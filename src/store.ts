@@ -1,11 +1,10 @@
-import type {Asset, LinkSession} from 'anchor-link'
+import type {LinkSession} from 'anchor-link'
 import {derived, writable} from 'svelte/store'
 import type {Readable} from 'svelte/store'
 import type {SessionLike} from './auth'
 import {ChainConfig, chainConfig, chains} from './config'
 import {Preferences} from './preferences'
 import {priceTicker} from './price-ticker'
-import {accountProvider} from './stores/account-provider'
 
 /** Set to true when app initialization completes. */
 export const appReady = writable<boolean>(false)
@@ -38,22 +37,6 @@ export const availableSessions = writable<SessionLike[]>([])
 
 /** List of preferences. */
 export const preferences = Preferences.shared
-
-/** Current logged in users account data. */
-export const currentAccount = derived(
-    accountProvider,
-    ($accountProvider) => $accountProvider.account
-)
-
-/** Current system token balance of current logged in user. */
-export const currentAccountBalance: Readable<Asset | undefined> = derived(
-    currentAccount,
-    ($currentAccount) => {
-        if ($currentAccount) {
-            return $currentAccount.core_liquid_balance
-        }
-    }
-)
 
 const systemDarkMode = writable<boolean>(
     window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches

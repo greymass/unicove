@@ -8,6 +8,7 @@
 
     import Login from '~/pages/login.svelte'
     import Dashboard from '~/pages/dashboard/index.svelte'
+    import Earn from '~/pages/earn/index.svelte'
     import Request from '~/pages/request/index.svelte'
     import Transfer from '~/pages/transfer/index.svelte'
     import Resources from '~/pages/resources/index.svelte'
@@ -31,7 +32,8 @@
     $: needLogin =
         $activeSession === undefined &&
         !$router.path.startsWith('/_components') &&
-        !$router.path.startsWith('/request')
+        !$router.path.startsWith('/request') &&
+        !$router.path.startsWith('/proposal')
 </script>
 
 <style lang="scss" global>
@@ -174,6 +176,9 @@
             <Route path="/">
                 <Dashboard />
             </Route>
+            <Route path="/earn/*">
+                <Earn />
+            </Route>
             <Route path="/transfer">
                 <Transfer />
             </Route>
@@ -186,6 +191,7 @@
             <Route path="/resources/*">
                 <Resources />
             </Route>
+            <Route path="/proposal/:account/:proposal">Success!</Route>
             <Route fallback>
                 <Page title="Page not found">
                     <p>You shouldn't be here. Get out before it's too late.</p>
