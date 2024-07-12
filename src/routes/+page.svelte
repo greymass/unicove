@@ -1,10 +1,5 @@
 <script>
-	import { onMount } from 'svelte';
 	import { user } from '$lib/wharf';
-
-	onMount(() => {
-		user.restore();
-	});
 </script>
 
 <h3>Active Session</h3>
