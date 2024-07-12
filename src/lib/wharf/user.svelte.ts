@@ -40,17 +40,11 @@ export class User {
 	}
 
 	public async logout(session?: Session | SerializedSession) {
-		// Perform the requested logout
 		await sessionKit.logout(session);
-
-		// Retrieve any remaining sessions
 		this.sessions = await sessionKit.getSessions();
-
 		if (this.sessions.length > 0) {
-			// If any sessions remain, switch to the first available one
 			await this.switch(this.sessions[0]);
 		} else {
-			// otherwise clear the session
 			this.session = undefined;
 		}
 	}
@@ -58,7 +52,6 @@ export class User {
 	public async restore(args?: RestoreArgs, options?: LoginOptions) {
 		const restored = await sessionKit.restore(args, options);
 		if (restored) {
-			console.log('restored, setting session');
 			this.session = restored;
 		}
 		this.sessions = await sessionKit.getSessions();
@@ -66,7 +59,6 @@ export class User {
 	}
 
 	public async switch(serialized: SerializedSession): Promise<Session> {
-		console.log('switching', serialized);
 		const session = await this.restore({
 			chain: serialized.chain,
 			actor: serialized.actor,
