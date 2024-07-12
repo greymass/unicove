@@ -14,4 +14,4 @@ format: node_modules
 	bun run format
 
 node_modules:
-	bun install
+	bun install --yarn
