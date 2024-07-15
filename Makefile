@@ -3,7 +3,7 @@ BIN := ./node_modules/.bin
 
 .PHONY: dev
 dev: node_modules
-	bun --bun run dev
+	bun run dev
 
 .PHONY: check
 check: node_modules
