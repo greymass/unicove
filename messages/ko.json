@@ -1,4 +1,5 @@
 {
     "$schema": "https://inlang.com/schema/inlang-message-format",
-    "active_session": "활성 세션"
+    "active_session": "활성 세션",
+    "test_locale_string": "이것은 테스트입니다"
 }

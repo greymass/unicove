@@ -1,4 +1,5 @@
 {
     "$schema": "https://inlang.com/schema/inlang-message-format",
-    "active_session": "活动会话"
+    "active_session": "活动会话",
+    "test_locale_string": "这是一个测试"
 }
