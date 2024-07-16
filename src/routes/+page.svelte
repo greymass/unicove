@@ -1,5 +1,6 @@
 <script>
 	import { user } from '$lib/wharf';
+	import * as m from '$lib/paraglide/messages.js';
 </script>
 
 <h3>{m.active_session()}</h3>
