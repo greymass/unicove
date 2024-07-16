@@ -1,5 +1,6 @@
-import { browser } from '$app/environment';
 import { APIClient } from '@wharfkit/antelope';
+import { browser } from '$app/environment';
+
 import { chain } from '.';
 
 export let apiUrl: string = chain.url;

@@ -8,7 +8,9 @@
 	let { children } = $props();
 
 	onMount(() => {
-		user.restore();
+		if (user) {
+			user.restore();
+		}
 	});
 </script>
 
