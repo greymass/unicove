@@ -1,3 +1,5 @@
+import { browser } from '$app/environment';
+
 import { PUBLIC_LOCAL_SIGNER } from '$env/static/public';
 
 import {
@@ -22,26 +24,29 @@ if (PUBLIC_LOCAL_SIGNER) {
 	walletPlugins.unshift(new WalletPluginPrivateKey(PUBLIC_LOCAL_SIGNER));
 }
 
-export const sessionKit = new SessionKit({
-	appName: 'unicove',
-	chains: [chain],
-	ui: new WebRenderer({ minimal: true }),
-	walletPlugins
-});
-
 export class User {
 	public session: Session | undefined = $state<Session | undefined>();
 	public sessions: SerializedSession[] = $state([]);
+	public sessionKit: SessionKit;
+
+	constructor() {
+		this.sessionKit = new SessionKit({
+			appName: 'unicove',
+			chains: [chain],
+			ui: new WebRenderer({ minimal: true }),
+			walletPlugins
+		});
+	}
 
 	public async login(options?: LoginOptions) {
-		const result = await sessionKit.login(options);
+		const result = await this.sessionKit.login(options);
 		this.session = result.session;
-		this.sessions = await sessionKit.getSessions();
+		this.sessions = await this.sessionKit.getSessions();
 	}
 
 	public async logout(session?: Session | SerializedSession) {
-		await sessionKit.logout(session);
-		this.sessions = await sessionKit.getSessions();
+		await this.sessionKit.logout(session);
+		this.sessions = await this.sessionKit.getSessions();
 		if (this.sessions.length > 0) {
 			await this.switch(this.sessions[0]);
 		} else {
@@ -50,11 +55,11 @@ export class User {
 	}
 
 	public async restore(args?: RestoreArgs, options?: LoginOptions) {
-		const restored = await sessionKit.restore(args, options);
+		const restored = await this.sessionKit.restore(args, options);
 		if (restored) {
 			this.session = restored;
 		}
-		this.sessions = await sessionKit.getSessions();
+		this.sessions = await this.sessionKit.getSessions();
 		return restored;
 	}
 
@@ -72,4 +77,8 @@ export class User {
 	}
 }
 
-export const user = new User();
+export let user: User | undefined;
+
+if (browser) {
+	user = new User();
+}
