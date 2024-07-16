@@ -9,6 +9,7 @@
 
 	onMount(() => {
 		user.init();
+		user.restore();
 	});
 </script>
 
