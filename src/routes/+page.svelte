@@ -2,7 +2,7 @@
 	import { user } from '$lib/wharf';
 </script>
 
-<h3>Active Session</h3>
+<h3>{m.active_session()}</h3>
 {#if user}
 	{#if user.session}
 		<p>Current: {user.session.actor}</p>
