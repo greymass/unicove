@@ -3,14 +3,12 @@
 	import { i18n } from '$lib/i18n';
 
 	import { onMount } from 'svelte';
-	// import { user } from '$lib/wharf';
+	import { user } from '$lib/wharf/user.svelte';
 
 	let { children } = $props();
 
 	onMount(() => {
-		// if (user) {
-		// 	user.restore();
-		// }
+		user.init();
 	});
 </script>
 

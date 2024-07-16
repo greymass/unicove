@@ -1,5 +1,5 @@
 <script>
-	// import { user } from '$lib/wharf';
+	import { user } from '$lib/wharf/user.svelte';
 	import * as m from '$lib/paraglide/messages.js';
 	import Language from '$lib/components/language.svelte';
 </script>
@@ -9,7 +9,7 @@
 <a href="/test">Test Page</a>
 
 <h3>{m.active_session()}</h3>
-<!-- {#if user}
+{#if user}
 	{#if user.session}
 		<p>Current: {user.session.actor}</p>
 		<button onclick={() => user.logout(user.session)}>Logout current account</button>
@@ -25,4 +25,4 @@
 			</button>
 		</p>
 	{/each}
-{/if} -->
+{/if}
