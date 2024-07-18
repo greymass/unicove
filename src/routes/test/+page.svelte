@@ -1,26 +1,34 @@
-<script>
+<script lang="ts">
 	import { Asset } from '@wharfkit/antelope';
 
-	import Language from '$lib/components/language.svelte';
-	import AssetInput from '$lib/components/asset.svelte';
+	import AssetInput from '$lib/components/asset/input.svelte';
+	import { StringAsset } from '$lib/components/asset/state.svelte';
 
-	const defaultValue = Asset.from('0.00000000 TOKEN');
+	let input: AssetInput;
 
-	let value = $state(defaultValue);
-	let valid = $state(false);
+	let value = new StringAsset(Asset.from('1.00000000 TOKEN'));
+
+	$inspect(String(value));
 </script>
-
-<Language />
 
 <a href="/">Home</a>
 
+<p>
+	<button onclick={() => (value.asset = Asset.from('2100000000.0000 EOS'))}> EOS (MAX) </button>
+	<button onclick={() => (value.asset = Asset.from('46116860184.27387903 WAX'))}>
+		WAX (MAX)
+	</button>
+	<button onclick={() => (value.asset = Asset.from('46116860184.27387903 WAX'))}>
+		Broken Value
+	</button>
+</p>
+
+<AssetInput bind:this={input} autofocus bind:value />
+
 <div>
 	<h3>Page State</h3>
-	<p>Valid Input: {valid}</p>
-	<p>Asset: {value}</p>
-	<p>Symbol: {value.symbol}</p>
-	<p>Value: {value.value}</p>
-	<p>Quantity: {value.quantity}</p>
+	<pre>
+Valid Input: {value.isValid()}
+Asset: {value.asset}
+    </pre>
 </div>
-
-<AssetInput bind:value bind:valid autofocus />
