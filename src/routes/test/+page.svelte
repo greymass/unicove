@@ -4,7 +4,9 @@
 	import Language from '$lib/components/language.svelte';
 	import AssetInput from '$lib/components/asset.svelte';
 
-	let value = $state(Asset.from('0.0000 TOKEN'));
+	const defaultValue = Asset.from('0.00000000 TOKEN');
+
+	let value = $state(defaultValue);
 	let valid = $state(false);
 </script>
 

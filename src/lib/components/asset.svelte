@@ -35,12 +35,6 @@
 		/** The multiplier used to convert between value and Int64 units */
 		multiplier = $derived(Math.pow(10, this.symbol.precision));
 
-		/** The derived maximum value of this input */
-		maximum = $derived(Int64.from(Int64.max).dividing(this.multiplier));
-
-		/** The derived minimum value of this input */
-		minimum = $derived(Int64.from(Int64.min).dividing(this.multiplier));
-
 		constructor(asset: Asset) {
 			this.input = String(asset.quantity);
 			this.symbol = asset.symbol;
@@ -67,12 +61,14 @@
 			assetState.input = target.value;
 
 			// Input validity checks
-			const satisfiesMinimum = assetState.asset.units.gte(assetState.minimum);
-			const satisfiesMaximum = assetState.asset.units.lte(assetState.maximum);
 			const satisfiesPrecision = assetState.decimals <= assetState.symbol.precision;
 
 			// Update the validity state
-			valid = satisfiesMinimum && satisfiesMaximum && satisfiesPrecision;
+			valid = satisfiesPrecision;
+
+			if (valid) {
+				value = assetState.asset;
+			}
 		}
 	}
 </script>
@@ -101,22 +97,6 @@
 		<tr>
 			<td>multiplier (number)</td>
 			<td>{assetState.multiplier}</td>
-		</tr>
-		<tr>
-			<td>minimum (Int64)</td>
-			<td>{assetState.minimum}</td>
-		</tr>
-		<tr>
-			<td>real minimum (Int64)</td>
-			<td>{String(Int64.min)}</td>
-		</tr>
-		<tr>
-			<td>maximum (Int64)</td>
-			<td>{assetState.maximum}</td>
-		</tr>
-		<tr>
-			<td>real maximum (Int64)</td>
-			<td>{String(Int64.max)}</td>
 		</tr>
 		<tr>
 			<td>asset (Asset)</td>
