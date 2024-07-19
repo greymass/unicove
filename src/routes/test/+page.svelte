@@ -2,33 +2,64 @@
 	import { Asset } from '@wharfkit/antelope';
 
 	import AssetInput from '$lib/components/asset/input.svelte';
-	import { StringAsset } from '$lib/components/asset/state.svelte';
 
 	let input: AssetInput;
 
-	let value = new StringAsset(Asset.from('1.00000000 TOKEN'));
+	let value = $state(Asset.from('0.00000000 TOKEN'));
+	let valid = $state(false);
 
-	$inspect(String(value));
+	let min = $state(1);
+	let max = $state(100);
+
+	// $inspect(String(value));
 </script>
 
 <a href="/">Home</a>
 
 <p>
-	<button onclick={() => (value.asset = Asset.from('2100000000.0000 EOS'))}> EOS (MAX) </button>
-	<button onclick={() => (value.asset = Asset.from('46116860184.27387903 WAX'))}>
-		WAX (MAX)
+	<button onclick={() => input.set(Asset.from('0.0000 EOS'))}> EOS (0) </button>
+	<button onclick={() => input.set(Asset.from('1.0000 EOS'))}> EOS (1) </button>
+	<button onclick={() => input.set(Asset.from('2100000000.0000 EOS'))}> EOS (MAX) </button>
+
+	<button onclick={() => input.set(Asset.from('46116860184.27387903 WAX'))}> WAX (MAX) </button>
+	<button onclick={() => input.set(Asset.from('0 FOO'))}>No Decimals </button>
+	<button onclick={() => input.set(Asset.from('4611686018427387903 TEST'))}>
+		Maximum No Decimals
 	</button>
-	<button onclick={() => (value.asset = Asset.from('46116860184.27387903 WAX'))}>
-		Broken Value
+	<button onclick={() => input.set(Asset.from('461168601842738.7903 TEST'))}>
+		Maximum 4 Decimals
+	</button>
+	<button onclick={() => input.set(Asset.from('46116860184.27387903 TEST'))}>
+		Maximum 8 Decimals
 	</button>
 </p>
 
-<AssetInput bind:this={input} autofocus bind:value />
+<div>
+	<label>
+		Minimum
+		<input type="number" bind:value={min} />
+	</label>
+</div>
+
+<div>
+	<label>
+		Maximum
+		<input type="number" bind:value={max} />
+	</label>
+</div>
+
+<div>
+	<label>
+		Value
+		<AssetInput bind:this={input} autofocus bind:value bind:valid {min} {max} />
+	</label>
+</div>
 
 <div>
 	<h3>Page State</h3>
 	<pre>
-Valid Input: {value.isValid()}
-Asset: {value.asset}
+Valid Input: {valid}
+Asset: {value}
+
     </pre>
 </div>
