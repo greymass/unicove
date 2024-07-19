@@ -46,6 +46,10 @@
 	</label>
 </div>
 
+<button type="button" disabled={!valid} onclick={() => alert(value)}
+	>Do a thing with the token!</button
+>
+
 <div>
 	<label>
 		Enter token value:
