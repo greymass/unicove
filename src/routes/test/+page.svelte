@@ -1,17 +1,15 @@
 <script lang="ts">
 	import { Asset } from '@wharfkit/antelope';
 
-	import AssetInput from '$lib/components/asset/input.svelte';
+	import AssetInput from '$lib/components/inputs/asset.svelte';
 
 	let input: AssetInput;
 
-	let value = $state(Asset.from('0.00000000 TOKEN'));
+	let value = $state(Asset.from('0.0000 TOKEN'));
 	let valid = $state(false);
 
 	let min = $state(1);
 	let max = $state(100);
-
-	// $inspect(String(value));
 </script>
 
 <a href="/">Home</a>
@@ -50,8 +48,8 @@
 
 <div>
 	<label>
-		Value
-		<AssetInput bind:this={input} autofocus bind:value bind:valid {min} {max} />
+		Enter token value:
+		<AssetInput bind:this={input} autofocus bind:value bind:valid bind:min bind:max />
 	</label>
 </div>
 
@@ -60,6 +58,5 @@
 	<pre>
 Valid Input: {valid}
 Asset: {value}
-
     </pre>
 </div>
