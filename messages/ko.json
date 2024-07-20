@@ -1,5 +1,7 @@
 {
     "$schema": "https://inlang.com/schema/inlang-message-format",
     "active_session": "활성 세션",
-    "test_locale_string": "이것은 테스트입니다"
+    "test_locale_string": "이것은 테스트입니다",
+    "block_height_numbered": "블록 # {height}",
+    "block_height_numbered_description": "블록 # {height} 는 {producer} {timestamp} , 여기에는 {transactions} 작업을 수행하는 {actions} 트랜잭션이 포함되었습니다."
 }

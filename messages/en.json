@@ -1,5 +1,7 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
 	"active_session": "Active Session",
-	"test_locale_string": "This is a test"
+	"test_locale_string": "This is a test",
+	"block_height_numbered": "Block #{height}",
+	"block_height_numbered_description": "Block #{height} was produced by {producer} on {timestamp}, which included {transactions} transactions performing {actions} actions."
 }
