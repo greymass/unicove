@@ -28,7 +28,7 @@
 	const satisfiesNumber = $derived(!!input && !isNaN(Number(input)));
 
 	/** Use Big.js to accurately convert the string into a usable number*/
-	let number = $derived(satisfiesNumber ? Big(input) : Big(0));
+	let number = $derived(input && satisfiesNumber ? Big(input) : Big(0));
 
 	/** The number of decimal places used in the string input */
 	const decimals = $derived(String(number).split('.')[1]?.length || 0);
