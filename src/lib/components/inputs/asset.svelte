@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Asset, Int64 } from '@wharfkit/antelope';
+	import Big from 'big.js';
 
 	interface AssetInputProps {
 		autofocus?: boolean;
@@ -24,10 +25,13 @@
 	let input: string | null = $state(null);
 
 	/** Whether or not the input is a valid number */
-	const satisfiesNumber = $derived(!isNaN(Number(input)));
+	const satisfiesNumber = $derived(!!input && !isNaN(Number(input)));
+
+	/** Use Big.js to accurately convert the string into a usable number*/
+	let number = $derived(satisfiesNumber ? Big(input) : Big(0));
 
 	/** The number of decimal places used in the string input */
-	const decimals = $derived(String(input).split('.')[1]?.length || 0);
+	const decimals = $derived(String(number).split('.')[1]?.length || 0);
 
 	/** The symbol of the asset */
 	let symbol: Asset.Symbol = $state(Asset.Symbol.from('4,TOKEN'));
@@ -43,7 +47,7 @@
 	);
 
 	/** The derived formatted value of the input */
-	const formatted = $derived(Number(satisfiesNumber ? input : 0).toFixed(symbol.precision));
+	const formatted = $derived((satisfiesNumber ? number : 0).toFixed(symbol.precision));
 
 	/** The derived asset from the formatted input */
 	const asset: Asset = $derived(Asset.from(`${formatted} ${symbol.code}`));
@@ -60,8 +64,8 @@
 
 	/** Set the input value from a parent */
 	export function set(asset: Asset) {
-		input = asset.quantity;
 		symbol = asset.symbol;
+		input = asset.quantity;
 	}
 
 	/** Set the bindable values on form input changes */
@@ -81,10 +85,12 @@
 <pre>
 
 input (string):   "{input}"
+input (number):   "{number}"
 input (decimals): {decimals}
 input (min):      {min}
 input (max):      {max}
 token symbol:     {symbol}
+precision:        {symbol.precision}
 formatted:        {formatted}
 Asset:            {asset}
     
