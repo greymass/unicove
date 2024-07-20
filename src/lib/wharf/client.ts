@@ -1,3 +1,5 @@
-import { APIClient } from '@wharfkit/antelope';
+import { APIClient, FetchProvider } from '@wharfkit/antelope';
 
-export const client = new APIClient({ url: 'https://jungle4.greymass.com' });
+export function getClient(fetch: typeof window.fetch) {
+	return new APIClient({ provider: new FetchProvider('https://jungle4.greymass.com', { fetch }) });
+}

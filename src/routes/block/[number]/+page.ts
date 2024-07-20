@@ -2,11 +2,11 @@ import { error } from '@sveltejs/kit';
 
 import type { PageLoad } from './$types';
 import * as m from '$lib/paraglide/messages.js';
-import { client } from '$lib/wharf/client';
+import { getClient } from '$lib/wharf/client';
 
-export const load: PageLoad = async ({ params }) => {
+export const load: PageLoad = async ({ fetch, params }) => {
 	if (params.number) {
-		const block = await client.v1.chain.get_block(params.number);
+		const block = await getClient(fetch).v1.chain.get_block(params.number);
 		const description = m.block_height_numbered_description({
 			height: params.number,
 			producer: String(block.producer),
