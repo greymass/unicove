@@ -2,18 +2,7 @@
 	import * as m from '$lib/paraglide/messages.js';
 	import Language from '$lib/components/language.svelte';
 	import { wharf } from '$lib/wharf/service.svelte';
-
-	import { createCollapsible, melt } from '@melt-ui/svelte';
-	const {
-		elements: { root, content, trigger },
-		states: { open }
-	} = createCollapsible();
 </script>
-
-<div use:melt={$root}>
-	<button use:melt={$trigger}>{$open ? 'Close' : 'Open'}</button>
-	<div use:melt={$content}>Obi-Wan says: Hello there!</div>
-</div>
 
 <Language />
 
