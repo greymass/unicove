@@ -1173,7 +1173,7 @@
     pako "^2.1.0"
     tslib "^2.0.3"
 
-"@wharfkit/antelope@next":
+"@wharfkit/antelope@^1.0.9-rc1":
   version "1.0.9-rc1"
   resolved "https://registry.npmjs.org/@wharfkit/antelope/-/antelope-1.0.9-rc1.tgz"
   integrity sha512-abNDUkdGKV19ju8iZdKOembcAkcdYbbsiHHcHxj9qjqx3mLpS8F/3CH9us8frRDN3Ol8V33NUQSRn3fd1xF8og==
@@ -1271,7 +1271,7 @@
   dependencies:
     tslib "^2.1.0"
 
-"@wharfkit/web-renderer@next":
+"@wharfkit/web-renderer@^1.4.0-rc6":
   version "1.4.0-rc6"
   resolved "https://registry.npmjs.org/@wharfkit/web-renderer/-/web-renderer-1.4.0-rc6.tgz"
   integrity sha512-xHs5DvwCDnQCQshOCQniKaFpVT2MQhJCwQjEz9+8sZJu7gg/+9S5OcmD2cym8x+dc3ccBVWsrt2FWD/umbv7lw==
