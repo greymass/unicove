@@ -1098,10 +1098,10 @@ export namespace Types {
     export class setrexmature extends Struct {
         @Struct.field(UInt32, {optional: true})
         num_of_maturity_buckets?: UInt32
-        @Struct.field(Bool, {optional: true})
-        sell_matured_rex?: Bool
-        @Struct.field(Bool, {optional: true})
-        buy_rex_to_savings?: Bool
+        @Struct.field('bool', {optional: true})
+        sell_matured_rex?: boolean
+        @Struct.field('bool', {optional: true})
+        buy_rex_to_savings?: boolean
     }
     @Struct.type('setschedule')
     export class setschedule extends Struct {
