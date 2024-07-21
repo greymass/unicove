@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Asset } from '@wharfkit/antelope';
 
-	import AssetInput from '$lib/components/inputs/asset.svelte';
+	import AssetInput from '$lib/components/input/asset.svelte';
 
 	let input: AssetInput;
 
@@ -11,8 +11,6 @@
 	let min = $state(1);
 	let max = $state(100);
 </script>
-
-<a href="/">Home</a>
 
 <p>
 	<button onclick={() => input.set(Asset.from('0.0000 EOS'))}> EOS (0) </button>
