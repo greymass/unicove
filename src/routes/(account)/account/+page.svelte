@@ -1,15 +1,15 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	import * as m from '$lib/paraglide/messages.js';
-	import { user } from '$lib/wharf/user.svelte';
+	import { wharf } from '$lib/wharf/service.svelte';
 
 	export let data: PageData;
 </script>
 
-{#if user.session}
-	<h1>Account: {user.session.actor}</h1>
+{#if wharf.session}
+	<h1>Account: {wharf.session.actor}</h1>
 {/if}
 
-{#if user.account}
-	<pre>{JSON.stringify(user.account.data, null, 2)}</pre>
+{#if wharf.account}
+	<pre>{JSON.stringify(wharf.account.data, null, 2)}</pre>
 {/if}

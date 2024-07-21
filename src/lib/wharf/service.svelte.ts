@@ -32,7 +32,7 @@ interface DefaultContracts {
 	system?: SystemContract;
 }
 
-export class User {
+export class WharfService {
 	public account: Account | undefined = $state<Account | undefined>();
 	public accountKit: AccountKit | undefined = $state<AccountKit | undefined>();
 	public contracts: DefaultContracts = $state({});
@@ -43,19 +43,18 @@ export class User {
 
 	init() {
 		if (!browser) {
-			throw new Error('User should only be used in the browser');
+			throw new Error('Wharf should only be used in the browser');
 		}
 		const chain = Chains.Jungle4;
 		const client = new APIClient({ url: chain.url });
+
 		this.accountKit = new AccountKit(chain, {
 			client
 		});
+
 		this.contractKit = new ContractKit({
 			client
 		});
-
-		this.contracts.token = new TokenContract({ client });
-		this.contracts.system = new SystemContract({ client });
 
 		this.sessionKit = new SessionKit({
 			appName: 'unicove',
@@ -63,6 +62,9 @@ export class User {
 			ui: new WebRenderer({ minimal: true }),
 			walletPlugins
 		});
+
+		this.contracts.token = new TokenContract({ client });
+		this.contracts.system = new SystemContract({ client });
 	}
 
 	private async loadAccount() {
@@ -125,4 +127,4 @@ export class User {
 	}
 }
 
-export const user = new User();
+export const wharf = new WharfService();

@@ -6,7 +6,7 @@
 
 	import { page } from '$app/stores';
 	import { i18n } from '$lib/i18n';
-	import { user } from '$lib/wharf/user.svelte';
+	import { wharf } from '$lib/wharf/service.svelte.js';
 	import Navigation from '$lib/components/navigation.svelte';
 
 	let { children, data } = $props();
@@ -16,8 +16,8 @@
 	);
 
 	onMount(() => {
-		user.init();
-		user.restore();
+		wharf.init();
+		wharf.restore();
 	});
 </script>
 
