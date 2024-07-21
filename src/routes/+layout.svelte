@@ -7,10 +7,13 @@
 	import { page } from '$app/stores';
 	import { i18n } from '$lib/i18n';
 	import { user } from '$lib/wharf/user.svelte';
+	import Navigation from '$lib/components/navigation.svelte';
 
 	let { children, data } = $props();
 
-	const seo_config: SeoConfig = $derived(extend({}, data.baseMetaTags, $page.data.pageMetaTags));
+	const seo_config: SeoConfig = $derived<SeoConfig>(
+		extend({}, data.baseMetaTags, $page.data.pageMetaTags)
+	);
 
 	onMount(() => {
 		user.init();
@@ -21,5 +24,6 @@
 <Head {seo_config} />
 
 <ParaglideJS {i18n}>
+	<Navigation />
 	{@render children()}
 </ParaglideJS>

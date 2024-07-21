@@ -1,12 +1,12 @@
 <script>
-	import { user } from '$lib/wharf/user.svelte';
 	import * as m from '$lib/paraglide/messages.js';
 	import Language from '$lib/components/language.svelte';
+	import { user } from '$lib/wharf/user.svelte';
 </script>
 
 <Language />
 
-<a href="/test">Test Page</a>
+<a href="/debug/input/asset">Asset Input</a>
 
 <h3>{m.active_session()}</h3>
 {#if user}
