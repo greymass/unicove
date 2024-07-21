@@ -37,6 +37,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@wharfkit/account": "^1.1.1",
 		"@wharfkit/antelope": "^1.0.9-rc1",
 		"@wharfkit/contract": "^1.1.5",
 		"@wharfkit/session": "^1.3.1",
