@@ -2,6 +2,7 @@
 	import type { PageData } from './$types';
 	import * as m from '$lib/paraglide/messages.js';
 	import { wharf } from '$lib/wharf/service.svelte';
+	import { transact, transactions } from '$lib/wharf/transact.svelte';
 
 	export let data: PageData;
 
@@ -13,7 +14,7 @@
 				quantity: '0.0001 EOS',
 				memo: 'test'
 			});
-			wharf.session.transact({ action });
+			transact({ action });
 		} else {
 			alert('Not logged in');
 		}
@@ -27,5 +28,13 @@
 {#if wharf.account}
 	<p>{wharf.account.data.core_liquid_balance}</p>
 	<button onclick={test}>Send 0.0001 test</button>
+
+	{#each transactions as transaction}
+		<div>
+			<h1>{transaction.id}</h1>
+			<pre>{JSON.stringify(transaction, null, 2)}</pre>
+		</div>
+	{/each}
+
 	<pre>{JSON.stringify(wharf.account.data, null, 2)}</pre>
 {/if}
