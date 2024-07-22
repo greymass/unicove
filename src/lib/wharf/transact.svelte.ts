@@ -29,7 +29,7 @@ export async function transact(
 	if (!wharf.session) {
 		throw new Error('No active session available to transact with.');
 	}
-	console.log('global transact', args, options);
+
 	const transaction: QueuedTransaction = {
 		status: StatusType.CREATED,
 		args,

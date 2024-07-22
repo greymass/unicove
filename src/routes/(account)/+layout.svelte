@@ -1,10 +1,5 @@
 <script lang="ts">
-	import extend from 'just-extend';
-	import { type SeoConfig } from 'svead';
-
-	import { page } from '$app/stores';
-
-	let { children, data } = $props();
+	let { children } = $props();
 </script>
 
 <ul>
