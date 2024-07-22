@@ -5,7 +5,7 @@
 	export let data: PageData;
 </script>
 
-<h1>{data.proposer}/{data.proposer}</h1>
+<h1>{data.proposer}/{data.name}</h1>
 
 <pre>
 {JSON.stringify(data.proposal, null, 2)}
