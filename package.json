@@ -47,5 +47,8 @@
 		"big.js": "^6.2.1",
 		"just-extend": "^6.2.0",
 		"svead": "^0.0.11"
+	},
+	"resolutions": {
+		"@wharfkit/antelope": "^1.0.9-rc1"
 	}
 }
