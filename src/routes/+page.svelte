@@ -7,6 +7,7 @@
 <Language />
 
 <a href="/debug/input/asset">Asset Input</a>
+<a href="/debug/state/network">Network State</a>
 
 <h3>{m.active_session()}</h3>
 {#if wharf}
