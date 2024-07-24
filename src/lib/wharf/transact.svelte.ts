@@ -2,7 +2,7 @@ import { type Checksum256, type Transaction } from '@wharfkit/antelope';
 import type { TransactArgs, TransactOptions, TransactResult } from '@wharfkit/session';
 import { wharf } from './service.svelte';
 import { TransactPluginStatusEmitter } from './plugins/status';
-import { addToast } from '../components/toaster.svelte';
+import { addToast, updateToast } from '../state/toaster.svelte';
 
 export enum StatusType {
 	CREATED = 'CREATED',
@@ -20,14 +20,23 @@ export interface QueuedTransaction {
 	response?: any;
 	transaction?: Transaction;
 	error?: string;
+	toastId?: string;
 }
 
 export const transactions = $state<QueuedTransaction[]>([]);
 
 export function updateStatus(id: Checksum256, status: StatusType) {
-	const index = transactions.findIndex((t) => t.transaction.id.equals(id));
+	const index = transactions.findIndex((t) => t.transaction?.id.equals(id));
 	if (index >= 0) {
-		transactions[index].status = status;
+		const t = transactions[index];
+		t.status = status;
+		if (t.toastId) {
+			updateToast(t.toastId, {
+				title: t.status,
+				description: t.transaction?.id.toString() || '',
+				color: 'green-200'
+			});
+		}
 	} else {
 		console.error('Unable to find transaction in queue', String(id));
 	}
@@ -56,12 +65,29 @@ export async function transact(
 			transaction.status = StatusType.ERROR;
 			transaction.error = String(e);
 			transactions.push(transaction);
+			const { id } = addToast({
+				data: {
+					title: transaction.status,
+					description: transaction.error,
+					color: 'bg-red-200'
+				}
+			});
+			transaction.toastId = id;
 			throw e;
 		});
 
 	if (!result.resolved || !result.response) {
 		transaction.status = StatusType.ERROR;
 		transaction.error = 'Transaction was not resolved.';
+		const { id } = addToast({
+			data: {
+				title: transaction.status,
+				description: transaction.error,
+				color: 'bg-red-200'
+			}
+		});
+		transaction.toastId = id;
+
 		transactions.push(transaction);
 		throw new Error('Transaction was not resolved.');
 	}
@@ -69,13 +95,15 @@ export async function transact(
 	transaction.status = StatusType.BROADCAST;
 	transaction.response = result.response;
 	transaction.transaction = result.resolved.transaction;
-	transactions.push(transaction);
-
-	addToast({
-		title: 'Transaction Broadcast',
-		message: `Transaction ${result.resolved.transaction.id} has been broadcast.`,
-		type: 'info'
+	const { id } = addToast({
+		data: {
+			title: transaction.status,
+			description: transaction.transaction.id.toString(),
+			color: 'bg-green-200'
+		}
 	});
+	transaction.toastId = id;
+	transactions.push(transaction);
 
 	return result;
 }
