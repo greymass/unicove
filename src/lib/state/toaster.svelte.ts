@@ -7,7 +7,7 @@ export type ToastData = {
 };
 
 export const {
-	elements,
+	elements: { content, title, description, close },
 	helpers,
 	states: { toasts },
 	actions: { portal }
