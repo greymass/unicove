@@ -2,6 +2,7 @@ import { type Checksum256, type Transaction } from '@wharfkit/antelope';
 import type { TransactArgs, TransactOptions, TransactResult } from '@wharfkit/session';
 import { wharf } from './service.svelte';
 import { TransactPluginStatusEmitter } from './plugins/status';
+import { addToast } from '../components/toaster.svelte';
 
 export enum StatusType {
 	CREATED = 'CREATED',
@@ -69,6 +70,12 @@ export async function transact(
 	transaction.response = result.response;
 	transaction.transaction = result.resolved.transaction;
 	transactions.push(transaction);
+
+	addToast({
+		title: 'Transaction Broadcast',
+		message: `Transaction ${result.resolved.transaction.id} has been broadcast.`,
+		type: 'info'
+	});
 
 	return result;
 }

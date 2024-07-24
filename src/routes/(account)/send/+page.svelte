@@ -3,6 +3,7 @@
 	import * as m from '$lib/paraglide/messages.js';
 	import { wharf } from '$lib/wharf/service.svelte';
 	import { transact } from '$lib/wharf/transact.svelte';
+	import { addToast } from '$lib/components/toaster.svelte';
 	import Transactions from '$lib/components/transactions.svelte';
 
 	export let data: PageData;
@@ -20,11 +21,22 @@
 			alert('Not logged in');
 		}
 	}
+
+	function create(){
+		addToast({data: {
+			title: 'Test',
+			description: 'This is a test toast',
+			color: 'red'
+		} });
+	}
 </script>
+
 
 {#if wharf.session}
 	<h1>Send/Receive: {wharf.session.actor}</h1>
 {/if}
+
+<button onclick={create}>Test Toast</button>
 
 {#if wharf.account}
 	<p>{wharf.account.data.core_liquid_balance}</p>
