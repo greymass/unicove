@@ -1,11 +1,9 @@
 <script lang="ts">
 	import { type Toast, type ToastsElements } from '@melt-ui/svelte';
 	import type { ToastData } from '$lib/state/toaster.svelte';
-
-	let { elements = $bindable(), toast = $bindable() } = $props();
-
-	let { content, title, description, close } = elements;
-	let { id, data } = toast;
+	let {elements, toast} = $props()
+	let {description, content, title, close} = $derived(elements)
+	let {id, data} = $derived(toast) 
 </script>
 
 <div class="rounded-lg bg-neutral-800 text-white shadow-md" use:melt={$content(id)}>

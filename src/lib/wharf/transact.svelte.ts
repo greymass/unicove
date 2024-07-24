@@ -34,7 +34,7 @@ export function updateStatus(id: Checksum256, status: StatusType) {
 			updateToast(t.toastId, {
 				title: t.status,
 				description: t.transaction?.id.toString() || '',
-				color: 'green-200'
+				color: 'bg-green-200'
 			});
 		}
 	} else {
