@@ -1,4 +1,5 @@
 <script lang="ts">
+	import '../app.css'
 	import extend from 'just-extend';
 	import { onMount } from 'svelte';
 	import { Head, type SeoConfig } from 'svead';
