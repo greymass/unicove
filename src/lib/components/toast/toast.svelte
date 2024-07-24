@@ -1,12 +1,17 @@
 <script lang="ts">
 	import { type Toast, type ToastsElements } from '@melt-ui/svelte';
 	import type { ToastData } from '$lib/state/toaster.svelte';
+	import {fly} from 'svelte/transition';
 	let {elements, toast} = $props()
 	let {description, content, title, close} = $derived(elements)
 	let {id, data} = $derived(toast) 
+
 </script>
 
-<div class="rounded-lg bg-neutral-800 text-white shadow-md" use:melt={$content(id)}>
+<div class="rounded-lg bg-neutral-800 text-white shadow-md" 
+in:fly={{ duration: 150, x: '100%' }}
+  out:fly={{ duration: 150, x: '100%' }}
+	use:melt={$content(id)}>
 	<div class="relative flex items-center justify-between gap-4 p-5">
 		<div>
 			<h3 class="flex items-center gap-2 font-semibold" use:melt={$title(id)}>
