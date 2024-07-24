@@ -1,4 +1,4 @@
-SHELL := /bin/bash
+SHELL := /usr/bin/env bash
 BIN := ./node_modules/.bin
 
 .PHONY: dev
