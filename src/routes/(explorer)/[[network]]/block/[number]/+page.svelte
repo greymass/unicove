@@ -8,10 +8,10 @@
 <h1>{m.block_height_numbered({ height: data.height })}</h1>
 
 <a href="/block/{Number(data.height) - 1}"
-	>← {m.block_height_numbered({ height: data.height - 1 })}</a
+	>← {m.block_height_numbered({ height: Number(data.height) - 1 })}</a
 >
 <a href="/block/{Number(data.height) + 1}"
-	>{m.block_height_numbered({ height: data.height + 1 })} →</a
+	>{m.block_height_numbered({ height: Number(data.height) + 1 })} →</a
 >
 
 <pre>

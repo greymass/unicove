@@ -8,11 +8,15 @@ import * as m from '$lib/paraglide/messages.js';
 export const load: PageLoad = async ({ fetch, params }) => {
 	let account: API.v1.AccountObject;
 	try {
-		account = await getClient(fetch).v1.chain.get_account(params.name);
+		account = await getClient(fetch, params.network).v1.chain.get_account(params.name);
 	} catch (e) {
-		return error(500, {
-			message: `Error while loading account ${params.name}: ${e}.`
-		});
+		// Catch or no catch?
+		// return error(404, {
+		//     message: 'Not found',
+		// });
+		// return error(500, {
+		// 	message: `Error while loading account ${params.name}: ${e}.`
+		// });
 	}
 	return {
 		account,
