@@ -4,6 +4,7 @@
 	import { wharf } from '$lib/wharf/service.svelte';
 	import { transact } from '$lib/wharf/transact.svelte';
 	import { addToast } from '$lib/state/toaster.svelte';
+	import Button from '$lib/components/button/button.svelte';
 
 	export let data: PageData;
 
@@ -28,7 +29,6 @@
 
 {#if wharf.account}
 	<p>{wharf.account.data.core_liquid_balance}</p>
-	<button onclick={test}>Send 0.0001 test</button>
-
+	<Button onclick={test}>Send 0.0001 test</Button>
 	<pre>{JSON.stringify(wharf.account.data, null, 2)}</pre>
 {/if}

@@ -2,6 +2,7 @@
 	import { Asset } from '@wharfkit/antelope';
 
 	import AssetInput from '$lib/components/input/asset.svelte';
+	import Button from '$lib/components/button/button.svelte';
 
 	let input: AssetInput;
 
@@ -13,21 +14,21 @@
 </script>
 
 <p>
-	<button onclick={() => input.set(Asset.from('0.0000 EOS'))}> EOS (0) </button>
-	<button onclick={() => input.set(Asset.from('1.0000 EOS'))}> EOS (1) </button>
-	<button onclick={() => input.set(Asset.from('2100000000.0000 EOS'))}> EOS (MAX) </button>
+	<Button onclick={() => input.set(Asset.from('0.0000 EOS'))}> EOS (0) </Button>
+	<Button onclick={() => input.set(Asset.from('1.0000 EOS'))}> EOS (1) </Button>
+	<Button onclick={() => input.set(Asset.from('2100000000.0000 EOS'))}> EOS (MAX) </Button>
 
-	<button onclick={() => input.set(Asset.from('46116860184.27387903 WAX'))}> WAX (MAX) </button>
-	<button onclick={() => input.set(Asset.from('0 FOO'))}>No Decimals </button>
-	<button onclick={() => input.set(Asset.from('4611686018427387903 TEST'))}>
+	<Button onclick={() => input.set(Asset.from('46116860184.27387903 WAX'))}> WAX (MAX) </Button>
+	<Button onclick={() => input.set(Asset.from('0 FOO'))}>No Decimals </Button>
+	<Button onclick={() => input.set(Asset.from('4611686018427387903 TEST'))}>
 		Maximum No Decimals
-	</button>
-	<button onclick={() => input.set(Asset.from('461168601842738.7903 TEST'))}>
+	</Button>
+	<Button onclick={() => input.set(Asset.from('461168601842738.7903 TEST'))}>
 		Maximum 4 Decimals
-	</button>
-	<button onclick={() => input.set(Asset.from('46116860184.27387903 TEST'))}>
+	</Button>
+	<Button onclick={() => input.set(Asset.from('46116860184.27387903 TEST'))}>
 		Maximum 8 Decimals
-	</button>
+	</Button>
 </p>
 
 <div>
@@ -44,8 +45,8 @@
 	</label>
 </div>
 
-<button type="button" disabled={!valid} onclick={() => alert(value)}
-	>Do a thing with the token!</button
+<Button type="Button" disabled={!valid} onclick={() => alert(value)}
+	>Do a thing with the token!</Button
 >
 
 <div>

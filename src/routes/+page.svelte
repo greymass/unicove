@@ -2,28 +2,29 @@
 	import * as m from '$lib/paraglide/messages.js';
 	import Language from '$lib/components/language.svelte';
 	import { wharf } from '$lib/wharf/service.svelte';
+	import Button from '$lib/components/button/button.svelte';
 </script>
 
 <Language />
 
-<a href="/debug/input/asset">Asset Input</a>
-<a href="/debug/state/network">Network State</a>
+<Button href="/debug/input/asset">Asset Input</Button>
+<Button href="/debug/state/network">Network State</Button>
 
 <h3>{m.active_session()}</h3>
 {#if wharf}
 	{#if wharf.session}
 		<p>Current: {wharf.session.actor}</p>
-		<button onclick={() => wharf.logout(wharf.session)}>Logout current account</button>
-		<button onclick={() => wharf.logout()}>Logout all accounts</button>
+		<Button onclick={() => wharf.logout(wharf.session)}>Logout current account</Button>
+		<Button onclick={() => wharf.logout()}>Logout all accounts</Button>
 	{/if}
 
 	<h3>Sessions</h3>
-	<button onclick={() => wharf.login()}>Login</button>
+	<Button onclick={() => wharf.login()}>Login</Button>
 	{#each wharf.sessions as session}
 		<p>
-			<button onclick={() => wharf.switch(session)}>
+			<Button onclick={() => wharf.switch(session)}>
 				Switch: {session.actor}@{session.permission} ({session.chain})
-			</button>
+			</Button>
 		</p>
 	{/each}
 {/if}
