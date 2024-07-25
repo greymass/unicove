@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+a {
+	@apply text-blue-500 underline;
+}
+
+button {
+	@apply bg-blue-500 text-white;
+}

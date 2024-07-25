@@ -1,4 +1,5 @@
 <script lang="ts">
+	import '../app.css';
 	import extend from 'just-extend';
 	import { onMount } from 'svelte';
 	import { Head, type SeoConfig } from 'svead';
@@ -8,6 +9,7 @@
 	import { i18n } from '$lib/i18n';
 	import { wharf } from '$lib/wharf/service.svelte.js';
 	import Navigation from '$lib/components/navigation.svelte';
+	import Toaster from '$lib/components/toast/toaster.svelte';
 	import { network } from '$lib/state/network.svelte.js';
 
 	let { children, data } = $props();
@@ -27,6 +29,8 @@
 </script>
 
 <Head {seo_config} />
+
+<Toaster />
 
 <ParaglideJS {i18n}>
 	<Navigation />

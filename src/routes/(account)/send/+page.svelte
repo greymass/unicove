@@ -3,7 +3,7 @@
 	import * as m from '$lib/paraglide/messages.js';
 	import { wharf } from '$lib/wharf/service.svelte';
 	import { transact } from '$lib/wharf/transact.svelte';
-	import Transactions from '$lib/components/transactions.svelte';
+	import { addToast } from '$lib/state/toaster.svelte';
 
 	export let data: PageData;
 
@@ -29,8 +29,6 @@
 {#if wharf.account}
 	<p>{wharf.account.data.core_liquid_balance}</p>
 	<button onclick={test}>Send 0.0001 test</button>
-
-	<Transactions />
 
 	<pre>{JSON.stringify(wharf.account.data, null, 2)}</pre>
 {/if}
