@@ -1,3 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+
+	/* Headings are defined by class instead of tag to preserve semantic html independent of style */
+
+	.h1 {
+		@apply text-5xl font-bold;
+	}
+
+	.h2 {
+		@apply text-3xl font-bold;
+	}
+
+	.h3 {
+		@apply text-2xl font-bold;
+	}
+
+	.h4 {
+		@apply text-lg font-bold;
+	}
+
+	.h5 {
+		@apply text-base font-bold;
+	}
+
+	.caption {
+		@apply text-xs text-gray-500;
+	}
+}
