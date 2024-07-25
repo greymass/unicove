@@ -25,7 +25,7 @@ Command: npx @threlte/gltf@3.0.0-next.6 ../../../../../static/unicove_logo_3d.gl
       position={[0, 0.01, 0]}
       scale={15}
     >
-      <T.MeshStandardMaterial  color="blue" />
+      <T.MeshPhysicalMaterial metalness={1} roughness={0.5} clearcoat={0.5} color="#95969D" />
     </T.Mesh>
   {:catch err}
     {@render error?.({ error: err })}
