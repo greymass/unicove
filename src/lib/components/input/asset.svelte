@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Asset, Int64 } from '@wharfkit/antelope';
+	import TextInput from './textinput.svelte';
 	import Big from 'big.js';
 
 	interface AssetInputProps {
@@ -79,7 +80,7 @@
 	});
 </script>
 
-<input type="text" bind:value={input} placeholder={zeroValue.quantity} {autofocus} />
+<TextInput bind:value={input} placeholder={zeroValue.quantity} {autofocus} />
 
 <h3>Component State</h3>
 <pre>
