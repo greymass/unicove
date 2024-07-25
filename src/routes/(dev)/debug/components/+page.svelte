@@ -2,6 +2,8 @@
 	import { Asset } from '@wharfkit/antelope';
 	import AssetInput from '$lib/components/input/asset.svelte';
 	import Button from '$lib/components/button/button.svelte';
+	import TextInput from '$lib/components/input/textinput.svelte';
+	import Label from '$lib/components/input/label.svelte';
 
 	let input: AssetInput;
 
@@ -12,7 +14,7 @@
 	let max = $state(100);
 </script>
 
-<main class='space-y-8 mt-8'>
+<main class='space-y-12 mt-8'>
 	<article>
 		<h2 class='h2'>Typography</h2>
 		<h1 class='h1'>Heading 1</h1>
@@ -33,11 +35,26 @@
 		<Button variant="pill" onclick={() => input.set(Asset.from('2100000000.0000 EOS'))}> EOS (MAX) </Button>
 	</div>
 
+	<div class='space-y-4'>
+		<h2 class='h2'>Text Input</h2>
+		<div>
+			<h3 class='h4'>Default</h3>
+			<TextInput placeholder="Placeholder text" />
+		</div>
+		<div>
+			<h3 class='h4'>With Label</h3>
+			<Label>
+				Enter a value
+				<TextInput  placeholder="Placeholder text" />
+			</Label>
+		</div>
+	</div>
+
 	<div>
 		<h2 class='h2'>Asset Input</h2>
-		<label>
+		<Label>
 			Enter token value:
 			<AssetInput bind:this={input} bind:value bind:valid bind:min bind:max />
-		</label>
+		</Label>
 	</div>
 </main>
