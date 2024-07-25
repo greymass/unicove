@@ -2,7 +2,7 @@ import { type Checksum256, type Transaction } from '@wharfkit/antelope';
 import type { TransactArgs, TransactOptions, TransactResult } from '@wharfkit/session';
 import { wharf } from './service.svelte';
 import { TransactPluginStatusEmitter } from './plugins/status';
-import { addToast, updateToast } from '../state/toaster.svelte';
+import { addToast, removeToast, updateToast } from '../state/toaster.svelte';
 
 export enum StatusType {
 	CREATED = 'CREATED',
@@ -28,13 +28,25 @@ export const transactions = $state<QueuedTransaction[]>([]);
 export function updateStatus(id: Checksum256, status: StatusType) {
 	const index = transactions.findIndex((t) => t.transaction?.id.equals(id));
 	if (index >= 0) {
-		const t = transactions[index];
-		t.status = status;
-		if (t.toastId) {
-			updateToast(t.toastId, {
-				title: t.status,
-				description: t.transaction?.id.toString() || '',
+		const tx = transactions[index];
+		tx.status = status;
+
+		if (tx.toastId) {
+			updateToast(tx.toastId, {
+				title: tx.status,
+				description: String(tx.transaction?.id),
 				color: 'bg-green-200'
+			});
+		}
+
+		if (tx.toastId && status === StatusType.IRREVERSIBLE) {
+			addToast({
+				data: {
+					title: tx.status,
+					description: String(tx.transaction?.id),
+					color: 'bg-green-200'
+				},
+				closeDelay: 5000
 			});
 		}
 	} else {
@@ -65,13 +77,7 @@ export async function transact(
 			transaction.status = StatusType.ERROR;
 			transaction.error = String(e);
 			transactions.push(transaction);
-			const { id } = addToast({
-				data: {
-					title: transaction.status,
-					description: transaction.error,
-					color: 'bg-red-200'
-				}
-			});
+			const { id } = sendErrorToast(transaction);
 			transaction.toastId = id;
 			throw e;
 		});
@@ -79,13 +85,7 @@ export async function transact(
 	if (!result.resolved || !result.response) {
 		transaction.status = StatusType.ERROR;
 		transaction.error = 'Transaction was not resolved.';
-		const { id } = addToast({
-			data: {
-				title: transaction.status,
-				description: transaction.error,
-				color: 'bg-red-200'
-			}
-		});
+		const { id } = sendErrorToast(transaction);
 		transaction.toastId = id;
 
 		transactions.push(transaction);
@@ -100,10 +100,22 @@ export async function transact(
 			title: transaction.status,
 			description: transaction.transaction.id.toString(),
 			color: 'bg-green-200'
-		}
+		},
+		closeDelay: 5000
 	});
 	transaction.toastId = id;
 	transactions.push(transaction);
 
 	return result;
+}
+
+function sendErrorToast(tx: QueuedTransaction) {
+	return addToast({
+		data: {
+			title: tx.status,
+			description: String(tx.error),
+			color: 'bg-red-200'
+		},
+		closeDelay: 5000
+	});
 }

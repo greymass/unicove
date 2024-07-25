@@ -14,5 +14,5 @@ export const {
 } = createToaster<ToastData>({ closeDelay: 0 });
 
 export const addToast = helpers.addToast;
-
 export const updateToast = helpers.updateToast;
+export const removeToast = helpers.removeToast;
