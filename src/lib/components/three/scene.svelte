@@ -49,7 +49,7 @@ let lightY = $derived(-(((mouseY / windowHeight) * canvasHeight) - (canvasHeight
 <!-- 	<T.MeshStandardMaterial color="red" /> -->
 <!-- </T.Mesh> -->
 
-<T.DirectionalLight position={[lightX, lightY, 1]} />
+<T.DirectionalLight position={[lightX, lightY, 5]} />
 
 <Logo scale={4}  rotation.x={Math.PI /2} />
 
