@@ -22,7 +22,7 @@
 	<Button onclick={() => wharf.login()}>Login</Button>
 	{#each wharf.sessions as session}
 		<p>
-			<Button onclick={() => wharf.switch(session)}>
+			<Button onclick={() => wharf.switch(session)} variant='secondary'>
 				Switch: {session.actor}@{session.permission} ({session.chain})
 			</Button>
 		</p>
