@@ -2,7 +2,7 @@ import { type Checksum256, type Transaction } from '@wharfkit/antelope';
 import type { TransactArgs, TransactOptions, TransactResult } from '@wharfkit/session';
 import { wharf } from './service.svelte';
 import { TransactPluginStatusEmitter } from './plugins/status';
-import { addToast, removeToast, updateToast } from '../state/toaster.svelte';
+import { addToast, updateToast } from '../state/toaster.svelte';
 
 export enum StatusType {
 	CREATED = 'CREATED',
@@ -40,14 +40,7 @@ export function updateStatus(id: Checksum256, status: StatusType) {
 		}
 
 		if (tx.toastId && status === StatusType.IRREVERSIBLE) {
-			addToast({
-				data: {
-					title: tx.status,
-					description: String(tx.transaction?.id),
-					color: 'bg-green-200'
-				},
-				closeDelay: 5000
-			});
+			sendSuccessToast(tx);
 		}
 	} else {
 		console.error('Unable to find transaction in queue', String(id));
@@ -95,14 +88,7 @@ export async function transact(
 	transaction.status = StatusType.BROADCAST;
 	transaction.response = result.response;
 	transaction.transaction = result.resolved.transaction;
-	const { id } = addToast({
-		data: {
-			title: transaction.status,
-			description: transaction.transaction.id.toString(),
-			color: 'bg-green-200'
-		},
-		closeDelay: 5000
-	});
+	const { id } = sendSuccessToast(transaction);
 	transaction.toastId = id;
 	transactions.push(transaction);
 
@@ -115,6 +101,17 @@ function sendErrorToast(tx: QueuedTransaction) {
 			title: tx.status,
 			description: String(tx.error),
 			color: 'bg-red-200'
+		},
+		closeDelay: 5000
+	});
+}
+
+function sendSuccessToast(tx: QueuedTransaction) {
+	return addToast({
+		data: {
+			title: tx.status,
+			description: String(tx.transaction?.id),
+			color: 'bg-green-200'
 		},
 		closeDelay: 5000
 	});
