@@ -9,6 +9,7 @@
 
 <Button href="/debug/input/asset">Asset Input</Button>
 <Button href="/debug/state/network">Network State</Button>
+<Button href="/debug/components">Component Library</Button>
 
 <h3>{m.active_session()}</h3>
 {#if wharf}
