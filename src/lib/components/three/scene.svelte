@@ -1,6 +1,6 @@
 <script>
 import { T, useTask, useLoader } from '@threlte/core'
-import { interactivity } from '@threlte/extras'
+import { interactivity, Float } from '@threlte/extras'
 
 import Logo from './assets/unicove_logo_3d.svelte'
 
@@ -49,8 +49,14 @@ let lightY = $derived(-(((mouseY / windowHeight) * canvasHeight) - (canvasHeight
 <!-- 	<T.MeshStandardMaterial color="red" /> -->
 <!-- </T.Mesh> -->
 
-<T.DirectionalLight position={[lightX, lightY, 5]} />
+<T.DirectionalLight position={[lightX, lightY, 10]} />
 
-<Logo scale={4}  rotation.x={Math.PI /2} />
+<T.Mesh position.z={-1} scale={1.5} receiveShadow={true}>
+	<T.CircleGeometry args={[2, 32]} />
+	<T.MeshPhongMaterial color="#063a47" />
+</T.Mesh>
 
+<Float floatIntensity={2} rotationIntensity={2}>
+	<Logo scale={4}  rotation.x={Math.PI /2} castShadow={true} />
+</Float>
 
