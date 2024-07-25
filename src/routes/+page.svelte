@@ -1,6 +1,7 @@
 <script>
 	import * as m from '$lib/paraglide/messages.js';
 	import Language from '$lib/components/language.svelte';
+	import Three from '$lib/components/three/three.svelte';
 	import { wharf } from '$lib/wharf/service.svelte';
 </script>
 
@@ -27,3 +28,5 @@
 		</p>
 	{/each}
 {/if}
+
+<Three />
