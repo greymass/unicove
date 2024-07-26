@@ -20,8 +20,8 @@ interactivity()
 let mouseX = $state(0)
 let mouseY = $state(0)
 
-let windowWidth
-let windowHeight
+let windowWidth = 1
+let windowHeight = 1
 
 function handleMouseMove(e) {
 	mouseX = e.clientX
