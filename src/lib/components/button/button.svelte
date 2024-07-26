@@ -24,7 +24,7 @@ const variantStyles = variants[props.variant] || variants.primary;
 
 <svelte:element
 	this={props.href ? 'a' : 'button'}
-	class={ `py-2 px-8 text-white font-bold  ${variantStyles}` }
+	class={ `py-2 px-8 text-white font-medium  ${variantStyles}` }
 	{...props}
 >
 	<slot />

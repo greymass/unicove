@@ -38,11 +38,11 @@
 	<div class='space-y-4'>
 		<h2 class='h2'>Text Input</h2>
 		<div>
-			<h3 class='h4'>Default</h3>
+			<h3 class='h3'>Default</h3>
 			<TextInput placeholder="Placeholder text" />
 		</div>
 		<div>
-			<h3 class='h4'>With Label</h3>
+			<h3 class='h3'>With Label</h3>
 			<fieldset class='grid gap-3'>
 				<Label>Enter a value</Label>
 				<TextInput placeholder="Placeholder text" />
