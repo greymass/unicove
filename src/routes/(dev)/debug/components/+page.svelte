@@ -43,18 +43,16 @@
 		</div>
 		<div>
 			<h3 class='h4'>With Label</h3>
-			<Label>
-				Enter a value
-				<TextInput  placeholder="Placeholder text" />
-			</Label>
+			<fieldset class='grid gap-3'>
+				<Label>Enter a value</Label>
+				<TextInput placeholder="Placeholder text" />
+			</fieldset>
 		</div>
 	</div>
 
 	<div>
 		<h2 class='h2'>Asset Input</h2>
-		<Label>
-			Enter token value:
-			<AssetInput bind:this={input} bind:value bind:valid bind:min bind:max />
-		</Label>
+		<Label for='assetInput'> Enter token value: </Label>
+		<AssetInput id='assetInput' bind:this={input} bind:value bind:valid bind:min bind:max />
 	</div>
 </main>
