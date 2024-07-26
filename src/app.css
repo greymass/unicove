@@ -19,14 +19,18 @@
 	}
 
 	.h4 {
-		@apply text-lg font-bold;
+		@apply text-lg font-bold leading-7;
 	}
 
 	.h5 {
-		@apply text-base font-bold;
+		@apply text-base font-bold leading-snug;
 	}
 
 	.caption {
 		@apply text-xs text-gray-500;
+	}
+
+	p {
+		@apply max-w-prose;
 	}
 }
