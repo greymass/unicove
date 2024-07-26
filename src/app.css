@@ -7,30 +7,33 @@
 	/* Headings are defined by class instead of tag to preserve semantic html independent of style */
 
 	.h1 {
-		@apply text-5xl font-bold;
+		@apply text-5xl font-semibold;
 	}
 
 	.h2 {
-		@apply text-3xl font-bold;
+		@apply text-3xl font-semibold;
 	}
 
 	.h3 {
-		@apply text-2xl font-bold;
+		@apply text-2xl font-semibold;
 	}
 
 	.h4 {
-		@apply text-lg font-bold leading-7;
+		@apply text-lg leading-7;
+		/* font weight is determined in context */
 	}
 
 	.h5 {
-		@apply text-base font-bold leading-snug;
+		@apply text-base leading-snug;
+		/* font weight is determined in context */
 	}
 
 	.caption {
 		@apply text-xs text-gray-500;
+		/* font weight is determined in context */
 	}
 
 	p {
-		@apply max-w-prose;
+		@apply max-w-prose font-medium;
 	}
 }
