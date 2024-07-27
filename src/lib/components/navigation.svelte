@@ -1,4 +1,8 @@
-<nav class='flex gap-2'>
+<script lang='ts'>
+	import Cluster from '$lib/components/layout/cluster.svelte'
+</script>
+
+<Cluster tag='nav' class='flex gap-2'>
 	<a href="/">Home</a>
 	<a href="/account">My Account</a>
 	<a href="/account/eosio">Account: eosio</a>
@@ -7,5 +11,4 @@
 		>Transaction</a
 	>
 	<a href="/msig/evilmikehere/t">msig</a>
-	<a href="/transactions" class=''>transactions</a>
-</nav>
+</Cluster>
