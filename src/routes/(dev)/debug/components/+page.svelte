@@ -128,37 +128,19 @@ let max = $state(100);
 
 		<p>Box > Center > Stack will be a common pattern for creating page layouts.</p>
 
-		<h3 class='h3'>Cluster</h3>
-			<p>Clusters children horizontally with a default gap. The cluster will re-flow when the screen size changes.</p>
-			<p> Note: no leading or trailing horizontal gap. </p>
-			<Cluster>
-				<Card class='bg-red-900'>
-					<p>Child 1</p>
-				</Card>
-				<Card class='bg-red-900'>
-					<p>Child 2 is larger</p>
-				</Card>
-				<Card class='bg-red-900'>
-					<p>Child 3 is also large</p>
-				</Card>
-				<Card class='bg-red-900'>
-					<p>Child 4</p>
-				</Card>
-			</Cluster>
-
 		<h3 class='h3'>Sidebar</h3>
 			<p>The Sidebar is used for two horizontally adjecent elements: one smaller and fixed width, the other filling the remaining space. In a narrow context the elements will stack vertically.</p>
 			<p>It is a common pattern to use a Sidebar with a Stack to create a page layout.</p>
 		<Sidebar.Root>
-			<Sidebar.Side tag='aside' width='20rem'>
+			<Sidebar.Side width='20rem' tag='aside'>
 				<Card title='Sidebar'>
-					<p>This is the sidebar content</p>
+					<p>This is the sidebar content set to 20rem</p>
 				</Card>
 			</Sidebar.Side>
 			<Sidebar.Content tag='main' threshold='50%'>
 				<Card title='Main Content'>
 				<Stack>
-					<p>This is the main content</p>
+					<p>This is the main content set to break at 50%</p>
 					<p>This is the main content</p>
 					<p>This is the main content</p>
 					<p>This is the main content</p>
@@ -174,19 +156,44 @@ let max = $state(100);
 			<Sidebar.Content tag='main' threshold='50%'>
 				<Card title='Main Content'>
 				<Stack>
-					<p>This is the main content</p>
+					<p>This is the main content set to break at 50%</p>
 					<p>This is the main content</p>
 					<p>This is the main content</p>
 					<p>This is the main content</p>
 					</Stack>
 				</Card>
 				</Sidebar.Content>
-			<Sidebar.Side tag='aside' width='20rem'>
+			<Sidebar.Side tag='aside' width='10rem'>
 				<Card title='Sidebar'>
-					<p>This is the sidebar content</p>
+					<p>This is the sidebar content set to 10rem</p>
 				</Card>
 			</Sidebar.Side>
 			</Sidebar.Root>
+
+		<h3 class='h3'>Cluster</h3>
+			<p>Clusters children horizontally with a default gap. The cluster will re-flow when the screen size changes.</p>
+			<p>This is essentially just typical flex-wrap behaviour with some default gaps.</p>
+			<p> Note: no leading or trailing horizontal gap. </p>
+			<Cluster>
+				<Card class='bg-red-900'>
+					<p>Child 1</p>
+				</Card>
+				<Card class='bg-red-900'>
+					<p>Child 2 is larger</p>
+				</Card>
+				<Card class='bg-red-900'>
+					<p>Child 3 is also large</p>
+				</Card>
+				<Card class='bg-red-900'>
+					<p>Child 4</p>
+				</Card>
+				<Card class='bg-red-900'>
+					<p>Child 5</p>
+				</Card>
+				<Card class='bg-red-900'>
+					<p>Child 6</p>
+				</Card>
+			</Cluster>
 
 		<h3 class='h3'>Switcher</h3>
 		<p>The Switcher switches a flexbox context between horizontal and a vertical layout at a given, parent container-based breakpoint.</p>
@@ -208,6 +215,7 @@ let max = $state(100);
 		<h3 class='h3'>Grid</h3>
 		<p>The Grid component is used to create a grid layout with a default gap between children.</p>
 		<p>The grid is different from the Cluster component in that all children are the same size and will align to columns.</p>
+		<p>On a small screen, these will form a single column whereas the cluster will not.</p>
 		<Grid>
 			<Card class='bg-red-900'>
 				<p>Child 1</p>
