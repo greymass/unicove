@@ -27,5 +27,5 @@ const variantStyles = variants[props.variant] || variants.primary;
 	class={ `py-2 px-8 text-white font-medium  ${variantStyles}` }
 	{...props}
 >
-	<slot />
+	{@render props.children()}
 </svelte:element>

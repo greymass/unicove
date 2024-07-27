@@ -19,18 +19,15 @@
 	}
 
 	.h4 {
-		@apply text-lg leading-7;
-		/* font weight is determined in context */
+		@apply text-lg leading-7 font-medium;
 	}
 
 	.h5 {
-		@apply text-base leading-snug;
-		/* font weight is determined in context */
+		@apply text-base leading-snug font-medium;
 	}
 
 	.caption {
-		@apply text-xs text-gray-500;
-		/* font weight is determined in context */
+		@apply text-xs text-gray-500 font-medium;
 	}
 
 	p {
