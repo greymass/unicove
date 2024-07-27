@@ -7,16 +7,13 @@ const {
 	tag = 'div',
 	class: className = '', 
 	...props} = $props();
-// prop classes will override the default classes
-// remaining props will be passed to the root element
-
-const classArray = ['sidebar-side grow'];
-width && classArray.push(`basis-[${width}]`);
-className && classArray.push(className);
-const sidebarClasses = classArray.join(' ');
 </script>
 
-
-<svelte:element this={tag} class={sidebarClasses} {...props}>
+<svelte:element 
+	this={tag} 
+	class={`sidebar-side grow ${className}`} 
+	style={`flex-basis: ${width}`}
+	{...props} 
+>
 	{@render children()}
 </svelte:element>
