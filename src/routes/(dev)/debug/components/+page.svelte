@@ -1,21 +1,29 @@
 <script lang="ts">
-	import { Asset } from '@wharfkit/antelope';
-	import AssetInput from '$lib/components/input/asset.svelte';
-	import Button from '$lib/components/button/button.svelte';
-	import TextInput from '$lib/components/input/textinput.svelte';
-	import Label from '$lib/components/input/label.svelte';
+import { Asset } from '@wharfkit/antelope';
+import AssetInput from '$lib/components/input/asset.svelte';
+import Button from '$lib/components/button/button.svelte';
+import TextInput from '$lib/components/input/textinput.svelte';
+import Label from '$lib/components/input/label.svelte';
+import Stack from '$lib/components/layout/stack.svelte';
+import Box from '$lib/components/layout/box.svelte';
+import Card from '$lib/components/card.svelte';
+import Center from '$lib/components/layout/center.svelte';
+import Cluster from '$lib/components/layout/cluster.svelte';
+import * as Sidebar from '$lib/components/layout/sidebar';
+import Switcher from '$lib/components/layout/switcher.svelte';
+import Grid from '$lib/components/layout/grid.svelte';
 
-	let input: AssetInput;
+let input: AssetInput;
 
-	let value = $state(Asset.from('0.0000 TOKEN'));
-	let valid = $state(false);
+let value = $state(Asset.from('0.0000 TOKEN'));
+let valid = $state(false);
 
-	let min = $state(1);
-	let max = $state(100);
+let min = $state(1);
+let max = $state(100);
 </script>
 
-<main class='space-y-12 mt-8'>
-	<article>
+<Stack class='space-y-10 my-10'>
+	<Stack>
 		<h2 class='h2'>Typography</h2>
 		<h1 class='h1'>Heading 1</h1>
 		<h2 class='h2'>Heading 2</h2>
@@ -26,7 +34,7 @@
 		<p>Paragraph - 
 			lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 		</p>
-	</article>
+	</Stack>
 
 	<div>
 		<h2 class='h2'>Buttons</h2>
@@ -55,4 +63,169 @@
 		<Label for='assetInput'> Enter token value: </Label>
 		<AssetInput id='assetInput' bind:this={input} bind:value bind:valid bind:min bind:max />
 	</div>
-</main>
+
+	<Stack>
+		<h2 class='h2'>Cards</h2>
+		<Box class='grid grid-cols-2 gap-6'>
+
+			<Card title='Card Title'>
+				<table class='w-full'>
+					<tbody>
+						<tr>
+							<td>Card Content</td>
+							<td>Card Content</td>
+						</tr>
+						<tr>
+							<td>Card Content</td>
+							<td>Card Content</td>
+						</tr>
+					</tbody>
+				</table>
+			</Card>
+		</Box>
+	</Stack>
+
+	<Stack>
+		<h2 class='h2'>Layout Components</h2>
+		<p>These are the basic layout components designed to be:</p>
+			<ul class='list-disc list-inside'>
+				<li>Aomically Composable</li>
+				<li>Intrisically Responsive</li>
+				<li>Accessible</li>
+			</ul>
+			<p>We should default to these to create the structure of pages and other components.</p>
+
+		<h3 class='h3'>Box</h3>
+		<Card>
+			<p>Adds default padding to both horizontal and vertical axes. The Card component is an example of a Box with some additional styling.</p>
+		</Card>
+
+		<h3 class='h3'>Center</h3>
+		<Center>
+			<Card>
+				<Stack>
+					<p>Switches the context to content-box and centers the element with a default horizontal padding for narrow contexts. This prevents the element from being flush to the edge by default. Change the default with a px- tailwind class</p>
+						<p>Includes a default maximum width which can be overridden with the max-w- tailwind class.</p>
+					<p class='text-center'>Centering text inside a Center component is simply done with a text-center tailwind class on the child, allowing more flexibility depending on context.</p>
+				</Stack>
+			</Card>
+		</Center>
+
+		<h3 class='h3'>Stack</h3>
+			<p>Stacks children vertically with a default gap. </p>
+			<p> Note: no leading or trailing vertical gap. </p>
+			<Stack>
+				<Card class='bg-red-900'>
+					<p>Child 1</p>
+				</Card>
+				<Card class='bg-red-900'>
+					<p>Child 2</p>
+				</Card>
+				<Card class='bg-red-900'>
+					<p>Child 2</p>
+				</Card>
+			</Stack>
+
+		<p>Box > Center > Stack will be a common pattern for creating page layouts.</p>
+
+		<h3 class='h3'>Cluster</h3>
+			<p>Clusters children horizontally with a default gap. The cluster will re-flow when the screen size changes.</p>
+			<p> Note: no leading or trailing horizontal gap. </p>
+			<Cluster>
+				<Card class='bg-red-900'>
+					<p>Child 1</p>
+				</Card>
+				<Card class='bg-red-900'>
+					<p>Child 2 is larger</p>
+				</Card>
+				<Card class='bg-red-900'>
+					<p>Child 3 is also large</p>
+				</Card>
+				<Card class='bg-red-900'>
+					<p>Child 4</p>
+				</Card>
+			</Cluster>
+
+		<h3 class='h3'>Sidebar</h3>
+			<p>The Sidebar is used for two horizontally adjecent elements: one smaller and fixed width, the other filling the remaining space. In a narrow context the elements will stack vertically.</p>
+			<p>It is a common pattern to use a Sidebar with a Stack to create a page layout.</p>
+		<Sidebar.Root>
+			<Sidebar.Side tag='aside' width='20rem'>
+				<Card title='Sidebar'>
+					<p>This is the sidebar content</p>
+				</Card>
+			</Sidebar.Side>
+			<Sidebar.Content tag='main' threshold='50%'>
+				<Card title='Main Content'>
+				<Stack>
+					<p>This is the main content</p>
+					<p>This is the main content</p>
+					<p>This is the main content</p>
+					<p>This is the main content</p>
+					</Stack>
+				</Card>
+				</Sidebar.Content>
+			</Sidebar.Root>
+
+		<p>We can also have the Sidebar on the right side, and choose to wrap above or below the main content with flex-wrap-reverse</p>
+
+		<!-- <Sidebar.Root class='flex-wrap-reverse'> -->
+		<Sidebar.Root>
+			<Sidebar.Content tag='main' threshold='50%'>
+				<Card title='Main Content'>
+				<Stack>
+					<p>This is the main content</p>
+					<p>This is the main content</p>
+					<p>This is the main content</p>
+					<p>This is the main content</p>
+					</Stack>
+				</Card>
+				</Sidebar.Content>
+			<Sidebar.Side tag='aside' width='20rem'>
+				<Card title='Sidebar'>
+					<p>This is the sidebar content</p>
+				</Card>
+			</Sidebar.Side>
+			</Sidebar.Root>
+
+		<h3 class='h3'>Switcher</h3>
+		<p>The Switcher switches a flexbox context between horizontal and a vertical layout at a given, parent container-based breakpoint.</p>
+		<p>For example, if the breakpoint is 30rem the layout will switch to vertical when the parent container itself is less than 30rem wide.</p>
+		<p>This layout is useful when all elements inside the switcher are considered of equal importance.</p>
+
+		<Switcher threshold='30rem'>
+			<Card class='bg-red-900'>
+				<p>Child 1</p>
+			</Card>
+			<Card class='bg-red-900'>
+				<p>Child 2</p>
+			</Card>
+			<Card class='bg-red-900'>
+				<p>Child 3</p>
+			</Card>
+		</Switcher>
+
+		<h3 class='h3'>Grid</h3>
+		<p>The Grid component is used to create a grid layout with a default gap between children.</p>
+		<p>The grid is different from the Cluster component in that all children are the same size and will align to columns.</p>
+		<Grid>
+			<Card class='bg-red-900'>
+				<p>Child 1</p>
+			</Card>
+			<Card class='bg-red-900'>
+				<p>Child 2</p>
+			</Card>
+			<Card class='bg-red-900'>
+				<p>Child 3</p>
+			</Card>
+			<Card class='bg-red-900'>
+				<p>Child 4</p>
+			</Card>
+			<Card class='bg-red-900'>
+				<p>Child 5</p>
+			</Card>
+		</Grid>
+		
+
+	</Stack>
+</Stack>
