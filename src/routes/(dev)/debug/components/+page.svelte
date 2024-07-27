@@ -17,7 +17,7 @@ let min = $state(1);
 let max = $state(100);
 </script>
 
-<Stack class='space-y-10 my-10'>
+<Stack class='space-y-10'>
 	<Stack>
 		<h2 class='h2'>Typography</h2>
 		<h1 class='h1'>Heading 1</h1>
@@ -99,7 +99,7 @@ let max = $state(100);
 		<Center>
 			<Card>
 				<Stack>
-					<p>Switches the context to content-box and centers the element with a default horizontal padding for narrow contexts. This prevents the element from being flush to the edge by default. Change the default with a px- tailwind class</p>
+					<p>Switches the context to content-box and centers the element. No padding by default so add a px-4 or similar to avoid being flush to the edge, depending on context.</p>
 						<p>Includes a default maximum width which can be overridden with the max-w- tailwind class.</p>
 					<p class='text-center'>Centering text inside a Center component is simply done with a text-center tailwind class on the child, allowing more flexibility depending on context.</p>
 				</Stack>

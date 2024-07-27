@@ -5,6 +5,6 @@ const {class: className = '', children, ...props} = $props();
 // remaining props will be passed to the root element
 </script>
 
-<div class={`center box-content max-w-prose mx-auto px-4 ${className}`} {...props}>
+<div class={`center box-content max-w-prose mx-auto ${className}`} {...props}>
 		{@render children()}
 </div>
