@@ -11,5 +11,5 @@ let props: Props = $props();
 
 
 <label for={props.for} use:melt={$root} class='h5 semi-bold'>
-	<slot></slot>
+	{@render props.children()}
 </label>
