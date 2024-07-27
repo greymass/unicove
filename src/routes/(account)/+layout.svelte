@@ -21,6 +21,9 @@
 	<li>
 		<a href="/vote">Vote</a>
 	</li>
+	<li>
+		<a href="/transactions">Transactions</a>
+	</li>
 </ul>
 
 {@render children()}
