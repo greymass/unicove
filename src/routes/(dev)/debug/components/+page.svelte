@@ -4,14 +4,9 @@ import AssetInput from '$lib/components/input/asset.svelte';
 import Button from '$lib/components/button/button.svelte';
 import TextInput from '$lib/components/input/textinput.svelte';
 import Label from '$lib/components/input/label.svelte';
-import Stack from '$lib/components/layout/stack.svelte';
-import Box from '$lib/components/layout/box.svelte';
 import Card from '$lib/components/card.svelte';
-import Center from '$lib/components/layout/center.svelte';
-import Cluster from '$lib/components/layout/cluster.svelte';
-import * as Sidebar from '$lib/components/layout/sidebar';
-import Switcher from '$lib/components/layout/switcher.svelte';
-import Grid from '$lib/components/layout/grid.svelte';
+import { Grid, Switcher, Sidebar, Cluster, Center, Box, Stack } from '$lib/components/layout';
+
 
 let input: AssetInput;
 
@@ -122,7 +117,20 @@ let max = $state(100);
 					<p>Child 2</p>
 				</Card>
 				<Card class='bg-red-900'>
-					<p>Child 2</p>
+					<p>Child 3</p>
+				</Card>
+			</Stack>
+
+			<p>You can push items to the top or bottom of the stack by using mt-auto or mb-auto</p>
+			<Stack class='h-96'>
+				<Card class='bg-red-900'>
+					<p>Child 1</p>
+				</Card>
+				<Card class='bg-red-900'>
+					<p>Child 2 - Then a big gap to the bottom of the element</p>
+				</Card>
+				<Card class='bg-red-900 mt-auto'>
+					<p>Child 3</p>
 				</Card>
 			</Stack>
 
