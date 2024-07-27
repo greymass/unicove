@@ -9,7 +9,7 @@ import { Cluster, Box, Sidebar, Switcher } from '$lib/components/layout';
 		</Sidebar.Side>
 
 		<Sidebar.Content class='justify-end'>
-		<Switcher tag='nav' class='justify-end'>
+		<Cluster tag='nav' class='justify-end'>
 			<a href="/account">My Account</a>
 			<a href="/account/eosio">Account: eosio</a>
 			<a href="/block/100000">Block 100,000</a>
@@ -17,7 +17,7 @@ import { Cluster, Box, Sidebar, Switcher } from '$lib/components/layout';
 			>Transaction</a
 			>
 			<a href="/msig/evilmikehere/t">msig</a>
-		</Switcher>
+		</Cluster>
 		</Sidebar.Content>
 	</Sidebar.Root>
 </Box>
