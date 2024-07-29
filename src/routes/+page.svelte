@@ -3,9 +3,8 @@
 	import Language from '$lib/components/language.svelte';
 	import { wharf } from '$lib/wharf/service.svelte';
 	import Button from '$lib/components/button/button.svelte';
-	import {Box,Center, Stack} from '$lib/components/layout';
+	import { Box, Center, Stack } from '$lib/components/layout';
 </script>
-
 
 <Box>
 	<Center>
@@ -28,7 +27,7 @@
 				<Button onclick={() => wharf.login()}>Login</Button>
 				{#each wharf.sessions as session}
 					<p>
-						<Button onclick={() => wharf.switch(session)} variant='secondary'>
+						<Button onclick={() => wharf.switch(session)} variant="secondary">
 							Switch: {session.actor}@{session.permission} ({session.chain})
 						</Button>
 					</p>
