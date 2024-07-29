@@ -11,7 +11,7 @@
 	const optionsArr = ['overview', 'stake', 'unstake', 'withdraw'];
 </script>
 
-<div use:melt={$root} aria-label="page functions">
+<div use:melt={$root} aria-label="page functions" class="flex gap-3">
 	{#each optionsArr as option}
 		<span use:melt={$item(option)}>
 			<Button variant="pill" active={$isChecked(option)}>
