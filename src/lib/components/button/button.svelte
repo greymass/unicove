@@ -18,8 +18,11 @@
 	after:absolute after:opacity-0  after:rounded-full after:inset-0 after:transition-opacity after:duration-100 after:delay-0 \
   after:bg-mineShaft-950 active:after:opacity-100 active:text-white \
 	focus-visible:outline focus-visible:outline-2 focus-visible:outline-solar-500 focus-visible:before:opacity-100 focus-visible:before:transition-none \
-	target:outline target:outline-2 target:outline-mineShaft-200/30`}
+	`}
 		{...props}
+		class:outline={props.active}
+		class:outline-2={props.active}
+		class:outline-mineShaft-200={props.active}
 	>
 		<span class="relative z-10">{@render props.children()}</span>
 	</svelte:element>
