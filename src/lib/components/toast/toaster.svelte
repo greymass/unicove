@@ -2,7 +2,7 @@
 	import { createToaster, melt } from '@melt-ui/svelte';
 	import { toasts, elements, portal } from '$lib/state/toaster.svelte';
 	import Toast from './toast.svelte';
-	import {flip} from 'svelte/animate';
+	import { flip } from 'svelte/animate';
 </script>
 
 <div
@@ -10,7 +10,7 @@
 	use:portal
 >
 	{#each $toasts as toast (toast.id)}
-		<div animate:flip={{duration: 500}}>
+		<div animate:flip={{ duration: 500 }}>
 			<Toast {toast} {elements} />
 		</div>
 	{/each}

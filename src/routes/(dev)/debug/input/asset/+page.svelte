@@ -14,12 +14,16 @@
 </script>
 
 <span>
-	<Button variant="pill" onclick={() => input.set(Asset.from('0.0000 EOS'))}> EOS (0) </Button>
-	<Button variant="pill" onclick={() => input.set(Asset.from('1.0000 EOS'))}> EOS (1) </Button>
-	<Button variant="pill" onclick={() => input.set(Asset.from('2100000000.0000 EOS'))}> EOS (MAX) </Button>
+	<Button variant="pill" onclick={() => input.set(Asset.from('0.0000 EOS'))}>EOS (0)</Button>
+	<Button variant="pill" onclick={() => input.set(Asset.from('1.0000 EOS'))}>EOS (1)</Button>
+	<Button variant="pill" onclick={() => input.set(Asset.from('2100000000.0000 EOS'))}>
+		EOS (MAX)
+	</Button>
 
-	<Button variant="pill" onclick={() => input.set(Asset.from('46116860184.27387903 WAX'))}> WAX (MAX) </Button>
-	<Button variant="pill" onclick={() => input.set(Asset.from('0 FOO'))}>No Decimals </Button>
+	<Button variant="pill" onclick={() => input.set(Asset.from('46116860184.27387903 WAX'))}>
+		WAX (MAX)
+	</Button>
+	<Button variant="pill" onclick={() => input.set(Asset.from('0 FOO'))}>No Decimals</Button>
 	<Button variant="pill" onclick={() => input.set(Asset.from('4611686018427387903 TEST'))}>
 		Maximum No Decimals
 	</Button>

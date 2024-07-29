@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 @layer components {
-
 	/* Headings are defined by class instead of tag to preserve semantic html independent of style */
 
 	.h1 {
