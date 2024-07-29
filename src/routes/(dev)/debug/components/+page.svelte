@@ -29,7 +29,9 @@
 		</Stack>
 	</Sidebar.Side>
 	<Sidebar.Content tag="main" threshold="50%">
-		<Stack class="space-y-24">
+			<h1 class="h1 mb-8">Design System</h1>
+
+		<Stack class="space-y-12">
 			<Stack id="typography">
 				<h2 class="h2">Typography</h2>
 				<h1 class="h1">Heading 1</h1>
@@ -48,18 +50,31 @@
 				</p>
 			</Stack>
 
-			<div id="buttons">
+			<hr class="h-px my-8 bg-slate-200 border-0 dark:bg-slate-800">
+
+			<Stack id="buttons">
 				<h2 class="h2">Buttons</h2>
-				<Button variant="primary" onclick={() => input.set(Asset.from('0.0000 EOS'))}
+				<Stack class='items-start'>
+					<h3 class="h3">Primary</h3>
+					<Button variant="primary" onclick={() => input.set(Asset.from('0.0000 EOS'))}
 					>EOS (0)</Button
-				>
+					>
+				</Stack>
+				<Stack class='items-start'>
+					<h3 class="h3">Secondary</h3>
 				<Button variant="secondary" onclick={() => input.set(Asset.from('1.0000 EOS'))}
 					>EOS (1)</Button
 				>
+				</Stack>
+				<Stack class='items-start'>
+					<h3 class="h3">Pill</h3>
 				<Button variant="pill" onclick={() => input.set(Asset.from('2100000000.0000 EOS'))}>
 					EOS (MAX)
 				</Button>
-			</div>
+				</Stack>
+			</Stack>
+
+			<hr class="h-px my-8 bg-slate-200 border-0 dark:bg-slate-800">
 
 			<Stack id="inputs">
 				<Stack>
@@ -84,6 +99,8 @@
 				</div>
 			</Stack>
 
+			<hr class="h-px my-8 bg-slate-200 border-0 dark:bg-slate-800">
+
 			<Stack id="cards">
 				<h2 class="h2">Cards</h2>
 				<Box class="grid grid-cols-2 gap-6">
@@ -104,11 +121,15 @@
 				</Box>
 			</Stack>
 
+			<hr class="h-px my-8 bg-slate-200 border-0 dark:bg-slate-800">
+
 			<Stack id="navigation">
 				<h2 class="h2">Navigation Components</h2>
 				<h3 class="h3">Pill Group</h3>
 				<PillGroup />
 			</Stack>
+
+			<hr class="h-px my-8 bg-slate-200 border-0 dark:bg-slate-800">
 
 			<Stack id="layout" class="space-y-8">
 				<div>
