@@ -29,17 +29,35 @@
 		</Stack>
 	</Sidebar.Side>
 	<Sidebar.Content tag="main" threshold="50%">
-			<h1 class="h1 mb-8">Design System</h1>
+		<h1 class="h1 mb-8">Design System</h1>
 
 		<Stack class="space-y-12">
 			<Stack id="typography">
 				<h2 class="h2">Typography</h2>
-				<h1 class="h1">Heading 1</h1>
-				<h2 class="h2">Heading 2</h2>
-				<h3 class="h3">Heading 3</h3>
-				<h4 class="h4">Heading 4</h4>
-				<h5 class="h5">Heading 5</h5>
-				<p class="caption">Caption</p>
+				<Cluster class="items-center">
+					<h1 class="h1">Heading 1 (Inter 48)</h1>
+					<code class=" bg-gray-300 text-black rounded-lg p-2">class='h1'</code>
+				</Cluster>
+				<Cluster class="items-center">
+					<h2 class="h2">Heading 2 (Inter 32)</h2>
+					<code class=" bg-gray-300 text-black rounded-lg p-2">class='h2'</code>
+				</Cluster>
+				<Cluster class="items-center">
+					<h3 class="h3">Heading 3 (Inter 24)</h3>
+					<code class=" bg-gray-300 text-black rounded-lg p-2">class='h3'</code>
+				</Cluster>
+				<Cluster class="items-center">
+					<h4 class="h4">Heading 4 (Inter 18)</h4>
+					<code class=" bg-gray-300 text-black rounded-lg p-2">class='h4'</code>
+				</Cluster>
+				<Cluster class="items-center">
+					<h5 class="h5">Heading 5 (Inter 16)</h5>
+					<code class="bg-gray-300 text-black rounded-lg p-2">class='h5'</code>
+				</Cluster>
+				<Cluster class="items-center">
+					<p class="caption">Caption (Inter 12)</p>
+					<code class="bg-gray-300 text-black rounded-lg p-2">class='caption'</code>
+				</Cluster>
 				<p>
 					Paragraph - lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
 					incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
@@ -50,31 +68,31 @@
 				</p>
 			</Stack>
 
-			<hr class="h-px my-8 bg-slate-200 border-0 dark:bg-slate-800">
+			<hr class="h-px my-8 bg-slate-200 border-0 dark:bg-slate-800" />
 
 			<Stack id="buttons">
 				<h2 class="h2">Buttons</h2>
-				<Stack class='items-start'>
+				<Stack class="items-start">
 					<h3 class="h3">Primary</h3>
 					<Button variant="primary" onclick={() => input.set(Asset.from('0.0000 EOS'))}
-					>EOS (0)</Button
+						>EOS (0)</Button
 					>
 				</Stack>
-				<Stack class='items-start'>
+				<Stack class="items-start">
 					<h3 class="h3">Secondary</h3>
-				<Button variant="secondary" onclick={() => input.set(Asset.from('1.0000 EOS'))}
-					>EOS (1)</Button
-				>
+					<Button variant="secondary" onclick={() => input.set(Asset.from('1.0000 EOS'))}
+						>EOS (1)</Button
+					>
 				</Stack>
-				<Stack class='items-start'>
+				<Stack class="items-start">
 					<h3 class="h3">Pill</h3>
-				<Button variant="pill" onclick={() => input.set(Asset.from('2100000000.0000 EOS'))}>
-					EOS (MAX)
-				</Button>
+					<Button variant="pill" onclick={() => input.set(Asset.from('2100000000.0000 EOS'))}>
+						EOS (MAX)
+					</Button>
 				</Stack>
 			</Stack>
 
-			<hr class="h-px my-8 bg-slate-200 border-0 dark:bg-slate-800">
+			<hr class="h-px my-8 bg-slate-200 border-0 dark:bg-slate-800" />
 
 			<Stack id="inputs">
 				<Stack>
@@ -99,29 +117,29 @@
 				</div>
 			</Stack>
 
-			<hr class="h-px my-8 bg-slate-200 border-0 dark:bg-slate-800">
+			<hr class="h-px my-8 bg-slate-200 border-0 dark:bg-slate-800" />
 
 			<Stack id="cards">
 				<h2 class="h2">Cards</h2>
-				<Box class="grid grid-cols-2 gap-6">
-					<Card title="Card Title">
-						<table class="w-full">
-							<tbody>
-								<tr>
-									<td>Card Content</td>
-									<td>Card Content</td>
-								</tr>
-								<tr>
-									<td>Card Content</td>
-									<td>Card Content</td>
-								</tr>
-							</tbody>
-						</table>
-					</Card>
-				</Box>
+				<Card title="Card Title" class="self-start">
+					<table>
+						<thead>
+							<tr>
+								<th>Amount</th>
+								<th>Date available</th>
+							</tr>
+						</thead><tbody>
+							<tr>
+								<td>0 EOS</td>
+								<td>Not connected</td>
+							</tr>
+						</tbody>
+					</table>
+					<Button variant="secondary" class="text-pictonBlue-500">Withdraw</Button>
+				</Card>
 			</Stack>
 
-			<hr class="h-px my-8 bg-slate-200 border-0 dark:bg-slate-800">
+			<hr class="h-px my-8 bg-slate-200 border-0 dark:bg-slate-800" />
 
 			<Stack id="navigation">
 				<h2 class="h2">Navigation Components</h2>
@@ -129,14 +147,14 @@
 				<PillGroup />
 			</Stack>
 
-			<hr class="h-px my-8 bg-slate-200 border-0 dark:bg-slate-800">
+			<hr class="h-px my-8 bg-slate-200 border-0 dark:bg-slate-800" />
 
 			<Stack id="layout" class="space-y-8">
 				<div>
 					<h2 class="h2 mb-4">Layout Components</h2>
 					<p>These are the basic layout components designed to be:</p>
 					<ul class="list-disc list-inside">
-						<li>Aomically Composable</li>
+						<li>Atomically Composable</li>
 						<li>Intrisically Responsive</li>
 						<li>Accessible</li>
 					</ul>
@@ -221,7 +239,7 @@
 							</Card>
 						</Sidebar.Side>
 						<Sidebar.Content tag="main" threshold="50%">
-							<Card title="Main Content">
+							<Card title="Main Content" class="">
 								<Stack>
 									<p>This is the main content set to break at 50%</p>
 									<p>This is the main content</p>

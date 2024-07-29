@@ -32,4 +32,8 @@
 	p {
 		@apply max-w-prose font-medium;
 	}
+
+	.card {
+		@apply bg-mineShaft-900;
+	}
 }

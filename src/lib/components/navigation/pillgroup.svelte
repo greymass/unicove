@@ -13,7 +13,7 @@
 
 <div use:melt={$root} aria-label="page functions" class="flex gap-3">
 	{#each optionsArr as option}
-		<span class='contents' use:melt={$item(option)}>
+		<span class="contents" use:melt={$item(option)}>
 			<Button variant="pill" active={$isChecked(option)}>
 				{option}
 			</Button>

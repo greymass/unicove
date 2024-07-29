@@ -4,9 +4,10 @@
 		variant?: 'primary' | 'secondary' | 'pill';
 		disabled?: boolean;
 		active?: boolean;
+		class?: string;
 	}
 
-	let props: Props = $props();
+	let { class: className, ...props }: Props = $props();
 </script>
 
 {#if props.variant === 'pill'}
@@ -18,7 +19,7 @@
 	after:absolute after:opacity-0  after:rounded-full after:inset-0 after:transition-opacity after:duration-100 after:delay-0 \
   after:bg-mineShaft-950 active:after:opacity-100 active:text-white \
 	focus-visible:outline focus-visible:outline-2 focus-visible:outline-solar-500 focus-visible:before:opacity-100 focus-visible:before:transition-none \
-	`}
+	${className}`}
 		{...props}
 		class:outline={props.active}
 		class:outline-2={props.active}
@@ -34,7 +35,8 @@
   before:bg-mineShaft-900 [@media(any-hover:hover){&:hover}]:before:opacity-100 [@media(any-hover:hover){&:hover}]:text-white \
 	after:absolute after:opacity-0  after:rounded-lg after:-inset-0.5 after:transition-opacity after:duration-100 after:delay-0 \
   after:bg-mineShaft-950 active:after:opacity-100 active:text-white \
-	focus-visible:outline focus:outline-2 focus:outline-solar-500 focus-visible:before:opacity-100 focus-visible:before:transition-none 
+	focus-visible:outline focus:outline-2 focus:outline-solar-500 focus-visible:before:opacity-100 focus-visible:before:transition-none \
+	${className}
 `}
 		{...props}
 	>
@@ -48,7 +50,8 @@
   before:bg-pictonBlue-400 [@media(any-hover:hover){&:hover}]:before:opacity-100 \
 	after:absolute after:opacity-0  after:rounded-lg after:inset-0 after:transition-opacity after:duration-100 after:delay-0 \
   after:bg-pictonBlue-600 active:after:opacity-100 active:text-white \
-	focus-visible:outline focus:outline-2 focus:outline-solar-500
+	focus-visible:outline focus:outline-2 focus:outline-solar-500 \
+	${className}
 	`}
 		{...props}
 	>
