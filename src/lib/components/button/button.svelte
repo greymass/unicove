@@ -7,8 +7,9 @@ interface Props {
 
 let props: Props = $props();
 
-const primary = 'rounded-lg bg-blue-400 hover:bg-blue-300 active:bg-blue-500 transition-colors';
-const secondary = 'rounded-lg outline outline-1 outline-slate-600 hover:bg-slate-800 hover:outline-none active:bg-slate-900';
+const primary = 'rounded-lg relative bg-pictonBlue-600 \
+	before:absolute before:opacity-20 before:bg-white hover:before:opacity-30 before:rounded-md before:inset-0 before:transition-opacity before:active:opacity-0 ';
+const secondary = 'rounded-lg outline outline-1 outline-slate-600 hover:bg-slate-800 hover:outline-slate-800 active:bg-slate-900';
 const pill = 'rounded-full hover:bg-slate-800 active:bg-slate-900 target:outline target:outline-1 target:outline-slate-600';
 
 const variants = {
@@ -27,5 +28,5 @@ const variantStyles = variants[props.variant] || variants.primary;
 	class={ `py-2 px-8 text-white font-medium  ${variantStyles}` }
 	{...props}
 >
-	{@render props.children()}
+	<span class="relative z-10">{@render props.children()}</span>
 </svelte:element>
