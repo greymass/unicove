@@ -1,32 +1,55 @@
 <script lang='ts'>
 interface Props {
 	href?: string;
-	variant?: typeof variants;
+	variant?: 'primary' | 'secondary' | 'pill';
 	disabled?: boolean;
 }
 
 let props: Props = $props();
-
-const primary = 'rounded-lg relative bg-pictonBlue-600 \
-	before:absolute before:opacity-20 before:bg-white hover:before:opacity-30 before:rounded-md before:inset-0 before:transition-opacity before:active:opacity-0 ';
-const secondary = 'rounded-lg outline outline-1 outline-slate-600 hover:bg-slate-800 hover:outline-slate-800 active:bg-slate-900';
-const pill = 'rounded-full hover:bg-slate-800 active:bg-slate-900 target:outline target:outline-1 target:outline-slate-600';
-
-const variants = {
-	primary,
-	secondary,
-	pill
-};
-
-// Default to primary if variant is not defined
-const variantStyles = variants[props.variant] || variants.primary;
-
 </script>
 
-<svelte:element
-	this={props.href ? 'a' : 'button'}
-	class={ `py-2 px-8 text-white font-medium  ${variantStyles}` }
-	{...props}
->
-	<span class="relative z-10">{@render props.children()}</span>
-</svelte:element>
+{#if props.variant === 'pill'}
+	<svelte:element
+		this={props.href ? 'a' : 'button'}
+		class={ `py-2.5 px-8 font-medium rounded-full relative \
+	before:absolute before:opacity-0 before:rounded-full before:inset-0 before:transition-opacity \
+  before:bg-mineShaft-900 [@media(any-hover:hover){&:hover}]:before:opacity-100 [@media(any-hover:hover){&:hover}]:text-white \
+	after:absolute after:opacity-0  after:rounded-full after:inset-0 after:transition-opacity after:duration-100 after:delay-0 \
+  after:bg-mineShaft-950 active:after:opacity-100 active:text-white \
+	focus-visible:outline focus:outline-3 focus:outline-solar-500 focus-visible:before:opacity-100 focus-visible:before:transition-none \
+target:outline target:outline-1 target:outline-mineShaft-950` }
+		{...props}
+	>
+		<span class="relative z-10">{@render props.children()}</span>
+	</svelte:element>
+
+{:else if props.variant === 'secondary'}
+	<svelte:element
+		this={props.href ? 'a' : 'button'}
+		class={ `py-3 px-8  relative font-medium rounded-lg  border-2 border-mineShaft-600 \
+	before:absolute before:opacity-0  before:rounded-lg before:-inset-0.5 before:transition-opacity \
+  before:bg-mineShaft-900 [@media(any-hover:hover){&:hover}]:before:opacity-100 [@media(any-hover:hover){&:hover}]:text-white \
+	after:absolute after:opacity-0  after:rounded-lg after:-inset-0.5 after:transition-opacity after:duration-100 after:delay-0 \
+  after:bg-mineShaft-950 active:after:opacity-100 active:text-white \
+	focus-visible:outline focus:outline-3 focus:outline-solar-500 focus-visible:before:opacity-100 focus-visible:before:transition-none 
+` }
+		{...props}
+	>
+		<span class="relative z-10">{@render props.children()}</span>
+	</svelte:element>
+
+{:else}
+	<svelte:element
+		this={props.href ? 'a' : 'button'}
+		class={ `py-3.5 px-8 text-white relative font-medium rounded-lg relative bg-pictonBlue-500 \
+	before:absolute before:opacity-0  before:rounded-lg before:inset-0 before:transition-opacity \
+  before:bg-pictonBlue-400 [@media(any-hover:hover){&:hover}]:before:opacity-100 \
+	after:absolute after:opacity-0  after:rounded-lg after:inset-0 after:transition-opacity after:duration-100 after:delay-0 \
+  after:bg-pictonBlue-600 active:after:opacity-100 active:text-white \
+	focus-visible:outline focus:outline-3 focus:outline-solar-500
+	` }
+		{...props}
+	>
+		<span class="relative z-10">{@render props.children()}</span>
+	</svelte:element>
+{/if}
