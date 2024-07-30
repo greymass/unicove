@@ -1,4 +1,5 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
+import containerQueries from '@tailwindcss/container-queries';
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -90,5 +91,5 @@ export default {
 			}
 		}
 	},
-	plugins: []
+	plugins: [containerQueries]
 };
