@@ -45,11 +45,11 @@
 {:else}
 	<svelte:element
 		this={props.href ? 'a' : 'button'}
-		class={`m-0.5 py-3.5 px-8 text-white relative font-medium rounded-lg relative bg-pictonBlue-500 \
+		class={`m-0.5 py-3.5 px-8 text-white relative font-medium rounded-lg relative bg-skyBlue-500 \
 	before:absolute before:opacity-0  before:rounded-lg before:inset-0 before:transition-opacity \
-  before:bg-pictonBlue-400 [@media(any-hover:hover){&:hover}]:before:opacity-100 \
+  before:bg-skyBlue-400 [@media(any-hover:hover){&:hover}]:before:opacity-100 \
 	after:absolute after:opacity-0  after:rounded-lg after:inset-0 after:transition-opacity after:duration-100 after:delay-0 \
-  after:bg-pictonBlue-600 active:after:opacity-100 active:text-white \
+  after:bg-skyBlue-600 active:after:opacity-100 active:text-white \
 	focus-visible:outline focus:outline-2 focus:outline-solar-500 \
 	${className}
 	`}

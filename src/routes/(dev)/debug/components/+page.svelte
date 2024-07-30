@@ -28,12 +28,14 @@
 			<a href="#layout" class="block">Layout</a>
 		</Stack>
 	</Sidebar.Side>
-	<Sidebar.Content tag="main" threshold="50%">
+	<Sidebar.Content tag="main" threshold="80%">
 		<h1 class="h1 mb-8">Design System</h1>
 
 		<Stack class="space-y-12">
 			<Stack id="typography">
 				<h2 class="h2">Typography</h2>
+				<p>Styles are applied separately from their tag since there will be situations where we want to mix and match styles and tags. We want to adhere to valid and semantic html as much as possible, and having a utility class to apply heading styles helps us with that goal.</p>
+				<p>For example, some of the designs show the main heading of the page using the style of a second heading. This is easily achieved by applying the h2 class to the h1 tag.</p>
 				<Cluster class="items-center">
 					<h1 class="h1">Heading 1 (Inter 48)</h1>
 					<code class=" bg-gray-300 text-black rounded-lg p-2">class='h1'</code>
@@ -121,22 +123,40 @@
 
 			<Stack id="cards">
 				<h2 class="h2">Cards</h2>
-				<Card title="Card Title" class="self-start">
-					<table>
-						<thead>
-							<tr>
-								<th>Amount</th>
-								<th>Date available</th>
-							</tr>
-						</thead><tbody>
-							<tr>
-								<td>0 EOS</td>
-								<td>Not connected</td>
-							</tr>
-						</tbody>
-					</table>
-					<Button variant="secondary" class="text-pictonBlue-500">Withdraw</Button>
-				</Card>
+
+				<Cluster>
+					<Card class='gap-5'>
+						<Stack class='gap-0'>
+							<p class='caption'>Currently Staked - 34% APY</p>
+							<p class='h3'>0.0 EOS</p>
+							<p class='bg-shark-800/60 rounded self-start px-2 mt-1.5'>USD Value $0.0</p>
+						</Stack>
+						<Switcher threshold='30rem' >
+							<Button variant="secondary" class="text-skyBlue-500">Stake</Button>
+							<Button variant="secondary" class="text-skyBlue-500">Unstake</Button>
+						</Switcher>
+					</Card>
+
+					<Card title="Unstaking Balances">
+						<table class='table-auto'>
+							<thead class='border-b-2 border-shark-100/10'>
+								<tr class='caption font-medium'>
+									<th class='p-4 text-left'>Amount</th>
+									<th class='p-4 text-right'>Date available</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class='p-4'>0 EOS</td>
+									<td class='p-4 text-right'>Not connected</td>
+								</tr>
+							</tbody>
+						</table>
+						<Button variant="secondary" class="text-skyBlue-500">Withdraw</Button>
+					</Card>
+				</Cluster>
+
+
 			</Stack>
 
 			<hr class="h-px my-8 bg-slate-200 border-0 dark:bg-slate-800" />
