@@ -7,6 +7,7 @@
 	import Card from '$lib/components/card.svelte';
 	import { Grid, Switcher, Sidebar, Cluster, Center, Box, Stack } from '$lib/components/layout';
 	import PillGroup from '$lib/components/navigation/pillgroup.svelte';
+	import AccountNavigation from '$lib/components/navigation/accountnavigation.svelte';
 	import Code from '$lib/components/code.svelte';
 
 	let input: AssetInput;
@@ -126,17 +127,19 @@
 			<Stack id="cards">
 				<h2 class="h2">Cards</h2>
 
-				<Cluster>
+				<Cluster class='justify-center items-start'>
 					<Card class='gap-5'>
 						<Stack class='gap-0'>
 							<p class='caption'>Currently Staked - 34% APY</p>
 							<p class='h3'>0.0 EOS</p>
 							<p class='bg-shark-800/60 rounded self-start px-2 mt-1.5'>USD Value $0.0</p>
 						</Stack>
-						<Switcher threshold='30rem' >
+						<!-- <Switcher threshold='30rem' > -->
+						<Grid itemWidth='8ch'>
 							<Button variant="secondary" class="text-skyBlue-500">Stake</Button>
 							<Button variant="secondary" class="text-skyBlue-500">Unstake</Button>
-						</Switcher>
+						</Grid>
+						<!-- </Switcher> -->
 					</Card>
 
 					<Card title="Unstaking Balances">
@@ -165,8 +168,26 @@
 
 			<Stack id="navigation">
 				<h2 class="h2">Navigation Components</h2>
-				<h3 class="h3">Pill Group</h3>
-				<PillGroup />
+				<Stack>
+					<h3 class="h3">Account Actions</h3>
+					<AccountNavigation 
+						options={[
+							{ href: '#navigation', text: 'Permissions' },
+							{ href: '#navigation', text: 'RAM' },
+							{ href: '#navigation', text: 'Resources', active: true },
+							{ href: '#navigation', text: 'Send' },
+							{ href: '#navigation', text: 'Transfer' },
+							{ href: '#navigation', text: 'Vote' },
+							{ href: '#navigation', text: 'Transactions' },
+						]}
+					/>
+
+				</Stack>
+
+				<Stack>
+					<h3 class="h3">Page Actions</h3>
+					<PillGroup />
+				</Stack>
 			</Stack>
 
 			<hr class="h-px my-8 bg-slate-200 border-0 dark:bg-slate-800" />
