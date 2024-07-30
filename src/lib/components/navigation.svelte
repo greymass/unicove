@@ -3,12 +3,9 @@
 </script>
 
 <Box>
-	<Sidebar.Root>
-		<Sidebar.Side width="10rem">
-			<a href="/">Home</a>
-		</Sidebar.Side>
+	<Switcher>
+		<a href="/">Home</a>
 
-		<Sidebar.Content class="justify-end">
 			<Cluster tag="nav" class="justify-end">
 				<a href="/account">My Account</a>
 				<a href="/account/eosio">Account: eosio</a>
@@ -18,6 +15,5 @@
 				>
 				<a href="/msig/evilmikehere/t">msig</a>
 			</Cluster>
-		</Sidebar.Content>
-	</Sidebar.Root>
+		</Switcher>
 </Box>

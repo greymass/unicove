@@ -13,7 +13,7 @@
 {#if props.variant === 'pill'}
 	<svelte:element
 		this={props.href ? 'a' : 'button'}
-		class={`inline-block m-0.5 py-2.5 px-6 font-medium rounded-full relative leading-4 \
+		class={`inline-block text-nowrap m-0.5 py-2.5 px-6 font-medium rounded-full relative leading-4 \
 	before:absolute before:opacity-0 before:rounded-full before:inset-0 before:transition-opacity \
   before:bg-mineShaft-900 [@media(any-hover:hover){&:hover}]:before:opacity-100 [@media(any-hover:hover){&:hover}]:text-white \
 	after:absolute after:opacity-0  after:rounded-full after:inset-0 after:transition-opacity after:duration-100 after:delay-0 \
@@ -30,7 +30,7 @@
 {:else if props.variant === 'secondary'}
 	<svelte:element
 		this={props.href ? 'a' : 'button'}
-		class={`m-0.5 py-3 px-8  relative font-medium rounded-lg  border-2 border-mineShaft-600 \
+		class={`m-0.5 py-3 px-8 text-nowrap  relative font-medium rounded-lg  border-2 border-mineShaft-600 \
 	before:absolute before:opacity-0  before:rounded-lg before:-inset-0.5 before:transition-opacity \
   before:bg-mineShaft-900 [@media(any-hover:hover){&:hover}]:before:opacity-100 [@media(any-hover:hover){&:hover}]:text-white \
 	after:absolute after:opacity-0  after:rounded-lg after:-inset-0.5 after:transition-opacity after:duration-100 after:delay-0 \
@@ -45,7 +45,7 @@
 {:else}
 	<svelte:element
 		this={props.href ? 'a' : 'button'}
-		class={`m-0.5 py-3.5 px-8 text-white relative font-medium rounded-lg relative bg-skyBlue-500 \
+		class={`m-0.5 py-3.5 px-8 text-white text-nowrap relative font-medium rounded-lg relative bg-skyBlue-500 \
 	before:absolute before:opacity-0  before:rounded-lg before:inset-0 before:transition-opacity \
   before:bg-skyBlue-400 [@media(any-hover:hover){&:hover}]:before:opacity-100 \
 	after:absolute after:opacity-0  after:rounded-lg after:inset-0 after:transition-opacity after:duration-100 after:delay-0 \
