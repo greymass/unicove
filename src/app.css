@@ -2,10 +2,46 @@
 @tailwind components;
 @tailwind utilities;
 
-a {
-	@apply text-blue-500 underline;
-}
+@layer components {
+	/* Headings are defined by class instead of tag to preserve semantic html independent of style */
 
-button {
-	@apply bg-blue-500 text-white;
+	.h1 {
+		@apply text-5xl font-semibold;
+	}
+
+	.h2 {
+		@apply text-3xl font-semibold;
+	}
+
+	.h3 {
+		@apply text-2xl font-semibold;
+	}
+
+	.h4 {
+		@apply text-lg leading-7 font-medium;
+	}
+
+	.h5 {
+		@apply text-base leading-snug font-medium;
+	}
+
+	.caption {
+		@apply text-base text-gray-500 font-medium;
+	}
+
+	p {
+		@apply max-w-prose text-base font-medium;
+	}
+
+	.card {
+		@apply bg-mineShaft-900;
+	}
+
+	.stack {
+		@apply flex flex-col gap-4;
+	}
+
+	.center {
+		@apply box-content max-w-prose mx-auto;
+	}
 }
