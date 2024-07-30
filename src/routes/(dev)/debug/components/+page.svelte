@@ -21,7 +21,7 @@
 
 <Sidebar.Root>
 	<Sidebar.Side width="10rem" tag="aside">
-		<Stack id='toc' class="sticky top-4">
+		<Stack id="toc" class="sticky top-4">
 			<a href="#typography">Typography</a>
 			<a href="#buttons">Buttons</a>
 			<a href="#inputs">Inputs</a>
@@ -37,8 +37,15 @@
 		<Stack class="space-y-12">
 			<Stack id="typography">
 				<h2 class="h2">Typography</h2>
-				<p>Styles are applied separately from their tag since there will be situations where we want to mix and match styles and tags. We want to adhere to valid and semantic html as much as possible, and having a utility class to apply heading styles helps us with that goal.</p>
-				<p>For example, some of the designs show the main heading of the page using the style of a second heading. This is easily achieved by applying the h2 class to the h1 tag.</p>
+				<p>
+					Styles are applied separately from their tag since there will be situations where we want
+					to mix and match styles and tags. We want to adhere to valid and semantic html as much as
+					possible, and having a utility class to apply heading styles helps us with that goal.
+				</p>
+				<p>
+					For example, some of the designs show the main heading of the page using the style of a
+					second heading. This is easily achieved by applying the h2 class to the h1 tag.
+				</p>
 				<Cluster class="items-center">
 					<h1 class="h1">Heading 1 (Inter 48)</h1>
 					<code class=" bg-gray-300 text-black rounded-lg p-2">class='h1'</code>
@@ -127,32 +134,32 @@
 			<Stack id="cards">
 				<h2 class="h2">Cards</h2>
 
-				<div class='flex justify-center'>
-					<Switcher threshold='40rem' class='items-start'>
-						<Card class='gap-5'>
-							<Stack class='gap-0'>
-								<p class='caption'>Currently Staked - 34% APY</p>
-								<p class='h3'>0.0 EOS</p>
-								<p class='bg-shark-800/60 rounded self-start px-2 mt-1.5'>USD Value $0.0</p>
+				<div class="flex justify-center">
+					<Switcher threshold="40rem" class="items-start">
+						<Card class="gap-5">
+							<Stack class="gap-0">
+								<p class="caption">Currently Staked - 34% APY</p>
+								<p class="h3">0.0 EOS</p>
+								<p class="bg-shark-800/60 rounded self-start px-2 mt-1.5">USD Value $0.0</p>
 							</Stack>
-							<Switcher threshold='20rem'>
+							<Switcher threshold="20rem">
 								<Button variant="secondary" class="text-skyBlue-500">Stake</Button>
 								<Button variant="secondary" class="text-skyBlue-500">Unstake</Button>
 							</Switcher>
 						</Card>
 
 						<Card title="Unstaking Balances Is A Long Title">
-							<table class='table-auto'>
-								<thead class='border-b-2 border-shark-100/10'>
-									<tr class='caption font-medium'>
-										<th class='p-4 text-left'>Amount</th>
-										<th class='p-4 text-right'>Date available</th>
+							<table class="table-auto">
+								<thead class="border-b-2 border-shark-100/10">
+									<tr class="caption font-medium">
+										<th class="p-4 text-left">Amount</th>
+										<th class="p-4 text-right">Date available</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
-										<td class='p-4'>0 EOS</td>
-										<td class='p-4 text-right'>Not connected</td>
+										<td class="p-4">0 EOS</td>
+										<td class="p-4 text-right">Not connected</td>
 									</tr>
 								</tbody>
 							</table>
@@ -168,7 +175,7 @@
 				<h2 class="h2">Navigation Components</h2>
 				<Stack>
 					<h3 class="h3">Account Actions</h3>
-					<AccountNavigation 
+					<AccountNavigation
 						options={[
 							{ href: '#navigation', text: 'Permissions' },
 							{ href: '#navigation', text: 'RAM' },
@@ -176,20 +183,14 @@
 							{ href: '#navigation', text: 'Send' },
 							{ href: '#navigation', text: 'Transfer' },
 							{ href: '#navigation', text: 'Vote' },
-							{ href: '#navigation', text: 'Transactions' },
+							{ href: '#navigation', text: 'Transactions' }
 						]}
 					/>
-
 				</Stack>
 
 				<Stack>
 					<h3 class="h3">Page Actions</h3>
-					<PillGroup options={[
-						'Overview',
-						'Stake',
-						'Unstake',
-						'Withdraw',
-					]} />
+					<PillGroup options={['Overview', 'Stake', 'Unstake', 'Withdraw']} />
 				</Stack>
 			</Stack>
 
@@ -197,21 +198,18 @@
 
 			<Stack id="code">
 				<h2 class="h2">Code</h2>
+				<p>We can use the code component to display JSON snippets. This is useful for debug.</p>
 				<p>
-					We can use the code component to display JSON snippets. This is useful for debug.
+					Here we have an inline code snippet: <Code inline>{`{ "key": "value" }`}</Code> surrounded
+					by text.
 				</p>
-				<p>
-					Here we have an inline code snippet: <Code inline>{`{ "key": "value" }`}</Code> surrounded by text.
-				</p>
-				<p>
-					And here we have a block code snippet:
-				</p>
+				<p>And here we have a block code snippet:</p>
 				<Code>
 					{`{
 	"key": "value",
 	"key2": "someReallyLongValueThatWeCanEitherWrapToTheNextLineOrPresentAScrollbarIfItDoesntFitInThisContainer",
 }`}
-					</Code>
+				</Code>
 			</Stack>
 
 			<hr class="h-px my-8 bg-slate-200 border-0 dark:bg-slate-800" />
@@ -241,7 +239,7 @@
 				<Stack>
 					<h3 class="h3">Center</h3>
 					<Center>
-						<Card class='box-content max-w-prose'>
+						<Card class="box-content max-w-prose">
 							<Stack>
 								<p>
 									Switches the context to content-box and centers the element. No padding by default

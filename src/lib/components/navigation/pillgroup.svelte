@@ -5,16 +5,15 @@
 	interface Props {
 		options: string[];
 	}
-	const props: Props = $props()
-	
+	const props: Props = $props();
+
 	const {
 		elements: { root, item, hiddenInput },
 		helpers: { isChecked }
 	} = createRadioGroup({
 		defaultValue: props.options[0],
-		orientation: 'horizontal',
+		orientation: 'horizontal'
 	});
-
 </script>
 
 <div use:melt={$root} aria-label="page functions" class="flex flex-wrap gap-3">

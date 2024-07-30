@@ -12,19 +12,20 @@
 		{ href: '/send', text: 'Send' },
 		{ href: '/transfer', text: 'Transfer' },
 		{ href: '/vote', text: 'Vote' },
-		{ href: '/transactions', text: 'Transactions' },
+		{ href: '/transactions', text: 'Transactions' }
 	];
 
 	// Derive the active state of each destination
-	let options = $derived(destinations.map((destination) => ({
-		...destination,
-		active: $page.url.pathname.includes(destination.href),
-	})))
-
+	let options = $derived(
+		destinations.map((destination) => ({
+			...destination,
+			active: $page.url.pathname.includes(destination.href)
+		}))
+	);
 </script>
 
 <AccountNavigation {options} />
 
 <Box>
-		{@render children()}
+	{@render children()}
 </Box>
