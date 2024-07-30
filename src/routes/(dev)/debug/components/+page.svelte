@@ -4,6 +4,7 @@
 	import Button from '$lib/components/button/button.svelte';
 	import TextInput from '$lib/components/input/textinput.svelte';
 	import Label from '$lib/components/input/label.svelte';
+	import Switch from '$lib/components/input/switch.svelte';
 	import Card from '$lib/components/card.svelte';
 	import { Grid, Switcher, Sidebar, Cluster, Center, Box, Stack } from '$lib/components/layout';
 	import PillGroup from '$lib/components/navigation/pillgroup.svelte';
@@ -96,6 +97,11 @@
 					<h2 class="h2">Asset Input</h2>
 					<Label for="assetInput">Enter token value:</Label>
 					<AssetInput id="assetInput" bind:this={input} bind:value bind:valid bind:min bind:max />
+				</div>
+
+				<div>
+					<h2 class="h2">Switch</h2>
+					<Switch />
 				</div>
 			</Stack>
 
