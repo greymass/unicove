@@ -7,6 +7,7 @@
 	import Card from '$lib/components/card.svelte';
 	import { Grid, Switcher, Sidebar, Cluster, Center, Box, Stack } from '$lib/components/layout';
 	import PillGroup from '$lib/components/navigation/pillgroup.svelte';
+	import Code from '$lib/components/code.svelte';
 
 	let input: AssetInput;
 
@@ -19,13 +20,14 @@
 
 <Sidebar.Root>
 	<Sidebar.Side width="10rem" tag="aside">
-		<Stack class="sticky top-4">
-			<a href="#typography" class="block">Typography</a>
-			<a href="#buttons" class="block">Buttons</a>
-			<a href="#inputs" class="block">Inputs</a>
-			<a href="#cards" class="block">Cards</a>
-			<a href="#navigation" class="block">Navigation</a>
-			<a href="#layout" class="block">Layout</a>
+		<Stack id='toc' class="sticky top-4">
+			<a href="#typography">Typography</a>
+			<a href="#buttons">Buttons</a>
+			<a href="#inputs">Inputs</a>
+			<a href="#cards">Cards</a>
+			<a href="#navigation">Navigation</a>
+			<a href="#code">Code</a>
+			<a href="#layout">Layout</a>
 		</Stack>
 	</Sidebar.Side>
 	<Sidebar.Content tag="main" threshold="80%">
@@ -165,6 +167,27 @@
 				<h2 class="h2">Navigation Components</h2>
 				<h3 class="h3">Pill Group</h3>
 				<PillGroup />
+			</Stack>
+
+			<hr class="h-px my-8 bg-slate-200 border-0 dark:bg-slate-800" />
+
+			<Stack id="code">
+				<h2 class="h2">Code</h2>
+				<p>
+					We can use the code component to display JSON snippets. This is useful for debug.
+				</p>
+				<p>
+					Here we have an inline code snippet: <Code inline>{`{ "key": "value" }`}</Code> surrounded by text.
+				</p>
+				<p>
+					And here we have a block code snippet:
+				</p>
+				<Code>
+					{`{
+	"key": "value",
+	"key2": "someReallyLongValueThatWeCanEitherWrapToTheNextLineOrPresentAScrollbarIfItDoesntFitInThisContainer",
+}`}
+					</Code>
 			</Stack>
 
 			<hr class="h-px my-8 bg-slate-200 border-0 dark:bg-slate-800" />
