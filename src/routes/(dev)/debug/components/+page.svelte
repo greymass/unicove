@@ -186,7 +186,12 @@
 
 				<Stack>
 					<h3 class="h3">Page Actions</h3>
-					<PillGroup />
+					<PillGroup options={[
+						'Overview',
+						'Stake',
+						'Unstake',
+						'Withdraw',
+					]} />
 				</Stack>
 			</Stack>
 
