@@ -7,7 +7,9 @@ import {
 	type SerializedSession,
 	type WalletPlugin,
 	APIClient,
+	ChainDefinition,
 	Chains,
+	FetchProvider,
 	Session,
 	SessionKit
 } from '@wharfkit/session';
@@ -16,9 +18,11 @@ import WebRenderer from '@wharfkit/web-renderer';
 import { WalletPluginAnchor } from '@wharfkit/wallet-plugin-anchor';
 import { WalletPluginPrivateKey } from '@wharfkit/wallet-plugin-privatekey';
 import { Account, AccountKit } from '@wharfkit/account';
-import ContractKit, { Contract } from '@wharfkit/contract';
-import { Contract as TokenContract } from './contracts/token';
+import { ContractKit } from '@wharfkit/contract';
+import { Contract as DelphiOracleContract } from './contracts/delphioracle';
 import { Contract as SystemContract } from './contracts/system';
+import { Contract as TokenContract } from './contracts/token';
+import { Resources } from '@wharfkit/resources';
 
 const walletPlugins: WalletPlugin[] = [new WalletPluginAnchor()];
 
@@ -28,43 +32,55 @@ if (PUBLIC_LOCAL_SIGNER) {
 }
 
 interface DefaultContracts {
+	delphioracle?: DelphiOracleContract;
 	token?: TokenContract;
 	system?: SystemContract;
 }
 
 export class WharfService {
-	public account: Account | undefined = $state<Account | undefined>();
-	public accountKit: AccountKit | undefined = $state<AccountKit | undefined>();
+	public account?: Account = $state();
+	public accountKit?: AccountKit = $state(); //$derived.by(() => {});
+	public chain: ChainDefinition = $state(Chains.EOS);
+	public client?: APIClient = $state();
 	public contracts: DefaultContracts = $state({});
-	public contractKit: ContractKit | undefined = $state<ContractKit | undefined>();
-	public session: Session | undefined = $state<Session | undefined>();
+	public contractKit?: ContractKit = $state<ContractKit>();
+	public resources?: Resources = $state();
+	public session?: Session = $state<Session>();
 	public sessions: SerializedSession[] = $state([]);
-	public sessionKit: SessionKit | undefined;
+	public sessionKit?: SessionKit;
+
+	constructor(chain: ChainDefinition, fetchOverride: typeof window.fetch = fetch) {
+		this.chain = chain;
+		const fetchProvider = new FetchProvider(this.chain.url, { fetch: fetchOverride || fetch });
+		this.client = new APIClient(fetchProvider);
+
+		this.accountKit = new AccountKit(this.chain, { client: this.client });
+		this.contractKit = new ContractKit({ client: this.client });
+
+		this.contracts.delphioracle = new DelphiOracleContract({ client: this.client });
+		this.contracts.token = new TokenContract({ client: this.client });
+		this.contracts.system = new SystemContract({ client: this.client });
+
+		this.resources = new Resources({
+			api: this.client,
+			sampleAccount: 'eosio.reserv'
+		});
+	}
 
 	init() {
 		if (!browser) {
 			throw new Error('Wharf should only be used in the browser');
 		}
-		const chain = Chains.Jungle4;
-		const client = new APIClient({ url: chain.url });
-
-		this.accountKit = new AccountKit(chain, {
-			client
-		});
-
-		this.contractKit = new ContractKit({
-			client
-		});
+		if (!this.chain) {
+			throw new Error('Chain not initialized');
+		}
 
 		this.sessionKit = new SessionKit({
 			appName: 'unicove',
-			chains: [chain],
+			chains: [this.chain],
 			ui: new WebRenderer({ minimal: true }),
 			walletPlugins
 		});
-
-		this.contracts.token = new TokenContract({ client });
-		this.contracts.system = new SystemContract({ client });
 	}
 
 	private async loadAccount() {
@@ -127,4 +143,4 @@ export class WharfService {
 	}
 }
 
-export const wharf = new WharfService();
+export const wharf = $state(new WharfService(Chains.EOS));

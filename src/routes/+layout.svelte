@@ -11,7 +11,6 @@
 	import { wharf } from '$lib/wharf/service.svelte.js';
 	import Navigation from '$lib/components/navigation/appnavigation.svelte';
 	import Toaster from '$lib/components/toast/toaster.svelte';
-	import { network } from '$lib/state/network.svelte.js';
 
 	let { children, data } = $props();
 
@@ -19,13 +18,22 @@
 		extend({}, data.baseMetaTags, $page.data.pageMetaTags)
 	);
 
+	// Number of ms between network updates
+	const NETWORK_UPDATE_INTERVAL = 30_000;
+
 	onMount(() => {
 		// Initialize Wharf and restore session state
 		wharf.init();
 		wharf.restore();
 
-		// Initialize network state
-		network.init();
+		// Update the network state on a set interval
+		const networkInterval = setInterval(() => {
+			data.network.refresh();
+		}, NETWORK_UPDATE_INTERVAL);
+
+		return () => {
+			clearInterval(networkInterval);
+		};
 	});
 </script>
 
