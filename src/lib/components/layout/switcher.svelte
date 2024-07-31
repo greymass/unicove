@@ -4,10 +4,6 @@
 	const { class: className = '', children, threshold = '30rem', ...props } = $props();
 </script>
 
-<div
-	class={`layout-switcher ${className}`}
-	{...props}
-	style={`--switcher-threshold:${threshold}`}
->
+<div class={`layout-switcher ${className}`} {...props} style={`--switcher-threshold:${threshold}`}>
 	{@render children()}
 </div>

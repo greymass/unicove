@@ -4,7 +4,16 @@
 	import Button from '$lib/components/button/button.svelte';
 	import TextInput from '$lib/components/input/textinput.svelte';
 	import Label from '$lib/components/input/label.svelte';
-	import { Grid, Switcher, Sidebar, Cluster, Center, Box, Card, Stack } from '$lib/components/layout';
+	import {
+		Grid,
+		Switcher,
+		Sidebar,
+		Cluster,
+		Center,
+		Box,
+		Card,
+		Stack
+	} from '$lib/components/layout';
 	import PillGroup from '$lib/components/navigation/pillgroup.svelte';
 	import AccountNavigation from '$lib/components/navigation/accountnavigation.svelte';
 	import Code from '$lib/components/code.svelte';

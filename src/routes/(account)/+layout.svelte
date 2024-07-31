@@ -15,7 +15,7 @@
 		{ href: '/transactions', text: 'Transactions' }
 	];
 
-	let rootPathname = $derived($page.url.pathname.split('/').slice(2)[0])
+	let rootPathname = $derived($page.url.pathname.split('/').slice(2)[0]);
 
 	// Derive the active state of each destination
 	let options = $derived(
