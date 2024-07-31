@@ -5,16 +5,9 @@
 </script>
 
 <div
-	class={`switcher flex flex-wrap gap-4 ${className}`}
+	class={`layout-switcher ${className}`}
 	{...props}
-	style={`--threshold:${threshold}`}
+	style={`--switcher-threshold:${threshold}`}
 >
 	{@render children()}
 </div>
-
-<style>
-	.switcher :global(> *) {
-		flex-grow: 1;
-		flex-basis: calc((var(--threshold) - 100%) * 999);
-	}
-</style>
