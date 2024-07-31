@@ -5,6 +5,6 @@
 	// remaining props will be passed to the root element
 </script>
 
-<div class={`center box-content max-w-prose mx-auto ${className}`} {...props}>
+<div class={`center ${className}`} {...props}>
 	{@render children()}
 </div>

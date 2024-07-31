@@ -7,13 +7,11 @@
 	// remaining props will be passed to the root element
 </script>
 
-<Box class={`card bg-gray-800 rounded-lg grid gap-4 ${className}`} {...props}>
+<Box class={`card rounded-xl grid gap-4 p-5 bg-shark-900/20 ${className}`} {...props}>
 	{#if title}
-		<svelte:element this={titleTag} class="card-title text-base font-semibold">
+		<svelte:element this={titleTag} class="card-title h3">
 			{title}
 		</svelte:element>
 	{/if}
-	<div class="card-content">
-		{@render children()}
-	</div>
+	{@render children()}
 </Box>

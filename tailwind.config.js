@@ -1,9 +1,23 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
+import containerQueries from '@tailwindcss/container-queries';
 
 /** @type {import('tailwindcss').Config} */
 export default {
 	content: ['./src/**/*.{svelte,html,js,ts}'],
 	theme: {
+		// fontSize: {
+		// 	xs: ['8px', '0.75rem'], // 8px
+		// 	sm: ['0.625rem', '1rem'], // 10px
+		// 	base: ['0.75rem', '1rem'], // 12px
+		// 	lg: ['0.875rem', '1.25rem'], // 14px
+		// 	xl: ['1rem', '1.5rem'], // 16px
+		// 	'2xl': ['1.125rem', '1.75rem'], // 18px
+		// 	'3xl': ['1.25rem', '1.75rem'], // 20px
+		// 	'4xl': ['1.5rem', '2rem'], // 24px
+		// 	'5xl': ['1.875rem', '2.25rem'], // 30px
+		// 	'6xl': ['2.25rem', '2.5rem'], // 36px
+		// 	'7xl': ['3rem', '1'] // 48px
+		// },
 		extend: {
 			fontFamily: {
 				sans: ['Inter', ...defaultTheme.fontFamily.sans]
@@ -12,15 +26,15 @@ export default {
 				shark: {
 					50: '#f4f6f7',
 					100: '#e2e8eb',
-					200: '#c8d2d9',
+					200: '#c9d3d8',
 					300: '#a3b3bd',
-					400: '#758c9b',
+					400: '#768c9a',
 					500: '#5a7080',
-					600: '#4d5e6d',
+					600: '#4e5e6c',
 					700: '#434f5b',
 					800: '#3c454e',
-					900: '#353c44',
-					950: '#20252c'
+					900: '#363c43',
+					950: '#1b1f24'
 				},
 				mineShaft: {
 					50: '#f4f5f7',
@@ -35,7 +49,7 @@ export default {
 					900: '#383c41',
 					950: '#22252a'
 				},
-				pictonBlue: {
+				skyBlue: {
 					50: '#eff9ff',
 					100: '#def3ff',
 					200: '#b6e8ff',
@@ -77,5 +91,5 @@ export default {
 			}
 		}
 	},
-	plugins: []
+	plugins: [containerQueries]
 };
