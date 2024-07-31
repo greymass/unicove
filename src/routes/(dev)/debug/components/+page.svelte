@@ -101,7 +101,9 @@
 
 				<div>
 					<h2 class="h2">Switch</h2>
-					<Switch />
+					<Label for="switchInput">Default:</Label> <Switch />
+					<Label for="switchInput">Disabled:</Label> <Switch isDisabled={true} />
+					<Label for="switchInput">Checked:</Label> <Switch isChecked={true} />
 				</div>
 			</Stack>
 
