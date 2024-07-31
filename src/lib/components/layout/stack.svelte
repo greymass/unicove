@@ -9,13 +9,3 @@
 <div class={`stack ${className}`} {...props}>
 	{@render props.children()}
 </div>
-
-<!-- We need to break out of Tailwind here to allow the stack to be overridden by children components -->
-<style>
-	.stack {
-		display: flex;
-		flex-direction: column;
-		justify-content: start;
-		gap: 1.5rem;
-	}
-</style>
