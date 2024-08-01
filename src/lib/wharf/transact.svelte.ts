@@ -2,9 +2,9 @@ import { type Checksum256, type Transaction } from '@wharfkit/antelope';
 import type { TransactArgs, TransactOptions, TransactResult } from '@wharfkit/session';
 import { TransactPluginStatusEmitter } from './plugins/status';
 import { addToast, updateToast } from '../state/toaster.svelte';
+import { getWharf } from './service.svelte';
 
-const { data } = $props();
-const { wharf } = data;
+const wharf = getWharf();
 
 export enum StatusType {
 	CREATED = 'CREATED',
