@@ -27,15 +27,6 @@
 	let min = $state(1);
 	let max = $state(100);
 
-	const barChartData = () => {
-		const data = [];
-		for (let i = 0; i < 30; i++) {
-			const y = 100;
-			const y1 = y + i + Math.floor(Math.random() * 5 * i);
-			data.push({ x: i, y, y1 });
-		}
-		return data;
-	};
 </script>
 
 <Sidebar.Root>
@@ -236,7 +227,7 @@
 			<Stack id="charts">
 				<h2 class="h2">Charts</h2>
 				<h3 class="h3">Bar Chart</h3>
-				<BarChart title="Staking Yield History" data={ barChartData() }/>
+				<BarChart title="Staking Yield History" />
 			</Stack>
 
 			<hr class="h-px my-8 bg-slate-200 border-0 dark:bg-slate-800" />

@@ -10,12 +10,22 @@
 		y2: number
 	}
 
+	const barChartData = () => {
+		const data = [];
+		for (let i = 0; i < 30; i++) {
+			const y = 100;
+			const y1 = y + i + Math.floor(Math.random() * 5 * i);
+			data.push({ x: i, y, y1 });
+		}
+		return data;
+	};
+
 	interface Props {
 		data: DataRecord[]
 		title: string
 	}
 
-	const {data, ...props}: Props = $props()
+	const {data = barChartData(), ...props}: Props = $props()
 
   const x = (d: DataRecord) => d.x
   const y = [
