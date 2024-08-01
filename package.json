@@ -57,6 +57,7 @@
 		"@wharfkit/account-creation-plugin-metamask": "1.0.0-RC3",
 		"@wharfkit/account-creation-plugin-greymass": "^1.2.0",
 		"@wharfkit/web-renderer": "^1.4.1",
+		"chart.js": "^4.4.3",
 		"big.js": "^6.2.1",
 		"inter-ui": "^4.0.2",
 		"just-extend": "^6.2.0",
