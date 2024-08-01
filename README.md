@@ -9,7 +9,6 @@ Clone this repo and run `bun install` to install the dependencies.
 Add a `.env` file to the root of the project with the following content:
 
 ```
-PUBLIC_HOSTNAME="http://localhost:5173"
 PUBLIC_LOCAL_SIGNER=""
 ```
 

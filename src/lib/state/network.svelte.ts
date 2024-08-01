@@ -5,7 +5,6 @@ import { RAMState, Resources, REXState } from '@wharfkit/resources';
 import { Types as DelphiOracleTypes } from '$lib/wharf/contracts/delphioracle';
 
 import { WharfService } from '$lib/wharf/service.svelte';
-import { PUBLIC_HOSTNAME } from '$env/static/public';
 
 export class NetworkState {
 	public client?: APIClient = $state();
@@ -30,8 +29,7 @@ export class NetworkState {
 	}
 
 	async refresh() {
-		const url = PUBLIC_HOSTNAME ? PUBLIC_HOSTNAME + '/api/network' : '/api/network';
-		const response = await fetch(url);
+		const response = await this.fetch('/api/network');
 		const json = await response.json();
 
 		this.last_update = new Date();
