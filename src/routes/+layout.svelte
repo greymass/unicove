@@ -8,13 +8,12 @@
 
 	import { page } from '$app/stores';
 	import { i18n } from '$lib/i18n';
-	import { getWharf } from '$lib/wharf/service.svelte.js';
 	import Navigation from '$lib/components/navigation/appnavigation.svelte';
 	import Toaster from '$lib/components/toast/toaster.svelte';
 
 	let { children, data } = $props();
 
-	const wharf = getWharf();
+	const { wharf } = data;
 
 	const seo_config: SeoConfig = $derived<SeoConfig>(
 		extend({}, data.baseMetaTags, $page.data.pageMetaTags)
@@ -30,7 +29,7 @@
 
 		// Update the network state on a set interval
 		const networkInterval = setInterval(() => {
-			data.network.refresh();
+			wharf.network.refresh();
 		}, NETWORK_UPDATE_INTERVAL);
 
 		return () => {

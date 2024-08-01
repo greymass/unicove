@@ -2,9 +2,8 @@
 	import * as m from '$lib/paraglide/messages.js';
 	import Code from '$lib/components/code.svelte';
 
-	import { getWharf } from '$lib/wharf/service.svelte';
-
-	const wharf = getWharf();
+	const { data } = $props();
+	const { wharf } = data;
 </script>
 
 {#if wharf.account}

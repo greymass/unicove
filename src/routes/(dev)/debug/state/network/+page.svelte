@@ -3,10 +3,11 @@
 	import Code from '$lib/components/code.svelte';
 
 	const { data } = $props();
+	const { wharf } = data;
 </script>
 
-<Button onclick={() => data.network.refresh()}>Update network state</Button>
+<Button onclick={() => wharf.network.refresh()}>Update network state</Button>
 
 <Code>
-	{JSON.stringify(data.network, null, 2)}
+	{JSON.stringify(wharf.network, null, 2)}
 </Code>

@@ -1,14 +1,11 @@
 <script lang="ts">
-	import type { PageData } from './$types';
 	import * as m from '$lib/paraglide/messages.js';
-	import { getWharf } from '$lib/wharf/service.svelte';
-
-	const wharf = getWharf();
 	import { transact } from '$lib/wharf/transact.svelte';
 	import { addToast } from '$lib/state/toaster.svelte';
 	import Button from '$lib/components/button/button.svelte';
 
-	export let data: PageData;
+	const { data } = $props();
+	const { wharf } = data;
 
 	async function test() {
 		if (wharf.contracts.token && wharf.session) {

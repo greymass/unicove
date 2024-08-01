@@ -1,7 +1,6 @@
 import { i18n } from '$lib/i18n';
 import { type SeoConfig } from 'svead';
 import { getWharf } from '$lib/wharf/service.svelte';
-import { browser } from '$app/environment';
 
 export const load = async ({ fetch, url }) => {
 	const modified = new URL(url);
@@ -17,6 +16,6 @@ export const load = async ({ fetch, url }) => {
 
 	return {
 		baseMetaTags,
-		network: wharf.network
+		wharf
 	};
 };

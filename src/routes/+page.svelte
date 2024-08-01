@@ -1,11 +1,11 @@
 <script>
 	import * as m from '$lib/paraglide/messages.js';
 	import Language from '$lib/components/language.svelte';
-	import { getWharf } from '$lib/wharf/service.svelte';
 	import Button from '$lib/components/button/button.svelte';
 	import { Box, Center, Stack } from '$lib/components/layout';
 
-	const wharf = getWharf();
+	const { data } = $props();
+	const { wharf } = data;
 </script>
 
 <Box>
