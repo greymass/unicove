@@ -19,9 +19,9 @@ import { WalletPluginAnchor } from '@wharfkit/wallet-plugin-anchor';
 import { WalletPluginPrivateKey } from '@wharfkit/wallet-plugin-privatekey';
 import { Account, AccountKit } from '@wharfkit/account';
 import { ContractKit } from '@wharfkit/contract';
-import { Contract as DelphiOracleContract } from './contracts/delphioracle';
-import { Contract as SystemContract } from './contracts/system';
-import { Contract as TokenContract } from './contracts/token';
+import { Contract as DelphiOracleContract } from '../wharf/contracts/delphioracle';
+import { Contract as SystemContract } from '../wharf/contracts/system';
+import { Contract as TokenContract } from '../wharf/contracts/token';
 import { Resources } from '@wharfkit/resources';
 import { NetworkState } from '$lib/state/network.svelte';
 
@@ -38,8 +38,8 @@ interface DefaultContracts {
 	system?: SystemContract;
 }
 
-export class WharfService {
-	public account?: Account = $state();
+export class WharfState {
+	public account?: AccountState = $state();
 	public accountKit?: AccountKit = $state(); //$derived.by(() => {});
 	public chain: ChainDefinition = $state(Chains.EOS);
 	public client?: APIClient = $state();
@@ -158,11 +158,11 @@ export class WharfService {
 	}
 }
 
-let wharf: WharfService | undefined = $state();
+let wharf: WharfState | undefined = $state();
 
 export function getWharf(fetchOverride?: typeof window.fetch) {
 	if (!wharf) {
-		wharf = new WharfService(Chains.EOS, fetchOverride);
+		wharf = new WharfState(Chains.EOS, fetchOverride);
 	}
 	return wharf;
 }

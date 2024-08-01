@@ -4,7 +4,7 @@ import { RAMState, Resources, REXState } from '@wharfkit/resources';
 
 import { Types as DelphiOracleTypes } from '$lib/wharf/contracts/delphioracle';
 
-import { WharfService } from '$lib/wharf/service.svelte';
+import { WharfState } from '$lib/wharf/service.svelte';
 
 export class NetworkState {
 	public client?: APIClient = $state();
@@ -22,7 +22,7 @@ export class NetworkState {
 		this.tokenstate ? Asset.fromUnits(this.tokenstate.median, '4,USD') : undefined
 	);
 
-	constructor(wharf: WharfService) {
+	constructor(wharf: WharfState) {
 		this.chain = wharf.chain;
 		this.fetch = wharf.fetch;
 		this.resources = wharf.resources;

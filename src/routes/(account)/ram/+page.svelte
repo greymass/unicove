@@ -2,7 +2,7 @@
 	import * as m from '$lib/paraglide/messages.js';
 
 	const { data } = $props();
-	const { wharf }: { wharf: WharfService } = data;
+	const { wharf }: { wharf: WharfState } = data;
 </script>
 
 {#if wharf.session}

@@ -1,4 +1,4 @@
-import { getWharf, WharfService } from '$lib/wharf/service.svelte';
+import { getWharf, WharfState } from '$lib/wharf/service.svelte';
 import { json } from '@sveltejs/kit';
 
 export async function GET({ fetch }) {
@@ -16,7 +16,7 @@ export async function GET({ fetch }) {
 	});
 }
 
-async function getTokenPrice(service: WharfService) {
+async function getTokenPrice(service: WharfState) {
 	const { delphioracle } = service.contracts;
 	if (delphioracle) {
 		const response = await delphioracle.table('datapoints', 'eosusd').get();
