@@ -128,13 +128,17 @@
 					<Label for="assetInput">Enter token value:</Label>
 					<AssetInput id="assetInput" bind:this={input} bind:value bind:valid bind:min bind:max />
 				</div>
-
-				<div>
-					<h2 class="h2">Switch</h2>
-					<Label for="switchInput">Default:</Label> <Switch />
-					<Label for="switchInput">Disabled:</Label> <Switch isDisabled={true} />
-					<Label for="switchInput">Checked:</Label> <Switch isChecked={true} />
-				</div>
+				<form>
+					<div>
+						<h2 class="h2">Switch</h2>
+						<Label for="mySwitch-1">Default:</Label>
+						<Switch id="mySwitch-1" name="mySwitch-1" />
+						<Label for="mySwitch-2">Disabled:</Label>
+						<Switch id="mySwitch-2" name="mySwitch-2" isDisabled={true} />
+						<Label for="mySwitch-3">Checked:</Label>
+						<Switch id="mySwitch-3" name="mySwitch-2" isChecked={true} />
+					</div>
+				</form>
 			</Stack>
 
 			<hr class="h-px my-8 bg-slate-200 border-0 dark:bg-slate-800" />
