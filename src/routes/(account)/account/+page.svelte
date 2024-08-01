@@ -1,7 +1,10 @@
 <script lang="ts">
 	import * as m from '$lib/paraglide/messages.js';
-	import { wharf } from '$lib/wharf/service.svelte';
 	import Code from '$lib/components/code.svelte';
+
+	import { getWharf } from '$lib/wharf/service.svelte';
+
+	const wharf = getWharf();
 </script>
 
 {#if wharf.account}

@@ -1,20 +1,15 @@
-import { wharf } from '$lib/wharf/service.svelte';
+import { getWharf, WharfService } from '$lib/wharf/service.svelte';
 import { json } from '@sveltejs/kit';
-import { Resources } from '@wharfkit/resources';
 
-const resources = new Resources({
-	api: wharf.client,
-	sampleAccount: 'eosio.reserv'
-});
-
-export async function GET({ setHeaders }) {
+export async function GET({ fetch, setHeaders }) {
 	setHeaders({
 		'cache-control': 'max-age=3600' // 3600 seconds, replace with your preferred length.
 	});
+	const wharf = getWharf(fetch);
 	const [ramstate, rexstate, tokenstate] = await Promise.all([
-		resources.v1.ram.get_state(),
-		resources.v1.rex.get_state(),
-		getTokenPrice()
+		wharf.resources.v1.ram.get_state(),
+		wharf.resources.v1.rex.get_state(),
+		getTokenPrice(wharf)
 	]);
 	return json({
 		ts: new Date(),
@@ -24,11 +19,10 @@ export async function GET({ setHeaders }) {
 	});
 }
 
-async function getTokenPrice() {
-	const { delphioracle } = wharf.contracts;
+async function getTokenPrice(service: WharfService) {
+	const { delphioracle } = service.contracts;
 	if (delphioracle) {
 		const response = await delphioracle.table('datapoints', 'eosusd').get();
-		console.log(response);
 		return response;
 	}
 	return undefined;

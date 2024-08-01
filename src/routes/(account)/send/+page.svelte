@@ -1,7 +1,9 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	import * as m from '$lib/paraglide/messages.js';
-	import { wharf } from '$lib/wharf/service.svelte';
+	import { getWharf } from '$lib/wharf/service.svelte';
+
+	const wharf = getWharf();
 	import { transact } from '$lib/wharf/transact.svelte';
 	import { addToast } from '$lib/state/toaster.svelte';
 	import Button from '$lib/components/button/button.svelte';

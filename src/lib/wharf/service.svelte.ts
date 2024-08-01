@@ -23,6 +23,7 @@ import { Contract as DelphiOracleContract } from './contracts/delphioracle';
 import { Contract as SystemContract } from './contracts/system';
 import { Contract as TokenContract } from './contracts/token';
 import { Resources } from '@wharfkit/resources';
+import { NetworkState } from '$lib/state/network.svelte';
 
 const walletPlugins: WalletPlugin[] = [new WalletPluginAnchor()];
 
@@ -44,15 +45,34 @@ export class WharfService {
 	public client?: APIClient = $state();
 	public contracts: DefaultContracts = $state({});
 	public contractKit?: ContractKit = $state<ContractKit>();
-	public resources?: Resources = $state();
+	public fetch = $state(fetch);
+	public network: NetworkState = $derived.by(() => new NetworkState(this));
+	public resources: Resources = $derived.by(() => {
+		if (!this.client) {
+			throw new Error('APIClient not initialized');
+		}
+		return new Resources({
+			api: this.client,
+			sampleAccount: 'eosio.reserv'
+		});
+	});
 	public session?: Session = $state<Session>();
 	public sessions: SerializedSession[] = $state([]);
 	public sessionKit?: SessionKit;
 
-	constructor(chain: ChainDefinition, fetchOverride: typeof window.fetch = fetch) {
+	constructor(chain: ChainDefinition, fetchOverride?: typeof window.fetch) {
 		this.chain = chain;
-		const fetchProvider = new FetchProvider(this.chain.url, { fetch: fetchOverride || fetch });
-		this.client = new APIClient(fetchProvider);
+
+		if (fetchOverride) {
+			this.fetch = fetchOverride;
+			this.client = new APIClient(
+				new FetchProvider(this.chain.url, {
+					fetch: fetchOverride || this.fetch
+				})
+			);
+		} else {
+			this.client = new APIClient({ url: this.chain.url });
+		}
 
 		this.accountKit = new AccountKit(this.chain, { client: this.client });
 		this.contractKit = new ContractKit({ client: this.client });
@@ -60,11 +80,6 @@ export class WharfService {
 		this.contracts.delphioracle = new DelphiOracleContract({ client: this.client });
 		this.contracts.token = new TokenContract({ client: this.client });
 		this.contracts.system = new SystemContract({ client: this.client });
-
-		this.resources = new Resources({
-			api: this.client,
-			sampleAccount: 'eosio.reserv'
-		});
 	}
 
 	init() {
@@ -143,4 +158,11 @@ export class WharfService {
 	}
 }
 
-export const wharf = $state(new WharfService(Chains.EOS));
+let wharf: WharfService | undefined = $state();
+
+export function getWharf(fetchOverride?: typeof window.fetch) {
+	if (!wharf) {
+		wharf = new WharfService(Chains.EOS, fetchOverride);
+	}
+	return wharf;
+}

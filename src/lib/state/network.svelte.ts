@@ -1,15 +1,15 @@
-import { APIClient, Asset, FetchProvider, Int128, type AssetType } from '@wharfkit/antelope';
+import { APIClient, Asset, Int128, type AssetType } from '@wharfkit/antelope';
 import { Chains, ChainDefinition } from '@wharfkit/common';
 import { RAMState, Resources, REXState } from '@wharfkit/resources';
 
 import { Types as DelphiOracleTypes } from '$lib/wharf/contracts/delphioracle';
 
-import { wharf, WharfService } from '$lib/wharf/service.svelte';
+import { WharfService } from '$lib/wharf/service.svelte';
+import { PUBLIC_HOSTNAME } from '$env/static/public';
 
 export class NetworkState {
 	public client?: APIClient = $state();
-	public fetch: typeof window.fetch = $state(fetch);
-
+	public fetch = $state(fetch);
 	public chain: ChainDefinition = $state(Chains.EOS);
 	public last_update: Date = $state(new Date());
 	public ramstate?: RAMState = $state();
@@ -25,15 +25,13 @@ export class NetworkState {
 
 	constructor(wharf: WharfService) {
 		this.chain = wharf.chain;
-		this.client = new APIClient({ url: this.chain.url });
+		this.fetch = wharf.fetch;
 		this.resources = wharf.resources;
 	}
 
 	async refresh() {
-		if (!this.resources) {
-			throw new Error('Resources not initialized');
-		}
-		const response = await this.fetch('/api/network');
+		const url = PUBLIC_HOSTNAME ? PUBLIC_HOSTNAME + '/api/network' : '/api/network';
+		const response = await fetch(url);
 		const json = await response.json();
 
 		this.last_update = new Date();
@@ -79,18 +77,3 @@ export class NetworkState {
 		};
 	}
 }
-
-const currentNetwork = $derived(new NetworkState(wharf));
-
-export function getNetwork(fetchOverride?: typeof window.fetch) {
-	if (fetchOverride) {
-		const fetchProvider = new FetchProvider(currentNetwork.chain.url, { fetch: fetchOverride });
-		currentNetwork.fetch = fetchOverride;
-		currentNetwork.client = new APIClient(fetchProvider);
-	}
-	return currentNetwork;
-}
-
-export const setChain = (definition: ChainDefinition) => {
-	currentNetwork.chain = definition;
-};

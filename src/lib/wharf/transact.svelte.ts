@@ -1,8 +1,10 @@
 import { type Checksum256, type Transaction } from '@wharfkit/antelope';
 import type { TransactArgs, TransactOptions, TransactResult } from '@wharfkit/session';
-import { wharf } from './service.svelte';
+import { getWharf } from './service.svelte';
 import { TransactPluginStatusEmitter } from './plugins/status';
 import { addToast, updateToast } from '../state/toaster.svelte';
+
+const wharf = getWharf();
 
 export enum StatusType {
 	CREATED = 'CREATED',

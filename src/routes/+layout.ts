@@ -1,6 +1,7 @@
 import { i18n } from '$lib/i18n';
 import { type SeoConfig } from 'svead';
-import { getNetwork } from '$lib/state/network.svelte.js';
+import { getWharf } from '$lib/wharf/service.svelte';
+import { browser } from '$app/environment';
 
 export const load = async ({ fetch, url }) => {
 	const modified = new URL(url);
@@ -11,11 +12,11 @@ export const load = async ({ fetch, url }) => {
 		description: 'Unicove, but 2.0'
 	};
 
-	const network = getNetwork(fetch);
-	await network.refresh();
+	const wharf = getWharf(fetch);
+	await wharf.network.refresh();
 
 	return {
 		baseMetaTags,
-		network
+		network: wharf.network
 	};
 };
