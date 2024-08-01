@@ -1,10 +1,7 @@
 import { getWharf, WharfService } from '$lib/wharf/service.svelte';
 import { json } from '@sveltejs/kit';
 
-export async function GET({ fetch, setHeaders }) {
-	setHeaders({
-		'cache-control': 'max-age=3600' // 3600 seconds, replace with your preferred length.
-	});
+export async function GET({ fetch }) {
 	const wharf = getWharf(fetch);
 	const [ramstate, rexstate, tokenstate] = await Promise.all([
 		wharf.resources.v1.ram.get_state(),
