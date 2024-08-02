@@ -1,7 +1,5 @@
 <script lang="ts">
-	import { createSwitch, melt } from '@melt-ui/svelte';
-	import { writable, type Writable } from 'svelte/store';
-	import { onDestroy } from 'svelte';
+	import { createSwitch, melt, createSync } from '@melt-ui/svelte';
 
 	interface Props {
 		isDisabled?: boolean;
@@ -10,43 +8,27 @@
 		id: string;
 	}
 
-	let { isDisabled = false, isChecked = false, name, id = 'default-switch-id' }: Props = $props();
-
-	// Create writable store to manage checked state
-	const checked: Writable<boolean> = writable(isChecked);
+	let {
+		isDisabled = false,
+		isChecked = $bindable(false),
+		name,
+		id = 'default-switch-id'
+	}: Props = $props();
 
 	const {
 		elements: { root, input },
-		states: { checked: meltChecked }
+		states
 	} = createSwitch({
 		disabled: isDisabled,
 		defaultChecked: isChecked
 	});
 
-	const ariaLabelledBy = `${id}-label`;
-
+	const sync = createSync(states);
 	$effect(() => {
-		checked.set($meltChecked);
+		sync.checked(isChecked, (v) => (isChecked = v));
 	});
 
-	// Subscribe to changes in checked store and dispatch custom event
-	const unsubscribe = checked.subscribe((value) => {
-		if (typeof window !== 'undefined') {
-			const event = new CustomEvent('switchChange', {
-				detail: { id, checked: value },
-				bubbles: true,
-				composed: true
-			});
-			window.dispatchEvent(event);
-		}
-	});
-
-	onDestroy(() => {
-		unsubscribe();
-	});
-
-	// Export checked store for external use
-	export { checked };
+	const ariaLabelledBy = `${id}-label`;
 </script>
 
 <div class="flex items-center">

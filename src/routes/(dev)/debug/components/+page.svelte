@@ -18,6 +18,15 @@
 
 	let min = $state(1);
 	let max = $state(100);
+
+	let controlledSwitch = $state(false);
+
+	$effect(() => {
+		let id = setInterval(() => {
+			controlledSwitch = !controlledSwitch;
+		}, 1000);
+		return () => clearInterval(id);
+	});
 </script>
 
 <Sidebar.Root>
@@ -136,7 +145,9 @@
 						<Label for="mySwitch-2">Disabled:</Label>
 						<Switch id="mySwitch-2" name="mySwitch-2" isDisabled={true} />
 						<Label for="mySwitch-3">Checked:</Label>
-						<Switch id="mySwitch-3" name="mySwitch-2" isChecked={true} />
+						<Switch id="mySwitch-3" name="mySwitch-3" bind:isChecked={controlledSwitch} />
+
+						<p>Switch is {controlledSwitch ? 'on' : 'off'}</p>
 					</div>
 				</form>
 			</Stack>
