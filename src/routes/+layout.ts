@@ -1,16 +1,24 @@
-import { i18n } from '$lib/i18n';
 import { type SeoConfig } from 'svead';
 
-export const load = ({ url }) => {
+import { i18n } from '$lib/i18n';
+import { getNetworkFromParams } from '$lib/state/network.svelte.js';
+
+function generateMetadata(url: URL): SeoConfig {
 	const modified = new URL(url);
 	modified.pathname = i18n.route(url.pathname);
-	const baseMetaTags: SeoConfig = {
+	return {
 		url: String(modified),
 		title: '2nicove',
 		description: 'Unicove, but 2.0'
 	};
+}
 
+export const load = async ({ fetch, params, url }) => {
+	const baseMetaTags = generateMetadata(url);
+	const network = getNetworkFromParams(params.network, fetch);
+	await network.refresh();
 	return {
-		baseMetaTags
+		baseMetaTags,
+		network
 	};
 };

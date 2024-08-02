@@ -1,9 +1,8 @@
 <script lang="ts">
-	import type { PageData } from './$types';
 	import * as m from '$lib/paraglide/messages.js';
-	import { wharf } from '$lib/wharf/service.svelte';
 
-	export let data: PageData;
+	const { data } = $props();
+	const { wharf }: { wharf: WharfState } = data;
 </script>
 
 {#if wharf.session}

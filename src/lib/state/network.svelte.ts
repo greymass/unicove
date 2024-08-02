@@ -1,58 +1,104 @@
-import { browser } from '$app/environment';
-import { getClient } from '$lib/wharf/client';
-import { APIClient, Asset, Int128, type AssetType } from '@wharfkit/antelope';
+import { APIClient, Asset, FetchProvider, Int128, type AssetType } from '@wharfkit/antelope';
 import { Chains, ChainDefinition } from '@wharfkit/common';
 import { RAMState, Resources, REXState } from '@wharfkit/resources';
 
-export class NetworkState {
-	public chain: ChainDefinition = $state(Chains.Jungle4);
+import { Types as DelphiOracleTypes } from '$lib/wharf/contracts/delphioracle';
 
+import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
+import { Contract as SystemContract } from '$lib/wharf/contracts/system';
+import { Contract as TokenContract } from '$lib/wharf/contracts/token';
+
+import { chainMapper } from '$lib/wharf/chains';
+import { chainIdsToIndices } from '@wharfkit/session';
+
+interface DefaultContracts {
+	delphioracle?: DelphiOracleContract;
+	token?: TokenContract;
+	system?: SystemContract;
+}
+
+const config = {
+	aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906: {
+		// EOS
+		contracts: {
+			delphioracle: false,
+			token: true,
+			system: true
+		}
+	},
+	'73e4385a2708e6d7048834fbc1079f2fabb17b3c125b146af438971e90716c4d': {
+		// Jungle4
+		contracts: {
+			delphioracle: false,
+			token: true,
+			system: true
+		}
+	},
+	'4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11': {
+		// Telos
+		contracts: {
+			delphioracle: false,
+			token: true,
+			system: true
+		}
+	}
+};
+
+export class NetworkState {
+	public chain: ChainDefinition = $state(Chains.EOS);
+	public fetch = fetch;
 	public last_update: Date = $state(new Date());
 
-	public resources: Resources | undefined = $state();
+	public contracts: DefaultContracts = $state({});
 
-	public rammarket: RAMState | undefined = $state();
-	public ramprice = $derived.by(() => {
-		if (this.rammarket) {
-			return this.rammarket.price_per_kb(1);
-		}
-		return 0;
-	});
+	public ramstate?: RAMState = $state();
+	public resources?: Resources = $state();
+	public rexstate?: REXState = $state();
+	public tokenstate?: DelphiOracleTypes.datapoints = $state();
 
-	public rexstate: REXState | undefined = $state();
-	public rexprice = $derived.by(() => {
-		if (this.rexstate) {
-			// return this.rexstate
-		}
-		return 0;
-	});
+	public ramprice = $derived.by(() => (this.ramstate ? this.ramstate.price_per_kb(1) : undefined));
+	public rexprice = $derived.by(() => undefined);
+	public tokenprice = $derived.by(() =>
+		this.tokenstate ? Asset.fromUnits(this.tokenstate.median, '4,USD') : undefined
+	);
 
-	constructor(chain: ChainDefinition) {
+	constructor(chain: ChainDefinition, fetchOverride?: typeof fetch) {
 		this.chain = chain;
-	}
-
-	async init() {
-		if (!browser) {
-			throw new Error('Wharf should only be used in the browser');
+		if (fetchOverride) {
+			this.fetch = fetchOverride;
 		}
-
-		const chain = Chains.Jungle4;
-		const client = new APIClient({ url: 'https://eos.greymass.com' });
 		this.resources = new Resources({
-			api: client,
+			api: this.client,
 			sampleAccount: 'eosio.reserv'
 		});
 
-		await this.refresh();
+		this.contracts = {
+			delphioracle: config[String(chain.id)].contracts['delphioracle']
+				? new DelphiOracleContract({ client: this.client })
+				: undefined,
+			token: new TokenContract({ client: this.client }),
+			system: new SystemContract({ client: this.client })
+		};
+	}
+
+	public get client() {
+		return new APIClient(
+			new FetchProvider(this.chain.url, {
+				fetch: this.fetch
+			})
+		);
 	}
 
 	async refresh() {
-		if (!this.resources) {
-			throw new Error('Resources not initialized');
-		}
+		const response = await this.fetch(
+			`/api/${chainMapper.toShortName(String(this.chain.id))}/network`
+		);
+		const json = await response.json();
+
 		this.last_update = new Date();
-		this.rammarket = await this.resources.v1.ram.get_state();
-		this.rexstate = await this.resources.v1.rex.get_state();
+		this.ramstate = RAMState.from(json.ramstate);
+		this.rexstate = REXState.from(json.rexstate);
+		this.tokenstate = json.tokenstate;
 	}
 
 	tokenToRex = (token: AssetType) => {
@@ -83,16 +129,51 @@ export class NetworkState {
 		return {
 			chain: this.chain,
 			last_update: this.last_update,
-			rammarket: this.rammarket,
+			ramstate: this.ramstate,
 			ramprice: this.ramprice,
 			rexstate: this.rexstate,
-			sampleAccount: this.resources?.sampleAccount
+			sampleAccount: this.resources?.sampleAccount,
+			tokenprice: this.tokenprice,
+			tokenstate: this.tokenstate
 		};
 	}
 }
 
-export const network = new NetworkState(Chains.Jungle4);
+interface NetworkServiceInstance {
+	chain: string;
+	network: NetworkState;
+}
 
-export const setChain = (definition: ChainDefinition) => {
-	network.chain = definition;
-};
+const services = $state<NetworkServiceInstance[]>([]);
+
+export function getNetwork(chain: ChainDefinition, fetchOverride?: typeof window.fetch) {
+	let current = services.find((service) => service.chain === String(chain.id));
+	if (!current) {
+		const network = new NetworkState(chain, fetchOverride);
+		current = { chain: String(chain.id), network };
+		services.push(current);
+	}
+	return current.network;
+}
+
+export function getChainDefinitionFromParams(network?: string): ChainDefinition {
+	if (network) {
+		const id = chainMapper.toChainId(network);
+		const name = chainIdsToIndices.get(id);
+		if (name) {
+			// Return the chain that's found
+			return Chains[name];
+		}
+	}
+	// Return EOS as the default network if params.network is not defined
+	return Chains.EOS;
+}
+
+export function getNetworkFromParams(
+	network?: string,
+	fetchOverride?: typeof window.fetch
+): NetworkState {
+	const chain = getChainDefinitionFromParams(network);
+	const state = getNetwork(chain, fetchOverride);
+	return state;
+}

@@ -21,6 +21,10 @@ export function getHeaderLang(event: RequestEvent) {
 
 export async function redirectHandle({ event, resolve }: HandleParams): Promise<Response> {
 	const { pathname, search } = new URL(event.request.url);
+	const ignorePaths = ['/api'];
+	if (ignorePaths.some((path) => pathname.startsWith(path))) {
+		return await resolve(event);
+	}
 	const pathLang = pathname.match(/[^/]+?(?=\/|$)/);
 	const matchedLang = pathLang ? pathLang[0].toLowerCase() : null;
 	let lang = availableLanguageTags.find((l) => l.toLowerCase() === matchedLang);

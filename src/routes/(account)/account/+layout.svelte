@@ -3,9 +3,11 @@
 	import { page } from '$app/stores';
 	import type { PageData } from './$types';
 	import * as m from '$lib/paraglide/messages.js';
-	import { wharf } from '$lib/wharf/service.svelte';
+	import { getWharf } from '$lib/state/client/wharf.svelte';
 	import { Stack, Switcher } from '$lib/components/layout';
 	import PillGroup from '$lib/components/navigation/pillgroup.svelte';
+
+	const wharf = getWharf();
 
 	const tabOptions = [
 		{ href: '/account', text: 'Overview' },

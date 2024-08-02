@@ -6,19 +6,15 @@ import {
 	type RestoreArgs,
 	type SerializedSession,
 	type WalletPlugin,
-	APIClient,
+	ChainDefinition,
 	Chains,
 	Session,
 	SessionKit
 } from '@wharfkit/session';
 import WebRenderer from '@wharfkit/web-renderer';
-
 import { WalletPluginAnchor } from '@wharfkit/wallet-plugin-anchor';
 import { WalletPluginPrivateKey } from '@wharfkit/wallet-plugin-privatekey';
-import { Account, AccountKit } from '@wharfkit/account';
-import ContractKit, { Contract } from '@wharfkit/contract';
-import { Contract as TokenContract } from './contracts/token';
-import { Contract as SystemContract } from './contracts/system';
+import { getContext, setContext } from 'svelte';
 
 const walletPlugins: WalletPlugin[] = [new WalletPluginAnchor()];
 
@@ -27,54 +23,22 @@ if (PUBLIC_LOCAL_SIGNER) {
 	walletPlugins.unshift(new WalletPluginPrivateKey(PUBLIC_LOCAL_SIGNER));
 }
 
-interface DefaultContracts {
-	token?: TokenContract;
-	system?: SystemContract;
-}
-
-export class WharfService {
-	public account: Account | undefined = $state<Account | undefined>();
-	public accountKit: AccountKit | undefined = $state<AccountKit | undefined>();
-	public contracts: DefaultContracts = $state({});
-	public contractKit: ContractKit | undefined = $state<ContractKit | undefined>();
-	public session: Session | undefined = $state<Session | undefined>();
+export class WharfState {
+	public chains: ChainDefinition[] = [Chains.EOS, Chains.Jungle4, Chains.Telos];
+	public session?: Session = $state<Session>();
 	public sessions: SerializedSession[] = $state([]);
-	public sessionKit: SessionKit | undefined;
+	public sessionKit?: SessionKit;
 
 	init() {
 		if (!browser) {
 			throw new Error('Wharf should only be used in the browser');
 		}
-		const chain = Chains.Jungle4;
-		const client = new APIClient({ url: chain.url });
-
-		this.accountKit = new AccountKit(chain, {
-			client
-		});
-
-		this.contractKit = new ContractKit({
-			client
-		});
-
 		this.sessionKit = new SessionKit({
-			appName: 'unicove',
-			chains: [chain],
+			appName: '2nicove',
+			chains: this.chains,
 			ui: new WebRenderer({ minimal: true }),
 			walletPlugins
 		});
-
-		this.contracts.token = new TokenContract({ client });
-		this.contracts.system = new SystemContract({ client });
-	}
-
-	private async loadAccount() {
-		if (!this.accountKit) {
-			throw new Error('AccountKit not initialized');
-		}
-		if (!this.session) {
-			throw new Error('Session not initialized');
-		}
-		this.account = await this.accountKit.load(this.session.actor);
 	}
 
 	public async login(options?: LoginOptions) {
@@ -84,7 +48,6 @@ export class WharfService {
 		const result = await this.sessionKit.login(options);
 		this.session = result.session;
 		this.sessions = await this.sessionKit.getSessions();
-		await this.loadAccount();
 	}
 
 	public async logout(session?: Session | SerializedSession) {
@@ -107,7 +70,6 @@ export class WharfService {
 		const restored = await this.sessionKit.restore(args, options);
 		if (restored) {
 			this.session = restored;
-			await this.loadAccount();
 		}
 		this.sessions = await this.sessionKit.getSessions();
 		return restored;
@@ -127,4 +89,10 @@ export class WharfService {
 	}
 }
 
-export const wharf = new WharfService();
+const contextKey = 'wharf';
+export function getWharf(): WharfState {
+	if (!getContext(contextKey)) {
+		setContext(contextKey, new WharfState());
+	}
+	return getContext(contextKey);
+}
