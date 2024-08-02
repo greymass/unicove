@@ -13,9 +13,9 @@
 	const { class: className, ...props }: Props = $props();
 </script>
 
-<menu aria-label="page functions" class={`flex flex-wrap gap-3 sm:self-end ${className}`}>
+<menu aria-label="page functions" class={`flex flex-wrap gap-3 ${className}`}>
 	{#each props.options as option}
-		<Button variant="pill" {...option}>
+		<Button variant="pill" active={option.active} href={option.href}>
 			{option.text}
 		</Button>
 	{/each}

@@ -5,8 +5,6 @@
 	import { Stack } from '$lib/components/layout';
 	import PillGroup from '$lib/components/navigation/pillgroup.svelte';
 
-	const wharf = getWharf();
-
 	const tabOptions = [
 		{ href: '/account', text: 'Overview' },
 		{ href: '/account/resources', text: 'Resources' },
@@ -33,7 +31,7 @@
 		{/if}
 	</Stack>
 
-	<PillGroup {options} />
+	<PillGroup {options} class="sm:self-end" />
 </header>
 
 {@render children()}
