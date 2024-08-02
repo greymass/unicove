@@ -90,7 +90,6 @@ export class NetworkState {
 	}
 
 	async refresh() {
-		console.log('refreshing network state');
 		const response = await this.fetch(
 			`/api/${chainMapper.toShortName(String(this.chain.id))}/network`
 		);

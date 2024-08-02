@@ -38,10 +38,8 @@ export class AccountState {
 			`/api/${chainMapper.toShortName(String(this.chain.id))}/account/${this.name}`
 		);
 		const json = await response.json();
-		console.log(json);
 		this.last_update = new Date();
 		this.account_data = json.account_data;
-		console.log(this);
 	}
 
 	toJSON() {
