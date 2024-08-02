@@ -1,10 +1,8 @@
 <script lang="ts">
 	let { children } = $props();
 	import { page } from '$app/stores';
-	import type { PageData } from './$types';
-	import * as m from '$lib/paraglide/messages.js';
 	import { getWharf } from '$lib/state/client/wharf.svelte';
-	import { Stack, Switcher } from '$lib/components/layout';
+	import { Stack } from '$lib/components/layout';
 	import PillGroup from '$lib/components/navigation/pillgroup.svelte';
 
 	const wharf = getWharf();
