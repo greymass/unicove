@@ -5,7 +5,7 @@
 	import { Box, Center, Stack } from '$lib/components/layout';
 
 	const { data } = $props();
-	const { wharf } = data;
+	const { wharf } = $derived(data);
 </script>
 
 <Box>

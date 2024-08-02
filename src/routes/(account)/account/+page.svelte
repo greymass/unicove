@@ -3,7 +3,7 @@
 	import Code from '$lib/components/code.svelte';
 
 	const { data } = $props();
-	const { wharf } = data;
+	const { wharf } = $derived(data);
 </script>
 
 {#if wharf.account}

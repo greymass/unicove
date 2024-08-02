@@ -13,7 +13,7 @@
 
 	let { children, data } = $props();
 
-	const { wharf } = data;
+	const { wharf } = $derived(data);
 
 	const seo_config: SeoConfig = $derived<SeoConfig>(
 		extend({}, data.baseMetaTags, $page.data.pageMetaTags)

@@ -2,7 +2,7 @@
 	import * as m from '$lib/paraglide/messages.js';
 
 	const { data } = $props();
-	const { wharf } = data;
+	const { wharf } = $derived(data);
 </script>
 
 {#if wharf.session}

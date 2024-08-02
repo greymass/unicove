@@ -5,7 +5,7 @@
 	import Button from '$lib/components/button/button.svelte';
 
 	const { data } = $props();
-	const { wharf } = data;
+	const { wharf } = $derived(data);
 
 	async function test() {
 		if (wharf.contracts.token && wharf.session) {
