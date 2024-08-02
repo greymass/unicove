@@ -32,6 +32,7 @@
 		"postcss": "^8.4.40",
 		"prettier": "^3.3.3",
 		"prettier-plugin-svelte": "^3.2.6",
+		"prettier-plugin-tailwindcss": "^0.6.5",
 		"svelte": "^5.0.0-next.199",
 		"svelte-check": "^3.8.4",
 		"tailwindcss": "^3.4.7",
@@ -54,7 +55,9 @@
 		"big.js": "^6.2.1",
 		"inter-ui": "^4.0.2",
 		"just-extend": "^6.2.0",
-		"svead": "^0.0.11"
+		"prettier-plugin-organize-imports": "^4.0.0",
+		"svead": "^0.0.11",
+		"typescript-svelte-plugin": "^0.3.40"
 	},
 	"resolutions": {
 		"@wharfkit/antelope": "^1.0.9-rc1"
