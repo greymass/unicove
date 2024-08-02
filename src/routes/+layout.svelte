@@ -21,7 +21,6 @@
 	$effect(() => {
 		wharf.session ? account.load(wharf.session) : account.clear();
 	});
-	setContext('account', account);
 
 	const seo_config: SeoConfig = $derived<SeoConfig>(
 		extend({}, data.baseMetaTags, $page.data.pageMetaTags)
