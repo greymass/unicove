@@ -1,9 +1,11 @@
 <script lang="ts">
 	let { children } = $props();
 	import { page } from '$app/stores';
-	import { getWharf } from '$lib/state/client/wharf.svelte';
 	import { Stack } from '$lib/components/layout';
 	import PillGroup from '$lib/components/navigation/pillgroup.svelte';
+	import { getWharf } from '$lib/state/client/wharf.svelte';
+
+	const wharf = getWharf();
 
 	const tabOptions = [
 		{ href: '/account', text: 'Overview' },
