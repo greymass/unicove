@@ -2,7 +2,7 @@
 	import '../app.css';
 	import 'inter-ui/inter-latin.css';
 	import extend from 'just-extend';
-	import { onMount } from 'svelte';
+	import { onMount, setContext } from 'svelte';
 	import { Head, type SeoConfig } from 'svead';
 	import { ParaglideJS } from '@inlang/paraglide-sveltekit';
 
@@ -10,16 +10,25 @@
 	import { i18n } from '$lib/i18n';
 	import Navigation from '$lib/components/navigation/appnavigation.svelte';
 	import Toaster from '$lib/components/toast/toaster.svelte';
+	import { getWharf } from '$lib/state/client/wharf.svelte';
+	import { getAccount } from '$lib/state/client/account.svelte';
 
 	let { children, data } = $props();
+	const { network } = $derived(data);
 
-	const { wharf } = $derived(data);
+	const account = getAccount();
+	const wharf = getWharf();
+	$effect(() => {
+		wharf.session ? account.load(wharf.session) : account.clear();
+	});
+	setContext('account', account);
 
 	const seo_config: SeoConfig = $derived<SeoConfig>(
 		extend({}, data.baseMetaTags, $page.data.pageMetaTags)
 	);
 
 	// Number of ms between network updates
+	const ACCOUNT_UPDATE_INTERVAL = 30_000;
 	const NETWORK_UPDATE_INTERVAL = 30_000;
 
 	onMount(() => {
@@ -27,12 +36,22 @@
 		wharf.init();
 		wharf.restore();
 
+		// Update account state on a set interval
+		const accountInterval = setInterval(() => {
+			if (account) {
+				account.refresh();
+			}
+		}, ACCOUNT_UPDATE_INTERVAL);
+
 		// Update the network state on a set interval
 		const networkInterval = setInterval(() => {
-			wharf.network.refresh();
+			if (network) {
+				network.refresh();
+			}
 		}, NETWORK_UPDATE_INTERVAL);
 
 		return () => {
+			clearInterval(accountInterval);
 			clearInterval(networkInterval);
 		};
 	});

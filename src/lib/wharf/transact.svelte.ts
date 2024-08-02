@@ -2,7 +2,7 @@ import { type Checksum256, type Transaction } from '@wharfkit/antelope';
 import type { TransactArgs, TransactOptions, TransactResult } from '@wharfkit/session';
 import { TransactPluginStatusEmitter } from './plugins/status';
 import { addToast, updateToast } from '../state/toaster.svelte';
-import { getWharf } from './service.svelte';
+import { getWharf } from '$lib/state/wharf.svelte';
 
 const wharf = getWharf();
 
