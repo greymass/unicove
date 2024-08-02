@@ -22,11 +22,7 @@ export class NetworkState {
 	public fetch = fetch;
 	public last_update: Date = $state(new Date());
 
-	public contracts: DefaultContracts = $state({
-		delphioracle: new DelphiOracleContract({ client: this.client }),
-		token: new TokenContract({ client: this.client }),
-		system: new SystemContract({ client: this.client })
-	});
+	public contracts: DefaultContracts = $state({});
 
 	public ramstate?: RAMState = $state();
 	public resources?: Resources = $state();
@@ -48,6 +44,14 @@ export class NetworkState {
 			api: this.client,
 			sampleAccount: 'eosio.reserv'
 		});
+
+		this.contracts = {
+			delphioracle: config[String(chain.id)].contracts['delphioracle']
+				? new DelphiOracleContract({ client: this.client })
+				: undefined,
+			token: new TokenContract({ client: this.client }),
+			system: new SystemContract({ client: this.client })
+		};
 	}
 
 	public get client() {
