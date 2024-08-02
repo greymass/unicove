@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { Asset, Int64 } from '@wharfkit/antelope';
+	import type { ComponentProps } from 'svelte';
 	import TextInput from './textinput.svelte';
 	import Big from 'big.js';
 
-	interface AssetInputProps {
-		autofocus?: boolean;
+	interface AssetInputProps extends ComponentProps<TextInput> {
 		min?: number;
 		max?: number;
 		valid?: boolean;

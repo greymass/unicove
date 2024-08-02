@@ -1,7 +1,15 @@
 <script lang="ts">
-	interface Props {
-		options: { href: string; text: string; active: boolean }[];
+	interface Option {
+		text: string;
+		active?: boolean;
+		href: string;
 	}
+
+	interface Props {
+		options: Option[];
+		class?: string;
+	}
+
 	const props: Props = $props();
 </script>
 

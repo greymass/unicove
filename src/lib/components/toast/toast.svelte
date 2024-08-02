@@ -1,8 +1,15 @@
 <script lang="ts">
-	import { type Toast, type ToastsElements } from '@melt-ui/svelte';
-	import type { ToastData } from '$lib/state/toaster.svelte';
 	import { fly } from 'svelte/transition';
-	let { elements, toast } = $props();
+	import { melt, type Toast } from '@melt-ui/svelte';
+
+	import { elements as toastElements, type ToastData } from '$lib/state/toaster.svelte';
+
+	interface Props {
+		elements: typeof toastElements;
+		toast: Toast<ToastData>;
+	}
+
+	let { elements, toast }: Props = $props();
 	let { description, content, title, close } = $derived(elements);
 	let { id, data } = $derived(toast);
 </script>
@@ -18,7 +25,7 @@
 			<div>
 				<h3 class="flex items-center gap-2 font-semibold" use:melt={$title(id)}>
 					{data.title}
-					<span class={`size-1.5 rounded-full ${data.color}`} />
+					<span class={`size-1.5 rounded-full ${data.color}`}></span>
 				</h3>
 				<div use:melt={$description(id)}>
 					{data.description}

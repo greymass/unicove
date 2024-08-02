@@ -1,13 +1,19 @@
 <script lang="ts">
-	interface Props {
+	import type { Snippet } from 'svelte';
+	import type { HTMLButtonAttributes, HTMLLinkAttributes } from 'svelte/elements';
+
+	type HTMLAttributes = HTMLButtonAttributes & HTMLLinkAttributes;
+
+	interface ButtonProps extends HTMLAttributes {
 		href?: string;
 		variant?: 'primary' | 'secondary' | 'pill';
 		disabled?: boolean;
 		active?: boolean;
 		class?: string;
+		children: Snippet;
 	}
 
-	let { class: className, ...props }: Props = $props();
+	let { class: className, ...props }: ButtonProps = $props();
 </script>
 
 {#if props.variant === 'pill'}
