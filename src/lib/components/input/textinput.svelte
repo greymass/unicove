@@ -1,19 +1,8 @@
 <script lang="ts">
-	interface Props {
-		disabled?: boolean;
-		placeholder?: string;
-		autoFocus?: boolean;
-		input: string;
-		value: string;
-	}
+	import type { HTMLInputAttributes } from 'svelte/elements';
+	interface TextInputProps extends HTMLInputAttributes {}
 
-	import { createLabel, melt } from '@melt-ui/svelte';
-
-	const {
-		elements: { root }
-	} = createLabel();
-
-	let { value = $bindable(), ...props }: Props = $props();
+	let { value = $bindable(), ...props }: TextInputProps = $props();
 </script>
 
 <input

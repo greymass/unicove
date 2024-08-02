@@ -1,9 +1,21 @@
 <!-- The Sidebar is used for two horizontally adjecent elements: one smaller and fixed width, the other filling the remaining space. In a narrow context the elements will stack vertically. -->
 
 <script lang="ts">
-	const { threshold = '50%', children, tag = 'div', class: className = '', ...props } = $props();
-	// prop classes will override the default classes
-	// remaining props will be passed to the root element
+	import type { Snippet } from 'svelte';
+
+	interface Props {
+		threshold?: string;
+		tag?: string;
+		class?: string;
+		children: Snippet;
+	}
+	const {
+		threshold = '50%',
+		children,
+		tag = 'div',
+		class: className = '',
+		...props
+	}: Props = $props();
 </script>
 
 <!-- 

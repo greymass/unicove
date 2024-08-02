@@ -14,7 +14,7 @@
 </script>
 
 <Stack>
-	<header class="flex flex-wrap justify-between gap-6 pb-10">
+	<header class="flex flex-wrap items-end items-end justify-between gap-6 pb-10">
 		<Stack>
 			<h2 class="h2">Network State</h2>
 			<p>The currently loaded network state, based off the page URL you're on.</p>
