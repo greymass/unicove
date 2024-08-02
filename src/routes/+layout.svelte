@@ -36,12 +36,20 @@
 		wharf.init();
 		wharf.restore();
 
+		// Refresh the account state
+		if (wharf.session) {
+			account.refresh();
+		}
+
 		// Update account state on a set interval
 		const accountInterval = setInterval(() => {
-			if (account) {
+			if (wharf.session) {
 				account.refresh();
 			}
 		}, ACCOUNT_UPDATE_INTERVAL);
+
+		// Refresh the network state
+		network.refresh();
 
 		// Update the network state on a set interval
 		const networkInterval = setInterval(() => {
