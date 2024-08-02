@@ -143,12 +143,11 @@ export function getChainDefinitionFromParams(network?: string): ChainDefinition 
 	return Chains.EOS;
 }
 
-export async function getNetworkFromParams(
+export function getNetworkFromParams(
 	network?: string,
 	fetchOverride?: typeof window.fetch
-): Promise<NetworkState> {
+): NetworkState {
 	const chain = getChainDefinitionFromParams(network);
 	const state = getNetwork(chain, fetchOverride);
-	await state.refresh();
 	return state;
 }
