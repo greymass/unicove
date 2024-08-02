@@ -17,6 +17,33 @@ interface DefaultContracts {
 	system?: SystemContract;
 }
 
+const config = {
+	aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906: {
+		// EOS
+		contracts: {
+			delphioracle: false,
+			token: true,
+			system: true
+		}
+	},
+	'73e4385a2708e6d7048834fbc1079f2fabb17b3c125b146af438971e90716c4d': {
+		// Jungle4
+		contracts: {
+			delphioracle: false,
+			token: true,
+			system: true
+		}
+	},
+	'4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11': {
+		// Telos
+		contracts: {
+			delphioracle: false,
+			token: true,
+			system: true
+		}
+	}
+};
+
 export class NetworkState {
 	public chain: ChainDefinition = $state(Chains.EOS);
 	public fetch = fetch;
