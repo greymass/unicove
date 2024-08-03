@@ -48,9 +48,6 @@
 			}
 		}, ACCOUNT_UPDATE_INTERVAL);
 
-		// Refresh the network state
-		network.refresh();
-
 		// Update the network state on a set interval
 		const networkInterval = setInterval(() => {
 			if (network) {

@@ -13,43 +13,50 @@ import { chainIdsToIndices } from '@wharfkit/session';
 
 interface DefaultContracts {
 	delphioracle?: DelphiOracleContract;
-	token?: TokenContract;
-	system?: SystemContract;
+	token: TokenContract;
+	system: SystemContract;
 }
 
-const config = {
+export type FeatureType = 'delphioracle' | 'lightapi' | 'rex';
+
+interface ChainConfig {
+	features: Record<FeatureType, boolean>;
+}
+
+const configs: Record<string, ChainConfig> = {
+	// EOS
 	aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906: {
-		// EOS
-		contracts: {
-			delphioracle: false,
-			token: true,
-			system: true
+		features: {
+			delphioracle: true,
+			lightapi: true,
+			rex: true
 		}
 	},
+	// Jungle4
 	'73e4385a2708e6d7048834fbc1079f2fabb17b3c125b146af438971e90716c4d': {
-		// Jungle4
-		contracts: {
+		features: {
 			delphioracle: false,
-			token: true,
-			system: true
+			lightapi: false,
+			rex: true
 		}
 	},
+	// Telos
 	'4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11': {
-		// Telos
-		contracts: {
-			delphioracle: false,
-			token: true,
-			system: true
+		features: {
+			delphioracle: true,
+			lightapi: true,
+			rex: true
 		}
 	}
 };
 
 export class NetworkState {
-	public chain: ChainDefinition = $state(Chains.EOS);
+	public chain: ChainDefinition;
+	public config: ChainConfig;
 	public fetch = fetch;
 	public last_update: Date = $state(new Date());
 
-	public contracts: DefaultContracts = $state({});
+	public contracts: DefaultContracts;
 
 	public ramstate?: RAMState = $state();
 	public resources?: Resources = $state();
@@ -64,6 +71,7 @@ export class NetworkState {
 
 	constructor(chain: ChainDefinition, fetchOverride?: typeof fetch) {
 		this.chain = chain;
+		this.config = configs[String(this.chain.id)];
 		if (fetchOverride) {
 			this.fetch = fetchOverride;
 		}
@@ -73,12 +81,13 @@ export class NetworkState {
 		});
 
 		this.contracts = {
-			delphioracle: config[String(chain.id)].contracts['delphioracle']
-				? new DelphiOracleContract({ client: this.client })
-				: undefined,
 			token: new TokenContract({ client: this.client }),
 			system: new SystemContract({ client: this.client })
 		};
+
+		if (this.config.features.delphioracle) {
+			this.contracts.delphioracle = new DelphiOracleContract({ client: this.client });
+		}
 	}
 
 	public get client() {
@@ -96,9 +105,15 @@ export class NetworkState {
 		const json = await response.json();
 
 		this.last_update = new Date();
-		this.ramstate = RAMState.from(json.ramstate);
-		this.rexstate = REXState.from(json.rexstate);
 		this.tokenstate = json.tokenstate;
+
+		try {
+			this.ramstate = RAMState.from(json.ramstate);
+			this.rexstate = REXState.from(json.rexstate);
+		} catch (error) {
+			console.log(error);
+			console.log(json);
+		}
 	}
 
 	tokenToRex = (token: AssetType) => {
