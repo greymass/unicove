@@ -2,19 +2,16 @@
 	import Code from '$lib/components/code.svelte';
 	import Button from '$lib/components/button/button.svelte';
 	import { getAccount } from '$lib/state/client/account.svelte';
-
-	import StateNavigation from '../navigation.svelte';
+	import { Stack } from '$lib/components/layout';
 
 	const account = getAccount();
 </script>
 
-<StateNavigation />
-
-<div class="p-8 space-y-4">
+<Stack>
 	<h2 class="h2">Account State</h2>
 	<p>The account state for the currently active session.</p>
 	{#if account.name}
-		<Button onclick={() => account.refresh()}>Update account state</Button>
+		<Button class="self-start" onclick={() => account.refresh()}>Update account state</Button>
 		<table>
 			<tbody>
 				<tr>
@@ -37,4 +34,4 @@
 	{:else}
 		<p>No account state available.</p>
 	{/if}
-</div>
+</Stack>

@@ -1,8 +1,13 @@
 <!-- The Center aligns its content horizontally centered -->
 <script lang="ts">
-	const { class: className = '', children, ...props } = $props();
-	// prop classes will override the default classes
-	// remaining props will be passed to the root element
+	import type { Snippet } from 'svelte';
+	import type { HTMLAttributes } from 'svelte/elements';
+
+	interface Props extends HTMLAttributes<HTMLDivElement> {
+		children: Snippet;
+	}
+
+	const { class: className = '', children, ...props }: Props = $props();
 </script>
 
 <div class={`layout-center ${className}`} {...props}>

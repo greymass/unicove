@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { createToaster, melt } from '@melt-ui/svelte';
 	import { toasts, elements, portal } from '$lib/state/toaster.svelte';
 	import Toast from './toast.svelte';
 	import { flip } from 'svelte/animate';

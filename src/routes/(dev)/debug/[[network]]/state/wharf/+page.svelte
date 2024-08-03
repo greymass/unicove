@@ -1,14 +1,12 @@
 <script lang="ts">
 	import Button from '$lib/components/button/button.svelte';
-	import StateNavigation from '../navigation.svelte';
+	import { Stack } from '$lib/components/layout';
 	import { getWharf } from '$lib/state/client/wharf.svelte';
 
 	const wharf = getWharf();
 </script>
 
-<StateNavigation />
-
-<div class="p-8 space-y-4">
+<Stack class="items-start">
 	<h2 class="h2">Wharf State</h2>
 	<p>The state internal to the wharf service.</p>
 	<h2 class="h2">controls</h2>
@@ -48,4 +46,4 @@
 			</Button>
 		</p>
 	{/each}
-</div>
+</Stack>

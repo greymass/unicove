@@ -1,8 +1,4 @@
 <script lang="ts">
-	interface Props {
-		inline?: boolean;
-		children: () => any;
-	}
 	const props = $props();
 	const tag = props.inline ? 'code' : 'pre';
 

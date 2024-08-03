@@ -1,7 +1,11 @@
 <script lang="ts">
-	interface Props {
-		for: string;
+	import type { Snippet } from 'svelte';
+	import type { HTMLLabelAttributes } from 'svelte/elements';
+
+	interface Props extends HTMLLabelAttributes {
+		children: Snippet;
 	}
+
 	import { createLabel, melt } from '@melt-ui/svelte';
 
 	const {

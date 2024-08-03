@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Cluster, PageMargin, Sidebar, Switcher } from '$lib/components/layout';
+	import { Cluster, PageMargin, Switcher } from '$lib/components/layout';
 </script>
 
 <PageMargin>

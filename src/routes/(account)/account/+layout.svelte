@@ -1,11 +1,9 @@
 <script lang="ts">
 	let { children } = $props();
 	import { page } from '$app/stores';
-	import type { PageData } from './$types';
-	import * as m from '$lib/paraglide/messages.js';
-	import { getWharf } from '$lib/state/client/wharf.svelte';
-	import { Stack, Switcher } from '$lib/components/layout';
+	import { Stack } from '$lib/components/layout';
 	import PillGroup from '$lib/components/navigation/pillgroup.svelte';
+	import { getWharf } from '$lib/state/client/wharf.svelte';
 
 	const wharf = getWharf();
 
@@ -35,7 +33,7 @@
 		{/if}
 	</Stack>
 
-	<PillGroup {options} />
+	<PillGroup {options} class="sm:self-end" />
 </header>
 
 {@render children()}
