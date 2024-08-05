@@ -4,6 +4,7 @@
 	import Label from '$lib/components/input/label.svelte';
 	import AssetOrUnitsInput from '$lib/components/input/assetOrUnits.svelte';
 	import NumberInput from '$lib/components/input/number.svelte';
+	import Switch from '$lib/components/input/switch.svelte';
 
 	import { Asset } from '@wharfkit/antelope';
 	import AssetInput from '$lib/components/input/asset.svelte';
@@ -19,6 +20,14 @@
 	let max = $state(100);
 
 	let numberValue: number | undefined = $state(undefined);
+	let controlledSwitch = $state(false);
+
+	$effect(() => {
+		let id = setInterval(() => {
+			controlledSwitch = !controlledSwitch;
+		}, 1000);
+		return () => clearInterval(id);
+	});
 </script>
 
 <Stack id="inputs">
@@ -52,4 +61,17 @@
 		<h2 class="h2">Number Input</h2>
 		<NumberInput id="numberInput" bind:value={numberValue} min={0} max={100} step={1} debug />
 	</div>
+	<form>
+		<div>
+			<h2 class="h2">Switch</h2>
+			<Label for="mySwitch-1">Default:</Label>
+			<Switch id="mySwitch-1" name="mySwitch-1" />
+			<Label for="mySwitch-2">Disabled:</Label>
+			<Switch id="mySwitch-2" name="mySwitch-2" isDisabled={true} />
+			<Label for="mySwitch-3">Checked:</Label>
+			<Switch id="mySwitch-3" name="mySwitch-3" bind:isChecked={controlledSwitch} />
+
+			<p>Switch is {controlledSwitch ? 'on' : 'off'}</p>
+		</div>
+	</form>
 </Stack>
