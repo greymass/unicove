@@ -30,351 +30,351 @@ export namespace Types {
     @Struct.type('abusers')
     export class abusers extends Struct {
         @Struct.field(Name)
-        name!: Name
+        declare name: Name
         @Struct.field(UInt64)
-        votes!: UInt64
+        declare votes: UInt64
     }
     @Struct.type('addcustodian')
     export class addcustodian extends Struct {
         @Struct.field(Name)
-        name!: Name
+        declare name: Name
     }
     @Struct.type('bars')
     export class bars extends Struct {
         @Struct.field(UInt64)
-        id!: UInt64
+        declare id: UInt64
         @Struct.field(UInt64)
-        high!: UInt64
+        declare high: UInt64
         @Struct.field(UInt64)
-        low!: UInt64
+        declare low: UInt64
         @Struct.field(UInt64)
-        median!: UInt64
+        declare median: UInt64
         @Struct.field(TimePoint)
-        timestamp!: TimePoint
+        declare timestamp: TimePoint
     }
     @Struct.type('cancelbounty')
     export class cancelbounty extends Struct {
         @Struct.field(Name)
-        name!: Name
+        declare name: Name
         @Struct.field('string')
-        reason!: string
+        declare reason: string
     }
     @Struct.type('claim')
     export class claim extends Struct {
         @Struct.field(Name)
-        owner!: Name
+        declare owner: Name
     }
     @Struct.type('clear')
     export class clear extends Struct {
         @Struct.field(Name)
-        pair!: Name
+        declare pair: Name
     }
     @Struct.type('globalinput')
     export class globalinput extends Struct {
         @Struct.field(UInt64)
-        datapoints_per_instrument!: UInt64
+        declare datapoints_per_instrument: UInt64
         @Struct.field(UInt64)
-        bars_per_instrument!: UInt64
+        declare bars_per_instrument: UInt64
         @Struct.field(UInt64)
-        vote_interval!: UInt64
+        declare vote_interval: UInt64
         @Struct.field(UInt64)
-        write_cooldown!: UInt64
+        declare write_cooldown: UInt64
         @Struct.field(UInt64)
-        approver_threshold!: UInt64
+        declare approver_threshold: UInt64
         @Struct.field(UInt64)
-        approving_oracles_threshold!: UInt64
+        declare approving_oracles_threshold: UInt64
         @Struct.field(UInt64)
-        approving_custodians_threshold!: UInt64
+        declare approving_custodians_threshold: UInt64
         @Struct.field(UInt64)
-        minimum_rank!: UInt64
+        declare minimum_rank: UInt64
         @Struct.field(UInt64)
-        paid!: UInt64
+        declare paid: UInt64
         @Struct.field(UInt64)
-        min_bounty_delay!: UInt64
+        declare min_bounty_delay: UInt64
         @Struct.field(UInt64)
-        new_bounty_delay!: UInt64
+        declare new_bounty_delay: UInt64
     }
     @Struct.type('configure')
     export class configure extends Struct {
         @Struct.field(globalinput)
-        g!: globalinput
+        declare g: globalinput
     }
     @Struct.type('custodians')
     export class custodians extends Struct {
         @Struct.field(Name)
-        name!: Name
+        declare name: Name
     }
     @Struct.type('datapoints')
     export class datapoints extends Struct {
         @Struct.field(UInt64)
-        id!: UInt64
+        declare id: UInt64
         @Struct.field(Name)
-        owner!: Name
+        declare owner: Name
         @Struct.field(UInt64)
-        value!: UInt64
+        declare value: UInt64
         @Struct.field(UInt64)
-        median!: UInt64
+        declare median: UInt64
         @Struct.field(TimePoint)
-        timestamp!: TimePoint
+        declare timestamp: TimePoint
     }
     @Struct.type('delcustodian')
     export class delcustodian extends Struct {
         @Struct.field(Name)
-        name!: Name
+        declare name: Name
     }
     @Struct.type('deletepair')
     export class deletepair extends Struct {
         @Struct.field(Name)
-        name!: Name
+        declare name: Name
         @Struct.field('string')
-        reason!: string
+        declare reason: string
     }
     @Struct.type('donations')
     export class donations extends Struct {
         @Struct.field(UInt64)
-        id!: UInt64
+        declare id: UInt64
         @Struct.field(Name)
-        donator!: Name
+        declare donator: Name
         @Struct.field(Name)
-        pair!: Name
+        declare pair: Name
         @Struct.field(TimePoint)
-        timestamp!: TimePoint
+        declare timestamp: TimePoint
         @Struct.field(Asset)
-        amount!: Asset
+        declare amount: Asset
     }
     @Struct.type('pairinput')
     export class pairinput extends Struct {
         @Struct.field(Name)
-        name!: Name
+        declare name: Name
         @Struct.field(Asset.Symbol)
-        base_symbol!: Asset.Symbol
+        declare base_symbol: Asset.Symbol
         @Struct.field(UInt16)
-        base_type!: UInt16
+        declare base_type: UInt16
         @Struct.field(Name)
-        base_contract!: Name
+        declare base_contract: Name
         @Struct.field(Asset.Symbol)
-        quote_symbol!: Asset.Symbol
+        declare quote_symbol: Asset.Symbol
         @Struct.field(UInt16)
-        quote_type!: UInt16
+        declare quote_type: UInt16
         @Struct.field(Name)
-        quote_contract!: Name
+        declare quote_contract: Name
         @Struct.field(UInt64)
-        quoted_precision!: UInt64
+        declare quoted_precision: UInt64
     }
     @Struct.type('editbounty')
     export class editbounty extends Struct {
         @Struct.field(Name)
-        name!: Name
+        declare name: Name
         @Struct.field(pairinput)
-        pair!: pairinput
+        declare pair: pairinput
     }
     @Struct.type('pairs')
     export class pairs extends Struct {
         @Struct.field('bool')
-        active!: boolean
+        declare active: boolean
         @Struct.field('bool')
-        bounty_awarded!: boolean
+        declare bounty_awarded: boolean
         @Struct.field('bool')
-        bounty_edited_by_custodians!: boolean
+        declare bounty_edited_by_custodians: boolean
         @Struct.field(Name)
-        proposer!: Name
+        declare proposer: Name
         @Struct.field(Name)
-        name!: Name
+        declare name: Name
         @Struct.field(Asset)
-        bounty_amount!: Asset
+        declare bounty_amount: Asset
         @Struct.field(Name, {array: true})
-        approving_custodians!: Name[]
+        declare approving_custodians: Name[]
         @Struct.field(Name, {array: true})
-        approving_oracles!: Name[]
+        declare approving_oracles: Name[]
         @Struct.field(Asset.Symbol)
-        base_symbol!: Asset.Symbol
+        declare base_symbol: Asset.Symbol
         @Struct.field(UInt16)
-        base_type!: UInt16
+        declare base_type: UInt16
         @Struct.field(Name)
-        base_contract!: Name
+        declare base_contract: Name
         @Struct.field(Asset.Symbol)
-        quote_symbol!: Asset.Symbol
+        declare quote_symbol: Asset.Symbol
         @Struct.field(UInt16)
-        quote_type!: UInt16
+        declare quote_type: UInt16
         @Struct.field(Name)
-        quote_contract!: Name
+        declare quote_contract: Name
         @Struct.field(UInt64)
-        quoted_precision!: UInt64
+        declare quoted_precision: UInt64
     }
     @Struct.type('editpair')
     export class editpair extends Struct {
         @Struct.field(pairs)
-        pair!: pairs
+        declare pair: pairs
     }
     @Struct.type('forfeithash')
     export class forfeithash extends Struct {
         @Struct.field(Name)
-        owner!: Name
+        declare owner: Name
     }
     @Struct.type('global')
     export class global extends Struct {
         @Struct.field(UInt64)
-        id!: UInt64
+        declare id: UInt64
         @Struct.field(UInt64)
-        total_datapoints_count!: UInt64
+        declare total_datapoints_count: UInt64
         @Struct.field(Asset)
-        total_claimed!: Asset
+        declare total_claimed: Asset
         @Struct.field(UInt64)
-        datapoints_per_instrument!: UInt64
+        declare datapoints_per_instrument: UInt64
         @Struct.field(UInt64)
-        bars_per_instrument!: UInt64
+        declare bars_per_instrument: UInt64
         @Struct.field(UInt64)
-        vote_interval!: UInt64
+        declare vote_interval: UInt64
         @Struct.field(UInt64)
-        write_cooldown!: UInt64
+        declare write_cooldown: UInt64
         @Struct.field(UInt64)
-        approver_threshold!: UInt64
+        declare approver_threshold: UInt64
         @Struct.field(UInt64)
-        approving_oracles_threshold!: UInt64
+        declare approving_oracles_threshold: UInt64
         @Struct.field(UInt64)
-        approving_custodians_threshold!: UInt64
+        declare approving_custodians_threshold: UInt64
         @Struct.field(UInt64)
-        minimum_rank!: UInt64
+        declare minimum_rank: UInt64
         @Struct.field(UInt64)
-        paid!: UInt64
+        declare paid: UInt64
         @Struct.field(UInt64)
-        min_bounty_delay!: UInt64
+        declare min_bounty_delay: UInt64
         @Struct.field(UInt64)
-        new_bounty_delay!: UInt64
+        declare new_bounty_delay: UInt64
     }
     @Struct.type('hashes')
     export class hashes extends Struct {
         @Struct.field(UInt64)
-        id!: UInt64
+        declare id: UInt64
         @Struct.field(Name)
-        owner!: Name
+        declare owner: Name
         @Struct.field(Checksum256)
-        multiparty!: Checksum256
+        declare multiparty: Checksum256
         @Struct.field(Checksum256)
-        hash!: Checksum256
+        declare hash: Checksum256
         @Struct.field('string')
-        reveal!: string
+        declare reveal: string
         @Struct.field(TimePoint)
-        timestamp!: TimePoint
+        declare timestamp: TimePoint
     }
     @Struct.type('migratedata')
     export class migratedata extends Struct {}
     @Struct.type('networks')
     export class networks extends Struct {
         @Struct.field(Name)
-        name!: Name
+        declare name: Name
     }
     @Struct.type('newbounty')
     export class newbounty extends Struct {
         @Struct.field(Name)
-        proposer!: Name
+        declare proposer: Name
         @Struct.field(pairinput)
-        pair!: pairinput
+        declare pair: pairinput
     }
     @Struct.type('oglobal')
     export class oglobal extends Struct {
         @Struct.field(UInt64)
-        id!: UInt64
+        declare id: UInt64
         @Struct.field(UInt64)
-        total_datapoints_count!: UInt64
+        declare total_datapoints_count: UInt64
     }
     @Struct.type('quote')
     export class quote extends Struct {
         @Struct.field(UInt64)
-        value!: UInt64
+        declare value: UInt64
         @Struct.field(Name)
-        pair!: Name
+        declare pair: Name
     }
     @Struct.type('reguser')
     export class reguser extends Struct {
         @Struct.field(Name)
-        owner!: Name
+        declare owner: Name
     }
     @Struct.type('stats')
     export class stats extends Struct {
         @Struct.field(Name)
-        owner!: Name
+        declare owner: Name
         @Struct.field(TimePoint)
-        timestamp!: TimePoint
+        declare timestamp: TimePoint
         @Struct.field(UInt64)
-        count!: UInt64
+        declare count: UInt64
         @Struct.field(TimePoint)
-        last_claim!: TimePoint
+        declare last_claim: TimePoint
         @Struct.field(Asset)
-        balance!: Asset
+        declare balance: Asset
     }
     @Struct.type('unvotebounty')
     export class unvotebounty extends Struct {
         @Struct.field(Name)
-        owner!: Name
+        declare owner: Name
         @Struct.field(Name)
-        bounty!: Name
+        declare bounty: Name
     }
     @Struct.type('updateusers')
     export class updateusers extends Struct {}
     @Struct.type('users')
     export class users extends Struct {
         @Struct.field(Name)
-        name!: Name
+        declare name: Name
         @Struct.field(Asset)
-        contribution!: Asset
+        declare contribution: Asset
         @Struct.field(UInt64)
-        score!: UInt64
+        declare score: UInt64
         @Struct.field(TimePoint)
-        creation_timestamp!: TimePoint
+        declare creation_timestamp: TimePoint
     }
     @Struct.type('voteabuser')
     export class voteabuser extends Struct {
         @Struct.field(Name)
-        owner!: Name
+        declare owner: Name
         @Struct.field(Name)
-        abuser!: Name
+        declare abuser: Name
     }
     @Struct.type('votebounty')
     export class votebounty extends Struct {
         @Struct.field(Name)
-        owner!: Name
+        declare owner: Name
         @Struct.field(Name)
-        bounty!: Name
+        declare bounty: Name
     }
     @Struct.type('voter_info')
     export class voter_info extends Struct {
         @Struct.field(Name)
-        owner!: Name
+        declare owner: Name
         @Struct.field(Name)
-        proxy!: Name
+        declare proxy: Name
         @Struct.field(Name, {array: true})
-        producers!: Name[]
+        declare producers: Name[]
         @Struct.field(Int64)
-        staked!: Int64
+        declare staked: Int64
         @Struct.field(Float64)
-        last_vote_weight!: Float64
+        declare last_vote_weight: Float64
         @Struct.field(Float64)
-        proxied_vote_weight!: Float64
+        declare proxied_vote_weight: Float64
         @Struct.field('bool')
-        is_proxy!: boolean
+        declare is_proxy: boolean
         @Struct.field(UInt32)
-        flags1!: UInt32
+        declare flags1: UInt32
         @Struct.field(UInt32)
-        reserved2!: UInt32
+        declare reserved2: UInt32
         @Struct.field(Asset)
-        reserved3!: Asset
+        declare reserved3: Asset
     }
     @Struct.type('write')
     export class write extends Struct {
         @Struct.field(Name)
-        owner!: Name
+        declare owner: Name
         @Struct.field(quote, {array: true})
-        quotes!: quote[]
+        declare quotes: quote[]
     }
     @Struct.type('writehash')
     export class writehash extends Struct {
         @Struct.field(Name)
-        owner!: Name
+        declare owner: Name
         @Struct.field(Checksum256)
-        hash!: Checksum256
+        declare hash: Checksum256
         @Struct.field('string')
-        reveal!: string
+        declare reveal: string
     }
 }
 export const TableMap = {
