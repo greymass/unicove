@@ -3,9 +3,9 @@
 	import { transact } from '$lib/wharf/transact.svelte';
 	import { addToast } from '$lib/state/toaster.svelte';
 	import Button from '$lib/components/button/button.svelte';
+	import { getWharf } from '$lib/state/client/wharf.svelte';
 
-	const { data } = $props();
-	const { wharf } = $derived(data);
+	const wharf = getWharf();
 
 	async function test() {
 		if (wharf.contracts.token && wharf.session) {
