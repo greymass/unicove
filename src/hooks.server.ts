@@ -21,8 +21,9 @@ export function getHeaderLang(event: RequestEvent) {
 
 export async function redirectHandle({ event, resolve }: HandleParams): Promise<Response> {
 	const { pathname, search } = new URL(event.request.url);
-	const ignorePaths = ['/api'];
-	if (ignorePaths.some((path) => pathname.startsWith(path))) {
+    console.log(pathname)
+    console.log(/^\/[a-z0-9]+\/api/gm.test(pathname))
+    if (/^\/[a-z0-9]+\/api/gm.test(pathname)) {
 		return await resolve(event);
 	}
 	const pathLang = pathname.match(/[^/]+?(?=\/|$)/);
