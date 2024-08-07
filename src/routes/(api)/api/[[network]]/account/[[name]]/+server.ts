@@ -45,6 +45,5 @@ export async function GET({ fetch, params }) {
 async function loadBalances(chain: ChainDefinition, account: NameType, f: typeof fetch) {
 	const network = chainMapper.toShortName(String(chain.id));
 	const result = await f(`https://balances.unicove.com/api/balances/${network}/${account}`);
-	console.log(result);
 	return result.json();
 }

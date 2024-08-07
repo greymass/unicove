@@ -4,9 +4,8 @@ import { AccountState } from '$lib/state/client/account.svelte';
 import { getChainDefinitionFromParams } from '$lib/state/network.svelte';
 
 export const load: PageLoad = async ({ fetch, params }) => {
-	const account = new AccountState(fetch);
 	const chain = getChainDefinitionFromParams(params.network);
-	await account.load(chain, params.name);
+	const account = await AccountState.for(chain, params.name, fetch);
 	return {
 		account,
 		name: params.name
