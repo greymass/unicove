@@ -21,6 +21,7 @@ export type FeatureType = 'delphioracle' | 'lightapi' | 'rex';
 
 interface ChainConfig {
 	features: Record<FeatureType, boolean>;
+	symbol: Asset.SymbolType;
 }
 
 const configs: Record<string, ChainConfig> = {
@@ -30,7 +31,8 @@ const configs: Record<string, ChainConfig> = {
 			delphioracle: true,
 			lightapi: true,
 			rex: true
-		}
+		},
+		symbol: '4,EOS'
 	},
 	// Jungle4
 	'73e4385a2708e6d7048834fbc1079f2fabb17b3c125b146af438971e90716c4d': {
@@ -38,7 +40,8 @@ const configs: Record<string, ChainConfig> = {
 			delphioracle: false,
 			lightapi: false,
 			rex: true
-		}
+		},
+		symbol: '4,EOS'
 	},
 	// Telos
 	'4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11': {
@@ -46,7 +49,8 @@ const configs: Record<string, ChainConfig> = {
 			delphioracle: true,
 			lightapi: true,
 			rex: true
-		}
+		},
+		symbol: '4,TLOS'
 	}
 };
 
