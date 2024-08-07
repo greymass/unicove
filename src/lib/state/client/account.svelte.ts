@@ -5,7 +5,7 @@ import * as SystemContract from '$lib/wharf/contracts/system';
 
 import { chainMapper } from '$lib/wharf/chains';
 import type { ChainDefinitionType } from '@wharfkit/session';
-import { getNetwork } from '../network.svelte';
+import { getNetwork, NetworkState } from '../network.svelte';
 import type { REXState } from '@wharfkit/resources';
 
 interface LightAPIBalanceResponse {
@@ -38,13 +38,15 @@ export class AccountState {
 	public client?: APIClient = $state();
 	public fetch = $state(fetch);
 
+	public network: NetworkState | undefined;
 	public sources: DataSources = $state(defaultDataSources);
 
 	public chain: ChainDefinition | undefined = $state();
 	public name: Name | undefined = $state();
 	public last_update: Date = $state(new Date());
+	public loaded: boolean = $state(false);
 
-	public balance = $derived(getBalance(this.chain, this.sources, this.fetch));
+	public balance = $derived(getBalance(this.network, this.sources, this.fetch));
 	public balances = $derived(getBalances(this.sources));
 	public delegations = $derived(getDelegations(this.sources));
 	public delegated = $derived(getDelegated(this.delegations, this.balance.symbol));
@@ -55,10 +57,19 @@ export class AccountState {
 		}
 	}
 
+	static async for(chain: ChainDefinition, name: NameType, fetchOverride?: typeof fetch) {
+		const state = new AccountState(fetchOverride);
+		await state.load(chain, name);
+		state.refresh();
+		return state;
+	}
+
 	async load(chain: ChainDefinitionType, name: NameType) {
 		this.chain = ChainDefinition.from(chain);
 		this.name = Name.from(name);
+		this.network = getNetwork(this.chain, this.fetch);
 		await this.refresh();
+		this.loaded = true;
 	}
 
 	async clear() {
@@ -66,6 +77,8 @@ export class AccountState {
 		this.sources = defaultDataSources;
 		this.name = undefined;
 		this.chain = undefined;
+		this.network = undefined;
+		this.loaded = false;
 	}
 
 	async refresh() {
@@ -97,14 +110,21 @@ export class AccountState {
 }
 
 export function getBalance(
-	chain: ChainDefinition | undefined,
+	network: NetworkState,
 	sources: DataSources,
 	fetchOverride?: typeof fetch
 ): Asset {
-	if (!chain || !sources.get_account) {
+	if (!sources.get_account) {
 		return Asset.from('0.0000 ERROR');
 	}
-	const balance = Asset.from(sources.get_account.core_liquid_balance!);
+
+	// Create an empty balance to start adding to
+	let balance = Asset.fromUnits(0, network.config.symbol);
+
+	// Add the core balance if it exists on the account
+	if (sources.get_account.core_liquid_balance) {
+		balance = Asset.from(sources.get_account.core_liquid_balance);
+	}
 
 	// Add any delegated tokens to the total balance
 	if (sources.delegated.length > 0) {
@@ -114,7 +134,6 @@ export function getBalance(
 
 	// Add any staked (REX) tokens to total balance based on current value
 	if (sources.rex) {
-		const network = getNetwork(chain, fetchOverride);
 		if (network.config.features.rex && network.rexstate) {
 			const rexValue = convertRexToToken(sources.rex.rex_balance, network.rexstate);
 			balance.units.add(rexValue.units);
