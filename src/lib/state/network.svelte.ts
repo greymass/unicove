@@ -10,6 +10,7 @@ import { Contract as TokenContract } from '$lib/wharf/contracts/token';
 
 import { chainMapper } from '$lib/wharf/chains';
 import { chainIdsToIndices } from '@wharfkit/session';
+import { calculateValue } from './client/account.svelte';
 
 interface DefaultContracts {
 	delphioracle?: DelphiOracleContract;
@@ -67,11 +68,12 @@ export class NetworkState {
 	public resources?: Resources = $state();
 	public rexstate?: REXState = $state();
 	public tokenstate?: DelphiOracleTypes.datapoints = $state();
-
-	public ramprice = $derived.by(() => (this.ramstate ? this.ramstate.price_per_kb(1) : undefined));
 	public rexprice = $derived.by(() => undefined);
 	public tokenprice = $derived.by(() =>
 		this.tokenstate ? Asset.fromUnits(this.tokenstate.median, '4,USD') : undefined
+	);
+	public ramprice = $derived(
+		this.ramstate && this.tokenprice ? getRAMPrice(this.ramstate, this.tokenprice) : undefined
 	);
 
 	constructor(chain: ChainDefinition, fetchOverride?: typeof fetch) {
@@ -166,6 +168,14 @@ interface NetworkServiceInstance {
 }
 
 const services = $state<NetworkServiceInstance[]>([]);
+
+export function getRAMPrice(state: RAMState, systemTokenPrice: Asset) {
+	const cost = state.price_per_kb(1);
+	return {
+		eos: cost,
+		usd: calculateValue(cost, systemTokenPrice)
+	};
+}
 
 export function getNetwork(chain: ChainDefinition, fetchOverride?: typeof window.fetch) {
 	let current = services.find((service) => service.chain === String(chain.id));

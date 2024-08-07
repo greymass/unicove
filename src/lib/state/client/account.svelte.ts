@@ -7,6 +7,7 @@ import { chainMapper } from '$lib/wharf/chains';
 import type { ChainDefinitionType } from '@wharfkit/session';
 import { getNetwork, NetworkState } from '../network.svelte';
 import type { REXState } from '@wharfkit/resources';
+import { Account, Resource } from '@wharfkit/account';
 
 interface LightAPIBalanceResponse {
 	currency: string;
@@ -38,18 +39,27 @@ export class AccountState {
 	public client?: APIClient = $state();
 	public fetch = $state(fetch);
 
-	public network: NetworkState | undefined;
+	public network: NetworkState | undefined = undefined;
 	public sources: DataSources = $state(defaultDataSources);
 
+	public account: Account | undefined = $state();
 	public chain: ChainDefinition | undefined = $state();
 	public name: Name | undefined = $state();
 	public last_update: Date = $state(new Date());
 	public loaded: boolean = $state(false);
 
-	public balance = $derived(getBalance(this.network, this.sources, this.fetch));
+	public balance = $derived.by(() =>
+		this.network ? getBalance(this.network, this.sources, this.fetch) : undefined
+	);
 	public balances = $derived(getBalances(this.sources));
 	public delegations = $derived(getDelegations(this.sources));
-	public delegated = $derived(getDelegated(this.delegations, this.balance.symbol));
+	public cpu = $derived.by(() => (this.account ? this.account.resource('cpu') : undefined));
+	public net = $derived.by(() => (this.account ? this.account.resource('net') : undefined));
+	public ram = $derived.by(() => (this.account ? this.account.resource('ram') : undefined));
+	public permissions = $derived.by(() => (this.account ? this.account.permissions : undefined));
+	public value = $derived.by(() =>
+		this.network && this.balance ? getAccountValue(this.network, this.balance, this.ram) : undefined
+	);
 
 	constructor(fetchOverride?: typeof fetch) {
 		if (fetchOverride) {
@@ -60,7 +70,6 @@ export class AccountState {
 	static async for(chain: ChainDefinition, name: NameType, fetchOverride?: typeof fetch) {
 		const state = new AccountState(fetchOverride);
 		await state.load(chain, name);
-		state.refresh();
 		return state;
 	}
 
@@ -69,6 +78,10 @@ export class AccountState {
 		this.name = Name.from(name);
 		this.network = getNetwork(this.chain, this.fetch);
 		await this.refresh();
+		this.account = new Account({
+			client: this.network.client,
+			data: API.v1.AccountObject.from(this.sources.get_account)
+		});
 		this.loaded = true;
 	}
 
@@ -78,6 +91,7 @@ export class AccountState {
 		this.name = undefined;
 		this.chain = undefined;
 		this.network = undefined;
+		this.account = undefined;
 		this.loaded = false;
 	}
 
@@ -98,49 +112,123 @@ export class AccountState {
 	toJSON() {
 		return {
 			last_update: this.last_update,
+			value: this.value,
 			chain: this.chain,
 			name: this.name,
 			balance: this.balance,
 			balances: this.balances,
 			delegated: this.delegated,
 			delegations: this.delegations,
-			sources: this.sources
+			permissions: this.permissions,
+			resources: {
+				cpu: this.cpu,
+				net: this.net,
+				ram: this.ram
+			}
 		};
 	}
 }
 
-export function getBalance(
+export function calculateValue(balance: Asset, currency: Asset): Asset {
+	return Asset.from(
+		`${(currency.value * balance.value).toFixed(currency.symbol.precision)} ${currency.symbol.code}`
+	);
+}
+
+export interface AccountValue {
+	delegated: Asset;
+	liquid: Asset;
+	ram: Asset;
+	staked: Asset;
+	total: Asset;
+}
+
+export function getAccountValue(
 	network: NetworkState,
-	sources: DataSources,
-	fetchOverride?: typeof fetch
-): Asset {
-	if (!sources.get_account) {
-		return Asset.from('0.0000 ERROR');
+	balance: Balance,
+	ramResources: Resource
+): AccountValue {
+	const delegated = Asset.from('0.0000 USD');
+	const liquid = Asset.from('0.0000 USD');
+	const ram = Asset.from('0.0000 USD');
+	const staked = Asset.from('0.0000 USD');
+	const total = Asset.from('0.0000 USD');
+
+	if (network.tokenprice) {
+		delegated.units.add(calculateValue(balance.delegated, network.tokenprice).units);
+		liquid.units.add(calculateValue(balance.liquid, network.tokenprice).units);
+		staked.units.add(calculateValue(balance.staked, network.tokenprice).units);
+		total.units.add(calculateValue(balance.total, network.tokenprice).units);
 	}
 
+	if (network.ramprice) {
+		const asset = Asset.from(`${ramResources.max / 1000} RAM`);
+		const ramValue = calculateValue(asset, network.ramprice.eos);
+		ram.units.add(ramValue.units);
+		total.units.add(ramValue.units);
+	}
+
+	return {
+		delegated,
+		liquid,
+		ram,
+		staked,
+		total
+	};
+}
+
+export interface Balance {
+	delegated: Asset;
+	liquid: Asset;
+	staked: Asset;
+	total: Asset;
+}
+
+export function getBalance(network: NetworkState, sources: DataSources): Balance {
+	if (!network) {
+		throw new Error('Network not initialized');
+	}
+	if (!network.config) {
+		throw new Error('Network configuration not initialized');
+	}
 	// Create an empty balance to start adding to
-	let balance = Asset.fromUnits(0, network.config.symbol);
+	const delegated = Asset.fromUnits(0, network.config.symbol);
+	const liquid = Asset.fromUnits(0, network.config.symbol);
+	const staked = Asset.fromUnits(0, network.config.symbol);
+	const total = Asset.fromUnits(0, network.config.symbol);
+
+	if (!sources.get_account) {
+		return { delegated, liquid, staked, total };
+	}
 
 	// Add the core balance if it exists on the account
 	if (sources.get_account.core_liquid_balance) {
-		balance = Asset.from(sources.get_account.core_liquid_balance);
+		liquid.units.add(Asset.from(sources.get_account.core_liquid_balance).units);
+		total.units.add(Asset.from(sources.get_account.core_liquid_balance).units);
 	}
 
 	// Add any delegated tokens to the total balance
 	if (sources.delegated.length > 0) {
-		const delegated = getDelegated(getDelegations(sources), balance.symbol);
-		balance.units.add(delegated.units);
+		const delegatedTokens = getDelegated(getDelegations(sources), network.config.symbol);
+		delegated.units.add(delegatedTokens.units);
+		total.units.add(delegatedTokens.units);
 	}
 
 	// Add any staked (REX) tokens to total balance based on current value
 	if (sources.rex) {
 		if (network.config.features.rex && network.rexstate) {
-			const rexValue = convertRexToToken(sources.rex.rex_balance, network.rexstate);
-			balance.units.add(rexValue.units);
+			const rex = convertRexToToken(sources.rex.rex_balance, network.rexstate);
+			staked.units.add(rex.units);
+			total.units.add(rex.units);
 		}
 	}
 
-	return balance;
+	return {
+		delegated,
+		liquid,
+		staked,
+		total
+	};
 }
 
 export function getBalances(sources: DataSources): TokenBalance[] {
@@ -190,8 +278,8 @@ export function convertRexToToken(input: Asset, state: REXState) {
 	return Asset.fromUnits(result, state.total_lendable.symbol);
 }
 
-const contextKey = 'account';
 export function getAccount(fetchOverride?: typeof fetch): AccountState {
+	const contextKey = 'account';
 	if (!getContext(contextKey)) {
 		setContext(contextKey, new AccountState(fetchOverride));
 	}
