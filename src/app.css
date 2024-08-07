@@ -19,15 +19,15 @@
 	}
 
 	.h4 {
-		@apply text-lg font-medium leading-7;
+		@apply text-lg leading-7 font-medium;
 	}
 
 	.h5 {
-		@apply text-base font-medium leading-snug;
+		@apply text-base leading-snug font-medium;
 	}
 
 	.caption {
-		@apply text-base font-medium text-gray-500;
+		@apply text-base text-gray-500 font-medium;
 	}
 
 	p {
@@ -37,7 +37,7 @@
 	/* Layout */
 
 	.card {
-		@apply grid gap-4 rounded-xl bg-shark-900/20 p-5;
+		@apply rounded-xl grid gap-4 p-5 bg-shark-900/20;
 	}
 
 	.layout-stack {
@@ -45,7 +45,7 @@
 	}
 
 	.layout-center {
-		@apply mx-auto box-content max-w-prose;
+		@apply box-content max-w-prose mx-auto;
 	}
 
 	.layout-switcher {

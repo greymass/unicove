@@ -6,7 +6,7 @@
 	<div>
 		<h2 class="h2 mb-4">Layout Components</h2>
 		<p>These are the basic layout components designed to be:</p>
-		<ul class="list-inside list-disc">
+		<ul class="list-disc list-inside">
 			<li>Atomically Composable</li>
 			<li>Intrisically Responsive</li>
 			<li>Accessible</li>

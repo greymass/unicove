@@ -29,27 +29,27 @@
 			<Stack class="space-y-12">
 				<Typography />
 
-				<hr class="my-8 h-px border-0 bg-slate-200 dark:bg-slate-800" />
+				<hr class="h-px my-8 bg-slate-200 border-0 dark:bg-slate-800" />
 
 				<Buttons />
 
-				<hr class="my-8 h-px border-0 bg-slate-200 dark:bg-slate-800" />
+				<hr class="h-px my-8 bg-slate-200 border-0 dark:bg-slate-800" />
 
 				<Inputs />
 
-				<hr class="my-8 h-px border-0 bg-slate-200 dark:bg-slate-800" />
+				<hr class="h-px my-8 bg-slate-200 border-0 dark:bg-slate-800" />
 
 				<Cards />
 
-				<hr class="my-8 h-px border-0 bg-slate-200 dark:bg-slate-800" />
+				<hr class="h-px my-8 bg-slate-200 border-0 dark:bg-slate-800" />
 
 				<Navigation />
 
-				<hr class="my-8 h-px border-0 bg-slate-200 dark:bg-slate-800" />
+				<hr class="h-px my-8 bg-slate-200 border-0 dark:bg-slate-800" />
 
 				<Code />
 
-				<hr class="my-8 h-px border-0 bg-slate-200 dark:bg-slate-800" />
+				<hr class="h-px my-8 bg-slate-200 border-0 dark:bg-slate-800" />
 
 				<Layouts />
 			</Stack>
