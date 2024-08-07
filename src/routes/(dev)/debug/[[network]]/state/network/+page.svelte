@@ -4,7 +4,7 @@
 	import { page } from '$app/stores';
 	import { chainMapper } from '$lib/wharf/chains';
 	import Pillgroup from '$lib/components/navigation/pillgroup.svelte';
-	import { Stack } from '$lib/components/layout';../../../../../(dev)/debug/[[network]]/state/network/$types.js../../../../../debug/[[network]]/state/network/$types.js../../[[network]]/state/network/$types.js../../../state/network/$types.js../../../../../[[network]]/debug/[[network]]/state/network/$types.js
+	import { Stack } from '$lib/components/layout';
 
 	const { data } = $props();
 	const { network } = $derived(data);
