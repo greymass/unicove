@@ -25,7 +25,7 @@
 	);
 </script>
 
-<header class="flex flex-wrap justify-between gap-6 pt-2 pb-10">
+<header class="flex flex-wrap justify-between gap-6 pb-10 pt-2">
 	<Stack class="gap-1">
 		<h1 class="h2 text-neutral-200/60">Account</h1>
 		{#if wharf.session}

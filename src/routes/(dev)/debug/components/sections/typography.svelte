@@ -15,27 +15,27 @@
 	</p>
 	<Cluster class="items-center">
 		<h1 class="h1">Heading 1 (Inter 48)</h1>
-		<code class=" bg-gray-300 text-black rounded-lg p-2">class='h1'</code>
+		<code class=" rounded-lg bg-gray-300 p-2 text-black">class='h1'</code>
 	</Cluster>
 	<Cluster class="items-center">
 		<h2 class="h2">Heading 2 (Inter 32)</h2>
-		<code class=" bg-gray-300 text-black rounded-lg p-2">class='h2'</code>
+		<code class=" rounded-lg bg-gray-300 p-2 text-black">class='h2'</code>
 	</Cluster>
 	<Cluster class="items-center">
 		<h3 class="h3">Heading 3 (Inter 24)</h3>
-		<code class=" bg-gray-300 text-black rounded-lg p-2">class='h3'</code>
+		<code class=" rounded-lg bg-gray-300 p-2 text-black">class='h3'</code>
 	</Cluster>
 	<Cluster class="items-center">
 		<h4 class="h4">Heading 4 (Inter 18)</h4>
-		<code class=" bg-gray-300 text-black rounded-lg p-2">class='h4'</code>
+		<code class=" rounded-lg bg-gray-300 p-2 text-black">class='h4'</code>
 	</Cluster>
 	<Cluster class="items-center">
 		<h5 class="h5">Heading 5 (Inter 16)</h5>
-		<code class="bg-gray-300 text-black rounded-lg p-2">class='h5'</code>
+		<code class="rounded-lg bg-gray-300 p-2 text-black">class='h5'</code>
 	</Cluster>
 	<Cluster class="items-center">
 		<p class="caption">Caption (Inter 12)</p>
-		<code class="bg-gray-300 text-black rounded-lg p-2">class='caption'</code>
+		<code class="rounded-lg bg-gray-300 p-2 text-black">class='caption'</code>
 	</Cluster>
 	<p>
 		Paragraph - lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
