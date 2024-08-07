@@ -55,6 +55,7 @@ export class NetworkState {
 	public config: ChainConfig;
 	public fetch = fetch;
 	public last_update: Date = $state(new Date());
+	public loaded = $state(false);
 
 	public contracts: DefaultContracts;
 
@@ -104,6 +105,7 @@ export class NetworkState {
 		);
 		const json = await response.json();
 
+		this.loaded = true;
 		this.last_update = new Date();
 		this.tokenstate = json.tokenstate;
 
