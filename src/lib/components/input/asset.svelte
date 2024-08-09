@@ -9,6 +9,7 @@
 		max?: number;
 		valid?: boolean;
 		value: Asset;
+		debug?: boolean;
 	}
 
 	let {
@@ -16,11 +17,12 @@
 		min = $bindable(),
 		max = $bindable(),
 		valid = $bindable(false),
-		value = $bindable()
+		value: _value = $bindable(),
+		debug = false
 	}: AssetInputProps = $props();
 
 	/** A zero-value version of the passed in asset for placeholder */
-	const zeroValue = $derived(Asset.fromUnits(0, value.symbol));
+	const zeroValue = $derived(Asset.fromUnits(0, _value.symbol));
 
 	/** The string value bound to the form input */
 	let input: string | null = $state(null);
@@ -73,17 +75,36 @@
 	$effect(() => {
 		valid = satisfies;
 		if (satisfies) {
-			value = asset;
+			_value = asset;
 		} else {
-			value = zeroValue;
+			_value = zeroValue;
 		}
 	});
+
+	debug &&
+		$inspect({
+			input,
+			number,
+			decimals,
+			min,
+			max,
+			symbol,
+			precision: symbol.precision,
+			formatted,
+			asset,
+			satisfies,
+			satisfiesNumber,
+			satisfiesPrecision,
+			satisfiesMinimum,
+			satisfiesMaximum
+		});
 </script>
 
 <TextInput bind:value={input} placeholder={zeroValue.quantity} {autofocus} />
 
-<h3>Component State</h3>
-<pre>
+{#if debug}
+	<h3>Component State</h3>
+	<pre>
 
 input (string):   "{input}"
 input (number):   "{number}"
@@ -103,3 +124,4 @@ Valid Precision:   {satisfiesPrecision}
 Valid Minimum:     {satisfiesMinimum}
 Valid Maximum:     {satisfiesMaximum}
 </pre>
+{/if}

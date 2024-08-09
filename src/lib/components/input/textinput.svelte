@@ -6,8 +6,8 @@
 </script>
 
 <input
-	class="py-4 px-4 rounded-lg bg-transparent outline outline-1 outline-gray-700 focus:outline-none focus:ring focus:ring-inset focus:ring-blue-500 font-medium"
+	class="rounded-lg bg-transparent px-4 py-4 font-medium outline outline-1 outline-gray-700 focus:outline-none focus:ring focus:ring-inset focus:ring-blue-500"
 	type="text"
-	{value}
+	bind:value
 	{...props}
 />

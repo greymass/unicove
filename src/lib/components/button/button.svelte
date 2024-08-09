@@ -11,9 +11,12 @@
 		active?: boolean;
 		class?: string;
 		children: Snippet;
+		onclick?: (event: MouseEvent) => void;
 	}
 
-	let { class: className = '', ...props }: ButtonProps = $props();
+	let { class: className = '', onclick, ...props }: ButtonProps = $props();
+
+	let ariaRole = props.href ? 'link' : 'button';
 </script>
 
 {#if props.variant === 'pill'}
@@ -62,6 +65,8 @@
 		[@media(any-hover:hover)]:hover:text-white
 		[@media(any-hover:hover)]:hover:before:opacity-100
 		{className}"
+		{onclick}
+		role={ariaRole}
 		{...props}
 	>
 		<span class="relative z-10">{@render props.children()}</span>
@@ -110,6 +115,8 @@
 		[@media(any-hover:hover)]:hover:before:opacity-100
 		{className}
 		"
+		{onclick}
+		role={ariaRole}
 		{...props}
 	>
 		<span class="relative z-10">{@render props.children()}</span>
@@ -155,6 +162,8 @@
 		[@media(any-hover:hover)]:hover:before:opacity-100
 		{className}
 		"
+		{onclick}
+		role={ariaRole}
 		{...props}
 	>
 		<span class="relative z-10">{@render props.children()}</span>
