@@ -34,6 +34,6 @@
 	<div>
 		<h2 class="h2">Asset Input</h2>
 		<Label for="assetInput">Enter token value:</Label>
-		<AssetInput id="assetInput" bind:this={input} bind:value bind:valid bind:min bind:max />
+		<AssetInput id="assetInput" bind:this={input} bind:value bind:valid bind:min bind:max debug />
 	</div>
 </Stack>
