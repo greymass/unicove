@@ -63,14 +63,12 @@
 			</label>
 		</div>
 
-		<Button type="Button" disabled={!valid} onclick={() => alert(value)}
-			>Do a thing with the token!</Button
-		>
+		<Button disabled={!valid} onclick={() => alert(value)}>Do a thing with the token!</Button>
 
 		<div>
 			<label>
 				Enter token value:
-				<AssetInput bind:this={input} autofocus bind:value bind:valid bind:min bind:max />
+				<AssetInput bind:this={input} autofocus bind:value bind:valid bind:min bind:max debug />
 			</label>
 		</div>
 
