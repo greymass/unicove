@@ -1,6 +1,9 @@
 import { browser } from '$app/environment';
 import { PUBLIC_LOCAL_SIGNER } from '$env/static/public';
 
+import { getContext, setContext } from 'svelte';
+import type { Checksum256 } from '@wharfkit/antelope';
+import { ChainDefinition, Chains } from '@wharfkit/common';
 import {
 	type LoginOptions,
 	type RestoreArgs,
@@ -9,15 +12,13 @@ import {
 	type TransactOptions,
 	type TransactResult,
 	type WalletPlugin,
-	ChainDefinition,
-	Chains,
 	Session,
 	SessionKit
 } from '@wharfkit/session';
 import WebRenderer from '@wharfkit/web-renderer';
 import { WalletPluginAnchor } from '@wharfkit/wallet-plugin-anchor';
 import { WalletPluginPrivateKey } from '@wharfkit/wallet-plugin-privatekey';
-import { getContext, setContext } from 'svelte';
+
 import { TransactPluginStatusEmitter } from '$lib/wharf/plugins/status';
 import {
 	type QueuedTransaction,
@@ -26,7 +27,6 @@ import {
 	sendErrorToast,
 	sendSuccessToast
 } from '$lib/wharf/transact.svelte';
-import { getNetwork } from '../network.svelte';
 
 const walletPlugins: WalletPlugin[] = [new WalletPluginAnchor()];
 
@@ -37,9 +37,16 @@ if (PUBLIC_LOCAL_SIGNER) {
 
 export class WharfState {
 	public chains: ChainDefinition[] = [Chains.EOS, Chains.Jungle4, Chains.Telos];
+	public chainsSession: Record<string, SerializedSession | undefined> = $state({});
 	public session?: Session = $state<Session>();
 	public sessions: SerializedSession[] = $state([]);
 	public sessionKit?: SessionKit;
+
+	constructor() {
+		if (browser) {
+			this.chainsSession = JSON.parse(localStorage.getItem('chainSessions') || '{}');
+		}
+	}
 
 	init() {
 		if (!browser) {
@@ -51,14 +58,18 @@ export class WharfState {
 			ui: new WebRenderer({ minimal: true }),
 			walletPlugins
 		});
+		$effect(() => {
+			localStorage.setItem('chainSessions', JSON.stringify(this.chainsSession));
+		});
 	}
 
 	public async login(options?: LoginOptions) {
 		if (!this.sessionKit) {
 			throw new Error('User not initialized');
 		}
-		const result = await this.sessionKit.login(options);
-		this.session = result.session;
+		const { session } = await this.sessionKit.login(options);
+		this.session = session;
+		this.chainsSession[String(session.chain.id)] = session.serialize();
 		this.sessions = await this.sessionKit.getSessions();
 	}
 
@@ -67,6 +78,15 @@ export class WharfState {
 			throw new Error('User not initialized');
 		}
 		await this.sessionKit.logout(session);
+		if (session) {
+			if (session instanceof Session) {
+				this.chainsSession[String(session.chain.id)] = undefined;
+			} else {
+				this.chainsSession[String(session.chain)] = undefined;
+			}
+		} else {
+			this.chainsSession = {};
+		}
 		this.sessions = await this.sessionKit.getSessions();
 		if (this.sessions.length > 0) {
 			await this.switch(this.sessions[0]);
@@ -79,12 +99,13 @@ export class WharfState {
 		if (!this.sessionKit) {
 			throw new Error('User not initialized');
 		}
-		const restored = await this.sessionKit.restore(args, options);
-		if (restored) {
-			this.session = restored;
+		// TODO: If the current account matches the account we're switching to, just return the current session
+		const session = await this.sessionKit.restore(args, options);
+		if (session) {
+			this.session = session;
 		}
 		this.sessions = await this.sessionKit.getSessions();
-		return restored;
+		return session;
 	}
 
 	public async switch(serialized: SerializedSession): Promise<Session> {
@@ -94,10 +115,16 @@ export class WharfState {
 			permission: serialized.permission,
 			walletPlugin: serialized.walletPlugin
 		});
+		this.chainsSession[String(serialized.chain)] = serialized;
+		// TODO: Redirect to the appropriate network in the URL
 		if (!session) {
 			throw new Error(`Failed to switch session to ${JSON.stringify(serialized)}`);
 		}
 		return session;
+	}
+
+	public reset() {
+		this.session = undefined;
 	}
 
 	async transact(

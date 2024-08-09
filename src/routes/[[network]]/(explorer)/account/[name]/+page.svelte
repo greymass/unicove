@@ -1,34 +1,33 @@
 <script lang="ts">
-	import type { PageData } from './$types';
 	import * as m from '$lib/paraglide/messages.js';
-	import AccountLink from '$lib/components/link/account.svelte';
-	import { supportedChains } from '$lib/wharf/client';
-	import { languageTag } from '$lib/paraglide/runtime';
+	import Code from '$lib/components/code.svelte';
 
-	export let data: PageData;
+	const { data } = $props();
 </script>
 
-<h1>{data.name}</h1>
-
-<ul>
-	<li>
-		<a href={`/${languageTag()}/account/${data.name}`}> default (eos) </a>
-	</li>
-	{#each Object.keys(supportedChains) as chain}
-		<li>
-			<a href={`/${languageTag()}/${chain}/account/${data.name}`}>
-				{chain}
-			</a>
-		</li>
-	{/each}
-</ul>
-
-<AccountLink contract name={data.name}>View Contract</AccountLink>
+{#if data.account}
+	<div class="space-y-4">
+		<h3 class="h3">Account Value</h3>
+		<Code>{JSON.stringify(data.account.value, null, 2)}</Code>
+		<h3 class="h3">System Token Balance</h3>
+		<Code>{JSON.stringify(data.account.balance, null, 2)}</Code>
+		<h3 class="h3">Token Price</h3>
+		{#if data.account.network}
+			<Code>{JSON.stringify(data.account.network.tokenprice, null, 2)}</Code>
+		{/if}
+		<h3 class="h3">RAM Balance</h3>
+		<Code>{JSON.stringify(data.account.ram, null, 2)}</Code>
+		{#if data.account.network}
+			<h3 class="h3">RAM Prices</h3>
+			<Code>{JSON.stringify(data.account.network.ramprice, null, 2)}</Code>
+		{/if}
+		<h3 class="h3">Balances</h3>
+		<Code>{JSON.stringify(data.account.balances, null, 2)}</Code>
+	</div>
+{/if}
 
 {#if data.account}
-	<pre>
-{JSON.stringify(data.account, null, 2)}
-</pre>
-{:else}
-	<p>Account not found!</p>
+	<hr />
+	<Code>{JSON.stringify(data.account.network, null, 2)}</Code>
+	<Code>{JSON.stringify(data.account, null, 2)}</Code>
 {/if}
