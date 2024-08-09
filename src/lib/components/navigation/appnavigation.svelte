@@ -1,5 +1,10 @@
 <script lang="ts">
+	import { getContext } from 'svelte';
+	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { Cluster, PageMargin, Switcher } from '$lib/components/layout';
+	import { chainMapper } from '$lib/wharf/chains';
+
+	const context = getContext<UnicoveContext>('state');
 </script>
 
 <PageMargin>
@@ -7,13 +12,15 @@
 		<a href="/">Home</a>
 
 		<Cluster tag="nav" class="justify-end">
-			<a href="/account">My Account</a>
-			<a href="/account/eosio">Account: eosio</a>
-			<a href="/block/100000">Block 100,000</a>
-			<a href="/transaction/f45c450512181315e811f3a4f29a2ac64c96fdbb3528de97a8907f80abfe74c8"
-				>Transaction</a
-			>
-			<a href="/msig/evilmikehere/t">msig</a>
+			{#if context.account}
+				<a href={`/${String(context.account.network)}/account/${context.account.name}`}>
+					My Account
+				</a>
+			{/if}
+			<a href="/eos/account/eosio">EOS Account</a>
+			<a href="/jungle4/account/eosio">Jungle 4 Account</a>
+			<a href="/eos/block/100000">EOS Block</a>
+			<a href="/jungle4/block/100000">Jungle 4 Block</a>
 		</Cluster>
 	</Switcher>
 </PageMargin>
