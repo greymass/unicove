@@ -1,16 +1,12 @@
 <script lang="ts">
 	import * as m from '$lib/paraglide/messages.js';
-	import { getAccount } from '$lib/state/client/account.svelte';
-	import { getWharf } from '$lib/state/client/wharf.svelte';
+	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import { getContext } from 'svelte';
 
-	const wharf = getWharf();
-	const account = getAccount();
+	const context = getContext<UnicoveContext>('state');
 </script>
 
-{#if wharf.session}
-	<h1>RAM: {wharf.session.actor}</h1>
-{/if}
-
-{#if account}
-	<pre>{JSON.stringify(account.sources, null, 2)}</pre>
+{#if context.account}
+	<h1>RAM: {context.account.name}</h1>
+	<pre>{JSON.stringify(context.account.sources, null, 2)}</pre>
 {/if}

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Button from '$lib/components/button/button.svelte';
+	import Code from '$lib/components/code.svelte';
 	import { Stack } from '$lib/components/layout';
 	import { getWharf } from '$lib/state/client/wharf.svelte';
 
@@ -15,6 +16,9 @@
 		<Button onclick={() => wharf.logout(wharf.session)} variant="secondary">
 			Logout ({wharf.session.actor})
 		</Button>
+	{/if}
+	{#if wharf.chainsSession}
+		<Code>{JSON.stringify(wharf.chainsSession, null, 2)}</Code>
 	{/if}
 	{#if wharf.sessions.length}
 		<Button onclick={() => wharf.logout()} variant="secondary">Logout (All Accounts)</Button>

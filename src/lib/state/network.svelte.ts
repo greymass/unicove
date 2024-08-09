@@ -69,9 +69,9 @@ export class NetworkState {
 	public rexstate?: REXState = $state();
 	public tokenstate?: DelphiOracleTypes.datapoints = $state();
 	public rexprice = $derived.by(() => undefined);
-	public tokenprice = $derived.by(() =>
-		this.tokenstate ? Asset.fromUnits(this.tokenstate.median, '4,USD') : undefined
-	);
+	public tokenprice = $derived.by(() => {
+		return this.tokenstate ? Asset.fromUnits(this.tokenstate.median, '4,USD') : undefined;
+	});
 	public ramprice = $derived(
 		this.ramstate && this.tokenprice ? getRAMPrice(this.ramstate, this.tokenprice) : undefined
 	);
@@ -148,6 +148,10 @@ export class NetworkState {
 		return Asset.fromUnits(result, total_lendable.symbol);
 	};
 
+	toString() {
+		return chainMapper.toShortName(String(this.chain.id));
+	}
+
 	toJSON() {
 		return {
 			chain: this.chain,
@@ -178,7 +182,7 @@ export function getRAMPrice(state: RAMState, systemTokenPrice: Asset) {
 }
 
 export function getNetwork(chain: ChainDefinition, fetchOverride?: typeof window.fetch) {
-	let current = services.find((service) => service.chain === String(chain.id));
+	let current = services.find((service) => chain.id.equals(service.chain));
 	if (!current) {
 		const network = new NetworkState(chain, fetchOverride);
 		current = { chain: String(chain.id), network };

@@ -8,6 +8,7 @@ import type { ChainDefinitionType } from '@wharfkit/session';
 import { getNetwork, NetworkState } from '../network.svelte';
 import type { REXState } from '@wharfkit/resources';
 import { Account, Resource } from '@wharfkit/account';
+import { get } from 'svelte/store';
 
 interface LightAPIBalanceResponse {
 	currency: string;
@@ -39,11 +40,10 @@ export class AccountState {
 	public client?: APIClient = $state();
 	public fetch = $state(fetch);
 
-	public network: NetworkState | undefined = undefined;
+	public network: NetworkState;
 	public sources: DataSources = $state(defaultDataSources);
 
 	public account: Account | undefined = $state();
-	public chain: ChainDefinition | undefined = $state();
 	public name: Name | undefined = $state();
 	public last_update: Date = $state(new Date());
 	public loaded: boolean = $state(false);
@@ -57,47 +57,29 @@ export class AccountState {
 	public net = $derived.by(() => (this.account ? this.account.resource('net') : undefined));
 	public ram = $derived.by(() => (this.account ? this.account.resource('ram') : undefined));
 	public permissions = $derived.by(() => (this.account ? this.account.permissions : undefined));
-	public value = $derived.by(() =>
-		this.network && this.balance ? getAccountValue(this.network, this.balance, this.ram) : undefined
-	);
+	public value = $derived.by(() => {
+		return this.network && this.balance && this.ram
+			? getAccountValue(this.network, this.balance, this.ram)
+			: undefined;
+	});
 
-	constructor(fetchOverride?: typeof fetch) {
+	constructor(network: NetworkState, name: NameType, fetchOverride?: typeof fetch) {
 		if (fetchOverride) {
 			this.fetch = fetchOverride;
 		}
-	}
-
-	static async for(chain: ChainDefinition, name: NameType, fetchOverride?: typeof fetch) {
-		const state = new AccountState(fetchOverride);
-		await state.load(chain, name);
-		return state;
-	}
-
-	async load(chain: ChainDefinitionType, name: NameType) {
-		this.chain = ChainDefinition.from(chain);
 		this.name = Name.from(name);
-		this.network = getNetwork(this.chain, this.fetch);
-		await this.refresh();
-		this.account = new Account({
-			client: this.network.client,
-			data: API.v1.AccountObject.from(this.sources.get_account)
-		});
-		this.loaded = true;
+		this.network = network;
 	}
 
-	async clear() {
-		this.last_update = new Date();
-		this.sources = defaultDataSources;
-		this.name = undefined;
-		this.chain = undefined;
-		this.network = undefined;
-		this.account = undefined;
-		this.loaded = false;
+	static async for(network: NetworkState, name: NameType, fetchOverride?: typeof fetch) {
+		const state = new AccountState(network, name, fetchOverride);
+		await state.refresh();
+		return state;
 	}
 
 	async refresh() {
 		const response = await this.fetch(
-			`/${chainMapper.toShortName(String(this.chain.id))}/api/account/${this.name}`
+			`/${chainMapper.toShortName(String(this.network.chain.id))}/api/account/${this.name}`
 		);
 		const json = await response.json();
 		this.last_update = new Date();
@@ -107,17 +89,21 @@ export class AccountState {
 			delegated: json.delegated,
 			rex: json.rex
 		};
+		this.account = new Account({
+			client: this.network.client,
+			data: API.v1.AccountObject.from(json.account_data)
+		});
+		this.loaded = true;
 	}
 
 	toJSON() {
 		return {
 			last_update: this.last_update,
 			value: this.value,
-			chain: this.chain,
+			chain: this.network.chain,
 			name: this.name,
 			balance: this.balance,
 			balances: this.balances,
-			delegated: this.delegated,
 			delegations: this.delegations,
 			permissions: this.permissions,
 			resources: {
@@ -162,7 +148,7 @@ export function getAccountValue(
 	}
 
 	if (network.ramprice) {
-		const asset = Asset.from(`${ramResources.max / 1000} RAM`);
+		const asset = Asset.from(`${ramResources.max.dividing(1000)} RAM`);
 		const ramValue = calculateValue(asset, network.ramprice.eos);
 		ram.units.add(ramValue.units);
 		total.units.add(ramValue.units);
@@ -276,12 +262,4 @@ export function convertRexToToken(input: Asset, state: REXState) {
 		.dividing(state.total_rex.units);
 	const result = S1.subtracting(state.total_lendable.units);
 	return Asset.fromUnits(result, state.total_lendable.symbol);
-}
-
-export function getAccount(fetchOverride?: typeof fetch): AccountState {
-	const contextKey = 'account';
-	if (!getContext(contextKey)) {
-		setContext(contextKey, new AccountState(fetchOverride));
-	}
-	return getContext(contextKey);
 }
