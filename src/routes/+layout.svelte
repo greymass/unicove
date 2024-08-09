@@ -10,6 +10,7 @@
 	import { i18n } from '$lib/i18n';
 	import Navigation from '$lib/components/navigation/appnavigation.svelte';
 	import Toaster from '$lib/components/toast/toaster.svelte';
+	import CommandPalette from '$lib/components/command-palette.svelte';
 	import { getWharf } from '$lib/state/client/wharf.svelte';
 	import { getAccount } from '$lib/state/client/account.svelte';
 
@@ -68,6 +69,7 @@
 <Head {seo_config} />
 
 <Toaster />
+<CommandPalette />
 
 <ParaglideJS {i18n}>
 	<Navigation />
