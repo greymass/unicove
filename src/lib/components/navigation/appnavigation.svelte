@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import { Cluster, PageMargin, Switcher } from '$lib/components/layout';
+	import { Cluster, PageMargin } from '$lib/components/layout';
 	import LanguageSelect from '$lib/components/select/language.svelte';
-	import { chainMapper } from '$lib/wharf/chains';
+	import AccountSelect from '$lib/components/select/account.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 </script>
@@ -23,6 +23,7 @@
 			<a href="/eos/block/100000">EOS Block</a>
 			<a href="/jungle4/block/100000">Jungle 4 Block</a>
 			<LanguageSelect />
+			<AccountSelect />
 		</Cluster>
 	</nav>
 </PageMargin>
