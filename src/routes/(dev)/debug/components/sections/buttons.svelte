@@ -44,4 +44,11 @@
 			</Stack>
 		</Cluster>
 	</Stack>
+	<Stack class="items-start">
+		<h3 class="h3">Side by side</h3>
+		<Cluster>
+			<Button variant="secondary" onclick={() => {}}>Cancel</Button>
+			<Button variant="primary" onclick={() => {}}>Confirm</Button>
+		</Cluster>
+	</Stack>
 </Stack>

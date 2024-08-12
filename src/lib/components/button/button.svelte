@@ -33,43 +33,26 @@
 		py-2.5
 		font-medium
 		leading-4
-		before:absolute
-		before:-inset-0.5
-		before:rounded-full
-		before:bg-mineShaft-900
-		before:opacity-0
-		before:transition-opacity
-		after:absolute
-		after:inset-0
-		after:rounded-full
-		after:bg-mineShaft-950
-		after:opacity-0
-		after:transition-opacity
-		after:delay-0
-		after:duration-100
+
 		focus-visible:outline
 		focus-visible:outline-2
 		focus-visible:outline-solar-500
-		focus-visible:before:inset-0
-		focus-visible:before:opacity-100
-		focus-visible:before:transition-none
-		active:text-white
-		active:after:opacity-100
+
 		data-[active=true]:ring
 		data-[active=true]:ring-2
 		data-[active=true]:ring-mineShaft-200/30
-		data-[active=true]:before:ring
-		data-[active=true]:before:ring-2
-		data-[active=true]:before:ring-inset
-		data-[active=true]:before:ring-mineShaft-200/30
-		[@media(any-hover:hover)]:hover:text-white
-		[@media(any-hover:hover)]:hover:before:opacity-100
+
+		[@media(any-hover:hover)]:hover:text-mineShaft-100
+
 		{className}"
 		{onclick}
 		role={ariaRole}
 		{...props}
 	>
-		<span class="relative z-10">{@render props.children()}</span>
+		<span class="pointer-events-none relative z-10">{@render props.children()}</span>
+		<div
+			class="absolute inset-0 rounded-[inherit] bg-mineShaft-900 opacity-0 hover:opacity-100 active:opacity-20 active:transition-opacity"
+		></div>
 	</svelte:element>
 {:else if props.variant === 'secondary'}
 	<svelte:element
@@ -80,46 +63,35 @@
 		m-0.5
 		text-nowrap
 		rounded-lg
-		border-2
-		border-mineShaft-600
 		px-8
-		py-3
+		py-3.5
 		font-medium
-		before:absolute
-		before:-inset-0.5
-		before:rounded-lg
-		before:bg-mineShaft-900
-		before:opacity-0
-		before:transition-opacity
-		after:absolute
-		after:-inset-0.5
-		after:rounded-lg
-		after:bg-mineShaft-950
-		after:opacity-0
-		after:transition-opacity
-		after:delay-0
-		after:duration-100
-		focus:outline-2
-		focus:outline-solar-500
+		text-mineShaft-100
+		ring-2
+		ring-inset
+		ring-mineShaft-600
+
 		focus-visible:outline
-		focus-visible:before:opacity-100
-		focus-visible:before:transition-none
-		active:text-white
-		active:after:opacity-100
+		focus-visible:outline-transparent
+		focus-visible:ring-solar-500
+
+		active:ring-transparent
+
 		disabled:cursor-not-allowed
-		disabled:text-white/40
-		disabled:before:hidden
-		disabled:after:hidden
-		disabled:hover:text-white/40
-		[@media(any-hover:hover)]:hover:text-white
-		[@media(any-hover:hover)]:hover:before:opacity-100
+		disabled:text-mineShaft-400
+		disabled:active:ring-mineShaft-600
+
 		{className}
 		"
 		{onclick}
 		role={ariaRole}
 		{...props}
 	>
-		<span class="relative z-10">{@render props.children()}</span>
+		<span class="pointer-events-none relative z-10">{@render props.children()}</span>
+		<div
+			class="absolute inset-0 rounded-[inherit] bg-mineShaft-900 opacity-0 hover:opacity-100 active:opacity-20 active:transition-opacity"
+			class:hidden={props.disabled}
+		></div>
 	</svelte:element>
 {:else}
 	<svelte:element
@@ -134,38 +106,28 @@
 		px-8
 		py-3.5
 		font-medium
-		text-white
-		before:absolute
-		before:inset-0
-		before:rounded-lg
-		before:bg-skyBlue-400
-		before:opacity-0
-		before:transition-opacity
-		after:absolute
-		after:inset-0
-		after:rounded-lg
-		after:bg-skyBlue-600
-		after:opacity-0
-		after:transition-opacity
-		after:delay-0
-		after:duration-100
-		focus:outline-2
-		focus:outline-solar-500
+		text-skyBlue-950
+
+		focus:outline-transparent
 		focus-visible:outline
-		active:text-white
-		active:after:opacity-100
+		focus-visible:ring-2
+		focus-visible:ring-inset
+		focus-visible:ring-solar-500
+
 		disabled:cursor-not-allowed
 		disabled:bg-mineShaft-900
-		disabled:text-white/40
-		disabled:before:hidden
-		disabled:after:hidden
-		[@media(any-hover:hover)]:hover:before:opacity-100
+		disabled:text-white/60
+
 		{className}
 		"
 		{onclick}
 		role={ariaRole}
 		{...props}
 	>
-		<span class="relative z-10">{@render props.children()}</span>
+		<span class="pointer-events-none relative z-10">{@render props.children()}</span>
+		<div
+			class="absolute inset-0 rounded-[inherit] bg-white opacity-0 transition-opacity hover:opacity-20 active:bg-black/30"
+			class:hidden={props.disabled}
+		></div>
 	</svelte:element>
 {/if}
