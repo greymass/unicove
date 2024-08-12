@@ -17,6 +17,7 @@ import {
 } from '@wharfkit/session';
 import WebRenderer from '@wharfkit/web-renderer';
 import { WalletPluginAnchor } from '@wharfkit/wallet-plugin-anchor';
+import { WalletPluginMetaMask } from '@wharfkit/wallet-plugin-metamask';
 import { WalletPluginPrivateKey } from '@wharfkit/wallet-plugin-privatekey';
 
 import { TransactPluginStatusEmitter } from '$lib/wharf/plugins/status';
@@ -28,7 +29,7 @@ import {
 	sendSuccessToast
 } from '$lib/wharf/transact.svelte';
 
-const walletPlugins: WalletPlugin[] = [new WalletPluginAnchor()];
+const walletPlugins: WalletPlugin[] = [new WalletPluginAnchor(), new WalletPluginMetaMask()];
 
 // If a local key is provided, add the private key wallet
 if (PUBLIC_LOCAL_SIGNER) {
