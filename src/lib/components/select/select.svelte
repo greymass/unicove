@@ -60,8 +60,9 @@
 	border-2
 	border-mineShaft-600
 	bg-transparent
-	px-3
 	py-2
+	pl-4
+	pr-3
 	font-medium
 	transition-opacity
 	hover:opacity-90
