@@ -16,13 +16,13 @@
 		];
 	});
 
-	let currentTab = $derived($page.url.pathname.split('/').slice(2)[1]);
+	let currentTab = $derived($page.url.pathname.split('/').slice(2)[3]);
 
 	// Derive the active state of each destination
 	let options = $derived(
 		tabOptions.map((option) => ({
 			...option,
-			active: option.href.split('/')[2] === currentTab
+			active: option.href.split('/').slice(2)[2] === currentTab
 		}))
 	);
 </script>
