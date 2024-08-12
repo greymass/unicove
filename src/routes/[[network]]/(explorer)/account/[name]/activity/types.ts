@@ -1,5 +1,5 @@
-import type {
-	AnyAction,
+import {
+	Struct,
 	API,
 	Checksum256,
 	Int32,
@@ -16,12 +16,13 @@ export interface Activity {
 	head_block_num: Int32;
 }
 
-export interface ActivityAction {
-	id: Checksum256;
-	timestamp: TimePointSec;
-	contract: Name;
-	action: Name;
-	authorizations: PermissionLevel[];
-	data: AnyAction;
-	raw: API.v1.OrderedActionsResult;
+@Struct.type('activity_action')
+export class ActivityAction extends Struct {
+	@Struct.field(Checksum256) declare id: Checksum256;
+	@Struct.field(TimePointSec) declare timestamp: TimePointSec;
+	@Struct.field(Name) declare contract: Name;
+	@Struct.field(Name) declare action: Name;
+	@Struct.field(PermissionLevel, { array: true }) declare authorizations: PermissionLevel[];
+	@Struct.field('any') declare data: any;
+	@Struct.field(API.v1.OrderedActionsResult) declare raw: API.v1.OrderedActionsResult;
 }

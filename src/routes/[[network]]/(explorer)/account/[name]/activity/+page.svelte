@@ -1,11 +1,13 @@
 <script lang="ts">
 	import * as m from '$lib/paraglide/messages.js';
 	import Code from '$lib/components/code.svelte';
+	import { ActivityAction } from './types.js';
 
 	const { data } = $props();
 </script>
 
-{#each data.activity.actions as action}
+{#each data.activity.actions as row}
+	{@const action = ActivityAction.from(row)}
 	<div class="my-4 space-y-2">
 		<h3 class="h3">
 			{action.contract}::{action.action}
@@ -22,5 +24,6 @@
 		</p>
 		<Code>{JSON.stringify(action.authorizations, null, 2)}</Code>
 		<Code>{JSON.stringify(action.data, null, 2)}</Code>
+		<Code>{JSON.stringify(action.raw, null, 2)}</Code>
 	</div>
 {/each}
