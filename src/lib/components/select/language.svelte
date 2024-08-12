@@ -23,7 +23,27 @@
 </script>
 
 <button
-	class="flex h-10 items-center justify-between gap-2 rounded-full border-2 border-mineShaft-600 bg-transparent py-2 pl-4 pr-3 font-medium transition-opacity hover:opacity-90"
+	class="
+	flex
+	h-10
+	items-center
+	justify-between
+	gap-2
+	rounded-full
+	border-2
+	border-mineShaft-600
+	bg-transparent
+	py-2
+	pl-4
+	pr-3
+	font-medium
+	transition-opacity
+	hover:opacity-90
+	focus:outline-2
+	focus:outline-solar-500
+	focus-visible:border-transparent
+	focus-visible:outline
+	"
 	use:melt={$trigger}
 	aria-label="langauge-switcher-label"
 	id="language-switcher"
@@ -44,11 +64,11 @@
 				hreflang={lang}
 				aria-current={lang === languageTag() ? 'page' : undefined}
 				class="relative cursor-pointer rounded-xl px-2
-						py-1 font-medium
-						hover:bg-solar-100 focus:z-10
-						focus:text-solar-700 data-[highlighted]:bg-solar-200
-						data-[highlighted]:text-solar-950
-						data-[disabled]:opacity-50"
+				py-1 font-medium
+				hover:bg-solar-100 focus:z-10
+				focus:text-solar-700 data-[highlighted]:bg-solar-200
+				data-[highlighted]:text-solar-950
+				data-[disabled]:opacity-50"
 				use:melt={$option({ value: lang, label: lang })}
 			>
 				{lang}
