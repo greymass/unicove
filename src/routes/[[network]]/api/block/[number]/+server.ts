@@ -5,18 +5,7 @@ import { UInt64 } from '@wharfkit/antelope';
 import { getCacheHeaders } from '$lib/utils';
 import { getBackendClient } from '$lib/wharf/client/ssr.js';
 
-export async function GET({ fetch, params, request }) {
-	const cacheUrl = new URL(request.url);
-	const cacheKey = new Request(cacheUrl.toString(), request);
-
-	if (caches) {
-		const cache = caches.default;
-		const response = await cache.match(cacheKey);
-		if (response) {
-			return response;
-		}
-	}
-
+export async function GET({ fetch, params }) {
 	const chain = getChainDefinitionFromParams(params.network);
 	if (!chain) {
 		return json({ error: 'Invalid chain specified' }, { status: 400 });
@@ -24,10 +13,7 @@ export async function GET({ fetch, params, request }) {
 
 	const network = getNetwork(chain, fetch);
 	const client = getBackendClient(fetch, network.shortname, {
-		history: true,
-		headers: {
-			cacheEverything: true
-		}
+		history: true
 	});
 	const [info, block] = await Promise.all([
 		client.v1.chain.get_info(),
@@ -42,7 +28,7 @@ export async function GET({ fetch, params, request }) {
 
 	const irreversible = info.last_irreversible_block_num.gte(UInt64.from(params.number));
 
-	const response = json(
+	return json(
 		{
 			ts: new Date(),
 			block
@@ -51,11 +37,4 @@ export async function GET({ fetch, params, request }) {
 			headers: getCacheHeaders(5, irreversible)
 		}
 	);
-
-	if (caches && request.method === 'GET') {
-		const cache = caches.default;
-		await cache.put(cacheKey, response.clone());
-	}
-
-	return response;
 }
