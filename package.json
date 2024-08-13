@@ -64,6 +64,7 @@
 		"typescript-svelte-plugin": "^0.3.40"
 	},
 	"resolutions": {
-		"@wharfkit/antelope": "^1.0.10"
+		"@wharfkit/antelope": "^1.0.11",
+		"@wharfkit/session": "^1.4.0"
 	}
 }
