@@ -21,10 +21,23 @@ export async function GET({ fetch, params }) {
 		})
 	]);
 
+	// Maintain a 5 second cache by default
+	let cacheControl = 'public, max-age=5';
+
+	// If the block is irreversible, cache for one year and mark immutable
+	if (info.last_irreversible_block_num.gte(UInt64.from(params.number))) {
+		cacheControl = 'public, max-age=31536000, immutable';
+	}
+
 	return json(
 		{
 			ts: new Date(),
 			block
 		},
+		{
+			headers: {
+				'cache-control': cacheControl
+			}
+		}
 	);
 }
