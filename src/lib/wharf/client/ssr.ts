@@ -9,10 +9,15 @@ import {
 } from '$env/static/private';
 import { supportedChains, type supportedChainNames } from '../client';
 
+interface GetBackendClientOptions {
+	history: boolean;
+	headers: Record<string, string>;
+}
+
 export function getBackendClient(
 	fetch: typeof window.fetch,
 	chain: supportedChainNames = 'eos',
-	history = false
+	options: Partial<GetBackendClientOptions> = {}
 ): APIClient {
 	if (!supportedChains[chain]) {
 		throw new Error(`Chain ${chain} not supported`);
@@ -20,16 +25,18 @@ export function getBackendClient(
 	const chainDef = Chains[supportedChains[chain]];
 	switch (chain) {
 		case 'eos': {
-			chainDef.url = history ? API_EOS_HISTORY : API_EOS_CHAIN;
+			chainDef.url = options.history ? API_EOS_HISTORY : API_EOS_CHAIN;
 			break;
 		}
 		case 'jungle4': {
-			chainDef.url = history ? API_JUNGLE4_HISTORY : API_JUNGLE4_CHAIN;
+			chainDef.url = options.history ? API_JUNGLE4_HISTORY : API_JUNGLE4_CHAIN;
 			break;
 		}
 		default: {
 			throw new Error(`Chain ${chain} not supported`);
 		}
 	}
-	return new APIClient({ provider: new FetchProvider(chainDef.url, { fetch }) });
+	return new APIClient({
+		provider: new FetchProvider(chainDef.url, { fetch, headers: options.headers })
+	});
 }
