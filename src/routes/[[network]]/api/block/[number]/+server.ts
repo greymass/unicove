@@ -23,7 +23,13 @@ export async function GET({ fetch, params, request }) {
 	}
 
 	const network = getNetwork(chain, fetch);
-	const client = getBackendClient(fetch, network.shortname);
+	const client = getBackendClient(fetch, network.shortname, {
+		history: true,
+		headers: {
+			cacheEverything: true,
+			cacheTtlByStatus: { '200-299': 60, 404: 1, '500-599': 0 }
+		}
+	});
 	const [info, block] = await Promise.all([
 		client.v1.chain.get_info(),
 		client.call({
