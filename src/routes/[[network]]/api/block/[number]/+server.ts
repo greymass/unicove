@@ -47,7 +47,7 @@ export async function GET({ fetch, params, request }) {
 		}
 	);
 
-	if (caches) {
+	if (caches && request.method === 'GET') {
 		const cache = caches.default;
 		await cache.put(cacheKey, response.clone());
 	}
