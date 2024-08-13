@@ -3,17 +3,30 @@ import { json } from '@sveltejs/kit';
 import { getChainDefinitionFromParams, getNetwork } from '$lib/state/network.svelte';
 import { UInt64 } from '@wharfkit/antelope';
 import { getCacheHeaders } from '$lib/utils';
+import { getBackendClient } from '$lib/wharf/client/ssr.js';
 
-export async function GET({ fetch, params }) {
+export async function GET({ fetch, params, request }) {
+	const cacheUrl = new URL(request.url);
+	const cacheKey = new Request(cacheUrl.toString(), request);
+
+	if (typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope) {
+		const cache = caches.default;
+		const response = await cache.match(cacheKey);
+		if (response) {
+			return response;
+		}
+	}
+
 	const chain = getChainDefinitionFromParams(params.network);
 	if (!chain) {
 		return json({ error: 'Invalid chain specified' }, { status: 400 });
 	}
 
 	const network = getNetwork(chain, fetch);
+	const client = getBackendClient(fetch, network.shortname);
 	const [info, block] = await Promise.all([
-		network.client.v1.chain.get_info(),
-		network.client.call({
+		client.v1.chain.get_info(),
+		client.call({
 			method: 'POST',
 			path: '/v1/chain/get_block',
 			params: {
@@ -23,15 +36,21 @@ export async function GET({ fetch, params }) {
 	]);
 
 	const irreversible = info.last_irreversible_block_num.gte(UInt64.from(params.number));
-	const headers = getCacheHeaders(5, irreversible);
 
-	return json(
+	const response = json(
 		{
 			ts: new Date(),
 			block
 		},
 		{
-			headers
+			headers: getCacheHeaders(5, irreversible)
 		}
 	);
+
+	if (typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope) {
+		const cache = caches.default;
+		await cache.put(cacheKey, response.clone());
+	}
+
+	return response;
 }
