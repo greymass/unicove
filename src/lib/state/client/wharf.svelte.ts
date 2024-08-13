@@ -29,7 +29,11 @@ import {
 	sendSuccessToast
 } from '$lib/wharf/transact.svelte';
 
-const walletPlugins: WalletPlugin[] = [new WalletPluginAnchor(), new WalletPluginMetaMask()];
+const metamaskWalletPlugin = new WalletPluginMetaMask();
+
+console.log({ metamaskWalletPlugin, retrievePublicKey: metamaskWalletPlugin.retrievePublicKey });
+
+const walletPlugins: WalletPlugin[] = [new WalletPluginAnchor(), metamaskWalletPlugin];
 
 // If a local key is provided, add the private key wallet
 if (PUBLIC_LOCAL_SIGNER) {
@@ -59,6 +63,7 @@ export class WharfState {
 			ui: new WebRenderer({ minimal: true }),
 			walletPlugins
 		});
+		console.log({ walletPlugins });
 		$effect(() => {
 			localStorage.setItem('chainSessions', JSON.stringify(this.chainsSession));
 		});
@@ -68,6 +73,11 @@ export class WharfState {
 		if (!this.sessionKit) {
 			throw new Error('User not initialized');
 		}
+		console.log('login', {
+			walletPlugin: this.sessionKit.walletPlugins[1],
+			retrievePublicKey: this.sessionKit.walletPlugins[1].retrievePublicKey
+		});
+
 		const { session } = await this.sessionKit.login(options);
 		this.session = session;
 		this.chainsSession[String(session.chain.id)] = session.serialize();
@@ -102,6 +112,7 @@ export class WharfState {
 		}
 		// TODO: If the current account matches the account we're switching to, just return the current session
 		const session = await this.sessionKit.restore(args, options);
+		console.log({ session });
 		if (session) {
 			this.session = session;
 		}
