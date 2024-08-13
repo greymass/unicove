@@ -12,11 +12,12 @@ export async function GET({ fetch, params }) {
 	}
 
 	const network = getNetwork(chain, fetch);
+	const client = getBackendClient(fetch, network.shortname, {
+		history: true
+	});
 	let transaction: API.v1.GetTransactionResponse;
 	try {
-		transaction = await getBackendClient(fetch, network.shortname, {
-			history: true
-		}).v1.history.get_transaction(params.id);
+		transaction = await client.v1.history.get_transaction(params.id);
 	} catch (e) {
 		return error(500, {
 			message: `Error while loading account ${params.id}: ${e}.`
