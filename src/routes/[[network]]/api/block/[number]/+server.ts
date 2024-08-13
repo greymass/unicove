@@ -26,8 +26,7 @@ export async function GET({ fetch, params, request }) {
 	const client = getBackendClient(fetch, network.shortname, {
 		history: true,
 		headers: {
-			cacheEverything: true,
-			cacheTtlByStatus: { '200-299': 60, 404: 1, '500-599': 0 }
+			cacheEverything: true
 		}
 	});
 	const [info, block] = await Promise.all([
