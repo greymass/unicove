@@ -41,7 +41,8 @@ export async function GET({ fetch, params }) {
 		},
 		{
 			headers: {
-				'cache-control': cacheControl
+				'cache-control': cacheControl,
+				'Cloudflare-CDN-Cache-Control': cacheControl
 			}
 		}
 	);
