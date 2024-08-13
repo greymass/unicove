@@ -9,7 +9,7 @@ export async function GET({ fetch, params, request }) {
 	const cacheUrl = new URL(request.url);
 	const cacheKey = new Request(cacheUrl.toString(), request);
 
-	if (typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope) {
+	if (caches) {
 		const cache = caches.default;
 		const response = await cache.match(cacheKey);
 		if (response) {
@@ -47,7 +47,7 @@ export async function GET({ fetch, params, request }) {
 		}
 	);
 
-	if (typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope) {
+	if (caches) {
 		const cache = caches.default;
 		await cache.put(cacheKey, response.clone());
 	}
