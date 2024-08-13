@@ -1,6 +1,8 @@
 import { APIClient, FetchProvider } from '@wharfkit/antelope';
 import { Chains, type ChainIndices } from '@wharfkit/common';
 
+export type supportedChainNames = 'eos' | 'jungle4';
+
 export const supportedChains: Record<string, ChainIndices> = {
 	eos: 'EOS',
 	jungle4: 'Jungle4'

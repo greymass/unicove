@@ -1,3 +1,55 @@
+import type { Asset } from '@wharfkit/antelope';
+
+import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
+import { Contract as SystemContract } from '$lib/wharf/contracts/system';
+import { Contract as TokenContract } from '$lib/wharf/contracts/token';
+
+export interface DefaultContracts {
+	delphioracle?: DelphiOracleContract;
+	token: TokenContract;
+	system: SystemContract;
+}
+
+export type FeatureType = 'delphioracle' | 'lightapi' | 'rex' | 'robo';
+
+export interface ChainConfig {
+	features: Record<FeatureType, boolean>;
+	symbol: Asset.SymbolType;
+}
+
+export const chainConfigs: Record<string, ChainConfig> = {
+	// EOS
+	aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906: {
+		features: {
+			delphioracle: true,
+			lightapi: true,
+			rex: true,
+			robo: true
+		},
+		symbol: '4,EOS'
+	},
+	// Jungle4
+	'73e4385a2708e6d7048834fbc1079f2fabb17b3c125b146af438971e90716c4d': {
+		features: {
+			delphioracle: false,
+			lightapi: false,
+			rex: true,
+			robo: true
+		},
+		symbol: '4,EOS'
+	},
+	// Telos
+	'4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11': {
+		features: {
+			delphioracle: true,
+			lightapi: true,
+			rex: true,
+			robo: false
+		},
+		symbol: '4,TLOS'
+	}
+};
+
 export const chainMap: Record<string, string> = {
 	aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906: 'eos',
 	'21dcae42c0182200e93f954a074011f9048a7624c6fe81d3c9541a614a88bd1c': 'fio',
