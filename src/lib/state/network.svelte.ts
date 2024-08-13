@@ -1,59 +1,21 @@
 import { APIClient, Asset, FetchProvider, Int128, type AssetType } from '@wharfkit/antelope';
 import { Chains, ChainDefinition } from '@wharfkit/common';
 import { RAMState, Resources, REXState } from '@wharfkit/resources';
+import { chainIdsToIndices } from '@wharfkit/session';
 
 import { Types as DelphiOracleTypes } from '$lib/wharf/contracts/delphioracle';
-
 import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
 import { Contract as SystemContract } from '$lib/wharf/contracts/system';
 import { Contract as TokenContract } from '$lib/wharf/contracts/token';
 
-import { chainMapper } from '$lib/wharf/chains';
-import { chainIdsToIndices } from '@wharfkit/session';
+import {
+	chainConfigs,
+	chainMapper,
+	type ChainConfig,
+	type DefaultContracts
+} from '$lib/wharf/chains';
+
 import { calculateValue } from './client/account.svelte';
-
-interface DefaultContracts {
-	delphioracle?: DelphiOracleContract;
-	token: TokenContract;
-	system: SystemContract;
-}
-
-export type FeatureType = 'delphioracle' | 'lightapi' | 'rex';
-
-interface ChainConfig {
-	features: Record<FeatureType, boolean>;
-	symbol: Asset.SymbolType;
-}
-
-const configs: Record<string, ChainConfig> = {
-	// EOS
-	aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906: {
-		features: {
-			delphioracle: true,
-			lightapi: true,
-			rex: true
-		},
-		symbol: '4,EOS'
-	},
-	// Jungle4
-	'73e4385a2708e6d7048834fbc1079f2fabb17b3c125b146af438971e90716c4d': {
-		features: {
-			delphioracle: false,
-			lightapi: false,
-			rex: true
-		},
-		symbol: '4,EOS'
-	},
-	// Telos
-	'4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11': {
-		features: {
-			delphioracle: true,
-			lightapi: true,
-			rex: true
-		},
-		symbol: '4,TLOS'
-	}
-};
 
 export class NetworkState {
 	public chain: ChainDefinition;
@@ -61,6 +23,7 @@ export class NetworkState {
 	public fetch = fetch;
 	public last_update: Date = $state(new Date());
 	public loaded = $state(false);
+	public shortname: string;
 
 	public contracts: DefaultContracts;
 
@@ -78,7 +41,8 @@ export class NetworkState {
 
 	constructor(chain: ChainDefinition, fetchOverride?: typeof fetch) {
 		this.chain = chain;
-		this.config = configs[String(this.chain.id)];
+		this.config = chainConfigs[String(this.chain.id)];
+		this.shortname = chainMapper.toShortName(String(this.chain.id));
 		if (fetchOverride) {
 			this.fetch = fetchOverride;
 		}

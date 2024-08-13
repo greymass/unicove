@@ -1,12 +1,10 @@
-import type { PageLoad } from './$types';
+import type { Load } from '@sveltejs/kit';
 import * as m from '$lib/paraglide/messages.js';
-import { getClient } from '$lib/wharf/client';
-import { getActivity } from './activity';
 
-export const load: PageLoad = async ({ fetch, params }: PageLoad) => {
-	const client = getClient(fetch, params.network);
-	const activity = await getActivity(client, params.name);
+export const load: Load = async ({ fetch, params }) => {
+	const response = await fetch(`/${params.network}/api/account/${params.name}/activity`);
+	const json = await response.json();
 	return {
-		activity
+		activity: json.activity
 	};
 };
