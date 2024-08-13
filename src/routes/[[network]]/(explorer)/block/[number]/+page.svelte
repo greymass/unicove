@@ -7,10 +7,12 @@
 
 <h1>{m.block_height_numbered({ height: data.height })}</h1>
 
-<a href="/block/{Number(data.height) - 1}"
-	>← {m.block_height_numbered({ height: Number(data.height) - 1 })}</a
->
-<a href="/block/{Number(data.height) + 1}"
+{#if data.height > 1}
+	<a href="/{data.network}/block/{Number(data.height) - 1}"
+		>← {m.block_height_numbered({ height: Number(data.height) - 1 })}</a
+	>
+{/if}
+<a href="/{data.network}/block/{Number(data.height) + 1}"
 	>{m.block_height_numbered({ height: Number(data.height) + 1 })} →</a
 >
 
