@@ -1,5 +1,9 @@
 import type { Asset } from '@wharfkit/antelope';
 
+import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
+import { Contract as SystemContract } from '$lib/wharf/contracts/system';
+import { Contract as TokenContract } from '$lib/wharf/contracts/token';
+
 export interface DefaultContracts {
 	delphioracle?: DelphiOracleContract;
 	token: TokenContract;

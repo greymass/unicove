@@ -5,7 +5,7 @@
 	export let data: PageData;
 </script>
 
-<h1>{data.id}</h1>
+<p>Resources</p>
 
 <pre>
 {JSON.stringify(data.transaction, null, 2)}

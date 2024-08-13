@@ -17,9 +17,15 @@
 			{action.timestamp}
 		</p>
 		<p>
-			ID:
-			<a href="/transaction/{action.id}">
+			Transaction:
+			<a href="/{data.network.shortname}/transaction/{action.id}">
 				{String(action.id).substring(0, 7)}
+			</a>
+		</p>
+		<p>
+			Action:
+			<a href="/{data.network.shortname}/transaction/{action.id}/{action.seq}">
+				{String(action.id).substring(0, 7)}/{action.seq}
 			</a>
 		</p>
 		<Code>{JSON.stringify(action.authorizations, null, 2)}</Code>

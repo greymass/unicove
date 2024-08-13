@@ -19,6 +19,7 @@ export async function getActivity(client: APIClient, name: string): Promise<Acti
 		actions: response.actions.map((action) => {
 			return {
 				id: action.action_trace.trx_id,
+				seq: action.global_action_seq,
 				timestamp: action.block_time,
 				contract: action.action_trace.act.account,
 				action: action.action_trace.act.name,

@@ -6,7 +6,8 @@ import {
 	Int64,
 	Name,
 	PermissionLevel,
-	TimePointSec
+	TimePointSec,
+	UInt64
 } from '@wharfkit/antelope';
 
 export interface Activity {
@@ -19,6 +20,7 @@ export interface Activity {
 @Struct.type('activity_action')
 export class ActivityAction extends Struct {
 	@Struct.field(Checksum256) declare id: Checksum256;
+	@Struct.field(UInt64) declare seq: UInt64;
 	@Struct.field(TimePointSec) declare timestamp: TimePointSec;
 	@Struct.field(Name) declare contract: Name;
 	@Struct.field(Name) declare action: Name;
