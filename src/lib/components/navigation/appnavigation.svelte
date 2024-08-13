@@ -18,8 +18,8 @@
 					My Account
 				</a>
 			{/if}
-			<a href="/eos/account/eosio">EOS Account</a>
-			<a href="/jungle4/account/eosio">Jungle 4 Account</a>
+			<a href="/eos/account/teamgreymass">EOS Account</a>
+			<a href="/jungle4/account/teamgreymass">Jungle 4 Account</a>
 			<a href="/eos/block/100000">EOS Block</a>
 			<a href="/jungle4/block/100000">Jungle 4 Block</a>
 			<LanguageSelect />
