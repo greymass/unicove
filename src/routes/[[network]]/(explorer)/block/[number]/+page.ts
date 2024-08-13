@@ -23,8 +23,7 @@ export const load: Load = async ({ fetch, params }) => {
 	return {
 		block,
 		network: params.network,
-		id: params.id,
-		seq: params.seq,
+		height: params.number,
 		pageMetaTags: {
 			title: m.block_height_numbered({ height: params.number }),
 			description
