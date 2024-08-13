@@ -4,6 +4,7 @@ import { getChainDefinitionFromParams, getNetwork } from '$lib/state/network.sve
 import type { NameType } from '@wharfkit/antelope';
 import type { ChainDefinition } from '@wharfkit/session';
 import { chainMapper } from '$lib/wharf/chains.js';
+import { getCacheHeaders } from '$lib/utils';
 
 export async function GET({ fetch, params }) {
 	const chain = getChainDefinitionFromParams(params.network);
@@ -29,14 +30,18 @@ export async function GET({ fetch, params }) {
 	}
 
 	try {
+		const headers = getCacheHeaders(5);
 		const [account_data, delegated, rex, light_api_response] = await Promise.all(requests);
-		return json({
-			ts: new Date(),
-			account_data,
-			balances: light_api_response ? light_api_response.balances : [],
-			delegated,
-			rex
-		});
+		return json(
+			{
+				ts: new Date(),
+				account_data,
+				balances: light_api_response ? light_api_response.balances : [],
+				delegated,
+				rex
+			},
+			{ headers }
+		);
 	} catch (error) {
 		return json({ error: 'Unable to load account.' }, { status: 500 });
 	}

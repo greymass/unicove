@@ -1,6 +1,7 @@
 import { json } from '@sveltejs/kit';
 
 import { getChainDefinitionFromParams, getNetwork } from '$lib/state/network.svelte';
+import { getCacheHeaders } from '$lib/utils';
 
 export async function GET({ fetch, params }) {
 	const chain = getChainDefinitionFromParams(params.network);
@@ -24,10 +25,17 @@ export async function GET({ fetch, params }) {
 
 	const [ramstate, rexstate, tokenstate] = await Promise.all(requests);
 
-	return json({
-		ts: new Date(),
-		ramstate,
-		rexstate,
-		tokenstate
-	});
+	const headers = getCacheHeaders(5);
+
+	return json(
+		{
+			ts: new Date(),
+			ramstate,
+			rexstate,
+			tokenstate
+		},
+		{
+			headers
+		}
+	);
 }

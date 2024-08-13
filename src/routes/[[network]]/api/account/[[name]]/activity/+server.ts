@@ -3,6 +3,7 @@ import { json } from '@sveltejs/kit';
 import { getChainDefinitionFromParams, getNetwork } from '$lib/state/network.svelte';
 import { getBackendClient } from '$lib/wharf/client/ssr.js';
 import { getActivity } from './activity';
+import { getCacheHeaders } from '$lib/utils';
 
 export async function GET({ fetch, params }) {
 	const chain = getChainDefinitionFromParams(params.network);
@@ -22,6 +23,7 @@ export async function GET({ fetch, params }) {
 	const client = getBackendClient(fetch, network.shortname, true);
 
 	const requests = [getActivity(client, params.name)];
+	const headers = getCacheHeaders(5);
 
 	try {
 		const [activity] = await Promise.all(requests);
@@ -31,9 +33,7 @@ export async function GET({ fetch, params }) {
 				activity
 			},
 			{
-				headers: {
-					'cache-control': 'public, max-age=5'
-				}
+				headers
 			}
 		);
 	} catch (error) {
