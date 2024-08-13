@@ -84,6 +84,13 @@ export class WharfState {
 		this.sessions = await this.sessionKit.getSessions();
 	}
 
+	public async signup() {
+		if (!this.sessionKit) {
+			throw new Error('User not initialized');
+		}
+		return this.sessionKit.createAccount();
+	}
+
 	public async logout(session?: Session | SerializedSession) {
 		if (!this.sessionKit) {
 			throw new Error('User not initialized');
