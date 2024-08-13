@@ -1,31 +1,30 @@
-import { error } from '@sveltejs/kit';
-import type { API } from '@wharfkit/antelope';
-
-import type { PageLoad } from './$types';
-import { getClient } from '$lib/wharf/client';
+import type { Load } from '@sveltejs/kit';
 import * as m from '$lib/paraglide/messages.js';
+import { API, TimePointSec } from '@wharfkit/antelope';
 
-export const load: PageLoad = async ({ fetch, params }) => {
-	// Attempt to load the block from the API
-	let block: API.v1.GetBlockResponse;
-	try {
-		block = await getClient(fetch).v1.chain.get_block(params.number);
-	} catch (e) {
-		return error(500, {
-			message: `Error while loading block ${params.number}: ${e}.`
-		});
-	}
+export const load: Load = async ({ fetch, params }) => {
+	const response = await fetch(`/${params.network}/api/block/${params.number}`);
+	const json = await response.json();
+	const block = json.block;
 	// Create metadata for the page
+	const actions = block.transactions.reduce((acc, tx) => {
+		if (!tx.trx.transaction) {
+			return acc;
+		}
+		return acc + tx.trx.transaction.actions.length;
+	}, 0);
 	const description = m.block_height_numbered_description({
-		height: params.number,
+		height: String(params.number),
 		producer: block.producer,
-		timestamp: block.timestamp.toDate(),
+		timestamp: TimePointSec.from(block.timestamp).toDate(),
 		transactions: block.transactions.length,
-		actions: block.transactions.reduce((acc, tx) => acc + tx.trx.transaction.actions.length, 0)
+		actions
 	});
 	return {
 		block,
-		height: params.number,
+		network: params.network,
+		id: params.id,
+		seq: params.seq,
 		pageMetaTags: {
 			title: m.block_height_numbered({ height: params.number }),
 			description
