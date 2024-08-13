@@ -2,6 +2,7 @@ import { json } from '@sveltejs/kit';
 
 import { getChainDefinitionFromParams, getNetwork } from '$lib/state/network.svelte';
 import { UInt64 } from '@wharfkit/antelope';
+import { getCacheHeaders } from '$lib/utils';
 
 export async function GET({ fetch, params }) {
 	const chain = getChainDefinitionFromParams(params.network);
@@ -21,13 +22,8 @@ export async function GET({ fetch, params }) {
 		})
 	]);
 
-	// Maintain a 5 second cache by default
-	let cacheControl = 'public, max-age=5';
-
-	// If the block is irreversible, cache for one year and mark immutable
-	if (info.last_irreversible_block_num.gte(UInt64.from(params.number))) {
-		cacheControl = 'public, max-age=31536000, immutable';
-	}
+	const irreversible = info.last_irreversible_block_num.gte(UInt64.from(params.number));
+	const headers = getCacheHeaders(5, irreversible);
 
 	return json(
 		{
@@ -35,10 +31,7 @@ export async function GET({ fetch, params }) {
 			block
 		},
 		{
-			headers: {
-				'Cache-Control': cacheControl,
-				'Cloudflare-CDN-Cache-Control': cacheControl
-			}
+			headers
 		}
 	);
 }

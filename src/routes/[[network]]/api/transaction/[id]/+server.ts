@@ -3,6 +3,7 @@ import { error, json } from '@sveltejs/kit';
 import { getChainDefinitionFromParams, getNetwork } from '$lib/state/network.svelte';
 import { getBackendClient } from '$lib/wharf/client/ssr';
 import type { API } from '@wharfkit/antelope';
+import { getCacheHeaders } from '$lib/utils';
 
 export async function GET({ fetch, params }) {
 	const chain = getChainDefinitionFromParams(params.network);
@@ -26,13 +27,8 @@ export async function GET({ fetch, params }) {
 		});
 	}
 
-	// Maintain a 5 second cache by default
-	let cacheControl = 'public, max-age=5';
-
-	// If the block is irreversible, cache for one year and mark immutable
-	if (transaction.last_irreversible_block.gte(transaction.block_num)) {
-		cacheControl = 'public, max-age=31536000, immutable';
-	}
+	const irreversible = transaction.last_irreversible_block.gte(transaction.block_num);
+	const headers = getCacheHeaders(5, irreversible);
 
 	return json(
 		{
@@ -40,10 +36,7 @@ export async function GET({ fetch, params }) {
 			transaction
 		},
 		{
-			headers: {
-				'Cache-Control': cacheControl,
-				'Cloudflare-CDN-Cache-Control': cacheControl
-			}
+			headers
 		}
 	);
 }
