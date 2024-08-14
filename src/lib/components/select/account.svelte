@@ -11,6 +11,9 @@
 	import { Stack } from '../layout';
 	import Button from '../button/button.svelte';
 
+	import { Session, type SerializedSession } from '@wharfkit/session';
+	import { goto } from '$app/navigation';
+
 	const context = getContext<UnicoveContext>('state');
 
 	let currentSession = $derived(context.wharf.session);
@@ -133,7 +136,7 @@
 
 					<h2 class="h2">Controls</h2>
 					<Button onclick={addSession} variant="secondary">Login</Button>
-					<Button onclick={signup} variant="secondary">Signup</Button>
+					<Button onclick={() => goto('/eos/signup')} variant="secondary">Signup</Button>
 					{#if context.wharf.session}
 						<Button onclick={() => removeSession(currentSession)} variant="secondary">
 							Logout ({context.wharf.session.actor})

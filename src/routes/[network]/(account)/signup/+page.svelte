@@ -3,9 +3,9 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 
-	const network = $page.params.network;
+	$: network = $page.params.network;
 
-	const signupMethods = [
+	$: signupMethods = [
 		{ name: 'Anchor', route: `/${network}/anchor` },
 		{ name: 'MetaMask', route: `/${network}/metamask` },
 		{ name: 'TokenPocket', route: `/${network}/tokenpocket` },
@@ -21,7 +21,7 @@
 		{#each signupMethods as method}
 			<div class="card rounded-lg border p-4">
 				<h2 class="mb-2 text-xl font-semibold">{method.name}</h2>
-				<Button on:click={() => goto(method.route)}>{method.name}</Button>
+				<Button onclick={() => goto(method.route)}>{method.name}</Button>
 			</div>
 		{/each}
 	</div>
