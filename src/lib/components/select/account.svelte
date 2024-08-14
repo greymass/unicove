@@ -5,6 +5,7 @@
 	import { Stack } from '../layout';
 	import Button from '../button/button.svelte';
 	import { Session, type SerializedSession } from '@wharfkit/session';
+	import { chainMapper } from '$lib/wharf/chains';
 
 	const wharf = getWharf();
 
@@ -139,10 +140,10 @@
 						<p>
 							<Button onclick={() => switchSession(session)} variant="secondary">
 								<span class="self-start">
-									Switch: {session.actor}@{session.permission}
+									{session.actor}@{session.permission}
 								</span>
 								<span class="truncate">
-									({session.chain})
+									({chainMapper.toShortName(session.chain)})
 								</span>
 							</Button>
 						</p>
