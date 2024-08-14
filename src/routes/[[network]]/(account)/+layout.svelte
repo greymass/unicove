@@ -36,8 +36,12 @@
 	);
 </script>
 
-<AccountNavigation {options} />
+{#if context.account}
+	<AccountNavigation {options} />
 
-<PageMargin>
-	{@render children()}
-</PageMargin>
+	<PageMargin>
+		{@render children()}
+	</PageMargin>
+{:else}
+	Loading
+{/if}
