@@ -14,7 +14,7 @@
 		const name = String(context.account.name);
 		const network = String(context.account.network);
 		return [
-			{ href: `/${network}/account/${name}`, text: 'Account' },
+			{ href: `/${network}/account`, text: 'Account' },
 			{ href: `/${network}/permissions`, text: 'Permissions' },
 			{ href: `/${network}/ram`, text: 'RAM' },
 			{ href: `/${network}/resources`, text: 'Resources' },
