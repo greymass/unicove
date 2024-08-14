@@ -3,7 +3,6 @@
 	import Code from '$lib/components/code.svelte';
 	import { page } from '$app/stores';
 	import { chainMapper } from '$lib/wharf/chains';
-	import Pillgroup from '$lib/components/navigation/pillgroup.svelte';
 	import { Stack } from '$lib/components/layout';
 
 	const { data } = $props();
@@ -19,13 +18,6 @@
 			<h2 class="h2">Network State</h2>
 			<p>The currently loaded network state, based off the page URL you're on.</p>
 		</Stack>
-		<Pillgroup
-			options={[
-				{ active: shortName === 'eos', href: '/debug/state/network', text: 'Default (EOS)' },
-				{ active: shortName === 'jungle4', href: '/debug/jungle4/state/network', text: 'Jungle4' },
-				{ active: shortName === 'telos', href: '/debug/telos/state/network', text: 'Telos' }
-			]}
-		/>
 	</header>
 	<table>
 		<tbody>

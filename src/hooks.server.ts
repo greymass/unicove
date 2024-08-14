@@ -30,7 +30,7 @@ function isDevPath(pathname: string) {
 }
 
 function skipRedirect(pathname: string) {
-	return isAPIPath(pathname) || isDevPath(pathname);
+	return isAPIPath(pathname);
 }
 
 function isLanguage(value: string) {
