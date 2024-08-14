@@ -3,6 +3,8 @@
 	import Button from '$lib/components/button/button.svelte';
 	import { getWharf } from '$lib/state/client/wharf.svelte';
 	import { getNetwork } from '$lib/state/network.svelte';
+	import { getContext } from 'svelte';
+	import type { UnicoveContext } from '$lib/state/client.svelte';
 
 	const wharf = getWharf();
 	const context = getContext<UnicoveContext>('state');
@@ -30,8 +32,8 @@
 	<h1>Send/Receive: {wharf.session.actor}</h1>
 {/if}
 
-{#if context.account.loaded}
-	<p>{context.account.balance}</p>
+{#if context.account}
+	<p>Available: {context.account.balance?.liquid}</p>
 	<Button onclick={test}>Send 0.0001 test</Button>
 	<pre>{JSON.stringify(context.account.sources, null, 2)}</pre>
 {/if}
