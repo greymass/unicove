@@ -25,6 +25,14 @@ function isAPIPath(pathname: string) {
 	return /^\/[a-z0-9]+\/api/gm.test(pathname);
 }
 
+function isDevPath(pathname: string) {
+	return /^\/[a-z0-9]+\/debug/gm.test(pathname);
+}
+
+function skipRedirect(pathname: string) {
+	return isAPIPath(pathname) || isDevPath(pathname);
+}
+
 function isLanguage(value: string) {
 	return availableLanguageTags.find((l) => l.toLowerCase() === value);
 }
@@ -36,7 +44,7 @@ function isNetwork(value: string) {
 export async function redirectHandle({ event, resolve }: HandleParams): Promise<Response> {
 	const { pathname, search } = new URL(event.request.url);
 
-	if (isAPIPath(pathname)) {
+	if (skipRedirect(pathname)) {
 		return await resolve(event);
 	}
 
@@ -45,12 +53,16 @@ export async function redirectHandle({ event, resolve }: HandleParams): Promise<
 		.map((p) => p.trim().toLowerCase());
 
 	let lang = 'en';
-	let network = 'eos';
+	let network: string | undefined = 'eos';
 
 	if (isLanguage(pathFirst) && isNetwork(pathSecond)) {
 		// Proceed, correct URL
 		lang = pathFirst;
 		network = pathSecond;
+	} else if (isLanguage(pathFirst) && !isNetwork(pathSecond) && !pathSecond) {
+		// Only a language is specified, land on the language specific homepage
+		lang = pathFirst;
+		network = undefined;
 	} else if (isLanguage(pathFirst) && !isNetwork(pathSecond)) {
 		// The network isn't specified, but the language is - redirect to the default network
 		lang = pathFirst;
@@ -67,7 +79,14 @@ export async function redirectHandle({ event, resolve }: HandleParams): Promise<
 
 	event.locals.lang = lang;
 
-	const url = `/${lang}/${network}/${pathMore.join('/')}${search}`;
+	let url = `/${lang}`;
+	if (network) {
+		url += `/${network}`;
+	}
+	if (pathMore.length > 0) {
+		url += `/${pathMore.join('/')}`;
+	}
+	url += search;
 
 	if (pathname !== url) {
 		return new Response(undefined, {
