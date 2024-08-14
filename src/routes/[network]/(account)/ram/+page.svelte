@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Code from '$lib/components/code.svelte';
 	import * as m from '$lib/paraglide/messages.js';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
@@ -6,7 +7,5 @@
 	const context = getContext<UnicoveContext>('state');
 </script>
 
-{#if context.account}
-	<h1>RAM: {context.account.name}</h1>
-	<pre>{JSON.stringify(context.account.sources, null, 2)}</pre>
-{/if}
+<h1>RAM</h1>
+<Code>{JSON.stringify(context, null, 2)}</Code>

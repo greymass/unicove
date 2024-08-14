@@ -28,12 +28,15 @@
 	}
 </script>
 
-{#if wharf.session}
-	<h1>Send/Receive: {wharf.session.actor}</h1>
-{/if}
+<h1>Send/Receive</h1>
 
-{#if context.account}
-	<p>Available: {context.account.balance?.liquid}</p>
-	<Button onclick={test}>Send 0.0001 test</Button>
-	<pre>{JSON.stringify(context.account.sources, null, 2)}</pre>
-{/if}
+<p>
+	Available:
+	{#if context.account}
+		{context.account.balance?.liquid}
+	{:else}
+		0.0000
+	{/if}
+</p>
+
+<Button disabled={!context.account} onclick={test}>Send 0.0001 test</Button>

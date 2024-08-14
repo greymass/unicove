@@ -1,14 +1,11 @@
 <script lang="ts">
+	import Code from '$lib/components/code.svelte';
 	import * as m from '$lib/paraglide/messages.js';
-	import { getWharf } from '$lib/state/client/wharf.svelte';
+	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import { getContext } from 'svelte';
 
-	const wharf = getWharf();
+	const context = getContext<UnicoveContext>('state');
 </script>
 
-{#if wharf.session}
-	<h1>Resources: {wharf.session.actor}</h1>
-{/if}
-
-{#if wharf.account}
-	<pre>{JSON.stringify(wharf.account.data, null, 2)}</pre>
-{/if}
+<h1>Resources</h1>
+<Code>{JSON.stringify(context, null, 2)}</Code>

@@ -7,5 +7,5 @@
 	const context = getContext<UnicoveContext>('state');
 </script>
 
-<h1>Vote</h1>
+<h1>Move</h1>
 <Code>{JSON.stringify(context, null, 2)}</Code>

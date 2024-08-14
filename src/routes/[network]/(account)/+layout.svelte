@@ -2,26 +2,20 @@
 	import { PageMargin } from '$lib/components/layout';
 	import AccountNavigation from '$lib/components/navigation/accountnavigation.svelte';
 	import { page } from '$app/stores';
-	import { getContext } from 'svelte';
-	import type { UnicoveContext } from '$lib/state/client.svelte.js';
 
 	const { children, data } = $props();
 
-	const context = getContext<UnicoveContext>('state');
-
 	const destinations = $derived.by(() => {
-		if (!context.account) return [];
-		const name = String(context.account.name);
-		const network = String(context.account.network);
+		const network = String(data.network);
 		return [
 			{ href: `/${network}/account`, text: 'Account' },
+			{ href: `/${network}/move`, text: 'Move' },
 			{ href: `/${network}/permissions`, text: 'Permissions' },
 			{ href: `/${network}/ram`, text: 'RAM' },
 			{ href: `/${network}/resources`, text: 'Resources' },
 			{ href: `/${network}/send`, text: 'Send' },
-			{ href: `/${network}/transfer`, text: 'Transfer' },
-			{ href: `/${network}/vote`, text: 'Vote' },
-			{ href: `/${network}/transactions`, text: 'Transactions' }
+			{ href: `/${network}/transactions`, text: 'Transactions' },
+			{ href: `/${network}/vote`, text: 'Vote' }
 		];
 	});
 
@@ -36,12 +30,8 @@
 	);
 </script>
 
-{#if context.account}
-	<AccountNavigation {options} />
+<AccountNavigation {options} />
 
-	<PageMargin>
-		{@render children()}
-	</PageMargin>
-{:else}
-	Loading
-{/if}
+<PageMargin>
+	{@render children()}
+</PageMargin>
