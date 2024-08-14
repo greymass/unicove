@@ -1,21 +1,31 @@
 <script lang="ts">
-	let { children } = $props();
 	import { PageMargin } from '$lib/components/layout';
 	import AccountNavigation from '$lib/components/navigation/accountnavigation.svelte';
 	import { page } from '$app/stores';
+	import { getContext } from 'svelte';
+	import type { UnicoveContext } from '$lib/state/client.svelte.js';
 
-	const destinations = [
-		{ href: '/account', text: 'Account' },
-		{ href: '/permissions', text: 'Permissions' },
-		{ href: '/ram', text: 'RAM' },
-		{ href: '/resources', text: 'Resources' },
-		{ href: '/send', text: 'Send' },
-		{ href: '/transfer', text: 'Transfer' },
-		{ href: '/vote', text: 'Vote' },
-		{ href: '/transactions', text: 'Transactions' }
-	];
+	const { children, data } = $props();
 
-	let rootPathname = $derived($page.url.pathname.split('/').slice(2)[0]);
+	const context = getContext<UnicoveContext>('state');
+
+	const destinations = $derived.by(() => {
+		if (!context.account) return [];
+		const name = String(context.account.name);
+		const network = String(context.account.network);
+		return [
+			{ href: `/${network}/account/${name}`, text: 'Account' },
+			{ href: `/${network}/permissions`, text: 'Permissions' },
+			{ href: `/${network}/ram`, text: 'RAM' },
+			{ href: `/${network}/resources`, text: 'Resources' },
+			{ href: `/${network}/send`, text: 'Send' },
+			{ href: `/${network}/transfer`, text: 'Transfer' },
+			{ href: `/${network}/vote`, text: 'Vote' },
+			{ href: `/${network}/transactions`, text: 'Transactions' }
+		];
+	});
+
+	let rootPathname = $derived($page.url.pathname.split('/').slice(2)[1]);
 
 	// Derive the active state of each destination
 	let options = $derived(
