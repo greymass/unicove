@@ -14,14 +14,11 @@
 
 		<Cluster tag="nav" class="items-center justify-end">
 			{#if context.account}
+				<a href={`/${String(context.account.network)}/account`}> My Actions </a>
 				<a href={`/${String(context.account.network)}/account/${context.account.name}`}>
-					My Account
+					My Account (Overview)
 				</a>
 			{/if}
-			<a href="/eos/account/teamgreymass">EOS Account</a>
-			<a href="/jungle4/account/teamgreymass">Jungle 4 Account</a>
-			<a href="/eos/block/100000">EOS Block</a>
-			<a href="/jungle4/block/100000">Jungle 4 Block</a>
 			<LanguageSelect />
 			<AccountSelect />
 		</Cluster>
