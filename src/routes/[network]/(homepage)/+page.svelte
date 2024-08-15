@@ -32,7 +32,7 @@
 			{/if}
 
 			<h3>Sessions</h3>
-			<Button onclick={() => context.wharf.login()}>Login</Button>
+			<Button onclick={() => context.wharf.login({ chain: data.network.chain })}>Login</Button>
 			{#each context.wharf.sessions as session}
 				{#if data.network.chain.id.equals(session.chain)}
 					<p>
