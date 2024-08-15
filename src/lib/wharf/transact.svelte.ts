@@ -46,7 +46,6 @@ export function updateStatus(id: Checksum256, status: StatusType) {
 }
 
 export function queueTransaction(tx: QueuedTransaction) {
-	console.log({ tx });
 	transactions.push(tx);
 }
 
