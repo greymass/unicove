@@ -8,13 +8,14 @@
 	/**
 	 * 1. Overview
 	 * 2. Activity
-	 * 3. Details
-	 *  - Tokens
-	 *  - Permissions
+	 * 3. Assets
 	 *  - RAM
-	 *  - Resources
 	 *  - Staked
-	 * 4. Data (Maybe this is just an icon? Something obscure, as its not a common use case)
+	 *  - Tokens
+	 * 4. Details (?? Unsure on name, it's basically the state of the account)
+	 *  - Permissions
+	 *  - Resources
+	 * 5. Data (Maybe this is just an icon? Something obscure, as its not a common use case)
 	 */
 	const tabOptions = $derived.by(() => {
 		const account = String(data.account.name);
@@ -22,7 +23,7 @@
 		return [
 			{ href: `/${network}/account/${account}`, text: 'Overview' },
 			{ href: `/${network}/account/${account}/activity`, text: 'Activity' },
-			{ href: `/${network}/account/${account}/balances`, text: 'Balances' },
+			{ href: `/${network}/account/${account}/assets`, text: 'Assets' },
 			{ href: `/${network}/account/${account}/permissions`, text: 'Permissions' },
 			{ href: `/${network}/account/${account}/ram`, text: 'RAM' },
 			{ href: `/${network}/account/${account}/resources`, text: 'Resources' },
