@@ -2,7 +2,7 @@ import { browser } from '$app/environment';
 import { PUBLIC_LOCAL_SIGNER } from '$env/static/public';
 
 import { getContext, setContext } from 'svelte';
-import type { Checksum256 } from '@wharfkit/antelope';
+import type {} from '@wharfkit/antelope';
 import { ChainDefinition, Chains } from '@wharfkit/common';
 import {
 	type AccountCreationPlugin,
@@ -30,12 +30,16 @@ import {
 	sendSuccessToast
 } from '$lib/wharf/transact.svelte';
 import { AccountCreationPluginMetamask } from '@wharfkit/account-creation-plugin-metamask';
+import { AccountCreationPluginGreymass } from '@wharfkit/account-creation-plugin-greymass';
 
 const metamaskWalletPlugin = new WalletPluginMetaMask();
 
 const walletPlugins: WalletPlugin[] = [new WalletPluginAnchor(), metamaskWalletPlugin];
 
-const accountCreationPlugins: AccountCreationPlugin[] = [new AccountCreationPluginMetamask()];
+const accountCreationPlugins: AccountCreationPlugin[] = [
+	new AccountCreationPluginMetamask(),
+	new AccountCreationPluginGreymass()
+];
 
 // If a local key is provided, add the private key wallet
 if (PUBLIC_LOCAL_SIGNER) {

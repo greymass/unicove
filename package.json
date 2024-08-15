@@ -55,6 +55,7 @@
 		"@wharfkit/wallet-plugin-metamask": "^1.0.0-rc3",
 		"@wharfkit/wallet-plugin-privatekey": "^1.1.0",
 		"@wharfkit/account-creation-plugin-metamask": "1.0.0-RC3",
+		"@wharfkit/account-creation-plugin-greymass": "^1.2.0",
 		"@wharfkit/web-renderer": "^1.4.1",
 		"big.js": "^6.2.1",
 		"inter-ui": "^4.0.2",
