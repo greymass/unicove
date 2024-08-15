@@ -7,7 +7,8 @@ import {
 	API_JUNGLE4_CHAIN,
 	API_JUNGLE4_HISTORY
 } from '$env/static/private';
-import { supportedChains, type supportedChainNames } from '../client';
+
+import { chainIndiceMapping, type ChainShortName } from '../chains';
 
 interface GetBackendClientOptions {
 	history: boolean;
@@ -16,13 +17,13 @@ interface GetBackendClientOptions {
 
 export function getBackendClient(
 	fetch: typeof window.fetch,
-	chain: supportedChainNames = 'eos',
+	chain: ChainShortName = 'eos',
 	options: Partial<GetBackendClientOptions> = {}
 ): APIClient {
-	if (!supportedChains[chain]) {
+	if (!chainIndiceMapping[chain]) {
 		throw new Error(`Chain ${chain} not supported`);
 	}
-	const chainDef = Chains[supportedChains[chain]];
+	const chainDef = Chains[chainIndiceMapping[chain]];
 	switch (chain) {
 		case 'eos': {
 			chainDef.url = options.history ? API_EOS_HISTORY : API_EOS_CHAIN;

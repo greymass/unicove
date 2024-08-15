@@ -1,4 +1,4 @@
-export function getCacheHeaders(ttl: number, irreversible: boolean) {
+export function getCacheHeaders(ttl: number, irreversible: boolean = false) {
 	// Maintain a ttl cache by default
 	let browser = `public, max-age=${ttl}, s-max-age=${ttl}`;
 	let cloudflare = `max-age=${ttl}, s-max-age=${ttl}`;

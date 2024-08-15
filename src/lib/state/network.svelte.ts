@@ -155,7 +155,7 @@ export function getNetwork(chain: ChainDefinition, fetchOverride?: typeof window
 	return current.network;
 }
 
-export function getChainDefinitionFromParams(network?: string): ChainDefinition {
+export function getChainDefinitionFromParams(network: string): ChainDefinition {
 	if (network) {
 		const id = chainMapper.toChainId(network);
 		const name = chainIdsToIndices.get(id);
@@ -169,7 +169,7 @@ export function getChainDefinitionFromParams(network?: string): ChainDefinition 
 }
 
 export function getNetworkFromParams(
-	network?: string,
+	network: string,
 	fetchOverride?: typeof window.fetch
 ): NetworkState {
 	const chain = getChainDefinitionFromParams(network);
