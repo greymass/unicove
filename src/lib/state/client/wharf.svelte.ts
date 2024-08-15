@@ -5,6 +5,7 @@ import { getContext, setContext } from 'svelte';
 import type { Checksum256 } from '@wharfkit/antelope';
 import { ChainDefinition, Chains } from '@wharfkit/common';
 import {
+	type AccountCreationPlugin,
 	type LoginOptions,
 	type RestoreArgs,
 	type SerializedSession,
@@ -28,12 +29,13 @@ import {
 	sendErrorToast,
 	sendSuccessToast
 } from '$lib/wharf/transact.svelte';
+import { AccountCreationPluginMetamask } from '@wharfkit/account-creation-plugin-metamask';
 
 const metamaskWalletPlugin = new WalletPluginMetaMask();
 
-console.log({ metamaskWalletPlugin, retrievePublicKey: metamaskWalletPlugin.retrievePublicKey });
-
 const walletPlugins: WalletPlugin[] = [new WalletPluginAnchor(), metamaskWalletPlugin];
+
+const accountCreationPlugins: AccountCreationPlugin[] = [new AccountCreationPluginMetamask()];
 
 // If a local key is provided, add the private key wallet
 if (PUBLIC_LOCAL_SIGNER) {
@@ -57,13 +59,17 @@ export class WharfState {
 		if (!browser) {
 			throw new Error('Wharf should only be used in the browser');
 		}
-		this.sessionKit = new SessionKit({
-			appName: '2nicove',
-			chains: this.chains,
-			ui: new WebRenderer({ minimal: true }),
-			walletPlugins
-		});
-		console.log({ walletPlugins });
+		this.sessionKit = new SessionKit(
+			{
+				appName: '2nicove',
+				chains: this.chains,
+				ui: new WebRenderer({ minimal: true }),
+				walletPlugins
+			},
+			{
+				accountCreationPlugins
+			}
+		);
 		$effect(() => {
 			localStorage.setItem('chainSessions', JSON.stringify(this.chainsSession));
 		});
@@ -73,10 +79,6 @@ export class WharfState {
 		if (!this.sessionKit) {
 			throw new Error('User not initialized');
 		}
-		console.log('login', {
-			walletPlugin: this.sessionKit.walletPlugins[1],
-			retrievePublicKey: this.sessionKit.walletPlugins[1].retrievePublicKey
-		});
 
 		const { session } = await this.sessionKit.login(options);
 		this.session = session;

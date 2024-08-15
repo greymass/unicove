@@ -7,15 +7,18 @@
 	import Card from '$lib/components/layout/box/card.svelte';
 	import Grid from '$lib/components/layout/grid.svelte';
 	import { getWharf } from '$lib/state/client/wharf.svelte';
-	import { snapProvider, isFlask } from '$lib/state/metamask.svelte';
+	import {
+		snapProvider,
+		isFlask,
+		isMetaMaskReady,
+		installedSnap
+	} from '$lib/state/metamask.svelte';
 	import { setSnap, requestSnap } from '$lib/metamask/snap';
 	import { checkIsFlask, getSnapsProvider } from '$lib/metamask/metamask';
 
-	let isMetaMaskInstalled = false;
-	let isSnapInstalled = false;
-	let account: string | null = null;
-
 	let provider: MetaMaskInpageProvider;
+
+	const wharf = getWharf();
 
 	onMount(async () => {
 		snapProvider.set(await getSnapsProvider());
@@ -27,19 +30,13 @@
 		}
 	});
 
-	function checkMetaMaskInstallation() {
-		if (typeof window.ethereum !== 'undefined') {
-			isMetaMaskInstalled = true;
-		}
-	}
-
 	function installMetaMask() {
 		window.open('https://metamask.io/download/', '_blank');
 	}
 
 	async function createAccount() {
 		try {
-			const accountCreationResponse = await getWharf().createAccount();
+			const accountCreationResponse = await wharf.createAccount();
 			alert(`Account created: ${accountCreationResponse.accountName}`);
 		} catch (error) {
 			console.error('Error creating account:', error);
@@ -54,7 +51,7 @@
 	<Grid itemWidth="100%">
 		<Card class="mb-4">
 			<h2 class="mb-2 text-xl font-semibold">Step 1: Install MetaMask</h2>
-			{#if isMetaMaskInstalled}
+			{#if $isMetaMaskReady}
 				<p class="text-green-600">MetaMask is installed.</p>
 			{:else}
 				<p class="mb-2">To get started, you need to install MetaMask:</p>
@@ -64,11 +61,11 @@
 
 		<Card class="mb-4">
 			<h2 class="mb-2 text-xl font-semibold">Step 2: Install Antelope Snap</h2>
-			{#if isSnapInstalled}
+			{#if $installedSnap}
 				<p class="text-green-600">Antelope Snap is installed.</p>
 			{:else}
 				<p class="mb-2">Install the Antelope Snap for MetaMask:</p>
-				<Button on:click={() => requestSnap()} disabled={!isMetaMaskInstalled}
+				<Button on:click={() => requestSnap()} disabled={!$isMetaMaskReady}
 					>Install Antelope Snap</Button
 				>
 			{/if}
@@ -76,14 +73,10 @@
 
 		<Card class="mb-4">
 			<h2 class="mb-2 text-xl font-semibold">Step 3: Create an Account</h2>
-			{#if account}
-				<p class="text-green-600">Account created: {account}</p>
-			{:else}
-				<p class="mb-2">Create your Antelope account:</p>
-				<Button on:click={createAccount} disabled={!isMetaMaskInstalled || !isSnapInstalled}>
-					Create Account
-				</Button>
-			{/if}
+			<p class="mb-2">Create your Antelope account:</p>
+			<Button onclick={createAccount} disabled={!$isMetaMaskReady || !$installedSnap}>
+				Create Account
+			</Button>
 		</Card>
 	</Grid>
 
@@ -93,8 +86,7 @@
 			This signup method allows you to use your MetaMask wallet to interact with Antelope
 			blockchains. The Antelope Snap extends MetaMask's functionality, enabling it to sign Antelope
 			transactions. Once your account is created, you'll be able to use MetaMask to manage your
-			Antelope assets and interact with Antelope-based applications, providing a seamless experience
-			across both Ethereum and Antelope ecosystems.
+			Antelope assets and interact with Antelope-based applications.
 		</p>
 	</Box>
 </Box>
