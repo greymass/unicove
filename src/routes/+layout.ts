@@ -1,7 +1,5 @@
 import { type SeoConfig } from 'svead';
-
 import { i18n } from '$lib/i18n';
-import { getNetworkFromParams } from '$lib/state/network.svelte.js';
 
 function generateMetadata(url: URL): SeoConfig {
 	const modified = new URL(url);
@@ -13,14 +11,9 @@ function generateMetadata(url: URL): SeoConfig {
 	};
 }
 
-export const load = async ({ fetch, params, url }) => {
+export const load = async ({ url }) => {
 	const baseMetaTags = generateMetadata(url);
-	const network = getNetworkFromParams(params.network, fetch);
-	if (!network.loaded) {
-		await network.refresh();
-	}
 	return {
-		baseMetaTags,
-		network
+		baseMetaTags
 	};
 };

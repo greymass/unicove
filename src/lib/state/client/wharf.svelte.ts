@@ -176,11 +176,3 @@ export class WharfState {
 		return result;
 	}
 }
-
-export function getWharf(): WharfState {
-	const contextKey = 'wharf';
-	if (!getContext(contextKey)) {
-		setContext(contextKey, new WharfState());
-	}
-	return getContext(contextKey);
-}

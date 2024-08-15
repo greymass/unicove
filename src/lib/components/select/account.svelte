@@ -1,38 +1,41 @@
 <script lang="ts">
-	import { createDialog, melt } from '@melt-ui/svelte';
+	import { getContext } from 'svelte';
 	import { fade, fly } from 'svelte/transition';
-	import { getWharf } from '$lib/state/client/wharf.svelte';
+	import { createDialog, melt } from '@melt-ui/svelte';
+	import { Session, type SerializedSession } from '@wharfkit/session';
+
+	import { chainMapper } from '$lib/wharf/chains';
+	import type { UnicoveContext } from '$lib/state/client.svelte';
+
 	import { Stack } from '../layout';
 	import Button from '../button/button.svelte';
-	import { Session, type SerializedSession } from '@wharfkit/session';
-	import { chainMapper } from '$lib/wharf/chains';
 
-	const wharf = getWharf();
+	const context = getContext<UnicoveContext>('state');
 
-	let currentSession = $derived(wharf.session);
+	let currentSession = $derived(context.wharf.session);
 
 	function closeDrawer() {
 		$open = false;
 	}
 
 	function addSession() {
-		wharf.login();
+		context.wharf.login();
 	}
 
 	function switchSession(session: SerializedSession) {
-		wharf.switch(session);
+		context.wharf.switch(session);
 		closeDrawer();
 	}
 
 	function removeSession(session?: Session) {
 		if (session) {
-			wharf.logout(session);
+			context.wharf.logout(session);
 		}
 		closeDrawer();
 	}
 
 	function removeAllSessions() {
-		wharf.logout();
+		context.wharf.logout();
 		closeDrawer();
 	}
 
@@ -72,10 +75,10 @@
 	use:melt={$trigger}
 	aria-label="account-switcher-label"
 	id="account-switcher"
-	data-session={!!wharf.session}
+	data-session={!!context.wharf.session}
 >
-	{#if wharf.session}
-		<span class="pointer-events-none z-10 text-skyBlue-950">{wharf.session.actor}</span>
+	{#if context.wharf.session}
+		<span class="pointer-events-none z-10 text-skyBlue-950">{context.wharf.session.actor}</span>
 	{:else}
 		<span class="pointer-events-none z-10 text-skyBlue-950">Connect Wallet</span>
 	{/if}
@@ -108,15 +111,15 @@
 			<section>
 				<Stack class="">
 					<h2 class="h2">Active session</h2>
-					{#if wharf.session}
+					{#if context.wharf.session}
 						<Stack>
 							<Stack class="gap-0">
 								<p class="caption">Account</p>
-								<p>{String(wharf.session.permissionLevel)}</p>
+								<p>{String(context.wharf.session.permissionLevel)}</p>
 							</Stack>
 							<Stack class="gap-0">
 								<p class="caption">Chain</p>
-								<p class="truncate">{String(wharf.session.chain.id)}</p>
+								<p class="truncate">{String(context.wharf.session.chain.id)}</p>
 							</Stack>
 						</Stack>
 					{:else}
@@ -125,18 +128,18 @@
 
 					<h2 class="h2">Controls</h2>
 					<Button onclick={addSession} variant="secondary">Login</Button>
-					{#if wharf.session}
+					{#if context.wharf.session}
 						<Button onclick={() => removeSession(currentSession)} variant="secondary">
-							Logout ({wharf.session.actor})
+							Logout ({context.wharf.session.actor})
 						</Button>
 					{/if}
-					{#if wharf.sessions.length}
+					{#if context.wharf.sessions.length}
 						<Button onclick={removeAllSessions} variant="secondary">Logout (All Accounts)</Button>
 					{/if}
 
 					<h2 class="h2">Sessions</h2>
 					<p>The available sessions that can be used.</p>
-					{#each wharf.sessions as session}
+					{#each context.wharf.sessions as session}
 						<p>
 							<Button onclick={() => switchSession(session)} variant="secondary">
 								<span class="self-start">

@@ -2,11 +2,8 @@
 	import * as m from '$lib/paraglide/messages.js';
 	import Button from '$lib/components/button/button.svelte';
 	import { Box, Center, Stack } from '$lib/components/layout';
-	import { getWharf } from '$lib/state/client/wharf.svelte';
 	import { languageTag } from '$lib/paraglide/runtime';
 	import { chainShortNames } from '$lib/wharf/chains';
-
-	const wharf = getWharf();
 </script>
 
 <Box>

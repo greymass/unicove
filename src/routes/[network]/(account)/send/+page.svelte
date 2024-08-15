@@ -1,27 +1,25 @@
 <script lang="ts">
 	import * as m from '$lib/paraglide/messages.js';
 	import Button from '$lib/components/button/button.svelte';
-	import { getWharf } from '$lib/state/client/wharf.svelte';
 	import { getNetwork } from '$lib/state/network.svelte';
 	import { getContext } from 'svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 
-	const wharf = getWharf();
 	const context = getContext<UnicoveContext>('state');
 
 	async function test() {
-		if (!wharf.session) {
+		if (!context.wharf || !context.wharf.session) {
 			return;
 		}
-		const network = getNetwork(wharf.session.chain);
+		const network = getNetwork(context.wharf.session.chain);
 		if (network.contracts.token) {
 			const action = network.contracts.token.action('transfer', {
-				from: wharf.session.actor,
+				from: context.wharf.session.actor,
 				to: 'teamgreymass',
 				quantity: '0.0001 EOS',
 				memo: 'test'
 			});
-			wharf.transact({ action });
+			context.wharf.transact({ action });
 		} else {
 			alert('Not logged in');
 		}

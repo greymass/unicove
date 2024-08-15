@@ -6,11 +6,16 @@
 	import AccountSelect from '$lib/components/select/account.svelte';
 
 	const context = getContext<UnicoveContext>('state');
+
+	const { network } = $props();
 </script>
 
 <PageMargin>
 	<nav class="flex flex-wrap items-center justify-between gap-4">
-		<a class="grow" href="/">Home</a>
+		<a href="/">Home</a>
+		{#if network}
+			<a class="grow" href="/{network}">{network}</a>
+		{/if}
 
 		<Cluster tag="nav" class="items-center justify-end">
 			{#if context.account}
