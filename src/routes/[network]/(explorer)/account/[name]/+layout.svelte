@@ -5,6 +5,17 @@
 
 	const { children, data } = $props();
 
+	/**
+	 * 1. Overview
+	 * 2. Activity
+	 * 3. Details
+	 *  - Tokens
+	 *  - Permissions
+	 *  - RAM
+	 *  - Resources
+	 *  - Staked
+	 * 4. Data (Maybe this is just an icon? Something obscure, as its not a common use case)
+	 */
 	const tabOptions = $derived.by(() => {
 		const account = String(data.account.name);
 		const network = String(data.account.network);
