@@ -52,6 +52,7 @@
 				setAccount(getNetwork(session.chain), session.actor);
 			} else {
 				account = undefined;
+				network = undefined;
 			}
 		});
 	});
