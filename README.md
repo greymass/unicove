@@ -10,6 +10,7 @@ Add a `.env` file to the root of the project with the following content:
 
 ```
 PUBLIC_LOCAL_SIGNER=""
+PUBLIC_SNAP_ORIGIN=
 API_EOS_HISTORY=https://eos.greymass.com
 API_EOS_CHAIN=https://eos.greymass.com
 API_JUNGLE4_HISTORY=https://jungle4.greymass.com

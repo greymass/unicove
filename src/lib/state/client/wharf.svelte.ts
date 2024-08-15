@@ -125,7 +125,6 @@ export class WharfState {
 		}
 		// TODO: If the current account matches the account we're switching to, just return the current session
 		const session = await this.sessionKit.restore(args, options);
-		console.log({ session });
 		if (session) {
 			this.session = session;
 		}

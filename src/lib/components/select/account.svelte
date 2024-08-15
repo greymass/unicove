@@ -27,10 +27,6 @@
 		context.wharf.login();
 	}
 
-	function signup() {
-		context.wharf.signup();
-	}
-
 	function switchSession(session: SerializedSession) {
 		context.wharf.switch(session);
 		closeDrawer();

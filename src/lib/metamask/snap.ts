@@ -10,7 +10,11 @@ import { PUBLIC_SNAP_ORIGIN } from '$env/static/public';
  * don't. Instead, rename `.env.production.dist` to `.env.production` and set the production URL
  * there. Running `yarn build` will automatically use the production environment variables.
  */
-export const defaultSnapOrigin = PUBLIC_SNAP_ORIGIN ?? `local:http://localhost:8080`;
+export const defaultSnapOrigin = PUBLIC_SNAP_ORIGIN
+	? PUBLIC_SNAP_ORIGIN
+	: `local:http://localhost:8080`;
+
+console.log({ defaultSnapOrigin });
 
 /**
  * Check if a snap ID is a local snap ID.
