@@ -37,7 +37,7 @@
 	const decimals = $derived(String(number).split('.')[1]?.length || 0);
 
 	/** The symbol of the asset */
-	let symbol: Asset.Symbol = $state(Asset.Symbol.from('4,TOKEN'));
+	let symbol: Asset.Symbol = $state(_value.symbol);
 
 	/** The minimum allowed value */
 	const minUnits: Int64 = $derived(
