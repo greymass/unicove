@@ -110,7 +110,9 @@ input (string):   "{input}"
 input (number):   "{number}"
 input (decimals): {decimals}
 input (min):      {min}
+input (minUnits): {minUnits}
 input (max):      {max}
+input (maxUnits): {maxUnits}
 token symbol:     {symbol}
 precision:        {symbol.precision}
 formatted:        {formatted}
