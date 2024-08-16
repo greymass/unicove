@@ -53,14 +53,19 @@ export const setSnap = async () => {
  */
 export const requestSnap = async (id?: string, version?: string) => {
 	const snapId = id || defaultSnapOrigin;
-	const snaps = (await request({
-		method: 'wallet_requestSnaps',
-		params: {
-			[snapId]: version ? { version } : {}
-		}
-	})) as Record<string, Snap>;
 
-	installedSnap.set(snaps?.[snapId] ?? null);
+	try {
+		const snaps = (await request({
+			method: 'wallet_requestSnaps',
+			params: {
+				[snapId]: version ? { version } : {}
+			}
+		})) as Record<string, Snap>;
+
+		installedSnap.set(snaps?.[snapId] ?? null);
+	} catch (error) {
+		alert(`Error requesting "${snapId}" snap. Error: ${(error as { message: string }).message}`);
+	}
 };
 
 export type InvokeSnapParams = {

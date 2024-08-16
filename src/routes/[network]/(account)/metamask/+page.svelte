@@ -1,12 +1,13 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onMount, getContext } from 'svelte';
 	import type { MetaMaskInpageProvider } from '@metamask/providers';
+
+	import type { UnicoveContext } from '$lib/state/client.svelte';
 
 	import Button from '$lib/components/button/button.svelte';
 	import Box from '$lib/components/layout/box/box.svelte';
 	import Card from '$lib/components/layout/box/card.svelte';
 	import Grid from '$lib/components/layout/grid.svelte';
-	import { getWharf } from '$lib/state/client/wharf.svelte';
 	import {
 		snapProvider,
 		isFlask,
@@ -18,7 +19,9 @@
 
 	let provider: MetaMaskInpageProvider;
 
-	const wharf = getWharf();
+	const context = getContext<UnicoveContext>('state');
+
+	const wharf = context.wharf;
 
 	onMount(async () => {
 		snapProvider.set(await getSnapsProvider());
@@ -65,7 +68,7 @@
 				<p class="text-green-600">Antelope Snap is installed.</p>
 			{:else}
 				<p class="mb-2">Install the Antelope Snap for MetaMask:</p>
-				<Button on:click={() => requestSnap()} disabled={!$isMetaMaskReady}
+				<Button onclick={() => requestSnap()} disabled={!$isMetaMaskReady}
 					>Install Antelope Snap</Button
 				>
 			{/if}
