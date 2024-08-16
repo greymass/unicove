@@ -41,12 +41,12 @@
 
 	/** The minimum allowed value */
 	const minUnits: Int64 = $derived(
-		min ? Int64.from(min * Math.pow(10, symbol.precision)) : Int64.from(0)
+		min ? Int64.from(Math.floor(min * Math.pow(10, symbol.precision))) : Int64.from(0)
 	);
 
 	/** The maximum allowed value */
 	const maxUnits: Int64 = $derived(
-		max ? Int64.from(max * Math.pow(10, symbol.precision)) : Int64.from(0)
+		max ? Int64.from(Math.ceil(max * Math.pow(10, symbol.precision))) : Int64.from(0)
 	);
 
 	/** The derived formatted value of the input */
