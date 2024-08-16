@@ -6,6 +6,8 @@ import type {} from '@wharfkit/antelope';
 import { ChainDefinition, Chains } from '@wharfkit/common';
 import {
 	type AccountCreationPlugin,
+	type AccountCreationPluginConfig,
+	type CreateAccountOptions,
 	type LoginOptions,
 	type RestoreArgs,
 	type SerializedSession,
@@ -90,11 +92,11 @@ export class WharfState {
 		this.sessions = await this.sessionKit.getSessions();
 	}
 
-	public async createAccount() {
+	public async createAccount(createAccountOptions?: CreateAccountOptions) {
 		if (!this.sessionKit) {
 			throw new Error('Session Kit not initialized');
 		}
-		return this.sessionKit.createAccount();
+		return this.sessionKit.createAccount(createAccountOptions);
 	}
 
 	public async logout(session?: Session | SerializedSession) {

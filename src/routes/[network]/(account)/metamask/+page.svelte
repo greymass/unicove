@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount, getContext } from 'svelte';
 	import type { MetaMaskInpageProvider } from '@metamask/providers';
+	import { page } from '$app/stores';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 
@@ -16,6 +17,7 @@
 	} from '$lib/state/metamask.svelte';
 	import { setSnap, requestSnap } from '$lib/metamask/snap';
 	import { checkIsFlask, getSnapsProvider } from '$lib/metamask/metamask';
+	import { getChainDefinitionFromParams } from '$lib/state/network.svelte';
 
 	let provider: MetaMaskInpageProvider;
 
@@ -39,7 +41,10 @@
 
 	async function createAccount() {
 		try {
-			const accountCreationResponse = await wharf.createAccount();
+			const accountCreationResponse = await wharf.createAccount({
+				chain: getChainDefinitionFromParams($page.params.network),
+				pluginId: 'account-creation-plugin-metamask'
+			});
 			alert(`Account created: ${accountCreationResponse.accountName}`);
 		} catch (error) {
 			console.error('Error creating account:', error);
