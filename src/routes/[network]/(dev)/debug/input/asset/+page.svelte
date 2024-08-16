@@ -7,7 +7,7 @@
 
 	let input: AssetInput;
 
-	let value = $state(Asset.from('0.0000 TOKEN'));
+	let value = $state(Asset.from('0.0000 FOO'));
 	let valid = $state(false);
 
 	let min = $state(1);
