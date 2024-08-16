@@ -2,6 +2,7 @@
 	import { onMount, getContext } from 'svelte';
 	import type { MetaMaskInpageProvider } from '@metamask/providers';
 	import { page } from '$app/stores';
+	import { checkIsFlask, getSnapsProvider } from '@wharfkit/wallet-plugin-metamask';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 
@@ -15,8 +16,7 @@
 		isMetaMaskReady,
 		installedSnap
 	} from '$lib/state/metamask.svelte';
-	import { setSnap, requestSnap } from '$lib/metamask/snap';
-	import { checkIsFlask, getSnapsProvider } from '$lib/metamask/metamask';
+	import { setSnap, requestSnap } from '$lib/metamask-snap';
 	import { getChainDefinitionFromParams } from '$lib/state/network.svelte';
 
 	let provider: MetaMaskInpageProvider;
@@ -48,7 +48,9 @@
 			alert(`Account created: ${accountCreationResponse.accountName}`);
 		} catch (error) {
 			console.error('Error creating account:', error);
-			alert(`Error creating account: ${error}`);
+			alert(
+				`Error creating account through Metamask. Please make sure that the Antelope snap is enabled.`
+			);
 		}
 	}
 </script>

@@ -1,5 +1,9 @@
-import { installedSnap } from '../state/metamask.svelte';
-import { request } from './request';
+import type { RequestArguments } from '@metamask/providers';
+
+import { snapProvider, installedSnap } from './state/metamask.svelte';
+import { get } from 'svelte/store';
+
+export type Request = (params: RequestArguments) => Promise<unknown | null>;
 
 import { PUBLIC_SNAP_ORIGIN } from '$env/static/public';
 /**
@@ -13,8 +17,6 @@ import { PUBLIC_SNAP_ORIGIN } from '$env/static/public';
 export const defaultSnapOrigin = PUBLIC_SNAP_ORIGIN
 	? PUBLIC_SNAP_ORIGIN
 	: `local:http://localhost:8080`;
-
-console.log({ defaultSnapOrigin });
 
 /**
  * Check if a snap ID is a local snap ID.
@@ -84,4 +86,11 @@ export type InvokeSnapParams = {
 export const invokeSnap = async ({ method, params }: InvokeSnapParams, id?: string) => {
 	const snapId = id || defaultSnapOrigin;
 	return request({ method: 'wallet_invokeSnap', params: { snapId, request: { method, params } } });
+};
+
+const request: Request = async ({ method, params }) => {
+	return get(snapProvider)?.request({
+		method,
+		params
+	} as RequestArguments);
 };
