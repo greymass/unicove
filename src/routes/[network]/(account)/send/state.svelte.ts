@@ -8,6 +8,14 @@ export class SendState {
 
 	public max: number | undefined = $state(undefined);
 
+	reset() {
+		this.from = Name.from('');
+		this.to = Name.from('');
+		this.quantity = Asset.from('0.0000 UNKNOWN');
+		this.memo = '';
+		this.max = undefined;
+	}
+
 	toJSON() {
 		return Serializer.objectify({
 			from: this.from,

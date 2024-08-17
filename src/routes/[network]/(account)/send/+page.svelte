@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { Asset } from '@wharfkit/antelope';
 	import type { Checksum256 } from '@wharfkit/session';
-	import { getContext, onMount } from 'svelte';
+	import { getContext, onMount, tick } from 'svelte';
+	import { FiniteStateMachine, type ActionFn, type Action as StateAction } from 'runed';
 
 	import * as m from '$lib/paraglide/messages.js';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
@@ -18,7 +19,11 @@
 	const { data } = $props();
 	const state: SendState = $state(new SendState());
 	let chain: Checksum256 | undefined = $state();
-	let assetInput: AssetInput;
+	let assetInput: AssetInput = $state();
+
+	let assetRef = $state();
+	let toRef = $state();
+	let memoRef = $state();
 
 	async function test() {
 		if (!context.wharf || !context.wharf.session) {
@@ -56,45 +61,112 @@
 			state.quantity = Asset.fromUnits(0, data.network.systemtoken);
 		}
 	});
+
+	// The state which the submit form can exist in
+	type FormStates = 'to' | 'quantity' | 'memo' | 'confirm';
+
+	// The events which can modify state
+	type FormEvents = 'next' | 'previous' | 'reset';
+
+	const f = new FiniteStateMachine<FormStates, FormEvents>('to', {
+		to: {
+			next: 'quantity',
+			reset,
+			_enter: () => tick().then(() => toRef?.focus())
+		},
+		quantity: {
+			previous: 'to',
+			next: 'memo',
+			reset,
+			_enter: () => tick().then(() => assetRef?.focus())
+		},
+		memo: {
+			previous: 'quantity',
+			next: 'confirm',
+			reset,
+			_enter: () => tick().then(() => memoRef?.focus())
+		},
+		confirm: {
+			previous: 'memo',
+			next: 'to',
+			reset
+		}
+	});
+
+	const next = () => f.send('next');
+	const previous = () => f.send('previous');
+
+	function complete() {
+		alert('complete!');
+	}
+
+	function reset(): FormStates {
+		// Reset the form state itself
+		state.reset();
+
+		// Focus the "to" input field
+		tick().then(() => toRef?.focus());
+
+		// Return the state it should reset to
+		return 'to';
+	}
+
+	function preventDefault(fn: (event: Event) => void) {
+		return function (event: Event) {
+			event.preventDefault();
+			fn.call(this, event);
+		};
+	}
 </script>
 
-<h1>Send/Receive</h1>
-
 {#if chain}
-	<Code>{String(chain)}</Code>
-
-	<h3 class="h3">State</h3>
-	<Code>{JSON.stringify(state, undefined, 2)}</Code>
-
-	<fieldset class="grid gap-3">
-		<Label for="labeled-input">Account</Label>
-		<TextInput bind:value={state.to} />
-	</fieldset>
-
-	<fieldset class="grid gap-3">
-		<Label for="labeled-input">Amount</Label>
-		<AssetInput
-			id="assetInput"
-			bind:this={assetInput}
-			bind:value={state.quantity}
-			max={state.max}
-		/>
-	</fieldset>
-
-	<fieldset class="grid gap-3">
-		<Label for="labeled-input">Memo</Label>
-		<TextInput bind:value={state.memo} />
-	</fieldset>
-
-	<p>
-		Available:
-		{#if context.account}
-			{context.account.balance?.liquid}
-			<Button disabled={!context.account} onclick={max}>Fill Max</Button>
+	<form onsubmit={preventDefault(next)}>
+		<fieldset class="grid gap-3" class:hidden={f.current !== 'to'}>
+			<Label for="labeled-input">Account</Label>
+			<TextInput bind:ref={toRef} bind:value={state.to} />
+		</fieldset>
+		<fieldset class="grid gap-3" class:hidden={f.current !== 'quantity'}>
+			<Label for="labeled-input">Amount</Label>
+			<AssetInput
+				id="assetInput"
+				bind:this={assetInput}
+				bind:ref={assetRef}
+				bind:value={state.quantity}
+				max={state.max}
+			/>
+			<p>
+				Available:
+				{#if context.account}
+					{context.account.balance?.liquid}
+					<Button disabled={!context.account} onclick={preventDefault(max)} type="button"
+						>Fill Max</Button
+					>
+				{:else}
+					0.0000
+				{/if}
+			</p>
+		</fieldset>
+		<fieldset class="grid gap-3" class:hidden={f.current !== 'memo'}>
+			<Label for="labeled-input">Memo</Label>
+			<TextInput bind:ref={memoRef} bind:value={state.memo} placeholder="Enter a memo" />
+		</fieldset>
+		<fieldset class="grid gap-3" class:hidden={f.current !== 'confirm'}>
+			<h3 class="h3">Confirm Transaction</h3>
+			<Code>{JSON.stringify(state, undefined, 2)}</Code>
+		</fieldset>
+		{#if f.current === 'confirm'}
+			<Button type="submit" onclick={preventDefault(complete)}>Submit</Button>
 		{:else}
-			0.0000
+			<Button type="submit" onclick={preventDefault(next)}>Next</Button>
 		{/if}
-	</p>
+		{#if f.current !== 'to'}
+			<Button type="button" onclick={preventDefault(previous)}>Back</Button>
+		{/if}
+	</form>
 
-	<Button disabled={!context.account} onclick={test}>Send</Button>
+	<hr class="my-12" />
+
+	<h3 class="h3">Current State: {f.current}</h3>
+	<Code>{JSON.stringify(state, undefined, 2)}</Code>
+	<Button onclick={() => f.send('reset')}>Reset</Button>
 {/if}
