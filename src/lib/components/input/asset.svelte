@@ -16,6 +16,7 @@
 		autofocus = false,
 		min = $bindable(),
 		max = $bindable(),
+		ref = $bindable(),
 		valid = $bindable(false),
 		value: _value = $bindable(),
 		debug = false
@@ -100,7 +101,7 @@
 		});
 </script>
 
-<TextInput bind:value={input} placeholder={zeroValue.quantity} {autofocus} />
+<TextInput bind:ref bind:value={input} placeholder={zeroValue.quantity} {autofocus} />
 
 {#if debug}
 	<h3>Component State</h3>
