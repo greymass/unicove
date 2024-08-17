@@ -31,7 +31,9 @@
 		if ($snapProvider !== null) {
 			provider = $snapProvider; // gotta be a better way of narrowing this type
 			isFlask.set(await checkIsFlask(provider));
-			setSnap();
+			const { data } = $props();
+
+			setSnap(data.network.snapOrigin);
 		}
 	});
 
@@ -39,13 +41,15 @@
 		window.open('https://metamask.io/download/', '_blank');
 	}
 
-	async function createAccount() {
+	async function createAccountAndLogin() {
 		try {
 			const accountCreationResponse = await wharf.createAccount({
 				chain: getChainDefinitionFromParams($page.params.network),
 				pluginId: 'account-creation-plugin-metamask'
 			});
-			alert(`Account created: ${accountCreationResponse.accountName}`);
+			console.log(`Account created: ${accountCreationResponse.accountName}`);
+
+			await wharf.login();
 		} catch (error) {
 			console.error('Error creating account:', error);
 			alert(
@@ -84,7 +88,7 @@
 		<Card class="mb-4">
 			<h2 class="mb-2 text-xl font-semibold">Step 3: Create an Account</h2>
 			<p class="mb-2">Create your Antelope account:</p>
-			<Button onclick={createAccount} disabled={!$isMetaMaskReady || !$installedSnap}>
+			<Button onclick={createAccountAndLogin} disabled={!$isMetaMaskReady || !$installedSnap}>
 				Create Account
 			</Button>
 		</Card>
