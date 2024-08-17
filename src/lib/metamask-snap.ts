@@ -5,19 +5,6 @@ import { get } from 'svelte/store';
 
 export type Request = (params: RequestArguments) => Promise<unknown | null>;
 
-import { PUBLIC_SNAP_ORIGIN } from '$env/static/public';
-/**
- * The snap origin to use.
- * Will default to the local hosted snap if no value is provided in environment.
- *
- * You may be tempted to change this to the URL where your production snap is hosted, but please
- * don't. Instead, rename `.env.production.dist` to `.env.production` and set the production URL
- * there. Running `yarn build` will automatically use the production environment variables.
- */
-export const defaultSnapOrigin = PUBLIC_SNAP_ORIGIN
-	? PUBLIC_SNAP_ORIGIN
-	: `local:http://localhost:8080`;
-
 /**
  * Check if a snap ID is a local snap ID.
  *
@@ -38,12 +25,12 @@ export type Snap = {
 /**
  * Get the Snap information from MetaMask.
  */
-export const setSnap = async () => {
+export const setSnap = async (snapProvider: string) => {
 	const snaps = (await request({
 		method: 'wallet_getSnaps'
 	})) as GetSnapsResponse;
 
-	installedSnap.set(snaps[defaultSnapOrigin] ?? null);
+	installedSnap.set(snaps[snapProvider] ?? null);
 };
 
 /**
@@ -54,7 +41,7 @@ export const setSnap = async () => {
  * @returns The `wallet_requestSnaps` wrapper.
  */
 export const requestSnap = async (id?: string, version?: string) => {
-	const snapId = id || defaultSnapOrigin;
+	const snapId = id;
 
 	try {
 		const snaps = (await request({
@@ -84,7 +71,7 @@ export type InvokeSnapParams = {
  * @returns The Snap response.
  */
 export const invokeSnap = async ({ method, params }: InvokeSnapParams, id?: string) => {
-	const snapId = id || defaultSnapOrigin;
+	const snapId = id;
 	return request({ method: 'wallet_invokeSnap', params: { snapId, request: { method, params } } });
 };
 

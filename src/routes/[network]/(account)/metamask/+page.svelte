@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount, getContext } from 'svelte';
+	import { goto } from '$app/navigation';
 	import type { MetaMaskInpageProvider } from '@metamask/providers';
 	import { page } from '$app/stores';
 	import { checkIsFlask, getSnapsProvider } from '@wharfkit/wallet-plugin-metamask';
@@ -14,7 +15,8 @@
 		snapProvider,
 		isFlask,
 		isMetaMaskReady,
-		installedSnap
+		installedSnap,
+		snapOrigin
 	} from '$lib/state/metamask.svelte';
 	import { setSnap, requestSnap } from '$lib/metamask-snap';
 	import { getChainDefinitionFromParams } from '$lib/state/network.svelte';
@@ -25,15 +27,24 @@
 
 	const wharf = context.wharf;
 
+	const { data } = $props();
+
 	onMount(async () => {
 		snapProvider.set(await getSnapsProvider());
 
-		if ($snapProvider !== null) {
-			provider = $snapProvider; // gotta be a better way of narrowing this type
-			isFlask.set(await checkIsFlask(provider));
-			const { data } = $props();
+		if (!data.network.snapOrigin) {
+			// We may want to do this in the load function so it works on the SSR side.
+			return goto(`/404`);
+		}
 
-			setSnap(data.network.snapOrigin);
+		if ($snapProvider !== null) {
+			provider = $snapProvider;
+			snapOrigin.set(data.network.snapOrigin);
+			isFlask.set(await checkIsFlask(provider));
+
+			if (data.network.snapOrigin) {
+				setSnap(data.network.snapOrigin);
+			}
 		}
 	});
 
@@ -79,7 +90,7 @@
 				<p class="text-green-600">Antelope Snap is installed.</p>
 			{:else}
 				<p class="mb-2">Install the Antelope Snap for MetaMask:</p>
-				<Button onclick={() => requestSnap()} disabled={!$isMetaMaskReady}
+				<Button onclick={() => requestSnap(data.network.snapOrigin)} disabled={!$isMetaMaskReady}
 					>Install Antelope Snap</Button
 				>
 			{/if}

@@ -17,6 +17,11 @@ import {
 
 import { calculateValue } from './client/account.svelte';
 
+const snapOriginMap = new Map([
+	['eos', 'local:http://localhost:8080'],
+	['jungle4', 'local:http://localhost:8080']
+]);
+
 export class NetworkState {
 	public chain: ChainDefinition;
 	public config: ChainConfig;
@@ -24,6 +29,7 @@ export class NetworkState {
 	public last_update: Date = $state(new Date());
 	public loaded = $state(false);
 	public shortname: string;
+	public snapOrigin?: string = $state();
 
 	public contracts: DefaultContracts;
 
@@ -43,6 +49,7 @@ export class NetworkState {
 		this.chain = chain;
 		this.config = chainConfigs[String(this.chain.id)];
 		this.shortname = chainMapper.toShortName(String(this.chain.id));
+		this.snapOrigin = snapOriginMap.get(this.shortname);
 		if (fetchOverride) {
 			this.fetch = fetchOverride;
 		}
