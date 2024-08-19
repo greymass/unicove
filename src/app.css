@@ -3,6 +3,12 @@
 @tailwind utilities;
 
 @layer components {
+
+	html,
+	body {
+		@apply h-full bg-shark-950 text-white;
+	}
+
 	/* Headings are defined by class instead of tag to preserve semantic html independent of style */
 
 	/* Typography */
@@ -52,7 +58,7 @@
 		@apply flex flex-wrap gap-4;
 	}
 
-	.layout-switcher > * {
+	.layout-switcher>* {
 		flex-grow: 1;
 		flex-basis: calc((var(--switcher-threshold) - 100%) * 999);
 	}
@@ -67,6 +73,11 @@
 	}
 
 	.px-page {
-		@apply px-4 sm:px-11;
+		@apply px-4;
 	}
+
+	.mx-page {
+		@apply px-4;
+	}
+
 }
