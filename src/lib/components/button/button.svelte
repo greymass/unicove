@@ -31,6 +31,7 @@
 		rounded-full
 		px-6
 		py-2.5
+		text-base
 		font-medium
 		leading-4
 
@@ -65,6 +66,7 @@
 		rounded-lg
 		px-8
 		py-3.5
+		text-base
 		font-medium
 		text-mineShaft-100
 		ring-2
@@ -105,6 +107,7 @@
 		bg-skyBlue-500
 		px-8
 		py-3.5
+		text-base
 		font-medium
 		text-skyBlue-950
 
