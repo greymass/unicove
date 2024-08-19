@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { PageMargin } from '$lib/components/layout';
 	import AccountNavigation from '$lib/components/navigation/accountnavigation.svelte';
 	import { page } from '$app/stores';
 
@@ -32,6 +31,4 @@
 
 <AccountNavigation {options} />
 
-<PageMargin>
-	{@render children()}
-</PageMargin>
+{@render children()}

@@ -12,8 +12,8 @@
 	<p>And here we have a block code snippet:</p>
 	<Code>
 		{`{
-	"key": "value",
-	"key2": "someReallyLongValueThatWeCanEitherWrapToTheNextLineOrPresentAScrollbarIfItDoesntFitInThisContainer",
-}`}
+		"key": "value",
+		"key2": "someReallyLongValueThatWeCanEitherWrapToTheNextLineOrPresentAScrollbarIfItDoesntFitInThisContainer",
+	}`}
 	</Code>
 </Stack>

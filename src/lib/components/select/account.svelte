@@ -6,6 +6,7 @@
 
 	import { chainMapper } from '$lib/wharf/chains';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import { chainLogos } from '@wharfkit/session';
 
 	import { Stack } from '../layout';
 	import Button from '../button/button.svelte';
@@ -46,14 +47,18 @@
 		// defaultOpen: true,
 		forceVisible: true
 	});
+
+	$inspect(chainLogos.get(context.wharf));
 </script>
 
 <!-- [@media(any-hover:hover)]:hover:opacity-80 -->
 
 <button
 	class="
-	relative
-	m-0.5
+	fixed
+	right-4
+	z-50
+	my-4
 	flex
 	h-10
 	items-center
@@ -78,6 +83,7 @@
 	data-session={!!context.wharf.session}
 >
 	{#if context.wharf.session}
+		<img src={String(chainLogos.get(context.wharf.session.chain.id))} class="size-6" />
 		<span class="pointer-events-none z-10 text-skyBlue-950">{context.wharf.session.actor}</span>
 	{:else}
 		<span class="pointer-events-none z-10 text-skyBlue-950">Connect Wallet</span>
@@ -140,16 +146,14 @@
 					<h2 class="h2">Sessions</h2>
 					<p>The available sessions that can be used.</p>
 					{#each context.wharf.sessions as session}
-						<p>
-							<Button onclick={() => switchSession(session)} variant="secondary">
-								<span class="self-start">
-									{session.actor}@{session.permission}
-								</span>
-								<span class="truncate">
-									({chainMapper.toShortName(session.chain)})
-								</span>
-							</Button>
-						</p>
+						<Button onclick={() => switchSession(session)} variant="secondary">
+							<span class="self-start">
+								{session.actor}@{session.permission}
+							</span>
+							<span class="truncate">
+								({chainMapper.toShortName(session.chain)})
+							</span>
+						</Button>
 					{/each}
 				</Stack>
 			</section>
@@ -157,9 +161,9 @@
 				use:melt={$close}
 				aria-label="Close"
 				class="absolute right-[10px] top-[10px] inline-flex h-6 w-6
-				appearance-none items-center justify-center rounded-full text-solar-800
-				hover:bg-solar-100 focus:shadow-solar-400 focus:outline-none focus:ring-2
-				focus:ring-solar-400"
+				appearance-none items-center justify-center rounded-full text-skyBlue-800
+				hover:bg-skyBlue-100 focus:shadow-skyBlue-400 focus:outline-none focus:ring-2
+				focus:ring-skyBlue-400"
 			>
 				X
 			</button>
