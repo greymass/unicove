@@ -48,7 +48,7 @@
 		forceVisible: true
 	});
 
-	$inspect(chainLogos.get(context.wharf));
+	let logo = $derived(chainLogos.get(String(context.wharf.session?.chain.id)) || '');
 </script>
 
 <!-- [@media(any-hover:hover)]:hover:opacity-80 -->
@@ -81,7 +81,7 @@
 	data-session={!!context.wharf.session}
 >
 	{#if context.wharf.session}
-		<img src={String(chainLogos.get(context.wharf.session.chain.id))} class="size-6" />
+		<img src={String(logo)} alt={context.wharf.session.chain.name} class="w-4" />
 		<span class="pointer-events-none z-10">{context.wharf.session.actor}</span>
 	{:else}
 		<span class="pointer-events-none z-10">Connect Wallet</span>
