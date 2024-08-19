@@ -55,22 +55,20 @@
 
 <button
 	class="
-	fixed
-	right-4
+	relative
 	z-50
-	my-4
 	flex
 	h-10
 	items-center
 	justify-between
 	gap-2
 	text-nowrap
-	rounded-lg
-	bg-skyBlue-500
-	px-8
-	py-3.5
+	text-base
 	font-medium
 	transition-opacity
+	hover:border-y
+	hover:border-b-skyBlue-400
+	hover:border-t-transparent
 	focus:outline-transparent
 	focus-visible:outline
 	focus-visible:ring-2
@@ -84,13 +82,13 @@
 >
 	{#if context.wharf.session}
 		<img src={String(chainLogos.get(context.wharf.session.chain.id))} class="size-6" />
-		<span class="pointer-events-none z-10 text-skyBlue-950">{context.wharf.session.actor}</span>
+		<span class="pointer-events-none z-10">{context.wharf.session.actor}</span>
 	{:else}
-		<span class="pointer-events-none z-10 text-skyBlue-950">Connect Wallet</span>
+		<span class="pointer-events-none z-10">Connect Wallet</span>
 	{/if}
-	<div
-		class="absolute inset-0 rounded-[inherit] border-2 border-white bg-white opacity-0 transition-opacity hover:opacity-20 active:border-black active:bg-black"
-	></div>
+	<!-- <div -->
+	<!-- 	class="absolute inset-0 rounded-[inherit] border-2 border-white bg-white opacity-0 transition-opacity hover:opacity-20 active:border-black active:bg-black" -->
+	<!-- ></div> -->
 </button>
 
 {#if $open}

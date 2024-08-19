@@ -31,15 +31,14 @@
 	);
 </script>
 
-<header class="flex flex-wrap justify-between gap-6 pb-10 pt-2">
-	<Stack class="gap-1">
-		<h1 class="h2 text-neutral-200/60">Account</h1>
+<header class="layout-stack gap-6">
+	<Stack class="gap-2">
+		<h1 class="h2 leading-none text-neutral-200/60">Account</h1>
 		{#if data.account}
 			<h2 class="h1 font-bold text-white">{data.account.name}</h2>
 		{/if}
 	</Stack>
-
-	<PillGroup {options} class="sm:self-end" />
+	<PillGroup {options} class="mb-6" />
 </header>
 
 {@render children()}
