@@ -8,13 +8,15 @@
 
 	import { page } from '$app/stores';
 	import { i18n } from '$lib/i18n';
-	import Navigation from '$lib/components/navigation/appnavigation.svelte';
+	import Navigation from '$lib/components/navigation/mobilenavigation.svelte';
 	import Toaster from '$lib/components/toast/toaster.svelte';
 	import { AccountState } from '$lib/state/client/account.svelte';
 	import { getNetwork, NetworkState } from '$lib/state/network.svelte';
 	import type { NameType } from '@wharfkit/antelope';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { WharfState } from '$lib/state/client/wharf.svelte';
+	import Sidemenu from '$lib/components/navigation/sidemenu.svelte';
+	import AccountSwitcher from '$lib/components/select/account.svelte';
 
 	let { children, data } = $props();
 
@@ -72,6 +74,18 @@
 <Toaster />
 
 <ParaglideJS {i18n}>
-	<Navigation {network} />
-	{@render children()}
+	<div
+		class="relative grid h-full grid-cols-1 grid-rows-[minmax(0,1fr)_auto] md:grid-cols-[auto_minmax(0,1fr)]"
+	>
+		<AccountSwitcher />
+		<aside class="relative hidden md:block">
+			<Sidemenu {network} />
+		</aside>
+		<main class="px-4 py-4">
+			{@render children()}
+		</main>
+		<aside class="relative md:hidden">
+			<Navigation {network} />
+		</aside>
+	</div>
 </ParaglideJS>
