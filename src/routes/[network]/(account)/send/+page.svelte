@@ -149,6 +149,7 @@
 				bind:this={assetInput}
 				bind:ref={assetRef}
 				bind:value={state.quantity}
+				bind:valid={assetValid}
 				max={state.max}
 			/>
 			<p>
