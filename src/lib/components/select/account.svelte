@@ -86,9 +86,6 @@
 	{:else}
 		<span class="pointer-events-none z-10">Connect Wallet</span>
 	{/if}
-	<!-- <div -->
-	<!-- 	class="absolute inset-0 rounded-[inherit] border-2 border-white bg-white opacity-0 transition-opacity hover:opacity-20 active:border-black active:bg-black" -->
-	<!-- ></div> -->
 </button>
 
 {#if $open}
