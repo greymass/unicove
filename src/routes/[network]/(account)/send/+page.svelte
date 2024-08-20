@@ -11,9 +11,12 @@
 	import Button from '$lib/components/button/button.svelte';
 	import Code from '$lib/components/code.svelte';
 	import Label from '$lib/components/input/label.svelte';
+	import PillGroup from '$lib/components/navigation/pillgroup.svelte';
+	import Stack from '$lib/components/layout/stack.svelte';
 	import TextInput from '$lib/components/input/textinput.svelte';
 
 	import { SendState } from './state.svelte';
+	import { page } from '$app/stores';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
@@ -24,6 +27,24 @@
 	let assetRef = $state();
 	let toRef = $state();
 	let memoRef = $state();
+
+	const tabOptions = $derived.by(() => {
+		const account = String(context.account?.name);
+		const network = String(context.account?.network);
+		return [
+			{ href: `/${network}/send`, text: 'Send' },
+			{ href: `/${network}/receive`, text: 'Receive' }
+		];
+	});
+
+	let currentTab = $derived($page.url.pathname.split('/').slice(2)[3]);
+
+	let options = $derived(
+		tabOptions.map((option) => ({
+			...option,
+			active: option.href.split('/').slice(2)[2] === currentTab
+		}))
+	);
 
 	async function test() {
 		if (!context.wharf || !context.wharf.session) {
@@ -134,6 +155,22 @@
 		};
 	}
 </script>
+
+<header class="layout-stack gap-6">
+	<PillGroup {options} class="mb-6" />
+	<Stack class="gap-2">
+		<h1 class="h1 font-bold leading-none text-white">Send</h1>
+		{#if f.current === 'to'}
+			<h3 class="h3 text-white/60">Add recipient</h3>
+		{:else if f.current === 'quantity'}
+			<h3 class="h3 text-white/60">Enter the amount of tokens</h3>
+		{:else if f.current === 'memo'}
+			<h3 class="h3 text-white/60">Add an optional memo</h3>
+		{:else if f.current === 'confirm'}
+			<h3 class="h3 text-white/60">Confirm this is correct</h3>
+		{/if}
+	</Stack>
+</header>
 
 {#if chain}
 	{toValid} / {assetValid} / {memoValid}
