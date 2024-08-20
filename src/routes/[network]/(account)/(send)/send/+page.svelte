@@ -10,6 +10,7 @@
 	import Button from '$lib/components/button/button.svelte';
 	import Code from '$lib/components/code.svelte';
 	import Label from '$lib/components/input/label.svelte';
+	import Progress from '$lib/components/progress.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
 	import TextInput from '$lib/components/input/textinput.svelte';
 
@@ -110,6 +111,20 @@
 	});
 
 	const allValid = $derived(toValid && assetValid && memoValid);
+
+	const progress = $derived.by(() => {
+		switch (f.current) {
+			case 'to':
+				return 1;
+			case 'quantity':
+				return 2;
+			case 'memo':
+				return 3;
+			case 'confirm':
+				return 4;
+		}
+	});
+
 	const next = () => f.send('next');
 	const previous = () => f.send('previous');
 
@@ -150,6 +165,8 @@
 		{/if}
 	</Stack>
 </header>
+
+<Progress currentStep={progress} maxStep={3} />
 
 <form onsubmit={preventDefault(next)}>
 	<fieldset class="grid gap-3" class:hidden={f.current !== 'to'}>
