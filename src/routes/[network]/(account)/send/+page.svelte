@@ -70,19 +70,19 @@
 
 	const f = new FiniteStateMachine<FormStates, FormEvents>('to', {
 		to: {
-			next: 'quantity',
+			next: () => (toValid ? 'quantity' : 'to'),
 			reset,
 			_enter: () => tick().then(() => toRef?.focus())
 		},
 		quantity: {
 			previous: 'to',
-			next: 'memo',
+			next: () => (assetValid ? 'memo' : 'quantity'),
 			reset,
 			_enter: () => tick().then(() => assetRef?.focus())
 		},
 		memo: {
 			previous: 'quantity',
-			next: 'confirm',
+			next: () => (memoValid ? 'confirm' : 'memo'),
 			reset,
 			_enter: () => tick().then(() => memoRef?.focus())
 		},
@@ -93,6 +93,22 @@
 		}
 	});
 
+	let assetValid = $state(false);
+	let memoValid = $state(true); // TODO: Implement validation
+	let toValid = $state(true); // TODO: Implement validation
+
+	const nextValid = $derived.by(() => {
+		switch (f.current) {
+			case 'to':
+				return toValid;
+			case 'quantity':
+				return assetValid;
+			case 'memo':
+				return memoValid;
+		}
+	});
+
+	const allValid = $derived(toValid && assetValid && memoValid);
 	const next = () => f.send('next');
 	const previous = () => f.send('previous');
 
@@ -120,9 +136,10 @@
 </script>
 
 {#if chain}
+	{toValid} / {assetValid} / {memoValid}
 	<form onsubmit={preventDefault(next)}>
 		<fieldset class="grid gap-3" class:hidden={f.current !== 'to'}>
-			<Label for="labeled-input">Account</Label>
+			<Label for="labeled-input">Account Name</Label>
 			<TextInput bind:ref={toRef} bind:value={state.to} />
 		</fieldset>
 		<fieldset class="grid gap-3" class:hidden={f.current !== 'quantity'}>
@@ -148,16 +165,20 @@
 		</fieldset>
 		<fieldset class="grid gap-3" class:hidden={f.current !== 'memo'}>
 			<Label for="labeled-input">Memo</Label>
-			<TextInput bind:ref={memoRef} bind:value={state.memo} placeholder="Enter a memo" />
+			<TextInput
+				bind:ref={memoRef}
+				bind:value={state.memo}
+				placeholder="Record a public memo for this transfer (optional)"
+			/>
 		</fieldset>
 		<fieldset class="grid gap-3" class:hidden={f.current !== 'confirm'}>
 			<h3 class="h3">Confirm Transaction</h3>
 			<Code>{JSON.stringify(state, undefined, 2)}</Code>
 		</fieldset>
 		{#if f.current === 'confirm'}
-			<Button type="submit" onclick={preventDefault(complete)}>Submit</Button>
+			<Button type="submit" onclick={preventDefault(complete)} disabled={!allValid}>Submit</Button>
 		{:else}
-			<Button type="submit" onclick={preventDefault(next)}>Next</Button>
+			<Button type="submit" onclick={preventDefault(next)} disabled={!nextValid}>Next</Button>
 		{/if}
 		{#if f.current !== 'to'}
 			<Button type="button" onclick={preventDefault(previous)}>Back</Button>
