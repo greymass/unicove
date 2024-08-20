@@ -6,7 +6,7 @@
 
 	import { chainMapper } from '$lib/wharf/chains';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import { chainLogos } from '@wharfkit/session';
+	import { chainLogos } from '@wharfkit/common';
 
 	import { Stack } from '../layout';
 	import Button from '../button/button.svelte';
