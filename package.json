@@ -66,6 +66,7 @@
 	},
 	"resolutions": {
 		"@wharfkit/antelope": "^1.0.11",
+		"@wharfkit/common": "^1.2.5",
 		"@wharfkit/session": "^1.4.0"
 	}
 }
