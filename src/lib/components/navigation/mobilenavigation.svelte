@@ -4,12 +4,17 @@
 	import { createDialog, melt } from '@melt-ui/svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import SideMenu from '$lib/components/navigation/sidemenu.svelte';
+	import { Menu, Search } from 'lucide-svelte';
 
 	const context = getContext<UnicoveContext>('state');
 
 	const { network } = $props();
 
 	let innerWidth = $state(0);
+
+	function closeMenu() {
+		$open = false;
+	}
 
 	$effect(() => {
 		if (innerWidth < 768) {
@@ -31,7 +36,7 @@
 <!-- [@media(any-hover:hover)]:hover:opacity-80 -->
 
 <menu
-	class="fixed bottom-0 z-50 grid w-full grid-cols-3 items-center justify-items-center bg-shark-950 md:hidden"
+	class="fixed bottom-0 z-50 flex w-full items-center justify-between justify-items-center bg-shark-950 px-4 py-2 md:hidden"
 >
 	<button
 		class="
@@ -54,14 +59,37 @@
 		focus-visible:ring-solar-500
 		"
 		use:melt={$trigger}
-		aria-label="account-switcher-label"
-		id="account-switcher"
+		aria-label="menu-open"
+		id="menu-open"
 		data-session={!!context.wharf.session}
 	>
-		Menu
+		<Menu /><span>Menu</span>
 	</button>
-	<p>Unicove</p>
-	<p>Search</p>
+	<button
+		class="
+		relative
+		flex
+		h-10
+		items-center
+		justify-between
+		gap-2
+		text-nowrap
+		rounded-lg
+		py-3.5
+		text-base
+		font-medium
+		transition-opacity
+		focus:outline-transparent
+		focus-visible:outline
+		focus-visible:ring-2
+		focus-visible:ring-inset
+		focus-visible:ring-solar-500
+		"
+		aria-label="search-open"
+		id="search-open"
+	>
+		<Search /><span>Search</span>
+	</button>
 </menu>
 
 {#if $open}
@@ -91,7 +119,7 @@
 				opacity: 1
 			}}
 		>
-			<SideMenu {network} />
+			<SideMenu callbackFn={closeMenu} />
 		</div>
 	</div>
 {/if}
