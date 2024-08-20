@@ -18,7 +18,7 @@
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
-	const state: SendState = $state(new SendState());
+	const state: SendState = $state(new SendState(data.network.chain));
 	let chain: Checksum256 | undefined = $state(data.network.chain.id);
 	let assetInput: AssetInput = $state();
 

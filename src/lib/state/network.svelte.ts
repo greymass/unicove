@@ -30,7 +30,6 @@ export class NetworkState {
 	public ramstate?: RAMState = $state();
 	public resources?: Resources = $state();
 	public rexstate?: REXState = $state();
-	public systemtoken?: Asset.Symbol = $state();
 	public tokenstate?: DelphiOracleTypes.datapoints = $state();
 	public rexprice = $derived.by(() => undefined);
 	public tokenprice = $derived.by(() => {
@@ -83,7 +82,6 @@ export class NetworkState {
 		try {
 			this.ramstate = RAMState.from(json.ramstate);
 			this.rexstate = REXState.from(json.rexstate);
-			this.systemtoken = Asset.Symbol.from(json.systemtoken);
 		} catch (error) {
 			console.log(error);
 			console.log(json);
@@ -126,7 +124,6 @@ export class NetworkState {
 			ramprice: this.ramprice,
 			rexstate: this.rexstate,
 			sampleAccount: this.resources?.sampleAccount,
-			systemtoken: this.systemtoken,
 			tokenprice: this.tokenprice,
 			tokenstate: this.tokenstate
 		};
