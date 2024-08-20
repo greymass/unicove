@@ -2,16 +2,14 @@
 	import { Asset } from '@wharfkit/antelope';
 	import type { Checksum256 } from '@wharfkit/session';
 	import { getContext, onMount, tick } from 'svelte';
-	import { FiniteStateMachine, type ActionFn, type Action as StateAction } from 'runed';
+	import { FiniteStateMachine } from 'runed';
 
-	import * as m from '$lib/paraglide/messages.js';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 
 	import AssetInput from '$lib/components/input/asset.svelte';
 	import Button from '$lib/components/button/button.svelte';
 	import Code from '$lib/components/code.svelte';
 	import Label from '$lib/components/input/label.svelte';
-	import PillGroup from '$lib/components/navigation/pillgroup.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
 	import TextInput from '$lib/components/input/textinput.svelte';
 
@@ -27,24 +25,6 @@
 	let assetRef = $state();
 	let toRef = $state();
 	let memoRef = $state();
-
-	const tabOptions = $derived.by(() => {
-		const account = String(context.account?.name);
-		const network = String(context.account?.network);
-		return [
-			{ href: `/${network}/send`, text: 'Send' },
-			{ href: `/${network}/receive`, text: 'Receive' }
-		];
-	});
-
-	let currentTab = $derived($page.url.pathname.split('/').slice(2)[3]);
-
-	let options = $derived(
-		tabOptions.map((option) => ({
-			...option,
-			active: option.href.split('/').slice(2)[2] === currentTab
-		}))
-	);
 
 	async function test() {
 		if (!context.wharf || !context.wharf.session) {
@@ -157,7 +137,6 @@
 </script>
 
 <header class="layout-stack gap-6">
-	<PillGroup {options} class="mb-6" />
 	<Stack class="gap-2">
 		<h1 class="h1 font-bold leading-none text-white">Send</h1>
 		{#if f.current === 'to'}
@@ -173,7 +152,6 @@
 </header>
 
 {#if chain}
-	{toValid} / {assetValid} / {memoValid}
 	<form onsubmit={preventDefault(next)}>
 		<fieldset class="grid gap-3" class:hidden={f.current !== 'to'}>
 			<Label for="labeled-input">Account Name</Label>
@@ -223,9 +201,13 @@
 		{/if}
 	</form>
 
-	<hr class="my-12" />
-
-	<h3 class="h3">Current State: {f.current}</h3>
-	<Code>{JSON.stringify(state, undefined, 2)}</Code>
+	<h3 class="h3">Debugging</h3>
+	<Code
+		>{JSON.stringify(
+			{ state, current: f.current, valid: { toValid, assetValid, memoValid } },
+			undefined,
+			2
+		)}</Code
+	>
 	<Button onclick={() => f.send('reset')}>Reset</Button>
 {/if}
