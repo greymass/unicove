@@ -19,7 +19,7 @@
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
 	const state: SendState = $state(new SendState());
-	let chain: Checksum256 | undefined = $state();
+	let chain: Checksum256 | undefined = $state(data.network.chain.id);
 	let assetInput: AssetInput = $state();
 
 	let assetRef = $state();
@@ -151,63 +151,61 @@
 	</Stack>
 </header>
 
-{#if chain}
-	<form onsubmit={preventDefault(next)}>
-		<fieldset class="grid gap-3" class:hidden={f.current !== 'to'}>
-			<Label for="labeled-input">Account Name</Label>
-			<TextInput bind:ref={toRef} bind:value={state.to} />
-		</fieldset>
-		<fieldset class="grid gap-3" class:hidden={f.current !== 'quantity'}>
-			<Label for="labeled-input">Amount</Label>
-			<AssetInput
-				id="assetInput"
-				bind:this={assetInput}
-				bind:ref={assetRef}
-				bind:value={state.quantity}
-				bind:valid={assetValid}
-				max={state.max}
-			/>
-			<p>
-				Available:
-				{#if context.account}
-					{context.account.balance?.liquid}
-					<Button disabled={!context.account} onclick={preventDefault(max)} type="button"
-						>Fill Max</Button
-					>
-				{:else}
-					0.0000
-				{/if}
-			</p>
-		</fieldset>
-		<fieldset class="grid gap-3" class:hidden={f.current !== 'memo'}>
-			<Label for="labeled-input">Memo</Label>
-			<TextInput
-				bind:ref={memoRef}
-				bind:value={state.memo}
-				placeholder="Record a public memo for this transfer (optional)"
-			/>
-		</fieldset>
-		<fieldset class="grid gap-3" class:hidden={f.current !== 'confirm'}>
-			<h3 class="h3">Confirm Transaction</h3>
-			<Code>{JSON.stringify(state, undefined, 2)}</Code>
-		</fieldset>
-		{#if f.current === 'confirm'}
-			<Button type="submit" onclick={preventDefault(complete)} disabled={!allValid}>Submit</Button>
-		{:else}
-			<Button type="submit" onclick={preventDefault(next)} disabled={!nextValid}>Next</Button>
-		{/if}
-		{#if f.current !== 'to'}
-			<Button type="button" onclick={preventDefault(previous)}>Back</Button>
-		{/if}
-	</form>
+<form onsubmit={preventDefault(next)}>
+	<fieldset class="grid gap-3" class:hidden={f.current !== 'to'}>
+		<Label for="labeled-input">Account Name</Label>
+		<TextInput bind:ref={toRef} bind:value={state.to} />
+	</fieldset>
+	<fieldset class="grid gap-3" class:hidden={f.current !== 'quantity'}>
+		<Label for="labeled-input">Amount</Label>
+		<AssetInput
+			id="assetInput"
+			bind:this={assetInput}
+			bind:ref={assetRef}
+			bind:value={state.quantity}
+			bind:valid={assetValid}
+			max={state.max}
+		/>
+		<p>
+			Available:
+			{#if context.account}
+				{context.account.balance?.liquid}
+				<Button disabled={!context.account} onclick={preventDefault(max)} type="button"
+					>Fill Max</Button
+				>
+			{:else}
+				0.0000
+			{/if}
+		</p>
+	</fieldset>
+	<fieldset class="grid gap-3" class:hidden={f.current !== 'memo'}>
+		<Label for="labeled-input">Memo</Label>
+		<TextInput
+			bind:ref={memoRef}
+			bind:value={state.memo}
+			placeholder="Record a public memo for this transfer (optional)"
+		/>
+	</fieldset>
+	<fieldset class="grid gap-3" class:hidden={f.current !== 'confirm'}>
+		<h3 class="h3">Confirm Transaction</h3>
+		<Code>{JSON.stringify(state, undefined, 2)}</Code>
+	</fieldset>
+	{#if f.current === 'confirm'}
+		<Button type="submit" onclick={preventDefault(complete)} disabled={!allValid}>Submit</Button>
+	{:else}
+		<Button type="submit" onclick={preventDefault(next)} disabled={!nextValid}>Next</Button>
+	{/if}
+	{#if f.current !== 'to'}
+		<Button type="button" onclick={preventDefault(previous)}>Back</Button>
+	{/if}
+</form>
 
-	<h3 class="h3">Debugging</h3>
-	<Code
-		>{JSON.stringify(
-			{ state, current: f.current, valid: { toValid, assetValid, memoValid } },
-			undefined,
-			2
-		)}</Code
-	>
-	<Button onclick={() => f.send('reset')}>Reset</Button>
-{/if}
+<h3 class="h3">Debugging</h3>
+<Code
+	>{JSON.stringify(
+		{ state, current: f.current, valid: { toValid, assetValid, memoValid } },
+		undefined,
+		2
+	)}</Code
+>
+<Button onclick={() => f.send('reset')}>Reset</Button>
