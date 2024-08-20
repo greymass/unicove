@@ -6,6 +6,7 @@
 
 	import { chainMapper } from '$lib/wharf/chains';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import { chainLogos } from '@wharfkit/common';
 
 	import { Stack } from '../layout';
 	import Button from '../button/button.svelte';
@@ -46,6 +47,8 @@
 		// defaultOpen: true,
 		forceVisible: true
 	});
+
+	let logo = $derived(chainLogos.get(String(context.wharf.session?.chain.id)) || '');
 </script>
 
 <!-- [@media(any-hover:hover)]:hover:opacity-80 -->
@@ -53,19 +56,19 @@
 <button
 	class="
 	relative
-	m-0.5
+	z-50
 	flex
 	h-10
 	items-center
 	justify-between
 	gap-2
 	text-nowrap
-	rounded-lg
-	bg-skyBlue-500
-	px-8
-	py-3.5
+	text-base
 	font-medium
 	transition-opacity
+	hover:border-y
+	hover:border-b-skyBlue-400
+	hover:border-t-transparent
 	focus:outline-transparent
 	focus-visible:outline
 	focus-visible:ring-2
@@ -78,13 +81,11 @@
 	data-session={!!context.wharf.session}
 >
 	{#if context.wharf.session}
-		<span class="pointer-events-none z-10 text-skyBlue-950">{context.wharf.session.actor}</span>
+		<img src={String(logo)} alt={context.wharf.session.chain.name} class="w-4" />
+		<span class="pointer-events-none z-10">{context.wharf.session.actor}</span>
 	{:else}
-		<span class="pointer-events-none z-10 text-skyBlue-950">Connect Wallet</span>
+		<span class="pointer-events-none z-10">Connect Wallet</span>
 	{/if}
-	<div
-		class="absolute inset-0 rounded-[inherit] border-2 border-white bg-white opacity-0 transition-opacity hover:opacity-20 active:border-black active:bg-black"
-	></div>
 </button>
 
 {#if $open}
@@ -140,16 +141,14 @@
 					<h2 class="h2">Sessions</h2>
 					<p>The available sessions that can be used.</p>
 					{#each context.wharf.sessions as session}
-						<p>
-							<Button onclick={() => switchSession(session)} variant="secondary">
-								<span class="self-start">
-									{session.actor}@{session.permission}
-								</span>
-								<span class="truncate">
-									({chainMapper.toShortName(session.chain)})
-								</span>
-							</Button>
-						</p>
+						<Button onclick={() => switchSession(session)} variant="secondary">
+							<span class="self-start">
+								{session.actor}@{session.permission}
+							</span>
+							<span class="truncate">
+								({chainMapper.toShortName(session.chain)})
+							</span>
+						</Button>
 					{/each}
 				</Stack>
 			</section>
@@ -157,9 +156,9 @@
 				use:melt={$close}
 				aria-label="Close"
 				class="absolute right-[10px] top-[10px] inline-flex h-6 w-6
-				appearance-none items-center justify-center rounded-full text-solar-800
-				hover:bg-solar-100 focus:shadow-solar-400 focus:outline-none focus:ring-2
-				focus:ring-solar-400"
+				appearance-none items-center justify-center rounded-full text-skyBlue-800
+				hover:bg-skyBlue-100 focus:shadow-skyBlue-400 focus:outline-none focus:ring-2
+				focus:ring-skyBlue-400"
 			>
 				X
 			</button>

@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import Pagemargin from '$lib/components/layout/box/pagemargin.svelte';
 	import AccountNavigation from '$lib/components/navigation/accountnavigation.svelte';
 
 	let { children, data } = $props();
@@ -24,6 +23,4 @@
 	]}
 />
 
-<Pagemargin>
-	{@render children()}
-</Pagemargin>
+{@render children()}

@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 @layer components {
+	html,
+	body {
+		@apply h-full bg-shark-950 text-white;
+	}
+
 	/* Headings are defined by class instead of tag to preserve semantic html independent of style */
 
 	/* Typography */
@@ -19,15 +24,15 @@
 	}
 
 	.h4 {
-		@apply text-lg leading-7 font-medium;
+		@apply text-lg font-medium leading-7;
 	}
 
 	.h5 {
-		@apply text-base leading-snug font-medium;
+		@apply text-base font-medium leading-snug;
 	}
 
 	.caption {
-		@apply text-base text-gray-500 font-medium;
+		@apply text-base font-medium text-gray-500;
 	}
 
 	p {
@@ -37,7 +42,7 @@
 	/* Layout */
 
 	.card {
-		@apply rounded-xl grid gap-4 p-5 bg-shark-900/20;
+		@apply grid gap-4 rounded-xl bg-shark-900/20 p-5;
 	}
 
 	.layout-stack {
@@ -45,7 +50,7 @@
 	}
 
 	.layout-center {
-		@apply box-content max-w-prose mx-auto;
+		@apply mx-auto box-content max-w-prose;
 	}
 
 	.layout-switcher {
@@ -67,6 +72,10 @@
 	}
 
 	.px-page {
-		@apply px-4 sm:px-11;
+		@apply px-4;
+	}
+
+	.mx-page {
+		@apply px-4;
 	}
 }
