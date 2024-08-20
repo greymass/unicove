@@ -170,13 +170,13 @@
 
 <form onsubmit={preventDefault(next)}>
 	<fieldset class="grid gap-3" class:hidden={f.current !== 'to'}>
-		<Label for="labeled-input">Account Name</Label>
-		<TextInput bind:ref={toRef} bind:value={state.to} />
+		<Label for="to-input">Account Name</Label>
+		<TextInput bind:ref={toRef} bind:value={state.to} id="to-input" />
 	</fieldset>
 	<fieldset class="grid gap-3" class:hidden={f.current !== 'quantity'}>
-		<Label for="labeled-input">Amount</Label>
+		<Label for="quantity-input">Amount</Label>
 		<AssetInput
-			id="assetInput"
+			id="quantity-input"
 			bind:this={assetInput}
 			bind:ref={assetRef}
 			bind:value={state.quantity}
@@ -196,8 +196,9 @@
 		</p>
 	</fieldset>
 	<fieldset class="grid gap-3" class:hidden={f.current !== 'memo'}>
-		<Label for="labeled-input">Memo</Label>
+		<Label for="memo-input">Memo</Label>
 		<TextInput
+			id="memo-input"
 			bind:ref={memoRef}
 			bind:value={state.memo}
 			placeholder="Record a public memo for this transfer (optional)"
