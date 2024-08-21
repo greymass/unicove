@@ -19,7 +19,8 @@
 		ref = $bindable(),
 		valid = $bindable(false),
 		value: _value = $bindable(),
-		debug = false
+		debug = false,
+		...props
 	}: AssetInputProps = $props();
 
 	/** A zero-value version of the passed in asset for placeholder */
@@ -105,7 +106,7 @@
 		});
 </script>
 
-<TextInput bind:ref bind:value={input} placeholder={zeroValue.quantity} {autofocus} />
+<TextInput bind:ref bind:value={input} placeholder={zeroValue.quantity} {autofocus} {...props} />
 
 {#if debug}
 	<h3>Component State</h3>
