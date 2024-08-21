@@ -25,7 +25,6 @@
 		data-active={props.active}
 		class="
 		relative
-		m-0.5
 		inline-block
 		text-nowrap
 		rounded-full
@@ -61,7 +60,7 @@
 		disabled={props.disabled}
 		class="
 		relative
-		m-0.5
+		grow
 		text-nowrap
 		rounded-lg
 		px-8
@@ -72,6 +71,7 @@
 		ring-2
 		ring-inset
 		ring-mineShaft-600
+		transition-all
 
 		focus-visible:outline
 		focus-visible:outline-transparent
@@ -101,7 +101,7 @@
 		disabled={props.disabled}
 		class="
 		relative
-		m-0.5
+		grow
 		text-nowrap
 		rounded-lg
 		bg-skyBlue-500
@@ -110,6 +110,7 @@
 		text-base
 		font-medium
 		text-skyBlue-950
+		transition-all
 
 		focus:outline-transparent
 		focus-visible:outline

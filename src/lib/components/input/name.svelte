@@ -14,7 +14,8 @@
 		ref = $bindable(),
 		valid = $bindable(false),
 		value: _value = $bindable(),
-		debug = false
+		debug = false,
+		...props
 	}: NameInputProps = $props();
 
 	/** The string value bound to the form input */
@@ -52,7 +53,7 @@
 		});
 </script>
 
-<TextInput bind:ref bind:value={input} {autofocus} />
+<TextInput bind:ref bind:value={input} {autofocus} {...props} />
 
 {#if debug}
 	<h3>Component State</h3>
