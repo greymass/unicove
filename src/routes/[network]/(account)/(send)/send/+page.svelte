@@ -10,6 +10,7 @@
 	import Button from '$lib/components/button/button.svelte';
 	import Code from '$lib/components/code.svelte';
 	import Label from '$lib/components/input/label.svelte';
+	import NameInput from '$lib/components/input/name.svelte';
 	import Progress from '$lib/components/progress.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
 	import TextInput from '$lib/components/input/textinput.svelte';
@@ -24,6 +25,7 @@
 	let assetInput: AssetInput = $state();
 
 	let assetRef = $state();
+	let toInput: NameInput = $state();
 	let toRef = $state();
 	let memoRef = $state();
 
@@ -97,7 +99,7 @@
 
 	let assetValid = $state(false);
 	let memoValid = $state(true); // TODO: Implement validation
-	let toValid = $state(true); // TODO: Implement validation
+	let toValid = $state(false);
 
 	const nextValid = $derived.by(() => {
 		switch (f.current) {
@@ -136,6 +138,9 @@
 		// Reset the form state itself
 		state.reset();
 
+		// Reset all the inputs
+		toInput.set('');
+
 		// Focus the "to" input field
 		tick().then(() => toRef?.focus());
 
@@ -171,7 +176,13 @@
 <form onsubmit={preventDefault(next)}>
 	<fieldset class="grid gap-3" class:hidden={f.current !== 'to'}>
 		<Label for="to-input">Account Name</Label>
-		<TextInput bind:ref={toRef} bind:value={state.to} id="to-input" />
+		<NameInput
+			bind:this={toInput}
+			bind:ref={toRef}
+			bind:value={state.to}
+			bind:valid={toValid}
+			id="to-input"
+		/>
 	</fieldset>
 	<fieldset class="grid gap-3" class:hidden={f.current !== 'quantity'}>
 		<Label for="quantity-input">Amount</Label>

@@ -67,9 +67,13 @@
 	);
 
 	/** Set the input value from a parent */
-	export function set(asset: Asset) {
-		symbol = asset.symbol;
-		input = asset.quantity;
+	export function set(asset: Asset | null) {
+		if (!asset) {
+			input = null;
+		} else {
+			symbol = asset.symbol;
+			input = asset.quantity;
+		}
 	}
 
 	/** Set the bindable values on form input changes */
