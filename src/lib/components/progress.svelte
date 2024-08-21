@@ -7,7 +7,7 @@
 		<div
 			data-complete={step < currentStep - 1}
 			data-current={step === currentStep - 1}
-			class="step-{step} my-8 h-1 flex-1 rounded-full border-0 bg-white/10 data-[complete=true]:bg-white data-[current=true]:bg-white"
+			class="step-{step} h-1 flex-1 rounded-full border-0 bg-white/10 data-[complete=true]:bg-white data-[current=true]:bg-white"
 		></div>
 	{/each}
 </div>
