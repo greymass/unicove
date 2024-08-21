@@ -111,7 +111,7 @@
 	bind:value={input}
 	placeholder={zeroValue.quantity}
 	{autofocus}
-	type="number"
+	inputmode="numeric"
 	{...props}
 />
 
