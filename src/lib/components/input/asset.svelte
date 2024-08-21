@@ -106,7 +106,14 @@
 		});
 </script>
 
-<TextInput bind:ref bind:value={input} placeholder={zeroValue.quantity} {autofocus} {...props} />
+<TextInput
+	bind:ref
+	bind:value={input}
+	placeholder={zeroValue.quantity}
+	{autofocus}
+	type="number"
+	{...props}
+/>
 
 {#if debug}
 	<h3>Component State</h3>
