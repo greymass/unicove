@@ -22,10 +22,11 @@
 	const { data } = $props();
 	const state: SendState = $state(new SendState(data.network.chain));
 	let chain: Checksum256 | undefined = $state(data.network.chain.id);
-	let assetInput: AssetInput = $state();
 
-	let assetRef = $state();
+	let quantityInput: AssetInput = $state();
 	let toInput: NameInput = $state();
+
+	let quantityRef = $state();
 	let toRef = $state();
 	let memoRef = $state();
 
@@ -42,8 +43,8 @@
 	}
 
 	function max() {
-		if (data.network.systemtoken && context.account && context.account.balance) {
-			assetInput.set(context.account.balance.liquid);
+		if (context.account && context.account.balance) {
+			quantityInput.set(context.account.balance.liquid);
 		}
 	}
 
@@ -82,7 +83,7 @@
 			previous: 'to',
 			next: () => (assetValid ? 'memo' : 'quantity'),
 			reset,
-			_enter: () => tick().then(() => assetRef?.focus())
+			_enter: () => tick().then(() => quantityRef?.focus())
 		},
 		memo: {
 			previous: 'quantity',
@@ -140,6 +141,7 @@
 
 		// Reset all the inputs
 		toInput.set('');
+		quantityInput.set(null);
 
 		// Focus the "to" input field
 		tick().then(() => toRef?.focus());
@@ -188,11 +190,11 @@
 		<Label for="quantity-input">Amount</Label>
 		<AssetInput
 			id="quantity-input"
-			bind:this={assetInput}
-			bind:ref={assetRef}
+			bind:this={quantityInput}
+			bind:ref={quantityRef}
 			bind:value={state.quantity}
 			bind:valid={assetValid}
-			max={state.max}
+			max={state.max || 0}
 		/>
 		<p>
 			Available:
