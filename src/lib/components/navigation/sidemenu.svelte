@@ -64,7 +64,7 @@
 
 <style>
 	:root {
-		--bg-menu: #00b5ff60;
+		--bg-menu: var(--network-theme, #00b5ff60);
 	}
 	menu {
 		background-image: radial-gradient(
