@@ -1,9 +1,9 @@
 import { Name, Serializer } from '@wharfkit/antelope';
-import type { ChainDefinition } from '@wharfkit/session';
+import { Asset, type ChainDefinition } from '@wharfkit/session';
 
 export class SellRAMState {
 	public account: Name = $state(Name.from(''));
-	public bytes: number = $state(0);
+	public bytes: Asset = $state(Asset.from(0, 'BYTES'));
 	public max: number | undefined = $state(undefined);
 	readonly chain: ChainDefinition;
 
@@ -13,7 +13,7 @@ export class SellRAMState {
 
 	reset() {
 		this.account = Name.from('');
-		this.bytes = 0;
+		this.bytes = Asset.from(0, 'BYTES');
 		this.max = undefined;
 	}
 

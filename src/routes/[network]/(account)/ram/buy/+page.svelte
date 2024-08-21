@@ -6,24 +6,14 @@
 	import Button from '$lib/components/button/button.svelte';
 	import Label from '$lib/components/input/label.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
+	import { BuyRAMState } from './state.svelte.js';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
 
-	class BuyRAMState {
-		public amount: Asset = $state(Asset.from('0.0000 EOS'));
-		public max: number | undefined = $state(undefined);
-
-		reset() {
-			this.amount = Asset.from('0.0000 EOS');
-			this.max = undefined;
-		}
-	}
-
-	const state: BuyRAMState = $state(new BuyRAMState());
-	let assetInput: AssetInput = $state();
-	let assetRef = $state();
-	let assetValid = $state(false);
+	const buyRamState: BuyRAMState = new BuyRAMState(data.network.chain);
+	let assetInput: AssetInput | undefined;
+	let assetValid = false;
 
 	async function handleBuyRAM() {
 		if (!context.wharf || !context.wharf.session) {
@@ -33,35 +23,36 @@
 
 		try {
 			await context.wharf.transact({
-				action: data.network.contracts.eosio.action('buyram', {
-					payer: context.account.name,
-					receiver: context.account.name,
-					quant: state.amount
-				})
+				action: data.network.contracts.eosio.action('buyram', buyRamState.toJSON())
 			});
 			alert('RAM purchase successful');
 		} catch (error) {
-			alert('RAM purchase failed: ' + error.message);
+			alert('RAM purchase failed: ' + (error as { message: string }).message);
 		}
 	}
 
 	function max() {
 		if (data.network.systemtoken && context.account && context.account.balance) {
-			assetInput.set(context.account.balance.liquid);
+			assetInput?.set(context.account.balance.liquid);
 		}
 	}
 
 	onMount(() => {
 		if (data.network && data.network.systemtoken) {
-			state.amount = Asset.from('0.0000 ' + data.network.systemtoken.symbol);
+			buyRamState.quant = Asset.from('0.0000 ' + data.network.systemtoken.symbol);
 		}
 	});
 
 	function preventDefault(fn: (event: Event) => void) {
 		return function (event: Event) {
 			event.preventDefault();
-			fn.call(this, event);
+			// fn.call(this, event);
 		};
+	}
+
+	function onAssetChange(event: CustomEvent) {
+		buyRamState.quant = event.detail.value;
+		assetValid = event.detail.valid;
 	}
 </script>
 
@@ -70,11 +61,9 @@
 		<Label for="assetInput">Amount</Label>
 		<AssetInput
 			id="assetInput"
-			bind:this={assetInput}
-			bind:ref={assetRef}
-			bind:value={state.amount}
-			bind:valid={assetValid}
-			max={state.max}
+			bind:value={buyRamState.quant}
+			on:change={onAssetChange}
+			max={buyRamState.max}
 		/>
 		<p>
 			Available:
@@ -99,7 +88,7 @@
 			<span>Fee:</span>
 			<span>0.0001 EOS</span>
 			<span>Expected Receive:</span>
-			<span>{state.amount.value * 512} Bytes</span>
+			<span>{buyRamState.quant.value * 512} Bytes</span>
 		</div>
 	</Stack>
 

@@ -11,11 +11,14 @@
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
 
-	const state: SellRAMState = new SellRAMState(data.network.chain);
-	let chain: Checksum256 | undefined = $state(data.network.chain.id);
-	let assetInput: AssetInput = $state();
-	let assetRef = $state();
-	let assetValid = $state(false);
+	const sellRamState: SellRAMState = new SellRAMState(data.network.chain);
+	let chain: Checksum256 | undefined = data.network.chain.id;
+	let assetInput: AssetInput | undefined;
+	let assetValid = false;
+
+	onMount(() => {
+		sellRamState.bytes = Asset.fromUnits(0, data.network.systemtoken);
+	});
 
 	async function handleSellRAM() {
 		if (!context.wharf || !context.wharf.session) {
@@ -25,7 +28,7 @@
 
 		try {
 			await context.wharf.transact({
-				action: data.network.contracts.eosio.action('sellram', state.toJSON())
+				action: data.network.contracts.eosio.action('sellram', sellRamState.toJSON())
 			});
 			alert('RAM sale successful');
 		} catch (error) {
@@ -34,20 +37,19 @@
 	}
 
 	function max() {
-		// You would need to implement a way to get the current RAM balance
-		// This is a placeholder
-		assetInput.set(Asset.from('1024 BYTE'));
+		assetInput?.set(Asset.from('1024 BYTE'));
 	}
-
-	onMount(() => {
-		state.amount = Asset.from('0 BYTE');
-	});
 
 	function preventDefault(fn: (event: Event) => void) {
 		return function (event: Event) {
 			event.preventDefault();
-			fn.call(this, event);
+			// fn.call(this, event);
 		};
+	}
+
+	function onAssetChange(event: CustomEvent) {
+		sellRamState.bytes = event.detail.value;
+		assetValid = event.detail.valid;
 	}
 </script>
 
@@ -56,11 +58,9 @@
 		<Label for="assetInput">Amount (in bytes)</Label>
 		<AssetInput
 			id="assetInput"
-			bind:this={assetInput}
-			bind:ref={assetRef}
-			bind:value={state.amount}
-			bind:valid={assetValid}
-			max={state.max}
+			bind:value={sellRamState.bytes}
+			on:change={onAssetChange}
+			max={sellRamState.max}
 		/>
 		<p>
 			Available:
@@ -85,7 +85,7 @@
 			<span>Fee:</span>
 			<span>0.0001 EOS</span>
 			<span>Expected Return:</span>
-			<span>{state.amount.value / 512} EOS</span>
+			<span>{sellRamState.bytes.value / 512} EOS</span>
 		</div>
 	</Stack>
 
