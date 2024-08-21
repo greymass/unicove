@@ -206,6 +206,7 @@
 				bind:ref={quantityRef}
 				bind:value={state.quantity}
 				bind:valid={assetValid}
+				min={Asset.fromUnits(1, data.network.chain.systemToken).value}
 				max={state.max || 0}
 			/>
 		</fieldset>
