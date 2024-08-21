@@ -11,9 +11,9 @@
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
 
-	const buyRamState: BuyRAMState = new BuyRAMState(data.network.chain);
-	let assetInput: AssetInput | undefined;
-	let assetValid = false;
+	const buyRamState: BuyRAMState = $state(new BuyRAMState(data.network.chain));
+	let assetInput: AssetInput | undefined = $state();
+	let assetValid = $state(false);
 
 	async function handleBuyRAM() {
 		if (!context.wharf || !context.wharf.session) {
@@ -46,7 +46,7 @@
 	function preventDefault(fn: (event: Event) => void) {
 		return function (event: Event) {
 			event.preventDefault();
-			// fn.call(this, event);
+			fn.call(this, event);
 		};
 	}
 

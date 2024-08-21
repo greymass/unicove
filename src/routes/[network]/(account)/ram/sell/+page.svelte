@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Asset, Checksum256 } from '@wharfkit/antelope';
+	import { Asset } from '@wharfkit/antelope';
 	import { getContext, onMount } from 'svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import AssetInput from '$lib/components/input/asset.svelte';
@@ -11,10 +11,9 @@
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
 
-	const sellRamState: SellRAMState = new SellRAMState(data.network.chain);
-	let chain: Checksum256 | undefined = data.network.chain.id;
-	let assetInput: AssetInput | undefined;
-	let assetValid = false;
+	const sellRamState: SellRAMState = $state(new SellRAMState(data.network.chain));
+	let assetInput: AssetInput | undefined = $state();
+	let assetValid = $state(false);
 
 	onMount(() => {
 		sellRamState.bytes = Asset.fromUnits(0, data.network.systemtoken);
@@ -40,7 +39,7 @@
 		assetInput?.set(Asset.from('1024 BYTE'));
 	}
 
-	function preventDefault(fn: (event: Event) => void) {
+	function preventDefault(_fn: (event: Event) => void) {
 		return function (event: Event) {
 			event.preventDefault();
 			// fn.call(this, event);
