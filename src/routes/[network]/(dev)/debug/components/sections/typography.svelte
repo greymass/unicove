@@ -1,5 +1,6 @@
 <script>
 	import { Cluster, Stack } from '$lib/components/layout';
+	import PageHeader from '$lib/components/pageheader.svelte';
 </script>
 
 <Stack id="typography">
@@ -14,23 +15,23 @@
 		heading. This is easily achieved by applying the h2 class to the h1 tag.
 	</p>
 	<Cluster class="items-center">
-		<h1 class="h1">Heading 1 (Inter 48)</h1>
+		<p class="h1">Heading 1 (Inter 48)</p>
 		<code class=" rounded-lg bg-gray-300 p-2 text-black">class='h1'</code>
 	</Cluster>
 	<Cluster class="items-center">
-		<h2 class="h2">Heading 2 (Inter 32)</h2>
+		<p class="h2">Heading 2 (Inter 32)</p>
 		<code class=" rounded-lg bg-gray-300 p-2 text-black">class='h2'</code>
 	</Cluster>
 	<Cluster class="items-center">
-		<h3 class="h3">Heading 3 (Inter 24)</h3>
+		<p class="h3">Heading 3 (Inter 24)</p>
 		<code class=" rounded-lg bg-gray-300 p-2 text-black">class='h3'</code>
 	</Cluster>
 	<Cluster class="items-center">
-		<h4 class="h4">Heading 4 (Inter 18)</h4>
+		<p class="h4">Heading 4 (Inter 18)</p>
 		<code class=" rounded-lg bg-gray-300 p-2 text-black">class='h4'</code>
 	</Cluster>
 	<Cluster class="items-center">
-		<h5 class="h5">Heading 5 (Inter 16)</h5>
+		<p class="h5">Heading 5 (Inter 16)</p>
 		<code class="rounded-lg bg-gray-300 p-2 text-black">class='h5'</code>
 	</Cluster>
 	<Cluster class="items-center">
@@ -44,4 +45,10 @@
 		in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
 		cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 	</p>
+</Stack>
+
+<Stack class="gap-8">
+	<h2 class="h2">Page Header</h2>
+	<PageHeader title="Send" subtitle="Add recipient" />
+	<PageHeader title="teamgreymass" subtitle="Account" inverted />
 </Stack>
