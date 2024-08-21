@@ -5,10 +5,15 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import SideMenu from '$lib/components/navigation/sidemenu.svelte';
 	import { Menu, Search } from 'lucide-svelte';
+	import type { NetworkState } from '$lib/state/network.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 
-	const { network } = $props();
+	interface Props {
+		network: NetworkState;
+	}
+
+	const { network }: Props = $props();
 
 	let innerWidth = $state(0);
 
@@ -119,7 +124,7 @@
 				opacity: 1
 			}}
 		>
-			<SideMenu callbackFn={closeMenu} />
+			<SideMenu callbackFn={closeMenu} {network} />
 		</div>
 	</div>
 {/if}

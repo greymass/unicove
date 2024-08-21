@@ -3,6 +3,10 @@
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { Checksum256 } from '@wharfkit/antelope';
+	import Navigation from '$lib/components/navigation/mobilenavigation.svelte';
+	import Sidemenu from '$lib/components/navigation/sidemenu.svelte';
+	import AccountSwitcher from '$lib/components/select/account.svelte';
+	import UnicoveLogo from '$lib/assets/unicovelogo.svelte';
 
 	let { children, data } = $props();
 
@@ -58,4 +62,22 @@
 	});
 </script>
 
-{@render children()}
+<div class="relative grid h-full auto-rows-min grid-cols-1 md:grid-cols-[auto_minmax(0,1fr)]">
+	<aside class="relative hidden md:block">
+		<Sidemenu network={data.network} />
+	</aside>
+	<main class="grid auto-rows-min grid-cols-1 gap-4 px-4 py-4">
+		<header
+			class="root-layout-header col-start-1 col-end-2 row-start-1 row-end-2 flex flex-wrap items-center justify-between md:justify-end"
+		>
+			<UnicoveLogo small class="w-min md:hidden" />
+			<AccountSwitcher />
+		</header>
+		<div class="col-start-1 col-end-2 row-start-2 row-end-3 md:row-start-1 md:row-end-3">
+			{@render children()}
+		</div>
+	</main>
+	<aside class="relative md:hidden">
+		<Navigation network={data.network} />
+	</aside>
+</div>

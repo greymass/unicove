@@ -16,9 +16,11 @@
 		autofocus = false,
 		min = $bindable(),
 		max = $bindable(),
+		ref = $bindable(),
 		valid = $bindable(false),
 		value: _value = $bindable(),
-		debug = false
+		debug = false,
+		...props
 	}: AssetInputProps = $props();
 
 	/** A zero-value version of the passed in asset for placeholder */
@@ -37,16 +39,16 @@
 	const decimals = $derived(String(number).split('.')[1]?.length || 0);
 
 	/** The symbol of the asset */
-	let symbol: Asset.Symbol = $state(Asset.Symbol.from('4,TOKEN'));
+	let symbol: Asset.Symbol = $state(_value.symbol);
 
 	/** The minimum allowed value */
 	const minUnits: Int64 = $derived(
-		min ? Int64.from(min * Math.pow(10, symbol.precision)) : Int64.from(0)
+		min ? Int64.from(Math.floor(min * Math.pow(10, symbol.precision))) : Int64.from(0)
 	);
 
 	/** The maximum allowed value */
 	const maxUnits: Int64 = $derived(
-		max ? Int64.from(max * Math.pow(10, symbol.precision)) : Int64.from(0)
+		max ? Int64.from(Math.ceil(max * Math.pow(10, symbol.precision))) : Int64.from(0)
 	);
 
 	/** The derived formatted value of the input */
@@ -66,9 +68,13 @@
 	);
 
 	/** Set the input value from a parent */
-	export function set(asset: Asset) {
-		symbol = asset.symbol;
-		input = asset.quantity;
+	export function set(asset: Asset | null) {
+		if (!asset) {
+			input = null;
+		} else {
+			symbol = asset.symbol;
+			input = asset.quantity;
+		}
 	}
 
 	/** Set the bindable values on form input changes */
@@ -100,7 +106,14 @@
 		});
 </script>
 
-<TextInput bind:value={input} placeholder={zeroValue.quantity} {autofocus} />
+<TextInput
+	bind:ref
+	bind:value={input}
+	placeholder={zeroValue.quantity}
+	{autofocus}
+	inputmode="numeric"
+	{...props}
+/>
 
 {#if debug}
 	<h3>Component State</h3>
@@ -110,7 +123,9 @@ input (string):   "{input}"
 input (number):   "{number}"
 input (decimals): {decimals}
 input (min):      {min}
+input (minUnits): {minUnits}
 input (max):      {max}
+input (maxUnits): {maxUnits}
 token symbol:     {symbol}
 precision:        {symbol.precision}
 formatted:        {formatted}

@@ -4,15 +4,16 @@
 	const context = getContext<UnicoveContext>('state');
 	import { page } from '$app/stores';
 	import UnicoveLogo from '$lib/assets/unicovelogo.svelte';
+	import type { NetworkState } from '$lib/state/network.svelte';
 
 	interface Props {
 		callbackFn?: (event: MouseEvent) => void;
+		network: NetworkState;
 	}
 
-	let { callbackFn }: Props = $props();
+	let { callbackFn, network }: Props = $props();
 
 	const destinations = $derived.by(() => {
-		const network = String(context.account?.network);
 		return [
 			{ href: `/${network}/account`, text: 'Account' },
 			{ href: `/${network}/move`, text: 'Move' },
