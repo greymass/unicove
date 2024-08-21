@@ -1,3 +1,6 @@
+include .env
+
+API_EOS_CHAIN ?= https://eos.greymass.com
 SHELL := /usr/bin/env bash
 BIN := ./node_modules/.bin
 
@@ -17,6 +20,6 @@ node_modules:
 	bun install --yarn
 
 codegen:
-	npx @wharfkit/cli generate -u https://eos.greymass.com -f src/lib/wharf/contracts/system.ts eosio
-	npx @wharfkit/cli generate -u https://eos.greymass.com -f src/lib/wharf/contracts/token.ts eosio.token
-	npx @wharfkit/cli generate -u https://eos.greymass.com -f src/lib/wharf/contracts/delphioracle.ts delphioracle
+	npx @wharfkit/cli generate -u $(API_EOS_CHAIN) -f src/lib/wharf/contracts/system.ts eosio
+	npx @wharfkit/cli generate -u $(API_EOS_CHAIN) -f src/lib/wharf/contracts/token.ts eosio.token
+	npx @wharfkit/cli generate -u $(API_EOS_CHAIN) -f src/lib/wharf/contracts/delphioracle.ts delphioracle
