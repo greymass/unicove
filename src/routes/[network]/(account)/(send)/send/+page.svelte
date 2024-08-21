@@ -14,6 +14,7 @@
 	import Progress from '$lib/components/progress.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
 	import TextInput from '$lib/components/input/textinput.svelte';
+	import PageHeader from '$lib/components/pageheader.svelte';
 
 	import { SendState } from './state.svelte';
 	import { page } from '$app/stores';
@@ -156,87 +157,102 @@
 			fn.call(this, event);
 		};
 	}
+
+	const subtitle = {
+		to: 'Add recipient',
+		quantity: 'Enter the amount of tokens',
+		memo: 'Add an optional memo',
+		confirm: 'Confirm this is correct'
+	};
 </script>
 
-<header class="layout-stack gap-6">
-	<Stack class="gap-2">
-		<h1 class="h1 font-bold leading-none text-white">Send</h1>
-		{#if f.current === 'to'}
-			<h3 class="h3 text-white/60">Add recipient</h3>
-		{:else if f.current === 'quantity'}
-			<h3 class="h3 text-white/60">Enter the amount of tokens</h3>
-		{:else if f.current === 'memo'}
-			<h3 class="h3 text-white/60">Add an optional memo</h3>
-		{:else if f.current === 'confirm'}
-			<h3 class="h3 text-white/60">Confirm this is correct</h3>
-		{/if}
-	</Stack>
-</header>
+<article class="layout-stack gap-4">
+	<PageHeader title="Send" subtitle={subtitle[f.current]} />
+	<Progress currentStep={progress} maxStep={3} />
 
-<Progress currentStep={progress} maxStep={3} />
+	<form onsubmit={preventDefault(next)} class="grid gap-4">
+		<fieldset class="grid gap-2" class:hidden={f.current !== 'to'}>
+			<Label for="to-input">Account Name</Label>
+			<NameInput
+				bind:this={toInput}
+				bind:ref={toRef}
+				bind:value={state.to}
+				bind:valid={toValid}
+				id="to-input"
+			/>
+		</fieldset>
+		<fieldset class="grid gap-2" class:hidden={f.current !== 'quantity'}>
+			<Label for="quantity-input"
+				>Amount (Available:
+				{#if context.account}
+					{context.account.balance?.liquid})
+					<button
+						class="text-skyBlue-500 hover:text-skyBlue-400"
+						disabled={!context.account}
+						onclick={preventDefault(max)}
+						type="button">Fill Max</button
+					>
+				{:else}
+					0.0000)
+				{/if}</Label
+			>
+			<AssetInput
+				id="quantity-input"
+				bind:this={quantityInput}
+				bind:ref={quantityRef}
+				bind:value={state.quantity}
+				bind:valid={assetValid}
+				max={state.max || 0}
+			/>
+		</fieldset>
+		<fieldset class="grid gap-2" class:hidden={f.current !== 'memo'}>
+			<Label for="memo-input">Memo</Label>
+			<TextInput
+				id="memo-input"
+				bind:ref={memoRef}
+				bind:value={state.memo}
+				placeholder="Record a public memo for this transfer (optional)"
+			/>
+		</fieldset>
 
-<form onsubmit={preventDefault(next)}>
-	<fieldset class="grid gap-3" class:hidden={f.current !== 'to'}>
-		<Label for="to-input">Account Name</Label>
-		<NameInput
-			bind:this={toInput}
-			bind:ref={toRef}
-			bind:value={state.to}
-			bind:valid={toValid}
-			id="to-input"
-		/>
-	</fieldset>
-	<fieldset class="grid gap-3" class:hidden={f.current !== 'quantity'}>
-		<Label for="quantity-input">Amount</Label>
-		<AssetInput
-			id="quantity-input"
-			bind:this={quantityInput}
-			bind:ref={quantityRef}
-			bind:value={state.quantity}
-			bind:valid={assetValid}
-			max={state.max || 0}
-		/>
-		<p>
-			Available:
-			{#if context.account}
-				{context.account.balance?.liquid}
-				<Button disabled={!context.account} onclick={preventDefault(max)} type="button"
-					>Fill Max</Button
+		<fieldset class="grid gap-3" class:hidden={f.current !== 'confirm'}>
+			<h3 class="h3">Confirm Transaction</h3>
+			<Code>{JSON.stringify(state, undefined, 2)}</Code>
+		</fieldset>
+
+		<fieldset
+			class="grid transition-all duration-200"
+			class:grid-cols-[0_100%]={f.current === 'to'}
+			class:grid-cols-[50%_50%]={f.current !== 'to'}
+		>
+			{#if f.current !== 'to'}
+				<Button class="mr-2" variant="secondary" type="button" onclick={preventDefault(previous)}
+					>Back</Button
+				>
+			{/if}
+
+			{#if f.current === 'confirm'}
+				<Button
+					class="col-end-3"
+					type="submit"
+					onclick={preventDefault(complete)}
+					disabled={!allValid}>Submit</Button
 				>
 			{:else}
-				0.0000
+				<Button class="col-end-3" type="submit" onclick={preventDefault(next)} disabled={!nextValid}
+					>Next</Button
+				>
 			{/if}
-		</p>
-	</fieldset>
-	<fieldset class="grid gap-3" class:hidden={f.current !== 'memo'}>
-		<Label for="memo-input">Memo</Label>
-		<TextInput
-			id="memo-input"
-			bind:ref={memoRef}
-			bind:value={state.memo}
-			placeholder="Record a public memo for this transfer (optional)"
-		/>
-	</fieldset>
-	<fieldset class="grid gap-3" class:hidden={f.current !== 'confirm'}>
-		<h3 class="h3">Confirm Transaction</h3>
-		<Code>{JSON.stringify(state, undefined, 2)}</Code>
-	</fieldset>
-	{#if f.current === 'confirm'}
-		<Button type="submit" onclick={preventDefault(complete)} disabled={!allValid}>Submit</Button>
-	{:else}
-		<Button type="submit" onclick={preventDefault(next)} disabled={!nextValid}>Next</Button>
-	{/if}
-	{#if f.current !== 'to'}
-		<Button type="button" onclick={preventDefault(previous)}>Back</Button>
-	{/if}
-</form>
+		</fieldset>
+	</form>
 
-<h3 class="h3">Debugging</h3>
-<Code
-	>{JSON.stringify(
-		{ state, current: f.current, valid: { toValid, assetValid, memoValid } },
-		undefined,
-		2
-	)}</Code
->
-<Button onclick={() => f.send('reset')}>Reset</Button>
+	<h3 class="h3">Debugging</h3>
+	<Code
+		>{JSON.stringify(
+			{ state, current: f.current, valid: { toValid, assetValid, memoValid } },
+			undefined,
+			2
+		)}</Code
+	>
+	<Button onclick={() => f.send('reset')}>Reset</Button>
+</article>
