@@ -8,6 +8,9 @@
 		min?: number;
 		max?: number;
 		valid?: boolean;
+		validPrecision?: boolean;
+		validMinimum?: boolean;
+		validMaximum?: boolean;
 		value: Asset;
 		debug?: boolean;
 	}
@@ -18,6 +21,9 @@
 		max = $bindable(),
 		ref = $bindable(),
 		valid = $bindable(false),
+		validPrecision = $bindable(false),
+		validMinimum = $bindable(false),
+		validMaximum = $bindable(false),
 		value: _value = $bindable(),
 		debug = false,
 		...props
@@ -80,6 +86,9 @@
 	/** Set the bindable values on form input changes */
 	$effect(() => {
 		valid = satisfies;
+		validPrecision = satisfiesPrecision;
+		validMinimum = satisfiesMinimum;
+		validMaximum = satisfiesMaximum;
 		if (satisfies) {
 			_value = asset;
 		} else {

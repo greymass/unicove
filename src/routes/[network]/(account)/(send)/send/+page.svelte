@@ -104,6 +104,9 @@
 	});
 
 	let assetValid = $state(false);
+	let assetValidPrecision = $state(false);
+	let assetValidMinimum = $state(false);
+	let assetValidMaximum = $state(false);
 	let memoValid = $state(true); // TODO: Implement validation
 	let toValid = $state(false);
 
@@ -206,9 +209,18 @@
 				bind:ref={quantityRef}
 				bind:value={state.quantity}
 				bind:valid={assetValid}
+				bind:validPrecision={assetValidPrecision}
+				bind:validMinimum={assetValidMinimum}
+				bind:validMaximum={assetValidMaximum}
 				min={Asset.fromUnits(1, data.network.chain.systemToken).value}
 				max={state.max || 0}
 			/>
+			{#if !assetValidPrecision}
+				<p class="text-red-500">Invalid number, too many decimal places.</p>
+			{/if}
+			{#if !assetValidMaximum}
+				<p class="text-red-500">Amount exceeds available balance.</p>
+			{/if}
 		</fieldset>
 		<fieldset class="grid gap-2" class:hidden={f.current !== 'memo'}>
 			<Label for="memo-input">Memo</Label>
@@ -255,7 +267,18 @@
 		<h3 class="h3">Debugging</h3>
 		<Code
 			>{JSON.stringify(
-				{ state, current: f.current, valid: { toValid, assetValid, memoValid } },
+				{
+					state,
+					current: f.current,
+					valid: {
+						toValid,
+						assetValid,
+						memoValid,
+						assetValidPrecision,
+						assetValidMinimum,
+						assetValidMaximum
+					}
+				},
 				undefined,
 				2
 			)}</Code
