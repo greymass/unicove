@@ -1,7 +1,6 @@
 import type { RequestArguments } from '@metamask/providers';
 
-import { snapProvider, installedSnap } from './state/metamask.svelte';
-import { get } from 'svelte/store';
+import type { MetaMaskState } from './state/metamask.svelte';
 
 export type Request = (params: RequestArguments) => Promise<unknown | null>;
 
@@ -25,12 +24,15 @@ export type Snap = {
 /**
  * Get the Snap information from MetaMask.
  */
-export const setSnap = async (snapProvider: string) => {
-	const snaps = (await request({
-		method: 'wallet_getSnaps'
-	})) as GetSnapsResponse;
+export const setSnap = async (metaMaskState: MetaMaskState) => {
+	const snaps = (await request(
+		{
+			method: 'wallet_getSnaps'
+		},
+		metaMaskState
+	)) as GetSnapsResponse;
 
-	installedSnap.set(snaps[snapProvider] ?? null);
+	metaMaskState.installedSnap = snaps[metaMaskState.snapOrigin || ''] ?? null;
 };
 
 /**
@@ -40,18 +42,25 @@ export const setSnap = async (snapProvider: string) => {
  * @param version - The requested version.
  * @returns The `wallet_requestSnaps` wrapper.
  */
-export const requestSnap = async (id?: string, version?: string) => {
-	const snapId = id;
+export const requestSnap = async (metaMaskState: MetaMaskState, version?: string) => {
+	const snapId = metaMaskState.snapOrigin;
+
+	if (!snapId) {
+		throw new Error('Snap ID is needed to request snap.');
+	}
 
 	try {
-		const snaps = (await request({
-			method: 'wallet_requestSnaps',
-			params: {
-				[snapId]: version ? { version } : {}
-			}
-		})) as Record<string, Snap>;
+		const snaps = (await request(
+			{
+				method: 'wallet_requestSnaps',
+				params: {
+					[snapId]: version ? { version } : {}
+				}
+			},
+			metaMaskState
+		)) as Record<string, Snap>;
 
-		installedSnap.set(snaps?.[snapId] ?? null);
+		metaMaskState.installedSnap = snaps?.[snapId] ?? null;
 	} catch (error) {
 		alert(`Error requesting "${snapId}" snap. Error: ${(error as { message: string }).message}`);
 	}
@@ -70,13 +79,25 @@ export type InvokeSnapParams = {
  * @param id -  The Snap ID to invoke. Defaults to the snap ID specified in the
  * @returns The Snap response.
  */
-export const invokeSnap = async ({ method, params }: InvokeSnapParams, id?: string) => {
+export const invokeSnap = async (
+	{ method, params }: InvokeSnapParams,
+	id: string,
+	metaMaskState: MetaMaskState
+) => {
 	const snapId = id;
-	return request({ method: 'wallet_invokeSnap', params: { snapId, request: { method, params } } });
+	return request(
+		{ method: 'wallet_invokeSnap', params: { snapId, request: { method, params } } },
+		metaMaskState
+	);
 };
 
-const request: Request = async ({ method, params }) => {
-	return get(snapProvider)?.request({
+interface RequestState {
+	method: string;
+	params?: Record<string, unknown>;
+}
+
+const request = async ({ method, params }: RequestState, metaMaskState: MetaMaskState) => {
+	return metaMaskState.snapProvider?.request({
 		method,
 		params
 	} as RequestArguments);

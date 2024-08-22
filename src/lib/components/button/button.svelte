@@ -37,7 +37,6 @@
 		data-active={props.active}
 		class="
 		relative
-		m-0.5
 		inline-flex
 		items-center
 		justify-center
@@ -45,6 +44,7 @@
 		rounded-full
 		px-6
 		py-2.5
+		text-center
 		text-base
 		font-medium
 		leading-4
@@ -78,10 +78,16 @@
 		this={props.href ? 'a' : 'button'}
 		disabled={props.disabled}
 		class="
+		relative
+		flex
+		grow
+		items-center
+		justify-center
 		text-nowrap
 		rounded-lg
 		px-8
 		py-3.5
+		text-center
 		text-base
 		font-medium
 		text-mineShaft-100
@@ -125,20 +131,17 @@ active:transition-opacity
 		this={props.href ? 'a' : 'button'}
 		disabled={props.disabled}
 		class="
-		<<<<<<<
-HEAD =======
-		>>>>>>>
-1f81e2f
-		(fix:
-		using
-		links
-		instead
-of functions for link buttons) relative m-0.5 inline-flex grow items-center justify-center
+		relative
+		inline-flex
+		grow
+		items-center
+		justify-center
 		text-nowrap
 		rounded-lg
 		bg-skyBlue-500
 		px-8
 		py-3.5
+		text-center
 		text-base
 		font-medium
 		text-skyBlue-950

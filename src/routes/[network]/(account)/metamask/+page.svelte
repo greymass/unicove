@@ -23,15 +23,13 @@
 
 	const { data } = $props();
 
-	let metaMaskState: MetaMaskState;
+	let metaMaskState: MetaMaskState = new MetaMaskState();
 
 	onMount(async () => {
 		if (!data.network.snapOrigin) {
 			// We may want to do this in the load function so it works on the SSR side.
 			return goto(`/404`);
 		}
-
-		metaMaskState = new MetaMaskState();
 
 		metaMaskState.snapProvider = await getSnapsProvider();
 
@@ -40,7 +38,7 @@
 			metaMaskState.isFlask = await checkIsFlask(provider);
 
 			if (data.network.snapOrigin) {
-				setSnap(data.network.snapOrigin);
+				setSnap(metaMaskState);
 			}
 		}
 	});
@@ -83,9 +81,8 @@
 				<p class="text-green-600">Antelope Snap is installed.</p>
 			{:else}
 				<p class="mb-2">Install the Antelope Snap for MetaMask:</p>
-				<Button
-					onclick={() => requestSnap(data.network.snapOrigin)}
-					disabled={!metaMaskState.isMetaMaskReady}>Install Antelope Snap</Button
+				<Button onclick={() => requestSnap(metaMaskState)} disabled={!metaMaskState.isMetaMaskReady}
+					>Install Antelope Snap</Button
 				>
 			{/if}
 		</Card>
