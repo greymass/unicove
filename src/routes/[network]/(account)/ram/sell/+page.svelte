@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { Asset } from '@wharfkit/antelope';
-	import { getContext, onMount } from 'svelte';
+	import { getContext } from 'svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import AssetInput from '$lib/components/input/asset.svelte';
+	import Input from '$lib/components/input/textinput.svelte';
 	import Button from '$lib/components/button/button.svelte';
 	import Label from '$lib/components/input/label.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
@@ -12,12 +12,8 @@
 	const { data } = $props();
 
 	const sellRamState: SellRAMState = $state(new SellRAMState(data.network.chain));
-	let assetInput: AssetInput | undefined = $state();
-	let assetValid = $state(false);
-
-	onMount(() => {
-		sellRamState.bytes = Asset.fromUnits(0, data.network.systemtoken);
-	});
+	let quantityInput: Input | undefined = $state();
+	let quantityValid = $state(false);
 
 	async function handleSellRAM() {
 		if (!context.wharf || !context.wharf.session) {
@@ -27,7 +23,7 @@
 
 		try {
 			await context.wharf.transact({
-				action: data.network.contracts.eosio.action('sellram', sellRamState.toJSON())
+				action: data.network.contracts.system.action('sellram', sellRamState.toJSON())
 			});
 			alert('RAM sale successful');
 		} catch (error) {
@@ -35,37 +31,38 @@
 		}
 	}
 
-	function max() {
-		assetInput?.set(Asset.from('1024 BYTE'));
-	}
-
-	function preventDefault(_fn: (event: Event) => void) {
+	function preventDefault(fn: (event: Event) => void) {
 		return function (event: Event) {
 			event.preventDefault();
-			// fn.call(this, event);
+			fn.call(this, event);
 		};
 	}
 
-	function onAssetChange(event: CustomEvent) {
+	function setMax() {
+		quantityInput?.set(Asset.from('1024 BYTE'));
+		quantityValid = true;
+	}
+
+	function onQuantityChange(event: CustomEvent) {
 		sellRamState.bytes = event.detail.value;
-		assetValid = event.detail.valid;
+		quantityValid = event.detail.valid;
 	}
 </script>
 
 <form on:submit={preventDefault(handleSellRAM)}>
 	<Stack class="gap-3">
 		<Label for="assetInput">Amount (in bytes)</Label>
-		<AssetInput
+		<Input
 			id="assetInput"
 			bind:value={sellRamState.bytes}
-			on:change={onAssetChange}
+			on:change={onQuantityChange}
 			max={sellRamState.max}
 		/>
 		<p>
 			Available:
 			{#if context.account}
-				1024 Bytes
-				<Button disabled={!context.account} on:click={preventDefault(max)} type="button"
+				{context.account.ram?.available} Bytes
+				<Button disabled={!context.account} onclick={preventDefault(setMax)} type="button"
 					>Fill Max</Button
 				>
 			{:else}
@@ -79,14 +76,10 @@
 		<div class="grid grid-cols-2 gap-2">
 			<span>Price:</span>
 			<span>512 Bytes = 1 EOS</span>
-			<span>Price Impact:</span>
-			<span>~0.01%</span>
-			<span>Fee:</span>
-			<span>0.0001 EOS</span>
-			<span>Expected Return:</span>
-			<span>{sellRamState.bytes.value / 512} EOS</span>
+			<span>Expected Receive:</span>
+			<span>{sellRamState.bytes / 512} EOS</span>
 		</div>
 	</Stack>
 
-	<Button type="submit" class="mt-4 w-full" disabled={!assetValid}>Confirm Sell RAM</Button>
+	<Button type="submit" class="mt-4 w-full" disabled={!quantityValid}>Confirm Sell RAM</Button>
 </form>

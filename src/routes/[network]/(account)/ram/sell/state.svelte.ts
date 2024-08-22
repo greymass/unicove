@@ -3,17 +3,18 @@ import { Asset, type ChainDefinition } from '@wharfkit/session';
 
 export class SellRAMState {
 	public account: Name = $state(Name.from(''));
-	public bytes: Asset = $state(Asset.from(0, 'BYTES'));
+	public bytes: number;
 	public max: number | undefined = $state(undefined);
 	readonly chain: ChainDefinition;
 
 	constructor(chain: ChainDefinition) {
 		this.chain = chain;
+		this.bytes = 0;
 	}
 
 	reset() {
 		this.account = Name.from('');
-		this.bytes = Asset.from(0, 'BYTES');
+		this.bytes = 0;
 		this.max = undefined;
 	}
 

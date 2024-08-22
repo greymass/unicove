@@ -2,7 +2,7 @@
 	import { Asset } from '@wharfkit/antelope';
 	import { getContext, onMount } from 'svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import AssetInput from '$lib/components/input/asset.svelte';
+	import Input from '$lib/components/input/textinput.svelte';
 	import Button from '$lib/components/button/button.svelte';
 	import Label from '$lib/components/input/label.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
@@ -12,8 +12,8 @@
 	const { data } = $props();
 
 	const buyRamState: BuyRAMState = $state(new BuyRAMState(data.network.chain));
-	let assetInput: AssetInput | undefined = $state();
-	let assetValid = $state(false);
+	let quantityInput: Input | undefined = $state();
+	let quantityValid = $state(false);
 
 	async function handleBuyRAM() {
 		if (!context.wharf || !context.wharf.session) {
@@ -23,7 +23,7 @@
 
 		try {
 			await context.wharf.transact({
-				action: data.network.contracts.eosio.action('buyram', buyRamState.toJSON())
+				action: data.network.contracts.system.action('buyram', buyRamState.toJSON())
 			});
 			alert('RAM purchase successful');
 		} catch (error) {
@@ -31,15 +31,16 @@
 		}
 	}
 
-	function max() {
-		if (data.network.systemtoken && context.account && context.account.balance) {
-			assetInput?.set(context.account.balance.liquid);
+	function setMax() {
+		console.log('setMax', { context, ram: Number(context.account?.ram?.available) });
+		if (data.network.chain.systemToken && context.account?.ram) {
+			buyRamState.quant = Number(context.account.ram.available);
 		}
 	}
 
 	onMount(() => {
-		if (data.network && data.network.systemtoken) {
-			buyRamState.quant = Asset.from('0.0000 ' + data.network.systemtoken.symbol);
+		if (data.network && data.network.chain.systemToken) {
+			buyRamState.quant = 0;
 		}
 	});
 
@@ -52,14 +53,14 @@
 
 	function onAssetChange(event: CustomEvent) {
 		buyRamState.quant = event.detail.value;
-		assetValid = event.detail.valid;
+		quantityValid = event.detail.valid;
 	}
 </script>
 
 <form on:submit={preventDefault(handleBuyRAM)}>
 	<Stack class="gap-3">
 		<Label for="assetInput">Amount</Label>
-		<AssetInput
+		<Input
 			id="assetInput"
 			bind:value={buyRamState.quant}
 			on:change={onAssetChange}
@@ -69,7 +70,7 @@
 			Available:
 			{#if context.account}
 				{context.account.balance?.liquid}
-				<Button disabled={!context.account} on:click={preventDefault(max)} type="button"
+				<Button disabled={!context.account} onclick={preventDefault(setMax)} type="button"
 					>Fill Max</Button
 				>
 			{:else}
@@ -83,14 +84,10 @@
 		<div class="grid grid-cols-2 gap-2">
 			<span>Price:</span>
 			<span>1 EOS = 512 Bytes</span>
-			<span>Price Impact:</span>
-			<span>~0.01%</span>
-			<span>Fee:</span>
-			<span>0.0001 EOS</span>
 			<span>Expected Receive:</span>
-			<span>{buyRamState.quant.value * 512} Bytes</span>
+			<span>{buyRamState.quant * 512} Bytes</span>
 		</div>
 	</Stack>
 
-	<Button type="submit" class="mt-4 w-full" disabled={!assetValid}>Confirm Buy RAM</Button>
+	<Button type="submit" class="mt-4 w-full" disabled={!quantityValid}>Confirm Buy RAM</Button>
 </form>

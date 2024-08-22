@@ -4,19 +4,19 @@ import type { ChainDefinition } from '@wharfkit/common';
 export class BuyRAMState {
 	public payer: Name = $state(Name.from(''));
 	public receiver: Name = $state(Name.from(''));
-	public quant: Asset = $state(Asset.fromUnits(0, '4,UNKNOWN'));
+	public quant: number;
 	public max: number | undefined = $state(undefined);
 	readonly chain: ChainDefinition;
 
 	constructor(chain: ChainDefinition) {
 		this.chain = chain;
-		this.quant = Asset.fromUnits(0, chain.systemToken);
+		this.quant = 0;
 	}
 
 	reset() {
 		this.payer = Name.from('');
 		this.receiver = Name.from('');
-		this.quant = Asset.fromUnits(0, this.chain.systemToken);
+		this.quant = 0;
 		this.max = undefined;
 	}
 
@@ -24,7 +24,7 @@ export class BuyRAMState {
 		return Serializer.objectify({
 			payer: this.payer,
 			receiver: this.receiver,
-			quant: this.quant
+			quant: String(this.quant)
 		});
 	}
 }
