@@ -19,6 +19,8 @@
 	let ariaRole = props.href ? 'link' : 'button';
 </script>
 
+<!-- [@media(any-hover:hover)]:hover:opacity-80 -->
+
 {#if props.variant === 'pill'}
 	<svelte:element
 		this={props.href ? 'a' : 'button'}
@@ -51,7 +53,10 @@
 	>
 		<span class="pointer-events-none relative z-10">{@render props.children()}</span>
 		<div
-			class="absolute inset-0 rounded-[inherit] bg-mineShaft-900 opacity-0 hover:opacity-100 active:opacity-20 active:transition-opacity"
+			class="absolute inset-0 rounded-[inherit] bg-mineShaft-900 opacity-0
+			active:opacity-20
+			active:transition-opacity
+			[@media(any-hover:hover)]:hover:opacity-100"
 		></div>
 	</svelte:element>
 {:else if props.variant === 'secondary'}
@@ -91,7 +96,14 @@
 	>
 		<span class="pointer-events-none relative z-10">{@render props.children()}</span>
 		<div
-			class="absolute inset-0 rounded-[inherit] bg-mineShaft-900 opacity-0 hover:opacity-100 active:opacity-20 active:transition-opacity"
+			class="absolute
+inset-0
+rounded-[inherit]
+bg-mineShaft-900
+opacity-0
+active:opacity-20
+active:transition-opacity
+[@media(any-hover:hover)]:hover:opacity-100"
 			class:hidden={props.disabled}
 		></div>
 	</svelte:element>
@@ -130,7 +142,14 @@
 	>
 		<span class="pointer-events-none relative z-10">{@render props.children()}</span>
 		<div
-			class="absolute inset-0 rounded-[inherit] bg-white opacity-0 transition-opacity hover:opacity-20 active:bg-black/30"
+			class="absolute
+inset-0
+rounded-[inherit]
+bg-white
+opacity-0
+transition-opacity
+active:bg-black/30
+			[@media(any-hover:hover)]:hover:opacity-20"
 			class:hidden={props.disabled}
 		></div>
 	</svelte:element>
