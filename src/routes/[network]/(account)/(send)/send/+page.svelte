@@ -12,20 +12,19 @@
 	import Label from '$lib/components/input/label.svelte';
 	import NameInput from '$lib/components/input/name.svelte';
 	import Progress from '$lib/components/progress.svelte';
-	import Stack from '$lib/components/layout/stack.svelte';
 	import TextInput from '$lib/components/input/textinput.svelte';
 	import PageHeader from '$lib/components/pageheader.svelte';
 
 	import { SendState } from './state.svelte';
-	import { page } from '$app/stores';
 
 	import { getSetting } from '$lib/state/settings.svelte';
+	import { formatCurrency } from '$lib/i18n';
 
 	const debugMode = getSetting('debug-mode', false);
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
-	const state: SendState = $state(new SendState(data.network.chain));
+	const state: SendState = $state(new SendState(data.network));
 	let chain: Checksum256 | undefined = $state(data.network.chain.id);
 
 	let quantityInput: AssetInput = $state();
@@ -67,9 +66,16 @@
 	});
 
 	onMount(() => {
-		if (data.network && data.network.systemtoken) {
-			state.quantity = Asset.fromUnits(0, data.network.systemtoken);
+		if (data.network && data.network.chain.systemToken) {
+			state.quantity = Asset.fromUnits(0, data.network.chain.systemToken);
 		}
+
+		// DEBUGGING
+		// Set some default values for testing
+		// toInput.set('gm');
+		// tick().then(() => f.send('next'));
+		// quantityInput.set(Asset.from('10.0000 EOS'));
+		// tick().then(() => f.send('next'));
 	});
 
 	// The state which the submit form can exist in
@@ -187,6 +193,7 @@
 				id="to-input"
 			/>
 		</fieldset>
+
 		<fieldset class="grid gap-2" class:hidden={f.current !== 'quantity'}>
 			<Label for="quantity-input"
 				>Amount (Available:
@@ -214,6 +221,9 @@
 				min={Asset.fromUnits(1, data.network.chain.systemToken).value}
 				max={state.max || 0}
 			/>
+			{#if assetValid && state.value}
+				<Label for="quantity-input">Value: {formatCurrency(state.value)}</Label>
+			{/if}
 			{#if !assetValidPrecision}
 				<p class="text-red-500">Invalid number, too many decimal places.</p>
 			{/if}
@@ -221,6 +231,32 @@
 				<p class="text-red-500">Amount exceeds available balance.</p>
 			{/if}
 		</fieldset>
+
+		<div class="grid grid-cols-3 gap-4 text-center" class:hidden={f.current !== 'memo'}>
+			<div>
+				<h2 class="h2">
+					{state.from}
+				</h2>
+				<p>will send</p>
+			</div>
+			<div>
+				<h2 class="h2">
+					{state.quantity}
+				</h2>
+				{#if state.value}
+					<p>
+						{formatCurrency(state.value)}
+					</p>
+				{/if}
+			</div>
+			<div>
+				<h2 class="h2">
+					{state.to}
+				</h2>
+				<p>will receive</p>
+			</div>
+		</div>
+
 		<fieldset class="grid gap-2" class:hidden={f.current !== 'memo'}>
 			<Label for="memo-input">Memo</Label>
 			<TextInput
@@ -268,6 +304,8 @@
 			>{JSON.stringify(
 				{
 					state,
+					price: state.price,
+					value: state.value,
 					current: f.current,
 					valid: {
 						toValid,

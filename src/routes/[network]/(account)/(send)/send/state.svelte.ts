@@ -1,3 +1,5 @@
+import { calculateValue } from '$lib/state/client/account.svelte';
+import type { NetworkState } from '$lib/state/network.svelte';
 import { Asset, Name, Serializer } from '@wharfkit/antelope';
 import type { ChainDefinition } from '@wharfkit/common';
 
@@ -7,13 +9,19 @@ export class SendState {
 	public quantity: Asset = $state(Asset.fromUnits(0, '4,UNKNOWN'));
 	public memo: string = $state('');
 
+	public price: Asset | undefined = $state();
+	public value: Asset | undefined = $derived(
+		this.price ? calculateValue(this.quantity, this.price) : undefined
+	);
+
 	public max: number | undefined = $state(undefined);
 
 	readonly chain: ChainDefinition;
 
-	constructor(chain: ChainDefinition) {
-		this.chain = chain;
-		this.quantity = Asset.fromUnits(0, chain.systemToken);
+	constructor(network: NetworkState) {
+		this.chain = network.chain;
+		this.price = network.tokenprice;
+		this.quantity = Asset.fromUnits(0, network.chain.systemToken);
 	}
 
 	reset() {
