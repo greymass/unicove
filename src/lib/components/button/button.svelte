@@ -30,8 +30,8 @@
 		inline-block
 		text-nowrap
 		rounded-full
-		px-6
-		py-2.5
+		px-5
+		py-2
 		text-base
 		font-medium
 		leading-4

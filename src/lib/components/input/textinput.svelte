@@ -9,7 +9,7 @@
 </script>
 
 <input
-	class="rounded-lg bg-transparent px-4 py-4 font-medium outline outline-1 outline-gray-700 focus:outline-none focus:ring focus:ring-inset focus:ring-blue-500"
+	class="rounded-lg border-2 border-mineShaft-600 bg-transparent px-4 py-4 font-medium focus:outline-none focus:ring focus:ring-inset focus:ring-blue-500"
 	type="text"
 	bind:this={ref}
 	bind:value
