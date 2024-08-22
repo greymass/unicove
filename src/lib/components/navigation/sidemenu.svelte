@@ -1,7 +1,4 @@
 <script lang="ts">
-	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import { getContext } from 'svelte';
-	const context = getContext<UnicoveContext>('state');
 	import { page } from '$app/stores';
 	import UnicoveLogo from '$lib/assets/unicovelogo.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
