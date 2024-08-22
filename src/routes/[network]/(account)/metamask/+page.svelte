@@ -1,9 +1,8 @@
 <script lang="ts">
 	import { onMount, getContext } from 'svelte';
 	import { goto } from '$app/navigation';
-	import type { MetaMaskInpageProvider } from '@metamask/providers';
 	import { page } from '$app/stores';
-	import { checkIsFlask, getSnapsProvider } from '@wharfkit/wallet-plugin-metamask';
+	import { getSnapsProvider, checkIsFlask } from '@wharfkit/wallet-plugin-metamask';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 
@@ -15,8 +14,6 @@
 	import { getChainDefinitionFromParams } from '$lib/state/network.svelte';
 	import { MetaMaskState } from '$lib/state/metamask.svelte';
 
-	let provider: MetaMaskInpageProvider;
-
 	const context = getContext<UnicoveContext>('state');
 
 	const wharf = context.wharf;
@@ -26,20 +23,15 @@
 	let metaMaskState: MetaMaskState = new MetaMaskState();
 
 	onMount(async () => {
-		console.log('Metamask page mounted');
 		if (!data.network.snapOrigin) {
 			return goto(`/404`);
 		}
 
 		metaMaskState.snapProvider = await getSnapsProvider();
 
-		console.log({ metaMaskState });
-
 		if (metaMaskState.snapProvider !== null) {
 			metaMaskState.snapOrigin = data.network.snapOrigin;
-			metaMaskState.isFlask = await checkIsFlask(provider);
-
-			console.log({ metaMaskState });
+			metaMaskState.isFlask = await checkIsFlask(metaMaskState.snapProvider);
 
 			if (data.network.snapOrigin) {
 				setSnap(metaMaskState);

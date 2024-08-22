@@ -1,4 +1,4 @@
-import type { RequestArguments } from '@metamask/providers';
+import type { RequestArguments, MetaMaskInpageProvider } from '@metamask/providers';
 
 import type { MetaMaskState } from './state/metamask.svelte';
 
@@ -31,8 +31,6 @@ export const setSnap = async (metaMaskState: MetaMaskState) => {
 		},
 		metaMaskState
 	)) as GetSnapsResponse;
-
-	console.log('snaps', snaps);
 
 	metaMaskState.installedSnap = snaps[metaMaskState.snapOrigin || ''] ?? null;
 };
