@@ -2,8 +2,8 @@
 	import { Cluster, Stack } from '$lib/components/layout';
 	import Select from '$lib/components/select/select.svelte';
 	import Label from '$lib/components/input/label.svelte';
-	import { chainLogos } from '@wharfkit/common';
 	import { Chains } from '@wharfkit/common';
+	import TokenSelect from '$lib/components/select/token.svelte';
 
 	const options = [
 		{ value: 30, label: '30d' },
@@ -21,7 +21,7 @@
 	];
 	let selectedFormOption = $state(formOptions[1]);
 
-	const tokenOptions = [
+	const imageOptions = [
 		{ value: Chains.EOS.id, label: Chains.EOS.name, image: String(Chains.EOS.getLogo()) },
 		{
 			value: Chains.Jungle4.id,
@@ -32,6 +32,16 @@
 		{ value: Chains.Telos.id, label: Chains.Telos.name, image: String(Chains.Telos.getLogo()) },
 		{ value: Chains.WAX.id, label: Chains.WAX.name, image: String(Chains.WAX.getLogo()) },
 		{ value: Chains.Proton.id, label: Chains.Proton.name, image: String(Chains.Proton.getLogo()) }
+	];
+	let imageOptionSelected = $state(imageOptions[0]);
+
+	const tokenOptions = [
+		Chains.EOS,
+		Chains.Jungle4,
+		Chains.FIO,
+		Chains.Telos,
+		Chains.WAX,
+		Chains.Proton
 	];
 	let tokenSelected = $state(tokenOptions[0]);
 </script>
@@ -70,16 +80,27 @@
 		<h3 class="h3">Form Select with Images</h3>
 		<Cluster class="items-end">
 			<Stack class="gap-2">
-				<Label for="token-select">Select a token</Label>
+				<Label for="image-select">Select an option</Label>
 				<Select
 					variant="form"
-					id="token-select"
-					options={tokenOptions}
-					bind:selected={tokenSelected}
+					id="image-select"
+					options={imageOptions}
+					bind:selected={imageOptionSelected}
 					sameWidth={false}
 				/>
 			</Stack>
-			<span>Value in parent: {tokenSelected.label}</span>
+			<span>Value in parent: {imageOptionSelected.label}</span>
+		</Cluster>
+	</Stack>
+
+	<Stack class="items-start">
+		<h3 class="h3">Token Select</h3>
+		<Cluster class="items-end">
+			<Stack class="gap-2">
+				<Label for="token-select">Select a token</Label>
+				<TokenSelect id="token-select" options={tokenOptions} bind:selected={tokenSelected} />
+			</Stack>
+			<span>Value in parent: {tokenSelected.name}</span>
 		</Cluster>
 	</Stack>
 </Stack>

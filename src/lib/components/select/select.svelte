@@ -1,13 +1,15 @@
+<script lang="ts" context="module">
+	export interface OptionWithImage<T = unknown> extends SelectOption<T> {
+		image?: string;
+	}
+</script>
+
 <script lang="ts">
 	import { createSelect, createSync, melt, type SelectOption } from '@melt-ui/svelte';
 	import { fade } from 'svelte/transition';
 	import Check from 'lucide-svelte/icons/check';
 	import ChevronDown from 'lucide-svelte/icons/chevron-down';
 	import type { ChangeFn } from '@melt-ui/svelte/internal/helpers';
-
-	interface OptionWithImage extends SelectOption {
-		image?: string;
-	}
 
 	interface Props {
 		options: OptionWithImage[];
