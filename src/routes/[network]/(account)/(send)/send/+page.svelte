@@ -98,7 +98,6 @@
 		},
 		confirm: {
 			previous: 'memo',
-			next: 'to',
 			reset
 		}
 	});
