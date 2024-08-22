@@ -428,15 +428,6 @@
     "@wharfkit/signing-request" "^3.0.0"
     tslib "^2.1.0"
 
-:
-  version "github:greymass/create-account#98402cf"
-  resolved "github:greymass/create-account#98402cf"
-  dependencies:
-    "@greymass/return-path" "^0.0.1"
-    "@wharfkit/antelope" "^0.7.3"
-    "@wharfkit/signing-request" "^3.0.0"
-    tslib "^2.1.0"
-
 "@greymass/miniaes@^1.0.0":
   version "1.0.0"
   resolved "https://registry.npmjs.org/@greymass/miniaes/-/miniaes-1.0.0.tgz"

@@ -78,15 +78,6 @@
 		this={props.href ? 'a' : 'button'}
 		disabled={props.disabled}
 		class="
-		<<<<<<<
-HEAD =======
-		>>>>>>>
-1f81e2f
-		(fix:
-		using
-		links
-		instead
-of functions for link buttons) relative m-0.5 inline-flex grow items-center justify-center
 		text-nowrap
 		rounded-lg
 		px-8

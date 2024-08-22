@@ -11,15 +11,9 @@
 	import Box from '$lib/components/layout/box/box.svelte';
 	import Card from '$lib/components/layout/box/card.svelte';
 	import Grid from '$lib/components/layout/grid.svelte';
-	import {
-		snapProvider,
-		isFlask,
-		isMetaMaskReady,
-		installedSnap,
-		snapOrigin
-	} from '$lib/state/metamask.svelte';
 	import { setSnap, requestSnap } from '$lib/metamask-snap';
 	import { getChainDefinitionFromParams } from '$lib/state/network.svelte';
+	import { MetaMaskState } from '$lib/state/metamask.svelte';
 
 	let provider: MetaMaskInpageProvider;
 
@@ -29,28 +23,27 @@
 
 	const { data } = $props();
 
-	onMount(async () => {
-		snapProvider.set(await getSnapsProvider());
+	let metaMaskState: MetaMaskState;
 
+	onMount(async () => {
 		if (!data.network.snapOrigin) {
 			// We may want to do this in the load function so it works on the SSR side.
 			return goto(`/404`);
 		}
 
-		if ($snapProvider !== null) {
-			provider = $snapProvider;
-			snapOrigin.set(data.network.snapOrigin);
-			isFlask.set(await checkIsFlask(provider));
+		metaMaskState = new MetaMaskState();
+
+		metaMaskState.snapProvider = await getSnapsProvider();
+
+		if (metaMaskState.snapProvider !== null) {
+			metaMaskState.snapOrigin = data.network.snapOrigin;
+			metaMaskState.isFlask = await checkIsFlask(provider);
 
 			if (data.network.snapOrigin) {
 				setSnap(data.network.snapOrigin);
 			}
 		}
 	});
-
-	function installMetaMask() {
-		window.open('https://metamask.io/download/', '_blank');
-	}
 
 	async function createAccountAndLogin() {
 		try {
@@ -76,22 +69,23 @@
 	<Grid itemWidth="100%">
 		<Card class="mb-4">
 			<h2 class="mb-2 text-xl font-semibold">Step 1: Install MetaMask</h2>
-			{#if $isMetaMaskReady}
+			{#if metaMaskState?.isMetaMaskReady}
 				<p class="text-green-600">MetaMask is installed.</p>
 			{:else}
 				<p class="mb-2">To get started, you need to install MetaMask:</p>
-				<Button href={'https://metamask.io/download/'}>Install MetaMask</Button>
+				<Button href={'https://metamask.io/download/'} blank>Install MetaMask</Button>
 			{/if}
 		</Card>
 
 		<Card class="mb-4">
 			<h2 class="mb-2 text-xl font-semibold">Step 2: Install Antelope Snap</h2>
-			{#if $installedSnap}
+			{#if metaMaskState.installedSnap}
 				<p class="text-green-600">Antelope Snap is installed.</p>
 			{:else}
 				<p class="mb-2">Install the Antelope Snap for MetaMask:</p>
-				<Button onclick={() => requestSnap(data.network.snapOrigin)} disabled={!$isMetaMaskReady}
-					>Install Antelope Snap</Button
+				<Button
+					onclick={() => requestSnap(data.network.snapOrigin)}
+					disabled={!metaMaskState.isMetaMaskReady}>Install Antelope Snap</Button
 				>
 			{/if}
 		</Card>
@@ -99,7 +93,10 @@
 		<Card class="mb-4">
 			<h2 class="mb-2 text-xl font-semibold">Step 3: Create an Account</h2>
 			<p class="mb-2">Create your Antelope account:</p>
-			<Button onclick={createAccountAndLogin} disabled={!$isMetaMaskReady || !$installedSnap}>
+			<Button
+				onclick={createAccountAndLogin}
+				disabled={!metaMaskState.isMetaMaskReady || !metaMaskState.installedSnap}
+			>
 				Create Account
 			</Button>
 		</Card>
