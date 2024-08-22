@@ -26,16 +26,20 @@
 	let metaMaskState: MetaMaskState = new MetaMaskState();
 
 	onMount(async () => {
+		console.log('Metamask page mounted');
 		if (!data.network.snapOrigin) {
-			// We may want to do this in the load function so it works on the SSR side.
 			return goto(`/404`);
 		}
 
 		metaMaskState.snapProvider = await getSnapsProvider();
 
+		console.log({ metaMaskState });
+
 		if (metaMaskState.snapProvider !== null) {
 			metaMaskState.snapOrigin = data.network.snapOrigin;
 			metaMaskState.isFlask = await checkIsFlask(provider);
+
+			console.log({ metaMaskState });
 
 			if (data.network.snapOrigin) {
 				setSnap(metaMaskState);
@@ -65,41 +69,28 @@
 	<h1 class="mb-4 text-2xl font-bold">Sign Up with MetaMask</h1>
 
 	<Grid itemWidth="100%">
-		<Card class="mb-4">
-			<h2 class="mb-2 text-xl font-semibold">Step 1: Install MetaMask</h2>
-			{#if metaMaskState?.isMetaMaskReady}
-				<p class="text-green-600">MetaMask is installed.</p>
-			{:else}
+		{#if !metaMaskState?.isMetaMaskReady}
+			<Card class="mb-4">
+				<h2 class="mb-2 text-xl font-semibold">Step 1: Install MetaMask</h2>
 				<p class="mb-2">To get started, you need to install MetaMask:</p>
 				<Button href={'https://metamask.io/download/'} blank>Install MetaMask</Button>
-			{/if}
-		</Card>
-
-		<Card class="mb-4">
-			<h2 class="mb-2 text-xl font-semibold">Step 2: Install Antelope Snap</h2>
-			{#if metaMaskState.installedSnap}
-				<p class="text-green-600">Antelope Snap is installed.</p>
-			{:else}
+			</Card>
+		{:else if !metaMaskState.installedSnap}
+			<Card class="mb-4">
+				<h2 class="mb-2 text-xl font-semibold">Step 2: Install Antelope Snap</h2>
 				<p class="mb-2">Install the Antelope Snap for MetaMask:</p>
-				<Button onclick={() => requestSnap(metaMaskState)} disabled={!metaMaskState.isMetaMaskReady}
-					>Install Antelope Snap</Button
-				>
-			{/if}
-		</Card>
-
-		<Card class="mb-4">
-			<h2 class="mb-2 text-xl font-semibold">Step 3: Create an Account</h2>
-			<p class="mb-2">Create your Antelope account:</p>
-			<Button
-				onclick={createAccountAndLogin}
-				disabled={!metaMaskState.isMetaMaskReady || !metaMaskState.installedSnap}
-			>
-				Create Account
-			</Button>
-		</Card>
+				<Button onclick={() => requestSnap(metaMaskState)}>Install Antelope Snap</Button>
+			</Card>
+		{:else}
+			<Card class="mb-4">
+				<h2 class="mb-2 text-xl font-semibold">Step 3: Create an Account</h2>
+				<p class="mb-2">Create your Antelope account:</p>
+				<Button onclick={createAccountAndLogin}>Create Account</Button>
+			</Card>
+		{/if}
 	</Grid>
 
-	<Box class="mt-8 rounded-lg bg-gray-100 p-4">
+	<Box class="mt-8 rounded-lg bg-gray-800 p-4 text-white">
 		<h3 class="mb-2 text-lg font-semibold">How This Works</h3>
 		<p>
 			This signup method allows you to use your MetaMask wallet to interact with Antelope

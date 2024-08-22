@@ -32,6 +32,8 @@ export const setSnap = async (metaMaskState: MetaMaskState) => {
 		metaMaskState
 	)) as GetSnapsResponse;
 
+	console.log('snaps', snaps);
+
 	metaMaskState.installedSnap = snaps[metaMaskState.snapOrigin || ''] ?? null;
 };
 
