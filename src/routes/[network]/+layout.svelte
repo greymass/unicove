@@ -3,7 +3,7 @@
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { Checksum256 } from '@wharfkit/antelope';
-	import Navigation from '$lib/components/navigation/mobilenavigation.svelte';
+	import MobileNavigation from '$lib/components/navigation/mobilenavigation.svelte';
 	import Sidemenu from '$lib/components/navigation/sidemenu.svelte';
 	import AccountSwitcher from '$lib/components/select/account.svelte';
 	import UnicoveLogo from '$lib/assets/unicovelogo.svelte';
@@ -77,7 +77,7 @@
 			{@render children()}
 		</div>
 	</main>
-	<aside class="relative md:hidden">
-		<Navigation network={data.network} />
+	<aside class="relative h-14 md:hidden">
+		<MobileNavigation network={data.network} />
 	</aside>
 </div>
