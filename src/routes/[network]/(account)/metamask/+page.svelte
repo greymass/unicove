@@ -80,7 +80,7 @@
 				<p class="text-green-600">MetaMask is installed.</p>
 			{:else}
 				<p class="mb-2">To get started, you need to install MetaMask:</p>
-				<Button on:click={installMetaMask}>Install MetaMask</Button>
+				<Button href={'https://metamask.io/download/'}>Install MetaMask</Button>
 			{/if}
 		</Card>
 

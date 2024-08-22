@@ -133,9 +133,7 @@
 
 					<h2 class="h2">Controls</h2>
 					<Button onclick={addSession} variant="secondary">Login</Button>
-					<Button onclick={() => goto(`/${currentNetwork}/signup`)} variant="secondary"
-						>Signup</Button
-					>
+					<Button href={`/${currentNetwork}/signup`} variant="secondary">Signup</Button>
 					{#if context.wharf.session}
 						<Button onclick={() => removeSession(currentSession)} variant="secondary">
 							Logout ({context.wharf.session.actor})

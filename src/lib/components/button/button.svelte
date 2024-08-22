@@ -9,14 +9,24 @@
 		variant?: 'primary' | 'secondary' | 'pill';
 		disabled?: boolean;
 		active?: boolean;
+		blank?: boolean;
 		class?: string;
 		children: Snippet;
 		onclick?: (event: MouseEvent) => void;
 	}
 
-	let { class: className = '', onclick, ...props }: ButtonProps = $props();
+	let { class: className = '', onclick, blank = false, ...props }: ButtonProps = $props();
 
 	let ariaRole = props.href ? 'link' : 'button';
+
+	let linkProps = $derived(() =>
+		props.href && blank
+			? {
+					target: '_blank',
+					rel: 'noopener noreferrer'
+				}
+			: {}
+	);
 </script>
 
 <!-- [@media(any-hover:hover)]:hover:opacity-80 -->
@@ -27,7 +37,10 @@
 		data-active={props.active}
 		class="
 		relative
-		inline-block
+		m-0.5
+		inline-flex
+		items-center
+		justify-center
 		text-nowrap
 		rounded-full
 		px-6
@@ -50,6 +63,7 @@
 		{onclick}
 		role={ariaRole}
 		{...props}
+		{...linkProps}
 	>
 		<span class="pointer-events-none relative z-10">{@render props.children()}</span>
 		<div
@@ -64,8 +78,15 @@
 		this={props.href ? 'a' : 'button'}
 		disabled={props.disabled}
 		class="
-		relative
-		grow
+		<<<<<<<
+HEAD =======
+		>>>>>>>
+1f81e2f
+		(fix:
+		using
+		links
+		instead
+of functions for link buttons) relative m-0.5 inline-flex grow items-center justify-center
 		text-nowrap
 		rounded-lg
 		px-8
@@ -93,6 +114,7 @@
 		{onclick}
 		role={ariaRole}
 		{...props}
+		{...linkProps}
 	>
 		<span class="pointer-events-none relative z-10">{@render props.children()}</span>
 		<div
@@ -112,8 +134,15 @@ active:transition-opacity
 		this={props.href ? 'a' : 'button'}
 		disabled={props.disabled}
 		class="
-		relative
-		grow
+		<<<<<<<
+HEAD =======
+		>>>>>>>
+1f81e2f
+		(fix:
+		using
+		links
+		instead
+of functions for link buttons) relative m-0.5 inline-flex grow items-center justify-center
 		text-nowrap
 		rounded-lg
 		bg-skyBlue-500
@@ -139,6 +168,7 @@ active:transition-opacity
 		{onclick}
 		role={ariaRole}
 		{...props}
+		{...linkProps}
 	>
 		<span class="pointer-events-none relative z-10">{@render props.children()}</span>
 		<div

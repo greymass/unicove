@@ -1,12 +1,9 @@
 import { browser } from '$app/environment';
 import { PUBLIC_LOCAL_SIGNER } from '$env/static/public';
 
-import { getContext, setContext } from 'svelte';
-import type {} from '@wharfkit/antelope';
 import { ChainDefinition, Chains } from '@wharfkit/common';
 import {
 	type AccountCreationPlugin,
-	type AccountCreationPluginConfig,
 	type CreateAccountOptions,
 	type LoginOptions,
 	type RestoreArgs,
