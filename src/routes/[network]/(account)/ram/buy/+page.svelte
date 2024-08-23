@@ -90,8 +90,11 @@
 
 <form on:submit={preventDefault(handleBuyRAM)}>
 	<Stack class="gap-3">
-		<Label for="assetInput">Amount</Label>
+		<Label for="assetInput">Amount (in bytes)</Label>
 		<Input id="assetInput" bind:value={buyRamState.bytes} />
+		{#if buyRamState.insufficientBalance}
+			<p class="text-red-500">Insufficient balance. Please enter a smaller amount.</p>
+		{/if}
 		<p>
 			Available:
 			{#if context.account}

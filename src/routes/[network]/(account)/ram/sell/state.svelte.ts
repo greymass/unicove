@@ -16,6 +16,7 @@ export class SellRAMState {
 			this.chain?.systemToken || '4,EOS'
 		)
 	);
+	public insufficientRAM: boolean = $derived(this.bytes > this.max);
 
 	public valid: boolean = $derived(
 		!!(this.bytes > 0 && this.bytes <= this.max && this.account.value)

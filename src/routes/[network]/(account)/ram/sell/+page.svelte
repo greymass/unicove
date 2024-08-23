@@ -88,6 +88,9 @@
 	<Stack class="gap-3">
 		<Label for="assetInput">Amount (in bytes)</Label>
 		<Input id="assetInput" bind:value={sellRamState.bytes} />
+		{#if sellRamState.insufficientRAM}
+			<p class="text-red-500">Insufficient RAM available. Please enter a smaller amount.</p>
+		{/if}
 		<p>
 			Available:
 			{#if context.account}
