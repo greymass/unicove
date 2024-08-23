@@ -2,6 +2,7 @@ import { APIClient, Asset, FetchProvider, Int128, type AssetType } from '@wharfk
 import { Chains, ChainDefinition } from '@wharfkit/common';
 import { RAMState, Resources, REXState } from '@wharfkit/resources';
 import { chainIdsToIndices } from '@wharfkit/session';
+import { snapOrigins } from '@wharfkit/wallet-plugin-metamask';
 
 import { Types as DelphiOracleTypes } from '$lib/wharf/contracts/delphioracle';
 import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
@@ -16,11 +17,6 @@ import {
 } from '$lib/wharf/chains';
 
 import { calculateValue } from './client/account.svelte';
-
-const snapOriginMap = new Map([
-	['eos', 'local:http://localhost:8080'],
-	['jungle4', 'local:http://localhost:8080']
-]);
 
 export class NetworkState {
 	public chain: ChainDefinition;
@@ -49,7 +45,7 @@ export class NetworkState {
 		this.chain = chain;
 		this.config = chainConfigs[String(this.chain.id)];
 		this.shortname = chainMapper.toShortName(String(this.chain.id));
-		this.snapOrigin = snapOriginMap.get(this.shortname);
+		this.snapOrigin = snapOrigins.get(this.shortname);
 		if (fetchOverride) {
 			this.fetch = fetchOverride;
 		}
