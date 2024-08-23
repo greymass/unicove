@@ -63,14 +63,6 @@
 		sellRamState.pricePerKB = Asset.from(pricePerKB, data.network.chain.systemToken);
 	}
 
-	function validQuantity(value: number) {
-		console.log({
-			value,
-			max: sellRamState.max
-		});
-		return value > 0 && value <= sellRamState.max;
-	}
-
 	function preventDefault(fn: (event: Event) => void) {
 		return function (event: Event) {
 			event.preventDefault();
@@ -80,7 +72,6 @@
 
 	function setMax() {
 		sellRamState.bytes = sellRamState.max;
-		sellRamState.valid = true;
 	}
 
 	$effect(() => {
@@ -90,10 +81,6 @@
 			}
 			sellRamState.max = Number(context.account.ram?.available || 0);
 		}
-	});
-
-	$effect(() => {
-		sellRamState.valid = validQuantity(sellRamState.bytes);
 	});
 </script>
 

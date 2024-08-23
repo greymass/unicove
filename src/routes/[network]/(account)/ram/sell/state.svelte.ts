@@ -5,7 +5,6 @@ export class SellRAMState {
 	public account: Name = $state(Name.from(''));
 	public bytes: number = $state(0);
 	public max: number = $state(0);
-	public valid: boolean = $state(false);
 	public chain: ChainDefinition | undefined = $state();
 	public pricePerKB: Asset = $state(Asset.fromUnits(0, '4,EOS'));
 	public pricePerByte: Asset = $derived(
@@ -16,6 +15,10 @@ export class SellRAMState {
 			this.pricePerKB.value ? (this.bytes * this.pricePerKB.value) / 1024 : 0,
 			this.chain?.systemToken || '4,EOS'
 		)
+	);
+
+	public valid: boolean = $derived(
+		!!(this.bytes > 0 && this.bytes <= this.max && this.account.value)
 	);
 
 	constructor(chain: ChainDefinition) {
