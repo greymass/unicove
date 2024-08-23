@@ -20,8 +20,7 @@
 	<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
 		{#each signupMethods as method}
 			<div class="card rounded-lg border p-4">
-				<h2 class="mb-2 text-xl font-semibold">{method.name}</h2>
-				<Button onclick={() => goto(method.route)}>{method.name}</Button>
+				<a href={method.route} class="mb-2 text-xl font-semibold">{method.name}</a>
 			</div>
 		{/each}
 	</div>
