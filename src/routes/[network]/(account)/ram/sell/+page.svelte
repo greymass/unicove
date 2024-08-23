@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { Asset } from '@wharfkit/antelope';
-	import { getContext } from 'svelte';
+	import { onMount, getContext } from 'svelte';
+	import { Asset, Int64 } from '@wharfkit/antelope';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import Input from '$lib/components/input/textinput.svelte';
 	import Button from '$lib/components/button/button.svelte';
@@ -12,8 +12,6 @@
 	const { data } = $props();
 
 	const sellRamState: SellRAMState = $state(new SellRAMState(data.network.chain));
-	let quantityInput: Input | undefined = $state();
-	let quantityValid = $state(false);
 
 	async function handleSellRAM() {
 		if (!context.wharf || !context.wharf.session) {
@@ -27,8 +25,50 @@
 			});
 			alert('RAM sale successful');
 		} catch (error) {
+			console.error(error);
 			alert('RAM sale failed: ' + (error as { message: string }).message);
 		}
+	}
+
+	let getRamPriceInterval: NodeJS.Timeout;
+
+	onMount(() => {
+		getRamPriceInterval = setInterval(getRamPrice, 3000);
+
+		return () => clearInterval(getRamPriceInterval);
+	});
+
+	$effect(() => {
+		if (context.network) {
+			getRamPrice();
+		}
+	});
+
+	async function getRamPrice() {
+		console.log('Getting RAM price');
+		const table = context.network?.contracts.system.table('rammarket');
+
+		const ramMarket = await table?.get();
+
+		console.log({ ramMarket });
+
+		if (!ramMarket) {
+			return;
+		}
+
+		const pricePerKB = (ramMarket.quote.balance.value * 1024) / ramMarket.base.balance.value;
+
+		console.log({ pricePerKB });
+
+		sellRamState.pricePerKB = Asset.from(pricePerKB, data.network.chain.systemToken);
+	}
+
+	function validQuantity(value: number) {
+		console.log({
+			value,
+			max: sellRamState.max
+		});
+		return value > 0 && value <= sellRamState.max;
 	}
 
 	function preventDefault(fn: (event: Event) => void) {
@@ -39,29 +79,32 @@
 	}
 
 	function setMax() {
-		quantityInput?.set(Asset.from('1024 BYTE'));
-		quantityValid = true;
+		sellRamState.bytes = sellRamState.max;
+		sellRamState.valid = true;
 	}
 
-	function onQuantityChange(event: CustomEvent) {
-		sellRamState.bytes = event.detail.value;
-		quantityValid = event.detail.valid;
-	}
+	$effect(() => {
+		if (context.account) {
+			if (context.account.name) {
+				sellRamState.account = context.account.name;
+			}
+			sellRamState.max = Number(context.account.ram?.available || 0);
+		}
+	});
+
+	$effect(() => {
+		sellRamState.valid = validQuantity(sellRamState.bytes);
+	});
 </script>
 
 <form on:submit={preventDefault(handleSellRAM)}>
 	<Stack class="gap-3">
 		<Label for="assetInput">Amount (in bytes)</Label>
-		<Input
-			id="assetInput"
-			bind:value={sellRamState.bytes}
-			on:change={onQuantityChange}
-			max={sellRamState.max}
-		/>
+		<Input id="assetInput" bind:value={sellRamState.bytes} />
 		<p>
 			Available:
 			{#if context.account}
-				{context.account.ram?.available} Bytes
+				{sellRamState.max} Bytes
 				<Button disabled={!context.account} onclick={preventDefault(setMax)} type="button"
 					>Fill Max</Button
 				>
@@ -75,11 +118,11 @@
 		<h3 class="h3">Details</h3>
 		<div class="grid grid-cols-2 gap-2">
 			<span>Price:</span>
-			<span>512 Bytes = 1 EOS</span>
-			<span>Expected Receive:</span>
-			<span>{sellRamState.bytes / 512} EOS</span>
+			<span>{sellRamState.pricePerKB} / KB</span>
+			<span>Expected To Receive:</span>
+			<span>{sellRamState.bytesValue}</span>
 		</div>
 	</Stack>
 
-	<Button type="submit" class="mt-4 w-full" disabled={!quantityValid}>Confirm Sell RAM</Button>
+	<Button type="submit" class="mt-4 w-full" disabled={!sellRamState.valid}>Confirm Sell RAM</Button>
 </form>
