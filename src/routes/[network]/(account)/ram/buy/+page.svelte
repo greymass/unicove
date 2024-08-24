@@ -45,20 +45,15 @@
 	});
 
 	async function getRamPrice() {
-		console.log('Getting RAM price');
 		const table = context.network?.contracts.system.table('rammarket');
 
 		const ramMarket = await table?.get();
-
-		console.log({ ramMarket });
 
 		if (!ramMarket) {
 			return;
 		}
 
 		const pricePerKB = (ramMarket.quote.balance.value * 1024) / ramMarket.base.balance.value;
-
-		console.log({ pricePerKB });
 
 		buyRamState.pricePerKB = Asset.from(pricePerKB, data.network.chain.systemToken);
 	}

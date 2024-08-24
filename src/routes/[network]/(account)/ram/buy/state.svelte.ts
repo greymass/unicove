@@ -28,7 +28,7 @@ export class BuyRAMState {
 		!!(this.bytes > 0 && this.bytes <= this.max && this.payer.value && this.receiver.value)
 	);
 
-	public insufficientBalance: boolean = $derived(this.bytes > this.balance.value);
+	public insufficientBalance: boolean = $derived(this.bytesValue.value > this.balance.value);
 
 	constructor(chain: ChainDefinition) {
 		this.chain = chain;

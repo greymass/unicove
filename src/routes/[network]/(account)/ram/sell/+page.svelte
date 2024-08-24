@@ -50,15 +50,11 @@
 
 		const ramMarket = await table?.get();
 
-		console.log({ ramMarket });
-
 		if (!ramMarket) {
 			return;
 		}
 
 		const pricePerKB = (ramMarket.quote.balance.value * 1024) / ramMarket.base.balance.value;
-
-		console.log({ pricePerKB });
 
 		sellRamState.pricePerKB = Asset.from(pricePerKB, data.network.chain.systemToken);
 	}
