@@ -1,8 +1,8 @@
-<script>
+<script lang="ts">
 	import { Cluster, Stack } from '$lib/components/layout';
 	import Select from '$lib/components/select/select.svelte';
 	import Label from '$lib/components/input/label.svelte';
-	import { Chains } from '@wharfkit/common';
+	import { Chains, TokenBalance, TokenIdentifier } from '@wharfkit/common';
 	import TokenSelect from '$lib/components/select/token.svelte';
 
 	const options = [
@@ -35,13 +35,31 @@
 	];
 	let imageOptionSelected = $state(imageOptions[0]);
 
-	const tokenOptions = [
-		Chains.EOS,
-		Chains.Jungle4,
-		Chains.FIO,
-		Chains.Telos,
-		Chains.WAX,
-		Chains.Proton
+	const tokenOptions: TokenBalance[] = [
+		TokenBalance.from({
+			asset: '1.2345 EOS',
+			contract: 'eosio.token',
+			metadata: {
+				id: TokenIdentifier.from({
+					chain: Chains.EOS.id,
+					contract: 'eosio.token',
+					symbol: '4,EOS'
+				}),
+				logo: 'https://assets.wharfkit.com/chain/eos.png'
+			}
+		}),
+		TokenBalance.from({
+			asset: '9876 SCRAP',
+			contract: 'scrap',
+			metadata: {
+				id: TokenIdentifier.from({
+					chain: Chains.EOS.id,
+					contract: 'scrap',
+					symbol: '0,SCRAP'
+				}),
+				logo: 'https://scrapload.io/favicon.ico'
+			}
+		})
 	];
 	let tokenSelected = $state(tokenOptions[0]);
 </script>
