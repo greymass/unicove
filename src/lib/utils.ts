@@ -14,3 +14,10 @@ export function getCacheHeaders(ttl: number, irreversible: boolean = false) {
 		'cloudflare-cdn-cache-control': cloudflare
 	};
 }
+
+export function preventDefault(fn: (event: Event) => void) {
+	return function (event: Event) {
+		event.preventDefault();
+		fn.call(this, event);
+	};
+}
