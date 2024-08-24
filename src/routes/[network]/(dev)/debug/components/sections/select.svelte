@@ -118,7 +118,7 @@
 				<Label for="token-select">Select a token</Label>
 				<TokenSelect id="token-select" options={tokenOptions} bind:selected={tokenSelected} />
 			</Stack>
-			<span>Value in parent: {tokenSelected.name}</span>
+			<span>Value in parent: {JSON.stringify(tokenSelected.metadata.id)}</span>
 		</Cluster>
 	</Stack>
 </Stack>
