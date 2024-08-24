@@ -152,6 +152,7 @@
 					state.balance = balance;
 					state.quantity = Asset.fromUnits(0, balance.asset.symbol);
 					tokenSelect.set(balance);
+					quantityInput.set(Asset.fromUnits(0, balance.asset.symbol));
 				}
 			}
 		}

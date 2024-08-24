@@ -79,7 +79,9 @@
 			input = null;
 		} else {
 			symbol = asset.symbol;
-			input = asset.quantity;
+			if (asset.value) {
+				input = asset.quantity;
+			}
 		}
 	}
 
