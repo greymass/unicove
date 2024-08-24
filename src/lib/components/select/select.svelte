@@ -58,6 +58,15 @@
 		sync.selected(_selected, (v) => (_selected = v || options[0]));
 	});
 
+	/** Set the value from a parent */
+	export function set(option: OptionWithImage | null) {
+		if (!option) {
+			_selected = options[0];
+		} else {
+			_selected = option;
+		}
+	}
+
 	let selectedOption = $derived.by(() => options.find((o) => o.label === $selectedLabel));
 </script>
 
