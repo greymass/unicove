@@ -19,6 +19,10 @@
 	import { SendState } from './state.svelte';
 	import { page } from '$app/stores';
 
+	import { getSetting } from '$lib/state/settings.svelte';
+
+	const debugMode = getSetting('debug-mode', false);
+
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
 	const state: SendState = $state(new SendState(data.network.chain));
@@ -246,13 +250,15 @@
 		</fieldset>
 	</form>
 
-	<h3 class="h3">Debugging</h3>
-	<Code
-		>{JSON.stringify(
-			{ state, current: f.current, valid: { toValid, assetValid, memoValid } },
-			undefined,
-			2
-		)}</Code
-	>
+	{#if debugMode.value}
+		<h3 class="h3">Debugging</h3>
+		<Code
+			>{JSON.stringify(
+				{ state, current: f.current, valid: { toValid, assetValid, memoValid } },
+				undefined,
+				2
+			)}</Code
+		>
+	{/if}
 	<Button onclick={() => f.send('reset')}>Reset</Button>
 </article>
