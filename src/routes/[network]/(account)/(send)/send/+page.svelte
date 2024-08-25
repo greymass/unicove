@@ -149,7 +149,6 @@
 			) {
 				const balance = getDefaultBalance(data.network, context.account.balances);
 				if (balance) {
-					console.log('setting balance', JSON.stringify(balance));
 					state.balance = balance;
 					state.quantity = Asset.fromUnits(0, balance.asset.symbol);
 					tokenSelect.set(balance);
