@@ -3,8 +3,28 @@
 	import * as m from '$lib/paraglide/messages.js';
 	import Code from '$lib/components/code.svelte';
 
+	import SendSummary from '$lib/components/summary/send.svelte';
+
+	const summaryMap = {
+		'eosio.token': {
+			transfer: SendSummary
+		}
+	};
+
 	export let data: PageData;
 </script>
+
+{#if data.transaction && data.transaction.trx}
+	{#each data.transaction.trx.trx.actions as action}
+		{@const summaryComponent = summaryMap[action.account][action.name]}
+		{#if summaryComponent}
+			<svelte:component this={summaryComponent} {action} />
+		{:else}
+			<p>Unknown action: {action.account}::{action.name}</p>
+		{/if}
+		<Code>{JSON.stringify(action, null, 2)}</Code>
+	{/each}
+{/if}
 
 {#if data.seq}
 	{@const trace = data.transaction.traces.find(

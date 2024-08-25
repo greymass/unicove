@@ -13,6 +13,7 @@
 	import Label from '$lib/components/input/label.svelte';
 	import NameInput from '$lib/components/input/name.svelte';
 	import Progress from '$lib/components/progress.svelte';
+	import SummarySend from '$lib/components/summary/send.svelte';
 	import TextInput from '$lib/components/input/textinput.svelte';
 	import TokenSelect from '$lib/components/select/token.svelte';
 	import PageHeader from '$lib/components/pageheader.svelte';
@@ -267,8 +268,6 @@
 		// Focus the "to" input field
 		await tick();
 		toRef?.focus();
-
-		console.log('data reset', f.current, JSON.stringify(state));
 	}
 
 	async function resetURL() {
@@ -407,30 +406,7 @@
 			{/if}
 		</fieldset>
 
-		<div class="grid grid-cols-3 gap-4 text-center" class:hidden={f.current !== 'memo'}>
-			<div>
-				<h2 class="h2">
-					{state.from}
-				</h2>
-				<p>will send</p>
-			</div>
-			<div>
-				<h2 class="h2">
-					{state.quantity}
-				</h2>
-				{#if state.value}
-					<p>
-						{formatCurrency(state.value)}
-					</p>
-				{/if}
-			</div>
-			<div>
-				<h2 class="h2">
-					{state.to}
-				</h2>
-				<p>will receive</p>
-			</div>
-		</div>
+		<SummarySend action={{ data: state }} class={f.current !== 'memo' ? 'hidden' : undefined} />
 
 		<fieldset class="grid gap-2" class:hidden={f.current !== 'memo'}>
 			<Label for="memo-input">Memo</Label>

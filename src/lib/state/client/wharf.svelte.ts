@@ -28,6 +28,7 @@ import {
 	sendErrorToast,
 	sendSuccessToast
 } from '$lib/wharf/transact.svelte';
+import { chainMap, chainMapper } from '$lib/wharf/chains';
 
 const walletPlugins: WalletPlugin[] = [new WalletPluginAnchor(), new WalletPluginMetaMask()];
 
@@ -138,6 +139,8 @@ export class WharfState {
 
 		const transaction: QueuedTransaction = {
 			status: StatusType.CREATED,
+			chain: this.session.chain.id,
+			network: chainMapper.toShortName(String(this.session.chain.id)),
 			args,
 			options
 		};
