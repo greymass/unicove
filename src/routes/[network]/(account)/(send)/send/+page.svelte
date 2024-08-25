@@ -201,7 +201,7 @@
 			_enter: () => tick().then(() => memoRef?.focus())
 		},
 		complete: {
-			previous: reset
+			reset
 		},
 		error: {
 			previous: 'to',
@@ -244,7 +244,7 @@
 	const next = () => f.send('next');
 	const previous = () => f.send('previous');
 
-	function reset(): FormStates {
+	async function resetState() {
 		// Reset the inputs
 		if (toInput) {
 			toInput.set('');
@@ -256,13 +256,31 @@
 		// Reset the form state itself
 		state.reset();
 
+		// Reset associated transaction ID
+		id = undefined;
+
 		// Default back to the account as the sender
 		if (context.account && context.account.name) {
 			state.from = context.account.name;
 		}
 
 		// Focus the "to" input field
-		tick().then(() => toRef?.focus());
+		await tick();
+		toRef?.focus();
+
+		console.log('data reset', f.current, JSON.stringify(state));
+	}
+
+	async function resetURL() {
+		$page.url.searchParams.delete('to');
+		$page.url.searchParams.delete('quantity');
+		await goto(`?${$page.url.searchParams.toString()}`);
+		f.send('reset');
+	}
+
+	function reset(): FormStates {
+		// Call reset
+		resetState();
 
 		// Return the state it should reset to
 		return 'to';
@@ -294,7 +312,7 @@
 		}
 		if (key === 'Escape') {
 			if (f.current === 'to') {
-				reset();
+				resetURL();
 			} else {
 				previous();
 			}
@@ -427,12 +445,9 @@
 
 		<fieldset class="grid grid-cols-[50%_50%] gap-2 transition-all duration-200">
 			{#if f.current === 'to'}
-				<Button variant="secondary" onclick={() => f.send('reset')}>
-					Reset
-					{#if f.current === 'to'}
-						[␛]
-					{/if}
-				</Button>
+				<Button variant="secondary" onclick={() => resetURL()}>Restart [␛]</Button>
+			{:else if f.current === 'complete'}
+				<Button onclick={() => resetURL()}>Start new send</Button>
 			{:else}
 				<Button variant="secondary" type="button" onclick={previous}>Back [␛]</Button>
 			{/if}
@@ -441,7 +456,7 @@
 				<Button class="col-end-3" type="button" onclick={transact} disabled={!allValid}
 					>Submit [⏎]</Button
 				>
-			{:else}
+			{:else if f.current !== 'complete'}
 				<Button class="col-end-3" type="submit" onclick={preventDefault(next)} disabled={!nextValid}
 					>Next [⏎]</Button
 				>
