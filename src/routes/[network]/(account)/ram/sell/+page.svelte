@@ -30,35 +30,6 @@
 		}
 	}
 
-	let getRamPriceInterval: NodeJS.Timeout;
-
-	onMount(() => {
-		getRamPriceInterval = setInterval(getRamPrice, 3000);
-
-		return () => clearInterval(getRamPriceInterval);
-	});
-
-	$effect(() => {
-		if (context.network) {
-			getRamPrice();
-		}
-	});
-
-	async function getRamPrice() {
-		console.log('Getting RAM price');
-		const table = context.network?.contracts.system.table('rammarket');
-
-		const ramMarket = await table?.get();
-
-		if (!ramMarket) {
-			return;
-		}
-
-		const pricePerKB = (ramMarket.quote.balance.value * 1024) / ramMarket.base.balance.value;
-
-		sellRamState.pricePerKB = Asset.from(pricePerKB, data.network.chain.systemToken);
-	}
-
 	function preventDefault(fn: (event: Event) => void) {
 		return function (event: Event) {
 			event.preventDefault();
@@ -76,6 +47,12 @@
 				sellRamState.account = context.account.name;
 			}
 			sellRamState.max = Number(context.account.ram?.available || 0);
+		}
+	});
+
+	$effect(() => {
+		if (data.network.ramprice) {
+			sellRamState.pricePerKB = data.network.ramprice.eos;
 		}
 	});
 </script>

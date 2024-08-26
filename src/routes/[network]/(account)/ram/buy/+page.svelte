@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount, getContext } from 'svelte';
+	import { getContext } from 'svelte';
 	import { Asset } from '@wharfkit/antelope';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import Input from '$lib/components/input/textinput.svelte';
@@ -30,34 +30,6 @@
 		}
 	}
 
-	let getRamPriceInterval: NodeJS.Timeout;
-
-	onMount(() => {
-		getRamPriceInterval = setInterval(getRamPrice, 3000);
-
-		return () => clearInterval(getRamPriceInterval);
-	});
-
-	$effect(() => {
-		if (context.network) {
-			getRamPrice();
-		}
-	});
-
-	async function getRamPrice() {
-		const table = context.network?.contracts.system.table('rammarket');
-
-		const ramMarket = await table?.get();
-
-		if (!ramMarket) {
-			return;
-		}
-
-		const pricePerKB = (ramMarket.quote.balance.value * 1024) / ramMarket.base.balance.value;
-
-		buyRamState.pricePerKB = Asset.from(pricePerKB, data.network.chain.systemToken);
-	}
-
 	function preventDefault(fn: (event: Event) => void) {
 		return function (event: Event) {
 			event.preventDefault();
@@ -79,6 +51,12 @@
 				context.account.balance?.liquid?.value || 0,
 				data.network.chain.systemToken
 			);
+		}
+	});
+
+	$effect(() => {
+		if (data.network.ramprice) {
+			buyRamState.pricePerKB = data.network.ramprice.eos;
 		}
 	});
 </script>
