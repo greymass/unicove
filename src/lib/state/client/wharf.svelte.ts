@@ -19,6 +19,8 @@ import WebRenderer from '@wharfkit/web-renderer';
 import { WalletPluginAnchor } from '@wharfkit/wallet-plugin-anchor';
 import { WalletPluginMetaMask } from '@wharfkit/wallet-plugin-metamask';
 import { WalletPluginPrivateKey } from '@wharfkit/wallet-plugin-privatekey';
+import { AccountCreationPluginMetamask } from '@wharfkit/account-creation-plugin-metamask';
+import { AccountCreationPluginGreymass } from '@wharfkit/account-creation-plugin-greymass';
 
 import { TransactPluginStatusEmitter } from '$lib/wharf/plugins/status';
 import {
@@ -28,8 +30,8 @@ import {
 	sendErrorToast,
 	sendSuccessToast
 } from '$lib/wharf/transact.svelte';
-import { AccountCreationPluginMetamask } from '@wharfkit/account-creation-plugin-metamask';
-import { AccountCreationPluginGreymass } from '@wharfkit/account-creation-plugin-greymass';
+
+import { chainMapper } from '$lib/wharf/chains';
 
 const metamaskWalletPlugin = new WalletPluginMetaMask();
 
@@ -160,6 +162,8 @@ export class WharfState {
 
 		const transaction: QueuedTransaction = {
 			status: StatusType.CREATED,
+			chain: this.session.chain.id,
+			network: chainMapper.toShortName(String(this.session.chain.id)),
 			args,
 			options
 		};

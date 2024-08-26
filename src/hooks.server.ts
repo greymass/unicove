@@ -86,11 +86,10 @@ export async function redirectHandle({ event, resolve }: HandleParams): Promise<
 	if (pathMore.length > 0) {
 		url += `/${pathMore.join('/')}`;
 	}
-	url += search;
 
 	if (pathname !== url) {
 		return new Response(undefined, {
-			headers: { Location: url },
+			headers: { Location: url + search },
 			status: 301
 		});
 	}

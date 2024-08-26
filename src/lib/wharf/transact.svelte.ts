@@ -13,6 +13,8 @@ export enum StatusType {
 
 export interface QueuedTransaction {
 	status: StatusType;
+	chain: Checksum256;
+	network: string;
 	args: TransactArgs;
 	options?: TransactOptions;
 	response?: any;

@@ -1,3 +1,9 @@
+<script lang="ts" context="module">
+	export interface OptionWithImage<T = unknown> extends SelectOption<T> {
+		image?: string;
+	}
+</script>
+
 <script lang="ts">
 	import { createSelect, createSync, melt, type SelectOption } from '@melt-ui/svelte';
 	import { fade } from 'svelte/transition';
@@ -6,13 +12,15 @@
 	import type { ChangeFn } from '@melt-ui/svelte/internal/helpers';
 
 	interface Props {
-		options: SelectOption[];
-		selected: SelectOption;
+		options: OptionWithImage[];
+		selected: OptionWithImage;
+		variant?: 'pill' | 'form';
 		id: string;
 		onSelectedChange?: ChangeFn<SelectOption | undefined>;
 		required?: boolean;
 		disabled?: boolean;
 		multiple?: boolean;
+		sameWidth?: boolean;
 	}
 
 	let {
@@ -22,7 +30,9 @@
 		onSelectedChange,
 		required,
 		disabled,
-		multiple
+		variant = 'pill',
+		multiple,
+		sameWidth = true
 	}: Props = $props();
 
 	const {
@@ -37,9 +47,9 @@
 		multiple,
 		forceVisible: true,
 		positioning: {
-			placement: 'bottom',
+			placement: 'bottom-start',
 			fitViewport: true,
-			sameWidth: true
+			sameWidth
 		}
 	});
 
@@ -47,20 +57,28 @@
 	$effect(() => {
 		sync.selected(_selected, (v) => (_selected = v || options[0]));
 	});
+
+	/** Set the value from a parent */
+	export function set(option: OptionWithImage | null) {
+		if (!option) {
+			_selected = options[0];
+		} else {
+			_selected = option;
+		}
+	}
+
+	let selectedOption = $derived.by(() => options.find((o) => o.label === $selectedLabel));
 </script>
 
 <button
 	class="
 	flex
-	h-10
 	items-center
 	justify-between
 	gap-2
-	rounded-full
 	border-2
 	border-mineShaft-600
 	bg-transparent
-	py-2
 	pl-4
 	pr-3
 	font-medium
@@ -71,11 +89,24 @@
 	focus-visible:border-transparent
 	focus-visible:outline
 	"
+	class:rounded-full={variant === 'pill'}
+	class:rounded-lg={variant === 'form'}
+	class:h-10={variant === 'pill'}
+	class:py-4={variant === 'form'}
 	use:melt={$trigger}
 	aria-label="{id}-label"
 	{id}
 >
-	{$selectedLabel || 'Select an option'}
+	<div class="flex items-center">
+		{#if selectedOption?.image}
+			<img
+				src={selectedOption.image}
+				alt={selectedOption.label}
+				class="mr-2 size-5 object-contain"
+			/>
+		{/if}
+		{$selectedLabel || 'Select an option'}
+	</div>
 	<ChevronDown class="size-5 transition-transform duration-100 {$open ? 'rotate-180' : ''}" />
 </button>
 
@@ -87,16 +118,19 @@
 		max-h-[300px]
 		flex-col
 		overflow-y-auto
-		rounded-2xl
 		border-2
 		border-mineShaft-600
 		bg-shark-950
-		px-1
-		pb-1.5
-		pt-1
+		py-1
 		shadow
 		focus:!ring-0
 		"
+		class:px-1={variant === 'pill'}
+		class:px-2={variant === 'form'}
+		class:py-1={variant === 'pill'}
+		class:py-2={variant === 'form'}
+		class:rounded-2xl={variant === 'pill'}
+		class:rounded-lg={variant === 'form'}
 		use:melt={$menu}
 		transition:fade={{ duration: 100 }}
 	>
@@ -120,11 +154,17 @@
 				data-[highlighted]:text-solar-950
 				data-[disabled]:opacity-50
 				"
+				class:rounded-xl={variant === 'pill'}
+				class:rounded-sm={variant === 'form'}
 				use:melt={$option(item)}
 			>
-				<div class="check">
-					<Check class="size-4 {$isSelected(item.value) ? 'block' : 'hidden'}" />
-				</div>
+				{#if item.image}
+					<img src={item.image} alt={item.label} class="mr-2 size-4 object-contain" />
+				{:else}
+					<div class="check">
+						<Check class="size-4 {$isSelected(item.value) ? 'block' : 'hidden'}" />
+					</div>
+				{/if}
 				{item.label}
 			</div>
 		{/each}

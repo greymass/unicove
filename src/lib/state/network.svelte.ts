@@ -1,5 +1,5 @@
 import { APIClient, Asset, FetchProvider, Int128, type AssetType } from '@wharfkit/antelope';
-import { Chains, ChainDefinition } from '@wharfkit/common';
+import { Chains, ChainDefinition, TokenMeta } from '@wharfkit/common';
 import { RAMState, Resources, REXState } from '@wharfkit/resources';
 import { chainIdsToIndices } from '@wharfkit/session';
 import { snapOrigins } from '@wharfkit/wallet-plugin-metamask';
@@ -17,6 +17,7 @@ import {
 } from '$lib/wharf/chains';
 
 import { calculateValue } from './client/account.svelte';
+import { tokens } from '../../routes/[network]/api/tokens/tokens';
 
 export class NetworkState {
 	public chain: ChainDefinition;
@@ -32,6 +33,7 @@ export class NetworkState {
 	public ramstate?: RAMState = $state();
 	public resources?: Resources = $state();
 	public rexstate?: REXState = $state();
+	public tokenmeta?: TokenMeta[] = $state();
 	public tokenstate?: DelphiOracleTypes.datapoints = $state();
 	public rexprice = $derived.by(() => undefined);
 	public tokenprice = $derived.by(() => {
@@ -46,6 +48,7 @@ export class NetworkState {
 		this.config = chainConfigs[String(this.chain.id)];
 		this.shortname = chainMapper.toShortName(String(this.chain.id));
 		this.snapOrigin = snapOrigins.get(this.shortname);
+		this.tokenmeta = tokens[this.shortname];
 		if (fetchOverride) {
 			this.fetch = fetchOverride;
 		}

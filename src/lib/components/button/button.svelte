@@ -42,8 +42,8 @@
 		justify-center
 		text-nowrap
 		rounded-full
-		px-6
-		py-2.5
+		px-5
+		py-2
 		text-center
 		text-base
 		font-medium
