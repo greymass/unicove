@@ -16,7 +16,11 @@
 			<tr>
 				<td>{transaction.status}</td>
 				{#if transaction.transaction}
-					<td><pre>{transaction.transaction.id}</pre></td>
+					<td>
+						<a href="/{transaction.network}/transaction/{transaction.transaction.id}">
+							{transaction.transaction.id}
+						</a>
+					</td>
 				{:else}
 					<td>{transaction.error}</td>
 				{/if}
@@ -33,7 +37,11 @@
 			<tr>
 				<td>{transaction.status}</td>
 				{#if transaction.transaction}
-					<td><pre>{transaction.transaction.id}</pre></td>
+					<td>
+						<a href="/{transaction.network}/transaction/{transaction.transaction.id}">
+							{transaction.transaction.id}
+						</a>
+					</td>
 				{:else}
 					<td>{transaction.error}</td>
 				{/if}
