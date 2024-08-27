@@ -78,17 +78,6 @@
 		}
 	}
 
-	// Effect to handle network changes
-	$effect(() => {
-		if (
-			data.network.chain.id &&
-			context.account &&
-			!context.account.network.chain.equals(data.network.chain)
-		) {
-			goto(`/${languageTag()}/${context.account.network}/send`);
-		}
-	});
-
 	// Effect to handle token swapping
 	$effect(() => {
 		// Only trigger when the states quantity and balance do not match tokens
