@@ -10,18 +10,23 @@ export class BuyRAMState {
 	public pricePerKB: Asset = $state(Asset.fromUnits(0, '4,EOS'));
 
 	public pricePerByte: Asset = $derived(
-		Asset.fromUnits(this.pricePerKB.value / 1024, this.pricePerKB.symbol)
+		Asset.fromUnits(this.pricePerKB.value / 1000, this.pricePerKB.symbol)
 	);
 
 	public bytesValue: Asset = $derived(
-		Asset.from(
-			this.pricePerKB.value ? (this.bytes * this.pricePerKB.value) / 1024 : 0,
-			this.chain?.systemToken?.symbol || '4,EOS'
-		)
+		Asset.from((this.bytes * this.pricePerKB.value) / 1000, this.chain?.systemToken?.symbol)
+	);
+
+	public fee: Asset = $derived(
+		Asset.from(this.bytesValue.value * 0.05, this.chain?.systemToken?.symbol)
+	);
+
+	public bytesCost: Asset = $derived(
+		Asset.fromUnits(this.bytesValue.units.adding(this.fee.units), this.chain?.systemToken?.symbol)
 	);
 
 	public max: number = $derived(
-		this.pricePerKB.value ? Math.floor((this.balance.value * 1024) / this.pricePerKB.value) : 0
+		this.pricePerKB.value ? Math.floor((this.balance.value * 1000) / this.pricePerKB.value) : 0
 	);
 
 	public valid: boolean = $derived(
@@ -45,7 +50,7 @@ export class BuyRAMState {
 		return Serializer.objectify({
 			payer: this.payer,
 			receiver: this.receiver,
-			quant: this.bytesValue
+			quant: this.bytesCost
 		});
 	}
 

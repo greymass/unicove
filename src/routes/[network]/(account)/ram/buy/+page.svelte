@@ -90,10 +90,14 @@
 	<Stack class="mt-4 gap-3">
 		<h3 class="h3">Details</h3>
 		<div class="grid grid-cols-2 gap-2">
-			<span>Price:</span>
+			<span>Price for 1000 bytes:</span>
 			<span>{buyRamState.pricePerKB} / KB</span>
-			<span>Cost:</span>
+			<span>Price for {buyRamState.bytes}:</span>
 			<span>{buyRamState.bytesValue}</span>
+			<span>Network Fee (0.5%)</span>
+			<span>{buyRamState.fee}</span>
+			<span>Total Cost</span>
+			<span>{buyRamState.bytesCost}</span>
 		</div>
 	</Stack>
 
