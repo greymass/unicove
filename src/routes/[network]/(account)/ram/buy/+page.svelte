@@ -1,15 +1,21 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 	import { Asset } from '@wharfkit/antelope';
+
+	import { getSetting } from '$lib/state/settings.svelte.js';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import Input from '$lib/components/input/textinput.svelte';
+
 	import Button from '$lib/components/button/button.svelte';
+	import Code from '$lib/components/code.svelte';
+	import Input from '$lib/components/input/textinput.svelte';
 	import Label from '$lib/components/input/label.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
+
 	import { BuyRAMState } from './state.svelte.js';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
+	const debugMode = getSetting('debug-mode', false);
 
 	const buyRamState: BuyRAMState = $state(new BuyRAMState(data.network.chain));
 
@@ -49,7 +55,7 @@
 			}
 			buyRamState.balance = Asset.from(
 				context.account.balance?.liquid?.value || 0,
-				data.network.chain.systemToken
+				data.network.chain.systemToken?.symbol
 			);
 		}
 	});
@@ -92,4 +98,18 @@
 	</Stack>
 
 	<Button type="submit" class="mt-4 w-full" disabled={!buyRamState.valid}>Confirm Buy RAM</Button>
+
+	{#if debugMode.value}
+		<h3 class="h3">Debugging</h3>
+		<Code
+			>{JSON.stringify(
+				{
+					state: buyRamState,
+					balances: context.account?.balances
+				},
+				undefined,
+				2
+			)}</Code
+		>
+	{/if}
 </form>
