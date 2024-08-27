@@ -13,7 +13,7 @@ export class SellRAMState {
 	public bytesValue: Asset = $derived(
 		Asset.from(
 			this.pricePerKB.value ? (this.bytes * this.pricePerKB.value) / 1024 : 0,
-			this.chain?.systemToken || '4,EOS'
+			this.chain?.systemToken?.symbol || '4,EOS'
 		)
 	);
 	public insufficientRAM: boolean = $derived(this.bytes > this.max);
