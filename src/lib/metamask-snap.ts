@@ -1,4 +1,4 @@
-import type { RequestArguments, MetaMaskInpageProvider } from '@metamask/providers';
+import type { RequestArguments } from '@metamask/providers';
 
 import type { MetaMaskState } from './state/metamask.svelte';
 

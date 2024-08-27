@@ -15,12 +15,12 @@
 		onclick?: (event: MouseEvent) => void;
 	}
 
-	let { class: className = '', onclick, blank = false, ...props }: ButtonProps = $props();
+	let { class: className = '', onclick, ...props }: ButtonProps = $props();
 
 	let ariaRole = props.href ? 'link' : 'button';
 
 	let linkProps = $derived(() =>
-		props.href && blank
+		props.href && props.blank
 			? {
 					target: '_blank',
 					rel: 'noopener noreferrer'

@@ -69,14 +69,14 @@
 			</Card>
 		{:else if !metaMaskState.installedSnap}
 			<Card class="mb-4">
-				<h2 class="mb-2 text-xl font-semibold">Step 2: Install Antelope Snap</h2>
-				<p class="mb-2">Install the Antelope Snap for MetaMask:</p>
-				<Button onclick={() => requestSnap(metaMaskState)}>Install Antelope Snap</Button>
+				<h2 class="mb-2 text-xl font-semibold">Step 2: Install EOS Snap</h2>
+				<p class="mb-2">Install the EOS Snap for MetaMask:</p>
+				<Button onclick={() => requestSnap(metaMaskState)}>Install EOS Snap</Button>
 			</Card>
 		{:else}
 			<Card class="mb-4">
 				<h2 class="mb-2 text-xl font-semibold">Step 3: Create an Account</h2>
-				<p class="mb-2">Create your Antelope account:</p>
+				<p class="mb-2">Create your {data.network.shortname} account:</p>
 				<Button onclick={createAccountAndLogin}>Create Account</Button>
 			</Card>
 		{/if}

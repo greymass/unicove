@@ -17,7 +17,7 @@
 	const context = getContext<UnicoveContext>('state');
 
 	let currentSession = $derived(context.wharf.session);
-	const currentNetwork = $page.params.network || 'eos';
+	const currentNetwork = $page.params.network;
 
 	function closeDrawer() {
 		$open = false;
