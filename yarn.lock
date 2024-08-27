@@ -2,7 +2,6 @@
 # yarn lockfile v1
 # bun ./bun.lockb --hash: 4D9DB93CA704CBC9-467373d0eedafba2-E90876A9D21AA761-1c70a670ec9d55a3
 
-
 "@alloc/quick-lru@^5.2.0":
   version "5.2.0"
   resolved "https://registry.npmjs.org/@alloc/quick-lru/-/quick-lru-5.2.0.tgz"
@@ -409,10 +408,36 @@
     eventemitter3 "^4.0.7"
     tslib "^2.1.0"
 
+"@greymass/create-account@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.npmjs.org/@greymass/create-account/-/create-account-1.0.2.tgz"
+  integrity sha512-YDtdQTEsMEaQHu5QJx+UzEsag/2yjHxHGPUVaGuNY5tL4p918VJMc0IskjwL4WCSWoRyWeWa4ZUGDz/KTE/Q9Q==
+  dependencies:
+    "@greymass/return-path" "^0.0.1"
+    "@wharfkit/antelope" "^0.7.3"
+    "@wharfkit/signing-request" "^3.0.0"
+    tslib "^2.1.0"
+
+"@greymass/create-account@greymass/create-account":
+  version "github:greymass/create-account#98402cf"
+  resolved "github:greymass/create-account#98402cf"
+  dependencies:
+    "@greymass/return-path" "^0.0.1"
+    "@wharfkit/antelope" "^0.7.3"
+    "@wharfkit/signing-request" "^3.0.0"
+    tslib "^2.1.0"
+
 "@greymass/miniaes@^1.0.0":
   version "1.0.0"
   resolved "https://registry.npmjs.org/@greymass/miniaes/-/miniaes-1.0.0.tgz"
   integrity sha512-xKYTnAyyoq3gpJS11JvU4dkju28M8Zbp06CuP3aKR4DMH6B2z64LauGGGzKksKh5Qd770JA/dzhLbImnBlymbg==
+  dependencies:
+    tslib "^2.1.0"
+
+"@greymass/return-path@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.npmjs.org/@greymass/return-path/-/return-path-0.0.1.tgz"
+  integrity sha512-PMPgSJYSHeaYXbURj4JfsEeReWkJqlTKFMn2iTPhvb+6ICR5GhVPDJKewqZPqpZumcD13M1c701YYWKHZlMsxw==
   dependencies:
     tslib "^2.1.0"
 
@@ -1378,7 +1403,24 @@
     "@wharfkit/token" "^1.1.2"
     tslib "^2.1.0"
 
-"@wharfkit/antelope@^1.0.0", "@wharfkit/antelope@^1.0.11", "@wharfkit/antelope@^1.0.2", "@wharfkit/antelope@^1.0.4", "@wharfkit/antelope@^1.0.5", "@wharfkit/antelope@^1.0.7":
+"@wharfkit/account-creation-plugin-greymass@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.npmjs.org/@wharfkit/account-creation-plugin-greymass/-/account-creation-plugin-greymass-1.2.0.tgz"
+  integrity sha512-LZN0aTeVLnSkExS/T/JEk1ehlBPaHDjK+RQiqt6NEZeYawAnAak1wr455aHyLYE4IENmsellGWFq+xw4LMgJdg==
+  dependencies:
+    "@greymass/create-account" "greymass/create-account"
+    tslib "^2.1.0"
+
+"@wharfkit/account-creation-plugin-metamask@1.0.0-RC3":
+  version "1.0.0-RC3"
+  resolved "https://registry.npmjs.org/@wharfkit/account-creation-plugin-metamask/-/account-creation-plugin-metamask-1.0.0-RC3.tgz"
+  integrity sha512-TEWDx5xY8innYY+LvBlfKLlJP2YDzfXDIiwlxBHC0d2g8KWIHmFpz9aWdv9GniQiQ9S6NHZLCOYOYvHj7F1t1w==
+  dependencies:
+    "@greymass/create-account" "^1.0.2"
+    "@metamask/providers" "^17.0.0"
+    tslib "^2.1.0"
+
+"@wharfkit/antelope@^0.7.3", "@wharfkit/antelope@^1.0.0", "@wharfkit/antelope@^1.0.11", "@wharfkit/antelope@^1.0.2", "@wharfkit/antelope@^1.0.4", "@wharfkit/antelope@^1.0.5", "@wharfkit/antelope@^1.0.7":
   version "1.0.11"
   resolved "https://registry.npmjs.org/@wharfkit/antelope/-/antelope-1.0.11.tgz"
   integrity sha512-4oSM5b9IzQxP6hC5H6QGBCylTYKs+cZ8fg6piM8qjj/g4Ok3YmYwx6sbIQwwQmdCUK9sBweKXrOHjNwpyafPBQ==
@@ -1449,7 +1491,7 @@
     pako "^2.0.4"
     tslib "^2.1.0"
 
-"@wharfkit/signing-request@^3.1.0":
+"@wharfkit/signing-request@^3.0.0", "@wharfkit/signing-request@^3.1.0":
   version "3.2.0"
   resolved "https://registry.npmjs.org/@wharfkit/signing-request/-/signing-request-3.2.0.tgz"
   integrity sha512-rIMzqwAKA5vb09+1BI+9fUXbj73JIkYcD1XT/Tom+k/+bqi51JcmC0trjCOjTUOK9UYDabpxYFixrf1ZvQymKw==
@@ -1477,10 +1519,10 @@
     isomorphic-ws "^5.0.0"
     ws "^8.13.0"
 
-"@wharfkit/wallet-plugin-metamask@^1.0.0-rc3":
-  version "1.0.0-rc3"
-  resolved "https://registry.npmjs.org/@wharfkit/wallet-plugin-metamask/-/wallet-plugin-metamask-1.0.0-rc3.tgz"
-  integrity sha512-k2yBmCIlXwBMJnK1+ubgnzKfF8bMpvfuVbBOhlVj46tj+F4wGQ16XuHfCN0mK2Ta0mALHuH8vG7/PoFs+Cn87A==
+"@wharfkit/wallet-plugin-metamask@1.0.0-rc8":
+  version "1.0.0-rc8"
+  resolved "https://registry.npmjs.org/@wharfkit/wallet-plugin-metamask/-/wallet-plugin-metamask-1.0.0-rc8.tgz"
+  integrity sha512-ngixqtUbK3vKUMMz7IH2ga4Pb1c/RpohCTaOz26aKsNrY6XJapFU+b9HUihA029YP/xs4GSTJ5akpM9CyXpntw==
   dependencies:
     "@metamask/providers" "^17.0.0"
     tslib "^2.1.0"

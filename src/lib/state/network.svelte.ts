@@ -2,6 +2,7 @@ import { APIClient, Asset, FetchProvider, Int128, type AssetType } from '@wharfk
 import { Chains, ChainDefinition, TokenMeta } from '@wharfkit/common';
 import { RAMState, Resources, REXState } from '@wharfkit/resources';
 import { chainIdsToIndices } from '@wharfkit/session';
+import { snapOrigins } from '@wharfkit/wallet-plugin-metamask';
 
 import { Types as DelphiOracleTypes } from '$lib/wharf/contracts/delphioracle';
 import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
@@ -25,6 +26,7 @@ export class NetworkState {
 	public last_update: Date = $state(new Date());
 	public loaded = $state(false);
 	public shortname: string;
+	public snapOrigin?: string = $state();
 
 	public contracts: DefaultContracts;
 
@@ -45,6 +47,7 @@ export class NetworkState {
 		this.chain = chain;
 		this.config = chainConfigs[String(this.chain.id)];
 		this.shortname = chainMapper.toShortName(String(this.chain.id));
+		this.snapOrigin = snapOrigins.get(this.shortname);
 		this.tokenmeta = tokens[this.shortname];
 		if (fetchOverride) {
 			this.fetch = fetchOverride;

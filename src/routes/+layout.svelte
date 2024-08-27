@@ -57,7 +57,7 @@
 	});
 
 	const seo_config: SeoConfig = $derived<SeoConfig>(
-		extend({}, data.baseMetaTags, $page.data.pageMetaTags)
+		extend({}, data.baseMetaTags, $page.data?.pageMetaTags)
 	);
 
 	onMount(() => {

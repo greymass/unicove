@@ -1,10 +1,10 @@
 import { browser } from '$app/environment';
 import { PUBLIC_LOCAL_SIGNER } from '$env/static/public';
 
-import { getContext, setContext } from 'svelte';
-import type { Checksum256 } from '@wharfkit/antelope';
 import { ChainDefinition, Chains } from '@wharfkit/common';
 import {
+	type AccountCreationPlugin,
+	type CreateAccountOptions,
 	type LoginOptions,
 	type RestoreArgs,
 	type SerializedSession,
@@ -19,6 +19,8 @@ import WebRenderer from '@wharfkit/web-renderer';
 import { WalletPluginAnchor } from '@wharfkit/wallet-plugin-anchor';
 import { WalletPluginMetaMask } from '@wharfkit/wallet-plugin-metamask';
 import { WalletPluginPrivateKey } from '@wharfkit/wallet-plugin-privatekey';
+import { AccountCreationPluginMetamask } from '@wharfkit/account-creation-plugin-metamask';
+import { AccountCreationPluginGreymass } from '@wharfkit/account-creation-plugin-greymass';
 
 import { TransactPluginStatusEmitter } from '$lib/wharf/plugins/status';
 import {
@@ -28,9 +30,17 @@ import {
 	sendErrorToast,
 	sendSuccessToast
 } from '$lib/wharf/transact.svelte';
-import { chainMap, chainMapper } from '$lib/wharf/chains';
 
-const walletPlugins: WalletPlugin[] = [new WalletPluginAnchor(), new WalletPluginMetaMask()];
+import { chainMapper } from '$lib/wharf/chains';
+
+const metamaskWalletPlugin = new WalletPluginMetaMask();
+
+const walletPlugins: WalletPlugin[] = [new WalletPluginAnchor(), metamaskWalletPlugin];
+
+const accountCreationPlugins: AccountCreationPlugin[] = [
+	new AccountCreationPluginMetamask(),
+	new AccountCreationPluginGreymass()
+];
 
 // If a local key is provided, add the private key wallet
 if (PUBLIC_LOCAL_SIGNER) {
@@ -54,12 +64,17 @@ export class WharfState {
 		if (!browser) {
 			throw new Error('Wharf should only be used in the browser');
 		}
-		this.sessionKit = new SessionKit({
-			appName: '2nicove',
-			chains: this.chains,
-			ui: new WebRenderer({ minimal: true }),
-			walletPlugins
-		});
+		this.sessionKit = new SessionKit(
+			{
+				appName: '2nicove',
+				chains: this.chains,
+				ui: new WebRenderer({ minimal: true }),
+				walletPlugins
+			},
+			{
+				accountCreationPlugins
+			}
+		);
 		$effect(() => {
 			localStorage.setItem('chainSessions', JSON.stringify(this.chainsSession));
 		});
@@ -69,10 +84,18 @@ export class WharfState {
 		if (!this.sessionKit) {
 			throw new Error('User not initialized');
 		}
+
 		const { session } = await this.sessionKit.login(options);
 		this.session = session;
 		this.chainsSession[String(session.chain.id)] = session.serialize();
 		this.sessions = await this.sessionKit.getSessions();
+	}
+
+	public async createAccount(createAccountOptions?: CreateAccountOptions) {
+		if (!this.sessionKit) {
+			throw new Error('Session Kit not initialized');
+		}
+		return this.sessionKit.createAccount(createAccountOptions);
 	}
 
 	public async logout(session?: Session | SerializedSession) {

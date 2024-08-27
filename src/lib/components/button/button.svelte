@@ -9,6 +9,7 @@
 		variant?: 'primary' | 'secondary' | 'pill';
 		disabled?: boolean;
 		active?: boolean;
+		blank?: boolean;
 		class?: string;
 		children: Snippet;
 		onclick?: (event: MouseEvent) => void;
@@ -17,6 +18,15 @@
 	let { class: className = '', onclick, ...props }: ButtonProps = $props();
 
 	let ariaRole = props.href ? 'link' : 'button';
+
+	let linkProps = $derived(() =>
+		props.href && props.blank
+			? {
+					target: '_blank',
+					rel: 'noopener noreferrer'
+				}
+			: {}
+	);
 </script>
 
 <!-- [@media(any-hover:hover)]:hover:opacity-80 -->
@@ -27,11 +37,14 @@
 		data-active={props.active}
 		class="
 		relative
-		inline-block
+		inline-flex
+		items-center
+		justify-center
 		text-nowrap
 		rounded-full
 		px-5
 		py-2
+		text-center
 		text-base
 		font-medium
 		leading-4
@@ -50,6 +63,7 @@
 		{onclick}
 		role={ariaRole}
 		{...props}
+		{...linkProps}
 	>
 		<span class="pointer-events-none relative z-10">{@render props.children()}</span>
 		<div
@@ -65,11 +79,15 @@
 		disabled={props.disabled}
 		class="
 		relative
+		flex
 		grow
+		items-center
+		justify-center
 		text-nowrap
 		rounded-lg
 		px-8
 		py-3.5
+		text-center
 		text-base
 		font-medium
 		text-mineShaft-100
@@ -93,6 +111,7 @@
 		{onclick}
 		role={ariaRole}
 		{...props}
+		{...linkProps}
 	>
 		<span class="pointer-events-none relative z-10">{@render props.children()}</span>
 		<div
@@ -113,12 +132,16 @@ active:transition-opacity
 		disabled={props.disabled}
 		class="
 		relative
+		inline-flex
 		grow
+		items-center
+		justify-center
 		text-nowrap
 		rounded-lg
 		bg-skyBlue-500
 		px-8
 		py-3.5
+		text-center
 		text-base
 		font-medium
 		text-skyBlue-950
@@ -139,6 +162,7 @@ active:transition-opacity
 		{onclick}
 		role={ariaRole}
 		{...props}
+		{...linkProps}
 	>
 		<span class="pointer-events-none relative z-10">{@render props.children()}</span>
 		<div
