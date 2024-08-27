@@ -61,7 +61,7 @@
 	});
 </script>
 
-<form on:submit={preventDefault(handleSellRAM)}>
+<form onsubmit={preventDefault(handleSellRAM)}>
 	<Stack class="gap-3">
 		<Label for="assetInput">Amount (in bytes)</Label>
 		<Input id="assetInput" bind:value={sellRamState.bytes} />
@@ -98,7 +98,15 @@
 		<Code
 			>{JSON.stringify(
 				{
-					state: sellRamState,
+					account: sellRamState.account,
+					bytes: sellRamState.bytes,
+					max: sellRamState.max,
+					chain: sellRamState.chain,
+					pricePerKB: sellRamState.pricePerKB,
+					pricePerByte: sellRamState.pricePerByte,
+					bytesValue: sellRamState.bytesValue,
+					insufficientRAM: sellRamState.insufficientRAM,
+					valid: sellRamState.valid,
 					balances: context.account?.balances
 				},
 				undefined,
