@@ -8,11 +8,11 @@ export class SellRAMState {
 	public chain: ChainDefinition | undefined = $state();
 	public pricePerKB: Asset = $state(Asset.fromUnits(0, '4,EOS'));
 	public pricePerByte: Asset = $derived(
-		Asset.fromUnits(this.pricePerKB.value / 1024, this.pricePerKB.symbol)
+		Asset.fromUnits(this.pricePerKB.value / 1000, this.pricePerKB.symbol)
 	);
 	public bytesValue: Asset = $derived(
 		Asset.from(
-			this.pricePerKB.value ? (this.bytes * this.pricePerKB.value) / 1024 : 0,
+			this.pricePerKB.value ? (this.bytes * this.pricePerKB.value) / 1000 : 0,
 			this.chain?.systemToken?.symbol || '4,EOS'
 		)
 	);
