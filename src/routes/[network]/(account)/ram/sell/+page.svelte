@@ -1,15 +1,19 @@
 <script lang="ts">
-	import { onMount, getContext } from 'svelte';
-	import { Asset, Int64 } from '@wharfkit/antelope';
+	import { getContext } from 'svelte';
+
 	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import { SellRAMState } from './state.svelte.js';
+	import { getSetting } from '$lib/state/settings.svelte.js';
+
 	import Input from '$lib/components/input/textinput.svelte';
 	import Button from '$lib/components/button/button.svelte';
 	import Label from '$lib/components/input/label.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
-	import { SellRAMState } from './state.svelte.js';
+	import Code from '$lib/components/code.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
+	const debugMode = getSetting('debug-mode', false);
 
 	const sellRamState: SellRAMState = $state(new SellRAMState(data.network.chain));
 
@@ -57,7 +61,7 @@
 	});
 </script>
 
-<form on:submit={preventDefault(handleSellRAM)}>
+<form onsubmit={preventDefault(handleSellRAM)}>
 	<Stack class="gap-3">
 		<Label for="assetInput">Amount (in bytes)</Label>
 		<Input id="assetInput" bind:value={sellRamState.bytes} />
@@ -88,4 +92,26 @@
 	</Stack>
 
 	<Button type="submit" class="mt-4 w-full" disabled={!sellRamState.valid}>Confirm Sell RAM</Button>
+
+	{#if debugMode.value}
+		<h3 class="h3">Debugging</h3>
+		<Code
+			>{JSON.stringify(
+				{
+					account: sellRamState.account,
+					bytes: sellRamState.bytes,
+					max: sellRamState.max,
+					chain: sellRamState.chain,
+					pricePerKB: sellRamState.pricePerKB,
+					pricePerByte: sellRamState.pricePerByte,
+					bytesValue: sellRamState.bytesValue,
+					insufficientRAM: sellRamState.insufficientRAM,
+					valid: sellRamState.valid,
+					balances: context.account?.balances
+				},
+				undefined,
+				2
+			)}</Code
+		>
+	{/if}
 </form>

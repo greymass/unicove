@@ -40,7 +40,7 @@ export class NetworkState {
 		return this.tokenstate ? Asset.fromUnits(this.tokenstate.median, '4,USD') : undefined;
 	});
 	public ramprice = $derived(
-		this.ramstate && this.tokenprice ? getRAMPrice(this.ramstate, this.tokenprice) : undefined
+		this.ramstate ? getRAMPrice(this.ramstate, this.tokenprice) : undefined
 	);
 
 	constructor(chain: ChainDefinition, fetchOverride?: typeof fetch) {
@@ -143,11 +143,11 @@ interface NetworkServiceInstance {
 
 const services = $state<NetworkServiceInstance[]>([]);
 
-export function getRAMPrice(state: RAMState, systemTokenPrice: Asset) {
+export function getRAMPrice(state: RAMState, systemTokenPrice?: Asset) {
 	const cost = state.price_per_kb(1);
 	return {
 		eos: cost,
-		usd: calculateValue(cost, systemTokenPrice)
+		usd: systemTokenPrice ? calculateValue(cost, systemTokenPrice) : undefined
 	};
 }
 
