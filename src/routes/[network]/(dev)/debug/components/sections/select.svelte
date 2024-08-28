@@ -28,6 +28,11 @@
 			label: Chains.Jungle4.name,
 			image: String(Chains.Jungle4.getLogo())
 		},
+		{
+			value: Chains.KylinTestnet.id,
+			label: Chains.KylinTestnet.name,
+			image: String(Chains.KylinTestnet.getLogo())
+		},
 		{ value: Chains.FIO.id, label: Chains.FIO.name, image: String(Chains.FIO.getLogo()) },
 		{ value: Chains.Telos.id, label: Chains.Telos.name, image: String(Chains.Telos.getLogo()) },
 		{ value: Chains.WAX.id, label: Chains.WAX.name, image: String(Chains.WAX.getLogo()) },

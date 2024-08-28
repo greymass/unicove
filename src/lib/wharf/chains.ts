@@ -22,10 +22,11 @@ export type FeatureType = 'delphioracle' | 'lightapi' | 'rex' | 'robo';
 export type ChainShortName = (typeof chainShortNames)[number];
 export const chainIndiceMapping: Record<ChainShortName, ChainIndices> = {
 	eos: 'EOS',
-	jungle4: 'Jungle4'
+	jungle4: 'Jungle4',
+	kylin: 'KylinTestnet'
 };
 
-export const chainShortNames = ['eos', 'jungle4'] as const;
+export const chainShortNames = ['eos', 'jungle4', 'kylin'] as const;
 
 export function isNetworkShortName(value: string): value is ChainShortName {
 	return chainShortNames.includes(value as ChainShortName);
@@ -53,6 +54,17 @@ export const chainConfigs: Record<string, ChainConfig> = {
 			robo: true
 		},
 		symbol: '4,EOS'
+	},
+	// Kylin
+	'5fff1dae8dc8e2fc4d5b23b2c7665c97f9e9d8edf2b6485a86ba311c25639191': {
+		name: 'kylin',
+		features: {
+			delphioracle: false,
+			lightapi: false,
+			rex: true,
+			robo: true
+		},
+		symbol: '4,EOS'
 	}
 	// Telos
 	// '4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11': {
@@ -71,8 +83,8 @@ export const chainMap: Record<string, ChainShortName> = {
 	aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906: 'eos',
 	// '21dcae42c0182200e93f954a074011f9048a7624c6fe81d3c9541a614a88bd1c': 'fio',
 	// b20901380af44ef59c5918439a1f9a41d83669020319a80574b804a5f95cbd7e: 'fiotestnet',
-	'73e4385a2708e6d7048834fbc1079f2fabb17b3c125b146af438971e90716c4d': 'jungle4'
-	// '5fff1dae8dc8e2fc4d5b23b2c7665c97f9e9d8edf2b6485a86ba311c25639191': 'kylintestnet',
+	'73e4385a2708e6d7048834fbc1079f2fabb17b3c125b146af438971e90716c4d': 'jungle4',
+	'5fff1dae8dc8e2fc4d5b23b2c7665c97f9e9d8edf2b6485a86ba311c25639191': 'kylin'
 	// '38b1d7815474d0c60683ecbea321d723e83f5da6ae5f1c1f9fecc69d9ba96465': 'libre',
 	// b64646740308df2ee06c6b72f34c0f7fa066d940e831f752db2006fcc2b78dee: 'libretestnet',
 	// '384da888112027f0321850a169f737c33e53b388aad48b5adace4bab97f437e0': 'proton',

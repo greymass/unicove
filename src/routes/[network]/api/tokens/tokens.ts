@@ -34,6 +34,10 @@ const data: TokenMetaType[] = [
 	{
 		id: getSystemTokenIdentifier(Chains.Jungle4),
 		logo: 'https://assets.wharfkit.com/chain/eos.png'
+	},
+	{
+		id: getSystemTokenIdentifier(Chains.KylinTestnet),
+		logo: 'https://assets.wharfkit.com/chain/eos.png'
 	}
 ];
 
@@ -43,5 +47,8 @@ export const tokens: Record<ChainShortName, TokenMeta[]> = {
 		.map((meta) => TokenMeta.from(meta)),
 	jungle4: data
 		.filter((meta) => Chains.Jungle4.id.equals(meta.id.chain))
+		.map((meta) => TokenMeta.from(meta)),
+	kylin: data
+		.filter((meta) => Chains.KylinTestnet.id.equals(meta.id.chain))
 		.map((meta) => TokenMeta.from(meta))
 };

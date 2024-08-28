@@ -5,7 +5,9 @@ import {
 	API_EOS_CHAIN,
 	API_EOS_HISTORY,
 	API_JUNGLE4_CHAIN,
-	API_JUNGLE4_HISTORY
+	API_JUNGLE4_HISTORY,
+	API_KYLIN_CHAIN,
+	API_KYLIN_HISTORY
 } from '$env/static/private';
 
 import { chainIndiceMapping, type ChainShortName } from '../chains';
@@ -31,6 +33,10 @@ export function getBackendClient(
 		}
 		case 'jungle4': {
 			chainDef.url = options.history ? API_JUNGLE4_HISTORY : API_JUNGLE4_CHAIN;
+			break;
+		}
+		case 'kylin': {
+			chainDef.url = options.history ? API_KYLIN_HISTORY : API_KYLIN_CHAIN;
 			break;
 		}
 		default: {

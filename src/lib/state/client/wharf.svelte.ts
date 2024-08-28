@@ -48,7 +48,7 @@ if (PUBLIC_LOCAL_SIGNER) {
 }
 
 export class WharfState {
-	public chains: ChainDefinition[] = [Chains.EOS, Chains.Jungle4, Chains.Telos];
+	public chains: ChainDefinition[] = [Chains.EOS, Chains.Jungle4, Chains.KylinTestnet];
 	public chainsSession: Record<string, SerializedSession | undefined> = $state({});
 	public session?: Session = $state<Session>();
 	public sessions: SerializedSession[] = $state([]);
