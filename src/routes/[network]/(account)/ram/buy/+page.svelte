@@ -70,7 +70,7 @@
 <form onsubmit={preventDefault(handleBuyRAM)}>
 	<Stack class="gap-3">
 		<Label for="assetInput">Amount (in bytes)</Label>
-		<Input id="assetInput" bind:value={buyRamState.bytes} />
+		<Input id="assetInput" bind:value={buyRamState.bytes} autofocus />
 		{#if buyRamState.insufficientBalance}
 			<p class="text-red-500">Insufficient balance. Please enter a smaller amount.</p>
 		{/if}

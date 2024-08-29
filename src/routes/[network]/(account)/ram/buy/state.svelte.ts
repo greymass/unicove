@@ -4,7 +4,7 @@ import type { ChainDefinition } from '@wharfkit/session';
 export class BuyRAMState {
 	public payer: Name = $state(Name.from(''));
 	public receiver: Name = $state(Name.from(''));
-	public bytes: number = $state(0);
+	public bytes: number | undefined = $state(undefined);
 	public balance: Asset = $state(Asset.fromUnits(0, '4,EOS'));
 	public chain: ChainDefinition | undefined = $state();
 	public pricePerKB: Asset = $state(Asset.fromUnits(0, '4,EOS'));
@@ -14,7 +14,9 @@ export class BuyRAMState {
 	);
 
 	public bytesValue: Asset = $derived(
-		Asset.from((this.bytes * this.pricePerKB.value) / 1000, this.chain?.systemToken?.symbol)
+		this.bytes !== undefined
+			? Asset.from((this.bytes * this.pricePerKB.value) / 1000, this.chain?.systemToken?.symbol)
+			: Asset.fromUnits(0, this.chain?.systemToken?.symbol)
 	);
 
 	public fee: Asset = $derived(
@@ -30,7 +32,13 @@ export class BuyRAMState {
 	);
 
 	public valid: boolean = $derived(
-		!!(this.bytes > 0 && this.bytes <= this.max && this.payer.value && this.receiver.value)
+		!!(
+			this.bytes !== undefined &&
+			this.bytes > 0 &&
+			this.bytes <= this.max &&
+			this.payer.value &&
+			this.receiver.value
+		)
 	);
 
 	public insufficientBalance: boolean = $derived(this.bytesValue.value > this.balance.value);
@@ -42,7 +50,7 @@ export class BuyRAMState {
 	reset() {
 		this.payer = Name.from('');
 		this.receiver = Name.from('');
-		this.bytes = 0;
+		this.bytes = undefined;
 		this.valid = false;
 	}
 
