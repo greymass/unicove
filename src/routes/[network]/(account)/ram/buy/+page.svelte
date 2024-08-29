@@ -53,10 +53,13 @@
 				buyRamState.payer = context.account.name;
 				buyRamState.receiver = context.account.name;
 			}
-			buyRamState.balance = Asset.from(
-				context.account.balance?.liquid?.value || 0,
-				data.network.chain.systemToken?.symbol
-			);
+
+			if (data.network.chain.systemToken) {
+				buyRamState.balance = Asset.from(
+					context.account.balance?.liquid?.value || 0,
+					data.network.chain.systemToken.symbol
+				);
+			}
 		}
 	});
 

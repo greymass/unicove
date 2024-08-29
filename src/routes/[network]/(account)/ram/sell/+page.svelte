@@ -84,10 +84,14 @@
 	<Stack class="mt-4 gap-3">
 		<h3 class="h3">Details</h3>
 		<div class="grid grid-cols-2 gap-2">
-			<span>Price:</span>
+			<span>Price for 1000 bytes:</span>
 			<span>{sellRamState.pricePerKB} / KB</span>
-			<span>Expected To Receive:</span>
+			<span>RAM Value:</span>
 			<span>{sellRamState.bytesValue}</span>
+			<span>Network Fee (0.5%)</span>
+			<span>{sellRamState.fee}</span>
+			<span>Expected To Receive:</span>
+			<span>{sellRamState.expectedToReceive}</span>
 		</div>
 	</Stack>
 
