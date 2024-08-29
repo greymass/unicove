@@ -5,7 +5,7 @@
 	import { SellRAMState } from './state.svelte.js';
 	import { getSetting } from '$lib/state/settings.svelte.js';
 
-	import Input from '$lib/components/input/textinput.svelte';
+	import Input from '$lib/components/input/text.svelte';
 	import Button from '$lib/components/button/button.svelte';
 	import Label from '$lib/components/input/label.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';

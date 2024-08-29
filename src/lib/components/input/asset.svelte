@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Asset, Int64 } from '@wharfkit/antelope';
 	import type { ComponentProps } from 'svelte';
-	import TextInput from './textinput.svelte';
+	import TextInput from './text.svelte';
 	import Big from 'big.js';
 
 	interface AssetInputProps extends ComponentProps<TextInput> {
@@ -30,7 +30,7 @@
 	}: AssetInputProps = $props();
 
 	/** A zero-value version of the passed in asset for placeholder */
-	const zeroValue = $derived(Asset.fromUnits(0, _value.symbol));
+	let zeroValue = $state(Asset.fromUnits(0, _value.symbol));
 
 	/** The string value bound to the form input */
 	let input: string | null = $state(null);
@@ -87,6 +87,7 @@
 
 	/** Set the bindable values on form input changes */
 	$effect(() => {
+		console.log({ asset });
 		valid = satisfies;
 		validPrecision = satisfiesPrecision;
 		validMinimum = satisfiesMinimum;

@@ -7,7 +7,7 @@
 
 	import Button from '$lib/components/button/button.svelte';
 	import Code from '$lib/components/code.svelte';
-	import Input from '$lib/components/input/textinput.svelte';
+	import Input from '$lib/components/input/text.svelte';
 	import Label from '$lib/components/input/label.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
 
