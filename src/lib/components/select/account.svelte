@@ -11,7 +11,6 @@
 	import { Stack } from '../layout';
 	import Button from '../button/button.svelte';
 
-	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 
 	const context = getContext<UnicoveContext>('state');
@@ -53,6 +52,8 @@
 	});
 
 	let logo = $derived(chainLogos.get(String(context.wharf.session?.chain.id)) || '');
+
+	let { class: className = '' } = $props();
 </script>
 
 <!-- [@media(any-hover:hover)]:hover:opacity-80 -->
@@ -64,7 +65,6 @@
 	flex
 	h-10
 	items-center
-	justify-between
 	gap-2
 	text-nowrap
 	text-base
@@ -78,6 +78,7 @@
 	focus-visible:ring-2
 	focus-visible:ring-inset
 	focus-visible:ring-solar-500
+	{className}
 	"
 	use:melt={$trigger}
 	aria-label="account-switcher-label"
