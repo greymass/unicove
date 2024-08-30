@@ -35,17 +35,6 @@ export class BuyRAMState {
 		)
 	);
 
-	public maxBytes: number = $derived(
-		this.pricePerKB.value ? Math.floor((this.balance.value * 1000) / this.pricePerKB.value) : 0
-	);
-
-	public maxTokens: Asset = $derived(
-		Asset.fromUnits(
-			this.balance.units.subtracting(this.fee.units),
-			this.chain?.systemToken?.symbol || '4,EOS'
-		)
-	);
-
 	public valid: boolean = $derived(
 		!!(
 			((this.format === 'units' && this.bytes !== undefined && this.bytes > 0) ||

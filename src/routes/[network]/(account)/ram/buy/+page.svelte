@@ -43,11 +43,6 @@
 		};
 	}
 
-	function setMax() {
-		buyRamState.format = 'asset';
-		buyRamState.tokens = buyRamState.maxTokens;
-	}
-
 	$effect(() => {
 		if (context.account) {
 			if (context.account.name) {
@@ -94,9 +89,6 @@
 			Available:
 			{#if context.account}
 				{context.account.balance?.liquid}
-				<Button disabled={!context.account} onclick={preventDefault(setMax)} type="button"
-					>Fill Max</Button
-				>
 			{:else}
 				0.0000 {data.network.chain.systemToken}
 			{/if}
@@ -132,7 +124,6 @@
 					pricePerKB: buyRamState.pricePerKB,
 					pricePerByte: buyRamState.pricePerByte,
 					bytesValue: buyRamState.bytesValue,
-					max: buyRamState.max,
 					valid: buyRamState.valid,
 					insufficientBalance: buyRamState.insufficientBalance,
 					balances: context.account?.balances
