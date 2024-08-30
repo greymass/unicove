@@ -8,6 +8,7 @@
 	import { getContext } from 'svelte';
 
 	import { calSize, calUsagePer } from '../utils.svelte';
+	import { ResourceType } from '../types.svelte';
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');
@@ -35,7 +36,7 @@
 	/>
 	<div>
 		<Prices
-			name="CPU"
+			resource={ResourceType.CPU}
 			powerupLink="/{network}/resources/cpu/powerup"
 			rexLink="/{network}/resources/cpu/rex"
 			stakeLink="/{network}/resources/cpu/stake"

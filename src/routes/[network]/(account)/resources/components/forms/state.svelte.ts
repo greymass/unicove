@@ -1,15 +1,5 @@
-import { Asset, Name, Serializer } from '@wharfkit/antelope';
-import type { ChainDefinition } from '@wharfkit/session';
-
-export enum RentType {
-	POWERUP,
-	REX,
-	STAKE
-}
-
-export enum ResourceType {
-	CPU, NET
-}
+import { Asset } from '@wharfkit/antelope';
+import { RentType, ResourceType } from '../../types.svelte';
 
 export class RentState {
 	public resourceType: ResourceType;
@@ -19,13 +9,13 @@ export class RentState {
 	public amount: number | undefined = $state();
 	public pricePerUnit: Asset | undefined = $state();
 	public amountValue: Asset | undefined = $derived.by(() => {
-		if (!this.pricePerUnit)
-			return undefined;
-
-		return Asset.from(
-			Number(this.pricePerUnit!.value) * Number(this.amount),
-			this.pricePerUnit.symbol
-		)
+		if (this.pricePerUnit && this.amount != undefined) {
+			return Asset.from(
+				Number(this.pricePerUnit.value) * Number(this.amount),
+				this.pricePerUnit.symbol
+			)
+		}
+		return undefined;
 	});
 
 	getUnit(): string {

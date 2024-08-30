@@ -4,7 +4,9 @@
 	import Label from '$lib/components/input/label.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
 
-	import { ResourceType, RentState, RentType } from './state.svelte';
+	import { RentState } from './state.svelte';
+
+	import { RentType, ResourceType } from '../../types.svelte';
 
 	import { preventDefault } from '$lib/utils';
 
@@ -16,6 +18,7 @@
 	$effect(() => {
 		if (context.account && context.network) {
 			rentState.balance = context.account.balance ? context.account.balance.liquid : undefined;
+			rentState.pricePerUnit = context.network.rexprice;
 		} else {
 			rentState.reset();
 		}
@@ -28,10 +31,6 @@
 	const rentState: RentState = $state(new RentState(resourceType, RentType.REX));
 
 	function handleRent() {}
-
-	$effect(() => {
-		console.log('rentState.amount = ', rentState.amount);
-	});
 </script>
 
 <form on:submit={preventDefault(handleRent)}>
@@ -44,6 +43,11 @@
 		{#if rentState.balance}
 			<p>
 				Available:{rentState.balance}
+			</p>
+		{/if}
+		{#if rentState.pricePerUnit}
+			<p>
+				Price:{rentState.pricePerUnit}
 			</p>
 		{/if}
 	</Stack>

@@ -18,16 +18,16 @@ export async function GET({ fetch, params }) {
 		return json({ error: 'Network resources not initialized' }, { status: 500 });
 	}
 
-	const requests: Promise<ResponseType>[] = [
+	const requests: Promise<any>[] = [
 		network.resources.v1.ram.get_state(),
-		network.resources.v1.rex.get_state()
+		network.resources.v1.rex.get_state(),
+		network.resources.getSampledUsage()
 	];
-
 	if (network.contracts.delphioracle) {
 		requests.push(network.contracts.delphioracle.table('datapoints', 'eosusd').get());
 	}
 
-	const [ramstate, rexstate, tokenstate] = await Promise.all(requests);
+	const [ramstate, rexstate, sampleUsage, tokenstate] = await Promise.all(requests);
 
 	const systemtoken = ramstate ? (ramstate as RAMState).quote.balance.symbol : undefined;
 
@@ -39,7 +39,8 @@ export async function GET({ fetch, params }) {
 			ramstate,
 			rexstate,
 			systemtoken,
-			tokenstate
+			tokenstate,
+			sampleUsage
 		},
 		{
 			headers

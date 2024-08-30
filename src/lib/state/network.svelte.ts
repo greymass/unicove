@@ -1,6 +1,8 @@
-import { APIClient, Asset, FetchProvider, Int128, type AssetType } from '@wharfkit/antelope';
+import { APIClient, Asset, FetchProvider, Int128, Serializer, type AssetType } from '@wharfkit/antelope';
 import { Chains, ChainDefinition, TokenMeta } from '@wharfkit/common';
 import { RAMState, Resources, REXState } from '@wharfkit/resources';
+import type { SampleUsage } from '@wharfkit/resources';
+
 import { chainIdsToIndices } from '@wharfkit/session';
 import { snapOrigins } from '@wharfkit/wallet-plugin-metamask';
 
@@ -8,6 +10,8 @@ import { Types as DelphiOracleTypes } from '$lib/wharf/contracts/delphioracle';
 import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
 import { Contract as SystemContract } from '$lib/wharf/contracts/system';
 import { Contract as TokenContract } from '$lib/wharf/contracts/token';
+
+
 
 import {
 	chainConfigs,
@@ -33,9 +37,15 @@ export class NetworkState {
 	public ramstate?: RAMState = $state();
 	public resources?: Resources = $state();
 	public rexstate?: REXState = $state();
+	public sampledUsage?: SampleUsage = $state();
 	public tokenmeta?: TokenMeta[] = $state();
 	public tokenstate?: DelphiOracleTypes.datapoints = $state();
-	public rexprice = $derived.by(() => undefined);
+	public rexprice: Asset | undefined = $derived.by(() => {
+		if (this.rexstate && this.sampledUsage) {
+			return Asset.from(this.rexstate.price_per(this.sampledUsage, 30000), '4,EOS')
+		}
+		return undefined;
+	});
 	public tokenprice = $derived.by(() => {
 		return this.tokenstate ? Asset.fromUnits(this.tokenstate.median, '4,USD') : undefined;
 	});
@@ -80,7 +90,7 @@ export class NetworkState {
 			`/${chainMapper.toShortName(String(this.chain.id))}/api/network`
 		);
 		const json = await response.json();
-
+		console.log("json = ", json)
 		this.loaded = true;
 		this.last_update = new Date();
 		this.tokenstate = json.tokenstate;
@@ -88,6 +98,7 @@ export class NetworkState {
 		try {
 			this.ramstate = RAMState.from(json.ramstate);
 			this.rexstate = REXState.from(json.rexstate);
+			this.sampledUsage = Serializer.objectify(json.sampleUsage)
 		} catch (error) {
 			console.log(error);
 			console.log(json);

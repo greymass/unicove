@@ -4,7 +4,7 @@
 	import Rex from '../../components/forms/rex.svelte';
 
 	import State from '../../components/state/state.svelte';
-	import { ResourceType } from '../../components/forms/state.svelte';
+	import { ResourceType } from '../../types.svelte';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';

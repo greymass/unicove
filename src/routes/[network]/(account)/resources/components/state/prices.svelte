@@ -1,20 +1,41 @@
 <script lang="ts">
+	import { Asset } from '@wharfkit/antelope';
+
 	import Grid from '$lib/components/layout/grid.svelte';
 	import Button from '$lib/components/button/button.svelte';
+	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import { getContext } from 'svelte';
+
+	import { ResourceType } from '../../types.svelte';
+
 	interface Props {
-		name: string;
+		resource: ResourceType;
 		powerupLink: string;
 		rexLink: string;
 		stakeLink: string;
 	}
 
-	const { name, powerupLink, rexLink, stakeLink }: Props = $props();
+	const { resource, powerupLink, rexLink, stakeLink }: Props = $props();
+
+	const resourceName = resource === ResourceType.CPU ? 'CPU' : 'NET';
+	const resourceUnit = resource === ResourceType.CPU ? 'ms' : 'kb';
+
+	const context = getContext<UnicoveContext>('state');
+	let rexPrice: Asset | undefined = $state();
+
+	$effect(() => {
+		if (context.network) {
+			rexPrice = context.network.rexprice;
+		}
+	});
 </script>
 
 <div class="space-y-4 rounded-2xl border-2 border-slate-300 p-4">
-	<h2 class="header">Resource Provider Costs for {name}</h2>
+	<h2 class="header">
+		Resource Provider Costs for {resourceName}
+	</h2>
 	<h4 class="description">
-		Select a Resource Provider from the choices below to increase your {name}.
+		Select a Resource Provider from the choices below to increase your {resourceName}.
 	</h4>
 
 	<Grid>
@@ -27,8 +48,8 @@
 		</div>
 		<div class="flex flex-col items-center gap-2 rounded-2xl border-2 border-slate-300 p-4">
 			<div>REX</div>
-			<div>price</div>
-			<div>pair</div>
+			<div>{rexPrice?.value}</div>
+			<div>{rexPrice?.symbol.code} per 1{resourceUnit.toUpperCase()}</div>
 			<div class="text-center">Usable each day for <br />the next 30 days.</div>
 			<Button variant="pill" class="text-blue-400" href={rexLink}>Rent via REX</Button>
 		</div>

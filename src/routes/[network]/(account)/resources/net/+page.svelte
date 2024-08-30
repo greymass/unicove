@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-<h1>NET</h1>
-=======
 <script lang="ts">
 	import Stack from '$lib/components/layout/stack.svelte';
 	import State from '../components/state/state.svelte';
@@ -10,6 +7,7 @@
 	import { getContext } from 'svelte';
 
 	import { calSize, calUsagePer } from '../utils.svelte';
+	import { ResourceType } from '../types.svelte';
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');
@@ -36,11 +34,10 @@
 	/>
 	<div>
 		<Prices
-			name="NET"
+			resource={ResourceType.NET}
 			powerupLink="/{network}/resources/net/powerup"
 			rexLink="/{network}/resources/net/rex"
 			stakeLink="/{network}/resources/net/stake"
 		/>
 	</div>
 </Stack>
->>>>>>> kurt-powerup
