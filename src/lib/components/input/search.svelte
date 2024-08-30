@@ -70,8 +70,14 @@
 	});
 
 	function handleKeydown(event: KeyboardEvent) {
-		// Focus the search input when the user presses '/' or 'Cmd+k'
-		if (event.key === '/' || (event.metaKey && event.key === 'k')) {
+		// Focus the search input when the user presses '/' outside a text input or 'Cmd+k' anywhere
+		if (
+			(event.key === '/' &&
+				document.activeElement?.tagName !== 'INPUT' &&
+				document.activeElement?.tagName !== 'TEXTAREA' &&
+				document.activeElement?.getAttribute('contenteditable') !== 'true') ||
+			(event.metaKey && event.key === 'k')
+		) {
 			event.preventDefault();
 			$open = true;
 		}
