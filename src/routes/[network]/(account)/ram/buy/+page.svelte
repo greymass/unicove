@@ -7,11 +7,11 @@
 
 	import Button from '$lib/components/button/button.svelte';
 	import Code from '$lib/components/code.svelte';
-	import Input from '$lib/components/input/text.svelte';
 	import Label from '$lib/components/input/label.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
 
 	import { BuyRAMState } from './state.svelte.js';
+	import AssetOrUnitsInput from '$lib/components/input/assetOrUnits.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
@@ -44,7 +44,8 @@
 	}
 
 	function setMax() {
-		buyRamState.bytes = buyRamState.max;
+		buyRamState.format = 'asset';
+		buyRamState.tokens = buyRamState.maxTokens;
 	}
 
 	$effect(() => {
@@ -68,12 +69,24 @@
 			buyRamState.pricePerKB = data.network.ramprice.eos;
 		}
 	});
+
+	$effect(() => {
+		if (buyRamState.format) {
+			buyRamState.reset();
+		}
+	});
 </script>
 
 <form onsubmit={preventDefault(handleBuyRAM)}>
 	<Stack class="gap-3">
 		<Label for="assetInput">Amount (in bytes)</Label>
-		<Input id="assetInput" bind:value={buyRamState.bytes} autofocus />
+		<AssetOrUnitsInput
+			bind:assetValue={buyRamState.tokens}
+			bind:unitsValue={buyRamState.bytes}
+			unitName="Bytes"
+			bind:format={buyRamState.format}
+			autofocus
+		/>
 		{#if buyRamState.insufficientBalance}
 			<p class="text-red-500">Insufficient balance. Please enter a smaller amount.</p>
 		{/if}
@@ -93,9 +106,9 @@
 	<Stack class="mt-4 gap-3">
 		<h3 class="h3">Details</h3>
 		<div class="grid grid-cols-2 gap-2">
-			<span>Price for 1000 bytes:</span>
+			<span>Price for 1000 Bytes:</span>
 			<span>{buyRamState.pricePerKB} / KB</span>
-			<span>Price for {buyRamState.bytes}:</span>
+			<span>Price{buyRamState.bytes ? ` for ${buyRamState.bytes} Bytes` : ''}:</span>
 			<span>{buyRamState.bytesValue}</span>
 			<span>Network Fee (0.5%)</span>
 			<span>{buyRamState.fee}</span>

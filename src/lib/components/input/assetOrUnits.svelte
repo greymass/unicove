@@ -8,7 +8,7 @@
 
 	interface AssetOrUnitsProps {
 		assetValue: Asset;
-		unitsValue: number;
+		unitsValue: number | undefined;
 		unitName: string;
 		format: 'asset' | 'units';
 		min?: number;
@@ -29,21 +29,27 @@
 	}: AssetOrUnitsProps = $props();
 
 	let assetSymbol: Asset.Symbol = $derived(assetValue.symbol);
+	let assetInputRef: HTMLInputElement;
+	let unitsInputRef: HTMLInputElement;
 
-	function toggleInputType() {
+	function toggleInputType(event: Event) {
+		event.preventDefault();
+
 		if (format === 'asset') {
 			format = 'units';
+			setTimeout(() => unitsInputRef?.focus(), 0);
 		} else {
 			format = 'asset';
+			setTimeout(() => assetInputRef?.focus(), 0);
 		}
 	}
 </script>
 
 <div class="flex flex-col space-y-2">
 	{#if format === 'asset'}
-		<AssetInput bind:value={assetValue} {min} {max} {autofocus} />
+		<AssetInput bind:value={assetValue} bind:ref={assetInputRef} {min} {max} {autofocus} />
 	{:else}
-		<TextInput bind:value={unitsValue} type="number" {autofocus} />
+		<TextInput bind:value={unitsValue} bind:ref={unitsInputRef} type="number" {autofocus} />
 	{/if}
 
 	<div class="flex items-center space-x-2">

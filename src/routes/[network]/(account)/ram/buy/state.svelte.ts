@@ -1,25 +1,27 @@
-import { Asset, Name, Serializer } from '@wharfkit/antelope';
-import type { ChainDefinition } from '@wharfkit/session';
+import { Asset, Name, Serializer, Int64 } from '@wharfkit/antelope';
+import { Chains, type ChainDefinition } from '@wharfkit/session';
 
 export class BuyRAMState {
 	public payer: Name = $state(Name.from(''));
 	public receiver: Name = $state(Name.from(''));
 	public bytes: number | undefined = $state(undefined);
+	public tokens: Asset = $state(Asset.fromUnits(0, '4,EOS'));
 	public balance: Asset = $state(Asset.fromUnits(0, '4,EOS'));
-	public chain: ChainDefinition | undefined = $state();
+	public chain: ChainDefinition = $state(Chains.EOS);
 	public pricePerKB: Asset = $state(Asset.fromUnits(0, '4,EOS'));
+	public format: 'asset' | 'units' = $state('asset');
 
 	public pricePerByte: Asset = $derived(
 		Asset.fromUnits(this.pricePerKB.value / 1000, this.pricePerKB.symbol)
 	);
 
 	public bytesValue: Asset = $derived(
-		this.bytes !== undefined
+		this.format === 'units' && this.bytes !== undefined
 			? Asset.from(
 					(this.bytes * this.pricePerKB.value) / 1000,
 					this.chain?.systemToken?.symbol || '4,EOS'
 				)
-			: Asset.fromUnits(0, this.chain?.systemToken?.symbol || '4,EOS')
+			: this.tokens
 	);
 
 	public fee: Asset = $derived(
@@ -33,15 +35,22 @@ export class BuyRAMState {
 		)
 	);
 
-	public max: number = $derived(
+	public maxBytes: number = $derived(
 		this.pricePerKB.value ? Math.floor((this.balance.value * 1000) / this.pricePerKB.value) : 0
+	);
+
+	public maxTokens: Asset = $derived(
+		Asset.fromUnits(
+			this.balance.units.subtracting(this.fee.units),
+			this.chain?.systemToken?.symbol || '4,EOS'
+		)
 	);
 
 	public valid: boolean = $derived(
 		!!(
-			this.bytes !== undefined &&
-			this.bytes > 0 &&
-			this.bytes <= this.max &&
+			((this.format === 'units' && this.bytes !== undefined && this.bytes > 0) ||
+				(this.format === 'asset' && this.tokens.value > 0)) &&
+			this.bytesCost.units.lte(this.balance.units) &&
 			this.payer.value &&
 			this.receiver.value
 		)
@@ -54,18 +63,24 @@ export class BuyRAMState {
 	}
 
 	reset() {
-		this.payer = Name.from('');
-		this.receiver = Name.from('');
 		this.bytes = undefined;
-		this.valid = false;
+		this.tokens = Asset.fromUnits(0, this.chain?.systemToken?.symbol || '4,EOS');
 	}
 
 	toJSON() {
-		return Serializer.objectify({
-			payer: this.payer,
-			receiver: this.receiver,
-			quant: this.bytesCost
-		});
+		if (this.format === 'asset') {
+			return Serializer.objectify({
+				payer: this.payer,
+				receiver: this.receiver,
+				quant: this.bytesValue
+			});
+		} else {
+			return Serializer.objectify({
+				payer: this.payer,
+				receiver: this.receiver,
+				bytes: Int64.from(this.bytes || 0)
+			});
+		}
 	}
 
 	setBalance(balance: Asset) {
