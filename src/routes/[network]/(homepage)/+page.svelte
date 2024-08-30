@@ -6,6 +6,7 @@
 	import { getContext } from 'svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
 	import { chainMapper } from '$lib/wharf/chains.js';
+	import Search from '$lib/components/input/search.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
@@ -13,6 +14,8 @@
 
 <Stack>
 	<h2 class="h2">{data.network}</h2>
+
+	<Search network={data.network} autofocus debug />
 
 	<p>Language: {languageTag()}</p>
 	<p>Test Localization String: {m.test_locale_string()}</p>
