@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
-	import { Asset } from '@wharfkit/antelope';
+	import { Asset, Checksum256 } from '@wharfkit/antelope';
 
 	import { getSetting } from '$lib/state/settings.svelte.js';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
@@ -9,6 +9,7 @@
 	import Code from '$lib/components/code.svelte';
 	import Label from '$lib/components/input/label.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
+	import Transaction from '$lib/components/transaction.svelte';
 
 	import { BuyRAMState } from './state.svelte.js';
 	import AssetOrUnitsInput from '$lib/components/input/assetOrUnits.svelte';
@@ -19,20 +20,24 @@
 
 	const buyRamState: BuyRAMState = $state(new BuyRAMState(data.network.chain));
 
+	let transactionId: Checksum256 | undefined = $state();
+
 	async function handleBuyRAM() {
 		if (!context.wharf || !context.wharf.session) {
 			alert('Not logged in');
 			return;
 		}
 
+		const actionName = buyRamState.format === 'asset' ? 'buyram' : 'buyrambytes';
+
 		try {
-			await context.wharf.transact({
-				action: data.network.contracts.system.action('buyram', buyRamState.toJSON())
+			const transactionResult = await context.wharf.transact({
+				action: data.network.contracts.system.action(actionName, buyRamState.toJSON())
 			});
-			alert('RAM purchase successful');
+
+			transactionId = transactionResult?.resolved?.transaction.id;
 		} catch (error) {
 			console.error(error);
-			alert('RAM purchase failed: ' + (error as { message: string }).message);
 		}
 	}
 
@@ -71,6 +76,10 @@
 		}
 	});
 </script>
+
+{#if transactionId}
+	<Transaction network={data.network} {transactionId} />
+{/if}
 
 <form onsubmit={preventDefault(handleBuyRAM)}>
 	<Stack class="gap-3">

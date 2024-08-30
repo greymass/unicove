@@ -1,24 +1,36 @@
-import { Name, Serializer } from '@wharfkit/antelope';
-import { Asset, type ChainDefinition } from '@wharfkit/session';
+import { Asset, Name, Serializer, Int64 } from '@wharfkit/antelope';
+import { Chains, type ChainDefinition } from '@wharfkit/session';
 
 export class SellRAMState {
 	public account: Name = $state(Name.from(''));
 	public bytes: number | undefined = $state(undefined);
+	public tokens: Asset = $state(Asset.fromUnits(0, '4,EOS'));
 	public max: number = $state(0);
-	public chain: ChainDefinition | undefined = $state();
+	public chain: ChainDefinition = $state(Chains.EOS);
 	public pricePerKB: Asset = $state(Asset.fromUnits(0, '4,EOS'));
+	public format: 'asset' | 'units' = $state('asset');
+
+	public bytesToSell: number = $derived(
+		this.format === 'units'
+			? this.bytes || 0
+			: Math.floor((this.tokens.value * 1000) / this.pricePerKB.value)
+	);
+
+	public maxValue: Asset = $derived(
+		Asset.fromUnits((this.max * this.pricePerKB.units.value) / 1000, this.pricePerKB.symbol)
+	);
 
 	public pricePerByte: Asset = $derived(
 		Asset.fromUnits(this.pricePerKB.value / 1000, this.pricePerKB.symbol)
 	);
 
 	public bytesValue: Asset = $derived(
-		this.bytes !== undefined
+		this.format === 'units' && this.bytes !== undefined
 			? Asset.from(
-					this.pricePerKB.value ? (this.bytes * this.pricePerKB.value) / 1000 : 0,
+					(this.bytes * this.pricePerKB.value) / 1000,
 					this.chain?.systemToken?.symbol || '4,EOS'
 				)
-			: Asset.fromUnits(0, this.chain?.systemToken?.symbol || '4,EOS')
+			: this.tokens
 	);
 
 	public fee: Asset = $derived(
@@ -32,10 +44,19 @@ export class SellRAMState {
 		)
 	);
 
-	public insufficientRAM: boolean = $derived(this.bytes !== undefined && this.bytes > this.max);
+	public insufficientRAM: boolean = $derived(
+		this.format === 'units'
+			? this.bytes !== undefined && this.bytes > this.max
+			: this.bytesValue.value > (this.max * this.pricePerKB.value) / 1000
+	);
 
 	public valid: boolean = $derived(
-		!!(this.bytes !== undefined && this.bytes > 0 && this.bytes <= this.max && this.account.value)
+		!!(
+			((this.format === 'units' && this.bytes !== undefined && this.bytes > 0) ||
+				(this.format === 'asset' && this.tokens.value > 0)) &&
+			!this.insufficientRAM &&
+			this.account.value
+		)
 	);
 
 	constructor(chain: ChainDefinition) {
@@ -43,14 +64,18 @@ export class SellRAMState {
 	}
 
 	reset() {
-		this.account = Name.from('');
 		this.bytes = undefined;
+		this.tokens = Asset.fromUnits(0, this.chain?.systemToken?.symbol || '4,EOS');
 	}
 
 	toJSON() {
 		return Serializer.objectify({
 			account: this.account,
-			bytes: this.bytes !== undefined ? String(this.bytes) : ''
+			bytes: Int64.from(
+				this.format === 'units'
+					? this.bytes || 0
+					: Math.floor((this.tokens.value * 1000) / this.pricePerKB.value)
+			)
 		});
 	}
 }
