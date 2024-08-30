@@ -1,11 +1,14 @@
 <script lang="ts">
 	import type { HTMLInputAttributes } from 'svelte/elements';
+	import { createEventDispatcher } from 'svelte';
 
 	interface TextInputProps extends HTMLInputAttributes {
 		ref?: HTMLInputElement;
 	}
 
 	let { ref = $bindable(), value = $bindable(), ...props }: TextInputProps = $props();
+
+	const dispatch = createEventDispatcher();
 </script>
 
 <input

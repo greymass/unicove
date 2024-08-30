@@ -1,12 +1,13 @@
 <script lang="ts">
 	import { Asset } from '@wharfkit/antelope';
+	import { createEventDispatcher, type ComponentProps } from 'svelte';
 	import AssetInput from './asset.svelte';
 	import TextInput from './text.svelte';
 	import Button from '../button/button.svelte';
 	import Cluster from '../layout/cluster.svelte';
 	import Stack from '../layout/stack.svelte';
 
-	interface AssetOrUnitsProps {
+	interface AssetOrUnitsProps extends ComponentProps<TextInput> {
 		assetValue: Asset;
 		unitsValue: number | undefined;
 		unitName: string;
@@ -25,7 +26,8 @@
 		min,
 		max,
 		autofocus,
-		debug = false
+		debug = false,
+		...props
 	}: AssetOrUnitsProps = $props();
 
 	let assetSymbol: Asset.Symbol = $derived(assetValue.symbol);
@@ -47,9 +49,22 @@
 
 <div class="flex flex-col space-y-2">
 	{#if format === 'asset'}
-		<AssetInput bind:value={assetValue} bind:ref={assetInputRef} {min} {max} {autofocus} />
+		<AssetInput
+			bind:value={assetValue}
+			bind:ref={assetInputRef}
+			{min}
+			{max}
+			{autofocus}
+			{...props}
+		/>
 	{:else}
-		<TextInput bind:value={unitsValue} bind:ref={unitsInputRef} type="number" {autofocus} />
+		<TextInput
+			bind:value={unitsValue}
+			bind:ref={unitsInputRef}
+			type="number"
+			{autofocus}
+			{...props}
+		/>
 	{/if}
 
 	<div class="flex items-center space-x-2">

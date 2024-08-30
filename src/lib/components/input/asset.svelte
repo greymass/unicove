@@ -87,7 +87,6 @@
 
 	/** Set the bindable values on form input changes */
 	$effect(() => {
-		console.log({ asset });
 		valid = satisfies;
 		validPrecision = satisfiesPrecision;
 		validMinimum = satisfiesMinimum;

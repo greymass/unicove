@@ -48,6 +48,14 @@
 		};
 	}
 
+	function handleKeydown(event: unknown) {
+		const keyboardEvent = event as KeyboardEvent;
+		if (keyboardEvent.key === 'Enter') {
+			keyboardEvent.preventDefault();
+			handleBuyRAM();
+		}
+	}
+
 	$effect(() => {
 		if (context.account) {
 			if (context.account.name) {
@@ -83,13 +91,14 @@
 
 <form onsubmit={preventDefault(handleBuyRAM)}>
 	<Stack class="gap-3">
-		<Label for="assetInput">Amount (in bytes)</Label>
+		<Label for="assetInput">Amount to buy</Label>
 		<AssetOrUnitsInput
 			bind:assetValue={buyRamState.tokens}
 			bind:unitsValue={buyRamState.bytes}
 			unitName="Bytes"
 			bind:format={buyRamState.format}
 			autofocus
+			onkeydown={handleKeydown}
 		/>
 		{#if buyRamState.insufficientBalance}
 			<p class="text-red-500">Insufficient balance. Please enter a smaller amount.</p>

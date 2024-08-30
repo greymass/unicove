@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
-	import { Asset, Checksum256 } from '@wharfkit/antelope';
+	import { Checksum256 } from '@wharfkit/antelope';
 
 	import { getSetting } from '$lib/state/settings.svelte.js';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
@@ -66,6 +66,14 @@
 			sellRamState.reset();
 		}
 	});
+
+	function handleKeydown(event: unknown) {
+		const keyboardEvent = event as KeyboardEvent;
+		if (keyboardEvent.key === 'Enter') {
+			keyboardEvent.preventDefault();
+			handleSellRAM();
+		}
+	}
 </script>
 
 {#if transactionId}
@@ -81,6 +89,7 @@
 			unitName="Bytes"
 			bind:format={sellRamState.format}
 			autofocus
+			onkeydown={handleKeydown}
 		/>
 		{#if sellRamState.insufficientRAM}
 			<p class="text-red-500">Insufficient RAM available. Please enter a smaller amount.</p>
