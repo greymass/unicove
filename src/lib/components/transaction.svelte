@@ -1,5 +1,4 @@
 <script lang="ts">
-	import type { ChainDefinition } from '@wharfkit/session';
 	import { transactions } from '$lib/wharf/transact.svelte';
 
 	const { transactionId, network } = $props();
