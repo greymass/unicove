@@ -17,6 +17,7 @@
 
 	$effect(() => {
 		if (context.account && context.network) {
+			console.log('####2', context.account);
 			rentState.balance = context.account.balance ? context.account.balance.liquid : undefined;
 			rentState.pricePerUnit = context.network.rexprice;
 		} else {

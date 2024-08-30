@@ -1,15 +1,19 @@
 <script lang="ts">
 	import Circleprogress from '$lib/components/circleprogress.svelte';
+	import { ResourceType } from '../../types.svelte';
 
 	interface Props {
-		name: string;
+		resource: ResourceType;
 		available: string;
 		used: string;
 		max: string;
 		percentage: number;
 	}
 
-	const { name, available, used, max, percentage }: Props = $props();
+	const { resource, available, used, max, percentage }: Props = $props();
+
+	const resourceName = resource === ResourceType.CPU ? 'CPU' : 'NET';
+	const resourceUnit = resource === ResourceType.CPU ? 'ms' : 'kb';
 </script>
 
 <div class="flex items-center gap-6">
@@ -17,7 +21,7 @@
 		<Circleprogress {percentage}>{percentage}%</Circleprogress>
 	</div>
 	<div>
-		<h4>{name}</h4>
+		<h4>{resourceName}</h4>
 		<h3>Resource Statistics</h3>
 
 		<ul>

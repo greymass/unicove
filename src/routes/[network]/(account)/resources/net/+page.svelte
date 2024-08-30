@@ -26,10 +26,10 @@
 	<h1>CPU Resources</h1>
 	<hr />
 	<State
-		name="Net"
-		available="{availableSize}ms"
-		used="{usedSize}ms"
-		max="{maxSize}ms"
+		resource={ResourceType.NET}
+		available="{availableSize}kb"
+		used="{usedSize}kb"
+		max="{maxSize}kb"
 		percentage={usagePerc}
 	/>
 	<div>

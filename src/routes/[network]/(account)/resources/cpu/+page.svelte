@@ -28,7 +28,7 @@
 	<h1>CPU Resources</h1>
 	<hr />
 	<State
-		name="CPU"
+		resource={ResourceType.CPU}
 		available="{availableSize}ms"
 		used="{usedSize}ms"
 		max="{maxSize}ms"
