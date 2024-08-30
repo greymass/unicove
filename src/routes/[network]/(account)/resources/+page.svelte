@@ -11,45 +11,26 @@
 	import { getContext } from 'svelte';
 	import { TokenList, TokenState } from './state.svelte';
 
+	import { calSize, calUsagePer } from './utils.svelte';
+
 	const { data } = $props();
 
 	const context = getContext<UnicoveContext>('state');
 	const tokenList = $state(new TokenList());
 
-	const availableSize = (available: number) => {
-		let size = 0;
-		if (!isNaN(available)) size = available / 1000;
-		return Number(size.toFixed(2));
-	};
-
-	const usagePer = (used: number, max: number) => {
-		let percentage = 100;
-		if (isNaN(max) || isNaN(used)) {
-			percentage = 0;
-		} else if (max === 0) {
-			percentage = 100;
-		} else {
-			percentage = (used / max) * 100;
-			if (percentage > 100) {
-				percentage = 100;
-			}
-		}
-		return Number(percentage.toFixed(1));
-	};
-
-	const cpuAvailableSize = $derived(availableSize(Number(context.account?.cpu?.available)));
+	const cpuAvailableSize = $derived(calSize(Number(context.account?.cpu?.available)));
 	const cpuUsagePerc = $derived(
-		usagePer(Number(context.account?.cpu?.used), Number(context.account?.cpu?.max))
+		calUsagePer(Number(context.account?.cpu?.used), Number(context.account?.cpu?.max))
 	);
 
-	const ramAvailableSize = $derived(availableSize(Number(context.account?.ram?.available)));
+	const ramAvailableSize = $derived(calSize(Number(context.account?.ram?.available)));
 	const ramUsagePerc = $derived(
-		usagePer(Number(context.account?.ram?.used), Number(context.account?.ram?.max))
+		calUsagePer(Number(context.account?.ram?.used), Number(context.account?.ram?.max))
 	);
 
-	const netAvailableSize = $derived(availableSize(Number(context.account?.net?.available)));
+	const netAvailableSize = $derived(calSize(Number(context.account?.net?.available)));
 	const netUsagePerc = $derived(
-		usagePer(Number(context.account?.net?.used), Number(context.account?.net?.max))
+		calUsagePer(Number(context.account?.net?.used), Number(context.account?.net?.max))
 	);
 
 	$effect(() => {
