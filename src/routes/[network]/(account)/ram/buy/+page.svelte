@@ -63,11 +63,8 @@
 				buyRamState.receiver = context.account.name;
 			}
 
-			if (data.network.chain.systemToken) {
-				buyRamState.balance = Asset.from(
-					context.account.balance?.liquid?.value || 0,
-					data.network.chain.systemToken.symbol
-				);
+			if (context.account.balance) {
+				buyRamState.balance = context.account.balance?.liquid;
 			}
 		}
 	});

@@ -53,7 +53,7 @@ export class BuyRAMState {
 
 	reset() {
 		this.bytes = undefined;
-		this.tokens = Asset.fromUnits(0, this.chain?.systemToken?.symbol || '4,EOS');
+		this.tokens = Asset.fromUnits(0, this.chain.systemToken.symbol);
 	}
 
 	toJSON() {
