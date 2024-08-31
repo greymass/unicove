@@ -53,9 +53,9 @@
 		focus-visible:outline-2
 		focus-visible:outline-solar-500
 
-		data-[active=true]:ring
-		data-[active=true]:ring-2
-		data-[active=true]:ring-mineShaft-200/30
+		data-[active=true]:border
+		data-[active=true]:border-2
+		data-[active=true]:border-mineShaft-200/30
 
 		[@media(any-hover:hover)]:hover:text-mineShaft-100
 
