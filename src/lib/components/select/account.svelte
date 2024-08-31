@@ -3,20 +3,18 @@
 	import { fade, fly } from 'svelte/transition';
 	import { createDialog, melt } from '@melt-ui/svelte';
 	import { Session, type SerializedSession } from '@wharfkit/session';
-
-	import { chainMapper } from '$lib/wharf/chains';
-	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { chainLogos } from '@wharfkit/common';
+
+	import { chainMapper, chainShortNames } from '$lib/wharf/chains';
+	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import type { NetworkState } from '$lib/state/network.svelte';
 
 	import { Stack } from '../layout';
 	import Button from '../button/button.svelte';
 
-	import { page } from '$app/stores';
-
 	const context = getContext<UnicoveContext>('state');
 
 	let currentSession = $derived(context.wharf.session);
-	const currentNetwork = $derived($page.params.network);
 
 	function closeDrawer() {
 		$open = false;
@@ -53,7 +51,12 @@
 
 	let logo = $derived(chainLogos.get(String(context.wharf.session?.chain.id)) || '');
 
-	let { class: className = '' } = $props();
+	interface PageProps {
+		class?: string;
+		network: NetworkState;
+	}
+
+	let { class: className = '', network }: PageProps = $props();
 </script>
 
 <!-- [@media(any-hover:hover)]:hover:opacity-80 -->
@@ -110,13 +113,9 @@
 				opacity: 1
 			}}
 		>
-			<h2 use:melt={$title} class="h3 mb-0">Wharf State</h2>
-			<p use:melt={$description} class="caption mb-4 mt-2">
-				The state internal to the wharf service.
-			</p>
+			<h2 use:melt={$title} class="h3 mb-0">{network}</h2>
 			<section>
 				<Stack class="">
-					<h2 class="h2">Active session</h2>
 					{#if context.wharf.session}
 						<Stack>
 							<Stack class="gap-0">
@@ -129,12 +128,12 @@
 							</Stack>
 						</Stack>
 					{:else}
-						No Session Active
+						Not logged in
 					{/if}
 
 					<h2 class="h2">Controls</h2>
 					<Button onclick={addSession} variant="secondary">Login</Button>
-					<Button href={`/${currentNetwork}/signup`} onclick={closeDrawer} variant="secondary"
+					<Button href={`/${network}/signup`} onclick={closeDrawer} variant="secondary"
 						>Signup</Button
 					>
 					{#if context.wharf.session}
@@ -149,14 +148,23 @@
 					<h2 class="h2">Sessions</h2>
 					<p>The available sessions that can be used.</p>
 					{#each context.wharf.sessions as session}
-						<Button onclick={() => switchSession(session)} variant="secondary">
-							<span class="self-start">
-								{session.actor}@{session.permission}
-							</span>
-							<span class="truncate">
-								({chainMapper.toShortName(session.chain)})
-							</span>
-						</Button>
+						{#if network.chain.id.equals(session.chain)}
+							<Button onclick={() => switchSession(session)} variant="secondary">
+								<span class="self-start">
+									{session.actor}@{session.permission}
+								</span>
+								<span class="truncate">
+									({chainMapper.toShortName(String(session.chain))})
+								</span>
+							</Button>
+						{/if}
+					{/each}
+
+					<h2 class="h2">Switch Network</h2>
+					{#each chainShortNames as chain}
+						{#if chain !== String(network)}
+							<Button href={`/${chain}`}>{chain}</Button>
+						{/if}
 					{/each}
 				</Stack>
 			</section>

@@ -33,13 +33,22 @@
 		}
 	}
 
+	$effect(() => {
+		const { network } = data; // Destructure to force reactivity
+		if (!context.account) {
+			// no account loaded
+			setupWharf();
+		} else if (context.account && !context.account.network.chain.equals(network.chain)) {
+			// account loaded but for a different network
+			setupWharf();
+		}
+	});
+
 	// Number of ms between network updates
 	const ACCOUNT_UPDATE_INTERVAL = 3_000;
 	const NETWORK_UPDATE_INTERVAL = 3_000;
 
 	onMount(() => {
-		setupWharf();
-
 		// Update account state on a set interval
 		const accountInterval = setInterval(() => {
 			if (context.account) {
@@ -80,7 +89,7 @@
 	<div
 		class="col-start-3 row-start-2 flex justify-end md:col-start-4 md:col-end-5 md:row-start-2 md:row-end-3 md:px-4"
 	>
-		<AccountSwitcher />
+		<AccountSwitcher network={data.network} />
 	</div>
 
 	<main
