@@ -108,7 +108,6 @@
 
 		<Search
 			network={data.network}
-			debug
 			class="col-start-2 col-end-3  md:col-start-3 md:col-end-4 md:row-start-2 md:row-end-3"
 		/>
 	</aside>
