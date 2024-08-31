@@ -12,6 +12,10 @@
 	let historicalPrices: RamPriceData[] = $state([]);
 
 	onMount(async () => {
+		// Don't try to fetch historical RAM prices if the network doesn't support it
+		if (!data.network.config.features.timeseries) {
+			return;
+		}
 		try {
 			const response = await fetch('https://unicove-eos.greymass.io/api/marketprice/ram');
 			const parsedResponse = await response.json();
@@ -39,8 +43,8 @@
 	<p>Loading current RAM price...</p>
 {/if}
 
-<h2>Historical RAM Prices</h2>
 {#if historicalPrices.length > 0}
+	<h2>Historical RAM Prices</h2>
 	<table class="float-left max-w-lg border-collapse">
 		<thead>
 			<tr class="bg-gray-60">

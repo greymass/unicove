@@ -17,7 +17,7 @@ export interface ChainConfig {
 	symbol: Asset.SymbolType;
 }
 
-export type FeatureType = 'delphioracle' | 'lightapi' | 'rex' | 'robo';
+export type FeatureType = 'delphioracle' | 'lightapi' | 'rex' | 'robo' | 'timeseries';
 
 export type ChainShortName = (typeof chainShortNames)[number];
 export const chainIndiceMapping: Record<ChainShortName, ChainIndices> = {
@@ -40,7 +40,8 @@ export const chainConfigs: Record<string, ChainConfig> = {
 			delphioracle: true,
 			lightapi: true,
 			rex: true,
-			robo: true
+			robo: true,
+			timeseries: true
 		},
 		symbol: '4,EOS'
 	},
@@ -51,7 +52,8 @@ export const chainConfigs: Record<string, ChainConfig> = {
 			delphioracle: false,
 			lightapi: false,
 			rex: true,
-			robo: true
+			robo: true,
+			timeseries: false
 		},
 		symbol: '4,EOS'
 	},
@@ -62,7 +64,8 @@ export const chainConfigs: Record<string, ChainConfig> = {
 			delphioracle: false,
 			lightapi: false,
 			rex: true,
-			robo: true
+			robo: true,
+			timeseries: false
 		},
 		symbol: '4,EOS'
 	}

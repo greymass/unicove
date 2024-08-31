@@ -30,7 +30,7 @@
 	}: AssetInputProps = $props();
 
 	/** A zero-value version of the passed in asset for placeholder */
-	let zeroValue = $state(Asset.fromUnits(0, _value.symbol));
+	const zeroValue = $derived(Asset.fromUnits(0, _value.symbol));
 
 	/** The string value bound to the form input */
 	let input: string | null = $state(null);
