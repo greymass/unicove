@@ -44,7 +44,7 @@
 			)}
 				<div class="flex items-center justify-end gap-4 p-2 odd:bg-gray-800">
 					<div class="flex flex-1">
-						{#if state.tokenMeta}
+						{#if state.tokenMeta?.logo}
 							<img class=" h-6 w-6" src={state.tokenMeta?.logo} alt="LOGO" />
 						{/if}
 						{name}
