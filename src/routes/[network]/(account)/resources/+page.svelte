@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Code from '$lib/components/code.svelte';
+	import PageHeader from '$lib/components/pageheader.svelte';
 	import Grid from '$lib/components/layout/grid.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
 	import Button from '$lib/components/button/button.svelte';
@@ -101,11 +102,8 @@
 	const network = $derived(String(data.network));
 </script>
 
-<h1>Resources</h1>
-<br />
-<hr />
-<br />
-<Stack>
+<PageHeader title="Resources" />
+<Stack class="mt-10">
 	<Grid itemWidth="270px">
 		<ResourceWrapper
 			title="ram"

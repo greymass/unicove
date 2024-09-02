@@ -2,6 +2,7 @@
 	import Stack from '$lib/components/layout/stack.svelte';
 	import State from '../components/state/state.svelte';
 	import Prices from '../components/state/prices.svelte';
+	import PageHeader from '$lib/components/pageheader.svelte';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
@@ -22,9 +23,8 @@
 	const network = $derived(String(data.network));
 </script>
 
-<Stack>
-	<h1>CPU Resources</h1>
-	<hr />
+<PageHeader title="Network Resources" />
+<Stack class="mt-10">
 	<State
 		resource={ResourceType.NET}
 		available="{availableSize}kb"
