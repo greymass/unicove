@@ -111,7 +111,7 @@
 		</Stack>
 
 		{#if rentState.error}
-			<p>
+			<p class="text-red-500">
 				Fee:{rentState.error}
 			</p>
 		{/if}

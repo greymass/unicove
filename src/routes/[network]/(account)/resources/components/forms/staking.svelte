@@ -102,7 +102,11 @@
 				</p>
 			{/if}
 		</Stack>
-
+		{#if rentState.error}
+			<p class="text-red-500">
+				Fee:{rentState.error}
+			</p>
+		{/if}
 		<Button type="submit" class="mt-4 w-full">Stake Tokens</Button>
 	</form>
 {/if}
