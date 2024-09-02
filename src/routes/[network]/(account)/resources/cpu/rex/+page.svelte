@@ -26,7 +26,7 @@
 	<PageHeader title="Network Resource" />
 
 	<State
-		name="CPU"
+		resource={ResourceType.CPU}
 		available="{availableSize}ms"
 		used="{usedSize}ms"
 		max="{maxSize}ms"

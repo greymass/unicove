@@ -14,6 +14,11 @@
 	import { getContext } from 'svelte';
 
 	const context = getContext<UnicoveContext>('state');
+	interface Props {
+		resourceType: ResourceType;
+	}
+	const { resourceType }: Props = $props();
+	const rentState: RentState = $state(new RentState(resourceType, RentType.POWERUP));
 
 	$effect(() => {
 		if (context.account && context.network) {
@@ -21,19 +26,26 @@
 				rentState.payer = context.account.name;
 				rentState.receiver = context.account.name;
 			}
+			if (context.network.powerupstate && context.network.sampledUsage) {
+				if (resourceType === ResourceType.CPU) {
+					rentState.frac = context.network.powerupstate.cpu.frac_by_ms(
+						context.network.sampledUsage,
+						Number(rentState.amount)
+					);
+				} else {
+					rentState.frac = context.network.powerupstate.net.frac_by_kb(
+						context.network.sampledUsage,
+						Number(rentState.amount)
+					);
+				}
+			}
 			rentState.coreSymbol = context.network.chain.systemToken!.symbol;
 			rentState.balance = context.account.balance ? context.account.balance.liquid : undefined;
-			rentState.pricePerUnit = context.network.rexprice;
+			rentState.pricePerUnit = context.network.powerupprice;
 		} else {
 			rentState.reset();
 		}
 	});
-
-	interface Props {
-		resourceType: ResourceType;
-	}
-	const { resourceType }: Props = $props();
-	const rentState: RentState = $state(new RentState(resourceType, RentType.REX));
 
 	function handleRent() {
 		if (!context.wharf || !context.wharf.session || !context.network) {
@@ -42,20 +54,16 @@
 		}
 
 		try {
-			const depositData = rentState.getDepositData();
-			const depositAction = context.network.contracts.system.action('deposit', depositData);
+			console.log('name = ', rentState.getActionName());
 			const rentData = rentState.getActionData();
+			console.log('rentData = ', rentData);
 			const rentAction = context.network.contracts.system.action(
 				rentState.getActionName(),
 				rentData
 			);
-
-			console.log('depositData = ', depositData);
-			console.log('rentData = ', rentData);
 			context.wharf
 				.transact({
-					// action: rentAction
-					actions: [depositAction, rentAction]
+					action: rentAction
 				})
 				.then((result: any) => {
 					console.log('result', result);
@@ -85,7 +93,7 @@
 {:else}
 	<form on:submit={preventDefault(handleRent)}>
 		<Stack class="gap-3">
-			<Label>Amount of {rentState.getUnit()} to rent from REX.</Label>
+			<Label>Amount of {rentState.getUnit()} to rent from PowerUp.</Label>
 			<Input placeholder={`number of ${rentState.getUnit()}`} bind:value={rentState.amount} />
 			{#if rentState.insufficientBalance}
 				<p class="text-red-500">Insufficient balance. Please enter a smaller amount.</p>

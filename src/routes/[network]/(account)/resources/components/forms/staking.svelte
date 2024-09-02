@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Input from '$lib/components/input/textinput.svelte';
+	import AssetInput from '$lib/components/input/asset.svelte';
 	import Button from '$lib/components/button/button.svelte';
 	import Label from '$lib/components/input/label.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
@@ -21,9 +22,11 @@
 				rentState.payer = context.account.name;
 				rentState.receiver = context.account.name;
 			}
-			rentState.coreSymbol = context.network.chain.systemToken!.symbol;
+			if (context.network.chain.systemToken) {
+				rentState.coreSymbol = context.network.chain.systemToken.symbol;
+			}
 			rentState.balance = context.account.balance ? context.account.balance.liquid : undefined;
-			rentState.pricePerUnit = context.network.rexprice;
+			rentState.pricePerUnit = context.network.stakingprice;
 		} else {
 			rentState.reset();
 		}
@@ -33,7 +36,7 @@
 		resourceType: ResourceType;
 	}
 	const { resourceType }: Props = $props();
-	const rentState: RentState = $state(new RentState(resourceType, RentType.REX));
+	const rentState: RentState = $state(new RentState(resourceType, RentType.STAKE));
 
 	function handleRent() {
 		if (!context.wharf || !context.wharf.session || !context.network) {
@@ -42,23 +45,17 @@
 		}
 
 		try {
-			const depositData = rentState.getDepositData();
-			const depositAction = context.network.contracts.system.action('deposit', depositData);
-			const rentData = rentState.getActionData();
-			const rentAction = context.network.contracts.system.action(
-				rentState.getActionName(),
-				rentData
-			);
+			const actionName = rentState.getActionName();
+			const actionData = rentState.getActionData();
+			console.log('actionName = ', actionName);
+			console.log('actionData = ', actionData);
+			const rentAction = context.network.contracts.system.action(actionName!, actionData);
 
-			console.log('depositData = ', depositData);
-			console.log('rentData = ', rentData);
 			context.wharf
 				.transact({
-					// action: rentAction
-					actions: [depositAction, rentAction]
+					action: rentAction
 				})
 				.then((result: any) => {
-					console.log('result', result);
 					rentState.txid = String(result.response.transaction_id);
 				})
 				.catch((error) => {
@@ -69,7 +66,6 @@
 			alert('rex failed: ' + (error as { message: string }).message);
 		}
 	}
-
 	function handleSuccessBack() {
 		console.log('handleSuccessBack');
 		rentState.reset();
@@ -85,8 +81,10 @@
 {:else}
 	<form on:submit={preventDefault(handleRent)}>
 		<Stack class="gap-3">
-			<Label>Amount of {rentState.getUnit()} to rent from REX.</Label>
-			<Input placeholder={`number of ${rentState.getUnit()}`} bind:value={rentState.amount} />
+			<Label>Amount of {rentState.coreSymbol?.code} to stake as {rentState.getName()}</Label>
+
+			<AssetInput placeholder={`number of tokens`} bind:value={rentState.amountValue} />
+
 			{#if rentState.insufficientBalance}
 				<p class="text-red-500">Insufficient balance. Please enter a smaller amount.</p>
 			{/if}
@@ -97,22 +95,14 @@
 			{/if}
 			{#if rentState.pricePerUnit}
 				<p>
-					Price:{rentState.pricePerUnit}
+					Price:
+					{(Number(rentState.pricePerUnit.value) * 1000).toFixed(
+						rentState.pricePerUnit.symbol.precision
+					)}
 				</p>
 			{/if}
 		</Stack>
 
-		{#if rentState.error}
-			<p>
-				Fee:{rentState.error}
-			</p>
-		{/if}
-		<Button type="submit" class="mt-4 w-full">
-			{#if rentState.amount && rentState.cost}
-				Rent {rentState.amount}{rentState.getUnit()} for {rentState.cost}
-			{:else}
-				Rent
-			{/if}
-		</Button>
+		<Button type="submit" class="mt-4 w-full">Stake Tokens</Button>
 	</form>
 {/if}
