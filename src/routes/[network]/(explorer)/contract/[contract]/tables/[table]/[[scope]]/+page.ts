@@ -11,8 +11,14 @@ export const load: PageLoad = async ({ params, parent }) => {
 	const rows = await contract.table(params.table, params.scope).first(100).next();
 	return {
 		pageMetaTags: {
-			title: `Table: ${params.table} | Contract: ${p.contract} | ${p.network.chain.name}`,
-			description: `The ${params.table} data table in the ${p.contract} smart contract on the ${p.network.chain.name} network.`
+			title: m.contract_tables_view_title({
+				table: params.table
+			}),
+			description: m.contract_tables_view_description({
+				contract: p.contract,
+				network: p.network.chain.name,
+				table: params.table
+			})
 		},
 		rows: Serializer.objectify(rows),
 		table: params.table

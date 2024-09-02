@@ -1,35 +1,29 @@
 <script lang="ts">
-	import { ABI, Bytes, Serializer } from '@wharfkit/antelope';
-	import * as m from '$lib/paraglide/messages.js';
-	import Code from '$lib/components/code.svelte';
-	import Textinput from '$lib/components/input/textinput.svelte';
-	import Label from '$lib/components/input/label.svelte';
-	import Fields from './fields.svelte';
-	import Button from '$lib/components/button/button.svelte';
 	import { getContext } from 'svelte';
-	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import { Bytes, Serializer } from '@wharfkit/antelope';
 	import type { Contract } from '@wharfkit/contract';
-	import { Debounced } from 'runed';
+
 	import { page } from '$app/stores';
 	import { getSetting } from '$lib/state/settings.svelte';
-	import { transactions } from '$lib/wharf/transact.svelte';
+	import * as m from '$lib/paraglide/messages.js';
+
+	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import Button from '$lib/components/button/button.svelte';
+	import Card from '$lib/components/layout/box/card.svelte';
+	import Code from '$lib/components/code.svelte';
+	import Grid from '$lib/components/layout/grid.svelte';
+	import Label from '$lib/components/input/label.svelte';
+	import Pageheader from '$lib/components/pageheader.svelte';
+	import Stack from '$lib/components/layout/stack.svelte';
+	import Textinput from '$lib/components/input/textinput.svelte';
+
+	import Fields from './fields.svelte';
 
 	const { data } = $props();
 
 	const context = getContext<UnicoveContext>('state');
 	const contract = getContext<Contract>('contract');
 	const debugMode = getSetting('debug-mode', false);
-
-	const action = data.abi.actions.find((s: ABI.Action) => s.name === data.action);
-	const actionData = data.abi.structs.find((s: ABI.Struct) => s.name === action.type);
-
-	function deriveFields(fieldType: string) {
-		const struct = abi.structs.find((s: ABI.Struct) => s.name === fieldType);
-		if (struct) {
-			return struct.fields;
-		}
-		return [];
-	}
 
 	const flatten = (
 		obj: Record<string, any>,
@@ -54,7 +48,7 @@
 			const action = Serializer.decode({
 				data: Bytes.from(data.data),
 				abi: data.abi,
-				type: data.action
+				type: data.action.name
 			});
 			state = flatten(Serializer.objectify(action));
 		} catch (e) {
@@ -82,7 +76,7 @@
 			return Serializer.encode({
 				object: restructured,
 				abi: data.abi,
-				type: data.action
+				type: data.action.name
 			});
 		} catch (e) {
 			console.log(e);
@@ -95,7 +89,7 @@
 			return Serializer.decode({
 				data: serialized,
 				abi: data.abi,
-				type: data.action
+				type: data.action.name
 			});
 		} catch (e) {
 			console.log(e);
@@ -105,7 +99,7 @@
 
 	const link = $derived(
 		serialized
-			? `${$page.url.protocol}//${$page.url.host}/${data.network}/contract/${data.contract}/actions/${data.action}/${serialized}`
+			? `${$page.url.protocol}//${$page.url.host}/${data.network}/contract/${data.contract}/actions/${data.action.name}/${serialized}`
 			: undefined
 	);
 
@@ -113,7 +107,7 @@
 		if (!serialized) {
 			return;
 		}
-		const action = contract.action(data.action, serialized);
+		const action = contract.action(data.action.name, serialized);
 		context.wharf
 			.transact({ action })
 			.then((result) => {
@@ -125,9 +119,43 @@
 	}
 </script>
 
-<h2 class="h2">Action: {data.action}</h2>
-<Fields abi={data.abi} fields={actionData.fields} {state} />
-<Button onclick={transact} disabled={!decoded}>Perform Action</Button>
+<Stack>
+	<Pageheader
+		title={m.contract_action_view_title({
+			action: data.action.name
+		})}
+		subtitle={m.contract_action_view_description({
+			action: data.action.name,
+			contract: data.contract,
+			network: data.network.chain.name
+		})}
+	/>
+
+	<Grid>
+		<Card>
+			<Fields abi={data.abi} fields={data.actionData.fields} {state} />
+			<Button onclick={transact} disabled={!decoded}>Perform Action</Button>
+		</Card>
+		<Card>
+			{#if data.ricardian}
+				<h4 class="h4">Ricardian Contract</h4>
+				{#if data.ricardian.meta}
+					<p>Title: {data.ricardian.meta.title}</p>
+					<p>Summary: {data.ricardian.meta.summary}</p>
+				{/if}
+				{#if data.ricardian.text}
+					<p>{data.ricardian.text}</p>
+				{/if}
+			{/if}
+			<h4 class="h4">Data Representation</h4>
+			{#if decoded}
+				<Code>{JSON.stringify(decoded, null, 2)}</Code>
+			{:else}
+				<p>Fill out the form to create a representation of the data in this type of action.</p>
+			{/if}
+		</Card>
+	</Grid>
+</Stack>
 
 <h4 class="h4 mt-4">Transaction Link</h4>
 <fieldset class="grid gap-2">
@@ -147,7 +175,7 @@
 	<p>Decoded</p>
 	<Code>{JSON.stringify(decoded, null, 2)}</Code>
 	<p>Action</p>
-	<Code>{JSON.stringify(action, null, 2)}</Code>
+	<Code>{JSON.stringify(data.action, null, 2)}</Code>
 	<p>Action Data</p>
-	<Code>{JSON.stringify(actionData, null, 2)}</Code>
+	<Code>{JSON.stringify(data.actionData, null, 2)}</Code>
 {/if}

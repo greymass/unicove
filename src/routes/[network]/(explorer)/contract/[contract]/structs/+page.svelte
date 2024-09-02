@@ -1,16 +1,23 @@
 <script lang="ts">
 	import * as m from '$lib/paraglide/messages.js';
-	import Code from '$lib/components/code.svelte';
+	import Stack from '$lib/components/layout/stack.svelte';
+	import Pageheader from '$lib/components/pageheader.svelte';
 
 	const { data } = $props();
 </script>
 
-<ul>
+<Stack>
+	<Pageheader
+		title={m.contract_struct_page_title()}
+		subtitle={m.contract_struct_page_description({
+			structs: data.abi.structs.length,
+			contract: data.contract,
+			network: data.network.chain.name
+		})}
+	/>
 	{#each data.abi.structs as struct}
-		<li>
-			<a href="/{data.network}/contract/{data.contract}/structs/{struct.name}">
-				{struct.name}
-			</a>
-		</li>
+		<a href="/{data.network}/contract/{data.contract}/structs/{struct.name}">
+			{struct.name}
+		</a>
 	{/each}
-</ul>
+</Stack>

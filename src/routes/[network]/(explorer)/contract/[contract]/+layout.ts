@@ -11,8 +11,17 @@ export const load: PageLoad = async ({ fetch, params, parent }: Pageload) => {
 		abi,
 		contract: params.contract,
 		pageMetaTags: {
-			title: `Contract: ${params.contract} | ${p.network.chain.name}`,
-			description: `An overview of the ${params.contract} smart contract on the ${p.network.chain.name} network. This contract contains ${abi.actions.length} actions, ${abi.tables.length} tables, and ${abi.structs.length} structs.`
+			title: m.contract_view_title({
+				contract: params.contract,
+				network: p.network.chain.name
+			}),
+			description: m.contract_view_description({
+				contract: params.contract,
+				network: p.network.chain.name,
+				tables: abi.tables.length,
+				structs: abi.structs.length,
+				actions: abi.actions.length
+			})
 		}
 	};
 };
