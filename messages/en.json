@@ -3,5 +3,21 @@
 	"active_session": "Active Session",
 	"test_locale_string": "This is a test",
 	"block_height_numbered": "Block #{height}",
-	"block_height_numbered_description": "Block #{height} was produced by {producer} on {timestamp}, which included {transactions} transactions performing {actions} actions."
+	"block_height_numbered_description": "Block #{height} was produced by {producer} on {timestamp}, which included {transactions} transactions performing {actions} actions.",
+	"contract_struct_page_title": "Structs",
+	"contract_struct_page_description": "The {structs} data structures defined by the {contract} smart contract on the {network} network.",
+	"contract_struct_view_title": "Struct: {struct}",
+	"contract_struct_view_description": "The {struct} data structure as defined by the {contract} smart contract on the {network} network.",
+	"contract_action_view_title": "Action: {action}",
+	"contract_action_view_description": "The {action} action for the {contract} smart contract on the {network} network.",
+	"contract_actions_page_title": "Actions",
+	"contract_actions_page_description": "The {actions} smart contract actions available for the {contract} contract on the {network} network.",
+	"contract_abi_page_title": "ABI",
+	"contract_abi_page_description": "The ABI defining the {contract} smart contract on the {network} network.",
+	"contract_tables_page_title": "Tables",
+	"contract_tables_page_description": "The {tables} data tables in the {contract} contract on the {network} network.",
+	"contract_tables_view_title": "Table: {table}",
+	"contract_tables_view_description": "The {table} data table in the {contract} smart contract on the {network} network.",
+	"contract_view_title": "Contract: {contract} | {network}",
+	"contract_view_description": "An overview of the {contract} smart contract on the {network} network. This contract contains {actions} actions, {tables} tables, and {structs} structs."
 }
