@@ -49,16 +49,12 @@
 				rentState.getActionName(),
 				rentData
 			);
-
-			console.log('depositData = ', depositData);
-			console.log('rentData = ', rentData);
 			context.wharf
 				.transact({
 					// action: rentAction
 					actions: [depositAction, rentAction]
 				})
 				.then((result: any) => {
-					console.log('result', result);
 					rentState.txid = String(result.response.transaction_id);
 				})
 				.catch((error) => {

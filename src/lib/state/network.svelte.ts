@@ -43,18 +43,6 @@ export class NetworkState {
 	public tokenstate?: DelphiOracleTypes.datapoints = $state();
 	public rexprice: Asset | undefined = $derived.by(() => {
 		if (this.rexstate && this.sampledUsage && this.chain.systemToken) {
-			// console.log("#####", JSON.stringify(this.sampledUsage))
-			// if (this.resources) {
-			// 	this.resources
-			// 		.getSampledUsage()
-			// 		.then((result) => {
-			// 			console.log('>>>>', Serializer.stringify(result));
-			// 		})
-			// 		.catch((error) => {
-			// 			console.log('>>>>', error);
-			// 		});
-			// }
-
 			return Asset.from(this.rexstate.price_per(this.sampledUsage, 30000), this.chain.systemToken.symbol)
 		}
 		return undefined;

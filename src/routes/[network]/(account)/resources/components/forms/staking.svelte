@@ -47,8 +47,6 @@
 		try {
 			const actionName = rentState.getActionName();
 			const actionData = rentState.getActionData();
-			console.log('actionName = ', actionName);
-			console.log('actionData = ', actionData);
 			const rentAction = context.network.contracts.system.action(actionName!, actionData);
 
 			context.wharf
@@ -67,7 +65,6 @@
 		}
 	}
 	function handleSuccessBack() {
-		console.log('handleSuccessBack');
 		rentState.reset();
 	}
 </script>
