@@ -6,6 +6,7 @@
 
 	interface Props extends HTMLAttributes<HTMLDivElement> {
 		children: Snippet;
+		class?: string;
 	}
 
 	const { class: className = '', ...props }: Props = $props();
