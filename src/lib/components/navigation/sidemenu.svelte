@@ -38,7 +38,7 @@
 <menu
 	class="sticky top-0 grid h-svh max-h-[768px] min-w-36 grid-rows-[56px_1fr_56px] gap-6 px-9 py-4 {className}"
 >
-	<UnicoveLogo wordmark class="" {callbackFn} />
+	<UnicoveLogo {network} wordmark class="" {callbackFn} />
 	<nav class="flex flex-col justify-center gap-1 text-nowrap text-base font-medium text-white">
 		{#each options as option}
 			<a
