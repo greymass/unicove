@@ -19,23 +19,33 @@ export async function GET({ fetch, params }) {
 	}
 
 	const requests: Promise<ResponseType>[] = [];
+	let ramStateIndex = -1;
+	let rexStateIndex = -1;
+	let powerupStateIndex = -1;
+	let sampleUsageIndex = -1;
+	let tokenStateIndex = -1;
+
 	if (network.config.features.buyram) {
-		requests.push(network.resources.v1.ram.get_state());
+		ramStateIndex = addRequest(requests, network.resources.v1.ram.get_state());
 	}
 	if (network.config.features.rex) {
-		requests.push(network.resources.v1.rex.get_state());
+		rexStateIndex = addRequest(requests, network.resources.v1.rex.get_state());
 	}
 	if (network.config.features.powerup) {
-		requests.push(network.resources.v1.powerup.get_state());
+		powerupStateIndex = addRequest(requests, network.resources.v1.powerup.get_state());
 	}
-	if (network.config.features.staking || network.config.features.rex || network.config.features.powerup) {
-		requests.push(network.resources.getSampledUsage());
+	if (network.config.features.staking || network.config.features.rentrex || network.config.features.powerup) {
+		sampleUsageIndex = addRequest(requests, network.resources.getSampledUsage());
 	}
 	if (network.contracts.delphioracle) {
-		requests.push(network.contracts.delphioracle.table('datapoints', 'eosusd').get());
+		tokenStateIndex = addRequest(requests, network.contracts.delphioracle.table('datapoints', 'eosusd').get());
 	}
-
-	const [ramstate, rexstate, powerupstate, sampleUsage, tokenstate] = await Promise.all(requests);
+	const results = await Promise.all(requests);
+	const ramstate = getResponse(results, ramStateIndex);
+	const rexstate = getResponse(results, rexStateIndex);
+	const powerupstate = getResponse(results, powerupStateIndex);
+	const sampleUsage = getResponse(results, sampleUsageIndex);
+	const tokenstate = getResponse(results, tokenStateIndex);
 
 	const systemtoken = ramstate ? (ramstate as RAMState).quote.balance.symbol : undefined;
 
@@ -55,4 +65,12 @@ export async function GET({ fetch, params }) {
 			headers
 		}
 	);
+}
+
+function addRequest(list: Promise<ResponseType>[], request: Promise<ResponseType>) {
+	return list.push(request) - 1
+}
+
+function getResponse(list: ResponseType[], index: number) {
+	return index >= 0 && list.length > index ? list[index] : undefined;
 }

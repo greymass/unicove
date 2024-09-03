@@ -13,7 +13,7 @@ export class NetworkConfig {
         if (config) {
             this.hasBuyRAM = config.features.buyram;
             this.hasPowerUp = config.features.powerup;
-            this.hasREX = config.features.rex;
+            this.hasREX = config.features.rentrex;
             this.hasStaking = config.features.staking;
         } else {
             this.hasBuyRAM = false;
