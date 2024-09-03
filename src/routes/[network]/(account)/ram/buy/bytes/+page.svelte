@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
-	import { Asset, Checksum256 } from '@wharfkit/antelope';
+	import { Checksum256 } from '@wharfkit/antelope';
 
 	import { getSetting } from '$lib/state/settings.svelte.js';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
@@ -10,9 +10,10 @@
 	import Label from '$lib/components/input/label.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
 	import Transaction from '$lib/components/transaction.svelte';
+	import NumberInput from '$lib/components/input/number.svelte';
+	import Cluster from '$lib/components/layout/cluster.svelte';
 
-	import { BuyRAMState } from './state.svelte.js';
-	import AssetOrUnitsInput from '$lib/components/input/assetOrUnits.svelte';
+	import { BuyRAMState } from '../state.svelte.js';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
@@ -28,31 +29,14 @@
 			return;
 		}
 
-		const actionName = buyRamState.format === 'asset' ? 'buyram' : 'buyrambytes';
-
 		try {
 			const transactionResult = await context.wharf.transact({
-				action: data.network.contracts.system.action(actionName, buyRamState.toJSON())
+				action: data.network.contracts.system.action('buyrambytes', buyRamState.toJSON())
 			});
 
 			transactionId = transactionResult?.resolved?.transaction.id;
 		} catch (error) {
 			console.error(error);
-		}
-	}
-
-	function preventDefault(fn: (event: Event) => void) {
-		return function (event: Event) {
-			event.preventDefault();
-			fn.call(this, event);
-		};
-	}
-
-	function handleKeydown(event: unknown) {
-		const keyboardEvent = event as KeyboardEvent;
-		if (keyboardEvent.key === 'Enter') {
-			keyboardEvent.preventDefault();
-			handleBuyRAM();
 		}
 	}
 
@@ -74,28 +58,20 @@
 			buyRamState.pricePerKB = data.network.ramprice.eos;
 		}
 	});
-
-	$effect(() => {
-		if (buyRamState.format) {
-			buyRamState.reset();
-		}
-	});
 </script>
 
 {#if transactionId}
 	<Transaction network={data.network} {transactionId} />
 {/if}
 
-<form onsubmit={preventDefault(handleBuyRAM)}>
+<form on:submit|preventDefault={handleBuyRAM}>
 	<Stack class="gap-3">
-		<Label for="assetInput">Amount to buy</Label>
-		<AssetOrUnitsInput
-			bind:assetValue={buyRamState.tokens}
-			bind:unitsValue={buyRamState.bytes}
-			unitName="Bytes"
-			bind:format={buyRamState.format}
-			autofocus
-			onkeydown={handleKeydown}
+		<Label for="bytesInput">Amount to buy (Bytes)</Label>
+		<NumberInput
+			id="bytesInput"
+			bind:value={buyRamState.bytes}
+			placeholder="0"
+			disabled={!context.account}
 		/>
 		{#if buyRamState.insufficientBalance}
 			<p class="text-red-500">Insufficient balance. Please enter a smaller amount.</p>
@@ -105,7 +81,7 @@
 			{#if context.account}
 				{context.account.balance?.liquid}
 			{:else}
-				0.0000 {data.network.chain.systemToken}
+				0.0000 {data.network.chain.systemToken.symbol.code}
 			{/if}
 		</p>
 	</Stack>
@@ -115,7 +91,7 @@
 		<div class="grid grid-cols-2 gap-2">
 			<span>Price for 1000 Bytes:</span>
 			<span>{buyRamState.pricePerKB} / KB</span>
-			<span>Price{buyRamState.bytes ? ` for ${buyRamState.bytes} Bytes` : ''}:</span>
+			<span>Price for {buyRamState.bytes} Bytes:</span>
 			<span>{buyRamState.bytesValue}</span>
 			<span>Network Fee (0.5%)</span>
 			<span>{buyRamState.fee}</span>

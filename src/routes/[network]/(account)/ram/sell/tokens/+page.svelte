@@ -10,9 +10,9 @@
 	import Label from '$lib/components/input/label.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
 	import Transaction from '$lib/components/transaction.svelte';
-	import AssetOrUnitsInput from '$lib/components/input/assetOrUnits.svelte';
+	import AssetInput from '$lib/components/input/asset.svelte';
 
-	import { SellRAMState } from './state.svelte.js';
+	import { SellRAMState } from '../state.svelte.js';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
@@ -39,14 +39,8 @@
 		}
 	}
 
-	function preventDefault(fn: (event: Event) => void) {
-		return function (event: Event) {
-			event.preventDefault();
-			fn.call(this, event);
-		};
-	}
-
 	$effect(() => {
+		console.log({ context });
 		if (context.account) {
 			if (context.account.name) {
 				sellRamState.account = context.account.name;
@@ -60,36 +54,20 @@
 			sellRamState.pricePerKB = data.network.ramprice.eos;
 		}
 	});
-
-	$effect(() => {
-		if (sellRamState.format) {
-			sellRamState.reset();
-		}
-	});
-
-	function handleKeydown(event: unknown) {
-		const keyboardEvent = event as KeyboardEvent;
-		if (keyboardEvent.key === 'Enter') {
-			keyboardEvent.preventDefault();
-			handleSellRAM();
-		}
-	}
 </script>
 
 {#if transactionId}
 	<Transaction network={data.network} {transactionId} />
 {/if}
 
-<form onsubmit={preventDefault(handleSellRAM)}>
+<form on:submit|preventDefault={handleSellRAM}>
 	<Stack class="gap-3">
 		<Label for="assetInput">Amount to sell</Label>
-		<AssetOrUnitsInput
-			bind:assetValue={sellRamState.tokens}
-			bind:unitsValue={sellRamState.bytes}
-			unitName="Bytes"
-			bind:format={sellRamState.format}
-			autofocus
-			onkeydown={handleKeydown}
+		<AssetInput
+			id="assetInput"
+			bind:value={sellRamState.tokens}
+			placeholder="0.0000 EOS"
+			disabled={!context.account}
 		/>
 		{#if sellRamState.insufficientRAM}
 			<p class="text-red-500">Insufficient RAM available. Please enter a smaller amount.</p>
@@ -117,10 +95,10 @@
 		<div class="grid grid-cols-2 gap-2">
 			<span>Price for 1000 bytes:</span>
 			<span>{sellRamState.pricePerKB} / KB</span>
-			<span>RAM to be sold:</span>
-			<span>{sellRamState.bytesToSell || 0} Bytes</span>
+			<span>Estimated RAM to be sold:</span>
+			<span>{sellRamState.bytes || 0} Bytes</span>
 			<span>RAM Value:</span>
-			<span>{sellRamState.bytesValue}</span>
+			<span>{sellRamState.tokens}</span>
 			<span>Network Fee (0.5%)</span>
 			<span>{sellRamState.fee}</span>
 			<span>Expected To Receive:</span>
@@ -136,16 +114,14 @@
 			>{JSON.stringify(
 				{
 					account: sellRamState.account,
-					bytes: sellRamState.bytes,
 					tokens: sellRamState.tokens,
 					max: sellRamState.max,
 					chain: sellRamState.chain,
 					pricePerKB: sellRamState.pricePerKB,
 					pricePerByte: sellRamState.pricePerByte,
-					bytesValue: sellRamState.bytesValue,
+					estimatedBytesToSell: sellRamState.bytes,
 					insufficientRAM: sellRamState.insufficientRAM,
 					valid: sellRamState.valid,
-					format: sellRamState.format,
 					balances: context.account?.balances
 				},
 				undefined,

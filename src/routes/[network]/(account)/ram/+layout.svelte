@@ -2,7 +2,6 @@
 	import { page } from '$app/stores';
 	import PillGroup from '$lib/components/navigation/pillgroup.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
-	import { goto } from '$app/navigation';
 
 	const { data, children } = $props();
 
@@ -10,16 +9,19 @@
 		const network = String(data.network);
 		return [
 			{ href: `/${network}/ram`, text: 'Overview' },
-			{ href: `/${network}/ram/buy`, text: 'Buy RAM' },
-			{ href: `/${network}/ram/sell`, text: 'Sell RAM' }
+			{ href: `/${network}/ram/buy/tokens`, text: 'Buy RAM' },
+			{ href: `/${network}/ram/sell/tokens`, text: 'Sell RAM' }
 		];
 	});
 
-	let currentTab = $derived($page.url.pathname.split('/').slice(-1)[0]);
+	let currentTab = $derived($page.url.pathname.split('/')[4] || 'overview');
+
 	let options = $derived(
 		tabOptions.map((option) => ({
 			...option,
-			active: option.href.split('/').slice(-1)[0] === currentTab
+			active:
+				`/${$page.url.pathname.split('/').slice(2).slice(0, -1).join('/')}` ===
+				option.href.split('/').slice(0, -1).join('/')
 		}))
 	);
 </script>
