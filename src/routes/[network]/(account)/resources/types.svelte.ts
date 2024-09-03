@@ -5,5 +5,5 @@ export enum RentType {
 }
 
 export enum ResourceType {
-    CPU, NET
+    RAM, CPU, NET
 }

@@ -1,11 +1,14 @@
 import { Serializer, Asset, Name } from '@wharfkit/antelope';
 import { RentType, ResourceType } from '../../types.svelte';
 import type { ActionNames, ActionParams } from '$lib/wharf/contracts/system';
+import { getName, getUnit } from '../../utils.svelte';
 
 
 export class RentState {
 	public resourceType: ResourceType;
 	public rentType: RentType;
+	public resourceName;
+	public resourceUnit;
 
 	public payer: Name = $state(Name.from(''));
 	public receiver: Name = $state(Name.from(''));
@@ -33,19 +36,6 @@ export class RentState {
 	public error: string = $state('')
 	public txid: string = $state('')
 
-	getName(): string {
-		switch (this.resourceType) {
-			case ResourceType.CPU:
-				return "CPU";
-			case ResourceType.NET:
-				return "NET";
-		}
-	}
-
-	getUnit(): string {
-		return this.resourceType === ResourceType.CPU ? "ms" : "kb";
-	}
-
 	public insufficientBalance: boolean = $derived.by(() => {
 		if (this.cost && this.balance)
 			return this.cost.value > this.balance.value
@@ -55,6 +45,8 @@ export class RentState {
 	constructor(resource: ResourceType, rent: RentType) {
 		this.resourceType = resource;
 		this.rentType = rent;
+		this.resourceName = getName(resource);
+		this.resourceUnit = getUnit(resource)
 	}
 
 	reset() {

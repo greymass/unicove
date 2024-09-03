@@ -1,41 +1,57 @@
 <script lang="ts">
 	import Circleprogress from '$lib/components/circleprogress.svelte';
 	import { ResourceType } from '../../types.svelte';
+	import { ResourceState } from '../../state.svelte';
+
+	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import { getContext } from 'svelte';
+	import Resources from '../overview/resources.svelte';
+	import type { Resource } from '@wharfkit/account';
 
 	interface Props {
 		resource: ResourceType;
-		available: string;
-		used: string;
-		max: string;
-		percentage: number;
 	}
+	const { resource }: Props = $props();
 
-	const { resource, available, used, max, percentage }: Props = $props();
+	const context = getContext<UnicoveContext>('state');
 
-	const resourceName = resource === ResourceType.CPU ? 'CPU' : 'NET';
-	const resourceUnit = resource === ResourceType.CPU ? 'ms' : 'kb';
+	const resourceState = $state(new ResourceState(resource));
+	$effect(() => {
+		let resourceValue: Resource | undefined = undefined;
+		switch (resource) {
+			case ResourceType.RAM:
+				resourceValue = context.account?.ram;
+				break;
+			case ResourceType.CPU:
+				resourceValue = context.account?.cpu;
+				break;
+			case ResourceType.NET:
+				resourceValue = context.account?.net;
+				break;
+		}
+		resourceState.setResource(resourceValue);
+	});
 </script>
 
 <div class="flex items-center gap-6">
 	<div class="gauge">
-		<Circleprogress {percentage}>{percentage}%</Circleprogress>
+		<Circleprogress percentage={resourceState.usagePerc}>{resourceState.usagePerc}%</Circleprogress>
 	</div>
 	<div>
-		<h4>{resourceName}</h4>
+		<h4>{resourceState.name}</h4>
 		<h3>Resource Statistics</h3>
-
 		<ul>
 			<li>
 				<span>Available:</span>
-				<span>{available}</span>
+				<span>{resourceState.availableSize} {resourceState.unit}</span>
 			</li>
 			<li>
 				<span>Used:</span>
-				<span>{used}</span>
+				<span>{resourceState.usedSize} {resourceState.unit}</span>
 			</li>
 			<li>
 				<span>Maximum:</span>
-				<span>{max}</span>
+				<span>{resourceState.maxSize} {resourceState.unit}</span>
 			</li>
 		</ul>
 	</div>

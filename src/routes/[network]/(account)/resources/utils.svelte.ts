@@ -1,3 +1,5 @@
+import { ResourceType } from "./types.svelte";
+
 export const calSize = (available: number) => {
     let size = 0;
     if (!isNaN(available)) size = available / 1000;
@@ -18,3 +20,24 @@ export const calUsagePer = (used: number, max: number) => {
     }
     return Number(percentage.toFixed(1));
 };
+
+export const getName = (resourceType: ResourceType) => {
+    switch (resourceType) {
+        case ResourceType.RAM:
+            return "RAM";
+        case ResourceType.CPU:
+            return "CPU";
+        case ResourceType.NET:
+            return "NET";
+    }
+}
+
+export const getUnit = (resourceType: ResourceType) => {
+    switch (resourceType) {
+        case ResourceType.RAM:
+        case ResourceType.NET:
+            return "kb";
+        case ResourceType.CPU:
+            return "ms";
+    }
+}

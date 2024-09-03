@@ -110,11 +110,27 @@ export class NetworkState {
 
 		try {
 			this.ramstate = RAMState.from(json.ramstate);
+		} catch (error) {
+			console.log("RAMState parse", error);
+			console.log(json);
+		}
+		try {
 			this.rexstate = REXState.from(json.rexstate);
+		} catch (error) {
+			console.log("REXState parse", error);
+			console.log(json);
+		}
+		try {
 			this.powerupstate = PowerUpState.from(json.powerupstate)
+		} catch (error) {
+			console.log("PowerUpState parse", error);
+			console.log(json);
+		}
+
+		try {
 			this.sampledUsage = Serializer.objectify(json.sampleUsage)
 		} catch (error) {
-			console.log(error);
+			console.log("SampleUsage Parse", error);
 			console.log(json);
 		}
 	}

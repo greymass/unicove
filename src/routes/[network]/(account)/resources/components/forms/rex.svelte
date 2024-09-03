@@ -67,7 +67,6 @@
 	}
 
 	function handleSuccessBack() {
-		console.log('handleSuccessBack');
 		rentState.reset();
 	}
 </script>
@@ -81,8 +80,8 @@
 {:else}
 	<form on:submit={preventDefault(handleRent)}>
 		<Stack class="gap-3">
-			<Label>Amount of {rentState.getUnit()} to rent from REX.</Label>
-			<Input placeholder={`number of ${rentState.getUnit()}`} bind:value={rentState.amount} />
+			<Label>Amount of {rentState.resourceUnit} to rent from REX.</Label>
+			<Input placeholder="number of {rentState.resourceUnit}" bind:value={rentState.amount} />
 			{#if rentState.insufficientBalance}
 				<p class="text-red-500">Insufficient balance. Please enter a smaller amount.</p>
 			{/if}
@@ -105,7 +104,7 @@
 		{/if}
 		<Button type="submit" class="mt-4 w-full">
 			{#if rentState.amount && rentState.cost}
-				Rent {rentState.amount}{rentState.getUnit()} for {rentState.cost}
+				Rent {rentState.amount}{rentState.resourceUnit} for {rentState.cost}
 			{:else}
 				Rent
 			{/if}

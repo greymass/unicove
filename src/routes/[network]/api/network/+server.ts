@@ -18,12 +18,19 @@ export async function GET({ fetch, params }) {
 		return json({ error: 'Network resources not initialized' }, { status: 500 });
 	}
 
-	const requests: Promise<ResponseType>[] = [
-		network.resources.v1.ram.get_state(),
-		network.resources.v1.rex.get_state(),
-		network.resources.v1.powerup.get_state(),
-		network.resources.getSampledUsage()
-	];
+	const requests: Promise<ResponseType>[] = [];
+	if (network.config.features.buyram) {
+		requests.push(network.resources.v1.ram.get_state());
+	}
+	if (network.config.features.rex) {
+		requests.push(network.resources.v1.rex.get_state());
+	}
+	if (network.config.features.powerup) {
+		requests.push(network.resources.v1.powerup.get_state());
+	}
+	if (network.config.features.staking || network.config.features.rex || network.config.features.powerup) {
+		requests.push(network.resources.getSampledUsage());
+	}
 	if (network.contracts.delphioracle) {
 		requests.push(network.contracts.delphioracle.table('datapoints', 'eosusd').get());
 	}

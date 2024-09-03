@@ -78,9 +78,9 @@
 {:else}
 	<form on:submit={preventDefault(handleRent)}>
 		<Stack class="gap-3">
-			<Label>Amount of {rentState.coreSymbol?.code} to stake as {rentState.getName()}</Label>
+			<Label>Amount of {rentState.coreSymbol?.code} to stake as {rentState.resourceName}</Label>
 
-			<AssetInput placeholder={`number of tokens`} bind:value={rentState.amountValue} />
+			<AssetInput placeholder="number of tokens" bind:value={rentState.amountValue} />
 
 			{#if rentState.insufficientBalance}
 				<p class="text-red-500">Insufficient balance. Please enter a smaller amount.</p>
