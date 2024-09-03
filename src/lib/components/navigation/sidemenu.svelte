@@ -2,6 +2,11 @@
 	import { page } from '$app/stores';
 	import UnicoveLogo from '$lib/assets/unicovelogo.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
+	import { getSetting } from '$lib/state/settings.svelte';
+
+	let advancedMode = getSetting('advanced-mode', false);
+
+	$inspect(advancedMode);
 
 	interface Props {
 		callbackFn?: (event: MouseEvent) => void;
@@ -12,16 +17,25 @@
 	let { callbackFn, network, class: className }: Props = $props();
 
 	const destinations = $derived.by(() => {
-		return [
+		const isAdvanced = advancedMode.value;
+
+		const items = [
 			{ href: `/${network}/account`, text: 'Account' },
-			{ href: `/${network}/move`, text: 'Move' },
-			{ href: `/${network}/permissions`, text: 'Permissions' },
-			{ href: `/${network}/ram`, text: 'RAM' },
-			{ href: `/${network}/resources`, text: 'Resources' },
 			{ href: `/${network}/send`, text: 'Send' },
-			{ href: `/${network}/transactions`, text: 'Transactions' },
-			{ href: `/${network}/vote`, text: 'Vote' }
+			{ href: `/${network}/stake`, text: 'Stake' },
+			{ href: `/${network}/ram`, text: 'RAM' },
+			{ href: `/${network}/settings`, text: 'Settings' }
+			// { href: `/${network}/move`, text: 'Move' },
+			// { href: `/${network}/permissions`, text: 'Permissions' },
+			// { href: `/${network}/transactions`, text: 'Transactions' },
+			// { href: `/${network}/vote`, text: 'Vote' }
 		];
+
+		if (isAdvanced) {
+			items.splice(4, 0, { href: `/${network}/resources`, text: 'Resources' });
+		}
+
+		return items;
 	});
 
 	let rootPathname = $derived($page.url.pathname.split('/').slice(2)[1]);
