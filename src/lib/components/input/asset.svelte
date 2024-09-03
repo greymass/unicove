@@ -93,6 +93,8 @@
 		validMaximum = satisfiesMaximum;
 		if (satisfies) {
 			_value = asset;
+		} else if (!asset.value && _value.value) {
+			_value = zeroValue;
 		}
 	});
 
