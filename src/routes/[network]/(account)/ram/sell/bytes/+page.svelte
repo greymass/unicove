@@ -40,13 +40,11 @@
 	}
 
 	$effect(() => {
-		console.log({ context });
 		if (context.account) {
 			if (context.account.name) {
 				sellRamState.account = context.account.name;
 			}
 			sellRamState.max = Number(context.account.ram?.available || 0);
-			console.log({ sellRamState });
 		}
 	});
 

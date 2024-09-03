@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Asset } from '@wharfkit/antelope';
-	import { createEventDispatcher, type ComponentProps } from 'svelte';
+	import { type ComponentProps } from 'svelte';
 	import AssetInput from './asset.svelte';
 	import TextInput from './text.svelte';
 	import Button from '../button/button.svelte';

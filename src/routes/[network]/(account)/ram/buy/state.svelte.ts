@@ -24,6 +24,10 @@ export class BuyRAMState {
 			: this.tokens
 	);
 
+	public estimatedBytes: number = $derived(
+		Number(this.bytes || ((this.bytesValue.value / this.pricePerKB.value) * 1000).toFixed(0))
+	);
+
 	public fee: Asset = $derived(
 		Asset.from(this.bytesValue.value * 0.005, this.chain?.systemToken?.symbol || '4,EOS')
 	);

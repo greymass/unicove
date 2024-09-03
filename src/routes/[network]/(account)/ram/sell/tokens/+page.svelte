@@ -40,7 +40,6 @@
 	}
 
 	$effect(() => {
-		console.log({ context });
 		if (context.account) {
 			if (context.account.name) {
 				sellRamState.account = context.account.name;

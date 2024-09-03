@@ -1,7 +1,5 @@
 <script lang="ts">
 	import type { HTMLInputAttributes } from 'svelte/elements';
-
-	// Import the TextInput component (assuming it's in a file named TextInput.svelte)
 	import TextInput from './text.svelte';
 
 	interface NumberInputProps extends Omit<HTMLInputAttributes, 'type' | 'value'> {

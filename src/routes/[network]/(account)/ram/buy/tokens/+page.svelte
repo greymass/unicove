@@ -21,6 +21,8 @@
 
 	const buyRamState: BuyRAMState = $state(new BuyRAMState(data.network.chain));
 
+	buyRamState.format = 'asset';
+
 	let transactionId: Checksum256 | undefined = $state();
 
 	async function handleBuyRAM() {
@@ -77,7 +79,7 @@
 			<p class="text-red-500">Insufficient balance. Please enter a smaller amount.</p>
 		{/if}
 		<p>
-			Available:
+			Balance available:
 			{#if context.account}
 				{context.account.balance?.liquid}
 			{:else}
@@ -92,7 +94,7 @@
 			<span>Price for 1000 Bytes:</span>
 			<span>{buyRamState.pricePerKB} / KB</span>
 			<span>Estimated Bytes:</span>
-			<span>{buyRamState.bytes} Bytes</span>
+			<span>{buyRamState.estimatedBytes} Bytes</span>
 			<span>Network Fee (0.5%)</span>
 			<span>{buyRamState.fee}</span>
 			<span>Total Cost</span>
