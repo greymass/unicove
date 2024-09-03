@@ -20,6 +20,8 @@
 
 	const sellRamState: SellRAMState = $state(new SellRAMState(data.network.chain));
 
+	sellRamState.format = 'units';
+
 	let transactionId: Checksum256 | undefined = $state();
 
 	async function handleSellRAM() {
@@ -53,13 +55,6 @@
 			sellRamState.pricePerKB = data.network.ramprice.eos;
 		}
 	});
-
-	function handleKeydown(event: KeyboardEvent) {
-		if (event.key === 'Enter') {
-			event.preventDefault();
-			handleSellRAM();
-		}
-	}
 </script>
 
 {#if transactionId}
@@ -74,6 +69,7 @@
 			bind:value={sellRamState.bytes}
 			placeholder="0"
 			disabled={!context.account}
+			autofocus
 		/>
 		{#if sellRamState.insufficientRAM}
 			<p class="text-red-500">Insufficient RAM available. Please enter a smaller amount.</p>
@@ -102,7 +98,7 @@
 			<span>Price for 1000 bytes:</span>
 			<span>{sellRamState.pricePerKB} / KB</span>
 			<span>RAM to be sold:</span>
-			<span>{sellRamState.bytesToSell || 0} Bytes</span>
+			<span>{sellRamState.bytesToSell} Bytes</span>
 			<span>RAM Value:</span>
 			<span>{sellRamState.bytesValue}</span>
 			<span>Network Fee (0.5%)</span>

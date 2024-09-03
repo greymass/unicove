@@ -67,6 +67,7 @@
 			bind:value={sellRamState.tokens}
 			placeholder="0.0000 EOS"
 			disabled={!context.account}
+			autofocus
 		/>
 		{#if sellRamState.insufficientRAM}
 			<p class="text-red-500">Insufficient RAM available. Please enter a smaller amount.</p>
@@ -95,7 +96,7 @@
 			<span>Price for 1000 bytes:</span>
 			<span>{sellRamState.pricePerKB} / KB</span>
 			<span>Estimated RAM to be sold:</span>
-			<span>{sellRamState.bytes || 0} Bytes</span>
+			<span>{sellRamState.bytesToSell} Bytes</span>
 			<span>RAM Value:</span>
 			<span>{sellRamState.tokens}</span>
 			<span>Network Fee (0.5%)</span>

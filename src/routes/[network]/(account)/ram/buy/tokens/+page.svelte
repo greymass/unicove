@@ -74,6 +74,7 @@
 			bind:value={buyRamState.tokens}
 			placeholder="0.0000 EOS"
 			disabled={!context.account}
+			autofocus
 		/>
 		{#if buyRamState.insufficientBalance}
 			<p class="text-red-500">Insufficient balance. Please enter a smaller amount.</p>
@@ -94,7 +95,7 @@
 			<span>Price for 1000 Bytes:</span>
 			<span>{buyRamState.pricePerKB} / KB</span>
 			<span>Estimated Bytes:</span>
-			<span>{buyRamState.estimatedBytes} Bytes</span>
+			<span>{buyRamState.bytesToBuy} Bytes</span>
 			<span>Network Fee (0.5%)</span>
 			<span>{buyRamState.fee}</span>
 			<span>Total Cost</span>

@@ -24,7 +24,7 @@ export class BuyRAMState {
 			: this.tokens
 	);
 
-	public estimatedBytes: number = $derived(
+	public bytesToBuy: number = $derived(
 		Number(this.bytes || ((this.bytesValue.value / this.pricePerKB.value) * 1000).toFixed(0))
 	);
 

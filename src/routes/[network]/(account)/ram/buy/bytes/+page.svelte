@@ -74,6 +74,7 @@
 			bind:value={buyRamState.bytes}
 			placeholder="0"
 			disabled={!context.account}
+			autofocus
 		/>
 		{#if buyRamState.insufficientBalance}
 			<p class="text-red-500">Insufficient balance. Please enter a smaller amount.</p>
