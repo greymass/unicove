@@ -36,6 +36,12 @@ export class RentState {
 	public error: string = $state('')
 	public txid: string = $state('')
 
+	public min: number | undefined = $derived(
+		this.balance ? Asset.fromUnits(1, this.balance.symbol).value : undefined
+	);
+	public max: number | undefined = $derived(this.balance ? this.balance.value : undefined);
+
+
 	public insufficientBalance: boolean = $derived.by(() => {
 		if (this.cost && this.balance)
 			return this.cost.value > this.balance.value
@@ -50,10 +56,13 @@ export class RentState {
 	}
 
 	reset() {
+		this.payer = Name.from('');
+		this.receiver = Name.from('');
 		this.balance = undefined;
 		this.amount = undefined;
 		this.pricePerUnit = undefined;
 		this.amountValue = Asset.from(0, Asset.Symbol.from('4,EOS'));
+		this.frac = 0;
 		this.error = '';
 		this.txid = '';
 	}

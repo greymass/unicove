@@ -67,6 +67,11 @@
 	function handleSuccessBack() {
 		rentState.reset();
 	}
+
+	let assetValid = $state(false);
+	let assetValidPrecision = $state(false);
+	let assetValidMaximum = $state(false);
+	let assetValidMinimum = $state(false);
 </script>
 
 {#if rentState.txid}
@@ -80,11 +85,26 @@
 		<Stack class="gap-3">
 			<Label>Amount of {rentState.coreSymbol?.code} to stake as {rentState.resourceName}</Label>
 
-			<AssetInput placeholder="number of tokens" bind:value={rentState.amountValue} />
-
-			{#if rentState.insufficientBalance}
-				<p class="text-red-500">Insufficient balance. Please enter a smaller amount.</p>
+			<AssetInput
+				placeholder="number of tokens"
+				bind:value={rentState.amountValue}
+				bind:valid={assetValid}
+				bind:validPrecision={assetValidPrecision}
+				bind:validMinimum={assetValidMinimum}
+				bind:validMaximum={assetValidMaximum}
+				min={rentState.min || 0}
+				max={rentState.max || 0}
+			/>
+			{#if !assetValidPrecision}
+				<p class="text-red-500">Invalid number, too many decimal places.</p>
 			{/if}
+			{#if !assetValidMinimum && rentState.amountValue.value > 0}
+				<p class="text-red-500">Amount is below the minimum value</p>
+			{/if}
+			{#if !assetValidMaximum}
+				<p class="text-red-500">Amount exceeds available balance.</p>
+			{/if}
+
 			{#if rentState.balance}
 				<p>
 					Available:{rentState.balance}
@@ -101,9 +121,9 @@
 		</Stack>
 		{#if rentState.error}
 			<p class="text-red-500">
-				Fee:{rentState.error}
+				Error: {rentState.error}
 			</p>
 		{/if}
-		<Button type="submit" class="mt-4 w-full">Stake Tokens</Button>
+		<Button type="submit" class="mt-4 w-full" disabled={!assetValid}>Stake Tokens</Button>
 	</form>
 {/if}

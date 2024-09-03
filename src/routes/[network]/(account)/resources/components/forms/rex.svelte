@@ -51,7 +51,6 @@
 			);
 			context.wharf
 				.transact({
-					// action: rentAction
 					actions: [depositAction, rentAction]
 				})
 				.then((result: any) => {
@@ -99,7 +98,7 @@
 
 		{#if rentState.error}
 			<p class="text-red-500">
-				Fee:{rentState.error}
+				Error: {rentState.error}
 			</p>
 		{/if}
 		<Button type="submit" class="mt-4 w-full">
