@@ -12,5 +12,5 @@
 	<Pageheader title={context.account?.name} subtitle="Account Overview" />
 	<Pageheader title="Tokens" subtitle="Token balances" />
 	<Pageheader title="Staking" subtitle="Staked balances" />
-	<Pageheader title="RAM" subtitle="Information about this accounts RAM" />
+	<Pageheader title="RAM" subtitle="Information about this account's RAM" />
 </Stack>
