@@ -1,12 +1,11 @@
 <script lang="ts">
 	import { getContext, onMount } from 'svelte';
-
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { Checksum256 } from '@wharfkit/antelope';
 	import MobileNavigation from '$lib/components/navigation/mobilenavigation.svelte';
-	import Sidemenu from '$lib/components/navigation/sidemenu.svelte';
 	import AccountSwitcher from '$lib/components/select/account.svelte';
 	import UnicoveLogo from '$lib/assets/unicovelogo.svelte';
+	import Search from '$lib/components/input/search.svelte';
 
 	let { children, data } = $props();
 
@@ -34,13 +33,22 @@
 		}
 	}
 
+	$effect(() => {
+		const { network } = data; // Destructure to force reactivity
+		if (!context.account) {
+			// no account loaded
+			setupWharf();
+		} else if (context.account && !context.account.network.chain.equals(network.chain)) {
+			// account loaded but for a different network
+			setupWharf();
+		}
+	});
+
 	// Number of ms between network updates
 	const ACCOUNT_UPDATE_INTERVAL = 3_000;
 	const NETWORK_UPDATE_INTERVAL = 3_000;
 
 	onMount(() => {
-		setupWharf();
-
 		// Update account state on a set interval
 		const accountInterval = setInterval(() => {
 			if (context.account) {
@@ -62,22 +70,45 @@
 	});
 </script>
 
-<div class="relative grid h-full auto-rows-min grid-cols-1 md:grid-cols-[auto_minmax(0,1fr)]">
-	<aside class="relative hidden md:block">
-		<Sidemenu network={data.network} />
-	</aside>
-	<main class="grid auto-rows-min grid-cols-1 gap-4 px-4 py-4">
-		<header
-			class="root-layout-header col-start-1 col-end-2 row-start-1 row-end-2 flex flex-wrap items-center justify-between md:justify-end"
-		>
-			<UnicoveLogo small class="w-min md:hidden" />
-			<AccountSwitcher />
-		</header>
-		<div class="col-start-1 col-end-2 row-start-2 row-end-3 md:row-start-1 md:row-end-3">
-			{@render children()}
-		</div>
+<div
+	class="
+	relative
+	grid
+	h-full
+	w-svw
+	grid-cols-[16px_auto_auto_16px]
+	grid-rows-[16px_auto_auto_16px]
+	md:h-auto
+	md:grid-cols-[auto_minmax(0,1fr)_auto_auto_0]
+	md:grid-rows-[16px_minmax(0,1fr)]
+	md:gap-x-4
+	"
+>
+	<UnicoveLogo small class="col-start-2 row-start-2 w-min md:hidden" />
+
+	<div
+		class="col-start-3 row-start-2 flex justify-end md:col-start-4 md:col-end-5 md:row-start-2 md:row-end-3 md:px-4"
+	>
+		<AccountSwitcher network={data.network} />
+	</div>
+
+	<main
+		class="col-span-2 col-start-2 row-start-3 overflow-hidden md:col-span-3 md:col-start-2 md:row-start-2 md:row-end-4"
+	>
+		{@render children()}
 	</main>
-	<aside class="relative h-14 md:hidden">
-		<MobileNavigation network={data.network} />
+
+	<aside
+		class="fixed bottom-0 z-50 col-span-4 grid h-14 w-full grid-cols-subgrid bg-shark-950 px-4 py-2 md:contents"
+	>
+		<MobileNavigation
+			network={data.network}
+			class="col-start-1 col-end-2 md:row-start-1 md:row-end-3"
+		/>
+
+		<Search
+			network={data.network}
+			class="col-start-2 col-end-3  md:col-start-3 md:col-end-4 md:row-start-2 md:row-end-3"
+		/>
 	</aside>
 </div>

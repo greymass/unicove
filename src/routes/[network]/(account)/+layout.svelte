@@ -8,16 +8,16 @@
 	const { children, data } = $props();
 	const context = getContext<UnicoveContext>('state');
 
-	// Effect to handle network change redirects in the account section
+	// When an account changes, redirect any account-based URL (/send, /ram, etc) to
+	// the network matching the account.
 	$effect(() => {
-		if (
-			data.network.chain.id &&
-			context.account &&
-			!context.account.network.chain.equals(data.network.chain)
-		) {
-			const path = $page.url.pathname.replace(`/${languageTag()}/${data.network}/`, '');
-			const redirect = `/${languageTag()}/${context.account.network}/${path}`;
-			goto(redirect);
+		if (context.account && !context.account.network.chain.equals(data.network.chain)) {
+			goto(
+				$page.url.pathname.replace(
+					`/${languageTag()}/${data.network}/`,
+					`/${languageTag()}/${context.account.network}/`
+				)
+			);
 		}
 	});
 </script>
