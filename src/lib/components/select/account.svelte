@@ -162,9 +162,11 @@
 
 					<h2 class="h2">Switch Network</h2>
 					{#each chainShortNames as chain}
-						{#if chain !== String(network)}
-							<Button href={`/${chain}`}>{chain}</Button>
-						{/if}
+						{@const isCurrent = chain === String(network)}
+						<Button variant={isCurrent ? 'secondary' : 'primary'} href={`/${chain}`}>
+							{chain}
+							{isCurrent ? '(Selected)' : ''}
+						</Button>
 					{/each}
 				</Stack>
 			</section>

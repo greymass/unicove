@@ -2,6 +2,7 @@
 	import { page } from '$app/stores';
 	import PillGroup from '$lib/components/navigation/pillgroup.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
+	import Pageheader from '$lib/components/pageheader.svelte';
 
 	const { data, children } = $props();
 
@@ -24,21 +25,21 @@
 				option.href.split('/').slice(0, -1).join('/')
 		}))
 	);
+
+	const subtitle = $derived.by(() => {
+		switch (currentTab) {
+			case 'buy':
+				return 'Buy RAM';
+			case 'sell':
+				return 'Sell RAM';
+			default:
+				return 'Overview';
+		}
+	});
 </script>
 
 <Stack class="gap-6">
-	<Stack class="gap-2">
-		<h1 class="h1 font-bold leading-none text-white">RAM</h1>
-		<h3 class="h3 text-white/60">
-			{#if currentTab === 'overview'}
-				Overview
-			{:else if currentTab === 'buy'}
-				Buy RAM
-			{:else if currentTab === 'sell'}
-				Sell RAM
-			{/if}
-		</h3>
-	</Stack>
+	<Pageheader title="RAM" {subtitle} />
 
 	<PillGroup {options} class="mb-6" />
 
