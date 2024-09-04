@@ -27,6 +27,11 @@ export class SettingState<T> {
 	}
 }
 
+const state = new Map<string, SettingState<unknown>>();
+
 export function getSetting<T>(key: string, value: T) {
-	return new SettingState(key, value);
+	if (!state.has(key)) {
+		state.set(key, new SettingState(key, value));
+	}
+	return state.get(key) as SettingState<T>;
 }

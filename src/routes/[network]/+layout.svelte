@@ -84,7 +84,7 @@
 	md:gap-x-4
 	"
 >
-	<UnicoveLogo small class="col-start-2 row-start-2 w-min md:hidden" />
+	<UnicoveLogo small network={data.network} class="col-start-2 row-start-2 w-min md:hidden" />
 
 	<div
 		class="col-start-3 row-start-2 flex justify-end md:col-start-4 md:col-end-5 md:row-start-2 md:row-end-3 md:px-4"
