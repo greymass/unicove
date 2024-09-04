@@ -43,24 +43,26 @@
 	<p>Loading current RAM price...</p>
 {/if}
 
-{#if historicalPrices.length > 0}
-	<h2>Historical RAM Prices</h2>
-	<table class="float-left max-w-lg border-collapse">
-		<thead>
-			<tr class="bg-gray-60">
-				<th class="border p-1 text-left">Date</th>
-				<th class="border p-1 text-left">Price</th>
-			</tr>
-		</thead>
-		<tbody>
-			{#each historicalPrices as price}
-				<tr class="hover:bg-gray-50">
-					<td class="border p-1">{price.date.toLocaleString()}</td>
-					<td class="border p-1">{price.value.toString()}</td>
+{#if data.network.config.features.timeseries}
+	{#if historicalPrices.length > 0}
+		<h2>Historical RAM Prices</h2>
+		<table class="float-left max-w-lg border-collapse">
+			<thead>
+				<tr class="bg-gray-60">
+					<th class="border p-1 text-left">Date</th>
+					<th class="border p-1 text-left">Price</th>
 				</tr>
-			{/each}
-		</tbody>
-	</table>
-{:else}
-	<p>Loading historical RAM prices...</p>
+			</thead>
+			<tbody>
+				{#each historicalPrices as price}
+					<tr class="hover:bg-gray-50">
+						<td class="border p-1">{price.date.toLocaleString()}</td>
+						<td class="border p-1">{price.value.toString()}</td>
+					</tr>
+				{/each}
+			</tbody>
+		</table>
+	{:else}
+		<p>Loading historical RAM prices...</p>
+	{/if}
 {/if}
