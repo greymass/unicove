@@ -33,7 +33,7 @@
 				action: data.network.contracts.system.action('sellram', sellRamState.toJSON())
 			});
 
-			transactionId = transactionResult?.resolved?.transaction.id;
+			transactionId = transactionResult.resolved?.transaction.id;
 		} catch (error) {
 			console.error(error);
 		}

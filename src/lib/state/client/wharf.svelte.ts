@@ -152,10 +152,7 @@ export class WharfState {
 		this.session = undefined;
 	}
 
-	async transact(
-		args: TransactArgs,
-		options?: TransactOptions
-	): Promise<TransactResult | undefined> {
+	async transact(args: TransactArgs, options?: TransactOptions): Promise<TransactResult> {
 		if (!this.session) {
 			throw new Error('No active session available to transact with.');
 		}

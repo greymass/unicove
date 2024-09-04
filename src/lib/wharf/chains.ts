@@ -1,8 +1,6 @@
 import type { Asset } from '@wharfkit/antelope';
 import type { ChainIndices } from '@wharfkit/session';
 
-import { PUBLIC_API_EOS_METRICS } from '$env/static/public';
-
 import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
 import { Contract as SystemContract } from '$lib/wharf/contracts/system';
 import { Contract as TokenContract } from '$lib/wharf/contracts/token';
@@ -46,8 +44,7 @@ export const chainConfigs: Record<string, ChainConfig> = {
 			robo: true,
 			timeseries: true
 		},
-		symbol: '4,EOS',
-		timeseries_api: PUBLIC_API_EOS_METRICS
+		symbol: '4,EOS'
 	},
 	// Jungle4
 	'73e4385a2708e6d7048834fbc1079f2fabb17b3c125b146af438971e90716c4d': {
