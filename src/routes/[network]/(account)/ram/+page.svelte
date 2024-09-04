@@ -1,34 +1,5 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import { Asset } from '@wharfkit/antelope';
-
 	const { data } = $props();
-
-	interface RamPriceData {
-		date: Date;
-		value: number;
-	}
-
-	let historicalPrices: RamPriceData[] = $state([]);
-
-	onMount(async () => {
-		// Don't try to fetch historical RAM prices if the network doesn't support it
-		if (!data.network.config.features.timeseries) {
-			return;
-		}
-		try {
-			const response = await fetch('https://unicove-eos.greymass.io/api/marketprice/ram');
-			const parsedResponse = await response.json();
-			historicalPrices = parsedResponse
-				.map((price: RamPriceData) => ({
-					date: new Date(price.date),
-					value: Asset.from(price.value / 10000, data.network.chain.systemToken?.symbol || '4,EOS')
-				}))
-				.sort((a: RamPriceData, b: RamPriceData) => b.date.getTime() - a.date.getTime());
-		} catch (error) {
-			console.error('Error fetching historical RAM prices:', error);
-		}
-	});
 </script>
 
 <h1>RAM</h1>
@@ -44,7 +15,7 @@
 {/if}
 
 {#if data.network.config.features.timeseries}
-	{#if historicalPrices.length > 0}
+	{#if data.historicalPrices.length > 0}
 		<h2>Historical RAM Prices</h2>
 		<table class="float-left max-w-lg border-collapse">
 			<thead>
@@ -54,7 +25,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				{#each historicalPrices as price}
+				{#each data.historicalPrices as price}
 					<tr class="hover:bg-gray-50">
 						<td class="border p-1">{price.date.toLocaleString()}</td>
 						<td class="border p-1">{price.value.toString()}</td>
@@ -63,6 +34,6 @@
 			</tbody>
 		</table>
 	{:else}
-		<p>Loading historical RAM prices...</p>
+		<p>No historical RAM prices available.</p>
 	{/if}
 {/if}
