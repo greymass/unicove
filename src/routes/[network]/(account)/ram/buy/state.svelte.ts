@@ -1,14 +1,18 @@
 import { Asset, Name, Serializer, Int64 } from '@wharfkit/antelope';
 import { Chains, type ChainDefinition } from '@wharfkit/session';
 
+const defaultName = Name.from('');
+const defaultSymbol = Asset.Symbol.from('0,UNKNOWN');
+const defaultQuantity = Asset.fromUnits(0, defaultSymbol);
+
 export class BuyRAMState {
-	public payer: Name = $state(Name.from(''));
-	public receiver: Name = $state(Name.from(''));
+	public payer: Name = $state(defaultName);
+	public receiver: Name = $state(defaultName);
 	public bytes: number | undefined = $state(undefined);
-	public tokens: Asset = $state(Asset.fromUnits(0, '4,EOS'));
-	public balance: Asset = $state(Asset.fromUnits(0, '4,EOS'));
+	public tokens: Asset = $state(defaultQuantity);
+	public balance: Asset = $state(defaultQuantity);
 	public chain: ChainDefinition = $state(Chains.EOS);
-	public pricePerKB: Asset = $state(Asset.fromUnits(0, '4,EOS'));
+	public pricePerKB: Asset = $state(defaultQuantity);
 	public format: 'asset' | 'units' = $state('asset');
 
 	public pricePerByte: Asset = $derived(
