@@ -17,9 +17,7 @@ export interface ChainConfig {
 	name: ChainShortName;
 	features: Record<FeatureType, boolean>;
 	symbol: Asset.SymbolType;
-	ramPrices?: {
-		url: string;
-	};
+	timeseries_api?: string;
 }
 
 export type FeatureType = 'delphioracle' | 'lightapi' | 'rex' | 'robo' | 'timeseries';
@@ -49,9 +47,7 @@ export const chainConfigs: Record<string, ChainConfig> = {
 			timeseries: true
 		},
 		symbol: '4,EOS',
-		ramPrices: {
-			url: PUBLIC_API_EOS_METRICS
-		}
+		timeseries_api: PUBLIC_API_EOS_METRICS
 	},
 	// Jungle4
 	'73e4385a2708e6d7048834fbc1079f2fabb17b3c125b146af438971e90716c4d': {
