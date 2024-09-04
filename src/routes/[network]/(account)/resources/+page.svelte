@@ -10,31 +10,26 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
 
-	import { NetworkConfig } from './state.svelte';
-	import { calSize, calUsagePer } from './utils.svelte';
+	import { ResourceType } from './types.svelte';
+	import { NetworkConfig, ResourceState } from './state.svelte';
 
 	const { data } = $props();
 
 	const context = getContext<UnicoveContext>('state');
 
-	const cpuAvailableSize = $derived(calSize(Number(context.account?.cpu?.available)));
-	const cpuUsagePerc = $derived(
-		calUsagePer(Number(context.account?.cpu?.used), Number(context.account?.cpu?.max))
-	);
-
-	const ramAvailableSize = $derived(calSize(Number(context.account?.ram?.available)));
-	const ramUsagePerc = $derived(
-		calUsagePer(Number(context.account?.ram?.used), Number(context.account?.ram?.max))
-	);
-
-	const netAvailableSize = $derived(calSize(Number(context.account?.net?.available)));
-	const netUsagePerc = $derived(
-		calUsagePer(Number(context.account?.net?.used), Number(context.account?.net?.max))
-	);
+	const ramState = $state(new ResourceState(ResourceType.RAM));
+	const cpuState = $state(new ResourceState(ResourceType.CPU));
+	const netState = $state(new ResourceState(ResourceType.NET));
 
 	const networkConfig = $state(new NetworkConfig());
 	$effect(() => {
 		networkConfig.setConfig(context.network?.config);
+	});
+
+	$effect(() => {
+		ramState.setResource(context.account?.ram);
+		cpuState.setResource(context.account?.cpu);
+		netState.setResource(context.account?.net);
 	});
 
 	const network = $derived(String(data.network));
@@ -43,12 +38,7 @@
 <PageHeader title="Resources" />
 <Stack class="mt-10">
 	<Grid itemWidth="270px">
-		<ResourceWrapper
-			title="ram"
-			size="{ramAvailableSize}kb"
-			used="{ramUsagePerc}% Quota used"
-			percentage={ramUsagePerc}
-		>
+		<ResourceWrapper resourceState={ramState}>
 			{#if networkConfig.hasBuyRAM}
 				<div class="flex flex-col">
 					<Button class="text-blue-400" variant="pill" href="/{network}/ram/buy">BUY</Button>
@@ -56,12 +46,7 @@
 				</div>
 			{/if}
 		</ResourceWrapper>
-		<ResourceWrapper
-			title="cpu"
-			size="{cpuAvailableSize}ms"
-			used="{cpuUsagePerc}% Quota used"
-			percentage={cpuUsagePerc}
-		>
+		<ResourceWrapper resourceState={cpuState}>
 			{#if networkConfig.hasREX || networkConfig.hasPowerUp}
 				<Button class="text-blue-400" variant="pill" href="/{network}/resources/cpu">RENT</Button>
 			{:else if networkConfig.hasStaking}
@@ -70,12 +55,7 @@
 				>
 			{/if}
 		</ResourceWrapper>
-		<ResourceWrapper
-			title="net"
-			size="{netAvailableSize}kb"
-			used="{netUsagePerc}% Quota used"
-			percentage={netUsagePerc}
-		>
+		<ResourceWrapper resourceState={netState}>
 			{#if networkConfig.hasREX || networkConfig.hasPowerUp}
 				<Button class="text-blue-400" variant="pill" href="/{network}/resources/net">RENT</Button>
 			{:else if networkConfig.hasStaking}
