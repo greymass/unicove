@@ -64,13 +64,7 @@
 <form on:submit|preventDefault={handleSellRAM}>
 	<Stack class="gap-3">
 		<Label for="bytesInput">Amount to sell (Bytes)</Label>
-		<NumberInput
-			id="bytesInput"
-			bind:value={sellRamState.bytes}
-			placeholder="0"
-			disabled={!context.account}
-			autofocus
-		/>
+		<NumberInput id="bytesInput" bind:value={sellRamState.bytes} placeholder="0" autofocus />
 		{#if sellRamState.insufficientRAM}
 			<p class="text-red-500">Insufficient RAM available. Please enter a smaller amount.</p>
 		{/if}

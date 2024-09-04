@@ -44,11 +44,13 @@ export class SellRAMState {
 		)
 	);
 
-	public insufficientRAM: boolean = $derived(
+	readonly insufficientRAMForSale: boolean = $derived(
 		this.format === 'units'
 			? this.bytes !== undefined && this.bytes > this.max
 			: this.bytesValue.value > (this.max * this.pricePerKB.value) / 1000
 	);
+
+	public insufficientRAM: boolean = $derived(!this.max || this.insufficientRAMForSale);
 
 	public valid: boolean = $derived(
 		!!(

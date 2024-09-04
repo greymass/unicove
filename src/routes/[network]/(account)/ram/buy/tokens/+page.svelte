@@ -73,7 +73,6 @@
 			id="assetInput"
 			bind:value={buyRamState.tokens}
 			placeholder="0.0000 EOS"
-			disabled={!context.account}
 			autofocus
 		/>
 		{#if buyRamState.insufficientBalance}

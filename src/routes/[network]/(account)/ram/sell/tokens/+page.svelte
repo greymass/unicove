@@ -66,7 +66,6 @@
 			id="assetInput"
 			bind:value={sellRamState.tokens}
 			placeholder="0.0000 EOS"
-			disabled={!context.account}
 			autofocus
 		/>
 		{#if sellRamState.insufficientRAM}
