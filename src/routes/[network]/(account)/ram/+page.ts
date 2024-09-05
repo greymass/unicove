@@ -1,6 +1,7 @@
 import { Asset } from '@wharfkit/antelope';
 
 import type { LoadEvent } from '@sveltejs/kit';
+import { getChainDefinitionFromParams } from '$lib/state/network.svelte';
 
 interface HistoricalPrice {
 	date: Date;
@@ -13,6 +14,9 @@ interface LoadData {
 
 export async function load({ fetch, params }: LoadEvent): Promise<LoadData> {
 	const { network } = params;
+
+	const chain = getChainDefinitionFromParams(String(network));
+
 	let historicalPrices: HistoricalPrice[] = [];
 
 	try {
@@ -20,7 +24,7 @@ export async function load({ fetch, params }: LoadEvent): Promise<LoadData> {
 		const parsedResponse: any[] = await response.json();
 		historicalPrices = parsedResponse.map((price: { date: string; value: number }) => ({
 			date: new Date(price.date),
-			value: Asset.from(price.value / 10000, '4,EOS') // Assuming EOS for now, we'll adjust this later
+			value: Asset.from(price.value / 10000, chain.systemToken.symbol)
 		}));
 	} catch (error: unknown) {
 		console.error('Error fetching historical RAM prices:', error);

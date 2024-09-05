@@ -47,7 +47,6 @@
 
 	function resetState() {
 		buyRamState.reset();
-		console.log('resetState', bytesInput);
 		bytesInput?.set();
 	}
 
