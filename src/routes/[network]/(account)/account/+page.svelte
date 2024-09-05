@@ -110,11 +110,9 @@
 		</div>
 		<TokenTable {tokenList}>
 			{#snippet transferIntent(data: TokenState)}
-				<div class="flex flex-col">
-					<Button class="text-blue-400" variant="pill" href="/{network}/send?quantity={data.asset}"
-						>Send</Button
-					>
-				</div>
+				<Button class="text-blue-400" variant="pill" href="/{network}/send?quantity={data.asset}"
+					>Send</Button
+				>
 			{/snippet}
 		</TokenTable>
 	</Stack>
