@@ -31,8 +31,6 @@ export const GET: RequestHandler = async ({ params }) => {
 		}
 		const parsedResponse = await response.json();
 
-		console.log({ parsedResponse });
-
 		const historicalPrices = parsedResponse.sort(
 			(a: HistoricalPrice, b: HistoricalPrice) =>
 				new Date(b.date).getTime() - new Date(a.date).getTime()

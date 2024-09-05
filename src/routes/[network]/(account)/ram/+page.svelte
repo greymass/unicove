@@ -6,7 +6,7 @@
 
 <h2>Current RAM Price</h2>
 {#if data.network && data.network.ramstate}
-	<p>EOS: {data.network.ramstate.price_per_kb(1).toString()}</p>
+	<p>EOS: {String(data.network.ramstate.price_per_kb(1))}</p>
 	{#if data.network.ramprice && data.network.ramprice.usd}
 		<p>USD: ${data.network.ramprice.usd}</p>
 	{/if}
@@ -28,7 +28,7 @@
 				{#each data.historicalPrices as price}
 					<tr>
 						<td class="border p-1">{price.date.toLocaleString()}</td>
-						<td class="border p-1">{price.value.toString()}</td>
+						<td class="border p-1">{String(price.value)}</td>
 					</tr>
 				{/each}
 			</tbody>
