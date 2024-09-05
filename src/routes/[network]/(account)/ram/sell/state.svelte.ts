@@ -15,7 +15,7 @@ export class SellRAMState {
 	public format: 'asset' | 'units' = $state('asset');
 
 	public bytesToSell: number = $derived(
-		this.format === 'units'
+		this.format === 'units' || !this.tokens.value || !this.pricePerKB.value
 			? this.bytes || 0
 			: Math.floor((this.tokens.value * 1000) / this.pricePerKB.value)
 	);
@@ -30,21 +30,18 @@ export class SellRAMState {
 
 	public bytesValue: Asset = $derived(
 		this.format === 'units' && this.bytes !== undefined
-			? Asset.from(
-					(this.bytes * this.pricePerKB.value) / 1000,
-					this.chain?.systemToken?.symbol || '4,EOS'
-				)
+			? Asset.from((this.bytes * this.pricePerKB.value) / 1000, this.chain.systemToken.symbol)
 			: this.tokens
 	);
 
 	public fee: Asset = $derived(
-		Asset.from(this.bytesValue.value * 0.005, this.chain?.systemToken?.symbol || '4,EOS')
+		Asset.from(this.bytesValue.value * 0.005, this.chain.systemToken.symbol)
 	);
 
 	public expectedToReceive: Asset = $derived(
 		Asset.fromUnits(
 			this.bytesValue.units.subtracting(this.fee.units),
-			this.chain?.systemToken?.symbol || '4,EOS'
+			this.chain.systemToken.symbol
 		)
 	);
 
@@ -67,11 +64,13 @@ export class SellRAMState {
 
 	constructor(chain: ChainDefinition) {
 		this.chain = chain;
+
+		this.reset();
 	}
 
 	reset() {
 		this.bytes = undefined;
-		this.tokens = Asset.fromUnits(0, this.chain?.systemToken?.symbol || '4,EOS');
+		this.tokens = Asset.fromUnits(0, this.chain.systemToken.symbol);
 	}
 
 	toJSON() {

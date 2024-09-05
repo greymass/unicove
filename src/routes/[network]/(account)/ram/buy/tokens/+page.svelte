@@ -98,7 +98,7 @@
 			<span>Network Fee (0.5%)</span>
 			<span>{buyRamState.fee}</span>
 			<span>Total Cost</span>
-			<span>{buyRamState.tokens}</span>
+			<span>{buyRamState.bytesCost}</span>
 		</div>
 	</Stack>
 
