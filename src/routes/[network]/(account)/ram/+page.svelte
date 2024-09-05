@@ -26,7 +26,7 @@
 			</thead>
 			<tbody>
 				{#each data.historicalPrices as price}
-					<tr class="hover:bg-gray-50">
+					<tr>
 						<td class="border p-1">{price.date.toLocaleString()}</td>
 						<td class="border p-1">{price.value.toString()}</td>
 					</tr>
