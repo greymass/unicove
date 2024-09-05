@@ -23,6 +23,7 @@
 	sellRamState.format = 'units';
 
 	let transactionId: Checksum256 | undefined = $state();
+	let bytesInput: NumberInput | undefined = $state();
 
 	async function handleSellRAM() {
 		if (!context.wharf || !context.wharf.session) {
@@ -36,9 +37,16 @@
 			});
 
 			transactionId = transactionResult.resolved?.transaction.id;
+
+			resetState();
 		} catch (error) {
 			console.error(error);
 		}
+	}
+
+	function resetState() {
+		sellRamState.reset();
+		bytesInput?.set();
 	}
 
 	$effect(() => {
@@ -64,7 +72,13 @@
 <form on:submit|preventDefault={handleSellRAM}>
 	<Stack class="gap-3">
 		<Label for="bytesInput">Amount to sell (Bytes)</Label>
-		<NumberInput id="bytesInput" bind:value={sellRamState.bytes} placeholder="0" autofocus />
+		<NumberInput
+			id="bytesInput"
+			bind:this={bytesInput}
+			bind:value={sellRamState.bytes}
+			placeholder="0"
+			autofocus
+		/>
 		{#if sellRamState.insufficientRAM}
 			<p class="text-red-500">Insufficient RAM available. Please enter a smaller amount.</p>
 		{/if}

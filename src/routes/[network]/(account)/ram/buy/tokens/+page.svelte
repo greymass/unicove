@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
-	import { Checksum256 } from '@wharfkit/antelope';
+	import { Checksum256, Asset } from '@wharfkit/antelope';
 
 	import { getSetting } from '$lib/state/settings.svelte.js';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
@@ -11,7 +11,6 @@
 	import Stack from '$lib/components/layout/stack.svelte';
 	import Transaction from '$lib/components/transaction.svelte';
 	import AssetInput from '$lib/components/input/asset.svelte';
-	import Cluster from '$lib/components/layout/cluster.svelte';
 
 	import { BuyRAMState } from '../state.svelte.js';
 
@@ -24,6 +23,7 @@
 	buyRamState.format = 'asset';
 
 	let transactionId: Checksum256 | undefined = $state();
+	let assetInput: AssetInput | undefined = $state();
 
 	async function handleBuyRAM() {
 		if (!context.wharf || !context.wharf.session) {
@@ -37,9 +37,16 @@
 			});
 
 			transactionId = transactionResult.resolved?.transaction.id;
+
+			resetState();
 		} catch (error) {
 			console.error(error);
 		}
+	}
+
+	function resetState() {
+		buyRamState.reset();
+		assetInput?.set(null);
 	}
 
 	$effect(() => {
@@ -71,6 +78,7 @@
 		<Label for="assetInput">Amount to buy</Label>
 		<AssetInput
 			id="assetInput"
+			bind:this={assetInput}
 			bind:value={buyRamState.tokens}
 			placeholder="0.0000 EOS"
 			autofocus

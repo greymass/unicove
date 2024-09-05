@@ -19,6 +19,7 @@
 	const debugMode = getSetting('debug-mode', false);
 
 	const sellRamState: SellRAMState = $state(new SellRAMState(data.network.chain));
+	let assetInput: AssetInput | undefined = $state();
 
 	let transactionId: Checksum256 | undefined = $state();
 
@@ -34,9 +35,16 @@
 			});
 
 			transactionId = transactionResult.resolved?.transaction.id;
+
+			resetState();
 		} catch (error) {
 			console.error(error);
 		}
+	}
+
+	function resetState() {
+		sellRamState.reset();
+		assetInput?.set(null);
 	}
 
 	$effect(() => {
@@ -64,6 +72,7 @@
 		<Label for="assetInput">Amount to sell</Label>
 		<AssetInput
 			id="assetInput"
+			bind:this={assetInput}
 			bind:value={sellRamState.tokens}
 			placeholder="0.0000 EOS"
 			autofocus

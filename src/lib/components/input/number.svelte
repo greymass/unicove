@@ -19,6 +19,10 @@
 
 	let inputValue = $state(String(_value ?? ''));
 
+	export function set(value?: number) {
+		inputValue = String(value || '');
+	}
+
 	let satisfiesMinimum = $derived(inputValue && (!props.min || Number(inputValue) >= props.min));
 	let satisfiesMaxmimum = $derived(inputValue && (!props.max || Number(inputValue) <= props.max));
 	let satisfies = $derived(satisfiesMinimum && satisfiesMaxmimum);

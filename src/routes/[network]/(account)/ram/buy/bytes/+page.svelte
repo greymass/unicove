@@ -11,7 +11,6 @@
 	import Stack from '$lib/components/layout/stack.svelte';
 	import Transaction from '$lib/components/transaction.svelte';
 	import NumberInput from '$lib/components/input/number.svelte';
-	import Cluster from '$lib/components/layout/cluster.svelte';
 
 	import { BuyRAMState } from '../state.svelte.js';
 
@@ -22,6 +21,8 @@
 	const buyRamState: BuyRAMState = $state(new BuyRAMState(data.network.chain));
 
 	buyRamState.format = 'units';
+
+	let bytesInput: NumberInput | undefined = $state();
 
 	let transactionId: Checksum256 | undefined = $state();
 
@@ -37,9 +38,17 @@
 			});
 
 			transactionId = transactionResult.resolved?.transaction.id;
+
+			resetState();
 		} catch (error) {
 			console.error(error);
 		}
+	}
+
+	function resetState() {
+		buyRamState.reset();
+		console.log('resetState', bytesInput);
+		bytesInput?.set();
 	}
 
 	$effect(() => {
@@ -69,7 +78,13 @@
 <form on:submit|preventDefault={handleBuyRAM}>
 	<Stack class="gap-3">
 		<Label for="bytesInput">Amount to buy (Bytes)</Label>
-		<NumberInput id="bytesInput" bind:value={buyRamState.bytes} placeholder="0" autofocus />
+		<NumberInput
+			id="bytesInput"
+			bind:this={bytesInput}
+			bind:value={buyRamState.bytes}
+			placeholder="0"
+			autofocus
+		/>
 		{#if buyRamState.insufficientBalance}
 			<p class="text-red-500">Insufficient balance. Please enter a smaller amount.</p>
 		{/if}

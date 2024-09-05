@@ -3,7 +3,9 @@
 
 	const { transactionId, network } = $props();
 
-	const transaction = $derived(transactions.find((t) => t.transaction?.id === transactionId));
+	const transaction = $derived(
+		transactions.find((t) => t.transaction?.id.equals(String(transactionId)))
+	);
 </script>
 
 <div class="space-y-4 rounded-lg border border-gray-300 p-4">
