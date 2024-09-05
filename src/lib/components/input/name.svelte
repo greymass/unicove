@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Name } from '@wharfkit/antelope';
 	import type { ComponentProps } from 'svelte';
-	import TextInput from './textinput.svelte';
+	import TextInput from './text.svelte';
 
 	interface NameInputProps extends ComponentProps<TextInput> {
 		valid?: boolean;

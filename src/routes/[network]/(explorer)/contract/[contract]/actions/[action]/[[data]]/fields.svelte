@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Label from '$lib/components/input/label.svelte';
-	import Textinput from '$lib/components/input/textinput.svelte';
+	import Textinput from '$lib/components/input/text.svelte';
 	import type { ABI } from '@wharfkit/antelope';
 
 	interface PageProps {

@@ -10,20 +10,23 @@
 		const network = String(data.network);
 		return [
 			{ href: `/${network}/ram`, text: 'Overview' },
-			{ href: `/${network}/ram/buy`, text: 'Buy RAM' },
-			{ href: `/${network}/ram/sell`, text: 'Sell RAM' }
+			{ href: `/${network}/ram/buy/tokens`, text: 'Buy RAM' },
+			{ href: `/${network}/ram/sell/tokens`, text: 'Sell RAM' }
 		];
 	});
 
-	const currentTab = $derived($page.url.pathname.split('/').slice(-1)[0]);
-	const options = $derived(
+	let currentTab = $derived($page.url.pathname.split('/')[4] || 'overview');
+
+	let options = $derived(
 		tabOptions.map((option) => ({
 			...option,
-			active: option.href.split('/').slice(-1)[0] === currentTab
+			active:
+				`/${$page.url.pathname.split('/').slice(2).slice(0, -1).join('/')}` ===
+				option.href.split('/').slice(0, -1).join('/')
 		}))
 	);
 
-	const title = $derived.by(() => {
+	const subtitle = $derived.by(() => {
 		switch (currentTab) {
 			case 'buy':
 				return 'Buy RAM';
@@ -36,7 +39,7 @@
 </script>
 
 <Stack class="gap-6">
-	<Pageheader title="RAM" subtitle={title} />
+	<Pageheader title="RAM" {subtitle} />
 
 	<PillGroup {options} class="mb-6" />
 

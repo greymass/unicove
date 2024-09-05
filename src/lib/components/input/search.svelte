@@ -2,7 +2,7 @@
 	import { Checksum256, Name, PublicKey, UInt32 } from '@wharfkit/antelope';
 	import type { ComponentProps } from 'svelte';
 	import { createDialog, melt } from '@melt-ui/svelte';
-	import TextInput from './textinput.svelte';
+	import TextInput from './text.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
 	import { preventDefault } from '$lib/utils';
 	import { goto } from '$app/navigation';

@@ -15,7 +15,7 @@
 	import Label from '$lib/components/input/label.svelte';
 	import Pageheader from '$lib/components/pageheader.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
-	import Textinput from '$lib/components/input/textinput.svelte';
+	import Textinput from '$lib/components/input/text.svelte';
 
 	import Fields from './fields.svelte';
 
