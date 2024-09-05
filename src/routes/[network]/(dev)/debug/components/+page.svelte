@@ -9,6 +9,7 @@
 	import Code from './sections/code.svelte';
 	import Layouts from './sections/layouts.svelte';
 	import Progress from './sections/progress.svelte';
+	import Tables from './sections/tables.svelte';
 </script>
 
 <!-- <Sidebar.Side width="10rem" tag="aside"> -->
@@ -55,6 +56,10 @@
 	<hr class="my-8 h-px border-0 bg-slate-200 dark:bg-slate-800" />
 
 	<Code />
+
+	<hr class="my-8 h-px border-0 bg-slate-200 dark:bg-slate-800" />
+
+	<Tables />
 
 	<hr class="my-8 h-px border-0 bg-slate-200 dark:bg-slate-800" />
 
