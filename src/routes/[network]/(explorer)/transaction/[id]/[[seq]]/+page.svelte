@@ -4,10 +4,22 @@
 	import Code from '$lib/components/code.svelte';
 
 	import SendSummary from '$lib/components/summary/send.svelte';
+	import DepositSummary from '$lib/components/summary/deposit.svelte';
+	import WithdrawSummary from '$lib/components/summary/withdraw.svelte';
+	import BuyREXSummary from '$lib/components/summary/buyrex.svelte';
+	import SellREXSummary from '$lib/components/summary/sellrex.svelte';
+	import MvfrsavingsSummary from '$lib/components/summary/mvfrsavings.svelte';
 
 	const summaryMap = {
 		'eosio.token': {
 			transfer: SendSummary
+		},
+		eosio: {
+			deposit: DepositSummary,
+			withdraw: WithdrawSummary,
+			buyrex: BuyREXSummary,
+			sellrex: SellREXSummary,
+			mvfrsavings: MvfrsavingsSummary
 		}
 	};
 

@@ -21,6 +21,7 @@
 
 		const items = [
 			{ href: `/${network}/account`, text: 'Account' },
+			{ href: `/${network}/staking`, text: 'Staking' },
 			{ href: `/${network}/send`, text: 'Send' },
 			{ href: `/${network}/stake`, text: 'Stake' },
 			{ href: `/${network}/ram`, text: 'RAM' },

@@ -81,7 +81,6 @@ export class NetworkState {
 		);
 		const json = await response.json();
 
-		this.loaded = true;
 		this.last_update = new Date();
 		this.tokenstate = json.tokenstate;
 
@@ -92,6 +91,8 @@ export class NetworkState {
 			console.log(error);
 			console.log(json);
 		}
+
+		this.loaded = true;
 	}
 
 	tokenToRex = (token: AssetType) => {
