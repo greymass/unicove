@@ -1,4 +1,6 @@
 <script lang="ts">
+	import Stack from '$lib/components/layout/stack.svelte';
+	import Pageheader from '$lib/components/pageheader.svelte';
 	import LanguageSelect from '$lib/components/select/language.svelte';
 	import { getSetting } from '$lib/state/settings.svelte';
 
@@ -16,15 +18,24 @@
 	}
 </script>
 
-<p>Language Selector</p>
-<LanguageSelect />
+<Stack>
+	<Pageheader title="Settings" subtitle="Configure Unicove" />
 
-<label for="advanced-mode"> Enable Advanced Mode </label>
-<input id="advanced-mode" type="checkbox" checked={advancedMode.value} on:change={toggleAdvanced} />
+	<p>Language Selector</p>
+	<LanguageSelect />
 
-{#if advancedMode.value}
-	<div>
-		<label for="debug-mode"> Enable Debug Mode </label>
-		<input id="debug-mode" type="checkbox" bind:checked={debugMode.value} />
-	</div>
-{/if}
+	<label for="advanced-mode"> Enable Advanced Mode </label>
+	<input
+		id="advanced-mode"
+		type="checkbox"
+		checked={advancedMode.value}
+		on:change={toggleAdvanced}
+	/>
+
+	{#if advancedMode.value}
+		<div>
+			<label for="debug-mode"> Enable Debug Mode </label>
+			<input id="debug-mode" type="checkbox" bind:checked={debugMode.value} />
+		</div>
+	{/if}
+</Stack>

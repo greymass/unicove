@@ -2,8 +2,15 @@
 	import * as m from '$lib/paraglide/messages.js';
 	import { getContext } from 'svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import Pageheader from '$lib/components/pageheader.svelte';
+	import Stack from '$lib/components/layout/stack.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 </script>
 
-<p>Here's the things you can do with your account, {context.account?.name}!</p>
+<Stack>
+	<Pageheader title={context.account?.name} subtitle="Account Overview" />
+	<Pageheader title="Tokens" subtitle="Token balances" />
+	<Pageheader title="Staking" subtitle="Staked balances" />
+	<Pageheader title="RAM" subtitle="Information about this account's RAM" />
+</Stack>
