@@ -1,23 +1,83 @@
 <script lang="ts">
-	import * as m from '$lib/paraglide/messages.js';
-	import Code from '$lib/components/code.svelte';
+	import { Asset, Int64 } from '@wharfkit/session';
+	import Card from '$lib/components/layout/box/card.svelte';
 
 	const { data } = $props();
+
+	function bytesToKB(bytes: number | Int64 | undefined): string {
+		return ((Number(bytes) || 0) / 1000).toFixed(2);
+	}
+
+	interface RamPrice {
+		eos?: Asset;
+		usd?: Asset;
+	}
+
+	function calculateRamPriceInEOS(
+		bytes: number | Int64 | undefined,
+		ramprice: RamPrice | undefined
+	): string {
+		if (!bytes || !ramprice?.eos) return 'N/A';
+		return Asset.from(
+			(Number(bytes) * Number(ramprice.eos.value)) / 1000,
+			data.account.network.chain.systemToken.symbol
+		).toString();
+	}
+
+	function calculateRamPriceInUSD(
+		bytes: number | Int64 | undefined,
+		ramprice: RamPrice | undefined
+	): string {
+		if (!bytes || !ramprice?.usd) return 'N/A';
+		return `$${((Number(bytes) * Number(ramprice.usd.value)) / 1000).toFixed(2)} USD`;
+	}
 </script>
 
 {#if data.account}
-	<div class="space-y-4">
-		<h3 class="h3">RAM</h3>
-		<Code>{JSON.stringify(data.account.ram, null, 2)}</Code>
-		{#if data.account.network}
-			<h3 class="h3">RAM Prices</h3>
-			<Code>{JSON.stringify(data.account.network.ramprice, null, 2)}</Code>
-		{/if}
-		<h3 class="h3">Token Price</h3>
-		{#if data.account.network}
-			<Code>{JSON.stringify(data.account.network.tokenprice, null, 2)}</Code>
-		{/if}
-		<h3 class="h3">RAM State</h3>
-		<Code>{JSON.stringify(data.account.network.ramstate, null, 2)}</Code>
+	<h3 class="mb-4">Account RAM</h3>
+	<div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+		<Card class="rounded-lg bg-gray-600 p-4 shadow">
+			<h4 class="mb-2 text-lg font-semibold">Total:</h4>
+			<ul class="space-y-2">
+				<li>{bytesToKB(data.account.ram?.max)} KB</li>
+				<li>{calculateRamPriceInEOS(data.account.ram?.max, data.account.network.ramprice)}</li>
+				<li>{calculateRamPriceInUSD(data.account.ram?.max, data.account.network.ramprice)}</li>
+			</ul>
+		</Card>
+		<Card class="rounded-lg bg-gray-600 p-4 shadow">
+			<h4 class="mb-2 text-lg font-semibold">Available:</h4>
+			<ul class="space-y-2">
+				<li>{bytesToKB(data.account.ram?.available)} KB</li>
+				<li>
+					{calculateRamPriceInEOS(data.account.ram?.available, data.account.network.ramprice)}
+				</li>
+				<li>
+					{calculateRamPriceInUSD(data.account.ram?.available, data.account.network.ramprice)}
+				</li>
+			</ul>
+		</Card>
+		<Card class="rounded-lg bg-gray-600 p-4 shadow">
+			<h4 class="mb-2 text-lg font-semibold">Used:</h4>
+			<ul class="space-y-2">
+				<li>{bytesToKB(data.account.ram?.used)} KB</li>
+				<li>{calculateRamPriceInEOS(data.account.ram?.used, data.account.network.ramprice)}</li>
+				<li>{calculateRamPriceInUSD(data.account.ram?.used, data.account.network.ramprice)}</li>
+			</ul>
+		</Card>
 	</div>
+{:else}
+	<p>Loading account RAM details...</p>
+{/if}
+
+{#if data.account.network}
+	<Card class="mt-4 rounded-lg bg-gray-600 p-4 shadow">
+		<h3 class="mb-2 text-xl font-semibold">Current RAM Prices</h3>
+		<ul class="space-y-2">
+			<li>
+				{data.account.network.ramprice?.eos.value || 'N/A'}
+				{data.account.network.chain.systemToken.symbol.code}/KB
+			</li>
+			<li>${data.account.network.ramprice?.usd?.value || 'N/A'} USD/KB</li>
+		</ul>
+	</Card>
 {/if}
