@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Input from '$lib/components/input/textinput.svelte';
+	import NumberInput from '$lib/components/input/number.svelte';
 	import Button from '$lib/components/button/button.svelte';
 	import Label from '$lib/components/input/label.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
@@ -90,7 +90,10 @@
 	<form on:submit={preventDefault(handleRent)}>
 		<Stack class="gap-3">
 			<Label>Amount of {rentState.resourceUnit} to rent from PowerUp.</Label>
-			<Input placeholder={`number of ${rentState.resourceUnit}`} bind:value={rentState.amount} />
+			<NumberInput
+				placeholder={`number of ${rentState.resourceUnit}`}
+				bind:value={rentState.amount}
+			/>
 			{#if rentState.insufficientBalance}
 				<p class="text-red-500">Insufficient balance. Please enter a smaller amount.</p>
 			{/if}
