@@ -1,23 +1,30 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
-	import { Asset } from '@wharfkit/antelope';
+	import { Checksum256 } from '@wharfkit/antelope';
 
 	import { getSetting } from '$lib/state/settings.svelte.js';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 
 	import Button from '$lib/components/button/button.svelte';
 	import Code from '$lib/components/code.svelte';
-	import Input from '$lib/components/input/textinput.svelte';
 	import Label from '$lib/components/input/label.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
+	import Transaction from '$lib/components/transaction.svelte';
+	import NumberInput from '$lib/components/input/number.svelte';
 
-	import { BuyRAMState } from './state.svelte.js';
+	import { BuyRAMState } from '../state.svelte.js';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
 	const debugMode = getSetting('debug-mode', false);
 
 	const buyRamState: BuyRAMState = $state(new BuyRAMState(data.network.chain));
+
+	buyRamState.format = 'units';
+
+	let bytesInput: NumberInput | undefined = $state();
+
+	let transactionId: Checksum256 | undefined = $state();
 
 	async function handleBuyRAM() {
 		if (!context.wharf || !context.wharf.session) {
@@ -26,25 +33,21 @@
 		}
 
 		try {
-			await context.wharf.transact({
-				action: data.network.contracts.system.action('buyram', buyRamState.toJSON())
+			const transactionResult = await context.wharf.transact({
+				action: data.network.contracts.system.action('buyrambytes', buyRamState.toJSON())
 			});
-			alert('RAM purchase successful');
+
+			transactionId = transactionResult.resolved?.transaction.id;
+
+			resetState();
 		} catch (error) {
 			console.error(error);
-			alert('RAM purchase failed: ' + (error as { message: string }).message);
 		}
 	}
 
-	function preventDefault(fn: (event: Event) => void) {
-		return function (event: Event) {
-			event.preventDefault();
-			fn.call(this, event);
-		};
-	}
-
-	function setMax() {
-		buyRamState.bytes = buyRamState.max;
+	function resetState() {
+		buyRamState.reset();
+		bytesInput?.set();
 	}
 
 	$effect(() => {
@@ -53,10 +56,10 @@
 				buyRamState.payer = context.account.name;
 				buyRamState.receiver = context.account.name;
 			}
-			buyRamState.balance = Asset.from(
-				context.account.balance?.liquid?.value || 0,
-				data.network.chain.systemToken?.symbol
-			);
+
+			if (context.account.balance) {
+				buyRamState.balance = context.account.balance?.liquid;
+			}
 		}
 	});
 
@@ -67,22 +70,29 @@
 	});
 </script>
 
-<form onsubmit={preventDefault(handleBuyRAM)}>
+{#if transactionId}
+	<Transaction network={data.network} {transactionId} />
+{/if}
+
+<form on:submit|preventDefault={handleBuyRAM}>
 	<Stack class="gap-3">
-		<Label for="assetInput">Amount (in bytes)</Label>
-		<Input id="assetInput" bind:value={buyRamState.bytes} />
+		<Label for="bytesInput">Amount to buy (Bytes)</Label>
+		<NumberInput
+			id="bytesInput"
+			bind:this={bytesInput}
+			bind:value={buyRamState.bytes}
+			placeholder="0"
+			autofocus
+		/>
 		{#if buyRamState.insufficientBalance}
 			<p class="text-red-500">Insufficient balance. Please enter a smaller amount.</p>
 		{/if}
 		<p>
-			Available:
+			Balance available:
 			{#if context.account}
 				{context.account.balance?.liquid}
-				<Button disabled={!context.account} onclick={preventDefault(setMax)} type="button"
-					>Fill Max</Button
-				>
 			{:else}
-				0.0000 {data.network.chain.systemToken}
+				0.0000 {data.network.chain.systemToken.symbol.code}
 			{/if}
 		</p>
 	</Stack>
@@ -90,9 +100,9 @@
 	<Stack class="mt-4 gap-3">
 		<h3 class="h3">Details</h3>
 		<div class="grid grid-cols-2 gap-2">
-			<span>Price for 1000 bytes:</span>
+			<span>Price for 1000 Bytes:</span>
 			<span>{buyRamState.pricePerKB} / KB</span>
-			<span>Price for {buyRamState.bytes}:</span>
+			<span>Price for {buyRamState.bytes} Bytes:</span>
 			<span>{buyRamState.bytesValue}</span>
 			<span>Network Fee (0.5%)</span>
 			<span>{buyRamState.fee}</span>
@@ -116,7 +126,6 @@
 					pricePerKB: buyRamState.pricePerKB,
 					pricePerByte: buyRamState.pricePerByte,
 					bytesValue: buyRamState.bytesValue,
-					max: buyRamState.max,
 					valid: buyRamState.valid,
 					insufficientBalance: buyRamState.insufficientBalance,
 					balances: context.account?.balances

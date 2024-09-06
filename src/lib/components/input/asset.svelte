@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Asset, Int64 } from '@wharfkit/antelope';
 	import type { ComponentProps } from 'svelte';
-	import TextInput from './textinput.svelte';
+	import TextInput from './text.svelte';
 	import Big from 'big.js';
 
 	interface AssetInputProps extends ComponentProps<TextInput> {
@@ -93,7 +93,7 @@
 		validMaximum = satisfiesMaximum;
 		if (satisfies) {
 			_value = asset;
-		} else {
+		} else if (!asset.value && _value.value) {
 			_value = zeroValue;
 		}
 	});

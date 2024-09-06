@@ -6,12 +6,13 @@
 
 	interface Props extends HTMLAttributes<HTMLDivElement> {
 		children: Snippet;
+		tag?: string;
 		class?: string;
 	}
 
-	const { class: className = '', ...props }: Props = $props();
+	const { class: className = '', tag = 'div', ...props }: Props = $props();
 </script>
 
-<div class={`layout-stack ${className}`} {...props}>
+<svelte:element this={tag} class={`layout-stack ${className}`} {...props}>
 	{@render props.children()}
-</div>
+</svelte:element>

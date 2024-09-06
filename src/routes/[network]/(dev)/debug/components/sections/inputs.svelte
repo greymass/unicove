@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { Stack } from '$lib/components/layout';
-	import TextInput from '$lib/components/input/textinput.svelte';
+	import TextInput from '$lib/components/input/text.svelte';
 	import Label from '$lib/components/input/label.svelte';
+	import AssetOrUnitsInput from '$lib/components/input/assetOrUnits.svelte';
+	import NumberInput from '$lib/components/input/number.svelte';
 
 	import { Asset } from '@wharfkit/antelope';
 	import AssetInput from '$lib/components/input/asset.svelte';
@@ -10,9 +12,13 @@
 
 	let value = $state(Asset.from('0.0000 TOKEN'));
 	let valid = $state(false);
+	let unitsValue = $state(0);
+	let format: 'asset' | 'units' = $state('asset');
 
 	let min = $state(1);
 	let max = $state(100);
+
+	let numberValue: number | undefined = $state(undefined);
 </script>
 
 <Stack id="inputs">
@@ -35,5 +41,15 @@
 		<h2 class="h2">Asset Input</h2>
 		<Label for="assetInput">Enter token value:</Label>
 		<AssetInput id="assetInput" bind:this={input} bind:value bind:valid bind:min bind:max debug />
+	</div>
+
+	<div>
+		<h2 class="h2">Asset or Units Input</h2>
+		<AssetOrUnitsInput bind:assetValue={value} bind:unitsValue bind:format unitName="Units" debug />
+	</div>
+
+	<div>
+		<h2 class="h2">Number Input</h2>
+		<NumberInput id="numberInput" bind:value={numberValue} min={0} max={100} step={1} debug />
 	</div>
 </Stack>

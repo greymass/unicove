@@ -15,9 +15,11 @@ export interface ChainConfig {
 	name: ChainShortName;
 	features: Record<FeatureType, boolean>;
 	symbol: Asset.SymbolType;
+	timeseries_api?: string;
 }
 
-export type FeatureType = 'delphioracle' | 'lightapi' | 'rex' | 'robo' | 'buyram' | 'powerup' | 'rentrex' | 'staking';
+
+export type FeatureType = 'delphioracle' | 'lightapi' | 'rex' | 'robo' | 'timeseries' | 'buyram' | 'powerup' | 'rentrex' | 'staking';
 
 export type ChainShortName = (typeof chainShortNames)[number];
 export const chainIndiceMapping: Record<ChainShortName, ChainIndices> = {
@@ -41,10 +43,11 @@ export const chainConfigs: Record<string, ChainConfig> = {
 			lightapi: true,
 			rex: true,
 			robo: true,
+			timeseries: true,
 			buyram: true,
 			rentrex: true,
 			powerup: true,
-			staking: true,
+			staking: true
 		},
 		symbol: '4,EOS'
 	},
@@ -56,10 +59,11 @@ export const chainConfigs: Record<string, ChainConfig> = {
 			lightapi: false,
 			rex: true,
 			robo: true,
+			timeseries: false,
 			buyram: true,
 			powerup: true,
 			rentrex: true,
-			staking: true,
+			staking: true
 		},
 		symbol: '4,EOS'
 	},
@@ -71,10 +75,11 @@ export const chainConfigs: Record<string, ChainConfig> = {
 			lightapi: false,
 			rex: true,
 			robo: true,
+			timeseries: false,
 			buyram: true,
 			rentrex: true,
 			powerup: true,
-			staking: true,
+			staking: true
 		},
 		symbol: '4,EOS'
 	}

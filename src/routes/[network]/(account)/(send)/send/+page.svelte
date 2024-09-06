@@ -14,7 +14,7 @@
 	import NameInput from '$lib/components/input/name.svelte';
 	import Progress from '$lib/components/progress.svelte';
 	import SummarySend from '$lib/components/summary/send.svelte';
-	import TextInput from '$lib/components/input/textinput.svelte';
+	import TextInput from '$lib/components/input/text.svelte';
 	import TokenSelect from '$lib/components/select/token.svelte';
 	import PageHeader from '$lib/components/pageheader.svelte';
 

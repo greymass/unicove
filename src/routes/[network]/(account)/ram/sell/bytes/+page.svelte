@@ -1,21 +1,29 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
+	import { Checksum256 } from '@wharfkit/antelope';
 
-	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import { SellRAMState } from './state.svelte.js';
 	import { getSetting } from '$lib/state/settings.svelte.js';
+	import type { UnicoveContext } from '$lib/state/client.svelte';
 
-	import Input from '$lib/components/input/textinput.svelte';
 	import Button from '$lib/components/button/button.svelte';
+	import Code from '$lib/components/code.svelte';
 	import Label from '$lib/components/input/label.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
-	import Code from '$lib/components/code.svelte';
+	import Transaction from '$lib/components/transaction.svelte';
+	import NumberInput from '$lib/components/input/number.svelte';
+
+	import { SellRAMState } from '../state.svelte.js';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
 	const debugMode = getSetting('debug-mode', false);
 
 	const sellRamState: SellRAMState = $state(new SellRAMState(data.network.chain));
+
+	sellRamState.format = 'units';
+
+	let transactionId: Checksum256 | undefined = $state();
+	let bytesInput: NumberInput | undefined = $state();
 
 	async function handleSellRAM() {
 		if (!context.wharf || !context.wharf.session) {
@@ -24,25 +32,21 @@
 		}
 
 		try {
-			await context.wharf.transact({
+			const transactionResult = await context.wharf.transact({
 				action: data.network.contracts.system.action('sellram', sellRamState.toJSON())
 			});
-			alert('RAM sale successful');
+
+			transactionId = transactionResult.resolved?.transaction.id;
+
+			resetState();
 		} catch (error) {
 			console.error(error);
-			alert('RAM sale failed: ' + (error as { message: string }).message);
 		}
 	}
 
-	function preventDefault(fn: (event: Event) => void) {
-		return function (event: Event) {
-			event.preventDefault();
-			fn.call(this, event);
-		};
-	}
-
-	function setMax() {
-		sellRamState.bytes = sellRamState.max;
+	function resetState() {
+		sellRamState.reset();
+		bytesInput?.set();
 	}
 
 	$effect(() => {
@@ -61,20 +65,35 @@
 	});
 </script>
 
-<form onsubmit={preventDefault(handleSellRAM)}>
+{#if transactionId}
+	<Transaction network={data.network} {transactionId} />
+{/if}
+
+<form on:submit|preventDefault={handleSellRAM}>
 	<Stack class="gap-3">
-		<Label for="assetInput">Amount (in bytes)</Label>
-		<Input id="assetInput" bind:value={sellRamState.bytes} />
+		<Label for="bytesInput">Amount to sell (Bytes)</Label>
+		<NumberInput
+			id="bytesInput"
+			bind:this={bytesInput}
+			bind:value={sellRamState.bytes}
+			placeholder="0"
+			autofocus
+		/>
 		{#if sellRamState.insufficientRAM}
 			<p class="text-red-500">Insufficient RAM available. Please enter a smaller amount.</p>
 		{/if}
 		<p>
-			Available:
+			Available RAM:
 			{#if context.account}
 				{sellRamState.max} Bytes
-				<Button disabled={!context.account} onclick={preventDefault(setMax)} type="button"
-					>Fill Max</Button
-				>
+			{:else}
+				0 Bytes
+			{/if}
+		</p>
+		<p>
+			Value of available RAM:
+			{#if context.account}
+				{sellRamState.maxValue}
 			{:else}
 				0 Bytes
 			{/if}
@@ -84,10 +103,16 @@
 	<Stack class="mt-4 gap-3">
 		<h3 class="h3">Details</h3>
 		<div class="grid grid-cols-2 gap-2">
-			<span>Price:</span>
+			<span>Price for 1000 bytes:</span>
 			<span>{sellRamState.pricePerKB} / KB</span>
-			<span>Expected To Receive:</span>
+			<span>RAM to be sold:</span>
+			<span>{sellRamState.bytesToSell} Bytes</span>
+			<span>RAM Value:</span>
 			<span>{sellRamState.bytesValue}</span>
+			<span>Network Fee (0.5%)</span>
+			<span>{sellRamState.fee}</span>
+			<span>Expected To Receive:</span>
+			<span>~ {sellRamState.expectedToReceive}</span>
 		</div>
 	</Stack>
 
