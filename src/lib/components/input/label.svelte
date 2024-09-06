@@ -3,6 +3,7 @@
 	import type { HTMLLabelAttributes } from 'svelte/elements';
 
 	interface Props extends HTMLLabelAttributes {
+		for: string;
 		children: Snippet;
 	}
 

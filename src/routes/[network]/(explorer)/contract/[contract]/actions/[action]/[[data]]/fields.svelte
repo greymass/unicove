@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Checkbox from '$lib/components/input/checkbox.svelte';
 	import Label from '$lib/components/input/label.svelte';
 	import Textinput from '$lib/components/input/text.svelte';
 	import type { ABI } from '@wharfkit/antelope';
@@ -32,7 +33,7 @@
 					{fieldName} ({field.type})
 				</Label>
 				{#if field.type === 'bool'}
-					<input bind:checked={state[fieldName]} id="{fieldName}-input" type="checkbox" />
+					<Checkbox bind:checked={state[fieldName]} id="{fieldName}-input" />
 				{:else}
 					<Textinput
 						bind:value={state[fieldName]}
