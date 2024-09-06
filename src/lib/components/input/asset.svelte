@@ -8,6 +8,7 @@
 		min?: number;
 		max?: number;
 		valid?: boolean;
+		validNumber?: boolean;
 		validPrecision?: boolean;
 		validMinimum?: boolean;
 		validMaximum?: boolean;
@@ -21,6 +22,7 @@
 		max = $bindable(),
 		ref = $bindable(),
 		valid = $bindable(false),
+		validNumber = $bindable(false),
 		validPrecision = $bindable(false),
 		validMinimum = $bindable(false),
 		validMaximum = $bindable(false),
@@ -42,7 +44,17 @@
 	let number = $derived(input && satisfiesNumber ? Big(input) : Big(0));
 
 	/** The number of decimal places used in the string input */
-	const decimals = $derived(String(number).split('.')[1]?.length || 0);
+	const decimals = $derived(toNonExponential(number).split('.')[1]?.length || 0);
+
+	/** compatible with scientific notation, for example: 0.0000001 -> 1e-7 */
+	function toNonExponential(num: Big) {
+		const m: RegExpMatchArray | null = num.toExponential().match(/\d(?:\.(\d*))?e([+-]\d+)/);
+		if (m) {
+			return num.toFixed(Math.max(0, (m[1] || '').length - (Number(m[2]) || 0)));
+		} else {
+			return String(num);
+		}
+	}
 
 	/** The symbol of the asset */
 	let symbol: Asset.Symbol = $state(_value.symbol);
@@ -65,8 +77,13 @@
 
 	/** Validation states */
 	const satisfiesPrecision = $derived(decimals <= symbol.precision);
-	const satisfiesMinimum = $derived(min === undefined || asset.units.gte(minUnits));
-	const satisfiesMaximum = $derived(max === undefined || asset.units.lte(maxUnits));
+
+	const satisfiesMinimum = $derived(
+		min === undefined || !satisfiesNumber || !satisfiesPrecision || asset.units.gte(minUnits)
+	);
+	const satisfiesMaximum = $derived(
+		max === undefined || !satisfiesNumber || !satisfiesPrecision || asset.units.lte(maxUnits)
+	);
 
 	/** Whether or not the input value is valid */
 	const satisfies = $derived(
@@ -88,6 +105,7 @@
 	/** Set the bindable values on form input changes */
 	$effect(() => {
 		valid = satisfies;
+		validNumber = !input || satisfiesNumber; //no satisfy check when no input
 		validPrecision = satisfiesPrecision;
 		validMinimum = satisfiesMinimum;
 		validMaximum = satisfiesMaximum;
