@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { createCheckbox, melt, createSync } from '@melt-ui/svelte';
-	import type { ChangeFn } from '@melt-ui/svelte/internal/helpers';
 	import { Check, Minus } from 'lucide-svelte';
 
 	interface Props {
@@ -10,14 +9,12 @@
 		name?: string;
 		value?: string;
 		id: string;
-		onCheckedChange?: ChangeFn<boolean | 'indeterminate'>;
 	}
 
 	let {
 		disabled = $bindable(false),
 		checked = $bindable(false),
 		required = false,
-		onCheckedChange,
 		name,
 		value,
 		id
@@ -31,8 +28,7 @@
 		disabled,
 		name,
 		value,
-		required,
-		onCheckedChange
+		required
 	});
 
 	const sync = createSync(states);
@@ -85,4 +81,3 @@
 		<input use:melt={$input} />
 	</button>
 </div>
-
