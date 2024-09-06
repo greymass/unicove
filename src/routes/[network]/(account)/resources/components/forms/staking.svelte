@@ -69,9 +69,9 @@
 	}
 
 	let assetValid = $state(false);
-	let assetValidPrecision = $state(false);
-	let assetValidMaximum = $state(false);
-	let assetValidMinimum = $state(false);
+	let assetValidPrecision = $state(true);
+	let assetValidMaximum = $state(true);
+	let assetValidMinimum = $state(true);
 </script>
 
 {#if rentState.txid}
@@ -92,13 +92,13 @@
 				bind:validPrecision={assetValidPrecision}
 				bind:validMinimum={assetValidMinimum}
 				bind:validMaximum={assetValidMaximum}
-				min={rentState.min || 0}
-				max={rentState.max || 0}
+				min={rentState.min}
+				max={rentState.max}
 			/>
 			{#if !assetValidPrecision}
 				<p class="text-red-500">Invalid number, too many decimal places.</p>
 			{/if}
-			{#if !assetValidMinimum && rentState.amountValue.value > 0}
+			{#if !assetValidMinimum}
 				<p class="text-red-500">Amount is below the minimum value</p>
 			{/if}
 			{#if !assetValidMaximum}
