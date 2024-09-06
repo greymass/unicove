@@ -1,17 +1,24 @@
 <script lang="ts">
 	import { createSwitch, melt, createSync } from '@melt-ui/svelte';
+	import type { ChangeFn } from '@melt-ui/svelte/internal/helpers';
 
 	interface Props {
-		isDisabled: boolean;
-		isChecked: boolean;
-		name: string;
+		disabled?: boolean;
+		required?: boolean;
+		checked: boolean;
+		name?: string;
+		value?: string;
+		onCheckedChange?: ChangeFn<boolean>;
 		id: string;
 	}
 
 	let {
-		isDisabled = false,
-		isChecked = $bindable(false),
+		disabled = $bindable(false),
+		checked = $bindable(false),
+		required = false,
 		name,
+		value,
+		onCheckedChange,
 		id
 	}: Props = $props();
 
@@ -19,13 +26,17 @@
 		elements: { root, input },
 		states
 	} = createSwitch({
-		disabled: isDisabled,
-		defaultChecked: isChecked
+		disabled,
+		required,
+		defaultChecked: checked,
+		onCheckedChange,
+		value,
+		name
 	});
 
 	const sync = createSync(states);
 	$effect(() => {
-		sync.checked(isChecked, (v) => (isChecked = v));
+		sync.checked(checked, (v) => (checked = v));
 	});
 
 	const ariaLabelledBy = `${id}-label`;
@@ -46,20 +57,21 @@
 		focus-visible:outline-2
 		focus-visible:outline-offset-[-2px]
 		focus-visible:outline-solar-500
+		disabled:cursor-not-allowed
 		disabled:bg-mineShaft-700
 		data-[state=checked]:border-skyBlue-500
 		data-[state=checked]:bg-skyBlue-500
 		data-[state=checked]:hover:border-skyBlue-400
 		data-[state=checked]:hover:bg-skyBlue-400
-		data-[state=checked]:disabled:bg-mineShaft-950
 		data-[state=checked]:disabled:border-mineShaft-950
+		data-[state=checked]:disabled:bg-mineShaft-950
 "
 		{id}
 		aria-labelledby={ariaLabelledBy}
 	>
-		<span class="thumb block rounded-full bg-neutral-400 transition"></span>
+		<span class="thumb block rounded-full bg-mineShaft-200 transition"></span>
 	</button>
-	<input use:melt={$input} {name} />
+	<input use:melt={$input} />
 </div>
 
 <style>
@@ -83,6 +95,6 @@
 	}
 
 	:global(button[data-disabled='true']) .thumb {
-		background-color: white;
+		background-color: theme('colors.mineShaft.300');
 	}
 </style>

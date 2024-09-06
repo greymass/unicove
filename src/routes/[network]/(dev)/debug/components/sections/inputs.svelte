@@ -21,16 +21,7 @@
 	let max = $state(100);
 
 	let numberValue: number | undefined = $state(undefined);
-	let controlledSwitch = $state(false);
-	let controlledBox = $state(false);
-
-	$effect(() => {
-		let id = setInterval(() => {
-			controlledSwitch = !controlledSwitch;
-			controlledBox = !controlledBox;
-		}, 1000);
-		return () => clearInterval(id);
-	});
+	let controlledSwitch = $state(true);
 </script>
 
 <Stack id="inputs">
@@ -65,27 +56,47 @@
 		<NumberInput id="numberInput" bind:value={numberValue} min={0} max={100} step={1} debug />
 	</div>
 	<form>
-		<div>
+		<Stack>
 			<h2 class="h2">Switch</h2>
-			<Label for="mySwitch-1">Default:</Label>
-			<Switch id="mySwitch-1" name="mySwitch-1" isDisabled={false} isChecked={false} />
-			<Label for="mySwitch-2">Disabled:</Label>
-			<Switch id="mySwitch-2" name="mySwitch-2" isDisabled={true} isChecked={true} />
-			<Label for="mySwitch-3">Checked:</Label>
-			<Switch id="mySwitch-3" name="mySwitch-3" isDisabled={false} bind:isChecked={controlledSwitch} />
 
-			<p>Switch is {controlledSwitch ? 'on' : 'off'}</p>
-		</div>
-		<div class="mt-5">
+			<div>
+				<Label for="mySwitch-1">Default</Label>
+				<Switch id="mySwitch-1" name="mySwitch-1" checked={false} />
+			</div>
+
+			<div>
+				<Label for="mySwitch-2">Disabled</Label>
+				<Switch id="mySwitch-2" name="mySwitch-2" disabled checked />
+			</div>
+
+			<div>
+				<Label for="mySwitch-3">Checked</Label>
+				<Switch id="mySwitch-3" name="mySwitch-3" bind:checked={controlledSwitch} />
+				<p>Switch is {controlledSwitch ? 'on' : 'off'}</p>
+			</div>
+		</Stack>
+		<Stack class="mt-5">
 			<h2 class="h2">Checkbox</h2>
-			<Label for="myCheckbox-1">Default:</Label>
-			<Checkbox id="myCheckbox-1" name="myCheckbox-1" isDisabled={false} isChecked={false} />
-			<Label for="myCheckbox-2">Disabled:</Label>
-			<Checkbox id="myCheckbox-2" name="myCheckbox-2" isDisabled={true} isChecked={true} />
-			<Label for="myCheckbox-3">Checked:</Label>
-			<Checkbox id="myCheckbox-3" name="myCheckbox-3" isDisabled={false} bind:isChecked={controlledSwitch} />
+			<div>
+				<Label for="myCheckbox-1">Default</Label>
+				<Checkbox id="myCheckbox-1" name="myCheckbox-1" checked={false} />
+			</div>
 
-			<p>Checkbox is {controlledSwitch ? 'checked' : 'empty'}</p>
-		</div>
+			<div>
+				<Label for="myCheckbox-2">Disabled</Label>
+				<Checkbox id="myCheckbox-2" name="myCheckbox-2" disabled checked />
+			</div>
+
+			<div>
+				<Label for="myCheckbox-ind">Indeterminate</Label>
+				<Checkbox id="myCheckbox-ind" name="myCheckbox-ind" checked="indeterminate" />
+			</div>
+
+			<div>
+				<Label for="myCheckbox-3">Checked</Label>
+				<Checkbox id="myCheckbox-3" name="myCheckbox-3" bind:checked={controlledSwitch} />
+				<p>Checkbox is {controlledSwitch ? 'checked' : 'empty'}</p>
+			</div>
+		</Stack>
 	</form>
 </Stack>

@@ -1,19 +1,25 @@
 <script lang="ts">
 	import { createCheckbox, melt, createSync } from '@melt-ui/svelte';
-	import Check from '$lib/components/input/icons/check.svelte';
-	import Label from '$lib/components/input/label.svelte';
+	import type { ChangeFn } from '@melt-ui/svelte/internal/helpers';
+	import { Check, Minus } from 'lucide-svelte';
 
 	interface Props {
-		isDisabled: boolean;
-		isChecked: boolean | 'indeterminate';
-		name: string;
+		disabled?: boolean;
+		required?: boolean;
+		checked: boolean | 'indeterminate';
+		name?: string;
+		value?: string;
 		id: string;
+		onCheckedChange?: ChangeFn<boolean | 'indeterminate'>;
 	}
 
 	let {
-		isDisabled = false,
-		isChecked = $bindable(false),
+		disabled = $bindable(false),
+		checked = $bindable(false),
+		required = false,
+		onCheckedChange,
 		name,
+		value,
 		id
 	}: Props = $props();
 
@@ -21,13 +27,17 @@
 		elements: { root, input },
 		states
 	} = createCheckbox({
-		defaultChecked: isChecked,
-		disabled: isDisabled
+		defaultChecked: checked,
+		disabled,
+		name,
+		value,
+		required,
+		onCheckedChange
 	});
 
 	const sync = createSync(states);
 	$effect(() => {
-		sync.checked(isChecked, (v) => (isChecked = v));
+		sync.checked(checked, (v) => (checked = v));
 	});
 
 	const ariaLabelledBy = `${id}-label`;
@@ -40,37 +50,39 @@
 			flex
 			size-5
 			appearance-none
-			border-solid
-			border
-			border-gray-700
 			items-center
 			justify-center
 			rounded
+			border
+			border-solid
+			border-mineShaft-700
 			bg-transparent
+		text-skyBlue-950
 			focus-visible:border-solar-500
 			focus-visible:outline
 			focus-visible:outline-2
 			focus-visible:outline-offset-[-2px]
 			focus-visible:outline-solar-500
-			disabled:bg-mineShaft-950
-			disabled:border-mineShaft-950
+			disabled:cursor-not-allowed
+		disabled:border-mineShaft-950
+		disabled:bg-mineShaft-950
+			disabled:text-white/30
 			data-[state=checked]:border-skyBlue-500
 			data-[state=checked]:bg-skyBlue-500
 			data-[state=checked]:hover:border-skyBlue-400
 			data-[state=checked]:hover:bg-skyBlue-400
-			data-[state=checked]:disabled:bg-mineShaft-950
 			data-[state=checked]:disabled:border-mineShaft-950
+			data-[state=checked]:disabled:bg-mineShaft-950
 			"
 		{id}
 		aria-labelledby={ariaLabelledBy}
 	>
-		{#if isChecked}
-			<Check />
+		{#if checked === true}
+			<Check class="size-3.5 stroke-[3.5px]" />
+		{:else if checked === 'indeterminate'}
+			<Minus class="size-3.5 stroke-[3.5px] text-white/30" />
 		{/if}
 		<input use:melt={$input} />
 	</button>
-	<Label for={id}>
-		Accept terms and conditions.
-	</Label>
-	<input use:melt={$input} {name} />
 </div>
+

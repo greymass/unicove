@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Sidebar, Stack } from '$lib/components/layout';
+	import { Stack } from '$lib/components/layout';
 	import Typography from './sections/typography.svelte';
 	import Buttons from './sections/buttons.svelte';
 	import Select from './sections/select.svelte';
@@ -11,18 +11,6 @@
 	import Progress from './sections/progress.svelte';
 	import Tables from './sections/tables.svelte';
 </script>
-
-<!-- <Sidebar.Side width="10rem" tag="aside"> -->
-<!-- 	<Stack id="toc" class="sticky top-4"> -->
-<!-- 		<a href="#typography">Typography</a> -->
-<!-- 		<a href="#buttons">Buttons</a> -->
-<!-- 		<a href="#inputs">Inputs</a> -->
-<!-- 		<a href="#cards">Cards</a> -->
-<!-- 		<a href="#navigation">Navigation</a> -->
-<!-- 		<a href="#code">Code</a> -->
-<!-- 		<a href="#layout">Layout</a> -->
-<!-- 	</Stack> -->
-<!-- </Sidebar.Side> -->
 
 <h1 class="h1 mb-8">Design System</h1>
 
