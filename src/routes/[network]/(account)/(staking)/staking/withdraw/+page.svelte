@@ -43,7 +43,7 @@
 		<Switcher>
 			<PageHeader title="Currently Withdrawable" subtitle={withdrawState.total} inverted />
 			<Button
-				disabled={!withdrawState.withdrawable.value}
+				disabled={!withdrawState.total.value}
 				onclick={() => withdrawState.transact()}
 				variant="secondary"
 				class="text-skyBlue-500">Withdraw</Button
