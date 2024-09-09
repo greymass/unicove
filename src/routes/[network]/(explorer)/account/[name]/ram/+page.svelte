@@ -2,34 +2,12 @@
 	import { Asset, Int64 } from '@wharfkit/session';
 	import Card from '$lib/components/layout/box/card.svelte';
 
+	import { calculateValue } from '$lib/state/client/account.svelte';
+
 	const { data } = $props();
 
 	function bytesToKB(bytes: number | Int64 | undefined): string {
 		return ((Number(bytes) || 0) / 1000).toFixed(2);
-	}
-
-	interface RamPrice {
-		eos?: Asset;
-		usd?: Asset;
-	}
-
-	function calculateRamPriceInEOS(
-		bytes: number | Int64 | undefined,
-		ramprice: RamPrice | undefined
-	): string {
-		if (!bytes || !ramprice?.eos) return 'N/A';
-		return Asset.from(
-			(Number(bytes) * Number(ramprice.eos.value)) / 1000,
-			data.account.network.chain.systemToken.symbol
-		).toString();
-	}
-
-	function calculateRamPriceInUSD(
-		bytes: number | Int64 | undefined,
-		ramprice: RamPrice | undefined
-	): string {
-		if (!bytes || !ramprice?.usd) return 'N/A';
-		return `$${((Number(bytes) * Number(ramprice.usd.value)) / 1000).toFixed(2)} USD`;
 	}
 </script>
 
@@ -40,28 +18,66 @@
 			<h4 class="mb-2 text-lg font-semibold">Total:</h4>
 			<ul class="space-y-2">
 				<li>{bytesToKB(data.account.ram?.max)} KB</li>
-				<li>{calculateRamPriceInEOS(data.account.ram?.max, data.account.network.ramprice)}</li>
-				<li>{calculateRamPriceInUSD(data.account.ram?.max, data.account.network.ramprice)}</li>
+				{#if data.account.network.ramprice}
+					<li>
+						{calculateValue(
+							Asset.fromUnits(data.account.ram?.max, '3,RAM'),
+							data.account.network.ramprice.eos
+						)}
+					</li>
+					{#if data.account.network.ramprice.usd}
+						<li>
+							{calculateValue(
+								Asset.fromUnits(data.account.ram?.max, '3,RAM'),
+								data.account.network.ramprice.usd
+							)}
+						</li>
+					{/if}
+				{/if}
 			</ul>
 		</Card>
 		<Card class="rounded-lg bg-gray-600 p-4 shadow">
 			<h4 class="mb-2 text-lg font-semibold">Available:</h4>
 			<ul class="space-y-2">
 				<li>{bytesToKB(data.account.ram?.available)} KB</li>
-				<li>
-					{calculateRamPriceInEOS(data.account.ram?.available, data.account.network.ramprice)}
-				</li>
-				<li>
-					{calculateRamPriceInUSD(data.account.ram?.available, data.account.network.ramprice)}
-				</li>
+				{#if data.account.network.ramprice}
+					<li>
+						{calculateValue(
+							Asset.fromUnits(data.account.ram?.available, '3,RAM'),
+							data.account.network.ramprice.eos
+						)}
+					</li>
+					{#if data.account.network.ramprice.usd}
+						<li>
+							{calculateValue(
+								Asset.fromUnits(data.account.ram?.available, '3,RAM'),
+								data.account.network.ramprice.usd
+							)}
+						</li>
+					{/if}
+				{/if}
 			</ul>
 		</Card>
 		<Card class="rounded-lg bg-gray-600 p-4 shadow">
 			<h4 class="mb-2 text-lg font-semibold">Used:</h4>
 			<ul class="space-y-2">
 				<li>{bytesToKB(data.account.ram?.used)} KB</li>
-				<li>{calculateRamPriceInEOS(data.account.ram?.used, data.account.network.ramprice)}</li>
-				<li>{calculateRamPriceInUSD(data.account.ram?.used, data.account.network.ramprice)}</li>
+				{#if data.account.network.ramprice}
+					<li>
+						{calculateValue(
+							Asset.fromUnits(data.account.ram?.used, '3,RAM'),
+							data.account.network.ramprice.eos
+						)}
+					</li>
+					{#if data.account.network.ramprice.usd}
+						<li>
+							{calculateValue(
+								Asset.fromUnits(data.account.ram?.used, '3,RAM'),
+								data.account.network.ramprice.usd
+							)}
+						</li>
+					{/if}
+				{/if}
 			</ul>
 		</Card>
 	</div>
