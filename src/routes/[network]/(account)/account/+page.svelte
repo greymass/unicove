@@ -10,7 +10,6 @@
 	import type { TokenIdentifier } from '@wharfkit/common';
 
 	const { data } = $props();
-
 	const context = getContext<UnicoveContext>('state');
 
 	let totalSystemTokens: TokenState | undefined = $state();
@@ -96,7 +95,6 @@
 
 <Stack>
 	<Pageheader title={context.account?.name} subtitle="Account Overview" />
-
 	<Pageheader title="Tokens" subtitle="Token balances" />
 	<Stack>
 		<div class="flex rounded-lg bg-slate-600 p-4">

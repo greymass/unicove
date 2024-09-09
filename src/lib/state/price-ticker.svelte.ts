@@ -18,7 +18,6 @@ export class TokenPriceTicker {
     }
 
     setTokens(tokens: TokenIdentifier[], chain: ChainDefinition) {
-
         const symbols = new Map<string, Asset.Symbol>();
         const systemTokenKey = chain.systemToken ? this.makeTokenKey(chain.systemToken) : '';
         for (const token of tokens) {
@@ -82,7 +81,6 @@ export class TokenPriceTicker {
 
     private loadPrices() {
         for (let [key, value] of this.symbols) {
-            console.log("....load: ", key)
             this.priceTicker(value).then(result => {
                 const price = Asset.fromUnits(result.median, '4,USD');
                 this.prices[key] = price;
@@ -117,15 +115,12 @@ export class TokenPriceTicker {
         if (map1.size !== map2.size) {
             return false;
         }
-
         for (const [key, value] of map1) {
             if (!map2.has(key) || !value.equals(map2.get(key)!)) {
                 return false;
             }
         }
-
         return true;
     }
-
 }
 

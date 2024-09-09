@@ -1,14 +1,17 @@
 <script lang="ts">
 	import Code from '$lib/components/code.svelte';
-	import { onDestroy } from 'svelte';
+	import { onMount } from 'svelte';
 	import { TokenPriceTicker } from '$lib/state/price-ticker.svelte';
 	import type { TokenIdentifier } from '@wharfkit/common';
 
 	const { data } = $props();
 
 	const tokenPriceTicker = TokenPriceTicker.INST;
-	onDestroy(() => {
-		tokenPriceTicker.stopLoad();
+	onMount(() => {
+		tokenPriceTicker.startIntervalQuery();
+		return () => {
+			tokenPriceTicker.stopIntervalQuery();
+		};
 	});
 
 	$effect(() => {
@@ -19,7 +22,6 @@
 			}
 		}
 		tokenPriceTicker.setTokens(tokens, data.network.chain);
-		tokenPriceTicker.startLoad();
 	});
 </script>
 
