@@ -1,12 +1,15 @@
 <script lang="ts">
+	import { getContext } from 'svelte';
 	import { page } from '$app/stores';
+
 	import UnicoveLogo from '$lib/assets/unicovelogo.svelte';
+	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
 	import { getSetting } from '$lib/state/settings.svelte';
 
-	let advancedMode = getSetting('advanced-mode', false);
+	const context = getContext<UnicoveContext>('state');
 
-	$inspect(advancedMode);
+	let advancedMode = getSetting('advanced-mode', false);
 
 	interface Props {
 		callbackFn?: (event: MouseEvent) => void;
@@ -20,9 +23,9 @@
 		const isAdvanced = advancedMode.value;
 
 		const items = [
-			{ href: `/${network}/account`, text: 'Account' },
+			{ href: `/${network}`, text: network.chain.name },
 			{ href: `/${network}/staking`, text: 'Staking' },
-			{ href: `/${network}/send`, text: 'Send' },
+			// { href: `/${network}/send`, text: 'Send' },
 			{ href: `/${network}/ram`, text: 'RAM' },
 			{ href: `/${network}/settings`, text: 'Settings' }
 			// { href: `/${network}/move`, text: 'Move' },
@@ -32,7 +35,14 @@
 		];
 
 		if (isAdvanced) {
-			items.splice(4, 0, { href: `/${network}/resources`, text: 'Resources' });
+			items.splice(3, 0, { href: `/${network}/resources`, text: 'Resources' });
+		}
+
+		if (context.account) {
+			items.splice(1, 0, {
+				href: `/${network}/account/${context.account.name}`,
+				text: context.account.name
+			});
 		}
 
 		return items;
