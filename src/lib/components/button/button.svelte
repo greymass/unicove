@@ -42,6 +42,9 @@
 		justify-center
 		text-nowrap
 		rounded-full
+		border-2
+		border-transparent
+
 		px-5
 		py-2
 		text-center
@@ -53,8 +56,6 @@
 		focus-visible:outline-2
 		focus-visible:outline-solar-500
 
-		data-[active=true]:border
-		data-[active=true]:border-2
 		data-[active=true]:border-mineShaft-200/30
 
 		[@media(any-hover:hover)]:hover:text-mineShaft-100
@@ -65,12 +66,12 @@
 		{...props}
 		{...linkProps}
 	>
-		<span class="pointer-events-none relative z-10">{@render props.children()}</span>
+		<span class="pointer-events-none relative z-10 text-inherit">{@render props.children()}</span>
 		<div
 			class="absolute inset-0 rounded-[inherit] bg-mineShaft-900 opacity-0
-			active:opacity-20
-			active:transition-opacity
-			[@media(any-hover:hover)]:hover:opacity-100"
+			[@media(any-hover:hover)]:hover:opacity-100
+			[@media(any-hover:hover)]:active:opacity-20
+			[@media(any-hover:hover)]:active:transition-opacity"
 		></div>
 	</svelte:element>
 {:else if props.variant === 'secondary'}
@@ -91,15 +92,16 @@
 		text-base
 		font-medium
 		text-mineShaft-100
+
 		ring-2
 		ring-inset
 		ring-mineShaft-600
-		transition-all
 
+		hover:ring-transparent
 		focus-visible:outline
 		focus-visible:outline-transparent
-		focus-visible:ring-solar-500
 
+		focus-visible:ring-solar-500
 		active:ring-transparent
 
 		disabled:cursor-not-allowed
@@ -120,9 +122,9 @@ inset-0
 rounded-[inherit]
 bg-mineShaft-900
 opacity-0
-active:opacity-20
-active:transition-opacity
-[@media(any-hover:hover)]:hover:opacity-100"
+[@media(any-hover:hover)]:hover:opacity-100
+[@media(any-hover:hover)]:active:opacity-20
+[@media(any-hover:hover)]:active:transition-opacity"
 			class:hidden={props.disabled}
 		></div>
 	</svelte:element>

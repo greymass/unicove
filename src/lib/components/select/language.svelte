@@ -45,8 +45,8 @@
 	focus-visible:outline
 	"
 	use:melt={$trigger}
-	aria-label="langauge-switcher-label"
-	id="language-switcher"
+	aria-label="langauge-select-label"
+	id="language-select"
 >
 	{$selectedLabel || 'Select a language'}
 	<ChevronDown class="size-5 transition-transform duration-100 {$open ? 'rotate-180' : ''}" />
