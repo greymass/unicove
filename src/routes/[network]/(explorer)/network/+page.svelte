@@ -3,8 +3,9 @@
 	import Code from '$lib/components/code.svelte';
 	import { onMount } from 'svelte';
 	import * as Table from '$lib/components/table';
-	import { Stack } from '$lib/components/layout';
+	import { Card, Stack } from '$lib/components/layout';
 	import { API } from '@wharfkit/antelope';
+	import Pageheader from '$lib/components/pageheader.svelte';
 
 	const { data } = $props();
 
@@ -26,7 +27,8 @@
 </script>
 
 <Stack class="gap-8">
-	<h1 class="h1">Chain State</h1>
+	<Pageheader title="Network" subtitle="Network Overview" />
+	<Card>Network charts/metrics</Card>
 
 	<Stack>
 		{#if state}

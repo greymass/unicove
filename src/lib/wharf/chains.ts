@@ -18,8 +18,17 @@ export interface ChainConfig {
 	timeseries_api?: string;
 }
 
-
-export type FeatureType = 'delphioracle' | 'lightapi' | 'rex' | 'robo' | 'timeseries' | 'buyram' | 'powerup' | 'rentrex' | 'staking';
+export type FeatureType =
+	| 'delphioracle'
+	| 'lightapi'
+	| 'rex'
+	| 'robo'
+	| 'timeseries'
+	| 'rammarket'
+	| 'powerup'
+	| 'rentrex'
+	| 'stakeresource'
+	| 'staking';
 
 export type ChainShortName = (typeof chainShortNames)[number];
 export const chainIndiceMapping: Record<ChainShortName, ChainIndices> = {
@@ -44,9 +53,10 @@ export const chainConfigs: Record<string, ChainConfig> = {
 			rex: true,
 			robo: true,
 			timeseries: true,
-			buyram: true,
-			rentrex: true,
+			rammarket: true,
+			rentrex: false,
 			powerup: true,
+			stakeresource: false,
 			staking: true
 		},
 		symbol: '4,EOS'
@@ -60,9 +70,10 @@ export const chainConfigs: Record<string, ChainConfig> = {
 			rex: true,
 			robo: true,
 			timeseries: false,
-			buyram: true,
+			rammarket: true,
 			powerup: true,
 			rentrex: true,
+			stakeresource: true,
 			staking: true
 		},
 		symbol: '4,EOS'
@@ -74,11 +85,12 @@ export const chainConfigs: Record<string, ChainConfig> = {
 			delphioracle: false,
 			lightapi: false,
 			rex: true,
-			robo: true,
+			robo: false,
 			timeseries: false,
-			buyram: true,
+			rammarket: true,
 			rentrex: true,
 			powerup: true,
+			stakeresource: true,
 			staking: true
 		},
 		symbol: '4,EOS'

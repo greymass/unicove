@@ -1,12 +1,12 @@
 <script lang="ts">
+	import { getContext } from 'svelte';
 	import { page } from '$app/stores';
+
 	import UnicoveLogo from '$lib/assets/unicovelogo.svelte';
+	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
-	import { getSetting } from '$lib/state/settings.svelte';
 
-	let advancedMode = getSetting('advanced-mode', false);
-
-	$inspect(advancedMode);
+	const context = getContext<UnicoveContext>('state');
 
 	interface Props {
 		callbackFn?: (event: MouseEvent) => void;
@@ -17,22 +17,27 @@
 	let { callbackFn, network, class: className }: Props = $props();
 
 	const destinations = $derived.by(() => {
-		const isAdvanced = advancedMode.value;
+		const features = [];
+
+		if (network.config.features.staking) {
+			features.push({ href: `/${network}/staking`, text: 'Staking' });
+		}
+
+		if (network.config.features.rammarket) {
+			features.push({ href: `/${network}/ram`, text: 'RAM' });
+		}
 
 		const items = [
-			{ href: `/${network}/account`, text: 'Account' },
-			{ href: `/${network}/staking`, text: 'Staking' },
-			{ href: `/${network}/send`, text: 'Send' },
-			{ href: `/${network}/ram`, text: 'RAM' },
+			{ href: `/${network}`, text: network.chain.name },
+			...features,
 			{ href: `/${network}/settings`, text: 'Settings' }
-			// { href: `/${network}/move`, text: 'Move' },
-			// { href: `/${network}/permissions`, text: 'Permissions' },
-			// { href: `/${network}/transactions`, text: 'Transactions' },
-			// { href: `/${network}/vote`, text: 'Vote' }
 		];
 
-		if (isAdvanced) {
-			items.splice(4, 0, { href: `/${network}/resources`, text: 'Resources' });
+		if (context.account) {
+			items.splice(1, 0, {
+				href: `/${network}/account/${context.account.name}`,
+				text: 'My Account'
+			});
 		}
 
 		return items;

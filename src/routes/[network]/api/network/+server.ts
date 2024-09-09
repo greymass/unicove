@@ -5,7 +5,13 @@ import { getCacheHeaders } from '$lib/utils';
 import type { RAMState, REXState, PowerUpState, SampleUsage } from '@wharfkit/resources';
 import { Types as DelphioracleTypes } from '$lib/wharf/contracts/delphioracle.js';
 
-type ResponseType = RAMState | REXState | PowerUpState | SampleUsage | DelphioracleTypes.datapoints | undefined;
+type ResponseType =
+	| RAMState
+	| REXState
+	| PowerUpState
+	| SampleUsage
+	| DelphioracleTypes.datapoints
+	| undefined;
 
 export async function GET({ fetch, params }) {
 	const chain = getChainDefinitionFromParams(params.network);
@@ -25,7 +31,7 @@ export async function GET({ fetch, params }) {
 	let sampleUsageIndex = -1;
 	let tokenStateIndex = -1;
 
-	if (network.config.features.buyram) {
+	if (network.config.features.rammarket) {
 		ramStateIndex = addRequest(requests, network.resources.v1.ram.get_state());
 	}
 	if (network.config.features.rex) {
@@ -34,11 +40,18 @@ export async function GET({ fetch, params }) {
 	if (network.config.features.powerup) {
 		powerupStateIndex = addRequest(requests, network.resources.v1.powerup.get_state());
 	}
-	if (network.config.features.staking || network.config.features.rentrex || network.config.features.powerup) {
+	if (
+		network.config.features.staking ||
+		network.config.features.rentrex ||
+		network.config.features.powerup
+	) {
 		sampleUsageIndex = addRequest(requests, network.resources.getSampledUsage());
 	}
 	if (network.contracts.delphioracle) {
-		tokenStateIndex = addRequest(requests, network.contracts.delphioracle.table('datapoints', 'eosusd').get());
+		tokenStateIndex = addRequest(
+			requests,
+			network.contracts.delphioracle.table('datapoints', 'eosusd').get()
+		);
 	}
 	const results = await Promise.all(requests);
 	const ramstate = getResponse(results, ramStateIndex);
@@ -68,7 +81,7 @@ export async function GET({ fetch, params }) {
 }
 
 function addRequest(list: Promise<ResponseType>[], request: Promise<ResponseType>) {
-	return list.push(request) - 1
+	return list.push(request) - 1;
 }
 
 function getResponse(list: ResponseType[], index: number) {

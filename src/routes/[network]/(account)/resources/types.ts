@@ -1,9 +1,11 @@
 export enum RentType {
-    POWERUP,
-    REX,
-    STAKE
+	POWERUP,
+	REX,
+	STAKE
 }
 
 export enum ResourceType {
-    RAM, CPU, NET
+	RAM,
+	CPU,
+	NET
 }
