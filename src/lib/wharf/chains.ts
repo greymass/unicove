@@ -54,7 +54,7 @@ export const chainConfigs: Record<string, ChainConfig> = {
 			robo: true,
 			timeseries: true,
 			rammarket: true,
-			rentrex: true,
+			rentrex: false,
 			powerup: true,
 			stakeresource: false,
 			staking: true
@@ -85,7 +85,7 @@ export const chainConfigs: Record<string, ChainConfig> = {
 			delphioracle: false,
 			lightapi: false,
 			rex: true,
-			robo: true,
+			robo: false,
 			timeseries: false,
 			rammarket: true,
 			rentrex: true,
