@@ -22,16 +22,20 @@
 	const destinations = $derived.by(() => {
 		const isAdvanced = advancedMode.value;
 
+		const features = [];
+
+		if (network.config.features.staking) {
+			features.push({ href: `/${network}/staking`, text: 'Staking' });
+		}
+
+		if (network.config.features.rammarket) {
+			features.push({ href: `/${network}/ram`, text: 'RAM' });
+		}
+
 		const items = [
 			{ href: `/${network}`, text: network.chain.name },
-			{ href: `/${network}/staking`, text: 'Staking' },
-			// { href: `/${network}/send`, text: 'Send' },
-			{ href: `/${network}/ram`, text: 'RAM' },
+			...features,
 			{ href: `/${network}/settings`, text: 'Settings' }
-			// { href: `/${network}/move`, text: 'Move' },
-			// { href: `/${network}/permissions`, text: 'Permissions' },
-			// { href: `/${network}/transactions`, text: 'Transactions' },
-			// { href: `/${network}/vote`, text: 'Vote' }
 		];
 
 		if (isAdvanced) {
@@ -41,7 +45,7 @@
 		if (context.account) {
 			items.splice(1, 0, {
 				href: `/${network}/account/${context.account.name}`,
-				text: context.account.name
+				text: 'My Account'
 			});
 		}
 
