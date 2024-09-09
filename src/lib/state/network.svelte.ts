@@ -100,7 +100,6 @@ export class NetworkState {
 			`/${chainMapper.toShortName(String(this.chain.id))}/api/network`
 		);
 		const json = await response.json();
-		this.loaded = true;
 		this.last_update = new Date();
 		this.tokenstate = json.tokenstate;
 
@@ -129,6 +128,8 @@ export class NetworkState {
 			console.log("SampleUsage Parse", error);
 			console.log(json);
 		}
+
+		this.loaded = true;
 	}
 
 	tokenToRex = (token: AssetType) => {
