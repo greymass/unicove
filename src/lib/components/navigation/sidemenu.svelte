@@ -5,11 +5,8 @@
 	import UnicoveLogo from '$lib/assets/unicovelogo.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
-	import { getSetting } from '$lib/state/settings.svelte';
 
 	const context = getContext<UnicoveContext>('state');
-
-	let advancedMode = getSetting('advanced-mode', false);
 
 	interface Props {
 		callbackFn?: (event: MouseEvent) => void;
@@ -20,8 +17,6 @@
 	let { callbackFn, network, class: className }: Props = $props();
 
 	const destinations = $derived.by(() => {
-		const isAdvanced = advancedMode.value;
-
 		const features = [];
 
 		if (network.config.features.staking) {
@@ -37,10 +32,6 @@
 			...features,
 			{ href: `/${network}/settings`, text: 'Settings' }
 		];
-
-		if (isAdvanced) {
-			items.splice(3, 0, { href: `/${network}/resources`, text: 'Resources' });
-		}
 
 		if (context.account) {
 			items.splice(1, 0, {
