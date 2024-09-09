@@ -10,7 +10,7 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
 
-	import { ResourceType } from './types.svelte';
+	import { ResourceType } from './types';
 	import { NetworkConfig, ResourceState } from './state.svelte';
 
 	const { data } = $props();

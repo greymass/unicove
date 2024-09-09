@@ -1,7 +1,7 @@
 import { Serializer, Asset, Name } from '@wharfkit/antelope';
-import { RentType, ResourceType } from '../../types.svelte';
+import { RentType, ResourceType } from '../../types';
 import type { ActionNames, ActionParams } from '$lib/wharf/contracts/system';
-import { getName, getUnit } from '../../utils.svelte';
+import { getName, getUnit } from '../../utils';
 
 
 export class RentState {

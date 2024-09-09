@@ -1,4 +1,4 @@
-import { ResourceType } from "./types.svelte";
+import { ResourceType } from "./types";
 
 export const calSize = (available: number) => {
     let size = 0;

@@ -1,7 +1,7 @@
 import type { ChainConfig } from "$lib/wharf/chains";
 import { Resource } from "@wharfkit/account";
-import { ResourceType } from "./types.svelte";
-import { calSize, calUsagePer, getName, getUnit } from "./utils.svelte";
+import { ResourceType } from "./types";
+import { calSize, calUsagePer, getName, getUnit } from "./utils";
 
 export class NetworkConfig {
     public hasBuyRAM = $state(false);

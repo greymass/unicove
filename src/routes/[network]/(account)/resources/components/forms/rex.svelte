@@ -6,7 +6,7 @@
 
 	import { RentState } from './state.svelte';
 
-	import { RentType, ResourceType } from '../../types.svelte';
+	import { RentType, ResourceType } from '../../types';
 
 	import { preventDefault } from '$lib/utils';
 

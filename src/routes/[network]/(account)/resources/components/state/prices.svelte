@@ -6,9 +6,9 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
 
-	import { ResourceType } from '../../types.svelte';
+	import { ResourceType } from '../../types';
 	import { NetworkConfig } from '../../state.svelte';
-	import { getName, getUnit } from '../../utils.svelte';
+	import { getName, getUnit } from '../../utils';
 
 	interface Props {
 		resource: ResourceType;

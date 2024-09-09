@@ -4,7 +4,7 @@
 	import Prices from '../components/state/prices.svelte';
 	import PageHeader from '$lib/components/pageheader.svelte';
 
-	import { ResourceType } from '../types.svelte';
+	import { ResourceType } from '../types';
 
 	const { data } = $props();
 

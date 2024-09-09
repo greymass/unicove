@@ -4,12 +4,12 @@
 	import Powerup from '../../components/forms/powerup.svelte';
 
 	import State from '../../components/state/state.svelte';
-	import { ResourceType } from '../../types.svelte';
+	import { ResourceType } from '../../types';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
 
-	import { calSize, calUsagePer } from '../../utils.svelte';
+	import { calSize, calUsagePer } from '../../utils';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -25,12 +25,6 @@
 <Stack>
 	<PageHeader title="Network Resource" />
 
-	<State
-		resource={ResourceType.CPU}
-		available="{availableSize}ms"
-		used="{usedSize}ms"
-		max="{maxSize}ms"
-		percentage={usagePerc}
-	/>
+	<State resource={ResourceType.CPU} />
 	<Powerup resourceType={ResourceType.CPU} />
 </Stack>

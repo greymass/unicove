@@ -1,11 +1,10 @@
 <script lang="ts">
 	import Circleprogress from '$lib/components/circleprogress.svelte';
-	import { ResourceType } from '../../types.svelte';
+	import { ResourceType } from '../../types';
 	import { ResourceState } from '../../state.svelte';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
-	import Resources from '../overview/resources.svelte';
 	import type { Resource } from '@wharfkit/account';
 
 	interface Props {
