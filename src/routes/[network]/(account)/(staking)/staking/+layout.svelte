@@ -34,21 +34,6 @@
 
 <Box>
 	<Stack>
-		<PageHeader title="EOS System Functions" />
-		<AccountNavigation
-			options={[
-				{
-					active: false,
-					href: `/${data.network}`,
-					text: 'Account'
-				},
-				{
-					active: false,
-					href: `/${data.network}/staking`,
-					text: 'Staking'
-				}
-			]}
-		/>
 		<Cluster class="justify-between ">
 			<PageHeader title="Staking" />
 			<PillGroup {options} class="mb-6" />
