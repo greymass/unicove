@@ -17,7 +17,7 @@
 	{#if context.account}
 		<Pageheader title="My Account" subtitle="An account overview" />
 		<Card>Information about the currently logged in account</Card>
-		<Button href="/{data.network}/account{context.account.name}">My Account</Button>
+		<Button href="/{data.network}/account/{context.account.name}">My Account</Button>
 	{:else}
 		<Pageheader title="Getting started" subtitle="Login or create an acount" />
 		<Card>Controls and information about either creating an account or logging in</Card>
