@@ -1,20 +1,23 @@
 import { Serializer, Asset, Name } from '@wharfkit/antelope';
+import { ChainDefinition } from '@wharfkit/common';
 import { RentType, ResourceType } from '../../types';
 import type { ActionNames, ActionParams } from '$lib/wharf/contracts/system';
 import { getName, getUnit } from '../../utils';
 
+const defaultName = Name.from('');
+const defaultSymbol = Asset.Symbol.from('0,UNKNOWN');
+const defaultQuantity = Asset.fromUnits(0, defaultSymbol);
 
 export class RentState {
+	public chain: ChainDefinition;
 	public resourceType: ResourceType;
 	public rentType: RentType;
 	public resourceName;
 	public resourceUnit;
 
-	public payer: Name = $state(Name.from(''));
-	public receiver: Name = $state(Name.from(''));
+	public payer: Name = $state(defaultName);
+	public receiver: Name = $state(defaultName);
 
-
-	public coreSymbol: Asset.Symbol = $state(Asset.Symbol.from('4,UNKNOWN'))
 	public balance: Asset | undefined = $state();
 	public amount: number | undefined = $state();
 	public pricePerUnit: Asset | undefined = $state();
@@ -25,46 +28,56 @@ export class RentState {
 				this.pricePerUnit.symbol
 			)
 		}
-		return Asset.from(0, this.coreSymbol);
+		return Asset.from(0, this.chain.systemToken!.symbol);
 	});
 
 	//set for staking
-	public amountValue: Asset = $state(Asset.from(0, Asset.Symbol.from('4,UNKNOWN')));
+	public quantity: Asset = $state(defaultQuantity);
 	//set for powerup
-	public frac: number = $state(0)
+	public frac: number = $state(0);
 
-	public error: string = $state('')
-	public txid: string = $state('')
+	//transaction error
+	public error: string = $state('');
 
 	public min: number | undefined = $derived(
 		this.balance ? Asset.fromUnits(1, this.balance.symbol).value : undefined
 	);
 	public max: number | undefined = $derived(this.balance ? this.balance.value : undefined);
 
-
 	public insufficientBalance: boolean = $derived.by(() => {
 		if (this.cost && this.balance)
-			return this.cost.value > this.balance.value
+			return this.cost.value > this.balance.value;
 		return false;
 	});
 
-	constructor(resource: ResourceType, rent: RentType) {
+	constructor(chain: ChainDefinition, resource: ResourceType, rent: RentType) {
+		this.chain = chain;
 		this.resourceType = resource;
 		this.rentType = rent;
 		this.resourceName = getName(resource);
 		this.resourceUnit = getUnit(resource)
+		this.quantity = Asset.fromUnits(0, this.chain.systemToken!.symbol);
 	}
 
 	reset() {
-		this.payer = Name.from('');
-		this.receiver = Name.from('');
+		this.payer = defaultName;
+		this.receiver = defaultName;
 		this.balance = undefined;
 		this.amount = undefined;
 		this.pricePerUnit = undefined;
-		this.amountValue = Asset.from(0, Asset.Symbol.from('4,UNKNOWN'));
+		this.quantity = Asset.from(0, this.chain.systemToken!.symbol);
 		this.frac = 0;
 		this.error = '';
-		this.txid = '';
+	}
+
+	resetBeforeTransction() {
+		this.error = '';
+	}
+
+	resetAfterTransction() {
+		this.quantity = Asset.from(0, this.chain.systemToken!.symbol);
+		this.amount = undefined;
+		this.error = '';
 	}
 
 	getActionName(): ActionNames {
@@ -96,11 +109,11 @@ export class RentState {
 					from: this.payer,
 					receiver: this.receiver,
 					loan_payment: this.cost,
-					loan_fund: Asset.fromUnits(0, this.coreSymbol)
+					loan_fund: Asset.fromUnits(0, this.chain.systemToken!.symbol)
 				}
 			case RentType.STAKE:
-				const cpuQuantity = this.resourceType == ResourceType.CPU ? this.amountValue : Asset.fromUnits(0, this.coreSymbol)
-				const netQuantity = this.resourceType == ResourceType.CPU ? Asset.fromUnits(0, this.coreSymbol) : this.amountValue;
+				const cpuQuantity = this.resourceType == ResourceType.CPU ? this.quantity : Asset.fromUnits(0, this.chain.systemToken!.symbol)
+				const netQuantity = this.resourceType == ResourceType.CPU ? Asset.fromUnits(0, this.chain.systemToken!.symbol) : this.quantity;
 				return {
 					from: this.payer,
 					receiver: this.receiver,
