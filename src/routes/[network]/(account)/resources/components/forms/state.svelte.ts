@@ -14,7 +14,7 @@ export class RentState {
 	public receiver: Name = $state(Name.from(''));
 
 
-	public coreSymbol: Asset.Symbol = $state(Asset.Symbol.from('4,EOS'))
+	public coreSymbol: Asset.Symbol = $state(Asset.Symbol.from('4,UNKNOWN'))
 	public balance: Asset | undefined = $state();
 	public amount: number | undefined = $state();
 	public pricePerUnit: Asset | undefined = $state();
@@ -29,7 +29,7 @@ export class RentState {
 	});
 
 	//set for staking
-	public amountValue: Asset = $state(Asset.from(0, Asset.Symbol.from('4,EOS')));
+	public amountValue: Asset = $state(Asset.from(0, Asset.Symbol.from('4,UNKNOWN')));
 	//set for powerup
 	public frac: number = $state(0)
 
@@ -61,7 +61,7 @@ export class RentState {
 		this.balance = undefined;
 		this.amount = undefined;
 		this.pricePerUnit = undefined;
-		this.amountValue = Asset.from(0, Asset.Symbol.from('4,EOS'));
+		this.amountValue = Asset.from(0, Asset.Symbol.from('4,UNKNOWN'));
 		this.frac = 0;
 		this.error = '';
 		this.txid = '';
