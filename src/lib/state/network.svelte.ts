@@ -1,6 +1,6 @@
-import { APIClient, Asset, FetchProvider, Int128, type AssetType } from '@wharfkit/antelope';
+import { APIClient, Asset, FetchProvider, Int128, Serializer, type AssetType } from '@wharfkit/antelope';
 import { Chains, ChainDefinition, TokenMeta } from '@wharfkit/common';
-import { RAMState, Resources, REXState } from '@wharfkit/resources';
+import { RAMState, Resources, REXState, PowerUpState, type SampleUsage } from '@wharfkit/resources';
 import { chainIdsToIndices } from '@wharfkit/session';
 import { snapOrigins } from '@wharfkit/wallet-plugin-metamask';
 
@@ -33,9 +33,29 @@ export class NetworkState {
 	public ramstate?: RAMState = $state();
 	public resources?: Resources = $state();
 	public rexstate?: REXState = $state();
+	public powerupstate?: PowerUpState = $state();
+	public sampledUsage?: SampleUsage = $state();
 	public tokenmeta?: TokenMeta[] = $state();
 	public tokenstate?: DelphiOracleTypes.datapoints = $state();
-	public rexprice = $derived.by(() => undefined);
+	public rexprice: Asset | undefined = $derived.by(() => {
+		if (this.rexstate && this.sampledUsage && this.chain.systemToken) {
+			return Asset.from(this.rexstate.price_per(this.sampledUsage, 30000), this.chain.systemToken.symbol)
+		}
+		return undefined;
+	});
+	public stakingprice: Asset | undefined = $derived.by(() => {
+		if (this.sampledUsage && this.chain.systemToken) {
+			const { account } = this.sampledUsage;
+			return Asset.fromUnits(Number(account.cpu_weight) / Number(account.cpu_limit.max), this.chain.systemToken.symbol)
+		}
+		return undefined;
+	});
+	public powerupprice: Asset | undefined = $derived.by(() => {
+		if (this.sampledUsage && this.powerupstate && this.chain.systemToken) {
+			return Asset.from(this.powerupstate.cpu.price_per_ms(this.sampledUsage, 1), this.chain.systemToken.symbol)
+		}
+		return undefined;
+	});
 	public tokenprice = $derived.by(() => {
 		return this.tokenstate ? Asset.fromUnits(this.tokenstate.median, '4,USD') : undefined;
 	});
@@ -80,16 +100,33 @@ export class NetworkState {
 			`/${chainMapper.toShortName(String(this.chain.id))}/api/network`
 		);
 		const json = await response.json();
-
 		this.loaded = true;
 		this.last_update = new Date();
 		this.tokenstate = json.tokenstate;
 
 		try {
 			this.ramstate = RAMState.from(json.ramstate);
+		} catch (error) {
+			console.log("RAMState parse", error);
+			console.log(json);
+		}
+		try {
 			this.rexstate = REXState.from(json.rexstate);
 		} catch (error) {
-			console.log(error);
+			console.log("REXState parse", error);
+			console.log(json);
+		}
+		try {
+			this.powerupstate = PowerUpState.from(json.powerupstate)
+		} catch (error) {
+			console.log("PowerUpState parse", error);
+			console.log(json);
+		}
+
+		try {
+			this.sampledUsage = Serializer.objectify(json.sampleUsage)
+		} catch (error) {
+			console.log("SampleUsage Parse", error);
 			console.log(json);
 		}
 	}
