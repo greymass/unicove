@@ -31,7 +31,7 @@ export async function GET({ fetch, params }) {
 	let sampleUsageIndex = -1;
 	let tokenStateIndex = -1;
 
-	if (network.config.features.buyram) {
+	if (network.config.features.rammarket) {
 		ramStateIndex = addRequest(requests, network.resources.v1.ram.get_state());
 	}
 	if (network.config.features.rex) {

@@ -24,7 +24,7 @@ export type FeatureType =
 	| 'rex'
 	| 'robo'
 	| 'timeseries'
-	| 'buyram'
+	| 'rammarket'
 	| 'powerup'
 	| 'rentrex'
 	| 'staking';
@@ -52,7 +52,7 @@ export const chainConfigs: Record<string, ChainConfig> = {
 			rex: true,
 			robo: true,
 			timeseries: true,
-			buyram: true,
+			rammarket: true,
 			rentrex: true,
 			powerup: true,
 			staking: true
@@ -68,7 +68,7 @@ export const chainConfigs: Record<string, ChainConfig> = {
 			rex: true,
 			robo: true,
 			timeseries: false,
-			buyram: true,
+			rammarket: true,
 			powerup: true,
 			rentrex: true,
 			staking: true
@@ -84,7 +84,7 @@ export const chainConfigs: Record<string, ChainConfig> = {
 			rex: true,
 			robo: true,
 			timeseries: false,
-			buyram: true,
+			rammarket: true,
 			rentrex: true,
 			powerup: true,
 			staking: true

@@ -11,7 +11,7 @@ export class NetworkConfig {
 
 	setConfig(config: ChainConfig | undefined) {
 		if (config) {
-			this.hasBuyRAM = config.features.buyram;
+			this.hasBuyRAM = config.features.rammarket;
 			this.hasPowerUp = config.features.powerup;
 			this.hasREX = config.features.rentrex;
 			this.hasStaking = config.features.staking;
