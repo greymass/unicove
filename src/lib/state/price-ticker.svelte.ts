@@ -10,6 +10,7 @@ export class TokenPriceTicker {
     private chainId = '';
 
     private interval?: NodeJS.Timeout;
+    private intervalQuery = false;
 
     public static INST = new TokenPriceTicker();
 
@@ -17,6 +18,7 @@ export class TokenPriceTicker {
     }
 
     setTokens(tokens: TokenIdentifier[], chain: ChainDefinition) {
+
         const symbols = new Map<string, Asset.Symbol>();
         const systemTokenKey = chain.systemToken ? this.makeTokenKey(chain.systemToken) : '';
         for (const token of tokens) {
@@ -25,26 +27,37 @@ export class TokenPriceTicker {
                 symbols.set(tokenKey, token.symbol);
             }
         }
-        this.symbols = symbols;
-        this.chainId = chainMapper.toShortName(String(chain.id));
+        const chaindId = chainMapper.toShortName(String(chain.id));
+        let changed = false;
+        if (!this.isMapEqual(symbols, this.symbols) || chaindId !== this.chainId) {
+            this.symbols = symbols;
+            this.chainId = chaindId;
+            changed = true;
+        }
+        if (changed && this.isVaid()) {
+            this.stopIntervalQueryInnter();
+            this.loadPrices();
+            if (this.intervalQuery)
+                this.startIntervalQuery();
+        }
     }
 
-    startLoad() {
-        if (!this.symbols.size || !this.chainId) {
-            this.stopInner();
+    startIntervalQuery() {
+        if (this.intervalQuery) {
             return;
         }
-        if (this.interval) {
+        this.intervalQuery = true;
+        if (!this.isVaid()) {
             return;
         }
-
-        this.startInner();
+        if (!this.interval) {
+            this.startIntervalQueryInnter();
+        }
     }
 
-    stopLoad() {
-        if (!this.interval)
-            return;
-        this.stopInner();
+    stopIntervalQuery() {
+        this.intervalQuery = false;
+        this.stopIntervalQueryInnter();
     }
 
     getPrice(token: TokenIdentifier) {
@@ -52,14 +65,15 @@ export class TokenPriceTicker {
         return this.prices[tokenKey];
     }
 
-    private startInner() {
-        this.loadPrices();
+    private startIntervalQueryInnter() {
         this.interval = setInterval(() => {
-            this.loadPrices();
+            if (this.intervalQuery) {
+                this.loadPrices();
+            }
         }, PRICE_UPDATE_INTERVAL)
     }
 
-    private stopInner() {
+    private stopIntervalQueryInnter() {
         if (this.interval) {
             clearInterval(this.interval);
             this.interval = undefined;
@@ -68,9 +82,9 @@ export class TokenPriceTicker {
 
     private loadPrices() {
         for (let [key, value] of this.symbols) {
+            console.log("....load: ", key)
             this.priceTicker(value).then(result => {
                 const price = Asset.fromUnits(result.median, '4,USD');
-                console.log("price = ", price)
                 this.prices[key] = price;
             }).catch(error => {
                 console.error(error)
@@ -87,6 +101,9 @@ export class TokenPriceTicker {
         return json.tokenstate;
     }
 
+    private isVaid() {
+        return !!this.symbols.size && !!this.chainId
+    }
 
     private makeTokenKey(token: TokenIdentifier): string {
         return [String(token.chain), String(token.contract), String(token.symbol.name)]
@@ -94,6 +111,20 @@ export class TokenPriceTicker {
             .replace(/[()]/g, '')
             .replace(/\s/g, '-')
             .toLowerCase()
+    }
+
+    private isMapEqual(map1: Map<string, Asset.Symbol>, map2: Map<string, Asset.Symbol>): boolean {
+        if (map1.size !== map2.size) {
+            return false;
+        }
+
+        for (const [key, value] of map1) {
+            if (!map2.has(key) || !value.equals(map2.get(key)!)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
 }

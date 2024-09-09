@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getContext, onDestroy } from 'svelte';
+	import { getContext, onMount } from 'svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import Pageheader from '$lib/components/pageheader.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
@@ -40,6 +40,14 @@
 					? TokenState.from(balance.staked, metadata, price)
 					: undefined;
 			}
+		} else {
+			totalSystemTokens = undefined;
+			tokenList.reset();
+		}
+	});
+
+	$effect(() => {
+		if (context.network && context.account) {
 			if (context.account.balances) {
 				tokenList.others = context.account.balances
 					.filter((item) => !item.metadata.id.equals(context.network!.chain.systemToken))
@@ -50,14 +58,7 @@
 			} else {
 				tokenList.others = [];
 			}
-		} else {
-			totalSystemTokens = undefined;
-			tokenList.reset();
 		}
-	});
-
-	onDestroy(() => {
-		tokenPriceTicker.stopLoad();
 	});
 
 	$effect(() => {
@@ -69,8 +70,14 @@
 				}
 			}
 			tokenPriceTicker.setTokens(tokens, context.network.chain);
-			tokenPriceTicker.startLoad();
 		}
+	});
+
+	onMount(() => {
+		tokenPriceTicker.startIntervalQuery();
+		return () => {
+			tokenPriceTicker.stopIntervalQuery();
+		};
 	});
 
 	let totalUsdValue: number = $derived.by(() => {
