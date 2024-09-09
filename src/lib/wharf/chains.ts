@@ -18,8 +18,16 @@ export interface ChainConfig {
 	timeseries_api?: string;
 }
 
-
-export type FeatureType = 'delphioracle' | 'lightapi' | 'rex' | 'robo' | 'timeseries' | 'buyram' | 'powerup' | 'rentrex' | 'staking';
+export type FeatureType =
+	| 'delphioracle'
+	| 'lightapi'
+	| 'rex'
+	| 'robo'
+	| 'timeseries'
+	| 'buyram'
+	| 'powerup'
+	| 'rentrex'
+	| 'staking';
 
 export type ChainShortName = (typeof chainShortNames)[number];
 export const chainIndiceMapping: Record<ChainShortName, ChainIndices> = {

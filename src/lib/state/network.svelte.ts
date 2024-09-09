@@ -1,4 +1,11 @@
-import { APIClient, Asset, FetchProvider, Int128, Serializer, type AssetType } from '@wharfkit/antelope';
+import {
+	APIClient,
+	Asset,
+	FetchProvider,
+	Int128,
+	Serializer,
+	type AssetType
+} from '@wharfkit/antelope';
 import { Chains, ChainDefinition, TokenMeta } from '@wharfkit/common';
 import { RAMState, Resources, REXState, PowerUpState, type SampleUsage } from '@wharfkit/resources';
 import { chainIdsToIndices } from '@wharfkit/session';
@@ -39,20 +46,29 @@ export class NetworkState {
 	public tokenstate?: DelphiOracleTypes.datapoints = $state();
 	public rexprice: Asset | undefined = $derived.by(() => {
 		if (this.rexstate && this.sampledUsage && this.chain.systemToken) {
-			return Asset.from(this.rexstate.price_per(this.sampledUsage, 30000), this.chain.systemToken.symbol)
+			return Asset.from(
+				this.rexstate.price_per(this.sampledUsage, 30000),
+				this.chain.systemToken.symbol
+			);
 		}
 		return undefined;
 	});
 	public stakingprice: Asset | undefined = $derived.by(() => {
 		if (this.sampledUsage && this.chain.systemToken) {
 			const { account } = this.sampledUsage;
-			return Asset.fromUnits(Number(account.cpu_weight) / Number(account.cpu_limit.max), this.chain.systemToken.symbol)
+			return Asset.fromUnits(
+				Number(account.cpu_weight) / Number(account.cpu_limit.max),
+				this.chain.systemToken.symbol
+			);
 		}
 		return undefined;
 	});
 	public powerupprice: Asset | undefined = $derived.by(() => {
 		if (this.sampledUsage && this.powerupstate && this.chain.systemToken) {
-			return Asset.from(this.powerupstate.cpu.price_per_ms(this.sampledUsage, 1), this.chain.systemToken.symbol)
+			return Asset.from(
+				this.powerupstate.cpu.price_per_ms(this.sampledUsage, 1),
+				this.chain.systemToken.symbol
+			);
 		}
 		return undefined;
 	});
@@ -106,26 +122,26 @@ export class NetworkState {
 		try {
 			this.ramstate = RAMState.from(json.ramstate);
 		} catch (error) {
-			console.log("RAMState parse", error);
+			console.log('RAMState parse', error);
 			console.log(json);
 		}
 		try {
 			this.rexstate = REXState.from(json.rexstate);
 		} catch (error) {
-			console.log("REXState parse", error);
+			console.log('REXState parse', error);
 			console.log(json);
 		}
 		try {
-			this.powerupstate = PowerUpState.from(json.powerupstate)
+			this.powerupstate = PowerUpState.from(json.powerupstate);
 		} catch (error) {
-			console.log("PowerUpState parse", error);
+			console.log('PowerUpState parse', error);
 			console.log(json);
 		}
 
 		try {
-			this.sampledUsage = Serializer.objectify(json.sampleUsage)
+			this.sampledUsage = Serializer.objectify(json.sampleUsage);
 		} catch (error) {
-			console.log("SampleUsage Parse", error);
+			console.log('SampleUsage Parse', error);
 			console.log(json);
 		}
 

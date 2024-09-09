@@ -26,7 +26,7 @@ export class RentState {
 			return Asset.from(
 				Number(this.pricePerUnit.value) * Number(this.amount),
 				this.pricePerUnit.symbol
-			)
+			);
 		}
 		return Asset.from(0, this.chain.systemToken!.symbol);
 	});
@@ -45,8 +45,7 @@ export class RentState {
 	public max: number | undefined = $derived(this.balance ? this.balance.value : undefined);
 
 	public insufficientBalance: boolean = $derived.by(() => {
-		if (this.cost && this.balance)
-			return this.cost.value > this.balance.value;
+		if (this.cost && this.balance) return this.cost.value > this.balance.value;
 		return false;
 	});
 
@@ -55,7 +54,7 @@ export class RentState {
 		this.resourceType = resource;
 		this.rentType = rent;
 		this.resourceName = getName(resource);
-		this.resourceUnit = getUnit(resource)
+		this.resourceUnit = getUnit(resource);
 		this.quantity = Asset.fromUnits(0, this.chain.systemToken!.symbol);
 	}
 
@@ -84,14 +83,14 @@ export class RentState {
 		switch (this.rentType) {
 			case RentType.REX:
 				if (this.resourceType == ResourceType.CPU) {
-					return "rentcpu"
+					return 'rentcpu';
 				} else {
-					return "rentnet"
+					return 'rentnet';
 				}
 			case RentType.STAKE:
-				return "delegatebw";
+				return 'delegatebw';
 			case RentType.POWERUP:
-				return "powerup";
+				return 'powerup';
 		}
 	}
 
@@ -99,7 +98,7 @@ export class RentState {
 		return {
 			owner: this.payer,
 			amount: this.cost
-		}
+		};
 	}
 
 	getActionData() {
@@ -110,19 +109,25 @@ export class RentState {
 					receiver: this.receiver,
 					loan_payment: this.cost,
 					loan_fund: Asset.fromUnits(0, this.chain.systemToken!.symbol)
-				}
+				};
 			case RentType.STAKE:
-				const cpuQuantity = this.resourceType == ResourceType.CPU ? this.quantity : Asset.fromUnits(0, this.chain.systemToken!.symbol)
-				const netQuantity = this.resourceType == ResourceType.CPU ? Asset.fromUnits(0, this.chain.systemToken!.symbol) : this.quantity;
+				const cpuQuantity =
+					this.resourceType == ResourceType.CPU
+						? this.quantity
+						: Asset.fromUnits(0, this.chain.systemToken!.symbol);
+				const netQuantity =
+					this.resourceType == ResourceType.CPU
+						? Asset.fromUnits(0, this.chain.systemToken!.symbol)
+						: this.quantity;
 				return {
 					from: this.payer,
 					receiver: this.receiver,
 					stake_cpu_quantity: cpuQuantity,
 					stake_net_quantity: netQuantity,
-					transfer: false,
-				}
+					transfer: false
+				};
 			case RentType.POWERUP:
-				const cpuFrac = this.resourceType == ResourceType.CPU ? this.frac : 0
+				const cpuFrac = this.resourceType == ResourceType.CPU ? this.frac : 0;
 				const netFrac = this.resourceType == ResourceType.CPU ? 0 : this.frac;
 				return {
 					payer: this.payer,
@@ -130,9 +135,8 @@ export class RentState {
 					days: 1,
 					net_frac: netFrac,
 					cpu_frac: cpuFrac,
-					max_payment: this.cost,
-				}
+					max_payment: this.cost
+				};
 		}
-
 	}
 }
