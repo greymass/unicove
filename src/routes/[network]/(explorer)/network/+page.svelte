@@ -5,7 +5,6 @@
 	import * as Table from '$lib/components/table';
 	import { Card, Stack } from '$lib/components/layout';
 	import { API } from '@wharfkit/antelope';
-	import Button from '$lib/components/button/button.svelte';
 	import Pageheader from '$lib/components/pageheader.svelte';
 
 	const { data } = $props();
