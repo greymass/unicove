@@ -27,6 +27,7 @@ export type FeatureType =
 	| 'rammarket'
 	| 'powerup'
 	| 'rentrex'
+	| 'stakeresource'
 	| 'staking';
 
 export type ChainShortName = (typeof chainShortNames)[number];
@@ -55,6 +56,7 @@ export const chainConfigs: Record<string, ChainConfig> = {
 			rammarket: true,
 			rentrex: true,
 			powerup: true,
+			stakeresource: false,
 			staking: true
 		},
 		symbol: '4,EOS'
@@ -71,6 +73,7 @@ export const chainConfigs: Record<string, ChainConfig> = {
 			rammarket: true,
 			powerup: true,
 			rentrex: true,
+			stakeresource: true,
 			staking: true
 		},
 		symbol: '4,EOS'
@@ -87,6 +90,7 @@ export const chainConfigs: Record<string, ChainConfig> = {
 			rammarket: true,
 			rentrex: true,
 			powerup: true,
+			stakeresource: true,
 			staking: true
 		},
 		symbol: '4,EOS'
