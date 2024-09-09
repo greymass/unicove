@@ -7,9 +7,6 @@ export class TokenState {
     public readonly tokenMeta?: TokenMeta
     public readonly price?: Asset;
     public readonly value?: Asset;
-    public sendUrl: string = $derived(this.tokenMeta
-        ? `${String(this.tokenMeta.id.contract)}/${this.tokenMeta.id.symbol.name.toLowerCase()}`
-        : '')
 
     constructor(asset: Asset, tokenMeta?: TokenMeta, price?: Asset, value?: Asset) {
         this.asset = asset;
