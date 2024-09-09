@@ -24,11 +24,6 @@
 		})}
 	/>
 	<table>
-		<thead>
-			{#each struct.fields as field}
-				<th>{field.name}</th>
-			{/each}
-		</thead>
 		<tbody>
 			{#each data.rows as row}
 				<tr>
