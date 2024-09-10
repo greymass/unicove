@@ -13,6 +13,7 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
 	import { WithdrawState } from './state.svelte';
+	import UnstakingBalances from '../unstaking.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
@@ -43,35 +44,7 @@
 			>
 		</Switcher>
 		<Switcher>
-			<Card title="Unstaking Balances">
-				<table class="table-auto">
-					<thead class="border-b-2 border-shark-100/10">
-						<tr class="caption font-medium">
-							<th class="p-4 text-left">Amount</th>
-							<th class="p-4 text-right">Date available</th>
-						</tr>
-					</thead>
-					<tbody>
-						{#each withdrawState.unstaking as record}
-							{#if !record.savings}
-								<tr>
-									<td class="p-4">{record.balance}</td>
-									<td class="p-4 text-right"
-										>{record.date
-											? record.date.toLocaleDateString(undefined, {
-													weekday: 'long',
-													year: 'numeric',
-													month: 'long',
-													day: 'numeric'
-												})
-											: '--'}
-									</td></tr
-								>
-							{/if}
-						{/each}
-					</tbody>
-				</table>
-			</Card>
+			<UnstakingBalances records={withdrawState.unstaking} />
 		</Switcher>
 	</Stack>
 {/if}
