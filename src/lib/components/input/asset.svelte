@@ -42,7 +42,7 @@
 	let number = $derived(input && satisfiesNumber ? Big(input) : Big(0));
 
 	/** The number of decimal places used in the string input */
-	const decimals = $derived(String(number).split('.')[1]?.length || 0);
+	const decimals = $derived(number.toFixed().split('.')[1]?.length || 0);
 
 	/** The symbol of the asset */
 	let symbol: Asset.Symbol = $state(_value.symbol);
