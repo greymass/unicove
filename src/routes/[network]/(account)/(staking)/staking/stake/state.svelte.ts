@@ -25,14 +25,14 @@ export class StakeState {
 	public txid: string = $state('');
 
 	public stakable: Asset = $derived(
-		this.account && this.network ? getStakableBalance(this.network!, this.account) : defaultQuantity
+		this.account && this.network ? getStakableBalance(this.network, this.account) : defaultQuantity
 	);
-	public apy: string = $derived(getAPY(this.network));
+	public apy: string = $derived(this.network ? getAPY(this.network) : '0');
 	public estimateYield: Asset = $derived(
 		this.network
 			? Asset.from(
 					(this.assetValue.value * parseFloat(this.apy)) / 100,
-					this.network!.chain.systemToken!.symbol
+					this.network.chain.systemToken!.symbol
 				)
 			: defaultQuantity
 	);
@@ -42,7 +42,7 @@ export class StakeState {
 	}
 
 	get zeroValue() {
-		return Asset.from(0, this.network!.chain.systemToken!.symbol);
+		return this.network ? Asset.from(0, this.network.chain.systemToken!.symbol) : defaultQuantity;
 	}
 
 	sync(network: NetworkState, account: AccountState, wharf: WharfState) {
@@ -61,15 +61,17 @@ export class StakeState {
 			this.txid = '';
 		}
 
-		if (this.assetValue.symbol !== this.network!.chain.systemToken!.symbol) {
+		if (this.network && this.assetValue.symbol !== this.network.chain.systemToken!.symbol) {
 			this.input?.set(this.zeroValue);
 		}
 		if (wharf !== this.wharf) {
 			this.wharf = wharf;
 		}
 
-		this.minValue = Asset.fromUnits(1, this.network!.chain.systemToken!.symbol).value;
-		this.maxValue = this.account ? getStakableBalance(this.network!, this.account).value : 0;
+		if (this.network) {
+			this.minValue = Asset.fromUnits(1, this.network.chain.systemToken!.symbol).value;
+			this.maxValue = this.account ? getStakableBalance(this.network, this.account).value : 0;
+		}
 	}
 
 	setMaxValue() {
@@ -77,17 +79,21 @@ export class StakeState {
 	}
 
 	async transact() {
-		const deposit = this.network!.contracts.system.action('deposit', {
-			owner: this.account!.name!,
-			amount: this.assetValue!
-		});
-		const buyrex = this.network!.contracts.system.action('buyrex', {
-			from: this.account!.name!,
-			amount: this.assetValue!
-		});
-
 		try {
-			const result = await this.wharf!.transact({
+			if (!this.network || !this.account || !this.account.name || !this.wharf || !this.assetValue) {
+				throw new Error("Can't sign, data not ready");
+			}
+
+			const deposit = this.network.contracts.system.action('deposit', {
+				owner: this.account.name,
+				amount: this.assetValue
+			});
+			const buyrex = this.network.contracts.system.action('buyrex', {
+				from: this.account.name,
+				amount: this.assetValue
+			});
+
+			const result = await this.wharf.transact({
 				actions: [deposit, buyrex]
 			});
 
