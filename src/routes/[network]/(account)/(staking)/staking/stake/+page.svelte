@@ -6,6 +6,7 @@
 	import AssetInput from '$lib/components/input/asset.svelte';
 	import Button from '$lib/components/button/button.svelte';
 	import Label from '$lib/components/input/label.svelte';
+	import Transaction from '$lib/components/transaction.svelte';
 	import * as m from '$lib/paraglide/messages.js';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext, untrack } from 'svelte';
@@ -22,15 +23,7 @@
 </script>
 
 {#if stakeState.txid}
-	<div class="space-y-4">
-		<h2 class="h2">Transaction Complete</h2>
-		<h3 class="h3">success</h3>
-		<p>
-			<a href="/{data.network}/transaction/{stakeState.txid}">
-				{stakeState.txid}
-			</a>
-		</p>
-	</div>
+	<Transaction network={data.network} transactionId={stakeState.txid} />
 {:else if stakeState.error}
 	<div>
 		<h2 class="h2">Transaction Error</h2>
