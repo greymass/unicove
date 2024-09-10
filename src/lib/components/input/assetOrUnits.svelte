@@ -4,8 +4,8 @@
 	import AssetInput from './asset.svelte';
 	import TextInput from './text.svelte';
 	import Button from '../button/button.svelte';
-	import Cluster from '../layout/cluster.svelte';
-	import Stack from '../layout/stack.svelte';
+	import Cluster from '$lib/components/layout/cluster.svelte';
+	import Stack from '$lib/components/layout/stack.svelte';
 
 	interface AssetOrUnitsProps extends ComponentProps<TextInput> {
 		assetValue: Asset;

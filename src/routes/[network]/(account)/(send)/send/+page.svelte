@@ -13,7 +13,7 @@
 	import Label from '$lib/components/input/label.svelte';
 	import NameInput from '$lib/components/input/name.svelte';
 	import Progress from '$lib/components/progress.svelte';
-	import SummarySend from '$lib/components/summary/send.svelte';
+	import SummarySend from '$lib/components/summary/eosio.token/transfer.svelte';
 	import TextInput from '$lib/components/input/text.svelte';
 	import TokenSelect from '$lib/components/select/token.svelte';
 	import PageHeader from '$lib/components/pageheader.svelte';
@@ -394,7 +394,10 @@
 			{/if}
 		</fieldset>
 
-		<SummarySend action={{ data: state }} class={f.current !== 'memo' ? 'hidden' : undefined} />
+		<SummarySend
+			action={{ data: state.toJSON() }}
+			class={f.current !== 'memo' ? 'hidden' : undefined}
+		/>
 
 		<fieldset class="grid gap-2" class:hidden={f.current !== 'memo'}>
 			<Label for="memo-input">Memo</Label>

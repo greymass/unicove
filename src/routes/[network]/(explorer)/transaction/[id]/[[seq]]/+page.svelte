@@ -3,12 +3,12 @@
 	import * as m from '$lib/paraglide/messages.js';
 	import Code from '$lib/components/code.svelte';
 
-	import SendSummary from '$lib/components/summary/send.svelte';
-	import DepositSummary from '$lib/components/summary/deposit.svelte';
-	import WithdrawSummary from '$lib/components/summary/withdraw.svelte';
-	import BuyREXSummary from '$lib/components/summary/buyrex.svelte';
-	import SellREXSummary from '$lib/components/summary/sellrex.svelte';
-	import MvfrsavingsSummary from '$lib/components/summary/mvfrsavings.svelte';
+	import SendSummary from '$lib/components/summary/eosio.token/transfer.svelte';
+	import DepositSummary from '$lib/components/summary/eosio/deposit.svelte';
+	import WithdrawSummary from '$lib/components/summary/eosio/withdraw.svelte';
+	import BuyREXSummary from '$lib/components/summary/eosio/buyrex.svelte';
+	import SellREXSummary from '$lib/components/summary/eosio/sellrex.svelte';
+	import MvfrsavingsSummary from '$lib/components/summary/eosio/mvfrsavings.svelte';
 
 	const summaryMap = {
 		'eosio.token': {

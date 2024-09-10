@@ -9,7 +9,7 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
 
-	import { Stack } from '../layout';
+	import { Stack } from '$lib/components/layout';
 	import Button from '../button/button.svelte';
 
 	const context = getContext<UnicoveContext>('state');

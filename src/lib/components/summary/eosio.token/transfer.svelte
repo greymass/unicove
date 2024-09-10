@@ -1,17 +1,12 @@
 <script lang="ts">
 	import { formatCurrency } from '$lib/i18n';
-	import type { Asset, Name } from '@wharfkit/antelope';
-	import Button from '../button/button.svelte';
-	import { Card, Stack, Switcher } from '../layout';
+	import type { Asset } from '@wharfkit/antelope';
+	import { Card, Stack, Switcher } from '$lib/components/layout';
+	import * as TokenContract from '$lib/wharf/contracts/token';
 
 	interface SendProps {
 		action: {
-			data: {
-				from: Name;
-				to: Name;
-				quantity: Asset;
-				memo: string;
-			};
+			data: TokenContract.Types.transfer;
 		};
 		class?: string;
 		value?: Asset;
