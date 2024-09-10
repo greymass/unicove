@@ -1,14 +1,10 @@
 <script lang="ts">
 	import { Asset, Int64 } from '@wharfkit/session';
 	import Card from '$lib/components/layout/box/card.svelte';
-
+	import RAM from '$lib/components/elements/ram.svelte';
 	import { calculateValue } from '$lib/state/client/account.svelte';
 
 	const { data } = $props();
-
-	function bytesToKB(bytes: number | Int64 | undefined): string {
-		return ((Number(bytes) || 0) / 1000).toFixed(2);
-	}
 </script>
 
 {#if data.account}
@@ -17,7 +13,7 @@
 		<Card class="rounded-lg bg-gray-600 p-4 shadow">
 			<h4 class="mb-2 text-lg font-semibold">Total:</h4>
 			<ul class="space-y-2">
-				<li>{bytesToKB(data.account.ram?.max)} KB</li>
+				<li><RAM bytes={Number(data.account.ram?.max || 0)} /></li>
 				{#if data.account.network.ramprice}
 					<li>
 						{calculateValue(
@@ -39,7 +35,7 @@
 		<Card class="rounded-lg bg-gray-600 p-4 shadow">
 			<h4 class="mb-2 text-lg font-semibold">Available:</h4>
 			<ul class="space-y-2">
-				<li>{bytesToKB(data.account.ram?.available)} KB</li>
+				<li><RAM bytes={Number(data.account.ram?.available || 0)} /></li>
 				{#if data.account.network.ramprice}
 					<li>
 						{calculateValue(
@@ -61,7 +57,7 @@
 		<Card class="rounded-lg bg-gray-600 p-4 shadow">
 			<h4 class="mb-2 text-lg font-semibold">Used:</h4>
 			<ul class="space-y-2">
-				<li>{bytesToKB(data.account.ram?.used)} KB</li>
+				<li><RAM bytes={Number(data.account.ram?.used || 0)} /></li>
 				{#if data.account.network.ramprice}
 					<li>
 						{calculateValue(
