@@ -76,10 +76,13 @@
 	grid
 	h-full
 	w-svw
+	max-w-screen-xl
 	grid-cols-[16px_auto_auto_16px]
 	grid-rows-[16px_auto_auto_16px]
+	bg-shark-950
 	md:h-auto
-	md:grid-cols-[auto_minmax(0,1fr)_auto_auto_0]
+	md:min-h-svh
+	md:grid-cols-[auto_minmax(0,1fr)_auto_auto_32px]
 	md:grid-rows-[16px_minmax(0,1fr)]
 	md:gap-x-4
 	"
