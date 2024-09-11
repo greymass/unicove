@@ -1,10 +1,9 @@
 <script lang="ts">
+	import RamPriceHistory from '$lib/components/chart/rampricehistory.svelte';
 	const { data } = $props();
 </script>
 
-<h1>RAM</h1>
-
-<h2>Current RAM Price</h2>
+<h3>Current RAM Price</h3>
 {#if data.network && data.network.ramstate}
 	<p>EOS: {String(data.network.ramstate.price_per_kb(1))}</p>
 	{#if data.network.ramprice && data.network.ramprice.usd}
@@ -16,7 +15,8 @@
 
 {#if data.network.config.features.timeseries}
 	{#if data.historicalPrices.length > 0}
-		<h2>Historical RAM Prices</h2>
+		<h3>Historical RAM Prices</h3>
+		<RamPriceHistory data={data.historicalPrices} />
 		<table class="float-left max-w-lg border-collapse">
 			<thead>
 				<tr class="bg-gray-60">
