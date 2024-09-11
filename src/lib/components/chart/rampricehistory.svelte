@@ -36,13 +36,13 @@
 		return data.filter(({ date }) => dayjs(date).isAfter(rangeStartDate));
 	});
 
-	let currentPoint = $derived(dataRange[dataRange.length - 1]);
+	let currentPoint = $derived(dataRange[0]);
 	let currentPrice = $derived(String(currentPoint.value));
 
 	let percentChange = $derived.by(() => {
 		const current = Number(currentPoint.value.quantity);
-		const initial = Number(dataRange[0].value.quantity);
-		return (((initial - current) / initial) * 100).toFixed(2) + '%';
+		const initial = Number(dataRange[dataRange.length - 1].value.quantity);
+		return (((current - initial) / current) * 100).toFixed(2) + '%';
 	});
 
 	const labels = $derived(dataRange.map(({ date }) => String(date.toLocaleDateString())));
