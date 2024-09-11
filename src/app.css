@@ -3,13 +3,12 @@
 @tailwind utilities;
 
 @layer components {
-
 	html {
 		@apply h-full bg-black text-white;
 	}
 
 	body {
-		@apply min-h-svh h-auto bg-shark-950/50 text-white;
+		@apply h-auto min-h-svh bg-shark-950/50 text-white;
 	}
 
 	/* Headings are defined by class instead of tag to preserve semantic html independent of style */
@@ -60,7 +59,7 @@
 		@apply flex flex-wrap gap-4;
 	}
 
-	.layout-switcher>* {
+	.layout-switcher > * {
 		flex-grow: 1;
 		flex-basis: calc((var(--switcher-threshold) - 100%) * 999);
 	}
