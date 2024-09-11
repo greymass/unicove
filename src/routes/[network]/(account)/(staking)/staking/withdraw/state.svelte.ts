@@ -81,11 +81,11 @@ export class WithdrawState {
 					})
 				);
 			}
-			if (this.withdrawable) {
+			if (this.total) {
 				actions.push(
 					this.network.contracts.system.action('withdraw', {
 						owner: this.account.name,
-						amount: this.withdrawable
+						amount: this.total
 					})
 				);
 			}
