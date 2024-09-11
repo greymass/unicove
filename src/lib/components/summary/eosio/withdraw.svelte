@@ -1,25 +1,22 @@
 <script lang="ts">
 	import { formatCurrency } from '$lib/i18n';
-	import type { Asset, Name } from '@wharfkit/antelope';
-	import Button from '../button/button.svelte';
-	import { Card, Stack, Switcher } from '../layout';
+	import type { Asset } from '@wharfkit/antelope';
+	import { Card, Stack, Switcher } from '$lib/components/layout';
+	import * as SystemContract from '$lib/wharf/contracts/system';
 
-	interface StakeProps {
+	interface WithdrawProps {
 		action: {
-			data: {
-				owner: Name;
-				amount: Asset;
-			};
+			data: SystemContract.Types.withdraw;
 		};
 		class?: string;
 		value?: Asset;
 	}
 
-	const { action, class: className = '', value, ...props }: StakeProps = $props();
+	const { action, class: className = '', value, ...props }: WithdrawProps = $props();
 </script>
 
 <Card class="gap-5 text-center {className}">
-	<h3 class="h3">Deposit to REX</h3>
+	<h3 class="h3">Withdraw from REX</h3>
 	<Switcher threshold="20rem">
 		<Stack class="gap-0">
 			<p class="caption">owner</p>

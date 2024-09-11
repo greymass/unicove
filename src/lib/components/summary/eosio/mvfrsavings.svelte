@@ -1,15 +1,12 @@
 <script lang="ts">
 	import { formatCurrency } from '$lib/i18n';
-	import type { Asset, Name } from '@wharfkit/antelope';
-	import Button from '../button/button.svelte';
-	import { Card, Stack, Switcher } from '../layout';
+	import type { Asset } from '@wharfkit/antelope';
+	import { Card, Stack, Switcher } from '$lib/components/layout';
+	import * as SystemContract from '$lib/wharf/contracts/system';
 
 	interface MvfrsavingsProps {
 		action: {
-			data: {
-				owner: Name;
-				rex: Asset;
-			};
+			data: SystemContract.Types.mvfrsavings;
 		};
 		class?: string;
 		value?: Asset;
