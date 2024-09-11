@@ -4,7 +4,8 @@ import type { NetworkState } from '$lib/state/network.svelte';
 import type { WharfState } from '$lib/state/client/wharf.svelte';
 import AssetInput from '$lib/components/input/asset.svelte';
 
-import { defaultQuantity, getUnstakableBalance } from '../utils';
+import type { UnstakingRecord } from '../utils';
+import { defaultQuantity, getUnstakableBalance, getUnstakingBalances } from '../utils';
 
 export class UnstakeState {
 	public input: AssetInput | undefined = $state();
@@ -24,9 +25,12 @@ export class UnstakeState {
 	public error: string = $state('');
 	public txid: string = $state('');
 
+	public unstaking: Array<UnstakingRecord> = $derived(
+		this.account && this.network ? getUnstakingBalances(this.network, this.account) : []
+	);
 	public unstakable: Asset = $derived(
 		this.account && this.network
-			? getUnstakableBalance(this.network, this.account)
+			? getUnstakableBalance(this.network, this.account, this.unstaking)
 			: defaultQuantity
 	);
 
@@ -63,7 +67,7 @@ export class UnstakeState {
 
 		if (this.network) {
 			this.minValue = Asset.fromUnits(1, this.network.chain.systemToken!.symbol).value;
-			this.maxValue = this.account ? getUnstakableBalance(this.network, this.account).value : 0;
+			this.maxValue = this.unstakable.value;
 		}
 	}
 

@@ -26,17 +26,19 @@ export async function GET({ fetch, params }) {
 		Promise<API.v1.AccountObject>,
 		Promise<SystemContract.Types.delegated_bandwidth[]>,
 		Promise<SystemContract.Types.rex_balance>,
+		Promise<SystemContract.Types.rex_fund>,
 		Promise<LightAPIBalanceRow[]>
 	] = [
 		network.client.v1.chain.get_account(params.name),
 		systemContract.table('delband').all({ scope: params.name }),
 		systemContract.table('rexbal').get(params.name),
+		systemContract.table('rexfund').get(params.name),
 		loadBalances(network, params.name, fetch)
 	];
 
 	try {
 		const headers = getCacheHeaders(5);
-		const [account_data, delegated, rex, balances] = await Promise.all(requests);
+		const [account_data, delegated, rexbal, rexfund, balances] = await Promise.all(requests);
 
 		// If no response from the light API, add the core liquid balance as a default
 		if (!balances.length && chain.systemToken) {
@@ -54,7 +56,8 @@ export async function GET({ fetch, params }) {
 				account_data,
 				balances,
 				delegated,
-				rex
+				rex: rexbal,
+				rexfund: rexfund
 			},
 			{ headers }
 		);
