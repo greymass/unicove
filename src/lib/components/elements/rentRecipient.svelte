@@ -19,7 +19,7 @@
 	}: Props = $props();
 
 	let recipient = $state(Name.from(''));
-
+	let recipientValid = $state(true);
 	let recipientInput: NameInput | undefined = $state();
 
 	let editMode = $state(false);
@@ -27,17 +27,16 @@
 		editMode = !editMode;
 	}
 
-	let recipientValid = $state(true);
-
 	$effect(() => {
-		valid = recipientValid;
 		if (editMode) {
+			valid = recipientValid;
 			if (valid) {
 				_receiver = recipient;
 			} else {
 				_receiver = Name.from('');
 			}
 		} else {
+			valid = true;
 			_receiver = payer;
 		}
 	});
