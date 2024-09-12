@@ -4,6 +4,8 @@
 	import Label from '$lib/components/input/label.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
 	import Transaction from '$lib/components/transaction.svelte';
+	import RentRecipient from '$lib/components/elements/rentRecipient.svelte';
+	import { preventDefault } from '$lib/utils';
 
 	import { Checksum256 } from '@wharfkit/antelope';
 
@@ -21,6 +23,7 @@
 			if (context.account.name) {
 				rentState.payer = context.account.name;
 				rentState.receiver = context.account.name;
+				rentRecipient?.set(String(context.account.name));
 			}
 			rentState.balance = context.account.balance ? context.account.balance.liquid : undefined;
 			rentState.pricePerUnit = context.network.rexprice;
@@ -37,6 +40,9 @@
 	const rentState: RentState = $state(new RentState(network.chain, resourceType, RentType.REX));
 
 	let resourceNumberInput: NumberInput | undefined = $state();
+	let rentRecipient: RentRecipient | undefined = $state();
+	let recipienteValid = $state(true);
+
 	let transactionId: Checksum256 | undefined = $state();
 
 	function handleRent() {
@@ -80,19 +86,27 @@
 	<Transaction {network} {transactionId} />
 {/if}
 
-<form on:submit|preventDefault={handleRent}>
+<form onsubmit={preventDefault(handleRent)}>
 	<Stack class="gap-3">
-		<Label for="resourceNumberInput">Amount of {rentState.resourceUnit} to rent from REX.</Label>
-		<NumberInput
-			id="resourceNumberInput"
-			placeholder="number of {rentState.resourceUnit}"
-			bind:value={rentState.amount}
-			bind:this={resourceNumberInput}
-			autofocus
+		<RentRecipient
+			bind:this={rentRecipient}
+			bind:value={rentState.receiver}
+			bind:valid={recipienteValid}
 		/>
-		{#if rentState.insufficientBalance}
-			<p class="text-red-500">Insufficient balance. Please enter a smaller amount.</p>
-		{/if}
+		<fieldset class="grid gap-2">
+			<Label for="resourceNumberInput">Amount of {rentState.resourceUnit} to rent from REX.</Label>
+			<NumberInput
+				id="resourceNumberInput"
+				placeholder="number of {rentState.resourceUnit}"
+				bind:value={rentState.amount}
+				bind:this={resourceNumberInput}
+				autofocus
+			/>
+			{#if rentState.insufficientBalance}
+				<p class="text-red-500">Insufficient balance. Please enter a smaller amount.</p>
+			{/if}
+		</fieldset>
+
 		{#if rentState.balance}
 			<p>
 				Available:{rentState.balance}
@@ -109,7 +123,7 @@
 				Error: {rentState.error}
 			</p>
 		{/if}
-		<Button type="submit" class="mt-4 w-full">
+		<Button type="submit" class="mt-4 w-full" disabled={!recipienteValid || !rentState.valid()}>
 			{#if rentState.amount && rentState.cost}
 				Rent {rentState.amount}{rentState.resourceUnit} for {rentState.cost}
 			{:else}

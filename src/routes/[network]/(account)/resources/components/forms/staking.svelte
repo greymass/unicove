@@ -4,6 +4,8 @@
 	import Label from '$lib/components/input/label.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
 	import Transaction from '$lib/components/transaction.svelte';
+	import RentRecipient from '$lib/components/elements/rentRecipient.svelte';
+	import { preventDefault } from '$lib/utils';
 
 	import { Checksum256, Asset } from '@wharfkit/antelope';
 
@@ -16,12 +18,15 @@
 
 	const context = getContext<UnicoveContext>('state');
 	let quantityInput: AssetInput | undefined = $state();
+	let rentRecipient: RentRecipient | undefined = $state();
+	let recipienteValid = $state(true);
 
 	$effect(() => {
 		if (context.account && context.network) {
 			if (context.account.name) {
 				rentState.payer = context.account.name;
 				rentState.receiver = context.account.name;
+				rentRecipient?.set(String(context.account.name));
 			}
 			rentState.balance = context.account.balance ? context.account.balance.liquid : undefined;
 			rentState.pricePerUnit = context.network.stakingprice;
@@ -82,33 +87,35 @@
 	<Transaction {network} {transactionId} />
 {/if}
 
-<form on:submit|preventDefault={handleRent}>
+<form onsubmit={preventDefault(handleRent)}>
 	<Stack class="gap-3">
-		<Label for="assetInput"
-			>Amount of {rentState.chain.systemToken!.symbol.code} to stake as {rentState.resourceName}</Label
-		>
-
-		<AssetInput
-			placeholder="number of tokens"
-			bind:this={quantityInput}
-			bind:value={rentState.quantity}
-			bind:valid={assetValid}
-			bind:validPrecision={assetValidPrecision}
-			bind:validMinimum={assetValidMinimum}
-			bind:validMaximum={assetValidMaximum}
-			min={rentState.min}
-			max={rentState.max}
+		<RentRecipient
+			bind:this={rentRecipient}
+			bind:value={rentState.receiver}
+			bind:valid={recipienteValid}
 		/>
-		{#if !assetValidPrecision}
-			<p class="text-red-500">Invalid number, too many decimal places.</p>
-		{/if}
-		<!--Todo: refactor after asset fix-->
-		<!-- {#if !assetValidMinimum}
-			<p class="text-red-500">Amount is below the minimum value</p>
-		{/if} -->
-		{#if !assetValidMaximum}
-			<p class="text-red-500">Amount exceeds available balance.</p>
-		{/if}
+		<fieldset class="grid gap-2">
+			<Label for="assetInput"
+				>Amount of {rentState.chain.systemToken!.symbol.code} to stake as {rentState.resourceName}</Label
+			>
+			<AssetInput
+				placeholder="number of tokens"
+				bind:this={quantityInput}
+				bind:value={rentState.quantity}
+				bind:valid={assetValid}
+				bind:validPrecision={assetValidPrecision}
+				bind:validMinimum={assetValidMinimum}
+				bind:validMaximum={assetValidMaximum}
+				min={rentState.min}
+				max={rentState.max}
+			/>
+			{#if !assetValidPrecision}
+				<p class="text-red-500">Invalid number, too many decimal places.</p>
+			{/if}
+			{#if !assetValidMaximum}
+				<p class="text-red-500">Amount exceeds available balance.</p>
+			{/if}
+		</fieldset>
 
 		{#if rentState.balance}
 			<p>
@@ -129,6 +136,8 @@
 				Error: {rentState.error}
 			</p>
 		{/if}
-		<Button type="submit" class="mt-4 w-full" disabled={!assetValid}>Stake Tokens</Button>
+		<Button type="submit" class="mt-4 w-full" disabled={!recipienteValid || !assetValid}
+			>Stake Tokens</Button
+		>
 	</Stack>
 </form>

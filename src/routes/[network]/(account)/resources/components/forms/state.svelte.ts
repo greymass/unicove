@@ -58,6 +58,10 @@ export class RentState {
 		this.quantity = Asset.fromUnits(0, this.chain.systemToken!.symbol);
 	}
 
+	valid() {
+		return this.cost.value > 0 && !this.insufficientBalance;
+	}
+
 	reset() {
 		this.payer = defaultName;
 		this.receiver = defaultName;
