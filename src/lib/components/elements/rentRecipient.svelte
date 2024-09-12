@@ -6,50 +6,59 @@
 
 	interface Props {
 		valid?: boolean;
-		value: Name;
+		payer: Name;
+		receiver: Name;
 		debug?: boolean;
 	}
 
-	let { valid = $bindable(false), value: _value = $bindable(), debug = false }: Props = $props();
+	let {
+		valid = $bindable(false),
+		payer = $bindable(),
+		receiver: _receiver = $bindable(),
+		debug = false
+	}: Props = $props();
+
+	let recipient = $state(Name.from(''));
 
 	let recipientInput: NameInput | undefined = $state();
 
-	let nameEditing = $state(false);
+	let editMode = $state(false);
 	function switchNameEdit() {
-		nameEditing = !nameEditing;
+		editMode = !editMode;
 	}
 
 	let recipientValid = $state(true);
 
-	let initialAccount = '';
-	/** Set the inital name from  parent */
-	export function set(name: string) {
-		if (initialAccount !== name) {
-			initialAccount = name;
-		}
-	}
-
 	$effect(() => {
 		valid = recipientValid;
+		if (editMode) {
+			if (valid) {
+				_receiver = recipient;
+			} else {
+				_receiver = Name.from('');
+			}
+		} else {
+			_receiver = payer;
+		}
 	});
 
 	$effect(() => {
-		recipientInput?.set(initialAccount);
+		recipientInput?.set(String(payer));
 	});
 </script>
 
 <fieldset class="grid gap-2">
 	<Label for="recipientInput">Receiver</Label>
-	{#if !nameEditing}
+	{#if !editMode}
 		<div class="flex items-center justify-between rounded-lg border-2 border-mineShaft-600 p-4">
-			<p class="text-lg font-medium">{_value}</p>
+			<p class="text-lg font-medium">{payer}</p>
 			<p onclick={preventDefault(switchNameEdit)}>edit</p>
 		</div>
 	{:else}
 		<NameInput
 			id="recipientInput"
 			bind:this={recipientInput}
-			bind:value={_value}
+			bind:value={recipient}
 			bind:valid={recipientValid}
 			placeholder="Enter the account name of the recipient"
 			autofocus

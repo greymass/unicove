@@ -30,9 +30,7 @@
 	$effect(() => {
 		if (context.account && context.network) {
 			if (context.account.name) {
-				rentState.payer = context.account.name;
-				rentState.receiver = context.account.name;
-				rentRecipient?.set(String(context.account.name));
+				rentState.setAccount(context.account.name);
 			}
 			if (context.network.powerupstate && context.network.sampledUsage) {
 				if (resourceType === ResourceType.CPU) {
@@ -100,7 +98,8 @@
 	<Stack class="gap-3">
 		<RentRecipient
 			bind:this={rentRecipient}
-			bind:value={rentState.receiver}
+			payer={rentState.payer}
+			bind:receiver={rentState.receiver}
 			bind:valid={recipienteValid}
 		/>
 		<fieldset class="grid gap-2">

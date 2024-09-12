@@ -58,6 +58,12 @@ export class RentState {
 		this.quantity = Asset.fromUnits(0, this.chain.systemToken!.symbol);
 	}
 
+	setAccount(name: Name) {
+		if (!this.payer.equals(name)) {
+			this.payer = name;
+		}
+	}
+
 	valid() {
 		return this.cost.value > 0 && !this.insufficientBalance;
 	}

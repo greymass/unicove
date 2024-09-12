@@ -24,9 +24,7 @@
 	$effect(() => {
 		if (context.account && context.network) {
 			if (context.account.name) {
-				rentState.payer = context.account.name;
-				rentState.receiver = context.account.name;
-				rentRecipient?.set(String(context.account.name));
+				rentState.setAccount(context.account.name);
 			}
 			rentState.balance = context.account.balance ? context.account.balance.liquid : undefined;
 			rentState.pricePerUnit = context.network.stakingprice;
@@ -91,7 +89,8 @@
 	<Stack class="gap-3">
 		<RentRecipient
 			bind:this={rentRecipient}
-			bind:value={rentState.receiver}
+			payer={rentState.payer}
+			bind:receiver={rentState.receiver}
 			bind:valid={recipienteValid}
 		/>
 		<fieldset class="grid gap-2">
