@@ -3,13 +3,15 @@
 @tailwind utilities;
 
 @layer components {
-	html,
+	html {
+		@apply h-full bg-black text-white;
+	}
+
 	body {
-		@apply h-full bg-shark-950 text-white;
+		@apply h-auto min-h-svh bg-shark-950/50 text-white;
 	}
 
 	/* Headings are defined by class instead of tag to preserve semantic html independent of style */
-
 	/* Typography */
 	.h1 {
 		@apply text-5xl font-semibold;

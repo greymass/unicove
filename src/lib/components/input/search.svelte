@@ -112,7 +112,7 @@
 	inline-flex
 	h-10
 	items-center
-	justify-between
+	justify-end
 	text-nowrap
 	rounded-full
 	bg-transparent
