@@ -19,11 +19,11 @@
 	const destinations = $derived.by(() => {
 		const features = [];
 
-		if (network.config.features.staking) {
+		if (network.supports('staking')) {
 			features.push({ href: `/${network}/staking`, text: 'Staking' });
 		}
 
-		if (network.config.features.rammarket) {
+		if (network.supports('rammarket')) {
 			features.push({ href: `/${network}/ram`, text: 'RAM' });
 		}
 

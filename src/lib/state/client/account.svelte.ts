@@ -189,7 +189,7 @@ export function getBalance(network: NetworkState, sources: DataSources): Balance
 
 	// Add any staked (REX) tokens to total balance based on current value
 	if (sources.rex) {
-		if (network.config.features.rex && network.rexstate) {
+		if (network.supports('rex') && network.rexstate) {
 			const rex = network.rexToToken(sources.rex.rex_balance);
 			// const rex = convertRexToToken(sources.rex.rex_balance, network.rexstate);
 			staked.units.add(rex.units);

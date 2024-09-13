@@ -20,7 +20,8 @@ import {
 	chainConfigs,
 	chainMapper,
 	type ChainConfig,
-	type DefaultContracts
+	type DefaultContracts,
+	type FeatureType
 } from '$lib/wharf/chains';
 
 import { tokens } from '../../routes/[network]/api/tokens/tokens';
@@ -98,7 +99,7 @@ export class NetworkState {
 			system: new SystemContract({ client: this.client })
 		};
 
-		if (this.config.features.delphioracle) {
+		if (this.supports('delphioracle')) {
 			this.contracts.delphioracle = new DelphiOracleContract({ client: this.client });
 		}
 	}
@@ -147,6 +148,10 @@ export class NetworkState {
 
 		this.loaded = true;
 	}
+
+	supports = (feature: FeatureType): boolean => {
+		return this.config.features[feature];
+	};
 
 	tokenToRex = (token: AssetType) => {
 		if (!this.rexstate) {
