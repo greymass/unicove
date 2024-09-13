@@ -85,7 +85,7 @@
 {/if}
 
 {#if data.network.config.features.timeseries}
-	{#if data.historicalPrices.length > 0}
+	{#if data.historicalPrices && data.historicalPrices.length > 0}
 		<h3>Historical RAM Prices</h3>
 		<RamPriceHistory data={data.historicalPrices} />
 	{:else}

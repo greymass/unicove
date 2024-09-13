@@ -8,14 +8,16 @@
 	import 'chart.js/auto';
 	import { Card, Stack } from '$lib/components/layout';
 	import { Asset } from '@wharfkit/antelope';
-	import Select from '../select/select.svelte';
+	import Select, { type OptionWithImage } from '../select/select.svelte';
 
 	interface Props {
 		data: { date: Date; value: Asset }[];
 		debug?: boolean;
 	}
 
-	let { data, debug = true }: Props = $props();
+	// Seeing a weird bug with svelte where this component is rerendered with data being undefined
+	// This is a workaround to prevent the component from breaking the page
+	let { data = [], debug = true }: Props = $props();
 
 	let ctx: HTMLCanvasElement;
 	let chart: Chart<'line'>;
@@ -27,11 +29,12 @@
 		{ label: '1Y', value: 365 }
 	];
 
-	let selectedRange = $state(range[1]);
+	let selectedRange: OptionWithImage<number> = $state(range[1]);
 
 	let dataRange = $derived.by(() => {
+		if (!data || data.length === 0) return [];
 		const rangeEndDate = dayjs(data[0].date);
-		const rangeStartDate = rangeEndDate.subtract(selectedRange.value, 'day');
+		const rangeStartDate = rangeEndDate.subtract(Number(selectedRange.value), 'day');
 		debug && $inspect({ rangeStartDate, rangeEndDate });
 		return data.filter(({ date }) => dayjs(date).isAfter(rangeStartDate));
 	});
@@ -40,6 +43,7 @@
 	let currentPrice = $derived(String(currentPoint.value));
 
 	let percentChange = $derived.by(() => {
+		if (!currentPoint || !dataRange[dataRange.length - 1]) return '0%';
 		const current = Number(currentPoint.value.quantity);
 		const initial = Number(dataRange[dataRange.length - 1].value.quantity);
 		return (((current - initial) / current) * 100).toFixed(2) + '%';
@@ -112,7 +116,7 @@
 	});
 
 	debug &&
-		$inspect({ dataRangeLength: dataRange.length, currentDate: currentPoint.date, percentChange });
+		$inspect({ dataRangeLength: dataRange.length, currentDate: currentPoint?.date, percentChange });
 </script>
 
 <Card>

@@ -12,8 +12,8 @@
 	import type { ChangeFn } from '@melt-ui/svelte/internal/helpers';
 
 	interface Props {
-		options: OptionWithImage[];
-		selected: OptionWithImage;
+		options: OptionWithImage<any>[];
+		selected: OptionWithImage<any>;
 		variant?: 'pill' | 'form';
 		id: string;
 		onSelectedChange?: ChangeFn<SelectOption | undefined>;
