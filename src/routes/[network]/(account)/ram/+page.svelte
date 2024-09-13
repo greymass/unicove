@@ -17,22 +17,6 @@
 	{#if data.historicalPrices.length > 0}
 		<h3>Historical RAM Prices</h3>
 		<RamPriceHistory data={data.historicalPrices} />
-		<table class="float-left max-w-lg border-collapse">
-			<thead>
-				<tr class="bg-gray-60">
-					<th class="border p-1 text-left">Date</th>
-					<th class="border p-1 text-left">Price</th>
-				</tr>
-			</thead>
-			<tbody>
-				{#each data.historicalPrices as price}
-					<tr>
-						<td class="border p-1">{price.date.toLocaleString()}</td>
-						<td class="border p-1">{String(price.value)}</td>
-					</tr>
-				{/each}
-			</tbody>
-		</table>
 	{:else}
 		<p>No historical RAM prices available.</p>
 	{/if}
