@@ -5,6 +5,8 @@
 	import { getSetting } from '$lib/state/settings.svelte.js';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 
+	import SummaryBuyRAMBytes from '$lib/components/summary/eosio/buyrambytes.svelte';
+
 	import Button from '$lib/components/button/button.svelte';
 	import Code from '$lib/components/code.svelte';
 	import Label from '$lib/components/input/label.svelte';
@@ -109,6 +111,10 @@
 			<span>Total Cost</span>
 			<span>{buyRamState.bytesCost}</span>
 		</div>
+
+		{#if buyRamState.valid}
+			<SummaryBuyRAMBytes action={{ data: buyRamState.toJSON() }} />
+		{/if}
 	</Stack>
 
 	<Button type="submit" class="mt-4 w-full" disabled={!buyRamState.valid}>Confirm Buy RAM</Button>
