@@ -35,8 +35,10 @@
 		<ResourceWrapper resourceState={ramState}>
 			{#if context.network?.supports('rammarket')}
 				<div class="flex flex-col">
-					<Button class="text-blue-400" variant="pill" href="/{network}/ram/buy">BUY</Button>
-					<Button class="text-blue-400" variant="pill" href="/{network}/ram/sell">SELL</Button>
+					<Button class="text-blue-400" variant="pill" href="/{network}/ram/buy/tokens">BUY</Button>
+					<Button class="text-blue-400" variant="pill" href="/{network}/ram/sell/tokens"
+						>SELL</Button
+					>
 				</div>
 			{/if}
 		</ResourceWrapper>
