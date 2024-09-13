@@ -109,7 +109,7 @@ export function getUnstakingBalances(
 
 export function getUnstakableBalance(network: NetworkState, account: AccountState): Asset {
 	const savings = getUnstakingBalances(network, account).find((r) => r.savings);
-	return savings ? savings.balance : Asset.from(0, network.chain.systemToken.symbol);
+	return savings ? savings.balance : Asset.from(0, network.chain.systemToken!.symbol);
 }
 
 export function getAPY(network: NetworkState | undefined): string {

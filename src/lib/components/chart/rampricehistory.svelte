@@ -34,7 +34,7 @@
 	let dataRange = $derived.by(() => {
 		if (!data || data.length === 0) return [];
 		const rangeEndDate = dayjs(data[0].date);
-		const rangeStartDate = rangeEndDate.subtract(Number(selectedRange.value), 'day');
+		const rangeStartDate = rangeEndDate.subtract(selectedRange.value, 'day');
 		debug && $inspect({ rangeStartDate, rangeEndDate });
 		return data.filter(({ date }) => dayjs(date).isAfter(rangeStartDate));
 	});
