@@ -18,13 +18,38 @@
 	let quantityInput: AssetInput | undefined = $state();
 
 	$effect(() => {
-		if (context.account && context.network) {
+		if (
+			context.account &&
+			context.network &&
+			context.network.sampledUsage &&
+			context.network.chain.systemToken
+		) {
 			if (context.account.name) {
 				rentState.payer = context.account.name;
 				rentState.receiver = context.account.name;
 			}
 			rentState.balance = context.account.balance ? context.account.balance.liquid : undefined;
-			rentState.pricePerUnit = context.network.stakingprice;
+
+			switch (resourceType) {
+				case ResourceType.CPU: {
+					rentState.pricePerUnit = Asset.fromUnits(
+						context.network.sampledUsage.account.cpu_weight.dividing(
+							context.network.sampledUsage.account.cpu_limit.max
+						),
+						context.network.chain.systemToken.symbol
+					);
+					break;
+				}
+				case ResourceType.NET: {
+					rentState.pricePerUnit = Asset.fromUnits(
+						context.network.sampledUsage.account.net_weight.dividing(
+							context.network.sampledUsage.account.net_limit.max
+						),
+						context.network.chain.systemToken.symbol
+					);
+					break;
+				}
+			}
 		} else {
 			rentState.reset();
 		}

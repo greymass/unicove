@@ -54,16 +54,6 @@ export class NetworkState {
 		}
 		return undefined;
 	});
-	public stakingprice: Asset | undefined = $derived.by(() => {
-		if (this.sampledUsage && this.chain.systemToken) {
-			const { account } = this.sampledUsage;
-			return Asset.fromUnits(
-				Number(account.cpu_weight) / Number(account.cpu_limit.max),
-				this.chain.systemToken.symbol
-			);
-		}
-		return undefined;
-	});
 	public tokenprice = $derived.by(() => {
 		return this.tokenstate ? Asset.fromUnits(this.tokenstate.median, '4,USD') : undefined;
 	});
