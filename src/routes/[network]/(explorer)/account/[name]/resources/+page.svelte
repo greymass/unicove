@@ -10,8 +10,6 @@
 <div class="space-y-4">
 	<h3 class="h3">RAM Prices</h3>
 	<Code>{JSON.stringify(data.network.ramprice, null, 2)}</Code>
-	<h3 class="h3">Rent Via PowerUp Prices</h3>
-	<Code>{JSON.stringify(data.network.powerupprice, null, 2)}</Code>
 	<h3 class="h3">Rent Via REX Prices</h3>
 	<Code>{JSON.stringify(data.network.rexprice, null, 2)}</Code>
 	<h3 class="h3">Rent Via Stake Prices</h3>

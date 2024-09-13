@@ -64,15 +64,6 @@ export class NetworkState {
 		}
 		return undefined;
 	});
-	public powerupprice: Asset | undefined = $derived.by(() => {
-		if (this.sampledUsage && this.powerupstate && this.chain.systemToken) {
-			return Asset.from(
-				this.powerupstate.cpu.price_per_ms(this.sampledUsage, 1),
-				this.chain.systemToken.symbol
-			);
-		}
-		return undefined;
-	});
 	public tokenprice = $derived.by(() => {
 		return this.tokenstate ? Asset.fromUnits(this.tokenstate.median, '4,USD') : undefined;
 	});
