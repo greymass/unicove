@@ -149,9 +149,7 @@ export class NetworkState {
 		this.loaded = true;
 	}
 
-	supports = (feature: FeatureType): boolean => {
-		return this.config.features[feature];
-	};
+	supports = (feature: FeatureType): boolean => this.config.features[feature];
 
 	tokenToRex = (token: AssetType) => {
 		if (!this.rexstate) {
