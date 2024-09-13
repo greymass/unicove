@@ -64,7 +64,7 @@
 {/if}
 
 {#if data.network && data.network.ramstate}
-	<h3>Current RAM Price</h3>
+	<Pageheader title="Current RAM Price" />
 	<Card class="p-4">
 		<h4 class="mb-2 text-lg font-semibold">Current RAM Price</h4>
 		<div class="flex flex-col space-y-2">
@@ -86,7 +86,7 @@
 
 {#if data.network.config.features.timeseries}
 	{#if data.historicalPrices && data.historicalPrices.length > 0}
-		<h3>Historical RAM Prices</h3>
+		<Pageheader title="Historical RAM Prices" />
 		<RamPriceHistory data={data.historicalPrices} />
 	{:else}
 		<p>No historical RAM prices available.</p>
