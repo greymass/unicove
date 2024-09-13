@@ -23,8 +23,8 @@ import {
 	type DefaultContracts
 } from '$lib/wharf/chains';
 
-import { calculateValue } from './client/account.svelte';
 import { tokens } from '../../routes/[network]/api/tokens/tokens';
+import { calculateValue } from '$lib/utils';
 
 export class NetworkState {
 	public chain: ChainDefinition;
