@@ -1,4 +1,4 @@
-import { calculateValue } from '$lib/state/client/account.svelte';
+import { calculateValue } from '$lib/utils';
 import { Asset, Name, Serializer } from '@wharfkit/antelope';
 import { TokenBalance, TokenIdentifier, TokenMeta } from '@wharfkit/common';
 
