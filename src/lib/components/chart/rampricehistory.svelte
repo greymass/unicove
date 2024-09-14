@@ -8,8 +8,8 @@
 	import 'chart.js/auto';
 	import { Card, Stack } from '$lib/components/layout';
 	import { Asset } from '@wharfkit/antelope';
-	import Select, { type OptionWithImage } from '../select/select.svelte';
-
+	import Select from '../select/select.svelte';
+	import type { SelectOption } from '@melt-ui/svelte';
 	interface Props {
 		data: { date: Date; value: Asset }[];
 		debug?: boolean;
@@ -29,7 +29,7 @@
 		{ label: '1Y', value: 365 }
 	];
 
-	let selectedRange: OptionWithImage<number> = $state(range[1]);
+	let selectedRange: SelectOption<number> = $state(range[1]);
 
 	let dataRange = $derived.by(() => {
 		if (!data || data.length === 0) return [];
