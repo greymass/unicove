@@ -14,3 +14,14 @@ jobs:
       - uses: oven-sh/setup-bun@v2
       - run: bun install
       - run: bun lint
+  types:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install
+      - run: bunx tsc --noemit
+
