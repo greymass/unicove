@@ -2,7 +2,7 @@
 	import type { ComponentProps } from 'svelte';
 	import { TokenBalance } from '@wharfkit/common';
 
-	import Select, { type OptionWithImage } from './select.svelte';
+	import Select, { type CustomSelectOption } from './select.svelte';
 
 	// Override the options and selected props to be more specific to the NetworkSelect component
 	interface NetworkSelectProps extends Omit<ComponentProps<Select>, 'options' | 'selected'> {
@@ -19,7 +19,7 @@
 	}: NetworkSelectProps = $props();
 
 	// Convert the options to the format the Select component expects
-	const balanceOptions: OptionWithImage<TokenBalance>[] = $derived.by(() => {
+	const balanceOptions: CustomSelectOption<TokenBalance>[] = $derived.by(() => {
 		return options.map((balance: TokenBalance) => {
 			return {
 				value: balance,
@@ -30,7 +30,7 @@
 	});
 
 	// Create a derived store to get the selected option
-	let selectedOption: OptionWithImage<TokenBalance> = $state({
+	let selectedOption: CustomSelectOption<TokenBalance> = $state({
 		value: _selected,
 		label: `${String(_selected.asset.symbol.code)} (${_selected.asset.quantity})`,
 		image: _selected.metadata.logo

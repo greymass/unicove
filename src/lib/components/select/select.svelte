@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-	export interface OptionWithImage<T = unknown> extends SelectOption<T> {
+	export interface CustomSelectOption<T = unknown> extends SelectOption<T> {
 		image?: string;
 	}
 </script>
@@ -12,8 +12,8 @@
 	import type { ChangeFn } from '@melt-ui/svelte/internal/helpers';
 
 	interface Props {
-		options: OptionWithImage<any>[];
-		selected: OptionWithImage<any>;
+		options: CustomSelectOption[];
+		selected: CustomSelectOption;
 		variant?: 'pill' | 'form';
 		id: string;
 		onSelectedChange?: ChangeFn<SelectOption | undefined>;
@@ -59,7 +59,7 @@
 	});
 
 	/** Set the value from a parent */
-	export function set(option: OptionWithImage | null) {
+	export function set(option: CustomSelectOption | null) {
 		if (!option) {
 			_selected = options[0];
 		} else {
