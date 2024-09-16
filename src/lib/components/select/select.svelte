@@ -1,22 +1,23 @@
 <script lang="ts" context="module">
+	import { type SelectOption } from '@melt-ui/svelte';
 	export interface CustomSelectOption<T = unknown> extends SelectOption<T> {
 		image?: string;
 	}
 </script>
 
-<script lang="ts">
-	import { createSelect, createSync, melt, type SelectOption } from '@melt-ui/svelte';
+<script lang="ts" generics="T extends unknown">
+	import { createSelect, createSync, melt } from '@melt-ui/svelte';
 	import { fade } from 'svelte/transition';
 	import Check from 'lucide-svelte/icons/check';
 	import ChevronDown from 'lucide-svelte/icons/chevron-down';
 	import type { ChangeFn } from '@melt-ui/svelte/internal/helpers';
 
 	interface Props {
-		options: CustomSelectOption[];
-		selected: CustomSelectOption;
+		options: CustomSelectOption<T>[];
+		selected: CustomSelectOption<T>;
+		onSelectedChange?: ChangeFn<CustomSelectOption<T> | undefined>;
 		variant?: 'pill' | 'form';
 		id: string;
-		onSelectedChange?: ChangeFn<SelectOption | undefined>;
 		required?: boolean;
 		disabled?: boolean;
 		multiple?: boolean;
@@ -59,7 +60,7 @@
 	});
 
 	/** Set the value from a parent */
-	export function set(option: CustomSelectOption | null) {
+	export function set(option: CustomSelectOption<T> | null) {
 		if (!option) {
 			_selected = options[0];
 		} else {
