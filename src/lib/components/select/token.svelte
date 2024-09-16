@@ -1,22 +1,16 @@
 <script lang="ts">
-	import type { ComponentProps } from 'svelte';
 	import { TokenBalance } from '@wharfkit/common';
 
 	import Select, { type CustomSelectOption } from './select.svelte';
 
 	// Override the options and selected props to be more specific to the NetworkSelect component
-	interface NetworkSelectProps extends Omit<ComponentProps<Select>, 'options' | 'selected'> {
+	interface Props {
 		options: TokenBalance[];
 		selected: TokenBalance;
 		debug?: boolean;
 	}
 
-	let {
-		selected: _selected = $bindable(),
-		options,
-		debug = false,
-		...props
-	}: NetworkSelectProps = $props();
+	let { selected: _selected = $bindable(), options, debug = false, ...props }: Props = $props();
 
 	// Convert the options to the format the Select component expects
 	// Using the index as the value instead of the TokenBalance object
@@ -63,6 +57,7 @@
 </script>
 
 <Select
+	id="network-select"
 	variant="form"
 	bind:selected={selectedOption}
 	sameWidth={false}
