@@ -19,30 +19,33 @@
 	}: NetworkSelectProps = $props();
 
 	// Convert the options to the format the Select component expects
-	const balanceOptions: CustomSelectOption<TokenBalance>[] = $derived.by(() => {
-		return options.map((balance: TokenBalance) => {
+	// Using the index as the value instead of the TokenBalance object
+	const balanceOptions: CustomSelectOption<number>[] = $derived.by(() => {
+		return options.map((balance: TokenBalance, index) => {
 			return {
-				value: balance,
+				value: index,
 				label: `${String(balance.asset.symbol.code)} (${balance.asset.quantity})`,
 				image: balance.metadata.logo
 			};
 		});
 	});
 
-	// Create a derived store to get the selected option
-	let selectedOption: CustomSelectOption<TokenBalance> = $state({
-		value: _selected,
-		label: `${String(_selected.asset.symbol.code)} (${_selected.asset.quantity})`,
-		image: _selected.metadata.logo
+	// Create a store for the selected option
+	let selectedOption: CustomSelectOption<number> = $state({
+		value: 0,
+		label: `${String(options[0].asset.symbol.code)} (${options[0].asset.quantity})`,
+		image: options[0].metadata.logo
 	});
 
 	/** Set the value from a parent */
 	export function set(balance: TokenBalance | null) {
 		if (!balance) {
-			_selected = balanceOptions[0].value;
+			_selected = options[0];
 		} else {
 			_selected = balance;
-			const option = balanceOptions.find((o) => TokenBalance.from(o.value).equals(balance));
+			const option = balanceOptions.find((o) =>
+				TokenBalance.from(options[o.value]).equals(balance)
+			);
 			if (option) {
 				selectedOption = option;
 			}
@@ -50,8 +53,9 @@
 	}
 
 	// Sync the selected option with the passed in selected prop
+	// mapping the selected option to the index of the options array
 	$effect(() => {
-		const selected = options.find((o) => TokenBalance.from(o).equals(selectedOption.value));
+		const selected = options[selectedOption.value];
 		if (selected) {
 			_selected = selected;
 		}
@@ -70,9 +74,9 @@
 	<h3>Component State</h3>
 	<pre>
 
-_selected (store): {JSON.stringify(_selected)}
-selectedOption (store): {JSON.stringify(selectedOption)}
-options (store): {JSON.stringify(options)}
-balanceOptions (store): {JSON.stringify(balanceOptions)}
+_selected (store): {JSON.stringify(_selected, null, 2)}
+selectedOption (store): {JSON.stringify(selectedOption, null, 2)}
+options (store): {JSON.stringify(options, null, 2)}
+balanceOptions (store): {JSON.stringify(balanceOptions, null, 2)}
 </pre>
 {/if}
