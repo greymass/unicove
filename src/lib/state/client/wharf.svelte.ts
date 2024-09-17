@@ -19,6 +19,7 @@ import WebRenderer from '@wharfkit/web-renderer';
 import { WalletPluginAnchor } from '@wharfkit/wallet-plugin-anchor';
 import { WalletPluginMetaMask } from '@wharfkit/wallet-plugin-metamask';
 import { WalletPluginPrivateKey } from '@wharfkit/wallet-plugin-privatekey';
+import { WalletPluginWombat } from '@wharfkit/wallet-plugin-wombat';
 import { AccountCreationPluginMetamask } from '@wharfkit/account-creation-plugin-metamask';
 import { AccountCreationPluginGreymass } from '@wharfkit/account-creation-plugin-greymass';
 
@@ -33,9 +34,11 @@ import {
 
 import { chainMapper } from '$lib/wharf/chains';
 
-const metamaskWalletPlugin = new WalletPluginMetaMask();
-
-const walletPlugins: WalletPlugin[] = [new WalletPluginAnchor(), metamaskWalletPlugin];
+const walletPlugins: WalletPlugin[] = [
+	new WalletPluginAnchor(),
+	new WalletPluginMetaMask(),
+	new WalletPluginWombat()
+];
 
 const accountCreationPlugins: AccountCreationPlugin[] = [
 	new AccountCreationPluginMetamask(),
