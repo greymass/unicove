@@ -1,11 +1,11 @@
 <script lang="ts" context="module">
 	import { type SelectOption } from '@melt-ui/svelte';
-	export interface CustomSelectOption<T = unknown> extends SelectOption<T> {
+	export interface CustomSelectOption<T> extends SelectOption<T> {
 		image?: string;
 	}
 </script>
 
-<script lang="ts" generics="T extends unknown">
+<script lang="ts" generics="T = string">
 	import { createSelect, createSync, melt } from '@melt-ui/svelte';
 	import { fade } from 'svelte/transition';
 	import Check from 'lucide-svelte/icons/check';
@@ -14,7 +14,7 @@
 
 	interface Props {
 		options: CustomSelectOption<T>[];
-		selected: CustomSelectOption<T>;
+		selected: T;
 		onSelectedChange?: ChangeFn<CustomSelectOption<T> | undefined>;
 		variant?: 'pill' | 'form';
 		id: string;
@@ -41,7 +41,7 @@
 		states: { open, selected, selectedLabel },
 		helpers: { isSelected }
 	} = createSelect({
-		defaultSelected: _selected || options[0],
+		// defaultSelected: _selected || options[0].value,
 		onSelectedChange,
 		required,
 		disabled,
@@ -55,16 +55,16 @@
 	});
 
 	const sync = createSync({ selected });
-	$effect(() => {
-		sync.selected(_selected, (v) => (_selected = v || options[0]));
-	});
+	// $effect(() => {
+	// 	sync.selected(_selected, (v) => (_selected = v || options[0]));
+	// });
 
 	/** Set the value from a parent */
 	export function set(option: CustomSelectOption<T> | null) {
 		if (!option) {
-			_selected = options[0];
+			_selected = options[0].value;
 		} else {
-			_selected = option;
+			_selected = option.value;
 		}
 	}
 

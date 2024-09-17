@@ -59,7 +59,7 @@
 <Select
 	id="network-select"
 	variant="form"
-	bind:selected={selectedOption}
+	bind:selected={selectedOption.value}
 	sameWidth={false}
 	options={balanceOptions}
 	{...props}
