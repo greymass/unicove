@@ -10,7 +10,7 @@
 		return [
 			{
 				href: `/${network}/ram/sell/tokens`,
-				text: String(data.network.chain.systemToken.symbol.code)
+				text: String(data.network.chain.systemToken?.symbol.code)
 			},
 			{ href: `/${network}/ram/sell/bytes`, text: 'Bytes' }
 		];
