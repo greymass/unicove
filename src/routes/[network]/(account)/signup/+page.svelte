@@ -1,27 +1,121 @@
 <script lang="ts">
-	import Button from '$lib/components/button/button.svelte';
-	import { goto } from '$app/navigation';
+	import * as m from '$lib/paraglide/messages.js';
+	import PillGroup from '$lib/components/navigation/pillgroup.svelte';
 	import { page } from '$app/stores';
+	import Pageheader from '$lib/components/pageheader.svelte';
+	import Stack from '$lib/components/layout/stack.svelte';
+	import Button from '$lib/components/button/button.svelte';
 
-	$: network = $page.params.network;
+	const { data } = $props();
 
-	$: signupMethods = [
-		{ name: 'Anchor', route: `/${network}/anchor` },
-		{ name: 'MetaMask', route: `/${network}/metamask` },
-		{ name: 'TokenPocket', route: `/${network}/tokenpocket` },
-		{ name: 'Wombat', route: `/${network}/wombat` }
-	];
+	const walletTypes = {
+		// webAuths: {
+		// 	title: 'Web Authenticators',
+		// 	description:
+		// 		"Web Authenticators are convenient wallet options that don't require any installation.",
+		// 	benefits: [
+		// 		'No software installation needed',
+		// 		'Access your account from any device with a web browser',
+		// 		'Secure and easy to use'
+		// 	],
+		// 	wallets: [{ name: 'Anchor Web', route: 'anchor' }]
+		// },
+		hardWallets: {
+			title: 'Hardware Wallets',
+			description: 'Hardware wallets are physical devices that securely store your private keys.',
+			benefits: [
+				'Highest level of security',
+				'Offline storage of private keys',
+				'Support for multiple cryptocurrencies'
+			],
+			wallets: [{ name: 'Ledger', route: 'ledger' }]
+		},
+		softWallets: {
+			title: 'Soft Wallets',
+			description:
+				'Software wallets are applications you install on your computer or mobile device.',
+			benefits: [
+				'Easy to use and set up',
+				'Convenient for frequent transactions',
+				'Often free to download and use'
+			],
+			wallets: [
+				{ name: 'Anchor', route: 'anchor' },
+				{ name: 'Wombat', route: 'wombat' },
+				{ name: 'TokenPocket', route: 'tokenpocket' }
+			]
+		},
+		extensions: {
+			title: 'Browser Extensions',
+			description:
+				'Browser extension wallets integrate directly with your web browser for easy access.',
+			benefits: [
+				'Seamless integration with web applications',
+				'Quick access from your browser',
+				'Easy to use for web3 interactions'
+			],
+			wallets: [{ name: 'MetaMask', route: 'metamask' }]
+		}
+	};
+
+	const tabOptions = $derived.by(() => {
+		const network = String(data.network);
+		return Object.entries(walletTypes).map(([key, value]) => ({
+			href: `/${network}/signup/${key}`,
+			text: value.title
+		}));
+	});
+
+	let currentTab = $derived($page.url.pathname.split('/')[3] || 'webAuths');
+
+	let options = $derived(
+		tabOptions.map((option) => ({
+			...option,
+			active: option.href.split('/')[3] === currentTab
+		}))
+	);
+
+	let currentWalletType = $derived(walletTypes[currentTab as keyof typeof walletTypes]);
 </script>
 
-<div class="container mx-auto p-4">
-	<h1 class="mb-4 text-2xl font-bold">Signup</h1>
-	<p class="mb-4">Signup Methods:</p>
+<Stack>
+	<Pageheader title="Sign Up" subtitle="Create your account" />
 
-	<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-		{#each signupMethods as method}
-			<div class="card rounded-lg border p-4">
-				<a href={method.route} class="mb-2 text-xl font-semibold">{method.name}</a>
-			</div>
-		{/each}
+	<div class="mb-6">
+		<h2 class="mb-4 text-xl font-semibold">Why do I need a wallet?</h2>
+		<p class="mb-4">
+			A wallet is your gateway to the blockchain, allowing you to manage your digital assets and
+			interact with decentralized applications.
+		</p>
+		<h2 class="mb-4 text-xl font-semibold">Why do I need an account?</h2>
+		<p class="mb-4">
+			An account on the blockchain is your unique identity, enabling you to perform transactions,
+			store assets, and participate in the network.
+		</p>
 	</div>
-</div>
+
+	<PillGroup {options} class="mb-6" />
+
+	<div class="container mx-auto p-4">
+		<h1 class="mb-4 text-2xl font-bold">Sign Up with {currentWalletType.title}</h1>
+		<p class="mb-4">{currentWalletType.description}</p>
+
+		<h2 class="mb-2 text-xl font-semibold">Benefits:</h2>
+		<ul class="mb-6 list-disc pl-5">
+			{#each currentWalletType.benefits as benefit}
+				<li>{benefit}</li>
+			{/each}
+		</ul>
+
+		<h2 class="mb-2 text-xl font-semibold">Available Wallets:</h2>
+		<ul class="mb-6 list-disc pl-5">
+			{#each currentWalletType.wallets as wallet}
+				<li>
+					<Button href="/{data.network}/{wallet.route}">
+						{wallet.name}
+					</Button>
+				</li>
+			{/each}
+		</ul>
+	</div>
+</Stack>
