@@ -2,6 +2,8 @@
 	import Pageheader from '$lib/components/pageheader.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
 	import Button from '$lib/components/button/button.svelte';
+
+	let { data } = $props();
 </script>
 
 <Stack>
@@ -50,7 +52,10 @@
 			</li>
 			<li>
 				<h2 class="mb-2 text-xl font-semibold">Visit the Welcome Page</h2>
-				<p class="mb-2">Visit the TokenPocket <a href="/en/{data.chain.network}/welcome/tokenpocker"></a>welcome page</a> for next steps.</p>
+				<p class="mb-2">
+					Visit the TokenPocket <a href="/en/{data.network}/welcome/tokenpocker">welcome page</a> for
+					next steps.
+				</p>
 			</li>
 		</ol>
 
@@ -66,5 +71,5 @@
 				<li>Active community and support for troubleshooting</li>
 			</ul>
 		</div>
-	</div></Stack
->
+	</div>
+</Stack>
