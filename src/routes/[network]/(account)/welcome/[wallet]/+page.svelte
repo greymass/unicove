@@ -23,7 +23,9 @@
 		context.wharf.login({ walletPlugin: currentWallet.wharfPluginId });
 	}
 
-	$: isLoggedIn = context.wharf.session !== null;
+	console.log({ context });
+
+	let isLoggedIn = $derived(!!context.account);
 </script>
 
 <Stack>
