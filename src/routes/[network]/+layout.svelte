@@ -102,7 +102,7 @@
 	</div>
 
 	<main
-		class="col-span-2 col-start-2 row-start-3 md:col-span-3 md:col-start-2 md:row-start-2 md:row-end-4"
+		class="col-span-2 col-start-2 row-start-3 md:col-span-3 md:col-start-2 md:row-start-2 md:row-end-4 md:pt-16"
 	>
 		{@render children()}
 	</main>
