@@ -8,7 +8,7 @@
 			title: 'Install Wombat Extension',
 			description:
 				'Visit the Chrome Web Store to download and install the Wombat browser extension.',
-			link: 'https://chrome.google.com/webstore/detail/wombat-eos-wallet/amkmjjmmflddogmhpjloimipbofnfjih'
+			link: 'https://www.getwombat.io/'
 		},
 		{
 			title: 'Add to Chrome',

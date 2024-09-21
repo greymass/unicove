@@ -8,7 +8,7 @@
 			title: 'Download Wombat Desktop',
 			description:
 				'Visit the official Wombat website to download the Wombat desktop wallet application.',
-			link: 'https://www.getwombat.io/desktop'
+			link: 'https://www.getwombat.io'
 		},
 		{
 			title: 'Install the Desktop Application',
