@@ -15,7 +15,6 @@
 		{ value: 365, label: '365d' }
 	];
 	let selected = $state(options[0]);
-	// let selectedOption = $derived(options[selected]);
 
 	const formOptions: SelectOption[] = [
 		{ value: 30, label: '30d' },
