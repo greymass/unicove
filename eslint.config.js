@@ -23,10 +23,7 @@ export default [
 		files: ['**/*.svelte'],
 		languageOptions: {
 			parserOptions: {
-				parser: ts.parser,
-				svelteFeatures: {
-					experimentalGenerics: true
-				}
+				parser: ts.parser
 			}
 		}
 	},
