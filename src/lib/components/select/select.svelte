@@ -51,18 +51,6 @@
 		sync.selected(_selected, (v) => (_selected = v || options[0]));
 	});
 
-	// NOTE: I'm pretty sure this isn't needed here since the selected prop is already being synced using the $effect above.
-	// See test button on the debug page.
-	// However, we still need the method in the TokenSelect component since the type internal to the store is different than the type of the selected prop
-	/** Set the value from a parent */
-	// export function set(option: ExtendedSelectOption | null) {
-	// 	if (!option) {
-	// 		_selected = options[0];
-	// 	} else {
-	// 		_selected = option;
-	// 	}
-	// }
-
 	// Get the whole option object
 	let selectedOption = $derived.by(
 		() => options.find((o) => o.label === $selectedLabel) || options[0]
