@@ -1,22 +1,14 @@
-<script lang="ts" context="module">
-	import { type SelectOption } from '@melt-ui/svelte';
-	export interface CustomSelectOption<T> extends SelectOption<T> {
-		image?: string;
-	}
-</script>
-
-<script lang="ts" generics="T = string">
-	import { createSelect, createSync, melt } from '@melt-ui/svelte';
-	import { fade } from 'svelte/transition';
-	import Check from 'lucide-svelte/icons/check';
-	import ChevronDown from 'lucide-svelte/icons/chevron-down';
+<script lang="ts">
+	import { createSelect, createSync } from '@melt-ui/svelte';
 	import type { ChangeFn } from '@melt-ui/svelte/internal/helpers';
+	import { SelectTrigger, SelectMenu, SelectItem } from './elements';
+	import type { ExtendedSelectOption, SelectOptionVariant } from './types';
 
 	interface Props {
-		options: CustomSelectOption<T>[];
-		selected: T;
-		onSelectedChange?: ChangeFn<CustomSelectOption<T> | undefined>;
-		variant?: 'pill' | 'form';
+		options: ExtendedSelectOption[];
+		selected: ExtendedSelectOption;
+		onSelectedChange?: ChangeFn<ExtendedSelectOption | undefined>;
+		variant?: SelectOptionVariant;
 		id: string;
 		required?: boolean;
 		disabled?: boolean;
@@ -41,7 +33,6 @@
 		states: { open, selected, selectedLabel },
 		helpers: { isSelected }
 	} = createSelect({
-		// defaultSelected: _selected || options[0].value,
 		onSelectedChange,
 		required,
 		disabled,
@@ -54,120 +45,29 @@
 		}
 	});
 
+	// Sync the selected option with the passed in selected prop
 	const sync = createSync({ selected });
-	// $effect(() => {
-	// 	sync.selected(_selected, (v) => (_selected = v || options[0]));
-	// });
+	$effect(() => {
+		sync.selected(_selected, (v) => (_selected = v || options[0]));
+	});
 
-	/** Set the value from a parent */
-	export function set(option: CustomSelectOption<T> | null) {
-		if (!option) {
-			_selected = options[0].value;
-		} else {
-			_selected = option.value;
-		}
-	}
-
-	let selectedOption = $derived.by(() => options.find((o) => o.label === $selectedLabel));
+	// Get the whole option object
+	let selectedOption = $derived.by(
+		() => options.find((o) => o.label === $selectedLabel) || options[0]
+	);
 </script>
 
-<button
-	class="
-	flex
-	items-center
-	justify-between
-	gap-2
-	border-2
-	border-mineShaft-600
-	bg-transparent
-	pl-4
-	pr-3
-	font-medium
-	transition-opacity
-	hover:opacity-90
-	focus:outline-2
-	focus:outline-solar-500
-	focus-visible:border-transparent
-	focus-visible:outline
-	"
-	class:rounded-full={variant === 'pill'}
-	class:rounded-lg={variant === 'form'}
-	class:h-10={variant === 'pill'}
-	class:py-4={variant === 'form'}
-	use:melt={$trigger}
-	aria-label="{id}-label"
-	{id}
->
-	<div class="flex items-center">
-		{#if selectedOption?.image}
-			<img
-				src={selectedOption.image}
-				alt={selectedOption.label}
-				class="mr-2 size-5 object-contain"
-			/>
-		{/if}
-		{$selectedLabel || 'Select an option'}
-	</div>
-	<ChevronDown class="size-5 transition-transform duration-100 {$open ? 'rotate-180' : ''}" />
-</button>
+<SelectTrigger {variant} {id} {open} {trigger}>
+	{#if selectedOption.image && typeof selectedOption.image === 'string'}
+		<img src={selectedOption.image} alt={selectedOption.label} class="mr-2 size-5 object-contain" />
+	{/if}
+	{$selectedLabel || 'Select an option'}
+</SelectTrigger>
 
 {#if $open}
-	<div
-		class="
-		z-10
-		flex
-		max-h-[300px]
-		flex-col
-		overflow-y-auto
-		border-2
-		border-mineShaft-600
-		bg-shark-950
-		py-1
-		shadow
-		focus:!ring-0
-		"
-		class:px-1={variant === 'pill'}
-		class:px-2={variant === 'form'}
-		class:py-1={variant === 'pill'}
-		class:py-2={variant === 'form'}
-		class:rounded-2xl={variant === 'pill'}
-		class:rounded-lg={variant === 'form'}
-		use:melt={$menu}
-		transition:fade={{ duration: 100 }}
-	>
+	<SelectMenu {id} {variant} {menu} {open}>
 		{#each options as item}
-			<div
-				class="
-				relative
-				grid
-				cursor-pointer
-				grid-cols-[16px_1fr]
-				items-center
-				gap-2
-				rounded-xl
-				px-2
-				py-1
-				font-medium
-				hover:bg-solar-500
-				focus:z-10
-				focus:text-solar-950
-				data-[highlighted]:bg-solar-500
-				data-[highlighted]:text-solar-950
-				data-[disabled]:opacity-50
-				"
-				class:rounded-xl={variant === 'pill'}
-				class:rounded-sm={variant === 'form'}
-				use:melt={$option(item)}
-			>
-				{#if item.image}
-					<img src={item.image} alt={item.label} class="mr-2 size-4 object-contain" />
-				{:else}
-					<div class="check">
-						<Check class="size-4 {$isSelected(item.value) ? 'block' : 'hidden'}" />
-					</div>
-				{/if}
-				{item.label}
-			</div>
+			<SelectItem {id} {option} {variant} {item} {isSelected} />
 		{/each}
-	</div>
+	</SelectMenu>
 {/if}

@@ -8,7 +8,8 @@
 	import 'chart.js/auto';
 	import { Card, Stack } from '$lib/components/layout';
 	import { Asset } from '@wharfkit/antelope';
-	import Select, { type CustomSelectOption } from '../select/select.svelte';
+	import Select from '../select/select.svelte';
+	import type { ExtendedSelectOption } from '../select/types';
 
 	interface Props {
 		data: { date: Date; value: Asset }[];
@@ -22,14 +23,14 @@
 	let ctx: HTMLCanvasElement;
 	let chart: Chart<'line'>;
 
-	const range: CustomSelectOption<number>[] = [
+	const range: ExtendedSelectOption[] = [
 		{ label: '1D', value: 1 },
 		{ label: '1W', value: 7 },
 		{ label: '1M', value: 30 },
 		{ label: '1Y', value: 365 }
 	];
 
-	let selectedRange: CustomSelectOption<number> = $state(range[1]);
+	let selectedRange: ExtendedSelectOption = $state(range[1]);
 
 	let dataRange = $derived.by(() => {
 		if (!data || data.length === 0) return [];
@@ -100,10 +101,6 @@
 					legend: {
 						display: false
 					}
-					// decimation: {
-					// 	enabled: true,
-					// 	algorithm: 'lttb'
-					// }
 				}
 			}
 		});

@@ -1,4 +1,3 @@
-
 <script>
 	import * as SystemContract from '$lib/wharf/contracts/system';
 	import Code from '$lib/components/code.svelte';
