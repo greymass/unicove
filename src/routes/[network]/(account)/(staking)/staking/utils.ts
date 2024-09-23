@@ -18,8 +18,6 @@ export function getStakableBalance(network: NetworkState, account: AccountState)
 		if (account.balance && account.balance.liquid) {
 			balance.add(account.balance.liquid.units);
 		}
-
-		// TODO: add rexfund
 	}
 	return Asset.fromUnits(balance, network.chain.systemToken!.symbol);
 }
