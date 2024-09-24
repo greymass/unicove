@@ -6,7 +6,7 @@ import AssetInput from '$lib/components/input/asset.svelte';
 
 import { defaultQuantity, getStakableBalance, getAPY } from '../utils';
 
-export class StakeState {
+export class StakeManager {
 	public input: AssetInput | undefined = $state();
 	public network: NetworkState | undefined = $state();
 	public account: AccountState | undefined = $state();

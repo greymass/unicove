@@ -10,21 +10,21 @@
 	import * as m from '$lib/paraglide/messages.js';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext, untrack } from 'svelte';
-	import { StakeState } from './state.svelte';
+	import { StakeManager } from './manager.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
 
-	let stakeState: StakeState = $state(new StakeState(data.network));
+	let manager: StakeManager = $state(new StakeManager(data.network));
 
 	$effect(() => {
-		stakeState.sync(data.network, context.account, context.wharf);
+		manager.sync(data.network, context.account, context.wharf);
 	});
 </script>
 
-{#if stakeState.txid}
-	<Transaction network={data.network} transactionId={stakeState.txid} />
-{:else if stakeState.error}
+{#if manager.txid}
+	<Transaction network={data.network} transactionId={manager.txid} />
+{:else if manager.error}
 	<div>
 		<h2 class="h2">Transaction Error</h2>
 		<p>There was an error submitting your transaction.</p>
@@ -37,28 +37,28 @@
 				<Switcher>
 					<AssetInput
 						autofocus
-						bind:this={stakeState.input}
-						bind:min={stakeState.minValue}
-						bind:max={stakeState.maxValue}
-						bind:value={stakeState.assetValue}
-						bind:valid={stakeState.assetValid}
-						bind:validPrecision={stakeState.assetValidPrecision}
-						bind:validMinimum={stakeState.assetValidMinimum}
-						bind:validMaximum={stakeState.assetValidMaximum}
+						bind:this={manager.input}
+						bind:min={manager.minValue}
+						bind:max={manager.maxValue}
+						bind:value={manager.assetValue}
+						bind:valid={manager.assetValid}
+						bind:validPrecision={manager.assetValidPrecision}
+						bind:validMinimum={manager.assetValidMinimum}
+						bind:validMaximum={manager.assetValidMaximum}
 					/>
 					<Button
-						disabled={!stakeState.assetValid}
-						onclick={() => stakeState.transact()}
+						disabled={!manager.assetValid}
+						onclick={() => manager.transact()}
 						variant="secondary"
 						class="text-skyBlue-500">Stake</Button
 					>
 				</Switcher>
 
-				{#if !stakeState.assetValid}
-					{#if !stakeState.assetValidPrecision}
+				{#if !manager.assetValid}
+					{#if !manager.assetValidPrecision}
 						<p class="text-red-500">Invalid number, too many decimal places.</p>
 					{/if}
-					{#if !stakeState.assetValidMaximum}
+					{#if !manager.assetValidMaximum}
 						<p class="text-red-500">Amount exceeds available balance.</p>
 					{/if}
 				{/if}
@@ -67,9 +67,9 @@
 					<button
 						class="text-skyBlue-500 hover:text-skyBlue-400"
 						onclick={() => {
-							stakeState.setMaxValue();
+							manager.setMaxValue();
 						}}
-						type="button">Available: {stakeState.stakable}</button
+						type="button">Available: {manager.stakable}</button
 					>
 				</Label>
 			</Stack>
@@ -81,11 +81,11 @@
 						<p class="caption">Minimum lockup</p>
 						<p>21 Days</p>
 						<p class="caption">~APY</p>
-						<p>{stakeState.apy}%</p>
+						<p>{manager.apy}%</p>
 						<p class="caption">You will stake</p>
-						<p>{stakeState.assetValid ? stakeState.assetValue : ''}</p>
+						<p>{manager.assetValid ? manager.assetValue : ''}</p>
 						<p class="caption">Estimated Yield(per year)</p>
-						<p>{stakeState.assetValid ? stakeState.estimateYield : ''}</p>
+						<p>{manager.assetValid ? manager.estimateYield : ''}</p>
 					</div>
 				</Stack>
 			</Card>

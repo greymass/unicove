@@ -2,19 +2,25 @@ import { Asset } from '@wharfkit/antelope';
 import type { AccountState } from '$lib/state/client/account.svelte';
 import type { NetworkState } from '$lib/state/network.svelte';
 import type { WharfState } from '$lib/state/client/wharf.svelte';
+import AssetInput from '$lib/components/input/asset.svelte';
 
 import type { UnstakingRecord } from '../utils';
-import {
-	defaultQuantity,
-	getUnstakingBalances,
-	getClaimableBalance,
-	getWithdrawableBalance
-} from '../utils';
+import { defaultQuantity, getUnstakableBalance, getUnstakingBalances } from '../utils';
 
-export class WithdrawState {
+export class UnstakeManager {
+	public input: AssetInput | undefined = $state();
 	public network: NetworkState | undefined = $state();
 	public account: AccountState | undefined = $state();
 	public wharf: WharfState | undefined = $state();
+
+	public assetValue: Asset = $state(defaultQuantity);
+	public minValue = $state(0);
+	public maxValue = $state(0);
+
+	public assetValid = $state(false);
+	public assetValidPrecision = $state(true);
+	public assetValidMinimum = $state(true);
+	public assetValidMaximum = $state(true);
 
 	public error: string = $state('');
 	public txid: string = $state('');
@@ -22,27 +28,18 @@ export class WithdrawState {
 	public unstaking: Array<UnstakingRecord> = $derived(
 		this.account && this.network ? getUnstakingBalances(this.network, this.account) : []
 	);
-	public claimable: Asset = $derived(
+	public unstakable: Asset = $derived(
 		this.account && this.network
-			? getClaimableBalance(this.network, this.account, this.unstaking)
-			: defaultQuantity
-	);
-	public withdrawable: Asset = $derived(
-		this.account && this.network
-			? getWithdrawableBalance(this.network, this.account)
-			: defaultQuantity
-	);
-	public total: Asset = $derived(
-		this.network
-			? Asset.fromUnits(
-					this.claimable.units.adding(this.withdrawable.units),
-					this.network.chain.systemToken!.symbol
-				)
+			? getUnstakableBalance(this.network, this.account, this.unstaking)
 			: defaultQuantity
 	);
 
 	constructor(network: NetworkState) {
 		this.network = network;
+	}
+
+	get zeroValue() {
+		return this.network ? Asset.from(0, this.network.chain.systemToken!.symbol) : defaultQuantity;
 	}
 
 	sync(network: NetworkState, account: AccountState, wharf: WharfState) {
@@ -61,37 +58,35 @@ export class WithdrawState {
 			this.txid = '';
 		}
 
+		if (this.network && this.assetValue.symbol !== this.network.chain.systemToken!.symbol) {
+			this.input?.set(this.zeroValue);
+		}
 		if (wharf !== this.wharf) {
 			this.wharf = wharf;
 		}
+
+		if (this.network) {
+			this.minValue = Asset.fromUnits(1, this.network.chain.systemToken!.symbol).value;
+			this.maxValue = this.unstakable.value;
+		}
+	}
+
+	setMaxValue() {
+		this.input?.set(this.unstakable);
 	}
 
 	async transact() {
 		try {
-			if (!this.network || !this.account || !this.account.name || !this.wharf) {
+			if (!this.network || !this.account || !this.account.name || !this.assetValue || !this.wharf) {
 				throw new Error("Can't sign, data not ready");
 			}
-
-			const actions = [];
-			if (this.claimable) {
-				actions.push(
-					this.network.contracts.system.action('sellrex', {
-						from: this.account.name,
-						rex: this.network.tokenToRex(this.claimable)
-					})
-				);
-			}
-			if (this.total) {
-				actions.push(
-					this.network.contracts.system.action('withdraw', {
-						owner: this.account.name,
-						amount: this.total
-					})
-				);
-			}
+			const mvfrsavings = this.network.contracts.system.action('mvfrsavings', {
+				owner: this.account.name,
+				rex: this.network.tokenToRex(this.assetValue)
+			});
 
 			const result = await this.wharf.transact({
-				actions
+				actions: [mvfrsavings]
 			});
 
 			this.txid = String(result?.response?.transaction_id);
