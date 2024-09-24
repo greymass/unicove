@@ -34,8 +34,8 @@
 
 <Box>
 	<Stack>
-        <PageHeader title="Staking" />
-        <PillGroup {options} class="mb-6" />
+		<PageHeader title="Staking" />
+		<PillGroup {options} class="mb-6" />
 	</Stack>
 
 	{@render children()}
