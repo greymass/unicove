@@ -16,9 +16,7 @@
 		debug?: boolean;
 	}
 
-	// Seeing a weird bug with svelte where this component is rerendered with data being undefined
-	// This is a workaround to prevent the component from breaking the page
-	let { data = [], debug = true }: Props = $props();
+	let { data, debug = true }: Props = $props();
 
 	let ctx: HTMLCanvasElement;
 	let chart: Chart<'line'>;
@@ -33,6 +31,8 @@
 	let selectedRange: ExtendedSelectOption = $state(range[1]);
 
 	let dataRange = $derived.by(() => {
+		// Seeing a weird bug with svelte where this component is rerendered with data being undefined.
+		// This is a workaround to prevent the component from breaking the page.
 		if (!data || data.length === 0) return [];
 		const rangeEndDate = dayjs(data[0].date);
 		const rangeStartDate = rangeEndDate.subtract(Number(selectedRange.value), 'day');
