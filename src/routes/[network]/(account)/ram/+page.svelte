@@ -13,7 +13,7 @@
 	<p>Loading current RAM price...</p>
 {/if}
 
-{#if data.network.config.features.timeseries}
+{#if data.network.supports('timeseries')}
 	{#if data.historicalPrices.length > 0}
 		<h3>Historical RAM Prices</h3>
 		<RamPriceHistory data={data.historicalPrices} />

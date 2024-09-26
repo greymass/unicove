@@ -1,5 +1,11 @@
-import type { ABI } from '@wharfkit/antelope';
+import { Asset, type ABI } from '@wharfkit/antelope';
 import yaml from 'yaml';
+
+export function calculateValue(balance: Asset, currency: Asset): Asset {
+	return Asset.from(
+		`${(currency.value * balance.value).toFixed(currency.symbol.precision)} ${currency.symbol.code}`
+	);
+}
 
 export function getCacheHeaders(ttl: number, irreversible: boolean = false) {
 	// Maintain a ttl cache by default
