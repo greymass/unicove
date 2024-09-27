@@ -27,23 +27,23 @@
 	let stakingPrice: Asset | undefined = $state();
 
 	$effect(() => {
-		if (
-			context.network &&
-			context.network.sampledUsage &&
-			context.network.chain.systemToken
-		) {
-			powerupPrice = context.network.powerupstate ? getPowerupPrice(
-				resource,
-				context.network.powerupstate,
-				context.network.sampledUsage,
-				context.network.chain.systemToken.symbol
-			) : undefined;
-			rexPrice = context.network.rexstate ? getRexPrice(
-				resource,
-				context.network.rexstate,
-				context.network.sampledUsage,
-				context.network.chain.systemToken.symbol
-			): undefined;
+		if (context.network && context.network.sampledUsage && context.network.chain.systemToken) {
+			powerupPrice = context.network.powerupstate
+				? getPowerupPrice(
+						resource,
+						context.network.powerupstate,
+						context.network.sampledUsage,
+						context.network.chain.systemToken.symbol
+					)
+				: undefined;
+			rexPrice = context.network.rexstate
+				? getRexPrice(
+						resource,
+						context.network.rexstate,
+						context.network.sampledUsage,
+						context.network.chain.systemToken.symbol
+					)
+				: undefined;
 			stakingPrice = getStakingPrice(
 				resource,
 				context.network.sampledUsage,
@@ -71,7 +71,7 @@
 				<div>Power up</div>
 				<div>
 					{#if powerupPrice}
-						{powerupPrice.value.toFixed(powerupPrice.symbol.precision)}
+						{powerupPrice.quantity}
 					{/if}
 				</div>
 				<div>
@@ -88,7 +88,7 @@
 				<div>REX</div>
 				<div>
 					{#if rexPrice}
-						{rexPrice.value.toFixed(rexPrice.symbol.precision)}
+						{rexPrice.quantity}
 					{/if}
 				</div>
 				<div>
@@ -105,7 +105,7 @@
 				<div>Staking</div>
 				<div>
 					{#if stakingPrice}
-						{stakingPrice.value.toFixed(stakingPrice.symbol.precision)}
+						{stakingPrice.quantity}
 					{/if}
 				</div>
 				<div>

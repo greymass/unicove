@@ -14,7 +14,6 @@
 <PageHeader title="Network Resources" />
 <Stack class="mt-10">
 	<State resource={ResourceType.CPU} />
-
 	<Prices
 		resource={ResourceType.CPU}
 		powerupLink="/{network}/resources/cpu/powerup"
