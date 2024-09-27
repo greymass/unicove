@@ -7,7 +7,8 @@ import {
 	Name,
 	PermissionLevel,
 	TimePointSec,
-	UInt64
+	UInt64,
+	UInt128
 } from '@wharfkit/antelope';
 
 import * as SystemContract from '$lib/wharf/contracts/system';
@@ -50,4 +51,11 @@ export interface LightAPIBalanceRow {
 export interface LightAPIBalanceResponse {
 	account_name: string;
 	balances: LightAPIBalanceRow[];
+}
+
+@Struct.type('sampledusage')
+export class SampledUsage extends Struct {
+	@Struct.field(API.v1.AccountObject) declare account: API.v1.AccountObject;
+    @Struct.field(UInt128) declare cpu: UInt128;
+    @Struct.field(UInt128) declare net: UInt128;
 }
