@@ -1,4 +1,5 @@
 interface WalletType {
+	type: 'hardware' | 'desktop' | 'mobile' | 'extensions';
 	title: string;
 	description: string;
 	benefits: string[];
@@ -7,6 +8,7 @@ interface WalletType {
 
 export const walletTypes: Record<string, WalletType> = {
 	// webAuths: {
+	// 	type: 'webAuths',
 	// 	title: 'Web Authenticators',
 	// 	description:
 	// 		"Web Authenticators are convenient wallet options that don't require any installation.",
@@ -17,7 +19,8 @@ export const walletTypes: Record<string, WalletType> = {
 	// 	],
 	// 	wallets: [{ name: 'Anchor Web', route: 'anchor' }]
 	// },
-	hardwallets: {
+	hardware: {
+		type: 'hardware',
 		title: 'Hardware Wallets',
 		description: 'Hardware wallets are physical devices that securely store your private keys.',
 		benefits: [
@@ -25,9 +28,10 @@ export const walletTypes: Record<string, WalletType> = {
 			'Offline storage of private keys',
 			'Support for multiple cryptocurrencies'
 		],
-		wallets: [{ name: 'Ledger', route: 'ledger' }]
+		wallets: [{ name: 'Ledger', route: 'signup/wallet/ledger' }]
 	},
-	desktopwallets: {
+	desktop: {
+		type: 'desktop',
 		title: 'Desktop Wallets',
 		description: 'Software wallets are applications you install on your computer or mobile device.',
 		benefits: [
@@ -36,11 +40,12 @@ export const walletTypes: Record<string, WalletType> = {
 			'Often free to download and use'
 		],
 		wallets: [
-			{ name: 'Anchor', route: 'anchor/desktop' },
-			{ name: 'Wombat', route: 'wombat/desktop' }
+			{ name: 'Anchor', route: 'signup/wallet/anchor/desktop' },
+			{ name: 'Wombat', route: 'signup/wallet/wombat/desktop' }
 		]
 	},
-	mobilewallets: {
+	mobile: {
+		type: 'mobile',
 		title: 'Mobile Wallets',
 		description: 'Mobile wallets are applications you install on your mobile device.',
 		benefits: [
@@ -49,12 +54,13 @@ export const walletTypes: Record<string, WalletType> = {
 			'Quick and easy transactions from your smartphone'
 		],
 		wallets: [
-			{ name: 'Anchor Mobile', route: 'anchor/mobile' },
-			{ name: 'Wombat Mobile', route: 'wombat/mobile' },
-			{ name: 'TokenPocket', route: 'tokenpocket' }
+			{ name: 'Anchor Mobile', route: 'signup/wallet/anchor/mobile' },
+			{ name: 'Wombat Mobile', route: 'signup/wallet/wombat/mobile' },
+			{ name: 'TokenPocket', route: 'signup/wallet/tokenpocket' }
 		]
 	},
 	extensions: {
+		type: 'extensions',
 		title: 'Browser Extensions',
 		description:
 			'Browser extension wallets integrate directly with your web browser for easy access.',
@@ -64,8 +70,14 @@ export const walletTypes: Record<string, WalletType> = {
 			'Easy to use for web3 interactions'
 		],
 		wallets: [
-			{ name: 'MetaMask', route: 'metamask' },
-			{ name: 'Wombat', route: 'wombat/extension' }
+			{ name: 'MetaMask', route: 'signup/wallet/metamask' },
+			{ name: 'Wombat', route: 'signup/wallet/wombat/extension' }
 		]
 	}
 };
+
+export function getWalletType(path: string) {
+	return Object.values(walletTypes).find((walletType) => {
+		return walletType.wallets.some((wallet) => path.includes(wallet.route));
+	});
+}
