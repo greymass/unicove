@@ -50,7 +50,6 @@
 	}
 
 	function getFullStepPath(step: SignupStep) {
-		console.log({ step });
 		if (step.title === 'Environment') {
 			const walletType = getWalletType($page.url.pathname);
 
