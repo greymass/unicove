@@ -1,15 +1,11 @@
 import { json } from '@sveltejs/kit';
-
 import { getChainDefinitionFromParams, getNetwork, NetworkState } from '$lib/state/network.svelte';
-import { type API, type NameType } from '@wharfkit/antelope';
-import type { TokenBalance } from '@wharfkit/common';
-import type { ChainDefinition } from '@wharfkit/session';
-import { chainMapper } from '$lib/wharf/chains.js';
 import { getCacheHeaders } from '$lib/utils';
-import { SystemContract } from '@wharfkit/account';
 import type { LightAPIBalanceResponse, LightAPIBalanceRow } from '$lib/types.js';
+import type { RequestHandler } from './$types';
+import { type NameType } from '@wharfkit/antelope';
 
-export async function GET({ fetch, params }) {
+export const GET: RequestHandler = async ({ fetch, params }) => {
 	const chain = getChainDefinitionFromParams(params.network);
 	if (!chain) {
 		return json({ error: 'Invalid chain specified' }, { status: 400 });
@@ -22,30 +18,32 @@ export async function GET({ fetch, params }) {
 	const network = getNetwork(chain, fetch);
 	const { system: systemContract } = network.contracts;
 
-	const requests: [
-		Promise<API.v1.AccountObject>,
-		Promise<SystemContract.Types.delegated_bandwidth[]>,
-		Promise<SystemContract.Types.rex_balance>,
-		Promise<LightAPIBalanceRow[]>
-	] = [
-		network.client.v1.chain.get_account(params.name),
-		systemContract.table('delband').all({ scope: params.name }),
-		systemContract.table('rexbal').get(params.name),
-		loadBalances(network, params.name, fetch)
-	];
-
 	try {
 		const headers = getCacheHeaders(5);
-		const [account_data, delegated, rex, balances] = await Promise.all(requests);
+		const [account_data, delegated, rex, balances] = await Promise.all([
+			network.client.v1.chain.get_account(params.name),
+			systemContract.table('delband').all({ scope: params.name }),
+			systemContract.table('rexbal').get(params.name),
+			loadBalances(network, params.name, fetch)
+		]);
 
-		// If no response from the light API, add the core liquid balance as a default
+		// If no response from the light API, add the core liquid balance as a default if it exists
 		if (!balances.length && chain.systemToken) {
-			balances.push({
-				contract: chain.systemToken.contract,
-				amount: account_data.core_liquid_balance.quantity,
-				decimals: account_data.core_liquid_balance.symbol.precision,
-				currency: account_data.core_liquid_balance.symbol.code
-			});
+			if (account_data.core_liquid_balance) {
+				balances.push({
+					contract: chain.systemToken.contract.toString(),
+					amount: account_data.core_liquid_balance.quantity,
+					decimals: account_data.core_liquid_balance.symbol.precision.toString(),
+					currency: account_data.core_liquid_balance.symbol.code.toString()
+				});
+			} else {
+				balances.push({
+					contract: chain.systemToken.contract.toString(),
+					amount: '0',
+					decimals: '0',
+					currency: ''
+				});
+			}
 		}
 
 		return json(
@@ -62,7 +60,7 @@ export async function GET({ fetch, params }) {
 		console.error(error);
 		return json({ error: 'Unable to load account.' }, { status: 500 });
 	}
-}
+};
 
 async function loadBalances(
 	network: NetworkState,
