@@ -34,10 +34,8 @@
 
 <Box>
 	<Stack>
-		<Cluster class="justify-between ">
-			<PageHeader title="Staking" />
-			<PillGroup {options} class="mb-6" />
-		</Cluster>
+		<PageHeader title="Staking" />
+		<PillGroup {options} class="mb-6" />
 	</Stack>
 
 	{@render children()}

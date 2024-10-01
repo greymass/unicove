@@ -4,7 +4,9 @@
 	import Deposit from './eosio/deposit.svelte';
 	import Withdraw from './eosio/withdraw.svelte';
 	import Sellrex from './eosio/sellrex.svelte';
-
+	import Buyrambytes from './eosio/buyrambytes.svelte';
+	import Buyram from './eosio/buyram.svelte';
+	import Sellram from './eosio/sellram.svelte';
 	import Transfer from './eosio.token/transfer.svelte';
 </script>
 
@@ -17,6 +19,9 @@
 	<Deposit />
 	<Withdraw />
 	<Sellrex />
+	<Buyram />
+	<Buyrambytes />
+	<Sellram />
 
 	<h3 class="h3">eosio.token</h3>
 	<Transfer />

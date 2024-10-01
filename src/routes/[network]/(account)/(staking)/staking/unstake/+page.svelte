@@ -6,32 +6,25 @@
 	import AssetInput from '$lib/components/input/asset.svelte';
 	import Button from '$lib/components/button/button.svelte';
 	import Label from '$lib/components/input/label.svelte';
+	import Transaction from '$lib/components/transaction.svelte';
 	import * as m from '$lib/paraglide/messages.js';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
-	import { UnstakeState } from './state.svelte';
+	import { UnstakeManager } from './manager.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
 
-	let unstakeState: UnstakeState = $state(new UnstakeState(data.network));
+	let manager: UnstakeManager = $state(new UnstakeManager(data.network));
 
 	$effect(() => {
-		unstakeState.sync(data.network, context.account, context.wharf);
+		manager.sync(data.network, context.account, context.wharf);
 	});
 </script>
 
-{#if unstakeState.txid}
-	<div class="space-y-4">
-		<h2 class="h2">Transaction Complete</h2>
-		<h3 class="h3">success</h3>
-		<p>
-			<a href="/{data.network}/transaction/{unstakeState.txid}">
-				{unstakeState.txid}
-			</a>
-		</p>
-	</div>
-{:else if unstakeState.error}
+{#if manager.txid}
+	<Transaction network={data.network} transactionId={manager.txid} />
+{:else if manager.error}
 	<div>
 		<h2 class="h2">Transaction Error</h2>
 		<p>There was an error submitting your transaction.</p>
@@ -44,29 +37,29 @@
 				<Switcher>
 					<AssetInput
 						autofocus
-						bind:this={unstakeState.input}
-						bind:min={unstakeState.minValue}
-						bind:max={unstakeState.maxValue}
-						bind:value={unstakeState.assetValue}
-						bind:valid={unstakeState.assetValid}
-						bind:validPrecision={unstakeState.assetValidPrecision}
-						bind:validMinimum={unstakeState.assetValidMinimum}
-						bind:validMaximum={unstakeState.assetValidMaximum}
+						bind:this={manager.input}
+						bind:min={manager.minValue}
+						bind:max={manager.maxValue}
+						bind:value={manager.assetValue}
+						bind:valid={manager.assetValid}
+						bind:validPrecision={manager.assetValidPrecision}
+						bind:validMinimum={manager.assetValidMinimum}
+						bind:validMaximum={manager.assetValidMaximum}
 					/>
 
 					<Button
-						disabled={!unstakeState.assetValid}
-						onclick={() => unstakeState.transact()}
+						disabled={!manager.assetValid}
+						onclick={() => manager.transact()}
 						variant="secondary"
 						class="text-skyBlue-500">Unstake</Button
 					>
 				</Switcher>
 
-				{#if !unstakeState.assetValid}
-					{#if !unstakeState.assetValidPrecision}
+				{#if !manager.assetValid}
+					{#if !manager.assetValidPrecision}
 						<p class="text-red-500">Invalid number, too many decimal places.</p>
 					{/if}
-					{#if !unstakeState.assetValidMaximum}
+					{#if !manager.assetValidMaximum}
 						<p class="text-red-500">Amount exceeds available balance.</p>
 					{/if}
 				{/if}
@@ -75,9 +68,9 @@
 					<button
 						class="text-skyBlue-500 hover:text-skyBlue-400"
 						onclick={() => {
-							unstakeState.setMaxValue();
+							manager.setMaxValue();
 						}}
-						type="button">Available: {unstakeState.unstakable}</button
+						type="button">Available: {manager.unstakable}</button
 					>
 				</Label>
 			</Stack>
@@ -87,7 +80,7 @@
 				<Stack class="gap-0">
 					<div class="grid grid-cols-2 gap-2">
 						<p class="caption">In 21 days you can claim</p>
-						<p>{unstakeState.assetValid ? unstakeState.assetValue : ''}</p>
+						<p>{manager.assetValid ? manager.assetValue : ''}</p>
 						<p class="caption">Lockup</p>
 						<p>21 Days</p>
 					</div>

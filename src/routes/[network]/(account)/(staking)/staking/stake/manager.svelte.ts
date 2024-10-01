@@ -4,9 +4,9 @@ import type { NetworkState } from '$lib/state/network.svelte';
 import type { WharfState } from '$lib/state/client/wharf.svelte';
 import AssetInput from '$lib/components/input/asset.svelte';
 
-import { defaultQuantity, getUnstakableBalance } from '../utils';
+import { defaultQuantity, getStakableBalance, getAPY } from '../utils';
 
-export class UnstakeState {
+export class StakeManager {
 	public input: AssetInput | undefined = $state();
 	public network: NetworkState | undefined = $state();
 	public account: AccountState | undefined = $state();
@@ -24,8 +24,17 @@ export class UnstakeState {
 	public error: string = $state('');
 	public txid: string = $state('');
 
-	public unstakable: Asset = $derived(
-		this.account ? getUnstakableBalance(this.network!, this.account) : defaultQuantity
+	public stakable: Asset = $derived(
+		this.account && this.network ? getStakableBalance(this.network, this.account) : defaultQuantity
+	);
+	public apy: string = $derived(this.network ? getAPY(this.network) : '0');
+	public estimateYield: Asset = $derived(
+		this.network
+			? Asset.from(
+					(this.assetValue.value * parseFloat(this.apy)) / 100,
+					this.network.chain.systemToken!.symbol
+				)
+			: defaultQuantity
 	);
 
 	constructor(network: NetworkState) {
@@ -33,7 +42,7 @@ export class UnstakeState {
 	}
 
 	get zeroValue() {
-		return Asset.from(0, this.network!.chain.systemToken!.symbol);
+		return this.network ? Asset.from(0, this.network.chain.systemToken!.symbol) : defaultQuantity;
 	}
 
 	sync(network: NetworkState, account: AccountState, wharf: WharfState) {
@@ -52,30 +61,40 @@ export class UnstakeState {
 			this.txid = '';
 		}
 
-		if (this.assetValue.symbol !== this.network!.chain.systemToken!.symbol) {
+		if (this.network && this.assetValue.symbol !== this.network.chain.systemToken!.symbol) {
 			this.input?.set(this.zeroValue);
 		}
 		if (wharf !== this.wharf) {
 			this.wharf = wharf;
 		}
 
-		this.minValue = Asset.fromUnits(1, this.network!.chain.systemToken!.symbol).value;
-		this.maxValue = this.account ? getUnstakableBalance(this.network!, this.account).value : 0;
+		if (this.network) {
+			this.minValue = Asset.fromUnits(1, this.network.chain.systemToken!.symbol).value;
+			this.maxValue = this.account ? getStakableBalance(this.network, this.account).value : 0;
+		}
 	}
 
 	setMaxValue() {
-		this.input?.set(this.unstakable);
+		this.input?.set(this.stakable);
 	}
 
 	async transact() {
-		const mvfrsavings = this.network!.contracts.system.action('mvfrsavings', {
-			owner: this.account!.name!,
-			rex: this.network!.tokenToRex(this.assetValue!)
-		});
-
 		try {
-			const result = await this.wharf!.transact({
-				actions: [mvfrsavings]
+			if (!this.network || !this.account || !this.account.name || !this.wharf || !this.assetValue) {
+				throw new Error("Can't sign, data not ready");
+			}
+
+			const deposit = this.network.contracts.system.action('deposit', {
+				owner: this.account.name,
+				amount: this.assetValue
+			});
+			const buyrex = this.network.contracts.system.action('buyrex', {
+				from: this.account.name,
+				amount: this.assetValue
+			});
+
+			const result = await this.wharf.transact({
+				actions: [deposit, buyrex]
 			});
 
 			this.txid = String(result?.response?.transaction_id);

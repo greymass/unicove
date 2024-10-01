@@ -20,10 +20,11 @@ export const GET: RequestHandler = async ({ fetch, params }) => {
 
 	try {
 		const headers = getCacheHeaders(5);
-		const [account_data, delegated, rex, balances] = await Promise.all([
+		const [account_data, delegated, rexbal, rexfund, balances] = await Promise.all([
 			network.client.v1.chain.get_account(params.name),
 			systemContract.table('delband').all({ scope: params.name }),
 			systemContract.table('rexbal').get(params.name),
+   		systemContract.table('rexfund').get(params.name),
 			loadBalances(network, params.name, fetch)
 		]);
 
@@ -44,7 +45,8 @@ export const GET: RequestHandler = async ({ fetch, params }) => {
 				account_data,
 				balances,
 				delegated,
-				rex
+				rex: rexbal,
+				rexfund: rexfund
 			},
 			{ headers }
 		);
