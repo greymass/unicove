@@ -105,7 +105,7 @@
 		<div class="grid grid-cols-2 gap-2">
 			<span>Price for 1000 bytes:</span>
 			<span>{sellRamState.pricePerKB} / KB</span>
-			<span>Estimated RAM to be sold:</span>
+			<span>RAM to be sold:</span>
 			<span>{sellRamState.bytesToSell} Bytes</span>
 			<span>RAM Value:</span>
 			<span>{sellRamState.tokens}</span>

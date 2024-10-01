@@ -22,7 +22,10 @@ export class BuyRAMState {
 	public bytesValue: Asset = $derived(
 		this.format === 'asset' || !this.bytes || !this.pricePerKB.value
 			? this.tokens
-			: Asset.from((this.bytes * this.pricePerKB.value) / 1000, this.chain.systemToken.symbol)
+			: Asset.from(
+					(this.bytes * this.pricePerKB.value) / 1000,
+					this.chain.systemToken?.symbol || '0,UNKNOWN'
+				)
 	);
 
 	public bytesToBuy: number = $derived(
@@ -32,11 +35,14 @@ export class BuyRAMState {
 	);
 
 	public fee: Asset = $derived(
-		Asset.from(this.bytesValue.value * 0.005, this.chain.systemToken.symbol)
+		Asset.from(this.bytesValue.value * 0.005, this.chain.systemToken?.symbol || '0,UNKNOWN')
 	);
 
 	public bytesCost: Asset = $derived(
-		Asset.fromUnits(this.bytesValue.units.adding(this.fee.units), this.chain.systemToken.symbol)
+		Asset.fromUnits(
+			this.bytesValue.units.adding(this.fee.units),
+			this.chain.systemToken?.symbol || '0,UNKNOWN'
+		)
 	);
 
 	public valid: boolean = $derived(
@@ -61,7 +67,7 @@ export class BuyRAMState {
 
 	reset() {
 		this.bytes = undefined;
-		this.tokens = Asset.fromUnits(0, this.chain.systemToken.symbol);
+		this.tokens = Asset.fromUnits(0, this.chain.systemToken?.symbol || '0,UNKNOWN');
 	}
 
 	toJSON() {
