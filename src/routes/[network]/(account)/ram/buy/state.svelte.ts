@@ -75,7 +75,7 @@ export class BuyRAMState {
 			return Serializer.objectify({
 				payer: this.payer,
 				receiver: this.receiver,
-				quant: this.bytesValue
+				quant: this.bytesCost
 			});
 		} else {
 			return Serializer.objectify({

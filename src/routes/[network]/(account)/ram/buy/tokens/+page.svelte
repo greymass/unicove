@@ -93,7 +93,7 @@
 			{#if context.account}
 				{context.account.balance?.liquid}
 			{:else}
-				0.0000 {data.network.chain.systemToken.symbol.code}
+				0.0000 {data.network.chain.systemToken?.symbol.code || ''}
 			{/if}
 		</p>
 	</Stack>
