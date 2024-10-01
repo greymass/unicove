@@ -9,30 +9,29 @@
 	import { Card, Stack } from '$lib/components/layout';
 	import { Asset } from '@wharfkit/antelope';
 	import Select from '../select/select.svelte';
+	import type { ExtendedSelectOption } from '../select/types';
 
 	interface Props {
 		data: { date: Date; value: Asset }[];
-		debug?: boolean;
 	}
 
-	let { data, debug = true }: Props = $props();
+	let { data }: Props = $props();
 
 	let ctx: HTMLCanvasElement;
 	let chart: Chart<'line'>;
 
-	const range = [
+	const range: ExtendedSelectOption[] = [
 		{ label: '1D', value: 1 },
 		{ label: '1W', value: 7 },
 		{ label: '1M', value: 30 },
 		{ label: '1Y', value: 365 }
 	];
 
-	let selectedRange = $state(range[1]);
+	let selectedRange: ExtendedSelectOption = $state(range[1]);
 
 	let dataRange = $derived.by(() => {
 		const rangeEndDate = dayjs(data[0].date);
-		const rangeStartDate = rangeEndDate.subtract(selectedRange.value, 'day');
-		debug && $inspect({ rangeStartDate, rangeEndDate });
+		const rangeStartDate = rangeEndDate.subtract(Number(selectedRange.value), 'day');
 		return data.filter(({ date }) => dayjs(date).isAfter(rangeStartDate));
 	});
 
@@ -96,10 +95,6 @@
 					legend: {
 						display: false
 					}
-					// decimation: {
-					// 	enabled: true,
-					// 	algorithm: 'lttb'
-					// }
 				}
 			}
 		});
@@ -110,9 +105,6 @@
 		chart.data.datasets[0].data = values;
 		chart.update();
 	});
-
-	debug &&
-		$inspect({ dataRangeLength: dataRange.length, currentDate: currentPoint.date, percentChange });
 </script>
 
 <Card>

@@ -1,38 +1,94 @@
 <script lang="ts">
+	import { getContext } from 'svelte';
+	import { Asset } from '@wharfkit/antelope';
+
 	import RamPriceHistory from '$lib/components/chart/rampricehistory.svelte';
+	import RAM from '$lib/components/elements/ram.svelte';
+	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import Pageheader from '$lib/components/pageheader.svelte';
+	import Card from '$lib/components/layout/box/card.svelte';
+	import Button from '$lib/components/button/button.svelte';
+	import { calculateValue } from '$lib/utils.js';
+
 	const { data } = $props();
+	const context = getContext<UnicoveContext>('state');
 </script>
 
-<h3>Current RAM Price</h3>
+{#if context.account}
+	<Pageheader title="Your RAM" subtitle="RAM usage for your account" />
+	<Card class="p-4">
+		{#if context.account.ram}
+			<div class="space-y-4">
+				<div class="flex items-center justify-between">
+					<span class="text-lg font-semibold">Total RAM:</span>
+					<RAM bytes={Number(context.account.ram.max || 0)} />
+				</div>
+				<div class="border-t pt-4">
+					<h4 class="mb-2 text-lg font-semibold">Value:</h4>
+					{#if context.account.network.ramprice}
+						<div class="flex flex-col space-y-2">
+							<div class="flex justify-between">
+								<span>Network Token:</span>
+								<span
+									>{calculateValue(
+										Asset.fromUnits(context.account.ram.max, '3,RAM'),
+										context.account.network.ramprice.eos
+									)}</span
+								>
+							</div>
+							{#if context.account.network.ramprice.usd}
+								<div class="flex justify-between">
+									<span>USD:</span>
+									<span
+										>{calculateValue(
+											Asset.fromUnits(context.account.ram.max, '3,RAM'),
+											context.account.network.ramprice.usd
+										)}</span
+									>
+								</div>
+							{/if}
+						</div>
+					{:else}
+						<p class="text-gray-400">RAM price information unavailable</p>
+					{/if}
+				</div>
+			</div>
+		{:else}
+			<p class="text-center text-gray-400">Loading your RAM information...</p>
+		{/if}
+	</Card>
+	<Button href="/{data.network}/account/{context.account.name}/ram">View Account RAM Details</Button
+	>
+{:else}
+	<Pageheader title="RAM Information" subtitle="Login to view your RAM usage" />
+	<Card>To view your RAM usage, please log in or create an account.</Card>
+{/if}
+
 {#if data.network && data.network.ramstate}
-	<p>EOS: {String(data.network.ramstate.price_per_kb(1))}</p>
-	{#if data.network.ramprice && data.network.ramprice.usd}
-		<p>USD: ${data.network.ramprice.usd}</p>
-	{/if}
+	<Pageheader title="Current RAM Price" />
+	<Card class="p-4">
+		<h4 class="mb-2 text-lg font-semibold">Current RAM Price</h4>
+		<div class="flex flex-col space-y-2">
+			<div class="flex justify-between">
+				<span>Network Token:</span>
+				<span>{String(data.network.ramstate.price_per_kb(1))}/KB</span>
+			</div>
+			{#if data.network.ramprice && data.network.ramprice.usd}
+				<div class="flex justify-between">
+					<span>USD:</span>
+					<span>${data.network.ramprice.usd.value}/KB</span>
+				</div>
+			{/if}
+		</div>
+	</Card>
 {:else}
 	<p>Loading current RAM price...</p>
 {/if}
 
 {#if data.network.supports('timeseries')}
-	{#if data.historicalPrices.length > 0}
-		<h3>Historical RAM Prices</h3>
+	{#if data.historicalPrices && data.historicalPrices.length > 0}
+		<Pageheader title="Historical RAM Prices" />
 		<RamPriceHistory data={data.historicalPrices} />
-		<table class="float-left max-w-lg border-collapse">
-			<thead>
-				<tr class="bg-gray-60">
-					<th class="border p-1 text-left">Date</th>
-					<th class="border p-1 text-left">Price</th>
-				</tr>
-			</thead>
-			<tbody>
-				{#each data.historicalPrices as price}
-					<tr>
-						<td class="border p-1">{price.date.toLocaleString()}</td>
-						<td class="border p-1">{String(price.value)}</td>
-					</tr>
-				{/each}
-			</tbody>
-		</table>
 	{:else}
 		<p>No historical RAM prices available.</p>
 	{/if}

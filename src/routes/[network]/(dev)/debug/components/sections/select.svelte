@@ -1,19 +1,22 @@
 <script lang="ts">
 	import { Cluster, Stack } from '$lib/components/layout';
 	import Select from '$lib/components/select/select.svelte';
+	import type { ExtendedSelectOption } from '$lib/components/select/types';
 	import Label from '$lib/components/input/label.svelte';
 	import { Chains, TokenBalance, TokenIdentifier } from '@wharfkit/common';
 	import TokenSelect from '$lib/components/select/token.svelte';
+	import type { SelectOption } from '@melt-ui/svelte';
+	import Button from '$lib/components/button/button.svelte';
 
-	const options = [
+	const options: SelectOption[] = [
 		{ value: 30, label: '30d' },
 		{ value: 60, label: '60d' },
 		{ value: 90, label: '90d' },
 		{ value: 365, label: '365d' }
 	];
-	let selected = $state(options[1]);
+	let selected = $state(options[0]);
 
-	const formOptions = [
+	const formOptions: SelectOption[] = [
 		{ value: 30, label: '30d' },
 		{ value: 60, label: '60d' },
 		{ value: 90, label: '90d' },
@@ -21,7 +24,7 @@
 	];
 	let selectedFormOption = $state(formOptions[1]);
 
-	const imageOptions = [
+	const imageOptions: ExtendedSelectOption[] = [
 		{ value: Chains.EOS.id, label: Chains.EOS.name, image: String(Chains.EOS.getLogo()) },
 		{
 			value: Chains.Jungle4.id,
@@ -80,6 +83,7 @@
 				<Select id="date-range" {options} bind:selected />
 			</Stack>
 			<span>Value in parent: {selected.label}</span>
+			<Button onclick={() => (selected = options[2])}>Test set to 90d</Button>
 		</Cluster>
 	</Stack>
 
