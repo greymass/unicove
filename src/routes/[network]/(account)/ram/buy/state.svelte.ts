@@ -21,7 +21,7 @@ export class BuyRAMState {
 
 	public bytesValue: Asset = $derived(
 		this.format === 'asset' || !this.bytes || !this.pricePerKB.value
-			? this.tokens
+			? Asset.from(this.tokens.value * 0.995, this.chain.systemToken?.symbol || '0,UNKNOWN')
 			: Asset.from(
 					(this.bytes * this.pricePerKB.value) / 1000,
 					this.chain.systemToken?.symbol || '0,UNKNOWN'
@@ -35,14 +35,19 @@ export class BuyRAMState {
 	);
 
 	public fee: Asset = $derived(
-		Asset.from(this.bytesValue.value * 0.005, this.chain.systemToken?.symbol || '0,UNKNOWN')
+		Asset.from(
+			(this.format === 'asset' ? this.tokens.value : this.bytesValue.value) * 0.005,
+			this.chain.systemToken?.symbol || '0,UNKNOWN'
+		)
 	);
 
 	public bytesCost: Asset = $derived(
-		Asset.fromUnits(
-			this.bytesValue.units.adding(this.fee.units),
-			this.chain.systemToken?.symbol || '0,UNKNOWN'
-		)
+		this.format === 'asset'
+			? this.tokens
+			: Asset.fromUnits(
+					this.bytesValue.units.adding(this.fee.units),
+					this.chain.systemToken?.symbol || '0,UNKNOWN'
+				)
 	);
 
 	public valid: boolean = $derived(
@@ -57,6 +62,13 @@ export class BuyRAMState {
 
 	public insufficientBalance: boolean = $derived(
 		!!this.balance.value && this.bytesValue.value > this.balance.value
+	);
+
+	public expectedToReceive: Asset = $derived(
+		Asset.fromUnits(
+			this.bytesValue.units.subtracting(this.fee.units),
+			this.chain.systemToken?.symbol || '0,UNKNOWN'
+		)
 	);
 
 	constructor(chain: ChainDefinition) {
