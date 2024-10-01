@@ -64,13 +64,6 @@ export class BuyRAMState {
 		!!this.balance.value && this.bytesValue.value > this.balance.value
 	);
 
-	public expectedToReceive: Asset = $derived(
-		Asset.fromUnits(
-			this.bytesValue.units.subtracting(this.fee.units),
-			this.chain.systemToken?.symbol || '0,UNKNOWN'
-		)
-	);
-
 	constructor(chain: ChainDefinition) {
 		this.chain = chain;
 
