@@ -24,4 +24,3 @@ jobs:
       - uses: oven-sh/setup-bun@v2
       - run: bun install
       - run: bunx tsc --noemit
-

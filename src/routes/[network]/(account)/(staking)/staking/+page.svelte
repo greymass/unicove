@@ -9,6 +9,7 @@
 
 	import type { UnstakingRecord, WithdrawableBalance } from './utils';
 	import { getStakedBalance, getUnstakingBalances, getAPY } from './utils';
+	import UnstakingBalances from './unstaking.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
@@ -46,39 +47,7 @@
 				>
 			</Switcher>
 		</Card>
-
-		<Card title="Unstaking Balances">
-			<table class="table-auto">
-				<thead class="border-b-2 border-shark-100/10">
-					<tr class="caption font-medium">
-						<th class="p-4 text-left">Amount</th>
-						<th class="p-4 text-right">Date available</th>
-					</tr>
-				</thead>
-				<tbody>
-					{#each unstaking as record}
-						{#if !record.savings}
-							<tr>
-								<td class="p-4">{record.balance}</td>
-								<td class="p-4 text-right"
-									>{record.date
-										? record.date.toLocaleDateString(undefined, {
-												weekday: 'long',
-												year: 'numeric',
-												month: 'long',
-												day: 'numeric'
-											})
-										: '--'}
-								</td></tr
-							>
-						{/if}
-					{/each}
-				</tbody>
-			</table>
-			<Button href="/{networkName}/staking/withdraw" variant="secondary" class="text-skyBlue-500"
-				>Withdraw</Button
-			>
-		</Card>
+		<UnstakingBalances href="/{networkName}/staking/withdraw" records={unstaking} />
 	</Switcher>
 	<Card class="gap-5">
 		<Stack class="gap-0">

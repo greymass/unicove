@@ -36,6 +36,7 @@ export interface DataSources {
 	light_account: LightAPIBalanceResponse[];
 	delegated: SystemContract.Types.delegated_bandwidth[];
 	rex?: SystemContract.Types.rex_balance;
+	rexfund?: SystemContract.Types.rex_fund;
 }
 
 export interface LightAPIBalanceRow {
