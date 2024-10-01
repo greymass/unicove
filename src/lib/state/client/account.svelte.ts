@@ -16,6 +16,7 @@ import * as SystemContract from '$lib/wharf/contracts/system';
 import { type DataSources } from '$lib/types';
 import { chainMapper } from '$lib/wharf/chains';
 import { NetworkState } from '$lib/state/network.svelte';
+import { calculateValue } from '$lib/utils';
 
 const defaultDataSources = {
 	get_account: undefined,
@@ -107,12 +108,6 @@ export class AccountState {
 			}
 		};
 	}
-}
-
-export function calculateValue(balance: Asset, currency: Asset): Asset {
-	return Asset.from(
-		`${(currency.value * balance.value).toFixed(currency.symbol.precision)} ${currency.symbol.code}`
-	);
 }
 
 export interface AccountValue {

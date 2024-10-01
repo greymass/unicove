@@ -5,7 +5,7 @@
 	import Stack from '$lib/components/layout/stack.svelte';
 	import Transaction from '$lib/components/transaction.svelte';
 
-	import { Checksum256 } from '@wharfkit/antelope';
+	import { Asset, Checksum256 } from '@wharfkit/antelope';
 
 	import { RentState } from './state.svelte';
 	import { RentType, ResourceType } from '../../types';
@@ -13,6 +13,7 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
 	import { getContext } from 'svelte';
+	import Error from '../../../../../+error.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 	interface Props {
@@ -28,21 +29,32 @@
 				rentState.payer = context.account.name;
 				rentState.receiver = context.account.name;
 			}
-			if (context.network.powerupstate && context.network.sampledUsage) {
+			if (
+				context.network.powerupstate &&
+				context.network.sampledUsage &&
+				context.network.chain.systemToken
+			) {
 				if (resourceType === ResourceType.CPU) {
 					rentState.frac = context.network.powerupstate.cpu.frac_by_ms(
 						context.network.sampledUsage,
 						Number(rentState.amount)
+					);
+					rentState.pricePerUnit = Asset.from(
+						context.network.powerupstate?.cpu.price_per_ms(context.network.sampledUsage, 1),
+						context.network.chain.systemToken?.symbol
 					);
 				} else {
 					rentState.frac = context.network.powerupstate.net.frac_by_kb(
 						context.network.sampledUsage,
 						Number(rentState.amount)
 					);
+					rentState.pricePerUnit = Asset.from(
+						context.network.powerupstate?.net.price_per_kb(context.network.sampledUsage, 1),
+						context.network.chain.systemToken?.symbol
+					);
 				}
 			}
 			rentState.balance = context.account.balance ? context.account.balance.liquid : undefined;
-			rentState.pricePerUnit = context.network.powerupprice;
 		} else {
 			rentState.reset();
 		}

@@ -73,7 +73,7 @@ async function loadBalances(
 	f: typeof fetch
 ): Promise<LightAPIBalanceRow[]> {
 	const balances = [];
-	if (network.config.features.lightapi) {
+	if (network.supports('lightapi')) {
 		const result = await f(`https://balances.unicove.com/api/balances/${network}/${account}`);
 		const json: LightAPIBalanceResponse = await result.json();
 		balances.push(...json.balances);

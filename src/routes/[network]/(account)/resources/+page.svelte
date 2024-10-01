@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Code from '$lib/components/code.svelte';
 	import PageHeader from '$lib/components/pageheader.svelte';
 	import Grid from '$lib/components/layout/grid.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
@@ -11,7 +10,7 @@
 	import { getContext } from 'svelte';
 
 	import { ResourceType } from './types';
-	import { NetworkConfig, ResourceState } from './state.svelte';
+	import { ResourceState } from './state.svelte';
 
 	const { data } = $props();
 
@@ -20,11 +19,6 @@
 	const ramState = $state(new ResourceState(ResourceType.RAM));
 	const cpuState = $state(new ResourceState(ResourceType.CPU));
 	const netState = $state(new ResourceState(ResourceType.NET));
-
-	const networkConfig = $state(new NetworkConfig());
-	$effect(() => {
-		networkConfig.setConfig(context.network?.config);
-	});
 
 	$effect(() => {
 		ramState.setResource(context.account?.ram);
@@ -39,26 +33,30 @@
 <Stack class="mt-10">
 	<Grid itemWidth="270px">
 		<ResourceWrapper resourceState={ramState}>
-			{#if networkConfig.hasBuyRAM}
+			{#if context.network?.supports('rammarket')}
 				<div class="flex flex-col">
-					<Button class="text-blue-400" variant="pill" href="/{network}/ram/buy">BUY</Button>
-					<Button class="text-blue-400" variant="pill" href="/{network}/ram/sell">SELL</Button>
+					<Button class="text-blue-400" variant="pill" href="/{network}/ram/buy/tokens">BUY</Button>
+					<Button class="text-blue-400" variant="pill" href="/{network}/ram/sell/tokens"
+						>SELL</Button
+					>
 				</div>
 			{/if}
 		</ResourceWrapper>
 		<ResourceWrapper resourceState={cpuState}>
-			{#if networkConfig.hasREX || networkConfig.hasPowerUp}
+			{#if context.network?.supports('rentrex') || context.network?.supports('powerup')}
 				<Button class="text-blue-400" variant="pill" href="/{network}/resources/cpu">RENT</Button>
-			{:else if networkConfig.hasStaking}
+			{/if}
+			{#if context.network?.supports('stakeresource')}
 				<Button class="text-blue-400" variant="pill" href="/{network}/resources/cpu/stake"
 					>STAKE</Button
 				>
 			{/if}
 		</ResourceWrapper>
 		<ResourceWrapper resourceState={netState}>
-			{#if networkConfig.hasREX || networkConfig.hasPowerUp}
+			{#if context.network?.supports('rentrex') || context.network?.supports('powerup')}
 				<Button class="text-blue-400" variant="pill" href="/{network}/resources/net">RENT</Button>
-			{:else if networkConfig.hasStaking}
+			{/if}
+			{#if context.network?.supports('stakeresource')}
 				<Button class="text-blue-400" variant="pill" href="/{network}/resources/net/stake"
 					>STAKE</Button
 				>
