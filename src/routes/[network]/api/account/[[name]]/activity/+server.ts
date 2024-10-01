@@ -16,7 +16,7 @@ export async function GET({ fetch, params }) {
 	}
 
 	const network = getNetwork(chain, fetch);
-	if (!network.config.features.robo) {
+	if (!network.supports('robo')) {
 		return json({ error: `Activity not supported on ${network.chain.name}.` }, { status: 500 });
 	}
 

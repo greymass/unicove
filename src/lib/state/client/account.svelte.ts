@@ -16,6 +16,7 @@ import * as SystemContract from '$lib/wharf/contracts/system';
 import { type DataSources } from '$lib/types';
 import { chainMapper } from '$lib/wharf/chains';
 import { NetworkState } from '$lib/state/network.svelte';
+import { calculateValue } from '$lib/utils';
 
 const defaultDataSources = {
 	get_account: undefined,
@@ -107,12 +108,6 @@ export class AccountState {
 	}
 }
 
-export function calculateValue(balance: Asset, currency: Asset): Asset {
-	return Asset.from(
-		`${(currency.value * balance.value).toFixed(currency.symbol.precision)} ${currency.symbol.code}`
-	);
-}
-
 export interface AccountValue {
 	delegated: Asset;
 	liquid: Asset;
@@ -194,7 +189,7 @@ export function getBalance(network: NetworkState, sources: DataSources): Balance
 
 	// Add any staked (REX) tokens to total balance based on current value
 	if (sources.rex) {
-		if (network.config.features.rex && network.rexstate) {
+		if (network.supports('rex') && network.rexstate) {
 			const rex = network.rexToToken(sources.rex.rex_balance);
 			// const rex = convertRexToToken(sources.rex.rex_balance, network.rexstate);
 			staked.units.add(rex.units);

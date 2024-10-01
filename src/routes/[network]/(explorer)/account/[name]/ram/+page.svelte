@@ -2,7 +2,7 @@
 	import { Asset, Int64 } from '@wharfkit/session';
 	import Card from '$lib/components/layout/box/card.svelte';
 	import RAM from '$lib/components/elements/ram.svelte';
-	import { calculateValue } from '$lib/state/client/account.svelte';
+	import { calculateValue } from '$lib/utils';
 
 	const { data } = $props();
 </script>
