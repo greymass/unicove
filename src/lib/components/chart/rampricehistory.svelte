@@ -13,10 +13,9 @@
 
 	interface Props {
 		data: { date: Date; value: Asset }[];
-		debug?: boolean;
 	}
 
-	let { data, debug = true }: Props = $props();
+	let { data }: Props = $props();
 
 	let ctx: HTMLCanvasElement;
 	let chart: Chart<'line'>;
@@ -31,12 +30,8 @@
 	let selectedRange: ExtendedSelectOption = $state(range[1]);
 
 	let dataRange = $derived.by(() => {
-		// Seeing a weird bug with svelte where this component is rerendered with data being undefined.
-		// This is a workaround to prevent the component from breaking the page.
-		if (!data || data.length === 0) return [];
 		const rangeEndDate = dayjs(data[0].date);
 		const rangeStartDate = rangeEndDate.subtract(Number(selectedRange.value), 'day');
-		if (debug) $inspect({ rangeStartDate, rangeEndDate });
 		return data.filter(({ date }) => dayjs(date).isAfter(rangeStartDate));
 	});
 
@@ -111,10 +106,6 @@
 		chart.data.datasets[0].data = values;
 		chart.update();
 	});
-
-	if (debug) {
-		$inspect({ dataRangeLength: dataRange.length, currentDate: currentPoint?.date, percentChange });
-	}
 </script>
 
 <Card>
