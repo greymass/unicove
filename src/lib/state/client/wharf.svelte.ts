@@ -10,6 +10,7 @@ import {
 	type SerializedSession,
 	type TransactArgs,
 	type TransactOptions,
+	type TransactPlugin,
 	type TransactResult,
 	type WalletPlugin,
 	Session,
@@ -22,11 +23,13 @@ import { WalletPluginPrivateKey } from '@wharfkit/wallet-plugin-privatekey';
 import { WalletPluginWombat } from '@wharfkit/wallet-plugin-wombat';
 import { WalletPluginScatter } from '@wharfkit/wallet-plugin-scatter';
 import { WalletPluginTokenPocket } from '@wharfkit/wallet-plugin-tokenpocket';
+import { TransactPluginResourceProvider } from '@wharfkit/transact-plugin-resource-provider';
 
 import { AccountCreationPluginMetamask } from '@wharfkit/account-creation-plugin-metamask';
 import { AccountCreationPluginGreymass } from '@wharfkit/account-creation-plugin-greymass';
 
 import { TransactPluginStatusEmitter } from '$lib/wharf/plugins/status';
+
 import {
 	type QueuedTransaction,
 	StatusType,
@@ -48,6 +51,11 @@ const walletPlugins: WalletPlugin[] = [
 const accountCreationPlugins: AccountCreationPlugin[] = [
 	new AccountCreationPluginMetamask(),
 	new AccountCreationPluginGreymass()
+];
+
+const transactPlugins: TransactPlugin[] = [
+	new TransactPluginStatusEmitter(),
+	new TransactPluginResourceProvider()
 ];
 
 // If a local key is provided, add the private key wallet
@@ -80,7 +88,8 @@ export class WharfState {
 				walletPlugins
 			},
 			{
-				accountCreationPlugins
+				accountCreationPlugins,
+				transactPlugins
 			}
 		);
 		$effect(() => {
@@ -173,19 +182,14 @@ export class WharfState {
 			options
 		};
 
-		const result = await this.session
-			.transact(args, {
-				...options,
-				transactPlugins: [new TransactPluginStatusEmitter()]
-			})
-			.catch((e: Error) => {
-				transaction.status = StatusType.ERROR;
-				transaction.error = String(e);
-				queueTransaction(transaction);
-				const { id } = sendErrorToast(transaction);
-				transaction.toastId = id;
-				throw e;
-			});
+		const result = await this.session.transact(args).catch((e: Error) => {
+			transaction.status = StatusType.ERROR;
+			transaction.error = String(e);
+			queueTransaction(transaction);
+			const { id } = sendErrorToast(transaction);
+			transaction.toastId = id;
+			throw e;
+		});
 
 		if (!result.resolved || !result.response) {
 			transaction.status = StatusType.ERROR;
