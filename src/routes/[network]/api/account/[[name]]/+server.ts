@@ -3,7 +3,7 @@ import { getChainDefinitionFromParams, getNetwork, NetworkState } from '$lib/sta
 import { getCacheHeaders } from '$lib/utils';
 import type { LightAPIBalanceResponse, LightAPIBalanceRow } from '$lib/types.js';
 import type { RequestHandler } from './$types';
-import { type NameType } from '@wharfkit/antelope';
+import { Asset, type NameType } from '@wharfkit/antelope';
 
 export const GET: RequestHandler = async ({ fetch, params }) => {
 	const chain = getChainDefinitionFromParams(params.network);
@@ -29,21 +29,13 @@ export const GET: RequestHandler = async ({ fetch, params }) => {
 
 		// If no response from the light API, add the core liquid balance as a default if it exists
 		if (!balances.length && chain.systemToken) {
-			if (account_data.core_liquid_balance) {
-				balances.push({
-					contract: chain.systemToken.contract.toString(),
-					amount: account_data.core_liquid_balance.quantity,
-					decimals: account_data.core_liquid_balance.symbol.precision.toString(),
-					currency: account_data.core_liquid_balance.symbol.code.toString()
-				});
-			} else {
-				balances.push({
-					contract: chain.systemToken.contract.toString(),
-					amount: '0',
-					decimals: '0',
-					currency: ''
-				});
-			}
+			const symbol = Asset.Symbol.from(network.config.symbol);
+			balances.push({
+				contract: String(chain.systemToken.contract),
+				amount: '0',
+				decimals: String(symbol.precision),
+				currency: String(symbol.code)
+			});
 		}
 
 		return json(
