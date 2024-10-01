@@ -27,7 +27,7 @@ export const GET: RequestHandler = async ({ fetch, params }) => {
 			loadBalances(network, params.name, fetch)
 		]);
 
-		// If no response from the light API, add the core liquid balance as a default if it exists
+		// If no response from the light API, add a default balance of zero
 		if (!balances.length && chain.systemToken) {
 			const symbol = Asset.Symbol.from(network.config.symbol);
 			balances.push({
