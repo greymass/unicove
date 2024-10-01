@@ -39,7 +39,6 @@
 	let currentPrice = $derived(String(currentPoint.value));
 
 	let percentChange = $derived.by(() => {
-		if (!currentPoint || !dataRange[dataRange.length - 1]) return '0%';
 		const current = Number(currentPoint.value.quantity);
 		const initial = Number(dataRange[dataRange.length - 1].value.quantity);
 		return (((current - initial) / current) * 100).toFixed(2) + '%';
