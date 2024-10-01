@@ -29,7 +29,7 @@ export class BuyRAMState {
 	);
 
 	public bytesToBuy: number = $derived(
-		this.bytes || !this.bytesValue.value || !this.pricePerKB.value
+		this.format === 'units' || !this.bytesValue.value || !this.pricePerKB.value
 			? this.bytes || 0
 			: Number(((this.bytesValue.value / this.pricePerKB.value) * 1000).toFixed(0))
 	);
