@@ -14,6 +14,13 @@
 
 	const context = getContext<UnicoveContext>('state');
 
+	interface PageProps {
+		class?: string;
+		network: NetworkState;
+	}
+
+	let { class: className = '', network }: PageProps = $props();
+
 	let currentSession = $derived(context.wharf.session);
 
 	function closeDrawer() {
@@ -21,7 +28,9 @@
 	}
 
 	function addSession() {
-		context.wharf.login();
+		context.wharf.login({
+			chain: network.chain.id
+		});
 	}
 
 	function switchSession(session: SerializedSession) {
@@ -50,13 +59,6 @@
 	});
 
 	let logo = $derived(chainLogos.get(String(context.wharf.session?.chain.id)) || '');
-
-	interface PageProps {
-		class?: string;
-		network: NetworkState;
-	}
-
-	let { class: className = '', network }: PageProps = $props();
 </script>
 
 <!-- [@media(any-hover:hover)]:hover:opacity-80 -->
