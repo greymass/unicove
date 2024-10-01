@@ -11,7 +11,7 @@ import {
 	getWithdrawableBalance
 } from '../utils';
 
-export class WithdrawManger {
+export class WithdrawManager {
 	public network: NetworkState | undefined = $state();
 	public account: AccountState | undefined = $state();
 	public wharf: WharfState | undefined = $state();

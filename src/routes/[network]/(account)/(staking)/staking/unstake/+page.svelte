@@ -10,7 +10,7 @@
 	import * as m from '$lib/paraglide/messages.js';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
-	import { UnstakeManager } from './state.svelte';
+	import { UnstakeManager } from './manager.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
