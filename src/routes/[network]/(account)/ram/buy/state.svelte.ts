@@ -21,22 +21,33 @@ export class BuyRAMState {
 
 	public bytesValue: Asset = $derived(
 		this.format === 'asset' || !this.bytes || !this.pricePerKB.value
-			? this.tokens
-			: Asset.from((this.bytes * this.pricePerKB.value) / 1000, this.chain.systemToken.symbol)
+			? Asset.from(this.tokens.value * 0.995, this.chain.systemToken?.symbol || '0,UNKNOWN')
+			: Asset.from(
+					(this.bytes * this.pricePerKB.value) / 1000,
+					this.chain.systemToken?.symbol || '0,UNKNOWN'
+				)
 	);
 
 	public bytesToBuy: number = $derived(
-		this.bytes || !this.bytesValue.value || !this.pricePerKB.value
+		this.format === 'units' || !this.bytesValue.value || !this.pricePerKB.value
 			? this.bytes || 0
 			: Number(((this.bytesValue.value / this.pricePerKB.value) * 1000).toFixed(0))
 	);
 
 	public fee: Asset = $derived(
-		Asset.from(this.bytesValue.value * 0.005, this.chain.systemToken.symbol)
+		Asset.from(
+			(this.format === 'asset' ? this.tokens.value : this.bytesValue.value) * 0.005,
+			this.chain.systemToken?.symbol || '0,UNKNOWN'
+		)
 	);
 
 	public bytesCost: Asset = $derived(
-		Asset.fromUnits(this.bytesValue.units.adding(this.fee.units), this.chain.systemToken.symbol)
+		this.format === 'asset'
+			? this.tokens
+			: Asset.fromUnits(
+					this.bytesValue.units.adding(this.fee.units),
+					this.chain.systemToken?.symbol || '0,UNKNOWN'
+				)
 	);
 
 	public valid: boolean = $derived(
@@ -61,7 +72,7 @@ export class BuyRAMState {
 
 	reset() {
 		this.bytes = undefined;
-		this.tokens = Asset.fromUnits(0, this.chain.systemToken.symbol);
+		this.tokens = Asset.fromUnits(0, this.chain.systemToken?.symbol || '0,UNKNOWN');
 	}
 
 	toJSON() {
@@ -69,7 +80,7 @@ export class BuyRAMState {
 			return Serializer.objectify({
 				payer: this.payer,
 				receiver: this.receiver,
-				quant: this.bytesValue
+				quant: this.bytesCost
 			});
 		} else {
 			return Serializer.objectify({
