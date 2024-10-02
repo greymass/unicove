@@ -13,6 +13,7 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
 	import { getContext } from 'svelte';
+	import { preventDefault } from '$lib/utils';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -80,7 +81,7 @@
 	<Transaction {network} {transactionId} />
 {/if}
 
-<form on:submit|preventDefault={handleRent}>
+<form onsubmit={preventDefault(handleRent)}>
 	<Stack class="gap-3">
 		<Label for="resourceNumberInput">Amount of {rentState.resourceUnit} to rent from REX.</Label>
 		<NumberInput

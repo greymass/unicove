@@ -15,6 +15,7 @@
 	import NumberInput from '$lib/components/input/number.svelte';
 
 	import { BuyRAMState } from '../state.svelte.js';
+	import { preventDefault } from '$lib/utils.js';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
@@ -76,7 +77,7 @@
 	<Transaction network={data.network} {transactionId} />
 {/if}
 
-<form on:submit|preventDefault={handleBuyRAM}>
+<form onsubmit={preventDefault(handleBuyRAM)}>
 	<Stack class="gap-3">
 		<Label for="bytesInput">Amount to buy (Bytes)</Label>
 		<NumberInput

@@ -13,6 +13,7 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
 	import { getContext } from 'svelte';
+	import { preventDefault } from '$lib/utils';
 
 	const context = getContext<UnicoveContext>('state');
 	let quantityInput: AssetInput | undefined = $state();
@@ -107,7 +108,7 @@
 	<Transaction {network} {transactionId} />
 {/if}
 
-<form on:submit|preventDefault={handleRent}>
+<form onsubmit={preventDefault(handleRent)}>
 	<Stack class="gap-3">
 		<Label for="assetInput"
 			>Amount of {rentState.chain.systemToken!.symbol.code} to stake as {rentState.resourceName}</Label

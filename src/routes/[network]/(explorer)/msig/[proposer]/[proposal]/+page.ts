@@ -1,10 +1,9 @@
-import { error } from '@sveltejs/kit';
-import { Name, type API } from '@wharfkit/antelope';
+// import { error } from '@sveltejs/kit';
+// import { Name, type API } from '@wharfkit/antelope';
 
 import type { PageLoad } from './$types';
-import * as m from '$lib/paraglide/messages.js';
 
-export const load: PageLoad = async ({ fetch, params }) => {
+export const load: PageLoad = async () => {
 	// const result = await getClient(fetch).v1.chain.get_table_rows({
 	// 	code: 'eosio.msig',
 	// 	scope: params.proposer,

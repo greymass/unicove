@@ -1,15 +1,9 @@
 <script lang="ts">
-	import { Asset } from '@wharfkit/antelope';
-
-	import PillGroup from '$lib/components/navigation/pillgroup.svelte';
-	import { Card, Stack, Switcher } from '$lib/components/layout';
-	import AssetInput from '$lib/components/input/asset.svelte';
+	import { Stack, Switcher } from '$lib/components/layout';
 	import Button from '$lib/components/button/button.svelte';
-	import Label from '$lib/components/input/label.svelte';
 	import PageHeader from '$lib/components/pageheader.svelte';
 	import Transaction from '$lib/components/transaction.svelte';
 
-	import * as m from '$lib/paraglide/messages.js';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
 	import { WithdrawManager } from './manager.svelte';

@@ -1,7 +1,7 @@
-import { Serializer, Asset, Name } from '@wharfkit/antelope';
+import { Asset, Name } from '@wharfkit/antelope';
 import { ChainDefinition } from '@wharfkit/common';
 import { RentType, ResourceType } from '../../types';
-import type { ActionNames, ActionParams } from '$lib/wharf/contracts/system';
+import type { ActionNames } from '$lib/wharf/contracts/system';
 import { getName, getUnit } from '../../utils';
 
 const defaultName = Name.from('');

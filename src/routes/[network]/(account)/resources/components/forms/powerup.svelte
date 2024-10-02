@@ -13,7 +13,6 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
 	import { getContext } from 'svelte';
-	import Error from '../../../../../+error.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 	interface Props {
