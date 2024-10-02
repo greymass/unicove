@@ -24,7 +24,7 @@ export const GET: RequestHandler = async ({ fetch, params }) => {
 			network.client.v1.chain.get_account(params.name),
 			systemContract.table('delband').all({ scope: params.name }),
 			systemContract.table('rexbal').get(params.name),
-   		systemContract.table('rexfund').get(params.name),
+			systemContract.table('rexfund').get(params.name),
 			loadBalances(network, params.name, fetch)
 		]);
 
