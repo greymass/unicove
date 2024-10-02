@@ -36,7 +36,8 @@ export async function GET({ fetch, params }) {
 				headers
 			}
 		);
-	} catch (_error) {
+	} catch (error) {
+		console.error(error);
 		return json({ error: 'Unable to load account.' }, { status: 500 });
 	}
 }

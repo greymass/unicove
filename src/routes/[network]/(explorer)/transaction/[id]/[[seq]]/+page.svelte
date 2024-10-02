@@ -30,8 +30,7 @@
 	interface Action {
 		account: string;
 		name: string;
-		data: any; // Adjust as necessary
-		// Other properties if needed
+		data: Record<string, unknown>;
 	}
 
 	// Type guard for account
