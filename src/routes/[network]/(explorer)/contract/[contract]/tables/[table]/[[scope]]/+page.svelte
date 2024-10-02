@@ -9,7 +9,7 @@
 	const { data } = $props();
 
 	const tableDef = data.abi.tables.find((t: ABI.Table) => t.name === data.table);
-	const struct = data.abi.structs.find((s: ABI.Struct) => s.name === tableDef.type);
+	const struct = data.abi.structs.find((s: ABI.Struct) => s.name === tableDef?.type);
 </script>
 
 <Stack>

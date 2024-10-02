@@ -87,7 +87,7 @@
 		<ul class="space-y-2">
 			<li>
 				{data.account.network.ramprice?.eos.value || 'N/A'}
-				{data.account.network.chain.systemToken.symbol.code}/KB
+				{data.account.network.chain.systemToken?.symbol.code || ''}/KB
 			</li>
 			<li>${data.account.network.ramprice?.usd?.value || 'N/A'} USD/KB</li>
 		</ul>

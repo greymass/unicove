@@ -107,7 +107,7 @@
 	<Transaction {network} {transactionId} />
 {/if}
 
-<form on:submit|preventDefault={handleRent}>
+<form onsubmit|preventDefault={handleRent}>
 	<Stack class="gap-3">
 		<Label for="assetInput"
 			>Amount of {rentState.chain.systemToken!.symbol.code} to stake as {rentState.resourceName}</Label
@@ -117,7 +117,7 @@
 			placeholder="number of tokens"
 			bind:this={quantityInput}
 			bind:value={rentState.quantity}
-			bind:valid={assetValid}
+			bind:valid={assetValid}on
 			bind:validPrecision={assetValidPrecision}
 			bind:validMinimum={assetValidMinimum}
 			bind:validMaximum={assetValidMaximum}

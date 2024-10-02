@@ -48,11 +48,13 @@
 			const action = Serializer.decode({
 				data: Bytes.from(data.data),
 				abi: data.abi,
-				type: data.action.name
+				type: String(data.action.name)
 			});
-			state = flatten(Serializer.objectify(action));
+			if (action) {
+				state = flatten(Serializer.objectify(action));
+			}
 		} catch (e) {
-			console.log(e);
+			console.error('Error decoding action:', e);
 		}
 	}
 
@@ -76,7 +78,7 @@
 			return Serializer.encode({
 				object: restructured,
 				abi: data.abi,
-				type: data.action.name
+				type: String(data.action.name)
 			});
 		} catch (e) {
 			console.log(e);
@@ -89,7 +91,7 @@
 			return Serializer.decode({
 				data: serialized,
 				abi: data.abi,
-				type: data.action.name
+				type: String(data.action.name)
 			});
 		} catch (e) {
 			console.log(e);
@@ -133,7 +135,7 @@
 
 	<Grid>
 		<Card>
-			<Fields abi={data.abi} fields={data.actionData.fields} {state} />
+			<Fields abi={data.abi} fields={data.actionData?.fields || []} {state} />
 			<Button onclick={transact} disabled={!decoded}>Perform Action</Button>
 		</Card>
 		<Card>
