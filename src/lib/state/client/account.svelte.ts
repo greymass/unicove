@@ -221,7 +221,7 @@ export function getBalances(
 	if (sources.light_account) {
 		const balances: TokenBalance[] = [];
 		sources.light_account.forEach((lightAccount) => {
-			lightAccount.balances.forEach((balance) => {
+			lightAccount.balances?.forEach((balance) => {
 				const asset = Asset.from(`${balance.amount} ${balance.currency}`);
 				const contract = Name.from(balance.contract);
 				const id = TokenIdentifier.from({
