@@ -2,7 +2,7 @@
 	import '../app.css';
 	import 'inter-ui/inter-latin.css';
 	import extend from 'just-extend';
-	import { onMount, setContext, untrack } from 'svelte';
+	import { setContext, untrack } from 'svelte';
 	import { Head, type SeoConfig } from 'svead';
 	import { ParaglideJS } from '@inlang/paraglide-sveltekit';
 
@@ -56,8 +56,8 @@
 		});
 	});
 
-	const seo_config: SeoConfig = $derived<SeoConfig>(
-		extend({}, data.baseMetaTags, $page.data?.pageMetaTags)
+	const seo_config = $derived<SeoConfig>(
+		extend({}, data.baseMetaTags, $page.data?.pageMetaTags) as SeoConfig
 	);
 </script>
 
