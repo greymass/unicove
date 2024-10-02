@@ -1,6 +1,5 @@
 <script lang="ts">
-	import type { PageData } from '../../data/$types';
-	import * as m from '$lib/paraglide/messages.js';
+	import type { PageData } from './$types';
 
 	export let data: PageData;
 </script>
