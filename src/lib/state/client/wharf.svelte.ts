@@ -72,7 +72,7 @@ export class WharfState {
 
 	constructor() {
 		if (browser) {
-			this.chainsSession = JSON.parse(localStorage.getItem('chainSessions') || '{}');
+			this.chainsSession = JSON.parse(localStorage.getItem('chainsSession') || '{}');
 		}
 	}
 
@@ -92,8 +92,10 @@ export class WharfState {
 				transactPlugins
 			}
 		);
-		$effect(() => {
-			localStorage.setItem('chainSessions', JSON.stringify(this.chainsSession));
+		$effect.root(() => {
+			$effect(() => {
+				localStorage.setItem('chainsSession', JSON.stringify(this.chainsSession));
+			});
 		});
 	}
 
