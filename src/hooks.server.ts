@@ -14,7 +14,7 @@ export function getHeaderLang(event: RequestEvent) {
 		acceptLanguage?.split(',')?.map((lang: string) => lang.split(';')[0].split('-')[0].trim()) ??
 		[];
 	for (const locale of locales) {
-		if (availableLanguageTags.includes(locale)) {
+		if (availableLanguageTags.find((l) => l.toLowerCase() === locale)) {
 			return locale;
 		}
 	}
@@ -77,7 +77,8 @@ export async function redirectHandle({ event, resolve }: HandleParams): Promise<
 		pathMore.unshift(pathFirst);
 	}
 
-	event.locals.lang = lang;
+	// Ensure that the 'lang' property exists on the 'Locals' type
+	(event.locals as { lang: string }).lang = lang;
 
 	let url = `/${lang}`;
 	if (network) {

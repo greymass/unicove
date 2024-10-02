@@ -23,39 +23,34 @@
 	import { getSetting } from '$lib/state/settings.svelte';
 	import { formatCurrency } from '$lib/i18n';
 	import { goto } from '$app/navigation';
-	import { languageTag } from '$lib/paraglide/runtime';
 	import { preventDefault } from '$lib/utils';
 	import { NetworkState } from '$lib/state/network.svelte';
 	import { page } from '$app/stores';
-	import { error } from '@sveltejs/kit';
 	import { transactions } from '$lib/wharf/transact.svelte';
 
 	const debugMode = getSetting('debug-mode', false);
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
-	const state: SendState = $state(new SendState());
-	let chain: Checksum256 | undefined = $state(data.network.chain.id);
+	const sendState: SendState = $state(new SendState());
 
-	let quantityInput: AssetInput = $state();
-	let toInput: NameInput = $state();
-	let tokenSelect: TokenSelect = $state();
+	let quantityInput: AssetInput | undefined = $state();
+	let toInput: NameInput | undefined = $state();
+	let tokenSelect: TokenSelect | undefined = $state();
 
-	let quantityRef = $state();
-	let toRef = $state();
-	let memoRef = $state();
+	let quantityRef: HTMLInputElement | undefined = $state();
+	let toRef: HTMLInputElement | undefined = $state();
+	let memoRef: HTMLInputElement | undefined = $state();
 
 	let id: Checksum256 | undefined = $state();
-	const transaction = $derived(
-		id ? transactions.find((t) => t.transaction?.id.equals(id)) : undefined
-	);
+	const transaction = $derived(transactions.find((t) => id && t.transaction?.id.equals(id)));
 
 	function transact() {
 		if (!context.wharf || !context.wharf.session) {
 			return;
 		}
 		if (data.network.contracts.token) {
-			const action = data.network.contracts.token.action('transfer', state.toJSON());
+			const action = data.network.contracts.token.action('transfer', sendState.toJSON());
 			context.wharf
 				.transact({ action })
 				.then((result) => {
@@ -73,31 +68,31 @@
 	}
 
 	function max() {
-		if (state.balance) {
-			quantityInput.set(state.balance.asset);
+		if (sendState.balance) {
+			quantityInput?.set(sendState.balance.asset);
 		}
 	}
 
 	// Effect to handle token swapping
 	$effect(() => {
 		// Only trigger when the states quantity and balance do not match tokens
-		if (!state.balance.asset.symbol.equals(state.quantity.symbol)) {
+		if (!sendState.balance.asset.symbol.equals(sendState.quantity.symbol)) {
 			// Reset the quantity to 0
-			const quantity = Asset.fromUnits(0, state.balance.asset.symbol);
+			const quantity = Asset.fromUnits(0, sendState.balance.asset.symbol);
 			// Reset the values
-			quantityInput.set(quantity);
-			state.quantity = quantity;
+			quantityInput?.set(quantity);
+			sendState.quantity = quantity;
 			// Focus the quantity input
-			quantityRef.focus();
+			quantityRef?.focus();
 		}
 	});
 
 	// Effect to handle URL changes
 	$effect(() => {
 		const to = $page.url.searchParams.get('to');
-		if (quantityRef && to && !String(state.to)) {
-			toInput.set(to);
-			quantityRef.focus();
+		if (quantityRef && to && !String(sendState.to)) {
+			toInput?.set(to);
+			quantityRef?.focus();
 			tick().then(() => f.send('next'));
 		}
 
@@ -108,15 +103,15 @@
 			context.account &&
 			context.account.balances &&
 			context.account.balances.length &&
-			state.quantity.equals(defaultQuantity)
+			sendState.quantity.equals(defaultQuantity)
 		) {
 			const asset = Asset.from(quantity);
-			quantityInput.set(asset);
+			quantityInput?.set(asset);
 			const balance = context.account.balances.find((b) => b.asset.symbol.equals(asset.symbol));
 			if (balance) {
-				tokenSelect.set(balance);
+				tokenSelect?.set(balance);
 			}
-			memoRef.focus();
+			memoRef?.focus();
 			tick().then(() => f.send('next'));
 		}
 	});
@@ -126,22 +121,22 @@
 		if (context.account) {
 			const { name } = context.account;
 			// Change the from field on the transfer
-			if (name && state.from !== name) {
+			if (name && sendState.from !== name) {
 				f.send('reset');
 			}
 
 			// Set the balance to the default if it is not set
 			if (
-				state.quantity.equals(defaultQuantity) &&
+				sendState.quantity.equals(defaultQuantity) &&
 				context.account.balances &&
 				context.account.balances.length
 			) {
 				const balance = getDefaultBalance(data.network, context.account.balances);
 				if (balance) {
-					state.balance = balance;
-					state.quantity = Asset.fromUnits(0, balance.asset.symbol);
-					tokenSelect.set(balance);
-					quantityInput.set(Asset.fromUnits(0, balance.asset.symbol));
+					sendState.balance = balance;
+					sendState.quantity = Asset.fromUnits(0, balance.asset.symbol);
+					tokenSelect?.set(balance);
+					quantityInput?.set(Asset.fromUnits(0, balance.asset.symbol));
 				}
 			}
 		}
@@ -243,14 +238,14 @@
 		}
 
 		// Reset the form state itself
-		state.reset();
+		sendState.reset();
 
 		// Reset associated transaction ID
 		id = undefined;
 
 		// Default back to the account as the sender
 		if (context.account && context.account.name) {
-			state.from = context.account.name;
+			sendState.from = context.account.name;
 		}
 
 		// Focus the "to" input field
@@ -332,7 +327,7 @@
 			<NameInput
 				bind:this={toInput}
 				bind:ref={toRef}
-				bind:value={state.to}
+				bind:value={sendState.to}
 				bind:valid={toValid}
 				id="to-input"
 				{onkeydown}
@@ -343,12 +338,12 @@
 		<fieldset class="grid gap-2" class:hidden={f.current !== 'quantity'}>
 			<fieldset class="grid gap-2">
 				<Label for="token-select">Select a token</Label>
-				{#if tokenOptions.length && state.balance}
+				{#if tokenOptions.length && sendState.balance}
 					<TokenSelect
 						id="token-select"
 						options={tokenOptions}
 						bind:this={tokenSelect}
-						bind:selected={state.balance}
+						bind:selected={sendState.balance}
 						debug={debugMode.value}
 					/>
 				{:else}
@@ -356,20 +351,20 @@
 				{/if}
 			</fieldset>
 			<Label for="quantity-input">Amount</Label>
-			{#if state.balance}
+			{#if sendState.balance}
 				<AssetInput
 					id="quantity-input"
 					bind:this={quantityInput}
 					bind:ref={quantityRef}
-					bind:value={state.quantity}
+					bind:value={sendState.quantity}
 					bind:valid={assetValid}
 					bind:validPrecision={assetValidPrecision}
 					bind:validMinimum={assetValidMinimum}
 					bind:validMaximum={assetValidMaximum}
-					min={state.min || 0}
-					max={state.max || 0}
+					min={sendState.min || 0}
+					max={sendState.max || 0}
 					{onkeydown}
-					placeholder={`Enter the number of ${state.balance?.asset.symbol.code} tokens to send`}
+					placeholder={`Enter the number of ${sendState.balance?.asset.symbol.code} tokens to send`}
 					debug={debugMode.value}
 				/>
 			{/if}
@@ -383,8 +378,8 @@
 					>
 				</Label>
 			{/if}
-			{#if assetValid && state.value}
-				<Label for="quantity-input">Value: {formatCurrency(state.value)}</Label>
+			{#if assetValid && sendState.value}
+				<Label for="quantity-input">Value: {formatCurrency(sendState.value)}</Label>
 			{/if}
 			{#if !assetValidPrecision}
 				<p class="text-red-500">Invalid number, too many decimal places.</p>
@@ -395,7 +390,7 @@
 		</fieldset>
 
 		<SummarySend
-			action={{ data: state.toJSON() }}
+			action={{ data: sendState.toJSON() }}
 			class={f.current !== 'memo' ? 'hidden' : undefined}
 		/>
 
@@ -404,7 +399,7 @@
 			<TextInput
 				id="memo-input"
 				bind:ref={memoRef}
-				bind:value={state.memo}
+				bind:value={sendState.memo}
 				{onkeydown}
 				placeholder="Specify a public memo for this transfer (optional)"
 			/>
@@ -436,12 +431,12 @@
 		<Code
 			>{JSON.stringify(
 				{
-					state,
-					price: state.price,
-					value: state.value,
+					state: sendState,
+					price: sendState.price,
+					value: sendState.value,
 					current: f.current,
-					balance: state.balance,
-					max: state.max,
+					balance: sendState.balance,
+					max: sendState.max,
 					valid: {
 						toValid,
 						assetValid,

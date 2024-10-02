@@ -20,6 +20,7 @@ import {
 	chainConfigs,
 	chainMapper,
 	type ChainConfig,
+	type ChainShortName,
 	type DefaultContracts,
 	type FeatureType
 } from '$lib/wharf/chains';
@@ -33,7 +34,7 @@ export class NetworkState {
 	public fetch = fetch;
 	public last_update: Date = $state(new Date());
 	public loaded = $state(false);
-	public shortname: string;
+	public shortname: keyof typeof tokens;
 	public snapOrigin?: string = $state();
 
 	public contracts: DefaultContracts;
@@ -201,7 +202,7 @@ export function getNetwork(chain: ChainDefinition, fetchOverride?: typeof window
 
 export function getChainDefinitionFromParams(network: string): ChainDefinition {
 	if (network) {
-		const id = chainMapper.toChainId(network);
+		const id = chainMapper.toChainId(network as ChainShortName);
 		const name = chainIdsToIndices.get(id);
 		if (name) {
 			// Return the chain that's found

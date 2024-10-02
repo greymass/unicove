@@ -31,8 +31,8 @@
 	}: AssetOrUnitsProps = $props();
 
 	let assetSymbol: Asset.Symbol = $derived(assetValue.symbol);
-	let assetInputRef: HTMLInputElement;
-	let unitsInputRef: HTMLInputElement;
+	let assetInputRef: HTMLInputElement | undefined = $state();
+	let unitsInputRef: HTMLInputElement | undefined = $state();
 
 	function toggleInputType(event: Event) {
 		event.preventDefault();

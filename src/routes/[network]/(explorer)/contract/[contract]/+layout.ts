@@ -1,8 +1,7 @@
-import type { PageLoad } from './$types';
 import * as m from '$lib/paraglide/messages.js';
 import type { ABI } from '@wharfkit/antelope';
 
-export const load: PageLoad = async ({ fetch, params, parent }: Pageload) => {
+export const load = async ({ fetch, params, parent }) => {
 	const p = await parent();
 	const response = await fetch(`/${params.network}/api/contract/${params.contract}`);
 	const json = await response.json();

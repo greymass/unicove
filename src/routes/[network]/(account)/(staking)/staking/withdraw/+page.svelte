@@ -21,7 +21,9 @@
 	let manager: WithdrawManager = $state(new WithdrawManager(data.network));
 
 	$effect(() => {
-		manager.sync(data.network, context.account, context.wharf);
+		if (context.account) {
+			manager.sync(data.network, context.account, context.wharf);
+		}
 	});
 </script>
 
@@ -35,7 +37,7 @@
 {:else}
 	<Stack class="mx-auto max-w-5xl space-y-8">
 		<Switcher>
-			<PageHeader title="Currently Withdrawable" subtitle={manager.total} inverted />
+			<PageHeader title="Currently Withdrawable" subtitle={String(manager.total)} inverted />
 			<Button
 				disabled={!manager.total.value}
 				onclick={() => manager.transact()}

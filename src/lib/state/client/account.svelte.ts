@@ -219,23 +219,28 @@ export function getBalances(
 	tokenmeta?: TokenMeta[]
 ): TokenBalance[] {
 	if (sources.light_account) {
-		const balances = sources.light_account.map((result) => {
-			const asset = Asset.from(`${result.amount} ${result.currency}`);
-			const contract = Name.from(result.contract);
-			const id = TokenIdentifier.from({
-				chain,
-				contract: contract,
-				symbol: asset.symbol
+		const balances: TokenBalance[] = [];
+		sources.light_account.forEach((lightAccount) => {
+			lightAccount.balances.forEach((balance) => {
+				const asset = Asset.from(`${balance.amount} ${balance.currency}`);
+				const contract = Name.from(balance.contract);
+				const id = TokenIdentifier.from({
+					chain: chain,
+					contract: contract,
+					symbol: asset.symbol
+				});
+				const metadata =
+					tokenmeta && tokenmeta.length > 0
+						? tokenmeta.find((meta) => meta.id.equals(id))
+						: undefined;
+				balances.push(
+					TokenBalance.from({
+						asset,
+						contract,
+						metadata: metadata || TokenMeta.from({ id: { chain, contract, symbol: asset.symbol } })
+					})
+				);
 			});
-			const metadata =
-				tokenmeta && tokenmeta.length > 0
-					? tokenmeta.find((meta) => meta.id.equals(id))
-					: undefined;
-			return {
-				asset,
-				contract,
-				metadata: metadata || TokenMeta.from({ id: { chain, contract, symbol: asset.symbol } })
-			};
 		});
 
 		return balances;

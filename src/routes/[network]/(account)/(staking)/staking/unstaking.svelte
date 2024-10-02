@@ -14,10 +14,10 @@
 		records?: Array<UnstakingRecord>;
 	}
 
-	const { href, records, ...props }: Props = $props();
+	const { href, records = [], ...props }: Props = $props();
 </script>
 
-<Card title="Unstaking Balances" {...props}>
+<Card {...props} title="Unstaking Balances">
 	<Table.Root class="table-auto">
 		<Table.Head class="border-b-2 border-shark-100/10">
 			<Table.Row class="caption font-medium">

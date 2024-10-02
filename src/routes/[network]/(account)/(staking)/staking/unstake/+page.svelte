@@ -18,7 +18,9 @@
 	let manager: UnstakeManager = $state(new UnstakeManager(data.network));
 
 	$effect(() => {
-		manager.sync(data.network, context.account, context.wharf);
+		if (context.account) {
+			manager.sync(data.network, context.account, context.wharf);
+		}
 	});
 </script>
 
