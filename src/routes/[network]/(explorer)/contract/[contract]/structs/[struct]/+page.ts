@@ -1,5 +1,5 @@
 import type { PageLoad } from './$types';
-import * as m from '../../../../../../../lib/paraglide/messages';
+import * as m from '$lib/paraglide/messages.js';
 import { error } from '@sveltejs/kit';
 
 export const load: PageLoad = async ({ params, parent }) => {
