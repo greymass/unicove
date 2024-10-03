@@ -9,6 +9,8 @@
 	import { fade, scale } from 'svelte/transition';
 	import { SearchIcon } from 'lucide-svelte';
 	import { history } from '$lib/state/search.svelte';
+	import Button from '$lib/components/button/button.svelte';
+	import { Stack } from '$lib/components/layout';
 	import * as Table from '$lib/components/table';
 
 	interface NameInputProps extends ComponentProps<TextInput> {
@@ -194,57 +196,48 @@
 		></div>
 		<div
 			use:melt={$content}
-			class="fixed left-1/2 top-1/2 z-50 max-h-[85vh] w-[90vw] max-w-[450px] -translate-x-1/2 -translate-y-1/2 transform space-y-4 rounded-2xl bg-mineShaft-950 p-4 shadow-lg"
+			class="fixed left-1/2 top-1/2 z-50 max-h-[85vh] w-[90vw] max-w-[450px] -translate-x-1/2 -translate-y-1/2 transform rounded-2xl bg-mineShaft-950 p-4 shadow-lg"
 			transition:scale={{
 				duration: 100,
 				start: 0.95
 			}}
 		>
-			<form onsubmit={preventDefault(go)}>
-				<input
-					type="text"
-					bind:this={ref}
-					bind:value={searchValue}
-					placeholder="Enter an account, transaction, key, or block..."
-					{...props}
-					class="w-full rounded-lg border-2 border-skyBlue-500 bg-transparent p-4 focus:outline-none"
-				/>
-			</form>
+			<Stack>
+				<form onsubmit={preventDefault(go)}>
+					<input
+						type="text"
+						bind:this={ref}
+						bind:value={searchValue}
+						placeholder="Enter an account, transaction, key, or block..."
+						{...props}
+						class="w-full rounded-lg border-2 border-skyBlue-500 bg-transparent p-4 focus:outline-none"
+					/>
+				</form>
 
-			{#if history.length}
-				<div class="px-2">
-					<Table.Root>
-						<Table.Head>
-							<Table.Header>Type</Table.Header>
-							<Table.Header>Location</Table.Header>
-						</Table.Head>
-						<Table.Body>
-							{#each history as item, index}
-								<Table.Row
-									onclick={() => goToHistory(item.result)}
-									active={index === selectedIndex}
-								>
-									<Table.Cell>{item.searchType}</Table.Cell>
-									<Table.Cell class="truncate">{item.result}</Table.Cell>
-								</Table.Row>
-							{/each}
-						</Table.Body>
-					</Table.Root>
-				</div>
-			{/if}
+				{#if history.length}
+					<div class="px-2">
+						<Table.Root>
+							<Table.Head>
+								<Table.Header>Type</Table.Header>
+								<Table.Header>Location</Table.Header>
+							</Table.Head>
+							<Table.Body>
+								{#each history as item, index}
+									<Table.Row
+										onclick={() => goToHistory(item.result)}
+										active={index === selectedIndex}
+									>
+										<Table.Cell>{item.searchType}</Table.Cell>
+										<Table.Cell class="truncate">{item.result}</Table.Cell>
+									</Table.Row>
+								{/each}
+							</Table.Body>
+						</Table.Root>
+					</div>
+				{/if}
 
-			<footer>
-				<button class="text-base text-white/60" use:melt={$close}>Close</button>
-			</footer>
+				<Button variant="secondary" meltAction={close}>Close</Button>
+			</Stack>
 		</div>
 	</div>
 {/if}
-
-<!-- {#if debug} -->
-<!-- 	<h3>Component State</h3> -->
-<!-- 	<pre> -->
-<!-- 		search query:  "{searchValue}" -->
-<!-- 		searchType:     {searchType} -->
-<!-- 		result          {result} -->
-<!-- 	</pre> -->
-<!-- {/if} -->
