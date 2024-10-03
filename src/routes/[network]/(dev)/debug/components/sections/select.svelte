@@ -7,6 +7,7 @@
 	import TokenSelect from '$lib/components/select/token.svelte';
 	import type { SelectOption } from '@melt-ui/svelte';
 	import Button from '$lib/components/button/button.svelte';
+	import Code from '$lib/components/code.svelte';
 
 	const options: SelectOption[] = [
 		{ value: 30, label: '30d' },
@@ -120,14 +121,17 @@
 		</Cluster>
 	</Stack>
 
-	<Stack class="items-start">
+	<Stack>
 		<h3 class="h3">Token Select</h3>
-		<Cluster class="items-end">
-			<Stack class="gap-2">
-				<Label for="token-select">Select a token</Label>
-				<TokenSelect id="token-select" options={tokenOptions} bind:selected={tokenSelected} />
-			</Stack>
-			<span>Value in parent: {JSON.stringify(tokenSelected.metadata.id)}</span>
-		</Cluster>
+		<Stack class="gap-2">
+			<Label for="token-select">Select a token</Label>
+			<TokenSelect
+				id="token-select"
+				class="self-start"
+				options={tokenOptions}
+				bind:selected={tokenSelected}
+			/>
+			<Code>Value in parent: {JSON.stringify(tokenSelected.metadata.id, null, 2)}</Code>
+		</Stack>
 	</Stack>
 </Stack>

@@ -70,7 +70,7 @@
 	<canvas bind:this={ctx}></canvas>
 	<hr class="h-px border-0 bg-shark-200/50" />
 	<div class="flex items-center justify-between font-medium">
-		<span class="text-shark-200/70">{data.length} days</span>
+		<!-- <span class="text-shark-200/70">{String(data.length)} days</span> -->
 		<div class="flex gap-4">
 			<div class="flex items-center gap-1">
 				<div class="size-4 rounded bg-[#00ED97]"></div>
