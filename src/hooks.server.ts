@@ -1,7 +1,7 @@
 import { sequence } from '@sveltejs/kit/hooks';
 import type { Handle, RequestEvent } from '@sveltejs/kit';
 
-import { availableLanguageTags } from '$lib/paraglide/runtime';
+import { availableLanguageTags } from './lib/paraglide/runtime';
 import { i18n } from '$lib/i18n';
 import { isNetworkShortName } from '$lib/wharf/chains';
 
@@ -14,7 +14,7 @@ export function getHeaderLang(event: RequestEvent) {
 		acceptLanguage?.split(',')?.map((lang: string) => lang.split(';')[0].split('-')[0].trim()) ??
 		[];
 	for (const locale of locales) {
-		if (availableLanguageTags.find((l) => l.toLowerCase() === locale)) {
+		if (availableLanguageTags.find((l: string) => l.toLowerCase() === locale)) {
 			return locale;
 		}
 	}
@@ -30,7 +30,7 @@ function skipRedirect(pathname: string) {
 }
 
 function isLanguage(value: string) {
-	return availableLanguageTags.find((l) => l.toLowerCase() === value);
+	return availableLanguageTags.find((l: string) => l.toLowerCase() === value);
 }
 
 function isNetwork(value: string) {
