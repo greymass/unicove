@@ -51,7 +51,7 @@
 	}
 
 	const {
-		elements: { trigger, overlay, content, title, description, close, portalled },
+		elements: { trigger, overlay, content, title, close, portalled },
 		states: { open }
 	} = createDialog({
 		// defaultOpen: true,

@@ -1,5 +1,6 @@
 import { type SeoConfig } from 'svead';
 import { i18n } from '$lib/i18n';
+import type { LoadEvent } from '@sveltejs/kit';
 
 function generateMetadata(url: URL): SeoConfig {
 	const modified = new URL(url);
@@ -11,7 +12,7 @@ function generateMetadata(url: URL): SeoConfig {
 	};
 }
 
-export const load = async ({ url }) => {
+export const load = async ({ url }: LoadEvent) => {
 	const baseMetaTags = generateMetadata(url);
 	return {
 		baseMetaTags

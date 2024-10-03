@@ -1,15 +1,11 @@
 <script lang="ts">
-	import { Asset, Name } from '@wharfkit/antelope';
-
-	import PillGroup from '$lib/components/navigation/pillgroup.svelte';
 	import { Card, Stack, Switcher } from '$lib/components/layout';
 	import AssetInput from '$lib/components/input/asset.svelte';
 	import Button from '$lib/components/button/button.svelte';
 	import Label from '$lib/components/input/label.svelte';
 	import Transaction from '$lib/components/transaction.svelte';
-	import * as m from '$lib/paraglide/messages.js';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import { getContext, untrack } from 'svelte';
+	import { getContext } from 'svelte';
 	import { StakeManager } from './manager.svelte';
 
 	const context = getContext<UnicoveContext>('state');
@@ -18,7 +14,9 @@
 	let manager: StakeManager = $state(new StakeManager(data.network));
 
 	$effect(() => {
-		manager.sync(data.network, context.account, context.wharf);
+		if (context.account) {
+			manager.sync(data.network, context.account, context.wharf);
+		}
 	});
 </script>
 

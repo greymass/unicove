@@ -24,8 +24,8 @@ export function getCacheHeaders(ttl: number, irreversible: boolean = false) {
 	};
 }
 
-export function preventDefault(fn: (event: Event) => void) {
-	return function (event: Event) {
+export function preventDefault<TThis>(fn: (this: TThis, event: Event) => void) {
+	return function (this: TThis, event: Event) {
 		event.preventDefault();
 		fn.call(this, event);
 	};

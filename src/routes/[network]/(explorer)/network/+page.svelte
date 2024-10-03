@@ -1,6 +1,4 @@
 <script lang="ts">
-	import * as m from '$lib/paraglide/messages.js';
-	import Code from '$lib/components/code.svelte';
 	import { onMount } from 'svelte';
 	import * as Table from '$lib/components/table';
 	import { Card, Stack } from '$lib/components/layout';
@@ -43,7 +41,7 @@
 					{#each Object.keys(state) as index}
 						<Table.Row>
 							<Table.Cell>{index}</Table.Cell>
-							<Table.Cell>{state[index]}</Table.Cell>
+							<Table.Cell>{state[index as keyof typeof state]}</Table.Cell>
 						</Table.Row>
 					{/each}
 				</Table.Body>

@@ -1,11 +1,11 @@
-import { error } from '@sveltejs/kit';
+import { error, type LoadEvent } from '@sveltejs/kit';
 import type { ABI } from '@wharfkit/antelope';
 
 import * as m from '$lib/paraglide/messages.js';
 import { parseRicardian } from '$lib/utils';
 import type { PageLoad } from './$types';
 
-export const load: PageLoad = async ({ params, parent }) => {
+export const load: PageLoad = async ({ params, parent }: LoadEvent) => {
 	const p = await parent();
 	const action = p.abi.actions.find((s: ABI.Action) => s.name === params.action);
 	if (!action) {
@@ -20,13 +20,13 @@ export const load: PageLoad = async ({ params, parent }) => {
 		pageMetaTags: {
 			title: [
 				m.contract_action_view_title({
-					action: params.action
+					action: String(params.action)
 				}),
 				p.pageMetaTags.title
 			].join(' | '),
 			description: m.contract_action_view_description({
-				action: params.action,
-				contract: p.contract,
+				action: String(params.action),
+				contract: String(p.contract),
 				network: p.network.chain.name
 			})
 		},

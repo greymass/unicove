@@ -14,7 +14,7 @@ export const load: PageLoad = async ({ params, parent }) => {
 			),
 			description: m.contract_struct_view_description({
 				struct: params.struct,
-				contract: p.contract,
+				contract: String(p.contract),
 				network: p.network.chain.name
 			})
 		},

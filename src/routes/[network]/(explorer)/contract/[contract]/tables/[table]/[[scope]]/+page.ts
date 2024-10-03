@@ -15,7 +15,7 @@ export const load: PageLoad = async ({ params, parent }) => {
 				table: params.table
 			}),
 			description: m.contract_tables_view_description({
-				contract: p.contract,
+				contract: String(p.contract),
 				network: p.network.chain.name,
 				table: params.table
 			})

@@ -8,6 +8,7 @@
 		abi: ABI;
 		codePath?: string[];
 		fields: ABI.Field[];
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		state?: Record<string, any>;
 	}
 	const { abi, codePath = [], fields, state = $bindable({}) }: PageProps = $props();

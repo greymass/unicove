@@ -28,9 +28,11 @@
 
 	$effect(() => {
 		if (context.network) {
-			powerupPrice = context.network.powerupprice;
+			// TODO: we need to get the powerupprice from the stakingprice
+			// powerupPrice = context.network.powerupprice;
+			// stakingPrice = context.network.stakingprice;
+
 			rexPrice = context.network.rexprice;
-			stakingPrice = context.network.stakingprice;
 		} else {
 			powerupPrice = undefined;
 			rexPrice = undefined;

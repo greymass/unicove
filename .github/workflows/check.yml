@@ -3,6 +3,16 @@ name: Code Checks
 on:
   push:
 
+env:
+  PUBLIC_LOCAL_SIGNER: ''
+  API_EOS_CHAIN: ''
+  API_EOS_HISTORY: ''
+  API_EOS_METRICS: ''
+  API_JUNGLE4_CHAIN: ''
+  API_JUNGLE4_HISTORY: ''
+  API_KYLIN_CHAIN: ''
+  API_KYLIN_HISTORY: ''
+
 jobs:
   formatting:
     runs-on: ubuntu-latest
@@ -13,7 +23,7 @@ jobs:
           fetch-depth: 1
       - uses: oven-sh/setup-bun@v2
       - run: bun install
-      - run: bun lint
+      - run: bun run lint
   types:
     runs-on: ubuntu-latest
     steps:
@@ -23,4 +33,17 @@ jobs:
           fetch-depth: 1
       - uses: oven-sh/setup-bun@v2
       - run: bun install
+      - run: bun run build-paraglide
       - run: bunx tsc --noemit
+
+  sveltekit-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install
+      - run: bun run build-paraglide
+      - run: bun run check

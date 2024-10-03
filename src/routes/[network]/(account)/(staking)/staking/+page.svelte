@@ -1,13 +1,11 @@
 <script lang="ts">
-	import * as m from '$lib/paraglide/messages.js';
-	import { Box, Card, Center, Stack, Switcher } from '$lib/components/layout';
-	import PageHeader from '$lib/components/pageheader.svelte';
+	import { Card, Stack, Switcher } from '$lib/components/layout';
 	import Button from '$lib/components/button/button.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { Asset } from '@wharfkit/antelope';
 	import { getContext } from 'svelte';
 
-	import type { UnstakingRecord, WithdrawableBalance } from './utils';
+	import type { UnstakingRecord } from './utils';
 	import { getStakedBalance, getUnstakingBalances, getAPY } from './utils';
 	import UnstakingBalances from './unstaking.svelte';
 
@@ -15,9 +13,11 @@
 	const { data } = $props();
 	const networkName = String(data.network);
 
-	let staked: Asset = $derived(getStakedBalance(data.network, context.account));
+	let staked: Asset = $derived(
+		context.account ? getStakedBalance(data.network, context.account) : Asset.from(0, '0,UNKNOWN')
+	);
 	let unstaking: Array<UnstakingRecord> = $derived(
-		getUnstakingBalances(data.network, context.account)
+		context.account ? getUnstakingBalances(data.network, context.account) : []
 	);
 	let apy = $derived(getAPY(data.network));
 	let usdValue = $derived(

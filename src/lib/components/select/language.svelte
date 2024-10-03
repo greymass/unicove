@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { i18n } from '$lib/i18n';
-	import { availableLanguageTags, languageTag } from '$lib/paraglide/runtime';
+	import { availableLanguageTags, languageTag } from '$lib/paraglide/runtime.js';
 	import { createSelect, melt } from '@melt-ui/svelte';
 	import { fade } from 'svelte/transition';
 	import ChevronDown from 'lucide-svelte/icons/chevron-down';

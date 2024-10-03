@@ -1,8 +1,8 @@
-import type { PageLoad } from './$types';
 import * as m from '$lib/paraglide/messages.js';
+import type { LoadEvent } from '@sveltejs/kit';
 import type { ABI } from '@wharfkit/antelope';
 
-export const load: PageLoad = async ({ fetch, params, parent }: Pageload) => {
+export const load = async ({ fetch, params, parent }: LoadEvent) => {
 	const p = await parent();
 	const response = await fetch(`/${params.network}/api/contract/${params.contract}`);
 	const json = await response.json();
@@ -12,11 +12,11 @@ export const load: PageLoad = async ({ fetch, params, parent }: Pageload) => {
 		contract: params.contract,
 		pageMetaTags: {
 			title: m.contract_view_title({
-				contract: params.contract,
+				contract: String(params.contract),
 				network: p.network.chain.name
 			}),
 			description: m.contract_view_description({
-				contract: params.contract,
+				contract: String(params.contract),
 				network: p.network.chain.name,
 				tables: abi.tables.length,
 				structs: abi.structs.length,

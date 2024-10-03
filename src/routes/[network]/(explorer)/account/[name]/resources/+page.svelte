@@ -1,8 +1,5 @@
 <script lang="ts">
-	import * as m from '$lib/paraglide/messages.js';
 	import Code from '$lib/components/code.svelte';
-	import type { UnicoveContext } from '$lib/state/client.svelte.js';
-	import { getContext } from 'svelte';
 
 	const { data } = $props();
 </script>
