@@ -2,7 +2,7 @@
 	import { fly } from 'svelte/transition';
 	import { melt, type Toast } from '@melt-ui/svelte';
 
-	import { elements as toastElements, type ToastData } from '$lib/state/toaster.svelte';
+	import type { elements as toastElements, ToastData } from '$lib/state/toaster.svelte';
 
 	interface Props {
 		elements: typeof toastElements;

@@ -6,6 +6,7 @@
 	import Transaction from '$lib/components/transaction.svelte';
 
 	import { Checksum256, Asset } from '@wharfkit/antelope';
+	import type { TransactResult } from '@wharfkit/session';
 
 	import { RentState } from './state.svelte';
 	import { RentType, ResourceType } from '../../types';
@@ -81,8 +82,8 @@
 				.transact({
 					action: rentAction
 				})
-				.then((result: any) => {
-					transactionId = result.response.transaction_id;
+				.then((result: TransactResult) => {
+					transactionId = result.response?.transaction_id;
 					resetStateAfterTrasaction();
 				})
 				.catch((error) => {

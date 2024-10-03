@@ -2,7 +2,7 @@
 	import { Asset } from '@wharfkit/antelope';
 	import { TokenBalance } from '@wharfkit/common';
 	import { Checksum256 } from '@wharfkit/session';
-	import { getContext, onMount, tick } from 'svelte';
+	import { getContext, tick } from 'svelte';
 	import { FiniteStateMachine } from 'runed';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';

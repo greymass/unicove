@@ -27,6 +27,7 @@ export class ActivityAction extends Struct {
 	@Struct.field(Name) declare contract: Name;
 	@Struct.field(Name) declare action: Name;
 	@Struct.field(PermissionLevel, { array: true }) declare authorizations: PermissionLevel[];
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	@Struct.field('any') declare data: any;
 	@Struct.field(API.v1.OrderedActionsResult) declare raw: API.v1.OrderedActionsResult;
 }

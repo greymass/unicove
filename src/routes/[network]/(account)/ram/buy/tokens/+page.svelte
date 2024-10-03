@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
-	import { Checksum256, Asset } from '@wharfkit/antelope';
+	import { Checksum256 } from '@wharfkit/antelope';
 
 	import { getSetting } from '$lib/state/settings.svelte.js';
 	import type { UnicoveContext } from '$lib/state/client.svelte';

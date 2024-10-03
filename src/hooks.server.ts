@@ -25,10 +25,6 @@ function isAPIPath(pathname: string) {
 	return /^\/[a-z0-9]+\/api/gm.test(pathname);
 }
 
-function isDevPath(pathname: string) {
-	return /^\/[a-z0-9]+\/debug/gm.test(pathname);
-}
-
 function skipRedirect(pathname: string) {
 	return isAPIPath(pathname);
 }

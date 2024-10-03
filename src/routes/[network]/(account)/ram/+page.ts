@@ -21,7 +21,7 @@ export async function load({ fetch, params }: LoadEvent): Promise<LoadData> {
 
 	try {
 		const response: Response = await fetch(`/${network}/api/metrics/marketprice/ram`);
-		const parsedResponse: any[] = await response.json();
+		const parsedResponse: { date: string; value: number }[] = await response.json();
 		historicalPrices = parsedResponse.map((price: { date: string; value: number }) => ({
 			date: new Date(price.date),
 			value: Asset.from(price.value / 10000, chain.systemToken?.symbol || '0,UNKNOWN')

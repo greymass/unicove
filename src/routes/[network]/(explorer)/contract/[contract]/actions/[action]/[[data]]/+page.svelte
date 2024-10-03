@@ -1,4 +1,5 @@
 <script lang="ts">
+	/* eslint-disable @typescript-eslint/no-explicit-any */
 	import { getContext } from 'svelte';
 	import { Bytes, Serializer } from '@wharfkit/antelope';
 	import type { Contract } from '@wharfkit/contract';

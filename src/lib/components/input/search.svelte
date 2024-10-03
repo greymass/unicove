@@ -15,7 +15,6 @@
 	}
 
 	let {
-		autofocus = false,
 		network,
 		ref = $bindable(),
 		debug = false,
@@ -26,6 +25,8 @@
 	let searchValue: string = $state('');
 
 	const searchType = $derived.by(() => {
+		/* eslint-disable @typescript-eslint/no-unused-vars */
+		/* eslint-disable no-empty */
 		try {
 			PublicKey.from(searchValue);
 			return 'key';
@@ -45,6 +46,8 @@
 			return 'block';
 		} catch (e) {}
 		return 'unknown';
+		/* eslint-enable @typescript-eslint/no-unused-vars */
+		/* eslint-enable no-empty */
 	});
 
 	const result = $derived.by(() => {
@@ -91,13 +94,14 @@
 		searchValue = '';
 	}
 
-	debug &&
+	if (debug) {
 		$inspect({
 			searchValue,
 			searchType,
 			result,
 			open: $open
 		});
+	}
 </script>
 
 <svelte:window on:keydown={handleKeydown} />

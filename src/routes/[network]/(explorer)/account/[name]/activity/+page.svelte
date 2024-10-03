@@ -1,5 +1,4 @@
 <script lang="ts">
-	import * as m from '$lib/paraglide/messages.js';
 	import Code from '$lib/components/code.svelte';
 	import { ActivityAction } from '$lib/types.js';
 

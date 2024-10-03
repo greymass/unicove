@@ -98,7 +98,7 @@
 		}
 	});
 
-	debug &&
+	if (debug) {
 		$inspect({
 			input,
 			number,
@@ -115,6 +115,7 @@
 			satisfiesMinimum,
 			satisfiesMaximum
 		});
+	}
 </script>
 
 <TextInput

@@ -1,7 +1,5 @@
 <script lang="ts">
-	import * as m from '$lib/paraglide/messages.js';
-	import { Box, Card, Center, Stack, Switcher } from '$lib/components/layout';
-	import PageHeader from '$lib/components/pageheader.svelte';
+	import { Card, Stack, Switcher } from '$lib/components/layout';
 	import Button from '$lib/components/button/button.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { Asset } from '@wharfkit/antelope';

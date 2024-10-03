@@ -1,5 +1,5 @@
 import { type Checksum256, type Transaction } from '@wharfkit/antelope';
-import type { TransactArgs, TransactOptions } from '@wharfkit/session';
+import type { TransactArgs, TransactOptions, TransactResult } from '@wharfkit/session';
 import { addToast, updateToast } from '../state/toaster.svelte';
 
 export enum StatusType {
@@ -17,7 +17,7 @@ export interface QueuedTransaction {
 	network: string;
 	args: TransactArgs;
 	options?: TransactOptions;
-	response?: any;
+	response?: TransactResult;
 	transaction?: Transaction;
 	error?: string;
 	toastId?: string;

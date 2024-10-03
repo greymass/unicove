@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Asset, Int64 } from '@wharfkit/session';
+	import { Asset } from '@wharfkit/session';
 	import Card from '$lib/components/layout/box/card.svelte';
 	import RAM from '$lib/components/elements/ram.svelte';
 	import { calculateValue } from '$lib/utils';
