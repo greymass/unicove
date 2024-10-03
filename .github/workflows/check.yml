@@ -3,6 +3,16 @@ name: Code Checks
 on:
   push:
 
+env:
+  PUBLIC_LOCAL_SIGNER: ''
+  API_EOS_CHAIN: ''
+  API_EOS_HISTORY: ''
+  API_EOS_METRICS: ''
+  API_JUNGLE4_CHAIN: ''
+  API_JUNGLE4_HISTORY: ''
+  API_KYLIN_CHAIN: ''
+  API_KYLIN_HISTORY: ''
+
 jobs:
   formatting:
     runs-on: ubuntu-latest
