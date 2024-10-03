@@ -11,7 +11,7 @@
 		title={m.contract_struct_page_title()}
 		subtitle={m.contract_struct_page_description({
 			structs: data.abi.structs.length,
-			contract: data.contract,
+			contract: String(data.contract),
 			network: data.network.chain.name
 		})}
 	/>

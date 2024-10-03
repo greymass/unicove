@@ -12,7 +12,7 @@
 			table: data.table
 		})}
 		subtitle={m.contract_tables_view_description({
-			contract: data.contract,
+			contract: String(data.contract),
 			network: data.network.chain.name,
 			table: data.table
 		})}

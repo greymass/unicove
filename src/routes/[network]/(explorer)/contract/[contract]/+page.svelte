@@ -10,7 +10,7 @@
 	<Pageheader
 		title="Contract Overview"
 		subtitle={m.contract_view_description({
-			contract: data.contract,
+			contract: String(data.contract),
 			network: data.network.chain.name,
 			tables: data.abi.tables.length,
 			structs: data.abi.structs.length,

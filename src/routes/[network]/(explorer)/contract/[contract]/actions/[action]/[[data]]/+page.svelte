@@ -129,7 +129,7 @@
 		})}
 		subtitle={m.contract_action_view_description({
 			action: data.action.name,
-			contract: data.contract,
+			contract: String(data.contract),
 			network: data.network.chain.name
 		})}
 	/>
