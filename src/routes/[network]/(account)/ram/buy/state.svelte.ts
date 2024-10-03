@@ -4,16 +4,20 @@ import { Chains, type ChainDefinition } from '@wharfkit/session';
 const defaultName = Name.from('');
 const defaultSymbol = Asset.Symbol.from('0,UNKNOWN');
 const defaultQuantity = Asset.fromUnits(0, defaultSymbol);
+const kbSymbol = Asset.Symbol.from('3,KB');
+const defaultKBAmount = Asset.fromUnits(0, kbSymbol);
 
 export class BuyRAMState {
 	public payer: Name = $state(defaultName);
 	public receiver: Name = $state(defaultName);
-	public bytes: number | undefined = $state(undefined);
+	public kbsAmount: Asset = $state(defaultKBAmount);
 	public tokens: Asset = $state(defaultQuantity);
 	public balance: Asset = $state(defaultQuantity);
 	public chain: ChainDefinition = $state(Chains.EOS);
 	public pricePerKB: Asset = $state(defaultQuantity);
 	public format: 'asset' | 'units' = $state('asset');
+
+	public bytes: number = $derived(this.kbsAmount.value * 1000);
 
 	public pricePerByte: Asset = $derived(
 		Asset.fromUnits(this.pricePerKB.value / 1000, this.pricePerKB.symbol)
@@ -28,10 +32,10 @@ export class BuyRAMState {
 				)
 	);
 
-	public bytesToBuy: number = $derived(
-		this.format === 'units' || !this.bytesValue.value || !this.pricePerKB.value
-			? this.bytes || 0
-			: Number(((this.bytesValue.value / this.pricePerKB.value) * 1000).toFixed(0))
+	public kbs: Asset = $derived(
+		this.format === 'asset' && this.pricePerKB.value
+			? Asset.from(this.bytesValue.value / this.pricePerKB.value, kbSymbol)
+			: this.kbsAmount
 	);
 
 	public fee: Asset = $derived(
@@ -71,7 +75,7 @@ export class BuyRAMState {
 	}
 
 	reset() {
-		this.bytes = undefined;
+		this.kbsAmount = defaultKBAmount;
 		this.tokens = Asset.fromUnits(0, this.chain.systemToken?.symbol || '0,UNKNOWN');
 	}
 

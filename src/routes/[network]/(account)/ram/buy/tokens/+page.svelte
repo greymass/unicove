@@ -102,10 +102,10 @@
 	<Stack class="mt-4 gap-3">
 		<h3 class="h3">Details</h3>
 		<div class="grid grid-cols-2 gap-2">
-			<span>Price for 1000 Bytes:</span>
+			<span>RAM Price:</span>
 			<span>{buyRamState.pricePerKB} / KB</span>
-			<span>Estimated Bytes:</span>
-			<span>{buyRamState.bytesToBuy} Bytes</span>
+			<span>Estimated RAM:</span>
+			<span>{buyRamState.kbs}</span>
 			<span>Network Fee (0.5%)</span>
 			<span>{buyRamState.fee}</span>
 			<span>Total Cost</span>

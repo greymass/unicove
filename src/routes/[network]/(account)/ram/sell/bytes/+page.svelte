@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
-	import { Checksum256 } from '@wharfkit/antelope';
+	import { Checksum256, Asset } from '@wharfkit/antelope';
 
 	import { getSetting } from '$lib/state/settings.svelte.js';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
@@ -11,7 +11,7 @@
 	import Label from '$lib/components/input/label.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
 	import Transaction from '$lib/components/transaction.svelte';
-	import NumberInput from '$lib/components/input/number.svelte';
+	import AssetInput from '$lib/components/input/asset.svelte';
 
 	import { SellRAMState } from '../state.svelte.js';
 	import { preventDefault } from '$lib/utils.js';
@@ -25,7 +25,7 @@
 	sellRamState.format = 'units';
 
 	let transactionId: Checksum256 | undefined = $state();
-	let bytesInput: NumberInput | undefined = $state();
+	let bytesInput: AssetInput | undefined = $state();
 
 	async function handleSellRAM() {
 		if (!context.wharf || !context.wharf.session) {
@@ -56,7 +56,7 @@
 			if (context.account.name) {
 				sellRamState.account = context.account.name;
 			}
-			sellRamState.max = Number(context.account.ram?.available || 0);
+			sellRamState.max = Asset.fromUnits(context.account.ram?.available || 0, '3,KB');
 		}
 	});
 
@@ -73,12 +73,12 @@
 
 <form onsubmit={preventDefault(handleSellRAM)}>
 	<Stack class="gap-3">
-		<Label for="bytesInput">Amount to sell (Bytes)</Label>
-		<NumberInput
+		<Label for="bytesInput">Amount to sell</Label>
+		<AssetInput
 			id="bytesInput"
 			bind:this={bytesInput}
-			bind:value={sellRamState.bytes}
-			placeholder="0"
+			bind:value={sellRamState.kbsAmount}
+			placeholder="0.000 KB"
 			autofocus
 		/>
 		{#if sellRamState.insufficientRAM}
@@ -87,7 +87,7 @@
 		<p>
 			Available RAM:
 			{#if context.account}
-				{sellRamState.max} Bytes
+				{sellRamState.max}
 			{:else}
 				0 Bytes
 			{/if}
@@ -105,10 +105,10 @@
 	<Stack class="mt-4 gap-3">
 		<h3 class="h3">Details</h3>
 		<div class="grid grid-cols-2 gap-2">
-			<span>Price for 1000 bytes:</span>
+			<span>RAM Price:</span>
 			<span>{sellRamState.pricePerKB} / KB</span>
 			<span>RAM to be sold:</span>
-			<span>{sellRamState.bytesToSell} Bytes</span>
+			<span>{sellRamState.kbsToSell}</span>
 			<span>RAM Value:</span>
 			<span>{sellRamState.bytesValue}</span>
 			<span>Network Fee (0.5%)</span>
@@ -133,7 +133,6 @@
 					max: sellRamState.max,
 					chain: sellRamState.chain,
 					pricePerKB: sellRamState.pricePerKB,
-					pricePerByte: sellRamState.pricePerByte,
 					bytesValue: sellRamState.bytesValue,
 					insufficientRAM: sellRamState.insufficientRAM,
 					valid: sellRamState.valid,

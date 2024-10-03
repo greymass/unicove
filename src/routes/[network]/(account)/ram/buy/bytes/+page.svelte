@@ -12,7 +12,7 @@
 	import Label from '$lib/components/input/label.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
 	import Transaction from '$lib/components/transaction.svelte';
-	import NumberInput from '$lib/components/input/number.svelte';
+	import AssetInput from '$lib/components/input/asset.svelte';
 
 	import { BuyRAMState } from '../state.svelte.js';
 	import { preventDefault } from '$lib/utils.js';
@@ -25,7 +25,7 @@
 
 	buyRamState.format = 'units';
 
-	let bytesInput: NumberInput | undefined = $state();
+	let bytesInput: AssetInput | undefined = $state();
 
 	let transactionId: Checksum256 | undefined = $state();
 
@@ -79,12 +79,12 @@
 
 <form onsubmit={preventDefault(handleBuyRAM)}>
 	<Stack class="gap-3">
-		<Label for="bytesInput">Amount to buy (Bytes)</Label>
-		<NumberInput
+		<Label for="bytesInput">Amount to buy</Label>
+		<AssetInput
 			id="bytesInput"
 			bind:this={bytesInput}
-			bind:value={buyRamState.bytes}
-			placeholder="0"
+			bind:value={buyRamState.kbsAmount}
+			placeholder="0.0000 KB"
 			autofocus
 		/>
 		{#if buyRamState.insufficientBalance}
@@ -103,9 +103,9 @@
 	<Stack class="mt-4 gap-3">
 		<h3 class="h3">Details</h3>
 		<div class="grid grid-cols-2 gap-2">
-			<span>Price for 1000 Bytes:</span>
+			<span>RAM Price:</span>
 			<span>{buyRamState.pricePerKB} / KB</span>
-			<span>Price for {buyRamState.bytes} Bytes:</span>
+			<span>Price for {buyRamState.kbs}:</span>
 			<span>{buyRamState.bytesValue}</span>
 			<span>Network Fee (0.5%)</span>
 			<span>{buyRamState.fee}</span>

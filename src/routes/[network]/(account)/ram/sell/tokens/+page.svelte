@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
-	import { Checksum256 } from '@wharfkit/antelope';
+	import { Checksum256, Asset } from '@wharfkit/antelope';
 
 	import { getSetting } from '$lib/state/settings.svelte.js';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
@@ -55,7 +55,10 @@
 			if (context.account.name) {
 				sellRamState.account = context.account.name;
 			}
-			sellRamState.max = Number(context.account.ram?.available || 0);
+			sellRamState.max = Asset.fromUnits(
+				Number(context.account.ram?.available || 0),
+				Asset.Symbol.from('3,KB')
+			);
 		}
 	});
 
@@ -86,17 +89,16 @@
 		<p>
 			Available RAM:
 			{#if context.account}
-				{sellRamState.max} Bytes
+				{sellRamState.max}
 			{:else}
-				0 Bytes
+				0 KB
 			{/if}
 		</p>
 		<p>
-			Value of available RAM:
 			{#if context.account}
+				Value of available RAM:
+
 				{sellRamState.maxValue}
-			{:else}
-				0 Bytes
 			{/if}
 		</p>
 	</Stack>
@@ -104,10 +106,10 @@
 	<Stack class="mt-4 gap-3">
 		<h3 class="h3">Details</h3>
 		<div class="grid grid-cols-2 gap-2">
-			<span>Price for 1000 bytes:</span>
+			<span>RAM Price:</span>
 			<span>{sellRamState.pricePerKB} / KB</span>
 			<span>RAM to be sold:</span>
-			<span>{sellRamState.bytesToSell} Bytes</span>
+			<span>{sellRamState.kbsToSell}</span>
 			<span>RAM Value:</span>
 			<span>{sellRamState.tokens}</span>
 			<span>Network Fee (0.5%)</span>
@@ -133,7 +135,6 @@
 					max: sellRamState.max,
 					chain: sellRamState.chain,
 					pricePerKB: sellRamState.pricePerKB,
-					pricePerByte: sellRamState.pricePerByte,
 					estimatedBytesToSell: sellRamState.bytes,
 					insufficientRAM: sellRamState.insufficientRAM,
 					valid: sellRamState.valid,

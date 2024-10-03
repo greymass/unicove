@@ -4,28 +4,30 @@ import { Chains, type ChainDefinition } from '@wharfkit/session';
 const defaultName = Name.from('');
 const defaultSymbol = Asset.Symbol.from('0,UNKNOWN');
 const defaultQuantity = Asset.fromUnits(0, defaultSymbol);
+const kbsSymbol = Asset.Symbol.from('3,KB');
+const defaultKbs = Asset.fromUnits(0, kbsSymbol);
 
 export class SellRAMState {
 	public account: Name = $state(defaultName);
-	public bytes: number | undefined = $state(undefined);
+	public kbsAmount: Asset = $state(defaultKbs);
 	public tokens: Asset = $state(defaultQuantity);
-	public max: number = $state(0);
+	public max: Asset = $state(defaultQuantity);
 	public chain: ChainDefinition = $state(Chains.EOS);
 	public pricePerKB: Asset = $state(defaultQuantity);
 	public format: 'asset' | 'units' = $state('asset');
 
-	public bytesToSell: number = $derived(
+	public bytes: number | undefined = $derived(
+		this.format === 'units' ? this.kbsAmount.units.value : undefined
+	);
+
+	public kbsToSell: Asset = $derived(
 		this.format === 'units' || !this.tokens.value || !this.pricePerKB.value
-			? this.bytes || 0
-			: Math.floor((this.tokens.value * 1000) / this.pricePerKB.value)
+			? this.kbsAmount
+			: Asset.fromUnits((this.tokens.value / this.pricePerKB.value) * 1000, kbsSymbol)
 	);
 
 	public maxValue: Asset = $derived(
-		Asset.fromUnits((this.max * this.pricePerKB.units.value) / 1000, this.pricePerKB.symbol)
-	);
-
-	public pricePerByte: Asset = $derived(
-		Asset.fromUnits(this.pricePerKB.value / 1000, this.pricePerKB.symbol)
+		Asset.from(this.max.value * this.pricePerKB.value, this.pricePerKB.symbol)
 	);
 
 	public bytesValue: Asset = $derived(
@@ -50,8 +52,8 @@ export class SellRAMState {
 
 	readonly insufficientRAMForSale: boolean = $derived(
 		this.format === 'units'
-			? this.bytes !== undefined && this.bytes > this.max
-			: this.bytesValue.value > (this.max * this.pricePerKB.value) / 1000
+			? this.bytes !== undefined && this.kbsAmount.value > this.max.value
+			: this.bytesValue.value > this.max.value * this.pricePerKB.value
 	);
 
 	public insufficientRAM: boolean = $derived(!!this.max && this.insufficientRAMForSale);
@@ -72,7 +74,7 @@ export class SellRAMState {
 	}
 
 	reset() {
-		this.bytes = undefined;
+		this.kbsAmount = defaultKbs;
 		this.tokens = Asset.fromUnits(0, this.chain.systemToken?.symbol || '0,UNKNOWN');
 	}
 
