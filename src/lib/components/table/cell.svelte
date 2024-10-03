@@ -8,6 +8,6 @@
 	let { class: className = '', children, ...props }: Props = $props();
 </script>
 
-<td class="cell py-3 pl-2 pr-2 first:pl-0 last:pr-0 {className}" {...props}>
+<td class="py-3 pl-2 pr-2 text-base first:pl-0 last:pr-0 {className}" {...props}>
 	{@render children()}
 </td>

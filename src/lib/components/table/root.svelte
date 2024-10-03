@@ -4,10 +4,17 @@
 
 	interface Props extends HTMLAttributes<HTMLTableElement> {
 		children: Snippet;
+		fixed?: boolean;
 	}
-	let { children, ...props }: Props = $props();
+
+	let { children, fixed = false, ...props }: Props = $props();
 </script>
 
-<table class="table w-full table-auto" {...props}>
+<table
+	class="table w-full overflow-x-auto"
+	class:table-fixed={fixed}
+	class:table-auto={!fixed}
+	{...props}
+>
 	{@render children()}
 </table>

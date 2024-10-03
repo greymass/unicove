@@ -5,11 +5,15 @@
 	interface Props extends HTMLAttributes<HTMLTableRowElement> {
 		hoverEffect?: boolean;
 		children: Snippet;
+		active?: boolean;
+		onclick?: () => void;
 	}
-	let { hoverEffect = true, ...props }: Props = $props();
+
+	let { onclick, active, hoverEffect = true, ...props }: Props = $props();
 </script>
 
 <tr
+	data-clickable={onclick !== undefined}
 	class="
 	table-row
 	border-b
@@ -20,8 +24,11 @@
 	last:border-none
 	odd:via-mineShaft-950
 	group-[.table-head]:bg-none
+	data-[clickable=true]:cursor-pointer
 	{hoverEffect ? 'hover:via-skyBlue-500/10' : ''}
+	{active ? '!via-skyBlue-500/10' : ''}
 	"
+	{onclick}
 	{...props}
 >
 	{@render props.children()}

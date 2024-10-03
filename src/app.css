@@ -59,7 +59,7 @@
 		@apply flex flex-wrap gap-4;
 	}
 
-	.layout-switcher > * {
+	.layout-switcher>* {
 		flex-grow: 1;
 		flex-basis: calc((var(--switcher-threshold) - 100%) * 999);
 	}
@@ -79,5 +79,14 @@
 
 	.mx-page {
 		@apply px-4;
+	}
+
+	/* table styles */
+	.table-row-element {
+		@apply border-b border-neutral-300/10 bg-gradient-to-r from-transparent to-transparent last:border-none odd:via-mineShaft-950 group-[.table-head]:bg-none data-[hoverEffect=true]:hover:via-skyBlue-500/10
+	}
+
+	.table-header-element {
+		@apply py-1.5 pl-2 pr-2 text-left font-medium text-mineShaft-200/60 first:pl-0 last:pr-0
 	}
 }
