@@ -1,13 +1,15 @@
 <script lang="ts">
 	import { Checksum256, Name, PublicKey, UInt32 } from '@wharfkit/antelope';
 	import type { ComponentProps } from 'svelte';
-	import { createDialog, melt } from '@melt-ui/svelte';
+	import { createDialog, melt, type CreateDialogProps } from '@melt-ui/svelte';
 	import TextInput from './text.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
 	import { preventDefault } from '$lib/utils';
 	import { goto } from '$app/navigation';
 	import { fade, scale } from 'svelte/transition';
 	import { SearchIcon } from 'lucide-svelte';
+	import { history } from '$lib/state/search.svelte';
+	import * as Table from '$lib/components/table';
 
 	interface NameInputProps extends ComponentProps<TextInput> {
 		debug?: boolean;
@@ -23,6 +25,7 @@
 	}: NameInputProps = $props();
 
 	let searchValue: string = $state('');
+	let selectedIndex: number | undefined = $state();
 
 	const searchType = $derived.by(() => {
 		/* eslint-disable @typescript-eslint/no-unused-vars */
@@ -65,11 +68,20 @@
 		}
 	});
 
+	const resetSelectedIndex: CreateDialogProps['onOpenChange'] = ({ next }) => {
+		if (selectedIndex !== undefined) {
+			selectedIndex = undefined;
+		}
+		return next;
+	};
+
+	// Build the dialog element
 	const {
 		elements: { trigger, portalled, overlay, content, close },
 		states: { open }
 	} = createDialog({
-		forceVisible: true
+		forceVisible: true,
+		onOpenChange: resetSelectedIndex
 	});
 
 	function handleKeydown(event: KeyboardEvent) {
@@ -83,6 +95,33 @@
 		) {
 			event.preventDefault();
 			$open = true;
+			return;
+		}
+
+		if (document.activeElement === ref) {
+			if (event.key === 'ArrowDown') {
+				if (selectedIndex === undefined) {
+					selectedIndex = 0;
+					return;
+				}
+				// Select next history item
+				selectedIndex = (history.length + selectedIndex + 1) % history.length;
+				return;
+			}
+
+			if (event.key === 'ArrowUp') {
+				if (selectedIndex === undefined) {
+					selectedIndex = history.length;
+					return;
+				}
+				// Select previous history item
+				selectedIndex = (history.length + selectedIndex - 1) % history.length;
+				return;
+			}
+
+			if (selectedIndex !== undefined && event.key === 'Enter') {
+				goToHistory(history[selectedIndex].result);
+			}
 		}
 	}
 
@@ -90,12 +129,20 @@
 		$open = false;
 		if (result) {
 			goto(result);
+			history.push({ result, searchType });
 		}
+		searchValue = '';
+	}
+
+	function goToHistory(url: string) {
+		goto(url);
+		$open = false;
 		searchValue = '';
 	}
 
 	if (debug) {
 		$inspect({
+			selectedIndex,
 			searchValue,
 			searchType,
 			result,
@@ -147,7 +194,7 @@
 		></div>
 		<div
 			use:melt={$content}
-			class="fixed left-1/2 top-1/2 z-50 max-h-[85vh] w-[90vw] max-w-[450px] -translate-x-1/2 -translate-y-1/2 transform rounded-lg bg-mineShaft-950 p-4 shadow-lg"
+			class="fixed left-1/2 top-1/2 z-50 max-h-[85vh] w-[90vw] max-w-[450px] -translate-x-1/2 -translate-y-1/2 transform space-y-4 rounded-2xl bg-mineShaft-950 p-4 shadow-lg"
 			transition:scale={{
 				duration: 100,
 				start: 0.95
@@ -158,13 +205,37 @@
 					type="text"
 					bind:this={ref}
 					bind:value={searchValue}
-					placeholder="Search..."
+					placeholder="Enter an account, transaction, key, or block..."
 					{...props}
-					class="bg-transparent focus:outline-none"
+					class="w-full rounded-lg border-2 border-skyBlue-500 bg-transparent p-4 focus:outline-none"
 				/>
-
-				<button use:melt={$close}> Close Dialog </button>
 			</form>
+
+			{#if history.length}
+				<div class="px-2">
+					<Table.Root>
+						<Table.Head>
+							<Table.Header>Type</Table.Header>
+							<Table.Header>Location</Table.Header>
+						</Table.Head>
+						<Table.Body>
+							{#each history as item, index}
+								<Table.Row
+									onclick={() => goToHistory(item.result)}
+									active={index === selectedIndex}
+								>
+									<Table.Cell>{item.searchType}</Table.Cell>
+									<Table.Cell class="truncate">{item.result}</Table.Cell>
+								</Table.Row>
+							{/each}
+						</Table.Body>
+					</Table.Root>
+				</div>
+			{/if}
+
+			<footer>
+				<button class="text-base text-white/60" use:melt={$close}>Close</button>
+			</footer>
 		</div>
 	</div>
 {/if}
