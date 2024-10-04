@@ -79,13 +79,7 @@
 <form onsubmit={preventDefault(handleBuyRAM)}>
 	<Stack class="gap-3">
 		<Label for="assetInput">Amount to buy</Label>
-		<AssetInput
-			id="assetInput"
-			bind:this={assetInput}
-			bind:value={buyRamState.tokens}
-			placeholder="0.0000 EOS"
-			autofocus
-		/>
+		<AssetInput id="assetInput" bind:this={assetInput} bind:value={buyRamState.tokens} autofocus />
 		{#if buyRamState.insufficientBalance}
 			<p class="text-red-500">Insufficient balance. Please enter a smaller amount.</p>
 		{/if}
