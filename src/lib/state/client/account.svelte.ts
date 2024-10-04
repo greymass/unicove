@@ -20,7 +20,7 @@ import { calculateValue } from '$lib/utils';
 
 const defaultDataSources = {
 	get_account: undefined,
-	light_account: [],
+	balances: [],
 	delegated: [],
 	rex: undefined,
 	rexfund: undefined
@@ -79,7 +79,7 @@ export class AccountState {
 		this.last_update = new Date();
 		this.sources = {
 			get_account: json.account_data,
-			light_account: json.balances,
+			balances: json.balances,
 			delegated: json.delegated,
 			rex: json.rex,
 			rexfund: json.rexfund
@@ -218,29 +218,27 @@ export function getBalances(
 	chain: Checksum256,
 	tokenmeta?: TokenMeta[]
 ): TokenBalance[] {
-	if (sources.light_account) {
+	if (sources.balances) {
 		const balances: TokenBalance[] = [];
-		sources.light_account.forEach((lightAccount) => {
-			lightAccount.balances?.forEach((balance) => {
-				const asset = Asset.from(`${balance.amount} ${balance.currency}`);
-				const contract = Name.from(balance.contract);
-				const id = TokenIdentifier.from({
-					chain: chain,
-					contract: contract,
-					symbol: asset.symbol
-				});
-				const metadata =
-					tokenmeta && tokenmeta.length > 0
-						? tokenmeta.find((meta) => meta.id.equals(id))
-						: undefined;
-				balances.push(
-					TokenBalance.from({
-						asset,
-						contract,
-						metadata: metadata || TokenMeta.from({ id: { chain, contract, symbol: asset.symbol } })
-					})
-				);
+		sources.balances?.forEach((balance) => {
+			const asset = Asset.from(`${balance.amount} ${balance.currency}`);
+			const contract = Name.from(balance.contract);
+			const id = TokenIdentifier.from({
+				chain: chain,
+				contract: contract,
+				symbol: asset.symbol
 			});
+			const metadata =
+				tokenmeta && tokenmeta.length > 0
+					? tokenmeta.find((meta) => meta.id.equals(id))
+					: undefined;
+			balances.push(
+				TokenBalance.from({
+					asset,
+					contract,
+					metadata: metadata || TokenMeta.from({ id: { chain, contract, symbol: asset.symbol } })
+				})
+			);
 		});
 
 		return balances;

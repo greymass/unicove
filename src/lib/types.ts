@@ -34,7 +34,7 @@ export class ActivityAction extends Struct {
 
 export interface DataSources {
 	get_account?: API.v1.AccountObject | undefined;
-	light_account: LightAPIBalanceResponse[];
+	balances: LightAPIBalanceRow[];
 	delegated: SystemContract.Types.delegated_bandwidth[];
 	rex?: SystemContract.Types.rex_balance;
 	rexfund?: SystemContract.Types.rex_fund;
