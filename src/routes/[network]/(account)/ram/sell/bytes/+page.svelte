@@ -48,7 +48,7 @@
 
 	function resetState() {
 		sellRamState.reset();
-		bytesInput?.set();
+		bytesInput?.set(null);
 	}
 
 	$effect(() => {
@@ -89,15 +89,14 @@
 			{#if context.account}
 				{sellRamState.max}
 			{:else}
-				0 Bytes
+				0 KB
 			{/if}
 		</p>
 		<p>
-			Value of available RAM:
 			{#if context.account}
+				Value of available RAM:
+
 				{sellRamState.maxValue}
-			{:else}
-				0 Bytes
 			{/if}
 		</p>
 	</Stack>

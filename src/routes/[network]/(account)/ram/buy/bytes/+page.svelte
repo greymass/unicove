@@ -50,7 +50,7 @@
 
 	function resetState() {
 		buyRamState.reset();
-		bytesInput?.set();
+		bytesInput?.set(null);
 	}
 
 	$effect(() => {

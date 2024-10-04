@@ -26,7 +26,7 @@
 </script>
 
 <Stack class="gap-6">
-	<h2 class="h2 font-bold leading-none text-white">Buy with</h2>
+	<h2 class="h2 font-bold leading-none text-white">Buy in</h2>
 	<PillGroup {options} />
 
 	{@render children()}
