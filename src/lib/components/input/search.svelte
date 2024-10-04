@@ -8,7 +8,7 @@
 	import { goto } from '$app/navigation';
 	import { fade, scale } from 'svelte/transition';
 	import { SearchIcon } from 'lucide-svelte';
-	import { history } from '$lib/state/search.svelte';
+	import { history, addHistory } from '$lib/state/search.svelte';
 	import Button from '$lib/components/button/button.svelte';
 	import { Stack } from '$lib/components/layout';
 	import * as Table from '$lib/components/table';
@@ -127,11 +127,11 @@
 		}
 	}
 
-	function go() {
+	function goToResult() {
 		$open = false;
 		if (result) {
 			goto(result);
-			history.push({ result, searchType });
+			addHistory({ result, searchType });
 		}
 		searchValue = '';
 	}
@@ -203,7 +203,7 @@
 			}}
 		>
 			<Stack>
-				<form onsubmit={preventDefault(go)}>
+				<form onsubmit={preventDefault(goToResult)}>
 					<input
 						type="text"
 						bind:this={ref}
