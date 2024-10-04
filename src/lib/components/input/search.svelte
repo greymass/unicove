@@ -127,18 +127,21 @@
 	}
 
 	function goToResult() {
-		$open = false;
 		if (result) {
 			goto(result);
 			addHistory({ result, searchType });
 		}
+		closeSearch();
+	}
+
+	function closeSearch() {
+		$open = false;
 		searchValue = '';
 	}
 
 	function goToHistory(url: string) {
 		goto(url);
-		$open = false;
-		searchValue = '';
+		closeSearch();
 	}
 
 	if (debug) {
@@ -222,14 +225,15 @@
 							</div>
 
 							{#each history as item, index}
-								<button
+								<a
 									class="table-row-styles col-span-full grid grid-cols-subgrid justify-items-start"
-									onclick={() => goToHistory(item.result)}
+									href={item.result}
+									onclick={closeSearch}
 									data-active={index === selectedIndex}
 								>
 									<span class="table-cell-styles">{item.searchType}</span>
 									<span class="table-cell-styles truncate">{item.result}</span>
-								</button>
+								</a>
 							{/each}
 						</div>
 					</div>
