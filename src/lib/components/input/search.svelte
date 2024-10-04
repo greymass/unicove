@@ -11,7 +11,6 @@
 	import { history, addHistory } from '$lib/state/search.svelte';
 	import Button from '$lib/components/button/button.svelte';
 	import { Stack } from '$lib/components/layout';
-	import * as Table from '$lib/components/table';
 
 	interface NameInputProps extends ComponentProps<TextInput> {
 		debug?: boolean;
@@ -216,23 +215,23 @@
 
 				{#if history.length}
 					<div class="px-2">
-						<Table.Root>
-							<Table.Head>
-								<Table.Header>Type</Table.Header>
-								<Table.Header>Location</Table.Header>
-							</Table.Head>
-							<Table.Body>
-								{#each history as item, index}
-									<Table.Row
-										onclick={() => goToHistory(item.result)}
-										active={index === selectedIndex}
-									>
-										<Table.Cell>{item.searchType}</Table.Cell>
-										<Table.Cell class="truncate">{item.result}</Table.Cell>
-									</Table.Row>
-								{/each}
-							</Table.Body>
-						</Table.Root>
+						<div class="table-styles grid grid-cols-2">
+							<div class="table-head-styles col-span-full grid grid-cols-subgrid">
+								<span>Type</span>
+								<span>Location</span>
+							</div>
+
+							{#each history as item, index}
+								<button
+									class="table-row-styles col-span-full grid grid-cols-subgrid justify-items-start"
+									onclick={() => goToHistory(item.result)}
+									data-active={index === selectedIndex}
+								>
+									<span class="table-cell-styles">{item.searchType}</span>
+									<span class="table-cell-styles truncate">{item.result}</span>
+								</button>
+							{/each}
+						</div>
 					</div>
 				{/if}
 

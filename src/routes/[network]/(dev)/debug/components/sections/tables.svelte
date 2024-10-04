@@ -1,6 +1,5 @@
 <script>
 	import { Stack } from '$lib/components/layout';
-	import * as Table from '$lib/components/table';
 
 	const options = [
 		[
@@ -36,95 +35,96 @@
 	<Stack>
 		<h3 class="h3">Basic table (auto width columns)</h3>
 
-		<Table.Root>
-			<Table.Head>
-				<Table.Row>
-					<Table.Header class="w-max">Col 1</Table.Header>
-					<Table.Header>Column 2</Table.Header>
-					<Table.Header>Column 3</Table.Header>
-					<Table.Header>Column 4</Table.Header>
-				</Table.Row>
-			</Table.Head>
-			<Table.Body>
+		<table class="table-styles">
+			<thead>
+				<tr>
+					<th>Col 1</th>
+					<th>Column 2</th>
+					<th>Column 3</th>
+					<th>Column 4</th>
+				</tr>
+			</thead>
+			<tbody>
 				{#each options as option}
-					<Table.Row>
-						<Table.Cell>{option[0]}</Table.Cell>
-						<Table.Cell>{option[1]}</Table.Cell>
-						<Table.Cell>{option[2]}</Table.Cell>
-						<Table.Cell>{option[3]}</Table.Cell>
-					</Table.Row>
+					<tr>
+						<td>{option[0]}</td>
+						<td>{option[1]}</td>
+						<td>{option[2]}</td>
+						<td>{option[3]}</td>
+					</tr>
 				{/each}
-			</Table.Body>
-		</Table.Root>
+			</tbody>
+		</table>
 	</Stack>
 
 	<Stack>
 		<h3 class="h3">Fixed width columns (even)</h3>
-		<Table.Root fixed>
-			<Table.Head>
-				<Table.Row>
-					<Table.Header>Col 1</Table.Header>
-					<Table.Header>Column 2</Table.Header>
-					<Table.Header>Column 3</Table.Header>
-					<Table.Header>Column 4</Table.Header>
-				</Table.Row>
-			</Table.Head>
-			<Table.Body>
+		<table class="table-styles table-fixed">
+			<thead>
+				<tr>
+					<th>Col 1</th>
+					<th>Column 2</th>
+					<th>Column 3</th>
+					<th>Column 4</th>
+				</tr>
+			</thead>
+			<tbody>
 				{#each options as option}
-					<Table.Row>
-						<Table.Cell>{option[0]}</Table.Cell>
-						<Table.Cell>{option[1]}</Table.Cell>
-						<Table.Cell>{option[2]}</Table.Cell>
-						<Table.Cell>{option[3]}</Table.Cell>
-					</Table.Row>
+					<tr>
+						<td>{option[0]}</td>
+						<td>{option[1]}</td>
+						<td>{option[2]}</td>
+						<td>{option[3]}</td>
+					</tr>
 				{/each}
-			</Table.Body>
-		</Table.Root>
+			</tbody>
+		</table>
 	</Stack>
 
 	<Stack>
 		<h3 class="h3">Fixed width columns (modified width)</h3>
-		<Table.Root fixed>
-			<Table.Head>
-				<Table.Row>
-					<Table.Header class="w-20">Small 1</Table.Header>
-					<Table.Header>Column 2</Table.Header>
-					<Table.Header>Column 3</Table.Header>
-					<Table.Header>Column 4</Table.Header>
-				</Table.Row>
-			</Table.Head>
-			<Table.Body>
+		<p>Hover effect disabled</p>
+		<table class="table-styles table-fixed">
+			<thead>
+				<tr>
+					<th class="w-20">Small 1</th>
+					<th>Column 2</th>
+					<th>Column 3</th>
+					<th>Column 4</th>
+				</tr>
+			</thead>
+			<tbody>
 				{#each options as option}
-					<Table.Row>
-						<Table.Cell>{option[0]}</Table.Cell>
-						<Table.Cell>{option[1]}</Table.Cell>
-						<Table.Cell>{option[2]}</Table.Cell>
-						<Table.Cell>{option[3]}</Table.Cell>
-					</Table.Row>
+					<tr data-hover-effect={false}>
+						<td>{option[0]}</td>
+						<td>{option[1]}</td>
+						<td>{option[2]}</td>
+						<td>{option[3]}</td>
+					</tr>
 				{/each}
-			</Table.Body>
-		</Table.Root>
+			</tbody>
+		</table>
 	</Stack>
 
 	<Stack>
 		<h3 class="h3">Table with different alignments</h3>
-		<Table.Root>
-			<Table.Head>
-				<Table.Row>
-					<Table.Header class="text-left">Left</Table.Header>
-					<Table.Header class="text-center">Center</Table.Header>
-					<Table.Header class="text-right">Right</Table.Header>
-				</Table.Row>
-			</Table.Head>
-			<Table.Body>
+		<table class="table-styles">
+			<thead>
+				<tr>
+					<th class="text-left">Left</th>
+					<th class="text-center">Center</th>
+					<th class="text-right">Right</th>
+				</tr>
+			</thead>
+			<tbody>
 				{#each [1, 2, 3, 4] as index}
-					<Table.Row id={String(index)}>
-						<Table.Cell class="border-r border-white/10 text-left">Left</Table.Cell>
-						<Table.Cell class="border-r border-white/10 text-center">Center</Table.Cell>
-						<Table.Cell class="text-right">Right</Table.Cell>
-					</Table.Row>
+					<tr id={String(index)}>
+						<td class="border-r border-white/10 text-left">Left</td>
+						<td class="border-r border-white/10 text-center">Center</td>
+						<td class="text-right">Right</td>
+					</tr>
 				{/each}
-			</Table.Body>
-		</Table.Root>
+			</tbody>
+		</table>
 	</Stack>
 </Stack>

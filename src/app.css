@@ -82,11 +82,26 @@
 	}
 
 	/* table styles */
-	.table-row-element {
-		@apply border-b border-neutral-300/10 bg-gradient-to-r from-transparent to-transparent last:border-none odd:via-mineShaft-950 group-[.table-head]:bg-none data-[hoverEffect=true]:hover:via-skyBlue-500/10;
-	}
+	.table-styles {
+		@apply w-full table-auto overflow-x-auto;
 
-	.table-header-element {
-		@apply py-1.5 pl-2 pr-2 text-left font-medium text-mineShaft-200/60 first:pl-0 last:pr-0;
+		thead tr {
+			@apply bg-none;
+		}
+
+		tr,
+		.table-row-styles {
+			@apply border-b border-neutral-300/10 bg-gradient-to-r from-transparent to-transparent last:border-none odd:via-mineShaft-950 hover:via-skyBlue-500/10 data-[clickable=true]:cursor-pointer data-[active=true]:via-skyBlue-500/10 data-[hover-effect=false]:hover:via-transparent data-[hover-effect=false]:odd:hover:via-mineShaft-950;
+		}
+
+		th,
+		.table-head-styles {
+			@apply py-1.5 pl-2 pr-2 text-left text-base font-medium text-mineShaft-200/60 first:pl-0 last:pr-0;
+		}
+
+		td,
+		.table-cell-styles {
+			@apply py-3 pl-2 pr-2 text-base first:pl-0 last:pr-0;
+		}
 	}
 }
