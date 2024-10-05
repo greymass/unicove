@@ -22,7 +22,7 @@ export class SellRAMState {
 			: Math.floor((this.tokens.value / this.pricePerKB.value) * 1000)
 	);
 
-	public kbsToSell: number | undefined = $derived((this.bytesToSell || 0) / 1000);
+	public kbsToSell: Asset | undefined = $derived(Asset.fromUnits(this.bytesToSell || 0, '3,KB'));
 
 	public maxValue: Asset = $derived(
 		Asset.from(this.max * this.pricePerKB.value, this.pricePerKB.symbol)

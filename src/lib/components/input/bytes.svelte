@@ -33,13 +33,28 @@
 		GB: 1000 * 1000 * 1000
 	};
 
+	let isAddingDecimal = $state(false);
+
 	/** Convert the string into a usable number and update valid state */
 	$effect(() => {
+		console.log({ input });
 		const numericInput = Number(input);
+
+		console.log({ numericInput });
 		if (isNaN(numericInput) || numericInput < 0) {
+			console.log('invalid');
 			valid = false;
 			return;
 		}
+
+		isAddingDecimal = false;
+
+		// Allowing input of decimal values
+		if (numericInput && String(numericInput) !== input) {
+			console.log({ input, numericInput });
+			isAddingDecimal = true;
+		}
+
 		valid = true;
 		const multiplier = UNIT_MULTIPLIERS[unit];
 
@@ -47,7 +62,7 @@
 	});
 
 	$effect(() => {
-		if (input !== String(value)) {
+		if (input !== String(value) && !isAddingDecimal) {
 			input = value ? String(value / UNIT_MULTIPLIERS[unit]) : '';
 		}
 	});
@@ -74,6 +89,10 @@
 		unit = units[(currentIndex + 1) % units.length];
 	}
 
+	function handleBlur() {
+		isAddingDecimal = false;
+	}
+
 	if (debug) {
 		$inspect({
 			input,
@@ -89,8 +108,9 @@
 		bind:ref
 		bind:value={input}
 		placeholder="0 {unit}"
-		inputmode="decimal"
+		inputmode="numeric"
 		{autofocus}
+		onblur={handleBlur}
 		{oninput}
 		{...props}
 	/>

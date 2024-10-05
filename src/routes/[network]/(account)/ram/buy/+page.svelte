@@ -74,18 +74,12 @@
 
 	function setAssetAmount() {
 		buyRamState.format = 'asset';
-		console.log({ expectedBytes: buyRamState.expectedBytes });
 		buyRamState.bytes = buyRamState.expectedBytes;
 	}
 
 	function setBytesAmount() {
 		buyRamState.format = 'bytes';
 		buyRamState.tokens = buyRamState.bytesValue;
-		console.log({
-			bytes: buyRamState.bytes,
-			bytesValue: buyRamState.bytesValue,
-			quant: buyRamState.bytesValue.value
-		});
 		assetInput?.set(buyRamState.bytesValue);
 	}
 </script>

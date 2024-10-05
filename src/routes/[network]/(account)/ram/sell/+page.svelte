@@ -109,7 +109,7 @@
 			<p class="text-red-500">Insufficient RAM available. Please enter a smaller amount.</p>
 		{/if}
 		<p>
-			Available RAM:
+			RAM available:
 			{#if context.account}
 				{sellRamState.maxInKBs}
 			{:else}
