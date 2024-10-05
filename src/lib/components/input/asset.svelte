@@ -121,7 +121,7 @@
 <TextInput
 	bind:ref
 	bind:value={input}
-	placeholder={zeroValue.value}
+	placeholder={String(zeroValue.value)}
 	{autofocus}
 	inputmode="numeric"
 	rightText={String(symbol.code)}
