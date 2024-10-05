@@ -81,6 +81,8 @@
 			symbol = asset.symbol;
 			if (asset.value) {
 				input = asset.quantity;
+			} else {
+				input = null;
 			}
 		}
 	}

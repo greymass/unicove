@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
-	import { Checksum256 } from '@wharfkit/antelope';
+	import { Checksum256, Asset } from '@wharfkit/antelope';
 
 	import { getSetting } from '$lib/state/settings.svelte.js';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
@@ -14,17 +14,19 @@
 	import Transaction from '$lib/components/transaction.svelte';
 	import AssetInput from '$lib/components/input/asset.svelte';
 	import BytesInput from '$lib/components/input/bytes.svelte';
+	import Card from '$lib/components/layout/box/card.svelte';
 
 	import { BuyRAMState } from './state.svelte.js';
 	import { preventDefault } from '$lib/utils.js';
 
+	let bytesInput: BytesInput | undefined = $state();
+	let assetInput: AssetInput | undefined = $state();
+
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
-	const debugMode = getSetting('debug-mode', false);
+	const debugMode = getSetting('debug-mode', true);
 
 	const buyRamState: BuyRAMState = $state(new BuyRAMState(data.network.chain));
-
-	let bytesInput: AssetInput | undefined = $state();
 
 	let transactionId: Checksum256 | undefined = $state();
 
@@ -49,7 +51,6 @@
 
 	function resetState() {
 		buyRamState.reset();
-		bytesInput?.set(null);
 	}
 
 	$effect(() => {
@@ -70,6 +71,23 @@
 			buyRamState.pricePerKB = data.network.ramprice.eos;
 		}
 	});
+
+	function setAssetAmount() {
+		buyRamState.format = 'asset';
+		console.log({ expectedBytes: buyRamState.expectedBytes });
+		buyRamState.bytes = buyRamState.expectedBytes;
+	}
+
+	function setBytesAmount() {
+		buyRamState.format = 'bytes';
+		buyRamState.tokens = buyRamState.bytesValue;
+		console.log({
+			bytes: buyRamState.bytes,
+			bytesValue: buyRamState.bytesValue,
+			quant: buyRamState.bytesValue.value
+		});
+		assetInput?.set(buyRamState.bytesValue);
+	}
 </script>
 
 {#if transactionId}
@@ -82,18 +100,16 @@
 		<div class="flex gap-4">
 			<div class="flex-1">
 				<AssetInput
-					id="assetInput"
-					bind:this={bytesInput}
 					bind:value={buyRamState.tokens}
-					autofocus
+					bind:this={assetInput}
+					oninput={setAssetAmount}
 				/>
 			</div>
 			<div class="flex-1">
 				<BytesInput
-					id="bytesInput"
-					bind:this={bytesInput}
 					bind:value={buyRamState.bytes}
-					placeholder="0 bytes"
+					bind:this={bytesInput}
+					oninput={setBytesAmount}
 				/>
 			</div>
 		</div>
@@ -111,17 +127,19 @@
 	</Stack>
 
 	<Stack class="mt-4 gap-3">
-		<h3 class="h3">Details</h3>
-		<div class="grid grid-cols-2 gap-2">
-			<span>RAM Price:</span>
-			<span>{buyRamState.pricePerKB} / KB</span>
-			<span>Price for {buyRamState.kbs}:</span>
-			<span>{buyRamState.bytesValue}</span>
-			<span>Network Fee (0.5%)</span>
-			<span>{buyRamState.fee}</span>
-			<span>Total Cost</span>
-			<span>{buyRamState.bytesCost}</span>
-		</div>
+		<Card>
+			<h3 class="h3">Details</h3>
+			<div class="grid grid-cols-2 gap-2">
+				<span>RAM Price:</span>
+				<span>{buyRamState.pricePerKB} / KB</span>
+				<span>Price for {buyRamState.kbs}:</span>
+				<span>{buyRamState.bytesValue}</span>
+				<span>Network Fee (0.5%)</span>
+				<span>{buyRamState.fee}</span>
+				<span>Total Cost</span>
+				<span>{buyRamState.bytesCost}</span>
+			</div>
+		</Card>
 
 		{#if buyRamState.valid}
 			<SummaryBuyRAMBytes action={{ data: buyRamState.toJSON() }} />

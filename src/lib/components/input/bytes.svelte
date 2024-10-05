@@ -16,6 +16,7 @@
 		debug = false,
 		value = $bindable(),
 		valid = $bindable(),
+		oninput,
 		...props
 	}: BytesInputProps = $props();
 
@@ -34,10 +35,6 @@
 
 	/** Convert the string into a usable number and update valid state */
 	$effect(() => {
-		if (!input) {
-			valid = false;
-			return;
-		}
 		const numericInput = Number(input);
 		if (isNaN(numericInput) || numericInput < 0) {
 			valid = false;
@@ -45,33 +42,31 @@
 		}
 		valid = true;
 		const multiplier = UNIT_MULTIPLIERS[unit];
+
 		value = numericInput * multiplier;
 	});
 
-	/** Handle unit changes */
 	$effect(() => {
-		if (!input || !valid) {
-			return;
+		if (input !== String(value)) {
+			input = value ? String(value / UNIT_MULTIPLIERS[unit]) : '';
 		}
-		const oldMultiplier = UNIT_MULTIPLIERS[unit];
-
-		console.log({ value, oldMultiplier });
-		const newValue = (value || 0) / oldMultiplier;
-		input = String(newValue);
 	});
 
 	/** Set the input value from a parent */
-	export function set(newValue: number | null) {
-		if (newValue === null) {
-			input = null;
-			valid = false;
-		} else {
-			input = String(newValue);
-			valid = true;
-		}
+	export function reset() {
+		input = null;
+		value = undefined;
+
+		oninput?.(
+			new InputEvent('input', {}) as InputEvent & {
+				currentTarget: EventTarget & HTMLInputElement;
+			}
+		);
 	}
 
 	function cycleUnit() {
+		reset();
+
 		const units: (keyof typeof UNIT_MULTIPLIERS)[] = Object.keys(
 			UNIT_MULTIPLIERS
 		) as (keyof typeof UNIT_MULTIPLIERS)[];
@@ -93,9 +88,10 @@
 	<TextInput
 		bind:ref
 		bind:value={input}
-		placeholder="0"
-		{autofocus}
+		placeholder="0 {unit}"
 		inputmode="decimal"
+		{autofocus}
+		{oninput}
 		{...props}
 	/>
 	<div
