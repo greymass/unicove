@@ -24,7 +24,7 @@
 	let input: string | null = $state(String(value || ''));
 
 	/** The current unit of measurement */
-	let unit: 'Bytes' | 'KB' | 'MB' | 'GB' = $state('Bytes');
+	let unit: 'Bytes' | 'KB' | 'MB' | 'GB' = $state('KB');
 
 	const UNIT_MULTIPLIERS = {
 		Bytes: 1,
