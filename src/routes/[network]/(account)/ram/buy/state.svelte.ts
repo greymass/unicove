@@ -15,9 +15,10 @@ export class BuyRAMState {
 	public balance: Asset = $state(defaultQuantity);
 	public chain: ChainDefinition = $state(Chains.EOS);
 	public pricePerKB: Asset = $state(defaultQuantity);
-	public format: 'asset' | 'units' = $state('asset');
 
-	public bytes: number = $derived(this.kbsAmount.value * 1000);
+	public bytes: number | undefined = $state();
+
+	public format: 'asset' | 'bytes' = $derived(this.bytes ? 'bytes' : 'asset');
 
 	public pricePerByte: Asset = $derived(
 		Asset.fromUnits(this.pricePerKB.value / 1000, this.pricePerKB.symbol)
@@ -56,7 +57,7 @@ export class BuyRAMState {
 
 	public valid: boolean = $derived(
 		!!(
-			((this.format === 'units' && this.bytes) ||
+			((this.format === 'bytes' && this.bytes) ||
 				(this.format === 'asset' && this.tokens.value > 0)) &&
 			this.bytesCost.units.lte(this.balance.units) &&
 			this.payer.value &&

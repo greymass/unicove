@@ -6,7 +6,7 @@
 		valid?: boolean;
 		validMinimum?: boolean;
 		validMaximum?: boolean;
-		value: number;
+		value: number | undefined;
 		debug?: boolean;
 	}
 
@@ -56,7 +56,7 @@
 		const oldMultiplier = UNIT_MULTIPLIERS[unit];
 
 		console.log({ value, oldMultiplier });
-		const newValue = value / oldMultiplier;
+		const newValue = (value || 0) / oldMultiplier;
 		input = String(newValue);
 	});
 
