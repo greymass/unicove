@@ -20,7 +20,7 @@
 	let options = $derived(
 		tabOptions.map((option) => ({
 			...option,
-			active: $page.url.pathname.replace(/^\/[^\/]+/, '') === option.href
+			active: $page.url.pathname.replace(/^\/[^/]+/, '') === option.href
 		}))
 	);
 

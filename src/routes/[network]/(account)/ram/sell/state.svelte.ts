@@ -50,8 +50,8 @@ export class SellRAMState {
 
 	public insufficientRAMForSale: boolean = $derived(
 		this.format === 'bytes'
-			? this.bytes !== undefined && this.bytes / 1000 > this.max.value
-			: this.bytesValue.value > this.max.value * this.pricePerKB.value
+			? !!(this.bytes !== undefined && this.bytes > this.max)
+			: !!(this.bytesToSell || 0 > this.max)
 	);
 
 	public insufficientRAM: boolean = $derived(!!this.max && this.insufficientRAMForSale);
