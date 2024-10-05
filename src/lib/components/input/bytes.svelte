@@ -37,12 +37,9 @@
 
 	/** Convert the string into a usable number and update valid state */
 	$effect(() => {
-		console.log({ input });
 		const numericInput = Number(input);
 
-		console.log({ numericInput });
 		if (isNaN(numericInput) || numericInput < 0) {
-			console.log('invalid');
 			valid = false;
 			return;
 		}
@@ -51,7 +48,6 @@
 
 		// Allowing input of decimal values
 		if (numericInput && String(numericInput) !== input) {
-			console.log({ input, numericInput });
 			isAddingDecimal = true;
 		}
 
