@@ -17,6 +17,7 @@
 		value = $bindable(),
 		valid = $bindable(),
 		oninput,
+		onblur,
 		...props
 	}: BytesInputProps = $props();
 
@@ -85,8 +86,9 @@
 		unit = units[(currentIndex + 1) % units.length];
 	}
 
-	function handleBlur() {
+	function handleBlur(event: FocusEvent & { currentTarget: EventTarget & HTMLInputElement }) {
 		isAddingDecimal = false;
+		onblur?.(event);
 	}
 
 	if (debug) {
