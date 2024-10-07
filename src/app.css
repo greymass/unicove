@@ -59,7 +59,7 @@
 		@apply flex flex-wrap gap-4;
 	}
 
-	.layout-switcher>* {
+	.layout-switcher > * {
 		flex-grow: 1;
 		flex-basis: calc((var(--switcher-threshold) - 100%) * 999);
 	}
@@ -73,14 +73,6 @@
 		@apply flex flex-wrap gap-4;
 	}
 
-	.px-page {
-		@apply px-4;
-	}
-
-	.mx-page {
-		@apply px-4;
-	}
-
 	/* table styles */
 	.table-styles {
 		@apply w-full table-auto overflow-x-auto;
@@ -91,7 +83,7 @@
 
 		tr,
 		.table-row-styles {
-			@apply border-b border-neutral-300/10 bg-gradient-to-r from-transparent to-transparent last:border-none odd:via-mineShaft-950 hover:via-skyBlue-500/10 data-[clickable=true]:cursor-pointer data-[active=true]:via-skyBlue-500/10 data-[hover-effect=false]:hover:via-transparent data-[hover-effect=false]:odd:hover:via-mineShaft-950;
+			@apply table-row-border table-row-background;
 		}
 
 		th,
@@ -103,5 +95,23 @@
 		.table-cell-styles {
 			@apply py-3 pl-2 pr-2 text-base first:pl-0 last:pr-0;
 		}
+	}
+}
+
+@layer utilities {
+	.px-page {
+		@apply px-4;
+	}
+
+	.mx-page {
+		@apply px-4;
+	}
+
+	.table-row-border {
+		@apply border-b border-neutral-300/10 last:border-none;
+	}
+
+	.table-row-background {
+		@apply bg-gradient-to-r from-transparent to-transparent odd:via-mineShaft-950 hover:via-skyBlue-500/10 data-[clickable=true]:cursor-pointer data-[active=true]:via-skyBlue-500/10 data-[hover-effect=false]:hover:via-transparent data-[hover-effect=false]:odd:hover:via-mineShaft-950;
 	}
 }

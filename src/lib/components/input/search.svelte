@@ -206,7 +206,7 @@
 			}}
 		>
 			<Stack>
-				<form onsubmit={preventDefault(goToResult)}>
+				<form onsubmit={preventDefault(goToResult)} class="relative">
 					<input
 						type="text"
 						bind:this={ref}
@@ -215,22 +215,29 @@
 						{...props}
 						class="w-full rounded-lg border-2 border-skyBlue-500 bg-transparent p-4 focus:outline-none"
 					/>
-					<!-- <SearchIcon /> -->
+					<button
+						type="submit"
+						class="absolute right-4 top-1/2 -translate-y-1/2 outline-none focus:ring-2 focus:ring-skyBlue-500"
+					>
+						<SearchIcon class="size-5" />
+					</button>
 				</form>
 
 				{#if history.length}
 					<div class="px-2">
 						<div class="table-styles grid grid-cols-2">
-							<div
-								class="table-head-styles col-span-full grid grid-cols-subgrid border-b border-neutral-300/10"
-							>
+							<div class="table-head-styles col-span-full grid grid-cols-subgrid">
 								<span class="pl-2">Recent</span>
 								<span>Type</span>
 							</div>
 
 							{#each history as item, index}
 								<a
-									class="table-row-styles col-span-full grid grid-cols-subgrid items-center justify-items-start"
+									class="table-row-background col-span-full grid grid-cols-subgrid items-center
+									justify-items-start border-y border-neutral-300/10
+									border-transparent border-b-transparent
+									focus:border-skyBlue-500
+									focus:outline-none"
 									href={item.result}
 									onclick={closeSearch}
 									data-active={index === selectedIndex}
@@ -246,7 +253,7 @@
 											<span>{item.searchValue}</span>
 										{:else if item.searchType === 'key'}
 											<Key class="size-4" />
-											<span class="max-w-[13ch] truncate">
+											<span class="max-w-[12ch] truncate">
 												{item.searchValue}
 											</span>
 										{:else if item.searchType === 'transaction'}
