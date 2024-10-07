@@ -7,10 +7,11 @@
 	import { preventDefault } from '$lib/utils';
 	import { goto } from '$app/navigation';
 	import { fade, scale } from 'svelte/transition';
-	import { SearchIcon } from 'lucide-svelte';
+	import { ArrowLeftRight, Box, Key, SearchIcon, UserSearch } from 'lucide-svelte';
 	import { history, addHistory } from '$lib/state/search.svelte';
 	import Button from '$lib/components/button/button.svelte';
 	import { Stack } from '$lib/components/layout';
+	import { truncateCenter } from '$lib/utils';
 
 	interface NameInputProps extends ComponentProps<TextInput> {
 		debug?: boolean;
@@ -129,7 +130,7 @@
 	function goToResult() {
 		if (result) {
 			goto(result);
-			addHistory({ result, searchType });
+			addHistory({ result, searchType, searchValue });
 		}
 		closeSearch();
 	}
@@ -214,25 +215,51 @@
 						{...props}
 						class="w-full rounded-lg border-2 border-skyBlue-500 bg-transparent p-4 focus:outline-none"
 					/>
+					<!-- <SearchIcon /> -->
 				</form>
 
 				{#if history.length}
 					<div class="px-2">
 						<div class="table-styles grid grid-cols-2">
-							<div class="table-head-styles col-span-full grid grid-cols-subgrid">
+							<div
+								class="table-head-styles col-span-full grid grid-cols-subgrid border-b border-neutral-300/10"
+							>
+								<span class="pl-2">Recent</span>
 								<span>Type</span>
-								<span>Location</span>
 							</div>
 
 							{#each history as item, index}
 								<a
-									class="table-row-styles col-span-full grid grid-cols-subgrid justify-items-start"
+									class="table-row-styles col-span-full grid grid-cols-subgrid items-center justify-items-start"
 									href={item.result}
 									onclick={closeSearch}
 									data-active={index === selectedIndex}
 								>
-									<span class="table-cell-styles">{item.searchType}</span>
-									<span class="table-cell-styles truncate">{item.result}</span>
+									<div
+										class="table-cell-styles ml-2 flex items-center gap-2 font-mono tabular-nums"
+									>
+										{#if item.searchType === 'account'}
+											<UserSearch class="size-4" />
+											<span>{item.searchValue}</span>
+										{:else if item.searchType === 'block'}
+											<Box class="size-4" />
+											<span>{item.searchValue}</span>
+										{:else if item.searchType === 'key'}
+											<Key class="size-4" />
+											<span class="max-w-[13ch] truncate">
+												{item.searchValue}
+											</span>
+										{:else if item.searchType === 'transaction'}
+											<ArrowLeftRight class="size-4" />
+											<span class="max-w-[13ch] truncate">
+												{truncateCenter(item.searchValue)}
+											</span>
+										{/if}
+									</div>
+
+									<span class="align-center text-base font-medium capitalize text-mineShaft-200/60"
+										>{item.searchType}</span
+									>
 								</a>
 							{/each}
 						</div>

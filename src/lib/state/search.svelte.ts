@@ -1,6 +1,7 @@
 type SearchResult = {
 	result: string;
 	searchType: string;
+	searchValue: string;
 };
 
 const maxHistoryLength = 10;
