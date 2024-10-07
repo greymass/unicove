@@ -15,7 +15,7 @@
 	import NumberInput from '$lib/components/input/number.svelte';
 
 	import { BuyRAMState } from '../state.svelte.js';
-	import { preventDefault } from '$lib/utils.js';
+	import { preventDefault } from '$lib/utils';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
