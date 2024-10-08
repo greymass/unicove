@@ -35,32 +35,15 @@
 	};
 
 	let isAddingDecimal = $state(false);
-
-	/** Convert the string into a usable number and update valid state */
-	$effect(() => {
-		const numericInput = Number(input);
-
-		if (isNaN(numericInput) || numericInput < 0) {
-			valid = false;
-			return;
-		}
-
-		isAddingDecimal = false;
-
-		// Allowing input of decimal values
-		if (numericInput && String(numericInput) !== input) {
-			isAddingDecimal = true;
-		}
-
-		valid = true;
-		const multiplier = UNIT_MULTIPLIERS[unit];
-
-		value = numericInput * multiplier;
-	});
+	let previousValue = $state(value);
 
 	$effect(() => {
-		if (input !== String(value) && !isAddingDecimal) {
-			input = value ? String(value / UNIT_MULTIPLIERS[unit]) : '';
+		if (value && value !== previousValue) {
+			const newInput = String(value / UNIT_MULTIPLIERS[unit]);
+			if (input !== newInput && !isAddingDecimal) {
+				input = newInput ? newInput : '';
+				previousValue = value;
+			}
 		}
 	});
 
@@ -75,15 +58,64 @@
 			}
 		);
 	}
+	/** Convert the string into a usable number and update valid state */
+	function handleInput(
+		event: (Event & { currentTarget: EventTarget & HTMLInputElement }) | null | undefined
+	) {
+		if (!event) {
+			return;
+		}
+		const inputString = String(event.currentTarget.value);
+
+		const numericInput = Number(inputString);
+
+		if (isNaN(numericInput) || numericInput < 0) {
+			valid = false;
+			return;
+		}
+
+		isAddingDecimal = false;
+
+		// Allowing input of decimal values
+		if (numericInput && String(numericInput) !== inputString) {
+			isAddingDecimal = true;
+			input = inputString || '';
+			return;
+		}
+
+		valid = true;
+		const multiplier = UNIT_MULTIPLIERS[unit];
+
+		previousValue = numericInput * multiplier;
+		value = previousValue;
+
+		if (event) {
+			oninput?.(event);
+		}
+	}
 
 	function cycleUnit() {
-		reset();
-
 		const units: (keyof typeof UNIT_MULTIPLIERS)[] = Object.keys(
 			UNIT_MULTIPLIERS
 		) as (keyof typeof UNIT_MULTIPLIERS)[];
 		const currentIndex = units.indexOf(unit);
-		unit = units[(currentIndex + 1) % units.length];
+		const newUnit = units[(currentIndex + 1) % units.length];
+
+		if (value !== undefined) {
+			const currentMultiplier = UNIT_MULTIPLIERS[unit];
+			const newMultiplier = UNIT_MULTIPLIERS[newUnit];
+			const adjustedValue = (value / currentMultiplier) * newMultiplier;
+			value = adjustedValue;
+			input = String(adjustedValue / newMultiplier);
+		}
+
+		unit = newUnit;
+
+		oninput?.(
+			new InputEvent('input', {}) as InputEvent & {
+				currentTarget: EventTarget & HTMLInputElement;
+			}
+		);
 	}
 
 	function handleBlur(event: FocusEvent & { currentTarget: EventTarget & HTMLInputElement }) {
@@ -109,7 +141,7 @@
 		inputmode="numeric"
 		{autofocus}
 		onblur={handleBlur}
-		{oninput}
+		oninput={handleInput}
 		{...props}
 	/>
 	<div
