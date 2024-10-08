@@ -1,7 +1,14 @@
-interface WalletType {
+import TabletSmartphone from 'lucide-svelte/icons/tablet-smartphone';
+import LaptopMinimal from 'lucide-svelte/icons/laptop-minimal';
+import LockKeyhole from 'lucide-svelte/icons/lock-keyhole';
+import GlobeLock from 'lucide-svelte/icons/globe-lock';
+import type { Icon } from 'lucide-svelte';
+
+export interface WalletType {
 	type: 'hardware' | 'desktop' | 'mobile' | 'extensions';
 	title: string;
 	description: string;
+	icon: typeof Icon;
 	benefits: string[];
 	wallets: { name: string; route: string }[];
 }
@@ -10,6 +17,7 @@ export const walletTypes: Record<string, WalletType> = {
 	// webAuths: {
 	// 	type: 'webAuths',
 	// 	title: 'Web Authenticators',
+	// icon: 'tablet-smartphone',
 	// 	description:
 	// 		"Web Authenticators are convenient wallet options that don't require any installation.",
 	// 	benefits: [
@@ -23,6 +31,7 @@ export const walletTypes: Record<string, WalletType> = {
 		type: 'hardware',
 		title: 'Hardware Wallets',
 		description: 'Hardware wallets are physical devices that securely store your private keys.',
+		icon: LockKeyhole,
 		benefits: [
 			'Highest level of security',
 			'Offline storage of private keys',
@@ -34,6 +43,7 @@ export const walletTypes: Record<string, WalletType> = {
 		type: 'desktop',
 		title: 'Desktop Wallets',
 		description: 'Software wallets are applications you install on your computer or mobile device.',
+		icon: LaptopMinimal,
 		benefits: [
 			'Easy to use and set up',
 			'Convenient for frequent transactions',
@@ -48,6 +58,7 @@ export const walletTypes: Record<string, WalletType> = {
 		type: 'mobile',
 		title: 'Mobile Wallets',
 		description: 'Mobile wallets are applications you install on your mobile device.',
+		icon: TabletSmartphone,
 		benefits: [
 			'Convenient for on-the-go access',
 			'Secure storage of your digital assets on your mobile device',
@@ -64,6 +75,7 @@ export const walletTypes: Record<string, WalletType> = {
 		title: 'Browser Extensions',
 		description:
 			'Browser extension wallets integrate directly with your web browser for easy access.',
+		icon: GlobeLock,
 		benefits: [
 			'Seamless integration with web applications',
 			'Quick access from your browser',

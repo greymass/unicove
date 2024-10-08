@@ -1,40 +1,55 @@
 <script lang="ts">
-	import PillGroup from '$lib/components/navigation/pillgroup.svelte';
-	import { page } from '$app/stores';
-	import Pageheader from '$lib/components/pageheader.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
-	import Button from '$lib/components/button/button.svelte';
-	import { walletTypes } from './walletTypes';
+	import { ChevronRight } from 'lucide-svelte';
+	import { walletTypes, type WalletType } from './walletTypes';
 
 	const { data } = $props();
 </script>
 
-<Stack>
-	<Pageheader title="Sign Up" subtitle="Create your account" />
+{#snippet walletButton(wallet: WalletType)}
+	<a
+		href="/{data.network}/signup/wallet-type/{wallet.type}"
+		class="group grid grid-cols-[auto_1fr_auto] items-center gap-4 rounded-2xl border border-white/20 p-4
+hover:bg-mineShaft-950 focus-visible:outline focus-visible:outline-transparent focus-visible:ring-2 focus-visible:ring-solar-500"
+	>
+		<div class="rounded-full bg-mineShaft-900/60 p-3">
+			<svelte:component this={wallet.icon} class="size-6 group-hover:stroke-skyBlue-500 " />
+		</div>
+		<div class="space-y-1">
+			<h4 class="text-xl font-semibold">
+				{wallet.title}
+			</h4>
+			<p>{wallet.description}</p>
+		</div>
+		<ChevronRight class="size-6 group-hover:stroke-skyBlue-500" />
+	</a>
+{/snippet}
 
-	<div class="mb-6">
-		<h2 class="mb-4 text-xl font-semibold">Why do I need a wallet?</h2>
-		<p class="mb-4">
+<Stack
+	class="gap-7 *:z-10 before:absolute before:-inset-4 before:z-0 before:bg-shark-900/10 md:mx-auto md:max-w-md md:p-6 md:before:inset-0 md:before:rounded-2xl"
+>
+	<Stack class="gap-2">
+		<h3 class="h3">Why do I need a wallet?</h3>
+		<p>
 			A wallet is your gateway to the blockchain, allowing you to manage your digital assets and
 			interact with decentralized applications.
 		</p>
-		<h2 class="mb-4 text-xl font-semibold">Why do I need an account?</h2>
-		<p class="mb-4">
+	</Stack>
+
+	<Stack class="gap-2">
+		<h3 class="h3">Why do I need an account?</h3>
+		<p>
 			An account on the blockchain is your unique identity, enabling you to perform transactions,
 			store assets, and participate in the network.
 		</p>
-	</div>
+	</Stack>
 
-	<div class="container mx-auto p-4">
-		<h2 class="mb-4 text-xl font-semibold">Choose A Wallet Type</h2>
-		<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-			{#each Object.entries(walletTypes) as [walletType, value]}
-				<div class="flex justify-center">
-					<Button href="/{data.network}/signup/wallet-type/{walletType}" class="w-full">
-						{value.title}
-					</Button>
-				</div>
+	<Stack>
+		<h3 class="h2">Choose A Wallet Type</h3>
+		<Stack>
+			{#each Object.values(walletTypes) as wallet}
+				{@render walletButton(wallet)}
 			{/each}
-		</div>
-	</div>
+		</Stack>
+	</Stack>
 </Stack>
