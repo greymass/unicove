@@ -38,6 +38,10 @@
 	let previousValue = $state(value);
 
 	$effect(() => {
+		console.log({ value });
+	});
+
+	$effect(() => {
 		if (value && value !== previousValue) {
 			const newInput = String(value / UNIT_MULTIPLIERS[unit]);
 			if (input !== newInput && !isAddingDecimal) {

@@ -24,7 +24,9 @@ export class BuyRAMState {
 	);
 
 	public expectedBytes: number | undefined = $derived(
-		this.format === 'asset' ? Math.floor(this.tokens.value / this.pricePerByte.value) : this.bytes
+		this.format === 'asset'
+			? Math.round((this.tokens.value / this.pricePerKB.value) * 1000)
+			: this.bytes
 	);
 
 	public bytesValue: Asset = $derived(

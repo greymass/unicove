@@ -19,8 +19,8 @@
 	import { BuyRAMState } from './state.svelte.js';
 	import { preventDefault } from '$lib/utils.js';
 
-	let bytesInput: BytesInput | undefined = $state();
 	let assetInput: AssetInput | undefined = $state();
+	let bytesInput: BytesInput | undefined = $state();
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
@@ -51,6 +51,8 @@
 
 	function resetState() {
 		buyRamState.reset();
+		bytesInput?.reset();
+		assetInput?.reset();
 	}
 
 	$effect(() => {
@@ -74,6 +76,12 @@
 
 	function setAssetAmount() {
 		buyRamState.format = 'asset';
+		console.log({
+			tokens: buyRamState.tokens.value,
+			expectedBytes: buyRamState.expectedBytes,
+			price: buyRamState.pricePerByte.value,
+			amount: buyRamState.tokens.value / buyRamState.pricePerByte.value
+		});
 		buyRamState.bytes = buyRamState.expectedBytes;
 	}
 
