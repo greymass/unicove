@@ -9,9 +9,11 @@
 	import { page } from '$app/stores';
 	import Stack from '$lib/components/layout/stack.svelte';
 	import Pageheader from '$lib/components/pageheader.svelte';
-	import { getWalletType, walletTypes } from './walletTypes.js';
+	import { crossfade } from 'svelte/transition';
+	import { cubicInOut } from 'svelte/easing';
+	import { getWalletType } from './walletTypes.js';
 
-	const { data } = $props();
+	const { data, children } = $props();
 
 	const steps: SignupStep[] = [
 		{
@@ -58,32 +60,44 @@
 
 		return step.path;
 	}
+
+	const [send, receive] = crossfade({
+		duration: 250,
+		easing: cubicInOut
+	});
 </script>
 
 <Stack>
 	<Pageheader title="Sign Up" subtitle="Setup your account" />
 
-	<div class="mb-6 flex justify-start space-x-4">
+	<!-- Step progress -->
+	<ol class="mb-7 flex justify-between gap-5">
 		{#each steps as step, index}
 			{@const isCurrentStep = step.path === getCurrentStep()?.path}
-			{#if isCurrentStep || isFutureStep(index)}
-				<div
-					class="text-lg font-medium {isCurrentStep ? 'text-primary underline' : 'text-gray-500'}"
-				>
-					Step {index + 1}: {step.title}
-				</div>
-			{:else}
+			<li class="flex-1">
 				<a
 					href={getFullStepPath(step)}
-					class="hover:text-primary text-lg font-medium text-gray-500 hover:underline"
+					data-current={isCurrentStep}
+					data-incomplete={isCurrentStep || isFutureStep(index)}
+					class="relative flex flex-col gap-2 text-white/50 hover:text-white/80 data-[incomplete=true]:pointer-events-none data-[current=true]:text-white"
 				>
-					Step {index + 1}: {step.title}
+					<span> Step {index + 1}: {step.title} </span>
+
+					<!-- Bottom indicator -->
+					<div class="h-1 w-full rounded-full bg-white/10"></div>
+					{#if isCurrentStep}
+						<div
+							in:send={{ key: 'step' }}
+							out:receive={{ key: 'step' }}
+							class="absolute bottom-0 left-1/2 h-1 w-full -translate-x-1/2 rounded-full bg-skyBlue-400"
+						></div>
+					{/if}
 				</a>
-			{/if}
+			</li>
 		{/each}
-	</div>
+	</ol>
 
 	<div>
-		<slot />
+		{@render children()}
 	</div>
 </Stack>
