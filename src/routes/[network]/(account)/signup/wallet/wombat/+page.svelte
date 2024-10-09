@@ -1,5 +1,4 @@
 <script lang="ts">
-	import * as m from '$lib/paraglide/messages.js';
 	import Pageheader from '$lib/components/pageheader.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
 	import Button from '$lib/components/button/button.svelte';
@@ -42,7 +41,7 @@
 
 	<div class="container mx-auto p-4">
 		<ol class="list-decimal space-y-6 pl-5">
-			{#each steps as step, index}
+			{#each steps as step}
 				<li>
 					<h2 class="mb-2 text-xl font-semibold">{step.title}</h2>
 					<p class="mb-2">{step.description}</p>

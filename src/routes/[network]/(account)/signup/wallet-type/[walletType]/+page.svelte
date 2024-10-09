@@ -1,5 +1,4 @@
 <script lang="ts">
-	import PillGroup from '$lib/components/navigation/pillgroup.svelte';
 	import { page } from '$app/stores';
 	import Pageheader from '$lib/components/pageheader.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
@@ -8,24 +7,24 @@
 
 	const { data } = $props();
 
-	const tabOptions = $derived.by(() => {
-		const network = String(data.network);
-		return Object.entries(walletTypes).map(([key, value]) => ({
-			href: `/${network}/signup/${key}`,
-			text: value.title
-		}));
-	});
+	// const tabOptions = $derived.by(() => {
+	// 	const network = String(data.network);
+	// 	return Object.entries(walletTypes).map(([key, value]) => ({
+	// 		href: `/${network}/signup/${key}`,
+	// 		text: value.title
+	// 	}));
+	// });
 
 	const defaultWalletType = Object.keys(walletTypes)[0];
 
 	let currentTab = $derived($page.params.walletType || defaultWalletType);
 
-	let options = $derived(
-		tabOptions.map((option) => ({
-			...option,
-			active: option.href.split('/')[3] === currentTab
-		}))
-	);
+	// let options = $derived(
+	// 	tabOptions.map((option) => ({
+	// 		...option,
+	// 		active: option.href.split('/')[3] === currentTab
+	// 	}))
+	// );
 
 	let currentWalletType = $derived(
 		walletTypes[currentTab as keyof typeof walletTypes] || walletTypes[defaultWalletType]

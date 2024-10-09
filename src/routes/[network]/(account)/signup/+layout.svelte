@@ -9,9 +9,9 @@
 	import { page } from '$app/stores';
 	import Stack from '$lib/components/layout/stack.svelte';
 	import Pageheader from '$lib/components/pageheader.svelte';
-	import { getWalletType, walletTypes } from './walletTypes.js';
+	import { getWalletType } from './walletTypes.js';
 
-	const { data } = $props();
+	const { data, children } = $props();
 
 	const steps: SignupStep[] = [
 		{
@@ -84,6 +84,6 @@
 	</div>
 
 	<div>
-		<slot />
+		{@render children()}
 	</div>
 </Stack>
