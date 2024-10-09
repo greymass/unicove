@@ -5,6 +5,8 @@
 	import { getSetting } from '$lib/state/settings.svelte.js';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 
+	import SummarySellRAM from '$lib/components/summary/eosio/sellram.svelte';
+
 	import Button from '$lib/components/button/button.svelte';
 	import Code from '$lib/components/code.svelte';
 	import Label from '$lib/components/input/label.svelte';
@@ -13,6 +15,7 @@
 	import AssetInput from '$lib/components/input/asset.svelte';
 
 	import { SellRAMState } from '../state.svelte.js';
+	import { preventDefault } from '$lib/utils.js';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
@@ -67,7 +70,7 @@
 	<Transaction network={data.network} {transactionId} />
 {/if}
 
-<form on:submit|preventDefault={handleSellRAM}>
+<form onsubmit={preventDefault(handleSellRAM)}>
 	<Stack class="gap-3">
 		<Label for="assetInput">Amount to sell</Label>
 		<AssetInput
@@ -103,7 +106,7 @@
 		<div class="grid grid-cols-2 gap-2">
 			<span>Price for 1000 bytes:</span>
 			<span>{sellRamState.pricePerKB} / KB</span>
-			<span>Estimated RAM to be sold:</span>
+			<span>RAM to be sold:</span>
 			<span>{sellRamState.bytesToSell} Bytes</span>
 			<span>RAM Value:</span>
 			<span>{sellRamState.tokens}</span>
@@ -112,6 +115,10 @@
 			<span>Expected To Receive:</span>
 			<span>~ {sellRamState.expectedToReceive}</span>
 		</div>
+
+		{#if sellRamState.valid}
+			<SummarySellRAM action={{ data: sellRamState.toJSON() }} />
+		{/if}
 	</Stack>
 
 	<Button type="submit" class="mt-4 w-full" disabled={!sellRamState.valid}>Confirm Sell RAM</Button>

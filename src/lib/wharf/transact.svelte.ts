@@ -17,7 +17,8 @@ export interface QueuedTransaction {
 	network: string;
 	args: TransactArgs;
 	options?: TransactOptions;
-	response?: any;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	response?: Record<string, any>;
 	transaction?: Transaction;
 	error?: string;
 	toastId?: string;

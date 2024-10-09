@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import * as m from '$lib/paraglide/messages.js';
 	import Code from '$lib/components/code.svelte';
 
 	import SendSummary from '$lib/components/summary/eosio.token/transfer.svelte';
@@ -21,18 +20,46 @@
 			sellrex: SellREXSummary,
 			mvfrsavings: MvfrsavingsSummary
 		}
-	};
+	} as const;
 
 	export let data: PageData;
+
+	import type { SvelteComponent } from 'svelte';
+
+	// Define the Action interface
+	interface Action {
+		account: string;
+		name: string;
+		data: Record<string, unknown>;
+	}
+
+	// Type guard for account
+	function isValidAccount(account: string): account is keyof typeof summaryMap {
+		return account in summaryMap;
+	}
+
+	// Type guard for action name
+	function isValidActionName(
+		account: keyof typeof summaryMap,
+		name: string
+	): name is keyof (typeof summaryMap)[typeof account] {
+		return name in summaryMap[account];
+	}
 </script>
 
 {#if data.transaction && data.transaction.trx}
-	{#each data.transaction.trx.trx.actions as action}
-		{@const summaryComponent = summaryMap[action.account][action.name]}
-		{#if summaryComponent}
-			<svelte:component this={summaryComponent} {action} />
+	{@const actions = data.transaction.trx.trx.actions as Action[]}
+	{#each actions as action}
+		{#if isValidAccount(action.account)}
+			{@const accountMap = summaryMap[action.account]}
+			{#if isValidActionName(action.account, action.name)}
+				{@const summaryComponent = accountMap[action.name]}
+				<svelte:component this={summaryComponent as typeof SvelteComponent} {action} />
+			{:else}
+				<p>Unknown action: {action.account}::{action.name}</p>
+			{/if}
 		{:else}
-			<p>Unknown action: {action.account}::{action.name}</p>
+			<p>Unknown account: {action.account}</p>
 		{/if}
 		<Code>{JSON.stringify(action, null, 2)}</Code>
 	{/each}
@@ -40,7 +67,7 @@
 
 {#if data.seq}
 	{@const trace = data.transaction.traces.find(
-		(t) => String(t.receipt.global_sequence) === data.seq
+		(t: { receipt: { global_sequence: number } }) => String(t.receipt.global_sequence) === data.seq
 	)}
 	<Code>{JSON.stringify(trace, null, 2)}</Code>
 {:else}

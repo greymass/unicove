@@ -9,13 +9,7 @@
 		class?: string;
 		children: Snippet;
 	}
-	const {
-		threshold = '50%',
-		children,
-		tag = 'div',
-		class: className = '',
-		...props
-	}: Props = $props();
+	const { threshold = '50%', children, tag = 'div', ...props }: Props = $props();
 </script>
 
 <!-- 

@@ -1,28 +1,6 @@
-import type { ChainConfig } from '$lib/wharf/chains';
 import { Resource } from '@wharfkit/account';
 import { ResourceType } from './types';
 import { calSize, calUsagePer, getName, getUnit } from './utils';
-
-export class NetworkConfig {
-	public hasBuyRAM = $state(false);
-	public hasPowerUp = $state(false);
-	public hasREX = $state(false);
-	public hasStaking = $state(false);
-
-	setConfig(config: ChainConfig | undefined) {
-		if (config) {
-			this.hasBuyRAM = config.features.rammarket;
-			this.hasPowerUp = config.features.powerup;
-			this.hasREX = config.features.rentrex;
-			this.hasStaking = config.features.staking;
-		} else {
-			this.hasBuyRAM = false;
-			this.hasPowerUp = false;
-			this.hasREX = false;
-			this.hasStaking = false;
-		}
-	}
-}
 
 export class ResourceState {
 	private resourceType: ResourceType;

@@ -11,7 +11,7 @@
 		'contract',
 		new Contract({
 			abi: data.abi,
-			account: data.contract,
+			account: String(data.contract),
 			client: data.network.client
 		})
 	);

@@ -1,78 +1,128 @@
 <script lang="ts">
-	import type { ComponentProps } from 'svelte';
 	import { TokenBalance } from '@wharfkit/common';
+	import { createSelect, type SelectOption } from '@melt-ui/svelte';
+	import { SelectTrigger, SelectMenu, SelectItem } from './elements';
+	import { writable } from 'svelte/store';
 
-	import Select, { type OptionWithImage } from './select.svelte';
+	interface TokenSelectOption extends SelectOption<number> {
+		image?: string;
+	}
 
-	// Override the options and selected props to be more specific to the NetworkSelect component
-	interface NetworkSelectProps extends Omit<ComponentProps<Select>, 'options' | 'selected'> {
+	interface Props {
 		options: TokenBalance[];
 		selected: TokenBalance;
 		debug?: boolean;
+		id: string;
+		disabled?: boolean;
+		required?: boolean;
+		multiple?: boolean;
+		sameWidth?: boolean;
 	}
 
 	let {
 		selected: _selected = $bindable(),
+		id,
 		options,
 		debug = false,
-		...props
-	}: NetworkSelectProps = $props();
+		disabled = false,
+		required = false,
+		multiple = false,
+		sameWidth = true
+	}: Props = $props();
 
-	// Convert the options to the format the Select component expects
-	const balanceOptions: OptionWithImage<TokenBalance>[] = $derived.by(() => {
-		return options.map((balance: TokenBalance) => {
-			return {
-				value: balance,
-				label: `${String(balance.asset.symbol.code)} (${balance.asset.quantity})`,
-				image: balance.metadata.logo
-			};
-		});
+	const variant = 'form';
+
+	const label = (balance: TokenBalance) =>
+		`${String(balance.asset.symbol.code)} (${balance.asset.quantity})`;
+
+	const image = (balance: TokenBalance) => balance.metadata.logo;
+
+	const createOption = (balance: TokenBalance, index: number): TokenSelectOption => {
+		return {
+			value: index,
+			label: label(balance),
+			image: image(balance)
+		};
+	};
+
+	// Convert the options to the format of SelectOption<number>
+	// Using an index as the value instead of the TokenBalance object
+	const balanceOptions: TokenSelectOption[] = options.map((balance: TokenBalance, index) =>
+		createOption(balance, index)
+	);
+
+	// Create a typed store for the selected option
+	let selectedTokenOption = writable<TokenSelectOption>(balanceOptions[0]);
+
+	// Build the select component with the custom store
+	const {
+		elements: { trigger, menu, option },
+		states: { open, selected, selectedLabel },
+		helpers: { isSelected }
+	} = createSelect({
+		selected: selectedTokenOption,
+		required,
+		disabled,
+		multiple,
+		forceVisible: true,
+		positioning: {
+			placement: 'bottom-start',
+			fitViewport: true,
+			sameWidth
+		}
 	});
 
-	// Create a derived store to get the selected option
-	let selectedOption: OptionWithImage<TokenBalance> = $state({
-		value: _selected,
-		label: `${String(_selected.asset.symbol.code)} (${_selected.asset.quantity})`,
-		image: _selected.metadata.logo
+	// Get the whole TokenBalance object from the selected option by index
+	let selectedTokenBalance = $derived.by(() => options[$selectedTokenOption.value] || options[0]);
+
+	// Get the image from the selected TokenBalance object
+	let selectedTokenImage = $derived(image(selectedTokenBalance));
+
+	// Sync the currently selected object with the bound selected prop
+	$effect(() => {
+		if (selected) {
+			_selected = selectedTokenBalance;
+		}
 	});
 
 	/** Set the value from a parent */
 	export function set(balance: TokenBalance | null) {
 		if (!balance) {
-			_selected = balanceOptions[0].value;
+			_selected = options[0];
 		} else {
 			_selected = balance;
-			const option = balanceOptions.find((o) => TokenBalance.from(o.value).equals(balance));
+			const option = balanceOptions.find((o) =>
+				TokenBalance.from(options[o.value]).equals(balance)
+			);
 			if (option) {
-				selectedOption = option;
+				selectedTokenOption.set(option);
 			}
 		}
 	}
-
-	// Sync the selected option with the passed in selected prop
-	$effect(() => {
-		const selected = options.find((o) => TokenBalance.from(o).equals(selectedOption.value));
-		if (selected) {
-			_selected = selected;
-		}
-	});
 </script>
 
-<Select
-	variant="form"
-	bind:selected={selectedOption}
-	sameWidth={false}
-	options={balanceOptions}
-	{...props}
-/>
+<SelectTrigger {variant} {id} {open} {trigger}>
+	{#if selectedTokenImage}
+		<img src={selectedTokenImage} alt={$selectedLabel} class="mr-2 size-5 object-contain" />
+	{/if}
+	{$selectedLabel || 'Select an option'}
+</SelectTrigger>
+
+{#if $open}
+	<SelectMenu {id} {variant} {menu} {open}>
+		{#each balanceOptions as item}
+			<SelectItem {id} {option} {variant} {item} {isSelected} />
+		{/each}
+	</SelectMenu>
+{/if}
 
 {#if debug}
 	<h3>Component State</h3>
 	<pre>
 
-_selected (store): {JSON.stringify(_selected)}
-selectedOption (store): {JSON.stringify(selectedOption)}
-options (store): {JSON.stringify(options)}
-balanceOptions (store): {JSON.stringify(balanceOptions)}
+_selected (store): {JSON.stringify(_selected, null, 2)}
+selectedOption (store): {JSON.stringify($selectedTokenOption, null, 2)}
+options (store): {JSON.stringify(options, null, 2)}
+balanceOptions (store): {JSON.stringify(balanceOptions, null, 2)}
 </pre>
 {/if}

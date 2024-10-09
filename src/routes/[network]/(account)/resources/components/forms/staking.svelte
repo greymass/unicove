@@ -6,6 +6,7 @@
 	import Transaction from '$lib/components/transaction.svelte';
 
 	import { Checksum256, Asset } from '@wharfkit/antelope';
+	import type { TransactResult } from '@wharfkit/session';
 
 	import { RentState } from './state.svelte';
 	import { RentType, ResourceType } from '../../types';
@@ -13,18 +14,44 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
 	import { getContext } from 'svelte';
+	import { preventDefault } from '$lib/utils';
 
 	const context = getContext<UnicoveContext>('state');
 	let quantityInput: AssetInput | undefined = $state();
 
 	$effect(() => {
-		if (context.account && context.network) {
+		if (
+			context.account &&
+			context.network &&
+			context.network.sampledUsage &&
+			context.network.chain.systemToken
+		) {
 			if (context.account.name) {
 				rentState.payer = context.account.name;
 				rentState.receiver = context.account.name;
 			}
 			rentState.balance = context.account.balance ? context.account.balance.liquid : undefined;
-			rentState.pricePerUnit = context.network.stakingprice;
+
+			switch (resourceType) {
+				case ResourceType.CPU: {
+					rentState.pricePerUnit = Asset.fromUnits(
+						context.network.sampledUsage.account.cpu_weight.dividing(
+							context.network.sampledUsage.account.cpu_limit.max
+						),
+						context.network.chain.systemToken.symbol
+					);
+					break;
+				}
+				case ResourceType.NET: {
+					rentState.pricePerUnit = Asset.fromUnits(
+						context.network.sampledUsage.account.net_weight.dividing(
+							context.network.sampledUsage.account.net_limit.max
+						),
+						context.network.chain.systemToken.symbol
+					);
+					break;
+				}
+			}
 		} else {
 			rentState.reset();
 		}
@@ -55,8 +82,8 @@
 				.transact({
 					action: rentAction
 				})
-				.then((result: any) => {
-					transactionId = result.response.transaction_id;
+				.then((result: TransactResult) => {
+					transactionId = result.response?.transaction_id;
 					resetStateAfterTrasaction();
 				})
 				.catch((error) => {
@@ -82,7 +109,7 @@
 	<Transaction {network} {transactionId} />
 {/if}
 
-<form on:submit|preventDefault={handleRent}>
+<form onsubmit={preventDefault(handleRent)}>
 	<Stack class="gap-3">
 		<Label for="assetInput"
 			>Amount of {rentState.chain.systemToken!.symbol.code} to stake as {rentState.resourceName}</Label

@@ -1,7 +1,7 @@
-import { Serializer, Asset, Name } from '@wharfkit/antelope';
+import { Asset, Name } from '@wharfkit/antelope';
 import { ChainDefinition } from '@wharfkit/common';
 import { RentType, ResourceType } from '../../types';
-import type { ActionNames, ActionParams } from '$lib/wharf/contracts/system';
+import type { ActionNames } from '$lib/wharf/contracts/system';
 import { getName, getUnit } from '../../utils';
 
 const defaultName = Name.from('');
@@ -110,7 +110,7 @@ export class RentState {
 					loan_payment: this.cost,
 					loan_fund: Asset.fromUnits(0, this.chain.systemToken!.symbol)
 				};
-			case RentType.STAKE:
+			case RentType.STAKE: {
 				const cpuQuantity =
 					this.resourceType == ResourceType.CPU
 						? this.quantity
@@ -126,7 +126,8 @@ export class RentState {
 					stake_net_quantity: netQuantity,
 					transfer: false
 				};
-			case RentType.POWERUP:
+			}
+			case RentType.POWERUP: {
 				const cpuFrac = this.resourceType == ResourceType.CPU ? this.frac : 0;
 				const netFrac = this.resourceType == ResourceType.CPU ? 0 : this.frac;
 				return {
@@ -137,6 +138,7 @@ export class RentState {
 					cpu_frac: cpuFrac,
 					max_payment: this.cost
 				};
+			}
 		}
 	}
 }

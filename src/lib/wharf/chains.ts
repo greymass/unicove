@@ -125,6 +125,10 @@ export const chainMap: Record<string, ChainShortName> = {
 	// f16b1833c747c43682f4386fca9cbb327929334a762755ebec17f6f23c9b8a12: 'waxtestnet'
 };
 
+type Invert<M extends Record<keyof M, PropertyKey>> = {
+	[K in keyof M as M[K]]: K;
+};
+
 export function createMappers<M extends Record<keyof M, PropertyKey>>(map: M) {
 	const invertedMap = (Object.entries(map) as Array<[PropertyKey, PropertyKey]>).reduce(
 		(inverted, [key, value]) => ({ ...inverted, [value]: key }),

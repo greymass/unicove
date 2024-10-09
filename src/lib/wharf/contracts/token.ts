@@ -96,6 +96,7 @@ export interface TableTypes {
 	accounts: Types.account;
 	stat: Types.currency_stats;
 }
+
 export type RowType<T> = T extends keyof TableTypes ? TableTypes[T] : any;
 export type TableNames = keyof TableTypes;
 export namespace ActionParams {

@@ -6,6 +6,7 @@
 	import Transaction from '$lib/components/transaction.svelte';
 
 	import { Checksum256 } from '@wharfkit/antelope';
+	import type { TransactResult } from '@wharfkit/session';
 
 	import { RentState } from './state.svelte';
 	import { RentType, ResourceType } from '../../types';
@@ -13,6 +14,7 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
 	import { getContext } from 'svelte';
+	import { preventDefault } from '$lib/utils';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -58,8 +60,8 @@
 				.transact({
 					actions: [depositAction, rentAction]
 				})
-				.then((result: any) => {
-					transactionId = result.response.transaction_id;
+				.then((result: TransactResult) => {
+					transactionId = result.response?.transaction_id;
 					resetStateAfterTrasaction();
 				})
 				.catch((error) => {
@@ -80,7 +82,7 @@
 	<Transaction {network} {transactionId} />
 {/if}
 
-<form on:submit|preventDefault={handleRent}>
+<form onsubmit={preventDefault(handleRent)}>
 	<Stack class="gap-3">
 		<Label for="resourceNumberInput">Amount of {rentState.resourceUnit} to rent from REX.</Label>
 		<NumberInput

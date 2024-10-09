@@ -11,7 +11,7 @@ import {
 	getWithdrawableBalance
 } from '../utils';
 
-export class WithdrawState {
+export class WithdrawManager {
 	public network: NetworkState | undefined = $state();
 	public account: AccountState | undefined = $state();
 	public wharf: WharfState | undefined = $state();
@@ -29,7 +29,7 @@ export class WithdrawState {
 	);
 	public withdrawable: Asset = $derived(
 		this.account && this.network
-			? getWithdrawableBalance(this.network!, this.account)
+			? getWithdrawableBalance(this.network, this.account)
 			: defaultQuantity
 	);
 	public total: Asset = $derived(
@@ -67,24 +67,30 @@ export class WithdrawState {
 	}
 
 	async transact() {
-		const actions = [];
-		if (this.claimable) {
-			actions.push(
-				this.network!.contracts.system.action('sellrex', {
-					from: this.account!.name!,
-					rex: this.network!.tokenToRex(this.claimable)
-				})
-			);
-		}
-		actions.push(
-			this.network!.contracts.system.action('withdraw', {
-				owner: this.account!.name!,
-				amount: this.withdrawable!
-			})
-		);
-
 		try {
-			const result = await this.wharf!.transact({
+			if (!this.network || !this.account || !this.account.name || !this.wharf) {
+				throw new Error("Can't sign, data not ready");
+			}
+
+			const actions = [];
+			if (this.claimable) {
+				actions.push(
+					this.network.contracts.system.action('sellrex', {
+						from: this.account.name,
+						rex: this.network.tokenToRex(this.claimable)
+					})
+				);
+			}
+			if (this.total) {
+				actions.push(
+					this.network.contracts.system.action('withdraw', {
+						owner: this.account.name,
+						amount: this.total
+					})
+				);
+			}
+
+			const result = await this.wharf.transact({
 				actions
 			});
 

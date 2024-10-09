@@ -7,7 +7,6 @@
 	import { getContext } from 'svelte';
 
 	import { ResourceType } from '../../types';
-	import { NetworkConfig } from '../../state.svelte';
 	import { getName, getUnit } from '../../utils';
 
 	interface Props {
@@ -22,11 +21,6 @@
 	const resourceName = getName(resource);
 	const resourceUnit = getUnit(resource);
 
-	const networkConfig = $state(new NetworkConfig());
-	$effect(() => {
-		networkConfig.setConfig(context.network?.config);
-	});
-
 	const context = getContext<UnicoveContext>('state');
 	let powerupPrice: Asset | undefined = $state();
 	let rexPrice: Asset | undefined = $state();
@@ -34,9 +28,11 @@
 
 	$effect(() => {
 		if (context.network) {
-			powerupPrice = context.network.powerupprice;
+			// TODO: we need to get the powerupprice from the stakingprice
+			// powerupPrice = context.network.powerupprice;
+			// stakingPrice = context.network.stakingprice;
+
 			rexPrice = context.network.rexprice;
-			stakingPrice = context.network.stakingprice;
 		} else {
 			powerupPrice = undefined;
 			rexPrice = undefined;
@@ -54,7 +50,7 @@
 	</h4>
 
 	<Grid>
-		{#if networkConfig.hasPowerUp}
+		{#if context.network?.supports('powerup')}
 			<div class="flex flex-col items-center gap-2 rounded-2xl border-2 border-slate-300 p-4">
 				<div>Power up</div>
 				<div>
@@ -71,7 +67,7 @@
 				<Button variant="pill" class="text-blue-400" href={powerupLink}>Rent via PowerUp</Button>
 			</div>
 		{/if}
-		{#if networkConfig.hasREX}
+		{#if context.network?.supports('rentrex')}
 			<div class="flex flex-col items-center gap-2 rounded-2xl border-2 border-slate-300 p-4">
 				<div>REX</div>
 				<div>
@@ -88,7 +84,7 @@
 				<Button variant="pill" class="text-blue-400" href={rexLink}>Rent via REX</Button>
 			</div>
 		{/if}
-		{#if networkConfig.hasStaking}
+		{#if context.network?.supports('stakeresource')}
 			<div class="flex flex-col items-center gap-2 rounded-2xl border-2 border-slate-300 p-4">
 				<div>Staking</div>
 				<div>

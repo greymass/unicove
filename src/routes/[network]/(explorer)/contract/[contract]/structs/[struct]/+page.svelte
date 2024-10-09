@@ -16,7 +16,7 @@
 		title={m.contract_struct_view_title({ struct: data.struct })}
 		subtitle={m.contract_struct_view_description({
 			struct: data.struct,
-			contract: data.contract,
+			contract: String(data.contract),
 			network: data.network.chain.name
 		})}
 	/>

@@ -1,12 +1,12 @@
-import { json } from '@sveltejs/kit';
+import { json, type RequestEvent } from '@sveltejs/kit';
 
 import { getChainDefinitionFromParams, getNetwork } from '$lib/state/network.svelte';
 import { getBackendClient } from '$lib/wharf/client/ssr.js';
 import { getActivity } from './activity';
 import { getCacheHeaders } from '$lib/utils';
 
-export async function GET({ fetch, params }) {
-	const chain = getChainDefinitionFromParams(params.network);
+export async function GET({ fetch, params }: RequestEvent) {
+	const chain = getChainDefinitionFromParams(String(params.network));
 	if (!chain) {
 		return json({ error: 'Invalid chain specified' }, { status: 400 });
 	}
@@ -16,11 +16,11 @@ export async function GET({ fetch, params }) {
 	}
 
 	const network = getNetwork(chain, fetch);
-	if (!network.config.features.robo) {
+	if (!network.supports('robo')) {
 		return json({ error: `Activity not supported on ${network.chain.name}.` }, { status: 500 });
 	}
 
-	const client = getBackendClient(fetch, network.shortname, true);
+	const client = getBackendClient(fetch, network.shortname, { history: true });
 
 	const requests = [getActivity(client, params.name)];
 	const headers = getCacheHeaders(5);
@@ -37,6 +37,7 @@ export async function GET({ fetch, params }) {
 			}
 		);
 	} catch (error) {
+		console.error(error);
 		return json({ error: 'Unable to load account.' }, { status: 500 });
 	}
 }

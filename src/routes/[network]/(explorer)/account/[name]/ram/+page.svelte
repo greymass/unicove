@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { Asset, Int64 } from '@wharfkit/session';
+	import { Asset } from '@wharfkit/session';
 	import Card from '$lib/components/layout/box/card.svelte';
 	import RAM from '$lib/components/elements/ram.svelte';
-	import { calculateValue } from '$lib/state/client/account.svelte';
+	import { calculateValue } from '$lib/utils';
 
 	const { data } = $props();
 </script>
@@ -87,7 +87,7 @@
 		<ul class="space-y-2">
 			<li>
 				{data.account.network.ramprice?.eos.value || 'N/A'}
-				{data.account.network.chain.systemToken.symbol.code}/KB
+				{data.account.network.chain.systemToken?.symbol.code || ''}/KB
 			</li>
 			<li>${data.account.network.ramprice?.usd?.value || 'N/A'} USD/KB</li>
 		</ul>

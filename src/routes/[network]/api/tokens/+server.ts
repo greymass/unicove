@@ -1,12 +1,12 @@
-import { json } from '@sveltejs/kit';
+import { json, type RequestEvent } from '@sveltejs/kit';
 
 import { getChainDefinitionFromParams } from '$lib/state/network.svelte';
 import { getCacheHeaders } from '$lib/utils';
 import type { ChainShortName } from '$lib/wharf/chains.js';
 import { tokens } from './tokens';
 
-export async function GET({ params }) {
-	const chain = getChainDefinitionFromParams(params.network);
+export async function GET({ params }: RequestEvent) {
+	const chain = getChainDefinitionFromParams(String(params.network));
 	if (!chain) {
 		return json({ error: 'Invalid chain specified' }, { status: 400 });
 	}

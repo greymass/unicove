@@ -1,22 +1,23 @@
 <script lang="ts">
-	import * as m from '$lib/paraglide/messages.js';
-	import { Box, Card, Center, Stack, Switcher } from '$lib/components/layout';
-	import PageHeader from '$lib/components/pageheader.svelte';
+	import { Card, Stack, Switcher } from '$lib/components/layout';
 	import Button from '$lib/components/button/button.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { Asset } from '@wharfkit/antelope';
 	import { getContext } from 'svelte';
 
-	import type { UnstakingRecord, WithdrawableBalance } from './utils';
+	import type { UnstakingRecord } from './utils';
 	import { getStakedBalance, getUnstakingBalances, getAPY } from './utils';
+	import UnstakingBalances from './unstaking.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
 	const networkName = String(data.network);
 
-	let staked: Asset = $derived(getStakedBalance(data.network, context.account));
+	let staked: Asset = $derived(
+		context.account ? getStakedBalance(data.network, context.account) : Asset.from(0, '0,UNKNOWN')
+	);
 	let unstaking: Array<UnstakingRecord> = $derived(
-		getUnstakingBalances(data.network, context.account)
+		context.account ? getUnstakingBalances(data.network, context.account) : []
 	);
 	let apy = $derived(getAPY(data.network));
 	let usdValue = $derived(
@@ -46,39 +47,7 @@
 				>
 			</Switcher>
 		</Card>
-
-		<Card title="Unstaking Balances">
-			<table class="table-auto">
-				<thead class="border-b-2 border-shark-100/10">
-					<tr class="caption font-medium">
-						<th class="p-4 text-left">Amount</th>
-						<th class="p-4 text-right">Date available</th>
-					</tr>
-				</thead>
-				<tbody>
-					{#each unstaking as record}
-						{#if !record.savings}
-							<tr>
-								<td class="p-4">{record.balance}</td>
-								<td class="p-4 text-right"
-									>{record.date
-										? record.date.toLocaleDateString(undefined, {
-												weekday: 'long',
-												year: 'numeric',
-												month: 'long',
-												day: 'numeric'
-											})
-										: '--'}
-								</td></tr
-							>
-						{/if}
-					{/each}
-				</tbody>
-			</table>
-			<Button href="/{networkName}/staking/withdraw" variant="secondary" class="text-skyBlue-500"
-				>Withdraw</Button
-			>
-		</Card>
+		<UnstakingBalances href="/{networkName}/staking/withdraw" records={unstaking} />
 	</Switcher>
 	<Card class="gap-5">
 		<Stack class="gap-0">

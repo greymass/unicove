@@ -20,11 +20,13 @@ import {
 	chainConfigs,
 	chainMapper,
 	type ChainConfig,
-	type DefaultContracts
+	type ChainShortName,
+	type DefaultContracts,
+	type FeatureType
 } from '$lib/wharf/chains';
 
-import { calculateValue } from './client/account.svelte';
 import { tokens } from '../../routes/[network]/api/tokens/tokens';
+import { calculateValue } from '$lib/utils';
 
 export class NetworkState {
 	public chain: ChainDefinition;
@@ -32,7 +34,7 @@ export class NetworkState {
 	public fetch = fetch;
 	public last_update: Date = $state(new Date());
 	public loaded = $state(false);
-	public shortname: string;
+	public shortname: keyof typeof tokens;
 	public snapOrigin?: string = $state();
 
 	public contracts: DefaultContracts;
@@ -48,25 +50,6 @@ export class NetworkState {
 		if (this.rexstate && this.sampledUsage && this.chain.systemToken) {
 			return Asset.from(
 				this.rexstate.price_per(this.sampledUsage, 30000),
-				this.chain.systemToken.symbol
-			);
-		}
-		return undefined;
-	});
-	public stakingprice: Asset | undefined = $derived.by(() => {
-		if (this.sampledUsage && this.chain.systemToken) {
-			const { account } = this.sampledUsage;
-			return Asset.fromUnits(
-				Number(account.cpu_weight) / Number(account.cpu_limit.max),
-				this.chain.systemToken.symbol
-			);
-		}
-		return undefined;
-	});
-	public powerupprice: Asset | undefined = $derived.by(() => {
-		if (this.sampledUsage && this.powerupstate && this.chain.systemToken) {
-			return Asset.from(
-				this.powerupstate.cpu.price_per_ms(this.sampledUsage, 1),
 				this.chain.systemToken.symbol
 			);
 		}
@@ -98,7 +81,7 @@ export class NetworkState {
 			system: new SystemContract({ client: this.client })
 		};
 
-		if (this.config.features.delphioracle) {
+		if (this.supports('delphioracle')) {
 			this.contracts.delphioracle = new DelphiOracleContract({ client: this.client });
 		}
 	}
@@ -147,6 +130,8 @@ export class NetworkState {
 
 		this.loaded = true;
 	}
+
+	supports = (feature: FeatureType): boolean => this.config.features[feature];
 
 	tokenToRex = (token: AssetType) => {
 		if (!this.rexstate) {
@@ -217,7 +202,7 @@ export function getNetwork(chain: ChainDefinition, fetchOverride?: typeof window
 
 export function getChainDefinitionFromParams(network: string): ChainDefinition {
 	if (network) {
-		const id = chainMapper.toChainId(network);
+		const id = chainMapper.toChainId(network as ChainShortName);
 		const name = chainIdsToIndices.get(id);
 		if (name) {
 			// Return the chain that's found

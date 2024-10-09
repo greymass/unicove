@@ -1,15 +1,9 @@
 <script lang="ts">
-	import { ABI } from '@wharfkit/antelope';
 	import * as m from '$lib/paraglide/messages.js';
-	import Code from '$lib/components/code.svelte';
-	import Account from '$lib/components/link/account.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
 	import Pageheader from '$lib/components/pageheader.svelte';
 
 	const { data } = $props();
-
-	const tableDef = data.abi.tables.find((t: ABI.Table) => t.name === data.table);
-	const struct = data.abi.structs.find((s: ABI.Struct) => s.name === tableDef.type);
 </script>
 
 <Stack>
@@ -18,7 +12,7 @@
 			table: data.table
 		})}
 		subtitle={m.contract_tables_view_description({
-			contract: data.contract,
+			contract: String(data.contract),
 			network: data.network.chain.name,
 			table: data.table
 		})}

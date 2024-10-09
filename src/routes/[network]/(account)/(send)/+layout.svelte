@@ -1,5 +1,4 @@
 <script lang="ts">
-	import * as m from '$lib/paraglide/messages.js';
 	import PillGroup from '$lib/components/navigation/pillgroup.svelte';
 	import { page } from '$app/stores';
 	import Pageheader from '$lib/components/pageheader.svelte';

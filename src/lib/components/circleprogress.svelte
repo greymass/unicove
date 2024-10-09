@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { tweened } from 'svelte/motion';
 	import { cubicInOut } from 'svelte/easing';
-	import { onMount, type Snippet } from 'svelte';
-	import type { HTMLAttributes } from 'svelte/elements';
+	import { type Snippet } from 'svelte';
 
 	interface Props {
 		children?: Snippet;

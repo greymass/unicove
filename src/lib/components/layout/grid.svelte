@@ -9,7 +9,7 @@
 		itemWidth?: string;
 	}
 
-	const { class: className = '', children, itemWidth = '20ch', ...props }: Props = $props();
+	const { children, itemWidth = '20ch', ...props }: Props = $props();
 </script>
 
 <div class={`layout-grid`} {...props} style={`--grid-itemWidth:${itemWidth}`}>

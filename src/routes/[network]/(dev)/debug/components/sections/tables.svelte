@@ -48,8 +48,8 @@
 				</Table.Row>
 			</Table.Head>
 			<Table.Body>
-				{#each [1, 2, 3, 4] as _value}
-					<Table.Row>
+				{#each [1, 2, 3, 4] as index}
+					<Table.Row id={String(index)}>
 						<Table.Cell class="border-r border-white/10 text-left">Left</Table.Cell>
 						<Table.Cell class="border-r border-white/10 text-center">Center</Table.Cell>
 						<Table.Cell class="text-right">Right</Table.Cell>

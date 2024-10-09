@@ -1,7 +1,8 @@
 import type { PageLoad } from './$types';
-import * as m from '$lib/paraglide/messages.js';
+import * as m from '$lib/paraglide/messages';
+import type { LoadEvent } from '@sveltejs/kit';
 
-export const load: PageLoad = async ({ parent }) => {
+export const load: PageLoad = async ({ parent }: LoadEvent) => {
 	const p = await parent();
 	return {
 		pageMetaTags: {

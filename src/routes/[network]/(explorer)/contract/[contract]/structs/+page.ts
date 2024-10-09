@@ -8,7 +8,7 @@ export const load: PageLoad = async ({ parent }) => {
 			title: [m.contract_struct_page_title(), p.pageMetaTags.title].join(' | '),
 			description: m.contract_struct_page_description({
 				structs: p.abi.structs.length,
-				contract: p.contract,
+				contract: String(p.contract),
 				network: p.network.chain.name
 			})
 		}

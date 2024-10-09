@@ -32,19 +32,19 @@ export class SellRAMState {
 		this.format === 'units' && this.bytes !== undefined
 			? Asset.from(
 					(this.bytes * this.pricePerKB.value) / 1000,
-					this.chain.systemToken?.symbol || defaultSymbol
+					this.chain.systemToken?.symbol || '0,UNKNOWN'
 				)
 			: this.tokens
 	);
 
 	public fee: Asset = $derived(
-		Asset.from(this.bytesValue.value * 0.005, this.chain.systemToken?.symbol || defaultSymbol)
+		Asset.from(this.bytesValue.value * 0.005, this.chain.systemToken?.symbol || '0,UNKNOWN')
 	);
 
 	public expectedToReceive: Asset = $derived(
 		Asset.fromUnits(
 			this.bytesValue.units.subtracting(this.fee.units),
-			this.chain.systemToken?.symbol || defaultSymbol
+			this.chain.systemToken?.symbol || '0,UNKNOWN'
 		)
 	);
 
@@ -73,7 +73,7 @@ export class SellRAMState {
 
 	reset() {
 		this.bytes = undefined;
-		this.tokens = Asset.fromUnits(0, this.chain.systemToken?.symbol || defaultSymbol);
+		this.tokens = Asset.fromUnits(0, this.chain.systemToken?.symbol || '0,UNKNOWN');
 	}
 
 	toJSON() {

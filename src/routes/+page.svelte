@@ -1,8 +1,8 @@
 <script>
-	import * as m from '$lib/paraglide/messages.js';
+	import * as m from '$lib/paraglide/messages';
 	import Button from '$lib/components/button/button.svelte';
 	import { Box, Stack } from '$lib/components/layout';
-	import { languageTag } from '$lib/paraglide/runtime';
+	import { languageTag } from '$lib/paraglide/runtime.js';
 	import { chainShortNames } from '$lib/wharf/chains';
 </script>
 

@@ -11,7 +11,7 @@
 	<Pageheader
 		title={m.contract_abi_page_title()}
 		subtitle={m.contract_abi_page_description({
-			contract: data.contract,
+			contract: String(data.contract),
 			network: data.network.chain.name
 		})}
 	/>

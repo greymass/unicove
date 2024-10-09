@@ -1,4 +1,4 @@
-import { json } from '@sveltejs/kit';
+import { json, type RequestEvent } from '@sveltejs/kit';
 
 import { getChainDefinitionFromParams, getNetwork } from '$lib/state/network.svelte';
 import { getCacheHeaders } from '$lib/utils';
@@ -13,8 +13,8 @@ type ResponseType =
 	| DelphioracleTypes.datapoints
 	| undefined;
 
-export async function GET({ fetch, params }) {
-	const chain = getChainDefinitionFromParams(params.network);
+export async function GET({ fetch, params }: RequestEvent) {
+	const chain = getChainDefinitionFromParams(String(params.network));
 	if (!chain) {
 		return json({ error: 'Invalid chain specified' }, { status: 400 });
 	}
@@ -31,20 +31,16 @@ export async function GET({ fetch, params }) {
 	let sampleUsageIndex = -1;
 	let tokenStateIndex = -1;
 
-	if (network.config.features.rammarket) {
+	if (network.supports('rammarket')) {
 		ramStateIndex = addRequest(requests, network.resources.v1.ram.get_state());
 	}
-	if (network.config.features.rex) {
+	if (network.supports('rex')) {
 		rexStateIndex = addRequest(requests, network.resources.v1.rex.get_state());
 	}
-	if (network.config.features.powerup) {
+	if (network.supports('powerup')) {
 		powerupStateIndex = addRequest(requests, network.resources.v1.powerup.get_state());
 	}
-	if (
-		network.config.features.staking ||
-		network.config.features.rentrex ||
-		network.config.features.powerup
-	) {
+	if (network.supports('staking') || network.supports('rentrex') || network.supports('powerup')) {
 		sampleUsageIndex = addRequest(requests, network.resources.getSampledUsage());
 	}
 	if (network.contracts.delphioracle) {

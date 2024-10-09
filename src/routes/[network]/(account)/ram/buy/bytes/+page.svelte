@@ -5,6 +5,8 @@
 	import { getSetting } from '$lib/state/settings.svelte.js';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 
+	import SummaryBuyRAMBytes from '$lib/components/summary/eosio/buyrambytes.svelte';
+
 	import Button from '$lib/components/button/button.svelte';
 	import Code from '$lib/components/code.svelte';
 	import Label from '$lib/components/input/label.svelte';
@@ -13,6 +15,7 @@
 	import NumberInput from '$lib/components/input/number.svelte';
 
 	import { BuyRAMState } from '../state.svelte.js';
+	import { preventDefault } from '$lib/utils.js';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
@@ -74,7 +77,7 @@
 	<Transaction network={data.network} {transactionId} />
 {/if}
 
-<form on:submit|preventDefault={handleBuyRAM}>
+<form onsubmit={preventDefault(handleBuyRAM)}>
 	<Stack class="gap-3">
 		<Label for="bytesInput">Amount to buy (Bytes)</Label>
 		<NumberInput
@@ -92,7 +95,7 @@
 			{#if context.account}
 				{context.account.balance?.liquid}
 			{:else}
-				0.0000 {data.network.chain.systemToken?.symbol.code}
+				0.0000 {data.network.chain.systemToken?.symbol.code || ''}
 			{/if}
 		</p>
 	</Stack>
@@ -109,6 +112,10 @@
 			<span>Total Cost</span>
 			<span>{buyRamState.bytesCost}</span>
 		</div>
+
+		{#if buyRamState.valid}
+			<SummaryBuyRAMBytes action={{ data: buyRamState.toJSON() }} />
+		{/if}
 	</Stack>
 
 	<Button type="submit" class="mt-4 w-full" disabled={!buyRamState.valid}>Confirm Buy RAM</Button>
