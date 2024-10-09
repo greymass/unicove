@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import Pageheader from '$lib/components/pageheader.svelte';
-	import Stack from '$lib/components/layout/stack.svelte';
 	import Button from '$lib/components/button/button.svelte';
+	import Stack from '$lib/components/layout/stack.svelte';
 	import { walletTypes } from '../../walletTypes';
+	import { ChevronRight } from 'lucide-svelte';
 
 	const { data } = $props();
 
@@ -31,28 +31,47 @@
 	);
 </script>
 
-<Stack>
-	<Pageheader
-		title={`Sign Up with ${currentWalletType.title}`}
-		subtitle={currentWalletType.description}
-	/>
+<Stack class="gap-2">
+	<h3 class="h3">Sign Up with {currentWalletType.title}</h3>
+	<p>{currentWalletType.description}</p>
+</Stack>
 
-	<div class="container mx-auto p-4">
-		<h2 class="mb-2 text-xl font-semibold">Benefits:</h2>
-		<ul class="mb-6 list-disc pl-5">
-			{#each currentWalletType.benefits as benefit}
-				<li>{benefit}</li>
-			{/each}
-		</ul>
-		<h2 class="mb-4 text-xl font-semibold">Available Wallets:</h2>
-		<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-			{#each currentWalletType.wallets as wallet}
-				<div class="flex justify-center">
-					<Button href="/{data.network}/{wallet.route}" class="w-full">
-						{wallet.name}
-					</Button>
+<Stack class="gap-2">
+	<h3 class="h3">Benefits</h3>
+
+	<ul class="list-inside list-disc">
+		{#each currentWalletType.benefits as benefit}
+			<li class="">{benefit}</li>
+		{/each}
+	</ul>
+</Stack>
+
+<Stack>
+	<h3 class="h2">Available Wallets</h3>
+	<Stack>
+		{#each currentWalletType.wallets as wallet}
+			<a
+				href="/{data.network}/{wallet.route}"
+				class="group grid grid-cols-[auto_1fr_auto] items-center gap-4 rounded-2xl border border-white/20 p-4
+				hover:bg-mineShaft-950 focus-visible:outline focus-visible:outline-transparent focus-visible:ring-2 focus-visible:ring-solar-500"
+			>
+				<div class="grid size-12 place-items-center">
+					{#if wallet.logo}
+						<img src={wallet.logo} alt={wallet.name} class="" />
+					{:else}
+						<div class="rounded-full bg-mineShaft-900/60 p-3"></div>
+					{/if}
 				</div>
-			{/each}
-		</div>
-	</div>
+				<div class="space-y-1">
+					<h4 class="text-xl font-semibold">
+						{wallet.name}
+					</h4>
+					<!-- <p>{wallet.description}</p> -->
+				</div>
+				<ChevronRight class="size-6 group-hover:stroke-skyBlue-500" />
+			</a>
+		{/each}
+
+		<Button variant="secondary" href="/{data.network}/signup">Back</Button>
+	</Stack>
 </Stack>

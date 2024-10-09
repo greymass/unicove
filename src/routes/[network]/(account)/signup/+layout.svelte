@@ -88,7 +88,10 @@
 					<span> Step {index + 1}: {step.title} </span>
 
 					<!-- Bottom indicator -->
-					<div class="h-1 w-full rounded-full bg-white/10"></div>
+					<div
+						data-incomplete={isIncompleteStep}
+						class="h-1 w-full rounded-full data-[incomplete=false]:bg-skyBlue-400 data-[incomplete=true]:bg-white/10"
+					></div>
 					{#if isCurrentStep}
 						<div
 							in:send={{ key: 'step' }}
@@ -102,6 +105,10 @@
 	</ol>
 
 	<div class="relative">
-		{@render children()}
+		<Stack
+			class="gap-6 *:z-10 before:absolute before:-inset-4 before:z-0 before:bg-shark-900/10 md:mx-auto md:max-w-md md:p-6 md:pb-10 md:before:inset-0 md:before:rounded-2xl"
+		>
+			{@render children()}
+		</Stack>
 	</div>
 </Stack>

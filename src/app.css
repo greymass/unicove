@@ -37,7 +37,8 @@
 		@apply text-base font-medium text-gray-500;
 	}
 
-	p {
+	p,
+	li {
 		@apply max-w-prose text-base font-medium text-white/60;
 	}
 

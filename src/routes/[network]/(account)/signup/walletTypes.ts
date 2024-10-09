@@ -3,6 +3,17 @@ import LaptopMinimal from 'lucide-svelte/icons/laptop-minimal';
 import LockKeyhole from 'lucide-svelte/icons/lock-keyhole';
 import GlobeLock from 'lucide-svelte/icons/globe-lock';
 import type { Icon } from 'lucide-svelte';
+import AnchorLogo from '$lib/assets/wallets/anchor.svg';
+import WombatLogo from '$lib/assets/wallets/wombat.webp';
+import TokenPocketLogo from '$lib/assets/wallets/tokenpocket.webp';
+import MetaMaskLogo from '$lib/assets/wallets/metamask.svg';
+import LedgerLogo from '$lib/assets/wallets/ledger.svg';
+
+export interface Wallet {
+	name: string;
+	route: string;
+	logo?: string;
+}
 
 export interface WalletType {
 	type: 'hardware' | 'desktop' | 'mobile' | 'extensions';
@@ -10,7 +21,7 @@ export interface WalletType {
 	description: string;
 	icon: typeof Icon;
 	benefits: string[];
-	wallets: { name: string; route: string }[];
+	wallets: Wallet[];
 }
 
 export const walletTypes: Record<string, WalletType> = {
@@ -37,7 +48,7 @@ export const walletTypes: Record<string, WalletType> = {
 			'Offline storage of private keys',
 			'Support for multiple cryptocurrencies'
 		],
-		wallets: [{ name: 'Ledger', route: 'signup/wallet/ledger' }]
+		wallets: [{ name: 'Ledger', route: 'signup/wallet/ledger', logo: LedgerLogo }]
 	},
 	desktop: {
 		type: 'desktop',
@@ -50,8 +61,8 @@ export const walletTypes: Record<string, WalletType> = {
 			'Often free to download and use'
 		],
 		wallets: [
-			{ name: 'Anchor', route: 'signup/wallet/anchor/desktop' },
-			{ name: 'Wombat', route: 'signup/wallet/wombat/desktop' }
+			{ name: 'Anchor', route: 'signup/wallet/anchor/desktop', logo: AnchorLogo },
+			{ name: 'Wombat', route: 'signup/wallet/wombat/desktop', logo: WombatLogo }
 		]
 	},
 	mobile: {
@@ -65,9 +76,9 @@ export const walletTypes: Record<string, WalletType> = {
 			'Quick and easy transactions from your smartphone'
 		],
 		wallets: [
-			{ name: 'Anchor Mobile', route: 'signup/wallet/anchor/mobile' },
-			{ name: 'Wombat Mobile', route: 'signup/wallet/wombat/mobile' },
-			{ name: 'TokenPocket', route: 'signup/wallet/tokenpocket' }
+			{ name: 'Anchor Mobile', route: 'signup/wallet/anchor/mobile', logo: AnchorLogo },
+			{ name: 'Wombat Mobile', route: 'signup/wallet/wombat/mobile', logo: WombatLogo },
+			{ name: 'TokenPocket', route: 'signup/wallet/tokenpocket', logo: TokenPocketLogo }
 		]
 	},
 	extensions: {
@@ -82,8 +93,8 @@ export const walletTypes: Record<string, WalletType> = {
 			'Easy to use for web3 interactions'
 		],
 		wallets: [
-			{ name: 'MetaMask', route: 'signup/wallet/metamask' },
-			{ name: 'Wombat', route: 'signup/wallet/wombat/extension' }
+			{ name: 'MetaMask', route: 'signup/wallet/metamask', logo: MetaMaskLogo },
+			{ name: 'Wombat', route: 'signup/wallet/wombat/extension', logo: WombatLogo }
 		]
 	}
 };
