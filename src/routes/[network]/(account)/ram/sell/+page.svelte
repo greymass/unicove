@@ -95,6 +95,7 @@
 					bind:value={sellRamState.tokens}
 					bind:this={assetInput}
 					oninput={setAssetAmount}
+					autofocus
 				/>
 			</div>
 			<div class="flex-1">

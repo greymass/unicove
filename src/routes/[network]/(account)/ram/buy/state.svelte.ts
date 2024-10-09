@@ -10,7 +10,6 @@ const defaultKBAmount = Asset.fromUnits(0, kbSymbol);
 export class BuyRAMState {
 	public payer: Name = $state(defaultName);
 	public receiver: Name = $state(defaultName);
-	public kbsAmount: Asset = $state(defaultKBAmount);
 	public tokens: Asset = $state(defaultQuantity);
 	public balance: Asset = $state(defaultQuantity);
 	public chain: ChainDefinition = $state(Chains.EOS);
@@ -39,9 +38,7 @@ export class BuyRAMState {
 	);
 
 	public kbs: Asset = $derived(
-		this.format === 'asset' && this.pricePerKB.value
-			? Asset.from(this.bytesValue.value / this.pricePerKB.value, kbSymbol)
-			: this.kbsAmount
+		this.bytes ? Asset.from(this.bytes / 1000, kbSymbol) : defaultKBAmount
 	);
 
 	public fee: Asset = $derived(
@@ -81,11 +78,12 @@ export class BuyRAMState {
 	}
 
 	reset() {
-		this.kbsAmount = defaultKBAmount;
+		this.bytes = undefined;
 		this.tokens = Asset.fromUnits(0, this.chain.systemToken?.symbol || '0,UNKNOWN');
 	}
 
 	toJSON() {
+		console.log({ format: this.format });
 		if (this.format === 'asset') {
 			return Serializer.objectify({
 				payer: this.payer,

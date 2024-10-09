@@ -6,6 +6,7 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 
 	import SummaryBuyRAMBytes from '$lib/components/summary/eosio/buyrambytes.svelte';
+	import SummaryBuyRAM from '$lib/components/summary/eosio/buyram.svelte';
 
 	import Button from '$lib/components/button/button.svelte';
 	import Code from '$lib/components/code.svelte';
@@ -26,7 +27,7 @@
 	const { data } = $props();
 	const debugMode = getSetting('debug-mode', true);
 
-	const buyRamState: BuyRAMState = $state(new BuyRAMState(data.network.chain));
+	let buyRamState: BuyRAMState = $state(new BuyRAMState(data.network.chain));
 
 	let transactionId: Checksum256 | undefined = $state();
 
@@ -38,7 +39,10 @@
 
 		try {
 			const transactionResult = await context.wharf.transact({
-				action: data.network.contracts.system.action('buyrambytes', buyRamState.toJSON())
+				action: data.network.contracts.system.action(
+					buyRamState.format === 'asset' ? 'buyram' : 'buyrambytes',
+					buyRamState.toJSON()
+				)
 			});
 
 			transactionId = transactionResult.resolved?.transaction.id;
@@ -105,6 +109,7 @@
 					bind:value={buyRamState.tokens}
 					bind:this={assetInput}
 					oninput={setAssetAmount}
+					autofocus
 				/>
 			</div>
 			<div class="flex-1">
@@ -144,7 +149,11 @@
 		</Card>
 
 		{#if buyRamState.valid}
-			<SummaryBuyRAMBytes action={{ data: buyRamState.toJSON() }} />
+			{#if buyRamState.format === 'asset'}
+				<SummaryBuyRAM action={{ data: buyRamState.toJSON() }} />
+			{:else}
+				<SummaryBuyRAMBytes action={{ data: buyRamState.toJSON() }} />
+			{/if}
 		{/if}
 	</Stack>
 

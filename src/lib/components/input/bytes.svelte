@@ -35,19 +35,22 @@
 	};
 
 	let isAddingDecimal = $state(false);
-	let previousValue = $state(value);
+	let previousValue = $state(0);
 
 	$effect(() => {
-		console.log({ value });
-	});
-
-	$effect(() => {
-		if (value && value !== previousValue) {
+		console.log({ value, previousValue });
+		if (value === previousValue) {
+			return;
+		}
+		if (value) {
 			const newInput = String(value / UNIT_MULTIPLIERS[unit]);
 			if (input !== newInput && !isAddingDecimal) {
 				input = newInput ? newInput : '';
 				previousValue = value;
 			}
+		} else {
+			input = null;
+			previousValue = 0;
 		}
 	});
 
@@ -104,6 +107,8 @@
 		) as (keyof typeof UNIT_MULTIPLIERS)[];
 		const currentIndex = units.indexOf(unit);
 		const newUnit = units[(currentIndex + 1) % units.length];
+
+		console.log({ value });
 
 		if (value !== undefined) {
 			const currentMultiplier = UNIT_MULTIPLIERS[unit];
