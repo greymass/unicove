@@ -17,6 +17,7 @@
 		required?: boolean;
 		multiple?: boolean;
 		sameWidth?: boolean;
+		class?: string;
 	}
 
 	let {
@@ -27,7 +28,8 @@
 		disabled = false,
 		required = false,
 		multiple = false,
-		sameWidth = true
+		sameWidth = true,
+		class: className = ''
 	}: Props = $props();
 
 	const variant = 'form';
@@ -101,7 +103,7 @@
 	}
 </script>
 
-<SelectTrigger {variant} {id} {open} {trigger}>
+<SelectTrigger {variant} {id} {open} {trigger} class={className}>
 	{#if selectedTokenImage}
 		<img src={selectedTokenImage} alt={$selectedLabel} class="mr-2 size-5 object-contain" />
 	{/if}

@@ -1,13 +1,17 @@
 <script lang="ts">
 	import { Checksum256, Name, PublicKey, UInt32 } from '@wharfkit/antelope';
 	import type { ComponentProps } from 'svelte';
-	import { createDialog, melt } from '@melt-ui/svelte';
+	import { createDialog, melt, type CreateDialogProps } from '@melt-ui/svelte';
 	import TextInput from './text.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
 	import { preventDefault } from '$lib/utils';
 	import { goto } from '$app/navigation';
 	import { fade, scale } from 'svelte/transition';
-	import { SearchIcon } from 'lucide-svelte';
+	import { ArrowLeftRight, Box, Key, SearchIcon, UserSearch } from 'lucide-svelte';
+	import { history, addHistory } from '$lib/state/search.svelte';
+	import Button from '$lib/components/button/button.svelte';
+	import { Stack } from '$lib/components/layout';
+	import { truncateCenter } from '$lib/utils';
 
 	interface NameInputProps extends ComponentProps<TextInput> {
 		debug?: boolean;
@@ -23,6 +27,7 @@
 	}: NameInputProps = $props();
 
 	let searchValue: string = $state('');
+	let selectedIndex: number | undefined = $state();
 
 	const searchType = $derived.by(() => {
 		/* eslint-disable @typescript-eslint/no-unused-vars */
@@ -65,11 +70,20 @@
 		}
 	});
 
+	const resetSelectedIndex: CreateDialogProps['onOpenChange'] = ({ next }) => {
+		if (selectedIndex !== undefined) {
+			selectedIndex = undefined;
+		}
+		return next;
+	};
+
+	// Build the dialog element
 	const {
 		elements: { trigger, portalled, overlay, content, close },
 		states: { open }
 	} = createDialog({
-		forceVisible: true
+		forceVisible: true,
+		onOpenChange: resetSelectedIndex
 	});
 
 	function handleKeydown(event: KeyboardEvent) {
@@ -83,19 +97,57 @@
 		) {
 			event.preventDefault();
 			$open = true;
+			return;
+		}
+
+		if (document.activeElement === ref) {
+			if (event.key === 'ArrowDown') {
+				if (selectedIndex === undefined) {
+					selectedIndex = 0;
+					return;
+				}
+				// Select next history item
+				selectedIndex = (history.length + selectedIndex + 1) % history.length;
+				return;
+			}
+
+			if (event.key === 'ArrowUp') {
+				if (selectedIndex === undefined) {
+					selectedIndex = history.length;
+					return;
+				}
+				// Select previous history item
+				selectedIndex = (history.length + selectedIndex - 1) % history.length;
+				return;
+			}
+
+			if (selectedIndex !== undefined && event.key === 'Enter') {
+				goToHistory(history[selectedIndex].result);
+			}
 		}
 	}
 
-	function go() {
-		$open = false;
+	function goToResult() {
 		if (result) {
 			goto(result);
+			addHistory({ result, searchType, searchValue });
 		}
+		closeSearch();
+	}
+
+	function closeSearch() {
+		$open = false;
 		searchValue = '';
+	}
+
+	function goToHistory(url: string) {
+		goto(url);
+		closeSearch();
 	}
 
 	if (debug) {
 		$inspect({
+			selectedIndex,
 			searchValue,
 			searchType,
 			result,
@@ -147,33 +199,82 @@
 		></div>
 		<div
 			use:melt={$content}
-			class="fixed left-1/2 top-1/2 z-50 max-h-[85vh] w-[90vw] max-w-[450px] -translate-x-1/2 -translate-y-1/2 transform rounded-lg bg-mineShaft-950 p-4 shadow-lg"
+			class="fixed left-1/2 top-1/2 z-50 max-h-[85vh] w-[90vw] max-w-[450px] -translate-x-1/2 -translate-y-1/2 transform rounded-2xl bg-mineShaft-950 p-4 shadow-lg"
 			transition:scale={{
 				duration: 100,
 				start: 0.95
 			}}
 		>
-			<form onsubmit={preventDefault(go)}>
-				<input
-					type="text"
-					bind:this={ref}
-					bind:value={searchValue}
-					placeholder="Search..."
-					{...props}
-					class="bg-transparent focus:outline-none"
-				/>
+			<Stack>
+				<form onsubmit={preventDefault(goToResult)} class="relative">
+					<input
+						type="text"
+						bind:this={ref}
+						bind:value={searchValue}
+						placeholder="Enter an account, transaction, key, or block..."
+						{...props}
+						class="w-full rounded-lg border-2 border-skyBlue-500 bg-transparent p-4 focus:outline-none"
+					/>
+					<button
+						type="submit"
+						class="absolute right-4 top-1/2 -translate-y-1/2 outline-none focus:ring-2 focus:ring-skyBlue-500"
+					>
+						<SearchIcon class="size-5" />
+					</button>
+				</form>
 
-				<button use:melt={$close}> Close Dialog </button>
-			</form>
+				{#if history.length}
+					<div class="px-2">
+						<div class="table-styles grid grid-cols-2">
+							<div class="table-head-styles col-span-full grid grid-cols-subgrid">
+								<span class="pl-2">Recent</span>
+								<span>Type</span>
+							</div>
+
+							{#each history as item, index}
+								<a
+									class="table-row-background col-span-full grid grid-cols-subgrid items-center
+									justify-items-start border-y border-neutral-300/10
+									border-transparent border-b-transparent
+									focus:border-skyBlue-500
+									focus:outline-none"
+									href={item.result}
+									onclick={closeSearch}
+									data-active={index === selectedIndex}
+								>
+									<div
+										class="table-cell-styles ml-2 flex items-center gap-2 font-mono tabular-nums"
+									>
+										{#if item.searchType === 'account'}
+											<UserSearch class="size-4" />
+											<span>{item.searchValue}</span>
+										{:else if item.searchType === 'block'}
+											<Box class="size-4" />
+											<span>{item.searchValue}</span>
+										{:else if item.searchType === 'key'}
+											<Key class="size-4" />
+											<span class="max-w-[12ch] truncate">
+												{item.searchValue}
+											</span>
+										{:else if item.searchType === 'transaction'}
+											<ArrowLeftRight class="size-4" />
+											<span class="max-w-[13ch] truncate">
+												{truncateCenter(item.searchValue)}
+											</span>
+										{/if}
+									</div>
+
+									<span class="align-center text-base font-medium capitalize text-mineShaft-200/60"
+										>{item.searchType}</span
+									>
+								</a>
+							{/each}
+						</div>
+					</div>
+				{/if}
+
+				<Button variant="secondary" meltAction={close}>Close</Button>
+			</Stack>
 		</div>
 	</div>
 {/if}
-
-<!-- {#if debug} -->
-<!-- 	<h3>Component State</h3> -->
-<!-- 	<pre> -->
-<!-- 		search query:  "{searchValue}" -->
-<!-- 		searchType:     {searchType} -->
-<!-- 		result          {result} -->
-<!-- 	</pre> -->
-<!-- {/if} -->

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { HTMLInputAttributes } from 'svelte/elements';
 	import TextInput from './text.svelte';
+	import Code from '../code.svelte';
 
 	interface NumberInputProps extends Omit<HTMLInputAttributes, 'type' | 'value'> {
 		ref?: HTMLInputElement;
@@ -41,14 +42,15 @@
 {#if debug}
 	<div class="mt-4">
 		<h3>Component State</h3>
-		<pre>
-			Input Value: {inputValue}
-			Parsed Value: {_value}
-			Satisfies Minimum: {satisfiesMinimum}
-			Satisfies Maximum: {satisfiesMaxmimum}
-			Satisfies: {satisfies}
-			Min: {props.min}
-			Max: {props.max}
-		</pre>
+		<!-- prettier-ignore -->
+		<Code>
+Input Value: {inputValue}
+Parsed Value: {_value}
+Satisfies Minimum: {satisfiesMinimum}
+Satisfies Maximum: {satisfiesMaxmimum}
+Satisfies: {satisfies}
+Min: {props.min}
+Max: {props.max}
+		</Code>
 	</div>
 {/if}

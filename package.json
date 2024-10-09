@@ -11,7 +11,8 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"clean": "rm -rf ./.svelte-kit ./node_modules ./src/paraglide",
 		"lint": "prettier --check . && eslint .",
-		"format": "prettier --write ."
+		"format": "prettier --write .",
+		"test": "bun test"
 	},
 	"devDependencies": {
 		"@inlang/paraglide-js": "1.11.2",
@@ -24,6 +25,7 @@
 		"@sveltejs/kit": "^2.5.18",
 		"@sveltejs/vite-plugin-svelte": "^3.1.1",
 		"@types/big.js": "^6.2.2",
+		"@types/bun": "^1.1.10",
 		"@types/eslint": "^8.56.11",
 		"autoprefixer": "^10.4.19",
 		"eslint": "^9.7.0",
@@ -44,6 +46,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@fontsource/jetbrains-mono": "^5.1.0",
 		"@tailwindcss/container-queries": "^0.1.1",
 		"@wharfkit/account": "^1.2.0",
 		"@wharfkit/account-creation-plugin-greymass": "^1.2.0",
