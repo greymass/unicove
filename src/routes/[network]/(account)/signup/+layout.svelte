@@ -71,15 +71,19 @@
 	<Pageheader title="Sign Up" subtitle="Setup your account" />
 
 	<!-- Step progress -->
-	<ol class="mb-7 flex justify-between gap-5">
+	<ol class="mb-4 flex justify-between gap-5">
 		{#each steps as step, index}
 			{@const isCurrentStep = step.path === getCurrentStep()?.path}
-			<li class="flex-1">
+			{@const isIncompleteStep = isCurrentStep || isFutureStep(index)}
+			<li class="grid flex-1">
 				<a
 					href={getFullStepPath(step)}
 					data-current={isCurrentStep}
-					data-incomplete={isCurrentStep || isFutureStep(index)}
-					class="relative flex flex-col gap-2 text-white/50 hover:text-white/80 data-[incomplete=true]:pointer-events-none data-[current=true]:text-white"
+					data-incomplete={isIncompleteStep}
+					class="relative flex flex-col justify-between gap-2 text-white/50 hover:text-white/80 focus-visible:outline focus-visible:outline-offset-2
+ focus-visible:outline-solar-500 data-[incomplete=true]:pointer-events-none data-[current=true]:text-white
+					"
+					tabindex={isIncompleteStep ? -1 : 0}
 				>
 					<span> Step {index + 1}: {step.title} </span>
 
@@ -97,7 +101,7 @@
 		{/each}
 	</ol>
 
-	<div>
+	<div class="relative">
 		{@render children()}
 	</div>
 </Stack>
