@@ -220,27 +220,25 @@ export function getBalances(
 ): TokenBalance[] {
 	if (sources.light_account) {
 		const balances: TokenBalance[] = [];
-		sources.light_account.forEach((lightAccount) => {
-			lightAccount.balances?.forEach((balance) => {
-				const asset = Asset.from(`${balance.amount} ${balance.currency}`);
-				const contract = Name.from(balance.contract);
-				const id = TokenIdentifier.from({
-					chain: chain,
-					contract: contract,
-					symbol: asset.symbol
-				});
-				const metadata =
-					tokenmeta && tokenmeta.length > 0
-						? tokenmeta.find((meta) => meta.id.equals(id))
-						: undefined;
-				balances.push(
-					TokenBalance.from({
-						asset,
-						contract,
-						metadata: metadata || TokenMeta.from({ id: { chain, contract, symbol: asset.symbol } })
-					})
-				);
+		sources.light_account?.forEach((lightAccount) => {
+			const asset = Asset.from(`${lightAccount.amount} ${lightAccount.currency}`);
+			const contract = Name.from(lightAccount.contract);
+			const id = TokenIdentifier.from({
+				chain: chain,
+				contract: contract,
+				symbol: asset.symbol
 			});
+			const metadata =
+				tokenmeta && tokenmeta.length > 0
+					? tokenmeta.find((meta) => meta.id.equals(id))
+					: undefined;
+			balances.push(
+				TokenBalance.from({
+					asset,
+					contract,
+					metadata: metadata || TokenMeta.from({ id: { chain, contract, symbol: asset.symbol } })
+				})
+			);
 		});
 
 		return balances;
