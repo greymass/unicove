@@ -20,7 +20,7 @@ import { calculateValue } from '$lib/utils';
 
 const defaultDataSources = {
 	get_account: undefined,
-	balances: [],
+	light_account: [],
 	delegated: [],
 	rex: undefined,
 	rexfund: undefined
@@ -79,7 +79,7 @@ export class AccountState {
 		this.last_update = new Date();
 		this.sources = {
 			get_account: json.account_data,
-			balances: json.balances,
+			light_account: json.balances,
 			delegated: json.delegated,
 			rex: json.rex,
 			rexfund: json.rexfund
@@ -218,11 +218,11 @@ export function getBalances(
 	chain: Checksum256,
 	tokenmeta?: TokenMeta[]
 ): TokenBalance[] {
-	if (sources.balances) {
+	if (sources.light_account) {
 		const balances: TokenBalance[] = [];
-		sources.balances?.forEach((balance) => {
-			const asset = Asset.from(`${balance.amount} ${balance.currency}`);
-			const contract = Name.from(balance.contract);
+		sources.light_account?.forEach((lightAccount) => {
+			const asset = Asset.from(`${lightAccount.amount} ${lightAccount.currency}`);
+			const contract = Name.from(lightAccount.contract);
 			const id = TokenIdentifier.from({
 				chain: chain,
 				contract: contract,
