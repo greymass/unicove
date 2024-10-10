@@ -14,23 +14,23 @@
 	/* Headings are defined by class instead of tag to preserve semantic html independent of style */
 	/* Typography */
 	.h1 {
-		@apply text-5xl font-semibold;
+		@apply text-5xl font-semibold leading-none;
 	}
 
 	.h2 {
-		@apply text-3xl font-semibold;
+		@apply text-3xl font-semibold leading-none;
 	}
 
 	.h3 {
-		@apply text-2xl font-semibold;
+		@apply text-2xl font-semibold leading-none;
 	}
 
 	.h4 {
-		@apply text-lg font-medium leading-7;
+		@apply text-lg font-medium leading-none;
 	}
 
 	.h5 {
-		@apply text-base font-medium leading-snug;
+		@apply text-base font-medium leading-none;
 	}
 
 	.caption {
