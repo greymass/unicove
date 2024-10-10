@@ -113,24 +113,29 @@
 		const currentIndex = units.indexOf(unit);
 		const newUnit = units[(currentIndex + 1) % units.length];
 
+		previousValue = value || 0;
+
 		if (value !== undefined) {
 			const currentMultiplier = UNIT_MULTIPLIERS[unit];
 			const newMultiplier = UNIT_MULTIPLIERS[newUnit];
-			if (valueSetByParent) {
-				value = (value * currentMultiplier) / newMultiplier;
-			} else {
+			if (!valueSetByParent) {
 				value = (value / currentMultiplier) * newMultiplier;
+			}
+			if (value < 1) {
+				return reset();
 			}
 			input = String(value / newMultiplier);
 		}
 
 		unit = newUnit;
 
-		oninput?.(
-			new InputEvent('input', {}) as InputEvent & {
-				currentTarget: EventTarget & HTMLInputElement;
-			}
-		);
+		if (previousValue !== value) {
+			oninput?.(
+				new InputEvent('input', {}) as InputEvent & {
+					currentTarget: EventTarget & HTMLInputElement;
+				}
+			);
+		}
 	}
 
 	function handleBlur(event: FocusEvent & { currentTarget: EventTarget & HTMLInputElement }) {

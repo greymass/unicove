@@ -80,12 +80,6 @@
 
 	function setAssetAmount() {
 		buyRamState.format = 'asset';
-		console.log({
-			tokens: buyRamState.tokens.value,
-			expectedBytes: buyRamState.expectedBytes,
-			price: buyRamState.pricePerByte.value,
-			amount: buyRamState.tokens.value / buyRamState.pricePerByte.value
-		});
 		buyRamState.bytes = buyRamState.expectedBytes;
 	}
 

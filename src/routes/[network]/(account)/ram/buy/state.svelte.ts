@@ -23,7 +23,7 @@ export class BuyRAMState {
 	);
 
 	public expectedBytes: number | undefined = $derived(
-		this.format === 'asset'
+		this.format === 'asset' && this.pricePerKB.value
 			? Math.round((this.tokens.value / this.pricePerKB.value) * 1000)
 			: this.bytes
 	);
@@ -83,7 +83,6 @@ export class BuyRAMState {
 	}
 
 	toJSON() {
-		console.log({ format: this.format });
 		if (this.format === 'asset') {
 			return Serializer.objectify({
 				payer: this.payer,

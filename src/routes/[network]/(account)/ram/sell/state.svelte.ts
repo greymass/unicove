@@ -17,9 +17,9 @@ export class SellRAMState {
 	public maxInKBs: Asset = $derived(Asset.fromUnits(this.max, '3,KB'));
 
 	public bytesToSell: number | undefined = $derived(
-		this.format === 'bytes'
-			? this.bytes || 0
-			: Math.floor((this.tokens.value / this.pricePerKB.value) * 1000)
+		this.format === 'asset' && this.pricePerKB.value
+			? Math.floor((this.tokens.value / this.pricePerKB.value) * 1000)
+			: this.bytes || 0
 	);
 
 	public kbsToSell: Asset | undefined = $derived(Asset.fromUnits(this.bytesToSell || 0, '3,KB'));
@@ -29,7 +29,7 @@ export class SellRAMState {
 	);
 
 	public bytesValue: Asset = $derived(
-		this.format === 'bytes' && this.bytes !== undefined
+		this.format === 'bytes' && this.bytes !== undefined && this.pricePerKB.value
 			? Asset.from(
 					(this.bytes * this.pricePerKB.value) / 1000,
 					this.chain.systemToken?.symbol || '0,UNKNOWN'
