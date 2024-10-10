@@ -27,6 +27,8 @@
 	/** The current unit of measurement */
 	let unit: 'Bytes' | 'KB' | 'MB' | 'GB' = $state('KB');
 
+	let valueSetByParent = $state(false);
+
 	const UNIT_MULTIPLIERS = {
 		Bytes: 1,
 		KB: 1000,
@@ -38,16 +40,17 @@
 	let previousValue = $state(0);
 
 	$effect(() => {
-		console.log({ value, previousValue });
 		if (value === previousValue) {
 			return;
 		}
+
 		if (value) {
 			const newInput = String(value / UNIT_MULTIPLIERS[unit]);
 			if (input !== newInput && !isAddingDecimal) {
 				input = newInput ? newInput : '';
 				previousValue = value;
 			}
+			valueSetByParent = true;
 		} else {
 			input = null;
 			previousValue = 0;
@@ -65,6 +68,7 @@
 			}
 		);
 	}
+
 	/** Convert the string into a usable number and update valid state */
 	function handleInput(
 		event: (Event & { currentTarget: EventTarget & HTMLInputElement }) | null | undefined
@@ -82,6 +86,7 @@
 		}
 
 		isAddingDecimal = false;
+		valueSetByParent = false;
 
 		// Allowing input of decimal values
 		if (numericInput && String(numericInput) !== inputString) {
@@ -108,14 +113,15 @@
 		const currentIndex = units.indexOf(unit);
 		const newUnit = units[(currentIndex + 1) % units.length];
 
-		console.log({ value });
-
 		if (value !== undefined) {
 			const currentMultiplier = UNIT_MULTIPLIERS[unit];
 			const newMultiplier = UNIT_MULTIPLIERS[newUnit];
-			const adjustedValue = (value / currentMultiplier) * newMultiplier;
-			value = adjustedValue;
-			input = String(adjustedValue / newMultiplier);
+			if (valueSetByParent) {
+				value = (value * currentMultiplier) / newMultiplier;
+			} else {
+				value = (value / currentMultiplier) * newMultiplier;
+			}
+			input = String(value / newMultiplier);
 		}
 
 		unit = newUnit;
