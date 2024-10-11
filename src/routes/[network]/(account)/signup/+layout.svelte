@@ -17,16 +17,16 @@
 
 	const steps: SignupStep[] = [
 		{
-			title: 'Signup',
+			title: 'Select Environment',
 			path: `/${data.network}/signup`
 		},
 		{
-			title: 'Environment',
-			path: `/${data.network}/signup/wallet-type`
+			title: 'Select Wallet',
+			path: `/${data.network}/signup/wallets`
 		},
 		{
-			title: 'Wallet',
-			path: `/${data.network}/signup/wallet`
+			title: 'Setup Wallet',
+			path: `/${data.network}/signup/wallets/${getWalletType($page.url.pathname)?.type}`
 		}
 	];
 

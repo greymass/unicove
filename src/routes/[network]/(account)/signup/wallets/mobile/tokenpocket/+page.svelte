@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Pageheader from '$lib/components/pageheader.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
-	import Button from '$lib/components/button/button.svelte';
+	import Button from '$lib/components/button/button.svelte';../../tokenpocket/$types.js
 
 	let { data } = $props();
 </script>

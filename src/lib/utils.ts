@@ -60,3 +60,23 @@ export function parseRicardian(action: ABI.Action | undefined): RicardianData | 
 		text
 	};
 }
+
+export function detectEnvironment(): 'mobile' | 'desktop' {
+	if (typeof window === 'undefined') {
+		// Server-side rendering, default to desktop
+		return 'desktop';
+	}
+
+	const userAgent = window.navigator.userAgent.toLowerCase();
+	const mobileKeywords = [
+		'android',
+		'webos',
+		'iphone',
+		'ipad',
+		'ipod',
+		'blackberry',
+		'windows phone'
+	];
+
+	return mobileKeywords.some((keyword) => userAgent.includes(keyword)) ? 'mobile' : 'desktop';
+}

@@ -12,6 +12,7 @@ import LedgerLogo from '$lib/assets/wallets/ledger.svg';
 export interface Wallet {
 	name: string;
 	route: string;
+	description?: string;
 	logo?: string;
 }
 
@@ -48,7 +49,7 @@ export const walletTypes: Record<string, WalletType> = {
 			'Offline storage of private keys',
 			'Support for multiple cryptocurrencies'
 		],
-		wallets: [{ name: 'Ledger', route: 'signup/wallet/ledger', logo: LedgerLogo }]
+		wallets: [{ name: 'Ledger', route: 'signup/wallet/hardware/ledger', logo: LedgerLogo }]
 	},
 	desktop: {
 		type: 'desktop',
@@ -61,8 +62,13 @@ export const walletTypes: Record<string, WalletType> = {
 			'Often free to download and use'
 		],
 		wallets: [
-			{ name: 'Anchor', route: 'signup/wallet/anchor/desktop', logo: AnchorLogo },
-			{ name: 'Wombat', route: 'signup/wallet/wombat/desktop', logo: WombatLogo }
+			{
+				name: 'Anchor',
+				route: 'signup/wallet/desktop/anchor',
+				logo: AnchorLogo,
+				description: 'Anchor is a secure and easy-to-use mobile wallet.'
+			},
+			{ name: 'Wombat', route: 'signup/wallet/desktop/wombat', logo: WombatLogo }
 		]
 	},
 	mobile: {
@@ -76,9 +82,9 @@ export const walletTypes: Record<string, WalletType> = {
 			'Quick and easy transactions from your smartphone'
 		],
 		wallets: [
-			{ name: 'Anchor Mobile', route: 'signup/wallet/anchor/mobile', logo: AnchorLogo },
-			{ name: 'Wombat Mobile', route: 'signup/wallet/wombat/mobile', logo: WombatLogo },
-			{ name: 'TokenPocket', route: 'signup/wallet/tokenpocket', logo: TokenPocketLogo }
+			{ name: 'Anchor Mobile', route: 'signup/wallets/mobile/anchor', logo: AnchorLogo },
+			{ name: 'Wombat Mobile', route: 'signup/wallets/mobile/wombat', logo: WombatLogo },
+			{ name: 'TokenPocket', route: 'signup/wallets/mobile/tokenpocket', logo: TokenPocketLogo }
 		]
 	},
 	extensions: {
@@ -93,8 +99,13 @@ export const walletTypes: Record<string, WalletType> = {
 			'Easy to use for web3 interactions'
 		],
 		wallets: [
-			{ name: 'MetaMask', route: 'signup/wallet/metamask', logo: MetaMaskLogo },
-			{ name: 'Wombat', route: 'signup/wallet/wombat/extension', logo: WombatLogo }
+			{
+				name: 'MetaMask',
+				route: 'signup/wallet/extension/metamask',
+				logo: MetaMaskLogo,
+				description: 'MetaMask is a secure and easy-to-use browser extension wallet.'
+			},
+			{ name: 'Wombat', route: 'signup/wallet/extension/wombat', logo: WombatLogo }
 		]
 	}
 };

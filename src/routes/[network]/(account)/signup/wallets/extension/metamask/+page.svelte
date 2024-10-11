@@ -16,7 +16,7 @@
 
 	const context = getContext<UnicoveContext>('state');
 
-	const wharf = context.wharf;
+	const wharf = context.wharf;../../metamask/$types.js../../plugins/metamask/$types.js../../extensions/metamask/$types.js
 
 	const { data } = $props();
 
