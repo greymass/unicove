@@ -3,6 +3,7 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { Checksum256 } from '@wharfkit/antelope';
 	import MobileNavigation from '$lib/components/navigation/mobilenavigation.svelte';
+	import SideMenuContent from '$lib/components/navigation/sidemenu.svelte';
 	import AccountSwitcher from '$lib/components/select/account.svelte';
 	import UnicoveLogo from '$lib/assets/unicovelogo.svelte';
 	import Search from '$lib/components/input/search.svelte';
@@ -70,57 +71,53 @@
 	});
 </script>
 
-<!-- This is the main layout using grid columns and rows to align elements that appear at specific breakpoints -->
 <div
 	class="
 	relative
+	mx-auto
 	grid
 	h-full
 	min-h-svh
-	w-svw
-	max-w-screen-xl
-	grid-cols-[16px_1fr_1fr_16px]
-	grid-rows-[0_min-content_auto_56px]
+	w-[calc(100%-2rem)]
+	max-w-screen-2xl
+	grid-cols-2
+	grid-rows-[min-content_minmax(0,1fr)]
 	gap-y-4
-	bg-shark-950
+	pt-4
 	md:h-auto
 	md:min-h-svh
-	md:grid-cols-[auto_minmax(0,1fr)_auto_auto_32px]
-	md:grid-rows-[16px_minmax(0,1fr)_16px]
+	md:grid-cols-12
+	md:grid-rows-[min-content_minmax(0,1fr)]
 	md:gap-x-4
-	md:gap-y-0
+	md:gap-y-6
 	"
 >
-	<!-- This is the small unicove logo that appears on mobile only -->
-	<UnicoveLogo small network={data.network} class="col-start-2 row-start-2 w-min md:hidden" />
+	<header class="col-span-full grid grid-cols-subgrid items-center">
+		<UnicoveLogo small network={data.network} class="w-min self-center " />
 
-	<!-- The account switcher remains in the top right on mobile and desktop -->
-	<div
-		class="col-start-3 row-start-2 flex justify-end md:col-start-4 md:col-end-5 md:row-start-2 md:row-end-3 md:px-4"
-	>
-		<AccountSwitcher network={data.network} />
-	</div>
+		<div class="flex items-center justify-end md:col-span-3 md:col-start-10 md:gap-4">
+			<Search network={data.network} class="hidden flex-1 md:flex " />
+
+			<AccountSwitcher network={data.network} class="" />
+		</div>
+	</header>
+
+	<aside class="relative row-start-2 hidden h-full md:block">
+		<SideMenuContent class="" network={data.network} />
+	</aside>
 
 	<main
-		class="col-span-2 col-start-2 row-start-3 md:col-span-3 md:col-start-2 md:row-start-2 md:row-end-4 md:pt-16"
+		class="col-span-full col-start-1 row-start-2 grid grid-cols-subgrid gap-x-4 *:col-span-full md:col-start-3 md:col-end-12 md:px-0"
 	>
 		{@render children()}
 	</main>
-
-	<!-- This wrapper sets up the bottom menu on mobile, becomes a pass-thru component on desktop -->
-	<aside
-		class="fixed bottom-0 z-50 col-span-4 grid h-14 w-full grid-cols-subgrid bg-shark-950 px-4 py-2 md:contents"
-	>
-		<!-- This element is the sidebar on desktop, collapsible menu on mobile -->
-		<MobileNavigation
-			network={data.network}
-			class="col-start-1 col-end-2 md:row-start-1 md:row-end-4"
-		/>
-
-		<!-- This search box is in the bottom menu on mobile, top header on desktop -->
-		<Search
-			network={data.network}
-			class="col-start-2 col-end-3  md:col-start-3 md:col-end-4 md:row-start-2 md:row-end-3"
-		/>
-	</aside>
 </div>
+
+<!-- This wrapper sets up the bottom menu on mobile, becomes hidden on desktop -->
+<aside
+	class="px-page fixed bottom-0 z-50 flex h-14 w-full justify-between bg-shark-950 py-2 md:hidden"
+>
+	<MobileNavigation network={data.network} />
+
+	<Search network={data.network} />
+</aside>

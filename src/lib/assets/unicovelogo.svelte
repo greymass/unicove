@@ -19,7 +19,7 @@
 </script>
 
 <div class={className}>
-	<!-- Unicove Logo -->
+	<!-- Unicove Logo centered with wordmark -->
 	<a href="/{network}" class="flex flex-col items-center gap-3 fill-white/60" onclick={callbackFn}>
 		<svg
 			class:size-8={small}
