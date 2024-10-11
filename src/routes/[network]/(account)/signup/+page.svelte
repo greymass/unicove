@@ -4,6 +4,7 @@
 	import { walletTypes } from './walletTypes';
 	import { detectEnvironment } from '$lib/utils';
 	import WalletButton from './components/OptionButton.svelte';
+	import { ChevronRight } from 'lucide-svelte';
 
 	const { data } = $props();
 
@@ -29,10 +30,25 @@
 </Stack>
 
 <Stack>
-	<h3 class="h2">Choose A Wallet Type</h3>
-	<Stack>
-		<WalletButton wallet={recommendedWalletType} network={String(data.network)} />
-	</Stack>
+	<a
+		href="/{data.network}/signup/wallets/{recommendedWalletType.type}"
+		class="group grid grid-cols-[auto_1fr_auto] items-center gap-4 rounded-2xl border border-white/20 p-4
+hover:bg-mineShaft-950 focus-visible:outline focus-visible:outline-transparent focus-visible:ring-2 focus-visible:ring-solar-500"
+	>
+		<div class="rounded-full bg-mineShaft-900/60 p-3">
+			<svelte:component
+				this={recommendedWalletType.icon}
+				class="size-6 group-hover:stroke-skyBlue-500 "
+			/>
+		</div>
+		<div class="space-y-1">
+			<h4 class="text-xl font-semibold">
+				{recommendedWalletType.title}
+			</h4>
+			<p>{recommendedWalletType.description}</p>
+		</div>
+		<ChevronRight class="size-6 group-hover:stroke-skyBlue-500" />
+	</a>
 </Stack>
 
 <Stack class="rounded-2xl border border-white/20 p-4">
@@ -42,9 +58,11 @@
 				<img src={recommendedWallet.logo} alt={`${recommendedWallet.name} logo`} />
 			{/if}
 		</div>
-		<h3 class="text-2xl font-semibold">{recommendedWallet.name}</h3>
+		<div>
+			<h3 class="text-2xl font-semibold">{recommendedWallet.name}</h3>
+			<p class="text-gray-300">{recommendedWallet.description}</p>
+		</div>
 	</div>
-	<p class="text-gray-300">{recommendedWallet.description}</p>
 	<Stack class="gap-2">
 		<Button variant="primary" href={recommendedWallet.route}>Setup Wallet</Button>
 		<Button variant="secondary" href={recommendedWallet.route}>Select another wallet</Button>
