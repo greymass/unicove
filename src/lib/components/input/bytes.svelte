@@ -44,6 +44,8 @@
 			return;
 		}
 
+		console.log({ value, previousValue, valueSetByParent });
+
 		if (value) {
 			const newInput = String(value / UNIT_MULTIPLIERS[unit]);
 			if (input !== newInput && !isAddingDecimal) {
@@ -113,13 +115,17 @@
 		const currentIndex = units.indexOf(unit);
 		const newUnit = units[(currentIndex + 1) % units.length];
 
-		previousValue = value || 0;
-
 		if (value !== undefined) {
 			const currentMultiplier = UNIT_MULTIPLIERS[unit];
 			const newMultiplier = UNIT_MULTIPLIERS[newUnit];
 			if (!valueSetByParent) {
 				value = (value / currentMultiplier) * newMultiplier;
+				previousValue = value || 0;
+				oninput?.(
+					new InputEvent('input', { data: String(value) }) as InputEvent & {
+						currentTarget: EventTarget & HTMLInputElement;
+					}
+				);
 			}
 			if (value < 1) {
 				return reset();
@@ -128,14 +134,6 @@
 		}
 
 		unit = newUnit;
-
-		if (previousValue !== value) {
-			oninput?.(
-				new InputEvent('input', {}) as InputEvent & {
-					currentTarget: EventTarget & HTMLInputElement;
-				}
-			);
-		}
 	}
 
 	function handleBlur(event: FocusEvent & { currentTarget: EventTarget & HTMLInputElement }) {
