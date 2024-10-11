@@ -130,7 +130,8 @@
 			if (value < 1) {
 				return reset();
 			}
-			input = String(value / newMultiplier);
+			const formattedValue = (value / newMultiplier).toFixed(9);
+			input = parseFloat(formattedValue) === 0 ? '0' : formattedValue.replace(/\.?0+$/, '');
 		}
 
 		unit = newUnit;
