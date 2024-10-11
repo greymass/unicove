@@ -52,9 +52,7 @@ export class AccountState {
 	public ram = $derived.by(() => (this.account ? this.account.resource('ram') : undefined));
 	public permissions = $derived.by(() => (this.account ? this.account.permissions : undefined));
 	public value = $derived.by(() => {
-		return this.network && this.balance
-			? getAccountValue(this.network, this.balance)
-			: undefined;
+		return this.network && this.balance ? getAccountValue(this.network, this.balance) : undefined;
 	});
 
 	constructor(network: NetworkState, name: NameType, fetchOverride?: typeof fetch) {
@@ -118,10 +116,7 @@ export interface AccountValue {
 	total: Asset;
 }
 
-export function getAccountValue(
-	network: NetworkState,
-	balance: Balance
-): AccountValue {
+export function getAccountValue(network: NetworkState, balance: Balance): AccountValue {
 	const delegated = Asset.from('0.0000 USD');
 	const liquid = Asset.from('0.0000 USD');
 	const ram = Asset.from('0.0000 USD');
@@ -158,7 +153,11 @@ export interface Balance {
 	total: Asset;
 }
 
-export function getBalance(network: NetworkState, sources: DataSources, ramResources?: Resource): Balance {
+export function getBalance(
+	network: NetworkState,
+	sources: DataSources,
+	ramResources?: Resource
+): Balance {
 	if (!network) {
 		throw new Error('Network not initialized');
 	}
@@ -215,8 +214,8 @@ export function getBalance(network: NetworkState, sources: DataSources, ramResou
 	return {
 		delegated,
 		liquid,
-		staked,
 		ram,
+		staked,
 		total
 	};
 }
