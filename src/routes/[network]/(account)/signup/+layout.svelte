@@ -15,7 +15,7 @@
 
 	const { data, children } = $props();
 
-	const steps: SignupStep[] = [
+	let steps: SignupStep[] = $derived([
 		{
 			title: 'Get Started',
 			path: `/${data.network}/signup`
@@ -32,38 +32,18 @@
 			title: 'Setup Wallet',
 			path: `/${data.network}/signup/wallets/${getWalletTypeFromPath($page.url.pathname)?.type}/${getWalletNameFromPath($page.url.pathname)?.toLowerCase()}`
 		}
-	];
+	]);
 
 	function getCurrentStep() {
-		let currentStep: SignupStep | undefined;
-
-		steps.forEach((step) => {
-			console.log({ stepPath: step.path });
-			if (
-				$page.url.pathname.includes(step.path) &&
-				step.path.length > (currentStep?.path.length || 0)
-			) {
-				currentStep = step;
-			}
+		return steps.find((step) => {
+			return $page.url.pathname.replace(/^\/[^/]+/, '') === step.path;
 		});
-
-		return currentStep;
 	}
 
 	function isFutureStep(stepIndex: number) {
 		const currentStep = getCurrentStep();
 		if (!currentStep) return false;
 		return stepIndex > steps.indexOf(currentStep);
-	}
-
-	function getFullStepPath(step: SignupStep) {
-		if (step.title === 'Environment') {
-			const walletType = getWalletTypeFromPath($page.url.pathname);
-
-			return `${step.path}/${walletType?.type || ''}`;
-		}
-
-		return step.path;
 	}
 
 	const [send, receive] = crossfade({
@@ -82,7 +62,7 @@
 			{@const isIncompleteStep = isCurrentStep || isFutureStep(index)}
 			<li class="grid flex-1">
 				<a
-					href={getFullStepPath(step)}
+					href={step.path}
 					data-current={isCurrentStep}
 					data-incomplete={isIncompleteStep}
 					class="relative flex flex-col justify-between gap-2 text-white/50 hover:text-white/80 focus-visible:outline focus-visible:outline-offset-2

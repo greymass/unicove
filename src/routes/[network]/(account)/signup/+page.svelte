@@ -21,14 +21,6 @@
 	</p>
 </Stack>
 
-<Stack class="gap-2">
-	<h3 class="h3">Why do I need an account?</h3>
-	<p>
-		An account on the blockchain is your unique identity, enabling you to perform transactions,
-		store assets, and participate in the network.
-	</p>
-</Stack>
-
 <Stack>
 	<a
 		href="/{data.network}/signup/wallets"
@@ -67,4 +59,20 @@ hover:bg-mineShaft-950 focus-visible:outline focus-visible:outline-transparent f
 		<Button variant="primary" href={recommendedWallet.route}>Get Started</Button>
 		<Button variant="secondary" href={currentWalletTypePath}>Select another wallet</Button>
 	</Stack>
+</Stack>
+
+<Stack class="gap-2">
+	<h3 class="h3">Why do I need an account?</h3>
+	<p>
+		An account on the blockchain is your unique identity, enabling you to perform transactions,
+		store assets, and participate in the network.
+	</p>
+</Stack>
+
+<Stack class="gap-2">
+	<h3 class="h3">Why do I need a wallet?</h3>
+	<p>
+		A wallet is your gateway to the blockchain, allowing you to manage your digital assets and
+		interact with decentralized applications.
+	</p>
 </Stack>

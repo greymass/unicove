@@ -74,4 +74,11 @@
 
 		<Button variant="secondary" href="/{data.network}/signup">Back</Button>
 	</Stack>
+	<Stack class="gap-2">
+		<h3 class="h3">Why do I need a wallet?</h3>
+		<p>
+			A wallet is your gateway to the blockchain, allowing you to manage your digital assets and
+			interact with decentralized applications.
+		</p>
+	</Stack>
 </Stack>

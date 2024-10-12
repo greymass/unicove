@@ -2,6 +2,7 @@
 	import Stack from '$lib/components/layout/stack.svelte';
 	import { ChevronRight } from 'lucide-svelte';
 	import { walletTypes, type WalletType } from '../walletTypes';
+	import Button from '$lib/components/button/button.svelte';
 
 	const { data } = $props();
 </script>
@@ -25,22 +26,6 @@ hover:bg-mineShaft-950 focus-visible:outline focus-visible:outline-transparent f
 	</a>
 {/snippet}
 
-<Stack class="gap-2">
-	<h3 class="h3">Why do I need a wallet?</h3>
-	<p>
-		A wallet is your gateway to the blockchain, allowing you to manage your digital assets and
-		interact with decentralized applications.
-	</p>
-</Stack>
-
-<Stack class="gap-2">
-	<h3 class="h3">Why do I need an account?</h3>
-	<p>
-		An account on the blockchain is your unique identity, enabling you to perform transactions,
-		store assets, and participate in the network.
-	</p>
-</Stack>
-
 <Stack>
 	<h3 class="h2">Choose A Wallet Type</h3>
 	<Stack>
@@ -48,4 +33,13 @@ hover:bg-mineShaft-950 focus-visible:outline focus-visible:outline-transparent f
 			{@render walletButton(wallet)}
 		{/each}
 	</Stack>
+	<Button variant="secondary" href="/{data.network}/signup">Back</Button>
+</Stack>
+
+<Stack class="gap-2">
+	<h3 class="h3">Why do I need a wallet?</h3>
+	<p>
+		A wallet is your gateway to the blockchain, allowing you to manage your digital assets and
+		interact with decentralized applications.
+	</p>
 </Stack>
