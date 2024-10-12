@@ -49,12 +49,12 @@ export const walletTypes: Record<string, WalletType> = {
 			'Offline storage of private keys',
 			'Support for multiple cryptocurrencies'
 		],
-		wallets: [{ name: 'Ledger', route: 'signup/wallet/hardware/ledger', logo: LedgerLogo }]
+		wallets: [{ name: 'Ledger', route: 'signup/wallets/hardware/ledger', logo: LedgerLogo }]
 	},
 	desktop: {
 		type: 'desktop',
-		title: 'Desktop Wallets',
-		description: 'Software wallets are applications you install on your computer or mobile device.',
+		title: 'Desktop',
+		description: 'Desktop wallets are applications that you install on your computer.',
 		icon: LaptopMinimal,
 		benefits: [
 			'Easy to use and set up',
@@ -64,11 +64,11 @@ export const walletTypes: Record<string, WalletType> = {
 		wallets: [
 			{
 				name: 'Anchor',
-				route: 'signup/wallet/desktop/anchor',
+				route: 'signup/wallets/desktop/anchor',
 				logo: AnchorLogo,
 				description: 'Anchor is a secure and easy-to-use mobile wallet.'
 			},
-			{ name: 'Wombat', route: 'signup/wallet/desktop/wombat', logo: WombatLogo }
+			{ name: 'Wombat', route: 'signup/wallets/desktop/wombat', logo: WombatLogo }
 		]
 	},
 	mobile: {
@@ -105,13 +105,23 @@ export const walletTypes: Record<string, WalletType> = {
 				logo: MetaMaskLogo,
 				description: 'MetaMask is a secure and easy-to-use browser extension wallet.'
 			},
-			{ name: 'Wombat', route: 'signup/wallet/extension/wombat', logo: WombatLogo }
+			{ name: 'Wombat', route: 'signup/wallets/extensions/wombat', logo: WombatLogo }
 		]
 	}
 };
 
-export function getWalletType(path: string) {
+export function getWalletTypeFromPath(path: string) {
 	return Object.values(walletTypes).find((walletType) => {
-		return walletType.wallets.some((wallet) => path.includes(wallet.route));
+		return walletType.wallets.some((wallet) => {
+			return path.includes(wallet.route.split('/').slice(0, -1).join('/'));
+		});
 	});
+}
+
+export function getWalletFromPath(path: string) {
+	return getWalletTypeFromPath(path)?.wallets.find((wallet) => path.includes(wallet.route));
+}
+
+export function getWalletNameFromPath(path: string) {
+	return getWalletFromPath(path)?.name;
 }

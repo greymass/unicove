@@ -8,7 +8,7 @@
 
 {#snippet walletButton(wallet: WalletType)}
 	<a
-		href="/{data.network}/signup/wallet-type/{wallet.type}"
+		href="/{data.network}/signup/wallets/{wallet.type}"
 		class="group grid grid-cols-[auto_1fr_auto] items-center gap-4 rounded-2xl border border-white/20 p-4
 hover:bg-mineShaft-950 focus-visible:outline focus-visible:outline-transparent focus-visible:ring-2 focus-visible:ring-solar-500"
 	>

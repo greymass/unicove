@@ -11,22 +11,26 @@
 	import Pageheader from '$lib/components/pageheader.svelte';
 	import { crossfade } from 'svelte/transition';
 	import { cubicInOut } from 'svelte/easing';
-	import { getWalletType } from './walletTypes.js';
+	import { getWalletNameFromPath, getWalletTypeFromPath } from './walletTypes.js';
 
 	const { data, children } = $props();
 
 	const steps: SignupStep[] = [
 		{
-			title: 'Select Environment',
+			title: 'Get Started',
 			path: `/${data.network}/signup`
 		},
 		{
-			title: 'Select Wallet',
+			title: 'Select Environment',
 			path: `/${data.network}/signup/wallets`
 		},
 		{
+			title: 'Select Wallet',
+			path: `/${data.network}/signup/wallets/${getWalletTypeFromPath($page.url.pathname)?.type}`
+		},
+		{
 			title: 'Setup Wallet',
-			path: `/${data.network}/signup/wallets/${getWalletType($page.url.pathname)?.type}`
+			path: `/${data.network}/signup/wallets/${getWalletTypeFromPath($page.url.pathname)?.type}/${getWalletNameFromPath($page.url.pathname)?.toLowerCase()}`
 		}
 	];
 
@@ -34,6 +38,7 @@
 		let currentStep: SignupStep | undefined;
 
 		steps.forEach((step) => {
+			console.log({ stepPath: step.path });
 			if (
 				$page.url.pathname.includes(step.path) &&
 				step.path.length > (currentStep?.path.length || 0)
@@ -53,7 +58,7 @@
 
 	function getFullStepPath(step: SignupStep) {
 		if (step.title === 'Environment') {
-			const walletType = getWalletType($page.url.pathname);
+			const walletType = getWalletTypeFromPath($page.url.pathname);
 
 			return `${step.path}/${walletType?.type || ''}`;
 		}
