@@ -22,7 +22,7 @@
 			</Card>
 
 			<Card title="Unstaking Balances Is A Long Title">
-				<table class="table-auto">
+				<table class="table-styles">
 					<thead class="border-b-2 border-shark-100/10">
 						<tr class="caption font-medium">
 							<th class="p-4 text-left">Amount</th>

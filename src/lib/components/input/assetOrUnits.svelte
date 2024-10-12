@@ -6,6 +6,7 @@
 	import Button from '../button/button.svelte';
 	import Cluster from '$lib/components/layout/cluster.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
+	import Code from '../code.svelte';
 
 	interface AssetOrUnitsProps extends ComponentProps<TextInput> {
 		assetValue: Asset;
@@ -85,12 +86,13 @@
 	{#if debug}
 		<div class="mt-4">
 			<h3>Component State</h3>
-			<pre>
-                Input Type: {format === 'asset' ? 'Asset' : 'Units'}
-                Asset Value: {assetValue}
-                Units Value: {unitsValue}
-                Symbol: {assetValue?.symbol.code}
-			</pre>
+			<!-- prettier-ignore -->
+			<Code>
+Input Type: {format === 'asset' ? 'Asset' : 'Units'}
+Asset Value: {assetValue}
+Units Value: {unitsValue}
+Symbol: {assetValue?.symbol.code}
+			</Code>
 		</div>
 	{/if}
 </div>

@@ -8,7 +8,7 @@
 	import Pageheader from '$lib/components/pageheader.svelte';
 	import Card from '$lib/components/layout/box/card.svelte';
 	import Button from '$lib/components/button/button.svelte';
-	import { calculateValue } from '$lib/utils.js';
+	import { calculateValue } from '$lib/utils';
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');

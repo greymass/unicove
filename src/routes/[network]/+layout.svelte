@@ -79,7 +79,7 @@
 	min-h-svh
 	w-svw
 	max-w-screen-xl
-	grid-cols-[16px_auto_auto_16px]
+	grid-cols-[16px_1fr_1fr_16px]
 	grid-rows-[0_min-content_auto_56px]
 	gap-y-4
 	bg-shark-950
