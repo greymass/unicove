@@ -1,26 +1,27 @@
 <script lang="ts">
-	import { Stack, Subgrid } from '$lib/components/layout';
+	import { Box, Stack, Subgrid, Switcher } from '$lib/components/layout';
 	import { getContext } from 'svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
 	import Pageheader from '$lib/components/pageheader.svelte';
 	import Card from '$lib/components/layout/box/card.svelte';
 	import Button from '$lib/components/button/button.svelte';
 	import EOS from '$lib/assets/EOS@2x.svg';
+	import Metamask from '$lib/assets/metamask.svg';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
 </script>
 
-<!-- {#snippet textblock(stuff)} -->
-<!-- 	<Stack> -->
-<!-- 		<h3 class="h3">{stuff.title}</h3> -->
-<!-- 		<p>{stuff.text}</p> -->
-<!-- 		{#if stuff.button.href} -->
-<!-- 			<Button href={stuff.button.href}>{stuff.button.text}</Button> -->
-<!-- 		{/if} -->
-<!-- 		{@render stuff.children?.()} -->
-<!-- 	</Stack> -->
-<!-- {/snippet} -->
+{#snippet textblock(stuff)}
+	<Stack class="max-w-sm items-start">
+		<h3 class="h3">{stuff.title}</h3>
+		<p>{stuff.text}</p>
+		{#if stuff.button.href}
+			<Button href={stuff.button.href}>{stuff.button.text}</Button>
+		{/if}
+		{@render stuff.children?.()}
+	</Stack>
+{/snippet}
 
 <Subgrid id="homepage" class="gap-y-20">
 	<!-- <Pageheader title={data.network.chain.name} /> -->
@@ -71,6 +72,56 @@
 	</section>
 
 	<!-- Carousel -->
+
+	<div class="col-span-full @container">
+		<div class="-4 grid min-h-72 rounded-2xl bg-mineShaft-950 px-4 @xl:grid-cols-2 @xl:gap-4">
+			<div class="grid place-items-center">
+				<svg
+					class="col-start-1 row-start-1 h-full w-full object-cover"
+					width="635"
+					height="296"
+					viewBox="0 0 635 296"
+					fill="none"
+					xmlns="http://www.w3.org/2000/svg"
+				>
+					<path
+						d="M201.577-49.292h231.851l115.925 200.789-115.925 200.788H201.577L85.652 151.497 201.577-49.292Z"
+						stroke="#fff"
+						stroke-opacity=".1"
+					/>
+					<path
+						d="M179.906 13.903 367.864-36.46l137.594 137.594-50.363 187.957-187.957 50.363L129.543 201.86l50.363-187.957Z"
+						stroke="#fff"
+						stroke-opacity=".5"
+					/>
+					<path
+						d="M179.009 72.29 317.506-7.424l138.497 79.712v159.422l-138.497 79.712-138.497-79.712V72.289Z"
+						stroke="#fff"
+					/>
+				</svg>
+				<div
+					class="col-start-1 row-start-1 grid max-w-sm grid-cols-3 items-center justify-items-center"
+				>
+					<img class="h-40" src={Metamask} alt="metamask" />
+					<svg width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M18.008 0v36M36.008 18h-36" stroke="#fff" />
+					</svg>
+					<img class="h-40 rounded-full bg-mineShaft-950 px-2 py-4" src={EOS} alt="eos" />
+				</div>
+			</div>
+
+			<Box class="grid place-items-center py-8">
+				{@render textblock({
+					title: 'Metamask is now EOS compatible',
+					text: 'TODO: The APY is an estimate, and may fluctuate based on how many and much others are staking. Your 21 day lockup period starts when you unstake your EOS. You will always get back your staked EOS.',
+					button: {
+						text: 'Get a free account',
+						href: `/${data.network}/signup`
+					}
+				})}
+			</Box>
+		</div>
+	</div>
 
 	<Subgrid tag="section" class="gap-y-20 *:col-span-full">
 		{#if context.account}
