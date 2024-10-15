@@ -1,11 +1,4 @@
-import {
-	APIClient,
-	Asset,
-	FetchProvider,
-	Int128,
-	Serializer,
-	type AssetType
-} from '@wharfkit/antelope';
+import { APIClient, Asset, FetchProvider, Int128, type AssetType } from '@wharfkit/antelope';
 import { Chains, ChainDefinition, TokenMeta } from '@wharfkit/common';
 import { RAMState, Resources, REXState, PowerUpState, type SampleUsage } from '@wharfkit/resources';
 import { chainIdsToIndices } from '@wharfkit/session';
@@ -44,7 +37,7 @@ export class NetworkState {
 	public resources?: Resources = $state();
 	public rexstate?: REXState = $state();
 	public powerupstate?: PowerUpState = $state();
-	public sampledUsage?: SampledUsage = $state();
+	public sampleUsage?: SampleUsage = $state();
 	public tokenmeta?: TokenMeta[] = $state();
 	public tokenstate?: DelphiOracleTypes.datapoints = $state();
 	public tokenprice = $derived.by(() => {
@@ -114,8 +107,12 @@ export class NetworkState {
 		}
 
 		try {
-			console.log("#####", json.sampleUsage);
-			this.sampledUsage = SampledUsage.from(json.sampleUsage);
+			const sampledUsage = SampledUsage.from(json.sampleUsage);
+			this.sampleUsage = {
+				account: sampledUsage.account,
+				cpu: sampledUsage.cpu,
+				net: sampledUsage.net
+			};
 		} catch (error) {
 			console.log('SampleUsage Parse', error);
 			console.log(json);

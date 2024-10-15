@@ -56,6 +56,6 @@ export interface LightAPIBalanceResponse {
 @Struct.type('sampledusage')
 export class SampledUsage extends Struct {
 	@Struct.field(API.v1.AccountObject) declare account: API.v1.AccountObject;
-    @Struct.field(UInt128) declare cpu: UInt128;
-    @Struct.field(UInt128) declare net: UInt128;
+	@Struct.field(UInt128) declare cpu: UInt128;
+	@Struct.field(UInt128) declare net: UInt128;
 }

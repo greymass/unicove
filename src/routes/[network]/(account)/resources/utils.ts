@@ -1,10 +1,7 @@
 import { ResourceType } from './types';
 import { PowerUpState } from '@wharfkit/resources';
-import type { REXState } from '@wharfkit/resources';
+import type { REXState, SampleUsage } from '@wharfkit/resources';
 import { Asset } from '@wharfkit/antelope';
-import { SampledUsage } from '$lib/types';
-import { UInt128 } from '@wharfkit/antelope';
-import BN from 'bn.js';
 
 export const calSize = (available: number) => {
 	let size = 0;
@@ -51,16 +48,19 @@ export const getUnit = (resourceType: ResourceType) => {
 export const getPowerupPrice = (
 	resourceType: ResourceType,
 	powerupstate: PowerUpState,
-	sampleUsage: SampledUsage,
+	sampleUsage: SampleUsage,
 	systemTokenSymbol: Asset.Symbol
 ) => {
 	switch (resourceType) {
-		case ResourceType.NET:
+		case ResourceType.NET: {
 			const netPrice = powerupstate.net.price_per_kb(sampleUsage, 1);
 			return Asset.from(netPrice, systemTokenSymbol);
-		case ResourceType.CPU:
+		}
+		case ResourceType.CPU: {
 			const cpuPrice = powerupstate.cpu.price_per_ms(sampleUsage, 1);
 			return Asset.from(cpuPrice, systemTokenSymbol);
+		}
+
 		default:
 			throw new Error(`unsupport resource type: ${resourceType}`);
 	}
@@ -69,18 +69,18 @@ export const getPowerupPrice = (
 export const getRexPrice = (
 	resourceType: ResourceType,
 	rexState: REXState,
-	sampledUsage: SampledUsage,
+	sampledUsage: SampleUsage,
 	systemTokenSymbol: Asset.Symbol
 ) => {
 	switch (resourceType) {
-		case ResourceType.NET:
+		case ResourceType.NET: {
 			const netPrice = rexState.net_price_per_kb(sampledUsage, 30);
-			console.log("netPrice = ", netPrice);
 			return compatPriceWithPrecision(netPrice, systemTokenSymbol);
-		case ResourceType.CPU:
+		}
+		case ResourceType.CPU: {
 			const cpuPrice = rexState.cpu_price_per_ms(sampledUsage, 30);
-			console.log("cpuPrice = ", cpuPrice);
 			return compatPriceWithPrecision(cpuPrice, systemTokenSymbol);
+		}
 		default:
 			throw new Error(`unsupport resource type: ${resourceType}`);
 	}
@@ -96,17 +96,19 @@ function compatPriceWithPrecision(price: number, coreTokenSymbol: Asset.Symbol) 
 
 export const getStakingPrice = (
 	resourceType: ResourceType,
-	sampledUsage: SampledUsage,
+	sampledUsage: SampleUsage,
 	systemTokenSymbol: Asset.Symbol
 ) => {
 	const { account } = sampledUsage;
 	switch (resourceType) {
-		case ResourceType.NET:
+		case ResourceType.NET: {
 			const pricePerKb = account.net_weight.multiplying(1000).dividing(account.net_limit.max);
 			return Asset.fromUnits(pricePerKb, systemTokenSymbol);
-		case ResourceType.CPU:
+		}
+		case ResourceType.CPU: {
 			const pricePerMs = account.cpu_weight.multiplying(1000).dividing(account.cpu_limit.max);
 			return Asset.fromUnits(pricePerMs, systemTokenSymbol);
+		}
 		default:
 			throw new Error(`unsupport resource type: ${resourceType}`);
 	}
@@ -115,7 +117,7 @@ export const getStakingPrice = (
 export const getPowerupFrac = (
 	resourceType: ResourceType,
 	powerupstate: PowerUpState,
-	sampledUsage: SampledUsage,
+	sampledUsage: SampleUsage,
 	amount: number
 ) => {
 	switch (resourceType) {

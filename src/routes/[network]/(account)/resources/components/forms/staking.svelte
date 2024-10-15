@@ -5,7 +5,7 @@
 	import Stack from '$lib/components/layout/stack.svelte';
 	import Transaction from '$lib/components/transaction.svelte';
 
-	import { Checksum256, Asset } from '@wharfkit/antelope';
+	import { Checksum256 } from '@wharfkit/antelope';
 	import type { TransactResult } from '@wharfkit/session';
 
 	import { RentState } from './state.svelte';
@@ -24,7 +24,7 @@
 		if (
 			context.account &&
 			context.network &&
-			context.network.sampledUsage &&
+			context.network.sampleUsage &&
 			context.network.chain.systemToken
 		) {
 			if (context.account.name) {
@@ -34,7 +34,7 @@
 			rentState.balance = context.account.balance ? context.account.balance.liquid : undefined;
 			rentState.pricePerUnit = getStakingPrice(
 				resourceType,
-				context.network.sampledUsage,
+				context.network.sampleUsage,
 				context.network.chain.systemToken.symbol
 			);
 		} else {
@@ -128,9 +128,9 @@
 			</p>
 		{/if}
 		{#if rentState.pricePerUnit}
-		<p>
-			Price:{rentState.pricePerUnit}
-		</p>
+			<p>
+				Price:{rentState.pricePerUnit}
+			</p>
 		{/if}
 
 		{#if rentState.error}
