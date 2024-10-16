@@ -1,6 +1,4 @@
 <script lang="ts">
-	import Button from '$lib/components/button/button.svelte';
-
 	const { data } = $props();
 </script>
 
@@ -11,21 +9,22 @@
 			<th>Date</th>
 			<th>Action</th>
 			<th>Data</th>
-			<th></th>
 		</tr>
 	</thead>
 	<tbody>
 		{#each data.activityActions as action}
 			<tr>
 				<td>
-					{String(action.id).substring(0, 7)}
+					<a href="/{data.network}/transaction/{action.id}">{String(action.id).substring(0, 7)}</a>
 				</td>
 				<td>
 					{action.timestamp.toDate().toLocaleDateString(undefined, {
-						weekday: 'long',
 						year: 'numeric',
-						month: 'long',
-						day: 'numeric'
+						month: 'short',
+						day: 'numeric',
+						hour: 'numeric',
+						minute: 'numeric',
+						second: 'numeric'
 					})}
 				</td>
 				<td>
@@ -33,14 +32,6 @@
 				</td>
 				<td>
 					{JSON.stringify(action.data, null, 2)}
-				</td>
-				<td class="text-right">
-					<div class="flex">
-						<Button variant="pill" href="/{data.network}/transaction/{action.id}">detail</Button>
-						<Button variant="pill" href="/{data.network}/transaction/{action.id}/{action.seq}"
-							>seq</Button
-						>
-					</div>
 				</td>
 			</tr>
 		{/each}

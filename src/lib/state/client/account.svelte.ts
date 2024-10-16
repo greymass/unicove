@@ -39,7 +39,7 @@ export class AccountState {
 	public loaded: boolean = $state(false);
 
 	public balance = $derived.by(() =>
-		this.network ? getBalance(this.network, this.sources, this.ram) : undefined
+		this.network ? getBalance(this.network, this.sources) : undefined
 	);
 	public balances = $derived.by(() =>
 		this.network
@@ -52,7 +52,9 @@ export class AccountState {
 	public ram = $derived.by(() => (this.account ? this.account.resource('ram') : undefined));
 	public permissions = $derived.by(() => (this.account ? this.account.permissions : undefined));
 	public value = $derived.by(() => {
-		return this.network && this.balance ? getAccountValue(this.network, this.balance) : undefined;
+		return this.network && this.balance && this.ram
+			? getAccountValue(this.network, this.balance, this.ram)
+			: undefined;
 	});
 
 	constructor(network: NetworkState, name: NameType, fetchOverride?: typeof fetch) {
@@ -116,7 +118,11 @@ export interface AccountValue {
 	total: Asset;
 }
 
-export function getAccountValue(network: NetworkState, balance: Balance): AccountValue {
+export function getAccountValue(
+	network: NetworkState,
+	balance: Balance,
+	ramResources: Resource
+): AccountValue {
 	const delegated = Asset.from('0.0000 USD');
 	const liquid = Asset.from('0.0000 USD');
 	const ram = Asset.from('0.0000 USD');
@@ -128,12 +134,13 @@ export function getAccountValue(network: NetworkState, balance: Balance): Accoun
 		liquid.units.add(calculateValue(balance.liquid, network.tokenprice).units);
 		staked.units.add(calculateValue(balance.staked, network.tokenprice).units);
 		total.units.add(calculateValue(balance.total, network.tokenprice).units);
-	}
-
-	if (network.ramprice?.usd) {
-		const ramValue = calculateValue(balance.ram, network.ramprice.usd);
-		ram.units.add(ramValue.units);
-		total.units.add(ramValue.units);
+		if (network.ramprice) {
+			const ramAsset = Asset.from(`${ramResources.max.dividing(1000)} RAM`);
+			const ramValue = calculateValue(ramAsset, network.ramprice.eos);
+			const ramUsdValue = calculateValue(ramValue, network.tokenprice);
+			ram.units.add(ramUsdValue.units);
+			total.units.add(ramUsdValue.units);
+		}
 	}
 
 	return {
@@ -149,15 +156,10 @@ export interface Balance {
 	delegated: Asset;
 	liquid: Asset;
 	staked: Asset;
-	ram: Asset;
 	total: Asset;
 }
 
-export function getBalance(
-	network: NetworkState,
-	sources: DataSources,
-	ramResources?: Resource
-): Balance {
+export function getBalance(network: NetworkState, sources: DataSources): Balance {
 	if (!network) {
 		throw new Error('Network not initialized');
 	}
@@ -168,11 +170,10 @@ export function getBalance(
 	const delegated = Asset.fromUnits(0, network.config.symbol);
 	const liquid = Asset.fromUnits(0, network.config.symbol);
 	const staked = Asset.fromUnits(0, network.config.symbol);
-	const ram = Asset.fromUnits(0, network.config.symbol);
 	const total = Asset.fromUnits(0, network.config.symbol);
 
 	if (!sources.get_account) {
-		return { delegated, liquid, staked, ram, total };
+		return { delegated, liquid, staked, total };
 	}
 
 	// Add the core balance if it exists on the account
@@ -204,17 +205,9 @@ export function getBalance(
 		}
 	}
 
-	if (ramResources && network.ramprice) {
-		const asset = Asset.from(`${ramResources.max.dividing(1000)} RAM`);
-		const ramValue = calculateValue(asset, network.ramprice.eos);
-		ram.units.add(ramValue.units);
-		total.units.add(ramValue.units);
-	}
-
 	return {
 		delegated,
 		liquid,
-		ram,
 		staked,
 		total
 	};

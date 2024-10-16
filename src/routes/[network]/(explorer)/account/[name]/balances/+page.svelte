@@ -1,4 +1,6 @@
 <script lang="ts">
+	import AssetText from '$lib/components/elements/asset.svelte';
+
 	const { data } = $props();
 </script>
 
@@ -24,7 +26,7 @@
 						</div>
 					</td>
 					<td>
-						{balance.asset.value.toFixed(balance.asset.symbol.precision)}
+						<AssetText value={balance.asset} variant="quantity" />
 					</td>
 				</tr>
 			{/each}
