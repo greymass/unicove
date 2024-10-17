@@ -24,7 +24,7 @@
 		if (
 			context.account &&
 			context.network &&
-			context.network.sampleUsage &&
+			context.network.sampledUsage &&
 			context.network.chain.systemToken
 		) {
 			if (context.account.name) {
@@ -34,7 +34,7 @@
 			rentState.balance = context.account.balance ? context.account.balance.liquid : undefined;
 			rentState.pricePerUnit = getStakingPrice(
 				resourceType,
-				context.network.sampleUsage,
+				context.network.sampledUsage,
 				context.network.chain.systemToken.symbol
 			);
 		} else {

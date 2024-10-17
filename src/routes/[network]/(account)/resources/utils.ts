@@ -1,7 +1,8 @@
 import { ResourceType } from './types';
 import { PowerUpState } from '@wharfkit/resources';
-import type { REXState, SampleUsage } from '@wharfkit/resources';
+import type { REXState } from '@wharfkit/resources';
 import { Asset } from '@wharfkit/antelope';
+import type { SampledUsage } from '$lib/types';
 
 export const calSize = (available: number) => {
 	let size = 0;
@@ -48,7 +49,7 @@ export const getUnit = (resourceType: ResourceType) => {
 export const getPowerupPrice = (
 	resourceType: ResourceType,
 	powerupstate: PowerUpState,
-	sampleUsage: SampleUsage,
+	sampleUsage: SampledUsage,
 	systemTokenSymbol: Asset.Symbol
 ) => {
 	switch (resourceType) {
@@ -69,7 +70,7 @@ export const getPowerupPrice = (
 export const getRexPrice = (
 	resourceType: ResourceType,
 	rexState: REXState,
-	sampledUsage: SampleUsage,
+	sampledUsage: SampledUsage,
 	systemTokenSymbol: Asset.Symbol
 ) => {
 	switch (resourceType) {
@@ -96,7 +97,7 @@ function compatPriceWithPrecision(price: number, coreTokenSymbol: Asset.Symbol) 
 
 export const getStakingPrice = (
 	resourceType: ResourceType,
-	sampledUsage: SampleUsage,
+	sampledUsage: SampledUsage,
 	systemTokenSymbol: Asset.Symbol
 ) => {
 	const { account } = sampledUsage;
@@ -117,7 +118,7 @@ export const getStakingPrice = (
 export const getPowerupFrac = (
 	resourceType: ResourceType,
 	powerupstate: PowerUpState,
-	sampledUsage: SampleUsage,
+	sampledUsage: SampledUsage,
 	amount: number
 ) => {
 	switch (resourceType) {

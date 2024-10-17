@@ -27,12 +27,12 @@
 	let stakingPrice: Asset | undefined = $state();
 
 	$effect(() => {
-		if (context.network && context.network.sampleUsage && context.network.chain.systemToken) {
+		if (context.network && context.network.sampledUsage && context.network.chain.systemToken) {
 			powerupPrice = context.network.powerupstate
 				? getPowerupPrice(
 						resource,
 						context.network.powerupstate,
-						context.network.sampleUsage,
+						context.network.sampledUsage,
 						context.network.chain.systemToken.symbol
 					)
 				: undefined;
@@ -40,13 +40,13 @@
 				? getRexPrice(
 						resource,
 						context.network.rexstate,
-						context.network.sampleUsage,
+						context.network.sampledUsage,
 						context.network.chain.systemToken.symbol
 					)
 				: undefined;
 			stakingPrice = getStakingPrice(
 				resource,
-				context.network.sampleUsage,
+				context.network.sampledUsage,
 				context.network.chain.systemToken.symbol
 			);
 		} else {

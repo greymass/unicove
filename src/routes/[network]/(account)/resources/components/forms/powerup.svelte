@@ -34,20 +34,20 @@
 			}
 			if (
 				context.network.powerupstate &&
-				context.network.sampleUsage &&
+				context.network.sampledUsage &&
 				context.network.chain.systemToken
 			) {
 				rentState.frac = getPowerupFrac(
 					resourceType,
 					context.network.powerupstate,
-					context.network.sampleUsage,
+					context.network.sampledUsage,
 					Number(rentState.amount)
 				);
 
 				rentState.pricePerUnit = getPowerupPrice(
 					resourceType,
 					context.network.powerupstate,
-					context.network.sampleUsage,
+					context.network.sampledUsage,
 					context.network.chain.systemToken.symbol
 				);
 			}

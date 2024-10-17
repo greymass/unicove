@@ -1,6 +1,6 @@
 import { APIClient, Asset, FetchProvider, Int128, type AssetType } from '@wharfkit/antelope';
 import { Chains, ChainDefinition, TokenMeta } from '@wharfkit/common';
-import { RAMState, Resources, REXState, PowerUpState, type SampleUsage } from '@wharfkit/resources';
+import { RAMState, Resources, REXState, PowerUpState } from '@wharfkit/resources';
 import { chainIdsToIndices } from '@wharfkit/session';
 import { snapOrigins } from '@wharfkit/wallet-plugin-metamask';
 
@@ -37,7 +37,7 @@ export class NetworkState {
 	public resources?: Resources = $state();
 	public rexstate?: REXState = $state();
 	public powerupstate?: PowerUpState = $state();
-	public sampleUsage?: SampleUsage = $state();
+	public sampledUsage?: SampledUsage = $state();
 	public tokenmeta?: TokenMeta[] = $state();
 	public tokenstate?: DelphiOracleTypes.datapoints = $state();
 	public tokenprice = $derived.by(() => {
@@ -107,14 +107,9 @@ export class NetworkState {
 		}
 
 		try {
-			const sampledUsage = SampledUsage.from(json.sampleUsage);
-			this.sampleUsage = {
-				account: sampledUsage.account,
-				cpu: sampledUsage.cpu,
-				net: sampledUsage.net
-			};
+			this.sampledUsage = SampledUsage.from(json.sampleUsage);
 		} catch (error) {
-			console.log('SampleUsage Parse', error);
+			console.log('SampledUsage Parse', error);
 			console.log(json);
 		}
 

@@ -28,13 +28,13 @@
 			rentState.balance = context.account.balance ? context.account.balance.liquid : undefined;
 			if (
 				context.network.rexstate &&
-				context.network.sampleUsage &&
+				context.network.sampledUsage &&
 				context.network.chain.systemToken
 			) {
 				rentState.pricePerUnit = getRexPrice(
 					resourceType,
 					context.network.rexstate,
-					context.network.sampleUsage,
+					context.network.sampledUsage,
 					context.network.chain.systemToken.symbol
 				);
 			}
