@@ -30,6 +30,7 @@
 	let selectedRange: ExtendedSelectOption = $state(range[1]);
 
 	let dataRange = $derived.by(() => {
+		if (data.length === 0) return [];
 		const rangeEndDate = dayjs(data[0].date);
 		const rangeStartDate = rangeEndDate.subtract(Number(selectedRange.value), 'day');
 		return data.filter(({ date }) => dayjs(date).isAfter(rangeStartDate));

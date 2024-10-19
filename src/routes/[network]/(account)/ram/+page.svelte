@@ -31,28 +31,48 @@
 	});
 
 	let marketCapUSDValue = $derived(
-		marketCapEOS?.value || 0 * (data.network.ramprice?.usd?.value || 0)
+		marketCapEOS && data.network.ramprice?.usd
+			? calculateValue(marketCapEOS, data.network.ramprice?.usd)
+			: undefined
 	);
+
+	let ramOwned = $derived(Asset.from(Number(context.account?.ram?.max || 0) / 1000, '4,KB'));
+	$effect(() => {
+		console.log({ ramOwned, max: context.account?.ram });
+	});
 </script>
 
 <div class="space-y-4 bg-gray-900 p-4 text-white">
 	<div class="p-4">
-		<div class="flex items-start justify-between">
-			<div>
-				<h2 class="text-xl font-bold">RAM</h2>
-				<p>Available</p>
-				<p class="text-2xl font-bold">{ramState?.base.balance.toString() || '0 RAM'}</p>
+		<div class="flex flex-col items-start justify-between md:flex-row">
+			<div class="mb-4 w-full md:mb-0 md:w-1/2">
+				<h1 class="text-xl font-bold">RAM</h1>
+				<p class="font-light text-gray-400">Owned</p>
+				<p class="text-2xl font-bold">{String(ramOwned) || '0'}</p>
+				<div class="mt-4 flex space-x-2">
+					<Button
+						class="flex-1 bg-blue-500 hover:bg-blue-600"
+						href="/{String(data.network)}/ram/buy/tokens">Buy</Button
+					>
+					<Button
+						class="flex-1 bg-blue-500 hover:bg-blue-600"
+						href="/{String(data.network)}/ram/sell/tokens">Sell</Button
+					>
+				</div>
 			</div>
-			<div class="text-right">
-				<p>Total RAM Value USD</p>
-				<p class="text-xl font-bold">$ {data.network.ramprice?.usd?.toString() || '0'}</p>
-				<p>Total RAM Value EOS</p>
-				<p>{data.network.ramprice?.eos?.toString() || '0 EOS'}</p>
+			<div class="mt-4 w-full text-left md:mt-0 md:w-1/2 md:p-8">
+				<p class="text-left text-gray-400">Total RAM Value USD</p>
+				<p class="text-left text-xl font-bold">{String(ramOwned)}</p>
+				<hr class="my-2 border-gray-600" />
+				<p class="text-left text-gray-400">Total RAM Value EOS</p>
+				<p class="text-left text-xl font-bold">
+					$ {String(
+						context.account?.ram?.max && data.network.ramprice?.usd
+							? calculateValue(ramOwned, data.network.ramprice?.usd)
+							: '0'
+					)}
+				</p>
 			</div>
-		</div>
-		<div class="mt-4 flex space-x-2">
-			<Button class="flex-1 bg-blue-500 hover:bg-blue-600">Sell</Button>
-			<Button class="flex-1 bg-blue-500 hover:bg-blue-600">Buy</Button>
 		</div>
 	</div>
 

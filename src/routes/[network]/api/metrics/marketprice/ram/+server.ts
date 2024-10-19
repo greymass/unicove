@@ -21,10 +21,9 @@ function getMetricsUrl(chain: ChainDefinition): string {
 }
 
 export const GET: RequestHandler = async ({ params }) => {
-	const chain = getChainDefinitionFromParams(params.network);
-	const metricsUrl = getMetricsUrl(chain);
-
 	try {
+		const chain = getChainDefinitionFromParams(params.network);
+		const metricsUrl = getMetricsUrl(chain);
 		const response = await fetch(path.join(metricsUrl, 'marketprice', 'ram'));
 		if (!response.ok) {
 			throw new Error(`HTTP error! status: ${response.status}`);
