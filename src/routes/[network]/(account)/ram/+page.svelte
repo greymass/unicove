@@ -35,12 +35,9 @@
 	);
 
 	let ramOwned = $derived(Asset.from(Number(context.account?.ram?.max || 0) / 1000, '4,KB'));
-	$effect(() => {
-		console.log({ ramOwned, max: context.account?.ram });
-	});
 </script>
 
-<div class="space-y-4 bg-gray-900 p-4 text-white">
+<div class="space-y-4 p-4 text-white">
 	<div class="p-4">
 		<div class="flex flex-col items-start justify-between md:flex-row">
 			<div class="mb-4 w-full md:mb-0 md:w-1/2">
@@ -62,7 +59,9 @@
 				<p class="text-left text-gray-400">Total RAM Value USD</p>
 				<p class="text-left text-xl font-bold">{String(ramOwned)}</p>
 				<hr class="my-2 border-gray-600" />
-				<p class="text-left text-gray-400">Total RAM Value EOS</p>
+				<p class="text-left text-gray-400">
+					Total RAM Value {data.network.chain.systemToken?.symbol.code || ''}
+				</p>
 				<p class="text-left text-xl font-bold">
 					$ {String(
 						context.account?.ram?.max && data.network.ramprice?.usd
