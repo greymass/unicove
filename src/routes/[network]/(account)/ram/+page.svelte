@@ -12,84 +12,65 @@
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');
+
+	const ramState = $derived(data.network.ramstate);
+
+	let marketCapEOS: Asset | undefined = $state();
+	let ramSupply: Asset | undefined = $state();
+
+	$effect(() => {
+		if (ramState) {
+			const quoteBalanceEOS = ramState.quote.balance.value;
+			const connectorWeight = ramState.quote.weight.value;
+			marketCapEOS = Asset.from(
+				quoteBalanceEOS / connectorWeight,
+				data.network.chain.systemToken?.symbol || '0, UNKNOWN'
+			);
+			ramSupply = Asset.from((ramState?.base.balance.value || 0) / (1000 * 1000 * 1000), '2,GB');
+		}
+	});
+
+	let marketCapUSDValue = $derived(
+		marketCapEOS?.value || 0 * (data.network.ramprice?.usd?.value || 0)
+	);
 </script>
 
-{#if context.account}
-	<Pageheader title="Your RAM" subtitle="RAM usage for your account" />
-	<Card class="p-4">
-		{#if context.account.ram}
-			<div class="space-y-4">
-				<div class="flex items-center justify-between">
-					<span class="text-lg font-semibold">Total RAM:</span>
-					<RAM bytes={Number(context.account.ram.max || 0)} />
-				</div>
-				<div class="border-t pt-4">
-					<h4 class="mb-2 text-lg font-semibold">Value:</h4>
-					{#if context.account.network.ramprice}
-						<div class="flex flex-col space-y-2">
-							<div class="flex justify-between">
-								<span>Network Token:</span>
-								<span
-									>{calculateValue(
-										Asset.fromUnits(context.account.ram.max, '3,RAM'),
-										context.account.network.ramprice.eos
-									)}</span
-								>
-							</div>
-							{#if context.account.network.ramprice.usd}
-								<div class="flex justify-between">
-									<span>USD:</span>
-									<span
-										>{calculateValue(
-											Asset.fromUnits(context.account.ram.max, '3,RAM'),
-											context.account.network.ramprice.usd
-										)}</span
-									>
-								</div>
-							{/if}
-						</div>
-					{:else}
-						<p class="text-gray-400">RAM price information unavailable</p>
-					{/if}
-				</div>
+<div class="space-y-4 bg-gray-900 p-4 text-white">
+	<div class="p-4">
+		<div class="flex items-start justify-between">
+			<div>
+				<h2 class="text-xl font-bold">RAM</h2>
+				<p>Available</p>
+				<p class="text-2xl font-bold">{ramState?.base.balance.toString() || '0 RAM'}</p>
 			</div>
-		{:else}
-			<p class="text-center text-gray-400">Loading your RAM information...</p>
-		{/if}
-	</Card>
-	<Button href="/{data.network}/account/{context.account.name}/ram">View Account RAM Details</Button
-	>
-{:else}
-	<Pageheader title="RAM Information" subtitle="Login to view your RAM usage" />
-	<Card>To view your RAM usage, please log in or create an account.</Card>
-{/if}
-
-{#if data.network && data.network.ramstate}
-	<Pageheader title="Current RAM Price" />
-	<Card class="p-4">
-		<h4 class="mb-2 text-lg font-semibold">Current RAM Price</h4>
-		<div class="flex flex-col space-y-2">
-			<div class="flex justify-between">
-				<span>Network Token:</span>
-				<span>{String(data.network.ramstate.price_per_kb(1))}/KB</span>
+			<div class="text-right">
+				<p>Total RAM Value USD</p>
+				<p class="text-xl font-bold">$ {data.network.ramprice?.usd?.toString() || '0'}</p>
+				<p>Total RAM Value EOS</p>
+				<p>{data.network.ramprice?.eos?.toString() || '0 EOS'}</p>
 			</div>
-			{#if data.network.ramprice && data.network.ramprice.usd}
-				<div class="flex justify-between">
-					<span>USD:</span>
-					<span>${data.network.ramprice.usd.value}/KB</span>
-				</div>
-			{/if}
 		</div>
-	</Card>
-{:else}
-	<p>Loading current RAM price...</p>
-{/if}
+		<div class="mt-4 flex space-x-2">
+			<Button class="flex-1 bg-blue-500 hover:bg-blue-600">Sell</Button>
+			<Button class="flex-1 bg-blue-500 hover:bg-blue-600">Buy</Button>
+		</div>
+	</div>
 
-{#if data.network.supports('timeseries')}
-	{#if data.historicalPrices && data.historicalPrices.length > 0}
-		<Pageheader title="Historical RAM Prices" />
+	<Card class="bg-gray-800 p-4">
 		<RamPriceHistory data={data.historicalPrices} />
-	{:else}
-		<p>No historical RAM prices available.</p>
-	{/if}
-{/if}
+	</Card>
+
+	<div class="text-m mb-20 flex justify-between">
+		<Card class="mr-2 h-32 w-full bg-gray-800">
+			<p>RAM Market Cap</p>
+			<p class="font-bold">{String(marketCapEOS) || '0 EOS'}</p>
+			<p class="font-bold">
+				$ {String(marketCapUSDValue) || '0.00'} USD
+			</p>
+		</Card>
+		<Card class="ml-2 h-32 w-full bg-gray-800">
+			<p>RAM Supply</p>
+			<p class="font-bold">{String(ramSupply)}</p>
+		</Card>
+	</div>
+</div>
