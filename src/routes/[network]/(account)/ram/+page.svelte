@@ -3,9 +3,7 @@
 	import { Asset } from '@wharfkit/antelope';
 
 	import RamPriceHistory from '$lib/components/chart/rampricehistory.svelte';
-	import RAM from '$lib/components/elements/ram.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import Pageheader from '$lib/components/pageheader.svelte';
 	import Card from '$lib/components/layout/box/card.svelte';
 	import Button from '$lib/components/button/button.svelte';
 	import { calculateValue } from '$lib/utils';
