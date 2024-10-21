@@ -7,7 +7,7 @@
 	import { getContext } from 'svelte';
 
 	import { ResourceType } from '../../types';
-	import { getName, getUnit } from '../../utils';
+	import { getName, getUnit, getPowerupPrice, getRexPrice, getStakingPrice } from '../../utils';
 
 	interface Props {
 		resource: ResourceType;
@@ -27,12 +27,28 @@
 	let stakingPrice: Asset | undefined = $state();
 
 	$effect(() => {
-		if (context.network) {
-			// TODO: we need to get the powerupprice from the stakingprice
-			// powerupPrice = context.network.powerupprice;
-			// stakingPrice = context.network.stakingprice;
-
-			rexPrice = context.network.rexprice;
+		if (context.network && context.network.sampledUsage && context.network.chain.systemToken) {
+			powerupPrice = context.network.powerupstate
+				? getPowerupPrice(
+						resource,
+						context.network.powerupstate,
+						context.network.sampledUsage,
+						context.network.chain.systemToken.symbol
+					)
+				: undefined;
+			rexPrice = context.network.rexstate
+				? getRexPrice(
+						resource,
+						context.network.rexstate,
+						context.network.sampledUsage,
+						context.network.chain.systemToken.symbol
+					)
+				: undefined;
+			stakingPrice = getStakingPrice(
+				resource,
+				context.network.sampledUsage,
+				context.network.chain.systemToken.symbol
+			);
 		} else {
 			powerupPrice = undefined;
 			rexPrice = undefined;
@@ -55,7 +71,7 @@
 				<div>Power up</div>
 				<div>
 					{#if powerupPrice}
-						{powerupPrice.value.toFixed(powerupPrice.symbol.precision)}
+						{powerupPrice.quantity}
 					{/if}
 				</div>
 				<div>
@@ -72,7 +88,7 @@
 				<div>REX</div>
 				<div>
 					{#if rexPrice}
-						{rexPrice.value.toFixed(rexPrice.symbol.precision)}
+						{rexPrice.quantity}
 					{/if}
 				</div>
 				<div>
@@ -89,7 +105,7 @@
 				<div>Staking</div>
 				<div>
 					{#if stakingPrice}
-						{(Number(stakingPrice.value) * 1000).toFixed(stakingPrice.symbol.precision)}
+						{stakingPrice.quantity}
 					{/if}
 				</div>
 				<div>
