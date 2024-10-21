@@ -1,12 +1,10 @@
 <script lang="ts">
-	import type { NetworkState } from '$lib/state/network.svelte';
-
 	interface Props {
 		wordmark?: boolean;
 		small?: boolean;
 		class?: string;
 		callbackFn?: (e: MouseEvent) => void;
-		network: NetworkState;
+		href?: string;
 	}
 
 	const {
@@ -14,13 +12,13 @@
 		small = false,
 		class: className = '',
 		callbackFn,
-		network
+		href = '/'
 	}: Props = $props();
 </script>
 
 <div class={className}>
 	<!-- Unicove Logo centered with wordmark -->
-	<a href="/{network}" class="flex flex-col items-center gap-3 fill-white/60" onclick={callbackFn}>
+	<a {href} class="flex flex-col items-center gap-3 fill-white/60" onclick={callbackFn}>
 		<svg
 			class:size-8={small}
 			class:size-10={!small}

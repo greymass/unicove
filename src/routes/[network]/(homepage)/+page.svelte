@@ -1,32 +1,35 @@
 <script lang="ts">
-	import { Box, Stack, Subgrid, Switcher } from '$lib/components/layout';
-	import { getContext } from 'svelte';
-	import type { UnicoveContext } from '$lib/state/client.svelte.js';
-	import Pageheader from '$lib/components/pageheader.svelte';
-	import Card from '$lib/components/layout/box/card.svelte';
+	import { Box, Card, Stack, Subgrid } from '$lib/components/layout';
+	// import { getContext } from 'svelte';
+	// import type { UnicoveContext } from '$lib/state/client.svelte.js';
 	import Button from '$lib/components/button/button.svelte';
 	import EOS from '$lib/assets/EOS@2x.svg';
 	import Metamask from '$lib/assets/metamask.svg';
+	import Footer from '$lib/components/footer.svelte';
 
-	const context = getContext<UnicoveContext>('state');
+	// const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
 
 	const APY = 99;
 	const TLV = 123_456_789;
+	const DAU = 843_945;
+	const RAM_POOL = 1_234_567;
+	const EOS_MARKET_CAP = 1_234_567_890;
+	const TPS = 1_234;
 </script>
 
 {#snippet textblock(stuff)}
 	<Stack class="max-w-sm items-start">
 		<h3 class="h3">{stuff.title}</h3>
 		<p>{stuff.text}</p>
-		{#if stuff.button.href}
+		{#if stuff.button && stuff.button.href}
 			<Button href={stuff.button.href}>{stuff.button.text}</Button>
 		{/if}
 		{@render stuff.children?.()}
 	</Stack>
 {/snippet}
 
-<Subgrid id="homepage" class="mb-20 gap-y-20">
+<Subgrid id="homepage" class="mb-4 content-start items-start gap-y-20 sm:pt-12 md:pt-0">
 	<!-- <Pageheader title={data.network.chain.name} /> -->
 
 	<!-- Hero -->
@@ -36,7 +39,7 @@
 	>
 		<!-- Text block -->
 		<Stack
-			class="z-10 col-span-4 col-start-1 row-start-2 items-start md:col-span-6 md:col-start-1 md:row-start-1 md:max-w-lg  xl:col-start-2 "
+			class="z-10 col-span-full col-start-1 row-start-2 items-start sm:col-span-2 sm:col-start-1 sm:row-start-1 md:col-span-6 md:col-start-1 md:max-w-lg  xl:col-start-2 "
 		>
 			<h1 class="text-4xl font-bold leading-tight md:text-balance md:text-6xl">
 				Unicove is your gateway to the EOS Network
@@ -49,13 +52,15 @@
 
 		<!-- Network logo -->
 		<div
-			class="relative left-12 top-8 z-10 col-span-full col-start-1 row-start-1 max-h-80 justify-self-center md:inset-0 md:col-span-3 md:col-start-7 xl:col-span-4 xl:col-start-6"
+			class="relative left-12 top-8 z-10 col-span-full col-start-1 row-start-1 max-h-80 justify-self-center sm:col-start-3 md:inset-0 md:col-span-3 md:col-start-7 xl:col-span-4 xl:col-start-6"
 		>
 			<img class="h-40 object-contain md:h-72" src={EOS} alt="eos" />
 		</div>
 
 		<!-- Unicove logo outline -->
-		<div class="relative right-8 col-span-full row-start-1 place-self-center md:inset-0">
+		<div
+			class="relative right-8 col-span-full row-start-1 place-self-center sm:col-start-3 md:inset-0 md:col-span-full"
+		>
 			<svg
 				class="size-48 md:h-full md:w-full"
 				viewBox="0 0 632 606"
@@ -194,6 +199,60 @@
 			</div>
 		</div>
 	</section>
+
+	<!-- Charts -->
+	<!-- TODO: add charts -->
+
+	<!-- Performance grid -->
+	<section class="col-span-full grid grid-cols-subgrid @container">
+		<!-- Text -->
+		<div class="col-span-3 grid place-items-center text-balance @xl:justify-items-start">
+			{@render textblock({
+				title: `EOS performance and stats`,
+				text: 'TODO: The APY is an estimate, and may fluctuate based on how many and much others are staking. Your 21 day lockup period starts when you unstake your EOS. You will always get back your staked EOS.',
+				button: {
+					text: 'Live network overview',
+					href: `#`
+				}
+			})}
+		</div>
+
+		{#snippet gridItem({ title, value }: { title: string; value: string })}
+			<div class="grid content-between gap-2">
+				<h3 class="text-base text-white/60">{title}</h3>
+				<p class="justify-self-end text-xl text-white">{value}</p>
+			</div>
+		{/snippet}
+
+		<!-- Grid -->
+		<div class="col-span-5 col-start-5 grid grid-cols-5 gap-4">
+			<Card class="col-span-2">
+				<!-- {@render gridItem({ title: 'Total locked value', value: `${TLV} EOS` })} -->
+				<div></div>
+			</Card>
+			<Card class="col-span-2 row-span-2">
+				{@render gridItem({ title: 'Daily active users', value: `${DAU}` })}
+			</Card>
+			<Card class="row-span-2">
+				<!-- {@render gridItem({ title: 'Total locked value', value: `${TLV} EOS` })} -->
+				<div></div>
+			</Card>
+			<Card class="col-span-2 row-span-2">
+				{@render gridItem({ title: 'RAM Pool', value: `${RAM_POOL} EOS` })}
+			</Card>
+			<Card class="col-span-3">
+				{@render gridItem({ title: 'EOS Market Cap USD', value: `$${EOS_MARKET_CAP}` })}
+			</Card>
+			<Card class="col-span-3">
+				{@render gridItem({ title: 'Current TPS', value: `${TPS}` })}
+			</Card>
+			<Card class="col-span-2">
+				{@render gridItem({ title: 'Total locked value', value: `${TLV} EOS` })}
+			</Card>
+		</div>
+	</section>
+
+	<Footer />
 </Subgrid>
 
 <style>

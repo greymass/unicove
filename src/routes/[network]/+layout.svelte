@@ -84,6 +84,7 @@
 	grid-rows-[min-content_minmax(0,1fr)]
 	gap-y-4
 	pt-4
+	sm:grid-cols-4
 	md:h-auto
 	md:min-h-svh
 	md:grid-cols-12
@@ -93,9 +94,9 @@
 	"
 >
 	<header class="col-span-full grid grid-cols-subgrid items-center">
-		<UnicoveLogo small network={data.network} class="w-min self-center " />
+		<UnicoveLogo small href="/{data.network}" class="w-min self-center " />
 
-		<div class="flex items-center justify-end md:col-span-3 md:col-start-10 md:gap-4">
+		<div class="flex items-center justify-end sm:col-span-3 md:col-start-10 md:gap-4">
 			<Search network={data.network} class="hidden flex-1 md:flex " />
 
 			<AccountSwitcher network={data.network} class="" />

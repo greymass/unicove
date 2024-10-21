@@ -55,7 +55,7 @@
 </script>
 
 <menu class="grid h-svh grid-rows-[auto_1fr] justify-start gap-8 px-8 md:px-0 {className}">
-	<UnicoveLogo {network} wordmark class="flex pt-4 md:hidden" {callbackFn} />
+	<UnicoveLogo href="/{network}" wordmark class="flex pt-4 md:hidden" {callbackFn} />
 	<nav class="flex flex-col gap-1 text-nowrap text-base font-medium text-white">
 		{#each options as option}
 			<a
