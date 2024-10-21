@@ -140,13 +140,13 @@ export function getAccountValue(
 		liquid.units.add(calculateValue(balance.liquid, network.tokenprice).units);
 		staked.units.add(calculateValue(balance.staked, network.tokenprice).units);
 		total.units.add(calculateValue(balance.total, network.tokenprice).units);
-	}
-
-	if (network.ramprice) {
-		const asset = Asset.from(`${ramResources.max.dividing(1000)} RAM`);
-		const ramValue = calculateValue(asset, network.ramprice.eos);
-		ram.units.add(ramValue.units);
-		total.units.add(ramValue.units);
+		if (network.ramprice) {
+			const ramAsset = Asset.from(`${ramResources.max.dividing(1000)} RAM`);
+			const ramValue = calculateValue(ramAsset, network.ramprice.eos);
+			const ramUsdValue = calculateValue(ramValue, network.tokenprice);
+			ram.units.add(ramUsdValue.units);
+			total.units.add(ramUsdValue.units);
+		}
 	}
 
 	return {
