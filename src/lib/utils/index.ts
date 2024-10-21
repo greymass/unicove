@@ -1,4 +1,4 @@
-import { Asset } from '@wharfkit/antelope';
+import { Asset, type NameType } from '@wharfkit/antelope';
 export * from './strings';
 export * from './ricardian';
 
@@ -30,4 +30,17 @@ export function preventDefault<TThis>(fn: (this: TThis, event: Event) => void) {
 		event.preventDefault();
 		fn.call(this, event);
 	};
+}
+
+export interface TokenKeyParams {
+	contract: NameType;
+	symbol: NameType;
+}
+
+export function isSameToken(token1?: TokenKeyParams, token2?: TokenKeyParams): boolean {
+	if (!token1 || !token2) return false;
+	return (
+		String(token1.contract) === String(token2.contract) &&
+		String(token1.symbol) === String(token2.symbol)
+	);
 }

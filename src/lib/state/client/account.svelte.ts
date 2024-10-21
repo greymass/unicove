@@ -16,7 +16,7 @@ import * as SystemContract from '$lib/wharf/contracts/system';
 import { type DataSources } from '$lib/types';
 import { chainMapper } from '$lib/wharf/chains';
 import { NetworkState } from '$lib/state/network.svelte';
-import { calculateValue } from '$lib/utils';
+import { calculateValue, isSameToken } from '$lib/utils';
 
 const defaultDataSources = {
 	get_account: undefined,
@@ -43,7 +43,13 @@ export class AccountState {
 	);
 	public balances = $derived.by(() =>
 		this.network
-			? getBalances(this.sources, this.network.chain.id, this.network.tokenmeta)
+			? getBalances(
+					this.network,
+					this.sources,
+					this.network.chain.id,
+					this.network.tokenmeta,
+					this.balance?.liquid
+				)
 			: undefined
 	);
 	public delegations = $derived(getDelegations(this.sources));
@@ -214,14 +220,38 @@ export function getBalance(network: NetworkState, sources: DataSources): Balance
 }
 
 export function getBalances(
+	network: NetworkState,
 	sources: DataSources,
 	chain: Checksum256,
-	tokenmeta?: TokenMeta[]
+	tokenmeta?: TokenMeta[],
+	liquid?: Asset
 ): TokenBalance[] {
 	if (sources.light_account) {
 		const balances: TokenBalance[] = [];
+
+		//If the value of system token is 0,
+		//for example, the chain does not support lightapi.
+		//replace it with the value of liquid
 		sources.light_account?.forEach((lightAccount) => {
-			const asset = Asset.from(`${lightAccount.amount} ${lightAccount.currency}`);
+			let amount = lightAccount.amount;
+			if (
+				!Number(amount) &&
+				network.chain.systemToken &&
+				isSameToken(
+					{
+						contract: network.chain.systemToken.contract,
+						symbol: network.chain.systemToken.symbol.name
+					},
+					{
+						contract: lightAccount.contract,
+						symbol: lightAccount.currency
+					}
+				) &&
+				liquid
+			) {
+				amount = String(liquid.value);
+			}
+			const asset = Asset.from(`${amount} ${lightAccount.currency}`);
 			const contract = Name.from(lightAccount.contract);
 			const id = TokenIdentifier.from({
 				chain: chain,
