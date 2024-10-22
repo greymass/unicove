@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 	import { Asset } from '@wharfkit/antelope';
+	import { formatAsset } from '$lib/utils/assets';
 
 	import RamPriceHistory from '$lib/components/chart/rampricehistory.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
@@ -79,15 +80,15 @@
 
 	<div class="text-m mb-20 flex justify-between">
 		<Card class="mr-2 h-32 w-full bg-gray-800">
-			<p>RAM Market Cap</p>
-			<p class="font-bold">{String(marketCapEOS) || '0 EOS'}</p>
+			<p class="text-left text-gray-400">RAM Market Cap</p>
+			<p class="font-bold">{marketCapEOS ? formatAsset(marketCapEOS) : '0 EOS'}</p>
 			<p class="font-bold">
-				$ {String(marketCapUSDValue) || '0.00 USD'}
+				$ {marketCapUSDValue ? formatAsset(marketCapUSDValue) : '0.00 USD'}
 			</p>
 		</Card>
 		<Card class="ml-2 h-32 w-full bg-gray-800">
-			<p>RAM Supply</p>
-			<p class="font-bold">{String(ramSupply)}</p>
+			<p class="text-left text-gray-400">RAM Supply</p>
+			<p class="font-bold">{ramSupply ? formatAsset(ramSupply) : '0 GB'}</p>
 		</Card>
 	</div>
 </div>
