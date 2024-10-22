@@ -5,11 +5,12 @@
 	import Stack from '$lib/components/layout/stack.svelte';
 	import Transaction from '$lib/components/transaction.svelte';
 
-	import { Checksum256, Asset } from '@wharfkit/antelope';
+	import { Checksum256 } from '@wharfkit/antelope';
 	import type { TransactResult } from '@wharfkit/session';
 
 	import { RentState } from './state.svelte';
 	import { RentType, ResourceType } from '../../types';
+	import { getStakingPrice } from '../../utils';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
@@ -31,27 +32,11 @@
 				rentState.receiver = context.account.name;
 			}
 			rentState.balance = context.account.balance ? context.account.balance.liquid : undefined;
-
-			switch (resourceType) {
-				case ResourceType.CPU: {
-					rentState.pricePerUnit = Asset.fromUnits(
-						context.network.sampledUsage.account.cpu_weight.dividing(
-							context.network.sampledUsage.account.cpu_limit.max
-						),
-						context.network.chain.systemToken.symbol
-					);
-					break;
-				}
-				case ResourceType.NET: {
-					rentState.pricePerUnit = Asset.fromUnits(
-						context.network.sampledUsage.account.net_weight.dividing(
-							context.network.sampledUsage.account.net_limit.max
-						),
-						context.network.chain.systemToken.symbol
-					);
-					break;
-				}
-			}
+			rentState.pricePerUnit = getStakingPrice(
+				resourceType,
+				context.network.sampledUsage,
+				context.network.chain.systemToken.symbol
+			);
 		} else {
 			rentState.reset();
 		}
@@ -144,10 +129,7 @@
 		{/if}
 		{#if rentState.pricePerUnit}
 			<p>
-				Price:
-				{(Number(rentState.pricePerUnit.value) * 1000).toFixed(
-					rentState.pricePerUnit.symbol.precision
-				)}
+				Price:{rentState.pricePerUnit}
 			</p>
 		{/if}
 

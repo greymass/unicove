@@ -10,6 +10,7 @@
 
 	import { RentState } from './state.svelte';
 	import { RentType, ResourceType } from '../../types';
+	import { getRexPrice } from '../../utils';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
@@ -25,7 +26,18 @@
 				rentState.receiver = context.account.name;
 			}
 			rentState.balance = context.account.balance ? context.account.balance.liquid : undefined;
-			rentState.pricePerUnit = context.network.rexprice;
+			if (
+				context.network.rexstate &&
+				context.network.sampledUsage &&
+				context.network.chain.systemToken
+			) {
+				rentState.pricePerUnit = getRexPrice(
+					resourceType,
+					context.network.rexstate,
+					context.network.sampledUsage,
+					context.network.chain.systemToken.symbol
+				);
+			}
 		} else {
 			rentState.reset();
 		}
