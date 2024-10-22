@@ -1,11 +1,14 @@
 <script lang="ts">
-	import { Box, Card, Stack, Subgrid } from '$lib/components/layout';
+	import { Box, Card, Stack, Subgrid, Switcher } from '$lib/components/layout';
 	// import { getContext } from 'svelte';
 	// import type { UnicoveContext } from '$lib/state/client.svelte.js';
 	import Button from '$lib/components/button/button.svelte';
 	import EOS from '$lib/assets/EOS@2x.svg';
 	import Metamask from '$lib/assets/metamask.svg';
 	import Footer from '$lib/components/footer.svelte';
+	import Rampricehistory from '$lib/components/chart/rampricehistory.svelte';
+
+	import TLVHex from './components/tlvhex.svelte';
 
 	// const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
@@ -131,82 +134,60 @@
 		</div>
 	</section>
 
-	<section class="col-span-full @container xl:col-start-2 xl:col-end-9">
-		<div class="grid gap-8 @xl:grid-cols-2">
-			<!-- Text -->
-			<div class="grid place-items-center text-balance @xl:justify-items-start">
-				{@render textblock({
-					title: `Stake your tokens for ${APY}% APY`,
-					text: 'TODO: The APY is an estimate, and may fluctuate based on how many and much others are staking. Your 21 day lockup period starts when you unstake your EOS. You will always get back your staked EOS.',
-					button: {
-						text: 'Get a free account',
-						href: `/${data.network}/signup`
-					}
-				})}
-			</div>
+	<section class="col-span-full grid grid-cols-subgrid gap-4 xl:col-start-2 xl:col-end-9">
+		<!-- Text -->
+		<div
+			class="col-span-full row-start-1 items-center justify-self-center text-balance sm:justify-self-auto md:row-span-2 md:row-start-1 lg:col-span-4 lg:row-auto lg:content-center"
+		>
+			{@render textblock({
+				title: `Stake your tokens for ${APY}% APY`,
+				text: 'TODO: The APY is an estimate, and may fluctuate based on how many and much others are staking. Your 21 day lockup period starts when you unstake your EOS. You will always get back your staked EOS.',
+				button: {
+					text: 'Get a free account',
+					href: `/${data.network}/signup`
+				}
+			})}
+		</div>
 
-			<!-- Graphics -->
-			<div class="row-start-1 grid place-items-center @xl:col-start-2 @xl:justify-items-end">
-				<div class="grid grid-cols-12 grid-rows-6">
-					<!-- Big hex -->
-					<div
-						class="col-span-11 col-start-1 row-span-full grid place-items-center *:col-start-1 *:row-start-1"
-					>
-						<svg
-							class="h-full w-full object-contain"
-							width="296"
-							height="342"
-							viewBox="0 0 296 342"
-							fill="none"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<path
-								d="m148.245.755 147.437 85.123v170.245l-147.437 85.123L.809 256.123V85.878L148.245.755Z"
-								fill="#202429"
-							/>
-						</svg>
-						<div class="grid gap-2 text-center uppercase">
-							<img class="mb-3 h-14 place-self-center" src={EOS} alt="eos" />
-							<span class="text-base text-white/60">Total locked value</span>
-							<!-- TODO: add eos formatter -->
-							<span class="text-xl font-semibold">{TLV} EOS</span>
-						</div>
-					</div>
-
-					<!-- Small hex -->
-					<div
-						class="col-span-4 col-start-9 row-span-2 row-start-5 grid place-items-center *:col-start-1 *:row-start-1"
-					>
-						<svg
-							class="h-full w-full object-contain"
-							width="95"
-							height="110"
-							viewBox="0 0 95 110"
-							fill="none"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<path
-								d="m47.522.804 47.18 27.24v54.478l-47.18 27.239-47.18-27.24V28.044L47.522.804Z"
-								fill="#2B3035"
-							/>
-						</svg>
-						<div class="grid text-center uppercase">
-							<span class="text-base text-white/60">APY</span>
-							<span class="text-xl font-semibold">{APY}%</span>
-						</div>
-					</div>
-				</div>
-			</div>
+		<!-- Graphics -->
+		<div
+			class="col-span-full grid place-items-center sm:col-start-3 sm:row-start-1 md:col-start-5 md:row-span-2 md:row-start-2 lg:row-auto"
+		>
+			<TLVHex {TLV} {APY} />
 		</div>
 	</section>
 
 	<!-- Charts -->
-	<!-- TODO: add charts -->
+	<section class="col-span-full">
+		<Switcher>
+			<div>
+				{@render textblock({
+					title: `EOS Token`,
+					text: 'TODO: The APY is an estimate, and may fluctuate based on how many and much others are staking. Your 21 day lockup period starts when you unstake your EOS. You will always get back your staked EOS.',
+					button: {
+						text: 'Live network overview',
+						href: `#`
+					}
+				})}
+			</div>
+
+			<div>
+				{@render textblock({
+					title: `RAM Market`,
+					text: 'TODO: The APY is an estimate, and may fluctuate based on how many and much others are staking. Your 21 day lockup period starts when you unstake your EOS. You will always get back your staked EOS.',
+					button: {
+						text: 'Live network overview',
+						href: `#`
+					}
+				})}
+			</div>
+		</Switcher>
+	</section>
 
 	<!-- Performance grid -->
-	<section class="col-span-full grid grid-cols-subgrid @container">
+	<section class="col-span-full grid grid-cols-subgrid gap-8">
 		<!-- Text -->
-		<div class="col-span-3 grid place-items-center text-balance @xl:justify-items-start">
+		<div class=" col-span-full grid items-center text-balance lg:col-span-3 lg:row-start-1">
 			{@render textblock({
 				title: `EOS performance and stats`,
 				text: 'TODO: The APY is an estimate, and may fluctuate based on how many and much others are staking. Your 21 day lockup period starts when you unstake your EOS. You will always get back your staked EOS.',
@@ -225,28 +206,30 @@
 		{/snippet}
 
 		<!-- Grid -->
-		<div class="col-span-5 col-start-4 grid grid-cols-5 gap-4 xl:col-start-5">
-			<Card class="col-span-2">
+		<div
+			class="col-span-full grid grid-cols-2 gap-4 sm:grid-cols-5 lg:col-start-4 xl:col-span-5 xl:col-start-5"
+		>
+			<Card class="col-span-1 sm:col-span-2">
 				<!-- {@render gridItem({ title: 'Total locked value', value: `${TLV} EOS` })} -->
 				<div></div>
 			</Card>
-			<Card class="col-span-2 row-span-2">
+			<Card class="col-span-1 sm:col-span-2 sm:row-span-2">
 				{@render gridItem({ title: 'Daily active users', value: `${DAU}` })}
 			</Card>
-			<Card class="row-span-2">
+			<Card class="col-span-1 row-span-2 sm:col-span-1">
 				<!-- {@render gridItem({ title: 'Total locked value', value: `${TLV} EOS` })} -->
 				<div></div>
 			</Card>
-			<Card class="col-span-2 row-span-2">
+			<Card class="col-span-1 row-span-2 sm:col-span-2">
 				{@render gridItem({ title: 'RAM Pool', value: `${RAM_POOL} EOS` })}
 			</Card>
-			<Card class="col-span-3">
+			<Card class="col-span-1 sm:col-span-3">
 				{@render gridItem({ title: 'EOS Market Cap USD', value: `$${EOS_MARKET_CAP}` })}
 			</Card>
-			<Card class="col-span-3">
+			<Card class="col-span-1 sm:col-span-3">
 				{@render gridItem({ title: 'Current TPS', value: `${TPS}` })}
 			</Card>
-			<Card class="col-span-2">
+			<Card class="col-span-1 sm:col-span-2">
 				{@render gridItem({ title: 'Total locked value', value: `${TLV} EOS` })}
 			</Card>
 		</div>
