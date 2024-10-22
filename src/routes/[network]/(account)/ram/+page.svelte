@@ -82,7 +82,7 @@
 			<p>RAM Market Cap</p>
 			<p class="font-bold">{String(marketCapEOS) || '0 EOS'}</p>
 			<p class="font-bold">
-				$ {String(marketCapUSDValue) || '0.00'} USD
+				$ {String(marketCapUSDValue) || '0.00 USD'}
 			</p>
 		</Card>
 		<Card class="ml-2 h-32 w-full bg-gray-800">
