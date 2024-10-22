@@ -1,34 +1,39 @@
 <script lang="ts">
-	import Code from '$lib/components/code.svelte';
-	import { ActivityAction } from '$lib/types.js';
-
 	const { data } = $props();
 </script>
 
-{#each data.activity.actions as row}
-	{@const action = ActivityAction.from(row)}
-	<div class="my-4 space-y-2">
-		<h3 class="h3">
-			{action.contract}::{action.action}
-		</h3>
-		<p>
-			Time:
-			{action.timestamp}
-		</p>
-		<p>
-			Transaction:
-			<a href="/{data.network.shortname}/transaction/{action.id}">
-				{String(action.id).substring(0, 7)}
-			</a>
-		</p>
-		<p>
-			Action:
-			<a href="/{data.network.shortname}/transaction/{action.id}/{action.seq}">
-				{String(action.id).substring(0, 7)}/{action.seq}
-			</a>
-		</p>
-		<Code>{JSON.stringify(action.authorizations, null, 2)}</Code>
-		<Code>{JSON.stringify(action.data, null, 2)}</Code>
-		<Code>{JSON.stringify(action.raw, null, 2)}</Code>
-	</div>
-{/each}
+<table class="table-styles table-fixed">
+	<thead>
+		<tr>
+			<th class="w-20">ID</th>
+			<th>Date</th>
+			<th>Action</th>
+			<th>Data</th>
+		</tr>
+	</thead>
+	<tbody>
+		{#each data.activityActions as action}
+			<tr>
+				<td>
+					<a href="/{data.network}/transaction/{action.id}">{String(action.id).substring(0, 7)}</a>
+				</td>
+				<td>
+					{action.timestamp.toDate().toLocaleDateString(undefined, {
+						year: 'numeric',
+						month: 'short',
+						day: 'numeric',
+						hour: 'numeric',
+						minute: 'numeric',
+						second: 'numeric'
+					})}
+				</td>
+				<td>
+					{action.action}
+				</td>
+				<td>
+					{JSON.stringify(action.data, null, 2)}
+				</td>
+			</tr>
+		{/each}
+	</tbody>
+</table>

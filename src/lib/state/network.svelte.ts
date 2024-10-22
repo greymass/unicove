@@ -1,13 +1,6 @@
-import {
-	APIClient,
-	Asset,
-	FetchProvider,
-	Int128,
-	Serializer,
-	type AssetType
-} from '@wharfkit/antelope';
+import { APIClient, Asset, FetchProvider, Int128, type AssetType } from '@wharfkit/antelope';
 import { Chains, ChainDefinition, TokenMeta } from '@wharfkit/common';
-import { RAMState, Resources, REXState, PowerUpState, type SampleUsage } from '@wharfkit/resources';
+import { RAMState, Resources, REXState, PowerUpState } from '@wharfkit/resources';
 import { chainIdsToIndices } from '@wharfkit/session';
 import { snapOrigins } from '@wharfkit/wallet-plugin-metamask';
 
@@ -27,6 +20,7 @@ import {
 
 import { tokens } from '../../routes/[network]/api/tokens/tokens';
 import { calculateValue } from '$lib/utils';
+import { SampledUsage } from '$lib/types';
 
 export class NetworkState {
 	public chain: ChainDefinition;
@@ -43,18 +37,9 @@ export class NetworkState {
 	public resources?: Resources = $state();
 	public rexstate?: REXState = $state();
 	public powerupstate?: PowerUpState = $state();
-	public sampledUsage?: SampleUsage = $state();
+	public sampledUsage?: SampledUsage = $state();
 	public tokenmeta?: TokenMeta[] = $state();
 	public tokenstate?: DelphiOracleTypes.datapoints = $state();
-	public rexprice: Asset | undefined = $derived.by(() => {
-		if (this.rexstate && this.sampledUsage && this.chain.systemToken) {
-			return Asset.from(
-				this.rexstate.price_per(this.sampledUsage, 30000),
-				this.chain.systemToken.symbol
-			);
-		}
-		return undefined;
-	});
 	public tokenprice = $derived.by(() => {
 		return this.tokenstate ? Asset.fromUnits(this.tokenstate.median, '4,USD') : undefined;
 	});
@@ -122,9 +107,9 @@ export class NetworkState {
 		}
 
 		try {
-			this.sampledUsage = Serializer.objectify(json.sampleUsage);
+			this.sampledUsage = SampledUsage.from(json.sampleUsage);
 		} catch (error) {
-			console.log('SampleUsage Parse', error);
+			console.log('SampledUsage Parse', error);
 			console.log(json);
 		}
 

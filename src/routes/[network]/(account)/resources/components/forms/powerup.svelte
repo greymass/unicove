@@ -5,15 +5,17 @@
 	import Stack from '$lib/components/layout/stack.svelte';
 	import Transaction from '$lib/components/transaction.svelte';
 
-	import { Asset, Checksum256 } from '@wharfkit/antelope';
+	import { Checksum256 } from '@wharfkit/antelope';
 	import type { TransactResult } from '@wharfkit/session';
 
 	import { RentState } from './state.svelte';
 	import { RentType, ResourceType } from '../../types';
+	import { getPowerupPrice, getPowerupFrac } from '../../utils';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
 	import { getContext } from 'svelte';
+
 	import { preventDefault } from '$lib/utils';
 
 	const context = getContext<UnicoveContext>('state');
@@ -35,25 +37,19 @@
 				context.network.sampledUsage &&
 				context.network.chain.systemToken
 			) {
-				if (resourceType === ResourceType.CPU) {
-					rentState.frac = context.network.powerupstate.cpu.frac_by_ms(
-						context.network.sampledUsage,
-						Number(rentState.amount)
-					);
-					rentState.pricePerUnit = Asset.from(
-						context.network.powerupstate?.cpu.price_per_ms(context.network.sampledUsage, 1),
-						context.network.chain.systemToken?.symbol
-					);
-				} else {
-					rentState.frac = context.network.powerupstate.net.frac_by_kb(
-						context.network.sampledUsage,
-						Number(rentState.amount)
-					);
-					rentState.pricePerUnit = Asset.from(
-						context.network.powerupstate?.net.price_per_kb(context.network.sampledUsage, 1),
-						context.network.chain.systemToken?.symbol
-					);
-				}
+				rentState.frac = getPowerupFrac(
+					resourceType,
+					context.network.powerupstate,
+					context.network.sampledUsage,
+					Number(rentState.amount)
+				);
+
+				rentState.pricePerUnit = getPowerupPrice(
+					resourceType,
+					context.network.powerupstate,
+					context.network.sampledUsage,
+					context.network.chain.systemToken.symbol
+				);
 			}
 			rentState.balance = context.account.balance ? context.account.balance.liquid : undefined;
 		} else {

@@ -1,4 +1,4 @@
-import { ABI, Asset } from '@wharfkit/antelope';
+import { ABI, Asset, type NameType } from '@wharfkit/antelope';
 import yaml from 'yaml';
 
 export * from './strings';
@@ -82,4 +82,17 @@ export function detectEnvironment(): 'mobile' | 'desktop' {
 	];
 
 	return mobileKeywords.some((keyword) => userAgent.includes(keyword)) ? 'mobile' : 'desktop';
+}
+
+export interface TokenKeyParams {
+	contract: NameType;
+	symbol: NameType;
+}
+
+export function isSameToken(token1?: TokenKeyParams, token2?: TokenKeyParams): boolean {
+	if (!token1 || !token2) return false;
+	return (
+		String(token1.contract) === String(token2.contract) &&
+		String(token1.symbol) === String(token2.symbol)
+	);
 }
