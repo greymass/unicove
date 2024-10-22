@@ -16,7 +16,7 @@
 	import BytesInput from '$lib/components/input/bytes.svelte';
 	import Card from '$lib/components/layout/box/card.svelte';
 
-	import { SellRAMState } from '../state.svelte.js';
+	import { SellRAMState } from './state.svelte';
 	import { preventDefault } from '$lib/utils';
 
 	let bytesInput: BytesInput | undefined = $state();
