@@ -16,8 +16,18 @@ check: node_modules
 format: node_modules
 	bun run format
 
-node_modules:
-	bun install --yarn
+.PHONY: install
+install:
+	@if [ -z "$(package)" ]; then \
+		echo "Installing all dependencies:"; \
+		bun install --yarn; \
+	else \
+		echo "Installing package: $(package)"; \
+		bun install --yarn $(package); \
+	fi
+
+%:
+	$(MAKE) install package=$*
 
 codegen:
 	npx @wharfkit/cli generate -u $(API_EOS_CHAIN) -f src/lib/wharf/contracts/system.ts eosio
