@@ -35,7 +35,6 @@ jobs:
       - run: bun install
       - run: bun run build-paraglide
       - run: bunx tsc --noemit
-
   sveltekit-check:
     runs-on: ubuntu-latest
     steps:

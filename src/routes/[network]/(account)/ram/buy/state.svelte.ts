@@ -4,34 +4,41 @@ import { Chains, type ChainDefinition } from '@wharfkit/session';
 const defaultName = Name.from('');
 const defaultSymbol = Asset.Symbol.from('0,UNKNOWN');
 const defaultQuantity = Asset.fromUnits(0, defaultSymbol);
+const kbSymbol = Asset.Symbol.from('3,KB');
+const defaultKBAmount = Asset.fromUnits(0, kbSymbol);
 
 export class BuyRAMState {
 	public payer: Name = $state(defaultName);
 	public receiver: Name = $state(defaultName);
-	public bytes: number | undefined = $state(undefined);
 	public tokens: Asset = $state(defaultQuantity);
 	public balance: Asset = $state(defaultQuantity);
 	public chain: ChainDefinition = $state(Chains.EOS);
 	public pricePerKB: Asset = $state(defaultQuantity);
-	public format: 'asset' | 'units' = $state('asset');
+	public format: 'asset' | 'bytes' = $state('asset');
+
+	public bytes: number | undefined = $state();
 
 	public pricePerByte: Asset = $derived(
-		Asset.fromUnits(this.pricePerKB.value / 1000, this.pricePerKB.symbol)
+		Asset.fromUnits(Number(this.pricePerKB.units) / 1000, this.pricePerKB.symbol)
+	);
+
+	public expectedBytes: number | undefined = $derived(
+		this.format === 'asset' && this.pricePerKB.value
+			? Math.round((this.tokens.value / this.pricePerKB.value) * 1000)
+			: this.bytes
 	);
 
 	public bytesValue: Asset = $derived(
-		this.format === 'asset' || !this.bytes || !this.pricePerKB.value
+		this.format === 'asset' || !this.pricePerKB.value
 			? Asset.from(this.tokens.value * 0.995, this.chain.systemToken?.symbol || '0,UNKNOWN')
 			: Asset.from(
-					(this.bytes * this.pricePerKB.value) / 1000,
+					((this.bytes || 0) * this.pricePerKB.value) / 1000,
 					this.chain.systemToken?.symbol || '0,UNKNOWN'
 				)
 	);
 
-	public bytesToBuy: number = $derived(
-		this.format === 'units' || !this.bytesValue.value || !this.pricePerKB.value
-			? this.bytes || 0
-			: Number(((this.bytesValue.value / this.pricePerKB.value) * 1000).toFixed(0))
+	public kbs: Asset = $derived(
+		this.bytes ? Asset.from(this.bytes / 1000, kbSymbol) : defaultKBAmount
 	);
 
 	public fee: Asset = $derived(
@@ -52,7 +59,7 @@ export class BuyRAMState {
 
 	public valid: boolean = $derived(
 		!!(
-			((this.format === 'units' && this.bytes) ||
+			((this.format === 'bytes' && this.bytes) ||
 				(this.format === 'asset' && this.tokens.value > 0)) &&
 			this.bytesCost.units.lte(this.balance.units) &&
 			this.payer.value &&

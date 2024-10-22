@@ -10,8 +10,8 @@
 		const network = String(data.network);
 		return [
 			{ href: `/${network}/ram`, text: 'Overview' },
-			{ href: `/${network}/ram/buy/tokens`, text: 'Buy RAM' },
-			{ href: `/${network}/ram/sell/tokens`, text: 'Sell RAM' }
+			{ href: `/${network}/ram/buy`, text: 'Buy RAM' },
+			{ href: `/${network}/ram/sell`, text: 'Sell RAM' }
 		];
 	});
 
@@ -20,9 +20,7 @@
 	let options = $derived(
 		tabOptions.map((option) => ({
 			...option,
-			active:
-				`/${$page.url.pathname.split('/').slice(2).slice(0, -1).join('/')}` ===
-				option.href.split('/').slice(0, -1).join('/')
+			active: $page.url.pathname.replace(/^\/[^/]+/, '') === option.href
 		}))
 	);
 

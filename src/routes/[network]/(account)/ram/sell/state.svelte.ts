@@ -3,33 +3,33 @@ import { Chains, type ChainDefinition } from '@wharfkit/session';
 
 const defaultName = Name.from('');
 const defaultSymbol = Asset.Symbol.from('0,UNKNOWN');
-const defaultQuantity = Asset.fromUnits(0, defaultSymbol);
+const defaultTokens = Asset.fromUnits(0, defaultSymbol);
 
 export class SellRAMState {
 	public account: Name = $state(defaultName);
-	public bytes: number | undefined = $state(undefined);
-	public tokens: Asset = $state(defaultQuantity);
+	public bytes: number | undefined = $state(0);
+	public tokens: Asset = $state(defaultTokens);
 	public max: number = $state(0);
 	public chain: ChainDefinition = $state(Chains.EOS);
-	public pricePerKB: Asset = $state(defaultQuantity);
-	public format: 'asset' | 'units' = $state('asset');
+	public pricePerKB: Asset = $state(defaultTokens);
+	public format: 'asset' | 'bytes' = $state('asset');
 
-	public bytesToSell: number = $derived(
-		this.format === 'units' || !this.tokens.value || !this.pricePerKB.value
-			? this.bytes || 0
-			: Math.floor((this.tokens.value * 1000) / this.pricePerKB.value)
+	public maxInKBs: Asset = $derived(Asset.fromUnits(this.max, '3,KB'));
+
+	public bytesToSell: number | undefined = $derived(
+		this.format === 'asset' && this.pricePerKB.value
+			? Math.floor((this.tokens.value / this.pricePerKB.value) * 1000)
+			: this.bytes || 0
 	);
+
+	public kbsToSell: Asset | undefined = $derived(Asset.fromUnits(this.bytesToSell || 0, '3,KB'));
 
 	public maxValue: Asset = $derived(
-		Asset.fromUnits((this.max * this.pricePerKB.units.value) / 1000, this.pricePerKB.symbol)
-	);
-
-	public pricePerByte: Asset = $derived(
-		Asset.fromUnits(this.pricePerKB.value / 1000, this.pricePerKB.symbol)
+		Asset.from(this.max * this.pricePerKB.value, this.pricePerKB.symbol)
 	);
 
 	public bytesValue: Asset = $derived(
-		this.format === 'units' && this.bytes !== undefined
+		this.format === 'bytes' && this.bytes !== undefined && this.pricePerKB.value
 			? Asset.from(
 					(this.bytes * this.pricePerKB.value) / 1000,
 					this.chain.systemToken?.symbol || '0,UNKNOWN'
@@ -48,21 +48,14 @@ export class SellRAMState {
 		)
 	);
 
-	readonly insufficientRAMForSale: boolean = $derived(
-		this.format === 'units'
-			? this.bytes !== undefined && this.bytes > this.max
-			: this.bytesValue.value > (this.max * this.pricePerKB.value) / 1000
+	public insufficientRAMForSale: boolean = $derived(
+		this.bytes !== undefined && this.bytes > this.max
 	);
 
 	public insufficientRAM: boolean = $derived(!!this.max && this.insufficientRAMForSale);
 
 	public valid: boolean = $derived(
-		!!(
-			((this.format === 'units' && this.bytes !== undefined && this.bytes > 0) ||
-				(this.format === 'asset' && this.tokens.value > 0)) &&
-			!this.insufficientRAM &&
-			this.account.value
-		)
+		!!(this.bytes !== undefined && this.bytes > 0 && !this.insufficientRAM && this.account.value)
 	);
 
 	constructor(chain: ChainDefinition) {
@@ -79,11 +72,7 @@ export class SellRAMState {
 	toJSON() {
 		return Serializer.objectify({
 			account: this.account,
-			bytes: Int64.from(
-				this.format === 'units'
-					? this.bytes || 0
-					: Math.floor((this.tokens.value * 1000) / this.pricePerKB.value)
-			)
+			bytes: Int64.from(this.format === 'bytes' ? this.bytes || 0 : this.bytesToSell)
 		});
 	}
 }
