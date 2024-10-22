@@ -6,6 +6,7 @@
 	import NumberInput from '$lib/components/input/number.svelte';
 	import Switch from '$lib/components/input/switch.svelte';
 	import Checkbox from '$lib/components/input/checkbox.svelte';
+	import BytesInput from '$lib/components/input/bytes.svelte';
 
 	import { Asset } from '@wharfkit/antelope';
 	import AssetInput from '$lib/components/input/asset.svelte';
@@ -22,6 +23,8 @@
 
 	let numberValue: number | undefined = $state(undefined);
 	let controlledSwitch = $state(true);
+
+	let bytesValue = $state(0);
 </script>
 
 <Stack id="inputs">
@@ -54,6 +57,11 @@
 	<Stack>
 		<h2 class="h2">Number Input</h2>
 		<NumberInput id="numberInput" bind:value={numberValue} min={0} max={100} step={1} debug />
+	</Stack>
+
+	<Stack>
+		<h2 class="h2">Bytes Input</h2>
+		<BytesInput id="bytesInput" bind:value={bytesValue} debug />
 	</Stack>
 
 	<form>

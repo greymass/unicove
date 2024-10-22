@@ -4,6 +4,7 @@
 
 	import { getSetting } from '$lib/state/settings.svelte.js';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
+
 	import SummarySellRAM from '$lib/components/summary/eosio/sellram.svelte';
 
 	import Button from '$lib/components/button/button.svelte';
@@ -11,21 +12,23 @@
 	import Label from '$lib/components/input/label.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
 	import Transaction from '$lib/components/transaction.svelte';
-	import NumberInput from '$lib/components/input/number.svelte';
+	import AssetInput from '$lib/components/input/asset.svelte';
+	import BytesInput from '$lib/components/input/bytes.svelte';
+	import Card from '$lib/components/layout/box/card.svelte';
 
-	import { SellRAMState } from '../state.svelte.js';
+	import { SellRAMState } from './state.svelte';
 	import { preventDefault } from '$lib/utils';
+
+	let bytesInput: BytesInput | undefined = $state();
+	let assetInput: AssetInput | undefined = $state();
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
-	const debugMode = getSetting('debug-mode', false);
+	const debugMode = getSetting('debug-mode', true);
 
 	const sellRamState: SellRAMState = $state(new SellRAMState(data.network.chain));
 
-	sellRamState.format = 'units';
-
 	let transactionId: Checksum256 | undefined = $state();
-	let bytesInput: NumberInput | undefined = $state();
 
 	async function handleSellRAM() {
 		if (!context.wharf || !context.wharf.session) {
@@ -48,7 +51,8 @@
 
 	function resetState() {
 		sellRamState.reset();
-		bytesInput?.set();
+		bytesInput?.reset();
+		assetInput?.reset();
 	}
 
 	$effect(() => {
@@ -65,6 +69,17 @@
 			sellRamState.pricePerKB = data.network.ramprice.eos;
 		}
 	});
+
+	function setAssetAmount() {
+		sellRamState.format = 'asset';
+		sellRamState.bytes = sellRamState.bytesToSell;
+	}
+
+	function setBytesAmount() {
+		sellRamState.format = 'bytes';
+		sellRamState.tokens = sellRamState.bytesValue;
+		assetInput?.set(sellRamState.bytesValue);
+	}
 </script>
 
 {#if transactionId}
@@ -73,49 +88,54 @@
 
 <form onsubmit={preventDefault(handleSellRAM)}>
 	<Stack class="gap-3">
-		<Label for="bytesInput">Amount to sell (Bytes)</Label>
-		<NumberInput
-			id="bytesInput"
-			bind:this={bytesInput}
-			bind:value={sellRamState.bytes}
-			placeholder="0"
-			autofocus
-		/>
+		<Label for="bytesInput">Amount to sell</Label>
+		<div class="flex gap-4">
+			<div class="flex-1">
+				<AssetInput
+					bind:value={sellRamState.tokens}
+					bind:this={assetInput}
+					oninput={setAssetAmount}
+					autofocus
+				/>
+			</div>
+			<div class="flex-1">
+				<BytesInput
+					bind:value={sellRamState.bytes}
+					bind:this={bytesInput}
+					oninput={setBytesAmount}
+				/>
+			</div>
+		</div>
 		{#if sellRamState.insufficientRAM}
 			<p class="text-red-500">Insufficient RAM available. Please enter a smaller amount.</p>
 		{/if}
 		<p>
-			Available RAM:
+			RAM available:
 			{#if context.account}
-				{sellRamState.max} Bytes
+				{sellRamState.maxInKBs}
 			{:else}
-				0 Bytes
-			{/if}
-		</p>
-		<p>
-			Value of available RAM:
-			{#if context.account}
-				{sellRamState.maxValue}
-			{:else}
-				0 Bytes
+				0 KB
 			{/if}
 		</p>
 	</Stack>
 
 	<Stack class="mt-4 gap-3">
-		<h3 class="h3">Details</h3>
-		<div class="grid grid-cols-2 gap-2">
-			<span>Price for 1000 bytes:</span>
-			<span>{sellRamState.pricePerKB} / KB</span>
-			<span>RAM to be sold:</span>
-			<span>{sellRamState.bytesToSell} Bytes</span>
-			<span>RAM Value:</span>
-			<span>{sellRamState.bytesValue}</span>
-			<span>Network Fee (0.5%)</span>
-			<span>{sellRamState.fee}</span>
-			<span>Expected To Receive:</span>
-			<span>~ {sellRamState.expectedToReceive}</span>
-		</div>
+		<Card>
+			<h3 class="h3">Details</h3>
+			<div class="grid grid-cols-2 gap-2">
+				<span>RAM Price:</span>
+				<span>{sellRamState.pricePerKB} / KB</span>
+				<span>RAM to be sold:</span>
+				<span>{sellRamState.kbsToSell}</span>
+				<span>RAM Value:</span>
+				<span>{sellRamState.bytesValue}</span>
+				<span>Network Fee (0.5%)</span>
+				<span>{sellRamState.fee}</span>
+				<span>Expected To Receive:</span>
+				<span>~ {sellRamState.expectedToReceive}</span>
+			</div>
+		</Card>
+
 		{#if sellRamState.valid}
 			<SummarySellRAM action={{ data: sellRamState.toJSON() }} />
 		{/if}
@@ -133,7 +153,6 @@
 					max: sellRamState.max,
 					chain: sellRamState.chain,
 					pricePerKB: sellRamState.pricePerKB,
-					pricePerByte: sellRamState.pricePerByte,
 					bytesValue: sellRamState.bytesValue,
 					insufficientRAM: sellRamState.insufficientRAM,
 					valid: sellRamState.valid,
