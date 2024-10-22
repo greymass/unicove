@@ -1,6 +1,7 @@
 <script lang="ts">
 	import '../app.css';
 	import 'inter-ui/inter-latin.css';
+	import '@fontsource/jetbrains-mono/600.css'; // Semibold
 	import extend from 'just-extend';
 	import { setContext, untrack } from 'svelte';
 	import { Head, type SeoConfig } from 'svead';

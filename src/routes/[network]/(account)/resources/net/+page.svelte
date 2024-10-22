@@ -13,7 +13,6 @@
 <PageHeader title="Network Resources" />
 <Stack class="mt-10">
 	<State resource={ResourceType.NET} />
-
 	<Prices
 		resource={ResourceType.NET}
 		powerupLink="/{network}/resources/net/powerup"

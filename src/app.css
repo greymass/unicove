@@ -14,23 +14,23 @@
 	/* Headings are defined by class instead of tag to preserve semantic html independent of style */
 	/* Typography */
 	.h1 {
-		@apply text-5xl font-semibold;
+		@apply text-5xl font-semibold leading-none;
 	}
 
 	.h2 {
-		@apply text-3xl font-semibold;
+		@apply text-3xl font-semibold leading-none;
 	}
 
 	.h3 {
-		@apply text-2xl font-semibold;
+		@apply text-2xl font-semibold leading-none;
 	}
 
 	.h4 {
-		@apply text-lg font-medium leading-7;
+		@apply text-lg font-medium leading-none;
 	}
 
 	.h5 {
-		@apply text-base font-medium leading-snug;
+		@apply text-base font-medium leading-none;
 	}
 
 	.caption {
@@ -73,11 +73,45 @@
 		@apply flex flex-wrap gap-4;
 	}
 
+	/* table styles */
+	:where(.table-styles) {
+		@apply w-full table-auto overflow-x-auto;
+
+		thead tr {
+			@apply bg-none;
+		}
+
+		tr,
+		.table-row-styles {
+			@apply table-row-border table-row-background;
+		}
+
+		th,
+		.table-head-styles {
+			@apply py-1.5 pl-2 pr-2 text-left text-base font-medium text-mineShaft-200/60 first:pl-0 last:pr-0;
+		}
+
+		td,
+		.table-cell-styles {
+			@apply py-3 pl-2 pr-2 text-base first:pl-0 last:pr-0;
+		}
+	}
+}
+
+@layer utilities {
 	.px-page {
 		@apply px-4;
 	}
 
 	.mx-page {
 		@apply px-4;
+	}
+
+	.table-row-border {
+		@apply border-b border-neutral-300/10 last:border-none;
+	}
+
+	.table-row-background {
+		@apply bg-gradient-to-r from-transparent to-transparent odd:via-mineShaft-950 hover:via-skyBlue-500/10 data-[clickable=true]:cursor-pointer data-[active=true]:via-skyBlue-500/10 data-[hover-effect=false]:hover:via-transparent data-[hover-effect=false]:odd:hover:via-mineShaft-950;
 	}
 }

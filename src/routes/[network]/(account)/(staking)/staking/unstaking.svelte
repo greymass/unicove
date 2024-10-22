@@ -2,11 +2,8 @@
 
 <script lang="ts">
 	import type { HTMLAttributes } from 'svelte/elements';
-
 	import { Card } from '$lib/components/layout';
 	import Button from '$lib/components/button/button.svelte';
-	import * as Table from '$lib/components/table';
-
 	import type { UnstakingRecord } from './utils';
 
 	interface Props extends HTMLAttributes<HTMLDivElement> {
@@ -18,19 +15,19 @@
 </script>
 
 <Card {...props} title="Unstaking Balances">
-	<Table.Root class="table-auto">
-		<Table.Head class="border-b-2 border-shark-100/10">
-			<Table.Row class="caption font-medium">
-				<Table.Header class="text-left">Amount</Table.Header>
-				<Table.Header class="text-right">Date available</Table.Header>
-			</Table.Row>
-		</Table.Head>
-		<Table.Body>
+	<table class="table-styles">
+		<thead class="border-b-2 border-shark-100/10">
+			<tr class="caption font-medium">
+				<th class="text-left">Amount</th>
+				<th class="text-right">Date available</th>
+			</tr>
+		</thead>
+		<tbody>
 			{#each records as record}
 				{#if !record.savings}
-					<Table.Row>
-						<Table.Cell>{record.balance}</Table.Cell>
-						<Table.Cell class="text-right">
+					<tr>
+						<td>{record.balance}</td>
+						<td class="text-right">
 							{record.date
 								? record.date.toLocaleDateString(undefined, {
 										weekday: 'long',
@@ -39,12 +36,12 @@
 										day: 'numeric'
 									})
 								: '--'}
-						</Table.Cell>
-					</Table.Row>
+						</td>
+					</tr>
 				{/if}
 			{/each}
-		</Table.Body>
-	</Table.Root>
+		</tbody>
+	</table>
 	{#if href}
 		<Button {href} variant="secondary" class="text-skyBlue-500">Withdraw</Button>
 	{/if}

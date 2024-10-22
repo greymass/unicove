@@ -10,9 +10,10 @@
 		children: Snippet;
 		open: Readable<boolean>;
 		trigger: AnyMeltElement;
+		class?: string;
 	}
 
-	const { trigger, open, ...props }: Props = $props();
+	const { trigger, open, class: className = '', ...props }: Props = $props();
 </script>
 
 <button
@@ -37,6 +38,7 @@
 	data-[variant=form]:rounded-lg
 	data-[variant=pill]:rounded-full
 	data-[variant=form]:py-4
+	{className}
 	"
 	data-variant={props.variant}
 	use:melt={$trigger}

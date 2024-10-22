@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import * as Table from '$lib/components/table';
 	import { Card, Stack } from '$lib/components/layout';
 	import { API } from '@wharfkit/antelope';
 	import Pageheader from '$lib/components/pageheader.svelte';
@@ -30,22 +29,20 @@
 
 	<Stack>
 		{#if state}
-			<Table.Root class="table-auto">
-				<Table.Body>
-					<Table.Row>
-						<Table.Cell>Reversible Blocks</Table.Cell>
-						<Table.Cell
-							>{state.head_block_num.subtracting(state.last_irreversible_block_num)}</Table.Cell
-						>
-					</Table.Row>
+			<table class="table-styles">
+				<tbody>
+					<tr>
+						<td>Reversible Blocks</td>
+						<td>{state.head_block_num.subtracting(state.last_irreversible_block_num)}</td>
+					</tr>
 					{#each Object.keys(state) as index}
-						<Table.Row>
-							<Table.Cell>{index}</Table.Cell>
-							<Table.Cell>{state[index as keyof typeof state]}</Table.Cell>
-						</Table.Row>
+						<tr>
+							<td>{index}</td>
+							<td>{state[index as keyof typeof state]}</td>
+						</tr>
 					{/each}
-				</Table.Body>
-			</Table.Root>
+				</tbody>
+			</table>
 		{/if}
 	</Stack>
 </Stack>

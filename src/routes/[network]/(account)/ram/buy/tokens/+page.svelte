@@ -5,7 +5,6 @@
 	import { getSetting } from '$lib/state/settings.svelte.js';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 
-	import SummaryBuyRAMBytes from '$lib/components/summary/eosio/buyrambytes.svelte';
 	import SummaryBuyRAM from '$lib/components/summary/eosio/buyram.svelte';
 
 	import Button from '$lib/components/button/button.svelte';
@@ -14,22 +13,20 @@
 	import Stack from '$lib/components/layout/stack.svelte';
 	import Transaction from '$lib/components/transaction.svelte';
 	import AssetInput from '$lib/components/input/asset.svelte';
-	import BytesInput from '$lib/components/input/bytes.svelte';
-	import Card from '$lib/components/layout/box/card.svelte';
 
 	import { BuyRAMState } from '../state.svelte.js';
 	import { preventDefault } from '$lib/utils';
 
-	let assetInput: AssetInput | undefined = $state();
-	let bytesInput: BytesInput | undefined = $state();
-
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
-	const debugMode = getSetting('debug-mode', true);
+	const debugMode = getSetting('debug-mode', false);
 
-	let buyRamState: BuyRAMState = $state(new BuyRAMState(data.network.chain));
+	const buyRamState: BuyRAMState = $state(new BuyRAMState(data.network.chain));
+
+	buyRamState.format = 'asset';
 
 	let transactionId: Checksum256 | undefined = $state();
+	let assetInput: AssetInput | undefined = $state();
 
 	async function handleBuyRAM() {
 		if (!context.wharf || !context.wharf.session) {
@@ -39,10 +36,7 @@
 
 		try {
 			const transactionResult = await context.wharf.transact({
-				action: data.network.contracts.system.action(
-					buyRamState.format === 'asset' ? 'buyram' : 'buyrambytes',
-					buyRamState.toJSON()
-				)
+				action: data.network.contracts.system.action('buyram', buyRamState.toJSON())
 			});
 
 			transactionId = transactionResult.resolved?.transaction.id;
@@ -55,8 +49,7 @@
 
 	function resetState() {
 		buyRamState.reset();
-		bytesInput?.reset();
-		assetInput?.reset();
+		assetInput?.set(null);
 	}
 
 	$effect(() => {
@@ -77,17 +70,6 @@
 			buyRamState.pricePerKB = data.network.ramprice.eos;
 		}
 	});
-
-	function setAssetAmount() {
-		buyRamState.format = 'asset';
-		buyRamState.bytes = buyRamState.expectedBytes;
-	}
-
-	function setBytesAmount() {
-		buyRamState.format = 'bytes';
-		buyRamState.tokens = buyRamState.bytesValue;
-		assetInput?.set(buyRamState.bytesValue);
-	}
 </script>
 
 {#if transactionId}
@@ -96,24 +78,14 @@
 
 <form onsubmit={preventDefault(handleBuyRAM)}>
 	<Stack class="gap-3">
-		<Label for="bytesInput">Amount to buy</Label>
-		<div class="flex gap-4">
-			<div class="flex-1">
-				<AssetInput
-					bind:value={buyRamState.tokens}
-					bind:this={assetInput}
-					oninput={setAssetAmount}
-					autofocus
-				/>
-			</div>
-			<div class="flex-1">
-				<BytesInput
-					bind:value={buyRamState.bytes}
-					bind:this={bytesInput}
-					oninput={setBytesAmount}
-				/>
-			</div>
-		</div>
+		<Label for="assetInput">Amount to buy</Label>
+		<AssetInput
+			id="assetInput"
+			bind:this={assetInput}
+			bind:value={buyRamState.tokens}
+			placeholder="0.0000 EOS"
+			autofocus
+		/>
 		{#if buyRamState.insufficientBalance}
 			<p class="text-red-500">Insufficient balance. Please enter a smaller amount.</p>
 		{/if}
@@ -128,26 +100,19 @@
 	</Stack>
 
 	<Stack class="mt-4 gap-3">
-		<Card>
-			<h3 class="h3">Details</h3>
-			<div class="grid grid-cols-2 gap-2">
-				<span>RAM Price:</span>
-				<span>{buyRamState.pricePerKB} / KB</span>
-				<span>Price for {buyRamState.kbs}:</span>
-				<span>{buyRamState.bytesValue}</span>
-				<span>Network Fee (0.5%)</span>
-				<span>{buyRamState.fee}</span>
-				<span>Total Cost</span>
-				<span>{buyRamState.bytesCost}</span>
-			</div>
-		</Card>
-
+		<h3 class="h3">Details</h3>
+		<div class="grid grid-cols-2 gap-2">
+			<span>Price for 1000 Bytes:</span>
+			<span>{buyRamState.pricePerKB} / KB</span>
+			<span>Estimated Bytes:</span>
+			<span>{buyRamState.bytesToBuy} Bytes</span>
+			<span>Network Fee (0.5%)</span>
+			<span>{buyRamState.fee}</span>
+			<span>Total Cost</span>
+			<span>{buyRamState.bytesCost}</span>
+		</div>
 		{#if buyRamState.valid}
-			{#if buyRamState.format === 'asset'}
-				<SummaryBuyRAM action={{ data: buyRamState.toJSON() }} />
-			{:else}
-				<SummaryBuyRAMBytes action={{ data: buyRamState.toJSON() }} />
-			{/if}
+			<SummaryBuyRAM action={{ data: buyRamState.toJSON() }} />
 		{/if}
 	</Stack>
 
@@ -160,12 +125,11 @@
 				{
 					payer: buyRamState.payer,
 					receiver: buyRamState.receiver,
-					bytes: buyRamState.bytes,
+					tokens: buyRamState.tokens,
 					balance: buyRamState.balance,
 					chain: buyRamState.chain,
 					pricePerKB: buyRamState.pricePerKB,
-					pricePerByte: buyRamState.pricePerByte,
-					bytesValue: buyRamState.bytesValue,
+					estimatedBytes: buyRamState.bytes,
 					valid: buyRamState.valid,
 					insufficientBalance: buyRamState.insufficientBalance,
 					balances: context.account?.balances

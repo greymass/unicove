@@ -36,7 +36,7 @@
 		if (context.account) {
 			items.splice(1, 0, {
 				href: `/${network}/account/${context.account.name}`,
-				text: 'My Account'
+				text: 'Account'
 			});
 		}
 

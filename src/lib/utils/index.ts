@@ -1,5 +1,6 @@
-import { Asset, type ABI } from '@wharfkit/antelope';
-import yaml from 'yaml';
+import { Asset, type NameType } from '@wharfkit/antelope';
+export * from './strings';
+export * from './ricardian';
 
 export function calculateValue(balance: Asset, currency: Asset): Asset {
 	return Asset.from(
@@ -31,32 +32,15 @@ export function preventDefault<TThis>(fn: (this: TThis, event: Event) => void) {
 	};
 }
 
-export const ricardianRegExp = new RegExp(/---(\n.*?\n)---\n\n(.*)+/s);
-
-export interface RicardianMeta {
-	spec_version: string;
-	title: string;
-	icon: string;
-	summary: string;
+export interface TokenKeyParams {
+	contract: NameType;
+	symbol: NameType;
 }
 
-export interface RicardianData {
-	meta?: RicardianMeta;
-	text?: string;
-}
-
-export function parseRicardian(action: ABI.Action | undefined): RicardianData | undefined {
-	if (!action) {
-		return undefined;
-	}
-
-	const ricardianData = action ? ricardianRegExp.exec(action.ricardian_contract) : [];
-
-	const meta: RicardianMeta =
-		ricardianData && ricardianData.length ? yaml.parse(ricardianData[1]) : undefined;
-	const text = ricardianData && ricardianData.length ? ricardianData[2] : undefined;
-	return {
-		meta,
-		text
-	};
+export function isSameToken(token1?: TokenKeyParams, token2?: TokenKeyParams): boolean {
+	if (!token1 || !token2) return false;
+	return (
+		String(token1.contract) === String(token2.contract) &&
+		String(token1.symbol) === String(token2.symbol)
+	);
 }

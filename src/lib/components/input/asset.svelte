@@ -3,6 +3,7 @@
 	import type { ComponentProps } from 'svelte';
 	import TextInput from './text.svelte';
 	import Big from 'big.js';
+	import Code from '../code.svelte';
 
 	interface AssetInputProps extends ComponentProps<typeof TextInput> {
 		min?: number;
@@ -147,26 +148,24 @@
 
 {#if debug}
 	<h3>Component State</h3>
-	<pre>
-
-input (string):   "{input}"
-input (number):   "{number}"
+	<!-- prettier-ignore -->
+	<Code>
+input (string): "{input}"
+input (number): "{number}"
 input (decimals): {decimals}
-input (min):      {min}
+input (min): {min}
 input (minUnits): {minUnits}
-input (max):      {max}
+input (max): {max}
 input (maxUnits): {maxUnits}
-token symbol:     {symbol}
-precision:        {symbol.precision}
-formatted:        {formatted}
-Asset:            {asset}
-    
----
-
-Valid Input:       {satisfies}
-Valid Number:      {satisfiesNumber}
-Valid Precision:   {satisfiesPrecision}
-Valid Minimum:     {satisfiesMinimum}
-Valid Maximum:     {satisfiesMaximum}
-</pre>
+token symbol: {symbol}
+precision: {symbol.precision}
+formatted: {formatted}
+Asset: {asset}
+--- 
+Valid Input: {satisfies}
+Valid Number: {satisfiesNumber}
+Valid Precision: {satisfiesPrecision}
+Valid Minimum: {satisfiesMinimum}
+Valid Maximum: {satisfiesMaximum}
+	</Code>
 {/if}
