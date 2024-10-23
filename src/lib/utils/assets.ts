@@ -1,9 +1,9 @@
 import type { Asset } from '@wharfkit/antelope';
 
-export function formatAsset(asset: Asset) {
+export function formatAsset(asset: Asset, decimals = 0) {
 	const formattedValue = asset.value.toLocaleString('en-US', {
-		minimumFractionDigits: asset.symbol.precision,
-		maximumFractionDigits: asset.symbol.precision
+		minimumFractionDigits: decimals,
+		maximumFractionDigits: decimals
 	});
 	return `${formattedValue} ${asset.symbol.code}`;
 }

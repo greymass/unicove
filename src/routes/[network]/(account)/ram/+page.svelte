@@ -88,7 +88,7 @@
 		</Card>
 		<Card class="ml-2 h-32 w-full bg-gray-800">
 			<p class="text-gray-400">RAM Supply</p>
-			<p class="-mt-8 font-bold text-white">{ramSupply ? formatAsset(ramSupply) : '0 GB'}</p>
+			<p class="-mt-8 font-bold text-white">{ramSupply ? formatAsset(ramSupply, 3) : '0 GB'}</p>
 		</Card>
 	</div>
 </div>
