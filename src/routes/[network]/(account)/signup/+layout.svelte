@@ -20,30 +20,31 @@
 	let steps: SignupStep[] = $derived([
 		{
 			title: 'Get Started',
-			path: `/${locale}/${data.network}/signup`
+			path: `/${data.network}/signup`
 		},
 		{
 			title: 'Select Environment',
-			path: `/${locale}/${data.network}/signup/wallets`
+			path: `/${data.network}/signup/wallets`
 		},
 		{
 			title: 'Select Wallet',
-			path: `/${locale}/${data.network}/signup/wallets/${getWalletTypeFromPath($page.url.pathname)?.type}`
+			path: `/${data.network}/signup/wallets/${getWalletTypeFromPath($page.url.pathname)?.type}`
 		},
 		{
 			title: 'Setup Wallet',
-			path: `/${locale}/${data.network}/signup/wallets/${getWalletTypeFromPath($page.url.pathname)?.type}/${getWalletNameFromPath($page.url.pathname)?.toLowerCase()}`
+			path: `/${data.network}/signup/wallets/${getWalletTypeFromPath($page.url.pathname)?.type}/${getWalletNameFromPath($page.url.pathname)?.toLowerCase()}`
 		}
 	]);
 
 	function getCurrentStep() {
 		return steps.find((step) => {
-			return $page.url.pathname === step.path;
+			return $page.url.pathname.replace(`/${locale}`, '') === step.path;
 		});
 	}
 
 	function isFutureStep(stepIndex: number) {
 		const currentStep = getCurrentStep();
+		console.log({ currentStep, stepIndex });
 		if (!currentStep) return false;
 		return stepIndex > steps.indexOf(currentStep);
 	}
