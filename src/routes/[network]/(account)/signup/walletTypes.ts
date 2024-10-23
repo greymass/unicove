@@ -63,6 +63,12 @@ export const walletTypes: Record<string, WalletType> = {
 		],
 		wallets: [
 			{
+				name: 'MetaMask',
+				route: 'signup/wallets/extensions/metamask',
+				logo: MetaMaskLogo,
+				description: 'Secure and easy-to-use browser extension wallet.'
+			},
+			{
 				name: 'Anchor',
 				route: 'signup/wallets/desktop/anchor',
 				logo: AnchorLogo,
