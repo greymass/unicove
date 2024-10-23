@@ -1,77 +1,74 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-	import Button from '$lib/components/button/button.svelte';
+	import Pageheader from '$lib/components/pageheader.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
-	import { walletTypes } from '../../../walletTypes';
-	import { ChevronRight } from 'lucide-svelte';
+	import Button from '$lib/components/button/button.svelte';
 
-	const { data } = $props();
-
-	// const tabOptions = $derived.by(() => {
-	// 	const network = String(data.network);
-	// 	return Object.entries(walletTypes).map(([key, value]) => ({
-	// 		href: `/${network}/signup/${key}`,
-	// 		text: value.title
-	// 	}));
-	// });
-
-	const defaultWalletType = Object.keys(walletTypes)[0];
-
-	let currentTab = $derived($page.params.walletType || defaultWalletType);
-
-	// let options = $derived(
-	// 	tabOptions.map((option) => ({
-	// 		...option,
-	// 		active: option.href.split('/')[3] === currentTab
-	// 	}))
-	// );
-
-	let currentWalletType = $derived(
-		walletTypes[currentTab as keyof typeof walletTypes] || walletTypes[defaultWalletType]
-	);
+	let { data } = $props();
 </script>
 
-<Stack class="gap-2">
-	<h3 class="h3">Sign Up with {currentWalletType.title}</h3>
-	<p>{currentWalletType.description}</p>
-</Stack>
-
-<Stack class="gap-2">
-	<h3 class="h3">Benefits</h3>
-
-	<ul class="list-inside list-disc">
-		{#each currentWalletType.benefits as benefit}
-			<li class="">{benefit}</li>
-		{/each}
-	</ul>
-</Stack>
-
 <Stack>
-	<h3 class="h2">Available Wallets</h3>
-	<Stack>
-		{#each currentWalletType.wallets as wallet}
-			<a
-				href="/{data.network}/{wallet.route}"
-				class="group grid grid-cols-[auto_1fr_auto] items-center gap-4 rounded-2xl border border-white/20 p-4
-				hover:bg-mineShaft-950 focus-visible:outline focus-visible:outline-transparent focus-visible:ring-2 focus-visible:ring-solar-500"
-			>
-				<div class="grid size-12 place-items-center">
-					{#if wallet.logo}
-						<img src={wallet.logo} alt={wallet.name} class="" />
-					{:else}
-						<div class="rounded-full bg-mineShaft-900/60 p-3"></div>
-					{/if}
-				</div>
-				<div class="space-y-1">
-					<h4 class="text-xl font-semibold">
-						{wallet.name}
-					</h4>
-					<!-- <p>{wallet.description}</p> -->
-				</div>
-				<ChevronRight class="size-6 group-hover:stroke-skyBlue-500" />
-			</a>
-		{/each}
+	<Pageheader
+		title="Setup Wombat Wallet"
+		subtitle="Follow these steps to get started with Wombat on your mobile device"
+	/>
 
-		<Button variant="secondary" href="/{data.network}/signup">Back</Button>
-	</Stack>
+	<div class="container mx-auto p-4">
+		<ol class="list-decimal space-y-6 pl-5">
+			<li>
+				<h2 class="mb-2 text-xl font-semibold">Download Wombat</h2>
+				<p class="mb-2">
+					Visit your device's app store (Google Play Store for Android or App Store for iOS) to
+					download the Wombat wallet application.
+				</p>
+				<Button href="https://www.getwombat.io/" blank rel="noopener noreferrer"
+					>Download Wombat</Button
+				>
+			</li>
+			<li>
+				<h2 class="mb-2 text-xl font-semibold">Install the App</h2>
+				<p class="mb-2">
+					Tap the "Install" button and wait for Wombat to download and install on your device.
+				</p>
+			</li>
+			<li>
+				<h2 class="mb-2 text-xl font-semibold">Launch Wombat</h2>
+				<p class="mb-2">
+					Open the Wombat app by tapping its icon on your device's home screen or app drawer.
+				</p>
+			</li>
+			<li>
+				<h2 class="mb-2 text-xl font-semibold">Create a New Wallet</h2>
+				<p class="mb-2">
+					In Wombat, follow the prompts to create a new wallet. You may need to set up a PIN or use
+					biometric authentication for security.
+				</p>
+			</li>
+			<li>
+				<h2 class="mb-2 text-xl font-semibold">Secure Your Wallet</h2>
+				<p class="mb-2">
+					Write down your recovery phrase and store it in a safe place. This is crucial for account
+					recovery and should never be shared.
+				</p>
+			</li>
+			<li>
+				<h2 class="mb-2 text-xl font-semibold">Visit the Welcome Page</h2>
+				<p class="mb-2">
+					Visit the Wombat <a href="/en/{data.network}/welcome/wombat">welcome page</a> for next steps.
+				</p>
+			</li>
+		</ol>
+
+		<div class="mt-8">
+			<h2 class="mb-4 text-xl font-semibold">Why Choose Wombat?</h2>
+			<ul class="list-disc space-y-2 pl-5">
+				<li>User-friendly interface designed for simplicity</li>
+				<li>Multi-chain support including EOS and other popular blockchains</li>
+				<li>Built-in dApp browser for easy access to decentralized applications</li>
+				<li>Fast and secure transactions</li>
+				<li>Regular updates and new features to enhance user experience</li>
+				<li>Cross-platform availability (mobile and browser extension)</li>
+				<li>Smooth onboarding experience for crypto newcomers</li>
+			</ul>
+		</div>
+	</div>
 </Stack>
