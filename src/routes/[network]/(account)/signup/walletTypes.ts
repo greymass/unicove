@@ -66,9 +66,16 @@ export const walletTypes: Record<string, WalletType> = {
 				name: 'Anchor',
 				route: 'signup/wallets/desktop/anchor',
 				logo: AnchorLogo,
-				description: 'Anchor is a secure and easy-to-use mobile wallet.'
+				description:
+					'Popular option with a user-friendly interface. Supports multiple EOSIO chains.'
 			},
-			{ name: 'Wombat', route: 'signup/wallets/desktop/wombat', logo: WombatLogo }
+			{
+				name: 'Wombat',
+				route: 'signup/wallets/desktop/wombat',
+				logo: WombatLogo,
+				description:
+					'Fast and secure with multi-chain support. Offers a smooth onboarding experience.'
+			}
 		]
 	},
 	mobile: {
@@ -82,9 +89,26 @@ export const walletTypes: Record<string, WalletType> = {
 			'Quick and easy transactions from your smartphone'
 		],
 		wallets: [
-			{ name: 'Anchor Mobile', route: 'signup/wallets/mobile/anchor', logo: AnchorLogo },
-			{ name: 'Wombat Mobile', route: 'signup/wallets/mobile/wombat', logo: WombatLogo },
-			{ name: 'TokenPocket', route: 'signup/wallets/mobile/tokenpocket', logo: TokenPocketLogo }
+			{
+				name: 'Anchor Mobile',
+				route: 'signup/wallets/mobile/anchor',
+				logo: AnchorLogo,
+				description:
+					'Popular mobile option with a user-friendly interface. Supports multiple EOSIO chains.'
+			},
+			{
+				name: 'Wombat Mobile',
+				route: 'signup/wallets/mobile/wombat',
+				logo: WombatLogo,
+				description:
+					'Fast and secure with multi-chain support. Offers a smooth onboarding experience.'
+			},
+			{
+				name: 'TokenPocket',
+				route: 'signup/wallets/mobile/tokenpocket',
+				logo: TokenPocketLogo,
+				description: 'A leading crypto wallet that supports multiple chains.'
+			}
 		]
 	},
 	extensions: {
