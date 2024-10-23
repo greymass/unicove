@@ -7,9 +7,8 @@
 
 	const { data } = $props();
 
-	const currentEnvironment = 'mobile'; //detectEnvironment();
+	const currentEnvironment = detectEnvironment();
 	const currentWalletType = walletTypes[currentEnvironment];
-	const currentWalletTypePath = `/${data.network}/signup/wallets/${currentWalletType.type}`;
 	const recommendedWallet = currentWalletType.wallets[0];
 	const otherWallets = currentWalletType.wallets.slice(1);
 </script>
@@ -67,21 +66,25 @@
 
 <Stack>
 	<a
-		href={currentWalletTypePath}
+		href="/{data.network}/signup/wallets"
 		class="group grid grid-cols-[auto_1fr_auto] items-center gap-4 rounded-2xl border border-white/20 p-4
 hover:bg-mineShaft-950 focus-visible:outline focus-visible:outline-transparent focus-visible:ring-2 focus-visible:ring-solar-500"
 	>
 		<div class="rounded-full bg-mineShaft-900/60 p-3">
-			<svelte:component
-				this={currentWalletType.icon}
-				class="size-6 group-hover:stroke-skyBlue-500 "
-			/>
+			{#if currentWalletType.icon}
+				{@const Component = currentWalletType.icon}
+				<Component class="size-6 group-hover:stroke-skyBlue-500" />
+			{/if}
 		</div>
 		<div class="space-y-1">
-			<h4 class="text-xl font-semibold">
-				{currentWalletType.title}
-			</h4>
-			<p>{currentWalletType.description}</p>
+			<h4 class="text-xl font-semibold">More Options</h4>
+			<p>
+				Choose from {Object.values(walletTypes)
+					.filter((type) => type.type !== currentWalletType.type)
+					.map((type) => type.title.toLowerCase())
+					.join(', ')
+					.replace(/,([^,]*)$/, ' and$1')}
+			</p>
 		</div>
 		<ChevronRight class="size-6 group-hover:stroke-skyBlue-500" />
 	</a>

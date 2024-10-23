@@ -3,6 +3,7 @@
 	import Label from '$lib/components/input/label.svelte';
 	import Textinput from '$lib/components/input/text.svelte';
 	import type { ABI } from '@wharfkit/antelope';
+	import Fields from './fields.svelte';
 
 	interface PageProps {
 		abi: ABI;
@@ -26,7 +27,7 @@
 	{#each fields as field}
 		{@const subfields = deriveFields(field.type)}
 		{#if subfields.length > 0}
-			<svelte:self {abi} codePath={[...codePath, field.name]} fields={subfields} {state} />
+			<Fields {abi} codePath={[...codePath, field.name]} fields={subfields} {state} />
 		{:else}
 			{@const fieldName = [...codePath, field.name].join('->')}
 			<fieldset class="grid gap-2">
