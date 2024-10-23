@@ -44,26 +44,26 @@
 			<div class="mb-4 w-full md:mb-0 md:w-1/2">
 				<h1 class="text-xl font-bold">RAM</h1>
 				<p class="font-light text-gray-400">Owned</p>
-				<p class="text-2xl font-bold">{String(ramOwned) || '0'}</p>
+				<p class="text-2xl font-bold text-white">{String(ramOwned) || '0'}</p>
 				<div class="mt-4 flex space-x-2">
 					<Button
 						class="flex-1 bg-blue-500 hover:bg-blue-600"
-						href="/{String(data.network)}/ram/buy/tokens">Buy</Button
+						href="/{String(data.network)}/ram/buy">Buy</Button
 					>
 					<Button
 						class="flex-1 bg-blue-500 hover:bg-blue-600"
-						href="/{String(data.network)}/ram/sell/tokens">Sell</Button
+						href="/{String(data.network)}/ram/sell">Sell</Button
 					>
 				</div>
 			</div>
 			<div class="mt-4 w-full text-left md:mt-0 md:w-1/2 md:p-8">
 				<p class="text-left text-gray-400">Total RAM Value USD</p>
-				<p class="text-left text-xl font-bold">{String(ramOwned)}</p>
+				<p class="text-left text-xl font-bold text-white">{String(ramOwned)}</p>
 				<hr class="my-2 border-gray-600" />
 				<p class="text-left text-gray-400">
 					Total RAM Value {data.network.chain.systemToken?.symbol.code || ''}
 				</p>
-				<p class="text-left text-xl font-bold">
+				<p class="text-left text-xl font-bold text-white">
 					$ {String(
 						context.account?.ram?.max && data.network.ramprice?.usd
 							? calculateValue(ramOwned, data.network.ramprice?.usd)
@@ -78,17 +78,17 @@
 		<RamPriceHistory data={data.historicalPrices} />
 	</Card>
 
-	<div class="text-m mb-20 flex justify-between">
+	<div class="text-m mb-20 flex">
 		<Card class="mr-2 h-32 w-full bg-gray-800">
 			<p class="text-left text-gray-400">RAM Market Cap</p>
-			<p class="font-bold">{marketCapEOS ? formatAsset(marketCapEOS) : '0 EOS'}</p>
-			<p class="font-bold">
+			<p class="font-bold text-white">{marketCapEOS ? formatAsset(marketCapEOS) : '0 EOS'}</p>
+			<p class="font-bold text-white">
 				$ {marketCapUSDValue ? formatAsset(marketCapUSDValue) : '0.00 USD'}
 			</p>
 		</Card>
 		<Card class="ml-2 h-32 w-full bg-gray-800">
-			<p class="text-left text-gray-400">RAM Supply</p>
-			<p class="font-bold">{ramSupply ? formatAsset(ramSupply) : '0 GB'}</p>
+			<p class="text-gray-400">RAM Supply</p>
+			<p class="-mt-8 font-bold text-white">{ramSupply ? formatAsset(ramSupply) : '0 GB'}</p>
 		</Card>
 	</div>
 </div>
