@@ -1,11 +1,9 @@
-<script lang="ts" module>
-	export interface SignupStep {
+<script lang="ts">
+	interface SignupStep {
 		title: string;
 		path: string;
 	}
-</script>
 
-<script lang="ts">
 	import { page } from '$app/stores';
 	import Stack from '$lib/components/layout/stack.svelte';
 	import Pageheader from '$lib/components/pageheader.svelte';
@@ -13,30 +11,34 @@
 	import { cubicInOut } from 'svelte/easing';
 	import { getWalletNameFromPath, getWalletTypeFromPath } from './walletTypes.js';
 
+	import { i18n } from '$lib/i18n';
+
 	const { data, children } = $props();
+
+	const locale = i18n.getLanguageFromUrl($page.url);
 
 	let steps: SignupStep[] = $derived([
 		{
 			title: 'Get Started',
-			path: `/${data.network}/signup`
+			path: `/${locale}/${data.network}/signup`
 		},
 		{
 			title: 'Select Environment',
-			path: `/${data.network}/signup/wallets`
+			path: `/${locale}/${data.network}/signup/wallets`
 		},
 		{
 			title: 'Select Wallet',
-			path: `/${data.network}/signup/wallets/${getWalletTypeFromPath($page.url.pathname)?.type}`
+			path: `/${locale}/${data.network}/signup/wallets/${getWalletTypeFromPath($page.url.pathname)?.type}`
 		},
 		{
 			title: 'Setup Wallet',
-			path: `/${data.network}/signup/wallets/${getWalletTypeFromPath($page.url.pathname)?.type}/${getWalletNameFromPath($page.url.pathname)?.toLowerCase()}`
+			path: `/${locale}/${data.network}/signup/wallets/${getWalletTypeFromPath($page.url.pathname)?.type}/${getWalletNameFromPath($page.url.pathname)?.toLowerCase()}`
 		}
 	]);
 
 	function getCurrentStep() {
 		return steps.find((step) => {
-			return $page.url.pathname.replace(/^\/[^/]+/, '') === step.path;
+			return $page.url.pathname === step.path;
 		});
 	}
 
