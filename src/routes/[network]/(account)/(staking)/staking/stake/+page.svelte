@@ -81,9 +81,9 @@
 						<p class="caption">~APY</p>
 						<p>{manager.apy}%</p>
 						<p class="caption">You will stake</p>
-						<p>{manager.assetValid ? manager.assetValue : ''}</p>
+						<p>{manager.assetValue}</p>
 						<p class="caption">Estimated Yield(per year)</p>
-						<p>{manager.assetValid ? manager.estimateYield : ''}</p>
+						<p>{manager.estimateYield}</p>
 					</div>
 				</Stack>
 			</Card>
