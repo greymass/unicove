@@ -58,15 +58,21 @@
 			</div>
 			<div class="mt-4 w-full text-left md:mt-0 md:w-1/2 md:p-8">
 				<p class="text-left text-gray-400">Total RAM Value USD</p>
-				<p class="text-left text-xl font-bold text-white">{String(ramOwned)}</p>
+				<p class="text-left text-xl font-bold text-white">
+					$ {String(
+						context.account?.ram?.max && data.network.ramprice?.usd
+							? calculateValue(ramOwned, data.network.ramprice?.usd)
+							: '0'
+					)}
+				</p>
 				<hr class="my-2 border-gray-600" />
 				<p class="text-left text-gray-400">
 					Total RAM Value {data.network.chain.systemToken?.symbol.code || ''}
 				</p>
 				<p class="text-left text-xl font-bold text-white">
-					$ {String(
+					{String(
 						context.account?.ram?.max && data.network.ramprice?.usd
-							? calculateValue(ramOwned, data.network.ramprice?.usd)
+							? calculateValue(ramOwned, data.network.ramprice?.eos)
 							: '0'
 					)}
 				</p>
