@@ -4,13 +4,11 @@
 	const { TLV, APY } = $props();
 </script>
 
-<div class="grid grid-cols-12 grid-rows-6">
+<div class="relative max-w-fit">
 	<!-- Big hex -->
-	<div
-		class="col-span-11 col-start-1 row-span-full grid place-items-center *:col-start-1 *:row-start-1"
-	>
+	<div class="grid place-items-center *:col-start-1 *:row-start-1">
 		<svg
-			class="h-full w-full object-contain"
+			class="size-56 object-contain md:size-full"
 			width="296"
 			height="342"
 			viewBox="0 0 296 342"
@@ -23,19 +21,17 @@
 			/>
 		</svg>
 		<div class="grid gap-2 text-center uppercase">
-			<img class="mb-3 h-20 place-self-center" src={EOS} alt="eos" />
-			<span class="text-lg text-white/60">Total locked value</span>
+			<img class="mb-3 h-10 place-self-center md:h-20" src={EOS} alt="eos" />
+			<span class="text-base text-white/60 md:text-lg">Total locked value</span>
 			<!-- TODO: add eos formatter -->
-			<span class="text-2xl font-semibold">{TLV} EOS</span>
+			<span class="text-lg font-semibold md:text-2xl">{TLV} EOS</span>
 		</div>
 	</div>
 
 	<!-- Small hex -->
-	<div
-		class="col-span-4 col-start-9 row-span-2 row-start-5 grid place-items-center *:col-start-1 *:row-start-1"
-	>
+	<div class="absolute -bottom-4 -right-2 grid place-items-center *:col-start-1 *:row-start-1">
 		<svg
-			class="h-full w-full object-contain"
+			class="size-20 object-contain md:size-full"
 			width="95"
 			height="110"
 			viewBox="0 0 95 110"
@@ -48,8 +44,8 @@
 			/>
 		</svg>
 		<div class="grid text-center uppercase">
-			<span class="text-lg text-white/60">APY</span>
-			<span class="text-2xl font-semibold">{APY}%</span>
+			<span class="text-base text-white/60 md:text-lg">APY</span>
+			<span class="text-lg font-semibold md:text-2xl">{APY}%</span>
 		</div>
 	</div>
 </div>

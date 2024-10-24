@@ -19,6 +19,9 @@ export default {
 			'7xl': ['3rem', '1'] // 48px
 		},
 		extend: {
+			screens: {
+				xs: '480px'
+			},
 			fontFamily: {
 				sans: ['Inter', ...defaultTheme.fontFamily.sans],
 				mono: ['JetBrains Mono', ...defaultTheme.fontFamily.mono]
