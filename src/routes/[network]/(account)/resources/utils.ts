@@ -1,8 +1,21 @@
 import { ResourceType } from './types';
 import { PowerUpState } from '@wharfkit/resources';
 import type { REXState } from '@wharfkit/resources';
-import { Asset } from '@wharfkit/antelope';
+import { API, Asset } from '@wharfkit/antelope';
 import type { SampledUsage } from '$lib/types';
+
+export enum RentType {
+	POWERUP,
+	REX,
+	STAKE
+}
+
+export interface PricePair {
+	cpuPrice: Asset;
+	netPrice: Asset;
+}
+
+type ResourceStateType = PowerUpState | REXState | API.v1.AccountObject;
 
 export const calSize = (available: number) => {
 	let size = 0;
@@ -46,44 +59,40 @@ export const getUnit = (resourceType: ResourceType) => {
 	}
 };
 
-export const getPowerupPrice = (
-	resourceType: ResourceType,
-	powerupstate: PowerUpState,
+export const getCpuAndNetPrice = (
+	rentType: RentType,
+	stateType: ResourceStateType,
 	sampleUsage: SampledUsage,
 	systemTokenSymbol: Asset.Symbol
-) => {
-	switch (resourceType) {
-		case ResourceType.NET: {
-			const netPrice = powerupstate.net.price_per_kb(sampleUsage, 1);
-			return Asset.from(netPrice, systemTokenSymbol);
+): PricePair => {
+	switch (rentType) {
+		case RentType.POWERUP: {
+			const cpuPrice = (stateType as PowerUpState).cpu.price_per_ms(sampleUsage, 1);
+			const netPrice = (stateType as PowerUpState).net.price_per_kb(sampleUsage, 1);
+			return {
+				cpuPrice: compatPriceWithPrecision(cpuPrice, systemTokenSymbol),
+				netPrice: compatPriceWithPrecision(netPrice, systemTokenSymbol)
+			};
 		}
-		case ResourceType.CPU: {
-			const cpuPrice = powerupstate.cpu.price_per_ms(sampleUsage, 1);
-			return Asset.from(cpuPrice, systemTokenSymbol);
+		case RentType.REX: {
+			const cpuPrice = (stateType as REXState).cpu_price_per_ms(sampleUsage, 30);
+			const netPrice = (stateType as REXState).net_price_per_kb(sampleUsage, 30);
+			return {
+				cpuPrice: compatPriceWithPrecision(cpuPrice, systemTokenSymbol),
+				netPrice: compatPriceWithPrecision(netPrice, systemTokenSymbol)
+			};
 		}
-
-		default:
-			throw new Error(`unsupport resource type: ${resourceType}`);
-	}
-};
-
-export const getRexPrice = (
-	resourceType: ResourceType,
-	rexState: REXState,
-	sampledUsage: SampledUsage,
-	systemTokenSymbol: Asset.Symbol
-) => {
-	switch (resourceType) {
-		case ResourceType.NET: {
-			const netPrice = rexState.net_price_per_kb(sampledUsage, 30);
-			return compatPriceWithPrecision(netPrice, systemTokenSymbol);
-		}
-		case ResourceType.CPU: {
-			const cpuPrice = rexState.cpu_price_per_ms(sampledUsage, 30);
-			return compatPriceWithPrecision(cpuPrice, systemTokenSymbol);
+		case RentType.STAKE: {
+			const account = stateType as API.v1.AccountObject;
+			const cpuPrice = account.cpu_weight.multiplying(1000).dividing(account.cpu_limit.max);
+			const netPrice = account.net_weight.multiplying(1000).dividing(account.net_limit.max);
+			return {
+				cpuPrice: Asset.fromUnits(cpuPrice, systemTokenSymbol),
+				netPrice: Asset.fromUnits(netPrice, systemTokenSymbol)
+			};
 		}
 		default:
-			throw new Error(`unsupport resource type: ${resourceType}`);
+			throw new Error(`unsupport rent type: ${rentType}`);
 	}
 };
 
@@ -95,38 +104,12 @@ function compatPriceWithPrecision(price: number, coreTokenSymbol: Asset.Symbol) 
 	return Asset.from(price, `${precision},${coreTokenSymbol.name}`);
 }
 
-export const getStakingPrice = (
-	resourceType: ResourceType,
-	sampledUsage: SampledUsage,
-	systemTokenSymbol: Asset.Symbol
-) => {
-	const { account } = sampledUsage;
-	switch (resourceType) {
-		case ResourceType.NET: {
-			const pricePerKb = account.net_weight.multiplying(1000).dividing(account.net_limit.max);
-			return Asset.fromUnits(pricePerKb, systemTokenSymbol);
-		}
-		case ResourceType.CPU: {
-			const pricePerMs = account.cpu_weight.multiplying(1000).dividing(account.cpu_limit.max);
-			return Asset.fromUnits(pricePerMs, systemTokenSymbol);
-		}
-		default:
-			throw new Error(`unsupport resource type: ${resourceType}`);
-	}
-};
-
 export const getPowerupFrac = (
-	resourceType: ResourceType,
 	powerupstate: PowerUpState,
 	sampledUsage: SampledUsage,
-	amount: number
+	amounts: { cpuAmout: number; netAmount: number }
 ) => {
-	switch (resourceType) {
-		case ResourceType.NET:
-			return powerupstate.net.frac_by_kb(sampledUsage, amount);
-		case ResourceType.CPU:
-			return powerupstate.cpu.frac_by_ms(sampledUsage, amount);
-		default:
-			throw new Error(`unsupport resource type: ${resourceType}`);
-	}
+	const cpu = powerupstate.cpu.frac_by_ms(sampledUsage, amounts.cpuAmout);
+	const net = powerupstate.net.frac_by_kb(sampledUsage, amounts.netAmount);
+	return [cpu, net];
 };

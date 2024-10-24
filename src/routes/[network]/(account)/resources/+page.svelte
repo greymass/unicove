@@ -1,9 +1,12 @@
 <script lang="ts">
 	import Stack from '$lib/components/layout/stack.svelte';
 	import Button from '$lib/components/button/button.svelte';
-	import RamIcon from '$lib/assets/resources/ram.svg';
 	import CpuIcon from '$lib/assets/resources/cpu.svg';
 	import NetIcon from '$lib/assets/resources/net.svg';
+	import RamIcon from '$lib/assets/resources/ram.svg';
+
+	import CpuAndNetOverview from './components/cpunet.svelte';
+	import RamOverview from './components/ram.svelte';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
@@ -78,53 +81,25 @@
 >
 	<Stack class="max-w-lg flex-1 gap-9">
 		<Stack>
-			<div class="flex gap-[1px]">
-				<div class="relative h-[103px] flex-1 rounded-l-lg bg-[#303338]">
-					<div class="absolute left-4 top-5">
-						<img src={CpuIcon} class="size-6" alt="cpu icon" />
-					</div>
-					<div class="absolute right-3 top-3 text-xl font-bold">CPU</div>
-					<div class="absolute bottom-2 right-3">
-						<h5 class="h5 text-right">{cpuState.availableSize.toFixed(precision)} ms</h5>
-						<p>Usage Available</p>
-					</div>
-				</div>
-				<div class="relative h-[103px] flex-1 rounded-r-lg bg-[#303338]">
-					<div class="absolute left-5 top-4">
-						<img src={NetIcon} class="size-6" alt="cpu icon" />
-					</div>
-					<div class="absolute right-4 top-3 text-xl font-bold">NET</div>
-					<div class="absolute bottom-2 right-4">
-						<h5 class="h5 text-right">{netState.availableSize.toFixed(precision)} kb</h5>
-						<p>Usage Available</p>
-					</div>
-				</div>
-			</div>
+			<CpuAndNetOverview
+				cpuAvailable={cpuState.availableSize}
+				netAvailable={netState.availableSize}
+				{precision}
+			/>
 			{#if context.network?.supports('powerup')}
-				<Button variant="primary" href="/{network}/resources/cpu/powerup"
+				<Button variant="primary" href="/{network}/resources/powerup"
 					>Rent resources with PowerUp</Button
 				>
 			{/if}
 			{#if context.network?.supports('rentrex')}
-				<Button variant="primary" href="/{network}/resources/cpu/rex"
-					>Rent resources with REX</Button
-				>
+				<Button variant="primary" href="/{network}/resources/rex">Rent resources with REX</Button>
 			{/if}
 			{#if context.network?.supports('stakeresource')}
-				<Button variant="primary" href="/{network}/resources/cpu/stake"
-					>Stake EOS for resources</Button
-				>
+				<Button variant="primary" href="/{network}/resources/stake">Stake EOS for resources</Button>
 			{/if}
 		</Stack>
 		<Stack>
-			<div class="relative h-[103px] rounded-lg bg-[#303338]">
-				<div class="absolute left-4 top-3"><img src={RamIcon} class="size-6" alt="cpu icon" /></div>
-				<div class="absolute right-3 top-3 text-xl font-bold">RAM</div>
-				<div class="absolute bottom-2 right-3">
-					<h5 class="h5 text-right">{ramState.availableSize.toFixed(precision)} kb</h5>
-					<p>Usage Available</p>
-				</div>
-			</div>
+			<RamOverview ramAvailable={ramState.availableSize} {precision} />
 			<Button variant="secondary" href="/{network}/ram">RAM Market</Button>
 		</Stack>
 	</Stack>
