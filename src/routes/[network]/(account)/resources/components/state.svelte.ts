@@ -11,8 +11,14 @@ export class RentState {
 	public chain: ChainDefinition;
 	public rentType: RentType;
 
+	public rentingForSelf = $state(true);
+	public thirdReceiver: Name = $state(defaultName);
+	public thirdReceiverValid = $state(false);
+
 	public payer: Name = $state(defaultName);
-	public receiver: Name = $state(defaultName);
+	public receiver: Name = $derived(
+		this.rentingForSelf ? this.payer : this.thirdReceiverValid ? this.thirdReceiver : defaultName
+	);
 
 	public balance: Asset = $state(defaultQuantity);
 
@@ -81,7 +87,6 @@ export class RentState {
 
 	reset() {
 		this.payer = defaultName;
-		this.receiver = defaultName;
 		this.balance = defaultQuantity;
 		this.cpuAmount = undefined;
 		this.netAmount = undefined;

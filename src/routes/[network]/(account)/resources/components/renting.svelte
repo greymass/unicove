@@ -16,10 +16,14 @@
 	import { ResourceType } from '../types';
 	import type { PowerUpState } from '@wharfkit/resources';
 
+	import { getSetting } from '$lib/state/settings.svelte.js';
+
 	import { getContext } from 'svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 
 	const context = getContext<UnicoveContext>('state');
+
+	const debugMode = getSetting('debug-mode', true);
 
 	interface Props {
 		rentType: RentType;
@@ -41,7 +45,6 @@
 		if (account && network) {
 			if (account.name) {
 				rentState.payer = account.name;
-				rentState.receiver = account.name;
 			}
 			const stateType =
 				rentType === RentType.POWERUP
@@ -73,9 +76,6 @@
 		}
 	});
 
-	let rentingForSelf = $state(true);
-	let receiverInputValid = $state(false);
-
 	let receiverInput: NameInput | undefined = $state();
 
 	const rentState: RentState = $state(new RentState(network.chain, RentType.STAKE));
@@ -98,24 +98,6 @@
 </script>
 
 <div class="mx-auto max-w-md">
-	<div class="p-6">
-		<h3 class="h3">test info</h3>
-		<p>receiver: {rentState.receiver}</p>
-		<p>cpuPricePerMs: {rentState.cpuPricePerMs}, netPricePerKb: {rentState.netPricePerKb}</p>
-		<p>liquid: {rentState.balance}</p>
-
-		<h3 class="h3">valid</h3>
-		<p>rentingForSelf: {rentingForSelf}</p>
-		<p>receiverInputValid: {receiverInputValid}</p>
-
-		<h3 class="h3">Cost</h3>
-		<p>cpuAmount: {rentState.cpuAmount}, netAmount: {rentState.netAmount}</p>
-		<p>cpu: {rentState.cpuQuantity} net: {rentState.netQuantity}</p>
-		<p>cost: {rentState.cost}</p>
-		{#if rentType === RentType.POWERUP}
-			<p>cpuFrac: {rentState.cpuFrac}, netFrac: {rentState.netFrac}</p>
-		{/if}
-	</div>
 	<CpuAndNetOverview
 		cpuAvailable={cpuState.availableSize}
 		netAvailable={netState.availableSize}
@@ -140,16 +122,16 @@
 			</fieldset>
 
 			<fieldset class="flex items-center gap-3">
-				<Checkbox id="rentForSelf" bind:checked={rentingForSelf} />
+				<Checkbox id="rentForSelf" bind:checked={rentState.rentingForSelf} />
 				<Label for="rentForSelf">Rent Resources for my account</Label>
 			</fieldset>
 
-			<fieldset class="semi-bold grid gap-1" class:hidden={rentingForSelf}>
+			<fieldset class="semi-bold grid gap-1" class:hidden={rentState.rentingForSelf}>
 				<Label for="to-input">Receiving Account</Label>
 				<NameInput
 					bind:this={receiverInput}
-					bind:value={rentState.receiver}
-					bind:valid={receiverInputValid}
+					bind:value={rentState.thirdReceiver}
+					bind:valid={rentState.thirdReceiverValid}
 					placeholder="Enter the account name"
 				/>
 			</fieldset>
@@ -185,6 +167,29 @@
 				</tr>
 			</tbody>
 		</table>
-		<Button variant="secondary" class="w-full">Cancel</Button>
+		<Button variant="secondary" href="/{network}/resources" class="w-full">Cancel</Button>
 	</Stack>
+
+	{#if debugMode}
+		<div class="p-6">
+			<h3 class="h3">Test Info:</h3>
+			<p>receiver: {rentState.receiver}</p>
+			<p>rentingForSelf: {rentState.rentingForSelf}</p>
+			<p>thirdReceiver: {rentState.thirdReceiver}</p>
+			<p>cpuPricePerMs: {rentState.cpuPricePerMs}, netPricePerKb: {rentState.netPricePerKb}</p>
+			<p>liquid: {rentState.balance}</p>
+
+			<h3 class="h3">valid:</h3>
+			<p>Valid: {rentState.valid}</p>
+			<p>ReceiverInputValid: {rentState.thirdReceiverValid}</p>
+
+			<h3 class="h3">Cost</h3>
+			<p>cpuAmount: {rentState.cpuAmount}, netAmount: {rentState.netAmount}</p>
+			<p>cpu: {rentState.cpuQuantity} net: {rentState.netQuantity}</p>
+			<p>cost: {rentState.cost}</p>
+			{#if rentType === RentType.POWERUP}
+				<p>cpuFrac: {rentState.cpuFrac}, netFrac: {rentState.netFrac}</p>
+			{/if}
+		</div>
+	{/if}
 </div>
