@@ -89,7 +89,11 @@
 >
 	{#if context.wharf.session}
 		<div class="flex items-center gap-2 pl-3.5 pr-4">
-			<img src={String(logo)} alt={context.wharf.session.chain.name} class="size-5 md:size-4" />
+			<img
+				src={String(logo)}
+				alt={context.wharf.session.chain.name}
+				class="size-5 object-contain md:size-4"
+			/>
 			<span class="pointer-events-none z-10 text-base text-white/90"
 				>{context.wharf.session.actor}</span
 			>
