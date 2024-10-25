@@ -5,6 +5,7 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import SideMenuContent from '$lib/components/navigation/sidemenu.svelte';
 	import { Menu } from 'lucide-svelte';
+	import UnicoveLogo from '$lib/assets/unicovelogo.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
 
 	const context = getContext<UnicoveContext>('state');
@@ -47,8 +48,7 @@
 	flex
 	h-10
 	items-center
-	justify-between
-	gap-2
+	gap-1
 	text-nowrap
 	rounded-lg
 	py-3.5
@@ -69,6 +69,7 @@
 	id="menu-open"
 	data-session={!!context.wharf.session}
 >
+	<UnicoveLogo small href="/{network}" class="size-6 w-min place-self-center" />
 	<Menu class="size-6 text-inherit" />
 	<!-- <span>Menu</span> -->
 </button>

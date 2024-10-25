@@ -175,7 +175,7 @@
 	text-base
 	font-medium
 	leading-4
-	text-white/50
+	text-neutral-400
 	focus:outline-none
 	focus-visible:border-solar-500
 	md:h-7

@@ -93,20 +93,20 @@
 	md:gap-y-6
 	"
 >
-	<header class="col-span-full grid grid-cols-subgrid items-center">
-		<div class="flex gap-3">
-			<MobileNavigation network={data.network} />
-			<UnicoveLogo
-				small
-				href="/{data.network}"
-				class="hidden size-6 w-min place-self-center sm:block"
-			/>
-		</div>
+	<header class="col-span-full flex items-center justify-between">
+		<!-- Larger breakpoints only	 -->
+		<UnicoveLogo
+			small
+			href="/{data.network}"
+			class="hidden size-6 w-min place-self-center md:block"
+		/>
+
+		<MobileNavigation network={data.network} />
 
 		<div
-			class="flex items-center justify-end sm:col-start-4 md:col-span-full md:col-start-9 md:gap-4"
+			class="flex items-center justify-end gap-4 sm:col-start-4 md:col-span-full md:col-start-9 md:flex-1 md:gap-4"
 		>
-			<Search network={data.network} class="hidden flex-1 md:flex " />
+			<Search network={data.network} class="max-w-48 flex-1" />
 
 			<AccountSwitcher network={data.network} class="" />
 		</div>

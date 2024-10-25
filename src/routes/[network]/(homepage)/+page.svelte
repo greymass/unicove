@@ -37,7 +37,7 @@
 	</Stack>
 {/snippet}
 
-<Subgrid id="homepage" class="mb-4 content-start items-start gap-y-20 pt-4 sm:pt-12 md:pt-0">
+<Subgrid id="homepage" class="mb-4 content-start items-start gap-y-20 pt-8 sm:pt-12 md:pt-0">
 	<!-- <Pageheader title={data.network.chain.name} /> -->
 
 	<!-- Hero -->
