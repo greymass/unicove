@@ -4,18 +4,13 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
 
-	import { RentType } from '../types';
-
 	const { data } = $props();
-
 	const context = getContext<UnicoveContext>('state');
 
 	const network = data.network;
 	const account = $derived(context.account);
-
-	function handleRent() {}
 </script>
 
 <div class="container rounded-2xl sm:bg-shark-900/20 sm:p-6 sm:pb-10">
-	<Renting rentType={RentType.REX} {network} {account}></Renting>
+	<Renting rentType="REX" {network} {account}></Renting>
 </div>

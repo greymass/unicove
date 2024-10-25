@@ -1,14 +1,10 @@
-import { ResourceType } from './types';
 import { PowerUpState } from '@wharfkit/resources';
 import type { REXState } from '@wharfkit/resources';
 import { API, Asset } from '@wharfkit/antelope';
 import type { SampledUsage } from '$lib/types';
+import type { Resource } from '@wharfkit/account';
 
-export enum RentType {
-	POWERUP,
-	REX,
-	STAKE
-}
+export type RentType = 'POWERUP' | 'REX' | 'STAKE';
 
 export interface PricePair {
 	cpuPrice: Asset;
@@ -17,46 +13,11 @@ export interface PricePair {
 
 type ResourceStateType = PowerUpState | REXState | API.v1.AccountObject;
 
-export const calSize = (available: number) => {
+export const calAvailableSize = (resource?: Resource) => {
 	let size = 0;
+	const available = Number(resource?.available);
 	if (!isNaN(available)) size = available / 1000;
-	return Number(size.toFixed(2));
-};
-
-export const calUsagePer = (used: number, max: number) => {
-	let percentage = 100;
-	if (isNaN(max) || isNaN(used)) {
-		percentage = 0;
-	} else if (max === 0) {
-		percentage = 100;
-	} else {
-		percentage = (used / max) * 100;
-		if (percentage > 100) {
-			percentage = 100;
-		}
-	}
-	return Number(percentage.toFixed(1));
-};
-
-export const getName = (resourceType: ResourceType) => {
-	switch (resourceType) {
-		case ResourceType.RAM:
-			return 'RAM';
-		case ResourceType.CPU:
-			return 'CPU';
-		case ResourceType.NET:
-			return 'NET';
-	}
-};
-
-export const getUnit = (resourceType: ResourceType) => {
-	switch (resourceType) {
-		case ResourceType.RAM:
-		case ResourceType.NET:
-			return 'kb';
-		case ResourceType.CPU:
-			return 'ms';
-	}
+	return size;
 };
 
 export const getCpuAndNetPrice = (
@@ -66,7 +27,7 @@ export const getCpuAndNetPrice = (
 	systemTokenSymbol: Asset.Symbol
 ): PricePair => {
 	switch (rentType) {
-		case RentType.POWERUP: {
+		case 'POWERUP': {
 			const cpuPrice = (stateType as PowerUpState).cpu.price_per_ms(sampleUsage, 1);
 			const netPrice = (stateType as PowerUpState).net.price_per_kb(sampleUsage, 1);
 			return {
@@ -74,7 +35,7 @@ export const getCpuAndNetPrice = (
 				netPrice: compatPriceWithPrecision(netPrice, systemTokenSymbol)
 			};
 		}
-		case RentType.REX: {
+		case 'REX': {
 			const cpuPrice = (stateType as REXState).cpu_price_per_ms(sampleUsage, 30);
 			const netPrice = (stateType as REXState).net_price_per_kb(sampleUsage, 30);
 			return {
@@ -82,7 +43,7 @@ export const getCpuAndNetPrice = (
 				netPrice: compatPriceWithPrecision(netPrice, systemTokenSymbol)
 			};
 		}
-		case RentType.STAKE: {
+		case 'STAKE': {
 			const account = stateType as API.v1.AccountObject;
 			const cpuPrice = account.cpu_weight.multiplying(1000).dividing(account.cpu_limit.max);
 			const netPrice = account.net_weight.multiplying(1000).dividing(account.net_limit.max);

@@ -4,29 +4,19 @@
 	import CpuIcon from '$lib/assets/resources/cpu.svg';
 	import NetIcon from '$lib/assets/resources/net.svg';
 	import RamIcon from '$lib/assets/resources/ram.svg';
-
 	import CpuAndNetOverview from './components/cpunet.svelte';
 	import RamOverview from './components/ram.svelte';
+	import { calAvailableSize } from './utils';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
 
-	import { ResourceType } from './types';
-	import { ResourceState } from './state.svelte';
-
 	const { data } = $props();
-
 	const context = getContext<UnicoveContext>('state');
 
-	const ramState = $state(new ResourceState(ResourceType.RAM));
-	const cpuState = $state(new ResourceState(ResourceType.CPU));
-	const netState = $state(new ResourceState(ResourceType.NET));
-
-	$effect(() => {
-		ramState.setResource(context.account?.ram);
-		cpuState.setResource(context.account?.cpu);
-		netState.setResource(context.account?.net);
-	});
+	const cpuAvailableSize = $derived(calAvailableSize(context.account?.cpu));
+	const netAvailableSize = $derived(calAvailableSize(context.account?.net));
+	const ramAvailableSize = $derived(calAvailableSize(context.account?.ram));
 
 	const network = String(data.network);
 	const chainName = data.network.chain.name;
@@ -80,13 +70,13 @@
 </script>
 
 <div
-	class="mx-auto flex flex-col gap-9 py-6 sm:gap-12 lg:mx-0 lg:flex-row lg:justify-between lg:gap-8"
+	class="mx-auto flex flex-col gap-9 py-5 sm:gap-12 lg:mx-0 lg:flex-row lg:justify-between lg:gap-8"
 >
 	<Stack class="max-w-lg flex-1 gap-9">
 		<Stack>
 			<CpuAndNetOverview
-				cpuAvailable={cpuState.availableSize}
-				netAvailable={netState.availableSize}
+				cpuAvailable={cpuAvailableSize}
+				netAvailable={netAvailableSize}
 				{precision}
 			/>
 			{#if data.network.supports('powerup')}
@@ -104,7 +94,7 @@
 			{/if}
 		</Stack>
 		<Stack>
-			<RamOverview ramAvailable={ramState.availableSize} {precision} />
+			<RamOverview ramAvailable={ramAvailableSize} {precision} />
 			<Button variant="secondary" href="/{network}/ram">RAM Market</Button>
 		</Stack>
 	</Stack>

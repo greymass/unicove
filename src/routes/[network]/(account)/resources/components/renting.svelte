@@ -6,25 +6,23 @@
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import Checkbox from '$lib/components/input/checkbox.svelte';
 	import Button from '$lib/components/button/button.svelte';
+	import Transaction from '$lib/components/transaction.svelte';
 	import CpuAndNetOverview from './cpunet.svelte';
-	import { preventDefault } from '$lib/utils';
-	import { RentState } from './state.svelte';
-	import { getCpuAndNetPrice, getPowerupFrac, RentType } from '../utils';
-	import type { NetworkState } from '$lib/state/network.svelte';
-	import type { AccountState } from '$lib/state/client/account.svelte';
-	import { ResourceState } from '../state.svelte';
-	import { ResourceType } from '../types';
-	import type { PowerUpState } from '@wharfkit/resources';
 
-	import { getSetting } from '$lib/state/settings.svelte.js';
+	import { Checksum256, type TransactResult } from '@wharfkit/session';
 
 	import { getContext } from 'svelte';
+	import { getSetting } from '$lib/state/settings.svelte.js';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import { Checksum256, type TransactResult } from '@wharfkit/session';
-	import Transaction from '$lib/components/transaction.svelte';
+	import type { NetworkState } from '$lib/state/network.svelte';
+	import type { AccountState } from '$lib/state/client/account.svelte';
+	import type { PowerUpState } from '@wharfkit/resources';
+
+	import { preventDefault } from '$lib/utils';
+	import { RentState } from './state.svelte';
+	import { calAvailableSize, getCpuAndNetPrice, getPowerupFrac, type RentType } from '../utils';
 
 	const context = getContext<UnicoveContext>('state');
-
 	const debugMode = getSetting('debug-mode', true);
 
 	interface Props {
@@ -35,12 +33,12 @@
 
 	const { rentType, network, account }: Props = $props();
 
-	const cpuState = $state(new ResourceState(ResourceType.CPU));
-	const netState = $state(new ResourceState(ResourceType.NET));
-
-	$effect(() => {
-		cpuState.setResource(account?.cpu);
-		netState.setResource(account?.net);
+	const cpuAvailableSize = $derived(calAvailableSize(context.account?.cpu));
+	const netAvailableSize = $derived(calAvailableSize(context.account?.net));
+	const usableTime = $derived.by(() => {
+		if (rentType === 'POWERUP') return '24 Hours';
+		if (rentType === 'REX') return '30 Days';
+		return 'Until Unstaked';
 	});
 
 	$effect(() => {
@@ -49,13 +47,13 @@
 				rentState.payer = account.name;
 			}
 			const stateType =
-				rentType === RentType.POWERUP
+				rentType === 'POWERUP'
 					? network.powerupstate
-					: rentType === RentType.REX
+					: rentType === 'REX'
 						? network.rexstate
 						: network.sampledUsage?.account;
 			if (stateType && network.sampledUsage && network.chain.systemToken) {
-				if (rentType === RentType.POWERUP) {
+				if (rentType === 'POWERUP') {
 					const fracs = getPowerupFrac(stateType as PowerUpState, network.sampledUsage, {
 						cpuAmout: Number(rentState.cpuAmount || 0),
 						netAmount: Number(rentState.netAmount || 0)
@@ -76,6 +74,16 @@
 		} else {
 			rentState.reset();
 		}
+	});
+
+	const rentDetails = $derived.by(() => {
+		const details = [];
+		details.push({ title: 'Usable for', desc: usableTime });
+		details.push({
+			title: 'Total cost',
+			desc: `${rentState.cost.quantity} ${rentState.cost.symbol.name}`
+		});
+		return details;
 	});
 
 	let cpuAmountInput: NumberInput | undefined = $state();
@@ -125,11 +133,7 @@
 {/if}
 
 <div class="mx-auto max-w-md">
-	<CpuAndNetOverview
-		cpuAvailable={cpuState.availableSize}
-		netAvailable={netState.availableSize}
-		{precision}
-	/>
+	<CpuAndNetOverview cpuAvailable={cpuAvailableSize} netAvailable={netAvailableSize} {precision} />
 	<form onsubmit={preventDefault(handleRent)}>
 		<Stack class="py-4 sm:p-4">
 			<fieldset class="grid gap-1">
@@ -163,15 +167,18 @@
 				<Label for="rentForSelf">Rent Resources for my account</Label>
 			</fieldset>
 
-			<fieldset class="semi-bold grid gap-1" class:hidden={rentState.rentingForSelf}>
-				<Label for="to-input">Receiving Account</Label>
-				<NameInput
-					bind:this={receiverNameInput}
-					bind:value={rentState.thirdReceiver}
-					bind:valid={rentState.thirdReceiverValid}
-					placeholder="Enter the account name"
-				/>
-			</fieldset>
+			{#if rentState.rentingForSelf}
+				<fieldset class="semi-bold grid gap-1">
+					<Label for="thirdReceiver">Receiving Account</Label>
+					<NameInput
+						id="thirdReceiver"
+						bind:this={receiverNameInput}
+						bind:value={rentState.thirdReceiver}
+						bind:valid={rentState.thirdReceiverValid}
+						placeholder="Enter the account name"
+					/>
+				</fieldset>
+			{/if}
 
 			{#if rentState.insufficientBalance}
 				<p class="text-red-500">Insufficient balance. Please enter a smaller amount.</p>
@@ -187,23 +194,16 @@
 	</form>
 
 	<Stack class="sm:px-4">
-		<table class="table-styles">
-			<tbody>
-				<tr>
-					<td class="text-left">Usable for</td>
-					<td class="text-right"
-						>{#if rentType === RentType.POWERUP}24 Hours
-						{:else if rentType === RentType.REX}30 Days
-						{:else}Until Unstaked
-						{/if}
-					</td>
-				</tr>
-				<tr>
-					<td class="text-left">Total cost</td>
-					<td class="text-right"><AssetText variant="full" value={rentState.cost} /></td>
-				</tr>
-			</tbody>
-		</table>
+		<ul>
+			{#each rentDetails as detail}
+				<li
+					class="flex justify-between border-b border-neutral-300/10 bg-gradient-to-r from-transparent to-transparent py-3 last:border-none odd:via-mineShaft-950"
+				>
+					<span class="text-base font-medium">{detail.title}</span>
+					<span class="text-base font-medium text-white">{detail.desc}</span>
+				</li>s
+			{/each}
+		</ul>
 		<Button variant="secondary" href="/{network}/resources" class="w-full">Cancel</Button>
 	</Stack>
 </div>
@@ -258,7 +258,7 @@
 					<td class="text-left">NetQuantity</td>
 					<td class="text-right">{rentState.netQuantity}</td>
 				</tr>
-				{#if rentType === RentType.POWERUP}
+				{#if rentType === 'POWERUP'}
 					<tr>
 						<td class="text-left">CpuFrac</td>
 						<td class="text-right">{rentState.cpuFrac}</td>

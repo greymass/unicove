@@ -1,7 +1,8 @@
 import { type Action, Asset, Name } from '@wharfkit/antelope';
 import { ChainDefinition } from '@wharfkit/common';
-import { RentType } from '../types';
 import type { Contract } from '@wharfkit/contract';
+
+import type { RentType } from '../utils';
 
 const defaultName = Name.from('');
 const defaultSymbol = Asset.Symbol.from('0,UNKNOWN');
@@ -109,11 +110,11 @@ export class RentState {
 
 	getActions(contract: Contract): Action[] {
 		switch (this.rentType) {
-			case RentType.POWERUP:
+			case 'POWERUP':
 				return this.getPowerUpActions(contract);
-			case RentType.REX:
+			case 'REX':
 				return this.getRexActions(contract);
-			case RentType.STAKE:
+			case 'STAKE':
 				return this.getStakeActions(contract);
 		}
 	}
@@ -132,8 +133,7 @@ export class RentState {
 	}
 
 	private getRexActions(contract: Contract) {
-		let actions = [];
-
+		const actions = [];
 		if (this.cpuQuantity.value) {
 			const cpuDepositAction = contract.action('deposit', {
 				owner: this.payer,
