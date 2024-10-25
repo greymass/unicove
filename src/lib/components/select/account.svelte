@@ -67,22 +67,19 @@
 	class="
 	relative
 	z-50
-	flex
 	h-10
-	items-center
-	gap-2
 	text-nowrap
+	rounded-lg
+	border
+	border-white/20
 	text-base
 	font-medium
-	transition-opacity
-	hover:border-y
-	hover:border-b-skyBlue-400
-	hover:border-t-transparent
 	focus:outline-transparent
 	focus-visible:outline
 	focus-visible:ring-2
 	focus-visible:ring-inset
 	focus-visible:ring-solar-500
+	md:h-7
 	{className}
 	"
 	use:melt={$trigger}
@@ -91,10 +88,14 @@
 	data-session={!!context.wharf.session}
 >
 	{#if context.wharf.session}
-		<img src={String(logo)} alt={context.wharf.session.chain.name} class="w-4" />
-		<span class="pointer-events-none z-10">{context.wharf.session.actor}</span>
+		<div class="flex items-center gap-2 pl-3.5 pr-4">
+			<img src={String(logo)} alt={context.wharf.session.chain.name} class="size-5 md:size-4" />
+			<span class="pointer-events-none z-10 text-base text-white/90"
+				>{context.wharf.session.actor}</span
+			>
+		</div>
 	{:else}
-		<span class="pointer-events-none z-10">Connect Wallet</span>
+		<span class="pointer-events-none z-10 px-4 py-2">Connect Wallet</span>
 	{/if}
 </button>
 

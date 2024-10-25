@@ -94,9 +94,18 @@
 	"
 >
 	<header class="col-span-full grid grid-cols-subgrid items-center">
-		<UnicoveLogo small href="/{data.network}" class="w-min self-center " />
+		<div class="flex gap-3">
+			<MobileNavigation network={data.network} />
+			<UnicoveLogo
+				small
+				href="/{data.network}"
+				class="hidden size-6 w-min place-self-center sm:block"
+			/>
+		</div>
 
-		<div class="flex items-center justify-end sm:col-span-3 md:col-start-10 md:gap-4">
+		<div
+			class="flex items-center justify-end sm:col-start-4 md:col-span-full md:col-start-9 md:gap-4"
+		>
 			<Search network={data.network} class="hidden flex-1 md:flex " />
 
 			<AccountSwitcher network={data.network} class="" />
@@ -115,10 +124,10 @@
 </div>
 
 <!-- This wrapper sets up the bottom menu on mobile, becomes hidden on desktop -->
-<aside
-	class="px-page fixed bottom-0 z-50 flex h-14 w-full justify-between bg-shark-950 py-2 md:hidden"
->
-	<MobileNavigation network={data.network} />
-
-	<Search network={data.network} />
-</aside>
+<!-- <aside -->
+<!-- 	class="px-page fixed bottom-0 z-50 flex h-14 w-full justify-between bg-shark-950 py-2 md:hidden" -->
+<!-- > -->
+<!-- 	<MobileNavigation network={data.network} /> -->
+<!---->
+<!-- 	<Search network={data.network} /> -->
+<!-- </aside> -->

@@ -69,7 +69,8 @@
 	id="menu-open"
 	data-session={!!context.wharf.session}
 >
-	<Menu class="size-4 text-inherit" /><span>Menu</span>
+	<Menu class="size-6 text-inherit" />
+	<!-- <span>Menu</span> -->
 </button>
 
 {#if $open}
