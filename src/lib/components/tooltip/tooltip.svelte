@@ -2,7 +2,7 @@
 	import { createTooltip, melt } from '@melt-ui/svelte';
 	import { fade } from 'svelte/transition';
 	import { type Snippet } from 'svelte';
-	import type { Icon } from 'lucide-svelte';
+	import { Info, type Icon } from 'lucide-svelte';
 
 	interface Props {
 		content: string;
@@ -16,7 +16,7 @@
 	const {
 		content,
 		children,
-		icon,
+		icon = Info,
 		fadeDuration = 50,
 		openDelay = 300,
 		closeDelay = 300

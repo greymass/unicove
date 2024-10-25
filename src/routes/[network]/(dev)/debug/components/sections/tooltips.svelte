@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Info } from 'lucide-svelte';
+	import { ShieldQuestion, Info } from 'lucide-svelte';
 	import { Stack } from '$lib/components/layout';
 	import Tooltip from '$lib/components/tooltip/tooltip.svelte';
 </script>
@@ -35,9 +35,9 @@
 	<div>
 		<Tooltip
 			content="This is a long tooltip with an icon. Icons can be used to provide visual cues about the type of information being presented. For example, this icon might indicate that the tooltip contains important or critical information that the user should pay attention to."
-			icon={Info}
+			icon={ShieldQuestion}
 		>
-			<span class="cursor-help underline">Tooltip with icon</span>
+			<span class="cursor-help underline">Tooltip with custom icon</span>
 		</Tooltip>
 	</div>
 
