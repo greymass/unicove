@@ -209,7 +209,7 @@
 </div>
 {#if debugMode}
 	<div class="mx-auto mt-6 max-w-md border-2 border-skyBlue-500 p-6">
-		<h3 class="h3 text-center">Test Info</h3>
+		<h3 class="h3 text-center">Debug Info</h3>
 		<table class="table-styles">
 			<tbody>
 				<tr>

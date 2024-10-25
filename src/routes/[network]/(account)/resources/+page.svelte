@@ -28,6 +28,11 @@
 		netState.setResource(context.account?.net);
 	});
 
+	const network = String(data.network);
+	const chainName = data.network.chain.name;
+	const symbolName = data.network.chain.systemToken?.symbol.name || 'token';
+	const precision = 2;
+
 	const explanations = [
 		{
 			icon: CpuIcon,
@@ -53,9 +58,9 @@
 			name: 'CPU and NET',
 			title: 'CPU and NET',
 			descriptions: [
-				'Can be "powered up" by spending EOS.',
+				`Can be "powered up" by spending ${symbolName}.`,
 				'Some free services offer daily power-ups.',
-				'Amount received is proportional to EOS spent.',
+				`Amount received is proportional to ${symbolName} spent.`,
 				'Lasts for a specific time period.'
 			]
 		},
@@ -72,12 +77,10 @@
 			]
 		}
 	];
-	const precision = 2;
-	const network = $derived(String(data.network));
 </script>
 
 <div
-	class="mx-auto flex flex-col gap-9 py-9 sm:gap-12 lg:mx-0 lg:flex-row lg:justify-between lg:gap-8"
+	class="mx-auto flex flex-col gap-9 py-6 sm:gap-12 lg:mx-0 lg:flex-row lg:justify-between lg:gap-8"
 >
 	<Stack class="max-w-lg flex-1 gap-9">
 		<Stack>
@@ -86,16 +89,18 @@
 				netAvailable={netState.availableSize}
 				{precision}
 			/>
-			{#if context.network?.supports('powerup')}
+			{#if data.network.supports('powerup')}
 				<Button variant="primary" href="/{network}/resources/powerup"
 					>Rent resources with PowerUp</Button
 				>
 			{/if}
-			{#if context.network?.supports('rentrex')}
+			{#if data.network.supports('rentrex')}
 				<Button variant="primary" href="/{network}/resources/rex">Rent resources with REX</Button>
 			{/if}
-			{#if context.network?.supports('stakeresource')}
-				<Button variant="primary" href="/{network}/resources/stake">Stake EOS for resources</Button>
+			{#if data.network.supports('stakeresource')}
+				<Button variant="primary" href="/{network}/resources/stake"
+					>Stake {symbolName} for resources</Button
+				>
 			{/if}
 		</Stack>
 		<Stack>
@@ -105,11 +110,12 @@
 	</Stack>
 	<Stack class="max-w-lg flex-1 gap-4">
 		<Stack class="gap-4 px-5 py-3">
-			<h3 class="h3">EOS Resources: A Simple Explanation</h3>
+			<h3 class="h3">{chainName} Resources: A Simple Explanation</h3>
 			<p>
-				The EOS blockchain uses three main resources: CPU, NET, and RAM. Users need these resources
-				to interact with smart contracts and perform actions on the EOS blockchain. Managing these
-				resources is crucial for efficient use of the EOS network.
+				The {chainName} blockchain uses three main resources: CPU, NET, and RAM. Users need these resources
+				to interact with smart contracts and perform actions on the {chainName} blockchain. Managing
+				these resources is crucial for efficient use of the
+				{chainName} network.
 			</p>
 		</Stack>
 		<ul class="space-y-0 lg:space-y-4">

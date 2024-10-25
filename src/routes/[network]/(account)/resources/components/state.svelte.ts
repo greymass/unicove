@@ -80,8 +80,8 @@ export class RentState {
 		!!(
 			this.cost.value &&
 			this.cost.units.lte(this.balance?.units) &&
-			this.payer.value &&
-			this.receiver.value
+			String(this.payer) &&
+			String(this.receiver)
 		)
 	);
 
@@ -133,19 +133,13 @@ export class RentState {
 
 	private getRexActions(contract: Contract) {
 		let actions = [];
-		const depositData = {
-			owner: this.payer,
-			amount: this.cost || 0
-		};
-		console.log('depositData: ', depositData);
-		const depositAction = contract.action('deposit', {
-			owner: this.payer,
-			amount: this.cost || 0
-		});
-
-		actions.push(depositAction);
 
 		if (this.cpuQuantity.value) {
+			const cpuDepositAction = contract.action('deposit', {
+				owner: this.payer,
+				amount: this.cpuQuantity
+			});
+			actions.push(cpuDepositAction);
 			const rentCpuData = {
 				from: this.payer,
 				receiver: this.receiver,
@@ -158,6 +152,11 @@ export class RentState {
 		}
 
 		if (this.netQuantity.value) {
+			const netDepositAction = contract.action('deposit', {
+				owner: this.payer,
+				amount: this.netQuantity
+			});
+			actions.push(netDepositAction);
 			const rentNetData = {
 				from: this.payer,
 				receiver: this.receiver,
