@@ -20,6 +20,8 @@
 
 	import { getContext } from 'svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import { Checksum256, type TransactResult } from '@wharfkit/session';
+	import Transaction from '$lib/components/transaction.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -78,8 +80,10 @@
 
 	let receiverInput: NameInput | undefined = $state();
 
-	const rentState: RentState = $state(new RentState(network.chain, RentType.STAKE));
+	const rentState: RentState = $state(new RentState(network.chain, rentType));
 	const precision = 2;
+	//0ebca2f19920514cb7d1f31f04cbfd279788a06671dd1260b7c00a259e2e85ad
+	let transactionId: Checksum256 | undefined = $state();
 
 	function handleRent() {
 		if (!context.wharf || !context.wharf.session || !context.network) {
@@ -90,12 +94,31 @@
 		try {
 			rentState.resetBeforeTransction();
 			const actions = rentState.getActions(context.network.contracts.system);
+			context.wharf
+				.transact({
+					actions: actions
+				})
+				.then((result: TransactResult) => {
+					transactionId = result.response?.transaction_id;
+					resetStateAfterTrasaction();
+				})
+				.catch((error) => {
+					rentState.error = String(error);
+				});
 		} catch (error) {
 			console.error(error);
 			alert('rex failed: ' + (error as { message: string }).message);
 		}
 	}
+
+	function resetStateAfterTrasaction() {
+		rentState.resetAfterTransction();
+	}
 </script>
+
+{#if transactionId}
+	<div class="pb-6"><Transaction {network} {transactionId} /></div>
+{/if}
 
 <div class="mx-auto max-w-md">
 	<CpuAndNetOverview
@@ -169,27 +192,69 @@
 		</table>
 		<Button variant="secondary" href="/{network}/resources" class="w-full">Cancel</Button>
 	</Stack>
-
-	{#if debugMode}
-		<div class="p-6">
-			<h3 class="h3">Test Info:</h3>
-			<p>receiver: {rentState.receiver}</p>
-			<p>rentingForSelf: {rentState.rentingForSelf}</p>
-			<p>thirdReceiver: {rentState.thirdReceiver}</p>
-			<p>cpuPricePerMs: {rentState.cpuPricePerMs}, netPricePerKb: {rentState.netPricePerKb}</p>
-			<p>liquid: {rentState.balance}</p>
-
-			<h3 class="h3">valid:</h3>
-			<p>Valid: {rentState.valid}</p>
-			<p>ReceiverInputValid: {rentState.thirdReceiverValid}</p>
-
-			<h3 class="h3">Cost</h3>
-			<p>cpuAmount: {rentState.cpuAmount}, netAmount: {rentState.netAmount}</p>
-			<p>cpu: {rentState.cpuQuantity} net: {rentState.netQuantity}</p>
-			<p>cost: {rentState.cost}</p>
-			{#if rentType === RentType.POWERUP}
-				<p>cpuFrac: {rentState.cpuFrac}, netFrac: {rentState.netFrac}</p>
-			{/if}
-		</div>
-	{/if}
 </div>
+{#if debugMode}
+	<div class="mt-6 mx-auto max-w-md border-2 border-skyBlue-500 p-6">
+		<h3 class="h3 text-center">Test Info</h3>
+		<table class="table-styles">
+			<tbody>
+				<tr>
+					<td class="text-left">RentType</td>
+					<td class="text-right">{rentType}</td>
+				</tr>
+				<tr>
+					<td class="text-left">Balance</td>
+					<td class="text-right">{rentState.balance}</td>
+				</tr>
+				<tr>
+					<td class="text-left">Receiver</td>
+					<td class="text-right">{rentState.receiver}</td>
+				</tr>
+				<tr>
+					<td class="text-left">RentingForSelf</td>
+					<td class="text-right">{rentState.rentingForSelf}</td>
+				</tr>
+				<tr>
+					<td class="text-left">ThirdReceiver</td>
+					<td class="text-right">{rentState.thirdReceiver}</td>
+				</tr>
+				<tr>
+					<td class="text-left">ThirdReceiver-Valid</td>
+					<td class="text-right">{rentState.thirdReceiverValid}</td>
+				</tr>
+
+				<tr>
+					<td class="text-left">Valid</td>
+					<td class="text-right">{rentState.valid}</td>
+				</tr>
+				<tr>
+					<td class="text-left">CpuAmount</td>
+					<td class="text-right">{rentState.cpuAmount}</td>
+				</tr>
+
+				<tr>
+					<td class="text-left">NetAmount</td>
+					<td class="text-right">{rentState.netAmount}</td>
+				</tr>
+				<tr>
+					<td class="text-left">CpuQuantity</td>
+					<td class="text-right">{rentState.cpuQuantity}</td>
+				</tr>
+				<tr>
+					<td class="text-left">NetQuantity</td>
+					<td class="text-right">{rentState.netQuantity}</td>
+				</tr>
+				{#if rentType === RentType.POWERUP}
+					<tr>
+						<td class="text-left">CpuFrac</td>
+						<td class="text-right">{rentState.cpuFrac}</td>
+					</tr>
+					<tr>
+						<td class="text-left">NetFrac</td>
+						<td class="text-right">{rentState.netFrac}</td>
+					</tr>
+				{/if}
+			</tbody>
+		</table>
+	</div>
+{/if}

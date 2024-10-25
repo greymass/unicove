@@ -12,10 +12,8 @@
 
 	const network = data.network;
 	const account = $derived(context.account);
-
-	function handleRent() {}
 </script>
 
-<div class="container rounded-2xl sm:bg-shark-900/20 sm:pb-10 sm:pt-6">
+<div class="container rounded-2xl sm:bg-shark-900/20 sm:p-6 sm:pb-10">
 	<Renting rentType={RentType.STAKE} {network} {account}></Renting>
 </div>
