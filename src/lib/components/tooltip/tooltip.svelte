@@ -8,17 +8,26 @@
 		content: string;
 		children?: Snippet;
 		icon?: typeof Icon;
-		duration?: number;
+		fadeDuration?: number;
+		openDelay?: number;
+		closeDelay?: number;
 	}
 
-	const { content, children, icon, duration = 50 }: Props = $props();
+	const {
+		content,
+		children,
+		icon,
+		fadeDuration = 50,
+		openDelay = 300,
+		closeDelay = 300
+	}: Props = $props();
 
 	const {
 		elements: { trigger, content: tooltipContent },
 		states: { open }
 	} = createTooltip({
-		openDelay: 300,
-		closeDelay: 300
+		openDelay,
+		closeDelay
 	});
 </script>
 
@@ -31,7 +40,7 @@
 {#if $open}
 	<div
 		use:melt={$tooltipContent}
-		transition:fade={{ duration }}
+		transition:fade={{ duration: fadeDuration }}
 		class="z-50 flex max-w-xs items-center rounded-md border border-neutral-700 bg-neutral-800 px-4 py-3 text-sm text-white shadow-md"
 	>
 		{#if icon}

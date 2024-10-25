@@ -43,8 +43,18 @@
 
 	<div class="flex items-center space-x-4">
 		<Tooltip
+			content="This tooltip has a longer open and close delay, making it slower to appear and disappear when hovering."
+			openDelay={1000}
+			closeDelay={1000}
+		>
+			<span class="cursor-help underline">Slow open and close tooltip</span>
+		</Tooltip>
+	</div>
+
+	<div class="flex items-center space-x-4">
+		<Tooltip
 			content="This tooltip has a longer fade in duration, making it show up more slowly."
-			duration={1000}
+			fadeDuration={1000}
 		>
 			<span class="cursor-help underline">Slowly appearing tooltip</span>
 		</Tooltip>
