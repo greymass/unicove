@@ -78,7 +78,9 @@
 		}
 	});
 
-	let receiverInput: NameInput | undefined = $state();
+	let cpuAmountInput: NumberInput | undefined = $state();
+	let netAmountInput: NumberInput | undefined = $state();
+	let receiverNameInput: NameInput | undefined = $state();
 
 	const rentState: RentState = $state(new RentState(network.chain, rentType));
 	const precision = 2;
@@ -113,6 +115,8 @@
 
 	function resetStateAfterTrasaction() {
 		rentState.resetAfterTransction();
+		cpuAmountInput?.set();
+		netAmountInput?.set();
 	}
 </script>
 
@@ -133,7 +137,12 @@
 					>Amount of CPU {#if rentState.cpuPricePerMs}
 						(<AssetText variant="full" value={rentState.cpuPricePerMs} />/MS){/if}</Label
 				>
-				<NumberInput id="cpuNumberInput" bind:value={rentState.cpuAmount} placeholder="0 MS" />
+				<NumberInput
+					bind:this={cpuAmountInput}
+					id="cpuNumberInput"
+					bind:value={rentState.cpuAmount}
+					placeholder="0 MS"
+				/>
 			</fieldset>
 
 			<fieldset class="grid gap-1">
@@ -141,7 +150,12 @@
 					>Amount of NET {#if rentState.netPricePerKb}
 						(<AssetText variant="full" value={rentState.netPricePerKb} />/KB){/if}</Label
 				>
-				<NumberInput id="netNumberInput" bind:value={rentState.netAmount} placeholder="0 KB" />
+				<NumberInput
+					bind:this={netAmountInput}
+					id="netNumberInput"
+					bind:value={rentState.netAmount}
+					placeholder="0 KB"
+				/>
 			</fieldset>
 
 			<fieldset class="flex items-center gap-3">
@@ -152,7 +166,7 @@
 			<fieldset class="semi-bold grid gap-1" class:hidden={rentState.rentingForSelf}>
 				<Label for="to-input">Receiving Account</Label>
 				<NameInput
-					bind:this={receiverInput}
+					bind:this={receiverNameInput}
 					bind:value={rentState.thirdReceiver}
 					bind:valid={rentState.thirdReceiverValid}
 					placeholder="Enter the account name"
@@ -194,7 +208,7 @@
 	</Stack>
 </div>
 {#if debugMode}
-	<div class="mt-6 mx-auto max-w-md border-2 border-skyBlue-500 p-6">
+	<div class="mx-auto mt-6 max-w-md border-2 border-skyBlue-500 p-6">
 		<h3 class="h3 text-center">Test Info</h3>
 		<table class="table-styles">
 			<tbody>
