@@ -2,7 +2,6 @@
 	import { page } from '$app/stores';
 	import Button from '$lib/components/button/button.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
-	import { name } from '@melt-ui/svelte';
 	import { walletTypes } from '../../walletTypes';
 	import { ChevronRight } from 'lucide-svelte';
 
