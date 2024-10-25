@@ -5,7 +5,6 @@
 	import Button from '$lib/components/button/button.svelte';
 	import EOS from '$lib/assets/EOS@2x.svg';
 	import Metamask from '$lib/assets/metamask.svg';
-	import Footer from '$lib/components/footer.svelte';
 
 	import TLVHex from './components/tlvhex.svelte';
 	import { type Snippet } from 'svelte';
@@ -27,11 +26,11 @@
 	children?: Snippet;
 	button?: { text: string; href: string };
 })}
-	<Stack class="max-w-sm items-start">
-		<h3 class="h3">{props.title}</h3>
+	<Stack class="max-w-md items-start">
+		<h3 class="h3 leading-tight">{props.title}</h3>
 		<p>{props.text}</p>
 		{#if props.button && props.button.href}
-			<Button href={props.button.href}>{props.button.text}</Button>
+			<Button class="mt-1" href={props.button.href}>{props.button.text}</Button>
 		{/if}
 		{@render props.children?.()}
 	</Stack>
@@ -47,12 +46,12 @@
 	>
 		<!-- Text block -->
 		<Stack
-			class="z-10 col-span-full col-start-1 row-start-1 items-start xs:col-span-3 xs:col-start-1 sm:col-span-3 sm:col-start-1 sm:row-start-1 sm:max-w-sm sm:place-self-center md:col-span-6 md:col-start-1 md:max-w-lg md:place-self-auto  xl:col-start-2 "
+			class="z-10 col-span-full col-start-1 row-start-1 items-start xs:col-span-3 xs:col-start-1 sm:col-span-3 sm:col-start-1 sm:row-start-1 sm:max-w-sm sm:place-self-center md:col-span-6 md:col-start-1 md:max-w-xl md:place-self-auto"
 		>
-			<h1 class="text-balance text-4xl font-bold leading-tight md:text-6xl">
+			<h1 class="text-balance text-3xl font-semibold leading-tight md:text-4xl md:leading-tight">
 				Unicove is your gateway to the EOS Network
 			</h1>
-			<p class="text-balance text-2xl text-white/60 md:text-3xl">
+			<p class="mb-2 text-balance text-xl leading-tight text-white/60 md:text-2xl md:leading-tight">
 				Stake, Send, Manage Tokens, and Explore EOS – all with ease
 			</p>
 			<Button href={`/${data.network}/signup`}>Create your EOS account now</Button>
@@ -139,10 +138,10 @@
 		</div>
 	</section>
 
-	<section class="col-span-full grid grid-cols-subgrid gap-4 xl:col-start-2 xl:col-end-9">
+	<section class="col-span-full grid grid-cols-subgrid gap-8">
 		<!-- Text -->
 		<div
-			class="z-20 col-span-full row-start-1 max-w-xs place-self-center justify-self-start text-balance xs:col-span-1 sm:col-span-full sm:justify-self-auto md:row-span-2 md:row-start-1 lg:col-span-4 lg:row-auto lg:content-center"
+			class="z-20 col-span-full row-start-1 max-w-md place-self-center justify-self-start text-balance xs:col-span-1 sm:col-span-full sm:justify-self-auto md:row-span-2 md:row-start-1 md:max-w-md lg:col-span-4 lg:row-auto lg:content-center"
 		>
 			{@render textblock({
 				title: `Stake your tokens for ${APY}% APY`,
@@ -239,8 +238,6 @@
 			</Card>
 		</div>
 	</section>
-
-	<Footer />
 </Subgrid>
 
 <style>

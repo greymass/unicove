@@ -170,6 +170,7 @@
 	items-center
 	justify-end
 	text-nowrap
+	rounded-lg
 	bg-transparent
 	py-3.5
 	text-base
@@ -178,18 +179,17 @@
 	text-neutral-400
 	focus:outline-none
 	focus-visible:border-solar-500
-	md:h-7
 	md:justify-between
-	md:rounded-lg
 	md:border
 	md:border-white/20
-	md:px-2
 	md:py-2
+	md:pl-3
+	md:pr-2
 	{className}
 	"
 >
-	<span>Search<span class="hidden md:inline">...</span> </span>
-	<SearchIcon class="ml-2 size-4 text-inherit" />
+	<span class="hidden md:inline">Search... </span>
+	<SearchIcon class="ml-2 size-6 text-inherit md:size-5" />
 </button>
 
 {#if $open}

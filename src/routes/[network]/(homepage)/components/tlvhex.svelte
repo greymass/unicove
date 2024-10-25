@@ -8,7 +8,7 @@
 	<!-- Big hex -->
 	<div class="grid place-items-center *:col-start-1 *:row-start-1">
 		<svg
-			class="size-56 object-contain md:size-full"
+			class="size-64 object-contain md:size-full"
 			width="296"
 			height="342"
 			viewBox="0 0 296 342"
@@ -20,18 +20,18 @@
 				fill="#202429"
 			/>
 		</svg>
-		<div class="grid gap-2 text-center uppercase">
-			<img class="mb-3 h-10 place-self-center md:h-20" src={EOS} alt="eos" />
-			<span class="text-base text-white/60 md:text-lg">Total locked value</span>
+		<div class="grid text-center uppercase">
+			<img class="mb-4 h-12 place-self-center md:h-20" src={EOS} alt="eos" />
+			<span class="text-sm text-white/60 md:text-lg">Total locked value</span>
 			<!-- TODO: add eos formatter -->
-			<span class="text-lg font-semibold md:text-2xl">{TLV} EOS</span>
+			<span class="text-md font-semibold md:text-2xl">{TLV} EOS</span>
 		</div>
 	</div>
 
 	<!-- Small hex -->
 	<div class="absolute -bottom-4 -right-2 grid place-items-center *:col-start-1 *:row-start-1">
 		<svg
-			class="size-20 object-contain md:size-full"
+			class="size-24 object-contain md:size-full"
 			width="95"
 			height="110"
 			viewBox="0 0 95 110"
@@ -44,8 +44,8 @@
 			/>
 		</svg>
 		<div class="grid text-center uppercase">
-			<span class="text-base text-white/60 md:text-lg">APY</span>
-			<span class="text-lg font-semibold md:text-2xl">{APY}%</span>
+			<span class="text-sm text-white/60 md:text-lg">APY</span>
+			<span class="text-md font-semibold md:text-2xl">{APY}%</span>
 		</div>
 	</div>
 </div>

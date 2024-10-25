@@ -7,6 +7,7 @@
 	import AccountSwitcher from '$lib/components/select/account.svelte';
 	import UnicoveLogo from '$lib/assets/unicovelogo.svelte';
 	import Search from '$lib/components/input/search.svelte';
+	import Footer from '$lib/components/footer.svelte';
 
 	let { children, data } = $props();
 
@@ -95,11 +96,7 @@
 >
 	<header class="col-span-full flex items-center justify-between">
 		<!-- Larger breakpoints only	 -->
-		<UnicoveLogo
-			small
-			href="/{data.network}"
-			class="hidden size-6 w-min place-self-center md:block"
-		/>
+		<UnicoveLogo small href="/{data.network}" class="hidden w-min place-self-center md:block" />
 
 		<MobileNavigation network={data.network} />
 
@@ -121,6 +118,8 @@
 	>
 		{@render children()}
 	</main>
+
+	<Footer />
 </div>
 
 <!-- This wrapper sets up the bottom menu on mobile, becomes hidden on desktop -->

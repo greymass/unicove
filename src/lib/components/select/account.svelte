@@ -79,7 +79,6 @@
 	focus-visible:ring-2
 	focus-visible:ring-inset
 	focus-visible:ring-solar-500
-	md:h-7
 	{className}
 	"
 	use:melt={$trigger}
@@ -89,11 +88,13 @@
 >
 	{#if context.wharf.session}
 		<div class="flex items-center gap-2 pl-3.5 pr-4">
-			<img
-				src={String(logo)}
-				alt={context.wharf.session.chain.name}
-				class="size-5 object-contain md:size-4"
-			/>
+			<picture class="size-5">
+				<img
+					src={String(logo)}
+					alt={context.wharf.session.chain.name}
+					class="size-full object-contain"
+				/>
+			</picture>
 			<span class="pointer-events-none z-10 text-base text-white/90"
 				>{context.wharf.session.actor}</span
 			>

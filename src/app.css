@@ -39,7 +39,7 @@
 
 	p,
 	li {
-		@apply max-w-prose text-base font-medium text-white/60;
+		@apply max-w-prose text-base font-normal text-white/60;
 	}
 
 	/* Layout */
@@ -60,7 +60,7 @@
 		@apply flex flex-wrap gap-4;
 	}
 
-	.layout-switcher > * {
+	.layout-switcher>* {
 		flex-grow: 1;
 		flex-basis: calc((var(--switcher-threshold) - 100%) * 999);
 	}

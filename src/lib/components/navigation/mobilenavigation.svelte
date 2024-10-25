@@ -48,7 +48,7 @@
 	flex
 	h-10
 	items-center
-	gap-1
+	gap-2
 	text-nowrap
 	rounded-lg
 	py-3.5
@@ -69,8 +69,8 @@
 	id="menu-open"
 	data-session={!!context.wharf.session}
 >
-	<UnicoveLogo small href="/{network}" class="size-6 w-min place-self-center" />
-	<Menu class="size-6 text-inherit" />
+	<UnicoveLogo small href="/{network}" class="size-8 w-min place-self-center" />
+	<Menu class="size-8 text-inherit" />
 	<!-- <span>Menu</span> -->
 </button>
 

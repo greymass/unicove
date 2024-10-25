@@ -5,19 +5,19 @@ import containerQueries from '@tailwindcss/container-queries';
 export default {
 	content: ['./src/**/*.{svelte,html,js,ts}'],
 	theme: {
-		fontSize: {
-			xs: ['8px', '0.75rem'], // 8px
-			sm: ['0.625rem', '1rem'], // 10px
-			base: ['0.75rem', '1rem'], // 12px
-			lg: ['0.875rem', '1.25rem'], // 14px
-			xl: ['1rem', '1.5rem'], // 16px
-			'2xl': ['1.125rem', '1.75rem'], // 18px
-			'3xl': ['1.25rem', '1.75rem'], // 20px
-			'4xl': ['1.5rem', '2rem'], // 24px
-			'5xl': ['1.875rem', '2.25rem'], // 30px
-			'6xl': ['2.25rem', '2.5rem'], // 36px
-			'7xl': ['3rem', '1'] // 48px
-		},
+		// fontSize: {
+		// 	xs: ['8px', '0.75rem'], // 8px
+		// 	sm: ['0.625rem', '1rem'], // 10px
+		// 	base: ['0.75rem', '1rem'], // 12px
+		// 	lg: ['0.875rem', '1.25rem'], // 14px
+		// 	xl: ['1rem', '1.5rem'], // 16px
+		// 	'2xl': ['1.125rem', '1.75rem'], // 18px
+		// 	'3xl': ['1.25rem', '1.75rem'], // 20px
+		// 	'4xl': ['1.5rem', '2rem'], // 24px
+		// 	'5xl': ['1.875rem', '2.25rem'], // 30px
+		// 	'6xl': ['2.25rem', '2.5rem'], // 36px
+		// 	'7xl': ['3rem', '1'] // 48px
+		// },
 		extend: {
 			screens: {
 				xs: '480px'
