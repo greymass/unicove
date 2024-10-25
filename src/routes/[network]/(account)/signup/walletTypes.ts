@@ -14,15 +14,40 @@ export interface Wallet {
 	route: string;
 	description?: string;
 	logo?: string;
+	supportedNetworks?: string[]; // if empty, all networks are supported
 }
 
-export interface WalletType {
+interface WalletTypeProps {
 	type: 'hardware' | 'desktop' | 'mobile' | 'extensions';
 	title: string;
 	description: string;
 	icon: typeof Icon;
 	benefits: string[];
 	wallets: Wallet[];
+}
+
+export class WalletType {
+	readonly type: 'hardware' | 'desktop' | 'mobile' | 'extensions';
+	readonly title: string;
+	readonly description: string;
+	readonly icon: typeof Icon;
+	readonly benefits: string[];
+	readonly wallets: Wallet[];
+
+	constructor({ type, title, description, icon, benefits, wallets }: WalletTypeProps) {
+		this.type = type;
+		this.title = title;
+		this.description = description;
+		this.icon = icon;
+		this.benefits = benefits;
+		this.wallets = wallets;
+	}
+
+	networkWallets(network: string): Wallet[] {
+		return this.wallets.filter(
+			(wallet) => !wallet.supportedNetworks || wallet.supportedNetworks.includes(network)
+		);
+	}
 }
 
 export const walletTypes: Record<string, WalletType> = {
@@ -39,7 +64,7 @@ export const walletTypes: Record<string, WalletType> = {
 	// 	],
 	// 	wallets: [{ name: 'Anchor Web', route: 'anchor' }]
 	// },
-	hardware: {
+	hardware: new WalletType({
 		type: 'hardware',
 		title: 'Hardware Wallets',
 		description: 'Hardware wallets are physical devices that securely store your private keys.',
@@ -50,8 +75,8 @@ export const walletTypes: Record<string, WalletType> = {
 			'Support for multiple cryptocurrencies'
 		],
 		wallets: [{ name: 'Ledger', route: 'signup/wallets/hardware/ledger', logo: LedgerLogo }]
-	},
-	desktop: {
+	}),
+	desktop: new WalletType({
 		type: 'desktop',
 		title: 'Desktop',
 		description: 'Desktop wallets are applications that you install on your computer.',
@@ -83,8 +108,8 @@ export const walletTypes: Record<string, WalletType> = {
 					'Fast and secure with multi-chain support. Offers a smooth onboarding experience.'
 			}
 		]
-	},
-	mobile: {
+	}),
+	mobile: new WalletType({
 		type: 'mobile',
 		title: 'Mobile Wallets',
 		description: 'Mobile wallets are applications you install on your mobile device.',
@@ -116,8 +141,8 @@ export const walletTypes: Record<string, WalletType> = {
 				description: 'A leading crypto wallet that supports multiple chains.'
 			}
 		]
-	},
-	extensions: {
+	}),
+	extensions: new WalletType({
 		type: 'extensions',
 		title: 'Browser Extensions',
 		description:
@@ -137,7 +162,7 @@ export const walletTypes: Record<string, WalletType> = {
 			},
 			{ name: 'Wombat', route: 'signup/wallets/extensions/wombat', logo: WombatLogo }
 		]
-	}
+	})
 };
 
 export function getWalletTypeFromPath(path: string) {
