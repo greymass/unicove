@@ -10,13 +10,13 @@
 		<p>Tooltips provide additional information when hovering over an element.</p>
 	</div>
 
-	<div class="flex items-center space-x-4">
+	<div>
 		<Tooltip content="Another tooltip example">
 			<span class="cursor-help underline">Small tooltip</span>
 		</Tooltip>
 	</div>
 
-	<div class="flex items-center space-x-4">
+	<div>
 		<Tooltip
 			content="This is a medium-length tooltip that provides more detailed information about a feature or concept."
 		>
@@ -24,7 +24,7 @@
 		</Tooltip>
 	</div>
 
-	<div class="flex items-center space-x-4">
+	<div>
 		<Tooltip
 			content="This is a longer tooltip that can be used to provide comprehensive explanations or instructions. It's useful when you need to convey more complex information without cluttering the main interface. Remember that tooltips should still be concise and to the point."
 		>
@@ -32,7 +32,7 @@
 		</Tooltip>
 	</div>
 
-	<div class="flex items-center space-x-4">
+	<div>
 		<Tooltip
 			content="This is a long tooltip with an icon. Icons can be used to provide visual cues about the type of information being presented. For example, this icon might indicate that the tooltip contains important or critical information that the user should pay attention to."
 			icon={Info}
@@ -41,7 +41,7 @@
 		</Tooltip>
 	</div>
 
-	<div class="flex items-center space-x-4">
+	<div>
 		<Tooltip
 			content="This tooltip has a longer open and close delay, making it slower to appear and disappear when hovering."
 			openDelay={1000}
@@ -51,12 +51,20 @@
 		</Tooltip>
 	</div>
 
-	<div class="flex items-center space-x-4">
+	<div>
 		<Tooltip
 			content="This tooltip has a longer fade in duration, making it show up more slowly."
 			fadeDuration={1000}
 		>
 			<span class="cursor-help underline">Slowly appearing tooltip</span>
+		</Tooltip>
+	</div>
+
+	<div>
+		<Tooltip content="This tooltip is on an icon.">
+			<span class="inline-block cursor-help">
+				<Info />
+			</span>
 		</Tooltip>
 	</div>
 </Stack>
