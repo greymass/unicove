@@ -142,7 +142,7 @@
 	<section class="col-span-full grid grid-cols-subgrid gap-4 xl:col-start-2 xl:col-end-9">
 		<!-- Text -->
 		<div
-			class="z-20 col-span-full row-start-1 max-w-xs place-self-center justify-self-start text-balance sm:justify-self-auto md:row-span-2 md:row-start-1 lg:col-span-4 lg:row-auto lg:content-center"
+			class="z-20 col-span-full row-start-1 max-w-xs place-self-center justify-self-start text-balance xs:col-span-1 sm:col-span-full sm:justify-self-auto md:row-span-2 md:row-start-1 lg:col-span-4 lg:row-auto lg:content-center"
 		>
 			{@render textblock({
 				title: `Stake your tokens for ${APY}% APY`,
