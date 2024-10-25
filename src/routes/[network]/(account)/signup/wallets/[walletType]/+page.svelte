@@ -2,6 +2,7 @@
 	import { page } from '$app/stores';
 	import Button from '$lib/components/button/button.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
+	import { name } from '@melt-ui/svelte';
 	import { walletTypes } from '../../walletTypes';
 	import { ChevronRight } from 'lucide-svelte';
 
@@ -49,7 +50,7 @@
 <Stack>
 	<h3 class="h2">Available Wallets</h3>
 	<Stack>
-		{#each currentWalletType.networkWallets(data.network.chain.name) as wallet}
+		{#each currentWalletType.networkWallets(data.network.shortname) as wallet}
 			<a
 				href="/{data.network}/{wallet.route}"
 				class="group grid grid-cols-[auto_1fr_auto] items-center gap-4 rounded-2xl border border-white/20 p-4

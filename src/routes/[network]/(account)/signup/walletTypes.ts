@@ -74,7 +74,14 @@ export const walletTypes: Record<string, WalletType> = {
 			'Offline storage of private keys',
 			'Support for multiple cryptocurrencies'
 		],
-		wallets: [{ name: 'Ledger', route: 'signup/wallets/hardware/ledger', logo: LedgerLogo }]
+		wallets: [
+			{
+				name: 'Ledger',
+				route: 'signup/wallets/hardware/ledger',
+				logo: LedgerLogo,
+				supportedNetworks: ['eos', 'jungle4']
+			}
+		]
 	}),
 	desktop: new WalletType({
 		type: 'desktop',
@@ -91,21 +98,24 @@ export const walletTypes: Record<string, WalletType> = {
 				name: 'MetaMask',
 				route: 'signup/wallets/extensions/metamask',
 				logo: MetaMaskLogo,
-				description: 'Secure and easy-to-use browser extension wallet.'
+				description: 'Secure and easy-to-use browser extension wallet.',
+				supportedNetworks: ['eos', 'jungle4']
 			},
 			{
 				name: 'Anchor',
 				route: 'signup/wallets/desktop/anchor',
 				logo: AnchorLogo,
 				description:
-					'Popular option with a user-friendly interface. Supports multiple EOSIO chains.'
+					'Popular option with a user-friendly interface. Supports multiple EOSIO chains.',
+				supportedNetworks: ['eos', 'jungle4']
 			},
 			{
 				name: 'Wombat',
 				route: 'signup/wallets/desktop/wombat',
 				logo: WombatLogo,
 				description:
-					'Fast and secure with multi-chain support. Offers a smooth onboarding experience.'
+					'Fast and secure with multi-chain support. Offers a smooth onboarding experience.',
+				supportedNetworks: ['eos']
 			}
 		]
 	}),
@@ -125,20 +135,23 @@ export const walletTypes: Record<string, WalletType> = {
 				route: 'signup/wallets/mobile/anchor',
 				logo: AnchorLogo,
 				description:
-					'Popular mobile option with a user-friendly interface. Supports multiple EOSIO chains.'
+					'Popular mobile option with a user-friendly interface. Supports multiple EOSIO chains.',
+				supportedNetworks: ['eos', 'jungle4']
 			},
 			{
 				name: 'Wombat Mobile',
 				route: 'signup/wallets/mobile/wombat',
 				logo: WombatLogo,
 				description:
-					'Fast and secure with multi-chain support. Offers a smooth onboarding experience.'
+					'Fast and secure with multi-chain support. Offers a smooth onboarding experience.',
+				supportedNetworks: ['eos']
 			},
 			{
 				name: 'TokenPocket',
 				route: 'signup/wallets/mobile/tokenpocket',
 				logo: TokenPocketLogo,
-				description: 'A leading crypto wallet that supports multiple chains.'
+				description: 'A leading crypto wallet that supports multiple chains.',
+				supportedNetworks: ['eos']
 			}
 		]
 	}),
@@ -158,9 +171,17 @@ export const walletTypes: Record<string, WalletType> = {
 				name: 'MetaMask',
 				route: 'signup/wallets/extensions/metamask',
 				logo: MetaMaskLogo,
-				description: 'MetaMask is a secure and easy-to-use browser extension wallet.'
+				description: 'MetaMask is a secure and easy-to-use browser extension wallet.',
+				supportedNetworks: ['eos', 'jungle4']
 			},
-			{ name: 'Wombat', route: 'signup/wallets/extensions/wombat', logo: WombatLogo }
+			{
+				name: 'Wombat',
+				route: 'signup/wallets/extensions/wombat',
+				logo: WombatLogo,
+				description:
+					'Fast and secure with multi-chain support. Offers a smooth onboarding experience.',
+				supportedNetworks: ['eos']
+			}
 		]
 	})
 };

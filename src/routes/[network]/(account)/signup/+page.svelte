@@ -10,7 +10,7 @@
 	const currentEnvironment = detectEnvironment();
 	const currentWalletType = walletTypes[currentEnvironment];
 	const recommendedWallet = currentWalletType.wallets[0];
-	const otherWallets = currentWalletType.wallets.slice(1);
+	const otherWallets = currentWalletType.networkWallets(data.network.shortname).slice(1);
 </script>
 
 <Stack class="gap-2">

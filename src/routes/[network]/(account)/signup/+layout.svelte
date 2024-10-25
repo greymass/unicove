@@ -44,7 +44,6 @@
 
 	function isFutureStep(stepIndex: number) {
 		const currentStep = getCurrentStep();
-		console.log({ currentStep, stepIndex });
 		if (!currentStep) return false;
 		return stepIndex > steps.indexOf(currentStep);
 	}
