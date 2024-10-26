@@ -127,6 +127,8 @@
 		</p>
 	</Stack>
 
+	<Button type="submit" class="mt-4 w-full" disabled={!buyRamState.valid}>Confirm Buy RAM</Button>
+
 	<Stack class="mt-4 gap-3">
 		<Card>
 			<h3 class="h3">Details</h3>
@@ -150,8 +152,6 @@
 			{/if}
 		{/if}
 	</Stack>
-
-	<Button type="submit" class="mt-4 w-full" disabled={!buyRamState.valid}>Confirm Buy RAM</Button>
 
 	{#if debugMode.value}
 		<h3 class="h3">Debugging</h3>

@@ -119,6 +119,8 @@
 		</p>
 	</Stack>
 
+	<Button type="submit" class="mt-4 w-full" disabled={!sellRamState.valid}>Confirm Sell RAM</Button>
+
 	<Stack class="mt-4 gap-3">
 		<Card>
 			<h3 class="h3">Details</h3>
@@ -140,8 +142,6 @@
 			<SummarySellRAM action={{ data: sellRamState.toJSON() }} />
 		{/if}
 	</Stack>
-
-	<Button type="submit" class="mt-4 w-full" disabled={!sellRamState.valid}>Confirm Sell RAM</Button>
 
 	{#if debugMode.value}
 		<h3 class="h3">Debugging</h3>
