@@ -64,10 +64,10 @@ export function parseRicardian(action: ABI.Action | undefined): RicardianData | 
 	};
 }
 
-export function detectEnvironment(): 'mobile' | 'desktop' {
+export function detectEnvironment(): 'mobile' | 'desktop' | undefined {
 	if (typeof window === 'undefined') {
-		// Server-side rendering, default to desktop
-		return 'desktop';
+		// Server-side rendering
+		return;
 	}
 
 	const userAgent = window.navigator.userAgent.toLowerCase();
