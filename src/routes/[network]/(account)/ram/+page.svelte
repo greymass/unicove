@@ -8,6 +8,9 @@
 	import Card from '$lib/components/layout/box/card.svelte';
 	import Button from '$lib/components/button/button.svelte';
 	import { calculateValue } from '$lib/utils';
+	import { RAMCalculatorState } from './state.svelte';
+	import AssetInput from '$lib/components/input/asset.svelte';
+	import BytesInput from '$lib/components/input/bytes.svelte';
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');
@@ -36,6 +39,26 @@
 	);
 
 	let ramOwned = $derived(Asset.from(Number(context.account?.ram?.max || 0) / 1000, '4,KB'));
+
+	const ramCalculatorState = new RAMCalculatorState(data.network.chain);
+
+	$effect(() => {
+		if (data.network.ramprice) {
+			ramCalculatorState.pricePerKB = data.network.ramprice.eos;
+		}
+	});
+
+	function setAssetAmount() {
+		ramCalculatorState.setAssetAmount(ramCalculatorState.tokens);
+	}
+
+	function setBytesAmount() {
+		ramCalculatorState.setBytesAmount(ramCalculatorState.bytes || 0);
+		assetInput?.set(ramCalculatorState.bytesValue);
+	}
+
+	let assetInput: AssetInput;
+	let bytesInput: BytesInput;
 </script>
 
 <div class="space-y-4 p-4 text-white">
@@ -97,4 +120,23 @@
 			<p class="-mt-8 font-bold text-white">{ramSupply ? formatAsset(ramSupply, 3) : '0 GB'}</p>
 		</Card>
 	</div>
+	<Card class="gap-4">
+		<h2 class="text-xl font-bold">RAM Calculator</h2>
+		<div class="flex gap-4">
+			<div class="flex-1">
+				<AssetInput
+					bind:value={ramCalculatorState.tokens}
+					bind:this={assetInput}
+					oninput={setAssetAmount}
+				/>
+			</div>
+			<div class="flex-1">
+				<BytesInput
+					bind:value={ramCalculatorState.bytes}
+					bind:this={bytesInput}
+					oninput={setBytesAmount}
+				/>
+			</div>
+		</div>
+	</Card>
 </div>
