@@ -120,7 +120,7 @@
 			<p class="-mt-8 font-bold text-white">{ramSupply ? formatAsset(ramSupply, 3) : '0 GB'}</p>
 		</Card>
 	</div>
-	<Card class="gap-4">
+	<Card class="gap-4 bg-gray-800">
 		<h2 class="text-xl font-bold">RAM Calculator</h2>
 		<div class="flex gap-4">
 			<div class="flex-1">
