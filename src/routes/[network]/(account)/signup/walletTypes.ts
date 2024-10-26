@@ -85,7 +85,7 @@ export const walletTypes: Record<string, WalletType> = {
 	}),
 	desktop: new WalletType({
 		type: 'desktop',
-		title: 'Desktop',
+		title: 'Desktop Wallets',
 		description: 'Desktop wallets are applications that you install on your computer.',
 		icon: LaptopMinimal,
 		benefits: [

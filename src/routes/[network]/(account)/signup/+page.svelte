@@ -46,7 +46,9 @@
 			</div>
 		</div>
 	</Stack>
-	<div class="my-6 border-t border-white/20"></div>
+	<div class="my-2 border-t border-white/20"></div>
+
+	<h3 class="h3">Other {currentWalletType?.title}</h3>
 
 	{#if otherWallets}
 		{#each otherWallets as wallet}
