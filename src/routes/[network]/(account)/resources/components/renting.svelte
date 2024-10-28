@@ -76,6 +76,11 @@
 		}
 	});
 
+	let cpuAmountInput: NumberInput | undefined = $state();
+	let netAmountInput: NumberInput | undefined = $state();
+	let receiverNameInput: NameInput | undefined = $state();
+
+	const rentState: RentState = $state(new RentState(network.chain, rentType));
 	const rentDetails = $derived.by(() => {
 		const details = [];
 		details.push({ title: 'Usable for', desc: usableTime });
@@ -86,11 +91,6 @@
 		return details;
 	});
 
-	let cpuAmountInput: NumberInput | undefined = $state();
-	let netAmountInput: NumberInput | undefined = $state();
-	let receiverNameInput: NameInput | undefined = $state();
-
-	const rentState: RentState = $state(new RentState(network.chain, rentType));
 	const precision = 2;
 	//0ebca2f19920514cb7d1f31f04cbfd279788a06671dd1260b7c00a259e2e85ad
 	let transactionId: Checksum256 | undefined = $state();
@@ -167,7 +167,7 @@
 				<Label for="rentForSelf">Rent Resources for my account</Label>
 			</fieldset>
 
-			{#if rentState.rentingForSelf}
+			{#if !rentState.rentingForSelf}
 				<fieldset class="semi-bold grid gap-1">
 					<Label for="thirdReceiver">Receiving Account</Label>
 					<NameInput
@@ -201,7 +201,7 @@
 				>
 					<span class="text-base font-medium">{detail.title}</span>
 					<span class="text-base font-medium text-white">{detail.desc}</span>
-				</li>s
+				</li>
 			{/each}
 		</ul>
 		<Button variant="secondary" href="/{network}/resources" class="w-full">Cancel</Button>
