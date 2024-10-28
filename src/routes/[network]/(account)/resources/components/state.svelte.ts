@@ -12,6 +12,7 @@ export class RentState {
 	public chain: ChainDefinition;
 	public rentType: RentType;
 
+	// rentint for self or third
 	public rentingForSelf = $state(true);
 	public thirdReceiver: Name = $state(defaultName);
 	public thirdReceiverValid = $state(false);
@@ -134,38 +135,29 @@ export class RentState {
 
 	private getRexActions(contract: Contract) {
 		const actions = [];
+		const cpuDepositData = {
+			owner: this.payer,
+			amount: this.cost
+		};
+		actions.push(contract.action('deposit', cpuDepositData));
 		if (this.cpuQuantity.value) {
-			const cpuDepositAction = contract.action('deposit', {
-				owner: this.payer,
-				amount: this.cpuQuantity
-			});
-			actions.push(cpuDepositAction);
 			const rentCpuData = {
 				from: this.payer,
 				receiver: this.receiver,
 				loan_payment: this.cpuQuantity,
 				loan_fund: Asset.fromUnits(0, this.chain.systemToken!.symbol)
 			};
-			console.log('rentCpuData: ', rentCpuData);
-			const rentCpuAction = contract.action('rentcpu', rentCpuData);
-			actions.push(rentCpuAction);
+			actions.push(contract.action('rentcpu', rentCpuData));
 		}
 
 		if (this.netQuantity.value) {
-			const netDepositAction = contract.action('deposit', {
-				owner: this.payer,
-				amount: this.netQuantity
-			});
-			actions.push(netDepositAction);
 			const rentNetData = {
 				from: this.payer,
 				receiver: this.receiver,
 				loan_payment: this.netQuantity,
 				loan_fund: Asset.fromUnits(0, this.chain.systemToken!.symbol)
 			};
-			console.log('rentCpuData: ', rentNetData);
-			const rentNetAction = contract.action('rentnet', rentNetData);
-			actions.push(rentNetAction);
+			actions.push(contract.action('rentnet', rentNetData));
 		}
 		return actions;
 	}
