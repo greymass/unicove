@@ -14,6 +14,6 @@
 	<div class="absolute right-3 top-3 text-xl font-bold">RAM</div>
 	<div class="absolute bottom-2 right-3">
 		<h5 class="h5 text-right">{ramAvailable.toFixed(precision)} kb</h5>
-		<p>Usage Available</p>
+		<p>Available</p>
 	</div>
 </div>

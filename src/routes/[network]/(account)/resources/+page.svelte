@@ -4,8 +4,8 @@
 	import CpuIcon from '$lib/assets/resources/cpu.svg';
 	import NetIcon from '$lib/assets/resources/net.svg';
 	import RamIcon from '$lib/assets/resources/ram.svg';
-	import CpuAndNetOverview from './components/cpunet.svelte';
-	import RamOverview from './components/ram.svelte';
+	import CpuAndNetResource from '$lib/components/elements/cpunetresource.svelte';
+	import RamResource from '$lib/components/elements/ramresource.svelte';
 	import { calAvailableSize } from './utils';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
@@ -74,7 +74,7 @@
 >
 	<Stack class="max-w-lg flex-1 gap-9">
 		<Stack>
-			<CpuAndNetOverview
+			<CpuAndNetResource
 				cpuAvailable={cpuAvailableSize}
 				netAvailable={netAvailableSize}
 				{precision}
@@ -94,7 +94,7 @@
 			{/if}
 		</Stack>
 		<Stack>
-			<RamOverview ramAvailable={ramAvailableSize} {precision} />
+			<RamResource ramAvailable={ramAvailableSize} {precision} />
 			<Button variant="secondary" href="/{network}/ram">RAM Market</Button>
 		</Stack>
 	</Stack>

@@ -2,7 +2,7 @@ import { type Action, Asset, Name } from '@wharfkit/antelope';
 import { ChainDefinition } from '@wharfkit/common';
 import type { Contract } from '@wharfkit/contract';
 
-import type { RentType } from '../utils';
+import type { RentType } from './utils';
 
 const defaultName = Name.from('');
 const defaultSymbol = Asset.Symbol.from('0,UNKNOWN');
@@ -60,14 +60,6 @@ export class RentState {
 	public cpuFrac: number = $state(0);
 	public netFrac: number = $state(0);
 
-	//transaction error
-	public error: string = $state('');
-
-	public min: number | undefined = $derived(
-		this.balance ? Asset.fromUnits(1, this.balance.symbol).value : undefined
-	);
-	public max: number | undefined = $derived(this.balance ? this.balance.value : undefined);
-
 	public insufficientBalance: boolean = $derived.by(() => {
 		if (this.cost && this.balance) return this.cost.value > this.balance.value;
 		return false;
@@ -96,17 +88,11 @@ export class RentState {
 		this.netPricePerKb = undefined;
 		this.cpuFrac = 0;
 		this.netFrac = 0;
-		this.error = '';
-	}
-
-	resetBeforeTransction() {
-		this.error = '';
 	}
 
 	resetAfterTransction() {
 		this.cpuAmount = 0;
 		this.netAmount = 0;
-		this.error = '';
 	}
 
 	getActions(contract: Contract): Action[] {

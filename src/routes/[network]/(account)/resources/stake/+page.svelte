@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Renting from '../components/renting.svelte';
+	import Renting from '../renting.svelte';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';

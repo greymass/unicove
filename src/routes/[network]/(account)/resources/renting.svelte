@@ -7,7 +7,7 @@
 	import Checkbox from '$lib/components/input/checkbox.svelte';
 	import Button from '$lib/components/button/button.svelte';
 	import Transaction from '$lib/components/transaction.svelte';
-	import CpuAndNetOverview from './cpunet.svelte';
+	import CpuAndNetResource from '$lib/components/elements/cpunetresource.svelte';
 
 	import { Checksum256, type TransactResult } from '@wharfkit/session';
 
@@ -20,7 +20,7 @@
 
 	import { preventDefault } from '$lib/utils';
 	import { RentState } from './state.svelte';
-	import { calAvailableSize, getCpuAndNetPrice, getPowerupFrac, type RentType } from '../utils';
+	import { calAvailableSize, getCpuAndNetPrice, getPowerupFrac, type RentType } from './utils';
 
 	const context = getContext<UnicoveContext>('state');
 	const debugMode = getSetting('debug-mode', true);
@@ -92,7 +92,6 @@
 	});
 
 	const precision = 2;
-	//0ebca2f19920514cb7d1f31f04cbfd279788a06671dd1260b7c00a259e2e85ad
 	let transactionId: Checksum256 | undefined = $state();
 
 	function handleRent() {
@@ -102,7 +101,6 @@
 		}
 
 		try {
-			rentState.resetBeforeTransction();
 			const actions = rentState.getActions(context.network.contracts.system);
 			context.wharf
 				.transact({
@@ -113,11 +111,10 @@
 					resetStateAfterTrasaction();
 				})
 				.catch((error) => {
-					rentState.error = String(error);
+					console.error(error);
 				});
 		} catch (error) {
 			console.error(error);
-			alert('rex failed: ' + (error as { message: string }).message);
 		}
 	}
 
@@ -133,10 +130,10 @@
 {/if}
 
 <div class="mx-auto max-w-md">
-	<CpuAndNetOverview cpuAvailable={cpuAvailableSize} netAvailable={netAvailableSize} {precision} />
+	<CpuAndNetResource cpuAvailable={cpuAvailableSize} netAvailable={netAvailableSize} {precision} />
 	<form onsubmit={preventDefault(handleRent)}>
 		<Stack class="py-4 sm:p-4">
-			<fieldset class="grid gap-1">
+			<fieldset class="grid gap-2">
 				<Label for="cpuNumberInput"
 					>Amount of CPU {#if rentState.cpuPricePerMs}
 						(<AssetText variant="full" value={rentState.cpuPricePerMs} />/MS){/if}</Label
@@ -149,7 +146,7 @@
 				/>
 			</fieldset>
 
-			<fieldset class="grid gap-1">
+			<fieldset class="grid gap-2">
 				<Label for="netNumberInput"
 					>Amount of NET {#if rentState.netPricePerKb}
 						(<AssetText variant="full" value={rentState.netPricePerKb} />/KB){/if}</Label
@@ -168,7 +165,7 @@
 			</fieldset>
 
 			{#if !rentState.rentingForSelf}
-				<fieldset class="semi-bold grid gap-1">
+				<fieldset class="semi-bold grid gap-2">
 					<Label for="thirdReceiver">Receiving Account</Label>
 					<NameInput
 						id="thirdReceiver"

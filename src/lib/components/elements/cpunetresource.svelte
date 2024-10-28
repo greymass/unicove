@@ -19,7 +19,7 @@
 		<div class="absolute right-3 top-3 text-xl font-bold">CPU</div>
 		<div class="absolute bottom-2 right-3">
 			<h5 class="h5 text-right">{cpuAvailable.toFixed(precision)} ms</h5>
-			<p>Usage Available</p>
+			<p>Available</p>
 		</div>
 	</div>
 	<div class="relative h-[103px] flex-1 rounded-r-lg bg-[#303338]">
@@ -29,7 +29,7 @@
 		<div class="absolute right-4 top-3 text-xl font-bold">NET</div>
 		<div class="absolute bottom-2 right-4">
 			<h5 class="h5 text-right">{netAvailable.toFixed(precision)} kb</h5>
-			<p>Usage Available</p>
+			<p>Available</p>
 		</div>
 	</div>
 </div>

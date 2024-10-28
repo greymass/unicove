@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import BackIcon from '$lib/assets/title-icon-back.svg';
+	import { ChevronLeft } from 'lucide-svelte';
 
 	import Stack from '$lib/components/layout/stack.svelte';
 	import Pageheader from '$lib/components/pageheader.svelte';
@@ -28,7 +28,7 @@
 				href="/{data.network}/resources"
 				class="flex size-11 items-center justify-center rounded-full bg-[#303338] text-center"
 			>
-				<img src={BackIcon} alt="BackIcon" />
+				<ChevronLeft class="size-7 text-skyBlue-500" />
 			</a>
 		{/if}
 		<Pageheader title="Resources" {subtitle} />
