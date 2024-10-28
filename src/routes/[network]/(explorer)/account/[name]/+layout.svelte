@@ -2,6 +2,7 @@
 	import { page } from '$app/stores';
 	import { Stack } from '$lib/components/layout';
 	import PillGroup from '$lib/components/navigation/pillgroup.svelte';
+	import Pageheader from '$lib/components/pageheader.svelte';
 
 	const { children, data } = $props();
 
@@ -32,12 +33,7 @@
 </script>
 
 <header class="layout-stack gap-6">
-	<Stack class="gap-2">
-		<h1 class="h2 leading-none text-neutral-200/60">Account</h1>
-		{#if data.account}
-			<h2 class="h1 font-bold text-white">{data.account.name}</h2>
-		{/if}
-	</Stack>
+	<Pageheader title="Account" subtitle={String(data.account.name)} inverted />
 	<PillGroup {options} class="mb-6" />
 </header>
 

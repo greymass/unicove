@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Box, Stack } from '$lib/components/layout';
+	import { Stack } from '$lib/components/layout';
 	import PageHeader from '$lib/components/pageheader.svelte';
 	import PillGroup from '$lib/components/navigation/pillgroup.svelte';
 	import { page } from '$app/stores';
@@ -25,11 +25,9 @@
 	);
 </script>
 
-<Box>
-	<Stack>
-		<PageHeader title="Staking" />
-		<PillGroup {options} class="mb-6" />
-	</Stack>
+<Stack>
+	<PageHeader title="Staking" />
+	<PillGroup {options} class="mb-6" />
+</Stack>
 
-	{@render children()}
-</Box>
+{@render children()}

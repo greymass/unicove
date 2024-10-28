@@ -67,6 +67,7 @@
 		"@wharfkit/web-renderer": "^1.4.1",
 		"big.js": "^6.2.1",
 		"chart.js": "^4.4.3",
+		"clsx": "^2.1.1",
 		"dayjs": "^1.11.13",
 		"inter-ui": "^4.0.2",
 		"just-extend": "^6.2.0",
@@ -74,6 +75,7 @@
 		"prettier-plugin-organize-imports": "^4.0.0",
 		"runed": "^0.15.3",
 		"svead": "^0.0.11",
+		"tailwind-merge": "^2.5.3",
 		"typescript-svelte-plugin": "^0.3.40"
 	},
 	"resolutions": {

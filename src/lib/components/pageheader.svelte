@@ -5,11 +5,14 @@
 		inverted?: boolean;
 	}
 	let props: Props = $props();
+
+	const titleStyle = 'text-3xl font-bold leading-none text-white';
+	const subtitleStyle = 'text-xl font-medium leading-none text-white/60';
 </script>
 
-<header class="flex gap-2" class:flex-col={!props.inverted} class:flex-col-reverse={props.inverted}>
-	<h1 class="text-3xl font-bold leading-none text-white">{props.title}</h1>
+<header class="grid gap-2">
+	<h1 class={props.inverted ? subtitleStyle : titleStyle}>{props.title}</h1>
 	{#if props.subtitle}
-		<h2 class="text-xl font-medium leading-none text-white/60">{props.subtitle}</h2>
+		<h2 class={props.inverted ? titleStyle : subtitleStyle}>{props.subtitle}</h2>
 	{/if}
 </header>

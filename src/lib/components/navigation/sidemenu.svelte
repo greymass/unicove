@@ -54,22 +54,20 @@
 	);
 </script>
 
-<menu
-	class="sticky top-0 grid h-svh max-h-[768px] min-w-36 grid-rows-[56px_1fr_56px] gap-6 px-9 py-4 {className}"
->
-	<UnicoveLogo {network} wordmark class="" {callbackFn} />
-	<nav class="flex flex-col justify-center gap-1 text-nowrap text-base font-medium text-white">
+<menu class="grid h-svh grid-rows-[auto_1fr] justify-start gap-8 px-8 md:px-0 {className}">
+	<UnicoveLogo href="/{network}" wordmark class="flex pt-4 md:hidden" {callbackFn} />
+	<nav class="flex flex-col gap-1 text-nowrap text-base font-medium text-white">
 		{#each options as option}
 			<a
 				href={option.href}
-				class="flex h-12 items-center transition-opacity hover:opacity-100"
+				class="flex items-center py-3 leading-snug transition-opacity first:pt-1 hover:opacity-100"
 				class:opacity-50={!option.active}
 				class:opacity-100={option.active}
 				aria-current={!!option.active}
 				onclick={callbackFn}
 			>
 				<span
-					class="border-b-2 py-1"
+					class="border-b-2 pb-1"
 					class:border-transparent={!option.active}
 					class:border-skyBlue-500={option.active}
 				>
@@ -84,11 +82,11 @@
 	:root {
 		--bg-menu: var(--network-theme, #00b5ff60);
 	}
-	menu {
-		background-image: radial-gradient(
-			circle at left -250% top 50%,
-			var(--bg-menu) 40%,
-			transparent 80%
-		);
-	}
+	/* menu { */
+	/* 	background-image: radial-gradient( */
+	/* 		circle at left -250% top 50%, */
+	/* 		var(--bg-menu) 40%, */
+	/* 		transparent 80% */
+	/* 	); */
+	/* } */
 </style>
