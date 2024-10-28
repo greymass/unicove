@@ -78,7 +78,7 @@
 				<Stack class="gap-0">
 					<div class="grid grid-cols-2 gap-2">
 						<p class="caption">In 21 days you can claim</p>
-						<p>{manager.assetValid ? manager.assetValue : ''}</p>
+						<p>{manager.assetValue}</p>
 						<p class="caption">Lockup</p>
 						<p>21 Days</p>
 					</div>

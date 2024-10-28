@@ -12,33 +12,33 @@ export interface UnstakingRecord {
 const defaultSymbol = Asset.Symbol.from('0,UNKNOWN');
 export const defaultQuantity = Asset.fromUnits(0, defaultSymbol);
 
-export function getStakableBalance(network: NetworkState, account: AccountState): Asset {
+export function getStakableBalance(network?: NetworkState, account?: AccountState): Asset {
 	const balance = Int64.from(0);
 	if (account && account.balance) {
 		if (account.balance && account.balance.liquid) {
 			balance.add(account.balance.liquid.units);
 		}
 	}
-	return Asset.fromUnits(balance, network.chain.systemToken!.symbol);
+	return Asset.fromUnits(balance, network ? network.chain.systemToken!.symbol : defaultSymbol);
 }
 
-export function getStakedBalance(network: NetworkState, account: AccountState): Asset {
+export function getStakedBalance(network?: NetworkState, account?: AccountState): Asset {
 	const staked = Int64.from(0);
 	if (account && account.loaded) {
-		if (account.account?.data.rex_info) {
+		if (account.account?.data.rex_info && network) {
 			staked.add(network.rexToToken(account.account.data.rex_info.rex_balance).units);
 		}
 		if (account.sources.rexfund) {
 			staked.add(Asset.from(account.sources.rexfund.balance).units);
 		}
 	}
-	return Asset.fromUnits(staked, network.chain.systemToken!.symbol);
+	return Asset.fromUnits(staked, network ? network.chain.systemToken!.symbol : defaultSymbol);
 }
 
 export function getClaimableBalance(
-	network: NetworkState,
-	account: AccountState,
-	unstaking: Array<UnstakingRecord> | undefined
+	network?: NetworkState,
+	account?: AccountState,
+	unstaking?: Array<UnstakingRecord>
 ): Asset {
 	// claimable buckets, rex to be sold
 	const claimable = Int64.from(0);
@@ -54,24 +54,24 @@ export function getClaimableBalance(
 		claimable.add(sum);
 	}
 
-	return Asset.fromUnits(claimable, network.chain.systemToken!.symbol);
+	return Asset.fromUnits(claimable, network ? network.chain.systemToken!.symbol : defaultSymbol);
 }
 
-export function getWithdrawableBalance(network: NetworkState, account: AccountState): Asset {
+export function getWithdrawableBalance(network?: NetworkState, account?: AccountState): Asset {
 	const withdrawable = Int64.from(0);
 	if (account && account.loaded && account.sources.rexfund && account.sources.rexfund.balance) {
 		withdrawable.add(Asset.from(account.sources.rexfund.balance).units);
 	}
-	return Asset.fromUnits(withdrawable, network.chain.systemToken!.symbol);
+	return Asset.fromUnits(withdrawable, network ? network.chain.systemToken!.symbol : defaultSymbol);
 }
 
 export function getUnstakingBalances(
-	network: NetworkState,
-	account: AccountState
+	network?: NetworkState,
+	account?: AccountState
 ): Array<UnstakingRecord> {
 	// matured_rex + claimable buckets
 	const records: Array<UnstakingRecord> = [];
-	if (account && account.loaded && account.account?.data.rex_info) {
+	if (network && account && account.loaded && account.account?.data.rex_info) {
 		const rexInfo = account.account.data.rex_info;
 		if (rexInfo.matured_rex && rexInfo.matured_rex.gt(Int64.from(0))) {
 			// construct matured as one rex bucket
@@ -108,15 +108,17 @@ export function getUnstakingBalances(
 }
 
 export function getUnstakableBalance(
-	network: NetworkState,
-	account: AccountState,
-	unstaking: Array<UnstakingRecord> | undefined
+	network?: NetworkState,
+	account?: AccountState,
+	unstaking?: Array<UnstakingRecord>
 ): Asset {
 	if (!unstaking) {
 		unstaking = getUnstakingBalances(network, account);
 	}
 	const savings = unstaking.find((r) => r.savings);
-	return savings ? savings.balance : Asset.from(0, network.chain.systemToken!.symbol);
+	return savings
+		? savings.balance
+		: Asset.from(0, network ? network.chain.systemToken!.symbol : defaultSymbol);
 }
 
 export function getAPY(network: NetworkState): string {

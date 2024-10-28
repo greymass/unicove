@@ -13,11 +13,9 @@
 	const { data } = $props();
 	const networkName = String(data.network);
 
-	let staked: Asset = $derived(
-		context.account ? getStakedBalance(data.network, context.account) : Asset.from(0, '0,UNKNOWN')
-	);
+	let staked: Asset = $derived(getStakedBalance(data.network, context.account));
 	let unstaking: Array<UnstakingRecord> = $derived(
-		context.account ? getUnstakingBalances(data.network, context.account) : []
+		getUnstakingBalances(data.network, context.account)
 	);
 	let apy = $derived(getAPY(data.network));
 	let usdValue = $derived(
