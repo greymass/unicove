@@ -12,6 +12,7 @@
 	import Button from '$lib/components/button/button.svelte';
 	import { Stack } from '$lib/components/layout';
 	import { truncateCenter } from '$lib/utils';
+	import { cn } from '$lib/utils';
 
 	interface NameInputProps extends ComponentProps<TextInput> {
 		debug?: boolean;
@@ -162,33 +163,12 @@
 	use:melt={$trigger}
 	aria-label="search"
 	id="search"
-	class="
-	relative
-	z-50
-	inline-flex
-	h-10
-	items-center
-	justify-end
-	text-nowrap
-	rounded-lg
-	bg-transparent
-	py-3.5
-	text-base
-	font-medium
-	leading-4
-	text-neutral-400
-	focus:outline-none
-	focus-visible:border-solar-500
-	md:justify-between
-	md:border
-	md:border-white/20
-	md:py-2
-	md:pl-3
-	md:pr-2
-	{className}
-	"
+	class={cn(
+		'relative z-50 inline-flex h-10 items-center justify-end text-nowrap rounded-lg bg-transparent py-3.5 text-base font-medium leading-4 text-neutral-400 focus:outline-none focus-visible:border-solar-500 md:justify-between md:border md:border-white/20 md:py-2 md:pl-3 md:pr-2',
+		className
+	)}
 >
-	<span class="hidden md:inline">Search... </span>
+	<span class="hidden md:inline">Search...</span>
 	<SearchIcon class="ml-2 size-6 text-inherit md:size-5" />
 </button>
 
@@ -208,21 +188,25 @@
 			}}
 		>
 			<Stack>
-				<form onsubmit={preventDefault(goToResult)} class="relative">
-					<input
-						type="text"
-						bind:this={ref}
-						bind:value={searchValue}
-						placeholder="Enter an account, transaction, key, or block..."
-						{...props}
-						class="w-full rounded-lg border-2 border-skyBlue-500 bg-transparent p-4 focus:outline-none"
-					/>
-					<button
-						type="submit"
-						class="absolute right-4 top-1/2 -translate-y-1/2 outline-none focus:ring-2 focus:ring-skyBlue-500"
-					>
-						<SearchIcon class="size-5" />
-					</button>
+				<form onsubmit={preventDefault(goToResult)}>
+					<div class="relative">
+						<input
+							type="text"
+							bind:this={ref}
+							bind:value={searchValue}
+							placeholder="Enter an account, transaction, key, or block..."
+							{...props}
+							class="w-full rounded-lg border-2 border-skyBlue-500 bg-transparent p-4 focus:outline-none"
+						/>
+
+						<SearchIcon
+							class="absolute right-4 top-1/2 size-5 -translate-y-1/2 outline-none focus:ring-2 focus:ring-skyBlue-500"
+						/>
+					</div>
+					<div class="mt-2 flex gap-2">
+						<Button variant="secondary" meltAction={close}>Close</Button>
+						<Button variant="primary" type="submit">Search</Button>
+					</div>
 				</form>
 
 				{#if history.length}
@@ -274,8 +258,6 @@
 						</div>
 					</div>
 				{/if}
-
-				<Button variant="secondary" meltAction={close}>Close</Button>
 			</Stack>
 		</div>
 	</div>
