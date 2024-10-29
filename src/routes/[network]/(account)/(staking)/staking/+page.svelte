@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Card, Stack, Switcher } from '$lib/components/layout';
 	import Button from '$lib/components/button/button.svelte';
+	import AssetText from '$lib/components/elements/asset.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { Asset } from '@wharfkit/antelope';
 	import { getContext } from 'svelte';
@@ -30,10 +31,14 @@
 	<Switcher threshold="40rem" class="items-start justify-center">
 		<Card class="gap-5">
 			<Stack class="gap-0">
-				<p class="caption">Currently Staked - {apy}% APY</p>
-				<p class="h3">{staked}</p>
+				<p class="caption">
+					Staked Balance - {apy}% APY
+				</p>
+				<p class="h3">
+					<AssetText value={staked} />
+				</p>
 				<p class="mt-1.5 self-start rounded bg-shark-800/60 px-2">
-					${usdValue}
+					$<AssetText value={usdValue} />
 				</p>
 			</Stack>
 			<Switcher threshold="20rem">

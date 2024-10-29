@@ -44,7 +44,7 @@
 						{/if}
 					</div>
 					<Stack class="gap-2">
-						<p>Total {data.account.balance?.total.symbol.name || ''} Balance</p>
+						<p>{data.account.balance?.total.symbol.name || ''} Balance</p>
 						<AssetText class="h3" value={data.account.balance?.total} />
 					</Stack>
 				</div>
@@ -56,7 +56,7 @@
 						<span class="text-3xl font-light">$</span>
 					</div>
 					<Stack class="gap-2">
-						<p>Total {data.account.value?.total.symbol.name || ''} Balance</p>
+						<p>{data.account.value?.total.symbol.name || ''} Value</p>
 						<AssetText class="h3" value={data.account.value?.total} />
 					</Stack>
 				</div>
@@ -79,11 +79,11 @@
 								{name}
 							</td>
 							<td>
-								<AssetText value={asset} variant="full" />
+								<AssetText value={asset} />
 							</td>
 							<td>
 								{#if usdValue && usdValue.value}
-									<AssetText value={usdValue} variant="full" />
+									<AssetText value={usdValue} />
 								{/if}
 							</td>
 						</tr>

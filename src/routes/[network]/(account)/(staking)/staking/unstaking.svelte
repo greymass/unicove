@@ -2,6 +2,7 @@
 
 <script lang="ts">
 	import type { HTMLAttributes } from 'svelte/elements';
+	import AssetText from '$lib/components/elements/asset.svelte';
 	import { Card } from '$lib/components/layout';
 	import Button from '$lib/components/button/button.svelte';
 	import type { UnstakingRecord } from './utils';
@@ -26,7 +27,7 @@
 			{#each records as record}
 				{#if !record.savings}
 					<tr>
-						<td>{record.balance}</td>
+						<td><AssetText value={record.balance} /></td>
 						<td class="text-right">
 							{record.date
 								? record.date.toLocaleDateString(undefined, {
