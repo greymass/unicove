@@ -2,6 +2,8 @@
 	import type { Asset } from '@wharfkit/antelope';
 	import type { HTMLAttributes } from 'svelte/elements';
 
+	import { languageTag } from '$lib/paraglide/runtime.js';
+
 	interface AssetProps extends HTMLAttributes<HTMLSpanElement> {
 		value?: Asset;
 		variant?: 'value' | 'quantity' | 'full';
@@ -21,6 +23,8 @@
 	{#if variant === 'full'}
 		{value ? `${value.quantity} ${value.symbol.name}` : fallback}
 	{:else}
-		{value?.value || fallback}
+		{Number(value?.value || fallback).toLocaleString(languageTag(), {
+			minimumFractionDigits: value?.symbol.precision
+		})}
 	{/if}
 </span>
