@@ -37,6 +37,7 @@
 
 		const items = [
 			{ href: `/${network}`, text: network.chain.name },
+			{ href: `/${network}/send`, text: 'Send' },
 			...features,
 			{ href: `/${network}/settings`, text: 'Settings' }
 		];
