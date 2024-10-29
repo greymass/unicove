@@ -115,17 +115,16 @@ export class RentState {
 			cpu_frac: this.cpuFrac,
 			max_payment: this.cost
 		};
-		console.log('getPowerUpActions: ', rentData);
 		return [contract.action('powerup', rentData)];
 	}
 
 	private getRexActions(contract: Contract) {
 		const actions = [];
-		const cpuDepositData = {
+		const depositData = {
 			owner: this.payer,
 			amount: this.cost
 		};
-		actions.push(contract.action('deposit', cpuDepositData));
+		actions.push(contract.action('deposit', depositData));
 		if (this.cpuQuantity.value) {
 			const rentCpuData = {
 				from: this.payer,
@@ -158,7 +157,6 @@ export class RentState {
 			stake_net_quantity: netQuantity,
 			transfer: false
 		};
-		console.log('getStakeActions: ', rentData);
 		return [contract.action('delegatebw', rentData)];
 	}
 }

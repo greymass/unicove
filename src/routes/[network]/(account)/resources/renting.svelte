@@ -23,7 +23,7 @@
 	import { calAvailableSize, getCpuAndNetPrice, getPowerupFrac, type RentType } from './utils';
 
 	const context = getContext<UnicoveContext>('state');
-	const debugMode = getSetting('debug-mode', true);
+	const debugMode = getSetting('debug-mode', false);
 
 	interface Props {
 		rentType: RentType;
@@ -84,6 +84,10 @@
 	const rentDetails = $derived.by(() => {
 		const details = [];
 		details.push({ title: 'Usable for', desc: usableTime });
+		details.push({
+			title: 'Balance available',
+			desc: `${rentState.balance.quantity} ${rentState.balance.symbol.name}`
+		});
 		details.push({
 			title: 'Total cost',
 			desc: `${rentState.cost.quantity} ${rentState.cost.symbol.name}`
@@ -204,7 +208,7 @@
 		<Button variant="secondary" href="/{network}/resources" class="w-full">Cancel</Button>
 	</Stack>
 </div>
-{#if debugMode}
+{#if debugMode.value}
 	<div class="mx-auto mt-6 max-w-md border-2 border-skyBlue-500 p-6">
 		<h3 class="h3 text-center">Debug Info</h3>
 		<table class="table-styles">

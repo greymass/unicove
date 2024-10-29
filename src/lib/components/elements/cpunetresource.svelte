@@ -24,7 +24,7 @@
 	</div>
 	<div class="relative h-[103px] flex-1 rounded-r-lg bg-[#303338]">
 		<div class="absolute left-5 top-4">
-			<img src={NetIcon} class="size-6" alt="cpu icon" />
+			<img src={NetIcon} class="size-6" alt="net icon" />
 		</div>
 		<div class="absolute right-4 top-3 text-xl font-bold">NET</div>
 		<div class="absolute bottom-2 right-4">

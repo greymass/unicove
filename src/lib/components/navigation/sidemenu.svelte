@@ -5,6 +5,7 @@
 	import UnicoveLogo from '$lib/assets/unicovelogo.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
+	import { getSetting } from '$lib/state/settings.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -16,7 +17,10 @@
 
 	let { callbackFn, network, class: className }: Props = $props();
 
+	const advancedMode = getSetting('advanced-mode', false);
+
 	const destinations = $derived.by(() => {
+		const isAdvancedMode = advancedMode.value;
 		const features = [];
 
 		if (network.supports('staking')) {
@@ -25,6 +29,10 @@
 
 		if (network.supports('rammarket')) {
 			features.push({ href: `/${network}/ram`, text: 'RAM' });
+		}
+
+		if (isAdvancedMode) {
+			features.push({ href: `/${network}/resources`, text: 'Resources' });
 		}
 
 		const items = [
