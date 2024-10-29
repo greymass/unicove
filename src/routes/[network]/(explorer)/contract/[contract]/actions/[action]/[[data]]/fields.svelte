@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Self from './fields.svelte';
 	import Checkbox from '$lib/components/input/checkbox.svelte';
 	import Label from '$lib/components/input/label.svelte';
 	import Textinput from '$lib/components/input/text.svelte';
@@ -26,7 +27,7 @@
 	{#each fields as field}
 		{@const subfields = deriveFields(field.type)}
 		{#if subfields.length > 0}
-			<svelte:self {abi} codePath={[...codePath, field.name]} fields={subfields} {state} />
+			<Self {abi} codePath={[...codePath, field.name]} fields={subfields} {state} />
 		{:else}
 			{@const fieldName = [...codePath, field.name].join('->')}
 			<fieldset class="grid gap-2">
