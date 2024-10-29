@@ -21,7 +21,6 @@
 	let ramSupply: Asset | undefined = $state();
 
 	$effect(() => {
-		console.log({ ramState: JSON.parse(JSON.stringify(ramState, null, 2)) });
 		if (ramState) {
 			const quoteBalanceEOS = ramState.quote.balance.value;
 			marketCapEOS = Asset.from(
