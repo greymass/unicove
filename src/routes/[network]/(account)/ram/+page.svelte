@@ -27,13 +27,12 @@
 	$effect(() => {
 		if (ramState) {
 			const marketCapEOSValue = Number(data.network.ramprice?.eos.value || 0) * TOTAL_RAM_SUPPLY;
-			console.log({ marketCapEOSValue });
 			marketCapEOS = Asset.from(
 				marketCapEOSValue,
 				data.network.chain.systemToken?.symbol || '0, UNKNOWN'
 			);
-			const marketCapUSDValue = Number(data.network.ramprice?.usd?.value || 0) * TOTAL_RAM_SUPPLY;
-			console.log({ marketCapUSDValue });
+			const marketCapUSDValue =
+				(Number(data.network.ramprice?.usd?.value || 0) * TOTAL_RAM_SUPPLY) / 1000;
 			marketCapUSD = Asset.from(marketCapUSDValue, '2,USD');
 			ramSupply = Asset.from(TOTAL_RAM_SUPPLY / (1000 * 1000 * 1000), '2,GB');
 		}
