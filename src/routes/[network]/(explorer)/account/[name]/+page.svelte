@@ -91,11 +91,15 @@
 					{#if data.account.balance.liquid}
 						{@render row('Available', data.account.balance.liquid, data.account.value?.liquid)}
 					{/if}
-					{#if data.account.balance.delegated}
-						{@render row('Staked', data.account.balance.delegated, data.account.value?.delegated)}
-					{/if}
 					{#if data.account.balance.staked}
-						{@render row('REX', data.account.balance.staked, data.account.value?.staked)}
+						{@render row('Staked', data.account.balance.staked, data.account.value?.staked)}
+					{/if}
+					{#if data.account.balance.delegated}
+						{@render row(
+							'Delegated',
+							data.account.balance.delegated,
+							data.account.value?.delegated
+						)}
 					{/if}
 				</tbody>
 			</table>
