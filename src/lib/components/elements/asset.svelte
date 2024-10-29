@@ -20,8 +20,6 @@
 <span class={className} {...props}>
 	{#if variant === 'full'}
 		{value ? `${value.quantity} ${value.symbol.name}` : fallback}
-	{:else if variant === 'quantity'}
-		{value?.quantity || fallback}
 	{:else}
 		{value?.value || fallback}
 	{/if}
