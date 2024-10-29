@@ -21,11 +21,11 @@
 	let ramSupply: Asset | undefined = $state();
 
 	$effect(() => {
+		console.log({ ramState: JSON.parse(JSON.stringify(ramState, null, 2)) });
 		if (ramState) {
 			const quoteBalanceEOS = ramState.quote.balance.value;
-			const connectorWeight = ramState.quote.weight.value;
 			marketCapEOS = Asset.from(
-				quoteBalanceEOS / connectorWeight,
+				quoteBalanceEOS,
 				data.network.chain.systemToken?.symbol || '0, UNKNOWN'
 			);
 			ramSupply = Asset.from((ramState?.base.balance.value || 0) / (1000 * 1000 * 1000), '2,GB');
