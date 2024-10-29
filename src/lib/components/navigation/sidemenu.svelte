@@ -58,7 +58,9 @@
 	let options = $derived(
 		destinations.map((destination) => ({
 			...destination,
-			active: rootPathname && destination.href.includes(rootPathname)
+			active:
+				(rootPathname && destination.href.includes(rootPathname)) ||
+				(!rootPathname && destination.href === `/${network}`)
 		}))
 	);
 </script>
