@@ -18,25 +18,26 @@
 	const ramState = $derived(data.network.ramstate);
 
 	let marketCapEOS: Asset | undefined = $state();
+	let marketCapUSD: Asset | undefined = $state();
 	let ramSupply: Asset | undefined = $state();
+
+	// Hardcoding the total RAM supply to 409.13 GB for now
+	const TOTAL_RAM_SUPPLY = 409.13 * 1000 * 1000 * 1000;
 
 	$effect(() => {
 		if (ramState) {
-			const quoteBalanceEOS = ramState.quote.balance.value;
-			const connectorWeight = ramState.quote.weight.value;
+			const marketCapEOSValue = Number(data.network.ramprice?.eos.value || 0) * TOTAL_RAM_SUPPLY;
+			console.log({ marketCapEOSValue });
 			marketCapEOS = Asset.from(
-				quoteBalanceEOS / connectorWeight,
+				marketCapEOSValue,
 				data.network.chain.systemToken?.symbol || '0, UNKNOWN'
 			);
-			ramSupply = Asset.from((ramState?.base.balance.value || 0) / (1000 * 1000 * 1000), '2,GB');
+			const marketCapUSDValue = Number(data.network.ramprice?.usd?.value || 0) * TOTAL_RAM_SUPPLY;
+			console.log({ marketCapUSDValue });
+			marketCapUSD = Asset.from(marketCapUSDValue, '2,USD');
+			ramSupply = Asset.from(TOTAL_RAM_SUPPLY / (1000 * 1000 * 1000), '2,GB');
 		}
 	});
-
-	let marketCapUSDValue = $derived(
-		marketCapEOS && data.network.ramprice?.usd
-			? calculateValue(marketCapEOS, data.network.ramprice?.usd)
-			: undefined
-	);
 
 	let ramOwned = $derived(Asset.from(Number(context.account?.ram?.max || 0) / 1000, '4,KB'));
 
@@ -112,7 +113,7 @@
 			<p class="text-left text-gray-400">RAM Market Cap</p>
 			<p class="font-bold text-white">{marketCapEOS ? formatAsset(marketCapEOS) : '0 EOS'}</p>
 			<p class="font-bold text-white">
-				$ {marketCapUSDValue ? formatAsset(marketCapUSDValue) : '0.00 USD'}
+				$ {marketCapUSD ? formatAsset(marketCapUSD) : '0.00 USD'}
 			</p>
 		</Card>
 		<Card class="ml-2 h-32 w-full bg-gray-800">
