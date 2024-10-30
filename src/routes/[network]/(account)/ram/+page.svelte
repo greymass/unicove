@@ -11,6 +11,10 @@
 	import { RAMCalculatorState } from './state.svelte';
 	import AssetInput from '$lib/components/input/asset.svelte';
 	import BytesInput from '$lib/components/input/bytes.svelte';
+	import AssetText from '$lib/components/elements/asset.svelte';
+	import Stack from '$lib/components/layout/stack.svelte';
+	import Item from '$lib/components/select/elements/item.svelte';
+	import Grid from '$lib/components/layout/grid.svelte';
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');
@@ -103,40 +107,72 @@
 		</div>
 	</div>
 
-	<Card class="bg-gray-800 p-4">
-		<RamPriceHistory data={data.historicalPrices} />
-	</Card>
-
-	<div class="text-m mb-20 flex">
-		<Card class="mr-2 h-32 w-full bg-gray-800">
-			<p class="text-left text-gray-400">RAM Market Cap</p>
-			<p class="font-bold text-white">{marketCapEOS ? formatAsset(marketCapEOS) : '0 EOS'}</p>
-			<p class="font-bold text-white">
-				$ {marketCapUSD ? formatAsset(marketCapUSD) : '0.00 USD'}
-			</p>
-		</Card>
-		<Card class="ml-2 h-32 w-full bg-gray-800">
-			<p class="text-gray-400">RAM Supply</p>
-			<p class="-mt-8 font-bold text-white">{ramSupply ? formatAsset(ramSupply, 3) : '0 GB'}</p>
-		</Card>
-	</div>
 	<Card class="gap-4 bg-gray-800">
 		<h2 class="text-xl font-bold">RAM Calculator</h2>
-		<div class="flex gap-4">
-			<div class="flex-1">
+		<Grid itemWidth="49%">
+			<Stack>
+				<h2 class="mb-2">{data.network.chain.systemToken?.symbol.code || ''}</h2>
 				<AssetInput
 					bind:value={ramCalculatorState.tokens}
 					bind:this={assetInput}
 					oninput={setAssetAmount}
 				/>
-			</div>
-			<div class="flex-1">
+			</Stack>
+			<Stack>
+				<h2 class="mb-2">Bytes</h2>
 				<BytesInput
 					bind:value={ramCalculatorState.bytes}
 					bind:this={bytesInput}
 					oninput={setBytesAmount}
 				/>
-			</div>
-		</div>
+			</Stack>
+		</Grid>
+		<h2 class="text-lg font-bold">Details</h2>
+		<Stack class="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
+			<p class="text-gray-400">Price</p>
+			<AssetText
+				class="font-bold"
+				variant="full"
+				value={ramCalculatorState.tokens || Asset.from('0.0000 EOS')}
+			/>
+
+			<div class="col-span-2 my-2 border-b border-gray-600"></div>
+
+			<p class="text-gray-400">Price USD</p>
+			<AssetText
+				class="font-bold"
+				variant="full"
+				value={data.network.ramprice?.usd
+					? calculateValue(ramCalculatorState.tokens, data.network.ramprice.usd)
+					: Asset.from('0.0000 EOS')}
+			/>
+
+			<div class="col-span-2 my-2 border-b border-gray-600"></div>
+
+			<p class="text-gray-400">Fees</p>
+			<AssetText variant="full" class="font-bold" value={ramCalculatorState.fee} />
+		</Stack>
 	</Card>
+
+	<Card class="bg-gray-800 p-4">
+		<div></div>
+		<!-- <RamPriceHistory data={data.historicalPrices} /> -->
+	</Card>
+
+	<Stack class="text-m mb-20">
+		<Grid itemWidth="45%">
+			<Card class="h-32 bg-gray-800">
+				<p class="text-left text-gray-400">RAM Market Cap</p>
+				<AssetText variant="full" class="font-bold text-white" value={marketCapEOS} />
+			</Card>
+			<Card class="h-32 bg-gray-800">
+				<p class="text-gray-400">RAM Supply</p>
+				<AssetText variant="full" class="font-bold text-white" value={ramSupply} />
+			</Card>
+		</Grid>
+		<Card class="w-full bg-gray-800">
+			<p class="text-gray-400">USD Market Cap</p>
+			<AssetText variant="full" class="font-bold text-white" value={marketCapUSD} />
+		</Card>
+	</Stack>
 </div>

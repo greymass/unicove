@@ -37,6 +37,10 @@ export class RAMCalculatorState {
 		this.bytes ? Asset.from(this.bytes / 1000, kbSymbol) : defaultKBAmount
 	);
 
+	public fee: Asset = $derived(
+		Asset.from(this.bytesValue.value * 0.005, this.chain.systemToken?.symbol || '0,UNKNOWN')
+	);
+
 	constructor(chain: ChainDefinition) {
 		this.chain = chain;
 		this.reset();
