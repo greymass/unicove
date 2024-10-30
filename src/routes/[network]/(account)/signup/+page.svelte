@@ -9,6 +9,7 @@
 
 	const currentEnvironment = detectEnvironment();
 	const currentWalletType = walletTypes[currentEnvironment];
+	const WalletComponent = currentWalletType.icon;
 	const currentWalletTypePath = `/${data.network}/signup/wallets/${currentWalletType.type}`;
 	const recommendedWallet = currentWalletType.wallets[0];
 </script>
@@ -28,10 +29,7 @@
 hover:bg-mineShaft-950 focus-visible:outline focus-visible:outline-transparent focus-visible:ring-2 focus-visible:ring-solar-500"
 	>
 		<div class="rounded-full bg-mineShaft-900/60 p-3">
-			<svelte:component
-				this={currentWalletType.icon}
-				class="size-6 group-hover:stroke-skyBlue-500 "
-			/>
+			<WalletComponent class="size-6 group-hover:stroke-skyBlue-500 " />
 		</div>
 		<div class="space-y-1">
 			<h4 class="text-xl font-semibold">

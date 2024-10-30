@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Card, Stack, Switcher } from '$lib/components/layout';
 	import AssetInput from '$lib/components/input/asset.svelte';
+	import AssetText from '$lib/components/elements/asset.svelte';
 	import Button from '$lib/components/button/button.svelte';
 	import Label from '$lib/components/input/label.svelte';
 	import Transaction from '$lib/components/transaction.svelte';
@@ -67,7 +68,7 @@
 						onclick={() => {
 							manager.setMaxValue();
 						}}
-						type="button">Available: {manager.stakable}</button
+						type="button">Available: <AssetText value={manager.stakable} /></button
 					>
 				</Label>
 			</Stack>
@@ -81,9 +82,9 @@
 						<p class="caption">~APY</p>
 						<p>{manager.apy}%</p>
 						<p class="caption">You will stake</p>
-						<p>{manager.assetValue}</p>
+						<p><AssetText value={manager.assetValue} /></p>
 						<p class="caption">Estimated Yield(per year)</p>
-						<p>{manager.estimateYield}</p>
+						<p><AssetText value={manager.estimateYield} /></p>
 					</div>
 				</Stack>
 			</Card>

@@ -37,6 +37,7 @@
 
 		const items = [
 			{ href: `/${network}`, text: network.chain.name },
+			{ href: `/${network}/send`, text: 'Send' },
 			...features,
 			{ href: `/${network}/settings`, text: 'Settings' }
 		];
@@ -57,7 +58,9 @@
 	let options = $derived(
 		destinations.map((destination) => ({
 			...destination,
-			active: rootPathname && destination.href.includes(rootPathname)
+			active:
+				(rootPathname && destination.href.includes(rootPathname)) ||
+				(!rootPathname && destination.href === `/${network}`)
 		}))
 	);
 </script>
