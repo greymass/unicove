@@ -91,4 +91,8 @@
 	[data-variant='primary'] .button-backdrop {
 		@apply bg-white transition-opacity active:bg-black/30 [@media(any-hover:hover)]:hover:opacity-20;
 	}
+
+	[data-variant='outline'] .button-backdrop {
+		@apply bg-mineShaft-900 transition-opacity active:bg-black/30 [@media(any-hover:hover)]:hover:opacity-20;
+	}
 </style>
