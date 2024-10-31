@@ -6,7 +6,7 @@
 
 	interface AssetProps extends HTMLAttributes<HTMLSpanElement> {
 		value?: Asset;
-		variant?: 'value' | 'quantity' | 'full';
+		variant?: 'value' | 'full';
 		fallback?: string;
 	}
 
@@ -17,14 +17,18 @@
 		fallback = '0',
 		...props
 	}: AssetProps = $props();
+
+	function formatAssetValue(value?: Asset) {
+		return Number(value?.value || fallback).toLocaleString(languageTag(), {
+			minimumFractionDigits: value?.symbol.precision
+		});
+	}
 </script>
 
 <span class={className} {...props}>
 	{#if variant === 'full'}
-		{value ? `${value.quantity} ${value.symbol.name}` : fallback}
+		{value ? `${formatAssetValue(value)} ${value.symbol.name}` : fallback}
 	{:else}
-		{Number(value?.value || fallback).toLocaleString(languageTag(), {
-			minimumFractionDigits: value?.symbol.precision
-		})}
+		{formatAssetValue(value)}
 	{/if}
 </span>
