@@ -11,11 +11,12 @@
 	import Progress from './sections/progress.svelte';
 	import Tables from './sections/tables.svelte';
 	import Charts from './sections/charts.svelte';
+	import Tooltips from './sections/tooltips.svelte';
 </script>
 
 <h1 class="h1 mb-8">Design System</h1>
 
-<Stack class="space-y-12">
+<Stack class="space-y-12 pb-12">
 	<Typography />
 
 	<hr class="my-8 h-px border-0 bg-slate-200 dark:bg-slate-800" />
@@ -57,4 +58,8 @@
 	<hr class="my-8 h-px border-0 bg-slate-200 dark:bg-slate-800" />
 
 	<Layouts />
+
+	<hr class="my-8 h-px border-0 bg-slate-200 dark:bg-slate-800" />
+
+	<Tooltips />
 </Stack>

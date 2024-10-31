@@ -39,7 +39,7 @@
 
 	p,
 	li {
-		@apply max-w-prose text-base font-medium text-white/60;
+		@apply max-w-prose text-base font-normal text-white/60;
 	}
 
 	/* Layout */
@@ -114,5 +114,9 @@
 
 	.table-row-background {
 		@apply bg-gradient-to-r from-transparent to-transparent odd:via-mineShaft-950 hover:via-skyBlue-500/10 data-[clickable=true]:cursor-pointer data-[active=true]:via-skyBlue-500/10 data-[hover-effect=false]:hover:via-transparent data-[hover-effect=false]:odd:hover:via-mineShaft-950;
+	}
+
+	.bg-hero-gradient {
+		background-image: radial-gradient(var(--bg-menu) 0%, transparent 50%);
 	}
 }

@@ -24,9 +24,7 @@ export class StakeManager {
 	public error: string = $state('');
 	public txid: string = $state('');
 
-	public stakable: Asset = $derived(
-		this.account && this.network ? getStakableBalance(this.network, this.account) : defaultQuantity
-	);
+	public stakable: Asset = $derived(getStakableBalance(this.network, this.account));
 	public apy: string = $derived(this.network ? getAPY(this.network) : '0');
 	public estimateYield: Asset = $derived(
 		this.network
@@ -39,6 +37,7 @@ export class StakeManager {
 
 	constructor(network: NetworkState) {
 		this.network = network;
+		this.assetValue = this.zeroValue;
 	}
 
 	get zeroValue() {
@@ -51,7 +50,7 @@ export class StakeManager {
 			this.network = network;
 			changed = true;
 		}
-		if (account?.name !== this.account?.name) {
+		if (this.account !== account) {
 			this.account = account;
 			changed = true;
 		}
@@ -61,7 +60,7 @@ export class StakeManager {
 			this.txid = '';
 		}
 
-		if (this.network && this.assetValue.symbol !== this.network.chain.systemToken!.symbol) {
+		if (this.network && !this.assetValue.symbol.equals(this.network.chain.systemToken!.symbol)) {
 			this.input?.set(this.zeroValue);
 		}
 		if (wharf !== this.wharf) {

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Card, Stack, Switcher } from '$lib/components/layout';
 	import Button from '$lib/components/button/button.svelte';
+	import AssetText from '$lib/components/elements/asset.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { Asset } from '@wharfkit/antelope';
 	import { getContext } from 'svelte';
@@ -13,11 +14,9 @@
 	const { data } = $props();
 	const networkName = String(data.network);
 
-	let staked: Asset = $derived(
-		context.account ? getStakedBalance(data.network, context.account) : Asset.from(0, '0,UNKNOWN')
-	);
+	let staked: Asset = $derived(getStakedBalance(data.network, context.account));
 	let unstaking: Array<UnstakingRecord> = $derived(
-		context.account ? getUnstakingBalances(data.network, context.account) : []
+		getUnstakingBalances(data.network, context.account)
 	);
 	let apy = $derived(getAPY(data.network));
 	let usdValue = $derived(
@@ -32,10 +31,14 @@
 	<Switcher threshold="40rem" class="items-start justify-center">
 		<Card class="gap-5">
 			<Stack class="gap-0">
-				<p class="caption">Currently Staked - {apy}% APY</p>
-				<p class="h3">{staked}</p>
+				<p class="caption">
+					Staked Balance - {apy}% APY
+				</p>
+				<p class="h3">
+					<AssetText value={staked} />
+				</p>
 				<p class="mt-1.5 self-start rounded bg-shark-800/60 px-2">
-					${usdValue}
+					$<AssetText value={usdValue} />
 				</p>
 			</Stack>
 			<Switcher threshold="20rem">
