@@ -134,6 +134,27 @@
 			</div>
 			<h2 class="text-xl">Details</h2>
 			<Stack class="grid grid-cols-2 gap-y-0 text-lg">
+				<p class="text-gray-400">Price / KB</p>
+				<AssetText
+					variant="full"
+					class="text-right"
+					value={ramCalculatorState.pricePerKB
+						? Asset.from(ramCalculatorState.pricePerKB)
+						: Asset.from(0, data.network.chain.systemToken?.symbol || '0,UNKNOWN')}
+				/>
+
+				<div class="col-span-2 my-2 border-b border-gray-600"></div>
+
+				<p class="text-gray-400">Price USD / KB</p>
+				<AssetText
+					variant="full"
+					class="text-right"
+					value={ramCalculatorState.pricePerKB && data.network.ramprice?.usd
+						? data.network.ramprice?.usd
+						: Asset.from(0, '2,USD')}
+				/>
+
+				<div class="col-span-2 my-2 border-b border-gray-600"></div>
 				<p class="text-gray-400">Price</p>
 				<AssetText
 					variant="full"
