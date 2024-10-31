@@ -30,7 +30,8 @@
 
 	$effect(() => {
 		if (ramState) {
-			const marketCapEOSValue = Number(data.network.ramprice?.eos.value || 0) * TOTAL_RAM_SUPPLY;
+			const marketCapEOSValue =
+				(Number(data.network.ramprice?.eos.value || 0) * TOTAL_RAM_SUPPLY) / 1000;
 			marketCapEOS = Asset.from(
 				marketCapEOSValue,
 				data.network.chain.systemToken?.symbol || '0, UNKNOWN'
@@ -66,48 +67,51 @@
 </script>
 
 <div class="space-y-4 p-4 text-white">
-	<div class="p-4">
-		<div class="flex flex-col items-start justify-between md:flex-row">
-			<div class="mb-4 w-full md:mb-0 md:w-1/2">
-				<h1 class="text-xl font-bold">RAM</h1>
-				<p class="font-light text-gray-400">Owned</p>
-				<p class="text-2xl font-bold text-white">{String(ramOwned) || '0'}</p>
-				<div class="mt-4 flex space-x-2">
-					<Button
-						class="flex-1 bg-blue-500 hover:bg-blue-600"
-						href="/{String(data.network)}/ram/buy">Buy</Button
-					>
-					<Button
-						class="flex-1 bg-blue-500 hover:bg-blue-600"
-						href="/{String(data.network)}/ram/sell">Sell</Button
-					>
+	<Card class="flex flex-row">
+		<div class="mb-4 w-1/2">
+			<div class="h-24">
+				<div class="flex flex-col">
+					<h1 class="text-xl text-gray-400">Available</h1>
+					<AssetText class="text-xl" variant="full" value={ramOwned} />
+					<AssetText
+						class="text-md text-gray-400"
+						variant="full"
+						value={data.network.ramprice?.usd &&
+							calculateValue(ramOwned, data.network.ramprice?.eos)}
+					/>
 				</div>
 			</div>
-			<div class="mt-4 w-full text-left md:mt-0 md:w-1/2 md:p-8">
-				<p class="text-left text-gray-400">Total RAM Value USD</p>
-				<p class="text-left text-xl font-bold text-white">
-					$ {String(
-						context.account?.ram?.max && data.network.ramprice?.usd
-							? calculateValue(ramOwned, data.network.ramprice?.usd)
-							: '0'
-					)}
-				</p>
-				<hr class="my-2 border-gray-600" />
-				<p class="text-left text-gray-400">
-					Total RAM Value {data.network.chain.systemToken?.symbol.code || ''}
-				</p>
-				<p class="text-left text-xl font-bold text-white">
-					{String(
-						context.account?.ram?.max && data.network.ramprice?.usd
-							? calculateValue(ramOwned, data.network.ramprice?.eos)
-							: '0'
-					)}
-				</p>
-			</div>
+			<Button
+				variant="outline"
+				class="flex-1 bg-blue-500 hover:bg-blue-600"
+				href="/{String(data.network)}/ram/sell"
+			>
+				Sell
+			</Button>
 		</div>
-	</div>
+		<div class="mb-4 w-1/2">
+			<div class="h-24">
+				<div class="flex flex-col">
+					<h1 class="text-xl text-gray-400">Total RAM Value USD</h1>
+					<AssetText
+						class="text-xl"
+						variant="full"
+						value={data.network.ramprice?.usd &&
+							Asset.from(calculateValue(ramOwned, data.network.ramprice?.usd).value, '2,USD')}
+					/>
+				</div>
+			</div>
+			<Button
+				variant="outline"
+				class="flex-1 bg-blue-500 hover:bg-blue-600"
+				href="/{String(data.network)}/ram/buy"
+			>
+				Buy
+			</Button>
+		</div>
+	</Card>
 
-	<Card class="gap-4 bg-gray-800">
+	<Card class="gap-4">
 		<h2 class="text-xl font-bold">RAM Calculator</h2>
 		<Grid itemWidth="49%">
 			<Stack>
@@ -154,25 +158,27 @@
 		</Stack>
 	</Card>
 
-	<Card class="bg-gray-800 p-4">
+	<Card class="p-4">
 		<div></div>
 		<!-- <RamPriceHistory data={data.historicalPrices} /> -->
 	</Card>
 
 	<Stack class="text-m mb-20">
-		<Grid itemWidth="45%">
-			<Card class="h-32 bg-gray-800">
-				<p class="text-left text-gray-400">RAM Market Cap</p>
-				<AssetText variant="full" class="font-bold text-white" value={marketCapEOS} />
+		<Grid itemWidth="48%">
+			<Card>
+				<p class="text-gray-400">
+					RAM Market Cap {data.network.chain.systemToken?.symbol.code || ''}
+				</p>
+				<AssetText variant="full" value={marketCapEOS} class="text-right" />
 			</Card>
-			<Card class="h-32 bg-gray-800">
+			<Card>
 				<p class="text-gray-400">RAM Supply</p>
-				<AssetText variant="full" class="font-bold text-white" value={ramSupply} />
+				<AssetText variant="full" value={ramSupply} class="text-right" />
 			</Card>
 		</Grid>
-		<Card class="w-full bg-gray-800">
-			<p class="text-gray-400">USD Market Cap</p>
-			<AssetText variant="full" class="font-bold text-white" value={marketCapUSD} />
+		<Card class="w-full">
+			<p class="text-gray-400">RAM Market Cap USD</p>
+			<AssetText variant="full" value={marketCapUSD} class="text-right" />
 		</Card>
 	</Stack>
 </div>
