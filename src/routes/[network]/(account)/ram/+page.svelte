@@ -115,7 +115,7 @@
 		<Card class="gap-4">
 			<h2 class="text-xl font-bold">RAM Calculator</h2>
 			<div class="flex flex-row">
-				<Stack class="w-1/2 p-1">
+				<Stack class="w-1/2 pr-1">
 					<h2 class="leading-none">{data.network.chain.systemToken?.symbol.code || ''}</h2>
 					<AssetInput
 						bind:value={ramCalculatorState.tokens}
@@ -123,7 +123,7 @@
 						oninput={setAssetAmount}
 					/>
 				</Stack>
-				<Stack class="w-1/2 p-1">
+				<Stack class="w-1/2 pl-1">
 					<h2 class="leading-none">Bytes</h2>
 					<BytesInput
 						bind:value={ramCalculatorState.bytes}
