@@ -20,6 +20,7 @@
 
 	import { BuyRAMState } from './state.svelte';
 	import { preventDefault } from '$lib/utils';
+
 	import AvailableRam from '../(components)/availableRam.svelte';
 
 	let bytesInput: BytesInput | undefined = $state();
