@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { ArrowLeft } from 'lucide-svelte';
+	import { ChevronLeft } from 'lucide-svelte';
 	import { goto } from '$app/navigation';
 	interface Props {
 		title: string;
@@ -20,8 +20,11 @@
 
 <header class="flex items-center gap-4">
 	{#if props.backPath}
-		<button onclick={goBack} class="text-white hover:text-white/80 focus:outline-none">
-			<ArrowLeft size={24} />
+		<button
+			onclick={goBack}
+			class="flex h-10 w-10 items-center justify-center rounded-full bg-gray-700 text-sky-400 hover:text-sky-300 focus:outline-none"
+		>
+			<ChevronLeft size={24} />
 		</button>
 	{/if}
 	<div class="flex gap-2" class:flex-col={!props.inverted} class:flex-col-reverse={props.inverted}>
