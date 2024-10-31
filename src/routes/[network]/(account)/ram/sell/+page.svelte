@@ -19,6 +19,7 @@
 
 	import { SellRAMState } from './state.svelte';
 	import { preventDefault } from '$lib/utils';
+	import AvailableRam from '../(components)/availableRam.svelte';
 
 	let bytesInput: BytesInput | undefined = $state();
 	let assetInput: AssetInput | undefined = $state();
@@ -88,9 +89,11 @@
 {/if}
 
 <Card>
-	<form onsubmit={preventDefault(handleSellRAM)} class="mx-auto max-w-2xl">
+	<form onsubmit={preventDefault(handleSellRAM)} class="mx-auto max-w-2xl space-y-4">
+		<AvailableRam />
+
 		<Stack class="gap-3">
-			<Label for="bytesInput">Amount to sell</Label>
+			<Label class="text-lg" for="bytesInput">Amount to sell</Label>
 			<div class="flex gap-4">
 				<div class="flex-1">
 					<AssetInput
