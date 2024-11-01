@@ -28,6 +28,8 @@
 	// Hardcoding the total RAM supply to 409.13 GB for now
 	const TOTAL_RAM_SUPPLY = 409.13 * 1000 * 1000 * 1000;
 
+	const totalRamSupply = data.network.ramstate;
+
 	$effect(() => {
 		if (ramState) {
 			const marketCapEOSValue =

@@ -6,7 +6,7 @@ import { snapOrigins } from '@wharfkit/wallet-plugin-metamask';
 
 import { Types as DelphiOracleTypes } from '$lib/wharf/contracts/delphioracle';
 import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
-import { Contract as SystemContract } from '$lib/wharf/contracts/system';
+import { Contract as SystemContract, Types as SystemTypes } from '$lib/wharf/contracts/system';
 import { Contract as TokenContract } from '$lib/wharf/contracts/token';
 
 import {
@@ -34,6 +34,7 @@ export class NetworkState {
 	public contracts: DefaultContracts;
 
 	public ramstate?: RAMState = $state();
+	public globalState?: SystemTypes.eosio_global_state = $state();
 	public resources?: Resources = $state();
 	public rexstate?: REXState = $state();
 	public powerupstate?: PowerUpState = $state();
@@ -91,6 +92,13 @@ export class NetworkState {
 			this.ramstate = RAMState.from(json.ramstate);
 		} catch (error) {
 			console.log('RAMState parse', error);
+			console.log(json);
+		}
+		// We need to fetch the global state table here:
+		try {
+			this.globalState = SystemTypes.eosio_global_state.from({});
+		} catch (error) {
+			console.log('GlobalState parse', error);
 			console.log(json);
 		}
 		try {
