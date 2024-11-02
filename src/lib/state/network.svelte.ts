@@ -96,7 +96,7 @@ export class NetworkState {
 		}
 		// We need to fetch the global state table here:
 		try {
-			this.globalState = SystemTypes.eosio_global_state.from({});
+			this.globalState = await this.contracts.system.table('global').get();
 		} catch (error) {
 			console.log('GlobalState parse', error);
 			console.log(json);

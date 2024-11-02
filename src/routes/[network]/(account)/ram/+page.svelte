@@ -13,8 +13,6 @@
 	import BytesInput from '$lib/components/input/bytes.svelte';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
-	import Item from '$lib/components/select/elements/item.svelte';
-	import Grid from '$lib/components/layout/grid.svelte';
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');
@@ -25,23 +23,20 @@
 	let marketCapUSD: Asset | undefined = $state();
 	let ramSupply: Asset | undefined = $state();
 
-	// Hardcoding the total RAM supply to 409.13 GB for now
-	const TOTAL_RAM_SUPPLY = 409.13 * 1000 * 1000 * 1000;
-
-	const totalRamSupply = data.network.ramstate;
+	const totalRamSupply = $derived(Number(data.network.globalState?.max_ram_size || 0));
 
 	$effect(() => {
 		if (ramState) {
 			const marketCapEOSValue =
-				(Number(data.network.ramprice?.eos.value || 0) * TOTAL_RAM_SUPPLY) / 1000;
+				(Number(data.network.ramprice?.eos.value || 0) * totalRamSupply) / 1000;
 			marketCapEOS = Asset.from(
 				marketCapEOSValue,
 				data.network.chain.systemToken?.symbol || '0, UNKNOWN'
 			);
 			const marketCapUSDValue =
-				(Number(data.network.ramprice?.usd?.value || 0) * TOTAL_RAM_SUPPLY) / 1000;
+				(Number(data.network.ramprice?.usd?.value || 0) * totalRamSupply) / 1000;
 			marketCapUSD = Asset.from(marketCapUSDValue, '2,USD');
-			ramSupply = Asset.from(TOTAL_RAM_SUPPLY / (1000 * 1000 * 1000), '2,GB');
+			ramSupply = Asset.from(totalRamSupply / (1000 * 1000 * 1000), '2,GB');
 		}
 	});
 
