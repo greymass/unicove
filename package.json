@@ -22,6 +22,7 @@
 		"@melt-ui/svelte": "^0.83.0",
 		"@sveltejs/adapter-auto": "^3.2.2",
 		"@sveltejs/adapter-cloudflare": "^4.7.0",
+		"@sveltejs/adapter-vercel": "^5.4.6",
 		"@sveltejs/kit": "^2.5.18",
 		"@sveltejs/vite-plugin-svelte": "^3.1.1",
 		"@types/big.js": "^6.2.2",
