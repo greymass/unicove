@@ -62,8 +62,8 @@
 	let bytesInput: BytesInput;
 </script>
 
-<div class="flex flex-col space-y-4 p-4 text-white lg:flex-row lg:space-x-4 lg:space-y-0">
-	<div class="w-full space-y-4 lg:w-1/2">
+<div class="flex flex-col space-y-4 p-4 text-white xl:flex-row xl:space-x-4 xl:space-y-0">
+	<div class="w-full space-y-4 xl:w-1/2">
 		<Card class="flex flex-row">
 			<div class="mb-4 w-1/2">
 				<div class="h-24">
@@ -176,7 +176,7 @@
 			</Stack>
 		</Card>
 	</div>
-	<div class="w-full space-y-4 lg:w-1/2">
+	<div class="w-full space-y-4 xl:w-1/2">
 		<Card class="bg-transparent p-0">
 			<RamPriceHistory data={data.historicalPrices} />
 		</Card>

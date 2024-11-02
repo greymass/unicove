@@ -17,6 +17,8 @@
 
 	let { data }: Props = $props();
 
+	console.log({ length: data.length, first20: data.slice(0, 20), last20: data.slice(-20) });
+
 	let ctx: HTMLCanvasElement;
 	let chart: Chart<'line'>;
 
