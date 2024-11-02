@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 	import { Asset } from '@wharfkit/antelope';
-	import { formatAsset } from '$lib/utils/assets';
 
 	import RamPriceHistory from '$lib/components/chart/rampricehistory.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';

@@ -1,4 +1,4 @@
-import { Asset, Name, Serializer, Int64 } from '@wharfkit/antelope';
+import { Asset } from '@wharfkit/antelope';
 import { Chains, type ChainDefinition } from '@wharfkit/session';
 
 const defaultSymbol = Asset.Symbol.from('0,UNKNOWN');
