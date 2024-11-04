@@ -6,6 +6,7 @@
 		"dev": "vite dev",
 		"build-paraglide": "npx @inlang/paraglide-js compile --project ./project.inlang --outdir ./src/lib/paraglide",
 		"build": "bun run build-paraglide && vite build",
+		"build-docker": "bun run build-paraglide && ADAPTER=bun vite build",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
