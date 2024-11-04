@@ -24,7 +24,7 @@
 		"@sveltejs/adapter-cloudflare": "^4.7.0",
 		"@sveltejs/adapter-vercel": "^5.4.6",
 		"@sveltejs/kit": "^2.5.18",
-		"@sveltejs/vite-plugin-svelte": "^3.1.1",
+		"@sveltejs/vite-plugin-svelte": "^4.0.0-next.6",
 		"@types/big.js": "^6.2.2",
 		"@types/bun": "^1.1.10",
 		"@types/eslint": "^8.56.11",
@@ -37,7 +37,7 @@
 		"prettier": "^3.3.3",
 		"prettier-plugin-svelte": "^3.2.6",
 		"prettier-plugin-tailwindcss": "^0.6.5",
-		"svelte": "^5.0.5",
+		"svelte": "^5.1.9",
 		"svelte-adapter-bun": "^0.5.2",
 		"svelte-check": "^3.8.6",
 		"tailwindcss": "^3.4.7",
@@ -83,6 +83,7 @@
 	"resolutions": {
 		"@wharfkit/antelope": "^1.0.11",
 		"@wharfkit/common": "^1.4.0",
-		"@wharfkit/session": "^1.4.0"
+		"@wharfkit/session": "^1.4.0",
+		"svelte": "^5.1.9"
 	}
 }
