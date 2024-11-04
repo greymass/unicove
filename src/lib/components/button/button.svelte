@@ -7,7 +7,7 @@
 
 	interface ButtonProps extends HTMLAttributes {
 		href?: string;
-		variant?: 'primary' | 'secondary' | 'pill';
+		variant?: 'primary' | 'secondary' | 'pill' | 'outline';
 		disabled?: boolean;
 		active?: boolean;
 		blank?: boolean;
@@ -71,8 +71,13 @@
 	[data-variant='secondary'] {
 		@apply relative flex grow items-center justify-center text-nowrap rounded-lg px-8 py-3.5 text-center text-base font-medium text-mineShaft-100 ring-2 ring-inset ring-mineShaft-600 hover:ring-transparent focus-visible:outline focus-visible:outline-transparent focus-visible:ring-solar-500 active:ring-transparent disabled:cursor-not-allowed disabled:text-mineShaft-400 disabled:hover:ring-mineShaft-600 disabled:active:ring-mineShaft-600;
 	}
+
 	[data-variant='primary'] {
 		@apply relative inline-flex grow items-center justify-center text-nowrap rounded-lg bg-skyBlue-500 px-8 py-3.5 text-center text-base font-medium text-skyBlue-950 transition-all focus:outline-transparent focus-visible:outline focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-solar-500 disabled:cursor-not-allowed disabled:bg-mineShaft-900 disabled:text-white/60;
+	}
+
+	[data-variant='outline'] {
+		@apply relative flex grow items-center justify-center text-nowrap rounded-lg bg-transparent px-8 py-3.5 text-center text-base font-medium text-skyBlue-500 ring-1 ring-inset ring-mineShaft-600 hover:bg-mineShaft-900/20 focus-visible:outline focus-visible:outline-transparent focus-visible:ring-solar-500 active:bg-mineShaft-900/30 disabled:cursor-not-allowed disabled:text-mineShaft-400 disabled:hover:ring-mineShaft-600 disabled:active:ring-mineShaft-600;
 	}
 
 	.button-backdrop {
@@ -85,5 +90,9 @@
 	}
 	[data-variant='primary'] .button-backdrop {
 		@apply bg-white transition-opacity active:bg-black/30 [@media(any-hover:hover)]:hover:opacity-20;
+	}
+
+	[data-variant='outline'] .button-backdrop {
+		@apply bg-mineShaft-900 transition-opacity active:bg-black/30 [@media(any-hover:hover)]:hover:opacity-20;
 	}
 </style>

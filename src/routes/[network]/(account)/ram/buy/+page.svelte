@@ -16,18 +16,21 @@
 	import AssetInput from '$lib/components/input/asset.svelte';
 	import BytesInput from '$lib/components/input/bytes.svelte';
 	import Card from '$lib/components/layout/box/card.svelte';
+	import AssetText from '$lib/components/elements/asset.svelte';
 
 	import { BuyRAMState } from './state.svelte';
 	import { preventDefault } from '$lib/utils';
 
-	let assetInput: AssetInput | undefined = $state();
+	import AvailableRam from '../(components)/availableRam.svelte';
+
 	let bytesInput: BytesInput | undefined = $state();
+	let assetInput: AssetInput | undefined = $state();
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
 	const debugMode = getSetting('debug-mode', true);
 
-	let buyRamState: BuyRAMState = $state(new BuyRAMState(data.network.chain));
+	const buyRamState: BuyRAMState = $state(new BuyRAMState(data.network.chain));
 
 	let transactionId: Checksum256 | undefined = $state();
 
@@ -94,85 +97,100 @@
 	<Transaction network={data.network} {transactionId} />
 {/if}
 
-<form onsubmit={preventDefault(handleBuyRAM)}>
-	<Stack class="gap-3">
-		<Label for="bytesInput">Amount to buy</Label>
-		<div class="flex gap-4">
-			<div class="flex-1">
-				<AssetInput
-					bind:value={buyRamState.tokens}
-					bind:this={assetInput}
-					oninput={setAssetAmount}
-					autofocus
-				/>
+<Card>
+	<form onsubmit={preventDefault(handleBuyRAM)} class="mx-auto max-w-2xl space-y-4">
+		<AvailableRam />
+
+		<Stack class="gap-3">
+			<Label class="text-lg" for="bytesInput">Amount to buy</Label>
+			<div class="flex gap-4">
+				<div class="flex-1">
+					<AssetInput
+						bind:value={buyRamState.tokens}
+						bind:this={assetInput}
+						oninput={setAssetAmount}
+						autofocus
+					/>
+				</div>
+				<div class="flex-1">
+					<BytesInput
+						bind:value={buyRamState.bytes}
+						bind:this={bytesInput}
+						oninput={setBytesAmount}
+					/>
+				</div>
 			</div>
-			<div class="flex-1">
-				<BytesInput
-					bind:value={buyRamState.bytes}
-					bind:this={bytesInput}
-					oninput={setBytesAmount}
-				/>
-			</div>
-		</div>
-		{#if buyRamState.insufficientBalance}
-			<p class="text-red-500">Insufficient balance. Please enter a smaller amount.</p>
-		{/if}
-		<p>
-			Balance available:
-			{#if context.account}
-				{context.account.balance?.liquid}
-			{:else}
-				0.0000 {data.network.chain.systemToken?.symbol.code || ''}
+			{#if buyRamState.insufficientBalance}
+				<p class="text-red-500">Insufficient balance. Please enter a smaller amount.</p>
 			{/if}
-		</p>
-	</Stack>
+			<p>
+				Balance available:
+				{#if context.account}
+					{context.account.balance?.liquid}
+				{:else}
+					0.0000 {data.network.chain.systemToken?.symbol.code || ''}
+				{/if}
+			</p>
+		</Stack>
 
-	<Stack class="mt-4 gap-3">
-		<Card>
-			<h3 class="h3">Details</h3>
-			<div class="grid grid-cols-2 gap-2">
-				<span>RAM Price:</span>
-				<span>{buyRamState.pricePerKB} / KB</span>
-				<span>Price for {buyRamState.kbs}:</span>
-				<span>{buyRamState.bytesValue}</span>
-				<span>Network Fee (0.5%)</span>
-				<span>{buyRamState.fee}</span>
-				<span>Total Cost</span>
-				<span>{buyRamState.bytesCost}</span>
+		<Button type="submit" class="mt-4 w-full" disabled={!buyRamState.valid}>Confirm Buy RAM</Button>
+
+		<Stack class="mt-4 gap-3">
+			<div class="grid grid-cols-2 gap-y-0 text-lg">
+				<p class="text-gray-400">RAM Price</p>
+				<AssetText variant="full" class="text-right" value={buyRamState.pricePerKB} />
+
+				<div class="col-span-2 my-2 border-b border-gray-600"></div>
+
+				<p class="text-gray-400">RAM to be bought</p>
+				<AssetText variant="full" class="text-right" value={buyRamState.kbs} />
+
+				<div class="col-span-2 my-2 border-b border-gray-600"></div>
+
+				<p class="text-gray-400">RAM Value</p>
+				<AssetText variant="full" class="text-right" value={buyRamState.bytesValue} />
+
+				<div class="col-span-2 my-2 border-b border-gray-600"></div>
+
+				<p class="text-gray-400">Network Fee (0.5%)</p>
+				<AssetText variant="full" class="text-right" value={buyRamState.fee} />
+
+				<div class="col-span-2 my-2 border-b border-gray-600"></div>
+
+				<p class="text-gray-400">Total Cost</p>
+				<AssetText variant="full" class="text-right" value={buyRamState.bytesCost} />
 			</div>
-		</Card>
 
-		{#if buyRamState.valid}
-			{#if buyRamState.format === 'asset'}
-				<SummaryBuyRAM action={{ data: buyRamState.toJSON() }} />
-			{:else}
-				<SummaryBuyRAMBytes action={{ data: buyRamState.toJSON() }} />
+			{#if buyRamState.valid}
+				{#if buyRamState.format === 'asset'}
+					<SummaryBuyRAM action={{ data: buyRamState.toJSON() }} />
+				{:else}
+					<SummaryBuyRAMBytes action={{ data: buyRamState.toJSON() }} />
+				{/if}
 			{/if}
+		</Stack>
+
+		{#if debugMode.value}
+			<h3 class="h3">Debugging</h3>
+			<Code
+				>{JSON.stringify(
+					{
+						payer: buyRamState.payer,
+						receiver: buyRamState.receiver,
+						bytes: buyRamState.bytes,
+						balance: buyRamState.balance,
+						chain: buyRamState.chain,
+						pricePerKB: buyRamState.pricePerKB,
+						pricePerByte: buyRamState.pricePerByte,
+						bytesValue: buyRamState.bytesValue,
+						valid: buyRamState.valid,
+						insufficientBalance: buyRamState.insufficientBalance,
+						balances: context.account?.balances
+					},
+					undefined,
+					2
+				)}</Code
+			>
 		{/if}
-	</Stack>
-
-	<Button type="submit" class="mt-4 w-full" disabled={!buyRamState.valid}>Confirm Buy RAM</Button>
-
-	{#if debugMode.value}
-		<h3 class="h3">Debugging</h3>
-		<Code
-			>{JSON.stringify(
-				{
-					payer: buyRamState.payer,
-					receiver: buyRamState.receiver,
-					bytes: buyRamState.bytes,
-					balance: buyRamState.balance,
-					chain: buyRamState.chain,
-					pricePerKB: buyRamState.pricePerKB,
-					pricePerByte: buyRamState.pricePerByte,
-					bytesValue: buyRamState.bytesValue,
-					valid: buyRamState.valid,
-					insufficientBalance: buyRamState.insufficientBalance,
-					balances: context.account?.balances
-				},
-				undefined,
-				2
-			)}</Code
-		>
-	{/if}
-</form>
+	</form>
+</Card>
