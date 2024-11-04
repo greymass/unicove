@@ -8,7 +8,7 @@
 	import { goto } from '$app/navigation';
 	import { fade, scale } from 'svelte/transition';
 	import { ArrowLeftRight, Box, Key, SearchIcon, UserSearch } from 'lucide-svelte';
-	import { history, addHistory } from '$lib/state/search.svelte';
+	import { SearchHistory } from '$lib/state/search.svelte';
 	import Button from '$lib/components/button/button.svelte';
 	import { Stack } from '$lib/components/layout';
 	import { truncateCenter } from '$lib/utils';
@@ -29,6 +29,9 @@
 
 	let searchValue: string = $state('');
 	let selectedIndex: number | undefined = $state();
+
+	const searchHistory = new SearchHistory();
+	const history = searchHistory.get();
 
 	const searchType = $derived.by(() => {
 		/* eslint-disable @typescript-eslint/no-unused-vars */
@@ -107,7 +110,7 @@
 					selectedIndex = 0;
 					return;
 				}
-				// Select next history item
+				// Select next searchHistory item
 				selectedIndex = (history.length + selectedIndex + 1) % history.length;
 				return;
 			}
@@ -117,13 +120,13 @@
 					selectedIndex = history.length;
 					return;
 				}
-				// Select previous history item
+				// Select previous searchHistory item
 				selectedIndex = (history.length + selectedIndex - 1) % history.length;
 				return;
 			}
 
 			if (selectedIndex !== undefined && event.key === 'Enter') {
-				goToHistory(history[selectedIndex].result);
+				goTosearchHistory(history[selectedIndex].result);
 			}
 		}
 	}
@@ -131,7 +134,7 @@
 	function goToResult() {
 		if (result) {
 			goto(result);
-			addHistory({ result, searchType, searchValue });
+			searchHistory.add({ result, searchType, searchValue });
 		}
 		closeSearch();
 	}
@@ -141,7 +144,7 @@
 		searchValue = '';
 	}
 
-	function goToHistory(url: string) {
+	function goTosearchHistory(url: string) {
 		goto(url);
 		closeSearch();
 	}
