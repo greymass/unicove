@@ -15,10 +15,10 @@
 	const recommendedWallet = $derived(currentWalletType?.wallets[0]);
 	const otherWallets = $derived(currentWalletType?.networkWallets(data.network.shortname).slice(1));
 
-	const WalletComponent = currentWalletType?.icon;
+	const WalletComponent = $derived(currentWalletType?.icon);
 </script>
 
-{#if !recommendedWallet || !currentWalletType}
+{#if !recommendedWallet || !currentWalletType || !WalletComponent}
 	<Stack class="gap-2">
 		<h3 class="h3">Detecting your environment...</h3>
 		<p>Please wait while we determine the best options for you.</p>
