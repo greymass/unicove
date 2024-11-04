@@ -20,18 +20,12 @@ export class WithdrawManager {
 	public txid: string = $state('');
 
 	public unstaking: Array<UnstakingRecord> = $derived(
-		this.account && this.network ? getUnstakingBalances(this.network, this.account) : []
+		getUnstakingBalances(this.network, this.account)
 	);
 	public claimable: Asset = $derived(
-		this.account && this.network
-			? getClaimableBalance(this.network, this.account, this.unstaking)
-			: defaultQuantity
+		getClaimableBalance(this.network, this.account, this.unstaking)
 	);
-	public withdrawable: Asset = $derived(
-		this.account && this.network
-			? getWithdrawableBalance(this.network, this.account)
-			: defaultQuantity
-	);
+	public withdrawable: Asset = $derived(getWithdrawableBalance(this.network, this.account));
 	public total: Asset = $derived(
 		this.network
 			? Asset.fromUnits(
@@ -51,7 +45,7 @@ export class WithdrawManager {
 			this.network = network;
 			changed = true;
 		}
-		if (account?.name !== this.account?.name) {
+		if (this.account !== account) {
 			this.account = account;
 			changed = true;
 		}

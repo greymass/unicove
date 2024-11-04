@@ -14,9 +14,11 @@
 	);
 	const recommendedWallet = $derived(currentWalletType?.wallets[0]);
 	const otherWallets = $derived(currentWalletType?.networkWallets(data.network.shortname).slice(1));
+
+	const WalletComponent = currentWalletType?.icon;
 </script>
 
-{#if !recommendedWallet}
+{#if !recommendedWallet || !currentWalletType}
 	<Stack class="gap-2">
 		<h3 class="h3">Detecting your environment...</h3>
 		<p>Please wait while we determine the best options for you.</p>
@@ -28,6 +30,24 @@
 			There are many options to create your first account but we recommend {recommendedWallet.name} for
 			most people new to EOS.
 		</p>
+	</Stack>
+	<Stack>
+		<a
+			href="/{data.network}/signup/wallets"
+			class="group grid grid-cols-[auto_1fr_auto] items-center gap-4 rounded-2xl border border-white/20 p-4
+hover:bg-mineShaft-950 focus-visible:outline focus-visible:outline-transparent focus-visible:ring-2 focus-visible:ring-solar-500"
+		>
+			<div class="rounded-full bg-mineShaft-900/60 p-3">
+				<WalletComponent class="size-6 group-hover:stroke-skyBlue-500 " />
+			</div>
+			<div class="space-y-1">
+				<h4 class="text-xl font-semibold">
+					{currentWalletType.title}
+				</h4>
+				<p>{currentWalletType.description}</p>
+			</div>
+			<ChevronRight class="size-6 group-hover:stroke-skyBlue-500" />
+		</a>
 	</Stack>
 
 	<Stack class="rounded-2xl border border-white/20 p-4">

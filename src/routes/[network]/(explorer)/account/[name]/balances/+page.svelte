@@ -26,7 +26,7 @@
 						</div>
 					</td>
 					<td>
-						<AssetText value={balance.asset} variant="quantity" />
+						<AssetText value={balance.asset} />
 					</td>
 				</tr>
 			{/each}

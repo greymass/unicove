@@ -17,6 +17,8 @@
 
 	let { data }: Props = $props();
 
+	console.log({ length: data.length, first20: data.slice(0, 20), last20: data.slice(-20) });
+
 	let ctx: HTMLCanvasElement;
 	let chart: Chart<'line'>;
 
@@ -30,6 +32,7 @@
 	let selectedRange: ExtendedSelectOption = $state(range[1]);
 
 	let dataRange = $derived.by(() => {
+		if (data.length === 0) return [];
 		const rangeEndDate = dayjs(data[0].date);
 		const rangeStartDate = rangeEndDate.subtract(Number(selectedRange.value), 'day');
 		return data.filter(({ date }) => dayjs(date).isAfter(rangeStartDate));

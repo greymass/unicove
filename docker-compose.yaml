@@ -1,0 +1,24 @@
+version: "3.8"
+services:
+  nginx:
+    image: nginx:latest
+    depends_on:
+      - sveltekit
+    networks:
+      - unicove
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./docker/nginx.conf:/etc/nginx/nginx.conf:ro
+  sveltekit:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    expose:
+      - "3000"
+    networks:
+      - unicove
+    restart: always
+
+networks:
+  unicove:

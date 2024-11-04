@@ -26,16 +26,15 @@ export class UnstakeManager {
 	public txid: string = $state('');
 
 	public unstaking: Array<UnstakingRecord> = $derived(
-		this.account && this.network ? getUnstakingBalances(this.network, this.account) : []
+		getUnstakingBalances(this.network, this.account)
 	);
 	public unstakable: Asset = $derived(
-		this.account && this.network
-			? getUnstakableBalance(this.network, this.account, this.unstaking)
-			: defaultQuantity
+		getUnstakableBalance(this.network, this.account, this.unstaking)
 	);
 
 	constructor(network: NetworkState) {
 		this.network = network;
+		this.assetValue = this.zeroValue;
 	}
 
 	get zeroValue() {
@@ -48,7 +47,7 @@ export class UnstakeManager {
 			this.network = network;
 			changed = true;
 		}
-		if (account?.name !== this.account?.name) {
+		if (this.account !== account) {
 			this.account = account;
 			changed = true;
 		}
@@ -58,7 +57,7 @@ export class UnstakeManager {
 			this.txid = '';
 		}
 
-		if (this.network && this.assetValue.symbol !== this.network.chain.systemToken!.symbol) {
+		if (this.network && !this.assetValue.symbol.equals(this.network.chain.systemToken!.symbol)) {
 			this.input?.set(this.zeroValue);
 		}
 		if (wharf !== this.wharf) {

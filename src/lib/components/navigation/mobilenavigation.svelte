@@ -5,6 +5,7 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import SideMenuContent from '$lib/components/navigation/sidemenu.svelte';
 	import { Menu } from 'lucide-svelte';
+	import UnicoveLogo from '$lib/assets/unicovelogo.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
 
 	const context = getContext<UnicoveContext>('state');
@@ -41,70 +42,66 @@
 
 <!-- [@media(any-hover:hover)]:hover:opacity-80 -->
 
-<div class={className}>
-	<button
-		class="
-		relative
-		flex
-		h-10
-		items-center
-		justify-between
-		gap-2
-		text-nowrap
-		rounded-lg
-		py-3.5
-		text-base
-		font-medium
-		text-white/50
-		transition-opacity
-		focus:outline-transparent
-		focus-visible:outline
-		focus-visible:ring-2
-		focus-visible:ring-inset
-		focus-visible:ring-solar-500
-		md:hidden
-		"
-		use:melt={$trigger}
-		aria-label="menu-open"
-		id="menu-open"
-		data-session={!!context.wharf.session}
-	>
-		<Menu class="size-4 text-inherit" /><span>Menu</span>
-	</button>
+<button
+	class="
+	relative
+	flex
+	h-10
+	items-center
+	gap-2
+	text-nowrap
+	rounded-lg
+	py-3.5
+	text-base
+	font-medium
+	text-white/50
+	transition-opacity
+	focus:outline-transparent
+	focus-visible:outline
+	focus-visible:ring-2
+	focus-visible:ring-inset
+	focus-visible:ring-solar-500
+	md:hidden
+	{className}
+	"
+	use:melt={$trigger}
+	aria-label="menu-open"
+	id="menu-open"
+	data-session={!!context.wharf.session}
+>
+	<UnicoveLogo small href="/{network}" class="size-8 w-min place-self-center" />
+	<Menu class="size-8 text-inherit" />
+	<!-- <span>Menu</span> -->
+</button>
 
-	{#if $open}
-		<div class="md:hidden" use:melt={$portalled}>
-			<div
-				use:melt={$overlay}
-				class="fixed inset-0 z-50 bg-black/50 md:bg-transparent"
-				transition:fade={{ duration: 150 }}
-			></div>
-			<div
-				use:melt={$content}
-				class="
-				fixed
-				left-0
-				top-0
-				z-50
-				h-svh
-				bg-shark-950
-				shadow-lg
-				focus:outline-none
-				md:bg-transparent
-				md:shadow-none
-				"
-				transition:fly={{
-					x: -350,
-					duration: 300,
-					opacity: 1
-				}}
-			>
-				<SideMenuContent callbackFn={closeMenu} {network} />
-			</div>
+{#if $open}
+	<div class="md:hidden" use:melt={$portalled}>
+		<div
+			use:melt={$overlay}
+			class="fixed inset-0 z-50 bg-black/50 md:bg-transparent"
+			transition:fade={{ duration: 150 }}
+		></div>
+		<div
+			use:melt={$content}
+			class="
+			fixed
+			left-0
+			top-0
+			z-50
+			h-svh
+			bg-shark-950
+			shadow-lg
+			focus:outline-none
+			md:bg-transparent
+			md:shadow-none
+			"
+			transition:fly={{
+				x: -350,
+				duration: 300,
+				opacity: 1
+			}}
+		>
+			<SideMenuContent callbackFn={closeMenu} {network} />
 		</div>
-	{/if}
-
-	<div class="relative row-span-2 h-full">
-		<SideMenuContent class="hidden md:grid" {network} />
 	</div>
-</div>
+{/if}
