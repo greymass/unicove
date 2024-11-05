@@ -3,6 +3,7 @@ import yaml from 'yaml';
 
 export * from './strings';
 export * from './ricardian';
+export * from './resources';
 
 export function calculateValue(balance: Asset, currency: Asset): Asset {
 	return Asset.from(
