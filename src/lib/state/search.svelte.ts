@@ -6,10 +6,9 @@ type SearchResult = {
 	searchValue: string;
 };
 
-const maxHistoryLength = 10;
-
 export class SearchHistory {
-	history = $state<SearchResult[]>([]) as SearchResult[];
+	private history = $state<SearchResult[]>([]) as SearchResult[];
+	maxHistoryLength = 10;
 	storageKey = 'searchHistory';
 
 	constructor() {
@@ -35,13 +34,16 @@ export class SearchHistory {
 
 	add(s: SearchResult) {
 		this.history.unshift(s);
-		if (history.length > maxHistoryLength) {
-			this.history.splice(maxHistoryLength);
+		if (history.length > this.maxHistoryLength) {
+			this.history.splice(this.maxHistoryLength);
 		}
 		this.saveHistory();
 	}
 
-	// remove() {}
+	remove(i: number) {
+		this.history.splice(i, 1);
+		this.saveHistory();
+	}
 
 	get(): SearchResult[] {
 		return this.history;
