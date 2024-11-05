@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { ChevronLeft } from 'lucide-svelte';
 
 	import Stack from '$lib/components/layout/stack.svelte';
 	import Pageheader from '$lib/components/pageheader.svelte';
+	import { i18n } from '$lib/i18n';
 
 	const { data, children } = $props();
+	const locale = i18n.getLanguageFromUrl($page.url);
 
 	let currentTab = $derived($page.url.pathname.split('/')[4] || 'overview');
 	const subtitle = $derived.by(() => {
@@ -18,21 +19,13 @@
 				return 'Overview';
 		}
 	});
-	const isRenting = $derived(subtitle === 'Renting');
+	let backPath = $derived(
+		currentTab === 'overview' ? undefined : `/${locale}/${data.network.shortname}/resources`
+	);
 </script>
 
 <Stack>
-	<div class="flex gap-4">
-		{#if isRenting}
-			<a
-				href="/{data.network}/resources"
-				class="flex size-11 items-center justify-center rounded-full bg-[#303338] text-center"
-			>
-				<ChevronLeft class="size-7 text-skyBlue-500" />
-			</a>
-		{/if}
-		<Pageheader title="Resources" {subtitle} />
-	</div>
+	<Pageheader title="Resources" {subtitle} {backPath} />
 
 	{@render children()}
 </Stack>

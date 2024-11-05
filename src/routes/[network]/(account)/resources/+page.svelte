@@ -1,9 +1,8 @@
 <script lang="ts">
 	import Stack from '$lib/components/layout/stack.svelte';
 	import Button from '$lib/components/button/button.svelte';
-	import CpuIcon from '$lib/assets/resources/cpu.svg';
-	import NetIcon from '$lib/assets/resources/net.svg';
-	import RamIcon from '$lib/assets/resources/ram.svg';
+	import { CpuIcon, WifiIcon, HardDrive } from 'lucide-svelte';
+
 	import CpuAndNetResource from '$lib/components/elements/cpunetresource.svelte';
 	import RamResource from '$lib/components/elements/ramresource.svelte';
 	import { calAvailableSize } from './utils';
@@ -35,7 +34,7 @@
 			]
 		},
 		{
-			icon: NetIcon,
+			icon: WifiIcon,
 			name: 'NET',
 			title: 'NET (Network Bandwidth)',
 			descriptions: [
@@ -44,7 +43,7 @@
 			]
 		},
 		{
-			icon: '',
+			icon: undefined,
 			name: 'CPU and NET',
 			title: 'CPU and NET',
 			descriptions: [
@@ -55,7 +54,7 @@
 			]
 		},
 		{
-			icon: RamIcon,
+			icon: HardDrive,
 			name: 'RAM',
 			title: 'RAM (Random Access Memory)',
 			descriptions: [
@@ -70,7 +69,7 @@
 </script>
 
 <div
-	class="mx-auto flex flex-col gap-9 py-5 sm:gap-12 lg:mx-0 lg:flex-row lg:justify-between lg:gap-8"
+	class="mx-auto flex flex-col gap-9 py-5 sm:mx-0 sm:gap-12 xl:flex-row xl:justify-between xl:gap-8"
 >
 	<Stack class="max-w-lg flex-1 gap-9">
 		<Stack>
@@ -113,7 +112,8 @@
 				<li class="grid grid-cols-[25%_75%]">
 					<div class="flex justify-center pl-5 pt-5">
 						{#if explanation.icon}
-							<img src={explanation.icon} class="size-6" alt={`${explanation.name} icon`} />
+							{@const Component = explanation.icon}
+							<Component class="size-5 text-white" />
 						{/if}
 					</div>
 					<div class="space-y-4 px-5 py-3">
