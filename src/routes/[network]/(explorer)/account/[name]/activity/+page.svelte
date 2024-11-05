@@ -1,4 +1,6 @@
 <script lang="ts">
+	import Code from '$lib/components/code.svelte';
+
 	const { data } = $props();
 </script>
 
@@ -6,8 +8,8 @@
 	<thead>
 		<tr>
 			<th class="w-20">ID</th>
-			<th>Date</th>
-			<th>Action</th>
+			<th class="w-40">Date</th>
+			<th class="w-40">Action</th>
 			<th>Data</th>
 		</tr>
 	</thead>
@@ -28,10 +30,11 @@
 					})}
 				</td>
 				<td>
+					<p>{action.contract}</p>
 					{action.action}
 				</td>
 				<td>
-					{JSON.stringify(action.data, null, 2)}
+					<Code>{JSON.stringify(action.data, null, 2)}</Code>
 				</td>
 			</tr>
 		{/each}
