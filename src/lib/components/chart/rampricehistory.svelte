@@ -29,11 +29,22 @@
 
 	let selectedRange: ExtendedSelectOption = $state(range[1]);
 
+	// Calculate points to display based on range
+	const POINTS_TO_DISPLAY = 50;
+
 	let dataRange = $derived.by(() => {
 		if (data.length === 0) return [];
 		const rangeEndDate = dayjs(data[0].date);
 		const rangeStartDate = rangeEndDate.subtract(Number(selectedRange.value), 'day');
-		return data.filter(({ date }) => dayjs(date).isAfter(rangeStartDate));
+		const filteredData = data.filter(({ date }) => dayjs(date).isAfter(rangeStartDate));
+
+		// If we have more points than we want to display, sample them
+		if (filteredData.length > POINTS_TO_DISPLAY) {
+			const step = Math.floor(filteredData.length / POINTS_TO_DISPLAY);
+			return filteredData.filter((_, index) => index % step === 0).slice(0, POINTS_TO_DISPLAY);
+		}
+
+		return filteredData;
 	});
 
 	let currentPoint = $derived(dataRange[0]);
