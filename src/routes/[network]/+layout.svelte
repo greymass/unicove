@@ -119,7 +119,7 @@
 		{@render children()}
 	</main>
 
-	<Footer />
+	<!-- <Footer /> -->
 </div>
 
 <!-- This wrapper sets up the bottom menu on mobile, becomes hidden on desktop -->
