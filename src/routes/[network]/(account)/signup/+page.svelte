@@ -31,24 +31,6 @@
 			most people new to EOS.
 		</p>
 	</Stack>
-	<Stack>
-		<a
-			href="/{data.network}/signup/wallets"
-			class="group grid grid-cols-[auto_1fr_auto] items-center gap-4 rounded-2xl border border-white/20 p-4
-hover:bg-mineShaft-950 focus-visible:outline focus-visible:outline-transparent focus-visible:ring-2 focus-visible:ring-solar-500"
-		>
-			<div class="rounded-full bg-mineShaft-900/60 p-3">
-				<WalletComponent class="size-6 group-hover:stroke-skyBlue-500 " />
-			</div>
-			<div class="space-y-1">
-				<h4 class="text-xl font-semibold">
-					{currentWalletType.title}
-				</h4>
-				<p>{currentWalletType.description}</p>
-			</div>
-			<ChevronRight class="size-6 group-hover:stroke-skyBlue-500" />
-		</a>
-	</Stack>
 
 	<Stack class="rounded-2xl border border-white/20 p-4">
 		<div class="flex items-start space-x-4">
