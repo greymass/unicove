@@ -214,7 +214,7 @@
 
 				{#if history.length}
 					<div class="px-2">
-						<div class="table-styles grid grid-cols-3">
+						<div class="table-styles grid grid-cols-[1fr_1fr_auto] gap-x-4">
 							<div class="table-head-styles col-span-full grid grid-cols-subgrid">
 								<span class="pl-2">Recent</span>
 								<span>Type</span>
