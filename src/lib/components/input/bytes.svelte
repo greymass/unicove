@@ -44,8 +44,6 @@
 			return;
 		}
 
-		console.log({ value, previousValue, valueSetByParent });
-
 		if (value) {
 			const newInput = String(value / UNIT_MULTIPLIERS[unit]);
 			if (input !== newInput && !isAddingDecimal) {

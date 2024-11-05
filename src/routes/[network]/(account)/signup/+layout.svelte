@@ -1,11 +1,9 @@
-<script lang="ts" module>
-	export interface SignupStep {
+<script lang="ts">
+	interface SignupStep {
 		title: string;
 		path: string;
 	}
-</script>
 
-<script lang="ts">
 	import { page } from '$app/stores';
 	import Stack from '$lib/components/layout/stack.svelte';
 	import Pageheader from '$lib/components/pageheader.svelte';
@@ -13,7 +11,11 @@
 	import { cubicInOut } from 'svelte/easing';
 	import { getWalletNameFromPath, getWalletTypeFromPath } from './walletTypes.js';
 
+	import { i18n } from '$lib/i18n';
+
 	const { data, children } = $props();
+
+	const locale = i18n.getLanguageFromUrl($page.url);
 
 	let steps: SignupStep[] = $derived([
 		{
@@ -36,7 +38,7 @@
 
 	function getCurrentStep() {
 		return steps.find((step) => {
-			return $page.url.pathname.replace(/^\/[^/]+/, '') === step.path;
+			return $page.url.pathname.replace(`/${locale}`, '') === step.path;
 		});
 	}
 

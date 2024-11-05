@@ -1,4 +1,4 @@
-version: "3.8"
+version: '3.8'
 services:
   nginx:
     image: nginx:latest
@@ -7,7 +7,7 @@ services:
     networks:
       - unicove
     ports:
-      - "8000:8000"
+      - '8000:8000'
     volumes:
       - ./docker/nginx.conf:/etc/nginx/nginx.conf:ro
   sveltekit:
@@ -15,7 +15,7 @@ services:
       context: .
       dockerfile: Dockerfile
     expose:
-      - "3000"
+      - '3000'
     networks:
       - unicove
     restart: always

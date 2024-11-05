@@ -7,70 +7,101 @@
 
 	const { data } = $props();
 
-	const currentEnvironment = detectEnvironment();
-	const currentWalletType = walletTypes[currentEnvironment];
-	const WalletComponent = currentWalletType.icon;
-	const currentWalletTypePath = `/${data.network}/signup/wallets/${currentWalletType.type}`;
-	const recommendedWallet = currentWalletType.wallets[0];
+	let currentEnvironment = $state(detectEnvironment());
+
+	const currentWalletType = $derived(
+		currentEnvironment ? walletTypes[currentEnvironment] : undefined
+	);
+	const recommendedWallet = $derived(currentWalletType?.wallets[0]);
+	const otherWallets = $derived(currentWalletType?.networkWallets(data.network.shortname).slice(1));
+
+	const WalletComponent = $derived(currentWalletType?.icon);
 </script>
 
-<Stack class="gap-2">
-	<h3 class="h3">Lets's get started</h3>
-	<p>
-		There are many options to setup your first account, but for new users we recommend the following
-		wallet for your current platform. Feel free to explore other platforms and wallet options.
-	</p>
-</Stack>
-
-<Stack>
-	<a
-		href="/{data.network}/signup/wallets"
-		class="group grid grid-cols-[auto_1fr_auto] items-center gap-4 rounded-2xl border border-white/20 p-4
-hover:bg-mineShaft-950 focus-visible:outline focus-visible:outline-transparent focus-visible:ring-2 focus-visible:ring-solar-500"
-	>
-		<div class="rounded-full bg-mineShaft-900/60 p-3">
-			<WalletComponent class="size-6 group-hover:stroke-skyBlue-500 " />
-		</div>
-		<div class="space-y-1">
-			<h4 class="text-xl font-semibold">
-				{currentWalletType.title}
-			</h4>
-			<p>{currentWalletType.description}</p>
-		</div>
-		<ChevronRight class="size-6 group-hover:stroke-skyBlue-500" />
-	</a>
-</Stack>
-
-<Stack class="rounded-2xl border border-white/20 p-4">
-	<div class="flex items-center space-x-4">
-		<div class="rounded-full bg-mineShaft-800">
-			{#if recommendedWallet.logo}
-				<img src={recommendedWallet.logo} alt={`${recommendedWallet.name} logo`} />
-			{/if}
-		</div>
-		<div>
-			<h3 class="text-2xl font-semibold">{recommendedWallet.name}</h3>
-			<p class="text-gray-300">{recommendedWallet.description}</p>
-		</div>
-	</div>
+{#if !recommendedWallet || !currentWalletType || !WalletComponent}
 	<Stack class="gap-2">
-		<Button variant="primary" href={recommendedWallet.route}>Get Started</Button>
-		<Button variant="secondary" href={currentWalletTypePath}>Select another wallet</Button>
+		<h3 class="h3">Detecting your environment...</h3>
+		<p>Please wait while we determine the best options for you.</p>
 	</Stack>
-</Stack>
+{:else}
+	<Stack class="gap-2">
+		<h3 class="h3">Let's get started</h3>
+		<p>
+			There are many options to create your first account but we recommend {recommendedWallet.name} for
+			most people new to EOS.
+		</p>
+	</Stack>
 
-<Stack class="gap-2">
-	<h3 class="h3">Why do I need an account?</h3>
-	<p>
-		An account on the blockchain is your unique identity, enabling you to perform transactions,
-		store assets, and participate in the network.
-	</p>
-</Stack>
+	<Stack class="rounded-2xl border border-white/20 p-4">
+		<div class="flex items-start space-x-4">
+			<div class="mt-2 rounded-full bg-mineShaft-800">
+				<img src={recommendedWallet.logo} alt={`${recommendedWallet.name} logo`} width={96} />
+			</div>
+			<div>
+				<h3 class="text-2xl font-semibold">{recommendedWallet.name}</h3>
+				<p>{recommendedWallet.description}</p>
+				<Stack class="mt-4 gap-2">
+					<Button variant="primary" href={recommendedWallet.route}
+						>Continue with {recommendedWallet.name}</Button
+					>
+				</Stack>
+			</div>
+		</div>
+	</Stack>
+	<div class="my-2 border-t border-white/20"></div>
 
-<Stack class="gap-2">
-	<h3 class="h3">Why do I need a wallet?</h3>
-	<p>
-		A wallet is your gateway to the blockchain, allowing you to manage your digital assets and
-		interact with decentralized applications.
-	</p>
-</Stack>
+	<h3 class="h3">Other {currentWalletType?.title}</h3>
+
+	{#if otherWallets}
+		{#each otherWallets as wallet}
+			<Stack>
+				<a
+					href={wallet.route}
+					class="group grid grid-cols-[auto_1fr_auto] items-center gap-4 rounded-2xl border border-white/20 p-4
+					hover:bg-mineShaft-950 focus-visible:outline focus-visible:outline-transparent focus-visible:ring-2 focus-visible:ring-solar-500"
+				>
+					<div class="rounded-full bg-mineShaft-900/60">
+						{#if wallet.logo}
+							<img src={wallet.logo} alt={`${wallet.name} logo`} width="52" />
+						{/if}
+					</div>
+					<div class="space-y-1">
+						<h4 class="text-xl font-semibold">
+							{wallet.name}
+						</h4>
+						<p>{wallet.description}</p>
+					</div>
+					<ChevronRight class="size-6 group-hover:stroke-skyBlue-500" />
+				</a>
+			</Stack>
+		{/each}
+	{/if}
+
+	{#if currentWalletType}
+		<Stack>
+			<a
+				href="/{data.network}/signup/wallets"
+				class="group grid grid-cols-[auto_1fr_auto] items-center gap-4 rounded-2xl border border-white/20 p-4
+				hover:bg-mineShaft-950 focus-visible:outline focus-visible:outline-transparent focus-visible:ring-2 focus-visible:ring-solar-500"
+			>
+				<div class="rounded-full bg-mineShaft-900/60 p-3">
+					{#if currentWalletType.icon}
+						{@const Component = currentWalletType.icon}
+						<Component class="size-6 group-hover:stroke-skyBlue-500" />
+					{/if}
+				</div>
+				<div class="space-y-1">
+					<h4 class="text-xl font-semibold">More Options</h4>
+					<p>
+						Choose from {Object.values(walletTypes)
+							.filter((type) => type.type !== currentWalletType.type)
+							.map((type) => type.title.toLowerCase())
+							.join(', ')
+							.replace(/,([^,]*)$/, ' and$1')}
+					</p>
+				</div>
+				<ChevronRight class="size-6 group-hover:stroke-skyBlue-500" />
+			</a>
+		</Stack>
+	{/if}
+{/if}

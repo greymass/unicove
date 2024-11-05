@@ -7,21 +7,23 @@
 	const { data } = $props();
 </script>
 
-{#snippet walletButton(wallet: WalletType)}
-	{@const WalletIcon = wallet.icon}
+{#snippet walletTypeButton(walletType: WalletType)}
 	<a
-		href="/{data.network}/signup/wallets/{wallet.type}"
+		href="/{data.network}/signup/wallets/{walletType.type}"
 		class="group grid grid-cols-[auto_1fr_auto] items-center gap-4 rounded-2xl border border-white/20 p-4
 hover:bg-mineShaft-950 focus-visible:outline focus-visible:outline-transparent focus-visible:ring-2 focus-visible:ring-solar-500"
 	>
 		<div class="rounded-full bg-mineShaft-900/60 p-3">
-			<WalletIcon class="size-6 group-hover:stroke-skyBlue-500 " />
+			{#if walletType.icon}
+				{@const Component = walletType.icon}
+				<Component class="size-6 group-hover:stroke-skyBlue-500" />
+			{/if}
 		</div>
 		<div class="space-y-1">
 			<h4 class="text-xl font-semibold">
-				{wallet.title}
+				{walletType.title}
 			</h4>
-			<p>{wallet.description}</p>
+			<p>{walletType.description}</p>
 		</div>
 		<ChevronRight class="size-6 group-hover:stroke-skyBlue-500" />
 	</a>
@@ -30,8 +32,8 @@ hover:bg-mineShaft-950 focus-visible:outline focus-visible:outline-transparent f
 <Stack>
 	<h3 class="h2">Choose A Wallet Type</h3>
 	<Stack>
-		{#each Object.values(walletTypes) as wallet}
-			{@render walletButton(wallet)}
+		{#each Object.values(walletTypes) as walletType}
+			{@render walletTypeButton(walletType)}
 		{/each}
 	</Stack>
 	<Button variant="secondary" href="/{data.network}/signup">Back</Button>

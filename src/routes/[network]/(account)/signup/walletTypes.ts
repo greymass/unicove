@@ -14,15 +14,40 @@ export interface Wallet {
 	route: string;
 	description?: string;
 	logo?: string;
+	supportedNetworks?: string[]; // if empty, all networks are supported
 }
 
-export interface WalletType {
+interface WalletTypeProps {
 	type: 'hardware' | 'desktop' | 'mobile' | 'extensions';
 	title: string;
 	description: string;
 	icon: typeof Icon;
 	benefits: string[];
 	wallets: Wallet[];
+}
+
+export class WalletType {
+	readonly type: 'hardware' | 'desktop' | 'mobile' | 'extensions';
+	readonly title: string;
+	readonly description: string;
+	readonly icon: typeof Icon;
+	readonly benefits: string[];
+	readonly wallets: Wallet[];
+
+	constructor({ type, title, description, icon, benefits, wallets }: WalletTypeProps) {
+		this.type = type;
+		this.title = title;
+		this.description = description;
+		this.icon = icon;
+		this.benefits = benefits;
+		this.wallets = wallets;
+	}
+
+	networkWallets(network: string): Wallet[] {
+		return this.wallets.filter(
+			(wallet) => !wallet.supportedNetworks || wallet.supportedNetworks.includes(network)
+		);
+	}
 }
 
 export const walletTypes: Record<string, WalletType> = {
@@ -39,7 +64,7 @@ export const walletTypes: Record<string, WalletType> = {
 	// 	],
 	// 	wallets: [{ name: 'Anchor Web', route: 'anchor' }]
 	// },
-	hardware: {
+	hardware: new WalletType({
 		type: 'hardware',
 		title: 'Hardware Wallets',
 		description: 'Hardware wallets are physical devices that securely store your private keys.',
@@ -49,11 +74,18 @@ export const walletTypes: Record<string, WalletType> = {
 			'Offline storage of private keys',
 			'Support for multiple cryptocurrencies'
 		],
-		wallets: [{ name: 'Ledger', route: 'signup/wallets/hardware/ledger', logo: LedgerLogo }]
-	},
-	desktop: {
+		wallets: [
+			{
+				name: 'Ledger',
+				route: 'signup/wallets/hardware/ledger',
+				logo: LedgerLogo,
+				supportedNetworks: ['eos', 'jungle4']
+			}
+		]
+	}),
+	desktop: new WalletType({
 		type: 'desktop',
-		title: 'Desktop',
+		title: 'Desktop Wallets',
 		description: 'Desktop wallets are applications that you install on your computer.',
 		icon: LaptopMinimal,
 		benefits: [
@@ -63,15 +95,31 @@ export const walletTypes: Record<string, WalletType> = {
 		],
 		wallets: [
 			{
+				name: 'MetaMask',
+				route: 'signup/wallets/extensions/metamask',
+				logo: MetaMaskLogo,
+				description: 'Secure and easy-to-use browser extension wallet.',
+				supportedNetworks: ['eos', 'jungle4']
+			},
+			{
 				name: 'Anchor',
 				route: 'signup/wallets/desktop/anchor',
 				logo: AnchorLogo,
-				description: 'Anchor is a secure and easy-to-use mobile wallet.'
+				description:
+					'Popular option with a user-friendly interface. Supports multiple EOSIO chains.',
+				supportedNetworks: ['eos', 'jungle4']
 			},
-			{ name: 'Wombat', route: 'signup/wallets/desktop/wombat', logo: WombatLogo }
+			{
+				name: 'Wombat',
+				route: 'signup/wallets/desktop/wombat',
+				logo: WombatLogo,
+				description:
+					'Fast and secure with multi-chain support. Offers a smooth onboarding experience.',
+				supportedNetworks: ['eos']
+			}
 		]
-	},
-	mobile: {
+	}),
+	mobile: new WalletType({
 		type: 'mobile',
 		title: 'Mobile Wallets',
 		description: 'Mobile wallets are applications you install on your mobile device.',
@@ -82,12 +130,32 @@ export const walletTypes: Record<string, WalletType> = {
 			'Quick and easy transactions from your smartphone'
 		],
 		wallets: [
-			{ name: 'Anchor Mobile', route: 'signup/wallets/mobile/anchor', logo: AnchorLogo },
-			{ name: 'Wombat Mobile', route: 'signup/wallets/mobile/wombat', logo: WombatLogo },
-			{ name: 'TokenPocket', route: 'signup/wallets/mobile/tokenpocket', logo: TokenPocketLogo }
+			{
+				name: 'Anchor Mobile',
+				route: 'signup/wallets/mobile/anchor',
+				logo: AnchorLogo,
+				description:
+					'Popular mobile option with a user-friendly interface. Supports multiple EOSIO chains.',
+				supportedNetworks: ['eos', 'jungle4']
+			},
+			{
+				name: 'Wombat Mobile',
+				route: 'signup/wallets/mobile/wombat',
+				logo: WombatLogo,
+				description:
+					'Fast and secure with multi-chain support. Offers a smooth onboarding experience.',
+				supportedNetworks: ['eos']
+			},
+			{
+				name: 'TokenPocket',
+				route: 'signup/wallets/mobile/tokenpocket',
+				logo: TokenPocketLogo,
+				description: 'A leading crypto wallet that supports multiple chains.',
+				supportedNetworks: ['eos']
+			}
 		]
-	},
-	extensions: {
+	}),
+	extensions: new WalletType({
 		type: 'extensions',
 		title: 'Browser Extensions',
 		description:
@@ -103,11 +171,19 @@ export const walletTypes: Record<string, WalletType> = {
 				name: 'MetaMask',
 				route: 'signup/wallets/extensions/metamask',
 				logo: MetaMaskLogo,
-				description: 'MetaMask is a secure and easy-to-use browser extension wallet.'
+				description: 'MetaMask is a secure and easy-to-use browser extension wallet.',
+				supportedNetworks: ['eos', 'jungle4']
 			},
-			{ name: 'Wombat', route: 'signup/wallets/extensions/wombat', logo: WombatLogo }
+			{
+				name: 'Wombat',
+				route: 'signup/wallets/extensions/wombat',
+				logo: WombatLogo,
+				description:
+					'Fast and secure with multi-chain support. Offers a smooth onboarding experience.',
+				supportedNetworks: ['eos']
+			}
 		]
-	}
+	})
 };
 
 export function getWalletTypeFromPath(path: string) {
