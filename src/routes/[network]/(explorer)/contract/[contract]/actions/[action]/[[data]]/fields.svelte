@@ -4,7 +4,6 @@
 	import Label from '$lib/components/input/label.svelte';
 	import Textinput from '$lib/components/input/text.svelte';
 	import type { ABI } from '@wharfkit/antelope';
-	import Fields from './fields.svelte';
 
 	interface PageProps {
 		abi: ABI;
