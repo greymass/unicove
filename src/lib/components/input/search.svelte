@@ -229,15 +229,20 @@
 
 							{#each history as item, index}
 								<div
-									class="table-row-background col-span-full grid grid-cols-subgrid items-center
-									justify-items-start border-y border-neutral-300/10
-									border-transparent border-b-transparent
+									class="col-span-full grid grid-cols-subgrid items-center
+									justify-items-start rounded-lg border-y
+									border-neutral-300/10 border-transparent
+									border-b-transparent
 									focus:border-skyBlue-500
-									focus:outline-none"
+									focus:outline-none
+									data-[active=true]:ring
+									data-[active=true]:ring-inset
+									data-[active=true]:ring-solar-500
+									"
 									data-active={index === selectedIndex}
 								>
 									<a
-										class="col-span-2 grid grid-cols-subgrid items-center"
+										class="col-span-2 grid grid-cols-subgrid items-center focus:outline-none focus:ring focus:ring-inset focus:ring-white"
 										href={item.result}
 										onclick={closeSearch}
 									>
@@ -269,7 +274,7 @@
 										>
 									</a>
 
-									<button class="justify-self-end" onclick={() => searchHistory.remove(index)}>
+									<button class="justify-self-end px-2" onclick={() => searchHistory.remove(index)}>
 										<X class="align-center justify-self-end text-mineShaft-200/60" />
 									</button>
 								</div>
