@@ -81,9 +81,9 @@
 				<Button
 					variant="outline"
 					class="flex-1 bg-blue-500 hover:bg-blue-600"
-					href="/{String(data.network)}/ram/sell"
+					href="/{String(data.network)}/ram/buy"
 				>
-					Sell
+					Buy
 				</Button>
 			</div>
 			<div class="mb-4 w-1/2">
@@ -101,9 +101,9 @@
 				<Button
 					variant="outline"
 					class="flex-1 bg-blue-500 hover:bg-blue-600"
-					href="/{String(data.network)}/ram/buy"
+					href="/{String(data.network)}/ram/sell"
 				>
-					Buy
+					Sell
 				</Button>
 			</div>
 		</Card>

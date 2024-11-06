@@ -12,8 +12,8 @@
 		}
 		return [
 			{ href: urlBase, text: 'Summary' },
-			{ href: `${urlBase}/resources`, text: 'Resources' },
-			{ href: `${urlBase}/data`, text: 'Chain Data' }
+			// { href: `${urlBase}/resources`, text: 'Resources' },
+			{ href: `${urlBase}/data`, text: 'Data' }
 		];
 	});
 
