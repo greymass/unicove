@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { cn } from '$lib/utils/style';
 	import { type AnyMeltElement, melt } from '@melt-ui/svelte';
 	import { type Snippet } from 'svelte';
 	import type { Readable } from 'svelte/store';
@@ -9,32 +10,18 @@
 		children: Snippet;
 		open: Readable<boolean>;
 		menu: AnyMeltElement;
+		class: string;
 	}
 
-	const { menu, ...props }: Props = $props();
+	const { class: className, menu, ...props }: Props = $props();
 </script>
 
 {#if props.open}
 	<div
-		class="
-		z-10
-		flex
-		max-h-[300px]
-		flex-col
-		overflow-y-auto
-		border-2
-		border-mineShaft-600
-		bg-shark-950
-		py-1
-		shadow
-		focus:!ring-0
-		data-[variant=form]:rounded-lg
-		data-[variant=pill]:rounded-2xl
-		data-[variant=form]:px-2
-		data-[variant=form]:py-2
-		data-[variant=pill]:px-1
-		data-[variant=pill]:py-1
-		"
+		class={cn(
+			'z-90 flex max-h-[300px] flex-col overflow-y-auto border-2 border-mineShaft-600 bg-shark-950 py-1 shadow focus:!ring-0 data-[variant=form]:rounded-lg data-[variant=pill]:rounded-2xl data-[variant=form]:px-2 data-[variant=form]:py-2 data-[variant=pill]:px-1 data-[variant=pill]:py-1 ',
+			className
+		)}
 		data-variant={props.variant}
 		use:melt={$menu}
 		transition:fade={{ duration: 100 }}

@@ -4,10 +4,10 @@
 	import { Checksum256 } from '@wharfkit/antelope';
 	import MobileNavigation from '$lib/components/navigation/mobilenavigation.svelte';
 	import SideMenuContent from '$lib/components/navigation/sidemenu.svelte';
-	import AccountSwitcher from '$lib/components/select/account.svelte';
+	import AccountSwitcher from '$lib/components/accountswitch.svelte';
 	import UnicoveLogo from '$lib/assets/unicovelogo.svelte';
 	import Search from '$lib/components/input/search.svelte';
-	import Footer from '$lib/components/footer.svelte';
+	// import Footer from '$lib/components/footer.svelte';
 
 	let { children, data } = $props();
 
