@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { type AnyMeltElement, melt } from '@melt-ui/svelte';
-	import { ChevronDown } from 'lucide-svelte';
+	import ChevronDown from 'lucide-svelte/icons/chevron-down';
 	import { type Snippet } from 'svelte';
 	import { type Readable } from 'svelte/store';
 

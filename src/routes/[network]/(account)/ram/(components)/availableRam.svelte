@@ -4,7 +4,7 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import Card from '$lib/components/layout/box/card.svelte';
-	import { HardDrive } from 'lucide-svelte';
+	import HardDrive from 'lucide-svelte/icons/hard-drive';
 
 	const context = getContext<UnicoveContext>('state');
 	let ramOwned = $derived(Asset.from(Number(context.account?.ram?.max || 0) / 1000, '4,KB'));
