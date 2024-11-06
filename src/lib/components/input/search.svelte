@@ -105,6 +105,11 @@
 		}
 
 		if (document.activeElement === ref) {
+			if (event.metaKey && event.key === 'k') {
+				closeSearch();
+				return;
+			}
+
 			if (event.key === 'ArrowDown') {
 				if (selectedIndex === undefined) {
 					selectedIndex = 0;
