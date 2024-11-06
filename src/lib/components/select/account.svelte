@@ -121,7 +121,7 @@
 				opacity: 1
 			}}
 		>
-			<h2 use:melt={$title} class="h3 mb-0">{network}</h2>
+			<h2 use:melt={$title} class="h3 mb-8">{network.chain.name}</h2>
 			<section>
 				<Stack class="">
 					{#if context.wharf.session}
@@ -135,15 +135,12 @@
 								<p class="truncate">{String(context.wharf.session.chain.id)}</p>
 							</Stack>
 						</Stack>
-					{:else}
-						Not logged in
 					{/if}
 
-					<h2 class="h2">Controls</h2>
 					<Button onclick={addSession} variant="secondary">Login</Button>
-					<Button href={`/${network}/signup`} onclick={closeDrawer} variant="secondary"
+					<!-- <Button href={`/${network}/signup`} onclick={closeDrawer} variant="secondary"
 						>Signup</Button
-					>
+					> -->
 					{#if context.wharf.session}
 						<Button onclick={() => removeSession(currentSession)} variant="secondary">
 							Logout ({context.wharf.session.actor})
@@ -153,29 +150,33 @@
 						<Button onclick={removeAllSessions} variant="secondary">Logout (All Accounts)</Button>
 					{/if}
 
-					<h2 class="h2">Sessions</h2>
-					<p>The available sessions that can be used.</p>
-					{#each context.wharf.sessions as session}
-						{#if network.chain.id.equals(session.chain)}
-							<Button onclick={() => switchSession(session)} variant="secondary">
-								<span class="self-start">
-									{session.actor}@{session.permission}
-								</span>
-								<span class="truncate">
-									({chainMapper.toShortName(String(session.chain))})
-								</span>
-							</Button>
-						{/if}
-					{/each}
+					{#if context.wharf.sessions.length}
+						<h2 class="h2">Sessions</h2>
+						<p>The available sessions that can be used.</p>
+						{#each context.wharf.sessions as session}
+							{#if network.chain.id.equals(session.chain)}
+								<Button onclick={() => switchSession(session)} variant="secondary">
+									<span class="self-start">
+										{session.actor}@{session.permission}
+									</span>
+									<span class="truncate">
+										({chainMapper.toShortName(String(session.chain))})
+									</span>
+								</Button>
+							{/if}
+						{/each}
+					{/if}
 
-					<h2 class="h2">Switch Network</h2>
-					{#each chainShortNames as chain}
-						{@const isCurrent = chain === String(network)}
-						<Button variant={isCurrent ? 'secondary' : 'primary'} href={`/${chain}`}>
-							{chain}
-							{isCurrent ? '(Selected)' : ''}
-						</Button>
-					{/each}
+					<div class="hidden">
+						<h2 class="h2">Switch Network</h2>
+						{#each chainShortNames as chain}
+							{@const isCurrent = chain === String(network)}
+							<Button variant={isCurrent ? 'secondary' : 'primary'} href={`/${chain}`}>
+								{chain}
+								{isCurrent ? '(Selected)' : ''}
+							</Button>
+						{/each}
+					</div>
 				</Stack>
 			</section>
 			<button
