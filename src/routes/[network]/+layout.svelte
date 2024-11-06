@@ -96,7 +96,9 @@
 >
 	<header class="col-span-full flex items-center justify-between">
 		<!-- Larger breakpoints only	 -->
-		<UnicoveLogo small href="/{data.network}" class="hidden w-min place-self-center md:block" />
+		<a href="/{data.network}" class="hidden w-min place-self-center md:block">
+			<UnicoveLogo small />
+		</a>
 
 		<MobileNavigation network={data.network} />
 

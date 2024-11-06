@@ -83,6 +83,7 @@
 >
 	<nav class="col-span-full grid grid-cols-subgrid gap-y-8">
 		<UnicoveLogo wordmark class="justify-self-start md:col-span-2 xl:col-span-1" />
+
 		<menu class="contents">
 			{#each data as { title, links }}
 				<li class="space-y-2 md:col-span-2 xl:col-span-1">
