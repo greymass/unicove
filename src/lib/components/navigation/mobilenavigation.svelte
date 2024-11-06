@@ -69,9 +69,8 @@
 	id="menu-open"
 	data-session={!!context.wharf.session}
 >
-	<UnicoveLogo small href="/{network}" class="size-8 w-min place-self-center" />
+	<UnicoveLogo small class="size-8 w-min place-self-center" />
 	<Menu class="size-8 text-inherit" />
-	<!-- <span>Menu</span> -->
 </button>
 
 {#if $open}
