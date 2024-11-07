@@ -24,23 +24,27 @@
 			</tr>
 		</thead>
 		<tbody>
-			{#each records as record}
-				{#if !record.savings}
-					<tr>
-						<td><AssetText value={record.balance} /></td>
-						<td class="text-right">
-							{record.date
-								? record.date.toLocaleDateString(undefined, {
-										weekday: 'long',
-										year: 'numeric',
-										month: 'long',
-										day: 'numeric'
-									})
-								: '--'}
-						</td>
-					</tr>
-				{/if}
-			{/each}
+			{#if records.filter((r) => !r.savings).length > 0}
+				{#each records as record}
+					{#if !record.savings}
+						<tr>
+							<td><AssetText value={record.balance} /></td>
+							<td class="text-right">
+								{record.date
+									? record.date.toLocaleDateString(undefined, {
+											weekday: 'long',
+											year: 'numeric',
+											month: 'long',
+											day: 'numeric'
+										})
+									: '--'}
+							</td>
+						</tr>
+					{/if}
+				{/each}
+			{:else}
+				<tr><td class="caption">No staking in progress</td></tr>
+			{/if}
 		</tbody>
 	</table>
 	{#if href}

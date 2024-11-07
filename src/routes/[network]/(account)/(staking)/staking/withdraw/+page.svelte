@@ -35,9 +35,7 @@
 					>Withdraw</Button
 				>
 			</Switcher>
-			<Switcher>
-				<UnstakingBalances records={manager.unstaking} />
-			</Switcher>
+			<UnstakingBalances records={manager.unstaking} />
 		{/if}
 	</Stack>
 </Card>
