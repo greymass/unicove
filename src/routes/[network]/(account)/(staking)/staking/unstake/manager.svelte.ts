@@ -42,7 +42,7 @@ export class UnstakeManager {
 	public tokenBalance: TokenBalance | undefined = $derived.by(() => {
 		let balance: TokenBalance | undefined = undefined;
 		if (this.network) {
-			let meta = (this.network.tokenmeta || []).find((item) =>
+			const meta = (this.network.tokenmeta || []).find((item) =>
 				item.id.equals({
 					chain: this.network.chain.id,
 					contract: this.network.contracts.token.account,

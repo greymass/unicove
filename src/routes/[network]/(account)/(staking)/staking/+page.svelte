@@ -89,7 +89,11 @@
 		</Card>
 	</Stack>
 	<Stack class="max-w-lg gap-4">
-		<StakingCalculator {apy} network={data.network} tokenprice={data.network.tokenprice} />
+		<StakingCalculator
+			{apy}
+			network={data.network}
+			tokenprice={data.network.tokenprice || Asset.from(0, '2,USD')}
+		/>
 		<Card class="gap-5" title="About staking">
 			<Stack class="gap-5">
 				<p class="caption">

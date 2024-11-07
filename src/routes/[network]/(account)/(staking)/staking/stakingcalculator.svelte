@@ -18,14 +18,14 @@
 	const { apy, network, tokenprice, ...props }: Props = $props();
 
 	let assetValid: boolean = $state(true);
-	let assetValue: asset = $state(Asset.from(0, network.chain.systemToken!.symbol));
+	let assetValue: Asset = $state(Asset.from(0, network.chain.systemToken!.symbol));
 	let a = $derived(Number(apy) / 100);
 	let d = $derived(a / 365);
 	let m = $derived(a / 12);
 	let records = $derived.by(() => {
-		let daily = Asset.fromUnits(d * assetValue.units, assetValue.symbol);
-		let monthly = Asset.fromUnits(m * assetValue.units, assetValue.symbol);
-		let yearly = Asset.fromUnits(a * assetValue.units, assetValue.symbol);
+		let daily = Asset.fromUnits(assetValue.units.multiplying(d), assetValue.symbol);
+		let monthly = Asset.fromUnits(assetValue.units.multiplying(m), assetValue.symbol);
+		let yearly = Asset.fromUnits(assetValue.units.multiplying(a), assetValue.symbol);
 		let price = tokenprice ? tokenprice.value : 0;
 		return [
 			{
