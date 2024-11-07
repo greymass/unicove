@@ -11,13 +11,13 @@
 <div class="relative">
 	<input
 		class="
+			h-12
 			w-full
 			rounded-lg
 			border-2
 			border-mineShaft-600
 			bg-transparent
 			px-4
-			py-4
 			font-medium
 			focus:border-skyBlue-500
 			focus:outline-none
