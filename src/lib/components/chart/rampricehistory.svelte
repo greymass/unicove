@@ -37,7 +37,7 @@
 		const rangeStartDate = rangeEndDate.subtract(Number(selectedRange.value), 'day');
 		const filteredData = data.filter(({ date }) => dayjs(date).isAfter(rangeStartDate));
 
-		// If we have more points than NUM_POINTS, sample them evenly
+		// If we have more points than MAX_NUM_POINTS, sample them evenly
 		if (filteredData.length > MAX_NUM_POINTS) {
 			const result = [];
 			const step = filteredData.length / MAX_NUM_POINTS;
