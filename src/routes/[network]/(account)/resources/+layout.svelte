@@ -21,7 +21,7 @@
 	const isRenting = $derived(subtitle === 'Renting');
 </script>
 
-<Stack>
+<Stack tag="article" class="gap-6">
 	<div class="flex gap-4">
 		{#if isRenting}
 			<a

@@ -54,7 +54,7 @@
 	});
 </script>
 
-<Stack>
+<Stack tag="article" class="gap-6">
 	<Pageheader title="Sign Up" subtitle="Setup your account" />
 
 	<!-- Step progress -->

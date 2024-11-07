@@ -28,7 +28,7 @@
 	);
 </script>
 
-<header class="flex flex-wrap justify-between gap-6 pb-10 pt-2">
+<Stack tag="article" class="gap-6">
 	<Stack class="gap-1">
 		<h1 class="h2 text-neutral-200/60">{data.transaction.id.substring(0, 7)}</h1>
 		<h2 class="h1 font-bold text-white">Transaction</h2>
@@ -36,6 +36,6 @@
 	</Stack>
 
 	<PillGroup {options} class="sm:self-end" />
-</header>
 
-{@render children()}
+	{@render children()}
+</Stack>

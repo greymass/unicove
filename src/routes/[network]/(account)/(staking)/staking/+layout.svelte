@@ -28,7 +28,7 @@
 	);
 </script>
 
-<Stack class="gap-6">
+<Stack tag="article" class="gap-6">
 	<Pageheader title="Staking" {subtitle} {backPath} />
 
 	{@render children()}

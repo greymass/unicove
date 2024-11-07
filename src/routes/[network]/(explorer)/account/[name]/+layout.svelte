@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import { Stack } from '$lib/components/layout';
 	import PillGroup from '$lib/components/navigation/pillgroup.svelte';
 	import Pageheader from '$lib/components/pageheader.svelte';
 
@@ -31,9 +32,9 @@
 	);
 </script>
 
-<header class="layout-stack gap-6">
-	<Pageheader title="Account" subtitle={String(data.account.name)} inverted />
+<Stack tag="article" class="gap-6">
+	<Pageheader subtitle="Account" title={String(data.account.name)} />
 	<PillGroup {options} class="mb-6" />
-</header>
 
-{@render children()}
+	{@render children()}
+</Stack>

@@ -24,7 +24,7 @@
 	);
 </script>
 
-<Stack>
+<Stack tag="article" class="gap-6">
 	<Pageheader title="Send" subtitle="Send tokens" />
 
 	<PillGroup {options} class="mb-6 hidden" />
