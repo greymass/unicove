@@ -31,11 +31,8 @@
 		{:else}
 			<Switcher>
 				<PageHeader title="Currently Withdrawable" subtitle={String(manager.total)} inverted />
-				<Button
-					disabled={!manager.total.value}
-					onclick={() => manager.transact()}
-					variant="secondary"
-					class="text-skyBlue-500">Withdraw</Button
+				<Button disabled={!manager.total.value} onclick={() => manager.transact()} variant="primary"
+					>Withdraw</Button
 				>
 			</Switcher>
 			<Switcher>

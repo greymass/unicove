@@ -61,11 +61,15 @@
 				</Stack>
 			</Switcher>
 			<Switcher threshold="20rem">
-				<Button href="/{networkName}/staking/stake" variant="secondary" class="text-skyBlue-500"
-					>Stake</Button
+				<Button
+					href="/{networkName}/staking/stake"
+					variant="outline"
+					class="bg-blue-500 hover:bg-blue-600">Stake</Button
 				>
-				<Button href="/{networkName}/staking/unstake" variant="secondary" class="text-skyBlue-500"
-					>Unstake</Button
+				<Button
+					href="/{networkName}/staking/unstake"
+					variant="outline"
+					class="bg-blue-500 hover:bg-blue-600">Unstake</Button
 				>
 			</Switcher>
 		</Card>
@@ -77,8 +81,10 @@
 					<AssetText class="text-white" variant="full" value={totalWithdraw} />
 				</p>
 			</Stack>
-			<Button href="/{networkName}/staking/withdraw" variant="secondary" class="text-skyBlue-500"
-				>Withdraw</Button
+			<Button
+				href="/{networkName}/staking/withdraw"
+				variant="outline"
+				class="bg-blue-500 hover:bg-blue-600">Withdraw</Button
 			>
 		</Card>
 	</Stack>

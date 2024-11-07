@@ -69,11 +69,8 @@
 						type="button">Available: <AssetText value={manager.stakable} /></button
 					>
 				</Label>
-				<Button
-					disabled={!manager.assetValid}
-					onclick={() => manager.transact()}
-					variant="secondary"
-					class="text-skyBlue-500">Stake</Button
+				<Button disabled={!manager.assetValid} onclick={() => manager.transact()} variant="primary"
+					>Stake</Button
 				>
 			</Stack>
 
