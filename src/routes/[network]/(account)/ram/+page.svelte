@@ -78,13 +78,7 @@
 						/>
 					</div>
 				</div>
-				<Button
-					variant="outline"
-					class="flex-1 bg-blue-500 hover:bg-blue-600"
-					href="/{String(data.network)}/ram/buy"
-				>
-					Buy
-				</Button>
+				<Button variant="secondary" href="/{String(data.network)}/ram/buy">Buy</Button>
 			</div>
 			<div class="mb-4 w-1/2">
 				<div class="h-24">
@@ -98,13 +92,7 @@
 						/>
 					</div>
 				</div>
-				<Button
-					variant="outline"
-					class="flex-1 bg-blue-500 hover:bg-blue-600"
-					href="/{String(data.network)}/ram/sell"
-				>
-					Sell
-				</Button>
+				<Button variant="secondary" href="/{String(data.network)}/ram/sell">Sell</Button>
 			</div>
 		</Card>
 
