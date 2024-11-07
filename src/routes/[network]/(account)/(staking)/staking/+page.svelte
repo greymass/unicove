@@ -14,7 +14,7 @@
 		getUnstakingBalances,
 		getAPY
 	} from '$lib/utils/staking';
-	import UnstakingBalances from './unstaking.svelte';
+	import UnstakingBalances from '$lib/components/elements/unstaking.svelte';
 	import StakingCalculator from './stakingcalculator.svelte';
 
 	const context = getContext<UnicoveContext>('state');

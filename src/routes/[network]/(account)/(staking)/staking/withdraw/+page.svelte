@@ -7,7 +7,7 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
 	import { WithdrawManager } from './manager.svelte';
-	import UnstakingBalances from '../unstaking.svelte';
+	import UnstakingBalances from '$lib/components/elements/unstaking.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();

@@ -1,25 +1,28 @@
 <script lang="ts">
 	import { Asset, Int64 } from '@wharfkit/antelope';
-	import Code from '$lib/components/code.svelte';
-	import type { AccountState } from '$lib/state/client/account.svelte';
-	import type { NetworkState } from '$lib/state/network.svelte';
+	import { Card, Stack, Switcher } from '$lib/components/layout';
+	import type { UnstakingRecord } from '$lib/utils/staking';
+	import {
+		getStakedBalance,
+		getClaimableBalance,
+		getWithdrawableBalance,
+		getUnstakingBalances,
+		getUnstakableBalance,
+		getAPY
+	} from '$lib/utils/staking';
+
+	import UnstakingBalances from '$lib/components/elements/unstaking.svelte';
 
 	const { data } = $props();
 
-	function getStakedBalance(network: NetworkState, account: AccountState): Asset {
-		const staked = Int64.from(0);
-		if (account && account.loaded) {
-			if (account.account?.data.rex_info) {
-				staked.add(network.rexToToken(account.account.data.rex_info.rex_balance).units);
-			}
-			if (account.sources.rexfund) {
-				staked.add(Asset.from(account.sources.rexfund.balance).units);
-			}
-		}
-		return Asset.fromUnits(staked, network.chain.systemToken!.symbol);
-	}
-
 	let staked: Asset = $derived(getStakedBalance(data.network, data.account));
+	let claimable: Asset = $derived(getClaimableBalance(data.network, data.account));
+	let withdrawable: Asset = $derived(getWithdrawableBalance(data.network, data.account));
+	let unstaking: Array<UnstakingRecord> = $derived(
+		getUnstakingBalances(data.network, data.account)
+	);
+	let unstakable: Asset = $derived(getUnstakableBalance(data.network, data.account, unstaking));
+	let apy: string = $derived(getAPY(data.network));
 	let usdValue = $derived(
 		Asset.from(
 			staked.value * (data.network.tokenprice ? data.network.tokenprice.value : 0),
@@ -28,11 +31,46 @@
 	);
 </script>
 
-<div class="space-y-4">
-	<h3 class="h3">Staked</h3>
-	<Code>{staked}</Code>
-	<h3 class="h3">USD</h3>
-	<Code>{usdValue}</Code>
-	<h3 class="h3">REX State</h3>
-	<Code>{JSON.stringify(data.account.network.rexstate, null, 2)}</Code>
-</div>
+<Stack>
+	{#if data.account}
+		<Stack>
+			<Switcher threshold="64rem" class="place-content-between">
+				<Card class="gap-5" title="Staked">
+					<table class="table-styles">
+						<tbody>
+							<tr>
+								<td>Total staked</td>
+								<td>{staked}</td>
+							</tr>
+							<tr>
+								<td>Total value</td>
+								<td>{usdValue}</td>
+							</tr>
+
+							<tr>
+								<td>APY</td>
+								<td>{apy} %</td>
+							</tr>
+
+							<tr>
+								<td>Savings</td>
+								<td>{data.network.tokenToRex(unstakable)}</td>
+							</tr>
+							<tr>
+								<td>Available for claim</td>
+								<td>{data.network.tokenToRex(claimable)}</td>
+							</tr>
+							<tr>
+								<td>REX fund</td>
+								<td>{withdrawable}</td>
+							</tr>
+						</tbody>
+					</table>
+				</Card>
+				<UnstakingBalances records={unstaking} />
+			</Switcher>
+		</Stack>
+	{:else}
+		<p>Loading staking details...</p>
+	{/if}
+</Stack>
