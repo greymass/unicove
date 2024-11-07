@@ -27,13 +27,28 @@
 		{ label: '1Y', value: 365 }
 	];
 
+	const NUM_POINTS = 50; // Constant number of points to display
+
 	let selectedRange: ExtendedSelectOption = $state(range[1]);
 
 	let dataRange = $derived.by(() => {
 		if (data.length === 0) return [];
 		const rangeEndDate = dayjs(data[0].date);
 		const rangeStartDate = rangeEndDate.subtract(Number(selectedRange.value), 'day');
-		return data.filter(({ date }) => dayjs(date).isAfter(rangeStartDate));
+		const filteredData = data.filter(({ date }) => dayjs(date).isAfter(rangeStartDate));
+
+		// If we have more points than NUM_POINTS, sample them evenly
+		if (filteredData.length > NUM_POINTS) {
+			const result = [];
+			const step = filteredData.length / NUM_POINTS;
+			for (let i = 0; i < NUM_POINTS; i++) {
+				const index = Math.floor(i * step);
+				result.push(filteredData[index]);
+			}
+			return result;
+		}
+
+		return filteredData;
 	});
 
 	let currentPoint = $derived(dataRange[0]);
