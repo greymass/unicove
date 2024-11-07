@@ -58,7 +58,7 @@
 	<Pageheader title="Sign Up" subtitle="Setup your account" />
 
 	<!-- Step progress -->
-	<ol class="mb-4 flex justify-between gap-5">
+	<ol class="mb-4 flex hidden justify-between gap-5">
 		{#each steps as step, index}
 			{@const isCurrentStep = step.path === getCurrentStep()?.path}
 			{@const isIncompleteStep = isCurrentStep || isFutureStep(index)}
