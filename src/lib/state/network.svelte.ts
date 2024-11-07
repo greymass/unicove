@@ -22,7 +22,13 @@ import { tokens } from '../../routes/[network]/api/tokens/tokens';
 import { calculateValue } from '$lib/utils';
 import { SampledUsage } from '$lib/types';
 
+export interface NetworkStateOptions {
+	fetchOverride?: typeof fetch;
+	client?: APIClient;
+}
+
 export class NetworkState {
+	public client: APIClient;
 	public chain: ChainDefinition;
 	public config: ChainConfig;
 	public fetch = fetch;
@@ -34,9 +40,9 @@ export class NetworkState {
 	public contracts: DefaultContracts;
 
 	public ramstate?: RAMState = $state();
-	public globalState?: SystemTypes.eosio_global_state = $state();
 	public resources?: Resources = $state();
 	public rexstate?: REXState = $state();
+	public globalstate?: SystemTypes.eosio_global_state = $state();
 	public powerupstate?: PowerUpState = $state();
 	public sampledUsage?: SampledUsage = $state();
 	public tokenmeta?: TokenMeta[] = $state();
@@ -48,15 +54,27 @@ export class NetworkState {
 		this.ramstate ? getRAMPrice(this.ramstate, this.tokenprice) : undefined
 	);
 
-	constructor(chain: ChainDefinition, fetchOverride?: typeof fetch) {
+	constructor(chain: ChainDefinition, options: NetworkStateOptions = {}) {
 		this.chain = chain;
 		this.config = chainConfigs[String(this.chain.id)];
 		this.shortname = chainMapper.toShortName(String(this.chain.id));
 		this.snapOrigin = snapOrigins.get(this.shortname);
 		this.tokenmeta = tokens[this.shortname];
-		if (fetchOverride) {
-			this.fetch = fetchOverride;
+
+		if (options.fetchOverride) {
+			this.fetch = options.fetchOverride;
 		}
+
+		if (options.client) {
+			this.client = options.client;
+		} else {
+			this.client = new APIClient(
+				new FetchProvider(this.chain.url, {
+					fetch: this.fetch
+				})
+			);
+		}
+
 		this.resources = new Resources({
 			api: this.client,
 			sampleAccount: 'eosio.reserv'
@@ -72,14 +90,6 @@ export class NetworkState {
 		}
 	}
 
-	public get client() {
-		return new APIClient(
-			new FetchProvider(this.chain.url, {
-				fetch: this.fetch
-			})
-		);
-	}
-
 	async refresh() {
 		const response = await this.fetch(
 			`/${chainMapper.toShortName(String(this.chain.id))}/api/network`
@@ -89,24 +99,26 @@ export class NetworkState {
 		this.tokenstate = json.tokenstate;
 
 		try {
+			this.globalstate = SystemTypes.eosio_global_state.from(json.globalstate);
+		} catch (error) {
+			console.log('GlobalState Parse', error);
+			console.log(json);
+		}
+
+		try {
 			this.ramstate = RAMState.from(json.ramstate);
 		} catch (error) {
 			console.log('RAMState parse', error);
 			console.log(json);
 		}
-		// We need to fetch the global state table here:
-		try {
-			this.globalState = await this.contracts.system.table('global').get();
-		} catch (error) {
-			console.log('GlobalState parse', error);
-			console.log(json);
-		}
+
 		try {
 			this.rexstate = REXState.from(json.rexstate);
 		} catch (error) {
 			console.log('REXState parse', error);
 			console.log(json);
 		}
+
 		try {
 			this.powerupstate = PowerUpState.from(json.powerupstate);
 		} catch (error) {
@@ -183,10 +195,10 @@ export function getRAMPrice(state: RAMState, systemTokenPrice?: Asset) {
 	};
 }
 
-export function getNetwork(chain: ChainDefinition, fetchOverride?: typeof window.fetch) {
+export function getNetwork(chain: ChainDefinition, options: NetworkStateOptions = {}) {
 	let current = services.find((service) => chain.id.equals(service.chain));
 	if (!current) {
-		const network = new NetworkState(chain, fetchOverride);
+		const network = new NetworkState(chain, options);
 		current = { chain: String(chain.id), network };
 		services.push(current);
 	}
@@ -211,6 +223,6 @@ export function getNetworkFromParams(
 	fetchOverride?: typeof window.fetch
 ): NetworkState {
 	const chain = getChainDefinitionFromParams(network);
-	const state = getNetwork(chain, fetchOverride);
+	const state = getNetwork(chain, { fetchOverride });
 	return state;
 }

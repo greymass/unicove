@@ -22,7 +22,7 @@
 	let marketCapUSD: Asset | undefined = $state();
 	let ramSupply: Asset | undefined = $state();
 
-	const totalRamSupply = $derived(Number(data.network.globalState?.max_ram_size || 0));
+	const totalRamSupply = $derived(Number(data.network.globalstate?.max_ram_size || 0));
 
 	$effect(() => {
 		if (ramState) {

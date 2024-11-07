@@ -1,9 +1,9 @@
 import { json, type RequestEvent } from '@sveltejs/kit';
 
-import { getChainDefinitionFromParams, getNetwork } from '$lib/state/network.svelte';
+import { getChainDefinitionFromParams } from '$lib/state/network.svelte';
 import { UInt64 } from '@wharfkit/antelope';
 import { getCacheHeaders } from '$lib/utils';
-import { getBackendClient } from '$lib/wharf/client/ssr.js';
+import { getBackendNetwork } from '$lib/wharf/client/ssr.js';
 
 export async function GET({ fetch, params }: RequestEvent) {
 	const chain = getChainDefinitionFromParams(String(params.network));
@@ -11,13 +11,10 @@ export async function GET({ fetch, params }: RequestEvent) {
 		return json({ error: 'Invalid chain specified' }, { status: 400 });
 	}
 
-	const network = getNetwork(chain, fetch);
-	const client = getBackendClient(fetch, network.shortname, {
-		history: true
-	});
+	const network = getBackendNetwork(chain, fetch);
 	const [info, block] = await Promise.all([
-		client.v1.chain.get_info(),
-		client.call({
+		network.client.v1.chain.get_info(),
+		network.client.call({
 			method: 'POST',
 			path: '/v1/chain/get_block',
 			params: {

@@ -1,9 +1,10 @@
 import { json } from '@sveltejs/kit';
-import { getChainDefinitionFromParams, getNetwork, NetworkState } from '$lib/state/network.svelte';
+import { getChainDefinitionFromParams, NetworkState } from '$lib/state/network.svelte';
 import { getCacheHeaders } from '$lib/utils';
 import type { LightAPIBalanceResponse, LightAPIBalanceRow } from '$lib/types.js';
 import type { RequestHandler } from './$types';
 import { Asset, type NameType } from '@wharfkit/antelope';
+import { getBackendNetwork } from '$lib/wharf/client/ssr';
 
 export const GET: RequestHandler = async ({ fetch, params }) => {
 	const chain = getChainDefinitionFromParams(params.network);
@@ -15,7 +16,7 @@ export const GET: RequestHandler = async ({ fetch, params }) => {
 		return json({ error: 'Account name not specified.' }, { status: 500 });
 	}
 
-	const network = getNetwork(chain, fetch);
+	const network = getBackendNetwork(chain, fetch);
 	const { system: systemContract } = network.contracts;
 
 	try {
