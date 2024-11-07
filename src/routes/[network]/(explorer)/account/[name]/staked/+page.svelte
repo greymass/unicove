@@ -23,7 +23,7 @@
 	let usdValue = $derived(
 		Asset.from(
 			staked.value * (data.network.tokenprice ? data.network.tokenprice.value : 0),
-			'4,USD'
+			'2,USD'
 		)
 	);
 </script>

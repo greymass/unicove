@@ -7,8 +7,15 @@
 	import { getContext } from 'svelte';
 
 	import type { UnstakingRecord } from './utils';
-	import { getStakedBalance, getUnstakingBalances, getAPY } from './utils';
+	import {
+		getClaimableBalance,
+		getWithdrawableBalance,
+		getStakedBalance,
+		getUnstakingBalances,
+		getAPY
+	} from './utils';
 	import UnstakingBalances from './unstaking.svelte';
+	import StakingCalculator from './stakingcalculator.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
@@ -18,29 +25,41 @@
 	let unstaking: Array<UnstakingRecord> = $derived(
 		getUnstakingBalances(data.network, context.account)
 	);
+	let claimable: Asset = $derived(getClaimableBalance(data.network, context.account, unstaking));
+	let withdrawable: Asset = $derived(getWithdrawableBalance(data.network, context.account));
+	let totalWithdraw: Asset = $derived(
+		Asset.fromUnits(
+			claimable.units.adding(withdrawable.units),
+			data.network.chain.systemToken!.symbol
+		)
+	);
+
 	let apy = $derived(getAPY(data.network));
 	let usdValue = $derived(
 		Asset.from(
 			staked.value * (data.network.tokenprice ? data.network.tokenprice.value : 0),
-			'4,USD'
+			'2,USD'
 		)
 	);
 </script>
 
-<Stack class="mx-auto max-w-5xl gap-8">
-	<Switcher threshold="40rem" class="items-start justify-center">
-		<Card class="gap-5">
-			<Stack class="gap-0">
-				<p class="caption">
-					Staked Balance - {apy}% APY
-				</p>
-				<p class="h3">
-					<AssetText value={staked} />
-				</p>
-				<p class="mt-1.5 self-start rounded bg-shark-800/60 px-2">
-					$<AssetText value={usdValue} />
-				</p>
-			</Stack>
+<Switcher threshold="64rem" class="place-content-between">
+	<Stack class="max-w-lg gap-9">
+		<Card class="gap-5" title="Staked - {apy}% APY">
+			<Switcher threshold="20rem">
+				<Stack class="text-md gap-0">
+					<p class="caption">Currently Staked</p>
+					<p class="mt-1.5 self-start rounded bg-shark-800/60 px-2 text-white">
+						<AssetText class="text-white" variant="full" value={staked} />
+					</p>
+				</Stack>
+				<Stack class="text-md gap-0">
+					<p class="caption">USD Value</p>
+					<p class="mt-1.5 self-start rounded bg-shark-800/60 px-2 text-white">
+						$<AssetText variant="value" value={usdValue} />
+					</p>
+				</Stack>
+			</Switcher>
 			<Switcher threshold="20rem">
 				<Button href="/{networkName}/staking/stake" variant="secondary" class="text-skyBlue-500"
 					>Stake</Button
@@ -50,12 +69,29 @@
 				>
 			</Switcher>
 		</Card>
-		<UnstakingBalances href="/{networkName}/staking/withdraw" records={unstaking} />
-	</Switcher>
-	<Card class="gap-5">
-		<Stack class="gap-0">
-			<p class="caption">Staking yield history</p>
-			<p class="h3">0.0 EOS</p>
-		</Stack>
-	</Card>
-</Stack>
+		<UnstakingBalances records={unstaking} />
+		<Card class="gap-5" title="Withdrawable">
+			<Stack class="text-md gap-0">
+				<p class="caption">Currently Withdrawable</p>
+				<p class="mt-1.5 self-start rounded bg-shark-800/60 px-2 text-white">
+					<AssetText class="text-white" variant="full" value={totalWithdraw} />
+				</p>
+			</Stack>
+			<Button href="/{networkName}/staking/withdraw" variant="secondary" class="text-skyBlue-500"
+				>Withdraw</Button
+			>
+		</Card>
+	</Stack>
+	<Stack class="max-w-lg gap-4">
+		<StakingCalculator {apy} network={data.network} tokenprice={data.network.tokenprice} />
+		<Card class="gap-5" title="About staking">
+			<Stack class="gap-5">
+				<p class="caption">
+					Unstaking balances will still accrue rewards until they are claimed. However, any
+					operation you do (staking more for instance) will automatically claim your fully unstaked
+					positions.
+				</p>
+			</Stack>
+		</Card>
+	</Stack>
+</Switcher>
