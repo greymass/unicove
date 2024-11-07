@@ -4,7 +4,9 @@ import type { NetworkState } from '$lib/state/network.svelte';
 import type { WharfState } from '$lib/state/client/wharf.svelte';
 import AssetInput from '$lib/components/input/asset.svelte';
 
-import { defaultQuantity, getStakableBalance, getAPY } from '../utils';
+import { TokenBalance } from '@wharfkit/common';
+
+import { defaultQuantity, getStakableBalance, getStakedBalance, getAPY } from '$lib/utils/staking';
 
 export class StakeManager {
 	public input: AssetInput | undefined = $state();
@@ -24,6 +26,7 @@ export class StakeManager {
 	public error: string = $state('');
 	public txid: string = $state('');
 
+	public staked: Asset = $derived(getStakedBalance(this.network, this.account));
 	public stakable: Asset = $derived(getStakableBalance(this.network, this.account));
 	public apy: string = $derived(this.network ? getAPY(this.network) : '0');
 	public estimateYield: Asset = $derived(
@@ -34,6 +37,26 @@ export class StakeManager {
 				)
 			: defaultQuantity
 	);
+	public tokenBalance: TokenBalance | undefined = $derived.by(() => {
+		let balance: TokenBalance | undefined = undefined;
+		if (this.network) {
+			const meta = (this.network.tokenmeta || []).find((item) =>
+				item.id.equals({
+					chain: this.network.chain.id,
+					contract: this.network.contracts.token.account,
+					symbol: this.network.chain.systemToken!.symbol
+				})
+			);
+			if (meta) {
+				balance = TokenBalance.from({
+					asset: this.staked,
+					contract: this.network.contracts.token.account,
+					metadata: meta
+				});
+			}
+		}
+		return balance;
+	});
 
 	constructor(network: NetworkState) {
 		this.network = network;

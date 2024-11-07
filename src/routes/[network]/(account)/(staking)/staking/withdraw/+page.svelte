@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Stack, Switcher } from '$lib/components/layout';
+	import { Card, Stack, Switcher } from '$lib/components/layout';
 	import Button from '$lib/components/button/button.svelte';
 	import PageHeader from '$lib/components/pageheader.svelte';
 	import Transaction from '$lib/components/transaction.svelte';
@@ -7,7 +7,7 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
 	import { WithdrawManager } from './manager.svelte';
-	import UnstakingBalances from '../unstaking.svelte';
+	import UnstakingBalances from '$lib/components/elements/unstaking.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
@@ -21,26 +21,21 @@
 	});
 </script>
 
-{#if manager.txid}
-	<Transaction network={data.network} transactionId={manager.txid} />
-{:else if manager.error}
-	<div>
-		<h2 class="h2">Transaction Error</h2>
-		<p>There was an error submitting your transaction.</p>
-	</div>
-{:else}
-	<Stack class="mx-auto max-w-5xl space-y-8">
-		<Switcher>
-			<PageHeader title="Currently Withdrawable" subtitle={String(manager.total)} inverted />
-			<Button
-				disabled={!manager.total.value}
-				onclick={() => manager.transact()}
-				variant="secondary"
-				class="text-skyBlue-500">Withdraw</Button
-			>
-		</Switcher>
-		<Switcher>
+<Card>
+	<Stack class="mx-auto w-96 space-y-8">
+		{#if manager.txid}
+			<Transaction network={data.network} transactionId={manager.txid} />
+		{:else if manager.error}
+			<h2 class="h2">Transaction Error</h2>
+			<p>There was an error submitting your transaction.</p>
+		{:else}
+			<Switcher>
+				<PageHeader title="Currently Withdrawable" subtitle={String(manager.total)} inverted />
+				<Button disabled={!manager.total.value} onclick={() => manager.transact()} variant="primary"
+					>Withdraw</Button
+				>
+			</Switcher>
 			<UnstakingBalances records={manager.unstaking} />
-		</Switcher>
+		{/if}
 	</Stack>
-{/if}
+</Card>
