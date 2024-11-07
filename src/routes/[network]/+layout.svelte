@@ -7,7 +7,7 @@
 	import AccountSwitcher from '$lib/components/select/account.svelte';
 	import UnicoveLogo from '$lib/assets/unicovelogo.svelte';
 	import Search from '$lib/components/input/search.svelte';
-	import Footer from '$lib/components/footer.svelte';
+	// import Footer from '$lib/components/footer.svelte';
 
 	let { children, data } = $props();
 
