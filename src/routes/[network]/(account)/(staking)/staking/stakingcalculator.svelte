@@ -31,17 +31,17 @@
 			{
 				time: 'Daily',
 				value: daily,
-				usd: Asset.from(daily.value * price, '2,USD')
+				usd: '$' + Asset.from(daily.value * price, '2,USD').value.toFixed(2)
 			},
 			{
 				time: 'Monthly',
 				value: monthly,
-				usd: Asset.from(monthly.value * price, '2,USD')
+				usd: '$' + Asset.from(monthly.value * price, '2,USD').value.toFixed(2)
 			},
 			{
 				time: 'Yearly',
 				value: yearly,
-				usd: Asset.from(yearly.value * price, '2,USD')
+				usd: '$' + Asset.from(yearly.value * price, '2,USD').value.toFixed(2)
 			}
 		];
 	});
@@ -70,8 +70,7 @@
 					<td class="text-sm"
 						><AssetText class="text-white" variant="full" value={record.value} /></td
 					>
-					<td class="text-sm"><AssetText class="text-white" variant="full" value={record.usd} /></td
-					>
+					<td class="text-sm">{record.usd}</td>
 				</tr>
 			{/each}
 		</tbody>
