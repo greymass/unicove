@@ -1,6 +1,7 @@
 <!-- The Grid is like the Cluster but with all elements aligned to columns and rows -->
 
 <script lang="ts">
+	import { cn } from '$lib/utils/style';
 	import type { Snippet } from 'svelte';
 	import type { HTMLAttributes } from 'svelte/elements';
 
@@ -9,9 +10,9 @@
 		itemWidth?: string;
 	}
 
-	const { children, itemWidth = '20ch', ...props }: Props = $props();
+	const { children, itemWidth = '20ch', class: className, ...props }: Props = $props();
 </script>
 
-<div class={`layout-grid`} {...props} style={`--grid-itemWidth:${itemWidth}`}>
+<div class={cn(`layout-grid`, className)} {...props} style={`--grid-itemWidth:${itemWidth}`}>
 	{@render children()}
 </div>
