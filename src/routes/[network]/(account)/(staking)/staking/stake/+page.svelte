@@ -29,16 +29,14 @@
 	});
 </script>
 
-{#if manager.txid}
-	<Transaction network={data.network} transactionId={manager.txid} />
-{:else if manager.error}
-	<div>
-		<h2 class="h2">Transaction Error</h2>
-		<p>There was an error submitting your transaction.</p>
-	</div>
-{:else}
-	<Card>
-		<Stack class="mx-auto w-96 space-y-8">
+<Card>
+	<Stack class="mx-auto w-96 space-y-8">
+		{#if manager.txid}
+			<Transaction network={data.network} transactionId={manager.txid} />
+		{:else if manager.error}
+			<h2 class="h2">Transaction Error</h2>
+			<p>There was an error submitting your transaction.</p>
+		{:else}
 			<TokenCard token={manager.tokenBalance} title="Staked" description="Currently staked" />
 			<Stack class="gap-3">
 				<Label for="assetInput">Amount</Label>
@@ -93,6 +91,6 @@
 					{/each}
 				</tbody>
 			</table>
-		</Stack>
-	</Card>
-{/if}
+		{/if}
+	</Stack>
+</Card>

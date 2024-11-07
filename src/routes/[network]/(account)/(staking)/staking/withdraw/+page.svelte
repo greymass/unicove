@@ -21,16 +21,14 @@
 	});
 </script>
 
-{#if manager.txid}
-	<Transaction network={data.network} transactionId={manager.txid} />
-{:else if manager.error}
-	<div>
-		<h2 class="h2">Transaction Error</h2>
-		<p>There was an error submitting your transaction.</p>
-	</div>
-{:else}
-	<Card>
-		<Stack class="mx-auto max-w-5xl space-y-8">
+<Card>
+	<Stack class="mx-auto w-96 space-y-8">
+		{#if manager.txid}
+			<Transaction network={data.network} transactionId={manager.txid} />
+		{:else if manager.error}
+			<h2 class="h2">Transaction Error</h2>
+			<p>There was an error submitting your transaction.</p>
+		{:else}
 			<Switcher>
 				<PageHeader title="Currently Withdrawable" subtitle={String(manager.total)} inverted />
 				<Button
@@ -43,6 +41,6 @@
 			<Switcher>
 				<UnstakingBalances records={manager.unstaking} />
 			</Switcher>
-		</Stack>
-	</Card>
-{/if}
+		{/if}
+	</Stack>
+</Card>
