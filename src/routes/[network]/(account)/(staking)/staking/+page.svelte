@@ -6,14 +6,14 @@
 	import { Asset } from '@wharfkit/antelope';
 	import { getContext } from 'svelte';
 
-	import type { UnstakingRecord } from './utils';
+	import type { UnstakingRecord } from '$lib/utils/staking';
 	import {
 		getClaimableBalance,
 		getWithdrawableBalance,
 		getStakedBalance,
 		getUnstakingBalances,
 		getAPY
-	} from './utils';
+	} from '$lib/utils/staking';
 	import UnstakingBalances from './unstaking.svelte';
 	import StakingCalculator from './stakingcalculator.svelte';
 

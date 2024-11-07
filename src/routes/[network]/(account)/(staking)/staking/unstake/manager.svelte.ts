@@ -6,13 +6,13 @@ import AssetInput from '$lib/components/input/asset.svelte';
 
 import { TokenBalance } from '@wharfkit/common';
 
-import type { UnstakingRecord } from '../utils';
+import type { UnstakingRecord } from '$lib/utils/staking';
 import {
 	defaultQuantity,
 	getUnstakableBalance,
 	getUnstakingBalances,
 	getStakedBalance
-} from '../utils';
+} from '$lib/utils/staking';
 
 export class UnstakeManager {
 	public input: AssetInput | undefined = $state();

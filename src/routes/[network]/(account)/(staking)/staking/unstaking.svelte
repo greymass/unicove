@@ -5,7 +5,7 @@
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import { Card } from '$lib/components/layout';
 	import Button from '$lib/components/button/button.svelte';
-	import type { UnstakingRecord } from './utils';
+	import type { UnstakingRecord } from '$lib/utils/staking';
 
 	interface Props extends HTMLAttributes<HTMLDivElement> {
 		href?: string;

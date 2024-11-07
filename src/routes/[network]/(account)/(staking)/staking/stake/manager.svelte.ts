@@ -6,7 +6,7 @@ import AssetInput from '$lib/components/input/asset.svelte';
 
 import { TokenBalance } from '@wharfkit/common';
 
-import { defaultQuantity, getStakableBalance, getStakedBalance, getAPY } from '../utils';
+import { defaultQuantity, getStakableBalance, getStakedBalance, getAPY } from '$lib/utils/staking';
 
 export class StakeManager {
 	public input: AssetInput | undefined = $state();

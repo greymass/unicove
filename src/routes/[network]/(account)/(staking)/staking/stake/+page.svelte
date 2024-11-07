@@ -16,7 +16,7 @@
 	let manager: StakeManager = $state(new StakeManager(data.network));
 
 	let hints = $derived([
-		{ caption: 'Minimum lockup', data: '21Days' },
+		{ caption: 'Minimum lockup', data: '21 Days' },
 		{ caption: '~APY', data: manager.apy + '%' },
 		{ caption: 'You will stake', data: manager.assetValue.toString() },
 		{ caption: 'Estimated Yield(per year)', data: manager.estimateYield }
