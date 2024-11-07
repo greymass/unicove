@@ -97,6 +97,12 @@
 		<Card class="gap-5" title="About staking">
 			<Stack class="gap-5">
 				<p class="caption">
+					The APY is an estimate, and may fluctuate based on how many and much others are staking.
+					Your 21 day lockup period starts when you unstake your EOS.
+				</p>
+				<p class="caption">You will never get back less EOS.</p>
+
+				<p class="caption">
 					Unstaking balances will still accrue rewards until they are claimed. However, any
 					operation you do (staking more for instance) will automatically claim your fully unstaked
 					positions.
