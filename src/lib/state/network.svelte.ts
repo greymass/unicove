@@ -6,7 +6,7 @@ import { snapOrigins } from '@wharfkit/wallet-plugin-metamask';
 
 import { Types as DelphiOracleTypes } from '$lib/wharf/contracts/delphioracle';
 import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
-import { Contract as SystemContract } from '$lib/wharf/contracts/system';
+import { Contract as SystemContract, Types as SystemTypes } from '$lib/wharf/contracts/system';
 import { Contract as TokenContract } from '$lib/wharf/contracts/token';
 
 import {
@@ -42,6 +42,7 @@ export class NetworkState {
 	public ramstate?: RAMState = $state();
 	public resources?: Resources = $state();
 	public rexstate?: REXState = $state();
+	public globalstate?: SystemTypes.eosio_global_state = $state();
 	public powerupstate?: PowerUpState = $state();
 	public sampledUsage?: SampledUsage = $state();
 	public tokenmeta?: TokenMeta[] = $state();
@@ -98,17 +99,26 @@ export class NetworkState {
 		this.tokenstate = json.tokenstate;
 
 		try {
+			this.globalstate = SystemTypes.eosio_global_state.from(json.globalstate);
+		} catch (error) {
+			console.log('GlobalState Parse', error);
+			console.log(json);
+		}
+
+		try {
 			this.ramstate = RAMState.from(json.ramstate);
 		} catch (error) {
 			console.log('RAMState parse', error);
 			console.log(json);
 		}
+
 		try {
 			this.rexstate = REXState.from(json.rexstate);
 		} catch (error) {
 			console.log('REXState parse', error);
 			console.log(json);
 		}
+
 		try {
 			this.powerupstate = PowerUpState.from(json.powerupstate);
 		} catch (error) {
