@@ -51,8 +51,12 @@
 
 	// Sync the selected option with the passed in selected prop
 	const sync = createSync({ selected });
+	let lastSelected: ExtendedSelectOption | undefined = $state();
 	$effect(() => {
-		sync.selected(_selected, (v) => (_selected = v || options[0]));
+		if (JSON.stringify(_selected) !== JSON.stringify(lastSelected)) {
+			lastSelected = _selected;
+			sync.selected(_selected, (v) => (_selected = v || options[0]));
+		}
 	});
 
 	// Get the whole option object
