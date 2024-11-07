@@ -3,7 +3,7 @@
 	import Button from '$lib/components/button/button.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
 	import { walletTypes } from '../../walletTypes';
-	import { ChevronRight } from 'lucide-svelte';
+	import ChevronRight from 'lucide-svelte/icons/chevron-right';
 
 	const { data } = $props();
 
