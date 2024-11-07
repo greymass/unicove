@@ -23,9 +23,11 @@
 	const range: ExtendedSelectOption[] = [
 		{ label: '1D', value: 1 },
 		{ label: '1W', value: 7 },
-		{ label: '1M', value: 30 },
-		{ label: '1Y', value: 365 }
+		{ label: '1M', value: 30 }
+		// { label: '1Y', value: 365 } // We're currently only getting data for the last 30 days
 	];
+
+	const MAX_NUM_POINTS = 100; // Maximum number of points to display on the chart
 
 	let selectedRange: ExtendedSelectOption = $state(range[1]);
 
@@ -33,7 +35,20 @@
 		if (data.length === 0) return [];
 		const rangeEndDate = dayjs(data[0].date);
 		const rangeStartDate = rangeEndDate.subtract(Number(selectedRange.value), 'day');
-		return data.filter(({ date }) => dayjs(date).isAfter(rangeStartDate));
+		const filteredData = data.filter(({ date }) => dayjs(date).isAfter(rangeStartDate));
+
+		// If we have more points than MAX_NUM_POINTS, sample them evenly
+		if (filteredData.length > MAX_NUM_POINTS) {
+			const result = [];
+			const step = filteredData.length / MAX_NUM_POINTS;
+			for (let i = 0; i < MAX_NUM_POINTS; i++) {
+				const index = Math.floor(i * step);
+				result.push(filteredData[index]);
+			}
+			return result;
+		}
+
+		return filteredData;
 	});
 
 	let currentPoint = $derived(dataRange[0]);

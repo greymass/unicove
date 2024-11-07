@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { createCheckbox, melt, createSync } from '@melt-ui/svelte';
-	import { Check, Minus } from 'lucide-svelte';
+	import Check from 'lucide-svelte/icons/check';
+	import Minus from 'lucide-svelte/icons/minus';
 
 	interface Props {
 		disabled?: boolean;

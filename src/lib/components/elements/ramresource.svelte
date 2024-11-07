@@ -9,7 +9,7 @@
 	const { ramAvailable, precision = 2 }: Props = $props();
 </script>
 
-<div class="relative h-[103px] rounded-lg bg-[#303338]">
+<div class="relative h-28 rounded-lg bg-[#303338]">
 	<div class="absolute left-4 top-3"><img src={RamIcon} class="size-6" alt="ram icon" /></div>
 	<div class="absolute right-3 top-3 text-xl font-bold">RAM</div>
 	<div class="absolute bottom-2 right-3">

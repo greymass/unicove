@@ -3,13 +3,13 @@ import type { AccountState } from '$lib/state/client/account.svelte';
 import type { NetworkState } from '$lib/state/network.svelte';
 import type { WharfState } from '$lib/state/client/wharf.svelte';
 
-import type { UnstakingRecord } from '../utils';
+import type { UnstakingRecord } from '$lib/utils/staking';
 import {
 	defaultQuantity,
 	getUnstakingBalances,
 	getClaimableBalance,
 	getWithdrawableBalance
-} from '../utils';
+} from '$lib/utils/staking';
 
 export class WithdrawManager {
 	public network: NetworkState | undefined = $state();

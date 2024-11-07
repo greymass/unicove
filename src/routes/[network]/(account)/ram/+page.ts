@@ -21,11 +21,16 @@ export async function load({ fetch, params }: LoadEvent): Promise<LoadData> {
 
 	try {
 		const response: Response = await fetch(`/${network}/api/metrics/marketprice/ram`);
-		const parsedResponse: { date: string; value: number }[] = await response.json();
-		historicalPrices = parsedResponse.map((price: { date: string; value: number }) => ({
-			date: new Date(price.date),
-			value: Asset.from(price.value / 10000, chain.systemToken?.symbol || '0,UNKNOWN')
-		}));
+		const parsedResponse: { date: string; value: number }[] | { error: string } =
+			await response.json();
+		if ('error' in parsedResponse && parsedResponse.error) {
+			throw new Error(String(parsedResponse.error));
+		} else if (Array.isArray(parsedResponse)) {
+			historicalPrices = parsedResponse.map((price: { date: string; value: number }) => ({
+				date: new Date(price.date),
+				value: Asset.from(price.value / 10000, chain.systemToken?.symbol || '0,UNKNOWN')
+			}));
+		}
 	} catch (error: unknown) {
 		console.error('Error fetching historical RAM prices:', error);
 	}

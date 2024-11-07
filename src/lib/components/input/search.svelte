@@ -7,11 +7,17 @@
 	import { preventDefault } from '$lib/utils';
 	import { goto } from '$app/navigation';
 	import { fade, scale } from 'svelte/transition';
-	import { ArrowLeftRight, Box, Key, SearchIcon, UserSearch } from 'lucide-svelte';
-	import { history, addHistory } from '$lib/state/search.svelte';
+	import { SearchHistory } from '$lib/state/search.svelte';
+	import ArrowLeftRight from 'lucide-svelte/icons/arrow-left-right';
+	import Box from 'lucide-svelte/icons/box';
+	import Key from 'lucide-svelte/icons/key';
+	import SearchIcon from 'lucide-svelte/icons/search';
+	import UserSearch from 'lucide-svelte/icons/user-search';
+	import X from 'lucide-svelte/icons/user-search';
 	import Button from '$lib/components/button/button.svelte';
 	import { Stack } from '$lib/components/layout';
 	import { truncateCenter } from '$lib/utils';
+	import { cn } from '$lib/utils';
 
 	interface NameInputProps extends ComponentProps<typeof TextInput> {
 		debug?: boolean;
@@ -28,6 +34,9 @@
 
 	let searchValue: string = $state('');
 	let selectedIndex: number | undefined = $state();
+
+	const searchHistory = new SearchHistory();
+	const history = $derived(searchHistory.get());
 
 	const searchType = $derived.by(() => {
 		/* eslint-disable @typescript-eslint/no-unused-vars */
@@ -101,12 +110,17 @@
 		}
 
 		if (document.activeElement === ref) {
+			if (event.metaKey && event.key === 'k') {
+				closeSearch();
+				return;
+			}
+
 			if (event.key === 'ArrowDown') {
 				if (selectedIndex === undefined) {
 					selectedIndex = 0;
 					return;
 				}
-				// Select next history item
+				// Select next searchHistory item
 				selectedIndex = (history.length + selectedIndex + 1) % history.length;
 				return;
 			}
@@ -116,13 +130,13 @@
 					selectedIndex = history.length;
 					return;
 				}
-				// Select previous history item
+				// Select previous searchHistory item
 				selectedIndex = (history.length + selectedIndex - 1) % history.length;
 				return;
 			}
 
 			if (selectedIndex !== undefined && event.key === 'Enter') {
-				goToHistory(history[selectedIndex].result);
+				goToSearchHistory(history[selectedIndex].result);
 			}
 		}
 	}
@@ -130,7 +144,7 @@
 	function goToResult() {
 		if (result) {
 			goto(result);
-			addHistory({ result, searchType, searchValue });
+			searchHistory.add({ result, searchType, searchValue });
 		}
 		closeSearch();
 	}
@@ -140,7 +154,7 @@
 		searchValue = '';
 	}
 
-	function goToHistory(url: string) {
+	function goToSearchHistory(url: string) {
 		goto(url);
 		closeSearch();
 	}
@@ -162,33 +176,12 @@
 	use:melt={$trigger}
 	aria-label="search"
 	id="search"
-	class="
-	relative
-	z-50
-	inline-flex
-	h-10
-	items-center
-	justify-end
-	text-nowrap
-	rounded-lg
-	bg-transparent
-	py-3.5
-	text-base
-	font-medium
-	leading-4
-	text-neutral-400
-	focus:outline-none
-	focus-visible:border-solar-500
-	md:justify-between
-	md:border
-	md:border-white/20
-	md:py-2
-	md:pl-3
-	md:pr-2
-	{className}
-	"
+	class={cn(
+		'relative z-50 inline-flex h-10 items-center justify-end text-nowrap rounded-lg bg-transparent py-3.5 text-base font-medium leading-4 text-neutral-400 focus:outline-none focus-visible:border-solar-500 md:justify-between md:border md:border-white/20 md:py-2 md:pl-3 md:pr-2',
+		className
+	)}
 >
-	<span class="hidden md:inline">Search... </span>
+	<span class="hidden md:inline">Search...</span>
 	<SearchIcon class="ml-2 size-6 text-inherit md:size-5" />
 </button>
 
@@ -208,74 +201,92 @@
 			}}
 		>
 			<Stack>
-				<form onsubmit={preventDefault(goToResult)} class="relative">
-					<input
-						type="text"
-						bind:this={ref}
-						bind:value={searchValue}
-						placeholder="Enter an account, transaction, key, or block..."
-						{...props}
-						class="w-full rounded-lg border-2 border-skyBlue-500 bg-transparent p-4 focus:outline-none"
-					/>
-					<button
-						type="submit"
-						class="absolute right-4 top-1/2 -translate-y-1/2 outline-none focus:ring-2 focus:ring-skyBlue-500"
-					>
-						<SearchIcon class="size-5" />
-					</button>
+				<form onsubmit={preventDefault(goToResult)}>
+					<div class="relative">
+						<input
+							type="text"
+							bind:this={ref}
+							bind:value={searchValue}
+							placeholder="Enter an account, transaction, key, or block..."
+							{...props}
+							class="w-full rounded-lg border-2 border-skyBlue-500 bg-transparent p-4 focus:outline-none"
+						/>
+
+						<SearchIcon
+							class="absolute right-4 top-1/2 size-5 -translate-y-1/2 outline-none focus:ring-2 focus:ring-skyBlue-500"
+						/>
+					</div>
+					<div class="mt-2 flex gap-2">
+						<Button variant="secondary" meltAction={close}>Close</Button>
+						<Button variant="primary" type="submit">Search</Button>
+					</div>
 				</form>
 
 				{#if history.length}
 					<div class="px-2">
-						<div class="table-styles grid grid-cols-2">
+						<div class="table-styles grid grid-cols-[1fr_1fr_auto] gap-x-4">
 							<div class="table-head-styles col-span-full grid grid-cols-subgrid">
 								<span class="pl-2">Recent</span>
 								<span>Type</span>
+								<button class="justify-self-end" onclick={() => searchHistory.clear()}>Clear</button
+								>
 							</div>
 
 							{#each history as item, index}
-								<a
-									class="table-row-background col-span-full grid grid-cols-subgrid items-center
-									justify-items-start border-y border-neutral-300/10
-									border-transparent border-b-transparent
+								<div
+									class="col-span-full grid grid-cols-subgrid items-center
+									justify-items-start rounded-lg border-y
+									border-neutral-300/10 border-transparent
+									border-b-transparent
 									focus:border-skyBlue-500
-									focus:outline-none"
-									href={item.result}
-									onclick={closeSearch}
+									focus:outline-none
+									data-[active=true]:ring
+									data-[active=true]:ring-inset
+									data-[active=true]:ring-solar-500
+									"
 									data-active={index === selectedIndex}
 								>
-									<div
-										class="table-cell-styles ml-2 flex items-center gap-2 font-mono tabular-nums"
+									<a
+										class="col-span-2 grid grid-cols-subgrid items-center focus:outline-none focus:ring focus:ring-inset focus:ring-white"
+										href={item.result}
+										onclick={closeSearch}
 									>
-										{#if item.searchType === 'account'}
-											<UserSearch class="size-4" />
-											<span>{item.searchValue}</span>
-										{:else if item.searchType === 'block'}
-											<Box class="size-4" />
-											<span>{item.searchValue}</span>
-										{:else if item.searchType === 'key'}
-											<Key class="size-4" />
-											<span class="max-w-[12ch] truncate">
-												{item.searchValue}
-											</span>
-										{:else if item.searchType === 'transaction'}
-											<ArrowLeftRight class="size-4" />
-											<span class="max-w-[13ch] truncate">
-												{truncateCenter(item.searchValue)}
-											</span>
-										{/if}
-									</div>
+										<div
+											class="table-cell-styles ml-2 flex items-center gap-2 font-mono tabular-nums"
+										>
+											{#if item.searchType === 'account'}
+												<UserSearch class="size-4" />
+												<span>{item.searchValue}</span>
+											{:else if item.searchType === 'block'}
+												<Box class="size-4" />
+												<span>{item.searchValue}</span>
+											{:else if item.searchType === 'key'}
+												<Key class="size-4" />
+												<span class="max-w-[12ch] truncate">
+													{item.searchValue}
+												</span>
+											{:else if item.searchType === 'transaction'}
+												<ArrowLeftRight class="size-4" />
+												<span class="max-w-[13ch] truncate">
+													{truncateCenter(item.searchValue)}
+												</span>
+											{/if}
+										</div>
 
-									<span class="align-center text-base font-medium capitalize text-mineShaft-200/60"
-										>{item.searchType}</span
-									>
-								</a>
+										<span
+											class="align-center text-base font-medium capitalize text-mineShaft-200/60"
+											>{item.searchType}</span
+										>
+									</a>
+
+									<button class="justify-self-end px-2" onclick={() => searchHistory.remove(index)}>
+										<X class="align-center justify-self-end text-mineShaft-200/60" />
+									</button>
+								</div>
 							{/each}
 						</div>
 					</div>
 				{/if}
-
-				<Button variant="secondary" meltAction={close}>Close</Button>
 			</Stack>
 		</div>
 	</div>

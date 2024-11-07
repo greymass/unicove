@@ -16,10 +16,10 @@
 	import BytesInput from '$lib/components/input/bytes.svelte';
 	import Card from '$lib/components/layout/box/card.svelte';
 	import AssetText from '$lib/components/elements/asset.svelte';
+	import RamResource from '$lib/components/elements/ramresource.svelte';
 
 	import { SellRAMState } from './state.svelte';
-	import { preventDefault } from '$lib/utils';
-	import AvailableRam from '../(components)/availableRam.svelte';
+	import { calAvailableSize, preventDefault } from '$lib/utils';
 
 	let bytesInput: BytesInput | undefined = $state();
 	let assetInput: AssetInput | undefined = $state();
@@ -29,6 +29,7 @@
 	const debugMode = getSetting('debug-mode', true);
 
 	const sellRamState: SellRAMState = $state(new SellRAMState(data.network.chain));
+	const ramAvailableSize = $derived(calAvailableSize(context.account?.ram));
 
 	let transactionId: Checksum256 | undefined = $state();
 
@@ -90,7 +91,7 @@
 
 <Card>
 	<form onsubmit={preventDefault(handleSellRAM)} class="mx-auto max-w-2xl space-y-4">
-		<AvailableRam />
+		<RamResource ramAvailable={ramAvailableSize} />
 
 		<Stack class="gap-3">
 			<Label class="text-lg" for="bytesInput">Amount to sell</Label>

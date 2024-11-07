@@ -11,8 +11,8 @@
 	const { cpuAvailable, netAvailable, precision = 2 }: Props = $props();
 </script>
 
-<div class="flex gap-[1px]">
-	<div class="relative h-[103px] flex-1 rounded-l-lg bg-[#303338]">
+<div class="flex gap-px">
+	<div class="relative h-28 flex-1 rounded-l-lg bg-[#303338]">
 		<div class="absolute left-4 top-5">
 			<img src={CpuIcon} class="size-6" alt="cpu icon" />
 		</div>
@@ -22,7 +22,7 @@
 			<p>Available</p>
 		</div>
 	</div>
-	<div class="relative h-[103px] flex-1 rounded-r-lg bg-[#303338]">
+	<div class="relative h-28 flex-1 rounded-r-lg bg-[#303338]">
 		<div class="absolute left-5 top-4">
 			<img src={NetIcon} class="size-6" alt="net icon" />
 		</div>

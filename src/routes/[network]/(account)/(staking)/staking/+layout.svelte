@@ -1,33 +1,35 @@
 <script lang="ts">
-	import { Stack } from '$lib/components/layout';
-	import PageHeader from '$lib/components/pageheader.svelte';
-	import PillGroup from '$lib/components/navigation/pillgroup.svelte';
 	import { page } from '$app/stores';
+	import { Stack } from '$lib/components/layout';
+	import Pageheader from '$lib/components/pageheader.svelte';
+	import { i18n } from '$lib/i18n';
 
 	const { children, data } = $props();
 
-	const tabOptions = $derived.by(() => {
-		const network = String(data.network);
-		return [
-			{ href: `/${network}/staking`, text: 'Overview' },
-			{ href: `/${network}/staking/stake`, text: 'Stake' },
-			{ href: `/${network}/staking/unstake`, text: 'Unstake' },
-			{ href: `/${network}/staking/withdraw`, text: 'Withdraw' }
-		];
+	const locale = i18n.getLanguageFromUrl($page.url);
+
+	let currentTab = $derived($page.url.pathname.split('/')[4] || 'overview');
+
+	const subtitle = $derived.by(() => {
+		switch (currentTab) {
+			case 'stake':
+				return 'Select amount to stake';
+			case 'unstake':
+				return 'Select amount to unstake';
+			case 'withdraw':
+				return 'Withdraw';
+			default:
+				return 'Overview';
+		}
 	});
 
-	let currentTab = $derived($page.url.pathname.split('/').pop());
-	let options = $derived(
-		tabOptions.map((option) => ({
-			...option,
-			active: option.href.split('/').pop() === currentTab
-		}))
+	let backPath = $derived(
+		currentTab === 'overview' ? undefined : `/${locale}/${data.network.shortname}/staking`
 	);
 </script>
 
-<Stack>
-	<PageHeader title="Staking" />
-	<PillGroup {options} class="mb-6" />
-</Stack>
+<Stack class="gap-6">
+	<Pageheader title="Staking" {subtitle} {backPath} />
 
-{@render children()}
+	{@render children()}
+</Stack>

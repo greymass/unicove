@@ -4,8 +4,15 @@ import type { NetworkState } from '$lib/state/network.svelte';
 import type { WharfState } from '$lib/state/client/wharf.svelte';
 import AssetInput from '$lib/components/input/asset.svelte';
 
-import type { UnstakingRecord } from '../utils';
-import { defaultQuantity, getUnstakableBalance, getUnstakingBalances } from '../utils';
+import { TokenBalance } from '@wharfkit/common';
+
+import type { UnstakingRecord } from '$lib/utils/staking';
+import {
+	defaultQuantity,
+	getUnstakableBalance,
+	getUnstakingBalances,
+	getStakedBalance
+} from '$lib/utils/staking';
 
 export class UnstakeManager {
 	public input: AssetInput | undefined = $state();
@@ -25,12 +32,33 @@ export class UnstakeManager {
 	public error: string = $state('');
 	public txid: string = $state('');
 
+	public staked: Asset = $derived(getStakedBalance(this.network, this.account));
 	public unstaking: Array<UnstakingRecord> = $derived(
 		getUnstakingBalances(this.network, this.account)
 	);
 	public unstakable: Asset = $derived(
 		getUnstakableBalance(this.network, this.account, this.unstaking)
 	);
+	public tokenBalance: TokenBalance | undefined = $derived.by(() => {
+		let balance: TokenBalance | undefined = undefined;
+		if (this.network) {
+			const meta = (this.network.tokenmeta || []).find((item) =>
+				item.id.equals({
+					chain: this.network.chain.id,
+					contract: this.network.contracts.token.account,
+					symbol: this.network.chain.systemToken!.symbol
+				})
+			);
+			if (meta) {
+				balance = TokenBalance.from({
+					asset: this.staked,
+					contract: this.network.contracts.token.account,
+					metadata: meta
+				});
+			}
+		}
+		return balance;
+	});
 
 	constructor(network: NetworkState) {
 		this.network = network;
