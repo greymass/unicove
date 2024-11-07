@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Asset, Int64 } from '@wharfkit/antelope';
+	import { Asset } from '@wharfkit/antelope';
 	import { Card, Stack, Switcher } from '$lib/components/layout';
 	import type { UnstakingRecord } from '$lib/utils/staking';
 	import {
