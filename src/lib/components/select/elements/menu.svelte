@@ -10,7 +10,7 @@
 		children: Snippet;
 		open: Readable<boolean>;
 		menu: AnyMeltElement;
-		class: string;
+		class?: string;
 	}
 
 	const { class: className, menu, ...props }: Props = $props();
