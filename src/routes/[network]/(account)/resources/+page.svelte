@@ -107,10 +107,10 @@
 				{chainName} network.
 			</p>
 		</Stack>
-		<ul class="space-y-0 lg:space-y-4">
+		<ul class="space-y-4 xl:space-y-0">
 			{#each explanations as explanation}
-				<li class="grid grid-cols-[25%_75%]">
-					<div class="flex justify-center pl-5 pt-5">
+				<li class="grid grid-cols-1 gap-y-4 sm:grid-cols-[25%_75%]">
+					<div class="flex justify-center sm:pl-5 sm:pt-5">
 						{#if explanation.icon}
 							{@const Component = explanation.icon}
 							<Component class="size-5 text-white" />
