@@ -1,9 +1,10 @@
 import { json, type RequestEvent } from '@sveltejs/kit';
 
-import { getChainDefinitionFromParams, getNetwork } from '$lib/state/network.svelte';
+import { getChainDefinitionFromParams } from '$lib/state/network.svelte';
 import { getCacheHeaders } from '$lib/utils';
 import type { RAMState, REXState, PowerUpState, SampleUsage } from '@wharfkit/resources';
 import { Types as DelphioracleTypes } from '$lib/wharf/contracts/delphioracle.js';
+import { getBackendNetwork } from '$lib/wharf/client/ssr';
 
 type ResponseType =
 	| RAMState
@@ -19,7 +20,7 @@ export async function GET({ fetch, params }: RequestEvent) {
 		return json({ error: 'Invalid chain specified' }, { status: 400 });
 	}
 
-	const network = getNetwork(chain, fetch);
+	const network = getBackendNetwork(chain, fetch);
 	if (!network.resources) {
 		return json({ error: 'Network resources not initialized' }, { status: 500 });
 	}
