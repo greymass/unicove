@@ -6,7 +6,7 @@
 	import RamIcon from '$lib/assets/resources/ram.svg';
 	import CpuAndNetResource from '$lib/components/elements/cpunetresource.svelte';
 	import RamResource from '$lib/components/elements/ramresource.svelte';
-	import { calAvailableSize } from './utils';
+	import { calAvailableSize } from '$lib/utils';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
