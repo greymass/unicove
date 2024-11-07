@@ -13,7 +13,7 @@
 	import { Stack } from '$lib/components/layout';
 	import { truncateCenter } from '$lib/utils';
 
-	interface NameInputProps extends ComponentProps<TextInput> {
+	interface NameInputProps extends ComponentProps<typeof TextInput> {
 		debug?: boolean;
 		network: NetworkState;
 	}
