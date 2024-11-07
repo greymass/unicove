@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Stack, Switcher } from '$lib/components/layout';
+	import { Card, Stack, Switcher } from '$lib/components/layout';
 	import Button from '$lib/components/button/button.svelte';
 	import PageHeader from '$lib/components/pageheader.svelte';
 	import Transaction from '$lib/components/transaction.svelte';
@@ -29,18 +29,20 @@
 		<p>There was an error submitting your transaction.</p>
 	</div>
 {:else}
-	<Stack class="mx-auto max-w-5xl space-y-8">
-		<Switcher>
-			<PageHeader title="Currently Withdrawable" subtitle={String(manager.total)} inverted />
-			<Button
-				disabled={!manager.total.value}
-				onclick={() => manager.transact()}
-				variant="secondary"
-				class="text-skyBlue-500">Withdraw</Button
-			>
-		</Switcher>
-		<Switcher>
-			<UnstakingBalances records={manager.unstaking} />
-		</Switcher>
-	</Stack>
+	<Card>
+		<Stack class="mx-auto max-w-5xl space-y-8">
+			<Switcher>
+				<PageHeader title="Currently Withdrawable" subtitle={String(manager.total)} inverted />
+				<Button
+					disabled={!manager.total.value}
+					onclick={() => manager.transact()}
+					variant="secondary"
+					class="text-skyBlue-500">Withdraw</Button
+				>
+			</Switcher>
+			<Switcher>
+				<UnstakingBalances records={manager.unstaking} />
+			</Switcher>
+		</Stack>
+	</Card>
 {/if}
