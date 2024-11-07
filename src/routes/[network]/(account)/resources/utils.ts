@@ -2,7 +2,6 @@ import { PowerUpState } from '@wharfkit/resources';
 import type { REXState } from '@wharfkit/resources';
 import { API, Asset } from '@wharfkit/antelope';
 import type { SampledUsage } from '$lib/types';
-import type { Resource } from '@wharfkit/account';
 
 export type RentType = 'POWERUP' | 'REX' | 'STAKE';
 
@@ -12,13 +11,6 @@ export interface PricePair {
 }
 
 type ResourceStateType = PowerUpState | REXState | API.v1.AccountObject;
-
-export const calAvailableSize = (resource?: Resource) => {
-	let size = 0;
-	const available = Number(resource?.available);
-	if (!isNaN(available)) size = available / 1000;
-	return size;
-};
 
 export const getCpuAndNetPrice = (
 	rentType: RentType,

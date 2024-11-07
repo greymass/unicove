@@ -5,25 +5,13 @@
 		wordmark?: boolean;
 		small?: boolean;
 		class?: string;
-		callbackFn?: (e: MouseEvent) => void;
-		href?: string;
 	}
 
-	const {
-		wordmark = false,
-		small = false,
-		class: className = '',
-		callbackFn,
-		href = '/'
-	}: Props = $props();
+	const { wordmark = false, small = false, class: className = '' }: Props = $props();
 </script>
 
 <!-- Unicove Logo centered with wordmark -->
-<a
-	{href}
-	class={cn('mt-0.5 flex flex-col items-center gap-3 fill-white/60', className)}
-	onclick={callbackFn}
->
+<div class={cn('mt-0.5 flex flex-col items-center gap-3 fill-white/60', className)}>
 	<svg
 		class:size-8={small}
 		class:size-10={!small}
@@ -97,4 +85,4 @@
 		</svg>
 	{/if}
 	<span class="sr-only">Unicove</span>
-</a>
+</div>

@@ -4,10 +4,10 @@
 	import { Checksum256 } from '@wharfkit/antelope';
 	import MobileNavigation from '$lib/components/navigation/mobilenavigation.svelte';
 	import SideMenuContent from '$lib/components/navigation/sidemenu.svelte';
-	import AccountSwitcher from '$lib/components/select/account.svelte';
+	import AccountSwitcher from '$lib/components/accountswitch.svelte';
 	import UnicoveLogo from '$lib/assets/unicovelogo.svelte';
 	import Search from '$lib/components/input/search.svelte';
-	import Footer from '$lib/components/footer.svelte';
+	// import Footer from '$lib/components/footer.svelte';
 
 	let { children, data } = $props();
 
@@ -96,7 +96,9 @@
 >
 	<header class="col-span-full flex items-center justify-between">
 		<!-- Larger breakpoints only	 -->
-		<UnicoveLogo small href="/{data.network}" class="hidden w-min place-self-center md:block" />
+		<a href="/{data.network}" class="hidden w-min place-self-center md:block">
+			<UnicoveLogo small />
+		</a>
 
 		<MobileNavigation network={data.network} />
 
@@ -119,7 +121,7 @@
 		{@render children()}
 	</main>
 
-	<Footer />
+	<!-- <Footer /> -->
 </div>
 
 <!-- This wrapper sets up the bottom menu on mobile, becomes hidden on desktop -->

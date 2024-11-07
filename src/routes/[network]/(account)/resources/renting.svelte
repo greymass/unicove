@@ -18,9 +18,9 @@
 	import type { AccountState } from '$lib/state/client/account.svelte';
 	import type { PowerUpState } from '@wharfkit/resources';
 
-	import { preventDefault } from '$lib/utils';
+	import { calAvailableSize, preventDefault } from '$lib/utils';
 	import { RentState } from './state.svelte';
-	import { calAvailableSize, getCpuAndNetPrice, getPowerupFrac, type RentType } from './utils';
+	import { getCpuAndNetPrice, getPowerupFrac, type RentType } from './utils';
 
 	const context = getContext<UnicoveContext>('state');
 	const debugMode = getSetting('debug-mode', false);

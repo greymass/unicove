@@ -1,7 +1,8 @@
 <script lang="ts">
-	import { Card, Stack, Switcher } from '$lib/components/layout';
+	import { Card, Stack } from '$lib/components/layout';
 	import AssetInput from '$lib/components/input/asset.svelte';
 	import AssetText from '$lib/components/elements/asset.svelte';
+	import TokenCard from '$lib/components/elements/tokencard.svelte';
 	import Button from '$lib/components/button/button.svelte';
 	import Label from '$lib/components/input/label.svelte';
 	import Transaction from '$lib/components/transaction.svelte';
@@ -14,6 +15,13 @@
 
 	let manager: StakeManager = $state(new StakeManager(data.network));
 
+	let hints = $derived([
+		{ caption: 'Minimum lockup', data: '21 Days' },
+		{ caption: '~APY', data: manager.apy + '%' },
+		{ caption: 'You will stake', data: manager.assetValue.toString() },
+		{ caption: 'Estimated Yield(per year)', data: manager.estimateYield }
+	]);
+
 	$effect(() => {
 		if (context.account) {
 			manager.sync(data.network, context.account, context.wharf);
@@ -21,38 +29,28 @@
 	});
 </script>
 
-{#if manager.txid}
-	<Transaction network={data.network} transactionId={manager.txid} />
-{:else if manager.error}
-	<div>
-		<h2 class="h2">Transaction Error</h2>
-		<p>There was an error submitting your transaction.</p>
-	</div>
-{:else}
-	<Stack class="mx-auto max-w-5xl space-y-8">
-		<Switcher>
+<Card>
+	<Stack class="mx-auto w-96 space-y-8">
+		{#if manager.txid}
+			<Transaction network={data.network} transactionId={manager.txid} />
+		{:else if manager.error}
+			<h2 class="h2">Transaction Error</h2>
+			<p>There was an error submitting your transaction.</p>
+		{:else}
+			<TokenCard token={manager.tokenBalance} title="Staked" description="Currently staked" />
 			<Stack class="gap-3">
 				<Label for="assetInput">Amount</Label>
-				<Switcher>
-					<AssetInput
-						autofocus
-						bind:this={manager.input}
-						bind:min={manager.minValue}
-						bind:max={manager.maxValue}
-						bind:value={manager.assetValue}
-						bind:valid={manager.assetValid}
-						bind:validPrecision={manager.assetValidPrecision}
-						bind:validMinimum={manager.assetValidMinimum}
-						bind:validMaximum={manager.assetValidMaximum}
-					/>
-					<Button
-						disabled={!manager.assetValid}
-						onclick={() => manager.transact()}
-						variant="secondary"
-						class="text-skyBlue-500">Stake</Button
-					>
-				</Switcher>
-
+				<AssetInput
+					autofocus
+					bind:this={manager.input}
+					bind:min={manager.minValue}
+					bind:max={manager.maxValue}
+					bind:value={manager.assetValue}
+					bind:valid={manager.assetValid}
+					bind:validPrecision={manager.assetValidPrecision}
+					bind:validMinimum={manager.assetValidMinimum}
+					bind:validMaximum={manager.assetValidMaximum}
+				/>
 				{#if !manager.assetValid}
 					{#if !manager.assetValidPrecision}
 						<p class="text-red-500">Invalid number, too many decimal places.</p>
@@ -71,33 +69,25 @@
 						type="button">Available: <AssetText value={manager.stakable} /></button
 					>
 				</Label>
+				<Button disabled={!manager.assetValid} onclick={() => manager.transact()} variant="primary"
+					>Stake</Button
+				>
 			</Stack>
-		</Switcher>
-		<Switcher>
-			<Card class="gap-5" title="Details">
-				<Stack class="gap-0">
-					<div class="grid grid-cols-2 gap-2">
-						<p class="caption">Minimum lockup</p>
-						<p>21 Days</p>
-						<p class="caption">~APY</p>
-						<p>{manager.apy}%</p>
-						<p class="caption">You will stake</p>
-						<p><AssetText value={manager.assetValue} /></p>
-						<p class="caption">Estimated Yield(per year)</p>
-						<p><AssetText value={manager.estimateYield} /></p>
-					</div>
-				</Stack>
-			</Card>
 
-			<Card class="gap-5" title="About staking">
-				<Stack class="gap-5">
-					<p class="caption">
-						The APY is an estimate, and may fluctuate based on how many and much others are staking.
-						Your 21 day lockup period starts when you unstake your EOS.
-					</p>
-					<p class="caption">You will never get back less EOS.</p>
-				</Stack>
-			</Card>
-		</Switcher>
+			<table class="table-styles">
+				<tbody>
+					{#each hints as hint}
+						<tr>
+							<td class="caption">
+								{hint.caption}
+							</td>
+							<td>
+								{hint.data}
+							</td>
+						</tr>
+					{/each}
+				</tbody>
+			</table>
+		{/if}
 	</Stack>
-{/if}
+</Card>

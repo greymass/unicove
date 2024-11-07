@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Stack } from '$lib/components/layout';
+	import { Cluster, Stack } from '$lib/components/layout';
 	import TextInput from '$lib/components/input/text.svelte';
 	import Label from '$lib/components/input/label.svelte';
 	import AssetOrUnitsInput from '$lib/components/input/assetOrUnits.svelte';
@@ -82,17 +82,23 @@
 			<h2 class="h2">Switch</h2>
 
 			<Stack>
-				<Label for="mySwitch-1">Default</Label>
-				<Switch id="mySwitch-1" name="mySwitch-1" checked={false} />
+				<h3 class="h4">Default</h3>
+				<Cluster>
+					<Switch id="mySwitch-1" name="mySwitch-1" checked={false} />
+					<Switch id="mySwitch-1" name="mySwitch-1" checked={true} />
+				</Cluster>
 			</Stack>
 
 			<Stack>
-				<Label for="mySwitch-2">Disabled</Label>
-				<Switch id="mySwitch-2" name="mySwitch-2" disabled checked />
+				<h3 class="h4">Disabled</h3>
+				<Cluster>
+					<Switch id="mySwitch-2" name="mySwitch-2" disabled checked={false} />
+					<Switch id="mySwitch-2" name="mySwitch-2" disabled checked />
+				</Cluster>
 			</Stack>
 
 			<Stack>
-				<Label for="mySwitch-3">Checked</Label>
+				<h3 class="h4">Controlled</h3>
 				<Switch id="mySwitch-3" name="mySwitch-3" bind:checked={controlledSwitch} />
 				<p>Switch is {controlledSwitch ? 'on' : 'off'}</p>
 			</Stack>

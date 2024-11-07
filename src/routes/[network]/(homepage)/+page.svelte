@@ -54,7 +54,8 @@
 			<p class="mb-2 text-balance text-xl leading-tight text-white/60 md:text-2xl md:leading-tight">
 				Stake, Send, Manage Tokens, and Explore EOS – all with ease
 			</p>
-			<Button href={`/${data.network}/signup`}>Create your EOS account now</Button>
+			<!-- <Button href={`/${data.network}/signup`}>Create your EOS account now</Button> -->
+			<!-- <Button disabled>Create your EOS account (Coming Soon)</Button> -->
 		</Stack>
 
 		<!-- Network logo -->
@@ -88,7 +89,7 @@
 
 	<!-- Carousel -->
 
-	<section class="col-span-full @container">
+	<section class="col-span-full hidden @container">
 		<div class="grid min-h-72 rounded-2xl bg-mineShaft-950 px-4 @xl:grid-cols-2 @xl:gap-4">
 			<div class="grid place-items-center">
 				<svg
@@ -138,7 +139,7 @@
 		</div>
 	</section>
 
-	<section class="col-span-full grid grid-cols-subgrid gap-8">
+	<section class="col-span-full grid hidden grid-cols-subgrid gap-8">
 		<!-- Text -->
 		<div
 			class="z-20 col-span-full row-start-1 max-w-md place-self-center justify-self-start text-balance xs:col-span-1 sm:col-span-full sm:justify-self-auto md:row-span-2 md:row-start-1 md:max-w-md lg:col-span-4 lg:row-auto lg:content-center"
@@ -147,8 +148,8 @@
 				title: `Stake your tokens for ${APY}% APY`,
 				text: 'TODO: The APY is an estimate, and may fluctuate based on how many and much others are staking. Your 21 day lockup period starts when you unstake your EOS. You will always get back your staked EOS.',
 				button: {
-					text: 'Get a free account',
-					href: `/${data.network}/signup`
+					text: 'My Staking',
+					href: `/${data.network}/staking`
 				}
 			})}
 		</div>
@@ -162,11 +163,11 @@
 	</section>
 
 	<!-- Charts -->
-	<section class="col-span-full">
+	<section class="col-span-full hidden">
 		<Switcher>
 			<div>
 				{@render textblock({
-					title: `EOS Token`,
+					title: `RAM Market`,
 					text: 'TODO: The APY is an estimate, and may fluctuate based on how many and much others are staking. Your 21 day lockup period starts when you unstake your EOS. You will always get back your staked EOS.',
 					button: {
 						text: 'Live network overview',
@@ -174,10 +175,9 @@
 					}
 				})}
 			</div>
-
 			<div>
 				{@render textblock({
-					title: `RAM Market`,
+					title: `EOS Token`,
 					text: 'TODO: The APY is an estimate, and may fluctuate based on how many and much others are staking. Your 21 day lockup period starts when you unstake your EOS. You will always get back your staked EOS.',
 					button: {
 						text: 'Live network overview',
@@ -189,7 +189,7 @@
 	</section>
 
 	<!-- Performance grid -->
-	<section class="col-span-full grid grid-cols-subgrid gap-8">
+	<section class="col-span-full grid hidden hidden grid-cols-subgrid gap-8">
 		<!-- Text -->
 		<div class=" col-span-full grid items-center text-balance lg:col-span-3 lg:row-start-1">
 			{@render textblock({

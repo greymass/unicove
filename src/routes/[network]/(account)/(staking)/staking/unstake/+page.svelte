@@ -1,7 +1,8 @@
 <script lang="ts">
-	import { Card, Stack, Switcher } from '$lib/components/layout';
+	import { Card, Stack } from '$lib/components/layout';
 	import AssetInput from '$lib/components/input/asset.svelte';
 	import AssetText from '$lib/components/elements/asset.svelte';
+	import TokenCard from '$lib/components/elements/tokencard.svelte';
 	import Button from '$lib/components/button/button.svelte';
 	import Label from '$lib/components/input/label.svelte';
 	import Transaction from '$lib/components/transaction.svelte';
@@ -14,6 +15,11 @@
 
 	let manager: UnstakeManager = $state(new UnstakeManager(data.network));
 
+	let hints = $derived([
+		{ caption: 'In 21 days you can claim', data: manager.assetValue.toString() },
+		{ caption: 'Lockup', data: '21 Days' }
+	]);
+
 	$effect(() => {
 		if (context.account) {
 			manager.sync(data.network, context.account, context.wharf);
@@ -21,39 +27,28 @@
 	});
 </script>
 
-{#if manager.txid}
-	<Transaction network={data.network} transactionId={manager.txid} />
-{:else if manager.error}
-	<div>
-		<h2 class="h2">Transaction Error</h2>
-		<p>There was an error submitting your transaction.</p>
-	</div>
-{:else}
-	<Stack class="mx-auto max-w-5xl space-y-8">
-		<Switcher>
+<Card>
+	<Stack class="mx-auto w-96 space-y-8">
+		{#if manager.txid}
+			<Transaction network={data.network} transactionId={manager.txid} />
+		{:else if manager.error}
+			<h2 class="h2">Transaction Error</h2>
+			<p>There was an error submitting your transaction.</p>
+		{:else}
+			<TokenCard token={manager.tokenBalance} title="Staked" description="Currently staked" />
 			<Stack class="gap-3">
 				<Label for="assetInput">Amount</Label>
-				<Switcher>
-					<AssetInput
-						autofocus
-						bind:this={manager.input}
-						bind:min={manager.minValue}
-						bind:max={manager.maxValue}
-						bind:value={manager.assetValue}
-						bind:valid={manager.assetValid}
-						bind:validPrecision={manager.assetValidPrecision}
-						bind:validMinimum={manager.assetValidMinimum}
-						bind:validMaximum={manager.assetValidMaximum}
-					/>
-
-					<Button
-						disabled={!manager.assetValid}
-						onclick={() => manager.transact()}
-						variant="secondary"
-						class="text-skyBlue-500">Unstake</Button
-					>
-				</Switcher>
-
+				<AssetInput
+					autofocus
+					bind:this={manager.input}
+					bind:min={manager.minValue}
+					bind:max={manager.maxValue}
+					bind:value={manager.assetValue}
+					bind:valid={manager.assetValid}
+					bind:validPrecision={manager.assetValidPrecision}
+					bind:validMinimum={manager.assetValidMinimum}
+					bind:validMaximum={manager.assetValidMaximum}
+				/>
 				{#if !manager.assetValid}
 					{#if !manager.assetValidPrecision}
 						<p class="text-red-500">Invalid number, too many decimal places.</p>
@@ -72,29 +67,24 @@
 						type="button">Available: <AssetText value={manager.unstakable} /></button
 					>
 				</Label>
+				<Button disabled={!manager.assetValid} onclick={() => manager.transact()} variant="primary"
+					>Unstake</Button
+				>
 			</Stack>
-		</Switcher>
-		<Switcher>
-			<Card class="gap-5" title="Details">
-				<Stack class="gap-0">
-					<div class="grid grid-cols-2 gap-2">
-						<p class="caption">In 21 days you can claim</p>
-						<p><AssetText value={manager.assetValue} /></p>
-						<p class="caption">Lockup</p>
-						<p>21 Days</p>
-					</div>
-				</Stack>
-			</Card>
-
-			<Card class="gap-5" title="About unstaking">
-				<Stack class="gap-5">
-					<p class="caption">
-						Unstaking balances will still accrue rewards until they are claimed. However, any
-						operation you do (staking more for instance) will automatically claim your fully
-						unstaked positions.
-					</p>
-				</Stack>
-			</Card>
-		</Switcher>
+			<table class="table-styles">
+				<tbody>
+					{#each hints as hint}
+						<tr>
+							<td class="caption">
+								{hint.caption}
+							</td>
+							<td>
+								{hint.data}
+							</td>
+						</tr>
+					{/each}
+				</tbody>
+			</table>
+		{/if}
 	</Stack>
-{/if}
+</Card>

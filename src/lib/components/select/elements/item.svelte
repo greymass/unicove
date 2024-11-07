@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { melt } from '@melt-ui/svelte';
-	import { Check } from 'lucide-svelte';
+	import Check from 'lucide-svelte/icons/check';
+
 	import type { Readable } from 'svelte/store';
 	import type { ExtendedSelectOption } from '../types';
 

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Stack from '$lib/components/layout/stack.svelte';
-	import { ChevronRight } from 'lucide-svelte';
+	import ChevronRight from 'lucide-svelte/icons/chevron-right';
 	import { walletTypes, type WalletType } from '../walletTypes';
 	import Button from '$lib/components/button/button.svelte';
 

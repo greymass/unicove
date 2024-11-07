@@ -4,7 +4,7 @@
 	import { createDialog, melt } from '@melt-ui/svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import SideMenuContent from '$lib/components/navigation/sidemenu.svelte';
-	import { Menu } from 'lucide-svelte';
+	import Menu from 'lucide-svelte/icons/menu';
 	import UnicoveLogo from '$lib/assets/unicovelogo.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
 
@@ -69,9 +69,8 @@
 	id="menu-open"
 	data-session={!!context.wharf.session}
 >
-	<UnicoveLogo small href="/{network}" class="size-8 w-min place-self-center" />
+	<UnicoveLogo small class="size-8 w-min place-self-center" />
 	<Menu class="size-8 text-inherit" />
-	<!-- <span>Menu</span> -->
 </button>
 
 {#if $open}

@@ -12,7 +12,7 @@
 	const {
 		class: className = '',
 		title = '',
-		titleTag = 'h3',
+		titleTag = 'h4',
 		children,
 		...props
 	}: Props = $props();
@@ -20,7 +20,7 @@
 
 <div class={`card ${className}`} {...props}>
 	{#if title}
-		<svelte:element this={titleTag} class="card-title h3">
+		<svelte:element this={titleTag} class="card-title h4">
 			{title}
 		</svelte:element>
 	{/if}

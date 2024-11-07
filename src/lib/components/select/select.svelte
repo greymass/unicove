@@ -14,6 +14,8 @@
 		disabled?: boolean;
 		multiple?: boolean;
 		sameWidth?: boolean;
+		triggerClass?: string;
+		menuClass?: string;
 	}
 
 	let {
@@ -25,7 +27,9 @@
 		disabled,
 		variant = 'pill',
 		multiple,
-		sameWidth = true
+		sameWidth = true,
+		triggerClass,
+		menuClass
 	}: Props = $props();
 
 	const {
@@ -47,8 +51,12 @@
 
 	// Sync the selected option with the passed in selected prop
 	const sync = createSync({ selected });
+	let lastSelected: ExtendedSelectOption | undefined = $state();
 	$effect(() => {
-		sync.selected(_selected, (v) => (_selected = v || options[0]));
+		if (JSON.stringify(_selected) !== JSON.stringify(lastSelected)) {
+			lastSelected = _selected;
+			sync.selected(_selected, (v) => (_selected = v || options[0]));
+		}
 	});
 
 	// Get the whole option object
@@ -57,7 +65,7 @@
 	);
 </script>
 
-<SelectTrigger {variant} {id} {open} {trigger}>
+<SelectTrigger class={triggerClass} {variant} {id} {open} {trigger}>
 	{#if selectedOption.image && typeof selectedOption.image === 'string'}
 		<img src={selectedOption.image} alt={selectedOption.label} class="mr-2 size-5 object-contain" />
 	{/if}
@@ -65,7 +73,7 @@
 </SelectTrigger>
 
 {#if $open}
-	<SelectMenu {id} {variant} {menu} {open}>
+	<SelectMenu class={menuClass} {id} {variant} {menu} {open}>
 		{#each options as item}
 			<SelectItem {id} {option} {variant} {item} {isSelected} />
 		{/each}
