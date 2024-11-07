@@ -55,7 +55,7 @@
 				Stake, Send, Manage Tokens, and Explore EOS – all with ease
 			</p>
 			<!-- <Button href={`/${data.network}/signup`}>Create your EOS account now</Button> -->
-			<Button disabled>Create your EOS account (Coming Soon)</Button>
+			<!-- <Button disabled>Create your EOS account (Coming Soon)</Button> -->
 		</Stack>
 
 		<!-- Network logo -->
