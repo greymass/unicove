@@ -29,25 +29,24 @@
 
 	let selectedRange: ExtendedSelectOption = $state(range[1]);
 
-	// Calculate points to display based on range
-	const POINTS_TO_DISPLAY = 50;
-
-	let dataRange = $state([]);
+	let dataRange = $derived.by(() => {
+		if (data.length === 0) return [];
+		const rangeEndDate = dayjs(data[0].date);
+		const rangeStartDate = rangeEndDate.subtract(Number(selectedRange.value), 'day');
+		return data.filter(({ date }) => dayjs(date).isAfter(rangeStartDate));
+	});
 
 	let currentPoint = $derived(dataRange[0]);
-	let currentPrice = $derived(String(currentPoint?.value));
+	let currentPrice = $derived(String(currentPoint.value));
 
 	let percentChange = $derived.by(() => {
-		if (!currentPoint || dataRange.length === 0) return '0.00%';
 		const current = Number(currentPoint.value.quantity);
 		const initial = Number(dataRange[dataRange.length - 1].value.quantity);
 		return (((current - initial) / current) * 100).toFixed(2) + '%';
 	});
 
-	const labels = $derived(
-		dataRange.slice(0, 20).map(({ date }) => String(date.toLocaleDateString()))
-	);
-	const values = $derived(dataRange.slice(0, 20).map(({ value }) => Number(value.quantity)));
+	const labels = $derived(dataRange.map(({ date }) => String(date.toLocaleDateString())));
+	const values = $derived(dataRange.map(({ value }) => Number(value.quantity)));
 
 	onMount(() => {
 		chart = new Chart(ctx, {
@@ -100,49 +99,12 @@
 				}
 			}
 		});
-		updateChart();
 	});
 
-	function handleSelectedChange({
-		curr,
-		next
-	}: {
-		curr: ExtendedSelectOption | undefined;
-		next: ExtendedSelectOption | undefined;
-	}): ExtendedSelectOption | undefined {
-		if (next && (!curr || next.value !== curr.value)) {
-			selectedRange = next;
-			updateChart();
-		}
-		return next;
-	}
-
-	function updateChart() {
-		if (data.length === 0) return;
-
-		const rangeEndDate = dayjs(data[0].date);
-		const rangeStartDate = rangeEndDate.subtract(Number(selectedRange.value), 'day');
-		const filteredData = data.filter(({ date }) => dayjs(date).isAfter(rangeStartDate));
-
-		// If we have more points than we want to display, sample them
-		if (filteredData.length > POINTS_TO_DISPLAY) {
-			const step = Math.floor(filteredData.length / POINTS_TO_DISPLAY);
-			dataRange = filteredData.filter((_, index) => index % step === 0).slice(0, POINTS_TO_DISPLAY);
-		} else {
-			dataRange = filteredData;
-		}
-
-		console.log({ labels, values });
-		if (chart && labels && values) {
-			chart.data.labels = labels;
-			chart.data.datasets[0].data = values;
-		}
-	}
-
 	$effect(() => {
-		if (chart?.data?.datasets[0]?.data) {
-			chart.update();
-		}
+		chart.data.labels = labels;
+		chart.data.datasets[0].data = values;
+		chart.update();
 	});
 </script>
 
@@ -153,12 +115,7 @@
 			<p class="h3 font-semibold">{currentPrice}</p>
 			<p class="h4 font-semibold text-white/50">{percentChange}</p>
 		</Stack>
-		<Select
-			id="range-select"
-			options={range}
-			bind:selected={selectedRange}
-			onSelectedChange={handleSelectedChange}
-		/>
+		<Select id="range-select" options={range} bind:selected={selectedRange} />
 	</header>
 	<canvas bind:this={ctx}></canvas>
 	<hr class="h-px border-0 bg-shark-200/50" />
