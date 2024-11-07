@@ -139,6 +139,17 @@
 		</div>
 	</section>
 
+	<section class="col-span-full">
+		{@render textblock({
+			title: 'Unicove 2.0 enters early access',
+			text: 'Welcome to the early access release of Unicove 2.0! We invite you to explore the new features and provide feedback to help us improve this evolving platform. For the full announcement, visit our blog below.',
+			button: {
+				text: 'Read more...',
+				href: `#`
+			}
+		})}
+	</section>
+
 	<section class="col-span-full grid hidden grid-cols-subgrid gap-8">
 		<!-- Text -->
 		<div
