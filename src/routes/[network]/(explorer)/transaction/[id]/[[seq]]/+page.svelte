@@ -30,6 +30,7 @@
 	interface Action {
 		account: string;
 		name: string;
+		authorization: { actor: string; permission: string }[];
 		data: Record<string, unknown>;
 	}
 

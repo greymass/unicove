@@ -29,7 +29,7 @@
 		multiple,
 		sameWidth = true,
 		triggerClass,
-		menuClass
+		menuClass = ''
 	}: Props = $props();
 
 	const {

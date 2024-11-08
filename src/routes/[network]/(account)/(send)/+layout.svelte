@@ -27,7 +27,7 @@
 <Stack>
 	<Pageheader title="Send" subtitle="Send tokens" />
 
-	<PillGroup {options} class="mb-6" />
+	<PillGroup {options} class="mb-6 hidden" />
 
 	{@render children()}
 </Stack>

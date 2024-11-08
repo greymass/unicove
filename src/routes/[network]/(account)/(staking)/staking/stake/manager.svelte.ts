@@ -40,13 +40,12 @@ export class StakeManager {
 	public tokenBalance: TokenBalance | undefined = $derived.by(() => {
 		let balance: TokenBalance | undefined = undefined;
 		if (this.network) {
-			const meta = (this.network.tokenmeta || []).find((item) =>
-				item.id.equals({
-					chain: this.network.chain.id,
-					contract: this.network.contracts.token.account,
-					symbol: this.network.chain.systemToken!.symbol
-				})
-			);
+			const tokenIdentifier = {
+				chain: this.network.chain.id,
+				contract: this.network.contracts.token.account,
+				symbol: this.network.chain.systemToken!.symbol
+			};
+			const meta = (this.network.tokenmeta || []).find((item) => item.id.equals(tokenIdentifier));
 			if (meta) {
 				balance = TokenBalance.from({
 					asset: this.staked,

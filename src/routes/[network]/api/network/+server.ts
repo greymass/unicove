@@ -1,9 +1,11 @@
 import { json, type RequestEvent } from '@sveltejs/kit';
 
-import { getChainDefinitionFromParams, getNetwork } from '$lib/state/network.svelte';
+import { getChainDefinitionFromParams } from '$lib/state/network.svelte';
 import { getCacheHeaders } from '$lib/utils';
 import type { RAMState, REXState, PowerUpState, SampleUsage } from '@wharfkit/resources';
 import { Types as DelphioracleTypes } from '$lib/wharf/contracts/delphioracle.js';
+import { Types as SystemTypes } from '$lib/wharf/contracts/system';
+import { getBackendNetwork } from '$lib/wharf/client/ssr';
 
 type ResponseType =
 	| RAMState
@@ -11,6 +13,7 @@ type ResponseType =
 	| PowerUpState
 	| SampleUsage
 	| DelphioracleTypes.datapoints
+	| SystemTypes.eosio_global_state
 	| undefined;
 
 export async function GET({ fetch, params }: RequestEvent) {
@@ -19,17 +22,20 @@ export async function GET({ fetch, params }: RequestEvent) {
 		return json({ error: 'Invalid chain specified' }, { status: 400 });
 	}
 
-	const network = getNetwork(chain, fetch);
+	const network = getBackendNetwork(chain, fetch);
 	if (!network.resources) {
 		return json({ error: 'Network resources not initialized' }, { status: 500 });
 	}
 
 	const requests: Promise<ResponseType>[] = [];
+	let globalStateIndex = -1;
 	let ramStateIndex = -1;
 	let rexStateIndex = -1;
 	let powerupStateIndex = -1;
 	let sampleUsageIndex = -1;
 	let tokenStateIndex = -1;
+
+	globalStateIndex = addRequest(requests, network.contracts.system.table('global').get());
 
 	if (network.supports('rammarket')) {
 		ramStateIndex = addRequest(requests, network.resources.v1.ram.get_state());
@@ -52,6 +58,7 @@ export async function GET({ fetch, params }: RequestEvent) {
 	const results = await Promise.all(requests);
 	const ramstate = getResponse(results, ramStateIndex);
 	const rexstate = getResponse(results, rexStateIndex);
+	const globalstate = getResponse(results, globalStateIndex);
 	const powerupstate = getResponse(results, powerupStateIndex);
 	const sampleUsage = getResponse(results, sampleUsageIndex);
 	const tokenstate = getResponse(results, tokenStateIndex);
@@ -63,6 +70,7 @@ export async function GET({ fetch, params }: RequestEvent) {
 	return json(
 		{
 			ts: new Date(),
+			globalstate,
 			ramstate,
 			rexstate,
 			powerupstate,

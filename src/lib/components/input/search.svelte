@@ -2,6 +2,7 @@
 	import { Checksum256, Name, PublicKey, UInt32 } from '@wharfkit/antelope';
 	import type { ComponentProps } from 'svelte';
 	import { createDialog, melt, type CreateDialogProps } from '@melt-ui/svelte';
+	import type TextInput from './text.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
 	import { preventDefault } from '$lib/utils';
 	import { goto } from '$app/navigation';
@@ -18,7 +19,7 @@
 	import { truncateCenter } from '$lib/utils';
 	import { cn } from '$lib/utils';
 
-	interface NameInputProps extends ComponentProps<TextInput> {
+	interface NameInputProps extends ComponentProps<typeof TextInput> {
 		debug?: boolean;
 		network: NetworkState;
 	}

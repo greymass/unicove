@@ -1,7 +1,7 @@
 import { json, type RequestEvent } from '@sveltejs/kit';
 
-import { getChainDefinitionFromParams, getNetwork } from '$lib/state/network.svelte';
-import { getBackendClient } from '$lib/wharf/client/ssr.js';
+import { getChainDefinitionFromParams } from '$lib/state/network.svelte';
+import { getBackendNetwork } from '$lib/wharf/client/ssr.js';
 import { getActivity } from './activity';
 import { getCacheHeaders } from '$lib/utils';
 
@@ -15,14 +15,12 @@ export async function GET({ fetch, params }: RequestEvent) {
 		return json({ error: 'Account name not specified.' }, { status: 500 });
 	}
 
-	const network = getNetwork(chain, fetch);
+	const network = getBackendNetwork(chain, fetch, true);
 	if (!network.supports('robo')) {
 		return json({ error: `Activity not supported on ${network.chain.name}.` }, { status: 500 });
 	}
 
-	const client = getBackendClient(fetch, network.shortname, { history: true });
-
-	const requests = [getActivity(client, params.name)];
+	const requests = [getActivity(network.client, params.name)];
 	const headers = getCacheHeaders(5);
 
 	try {

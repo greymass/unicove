@@ -1,5 +1,5 @@
 import { APIClient, FetchProvider } from '@wharfkit/antelope';
-import { Chains } from '@wharfkit/common';
+import { ChainDefinition, Chains } from '@wharfkit/common';
 
 import {
 	API_EOS_CHAIN,
@@ -10,7 +10,8 @@ import {
 	API_KYLIN_HISTORY
 } from '$env/static/private';
 
-import { chainIndiceMapping, type ChainShortName } from '../chains';
+import { chainIndiceMapping, chainMapper, type ChainShortName } from '../chains';
+import { getNetwork } from '$lib/state/network.svelte';
 
 interface GetBackendClientOptions {
 	history: boolean;
@@ -46,4 +47,15 @@ export function getBackendClient(
 	return new APIClient({
 		provider: new FetchProvider(chainDef.url, { fetch, headers: options.headers })
 	});
+}
+
+export function getBackendNetwork(
+	chain: ChainDefinition,
+	fetch: typeof window.fetch,
+	history: boolean = false
+) {
+	const client = getBackendClient(fetch, chainMapper.toShortName(String(chain.id)), {
+		history
+	});
+	return getNetwork(chain, { client });
 }
