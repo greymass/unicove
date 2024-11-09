@@ -2,7 +2,7 @@
 	let { maxStep = 3, currentStep = 1 } = $props();
 </script>
 
-<div class="flex gap-1">
+<div class="flex gap-4">
 	{#each [...Array(maxStep).keys()] as step}
 		<div
 			data-complete={step < currentStep - 1}

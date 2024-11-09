@@ -1,16 +1,14 @@
 <script lang="ts">
 	import ChevronLeft from 'lucide-svelte/icons/chevron-left';
-	import { getContext } from 'svelte';
 	import { chainLogos } from '@wharfkit/common';
 	import { goto } from '$app/navigation';
-	import type { UnicoveContext } from '$lib/state/client.svelte';
-
-	const context = getContext<UnicoveContext>('state');
+	import { type NetworkState } from '$lib/state/network.svelte';
 
 	interface Props {
 		title: string;
 		subtitle?: string;
 		backPath?: string;
+		network: NetworkState;
 	}
 
 	let props: Props = $props();
@@ -23,7 +21,7 @@
 		}
 	}
 
-	let logo = $derived(chainLogos.get(String(context.wharf.session?.chain.id)) || '');
+	let logo = $derived(chainLogos.get(String(props.network.chain.id)) || '');
 </script>
 
 <header class="flex items-center gap-4">
@@ -38,7 +36,7 @@
 		<picture class="size-12">
 			<img
 				src={String(logo)}
-				alt={context.wharf.session.chain.name}
+				alt={String(props.network.chain.name)}
 				class="size-full object-contain"
 			/>
 		</picture>

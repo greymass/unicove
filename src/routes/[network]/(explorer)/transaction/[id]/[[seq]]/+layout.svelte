@@ -28,14 +28,6 @@
 	);
 </script>
 
-<Stack tag="article" class="gap-6">
-	<Stack class="gap-1">
-		<h1 class="h2 text-neutral-200/60">{data.transaction.id.substring(0, 7)}</h1>
-		<h2 class="h1 font-bold text-white">Transaction</h2>
-		<h5 class="h5 font-bold text-neutral-200/60">{data.transaction.block_time}</h5>
-	</Stack>
+<PillGroup {options} />
 
-	<PillGroup {options} class="sm:self-end" />
-
-	{@render children()}
-</Stack>
+{@render children()}

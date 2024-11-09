@@ -48,15 +48,13 @@
 	);
 </script>
 
-<Stack tag="article" class="gap-6">
-	<Stack class="gap-2">
-		<h1 class="h2 leading-none text-neutral-200/60">Contract</h1>
-		{#if data.contract}
-			<h2 class="h1 font-bold text-white">{data.contract}</h2>
-		{/if}
-	</Stack>
+<!-- <Stack class="gap-2"> -->
+<!-- 	<h1 class="h2 leading-none text-neutral-200/60">Contract</h1> -->
+<!-- 	{#if data.contract} -->
+<!-- 		<h2 class="h1 font-bold text-white">{data.contract}</h2> -->
+<!-- 	{/if} -->
+<!-- </Stack> -->
 
-	<PillGroup {options} class="mb-6" />
+<PillGroup {options} class="mb-6" />
 
-	{@render children()}
-</Stack>
+{@render children()}

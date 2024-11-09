@@ -13,6 +13,8 @@ export const load = async ({ fetch, params }: LoadEvent) => {
 	}
 	return {
 		account,
-		name: params.name
+		name: params.name,
+		title: params.name,
+		subtitle: 'Account'
 	};
 };

@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import { Card, Stack } from '$lib/components/layout';
 	import { API } from '@wharfkit/antelope';
-	import Pageheader from '$lib/components/pageheader.svelte';
+	// import Pageheader from '$lib/components/pageheader.svelte';
 
 	const { data } = $props();
 
@@ -24,7 +24,6 @@
 </script>
 
 <Stack class="gap-8">
-	<Pageheader title="Network" subtitle="Network Overview" />
 	<Card>Network charts/metrics</Card>
 
 	<Stack>

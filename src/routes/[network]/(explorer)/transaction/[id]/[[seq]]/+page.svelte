@@ -48,49 +48,47 @@
 	}
 </script>
 
-<div class="mt-6 p-6">
-	<table class="table-styles">
-		<thead>
-			<tr>
-				<th>Contract</th>
-				<th>Action</th>
-				<th>Authorization</th>
-				<th>Data</th>
-			</tr>
-		</thead>
-		<tbody>
-			{#if data.transaction && data.transaction.trx}
-				{@const actions = data.transaction.trx.trx.actions as Action[]}
-				{#each actions as action}
-					<tr>
-						<td>
-							<a href={`/${data.network}/contract/${action.account}`}>
-								{action.account}
-							</a>
-						</td>
-						<td>
-							<a href={`/${data.network}/contract/${action.account}/actions/${action.name}`}>
-								{action.name}
-							</a>
-						</td>
-						<td>
-							{#each action.authorization as auth}
-								<div>
-									<a href={`/${data.network}/account/${auth.actor}`}>
-										{auth.actor}@{auth.permission}
-									</a>
-								</div>
-							{/each}
-						</td>
-						<td>
-							<Code>{JSON.stringify(action.data, null, 2)}</Code>
-						</td>
-					</tr>
-				{/each}
-			{/if}
-		</tbody>
-	</table>
-</div>
+<table class="table-styles">
+	<thead>
+		<tr>
+			<th>Contract</th>
+			<th>Action</th>
+			<th>Authorization</th>
+			<th>Data</th>
+		</tr>
+	</thead>
+	<tbody>
+		{#if data.transaction && data.transaction.trx}
+			{@const actions = data.transaction.trx.trx.actions as Action[]}
+			{#each actions as action}
+				<tr>
+					<td>
+						<a href={`/${data.network}/contract/${action.account}`}>
+							{action.account}
+						</a>
+					</td>
+					<td>
+						<a href={`/${data.network}/contract/${action.account}/actions/${action.name}`}>
+							{action.name}
+						</a>
+					</td>
+					<td>
+						{#each action.authorization as auth}
+							<div>
+								<a href={`/${data.network}/account/${auth.actor}`}>
+									{auth.actor}@{auth.permission}
+								</a>
+							</div>
+						{/each}
+					</td>
+					<td>
+						<Code>{JSON.stringify(action.data, null, 2)}</Code>
+					</td>
+				</tr>
+			{/each}
+		{/if}
+	</tbody>
+</table>
 
 <div class="hidden">
 	{#if data.transaction && data.transaction.trx}

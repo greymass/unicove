@@ -34,7 +34,7 @@
 </script>
 
 {#if data.account}
-	<Stack class="my-4 gap-2">
+	<Stack class="gap-2">
 		<Switcher threshold="30rem" class="items-start justify-center">
 			<Card>
 				<div class="flex items-center gap-5">

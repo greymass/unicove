@@ -4,6 +4,8 @@
 	import { goto } from '$app/navigation';
 	import { languageTag } from '$lib/paraglide/runtime.js';
 	import { page } from '$app/stores';
+	import Pageheader from '$lib/components/pageheader.svelte';
+	import { Stack } from '$lib/components/layout';
 
 	const { children, data } = $props();
 	const context = getContext<UnicoveContext>('state');
@@ -22,4 +24,13 @@
 	});
 </script>
 
-{@render children()}
+<Stack tag="article" class="gap-6">
+	<Pageheader
+		network={data.network}
+		title={$page.data.title}
+		subtitle={$page.data.subtitle}
+		backPath={$page.data.backPath}
+	/>
+
+	{@render children()}
+</Stack>
