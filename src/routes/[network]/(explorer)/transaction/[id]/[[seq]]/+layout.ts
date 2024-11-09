@@ -5,7 +5,8 @@ export const load: Load = async ({ fetch, params }) => {
 	const json = await response.json();
 	return {
 		...json,
-		network: params.network,
+		title: `Transaction ${json.transaction.id.substring(0, 7)}`,
+		subtitle: json.transaction.block_time,
 		id: params.id,
 		seq: params.seq
 	};

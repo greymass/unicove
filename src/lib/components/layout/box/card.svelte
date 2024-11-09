@@ -1,5 +1,6 @@
 <!-- The Card is a Box with slots for content and additional styling -->
 <script lang="ts">
+	import { cn } from '$lib/utils/style';
 	import type { Snippet } from 'svelte';
 	import type { HTMLAttributes } from 'svelte/elements';
 
@@ -18,7 +19,7 @@
 	}: Props = $props();
 </script>
 
-<div class={`card ${className}`} {...props}>
+<div class={cn('card', className)} {...props}>
 	{#if title}
 		<svelte:element this={titleTag} class="card-title h4">
 			{title}

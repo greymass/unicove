@@ -1,6 +1,5 @@
 <script>
 	import { Cluster, Stack } from '$lib/components/layout';
-	import PageHeader from '$lib/components/pageheader.svelte';
 </script>
 
 <Stack id="typography">
@@ -45,10 +44,4 @@
 		in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
 		cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 	</p>
-</Stack>
-
-<Stack class="gap-8">
-	<h2 class="h2">Page Header</h2>
-	<PageHeader title="Send" subtitle="Add recipient" />
-	<PageHeader title="teamgreymass" subtitle="Account" inverted />
 </Stack>

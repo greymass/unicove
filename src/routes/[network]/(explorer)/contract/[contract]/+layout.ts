@@ -7,9 +7,14 @@ export const load = async ({ fetch, params, parent }: LoadEvent) => {
 	const response = await fetch(`/${params.network}/api/contract/${params.contract}`);
 	const json = await response.json();
 	const abi: ABI = json.abi.abi;
+
 	return {
 		abi,
 		contract: params.contract,
+
+		title: params.contract,
+		subtitle: 'Contract',
+
 		pageMetaTags: {
 			title: m.contract_view_title({
 				contract: String(params.contract),

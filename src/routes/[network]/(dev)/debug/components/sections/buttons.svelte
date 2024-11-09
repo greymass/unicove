@@ -18,6 +18,7 @@
 			</Stack>
 		</Cluster>
 	</Stack>
+
 	<Stack class="items-start">
 		<h3 class="h3">Secondary</h3>
 		<Cluster>
@@ -31,6 +32,7 @@
 			</Stack>
 		</Cluster>
 	</Stack>
+
 	<Stack class="items-start">
 		<h3 class="h3">Pill</h3>
 		<Cluster>
@@ -44,6 +46,7 @@
 			</Stack>
 		</Cluster>
 	</Stack>
+
 	<Stack class="items-start">
 		<h3 class="h3">Side by side</h3>
 		<Cluster>

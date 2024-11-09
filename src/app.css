@@ -39,7 +39,7 @@
 
 	p,
 	li {
-		@apply max-w-prose text-base font-normal text-white/60;
+		@apply text-muted max-w-prose text-base font-normal;
 	}
 
 	/* Layout */
@@ -118,5 +118,9 @@
 
 	.bg-hero-gradient {
 		background-image: radial-gradient(var(--bg-menu) 0%, transparent 50%);
+	}
+
+	.text-muted {
+		@apply text-zinc-400;
 	}
 }

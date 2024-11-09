@@ -57,7 +57,7 @@
 <button
 	id="network-switcher"
 	class={cn(
-		'flex items-center gap-4 rounded-2xl px-2 py-2 hover:bg-mineShaft-950 focus:bg-mineShaft-950 focus:outline-none',
+		'flex items-center gap-3 rounded-2xl px-4 py-3.5 hover:bg-mineShaft-950 focus:bg-mineShaft-950 focus:outline-none',
 		className
 	)}
 	use:melt={$trigger}
@@ -75,8 +75,8 @@
 		{/if}
 	</picture>
 
-	<div class="grid flex-1 justify-items-start gap-0">
-		<span class="m-0 text-2xl font-bold leading-none">{currentNetwork.toString()}</span>
+	<div class="grid flex-1 justify-items-start gap-0.5">
+		<span class="m-0 text-2xl font-bold leading-none">{currentNetwork.chain.name}</span>
 
 		<div class="font-regular m-0 flex items-center gap-2 pr-1 text-base text-zinc-400">
 			<span use:melt={$label}>Change network</span>
@@ -90,9 +90,7 @@
 
 {#if $open}
 	<div
-		class="z-50 flex max-h-[300px] flex-col
-    overflow-y-auto rounded-lg bg-mineShaft-950 p-1
-    shadow focus:!ring-0"
+		class="z-50 flex max-h-[300px] flex-col overflow-y-auto rounded-lg bg-mineShaft-950 p-1 shadow focus:!ring-0"
 		use:melt={$menu}
 		transition:fade={{ duration: 150 }}
 	>
