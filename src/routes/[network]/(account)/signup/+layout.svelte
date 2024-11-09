@@ -6,7 +6,7 @@
 
 	import { page } from '$app/stores';
 	import Stack from '$lib/components/layout/stack.svelte';
-	import Pageheader from '$lib/components/pageheader.svelte';
+	// import Pageheader from '$lib/components/pageheader.svelte';
 	import { crossfade } from 'svelte/transition';
 	import { cubicInOut } from 'svelte/easing';
 	import { getWalletNameFromPath, getWalletTypeFromPath } from './walletTypes.js';
@@ -55,8 +55,6 @@
 </script>
 
 <Stack tag="article" class="gap-6">
-	<Pageheader title="Sign Up" subtitle="Setup your account" />
-
 	<!-- Step progress -->
 	<ol class="mb-4 flex hidden justify-between gap-5">
 		{#each steps as step, index}

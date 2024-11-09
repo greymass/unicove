@@ -23,12 +23,17 @@ export const load: Load = async ({ fetch, params }) => {
 		transactions: block.transactions.length,
 		actions
 	});
+
+	const title = m.block_height_numbered({ height: Number(params.number) });
+
 	return {
+		title,
+		subtitle: String(block.timestamp),
 		block,
 		network: params.network,
 		height: Number(params.number),
 		pageMetaTags: {
-			title: m.block_height_numbered({ height: Number(params.number) }),
+			title,
 			description
 		}
 	};

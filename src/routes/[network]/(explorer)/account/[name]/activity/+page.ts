@@ -1,11 +1,7 @@
-import type { LoadEvent } from '@sveltejs/kit';
 import { ActivityAction } from '$lib/types';
+import type { PageLoad } from './$types';
 
-interface LoadData {
-	activityActions: ActivityAction[];
-}
-
-export async function load({ fetch, params }: LoadEvent): Promise<LoadData> {
+export const load: PageLoad = async ({ fetch, params }) => {
 	let activityActions: ActivityAction[] = [];
 	try {
 		const response = await fetch(`/${params.network}/api/account/${params.name}/activity`);
@@ -16,4 +12,4 @@ export async function load({ fetch, params }: LoadEvent): Promise<LoadData> {
 	}
 
 	return { activityActions };
-}
+};

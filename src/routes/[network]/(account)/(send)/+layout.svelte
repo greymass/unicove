@@ -1,8 +1,6 @@
 <script lang="ts">
 	import PillGroup from '$lib/components/navigation/pillgroup.svelte';
 	import { page } from '$app/stores';
-	import Pageheader from '$lib/components/pageheader.svelte';
-	import Stack from '$lib/components/layout/stack.svelte';
 
 	const { children, data } = $props();
 
@@ -24,10 +22,6 @@
 	);
 </script>
 
-<Stack tag="article" class="gap-6">
-	<Pageheader title="Send" subtitle="Send tokens" />
+<PillGroup {options} class="mb-6 hidden" />
 
-	<PillGroup {options} class="mb-6 hidden" />
-
-	{@render children()}
-</Stack>
+{@render children()}
