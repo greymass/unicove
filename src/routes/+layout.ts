@@ -12,7 +12,7 @@ function generateMetadata(url: URL): SeoConfig {
 	};
 }
 
-export const load = async ({ url }: LoadEvent) => {
+export const load = ({ url }: LoadEvent) => {
 	const baseMetaTags = generateMetadata(url);
 	return {
 		baseMetaTags
