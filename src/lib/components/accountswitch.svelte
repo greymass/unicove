@@ -127,20 +127,20 @@
 		<!-- Content -->
 		<div
 			use:melt={$content}
-			class="fixed right-0 top-0 z-50 h-svh max-w-[350px] space-y-4 overflow-y-auto overflow-x-hidden bg-shark-950 px-4 py-4 shadow-lg focus:outline-none"
+			class="fixed right-0 top-0 z-50 h-svh max-w-fit space-y-4 overflow-y-auto overflow-x-hidden bg-shark-950 px-6 py-4 shadow-lg focus:outline-none"
 			transition:fly={{
 				x: 350,
 				duration: 300,
 				opacity: 1
 			}}
 		>
-			<section class="flex flex-row-reverse justify-between">
+			<section class="flex flex-row-reverse justify-between gap-4">
 				<button
 					use:melt={$close}
 					aria-label="Close"
 					class="
 					grid size-12 appearance-none
-					justify-items-end
+					place-items-center
 					rounded-lg
 					text-zinc-400
 					hover:text-skyBlue-500 focus:text-white focus:outline-none"
