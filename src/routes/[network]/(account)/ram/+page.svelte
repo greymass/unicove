@@ -184,9 +184,11 @@
 		</Card>
 	</div>
 
-	<div class="lg:col-start-2 lg:row-span-2 lg:row-start-1">
-		<RamPriceHistory data={data.historicalPrices} />
-	</div>
+	{#if data.historicalPrices.length}
+		<div class="lg:col-start-2 lg:row-span-2 lg:row-start-1">
+			<RamPriceHistory data={data.historicalPrices} />
+		</div>
+	{/if}
 
 	<Grid class="gap-6 lg:col-start-2">
 		<Card>
