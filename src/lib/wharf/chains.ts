@@ -1,5 +1,5 @@
 import type { Asset } from '@wharfkit/antelope';
-import type { ChainIndices } from '@wharfkit/session';
+import type { ChainIndices } from '@wharfkit/common';
 
 import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
 import { Contract as SystemContract } from '$lib/wharf/contracts/system';
