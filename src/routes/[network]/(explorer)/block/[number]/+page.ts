@@ -2,7 +2,8 @@ import type { Load } from '@sveltejs/kit';
 import * as m from '$lib/paraglide/messages.js';
 import { TimePointSec, Transaction } from '@wharfkit/antelope';
 
-export const load: Load = async ({ fetch, params }) => {
+export const load: Load = async ({ fetch, params, parent }) => {
+	const { network } = await parent();
 	const response = await fetch(`/${params.network}/api/block/${params.number}`);
 	const json = await response.json();
 	const block = json.block;
@@ -33,7 +34,7 @@ export const load: Load = async ({ fetch, params }) => {
 		network: params.network,
 		height: Number(params.number),
 		pageMetaTags: {
-			title,
+			title: `${title} | ${network.chain.name} Network`,
 			description
 		}
 	};

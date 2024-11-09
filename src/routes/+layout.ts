@@ -7,12 +7,12 @@ function generateMetadata(url: URL): SeoConfig {
 	modified.pathname = i18n.route(url.pathname);
 	return {
 		url: String(modified),
-		title: '2nicove',
-		description: 'Unicove, but 2.0'
+		title: 'Unicove - Your gateway to the EOS Network',
+		description: 'Stake, Send, Manage Tokens, and Explore EOS – all with ease'
 	};
 }
 
-export const load = async ({ url }: LoadEvent) => {
+export const load = ({ url }: LoadEvent) => {
 	const baseMetaTags = generateMetadata(url);
 	return {
 		baseMetaTags
