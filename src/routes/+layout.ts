@@ -7,8 +7,8 @@ function generateMetadata(url: URL): SeoConfig {
 	modified.pathname = i18n.route(url.pathname);
 	return {
 		url: String(modified),
-		title: '2nicove',
-		description: 'Unicove, but 2.0'
+		title: 'Unicove - Your gateway to the EOS Network',
+		description: 'Stake, Send, Manage Tokens, and Explore EOS – all with ease'
 	};
 }
 
