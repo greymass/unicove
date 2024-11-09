@@ -94,7 +94,7 @@
 			network={data.network}
 			tokenprice={data.network.tokenprice || Asset.from(0, '2,USD')}
 		/>
-		<Card class="gap-5" title="About staking">
+		<Card class="hidden gap-5" title="About staking">
 			<Stack class="gap-5">
 				<p class="caption">
 					The APY is an estimate, and may fluctuate based on how many and much others are staking.

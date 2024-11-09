@@ -72,6 +72,13 @@
 	});
 </script>
 
+<div class="col-span-full flex items-center justify-between bg-slate-500">
+	<p class="text-center">
+		Looking for the old version of Unicove? Visit <a href="https://v1.unicove.com">v1.unicove.com</a
+		>
+	</p>
+</div>
+
 <div
 	class="
 	relative
