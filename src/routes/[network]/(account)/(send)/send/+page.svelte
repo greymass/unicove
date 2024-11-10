@@ -35,9 +35,9 @@
 	const { data } = $props();
 	const sendState: SendState = $state(new SendState());
 
-	let quantityInput: AssetInput | undefined = $state();
-	let toInput: NameInput | undefined = $state();
-	let tokenSelect: TokenSelect | undefined = $state();
+	let quantityInput: typeof AssetInput | undefined = $state();
+	let toInput: typeof NameInput | undefined = $state();
+	let tokenSelect: typeof TokenSelect | undefined = $state();
 
 	let quantityRef: HTMLInputElement | undefined = $state();
 	let toRef: HTMLInputElement | undefined = $state();
