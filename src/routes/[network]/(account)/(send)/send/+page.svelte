@@ -304,7 +304,7 @@
 
 {#snippet Recipient()}
 	<fieldset class="grid gap-2" class:hidden={f.current !== 'to'}>
-		<Label for="to-input">Account Name</Label>
+		<Label for="to-input">Receiving Account</Label>
 		<NameInput
 			bind:this={toInput}
 			bind:ref={toRef}
@@ -320,7 +320,7 @@
 {#snippet Quantity()}
 	<section class="grid gap-6" class:hidden={f.current !== 'quantity'}>
 		<fieldset class="grid gap-2">
-			<Label for="token-select">Select a token</Label>
+			<Label for="token-select">Token to send</Label>
 			{#if tokenOptions.length && sendState.balance}
 				<TokenSelect
 					id="token-select"
@@ -335,7 +335,7 @@
 		</fieldset>
 
 		<fieldset class="grid gap-2">
-			<Label for="quantity-input">Amount</Label>
+			<Label for="quantity-input">Amount to send</Label>
 			{#if sendState.balance}
 				<AssetInput
 					id="quantity-input"
@@ -349,7 +349,7 @@
 					min={sendState.min || 0}
 					max={sendState.max || 0}
 					{onkeydown}
-					placeholder={`Enter the number of ${sendState.balance?.asset.symbol.code} tokens to send`}
+					placeholder={`Enter the amount of ${sendState.balance?.asset.symbol.code} to send`}
 					debug={debugMode.value}
 				/>
 			{/if}
@@ -381,7 +381,7 @@
 
 {#snippet Memo()}
 	<fieldset class="grid gap-2" class:hidden={f.current !== 'memo'}>
-		<Label for="memo-input">Memo</Label>
+		<Label for="memo-input">Memo (Optional)</Label>
 		<TextInput
 			id="memo-input"
 			bind:ref={memoRef}
@@ -436,10 +436,11 @@
 	</fieldset>
 {/snippet}
 
-<Stack class="gap-6">
-	<h3>{subtitle[f.current]}</h3>
-
-	<Progress currentStep={progress} maxStep={3} />
+<Stack class="mt-6 gap-6">
+	<div class="hidden">
+		<h3>{subtitle[f.current]}</h3>
+		<Progress currentStep={progress} maxStep={3} />
+	</div>
 
 	{@render Complete()}
 
