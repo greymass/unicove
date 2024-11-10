@@ -7,7 +7,7 @@ export const load: LayoutLoad = async ({ parent }) => {
 		subtitle: `Manage CPU, NET, and RAM resources on the ${network.chain.name} Network.`,
 		pageMetaTags: {
 			title: `${network.chain.name} Network Resources`,
-			description: `An overview of the resources available on the ${network.chain.name} network that provides access to manage resources using an compatible wallet.`
+			description: `An overview of the multiple network resources usable on the ${network.chain.name} network providing access to manage resources using an compatible wallet.`
 		}
 	};
 };
