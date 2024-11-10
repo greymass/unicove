@@ -23,7 +23,7 @@ import { calculateValue } from '$lib/utils';
 import { SampledUsage } from '$lib/types';
 
 export interface NetworkStateOptions {
-	fetchOverride?: typeof fetch;
+	fetch?: typeof fetch;
 	client?: APIClient;
 }
 
@@ -61,8 +61,8 @@ export class NetworkState {
 		this.snapOrigin = snapOrigins.get(this.shortname);
 		this.tokenmeta = tokens[this.shortname];
 
-		if (options.fetchOverride) {
-			this.fetch = options.fetchOverride;
+		if (options.fetch) {
+			this.fetch = options.fetch;
 		}
 
 		if (options.client) {
@@ -195,14 +195,13 @@ export function getRAMPrice(state: RAMState, systemTokenPrice?: Asset) {
 	};
 }
 
-export function getNetwork(chain: ChainDefinition, options: NetworkStateOptions = {}) {
-	let current = services.find((service) => chain.id.equals(service.chain));
-	if (!current) {
-		const network = new NetworkState(chain, options);
-		current = { chain: String(chain.id), network };
-		services.push(current);
-	}
-	return current.network;
+export function getNetwork(
+	chain: ChainDefinition,
+	options: NetworkStateOptions = {}
+): NetworkState {
+	console.log('spawning new network state');
+	const network = new NetworkState(chain, options);
+	return network;
 }
 
 export function getChainDefinitionFromParams(network: string): ChainDefinition {
@@ -218,11 +217,8 @@ export function getChainDefinitionFromParams(network: string): ChainDefinition {
 	return Chains.EOS;
 }
 
-export function getNetworkFromParams(
-	network: string,
-	fetchOverride?: typeof window.fetch
-): NetworkState {
+export function getNetworkFromParams(network: string, fetch?: typeof window.fetch): NetworkState {
 	const chain = getChainDefinitionFromParams(network);
-	const state = getNetwork(chain, { fetchOverride });
+	const state = getNetwork(chain, { fetch });
 	return state;
 }
