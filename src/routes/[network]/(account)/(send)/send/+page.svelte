@@ -4,6 +4,7 @@
 	import { Checksum256 } from '@wharfkit/session';
 	import { getContext, tick } from 'svelte';
 	import { FiniteStateMachine } from 'runed';
+	import * as m from '$lib/paraglide/messages.js';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 
@@ -54,7 +55,6 @@
 			context.wharf
 				.transact({ action })
 				.then((result) => {
-					console.log('Transaction result', result);
 					id = result?.resolved?.transaction.id;
 					f.send('success');
 				})
@@ -269,11 +269,11 @@
 	}
 
 	const subtitle = {
-		to: 'Recipient',
-		quantity: 'Asset',
-		memo: 'Confirm',
-		complete: 'Complete',
-		error: 'Error'
+		to: m.common_recipient(),
+		quantity: m.common_asset(),
+		memo: m.common_confirm(),
+		complete: m.common_complete(),
+		error: m.common_error()
 	};
 
 	const tokenOptions: TokenBalance[] = $derived.by(() => {
@@ -304,7 +304,7 @@
 
 {#snippet Recipient()}
 	<fieldset class="grid gap-2" class:hidden={f.current !== 'to'}>
-		<Label for="to-input">Receiving Account</Label>
+		<Label for="to-input">{m.send_receiving_account()}</Label>
 		<NameInput
 			bind:this={toInput}
 			bind:ref={toRef}
@@ -312,7 +312,7 @@
 			bind:valid={toValid}
 			id="to-input"
 			{onkeydown}
-			placeholder="Enter the account name of the recipient"
+			placeholder={m.send_receiving_placeholder()}
 		/>
 	</fieldset>
 {/snippet}
@@ -320,7 +320,7 @@
 {#snippet Quantity()}
 	<section class="grid gap-6" class:hidden={f.current !== 'quantity'}>
 		<fieldset class="grid gap-2">
-			<Label for="token-select">Token to send</Label>
+			<Label for="token-select">{m.send_tokens_to_send()}</Label>
 			{#if tokenOptions.length && sendState.balance}
 				<TokenSelect
 					id="token-select"
@@ -330,12 +330,12 @@
 					debug={debugMode.value}
 				/>
 			{:else}
-				<p>No balances detected.</p>
+				<p>{m.send_no_balances()}</p>
 			{/if}
 		</fieldset>
 
 		<fieldset class="grid gap-2">
-			<Label for="quantity-input">Amount to send</Label>
+			<Label for="quantity-input">{m.send_amount_to_send()}</Label>
 			{#if sendState.balance}
 				<AssetInput
 					id="quantity-input"
@@ -349,7 +349,9 @@
 					min={sendState.min || 0}
 					max={sendState.max || 0}
 					{onkeydown}
-					placeholder={`Enter the amount of ${sendState.balance?.asset.symbol.code} to send`}
+					placeholder={m.send_enter_amount({
+						token: sendState.balance?.asset.symbol.code
+					})}
 					debug={debugMode.value}
 				/>
 			{/if}
@@ -360,20 +362,24 @@
 					disabled={!context.account}
 					onclick={max}
 				>
-					Fill Max
+					{m.common_fill_max()}
 				</button>
 			{/if}
 
 			{#if assetValid && sendState.value}
-				<Label for="quantity-input">Value: {formatCurrency(sendState.value)}</Label>
+				<Label for="quantity-input"
+					>{m.common_value_with_amount({
+						amount: formatCurrency(sendState.value)
+					})}</Label
+				>
 			{/if}
 
 			{#if !assetValidPrecision}
-				<p class="text-red-500">Invalid number, too many decimal places.</p>
+				<p class="text-red-500">{m.common_invalid_number_decimals()}</p>
 			{/if}
 
 			{#if !assetValidMaximum}
-				<p class="text-red-500">Amount exceeds available balance.</p>
+				<p class="text-red-500">{m.common_amount_exceeds_balance()}</p>
 			{/if}
 		</fieldset>
 	</section>
@@ -381,13 +387,13 @@
 
 {#snippet Memo()}
 	<fieldset class="grid gap-2" class:hidden={f.current !== 'memo'}>
-		<Label for="memo-input">Memo (Optional)</Label>
+		<Label for="memo-input">{m.common_memo()} ({m.common_optional()})</Label>
 		<TextInput
 			id="memo-input"
 			bind:ref={memoRef}
 			bind:value={sendState.memo}
 			{onkeydown}
-			placeholder="Specify a public memo for this transfer (optional)"
+			placeholder={m.send_memo_placeholder()}
 		/>
 	</fieldset>
 
@@ -399,7 +405,7 @@
 
 {#snippet Complete()}
 	<div class="space-y-4" class:hidden={f.current !== 'complete'}>
-		<h2 class="h2">Transaction Complete</h2>
+		<h2 class="h2">{m.common_transaction_complete()}</h2>
 		<h3 class="h3">{transaction?.status}</h3>
 		<p>
 			<a href="/{data.network}/transaction/{id}">
@@ -411,26 +417,26 @@
 
 {#snippet Error()}
 	<div class:hidden={f.current !== 'error'}>
-		<h2 class="h2">Transaction Error</h2>
-		<p>There was an error submitting your transaction.</p>
+		<h2 class="h2">{m.common_transaction_error()}</h2>
+		<p>{m.common_transaction_error_subtitle()}</p>
 	</div>
 {/snippet}
 
 {#snippet ButtonGroup()}
 	<fieldset class="grid grid-cols-[50%_50%] gap-2 transition-all duration-200">
 		{#if f.current === 'to'}
-			<Button variant="secondary" onclick={() => resetURL()}>Restart</Button>
+			<Button variant="secondary" onclick={() => resetURL()}>{m.common_restart()}</Button>
 		{:else if f.current === 'complete'}
-			<Button onclick={() => resetURL()}>Start new send</Button>
+			<Button onclick={() => resetURL()}>{m.send_start_new()}</Button>
 		{:else}
-			<Button variant="secondary" onclick={previous}>Back</Button>
+			<Button variant="secondary" onclick={previous}>{m.common_back()}</Button>
 		{/if}
 
 		{#if f.current === 'memo'}
-			<Button class="col-end-3" onclick={transact} disabled={!allValid}>Submit</Button>
+			<Button class="col-end-3" onclick={transact} disabled={!allValid}>{m.common_submit()}</Button>
 		{:else if f.current !== 'complete'}
 			<Button class="col-end-3" type="submit" onclick={preventDefault(next)} disabled={!nextValid}>
-				Next
+				{m.common_next()}
 			</Button>
 		{/if}
 	</fieldset>
@@ -456,7 +462,7 @@
 </Stack>
 
 {#if debugMode.value}
-	<h3 class="h3">Debugging</h3>
+	<h3 class="h3">{m.common_debugging()}</h3>
 	<Code
 		>{JSON.stringify(
 			{
