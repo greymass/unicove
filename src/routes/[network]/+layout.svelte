@@ -155,5 +155,4 @@
 <!-- > -->
 <!-- 	<MobileNavigation network={data.network} /> -->
 <!---->
-<!-- 	<Search network={data.network} /> -->
 <!-- </aside> -->
