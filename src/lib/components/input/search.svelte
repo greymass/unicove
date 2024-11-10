@@ -205,6 +205,8 @@
 					<div class="relative">
 						<input
 							type="text"
+							autocorrect="off"
+							autocapitalize="off"
 							bind:this={ref}
 							bind:value={searchValue}
 							placeholder="Enter an account, transaction, key, or block..."
