@@ -1,6 +1,5 @@
 {
 	"$schema": "https://inlang.com/schema/project-settings",
-	"sourceLanguageTag": "en",
 	"languageTags": ["en", "ko", "zh"],
 	"modules": [
 		"https://cdn.jsdelivr.net/npm/@inlang/message-lint-rule-empty-pattern@latest/dist/index.js",
@@ -11,5 +10,6 @@
 	],
 	"plugin.inlang.messageFormat": {
 		"pathPattern": "./messages/{languageTag}.json"
-	}
+	},
+	"sourceLanguageTag": "en"
 }
