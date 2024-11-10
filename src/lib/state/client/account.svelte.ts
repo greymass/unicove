@@ -249,7 +249,7 @@ export function getBalances(
 				) &&
 				liquid
 			) {
-				amount = String(liquid.value);
+				amount = liquid.quantity;
 			}
 			const asset = Asset.from(`${amount} ${lightAccount.currency}`);
 			const contract = Name.from(lightAccount.contract);
