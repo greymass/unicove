@@ -26,6 +26,9 @@
 			focus:ring-inset
 			focus:ring-skyBlue-500"
 		type="text"
+		autocorrect="off"
+		autocomplete="off"
+		autocapitalize="off"
 		bind:this={ref}
 		bind:value
 		{...props}

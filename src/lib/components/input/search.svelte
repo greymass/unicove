@@ -206,6 +206,7 @@
 						<input
 							type="text"
 							autocorrect="off"
+							autocomplete="off"
 							autocapitalize="off"
 							bind:this={ref}
 							bind:value={searchValue}
