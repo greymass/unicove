@@ -49,7 +49,7 @@
 </script>
 
 <!-- <Stack class="gap-2"> -->
-<!-- 	<h1 class="h2 leading-none text-neutral-200/60">Contract</h1> -->
+<!-- 	<h1 class="h2 leading-none text-muted">Contract</h1> -->
 <!-- 	{#if data.contract} -->
 <!-- 		<h2 class="h1 font-bold text-white">{data.contract}</h2> -->
 <!-- 	{/if} -->

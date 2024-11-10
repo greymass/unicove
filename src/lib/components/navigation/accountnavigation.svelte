@@ -18,7 +18,7 @@
 	class="px-page flex items-start gap-5 overflow-x-auto border-y border-mineShaft-900/70"
 >
 	{#each props.options as option}
-		<li class="list-none text-gray-500">
+		<li class="text-muted list-none">
 			<a
 				aria-current={option.active && 'page'}
 				href={option.href}

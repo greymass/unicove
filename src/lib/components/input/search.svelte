@@ -13,7 +13,7 @@
 	import Key from 'lucide-svelte/icons/key';
 	import SearchIcon from 'lucide-svelte/icons/search';
 	import UserSearch from 'lucide-svelte/icons/user-search';
-	import X from 'lucide-svelte/icons/user-search';
+	import X from 'lucide-svelte/icons/x';
 	import Button from '$lib/components/button/button.svelte';
 	import { Stack } from '$lib/components/layout';
 	import { truncateCenter } from '$lib/utils';
@@ -177,7 +177,7 @@
 	aria-label="search"
 	id="search"
 	class={cn(
-		'relative z-50 inline-flex h-10 items-center justify-end text-nowrap rounded-lg bg-transparent py-3.5 text-base font-medium leading-4 text-neutral-400 focus:outline-none focus-visible:border-solar-500 md:justify-between md:border md:border-white/20 md:py-2 md:pl-3 md:pr-2',
+		'text-muted relative z-50 inline-flex h-10 items-center justify-end text-nowrap rounded-lg bg-transparent py-3.5 text-base font-medium leading-4 focus:outline-none focus-visible:border-solar-500 md:justify-between md:border md:border-mineShaft-600 md:py-2 md:pl-3 md:pr-2',
 		className
 	)}
 >
@@ -237,11 +237,9 @@
 
 							{#each history as item, index}
 								<div
-									class="col-span-full grid grid-cols-subgrid items-center
-									justify-items-start rounded-lg border-y
-									border-neutral-300/10 border-transparent
-									border-b-transparent
-									focus:border-skyBlue-500
+									class="col-span-full grid h-12 grid-cols-subgrid
+									items-center justify-items-start
+									rounded-lg
 									focus:outline-none
 									data-[active=true]:ring
 									data-[active=true]:ring-inset
@@ -276,14 +274,16 @@
 											{/if}
 										</div>
 
-										<span
-											class="align-center text-base font-medium capitalize text-mineShaft-200/60"
+										<span class="align-center text-muted text-base font-medium capitalize"
 											>{item.searchType}</span
 										>
 									</a>
 
-									<button class="justify-self-end px-2" onclick={() => searchHistory.remove(index)}>
-										<X class="align-center justify-self-end text-mineShaft-200/60" />
+									<button
+										class="grid size-12 place-items-center justify-self-end"
+										onclick={() => searchHistory.remove(index)}
+									>
+										<X class=" text-muted " />
 									</button>
 								</div>
 							{/each}

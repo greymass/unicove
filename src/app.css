@@ -34,7 +34,7 @@
 	}
 
 	.caption {
-		@apply text-base font-medium text-gray-500;
+		@apply text-muted text-base font-medium;
 	}
 
 	p,
@@ -89,7 +89,7 @@
 
 		th,
 		.table-head-styles {
-			@apply py-1.5 pl-2 pr-2 text-left text-base font-medium text-mineShaft-200/60 first:pl-0 last:pr-0;
+			@apply text-muted py-1.5 pl-2 pr-2 text-left text-base font-medium first:pl-0 last:pr-0;
 		}
 
 		td,
@@ -109,7 +109,7 @@
 	}
 
 	.table-row-border {
-		@apply border-b border-neutral-300/10 last:border-none;
+		@apply border-b border-mineShaft-900 last:border-none;
 	}
 
 	.table-row-background {

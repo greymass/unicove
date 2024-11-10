@@ -8,7 +8,8 @@
 	);
 </script>
 
-<div class="space-y-4 rounded-lg border border-gray-300 p-4">
+<!-- TODO: Color audit -->
+<div class="space-y-4 rounded-lg border border-mineShaft-300 p-4">
 	{#if transaction}
 		<h2 class="h2">Transaction Complete</h2>
 		<h3 class="h3">{transaction.status}</h3>
