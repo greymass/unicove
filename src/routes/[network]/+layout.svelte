@@ -7,6 +7,7 @@
 	import AccountSwitcher from '$lib/components/accountswitch.svelte';
 	import UnicoveLogo from '$lib/assets/unicovelogo.svelte';
 	import Search from '$lib/components/input/search.svelte';
+	import X from 'lucide-svelte/icons/circle-x';
 	// import Footer from '$lib/components/footer.svelte';
 
 	let { children, data } = $props();
@@ -50,6 +51,9 @@
 	const ACCOUNT_UPDATE_INTERVAL = 3_000;
 	const NETWORK_UPDATE_INTERVAL = 3_000;
 
+	// Default to not show a banner (avoids flash of banner when hidden)
+	let showBanner = $state(false);
+
 	onMount(() => {
 		// Update account state on a set interval
 		const accountInterval = setInterval(() => {
@@ -65,19 +69,34 @@
 			}
 		}, NETWORK_UPDATE_INTERVAL);
 
+		// Show the banner if localStorage has no flag set
+		showBanner = !localStorage.getItem('hide-v1-banner');
+
 		return () => {
 			clearInterval(accountInterval);
 			clearInterval(networkInterval);
 		};
 	});
+
+	function hideBanner() {
+		// update the store to immediately hide the banner
+		showBanner = false;
+		// set the flag to prevent banner showing on next load
+		localStorage.setItem('hide-v1-banner', 'true');
+	}
 </script>
 
-<div class="col-span-full flex items-center justify-between bg-slate-500">
-	<p class="text-center">
-		Looking for the old version of Unicove? Visit <a href="https://v1.unicove.com">v1.unicove.com</a
-		>
-	</p>
-</div>
+{#if showBanner}
+	<aside class="flex items-center justify-between gap-4 bg-mineShaft-950 pl-4 shadow">
+		<p class="py-4 text-white">
+			Looking for the old version of Unicove? Go to
+			<a class="underline" href="https://v1.unicove.com">v1.unicove.com</a>
+		</p>
+		<button class="grid size-12 place-items-center" onclick={hideBanner}>
+			<X class="size-4" />
+		</button>
+	</aside>
+{/if}
 
 <div
 	class="
@@ -90,7 +109,7 @@
 	max-w-screen-2xl
 	grid-cols-2
 	grid-rows-[min-content_minmax(0,1fr)]
-	gap-y-4
+	gap-y-6
 	pt-4
 	sm:grid-cols-4
 	md:h-auto
@@ -98,7 +117,6 @@
 	md:grid-cols-12
 	md:grid-rows-[min-content_minmax(0,1fr)]
 	md:gap-x-4
-	md:gap-y-6
 	"
 >
 	<header class="col-span-full flex items-center justify-between">
