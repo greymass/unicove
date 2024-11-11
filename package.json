@@ -16,8 +16,8 @@
 		"test": "bun test"
 	},
 	"devDependencies": {
-		"@inlang/paraglide-js": "1.11.2",
-		"@inlang/paraglide-sveltekit": "0.11.0",
+		"@inlang/paraglide-js": "^1.11.3",
+		"@inlang/paraglide-sveltekit": "^0.11.5",
 		"@inlang/paraglide-vite": "^1.2.76",
 		"@melt-ui/pp": "^0.3.2",
 		"@melt-ui/svelte": "^0.83.0",
@@ -75,6 +75,7 @@
 		"just-extend": "^6.2.0",
 		"lucide-svelte": "^0.424.0",
 		"prettier-plugin-organize-imports": "^4.0.0",
+		"prettier-plugin-sort-json": "^4.0.0",
 		"runed": "^0.15.3",
 		"svead": "^0.0.11",
 		"tailwind-merge": "^2.5.3",
