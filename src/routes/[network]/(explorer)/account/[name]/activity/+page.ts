@@ -1,11 +1,8 @@
-import type { LoadEvent } from '@sveltejs/kit';
 import { ActivityAction } from '$lib/types';
+import type { PageLoad } from './$types';
 
-interface LoadData {
-	activityActions: ActivityAction[];
-}
-
-export async function load({ fetch, params }: LoadEvent): Promise<LoadData> {
+export const load: PageLoad = async ({ fetch, params, parent }) => {
+	const { network } = await parent();
 	let activityActions: ActivityAction[] = [];
 	try {
 		const response = await fetch(`/${params.network}/api/account/${params.name}/activity`);
@@ -15,5 +12,12 @@ export async function load({ fetch, params }: LoadEvent): Promise<LoadData> {
 		console.error('Error fetching activity actions:', error);
 	}
 
-	return { activityActions };
-}
+	return {
+		activityActions,
+		subtitle: `Recent activity on the ${network.chain.name} Network.`,
+		pageMetaTags: {
+			title: `Account Activity for ${params.name} | ${network.chain.name} Network`,
+			description: `View the transaction history of the ${params.name} account on the ${network.chain.name} network.`
+		}
+	};
+};

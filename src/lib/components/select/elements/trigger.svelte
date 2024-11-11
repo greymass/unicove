@@ -19,7 +19,7 @@
 
 <button
 	class={cn(
-		'flex items-center justify-between gap-2 border-2 border-mineShaft-600 bg-transparent pl-4 pr-3 font-medium transition-opacity hover:opacity-90 focus:outline-2 focus:outline-solar-500 focus-visible:border-transparent focus-visible:outline data-[variant=pill]:h-10 data-[variant=form]:rounded-lg data-[variant=pill]:rounded-full data-[variant=form]:py-4 ',
+		'flex items-center justify-between gap-2 border-2 border-mineShaft-600 bg-transparent pl-4 pr-3 font-medium transition-opacity hover:opacity-90 focus:outline-2 focus:outline-solar-500 focus-visible:border-transparent focus-visible:outline data-[variant=form]:h-12 data-[variant=pill]:h-10 data-[variant=form]:rounded-lg data-[variant=pill]:rounded-full',
 		className
 	)}
 	data-variant={props.variant}

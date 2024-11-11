@@ -97,7 +97,7 @@
 			<Button variant="secondary" href="/{network}/ram">RAM Market</Button>
 		</Stack>
 	</Stack>
-	<Stack class="max-w-lg flex-1 gap-4">
+	<Stack class="hidden max-w-lg flex-1 gap-4">
 		<Stack class="gap-4 px-5 py-3">
 			<h3 class="h3">{chainName} Resources: A Simple Explanation</h3>
 			<p>

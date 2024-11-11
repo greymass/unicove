@@ -16,7 +16,6 @@
 	import SummarySend from '$lib/components/summary/eosio.token/transfer.svelte';
 	import TextInput from '$lib/components/input/text.svelte';
 	import TokenSelect from '$lib/components/select/token.svelte';
-	import PageHeader from '$lib/components/pageheader.svelte';
 
 	import { defaultQuantity, SendState } from './state.svelte';
 
@@ -27,6 +26,7 @@
 	import { NetworkState } from '$lib/state/network.svelte';
 	import { page } from '$app/stores';
 	import { transactions } from '$lib/wharf/transact.svelte';
+	import { Stack } from '$lib/components/layout';
 
 	const debugMode = getSetting('debug-mode', false);
 
@@ -302,55 +302,40 @@
 	}
 </script>
 
-<article class="layout-stack gap-4">
-	<PageHeader title="Send" subtitle={subtitle[f.current]} />
-	<Progress currentStep={progress} maxStep={3} />
+{#snippet Recipient()}
+	<fieldset class="grid gap-2" class:hidden={f.current !== 'to'}>
+		<Label for="to-input">Receiving Account</Label>
+		<NameInput
+			bind:this={toInput}
+			bind:ref={toRef}
+			bind:value={sendState.to}
+			bind:valid={toValid}
+			id="to-input"
+			{onkeydown}
+			placeholder="Enter the account name of the recipient"
+		/>
+	</fieldset>
+{/snippet}
 
-	<div class="grid gap-4">
-		<div class="space-y-4" class:hidden={f.current !== 'complete'}>
-			<h2 class="h2">Transaction Complete</h2>
-			<h3 class="h3">{transaction?.status}</h3>
-			<p>
-				<a href="/{data.network}/transaction/{id}">
-					{id}
-				</a>
-			</p>
-		</div>
-
-		<div class:hidden={f.current !== 'error'}>
-			<h2 class="h2">Transaction Error</h2>
-			<p>There was an error submitting your transaction.</p>
-		</div>
-
-		<fieldset class="grid gap-2" class:hidden={f.current !== 'to'}>
-			<Label for="to-input">Account Name</Label>
-			<NameInput
-				bind:this={toInput}
-				bind:ref={toRef}
-				bind:value={sendState.to}
-				bind:valid={toValid}
-				id="to-input"
-				{onkeydown}
-				placeholder="Enter the account name of the recipient"
-			/>
+{#snippet Quantity()}
+	<section class="grid gap-6" class:hidden={f.current !== 'quantity'}>
+		<fieldset class="grid gap-2">
+			<Label for="token-select">Token to send</Label>
+			{#if tokenOptions.length && sendState.balance}
+				<TokenSelect
+					id="token-select"
+					options={tokenOptions}
+					bind:this={tokenSelect}
+					bind:selected={sendState.balance}
+					debug={debugMode.value}
+				/>
+			{:else}
+				<p>No balances detected.</p>
+			{/if}
 		</fieldset>
 
-		<fieldset class="grid gap-2" class:hidden={f.current !== 'quantity'}>
-			<fieldset class="grid gap-2">
-				<Label for="token-select">Select a token</Label>
-				{#if tokenOptions.length && sendState.balance}
-					<TokenSelect
-						id="token-select"
-						options={tokenOptions}
-						bind:this={tokenSelect}
-						bind:selected={sendState.balance}
-						debug={debugMode.value}
-					/>
-				{:else}
-					<p>No balances detected.</p>
-				{/if}
-			</fieldset>
-			<Label for="quantity-input">Amount</Label>
+		<fieldset class="grid gap-2">
+			<Label for="quantity-input">Amount to send</Label>
 			{#if sendState.balance}
 				<AssetInput
 					id="quantity-input"
@@ -364,92 +349,135 @@
 					min={sendState.min || 0}
 					max={sendState.max || 0}
 					{onkeydown}
-					placeholder={`Enter the number of ${sendState.balance?.asset.symbol.code} tokens to send`}
+					placeholder={`Enter the amount of ${sendState.balance?.asset.symbol.code} to send`}
 					debug={debugMode.value}
 				/>
 			{/if}
+
 			{#if context.account}
-				<Label for="quantity-input">
-					<button
-						class="text-skyBlue-500 hover:text-skyBlue-400"
-						disabled={!context.account}
-						onclick={max}
-						type="button">Fill Max</button
-					>
-				</Label>
+				<button
+					class="text-skyBlue-500 hover:text-skyBlue-400"
+					disabled={!context.account}
+					onclick={max}
+				>
+					Fill Max
+				</button>
 			{/if}
+
 			{#if assetValid && sendState.value}
 				<Label for="quantity-input">Value: {formatCurrency(sendState.value)}</Label>
 			{/if}
+
 			{#if !assetValidPrecision}
 				<p class="text-red-500">Invalid number, too many decimal places.</p>
 			{/if}
+
 			{#if !assetValidMaximum}
 				<p class="text-red-500">Amount exceeds available balance.</p>
 			{/if}
 		</fieldset>
+	</section>
+{/snippet}
 
-		<SummarySend
-			action={{ data: sendState.toJSON() }}
-			class={f.current !== 'memo' ? 'hidden' : undefined}
+{#snippet Memo()}
+	<fieldset class="grid gap-2" class:hidden={f.current !== 'memo'}>
+		<Label for="memo-input">Memo (Optional)</Label>
+		<TextInput
+			id="memo-input"
+			bind:ref={memoRef}
+			bind:value={sendState.memo}
+			{onkeydown}
+			placeholder="Specify a public memo for this transfer (optional)"
 		/>
+	</fieldset>
 
-		<fieldset class="grid gap-2" class:hidden={f.current !== 'memo'}>
-			<Label for="memo-input">Memo</Label>
-			<TextInput
-				id="memo-input"
-				bind:ref={memoRef}
-				bind:value={sendState.memo}
-				{onkeydown}
-				placeholder="Specify a public memo for this transfer (optional)"
-			/>
-		</fieldset>
+	<SummarySend
+		action={{ data: sendState.toJSON() }}
+		class={f.current !== 'memo' ? 'hidden' : undefined}
+	/>
+{/snippet}
 
-		<fieldset class="grid grid-cols-[50%_50%] gap-2 transition-all duration-200">
-			{#if f.current === 'to'}
-				<Button variant="secondary" onclick={() => resetURL()}>Restart [␛]</Button>
-			{:else if f.current === 'complete'}
-				<Button onclick={() => resetURL()}>Start new send</Button>
-			{:else}
-				<Button variant="secondary" type="button" onclick={previous}>Back [␛]</Button>
-			{/if}
+{#snippet Complete()}
+	<div class="space-y-4" class:hidden={f.current !== 'complete'}>
+		<h2 class="h2">Transaction Complete</h2>
+		<h3 class="h3">{transaction?.status}</h3>
+		<p>
+			<a href="/{data.network}/transaction/{id}">
+				{id}
+			</a>
+		</p>
+	</div>
+{/snippet}
 
-			{#if f.current === 'memo'}
-				<Button class="col-end-3" type="button" onclick={transact} disabled={!allValid}
-					>Submit [⏎]</Button
-				>
-			{:else if f.current !== 'complete'}
-				<Button class="col-end-3" type="submit" onclick={preventDefault(next)} disabled={!nextValid}
-					>Next [⏎]</Button
-				>
-			{/if}
-		</fieldset>
+{#snippet Error()}
+	<div class:hidden={f.current !== 'error'}>
+		<h2 class="h2">Transaction Error</h2>
+		<p>There was an error submitting your transaction.</p>
+	</div>
+{/snippet}
+
+{#snippet ButtonGroup()}
+	<fieldset class="grid grid-cols-[50%_50%] gap-2 transition-all duration-200">
+		{#if f.current === 'to'}
+			<Button variant="secondary" onclick={() => resetURL()}>Restart</Button>
+		{:else if f.current === 'complete'}
+			<Button onclick={() => resetURL()}>Start new send</Button>
+		{:else}
+			<Button variant="secondary" onclick={previous}>Back</Button>
+		{/if}
+
+		{#if f.current === 'memo'}
+			<Button class="col-end-3" onclick={transact} disabled={!allValid}>Submit</Button>
+		{:else if f.current !== 'complete'}
+			<Button class="col-end-3" type="submit" onclick={preventDefault(next)} disabled={!nextValid}>
+				Next
+			</Button>
+		{/if}
+	</fieldset>
+{/snippet}
+
+<Stack class="mt-6 gap-6">
+	<div class="hidden">
+		<h3>{subtitle[f.current]}</h3>
+		<Progress currentStep={progress} maxStep={3} />
 	</div>
 
-	{#if debugMode.value}
-		<h3 class="h3">Debugging</h3>
-		<Code
-			>{JSON.stringify(
-				{
-					state: sendState,
-					price: sendState.price,
-					value: sendState.value,
-					current: f.current,
-					balance: sendState.balance,
-					max: sendState.max,
-					valid: {
-						toValid,
-						assetValid,
-						memoValid,
-						assetValidPrecision,
-						assetValidMinimum,
-						assetValidMaximum
-					},
-					balances: context.account?.balances
+	{@render Complete()}
+
+	{@render Error()}
+
+	{@render Recipient()}
+
+	{@render Quantity()}
+
+	{@render Memo()}
+
+	{@render ButtonGroup()}
+</Stack>
+
+{#if debugMode.value}
+	<h3 class="h3">Debugging</h3>
+	<Code
+		>{JSON.stringify(
+			{
+				state: sendState,
+				price: sendState.price,
+				value: sendState.value,
+				current: f.current,
+				balance: sendState.balance,
+				max: sendState.max,
+				valid: {
+					toValid,
+					assetValid,
+					memoValid,
+					assetValidPrecision,
+					assetValidMinimum,
+					assetValidMaximum
 				},
-				undefined,
-				2
-			)}</Code
-		>
-	{/if}
-</article>
+				balances: context.account?.balances
+			},
+			undefined,
+			2
+		)}</Code
+	>
+{/if}

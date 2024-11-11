@@ -5,8 +5,6 @@
 	export let data: PageData;
 </script>
 
-<h1>{m.block_height_numbered({ height: data.height })}</h1>
-
 {#if data.height > 1}
 	<a href="/{data.network}/block/{Number(data.height) - 1}"
 		>← {m.block_height_numbered({ height: Number(data.height) - 1 })}</a

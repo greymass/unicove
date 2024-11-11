@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Pageheader from '$lib/components/pageheader.svelte';
+	// import Pageheader from '$lib/components/pageheader.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
 	import Button from '$lib/components/button/button.svelte';
 
@@ -44,10 +44,10 @@
 </script>
 
 <Stack>
-	<Pageheader
-		title="Setup Anchor Mobile Wallet"
-		subtitle="Follow these steps to get started with Anchor on your mobile device"
-	/>
+	<!-- <Pageheader -->
+	<!-- 	title="Setup Anchor Mobile Wallet" -->
+	<!-- 	subtitle="Follow these steps to get started with Anchor on your mobile device" -->
+	<!-- /> -->
 
 	<div class="container mx-auto p-4">
 		<ol class="list-decimal space-y-6 pl-5">

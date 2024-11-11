@@ -1,12 +1,16 @@
 <script lang="ts">
 	import ChevronLeft from 'lucide-svelte/icons/chevron-left';
+	import { chainLogos } from '@wharfkit/common';
 	import { goto } from '$app/navigation';
+	import { type NetworkState } from '$lib/state/network.svelte';
+
 	interface Props {
 		title: string;
 		subtitle?: string;
-		inverted?: boolean;
 		backPath?: string;
+		network: NetworkState;
 	}
+
 	let props: Props = $props();
 
 	function goBack() {
@@ -17,24 +21,31 @@
 		}
 	}
 
-	const titleStyle = 'text-3xl font-bold leading-none text-white';
-	const subtitleStyle = 'text-xl font-medium leading-none text-white/60';
+	let logo = $derived(chainLogos.get(String(props.network.chain.id)) || '');
 </script>
 
 <header class="flex items-center gap-4">
 	{#if props.backPath}
 		<button
 			onclick={goBack}
-			class="flex h-10 w-10 items-center justify-center rounded-full bg-gray-700 text-sky-400 hover:text-sky-300 focus:outline-none"
+			class="grid size-12 place-items-center rounded-full bg-mineShaft-900 text-skyBlue-500 hover:bg-mineShaft-800 hover:text-skyBlue-400"
 		>
 			<ChevronLeft size={24} />
 		</button>
+	{:else}
+		<picture class="size-12">
+			<img
+				src={String(logo)}
+				alt={String(props.network.chain.name)}
+				class="size-full object-contain"
+			/>
+		</picture>
 	{/if}
 
 	<div class="grid gap-2">
-		<h1 class={props.inverted ? subtitleStyle : titleStyle}>{props.title}</h1>
+		<h1 class="text-3xl font-bold leading-none text-white">{props.title}</h1>
 		{#if props.subtitle}
-			<h2 class={props.inverted ? titleStyle : subtitleStyle}>{props.subtitle}</h2>
+			<h2 class="text-muted text-base leading-none">{props.subtitle}</h2>
 		{/if}
 	</div>
 </header>

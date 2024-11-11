@@ -61,16 +61,8 @@
 				</Stack>
 			</Switcher>
 			<Switcher threshold="20rem">
-				<Button
-					href="/{networkName}/staking/stake"
-					variant="outline"
-					class="bg-blue-500 hover:bg-blue-600">Stake</Button
-				>
-				<Button
-					href="/{networkName}/staking/unstake"
-					variant="outline"
-					class="bg-blue-500 hover:bg-blue-600">Unstake</Button
-				>
+				<Button href="/{networkName}/staking/stake" variant="secondary">Stake</Button>
+				<Button href="/{networkName}/staking/unstake" variant="secondary">Unstake</Button>
 			</Switcher>
 		</Card>
 		<UnstakingBalances records={unstaking} />
@@ -81,11 +73,7 @@
 					<AssetText class="text-white" variant="full" value={totalWithdraw} />
 				</p>
 			</Stack>
-			<Button
-				href="/{networkName}/staking/withdraw"
-				variant="outline"
-				class="bg-blue-500 hover:bg-blue-600">Withdraw</Button
-			>
+			<Button href="/{networkName}/staking/withdraw" variant="secondary">Withdraw</Button>
 		</Card>
 	</Stack>
 	<Stack class="max-w-lg gap-4">
@@ -94,7 +82,7 @@
 			network={data.network}
 			tokenprice={data.network.tokenprice || Asset.from(0, '2,USD')}
 		/>
-		<Card class="gap-5" title="About staking">
+		<Card class="hidden gap-5" title="About staking">
 			<Stack class="gap-5">
 				<p class="caption">
 					The APY is an estimate, and may fluctuate based on how many and much others are staking.

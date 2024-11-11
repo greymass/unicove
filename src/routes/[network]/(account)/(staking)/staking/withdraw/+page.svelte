@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { Card, Stack, Switcher } from '$lib/components/layout';
 	import Button from '$lib/components/button/button.svelte';
-	import PageHeader from '$lib/components/pageheader.svelte';
 	import Transaction from '$lib/components/transaction.svelte';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
@@ -30,7 +29,12 @@
 			<p>There was an error submitting your transaction.</p>
 		{:else}
 			<Switcher>
-				<PageHeader title="Currently Withdrawable" subtitle={String(manager.total)} inverted />
+				<Stack class="gap-2">
+					<h3 class="text-muted leading-none">Currently Withdrawable</h3>
+					<p class="text-2xl font-bold text-white">{String(manager.total)}</p>
+				</Stack>
+
+				<!-- <PageHeader title="Currently Withdrawable" subtitle={String(manager.total)} inverted /> -->
 				<Button disabled={!manager.total.value} onclick={() => manager.transact()} variant="primary"
 					>Withdraw</Button
 				>
