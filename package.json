@@ -52,7 +52,7 @@
 		"@tailwindcss/container-queries": "^0.1.1",
 		"@wharfkit/account": "^1.2.0",
 		"@wharfkit/account-creation-plugin-greymass": "^1.2.0",
-		"@wharfkit/account-creation-plugin-metamask": "1.0.0-RC3",
+		"@wharfkit/account-creation-plugin-metamask": "^1.0.0",
 		"@wharfkit/antelope": "^1.0.11",
 		"@wharfkit/common": "^1.4.0",
 		"@wharfkit/contract": "^1.1.5",
