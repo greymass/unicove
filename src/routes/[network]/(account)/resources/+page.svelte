@@ -68,9 +68,7 @@
 	];
 </script>
 
-<div
-	class="mx-auto flex flex-col gap-9 py-5 sm:mx-0 sm:gap-12 xl:flex-row xl:justify-between xl:gap-8"
->
+<div class="flex flex-col gap-9 sm:gap-12 xl:flex-row xl:justify-between xl:gap-8">
 	<Stack class="max-w-lg flex-1 gap-9">
 		<Stack>
 			<CpuAndNetResource
