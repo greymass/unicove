@@ -199,7 +199,6 @@ export function getNetwork(
 	chain: ChainDefinition,
 	options: NetworkStateOptions = {}
 ): NetworkState {
-	console.log('spawning new network state');
 	const network = new NetworkState(chain, options);
 	return network;
 }
