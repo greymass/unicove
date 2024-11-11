@@ -61,7 +61,7 @@
 		"@wharfkit/session": "^1.4.0",
 		"@wharfkit/transact-plugin-resource-provider": "^1.1.1",
 		"@wharfkit/wallet-plugin-anchor": "^1.4.0",
-		"@wharfkit/wallet-plugin-metamask": "1.0.0-rc8",
+		"@wharfkit/wallet-plugin-metamask": "^1.0.0-rc9",
 		"@wharfkit/wallet-plugin-privatekey": "^1.1.0",
 		"@wharfkit/wallet-plugin-scatter": "^1.5.1",
 		"@wharfkit/wallet-plugin-tokenpocket": "^1.5.1",
