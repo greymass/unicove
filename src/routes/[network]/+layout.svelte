@@ -126,7 +126,7 @@
 	md:gap-x-4
 	"
 >
-	<header class="col-span-full flex items-center justify-between">
+	<header class="col-span-full flex h-12 items-center justify-between">
 		<!-- Larger breakpoints only	 -->
 		<a href="/{data.network}" class="hidden w-min place-self-center md:block">
 			<UnicoveLogo small />
