@@ -87,13 +87,20 @@
 </script>
 
 {#if showBanner}
-	<aside class="flex items-center justify-between gap-4 bg-mineShaft-950 pl-4 shadow">
-		<p class="py-4 text-white">
+	<aside
+		class="grid grid-cols-[auto_1fr_auto] items-center justify-items-center gap-4 bg-mineShaft-950 shadow *:row-start-1"
+	>
+		<p
+			class="col-start-2 py-4 font-medium text-mineShaft-50 md:col-span-3 md:col-start-1 md:text-center"
+		>
 			Looking for the old version of Unicove? Go to
 			<a class="underline" href="https://v1.unicove.com">v1.unicove.com</a>
 		</p>
-		<button class="grid size-12 place-items-center" onclick={hideBanner}>
-			<X class="size-4" />
+		<button
+			class="col-start-3 grid size-12 place-items-center justify-self-end text-inherit"
+			onclick={hideBanner}
+		>
+			<X class="size-4 " />
 		</button>
 	</aside>
 {/if}
