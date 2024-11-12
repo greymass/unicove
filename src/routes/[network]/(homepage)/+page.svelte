@@ -139,35 +139,28 @@
 		</div>
 	</section>
 
-	<section class="col-span-full grid grid-cols-subgrid gap-8">
-		<!-- Text -->
-		<div
-			class="z-20 col-span-full row-start-1 max-w-md place-self-center justify-self-start text-balance xs:col-span-1 sm:col-span-full sm:justify-self-auto md:row-span-2 md:row-start-1 md:max-w-md lg:col-span-4 lg:row-auto lg:content-center"
-		>
+	<Switcher threshold="60ch" class="col-span-full gap-6 ">
+		<div>
 			{@render textblock({
 				title: 'Unicove 2.0 enters early access',
-				text: 'Welcome to the early access release of Unicove 2.0! We invite you to explore the new features and provide feedback to help us improve this evolving platform. For the full announcement, visit our blog below.',
+				text: 'Welcome to the new Unicove! We invite you to explore the new features and provide feedback to help us improve this evolving platform. Read the following blog post to learn more.',
 				button: {
-					text: 'Read more...',
+					text: 'More information',
 					href: `https://greymass.medium.com/unicove-2-0-early-access-6a6a318e14db`
 				}
 			})}
 		</div>
-
-		<!-- Graphics -->
-		<div
-			class="col-span-full grid place-items-center xs:col-start-3 xs:row-start-1 md:col-start-5 md:row-span-2 md:row-start-2 lg:row-auto"
-		>
+		<div>
 			{@render textblock({
 				title: 'Looking for the old version?',
-				text: 'The original version of Unicove has moved to a new URL and will remain available for use. If you prefer the old version or need one of the features it offers, you can access it here.',
+				text: 'The original version of Unicove has moved to a new URL. If you prefer the old version or need a feature it offers, you can continue to access it at the link below.',
 				button: {
-					text: 'https://v1.unicove.com',
+					text: 'Go to Unicove 1.0',
 					href: `https://v1.unicove.com`
 				}
 			})}
 		</div>
-	</section>
+	</Switcher>
 
 	<section class="col-span-full grid hidden grid-cols-subgrid gap-8">
 		<!-- Text -->
