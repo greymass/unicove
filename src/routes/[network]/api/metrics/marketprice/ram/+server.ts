@@ -25,7 +25,7 @@ export const GET: RequestHandler = async ({ params }) => {
 	try {
 		const chain = getChainDefinitionFromParams(params.network);
 		const metricsUrl = getMetricsUrl(chain);
-		const response = await fetch(path.join(metricsUrl, 'marketprice', 'ram'));
+		const response = await fetch(`${metricsUrl}/marketprice/ram/1h/7d`);
 		if (!response.ok) {
 			throw new Error(`HTTP error! status: ${response.status}`);
 		}
