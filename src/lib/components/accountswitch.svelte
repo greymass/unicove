@@ -42,9 +42,6 @@
 
 	function switchSession(session: SerializedSession) {
 		context.wharf.switch(session);
-		const network = chainMap[session.chain.toString()];
-		const account = session.actor.toString();
-		goto(`/${languageTag()}/${network}/account/${account}`);
 		closeDrawer();
 	}
 
