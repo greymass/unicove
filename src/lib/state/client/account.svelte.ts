@@ -41,7 +41,7 @@ export class AccountState {
 	public balance = $derived.by(() =>
 		this.network ? getBalance(this.network, this.sources) : undefined
 	);
-	public balances = $derived.by(() =>
+	public balances: TokenBalance[] = $derived.by(() =>
 		this.network
 			? getBalances(
 					this.network,

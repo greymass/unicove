@@ -278,7 +278,7 @@
 
 	const tokenOptions: TokenBalance[] = $derived.by(() => {
 		if (context.account && context.account.balances && context.account.balances.length) {
-			return context.account.balances;
+			return context.account.balances.filter((b) => b.asset.value > 0);
 		}
 		return [];
 	});
