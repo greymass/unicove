@@ -8,7 +8,6 @@
 	import UnicoveLogo from '$lib/assets/unicovelogo.svelte';
 	import Search from '$lib/components/input/search.svelte';
 	import X from 'lucide-svelte/icons/circle-x';
-	// import Footer from '$lib/components/footer.svelte';
 
 	let { children, data } = $props();
 
@@ -155,14 +154,4 @@
 	>
 		{@render children()}
 	</main>
-
-	<!-- <Footer /> -->
 </div>
-
-<!-- This wrapper sets up the bottom menu on mobile, becomes hidden on desktop -->
-<!-- <aside -->
-<!-- 	class="px-page fixed bottom-0 z-50 flex h-14 w-full justify-between bg-shark-950 py-2 md:hidden" -->
-<!-- > -->
-<!-- 	<MobileNavigation network={data.network} /> -->
-<!---->
-<!-- </aside> -->
