@@ -4,11 +4,12 @@
 
 @layer components {
 	html {
-		@apply h-full bg-black text-white;
+		@apply h-full bg-shark-950 text-white;
+		color-scheme: dark;
 	}
 
 	body {
-		@apply h-auto min-h-svh bg-shark-950/50 text-white;
+		@apply h-auto min-h-svh text-white;
 	}
 
 	/* Headings are defined by class instead of tag to preserve semantic html independent of style */
