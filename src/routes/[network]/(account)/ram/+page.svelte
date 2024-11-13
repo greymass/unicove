@@ -64,7 +64,7 @@
 	let bytesInput: BytesInput;
 </script>
 
-<div class="grid gap-6 pb-6 lg:grid-cols-2">
+<div class="grid gap-6 lg:grid-cols-2">
 	<!-- Buy Sell Card -->
 	<Card class="flex *:flex-1 lg:col-start-1">
 		<div class="grid content-between gap-4">
