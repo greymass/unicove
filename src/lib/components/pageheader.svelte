@@ -24,7 +24,7 @@
 	let logo = $derived(chainLogos.get(String(props.network.chain.id)) || '');
 </script>
 
-<header class="flex items-center gap-4">
+<header class="flex min-h-16 items-center gap-4">
 	{#if props.backPath}
 		<button
 			onclick={goBack}

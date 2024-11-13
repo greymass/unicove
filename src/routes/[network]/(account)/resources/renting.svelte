@@ -197,8 +197,9 @@
 	<Stack class="sm:px-4">
 		<ul>
 			{#each rentDetails as detail}
+				<!-- TODO: Color audit -->
 				<li
-					class="flex justify-between border-b border-neutral-300/10 bg-gradient-to-r from-transparent to-transparent py-3 last:border-none odd:via-mineShaft-950"
+					class="flex justify-between border-b border-mineShaft-300/10 bg-gradient-to-r from-transparent to-transparent py-3 last:border-none odd:via-mineShaft-950"
 				>
 					<span class="text-base font-medium">{detail.title}</span>
 					<span class="text-base font-medium text-white">{detail.desc}</span>

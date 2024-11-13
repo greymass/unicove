@@ -67,13 +67,14 @@
 
 <menu class="grid h-svh grid-rows-[auto_1fr] justify-start gap-8 px-8 md:px-0 {className}">
 	<a href="/{network}" onclick={callbackFn} class="flex pt-4 md:hidden">
-		<UnicoveLogo wordmark />
+		<UnicoveLogo wordmark class="fill-shark-100" />
 	</a>
-	<nav class="flex flex-col gap-1 text-nowrap text-base font-medium text-white">
+
+	<nav class="flex flex-col gap-2 text-nowrap text-base font-medium text-white">
 		{#each options as option}
 			<a
 				href={option.href}
-				class="flex items-center py-3 leading-snug transition-opacity first:pt-1 hover:opacity-100"
+				class="flex h-12 select-none items-center rounded-lg leading-snug transition-opacity hover:opacity-100 focus-visible:opacity-100 focus-visible:outline focus-visible:outline-solar-500"
 				class:opacity-50={!option.active}
 				class:opacity-100={option.active}
 				aria-current={!!option.active}

@@ -14,8 +14,9 @@
 	let { id, data } = $derived(toast);
 </script>
 
+<!-- TODO: Color audit -->
 <div
-	class="rounded-lg bg-neutral-800 text-white shadow-md"
+	class="rounded-lg bg-mineShaft-800 text-white shadow-md"
 	in:fly={{ duration: 150, x: '100%' }}
 	out:fly={{ duration: 150, x: '100%' }}
 	use:melt={$content(id)}
@@ -32,7 +33,7 @@
 				</div>
 			</div>
 			<button
-				class="absolute right-4 top-4 grid size-6 place-items-center rounded-full hover:bg-neutral-700/50"
+				class="absolute right-4 top-4 grid size-6 place-items-center rounded-full hover:bg-mineShaft-700/50"
 				use:melt={$close(id)}
 				aria-label="close notification"
 			>

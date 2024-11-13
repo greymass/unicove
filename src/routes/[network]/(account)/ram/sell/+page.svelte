@@ -129,29 +129,30 @@
 			>Confirm Sell RAM</Button
 		>
 
+		<!-- TODO: use table  -->
 		<Stack class="mt-4 gap-3">
 			<div class="grid grid-cols-2 gap-y-0 text-lg">
-				<p class="text-gray-400">RAM Price</p>
+				<p class="text-muted">RAM Price</p>
 				<AssetText variant="full" class="text-right" value={sellRamState.pricePerKB} />
 
-				<div class="col-span-2 my-2 border-b border-gray-600"></div>
+				<div class="col-span-2 my-2 border-b border-mineShaft-600"></div>
 
-				<p class="text-gray-400">RAM to be sold</p>
+				<p class="text-muted">RAM to be sold</p>
 				<AssetText variant="full" class="text-right" value={sellRamState.kbsToSell} />
 
-				<div class="col-span-2 my-2 border-b border-gray-600"></div>
+				<div class="col-span-2 my-2 border-b border-mineShaft-600"></div>
 
-				<p class="text-gray-400">RAM Value</p>
+				<p class="text-muted">RAM Value</p>
 				<AssetText variant="full" class="text-right" value={sellRamState.bytesValue} />
 
-				<div class="col-span-2 my-2 border-b border-gray-600"></div>
+				<div class="col-span-2 my-2 border-b border-mineShaft-600"></div>
 
-				<p class="text-gray-400">Network Fee (0.5%)</p>
+				<p class="text-muted">Network Fee (0.5%)</p>
 				<AssetText variant="full" class="text-right" value={sellRamState.fee} />
 
-				<div class="col-span-2 my-2 border-b border-gray-600"></div>
+				<div class="col-span-2 my-2 border-b border-mineShaft-600"></div>
 
-				<p class="text-gray-400">Expected To Receive</p>
+				<p class="text-muted">Expected To Receive</p>
 				<AssetText variant="full" class="text-right" value={sellRamState.expectedToReceive} />
 			</div>
 

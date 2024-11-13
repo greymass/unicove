@@ -75,8 +75,10 @@
 		{/if}
 	</picture>
 
-	<div class="grid flex-1 justify-items-start gap-0.5">
-		<span class="m-0 text-2xl font-bold leading-none">{currentNetwork.chain.name}</span>
+	<div class="grid flex-1 justify-items-start gap-0.5 md:gap-0">
+		<span class="m-0 overflow-ellipsis text-xl font-bold leading-none md:text-2xl"
+			>{currentNetwork.chain.name}</span
+		>
 
 		<div class="font-regular m-0 flex items-center gap-2 pr-1 text-base text-zinc-400">
 			<span use:melt={$label}>Change network</span>

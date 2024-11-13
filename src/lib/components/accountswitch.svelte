@@ -18,6 +18,7 @@
 	import UserCheck from 'lucide-svelte/icons/user-check';
 	import { goto } from '$app/navigation';
 	import { languageTag } from '$lib/paraglide/runtime';
+	import Button from './button/button.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -124,14 +125,14 @@
 		<!-- Content -->
 		<div
 			use:melt={$content}
-			class="fixed right-0 top-0 z-50 h-svh max-w-fit space-y-4 overflow-y-auto overflow-x-hidden bg-shark-950 px-6 py-4 shadow-lg focus:outline-none"
+			class="fixed right-0 top-0 z-50 flex h-svh max-w-fit flex-col space-y-4 overflow-y-auto overflow-x-hidden bg-shark-950 px-4 py-4 shadow-lg focus:outline-none md:px-6"
 			transition:fly={{
 				x: 350,
 				duration: 300,
 				opacity: 1
 			}}
 		>
-			<section class="flex flex-row-reverse justify-between gap-4">
+			<section class="flex flex-row-reverse justify-between gap-2 md:gap-4">
 				<button
 					use:melt={$close}
 					aria-label="Close"
@@ -140,7 +141,11 @@
 					place-items-center
 					rounded-lg
 					text-zinc-400
-					hover:text-skyBlue-500 focus:text-white focus:outline-none"
+					hover:text-skyBlue-500
+					focus:text-white
+					focus:outline-none
+					md:pt-2.5
+					"
 				>
 					<CircleX />
 				</button>
@@ -150,30 +155,12 @@
 
 			<hr class=" border border-mineShaft-950" />
 
-			<section id="accounts" class="grid gap-4 pt-2">
-				<header class="flex items-center justify-between">
-					<span class="text-xl font-semibold">Accounts</span>
-					<button
-						onclick={addSession}
-						class=" flex h-12 items-center gap-2 rounded-lg border-2 border-mineShaft-600 px-4 text-mineShaft-100"
-					>
-						<UserPlus class="size-4" />
-						<span>Add account</span>
-					</button>
+			<section id="accounts" class="flex flex-1 flex-col gap-3 pt-2">
+				<header class="flex items-center justify-between text-xl font-semibold">
+					<span>Accounts</span>
+					<!-- class="flex h-12 items-center gap-2 rounded-lg border-2 border-mineShaft-600 px-4 text-mineShaft-100" -->
 				</header>
 
-				<!-- {#if context.wharf.session} -->
-				<!-- 	<p>{String(context.wharf.session.permissionLevel)}</p> -->
-				<!-- 	<p class="truncate">{String(context.wharf.session.chain.id)}</p> -->
-				<!-- {/if} -->
-
-				<!-- <Button href={`/${network}/signup`} onclick={closeDrawer} variant="secondary"
-						>Signup</Button
-					> <!-- {#if context.wharf.session} -->
-				<!-- 	<Button onclick={() => removeSession(currentSession)} variant="secondary"> -->
-				<!-- 		Logout ({context.wharf.session.actor}) -->
-				<!-- 	</Button> -->
-				<!-- {/if} -->
 				<!-- {#if context.wharf.sessions.length} -->
 				<!-- 	<Button onclick={removeAllSessions} variant="secondary">Logout (All Accounts)</Button> -->
 				<!-- {/if} -->
@@ -182,14 +169,15 @@
 					{#each context.wharf.sessions as session}
 						{#if network.chain.id.equals(session.chain)}
 							{@const isCurrent = currentSession?.actor.toString() === session.actor}
-							{console.log(currentSession?.actor.toString(), session.actor)}
 							<li class="grid grid-cols-[1fr_auto] gap-2">
 								<button
 									data-current={isCurrent}
 									onclick={() => switchSession(session)}
 									class="flex h-12 items-center gap-1 rounded-lg px-4
-									data-[current=true]:bg-skyBlue-500
-									data-[current=true]:text-skyBlue-950
+									data-[current=true]:bg-skyBlue-700
+									data-[current=true]:text-skyBlue-50
+									[@media(any-hover:hover)]:data-[current=false]:hover:bg-mineShaft-950
+									[@media(any-hover:hover)]:data-[current=false]:hover:text-mineShaft-50
 									"
 								>
 									<div class="w-6">
@@ -200,14 +188,17 @@
 										{/if}
 									</div>
 
-									<span>
+									<span class="font-medium">
 										{session.actor}@{session.permission}
 									</span>
 								</button>
 								<button
 									onclick={() => removeSession(session)}
 									data-current={isCurrent}
-									class="grid size-12 place-items-center rounded-lg"
+									class="grid size-12 place-items-center rounded-lg
+									[@media(any-hover:hover)]:hover:bg-mineShaft-950
+									[@media(any-hover:hover)]:hover:text-mineShaft-50
+									"
 								>
 									<LogOut class="size-4" />
 								</button>
@@ -216,6 +207,14 @@
 					{/each}
 				</ul>
 			</section>
+
+			<div class="flex flex-col gap-2 justify-self-end">
+				<Button onclick={addSession} variant="secondary">Add account</Button>
+
+				<Button href={`/${network}/signup`} onclick={closeDrawer} variant="secondary">
+					Create account
+				</Button>
+			</div>
 		</div>
 	</div>
 {/if}

@@ -8,6 +8,7 @@
 
 	import TLVHex from './components/tlvhex.svelte';
 	import { type Snippet } from 'svelte';
+	import Unicovelogo from '$lib/assets/unicovelogo.svelte';
 
 	// const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
@@ -51,7 +52,7 @@
 			<h1 class="text-balance text-3xl font-semibold leading-tight md:text-4xl md:leading-tight">
 				Unicove is your gateway to the EOS Network
 			</h1>
-			<p class="mb-2 text-balance text-xl leading-tight text-white/60 md:text-2xl md:leading-tight">
+			<p class="text-muted mb-2 text-balance text-xl leading-tight md:text-2xl md:leading-tight">
 				Stake, Send, Manage Tokens, and Explore EOS – all with ease
 			</p>
 			<!-- <Button href={`/${data.network}/signup`}>Create your EOS account now</Button> -->
