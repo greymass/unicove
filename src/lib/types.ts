@@ -8,7 +8,8 @@ import {
 	PermissionLevel,
 	TimePointSec,
 	UInt64,
-	UInt128
+	UInt128,
+	Asset
 } from '@wharfkit/antelope';
 
 import * as SystemContract from '$lib/wharf/contracts/system';
@@ -58,4 +59,9 @@ export class SampledUsage extends Struct {
 	@Struct.field(API.v1.AccountObject) declare account: API.v1.AccountObject;
 	@Struct.field(UInt128) declare cpu: UInt128;
 	@Struct.field(UInt128) declare net: UInt128;
+}
+
+export interface HistoricalPrice {
+	date: Date;
+	value: Asset;
 }
