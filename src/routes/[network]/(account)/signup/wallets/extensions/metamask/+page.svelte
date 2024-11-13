@@ -47,7 +47,9 @@
 			});
 			console.log(`Account created: ${accountCreationResponse.accountName}`);
 
-			await wharf.login();
+			await wharf.login({
+				walletPlugin: 'wallet-plugin-metamask'
+			});
 		} catch (error) {
 			console.error('Error creating account:', error);
 			alert(
