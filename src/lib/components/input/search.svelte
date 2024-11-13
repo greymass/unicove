@@ -194,14 +194,14 @@
 		></div>
 		<div
 			use:melt={$content}
-			class="fixed left-1/2 top-1/2 z-50 max-h-[85vh] w-[90vw] max-w-[450px] -translate-x-1/2 -translate-y-1/2 transform rounded-2xl bg-mineShaft-950 p-4 shadow-lg"
+			class="fixed left-1/2 top-1/2 z-50 max-h-[85vh] w-[90vw] max-w-lg -translate-x-1/2 -translate-y-1/2 transform rounded-2xl bg-mineShaft-950 p-4 shadow-lg"
 			transition:scale={{
 				duration: 100,
 				start: 0.95
 			}}
 		>
 			<Stack>
-				<form onsubmit={preventDefault(goToResult)}>
+				<form class="flex flex-col gap-4" onsubmit={preventDefault(goToResult)}>
 					<div class="relative">
 						<input
 							type="text"
@@ -211,15 +211,17 @@
 							bind:this={ref}
 							bind:value={searchValue}
 							placeholder="Enter an account, transaction, key, or block..."
-							{...props}
 							class="w-full rounded-lg border-2 border-skyBlue-500 bg-transparent p-4 focus:outline-none"
 						/>
 
-						<SearchIcon
-							class="absolute right-4 top-1/2 size-5 -translate-y-1/2 outline-none focus:ring-2 focus:ring-skyBlue-500"
-						/>
+						<div
+							class="text-muted absolute inset-y-1 right-4 hidden place-items-center bg-mineShaft-950 sm:grid"
+						>
+							<SearchIcon class="size-5 " />
+						</div>
 					</div>
-					<div class="mt-2 flex gap-2">
+
+					<div class="flex gap-2">
 						<Button variant="secondary" meltAction={close}>Close</Button>
 						<Button variant="primary" type="submit">Search</Button>
 					</div>
@@ -227,10 +229,10 @@
 
 				{#if history.length}
 					<div class="px-2">
-						<div class="table-styles grid grid-cols-[1fr_1fr_auto] gap-x-4">
+						<div class="table-styles grid grid-cols-[1fr_auto] gap-x-4 sm:grid-cols-[1fr_1fr_auto]">
 							<div class="table-head-styles col-span-full grid grid-cols-subgrid">
 								<span class="pl-2">Recent</span>
-								<span>Type</span>
+								<span class="hidden sm:block">Type</span>
 								<button class="justify-self-end" onclick={() => searchHistory.clear()}>Clear</button
 								>
 							</div>
@@ -248,7 +250,7 @@
 									data-active={index === selectedIndex}
 								>
 									<a
-										class="col-span-2 grid grid-cols-subgrid items-center focus:outline-none focus:ring focus:ring-inset focus:ring-white"
+										class="grid grid-cols-subgrid items-center focus-visible:outline-none focus-visible:ring focus-visible:ring-inset focus-visible:ring-solar-500 sm:col-span-2"
 										href={item.result}
 										onclick={closeSearch}
 									>
@@ -274,13 +276,19 @@
 											{/if}
 										</div>
 
-										<span class="align-center text-muted text-base font-medium capitalize"
+										<span
+											class="align-center text-muted hidden text-base font-medium capitalize sm:block"
 											>{item.searchType}</span
 										>
 									</a>
 
 									<button
-										class="grid size-12 place-items-center justify-self-end"
+										class="grid size-12 place-items-center justify-self-end
+										focus-visible:outline-none
+										focus-visible:ring
+										focus-visible:ring-inset
+										focus-visible:ring-solar-500
+										"
 										onclick={() => searchHistory.remove(index)}
 									>
 										<X class=" text-muted " />
