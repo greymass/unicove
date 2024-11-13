@@ -16,50 +16,54 @@
 
 <h1 class="h1 mb-8">Design System</h1>
 
+{#snippet divider()}
+	<hr class="my-8 h-px border-0 bg-shark-900" />
+{/snippet}
+
 <Stack class="space-y-12 pb-12">
 	<Typography />
 
-	<hr class="bg-slate-200 dark:bg-slate-800 my-8 h-px border-0" />
+	{@render divider()}
 
 	<Buttons />
 
-	<hr class="bg-slate-200 dark:bg-slate-800 my-8 h-px border-0" />
+	{@render divider()}
 
 	<Select />
 
-	<hr class="bg-slate-200 dark:bg-slate-800 my-8 h-px border-0" />
+	{@render divider()}
 
 	<Inputs />
 
-	<hr class="bg-slate-200 dark:bg-slate-800 my-8 h-px border-0" />
+	{@render divider()}
 
 	<Cards />
 
-	<hr class="bg-slate-200 dark:bg-slate-800 my-8 h-px border-0" />
+	{@render divider()}
 
 	<Navigation />
 
-	<hr class="bg-slate-200 dark:bg-slate-800 my-8 h-px border-0" />
+	{@render divider()}
 
 	<Progress />
 
-	<hr class="bg-slate-200 dark:bg-slate-800 my-8 h-px border-0" />
+	{@render divider()}
 
 	<Code />
 
-	<hr class="bg-slate-200 dark:bg-slate-800 my-8 h-px border-0" />
+	{@render divider()}
 
 	<Tables />
 
-	<hr class="bg-slate-200 dark:bg-slate-800 my-8 h-px border-0" />
+	{@render divider()}
 
 	<Charts />
 
-	<hr class="bg-slate-200 dark:bg-slate-800 my-8 h-px border-0" />
+	{@render divider()}
 
 	<Layouts />
 
-	<hr class="bg-slate-200 dark:bg-slate-800 my-8 h-px border-0" />
+	{@render divider()}
 
 	<Tooltips />
 </Stack>

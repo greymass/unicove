@@ -13,6 +13,7 @@ export default {
 			black: colors.black,
 			white: colors.white,
 			red: colors.red,
+			green: colors.green,
 			zinc: colors.zinc
 		},
 		extend: {

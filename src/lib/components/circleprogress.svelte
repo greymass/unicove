@@ -31,7 +31,7 @@
 			r="28"
 			transform="rotate(-90, 30, 30)"
 			stroke-dasharray={dasharray}
-			class="stroke-blue-400 fill-none stroke-[4]"
+			class="fill-none stroke-skyBlue-400 stroke-[4]"
 		/>
 	</svg>
 	{#if children}
