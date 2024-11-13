@@ -64,7 +64,7 @@
 	let bytesInput: BytesInput;
 
 	const layoutClasses = $derived({
-		container: `mx-auto grid gap-6 ${data.historicalPrices.length ? 'lg:grid-cols-2 max-w-7xl' : ''}`,
+		container: `grid gap-6 ${data.historicalPrices.length ? 'lg:grid-cols-2' : 'max-w-lg'}`,
 		calculatorWrapper: `${data.historicalPrices.length ? 'lg:col-start-1 lg:row-span-2' : ''}`,
 		statsWrapper: `gap-6 ${data.historicalPrices.length ? 'lg:col-start-2' : ''}`
 	});
