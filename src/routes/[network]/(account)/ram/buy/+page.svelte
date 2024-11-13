@@ -102,29 +102,29 @@
 		<RamResource class="hidden" ramAvailable={ramAvailableSize} />
 
 		<Stack class="gap-3">
-			<Label class="text-lg" for="bytesInput">Amount to buy</Label>
+			<Label class="text-lg" for="bytesInput">Amount of RAM to buy:</Label>
 			<div class="flex gap-4">
+				<div class="flex-1">
+					<BytesInput
+						autofocus
+						bind:value={buyRamState.bytes}
+						bind:this={bytesInput}
+						oninput={setBytesAmount}
+					/>
+				</div>
 				<div class="flex-1">
 					<AssetInput
 						bind:value={buyRamState.tokens}
 						bind:this={assetInput}
 						oninput={setAssetAmount}
-						autofocus
-					/>
-				</div>
-				<div class="flex-1">
-					<BytesInput
-						bind:value={buyRamState.bytes}
-						bind:this={bytesInput}
-						oninput={setBytesAmount}
 					/>
 				</div>
 			</div>
 			{#if buyRamState.insufficientBalance}
 				<p class="text-red-500">Insufficient balance. Please enter a smaller amount.</p>
 			{/if}
-			<p>
-				Balance available:
+			<p class="text-right">
+				Balance:
 				{#if context.account}
 					{context.account.balance?.liquid}
 				{:else}
@@ -133,29 +133,29 @@
 			</p>
 		</Stack>
 
-		<Button type="submit" class="mt-4 w-full" disabled={!buyRamState.valid}>Confirm Buy RAM</Button>
+		<Button type="submit" class="mt-4 w-full" disabled={!buyRamState.valid}>Buy RAM</Button>
 
-		<Stack class="mt-4 gap-3">
-			<div class="grid grid-cols-2 gap-y-0 text-lg">
-				<p class="text-gray-400">RAM Price</p>
+		<Stack class="gap-3">
+			<div class="mt-4 grid grid-cols-2 gap-y-0 text-lg">
+				<p class="text-gray-400">EOS/RAM Price (KB)</p>
 				<AssetText variant="full" class="text-right" value={buyRamState.pricePerKB} />
 
-				<div class="border-gray-600 col-span-2 my-2 border-b"></div>
+				<div class="col-span-2 my-2 border-b border-mineShaft-900"></div>
 
 				<p class="text-gray-400">RAM to be bought</p>
 				<AssetText variant="full" class="text-right" value={buyRamState.kbs} />
 
-				<div class="border-gray-600 col-span-2 my-2 border-b"></div>
+				<div class="col-span-2 my-2 border-b border-mineShaft-900"></div>
 
-				<p class="text-gray-400">RAM Value</p>
+				<p class="text-gray-400">RAM Purchase Value</p>
 				<AssetText variant="full" class="text-right" value={buyRamState.bytesValue} />
 
-				<div class="border-gray-600 col-span-2 my-2 border-b"></div>
+				<div class="col-span-2 my-2 border-b border-mineShaft-900"></div>
 
 				<p class="text-gray-400">Network Fee (0.5%)</p>
 				<AssetText variant="full" class="text-right" value={buyRamState.fee} />
 
-				<div class="border-gray-600 col-span-2 my-2 border-b"></div>
+				<div class="col-span-2 my-2 border-b border-mineShaft-900"></div>
 
 				<p class="text-gray-400">Total Cost</p>
 				<AssetText variant="full" class="text-right" value={buyRamState.bytesCost} />
@@ -163,9 +163,9 @@
 
 			{#if buyRamState.valid}
 				{#if buyRamState.format === 'asset'}
-					<SummaryBuyRAM action={{ data: buyRamState.toJSON() }} />
+					<SummaryBuyRAM class="hidden" action={{ data: buyRamState.toJSON() }} />
 				{:else}
-					<SummaryBuyRAMBytes action={{ data: buyRamState.toJSON() }} />
+					<SummaryBuyRAMBytes class="hidden" action={{ data: buyRamState.toJSON() }} />
 				{/if}
 			{/if}
 		</Stack>
