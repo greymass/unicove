@@ -91,7 +91,7 @@
 
 <Card>
 	<form onsubmit={preventDefault(handleSellRAM)} class="mx-auto max-w-2xl space-y-4">
-		<RamResource ramAvailable={ramAvailableSize} />
+		<RamResource class="hidden" ramAvailable={ramAvailableSize} />
 
 		<Stack class="gap-3">
 			<Label class="text-lg" for="bytesInput">Amount to sell</Label>

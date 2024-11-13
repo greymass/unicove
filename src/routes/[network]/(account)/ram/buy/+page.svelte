@@ -99,7 +99,7 @@
 
 <Card>
 	<form onsubmit={preventDefault(handleBuyRAM)} class="mx-auto max-w-2xl space-y-4">
-		<RamResource ramAvailable={ramAvailableSize} />
+		<RamResource class="hidden" ramAvailable={ramAvailableSize} />
 
 		<Stack class="gap-3">
 			<Label class="text-lg" for="bytesInput">Amount to buy</Label>
@@ -135,30 +135,29 @@
 
 		<Button type="submit" class="mt-4 w-full" disabled={!buyRamState.valid}>Confirm Buy RAM</Button>
 
-		<!-- TODO: Use table -->
 		<Stack class="mt-4 gap-3">
 			<div class="grid grid-cols-2 gap-y-0 text-lg">
-				<p class="text-muted">RAM Price</p>
+				<p class="text-gray-400">RAM Price</p>
 				<AssetText variant="full" class="text-right" value={buyRamState.pricePerKB} />
 
-				<div class="col-span-2 my-2 border-b border-mineShaft-600"></div>
+				<div class="border-gray-600 col-span-2 my-2 border-b"></div>
 
-				<p class="text-muted">RAM to be bought</p>
+				<p class="text-gray-400">RAM to be bought</p>
 				<AssetText variant="full" class="text-right" value={buyRamState.kbs} />
 
-				<div class="col-span-2 my-2 border-b border-mineShaft-600"></div>
+				<div class="border-gray-600 col-span-2 my-2 border-b"></div>
 
-				<p class="text-muted">RAM Value</p>
+				<p class="text-gray-400">RAM Value</p>
 				<AssetText variant="full" class="text-right" value={buyRamState.bytesValue} />
 
-				<div class="col-span-2 my-2 border-b border-mineShaft-600"></div>
+				<div class="border-gray-600 col-span-2 my-2 border-b"></div>
 
-				<p class="text-muted">Network Fee (0.5%)</p>
+				<p class="text-gray-400">Network Fee (0.5%)</p>
 				<AssetText variant="full" class="text-right" value={buyRamState.fee} />
 
-				<div class="col-span-2 my-2 border-b border-mineShaft-600"></div>
+				<div class="border-gray-600 col-span-2 my-2 border-b"></div>
 
-				<p class="text-muted">Total Cost</p>
+				<p class="text-gray-400">Total Cost</p>
 				<AssetText variant="full" class="text-right" value={buyRamState.bytesCost} />
 			</div>
 
