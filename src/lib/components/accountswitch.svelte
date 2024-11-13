@@ -5,19 +5,15 @@
 	import { Session, type SerializedSession } from '@wharfkit/session';
 	import { chainLogos } from '@wharfkit/common';
 
-	import { chainMap } from '$lib/wharf/chains';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
 
 	import NetworkSwitch from '$lib/components/networkswitch.svelte';
 
 	import CircleX from 'lucide-svelte/icons/circle-x';
-	import UserPlus from 'lucide-svelte/icons/user-plus';
 	import LogOut from 'lucide-svelte/icons/log-out';
 	import User from 'lucide-svelte/icons/user';
 	import UserCheck from 'lucide-svelte/icons/user-check';
-	import { goto } from '$app/navigation';
-	import { languageTag } from '$lib/paraglide/runtime';
 	import Button from './button/button.svelte';
 
 	const context = getContext<UnicoveContext>('state');

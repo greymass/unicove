@@ -1,16 +1,12 @@
 <script lang="ts">
 	import { Box, Card, Stack, Subgrid, Switcher } from '$lib/components/layout';
-	// import { getContext } from 'svelte';
-	// import type { UnicoveContext } from '$lib/state/client.svelte.js';
 	import Button from '$lib/components/button/button.svelte';
 	import EOS from '$lib/assets/EOS@2x.svg';
 	import Metamask from '$lib/assets/metamask.svg';
 
 	import TLVHex from './components/tlvhex.svelte';
 	import { type Snippet } from 'svelte';
-	import Unicovelogo from '$lib/assets/unicovelogo.svelte';
 
-	// const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
 
 	const APY = 99;

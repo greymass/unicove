@@ -41,7 +41,7 @@ export class AccountState {
 	public balance = $derived.by(() =>
 		this.network ? getBalance(this.network, this.sources) : undefined
 	);
-	public balances = $derived.by(() =>
+	public balances: TokenBalance[] = $derived.by(() =>
 		this.network
 			? getBalances(
 					this.network,
@@ -50,7 +50,7 @@ export class AccountState {
 					this.network.tokenmeta,
 					this.balance?.liquid
 				)
-			: undefined
+			: []
 	);
 	public delegations = $derived(getDelegations(this.sources));
 	public cpu = $derived.by(() => (this.account ? this.account.resource('cpu') : undefined));
@@ -270,6 +270,31 @@ export function getBalances(
 				})
 			);
 		});
+
+		// Sort balances alphabetically
+		balances.sort((a, b) => {
+			if (a.asset.symbol.name < b.asset.symbol.name) {
+				return -1;
+			}
+			if (a.asset.symbol.name > b.asset.symbol.name) {
+				return 1;
+			}
+			return 0;
+		});
+
+		// Move system token to the top of the list regardless of alphabetical order
+		const systemToken = network.chain.systemToken;
+		if (systemToken) {
+			balances.sort((a, b) => {
+				if (a.asset.symbol.equals(systemToken.symbol)) {
+					return -1;
+				}
+				if (b.asset.symbol.equals(systemToken.symbol)) {
+					return 1;
+				}
+				return 0;
+			});
+		}
 
 		return balances;
 	}
