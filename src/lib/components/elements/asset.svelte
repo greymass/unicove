@@ -19,7 +19,7 @@
 	}: AssetProps = $props();
 
 	function formatAssetValue(value?: Asset) {
-		return Number(value?.value || fallback).toLocaleString(languageTag(), {
+		return Number(value?.quantity || fallback).toLocaleString(languageTag(), {
 			minimumFractionDigits: value?.symbol.precision
 		});
 	}
