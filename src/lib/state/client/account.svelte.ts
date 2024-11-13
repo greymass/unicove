@@ -50,7 +50,7 @@ export class AccountState {
 					this.network.tokenmeta,
 					this.balance?.liquid
 				)
-			: undefined
+			: []
 	);
 	public delegations = $derived(getDelegations(this.sources));
 	public cpu = $derived.by(() => (this.account ? this.account.resource('cpu') : undefined));
