@@ -6,7 +6,6 @@
 
 	import { page } from '$app/stores';
 	import { getSetting } from '$lib/state/settings.svelte';
-	import * as m from '$lib/paraglide/messages.js';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import Button from '$lib/components/button/button.svelte';
@@ -14,7 +13,6 @@
 	import Code from '$lib/components/code.svelte';
 	import Grid from '$lib/components/layout/grid.svelte';
 	import Label from '$lib/components/input/label.svelte';
-	// import Pageheader from '$lib/components/pageheader.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
 	import Textinput from '$lib/components/input/text.svelte';
 
@@ -123,17 +121,6 @@
 </script>
 
 <Stack>
-	<!-- <Pageheader -->
-	<!-- 	title={m.contract_action_view_title({ -->
-	<!-- 		action: data.action.name -->
-	<!-- 	})} -->
-	<!-- 	subtitle={m.contract_action_view_description({ -->
-	<!-- 		action: data.action.name, -->
-	<!-- 		contract: String(data.contract), -->
-	<!-- 		network: data.network.chain.name -->
-	<!-- 	})} -->
-	<!-- /> -->
-
 	<Grid>
 		<Card>
 			<Fields abi={data.abi} fields={data.actionData?.fields || []} {state} />

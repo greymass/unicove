@@ -180,13 +180,6 @@ export class NetworkState {
 	}
 }
 
-interface NetworkServiceInstance {
-	chain: string;
-	network: NetworkState;
-}
-
-const services = $state<NetworkServiceInstance[]>([]);
-
 export function getRAMPrice(state: RAMState, systemTokenPrice?: Asset) {
 	const cost = state.price_per_kb(1);
 	return {
