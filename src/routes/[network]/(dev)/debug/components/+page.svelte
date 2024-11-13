@@ -19,47 +19,47 @@
 <Stack class="space-y-12 pb-12">
 	<Typography />
 
-	<hr class="my-8 h-px border-0 bg-slate-200 dark:bg-slate-800" />
+	<hr class="bg-slate-200 dark:bg-slate-800 my-8 h-px border-0" />
 
 	<Buttons />
 
-	<hr class="my-8 h-px border-0 bg-slate-200 dark:bg-slate-800" />
+	<hr class="bg-slate-200 dark:bg-slate-800 my-8 h-px border-0" />
 
 	<Select />
 
-	<hr class="my-8 h-px border-0 bg-slate-200 dark:bg-slate-800" />
+	<hr class="bg-slate-200 dark:bg-slate-800 my-8 h-px border-0" />
 
 	<Inputs />
 
-	<hr class="my-8 h-px border-0 bg-slate-200 dark:bg-slate-800" />
+	<hr class="bg-slate-200 dark:bg-slate-800 my-8 h-px border-0" />
 
 	<Cards />
 
-	<hr class="my-8 h-px border-0 bg-slate-200 dark:bg-slate-800" />
+	<hr class="bg-slate-200 dark:bg-slate-800 my-8 h-px border-0" />
 
 	<Navigation />
 
-	<hr class="my-8 h-px border-0 bg-slate-200 dark:bg-slate-800" />
+	<hr class="bg-slate-200 dark:bg-slate-800 my-8 h-px border-0" />
 
 	<Progress />
 
-	<hr class="my-8 h-px border-0 bg-slate-200 dark:bg-slate-800" />
+	<hr class="bg-slate-200 dark:bg-slate-800 my-8 h-px border-0" />
 
 	<Code />
 
-	<hr class="my-8 h-px border-0 bg-slate-200 dark:bg-slate-800" />
+	<hr class="bg-slate-200 dark:bg-slate-800 my-8 h-px border-0" />
 
 	<Tables />
 
-	<hr class="my-8 h-px border-0 bg-slate-200 dark:bg-slate-800" />
+	<hr class="bg-slate-200 dark:bg-slate-800 my-8 h-px border-0" />
 
 	<Charts />
 
-	<hr class="my-8 h-px border-0 bg-slate-200 dark:bg-slate-800" />
+	<hr class="bg-slate-200 dark:bg-slate-800 my-8 h-px border-0" />
 
 	<Layouts />
 
-	<hr class="my-8 h-px border-0 bg-slate-200 dark:bg-slate-800" />
+	<hr class="bg-slate-200 dark:bg-slate-800 my-8 h-px border-0" />
 
 	<Tooltips />
 </Stack>

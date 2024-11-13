@@ -166,7 +166,7 @@
 		onkeydown={cycleUnit}
 		role="button"
 		tabindex="0"
-		class="absolute right-2 top-1/2 flex w-16 -translate-y-1/2 cursor-pointer items-center justify-center rounded-md bg-transparent py-2 text-skyBlue-500 transition-all duration-200 ease-in-out hover:text-sky-300"
+		class="hover:text-sky-300 absolute right-2 top-1/2 flex w-16 -translate-y-1/2 cursor-pointer items-center justify-center rounded-md bg-transparent py-2 text-skyBlue-500 transition-all duration-200 ease-in-out"
 	>
 		<span class="text-sm font-medium">{unit}</span>
 		<span class="ml-1 text-xs">⇅</span>
