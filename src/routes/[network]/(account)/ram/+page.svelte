@@ -64,7 +64,7 @@
 	let bytesInput: BytesInput;
 </script>
 
-<div class="grid gap-6 lg:grid-cols-2">
+<div class="grid gap-6 pb-6 lg:grid-cols-2">
 	<!-- Buy Sell Card -->
 	<Card class="flex *:flex-1 lg:col-start-1">
 		<div class="grid content-between gap-4">
@@ -190,22 +190,24 @@
 		</div>
 	{/if}
 
-	<Grid class="gap-6 lg:col-start-2">
-		<Card>
-			<h3 class="text-muted">
-				RAM Market Cap {data.network.chain.systemToken?.symbol.code || ''}
-			</h3>
-			<AssetText variant="full" value={marketCapEOS} class="text-right" />
-		</Card>
+	<Stack class="gap-6 lg:col-start-2">
+		<Grid class="gap-6">
+			<Card>
+				<h3 class="text-muted">
+					RAM Market Cap {data.network.chain.systemToken?.symbol.code || ''}
+				</h3>
+				<AssetText variant="full" value={marketCapEOS} class="text-right" />
+			</Card>
 
-		<Card>
-			<h3 class="text-muted">RAM Supply</h3>
-			<AssetText variant="full" value={ramSupply} class="text-right" />
-		</Card>
+			<Card>
+				<h3 class="text-muted">RAM Supply</h3>
+				<AssetText variant="full" value={ramSupply} class="text-right" />
+			</Card>
+		</Grid>
 
-		<Card class="w-full">
+		<Card class="lg:col-start-2">
 			<h3 class="text-muted">RAM Market Cap USD</h3>
 			<AssetText variant="full" value={marketCapUSD} class="text-right" />
 		</Card>
-	</Grid>
+	</Stack>
 </div>
