@@ -78,8 +78,7 @@
 		if (!event) {
 			return;
 		}
-		const inputString = String(event.currentTarget.value);
-
+		const inputString = event.currentTarget.value;
 		const numericInput = Number(inputString);
 
 		if (isNaN(numericInput) || numericInput < 0) {
@@ -91,7 +90,11 @@
 		valueSetByParent = false;
 
 		// Allowing input of decimal values
-		if (numericInput && String(numericInput) !== inputString) {
+		if (
+			numericInput &&
+			String(numericInput) !== inputString &&
+			String(numericInput) !== `0${inputString}`
+		) {
 			isAddingDecimal = true;
 			input = inputString || '';
 			return;
