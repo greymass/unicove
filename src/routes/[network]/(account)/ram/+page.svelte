@@ -13,7 +13,6 @@
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
 	import Label from '$lib/components/input/label.svelte';
-	import { Grid } from '$lib/components/layout';
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');
@@ -196,24 +195,30 @@
 		</div>
 	{/if}
 
-	<Stack class={layoutClasses.statsWrapper}>
-		<Grid class="gap-6">
-			<Card>
-				<h3 class="text-muted">
-					RAM Market Cap {data.network.chain.systemToken?.symbol.code || ''}
-				</h3>
-				<AssetText variant="full" value={marketCapEOS} class="text-right" />
-			</Card>
-
-			<Card>
-				<h3 class="text-muted">RAM Supply</h3>
-				<AssetText variant="full" value={ramSupply} class="text-right" />
-			</Card>
-		</Grid>
-
-		<Card>
-			<h3 class="text-muted">RAM Market Cap USD</h3>
-			<AssetText variant="full" value={marketCapUSD} class="text-right" />
-		</Card>
-	</Stack>
+	<Card>
+		<table>
+			<tbody class="*:border-b *:border-mineShaft-900 *:pt-8 last:*:border-b-0 *:even:text-right">
+				<tr class="*:py-2">
+					<td class="text-muted text-base"
+						>RAM Market Cap {data.network.chain.systemToken?.symbol.code || ''}</td
+					>
+					<td class="text-right">
+						<AssetText variant="full" value={marketCapEOS} />
+					</td>
+				</tr>
+				<tr class="*:py-2">
+					<td class="text-muted text-base">RAM Supply</td>
+					<td class="text-right">
+						<AssetText variant="full" value={ramSupply} />
+					</td>
+				</tr>
+				<tr class="*:py-2">
+					<td class="text-muted text-base">RAM Market Cap USD</td>
+					<td class="text-right">
+						<AssetText variant="full" value={marketCapUSD} />
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</Card>
 </div>
