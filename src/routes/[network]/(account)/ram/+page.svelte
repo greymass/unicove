@@ -207,15 +207,15 @@
 					</td>
 				</tr>
 				<tr class="*:py-2">
-					<td class="text-muted text-base">RAM Supply</td>
-					<td class="text-right">
-						<AssetText variant="full" value={ramSupply} />
-					</td>
-				</tr>
-				<tr class="*:py-2">
 					<td class="text-muted text-base">RAM Market Cap USD</td>
 					<td class="text-right">
 						<AssetText variant="full" value={marketCapUSD} />
+					</td>
+				</tr>
+				<tr class="*:py-2">
+					<td class="text-muted text-base">RAM Supply</td>
+					<td class="text-right">
+						<AssetText variant="full" value={ramSupply} />
 					</td>
 				</tr>
 			</tbody>
