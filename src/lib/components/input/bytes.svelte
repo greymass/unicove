@@ -79,8 +79,6 @@
 		const inputString = event.currentTarget.value;
 		const numericInput = Number(inputString);
 
-		console.log('numericInput', numericInput);
-
 		if (isNaN(numericInput) || numericInput < 0) {
 			valid = false;
 			return;
