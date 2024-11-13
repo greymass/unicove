@@ -11,6 +11,6 @@
 	const account = $derived(context.account);
 </script>
 
-<div class="container rounded-2xl sm:bg-shark-900/20 sm:p-6 sm:pb-10">
+<div class="container rounded-2xl pb-4 sm:bg-shark-900/20 sm:p-6 sm:pb-10">
 	<Renting rentType="REX" {network} {account}></Renting>
 </div>

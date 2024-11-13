@@ -60,6 +60,19 @@
 	</Stack>
 
 	<Stack>
+		<h2 class="h2">Number Input With Unit</h2>
+		<NumberInput
+			id="numberInput"
+			unit="kb"
+			bind:value={numberValue}
+			min={0}
+			max={100}
+			step={1}
+			debug
+		/>
+	</Stack>
+
+	<Stack>
 		<h2 class="h2">Bytes Input</h2>
 		<BytesInput id="bytesInput" bind:value={bytesValue} debug />
 	</Stack>

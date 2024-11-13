@@ -1,6 +1,5 @@
 <script lang="ts">
-	import CpuIcon from '$lib/assets/resources/cpu.svg';
-	import NetIcon from '$lib/assets/resources/net.svg';
+	import { CpuIcon, WifiIcon } from 'lucide-svelte';
 
 	interface Props {
 		cpuAvailable: number;
@@ -12,9 +11,9 @@
 </script>
 
 <div class="flex gap-px">
-	<div class="relative h-28 flex-1 rounded-l-lg bg-[#303338]">
+	<div class="relative h-28 flex-1 rounded-l-xl bg-[#303338]">
 		<div class="absolute left-4 top-5">
-			<img src={CpuIcon} class="size-6" alt="cpu icon" />
+			<CpuIcon class="size-6" />
 		</div>
 		<div class="absolute right-3 top-3 text-xl font-bold">CPU</div>
 		<div class="absolute bottom-2 right-3">
@@ -22,9 +21,9 @@
 			<p>Available</p>
 		</div>
 	</div>
-	<div class="relative h-28 flex-1 rounded-r-lg bg-[#303338]">
+	<div class="relative h-28 flex-1 rounded-r-xl bg-[#303338]">
 		<div class="absolute left-5 top-4">
-			<img src={NetIcon} class="size-6" alt="net icon" />
+			<WifiIcon class="size-6" />
 		</div>
 		<div class="absolute right-4 top-3 text-xl font-bold">NET</div>
 		<div class="absolute bottom-2 right-4">

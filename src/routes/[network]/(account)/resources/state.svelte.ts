@@ -159,4 +159,21 @@ export class RentState {
 		};
 		return [contract.action('delegatebw', rentData)];
 	}
+
+	getDebugInfo() {
+		return [
+			['rentType', this.rentType],
+			['balance', this.balance],
+			['payer', this.payer],
+			['receiver', this.receiver],
+			['rentingForSelf', this.rentingForSelf],
+			['thirdReceiver', this.thirdReceiver],
+			['thirdReceiverValid', this.thirdReceiverValid],
+			['valid', this.valid],
+			['cpuAmount', this.cpuAmount || ''],
+			['netAmount', this.netAmount || ''],
+			['cpuFrac', this.cpuFrac || ''],
+			['netFrac', this.netFrac || '']
+		];
+	}
 }
