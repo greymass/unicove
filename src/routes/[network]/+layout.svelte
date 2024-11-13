@@ -128,7 +128,10 @@
 >
 	<header class="col-span-full flex h-12 items-center justify-between">
 		<!-- Larger breakpoints only	 -->
-		<a href="/{data.network}" class="hidden w-min place-self-center md:block">
+		<a
+			href="/{data.network}"
+			class="hidden w-min place-self-center rounded-sm focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-solar-500 md:block"
+		>
 			<UnicoveLogo small />
 		</a>
 

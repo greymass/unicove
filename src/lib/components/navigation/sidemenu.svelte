@@ -74,7 +74,7 @@
 		{#each options as option}
 			<a
 				href={option.href}
-				class="flex h-12 items-center leading-snug transition-opacity hover:opacity-100"
+				class="flex h-12 select-none items-center rounded-lg leading-snug transition-opacity hover:opacity-100 focus-visible:opacity-100 focus-visible:outline focus-visible:outline-solar-500"
 				class:opacity-50={!option.active}
 				class:opacity-100={option.active}
 				aria-current={!!option.active}
