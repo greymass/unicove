@@ -271,6 +271,31 @@ export function getBalances(
 			);
 		});
 
+		// Sort balances alphabetically
+		balances.sort((a, b) => {
+			if (a.asset.symbol.name < b.asset.symbol.name) {
+				return -1;
+			}
+			if (a.asset.symbol.name > b.asset.symbol.name) {
+				return 1;
+			}
+			return 0;
+		});
+
+		// Move system token to the top of the list regardless of alphabetical order
+		const systemToken = network.chain.systemToken;
+		if (systemToken) {
+			balances.sort((a, b) => {
+				if (a.asset.symbol.equals(systemToken.symbol)) {
+					return -1;
+				}
+				if (b.asset.symbol.equals(systemToken.symbol)) {
+					return 1;
+				}
+				return 0;
+			});
+		}
+
 		return balances;
 	}
 
