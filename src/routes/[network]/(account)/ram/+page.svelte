@@ -62,11 +62,17 @@
 
 	let assetInput: AssetInput;
 	let bytesInput: BytesInput;
+
+	const layoutClasses = $derived({
+		container: `mx-auto grid gap-6 ${data.historicalPrices.length ? 'lg:grid-cols-2 max-w-7xl' : ''}`,
+		calculatorWrapper: `${data.historicalPrices.length ? 'lg:col-start-1 lg:row-span-2' : ''}`,
+		statsWrapper: `gap-6 ${data.historicalPrices.length ? 'lg:col-start-2' : ''}`
+	});
 </script>
 
-<div class="grid gap-6 lg:grid-cols-2">
+<div class={layoutClasses.container}>
 	<!-- Buy Sell Card -->
-	<Card class="flex *:flex-1 lg:col-start-1">
+	<Card class="flex *:flex-1">
 		<div class="grid content-between gap-4">
 			<div class="grid">
 				<h3 class="text-muted text-base">Available</h3>
@@ -97,8 +103,8 @@
 	</Card>
 
 	<!-- RAM Calculator -->
-	<div class="lg:col-start-1 lg:row-span-2">
-		<Card class="gap-6 ">
+	<div class={layoutClasses.calculatorWrapper}>
+		<Card class="gap-6">
 			<h3 class="text-xl font-bold">RAM Calculator</h3>
 			<div class="flex gap-4 *:flex-1">
 				<Stack class="gap-2">
@@ -190,7 +196,7 @@
 		</div>
 	{/if}
 
-	<Stack class="gap-6 lg:col-start-2">
+	<Stack class={layoutClasses.statsWrapper}>
 		<Grid class="gap-6">
 			<Card>
 				<h3 class="text-muted">
@@ -205,7 +211,7 @@
 			</Card>
 		</Grid>
 
-		<Card class="lg:col-start-2">
+		<Card>
 			<h3 class="text-muted">RAM Market Cap USD</h3>
 			<AssetText variant="full" value={marketCapUSD} class="text-right" />
 		</Card>
