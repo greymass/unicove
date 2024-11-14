@@ -2,7 +2,6 @@ import type { ActionData, ActivityAction, ActivityActionWrapper } from '$lib/typ
 import { Checksum256, Name } from '@wharfkit/antelope';
 import { languageTag } from '$lib/paraglide/runtime.js';
 
-
 interface IActivityDelegate {
 	getActionName: (currentAccount: string, action: ActivityAction) => string;
 	getActionData: (currentAccount: string, action: ActivityAction, network: string) => ActionData;
@@ -22,24 +21,8 @@ class BaseActivityDelegate implements IActivityDelegate {
 	}
 
 	getActionData(currentAccount: string, action: ActivityAction, network: string): ActionData {
-		const records: Array<[string, string]> = Object.entries(action.data).map((item) => {
-			let value = item[1];
-			let key = String(item[0]);
-			let valueStr;
-			if (!value) {
-				valueStr = '';
-			} else if (Array.isArray(value)) {
-				valueStr = value.join(',');
-			}
-			if (typeof value === 'object') {
-				valueStr = JSON.stringify(value);
-			} else {
-				valueStr = String(value);
-			}
-			return [key, valueStr];
-		});
-		const memos = records.find((item) => item[0] === 'memo');
-		return { records: records, memo: memos ? memos[1] : undefined, src: action.data };
+		const memo = action.data['memo'];
+		return { memo: memo, json: action.data };
 	}
 
 	shouldShow(currentAccount: string, action: ActivityAction) {
@@ -178,11 +161,11 @@ class RamActivityDelegate extends SystemActivityDelegate {
 		const act = String(action.action);
 		let explanation = undefined;
 		if ('buyrambytes' === act) {
-			explanation = `${this.generateUserSpan(action.data['payer'], network)} bought ${this.generateWhiteTextSpan(action.data['bytes']+ ' bytes')} RAM for ${this.generateUserSpan(action.data['receiver'], network)}`;
+			explanation = `${this.generateUserSpan(action.data['payer'], network)} bought ${this.generateWhiteTextSpan(action.data['bytes'] + ' bytes')} RAM for ${this.generateUserSpan(action.data['receiver'], network)}`;
 		} else if ('buyram' === act) {
 			explanation = `${this.generateUserSpan(action.data['payer'], network)} bought ${this.generateWhiteTextSpan(action.data['quant'])} RAM for ${this.generateUserSpan(action.data['receiver'], network)}`;
 		} else if ('sellram' === act) {
-			explanation = `${this.generateUserSpan(action.data['account'], network)} sold ${this.generateWhiteTextSpan(action.data['bytes']+ ' bytes')} RAM`;
+			explanation = `${this.generateUserSpan(action.data['account'], network)} sold ${this.generateWhiteTextSpan(action.data['bytes'] + ' bytes')} RAM`;
 		}
 		if (!explanation)
 			explanation = super.generateActionDataExplanation(currentAccount, action, network);

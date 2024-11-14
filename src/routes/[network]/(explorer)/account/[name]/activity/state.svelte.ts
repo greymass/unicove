@@ -59,7 +59,6 @@ export class ActivityLoader {
 	}
 
 	public setAccount(account: string) {
-		console.log('................setAccount');
 		if (this.account !== account) {
 			this.account = account;
 			this.scene.reset();
@@ -69,7 +68,6 @@ export class ActivityLoader {
 	}
 
 	public load() {
-		console.log('................load');
 		if (!this.account) {
 			throw new Error('set account first');
 		}
@@ -80,7 +78,6 @@ export class ActivityLoader {
 	}
 
 	public laodMore() {
-		console.log('................laodMore');
 		if (!this.account) {
 			throw new Error('set account first');
 		}
@@ -93,7 +90,6 @@ export class ActivityLoader {
 		try {
 			this.scene.setLoading(true);
 			const startIndex = more ? this.scene!.loadStart : 1;
-			console.log('refresh..................., startIndex = ', startIndex);
 			const response = await fetch(
 				`/${this.network}/api/account/${this.account}/activity/${startIndex}`
 			);
@@ -105,37 +101,18 @@ export class ActivityLoader {
 				try {
 					activityActions.push(ActivityAction.from(item));
 				} catch (e) {
-					console.error('conver to ActivityAction error ', e);
+					console.error('Conver to ActivityAction error ', e);
 				}
 			});
 			const newBatch = convertActivityActions(this.account!, this.network, activityActions);
 			const nextStart = -json.activity.last;
 			const hasMore = newBatch.length > 0 && json.activity.last > 0;
-			const now = Date.now();
 			if (!more) {
-				console.log(
-					'newList = ',
-					newBatch.length,
-					', nextStart = ',
-					nextStart,
-					', hasMore = ',
-					hasMore
-				);
 				this.scene.setList(newBatch, nextStart, hasMore);
 			} else {
-				console.log(
-					'appendList = ',
-					newBatch.length,
-					', nextStart = ',
-					nextStart,
-					', hasMore = ',
-					hasMore
-				);
 				this.scene.appendList(newBatch, nextStart, hasMore);
 			}
-			console.log('refresh....finish');
 		} catch (error: unknown) {
-			console.log('refresh....error');
 			console.error('Error fetching activity actions:', error);
 		} finally {
 			this.scene.setLoading(false);

@@ -47,8 +47,7 @@ export interface ActivityActionWrapper {
 export interface ActionData {
 	explanation?: string;
 	memo?: string;
-	records: Array<[string, string]>;
-	src:any;
+	json:string;
 }
 
 export interface DataSources {

@@ -4,13 +4,14 @@
 	import { untrack } from 'svelte';
 	import { ActivityLoader } from './state.svelte.js';
 	import type { ActivityActionWrapper } from '$lib/types.js';
+	import Code from '$lib/components/code.svelte';
+	import Card from '$lib/components/layout/box/card.svelte';
 
 	const { data } = $props();
 
 	const networkName = String(data.network);
 
 	const activityLoader: ActivityLoader = $derived.by(() => {
-		console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>loader');
 		const loader = ActivityLoader.getInst(networkName);
 		const currentAccount = String(data.name);
 		untrack(() => {
@@ -44,9 +45,11 @@
 
 <Stack class="pb-8">
 	{#if isLoading}
-		<Center>
-			<h3 class="h3 py-20">Loading activity list...</h3>
-		</Center>
+		<div class="flex gap-4 py-20 items-center justify-center">
+			<div class="bounce bounce-1 h-3 w-3 rounded-full bg-white"></div>
+			<div class="bounce bounce-2 h-3 w-3 rounded-full bg-white"></div>
+			<div class="bounce bounce-3 h-3 w-3 rounded-full bg-white"></div>
+		</div>
 	{/if}
 	{#if activityActions.length}
 		<div>
@@ -76,7 +79,7 @@
 							<span class="text-white">Time:</span>
 						</div>
 						<div>
-							<span>{activityAction.date}&nbsp &nbsp{activityAction.timeInDay}</span>
+							<span>{activityAction.date}&nbsp&nbsp{activityAction.timeInDay}</span>
 						</div>
 					</div>
 					<div
@@ -93,22 +96,13 @@
 							<div>
 								{@html activityAction.actionData.explanation}
 							</div>
+							{#if activityAction.actionData.memo}
+								<div>
+									<span class="text-sm">Memo: {activityAction.actionData.memo}</span>
+								</div>
+							{/if}
 						{:else}
-							<ul>
-								{#each activityAction.actionData.records as item}
-									<li class="block">
-										<span class="text-pink-500">{item[0]} </span>
-										:
-										<span class="break-all text-cyan-500">{item[1]}</span>
-									</li>
-								{/each}
-							</ul>
-						{/if}
-
-						{#if activityAction.actionData.memo}
-							<div>
-								<span class="text-sm">Memo: {activityAction.actionData.memo}</span>
-							</div>
+							<Code>{JSON.stringify(activityAction.actionData.json, null, 2)}</Code>
 						{/if}
 					</div>
 				</div>
@@ -124,3 +118,37 @@
 		</div>
 	{/if}
 </Stack>
+
+<style>
+	@keyframes bounce {
+		0%,
+		20%,
+		50%,
+		80%,
+		100% {
+			transform: translateY(0);
+		}
+		40% {
+			transform: translateY(-10px);
+		}
+		60% {
+			transform: translateY(-5px);
+		}
+	}
+
+	.bounce {
+		animation: bounce 1.4s infinite ease-in-out;
+	}
+
+	.bounce-1 {
+		animation-delay: 0s;
+	}
+
+	.bounce-2 {
+		animation-delay: 0.2s;
+	}
+
+	.bounce-3 {
+		animation-delay: 0.4s;
+	}
+</style>
