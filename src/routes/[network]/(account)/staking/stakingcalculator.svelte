@@ -10,16 +10,16 @@
 	import type { NetworkState } from '$lib/state/network.svelte';
 
 	interface Props extends HTMLAttributes<HTMLDivElement> {
-		apy: string;
+		apr: string;
 		network: NetworkState;
 		tokenprice: Asset;
 	}
 
-	const { apy, network, tokenprice, ...props }: Props = $props();
+	const { apr, network, tokenprice, ...props }: Props = $props();
 
 	let assetValid: boolean = $state(true);
 	let assetValue: Asset = $state(Asset.from(0, network.chain.systemToken!.symbol));
-	let a = $derived(Number(apy) / 100);
+	let a = $derived(Number(apr) / 100);
 	let d = $derived(a / 365);
 	let m = $derived(a / 12);
 	let records = $derived.by(() => {

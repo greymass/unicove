@@ -18,7 +18,7 @@
 
 	let hints = $derived([
 		{ key: 'Minimum lockup', value: '21 Days' },
-		{ key: '~APY', value: manager.apy + '%' },
+		{ key: '~APR', value: manager.apr + '%' },
 		{ key: 'You will stake', value: manager.assetValue.toString() },
 		{ key: 'Estimated Yield(per year)', value: String(manager.estimateYield) }
 	]);
