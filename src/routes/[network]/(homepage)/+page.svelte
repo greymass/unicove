@@ -222,7 +222,7 @@
 	</section>
 
 	<!-- Charts -->
-	<section class="col-span-full">
+	<section class="col-span-full hidden">
 		<Switcher>
 			<div>
 				{#if ramPrices.length}
