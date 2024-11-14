@@ -12,6 +12,7 @@
 	import Tables from './sections/tables.svelte';
 	import Charts from './sections/charts.svelte';
 	import Tooltips from './sections/tooltips.svelte';
+	import Chips from './sections/chips.svelte';
 </script>
 
 <h1 class="h1 mb-8">Design System</h1>
@@ -29,11 +30,7 @@
 
 	{@render divider()}
 
-	<Select />
-
-	{@render divider()}
-
-	<Inputs />
+	<Chips />
 
 	{@render divider()}
 
@@ -58,6 +55,14 @@
 	{@render divider()}
 
 	<Charts />
+
+	{@render divider()}
+
+	<Select />
+
+	{@render divider()}
+
+	<Inputs />
 
 	{@render divider()}
 

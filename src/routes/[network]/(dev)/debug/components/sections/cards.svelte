@@ -1,5 +1,6 @@
 <script>
 	import Button from '$lib/components/button/button.svelte';
+	import Chip from '$lib/components/chip.svelte';
 
 	import { Card, Stack, Switcher } from '$lib/components/layout';
 </script>
