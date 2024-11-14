@@ -19,9 +19,14 @@
 	}: AssetProps = $props();
 
 	function formatAssetValue(value?: Asset) {
-		return Number(value?.quantity || fallback).toLocaleString(languageTag(), {
-			minimumFractionDigits: value?.symbol.precision
-		});
+		if (value) {
+			const [integerPart, decimalPart] = value.quantity.split('.');
+			const bigInt = BigInt(integerPart);
+			const formatInt = new Intl.NumberFormat(languageTag()).format(bigInt);
+			return decimalPart ? `${formatInt}.${decimalPart}` : formatInt;
+		} else {
+			return fallback;
+		}
 	}
 </script>
 
