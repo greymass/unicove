@@ -12,8 +12,9 @@
 	const activityLoader: ActivityLoader = $derived.by(() => {
 		console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>loader');
 		const loader = ActivityLoader.getInst(networkName);
+		const currentAccount = String(data.name);
 		untrack(() => {
-			loader.setAccount(String(data.name));
+			loader.setAccount(currentAccount);
 			loader.load();
 		});
 		return loader;
@@ -49,7 +50,7 @@
 	{/if}
 	{#if activityActions.length}
 		<div>
-			<div class="hidden border-b border-neutral-300/10 lg:flex lg:flex-row">
+			<div class="hidden border-b border-mineShaft-900 lg:flex lg:flex-row">
 				<div class="grow-0 basis-[15%] px-2 py-3">ID</div>
 				<div class="grow-0 basis-[22%] px-2 py-3">Time</div>
 				<div class="grow-0 basis-[25%] px-2 py-3">Action</div>
@@ -58,7 +59,7 @@
 
 			{#each activityActions as activityAction}
 				<div
-					class="text-muted box-border flex flex-col break-words border-b border-neutral-300/10 py-4 lg:flex-row"
+					class="text-muted box-border flex flex-col break-words border-b border-mineShaft-900 py-4 lg:flex-row"
 				>
 					<div class="flex flex-1 gap-2 px-2 py-1 lg:max-w-[15%] lg:grow-0 lg:basis-[15%] lg:py-3">
 						<div class="block lg:hidden">
@@ -114,7 +115,10 @@
 			{/each}
 		</div>
 		<div class="flex items-center">
-			<a onclick={clickLoadMore} class="mx-auto border-2 border-gray-500 bg-sky-500 px-5 py-3">
+			<a
+				onclick={clickLoadMore}
+				class="mx-auto min-w-32 border-2 border-shark-900/20 bg-skyBlue-500 px-5 py-3 text-center"
+			>
 				{loadingText}
 			</a>
 		</div>
