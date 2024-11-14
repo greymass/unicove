@@ -121,7 +121,7 @@ export function getUnstakableBalance(
 		: Asset.from(0, network ? network.chain.systemToken!.symbol : defaultSymbol);
 }
 
-export function getAPY(network: NetworkState): string {
+export function getAPR(network: NetworkState): string {
 	const annualReward = 31250000;
 	const totalStaked = Number(network.rexstate!.total_lendable.value);
 	return ((annualReward / totalStaked) * 100).toFixed(2);

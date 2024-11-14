@@ -8,7 +8,7 @@
 		getWithdrawableBalance,
 		getUnstakingBalances,
 		getUnstakableBalance,
-		getAPY
+		getAPR
 	} from '$lib/utils/staking';
 
 	import UnstakingBalances from '$lib/components/elements/unstaking.svelte';
@@ -22,7 +22,7 @@
 		getUnstakingBalances(data.network, data.account)
 	);
 	let unstakable: Asset = $derived(getUnstakableBalance(data.network, data.account, unstaking));
-	let apy: string = $derived(getAPY(data.network));
+	let apr: string = $derived(getAPR(data.network));
 	let usdValue = $derived(
 		Asset.from(
 			staked.value * (data.network.tokenprice ? data.network.tokenprice.value : 0),
@@ -48,8 +48,8 @@
 							</tr>
 
 							<tr>
-								<td>APY</td>
-								<td>{apy} %</td>
+								<td>APR</td>
+								<td>{apr} %</td>
 							</tr>
 
 							<tr>

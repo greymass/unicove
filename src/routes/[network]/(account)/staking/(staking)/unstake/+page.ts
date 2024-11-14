@@ -4,8 +4,8 @@ import type { PageLoad } from './$types';
 export const load: PageLoad = async ({ params, parent }) => {
 	const { network } = await parent();
 	return {
-		title: `Unstake ${network.chain.name}`,
-		subtitle: `Select the amount of ${network.chain.name} to unstake`,
+		title: `Unstake`,
+		subtitle: `Unstake ${network.chain.systemToken?.symbol.code} tokens`,
 		backPath: `/${languageTag()}/${params.network}/staking`,
 		pageMetaTags: {
 			title: `Unstake ${network.chain.name} Tokens`,

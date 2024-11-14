@@ -17,10 +17,10 @@
 	let manager: StakeManager = $state(new StakeManager(data.network));
 
 	let hints = $derived([
-		{ key: 'Minimum lockup', value: '21 Days' },
-		{ key: '~APY', value: manager.apy + '%' },
-		{ key: 'You will stake', value: manager.assetValue.toString() },
-		{ key: 'Estimated Yield(per year)', value: String(manager.estimateYield) }
+		{ key: 'Amount to stake', value: manager.assetValue.toString() },
+		{ key: 'Minimum lockup', value: '21 days' },
+		{ key: 'Estimated APR', value: manager.apr + '%' },
+		{ key: 'Estimated Yield (Yearly)', value: String(manager.estimateYield) }
 	]);
 
 	$effect(() => {
@@ -39,7 +39,7 @@
 	{:else}
 		<TokenCard token={manager.tokenBalance} title="Staked" description="Currently staked" />
 		<Stack class="gap-3">
-			<Label for="assetInput">Amount</Label>
+			<Label for="assetInput">Amount to stake</Label>
 			<AssetInput
 				autofocus
 				bind:this={manager.input}
