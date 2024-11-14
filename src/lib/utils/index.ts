@@ -5,6 +5,7 @@ export * from './strings';
 export * from './ricardian';
 export * from './resources';
 export * from './style';
+export * from './transactions';
 
 export function calculateValue(balance: Asset, currency: Asset): Asset {
 	return Asset.from(

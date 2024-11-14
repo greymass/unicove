@@ -47,8 +47,8 @@
 	});
 
 	// Number of ms between network updates
-	const ACCOUNT_UPDATE_INTERVAL = 3_000;
-	const NETWORK_UPDATE_INTERVAL = 3_000;
+	const ACCOUNT_UPDATE_INTERVAL = 30_000;
+	const NETWORK_UPDATE_INTERVAL = 30_000;
 
 	// Default to not show a banner (avoids flash of banner when hidden)
 	let showBanner = $state(false);

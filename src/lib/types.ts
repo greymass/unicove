@@ -33,6 +33,24 @@ export class ActivityAction extends Struct {
 	@Struct.field(API.v1.OrderedActionsResult) declare raw: API.v1.OrderedActionsResult;
 }
 
+export interface ActivityActionWrapper {
+	src: ActivityAction,
+	id: string;
+	shortId: string;
+	seqId: string;
+	date: string;
+	timeInDay: string;
+	actionName: string;
+	actionData: ActionData;
+}
+
+export interface ActionData {
+	explanation?: string;
+	memo?: string;
+	records: Array<[string, string]>;
+	src:any;
+}
+
 export interface DataSources {
 	get_account?: API.v1.AccountObject | undefined;
 	light_account: LightAPIBalanceRow[];
