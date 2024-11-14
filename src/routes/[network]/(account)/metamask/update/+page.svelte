@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount, getContext } from 'svelte';
+	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import { getSnapsProvider, checkIsFlask } from '@wharfkit/wallet-plugin-metamask';
 
@@ -61,9 +61,10 @@
 </script>
 
 <Box>
-	<h1 class="mb-4 text-2xl font-bold">Update EOS Wallet for MetaMask</h1>
-
 	<Grid itemWidth="100%">
+		<p class="mb-4">
+			This page allows you to install updates to your EOS Wallet snap for MetaMask.
+		</p>
 		{#if !metaMaskState?.isMetaMaskReady}
 			<Card class="mb-4">
 				<h2 class="mb-2 text-xl font-semibold">MetaMask Not Detected</h2>
