@@ -73,7 +73,7 @@
 			</Card>
 		{:else}
 			<Card class="mb-4">
-				<p class="mb-2">Current version: {currentVersion}</p>
+				<p class="mb-2">Currently installed version: {currentVersion}</p>
 				{#if latestVersion}
 					<p class="mb-2">Latest version: {latestVersion}</p>
 				{/if}
