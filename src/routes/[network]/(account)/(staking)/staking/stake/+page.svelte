@@ -30,7 +30,7 @@
 </script>
 
 <Card>
-	<Stack class="mx-auto w-96 space-y-8">
+	<Stack class="mx-auto basis-96 space-y-8">
 		{#if manager.txid}
 			<Transaction network={data.network} transactionId={manager.txid} />
 		{:else if manager.error}
