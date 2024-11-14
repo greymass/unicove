@@ -8,7 +8,7 @@
 
 	import TLVHex from './components/tlvhex.svelte';
 	import { onMount, type Snippet } from 'svelte';
-	import { Asset } from '@wharfkit/antelope';
+	// import { Asset } from '@wharfkit/antelope';
 	import type { HistoricalPrice } from '$lib/types';
 
 	const { data } = $props();
