@@ -6,6 +6,7 @@
 	import { Card } from '$lib/components/layout';
 	import Button from '$lib/components/button/button.svelte';
 	import type { UnstakingRecord } from '$lib/utils/staking';
+	import { languageTag } from '$lib/paraglide/runtime';
 
 	interface Props extends HTMLAttributes<HTMLDivElement> {
 		href?: string;
@@ -17,7 +18,7 @@
 
 {#if records.filter((r) => !r.savings).length > 0}
 	<Card {...props} title="Unstaking" class="auto-rows-max">
-		<table class="table-styles">
+		<table class="table-styles mt-4">
 			<thead class="border-b-2 border-shark-100/10">
 				<tr class="caption font-medium">
 					<th class="text-left">Amount</th>
@@ -28,16 +29,10 @@
 				{#each records as record}
 					{#if !record.savings}
 						<tr>
-							<td><AssetText value={record.balance} /></td>
+							<td><AssetText variant="full" value={record.balance} /></td>
 							<td class="text-right">
-								{record.date
-									? record.date.toLocaleDateString(undefined, {
-											weekday: 'long',
-											year: 'numeric',
-											month: 'long',
-											day: 'numeric'
-										})
-									: '--'}
+								{record.date ? record.date.toLocaleTimeString(languageTag()) : '--'}
+								{record.date ? record.date.toLocaleDateString(languageTag()) : '--'}
 							</td>
 						</tr>
 					{/if}

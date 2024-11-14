@@ -16,10 +16,7 @@
 
 	let manager: UnstakeManager = $state(new UnstakeManager(data.network));
 
-	let hints = $derived([
-		{ key: 'In 21 days you can claim', value: manager.assetValue.toString() },
-		{ key: 'Lockup', value: '21 Days' }
-	]);
+	let hints = $derived([{ key: 'Withdrawable in 21 days', value: manager.assetValue.toString() }]);
 
 	$effect(() => {
 		if (context.account) {
@@ -37,7 +34,7 @@
 	{:else}
 		<TokenCard token={manager.tokenBalance} title="Staked" description="Currently staked" />
 		<Stack class="gap-3">
-			<Label for="assetInput">Amount</Label>
+			<Label for="assetInput">Amount to unstake</Label>
 			<AssetInput
 				autofocus
 				bind:this={manager.input}
