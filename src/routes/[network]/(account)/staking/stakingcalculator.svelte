@@ -31,17 +31,17 @@
 			{
 				time: 'Daily',
 				value: daily,
-				usd: '$' + Asset.from(daily.value * price, '2,USD').value.toFixed(2)
+				usd: Asset.from(daily.value * price, '2,USD')
 			},
 			{
 				time: 'Monthly',
 				value: monthly,
-				usd: '$' + Asset.from(monthly.value * price, '2,USD').value.toFixed(2)
+				usd: Asset.from(monthly.value * price, '2,USD')
 			},
 			{
 				time: 'Yearly',
 				value: yearly,
-				usd: '$' + Asset.from(yearly.value * price, '2,USD').value.toFixed(2)
+				usd: Asset.from(yearly.value * price, '2,USD')
 			}
 		];
 	});
