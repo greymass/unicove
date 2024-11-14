@@ -207,9 +207,14 @@
 			<div class="flex flex-col gap-2 justify-self-end">
 				<Button onclick={addSession} variant="secondary">Add account</Button>
 
-				<Button href={`/${network}/signup`} onclick={closeDrawer} variant="secondary">
+				<!-- <Button
+					class="hidden"
+					href={`/${network}/signup`}
+					onclick={closeDrawer}
+					variant="secondary"
+				>
 					Create account
-				</Button>
+				</Button> -->
 			</div>
 		</div>
 	</div>
