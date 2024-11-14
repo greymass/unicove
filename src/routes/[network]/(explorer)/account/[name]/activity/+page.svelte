@@ -5,7 +5,6 @@
 	import { ActivityLoader } from './state.svelte.js';
 	import type { ActivityActionWrapper } from '$lib/types.js';
 	import Code from '$lib/components/code.svelte';
-	import Card from '$lib/components/layout/box/card.svelte';
 
 	const { data } = $props();
 
@@ -45,7 +44,7 @@
 
 <Stack class="pb-8">
 	{#if isLoading}
-		<div class="flex gap-4 py-20 items-center justify-center">
+		<div class="flex items-center justify-center gap-4 py-20">
 			<div class="bounce bounce-1 h-3 w-3 rounded-full bg-white"></div>
 			<div class="bounce bounce-2 h-3 w-3 rounded-full bg-white"></div>
 			<div class="bounce bounce-3 h-3 w-3 rounded-full bg-white"></div>
@@ -92,18 +91,7 @@
 					<div
 						class="flex flex-1 flex-col px-2 py-1 lg:max-w-[38%] lg:grow-0 lg:basis-[38%] lg:py-3"
 					>
-						{#if activityAction.actionData.explanation}
-							<div>
-								{@html activityAction.actionData.explanation}
-							</div>
-							{#if activityAction.actionData.memo}
-								<div>
-									<span class="text-sm">Memo: {activityAction.actionData.memo}</span>
-								</div>
-							{/if}
-						{:else}
-							<Code>{JSON.stringify(activityAction.actionData.json, null, 2)}</Code>
-						{/if}
+						<Code>{JSON.stringify(activityAction.actionData, null, 2)}</Code>
 					</div>
 				</div>
 			{/each}

@@ -41,13 +41,7 @@ export interface ActivityActionWrapper {
 	date: string;
 	timeInDay: string;
 	actionName: string;
-	actionData: ActionData;
-}
-
-export interface ActionData {
-	explanation?: string;
-	memo?: string;
-	json:string;
+	actionData: string;
 }
 
 export interface DataSources {

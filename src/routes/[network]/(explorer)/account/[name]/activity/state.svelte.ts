@@ -104,7 +104,7 @@ export class ActivityLoader {
 					console.error('Conver to ActivityAction error ', e);
 				}
 			});
-			const newBatch = convertActivityActions(this.account!, this.network, activityActions);
+			const newBatch = convertActivityActions(this.account!, activityActions);
 			const nextStart = -json.activity.last;
 			const hasMore = newBatch.length > 0 && json.activity.last > 0;
 			if (!more) {

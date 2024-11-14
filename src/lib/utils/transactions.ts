@@ -1,11 +1,9 @@
-import type { ActionData, ActivityAction, ActivityActionWrapper } from '$lib/types';
+import type { ActivityAction, ActivityActionWrapper } from '$lib/types';
 import { Checksum256, Name } from '@wharfkit/antelope';
-import { languageTag } from '$lib/paraglide/runtime.js';
 
 interface IActivityDelegate {
 	getActionName: (currentAccount: string, action: ActivityAction) => string;
-	getActionData: (currentAccount: string, action: ActivityAction, network: string) => ActionData;
-	shouldShow: (currentAccount: string, action: ActivityAction) => boolean;
+	isMyActionTrace: (currentAccount: string, action: ActivityAction) => boolean;
 }
 
 class BaseActivityDelegate implements IActivityDelegate {
@@ -20,22 +18,9 @@ class BaseActivityDelegate implements IActivityDelegate {
 		return `<span class="inline-block px-3 py-0.5 rounded bg-mineShaft-500 text-white">${name}</span>`;
 	}
 
-	getActionData(currentAccount: string, action: ActivityAction, network: string): ActionData {
-		const memo = action.data['memo'];
-		return { memo: memo, json: action.data };
-	}
-
-	shouldShow(currentAccount: string, action: ActivityAction) {
+	isMyActionTrace(currentAccount: string, action: ActivityAction) {
 		if (this.checkReceiver) return action['raw']['action_trace']['receiver'] === currentAccount;
 		return true;
-	}
-
-	generateUserSpan(account: string, network: string) {
-		return `<a href="/${languageTag()}/${network}/account/${account}/activity" class="text-skyBlue-500">${account}</a>`;
-	}
-
-	generateWhiteTextSpan(account: string) {
-		return `<span class="text-white">${account}</span>`;
 	}
 }
 
@@ -54,30 +39,6 @@ class SystemActivityDelegate extends BaseActivityDelegate {
 			return `<span class="inline-block px-3 py-0.5 rounded bg-mineShaft-500 text-white">${this.actionName}</span>`;
 		}
 		return super.getActionName(currentAccount, action);
-	}
-
-	override getActionData(
-		currentAccount: string,
-		action: ActivityAction,
-		network: string
-	): ActionData {
-		const data = super.getActionData(currentAccount, action, network);
-		let explanation = this.generateActionDataExplanation(currentAccount, action, network);
-		if (explanation) data.explanation = explanation;
-		return data;
-	}
-
-	generateActionDataExplanation(currentAccount: string, action: ActivityAction, network: string) {
-		const act = String(action.action);
-		let explanation = undefined;
-		if ('delegatebw' === act) {
-			explanation = `${this.generateUserSpan(action.data['from'], network)} delegated to ${this.generateUserSpan(action.data['receiver'], network)} ${this.generateWhiteTextSpan(action.data['stake_cpu_quantity'])} for CPU and ${this.generateWhiteTextSpan(action.data['stake_net_quantity'])} for NET`;
-		} else if ('undelegatebw' === act) {
-			explanation = `${this.generateUserSpan(action.data['receiver'], network)} undelegated from ${this.generateUserSpan(action.data['from'], network)} ${this.generateWhiteTextSpan(action.data['unstake_cpu_quantity'])} for CPU and ${this.generateWhiteTextSpan(action.data['unstake_net_quantity'])} for NET`;
-		} else if ('refund' === act) {
-			explanation = `Refund(unstaked) to ${this.generateUserSpan(action.data['owner'], network)}`;
-		}
-		return explanation;
 	}
 }
 
@@ -109,21 +70,7 @@ class TransferActivityDelegate extends SystemActivityDelegate {
 		return super.getActionName(currentAccount, action);
 	}
 
-	generateActionDataExplanation(currentAccount: string, action: ActivityAction, network: string) {
-		const act = String(action.action);
-		let explanation = undefined;
-		if (this.isSendToken(currentAccount, action) || this.isReceiveToken(currentAccount, action)) {
-			explanation = `${this.generateUserSpan(action.data['from'], network)} &rarr; ${this.generateUserSpan(action.data['to'], network)} ${this.generateWhiteTextSpan(action.data['quantity'])}`;
-			if (!TransferActivityDelegate.EOSIO_TOKEN.equals(action.contract)) {
-				explanation = `${explanation} (${this.generateUserSpan(String(action.contract), network)})`;
-			}
-		}
-		if (!explanation)
-			explanation = super.generateActionDataExplanation(currentAccount, action, network);
-		return explanation;
-	}
-
-	shouldShow(currentAccount: string, action: ActivityAction) {
+	override isMyActionTrace(currentAccount: string, action: ActivityAction) {
 		if (this.isSendToken(currentAccount, action) || this.isReceiveToken(currentAccount, action)) {
 			return action['raw']['action_trace']['receiver'] === currentAccount;
 		}
@@ -136,67 +83,8 @@ class AuthActivityDelegate extends SystemActivityDelegate {
 		super(actionName, false);
 	}
 
-	getActionName(currentAccount: string, action: ActivityAction): string {
+	override getActionName(currentAccount: string, action: ActivityAction): string {
 		return `<span class="inline-block px-3 py-0.5 rounded bg-red-500 text-white">${this.actionName}</span>`;
-	}
-
-	generateActionDataExplanation(currentAccount: string, action: ActivityAction, network: string) {
-		const act = String(action.action);
-		let explanation = undefined;
-		if ('newaccount' === act) {
-			explanation = `New User ${this.generateUserSpan(action.data['name'], network)} created by ${this.generateUserSpan(action.data['creator'], network)}</span>`;
-		}
-		if (!explanation)
-			explanation = super.generateActionDataExplanation(currentAccount, action, network);
-		return explanation;
-	}
-}
-
-class RamActivityDelegate extends SystemActivityDelegate {
-	constructor(actionName: string) {
-		super(actionName, true);
-	}
-
-	generateActionDataExplanation(currentAccount: string, action: ActivityAction, network: string) {
-		const act = String(action.action);
-		let explanation = undefined;
-		if ('buyrambytes' === act) {
-			explanation = `${this.generateUserSpan(action.data['payer'], network)} bought ${this.generateWhiteTextSpan(action.data['bytes'] + ' bytes')} RAM for ${this.generateUserSpan(action.data['receiver'], network)}`;
-		} else if ('buyram' === act) {
-			explanation = `${this.generateUserSpan(action.data['payer'], network)} bought ${this.generateWhiteTextSpan(action.data['quant'])} RAM for ${this.generateUserSpan(action.data['receiver'], network)}`;
-		} else if ('sellram' === act) {
-			explanation = `${this.generateUserSpan(action.data['account'], network)} sold ${this.generateWhiteTextSpan(action.data['bytes'] + ' bytes')} RAM`;
-		}
-		if (!explanation)
-			explanation = super.generateActionDataExplanation(currentAccount, action, network);
-		return explanation;
-	}
-}
-
-class RexActivityDelegate extends SystemActivityDelegate {
-	constructor(actionName: string) {
-		super(actionName, false);
-	}
-
-	generateActionDataExplanation(currentAccount: string, action: ActivityAction, network: string) {
-		const act = String(action.action);
-		let explanation = undefined;
-		if ('buyrex' === act) {
-			explanation = `${this.generateUserSpan(action.data['from'], network)} bought ${this.generateWhiteTextSpan(action.data['amount'])} of REX`;
-		} else if ('sellrex' === act) {
-			explanation = `${this.generateUserSpan(action.data['from'], network)} sold ${this.generateWhiteTextSpan(action.data['rex'])}`;
-		} else if ('withdraw' === act) {
-			explanation = `${this.generateUserSpan(action.data['owner'], network)} withdrew ${this.generateWhiteTextSpan(action.data['amount'])} from REX fund back to liquid`;
-		} else if ('mvfrsavings' === act) {
-			explanation = `Move ${this.generateWhiteTextSpan(action.data['rex'])} out of savings bucket`;
-		} else if ('mvtosavings' === act) {
-			explanation = `Move ${this.generateWhiteTextSpan(action.data['rex'])} to savings bucket`;
-		} else if ('unstaketorex' === act) {
-			explanation = `${this.generateUserSpan(action.data['owner'], network)} unstake to ${this.generateUserSpan(action.data['receiver'], network)} ${this.generateWhiteTextSpan(action.data['from_cpu'])} for CPU and ${this.generateWhiteTextSpan(action.data['from_net'])} for NET`;
-		}
-		if (!explanation)
-			explanation = super.generateActionDataExplanation(currentAccount, action, network);
-		return explanation;
 	}
 }
 
@@ -205,19 +93,8 @@ class VoteActivityDelegate extends SystemActivityDelegate {
 		super(actionName, false);
 	}
 
-	getActionName(currentAccount: string, action: ActivityAction): string {
+	override getActionName(currentAccount: string, action: ActivityAction): string {
 		return `<span class="inline-block px-3 py-0.5 rounded bg-red-500 text-white">${this.actionName}</span>`;
-	}
-
-	generateActionDataExplanation(currentAccount: string, action: ActivityAction, network: string) {
-		const act = String(action.action);
-		let explanation = undefined;
-		if ('voteproducer' === act) {
-			explanation = `${this.generateUserSpan(action.data['voter'], network)} voted through ${this.generateWhiteTextSpan('proxy')} ${this.generateUserSpan(action.data['proxy'], network)}`;
-		}
-		if (!explanation)
-			explanation = super.generateActionDataExplanation(currentAccount, action, network);
-		return explanation;
 	}
 }
 
@@ -230,22 +107,20 @@ export const actionDeleates: Record<string, BaseActivityDelegate> = {
 	updateauth: new AuthActivityDelegate('Update Auth'),
 	deleteauth: new AuthActivityDelegate('Delete Auth'),
 
-	buyrambytes: new RamActivityDelegate('Buy RAM'),
-	buyram: new RamActivityDelegate('Buy RAM'),
-	sellram: new RamActivityDelegate('Sell RAM'),
-
-	buyrex: new RexActivityDelegate('Buy REX'),
-	sellrex: new RexActivityDelegate('Sell REX'),
-	withdraw: new RexActivityDelegate('REX Fund Withdraw'),
-	mvfrsavings: new RexActivityDelegate('REX Savings Out'),
-	mvtosavings: new RexActivityDelegate('REX Savings In'),
-	deposit: new RexActivityDelegate('Deposit'),
-	rentnet: new RexActivityDelegate('Rent NET'),
-	rentcpu: new RexActivityDelegate('Rent CPU'),
-	unstaketorex: new RexActivityDelegate('Staked to REX'),
-
 	voteproducer: new VoteActivityDelegate('Vote'),
 
+	buyrambytes: new SystemActivityDelegate('Buy RAM', true),
+	buyram: new SystemActivityDelegate('Buy RAM', true),
+	sellram: new SystemActivityDelegate('Sell RAM', true),
+	buyrex: new SystemActivityDelegate('Buy REX'),
+	sellrex: new SystemActivityDelegate('Sell REX'),
+	withdraw: new SystemActivityDelegate('REX Fund Withdraw'),
+	mvfrsavings: new SystemActivityDelegate('REX Savings Out'),
+	mvtosavings: new SystemActivityDelegate('REX Savings In'),
+	deposit: new SystemActivityDelegate('Deposit'),
+	rentnet: new SystemActivityDelegate('Rent NET'),
+	rentcpu: new SystemActivityDelegate('Rent CPU'),
+	unstaketorex: new SystemActivityDelegate('Staked to REX'),
 	delegatebw: new SystemActivityDelegate('Delegate'),
 	undelegatebw: new SystemActivityDelegate('Undelegate'),
 	refund: new SystemActivityDelegate('Refund'),
@@ -258,7 +133,6 @@ const commonActivityDelegate = new BaseActivityDelegate();
 
 export function convertActivityActions(
 	currentAcount: string,
-	network: string,
 	actions: ActivityAction[]
 ): ActivityActionWrapper[] {
 	let list: ActivityActionWrapper[] = [];
@@ -267,26 +141,14 @@ export function convertActivityActions(
 		if (!delegate) {
 			delegate = commonActivityDelegate;
 		}
-		const shortId = getShortId(action.id);
-		const seqId = String(action.raw['account_action_seq']);
-		console.log(
-			shortId,
-			seqId,
-			String(action.action),
-			', receiver = ',
-			action['raw']['action_trace']['receiver'],
-			', Same = ',
-			currentAcount === action['raw']['action_trace']['receiver']
-		);
-		if (delegate.shouldShow(currentAcount, action)) {
-			list.push(convertActivityAction(currentAcount, network, action, delegate));
+		if (delegate.isMyActionTrace(currentAcount, action)) {
+			list.push(convertActivityAction(currentAcount, action, delegate));
 		}
 	});
 	return list;
 }
 function convertActivityAction(
 	currentAcount: string,
-	network: string,
 	action: ActivityAction,
 	delegate: BaseActivityDelegate
 ): ActivityActionWrapper {
@@ -304,7 +166,7 @@ function convertActivityAction(
 		date: dateTime,
 		timeInDay: timeInDay,
 		actionName: delegate.getActionName(currentAcount, action),
-		actionData: delegate.getActionData(currentAcount, action, network)
+		actionData: action.data,
 	};
 }
 
