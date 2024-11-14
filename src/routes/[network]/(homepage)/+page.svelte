@@ -23,33 +23,33 @@
 	let ramPrices: HistoricalPrice[] = $state([]);
 	let tokenPrices: HistoricalPrice[] = $state([]);
 
-	async function loadPrices() {
-		const ramResponse: Response = await fetch(`/${data.network}/api/metrics/marketprice/ram`);
-		const parsedRamResponse: { date: string; value: number }[] | { error: string } =
-			await ramResponse.json();
-		if ('error' in parsedRamResponse && parsedRamResponse.error) {
-			throw new Error(String(parsedRamResponse.error));
-		} else if (Array.isArray(parsedRamResponse)) {
-			ramPrices = parsedRamResponse.map((price: { date: string; value: number }) => ({
-				date: new Date(price.date),
-				value: Asset.from(
-					price.value / 10000,
-					data.network.chain.systemToken?.symbol || '0,UNKNOWN'
-				)
-			}));
-		}
-		const tokenResponse: Response = await fetch(`/${data.network}/api/metrics/marketprice/token`);
-		const parsedTokenResponse: { date: string; value: number }[] | { error: string } =
-			await tokenResponse.json();
-		if ('error' in parsedTokenResponse && parsedTokenResponse.error) {
-			throw new Error(String(parsedTokenResponse.error));
-		} else if (Array.isArray(parsedTokenResponse)) {
-			tokenPrices = parsedTokenResponse.map((price: { date: string; value: number }) => ({
-				date: new Date(price.date),
-				value: Asset.from(price.value / 10000, '4,USD')
-			}));
-		}
-	}
+	// async function loadPrices() {
+	// 	const ramResponse: Response = await fetch(`/${data.network}/api/metrics/marketprice/ram`);
+	// 	const parsedRamResponse: { date: string; value: number }[] | { error: string } =
+	// 		await ramResponse.json();
+	// 	if ('error' in parsedRamResponse && parsedRamResponse.error) {
+	// 		throw new Error(String(parsedRamResponse.error));
+	// 	} else if (Array.isArray(parsedRamResponse)) {
+	// 		ramPrices = parsedRamResponse.map((price: { date: string; value: number }) => ({
+	// 			date: new Date(price.date),
+	// 			value: Asset.from(
+	// 				price.value / 10000,
+	// 				data.network.chain.systemToken?.symbol || '0,UNKNOWN'
+	// 			)
+	// 		}));
+	// 	}
+	// 	const tokenResponse: Response = await fetch(`/${data.network}/api/metrics/marketprice/token`);
+	// 	const parsedTokenResponse: { date: string; value: number }[] | { error: string } =
+	// 		await tokenResponse.json();
+	// 	if ('error' in parsedTokenResponse && parsedTokenResponse.error) {
+	// 		throw new Error(String(parsedTokenResponse.error));
+	// 	} else if (Array.isArray(parsedTokenResponse)) {
+	// 		tokenPrices = parsedTokenResponse.map((price: { date: string; value: number }) => ({
+	// 			date: new Date(price.date),
+	// 			value: Asset.from(price.value / 10000, '4,USD')
+	// 		}));
+	// 	}
+	// }
 
 	onMount(() => {
 		// loadPrices();
