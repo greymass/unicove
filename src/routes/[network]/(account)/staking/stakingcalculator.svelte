@@ -23,9 +23,9 @@
 	let d = $derived(a / 365);
 	let m = $derived(a / 12);
 	let records = $derived.by(() => {
-		let daily = Asset.fromUnits(assetValue.units.multiplying(d), assetValue.symbol);
-		let monthly = Asset.fromUnits(assetValue.units.multiplying(m), assetValue.symbol);
-		let yearly = Asset.fromUnits(assetValue.units.multiplying(a), assetValue.symbol);
+		let daily = Asset.fromUnits(Number(assetValue.units) * d, assetValue.symbol);
+		let monthly = Asset.fromUnits(Number(assetValue.units) * m, assetValue.symbol);
+		let yearly = Asset.fromUnits(Number(assetValue.units) * a, assetValue.symbol);
 		let price = tokenprice ? tokenprice.value : 0;
 		return [
 			{
@@ -48,29 +48,23 @@
 </script>
 
 <Card {...props} class="gap-5" title="Staking Calculator">
-	<Switcher class="items-center gap-4" threshold="20rem">
-		<Stack class="grow-0 gap-0">
-			<p class="text-nowrap">APY</p>
-			<p class="text-nowrap text-white">
-				{apy}%
-			</p>
-		</Stack>
-		<Stack class="grow-0 gap-0">
-			<p class="text-nowrap">Staked EOS</p>
-			<AssetText class="text-nowrap text-white" variant="full" value={assetValue} />
-		</Stack>
-		<AssetInput min={0} bind:value={assetValue} bind:valid={assetValid} />
-	</Switcher>
+	<p>
+		Enter an amount of {network.chain.systemToken?.symbol.code} to calculate estimated rewards based
+		on the current APR of {apr}%. This rate will change over time based on the amount of tokens
+		staked.
+	</p>
+
+	<AssetInput min={0} bind:value={assetValue} bind:valid={assetValid} />
 
 	<table class="table-styles">
 		<tbody>
 			{#each records as record}
 				<tr>
 					<td class="text-sm">{record.time}</td>
-					<td class="text-sm"
+					<td class="text-right text-sm"
 						><AssetText class="text-white" variant="full" value={record.value} /></td
 					>
-					<td class="text-sm">{record.usd}</td>
+					<td class="text-right text-sm">{record.usd}</td>
 				</tr>
 			{/each}
 		</tbody>
