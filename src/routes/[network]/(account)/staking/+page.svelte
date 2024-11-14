@@ -43,45 +43,56 @@
 	);
 </script>
 
-<Switcher threshold="64rem" class="place-content-between">
-	<Stack class="max-w-lg gap-9">
-		<Card class="gap-5" title="Staked - {apy}% APY">
-			<Switcher threshold="20rem">
-				<Stack class="text-md gap-0">
-					<p class="caption">Currently Staked</p>
-					<p class="mt-1.5 self-start rounded bg-shark-800/60 px-2 text-white">
-						<AssetText class="text-white" variant="full" value={staked} />
-					</p>
-				</Stack>
-				<Stack class="text-md gap-0">
-					<p class="caption">USD Value</p>
-					<p class="mt-1.5 self-start rounded bg-shark-800/60 px-2 text-white">
+<div class="gap-6 *:mb-6 *:inline-block *:w-full last:*:mb-0 @2xl:columns-2">
+	<div>
+		<Card class="gap-6" title="Staked - {apy}% APY">
+			<Switcher threshold="30ch">
+				<div>
+					<p>Currently Staked</p>
+					<AssetText class="text-xl text-white" variant="full" value={staked} />
+					<!-- TODO: Chip for percent staked -->
+				</div>
+
+				<div>
+					<p>USD Value</p>
+					<p class="text-xl text-white">
 						$<AssetText variant="value" value={usdValue} />
 					</p>
-				</Stack>
+					<!-- TODO: Chip for percent change -->
+				</div>
 			</Switcher>
-			<Switcher threshold="20rem">
+
+			<Switcher threshold="30ch">
 				<Button href="/{networkName}/staking/stake" variant="secondary">Stake</Button>
 				<Button href="/{networkName}/staking/unstake" variant="secondary">Unstake</Button>
 			</Switcher>
 		</Card>
+	</div>
+
+	<div>
 		<UnstakingBalances records={unstaking} />
-		<Card class="gap-5" title="Withdrawable">
-			<Stack class="text-md gap-0">
+	</div>
+
+	<div>
+		<Card class="gap-6" title="Withdrawable">
+			<div>
 				<p class="caption">Currently Withdrawable</p>
-				<p class="mt-1.5 self-start rounded bg-shark-800/60 px-2 text-white">
-					<AssetText class="text-white" variant="full" value={totalWithdraw} />
-				</p>
-			</Stack>
+
+				<AssetText class="text-xl text-white" variant="full" value={totalWithdraw} />
+			</div>
 			<Button href="/{networkName}/staking/withdraw" variant="secondary">Withdraw</Button>
 		</Card>
-	</Stack>
-	<Stack class="max-w-lg gap-4">
+	</div>
+
+	<div>
 		<StakingCalculator
 			{apy}
 			network={data.network}
 			tokenprice={data.network.tokenprice || Asset.from(0, '2,USD')}
 		/>
+	</div>
+
+	<div>
 		<Card class="hidden gap-5" title="About staking">
 			<Stack class="gap-5">
 				<p class="caption">
@@ -97,5 +108,5 @@
 				</p>
 			</Stack>
 		</Card>
-	</Stack>
-</Switcher>
+	</div>
+</div>

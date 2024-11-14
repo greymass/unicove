@@ -65,3 +65,7 @@ export interface HistoricalPrice {
 	date: Date;
 	value: Asset;
 }
+export type DescriptionItem = {
+	key: string;
+	value: string;
+};

@@ -48,6 +48,6 @@
 		</tbody>
 	</table>
 	{#if href}
-		<Button {href} variant="secondary" class="text-skyBlue-500">Withdraw</Button>
+		<Button {href} variant="secondary">Withdraw</Button>
 	{/if}
 </Card>
