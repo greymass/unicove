@@ -2,11 +2,7 @@ import { Asset } from '@wharfkit/antelope';
 
 import type { LoadEvent } from '@sveltejs/kit';
 import { getChainDefinitionFromParams } from '$lib/state/network.svelte';
-
-interface HistoricalPrice {
-	date: Date;
-	value: Asset;
-}
+import type { HistoricalPrice } from '$lib/types';
 
 interface LoadData {
 	historicalPrices: HistoricalPrice[];

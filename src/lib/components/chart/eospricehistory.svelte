@@ -70,7 +70,7 @@
 				labels: labels,
 				datasets: [
 					{
-						label: 'EOS/RAM',
+						label: 'USD',
 						data: values,
 						fill: false,
 						borderColor: '#00ED97',
@@ -126,7 +126,7 @@
 <Card>
 	<header class="flex justify-between">
 		<Stack class="gap-0">
-			<p class="h4 font-semibold text-white/50">RAM/EOS</p>
+			<p class="h4 font-semibold text-white/50">EOS/USD</p>
 			<p class="h3 font-semibold">{currentPrice}</p>
 			<p class="h4 font-semibold text-white/50">{percentChange}</p>
 		</Stack>
@@ -139,7 +139,7 @@
 		<div class="flex gap-4">
 			<div class="flex items-center gap-1">
 				<div class="size-4 rounded bg-[#00ED97]"></div>
-				<span class="text-[#00ED97]">RAM/EOS</span>
+				<span class="text-[#00ED97]">EOS/USD</span>
 			</div>
 		</div>
 		<span class="text-shark-200/70">Today</span>

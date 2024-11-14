@@ -3,9 +3,13 @@
 	import Button from '$lib/components/button/button.svelte';
 	import EOS from '$lib/assets/EOS@2x.svg';
 	import Metamask from '$lib/assets/metamask.svg';
+	import EOSPriceHistory from '$lib/components/chart/eospricehistory.svelte';
+	import RamPriceHistory from '$lib/components/chart/rampricehistory.svelte';
 
 	import TLVHex from './components/tlvhex.svelte';
-	import { type Snippet } from 'svelte';
+	import { onMount, type Snippet } from 'svelte';
+	// import { Asset } from '@wharfkit/antelope';
+	import type { HistoricalPrice } from '$lib/types';
 
 	const { data } = $props();
 
@@ -15,6 +19,41 @@
 	const RAM_POOL = 1_234_567;
 	const EOS_MARKET_CAP = 1_234_567_890;
 	const TPS = 1_234;
+
+	let ramPrices: HistoricalPrice[] = $state([]);
+	let tokenPrices: HistoricalPrice[] = $state([]);
+
+	// async function loadPrices() {
+	// 	const ramResponse: Response = await fetch(`/${data.network}/api/metrics/marketprice/ram`);
+	// 	const parsedRamResponse: { date: string; value: number }[] | { error: string } =
+	// 		await ramResponse.json();
+	// 	if ('error' in parsedRamResponse && parsedRamResponse.error) {
+	// 		throw new Error(String(parsedRamResponse.error));
+	// 	} else if (Array.isArray(parsedRamResponse)) {
+	// 		ramPrices = parsedRamResponse.map((price: { date: string; value: number }) => ({
+	// 			date: new Date(price.date),
+	// 			value: Asset.from(
+	// 				price.value / 10000,
+	// 				data.network.chain.systemToken?.symbol || '0,UNKNOWN'
+	// 			)
+	// 		}));
+	// 	}
+	// 	const tokenResponse: Response = await fetch(`/${data.network}/api/metrics/marketprice/token`);
+	// 	const parsedTokenResponse: { date: string; value: number }[] | { error: string } =
+	// 		await tokenResponse.json();
+	// 	if ('error' in parsedTokenResponse && parsedTokenResponse.error) {
+	// 		throw new Error(String(parsedTokenResponse.error));
+	// 	} else if (Array.isArray(parsedTokenResponse)) {
+	// 		tokenPrices = parsedTokenResponse.map((price: { date: string; value: number }) => ({
+	// 			date: new Date(price.date),
+	// 			value: Asset.from(price.value / 10000, '4,USD')
+	// 		}));
+	// 	}
+	// }
+
+	onMount(() => {
+		// loadPrices();
+	});
 </script>
 
 {#snippet textblock(props: {
@@ -183,7 +222,19 @@
 	</section>
 
 	<!-- Charts -->
-	<section class="col-span-full hidden">
+	<section class="col-span-full">
+		<Switcher>
+			<div>
+				{#if ramPrices.length}
+					<RamPriceHistory data={ramPrices} />
+				{/if}
+			</div>
+			<div>
+				{#if tokenPrices.length}
+					<EOSPriceHistory data={tokenPrices} />
+				{/if}
+			</div>
+		</Switcher>
 		<Switcher>
 			<div>
 				{@render textblock({
