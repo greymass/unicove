@@ -43,7 +43,6 @@
 	let ramAvailable = $derived(
 		Asset.from(Number(context.account?.ram?.available || 0) / 1000, '4,KB')
 	);
-	let ramOwned = $derived(Asset.from(Number(context.account?.ram?.max || 0) / 1000, '4,KB'));
 
 	const ramCalculatorState = new RAMCalculatorState(data.network.chain);
 
@@ -79,28 +78,25 @@
 			<div class="grid">
 				<h3 class="text-muted text-base">RAM Available</h3>
 				<AssetText class="text-xl" variant="full" value={ramAvailable} />
-				<div class="text-muted text-base">
-					<AssetText variant="full" value={ramOwned} /> Total
-				</div>
 			</div>
 			<Button variant="secondary" href="/{String(data.network)}/ram/buy">Buy</Button>
 		</div>
 
 		<div class="grid content-between gap-4">
 			<div>
-				<h3 class="text-muted text-base">Sellable Value</h3>
+				<h3 class="text-muted text-base">EOS Value</h3>
 				<AssetText
 					class="text-xl"
 					variant="full"
 					value={data.network.ramprice?.usd &&
-						Asset.from(calculateValue(ramAvailable, data.network.ramprice?.usd).value, '2,USD')}
+						calculateValue(ramAvailable, data.network.ramprice?.eos)}
 				/>
 				<div>
 					<AssetText
 						class="text-muted text-base"
 						variant="full"
 						value={data.network.ramprice?.usd &&
-							calculateValue(ramOwned, data.network.ramprice?.eos)}
+							Asset.from(calculateValue(ramAvailable, data.network.ramprice?.usd).value, '2,USD')}
 					/>
 				</div>
 			</div>
@@ -138,13 +134,13 @@
 			</div>
 
 			<Stack class="gap-2">
-				<h4 class="text-xl font-semibold">Details</h4>
+				<h4 class="text-md font-semibold">Results</h4>
 				<table class="">
 					<tbody
 						class="*:border-b *:border-mineShaft-900 *:pt-8 last:*:border-b-0 *:even:text-right"
 					>
 						<tr class="*:py-2">
-							<td class="text-muted text-base"> Price / KB </td>
+							<td class="text-muted text-base"> EOS/RAM (KB) </td>
 							<td class="text-right">
 								<AssetText
 									variant="full"
@@ -155,7 +151,17 @@
 							</td>
 						</tr>
 						<tr class="*:py-2">
-							<td class="text-muted text-base"> Price USD / KB </td>
+							<td class="text-muted text-base"> EOS Price </td>
+							<td class="text-right">
+								<AssetText
+									variant="full"
+									value={ramCalculatorState.tokens || Asset.from('0.0000 EOS')}
+								/>
+							</td>
+						</tr>
+
+						<tr class="*:py-2">
+							<td class="text-muted text-base"> USD/RAM (KB) </td>
 							<td class="text-right">
 								<AssetText
 									variant="full"
@@ -166,16 +172,7 @@
 							</td>
 						</tr>
 						<tr class="*:py-2">
-							<td class="text-muted text-base"> Price </td>
-							<td class="text-right">
-								<AssetText
-									variant="full"
-									value={ramCalculatorState.tokens || Asset.from('0.0000 EOS')}
-								/>
-							</td>
-						</tr>
-						<tr class="*:py-2">
-							<td class="text-muted text-base"> Price USD </td>
+							<td class="text-muted text-base"> USD Price </td>
 							<td class="text-right">
 								<AssetText
 									variant="full"
@@ -186,7 +183,7 @@
 							</td>
 						</tr>
 						<tr class="*:py-2">
-							<td class="text-muted text-base"> Fees </td>
+							<td class="text-muted text-base"> Network Fees </td>
 							<td class="text-right">
 								<AssetText variant="full" value={ramCalculatorState.fee} />
 							</td>
@@ -208,20 +205,20 @@
 			<tbody class="*:border-b *:border-mineShaft-900 *:pt-8 last:*:border-b-0 *:even:text-right">
 				<tr class="*:py-2">
 					<td class="text-muted text-base"
-						>RAM Market Cap {data.network.chain.systemToken?.symbol.code || ''}</td
+						>Market Cap ({data.network.chain.systemToken?.symbol.code || ''})</td
 					>
 					<td class="text-right">
 						<AssetText variant="full" value={marketCapEOS} />
 					</td>
 				</tr>
 				<tr class="*:py-2">
-					<td class="text-muted text-base">RAM Market Cap USD</td>
+					<td class="text-muted text-base">Market Cap (USD)</td>
 					<td class="text-right">
 						<AssetText variant="full" value={marketCapUSD} />
 					</td>
 				</tr>
 				<tr class="*:py-2">
-					<td class="text-muted text-base">RAM Supply</td>
+					<td class="text-muted text-base">Supply</td>
 					<td class="text-right">
 						<AssetText variant="full" value={ramSupply} />
 					</td>
