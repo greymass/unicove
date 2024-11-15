@@ -4,5 +4,6 @@ export { default as Grid } from './grid.svelte';
 export { default as Subgrid } from './subgrid.svelte';
 export { default as Stack } from './stack.svelte';
 export { default as Switcher } from './switcher.svelte';
+export { default as PageColumns } from './pagecolumns.svelte';
 export * as Sidebar from './sidebar';
 export * from './box';
