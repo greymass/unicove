@@ -7,6 +7,7 @@
 	interface Props {
 		type: keyof typeof resourceMap;
 		value: string;
+		vertical?: boolean;
 	}
 
 	type Resource = {
@@ -39,7 +40,10 @@
 </script>
 
 <div class="text-right">
-	<h3 class="mb-4 flex items-center justify-between text-xl font-bold">
+	<h3
+		data-vertical={props.vertical}
+		class="mb-4 flex items-center justify-between gap-4 text-xl font-bold data-[vertical=true]:mb-0 data-[vertical=true]:flex-col data-[vertical=true]:items-end"
+	>
 		{#if icon}
 			{@const IconComponent = icon}
 			<IconComponent class="size-6" />
@@ -48,7 +52,7 @@
 	</h3>
 
 	<p class="*:block">
-		<span class="text-white">{props.value} {unit}</span>
+		<span class="font-semibold text-white">{props.value} {unit}</span>
 		<span>Available</span>
 	</p>
 </div>

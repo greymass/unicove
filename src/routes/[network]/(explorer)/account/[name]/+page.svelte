@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Stack, Card, PageColumns, Cluster } from '$lib/components/layout';
+	import { Stack, Card, PageColumns, Cluster, Switcher, Box, Grid } from '$lib/components/layout';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import { Asset } from '@wharfkit/antelope';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
@@ -8,6 +8,11 @@
 	import TradingPair from '$lib/components/elements/tradingpair.svelte';
 	import Chip from '$lib/components/chip.svelte';
 	import Tokendistribution from '$lib/components/chart/tokendistribution.svelte';
+	import { getSetting } from '$lib/state/settings.svelte';
+	import ResourceCard from '$lib/components/elements/resourceCard.svelte';
+	import Button from '$lib/components/button/button.svelte';
+
+	const advancedMode = getSetting('advanced-mode', false);
 
 	const { data } = $props();
 
@@ -35,6 +40,9 @@
 	const ramUsed = $derived(Asset.fromUnits(data.account.ram?.used, '3,KB'));
 	const ramAvailable = $derived(Asset.fromUnits(data.account.ram?.available, '3,KB'));
 	const ramPrice = $derived(data.network.ramprice?.usd);
+
+	const cpuAvailable = $derived(data.account.cpu?.available);
+	const netAvailable = $derived(data.account.net?.available);
 </script>
 
 {#snippet tableAction([text, href]: string[])}
@@ -172,8 +180,17 @@
 
 		<Tokendistribution data={data.account.value} />
 
-		<Card title="Resources">
-			<div></div>
-		</Card>
+		{#if advancedMode.value}
+			<Card title="Resources">
+				<div class="flex flex-wrap gap-12 *:flex-1">
+					<ResourceCard type="cpu" value={String(cpuAvailable)} vertical />
+
+					<ResourceCard type="net" value={String(netAvailable)} vertical />
+				</div>
+				{#if isCurrentUser}
+					<Button href={`/${data.network}/resources`} variant="secondary">Go to Resources</Button>
+				{/if}
+			</Card>
+		{/if}
 	</PageColumns>
 {/if}
