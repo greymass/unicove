@@ -93,7 +93,7 @@
 											<td></td>
 										{/if}
 									</tr>
-									<tr>
+									<tr class="font-semibold">
 										<td>Total</td>
 										<td class="text-right text-white">
 											<AssetText variant="full" value={data.account.balance?.total} />
@@ -146,7 +146,7 @@
 											<td></td>
 										{/if}
 									</tr>
-									<tr>
+									<tr class="font-semibold">
 										<td>Total</td>
 										<td class="text-right text-white"
 											><AssetText value={Asset.fromUnits(data.account.ram?.max, '3,KB')} /> KB</td
