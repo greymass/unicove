@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'bun:test';
-import { truncateCenter } from './strings';
+import { truncateCenter, percentString } from './strings';
 
 describe('truncateCenter', () => {
 	test('truncates string at center', () => {
@@ -20,5 +20,21 @@ describe('truncateCenter', () => {
 
 	test('handle zero length', () => {
 		expect(truncateCenter('')).toBe('');
+	});
+});
+
+describe('percentString', () => {
+	test('default', () => {
+		expect(percentString(0.1234)).toBe('12.34%');
+	});
+	test('rounds correctly', () => {
+		expect(percentString(0.12345)).toBe('12.35%');
+	});
+	test('handles fewer input digits', () => {
+		expect(percentString(0.1)).toBe('10.00%');
+	});
+	test('handles alternative decimal places', () => {
+		expect(percentString(0.1, 0)).toBe('10%');
+		expect(percentString(0.1, 4)).toBe('10.0000%');
 	});
 });
