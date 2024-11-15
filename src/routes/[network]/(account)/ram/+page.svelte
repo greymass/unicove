@@ -40,6 +40,9 @@
 		}
 	});
 
+	let ramAvailable = $derived(
+		Asset.from(Number(context.account?.ram?.available || 0) / 1000, '4,KB')
+	);
 	let ramOwned = $derived(Asset.from(Number(context.account?.ram?.max || 0) / 1000, '4,KB'));
 
 	const ramCalculatorState = new RAMCalculatorState(data.network.chain);
@@ -74,27 +77,32 @@
 	<Card class="flex *:flex-1">
 		<div class="grid content-between gap-4">
 			<div class="grid">
-				<h3 class="text-muted text-base">Available</h3>
-				<AssetText class="text-xl" variant="full" value={ramOwned} />
-				<AssetText
-					class="text-muted text-base"
-					variant="full"
-					value={data.network.ramprice?.usd && calculateValue(ramOwned, data.network.ramprice?.eos)}
-				/>
+				<h3 class="text-muted text-base">RAM Available</h3>
+				<AssetText class="text-xl" variant="full" value={ramAvailable} />
+				<div class="text-muted text-base">
+					<AssetText variant="full" value={ramOwned} /> Total
+				</div>
 			</div>
-
 			<Button variant="secondary" href="/{String(data.network)}/ram/buy">Buy</Button>
 		</div>
 
 		<div class="grid content-between gap-4">
 			<div>
-				<h3 class="text-muted text-base">Total RAM Value</h3>
+				<h3 class="text-muted text-base">Sellable Value</h3>
 				<AssetText
 					class="text-xl"
 					variant="full"
 					value={data.network.ramprice?.usd &&
-						Asset.from(calculateValue(ramOwned, data.network.ramprice?.usd).value, '2,USD')}
+						Asset.from(calculateValue(ramAvailable, data.network.ramprice?.usd).value, '2,USD')}
 				/>
+				<div>
+					<AssetText
+						class="text-muted text-base"
+						variant="full"
+						value={data.network.ramprice?.usd &&
+							calculateValue(ramOwned, data.network.ramprice?.eos)}
+					/>
+				</div>
 			</div>
 
 			<Button variant="secondary" href="/{String(data.network)}/ram/sell">Sell</Button>

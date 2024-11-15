@@ -24,7 +24,8 @@
 	});
 </script>
 
-<Stack tag="article" class="gap-6">
+<!-- Note: to enable subgrid on child pages this will need to change to `grid grid-cols-subgrid` -->
+<Stack tag="article" class="gap-6 @container">
 	<Pageheader
 		network={data.network}
 		title={$page.data.title}
