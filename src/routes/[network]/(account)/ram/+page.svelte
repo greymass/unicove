@@ -43,7 +43,6 @@
 	let ramAvailable = $derived(
 		Asset.from(Number(context.account?.ram?.available || 0) / 1000, '4,KB')
 	);
-	let ramOwned = $derived(Asset.from(Number(context.account?.ram?.max || 0) / 1000, '4,KB'));
 
 	const ramCalculatorState = new RAMCalculatorState(data.network.chain);
 
