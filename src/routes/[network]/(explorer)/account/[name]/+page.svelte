@@ -72,7 +72,7 @@
 											><AssetText variant="full" value={data.account.balance?.liquid} /></td
 										>
 										{#if isCurrentUser}
-											{@render tableAction(['Send', '/{data.network.chain}/send'])}
+											{@render tableAction(['Send', `/${data.network}/send`])}
 										{/if}
 									</tr>
 									<tr>
@@ -81,7 +81,7 @@
 											><AssetText variant="full" value={data.account.balance?.staked} /></td
 										>
 										{#if isCurrentUser}
-											{@render tableAction(['Staking', '/{data.network.chain}/staking'])}
+											{@render tableAction(['Staking', `/${data.network}/staking`])}
 										{/if}
 									</tr>
 									<tr>
@@ -134,7 +134,7 @@
 											><AssetText value={Asset.fromUnits(data.account.ram?.available, '3,KB')} /> KB</td
 										>
 										{#if isCurrentUser}
-											{@render tableAction(['RAM Market', '/{data.network.chain}/ram'])}
+											{@render tableAction(['RAM Market', `/${data.network}/ram`])}
 										{/if}
 									</tr>
 									<tr>
