@@ -54,7 +54,7 @@
 						<Stack class="gap-2">
 							<h4 class="text-muted text-base leading-none">Value</h4>
 							<p class="text-xl font-semibold leading-none text-white">
-								<AssetText variant="full" value={data.account.value?.total} />
+								<AssetText variant="full" value={data.account.value?.systemtoken} />
 							</p>
 							<Chip>
 								<TradingPair value={data.network.tokenprice} />

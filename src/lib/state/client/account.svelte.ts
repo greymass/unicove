@@ -121,6 +121,7 @@ export interface AccountValue {
 	liquid: Asset;
 	ram: Asset;
 	staked: Asset;
+	systemtoken: Asset;
 	total: Asset;
 }
 
@@ -133,12 +134,14 @@ export function getAccountValue(
 	const liquid = Asset.from('0.0000 USD');
 	const ram = Asset.from('0.0000 USD');
 	const staked = Asset.from('0.0000 USD');
+	const systemtoken = Asset.from('0.0000 USD');
 	const total = Asset.from('0.0000 USD');
 
 	if (network.tokenprice) {
 		delegated.units.add(calculateValue(balance.delegated, network.tokenprice).units);
 		liquid.units.add(calculateValue(balance.liquid, network.tokenprice).units);
 		staked.units.add(calculateValue(balance.staked, network.tokenprice).units);
+		systemtoken.units.add(calculateValue(balance.total, network.tokenprice).units);
 		total.units.add(calculateValue(balance.total, network.tokenprice).units);
 		if (network.ramprice) {
 			const ramAsset = Asset.from(`${ramResources.max.dividing(1000)} RAM`);
@@ -154,6 +157,7 @@ export function getAccountValue(
 		liquid,
 		ram,
 		staked,
+		systemtoken,
 		total
 	};
 }
