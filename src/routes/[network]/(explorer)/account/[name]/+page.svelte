@@ -7,127 +7,168 @@
 	import { Asset } from '@wharfkit/antelope';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
+	import DollarSign from 'lucide-svelte/icons/dollar-sign';
+	import TradingPair from '$lib/components/elements/tradingpair.svelte';
+	import Chip from '$lib/components/chip.svelte';
 
 	const { data } = $props();
 
 	const context = getContext<UnicoveContext>('state');
 
-	const isCurrentUser = context.account && data.account.name.equals(context.account.name);
+	const isCurrentUser = $derived(
+		context.account &&
+			context.account.name &&
+			data.account &&
+			data.account.name &&
+			data.account.name.equals(context.account.name)
+	);
 </script>
 
+{#snippet tableAction([text, href]: string[])}
+	<td class="text-right">
+		<a class="text-skyBlue-500 hover:text-skyBlue-400" {href}>{text}</a>
+	</td>
+{/snippet}
+
+<!-- What gets shown on this page if data.account doesn't exist? -->
 {#if data.account}
-	<Stack class="gap-2">
-		<Card>
-			<div class="flex items-center gap-5">
-				<div class="flex h-14 w-14 items-center justify-center rounded-full bg-[#303338]">
-					<span class="text-3xl font-light">$</span>
-				</div>
-				<Stack class="gap-2">
-					<p>Total Account Value</p>
-					<AssetText class="h3" value={data.account.value?.total} />
-				</Stack>
+	<Stack>
+		<Card id="account-value" class="flex items-center">
+			<picture class="grid size-12 place-items-center rounded-full bg-mineShaft-900">
+				<DollarSign />
+			</picture>
+			<div>
+				<p>Total Account Value</p>
+				<AssetText
+					class="text-2xl font-bold text-white"
+					variant="full"
+					value={data.account.value?.total}
+				/>
 			</div>
 		</Card>
+
 		<Grid class="grid-cols-5">
 			<Stack class="col-span-3">
-				<Card>
+				<Card id="eos" title="EOS">
 					<Stack>
-						<h3 class="h3">EOS</h3>
-						<h3 class="h4">Value</h3>
-						<div>
-							$ <AssetText value={data.account.value.total} />
-						</div>
-						<div>
-							<AssetText value={data.network.tokenprice} /> EOS/USD
-						</div>
-						<h3 class="h4">Breakdown</h3>
-						<table class="table-styles">
-							<tbody>
-								<tr>
-									<td>Available</td>
-									<td><AssetText value={data.account.balance.liquid} /></td>
-									{#if isCurrentUser}
-										<td>
-											<a href={`/{data.network.chain}/send`}>Send</a>
+						<Stack class="gap-2">
+							<h4 class="text-muted text-base leading-none">Value</h4>
+							<p class="text-xl font-semibold leading-none text-white">
+								<AssetText variant="full" value={data.account.value?.total} />
+							</p>
+							<Chip>
+								<TradingPair value={data.network.tokenprice} />
+								<!-- TODO: Percent change -->
+							</Chip>
+						</Stack>
+
+						<Stack class="gap-2">
+							<h5 class="h5">Breakdown</h5>
+							<table class="table-styles text-muted">
+								<tbody>
+									<tr>
+										<td>Available</td>
+										<td class="text-right text-white"
+											><AssetText variant="full" value={data.account.balance?.liquid} /></td
+										>
+										{#if isCurrentUser}
+											{@render tableAction(['Send', '/{data.network.chain}/send'])}
+										{/if}
+									</tr>
+									<tr>
+										<td>Staked</td>
+										<td class="text-right text-white"
+											><AssetText variant="full" value={data.account.balance?.staked} /></td
+										>
+										{#if isCurrentUser}
+											{@render tableAction(['Staking', '/{data.network.chain}/staking'])}
+										{/if}
+									</tr>
+									<tr>
+										<td>Delegated</td>
+										<td class="text-right text-white"
+											><AssetText variant="full" value={data.account.balance?.delegated} /></td
+										>
+										{#if isCurrentUser}
+											<td></td>
+										{/if}
+									</tr>
+									<tr>
+										<td>Total</td>
+										<td class="text-right text-white">
+											<AssetText variant="full" value={data.account.balance?.total} />
 										</td>
-									{/if}
-								</tr>
-								<tr>
-									<td>Staked</td>
-									<td><AssetText value={data.account.balance.staked} /></td>
-									{#if isCurrentUser}
-										<td>
-											<a href={`/{data.network.chain}/staking`}>Staking</a>
-										</td>
-									{/if}
-								</tr>
-								<tr>
-									<td>Delegated</td>
-									<td><AssetText value={data.account.balance.delegated} /></td>
-									{#if isCurrentUser}
-										<td></td>
-									{/if}
-								</tr>
-								<tr>
-									<td>Total</td>
-									<td><AssetText value={data.account.balance.total} /></td>
-									{#if isCurrentUser}
-										<td></td>
-									{/if}
-								</tr>
-							</tbody>
-						</table>
+										{#if isCurrentUser}
+											<td></td>
+										{/if}
+									</tr>
+								</tbody>
+							</table>
+						</Stack>
 					</Stack>
 				</Card>
-				<Card>
+
+				<Card id="ram" title="RAM">
 					<Stack>
-						<h3 class="h3">RAM</h3>
-						<h3 class="h4">Value</h3>
-						<div>
-							$ <AssetText value={data.account.value.ram} />
-						</div>
-						<div>
-							<AssetText value={data.network.ramprice.usd} /> RAM/USD
-						</div>
-						<h3 class="h4">Breakdown</h3>
-						<table class="table-styles">
-							<tbody>
-								<tr>
-									<td>Available</td>
-									<td
-										><AssetText value={Asset.fromUnits(data.account.ram.available, '3,KB')} /> KB</td
-									>
-									{#if isCurrentUser}
-										<td>
-											<a href={`/{data.network.chain}/ram`}>RAM Market</a>
-										</td>
-									{/if}
-								</tr>
-								<tr>
-									<td>Used</td>
-									<td><AssetText value={Asset.fromUnits(data.account.ram.used, '3,KB')} /> KB</td>
-									{#if isCurrentUser}
-										<td></td>
-									{/if}
-								</tr>
-								<tr>
-									<td>Total</td>
-									<td><AssetText value={Asset.fromUnits(data.account.ram.max, '3,KB')} /> KB</td>
-									{#if isCurrentUser}
-										<td></td>
-									{/if}
-								</tr>
-							</tbody>
-						</table>
+						<Stack class="gap-2">
+							<h4 class="text-muted text-base leading-none">Value</h4>
+							<p class="text-xl font-semibold leading-none text-white">
+								<AssetText variant="full" value={data.account.value?.ram} />
+							</p>
+							<Chip>
+								<!-- TODO: Get TradingPair working with RAM  -->
+								<span>
+									<AssetText value={data.network.ramprice?.usd} /> RAM/USD
+								</span>
+								<!-- TODO: Percent change -->
+							</Chip>
+						</Stack>
+
+						<Stack class="gap-2">
+							<h5 class="h5">Breakdown</h5>
+							<table class="table-styles text-muted">
+								<tbody>
+									<tr>
+										<td>Available</td>
+										<td class="text-right text-white"
+											><AssetText value={Asset.fromUnits(data.account.ram?.available, '3,KB')} /> KB</td
+										>
+										{#if isCurrentUser}
+											{@render tableAction(['RAM Market', '/{data.network.chain}/ram'])}
+										{/if}
+									</tr>
+									<tr>
+										<td>Used</td>
+										<td class="text-right text-white"
+											><AssetText value={Asset.fromUnits(data.account.ram?.used, '3,KB')} /> KB</td
+										>
+										{#if isCurrentUser}
+											<td></td>
+										{/if}
+									</tr>
+									<tr>
+										<td>Total</td>
+										<td class="text-right text-white"
+											><AssetText value={Asset.fromUnits(data.account.ram?.max, '3,KB')} /> KB</td
+										>
+										{#if isCurrentUser}
+											<td></td>
+										{/if}
+									</tr>
+								</tbody>
+							</table>
+						</Stack>
 					</Stack>
 				</Card>
 			</Stack>
+
 			<Stack class="col-span-2">
-				<Card>
-					<h3 class="h3">Distribution</h3>
+				<Card title="Distribution">
+					<div></div>
 				</Card>
-				<Card>
-					<h3 class="h3">Resources</h3>
+
+				<Card title="Resources">
+					<div></div>
 				</Card>
 			</Stack>
 		</Grid>
