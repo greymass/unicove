@@ -1,23 +1,59 @@
 <script lang="ts">
 	import { Box, Card, Stack, Subgrid, Switcher } from '$lib/components/layout';
-	// import { getContext } from 'svelte';
-	// import type { UnicoveContext } from '$lib/state/client.svelte.js';
 	import Button from '$lib/components/button/button.svelte';
 	import EOS from '$lib/assets/EOS@2x.svg';
 	import Metamask from '$lib/assets/metamask.svg';
+	import EOSPriceHistory from '$lib/components/chart/eospricehistory.svelte';
+	import RamPriceHistory from '$lib/components/chart/rampricehistory.svelte';
 
 	import TLVHex from './components/tlvhex.svelte';
-	import { type Snippet } from 'svelte';
+	import { onMount, type Snippet } from 'svelte';
+	// import { Asset } from '@wharfkit/antelope';
+	import type { HistoricalPrice } from '$lib/types';
 
-	// const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
 
-	const APY = 99;
+	const APR = 99;
 	const TLV = 123_456_789;
 	const DAU = 843_945;
 	const RAM_POOL = 1_234_567;
 	const EOS_MARKET_CAP = 1_234_567_890;
 	const TPS = 1_234;
+
+	let ramPrices: HistoricalPrice[] = $state([]);
+	let tokenPrices: HistoricalPrice[] = $state([]);
+
+	// async function loadPrices() {
+	// 	const ramResponse: Response = await fetch(`/${data.network}/api/metrics/marketprice/ram`);
+	// 	const parsedRamResponse: { date: string; value: number }[] | { error: string } =
+	// 		await ramResponse.json();
+	// 	if ('error' in parsedRamResponse && parsedRamResponse.error) {
+	// 		throw new Error(String(parsedRamResponse.error));
+	// 	} else if (Array.isArray(parsedRamResponse)) {
+	// 		ramPrices = parsedRamResponse.map((price: { date: string; value: number }) => ({
+	// 			date: new Date(price.date),
+	// 			value: Asset.from(
+	// 				price.value / 10000,
+	// 				data.network.chain.systemToken?.symbol || '0,UNKNOWN'
+	// 			)
+	// 		}));
+	// 	}
+	// 	const tokenResponse: Response = await fetch(`/${data.network}/api/metrics/marketprice/token`);
+	// 	const parsedTokenResponse: { date: string; value: number }[] | { error: string } =
+	// 		await tokenResponse.json();
+	// 	if ('error' in parsedTokenResponse && parsedTokenResponse.error) {
+	// 		throw new Error(String(parsedTokenResponse.error));
+	// 	} else if (Array.isArray(parsedTokenResponse)) {
+	// 		tokenPrices = parsedTokenResponse.map((price: { date: string; value: number }) => ({
+	// 			date: new Date(price.date),
+	// 			value: Asset.from(price.value / 10000, '4,USD')
+	// 		}));
+	// 	}
+	// }
+
+	onMount(() => {
+		// loadPrices();
+	});
 </script>
 
 {#snippet textblock(props: {
@@ -51,7 +87,7 @@
 			<h1 class="text-balance text-3xl font-semibold leading-tight md:text-4xl md:leading-tight">
 				Unicove is your gateway to the EOS Network
 			</h1>
-			<p class="mb-2 text-balance text-xl leading-tight text-white/60 md:text-2xl md:leading-tight">
+			<p class="text-muted mb-2 text-balance text-xl leading-tight md:text-2xl md:leading-tight">
 				Stake, Send, Manage Tokens, and Explore EOS – all with ease
 			</p>
 			<!-- <Button href={`/${data.network}/signup`}>Create your EOS account now</Button> -->
@@ -129,7 +165,7 @@
 			<Box class="grid place-items-center py-8">
 				{@render textblock({
 					title: 'Metamask is now EOS compatible',
-					text: 'TODO: The APY is an estimate, and may fluctuate based on how many and much others are staking. Your 21 day lockup period starts when you unstake your EOS. You will always get back your staked EOS.',
+					text: 'TODO: The APR is an estimate, and may fluctuate based on how many and much others are staking. Your 21 day lockup period starts when you unstake your EOS. You will always get back your staked EOS.',
 					button: {
 						text: 'Get a free account',
 						href: `/${data.network}/signup`
@@ -139,35 +175,28 @@
 		</div>
 	</section>
 
-	<section class="col-span-full grid grid-cols-subgrid gap-8">
-		<!-- Text -->
-		<div
-			class="z-20 col-span-full row-start-1 max-w-md place-self-center justify-self-start text-balance xs:col-span-1 sm:col-span-full sm:justify-self-auto md:row-span-2 md:row-start-1 md:max-w-md lg:col-span-4 lg:row-auto lg:content-center"
-		>
+	<Switcher threshold="60ch" class="col-span-full gap-6 ">
+		<div>
 			{@render textblock({
 				title: 'Unicove 2.0 enters early access',
-				text: 'Welcome to the early access release of Unicove 2.0! We invite you to explore the new features and provide feedback to help us improve this evolving platform. For the full announcement, visit our blog below.',
+				text: 'Welcome to the new Unicove! We invite you to explore the new features and provide feedback to help us improve this evolving platform. Read the following blog post to learn more.',
 				button: {
-					text: 'Read more...',
+					text: 'More information',
 					href: `https://greymass.medium.com/unicove-2-0-early-access-6a6a318e14db`
 				}
 			})}
 		</div>
-
-		<!-- Graphics -->
-		<div
-			class="col-span-full grid place-items-center xs:col-start-3 xs:row-start-1 md:col-start-5 md:row-span-2 md:row-start-2 lg:row-auto"
-		>
+		<div>
 			{@render textblock({
 				title: 'Looking for the old version?',
-				text: 'The original version of Unicove has moved to a new URL and will remain available for use. If you prefer the old version or need one of the features it offers, you can access it here.',
+				text: 'The original version of Unicove has moved to a new URL. If you prefer the old version or need a feature it offers, you can continue to access it at the link below.',
 				button: {
-					text: 'https://v1.unicove.com',
+					text: 'Go to Unicove 1.0',
 					href: `https://v1.unicove.com`
 				}
 			})}
 		</div>
-	</section>
+	</Switcher>
 
 	<section class="col-span-full grid hidden grid-cols-subgrid gap-8">
 		<!-- Text -->
@@ -175,8 +204,8 @@
 			class="z-20 col-span-full row-start-1 max-w-md place-self-center justify-self-start text-balance xs:col-span-1 sm:col-span-full sm:justify-self-auto md:row-span-2 md:row-start-1 md:max-w-md lg:col-span-4 lg:row-auto lg:content-center"
 		>
 			{@render textblock({
-				title: `Stake your tokens for ${APY}% APY`,
-				text: 'TODO: The APY is an estimate, and may fluctuate based on how many and much others are staking. Your 21 day lockup period starts when you unstake your EOS. You will always get back your staked EOS.',
+				title: `Stake your tokens for ${APR}% APR`,
+				text: 'TODO: The APR is an estimate, and may fluctuate based on how many and much others are staking. Your 21 day lockup period starts when you unstake your EOS. You will always get back your staked EOS.',
 				button: {
 					text: 'My Staking',
 					href: `/${data.network}/staking`
@@ -188,7 +217,7 @@
 		<div
 			class="col-span-full grid place-items-center xs:col-start-3 xs:row-start-1 md:col-start-5 md:row-span-2 md:row-start-2 lg:row-auto"
 		>
-			<TLVHex {TLV} {APY} />
+			<TLVHex {TLV} {APR} />
 		</div>
 	</section>
 
@@ -196,9 +225,21 @@
 	<section class="col-span-full hidden">
 		<Switcher>
 			<div>
+				{#if ramPrices.length}
+					<RamPriceHistory data={ramPrices} />
+				{/if}
+			</div>
+			<div>
+				{#if tokenPrices.length}
+					<EOSPriceHistory data={tokenPrices} />
+				{/if}
+			</div>
+		</Switcher>
+		<Switcher>
+			<div>
 				{@render textblock({
 					title: `RAM Market`,
-					text: 'TODO: The APY is an estimate, and may fluctuate based on how many and much others are staking. Your 21 day lockup period starts when you unstake your EOS. You will always get back your staked EOS.',
+					text: 'TODO: The APR is an estimate, and may fluctuate based on how many and much others are staking. Your 21 day lockup period starts when you unstake your EOS. You will always get back your staked EOS.',
 					button: {
 						text: 'Live network overview',
 						href: `#`
@@ -208,7 +249,7 @@
 			<div>
 				{@render textblock({
 					title: `EOS Token`,
-					text: 'TODO: The APY is an estimate, and may fluctuate based on how many and much others are staking. Your 21 day lockup period starts when you unstake your EOS. You will always get back your staked EOS.',
+					text: 'TODO: The APR is an estimate, and may fluctuate based on how many and much others are staking. Your 21 day lockup period starts when you unstake your EOS. You will always get back your staked EOS.',
 					button: {
 						text: 'Live network overview',
 						href: `#`
@@ -224,7 +265,7 @@
 		<div class=" col-span-full grid items-center text-balance lg:col-span-3 lg:row-start-1">
 			{@render textblock({
 				title: `EOS performance and stats`,
-				text: 'TODO: The APY is an estimate, and may fluctuate based on how many and much others are staking. Your 21 day lockup period starts when you unstake your EOS. You will always get back your staked EOS.',
+				text: 'TODO: The APR is an estimate, and may fluctuate based on how many and much others are staking. Your 21 day lockup period starts when you unstake your EOS. You will always get back your staked EOS.',
 				button: {
 					text: 'Live network overview',
 					href: `#`

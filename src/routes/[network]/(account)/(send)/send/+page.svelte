@@ -35,9 +35,9 @@
 	const { data } = $props();
 	const sendState: SendState = $state(new SendState());
 
-	let quantityInput: typeof AssetInput | undefined = $state();
-	let toInput: typeof NameInput | undefined = $state();
-	let tokenSelect: typeof TokenSelect | undefined = $state();
+	let quantityInput: AssetInput | undefined = $state();
+	let toInput: NameInput | undefined = $state();
+	let tokenSelect: TokenSelect | undefined = $state();
 
 	let quantityRef: HTMLInputElement | undefined = $state();
 	let toRef: HTMLInputElement | undefined = $state();
@@ -278,7 +278,7 @@
 
 	const tokenOptions: TokenBalance[] = $derived.by(() => {
 		if (context.account && context.account.balances && context.account.balances.length) {
-			return context.account.balances;
+			return context.account.balances.filter((b) => b.asset.value > 0);
 		}
 		return [];
 	});

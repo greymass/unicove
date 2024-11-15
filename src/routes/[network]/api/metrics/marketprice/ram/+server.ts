@@ -1,5 +1,4 @@
 import { json } from '@sveltejs/kit';
-import path from 'path';
 import type { RequestHandler } from './$types';
 import { Asset } from '@wharfkit/antelope';
 import { API_EOS_METRICS } from '$env/static/private';

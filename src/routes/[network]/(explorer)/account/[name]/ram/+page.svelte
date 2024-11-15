@@ -8,9 +8,9 @@
 </script>
 
 {#if data.account}
-	<h3 class="mb-4">Account RAM</h3>
-	<div class="grid grid-cols-1 gap-4 md:grid-cols-3">
-		<Card class="rounded-lg bg-gray-600 p-4 shadow">
+	<h3>Account RAM</h3>
+	<div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+		<Card>
 			<h4 class="mb-2 text-lg font-semibold">Total:</h4>
 			<ul class="space-y-2">
 				<li><RAM bytes={Number(data.account.ram?.max || 0)} /></li>
@@ -32,7 +32,7 @@
 				{/if}
 			</ul>
 		</Card>
-		<Card class="rounded-lg bg-gray-600 p-4 shadow">
+		<Card>
 			<h4 class="mb-2 text-lg font-semibold">Available:</h4>
 			<ul class="space-y-2">
 				<li><RAM bytes={Number(data.account.ram?.available || 0)} /></li>
@@ -54,7 +54,7 @@
 				{/if}
 			</ul>
 		</Card>
-		<Card class="rounded-lg bg-gray-600 p-4 shadow">
+		<Card>
 			<h4 class="mb-2 text-lg font-semibold">Used:</h4>
 			<ul class="space-y-2">
 				<li><RAM bytes={Number(data.account.ram?.used || 0)} /></li>
@@ -82,7 +82,7 @@
 {/if}
 
 {#if data.account.network}
-	<Card class="mt-4 rounded-lg bg-gray-600 p-4 shadow">
+	<Card>
 		<h3 class="mb-2 text-xl font-semibold">Current RAM Prices</h3>
 		<ul class="space-y-2">
 			<li>

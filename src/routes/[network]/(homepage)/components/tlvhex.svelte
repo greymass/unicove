@@ -1,7 +1,7 @@
 <script lang="ts">
 	import EOS from '$lib/assets/EOS@2x.svg';
 
-	const { TLV, APY } = $props();
+	const { TLV, APR } = $props();
 </script>
 
 <div class="relative max-w-fit">
@@ -44,8 +44,8 @@
 			/>
 		</svg>
 		<div class="grid text-center uppercase">
-			<span class="text-sm text-white/60 md:text-lg">APY</span>
-			<span class="text-md font-semibold md:text-2xl">{APY}%</span>
+			<span class="text-sm text-white/60 md:text-lg">APR</span>
+			<span class="text-md font-semibold md:text-2xl">{APR}%</span>
 		</div>
 	</div>
 </div>

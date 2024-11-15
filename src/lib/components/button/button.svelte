@@ -64,7 +64,7 @@
 	}
 
 	[data-variant='secondary'] {
-		@apply relative flex h-12 grow items-center justify-center text-nowrap rounded-lg px-8 text-center text-base font-medium text-skyBlue-400 ring-2 ring-inset ring-mineShaft-600 transition-all hover:ring-transparent focus-visible:outline-transparent focus-visible:ring-solar-500 hover:active:bg-mineShaft-950 hover:active:ring-mineShaft-900 disabled:cursor-not-allowed disabled:text-mineShaft-400 disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:ring-mineShaft-600 disabled:active:ring-mineShaft-600 [@media(any-hover:hover)]:hover:bg-mineShaft-900;
+		@apply relative flex h-12 grow items-center justify-center text-nowrap rounded-lg px-8 text-center text-base font-medium text-skyBlue-400 ring-2 ring-inset ring-mineShaft-600 transition-all hover:ring-transparent focus-visible:outline-none focus-visible:ring-solar-500 hover:active:bg-mineShaft-950 hover:active:ring-mineShaft-900 disabled:cursor-not-allowed disabled:text-mineShaft-400 disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:ring-mineShaft-600 disabled:active:ring-mineShaft-600 [@media(any-hover:hover)]:hover:bg-mineShaft-900;
 	}
 
 	[data-variant='pill'] {

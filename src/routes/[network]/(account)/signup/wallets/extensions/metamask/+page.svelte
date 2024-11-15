@@ -47,7 +47,9 @@
 			});
 			console.log(`Account created: ${accountCreationResponse.accountName}`);
 
-			await wharf.login();
+			await wharf.login({
+				walletPlugin: 'wallet-plugin-metamask'
+			});
 		} catch (error) {
 			console.error('Error creating account:', error);
 			alert(
@@ -82,8 +84,8 @@
 		{/if}
 	</Grid>
 
-	<Box class="mt-8 rounded-lg bg-gray-800 p-4 text-white">
-		<h3 class="mb-2 text-lg font-semibold">How This Works</h3>
+	<Card class="mt-8 gap-2">
+		<h3 class="text-lg font-semibold">How This Works</h3>
 		<p>
 			This signup method allows you to use your MetaMask wallet to interact with {data.network.chain
 				.name}. The EOS Wallet Snap extends MetaMask's functionality, enabling it to sign {data
@@ -91,5 +93,5 @@
 			to manage your {data.network.chain.name} assets and interact with {data.network.chain
 				.name}-based applications.
 		</p>
-	</Box>
+	</Card>
 </Box>

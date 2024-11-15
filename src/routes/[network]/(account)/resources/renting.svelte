@@ -133,11 +133,11 @@
 	<div class="pb-6"><Transaction {network} {transactionId} /></div>
 {/if}
 
-<div class="mx-auto max-w-md">
+<div class="mx-auto max-w-md space-y-3">
 	<CpuAndNetResource cpuAvailable={cpuAvailableSize} netAvailable={netAvailableSize} {precision} />
 	<form onsubmit={preventDefault(handleRent)}>
-		<Stack class="py-4 sm:p-4">
-			<fieldset class="grid gap-2">
+		<Stack class="py-4 sm:p-4 ">
+			<fieldset class="grid gap-4">
 				<Label for="cpuNumberInput"
 					>Amount of CPU {#if rentState.cpuPricePerMs}
 						(<AssetText variant="full" value={rentState.cpuPricePerMs} />/MS){/if}</Label
@@ -145,12 +145,13 @@
 				<NumberInput
 					bind:this={cpuAmountInput}
 					id="cpuNumberInput"
+					unit="ms"
 					bind:value={rentState.cpuAmount}
-					placeholder="0 MS"
+					placeholder="0"
 				/>
 			</fieldset>
 
-			<fieldset class="grid gap-2">
+			<fieldset class="grid gap-4">
 				<Label for="netNumberInput"
 					>Amount of NET {#if rentState.netPricePerKb}
 						(<AssetText variant="full" value={rentState.netPricePerKb} />/KB){/if}</Label
@@ -158,8 +159,9 @@
 				<NumberInput
 					bind:this={netAmountInput}
 					id="netNumberInput"
+					unit="kb"
 					bind:value={rentState.netAmount}
-					placeholder="0 KB"
+					placeholder="0"
 				/>
 			</fieldset>
 
@@ -169,7 +171,7 @@
 			</fieldset>
 
 			{#if !rentState.rentingForSelf}
-				<fieldset class="semi-bold grid gap-2">
+				<fieldset class="semi-bold grid gap-4">
 					<Label for="thirdReceiver">Receiving Account</Label>
 					<NameInput
 						id="thirdReceiver"
@@ -197,15 +199,15 @@
 	<Stack class="sm:px-4">
 		<ul>
 			{#each rentDetails as detail}
+				<!-- TODO: Color audit -->
 				<li
-					class="flex justify-between border-b border-neutral-300/10 bg-gradient-to-r from-transparent to-transparent py-3 last:border-none odd:via-mineShaft-950"
+					class="flex justify-between border-b border-mineShaft-300/10 bg-gradient-to-r from-transparent to-transparent py-3 last:border-none odd:via-mineShaft-950"
 				>
 					<span class="text-base font-medium">{detail.title}</span>
 					<span class="text-base font-medium text-white">{detail.desc}</span>
 				</li>
 			{/each}
 		</ul>
-		<Button variant="secondary" href="/{network}/resources" class="w-full">Cancel</Button>
 	</Stack>
 </div>
 {#if debugMode.value}
@@ -213,62 +215,12 @@
 		<h3 class="h3 text-center">Debug Info</h3>
 		<table class="table-styles">
 			<tbody>
-				<tr>
-					<td class="text-left">RentType</td>
-					<td class="text-right">{rentType}</td>
-				</tr>
-				<tr>
-					<td class="text-left">Balance</td>
-					<td class="text-right">{rentState.balance}</td>
-				</tr>
-				<tr>
-					<td class="text-left">Receiver</td>
-					<td class="text-right">{rentState.receiver}</td>
-				</tr>
-				<tr>
-					<td class="text-left">RentingForSelf</td>
-					<td class="text-right">{rentState.rentingForSelf}</td>
-				</tr>
-				<tr>
-					<td class="text-left">ThirdReceiver</td>
-					<td class="text-right">{rentState.thirdReceiver}</td>
-				</tr>
-				<tr>
-					<td class="text-left">ThirdReceiver-Valid</td>
-					<td class="text-right">{rentState.thirdReceiverValid}</td>
-				</tr>
-
-				<tr>
-					<td class="text-left">Valid</td>
-					<td class="text-right">{rentState.valid}</td>
-				</tr>
-				<tr>
-					<td class="text-left">CpuAmount</td>
-					<td class="text-right">{rentState.cpuAmount}</td>
-				</tr>
-
-				<tr>
-					<td class="text-left">NetAmount</td>
-					<td class="text-right">{rentState.netAmount}</td>
-				</tr>
-				<tr>
-					<td class="text-left">CpuQuantity</td>
-					<td class="text-right">{rentState.cpuQuantity}</td>
-				</tr>
-				<tr>
-					<td class="text-left">NetQuantity</td>
-					<td class="text-right">{rentState.netQuantity}</td>
-				</tr>
-				{#if rentType === 'POWERUP'}
+				{#each rentState.getDebugInfo() as item}
 					<tr>
-						<td class="text-left">CpuFrac</td>
-						<td class="text-right">{rentState.cpuFrac}</td>
+						<td class="text-left">{item[0]}</td>
+						<td class="text-right">{item[1]}</td>
 					</tr>
-					<tr>
-						<td class="text-left">NetFrac</td>
-						<td class="text-right">{rentState.netFrac}</td>
-					</tr>
-				{/if}
+				{/each}
 			</tbody>
 		</table>
 	</div>

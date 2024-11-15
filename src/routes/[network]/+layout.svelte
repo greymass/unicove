@@ -8,7 +8,6 @@
 	import UnicoveLogo from '$lib/assets/unicovelogo.svelte';
 	import Search from '$lib/components/input/search.svelte';
 	import X from 'lucide-svelte/icons/circle-x';
-	// import Footer from '$lib/components/footer.svelte';
 
 	let { children, data } = $props();
 
@@ -87,13 +86,20 @@
 </script>
 
 {#if showBanner}
-	<aside class="flex items-center justify-between gap-4 bg-mineShaft-950 pl-4 shadow">
-		<p class="py-4 text-white">
+	<aside
+		class="grid grid-cols-[auto_1fr_auto] items-center justify-items-center gap-4 bg-mineShaft-950 shadow *:row-start-1"
+	>
+		<p
+			class="col-start-2 py-4 font-medium text-mineShaft-50 md:col-span-3 md:col-start-1 md:text-center"
+		>
 			Looking for the old version of Unicove? Go to
 			<a class="underline" href="https://v1.unicove.com">v1.unicove.com</a>
 		</p>
-		<button class="grid size-12 place-items-center" onclick={hideBanner}>
-			<X class="size-4" />
+		<button
+			class="col-start-3 grid size-12 place-items-center justify-self-end text-inherit"
+			onclick={hideBanner}
+		>
+			<X class="size-4 " />
 		</button>
 	</aside>
 {/if}
@@ -110,6 +116,7 @@
 	grid-cols-2
 	grid-rows-[min-content_minmax(0,1fr)]
 	gap-y-6
+	pb-12
 	pt-4
 	sm:grid-cols-4
 	md:h-auto
@@ -119,9 +126,12 @@
 	md:gap-x-4
 	"
 >
-	<header class="col-span-full flex items-center justify-between">
+	<header class="col-span-full flex h-12 items-center justify-between">
 		<!-- Larger breakpoints only	 -->
-		<a href="/{data.network}" class="hidden w-min place-self-center md:block">
+		<a
+			href="/{data.network}"
+			class="hidden w-min place-self-center rounded-sm focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-solar-500 md:block"
+		>
 			<UnicoveLogo small />
 		</a>
 
@@ -145,15 +155,4 @@
 	>
 		{@render children()}
 	</main>
-
-	<!-- <Footer /> -->
 </div>
-
-<!-- This wrapper sets up the bottom menu on mobile, becomes hidden on desktop -->
-<!-- <aside -->
-<!-- 	class="px-page fixed bottom-0 z-50 flex h-14 w-full justify-between bg-shark-950 py-2 md:hidden" -->
-<!-- > -->
-<!-- 	<MobileNavigation network={data.network} /> -->
-<!---->
-<!-- 	<Search network={data.network} /> -->
-<!-- </aside> -->

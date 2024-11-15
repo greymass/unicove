@@ -1,6 +1,8 @@
 <script lang="ts">
 	import type { ComponentProps } from 'svelte';
 	import TextInput from './text.svelte';
+	import Code from '../code.svelte';
+	import ArrowUpDown from 'lucide-svelte/icons/arrow-up-down';
 
 	interface BytesInputProps extends ComponentProps<typeof TextInput> {
 		valid?: boolean;
@@ -76,8 +78,7 @@
 		if (!event) {
 			return;
 		}
-		const inputString = String(event.currentTarget.value);
-
+		const inputString = event.currentTarget.value;
 		const numericInput = Number(inputString);
 
 		if (isNaN(numericInput) || numericInput < 0) {
@@ -89,7 +90,11 @@
 		valueSetByParent = false;
 
 		// Allowing input of decimal values
-		if (numericInput && String(numericInput) !== inputString) {
+		if (
+			numericInput &&
+			String(numericInput) !== inputString &&
+			String(numericInput) !== `0${inputString}`
+		) {
 			isAddingDecimal = true;
 			input = inputString || '';
 			return;
@@ -161,26 +166,24 @@
 		oninput={handleInput}
 		{...props}
 	/>
-	<div
+	<button
 		onclick={cycleUnit}
-		onkeydown={cycleUnit}
-		role="button"
-		tabindex="0"
-		class="absolute right-2 top-1/2 flex w-16 -translate-y-1/2 cursor-pointer items-center justify-center rounded-md bg-transparent py-2 text-sky-500 transition-all duration-200 ease-in-out hover:text-sky-300"
+		type="button"
+		class="absolute inset-y-0 right-0 flex select-none items-center gap-1 rounded-md bg-transparent px-4 text-skyBlue-500 hover:text-skyBlue-300 focus:outline-none focus-visible:ring focus-visible:ring-inset focus-visible:ring-solar-500"
 	>
 		<span class="text-sm font-medium">{unit}</span>
-		<span class="ml-1 text-xs">⇅</span>
-	</div>
+		<ArrowUpDown class="size-4" />
+	</button>
 </div>
 
 {#if debug}
 	<div class="mt-4">
 		<h3>Component State</h3>
-		<pre>
-            Input (string):   "{input}"
-            Bytes (number):   "{value}"
-            Unit: "{unit}"
-            Valid: {valid}
-		</pre>
+		<Code>
+			<pre>Input (string):   "{input}"
+Bytes (number):   "{value}"
+Unit: "{unit}"
+Valid: {valid}</pre>
+		</Code>
 	</div>
 {/if}

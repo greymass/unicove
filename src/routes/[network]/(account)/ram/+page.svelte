@@ -13,7 +13,6 @@
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
 	import Label from '$lib/components/input/label.svelte';
-	import { Grid } from '$lib/components/layout';
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');
@@ -41,6 +40,9 @@
 		}
 	});
 
+	let ramAvailable = $derived(
+		Asset.from(Number(context.account?.ram?.available || 0) / 1000, '4,KB')
+	);
 	let ramOwned = $derived(Asset.from(Number(context.account?.ram?.max || 0) / 1000, '4,KB'));
 
 	const ramCalculatorState = new RAMCalculatorState(data.network.chain);
@@ -62,34 +64,45 @@
 
 	let assetInput: AssetInput;
 	let bytesInput: BytesInput;
+
+	const layoutClasses = $derived({
+		container: `grid gap-6 ${data.historicalPrices.length ? 'lg:grid-cols-2' : 'max-w-lg'}`,
+		calculatorWrapper: `${data.historicalPrices.length ? 'lg:col-start-1 lg:row-span-2' : ''}`,
+		statsWrapper: `gap-6 ${data.historicalPrices.length ? 'lg:col-start-2' : ''}`
+	});
 </script>
 
-<div class="grid gap-6 lg:grid-cols-2">
+<div class={layoutClasses.container}>
 	<!-- Buy Sell Card -->
-	<Card class="flex *:flex-1 lg:col-start-1">
+	<Card class="flex *:flex-1">
 		<div class="grid content-between gap-4">
 			<div class="grid">
-				<h3 class="text-muted text-base">Available</h3>
-				<AssetText class="text-xl" variant="full" value={ramOwned} />
-				<AssetText
-					class="text-muted text-base"
-					variant="full"
-					value={data.network.ramprice?.usd && calculateValue(ramOwned, data.network.ramprice?.eos)}
-				/>
+				<h3 class="text-muted text-base">RAM Available</h3>
+				<AssetText class="text-xl" variant="full" value={ramAvailable} />
+				<div class="text-muted text-base">
+					<AssetText variant="full" value={ramOwned} /> Total
+				</div>
 			</div>
-
 			<Button variant="secondary" href="/{String(data.network)}/ram/buy">Buy</Button>
 		</div>
 
 		<div class="grid content-between gap-4">
 			<div>
-				<h3 class="text-muted text-base">Total RAM Value</h3>
+				<h3 class="text-muted text-base">Sellable Value</h3>
 				<AssetText
 					class="text-xl"
 					variant="full"
 					value={data.network.ramprice?.usd &&
-						Asset.from(calculateValue(ramOwned, data.network.ramprice?.usd).value, '2,USD')}
+						Asset.from(calculateValue(ramAvailable, data.network.ramprice?.usd).value, '2,USD')}
 				/>
+				<div>
+					<AssetText
+						class="text-muted text-base"
+						variant="full"
+						value={data.network.ramprice?.usd &&
+							calculateValue(ramOwned, data.network.ramprice?.eos)}
+					/>
+				</div>
 			</div>
 
 			<Button variant="secondary" href="/{String(data.network)}/ram/sell">Sell</Button>
@@ -97,8 +110,8 @@
 	</Card>
 
 	<!-- RAM Calculator -->
-	<div class="lg:col-start-1 lg:row-span-2">
-		<Card class="gap-6 ">
+	<div class={layoutClasses.calculatorWrapper}>
+		<Card class="gap-6">
 			<h3 class="text-xl font-bold">RAM Calculator</h3>
 			<div class="flex gap-4 *:flex-1">
 				<Stack class="gap-2">
@@ -190,22 +203,30 @@
 		</div>
 	{/if}
 
-	<Grid class="gap-6 lg:col-start-2">
-		<Card>
-			<h3 class="text-muted">
-				RAM Market Cap {data.network.chain.systemToken?.symbol.code || ''}
-			</h3>
-			<AssetText variant="full" value={marketCapEOS} class="text-right" />
-		</Card>
-
-		<Card>
-			<h3 class="text-muted">RAM Supply</h3>
-			<AssetText variant="full" value={ramSupply} class="text-right" />
-		</Card>
-
-		<Card class="w-full">
-			<h3 class="text-muted">RAM Market Cap USD</h3>
-			<AssetText variant="full" value={marketCapUSD} class="text-right" />
-		</Card>
-	</Grid>
+	<Card>
+		<table>
+			<tbody class="*:border-b *:border-mineShaft-900 *:pt-8 last:*:border-b-0 *:even:text-right">
+				<tr class="*:py-2">
+					<td class="text-muted text-base"
+						>RAM Market Cap {data.network.chain.systemToken?.symbol.code || ''}</td
+					>
+					<td class="text-right">
+						<AssetText variant="full" value={marketCapEOS} />
+					</td>
+				</tr>
+				<tr class="*:py-2">
+					<td class="text-muted text-base">RAM Market Cap USD</td>
+					<td class="text-right">
+						<AssetText variant="full" value={marketCapUSD} />
+					</td>
+				</tr>
+				<tr class="*:py-2">
+					<td class="text-muted text-base">RAM Supply</td>
+					<td class="text-right">
+						<AssetText variant="full" value={ramSupply} />
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</Card>
 </div>

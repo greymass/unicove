@@ -12,54 +12,63 @@
 	import Tables from './sections/tables.svelte';
 	import Charts from './sections/charts.svelte';
 	import Tooltips from './sections/tooltips.svelte';
+	import Chips from './sections/chips.svelte';
 </script>
 
 <h1 class="h1 mb-8">Design System</h1>
 
+{#snippet divider()}
+	<hr class="my-8 h-px border-0 bg-shark-900" />
+{/snippet}
+
 <Stack class="space-y-12 pb-12">
 	<Typography />
 
-	<hr class="my-8 h-px border-0 bg-slate-200 dark:bg-slate-800" />
+	{@render divider()}
 
 	<Buttons />
 
-	<hr class="my-8 h-px border-0 bg-slate-200 dark:bg-slate-800" />
+	{@render divider()}
 
-	<Select />
+	<Chips />
 
-	<hr class="my-8 h-px border-0 bg-slate-200 dark:bg-slate-800" />
-
-	<Inputs />
-
-	<hr class="my-8 h-px border-0 bg-slate-200 dark:bg-slate-800" />
+	{@render divider()}
 
 	<Cards />
 
-	<hr class="my-8 h-px border-0 bg-slate-200 dark:bg-slate-800" />
+	{@render divider()}
 
 	<Navigation />
 
-	<hr class="my-8 h-px border-0 bg-slate-200 dark:bg-slate-800" />
+	{@render divider()}
 
 	<Progress />
 
-	<hr class="my-8 h-px border-0 bg-slate-200 dark:bg-slate-800" />
+	{@render divider()}
 
 	<Code />
 
-	<hr class="my-8 h-px border-0 bg-slate-200 dark:bg-slate-800" />
+	{@render divider()}
 
 	<Tables />
 
-	<hr class="my-8 h-px border-0 bg-slate-200 dark:bg-slate-800" />
+	{@render divider()}
 
 	<Charts />
 
-	<hr class="my-8 h-px border-0 bg-slate-200 dark:bg-slate-800" />
+	{@render divider()}
+
+	<Select />
+
+	{@render divider()}
+
+	<Inputs />
+
+	{@render divider()}
 
 	<Layouts />
 
-	<hr class="my-8 h-px border-0 bg-slate-200 dark:bg-slate-800" />
+	{@render divider()}
 
 	<Tooltips />
 </Stack>
