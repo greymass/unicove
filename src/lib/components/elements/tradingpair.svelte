@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { languageTag } from '$lib/paraglide/runtime';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import { Asset } from '@wharfkit/antelope';
+	import AssetText from '$lib/components/elements/asset.svelte';
 	import { getContext } from 'svelte';
 	import type { HTMLAttributes } from 'svelte/elements';
+	import { Asset } from '@wharfkit/antelope';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -13,17 +13,8 @@
 
 	let { value: asset, ...props }: Props = $props();
 
-	const locale = languageTag();
-
-	const options: Intl.NumberFormatOptions = {
-		style: 'decimal',
-		minimumFractionDigits: asset?.symbol.precision
-	};
-
-	let formattedValue = $derived(Intl.NumberFormat(locale, options).format(asset?.value || 0));
-
-	let baseCode = $derived(context.network?.chain.systemToken?.symbol.code);
-	let quoteCode = $derived(asset?.symbol.code);
+	let baseCode = $derived(asset?.symbol.code);
+	let quoteCode = $derived(context.network?.chain.systemToken?.symbol.code);
 </script>
 
-<span class={props.class}>{formattedValue} {baseCode}/{quoteCode}</span>
+<span class={props.class}> <AssetText value={asset} /> {baseCode}/{quoteCode}</span>

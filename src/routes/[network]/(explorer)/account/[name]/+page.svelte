@@ -118,7 +118,7 @@
 							<Chip>
 								<!-- TODO: Get TradingPair working with RAM  -->
 								<span>
-									<AssetText value={data.network.ramprice?.usd} /> RAM/USD
+									<AssetText value={data.network.ramprice?.usd} /> USD/KB
 								</span>
 								<!-- TODO: Percent change -->
 							</Chip>
