@@ -36,7 +36,6 @@
 	}
 
 	function formatCurrencyValue() {
-		console.log(currencyOptions);
 		return Intl.NumberFormat(locale, currencyOptions).format(asset?.value || fallback);
 	}
 
