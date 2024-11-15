@@ -35,13 +35,14 @@ export class ActivityAction extends Struct {
 }
 
 export interface ActivityActionWrapper {
-	src: ActivityAction,
+	src: ActivityAction;
 	id: string;
 	shortId: string;
 	seqId: string;
 	date: string;
 	timeInDay: string;
 	actionName: string;
+	actionStyle: string;
 	actionData: string;
 }
 

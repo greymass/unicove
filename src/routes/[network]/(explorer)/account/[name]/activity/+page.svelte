@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Center from '$lib/components/layout/center.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
 	import { untrack } from 'svelte';
 	import { ActivityLoader } from './state.svelte.js';
@@ -22,7 +21,7 @@
 
 	const isLoading = $derived.by(() => {
 		const scence = activityLoader.scene;
-		return scence.isLoading && scence.list.length === 0;
+		return scence.isLoading && !scence.list.length;
 	});
 
 	const loadingText = $derived.by(() => {
@@ -53,17 +52,17 @@
 	{#if activityActions.length}
 		<div>
 			<div class="hidden border-b border-mineShaft-900 lg:flex lg:flex-row">
-				<div class="grow-0 basis-[15%] px-2 py-3">ID</div>
-				<div class="grow-0 basis-[22%] px-2 py-3">Time</div>
-				<div class="grow-0 basis-[25%] px-2 py-3">Action</div>
-				<div class="grow-0 basis-[38%] px-2 py-3">Info</div>
+				<div class="grow-0 basis-[12%] px-2 py-3">ID</div>
+				<div class="grow-0 basis-[20%] px-2 py-3">Time</div>
+				<div class="grow-0 basis-[23%] px-2 py-3">Action</div>
+				<div class="grow-0 basis-[45%] px-2 py-3">Info</div>
 			</div>
 
 			{#each activityActions as activityAction}
 				<div
 					class="text-muted box-border flex flex-col break-words border-b border-mineShaft-900 py-4 lg:flex-row"
 				>
-					<div class="flex flex-1 gap-2 px-2 py-1 lg:max-w-[15%] lg:grow-0 lg:basis-[15%] lg:py-3">
+					<div class="flex flex-1 gap-2 px-2 py-1 lg:max-w-[12%] lg:grow-0 lg:basis-[11%] lg:py-3">
 						<div class="block lg:hidden">
 							<span class="text-white">ID:</span>
 						</div>
@@ -72,7 +71,7 @@
 						>
 					</div>
 					<div
-						class="flex flex-1 gap-2 px-2 py-1 lg:max-w-[22%] lg:grow-0 lg:basis-[22%] lg:gap-0 lg:py-3"
+						class="flex flex-1 gap-2 px-2 py-1 lg:max-w-[20%] lg:grow-0 lg:basis-[20%] lg:gap-0 lg:py-3"
 					>
 						<div class="block lg:hidden">
 							<span class="text-white">Time:</span>
@@ -82,14 +81,16 @@
 						</div>
 					</div>
 					<div
-						class="flex flex-1 break-all px-2 py-1 lg:max-w-[25%] lg:grow-0 lg:basis-[25%] lg:py-3"
+						class="flex flex-1 break-all px-2 py-1 lg:max-w-[23%] lg:grow-0 lg:basis-[23%] lg:py-3"
 					>
 						<div>
-							{@html activityAction.actionName}
+							<span class="inline-block rounded px-3 py-0.5 {activityAction.actionStyle} text-white"
+								>{activityAction.actionName}</span
+							>
 						</div>
 					</div>
 					<div
-						class="flex flex-1 flex-col px-2 py-1 lg:max-w-[38%] lg:grow-0 lg:basis-[38%] lg:py-3"
+						class="flex flex-1 flex-col px-2 py-1 lg:max-w-[45%] lg:grow-0 lg:basis-[45%] lg:py-3"
 					>
 						<Code>{JSON.stringify(activityAction.actionData, null, 2)}</Code>
 					</div>
@@ -97,12 +98,12 @@
 			{/each}
 		</div>
 		<div class="flex items-center">
-			<a
+			<button
 				onclick={clickLoadMore}
 				class="mx-auto min-w-32 border-2 border-shark-900/20 bg-skyBlue-500 px-5 py-3 text-center"
 			>
 				{loadingText}
-			</a>
+			</button>
 		</div>
 	{/if}
 </Stack>

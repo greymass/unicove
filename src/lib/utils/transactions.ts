@@ -1,163 +1,17 @@
 import type { ActivityAction, ActivityActionWrapper } from '$lib/types';
 import { Checksum256, Name } from '@wharfkit/antelope';
 
-interface IActivityDelegate {
-	getActionName: (currentAccount: string, action: ActivityAction) => string;
-	isMyActionTrace: (currentAccount: string, action: ActivityAction) => boolean;
-}
-
-class BaseActivityDelegate implements IActivityDelegate {
-	checkReceiver: boolean;
-
-	constructor(checkReceiver = false) {
-		this.checkReceiver = checkReceiver;
-	}
-
-	getActionName(currentAccount: string, action: ActivityAction): string {
-		const name = `${action.contract} - ${action.action}`;
-		return `<span class="inline-block px-3 py-0.5 rounded bg-mineShaft-500 text-white">${name}</span>`;
-	}
-
-	isMyActionTrace(currentAccount: string, action: ActivityAction) {
-		if (this.checkReceiver) return action['raw']['action_trace']['receiver'] === currentAccount;
-		return true;
-	}
-}
-
-class SystemActivityDelegate extends BaseActivityDelegate {
-	static EOSIO = Name.from('eosio');
-
-	protected actionName: string;
-
-	constructor(actionName: string, checkReceiver = false) {
-		super(checkReceiver);
-		this.actionName = actionName;
-	}
-
-	override getActionName(currentAccount: string, action: ActivityAction): string {
-		if (SystemActivityDelegate.EOSIO.equals(action.contract)) {
-			return `<span class="inline-block px-3 py-0.5 rounded bg-mineShaft-500 text-white">${this.actionName}</span>`;
-		}
-		return super.getActionName(currentAccount, action);
-	}
-}
-
-class TransferActivityDelegate extends SystemActivityDelegate {
-	static EOSIO_TOKEN = Name.from('eosio.token');
-
-	constructor() {
-		super('transfer', true);
-	}
-
-	isSendToken(currentAccount: string, action: ActivityAction): boolean {
-		return currentAccount === action.data['from'];
-	}
-
-	isReceiveToken(currentAccount: string, action: ActivityAction): boolean {
-		return currentAccount === action.data['to'];
-	}
-
-	getActionName(currentAccount: string, action: ActivityAction): string {
-		if (TransferActivityDelegate.EOSIO_TOKEN.equals(action.contract)) {
-			if (this.isSendToken(currentAccount, action)) {
-				return '<span class="inline-block px-3 py-0.5 rounded bg-solar-500 text-white">Sent Token</span>';
-			}
-			if (this.isReceiveToken(currentAccount, action)) {
-				return '<span class="inline-block px-3 py-0.5 rounded bg-green-500 text-white">Receive Token</span>';
-			}
-		}
-
-		return super.getActionName(currentAccount, action);
-	}
-
-	override isMyActionTrace(currentAccount: string, action: ActivityAction) {
-		if (this.isSendToken(currentAccount, action) || this.isReceiveToken(currentAccount, action)) {
-			return action['raw']['action_trace']['receiver'] === currentAccount;
-		}
-		return false;
-	}
-}
-
-class AuthActivityDelegate extends SystemActivityDelegate {
-	constructor(actionName: string) {
-		super(actionName, false);
-	}
-
-	override getActionName(currentAccount: string, action: ActivityAction): string {
-		return `<span class="inline-block px-3 py-0.5 rounded bg-red-500 text-white">${this.actionName}</span>`;
-	}
-}
-
-class VoteActivityDelegate extends SystemActivityDelegate {
-	constructor(actionName: string) {
-		super(actionName, false);
-	}
-
-	override getActionName(currentAccount: string, action: ActivityAction): string {
-		return `<span class="inline-block px-3 py-0.5 rounded bg-red-500 text-white">${this.actionName}</span>`;
-	}
-}
-
-export const actionDeleates: Record<string, BaseActivityDelegate> = {
-	transfer: new TransferActivityDelegate(),
-
-	newaccount: new AuthActivityDelegate('New Account'),
-	linkauth: new AuthActivityDelegate('Link Auth'),
-	unlinkauth: new AuthActivityDelegate('Unlink Auth'),
-	updateauth: new AuthActivityDelegate('Update Auth'),
-	deleteauth: new AuthActivityDelegate('Delete Auth'),
-
-	voteproducer: new VoteActivityDelegate('Vote'),
-
-	buyrambytes: new SystemActivityDelegate('Buy RAM', true),
-	buyram: new SystemActivityDelegate('Buy RAM', true),
-	sellram: new SystemActivityDelegate('Sell RAM', true),
-	buyrex: new SystemActivityDelegate('Buy REX'),
-	sellrex: new SystemActivityDelegate('Sell REX'),
-	withdraw: new SystemActivityDelegate('REX Fund Withdraw'),
-	mvfrsavings: new SystemActivityDelegate('REX Savings Out'),
-	mvtosavings: new SystemActivityDelegate('REX Savings In'),
-	deposit: new SystemActivityDelegate('Deposit'),
-	rentnet: new SystemActivityDelegate('Rent NET'),
-	rentcpu: new SystemActivityDelegate('Rent CPU'),
-	unstaketorex: new SystemActivityDelegate('Staked to REX'),
-	delegatebw: new SystemActivityDelegate('Delegate'),
-	undelegatebw: new SystemActivityDelegate('Undelegate'),
-	refund: new SystemActivityDelegate('Refund'),
-	claimrewards: new SystemActivityDelegate('Claim Rewards'),
-	regproducer: new SystemActivityDelegate('Reg Producer'),
-	unregprod: new SystemActivityDelegate('Unreg Producer')
-};
-
-const commonActivityDelegate = new BaseActivityDelegate();
-
-export function convertActivityActions(
+export function convertActivityAction(
 	currentAcount: string,
-	actions: ActivityAction[]
-): ActivityActionWrapper[] {
-	let list: ActivityActionWrapper[] = [];
-	actions.forEach((action) => {
-		let delegate = actionDeleates[String(action.action)];
-		if (!delegate) {
-			delegate = commonActivityDelegate;
-		}
-		if (delegate.isMyActionTrace(currentAcount, action)) {
-			list.push(convertActivityAction(currentAcount, action, delegate));
-		}
-	});
-	return list;
-}
-function convertActivityAction(
-	currentAcount: string,
-	action: ActivityAction,
-	delegate: BaseActivityDelegate
-): ActivityActionWrapper {
+	action: ActivityAction
+): ActivityActionWrapper | undefined {
+	const [actionName, actionStyle] = getActionNameAndStyle(currentAcount, action);
+	if (!actionName) return undefined;
 	const shortId = getShortId(action.id);
 	const seqId = String(action.raw['account_action_seq']);
 	const date = action.timestamp.toDate();
 	const dateTime = getDateTime(date);
 	const timeInDay = getDayTime(date);
-
 	return {
 		src: action,
 		id: String(action.id),
@@ -165,9 +19,83 @@ function convertActivityAction(
 		seqId: seqId,
 		date: dateTime,
 		timeInDay: timeInDay,
-		actionName: delegate.getActionName(currentAcount, action),
-		actionData: action.data,
+		actionName,
+		actionStyle,
+		actionData: action.data
 	};
+}
+
+const transferActions = ['transfer'];
+
+const ramActions: Record<string, string> = {
+	buyrambytes: 'Buy RAM',
+	buyram: 'Buy RAM',
+	sellram: 'Sell Ram'
+};
+const accountActions: Record<string, string> = {
+	newaccount: 'New Account',
+	linkauth: 'Link Auth',
+	unlinkauth: 'Unlink Auth',
+	updateauth: 'Update Auth',
+	deleteauth: 'Delete Auth'
+};
+
+const voteActions: Record<string, string> = {
+	voteproducer: 'Vote'
+};
+
+const otherActions: Record<string, string> = {
+	buyrex: 'Buy REX',
+	sellrex: 'Sell REX',
+	withdraw: 'REX Fund Withdraw',
+	mvfrsavings: 'REX Savings Out',
+	mvtosavings: 'REX Savings In',
+	deposit: 'Deposit',
+	rentnet: 'Rent NET',
+	rentcpu: 'Rent CPU',
+	unstaketorex: 'Staked to REX',
+	delegatebw: 'Delegate',
+	undelegatebw: 'Undelegate',
+	refund: 'Refund',
+	claimrewards: 'Claim Rewards',
+	regproducer: 'Reg Producer',
+	unregprod: 'Unreg Producer'
+};
+
+const EOSIO_TOKEN = Name.from('eosio.token');
+
+function getActionNameAndStyle(currentAccount: string, action: ActivityAction) {
+	const act = String(action.action);
+	let actionName;
+	if (transferActions.includes(act)) {
+		if (!isMyActionTrace(currentAccount, action)) {
+			return ['', ''];
+		}
+		if (EOSIO_TOKEN.equals(action.contract)) {
+			if (currentAccount === action.data['from']) {
+				return ['Sent Token', 'bg-solar-500'];
+			}
+			if (currentAccount === action.data['to']) {
+				return ['Received Token', 'bg-green-500'];
+			}
+		}
+	} else if ((actionName = ramActions[act])) {
+		if (!isMyActionTrace(currentAccount, action)) {
+			return ['', ''];
+		}
+		return [actionName, 'bg-mineShaft-500'];
+	} else if ((actionName = accountActions[act])) {
+		return [actionName, 'bg-red-500'];
+	} else if ((actionName = voteActions[act])) {
+		return [actionName, 'bg-red-500'];
+	} else if ((actionName = otherActions[act])) {
+		return [actionName, 'bg-mineShaft-500'];
+	}
+	return [`${action.contract} - ${action.action}`, 'bg-mineShaft-500'];
+}
+
+function isMyActionTrace(currentAccount: string, action: ActivityAction) {
+	return action['raw']['action_trace']['receiver'] === currentAccount;
 }
 
 function getShortId(id: Checksum256) {

@@ -4,7 +4,6 @@ import { getChainDefinitionFromParams } from '$lib/state/network.svelte';
 import { getBackendNetwork } from '$lib/wharf/client/ssr.js';
 import { getActivity } from './activity';
 import { getCacheHeaders } from '$lib/utils';
-import type Dice_1 from 'lucide-svelte/icons/dice-1';
 
 export async function GET({ fetch, params }: RequestEvent) {
 	const chain = getChainDefinitionFromParams(String(params.network));
@@ -24,6 +23,7 @@ export async function GET({ fetch, params }: RequestEvent) {
 	const start = Number(params.start) || 1;
 	const requests = [getActivity(network.client, params.name, start)];
 	const headers = getCacheHeaders(5);
+
 	try {
 		const [activity] = await Promise.all(requests);
 		return json(

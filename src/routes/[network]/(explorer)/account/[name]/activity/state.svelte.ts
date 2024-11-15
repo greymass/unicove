@@ -1,5 +1,5 @@
 import { ActivityAction, type ActivityActionWrapper } from '$lib/types';
-import { convertActivityActions } from '$lib/utils';
+import { convertActivityAction } from '$lib/utils';
 
 export class Scene {
 	firstTime: number = $state(0);
@@ -62,25 +62,22 @@ export class ActivityLoader {
 		if (this.account !== account) {
 			this.account = account;
 			this.scene.reset();
-		} else if (this.scene.updatedTime > Date.now() - 10_000) {
+		} else if (Date.now() - this.scene.updatedTime > 10_000) {
 			this.scene.reset();
 		}
 	}
 
 	public load() {
-		if (!this.account) {
-			throw new Error('set account first');
-		}
-		if (this.scene.isLoading) {
-			return;
-		}
+		if (!this.account) throw new Error('set account first');
+
+		if (this.scene.isLoading) return;
+
 		this.loadRemote(false);
 	}
 
 	public laodMore() {
-		if (!this.account) {
-			throw new Error('set account first');
-		}
+		if (!this.account) throw new Error('set account first');
+
 		if (this.scene.isLoading || !this.scene.hasMore) return;
 
 		this.loadRemote(true);
@@ -96,15 +93,21 @@ export class ActivityLoader {
 			const json: { activity: { actions: string[]; first: number; last: number } } =
 				await response.json();
 
-			const activityActions: ActivityAction[] = [];
+			const newBatch: ActivityActionWrapper[] = [];
 			json.activity.actions.forEach((item) => {
+				let action = undefined;
 				try {
-					activityActions.push(ActivityAction.from(item));
+					action = ActivityAction.from(item);
 				} catch (e) {
 					console.error('Conver to ActivityAction error ', e);
 				}
+				if (action) {
+					const actionWrapper = convertActivityAction(this.account!, action);
+					if (actionWrapper) {
+						newBatch.push(actionWrapper);
+					}
+				}
 			});
-			const newBatch = convertActivityActions(this.account!, activityActions);
 			const nextStart = -json.activity.last;
 			const hasMore = newBatch.length > 0 && json.activity.last > 0;
 			if (!more) {
