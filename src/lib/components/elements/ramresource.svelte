@@ -3,7 +3,7 @@
 
 	import ResourceCard from './resourceCard.svelte';
 
-	interface Props extends HTMLDivElement {
+	interface Props {
 		ramAvailable: number;
 		precision?: number;
 		class?: string;
