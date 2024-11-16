@@ -13,7 +13,7 @@
 	const {
 		class: className = '',
 		title = '',
-		titleTag = 'h4',
+		titleTag = 'h3',
 		children,
 		...props
 	}: Props = $props();

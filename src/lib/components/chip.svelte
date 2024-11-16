@@ -9,6 +9,11 @@
 	const props: Props = $props();
 </script>
 
-<div class={cn('w-fit rounded bg-mineShaft-900 px-2 text-mineShaft-50', props.class)}>
+<div
+	class={cn(
+		'w-fit rounded-md bg-mineShaft-900 px-2 py-1 text-xs font-semibold leading-none text-mineShaft-50',
+		props.class
+	)}
+>
 	{@render props.children()}
 </div>

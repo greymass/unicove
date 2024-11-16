@@ -31,7 +31,7 @@
 	);
 </script>
 
-<Stack class="gap-6">
+<Stack class="gap-6 @container">
 	<PillGroup {options} />
 
 	{@render children()}
