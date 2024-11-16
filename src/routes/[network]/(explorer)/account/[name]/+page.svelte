@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Stack, Card, PageColumns, Cluster, Switcher, Box, Grid } from '$lib/components/layout';
+	import { Stack, Card, PageColumns, Cluster } from '$lib/components/layout';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import { Asset } from '@wharfkit/antelope';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
@@ -54,7 +54,7 @@
 <!-- What gets shown on this page if data.account doesn't exist? -->
 {#if data.account}
 	<PageColumns>
-		<Card id="account-value">
+		<Card id="account-value" style="column-span: all;">
 			<Cluster class="items-center">
 				<picture class="grid size-12 place-items-center rounded-full bg-mineShaft-900">
 					<DollarSign />
@@ -66,7 +66,7 @@
 			</Cluster>
 		</Card>
 
-		<Card id="eos" title="EOS">
+		<Card id="eos" title="EOS" class="break-after-avoid">
 			<Stack>
 				<Stack class="gap-2">
 					<h4 class="text-muted text-base leading-none">Value</h4>
@@ -125,7 +125,7 @@
 			</Stack>
 		</Card>
 
-		<Card id="ram" title="RAM">
+		<Card id="ram" title="RAM" class="">
 			<Stack>
 				<Stack class="gap-2">
 					<h4 class="text-muted text-base leading-none">Value</h4>
