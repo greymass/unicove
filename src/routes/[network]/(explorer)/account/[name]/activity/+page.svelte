@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Stack from '$lib/components/layout/stack.svelte';
-	import { untrack } from 'svelte';
+	import { onMount, untrack } from 'svelte';
 	import { ActivityLoader } from './state.svelte.js';
 	import type { ActivityActionWrapper } from '$lib/types.js';
 	import Code from '$lib/components/code.svelte';
@@ -9,14 +9,14 @@
 
 	const networkName = String(data.network);
 
-	const activityLoader: ActivityLoader = $derived.by(() => {
+	onMount(() => {
 		const loader = ActivityLoader.getInst(networkName);
-		const currentAccount = String(data.name);
-		untrack(() => {
-			loader.setAccount(currentAccount);
-			loader.load();
-		});
-		return loader;
+		loader.setAccount(String(data.name));
+		loader.load();
+	});
+
+	const activityLoader: ActivityLoader = $derived.by(() => {
+		return ActivityLoader.getInst(networkName);
 	});
 
 	const isLoading = $derived.by(() => {
