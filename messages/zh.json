@@ -1,5 +1,7 @@
 {
-    "$schema": "https://inlang.com/schema/inlang-message-format",
-    "active_session": "活动会话",
-    "test_locale_string": "这是一个测试"
+	"$schema": "https://inlang.com/schema/inlang-message-format",
+	"active_session": "活动会话",
+	"block_height_numbered": "块 # {height}",
+	"block_height_numbered_description": "区块＃ {height}由{producer}在{timestamp}上生成，其中包括{transactions}交易执行{actions}操作。",
+	"test_locale_string": "这是一个测试"
 }

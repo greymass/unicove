@@ -1,0 +1,81 @@
+<script lang="ts">
+	import { createSwitch, melt, createSync } from '@melt-ui/svelte';
+	import type { ChangeFn } from '@melt-ui/svelte/internal/helpers';
+
+	interface Props {
+		disabled?: boolean;
+		required?: boolean;
+		checked: boolean;
+		name?: string;
+		value?: string;
+		onCheckedChange?: ChangeFn<boolean>;
+		id: string;
+	}
+
+	let {
+		disabled = $bindable(false),
+		checked = $bindable(false),
+		required = false,
+		name,
+		value,
+		onCheckedChange,
+		id
+	}: Props = $props();
+
+	const {
+		elements: { root, input },
+		states
+	} = createSwitch({
+		disabled,
+		required,
+		defaultChecked: checked,
+		onCheckedChange,
+		value,
+		name
+	});
+
+	const sync = createSync(states);
+	$effect(() => {
+		sync.checked(checked, (v) => (checked = v));
+	});
+
+	const ariaLabelledBy = `${id}-label`;
+</script>
+
+<div class="flex items-center">
+	<button
+		use:melt={$root}
+		class="
+		relative
+		h-8
+		w-[52px]
+		rounded-full
+		border-2
+		border-mineShaft-600
+		bg-transparent
+		*:size-4
+		*:translate-x-1.5
+		*:bg-mineShaft-400
+		*:transition-transform
+		focus-visible:border-solar-500
+		focus-visible:outline
+		focus-visible:outline-2
+		focus-visible:outline-offset-[-2px]
+		focus-visible:outline-solar-500
+		disabled:cursor-not-allowed
+		disabled:opacity-40
+		data-[state=checked]:border-skyBlue-500
+		data-[state=checked]:bg-skyBlue-500
+		*:data-[state=checked]:translate-x-[26px]
+		*:data-[state=checked]:scale-150
+		*:data-[state=checked]:bg-skyBlue-50
+		data-[state=checked]:hover:border-skyBlue-400
+		data-[state=checked]:hover:bg-skyBlue-400
+"
+		{id}
+		aria-labelledby={ariaLabelledBy}
+	>
+		<span class="thumb block rounded-full"></span>
+	</button>
+	<input use:melt={$input} />
+</div>

@@ -1,28 +1,19 @@
 <script>
-	import { user } from '$lib/wharf/user.svelte';
-	import * as m from '$lib/paraglide/messages.js';
-	import Language from '$lib/components/language.svelte';
+	import * as m from '$lib/paraglide/messages';
+	import Button from '$lib/components/button/button.svelte';
+	import { Box, Stack } from '$lib/components/layout';
+	import { languageTag } from '$lib/paraglide/runtime.js';
+	import { chainShortNames } from '$lib/wharf/chains';
 </script>
 
-<Language />
+<Box>
+	<Stack>
+		<p>Language: {languageTag()}</p>
+		<p>Test Localization String: {m.test_locale_string()}</p>
 
-<a href="/test">Test Page</a>
-
-<h3>{m.active_session()}</h3>
-{#if user}
-	{#if user.session}
-		<p>Current: {user.session.actor}</p>
-		<button onclick={() => user.logout(user.session)}>Logout current account</button>
-		<button onclick={() => user.logout()}>Logout all accounts</button>
-	{/if}
-
-	<h3>Sessions</h3>
-	<button onclick={() => user.login()}>Login</button>
-	{#each user.sessions as session}
-		<p>
-			<button onclick={() => user.switch(session)}>
-				Switch: {session.actor}@{session.permission} ({session.chain})
-			</button>
-		</p>
-	{/each}
-{/if}
+		<p>Select a network</p>
+		{#each chainShortNames as chain}
+			<Button href={`/${chain}`}>{chain}</Button>
+		{/each}
+	</Stack>
+</Box>
