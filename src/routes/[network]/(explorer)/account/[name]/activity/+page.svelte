@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Stack from '$lib/components/layout/stack.svelte';
-	import { onMount, untrack } from 'svelte';
+	import { onMount } from 'svelte';
 	import { ActivityLoader } from './state.svelte.js';
 	import type { ActivityActionWrapper } from '$lib/types.js';
 	import Code from '$lib/components/code.svelte';
