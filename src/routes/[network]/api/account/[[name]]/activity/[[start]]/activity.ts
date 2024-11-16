@@ -1,14 +1,18 @@
 import { APIClient, API, Serializer } from '@wharfkit/antelope';
-import { RoborovskiClient } from '@wharfkit/roborovski';
 import type { Activity } from '$lib/types';
+import { RoborovskiClient } from '@wharfkit/roborovski';
 
-export async function getActivity(client: APIClient, name: string): Promise<Activity> {
+export async function getActivity(
+	client: APIClient,
+	name: string,
+	start: number
+): Promise<Activity> {
 	const robo = new RoborovskiClient(client);
 	let response: API.v1.GetActionsResponse;
 	try {
 		response = await robo.get_actions(name, {
-			limit: 10,
-			start: 1,
+			limit: 20,
+			start: start,
 			reverse: true
 		});
 	} catch {

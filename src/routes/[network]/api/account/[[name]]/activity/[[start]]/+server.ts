@@ -20,7 +20,8 @@ export async function GET({ fetch, params }: RequestEvent) {
 		return json({ error: `Activity not supported on ${network.chain.name}.` }, { status: 500 });
 	}
 
-	const requests = [getActivity(network.client, params.name)];
+	const start = Number(params.start) || 1;
+	const requests = [getActivity(network.client, params.name, start)];
 	const headers = getCacheHeaders(5);
 
 	try {
