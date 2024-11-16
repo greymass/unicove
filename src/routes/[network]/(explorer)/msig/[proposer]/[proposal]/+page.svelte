@@ -1,7 +1,7 @@
 <script lang="ts">
-	// import type { PageData } from './$types';
+	import type { PageData } from './$types';
 
-	// export let data: PageData;
+	export let data: PageData;
 </script>
 
 <!-- 
@@ -10,7 +10,7 @@
 -->
 
 <!-- <h1>{data.proposer}/{data.name}</h1>
-
+ -->
 <pre>
 {JSON.stringify(data.proposal, null, 2)}
-</pre> -->
+</pre>
