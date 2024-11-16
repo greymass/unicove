@@ -12,9 +12,10 @@ function generateMetadata(url: URL): SeoConfig {
 	};
 }
 
-export const load = ({ url }: LoadEvent) => {
+export const load = ({ params, url }: LoadEvent) => {
 	const baseMetaTags = generateMetadata(url);
 	return {
-		baseMetaTags
+		baseMetaTags,
+		network: params.network
 	};
 };

@@ -11,7 +11,7 @@
 	import { i18n } from '$lib/i18n';
 	import Toaster from '$lib/components/toast/toaster.svelte';
 	import { AccountState } from '$lib/state/client/account.svelte';
-	import { getNetwork, NetworkState } from '$lib/state/network.svelte';
+	import { getNetwork, getNetworkFromParams, NetworkState } from '$lib/state/network.svelte';
 	import type { NameType } from '@wharfkit/antelope';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { WharfState } from '$lib/state/client/wharf.svelte';
@@ -44,6 +44,12 @@
 		account.refresh();
 		return account;
 	}
+
+	$effect(() => {
+		if (data.network) {
+			network = getNetworkFromParams(data.network);
+		}
+	});
 
 	$effect(() => {
 		const { session } = wharf;
