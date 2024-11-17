@@ -6,6 +6,7 @@
 	import { setContext, untrack } from 'svelte';
 	import { Head, type SeoConfig } from 'svead';
 	import { ParaglideJS } from '@inlang/paraglide-sveltekit';
+	import { PlausibleAnalytics } from '@accuser/svelte-plausible-analytics';
 
 	import { page } from '$app/stores';
 	import { i18n } from '$lib/i18n';
@@ -75,3 +76,5 @@
 <ParaglideJS {i18n}>
 	{@render children()}
 </ParaglideJS>
+
+<PlausibleAnalytics apiHost="https://stats.greymass.com" domain="unicove.com" />
