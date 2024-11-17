@@ -48,6 +48,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@accuser/svelte-plausible-analytics": "^1.0.0",
 		"@fontsource/jetbrains-mono": "^5.1.0",
 		"@tailwindcss/container-queries": "^0.1.1",
 		"@wharfkit/account": "^1.2.0",

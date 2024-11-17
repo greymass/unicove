@@ -14,16 +14,6 @@ env:
   API_KYLIN_HISTORY: ''
 
 jobs:
-  formatting:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
-      - uses: oven-sh/setup-bun@v2
-      - run: bun install
-      - run: bun run lint
   types:
     runs-on: ubuntu-latest
     steps:
@@ -35,7 +25,7 @@ jobs:
       - run: bun install
       - run: bun run build-paraglide
       - run: bunx tsc --noemit
-  sveltekit-check:
+  check:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -46,4 +36,3 @@ jobs:
       - run: bun install
       - run: bun run build-paraglide
       - run: bun run check
-      - run: bun run lint

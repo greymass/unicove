@@ -165,6 +165,7 @@ export function getAccountValue(
 export interface Balance {
 	delegated: Asset;
 	liquid: Asset;
+	refunding: Asset;
 	staked: Asset;
 	total: Asset;
 }
@@ -178,12 +179,13 @@ export function getBalance(network: NetworkState, sources: DataSources): Balance
 	}
 	// Create an empty balance to start adding to
 	const delegated = Asset.fromUnits(0, network.config.symbol);
+	const refunding = Asset.fromUnits(0, network.config.symbol);
 	const liquid = Asset.fromUnits(0, network.config.symbol);
 	const staked = Asset.fromUnits(0, network.config.symbol);
 	const total = Asset.fromUnits(0, network.config.symbol);
 
 	if (!sources.get_account) {
-		return { delegated, liquid, staked, total };
+		return { delegated, liquid, refunding, staked, total };
 	}
 
 	// Add the core balance if it exists on the account
@@ -197,6 +199,16 @@ export function getBalance(network: NetworkState, sources: DataSources): Balance
 		const delegatedTokens = getDelegated(getDelegations(sources), network.config.symbol);
 		delegated.units.add(delegatedTokens.units);
 		total.units.add(delegatedTokens.units);
+	}
+
+	// Add the currently refunding balance to the total balance
+	if (sources.get_account.refund_request) {
+		const cpu = Asset.from(sources.get_account.refund_request.cpu_amount);
+		refunding.units.add(cpu.units);
+		total.units.add(cpu.units);
+		const net = Asset.from(sources.get_account.refund_request.net_amount);
+		refunding.units.add(net.units);
+		total.units.add(net.units);
 	}
 
 	if (network.config.features.rex) {
@@ -218,6 +230,7 @@ export function getBalance(network: NetworkState, sources: DataSources): Balance
 	return {
 		delegated,
 		liquid,
+		refunding,
 		staked,
 		total
 	};
