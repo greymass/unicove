@@ -10,7 +10,7 @@ dev: node_modules
 
 .PHONY: check
 check: node_modules
-	bun run check
+	bun run check && bun run lint
 
 .PHONY: format
 format: node_modules
