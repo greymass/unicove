@@ -31,6 +31,7 @@
 	const tokenValue = $derived(data.account.value?.systemtoken);
 	const tokenPrice = $derived(data.network.tokenprice);
 	const tokenAvailable = $derived(data.account.balance?.liquid);
+	const tokenRefunding = $derived(data.account.balance?.refunding);
 	const tokenStaked = $derived(data.account.balance?.staked);
 	const tokenDelegated = $derived(data.account.balance?.delegated);
 	const tokenTotal = $derived(data.account.balance?.total);
@@ -101,15 +102,28 @@
 									{@render tableAction(['Staking', `/${data.network}/staking`])}
 								{/if}
 							</tr>
-							<tr>
-								<td>Delegated</td>
-								<td class="text-right text-white">
-									<AssetText variant="full" value={tokenDelegated} />
-								</td>
-								{#if isCurrentUser}
-									<td></td>
-								{/if}
-							</tr>
+							{#if tokenDelegated && tokenDelegated.value > 0}
+								<tr>
+									<td>Delegated</td>
+									<td class="text-right text-white">
+										<AssetText variant="full" value={tokenDelegated} />
+									</td>
+									{#if isCurrentUser}
+										<td></td>
+									{/if}
+								</tr>
+							{/if}
+							{#if tokenRefunding && tokenRefunding.value > 0}
+								<tr>
+									<td>Refunding</td>
+									<td class="text-right text-white">
+										<AssetText variant="full" value={tokenRefunding} />
+									</td>
+									{#if isCurrentUser}
+										{@render tableAction(['Claim', `/${data.network}/refund`])}
+									{/if}
+								</tr>
+							{/if}
 							<tr class="font-semibold">
 								<td>Total</td>
 								<td class="text-right text-white">
