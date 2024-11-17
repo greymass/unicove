@@ -109,7 +109,7 @@
 										<AssetText variant="full" value={tokenDelegated} />
 									</td>
 									{#if isCurrentUser}
-										<td></td>
+										{@render tableAction(['Reclaim', `/${data.network}/undelegate`])}
 									{/if}
 								</tr>
 							{/if}
