@@ -35,6 +35,18 @@ export const setSnap = async (metaMaskState: MetaMaskState) => {
 	metaMaskState.installedSnap = snaps[metaMaskState.snapOrigin || ''] ?? null;
 };
 
+export const checkForSnap = async (metaMaskState: MetaMaskState) => {
+	const snapId = metaMaskState.snapOrigin;
+	if (!snapId) {
+		throw new Error('Snap ID is needed to check for installed snap.');
+	}
+	const snaps = await getSnaps(metaMaskState);
+	if (!snaps) {
+		return false;
+	}
+	return Object.keys(snaps).includes(snapId);
+};
+
 /**
  * Utility hook to wrap the `wallet_requestSnaps` method.
  *
@@ -63,6 +75,27 @@ export const requestSnap = async (metaMaskState: MetaMaskState, version?: string
 		metaMaskState.installedSnap = snaps?.[snapId] ?? null;
 	} catch (error) {
 		alert(`Error requesting "${snapId}" snap. Error: ${(error as { message: string }).message}`);
+	}
+};
+
+export const getSnaps = async (metaMaskState: MetaMaskState) => {
+	const snapId = metaMaskState.snapOrigin;
+
+	if (!snapId) {
+		throw new Error('Snap ID is needed to request snap.');
+	}
+
+	try {
+		const snaps = (await request(
+			{
+				method: 'wallet_getSnaps'
+			},
+			metaMaskState
+		)) as Record<string, Snap>;
+
+		return snaps;
+	} catch (error) {
+		alert(`Error getting snaps. Error: ${(error as { message: string }).message}`);
 	}
 };
 

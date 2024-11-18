@@ -5,6 +5,7 @@ export class MetaMaskState {
 	public snapProvider = $state<MetaMaskInpageProvider | null>(null);
 	public snapOrigin = $state<string | undefined>(undefined);
 	public isFlask = $state(false);
+	public isInstalled = $state(false);
 	public error = $state<Error | null>(null);
 	public installedSnap = $state<Snap | null>(null);
 

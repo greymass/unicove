@@ -1,6 +1,6 @@
 import { error } from '@sveltejs/kit';
-import type { PageLoad } from './$types';
 import { getNetworkFromParams } from '$lib/state/network.svelte';
+import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ params }) => {
 	const network = getNetworkFromParams(params.network);
@@ -10,7 +10,8 @@ export const load: PageLoad = async ({ params }) => {
 	}
 
 	return {
-		title: 'Update',
-		subtitle: 'Update EOS Wallet for MetaMask'
+		title: 'MetaMask + EOS Wallet',
+		subtitle:
+			'Get started with the EOS Wallet plugin that makes MetaMask compatible with the EOS Network.'
 	};
 };
