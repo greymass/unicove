@@ -13,7 +13,6 @@
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import { PageColumns, Stack } from '$lib/components/layout';
 	import Label from '$lib/components/input/label.svelte';
-	import Descriptionlist from '$lib/components/descriptionlist.svelte';
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');
@@ -64,12 +63,6 @@
 
 	let assetInput: AssetInput;
 	let bytesInput: BytesInput;
-
-	let marketOverview = $derived([
-		{ key: `Market Cap (${data.network.chain.systemToken?.symbol.code})`, value: marketCapEOS },
-		{ key: `Market Cap (USD)`, value: marketCapUSD },
-		{ key: `Supply`, value: ramSupply }
-	]);
 </script>
 
 <PageColumns>

@@ -3,7 +3,7 @@
 	import dayjs from 'dayjs';
 	import { Chart } from 'chart.js';
 	import 'chart.js/auto';
-	import { Card, Stack } from '$lib/components/layout';
+	import { Card } from '$lib/components/layout';
 	import { Asset } from '@wharfkit/antelope';
 	import Select from '../select/select.svelte';
 	import type { ExtendedSelectOption } from '../select/types';
