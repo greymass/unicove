@@ -41,7 +41,14 @@
 
 {#if unit}
 	<div class="relative">
-		<TextInput bind:ref bind:value={inputValue} placeholder="0" inputmode="numeric" {...props} />
+		<TextInput
+			bind:ref
+			bind:value={inputValue}
+			placeholder="0"
+			inputmode="decimal"
+			step="any"
+			{...props}
+		/>
 
 		<span
 			class="
