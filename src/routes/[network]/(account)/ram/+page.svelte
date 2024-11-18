@@ -13,6 +13,7 @@
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import { PageColumns, Stack } from '$lib/components/layout';
 	import Label from '$lib/components/input/label.svelte';
+	import Descriptionlist from '$lib/components/descriptionlist.svelte';
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');
@@ -64,6 +65,11 @@
 	let assetInput: AssetInput;
 	let bytesInput: BytesInput;
 
+	let marketOverview = $derived([
+		{ key: `Market Cap (${data.network.chain.systemToken?.symbol.code})`, value: marketCapEOS },
+		{ key: `Market Cap (USD)`, value: marketCapUSD },
+		{ key: `Supply`, value: ramSupply }
+	]);
 </script>
 
 <PageColumns>
@@ -72,7 +78,7 @@
 		<div class="grid content-between gap-4">
 			<div class="grid">
 				<h3 class="text-muted text-base">RAM Available</h3>
-				<AssetText class="text-xl" variant="full" value={ramAvailable} />
+				<AssetText class="text-xl font-semibold" variant="full" value={ramAvailable} />
 			</div>
 			<Button variant="secondary" href="/{String(data.network)}/ram/buy">Buy</Button>
 		</div>
@@ -81,7 +87,7 @@
 			<div>
 				<h3 class="text-muted text-base">EOS Value</h3>
 				<AssetText
-					class="text-xl"
+					class="text-xl font-semibold"
 					variant="full"
 					value={data.network.ramprice?.usd &&
 						calculateValue(ramAvailable, data.network.ramprice?.eos)}
@@ -134,7 +140,7 @@
 				<tbody class="*:border-b *:border-mineShaft-900 *:pt-8 last:*:border-b-0 *:even:text-right">
 					<tr class="*:py-2">
 						<td class="text-muted text-base"> EOS/RAM (KB) </td>
-						<td class="text-right">
+						<td class="text-right font-medium text-white">
 							<AssetText
 								variant="full"
 								value={ramCalculatorState.pricePerKB
@@ -145,7 +151,7 @@
 					</tr>
 					<tr class="*:py-2">
 						<td class="text-muted text-base"> EOS Price </td>
-						<td class="text-right">
+						<td class="text-right font-medium text-white">
 							<AssetText
 								variant="full"
 								value={ramCalculatorState.tokens || Asset.from('0.0000 EOS')}
@@ -155,7 +161,7 @@
 
 					<tr class="*:py-2">
 						<td class="text-muted text-base"> USD/RAM (KB) </td>
-						<td class="text-right">
+						<td class="text-right font-medium text-white">
 							<AssetText
 								variant="full"
 								value={ramCalculatorState.pricePerKB && data.network.ramprice?.usd
@@ -166,7 +172,7 @@
 					</tr>
 					<tr class="*:py-2">
 						<td class="text-muted text-base"> USD Price </td>
-						<td class="text-right">
+						<td class="text-right font-medium text-white">
 							<AssetText
 								variant="full"
 								value={data.network.ramprice?.usd
@@ -177,7 +183,7 @@
 					</tr>
 					<tr class="*:py-2">
 						<td class="text-muted text-base"> Network Fees </td>
-						<td class="text-right">
+						<td class="text-right font-medium text-white">
 							<AssetText variant="full" value={ramCalculatorState.fee} />
 						</td>
 					</tr>
@@ -199,19 +205,19 @@
 					<td class="text-muted text-base"
 						>Market Cap ({data.network.chain.systemToken?.symbol.code || ''})</td
 					>
-					<td class="text-right">
+					<td class="text-right font-medium text-white">
 						<AssetText variant="full" value={marketCapEOS} />
 					</td>
 				</tr>
 				<tr class="*:py-2">
 					<td class="text-muted text-base">Market Cap (USD)</td>
-					<td class="text-right">
+					<td class="text-right font-medium text-white">
 						<AssetText variant="full" value={marketCapUSD} />
 					</td>
 				</tr>
 				<tr class="*:py-2">
 					<td class="text-muted text-base">Supply</td>
-					<td class="text-right">
+					<td class="text-right font-medium text-white">
 						<AssetText variant="full" value={ramSupply} />
 					</td>
 				</tr>
