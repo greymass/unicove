@@ -4,6 +4,7 @@ on:
   push:
 
 env:
+  PUBLIC_ENVIRONMENT: 'development'
   PUBLIC_LOCAL_SIGNER: ''
   API_EOS_CHAIN: ''
   API_EOS_HISTORY: ''
