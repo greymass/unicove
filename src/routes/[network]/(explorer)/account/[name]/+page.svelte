@@ -26,7 +26,6 @@
 {/snippet}
 
 {#await data.account}
-	{console.log('loading state hit')}
 	<div class="bg-red-300 text-4xl text-black">Loading...</div>
 {:then account}
 	{@const isCurrentUser = context.account?.name && account.name?.equals(context.account.name)}
