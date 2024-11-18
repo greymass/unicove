@@ -160,7 +160,8 @@
 		bind:ref
 		bind:value={input}
 		placeholder="0 {unit}"
-		inputmode="numeric"
+		step="any"
+		inputmode="decimal"
 		{autofocus}
 		onblur={handleBlur}
 		oninput={handleInput}
