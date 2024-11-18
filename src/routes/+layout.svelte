@@ -7,6 +7,7 @@
 	import { Head, type SeoConfig } from 'svead';
 	import { ParaglideJS } from '@inlang/paraglide-sveltekit';
 	import { PlausibleAnalytics } from '@accuser/svelte-plausible-analytics';
+	import { PUBLIC_ENVIRONMENT } from '$env/static/public';
 
 	import { page } from '$app/stores';
 	import { i18n } from '$lib/i18n';
@@ -68,6 +69,12 @@
 		extend({}, data.baseMetaTags, $page.data?.pageMetaTags) as SeoConfig
 	);
 </script>
+
+<svelte:head>
+	{#if !PUBLIC_ENVIRONMENT && PUBLIC_ENVIRONMENT !== 'production'}
+		<meta name="robots" content="noindex" />
+	{/if}
+</svelte:head>
 
 <Head {seo_config} />
 
