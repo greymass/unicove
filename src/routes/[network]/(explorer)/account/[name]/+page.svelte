@@ -17,6 +17,11 @@
 	const { data } = $props();
 
 	const context = getContext<UnicoveContext>('state');
+
+	const isCurrentUser = $derived(
+		context.account?.name && context.account?.name.equals(String(data.name))
+	);
+	console.log(context.account?.name, data.name);
 </script>
 
 {#snippet tableAction([text, href]: string[])}
@@ -25,167 +30,162 @@
 	</td>
 {/snippet}
 
-{#await data.account}
-	<div class="bg-red-300 text-4xl text-black">Loading...</div>
-{:then account}
-	{@const isCurrentUser = context.account?.name && account.name?.equals(context.account.name)}
-	<PageColumns>
-		<Card id="account-value" style="column-span: all;">
-			<Cluster class="items-center">
-				<picture class="grid size-12 place-items-center rounded-full bg-mineShaft-900">
-					<DollarSign />
-				</picture>
-				<div>
-					<p>Total Account Value</p>
+<PageColumns>
+	<Card id="account-value" style="column-span: all;">
+		<Cluster class="items-center">
+			<picture class="grid size-12 place-items-center rounded-full bg-mineShaft-900">
+				<DollarSign />
+			</picture>
+			<div>
+				<p>Total Account Value</p>
+				{#await data.account then account}
 					<AssetText
 						class="text-2xl font-bold text-white"
 						variant="full"
 						value={account.value?.total}
 					/>
-				</div>
-			</Cluster>
-		</Card>
+				{/await}
+			</div>
+		</Cluster>
+	</Card>
 
-		<Card id="eos" title="EOS" class="break-after-avoid">
-			<Stack>
-				<Stack class="gap-2">
-					<h4 class="text-muted text-base leading-none">Value</h4>
-					<p class="text-xl font-semibold leading-none text-white">
-						<AssetText variant="full" value={account.value?.systemtoken} />
-					</p>
-					<Chip>
-						<TradingPair value={data.network.tokenprice} />
-						<!-- TODO: Percent change -->
-					</Chip>
-				</Stack>
-
-				<Stack class="gap-2">
-					<h5 class="h5">Breakdown</h5>
-					<table class="table-styles text-muted">
-						<tbody>
-							<tr>
-								<td>Available</td>
-								<td class="text-right text-white">
-									<AssetText variant="full" value={account.balance?.liquid} />
-								</td>
-								{#if isCurrentUser}
-									{@render tableAction(['Send', `/${data.network}/send`])}
-								{/if}
-							</tr>
-							<tr>
-								<td>Staked</td>
-								<td class="text-right text-white">
-									<AssetText variant="full" value={account.balance?.staked} />
-								</td>
-								{#if isCurrentUser}
-									{@render tableAction(['Staking', `/${data.network}/staking`])}
-								{/if}
-							</tr>
-							{#if account.balance?.delegated && account.balance?.delegated.value > 0}
-								<tr>
-									<td>Delegated</td>
-									<td class="text-right text-white">
-										<AssetText variant="full" value={account.balance?.delegated} />
-									</td>
-									{#if isCurrentUser}
-										{@render tableAction(['Reclaim', `/${data.network}/undelegate`])}
-									{/if}
-								</tr>
-							{/if}
-							{#if account.balance?.refunding && account.balance?.refunding.value > 0}
-								<tr>
-									<td>Refunding</td>
-									<td class="text-right text-white">
-										<AssetText variant="full" value={account.balance.refunding} />
-									</td>
-									{#if isCurrentUser}
-										{@render tableAction(['Claim', `/${data.network}/refund`])}
-									{/if}
-								</tr>
-							{/if}
-							<tr class="font-semibold">
-								<td>Total</td>
-								<td class="text-right text-white">
-									<AssetText variant="full" value={account.balance?.total} />
-								</td>
-								{#if isCurrentUser}
-									<td></td>
-								{/if}
-							</tr>
-						</tbody>
-					</table>
-				</Stack>
+	<Card id="eos" title="EOS" class="break-after-avoid">
+		<Stack>
+			<Stack class="gap-2">
+				<h4 class="text-muted text-base leading-none">Value</h4>
+				<p class="text-xl font-semibold leading-none text-white">
+					<!-- <AssetText variant="full" value={account.value?.systemtoken} /> -->
+				</p>
+				<Chip>
+					<TradingPair value={data.network.tokenprice} />
+					<!-- TODO: Percent change -->
+				</Chip>
 			</Stack>
-		</Card>
 
-		<Card id="ram" title="RAM" class="">
-			<Stack>
-				<Stack class="gap-2">
-					<h4 class="text-muted text-base leading-none">Value</h4>
-					<p class="text-xl font-semibold leading-none text-white">
-						<AssetText variant="full" value={account.value?.ram} />
-					</p>
-					<Chip>
-						<!-- TODO: Get TradingPair working with RAM  -->
-						<span>
-							<AssetText value={data.network.ramprice?.usd} /> USD/KB
-						</span>
-						<!-- TODO: Percent change -->
-					</Chip>
-				</Stack>
-
-				<Stack class="gap-2">
-					<h5 class="h5">Breakdown</h5>
-					<table class="table-styles text-muted">
-						<tbody>
-							<tr>
-								<td>Available</td>
-								<td class="text-right text-white">
-									<AssetText value={Asset.fromUnits(account.ram?.available, '3,KB')} /> KB
-								</td>
-								{#if isCurrentUser}
-									{@render tableAction(['RAM Market', `/${data.network}/ram`])}
-								{/if}
-							</tr>
-							<tr>
-								<td>Used</td>
-								<td class="text-right text-white">
-									<AssetText value={Asset.fromUnits(account.ram?.used, '3,KB')} /> KB
-								</td>
-								{#if isCurrentUser}
-									<td></td>
-								{/if}
-							</tr>
-							<tr class="font-semibold">
-								<td>Total</td>
-								<td class="text-right text-white">
-									<AssetText value={Asset.fromUnits(account.ram?.max, '3,KB')} /> KB
-								</td>
-								{#if isCurrentUser}
-									<td></td>
-								{/if}
-							</tr>
-						</tbody>
-					</table>
-				</Stack>
+			<Stack class="gap-2">
+				<h5 class="h5">Breakdown</h5>
+				<table class="table-styles text-muted">
+					<tbody>
+						<tr>
+							<td>Available</td>
+							<td class="text-right text-white">
+								<!-- <AssetText variant="full" value={account.balance?.liquid} /> -->
+							</td>
+							{#if isCurrentUser}
+								{@render tableAction(['Send', `/${data.network}/send`])}
+							{/if}
+						</tr>
+						<tr>
+							<td>Staked</td>
+							<td class="text-right text-white">
+								<!-- <AssetText variant="full" value={account.balance?.staked} /> -->
+							</td>
+							<!-- {#if isCurrentUser} -->
+							<!-- 	{@render tableAction(['Staking', `/${data.network}/staking`])} -->
+							<!-- {/if} -->
+						</tr>
+						<!-- {#if account.balance?.delegated && account.balance?.delegated.value > 0} -->
+						<tr>
+							<td>Delegated</td>
+							<td class="text-right text-white">
+								<!-- <AssetText variant="full" value={account.balance?.delegated} /> -->
+							</td>
+							<!-- {#if isCurrentUser} -->
+							<!-- 	{@render tableAction(['Reclaim', `/${data.network}/undelegate`])} -->
+							<!-- {/if} -->
+						</tr>
+						<!-- {/if} -->
+						<!-- {#if account.balance?.refunding && account.balance?.refunding.value > 0} -->
+						<tr>
+							<td>Refunding</td>
+							<td class="text-right text-white">
+								<!-- <AssetText variant="full" value={account.balance.refunding} /> -->
+							</td>
+							<!-- {#if isCurrentUser} -->
+							<!-- 	{@render tableAction(['Claim', `/${data.network}/refund`])} -->
+							<!-- {/if} -->
+						</tr>
+						<!-- {/if} -->
+						<tr class="font-semibold">
+							<td>Total</td>
+							<td class="text-right text-white">
+								<!-- <AssetText variant="full" value={account.balance?.total} /> -->
+							</td>
+							<!-- {#if isCurrentUser} -->
+							<!-- 	<td></td> -->
+							<!-- {/if} -->
+						</tr>
+					</tbody>
+				</table>
 			</Stack>
-		</Card>
+		</Stack>
+	</Card>
 
-		<Tokendistribution data={account.value} />
+	<Card id="ram" title="RAM" class="">
+		<Stack>
+			<Stack class="gap-2">
+				<h4 class="text-muted text-base leading-none">Value</h4>
+				<p class="text-xl font-semibold leading-none text-white">
+					<!-- <AssetText variant="full" value={account.value?.ram} /> -->
+				</p>
+				<Chip>
+					<!-- TODO: Get TradingPair working with RAM  -->
+					<span>
+						<AssetText value={data.network.ramprice?.usd} /> USD/KB
+					</span>
+					<!-- TODO: Percent change -->
+				</Chip>
+			</Stack>
 
-		{#if advancedMode.value}
-			<Card title="Resources">
-				<div class="flex flex-wrap gap-12 *:flex-1">
-					<ResourceCard type="cpu" value={String(account.cpu?.available)} vertical />
+			<Stack class="gap-2">
+				<h5 class="h5">Breakdown</h5>
+				<table class="table-styles text-muted">
+					<tbody>
+						<tr>
+							<td>Available</td>
+							<td class="text-right text-white">
+								<!-- <AssetText value={Asset.fromUnits(account.ram?.available, '3,KB')} /> KB -->
+							</td>
+							{#if isCurrentUser}
+								{@render tableAction(['RAM Market', `/${data.network}/ram`])}
+							{/if}
+						</tr>
+						<tr>
+							<td>Used</td>
+							<td class="text-right text-white">
+								<!-- <AssetText value={Asset.fromUnits(account.ram?.used, '3,KB')} /> KB -->
+							</td>
+							<!-- {#if isCurrentUser} -->
+							<td></td>
+							<!-- {/if} -->
+						</tr>
+						<tr class="font-semibold">
+							<td>Total</td>
+							<td class="text-right text-white">
+								<!-- <AssetText value={Asset.fromUnits(account.ram?.max, '3,KB')} /> KB -->
+							</td>
+							<!-- {#if isCurrentUser} -->
+							<!-- 	<td></td> -->
+							<!-- {/if} -->
+						</tr>
+					</tbody>
+				</table>
+			</Stack>
+		</Stack>
+	</Card>
 
-					<ResourceCard type="net" value={String(account.net?.available)} vertical />
-				</div>
-				{#if isCurrentUser}
-					<Button href={`/${data.network}/resources`} variant="secondary">Go to Resources</Button>
-				{/if}
-			</Card>
-		{/if}
-	</PageColumns>
-{:catch error}
-	{error.message}
-{/await}
+	<!-- <Tokendistribution data={account.value} /> -->
+
+	{#if advancedMode.value}
+		<!-- <Card title="Resources"> -->
+		<!-- 	<div class="flex flex-wrap gap-12 *:flex-1"> -->
+		<!-- 		<ResourceCard type="cpu" value={String(account.cpu?.available)} vertical /> -->
+		<!---->
+		<!-- 		<ResourceCard type="net" value={String(account.net?.available)} vertical /> -->
+		<!-- 	</div> -->
+		<!-- 	{#if isCurrentUser} -->
+		<!-- 		<Button href={`/${data.network}/resources`} variant="secondary">Go to Resources</Button> -->
+		<!-- 	{/if} -->
+		<!-- </Card> -->
+	{/if}
+</PageColumns>
