@@ -25,7 +25,11 @@ export async function GET({ fetch, params }: RequestEvent) {
 	const headers = getCacheHeaders(5);
 
 	try {
+		// const begin = performance.now();
+		// This is slow...
 		const [activity] = await Promise.all(requests);
+		// const end = performance.now();
+		// console.log('activity', end - begin);
 		return json(
 			{
 				ts: new Date(),
