@@ -78,7 +78,7 @@
 		"prettier-plugin-organize-imports": "^4.0.0",
 		"prettier-plugin-sort-json": "^4.0.0",
 		"runed": "^0.15.3",
-		"svead": "^0.0.11",
+		"svead": "^0.0.13",
 		"tailwind-merge": "^2.5.3",
 		"typescript-svelte-plugin": "^0.3.40"
 	},
