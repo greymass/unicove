@@ -1,12 +1,9 @@
-<!-- TODO: Make a generic line chart component that can be reused for different data sets -->
-<!-- Then this component would be a wrapper around that generic line chart component -->
-
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import dayjs from 'dayjs';
 	import { Chart } from 'chart.js';
 	import 'chart.js/auto';
-	import { Card, Stack } from '$lib/components/layout';
+	import { Card } from '$lib/components/layout';
 	import { Asset } from '@wharfkit/antelope';
 	import Select from '../select/select.svelte';
 	import type { ExtendedSelectOption } from '../select/types';
@@ -125,23 +122,23 @@
 
 <Card>
 	<header class="flex justify-between">
-		<Stack class="gap-0">
-			<p class="h4 font-semibold text-white/50">RAM/EOS</p>
-			<p class="h3 font-semibold">{currentPrice}</p>
-			<p class="h4 font-semibold text-white/50">{percentChange}</p>
-		</Stack>
+		<div>
+			<p class="text-muted">EOS/RAM</p>
+			<p class="text-xl font-semibold text-white">{currentPrice}</p>
+			<p class="text-muted">{percentChange}</p>
+		</div>
 		<Select id="range-select" options={range} bind:selected={selectedRange} />
 	</header>
 	<canvas bind:this={ctx}></canvas>
 	<hr class="h-px border-0 bg-shark-200/50" />
 	<div class="flex items-center justify-between font-medium">
-		<span class="text-shark-200/70">{data[data.length - 1].date.toLocaleDateString()}</span>
+		<span class="text-muted">{data[data.length - 1].date.toLocaleDateString()}</span>
 		<div class="flex gap-4">
 			<div class="flex items-center gap-1">
 				<div class="size-4 rounded bg-[#00ED97]"></div>
-				<span class="text-[#00ED97]">RAM/EOS</span>
+				<span class="text-[#00ED97]">EOS/RAM</span>
 			</div>
 		</div>
-		<span class="text-shark-200/70">Today</span>
+		<span class="text-muted">Today</span>
 	</div>
 </Card>

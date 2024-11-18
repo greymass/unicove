@@ -11,7 +11,7 @@
 	import AssetInput from '$lib/components/input/asset.svelte';
 	import BytesInput from '$lib/components/input/bytes.svelte';
 	import AssetText from '$lib/components/elements/asset.svelte';
-	import Stack from '$lib/components/layout/stack.svelte';
+	import { PageColumns, Stack } from '$lib/components/layout';
 	import Label from '$lib/components/input/label.svelte';
 
 	const { data } = $props();
@@ -63,21 +63,15 @@
 
 	let assetInput: AssetInput;
 	let bytesInput: BytesInput;
-
-	const layoutClasses = $derived({
-		container: `grid gap-6 ${data.historicalPrices.length ? 'lg:grid-cols-2' : 'max-w-lg'}`,
-		calculatorWrapper: `${data.historicalPrices.length ? 'lg:col-start-1 lg:row-span-2' : ''}`,
-		statsWrapper: `gap-6 ${data.historicalPrices.length ? 'lg:col-start-2' : ''}`
-	});
 </script>
 
-<div class={layoutClasses.container}>
+<PageColumns>
 	<!-- Buy Sell Card -->
 	<Card class="flex *:flex-1">
 		<div class="grid content-between gap-4">
 			<div class="grid">
 				<h3 class="text-muted text-base">RAM Available</h3>
-				<AssetText class="text-xl" variant="full" value={ramAvailable} />
+				<AssetText class="text-xl font-semibold" variant="full" value={ramAvailable} />
 			</div>
 			<Button variant="secondary" href="/{String(data.network)}/ram/buy">Buy</Button>
 		</div>
@@ -86,7 +80,7 @@
 			<div>
 				<h3 class="text-muted text-base">EOS Value</h3>
 				<AssetText
-					class="text-xl"
+					class="text-xl font-semibold"
 					variant="full"
 					value={data.network.ramprice?.usd &&
 						calculateValue(ramAvailable, data.network.ramprice?.eos)}
@@ -106,93 +100,90 @@
 	</Card>
 
 	<!-- RAM Calculator -->
-	<div class={layoutClasses.calculatorWrapper}>
-		<Card class="gap-6">
-			<h3 class="text-xl font-bold">RAM Calculator</h3>
-			<div class="flex gap-4 *:flex-1">
-				<Stack class="gap-2">
-					<Label for="asset-amount" class="leading-none">
-						{data.network.chain.systemToken?.symbol.code || ''}
-					</Label>
-					<AssetInput
-						id="asset-amount"
-						bind:value={ramCalculatorState.tokens}
-						bind:this={assetInput}
-						oninput={setAssetAmount}
-					/>
-				</Stack>
 
-				<Stack class="gap-2">
-					<Label for="bytes-amount" class="leading-none">Bytes</Label>
-					<BytesInput
-						id="bytes-amount"
-						bind:value={ramCalculatorState.bytes}
-						bind:this={bytesInput}
-						oninput={setBytesAmount}
-					/>
-				</Stack>
-			</div>
+	<Card class="gap-6">
+		<h3 class="text-xl font-bold">RAM Calculator</h3>
+		<div class="flex gap-4 *:flex-1">
+			<Stack class="gap-2">
+				<Label for="asset-amount" class="leading-none">
+					{data.network.chain.systemToken?.symbol.code || ''}
+				</Label>
+				<AssetInput
+					id="asset-amount"
+					bind:value={ramCalculatorState.tokens}
+					bind:this={assetInput}
+					oninput={setAssetAmount}
+				/>
+			</Stack>
 
 			<Stack class="gap-2">
-				<h4 class="text-md font-semibold">Results</h4>
-				<table class="">
-					<tbody
-						class="*:border-b *:border-mineShaft-900 *:pt-8 last:*:border-b-0 *:even:text-right"
-					>
-						<tr class="*:py-2">
-							<td class="text-muted text-base"> EOS/RAM (KB) </td>
-							<td class="text-right">
-								<AssetText
-									variant="full"
-									value={ramCalculatorState.pricePerKB
-										? Asset.from(ramCalculatorState.pricePerKB)
-										: Asset.from(0, data.network.chain.systemToken?.symbol || '0,UNKNOWN')}
-								/>
-							</td>
-						</tr>
-						<tr class="*:py-2">
-							<td class="text-muted text-base"> EOS Price </td>
-							<td class="text-right">
-								<AssetText
-									variant="full"
-									value={ramCalculatorState.tokens || Asset.from('0.0000 EOS')}
-								/>
-							</td>
-						</tr>
-
-						<tr class="*:py-2">
-							<td class="text-muted text-base"> USD/RAM (KB) </td>
-							<td class="text-right">
-								<AssetText
-									variant="full"
-									value={ramCalculatorState.pricePerKB && data.network.ramprice?.usd
-										? data.network.ramprice?.usd
-										: Asset.from(0, '2,USD')}
-								/>
-							</td>
-						</tr>
-						<tr class="*:py-2">
-							<td class="text-muted text-base"> USD Price </td>
-							<td class="text-right">
-								<AssetText
-									variant="full"
-									value={data.network.ramprice?.usd
-										? calculateValue(ramCalculatorState.tokens, data.network.ramprice.usd)
-										: Asset.from('0.0000 EOS')}
-								/>
-							</td>
-						</tr>
-						<tr class="*:py-2">
-							<td class="text-muted text-base"> Network Fees </td>
-							<td class="text-right">
-								<AssetText variant="full" value={ramCalculatorState.fee} />
-							</td>
-						</tr>
-					</tbody>
-				</table>
+				<Label for="bytes-amount" class="leading-none">Bytes</Label>
+				<BytesInput
+					id="bytes-amount"
+					bind:value={ramCalculatorState.bytes}
+					bind:this={bytesInput}
+					oninput={setBytesAmount}
+				/>
 			</Stack>
-		</Card>
-	</div>
+		</div>
+
+		<Stack class="gap-2">
+			<h4 class="text-md font-semibold">Results</h4>
+			<table class="">
+				<tbody class="*:border-b *:border-mineShaft-900 *:pt-8 last:*:border-b-0 *:even:text-right">
+					<tr class="*:py-2">
+						<td class="text-muted text-base"> EOS/RAM (KB) </td>
+						<td class="text-right font-medium text-white">
+							<AssetText
+								variant="full"
+								value={ramCalculatorState.pricePerKB
+									? Asset.from(ramCalculatorState.pricePerKB)
+									: Asset.from(0, data.network.chain.systemToken?.symbol || '0,UNKNOWN')}
+							/>
+						</td>
+					</tr>
+					<tr class="*:py-2">
+						<td class="text-muted text-base"> EOS Price </td>
+						<td class="text-right font-medium text-white">
+							<AssetText
+								variant="full"
+								value={ramCalculatorState.tokens || Asset.from('0.0000 EOS')}
+							/>
+						</td>
+					</tr>
+
+					<tr class="*:py-2">
+						<td class="text-muted text-base"> USD/RAM (KB) </td>
+						<td class="text-right font-medium text-white">
+							<AssetText
+								variant="full"
+								value={ramCalculatorState.pricePerKB && data.network.ramprice?.usd
+									? data.network.ramprice?.usd
+									: Asset.from(0, '2,USD')}
+							/>
+						</td>
+					</tr>
+					<tr class="*:py-2">
+						<td class="text-muted text-base"> USD Price </td>
+						<td class="text-right font-medium text-white">
+							<AssetText
+								variant="full"
+								value={data.network.ramprice?.usd
+									? calculateValue(ramCalculatorState.tokens, data.network.ramprice.usd)
+									: Asset.from('0.0000 EOS')}
+							/>
+						</td>
+					</tr>
+					<tr class="*:py-2">
+						<td class="text-muted text-base"> Network Fees </td>
+						<td class="text-right font-medium text-white">
+							<AssetText variant="full" value={ramCalculatorState.fee} />
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</Stack>
+	</Card>
 
 	{#if data.historicalPrices.length}
 		<div class="lg:col-start-2 lg:row-span-2 lg:row-start-1">
@@ -207,23 +198,23 @@
 					<td class="text-muted text-base"
 						>Market Cap ({data.network.chain.systemToken?.symbol.code || ''})</td
 					>
-					<td class="text-right">
+					<td class="text-right font-medium text-white">
 						<AssetText variant="full" value={marketCapEOS} />
 					</td>
 				</tr>
 				<tr class="*:py-2">
 					<td class="text-muted text-base">Market Cap (USD)</td>
-					<td class="text-right">
+					<td class="text-right font-medium text-white">
 						<AssetText variant="full" value={marketCapUSD} />
 					</td>
 				</tr>
 				<tr class="*:py-2">
 					<td class="text-muted text-base">Supply</td>
-					<td class="text-right">
+					<td class="text-right font-medium text-white">
 						<AssetText variant="full" value={ramSupply} />
 					</td>
 				</tr>
 			</tbody>
 		</table>
 	</Card>
-</div>
+</PageColumns>

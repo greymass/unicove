@@ -1,5 +1,8 @@
 <script lang="ts">
-	import type { DescriptionItem } from '../types';
+	type DescriptionItem = {
+		key: string;
+		value: string;
+	};
 
 	interface Props {
 		items: DescriptionItem[];
@@ -14,7 +17,7 @@
 			class="flex flex-wrap items-center justify-between gap-x-4 border-b border-mineShaft-900 py-3 *:grow last:border-none"
 		>
 			<dt class="caption">{item.key}</dt>
-			<dd class="text-right">{item.value}</dd>
+			<dd class="text-right tabular-nums">{item.value}</dd>
 		</div>
 	{/each}
 </dl>
