@@ -87,6 +87,7 @@ export class ActivityLoader {
 		try {
 			this.scene.setLoading(true);
 			const startIndex = more ? this.scene!.loadStart : 1;
+			console.log('startIndex', startIndex);
 			const response = await fetch(
 				`/${this.network}/api/account/${this.account}/activity/${startIndex}`
 			);
@@ -110,6 +111,9 @@ export class ActivityLoader {
 			});
 			const nextStart = -json.activity.last;
 			const hasMore = newBatch.length > 0 && json.activity.last > 0;
+
+			console.log(nextStart, hasMore);
+
 			if (!more) {
 				this.scene.setList(newBatch, nextStart, hasMore);
 			} else {
