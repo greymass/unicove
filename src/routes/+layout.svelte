@@ -71,7 +71,7 @@
 </script>
 
 <svelte:head>
-	{#if !PUBLIC_ENVIRONMENT && PUBLIC_ENVIRONMENT !== 'production'}
+	{#if !PUBLIC_ENVIRONMENT || PUBLIC_ENVIRONMENT !== 'production'}
 		<meta name="robots" content="noindex" />
 	{/if}
 </svelte:head>
