@@ -6,8 +6,8 @@
 	const { children, data } = $props();
 
 	const tabOptions = $derived.by(() => {
-		const account = String(data.account.name);
-		const network = String(data.account.network);
+		const account = String(data.name);
+		const network = String(data.network);
 		return [
 			{ href: `/${network}/account/${account}`, text: 'Overview' },
 			{ href: `/${network}/account/${account}/activity`, text: 'Activity' },
