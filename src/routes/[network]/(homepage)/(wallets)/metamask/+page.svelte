@@ -149,19 +149,37 @@
 				{:else}
 					<Stack class="mb-1 gap-2">
 						<p class="leading-snug">
-							MetaMask and the EOS Wallet are both installed and up-to-date.
+							MetaMask and the EOS Wallet are, connected, installed, and up-to-date using <a
+								href="https://www.npmjs.com/package/@greymass/eos-wallet/v/{currentVersion}"
+								>version {currentVersion}</a
+							>.
 						</p>
-						<p class="leading-snug">
-							If you don't already have an EOS account you can create one now. If you have already
-							created an account you can login with MetaMask.
-						</p>
+						{#if context.wharf.session}
+							<p class="leading-snug">
+								You are logged in as {context.wharf.session.actor} and ready to use Unicove to access
+								the {context.network?.chain.name} network.
+							</p>
+						{:else}
+							<p class="leading-snug">
+								If you don't already have an EOS account you can create one now. If you have already
+								created an account you can login with MetaMask.
+							</p>
+						{/if}
 					</Stack>
-					<Cluster>
-						<Button onclick={login}>Login</Button>
-						<Button href={`/${data.network}/signup/wallets/extensions/metamask`}>
-							Create an account
-						</Button>
-					</Cluster>
+					{#if context.wharf.session}
+						<Cluster>
+							<Button href={`/${data.network}/account/${context.wharf.session.actor}`}
+								>View my account</Button
+							>
+						</Cluster>
+					{:else}
+						<Cluster>
+							<Button onclick={login}>Login</Button>
+							<Button href={`/${data.network}/signup/wallets/extensions/metamask`}>
+								Create an account
+							</Button>
+						</Cluster>
+					{/if}
 				{/if}
 			{:else}
 				<h2 class="text-xl font-semibold">Add EOS Wallet to MetaMask</h2>
