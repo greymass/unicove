@@ -10,8 +10,11 @@ export const load: PageLoad = async ({ params }) => {
 	}
 
 	return {
-		title: 'MetaMask + EOS Wallet',
-		subtitle:
-			'Get started with the EOS Wallet plugin that makes MetaMask compatible with the EOS Network.'
+		title: `MetaMask + ${network.chain.name} Wallet`,
+		subtitle: `Get started with MetaMask on the ${network.chain.name} Network with the ${network.chain.name} Wallet snap.`,
+		pageMetaTags: {
+			title: `MetaMask + ${network.chain.name} Wallet`,
+			description: `Get started with MetaMask on the ${network.chain.name} Network with the ${network.chain.name} Wallet snap.`
+		}
 	};
 };
