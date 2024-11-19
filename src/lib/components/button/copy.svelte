@@ -28,18 +28,20 @@
 
 <!-- Styled specifically for the PageHeader component. Will need to change it for more generic use.  -->
 <!-- Uses absolute positioning so it can maintain a decent hit slop on mobile without affecting layout -->
-<button
-	onclick={copyToClipboard}
-	class="absolute left-full grid size-12 -translate-x-2 translate-y-1 place-items-center gap-2 text-skyBlue-500 hover:text-skyBlue-400 focus-visible:text-skyBlue-400 focus-visible:outline-none active:text-skyBlue-200"
->
-	<div class="relative">
-		<Copy class="size-4 " />
-		{#if hint}
-			<span
-				in:fly={{ x: -20, easing: quartOut }}
-				out:fade={{ easing: sineIn }}
-				class="absolute inset-y-0 left-full translate-x-2 text-xs text-skyBlue-400">Copied!</span
-			>
-		{/if}
-	</div>
-</button>
+{#if 'clipboard' in navigator}
+	<button
+		onclick={copyToClipboard}
+		class="absolute left-full grid size-12 -translate-x-2 translate-y-1 place-items-center gap-2 text-skyBlue-500 hover:text-skyBlue-400 focus-visible:text-skyBlue-400 focus-visible:outline-none active:text-skyBlue-200"
+	>
+		<div class="relative">
+			<Copy class="size-4 " />
+			{#if hint}
+				<span
+					in:fly={{ x: -20, easing: quartOut }}
+					out:fade={{ easing: sineIn }}
+					class="absolute inset-y-0 left-full translate-x-2 text-xs text-skyBlue-400">Copied!</span
+				>
+			{/if}
+		</div>
+	</button>
+{/if}
