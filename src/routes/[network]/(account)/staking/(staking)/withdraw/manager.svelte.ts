@@ -1,4 +1,4 @@
-import { Asset } from '@wharfkit/antelope';
+import { Asset, UInt64 } from '@wharfkit/antelope';
 import type { AccountState } from '$lib/state/client/account.svelte';
 import type { NetworkState } from '$lib/state/network.svelte';
 import type { WharfState } from '$lib/state/client/wharf.svelte';
@@ -69,7 +69,7 @@ export class WithdrawManager {
 			}
 
 			const actions = [];
-			if (this.claimable) {
+			if (this.sellable && this.sellable.units.gt(UInt64.from(0))) {
 				actions.push(
 					this.network.contracts.system.action('sellrex', {
 						from: this.account.name,
