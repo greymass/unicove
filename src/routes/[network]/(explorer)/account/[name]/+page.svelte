@@ -109,7 +109,7 @@
 									<AssetText variant="full" value={tokenUnstaked} />
 								</td>
 								{#if isCurrentUser}
-									{@render tableAction(['Staking', `/${data.network}/staking`])}
+									{@render tableAction(['Withdraw', `/${data.network}/staking/withdraw`])}
 								{/if}
 							</tr>
 							{#if tokenDelegated && tokenDelegated.value > 0}
