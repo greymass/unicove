@@ -49,7 +49,7 @@
 	<div class="grid gap-2">
 		<h1 class="text-3xl font-bold leading-none text-white">{props.title}</h1>
 		{#if props.subtitle}
-			<h2 class="text-muted text-base leading-none">{props.subtitle}</h2>
+			<p class="text-muted text-base leading-none">{props.subtitle}</p>
 		{/if}
 	</div>
 </header>
