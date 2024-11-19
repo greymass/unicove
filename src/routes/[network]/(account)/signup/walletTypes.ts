@@ -1,13 +1,13 @@
 import TabletSmartphone from 'lucide-svelte/icons/tablet-smartphone';
 import LaptopMinimal from 'lucide-svelte/icons/laptop-minimal';
-import LockKeyhole from 'lucide-svelte/icons/lock-keyhole';
+// import LockKeyhole from 'lucide-svelte/icons/lock-keyhole';
 import GlobeLock from 'lucide-svelte/icons/globe-lock';
 import type { Icon } from 'lucide-svelte';
 import AnchorLogo from '$lib/assets/wallets/anchor.svg';
 import WombatLogo from '$lib/assets/wallets/wombat.webp';
 import TokenPocketLogo from '$lib/assets/wallets/tokenpocket.webp';
 import MetaMaskLogo from '$lib/assets/wallets/metamask.svg';
-import LedgerLogo from '$lib/assets/wallets/ledger.svg';
+// import LedgerLogo from '$lib/assets/wallets/ledger.svg';
 
 export interface Wallet {
 	name: string;
@@ -64,33 +64,34 @@ export const walletTypes: Record<string, WalletType> = {
 	// 	],
 	// 	wallets: [{ name: 'Anchor Web', route: 'anchor' }]
 	// },
-	hardware: new WalletType({
-		type: 'hardware',
-		title: 'Hardware Wallets',
-		description: 'Hardware wallets are physical devices that securely store your private keys.',
-		icon: LockKeyhole,
-		benefits: [
-			'Highest level of security',
-			'Offline storage of private keys',
-			'Support for multiple cryptocurrencies'
-		],
-		wallets: [
-			{
-				name: 'Ledger',
-				route: 'signup/wallets/hardware/ledger',
-				logo: LedgerLogo,
-				supportedNetworks: ['eos', 'jungle4']
-			}
-		]
-	}),
+	// hardware: new WalletType({
+	// 	type: 'hardware',
+	// 	title: 'Hardware Wallets',
+	// 	description:
+	// 		'Hardware wallets are dedicated devices to securely generate and store private keys.',
+	// 	icon: LockKeyhole,
+	// 	benefits: [
+	// 		'Highest level of security',
+	// 		'Offline storage of private keys',
+	// 		'Support for multiple cryptocurrencies'
+	// 	],
+	// 	wallets: [
+	// 		{
+	// 			name: 'Ledger',
+	// 			route: 'signup/wallets/hardware/ledger',
+	// 			logo: LedgerLogo,
+	// 			supportedNetworks: ['eos', 'jungle4']
+	// 		}
+	// 	]
+	// }),
 	desktop: new WalletType({
 		type: 'desktop',
 		title: 'Desktop Wallets',
-		description: 'Desktop wallets are applications that you install on your computer.',
+		description: 'Desktop wallets are standalone applications that are installed on a computer.',
 		icon: LaptopMinimal,
 		benefits: [
-			'Easy to use and set up',
-			'Convenient for frequent transactions',
+			'Standalone applications for secure key storage.',
+			'Operates independent of which web browser used. ',
 			'Often free to download and use'
 		],
 		wallets: [
@@ -98,7 +99,8 @@ export const walletTypes: Record<string, WalletType> = {
 				name: 'MetaMask',
 				route: 'signup/wallets/extensions/metamask',
 				logo: MetaMaskLogo,
-				description: 'Secure and easy-to-use browser extension wallet.',
+				description:
+					'One of the most popular wallets for interacting with web3 applications. Made compatible with Antelope-based blockchains through the EOS Wallet snap.',
 				supportedNetworks: ['eos', 'jungle4']
 			},
 			{
@@ -106,7 +108,7 @@ export const walletTypes: Record<string, WalletType> = {
 				route: 'signup/wallets/desktop/anchor',
 				logo: AnchorLogo,
 				description:
-					'Popular option with a user-friendly interface. Supports multiple EOSIO chains.',
+					'A general purpose desktop wallet and authenticator for any Antelope-based blockchain. Supports integration with Ledger devices.',
 				supportedNetworks: ['eos', 'jungle4']
 			},
 			{
@@ -114,7 +116,7 @@ export const walletTypes: Record<string, WalletType> = {
 				route: 'signup/wallets/desktop/wombat',
 				logo: WombatLogo,
 				description:
-					'Fast and secure with multi-chain support. Offers a smooth onboarding experience.',
+					'A desktop wallet with a focus on gaming and NFTs. Supports multiple Antelope-based blockchains.',
 				supportedNetworks: ['eos']
 			}
 		]

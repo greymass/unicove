@@ -127,7 +127,8 @@
 		bind:value={input}
 		placeholder={String(zeroValue.value)}
 		{autofocus}
-		inputmode="numeric"
+		inputmode="decimal"
+		step="any"
 		{...props}
 	/>
 
