@@ -8,7 +8,8 @@ import {
 	defaultQuantity,
 	getUnstakingBalances,
 	getClaimableBalance,
-	getWithdrawableBalance
+	getWithdrawableBalance,
+	getSellableREX
 } from '$lib/utils/staking';
 
 export class WithdrawManager {
@@ -25,6 +26,7 @@ export class WithdrawManager {
 	public claimable: Asset = $derived(
 		getClaimableBalance(this.network, this.account, this.unstaking)
 	);
+	public sellable: Asset = $derived(getSellableREX(this.network, this.account, this.unstaking));
 	public withdrawable: Asset = $derived(getWithdrawableBalance(this.network, this.account));
 	public total: Asset = $derived(
 		this.network
@@ -71,7 +73,7 @@ export class WithdrawManager {
 				actions.push(
 					this.network.contracts.system.action('sellrex', {
 						from: this.account.name,
-						rex: this.network.tokenToRex(this.claimable)
+						rex: this.sellable
 					})
 				);
 			}
