@@ -19,50 +19,57 @@
 
 	const advancedMode = getSetting('advanced-mode', false);
 
+	// Example: ['', 'en', 'eos', 'staking', 'withdraw']
+	let pathname = $derived($page.url.pathname.split('/'));
+
 	const destinations = $derived.by(() => {
 		const isAdvancedMode = advancedMode.value;
-		const features = [];
+
+		const items = [
+			{
+				href: `/${network}`,
+				text: network.chain.name,
+				active: pathname[2] === String(network) && !pathname[3]
+			},
+			{ href: `/${network}/send`, text: 'Send', active: pathname[3] === 'send' }
+		];
 
 		if (network.supports('staking')) {
-			features.push({ href: `/${network}/staking`, text: 'Staking' });
+			items.push({
+				href: `/${network}/staking`,
+				text: 'Staking',
+				active: pathname[3] === 'staking'
+			});
 		}
 
 		if (network.supports('rammarket')) {
-			features.push({ href: `/${network}/ram`, text: 'RAM' });
+			items.push({ href: `/${network}/ram`, text: 'RAM', active: pathname[3] === 'ram' });
 		}
 
 		if (isAdvancedMode) {
-			features.push({ href: `/${network}/resources`, text: 'Resources' });
+			items.push({
+				href: `/${network}/resources`,
+				text: 'Resources',
+				active: pathname[3] === 'resources'
+			});
 		}
-
-		const items = [
-			{ href: `/${network}`, text: network.chain.name },
-			{ href: `/${network}/send`, text: 'Send' },
-			...features,
-			{ href: `/${network}/settings`, text: 'Settings' }
-		];
 
 		if (context.account) {
 			items.splice(1, 0, {
 				href: `/${network}/account/${context.account.name}`,
-				text: 'Account'
+				text: 'My Account',
+				active: pathname[3] === 'account' && pathname[4] === String(context.account.name)
 			});
 		}
 
+		items.push({
+			href: `/${network}/settings`,
+			text: 'Settings',
+			active: pathname[3] === 'settings'
+		});
+
 		return items;
 	});
-
-	let rootPathname = $derived($page.url.pathname.split('/').slice(2)[1]);
-
-	// Derive the active state of each destination
-	let options = $derived(
-		destinations.map((destination) => ({
-			...destination,
-			active:
-				(rootPathname && destination.href.includes(rootPathname)) ||
-				(!rootPathname && destination.href === `/${network}`)
-		}))
-	);
 </script>
 
 <menu class="grid h-svh grid-rows-[auto_1fr] justify-start gap-8 px-8 md:px-0 {className}">
@@ -71,7 +78,7 @@
 	</a>
 
 	<nav class="flex flex-col gap-2 text-nowrap text-base font-medium text-white">
-		{#each options as option}
+		{#each destinations as option}
 			<a
 				href={option.href}
 				class="flex h-12 select-none items-center rounded-lg leading-snug transition-opacity hover:opacity-100 focus-visible:opacity-100 focus-visible:outline focus-visible:outline-solar-500"
@@ -91,16 +98,3 @@
 		{/each}
 	</nav>
 </menu>
-
-<style>
-	:root {
-		--bg-menu: var(--network-theme, #00b5ff60);
-	}
-	/* menu { */
-	/* 	background-image: radial-gradient( */
-	/* 		circle at left -250% top 50%, */
-	/* 		var(--bg-menu) 40%, */
-	/* 		transparent 80% */
-	/* 	); */
-	/* } */
-</style>
