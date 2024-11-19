@@ -29,9 +29,6 @@ export function getStakedBalance(network?: NetworkState, account?: AccountState)
 		if (account.account?.data.rex_info && network) {
 			staked.add(network.rexToToken(account.account.data.rex_info.rex_balance).units);
 		}
-		if (account.sources.rexfund) {
-			staked.add(Asset.from(account.sources.rexfund.balance).units);
-		}
 	}
 	return Asset.fromUnits(staked, network ? network.chain.systemToken!.symbol : defaultSymbol);
 }
