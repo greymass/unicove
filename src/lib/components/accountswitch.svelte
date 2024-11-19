@@ -14,7 +14,7 @@
 	import LogOut from 'lucide-svelte/icons/log-out';
 	import User from 'lucide-svelte/icons/user';
 	import UserCheck from 'lucide-svelte/icons/user-check';
-	import Button from './button/button.svelte';
+	import PlusIcon from 'lucide-svelte/icons/plus';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -54,11 +54,15 @@
 	// 	closeDrawer();
 	// }
 
+	let chainSessions = $derived(
+		context.wharf.sessions.filter((session) => network.chain.id.equals(session.chain))
+	);
+
 	const {
 		elements: { trigger, overlay, content, close, portalled },
 		states: { open }
 	} = createDialog({
-		// defaultOpen: true,
+		// defaultOpen: true, // dev only
 		forceVisible: true
 	});
 
@@ -157,8 +161,13 @@
 
 			<section id="accounts" class="flex flex-1 flex-col gap-3 pt-2">
 				<header class="flex items-center justify-between text-xl font-semibold">
-					<span>Accounts</span>
-					<!-- class="flex h-12 items-center gap-2 rounded-lg border-2 border-mineShaft-600 px-4 text-mineShaft-100" -->
+					<span>My Accounts</span>
+					<button
+						onclick={addSession}
+						class="grid size-12 place-items-center rounded-lg hover:bg-mineShaft-950"
+					>
+						<PlusIcon class="size-6" />
+					</button>
 				</header>
 
 				<!-- {#if context.wharf.sessions.length} -->
@@ -166,8 +175,8 @@
 				<!-- {/if} -->
 
 				<ul class="grid gap-2">
-					{#each context.wharf.sessions as session}
-						{#if network.chain.id.equals(session.chain)}
+					{#if chainSessions.length}
+						{#each chainSessions as session}
 							{@const isCurrent = currentSession?.actor.toString() === session.actor}
 							<li class="grid grid-cols-[1fr_auto] gap-2">
 								<button
@@ -195,7 +204,7 @@
 								<button
 									onclick={() => removeSession(session)}
 									data-current={isCurrent}
-									class="grid size-12 place-items-center rounded-lg
+									class="text-muted grid size-12 place-items-center rounded-lg
 									[@media(any-hover:hover)]:hover:bg-mineShaft-950
 									[@media(any-hover:hover)]:hover:text-mineShaft-50
 									"
@@ -203,15 +212,14 @@
 									<LogOut class="size-4" />
 								</button>
 							</li>
-						{/if}
-					{/each}
+						{/each}
+					{:else}
+						<p>No active sessions</p>
+					{/if}
 				</ul>
 			</section>
 
-			<div class="flex flex-col gap-2 justify-self-end">
-				<Button onclick={addSession} variant="secondary">Add account</Button>
-
-				<!-- <Button
+			<!-- <Button
 					class="hidden"
 					href={`/${network}/signup`}
 					onclick={closeDrawer}
@@ -219,7 +227,6 @@
 				>
 					Create account
 				</Button> -->
-			</div>
 		</div>
 	</div>
 {/if}

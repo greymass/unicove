@@ -80,7 +80,7 @@
 			>{currentNetwork.chain.name}</span
 		>
 
-		<div class="font-regular m-0 flex items-center gap-2 pr-1 text-base text-zinc-400">
+		<div class="font-regular m-0 flex items-center gap-1 pr-1 text-base text-zinc-400">
 			<span use:melt={$label}>Change network</span>
 			<ChevronDown
 				data-open={$open}
