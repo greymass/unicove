@@ -10,7 +10,7 @@
 
 	import NetworkSwitch from '$lib/components/networkswitch.svelte';
 
-	import CircleX from 'lucide-svelte/icons/circle-x';
+	import X from 'lucide-svelte/icons/x';
 	import LogOut from 'lucide-svelte/icons/log-out';
 	import User from 'lucide-svelte/icons/user';
 	import UserCheck from 'lucide-svelte/icons/user-check';
@@ -141,17 +141,16 @@
 					use:melt={$close}
 					aria-label="Close"
 					class="
-					grid size-12 appearance-none
+					text-muted grid size-12
+					appearance-none
 					place-items-center
 					rounded-lg
-					text-zinc-400
-					hover:text-skyBlue-500
 					focus:text-white
 					focus:outline-none
 					md:pt-2.5
 					"
 				>
-					<CircleX />
+					<X class="size-4 " />
 				</button>
 
 				<NetworkSwitch currentNetwork={network} class="" />
