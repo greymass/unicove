@@ -33,6 +33,7 @@
 	const tokenAvailable = $derived(data.account.balance?.liquid);
 	const tokenRefunding = $derived(data.account.balance?.refunding);
 	const tokenStaked = $derived(data.account.balance?.staked);
+	const tokenUnstaked = $derived(data.account.balance?.unstaked);
 	const tokenDelegated = $derived(data.account.balance?.delegated);
 	const tokenTotal = $derived(data.account.balance?.total);
 
@@ -97,6 +98,15 @@
 								<td>Staked</td>
 								<td class="text-right text-white">
 									<AssetText variant="full" value={tokenStaked} />
+								</td>
+								{#if isCurrentUser}
+									{@render tableAction(['Staking', `/${data.network}/staking`])}
+								{/if}
+							</tr>
+							<tr>
+								<td>Unstaked</td>
+								<td class="text-right text-white">
+									<AssetText variant="full" value={tokenUnstaked} />
 								</td>
 								{#if isCurrentUser}
 									{@render tableAction(['Staking', `/${data.network}/staking`])}

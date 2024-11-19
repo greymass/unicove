@@ -123,6 +123,7 @@ export interface AccountValue {
 	staked: Asset;
 	systemtoken: Asset;
 	total: Asset;
+	unstaked: Asset;
 }
 
 export function getAccountValue(
@@ -134,6 +135,7 @@ export function getAccountValue(
 	const liquid = Asset.from('0.0000 USD');
 	const ram = Asset.from('0.0000 USD');
 	const staked = Asset.from('0.0000 USD');
+	const unstaked = Asset.from('0.0000 USD');
 	const systemtoken = Asset.from('0.0000 USD');
 	const total = Asset.from('0.0000 USD');
 
@@ -141,6 +143,7 @@ export function getAccountValue(
 		delegated.units.add(calculateValue(balance.delegated, network.tokenprice).units);
 		liquid.units.add(calculateValue(balance.liquid, network.tokenprice).units);
 		staked.units.add(calculateValue(balance.staked, network.tokenprice).units);
+		unstaked.units.add(calculateValue(balance.unstaked, network.tokenprice).units);
 		systemtoken.units.add(calculateValue(balance.total, network.tokenprice).units);
 		total.units.add(calculateValue(balance.total, network.tokenprice).units);
 		if (network.ramprice) {
@@ -157,6 +160,7 @@ export function getAccountValue(
 		liquid,
 		ram,
 		staked,
+		unstaked,
 		systemtoken,
 		total
 	};
@@ -167,6 +171,7 @@ export interface Balance {
 	liquid: Asset;
 	refunding: Asset;
 	staked: Asset;
+	unstaked: Asset;
 	total: Asset;
 }
 
@@ -182,10 +187,11 @@ export function getBalance(network: NetworkState, sources: DataSources): Balance
 	const refunding = Asset.fromUnits(0, network.config.symbol);
 	const liquid = Asset.fromUnits(0, network.config.symbol);
 	const staked = Asset.fromUnits(0, network.config.symbol);
+	const unstaked = Asset.fromUnits(0, network.config.symbol);
 	const total = Asset.fromUnits(0, network.config.symbol);
 
 	if (!sources.get_account) {
-		return { delegated, liquid, refunding, staked, total };
+		return { delegated, liquid, refunding, staked, unstaked, total };
 	}
 
 	// Add the core balance if it exists on the account
@@ -222,8 +228,9 @@ export function getBalance(network: NetworkState, sources: DataSources): Balance
 		}
 		// Add rex fund to total balance based on current value
 		if (sources.rexfund && sources.rexfund.balance) {
-			staked.units.add(sources.rexfund.balance.units);
-			total.units.add(sources.rexfund.balance.units);
+			const balance = Asset.from(sources.rexfund.balance);
+			unstaked.units.add(balance.units);
+			total.units.add(balance.units);
 		}
 	}
 
@@ -232,6 +239,7 @@ export function getBalance(network: NetworkState, sources: DataSources): Balance
 		liquid,
 		refunding,
 		staked,
+		unstaked,
 		total
 	};
 }
