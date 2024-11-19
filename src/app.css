@@ -40,7 +40,7 @@
 
 	p,
 	li {
-		@apply text-muted max-w-prose text-base font-normal;
+		@apply text-muted text-base font-normal;
 	}
 
 	/* Layout */

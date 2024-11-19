@@ -48,8 +48,10 @@ const walletPlugins: WalletPlugin[] = [
 	new WalletPluginWombat()
 ];
 
+export const accountCreationPluginMetamask = new AccountCreationPluginMetamask();
+
 const accountCreationPlugins: AccountCreationPlugin[] = [
-	new AccountCreationPluginMetamask(),
+	accountCreationPluginMetamask,
 	new AccountCreationPluginGreymass()
 ];
 

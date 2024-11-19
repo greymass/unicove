@@ -5,6 +5,7 @@ import type { NetworkState } from '$lib/state/network.svelte';
 export interface UnstakingRecord {
 	date: Date | undefined;
 	balance: Asset;
+	rex: Asset;
 	claimable: boolean;
 	savings: boolean;
 }
@@ -27,9 +28,6 @@ export function getStakedBalance(network?: NetworkState, account?: AccountState)
 	if (account && account.loaded) {
 		if (account.account?.data.rex_info && network) {
 			staked.add(network.rexToToken(account.account.data.rex_info.rex_balance).units);
-		}
-		if (account.sources.rexfund) {
-			staked.add(Asset.from(account.sources.rexfund.balance).units);
 		}
 	}
 	return Asset.fromUnits(staked, network ? network.chain.systemToken!.symbol : defaultSymbol);
@@ -57,6 +55,28 @@ export function getClaimableBalance(
 	return Asset.fromUnits(claimable, network ? network.chain.systemToken!.symbol : defaultSymbol);
 }
 
+export function getSellableREX(
+	network?: NetworkState,
+	account?: AccountState,
+	unstaking?: Array<UnstakingRecord>
+): Asset {
+	// claimable buckets, rex to be sold
+	const claimable = Int64.from(0);
+
+	if (!unstaking) {
+		unstaking = getUnstakingBalances(network, account);
+	}
+
+	const sum: Int64 = unstaking
+		.filter((r) => r.claimable)
+		.reduce((acc, r) => acc.adding(r.rex.units), Int64.from(0));
+	if (sum) {
+		claimable.add(sum);
+	}
+
+	return Asset.fromUnits(claimable, '4,REX');
+}
+
 export function getWithdrawableBalance(network?: NetworkState, account?: AccountState): Asset {
 	const withdrawable = Int64.from(0);
 	if (account && account.loaded && account.sources.rexfund && account.sources.rexfund.balance) {
@@ -80,6 +100,7 @@ export function getUnstakingBalances(
 				balance: network.rexToToken(
 					Asset.fromUnits(rexInfo.matured_rex, rexInfo.rex_balance.symbol)
 				),
+				rex: Asset.fromUnits(rexInfo.matured_rex, rexInfo.rex_balance.symbol),
 				claimable: true,
 				savings: false
 			});
@@ -91,13 +112,14 @@ export function getUnstakingBalances(
 			const now = new Date();
 			for (const maturity of rexInfo.rex_maturities) {
 				if (maturity.first && maturity.second) {
-					const date = new Date(maturity.first.toString());
+					const date = new Date(maturity.first.toString() + 'Z');
 					records.push({
 						date,
 						balance: network.rexToToken(
 							Asset.fromUnits(maturity.second, rexInfo.rex_balance.symbol)
 						),
-						claimable: +date < +now,
+						rex: Asset.fromUnits(maturity.second, rexInfo.rex_balance.symbol),
+						claimable: date < now,
 						savings: +date > +fiveYearsFromNow
 					});
 				}

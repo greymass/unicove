@@ -12,7 +12,8 @@
 		delegated: { label: 'Delegated', color: 'bg-mineShaft-300' },
 		liquid: { label: 'Available', color: 'bg-green-400' },
 		ram: { label: 'RAM', color: 'bg-solar-400' },
-		staked: { label: 'Staked', color: 'bg-skyBlue-400' }
+		staked: { label: 'Staked', color: 'bg-skyBlue-400' },
+		unstaked: { label: 'Unstaked', color: 'bg-skyBlue-400' }
 	};
 
 	type DistributionItem = {
