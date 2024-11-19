@@ -5,18 +5,24 @@
 
 	import Button from '$lib/components/button/button.svelte';
 	import Box from '$lib/components/layout/box/box.svelte';
-	import { checkForSnap, getSnaps, requestSnap } from '$lib/metamask-snap';
+	import { checkForSnap, requestSnap } from '$lib/metamask-snap';
 	import EOS from '$lib/assets/EOS@2x.svg';
 	import Metamask from '$lib/assets/metamask.svg';
 	import { MetaMaskState } from '$lib/state/metamask.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
 	import { Cluster, Stack } from '$lib/components/layout/index.js';
+	import { accountCreationPluginMetamask } from '$lib/state/client/wharf.svelte';
+	import { getSetting } from '$lib/state/settings.svelte';
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');
 
 	let metaMaskState: MetaMaskState = new MetaMaskState();
 	let latestVersion: string | undefined = $state();
+	let isMetaMaskSession: boolean = $derived(
+		context.wharf.session?.walletPlugin.id === 'wallet-plugin-metamask'
+	);
+	const advancedMode = getSetting('advanced-mode', false);
 
 	let currentVersion = $derived(metaMaskState.installedSnap?.version);
 	let needsUpdate = $derived(
@@ -33,6 +39,11 @@
 						metaMaskState.isInstalled = isInstalled;
 						if (isInstalled) {
 							connect();
+							accountCreationPluginMetamask
+								.retrievePublicKey(data.network.chain.id)
+								.then((publicKey) => {
+									metaMaskState.publicKey = publicKey;
+								});
 						}
 					});
 				});
@@ -149,15 +160,19 @@
 				{:else}
 					<Stack class="mb-1 gap-2">
 						<p class="leading-snug">
-							MetaMask and the EOS Wallet are, connected, installed, and up-to-date using <a
+							MetaMask and the EOS Wallet are connected, installed, and up-to-date using <a
 								href="https://www.npmjs.com/package/@greymass/eos-wallet/v/{currentVersion}"
 								>version {currentVersion}</a
 							>.
 						</p>
-						{#if context.wharf.session}
+						{#if context.wharf.session && isMetaMaskSession}
 							<p class="leading-snug">
 								You are logged in as {context.wharf.session.actor} and ready to use Unicove to access
 								the {context.network?.chain.name} network.
+							</p>
+						{:else if context.wharf.session}
+							<p class="leading-snug">
+								You are logged in as {context.wharf.session.actor} but are not using MetaMask.
 							</p>
 						{:else}
 							<p class="leading-snug">
@@ -180,11 +195,17 @@
 							</Button>
 						</Cluster>
 					{/if}
+					{#if advancedMode.value}
+						<Stack class="mb-1 gap-2">
+							<p>EOS Wallet Public Key</p>
+							<p class="text-xs">{metaMaskState.publicKey}</p>
+						</Stack>
+					{/if}
 				{/if}
 			{:else}
 				<h2 class="text-xl font-semibold">Add EOS Wallet to MetaMask</h2>
 				<Stack class="mb-1 gap-2">
-					<p class="leading-snug">It looks like you have MetaMask installed and ready to go.</p>
+					<p class="leading-snug">It looks like you already have MetaMask installed.</p>
 					<p class="leading-snug">
 						To get started with MetaMask on the EOS Network, install the EOS Wallet snap using the
 						button below.
