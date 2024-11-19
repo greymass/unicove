@@ -3,6 +3,7 @@
 	import Copy from 'lucide-svelte/icons/copy';
 	import { quadIn, quartOut } from 'svelte/easing';
 	import { fade, fly } from 'svelte/transition';
+	import { browser } from '$app/environment';
 
 	interface Props {
 		data: string;
@@ -28,7 +29,7 @@
 
 <!-- Styled specifically for the PageHeader component. Will need to change it for more generic use.  -->
 <!-- Uses absolute positioning so it can maintain a decent hit slop on mobile without affecting layout -->
-{#if 'clipboard' in navigator}
+{#if browser && 'clipboard' in navigator}
 	<button
 		onclick={copyToClipboard}
 		class="absolute left-full grid size-12 -translate-x-2 translate-y-1 place-items-center gap-2 text-skyBlue-500 hover:text-skyBlue-400 focus-visible:text-skyBlue-400 focus-visible:outline-none active:scale-95"
