@@ -18,19 +18,14 @@
 	import { Stack } from '$lib/components/layout';
 	import { truncateCenter } from '$lib/utils';
 	import { cn } from '$lib/utils';
+	import { languageTag } from '$lib/paraglide/runtime';
 
 	interface NameInputProps extends ComponentProps<typeof TextInput> {
 		debug?: boolean;
 		network: NetworkState;
 	}
 
-	let {
-		network,
-		ref = $bindable(),
-		debug = false,
-		class: className,
-		...props
-	}: NameInputProps = $props();
+	let { network, ref = $bindable(), debug = false, class: className }: NameInputProps = $props();
 
 	let searchValue: string = $state('');
 	let selectedIndex: number | undefined = $state();
@@ -67,13 +62,13 @@
 	const result = $derived.by(() => {
 		switch (searchType) {
 			case 'account':
-				return `/${network}/account/${searchValue}`;
+				return `/${languageTag()}/${network}/account/${searchValue}`;
 			case 'block':
-				return `/${network}/block/${searchValue}`;
+				return `/${languageTag()}/${network}/block/${searchValue}`;
 			case 'key':
-				return `/${network}/key/${searchValue}`;
+				return `/${languageTag()}/${network}/key/${searchValue}`;
 			case 'transaction':
-				return `/${network}/transaction/${searchValue}`;
+				return `/${languageTag()}/${network}/transaction/${searchValue}`;
 			default:
 				return null;
 		}
