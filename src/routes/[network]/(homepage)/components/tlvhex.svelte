@@ -6,6 +6,7 @@
 	const { network } = getContext<UnicoveContext>('state');
 
 	let networkLogo = $derived(String(chainLogos.get(network?.chain.id.toString() || '')));
+	let networkName = $derived(String(network?.chain.name));
 
 	const { TLV, APR } = $props();
 </script>
@@ -27,7 +28,7 @@
 			/>
 		</svg>
 		<div class="grid text-center uppercase">
-			<img class="mb-4 h-12 place-self-center md:h-20" src={networkLogo} alt="eos" />
+			<img class="mb-4 h-12 place-self-center md:h-20" src={networkLogo} alt={networkName} />
 			<span class="text-sm text-white/60 md:text-lg">Total locked value</span>
 			<!-- TODO: add eos formatter -->
 			<span class="text-md font-semibold md:text-2xl">{TLV} EOS</span>

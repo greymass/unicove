@@ -24,6 +24,7 @@
 	let tokenPrices: HistoricalPrice[] = $state([]);
 
 	let networkLogo = $derived(String(chainLogos.get(data.network?.chain.id.toString())));
+	let networkName = $derived(String(data.network.chain.name));
 
 	// async function loadPrices() {
 	// 	const ramResponse: Response = await fetch(`/${data.network}/api/metrics/marketprice/ram`);
@@ -87,10 +88,10 @@
 			class="z-10 col-span-full col-start-1 row-start-1 items-start xs:col-span-3 xs:col-start-1 sm:col-span-3 sm:col-start-1 sm:row-start-1 sm:max-w-sm sm:place-self-center md:col-span-6 md:col-start-1 md:max-w-xl md:place-self-auto"
 		>
 			<h1 class="text-balance text-3xl font-semibold leading-tight md:text-4xl md:leading-tight">
-				Unicove is your gateway to the {data.network.chain.name} Network
+				Unicove is your gateway to the {networkName} Network
 			</h1>
 			<p class="text-muted mb-2 text-balance text-xl leading-tight md:text-2xl md:leading-tight">
-				Stake, Send, Manage Tokens, and Explore EOS – all with ease
+				Stake, Send, Manage Tokens, and Explore {networkName} – all with ease
 			</p>
 			<!-- <Button href={`/${data.network}/signup`}>Create your EOS account now</Button> -->
 			<!-- <Button disabled>Create your EOS account (Coming Soon)</Button> -->
@@ -100,7 +101,7 @@
 		<div
 			class="relative left-12 top-8 z-10 col-span-full col-start-3 row-start-1 hidden max-h-80 justify-self-center xs:block sm:col-start-3 md:inset-0 md:col-span-3 md:col-start-7 xl:col-span-4 xl:col-start-6"
 		>
-			<img class="h-40 object-contain md:h-72" src={networkLogo} alt="eos" />
+			<img class="h-40 object-contain md:h-72" src={networkLogo} alt={networkName} />
 		</div>
 
 		<!-- Unicove logo outline -->
@@ -162,15 +163,15 @@
 					</svg>
 					<img
 						class="h-40 rounded-full bg-mineShaft-950 object-contain px-2 py-4"
-						src={String(chainLogos.get(String(Chains.EOS.id)))}
-						alt="eos"
+						src={networkLogo}
+						alt={networkName}
 					/>
 				</div>
 			</div>
 
 			<Box class="grid place-items-center py-8">
 				{@render textblock({
-					title: 'Metamask is now EOS compatible',
+					title: `Metamask is now ${networkName} compatible`,
 					text: 'TODO: The APR is an estimate, and may fluctuate based on how many and much others are staking. Your 21 day lockup period starts when you unstake your EOS. You will always get back your staked EOS.',
 					button: {
 						text: 'Get a free account',

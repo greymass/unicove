@@ -93,7 +93,8 @@
 		});
 	}
 
-	const EOS = String(chainLogos.get(String(data.network.chain.id)));
+	const networkLogo = String(chainLogos.get(String(data.network.chain.id)));
+	const networkName = data.network.chain.name;
 </script>
 
 <section class="col-span-full @container">
@@ -131,8 +132,8 @@
 				</svg>
 				<img
 					class="h-40 rounded-full bg-mineShaft-950 object-contain px-2 py-4"
-					src={EOS}
-					alt="eos"
+					src={networkLogo}
+					alt={networkName}
 				/>
 			</div>
 		</div>
