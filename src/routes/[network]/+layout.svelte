@@ -8,6 +8,7 @@
 	import UnicoveLogo from '$lib/assets/unicovelogo.svelte';
 	import Search from '$lib/components/input/search.svelte';
 	import X from 'lucide-svelte/icons/circle-x';
+	import { chainLogos } from '@wharfkit/common';
 
 	let { children, data } = $props();
 
@@ -83,7 +84,21 @@
 		// set the flag to prevent banner showing on next load
 		localStorage.setItem('hide-v1-banner', 'true');
 	}
+
+	// Deduplicate chain logos
+	let logoSet = Array.from(new Set(chainLogos.values())).map(String);
 </script>
+
+<!-- Preload current chain logo, prefetch the rest to avoid future pop-in -->
+<svelte:head>
+	{#each logoSet as logoSrc}
+		{#if logoSrc === chainLogos.get(String(data.network.chain.id))}
+			<link rel="preload" href={logoSrc} as="image" type="image/png" />
+		{:else}
+			<link rel="prefetch" href={logoSrc} as="image" type="image/png" />
+		{/if}
+	{/each}
+</svelte:head>
 
 {#if showBanner}
 	<aside

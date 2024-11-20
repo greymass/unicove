@@ -28,10 +28,6 @@
 	let routePath = $derived($page.url.pathname.split('/')[3]);
 </script>
 
-<svelte:head>
-	<link rel="preload" href={String(logo)} as="image" type="image/png" />
-</svelte:head>
-
 <header class="col-span-full flex min-h-16 items-center gap-4">
 	{#if props.backPath}
 		<button
