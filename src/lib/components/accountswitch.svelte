@@ -69,10 +69,6 @@
 	let logo = $derived(chainLogos.get(String(context.wharf.session?.chain.id)) || '');
 </script>
 
-<svelte:head>
-	<link rel="preload" href={String(logo)} as="image" type="image/png" />
-</svelte:head>
-
 <!-- [@media(any-hover:hover)]:hover:opacity-80 -->
 
 <!-- Trigger Button -->
