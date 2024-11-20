@@ -17,6 +17,10 @@
 	import UnicoveLogo from '$lib/assets/unicovelogo.svelte';
 	import Search from '$lib/components/search/input.svelte';
 	import { SettingsState } from '$lib/state/settings.svelte.js';
+	import Search from '$lib/components/input/search.svelte';
+	import X from 'lucide-svelte/icons/circle-x';
+	import { chainLogos } from '@wharfkit/common';
+	import * as env from '$env/static/public';
 
 	let { children, data } = $props();
 
