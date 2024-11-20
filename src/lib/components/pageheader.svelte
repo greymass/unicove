@@ -3,6 +3,8 @@
 	import { chainLogos } from '@wharfkit/common';
 	import { goto } from '$app/navigation';
 	import { type NetworkState } from '$lib/state/network.svelte';
+	import { page } from '$app/stores';
+	import CopyButton from '$lib/components/button/copy.svelte';
 
 	interface Props {
 		title: string;
@@ -22,11 +24,9 @@
 	}
 
 	let logo = $derived(chainLogos.get(String(props.network.chain.id)) || '');
-</script>
 
-<svelte:head>
-	<link rel="preload" href={String(logo)} as="image" type="image/png" />
-</svelte:head>
+	let routePath = $derived($page.url.pathname.split('/')[3]);
+</script>
 
 <header class="col-span-full flex min-h-16 items-center gap-4">
 	{#if props.backPath}
@@ -47,7 +47,12 @@
 	{/if}
 
 	<div class="grid gap-2">
-		<h1 class="text-3xl font-bold leading-none text-white">{props.title}</h1>
+		<h1 class="relative flex w-fit items-center text-3xl font-bold leading-none text-white">
+			<span>{props.title}</span>
+			{#if routePath === 'account'}
+				<CopyButton data={props.title} />
+			{/if}
+		</h1>
 		{#if props.subtitle}
 			<p class="text-muted text-base leading-none">{props.subtitle}</p>
 		{/if}

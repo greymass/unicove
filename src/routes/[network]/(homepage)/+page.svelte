@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Box, Card, Stack, Subgrid, Switcher } from '$lib/components/layout';
 	import Button from '$lib/components/button/button.svelte';
-	import EOS from '$lib/assets/EOS@2x.svg';
+	import { chainLogos, Chains } from '@wharfkit/common';
 	import Metamask from '$lib/assets/metamask.svg';
 	import EOSPriceHistory from '$lib/components/chart/eospricehistory.svelte';
 	import RamPriceHistory from '$lib/components/chart/rampricehistory.svelte';
@@ -22,6 +22,9 @@
 
 	let ramPrices: HistoricalPrice[] = $state([]);
 	let tokenPrices: HistoricalPrice[] = $state([]);
+
+	let networkLogo = $derived(String(chainLogos.get(data.network?.chain.id.toString())));
+	let networkName = $derived(String(data.network.chain.name));
 
 	// async function loadPrices() {
 	// 	const ramResponse: Response = await fetch(`/${data.network}/api/metrics/marketprice/ram`);
@@ -85,10 +88,10 @@
 			class="z-10 col-span-full col-start-1 row-start-1 items-start xs:col-span-3 xs:col-start-1 sm:col-span-3 sm:col-start-1 sm:row-start-1 sm:max-w-sm sm:place-self-center md:col-span-6 md:col-start-1 md:max-w-xl md:place-self-auto"
 		>
 			<h1 class="text-balance text-3xl font-semibold leading-tight md:text-4xl md:leading-tight">
-				Unicove is your gateway to the EOS Network
+				Unicove is your gateway to the {networkName} Network
 			</h1>
 			<p class="text-muted mb-2 text-balance text-xl leading-tight md:text-2xl md:leading-tight">
-				Stake, Send, Manage Tokens, and Explore EOS – all with ease
+				Stake, Send, Manage Tokens, and Explore {networkName} – all with ease
 			</p>
 			<!-- <Button href={`/${data.network}/signup`}>Create your EOS account now</Button> -->
 			<!-- <Button disabled>Create your EOS account (Coming Soon)</Button> -->
@@ -98,7 +101,7 @@
 		<div
 			class="relative left-12 top-8 z-10 col-span-full col-start-3 row-start-1 hidden max-h-80 justify-self-center xs:block sm:col-start-3 md:inset-0 md:col-span-3 md:col-start-7 xl:col-span-4 xl:col-start-6"
 		>
-			<img class="h-40 object-contain md:h-72" src={EOS} alt="eos" />
+			<img class="h-40 object-contain md:h-72" src={networkLogo} alt={networkName} />
 		</div>
 
 		<!-- Unicove logo outline -->
@@ -158,13 +161,17 @@
 					<svg width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path d="M18.008 0v36M36.008 18h-36" stroke="#fff" />
 					</svg>
-					<img class="h-40 rounded-full bg-mineShaft-950 px-2 py-4" src={EOS} alt="eos" />
+					<img
+						class="h-40 rounded-full bg-mineShaft-950 object-contain px-2 py-4"
+						src={networkLogo}
+						alt={networkName}
+					/>
 				</div>
 			</div>
 
 			<Box class="grid place-items-center py-8">
 				{@render textblock({
-					title: 'Metamask is now EOS compatible',
+					title: `Metamask is now ${networkName} compatible`,
 					text: 'TODO: The APR is an estimate, and may fluctuate based on how many and much others are staking. Your 21 day lockup period starts when you unstake your EOS. You will always get back your staked EOS.',
 					button: {
 						text: 'Get a free account',
