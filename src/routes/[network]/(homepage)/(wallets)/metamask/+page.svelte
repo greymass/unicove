@@ -6,13 +6,13 @@
 	import Button from '$lib/components/button/button.svelte';
 	import Box from '$lib/components/layout/box/box.svelte';
 	import { checkForSnap, requestSnap } from '$lib/metamask-snap';
-	import EOS from '$lib/assets/EOS@2x.svg';
 	import Metamask from '$lib/assets/metamask.svg';
 	import { MetaMaskState } from '$lib/state/metamask.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
 	import { Cluster, Stack } from '$lib/components/layout/index.js';
 	import { accountCreationPluginMetamask } from '$lib/state/client/wharf.svelte';
 	import { getSetting } from '$lib/state/settings.svelte';
+	import { chainLogos } from '@wharfkit/common';
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');
@@ -92,6 +92,8 @@
 			walletPlugin: 'wallet-plugin-metamask'
 		});
 	}
+
+	const EOS = String(chainLogos.get(String(data.network.chain.id)));
 </script>
 
 <section class="col-span-full @container">
@@ -127,7 +129,11 @@
 				<svg width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path d="M18.008 0v36M36.008 18h-36" stroke="#fff" />
 				</svg>
-				<img class="h-40 rounded-full bg-mineShaft-950 px-2 py-4" src={EOS} alt="eos" />
+				<img
+					class="h-40 rounded-full bg-mineShaft-950 object-contain px-2 py-4"
+					src={EOS}
+					alt="eos"
+				/>
 			</div>
 		</div>
 
