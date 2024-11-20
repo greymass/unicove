@@ -62,13 +62,13 @@
 	const result = $derived.by(() => {
 		switch (searchType) {
 			case 'account':
-				return `/${languageTag()}/${network}/account/${searchValue}`;
+				return `/${network}/account/${searchValue}`;
 			case 'block':
-				return `/${languageTag()}/${network}/block/${searchValue}`;
+				return `/${network}/block/${searchValue}`;
 			case 'key':
-				return `/${languageTag()}/${network}/key/${searchValue}`;
+				return `/${network}/key/${searchValue}`;
 			case 'transaction':
-				return `/${languageTag()}/${network}/transaction/${searchValue}`;
+				return `/${network}/transaction/${searchValue}`;
 			default:
 				return null;
 		}
@@ -138,7 +138,7 @@
 
 	function goToResult() {
 		if (result) {
-			goto(result);
+			goto(`/${languageTag()}/${result}`);
 			searchHistory.add({ result, searchType, searchValue });
 		}
 		closeSearch();
