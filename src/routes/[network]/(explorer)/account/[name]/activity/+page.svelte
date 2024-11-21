@@ -5,6 +5,7 @@
 	import type { ActivityActionWrapper } from '$lib/types.js';
 	import Code from '$lib/components/code.svelte';
 	import Transaction from '$lib/components/elements/transaction.svelte';
+	import Button from '$lib/components/button/button.svelte';
 
 	const { data } = $props();
 
@@ -25,6 +26,7 @@
 		return scence.isLoading && !scence.list.length;
 	});
 
+	const hasMore = $derived(activityLoader.scene.hasMore);
 	const loadingText = $derived.by(() => {
 		const scence = activityLoader.scene;
 		if (!scence.hasMore) return 'No more';
@@ -96,14 +98,12 @@
 				</div>
 			{/each}
 		</div>
-		<div class="flex items-center">
-			<button
-				onclick={clickLoadMore}
-				class="mx-auto min-w-32 border-2 border-shark-900/20 bg-skyBlue-500 px-5 py-3 text-center"
-			>
+
+		{#if hasMore}
+			<Button onclick={clickLoadMore} variant="primary" class="">
 				{loadingText}
-			</button>
-		</div>
+			</Button>
+		{/if}
 	{/if}
 </Stack>
 
