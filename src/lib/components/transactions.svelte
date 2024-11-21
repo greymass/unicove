@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { StatusType, transactions } from '$lib/wharf/transact.svelte';
+	import Transaction from './elements/transaction.svelte';
 
 	const pendingStatuses = [StatusType.BROADCAST, StatusType.IN_BLOCK, StatusType.LOCALLY_APPLIED];
 	const pending = $derived(transactions.filter((t) => pendingStatuses.includes(t.status)));
@@ -17,9 +18,7 @@
 				<td>{transaction.status}</td>
 				{#if transaction.transaction}
 					<td>
-						<a href="/{transaction.network}/transaction/{transaction.transaction.id}">
-							{transaction.transaction.id}
-						</a>
+						<Transaction id={transaction.transaction.id} />
 					</td>
 				{:else}
 					<td>{transaction.error}</td>
@@ -38,9 +37,7 @@
 				<td>{transaction.status}</td>
 				{#if transaction.transaction}
 					<td>
-						<a href="/{transaction.network}/transaction/{transaction.transaction.id}">
-							{transaction.transaction.id}
-						</a>
+						<Transaction id={transaction.transaction.id} />
 					</td>
 				{:else}
 					<td>{transaction.error}</td>

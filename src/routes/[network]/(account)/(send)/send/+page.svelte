@@ -28,6 +28,7 @@
 	import { page } from '$app/stores';
 	import { transactions } from '$lib/wharf/transact.svelte';
 	import { Stack } from '$lib/components/layout';
+	import Transaction from '$lib/components/elements/transaction.svelte';
 
 	const debugMode = getSetting('debug-mode', false);
 
@@ -407,11 +408,9 @@
 	<div class="space-y-4" class:hidden={f.current !== 'complete'}>
 		<h2 class="h2">{m.common_transaction_complete()}</h2>
 		<h3 class="h3">{transaction?.status}</h3>
-		<p>
-			<a href="/{data.network}/transaction/{id}">
-				{id}
-			</a>
-		</p>
+		{#if id}
+			<Transaction {id} />
+		{/if}
 	</div>
 {/snippet}
 
