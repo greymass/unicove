@@ -4,6 +4,7 @@
 	import { ActivityLoader } from './state.svelte.js';
 	import type { ActivityActionWrapper } from '$lib/types.js';
 	import Code from '$lib/components/code.svelte';
+	import Transaction from '$lib/components/elements/transaction.svelte';
 
 	const { data } = $props();
 
@@ -66,9 +67,7 @@
 						<div class="block lg:hidden">
 							<span class="text-white">ID:</span>
 						</div>
-						<a href="/{data.network}/transaction/{activityAction.id}" class="text-skyBlue-500"
-							>{activityAction.shortId}</a
-						>
+						<Transaction id={activityAction.id} />
 					</div>
 					<div
 						class="flex flex-1 gap-2 px-2 py-1 lg:max-w-[20%] lg:grow-0 lg:basis-[20%] lg:gap-0 lg:py-3"
