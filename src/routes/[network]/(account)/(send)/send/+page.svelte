@@ -417,7 +417,7 @@
 {/snippet}
 
 {#snippet ButtonGroup()}
-	<fieldset class="grid grid-cols-[50%_50%] gap-2 transition-all duration-200">
+	<fieldset class="flex gap-2 *:flex-1">
 		{#if f.current === 'to'}
 			<Button variant="secondary" onclick={() => resetURL()}>{m.common_restart()}</Button>
 		{:else if f.current === 'complete'}
