@@ -44,6 +44,16 @@ export async function redirectHandle({ event, resolve }: HandleParams): Promise<
 		return await resolve(event);
 	}
 
+	// Store the original path segments
+	const originalPathSegments = pathname.split('/').filter(Boolean);
+
+	// Identify if this is a public key route and get the key if it exists
+	const keyIndex = originalPathSegments.findIndex((segment) => segment.toLowerCase() === 'key');
+	const originalPublicKey =
+		keyIndex !== -1 && keyIndex + 1 < originalPathSegments.length
+			? originalPathSegments[keyIndex + 1]
+			: null;
+
 	const [, pathFirst, pathSecond, ...pathMore] = pathname
 		.split('/')
 		.map((p) => p.trim().toLowerCase());
@@ -76,15 +86,33 @@ export async function redirectHandle({ event, resolve }: HandleParams): Promise<
 	// Ensure that the 'lang' property exists on the 'Locals' type
 	(event.locals as { lang: string }).lang = lang;
 
+	// Build the URL
 	let url = `/${lang}`;
 	if (network) {
 		url += `/${network}`;
 	}
+
+	// Reconstruct the remaining path, preserving public key case if it exists
 	if (pathMore.length > 0) {
-		url += `/${pathMore.join('/')}`;
+		const remainingPath = pathMore.map((segment, i) => {
+			if (segment.toLowerCase() === 'key') {
+				return 'key';
+			}
+			// If this is the segment after 'key', use the original case
+			if (i > 0 && pathMore[i - 1].toLowerCase() === 'key' && originalPublicKey) {
+				return originalPublicKey;
+			}
+			return segment;
+		});
+		url += `/${remainingPath.join('/')}`;
 	}
 
-	if (pathname !== url) {
+	// Set the original case public key in params if it exists
+	if (originalPublicKey) {
+		event.params.publicKey = originalPublicKey;
+	}
+
+	if (pathname.toLowerCase() !== url.toLowerCase()) {
 		return new Response(undefined, {
 			headers: { Location: url + search },
 			status: 301
