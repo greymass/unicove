@@ -27,8 +27,9 @@
 	import { NetworkState } from '$lib/state/network.svelte';
 	import { page } from '$app/stores';
 	import { transactions } from '$lib/wharf/transact.svelte';
-	import { Stack } from '$lib/components/layout';
+	import { SingleCard, Stack } from '$lib/components/layout';
 	import Transaction from '$lib/components/elements/transaction.svelte';
+	import TransactionSummary from '$lib/components/transactionSummary.svelte';
 
 	const debugMode = getSetting('debug-mode', false);
 
@@ -405,13 +406,7 @@
 {/snippet}
 
 {#snippet Complete()}
-	<div class="space-y-4" class:hidden={f.current !== 'complete'}>
-		<h2 class="h2">{m.common_transaction_complete()}</h2>
-		<h3 class="h3">{transaction?.status}</h3>
-		{#if id}
-			<Transaction {id} />
-		{/if}
-	</div>
+	<TransactionSummary hidden={f.current !== 'complete'} transactionId={id} />
 {/snippet}
 
 {#snippet Error()}
@@ -441,24 +436,26 @@
 	</fieldset>
 {/snippet}
 
-<Stack class="mt-6 gap-6">
-	<div class="hidden">
-		<h3>{subtitle[f.current]}</h3>
-		<Progress currentStep={progress} maxStep={3} />
-	</div>
+<SingleCard>
+	<Stack>
+		<div class="hidden">
+			<h3>{subtitle[f.current]}</h3>
+			<Progress currentStep={progress} maxStep={3} />
+		</div>
 
-	{@render Complete()}
+		{@render Complete()}
 
-	{@render Error()}
+		{@render Error()}
 
-	{@render Recipient()}
+		{@render Recipient()}
 
-	{@render Quantity()}
+		{@render Quantity()}
 
-	{@render Memo()}
+		{@render Memo()}
 
-	{@render ButtonGroup()}
-</Stack>
+		{@render ButtonGroup()}
+	</Stack>
+</SingleCard>
 
 {#if debugMode.value}
 	<h3 class="h3">{m.common_debugging()}</h3>
