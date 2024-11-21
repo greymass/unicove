@@ -1,5 +1,4 @@
 <script lang="ts">
-	import type { PageData } from './$types';
 	import Code from '$lib/components/code.svelte';
 
 	import SendSummary from '$lib/components/summary/eosio.token/transfer.svelte';
@@ -22,9 +21,7 @@
 		}
 	} as const;
 
-	export let data: PageData;
-
-	import type { SvelteComponent } from 'svelte';
+	let { data } = $props();
 
 	// Define the Action interface
 	interface Action {
@@ -48,59 +45,57 @@
 	}
 </script>
 
-<div class="mt-6 p-6">
-	<table class="table-styles">
-		<thead>
-			<tr>
-				<th>Contract</th>
-				<th>Action</th>
-				<th>Authorization</th>
-				<th>Data</th>
-			</tr>
-		</thead>
-		<tbody>
-			{#if data.transaction && data.transaction.trx}
-				{@const actions = data.transaction.trx.trx.actions as Action[]}
-				{#each actions as action}
-					<tr>
-						<td>
-							<a href={`/${data.network}/contract/${action.account}`}>
-								{action.account}
-							</a>
-						</td>
-						<td>
-							<a href={`/${data.network}/contract/${action.account}/actions/${action.name}`}>
-								{action.name}
-							</a>
-						</td>
-						<td>
-							{#each action.authorization as auth}
-								<div>
-									<a href={`/${data.network}/account/${auth.actor}`}>
-										{auth.actor}@{auth.permission}
-									</a>
-								</div>
-							{/each}
-						</td>
-						<td>
-							<Code>{JSON.stringify(action.data, null, 2)}</Code>
-						</td>
-					</tr>
-				{/each}
-			{/if}
-		</tbody>
-	</table>
-</div>
+<table class="table-styles">
+	<thead>
+		<tr>
+			<th>Contract</th>
+			<th>Action</th>
+			<th>Authorization</th>
+			<th>Data</th>
+		</tr>
+	</thead>
+	<tbody>
+		{#if data.transaction && data.transaction.trx}
+			{@const actions = data.transaction.trx.trx.actions as Action[]}
+			{#each actions as action}
+				<tr>
+					<td>
+						<a href={`/${data.network}/contract/${action.account}`}>
+							{action.account}
+						</a>
+					</td>
+					<td>
+						<a href={`/${data.network}/contract/${action.account}/actions/${action.name}`}>
+							{action.name}
+						</a>
+					</td>
+					<td>
+						{#each action.authorization as auth}
+							<div>
+								<a href={`/${data.network}/account/${auth.actor}`}>
+									{auth.actor}@{auth.permission}
+								</a>
+							</div>
+						{/each}
+					</td>
+					<td>
+						<Code>{JSON.stringify(action.data, null, 2)}</Code>
+					</td>
+				</tr>
+			{/each}
+		{/if}
+	</tbody>
+</table>
 
 <div class="hidden">
 	{#if data.transaction && data.transaction.trx}
 		{@const actions = data.transaction.trx.trx.actions as Action[]}
 		{#each actions as action}
 			{#if isValidAccount(action.account)}
-				{@const accountMap = summaryMap[action.account]}
+				<!-- {@const accountMap = summaryMap[action.account]} -->
 				{#if isValidActionName(action.account, action.name)}
-					{@const summaryComponent = accountMap[action.name]}
-					<svelte:component this={summaryComponent as typeof SvelteComponent} {action} />
+					<!-- {@const SummaryComponent = accountMap[action.name]} -->
+					<!-- <svelte:component this={SummaryComponent as typeof SvelteComponent} {action} /> -->
 				{:else}
 					<p>{action.account}::{action.name}</p>
 				{/if}
