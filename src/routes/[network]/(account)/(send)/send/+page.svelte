@@ -388,6 +388,11 @@
 {/snippet}
 
 {#snippet Memo()}
+	<SummarySend
+		action={{ data: sendState.toJSON() }}
+		class={f.current !== 'memo' ? 'hidden' : undefined}
+	/>
+
 	<fieldset class="grid gap-2" class:hidden={f.current !== 'memo'}>
 		<Label for="memo-input">{m.common_memo()} ({m.common_optional()})</Label>
 		<TextInput
@@ -398,11 +403,6 @@
 			placeholder={m.send_memo_placeholder()}
 		/>
 	</fieldset>
-
-	<SummarySend
-		action={{ data: sendState.toJSON() }}
-		class={f.current !== 'memo' ? 'hidden' : undefined}
-	/>
 {/snippet}
 
 {#snippet Complete()}
