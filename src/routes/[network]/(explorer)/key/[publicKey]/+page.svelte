@@ -10,7 +10,8 @@
 	<h4 class="mb-4 text-center">{m.accounts_using_public_key()}:</h4>
 
 	{#await data.accounts}
-		<p class="text-center italic text-gray-600">{m.loading_accounts()}</p>
+		<!-- TODO: Generic loading component -->
+		<p class="text-muted text-center italic">{m.loading_accounts()}</p>
 	{:then accounts}
 		{#if accounts && accounts.length > 0}
 			<div>
@@ -20,7 +21,10 @@
 					>
 						<dt class="caption">{account}</dt>
 						<dd class="text-right tabular-nums">
-							<a href="/{data.network}/account/{account}" class="text-blue-600 hover:text-blue-800">
+							<a
+								href="/{data.network}/account/{account}"
+								class="text-skyBlue-500 hover:text-skyBlue-400"
+							>
 								<span class="inline-flex items-center gap-2">
 									{m.account_page()}
 									<ArrowRight size={20} />
@@ -31,7 +35,7 @@
 				{/each}
 			</div>
 		{:else}
-			<p class="text-center text-gray-600">{m.no_accounts_found()}</p>
+			<p class="text-muted text-center">{m.no_accounts_found()}</p>
 		{/if}
 	{:catch error}
 		<p class="text-center text-red-600">{m.error_loading_accounts({ error: error.message })}</p>
