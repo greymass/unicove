@@ -1,10 +1,9 @@
 <script lang="ts">
 	import Card from '$lib/components/layout/box/card.svelte';
-	import type { PageData } from './$types';
 	import * as m from '$lib/paraglide/messages.js';
 	import { ArrowRight } from 'lucide-svelte';
 
-	export let data: PageData;
+	let { data } = $props();
 </script>
 
 <Card class="max-w-lg">
