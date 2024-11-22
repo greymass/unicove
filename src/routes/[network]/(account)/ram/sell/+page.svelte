@@ -11,7 +11,7 @@
 	import Code from '$lib/components/code.svelte';
 	import Label from '$lib/components/input/label.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
-	import Transaction from '$lib/components/transaction.svelte';
+	import TransactionSummary from '$lib/components/transactionSummary.svelte';
 	import AssetInput from '$lib/components/input/asset.svelte';
 	import BytesInput from '$lib/components/input/bytes.svelte';
 	import Card from '$lib/components/layout/box/card.svelte';
@@ -86,7 +86,7 @@
 </script>
 
 {#if transactionId}
-	<Transaction network={data.network} {transactionId} />
+	<TransactionSummary {transactionId} />
 {/if}
 
 <Card>

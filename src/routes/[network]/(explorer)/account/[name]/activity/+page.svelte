@@ -4,6 +4,8 @@
 	import { ActivityLoader } from './state.svelte.js';
 	import type { ActivityActionWrapper } from '$lib/types.js';
 	import Code from '$lib/components/code.svelte';
+	import Transaction from '$lib/components/elements/transaction.svelte';
+	import Button from '$lib/components/button/button.svelte';
 
 	const { data } = $props();
 
@@ -24,6 +26,7 @@
 		return scence.isLoading && !scence.list.length;
 	});
 
+	const hasMore = $derived(activityLoader.scene.hasMore);
 	const loadingText = $derived.by(() => {
 		const scence = activityLoader.scene;
 		if (!scence.hasMore) return 'No more';
@@ -66,9 +69,7 @@
 						<div class="block lg:hidden">
 							<span class="text-white">ID:</span>
 						</div>
-						<a href="/{data.network}/transaction/{activityAction.id}" class="text-skyBlue-500"
-							>{activityAction.shortId}</a
-						>
+						<Transaction id={activityAction.id} />
 					</div>
 					<div
 						class="flex flex-1 gap-2 px-2 py-1 lg:max-w-[20%] lg:grow-0 lg:basis-[20%] lg:gap-0 lg:py-3"
@@ -97,14 +98,12 @@
 				</div>
 			{/each}
 		</div>
-		<div class="flex items-center">
-			<button
-				onclick={clickLoadMore}
-				class="mx-auto min-w-32 border-2 border-shark-900/20 bg-skyBlue-500 px-5 py-3 text-center"
-			>
+
+		{#if hasMore}
+			<Button onclick={clickLoadMore} variant="primary" class="">
 				{loadingText}
-			</button>
-		</div>
+			</Button>
+		{/if}
 	{/if}
 </Stack>
 

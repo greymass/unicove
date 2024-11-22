@@ -11,7 +11,7 @@
 	import AssetInput from '$lib/components/input/asset.svelte';
 	import BytesInput from '$lib/components/input/bytes.svelte';
 	import AssetText from '$lib/components/elements/asset.svelte';
-	import { PageColumns, Stack } from '$lib/components/layout';
+	import { MultiCard, Stack } from '$lib/components/layout';
 	import Label from '$lib/components/input/label.svelte';
 
 	const { data } = $props();
@@ -65,7 +65,7 @@
 	let bytesInput: BytesInput;
 </script>
 
-<PageColumns>
+<MultiCard>
 	<!-- Buy Sell Card -->
 	<Card class="flex *:flex-1">
 		<div class="grid content-between gap-4">
@@ -217,4 +217,4 @@
 			</tbody>
 		</table>
 	</Card>
-</PageColumns>
+</MultiCard>
