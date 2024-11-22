@@ -262,8 +262,10 @@
 	<h3 class="text-md font-semibold">How do I sign transactions using the EOS Wallet?</h3>
 	<p>
 		Please see our guide on
-		<!-- TODO: Add link -->
-		How to Sign Transactions on the EOS network with MetaMask
+		{@render link(
+			'How to Sign Transactions on the EOS network with MetaMask',
+			'https://support.greymass.com/a/solutions/articles/72000637277'
+		)}
 	</p>
 
 	<h3 class="text-md font-semibold">Is the EOS Wallet free to use?</h3>
