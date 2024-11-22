@@ -103,15 +103,17 @@
 									{@render tableAction(['Staking', `/${data.network}/staking`])}
 								{/if}
 							</tr>
-							<tr>
-								<td>Unstaked</td>
-								<td class="text-right text-white">
-									<AssetText variant="full" value={tokenUnstaked} />
-								</td>
-								{#if isCurrentUser}
-									{@render tableAction(['Withdraw', `/${data.network}/staking/withdraw`])}
-								{/if}
-							</tr>
+							{#if tokenUnstaked && tokenUnstaked.value > 0}
+								<tr>
+									<td>Unstaked</td>
+									<td class="text-right text-white">
+										<AssetText variant="full" value={tokenUnstaked} />
+									</td>
+									{#if isCurrentUser}
+										{@render tableAction(['Withdraw', `/${data.network}/staking/withdraw`])}
+									{/if}
+								</tr>
+							{/if}
 							{#if tokenDelegated && tokenDelegated.value > 0}
 								<tr>
 									<td>Delegated</td>
