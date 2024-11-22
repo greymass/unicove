@@ -21,8 +21,6 @@ export async function GET({ fetch, params }: RequestEvent) {
 			return json({ error: 'Invalid public key format' }, { status: 400 });
 		}
 
-		console.log({ client: network.client });
-
 		const response = await network.client.v1.chain.get_accounts_by_authorizers({
 			keys: [String(publicKey)]
 		});
