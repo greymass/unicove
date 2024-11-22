@@ -23,7 +23,7 @@
 						<dd class="text-right tabular-nums">
 							<a href="/{data.network}/account/{account}" class="text-blue-600 hover:text-blue-800">
 								<span class="inline-flex items-center gap-2">
-									Account Page
+									{m.account_page()}
 									<ArrowRight size={20} />
 								</span>
 							</a>
