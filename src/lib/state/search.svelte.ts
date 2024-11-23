@@ -2,7 +2,7 @@ import { browser } from '$app/environment';
 import type { Checksum256 } from '@wharfkit/antelope';
 import type { NetworkState } from './network.svelte';
 
-type SearchResult = {
+export type SearchResult = {
 	result: string;
 	searchType: string;
 	searchValue: string;
