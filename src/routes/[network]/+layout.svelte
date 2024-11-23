@@ -6,7 +6,7 @@
 	import SideMenuContent from '$lib/components/navigation/sidemenu.svelte';
 	import AccountSwitcher from '$lib/components/accountswitch.svelte';
 	import UnicoveLogo from '$lib/assets/unicovelogo.svelte';
-	import Search from '$lib/components/input/search.svelte';
+	import Search from '$lib/components/search/input.svelte';
 	import X from 'lucide-svelte/icons/circle-x';
 	import { chainLogos } from '@wharfkit/common';
 	import { AccountState } from '$lib/state/client/account.svelte.js';
