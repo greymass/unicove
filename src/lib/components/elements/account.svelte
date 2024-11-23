@@ -17,19 +17,20 @@
 
 	let { name, contract = false, children, ...props }: Props = $props();
 
-	const path = contract ? '/contract/' + name : '/account/' + name;
-
 	let { network } = getContext<UnicoveContext>('state');
+
+	const path = contract
+		? '/' + String(network) + '/contract/' + name
+		: '/' + String(network) + '/account/' + name;
 
 	let account: AccountState | undefined = $state();
 
 	const fetchAccount: CreateLinkPreviewProps['onOpenChange'] = ({ next }) => {
-		if (network) {
+		if (next && network) {
 			AccountState.for(network, Name.from(String(name)), fetch).then(
 				(accountState) => (account = accountState)
 			);
 		}
-
 		return next;
 	};
 
@@ -39,7 +40,7 @@
 	} = createLinkPreview({
 		forceVisible: true,
 		onOpenChange: fetchAccount,
-		openDelay: 100
+		openDelay: 500
 	});
 </script>
 
@@ -59,7 +60,7 @@
 	<div
 		use:melt={$content}
 		transition:fly={{ y: -5, duration: 100 }}
-		class="z-10 rounded-lg bg-mineShaft-900 shadow-sm"
+		class="z-10 rounded-xl bg-mineShaft-900 shadow-sm"
 	>
 		<div class="w-72 rounded-xl bg-mineShaft-900 p-5 shadow-sm">
 			<div class="flex flex-col gap-2">
