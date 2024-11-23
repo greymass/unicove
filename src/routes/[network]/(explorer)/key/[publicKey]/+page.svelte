@@ -5,6 +5,9 @@
 	import Key from 'lucide-svelte/icons/key-round';
 
 	let { data } = $props();
+
+	const pubKey = String(data.publicKey);
+	const legacyPubKey = data.publicKey.toLegacyString();
 </script>
 
 <MultiCard>
@@ -13,10 +16,10 @@
 			<picture class="grid size-12 place-items-center rounded-full bg-mineShaft-900">
 				<Key />
 			</picture>
-			<div>
+			<div class="space-y-px break-all">
 				<!-- TODO: Display publicKey in multiple formats -->
-				<p>{data.publicKey}</p>
-				<p>{data.publicKey}</p>
+				<p class="break-all font-semibold text-white">{pubKey}</p>
+				<p class="text-muted break-all">{legacyPubKey}</p>
 			</div>
 		</Cluster>
 	</Card>
@@ -33,6 +36,7 @@
 								name={account}
 								class="h-12 content-center rounded-lg px-4 hover:bg-mineShaft-900 hover:text-mineShaft-50 focus-visible:bg-mineShaft-900 focus-visible:text-mineShaft-50"
 							/>
+							<!-- <a href={`/eos/account/${account}`}>{account}</a> -->
 						</li>
 					{/each}
 				</Cluster>
