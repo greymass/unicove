@@ -27,7 +27,9 @@
 	import { NetworkState } from '$lib/state/network.svelte';
 	import { page } from '$app/stores';
 	import { transactions } from '$lib/wharf/transact.svelte';
-	import { Stack } from '$lib/components/layout';
+	import { SingleCard, Stack } from '$lib/components/layout';
+	import Transaction from '$lib/components/elements/transaction.svelte';
+	import TransactionSummary from '$lib/components/transactionSummary.svelte';
 
 	const debugMode = getSetting('debug-mode', false);
 
@@ -386,6 +388,11 @@
 {/snippet}
 
 {#snippet Memo()}
+	<SummarySend
+		action={{ data: sendState.toJSON() }}
+		class={f.current !== 'memo' ? 'hidden' : undefined}
+	/>
+
 	<fieldset class="grid gap-2" class:hidden={f.current !== 'memo'}>
 		<Label for="memo-input">{m.common_memo()} ({m.common_optional()})</Label>
 		<TextInput
@@ -396,23 +403,10 @@
 			placeholder={m.send_memo_placeholder()}
 		/>
 	</fieldset>
-
-	<SummarySend
-		action={{ data: sendState.toJSON() }}
-		class={f.current !== 'memo' ? 'hidden' : undefined}
-	/>
 {/snippet}
 
 {#snippet Complete()}
-	<div class="space-y-4" class:hidden={f.current !== 'complete'}>
-		<h2 class="h2">{m.common_transaction_complete()}</h2>
-		<h3 class="h3">{transaction?.status}</h3>
-		<p>
-			<a href="/{data.network}/transaction/{id}">
-				{id}
-			</a>
-		</p>
-	</div>
+	<TransactionSummary hidden={f.current !== 'complete'} transactionId={id} />
 {/snippet}
 
 {#snippet Error()}
@@ -423,7 +417,7 @@
 {/snippet}
 
 {#snippet ButtonGroup()}
-	<fieldset class="grid grid-cols-[50%_50%] gap-2 transition-all duration-200">
+	<fieldset class="flex gap-2 *:flex-1">
 		{#if f.current === 'to'}
 			<Button variant="secondary" onclick={() => resetURL()}>{m.common_restart()}</Button>
 		{:else if f.current === 'complete'}
@@ -442,24 +436,26 @@
 	</fieldset>
 {/snippet}
 
-<Stack class="mt-6 gap-6">
-	<div class="hidden">
-		<h3>{subtitle[f.current]}</h3>
-		<Progress currentStep={progress} maxStep={3} />
-	</div>
+<SingleCard>
+	<Stack>
+		<div class="hidden">
+			<h3>{subtitle[f.current]}</h3>
+			<Progress currentStep={progress} maxStep={3} />
+		</div>
 
-	{@render Complete()}
+		{@render Complete()}
 
-	{@render Error()}
+		{@render Error()}
 
-	{@render Recipient()}
+		{@render Recipient()}
 
-	{@render Quantity()}
+		{@render Quantity()}
 
-	{@render Memo()}
+		{@render Memo()}
 
-	{@render ButtonGroup()}
-</Stack>
+		{@render ButtonGroup()}
+	</Stack>
+</SingleCard>
 
 {#if debugMode.value}
 	<h3 class="h3">{m.common_debugging()}</h3>
