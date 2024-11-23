@@ -30,7 +30,7 @@
 	let searchValue: string = $state('');
 	let selectedIndex: number | undefined = $state();
 
-	const searchHistory = new SearchHistory();
+	const searchHistory = new SearchHistory(network);
 	const history = $derived(searchHistory.get());
 
 	const searchType = $derived.by(() => {
