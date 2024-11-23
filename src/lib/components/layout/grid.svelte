@@ -7,12 +7,18 @@
 
 	interface Props extends HTMLAttributes<HTMLDivElement> {
 		children: Snippet;
+		tag?: string;
 		itemWidth?: string;
 	}
 
-	const { children, itemWidth = '20ch', class: className, ...props }: Props = $props();
+	const { tag, children, itemWidth = '20ch', class: className, ...props }: Props = $props();
 </script>
 
-<div class={cn(`layout-grid`, className)} {...props} style={`--grid-itemWidth:${itemWidth}`}>
+<svelte:element
+	this={tag}
+	class={cn(`layout-grid`, className)}
+	{...props}
+	style={`--grid-itemWidth:${itemWidth}`}
+>
 	{@render children()}
-</div>
+</svelte:element>
