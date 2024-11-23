@@ -10,7 +10,7 @@ export const load: Load = async ({ fetch, params, parent }) => {
 
 	const title = m.key_page_title();
 	const description = m.key_page_description();
-	const pubkey = PublicKey.from(params.publicKey);
+	const pubkey = PublicKey.from(String(params.publicKey));
 
 	return {
 		title,
