@@ -1,4 +1,6 @@
 import { browser } from '$app/environment';
+import type { Checksum256 } from '@wharfkit/antelope';
+import type { NetworkState } from './network.svelte';
 
 type SearchResult = {
 	result: string;
@@ -8,14 +10,20 @@ type SearchResult = {
 
 export class SearchHistory {
 	private history = $state<SearchResult[]>([]) as SearchResult[];
+	chainId: Checksum256;
 	maxHistoryLength = 10;
 	storageKey = 'searchHistory';
 
-	constructor() {
+	constructor(network: NetworkState) {
+		this.chainId = network.chain.id;
 		if (browser) {
-			const item = localStorage.getItem(this.storageKey);
+			const item = localStorage.getItem(this.makeStorageKey());
 			if (item) this.history = this.deserialize(item);
 		}
+	}
+
+	private makeStorageKey(): string {
+		return `${this.storageKey}-${this.chainId}`;
 	}
 
 	private serialize(value: SearchResult[]): string {
@@ -28,7 +36,7 @@ export class SearchHistory {
 
 	private saveHistory() {
 		if (browser) {
-			localStorage.setItem(this.storageKey, this.serialize(this.history));
+			localStorage.setItem(this.makeStorageKey(), this.serialize(this.history));
 		}
 	}
 
