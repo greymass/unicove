@@ -8,6 +8,7 @@
 	import { Name } from '@wharfkit/antelope';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { AccountState } from '$lib/state/client/account.svelte';
+	import { page } from '$app/stores';
 
 	interface Props extends HTMLAnchorAttributes {
 		name: string;
@@ -17,11 +18,17 @@
 
 	let { name, contract = false, children, ...props }: Props = $props();
 
-	let { network } = getContext<UnicoveContext>('state');
+	let context = getContext<UnicoveContext>('state');
 
-	const path = contract
-		? '/' + String(network) + '/contract/' + name
-		: '/' + String(network) + '/account/' + name;
+	let network = $derived(context.network);
+
+	$inspect(network);
+
+	const path = $derived(
+		contract
+			? '/' + $page.params.network + '/contract/' + name
+			: '/' + $page.params.network + '/account/' + name
+	);
 
 	let account: AccountState | undefined = $state();
 
