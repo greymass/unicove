@@ -52,8 +52,14 @@
 		if (!context.wharf || !context.wharf.session) {
 			return;
 		}
-		if (data.network.contracts.token) {
-			const action = data.network.contracts.token.action('transfer', sendState.toJSON());
+		const balance = context.account?.balances.find((b) =>
+			b.asset.symbol.equals(sendState.quantity.symbol)
+		);
+		if (balance) {
+			let action = data.network.contracts.token.action('transfer', sendState.toJSON());
+			if (!balance.contract.equals(data.network.contracts.token.account)) {
+				action.account = balance.contract;
+			}
 			context.wharf
 				.transact({ action })
 				.then((result) => {
