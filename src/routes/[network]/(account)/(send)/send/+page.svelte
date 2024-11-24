@@ -26,9 +26,7 @@
 	import { preventDefault } from '$lib/utils';
 	import { NetworkState } from '$lib/state/network.svelte';
 	import { page } from '$app/stores';
-	import { transactions } from '$lib/wharf/transact.svelte';
 	import { SingleCard, Stack } from '$lib/components/layout';
-	import Transaction from '$lib/components/elements/transaction.svelte';
 	import TransactionSummary from '$lib/components/transactionSummary.svelte';
 
 	const debugMode = getSetting('debug-mode', false);
@@ -46,7 +44,6 @@
 	let memoRef: HTMLInputElement | undefined = $state();
 
 	let id: Checksum256 | undefined = $state();
-	const transaction = $derived(transactions.find((t) => id && t.transaction?.id.equals(id)));
 
 	function transact() {
 		if (!context.wharf || !context.wharf.session) {

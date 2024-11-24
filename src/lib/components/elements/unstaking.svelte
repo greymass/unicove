@@ -18,6 +18,10 @@
 
 {#if records.filter((r) => !r.savings).length > 0}
 	<Card {...props} title="Unstaking" class="auto-rows-max">
+		<p>
+			The tokens currently being unstaked are listed below with the date they become available.
+			These balances will continue to earn rewards until they are withdrawn.
+		</p>
 		<table class="table-styles mt-4">
 			<thead class="border-b-2 border-shark-100/10">
 				<tr class="caption font-medium">
