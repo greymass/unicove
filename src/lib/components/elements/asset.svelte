@@ -5,6 +5,7 @@
 	import { languageTag } from '$lib/paraglide/runtime.js';
 	import { cn } from '$lib/utils';
 	import { getSetting } from '$lib/state/settings.svelte';
+	import Big from 'big.js';
 
 	const advancedMode = getSetting('advanced-mode', false);
 
@@ -32,7 +33,10 @@
 	};
 
 	function formatAssetValue() {
-		return Intl.NumberFormat(locale, assetOptions).format(asset?.value || fallback);
+		// Use Big.js to accurately convert the string into a usable number
+		// Some precision may be lost in extreme circumstances
+		const number = Number(new Big(asset?.quantity || fallback));
+		return Intl.NumberFormat(locale, assetOptions).format(number);
 	}
 
 	function formatCurrencyValue() {
