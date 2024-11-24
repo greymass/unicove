@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { Asset } from '@wharfkit/antelope';
 	import { getContext } from 'svelte';
+	import { ChartLine } from 'lucide-svelte';
 
-	import { Card, Stack, Switcher } from '$lib/components/layout';
+	import { Card, MultiCard, Stack } from '$lib/components/layout';
 	import Button from '$lib/components/button/button.svelte';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
@@ -12,18 +13,35 @@
 		getWithdrawableBalance,
 		getStakedBalance,
 		getUnstakingBalances,
-		getAPR
+		getAPR,
+		getStakableBalance,
+		getUnstakableBalance
 	} from '$lib/utils/staking';
 	import UnstakingBalances from '$lib/components/elements/unstaking.svelte';
 	import StakingCalculator from './stakingcalculator.svelte';
+	import Cluster from '$lib/components/layout/cluster.svelte';
+	import Chip from '$lib/components/chip.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
 	const networkName = String(data.network);
 
-	let staked: Asset = $derived(getStakedBalance(data.network, context.account));
+	let available: Asset = $derived(getStakableBalance(data.network, context.account));
+	let total: Asset = $derived(getStakedBalance(data.network, context.account));
+	let staked: Asset = $derived(getUnstakableBalance(data.network, context.account));
 	let unstaking: Array<UnstakingRecord> = $derived(
 		getUnstakingBalances(data.network, context.account)
+	);
+	let unstakingTotal: Asset = $derived(
+		unstaking
+			.filter((r) => !r.savings)
+			.reduce(
+				(acc, record) => {
+					acc.units.add(record.balance.units);
+					return acc;
+				},
+				Asset.fromUnits(0, data.network.chain.systemToken!.symbol) as Asset
+			)
 	);
 	let claimable: Asset = $derived(getClaimableBalance(data.network, context.account, unstaking));
 	let withdrawable: Asset = $derived(getWithdrawableBalance(data.network, context.account));
@@ -41,55 +59,104 @@
 			'2,USD'
 		)
 	);
+	let usdValueAvailable = $derived(
+		Asset.from(
+			available.value * (data.network.tokenprice ? data.network.tokenprice.value : 0),
+			'2,USD'
+		)
+	);
 </script>
 
-<div class="gap-6 *:mb-6 *:inline-block *:w-full last:*:mb-0 @2xl:columns-2">
-	<div>
-		<Card class="gap-6" title="Staked - {apr}% APR">
-			<Switcher threshold="30ch">
-				<div>
-					<p>Staked {context.network?.chain.name}</p>
-					<AssetText class="text-xl text-white" variant="value" value={staked} />
-					<!-- TODO: Chip for percent staked -->
-				</div>
+{#snippet tableAction([text, href]: string[])}
+	<td class="text-right">
+		<a class="text-skyBlue-500 hover:text-skyBlue-400" {href}>{text}</a>
+	</td>
+{/snippet}
 
-				<div>
-					<p>USD Value</p>
-					<p class="text-xl text-white">
-						<AssetText variant="value" value={usdValue} />
-					</p>
-					<!-- TODO: Chip for percent change -->
-				</div>
-			</Switcher>
-
-			<Switcher threshold="30ch">
-				<Button href="/{networkName}/staking/stake" variant="secondary">Stake</Button>
-				<Button href="/{networkName}/staking/unstake" variant="secondary">Unstake</Button>
-			</Switcher>
-		</Card>
-	</div>
-
-	<UnstakingBalances records={unstaking} />
-
-	<div>
-		<Card class="gap-6" title="Withdrawable">
+<MultiCard>
+	<Card id="account-value" style="column-span: all;">
+		<Cluster class="items-center">
+			<picture class="grid size-12 place-items-center rounded-full bg-mineShaft-900">
+				<ChartLine />
+			</picture>
 			<div>
-				<p class="caption">Currently Withdrawable</p>
-
-				<AssetText class="text-xl text-white" variant="full" value={totalWithdraw} />
+				<p>Current APR</p>
+				<p class="text-2xl font-bold text-white">{apr}%</p>
 			</div>
-			<Button href="/{networkName}/staking/withdraw" variant="secondary">Withdraw</Button>
-		</Card>
-	</div>
+		</Cluster>
+	</Card>
 
-	<div>
-		<StakingCalculator
-			{apr}
-			network={data.network}
-			tokenprice={data.network.tokenprice || Asset.from(0, '2,USD')}
-		/>
-	</div>
+	<Card id="token" title="Staking Contract">
+		<Stack>
+			<Stack class="gap-2">
+				<h4 class="text-muted text-base leading-none">Tokens Staked</h4>
+				<p class="text-xl font-semibold leading-none text-white">
+					<AssetText variant="full" value={total} />
+				</p>
+				<Chip>
+					<AssetText variant="full" value={usdValue} />
+					<!-- TODO: Percent change -->
+				</Chip>
+			</Stack>
 
+			<Stack class="gap-2">
+				<table class="table-styles text-muted">
+					<tbody>
+						<tr>
+							<td>Staked</td>
+							<td class="text-right text-white">
+								<AssetText variant="full" value={staked} />
+							</td>
+							{@render tableAction(['Unstake', `/${data.network}/staking/unstake`])}
+						</tr>
+						<tr>
+							<td>Unstaking</td>
+							<td class="text-right text-white">
+								<AssetText variant="full" value={unstakingTotal} />
+							</td>
+							<td></td>
+						</tr>
+						{#if totalWithdraw.value > 0}
+							<tr>
+								<td>Unstaked</td>
+								<td class="text-right text-white">
+									<AssetText variant="full" value={totalWithdraw} />
+								</td>
+								{@render tableAction(['Withdraw', `/${data.network}/staking/withdraw`])}
+							</tr>
+						{/if}
+					</tbody>
+				</table>
+			</Stack>
+		</Stack>
+	</Card>
+	<Card id="token" title="My Balance">
+		<Stack>
+			<Stack class="gap-2">
+				<h4 class="text-muted text-base leading-none">Available</h4>
+				<p class="text-xl font-semibold leading-none text-white">
+					<AssetText variant="full" value={available} />
+				</p>
+				<Chip>
+					<AssetText variant="full" value={usdValueAvailable} />
+					<!-- TODO: Percent change -->
+				</Chip>
+			</Stack>
+
+			<Stack class="gap-2">
+				<Button href="/{networkName}/staking/stake" variant="secondary">Stake</Button>
+			</Stack>
+		</Stack>
+	</Card>
+	<StakingCalculator
+		{apr}
+		network={data.network}
+		tokenprice={data.network.tokenprice || Asset.from(0, '2,USD')}
+	/>
+	<UnstakingBalances records={unstaking} />
+</MultiCard>
+
+<div class="gap-6 *:mb-6 *:inline-block *:w-full last:*:mb-0 @2xl:columns-2">
 	<div>
 		<Card class="hidden gap-5" title="About staking">
 			<Stack class="gap-5">
