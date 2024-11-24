@@ -71,6 +71,7 @@ export class WharfState {
 	public session?: Session = $state<Session>();
 	public sessions: SerializedSession[] = $state([]);
 	public sessionKit?: SessionKit;
+	public transacting = $state(false);
 
 	constructor() {
 		if (browser) {
@@ -178,6 +179,8 @@ export class WharfState {
 			throw new Error('No active session available to transact with.');
 		}
 
+		this.transacting = true;
+
 		const transaction: QueuedTransaction = {
 			status: StatusType.CREATED,
 			chain: this.session.chain.id,
@@ -192,8 +195,11 @@ export class WharfState {
 			queueTransaction(transaction);
 			const { id } = sendErrorToast(transaction);
 			transaction.toastId = id;
+			this.transacting = false;
 			throw e;
 		});
+
+		this.transacting = false;
 
 		if (!result.resolved || !result.response) {
 			transaction.status = StatusType.ERROR;
