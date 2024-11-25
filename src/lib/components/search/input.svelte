@@ -1,24 +1,19 @@
 <script lang="ts">
 	import { Checksum256, Name, PublicKey, UInt32 } from '@wharfkit/antelope';
-	import type { ComponentProps } from 'svelte';
+	import { onMount, type ComponentProps } from 'svelte';
 	import { createDialog, melt, type CreateDialogProps } from '@melt-ui/svelte';
-	import type TextInput from './text.svelte';
+	import type TextInput from '../input/text.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
 	import { preventDefault } from '$lib/utils';
 	import { goto } from '$app/navigation';
 	import { fade, scale } from 'svelte/transition';
-	import { SearchHistory } from '$lib/state/search.svelte';
-	import ArrowLeftRight from 'lucide-svelte/icons/arrow-left-right';
-	import Box from 'lucide-svelte/icons/box';
-	import Key from 'lucide-svelte/icons/key';
+	import { RecordStorage, RecordType, search, type Record } from '$lib/state/search.svelte';
 	import SearchIcon from 'lucide-svelte/icons/search';
-	import UserSearch from 'lucide-svelte/icons/user-search';
 	import X from 'lucide-svelte/icons/x';
 	import Button from '$lib/components/button/button.svelte';
 	import { Stack } from '$lib/components/layout';
-	import { truncateCenter } from '$lib/utils';
 	import { cn } from '$lib/utils';
-	import { languageTag } from '$lib/paraglide/runtime';
+	import Result from './result.svelte';
 
 	interface NameInputProps extends ComponentProps<typeof TextInput> {
 		debug?: boolean;
@@ -30,46 +25,58 @@
 	let searchValue: string = $state('');
 	let selectedIndex: number | undefined = $state();
 
-	const searchHistory = new SearchHistory();
-	const history = $derived(searchHistory.get());
+	const searchHistory = new RecordStorage(network);
+
+	let results: Record[] = $state(searchHistory.get());
+
+	$effect(() => {
+		if (searchValue) {
+			results = search(searchValue, network, searchHistory);
+		} else {
+			results = searchHistory.get();
+		}
+	});
 
 	const searchType = $derived.by(() => {
 		/* eslint-disable @typescript-eslint/no-unused-vars */
 		/* eslint-disable no-empty */
 		try {
 			PublicKey.from(searchValue);
-			return 'key';
+			return RecordType.KEY;
 		} catch (e) {}
 		try {
 			Checksum256.from(searchValue);
-			return 'transaction';
+			return RecordType.TRANSACTION;
 		} catch (e) {}
 		try {
 			const name = Name.from(searchValue);
 			if (searchValue && String(name) === searchValue) {
-				return 'account';
+				return RecordType.ACCOUNT;
 			}
 		} catch (e) {}
 		try {
 			UInt32.from(searchValue);
-			return 'block';
+			return RecordType.BLOCK;
 		} catch (e) {}
-		return 'unknown';
+		return RecordType.PAGE;
 		/* eslint-enable @typescript-eslint/no-unused-vars */
 		/* eslint-enable no-empty */
 	});
 
 	const result = $derived.by(() => {
 		switch (searchType) {
-			case 'account':
+			case RecordType.ACCOUNT:
 				return `/${network}/account/${searchValue}`;
-			case 'block':
+			case RecordType.BLOCK:
 				return `/${network}/block/${searchValue}`;
-			case 'key':
+			case RecordType.KEY:
 				return `/${network}/key/${searchValue}`;
-			case 'transaction':
+			case RecordType.TRANSACTION:
 				return `/${network}/transaction/${searchValue}`;
+			case RecordType.PAGE:
+				return `/${network}/${searchValue}`;
 			default:
+				console.log('unknown search type', searchType);
 				return null;
 		}
 	});
@@ -116,30 +123,32 @@
 					return;
 				}
 				// Select next searchHistory item
-				selectedIndex = (history.length + selectedIndex + 1) % history.length;
+				selectedIndex = (results.length + selectedIndex + 1) % results.length;
 				return;
 			}
 
 			if (event.key === 'ArrowUp') {
 				if (selectedIndex === undefined) {
-					selectedIndex = history.length;
+					selectedIndex = results.length;
 					return;
 				}
 				// Select previous searchHistory item
-				selectedIndex = (history.length + selectedIndex - 1) % history.length;
+				selectedIndex = (results.length + selectedIndex - 1) % results.length;
 				return;
 			}
 
 			if (selectedIndex !== undefined && event.key === 'Enter') {
-				goToSearchHistory(history[selectedIndex].result);
+				goToSearchHistory(results[selectedIndex]);
+				event.preventDefault();
+				return;
 			}
 		}
 	}
 
 	function goToResult() {
 		if (result) {
-			goto(`/${languageTag()}/${result}`);
-			searchHistory.add({ result, searchType, searchValue });
+			searchHistory.add({ url: result, type: searchType, value: searchValue });
+			goto(result);
 		}
 		closeSearch();
 	}
@@ -149,9 +158,10 @@
 		searchValue = '';
 	}
 
-	function goToSearchHistory(url: string) {
-		goto(url);
+	function goToSearchHistory(record: Record) {
+		searchHistory.add(record);
 		closeSearch();
+		goto(record.url);
 	}
 
 	if (debug) {
@@ -222,17 +232,21 @@
 					</div>
 				</form>
 
-				{#if history.length}
+				{#if results.length}
 					<div class="px-2">
 						<div class="table-styles grid grid-cols-[1fr_auto] gap-x-4 sm:grid-cols-[1fr_1fr_auto]">
 							<div class="table-head-styles col-span-full grid grid-cols-subgrid">
-								<span class="pl-2">Recent</span>
-								<span class="hidden sm:block">Type</span>
+								{#if searchValue}
+									<span class="pl-2">Search Results</span>
+								{:else}
+									<span class="pl-2">Recent Activity</span>
+								{/if}
+								<span class="hidden sm:block">Action</span>
 								<button class="justify-self-end" onclick={() => searchHistory.clear()}>Clear</button
 								>
 							</div>
 
-							{#each history as item, index}
+							{#each results as item, index}
 								<div
 									class="col-span-full grid h-12 grid-cols-subgrid
 									items-center justify-items-start
@@ -244,38 +258,7 @@
 									"
 									data-active={index === selectedIndex}
 								>
-									<a
-										class="grid grid-cols-subgrid items-center focus-visible:outline-none focus-visible:ring focus-visible:ring-inset focus-visible:ring-solar-500 sm:col-span-2"
-										href={item.result}
-										onclick={closeSearch}
-									>
-										<div
-											class="table-cell-styles ml-2 flex items-center gap-2 font-mono tabular-nums"
-										>
-											{#if item.searchType === 'account'}
-												<UserSearch class="size-4" />
-												<span>{item.searchValue}</span>
-											{:else if item.searchType === 'block'}
-												<Box class="size-4" />
-												<span>{item.searchValue}</span>
-											{:else if item.searchType === 'key'}
-												<Key class="size-4" />
-												<span class="max-w-[12ch] truncate">
-													{item.searchValue}
-												</span>
-											{:else if item.searchType === 'transaction'}
-												<ArrowLeftRight class="size-4" />
-												<span class="max-w-[13ch] truncate">
-													{truncateCenter(item.searchValue)}
-												</span>
-											{/if}
-										</div>
-
-										<span
-											class="align-center text-muted hidden text-base font-medium capitalize sm:block"
-											>{item.searchType}</span
-										>
-									</a>
+									<Result record={item} onclick={closeSearch} />
 
 									<button
 										class="grid size-12 place-items-center justify-self-end
