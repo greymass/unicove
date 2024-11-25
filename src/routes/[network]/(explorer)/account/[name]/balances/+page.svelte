@@ -1,10 +1,13 @@
 <script lang="ts">
 	import AssetText from '$lib/components/elements/asset.svelte';
+	import { UInt64 } from '@wharfkit/antelope';
 
 	const { data } = $props();
+	const zero = UInt64.from(0);
+	const balances = $derived(data.account.balances.filter((item) => item.asset.units.gt(zero)));
 </script>
 
-{#if data.account?.balances && data.account.balances.length}
+{#if balances.length}
 	<table class="table-styles">
 		<thead>
 			<tr>
@@ -13,7 +16,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			{#each data.account.balances as balance}
+			{#each balances as balance}
 				<tr>
 					<td>
 						<div class="flex items-center gap-3">
