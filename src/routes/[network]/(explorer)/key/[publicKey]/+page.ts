@@ -5,7 +5,7 @@ import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ fetch, params, parent }) => {
 	const { network } = await parent();
-	const accountsPromise = fetch(`/${params.network}/api/key/${params.publicKey}`)
+	const accounts = await fetch(`/${params.network}/api/key/${params.publicKey}`)
 		.then((response) => response.json())
 		.then((json) => json.accounts || []);
 
@@ -17,7 +17,6 @@ export const load: PageLoad = async ({ fetch, params, parent }) => {
 	try {
 		pubkey = PublicKey.from(String(params.publicKey));
 	} catch (e) {
-		console.error(e);
 		error(404, {
 			message: 'Key not found',
 			code: 'KEY_NOT_FOUND'
@@ -27,7 +26,7 @@ export const load: PageLoad = async ({ fetch, params, parent }) => {
 	return {
 		title,
 		publicKey: pubkey,
-		accounts: accountsPromise,
+		accounts,
 		network: params.network,
 		pageMetaTags: {
 			title: `${title} | ${network.chain.name} Network`,

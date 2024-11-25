@@ -1,7 +1,6 @@
 import { json, type RequestEvent } from '@sveltejs/kit';
 
 import { getChainDefinitionFromParams } from '$lib/state/network.svelte';
-import { getCacheHeaders } from '$lib/utils';
 import { getBackendNetwork } from '$lib/wharf/client/ssr.js';
 import { PublicKey } from '@wharfkit/antelope';
 
