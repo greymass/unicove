@@ -40,10 +40,14 @@ export class SearchHistory {
 		}
 	}
 
-	add(s: SearchResult) {
-		this.history.unshift(s);
-		if (history.length > this.maxHistoryLength) {
-			this.history.splice(this.maxHistoryLength);
+	add(s: Record) {
+		const exists = this.records.findIndex((r) => r.url === s.url);
+		if (exists) {
+			this.records.splice(exists, 1);
+		}
+		this.records.unshift(s);
+		if (this.records.length > this.maxLength) {
+			this.records.splice(this.maxLength);
 		}
 		this.saveHistory();
 	}
