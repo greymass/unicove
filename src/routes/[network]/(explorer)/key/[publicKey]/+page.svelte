@@ -35,7 +35,6 @@
 								name={account}
 								class="h-12 content-center rounded-lg px-4 hover:bg-mineShaft-900 hover:text-mineShaft-50 focus-visible:bg-mineShaft-900 focus-visible:text-mineShaft-50"
 							/>
-							<!-- <a href={`/eos/account/${account}`}>{account}</a> -->
 						</li>
 					{/each}
 				</Grid>
