@@ -4,14 +4,6 @@ import { PublicKey } from '@wharfkit/antelope';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ fetch, params, parent }) => {
-	const { network } = await parent();
-	const accounts = await fetch(`/${params.network}/api/key/${params.publicKey}`)
-		.then((response) => response.json())
-		.then((json) => json.accounts || []);
-
-	const title = m.key_page_title();
-	const description = m.key_page_description();
-
 	let pubkey: PublicKey;
 
 	try {
@@ -22,6 +14,14 @@ export const load: PageLoad = async ({ fetch, params, parent }) => {
 			code: 'KEY_NOT_FOUND'
 		});
 	}
+
+	const { network } = await parent();
+	const accounts = await fetch(`/${params.network}/api/key/${params.publicKey}`)
+		.then((response) => response.json())
+		.then((json) => json.accounts || []);
+
+	const title = m.key_page_title();
+	const description = m.key_page_description();
 
 	return {
 		title,
