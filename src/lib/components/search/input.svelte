@@ -97,10 +97,6 @@
 		onOpenChange: resetSelectedIndex
 	});
 
-	onMount(() => {
-		$open = true;
-	});
-
 	function handleKeydown(event: KeyboardEvent) {
 		// Focus the search input when the user presses '/' outside a text input or 'Cmd+k' anywhere
 		if (
