@@ -26,7 +26,6 @@ export const load: PageLoad = async ({ fetch, params, parent }) => {
 
 	return {
 		title,
-		subtitle: `${params.publicKey?.slice(0, 10)}...${params.publicKey?.slice(-10)}`,
 		publicKey: pubkey,
 		accounts: accountsPromise,
 		network: params.network,
