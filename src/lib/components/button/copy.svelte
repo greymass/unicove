@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getSetting } from '$lib/state/settings.svelte';
+	import { getDebugMode } from '$lib/state/settings.svelte';
 	import Copy from 'lucide-svelte/icons/copy';
 	import { quadIn, quartOut } from 'svelte/easing';
 	import { fade, fly } from 'svelte/transition';
@@ -9,7 +9,7 @@
 		data: string;
 	}
 
-	let { value: debugMode } = getSetting('debug-mode', false);
+	const debugMode = getDebugMode();
 
 	let props: Props = $props();
 
