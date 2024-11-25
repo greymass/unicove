@@ -3,6 +3,7 @@
 	import * as m from '$lib/paraglide/messages.js';
 	import Account from '$lib/components/elements/account.svelte';
 	import Key from 'lucide-svelte/icons/key-round';
+	import CopyButton from '$lib/components/button/copy.svelte';
 
 	let { data } = $props();
 
@@ -16,9 +17,12 @@
 			<picture class="grid size-12 place-items-center rounded-full bg-mineShaft-900">
 				<Key />
 			</picture>
-			<div class="space-y-px break-all">
-				<p class="break-all font-semibold text-white">{pubKey}</p>
-				<p class="text-muted break-all">{legacyPubKey}</p>
+			<div class="space-y-px *:break-all">
+				<p class="font-semibold text-white">
+					{pubKey}
+					<CopyButton data={pubKey} />
+				</p>
+				<p class="text-muted">{legacyPubKey}</p>
 			</div>
 		</Cluster>
 	</Card>
