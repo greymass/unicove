@@ -64,7 +64,7 @@ async function loadBalances(
 ): Promise<LightAPIBalanceRow[]> {
 	const balances = [];
 	if (network.supports('lightapi')) {
-		const result = await f(`https://balances.unicove.com/api/balances/${network}/${account}`);
+		const result = await f(`https://eos.light-api.net/api/balances/${network}/${account}`);
 		const json: LightAPIBalanceResponse = await result.json();
 		balances.push(...json.balances);
 	}

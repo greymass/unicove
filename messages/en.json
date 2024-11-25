@@ -49,7 +49,7 @@
 	"test_locale_string": "This is a test",
 	"key_page_description": "List of accounts using this public key.",
 	"key_page_title": "Public Key",
-	"accounts_using_public_key": "Accounts using this public key",
+	"accounts_using_public_key": "Associated Accounts",
 	"loading_accounts": "Loading accounts...",
 	"no_accounts_found": "No accounts found",
 	"error_loading_accounts": "Error loading accounts: {error}",

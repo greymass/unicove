@@ -58,7 +58,7 @@ async function checkStatus(
 				}
 				setTimeout(() => {
 					checkStatus(transactionId, context).then(resolve).catch(reject);
-				}, 5000);
+				}, 2000);
 			})
 			.catch((error) => {
 				if (error.response && error.response.status === 404) {

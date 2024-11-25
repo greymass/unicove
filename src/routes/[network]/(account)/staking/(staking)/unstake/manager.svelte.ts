@@ -7,12 +7,7 @@ import AssetInput from '$lib/components/input/asset.svelte';
 import { TokenBalance } from '@wharfkit/common';
 
 import type { UnstakingRecord } from '$lib/utils/staking';
-import {
-	defaultQuantity,
-	getUnstakableBalance,
-	getUnstakingBalances,
-	getStakedBalance
-} from '$lib/utils/staking';
+import { defaultQuantity, getUnstakableBalance, getUnstakingBalances } from '$lib/utils/staking';
 
 export class UnstakeManager {
 	public input: AssetInput | undefined = $state();
@@ -32,7 +27,7 @@ export class UnstakeManager {
 	public error: string = $state('');
 	public txid: string = $state('');
 
-	public staked: Asset = $derived(getStakedBalance(this.network, this.account));
+	public staked: Asset = $derived(getUnstakableBalance(this.network, this.account));
 	public unstaking: Array<UnstakingRecord> = $derived(
 		getUnstakingBalances(this.network, this.account)
 	);
