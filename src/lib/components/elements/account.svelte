@@ -18,11 +18,7 @@
 
 	let { name, contract = false, children, ...props }: Props = $props();
 
-	let context = getContext<UnicoveContext>('state');
-
-	let network = $derived(context.network);
-
-	$inspect(network);
+	let { network } = getContext<UnicoveContext>('state');
 
 	const path = $derived(
 		contract
