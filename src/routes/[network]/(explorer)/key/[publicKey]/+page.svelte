@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Card, Cluster, MultiCard } from '$lib/components/layout';
+	import { Card, Cluster, Grid, MultiCard } from '$lib/components/layout';
 	import * as m from '$lib/paraglide/messages.js';
 	import Account from '$lib/components/elements/account.svelte';
 	import Key from 'lucide-svelte/icons/key-round';
@@ -17,7 +17,6 @@
 				<Key />
 			</picture>
 			<div class="space-y-px break-all">
-				<!-- TODO: Display publicKey in multiple formats -->
 				<p class="break-all font-semibold text-white">{pubKey}</p>
 				<p class="text-muted break-all">{legacyPubKey}</p>
 			</div>
@@ -29,7 +28,7 @@
 			<p class="text-muted text-center italic">{m.loading_accounts()}</p>
 		{:then accounts}
 			{#if accounts && accounts.length > 0}
-				<Cluster tag="ul">
+				<Grid tag="ul">
 					{#each accounts as account}
 						<li class="flex">
 							<Account
@@ -39,7 +38,7 @@
 							<!-- <a href={`/eos/account/${account}`}>{account}</a> -->
 						</li>
 					{/each}
-				</Cluster>
+				</Grid>
 			{:else}
 				<p class="text-muted text-center">{m.no_accounts_found()}</p>
 			{/if}
