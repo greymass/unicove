@@ -1,11 +1,31 @@
 <script lang="ts">
 	import AssetText from '$lib/components/elements/asset.svelte';
-	import { UInt64 } from '@wharfkit/antelope';
+	import { Asset, UInt64 } from '@wharfkit/antelope';
+
+	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import { getContext } from 'svelte';
 
 	const { data } = $props();
 	const zero = UInt64.from(0);
 	const balances = $derived(data.account.balances.filter((item) => item.asset.units.gt(zero)));
+
+	const context = getContext<UnicoveContext>('state');
+	const isCurrentUser = $derived(
+		context.account &&
+			context.account.name &&
+			data.account &&
+			data.account.name &&
+			data.account.name.equals(context.account.name)
+	);
 </script>
+
+{#snippet tableAction(asset: Asset)}
+	<td class="text-right">
+		<a class="text-skyBlue-500 hover:text-skyBlue-400" href="/{data.network}/send?quantity={asset}"
+			>Send</a
+		>
+	</td>
+{/snippet}
 
 {#if balances.length}
 	<table class="table-styles">
@@ -13,6 +33,9 @@
 			<tr>
 				<th>Token</th>
 				<th>Amount</th>
+				{#if isCurrentUser}
+					<th></th>
+				{/if}
 			</tr>
 		</thead>
 		<tbody>
@@ -31,6 +54,9 @@
 					<td>
 						<AssetText value={balance.asset} />
 					</td>
+					{#if isCurrentUser}
+						{@render tableAction(balance.asset)}
+					{/if}
 				</tr>
 			{/each}
 		</tbody>
