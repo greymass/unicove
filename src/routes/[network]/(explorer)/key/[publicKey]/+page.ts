@@ -1,3 +1,4 @@
+import { error } from '@sveltejs/kit';
 import * as m from '$lib/paraglide/messages.js';
 import { PublicKey } from '@wharfkit/antelope';
 import type { PageLoad } from './$types';
@@ -10,7 +11,18 @@ export const load: PageLoad = async ({ fetch, params, parent }) => {
 
 	const title = m.key_page_title();
 	const description = m.key_page_description();
-	const pubkey = PublicKey.from(String(params.publicKey));
+
+	let pubkey: PublicKey;
+
+	try {
+		pubkey = PublicKey.from(String(params.publicKey));
+	} catch (e) {
+		console.error(e);
+		error(404, {
+			message: 'Key not found',
+			code: 'KEY_NOT_FOUND'
+		});
+	}
 
 	return {
 		title,
