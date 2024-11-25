@@ -47,7 +47,7 @@
 	{/if}
 
 	<div class="grid gap-2">
-		<h1 class="relative flex w-fit items-center text-3xl font-bold leading-none text-white">
+		<h1 class="w-fit text-3xl font-bold leading-none text-white">
 			<span>{props.title}</span>
 			{#if routePath === 'account'}
 				<CopyButton data={props.title} />

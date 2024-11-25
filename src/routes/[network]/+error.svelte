@@ -1,12 +1,30 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import { SingleCard, Stack } from '$lib/components/layout';
+	import Generic404 from '$lib/components/errors/generic.svelte';
+	// import Code from '$lib/components/code.svelte';
+
+	// const debugMode = getDebugMode() // TODO: merge ux-suggestion branch first
 </script>
 
 <!-- This error page gets triggered if any of the routes in the sibling directories fail -->
-<!-- TODO: this page needs a design still -->
+<!-- Here we can switch on the error message and determine which error component to render -->
+<!-- e.g. {#if $page.error?.code === 'ACCOUNT_NOT_FOUND'} -->
 
-{#if $page.error?.code === 'NOT_FOUND'}
-	<h1 class="h1">{$page.error.message}</h1>
-{:else}
-	<pre>{JSON.stringify($page.error, null, 2)}</pre>
-{/if}
+<SingleCard>
+	<Stack class="py-8 text-center">
+		<div class="*:object-fit *:size-full">
+			<Generic404 />
+		</div>
+		<h1 class="h2">
+			{#if $page.error?.message}
+				{$page.error.message}
+			{:else}
+				Page not found
+			{/if}
+		</h1>
+		<!-- {#if debugMode} -->
+		<!-- <Code>{JSON.stringify($page.error, null, 2)}</Code> -->
+		<!-- {/if} -->
+	</Stack>
+</SingleCard>

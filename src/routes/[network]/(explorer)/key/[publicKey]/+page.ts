@@ -1,7 +1,9 @@
-import type { Load } from '@sveltejs/kit';
+import { error } from '@sveltejs/kit';
 import * as m from '$lib/paraglide/messages.js';
+import { PublicKey } from '@wharfkit/antelope';
+import type { PageLoad } from './$types';
 
-export const load: Load = async ({ fetch, params, parent }) => {
+export const load: PageLoad = async ({ fetch, params, parent }) => {
 	const { network } = await parent();
 	const accountsPromise = fetch(`/${params.network}/api/key/${params.publicKey}`)
 		.then((response) => response.json())
@@ -10,10 +12,21 @@ export const load: Load = async ({ fetch, params, parent }) => {
 	const title = m.key_page_title();
 	const description = m.key_page_description();
 
+	let pubkey: PublicKey;
+
+	try {
+		pubkey = PublicKey.from(String(params.publicKey));
+	} catch (e) {
+		console.error(e);
+		error(404, {
+			message: 'Key not found',
+			code: 'KEY_NOT_FOUND'
+		});
+	}
+
 	return {
 		title,
-		subtitle: `${params.publicKey?.slice(0, 10)}...${params.publicKey?.slice(-10)}`,
-		publicKey: params.publicKey,
+		publicKey: pubkey,
 		accounts: accountsPromise,
 		network: params.network,
 		pageMetaTags: {
