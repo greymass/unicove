@@ -35,3 +35,8 @@ export function getSetting<T>(key: string, value: T) {
 	}
 	return state.get(key) as SettingState<T>;
 }
+
+export function getDebugMode() {
+	const { value } = getSetting('debug-mode', false);
+	return value;
+}

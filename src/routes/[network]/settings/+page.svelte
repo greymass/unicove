@@ -6,6 +6,7 @@
 
 	let advancedMode = getSetting('advanced-mode', false);
 	let debugMode = getSetting('debug-mode', false);
+	let preventAccountPageSwitching = getSetting('prevent-account-page-switching', false);
 
 	$effect(() => {
 		if (!advancedMode.value) {
@@ -29,6 +30,11 @@
 		<div class="flex items-center justify-between">
 			<Label for="debug-mode">Enable Debug Mode</Label>
 			<Switch id="debug-mode" bind:checked={debugMode.value} />
+		</div>
+
+		<div class="flex items-center justify-between">
+			<Label for="advanced-mode">Stay on current page when switching accounts</Label>
+			<Switch id="advanced-mode" bind:checked={preventAccountPageSwitching.value} />
 		</div>
 	{/if}
 </div>

@@ -26,11 +26,11 @@
 		const isAdvancedMode = advancedMode.value;
 
 		const items = [
-			{
-				href: `/${network}`,
-				text: network.chain.name,
-				active: pathname[2] === String(network) && !pathname[3]
-			},
+			// {
+			// 	href: `/${network}`,
+			// 	text: network.chain.name,
+			// 	active: pathname[2] === String(network) && !pathname[3]
+			// },
 			{ href: `/${network}/send`, text: 'Send', active: pathname[3] === 'send' }
 		];
 
@@ -55,7 +55,7 @@
 		}
 
 		if (context.account) {
-			items.splice(1, 0, {
+			items.splice(0, 0, {
 				href: `/${network}/account/${context.account.name}`,
 				text: 'My Account',
 				active: pathname[3] === 'account' && pathname[4] === String(context.account.name)

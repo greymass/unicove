@@ -4,6 +4,7 @@
 	import { createDialog, melt } from '@melt-ui/svelte';
 	import { Session, type SerializedSession } from '@wharfkit/session';
 	import { chainLogos } from '@wharfkit/common';
+	import { getSetting } from '$lib/state/settings.svelte';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
@@ -15,8 +16,12 @@
 	import User from 'lucide-svelte/icons/user';
 	import UserCheck from 'lucide-svelte/icons/user-check';
 	import PlusIcon from 'lucide-svelte/icons/plus';
+	import { goto } from '$app/navigation';
+	import { languageTag } from '$lib/paraglide/runtime';
 
 	const context = getContext<UnicoveContext>('state');
+
+	const { value: preventAccountPageSwitch } = getSetting('prevent-account-page-switching', false);
 
 	interface PageProps {
 		class?: string;
@@ -39,6 +44,9 @@
 
 	function switchSession(session: SerializedSession) {
 		context.wharf.switch(session);
+		if (!preventAccountPageSwitch) {
+			goto(`/${languageTag()}/${network}/account/${session.actor}`);
+		}
 		closeDrawer();
 	}
 
