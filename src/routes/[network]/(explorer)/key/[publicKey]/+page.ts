@@ -34,7 +34,7 @@ export const load: PageLoad = async ({ fetch, params, parent }) => {
 		accounts,
 		network: params.network,
 		pageMetaTags: {
-			title: `${pubkey} | ${title} | ${network.chain.name} Network`,
+			title: `${pubkey} | ${network.chain.name} Network`,
 			description
 		}
 	};
