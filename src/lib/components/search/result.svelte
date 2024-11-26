@@ -1,13 +1,13 @@
 <script lang="ts">
-	import { ArrowLeftRight, Box, Key, UserSearch, Wrench } from 'lucide-svelte';
+	import { AppWindow, ArrowLeftRight, Box, Key, UserSearch } from 'lucide-svelte';
 	import type { ComponentProps } from 'svelte';
 
-	import { RecordType, type Record } from '$lib/state/search.svelte';
+	import { SearchRecordType, type SearchRecord } from '$lib/state/search.svelte';
 	import { truncateCenter } from '$lib/utils';
 	import type TextInput from '../input/text.svelte';
 
 	interface ResultProps extends ComponentProps<typeof TextInput> {
-		record: Record;
+		record: SearchRecord;
 		onclick: (event: MouseEvent) => void;
 	}
 
@@ -20,24 +20,24 @@
 	{onclick}
 >
 	<div class="table-cell-styles ml-2 flex items-center gap-2 font-mono tabular-nums">
-		{#if record.type === RecordType.ACCOUNT}
+		{#if record.type === SearchRecordType.ACCOUNT}
 			<UserSearch class="size-4" />
 			<span>{record.value}</span>
-		{:else if record.type === RecordType.BLOCK}
+		{:else if record.type === SearchRecordType.BLOCK}
 			<Box class="size-4" />
 			<span>{record.value}</span>
-		{:else if record.type === RecordType.KEY}
+		{:else if record.type === SearchRecordType.KEY}
 			<Key class="size-4" />
 			<span class="max-w-[12ch] truncate">
 				{record.value}
 			</span>
-		{:else if record.type === RecordType.TRANSACTION}
+		{:else if record.type === SearchRecordType.TRANSACTION}
 			<ArrowLeftRight class="size-4" />
 			<span class="max-w-[13ch] truncate">
 				{truncateCenter(record.value)}
 			</span>
 		{:else}
-			<Wrench class="size-4" />
+			<AppWindow class="size-4" />
 			<span>{record.value}</span>
 		{/if}
 	</div>
