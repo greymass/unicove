@@ -6,7 +6,7 @@
 	import SideMenuContent from '$lib/components/navigation/sidemenu.svelte';
 	import AccountSwitcher from '$lib/components/accountswitch.svelte';
 	import UnicoveLogo from '$lib/assets/unicovelogo.svelte';
-	import Search from '$lib/components/input/search.svelte';
+	import Search from '$lib/components/search/input.svelte';
 	import X from 'lucide-svelte/icons/circle-x';
 	import { chainLogos } from '@wharfkit/common';
 	import { AccountState } from '$lib/state/client/account.svelte.js';
@@ -190,7 +190,7 @@
 		<div
 			class="flex items-center justify-end gap-4 sm:col-start-4 md:col-span-full md:col-start-9 md:flex-1 md:gap-4"
 		>
-			<Search network={data.network} class="max-w-48 flex-1" />
+			<Search network={data.network} class="max-w-56 flex-1" />
 
 			<AccountSwitcher network={data.network} class="" />
 		</div>
