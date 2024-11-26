@@ -233,7 +233,7 @@
 							autocapitalize="off"
 							bind:this={ref}
 							bind:value={searchValue}
-							placeholder="Unicove Search"
+							placeholder={m.common_search_unicove()}
 							class="w-full rounded-lg border-2 border-skyBlue-500 bg-transparent p-4 focus:outline-none"
 						/>
 						<div
