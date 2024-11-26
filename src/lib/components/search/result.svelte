@@ -1,23 +1,27 @@
 <script lang="ts">
 	import { AppWindow, ArrowLeftRight, Box, Key, UserSearch } from 'lucide-svelte';
-	import type { ComponentProps } from 'svelte';
+	import type { ComponentProps, Snippet } from 'svelte';
 
 	import { SearchRecordType, type SearchRecord } from '$lib/state/search.svelte';
-	import { truncateCenter } from '$lib/utils';
+	import { cn, truncateCenter } from '$lib/utils';
 	import type TextInput from '../input/text.svelte';
 
 	interface ResultProps extends ComponentProps<typeof TextInput> {
 		record: SearchRecord;
 		onclick: (event: MouseEvent) => void;
 		active?: boolean;
+		children?: Snippet;
 	}
 
-	let { record, onclick, active }: ResultProps = $props();
+	let { record, onclick, active, children, ...props }: ResultProps = $props();
 </script>
 
 <a
 	data-active={active}
-	class="grid select-none grid-cols-subgrid items-center focus-visible:outline-none focus-visible:ring focus-visible:ring-inset focus-visible:ring-solar-500 sm:col-span-2"
+	class={cn(
+		'grid select-none grid-cols-subgrid items-center rounded-lg focus-visible:outline-none focus-visible:ring focus-visible:ring-inset focus-visible:ring-solar-500 sm:col-span-2',
+		props.class
+	)}
 	href={record.url}
 	{onclick}
 >
@@ -54,4 +58,6 @@
 			View {record.type}
 		{/if}
 	</span>
+
+	{@render children?.()}
 </a>
