@@ -153,23 +153,27 @@
 		searchValue = '';
 	}
 
-	function getShortcutKey(): 'ctrl' | '⌘' | undefined {
+	function getShortcutKey(): 'ctrl + K' | '⌘ + K' | '/' | undefined {
 		if (!browser || !('navigator' in window)) {
 			return;
 		}
 
-		if (navigator.userAgentData) {
-			const { platform } = navigator.userAgentData;
-			if (platform.startsWith('win')) return 'ctrl';
-			if (platform.startsWith('mac')) return '⌘';
-			if (platform.startsWith('linux')) return 'ctrl';
+		if (/firefox/i.test(navigator.userAgent)) {
+			return '/';
+		}
+
+		if ((window.navigator as any).userAgentData) {
+			const { platform } = (window.navigator as any).userAgentData;
+			if (platform.startsWith('win')) return 'ctrl + K';
+			if (platform.startsWith('mac')) return '⌘ + K';
+			if (platform.startsWith('linux')) return 'ctrl + K';
 		} else {
 			// Fallback for older browsers
 			const { userAgent } = navigator;
-			if (userAgent.indexOf('Win') != -1) return 'ctrl';
-			if (userAgent.indexOf('Mac') != -1) return '⌘';
-			if (userAgent.indexOf('X11') != -1) return 'ctrl';
-			if (userAgent.indexOf('Linux') != -1) return 'ctrl';
+			if (userAgent.indexOf('Win') != -1) return 'ctrl + K';
+			if (userAgent.indexOf('Mac') != -1) return '⌘ + K';
+			if (userAgent.indexOf('X11') != -1) return 'ctrl + K';
+			if (userAgent.indexOf('Linux') != -1) return 'ctrl + K';
 		}
 	}
 
@@ -227,9 +231,9 @@ data-[active=true]:ring-solar-500
 >
 	<SearchIcon class="size-6 text-inherit md:size-5" />
 	<span class="hidden md:inline"> Search... </span>
-	<span class="hidden md:inline">
+	<span class="m-2 hidden rounded border border-mineShaft-800 p-1 px-2 md:inline">
 		{#if shortcutKey}
-			{shortcutKey} + K
+			{shortcutKey}
 		{/if}
 	</span>
 </button>
