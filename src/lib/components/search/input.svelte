@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount, type ComponentProps } from 'svelte';
+	import { type ComponentProps } from 'svelte';
 	import { createDialog, melt, type CreateDialogProps } from '@melt-ui/svelte';
 	import type TextInput from '../input/text.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
@@ -93,10 +93,6 @@
 	} = createDialog({
 		forceVisible: true,
 		onOpenChange: resetSelectedIndex
-	});
-
-	onMount(() => {
-		$open = true;
 	});
 
 	function handleKeydown(event: KeyboardEvent) {
