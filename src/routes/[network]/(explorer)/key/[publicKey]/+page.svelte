@@ -22,7 +22,7 @@
 					{pubKey}
 					<CopyButton data={pubKey} />
 				</p>
-				<p class="text-muted">{legacyPubKey}</p>
+				<p class="text-muted">{m.legacy_key()}{': '}{legacyPubKey}</p>
 			</div>
 		</Cluster>
 	</Card>
