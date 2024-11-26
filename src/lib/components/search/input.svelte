@@ -6,6 +6,7 @@
 	import { preventDefault } from '$lib/utils';
 	import { goto } from '$app/navigation';
 	import { fade, scale } from 'svelte/transition';
+	import * as m from '$lib/paraglide/messages';
 	import {
 		RecordStorage,
 		SearchRecordType,
@@ -153,7 +154,7 @@
 		searchValue = '';
 	}
 
-	function getShortcutKey(): 'ctrl + K' | '⌘ + K' | '/' | undefined {
+	function getShortcutKey(): 'Ctrl + K' | '⌘ + K' | '/' | undefined {
 		if (!browser || !('navigator' in window)) {
 			return;
 		}
@@ -164,16 +165,16 @@
 
 		if ((window.navigator as any).userAgentData) {
 			const { platform } = (window.navigator as any).userAgentData;
-			if (platform.startsWith('win')) return 'ctrl + K';
+			if (platform.startsWith('win')) return 'Ctrl + K';
 			if (platform.startsWith('mac')) return '⌘ + K';
-			if (platform.startsWith('linux')) return 'ctrl + K';
+			if (platform.startsWith('linux')) return 'Ctrl + K';
 		} else {
 			// Fallback for older browsers
 			const { userAgent } = navigator;
-			if (userAgent.indexOf('Win') != -1) return 'ctrl + K';
+			if (userAgent.indexOf('Win') != -1) return 'Ctrl + K';
 			if (userAgent.indexOf('Mac') != -1) return '⌘ + K';
-			if (userAgent.indexOf('X11') != -1) return 'ctrl + K';
-			if (userAgent.indexOf('Linux') != -1) return 'ctrl + K';
+			if (userAgent.indexOf('X11') != -1) return 'Ctrl + K';
+			if (userAgent.indexOf('Linux') != -1) return 'Ctrl + K';
 		}
 	}
 
@@ -230,7 +231,7 @@ data-[active=true]:ring-solar-500
 	)}
 >
 	<SearchIcon class="size-6 text-inherit md:size-5" />
-	<span class="hidden md:inline"> Search... </span>
+	<span class="hidden md:inline"> {m.common_search()} </span>
 	<span class="m-2 hidden rounded border border-mineShaft-800 p-1 px-2 md:inline">
 		{#if shortcutKey}
 			{shortcutKey}

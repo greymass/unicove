@@ -190,7 +190,7 @@
 		<div
 			class="flex items-center justify-end gap-4 sm:col-start-4 md:col-span-full md:col-start-9 md:flex-1 md:gap-4"
 		>
-			<Search network={data.network} class="max-w-48 flex-1" />
+			<Search network={data.network} class="max-w-56 flex-1" />
 
 			<AccountSwitcher network={data.network} class="" />
 		</div>
