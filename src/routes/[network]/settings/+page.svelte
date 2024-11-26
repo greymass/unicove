@@ -27,9 +27,17 @@
 
 	<div class="flex items-center justify-between">
 		<Stack class="gap-1">
+			<Label for="advanced-mode">Remain on current page when switching accounts</Label>
+			<p class="caption text-sm">Prevents automatic navigation to the account overview page</p>
+		</Stack>
+		<Switch id="advanced-mode" bind:checked={preventAccountPageSwitching.value} />
+	</div>
+
+	<div class="flex items-center justify-between">
+		<Stack class="gap-1">
 			<Label for="advanced-mode">Enable Advanced Mode</Label>
 			<p class="caption text-sm">
-				View Resources, Enhanced asset precision, extra options and more
+				View Resources tab, enable enhanced asset precision, debug, and more
 			</p>
 		</Stack>
 		<Switch id="advanced-mode" bind:checked={advancedMode.value} />
@@ -42,16 +50,6 @@
 				<p class="caption text-sm">Show raw data used for development and debugging</p>
 			</Stack>
 			<Switch id="debug-mode" bind:checked={debugMode.value} />
-		</div>
-
-		<div class="flex items-center justify-between">
-			<Stack class="gap-1">
-				<Label for="advanced-mode">Prevent navigation on account switching</Label>
-				<p class="caption text-sm">
-					Stay on the current page instead of navigating to account overview
-				</p>
-			</Stack>
-			<Switch id="advanced-mode" bind:checked={preventAccountPageSwitching.value} />
 		</div>
 	{/if}
 </div>
