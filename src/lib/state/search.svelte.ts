@@ -188,7 +188,7 @@ export class RecordStorage {
 		this.save();
 	}
 
-	get(): Record[] {
+	get(): SearchRecord[] {
 		return this.records;
 	}
 
