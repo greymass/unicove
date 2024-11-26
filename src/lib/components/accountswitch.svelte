@@ -22,6 +22,7 @@
 	const context = getContext<UnicoveContext>('state');
 
 	const { value: preventAccountPageSwitch } = getSetting('prevent-account-page-switching', false);
+	const advancedMode = $derived(getSetting('advanced-mode', false).value);
 
 	interface PageProps {
 		class?: string;
@@ -140,19 +141,15 @@
 				opacity: 1
 			}}
 		>
-			<section class="flex flex-row-reverse justify-between gap-2 md:gap-4">
+			<section
+				data-advanced={advancedMode}
+				class="flex flex-row-reverse justify-between gap-2 data-[advanced=false]:items-center md:gap-4"
+			>
 				<button
 					use:melt={$close}
 					aria-label="Close"
-					class="
-					text-muted grid size-12
-					appearance-none
-					place-items-center
-					rounded-lg
-					focus:text-white
-					focus:outline-none
-					md:pt-2.5
-					"
+					data-advanced={advancedMode}
+					class="text-muted grid size-12 appearance-none place-items-center rounded-lg focus:text-white focus:outline-none md:data-[advanced=false]:pt-0 md:data-[advanced=true]:pt-2.5"
 				>
 					<X class="size-4 " />
 				</button>
