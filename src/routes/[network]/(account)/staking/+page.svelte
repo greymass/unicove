@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Asset } from '@wharfkit/antelope';
+	import { Asset, UInt64 } from '@wharfkit/antelope';
 	import { getContext } from 'svelte';
 	import { ChartLine } from 'lucide-svelte';
 
@@ -65,6 +65,12 @@
 			'2,USD'
 		)
 	);
+
+	let activity = $derived(
+		staked.units.gt(UInt64.from(0)) ||
+			unstakingTotal.units.gt(UInt64.from(0)) ||
+			totalWithdraw.units.gt(UInt64.from(0))
+	);
 </script>
 
 {#snippet tableAction([text, href]: string[])}
@@ -85,8 +91,7 @@
 			</div>
 		</Cluster>
 	</Card>
-
-	<Card id="token" title="Staking Contract">
+	<Card id="token" title="Staking Balance">
 		<Stack>
 			<Stack class="gap-2">
 				<h4 class="text-muted text-base leading-none">Tokens Staked</h4>
@@ -99,38 +104,44 @@
 				</Chip>
 			</Stack>
 
-			<Stack class="gap-2">
-				<table class="table-styles text-muted">
-					<tbody>
-						<tr>
-							<td>Staked</td>
-							<td class="text-right text-white">
-								<AssetText variant="full" value={staked} />
-							</td>
-							{@render tableAction(['Unstake', `/${data.network}/staking/unstake`])}
-						</tr>
-						<tr>
-							<td>Unstaking</td>
-							<td class="text-right text-white">
-								<AssetText variant="full" value={unstakingTotal} />
-							</td>
-							<td></td>
-						</tr>
-						{#if totalWithdraw.value > 0}
-							<tr>
-								<td>Unstaked</td>
-								<td class="text-right text-white">
-									<AssetText variant="full" value={totalWithdraw} />
-								</td>
-								{@render tableAction(['Withdraw', `/${data.network}/staking/withdraw`])}
-							</tr>
-						{/if}
-					</tbody>
-				</table>
-			</Stack>
+			{#if activity}
+				<Stack class="gap-2">
+					<table class="table-styles text-muted">
+						<tbody>
+							{#if staked.units.gt(UInt64.from(0))}
+								<tr>
+									<td>Staked</td>
+									<td class="text-right text-white">
+										<AssetText variant="full" value={staked} />
+									</td>
+									{@render tableAction(['Unstake', `/${data.network}/staking/unstake`])}
+								</tr>
+							{/if}
+							{#if unstakingTotal.units.gt(UInt64.from(0))}
+								<tr>
+									<td>Unstaking</td>
+									<td class="text-right text-white">
+										<AssetText variant="full" value={unstakingTotal} />
+									</td>
+									<td></td>
+								</tr>
+							{/if}
+							{#if totalWithdraw.units.gt(UInt64.from(0))}
+								<tr>
+									<td>Unstaked</td>
+									<td class="text-right text-white">
+										<AssetText variant="full" value={totalWithdraw} />
+									</td>
+									{@render tableAction(['Withdraw', `/${data.network}/staking/withdraw`])}
+								</tr>
+							{/if}
+						</tbody>
+					</table>
+				</Stack>
+			{/if}
 		</Stack>
 	</Card>
-	<Card id="token" title="My Balance">
+	<Card id="token" title="Account Balance">
 		<Stack>
 			<Stack class="gap-2">
 				<h4 class="text-muted text-base leading-none">Available</h4>
@@ -144,7 +155,7 @@
 			</Stack>
 
 			<Stack class="gap-2">
-				<Button href="/{networkName}/staking/stake" variant="secondary">Stake</Button>
+				<Button href="/{networkName}/staking/stake">Stake</Button>
 			</Stack>
 		</Stack>
 	</Card>

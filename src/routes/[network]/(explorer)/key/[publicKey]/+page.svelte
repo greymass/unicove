@@ -27,26 +27,19 @@
 		</Cluster>
 	</Card>
 	<Card title={m.accounts_using_public_key()}>
-		{#await data.accounts}
-			<!-- TODO: Create generic loading component -->
-			<p class="text-muted text-center italic">{m.loading_accounts()}</p>
-		{:then accounts}
-			{#if accounts && accounts.length > 0}
-				<Grid tag="ul">
-					{#each accounts as account}
-						<li class="flex">
-							<Account
-								name={account}
-								class="h-12 content-center rounded-lg px-4 hover:bg-mineShaft-900 hover:text-mineShaft-50 focus-visible:bg-mineShaft-900 focus-visible:text-mineShaft-50"
-							/>
-						</li>
-					{/each}
-				</Grid>
-			{:else}
-				<p class="text-muted text-center">{m.no_accounts_found()}</p>
-			{/if}
-		{:catch error}
-			<p class="text-center text-red-600">{m.error_loading_accounts({ error: error.message })}</p>
-		{/await}</Card
-	>
+		{#if data.accounts && data.accounts.length > 0}
+			<Grid tag="ul">
+				{#each data.accounts as account}
+					<li class="flex">
+						<Account
+							name={account}
+							class="h-12 content-center rounded-lg px-4 hover:bg-mineShaft-900 hover:text-mineShaft-50 focus-visible:bg-mineShaft-900 focus-visible:text-mineShaft-50"
+						/>
+					</li>
+				{/each}
+			</Grid>
+		{:else}
+			<p class="text-muted text-center">{m.no_accounts_found()}</p>
+		{/if}
+	</Card>
 </MultiCard>

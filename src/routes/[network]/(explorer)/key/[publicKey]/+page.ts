@@ -21,15 +21,20 @@ export const load: PageLoad = async ({ fetch, params, parent }) => {
 		.then((json) => json.accounts || []);
 
 	const title = m.key_page_title();
-	const description = m.key_page_description();
+	const description = m.key_page_description({
+		accounts: accounts.length,
+		network: network.chain.name
+	});
+	const subtitle = m.key_page_subtitle({ accounts: accounts.length });
 
 	return {
 		title,
+		subtitle,
 		publicKey: pubkey,
 		accounts,
 		network: params.network,
 		pageMetaTags: {
-			title: `${title} | ${network.chain.name} Network`,
+			title: `${pubkey} | ${network.chain.name} Network`,
 			description
 		}
 	};

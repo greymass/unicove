@@ -14,9 +14,10 @@
 		name: string;
 		contract?: boolean;
 		children?: Snippet;
+		preview?: boolean;
 	}
 
-	let { name, contract = false, children, ...props }: Props = $props();
+	let { name, contract = false, preview = false, children, ...props }: Props = $props();
 
 	let { network } = getContext<UnicoveContext>('state');
 
@@ -29,7 +30,7 @@
 	let account: AccountState | undefined = $state();
 
 	const fetchAccount: CreateLinkPreviewProps['onOpenChange'] = ({ next }) => {
-		if (next && network) {
+		if (preview && next && network) {
 			AccountState.for(network, Name.from(String(name)), fetch).then(
 				(accountState) => (account = accountState)
 			);
