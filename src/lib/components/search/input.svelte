@@ -23,6 +23,7 @@
 	import { cn } from '$lib/utils';
 	import Result from './result.svelte';
 	import { browser } from '$app/environment';
+	import { ArrowRight } from 'lucide-svelte';
 
 	interface NameInputProps extends ComponentProps<typeof TextInput> {
 		debug?: boolean;
@@ -184,34 +185,6 @@
 	}
 </script>
 
-{#snippet ResultRow(index: number, item: SearchRecord)}
-	<div
-		class="col-span-full grid h-12 grid-cols-subgrid
-items-center justify-items-start
-rounded-lg
-focus:outline-none
-data-[active=true]:ring
-data-[active=true]:ring-inset
-data-[active=true]:ring-solar-500
-"
-		data-active={index === selectedIndex}
-	>
-		<Result record={item} onclick={closeSearch} />
-
-		<button
-			class="grid size-12 place-items-center justify-self-end
-    focus-visible:outline-none
-    focus-visible:ring
-    focus-visible:ring-inset
-    focus-visible:ring-solar-500
-    "
-			onclick={() => searchHistory.remove(index)}
-		>
-			<X class=" text-muted " />
-		</button>
-	</div>
-{/snippet}
-
 <svelte:window on:keydown={handleKeydown} />
 
 <button
@@ -219,17 +192,20 @@ data-[active=true]:ring-solar-500
 	aria-label="search"
 	id="search"
 	class={cn(
-		'text-muted relative z-50 inline-flex h-10 items-center justify-end text-nowrap rounded-lg bg-transparent py-3.5 text-base font-medium leading-4 focus:outline-none focus-visible:border-solar-500 md:justify-between md:border md:border-mineShaft-600 md:py-2 md:pl-3 md:pr-0',
+		'text-muted relative z-50 inline-flex h-10 items-center justify-between text-nowrap rounded-lg bg-transparent py-3.5 text-base font-medium leading-4 focus:outline-none focus-visible:border-solar-500 md:justify-between md:border md:border-mineShaft-600 md:py-2 md:pl-3 md:pr-0',
 		className
 	)}
 >
-	<SearchIcon class="size-6 text-inherit md:size-5" />
-	<span class="hidden md:inline"> {m.common_search()} </span>
-	<span class="m-2 hidden rounded border border-mineShaft-800 p-1 px-2 md:inline">
-		{#if shortcutKey}
-			{shortcutKey}
-		{/if}
+	<span class="inline-flex items-center gap-2">
+		<SearchIcon class="size-6 text-inherit md:size-5" />
+		<span class="hidden md:inline"> {m.common_search()} </span>
 	</span>
+
+	{#if shortcutKey}
+		<span class="m-2 hidden rounded border border-mineShaft-900 px-2 py-1 md:inline">
+			{shortcutKey}
+		</span>
+	{/if}
 </button>
 
 {#if $open}
@@ -241,7 +217,7 @@ data-[active=true]:ring-solar-500
 		></div>
 		<div
 			use:melt={$content}
-			class="fixed left-1/2 top-8 z-50 max-h-[85vh] w-[90vw] max-w-lg -translate-x-1/2 transform rounded-2xl bg-mineShaft-950 p-4 shadow-lg"
+			class="fixed left-1/2 top-20 z-50 max-h-[85vh] w-[90vw] max-w-lg -translate-x-1/2 transform rounded-2xl bg-mineShaft-950 p-4 shadow-lg"
 			transition:scale={{
 				duration: 100,
 				start: 0.95
@@ -270,35 +246,86 @@ data-[active=true]:ring-solar-500
 
 				<div class="table-styles grid grid-cols-[1fr_auto] gap-x-4 sm:grid-cols-[1fr_1fr_auto]">
 					{#if results.length > 0}
-						<div class="table-head-styles col-span-full grid grid-cols-subgrid">
+						<div class="table-head-styles col-span-full grid select-none grid-cols-subgrid">
 							{#if searchValue}
 								<span class="pl-2">{m.common_search_results()}</span>
 							{:else}
 								<span class="pl-2">{m.common_recent_activity()}</span>
 							{/if}
 							<span class="hidden sm:block">{m.common_action()}</span>
-							<button class="justify-self-end" onclick={() => searchHistory.clear()}
-								>{m.common_clear()}</button
-							>
+							{#if !searchValue}
+								<button
+									class="justify-self-end focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-solar-500"
+									onclick={() => searchHistory.clear()}
+								>
+									{m.common_clear()}
+								</button>
+							{/if}
 						</div>
 					{/if}
-					{#each results as item, index}
-						{@render ResultRow(index, item)}
+
+					{#if results.length > 0}
+						<ul class="group/list col-span-full grid grid-cols-subgrid">
+							{#each results as item, index}
+								{#if searchValue}
+									{@render ResultRow(index, item)}
+								{:else}
+									{@render HistoryRow(index, item)}
+								{/if}
+							{/each}
+						</ul>
 					{:else}
-						<div class="col-span-full grid h-12 items-center justify-items-center m-4">
+						<!-- No results -->
+						<div class="col-span-full m-4 grid h-12 items-center justify-items-center">
 							{#if searchValue}
-								<span class="text-muted text-center col-span-full">
+								<span class="text-muted col-span-full text-center">
 									{m.common_search_no_results()}
 								</span>
 							{:else}
-								<span class="text-muted text-center col-span-full">
+								<span class="text-muted col-span-full text-center">
 									{m.common_search_instructions()}
 								</span>
 							{/if}
 						</div>
-					{/each}
+					{/if}
 				</div>
 			</Stack>
 		</div>
 	</div>
 {/if}
+
+{#snippet ResultRow(index: number, item: SearchRecord)}
+	{@const active = index === selectedIndex}
+	<li
+		class="group/row group-has-[:hover]/list:text-muted col-span-full grid h-12 grid-cols-subgrid items-center justify-items-start rounded-lg focus:outline-none group-has-[:hover]/list:bg-transparent group-has-[:hover]/list:hover:bg-mineShaft-900 group-has-[:hover]/list:hover:text-mineShaft-50 data-[active=true]:bg-mineShaft-900 data-[active=true]:text-mineShaft-50"
+		data-active={active}
+	>
+		<Result {active} record={item} onclick={closeSearch} />
+
+		<a
+			href={item.url}
+			onclick={closeSearch}
+			data-active={active}
+			class="hidden size-12 place-items-center text-mineShaft-50 group-hover/row:grid data-[active=true]:grid group-has-[:hover]/list:data-[active=true]:hidden group-has-[:hover]/list:group-hover/row:data-[active=true]:grid"
+		>
+			<ArrowRight />
+		</a>
+	</li>
+{/snippet}
+
+{#snippet HistoryRow(index: number, item: SearchRecord)}
+	{@const active = index === selectedIndex}
+	<li
+		class="group-has-[:hover]/list:text-muted col-span-full grid h-12 grid-cols-subgrid items-center justify-items-start rounded-lg focus:outline-none group-has-[:hover]/list:bg-transparent group-has-[:hover]/list:hover:bg-mineShaft-900 group-has-[:hover]/list:hover:text-mineShaft-50 data-[active=true]:bg-mineShaft-900 data-[active=true]:text-mineShaft-50"
+		data-active={active}
+	>
+		<Result {active} record={item} onclick={closeSearch} />
+
+		<button
+			class="text-muted grid size-12 place-items-center justify-self-end hover:text-white focus-visible:outline-none focus-visible:ring focus-visible:ring-inset focus-visible:ring-solar-500"
+			onclick={() => searchHistory.remove(index)}
+		>
+			<X class="text-inherit" />
+		</button>
+	</li>
+{/snippet}

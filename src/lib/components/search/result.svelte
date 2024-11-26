@@ -9,13 +9,15 @@
 	interface ResultProps extends ComponentProps<typeof TextInput> {
 		record: SearchRecord;
 		onclick: (event: MouseEvent) => void;
+		active?: boolean;
 	}
 
-	let { record, onclick }: ResultProps = $props();
+	let { record, onclick, active }: ResultProps = $props();
 </script>
 
 <a
-	class="grid grid-cols-subgrid items-center focus-visible:outline-none focus-visible:ring focus-visible:ring-inset focus-visible:ring-solar-500 sm:col-span-2"
+	data-active={active}
+	class="grid select-none grid-cols-subgrid items-center focus-visible:outline-none focus-visible:ring focus-visible:ring-inset focus-visible:ring-solar-500 sm:col-span-2"
 	href={record.url}
 	{onclick}
 >
@@ -42,7 +44,10 @@
 		{/if}
 	</div>
 
-	<span class="align-center text-muted hidden text-base font-medium capitalize sm:block">
+	<span
+		data-active={active}
+		class="align-center hidden text-base font-medium capitalize text-inherit sm:block"
+	>
 		{#if record.description}
 			{record.description}
 		{:else}
