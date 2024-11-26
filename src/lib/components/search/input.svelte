@@ -153,28 +153,22 @@
 		searchValue = '';
 	}
 
-	function getShortcutKey(): 'Ctrl + K' | '⌘ + K' | '/' | undefined {
+	function getShortcutKey(): '⌘ + K' | '/' | undefined {
 		if (!browser || !('navigator' in window)) {
 			return;
 		}
 
-		if (/firefox/i.test(navigator.userAgent)) {
-			return '/';
-		}
-
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		if ((window.navigator as any).userAgentData) {
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			const { platform } = (window.navigator as any).userAgentData;
-			if (platform.startsWith('win')) return 'Ctrl + K';
 			if (platform.startsWith('mac')) return '⌘ + K';
-			if (platform.startsWith('linux')) return 'Ctrl + K';
 		} else {
 			// Fallback for older browsers
-			const { userAgent } = navigator;
-			if (userAgent.indexOf('Win') != -1) return 'Ctrl + K';
-			if (userAgent.indexOf('Mac') != -1) return '⌘ + K';
-			if (userAgent.indexOf('X11') != -1) return 'Ctrl + K';
-			if (userAgent.indexOf('Linux') != -1) return 'Ctrl + K';
+			if (navigator.userAgent.indexOf('Mac') != -1) return '⌘ + K';
 		}
+
+		return '/';
 	}
 
 	const shortcutKey = getShortcutKey();
