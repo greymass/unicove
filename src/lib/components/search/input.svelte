@@ -19,7 +19,6 @@
 	} from '$lib/state/search.svelte';
 	import SearchIcon from 'lucide-svelte/icons/search';
 	import X from 'lucide-svelte/icons/x';
-	import Button from '$lib/components/button/button.svelte';
 	import { Stack } from '$lib/components/layout';
 	import { cn } from '$lib/utils';
 	import Result from './result.svelte';
@@ -254,8 +253,8 @@ data-[active=true]:ring-solar-500
 				start: 0.95
 			}}
 		>
-			<Stack>
-				<form class="flex flex-col gap-4" onsubmit={preventDefault(goToResult)}>
+			<Stack class="gap-4">
+				<form class="flex flex-col gap-2" onsubmit={preventDefault(goToResult)}>
 					<div class="relative">
 						<input
 							type="text"
@@ -264,42 +263,46 @@ data-[active=true]:ring-solar-500
 							autocapitalize="off"
 							bind:this={ref}
 							bind:value={searchValue}
-							placeholder="Enter an account, transaction, key, or block..."
+							placeholder="Unicove Search"
 							class="w-full rounded-lg border-2 border-skyBlue-500 bg-transparent p-4 focus:outline-none"
 						/>
-
 						<div
 							class="text-muted absolute inset-y-1 right-4 hidden place-items-center bg-mineShaft-950 sm:grid"
 						>
 							<SearchIcon class="size-5 " />
 						</div>
 					</div>
-
-					<div class="flex gap-2">
-						<Button variant="secondary" meltAction={close}>Close</Button>
-						<Button variant="primary" type="submit">Search</Button>
-					</div>
 				</form>
 
-				<div class="px-2">
-					<div class="table-styles grid grid-cols-[1fr_auto] gap-x-4 sm:grid-cols-[1fr_1fr_auto]">
+				<div class="table-styles grid grid-cols-[1fr_auto] gap-x-4 sm:grid-cols-[1fr_1fr_auto]">
+					{#if results.length > 0}
 						<div class="table-head-styles col-span-full grid grid-cols-subgrid">
 							{#if searchValue}
-								<span class="pl-2">Search Results</span>
+								<span class="pl-2">{m.common_search_results()}</span>
 							{:else}
-								<span class="pl-2">Recent Activity</span>
+								<span class="pl-2">{m.common_recent_activity()}</span>
 							{/if}
-							<span class="hidden sm:block">Action</span>
-							<button class="justify-self-end" onclick={() => searchHistory.clear()}>Clear</button>
+							<span class="hidden sm:block">{m.common_action()}</span>
+							<button class="justify-self-end" onclick={() => searchHistory.clear()}
+								>{m.common_clear()}</button
+							>
 						</div>
-						{#each results as item, index}
-							{@render ResultRow(index, item)}
-						{:else}
-							<div class="col-span-full grid h-12 items-center justify-items-center">
-								<span class="text-muted text-center col-span-full"> No results found </span>
-							</div>
-						{/each}
-					</div>
+					{/if}
+					{#each results as item, index}
+						{@render ResultRow(index, item)}
+					{:else}
+						<div class="col-span-full grid h-12 items-center justify-items-center m-4">
+							{#if searchValue}
+								<span class="text-muted text-center col-span-full">
+									{m.common_search_no_results()}
+								</span>
+							{:else}
+								<span class="text-muted text-center col-span-full">
+									{m.common_search_instructions()}
+								</span>
+							{/if}
+						</div>
+					{/each}
 				</div>
 			</Stack>
 		</div>
