@@ -27,10 +27,12 @@
 
 	<div class="flex items-center justify-between">
 		<Stack class="gap-1">
-			<Label for="advanced-mode">Remain on current page when switching accounts</Label>
+			<Label for="prevent-account-page-switching"
+				>Remain on current page when switching accounts</Label
+			>
 			<p class="caption text-sm">Prevents automatic navigation to the account overview page</p>
 		</Stack>
-		<Switch id="advanced-mode" bind:checked={preventAccountPageSwitching.value} />
+		<Switch id="prevent-account-page-switching" bind:checked={preventAccountPageSwitching.value} />
 	</div>
 
 	<div class="flex items-center justify-between">
