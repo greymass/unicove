@@ -20,11 +20,7 @@
 	const context = getContext<UnicoveContext>('state');
 
 	const isCurrentUser = $derived(
-		context.account &&
-			context.account.name &&
-			data.account &&
-			data.account.name &&
-			data.account.name.equals(context.account.name)
+		(context.account?.name && data.account.name?.equals(context.account.name)) || false
 	);
 
 	const accountValue = $derived(data.account.value?.total);
@@ -47,12 +43,6 @@
 	const cpuAvailable = $derived(data.account.cpu?.available);
 	const netAvailable = $derived(data.account.net?.available);
 </script>
-
-{#snippet tableAction([text, href]: string[])}
-	<td class="text-right">
-		<a class="text-skyBlue-500 hover:text-skyBlue-400" {href}>{text}</a>
-	</td>
-{/snippet}
 
 <!-- What gets shown on this page if data.account doesn't exist? -->
 {#if data.account}
@@ -82,26 +72,28 @@
 					</Chip>
 				</Stack>
 
-				<Breakdown>
+				<Breakdown {isCurrentUser}>
 					<BreakdownRow
 						key="Available"
 						value={tokenAvailable}
-						shouldShowAction={isCurrentUser}
-						action={{ text: 'Send', href: `/${data.network}/send` }}
+						action={{ text: 'Send', href: `/${data.network}/send`, visible: isCurrentUser }}
 					/>
+
 					<BreakdownRow
 						key="Staked"
 						value={tokenStaked}
-						shouldShowAction={isCurrentUser}
-						action={{ text: 'Staking', href: `/${data.network}/staking` }}
+						action={{ text: 'Staking', href: `/${data.network}/staking`, visible: isCurrentUser }}
 					/>
 
 					{#if tokenUnstaked && tokenUnstaked.value > 0}
 						<BreakdownRow
 							key="Unstaked"
 							value={tokenUnstaked}
-							shouldShowAction={isCurrentUser}
-							action={{ text: 'Withdraw', href: `/${data.network}/staking/withdraw` }}
+							action={{
+								text: 'Withdraw',
+								href: `/${data.network}/staking/withdraw`,
+								visible: isCurrentUser
+							}}
 						/>
 					{/if}
 
@@ -109,8 +101,11 @@
 						<BreakdownRow
 							key="Delegated"
 							value={tokenDelegated}
-							shouldShowAction={isCurrentUser}
-							action={{ text: 'Reclaim', href: `/${data.network}/undelegate` }}
+							action={{
+								text: 'Reclaim',
+								href: `/${data.network}/undelegate`,
+								visible: isCurrentUser
+							}}
 						/>
 					{/if}
 
@@ -118,8 +113,7 @@
 						<BreakdownRow
 							key="Refunding"
 							value={tokenRefunding}
-							shouldShowAction={isCurrentUser}
-							action={{ text: 'Claim', href: `/${data.network}/refund` }}
+							action={{ text: 'Claim', href: `/${data.network}/refund`, visible: isCurrentUser }}
 						/>
 					{/if}
 
@@ -144,12 +138,11 @@
 					</Chip>
 				</Stack>
 
-				<Breakdown>
+				<Breakdown {isCurrentUser}>
 					<BreakdownRow
 						key="Available"
 						value={ramAvailable}
-						shouldShowAction={isCurrentUser}
-						action={{ text: 'RAM Market', href: `/${data.network}/ram` }}
+						action={{ text: 'RAM Market', href: `/${data.network}/ram`, visible: isCurrentUser }}
 					/>
 
 					<BreakdownRow key="Used" value={ramUsed} />
