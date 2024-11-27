@@ -1,21 +1,27 @@
 <script lang="ts">
 	import { AppWindow, ArrowLeftRight, Box, Key, UserSearch } from 'lucide-svelte';
-	import type { ComponentProps } from 'svelte';
+	import type { ComponentProps, Snippet } from 'svelte';
 
 	import { SearchRecordType, type SearchRecord } from '$lib/state/search.svelte';
-	import { truncateCenter } from '$lib/utils';
+	import { cn, truncateCenter } from '$lib/utils';
 	import type TextInput from '../input/text.svelte';
 
 	interface ResultProps extends ComponentProps<typeof TextInput> {
 		record: SearchRecord;
 		onclick: (event: MouseEvent) => void;
+		active?: boolean;
+		children?: Snippet;
 	}
 
-	let { record, onclick }: ResultProps = $props();
+	let { record, onclick, active, children, ...props }: ResultProps = $props();
 </script>
 
 <a
-	class="grid grid-cols-subgrid items-center focus-visible:outline-none focus-visible:ring focus-visible:ring-inset focus-visible:ring-solar-500 sm:col-span-2"
+	data-active={active}
+	class={cn(
+		'grid select-none grid-cols-subgrid items-center rounded-lg focus-visible:outline-none focus-visible:ring focus-visible:ring-inset focus-visible:ring-solar-500 sm:col-span-2',
+		props.class
+	)}
 	href={record.url}
 	{onclick}
 >
@@ -42,11 +48,16 @@
 		{/if}
 	</div>
 
-	<span class="align-center text-muted hidden text-base font-medium capitalize sm:block">
+	<span
+		data-active={active}
+		class="align-center hidden text-base font-medium capitalize text-inherit sm:block"
+	>
 		{#if record.description}
 			{record.description}
 		{:else}
 			View {record.type}
 		{/if}
 	</span>
+
+	{@render children?.()}
 </a>
