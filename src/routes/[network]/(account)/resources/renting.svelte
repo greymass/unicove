@@ -6,7 +6,7 @@
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import Checkbox from '$lib/components/input/checkbox.svelte';
 	import Button from '$lib/components/button/button.svelte';
-	import Transaction from '$lib/components/transaction.svelte';
+	import TransactionSummary from '$lib/components/transactionSummary.svelte';
 	import CpuAndNetResource from '$lib/components/elements/cpunetresource.svelte';
 
 	import { Checksum256, type TransactResult } from '@wharfkit/session';
@@ -130,7 +130,7 @@
 </script>
 
 {#if transactionId}
-	<div class="pb-6"><Transaction {network} {transactionId} /></div>
+	<div class="pb-6"><TransactionSummary {transactionId} /></div>
 {/if}
 
 <div class="mx-auto max-w-md space-y-3">

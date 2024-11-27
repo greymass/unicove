@@ -21,13 +21,24 @@ export const GET: RequestHandler = async ({ fetch, params }) => {
 
 	try {
 		const headers = getCacheHeaders(5);
-		const [account_data, delegated, rexbal, rexfund, balances] = await Promise.all([
+
+		const [account_data, delegated] = await Promise.all([
 			network.client.v1.chain.get_account(params.name),
-			systemContract.table('delband').all({ scope: params.name }),
-			systemContract.table('rexbal').get(params.name),
-			systemContract.table('rexfund').get(params.name),
-			loadBalances(network, params.name, fetch)
+			systemContract.table('delband').all({ scope: params.name })
 		]);
+
+		let rexbal, rexfund;
+		let balances: LightAPIBalanceRow[] = [];
+
+		if (network.supports('lightapi')) {
+			balances = await loadBalances(network, params.name, fetch);
+		}
+
+		if (network.supports('rex')) {
+			const t4 = systemContract.table('rexbal').get(params.name);
+			const t5 = systemContract.table('rexfund').get(params.name);
+			[rexbal, rexfund] = await Promise.all([t4, t5]);
+		}
 
 		// If no response from the light API, add a default balance of zero
 		if (!balances.length && chain.systemToken) {
@@ -64,7 +75,7 @@ async function loadBalances(
 ): Promise<LightAPIBalanceRow[]> {
 	const balances = [];
 	if (network.supports('lightapi')) {
-		const result = await f(`https://balances.unicove.com/api/balances/${network}/${account}`);
+		const result = await f(`https://eos.light-api.net/api/balances/${network}/${account}`);
 		const json: LightAPIBalanceResponse = await result.json();
 		balances.push(...json.balances);
 	}

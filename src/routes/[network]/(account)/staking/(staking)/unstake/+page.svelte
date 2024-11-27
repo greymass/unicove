@@ -5,7 +5,7 @@
 	import TokenCard from '$lib/components/elements/tokencard.svelte';
 	import Button from '$lib/components/button/button.svelte';
 	import Label from '$lib/components/input/label.svelte';
-	import Transaction from '$lib/components/transaction.svelte';
+	import TransactionSummary from '$lib/components/transactionSummary.svelte';
 	import Descriptionlist from '$lib/components/descriptionlist.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
@@ -27,7 +27,7 @@
 
 <Stack>
 	{#if manager.txid}
-		<Transaction network={data.network} transactionId={manager.txid} />
+		<TransactionSummary transactionId={manager.txid} />
 	{:else if manager.error}
 		<h2 class="h2">Transaction Error</h2>
 		<p>There was an error submitting your transaction.</p>

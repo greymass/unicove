@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Box, Card, Stack, Subgrid, Switcher } from '$lib/components/layout';
 	import Button from '$lib/components/button/button.svelte';
-	import { chainLogos, Chains } from '@wharfkit/common';
+	import { chainLogos } from '@wharfkit/common';
 	import Metamask from '$lib/assets/metamask.svg';
 	import EOSPriceHistory from '$lib/components/chart/eospricehistory.svelte';
 	import RamPriceHistory from '$lib/components/chart/rampricehistory.svelte';

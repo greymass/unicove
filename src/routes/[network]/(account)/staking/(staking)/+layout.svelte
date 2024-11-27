@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { Card } from '$lib/components/layout';
+	import { SingleCard } from '$lib/components/layout';
 
-	let props = $props();
+	let { children } = $props();
 </script>
 
-<Card class="flex justify-center py-6 *:max-w-md *:grow">
-	{@render props.children()}
-</Card>
+<SingleCard>
+	{@render children()}
+</SingleCard>
