@@ -6,7 +6,12 @@ import AssetInput from '$lib/components/input/asset.svelte';
 
 import { TokenBalance } from '@wharfkit/common';
 
-import { defaultQuantity, getStakableBalance, getStakedBalance, getAPR } from '$lib/utils/staking';
+import {
+	defaultQuantity,
+	getStakableBalance,
+	getAPR,
+	getUnstakableBalance
+} from '$lib/utils/staking';
 
 export class StakeManager {
 	public input: AssetInput | undefined = $state();
@@ -26,7 +31,7 @@ export class StakeManager {
 	public error: string = $state('');
 	public txid: string = $state('');
 
-	public staked: Asset = $derived(getStakedBalance(this.network, this.account));
+	public staked: Asset = $derived(getUnstakableBalance(this.network, this.account));
 	public stakable: Asset = $derived(getStakableBalance(this.network, this.account));
 	public apr: string = $derived(this.network ? getAPR(this.network) : '0');
 	public estimateYield: Asset = $derived(

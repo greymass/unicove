@@ -1,47 +1,84 @@
 <script lang="ts">
-	import { getContext, onMount } from 'svelte';
+	import { onMount, setContext, untrack } from 'svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import { Checksum256 } from '@wharfkit/antelope';
+	import { Checksum256, type NameType } from '@wharfkit/antelope';
 	import MobileNavigation from '$lib/components/navigation/mobilenavigation.svelte';
 	import SideMenuContent from '$lib/components/navigation/sidemenu.svelte';
 	import AccountSwitcher from '$lib/components/accountswitch.svelte';
 	import UnicoveLogo from '$lib/assets/unicovelogo.svelte';
-	import Search from '$lib/components/input/search.svelte';
+	import Search from '$lib/components/search/input.svelte';
 	import X from 'lucide-svelte/icons/circle-x';
 	import { chainLogos } from '@wharfkit/common';
+	import { AccountState } from '$lib/state/client/account.svelte.js';
+	import { WharfState } from '$lib/state/client/wharf.svelte.js';
+	import { NetworkState, getNetwork } from '$lib/state/network.svelte.js';
 
 	let { children, data } = $props();
 
-	const context = getContext<UnicoveContext>('state');
+	let account: AccountState | undefined = $state();
+	const wharf = new WharfState();
+
+	setContext<UnicoveContext>('state', {
+		get account() {
+			return account;
+		},
+		get network() {
+			return data.network;
+		},
+		get wharf() {
+			return wharf;
+		}
+	});
+
+	export function setAccount(
+		state: NetworkState,
+		name: NameType,
+		fetchOverride?: typeof fetch
+	): AccountState {
+		account = new AccountState(data.network, name, fetchOverride);
+		account.refresh();
+		return account;
+	}
+
+	$effect(() => {
+		const { session } = wharf;
+		untrack(() => {
+			if (session) {
+				setAccount(getNetwork(session.chain), session.actor);
+			} else {
+				account = undefined;
+			}
+		});
+	});
 
 	async function setupWharf() {
-		if (!context.wharf.sessionKit) {
-			context.wharf.init();
+		if (!wharf.sessionKit) {
+			wharf.init();
 		}
 
-		const sessions = await context.wharf.sessionKit?.getSessions();
+		const sessions = await wharf.sessionKit?.getSessions();
 		if (sessions) {
-			const lastUsedSession = context.wharf.chainsSession[String(data.network.chain.id)];
+			const lastUsedSession = wharf.chainsSession[String(data.network.chain.id)];
 			const anyValidSession =
 				sessions.length > 0
 					? sessions.find((s) => Checksum256.from(s.chain).equals(data.network.chain.id))
 					: undefined;
 			if (lastUsedSession) {
-				context.wharf.restore(lastUsedSession);
+				wharf.restore(lastUsedSession);
 			} else if (anyValidSession) {
-				context.wharf.restore(anyValidSession);
+				wharf.restore(anyValidSession);
 			} else {
-				context.wharf.reset();
+				wharf.reset();
 			}
 		}
 	}
 
 	$effect(() => {
 		const { network } = data; // Destructure to force reactivity
-		if (!context.account) {
+		if (!account) {
 			// no account loaded
 			setupWharf();
-		} else if (context.account && !context.account.network.chain.equals(network.chain)) {
+		} else if (account && !account.network.chain.equals(network.chain)) {
 			// account loaded but for a different network
 			setupWharf();
 		}
@@ -57,16 +94,14 @@
 	onMount(() => {
 		// Update account state on a set interval
 		const accountInterval = setInterval(() => {
-			if (context.account) {
-				context.account.refresh();
+			if (account) {
+				account.refresh();
 			}
 		}, ACCOUNT_UPDATE_INTERVAL);
 
 		// Update the network state on a set interval
 		const networkInterval = setInterval(() => {
-			if (context.network) {
-				context.network.refresh();
-			}
+			data.network.refresh();
 		}, NETWORK_UPDATE_INTERVAL);
 
 		// Show the banner if localStorage has no flag set
@@ -155,7 +190,7 @@
 		<div
 			class="flex items-center justify-end gap-4 sm:col-start-4 md:col-span-full md:col-start-9 md:flex-1 md:gap-4"
 		>
-			<Search network={data.network} class="max-w-48 flex-1" />
+			<Search network={data.network} class="max-w-56 flex-1" />
 
 			<AccountSwitcher network={data.network} class="" />
 		</div>
@@ -166,7 +201,7 @@
 	</aside>
 
 	<main
-		class="col-span-full col-start-1 row-start-2 grid grid-cols-subgrid content-start gap-x-4 *:col-span-full md:col-start-3 md:col-end-12 md:px-0"
+		class="col-span-full col-start-1 row-start-2 grid grid-cols-subgrid content-start gap-x-4 *:col-span-full md:col-start-3 md:col-end-13 md:px-0 lg:col-end-12"
 	>
 		{@render children()}
 	</main>

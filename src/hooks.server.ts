@@ -14,7 +14,7 @@ export function getHeaderLang(event: RequestEvent) {
 		acceptLanguage?.split(',')?.map((lang: string) => lang.split(';')[0].split('-')[0].trim()) ??
 		[];
 	for (const locale of locales) {
-		if (availableLanguageTags.find((l: string) => l.toLowerCase() === locale)) {
+		if (availableLanguageTags.find((l: string) => l.toLowerCase() === locale.toLowerCase())) {
 			return locale;
 		}
 	}
@@ -30,7 +30,7 @@ function skipRedirect(pathname: string) {
 }
 
 function isLanguage(value: string) {
-	return availableLanguageTags.find((l: string) => l.toLowerCase() === value);
+	return availableLanguageTags.find((l: string) => l.toLowerCase() === value.toLowerCase());
 }
 
 function isNetwork(value: string) {
@@ -44,9 +44,7 @@ export async function redirectHandle({ event, resolve }: HandleParams): Promise<
 		return await resolve(event);
 	}
 
-	const [, pathFirst, pathSecond, ...pathMore] = pathname
-		.split('/')
-		.map((p) => p.trim().toLowerCase());
+	const [, pathFirst, pathSecond, ...pathMore] = pathname.split('/').map((p) => p.trim());
 
 	let lang = 'en';
 	let network: string | undefined = 'eos';
