@@ -28,6 +28,7 @@ export const load: Load = async ({ fetch, params, parent }) => {
 	const title = m.block_height_numbered({ height: Number(params.number) });
 
 	return {
+		number:params.number,
 		title,
 		subtitle: String(block.timestamp),
 		block,
