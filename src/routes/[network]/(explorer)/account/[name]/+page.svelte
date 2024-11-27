@@ -11,6 +11,7 @@
 	import { getSetting } from '$lib/state/settings.svelte';
 	import ResourceCard from '$lib/components/elements/resourceCard.svelte';
 	import Button from '$lib/components/button/button.svelte';
+	import { Breakdown, BreakdownRow } from '$lib/components/breakdown';
 
 	const advancedMode = getSetting('advanced-mode', false);
 
@@ -19,11 +20,7 @@
 	const context = getContext<UnicoveContext>('state');
 
 	const isCurrentUser = $derived(
-		context.account &&
-			context.account.name &&
-			data.account &&
-			data.account.name &&
-			data.account.name.equals(context.account.name)
+		(context.account?.name && data.account.name?.equals(context.account.name)) || false
 	);
 
 	const accountValue = $derived(data.account.value?.total);
@@ -46,12 +43,6 @@
 	const cpuAvailable = $derived(data.account.cpu?.available);
 	const netAvailable = $derived(data.account.net?.available);
 </script>
-
-{#snippet tableAction([text, href]: string[])}
-	<td class="text-right">
-		<a class="text-skyBlue-500 hover:text-skyBlue-400" {href}>{text}</a>
-	</td>
-{/snippet}
 
 <!-- What gets shown on this page if data.account doesn't exist? -->
 {#if data.account}
@@ -81,73 +72,53 @@
 					</Chip>
 				</Stack>
 
-				<Stack class="gap-2">
-					<h5 class="h5">Breakdown</h5>
-					<table class="table-styles text-muted">
-						<tbody>
-							<tr>
-								<td>Available</td>
-								<td class="text-right text-white">
-									<AssetText variant="full" value={tokenAvailable} />
-								</td>
-								{#if isCurrentUser}
-									{@render tableAction(['Send', `/${data.network}/send`])}
-								{/if}
-							</tr>
-							<tr>
-								<td>Staked</td>
-								<td class="text-right text-white">
-									<AssetText variant="full" value={tokenStaked} />
-								</td>
-								{#if isCurrentUser}
-									{@render tableAction(['Staking', `/${data.network}/staking`])}
-								{/if}
-							</tr>
-							{#if tokenUnstaked && tokenUnstaked.value > 0}
-								<tr>
-									<td>Unstaked</td>
-									<td class="text-right text-white">
-										<AssetText variant="full" value={tokenUnstaked} />
-									</td>
-									{#if isCurrentUser}
-										{@render tableAction(['Withdraw', `/${data.network}/staking/withdraw`])}
-									{/if}
-								</tr>
-							{/if}
-							{#if tokenDelegated && tokenDelegated.value > 0}
-								<tr>
-									<td>Delegated</td>
-									<td class="text-right text-white">
-										<AssetText variant="full" value={tokenDelegated} />
-									</td>
-									{#if isCurrentUser}
-										{@render tableAction(['Reclaim', `/${data.network}/undelegate`])}
-									{/if}
-								</tr>
-							{/if}
-							{#if tokenRefunding && tokenRefunding.value > 0}
-								<tr>
-									<td>Refunding</td>
-									<td class="text-right text-white">
-										<AssetText variant="full" value={tokenRefunding} />
-									</td>
-									{#if isCurrentUser}
-										{@render tableAction(['Claim', `/${data.network}/refund`])}
-									{/if}
-								</tr>
-							{/if}
-							<tr class="font-semibold">
-								<td>Total</td>
-								<td class="text-right text-white">
-									<AssetText variant="full" value={tokenTotal} />
-								</td>
-								{#if isCurrentUser}
-									<td></td>
-								{/if}
-							</tr>
-						</tbody>
-					</table>
-				</Stack>
+				<Breakdown {isCurrentUser}>
+					<BreakdownRow
+						key="Available"
+						value={tokenAvailable}
+						action={{ text: 'Send', href: `/${data.network}/send`, visible: isCurrentUser }}
+					/>
+
+					<BreakdownRow
+						key="Staked"
+						value={tokenStaked}
+						action={{ text: 'Staking', href: `/${data.network}/staking`, visible: isCurrentUser }}
+					/>
+
+					{#if tokenUnstaked && tokenUnstaked.value > 0}
+						<BreakdownRow
+							key="Unstaked"
+							value={tokenUnstaked}
+							action={{
+								text: 'Withdraw',
+								href: `/${data.network}/staking/withdraw`,
+								visible: isCurrentUser
+							}}
+						/>
+					{/if}
+
+					{#if tokenDelegated && tokenDelegated.value > 0}
+						<BreakdownRow
+							key="Delegated"
+							value={tokenDelegated}
+							action={{
+								text: 'Reclaim',
+								href: `/${data.network}/undelegate`,
+								visible: isCurrentUser
+							}}
+						/>
+					{/if}
+
+					{#if tokenRefunding && tokenRefunding.value > 0}
+						<BreakdownRow
+							key="Refunding"
+							value={tokenRefunding}
+							action={{ text: 'Claim', href: `/${data.network}/refund`, visible: isCurrentUser }}
+						/>
+					{/if}
+
+					<BreakdownRow key="Total" value={tokenTotal} />
+				</Breakdown>
 			</Stack>
 		</Card>
 
@@ -167,40 +138,16 @@
 					</Chip>
 				</Stack>
 
-				<Stack class="gap-2">
-					<h5 class="h5">Breakdown</h5>
-					<table class="table-styles text-muted">
-						<tbody>
-							<tr>
-								<td>Available</td>
-								<td class="text-right text-white">
-									<AssetText value={ramAvailable} /> KB
-								</td>
-								{#if isCurrentUser}
-									{@render tableAction(['RAM Market', `/${data.network}/ram`])}
-								{/if}
-							</tr>
-							<tr>
-								<td>Used</td>
-								<td class="text-right text-white">
-									<AssetText value={ramUsed} /> KB
-								</td>
-								{#if isCurrentUser}
-									<td></td>
-								{/if}
-							</tr>
-							<tr class="font-semibold">
-								<td>Total</td>
-								<td class="text-right text-white">
-									<AssetText value={ramTotal} /> KB
-								</td>
-								{#if isCurrentUser}
-									<td></td>
-								{/if}
-							</tr>
-						</tbody>
-					</table>
-				</Stack>
+				<Breakdown {isCurrentUser}>
+					<BreakdownRow
+						key="Available"
+						value={ramAvailable}
+						action={{ text: 'RAM Market', href: `/${data.network}/ram`, visible: isCurrentUser }}
+					/>
+
+					<BreakdownRow key="Used" value={ramUsed} />
+					<BreakdownRow key="Total" value={ramTotal} />
+				</Breakdown>
 			</Stack>
 		</Card>
 
