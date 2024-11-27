@@ -9,6 +9,7 @@
 	import Search from '$lib/components/search/input.svelte';
 	import X from 'lucide-svelte/icons/circle-x';
 	import { chainLogos } from '@wharfkit/common';
+	import * as env from '$env/static/public';
 	import { AccountState } from '$lib/state/client/account.svelte.js';
 	import { WharfState } from '$lib/state/client/wharf.svelte.js';
 	import { NetworkState, getNetwork } from '$lib/state/network.svelte.js';
@@ -85,8 +86,8 @@
 	});
 
 	// Number of ms between network updates
-	const ACCOUNT_UPDATE_INTERVAL = 3_000;
-	const NETWORK_UPDATE_INTERVAL = 3_000;
+	const ACCOUNT_UPDATE_INTERVAL = Number(env.PUBLIC_ACCOUNT_UPDATE_INTERVAL) || 3_000;
+	const NETWORK_UPDATE_INTERVAL = Number(env.PUBLIC_NETWORK_UPDATE_INTERVAL) || 3_000;
 
 	// Default to not show a banner (avoids flash of banner when hidden)
 	let showBanner = $state(false);
