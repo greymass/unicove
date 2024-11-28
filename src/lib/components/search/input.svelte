@@ -30,7 +30,6 @@
 
 	interface NameInputProps extends ComponentProps<typeof TextInput> {
 		debug?: boolean;
-		network: NetworkState;
 	}
 
 	let { ref = $bindable(), debug = false, class: className }: NameInputProps = $props();
