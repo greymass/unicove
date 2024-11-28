@@ -1,27 +1,33 @@
 <script lang="ts">
-	import { onMount, setContext, untrack } from 'svelte';
-	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { Checksum256, type NameType } from '@wharfkit/antelope';
+	import { chainLogos } from '@wharfkit/common';
+	import { onMount, setContext, untrack } from 'svelte';
+	import X from 'lucide-svelte/icons/circle-x';
+
+	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import { AccountState } from '$lib/state/client/account.svelte.js';
+	import { WharfState } from '$lib/state/client/wharf.svelte.js';
+	import { NetworkState, getNetwork } from '$lib/state/network.svelte.js';
+	import { SearchRecordStorage } from '$lib/state/search.svelte.js';
+
 	import MobileNavigation from '$lib/components/navigation/mobilenavigation.svelte';
 	import SideMenuContent from '$lib/components/navigation/sidemenu.svelte';
 	import AccountSwitcher from '$lib/components/accountswitch.svelte';
 	import UnicoveLogo from '$lib/assets/unicovelogo.svelte';
 	import Search from '$lib/components/search/input.svelte';
-	import X from 'lucide-svelte/icons/circle-x';
-	import { chainLogos } from '@wharfkit/common';
-	import { AccountState } from '$lib/state/client/account.svelte.js';
-	import { WharfState } from '$lib/state/client/wharf.svelte.js';
-	import { NetworkState, getNetwork } from '$lib/state/network.svelte.js';
-	import * as env from '$env/static/public';
 
 	let { children, data } = $props();
 
 	let account: AccountState | undefined = $state();
+	const history = new SearchRecordStorage(data.network);
 	const wharf = new WharfState();
 
 	setContext<UnicoveContext>('state', {
 		get account() {
 			return account;
+		},
+		get history() {
+			return history;
 		},
 		get network() {
 			return data.network;
