@@ -42,6 +42,13 @@ export interface SearchRecord {
 
 export const SearchCommands: SearchRecord[] = [
 	{
+		value: 'RAM Market',
+		type: SearchRecordType.PAGE,
+		keywords: ['ram'],
+		description: 'Market Overview',
+		url: '/ram'
+	},
+	{
 		value: 'Buy RAM',
 		type: SearchRecordType.PAGE,
 		keywords: ['ram', 'buy'],
@@ -70,13 +77,6 @@ export const SearchCommands: SearchRecord[] = [
 		url: '/settings'
 	},
 	{
-		value: 'Stake',
-		type: SearchRecordType.PAGE,
-		keywords: ['stake'],
-		description: 'Stake tokens',
-		url: '/staking/stake'
-	},
-	{
 		value: 'Staking',
 		type: SearchRecordType.PAGE,
 		keywords: ['staking', 'stake'],
@@ -84,18 +84,11 @@ export const SearchCommands: SearchRecord[] = [
 		url: '/staking'
 	},
 	{
-		value: 'RAM Market',
+		value: 'Stake',
 		type: SearchRecordType.PAGE,
-		keywords: ['ram'],
-		description: 'Market Overview',
-		url: '/ram'
-	},
-	{
-		value: 'Resources',
-		type: SearchRecordType.PAGE,
-		keywords: ['resources', 'cpu', 'net', 'powerup'],
-		description: 'Manage CPU/NET',
-		url: '/resources'
+		keywords: ['stake'],
+		description: 'Stake tokens',
+		url: '/staking/stake'
 	},
 	{
 		value: 'Unstake',
@@ -103,6 +96,13 @@ export const SearchCommands: SearchRecord[] = [
 		keywords: ['unstake'],
 		description: 'Unstake tokens',
 		url: '/staking/unstake'
+	},
+	{
+		value: 'Resources',
+		type: SearchRecordType.PAGE,
+		keywords: ['resources', 'cpu', 'net', 'powerup'],
+		description: 'Manage CPU/NET',
+		url: '/resources'
 	}
 ];
 
