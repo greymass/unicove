@@ -2,7 +2,6 @@
 	import { getContext, type ComponentProps } from 'svelte';
 	import { createDialog, melt, type CreateDialogProps } from '@melt-ui/svelte';
 	import type TextInput from '../input/text.svelte';
-	import type { NetworkState } from '$lib/state/network.svelte';
 	import { preventDefault } from '$lib/utils';
 	import { goto } from '$app/navigation';
 	import { fade, scale } from 'svelte/transition';
@@ -89,7 +88,7 @@
 
 	// Build the dialog element
 	const {
-		elements: { trigger, portalled, overlay, content, close },
+		elements: { trigger, portalled, overlay, content },
 		states: { open }
 	} = createDialog({
 		forceVisible: true,
