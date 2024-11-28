@@ -1,10 +1,11 @@
 <script lang="ts">
-	import { MultiCard, Stack, Card } from '$lib/components/layout';
+	import { Card, Cluster } from '$lib/components/layout';
 	import TransactionElement from '$lib/components/elements/transaction.svelte';
 	import { Transaction } from '@wharfkit/antelope';
 	import Button from '$lib/components/button/button.svelte';
 	import ArrowRightLeft from 'lucide-svelte/icons/arrow-right-left';
 	import ChevronRight from 'lucide-svelte/icons/chevron-right';
+	import { truncateCenter } from '$lib/utils';
 
 	const { data } = $props();
 
@@ -36,7 +37,7 @@
 	});
 </script>
 
-<MultiCard class="@2xl:columns-1 @4xl:columns-2 ">
+<div class="gap-6 *:mb-6 *:w-full *:break-inside-avoid last:*:mb-0 @4xl:columns-2">
 	<Card class="text-muted gap-0 bg-transparent py-0">
 		<div class="flex items-center gap-2 py-2 text-white">
 			<ArrowRightLeft class="size-4" />
@@ -52,25 +53,40 @@
 		</div>
 
 		<div>
-			{#each data.block.transactions as transaction}
-				{#if transaction}
-					<div
-						class="table-row-border table-row-background group grid grid-cols-[1.5fr,1fr,1fr,1fr,0.5fr] py-3"
-					>
-						<div>
-							<TransactionElement id={transaction.trx.id} />
-						</div>
-						<div>
-							{transaction.trx.transaction.actions.length}
-						</div>
-						<div>{transaction.cpu_usage_us} μs</div>
-						<div>{transaction.net_usage_words * 8} Bytes</div>
-						<div class="flex items-center justify-center text-white">
-							<ChevronRight class="size-6 group-hover:stroke-skyBlue-500" />
-						</div>
-					</div>
-				{/if}
-			{/each}
+			{#if totalTransactionCount}
+				{#each data.block.transactions as transaction}
+					{#if transaction}
+						<a
+							href="/{data.network}/transaction/{String(transaction.trx.id)}"
+							class="table-row-border table-row-background group grid grid-cols-[1.5fr,1fr,1fr,1fr,0.5fr] py-3"
+						>
+							<div>
+								<span class="text-skyBlue-500 hover:text-skyBlue-400"
+									>{truncateCenter(String(transaction.trx.id))}</span
+								>
+							</div>
+							<div>
+								{transaction.trx.transaction.actions.length}
+							</div>
+							<div>{transaction.cpu_usage_us} μs</div>
+							<div>{transaction.net_usage_words * 8} Bytes</div>
+							<div class="flex items-center justify-center text-white">
+								<ChevronRight class="size-6 group-hover:stroke-skyBlue-400" />
+							</div>
+						</a>
+					{/if}
+				{/each}
+			{:else}
+				<div
+					class="table-row-border table-row-background group grid grid-cols-[1.5fr,1fr,1fr,1fr,0.5fr] py-3"
+				>
+					<div>-</div>
+					<div>-</div>
+					<div>-</div>
+					<div>-</div>
+					<div></div>
+				</div>
+			{/if}
 		</div>
 	</Card>
 
@@ -97,13 +113,13 @@
 				{/each}
 			</tbody>
 		</table>
-		<div class="mt-8 flex gap-3">
+		<Cluster class="mt-8">
 			<Button href="/{data.network}/block/{Number(data.height) - 1}" variant="secondary"
 				>← Previous Block</Button
 			>
 			<Button href="/{data.network}/block/{Number(data.height) + 1}" variant="secondary"
 				>Next Block →</Button
 			>
-		</div>
+		</Cluster>
 	</Card>
-</MultiCard>
+</div>
