@@ -15,6 +15,8 @@ export enum SearchRecordType {
 	ACCOUNT = 'account',
 	// View a block
 	BLOCK = 'block',
+	// Clear all search history
+	CLEAR = 'clear',
 	// View a key
 	KEY = 'key',
 	// Visit a page
@@ -103,6 +105,13 @@ export const SearchCommands: SearchRecord[] = [
 		keywords: ['resources', 'cpu', 'net', 'powerup'],
 		description: 'Manage CPU/NET',
 		url: '/resources'
+	},
+	{
+		value: 'Clear',
+		type: SearchRecordType.CLEAR,
+		description: 'Clear search history',
+		keywords: ['clear', 'history'],
+		url: ''
 	}
 ];
 

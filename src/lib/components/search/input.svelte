@@ -145,6 +145,13 @@
 			return;
 		}
 
+		// Clear the search history and keep search open, resetting
+		if (result.type === SearchRecordType.CLEAR) {
+			context.history.clear();
+			searchValue = '';
+			return;
+		}
+
 		closeSearch();
 
 		// Switch accounts if this is a request to switch
