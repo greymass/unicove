@@ -8,13 +8,16 @@
 
 	const context = getContext<UnicoveContext>('state');
 
-	const settings = context.settings.data;
+	let preventAccountPageSwitching = $state(!!context.settings.data.preventAccountPageSwitching);
+	let advancedMode = $state(!!context.settings.data.advancedMode);
+	let debugMode = $state(!!context.settings.data.debugMode);
 
 	$effect(() => {
 		context.settings.data = {
-			...settings,
+			advancedMode,
+			preventAccountPageSwitching,
 			// Override debug mode if advanced mode is disabled
-			debugMode: settings.advancedMode ? settings.debugMode : false
+			debugMode: advancedMode ? debugMode : false
 		};
 	});
 </script>
@@ -35,10 +38,7 @@
 			>
 			<p class="caption text-sm">Prevents automatic navigation to the account overview page</p>
 		</Stack>
-		<Switch
-			id="prevent-account-page-switching"
-			bind:checked={settings.preventAccountPageSwitching as boolean}
-		/>
+		<Switch id="prevent-account-page-switching" bind:checked={preventAccountPageSwitching} />
 	</div>
 
 	<div class="flex items-center justify-between">
@@ -48,16 +48,16 @@
 				View Resources tab, enable enhanced asset precision, debug, and more
 			</p>
 		</Stack>
-		<Switch id="advanced-mode" bind:checked={settings.advancedMode as boolean} />
+		<Switch id="advanced-mode" bind:checked={advancedMode} />
 	</div>
 
-	{#if settings.advancedMode}
+	{#if advancedMode}
 		<div class="flex items-center justify-between">
 			<Stack class="gap-1">
 				<Label for="debug-mode">Enable Debug Mode</Label>
 				<p class="caption text-sm">Show raw data used for development and debugging</p>
 			</Stack>
-			<Switch id="debug-mode" bind:checked={settings.debugMode as boolean} />
+			<Switch id="debug-mode" bind:checked={debugMode} />
 		</div>
 	{/if}
 </div>
