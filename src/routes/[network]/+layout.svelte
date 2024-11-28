@@ -3,6 +3,10 @@
 	import { chainLogos } from '@wharfkit/common';
 	import { onMount, setContext, untrack } from 'svelte';
 	import X from 'lucide-svelte/icons/circle-x';
+	import {
+		PUBLIC_ACCOUNT_UPDATE_INTERVAL,
+		PUBLIC_NETWORK_UPDATE_INTERVAL
+	} from '$env/static/public';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { AccountState } from '$lib/state/client/account.svelte.js';
@@ -97,8 +101,8 @@
 	});
 
 	// Number of ms between network updates
-	const ACCOUNT_UPDATE_INTERVAL = Number(env.PUBLIC_ACCOUNT_UPDATE_INTERVAL) || 3_000;
-	const NETWORK_UPDATE_INTERVAL = Number(env.PUBLIC_NETWORK_UPDATE_INTERVAL) || 3_000;
+	const ACCOUNT_UPDATE_INTERVAL = Number(PUBLIC_ACCOUNT_UPDATE_INTERVAL) || 3_000;
+	const NETWORK_UPDATE_INTERVAL = Number(PUBLIC_NETWORK_UPDATE_INTERVAL) || 3_000;
 
 	// Default to not show a banner (avoids flash of banner when hidden)
 	let showBanner = $state(false);
