@@ -5,10 +5,13 @@
 	import { Stack } from '$lib/components/layout';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
+	import Code from '$lib/components/code.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 
 	let preventAccountPageSwitching = $state(!!context.settings.data.preventAccountPageSwitching);
+	let searchAccountSwitch = $state(!!context.settings.data.searchAccountSwitch);
+	let searchShowPages = $state(!!context.settings.data.searchShowPages);
 	let advancedMode = $state(!!context.settings.data.advancedMode);
 	let debugMode = $state(!!context.settings.data.debugMode);
 
@@ -16,6 +19,8 @@
 		context.settings.data = {
 			advancedMode,
 			preventAccountPageSwitching,
+			searchAccountSwitch,
+			searchShowPages,
 			// Override debug mode if advanced mode is disabled
 			debugMode: advancedMode ? debugMode : false
 		};
@@ -33,6 +38,22 @@
 			<!-- <p class="caption text-sm">Choose a language</p> -->
 		</Stack>
 		<LanguageSelect />
+	</div>
+
+	<div class="flex items-center justify-between">
+		<Stack class="gap-1">
+			<Label for="prevent-account-page-switching">Allow page navigation in search prompt</Label>
+			<p class="caption text-sm">Adds popular Unicove pages to search results.</p>
+		</Stack>
+		<Switch id="prevent-account-page-switching" bind:checked={searchShowPages} />
+	</div>
+
+	<div class="flex items-center justify-between">
+		<Stack class="gap-1">
+			<Label for="prevent-account-page-switching">Allow account switching in search prompt</Label>
+			<p class="caption text-sm">Adds logged in accounts to search results for quick switching.</p>
+		</Stack>
+		<Switch id="prevent-account-page-switching" bind:checked={searchAccountSwitch} />
 	</div>
 
 	<div class="flex items-center justify-between">
@@ -70,3 +91,6 @@
 		</div>
 	{/if}
 </div>
+{#if debugMode}
+	<Code>{JSON.stringify(context.settings.data, null, 2)}</Code>
+{/if}

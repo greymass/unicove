@@ -3,7 +3,9 @@ import { browser } from '$app/environment';
 export enum SettingKeys {
 	'advancedMode' = 'advancedMode',
 	'debugMode' = 'debugMode',
-	'preventAccountPageSwitching' = 'preventAccountPageSwitching'
+	'preventAccountPageSwitching' = 'preventAccountPageSwitching',
+	'searchAccountSwitch' = 'searchAccountSwitch',
+	'searchShowPages' = 'searchShowPages'
 }
 
 export type SettingsData = Record<SettingKeys, unknown>;
@@ -12,7 +14,9 @@ export class SettingsState {
 	data = $state<SettingsData>({
 		advancedMode: false,
 		debugMode: false,
-		preventAccountPageSwitching: false
+		preventAccountPageSwitching: false,
+		searchAccountSwitch: false,
+		searchShowPages: true
 	});
 
 	constructor() {

@@ -116,20 +116,25 @@ export const SearchCommands: SearchRecord[] = [
 ];
 
 export function search(context: UnicoveContext, query: string): SearchRecord[] {
-	// Listing of the currently logged in accounts for quick switching
-	const accounts = searchAccounts(query, context.network, context.wharf);
+	const results: SearchRecord[] = [];
 
-	// Suggestions based on the input
-	const suggestions = searchSuggestions(query, context.network);
+	// Listing of the currently logged in accounts for quick switching
+	if (context.settings.data.searchAccountSwitch) {
+		results.push(...searchAccounts(query, context.network, context.wharf));
+	}
+
+	// Page suggestions based on the input
+	if (context.settings.data.searchShowPages) {
+		results.push(...searchCommands(query, context.network));
+	}
 
 	// Search commands for matching keywords
-	const commands = searchCommands(query, context.network);
+	results.push(...searchSuggestions(query, context.network));
 
 	// Search recent history
-	const recent = searchHistory(query, context.history);
+	results.push(...searchHistory(query, context.history));
 
-	// Combine and return
-	return [...accounts, ...commands, ...suggestions, ...recent];
+	return results;
 }
 
 export function searchAccounts(
