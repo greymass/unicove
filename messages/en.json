@@ -56,6 +56,7 @@
 	"legacy_key": "Legacy Key",
 	"loading_accounts": "Loading accounts...",
 	"no_accounts_found": "No accounts found",
+	"search_view_type": "View {type}",
 	"send_amount_to_send": "Amount to send",
 	"send_enter_amount": "Enter the amount of {token} to send",
 	"send_memo_placeholder": "Specify a public memo for this transfer (optional)",

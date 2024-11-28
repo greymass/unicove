@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { AppWindow, ArrowLeftRight, Box, Boxes, Key, UserSearch } from 'lucide-svelte';
 	import type { ComponentProps, Snippet } from 'svelte';
+	import * as m from '$lib/paraglide/messages';
 
 	import { SearchRecordType, type SearchRecord } from '$lib/state/search.svelte';
 	import { cn, truncateCenter } from '$lib/utils';
@@ -58,7 +59,7 @@
 		{#if record.description}
 			{record.description}
 		{:else}
-			View {record.type}
+			{m.search_view_type({ type: record.type })}
 		{/if}
 	</span>
 
