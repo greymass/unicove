@@ -23,7 +23,7 @@
 				tx: { cpu_usage_us: number; net_usage_words: number; trx: { transaction: Transaction } }
 			) => {
 				acc.cpuCount += tx.cpu_usage_us;
-				acc.netCount += tx.net_usage_words;
+				acc.netCount += tx.net_usage_words * 8;
 				acc.actionCount += tx.trx.transaction ? tx.trx.transaction.actions.length : 0;
 				return acc;
 			},

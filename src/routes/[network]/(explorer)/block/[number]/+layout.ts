@@ -1,6 +1,7 @@
 import type { Load } from '@sveltejs/kit';
 import * as m from '$lib/paraglide/messages.js';
 import { TimePointSec, Transaction } from '@wharfkit/antelope';
+import { languageTag } from '$lib/paraglide/runtime';
 
 export const load: Load = async ({ fetch, params, parent }) => {
 	const { network } = await parent();
@@ -17,10 +18,11 @@ export const load: Load = async ({ fetch, params, parent }) => {
 		},
 		0
 	);
+	const date = TimePointSec.from(block.timestamp).toDate();
 	const description = m.block_height_numbered_description({
 		height: String(params.number),
 		producer: block.producer,
-		timestamp: TimePointSec.from(block.timestamp).toDate(),
+		timestamp: date,
 		transactions: block.transactions.length,
 		actions
 	});
@@ -28,9 +30,9 @@ export const load: Load = async ({ fetch, params, parent }) => {
 	const title = m.block_height_numbered({ height: Number(params.number) });
 
 	return {
-		number:params.number,
+		number: params.number,
 		title,
-		subtitle: String(block.timestamp),
+		subtitle: date.toLocaleString(languageTag()),
 		block,
 		network: params.network,
 		height: Number(params.number),
