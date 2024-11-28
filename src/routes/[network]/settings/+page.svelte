@@ -24,6 +24,10 @@
 
 <div class="grid max-w-screen-sm auto-rows-fr gap-6">
 	<div class="flex items-center justify-between">
+		<h2 class="text-muted text-xl font-semibold">General</h2>
+	</div>
+
+	<div class="flex items-center justify-between">
 		<Stack class="gap-1">
 			<Label for="language-select">Language Selector</Label>
 			<!-- <p class="caption text-sm">Choose a language</p> -->
@@ -36,22 +40,27 @@
 			<Label for="prevent-account-page-switching"
 				>Remain on current page when switching accounts</Label
 			>
-			<p class="caption text-sm">Prevents automatic navigation to the account overview page</p>
+			<p class="caption text-sm">Prevents the automatic navigation to the account overview page</p>
 		</Stack>
 		<Switch id="prevent-account-page-switching" bind:checked={preventAccountPageSwitching} />
 	</div>
 
 	<div class="flex items-center justify-between">
+		<h2 class="text-muted text-xl font-semibold">Advanced</h2>
+	</div>
+
+	<div class="flex items-center justify-between">
 		<Stack class="gap-1">
-			<Label for="advanced-mode">Enable Advanced Mode</Label>
-			<p class="caption text-sm">
-				View Resources tab, enable enhanced asset precision, debug, and more
-			</p>
+			<Label for="advanced-mode">Enable Advanced Options</Label>
+			<p class="caption text-sm">Manage network resources, enhanced asset precision, etc.</p>
 		</Stack>
 		<Switch id="advanced-mode" bind:checked={advancedMode} />
 	</div>
 
 	{#if advancedMode}
+		<div class="flex items-center justify-between">
+			<h2 class="text-muted text-xl font-semibold">Developer</h2>
+		</div>
 		<div class="flex items-center justify-between">
 			<Stack class="gap-1">
 				<Label for="debug-mode">Enable Debug Mode</Label>

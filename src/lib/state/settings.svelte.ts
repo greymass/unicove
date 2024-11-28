@@ -1,14 +1,19 @@
 import { browser } from '$app/environment';
 
-export interface SettingsEntry {
-	key: string;
-	value: unknown;
+export enum SettingKeys {
+	'advancedMode' = 'advancedMode',
+	'debugMode' = 'debugMode',
+	'preventAccountPageSwitching' = 'preventAccountPageSwitching'
 }
 
-export type SettingsData = Record<string, unknown>;
+export type SettingsData = Record<SettingKeys, unknown>;
 
 export class SettingsState {
-	data = $state<SettingsData>({});
+	data = $state<SettingsData>({
+		advancedMode: false,
+		debugMode: false,
+		preventAccountPageSwitching: false
+	});
 
 	constructor() {
 		if (browser) {
@@ -20,7 +25,7 @@ export class SettingsState {
 		});
 	}
 
-	get<T>(key: string, value: T) {
+	get<T>(key: SettingKeys, value: T) {
 		if (!this.data[key]) {
 			return value;
 		}

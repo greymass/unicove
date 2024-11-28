@@ -142,7 +142,7 @@ export function searchAccounts(
 		.filter((s) => String(s.actor).includes(query.trim().toLowerCase()))
 		.map((s) => ({
 			data: s,
-			description: `Switch Account`, // TODO: Update description based on whether this will navigate or not, needs preventAccountPageSwitch variable to be in context
+			description: `Switch Account`,
 			type: SearchRecordType.SWITCH,
 			value: `${s.actor}@${s.permission}`,
 			url: `/${network}/account/${s.actor}`

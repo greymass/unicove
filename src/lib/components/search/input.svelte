@@ -159,7 +159,7 @@
 		if ([SearchRecordType.SWITCH].includes(result.type)) {
 			context.wharf.switch(result.data as SerializedSession);
 			// Navigate if needed
-			if (!context.settings.data.preventAccountPageSwitch) {
+			if (!context.settings.data.preventAccountPageSwitching) {
 				goto(`/${languageTag()}${result.url}`);
 			}
 			return;

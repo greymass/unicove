@@ -41,7 +41,7 @@
 
 	function switchSession(session: SerializedSession) {
 		context.wharf.switch(session);
-		if (!context.settings.data.preventAccountPageSwitch) {
+		if (!context.settings.data.preventAccountPageSwitching) {
 			goto(`/${languageTag()}/${network}/account/${session.actor}`);
 		}
 		closeDrawer();
