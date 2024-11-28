@@ -20,7 +20,6 @@
 	let pathname = $derived($page.url.pathname.split('/'));
 
 	const destinations = $derived.by(() => {
-		console.log('sidebar', context.settings.data.advancedMode);
 		const items = [
 			// {
 			// 	href: `/${network}`,
