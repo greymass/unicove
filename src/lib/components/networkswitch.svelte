@@ -11,7 +11,6 @@
 	import { goto } from '$app/navigation';
 	import { languageTag } from '$lib/paraglide/runtime';
 	import type { NetworkState } from '$lib/state/network.svelte';
-	import { getSetting } from '$lib/state/settings.svelte';
 
 	interface Props {
 		currentNetwork: NetworkState;
@@ -19,8 +18,6 @@
 	}
 
 	const context = getContext<UnicoveContext>('state');
-
-	const advancedMode = getSetting('advanced-mode', false).value;
 
 	let currentSession = $derived(context.wharf.session);
 
@@ -61,12 +58,12 @@
 	id="network-switcher"
 	class={cn(
 		'flex items-center gap-3 rounded-2xl px-4 py-3.5  focus:bg-mineShaft-950 focus:outline-none',
-		advancedMode && 'hover:bg-mineShaft-950',
+		!!context.settings.data.advancedMode && 'hover:bg-mineShaft-950',
 		className
 	)}
 	use:melt={$trigger}
 	{...props}
-	disabled={!advancedMode}
+	disabled={!context.settings.data.advancedMode}
 >
 	<picture class="flex size-10 justify-center">
 		{#if logo}
@@ -85,7 +82,7 @@
 			>{currentNetwork.chain.name}</span
 		>
 
-		{#if advancedMode}
+		{#if context.settings.data.advancedMode}
 			<div class="font-regular m-0 flex items-center gap-1 pr-1 text-base text-zinc-400">
 				<span use:melt={$label}>Change network</span>
 				<ChevronDown

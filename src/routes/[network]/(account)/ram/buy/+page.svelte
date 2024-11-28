@@ -2,7 +2,6 @@
 	import { getContext } from 'svelte';
 	import { Checksum256 } from '@wharfkit/antelope';
 
-	import { getSetting } from '$lib/state/settings.svelte.js';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 
 	import SummaryBuyRAMBytes from '$lib/components/summary/eosio/buyrambytes.svelte';
@@ -27,7 +26,6 @@
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
-	const debugMode = getSetting('debug-mode', true);
 
 	const buyRamState: BuyRAMState = $state(new BuyRAMState(data.network.chain));
 	const ramAvailableSize = $derived(calAvailableSize(context.account?.ram));
@@ -170,7 +168,7 @@
 			{/if}
 		</Stack>
 
-		{#if debugMode.value}
+		{#if context.settings.data.debugMode}
 			<h3 class="h3">Debugging</h3>
 			<Code
 				>{JSON.stringify(

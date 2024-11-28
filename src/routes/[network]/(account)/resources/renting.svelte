@@ -12,7 +12,6 @@
 	import { Checksum256, type TransactResult } from '@wharfkit/session';
 
 	import { getContext } from 'svelte';
-	import { getSetting } from '$lib/state/settings.svelte.js';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
 	import type { AccountState } from '$lib/state/client/account.svelte';
@@ -23,7 +22,6 @@
 	import { getCpuAndNetPrice, getPowerupFrac, type RentType } from './utils';
 
 	const context = getContext<UnicoveContext>('state');
-	const debugMode = getSetting('debug-mode', false);
 
 	interface Props {
 		rentType: RentType;
@@ -210,7 +208,7 @@
 		</ul>
 	</Stack>
 </div>
-{#if debugMode.value}
+{#if context.settings.data.debugMode}
 	<div class="mx-auto mt-6 max-w-md border-2 border-skyBlue-500 p-6">
 		<h3 class="h3 text-center">Debug Info</h3>
 		<table class="table-styles">

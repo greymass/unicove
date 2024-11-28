@@ -7,15 +7,6 @@
 	import { getContext } from 'svelte';
 
 	const context = getContext<UnicoveContext>('state');
-	const settings = context.settings.data;
-
-	$effect(() => {
-		context.settings.data = {
-			...settings,
-			// Override debug mode if advanced mode is disabled
-			debugMode: settings.advancedMode ? settings.debugMode : false
-		};
-	});
 </script>
 
 <div class="grid max-w-screen-sm auto-rows-fr gap-6">
@@ -36,7 +27,7 @@
 		</Stack>
 		<Switch
 			id="prevent-account-page-switching"
-			bind:checked={settings.preventAccountPageSwitching as boolean}
+			bind:checked={context.settings.data.preventAccountPageSwitching as boolean}
 		/>
 	</div>
 
@@ -47,16 +38,16 @@
 				View Resources tab, enable enhanced asset precision, debug, and more
 			</p>
 		</Stack>
-		<Switch id="advanced-mode" bind:checked={settings.advancedMode as boolean} />
+		<Switch id="advanced-mode" bind:checked={context.settings.data.advancedMode as boolean} />
 	</div>
 
-	{#if settings.advancedMode}
+	{#if context.settings.data.advancedMode}
 		<div class="flex items-center justify-between">
 			<Stack class="gap-1">
 				<Label for="debug-mode">Enable Debug Mode</Label>
 				<p class="caption text-sm">Show raw data used for development and debugging</p>
 			</Stack>
-			<Switch id="debug-mode" bind:checked={settings.debugMode as boolean} />
+			<Switch id="debug-mode" bind:checked={context.settings.data.debugMode as boolean} />
 		</div>
 	{/if}
 </div>
