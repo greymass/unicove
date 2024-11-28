@@ -8,12 +8,9 @@
 	import TradingPair from '$lib/components/elements/tradingpair.svelte';
 	import Chip from '$lib/components/chip.svelte';
 	import Tokendistribution from '$lib/components/chart/tokendistribution.svelte';
-	import { getSetting } from '$lib/state/settings.svelte';
 	import ResourceCard from '$lib/components/elements/resourceCard.svelte';
 	import Button from '$lib/components/button/button.svelte';
 	import { Breakdown, BreakdownRow } from '$lib/components/breakdown';
-
-	const advancedMode = getSetting('advanced-mode', false);
 
 	const { data } = $props();
 
@@ -153,7 +150,7 @@
 
 		<Tokendistribution data={data.account.value} />
 
-		{#if advancedMode.value}
+		{#if context.settings.data.advancedMode}
 			<Card title="Resources">
 				<div class="flex flex-wrap gap-12 *:flex-1">
 					<ResourceCard type="cpu" value={String(cpuAvailable)} vertical />

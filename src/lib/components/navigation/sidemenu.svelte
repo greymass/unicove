@@ -5,7 +5,6 @@
 	import UnicoveLogo from '$lib/assets/unicovelogo.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
-	import { getSetting } from '$lib/state/settings.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -17,14 +16,11 @@
 
 	let { callbackFn, network, class: className }: Props = $props();
 
-	const advancedMode = getSetting('advanced-mode', false);
-
 	// Example: ['', 'en', 'eos', 'staking', 'withdraw']
 	let pathname = $derived($page.url.pathname.split('/'));
 
 	const destinations = $derived.by(() => {
-		const isAdvancedMode = advancedMode.value;
-
+		console.log('sidebar', context.settings.data.advancedMode);
 		const items = [
 			// {
 			// 	href: `/${network}`,
@@ -46,7 +42,7 @@
 			items.push({ href: `/${network}/ram`, text: 'RAM', active: pathname[3] === 'ram' });
 		}
 
-		if (isAdvancedMode) {
+		if (context.settings.data.advancedMode) {
 			items.push({
 				href: `/${network}/resources`,
 				text: 'Resources',

@@ -1,15 +1,16 @@
 <script lang="ts">
-	import { getSetting } from '$lib/state/settings.svelte';
 	import Copy from 'lucide-svelte/icons/copy';
 	import { quadIn, quartOut } from 'svelte/easing';
 	import { fade, fly } from 'svelte/transition';
 	import { browser } from '$app/environment';
+	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import { getContext } from 'svelte';
+
+	const context = getContext<UnicoveContext>('state');
 
 	interface Props {
 		data: string;
 	}
-
-	let { value: debugMode } = getSetting('debug-mode', false);
 
 	let props: Props = $props();
 
@@ -18,11 +19,11 @@
 	async function copyToClipboard() {
 		try {
 			await navigator.clipboard.writeText(props.data);
-			if (debugMode) console.log(props.data, 'copied to clipboard');
+			if (context.settings.data.debugMode) console.log(props.data, 'copied to clipboard');
 			hint = true;
 			setTimeout(() => (hint = false), 300);
 		} catch (err) {
-			if (debugMode) console.error('Failed to copy text: ', err);
+			if (context.settings.data.debugMode) console.error('Failed to copy text: ', err);
 		}
 	}
 

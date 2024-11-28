@@ -25,10 +25,8 @@
 	import { ArrowRight } from 'lucide-svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { SerializedSession } from '@wharfkit/session';
-	import { getSetting } from '$lib/state/settings.svelte';
 
 	const context = getContext<UnicoveContext>('state');
-	const { value: preventAccountPageSwitch } = getSetting('prevent-account-page-switching', false);
 
 	interface NameInputProps extends ComponentProps<typeof TextInput> {
 		debug?: boolean;
@@ -155,7 +153,7 @@
 		if ([SearchRecordType.SWITCH].includes(result.type)) {
 			context.wharf.switch(result.data as SerializedSession);
 			// Navigate if needed
-			if (!preventAccountPageSwitch) {
+			if (!context.settings.data.preventAccountPageSwitch) {
 				goto(result.url);
 			}
 			return;
