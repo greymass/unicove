@@ -1,7 +1,8 @@
 import { Name, PublicKey, UInt32, Checksum256 } from '@wharfkit/antelope';
 import { browser } from '$app/environment';
-
 import type { NetworkState } from './network.svelte';
+import type { UnicoveContext } from './client.svelte';
+import type { WharfState } from './client/wharf.svelte';
 
 export type SearchResult = {
 	result: string;
@@ -10,16 +11,27 @@ export type SearchResult = {
 };
 
 export enum SearchRecordType {
+	// View an account
 	ACCOUNT = 'account',
+	// View a block
 	BLOCK = 'block',
+	// Clear all search history
+	CLEAR = 'clear',
+	// View a key
 	KEY = 'key',
+	// Visit a page
 	PAGE = 'page',
+	// Switch to an account
+	SWITCH = 'switch',
+	// View a transaction
 	TRANSACTION = 'transaction',
+	// Unknown type, error?
 	UNKNOWN = 'unknown'
 }
 
 export interface SearchRecord {
 	type: SearchRecordType;
+	data?: unknown; // arbitrary data field
 	value: string;
 	keywords?: string[];
 	description?: string;
@@ -31,6 +43,13 @@ export interface SearchRecord {
 // export interface Favorite extends Record {}
 
 export const SearchCommands: SearchRecord[] = [
+	{
+		value: 'RAM Market',
+		type: SearchRecordType.PAGE,
+		keywords: ['ram'],
+		description: 'Market Overview',
+		url: '/ram'
+	},
 	{
 		value: 'Buy RAM',
 		type: SearchRecordType.PAGE,
@@ -60,13 +79,6 @@ export const SearchCommands: SearchRecord[] = [
 		url: '/settings'
 	},
 	{
-		value: 'Stake',
-		type: SearchRecordType.PAGE,
-		keywords: ['stake'],
-		description: 'Stake tokens',
-		url: '/staking/stake'
-	},
-	{
 		value: 'Staking',
 		type: SearchRecordType.PAGE,
 		keywords: ['staking', 'stake'],
@@ -74,11 +86,18 @@ export const SearchCommands: SearchRecord[] = [
 		url: '/staking'
 	},
 	{
-		value: 'RAM Market',
+		value: 'Stake',
 		type: SearchRecordType.PAGE,
-		keywords: ['ram'],
-		description: 'Market Overview',
-		url: '/ram'
+		keywords: ['stake'],
+		description: 'Stake tokens',
+		url: '/staking/stake'
+	},
+	{
+		value: 'Unstake',
+		type: SearchRecordType.PAGE,
+		keywords: ['unstake'],
+		description: 'Unstake tokens',
+		url: '/staking/unstake'
 	},
 	{
 		value: 'Resources',
@@ -88,30 +107,46 @@ export const SearchCommands: SearchRecord[] = [
 		url: '/resources'
 	},
 	{
-		value: 'Unstake',
-		type: SearchRecordType.PAGE,
-		keywords: ['unstake'],
-		description: 'Unstake tokens',
-		url: '/staking/unstake'
+		value: 'Clear',
+		type: SearchRecordType.CLEAR,
+		description: 'Clear search history',
+		keywords: ['clear', 'history'],
+		url: ''
 	}
 ];
 
-export function search(
-	query: string,
-	network: NetworkState,
-	recentHistory: RecordStorage
-): SearchRecord[] {
+export function search(context: UnicoveContext, query: string): SearchRecord[] {
+	// Listing of the currently logged in accounts for quick switching
+	const accounts = searchAccounts(query, context.network, context.wharf);
+
 	// Suggestions based on the input
-	const suggestions = searchSuggestions(query, network);
+	const suggestions = searchSuggestions(query, context.network);
 
 	// Search commands for matching keywords
-	const commands = searchCommands(query, network);
+	const commands = searchCommands(query, context.network);
 
 	// Search recent history
-	const recent = searchHistory(query, recentHistory);
+	const recent = searchHistory(query, context.history);
 
 	// Combine and return
-	return [...commands, ...suggestions, ...recent];
+	return [...accounts, ...commands, ...suggestions, ...recent];
+}
+
+export function searchAccounts(
+	query: string,
+	network: NetworkState,
+	wharf: WharfState
+): SearchRecord[] {
+	return wharf.sessions
+		.filter((s) => network.chain.id.equals(s.chain))
+		.filter((s) => String(s.actor).includes(query.trim().toLowerCase()))
+		.map((s) => ({
+			data: s,
+			description: `Switch Account`, // TODO: Update description based on whether this will navigate or not, needs preventAccountPageSwitch variable to be in context
+			type: SearchRecordType.SWITCH,
+			value: `${s.actor}@${s.permission}`,
+			url: `/${network}/account/${s.actor}`
+		}));
 }
 
 export function searchSuggestions(query: string, network: NetworkState): SearchRecord[] {
@@ -131,14 +166,64 @@ export function searchCommands(query: string, network: NetworkState): SearchReco
 	}));
 }
 
-export function searchHistory(query: string, recentHistory: RecordStorage): SearchRecord[] {
+export function searchHistory(query: string, recentHistory: SearchRecordStorage): SearchRecord[] {
 	const history = recentHistory.get();
 	return history
 		.filter((r) => r.type !== SearchRecordType.PAGE)
 		.filter((r) => r.value.includes(query.trim().toLowerCase()));
 }
 
-export class RecordStorage {
+export function getPossibleSearchTypes(value: string): SearchRecordType[] {
+	const types: SearchRecordType[] = [];
+	if (isSearchAccount(value)) types.push(SearchRecordType.ACCOUNT);
+	if (isSearchBlock(value)) types.push(SearchRecordType.BLOCK);
+	if (isSearchKey(value)) types.push(SearchRecordType.KEY);
+	if (isSearchTransaction(value)) types.push(SearchRecordType.TRANSACTION);
+	return types;
+}
+
+/* eslint-disable @typescript-eslint/no-unused-vars */
+export function isSearchKey(value: string) {
+	try {
+		PublicKey.from(value);
+		return true;
+	} catch (e) {
+		return false;
+	}
+}
+
+export function isSearchTransaction(value: string) {
+	try {
+		Checksum256.from(value);
+		return true;
+	} catch (e) {
+		return false;
+	}
+}
+
+export function isSearchAccount(value: string) {
+	try {
+		const name = Name.from(value);
+		if (value && String(name) === value) {
+			return true;
+		}
+		return false;
+	} catch (e) {
+		return false;
+	}
+}
+
+export function isSearchBlock(value: string) {
+	try {
+		UInt32.from(value);
+		return true;
+	} catch (e) {
+		return false;
+	}
+}
+/* eslint-enable @typescript-eslint/no-unused-vars */
+
+export class SearchRecordStorage {
 	private records = $state<SearchRecord[]>([]) as SearchRecord[];
 	chainId: Checksum256;
 	maxLength: number;
@@ -197,53 +282,3 @@ export class RecordStorage {
 		this.save();
 	}
 }
-
-export function getPossibleSearchTypes(value: string): SearchRecordType[] {
-	const types: SearchRecordType[] = [];
-	if (isSearchAccount(value)) types.push(SearchRecordType.ACCOUNT);
-	if (isSearchBlock(value)) types.push(SearchRecordType.BLOCK);
-	if (isSearchKey(value)) types.push(SearchRecordType.KEY);
-	if (isSearchTransaction(value)) types.push(SearchRecordType.TRANSACTION);
-	return types;
-}
-
-/* eslint-disable @typescript-eslint/no-unused-vars */
-export function isSearchKey(value: string) {
-	try {
-		PublicKey.from(value);
-		return true;
-	} catch (e) {
-		return false;
-	}
-}
-
-export function isSearchTransaction(value: string) {
-	try {
-		Checksum256.from(value);
-		return true;
-	} catch (e) {
-		return false;
-	}
-}
-
-export function isSearchAccount(value: string) {
-	try {
-		const name = Name.from(value);
-		if (value && String(name) === value) {
-			return true;
-		}
-		return false;
-	} catch (e) {
-		return false;
-	}
-}
-
-export function isSearchBlock(value: string) {
-	try {
-		UInt32.from(value);
-		return true;
-	} catch (e) {
-		return false;
-	}
-}
-/* eslint-enable @typescript-eslint/no-unused-vars */

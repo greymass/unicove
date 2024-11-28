@@ -11,7 +11,6 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
 	import { Cluster, Stack } from '$lib/components/layout/index.js';
 	import { accountCreationPluginMetamask } from '$lib/state/client/wharf.svelte';
-	import { getSetting } from '$lib/state/settings.svelte';
 	import { chainLogos } from '@wharfkit/common';
 
 	const { data } = $props();
@@ -22,7 +21,6 @@
 	let isMetaMaskSession: boolean = $derived(
 		context.wharf.session?.walletPlugin.id === 'wallet-plugin-metamask'
 	);
-	const advancedMode = getSetting('advanced-mode', false);
 
 	let currentVersion = $derived(metaMaskState.installedSnap?.version);
 	let needsUpdate = $derived(
@@ -202,7 +200,7 @@
 							</Button>
 						</Cluster>
 					{/if}
-					{#if advancedMode.value}
+					{#if context.settings.data.advancedMode}
 						<Stack class="mb-1 gap-2">
 							<p>EOS Wallet Public Key</p>
 							<p class="text-xs">{metaMaskState.publicKey}</p>

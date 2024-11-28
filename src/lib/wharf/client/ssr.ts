@@ -4,6 +4,7 @@ import { ChainDefinition, Chains } from '@wharfkit/common';
 import {
 	API_EOS_CHAIN,
 	API_EOS_HISTORY,
+	API_EOS_LIGHTAPI,
 	API_JUNGLE4_CHAIN,
 	API_JUNGLE4_HISTORY,
 	API_KYLIN_CHAIN,
@@ -58,4 +59,15 @@ export function getBackendNetwork(
 		history
 	});
 	return getNetwork(chain, { client });
+}
+
+export function getLightAPIURL(chain: ChainShortName = 'eos') {
+	switch (chain) {
+		case 'eos': {
+			return API_EOS_LIGHTAPI;
+		}
+		default: {
+			throw new Error(`Chain ${chain} does not have a light API defined`);
+		}
+	}
 }

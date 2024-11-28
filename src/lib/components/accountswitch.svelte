@@ -4,7 +4,6 @@
 	import { createDialog, melt } from '@melt-ui/svelte';
 	import { Session, type SerializedSession } from '@wharfkit/session';
 	import { chainLogos } from '@wharfkit/common';
-	import { getSetting } from '$lib/state/settings.svelte';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
@@ -20,9 +19,6 @@
 	import { languageTag } from '$lib/paraglide/runtime';
 
 	const context = getContext<UnicoveContext>('state');
-
-	const { value: preventAccountPageSwitch } = getSetting('prevent-account-page-switching', false);
-	const advancedMode = $derived(getSetting('advanced-mode', false).value);
 
 	interface PageProps {
 		class?: string;
@@ -45,7 +41,7 @@
 
 	function switchSession(session: SerializedSession) {
 		context.wharf.switch(session);
-		if (!preventAccountPageSwitch) {
+		if (!context.settings.data.preventAccountPageSwitch) {
 			goto(`/${languageTag()}/${network}/account/${session.actor}`);
 		}
 		closeDrawer();
@@ -142,13 +138,13 @@
 			}}
 		>
 			<section
-				data-advanced={advancedMode}
+				data-advanced={context.settings.data.advancedMode}
 				class="flex flex-row-reverse justify-between gap-2 data-[advanced=false]:items-center md:gap-4"
 			>
 				<button
 					use:melt={$close}
 					aria-label="Close"
-					data-advanced={advancedMode}
+					data-advanced={context.settings.data.advancedMode}
 					class="text-muted grid size-12 appearance-none place-items-center rounded-lg focus:text-white focus:outline-none md:data-[advanced=false]:pt-0 md:data-[advanced=true]:pt-2.5"
 				>
 					<X class="size-4 " />
