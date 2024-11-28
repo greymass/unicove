@@ -1,16 +1,16 @@
 import type { Load } from '@sveltejs/kit';
 import * as m from '$lib/paraglide/messages.js';
-import { TimePointSec, Transaction } from '@wharfkit/antelope';
+import { API, TimePointSec, Transaction } from '@wharfkit/antelope';
 import { languageTag } from '$lib/paraglide/runtime';
 
 export const load: Load = async ({ fetch, params, parent }) => {
 	const { network } = await parent();
 	const response = await fetch(`/${params.network}/api/block/${params.number}`);
 	const json = await response.json();
-	const block = json.block;
+	const block = json.block as API.v1.GetBlockResponse;
 	// Create metadata for the page
 	const actions = block.transactions.reduce(
-		(acc: number, tx: { trx: { transaction: Transaction } }) => {
+		(acc: number, tx: { trx: { transaction?: Transaction } }) => {
 			if (!tx.trx.transaction) {
 				return acc;
 			}
@@ -34,6 +34,7 @@ export const load: Load = async ({ fetch, params, parent }) => {
 		title,
 		subtitle: date.toLocaleString(languageTag()),
 		block,
+		actions,
 		network: params.network,
 		height: Number(params.number),
 		pageMetaTags: {

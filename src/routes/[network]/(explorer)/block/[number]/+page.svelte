@@ -7,7 +7,14 @@
 	import ChevronRight from 'lucide-svelte/icons/chevron-right';
 	import { truncateCenter } from '$lib/utils';
 
-	const { data } = $props();
+	let { data } = $props();
+
+	const details = $derived([
+		{ key: 'Block Number', value: data.block.block_num },
+		{ key: 'Producer Name', value: data.block.producer },
+		{ key: 'Total Actions', value: data.actions },
+		{ key: 'Block ID', value: data.block.id }
+	]);
 
 	const totalTransactionCount = $derived(
 		data.block.transactions.filter(
@@ -37,7 +44,7 @@
 	});
 </script>
 
-<div class="gap-6 text-nowrap *:mb-6 *:w-full *:break-inside-avoid last:*:mb-0 @4xl:columns-2">
+<MultiCard>
 	<Card class="text-muted gap-0 bg-transparent px-2 py-0 sm:px-5">
 		<div class="flex items-center gap-2 py-2 text-white">
 			<ArrowRightLeft class="size-4" />
@@ -124,4 +131,60 @@
 			>
 		</Cluster>
 	</Card>
-</div>
+</MultiCard>
+
+
+<Stack class="@container">
+	<!-- <Pillgroup /> -->
+	<MultiCard>
+		{#if data.block.transactions}
+			{@const transactions = data.block.transactions}
+			<Stack id="transactions">
+				<h2 class="h3 flex items-center gap-2">
+					<ArrowLeftRight class="size-5" />
+					{transactions.length}
+					{transactions.length > 1 ? 'Transactions' : 'Transaction'}
+				</h2>
+				<table class="table-styles">
+					<thead>
+						<tr>
+							<th>Transaction</th>
+							<th>Actions</th>
+							<th>CPU</th>
+							<th>NET</th>
+						</tr>
+					</thead>
+					<tbody>
+						{#each transactions as transaction}
+							<tr>
+								<td><Transaction id={transaction.trx.id} /></td>
+								<td>{transaction.trx.transaction?.actions.length}</td>
+								<td>{transaction.cpu_usage_us}</td>
+								<td>{transaction.net_usage_words}</td>
+							</tr>
+						{/each}
+					</tbody>
+				</table>
+			</Stack>
+		{/if}
+
+		<Stack id="details">
+			<h2 class="h3 flex items-center gap-2">Block Details</h2>
+			<Descriptionlist items={details} />
+			<Switcher>
+				{#if data.height > 1}
+					<Button variant="secondary" href="/{data.network}/block/{Number(data.height) - 1}">
+						{m.block_height_numbered({ height: Number(data.height) - 1 })}
+					</Button>
+				{/if}
+				<Button variant="secondary" href="/{data.network}/block/{Number(data.height) + 1}">
+					{m.block_height_numbered({ height: Number(data.height) + 1 })}
+				</Button>
+			</Switcher>
+		</Stack>
+
+		<Code>
+			{JSON.stringify(data.block, null, 2)}
+		</Code>
+	</MultiCard>
+</Stack>
