@@ -30,6 +30,8 @@
 	let visible = $derived(browser && 'clipboard' in navigator);
 </script>
 
+{visible}
+
 <!-- Styled as a trailing element. Will need to change it if we want to use it inline with other elements following it.  -->
 {#if browser && 'clipboard' in navigator}
 	<div
