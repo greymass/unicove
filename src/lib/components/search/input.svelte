@@ -24,6 +24,7 @@
 	import { ArrowRight } from 'lucide-svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { SerializedSession } from '@wharfkit/session';
+	import { languageTag } from '$lib/paraglide/runtime';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -159,7 +160,7 @@
 			context.wharf.switch(result.data as SerializedSession);
 			// Navigate if needed
 			if (!context.settings.data.preventAccountPageSwitch) {
-				goto(result.url);
+				goto(`/${languageTag()}${result.url}`);
 			}
 			return;
 		}
@@ -171,7 +172,7 @@
 
 		// Should this result type navigate to the URL?
 		if (![SearchRecordType.SWITCH, SearchRecordType.UNKNOWN].includes(result.type)) {
-			goto(result.url);
+			goto(`/${languageTag()}${result.url}`);
 		}
 	}
 
