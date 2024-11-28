@@ -101,8 +101,7 @@
 
 	<!-- RAM Calculator -->
 
-	<Card class="gap-6">
-		<h3 class="text-xl font-bold">RAM Calculator</h3>
+	<Card class="gap-6" title="RAM Calculator">
 		<div class="flex gap-4 *:flex-1">
 			<Stack class="gap-2">
 				<Label for="asset-amount" class="leading-none">
