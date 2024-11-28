@@ -15,11 +15,13 @@
 	import AccountSwitcher from '$lib/components/accountswitch.svelte';
 	import UnicoveLogo from '$lib/assets/unicovelogo.svelte';
 	import Search from '$lib/components/search/input.svelte';
+	import { SettingsState } from '$lib/state/settings.svelte.js';
 
 	let { children, data } = $props();
 
 	let account: AccountState | undefined = $state();
 	const history = new SearchRecordStorage(data.network);
+	const settings = new SettingsState();
 	const wharf = new WharfState();
 
 	setContext<UnicoveContext>('state', {
@@ -31,6 +33,9 @@
 		},
 		get network() {
 			return data.network;
+		},
+		get settings() {
+			return settings;
 		},
 		get wharf() {
 			return wharf;

@@ -1,18 +1,20 @@
 <script lang="ts">
 	import Switch from '$lib/components/input/switch.svelte';
 	import LanguageSelect from '$lib/components/select/language.svelte';
-	import { getSetting } from '$lib/state/settings.svelte';
 	import Label from '$lib/components/input/label.svelte';
 	import { Stack } from '$lib/components/layout';
+	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import { getContext } from 'svelte';
 
-	let advancedMode = getSetting('advanced-mode', false);
-	let debugMode = getSetting('debug-mode', false);
-	let preventAccountPageSwitching = getSetting('prevent-account-page-switching', false);
+	const context = getContext<UnicoveContext>('state');
+	const settings = context.settings.data;
 
 	$effect(() => {
-		if (!advancedMode.value) {
-			debugMode.value = false;
-		}
+		context.settings.data = {
+			...settings,
+			// Override debug mode if advanced mode is disabled
+			debugMode: settings.advancedMode ? settings.debugMode : false
+		};
 	});
 </script>
 
@@ -32,7 +34,10 @@
 			>
 			<p class="caption text-sm">Prevents automatic navigation to the account overview page</p>
 		</Stack>
-		<Switch id="prevent-account-page-switching" bind:checked={preventAccountPageSwitching.value} />
+		<Switch
+			id="prevent-account-page-switching"
+			bind:checked={settings.preventAccountPageSwitching as boolean}
+		/>
 	</div>
 
 	<div class="flex items-center justify-between">
@@ -42,16 +47,16 @@
 				View Resources tab, enable enhanced asset precision, debug, and more
 			</p>
 		</Stack>
-		<Switch id="advanced-mode" bind:checked={advancedMode.value} />
+		<Switch id="advanced-mode" bind:checked={settings.advancedMode as boolean} />
 	</div>
 
-	{#if advancedMode.value}
+	{#if settings.advancedMode}
 		<div class="flex items-center justify-between">
 			<Stack class="gap-1">
 				<Label for="debug-mode">Enable Debug Mode</Label>
 				<p class="caption text-sm">Show raw data used for development and debugging</p>
 			</Stack>
-			<Switch id="debug-mode" bind:checked={debugMode.value} />
+			<Switch id="debug-mode" bind:checked={settings.debugMode as boolean} />
 		</div>
 	{/if}
 </div>
