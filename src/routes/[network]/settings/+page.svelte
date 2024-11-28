@@ -42,18 +42,18 @@
 
 	<div class="flex items-center justify-between">
 		<Stack class="gap-1">
-			<Label for="prevent-account-page-switching">Allow page navigation in search prompt</Label>
+			<Label for="search-show-pages">Allow page navigation in search prompt</Label>
 			<p class="caption text-sm">Adds popular Unicove pages to search results.</p>
 		</Stack>
-		<Switch id="prevent-account-page-switching" bind:checked={searchShowPages} />
+		<Switch id="search-show-pages" bind:checked={searchShowPages} />
 	</div>
 
 	<div class="flex items-center justify-between">
 		<Stack class="gap-1">
-			<Label for="prevent-account-page-switching">Allow account switching in search prompt</Label>
+			<Label for="search-account-switch">Allow account switching in search prompt</Label>
 			<p class="caption text-sm">Adds logged in accounts to search results for quick switching.</p>
 		</Stack>
-		<Switch id="prevent-account-page-switching" bind:checked={searchAccountSwitch} />
+		<Switch id="search-account-switch" bind:checked={searchAccountSwitch} />
 	</div>
 
 	<div class="flex items-center justify-between">
