@@ -25,10 +25,12 @@
 			if (debugMode) console.error('Failed to copy text: ', err);
 		}
 	}
+
+	let visible = $derived(browser && 'clipboard' in navigator);
 </script>
 
 <!-- Styled as a trailing element. Will need to change it if we want to use it inline with other elements following it.  -->
-{#if browser && 'clipboard' in navigator}
+{#if visible}
 	<div
 		class="relative inline-flex text-skyBlue-500 hover:text-skyBlue-400 focus-visible:text-skyBlue-400 has-[:focus-visible]:text-solar-500"
 	>
