@@ -1,37 +1,37 @@
 import { browser } from '$app/environment';
 
-export class SettingState<T> {
-	value = $state<T>() as T;
-	key = '';
+export interface SettingsEntry {
+	key: string;
+	value: unknown;
+}
 
-	constructor(key: string, value: T) {
-		this.key = key;
-		this.value = value;
+export type SettingsData = Record<string, unknown>;
 
+export class SettingsState {
+	data = $state<SettingsData>({});
+
+	constructor() {
 		if (browser) {
-			const item = localStorage.getItem(key);
-			if (item) this.value = this.deserialize(item);
+			const item = localStorage.getItem('unicove-settings');
+			if (item) this.data = this.deserialize(item);
 		}
-
 		$effect(() => {
-			localStorage.setItem(this.key, this.serialize(this.value));
+			localStorage.setItem('unicove-settings', this.serialize(this.data));
 		});
 	}
 
-	serialize(value: T): string {
-		return JSON.stringify(value);
+	get<T>(key: string, value: T) {
+		if (!this.data[key]) {
+			return value;
+		}
+		return this.data[key] as T;
 	}
 
-	deserialize(item: string): T {
+	serialize(data: SettingsData): string {
+		return JSON.stringify(data);
+	}
+
+	deserialize(item: string): SettingsData {
 		return JSON.parse(item);
 	}
-}
-
-const state = new Map<string, SettingState<unknown>>();
-
-export function getSetting<T>(key: string, value: T) {
-	if (!state.has(key)) {
-		state.set(key, new SettingState(key, value));
-	}
-	return state.get(key) as SettingState<T>;
 }
