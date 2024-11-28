@@ -26,8 +26,6 @@
 			if (context.settings.data.debugMode) console.error('Failed to copy text: ', err);
 		}
 	}
-
-	let visible = $derived(browser && 'clipboard' in navigator);
 </script>
 
 <!-- Styled as a trailing element. Will need to change it if we want to use it inline with other elements following it.  -->
