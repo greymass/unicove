@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { type ComponentProps } from 'svelte';
+	import { getContext, type ComponentProps } from 'svelte';
 	import { createDialog, melt, type CreateDialogProps } from '@melt-ui/svelte';
 	import type TextInput from '../input/text.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
@@ -8,7 +8,6 @@
 	import { fade, scale } from 'svelte/transition';
 	import * as m from '$lib/paraglide/messages';
 	import {
-		RecordStorage,
 		SearchRecordType,
 		search,
 		isSearchBlock,
@@ -24,26 +23,30 @@
 	import Result from './result.svelte';
 	import { browser } from '$app/environment';
 	import { ArrowRight } from 'lucide-svelte';
+	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import type { SerializedSession } from '@wharfkit/session';
+	import { getSetting } from '$lib/state/settings.svelte';
+
+	const context = getContext<UnicoveContext>('state');
+	const { value: preventAccountPageSwitch } = getSetting('prevent-account-page-switching', false);
 
 	interface NameInputProps extends ComponentProps<typeof TextInput> {
 		debug?: boolean;
 		network: NetworkState;
 	}
 
-	let { network, ref = $bindable(), debug = false, class: className }: NameInputProps = $props();
+	let { ref = $bindable(), debug = false, class: className }: NameInputProps = $props();
 
 	let searchValue: string = $state('');
 	let selectedIndex: number = $state(0);
 
-	const searchHistory = new RecordStorage(network);
-
-	let results: SearchRecord[] = $state(searchHistory.get());
+	let results: SearchRecord[] = $state(context.history.get());
 
 	$effect(() => {
 		if (searchValue) {
-			results = search(searchValue, network, searchHistory);
+			results = search(context, searchValue);
 		} else {
-			results = searchHistory.get();
+			results = context.history.get();
 		}
 	});
 
@@ -67,15 +70,15 @@
 	const result = $derived.by(() => {
 		switch (searchType) {
 			case SearchRecordType.ACCOUNT:
-				return `/${network}/account/${searchValue}`;
+				return `/${context.network}/account/${searchValue}`;
 			case SearchRecordType.BLOCK:
-				return `/${network}/block/${searchValue}`;
+				return `/${context.network}/block/${searchValue}`;
 			case SearchRecordType.KEY:
-				return `/${network}/key/${searchValue}`;
+				return `/${context.network}/key/${searchValue}`;
 			case SearchRecordType.TRANSACTION:
-				return `/${network}/transaction/${searchValue}`;
+				return `/${context.network}/transaction/${searchValue}`;
 			case SearchRecordType.PAGE:
-				return `/${network}/${searchValue}`;
+				return `/${context.network}/${searchValue}`;
 			default:
 				console.log('unknown search type', searchType);
 				return null;
@@ -121,7 +124,7 @@
 					selectedIndex = 0;
 					return;
 				}
-				// Select next searchHistory item
+				// Select next context.history item
 				selectedIndex = (results.length + selectedIndex + 1) % results.length;
 				event.preventDefault();
 				return;
@@ -132,7 +135,7 @@
 					selectedIndex = results.length;
 					return;
 				}
-				// Select previous searchHistory item
+				// Select previous context.history item
 				selectedIndex = (results.length + selectedIndex - 1) % results.length;
 				event.preventDefault();
 				return;
@@ -140,13 +143,33 @@
 		}
 	}
 
-	function goToResult() {
+	async function goToResult() {
 		const result = results[selectedIndex];
-		if (result) {
-			searchHistory.add(result);
+		if (!result) {
+			return;
+		}
+
+		closeSearch();
+
+		// Switch accounts if this is a request to switch
+		if ([SearchRecordType.SWITCH].includes(result.type)) {
+			context.wharf.switch(result.data as SerializedSession);
+			// Navigate if needed
+			if (!preventAccountPageSwitch) {
+				goto(result.url);
+			}
+			return;
+		}
+
+		// Should this result type be saved in history?
+		if (![SearchRecordType.SWITCH, SearchRecordType.UNKNOWN].includes(result.type)) {
+			context.history.add(result);
+		}
+
+		// Should this result type navigate to the URL?
+		if (![SearchRecordType.SWITCH, SearchRecordType.UNKNOWN].includes(result.type)) {
 			goto(result.url);
 		}
-		closeSearch();
 	}
 
 	function closeSearch() {
@@ -256,7 +279,7 @@
 							{#if !searchValue}
 								<button
 									class="justify-self-end focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-solar-500"
-									onclick={() => searchHistory.clear()}
+									onclick={() => context.history.clear()}
 								>
 									{m.common_clear()}
 								</button>
@@ -321,7 +344,7 @@
 
 		<button
 			class="text-muted grid size-12 place-items-center justify-self-end hover:text-white focus-visible:outline-none focus-visible:ring focus-visible:ring-inset focus-visible:ring-solar-500"
-			onclick={() => searchHistory.remove(index)}
+			onclick={() => context.history.remove(index)}
 		>
 			<X class="text-inherit" />
 		</button>

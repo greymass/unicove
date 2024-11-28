@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { AppWindow, ArrowLeftRight, Box, Key, UserSearch } from 'lucide-svelte';
+	import { AppWindow, ArrowLeftRight, Box, Boxes, Key, UserSearch } from 'lucide-svelte';
 	import type { ComponentProps, Snippet } from 'svelte';
 
 	import { SearchRecordType, type SearchRecord } from '$lib/state/search.svelte';
@@ -37,8 +37,11 @@
 			<span class="max-w-[12ch] truncate">
 				{record.value}
 			</span>
-		{:else if record.type === SearchRecordType.TRANSACTION}
+		{:else if record.type === SearchRecordType.SWITCH}
 			<ArrowLeftRight class="size-4" />
+			<span>{record.value}</span>
+		{:else if record.type === SearchRecordType.TRANSACTION}
+			<Boxes class="size-4" />
 			<span class="max-w-[13ch] truncate">
 				{truncateCenter(record.value)}
 			</span>
