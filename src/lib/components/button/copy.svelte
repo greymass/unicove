@@ -1,15 +1,16 @@
 <script lang="ts">
-	import { getSetting } from '$lib/state/settings.svelte';
 	import Copy from 'lucide-svelte/icons/copy';
 	import { quadIn, quartOut } from 'svelte/easing';
 	import { fade, fly } from 'svelte/transition';
 	import { browser } from '$app/environment';
+	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import { getContext } from 'svelte';
+
+	const context = getContext<UnicoveContext>('state');
 
 	interface Props {
 		data: string;
 	}
-
-	let { value: debugMode } = getSetting('debug-mode', false);
 
 	let props: Props = $props();
 
@@ -18,19 +19,17 @@
 	async function copyToClipboard() {
 		try {
 			await navigator.clipboard.writeText(props.data);
-			if (debugMode) console.log(props.data, 'copied to clipboard');
+			if (context.settings.data.debugMode) console.log(props.data, 'copied to clipboard');
 			hint = true;
 			setTimeout(() => (hint = false), 300);
 		} catch (err) {
-			if (debugMode) console.error('Failed to copy text: ', err);
+			if (context.settings.data.debugMode) console.error('Failed to copy text: ', err);
 		}
 	}
-
-	let visible = $derived(browser && 'clipboard' in navigator);
 </script>
 
 <!-- Styled as a trailing element. Will need to change it if we want to use it inline with other elements following it.  -->
-{#if visible}
+{#if browser && 'clipboard' in navigator}
 	<div
 		class="relative inline-flex text-skyBlue-500 hover:text-skyBlue-400 focus-visible:text-skyBlue-400 has-[:focus-visible]:text-solar-500"
 	>

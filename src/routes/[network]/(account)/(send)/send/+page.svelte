@@ -20,7 +20,6 @@
 
 	import { defaultQuantity, SendState } from './state.svelte';
 
-	import { getSetting } from '$lib/state/settings.svelte';
 	import { formatCurrency } from '$lib/i18n';
 	import { goto } from '$app/navigation';
 	import { preventDefault } from '$lib/utils';
@@ -28,8 +27,6 @@
 	import { page } from '$app/stores';
 	import { SingleCard, Stack } from '$lib/components/layout';
 	import TransactionSummary from '$lib/components/transactionSummary.svelte';
-
-	const debugMode = getSetting('debug-mode', false);
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
@@ -332,7 +329,7 @@
 					options={tokenOptions}
 					bind:this={tokenSelect}
 					bind:selected={sendState.balance}
-					debug={debugMode.value}
+					debug={context.settings.data.debugMode as boolean}
 				/>
 			{:else}
 				<p>{m.send_no_balances()}</p>
@@ -357,7 +354,7 @@
 					placeholder={m.send_enter_amount({
 						token: sendState.balance?.asset.symbol.code
 					})}
-					debug={debugMode.value}
+					debug={context.settings.data.debugMode as boolean}
 				/>
 			{/if}
 
@@ -460,7 +457,7 @@
 	</Stack>
 </SingleCard>
 
-{#if debugMode.value}
+{#if context.settings.data.debugMode}
 	<h3 class="h3">{m.common_debugging()}</h3>
 	<Code
 		>{JSON.stringify(

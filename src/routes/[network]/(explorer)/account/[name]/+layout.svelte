@@ -1,12 +1,12 @@
 <script lang="ts">
+	import { getContext } from 'svelte';
 	import { page } from '$app/stores';
 	import { Stack } from '$lib/components/layout';
 	import PillGroup from '$lib/components/navigation/pillgroup.svelte';
-	import { getSetting } from '$lib/state/settings.svelte.js';
+	import type { UnicoveContext } from '$lib/state/client.svelte.js';
 
+	const context = getContext<UnicoveContext>('state');
 	const { children, data } = $props();
-
-	const { value: debugMode } = $derived(getSetting('debug-mode', false));
 
 	const tabOptions = $derived.by(() => {
 		const account = String(data.account.name);
@@ -21,7 +21,7 @@
 			// { href: `/${network}/account/${account}/staked`, text: 'Staked' },
 		];
 
-		if (debugMode) {
+		if (context.settings.data.debugMode) {
 			items.push({ href: `/${network}/account/${account}/chaindata`, text: 'Data' });
 		}
 

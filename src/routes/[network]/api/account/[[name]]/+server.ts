@@ -4,7 +4,7 @@ import { getCacheHeaders } from '$lib/utils';
 import type { LightAPIBalanceResponse, LightAPIBalanceRow } from '$lib/types.js';
 import type { RequestHandler } from './$types';
 import { Asset, type NameType } from '@wharfkit/antelope';
-import { getBackendNetwork } from '$lib/wharf/client/ssr';
+import { getBackendNetwork, getLightAPIURL } from '$lib/wharf/client/ssr';
 
 export const GET: RequestHandler = async ({ fetch, params }) => {
 	const chain = getChainDefinitionFromParams(params.network);
@@ -75,7 +75,9 @@ async function loadBalances(
 ): Promise<LightAPIBalanceRow[]> {
 	const balances = [];
 	if (network.supports('lightapi')) {
-		const result = await f(`https://eos.light-api.net/api/balances/${network}/${account}`);
+		const result = await f(
+			`${getLightAPIURL(network.shortname)}/api/balances/${network}/${account}`
+		);
 		const json: LightAPIBalanceResponse = await result.json();
 		balances.push(...json.balances);
 	}

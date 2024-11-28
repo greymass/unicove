@@ -17,7 +17,7 @@ export async function GET({ fetch, params }: RequestEvent) {
 		try {
 			publicKey = PublicKey.from(String(params.publicKey));
 		} catch (e) {
-			return json({ error: 'Invalid public key format' }, { status: 400 });
+			return json({ error: `Invalid public key format: ${e}` }, { status: 400 });
 		}
 
 		const response = await network.client.v1.chain.get_accounts_by_authorizers({
