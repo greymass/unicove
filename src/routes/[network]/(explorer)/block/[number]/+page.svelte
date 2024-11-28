@@ -37,14 +37,14 @@
 	});
 </script>
 
-<div class="gap-6 *:mb-6 *:w-full *:break-inside-avoid last:*:mb-0 @4xl:columns-2">
-	<Card class="text-muted gap-0 bg-transparent py-0">
+<div class="gap-6 text-nowrap *:mb-6 *:w-full *:break-inside-avoid last:*:mb-0 @4xl:columns-2">
+	<Card class="text-muted gap-0 bg-transparent px-2 py-0 sm:px-5">
 		<div class="flex items-center gap-2 py-2 text-white">
 			<ArrowRightLeft class="size-4" />
 			<h3 class="text-xl font-semibold">{totalTransactionCount} Transations</h3>
 		</div>
 
-		<div class="grid grid-cols-[1.5fr,1fr,1fr,1fr,0.5fr] py-3">
+		<div class="grid grid-cols-[1.5fr,1fr,1fr,1fr,0fr] py-3 sm:grid-cols-[1.5fr,1fr,1fr,1fr,0.5fr]">
 			<div>Tx ID</div>
 			<div>Actions</div>
 			<div>CPU</div>
@@ -58,7 +58,7 @@
 					{#if transaction}
 						<a
 							href="/{data.network}/transaction/{String(transaction.trx.id)}"
-							class="table-row-border table-row-background group grid grid-cols-[1.5fr,1fr,1fr,1fr,0.5fr] py-3"
+							class="table-row-border table-row-background group grid grid-cols-[1.5fr,1fr,1fr,1fr,0fr] py-3 sm:grid-cols-[1.5fr,1fr,1fr,1fr,0.5fr]"
 						>
 							<div>
 								<span class="text-skyBlue-500 hover:text-skyBlue-400"
@@ -71,14 +71,16 @@
 							<div>{transaction.cpu_usage_us} μs</div>
 							<div>{transaction.net_usage_words * 8} Bytes</div>
 							<div class="flex items-center justify-center text-white">
-								<ChevronRight class="size-6 group-hover:stroke-skyBlue-400" />
+								<div class="hidden sm:block">
+									<ChevronRight class="size-6 group-hover:stroke-skyBlue-400" />
+								</div>
 							</div>
 						</a>
 					{/if}
 				{/each}
 			{:else}
 				<div
-					class="table-row-border table-row-background group grid grid-cols-[1.5fr,1fr,1fr,1fr,0.5fr] py-3"
+					class="table-row-border table-row-background group grid grid-cols-[1.5fr,1fr,1fr,1fr,0fr] py-3 sm:grid-cols-[1.5fr,1fr,1fr,1fr,0.5fr]"
 				>
 					<div>-</div>
 					<div>-</div>
@@ -90,15 +92,15 @@
 		</div>
 	</Card>
 
-	<Card class="gap-0 bg-transparent py-0">
+	<Card class="gap-0 bg-transparent px-2 py-0 sm:px-5">
 		<div class="py-2">
 			<h3 class="text-xl font-semibold">{data.title} details</h3>
 		</div>
 		<table class="table-styles">
 			<tbody>
 				<tr>
-					<td width="40%" class="text-muted break-all align-top">Producter Name: </td>
-					<td width="60%" class="break-all align-top">
+					<td width="42%" class="text-muted align-top">Producter Name: </td>
+					<td width="58%" class="break-all align-top">
 						<a
 							class="text-skyBlue-500 hover:text-skyBlue-400"
 							href="/{data.network}/account/{data.block.producer}">{data.block.producer}</a
@@ -107,8 +109,8 @@
 				</tr>
 				{#each deails as detail}
 					<tr>
-						<td width="40%" class="text-muted break-all align-top">{detail[0]}: </td>
-						<td width="60%" class="break-all align-top">{detail[1]}</td>
+						<td width="42%" class="text-muted align-top">{detail[0]}: </td>
+						<td width="58%" class="text-wrap break-all align-top">{detail[1]}</td>
 					</tr>
 				{/each}
 			</tbody>
