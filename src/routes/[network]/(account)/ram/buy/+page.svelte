@@ -167,28 +167,28 @@
 				{/if}
 			{/if}
 		</Stack>
-
-		{#if context.settings.data.debugMode}
-			<h3 class="h3">Debugging</h3>
-			<Code
-				>{JSON.stringify(
-					{
-						payer: buyRamState.payer,
-						receiver: buyRamState.receiver,
-						bytes: buyRamState.bytes,
-						balance: buyRamState.balance,
-						chain: buyRamState.chain,
-						pricePerKB: buyRamState.pricePerKB,
-						pricePerByte: buyRamState.pricePerByte,
-						bytesValue: buyRamState.bytesValue,
-						valid: buyRamState.valid,
-						insufficientBalance: buyRamState.insufficientBalance,
-						balances: context.account?.balances
-					},
-					undefined,
-					2
-				)}</Code
-			>
-		{/if}
 	</form>
 </Card>
+
+{#if context.settings.data.debugMode}
+	<h3 class="h3">Debugging</h3>
+	<Code
+		>{JSON.stringify(
+			{
+				payer: buyRamState.payer,
+				receiver: buyRamState.receiver,
+				bytes: buyRamState.bytes,
+				balance: buyRamState.balance,
+				chain: buyRamState.chain,
+				pricePerKB: buyRamState.pricePerKB,
+				pricePerByte: buyRamState.pricePerByte,
+				bytesValue: buyRamState.bytesValue,
+				valid: buyRamState.valid,
+				insufficientBalance: buyRamState.insufficientBalance,
+				balances: context.account?.balances
+			},
+			undefined,
+			2
+		)}</Code
+	>
+{/if}

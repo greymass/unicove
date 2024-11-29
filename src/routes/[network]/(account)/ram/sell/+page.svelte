@@ -156,26 +156,26 @@
 				<SummarySellRAM class="hidden" action={{ data: sellRamState.toJSON() }} />
 			{/if}
 		</Stack>
-
-		{#if context.settings.data.debugMode}
-			<h3 class="h3">Debugging</h3>
-			<Code
-				>{JSON.stringify(
-					{
-						account: sellRamState.account,
-						bytes: sellRamState.bytes,
-						max: sellRamState.max,
-						chain: sellRamState.chain,
-						pricePerKB: sellRamState.pricePerKB,
-						bytesValue: sellRamState.bytesValue,
-						insufficientRAM: sellRamState.insufficientRAM,
-						valid: sellRamState.valid,
-						balances: context.account?.balances
-					},
-					undefined,
-					2
-				)}</Code
-			>
-		{/if}
 	</form>
 </Card>
+
+{#if context.settings.data.debugMode}
+	<h3 class="h3">Debugging</h3>
+	<Code
+		>{JSON.stringify(
+			{
+				account: sellRamState.account,
+				bytes: sellRamState.bytes,
+				max: sellRamState.max,
+				chain: sellRamState.chain,
+				pricePerKB: sellRamState.pricePerKB,
+				bytesValue: sellRamState.bytesValue,
+				insufficientRAM: sellRamState.insufficientRAM,
+				valid: sellRamState.valid,
+				balances: context.account?.balances
+			},
+			undefined,
+			2
+		)}</Code
+	>
+{/if}
