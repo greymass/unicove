@@ -5,9 +5,32 @@
 	import Button from '$lib/components/button/button.svelte';
 	import { ArrowLeftRight, ArrowRight, ArrowLeft } from 'lucide-svelte';
 	import { DL, DLRow } from '$lib/components/descriptionlist/index.js';
+	import { goto } from '$lib/utils';
 
 	let { data } = $props();
+
+	const previousBlockLink = $derived(`/${data.network}/block/${Number(data.height) - 1}`);
+	const nextBlockLink = $derived(`/${data.network}/block/${Number(data.height) + 1}`);
+
+	const handleKeydown = (e: KeyboardEvent) => {
+		// Don't do anything if search is open
+		if (
+			document.activeElement?.tagName === 'INPUT' ||
+			document.activeElement?.tagName === 'TEXTAREA' ||
+			document.activeElement?.getAttribute('contenteditable') === 'true'
+		) {
+			return;
+		}
+
+		if (e.key === 'ArrowRight') {
+			goto(nextBlockLink);
+		} else if (e.key === 'ArrowLeft') {
+			goto(previousBlockLink);
+		}
+	};
 </script>
+
+<svelte:window on:keydown={handleKeydown} />
 
 <MultiCard>
 	{#if data.block.transactions}
@@ -76,13 +99,13 @@
 
 		<Switcher>
 			{#if data.height > 1}
-				<Button href="/{data.network}/block/{Number(data.height) - 1}" variant="secondary">
+				<Button href={previousBlockLink} variant="secondary">
 					<span class="inline-flex items-center gap-1">
 						<ArrowLeft class="size-4" /> Previous Block
 					</span>
 				</Button>
 			{/if}
-			<Button href="/{data.network}/block/{Number(data.height) + 1}" variant="secondary">
+			<Button href={nextBlockLink} variant="secondary">
 				<span class="inline-flex items-center gap-1">
 					Next Block <ArrowRight class="size-4" />
 				</span>
