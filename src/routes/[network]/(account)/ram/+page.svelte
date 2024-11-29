@@ -14,6 +14,7 @@
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import { MultiCard, Stack } from '$lib/components/layout';
 	import Label from '$lib/components/input/label.svelte';
+	import * as m from '$lib/paraglide/messages.js';
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');
@@ -71,15 +72,17 @@
 	<Card class="flex *:flex-1">
 		<div class="grid content-between gap-4">
 			<div class="grid">
-				<h3 class="text-muted text-base">RAM Available</h3>
+				<h3 class="text-muted text-base">{m.common_labeled_unit_available({ unit: 'RAM' })}</h3>
 				<AssetText class="text-xl font-semibold" variant="full" value={ramAvailable} />
 			</div>
-			<Button variant="secondary" href="/{String(data.network)}/ram/buy">Buy</Button>
+			<Button variant="secondary" href="/{String(data.network)}/ram/buy">{m.common_buy()}</Button>
 		</div>
 
 		<div class="grid content-between gap-4">
 			<div>
-				<h3 class="text-muted text-base">EOS Value</h3>
+				<h3 class="text-muted text-base">
+					{m.common_labeled_unit_value({ unit: data.network.chain.name })}
+				</h3>
 				<AssetText
 					class="text-xl font-semibold"
 					variant="full"
@@ -97,7 +100,7 @@
 					</div>
 				{/if}
 			</div>
-			<Button variant="secondary" href="/{String(data.network)}/ram/sell">Sell</Button>
+			<Button variant="secondary" href="/{String(data.network)}/ram/sell">{m.common_sell()}</Button>
 		</div>
 	</Card>
 
@@ -120,7 +123,7 @@
 			</Stack>
 
 			<Stack class="gap-2">
-				<Label for="bytes-amount" class="leading-none">Bytes</Label>
+				<Label for="bytes-amount" class="leading-none">{m.common_bytes()}</Label>
 				<BytesInput
 					id="bytes-amount"
 					bind:value={ramCalculatorState.bytes}
@@ -131,7 +134,7 @@
 		</div>
 
 		<Stack class="gap-2">
-			<h4 class="text-md font-semibold">Details</h4>
+			<h4 class="text-md font-semibold">{m.common_details()}</h4>
 			<table class="">
 				<tbody class="*:border-b *:border-mineShaft-900 *:pt-8 last:*:border-b-0 *:even:text-right">
 					<tr class="*:py-2">
@@ -158,7 +161,11 @@
 							</td>
 						</tr>
 						<tr class="*:py-2">
-							<td class="text-muted text-base"> USD Price </td>
+							<td class="text-muted text-base">
+								{m.common_labeled_unit_price({
+									unit: 'USD'
+								})}
+							</td>
 							<td class="text-right font-medium text-white">
 								<AssetText
 									variant="full"
@@ -170,7 +177,7 @@
 						</tr>
 					{/if}
 					<tr class="*:py-2">
-						<td class="text-muted text-base"> Network Fees </td>
+						<td class="text-muted text-base"> {m.common_network_fees()} </td>
 						<td class="text-right font-medium text-white">
 							<AssetText variant="full" value={ramCalculatorState.fee} />
 						</td>
@@ -191,7 +198,7 @@
 			<tbody class="*:border-b *:border-mineShaft-900 *:pt-8 last:*:border-b-0 *:even:text-right">
 				<tr class="*:py-2">
 					<td class="text-muted text-base"
-						>Market Cap ({data.network.chain.systemToken?.symbol.code || ''})</td
+						>{m.common_market_cap()} ({data.network.chain.systemToken?.symbol.code || ''})</td
 					>
 					<td class="text-right font-medium text-white">
 						<AssetText variant="full" value={marketCapEOS} />
@@ -199,14 +206,14 @@
 				</tr>
 				{#if data.network.ramprice?.usd}
 					<tr class="*:py-2">
-						<td class="text-muted text-base">Market Cap (USD)</td>
+						<td class="text-muted text-base">{m.common_market_cap()} (USD)</td>
 						<td class="text-right font-medium text-white">
 							<AssetText variant="full" value={marketCapUSD} />
 						</td>
 					</tr>
 				{/if}
 				<tr class="*:py-2">
-					<td class="text-muted text-base">Supply</td>
+					<td class="text-muted text-base">{m.common_supply()}</td>
 					<td class="text-right font-medium text-white">
 						<AssetText variant="full" value={ramSupply} />
 					</td>
