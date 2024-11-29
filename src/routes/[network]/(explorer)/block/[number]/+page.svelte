@@ -24,18 +24,20 @@
 					<tr>
 						<th>Transaction</th>
 						<th class="text-right">Actions</th>
-						<th class="text-right">CPU</th>
-						<th class="text-right">NET</th>
+						<th class="text-right">CPU (μs)</th>
+						<th class="text-right">NET (Bytes)</th>
 					</tr>
 				</thead>
 				<tbody>
 					{#each transactions as transaction}
 						{#if transaction}
+							{@const txID =
+								typeof transaction.trx === 'string' ? transaction.trx : transaction.trx.id}
 							<tr>
-								<td><TransactionText id={transaction.trx.id} /></td>
-								<td class="text-right">{transaction.trx.transaction?.actions.length}</td>
+								<td><TransactionText id={txID} /></td>
+								<td class="text-right">{transaction.trx.transaction?.actions.length || 0}</td>
 								<td class="text-right">{transaction.cpu_usage_us}</td>
-								<td class="text-right">{transaction.net_usage_words}</td>
+								<td class="text-right">{Number(transaction.net_usage_words) * 8}</td>
 							</tr>
 						{/if}
 					{/each}
