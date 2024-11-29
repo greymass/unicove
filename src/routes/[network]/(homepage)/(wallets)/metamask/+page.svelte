@@ -12,6 +12,7 @@
 	import { Cluster, Stack } from '$lib/components/layout/index.js';
 	import { accountCreationPluginMetamask } from '$lib/state/client/wharf.svelte';
 	import { chainLogos } from '@wharfkit/common';
+	import { getChainDefinitionFromParams } from '$lib/state/network.svelte.js';
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');
@@ -89,6 +90,26 @@
 			chain: data.network.chain,
 			walletPlugin: 'wallet-plugin-metamask'
 		});
+	}
+
+	async function createAccountAndLogin() {
+		try {
+			const accountCreationResponse = await context.wharf.createAccount({
+				chain: data.network.chain,
+				pluginId: 'account-creation-plugin-metamask'
+			});
+			console.log(`Account created: ${accountCreationResponse.accountName}`);
+
+			await context.wharf.login({
+				permissionLevel: `${accountCreationResponse.accountName}@active`,
+				walletPlugin: 'wallet-plugin-metamask'
+			});
+		} catch (error) {
+			console.error('Error creating account:', error);
+			alert(
+				`Error creating account through Metamask. Please make sure that the Antelope snap is enabled.`
+			);
+		}
 	}
 
 	const networkLogo = String(chainLogos.get(String(data.network.chain.id)));
@@ -195,9 +216,7 @@
 					{:else}
 						<Cluster>
 							<Button onclick={login}>Login</Button>
-							<Button href={`/${data.network}/signup/wallets/extensions/metamask`}>
-								Create an account
-							</Button>
+							<Button onclick={createAccountAndLogin}>Create an account</Button>
 						</Cluster>
 					{/if}
 					{#if context.settings.data.advancedMode}
