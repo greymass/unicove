@@ -140,9 +140,7 @@
 	</Card>
 	<AccountBalance
 		title="Account Balance"
-		balance={available}
 		cta={{ href: `/${networkName}/staking/stake`, label: 'Stake' }}
-		value={usdValueAvailable}
 	/>
 	<StakingCalculator
 		{apr}

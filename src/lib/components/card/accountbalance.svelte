@@ -1,21 +1,23 @@
 <script lang="ts">
-	import Button from '../button/button.svelte';
-	import Chip from '../chip.svelte';
-	import { Card, Stack } from '../layout';
+	import { getContext } from 'svelte';
+	import type { UnicoveContext } from '$lib/state/client.svelte';
+
+	import { Card, Stack } from '$lib/components/layout';
+	import Button from '$lib/components/button/button.svelte';
+	import Chip from '$lib/components/chip.svelte';
 	import AssetText from '$lib/components/elements/asset.svelte';
-	import { Asset } from '@wharfkit/antelope';
+
+	const context = getContext<UnicoveContext>('state');
 
 	interface Props {
-		balance: Asset;
 		cta?: {
 			label: string;
 			href: string;
 		};
 		title: string;
-		value?: Asset;
 	}
 
-	const { balance, cta, title, value }: Props = $props();
+	const { cta, title }: Props = $props();
 </script>
 
 <Card {title}>
@@ -23,11 +25,15 @@
 		<Stack class="gap-2">
 			<h4 class="text-muted text-base leading-none">Available</h4>
 			<p class="text-xl font-semibold leading-none text-white">
-				<AssetText variant="full" value={balance} />
+				{#if context.account}
+					<AssetText variant="full" value={context.account?.balance?.liquid} />
+				{:else}
+					Not logged in
+				{/if}
 			</p>
-			{#if value}
+			{#if context.account?.value?.liquid}
 				<Chip>
-					<AssetText variant="full" {value} />
+					<AssetText variant="full" value={context.account?.value?.liquid} />
 					<!-- TODO: Percent change -->
 				</Chip>
 			{/if}
