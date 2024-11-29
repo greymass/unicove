@@ -4,7 +4,6 @@
 	import { ChartLine } from 'lucide-svelte';
 
 	import { Card, MultiCard, Stack } from '$lib/components/layout';
-	import Button from '$lib/components/button/button.svelte';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { UnstakingRecord } from '$lib/utils/staking';
@@ -18,6 +17,7 @@
 		getUnstakableBalance
 	} from '$lib/utils/staking';
 	import UnstakingBalances from '$lib/components/elements/unstaking.svelte';
+	import AccountBalance from '$lib/components/card/accountbalance.svelte';
 	import StakingCalculator from './stakingcalculator.svelte';
 	import Cluster from '$lib/components/layout/cluster.svelte';
 	import Chip from '$lib/components/chip.svelte';
@@ -138,24 +138,12 @@
 			{/if}
 		</Stack>
 	</Card>
-	<Card id="token" title="Account Balance">
-		<Stack>
-			<Stack class="gap-2">
-				<h4 class="text-muted text-base leading-none">Available</h4>
-				<p class="text-xl font-semibold leading-none text-white">
-					<AssetText variant="full" value={available} />
-				</p>
-				<Chip>
-					<AssetText variant="full" value={usdValueAvailable} />
-					<!-- TODO: Percent change -->
-				</Chip>
-			</Stack>
-
-			<Stack class="gap-2">
-				<Button href="/{networkName}/staking/stake">Stake</Button>
-			</Stack>
-		</Stack>
-	</Card>
+	<AccountBalance
+		title="Account Balance"
+		balance={available}
+		cta={{ href: `/${networkName}/staking/stake`, label: 'Stake' }}
+		value={usdValueAvailable}
+	/>
 	<StakingCalculator
 		{apr}
 		network={data.network}
