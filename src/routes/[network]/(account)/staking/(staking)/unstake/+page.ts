@@ -1,15 +1,23 @@
 import { languageTag } from '$lib/paraglide/runtime';
 import type { PageLoad } from './$types';
+import * as m from '$lib/paraglide/messages';
 
 export const load: PageLoad = async ({ params, parent }) => {
 	const { network } = await parent();
 	return {
-		title: `Unstake`,
-		subtitle: `Unstake ${network.chain.systemToken?.symbol.code} tokens`,
+		title: m.common_unstake(),
+		subtitle: m.common_unstake_tokens({
+			token: String(network.chain.systemToken?.symbol.name)
+		}),
 		backPath: `/${languageTag()}/${params.network}/staking`,
 		pageMetaTags: {
-			title: `Unstake ${network.chain.name} Tokens`,
-			description: `Unstake ${network.chain.name} tokens and begin claiming the balance of your rewards using an ${network.chain.name} compatible wallet.`
+			title: m.common_unstake_tokens({
+				token: String(network.chain.systemToken?.symbol.name)
+			}),
+			description: m.staking_metadata_unstake_description({
+				network: String(network.chain.name),
+				token: String(network.chain.systemToken?.symbol.name)
+			})
 		}
 	};
 };

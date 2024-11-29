@@ -1,4 +1,5 @@
 import type { LayoutLoad } from './$types';
+import * as m from '$lib/paraglide/messages';
 
 export const load: LayoutLoad = async ({ parent }) => {
 	const { network } = await parent();
@@ -6,8 +7,16 @@ export const load: LayoutLoad = async ({ parent }) => {
 		title: `${network.chain.systemToken?.symbol.name}/RAM Market`,
 		subtitle: `An overview of the ${network.chain.systemToken?.symbol.name}/RAM market on the ${network.chain.name} network.`,
 		pageMetaTags: {
-			title: `${network.chain.systemToken?.symbol.name}/RAM Market on the ${network.chain.name} Network`,
-			description: `An overview of RAM Market on the ${network.chain.name} network providing access to buy and sell RAM using an ${network.chain.name} compatible wallet.`
+			title: [
+				m.ram_metadata_buy_title({
+					token: network.chain.systemToken?.symbol.name || m.common_tokens(),
+					network: network.chain.name
+				})
+			].join(' | '),
+			description: m.ram_metadata_overview_description({
+				token: network.chain.systemToken?.symbol.name || m.common_tokens(),
+				network: network.chain.name
+			})
 		}
 	};
 };

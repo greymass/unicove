@@ -4,7 +4,6 @@
 	import { ChartLine } from 'lucide-svelte';
 
 	import { Card, MultiCard, Stack } from '$lib/components/layout';
-	import Button from '$lib/components/button/button.svelte';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { UnstakingRecord } from '$lib/utils/staking';
@@ -18,9 +17,11 @@
 		getUnstakableBalance
 	} from '$lib/utils/staking';
 	import UnstakingBalances from '$lib/components/elements/unstaking.svelte';
+	import AccountBalance from '$lib/components/card/accountbalance.svelte';
 	import StakingCalculator from './stakingcalculator.svelte';
 	import Cluster from '$lib/components/layout/cluster.svelte';
 	import Chip from '$lib/components/chip.svelte';
+	import * as m from '$lib/paraglide/messages';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
@@ -83,15 +84,24 @@
 				<ChartLine />
 			</picture>
 			<div>
-				<p>Current APR</p>
+				<p>{m.common_apr_current()}</p>
 				<p class="text-2xl font-bold text-white">{apr}%</p>
 			</div>
 		</Cluster>
 	</Card>
-	<Card id="token" title="Staking Balance">
+	<Card
+		id="token"
+		title={m.common_labeled_unit_balance({
+			unit: m.common_staking()
+		})}
+	>
 		<Stack>
 			<Stack class="gap-2">
-				<h4 class="text-muted text-base leading-none">Tokens Staked</h4>
+				<h4 class="text-muted text-base capitalize leading-none">
+					{m.common_labeled_unit_staked({
+						unit: m.common_tokens()
+					})}
+				</h4>
 				<p class="text-xl font-semibold leading-none text-white">
 					<AssetText variant="full" value={total} />
 				</p>
@@ -107,16 +117,16 @@
 						<tbody>
 							{#if staked.units.gt(UInt64.from(0))}
 								<tr>
-									<td>Staked</td>
+									<td>{m.common_staked()}</td>
 									<td class="text-right text-white">
 										<AssetText variant="full" value={staked} />
 									</td>
-									{@render tableAction(['Unstake', `/${data.network}/staking/unstake`])}
+									{@render tableAction([m.common_unstake(), `/${data.network}/staking/unstake`])}
 								</tr>
 							{/if}
 							{#if unstakingTotal.units.gt(UInt64.from(0))}
 								<tr>
-									<td>Unstaking</td>
+									<td>{m.common_unstaking()}</td>
 									<td class="text-right text-white">
 										<AssetText variant="full" value={unstakingTotal} />
 									</td>
@@ -125,11 +135,11 @@
 							{/if}
 							{#if totalWithdraw.units.gt(UInt64.from(0))}
 								<tr>
-									<td>Unstaked</td>
+									<td>{m.common_unstaked()}</td>
 									<td class="text-right text-white">
 										<AssetText variant="full" value={totalWithdraw} />
 									</td>
-									{@render tableAction(['Withdraw', `/${data.network}/staking/withdraw`])}
+									{@render tableAction([m.common_withdraw(), `/${data.network}/staking/withdraw`])}
 								</tr>
 							{/if}
 						</tbody>
@@ -138,24 +148,7 @@
 			{/if}
 		</Stack>
 	</Card>
-	<Card id="token" title="Account Balance">
-		<Stack>
-			<Stack class="gap-2">
-				<h4 class="text-muted text-base leading-none">Available</h4>
-				<p class="text-xl font-semibold leading-none text-white">
-					<AssetText variant="full" value={available} />
-				</p>
-				<Chip>
-					<AssetText variant="full" value={usdValueAvailable} />
-					<!-- TODO: Percent change -->
-				</Chip>
-			</Stack>
-
-			<Stack class="gap-2">
-				<Button href="/{networkName}/staking/stake">Stake</Button>
-			</Stack>
-		</Stack>
-	</Card>
+	<AccountBalance cta={{ href: `/${networkName}/staking/stake`, label: m.common_stake() }} />
 	<StakingCalculator
 		{apr}
 		network={data.network}
@@ -166,7 +159,12 @@
 
 <div class="gap-6 *:mb-6 *:inline-block *:w-full last:*:mb-0 @2xl:columns-2">
 	<div>
-		<Card class="hidden gap-5" title="About staking">
+		<Card
+			class="hidden gap-5"
+			title={m.common_about_something({
+				thing: m.common_staking()
+			})}
+		>
 			<Stack class="gap-5">
 				<p class="caption">
 					The APR is an estimate, and may fluctuate based on how many and much others are staking.

@@ -49,6 +49,14 @@
 			});
 		}
 
+		if (context.settings.data.debugMode) {
+			items.push({
+				href: `/${network}/debug/state`,
+				text: 'Debug State',
+				active: pathname[3] === 'debug'
+			});
+		}
+
 		if (context.account) {
 			items.splice(0, 0, {
 				href: `/${network}/account/${context.account.name}`,
