@@ -16,6 +16,7 @@
 	import BytesInput from '$lib/components/input/bytes.svelte';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import RamResource from '$lib/components/elements/ramresource.svelte';
+	import * as m from '$lib/paraglide/messages';
 
 	import { BuyRAMState } from './state.svelte';
 	import { calAvailableSize, preventDefault } from '$lib/utils';
@@ -33,7 +34,7 @@
 
 	async function handleBuyRAM() {
 		if (!context.wharf || !context.wharf.session) {
-			alert('Not logged in');
+			alert(m.common_not_logged_in());
 			return;
 		}
 
@@ -98,7 +99,7 @@
 			<RamResource class="hidden" ramAvailable={ramAvailableSize} />
 
 			<Stack class="gap-3">
-				<Label class="text-lg" for="bytesInput">Amount of RAM to buy:</Label>
+				<Label class="text-lg" for="bytesInput">{m.ram_form_buy_amount()}</Label>
 				<div class="flex gap-4">
 					<div class="flex-1">
 						<BytesInput
@@ -117,10 +118,14 @@
 					</div>
 				</div>
 				{#if buyRamState.insufficientBalance}
-					<p class="text-red-500">Insufficient balance. Please enter a smaller amount.</p>
+					<p class="text-red-500">
+						{m.form_validation_insufficient_balance({
+							unit: String(context.network.chain.systemToken?.symbol.name)
+						})}
+					</p>
 				{/if}
 				<p class="text-right">
-					Balance:
+					{m.common_balance()}
 					{#if context.account}
 						{context.account.balance?.liquid}
 					{:else}
@@ -129,31 +134,37 @@
 				</p>
 			</Stack>
 
-			<Button type="submit" class="mt-4 w-full" disabled={!buyRamState.valid}>Buy RAM</Button>
+			<Button type="submit" class="mt-4 w-full" disabled={!buyRamState.valid}>
+				{m.common_unit_buy({ unit: 'RAM' })}
+			</Button>
 
 			<Stack class="gap-3">
 				<div class="mt-4 grid grid-cols-2 gap-y-0 text-lg">
-					<p class="text-gray-400">EOS/RAM Price (KB)</p>
+					<p class="text-gray-400">
+						{m.common_labeled_unit_price({
+							unit: `${context.network.chain.systemToken?.symbol.name}/RAM`
+						})} (KB)
+					</p>
 					<AssetText variant="full" class="text-right" value={buyRamState.pricePerKB} />
 
 					<div class="col-span-2 my-2 border-b border-mineShaft-900"></div>
 
-					<p class="text-gray-400">RAM to be bought</p>
+					<p class="text-gray-400">{m.ram_to_purchase()}</p>
 					<AssetText variant="full" class="text-right" value={buyRamState.kbs} />
 
 					<div class="col-span-2 my-2 border-b border-mineShaft-900"></div>
 
-					<p class="text-gray-400">RAM Purchase Value</p>
+					<p class="text-gray-400">{m.ram_purchase_value()}</p>
 					<AssetText variant="full" class="text-right" value={buyRamState.bytesValue} />
 
 					<div class="col-span-2 my-2 border-b border-mineShaft-900"></div>
 
-					<p class="text-gray-400">Network Fee (0.5%)</p>
+					<p class="text-gray-400">{m.common_network_fees()} (0.5%)</p>
 					<AssetText variant="full" class="text-right" value={buyRamState.fee} />
 
 					<div class="col-span-2 my-2 border-b border-mineShaft-900"></div>
 
-					<p class="text-gray-400">Total Cost</p>
+					<p class="text-gray-400">{m.common_total_cost()}</p>
 					<AssetText variant="full" class="text-right" value={buyRamState.bytesCost} />
 				</div>
 
@@ -170,7 +181,7 @@
 </Stack>
 
 {#if context.settings.data.debugMode}
-	<h3 class="h3">Debugging</h3>
+	<h3 class="h3">{m.common_debugging()}}</h3>
 	<Code
 		>{JSON.stringify(
 			{

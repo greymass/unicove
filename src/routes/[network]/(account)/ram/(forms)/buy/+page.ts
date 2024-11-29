@@ -1,15 +1,28 @@
 import { languageTag } from '$lib/paraglide/runtime';
 import type { PageLoad } from './$types';
+import * as m from '$lib/paraglide/messages';
 
 export const load: PageLoad = async ({ params, parent }) => {
 	const { network } = await parent();
 	return {
 		backPath: `/${languageTag()}/${params.network}/ram`,
-		title: `Buy RAM`,
-		subtitle: `Exchange ${network.chain.systemToken?.symbol.name} for RAM on the ${network.chain.name} network.`,
+		title: m.common_unit_buy({ unit: 'RAM' }),
+		subtitle: m.ram_page_subtitle({
+			token: network.chain.systemToken?.symbol.name || 'tokens',
+			network: network.chain.name
+		}),
 		pageMetaTags: {
-			title: `Buy RAM | ${network.chain.systemToken?.symbol.name}/RAM Market | ${network.chain.name} Network`,
-			description: `Exchange ${network.chain.systemToken?.symbol.name} for RAM on the ${network.chain.name} network using an ${network.chain.name} compatible wallet.`
+			title: [
+				m.common_unit_buy({ unit: 'RAM' }),
+				m.ram_metadata_buy_title({
+					token: network.chain.systemToken?.symbol.name || 'tokens',
+					network: network.chain.name
+				})
+			].join(' | '),
+			description: m.ram_metadata_buy_description({
+				token: network.chain.systemToken?.symbol.name || 'tokens',
+				network: network.chain.name
+			})
 		}
 	};
 };
