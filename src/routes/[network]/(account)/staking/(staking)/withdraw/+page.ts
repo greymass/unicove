@@ -1,15 +1,23 @@
 import { languageTag } from '$lib/paraglide/runtime';
 import type { PageLoad } from './$types';
+import * as m from '$lib/paraglide/messages';
 
 export const load: PageLoad = async ({ params, parent }) => {
 	const { network } = await parent();
 	return {
-		title: `Withdraw`,
-		subtitle: `Withdraw ${network.chain.systemToken?.symbol.code} tokens from staking`,
+		title: m.common_withdraw(),
+		subtitle: m.common_withdraw_tokens({
+			token: String(network.chain.systemToken?.symbol.name)
+		}),
 		backPath: `/${languageTag()}/${params.network}/staking`,
 		pageMetaTags: {
-			title: `Withdraw ${network.chain.name} Tokens`,
-			description: `Withdraw ${network.chain.name} tokens from the staking contract to add them to your available balance using an ${network.chain.name} compatible wallet.`
+			title: m.common_withdraw_tokens({
+				token: String(network.chain.systemToken?.symbol.name)
+			}),
+			description: m.staking_metadata_withdraw_description({
+				network: String(network.chain.name),
+				token: String(network.chain.systemToken?.symbol.name)
+			})
 		}
 	};
 };

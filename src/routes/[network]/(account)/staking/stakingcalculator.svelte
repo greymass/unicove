@@ -8,6 +8,7 @@
 	import AssetInput from '$lib/components/input/asset.svelte';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
+	import * as m from '$lib/paraglide/messages';
 
 	interface Props extends HTMLAttributes<HTMLDivElement> {
 		apr: string;
@@ -21,25 +22,25 @@
 	let assetValue: Asset = $state(Asset.from(0, network.chain.systemToken!.symbol));
 	let a = $derived(Number(apr) / 100);
 	let d = $derived(a / 365);
-	let m = $derived(a / 12);
+	let mo = $derived(a / 12);
 	let records = $derived.by(() => {
 		let daily = Asset.fromUnits(Number(assetValue.units) * d, assetValue.symbol);
-		let monthly = Asset.fromUnits(Number(assetValue.units) * m, assetValue.symbol);
+		let monthly = Asset.fromUnits(Number(assetValue.units) * mo, assetValue.symbol);
 		let yearly = Asset.fromUnits(Number(assetValue.units) * a, assetValue.symbol);
 		let price = tokenprice ? tokenprice.value : 0;
 		return [
 			{
-				time: 'Daily',
+				time: m.common_timeframe_daily(),
 				value: daily,
 				usd: Asset.from(daily.value * price, '2,USD')
 			},
 			{
-				time: 'Monthly',
+				time: m.common_timeframe_monthly(),
 				value: monthly,
 				usd: Asset.from(monthly.value * price, '2,USD')
 			},
 			{
-				time: 'Yearly',
+				time: m.common_timeframe_yearly(),
 				value: yearly,
 				usd: Asset.from(yearly.value * price, '2,USD')
 			}
@@ -47,11 +48,12 @@
 	});
 </script>
 
-<Card {...props} class="gap-5" title="Staking Calculator">
+<Card {...props} class="gap-5" title={m.staking_calculator()}>
 	<p>
-		Enter an amount of {network.chain.systemToken?.symbol.code} to calculate estimated rewards based
-		on the current APR of {apr}%. This rate will change over time based on the amount of tokens
-		staked.
+		{m.staking_calculator_description({
+			apr: apr,
+			token: String(network.chain.systemToken!.symbol.name)
+		})}
 	</p>
 
 	<AssetInput min={0} bind:value={assetValue} bind:valid={assetValid} />
