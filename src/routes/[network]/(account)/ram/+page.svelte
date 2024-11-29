@@ -8,6 +8,7 @@
 	import Button from '$lib/components/button/button.svelte';
 	import { calculateValue } from '$lib/utils';
 	import { RAMCalculatorState } from './state.svelte';
+	import AccountBalance from '$lib/components/card/accountbalance.svelte';
 	import AssetInput from '$lib/components/input/asset.svelte';
 	import BytesInput from '$lib/components/input/bytes.svelte';
 	import AssetText from '$lib/components/elements/asset.svelte';
@@ -99,6 +100,8 @@
 			<Button variant="secondary" href="/{String(data.network)}/ram/sell">Sell</Button>
 		</div>
 	</Card>
+
+	<AccountBalance title="Account Balance" />
 
 	<!-- RAM Calculator -->
 
