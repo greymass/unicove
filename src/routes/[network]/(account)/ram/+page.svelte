@@ -13,7 +13,6 @@
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import { MultiCard, Stack } from '$lib/components/layout';
 	import Label from '$lib/components/input/label.svelte';
-	import Code from '$lib/components/code.svelte';
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');
@@ -42,7 +41,7 @@
 	});
 
 	let ramAvailable = $derived(
-		Asset.from(Number(context.account?.ram?.available || 0) / 1000, '4,KB')
+		Asset.from(Number(context.account?.ram?.available || 0) / 1000, '3,KB')
 	);
 
 	const ramCalculatorState = new RAMCalculatorState(data.network.chain);

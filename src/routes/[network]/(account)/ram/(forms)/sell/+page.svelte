@@ -13,7 +13,6 @@
 	import TransactionSummary from '$lib/components/transactionSummary.svelte';
 	import AssetInput from '$lib/components/input/asset.svelte';
 	import BytesInput from '$lib/components/input/bytes.svelte';
-	import Card from '$lib/components/layout/box/card.svelte';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import RamResource from '$lib/components/elements/ramresource.svelte';
 
@@ -85,9 +84,7 @@
 
 {#if transactionId}
 	<TransactionSummary {transactionId} />
-{/if}
-
-<Card>
+{:else}
 	<form onsubmit={preventDefault(handleSellRAM)} class="mx-auto max-w-2xl space-y-4">
 		<RamResource class="hidden" ramAvailable={ramAvailableSize} />
 
@@ -157,7 +154,7 @@
 			{/if}
 		</Stack>
 	</form>
-</Card>
+{/if}
 
 {#if context.settings.data.debugMode}
 	<h3 class="h3">Debugging</h3>
