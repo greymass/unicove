@@ -13,6 +13,7 @@
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import { MultiCard, Stack } from '$lib/components/layout';
 	import Label from '$lib/components/input/label.svelte';
+	import Code from '$lib/components/code.svelte';
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');
@@ -82,19 +83,20 @@
 				<AssetText
 					class="text-xl font-semibold"
 					variant="full"
-					value={data.network.ramprice?.usd &&
+					value={data.network.ramprice?.eos &&
 						calculateValue(ramAvailable, data.network.ramprice?.eos)}
 				/>
-				<div>
-					<AssetText
-						class="text-muted text-base"
-						variant="full"
-						value={data.network.ramprice?.usd &&
-							Asset.from(calculateValue(ramAvailable, data.network.ramprice?.usd).value, '2,USD')}
-					/>
-				</div>
+				{#if data.network.ramprice?.usd}
+					<div>
+						<AssetText
+							class="text-muted text-base"
+							variant="full"
+							value={data.network.ramprice?.usd &&
+								Asset.from(calculateValue(ramAvailable, data.network.ramprice?.usd).value, '2,USD')}
+						/>
+					</div>
+				{/if}
 			</div>
-
 			<Button variant="secondary" href="/{String(data.network)}/ram/sell">Sell</Button>
 		</div>
 	</Card>
@@ -127,7 +129,7 @@
 		</div>
 
 		<Stack class="gap-2">
-			<h4 class="text-md font-semibold">Results</h4>
+			<h4 class="text-md font-semibold">Details</h4>
 			<table class="">
 				<tbody class="*:border-b *:border-mineShaft-900 *:pt-8 last:*:border-b-0 *:even:text-right">
 					<tr class="*:py-2">
@@ -141,38 +143,30 @@
 							/>
 						</td>
 					</tr>
-					<tr class="*:py-2">
-						<td class="text-muted text-base"> EOS Price </td>
-						<td class="text-right font-medium text-white">
-							<AssetText
-								variant="full"
-								value={ramCalculatorState.tokens || Asset.from('0.0000 EOS')}
-							/>
-						</td>
-					</tr>
-
-					<tr class="*:py-2">
-						<td class="text-muted text-base"> USD/RAM (KB) </td>
-						<td class="text-right font-medium text-white">
-							<AssetText
-								variant="full"
-								value={ramCalculatorState.pricePerKB && data.network.ramprice?.usd
-									? data.network.ramprice?.usd
-									: Asset.from(0, '2,USD')}
-							/>
-						</td>
-					</tr>
-					<tr class="*:py-2">
-						<td class="text-muted text-base"> USD Price </td>
-						<td class="text-right font-medium text-white">
-							<AssetText
-								variant="full"
-								value={data.network.ramprice?.usd
-									? calculateValue(ramCalculatorState.tokens, data.network.ramprice.usd)
-									: Asset.from('0.0000 EOS')}
-							/>
-						</td>
-					</tr>
+					{#if data.network.ramprice?.usd}
+						<tr class="*:py-2">
+							<td class="text-muted text-base"> USD/RAM (KB) </td>
+							<td class="text-right font-medium text-white">
+								<AssetText
+									variant="full"
+									value={ramCalculatorState.pricePerKB && data.network.ramprice?.usd
+										? data.network.ramprice?.usd
+										: Asset.from(0, '2,USD')}
+								/>
+							</td>
+						</tr>
+						<tr class="*:py-2">
+							<td class="text-muted text-base"> USD Price </td>
+							<td class="text-right font-medium text-white">
+								<AssetText
+									variant="full"
+									value={data.network.ramprice?.usd
+										? calculateValue(ramCalculatorState.tokens, data.network.ramprice.usd)
+										: Asset.from('0.0000 EOS')}
+								/>
+							</td>
+						</tr>
+					{/if}
 					<tr class="*:py-2">
 						<td class="text-muted text-base"> Network Fees </td>
 						<td class="text-right font-medium text-white">
@@ -201,12 +195,14 @@
 						<AssetText variant="full" value={marketCapEOS} />
 					</td>
 				</tr>
-				<tr class="*:py-2">
-					<td class="text-muted text-base">Market Cap (USD)</td>
-					<td class="text-right font-medium text-white">
-						<AssetText variant="full" value={marketCapUSD} />
-					</td>
-				</tr>
+				{#if data.network.ramprice?.usd}
+					<tr class="*:py-2">
+						<td class="text-muted text-base">Market Cap (USD)</td>
+						<td class="text-right font-medium text-white">
+							<AssetText variant="full" value={marketCapUSD} />
+						</td>
+					</tr>
+				{/if}
 				<tr class="*:py-2">
 					<td class="text-muted text-base">Supply</td>
 					<td class="text-right font-medium text-white">
