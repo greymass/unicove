@@ -138,10 +138,7 @@
 			{/if}
 		</Stack>
 	</Card>
-	<AccountBalance
-		title="Account Balance"
-		cta={{ href: `/${networkName}/staking/stake`, label: 'Stake' }}
-	/>
+	<AccountBalance cta={{ href: `/${networkName}/staking/stake`, label: 'Stake' }} />
 	<StakingCalculator
 		{apr}
 		network={data.network}

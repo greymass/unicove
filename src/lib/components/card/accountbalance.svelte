@@ -14,10 +14,10 @@
 			label: string;
 			href: string;
 		};
-		title: string;
+		title?: string;
 	}
 
-	const { cta, title }: Props = $props();
+	const { cta, title = 'Account Balance' }: Props = $props();
 </script>
 
 <Card {title}>

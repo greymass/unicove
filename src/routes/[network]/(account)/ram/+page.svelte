@@ -101,7 +101,7 @@
 		</div>
 	</Card>
 
-	<AccountBalance title="Account Balance" />
+	<AccountBalance />
 
 	<!-- RAM Calculator -->
 
