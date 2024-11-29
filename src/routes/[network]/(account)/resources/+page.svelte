@@ -5,6 +5,7 @@
 
 	import CpuAndNetResource from '$lib/components/elements/cpunetresource.svelte';
 	import RamResource from '$lib/components/elements/ramresource.svelte';
+	import AccountBalance from '$lib/components/card/accountbalance.svelte';
 	import { calAvailableSize } from '$lib/utils';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
@@ -94,6 +95,7 @@
 			<RamResource ramAvailable={ramAvailableSize} {precision} />
 			<Button variant="secondary" href="/{network}/ram">RAM Market</Button>
 		</Stack>
+		<AccountBalance />
 	</Stack>
 	<Stack class="hidden max-w-lg flex-1 gap-4">
 		<Stack class="gap-4 px-5 py-3">
