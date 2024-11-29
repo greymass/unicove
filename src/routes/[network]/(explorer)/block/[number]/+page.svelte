@@ -3,7 +3,7 @@
 	import TransactionText from '$lib/components/elements/transaction.svelte';
 	import AccountText from '$lib/components/elements/account.svelte';
 	import Button from '$lib/components/button/button.svelte';
-	import ArrowLeftRight from 'lucide-svelte/icons/arrow-left-right';
+	import { ArrowLeftRight, ArrowRight, ArrowLeft } from 'lucide-svelte';
 	import { DL, DLRow } from '$lib/components/descriptionlist/index.js';
 
 	let { data } = $props();
@@ -71,11 +71,15 @@
 		<Switcher>
 			{#if data.height > 1}
 				<Button href="/{data.network}/block/{Number(data.height) - 1}" variant="secondary">
-					← Previous Block
+					<span class="inline-flex items-center gap-1">
+						<ArrowLeft class="size-4" /> Previous Block
+					</span>
 				</Button>
 			{/if}
 			<Button href="/{data.network}/block/{Number(data.height) + 1}" variant="secondary">
-				Next Block →
+				<span class="inline-flex items-center gap-1">
+					Next Block <ArrowRight class="size-4" />
+				</span>
 			</Button>
 		</Switcher>
 	</Stack>
