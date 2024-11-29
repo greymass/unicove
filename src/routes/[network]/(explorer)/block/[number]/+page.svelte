@@ -16,33 +16,37 @@
 			<h2 class="h3 flex items-center gap-2">
 				<ArrowLeftRight class="size-5" />
 				{transactions.length}
-				{transactions.length > 1 ? 'Transactions' : 'Transaction'}
+				{transactions.length === 1 ? 'Transaction' : 'Transactions'}
 			</h2>
 
-			<table class="table-styles">
-				<thead>
-					<tr>
-						<th>Transaction</th>
-						<th class="text-right">Actions</th>
-						<th class="text-right">CPU (μs)</th>
-						<th class="text-right">NET (Bytes)</th>
-					</tr>
-				</thead>
-				<tbody>
-					{#each transactions as transaction}
-						{#if transaction}
-							{@const txID =
-								typeof transaction.trx === 'string' ? transaction.trx : transaction.trx.id}
-							<tr>
-								<td><TransactionText id={txID} /></td>
-								<td class="text-right">{transaction.trx.transaction?.actions.length || 0}</td>
-								<td class="text-right">{transaction.cpu_usage_us}</td>
-								<td class="text-right">{Number(transaction.net_usage_words) * 8}</td>
-							</tr>
-						{/if}
-					{/each}
-				</tbody>
-			</table>
+			{#if transactions.length}
+				<table class="table-styles">
+					<thead>
+						<tr>
+							<th>Transaction</th>
+							<th class="text-right">Actions</th>
+							<th class="text-right">CPU (μs)</th>
+							<th class="text-right">NET (Bytes)</th>
+						</tr>
+					</thead>
+					<tbody>
+						{#each transactions as transaction}
+							{#if transaction}
+								{@const txID =
+									typeof transaction.trx === 'string' ? transaction.trx : transaction.trx.id}
+								<tr>
+									<td><TransactionText id={txID} /></td>
+									<td class="text-right">{transaction.trx.transaction?.actions.length || 0}</td>
+									<td class="text-right">{transaction.cpu_usage_us}</td>
+									<td class="text-right">{Number(transaction.net_usage_words) * 8}</td>
+								</tr>
+							{/if}
+						{/each}
+					</tbody>
+				</table>
+			{:else}
+				<p>No transactions</p>
+			{/if}
 		</Stack>
 	{/if}
 
