@@ -62,27 +62,25 @@
 <Box>
 	<h1 class="mb-4 text-2xl font-bold">Sign Up with MetaMask</h1>
 
-	<Grid itemWidth="100%">
-		{#if !metaMaskState?.isMetaMaskReady}
-			<Card class="mb-4">
-				<h2 class="mb-2 text-xl font-semibold">Step 1: Install MetaMask</h2>
-				<p class="mb-2">To get started, you need to install MetaMask:</p>
-				<Button href={'https://metamask.io/download/'} blank>Install MetaMask</Button>
-			</Card>
-		{:else if !metaMaskState.installedSnap}
-			<Card class="mb-4">
-				<h2 class="mb-2 text-xl font-semibold">Step 2: Install EOS Wallet</h2>
-				<p class="mb-2">Install the EOS Wallet for MetaMask:</p>
-				<Button onclick={() => requestSnap(metaMaskState)}>Install EOS Wallet</Button>
-			</Card>
-		{:else}
-			<Card class="mb-4">
-				<h2 class="mb-2 text-xl font-semibold">Step 3: Create an Account</h2>
-				<p class="mb-2">Create your {data.network.chain.name} account:</p>
-				<Button onclick={createAccountAndLogin}>Create Account</Button>
-			</Card>
-		{/if}
-	</Grid>
+	{#if !metaMaskState?.isMetaMaskReady}
+		<Card class="mb-4">
+			<h2 class="mb-2 text-xl font-semibold">Step 1: Install MetaMask</h2>
+			<p class="mb-2">To get started, you need to install MetaMask:</p>
+			<Button href={'https://metamask.io/download/'} blank>Install MetaMask</Button>
+		</Card>
+	{:else if !metaMaskState.installedSnap}
+		<Card class="mb-4">
+			<h2 class="mb-2 text-xl font-semibold">Step 2: Install EOS Wallet</h2>
+			<p class="mb-2">Install the EOS Wallet for MetaMask:</p>
+			<Button onclick={() => requestSnap(metaMaskState)}>Install EOS Wallet</Button>
+		</Card>
+	{:else}
+		<Card class="mb-4">
+			<h2 class="mb-2 text-xl font-semibold">Step 3: Create an Account</h2>
+			<p class="mb-2">Create your {data.network.chain.name} account:</p>
+			<Button onclick={createAccountAndLogin}>Create Account</Button>
+		</Card>
+	{/if}
 
 	<Card class="mt-8 gap-2">
 		<h3 class="text-lg font-semibold">How This Works</h3>
