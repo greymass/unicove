@@ -1,30 +1,40 @@
-import type { Load } from '@sveltejs/kit';
+import type { LayoutLoad } from './$types';
 import * as m from '$lib/paraglide/messages.js';
-import { TimePointSec, Transaction } from '@wharfkit/antelope';
-import { languageTag } from '$lib/paraglide/runtime';
+import { API, TimePoint } from '@wharfkit/antelope';
 
-export const load: Load = async ({ fetch, params, parent }) => {
+export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 	const { network } = await parent();
 	const response = await fetch(`/${params.network}/api/block/${params.number}`);
 	const json = await response.json();
-	const block = json.block;
-	// Create metadata for the page
-	const actions = block.transactions.reduce(
-		(acc: number, tx: { trx: { transaction: Transaction } }) => {
-			if (!tx.trx.transaction) {
-				return acc;
-			}
-			return acc + tx.trx.transaction.actions.length;
+	const block = json.block as API.v1.GetBlockResponse;
+
+	const { cpuCount, netCount, actionCount } = block.transactions.reduce(
+		(acc, tx) => {
+			acc.cpuCount += Number(tx.cpu_usage_us);
+			acc.netCount += Number(tx.net_usage_words) * 8;
+			acc.actionCount += tx.trx.transaction ? tx.trx.transaction.actions.length : 0;
+			return acc;
 		},
-		0
+		{ cpuCount: 0, netCount: 0, actionCount: 0 }
 	);
-	const date = TimePointSec.from(block.timestamp).toDate();
+
+	const details = {
+		totalCpu: cpuCount,
+		totalNet: netCount,
+		totalActions: actionCount,
+		blockId: String(block.id),
+		blockNumber: Number(block.block_num),
+		blockProducer: block.producer
+	};
+
+	const date = TimePoint.from(block.timestamp).toDate();
+
 	const description = m.block_height_numbered_description({
 		height: String(params.number),
 		producer: block.producer,
 		timestamp: date,
 		transactions: block.transactions.length,
-		actions
+		actions: actionCount
 	});
 
 	const title = m.block_height_numbered({ height: Number(params.number) });
@@ -32,8 +42,9 @@ export const load: Load = async ({ fetch, params, parent }) => {
 	return {
 		number: params.number,
 		title,
-		subtitle: date.toLocaleString(languageTag()),
+		subtitle: date.toISOString(),
 		block,
+		details,
 		network: params.network,
 		height: Number(params.number),
 		pageMetaTags: {

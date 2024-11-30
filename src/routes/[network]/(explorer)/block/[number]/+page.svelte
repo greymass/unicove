@@ -1,127 +1,115 @@
 <script lang="ts">
-	import { Card, Cluster } from '$lib/components/layout';
-	import TransactionElement from '$lib/components/elements/transaction.svelte';
-	import { Transaction } from '@wharfkit/antelope';
+	import { Stack, MultiCard, Switcher } from '$lib/components/layout';
+	import TransactionText from '$lib/components/elements/transaction.svelte';
+	import AccountText from '$lib/components/elements/account.svelte';
 	import Button from '$lib/components/button/button.svelte';
-	import ArrowRightLeft from 'lucide-svelte/icons/arrow-right-left';
-	import ChevronRight from 'lucide-svelte/icons/chevron-right';
-	import { truncateCenter } from '$lib/utils';
+	import { ArrowLeftRight, ArrowRight, ArrowLeft } from 'lucide-svelte';
+	import { DL, DLRow } from '$lib/components/descriptionlist/index.js';
+	import { goto } from '$lib/utils';
 
-	const { data } = $props();
+	let { data } = $props();
 
-	const totalTransactionCount = $derived(
-		data.block.transactions.filter(
-			(item: { trx: { transaction: Transaction } }) => item.trx?.transaction
-		).length
-	);
+	const previousBlockLink = $derived(`/${data.network}/block/${Number(data.height) - 1}`);
+	const nextBlockLink = $derived(`/${data.network}/block/${Number(data.height) + 1}`);
 
-	const deails: string[][] = $derived.by(() => {
-		const items: string[][] = [];
-		const result = data.block.transactions.reduce(
-			(
-				acc: { cpuCount: number; netCount: number; actionCount: number },
-				tx: { cpu_usage_us: number; net_usage_words: number; trx: { transaction: Transaction } }
-			) => {
-				acc.cpuCount += tx.cpu_usage_us;
-				acc.netCount += tx.net_usage_words * 8;
-				acc.actionCount += tx.trx.transaction ? tx.trx.transaction.actions.length : 0;
-				return acc;
-			},
-			{ cpuCount: 0, netCount: 0, actionCount: 0 }
-		);
-		items.push(['Total Block CPU', `${result.cpuCount} μs`]);
-		items.push(['Total Block NET', `${result.netCount} Bytes`]);
-		items.push(['Total Actions', `${result.actionCount}`]);
-		items.push(['Block ID', `${data.block.id}`]);
-		return items;
-	});
+	const handleKeydown = (e: KeyboardEvent) => {
+		// Don't do anything if search is open
+		if (
+			document.activeElement?.tagName === 'INPUT' ||
+			document.activeElement?.tagName === 'TEXTAREA' ||
+			document.activeElement?.getAttribute('contenteditable') === 'true'
+		) {
+			return;
+		}
+
+		if (e.key === 'ArrowRight') {
+			goto(nextBlockLink);
+		} else if (e.key === 'ArrowLeft') {
+			goto(previousBlockLink);
+		}
+	};
 </script>
 
-<div class="gap-6 text-nowrap *:mb-6 *:w-full *:break-inside-avoid last:*:mb-0 @4xl:columns-2">
-	<Card class="text-muted gap-0 bg-transparent px-2 py-0 sm:px-5">
-		<div class="flex items-center gap-2 py-2 text-white">
-			<ArrowRightLeft class="size-4" />
-			<h3 class="text-xl font-semibold">{totalTransactionCount} Transations</h3>
-		</div>
+<svelte:window on:keydown={handleKeydown} />
 
-		<div class="grid grid-cols-[1.5fr,1fr,1fr,1fr,0fr] py-3 sm:grid-cols-[1.5fr,1fr,1fr,1fr,0.5fr]">
-			<div>Tx ID</div>
-			<div>Actions</div>
-			<div>CPU</div>
-			<div>NET</div>
-			<div></div>
-		</div>
+<MultiCard>
+	{#if data.block.transactions}
+		{@const transactions = data.block.transactions}
+		<Stack id="transactions">
+			<h2 class="h3 flex items-center gap-2">
+				<ArrowLeftRight class="size-5" />
+				{transactions.length}
+				{transactions.length === 1 ? 'Transaction' : 'Transactions'}
+			</h2>
 
-		<div>
-			{#if totalTransactionCount}
-				{#each data.block.transactions as transaction}
-					{#if transaction}
-						<a
-							href="/{data.network}/transaction/{String(transaction.trx.id)}"
-							class="table-row-border table-row-background group grid grid-cols-[1.5fr,1fr,1fr,1fr,0fr] py-3 sm:grid-cols-[1.5fr,1fr,1fr,1fr,0.5fr]"
-						>
-							<div>
-								<span class="text-skyBlue-500 hover:text-skyBlue-400"
-									>{truncateCenter(String(transaction.trx.id))}</span
-								>
-							</div>
-							<div>
-								{transaction.trx.transaction.actions.length}
-							</div>
-							<div>{transaction.cpu_usage_us} μs</div>
-							<div>{transaction.net_usage_words * 8} Bytes</div>
-							<div class="flex items-center justify-center text-white">
-								<div class="hidden sm:block">
-									<ChevronRight class="size-6 group-hover:stroke-skyBlue-400" />
-								</div>
-							</div>
-						</a>
-					{/if}
-				{/each}
+			{#if transactions.length}
+				<table class="table-styles">
+					<thead>
+						<tr>
+							<th>Transaction</th>
+							<th class="text-right">Actions</th>
+							<th class="text-right">CPU (μs)</th>
+							<th class="text-right">NET (Bytes)</th>
+						</tr>
+					</thead>
+					<tbody>
+						{#each transactions as transaction}
+							{#if transaction}
+								{@const txID =
+									typeof transaction.trx === 'string' ? transaction.trx : transaction.trx.id}
+								<tr>
+									<td><TransactionText id={txID} /></td>
+									<td class="text-right">{transaction.trx.transaction?.actions.length || 0}</td>
+									<td class="text-right">{transaction.cpu_usage_us}</td>
+									<td class="text-right">{Number(transaction.net_usage_words) * 8}</td>
+								</tr>
+							{/if}
+						{/each}
+					</tbody>
+				</table>
 			{:else}
-				<div
-					class="table-row-border table-row-background group grid grid-cols-[1.5fr,1fr,1fr,1fr,0fr] py-3 sm:grid-cols-[1.5fr,1fr,1fr,1fr,0.5fr]"
-				>
-					<div>-</div>
-					<div>-</div>
-					<div>-</div>
-					<div>-</div>
-					<div></div>
-				</div>
+				<p>No transactions</p>
 			{/if}
-		</div>
-	</Card>
+		</Stack>
+	{/if}
 
-	<Card class="gap-0 bg-transparent px-2 py-0 sm:px-5">
-		<div class="py-2">
-			<h3 class="text-xl font-semibold">{data.title} details</h3>
-		</div>
-		<table class="table-styles">
-			<tbody>
-				<tr>
-					<td width="42%" class="text-muted align-top">Producter Name: </td>
-					<td width="58%" class="break-all align-top">
-						<a
-							class="text-skyBlue-500 hover:text-skyBlue-400"
-							href="/{data.network}/account/{data.block.producer}">{data.block.producer}</a
-						></td
-					>
-				</tr>
-				{#each deails as detail}
-					<tr>
-						<td width="42%" class="text-muted align-top">{detail[0]}: </td>
-						<td width="58%" class="text-wrap break-all align-top">{detail[1]}</td>
-					</tr>
-				{/each}
-			</tbody>
-		</table>
-		<Cluster class="mt-8">
-			<Button href="/{data.network}/block/{Number(data.height) - 1}" variant="secondary"
-				>← Previous Block</Button
-			>
-			<Button href="/{data.network}/block/{Number(data.height) + 1}" variant="secondary"
-				>Next Block →</Button
-			>
-		</Cluster>
-	</Card>
-</div>
+	<Stack class="gap-4" id="details">
+		<h2 class="h3">Block Details</h2>
+
+		<DL>
+			<DLRow title={'Block Number'}>
+				{data.details.blockNumber}
+			</DLRow>
+			<DLRow title={'Producer Name'}>
+				<AccountText name={data.details.blockProducer} />
+			</DLRow>
+			<DLRow title={'Total CPU'}>
+				{data.details.totalCpu} μs
+			</DLRow>
+			<DLRow title={'Total NET'}>
+				{data.details.totalNet * 8} Bytes
+			</DLRow>
+			<DLRow title={'Total Actions'}>
+				{data.details.totalActions}
+			</DLRow>
+			<DLRow title={'Block ID'}>
+				{data.details.blockId}
+			</DLRow>
+		</DL>
+
+		<Switcher>
+			{#if data.height > 1}
+				<Button href={previousBlockLink} variant="secondary">
+					<span class="inline-flex items-center gap-1">
+						<ArrowLeft class="size-4" /> Previous Block
+					</span>
+				</Button>
+			{/if}
+			<Button href={nextBlockLink} variant="secondary">
+				<span class="inline-flex items-center gap-1">
+					Next Block <ArrowRight class="size-4" />
+				</span>
+			</Button>
+		</Switcher>
+	</Stack>
+</MultiCard>
