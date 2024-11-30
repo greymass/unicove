@@ -45,7 +45,7 @@
 	// }
 </script>
 
-{#if data.transaction?.trx?.actions}
+{#if data.transaction?.trx.trx?.actions}
 	{@const actions = data.transaction.trx.trx.actions as Action[]}
 	<table class="table-styles">
 		<thead>
