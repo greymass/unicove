@@ -11,7 +11,7 @@
 	import { page } from '$app/stores';
 
 	interface Props extends HTMLAnchorAttributes {
-		name: string;
+		name: Name | string;
 		contract?: boolean;
 		children?: Snippet;
 		preview?: boolean;
@@ -50,7 +50,10 @@
 
 <a
 	href={path}
-	class={cn('focus-visible:outline focus-visible:outline-solar-500 ', props.class)}
+	class={cn(
+		'text-skyBlue-500 hover:text-skyBlue-400 focus-visible:outline focus-visible:outline-solar-500 ',
+		props.class
+	)}
 	use:melt={$trigger}
 >
 	{#if children}

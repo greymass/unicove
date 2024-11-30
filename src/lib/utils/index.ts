@@ -1,3 +1,5 @@
+import { languageTag } from '$lib/paraglide/runtime';
+import { goto as svelteGoto } from '$app/navigation';
 import { ABI, Asset, type NameType } from '@wharfkit/antelope';
 import yaml from 'yaml';
 
@@ -99,3 +101,11 @@ export function isSameToken(token1?: TokenKeyParams, token2?: TokenKeyParams): b
 		String(token1.symbol) === String(token2.symbol)
 	);
 }
+
+/**
+ * Adds the language tag prefix to the built-in svelte goto()
+ * @example "/eos/account/123" => "/en/eos/account/123"
+ */
+export const goto: typeof svelteGoto = (url, opts = {}) => {
+	return svelteGoto(`/${languageTag()}${url}`, opts);
+};
