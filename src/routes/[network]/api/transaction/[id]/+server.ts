@@ -17,7 +17,7 @@ export async function GET({ fetch, params }: RequestEvent) {
 		transaction = await network.client.v1.history.get_transaction(String(params.id));
 	} catch (e) {
 		return error(500, {
-			message: `Error while loading account ${params.id}: ${e}.`
+			message: `Error while loading transaction ${params.id}: ${e}.`
 		});
 	}
 

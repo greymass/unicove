@@ -1,5 +1,9 @@
 import { browser } from '$app/environment';
-import { PUBLIC_LOCAL_SIGNER } from '$env/static/public';
+import {
+	PUBLIC_LOCAL_SIGNER,
+	PUBLIC_METAMASK_SERVICE_URL,
+	PUBLIC_METAMASK_SNAP_ORIGIN
+} from '$env/static/public';
 
 import { ChainDefinition, Chains } from '@wharfkit/common';
 import {
@@ -48,7 +52,10 @@ const walletPlugins: WalletPlugin[] = [
 	new WalletPluginWombat()
 ];
 
-export const accountCreationPluginMetamask = new AccountCreationPluginMetamask();
+export const accountCreationPluginMetamask = new AccountCreationPluginMetamask({
+	accountCreationServiceUrl: PUBLIC_METAMASK_SERVICE_URL,
+	snapOrigin: PUBLIC_METAMASK_SNAP_ORIGIN
+});
 
 const accountCreationPlugins: AccountCreationPlugin[] = [
 	accountCreationPluginMetamask,

@@ -2,7 +2,6 @@
 	import { getContext } from 'svelte';
 	import { Checksum256 } from '@wharfkit/antelope';
 
-	import { getSetting } from '$lib/state/settings.svelte.js';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 
 	import SummarySellRAM from '$lib/components/summary/eosio/sellram.svelte';
@@ -14,9 +13,9 @@
 	import TransactionSummary from '$lib/components/transactionSummary.svelte';
 	import AssetInput from '$lib/components/input/asset.svelte';
 	import BytesInput from '$lib/components/input/bytes.svelte';
-	import Card from '$lib/components/layout/box/card.svelte';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import RamResource from '$lib/components/elements/ramresource.svelte';
+	import * as m from '$lib/paraglide/messages';
 
 	import { SellRAMState } from './state.svelte';
 	import { calAvailableSize, preventDefault } from '$lib/utils';
@@ -26,7 +25,6 @@
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
-	const debugMode = getSetting('debug-mode', true);
 
 	const sellRamState: SellRAMState = $state(new SellRAMState(data.network.chain));
 	const ramAvailableSize = $derived(calAvailableSize(context.account?.ram));
@@ -87,14 +85,12 @@
 
 {#if transactionId}
 	<TransactionSummary {transactionId} />
-{/if}
-
-<Card>
+{:else}
 	<form onsubmit={preventDefault(handleSellRAM)} class="mx-auto max-w-2xl space-y-4">
 		<RamResource class="hidden" ramAvailable={ramAvailableSize} />
 
 		<Stack class="gap-3">
-			<Label class="text-lg" for="bytesInput">Amount of RAM to sell:</Label>
+			<Label class="text-lg" for="bytesInput">{m.ram_sale_value()}</Label>
 			<div class="flex gap-4">
 				<div class="flex-1">
 					<BytesInput
@@ -113,10 +109,10 @@
 				</div>
 			</div>
 			{#if sellRamState.insufficientRAM}
-				<p class="text-red-500">Insufficient RAM available. Please enter a smaller amount.</p>
+				<p class="text-red-500">{m.form_validation_insufficient_balance({ unit: 'RAM' })}</p>
 			{/if}
 			<p>
-				Available:
+				{m.common_labeled_unit_available({ unit: 'RAM' })}
 				{#if context.account}
 					{sellRamState.maxInKBs}
 				{:else}
@@ -125,32 +121,38 @@
 			</p>
 		</Stack>
 
-		<Button type="submit" class="mt-4 w-full" disabled={!sellRamState.valid}>Sell RAM</Button>
+		<Button type="submit" class="mt-4 w-full" disabled={!sellRamState.valid}>
+			{m.common_unit_sell({ unit: 'RAM' })}
+		</Button>
 
 		<!-- TODO: use table  -->
 		<Stack class="gap-3">
 			<div class="mt-4 grid grid-cols-2 gap-y-0 text-lg">
-				<p class="text-muted">EOS/RAM Price (KB)</p>
+				<p class="text-muted">
+					{m.common_labeled_unit_price({
+						unit: `${context.network.chain.systemToken?.symbol.name}/RAM`
+					})} (KB)
+				</p>
 				<AssetText variant="full" class="text-right" value={sellRamState.pricePerKB} />
 
 				<div class="col-span-2 my-2 border-b border-mineShaft-900"></div>
 
-				<p class="text-muted">RAM to be sold</p>
+				<p class="text-muted">{m.ram_to_sell()}</p>
 				<AssetText variant="full" class="text-right" value={sellRamState.kbsToSell} />
 
 				<div class="col-span-2 my-2 border-b border-mineShaft-900"></div>
 
-				<p class="text-muted">Total Proceeds</p>
+				<p class="text-muted">{m.total_proceeds()}</p>
 				<AssetText variant="full" class="text-right" value={sellRamState.bytesValue} />
 
 				<div class="col-span-2 my-2 border-b border-mineShaft-900"></div>
 
-				<p class="text-muted">Network fee (0.5%)</p>
+				<p class="text-muted">{m.common_network_fees()} (0.5%)</p>
 				<AssetText variant="full" class="text-right" value={sellRamState.fee} />
 
 				<div class="col-span-2 my-2 border-b border-mineShaft-900"></div>
 
-				<p class="text-muted">Expected to receive</p>
+				<p class="text-muted">{m.common_expected_receive()}</p>
 				<AssetText variant="full" class="text-right" value={sellRamState.expectedToReceive} />
 			</div>
 
@@ -158,26 +160,26 @@
 				<SummarySellRAM class="hidden" action={{ data: sellRamState.toJSON() }} />
 			{/if}
 		</Stack>
-
-		{#if debugMode.value}
-			<h3 class="h3">Debugging</h3>
-			<Code
-				>{JSON.stringify(
-					{
-						account: sellRamState.account,
-						bytes: sellRamState.bytes,
-						max: sellRamState.max,
-						chain: sellRamState.chain,
-						pricePerKB: sellRamState.pricePerKB,
-						bytesValue: sellRamState.bytesValue,
-						insufficientRAM: sellRamState.insufficientRAM,
-						valid: sellRamState.valid,
-						balances: context.account?.balances
-					},
-					undefined,
-					2
-				)}</Code
-			>
-		{/if}
 	</form>
-</Card>
+{/if}
+
+{#if context.settings.data.debugMode}
+	<h3 class="h3">{m.common_debugging()}</h3>
+	<Code
+		>{JSON.stringify(
+			{
+				account: sellRamState.account,
+				bytes: sellRamState.bytes,
+				max: sellRamState.max,
+				chain: sellRamState.chain,
+				pricePerKB: sellRamState.pricePerKB,
+				bytesValue: sellRamState.bytesValue,
+				insufficientRAM: sellRamState.insufficientRAM,
+				valid: sellRamState.valid,
+				balances: context.account?.balances
+			},
+			undefined,
+			2
+		)}</Code
+	>
+{/if}

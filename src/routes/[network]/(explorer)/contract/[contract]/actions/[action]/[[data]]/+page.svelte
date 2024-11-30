@@ -5,7 +5,6 @@
 	import type { Contract } from '@wharfkit/contract';
 
 	import { page } from '$app/stores';
-	import { getSetting } from '$lib/state/settings.svelte';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import Button from '$lib/components/button/button.svelte';
@@ -22,7 +21,6 @@
 
 	const context = getContext<UnicoveContext>('state');
 	const contract = getContext<Contract>('contract');
-	const debugMode = getSetting('debug-mode', false);
 
 	const flatten = (
 		obj: Record<string, any>,
@@ -159,7 +157,7 @@
 	<Textinput value={link} readonly />
 </fieldset>
 
-{#if debugMode.value}
+{#if context.settings.data.debugMode}
 	<p>State</p>
 	<Code>{JSON.stringify(state, null, 2)}</Code>
 	<p>Decoded</p>

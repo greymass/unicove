@@ -11,8 +11,8 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
 	import { Cluster, Stack } from '$lib/components/layout/index.js';
 	import { accountCreationPluginMetamask } from '$lib/state/client/wharf.svelte';
-	import { getSetting } from '$lib/state/settings.svelte';
 	import { chainLogos } from '@wharfkit/common';
+	import { getChainDefinitionFromParams } from '$lib/state/network.svelte.js';
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');
@@ -22,7 +22,6 @@
 	let isMetaMaskSession: boolean = $derived(
 		context.wharf.session?.walletPlugin.id === 'wallet-plugin-metamask'
 	);
-	const advancedMode = getSetting('advanced-mode', false);
 
 	let currentVersion = $derived(metaMaskState.installedSnap?.version);
 	let needsUpdate = $derived(
@@ -91,6 +90,26 @@
 			chain: data.network.chain,
 			walletPlugin: 'wallet-plugin-metamask'
 		});
+	}
+
+	async function createAccountAndLogin() {
+		try {
+			const accountCreationResponse = await context.wharf.createAccount({
+				chain: data.network.chain,
+				pluginId: 'account-creation-plugin-metamask'
+			});
+			console.log(`Account created: ${accountCreationResponse.accountName}`);
+
+			await context.wharf.login({
+				permissionLevel: `${accountCreationResponse.accountName}@active`,
+				walletPlugin: 'wallet-plugin-metamask'
+			});
+		} catch (error) {
+			console.error('Error creating account:', error);
+			alert(
+				`Error creating account through Metamask. Please make sure that the Antelope snap is enabled.`
+			);
+		}
 	}
 
 	const networkLogo = String(chainLogos.get(String(data.network.chain.id)));
@@ -197,12 +216,10 @@
 					{:else}
 						<Cluster>
 							<Button onclick={login}>Login</Button>
-							<Button href={`/${data.network}/signup/wallets/extensions/metamask`}>
-								Create an account
-							</Button>
+							<Button onclick={createAccountAndLogin}>Create an account</Button>
 						</Cluster>
 					{/if}
-					{#if advancedMode.value}
+					{#if context.settings.data.advancedMode}
 						<Stack class="mb-1 gap-2">
 							<p>EOS Wallet Public Key</p>
 							<p class="text-xs">{metaMaskState.publicKey}</p>

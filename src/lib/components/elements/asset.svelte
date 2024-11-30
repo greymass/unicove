@@ -4,9 +4,10 @@
 
 	import { languageTag } from '$lib/paraglide/runtime.js';
 	import { cn } from '$lib/utils';
-	import { getSetting } from '$lib/state/settings.svelte';
+	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import { getContext } from 'svelte';
 
-	const advancedMode = getSetting('advanced-mode', false);
+	const context = getContext<UnicoveContext>('state');
 
 	interface AssetProps extends HTMLAttributes<HTMLSpanElement> {
 		value?: Asset;
@@ -28,7 +29,7 @@
 	const currencyOptions: Intl.NumberFormatOptions = {
 		style: 'currency',
 		currency: asset?.symbol.name,
-		minimumFractionDigits: advancedMode.value ? asset?.symbol.precision : undefined
+		minimumFractionDigits: context.settings.data.advancedMode ? asset?.symbol.precision : undefined
 	};
 
 	function formatAssetValue() {
