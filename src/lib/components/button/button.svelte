@@ -9,7 +9,6 @@
 		href?: string;
 		variant?: 'primary' | 'secondary' | 'pill' | 'outline';
 		disabled?: boolean;
-		active?: boolean;
 		blank?: boolean;
 		class?: string;
 		children: Snippet;
@@ -22,7 +21,6 @@
 		meltAction,
 		onclick,
 		variant = 'primary',
-		active = false,
 		disabled = false,
 		...props
 	}: ButtonProps = $props();
@@ -46,7 +44,6 @@
 <svelte:element
 	this={tag}
 	use:melt={$meltElement}
-	data-active={active}
 	data-variant={variant}
 	class={className}
 	role={ariaRole}
@@ -68,7 +65,7 @@
 	}
 
 	[data-variant='pill'] {
-		@apply relative inline-flex h-10 items-center justify-center text-nowrap rounded-full border-2 border-transparent px-5 text-center text-base font-medium leading-4 transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-solar-500 hover:active:bg-mineShaft-950 data-[active=true]:border-mineShaft-200/30 [@media(any-hover:hover)]:hover:bg-mineShaft-900 [@media(any-hover:hover)]:hover:text-mineShaft-100;
+		@apply relative inline-flex h-10 items-center justify-center text-nowrap rounded-full border-2 border-transparent px-5 text-center text-base font-medium leading-4 transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-solar-500 hover:active:bg-mineShaft-950 aria-[current=page]:border-mineShaft-200/30 [@media(any-hover:hover)]:hover:bg-mineShaft-900 [@media(any-hover:hover)]:hover:text-mineShaft-100;
 	}
 
 	.button-text {
