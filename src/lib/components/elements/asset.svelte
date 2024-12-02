@@ -29,6 +29,7 @@
 	const currencyOptions: Intl.NumberFormatOptions = {
 		style: 'currency',
 		currency: asset?.symbol.name,
+		currencyDisplay: 'narrowSymbol',
 		minimumFractionDigits: context.settings.data.advancedMode ? asset?.symbol.precision : undefined
 	};
 
