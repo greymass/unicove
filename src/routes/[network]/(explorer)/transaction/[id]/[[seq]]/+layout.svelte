@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { page } from '$app/stores';
 	import { Stack } from '$lib/components/layout/index.js';
 	import PillGroup from '$lib/components/navigation/pillgroup.svelte';
 	import { type UnicoveContext } from '$lib/state/client.svelte.js';
@@ -9,7 +8,7 @@
 
 	const { settings } = getContext<UnicoveContext>('state');
 
-	const tabOptions = $derived.by(() => {
+	const options = $derived.by(() => {
 		let urlBase = `/${data.network}/transaction/${data.id}`;
 		if (data.seq) {
 			urlBase += `/${data.seq}`;
@@ -20,16 +19,6 @@
 			{ href: `${urlBase}/data`, text: 'Data' }
 		];
 	});
-
-	let currentTab = $derived($page.url.pathname.split('/').slice(2)[3]);
-
-	// Derive the active state of each destination
-	let options = $derived(
-		tabOptions.map((option) => ({
-			...option,
-			active: option.href.split('/').slice(2)[2] === currentTab
-		}))
-	);
 </script>
 
 <Stack class="@container">

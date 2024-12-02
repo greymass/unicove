@@ -26,7 +26,7 @@
 		<h3 class="h3">Page Actions</h3>
 		<PillGroup
 			options={[
-				{ href: '#', text: 'Overview', active: true },
+				{ href: '#', text: 'Overview' },
 				{ href: '#', text: 'Stake' },
 				{ href: '#', text: 'Unstake' },
 				{ href: '#', text: 'Withdraw' }
