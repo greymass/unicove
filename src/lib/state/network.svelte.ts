@@ -6,6 +6,7 @@ import { snapOrigins } from '@wharfkit/wallet-plugin-metamask';
 
 import { Types as DelphiOracleTypes } from '$lib/wharf/contracts/delphioracle';
 import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
+import { Contract as MSIGContract } from '$lib/wharf/contracts/msig';
 import { Contract as SystemContract, Types as SystemTypes } from '$lib/wharf/contracts/system';
 import { Contract as TokenContract } from '$lib/wharf/contracts/token';
 
@@ -81,6 +82,7 @@ export class NetworkState {
 		});
 
 		this.contracts = {
+			msig: new MSIGContract({ client: this.client }),
 			token: new TokenContract({ client: this.client }),
 			system: new SystemContract({ client: this.client })
 		};
