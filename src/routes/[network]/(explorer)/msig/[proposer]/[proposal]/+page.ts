@@ -1,27 +1,19 @@
-import { PackedTransaction } from '@wharfkit/antelope';
+import { Name } from '@wharfkit/antelope';
 import type { PageLoad } from './$types';
 
-export const load: PageLoad = async ({ fetch, params, parent }) => {
-	const { network } = await parent();
-	const response = await fetch(`/${params.network}/api/msig/${params.proposer}/${params.proposal}`);
-	const json = await response.json();
-	const packed = PackedTransaction.from({
-		compression: false,
-		signatures: [],
-		packed_trx: json.proposal.packed_transaction,
-		packed_context_free_data: []
-	});
-	const transaction = packed.getTransaction();
+export const load: PageLoad = async ({ parent }) => {
+	const { proposal } = await parent();
+
+	const requested_names: Name[] = proposal.approvals.requested_approvals.map(({ level }) =>
+		Name.from(level.actor)
+	);
+
+	const provided_names: Name[] = proposal.approvals.provided_approvals.map(({ level }) =>
+		Name.from(level.actor)
+	);
+
 	return {
-		title: `${params.proposal}`,
-		subtitle: `An MSIG proposed by ${params.proposer} on the ${network.chain.name} Network`,
-		proposal: {
-			approvals: json.approvals,
-			proposer: params.proposer,
-			name: params.proposal,
-			hash: transaction.id,
-			packed,
-			transaction
-		}
+		requested_names,
+		provided_names
 	};
 };
