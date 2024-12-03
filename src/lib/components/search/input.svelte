@@ -1,10 +1,11 @@
 <script lang="ts">
-	import { getContext, type ComponentProps } from 'svelte';
+	import { getContext, onMount, type ComponentProps } from 'svelte';
 	import { createDialog, melt, type CreateDialogProps } from '@melt-ui/svelte';
 	import type TextInput from '../input/text.svelte';
 	import { preventDefault } from '$lib/utils';
 	import { goto } from '$app/navigation';
 	import { fade, scale } from 'svelte/transition';
+	import { StateHistory } from 'runed';
 	import * as m from '$lib/paraglide/messages';
 	import {
 		SearchRecordType,
@@ -35,12 +36,25 @@
 	let { ref = $bindable(), debug = false, class: className }: NameInputProps = $props();
 
 	let searchValue: string = $state('');
+
 	let selectedIndex: number = $state(0);
+	let previousIndex: number = $state(0);
+	let previousHistory = new StateHistory(
+		() => previousIndex,
+		(c) => (previousIndex = c)
+	);
 
 	let results: SearchRecord[] = $state(context.history.get());
+	let parent: SearchRecord | undefined = $state(undefined);
+	const history = new StateHistory(
+		() => parent,
+		(c) => (parent = c)
+	);
 
 	$effect(() => {
-		if (searchValue) {
+		if (parent && parent.children) {
+			results = parent.children;
+		} else if (searchValue) {
 			results = search(context, searchValue);
 		} else {
 			results = context.history.get();
@@ -96,6 +110,10 @@
 		onOpenChange: resetSelectedIndex
 	});
 
+	onMount(() => {
+		$open = true;
+	});
+
 	function handleKeydown(event: KeyboardEvent) {
 		// Focus the search input when the user presses '/' outside a text input or 'Cmd+k' anywhere
 		if (
@@ -134,6 +152,27 @@
 				}
 				// Select previous context.history item
 				selectedIndex = (results.length + selectedIndex - 1) % results.length;
+				event.preventDefault();
+				return;
+			}
+
+			if (event.key === 'ArrowLeft') {
+				if (parent) {
+					selectedIndex = previousIndex;
+					previousHistory.undo();
+					history.undo();
+				}
+				event.preventDefault();
+				return;
+			}
+
+			if (event.key === 'ArrowRight') {
+				let result = results[selectedIndex];
+				if (result.children && result.children.length > 0) {
+					parent = result;
+					previousIndex = selectedIndex;
+					selectedIndex = 0;
+				}
 				event.preventDefault();
 				return;
 			}
@@ -332,7 +371,9 @@
 				data-active={active}
 				class="hidden size-12 place-items-center text-mineShaft-50 group-hover/row:grid data-[active=true]:grid group-has-[:hover]/list:data-[active=true]:hidden group-has-[:hover]/list:group-hover/row:data-[active=true]:grid"
 			>
-				<ArrowRight />
+				{#if item.children && item.children.length > 0}
+					<ArrowRight />
+				{/if}
 			</div>
 		</Result>
 	</li>

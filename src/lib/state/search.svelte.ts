@@ -17,6 +17,8 @@ export enum SearchRecordType {
 	BLOCK = 'block',
 	// Clear all search history
 	CLEAR = 'clear',
+	// View a contract
+	CONTRACT = 'contract',
 	// View a key
 	KEY = 'key',
 	// Visit a page
@@ -31,6 +33,7 @@ export enum SearchRecordType {
 
 export interface SearchRecord {
 	type: SearchRecordType;
+	children?: SearchRecord[];
 	data?: unknown; // arbitrary data field
 	value: string;
 	keywords?: string[];
@@ -44,25 +47,94 @@ export interface SearchRecord {
 
 export const SearchCommands: SearchRecord[] = [
 	{
+		value: 'Debug',
+		type: SearchRecordType.PAGE,
+		children: [
+			{
+				value: 'Debug 2',
+				type: SearchRecordType.PAGE,
+				children: [
+					{
+						value: 'Debug 3',
+						type: SearchRecordType.PAGE,
+						children: [],
+						keywords: ['debug', 'foo'],
+						description: '(no children)',
+						url: '/staking'
+					},
+					{
+						value: 'Debug 3',
+						type: SearchRecordType.PAGE,
+						children: [],
+						keywords: ['debug', 'foo'],
+						description: '(no children)',
+						url: '/staking'
+					},
+					{
+						value: 'Debug 3',
+						type: SearchRecordType.PAGE,
+						children: [
+							{
+								value: 'Debug 4',
+								type: SearchRecordType.PAGE,
+								children: [],
+								keywords: ['debug', 'foo'],
+								description: '(no children)',
+								url: '/staking'
+							},
+							{
+								value: 'Debug 4',
+								type: SearchRecordType.PAGE,
+								children: [],
+								keywords: ['debug', 'foo'],
+								description: '(no children)',
+								url: '/staking'
+							}
+						],
+						keywords: ['debug', 'foo'],
+						description: '(has children)',
+						url: '/staking'
+					}
+				],
+				keywords: ['debug', 'foo'],
+				description: '(has children)',
+				url: '/staking'
+			},
+			{
+				value: 'Debug 2',
+				type: SearchRecordType.PAGE,
+				children: [],
+				keywords: ['debug', 'foo'],
+				description: '(no children)',
+				url: '/staking'
+			}
+		],
+		keywords: ['debug', 'foo'],
+		description: '(has children)',
+		url: '/staking'
+	},
+	{
 		value: 'RAM Market',
 		type: SearchRecordType.PAGE,
+		children: [
+			{
+				value: 'Buy RAM',
+				type: SearchRecordType.PAGE,
+				keywords: ['ram', 'buy'],
+				description: 'Purchase RAM',
+				url: '/ram/buy'
+			},
+			{
+				value: 'Sell RAM',
+				type: SearchRecordType.PAGE,
+				keywords: ['ram', 'sell'],
+				description: 'Sell RAM',
+				url: '/ram/sell'
+			}
+		],
 		keywords: ['ram'],
 		description: 'Market Overview',
 		url: '/ram'
-	},
-	{
-		value: 'Buy RAM',
-		type: SearchRecordType.PAGE,
-		keywords: ['ram', 'buy'],
-		description: 'Purchase RAM',
-		url: '/ram/buy'
-	},
-	{
-		value: 'Sell RAM',
-		type: SearchRecordType.PAGE,
-		keywords: ['ram', 'sell'],
-		description: 'Sell RAM',
-		url: '/ram/sell'
 	},
 	{
 		value: 'Send',
@@ -81,23 +153,25 @@ export const SearchCommands: SearchRecord[] = [
 	{
 		value: 'Staking',
 		type: SearchRecordType.PAGE,
+		children: [
+			{
+				value: 'Stake',
+				type: SearchRecordType.PAGE,
+				keywords: ['stake'],
+				description: 'Stake tokens',
+				url: '/staking/stake'
+			},
+			{
+				value: 'Unstake',
+				type: SearchRecordType.PAGE,
+				keywords: ['unstake'],
+				description: 'Unstake tokens',
+				url: '/staking/unstake'
+			}
+		],
 		keywords: ['staking', 'stake'],
 		description: 'Staking overview',
 		url: '/staking'
-	},
-	{
-		value: 'Stake',
-		type: SearchRecordType.PAGE,
-		keywords: ['stake'],
-		description: 'Stake tokens',
-		url: '/staking/stake'
-	},
-	{
-		value: 'Unstake',
-		type: SearchRecordType.PAGE,
-		keywords: ['unstake'],
-		description: 'Unstake tokens',
-		url: '/staking/unstake'
 	},
 	{
 		value: 'Resources',
@@ -181,6 +255,7 @@ export function searchHistory(query: string, recentHistory: SearchRecordStorage)
 export function getPossibleSearchTypes(value: string): SearchRecordType[] {
 	const types: SearchRecordType[] = [];
 	if (isSearchAccount(value)) types.push(SearchRecordType.ACCOUNT);
+	if (isSearchAccount(value)) types.push(SearchRecordType.CONTRACT);
 	if (isSearchBlock(value)) types.push(SearchRecordType.BLOCK);
 	if (isSearchKey(value)) types.push(SearchRecordType.KEY);
 	if (isSearchTransaction(value)) types.push(SearchRecordType.TRANSACTION);

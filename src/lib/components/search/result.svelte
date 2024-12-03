@@ -1,5 +1,13 @@
 <script lang="ts">
-	import { AppWindow, ArrowLeftRight, Box, Boxes, Key, UserSearch } from 'lucide-svelte';
+	import {
+		AppWindow,
+		ArrowLeftRight,
+		Box,
+		Boxes,
+		Key,
+		ReceiptText,
+		UserSearch
+	} from 'lucide-svelte';
 	import type { ComponentProps, Snippet } from 'svelte';
 	import * as m from '$lib/paraglide/messages';
 
@@ -32,6 +40,9 @@
 			<span>{record.value}</span>
 		{:else if record.type === SearchRecordType.BLOCK}
 			<Box class="size-4" />
+			<span>{record.value}</span>
+		{:else if record.type === SearchRecordType.CONTRACT}
+			<ReceiptText class="size-4" />
 			<span>{record.value}</span>
 		{:else if record.type === SearchRecordType.KEY}
 			<Key class="size-4" />
