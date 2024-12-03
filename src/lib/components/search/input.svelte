@@ -36,9 +36,13 @@
 	let { ref = $bindable(), debug = false, class: className }: NameInputProps = $props();
 
 	let searchValue: string = $state('');
-	let submenu = $state('');
 
 	let selectedIndex: number = $state(0);
+	let previousIndex: number = $state(0);
+	let previousHistory = new StateHistory(
+		() => previousIndex,
+		(c) => (previousIndex = c)
+	);
 
 	let results: SearchRecord[] = $state(context.history.get());
 	let parent: SearchRecord | undefined = $state(undefined);
@@ -154,7 +158,8 @@
 
 			if (event.key === 'ArrowLeft') {
 				if (parent) {
-					selectedIndex = 0;
+					selectedIndex = previousIndex;
+					previousHistory.undo();
 					history.undo();
 				}
 				event.preventDefault();
@@ -165,6 +170,7 @@
 				let result = results[selectedIndex];
 				if (result.children && result.children.length > 0) {
 					parent = result;
+					previousIndex = selectedIndex;
 					selectedIndex = 0;
 				}
 				event.preventDefault();
@@ -365,7 +371,9 @@
 				data-active={active}
 				class="hidden size-12 place-items-center text-mineShaft-50 group-hover/row:grid data-[active=true]:grid group-has-[:hover]/list:data-[active=true]:hidden group-has-[:hover]/list:group-hover/row:data-[active=true]:grid"
 			>
-				<ArrowRight />
+				{#if item.children && item.children.length > 0}
+					<ArrowRight />
+				{/if}
 			</div>
 		</Result>
 	</li>
