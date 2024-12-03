@@ -17,6 +17,8 @@ export enum SearchRecordType {
 	BLOCK = 'block',
 	// Clear all search history
 	CLEAR = 'clear',
+	// View a contract
+	CONTRACT = 'contract',
 	// View a key
 	KEY = 'key',
 	// Visit a page
@@ -181,6 +183,7 @@ export function searchHistory(query: string, recentHistory: SearchRecordStorage)
 export function getPossibleSearchTypes(value: string): SearchRecordType[] {
 	const types: SearchRecordType[] = [];
 	if (isSearchAccount(value)) types.push(SearchRecordType.ACCOUNT);
+	if (isSearchAccount(value)) types.push(SearchRecordType.CONTRACT);
 	if (isSearchBlock(value)) types.push(SearchRecordType.BLOCK);
 	if (isSearchKey(value)) types.push(SearchRecordType.KEY);
 	if (isSearchTransaction(value)) types.push(SearchRecordType.TRANSACTION);
