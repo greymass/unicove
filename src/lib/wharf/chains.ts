@@ -2,11 +2,13 @@ import type { Asset } from '@wharfkit/antelope';
 import type { ChainIndices } from '@wharfkit/common';
 
 import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
+import { Contract as MSIGContract } from '$lib/wharf/contracts/msig';
 import { Contract as SystemContract } from '$lib/wharf/contracts/system';
 import { Contract as TokenContract } from '$lib/wharf/contracts/token';
 
 export interface DefaultContracts {
 	delphioracle?: DelphiOracleContract;
+	msig: MSIGContract;
 	token: TokenContract;
 	system: SystemContract;
 }
