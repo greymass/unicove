@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { page } from '$app/stores';
 	import PillGroup from '$lib/components/navigation/pillgroup.svelte';
 	import { Contract } from '@wharfkit/contract';
 	import { setContext } from 'svelte';
@@ -15,7 +14,7 @@
 		})
 	);
 
-	const tabOptions = $derived.by(() => {
+	const options = $derived.by(() => {
 		const account = String(data.contract);
 		const network = String(data.network);
 		return [
@@ -35,16 +34,6 @@
 			{ href: `/${network}/contract/${account}/abi`, text: 'ABI' }
 		];
 	});
-
-	let currentTab = $derived($page.url.pathname.split('/').slice(2)[3]);
-
-	// Derive the active state of each destination
-	let options = $derived(
-		tabOptions.map((option) => ({
-			...option,
-			active: option.href.split('/').slice(2)[2] === currentTab
-		}))
-	);
 </script>
 
 <!-- <Stack class="gap-2"> -->
