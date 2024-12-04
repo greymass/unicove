@@ -16,7 +16,7 @@ export async function GET({ params }: RequestEvent) {
 			tokens: tokens[params.network as ChainShortName]
 		},
 		{
-			headers: getCacheHeaders(300) // 60 min cache
+			headers: getCacheHeaders(3600)
 		}
 	);
 }
