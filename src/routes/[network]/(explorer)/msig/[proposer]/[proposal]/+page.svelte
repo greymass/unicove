@@ -3,7 +3,7 @@
 	import { DL, DLRow } from '$lib/components/descriptionlist/index.js';
 	import { MultiCard, Stack } from '$lib/components/layout/index.js';
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
-	import { Name, PermissionLevel } from '@wharfkit/antelope';
+	import { PermissionLevel } from '@wharfkit/antelope';
 	import { getContext } from 'svelte';
 	import dayjs from 'dayjs';
 	import relativeTime from 'dayjs/plugin/relativeTime';
@@ -43,8 +43,6 @@
 	let userHasApproved = $derived(
 		accountHasApproved(wharf.session?.permissionLevel) || !!manager.txid
 	);
-
-	let userIsProposer = $derived(wharf.session?.actor.equals(Name.from(proposal.proposer)) || false);
 
 	// Expiry date
 	let relativeTimeToExpiry = $derived(dayjs(proposal.transaction.expiration.toDate()).fromNow());
@@ -139,7 +137,6 @@
 		</DL>
 	</Stack>
 
-	<!-- {#if isUserApprover && !proposalExpired} -->
 	{#if userIsApprover}
 		{#if userHasApproved}
 			<Button variant="secondary" onclick={handleUnapprove}>Unapprove</Button>
@@ -148,9 +145,7 @@
 		{/if}
 	{/if}
 
-	{#if userIsProposer && !proposalExpired}
-		<Button variant="primary" onclick={handleExecute}>Execute</Button>
-	{/if}
+	<Button variant="primary" onclick={handleExecute} disabled={proposalExpired}>Execute</Button>
 </MultiCard>
 
 {#snippet approvalCard(approved?: boolean)}
