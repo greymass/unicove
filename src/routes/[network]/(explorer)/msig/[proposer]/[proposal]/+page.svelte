@@ -37,7 +37,7 @@
 	};
 
 	let userIsApprover = $derived(
-		requested_approvals.some((a) => wharf.session && a.equals(wharf.session.permissionLevel))
+		total_approvals.some((a) => wharf.session && a.equals(wharf.session.permissionLevel))
 	);
 
 	let userHasApproved = $derived(
