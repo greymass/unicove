@@ -28,6 +28,10 @@ export async function GET({ fetch, params }: RequestEvent) {
 		limit: 1
 	});
 
+	if (!proposals.rows.length) {
+		return json({ error: 'msig record not found' }, { status: 404 });
+	}
+
 	const approvals2 = await network.client.v1.chain.get_table_rows({
 		code: 'eosio.msig',
 		scope: params.proposer,
@@ -36,10 +40,6 @@ export async function GET({ fetch, params }: RequestEvent) {
 		upper_bound: Name.from(params.proposal),
 		limit: 1
 	});
-
-	if (!proposals.rows.length) {
-		return json({ error: 'msig record not found' }, { status: 400 });
-	}
 
 	const proposal = proposals.rows[0];
 	const approvals = approvals2.rows[0];
