@@ -1,6 +1,5 @@
 <script lang="ts">
 	import Button from '$lib/components/button/button.svelte';
-	import Code from '$lib/components/code.svelte';
 	import { DL, DLRow } from '$lib/components/descriptionlist/index.js';
 	import { MultiCard, Stack } from '$lib/components/layout/index.js';
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
@@ -12,6 +11,7 @@
 	import { percentString } from '$lib/utils';
 	// import { Check, UserCheck } from 'lucide-svelte';
 	import { ApprovalManager } from './manager.svelte';
+	import ActionCard from '$lib/components/elements/action.svelte';
 
 	dayjs.extend(relativeTime);
 
@@ -89,9 +89,9 @@
 	<Stack>
 		<h2 class="h3">Requested Approvals</h2>
 
-		<table>
+		<table class="table-styles">
 			<thead>
-				<tr class="text-muted">
+				<tr>
 					<th class="text-left">Actor</th>
 					<th class="text-left">Permission</th>
 					<th class="text-right">Status</th>
@@ -101,7 +101,7 @@
 				{#each proposal.approvals.requested_approvals as requested}
 					<tr class="h-12">
 						<td><Account name={requested.actor} /></td>
-						<td>{requested.permission}</td>
+						<td class="text-muted">{requested.permission}</td>
 						<td class="text-right">
 							{@render approvalCard(accountHasApproved(requested))}
 						</td>
@@ -113,8 +113,8 @@
 
 	<Stack>
 		<h2 class="h3">Proposed Actions</h2>
-		{#each proposal.transaction.actions as action}
-			<Code>{JSON.stringify(action, null, 2)}</Code>
+		{#each proposal.actions as action}
+			<ActionCard data={action} />
 		{/each}
 	</Stack>
 
