@@ -17,7 +17,6 @@
 
 	let { data } = $props();
 	let { proposal } = $derived(data);
-	let { requested_approvals, provided_approvals } = $derived(proposal.approvals);
 
 	let context = getContext<UnicoveContext>('state');
 	let { wharf } = $derived(context);
@@ -28,6 +27,9 @@
 			manager.sync(data.network, context.wharf);
 		}
 	});
+
+	let { requested_approvals, provided_approvals } = $derived(proposal.approvals);
+	let total_approvals = $derived([...provided_approvals, ...requested_approvals]);
 
 	const accountHasApproved = (account?: PermissionLevel) => {
 		if (!account) return false;
@@ -49,7 +51,7 @@
 	let proposalExpired = $derived(dayjs(proposal.transaction.expiration.toDate()).isBefore());
 
 	// Approval statistics
-	let totalRequested = $derived(requested_approvals.length);
+	let totalRequested = $derived(total_approvals.length);
 	let totalApproved = $derived(provided_approvals.length);
 	let ratioApproved = $derived(totalApproved / totalRequested);
 
@@ -98,7 +100,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				{#each proposal.approvals.requested_approvals as requested}
+				{#each total_approvals as requested}
 					<tr class="h-12">
 						<td><Account name={requested.actor} /></td>
 						<td class="text-muted">{requested.permission}</td>
