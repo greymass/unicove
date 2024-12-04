@@ -39,7 +39,7 @@
 
 	let cost: Asset | undefined = $state();
 	let costAmount: string | undefined = $derived(cost?.quantity);
-	let memo: string = $derived(`${accountName}:${publicKey}`);
+	let memo: string = $derived(`${accountName}:${publicKey?.toLegacyString()}`);
 
 	let sendAccount: string = $state('openaccounts');
 
