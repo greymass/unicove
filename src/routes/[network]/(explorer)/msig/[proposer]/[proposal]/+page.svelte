@@ -8,7 +8,6 @@
 	import dayjs from 'dayjs';
 	import relativeTime from 'dayjs/plugin/relativeTime';
 	import Account from '$lib/components/elements/account.svelte';
-	import { percentString } from '$lib/utils';
 	// import { Check, UserCheck } from 'lucide-svelte';
 	import { ApprovalManager } from './manager.svelte';
 	import ActionCard from '$lib/components/elements/action.svelte';
@@ -40,9 +39,8 @@
 		total_approvals.some((a) => wharf.session && a.equals(wharf.session.permissionLevel))
 	);
 
-	let userHasApproved = $derived(
-		accountHasApproved(wharf.session?.permissionLevel) || !!manager.txid
-	);
+	let transacting = $derived(manager.transacting);
+	let userHasApproved = $derived(manager.approved);
 
 	// Expiry date
 	let relativeTimeToExpiry = $derived(dayjs(proposal.transaction.expiration.toDate()).fromNow());
@@ -51,7 +49,7 @@
 	// Approval statistics
 	let totalRequested = $derived(total_approvals.length);
 	let totalApproved = $derived(provided_approvals.length);
-	let ratioApproved = $derived(totalApproved / totalRequested);
+	let ratioApproved = $derived((totalApproved / totalRequested) * 100);
 
 	// Actions
 	const handleApprove = () => manager.approve();
@@ -62,8 +60,11 @@
 <MultiCard>
 	<div
 		id="msig-vis"
-		class="rounded-xl pb-4 pt-10"
-		style={`column-span:all;--bg-pos: calc(100% - ${percentString(ratioApproved)})`}
+		class="rounded-xl pb-4 pt-10 [column-span:all]"
+		style="
+		--bg-pos: calc(100% - {ratioApproved}%); 
+		--ease: {userHasApproved ? 'ease-out' : 'ease-in'};
+		--duration: {userHasApproved ? '1000ms' : '200ms'}"
 	>
 		<div class="flex justify-between px-4 font-semibold">
 			<div class="">
@@ -139,9 +140,10 @@
 
 	{#if userIsApprover}
 		{#if userHasApproved}
-			<Button variant="secondary" onclick={handleUnapprove}>Unapprove</Button>
+			<Button variant="secondary" onclick={handleUnapprove} disabled={transacting}>Unapprove</Button
+			>
 		{:else}
-			<Button variant="primary" onclick={handleApprove}>Approve</Button>
+			<Button variant="primary" onclick={handleApprove} disabled={transacting}>Approve</Button>
 		{/if}
 	{/if}
 
@@ -164,13 +166,15 @@
 			theme(colors.mineShaft.950) 50%
 		);
 		background-size: 200% 100%;
-		background-position: var(--bg-pos, 100%);
+		background-position: var(--bg-pos);
+		transition: all var(--ease) var(--duration);
 	}
 	#msig-vis > div {
 		background: linear-gradient(to right, theme(colors.green.900) 50%, theme(colors.zinc.400) 50%);
 		background-size: 200% 100%;
-		background-position: var(--bg-pos, 100%);
+		background-position: var(--bg-pos);
 		background-clip: text;
 		color: transparent;
+		transition: all var(--ease) var(--duration);
 	}
 </style>
