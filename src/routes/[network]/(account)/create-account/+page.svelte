@@ -212,21 +212,16 @@
 	<div class:hidden={!showAll && f.current !== 'privatekey'}>
 		<fieldset class="grid gap-2">
 			<Label for="to-input">Private Key <CopyButton data={String(privateKey)} /></Label>
-			<div class="relative">
-				<TextInput
-					bind:ref={privateKeyRef}
-					bind:value={privateKey}
-					disabled
-					id="private-key-input"
-					placeholder="Private Key"
-				/>
-				<button
-					type="button"
-					class="absolute inset-y-0 right-0 z-10 flex select-none items-center gap-1 rounded-md bg-black bg-transparent px-4 text-skyBlue-500 hover:text-skyBlue-300 focus:outline-none focus-visible:ring focus-visible:ring-inset focus-visible:ring-solar-500"
-				>
-					<CopyButton data={String(privateKey)} />
-				</button>
-			</div>
+
+			<TextInput
+				bind:ref={privateKeyRef}
+				bind:value={privateKey}
+				disabled
+				id="private-key-input"
+				placeholder="Private Key"
+			>
+				<CopyButton data={String(privateKey)} />
+			</TextInput>
 		</fieldset>
 		<p class="my-3 flex items-center gap-3">
 			This is your new private key. Copy it someplace safe, import it into your wallet, and never
