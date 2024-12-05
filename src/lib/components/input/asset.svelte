@@ -121,31 +121,17 @@
 	}
 </script>
 
-<div class="relative">
-	<TextInput
-		bind:ref
-		bind:value={input}
-		placeholder={String(zeroValue.value)}
-		{autofocus}
-		inputmode="decimal"
-		step="any"
-		{...props}
-	/>
-
-	<span
-		class="
-				text-muted
-				pointer-events-none
-				absolute
-				inset-y-0
-				right-0
-				flex
-				items-center
-				pr-4"
-	>
-		{String(symbol.code)}
-	</span>
-</div>
+<TextInput
+	bind:ref
+	bind:value={input}
+	placeholder={String(zeroValue.value)}
+	{autofocus}
+	inputmode="decimal"
+	step="any"
+	{...props}
+>
+	{String(symbol.code)}
+</TextInput>
 
 {#if debug}
 	<h3>Component State</h3>
