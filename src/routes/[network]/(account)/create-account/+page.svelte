@@ -245,47 +245,32 @@
 			<Label for="send-account-input"
 				>Send {context.network.chain.systemToken?.symbol.name} to account</Label
 			>
-			<div class="relative">
-				{#if cost}
-					<TextInput is="send-account-input" value={sendAccount} disabled />
-				{/if}
-				<button
-					type="button"
-					class="absolute inset-y-0 right-0 z-10 flex select-none items-center gap-1 rounded-md bg-black bg-transparent px-4 text-skyBlue-500 hover:text-skyBlue-300 focus:outline-none focus-visible:ring focus-visible:ring-inset focus-visible:ring-solar-500"
-				>
+
+			{#if cost}
+				<TextInput is="send-account-input" value={sendAccount} disabled>
 					<CopyButton data={sendAccount} />
-				</button>
-			</div>
+				</TextInput>
+			{/if}
 		</fieldset>
 
 		<fieldset class="grid gap-2">
 			<Label for="cost-amount-input"
 				>Amount of {context.network.chain.systemToken?.symbol.name} to send</Label
 			>
-			<div class="relative">
-				{#if cost}
-					<TextInput id="cost-amount-input" value={costAmount} disabled />
-				{/if}
-				<button
-					type="button"
-					class="absolute inset-y-0 right-0 z-10 flex select-none items-center gap-1 rounded-md bg-black bg-transparent px-4 text-skyBlue-500 hover:text-skyBlue-300 focus:outline-none focus-visible:ring focus-visible:ring-inset focus-visible:ring-solar-500"
-				>
+
+			{#if cost}
+				<TextInput id="cost-amount-input" value={costAmount} disabled>
 					<CopyButton data={String(costAmount)} />
-				</button>
-			</div>
+				</TextInput>
+			{/if}
 		</fieldset>
 
 		<fieldset class="grid gap-2">
 			<Label for="memo-input">Transfer Memo</Label>
-			<div class="relative">
-				<TextInput id="memo-input" value={memo} disabled />
-				<button
-					type="button"
-					class="absolute inset-y-0 right-0 z-10 flex select-none items-center gap-1 rounded-md bg-black bg-transparent px-4 text-skyBlue-500 hover:text-skyBlue-300 focus:outline-none focus-visible:ring focus-visible:ring-inset focus-visible:ring-solar-500"
-				>
-					<CopyButton data={String(memo)} />
-				</button>
-			</div>
+
+			<TextInput id="memo-input" value={memo} disabled>
+				<CopyButton data={String(memo)} />
+			</TextInput>
 		</fieldset>
 
 		<p class="flex gap-2">
