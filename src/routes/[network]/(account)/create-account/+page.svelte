@@ -179,7 +179,7 @@
 
 {#snippet AccountName()}
 	<fieldset class="grid gap-2" class:hidden={!showAll && f.current !== 'account'}>
-		<Label for="to-input">Account Name</Label>
+		<Label for="account-input">Account Name</Label>
 		<NameInput
 			bind:this={accountInput}
 			bind:ref={accountRef}
@@ -194,7 +194,7 @@
 
 {#snippet PublicKey()}
 	<fieldset class="grid gap-2" class:hidden={!showAll && f.current !== 'publickey'}>
-		<Label for="to-input">Public Key</Label>
+		<Label for="public-key-input">Public Key</Label>
 		<PublicKeyInput
 			bind:this={publicKeyInput}
 			bind:ref={publicKeyRef}
@@ -211,7 +211,7 @@
 {#snippet Generate()}
 	<div class:hidden={!showAll && f.current !== 'privatekey'}>
 		<fieldset class="grid gap-2">
-			<Label for="to-input">Private Key <CopyButton data={String(privateKey)} /></Label>
+			<Label for="private-key-input">Private Key <CopyButton data={String(privateKey)} /></Label>
 
 			<TextInput
 				bind:ref={privateKeyRef}
@@ -242,10 +242,12 @@
 			create your account.
 		</p>
 		<fieldset class="grid gap-2">
-			<Label for="to-input">Send {context.network.chain.systemToken?.symbol.name} to account</Label>
+			<Label for="send-account-input"
+				>Send {context.network.chain.systemToken?.symbol.name} to account</Label
+			>
 			<div class="relative">
 				{#if cost}
-					<TextInput value={sendAccount} disabled />
+					<TextInput is="send-account-input" value={sendAccount} disabled />
 				{/if}
 				<button
 					type="button"
@@ -257,12 +259,12 @@
 		</fieldset>
 
 		<fieldset class="grid gap-2">
-			<Label for="to-input"
+			<Label for="cost-amount-input"
 				>Amount of {context.network.chain.systemToken?.symbol.name} to send</Label
 			>
 			<div class="relative">
 				{#if cost}
-					<TextInput value={costAmount} disabled />
+					<TextInput id="cost-amount-input" value={costAmount} disabled />
 				{/if}
 				<button
 					type="button"
@@ -274,9 +276,9 @@
 		</fieldset>
 
 		<fieldset class="grid gap-2">
-			<Label for="to-input">Transfer Memo</Label>
+			<Label for="memo-input">Transfer Memo</Label>
 			<div class="relative">
-				<TextInput value={memo} disabled />
+				<TextInput id="memo-input" value={memo} disabled />
 				<button
 					type="button"
 					class="absolute inset-y-0 right-0 z-10 flex select-none items-center gap-1 rounded-md bg-black bg-transparent px-4 text-skyBlue-500 hover:text-skyBlue-300 focus:outline-none focus-visible:ring focus-visible:ring-inset focus-visible:ring-solar-500"
