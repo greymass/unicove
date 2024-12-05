@@ -32,6 +32,7 @@ export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 		({ level }: { level?: PermissionLevel }) => (level ? PermissionLevel.from(level) : undefined)
 	);
 
+	// TODO: Use ABICache here to prevent duplicate calls
 	const actions = await Promise.all(
 		transaction.actions.map(async (a) => {
 			const { abi } = await network.client.v1.chain.get_abi(String(a.account));

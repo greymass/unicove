@@ -39,6 +39,8 @@
 		total_approvals.some((a) => wharf.session && a.equals(wharf.session.permissionLevel))
 	);
 
+	let userIsProposer = $derived(wharf.session?.actor.equals(Name.from(proposal.proposer)));
+
 	let transacting = $derived(manager.transacting);
 	let userHasApproved = $derived(manager.approved);
 
@@ -55,6 +57,7 @@
 	const handleApprove = () => manager.approve();
 	const handleUnapprove = () => manager.unapprove();
 	const handleExecute = () => manager.execute();
+	const handleCancel = () => manager.cancel();
 </script>
 
 <MultiCard>
@@ -143,6 +146,9 @@
 			{/if}
 		{/if}
 
+		{#if userIsProposer}
+			<Button variant="secondary" onclick={handleCancel}>Cancel MSIG</Button>
+		{/if}
 
 		<Button variant="primary" onclick={handleExecute}>Execute</Button>
 	</Stack>

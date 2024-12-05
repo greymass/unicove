@@ -112,4 +112,17 @@ export class ApprovalManager {
 
 		this.transact(action);
 	}
+
+	async cancel() {
+		if (!this.network || !this.wharf || !this.wharf.session) {
+			throw new Error("Can't sign, data not ready");
+		}
+		const action = this.network.contracts.msig.action('cancel', {
+			proposer: Name.from(this.proposal.proposer),
+			proposal_name: Name.from(this.proposal.name),
+			canceler: this.wharf.session.actor
+		});
+
+		this.transact(action);
+	}
 }
