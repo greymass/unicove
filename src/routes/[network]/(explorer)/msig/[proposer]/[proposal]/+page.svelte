@@ -3,12 +3,12 @@
 	import { DL, DLRow } from '$lib/components/descriptionlist/index.js';
 	import { MultiCard, Stack } from '$lib/components/layout/index.js';
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
-	import { PermissionLevel } from '@wharfkit/antelope';
 	import { getContext } from 'svelte';
+	import { Name, PermissionLevel } from '@wharfkit/antelope';
 	import dayjs from 'dayjs';
 	import relativeTime from 'dayjs/plugin/relativeTime';
 	import Account from '$lib/components/elements/account.svelte';
-	// import { Check, UserCheck } from 'lucide-svelte';
+	import { CircleCheck, CircleHelp } from 'lucide-svelte';
 	import { ApprovalManager } from './manager.svelte';
 	import ActionCard from '$lib/components/elements/action.svelte';
 
@@ -58,38 +58,37 @@
 </script>
 
 <MultiCard>
-	<div
-		id="msig-vis"
-		class="rounded-xl pb-4 pt-10 [column-span:all]"
-		style="
+	<Stack class="gap-4">
+		<h2 class="h3">Requested Approvals</h2>
+
+		<div
+			id="msig-vis"
+			class="rounded-2xl pb-4 pt-8"
+			style="
 		--bg-pos: calc(100% - {ratioApproved}%); 
 		--ease: {userHasApproved ? 'ease-out' : 'ease-in'};
 		--duration: {userHasApproved ? '1000ms' : '200ms'}"
-	>
-		<div class="flex justify-between px-4 font-semibold">
-			<div class="">
-				<span class="flex items-center gap-1 text-3xl">
-					<!-- TODO: Figure out how to clip these icons the same as the text -->
-					<!-- <Check class="size-5 fill-inherit" />  -->
-					{totalApproved}
-				</span>
-				Approved
-			</div>
+		>
+			<div class="flex justify-between px-4 font-semibold">
+				<div class="">
+					<span class="flex items-center gap-1 text-3xl">
+						<!-- TODO: Figure out how to clip these icons the same as the text -->
+						<!-- <Check class="size-5 fill-inherit" />  -->
+						{totalApproved}
+					</span>
+					Approved
+				</div>
 
-			<div class="">
-				<span class="flex items-center justify-end gap-1 text-3xl">
-					<!-- TODO: Figure out how to clip these icons the same as the text -->
-					<!-- <UserCheck class="size-5 fill-inherit" />  -->
-					{totalRequested}
-				</span>
-				Requested
+				<div class="">
+					<span class="flex items-center justify-end gap-1 text-3xl">
+						<!-- TODO: Figure out how to clip these icons the same as the text -->
+						<!-- <UserCheck class="size-5 fill-inherit" />  -->
+						{totalRequested}
+					</span>
+					Requested
+				</div>
 			</div>
 		</div>
-	</div>
-
-	<Stack>
-		<h2 class="h3">Requested Approvals</h2>
-
 		<table class="table-styles">
 			<thead>
 				<tr>
@@ -100,11 +99,15 @@
 			</thead>
 			<tbody>
 				{#each total_approvals as requested}
-					<tr class="h-12">
+					<tr class="h-12 bg-none">
 						<td><Account name={requested.actor} /></td>
 						<td class="text-muted">{requested.permission}</td>
 						<td class="text-right">
-							{@render approvalCard(accountHasApproved(requested))}
+							{#if accountHasApproved(requested)}
+								<span class="text-green-300">Approved</span>
+							{:else}
+								<span class="text-muted">Requested</span>
+							{/if}
 						</td>
 					</tr>
 				{/each}
@@ -112,15 +115,8 @@
 		</table>
 	</Stack>
 
-	<Stack>
-		<h2 class="h3">Proposed Actions</h2>
-		{#each proposal.actions as action}
-			<ActionCard data={action} />
-		{/each}
-	</Stack>
-
 	<Stack class="gap-4" id="details">
-		<h2 class="h3">Details</h2>
+		<h2 class="h3">Multisig Details</h2>
 
 		<DL>
 			<DLRow title={'Proposer'}>
@@ -136,27 +132,28 @@
 				{proposal.hash}
 			</DLRow>
 		</DL>
+
+		{#if userIsApprover}
+			{#if userHasApproved}
+				<Button variant="secondary" onclick={handleUnapprove} disabled={transacting}
+					>Unapprove</Button
+				>
+			{:else}
+				<Button variant="primary" onclick={handleApprove} disabled={transacting}>Approve</Button>
+			{/if}
+		{/if}
+
+
+		<Button variant="primary" onclick={handleExecute}>Execute</Button>
 	</Stack>
 
-	{#if userIsApprover}
-		{#if userHasApproved}
-			<Button variant="secondary" onclick={handleUnapprove} disabled={transacting}>Unapprove</Button
-			>
-		{:else}
-			<Button variant="primary" onclick={handleApprove} disabled={transacting}>Approve</Button>
-		{/if}
-	{/if}
-
-	<Button variant="primary" onclick={handleExecute} disabled={proposalExpired}>Execute</Button>
+	<Stack class="[column-span:all]">
+		<h2 class="h3">Proposed Actions</h2>
+		{#each proposal.actions as action}
+			<ActionCard data={action} />
+		{/each}
+	</Stack>
 </MultiCard>
-
-{#snippet approvalCard(approved?: boolean)}
-	{#if approved}
-		<span class="rounded-md bg-green-300 px-2 py-1 text-green-950">Approved</span>
-	{:else}
-		<span class="text-muted">Pending</span>
-	{/if}
-{/snippet}
 
 <style lang="postcss">
 	#msig-vis {
@@ -170,7 +167,7 @@
 		transition: all var(--ease) var(--duration);
 	}
 	#msig-vis > div {
-		background: linear-gradient(to right, theme(colors.green.900) 50%, theme(colors.zinc.400) 50%);
+		background: linear-gradient(to right, theme(colors.green.950) 50%, theme(colors.zinc.400) 50%);
 		background-size: 200% 100%;
 		background-position: var(--bg-pos);
 		background-clip: text;
