@@ -20,6 +20,7 @@
 
 	import { BuyRAMState } from './state.svelte';
 	import { calAvailableSize, preventDefault } from '$lib/utils';
+	import { DD, DL, DLRow } from '$lib/components/descriptionlist';
 
 	let bytesInput: BytesInput | undefined = $state();
 	let assetInput: AssetInput | undefined = $state();
@@ -139,34 +140,39 @@
 			</Button>
 
 			<Stack class="gap-3">
-				<div class="mt-4 grid grid-cols-2 gap-y-0 text-lg">
-					<p class="text-gray-400">
-						{m.common_labeled_unit_price({
-							unit: `${context.network.chain.systemToken?.symbol.name}/RAM`
-						})} (KB)
-					</p>
-					<AssetText variant="full" class="text-right" value={buyRamState.pricePerKB} />
+				<DL>
+					<DLRow
+						title={`${m.common_labeled_unit_price({ unit: `${context.network.chain.systemToken?.symbol.name}/RAM` })} (KB) `}
+					>
+						<DD>
+							<AssetText variant="full" value={buyRamState.pricePerKB} />
+						</DD>
+					</DLRow>
 
-					<div class="col-span-2 my-2 border-b border-mineShaft-900"></div>
+					<DLRow title={m.ram_to_purchase()}>
+						<DD>
+							<AssetText variant="full" value={buyRamState.kbs} />
+						</DD>
+					</DLRow>
 
-					<p class="text-gray-400">{m.ram_to_purchase()}</p>
-					<AssetText variant="full" class="text-right" value={buyRamState.kbs} />
+					<DLRow title={m.ram_purchase_value()}>
+						<DD>
+							<AssetText variant="full" value={buyRamState.bytesValue} />
+						</DD>
+					</DLRow>
 
-					<div class="col-span-2 my-2 border-b border-mineShaft-900"></div>
+					<DLRow title={`${m.common_network_fees()} (0.5%)`}>
+						<DD>
+							<AssetText variant="full" value={buyRamState.fee} />
+						</DD>
+					</DLRow>
 
-					<p class="text-gray-400">{m.ram_purchase_value()}</p>
-					<AssetText variant="full" class="text-right" value={buyRamState.bytesValue} />
-
-					<div class="col-span-2 my-2 border-b border-mineShaft-900"></div>
-
-					<p class="text-gray-400">{m.common_network_fees()} (0.5%)</p>
-					<AssetText variant="full" class="text-right" value={buyRamState.fee} />
-
-					<div class="col-span-2 my-2 border-b border-mineShaft-900"></div>
-
-					<p class="text-gray-400">{m.common_total_cost()}</p>
-					<AssetText variant="full" class="text-right" value={buyRamState.bytesCost} />
-				</div>
+					<DLRow title={m.common_total_cost()}>
+						<DD>
+							<AssetText variant="full" value={buyRamState.bytesCost} />
+						</DD>
+					</DLRow>
+				</DL>
 
 				{#if buyRamState.valid}
 					{#if buyRamState.format === 'asset'}

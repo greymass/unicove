@@ -19,6 +19,7 @@
 
 	import { SellRAMState } from './state.svelte';
 	import { calAvailableSize, preventDefault } from '$lib/utils';
+	import { DD, DL, DLRow } from '$lib/components/descriptionlist';
 
 	let bytesInput: BytesInput | undefined = $state();
 	let assetInput: AssetInput | undefined = $state();
@@ -125,36 +126,40 @@
 			{m.common_unit_sell({ unit: 'RAM' })}
 		</Button>
 
-		<!-- TODO: use table  -->
 		<Stack class="gap-3">
-			<div class="mt-4 grid grid-cols-2 gap-y-0 text-lg">
-				<p class="text-muted">
-					{m.common_labeled_unit_price({
-						unit: `${context.network.chain.systemToken?.symbol.name}/RAM`
-					})} (KB)
-				</p>
-				<AssetText variant="full" class="text-right" value={sellRamState.pricePerKB} />
+			<DL>
+				<DLRow
+					title={` ${m.common_labeled_unit_price({ unit: `${context.network.chain.systemToken?.symbol.name}/RAM` })} (KB) `}
+				>
+					<DD>
+						<AssetText variant="full" value={sellRamState.pricePerKB} />
+					</DD>
+				</DLRow>
 
-				<div class="col-span-2 my-2 border-b border-mineShaft-900"></div>
+				<DLRow title={m.ram_to_sell()}>
+					<DD>
+						<AssetText variant="full" value={sellRamState.kbsToSell} />
+					</DD>
+				</DLRow>
 
-				<p class="text-muted">{m.ram_to_sell()}</p>
-				<AssetText variant="full" class="text-right" value={sellRamState.kbsToSell} />
+				<DLRow title={m.total_proceeds()}>
+					<DD>
+						<AssetText variant="full" value={sellRamState.bytesValue} />
+					</DD>
+				</DLRow>
 
-				<div class="col-span-2 my-2 border-b border-mineShaft-900"></div>
+				<DLRow title={` ${m.common_network_fees()} (0.5%) `}>
+					<DD>
+						<AssetText variant="full" value={sellRamState.fee} />
+					</DD>
+				</DLRow>
 
-				<p class="text-muted">{m.total_proceeds()}</p>
-				<AssetText variant="full" class="text-right" value={sellRamState.bytesValue} />
-
-				<div class="col-span-2 my-2 border-b border-mineShaft-900"></div>
-
-				<p class="text-muted">{m.common_network_fees()} (0.5%)</p>
-				<AssetText variant="full" class="text-right" value={sellRamState.fee} />
-
-				<div class="col-span-2 my-2 border-b border-mineShaft-900"></div>
-
-				<p class="text-muted">{m.common_expected_receive()}</p>
-				<AssetText variant="full" class="text-right" value={sellRamState.expectedToReceive} />
-			</div>
+				<DLRow title={m.common_expected_receive()}>
+					<DD>
+						<AssetText variant="full" value={sellRamState.expectedToReceive} />
+					</DD>
+				</DLRow>
+			</DL>
 
 			{#if sellRamState.valid}
 				<SummarySellRAM class="hidden" action={{ data: sellRamState.toJSON() }} />
