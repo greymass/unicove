@@ -12,7 +12,6 @@
 	import { Cluster, Stack } from '$lib/components/layout/index.js';
 	import { accountCreationPluginMetamask } from '$lib/state/client/wharf.svelte';
 	import { chainLogos } from '@wharfkit/common';
-	import { getChainDefinitionFromParams } from '$lib/state/network.svelte.js';
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');
