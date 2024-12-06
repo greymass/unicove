@@ -27,7 +27,7 @@
 	let accountValid = $state(false);
 	let accountName: Name = $state(Name.from(''));
 
-	let publicKeyInput: TextInput | undefined = $state();
+	let publicKeyInput: PublicKeyInput | undefined = $state();
 	let publicKeyRef: HTMLInputElement | undefined = $state();
 	let publicKeyValid = $state(false);
 	let publicKey: PublicKey | undefined = $state();
