@@ -8,10 +8,10 @@
 
 	const { settings } = getContext<UnicoveContext>('state');
 
-	const options = $derived.by(() => {
-		let urlBase = `/${data.network}/block/${data.number}`;
+	const tabOptions = $derived.by(() => {
+		let urlBase = `/${data.network}/msig/${data.proposal.proposer}/${data.proposal.name}`;
 		return [
-			{ href: urlBase, text: 'Summary' },
+			{ href: urlBase, text: 'Overview' },
 			{ href: `${urlBase}/data`, text: 'Data' }
 		];
 	});
@@ -19,7 +19,7 @@
 
 <Stack class="@container">
 	{#if settings.data.debugMode}
-		<PillGroup {options} />
+		<PillGroup options={tabOptions} />
 	{/if}
 
 	{@render children()}

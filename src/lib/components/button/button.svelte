@@ -18,16 +18,16 @@
 	}
 
 	let {
-		class: className = '',
 		meltAction,
 		onclick,
 		variant = 'primary',
-		active = false,
+		active,
 		disabled = false,
 		...props
 	}: ButtonProps = $props();
 
-	const ariaRole = props.href ? 'link' : 'button';
+	const ariaRole = props.href ? undefined : 'button'; // undefined because anchor tag with role=link gives a warning
+	const ariaCurrent = props['aria-current'] || active === false ? undefined : true; // removes aria-current if active===false
 	const tag = props.href ? 'a' : 'button';
 
 	// Only use melt builder element if passed as a prop
@@ -46,19 +46,19 @@
 <svelte:element
 	this={tag}
 	use:melt={$meltElement}
-	data-active={active}
 	data-variant={variant}
-	class={className}
+	class={props.class || ''}
 	role={ariaRole}
+	aria-current={ariaCurrent}
 	{disabled}
 	{onclick}
 	{...props}
 	{...linkProps}
 >
-	<span class="button-text">{@render props.children()}</span>
+	<span>{@render props.children()}</span>
 </svelte:element>
 
-<style>
+<style lang="postcss">
 	[data-variant='primary'] {
 		@apply relative inline-flex h-12 grow items-center justify-center text-nowrap rounded-lg bg-skyBlue-700 px-8 text-center text-base font-medium text-skyBlue-50 transition-all focus:outline-transparent focus-visible:outline focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-solar-500 hover:active:bg-skyBlue-800 disabled:cursor-not-allowed disabled:bg-mineShaft-900 disabled:text-white/60 disabled:opacity-30 disabled:hover:bg-mineShaft-900 [@media(any-hover:hover)]:hover:bg-skyBlue-600;
 	}
@@ -68,10 +68,10 @@
 	}
 
 	[data-variant='pill'] {
-		@apply relative inline-flex h-10 items-center justify-center text-nowrap rounded-full border-2 border-transparent px-5 text-center text-base font-medium leading-4 transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-solar-500 hover:active:bg-mineShaft-950 data-[active=true]:border-mineShaft-200/30 [@media(any-hover:hover)]:hover:bg-mineShaft-900 [@media(any-hover:hover)]:hover:text-mineShaft-100;
+		@apply relative inline-flex h-10 items-center justify-center text-nowrap rounded-full border-2 border-transparent px-5 text-center text-base font-medium leading-4 transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-solar-500 hover:active:bg-mineShaft-950 aria-[current]:border-mineShaft-200/30 [@media(any-hover:hover)]:hover:bg-mineShaft-900 [@media(any-hover:hover)]:hover:text-mineShaft-100;
 	}
 
-	.button-text {
+	span {
 		@apply pointer-events-none relative text-inherit;
 	}
 </style>

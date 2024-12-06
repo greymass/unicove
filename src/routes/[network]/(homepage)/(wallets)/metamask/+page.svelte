@@ -12,7 +12,6 @@
 	import { Cluster, Stack } from '$lib/components/layout/index.js';
 	import { accountCreationPluginMetamask } from '$lib/state/client/wharf.svelte';
 	import { chainLogos } from '@wharfkit/common';
-	import { getChainDefinitionFromParams } from '$lib/state/network.svelte.js';
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');
@@ -39,9 +38,10 @@
 						if (isInstalled) {
 							connect();
 							accountCreationPluginMetamask
-								.retrievePublicKey(data.network.chain.id)
+								.retrievePublicKeys(data.network.chain.id)
 								.then((publicKey) => {
-									metaMaskState.publicKey = publicKey;
+									metaMaskState.publicKey = publicKey.activePublicKey;
+									metaMaskState.ownerKey = publicKey.ownerPublicKey;
 								});
 						}
 					});
@@ -221,8 +221,18 @@
 					{/if}
 					{#if context.settings.data.advancedMode}
 						<Stack class="mb-1 gap-2">
-							<p>EOS Wallet Public Key</p>
-							<p class="text-xs">{metaMaskState.publicKey}</p>
+							<p>EOS Wallet Public Key (Active)</p>
+							<p class="font-mono text-xs">
+								<a href={`/${data.network}/key/${metaMaskState.publicKey}`}>
+									{metaMaskState.publicKey}
+								</a>
+							</p>
+							<p>EOS Wallet Public Key (Owner)</p>
+							<p class="font-mono text-xs">
+								<a href={`/${data.network}/key/${metaMaskState.ownerKey}`}>
+									{metaMaskState.ownerKey}
+								</a>
+							</p>
 						</Stack>
 					{/if}
 				{/if}

@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
-	import { page } from '$app/stores';
 	import { Stack } from '$lib/components/layout';
 	import PillGroup from '$lib/components/navigation/pillgroup.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
@@ -8,7 +7,7 @@
 	const context = getContext<UnicoveContext>('state');
 	const { children, data } = $props();
 
-	const tabOptions = $derived.by(() => {
+	const options = $derived.by(() => {
 		const account = String(data.account.name);
 		const network = String(data.account.network);
 		let items = [
@@ -27,16 +26,6 @@
 
 		return items;
 	});
-
-	let currentTab = $derived($page.url.pathname.split('/').slice(2)[3]);
-
-	// Derive the active state of each destination
-	let options = $derived(
-		tabOptions.map((option) => ({
-			...option,
-			active: option.href.split('/').slice(2)[2] === currentTab
-		}))
-	);
 </script>
 
 <Stack class="gap-6 @container">

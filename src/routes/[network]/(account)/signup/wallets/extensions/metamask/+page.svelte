@@ -9,7 +9,6 @@
 	import Button from '$lib/components/button/button.svelte';
 	import Box from '$lib/components/layout/box/box.svelte';
 	import Card from '$lib/components/layout/box/card.svelte';
-	import Grid from '$lib/components/layout/grid.svelte';
 	import { setSnap, requestSnap } from '$lib/metamask-snap';
 	import { getChainDefinitionFromParams } from '$lib/state/network.svelte';
 	import { MetaMaskState } from '$lib/state/metamask.svelte';

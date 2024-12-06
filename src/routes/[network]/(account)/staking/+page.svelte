@@ -13,7 +13,6 @@
 		getStakedBalance,
 		getUnstakingBalances,
 		getAPR,
-		getStakableBalance,
 		getUnstakableBalance
 	} from '$lib/utils/staking';
 	import UnstakingBalances from '$lib/components/elements/unstaking.svelte';
@@ -27,7 +26,6 @@
 	const { data } = $props();
 	const networkName = String(data.network);
 
-	let available: Asset = $derived(getStakableBalance(data.network, context.account));
 	let total: Asset = $derived(getStakedBalance(data.network, context.account));
 	let staked: Asset = $derived(getUnstakableBalance(data.network, context.account));
 	let unstaking: Array<UnstakingRecord> = $derived(
@@ -56,12 +54,6 @@
 	let apr = $derived(getAPR(data.network));
 	let usdValue = $derived(
 		Asset.from(total.value * (data.network.tokenprice ? data.network.tokenprice.value : 0), '2,USD')
-	);
-	let usdValueAvailable = $derived(
-		Asset.from(
-			available.value * (data.network.tokenprice ? data.network.tokenprice.value : 0),
-			'2,USD'
-		)
 	);
 
 	let activity = $derived(

@@ -9,7 +9,8 @@ export class MetaMaskState {
 	public isInstalled = $state(false);
 	public error = $state<Error | null>(null);
 	public installedSnap = $state<Snap | null>(null);
-	public publicKey = $state<PublicKey | null>(null);
+	public publicKey = $state<PublicKey | null>(null); // active
+	public ownerKey = $state<PublicKey | null>(null); // owner
 
 	public snapsDetected = $derived(this.snapProvider !== null);
 
