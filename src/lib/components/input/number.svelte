@@ -40,33 +40,20 @@
 </script>
 
 {#if unit}
-	<div class="relative">
-		<TextInput
-			bind:ref
-			bind:value={inputValue}
-			placeholder="0"
-			inputmode="decimal"
-			step="any"
-			{...props}
-		/>
-
-		<span
-			class="
-			text-gray-500
-			pointer-events-none
-			absolute
-			inset-y-0
-			right-0
-			flex
-			items-center
-			pr-4"
-		>
-			{unit}
-		</span>
-	</div>
+	<TextInput
+		bind:ref
+		bind:value={inputValue}
+		placeholder="0"
+		inputmode="decimal"
+		step="any"
+		{...props}
+	>
+		{unit}
+	</TextInput>
 {:else}
 	<TextInput bind:ref bind:value={inputValue} placeholder="0" type="number" {...props} />
 {/if}
+
 {#if debug}
 	<div class="mt-4">
 		<h3>Component State</h3>
