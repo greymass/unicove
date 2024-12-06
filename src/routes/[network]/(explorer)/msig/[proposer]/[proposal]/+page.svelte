@@ -1,14 +1,14 @@
 <script lang="ts">
 	import Button from '$lib/components/button/button.svelte';
-	import { DL, DLRow } from '$lib/components/descriptionlist/index.js';
-	import { MultiCard, Stack } from '$lib/components/layout/index.js';
+	import { DD, DL, DLRow } from '$lib/components/descriptionlist/index.js';
+	import { Stack, Switcher } from '$lib/components/layout/index.js';
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
 	import { getContext } from 'svelte';
 	import { Name, PermissionLevel } from '@wharfkit/antelope';
 	import dayjs from 'dayjs';
 	import relativeTime from 'dayjs/plugin/relativeTime';
 	import Account from '$lib/components/elements/account.svelte';
-	import { CircleCheck, CircleHelp } from 'lucide-svelte';
+	// import { CircleCheck, CircleHelp } from 'lucide-svelte';
 	import { ApprovalManager } from './manager.svelte';
 	import ActionCard from '$lib/components/elements/action.svelte';
 
@@ -60,106 +60,121 @@
 	const handleCancel = () => manager.cancel();
 </script>
 
-<MultiCard>
-	<Stack class="gap-4">
-		<h2 class="h3">Requested Approvals</h2>
+<Stack>
+	<Switcher class="items-start gap-6" threshold="40rem">
+		<Stack class="gap-4">
+			<h2 class="h3">Requested Approvals</h2>
 
-		<div
-			id="msig-vis"
-			class="rounded-2xl pb-4 pt-8"
-			style="
-		--bg-pos: calc(100% - {ratioApproved}%); 
-		--ease: {userHasApproved ? 'ease-out' : 'ease-in'};
-		--duration: {userHasApproved ? '1000ms' : '200ms'}"
-		>
-			<div class="flex justify-between px-4 font-semibold">
-				<div class="">
-					<span class="flex items-center gap-1 text-3xl">
-						<!-- TODO: Figure out how to clip these icons the same as the text -->
-						<!-- <Check class="size-5 fill-inherit" />  -->
-						{totalApproved}
-					</span>
-					Approved
-				</div>
+			<div
+				id="msig-vis"
+				class="rounded-2xl pb-4 pt-8"
+				style="
+				--bg-pos: calc(100% - {ratioApproved}%); 
+				--ease: {userHasApproved ? 'ease-out' : 'ease-in'};
+				--duration: {userHasApproved ? '1000ms' : '200ms'}"
+			>
+				<div class="flex justify-between px-4 font-semibold">
+					<div class="">
+						<span class="flex items-center gap-1 text-3xl">
+							<!-- TODO: Figure out how to clip these icons the same as the text -->
+							<!-- <Check class="size-5 fill-inherit" />  -->
+							{totalApproved}
+						</span>
+						Approved
+					</div>
 
-				<div class="">
-					<span class="flex items-center justify-end gap-1 text-3xl">
-						<!-- TODO: Figure out how to clip these icons the same as the text -->
-						<!-- <UserCheck class="size-5 fill-inherit" />  -->
-						{totalRequested}
-					</span>
-					Requested
+					<div class="">
+						<span class="flex items-center justify-end gap-1 text-3xl">
+							<!-- TODO: Figure out how to clip these icons the same as the text -->
+							<!-- <UserCheck class="size-5 fill-inherit" />  -->
+							{totalRequested}
+						</span>
+						Requested
+					</div>
 				</div>
 			</div>
-		</div>
-		<table class="table-styles">
-			<thead>
-				<tr>
-					<th class="text-left">Actor</th>
-					<th class="text-left">Permission</th>
-					<th class="text-right">Status</th>
-				</tr>
-			</thead>
-			<tbody>
-				{#each total_approvals as requested}
-					<tr class="h-12 bg-none">
-						<td><Account name={requested.actor} /></td>
-						<td class="text-muted">{requested.permission}</td>
-						<td class="text-right">
-							{#if accountHasApproved(requested)}
-								<span class="text-green-300">Approved</span>
-							{:else}
-								<span class="text-muted">Requested</span>
-							{/if}
-						</td>
+			<table class="table-styles">
+				<thead>
+					<tr>
+						<th class="text-left">Actor</th>
+						<th class="text-left">Permission</th>
+						<th class="text-right">Status</th>
 					</tr>
-				{/each}
-			</tbody>
-		</table>
-	</Stack>
+				</thead>
+				<tbody>
+					{#each total_approvals as requested}
+						<tr class="h-12 bg-none">
+							<td><Account name={requested.actor} /></td>
+							<td class="text-muted">{requested.permission}</td>
+							<td class="text-right">
+								{#if accountHasApproved(requested)}
+									<span class="text-green-300">Approved</span>
+								{:else}
+									<span class="text-muted">Requested</span>
+								{/if}
+							</td>
+						</tr>
+					{/each}
+				</tbody>
+			</table>
+		</Stack>
 
-	<Stack class="gap-4" id="details">
-		<h2 class="h3">Multisig Details</h2>
+		<Stack class="gap-4" id="details">
+			<h2 class="h3">Multisig Details</h2>
 
-		<DL>
-			<DLRow title={'Proposer'}>
-				<Account name={proposal.proposer} />
-			</DLRow>
-			<DLRow title={'Proposal Name'}>
-				{proposal.name}
-			</DLRow>
-			<DLRow title={proposalExpired ? 'Expired' : 'Expiration'}>
-				{proposal.transaction.expiration} ({relativeTimeToExpiry})
-			</DLRow>
-			<DLRow title={'Hash'}>
-				{proposal.hash}
-			</DLRow>
-		</DL>
+			<DL>
+				<DLRow title={'Proposer'}>
+					<DD>
+						<Account name={proposal.proposer} />
+					</DD>
+				</DLRow>
+				<DLRow title={'Proposal Name'}>
+					<DD>
+						{proposal.name}
+					</DD>
+				</DLRow>
+				<DLRow title={proposalExpired ? 'Expired' : 'Expiration'}>
+					<DD>
+						{proposal.transaction.expiration} ({relativeTimeToExpiry})
+					</DD>
+				</DLRow>
+				<DLRow title={'Hash'}>
+					<DD>
+						{proposal.hash}
+					</DD>
+				</DLRow>
+			</DL>
 
-		{#if userIsApprover}
-			{#if userHasApproved}
-				<Button variant="secondary" onclick={handleUnapprove} disabled={transacting}
-					>Unapprove</Button
-				>
-			{:else}
-				<Button variant="primary" onclick={handleApprove} disabled={transacting}>Approve</Button>
+			{#if userIsApprover}
+				{#if userHasApproved}
+					<Button variant="secondary" onclick={handleUnapprove} disabled={transacting}
+						>Unapprove</Button
+					>
+				{:else}
+					<Button
+						class="bg-green-400 text-green-950 hover:active:bg-green-500 [@media(any-hover:hover)]:hover:bg-green-300"
+						variant="primary"
+						onclick={handleApprove}
+						disabled={transacting}>Approve</Button
+					>
+				{/if}
 			{/if}
-		{/if}
 
-		{#if userIsProposer}
-			<Button variant="secondary" onclick={handleCancel}>Cancel MSIG</Button>
-		{/if}
+			{#if userIsProposer}
+				<Button variant="secondary" onclick={handleCancel}>Cancel MSIG</Button>
+			{/if}
 
-		<Button variant="primary" onclick={handleExecute}>Execute</Button>
-	</Stack>
+			<Button variant="primary" onclick={handleExecute}>Execute</Button>
+		</Stack>
+	</Switcher>
 
-	<Stack class="[column-span:all]">
+	<Stack>
 		<h2 class="h3">Proposed Actions</h2>
-		{#each proposal.actions as action}
-			<ActionCard data={action} />
+		{#each proposal.transaction.actions as action}
+			<ActionCard {action} />
 		{/each}
 	</Stack>
-</MultiCard>
+</Stack>
 
 <style lang="postcss">
 	#msig-vis {
