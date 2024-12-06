@@ -6,6 +6,7 @@
 	import { cn } from '$lib/utils';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
+	import Big from 'big.js';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -34,7 +35,10 @@
 	};
 
 	function formatAssetValue() {
-		return Intl.NumberFormat(locale, assetOptions).format(asset?.value || fallback);
+		// Use Big.js to accurately convert the string into a usable number
+		// Some precision may be lost in extreme circumstances
+		const number = Number(new Big(asset?.quantity || fallback));
+		return Intl.NumberFormat(locale, assetOptions).format(number);
 	}
 
 	function formatCurrencyValue() {
