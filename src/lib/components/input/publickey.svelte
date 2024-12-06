@@ -26,6 +26,7 @@
 		try {
 			return PublicKey.from(input);
 		} catch (e) {
+			console.warn(e);
 			return;
 		}
 	});
