@@ -9,7 +9,7 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
 	import { StakeManager } from './manager.svelte';
-	import Descriptionlist from '$lib/components/descriptionlist.svelte';
+	import { DL } from '$lib/components/descriptionlist';
 	import * as m from '$lib/paraglide/messages';
 
 	const context = getContext<UnicoveContext>('state');
@@ -19,14 +19,12 @@
 
 	let hints = $derived([
 		{
-			key: m.common_amount_to_act({
-				action: m.common_stake()
-			}),
-			value: manager.assetValue.toString()
+			title: m.common_amount_to_act({ action: m.common_stake() }),
+			description: manager.assetValue.toString()
 		},
-		{ key: m.staking_minimum_lockup(), value: '21 days' },
-		{ key: m.common_apr_current(), value: manager.apr + '%' },
-		{ key: m.staking_estimated_yield_yearly(), value: String(manager.estimateYield) }
+		{ title: m.staking_minimum_lockup(), description: '21 days' },
+		{ title: m.common_apr_current(), description: manager.apr + '%' },
+		{ title: m.staking_estimated_yield_yearly(), description: String(manager.estimateYield) }
 	]);
 
 	$effect(() => {
@@ -90,6 +88,6 @@
 			>
 		</Stack>
 
-		<Descriptionlist items={hints} />
+		<DL items={hints} />
 	{/if}
 </Stack>
