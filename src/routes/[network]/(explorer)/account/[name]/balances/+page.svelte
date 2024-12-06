@@ -48,7 +48,11 @@
 									<img class="h-5 w-5" src={balance.metadata?.logo} alt="LOGO" />
 								{/if}
 							</div>
-							<span>{balance.asset.symbol.name}</span>
+							<a
+								href={`/${context.network}/token/${balance.contract}/${balance.asset.symbol.name}`}
+							>
+								{balance.asset.symbol.name}
+							</a>
 						</div>
 					</td>
 					<td>
