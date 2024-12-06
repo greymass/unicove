@@ -1,30 +1,20 @@
 <script lang="ts">
+	import type { Snippet } from 'svelte';
 	import type { HTMLInputAttributes } from 'svelte/elements';
 
 	interface TextInputProps extends HTMLInputAttributes {
 		ref?: HTMLInputElement;
+		children?: Snippet;
 	}
 
 	let { ref = $bindable(), value = $bindable(), ...props }: TextInputProps = $props();
 </script>
 
-<div class="relative">
+<div
+	class="relative flex h-12 gap-2 rounded-lg border-2 border-mineShaft-600 px-4 *:content-center focus-within:border-skyBlue-500 focus-within:ring focus-within:ring-1 focus-within:ring-inset focus-within:ring-skyBlue-500"
+>
 	<input
-		class="
-			h-12
-			w-full
-			rounded-lg
-			border-2
-			border-mineShaft-600
-			bg-transparent
-			px-4
-			font-medium
-			focus:border-skyBlue-500
-			focus:outline-none
-			focus:ring
-			focus:ring-1
-			focus:ring-inset
-			focus:ring-skyBlue-500"
+		class="placeholder:text-muted w-full rounded-lg bg-transparent font-medium focus:outline-none"
 		type="text"
 		autocorrect="off"
 		autocomplete="off"
@@ -33,4 +23,8 @@
 		bind:value
 		{...props}
 	/>
+
+	<div class="text-muted select-none">
+		{@render props.children?.()}
+	</div>
 </div>

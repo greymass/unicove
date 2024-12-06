@@ -10,12 +10,11 @@
 	import Button from '$lib/components/button/button.svelte';
 	import Card from '$lib/components/layout/box/card.svelte';
 	import Code from '$lib/components/code.svelte';
-	import Grid from '$lib/components/layout/grid.svelte';
 	import Label from '$lib/components/input/label.svelte';
-	import Stack from '$lib/components/layout/stack.svelte';
 	import Textinput from '$lib/components/input/text.svelte';
 
 	import Fields from './fields.svelte';
+	import { MultiCard } from '$lib/components/layout';
 
 	const { data } = $props();
 
@@ -118,32 +117,30 @@
 	}
 </script>
 
-<Stack>
-	<Grid>
-		<Card>
-			<Fields abi={data.abi} fields={data.actionData?.fields || []} {state} />
-			<Button onclick={transact} disabled={!decoded}>Perform Action</Button>
-		</Card>
-		<Card>
-			{#if data.ricardian}
-				<h4 class="h4">Ricardian Contract</h4>
-				{#if data.ricardian.meta}
-					<p>Title: {data.ricardian.meta.title}</p>
-					<p>Summary: {data.ricardian.meta.summary}</p>
-				{/if}
-				{#if data.ricardian.text}
-					<p>{data.ricardian.text}</p>
-				{/if}
+<MultiCard>
+	<Card>
+		<Fields abi={data.abi} fields={data.actionData?.fields || []} {state} />
+		<Button onclick={transact} disabled={!decoded}>Perform Action</Button>
+	</Card>
+	<Card>
+		{#if data.ricardian}
+			<h4 class="h4">Ricardian Contract</h4>
+			{#if data.ricardian.meta}
+				<p>Title: {data.ricardian.meta.title}</p>
+				<p>Summary: {data.ricardian.meta.summary}</p>
 			{/if}
-			<h4 class="h4">Data Representation</h4>
-			{#if decoded}
-				<Code>{JSON.stringify(decoded, null, 2)}</Code>
-			{:else}
-				<p>Fill out the form to create a representation of the data in this type of action.</p>
+			{#if data.ricardian.text}
+				<p>{data.ricardian.text}</p>
 			{/if}
-		</Card>
-	</Grid>
-</Stack>
+		{/if}
+		<h4 class="h4">Data Representation</h4>
+		{#if decoded}
+			<Code>{JSON.stringify(decoded, null, 2)}</Code>
+		{:else}
+			<p>Fill out the form to create a representation of the data in this type of action.</p>
+		{/if}
+	</Card>
+</MultiCard>
 
 <h4 class="h4 mt-4">Transaction Link</h4>
 <fieldset class="grid gap-2">

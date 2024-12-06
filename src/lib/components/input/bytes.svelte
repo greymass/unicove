@@ -155,27 +155,26 @@
 	}
 </script>
 
-<div class="relative">
-	<TextInput
-		bind:ref
-		bind:value={input}
-		placeholder="0 {unit}"
-		step="any"
-		inputmode="decimal"
-		{autofocus}
-		onblur={handleBlur}
-		oninput={handleInput}
-		{...props}
-	/>
+<TextInput
+	bind:ref
+	bind:value={input}
+	placeholder="0 {unit}"
+	step="any"
+	inputmode="decimal"
+	{autofocus}
+	onblur={handleBlur}
+	oninput={handleInput}
+	{...props}
+>
 	<button
 		onclick={cycleUnit}
 		type="button"
-		class="absolute inset-y-0 right-0 flex select-none items-center gap-1 rounded-md bg-transparent px-4 text-skyBlue-500 hover:text-skyBlue-300 focus:outline-none focus-visible:ring focus-visible:ring-inset focus-visible:ring-solar-500"
+		class="flex h-full select-none items-center gap-1 rounded-md bg-transparent text-skyBlue-500 hover:text-skyBlue-300 focus:outline-none focus-visible:ring focus-visible:ring-inset focus-visible:ring-solar-500"
 	>
 		<span class="text-sm font-medium">{unit}</span>
 		<ArrowUpDown class="size-4" />
 	</button>
-</div>
+</TextInput>
 
 {#if debug}
 	<div class="mt-4">
