@@ -33,16 +33,16 @@ export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 	);
 
 	// TODO: Use ABICache here to prevent duplicate calls
-	const actions = await Promise.all(
-		transaction.actions.map(async (a) => {
-			const { abi } = await network.client.v1.chain.get_abi(String(a.account));
-			if (abi) {
-				const decoded = a.decodeData(abi);
-				return Serializer.objectify(decoded) as Record<string, unknown>;
-			}
-			return {};
-		})
-	);
+	// const actions = await Promise.all(
+	// 	transaction.actions.map(async (a) => {
+	// 		const { abi } = await network.client.v1.chain.get_abi(String(a.account));
+	// 		if (abi) {
+	// 			const decoded = a.decodeData(abi);
+	// 			return Serializer.objectify(decoded) as Record<string, unknown>;
+	// 		}
+	// 		return {};
+	// 	})
+	// );
 
 	return {
 		title: `${params.proposal}`,
@@ -53,8 +53,8 @@ export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 			name: params.proposal,
 			hash: transaction.id,
 			packed,
-			transaction,
-			actions
+			transaction
+			// actions
 		}
 	};
 };
