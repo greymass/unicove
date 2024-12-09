@@ -6,7 +6,7 @@
 	import Button from '$lib/components/button/button.svelte';
 	import Label from '$lib/components/input/label.svelte';
 	import TransactionSummary from '$lib/components/transactionSummary.svelte';
-	import Descriptionlist from '$lib/components/descriptionlist.svelte';
+	import { DL } from '$lib/components/descriptionlist';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
 	import { UnstakeManager } from './manager.svelte';
@@ -18,7 +18,7 @@
 	let manager: UnstakeManager = $state(new UnstakeManager(data.network));
 
 	let hints = $derived([
-		{ key: m.staking_withdraw_timeframe(), value: manager.assetValue.toString() }
+		{ title: m.staking_withdraw_timeframe(), description: manager.assetValue.toString() }
 	]);
 
 	$effect(() => {
@@ -78,6 +78,6 @@
 			</Button>
 		</Stack>
 
-		<Descriptionlist items={hints} />
+		<DL items={hints} />
 	{/if}
 </Stack>

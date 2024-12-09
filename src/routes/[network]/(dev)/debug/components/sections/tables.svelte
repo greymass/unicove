@@ -1,6 +1,7 @@
 <script>
-	import Descriptionlist from '$lib/components/descriptionlist.svelte';
-	import { Stack } from '$lib/components/layout';
+	import { DD, DL, DLRow } from '$lib/components/descriptionlist';
+	import Account from '$lib/components/elements/account.svelte';
+	import { Card, Stack } from '$lib/components/layout';
 
 	const options = [
 		[
@@ -30,11 +31,11 @@
 	];
 
 	const items = [
-		{ key: 'Some title', value: '123456' },
-		{ key: 'Some title', value: '123456' },
-		{ key: 'Some title', value: '123456' },
-		{ key: 'Some title', value: '123456' },
-		{ key: 'Some title', value: '123456' }
+		{ title: 'Some title', description: '123456' },
+		{ title: 'Some title', description: '123456' },
+		{ title: 'Some title', description: '123456' },
+		{ title: 'Some title', description: '123456' },
+		{ title: 'Some title', description: '123456' }
 	];
 </script>
 
@@ -50,8 +51,39 @@
 			row striping here.
 		</p>
 
+		<Card class="max-w-md" title="Some items">
+			<DL {items} />
+		</Card>
+
+		<p>
+			For displaying a component in the description, or multiple values under a single key, you can
+			use the components declaratively.
+		</p>
+
+		<p>
+			Note: You need to wrap the child component correctly or you'll get a warning. There are CSS
+			rules that'll visually yell at you to fix it :)
+		</p>
+
 		<div class="max-w-md">
-			<Descriptionlist {items} />
+			<DL>
+				<DLRow title="First">
+					<DD>
+						<Account name={'teamgreymass'} />
+					</DD>
+				</DLRow>
+				<DLRow title="Second">
+					<DD>
+						<Account name={'unicove.gm'} />
+					</DD>
+					<DD>
+						<Account name={'test.gm'} />
+					</DD>
+				</DLRow>
+				<DLRow title="Warning">
+					<Account name={'unicove.gm'} />
+				</DLRow>
+			</DL>
 		</div>
 	</Stack>
 
