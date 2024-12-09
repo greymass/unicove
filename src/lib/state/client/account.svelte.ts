@@ -3,8 +3,11 @@ import {
 	APIClient,
 	Asset,
 	Checksum256,
+	Float64,
 	Int128,
+	Int64,
 	Name,
+	UInt128,
 	UInt64,
 	type NameType
 } from '@wharfkit/antelope';
@@ -24,6 +27,24 @@ const defaultDataSources = {
 	delegated: [],
 	rex: undefined,
 	rexfund: undefined
+};
+
+interface VoterInfo {
+	isProxy: boolean;
+	proxyWeight: Float64;
+	proxy: Name;
+	weight: Float64;
+	votes: Name[];
+	staked: Int64;
+}
+
+const defaultVoteInfo: VoterInfo = {
+	isProxy: false,
+	proxy: Name.from(''),
+	proxyWeight: Float64.from(0),
+	weight: Float64.from(0),
+	votes: [],
+	staked: Int64.from(0)
 };
 
 export class AccountState {
@@ -62,6 +83,7 @@ export class AccountState {
 			? getAccountValue(this.network, this.balance, this.ram)
 			: undefined;
 	});
+	public voter: VoterInfo = $state(defaultVoteInfo);
 
 	constructor(network: NetworkState, name: NameType, fetchOverride?: typeof fetch) {
 		if (fetchOverride) {
@@ -94,6 +116,14 @@ export class AccountState {
 			client: this.network.client,
 			data: API.v1.AccountObject.from(json.account_data)
 		});
+		this.voter = {
+			isProxy: json.account_data.voter_info.is_proxy,
+			proxy: Name.from(json.account_data.voter_info.proxy),
+			proxyWeight: Float64.from(json.account_data.voter_info.proxied_vote_weight),
+			weight: Float64.from(json.account_data.voter_info.last_vote_weight),
+			votes: json.account_data.voter_info.producers.map((producer: string) => Name.from(producer)),
+			staked: Int64.from(json.account_data.voter_info.staked)
+		};
 		this.loaded = true;
 	}
 
@@ -111,7 +141,8 @@ export class AccountState {
 				cpu: this.cpu,
 				net: this.net,
 				ram: this.ram
-			}
+			},
+			voter: this.voter
 		};
 	}
 }
