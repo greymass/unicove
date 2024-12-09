@@ -3,6 +3,7 @@ import {
 	APIClient,
 	Asset,
 	Checksum256,
+	Float64,
 	Int128,
 	Int64,
 	Name,
@@ -30,9 +31,9 @@ const defaultDataSources = {
 
 interface VoterInfo {
 	isProxy: boolean;
-	proxyWeight: UInt128;
+	proxyWeight: Float64;
 	proxy: Name;
-	weight: UInt128;
+	weight: Float64;
 	votes: Name[];
 	staked: Int64;
 }
@@ -40,8 +41,8 @@ interface VoterInfo {
 const defaultVoteInfo: VoterInfo = {
 	isProxy: false,
 	proxy: Name.from(''),
-	proxyWeight: UInt128.from(0),
-	weight: UInt128.from(0),
+	proxyWeight: Float64.from(0),
+	weight: Float64.from(0),
 	votes: [],
 	staked: Int64.from(0)
 };
@@ -118,8 +119,8 @@ export class AccountState {
 		this.voter = {
 			isProxy: json.account_data.voter_info.is_proxy,
 			proxy: Name.from(json.account_data.voter_info.proxy),
-			proxyWeight: UInt128.from(json.account_data.voter_info.proxied_vote_weight),
-			weight: json.account_data.voter_info.last_vote_weight,
+			proxyWeight: Float64.from(json.account_data.voter_info.proxied_vote_weight),
+			weight: Float64.from(json.account_data.voter_info.last_vote_weight),
 			votes: json.account_data.voter_info.producers.map((producer: string) => Name.from(producer)),
 			staked: Int64.from(json.account_data.voter_info.staked)
 		};

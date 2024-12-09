@@ -1,5 +1,7 @@
 <script lang="ts">
 	import AccountText from '$lib/components/elements/account.svelte';
+	import VoteWeight from '$lib/components/elements/voteweight.svelte';
+	import { Float64 } from '@wharfkit/antelope';
 
 	const { data } = $props();
 </script>
@@ -8,13 +10,13 @@
 	<tbody>
 		<tr>
 			<td> Proxied To </td>
-			<td>
+			<td class="text-right">
 				<AccountText name={data.account.voter.proxy} />
 			</td>
 		</tr>
 		<tr>
 			<td> Is Proxy? </td>
-			<td>
+			<td class="text-right">
 				{#if data.account.voter.isProxy}
 					Yes
 				{:else}
@@ -23,15 +25,26 @@
 			</td>
 		</tr>
 		<tr>
-			<td> Vote Weight </td>
-			<td>
-				{data.account.voter.weight}
+			<td> Total Vote Weight </td>
+			<td class="text-right">
+				<VoteWeight weight={data.account.voter.weight} variant="full" />
 			</td>
 		</tr>
 		<tr>
-			<td> Proxy Weight </td>
-			<td>
-				{data.account.voter.proxyWeight}
+			<td> Self Vote Weight </td>
+			<td class="text-right">
+				<VoteWeight
+					weight={Float64.from(
+						Number(data.account.voter.weight) - Number(data.account.voter.proxyWeight)
+					)}
+					variant="full"
+				/>
+			</td>
+		</tr>
+		<tr>
+			<td> Proxied Weight </td>
+			<td class="text-right">
+				<VoteWeight weight={data.account.voter.proxyWeight} variant="full" />
 			</td>
 		</tr>
 	</tbody>
