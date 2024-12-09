@@ -32,18 +32,6 @@ export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 		({ level }: { level?: PermissionLevel }) => (level ? PermissionLevel.from(level) : undefined)
 	);
 
-	// TODO: Use ABICache here to prevent duplicate calls
-	const actions = await Promise.all(
-		transaction.actions.map(async (a) => {
-			const { abi } = await network.client.v1.chain.get_abi(String(a.account));
-			if (abi) {
-				const decoded = a.decodeData(abi);
-				return Serializer.objectify(decoded) as Record<string, unknown>;
-			}
-			return {};
-		})
-	);
-
 	return {
 		title: `${params.proposal}`,
 		subtitle: `An MSIG proposed by ${params.proposer} on the ${network.chain.name} Network`,
@@ -53,8 +41,7 @@ export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 			name: params.proposal,
 			hash: transaction.id,
 			packed,
-			transaction,
-			actions
+			transaction
 		}
 	};
 };
