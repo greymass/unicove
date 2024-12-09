@@ -3,8 +3,8 @@
 	import Dlrow from './dlrow.svelte';
 
 	type DescriptionItem = {
-		key: string;
-		value: string;
+		title: string;
+		description: string;
 	};
 
 	interface Props {
@@ -17,10 +17,8 @@
 
 <dl class="@container">
 	{#if props.items}
-		{#each props.items as item}
-			<Dlrow title={item.key}>
-				{item.value}
-			</Dlrow>
+		{#each props.items as { title, description }}
+			<Dlrow {title} {description} />
 		{/each}
 	{:else if props.children}
 		{@render props.children()}

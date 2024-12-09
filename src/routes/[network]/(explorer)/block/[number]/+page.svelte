@@ -4,7 +4,7 @@
 	import AccountText from '$lib/components/elements/account.svelte';
 	import Button from '$lib/components/button/button.svelte';
 	import { ArrowLeftRight, ArrowRight, ArrowLeft } from 'lucide-svelte';
-	import { DL, DLRow } from '$lib/components/descriptionlist/index.js';
+	import { DD, DL, DLRow } from '$lib/components/descriptionlist/index.js';
 	import { goto } from '$lib/utils';
 
 	let { data } = $props();
@@ -78,22 +78,34 @@
 
 		<DL>
 			<DLRow title={'Block Number'}>
-				{data.details.blockNumber}
+				<DD>
+					{data.details.blockNumber}
+				</DD>
 			</DLRow>
 			<DLRow title={'Producer Name'}>
-				<AccountText name={data.details.blockProducer} />
+				<DD>
+					<AccountText name={data.details.blockProducer} />
+				</DD>
 			</DLRow>
 			<DLRow title={'Total CPU'}>
-				{data.details.totalCpu} μs
+				<DD>
+					{data.details.totalCpu} μs
+				</DD>
 			</DLRow>
 			<DLRow title={'Total NET'}>
-				{data.details.totalNet * 8} Bytes
+				<DD>
+					{data.details.totalNet * 8} Bytes
+				</DD>
 			</DLRow>
 			<DLRow title={'Total Actions'}>
-				{data.details.totalActions}
+				<DD>
+					{data.details.totalActions}
+				</DD>
 			</DLRow>
 			<DLRow title={'Block ID'}>
-				{data.details.blockId}
+				<DD>
+					{data.details.blockId}
+				</DD>
 			</DLRow>
 		</DL>
 
