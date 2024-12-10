@@ -2,7 +2,11 @@ import { invalidateAll } from '$app/navigation';
 import type { WharfState } from '$lib/state/client/wharf.svelte';
 import type { NetworkState } from '$lib/state/network.svelte';
 import { Name, PermissionLevel, type Checksum256 } from '@wharfkit/antelope';
-import type { AnyAction } from '@wharfkit/session';
+import type { AnyAction, Transaction } from '@wharfkit/session';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+
+dayjs.extend(relativeTime);
 
 type Proposal = {
 	proposer: string;
@@ -10,7 +14,9 @@ type Proposal = {
 	hash: Checksum256;
 	approvals: {
 		provided_approvals: PermissionLevel[];
+		requested_approvals: PermissionLevel[];
 	};
+	transaction: Transaction;
 };
 
 export class ApprovalManager {
@@ -19,7 +25,30 @@ export class ApprovalManager {
 	proposal: Proposal;
 	error?: string = $state();
 	transacting = $state(false);
-	approved = $state(false);
+
+	// States related to proposal
+	approvals = $derived.by(() => [
+		...this.proposal.approvals.provided_approvals,
+		...this.proposal.approvals.requested_approvals
+	]);
+	proposalExpired = $derived.by(() =>
+		dayjs(this.proposal.transaction.expiration.toDate()).isBefore()
+	);
+	totalRequested = $derived(this.approvals.length);
+	totalApproved = $derived.by(() => this.proposal.approvals.provided_approvals.length);
+	ratioApproved = $derived((this.totalApproved / this.totalRequested) * 100);
+	relativeTimeToExpiry = $derived.by(() =>
+		dayjs(this.proposal.transaction.expiration.toDate()).fromNow()
+	);
+
+	// States related to user
+	userHasApproved = $derived.by(() =>
+		this.accountHasApproved(this.wharf?.session?.permissionLevel)
+	);
+	userIsProposer = $derived.by(() => this.wharf?.session?.actor.equals(this.proposal.proposer));
+	userIsApprover = $derived.by(() =>
+		this.approvals.some((a) => this.wharf?.session && a.equals(this.wharf?.session.permissionLevel))
+	);
 
 	constructor(network: NetworkState, proposal: Proposal) {
 		this.network = network;
@@ -39,23 +68,21 @@ export class ApprovalManager {
 
 		if (wharf !== this.wharf) {
 			this.wharf = wharf;
-
-			if (wharf.session) {
-				const permissionLevel = wharf.session.permissionLevel;
-				this.approved = this.proposal.approvals.provided_approvals.some((a: PermissionLevel) =>
-					a.equals(permissionLevel)
-				);
-			}
 		}
 	}
 
+	accountHasApproved = (account?: PermissionLevel) => {
+		if (!account) return false;
+		return this.proposal.approvals.provided_approvals.some((a) => a.equals(account));
+	};
+
 	async transact(action: AnyAction) {
 		try {
-			this.transacting = true;
-
 			if (!this.wharf) {
 				throw new Error("Can't sign, wharf not ready");
 			}
+
+			this.transacting = true;
 
 			const result = await this.wharf.transact({ action });
 
@@ -83,7 +110,6 @@ export class ApprovalManager {
 		});
 
 		await this.transact(action);
-		this.approved = true;
 	}
 
 	async unapprove() {
@@ -97,7 +123,6 @@ export class ApprovalManager {
 		});
 
 		await this.transact(action);
-		this.approved = false;
 	}
 
 	async execute() {
@@ -124,5 +149,22 @@ export class ApprovalManager {
 		});
 
 		this.transact(action);
+	}
+
+	toJSON() {
+		return {
+			approvals: this.approvals,
+			proposalExpired: this.proposalExpired,
+			totalRequested: this.totalRequested,
+			totalApproved: this.totalApproved,
+			ratioApproved: this.ratioApproved,
+			relativeTimeToExpiry: this.relativeTimeToExpiry,
+			userHasApproved: this.userHasApproved,
+			userIsProposer: this.userIsProposer,
+			userIsApprover: this.userIsApprover,
+			network: this.network,
+			proposal: this.proposal,
+			error: this.error
+		};
 	}
 }

@@ -1,63 +1,24 @@
 <script lang="ts">
+	import { getContext } from 'svelte';
+	// import { CircleCheck, CircleHelp } from 'lucide-svelte';
+
 	import Button from '$lib/components/button/button.svelte';
 	import { DD, DL, DLRow } from '$lib/components/descriptionlist/index.js';
 	import { Stack, Switcher } from '$lib/components/layout/index.js';
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
-	import { getContext } from 'svelte';
-	import { Name, PermissionLevel } from '@wharfkit/antelope';
-	import dayjs from 'dayjs';
-	import relativeTime from 'dayjs/plugin/relativeTime';
 	import Account from '$lib/components/elements/account.svelte';
-	// import { CircleCheck, CircleHelp } from 'lucide-svelte';
-	import { ApprovalManager } from './manager.svelte';
 	import ActionCard from '$lib/components/elements/action.svelte';
 
-	dayjs.extend(relativeTime);
+	import { ApprovalManager } from './manager.svelte';
 
 	let { data } = $props();
-	let { proposal } = $derived(data);
 
 	let context = getContext<UnicoveContext>('state');
-	let { wharf } = $derived(context);
 
 	const manager = $state(new ApprovalManager(data.network, data.proposal));
 	$effect(() => {
-		if (context.account) {
-			manager.sync(data.network, context.wharf);
-		}
+		manager.sync(data.network, context.wharf);
 	});
-
-	let { requested_approvals, provided_approvals } = $derived(proposal.approvals);
-	let total_approvals = $derived([...provided_approvals, ...requested_approvals]);
-
-	const accountHasApproved = (account?: PermissionLevel) => {
-		if (!account) return false;
-		return provided_approvals.some((a) => a.equals(account));
-	};
-
-	let userIsApprover = $derived(
-		total_approvals.some((a) => wharf.session && a.equals(wharf.session.permissionLevel))
-	);
-
-	let userIsProposer = $derived(wharf.session?.actor.equals(Name.from(proposal.proposer)));
-
-	let transacting = $derived(manager.transacting);
-	let userHasApproved = $derived(manager.approved);
-
-	// Expiry date
-	let relativeTimeToExpiry = $derived(dayjs(proposal.transaction.expiration.toDate()).fromNow());
-	let proposalExpired = $derived(dayjs(proposal.transaction.expiration.toDate()).isBefore());
-
-	// Approval statistics
-	let totalRequested = $derived(total_approvals.length);
-	let totalApproved = $derived(provided_approvals.length);
-	let ratioApproved = $derived((totalApproved / totalRequested) * 100);
-
-	// Actions
-	const handleApprove = () => manager.approve();
-	const handleUnapprove = () => manager.unapprove();
-	const handleExecute = () => manager.execute();
-	const handleCancel = () => manager.cancel();
 </script>
 
 <Stack>
@@ -69,16 +30,16 @@
 				id="msig-vis"
 				class="rounded-2xl pb-4 pt-8"
 				style="
-				--bg-pos: calc(100% - {ratioApproved}%); 
-				--ease: {userHasApproved ? 'ease-out' : 'ease-in'};
-				--duration: {userHasApproved ? '1000ms' : '200ms'}"
+				--bg-pos: calc(100% - {manager.ratioApproved}%); 
+				--ease: {manager.userHasApproved ? 'ease-out' : 'ease-in'};
+				--duration: {manager.userHasApproved ? '1000ms' : '200ms'}"
 			>
 				<div class="flex justify-between px-4 font-semibold">
 					<div class="">
 						<span class="flex items-center gap-1 text-3xl">
 							<!-- TODO: Figure out how to clip these icons the same as the text -->
 							<!-- <Check class="size-5 fill-inherit" />  -->
-							{totalApproved}
+							{manager.totalApproved}
 						</span>
 						Approved
 					</div>
@@ -87,7 +48,7 @@
 						<span class="flex items-center justify-end gap-1 text-3xl">
 							<!-- TODO: Figure out how to clip these icons the same as the text -->
 							<!-- <UserCheck class="size-5 fill-inherit" />  -->
-							{totalRequested}
+							{manager.totalRequested}
 						</span>
 						Requested
 					</div>
@@ -102,12 +63,12 @@
 					</tr>
 				</thead>
 				<tbody>
-					{#each total_approvals as requested}
+					{#each manager.approvals as requested}
 						<tr class="h-12 bg-none">
 							<td><Account name={requested.actor} /></td>
 							<td class="text-muted">{requested.permission}</td>
 							<td class="text-right">
-								{#if accountHasApproved(requested)}
+								{#if manager.accountHasApproved(requested)}
 									<span class="text-green-300">Approved</span>
 								{:else}
 									<span class="text-muted">Requested</span>
@@ -125,56 +86,62 @@
 			<DL>
 				<DLRow title={'Proposer'}>
 					<DD>
-						<Account name={proposal.proposer} />
+						<Account name={manager.proposal.proposer} />
 					</DD>
 				</DLRow>
 				<DLRow title={'Proposal Name'}>
 					<DD>
-						{proposal.name}
+						{manager.proposal.name}
 					</DD>
 				</DLRow>
-				<DLRow title={proposalExpired ? 'Expired' : 'Expiration'}>
+				<DLRow title={manager.proposalExpired ? 'Expired' : 'Expiration'}>
 					<DD>
-						{proposal.transaction.expiration} ({relativeTimeToExpiry})
+						{manager.proposal.transaction.expiration} ({manager.relativeTimeToExpiry})
 					</DD>
 				</DLRow>
 				<DLRow title={'Hash'}>
 					<DD>
-						{proposal.hash}
+						{manager.proposal.hash}
 					</DD>
 				</DLRow>
 			</DL>
 
-			{#if userIsApprover}
-				{#if userHasApproved}
-					<Button variant="secondary" onclick={handleUnapprove} disabled={transacting}
-						>Unapprove</Button
+			{#if manager.userIsApprover}
+				{#if manager.userHasApproved}
+					<Button
+						variant="secondary"
+						onclick={() => manager.unapprove()}
+						disabled={manager.transacting}>Unapprove</Button
 					>
 				{:else}
 					<Button
 						class="bg-green-400 text-green-950 hover:active:bg-green-500 [@media(any-hover:hover)]:hover:bg-green-300"
 						variant="primary"
-						onclick={handleApprove}
-						disabled={transacting}>Approve</Button
+						onclick={() => manager.approve()}
+						disabled={manager.transacting}>Approve</Button
 					>
 				{/if}
 			{/if}
 
-			{#if userIsProposer}
-				<Button variant="secondary" onclick={handleCancel}>Cancel MSIG</Button>
+			{#if manager.userIsProposer}
+				<Button variant="secondary" onclick={() => manager.cancel()}>Cancel MSIG</Button>
 			{/if}
 
-			<Button variant="primary" onclick={handleExecute}>Execute</Button>
+			<Button variant="primary" onclick={() => manager.execute()}>Execute</Button>
 		</Stack>
 	</Switcher>
 
 	<Stack>
 		<h2 class="h3">Proposed Actions</h2>
-		{#each proposal.transaction.actions as action}
+		{#each manager.proposal.transaction.actions as action}
 			<ActionCard {action} />
 		{/each}
 	</Stack>
 </Stack>
+
+{#if context.settings.data.debugMode}
+	<pre>{JSON.stringify(manager, null, 2)}</pre>
+{/if}
 
 <style lang="postcss">
 	#msig-vis {
