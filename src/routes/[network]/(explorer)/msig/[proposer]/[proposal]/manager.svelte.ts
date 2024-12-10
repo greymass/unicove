@@ -1,10 +1,11 @@
-import { invalidateAll } from '$app/navigation';
-import type { WharfState } from '$lib/state/client/wharf.svelte';
-import type { NetworkState } from '$lib/state/network.svelte';
 import { Name, PermissionLevel, type Checksum256 } from '@wharfkit/antelope';
-import type { AnyAction, Transaction } from '@wharfkit/session';
+import type { Transaction } from '@wharfkit/session';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+
+import type { UnicoveContext } from '$lib/state/client.svelte';
+import type { WharfState } from '$lib/state/client/wharf.svelte';
+import type { NetworkState } from '$lib/state/network.svelte';
 
 dayjs.extend(relativeTime);
 
@@ -25,8 +26,8 @@ interface Approvals {
 }
 
 export class ApprovalManager {
-	network: NetworkState | undefined = $state();
-	wharf: WharfState | undefined = $state();
+	network: NetworkState = $state() as NetworkState;
+	wharf: WharfState = $state() as WharfState;
 	proposal: Proposal;
 
 	// States related to proposal
@@ -54,8 +55,9 @@ export class ApprovalManager {
 		)
 	);
 
-	constructor(network: NetworkState, proposal: Proposal) {
-		this.network = network;
+	constructor(context: UnicoveContext, proposal: Proposal) {
+		this.network = context.network;
+		this.wharf = context.wharf;
 		this.proposal = proposal;
 
 		this.approvals = {
@@ -92,8 +94,8 @@ export class ApprovalManager {
 	};
 
 	async approve() {
-		if (!this.network || !this.wharf || !this.wharf.session) {
-			throw new Error("Can't sign, data not ready");
+		if (!this.wharf.session) {
+			throw new Error('Must be logged in to sign.');
 		}
 
 		const action = this.network.contracts.msig.action('approve', {
@@ -108,8 +110,8 @@ export class ApprovalManager {
 	}
 
 	async unapprove() {
-		if (!this.network || !this.wharf || !this.wharf.session) {
-			throw new Error("Can't sign, data not ready");
+		if (!this.wharf.session) {
+			throw new Error('Must be logged in to sign.');
 		}
 
 		const action = this.network.contracts.msig.action('unapprove', {
@@ -123,8 +125,8 @@ export class ApprovalManager {
 	}
 
 	async execute() {
-		if (!this.network || !this.wharf || !this.wharf.session) {
-			throw new Error("Can't sign, data not ready");
+		if (!this.wharf.session) {
+			throw new Error('Must be logged in to sign.');
 		}
 
 		const action = this.network.contracts.msig.action('exec', {
@@ -137,8 +139,8 @@ export class ApprovalManager {
 	}
 
 	async cancel() {
-		if (!this.network || !this.wharf || !this.wharf.session) {
-			throw new Error("Can't sign, data not ready");
+		if (!this.wharf.session) {
+			throw new Error('Must be logged in to sign.');
 		}
 
 		const action = this.network.contracts.msig.action('cancel', {

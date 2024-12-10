@@ -15,7 +15,7 @@
 
 	let context = getContext<UnicoveContext>('state');
 
-	const manager = $state(new ApprovalManager(data.network, data.proposal));
+	const manager = $state(new ApprovalManager(context, data.proposal));
 	$effect(() => {
 		manager.sync(data.network, context.wharf);
 	});
