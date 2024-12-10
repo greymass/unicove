@@ -1,7 +1,7 @@
 import { APIClient, Asset, FetchProvider, Int128, type AssetType } from '@wharfkit/antelope';
 import { Chains, ChainDefinition, TokenMeta } from '@wharfkit/common';
 import { RAMState, Resources, REXState, PowerUpState } from '@wharfkit/resources';
-import { chainIdsToIndices } from '@wharfkit/session';
+import { ABICache, chainIdsToIndices } from '@wharfkit/session';
 import { snapOrigins } from '@wharfkit/wallet-plugin-metamask';
 
 import { Types as DelphiOracleTypes } from '$lib/wharf/contracts/delphioracle';
@@ -40,6 +40,7 @@ export class NetworkState {
 
 	public contracts: DefaultContracts;
 
+	public abis?: ABICache = $state();
 	public ramstate?: RAMState = $state();
 	public resources?: Resources = $state();
 	public rexstate?: REXState = $state();
@@ -75,6 +76,8 @@ export class NetworkState {
 				})
 			);
 		}
+
+		this.abis = new ABICache(this.client);
 
 		this.resources = new Resources({
 			api: this.client,
