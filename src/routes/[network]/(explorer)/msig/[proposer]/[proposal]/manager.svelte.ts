@@ -66,15 +66,7 @@ export class ApprovalManager {
 
 	sync(network: NetworkState, wharf: WharfState) {
 		console.log('sync');
-		let changed = false;
-		if (network.chain != this.network?.chain) {
-			this.network = network;
-			changed = true;
-		}
-
-		if (changed) {
-		}
-
+		this.network = network;
 		this.wharf = wharf;
 	}
 
