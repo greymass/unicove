@@ -1,4 +1,4 @@
-import type { Asset } from '@wharfkit/antelope';
+import type { Asset, NameType } from '@wharfkit/antelope';
 import type { ChainIndices } from '@wharfkit/common';
 
 import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
@@ -16,6 +16,7 @@ export interface DefaultContracts {
 export interface ChainConfig {
 	name: ChainShortName;
 	features: Record<FeatureType, boolean>;
+	lockedsupply?: NameType[]; // Accounts where tokens exist but are not in circulation
 	symbol: Asset.SymbolType;
 	timeseries_api?: string;
 }
@@ -61,6 +62,7 @@ export const chainConfigs: Record<string, ChainConfig> = {
 			stakeresource: false,
 			staking: true
 		},
+		lockedsupply: ['eosio'],
 		symbol: '4,EOS'
 	},
 	// Jungle4
