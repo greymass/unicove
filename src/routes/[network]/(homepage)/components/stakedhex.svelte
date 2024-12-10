@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { type UnicoveContext } from '$lib/state/client.svelte';
+	import AssetText from '$lib/components/elements/asset.svelte';
 	import { chainLogos } from '@wharfkit/common';
 	import { getContext } from 'svelte';
 
@@ -8,7 +9,7 @@
 	let networkLogo = $derived(String(chainLogos.get(network?.chain.id.toString() || '')));
 	let networkName = $derived(String(network?.chain.name));
 
-	const { TLV, APR } = $props();
+	const { staked, apr } = $props();
 </script>
 
 <div class="relative max-w-fit">
@@ -29,9 +30,11 @@
 		</svg>
 		<div class="grid text-center uppercase">
 			<img class="mb-4 h-12 place-self-center md:h-20" src={networkLogo} alt={networkName} />
-			<span class="text-sm text-white/60 md:text-lg">Total locked value</span>
+			<span class="md:text-md text-sm text-white/60">Total Staked</span>
 			<!-- TODO: add eos formatter -->
-			<span class="text-md font-semibold md:text-2xl">{TLV} EOS</span>
+			<span class="text-md font-semibold md:text-xl">
+				<AssetText value={staked} variant="full" />
+			</span>
 		</div>
 	</div>
 
@@ -51,8 +54,8 @@
 			/>
 		</svg>
 		<div class="grid text-center uppercase">
-			<span class="text-sm text-white/60 md:text-lg">APR</span>
-			<span class="text-md font-semibold md:text-2xl">{APR}%</span>
+			<span class="md:text-md text-sm text-white/60">APR</span>
+			<span class="text-md font-semibold md:text-xl">{apr}%</span>
 		</div>
 	</div>
 </div>
