@@ -92,20 +92,15 @@ export class ApprovalManager {
 	};
 
 	async transact(action: AnyAction) {
-		try {
-			if (!this.wharf) {
-				throw new Error("Can't sign, wharf not ready");
-			}
+		if (!this.wharf) {
+			throw new Error("Can't sign, wharf not ready");
+		}
 
-			const result = await this.wharf.transact({ action });
+		const result = await this.wharf.transact({ action });
 
-			const txid = result.response?.transaction_id;
-			if (!txid) {
-				throw Error('No transaction id');
-			}
-		} catch (e) {
-		} finally {
-			invalidateAll(); // Re-runs the load function to refresh table data
+		const txid = result.response?.transaction_id;
+		if (!txid) {
+			throw Error('No transaction id');
 		}
 	}
 
