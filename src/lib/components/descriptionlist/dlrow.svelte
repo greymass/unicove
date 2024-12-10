@@ -1,16 +1,29 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
+	import DT from './dt.svelte';
+	import DD from './dd.svelte';
 
 	interface Props {
 		title: string;
-		children: Snippet;
+		description?: string;
+		children?: Snippet;
 	}
-	let { title, children }: Props = $props();
+
+	let { title = '', description, children }: Props = $props();
 </script>
 
 <div
 	class="flex flex-wrap items-center justify-between gap-x-4 border-b border-mineShaft-900 py-3 last:border-none @xs:flex-nowrap"
 >
-	<dt class="caption self-start text-nowrap">{title}</dt>
-	<dd class="grow text-balance break-all text-right tabular-nums">{@render children()}</dd>
+	<DT>{title}</DT>
+	<div
+		class="grow bg-red-500 before:content-['ERROR_Missing_DD_element_'] has-[dd]:bg-transparent has-[dd]:before:hidden"
+	>
+		{#if description}
+			<DD>{description}</DD>
+		{/if}
+		{#if children}
+			{@render children()}
+		{/if}
+	</div>
 </div>

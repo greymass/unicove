@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Card, Cluster, Grid, MultiCard } from '$lib/components/layout';
+	import { Card, Grid, Stack } from '$lib/components/layout';
 	import * as m from '$lib/paraglide/messages.js';
 	import Account from '$lib/components/elements/account.svelte';
 	import Key from 'lucide-svelte/icons/key-round';
@@ -11,20 +11,20 @@
 	const legacyPubKey = data.publicKey.toLegacyString();
 </script>
 
-<MultiCard>
+<Stack>
 	<Card>
-		<Cluster class="items-center">
-			<picture class="grid size-12 place-items-center rounded-full bg-mineShaft-900">
+		<div class="flex gap-6">
+			<picture class="grid size-12 shrink-0 place-items-center rounded-full bg-mineShaft-900">
 				<Key />
 			</picture>
-			<div class="space-y-px *:break-all">
+			<div class="space-y-0.5 text-balance *:break-all">
 				<p class="font-semibold text-white">
 					{pubKey}
 					<CopyButton data={pubKey} />
 				</p>
 				<p class="text-muted">{m.legacy_key()}{': '}{legacyPubKey}</p>
 			</div>
-		</Cluster>
+		</div>
 	</Card>
 	<Card title={m.accounts_using_public_key()}>
 		{#if data.accounts && data.accounts.length > 0}
@@ -33,7 +33,7 @@
 					<li class="flex">
 						<Account
 							name={account}
-							class="h-12 content-center rounded-lg px-4 hover:bg-mineShaft-900 hover:text-mineShaft-50 focus-visible:bg-mineShaft-900 focus-visible:text-mineShaft-50"
+							class="h-12 content-center rounded-lg px-4 hover:bg-mineShaft-900/50  focus-visible:bg-mineShaft-900 focus-visible:text-mineShaft-50"
 						/>
 					</li>
 				{/each}
@@ -42,4 +42,4 @@
 			<p class="text-muted text-center">{m.no_accounts_found()}</p>
 		{/if}
 	</Card>
-</MultiCard>
+</Stack>

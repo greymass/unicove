@@ -32,7 +32,8 @@
 		<thead>
 			<tr>
 				<th>Token</th>
-				<th>Amount</th>
+				<th class="text-right">Amount</th>
+				<th class="text-right">Value</th>
 				{#if isCurrentUser}
 					<th></th>
 				{/if}
@@ -48,12 +49,17 @@
 									<img class="h-5 w-5" src={balance.metadata?.logo} alt="LOGO" />
 								{/if}
 							</div>
-							<span>{balance.asset.symbol.name}</span>
+							<a
+								href={`/${context.network}/token/${balance.contract}/${balance.asset.symbol.name}`}
+							>
+								{balance.asset.symbol.name}
+							</a>
 						</div>
 					</td>
-					<td>
+					<td class="text-right">
 						<AssetText value={balance.asset} />
 					</td>
+					<td></td>
 					{#if isCurrentUser}
 						{@render tableAction(balance.asset)}
 					{/if}
