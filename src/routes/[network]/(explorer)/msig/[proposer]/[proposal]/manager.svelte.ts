@@ -28,7 +28,6 @@ export class ApprovalManager {
 	network: NetworkState | undefined = $state();
 	wharf: WharfState | undefined = $state();
 	proposal: Proposal;
-	error?: string = $state();
 
 	// States related to proposal
 	expiration = $derived.by(() => this.proposal.transaction.expiration.toDate());
@@ -74,7 +73,6 @@ export class ApprovalManager {
 		}
 
 		if (changed) {
-			this.error = '';
 		}
 
 		this.wharf = wharf;
@@ -114,7 +112,6 @@ export class ApprovalManager {
 				throw Error('No transaction id');
 			}
 		} catch (e) {
-			this.error = String(e);
 		} finally {
 			invalidateAll(); // Re-runs the load function to refresh table data
 		}
@@ -188,8 +185,7 @@ export class ApprovalManager {
 			userIsProposer: this.userIsProposer,
 			userIsApprover: this.userIsApprover,
 			network: this.network,
-			proposal: this.proposal,
-			error: this.error
+			proposal: this.proposal
 		};
 	}
 }
