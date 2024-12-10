@@ -17,7 +17,7 @@
 	let humanReadable = $state({});
 
 	onMount(async () => {
-		const { abi } = await network.client.v1.chain.get_abi(String(action.account));
+		const abi = await network.abis?.getAbi(action.account);
 		if (abi) {
 			const decoded = action.decodeData(abi);
 			humanReadable = Serializer.objectify(decoded) as Record<string, unknown>;
