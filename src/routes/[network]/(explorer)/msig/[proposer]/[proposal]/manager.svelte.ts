@@ -77,7 +77,6 @@ export class ApprovalManager {
 	}
 
 	async sync(network: NetworkState, wharf: WharfState) {
-		console.log('sync');
 		this.network = network;
 		this.wharf = wharf;
 
@@ -101,8 +100,6 @@ export class ApprovalManager {
 				readable.push(action);
 				continue;
 			}
-
-			console.log(String(action.account), String(action.name), abi);
 
 			// Decode action data and push to readable
 			const decoded = action.decodeData(abi);
