@@ -221,8 +221,8 @@ export class WharfState {
 		transaction.status = StatusType.BROADCAST;
 		transaction.response = result.response;
 		transaction.transaction = result.resolved.transaction;
-		const { id } = sendSuccessToast(transaction);
-		transaction.toastId = id;
+		// const { id } = sendSuccessToast(transaction);
+		// transaction.toastId = id;
 		queueTransaction(transaction);
 
 		return result;
