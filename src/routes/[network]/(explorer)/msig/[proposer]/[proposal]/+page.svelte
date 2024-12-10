@@ -141,14 +141,14 @@
 
 	<Stack>
 		<h2 class="h3">Proposed Actions</h2>
-		{#each manager.proposal.transaction.actions as action}
+		{#each manager.actions as action}
 			<ActionCard {action} />
 		{/each}
 	</Stack>
 </Stack>
 
 {#if context.settings.data.debugMode}
-	<pre>{JSON.stringify(manager, null, 2)}</pre>
+	<pre>{JSON.stringify(manager.actions, null, 2)}</pre>
 {/if}
 
 <style lang="postcss">

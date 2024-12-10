@@ -1,11 +1,19 @@
-import { Name, PermissionLevel, type Checksum256 } from '@wharfkit/antelope';
-import type { Transaction } from '@wharfkit/session';
+import {
+	ABI,
+	Name,
+	PermissionLevel,
+	Serializer,
+	type Action,
+	type Checksum256,
+	type Transaction
+} from '@wharfkit/antelope';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 
 import type { UnicoveContext } from '$lib/state/client.svelte';
 import type { WharfState } from '$lib/state/client/wharf.svelte';
 import type { NetworkState } from '$lib/state/network.svelte';
+import * as SystemContract from '$lib/wharf/contracts/system';
 
 dayjs.extend(relativeTime);
 
@@ -31,6 +39,8 @@ export class ApprovalManager {
 	proposal: Proposal;
 
 	// States related to proposal
+	actions: Action[] = $state([]);
+
 	expiration = $derived.by(() => this.proposal.transaction.expiration.toDate());
 	expired = $derived.by(() => dayjs(this.expiration).isBefore());
 	expiresIn = $derived.by(() => dayjs(this.expiration).fromNow());
@@ -66,10 +76,50 @@ export class ApprovalManager {
 		};
 	}
 
-	sync(network: NetworkState, wharf: WharfState) {
+	async sync(network: NetworkState, wharf: WharfState) {
 		console.log('sync');
 		this.network = network;
 		this.wharf = wharf;
+
+		const overrides: Record<string, ABI> = {};
+		const readable: Action[] = [];
+		for (const action of this.proposal.transaction.actions) {
+			// Check if an ABI override exists
+			let abi: ABI | undefined = overrides[String(action.account)];
+
+			// If not, retrieve from cache/network
+			if (!abi) {
+				try {
+					abi = await network.abis?.getAbi(action.account);
+				} catch (e) {
+					console.error(e);
+				}
+			}
+
+			// If unavailable, abort decoding and return raw
+			if (!abi) {
+				readable.push(action);
+				continue;
+			}
+
+			console.log(String(action.account), String(action.name), abi);
+
+			// Decode action data and push to readable
+			const decoded = action.decodeData(abi);
+			action.data = Serializer.objectify(decoded);
+			readable.push(action);
+
+			// If this action is a setabi, set override for future actions in loop
+			if (action.account.equals('eosio') && action.name.equals('setabi')) {
+				const setabi = SystemContract.Types.setabi.from(action.data);
+				const decoded = Serializer.decode({
+					type: ABI,
+					data: setabi.abi
+				});
+				overrides[String(setabi.account)] = decoded;
+			}
+		}
+		this.actions = readable;
 	}
 
 	accountHasApproved = (account?: PermissionLevel) => {
