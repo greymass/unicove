@@ -30,7 +30,7 @@
 				id="msig-vis"
 				class="rounded-2xl pb-4 pt-8"
 				style="
-				--bg-pos: calc(100% - {manager.ratioApproved}%); 
+				--bg-pos: calc(100% - {manager.approvalRatio}%); 
 				--ease: {manager.userHasApproved ? 'ease-out' : 'ease-in'};
 				--duration: {manager.userHasApproved ? '1000ms' : '200ms'}"
 			>
@@ -63,12 +63,12 @@
 					</tr>
 				</thead>
 				<tbody>
-					{#each manager.approvals as requested}
+					{#each manager.participants as participant}
 						<tr class="h-12 bg-none">
-							<td><Account name={requested.actor} /></td>
-							<td class="text-muted">{requested.permission}</td>
+							<td><Account name={participant.actor} /></td>
+							<td class="text-muted">{participant.permission}</td>
 							<td class="text-right">
-								{#if manager.accountHasApproved(requested)}
+								{#if manager.accountHasApproved(participant)}
 									<span class="text-green-300">Approved</span>
 								{:else}
 									<span class="text-muted">Requested</span>
@@ -94,9 +94,9 @@
 						{manager.proposal.name}
 					</DD>
 				</DLRow>
-				<DLRow title={manager.proposalExpired ? 'Expired' : 'Expiration'}>
+				<DLRow title={manager.expired ? 'Expired' : 'Expiration'}>
 					<DD>
-						{manager.proposal.transaction.expiration} ({manager.relativeTimeToExpiry})
+						{manager.proposal.transaction.expiration} ({manager.expiresIn})
 					</DD>
 				</DLRow>
 				<DLRow title={'Hash'}>

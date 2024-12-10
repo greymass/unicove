@@ -19,6 +19,11 @@ type Proposal = {
 	transaction: Transaction;
 };
 
+interface Approvals {
+	requested: PermissionLevel[];
+	provided: PermissionLevel[];
+}
+
 export class ApprovalManager {
 	network: NetworkState | undefined = $state();
 	wharf: WharfState | undefined = $state();
@@ -27,19 +32,18 @@ export class ApprovalManager {
 	transacting = $state(false);
 
 	// States related to proposal
-	approvals = $derived.by(() => [
-		...this.proposal.approvals.provided_approvals,
-		...this.proposal.approvals.requested_approvals
-	]);
-	proposalExpired = $derived.by(() =>
-		dayjs(this.proposal.transaction.expiration.toDate()).isBefore()
-	);
-	totalRequested = $derived(this.approvals.length);
-	totalApproved = $derived.by(() => this.proposal.approvals.provided_approvals.length);
-	ratioApproved = $derived((this.totalApproved / this.totalRequested) * 100);
-	relativeTimeToExpiry = $derived.by(() =>
-		dayjs(this.proposal.transaction.expiration.toDate()).fromNow()
-	);
+	expiration = $derived.by(() => this.proposal.transaction.expiration.toDate());
+	expired = $derived.by(() => dayjs(this.expiration).isBefore());
+	expiresIn = $derived.by(() => dayjs(this.expiration).fromNow());
+
+	approvals: Approvals = $state({
+		requested: [],
+		provided: []
+	});
+	participants = $derived.by(() => [...this.approvals.provided, ...this.approvals.requested]);
+	totalRequested = $derived(this.approvals.provided.length + this.approvals.requested.length);
+	totalApproved = $derived.by(() => this.approvals.provided.length);
+	approvalRatio = $derived((this.totalApproved / this.totalRequested) * 100);
 
 	// States related to user
 	userHasApproved = $derived.by(() =>
@@ -47,15 +51,23 @@ export class ApprovalManager {
 	);
 	userIsProposer = $derived.by(() => this.wharf?.session?.actor.equals(this.proposal.proposer));
 	userIsApprover = $derived.by(() =>
-		this.approvals.some((a) => this.wharf?.session && a.equals(this.wharf?.session.permissionLevel))
+		this.participants.some(
+			(a) => this.wharf?.session && a.equals(this.wharf?.session.permissionLevel)
+		)
 	);
 
 	constructor(network: NetworkState, proposal: Proposal) {
 		this.network = network;
 		this.proposal = proposal;
+
+		this.approvals = {
+			requested: proposal.approvals.requested_approvals,
+			provided: proposal.approvals.provided_approvals
+		};
 	}
 
 	sync(network: NetworkState, wharf: WharfState) {
+		console.log('sync');
 		let changed = false;
 		if (network.chain != this.network?.chain) {
 			this.network = network;
@@ -66,14 +78,28 @@ export class ApprovalManager {
 			this.error = '';
 		}
 
-		if (wharf !== this.wharf) {
-			this.wharf = wharf;
-		}
+		this.wharf = wharf;
 	}
 
 	accountHasApproved = (account?: PermissionLevel) => {
 		if (!account) return false;
-		return this.proposal.approvals.provided_approvals.some((a) => a.equals(account));
+		return this.approvals.provided.some((a) => a.equals(account));
+	};
+
+	accountApprove = (account: PermissionLevel) => {
+		this.approvals.provided.push(account);
+		const index = this.approvals.requested.findIndex((a) => a.equals(account));
+		if (index >= 0) {
+			this.approvals.requested.splice(index, 1);
+		}
+	};
+
+	accountUnapprove = (account: PermissionLevel) => {
+		this.approvals.requested.push(account);
+		const index = this.approvals.provided.findIndex((a) => a.equals(account));
+		if (index >= 0) {
+			this.approvals.provided.splice(index, 1);
+		}
 	};
 
 	async transact(action: AnyAction) {
@@ -110,6 +136,7 @@ export class ApprovalManager {
 		});
 
 		await this.transact(action);
+		this.accountApprove(this.wharf.session.permissionLevel);
 	}
 
 	async unapprove() {
@@ -123,6 +150,7 @@ export class ApprovalManager {
 		});
 
 		await this.transact(action);
+		this.accountUnapprove(this.wharf.session.permissionLevel);
 	}
 
 	async execute() {
@@ -153,12 +181,13 @@ export class ApprovalManager {
 
 	toJSON() {
 		return {
+			expiration: this.expiration,
+			expired: this.expired,
+			expiresIn: this.expiresIn,
 			approvals: this.approvals,
-			proposalExpired: this.proposalExpired,
 			totalRequested: this.totalRequested,
 			totalApproved: this.totalApproved,
-			ratioApproved: this.ratioApproved,
-			relativeTimeToExpiry: this.relativeTimeToExpiry,
+			approvalRatio: this.approvalRatio,
 			userHasApproved: this.userHasApproved,
 			userIsProposer: this.userIsProposer,
 			userIsApprover: this.userIsApprover,
