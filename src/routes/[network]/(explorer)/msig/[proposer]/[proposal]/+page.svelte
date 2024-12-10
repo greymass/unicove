@@ -111,23 +111,31 @@
 					<Button
 						variant="secondary"
 						onclick={() => manager.unapprove()}
-						disabled={manager.transacting}>Unapprove</Button
+						disabled={context.wharf.transacting}>Unapprove</Button
 					>
 				{:else}
 					<Button
 						class="bg-green-400 text-green-950 hover:active:bg-green-500 [@media(any-hover:hover)]:hover:bg-green-300"
 						variant="primary"
 						onclick={() => manager.approve()}
-						disabled={manager.transacting}>Approve</Button
+						disabled={context.wharf.transacting}>Approve</Button
 					>
 				{/if}
 			{/if}
 
 			{#if manager.userIsProposer}
-				<Button variant="secondary" onclick={() => manager.cancel()}>Cancel MSIG</Button>
+				<Button
+					variant="secondary"
+					disabled={context.wharf.transacting}
+					onclick={() => manager.cancel()}>Cancel MSIG</Button
+				>
 			{/if}
 
-			<Button variant="primary" onclick={() => manager.execute()}>Execute</Button>
+			<Button
+				variant="primary"
+				disabled={context.wharf.transacting}
+				onclick={() => manager.execute()}>Execute</Button
+			>
 		</Stack>
 	</Switcher>
 

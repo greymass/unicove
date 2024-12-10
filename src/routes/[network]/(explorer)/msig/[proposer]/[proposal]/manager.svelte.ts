@@ -29,7 +29,6 @@ export class ApprovalManager {
 	wharf: WharfState | undefined = $state();
 	proposal: Proposal;
 	error?: string = $state();
-	transacting = $state(false);
 
 	// States related to proposal
 	expiration = $derived.by(() => this.proposal.transaction.expiration.toDate());
@@ -108,8 +107,6 @@ export class ApprovalManager {
 				throw new Error("Can't sign, wharf not ready");
 			}
 
-			this.transacting = true;
-
 			const result = await this.wharf.transact({ action });
 
 			const txid = result.response?.transaction_id;
@@ -119,7 +116,6 @@ export class ApprovalManager {
 		} catch (e) {
 			this.error = String(e);
 		} finally {
-			this.transacting = false;
 			invalidateAll(); // Re-runs the load function to refresh table data
 		}
 	}
