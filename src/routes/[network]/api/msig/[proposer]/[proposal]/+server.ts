@@ -4,7 +4,6 @@ import { getChainDefinitionFromParams } from '$lib/state/network.svelte';
 import { Name } from '@wharfkit/antelope';
 import { getCacheHeaders } from '$lib/utils';
 import { getBackendNetwork } from '$lib/wharf/client/ssr.js';
-import { ORIGIN } from '$env/static/private';
 
 export async function GET({ fetch, params }: RequestEvent) {
 	const chain = getChainDefinitionFromParams(String(params.network));
@@ -26,7 +25,7 @@ export async function GET({ fetch, params }: RequestEvent) {
 	const proposal = await network.contracts.msig.table('proposal', scope).get(name);
 	const approvals = await network.contracts.msig.table('approvals2', scope).get(name);
 
-	const response = await fetch(`${ORIGIN}/${params.network}/api/producers/top30`);
+	const response = await fetch(`/${params.network}/api/producers/top30`);
 	const { producers } = await response.json();
 
 	return json(
