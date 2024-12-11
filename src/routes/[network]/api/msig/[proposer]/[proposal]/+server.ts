@@ -4,6 +4,7 @@ import { getChainDefinitionFromParams } from '$lib/state/network.svelte';
 import { Name } from '@wharfkit/antelope';
 import { getCacheHeaders } from '$lib/utils';
 import { getBackendNetwork } from '$lib/wharf/client/ssr.js';
+import { ORIGIN } from '$env/static/private';
 
 export async function GET({ fetch, params }: RequestEvent) {
 	const chain = getChainDefinitionFromParams(String(params.network));
@@ -43,12 +44,15 @@ export async function GET({ fetch, params }: RequestEvent) {
 
 	const proposal = proposals.rows[0];
 	const approvals = approvals2.rows[0];
+	const response = await fetch(`${ORIGIN}/${params.network}/api/producers/top30`);
+	const { producers } = await response.json();
 
 	return json(
 		{
 			ts: new Date(),
 			proposer: params.proposer,
 			name: params.proposal,
+			producers,
 			proposal,
 			approvals
 		},

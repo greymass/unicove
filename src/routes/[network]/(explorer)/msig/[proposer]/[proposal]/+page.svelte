@@ -19,6 +19,8 @@
 	$effect(() => {
 		manager.sync(data.network, context.wharf);
 	});
+
+	const top21 = data.producers.splice(0, 21);
 </script>
 
 <Stack>
@@ -59,14 +61,26 @@
 					<tr>
 						<th class="text-left">Actor</th>
 						<th class="text-left">Permission</th>
+						<th class="text-left">Role</th>
 						<th class="text-right">Status</th>
 					</tr>
 				</thead>
 				<tbody>
 					{#each manager.participants as participant}
+						{@const isProducer = data.producers.includes(String(participant.actor))}
+						{@const isTop21 = top21.includes(String(participant.actor))}
 						<tr class="h-12 bg-none">
 							<td><Account name={participant.actor} /></td>
 							<td class="text-muted">{participant.permission}</td>
+							<td>
+								{#if isTop21}
+									Top 21
+								{:else if isProducer}
+									Standby
+								{:else}
+									Signer
+								{/if}
+							</td>
 							<td class="text-right">
 								{#if manager.accountHasApproved(participant)}
 									<span class="text-green-300">Approved</span>
