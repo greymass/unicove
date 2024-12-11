@@ -1,8 +1,6 @@
 <script lang="ts">
-	import { Serializer, type Action } from '@wharfkit/antelope';
+	import { type Action } from '@wharfkit/antelope';
 	import Code from '../code.svelte';
-	import { getContext, onMount } from 'svelte';
-	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { DL, DLRow, DD } from '../descriptionlist';
 	import { Stack } from '../layout';
 	import Account from './account.svelte';
