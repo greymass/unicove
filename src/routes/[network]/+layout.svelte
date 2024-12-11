@@ -26,7 +26,7 @@
 	let account: AccountState | undefined = $state();
 	const history = new SearchRecordStorage(data.network);
 	const settings = new SettingsState();
-	const wharf = new WharfState();
+	const wharf = new WharfState(settings);
 
 	setContext<UnicoveContext>('state', {
 		get account() {
@@ -65,6 +65,10 @@
 				account = undefined;
 			}
 		});
+	});
+
+	$effect(() => {
+		wharf.setSettings(settings);
 	});
 
 	async function setupWharf() {
