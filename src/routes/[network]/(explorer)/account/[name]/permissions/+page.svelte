@@ -1,12 +1,13 @@
 <script lang="ts">
-	import Code from '$lib/components/code.svelte';
+	import Permission from './permission.svelte';
 
 	const { data } = $props();
 </script>
 
 {#if data.account}
-	<div class="space-y-4">
-		<h3 class="h3">Permissions</h3>
-		<Code>{JSON.stringify(data.account.permissions, null, 2)}</Code>
+	<div class="grid grid-cols-[1fr_auto] gap-y-6">
+		{#each data.tree as permission}
+			<Permission {permission} />
+		{/each}
 	</div>
 {/if}
