@@ -38,13 +38,15 @@ import {
 	type QueuedTransaction,
 	StatusType,
 	queueTransaction,
-	sendErrorToast,
-	sendSuccessToast
+	sendErrorToast
+	// sendSuccessToast
 } from '$lib/wharf/transact.svelte';
 
 import { chainMapper } from '$lib/wharf/chains';
+import type { SettingsState } from '../settings.svelte';
+import { WalletPluginCleos } from '@wharfkit/wallet-plugin-cleos';
 
-const walletPlugins: WalletPlugin[] = [
+const defaultWalletPlugins: WalletPlugin[] = [
 	new WalletPluginAnchor(),
 	new WalletPluginMetaMask(),
 	new WalletPluginScatter(),
@@ -69,7 +71,7 @@ const transactPlugins: TransactPlugin[] = [
 
 // If a local key is provided, add the private key wallet
 if (PUBLIC_LOCAL_SIGNER) {
-	walletPlugins.unshift(new WalletPluginPrivateKey(PUBLIC_LOCAL_SIGNER));
+	defaultWalletPlugins.unshift(new WalletPluginPrivateKey(PUBLIC_LOCAL_SIGNER));
 }
 
 export class WharfState {
@@ -79,8 +81,10 @@ export class WharfState {
 	public sessions: SerializedSession[] = $state([]);
 	public sessionKit?: SessionKit;
 	public transacting = $state(false);
+	public settings: SettingsState = $state() as SettingsState;
 
-	constructor() {
+	constructor(settings: SettingsState) {
+		this.settings = settings;
 		if (browser) {
 			this.chainsSession = JSON.parse(localStorage.getItem('chainsSession') || '{}');
 		}
@@ -89,6 +93,10 @@ export class WharfState {
 	init() {
 		if (!browser) {
 			throw new Error('Wharf should only be used in the browser');
+		}
+		const walletPlugins = [...defaultWalletPlugins];
+		if (this.settings.data.advancedMode) {
+			walletPlugins.push(new WalletPluginCleos());
 		}
 		this.sessionKit = new SessionKit(
 			{
@@ -107,6 +115,12 @@ export class WharfState {
 				localStorage.setItem('chainsSession', JSON.stringify(this.chainsSession));
 			});
 		});
+	}
+
+	public setSettings(settings: SettingsState) {
+		console.log('set settings');
+		this.settings = settings;
+		this.init();
 	}
 
 	public async login(options?: LoginOptions) {
