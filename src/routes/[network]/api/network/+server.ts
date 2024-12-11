@@ -6,8 +6,11 @@ import type { RAMState, REXState, PowerUpState, SampleUsage } from '@wharfkit/re
 import { Types as DelphioracleTypes } from '$lib/wharf/contracts/delphioracle.js';
 import { Types as SystemTypes } from '$lib/wharf/contracts/system';
 import { getBackendNetwork } from '$lib/wharf/client/ssr';
+import type { API, Asset } from '@wharfkit/antelope';
 
 type ResponseType =
+	| Asset[]
+	| API.v1.GetCurrencyStatsResponse
 	| RAMState
 	| REXState
 	| PowerUpState
@@ -29,10 +32,12 @@ export async function GET({ fetch, params }: RequestEvent) {
 
 	const requests: Promise<ResponseType>[] = [];
 	let globalStateIndex = -1;
+	let lockedsupplyIndex = -1;
 	let ramStateIndex = -1;
 	let rexStateIndex = -1;
 	let powerupStateIndex = -1;
 	let sampleUsageIndex = -1;
+	let supplyIndex = -1;
 	let tokenStateIndex = -1;
 
 	globalStateIndex = addRequest(requests, network.contracts.system.table('global').get());
@@ -49,6 +54,25 @@ export async function GET({ fetch, params }: RequestEvent) {
 	if (network.supports('staking') || network.supports('rentrex') || network.supports('powerup')) {
 		sampleUsageIndex = addRequest(requests, network.resources.getSampledUsage());
 	}
+	if (network.chain.systemToken) {
+		supplyIndex = addRequest(
+			requests,
+			network.client.v1.chain.get_currency_stats(
+				network.chain.systemToken.contract,
+				network.chain.systemToken.symbol.name
+			)
+		);
+	}
+	if (network.chain.systemToken && network.config.lockedsupply) {
+		lockedsupplyIndex = addRequest(
+			requests,
+			network.client.v1.chain.get_currency_balance(
+				network.chain.systemToken.contract,
+				network.config.lockedsupply[0],
+				network.chain.systemToken.symbol.name
+			)
+		);
+	}
 	if (network.contracts.delphioracle) {
 		tokenStateIndex = addRequest(
 			requests,
@@ -61,6 +85,8 @@ export async function GET({ fetch, params }: RequestEvent) {
 	const globalstate = getResponse(results, globalStateIndex);
 	const powerupstate = getResponse(results, powerupStateIndex);
 	const sampleUsage = getResponse(results, sampleUsageIndex);
+	const supply = getResponse(results, supplyIndex);
+	const lockedsupply = getResponse(results, lockedsupplyIndex);
 	const tokenstate = getResponse(results, tokenStateIndex);
 
 	const systemtoken = ramstate ? (ramstate as RAMState).quote.balance.symbol : undefined;
@@ -71,12 +97,14 @@ export async function GET({ fetch, params }: RequestEvent) {
 		{
 			ts: new Date(),
 			globalstate,
+			lockedsupply,
 			ramstate,
 			rexstate,
 			powerupstate,
 			systemtoken,
 			tokenstate,
-			sampleUsage
+			sampleUsage,
+			supply
 		},
 		{
 			headers
