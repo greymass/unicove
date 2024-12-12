@@ -39,7 +39,7 @@
 			<span class="md:text-md text-sm text-white/60">Total Staked</span>
 			<!-- TODO: add eos formatter -->
 			<span class="text-md font-semibold md:text-xl">
-				<AssetText value={staked} variant="full" />
+				<AssetText value={staked} variant="short" />
 			</span>
 		</div>
 	</div>

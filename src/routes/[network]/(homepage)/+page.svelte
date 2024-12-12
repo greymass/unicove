@@ -13,11 +13,25 @@
 	import type { HistoricalPrice } from '$lib/types';
 	import { getAPR } from '$lib/utils/staking';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import { calculateValue } from '$lib/utils';
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');
 
 	const apr = $derived(getAPR(data.network));
+	const tvl = $derived.by(() => {
+		const token = Asset.fromUnits(0, data.network.chain.systemToken!.symbol);
+		if (data.network.supports('rex') && data.network.rexstate) {
+			token.units.add(data.network.rexstate.total_lendable.units);
+		}
+		if (data.network.supports('rammarket') && data.network.ramstate) {
+			token.units.add(data.network.ramstate.quote.balance.units);
+		}
+		if (data.network.tokenprice) {
+			return calculateValue(token, data.network.tokenprice);
+		}
+		return token;
+	});
 
 	let ramPrices: HistoricalPrice[] = $state([]);
 	let tokenPrices: HistoricalPrice[] = $state([]);
@@ -211,14 +225,18 @@
 		<div
 			class="z-20 col-span-full row-start-1 max-w-md place-self-center justify-self-start text-balance xs:col-span-1 sm:col-span-full sm:justify-self-auto md:row-span-2 md:row-start-1 md:max-w-md lg:col-span-4 lg:row-auto lg:content-center"
 		>
-			{@render textblock({
-				title: `Stake ${data.network.chain.name} for ${apr}% APR`,
-				text: `The ${data.network.chain.name} staking rewards program distributes 85.6k ${data.network.chain.systemToken?.symbol.name} daily to token holders who have staked their tokens. Tokens can be withdrawn at any time, but there is a 21 day lockup period.`,
-				button: {
-					text: 'Stake Tokens',
-					href: `/${data.network}/staking`
-				}
-			})}
+			<Stack class="max-w-md items-start">
+				<h3 class="h3 leading-tight">Stake {data.network.chain.name} for {apr}% APR</h3>
+				<p>
+					The {data.network.chain.name} staking rewards program distributes 85.6k {data.network
+						.chain.systemToken?.symbol.name} daily to token holders proportionally who have staked their
+					tokens. These tokens can be unstaked and will be usable against after a 21 day lockup period.
+				</p>
+				<div class="flex gap-2">
+					<Button class="mt-1" href={`/${data.network}/staking`}>Stake Tokens</Button>
+					<Button class="mt-1" variant="secondary" href="#">Learn more</Button>
+				</div>
+			</Stack>
 		</div>
 
 		<!-- Graphics -->
@@ -298,32 +316,50 @@
 			class="col-span-full grid grid-cols-2 gap-4 sm:grid-cols-5 lg:col-start-4 xl:col-span-5 xl:col-start-5"
 		>
 			<Card class="col-span-1 sm:col-span-2">
-				{@render gridItem({ title: 'Total locked value', value: `? EOS` })}
-				<div></div>
+				<div class="grid content-between gap-2">
+					<h3 class="text-base text-white/60">
+						{data.network.chain.systemToken?.symbol.name}/{data.network.tokenprice?.symbol.name}
+					</h3>
+					<p class="justify-self-end text-xl text-white">
+						<AssetText value={data.network.tokenprice} variant="full" />
+					</p>
+				</div>
 			</Card>
 			<Card class="col-span-1 sm:col-span-2 sm:row-span-2">
-				<!-- {@render gridItem({ title: 'Daily active users', value: `${DAU}` })} -->
-				<div></div>
+				<div class="grid content-between gap-2">
+					<h3 class="text-base text-white/60">Native TVL</h3>
+					<p class="justify-self-end text-xl text-white">
+						<AssetText value={tvl} variant="short" />
+					</p>
+				</div>
 			</Card>
 			<Card class="col-span-1 row-span-2 sm:col-span-1">
 				<!-- {@render gridItem({ title: 'Total locked value', value: `${TLV} EOS` })} -->
 				<div></div>
 			</Card>
 			<Card class="col-span-1 row-span-2 sm:col-span-2">
-				<!-- {@render gridItem({ title: 'RAM Pool', value: `${RAM_POOL} EOS` })} -->
-				<div></div>
+				<div class="grid content-between gap-2">
+					<h3 class="text-base text-white/60">RAM/EOS</h3>
+					<p class="justify-self-end text-xl text-white">
+						<AssetText value={data.network.ramprice?.eos} variant="full" />
+					</p>
+				</div>
 			</Card>
 			<Card class="col-span-1 sm:col-span-3">
 				<div class="grid content-between gap-2">
 					<h3 class="text-base text-white/60">EOS Market Cap</h3>
 					<p class="justify-self-end text-xl text-white">
-						<AssetText value={data.network.marketcap} variant="full" />
+						<AssetText value={data.network.marketcap} variant="short" />
 					</p>
 				</div>
 			</Card>
 			<Card class="col-span-1 sm:col-span-3">
-				<!-- {@render gridItem({ title: 'Current TPS', value: `${TPS}` })} -->
-				<div></div>
+				<div class="grid content-between gap-2">
+					<h3 class="text-base text-white/60">RAM/USD</h3>
+					<p class="justify-self-end text-xl text-white">
+						<AssetText value={data.network.ramprice?.usd} variant="full" />
+					</p>
+				</div>
 			</Card>
 			<Card class="col-span-1 sm:col-span-2">
 				<!-- {@render gridItem({ title: 'Total locked value', value: `${TLV} EOS` })} -->
