@@ -7,7 +7,6 @@ import {
 	Int128,
 	Int64,
 	Name,
-	UInt128,
 	UInt64,
 	type NameType
 } from '@wharfkit/antelope';

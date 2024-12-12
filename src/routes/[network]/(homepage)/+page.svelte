@@ -298,7 +298,7 @@
 			class="col-span-full grid grid-cols-2 gap-4 sm:grid-cols-5 lg:col-start-4 xl:col-span-5 xl:col-start-5"
 		>
 			<Card class="col-span-1 sm:col-span-2">
-				<!-- {@render gridItem({ title: 'Total locked value', value: `${TLV} EOS` })} -->
+				{@render gridItem({ title: 'Total locked value', value: `? EOS` })}
 				<div></div>
 			</Card>
 			<Card class="col-span-1 sm:col-span-2 sm:row-span-2">
