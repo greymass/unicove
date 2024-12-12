@@ -4,7 +4,7 @@
 	import type { HTMLAnchorAttributes } from 'svelte/elements';
 	import { createLinkPreview, melt, type CreateLinkPreviewProps } from '@melt-ui/svelte';
 	import { fly } from 'svelte/transition';
-	import { User } from 'lucide-svelte';
+	import { User, UserIcon } from 'lucide-svelte';
 	import { Name } from '@wharfkit/antelope';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { AccountState } from '$lib/state/client/account.svelte';
@@ -15,6 +15,7 @@
 		contract?: boolean;
 		children?: Snippet;
 		preview?: boolean;
+		icon?: boolean;
 	}
 
 	let { name, contract = false, preview = false, children, ...props }: Props = $props();
@@ -51,11 +52,14 @@
 <a
 	href={path}
 	class={cn(
-		'text-skyBlue-500 hover:text-skyBlue-400 focus-visible:outline focus-visible:outline-solar-500 ',
+		'inline-flex items-center gap-2 text-skyBlue-500 hover:text-skyBlue-400 focus-visible:outline focus-visible:outline-solar-500 ',
 		props.class
 	)}
 	use:melt={$trigger}
 >
+	{#if props.icon}
+		<UserIcon class="size-4" />
+	{/if}
 	{#if children}
 		{@render children()}
 	{:else}

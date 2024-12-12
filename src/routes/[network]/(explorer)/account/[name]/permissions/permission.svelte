@@ -3,6 +3,7 @@
 	import type { TreePermission } from './+page';
 	import Key from '$lib/components/elements/key.svelte';
 	import CopyButton from '$lib/components/button/copy.svelte';
+	import Account from '$lib/components/elements/account.svelte';
 	interface Props {
 		permission: TreePermission;
 		level?: number;
@@ -12,42 +13,83 @@
 </script>
 
 <li
-	class="relative col-span-full grid grid-cols-subgrid bg-shark-950 pt-6"
+	class="relative col-span-full grid grid-cols-subgrid bg-shark-950"
 	class:pl-4={level !== 0}
+	class:pt-6={level !== 0}
 >
 	<dl class="z-20 space-y-1 rounded-l-lg bg-mineShaft-950 px-4 py-3">
 		<div>
 			<dt class="sr-only">Permission Name</dt>
 			<dd class="text-xl font-semibold text-white">{permission.perm_name}</dd>
 		</div>
-		<div class="text-muted *:inline">
+		<div class="text-muted text-nowrap *:inline">
 			<dt class="after:content-[':']">Required</dt>
 			<dd>{permission.required_auth.threshold}</dd>
 		</div>
 	</dl>
 
 	<div class="rounded-r-lg bg-mineShaft-950/50 px-4 py-3">
-		<table class="table-styles">
-			<thead>
-				<tr class="text-left *:pt-1">
+		<table class="grid grid-cols-[auto_1fr_auto] gap-x-4 gap-y-2">
+			<thead class="col-span-full grid grid-cols-subgrid">
+				<tr class="col-span-full grid grid-cols-subgrid text-left *:pt-1 *:text-base *:font-medium">
 					<th>Weight</th>
-					<th>Key</th>
+					<th>Required Auth</th>
 				</tr>
 			</thead>
-			<tbody>
-				{#each permission.required_auth.keys as { weight, key }}
-					<tr class="table-row-border text-white" data-hover-effect="false">
-						<td>
-							+{weight.toString()}
-						</td>
-						<td>
-							<Key {key} />
-						</td>
-						<td>
-							<CopyButton data={key.toString()} />
-						</td>
-					</tr>
-				{/each}
+			<tbody class="col-span-full grid grid-cols-subgrid gap-x-4 gap-y-2">
+				{#if permission.required_auth.keys}
+					{#each permission.required_auth.keys as { weight, key }}
+						<tr
+							class="col-span-full grid grid-cols-subgrid items-center bg-none text-white"
+							data-hover-effect="false"
+						>
+							<td>
+								+{weight.toString()}
+							</td>
+							<td>
+								<Key {key} icon />
+							</td>
+							<td>
+								<CopyButton data={key.toString()} />
+							</td>
+						</tr>
+					{/each}
+				{/if}
+				{#if permission.required_auth.accounts}
+					{#each permission.required_auth.accounts as { weight, permission: account }}
+						<tr
+							class="col-span-full grid grid-cols-subgrid bg-none text-white"
+							data-hover-effect="false"
+						>
+							<td>
+								+{weight.toString()}
+							</td>
+							<td>
+								<Account name={account.actor} icon>
+									{account}
+								</Account>
+							</td>
+							<td>
+								<CopyButton data={account.toString()} />
+							</td>
+						</tr>
+					{/each}
+				{/if}
+				{#if permission.required_auth.waits}
+					{#each permission.required_auth.waits as { weight, wait_sec }}
+						<tr
+							class="col-span-full grid grid-cols-subgrid bg-none text-white"
+							data-hover-effect="false"
+						>
+							<td>
+								+{weight.toString()}
+							</td>
+							<td>
+								{JSON.stringify(wait_sec)}
+							</td>
+						</tr>
+					{/each}
+				{/if}
 			</tbody>
 		</table>
 	</div>

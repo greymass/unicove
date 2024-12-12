@@ -4,7 +4,7 @@
 	let props = $props();
 </script>
 
-<ul class="grid grid-cols-[1fr_auto]">
+<ul class="grid grid-cols-[auto_1fr]">
 	{#each props.permissions as permission}
 		<Permission {permission} />
 	{/each}
