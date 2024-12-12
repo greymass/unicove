@@ -225,17 +225,25 @@
 		<div
 			class="z-20 col-span-full row-start-1 max-w-md place-self-center justify-self-start text-balance xs:col-span-1 sm:col-span-full sm:justify-self-auto md:row-span-2 md:row-start-1 md:max-w-md lg:col-span-4 lg:row-auto lg:content-center"
 		>
-			<Stack class="max-w-md items-start">
-				<h3 class="h3 leading-tight">Stake {data.network.chain.name} for {apr}% APR</h3>
+			<Stack class="max-w-md items-start pl-8">
+				<h3 class="h3 leading-tight">EOS Staking Rewards</h3>
 				<p>
-					The {data.network.chain.name} staking rewards program distributes 85.6k {data.network
-						.chain.systemToken?.symbol.name} daily to token holders proportionally who have staked their
-					tokens. These tokens can be unstaked and will be usable against after a 21 day lockup period.
+					Stake {data.network.chain.systemToken?.symbol.name} today for an estimated {apr}% APR<sup
+						>1</sup
+					>.
+				</p>
+				<p>
+					The {data.network.chain.name} staking rewards program proportionally distributes 85.6k {data
+						.network.chain.systemToken?.symbol.name} daily to token holders who have staked their tokens.
+					These tokens can be unstaked and will be usable against after a 21 day lockup period.
 				</p>
 				<div class="flex gap-2">
 					<Button class="mt-1" href={`/${data.network}/staking`}>Stake Tokens</Button>
 					<Button class="mt-1" variant="secondary" href="#">Learn more</Button>
 				</div>
+				<p class="text-muted text-xs">
+					<sup>1</sup> APR is based on the total amount staked and dynamically changes over time.
+				</p>
 			</Stack>
 		</div>
 
@@ -266,20 +274,20 @@
 		<Switcher>
 			<div>
 				{@render textblock({
-					title: `EOS`,
+					title: `EOS: The Native Token`,
 					text: `The ${data.network.chain.name} network's native token, EOS, can be used for staking rewards, to buy and sell RAM, to pay transaction fees, and more. It is traded on most major exchanges.`,
 					button: {
-						text: '???',
-						href: `#`
+						text: 'Get Tokens',
+						href: `${data.network}/fund`
 					}
 				})}
 			</div>
 			<div>
 				{@render textblock({
-					title: `RAM`,
+					title: `RAM: Tokenized Blockchain Storage`,
 					text: `Each unit of RAM ownership represents a portion of the network's total blockchain storage. RAM can be bought and sold directly from the network using the RAM Market.`,
 					button: {
-						text: 'Visit RAM Market',
+						text: 'EOS/RAM Market',
 						href: `${data.network}/ram`
 					}
 				})}
@@ -295,21 +303,14 @@
 		<!-- Text -->
 		<div class=" col-span-full grid items-center text-balance lg:col-span-3 lg:row-start-1">
 			{@render textblock({
-				title: `EOS performance and stats`,
-				text: 'TODO: The APR is an estimate, and may fluctuate based on how many and much others are staking. Your 21 day lockup period starts when you unstake your EOS. You will always get back your staked EOS.',
-				button: {
-					text: 'Live network overview',
-					href: `#`
-				}
+				title: `EOS Network DeFi`,
+				text: 'System-level DeFi is offered by the EOS network both staking and RAM trading. The network also supports a variety of DeFi applications, including decentralized exchanges, lending platforms, swaps, and more.'
+				// button: {
+				// 	text: 'Explore DeFi Platforms',
+				// 	href: `${data.network}/defi`
+				// }
 			})}
 		</div>
-
-		{#snippet gridItem({ title, value }: { title: string; value: string })}
-			<div class="grid content-between gap-2">
-				<h3 class="text-base text-white/60">{title}</h3>
-				<p class="justify-self-end text-xl text-white">{value}</p>
-			</div>
-		{/snippet}
 
 		<!-- Grid -->
 		<div
@@ -334,8 +335,11 @@
 				</div>
 			</Card>
 			<Card class="col-span-1 row-span-2 sm:col-span-1">
-				<!-- {@render gridItem({ title: 'Total locked value', value: `${TLV} EOS` })} -->
-				<div></div>
+				<img
+					class="rounded-full bg-mineShaft-950 object-contain px-2 py-4"
+					src={networkLogo}
+					alt={networkName}
+				/>
 			</Card>
 			<Card class="col-span-1 row-span-2 sm:col-span-2">
 				<div class="grid content-between gap-2">
@@ -347,23 +351,24 @@
 			</Card>
 			<Card class="col-span-1 sm:col-span-3">
 				<div class="grid content-between gap-2">
+					<h3 class="text-base text-white/60">???</h3>
+				</div>
+			</Card>
+			<Card class="col-span-1 sm:col-span-3">
+				<div class="grid content-between gap-2">
 					<h3 class="text-base text-white/60">EOS Market Cap</h3>
 					<p class="justify-self-end text-xl text-white">
 						<AssetText value={data.network.marketcap} variant="short" />
 					</p>
 				</div>
 			</Card>
-			<Card class="col-span-1 sm:col-span-3">
+			<Card class="col-span-1 sm:col-span-2">
 				<div class="grid content-between gap-2">
 					<h3 class="text-base text-white/60">RAM/USD</h3>
 					<p class="justify-self-end text-xl text-white">
 						<AssetText value={data.network.ramprice?.usd} variant="full" />
 					</p>
 				</div>
-			</Card>
-			<Card class="col-span-1 sm:col-span-2">
-				<!-- {@render gridItem({ title: 'Total locked value', value: `${TLV} EOS` })} -->
-				<div></div>
 			</Card>
 		</div>
 	</section>

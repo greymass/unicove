@@ -55,7 +55,6 @@ function isManualRedirectPath(pathMore: string[]): boolean {
 
 export async function redirectHandle({ event, resolve }: HandleParams): Promise<Response> {
 	const { pathname, search } = new URL(event.request.url);
-	console.log('pathname', pathname);
 
 	if (skipRedirect(pathname)) {
 		return await resolve(event);
