@@ -1,13 +1,11 @@
 <script lang="ts">
-	import Permission from './permission.svelte';
+	import PermissionTree from './permissiontree.svelte';
 
 	const { data } = $props();
+
+	console.log(JSON.stringify(data.tree, null, 2));
 </script>
 
 {#if data.account}
-	<div class="grid grid-cols-[1fr_auto] gap-y-6">
-		{#each data.tree as permission}
-			<Permission {permission} />
-		{/each}
-	</div>
+	<PermissionTree permissions={data.tree} />
 {/if}
