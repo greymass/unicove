@@ -4,6 +4,7 @@
 	import Key from '$lib/components/elements/key.svelte';
 	import CopyButton from '$lib/components/button/copy.svelte';
 	import Account from '$lib/components/elements/account.svelte';
+	import Contract from '$lib/components/elements/contract.svelte';
 	interface Props {
 		permission: TreePermission;
 		level?: number;
@@ -23,9 +24,21 @@
 			<dd class="text-xl font-semibold text-white">{permission.perm_name}</dd>
 		</div>
 		<div class="text-muted text-nowrap *:inline">
-			<dt class="after:content-[':']">Required</dt>
+			<dt class="after:content-[':']"><span class="sr-only">Threshold</span> Required</dt>
 			<dd>{permission.required_auth.threshold}</dd>
 		</div>
+		{#if permission.linked_actions}
+			<div class="">
+				<dt class="sr-only">Actions</dt>
+				{#each permission.linked_actions as action}
+					<dd>
+						<Contract name={action.account}>
+							{action.account}::{action.action}
+						</Contract>
+					</dd>
+				{/each}
+			</div>
+		{/if}
 	</dl>
 
 	<div class="rounded-r-lg bg-mineShaft-950/50 px-4 py-3">
@@ -33,7 +46,7 @@
 			<thead class="col-span-full grid grid-cols-subgrid">
 				<tr class="col-span-full grid grid-cols-subgrid text-left *:pt-1 *:text-base *:font-medium">
 					<th>Weight</th>
-					<th>Required Auth</th>
+					<th>Authorization</th>
 				</tr>
 			</thead>
 			<tbody class="col-span-full grid grid-cols-subgrid gap-x-4 gap-y-2">

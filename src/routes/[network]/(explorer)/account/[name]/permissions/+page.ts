@@ -1,4 +1,4 @@
-import { Permission } from '@wharfkit/account';
+import type { Permission } from '@wharfkit/account';
 import type { PageLoad } from './$types';
 import { Name } from '@wharfkit/antelope';
 
