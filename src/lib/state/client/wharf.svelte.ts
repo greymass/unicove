@@ -118,7 +118,6 @@ export class WharfState {
 	}
 
 	public setSettings(settings: SettingsState) {
-		console.log('set settings');
 		this.settings = settings;
 		this.init();
 	}
