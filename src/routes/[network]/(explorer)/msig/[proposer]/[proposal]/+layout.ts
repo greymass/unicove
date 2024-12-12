@@ -1,4 +1,4 @@
-import { Name, PackedTransaction, PermissionLevel, Serializer } from '@wharfkit/antelope';
+import { Name, PackedTransaction, PermissionLevel } from '@wharfkit/antelope';
 import type { LayoutLoad } from './$types';
 import { error } from '@sveltejs/kit';
 
@@ -42,6 +42,7 @@ export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 			hash: transaction.id,
 			packed,
 			transaction
-		}
+		},
+		producers: json.producers
 	};
 };
