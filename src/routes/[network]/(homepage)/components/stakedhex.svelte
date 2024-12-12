@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { type UnicoveContext } from '$lib/state/client.svelte';
 	import AssetText from '$lib/components/elements/asset.svelte';
+	import { Asset } from '@wharfkit/antelope';
 	import { chainLogos } from '@wharfkit/common';
 	import { getContext } from 'svelte';
 
@@ -9,7 +10,12 @@
 	let networkLogo = $derived(String(chainLogos.get(network?.chain.id.toString() || '')));
 	let networkName = $derived(String(network?.chain.name));
 
-	const { staked, apr } = $props();
+	interface PageProps {
+		staked: Asset;
+		apr: string;
+	}
+
+	const { staked, apr }: PageProps = $props();
 </script>
 
 <div class="relative max-w-fit">

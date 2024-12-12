@@ -225,7 +225,9 @@
 		<div
 			class="col-span-full grid place-items-center xs:col-start-3 xs:row-start-1 md:col-start-5 md:row-span-2 md:row-start-2 lg:row-auto"
 		>
-			<StakedHEX staked={data.network.rexstate?.total_lendable} {apr} />
+			{#if data.network.rexstate}
+				<StakedHEX staked={data.network.rexstate.total_lendable} {apr} />
+			{/if}
 		</div>
 	</section>
 
