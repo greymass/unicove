@@ -142,8 +142,10 @@
 		<ul
 			data-solo={children.length === 1}
 			class="children col-span-full grid grid-cols-subgrid *:data-[solo=false]:border-l last:*:data-[solo=false]:border-transparent"
-			style={`margin-left:calc(1rem * ${level + 1})`}
+			class:ml-8={level > 0}
+			class:ml-4={level === 0}
 		>
+			<!-- style={`margin-left:calc(1rem * ${level + 1})`} -->
 			{#each children as child}
 				<Self permission={child} level={level + 1} />
 			{/each}
