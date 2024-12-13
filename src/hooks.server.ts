@@ -37,6 +37,22 @@ function isNetwork(value: string) {
 	return isNetworkShortName(value);
 }
 
+const redirects: Record<string, string> = {
+	'/earn': '/staking',
+	'/resources/ram/buy': '/ram/buy',
+	'/resources/ram/sell': '/ram/sell'
+};
+
+function getManualRedirectPath(pathMore: string[]): string {
+	const pathname = '/' + pathMore.join('/');
+	return redirects[pathname];
+}
+
+function isManualRedirectPath(pathMore: string[]): boolean {
+	const pathname = '/' + pathMore.join('/');
+	return pathname in redirects;
+}
+
 export async function redirectHandle({ event, resolve }: HandleParams): Promise<Response> {
 	const { pathname, search } = new URL(event.request.url);
 
@@ -79,10 +95,15 @@ export async function redirectHandle({ event, resolve }: HandleParams): Promise<
 		url += `/${network}`;
 	}
 	if (pathMore.length > 0) {
-		url += `/${pathMore.join('/')}`;
+		if (isManualRedirectPath(pathMore)) {
+			url += getManualRedirectPath(pathMore);
+		} else {
+			url += `/${pathMore.join('/')}`;
+		}
 	}
 
 	if (pathname !== url) {
+		console.log('redirecting to', url + search);
 		return new Response(undefined, {
 			headers: { Location: url + search },
 			status: 301
