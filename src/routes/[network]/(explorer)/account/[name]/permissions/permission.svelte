@@ -83,7 +83,7 @@
 									<Key {key} icon />
 								</td>
 								<td>
-									<CopyButton data={key.toString()} />
+									<CopyButton data={key.toString()} slop={false} />
 								</td>
 							</tr>
 						{/each}
@@ -102,8 +102,8 @@
 										{account}
 									</Account>
 								</td>
-								<td>
-									<CopyButton data={account.toString()} />
+								<td class="*:pt-1">
+									<CopyButton data={account.toString()} slop={false} />
 								</td>
 							</tr>
 						{/each}
