@@ -17,7 +17,7 @@
 	}
 	let { level = 0, ...props }: Props = $props();
 	let { permission, children } = $derived(props.permission);
-	$inspect(permission);
+
 	const anyPermissions = $derived(
 		permission.required_auth.accounts.length ||
 			permission.required_auth.keys.length ||
