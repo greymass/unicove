@@ -38,8 +38,11 @@
 				<dt class="sr-only">Actions</dt>
 				{#each permission.linked_actions as { action, account }}
 					<dd>
-						<Contract name={account} {action}>
-							{account}::{action}
+						<Contract name={account} {action} class="flex">
+							<span class="account">{account}</span>
+							{#if action}
+								<span class="action">::{action}</span>
+							{/if}
 						</Contract>
 					</dd>
 				{/each}

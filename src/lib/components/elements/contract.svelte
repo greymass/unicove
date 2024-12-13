@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import { cn } from '$lib/utils';
 	import type { Name } from '@wharfkit/antelope';
 	import { getContext, type Snippet } from 'svelte';
 
@@ -9,9 +10,10 @@
 		children?: Snippet;
 		name?: Name | string;
 		action?: Name | string;
+		class?: string;
 	}
 
-	let { name, action, children }: Props = $props();
+	let { name, action, children, ...props }: Props = $props();
 
 	let href = $derived.by(() => {
 		const base = `/${network}/contract/${String(name)}`;
@@ -23,7 +25,7 @@
 </script>
 
 {#if name}
-	<a class="text-skyBlue-500 hover:text-skyBlue-400" {href}>
+	<a class={cn('text-skyBlue-500 hover:text-skyBlue-400', props.class)} {href}>
 		{#if children}
 			{@render children()}
 		{:else}
