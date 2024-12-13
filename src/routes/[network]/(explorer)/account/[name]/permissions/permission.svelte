@@ -30,10 +30,10 @@
 		{#if permission.linked_actions}
 			<div class="">
 				<dt class="sr-only">Actions</dt>
-				{#each permission.linked_actions as action}
+				{#each permission.linked_actions as { action, account }}
 					<dd>
-						<Contract name={action.account}>
-							{action.account}::{action.action}
+						<Contract name={account} {action}>
+							{account}::{action}
 						</Contract>
 					</dd>
 				{/each}
