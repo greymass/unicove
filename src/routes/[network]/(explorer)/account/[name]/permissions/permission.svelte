@@ -117,7 +117,7 @@
 								<td>
 									+{weight.toString()}
 								</td>
-								<td class="flex items-center gap-2 text-mineShaft-50">
+								<td class="flex items-center gap-2 text-mineShaft-100">
 									<Clock class="size-4" />
 									{wait_sec.toString()}s ({dayjs
 										.duration(wait_sec.toNumber(), 'seconds')
