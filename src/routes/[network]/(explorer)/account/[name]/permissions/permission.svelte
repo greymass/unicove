@@ -24,7 +24,9 @@
 	class:pl-4={level !== 0}
 	class:pt-6={level !== 0}
 >
-	<dl class="z-20 col-span-full space-y-1 rounded-l-lg bg-mineShaft-950 px-4 py-3 md:col-span-1">
+	<dl
+		class="z-20 col-span-full space-y-1 rounded-t-lg bg-mineShaft-950 px-4 py-3 md:col-span-1 md:rounded-l-lg"
+	>
 		<div>
 			<dt class="sr-only">Permission Name</dt>
 			<dd class="text-xl font-semibold text-white">{permission.perm_name}</dd>
@@ -50,7 +52,7 @@
 		{/if}
 	</dl>
 
-	<div class="rounded-r-lg bg-mineShaft-950/50 px-4 py-3">
+	<div class="rounded-b-lg bg-mineShaft-950/50 px-4 py-3 md:rounded-r-lg">
 		<table class="grid grid-cols-[auto_1fr_auto] gap-x-4 gap-y-2">
 			<thead class="col-span-full grid grid-cols-subgrid">
 				<tr class="col-span-full grid grid-cols-subgrid text-left *:pt-1 *:text-base *:font-medium">
@@ -62,7 +64,7 @@
 				{#if permission.required_auth.keys}
 					{#each permission.required_auth.keys as { weight, key }}
 						<tr
-							class="col-span-full grid grid-cols-subgrid items-center bg-none text-white"
+							class="col-span-full grid grid-cols-subgrid items-start bg-none text-white"
 							data-hover-effect="false"
 						>
 							<td>
@@ -106,7 +108,7 @@
 							<td>
 								+{weight.toString()}
 							</td>
-							<td class="flex items-center gap-2">
+							<td class="flex items-center gap-2 text-mineShaft-50">
 								<Clock class="size-4" />
 								{wait_sec.toString()}s ({dayjs.duration(wait_sec.toNumber(), 'seconds').humanize()})
 							</td>

@@ -16,13 +16,15 @@
 
 {#if key}
 	<a
-		class="inline-flex items-center gap-2 text-skyBlue-500 hover:text-skyBlue-400"
+		class="inline-grid grid-cols-[auto_1fr] items-start gap-2 text-skyBlue-500 hover:text-skyBlue-400"
 		href="/{network}/key/{String(key)}"
 	>
 		{#if icon}
-			<KeyRound class="size-4" />
+			<div class="h-6 content-center">
+				<KeyRound class="size-4 shrink-0 " />
+			</div>
 		{/if}
-		<span class="truncate">
+		<span class="break-all leading-6">
 			{String(key)}
 		</span>
 	</a>
