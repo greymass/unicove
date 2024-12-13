@@ -1,11 +1,14 @@
 import { Name, PackedTransaction, PermissionLevel } from '@wharfkit/antelope';
 import type { LayoutLoad } from './$types';
 import { error } from '@sveltejs/kit';
+import { msigResponseSchema } from '../../../../api/msig/[proposer]/[proposal]/types';
 
 export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 	const { network } = await parent();
 	const response = await fetch(`/${params.network}/api/msig/${params.proposer}/${params.proposal}`);
-	const json = await response.json();
+	// const json = await response.json();
+
+	const json = msigResponseSchema.parse(await response.json());
 
 	if ('error' in json) {
 		error(404, json.error);

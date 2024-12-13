@@ -82,7 +82,8 @@
 		"runed": "^0.15.3",
 		"svead": "^0.0.13",
 		"tailwind-merge": "^2.5.3",
-		"typescript-svelte-plugin": "^0.3.40"
+		"typescript-svelte-plugin": "^0.3.40",
+		"zod": "^3.24.1"
 	},
 	"resolutions": {
 		"@wharfkit/antelope": "^1.0.11",

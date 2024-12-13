@@ -1,5 +1,4 @@
 import { json, type RequestEvent } from '@sveltejs/kit';
-
 import { getChainDefinitionFromParams } from '$lib/state/network.svelte';
 import { Name } from '@wharfkit/antelope';
 import { getCacheHeaders } from '$lib/utils';
