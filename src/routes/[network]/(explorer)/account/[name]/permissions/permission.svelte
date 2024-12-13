@@ -5,6 +5,12 @@
 	import CopyButton from '$lib/components/button/copy.svelte';
 	import Account from '$lib/components/elements/account.svelte';
 	import Contract from '$lib/components/elements/contract.svelte';
+	import dayjs from 'dayjs';
+	import duration from 'dayjs/plugin/duration'; // ES 2015
+	import relativeTime from 'dayjs/plugin/relativeTime'; // ES 2015
+	import { Clock } from 'lucide-svelte';
+	dayjs.extend(duration);
+	dayjs.extend(relativeTime);
 	interface Props {
 		permission: TreePermission;
 		level?: number;
@@ -18,7 +24,7 @@
 	class:pl-4={level !== 0}
 	class:pt-6={level !== 0}
 >
-	<dl class="z-20 space-y-1 rounded-l-lg bg-mineShaft-950 px-4 py-3">
+	<dl class="z-20 col-span-full space-y-1 rounded-l-lg bg-mineShaft-950 px-4 py-3 md:col-span-1">
 		<div>
 			<dt class="sr-only">Permission Name</dt>
 			<dd class="text-xl font-semibold text-white">{permission.perm_name}</dd>
@@ -97,8 +103,9 @@
 							<td>
 								+{weight.toString()}
 							</td>
-							<td>
-								{JSON.stringify(wait_sec)}
+							<td class="flex items-center gap-2">
+								<Clock class="size-4" />
+								{wait_sec.toString()}s ({dayjs.duration(wait_sec.toNumber(), 'seconds').humanize()})
 							</td>
 						</tr>
 					{/each}
