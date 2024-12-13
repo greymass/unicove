@@ -20,11 +20,11 @@
 		href="/{network}/key/{String(key)}"
 	>
 		{#if icon}
-			<div class="h-6 content-center">
+			<div class="content-center pt-1">
 				<KeyRound class="size-4 shrink-0 " />
 			</div>
 		{/if}
-		<span class="break-all leading-6">
+		<span class="break-all">
 			{String(key)}
 		</span>
 	</a>
