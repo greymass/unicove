@@ -17,6 +17,12 @@
 	}
 	let { level = 0, ...props }: Props = $props();
 	let { permission, children } = $derived(props.permission);
+	$inspect(permission);
+	const anyPermissions = $derived(
+		permission.required_auth.accounts.length ||
+			permission.required_auth.keys.length ||
+			permission.required_auth.waits.length
+	);
 </script>
 
 <li
@@ -53,70 +59,76 @@
 	</dl>
 
 	<div class="rounded-b-lg bg-mineShaft-950/50 px-4 py-3 md:rounded-r-lg">
-		<table class="grid grid-cols-[auto_1fr_auto] gap-x-4 gap-y-2">
-			<thead class="col-span-full grid grid-cols-subgrid">
-				<tr class="col-span-full grid grid-cols-subgrid text-left *:pt-1 *:text-base *:font-medium">
-					<th>Weight</th>
-					<th>Authorization</th>
-				</tr>
-			</thead>
-			<tbody class="col-span-full grid grid-cols-subgrid gap-x-4 gap-y-2">
-				{#if permission.required_auth.keys}
-					{#each permission.required_auth.keys as { weight, key }}
-						<tr
-							class="col-span-full grid grid-cols-subgrid items-start bg-none text-white"
-							data-hover-effect="false"
-						>
-							<td>
-								+{weight.toString()}
-							</td>
-							<td>
-								<Key {key} icon />
-							</td>
-							<td>
-								<CopyButton data={key.toString()} />
-							</td>
-						</tr>
-					{/each}
-				{/if}
-				{#if permission.required_auth.accounts}
-					{#each permission.required_auth.accounts as { weight, permission: account }}
-						<tr
-							class="col-span-full grid grid-cols-subgrid bg-none text-white"
-							data-hover-effect="false"
-						>
-							<td>
-								+{weight.toString()}
-							</td>
-							<td>
-								<Account name={account.actor} icon>
-									{account}
-								</Account>
-							</td>
-							<td>
-								<CopyButton data={account.toString()} />
-							</td>
-						</tr>
-					{/each}
-				{/if}
-				{#if permission.required_auth.waits}
-					{#each permission.required_auth.waits as { weight, wait_sec }}
-						<tr
-							class="col-span-full grid grid-cols-subgrid bg-none text-white"
-							data-hover-effect="false"
-						>
-							<td>
-								+{weight.toString()}
-							</td>
-							<td class="flex items-center gap-2 text-mineShaft-50">
-								<Clock class="size-4" />
-								{wait_sec.toString()}s ({dayjs.duration(wait_sec.toNumber(), 'seconds').humanize()})
-							</td>
-						</tr>
-					{/each}
-				{/if}
-			</tbody>
-		</table>
+		{#if anyPermissions}
+			<table class="grid grid-cols-[auto_1fr_auto] gap-x-4 gap-y-2">
+				<thead class="col-span-full grid grid-cols-subgrid">
+					<tr
+						class="col-span-full grid grid-cols-subgrid text-left *:pt-1 *:text-base *:font-medium"
+					>
+						<th>Weight</th>
+						<th>Authorization</th>
+					</tr>
+				</thead>
+				<tbody class="col-span-full grid grid-cols-subgrid gap-x-4 gap-y-2">
+					{#if permission.required_auth.keys}
+						{#each permission.required_auth.keys as { weight, key }}
+							<tr
+								class="col-span-full grid grid-cols-subgrid items-start bg-none text-white"
+								data-hover-effect="false"
+							>
+								<td>
+									+{weight.toString()}
+								</td>
+								<td>
+									<Key {key} icon />
+								</td>
+								<td>
+									<CopyButton data={key.toString()} />
+								</td>
+							</tr>
+						{/each}
+					{/if}
+					{#if permission.required_auth.accounts}
+						{#each permission.required_auth.accounts as { weight, permission: account }}
+							<tr
+								class="col-span-full grid grid-cols-subgrid bg-none text-white"
+								data-hover-effect="false"
+							>
+								<td>
+									+{weight.toString()}
+								</td>
+								<td>
+									<Account name={account.actor} icon>
+										{account}
+									</Account>
+								</td>
+								<td>
+									<CopyButton data={account.toString()} />
+								</td>
+							</tr>
+						{/each}
+					{/if}
+					{#if permission.required_auth.waits}
+						{#each permission.required_auth.waits as { weight, wait_sec }}
+							<tr
+								class="col-span-full grid grid-cols-subgrid bg-none text-white"
+								data-hover-effect="false"
+							>
+								<td>
+									+{weight.toString()}
+								</td>
+								<td class="flex items-center gap-2 text-mineShaft-50">
+									<Clock class="size-4" />
+									{wait_sec.toString()}s ({dayjs
+										.duration(wait_sec.toNumber(), 'seconds')
+										.humanize()})
+								</td>
+							</tr>
+						{/each}
+					{/if}
+				</tbody>
+			</table>
+		{/if}
 	</div>
 	<!-- The curved connector line -->
 	{#if level > 0}
