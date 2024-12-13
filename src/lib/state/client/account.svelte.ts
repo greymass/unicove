@@ -116,14 +116,18 @@ export class AccountState {
 			client: this.network.client,
 			data: API.v1.AccountObject.from(json.account_data)
 		});
-		this.voter = {
-			isProxy: json.account_data.voter_info.is_proxy,
-			proxy: Name.from(json.account_data.voter_info.proxy),
-			proxyWeight: Float64.from(json.account_data.voter_info.proxied_vote_weight),
-			weight: Float64.from(json.account_data.voter_info.last_vote_weight),
-			votes: json.account_data.voter_info.producers.map((producer: string) => Name.from(producer)),
-			staked: Int64.from(json.account_data.voter_info.staked)
-		};
+		if (json.account_data.voter_info) {
+			this.voter = {
+				isProxy: json.account_data.voter_info.is_proxy,
+				proxy: Name.from(json.account_data.voter_info.proxy),
+				proxyWeight: Float64.from(json.account_data.voter_info.proxied_vote_weight),
+				weight: Float64.from(json.account_data.voter_info.last_vote_weight),
+				votes: json.account_data.voter_info.producers.map((producer: string) =>
+					Name.from(producer)
+				),
+				staked: Int64.from(json.account_data.voter_info.staked)
+			};
+		}
 		this.loaded = true;
 	}
 
