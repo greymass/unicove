@@ -6,11 +6,8 @@
 	import Account from '$lib/components/elements/account.svelte';
 	import Contract from '$lib/components/elements/contract.svelte';
 	import dayjs from 'dayjs';
-	import duration from 'dayjs/plugin/duration'; // ES 2015
-	import relativeTime from 'dayjs/plugin/relativeTime'; // ES 2015
 	import { Clock } from 'lucide-svelte';
-	dayjs.extend(duration);
-	dayjs.extend(relativeTime);
+
 	interface Props {
 		permission: TreePermission;
 		level?: number;
