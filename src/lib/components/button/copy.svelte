@@ -5,14 +5,16 @@
 	import { browser } from '$app/environment';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
+	import { cn } from '$lib/utils';
 
 	const context = getContext<UnicoveContext>('state');
 
 	interface Props {
 		data: string;
+		slop?: boolean;
 	}
 
-	let props: Props = $props();
+	let { slop = true, ...props }: Props = $props();
 
 	let hint = $state(false);
 
@@ -26,6 +28,8 @@
 			if (context.settings.data.debugMode) console.error('Failed to copy text: ', err);
 		}
 	}
+
+	let buttonSize = $derived(slop ? 'size-12' : 'size-4');
 </script>
 
 <!-- Styled as a trailing element. Will need to change it if we want to use it inline with other elements following it.  -->
@@ -35,7 +39,10 @@
 	>
 		<button
 			onclick={copyToClipboard}
-			class="peer absolute left-1/2 top-1/2 size-12 -translate-x-1/2 -translate-y-1/2 focus-visible:outline-none"
+			class={cn(
+				'peer absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 focus-visible:outline-none',
+				buttonSize
+			)}
 			aria-label="Copy"
 		>
 			<!-- Button is done this way with absolute positioning so we can maintain a decent hit slop on mobile without affecting layout -->

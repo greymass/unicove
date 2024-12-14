@@ -8,14 +8,11 @@ import {
 	type Transaction
 } from '@wharfkit/antelope';
 import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
 
 import type { UnicoveContext } from '$lib/state/client.svelte';
 import type { WharfState } from '$lib/state/client/wharf.svelte';
 import type { NetworkState } from '$lib/state/network.svelte';
 import * as SystemContract from '$lib/wharf/contracts/system';
-
-dayjs.extend(relativeTime);
 
 type Proposal = {
 	proposer: string;
