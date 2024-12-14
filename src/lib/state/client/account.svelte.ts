@@ -24,6 +24,7 @@ const defaultDataSources = {
 	get_account: undefined,
 	light_account: [],
 	delegated: [],
+	proposals: [],
 	rex: undefined,
 	rexfund: undefined
 };
@@ -77,6 +78,7 @@ export class AccountState {
 	public net = $derived.by(() => (this.account ? this.account.resource('net') : undefined));
 	public ram = $derived.by(() => (this.account ? this.account.resource('ram') : undefined));
 	public permissions = $derived.by(() => (this.account ? this.account.permissions : undefined));
+	public proposals = $derived.by(() => this.sources.proposals);
 	public value = $derived.by(() => {
 		return this.network && this.balance && this.ram
 			? getAccountValue(this.network, this.balance, this.ram)
@@ -108,6 +110,7 @@ export class AccountState {
 			get_account: json.account_data,
 			light_account: json.balances,
 			delegated: json.delegated,
+			proposals: json.proposals,
 			rex: json.rex,
 			rexfund: json.rexfund
 		};
