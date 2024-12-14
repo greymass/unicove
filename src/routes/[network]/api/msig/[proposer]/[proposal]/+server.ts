@@ -19,36 +19,21 @@ export async function GET({ fetch, params }: RequestEvent) {
 
 	const network = getBackendNetwork(chain, fetch);
 
-	const proposals = await network.client.v1.chain.get_table_rows({
-		code: 'eosio.msig',
-		scope: params.proposer,
-		table: 'proposal',
-		lower_bound: Name.from(params.proposal),
-		upper_bound: Name.from(params.proposal),
-		limit: 1
-	});
+	const scope = Name.from(params.proposer);
+	const name = Name.from(params.proposal);
 
-	if (!proposals.rows.length) {
-		return json({ error: 'msig record not found' }, { status: 404 });
-	}
+	const proposal = await network.contracts.msig.table('proposal', scope).get(name);
+	const approvals = await network.contracts.msig.table('approvals2', scope).get(name);
 
-	const approvals2 = await network.client.v1.chain.get_table_rows({
-		code: 'eosio.msig',
-		scope: params.proposer,
-		table: 'approvals2',
-		lower_bound: Name.from(params.proposal),
-		upper_bound: Name.from(params.proposal),
-		limit: 1
-	});
-
-	const proposal = proposals.rows[0];
-	const approvals = approvals2.rows[0];
+	const response = await fetch(`/${params.network}/api/producers/top30`);
+	const { producers } = await response.json();
 
 	return json(
 		{
 			ts: new Date(),
 			proposer: params.proposer,
 			name: params.proposal,
+			producers,
 			proposal,
 			approvals
 		},

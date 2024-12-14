@@ -1,165 +1,169 @@
 <script lang="ts">
-	import Button from '$lib/components/button/button.svelte';
-	import { DL, DLRow } from '$lib/components/descriptionlist/index.js';
-	import { MultiCard, Stack } from '$lib/components/layout/index.js';
-	import type { UnicoveContext } from '$lib/state/client.svelte.js';
 	import { getContext } from 'svelte';
-	import { Name, PermissionLevel } from '@wharfkit/antelope';
-	import dayjs from 'dayjs';
-	import relativeTime from 'dayjs/plugin/relativeTime';
+	// import { CircleCheck, CircleHelp } from 'lucide-svelte';
+
+	import Button from '$lib/components/button/button.svelte';
+	import { DD, DL, DLRow } from '$lib/components/descriptionlist/index.js';
+	import { Stack, Switcher } from '$lib/components/layout/index.js';
+	import type { UnicoveContext } from '$lib/state/client.svelte.js';
 	import Account from '$lib/components/elements/account.svelte';
-	import { CircleCheck, CircleHelp } from 'lucide-svelte';
-	import { ApprovalManager } from './manager.svelte';
 	import ActionCard from '$lib/components/elements/action.svelte';
 
-	dayjs.extend(relativeTime);
+	import { ApprovalManager } from './manager.svelte';
 
 	let { data } = $props();
-	let { proposal } = $derived(data);
 
 	let context = getContext<UnicoveContext>('state');
-	let { wharf } = $derived(context);
 
-	const manager = $state(new ApprovalManager(data.network, data.proposal));
+	const manager = $state(new ApprovalManager(context, data.proposal));
 	$effect(() => {
-		if (context.account) {
-			manager.sync(data.network, context.wharf);
-		}
+		manager.sync(data.network, context.wharf);
 	});
 
-	let { requested_approvals, provided_approvals } = $derived(proposal.approvals);
-	let total_approvals = $derived([...provided_approvals, ...requested_approvals]);
-
-	const accountHasApproved = (account?: PermissionLevel) => {
-		if (!account) return false;
-		return provided_approvals.some((a) => a.equals(account));
-	};
-
-	let userIsApprover = $derived(
-		total_approvals.some((a) => wharf.session && a.equals(wharf.session.permissionLevel))
-	);
-
-	let userIsProposer = $derived(wharf.session?.actor.equals(Name.from(proposal.proposer)));
-
-	let transacting = $derived(manager.transacting);
-	let userHasApproved = $derived(manager.approved);
-
-	// Expiry date
-	let relativeTimeToExpiry = $derived(dayjs(proposal.transaction.expiration.toDate()).fromNow());
-	let proposalExpired = $derived(dayjs(proposal.transaction.expiration.toDate()).isBefore());
-
-	// Approval statistics
-	let totalRequested = $derived(total_approvals.length);
-	let totalApproved = $derived(provided_approvals.length);
-	let ratioApproved = $derived((totalApproved / totalRequested) * 100);
-
-	// Actions
-	const handleApprove = () => manager.approve();
-	const handleUnapprove = () => manager.unapprove();
-	const handleExecute = () => manager.execute();
-	const handleCancel = () => manager.cancel();
+	const top21 = data.producers.splice(0, 21);
 </script>
 
-<MultiCard>
-	<Stack class="gap-4">
-		<h2 class="h3">Requested Approvals</h2>
+<Stack>
+	<Switcher class="items-start gap-6" threshold="40rem">
+		<Stack class="gap-4">
+			<h2 class="h3">Requested Approvals</h2>
 
-		<div
-			id="msig-vis"
-			class="rounded-2xl pb-4 pt-8"
-			style="
-		--bg-pos: calc(100% - {ratioApproved}%); 
-		--ease: {userHasApproved ? 'ease-out' : 'ease-in'};
-		--duration: {userHasApproved ? '1000ms' : '200ms'}"
-		>
-			<div class="flex justify-between px-4 font-semibold">
-				<div class="">
-					<span class="flex items-center gap-1 text-3xl">
-						<!-- TODO: Figure out how to clip these icons the same as the text -->
-						<!-- <Check class="size-5 fill-inherit" />  -->
-						{totalApproved}
-					</span>
-					Approved
-				</div>
+			<div
+				id="msig-vis"
+				class="rounded-2xl pb-4 pt-8"
+				style="
+				--bg-pos: calc(100% - {manager.approvalRatio}%); 
+				--ease: {manager.userHasApproved ? 'ease-out' : 'ease-in'};
+				--duration: {manager.userHasApproved ? '1000ms' : '200ms'}"
+			>
+				<div class="flex justify-between px-4 font-semibold">
+					<div class="">
+						<span class="flex items-center gap-1 text-3xl">
+							<!-- TODO: Figure out how to clip these icons the same as the text -->
+							<!-- <Check class="size-5 fill-inherit" />  -->
+							{manager.totalApproved}
+						</span>
+						Approved
+					</div>
 
-				<div class="">
-					<span class="flex items-center justify-end gap-1 text-3xl">
-						<!-- TODO: Figure out how to clip these icons the same as the text -->
-						<!-- <UserCheck class="size-5 fill-inherit" />  -->
-						{totalRequested}
-					</span>
-					Requested
+					<div class="">
+						<span class="flex items-center justify-end gap-1 text-3xl">
+							<!-- TODO: Figure out how to clip these icons the same as the text -->
+							<!-- <UserCheck class="size-5 fill-inherit" />  -->
+							{manager.totalRequested}
+						</span>
+						Requested
+					</div>
 				</div>
 			</div>
-		</div>
-		<table class="table-styles">
-			<thead>
-				<tr>
-					<th class="text-left">Actor</th>
-					<th class="text-left">Permission</th>
-					<th class="text-right">Status</th>
-				</tr>
-			</thead>
-			<tbody>
-				{#each total_approvals as requested}
-					<tr class="h-12 bg-none">
-						<td><Account name={requested.actor} /></td>
-						<td class="text-muted">{requested.permission}</td>
-						<td class="text-right">
-							{#if accountHasApproved(requested)}
-								<span class="text-green-300">Approved</span>
-							{:else}
-								<span class="text-muted">Requested</span>
-							{/if}
-						</td>
+			<table class="table-styles">
+				<thead>
+					<tr>
+						<th class="text-left">Actor</th>
+						<th class="text-left">Permission</th>
+						<th class="text-left">Role</th>
+						<th class="text-right">Status</th>
 					</tr>
-				{/each}
-			</tbody>
-		</table>
-	</Stack>
+				</thead>
+				<tbody>
+					{#each manager.participants as participant}
+						{@const isProducer = data.producers.includes(String(participant.actor))}
+						{@const isTop21 = top21.includes(String(participant.actor))}
+						<tr class="h-12 bg-none">
+							<td><Account name={participant.actor} /></td>
+							<td class="text-muted">{participant.permission}</td>
+							<td>
+								{#if isTop21}
+									Top 21
+								{:else if isProducer}
+									Standby
+								{:else}
+									Signer
+								{/if}
+							</td>
+							<td class="text-right">
+								{#if manager.accountHasApproved(participant)}
+									<span class="text-green-300">Approved</span>
+								{:else}
+									<span class="text-muted">Requested</span>
+								{/if}
+							</td>
+						</tr>
+					{/each}
+				</tbody>
+			</table>
+		</Stack>
 
-	<Stack class="gap-4" id="details">
-		<h2 class="h3">Multisig Details</h2>
+		<Stack class="gap-4" id="details">
+			<h2 class="h3">Multisig Details</h2>
 
-		<DL>
-			<DLRow title={'Proposer'}>
-				<Account name={proposal.proposer} />
-			</DLRow>
-			<DLRow title={'Proposal Name'}>
-				{proposal.name}
-			</DLRow>
-			<DLRow title={proposalExpired ? 'Expired' : 'Expiration'}>
-				{proposal.transaction.expiration} ({relativeTimeToExpiry})
-			</DLRow>
-			<DLRow title={'Hash'}>
-				{proposal.hash}
-			</DLRow>
-		</DL>
+			<DL>
+				<DLRow title={'Proposer'}>
+					<DD>
+						<Account name={manager.proposal.proposer} />
+					</DD>
+				</DLRow>
+				<DLRow title={'Proposal Name'}>
+					<DD>
+						{manager.proposal.name}
+					</DD>
+				</DLRow>
+				<DLRow title={manager.expired ? 'Expired' : 'Expiration'}>
+					<DD>
+						{manager.proposal.transaction.expiration} ({manager.expiresIn})
+					</DD>
+				</DLRow>
+				<DLRow title={'Hash'}>
+					<DD>
+						{manager.proposal.hash}
+					</DD>
+				</DLRow>
+			</DL>
 
-		{#if userIsApprover}
-			{#if userHasApproved}
-				<Button variant="secondary" onclick={handleUnapprove} disabled={transacting}
-					>Unapprove</Button
-				>
-			{:else}
-				<Button variant="primary" onclick={handleApprove} disabled={transacting}>Approve</Button>
+			{#if manager.userIsApprover}
+				{#if manager.userHasApproved}
+					<Button
+						variant="secondary"
+						onclick={() => manager.unapprove()}
+						disabled={context.wharf.transacting}>Unapprove</Button
+					>
+				{:else}
+					<Button
+						class="bg-green-400 text-green-950 hover:active:bg-green-500 [@media(any-hover:hover)]:hover:bg-green-300"
+						variant="primary"
+						onclick={() => manager.approve()}
+						disabled={context.wharf.transacting}>Approve</Button
+					>
+				{/if}
 			{/if}
-		{/if}
 
-		{#if userIsProposer}
-			<Button variant="secondary" onclick={handleCancel}>Cancel MSIG</Button>
-		{/if}
+			{#if manager.userIsProposer}
+				<Button
+					variant="secondary"
+					disabled={context.wharf.transacting}
+					onclick={() => manager.cancel()}>Cancel MSIG</Button
+				>
+			{/if}
 
-		<Button variant="primary" onclick={handleExecute}>Execute</Button>
-	</Stack>
+			<Button
+				variant="primary"
+				disabled={context.wharf.transacting}
+				onclick={() => manager.execute()}>Execute</Button
+			>
+		</Stack>
+	</Switcher>
 
-	<Stack class="[column-span:all]">
+	<Stack>
 		<h2 class="h3">Proposed Actions</h2>
-		{#each proposal.actions as action}
-			<ActionCard data={action} />
+		{#each manager.actions as action}
+			<ActionCard {action} />
 		{/each}
 	</Stack>
-</MultiCard>
+</Stack>
+
+{#if context.settings.data.debugMode}
+	<pre>{JSON.stringify(manager.actions, null, 2)}</pre>
+{/if}
 
 <style lang="postcss">
 	#msig-vis {

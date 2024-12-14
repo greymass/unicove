@@ -6,12 +6,13 @@
 	import { cn } from '$lib/utils';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
+	import Big from 'big.js';
 
 	const context = getContext<UnicoveContext>('state');
 
 	interface AssetProps extends HTMLAttributes<HTMLSpanElement> {
 		value?: Asset;
-		variant?: 'value' | 'full';
+		variant?: 'value' | 'full' | 'short';
 		fallback?: number;
 	}
 
@@ -33,8 +34,28 @@
 		minimumFractionDigits: context.settings.data.advancedMode ? asset?.symbol.precision : undefined
 	};
 
+	function abbreviatedValue(): string {
+		const suffixes = ['', 'K', 'M', 'B', 'T'];
+		let suffixIndex = 0;
+
+		if (!asset) {
+			return '';
+		}
+
+		let value = asset.value;
+		while (value >= 1000 && suffixIndex < suffixes.length - 1) {
+			value /= 1000;
+			suffixIndex++;
+		}
+
+		return `${value.toFixed(2)}${suffixes[suffixIndex]} ${asset.symbol.name}`;
+	}
+
 	function formatAssetValue() {
-		return Intl.NumberFormat(locale, assetOptions).format(asset?.value || fallback);
+		// Use Big.js to accurately convert the string into a usable number
+		// Some precision may be lost in extreme circumstances
+		const number = Number(new Big(asset?.quantity || fallback));
+		return Intl.NumberFormat(locale, assetOptions).format(number);
 	}
 
 	function formatCurrencyValue() {
@@ -48,7 +69,9 @@
 	<span class={cn('text-right tabular-nums', props.class)} {...props}>{string}</span>
 {/snippet}
 
-{#if isCurrency && variant === 'value'}
+{#if variant === 'short'}
+	{@render span(abbreviatedValue())}
+{:else if isCurrency && variant === 'value'}
 	{@render span(formatCurrencyValue())}
 {:else if isCurrency && variant === 'full'}
 	{@render span(`${formatCurrencyValue()} ${asset?.symbol.name}`)}

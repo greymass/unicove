@@ -2,6 +2,7 @@
 	import '../app.css';
 	import 'inter-ui/inter-latin.css';
 	import '@fontsource/jetbrains-mono/600.css'; // Semibold
+	import '$lib/utils/dayjs'; // setup dayjs
 	import extend from 'just-extend';
 	import { Head, type SeoConfig } from 'svead';
 	import { ParaglideJS } from '@inlang/paraglide-sveltekit';

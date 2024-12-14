@@ -1,7 +1,7 @@
 import { APIClient, Asset, FetchProvider, Int128, type AssetType } from '@wharfkit/antelope';
 import { Chains, ChainDefinition, TokenMeta } from '@wharfkit/common';
 import { RAMState, Resources, REXState, PowerUpState } from '@wharfkit/resources';
-import { chainIdsToIndices } from '@wharfkit/session';
+import { ABICache, chainIdsToIndices } from '@wharfkit/session';
 import { snapOrigins } from '@wharfkit/wallet-plugin-metamask';
 
 import { Types as DelphiOracleTypes } from '$lib/wharf/contracts/delphioracle';
@@ -40,12 +40,20 @@ export class NetworkState {
 
 	public contracts: DefaultContracts;
 
+	public abis?: ABICache = $state();
+	public globalstate?: SystemTypes.eosio_global_state = $state();
+	public marketcap: Asset = $derived.by(() => {
+		if (this.supply && this.tokenprice) {
+			return calculateValue(this.supply, this.tokenprice);
+		}
+		return Asset.fromUnits(0, '4,USD');
+	});
 	public ramstate?: RAMState = $state();
 	public resources?: Resources = $state();
 	public rexstate?: REXState = $state();
-	public globalstate?: SystemTypes.eosio_global_state = $state();
 	public powerupstate?: PowerUpState = $state();
 	public sampledUsage?: SampledUsage = $state();
+	public supply?: Asset = $state();
 	public tokenmeta?: TokenMeta[] = $state();
 	public tokenstate?: DelphiOracleTypes.datapoints = $state();
 	public tokenprice = $derived.by(() => {
@@ -75,6 +83,8 @@ export class NetworkState {
 				})
 			);
 		}
+
+		this.abis = new ABICache(this.client);
 
 		this.resources = new Resources({
 			api: this.client,
@@ -135,6 +145,21 @@ export class NetworkState {
 			console.log(json);
 		}
 
+		try {
+			const index = String(this.chain.systemToken?.symbol.name);
+			const supply = Asset.from(json.supply[index].supply);
+			if (json.lockedsupply && json.lockedsupply.length) {
+				for (const balance of json.lockedsupply) {
+					const locked = Asset.from(balance);
+					supply.units.subtract(locked.units);
+				}
+			}
+			this.supply = supply;
+		} catch (error) {
+			console.log('Supply Parse', error);
+			console.log(json);
+		}
+
 		this.loaded = true;
 	}
 
@@ -172,10 +197,12 @@ export class NetworkState {
 		return {
 			chain: this.chain,
 			last_update: this.last_update,
+			marketcap: this.marketcap,
 			ramstate: this.ramstate,
 			ramprice: this.ramprice,
 			rexstate: this.rexstate,
 			sampleAccount: this.resources?.sampleAccount,
+			supply: this.supply,
 			tokenprice: this.tokenprice,
 			tokenstate: this.tokenstate
 		};
