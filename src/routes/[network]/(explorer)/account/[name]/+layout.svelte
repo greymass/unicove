@@ -17,11 +17,11 @@
 		];
 
 		if (context.settings.data.advancedMode) {
+			items.push({ href: `/${network}/account/${account}/permissions`, text: 'Permissions' });
 			items.push({ href: `/${network}/account/${account}/votes`, text: 'Votes' });
 		}
 
 		if (context.settings.data.debugMode) {
-			items.push({ href: `/${network}/account/${account}/permissions`, text: 'Permissions' });
 			items.push({ href: `/${network}/account/${account}/ram`, text: 'RAM' });
 			items.push({ href: `/${network}/account/${account}/resources`, text: 'Resources' });
 			items.push({ href: `/${network}/account/${account}/staked`, text: 'Staked' });
