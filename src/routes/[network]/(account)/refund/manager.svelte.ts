@@ -47,7 +47,7 @@ export class RefundManager {
 	});
 
 	public refundable: boolean = $derived.by(() => {
-		return this.dateAvailable ? new Date() >= this.dateAvailable : false;
+		return this.dateAvailable ? new Date() >= this.dateAvailable : true;
 	});
 
 	constructor(network: NetworkState) {
