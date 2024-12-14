@@ -12,6 +12,7 @@ import {
 	Asset
 } from '@wharfkit/antelope';
 
+import * as MsigContract from '$lib/wharf/contracts/msig';
 import * as SystemContract from '$lib/wharf/contracts/system';
 
 export interface Activity {
@@ -50,6 +51,7 @@ export interface DataSources {
 	get_account?: API.v1.AccountObject | undefined;
 	light_account: LightAPIBalanceRow[];
 	delegated: SystemContract.Types.delegated_bandwidth[];
+	proposals: MsigContract.Types.proposal[];
 	rex?: SystemContract.Types.rex_balance;
 	rexfund?: SystemContract.Types.rex_fund;
 }

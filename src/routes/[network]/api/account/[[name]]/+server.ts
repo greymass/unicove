@@ -17,14 +17,15 @@ export const GET: RequestHandler = async ({ fetch, params }) => {
 	}
 
 	const network = getBackendNetwork(chain, fetch);
-	const { system: systemContract } = network.contracts;
+	const { system: systemContract, msig: msigContract } = network.contracts;
 
 	try {
 		const headers = getCacheHeaders(5);
 
-		const [account_data, delegated] = await Promise.all([
+		const [account_data, delegated, proposals] = await Promise.all([
 			network.client.v1.chain.get_account(params.name),
-			systemContract.table('delband').all({ scope: params.name })
+			systemContract.table('delband').all({ scope: params.name }),
+			msigContract.table('proposal', params.name).all()
 		]);
 
 		let rexbal, rexfund;
@@ -57,6 +58,7 @@ export const GET: RequestHandler = async ({ fetch, params }) => {
 				account_data,
 				balances,
 				delegated,
+				proposals,
 				rex: rexbal,
 				rexfund: rexfund
 			},

@@ -19,6 +19,10 @@
 		if (context.settings.data.advancedMode) {
 			items.push({ href: `/${network}/account/${account}/permissions`, text: 'Permissions' });
 			items.push({ href: `/${network}/account/${account}/votes`, text: 'Votes' });
+
+			if (data.account.proposals.length > 0) {
+				items.push({ href: `/${network}/account/${account}/proposals`, text: 'Proposals' });
+			}
 		}
 
 		if (context.settings.data.debugMode) {
