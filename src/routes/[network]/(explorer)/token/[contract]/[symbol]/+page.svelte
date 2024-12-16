@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Button from '$lib/components/button/button.svelte';
 	import Code from '$lib/components/code.svelte';
 	import Account from '$lib/components/elements/account.svelte';
 	import AssetText from '$lib/components/elements/asset.svelte';
@@ -62,6 +63,12 @@
 			{/each}
 		</tbody>
 	</table>
+
+	{#if data.loadMoreUrl}
+		<Button href={data.loadMoreUrl} data-sveltekit-noscroll data-sveltekit-replacestate
+			>Load more</Button
+		>
+	{/if}
 {/if}
 
 {#if context.settings.data.debugMode}
