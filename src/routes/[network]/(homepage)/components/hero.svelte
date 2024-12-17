@@ -4,7 +4,12 @@
 	import bgDesktop from '$lib/assets/hero/bg1@2x.png?enhanced';
 	import bgMobile from '$lib/assets/hero/bg2@2x.png?enhanced';
 
-	let { networkName, networkLogo } = $props();
+	interface Props {
+		networkName: string;
+		networkLogo: string;
+	}
+
+	let { networkName, networkLogo }: Props = $props();
 </script>
 
 <section id="hero" class="col-span-full grid grid-cols-subgrid gap-y-14 pt-6 md:items-center">
