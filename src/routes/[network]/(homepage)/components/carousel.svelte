@@ -52,6 +52,8 @@
 					class="h-40 rounded-full bg-mineShaft-950 object-contain px-2 py-4"
 					src={networkLogo}
 					alt={networkName}
+					height="160"
+					width="160"
 				/>
 			</div>
 		</div>

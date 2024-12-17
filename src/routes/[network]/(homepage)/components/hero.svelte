@@ -14,7 +14,12 @@
 
 <section id="hero" class="col-span-full grid grid-cols-subgrid gap-y-14 pt-6 md:items-center">
 	<div id="hero-background" class="col-span-full row-start-1 hidden md:block">
-		<enhanced:img class="w-auto object-contain" src={bgDesktop} alt="" fetchpriority="high" />
+		<enhanced:img
+			class="h-auto w-auto object-contain"
+			src={bgDesktop}
+			alt=""
+			fetchpriority="high"
+		/>
 	</div>
 
 	<picture
@@ -26,6 +31,8 @@
 			src={networkLogo}
 			alt={networkName}
 			fetchpriority="high"
+			height="512"
+			width="512"
 		/>
 		<enhanced:img
 			class="absolute left-1/2 top-0 -translate-x-1/2 object-contain md:hidden"
