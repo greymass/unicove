@@ -139,30 +139,6 @@
 		</div>
 	</section>
 
-	<!-- Carousel -->
-	<Switcher threshold="60ch" class="col-span-full gap-6">
-		<div>
-			{@render textblock({
-				title: 'Unicove 2.0 enters early access',
-				text: 'Welcome to the new Unicove! We invite you to explore the new features and provide feedback to help us improve this evolving platform. Read the following blog post to learn more.',
-				button: {
-					text: 'More information',
-					href: `https://greymass.medium.com/unicove-2-0-early-access-6a6a318e14db`
-				}
-			})}
-		</div>
-		<div>
-			{@render textblock({
-				title: 'Looking for the old version?',
-				text: 'The original version of Unicove has moved to a new URL. If you prefer the old version or need a feature it offers, you can continue to access it at the link below.',
-				button: {
-					text: 'Go to Unicove 1.0',
-					href: `https://v1.unicove.com`
-				}
-			})}
-		</div>
-	</Switcher>
-
 	<section class="col-span-full @container" class:hidden={!context.settings.data.debugMode}>
 		<div class="grid min-h-72 rounded-2xl bg-mineShaft-950 px-4 @xl:grid-cols-2 @xl:gap-4">
 			<div class="grid place-items-center">
