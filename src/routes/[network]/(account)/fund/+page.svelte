@@ -17,9 +17,9 @@
 				range: '1.49% - 3.99%'
 			},
 			limits: {
-				daily: '$25,000/day'
+				daily: m._500_per_day()
 			},
-			details: ['United States Only', 'Instant ACH transfers', 'Debit card support', 'Bank wire'],
+			details: [m.buy_or_transfer_crypto(), m.debit_and_credit_card_support()],
 			action: {
 				text: m.buy_eos_with_coinbase(),
 				handler: 'coinbase',
