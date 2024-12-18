@@ -1,12 +1,13 @@
 import type { PageLoad } from './$types';
+import * as m from '$lib/paraglide/messages';
 
 export const load: PageLoad = async () => {
 	return {
-		title: 'Fund Account',
-		subtitle: 'Purchase EOS tokens to fund your account',
+		title: m.fund_account(),
+		subtitle: m.fund_account_description(),
 		pageMetaTags: {
-			title: 'Fund Account',
-			description: 'Purchase EOS tokens to fund your account'
+			title: m.fund_account(),
+			description: m.fund_account_description()
 		}
 	};
 };
