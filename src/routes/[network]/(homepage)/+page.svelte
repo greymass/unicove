@@ -1,24 +1,22 @@
 <script lang="ts">
-	import { Box, Card, Stack, Subgrid, Switcher } from '$lib/components/layout';
+	import { Card, Stack, Subgrid, Switcher } from '$lib/components/layout';
 	import Button from '$lib/components/button/button.svelte';
 	import { chainLogos } from '@wharfkit/common';
 	import EOSPriceHistory from '$lib/components/chart/eospricehistory.svelte';
 	import RamPriceHistory from '$lib/components/chart/rampricehistory.svelte';
 	import AssetText from '$lib/components/elements/asset.svelte';
-	import StakedHEX from './components/stakedhex.svelte';
 	import Hero from './components/hero.svelte';
-	import { getContext, onMount, type Snippet } from 'svelte';
+	import { getContext, type Snippet } from 'svelte';
 	import { Asset } from '@wharfkit/antelope';
-	import type { HistoricalPrice } from '$lib/types';
-	import { getAPR } from '$lib/utils/staking';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { calculateValue } from '$lib/utils';
 	import Carousel from './components/carousel.svelte';
+	import StakingRewards from './components/staking-rewards.svelte';
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');
+	const { ramPrices, tokenPrices } = $derived(data);
 
-	const apr = $derived(getAPR(data.network));
 	const tvl = $derived.by(() => {
 		const token = Asset.fromUnits(0, data.network.chain.systemToken!.symbol);
 		if (data.network.supports('rex') && data.network.rexstate) {
@@ -33,43 +31,8 @@
 		return token;
 	});
 
-	let ramPrices: HistoricalPrice[] = $state([]);
-	let tokenPrices: HistoricalPrice[] = $state([]);
-
 	let networkLogo = $derived(String(chainLogos.get(data.network?.chain.id.toString())));
 	let networkName = $derived(String(data.network.chain.name));
-
-	async function loadPrices() {
-		const ramResponse: Response = await fetch(`/${data.network}/api/metrics/marketprice/ram`);
-		const parsedRamResponse: { date: string; value: number }[] | { error: string } =
-			await ramResponse.json();
-		if ('error' in parsedRamResponse && parsedRamResponse.error) {
-			throw new Error(String(parsedRamResponse.error));
-		} else if (Array.isArray(parsedRamResponse)) {
-			ramPrices = parsedRamResponse.map((price: { date: string; value: number }) => ({
-				date: new Date(price.date),
-				value: Asset.from(
-					price.value / 10000,
-					data.network.chain.systemToken?.symbol || '0,UNKNOWN'
-				)
-			}));
-		}
-		const tokenResponse: Response = await fetch(`/${data.network}/api/metrics/marketprice/token`);
-		const parsedTokenResponse: { date: string; value: number }[] | { error: string } =
-			await tokenResponse.json();
-		if ('error' in parsedTokenResponse && parsedTokenResponse.error) {
-			throw new Error(String(parsedTokenResponse.error));
-		} else if (Array.isArray(parsedTokenResponse)) {
-			tokenPrices = parsedTokenResponse.map((price: { date: string; value: number }) => ({
-				date: new Date(price.date),
-				value: Asset.from(price.value / 10000, '4,USD')
-			}));
-		}
-	}
-
-	onMount(() => {
-		loadPrices();
-	});
 </script>
 
 {#snippet textblock(props: {
@@ -93,48 +56,10 @@
 
 	<Carousel {networkLogo} {networkName} />
 
-	<section
-		class="col-span-full grid grid-cols-subgrid gap-8"
-		class:hidden={!context.settings.data.debugMode}
-	>
-		<!-- Text -->
-		<div
-			class="z-20 col-span-full row-start-1 max-w-md place-self-center justify-self-start text-balance xs:col-span-1 sm:col-span-full sm:justify-self-auto md:row-span-2 md:row-start-1 md:max-w-md lg:col-span-4 lg:row-auto lg:content-center"
-		>
-			<Stack class="max-w-md items-start pl-8">
-				<h3 class="h3 leading-tight">EOS Staking Rewards</h3>
-				<p>
-					Stake {data.network.chain.systemToken?.symbol.name} today for an estimated {apr}% APR<sup
-						>1</sup
-					>.
-				</p>
-				<p>
-					The {data.network.chain.name} staking rewards program proportionally distributes 85.6k {data
-						.network.chain.systemToken?.symbol.name} daily to token holders who have staked their tokens.
-					These tokens can be unstaked and will be usable against after a 21 day lockup period.
-				</p>
-				<div class="flex gap-2">
-					<Button class="mt-1" href={`/${data.network}/staking`}>Stake Tokens</Button>
-					<Button class="mt-1" variant="secondary" href="#">Learn more</Button>
-				</div>
-				<p class="text-muted text-xs">
-					<sup>1</sup> APR is based on the total amount staked and dynamically changes over time.
-				</p>
-			</Stack>
-		</div>
-
-		<!-- Graphics -->
-		<div
-			class="col-span-full grid place-items-center xs:col-start-3 xs:row-start-1 md:col-start-5 md:row-span-2 md:row-start-2 lg:row-auto"
-		>
-			{#if data.network.rexstate}
-				<StakedHEX staked={data.network.rexstate.total_lendable} {apr} />
-			{/if}
-		</div>
-	</section>
+	<StakingRewards network={data.network} />
 
 	<!-- Charts -->
-	<section class="col-span-full" class:hidden={!context.settings.data.debugMode}>
+	<section class="col-span-full">
 		<Switcher>
 			<div>
 				{#if tokenPrices.length}
