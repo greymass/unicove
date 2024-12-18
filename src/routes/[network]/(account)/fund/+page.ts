@@ -7,7 +7,7 @@ export const load: PageLoad = async () => {
 		subtitle: m.fund_account_description(),
 		pageMetaTags: {
 			title: m.fund_account(),
-			description: m.fund_account_description()
+			description: m.fund_account_seo_description()
 		}
 	};
 };
