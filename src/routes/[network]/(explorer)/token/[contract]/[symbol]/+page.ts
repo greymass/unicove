@@ -12,10 +12,12 @@ class LightAPIBalance extends Struct {
 	@Struct.field(Asset) declare balance: Asset;
 }
 
-export const load: PageLoad = async ({ fetch, params, parent }) => {
+export const load: PageLoad = async ({ fetch, params, parent, url }) => {
 	const { network } = await parent();
 
-	const response = await fetch(`/${network}/api/token/${params.contract}/${params.symbol}`);
+	const count = Number(url.searchParams.get('count')) || 100;
+	const baseUrl = `/${network}/api/token/${params.contract}/${params.symbol}?count=${count}`;
+	const response = await fetch(baseUrl);
 	const json = await response.json();
 
 	const stats = API.v1.GetCurrencyStatsItemResponse.from(json.stats);
@@ -26,10 +28,17 @@ export const load: PageLoad = async ({ fetch, params, parent }) => {
 		});
 	});
 
+	// Prevent loading more than 1000 entries since the API ends at 1000
+	const loadMoreUrl =
+		count < 1000
+			? `/${network}/token/${params.contract}/${params.symbol}?count=${count + 100}`
+			: undefined;
+
 	return {
 		numholders: json.numholders,
 		topholders,
 		stats,
+		loadMoreUrl,
 		title: `${stats.supply.symbol.name} Token`,
 		subtitle: `A token on the ${params.contract} smart contract.`,
 		pageMetaTags: {

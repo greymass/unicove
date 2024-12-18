@@ -4,7 +4,7 @@ import { getChainDefinitionFromParams, NetworkState } from '$lib/state/network.s
 import { getCacheHeaders } from '$lib/utils';
 import { getBackendNetwork, getLightAPIURL } from '$lib/wharf/client/ssr';
 
-export async function GET({ fetch, params }: RequestEvent) {
+export async function GET({ fetch, params, url }: RequestEvent) {
 	const chain = getChainDefinitionFromParams(String(params.network));
 	if (!chain) {
 		return json({ error: 'Invalid chain specified' }, { status: 400 });
@@ -18,8 +18,9 @@ export async function GET({ fetch, params }: RequestEvent) {
 	}
 	const contract = params.contract.toLocaleLowerCase();
 	const symbol = params.symbol?.toLocaleUpperCase();
+	const count = Number(url.searchParams.get('count')) || 100;
 	const stats = await network.client.v1.chain.get_currency_stats(contract, symbol);
-	const topholders = await getTopHolders(network, contract, symbol);
+	const topholders = await getTopHolders(network, contract, symbol, count);
 	const numholders = await getNumHolders(network, contract, symbol);
 
 	return json(
