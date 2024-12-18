@@ -19,6 +19,7 @@
 			src={bgDesktop}
 			alt=""
 			fetchpriority="high"
+			loading="eager"
 		/>
 	</div>
 
@@ -31,6 +32,7 @@
 			src={networkLogo}
 			alt={networkName}
 			fetchpriority="high"
+			loading="eager"
 			height="512"
 			width="512"
 		/>
@@ -39,6 +41,7 @@
 			src={bgMobile}
 			alt=""
 			fetchpriority="high"
+			loading="eager"
 		/>
 	</picture>
 
