@@ -64,7 +64,7 @@
 					title: `The EOS Wallet for MetaMask`,
 					text: `MetaMask, an the industry leading self-custody wallet, is now compatible with Unicove and the ${networkName} network. Install the ${networkName} Wallet snap for MetaMask to get started.`,
 					button: {
-						text: 'Install EOS Wallet for MetaMask',
+						text: 'Install EOS Wallet',
 						href: `/${network}/metamask`
 					}
 				}}
