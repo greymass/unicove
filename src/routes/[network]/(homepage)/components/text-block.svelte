@@ -13,7 +13,7 @@
 </script>
 
 <Stack class="max-w-md items-start">
-	<h3 class="h3 leading-tight">{props.title}</h3>
+	<h2 class="h3 leading-tight">{props.title}</h2>
 	<p>{props.text}</p>
 	{#if props.button && props.button.href}
 		<Button text={props.button.text} href={props.button.href} icon />
