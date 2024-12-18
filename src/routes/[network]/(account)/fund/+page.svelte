@@ -187,7 +187,7 @@
 
 <h2 class="h4">{m.exchanges()}</h2>
 
-<p class="text-gray-200 mb-6">
+<p class="mb-6">
 	{m.where_eos_can_be_purchased()}
 </p>
 
