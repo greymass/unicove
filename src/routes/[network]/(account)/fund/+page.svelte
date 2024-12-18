@@ -185,7 +185,7 @@
 	{/each}
 </MultiCard>
 
-<h4 class="h4">{m.exchanges()}</h4>
+<h2 class="h4">{m.exchanges()}</h2>
 
 <p class="text-gray-200 mb-6">
 	{m.where_eos_can_be_purchased()}
