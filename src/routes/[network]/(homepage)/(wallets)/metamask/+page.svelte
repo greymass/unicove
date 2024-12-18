@@ -249,7 +249,7 @@
 	</a>
 {/snippet}
 
-<div class="mt-8 flex flex-row gap-16">
+<div class="mt-8 flex flex-row flex-wrap gap-16">
 	<section class="max-w-prose space-y-4">
 		<h2 class="text-2xl font-semibold">FAQ</h2>
 		<h3 class="text-md font-semibold">What is a MetaMask snap?</h3>
