@@ -144,7 +144,7 @@
 
 <h4 class="h4">Token Purchase Providers:</h4>
 
-<MultiCard>
+<MultiCard class="max-w-[700px]">
 	{#each ON_RAMP_PROVIDERS as service}
 		<Card>
 			<div>
