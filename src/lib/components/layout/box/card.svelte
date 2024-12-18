@@ -8,22 +8,24 @@
 		title?: string;
 		titleTag?: string;
 		children: Snippet;
+		tag?: string;
 	}
 
 	const {
 		class: className = '',
 		title = '',
 		titleTag = 'h3',
+		tag = 'div',
 		children,
 		...props
 	}: Props = $props();
 </script>
 
-<div class={cn('card', className)} {...props}>
+<svelte:element this={tag} class={cn('card', className)} {...props}>
 	{#if title}
 		<svelte:element this={titleTag} class="card-title h4">
 			{title}
 		</svelte:element>
 	{/if}
 	{@render children()}
-</div>
+</svelte:element>
