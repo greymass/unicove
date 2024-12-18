@@ -235,7 +235,7 @@
 				<p>
 					The {data.network.chain.name} staking rewards program proportionally distributes 85.6k {data
 						.network.chain.systemToken?.symbol.name} daily to token holders who have staked their tokens.
-					These tokens can be unstaked and will be usable against after a 21 day lockup period.
+					These tokens can be unstaked and used again after a 21-day lockup period.
 				</p>
 				<div class="flex gap-2">
 					<Button class="mt-1" href={`/${data.network}/staking`}>Stake Tokens</Button>
@@ -275,7 +275,7 @@
 			<div>
 				{@render textblock({
 					title: `EOS: The Native Token`,
-					text: `The ${data.network.chain.name} network's native token, EOS, can be used for staking rewards, to buy and sell RAM, to pay transaction fees, and more. It is traded on most major exchanges.`,
+					text: `The ${data.network.chain.name} network's native token - EOS, can be used for staking rewards, to buy and sell RAM, to pay transaction fees, and more. It is traded on most major exchanges.`,
 					button: {
 						text: 'Get Tokens',
 						href: `${data.network}/fund`
