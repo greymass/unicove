@@ -94,7 +94,7 @@
 	"contract_tables_view_title": "Table: {table}",
 	"contract_view_description": "An overview of the {contract} smart contract on the {network} network. This contract contains {actions} actions, {tables} tables, and {structs} structs.",
 	"contract_view_title": "Contract: {contract} | {network}",
-	"debit_and_credit_card_supported": "Debit and credit card supported",
+	"debit_and_credit_cards_supported": "Debit and credit cards supported",
 	"delegation_metadata_refund_description": "Claim previously delegated {network} tokens.",
 	"delegation_metadata_refund_title": "Refund Delegated {network} Tokens",
 	"details": "Details",

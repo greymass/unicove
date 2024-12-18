@@ -19,7 +19,7 @@
 			limits: {
 				daily: m._500_per_day()
 			},
-			details: [m.buy_or_transfer_crypto(), m.debit_and_credit_card_supported()],
+			details: [m.buy_or_transfer_crypto(), m.debit_and_credit_cards_supported()],
 			action: {
 				text: m.buy_eos_with_coinbase(),
 				handler: 'coinbase',
@@ -164,9 +164,9 @@
 					<div class="border-gray-300 col-span-2 border-t border-t-[0.5px]"></div>
 				</div>
 				<p class="text-md my-2">{m.details()}</p>
-				<ul class="list-disc pl-6 text-sm text-white">
+				<ul class="list-disc pl-6">
 					{#each service.details as detail}
-						<li>{detail}</li>
+						<li class="text-sm text-white">{detail}</li>
 					{/each}
 				</ul>
 			</div>
