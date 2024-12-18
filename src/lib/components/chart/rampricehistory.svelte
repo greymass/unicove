@@ -79,7 +79,7 @@
 				responsive: true,
 				maintainAspectRatio: false,
 				interaction: {
-					mode: 'x',
+					mode: 'nearest',
 					intersect: false
 				},
 				scales: {
