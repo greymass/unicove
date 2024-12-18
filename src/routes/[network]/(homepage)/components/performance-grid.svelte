@@ -29,7 +29,7 @@
 	});
 </script>
 
-<section class="col-span-full grid grid-cols-subgrid gap-8">
+<section class="col-span-full grid grid-cols-subgrid gap-4">
 	<!-- Text -->
 	<div
 		class="col-span-full row-start-2 grid items-center text-balance lg:col-span-3 lg:row-start-1"
@@ -50,61 +50,65 @@
 
 	<!-- Grid -->
 	<div
-		class="col-span-full grid grid-cols-2 gap-4 sm:grid-cols-5 lg:col-start-4 xl:col-span-5 xl:col-start-5"
+		class="col-span-full grid content-start gap-4 @container lg:col-start-4 xl:col-span-5 xl:col-start-5"
 	>
-		<Card class="col-span-1 sm:col-span-2">
-			<div class="grid content-between gap-2">
-				<h3 class="text-base text-white/60">
-					{network.chain.systemToken?.symbol.name}/{network.tokenprice?.symbol.name}
-				</h3>
-				<p class="justify-self-end text-xl text-white">
-					<AssetText value={network.tokenprice} variant="full" />
-				</p>
-			</div>
-		</Card>
-		<Card class="col-span-1 sm:col-span-2 sm:row-span-2">
-			<div class="grid content-between gap-2">
-				<h3 class="text-base text-white/60">Native TVL</h3>
-				<p class="justify-self-end text-xl text-white">
-					<AssetText value={tvl} variant="short" />
-				</p>
-			</div>
-		</Card>
-		<Card class="col-span-1 row-span-2 sm:col-span-1">
-			<img
-				class="rounded-full bg-mineShaft-950 object-contain px-2 py-4"
-				src={networkLogo}
-				alt={networkName}
-			/>
-		</Card>
-		<Card class="col-span-1 row-span-2 sm:col-span-2">
-			<div class="grid content-between gap-2">
-				<h3 class="text-base text-white/60">RAM/EOS</h3>
-				<p class="justify-self-end text-xl text-white">
-					<AssetText value={network.ramprice?.eos} variant="full" />
-				</p>
-			</div>
-		</Card>
-		<Card class="col-span-1 sm:col-span-3">
-			<div class="grid content-between gap-2">
-				<h3 class="text-base text-white/60">???</h3>
-			</div>
-		</Card>
-		<Card class="col-span-1 sm:col-span-3">
-			<div class="grid content-between gap-2">
-				<h3 class="text-base text-white/60">EOS Market Cap</h3>
-				<p class="justify-self-end text-xl text-white">
+		<div id="performance-row-1" class="grid gap-4 @lg:grid-cols-[1fr_auto_1fr]">
+			<!-- Market Cap -->
+			<Card class="grid content-between gap-4  bg-mineShaft-900/40">
+				<h3 class="text-muted text-sm">EOS Market Cap</h3>
+				<p class="justify-self-end text-nowrap text-xl font-semibold text-white">
 					<AssetText value={network.marketcap} variant="short" />
 				</p>
-			</div>
-		</Card>
-		<Card class="col-span-1 sm:col-span-2">
-			<div class="grid content-between gap-2">
-				<h3 class="text-base text-white/60">RAM/USD</h3>
-				<p class="justify-self-end text-xl text-white">
+			</Card>
+
+			<!-- Network logo -->
+			<!-- contain:size lets us keep the auto grid height while preventing the content from setting the height -->
+			<Card class="order-first @lg:order-none @lg:aspect-square @lg:[contain:size]">
+				<img
+					class="object-contain"
+					src={networkLogo}
+					alt={networkName}
+					loading="lazy"
+					width="200"
+					height="200"
+				/>
+			</Card>
+
+			<!-- Native TVL -->
+			<Card class="grid content-between gap-4 bg-mineShaft-900/60">
+				<h3 class="text-muted text-sm">Native TVL</h3>
+				<p class="justify-self-end text-nowrap text-xl font-semibold text-white">
+					<AssetText value={tvl} variant="short" />
+				</p>
+			</Card>
+		</div>
+
+		<div id="performance-row-2" class="grid gap-4 @lg:grid-cols-3">
+			<!-- Token price -->
+			<Card class="grid flex-1 content-between gap-4 @sm:shrink">
+				<h3 class="text-muted text-sm">
+					{network.chain.systemToken?.symbol.name}/{network.tokenprice?.symbol.name}
+				</h3>
+				<p class="justify-self-end text-nowrap text-xl font-semibold text-white">
+					<AssetText value={network.tokenprice} variant="full" />
+				</p>
+			</Card>
+
+			<!-- Ram Eos pair -->
+			<Card class="grid flex-1 content-between gap-4  bg-mineShaft-900/60">
+				<h3 class="text-muted text-sm">RAM/EOS</h3>
+				<p class="justify-self-end text-nowrap text-xl font-semibold text-white">
+					<AssetText value={network.ramprice?.eos} variant="full" />
+				</p>
+			</Card>
+
+			<!-- Ram price -->
+			<Card class="grid flex-1 content-between gap-4 bg-mineShaft-900/40">
+				<h3 class="text-muted text-sm">RAM/USD</h3>
+				<p class="justify-self-end text-nowrap text-xl font-semibold text-white">
 					<AssetText value={network.ramprice?.usd} variant="full" />
 				</p>
-			</div>
-		</Card>
+			</Card>
+		</div>
 	</div>
 </section>

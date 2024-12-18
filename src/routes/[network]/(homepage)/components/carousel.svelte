@@ -65,7 +65,7 @@
 				text={`MetaMask, an the industry leading self-custody wallet, is now compatible with Unicove and the ${networkName} network. Install the ${networkName} Wallet snap for MetaMask to get started.`}
 			>
 				<HomepageButton
-					class="bg-solar-500 px-8 text-solar-950
+					class="mt-0.5 bg-solar-500 px-8 text-solar-950
 					    hover:active:bg-solar-600 hover:active:text-solar-950 [@media(any-hover:hover)]:hover:bg-solar-400 [@media(any-hover:hover)]:hover:text-solar-950"
 					text="Install EOS Wallet"
 					href={`/${network}/metamask`}
