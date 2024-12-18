@@ -200,11 +200,11 @@
 				rel="noopener noreferrer"
 				class="block h-full transition-all hover:scale-105"
 			>
-				<div class="relative mb-4 aspect-square overflow-hidden rounded-lg bg-mineShaft-900 p-4">
+				<div class="mb-4 aspect-square grid place-items-center rounded-lg bg-mineShaft-900 p-4">
 					<img
 						src={exchange.logo}
 						alt="{exchange.name} logo"
-						class="absolute left-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 transform object-cover p-4"
+						class="size-full object-cover p-4"
 					/>
 				</div>
 				<h3 class="text-center text-lg font-medium">{exchange.name}</h3>
