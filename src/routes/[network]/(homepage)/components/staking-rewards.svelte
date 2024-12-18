@@ -31,8 +31,12 @@
 						.chain.systemToken?.symbol.name} daily to token holders who have staked their tokens. These
 					tokens can be unstaked and will be usable again after a 21 day lockup period.
 				</p>
-				<div class="flex gap-6">
-					<Button href={`/${network}/staking`} text="Stake Tokens" />
+				<div class="mt-2 flex gap-6">
+					<Button
+						class="border border-mineShaft-600 px-6"
+						href={`/${network}/staking`}
+						text="Stake Tokens"
+					/>
 					<Button href="#" text="Learn more" icon />
 				</div>
 				<p class="text-muted text-xs">
