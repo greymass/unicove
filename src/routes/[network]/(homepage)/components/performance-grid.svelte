@@ -63,9 +63,11 @@
 
 			<!-- Network logo -->
 			<!-- contain:size lets us keep the auto grid height while preventing the content from setting the height -->
-			<Card class="order-first @lg:order-none @lg:aspect-square @lg:[contain:size]">
+			<Card
+				class="order-first flex justify-center @lg:order-none @lg:aspect-square @lg:[contain:size]"
+			>
 				<img
-					class="object-contain"
+					class="max-h-24 object-contain"
 					src={networkLogo}
 					alt={networkName}
 					loading="lazy"
