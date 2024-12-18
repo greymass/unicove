@@ -5,6 +5,7 @@
 	import StakedHEX from './stakedhex.svelte';
 	import { getAPR } from '$lib/utils/staking';
 	import Switcher from '$lib/components/layout/switcher.svelte';
+	import Box from '$lib/components/layout/box/box.svelte';
 
 	interface Props {
 		network: NetworkState;
@@ -15,10 +16,10 @@
 	const apr = $derived(getAPR(network));
 </script>
 
-<section class="col-span-full xl:col-start-2">
+<section class="col-span-full">
 	<Switcher class="flex-wrap-reverse gap-y-12" threshold="40rem">
 		<!-- Text -->
-		<div class="col-span-full">
+		<Box class="col-span-full">
 			<Stack class="max-w-md items-start">
 				<h2 class="h3 leading-tight">EOS Staking Rewards</h2>
 				<p>
@@ -37,13 +38,13 @@
 						href={`/${network}/staking`}
 						text="Stake Tokens"
 					/>
-					<Button href="#" text="Learn more" icon />
+					<Button href="https://eosnetwork.com/staking-rewards/" text="Learn more" icon />
 				</div>
 				<p class="text-muted text-xs">
 					<sup>1</sup> APR is based on the total amount staked and dynamically changes over time.
 				</p>
 			</Stack>
-		</div>
+		</Box>
 
 		<!-- Graphics -->
 		<div class="col-span-full grid place-items-center">

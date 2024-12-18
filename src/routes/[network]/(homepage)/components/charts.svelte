@@ -15,8 +15,11 @@
 	let { ramPrices, tokenPrices, network }: Props = $props();
 </script>
 
-<section id="charts" class="col-span-full grid grid-cols-subgrid">
-	<Stack class="col-span-4 col-start-1">
+<section
+	id="charts"
+	class="col-span-full grid grid-cols-2 gap-12 @container xl:grid-cols-9 xl:gap-x-4"
+>
+	<Stack class="col-span-full @3xl:col-span-1 xl:col-span-4">
 		{#if tokenPrices.length}
 			<EOSPriceHistory data={tokenPrices} />
 		{/if}
@@ -35,7 +38,7 @@
 		</Box>
 	</Stack>
 
-	<Stack class="col-span-4 col-start-6">
+	<Stack class="col-span-full @3xl:col-span-1 xl:col-span-4 xl:col-start-6">
 		{#if ramPrices.length}
 			<RamPriceHistory data={ramPrices} />
 		{/if}
