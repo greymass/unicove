@@ -139,20 +139,14 @@
 		// set the flag to prevent banner showing on next load
 		localStorage.setItem('hide-v1-banner', 'true');
 	}
-
-	// Deduplicate chain logos
-	let logoSet = Array.from(new Set(chainLogos.values())).map(String);
 </script>
 
-<!-- Preload current chain logo, prefetch the rest to avoid future pop-in -->
+<!-- Preload current chain logo -->
 <svelte:head>
-	{#each logoSet as logoSrc}
-		{#if logoSrc === chainLogos.get(String(data.network.chain.id))}
-			<link rel="preload" href={logoSrc} as="image" type="image/png" />
-		{:else}
-			<link rel="prefetch" href={logoSrc} as="image" type="image/png" />
-		{/if}
-	{/each}
+	{#if chainLogos.get(String(data.network.chain.id)) !== undefined}
+		{@const chainLogo = String(chainLogos.get(String(data.network.chain.id)))}
+		<link rel="preload" href={chainLogo} as="image" type="image/png" />
+	{/if}
 </svelte:head>
 
 {#if showBanner}
