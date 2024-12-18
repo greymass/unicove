@@ -99,7 +99,7 @@
 	"delegation_metadata_refund_title": "Refund Delegated {network} Tokens",
 	"details": "Details",
 	"error_loading_accounts": "Error loading accounts: {error}",
-	"exchanges": "Exchanges:",
+	"exchanges": "Exchanges",
 	"form_validation_insufficient_balance": "Insufficient {unit} balance. Please enter a smaller amount.",
 	"form_validation_invalid_number_decimals": "Invalid number, too many decimal places.",
 	"fund_account": "Fund Account",
