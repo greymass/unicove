@@ -142,7 +142,7 @@
 	}
 </script>
 
-<h4 class="h4">Token Purchase Providers:</h4>
+<h2 class="h4">Token Purchase Providers</h2>
 
 <MultiCard class="max-w-[700px]">
 	{#each ON_RAMP_PROVIDERS as service}
