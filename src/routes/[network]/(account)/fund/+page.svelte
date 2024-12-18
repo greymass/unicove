@@ -19,7 +19,7 @@
 			limits: {
 				daily: m._500_per_day()
 			},
-			details: [m.buy_or_transfer_crypto(), m.debit_and_credit_card_support()],
+			details: [m.buy_or_transfer_crypto(), m.debit_and_credit_card_supported()],
 			action: {
 				text: m.buy_eos_with_coinbase(),
 				handler: 'coinbase',
