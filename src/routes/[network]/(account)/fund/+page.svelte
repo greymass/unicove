@@ -7,8 +7,8 @@
 	import Button from '$lib/components/button/button.svelte';
 	import { env } from '$env/dynamic/public';
 	import * as m from '$lib/paraglide/messages';
-	import { MultiCard } from '$lib/components/layout';
 	import Grid from '$lib/components/layout/grid.svelte';
+	import { DL, DLRow, DD } from '$lib/components/descriptionlist';
 
 	const ON_RAMP_PROVIDERS = [
 		{
@@ -143,7 +143,7 @@
 	}
 </script>
 
-<div class="max-w-5xl space-y-4">
+<div class="max-w-5xl space-y-6">
 	<h2 class="h4">{m.token_purchase_providers()}</h2>
 
 	<Grid tag="ul" class="grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
@@ -153,28 +153,31 @@
 					<div class="mb-4 flex items-center justify-center">
 						<img src={service.logo} alt={service.id} class="h-24 w-3/5 object-contain" />
 					</div>
-					<div class="grid grid-cols-[1fr_auto] text-sm">
-						<div class="flex items-center py-2">
-							<p class="text-md">{m.processing_fees()}</p>
-							<p class="ml-auto text-white">{service.fees.range}</p>
-						</div>
-						<div class="border-gray-300 col-span-2 border-t border-t-[0.5px]"></div>
-						<div class="flex items-center py-2">
-							<p class="text-md">{m.limits()}</p>
-							<p class="ml-auto text-white">{service.limits.daily}</p>
-						</div>
-						<div class="border-gray-300 col-span-2 border-t border-t-[0.5px]"></div>
-					</div>
-					<p class="text-md my-2">{m.details()}</p>
-					<ul class="list-disc pl-6">
-						{#each service.details as detail}
-							<li class="text-sm text-white">{detail}</li>
-						{/each}
-					</ul>
+					<DL>
+						<DLRow title={m.processing_fees()}>
+							<DD>
+								<p class="text-white">{service.fees.range}</p>
+							</DD>
+						</DLRow>
+						<DLRow title={m.limits()}>
+							<DD>
+								<p class="text-white">{service.limits.daily}</p>
+							</DD>
+						</DLRow>
+						<DLRow title={m.details()}>
+							<DD>
+								<ul class="list-disc pl-6">
+									{#each service.details as detail}
+										<li class="text-left text-sm text-white">{detail}</li>
+									{/each}
+								</ul>
+							</DD>
+						</DLRow>
+					</DL>
 				</div>
 				<div class="mt-6">
 					{#if !context.account}
-						<p class="text-gray-300 text-sm">{m.must_be_logged_in_for_feature()}</p>
+						<p class="text-sm">{m.must_be_logged_in_for_feature()}</p>
 					{:else}
 						<Button
 							variant="secondary"
