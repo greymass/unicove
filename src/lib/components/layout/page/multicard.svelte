@@ -4,6 +4,7 @@
 	import type { HTMLAttributes } from 'svelte/elements';
 
 	interface Props extends HTMLAttributes<HTMLDivElement> {
+		tag?: string;
 		children: Snippet;
 		class?: string;
 	}
@@ -13,8 +14,9 @@
 
 <!-- What we really need here is `grid-template-rows: masonry` which is still in draft spec -->
 <!-- https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout/Masonry_layout -->
-<div
+<svelte:element
+	this={props.tag || 'div'}
 	class={cn('gap-6 *:mb-6 *:w-full *:break-inside-avoid last:*:mb-0 @2xl:columns-2', props.class)}
 >
 	{@render props.children()}
-</div>
+</svelte:element>
