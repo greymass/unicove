@@ -19,20 +19,12 @@
 	import { DL, DLRow, DD } from '$lib/components/descriptionlist';
 	import coinbaseLogo from '$lib/assets/exchanges/coinbase.svg';
 	import Stack from '$lib/components/layout/stack.svelte';
-	import MultiCard from '$lib/components/layout/page/multicard.svelte';
 	import Cluster from '$lib/components/layout/cluster.svelte';
 
 	const ON_RAMP_PROVIDERS = [
 		{
 			id: 'coinbase',
 			logo: coinbaseLogo,
-			fees: {
-				range: '1.49% - 3.99%'
-			},
-			limits: {
-				daily: m._500_per_day()
-			},
-			details: [m.buy_or_transfer_crypto(), m.debit_and_credit_cards_supported()],
 			action: {
 				text: m.buy_eos_with_coinbase(),
 				handler: 'coinbase'
@@ -155,9 +147,9 @@
 </script>
 
 <Stack class="gap-12">
-	<Stack>
-		<h2 class="h4">{m.token_purchase_providers()}</h2>
-
+	<Stack class="gap-4">
+		<h2 class="h4">{m.fund_direct_purchase()}</h2>
+		<p>{m.fund_direct_purchase_description()}</p>
 		<Cluster tag="ul">
 			{#each ON_RAMP_PROVIDERS as service}
 				<Card tag="li" class="max-w-sm p-6">
@@ -166,29 +158,20 @@
 							<img src={service.logo} alt={service.id} class="h-24 w-3/5 object-contain" />
 						</div>
 						<DL>
-							<DLRow title={m.processing_fees()}>
-								<DD>
-									<p class="text-white">{service.fees.range}</p>
-								</DD>
+							<DLRow title={m.fund_token_to_purchase()}>
+								<DD>{env.PUBLIC_EOS_COINBASE_ASSET}</DD>
 							</DLRow>
-							<DLRow title={m.limits()}>
-								<DD>
-									<p class="text-white">{service.limits.daily}</p>
-								</DD>
-							</DLRow>
-							<DLRow title={m.details()}>
-								{#each service.details as detail}
-									<DD class="text-white">{detail}</DD>
-								{/each}
+							<DLRow title={m.send_receiving_account()}>
+								<DD>{context.account?.name}</DD>
 							</DLRow>
 						</DL>
 					</div>
 
 					<div class="mt-6">
 						{#if !context.account}
-							<p class="text-sm">{m.must_be_logged_in_for_feature()}</p>
+							<p class="text-sm">{m.common_must_be_logged_in()}</p>
 						{:else}
-							<Button variant="secondary" class="w-full" onclick={() => handleOnRamp(service.id)}
+							<Button class="w-full" onclick={() => handleOnRamp(service.id)}
 								>{service.action.text}</Button
 							>
 						{/if}
@@ -199,9 +182,11 @@
 	</Stack>
 
 	<Stack class="gap-4">
-		<h2 class="h4">{m.exchanges()}</h2>
+		<h2 class="h4">{m.common_exchanges()}</h2>
 
-		<p>{m.where_eos_can_be_purchased()}</p>
+		<p>
+			{m.fund_exchange_description()}
+		</p>
 
 		<Grid tag="ul" itemWidth="10rem" class="">
 			{#each EXCHANGES as exchange}
