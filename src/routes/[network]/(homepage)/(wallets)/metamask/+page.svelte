@@ -12,11 +12,15 @@
 	import { Cluster, Stack } from '$lib/components/layout/index.js';
 	import { accountCreationPluginMetamask } from '$lib/state/client/wharf.svelte';
 	import { chainLogos } from '@wharfkit/common';
+	import { DD, DL, DLRow } from '$lib/components/descriptionlist/index.js';
+	import TextInput from '$lib/components/input/text.svelte';
+	import CopyButton from '$lib/components/button/copy.svelte';
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');
 
 	let metaMaskState: MetaMaskState = new MetaMaskState();
+	let packageInfo: any = $state();
 	let latestVersion: string | undefined = $state();
 	let isMetaMaskSession: boolean = $derived(
 		context.wharf.session?.walletPlugin.id === 'wallet-plugin-metamask'
@@ -69,7 +73,7 @@
 		const npmPackage = data.network.snapOrigin?.split(':')[1];
 
 		const response = await fetch(`https://registry.npmjs.org/${npmPackage}/latest`);
-		const packageInfo = await response.json();
+		packageInfo = await response.json();
 		latestVersion = packageInfo.version;
 	}
 
@@ -145,7 +149,11 @@
 			<div
 				class="col-start-1 row-start-1 grid max-w-sm grid-cols-3 items-center justify-items-center"
 			>
-				<img class="h-40" src={Metamask} alt="metamask" />
+				<img
+					class="h-40 rounded-full bg-mineShaft-950 object-contain"
+					src={Metamask}
+					alt="metamask"
+				/>
 				<svg width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path d="M18.008 0v36M36.008 18h-36" stroke="#fff" />
 				</svg>
@@ -219,22 +227,6 @@
 							<Button onclick={createAccountAndLogin}>Create an account</Button>
 						</Cluster>
 					{/if}
-					{#if context.settings.data.advancedMode}
-						<Stack class="mb-1 gap-2">
-							<p>EOS Wallet Public Key (Active)</p>
-							<p class="font-mono text-xs">
-								<a href={`/${data.network}/key/${metaMaskState.publicKey}`}>
-									{metaMaskState.publicKey}
-								</a>
-							</p>
-							<p>EOS Wallet Public Key (Owner)</p>
-							<p class="font-mono text-xs">
-								<a href={`/${data.network}/key/${metaMaskState.ownerKey}`}>
-									{metaMaskState.ownerKey}
-								</a>
-							</p>
-						</Stack>
-					{/if}
 				{/if}
 			{:else}
 				<h2 class="text-xl font-semibold">Add EOS Wallet to MetaMask</h2>
@@ -257,95 +249,163 @@
 	</a>
 {/snippet}
 
-<section class="max-w-prose space-y-4">
-	<h2 class="text-2xl font-semibold">FAQ</h2>
-	<h3 class="text-md font-semibold">What is a MetaMask snap?</h3>
-	<p>
-		{@render link('MetaMask Snaps', 'https://metamask.io/snaps/')} are a new feature in MetaMask that
-		allow community built plugins to extend the functionality of the wallet beyond Ethereum based blockchains.
-		This means you can now access the EOS Network through MetaMask using the EOS Wallet snap.
-	</p>
+<div class="mt-8 flex flex-row flex-wrap gap-16">
+	<section class="max-w-prose space-y-4">
+		<h2 class="text-2xl font-semibold">FAQ</h2>
+		<h3 class="text-md font-semibold">What is a MetaMask snap?</h3>
+		<p>
+			{@render link('MetaMask Snaps', 'https://metamask.io/snaps/')} are a new feature in MetaMask that
+			allow community built plugins to extend the functionality of the wallet beyond Ethereum based blockchains.
+			This means you can now access the EOS Network through MetaMask using the EOS Wallet snap.
+		</p>
 
-	<h3 class="text-md font-semibold">How do I install the EOS Wallet?</h3>
-	<p>
-		The EOS Wallet is a {@render link('MetaMask Snap', 'https://metamask.io/snaps/')}
-		you can install directly from this page on Unicove or from the EOS Wallet page in the
-		{@render link('MetaMask Snaps Directory', 'https://snaps.metamask.io/')}. You will need to have
-		MetaMask installed before adding the EOS Wallet snap.
-	</p>
+		<h3 class="text-md font-semibold">How do I install the EOS Wallet?</h3>
+		<p>
+			The EOS Wallet is a {@render link('MetaMask Snap', 'https://metamask.io/snaps/')}
+			you can install directly from this page on Unicove or from the EOS Wallet page in the
+			{@render link(
+				'MetaMask Snaps Directory',
+				'https://snaps.metamask.io/snap/npm/greymass/eos-wallet'
+			)}. You will need to have
+			{@render link('MetaMask', 'https://metamask.io/')}
+			installed before adding the EOS Wallet snap.
+		</p>
 
-	<h3 class="text-md font-semibold">What does the EOS Wallet do?</h3>
-	<p>
-		The EOS Wallet allows you to use MetaMask as a web3 wallet for an EOS Network account. Any dApp
-		compatible with the EOS Wallet can be used with MetaMask.
-	</p>
+		<h3 class="text-md font-semibold">What does the EOS Wallet do?</h3>
+		<p>
+			The EOS Wallet allows you to use MetaMask as a web3 wallet for an EOS Network account. With it
+			you can sign in to EOS apps and perform transactions.
+		</p>
 
-	<h3 class="text-md font-semibold">What does the EOS Wallet not do?</h3>
-	<p>
-		The EOS Wallet's only purpose is to sign transactions and will need to be paired with a
-		companion dApp, such as Unicove, in order to manage your account.
-	</p>
+		<h3 class="text-md font-semibold">What does the EOS Wallet not do?</h3>
+		<p>
+			The EOS Wallet's only purpose is to sign transactions and will need to be paired with a
+			companion dApp, such as Unicove, in order to manage your account.
+		</p>
 
-	<h3 class="text-md font-semibold">How do I sign transactions using the EOS Wallet?</h3>
-	<p>
-		Please see our guide on
-		{@render link(
-			'How to Sign Transactions on the EOS network with MetaMask',
-			'https://support.greymass.com/a/solutions/articles/72000637277'
-		)}
-	</p>
+		<h3 class="text-md font-semibold">How do I sign transactions using the EOS Wallet?</h3>
+		<p>
+			Please see our guide on
+			{@render link(
+				'How to Sign Transactions on the EOS network with MetaMask',
+				'https://support.greymass.com/a/solutions/articles/72000637277'
+			)}
+		</p>
 
-	<h3 class="text-md font-semibold">Is the EOS Wallet free to use?</h3>
-	<p>
-		Yes, the EOS Wallet software is completely free to use. However, accounts on the EOS Network
-		require a small amount of EOS before they are created.
-	</p>
-	<p>
-		Unicove is currently covering this cost and offering one free account per user. To limit abuse,
-		we require logging in with a valid 3rd party account. Only Apple and Google accounts are
-		supported at this time.
-	</p>
-	<h3 class="text-md font-semibold">Where can I view and manage my EOS account?</h3>
-	<p>
-		Unicove is the first web wallet to allow you to manage your EOS account using MetaMask. We
-		expect other wallets will add support in the future.
-	</p>
-	<p>
-		You can view your account on any EOS Network block explorer, like Unicove, simply by searching
-		for the account name.
-	</p>
+		<h3 class="text-md font-semibold">Is the EOS Wallet free to use?</h3>
+		<p>
+			Yes, the EOS Wallet software is completely free to use. However, accounts on the EOS Network
+			require a small amount of EOS before they are created.
+		</p>
+		<p>
+			Unicove is currently covering this cost and offering one free account per user. To limit
+			abuse, we require logging in with a valid 3rd party account. Only Apple and Google accounts
+			are supported at this time.
+		</p>
+		<h3 class="text-md font-semibold">Where can I view and manage my EOS account?</h3>
+		<p>
+			Unicove is the first web wallet to allow you to manage your EOS account using MetaMask. We
+			expect other wallets will add support in the future.
+		</p>
+		<p>
+			You can view your account on any EOS Network block explorer, like Unicove, simply by searching
+			for the account name.
+		</p>
 
-	<h3 class="text-md font-semibold">
-		Is my private key or recovery phrase exposed when using the EOS Wallet Snap?
-	</h3>
-	<p>
-		The EOS Wallet uses a private key derived from your MetaMask seed phrase using the BIP-0044 and
-		the EOS coin type. This private key is only ever used for EOS accounts and the EOS Wallet cannot
-		access any of your other keys. The EOS Wallet never exposes this private key and does not have
-		access to your seed phrase.
-	</p>
+		<h3 class="text-md font-semibold">
+			Is my private key or recovery phrase exposed when using the EOS Wallet Snap?
+		</h3>
+		<p>
+			The EOS Wallet uses a private key derived from your MetaMask seed phrase using the BIP-0044
+			and the EOS coin type. This private key is only ever used for EOS accounts and the EOS Wallet
+			cannot access any of your other keys. The EOS Wallet never exposes this private key and does
+			not have access to your seed phrase.
+		</p>
 
-	<h3 class="text-md font-semibold">Can I access all EOS apps?</h3>
-	<p>
-		It's possible to access any EOS Network app, provided the app developers have integrated the
-		required SDKs. The EOS Wallet and MetaMask can be added to any web app using
-		{@render link('Wharf', 'https://wharfkit.com/')}
-		with the
-		{@render link('MetaMask Wallet Plugin', 'https://github.com/wharfkit/wallet-plugin-metamask')}.
-	</p>
-	<p>
-		Unicove itself is
-		{@render link('open source', 'https://github.com/greymass/2nicove')}
-		and serves as reference material for how this integration can be performed.
-	</p>
+		<h3 class="text-md font-semibold">How does MetaMask configure my owner and active keys?</h3>
+		<p>
+			The EOS Wallet derives your owner and active keys from your MetaMask seed phrase using
+			different indexes. The zero (0) index key is reserved for the owner key and is not available
+			to sign regular transactions with, while the first (1) index key is used for the active key
+			and available for transaction signing.
+		</p>
+		<p>
+			A future update to the EOS Wallet will provide a way to use the owner key to reset the active
+			key, allowing for a recovery path in the event the active keys have been changed.
+		</p>
 
-	<h3 class="text-md font-semibold">How do I reach out for EOS Wallet support?</h3>
-	<p>If you have any issues with the EOS Wallet itself, please feel free to reach out to us at</p>
-	<address class="text-muted inline">
-		<a href="mailto:support@greymass.com">support@greymass.com</a>
-	</address>
-	<p class="inline">
-		or by visiting our Support portal at
-		{@render link('https://support.greymass.com', 'https://support.greymass.com')}
-	</p>
-</section>
+		<h3 class="text-md font-semibold">How does find my owner and active keys?</h3>
+		<p>
+			The EOS Wallet provides an RPC method which returns the public keys associated with your
+			MetaMask seed phrase. These can be used when manually setting up a new account. Unicove can
+			display these keys to you if you visit the Settings page and enable Advanced Mode.
+		</p>
+
+		<h3 class="text-md font-semibold">Can I access all EOS apps using EOS Wallet for MetaMask?</h3>
+		<p>
+			It's possible to access any EOS Network app, provided the app developers have integrated the
+			required SDKs. The EOS Wallet and MetaMask can be added to any web app using
+			{@render link('Wharf', 'https://wharfkit.com/')}
+			with the
+			{@render link(
+				'MetaMask Wallet Plugin',
+				'https://github.com/wharfkit/wallet-plugin-metamask'
+			)}.
+		</p>
+		<p>
+			Unicove itself is
+			{@render link('open source', 'https://github.com/greymass/2nicove')}
+			and serves as reference material for how this integration can be performed.
+		</p>
+
+		<h3 class="text-md font-semibold">How do I reach out for EOS Wallet support?</h3>
+		<p>If you have any issues with the EOS Wallet itself, please feel free to reach out to us at</p>
+		<address class="text-muted inline">
+			<a href="mailto:support@greymass.com">support@greymass.com</a>
+		</address>
+		<p class="inline">or by visiting our Support portal at:</p>
+		<p>{@render link('https://support.greymass.com', 'https://support.greymass.com')}</p>
+	</section>
+	<div class="w-80">
+		<Stack class="gap-4">
+			{#if context.settings.data.advancedMode}
+				<h2 class="text-2xl font-semibold">Your Public Keys</h2>
+				{#if metaMaskState.publicKey}
+					<p>MetaMask Public Key (Active)</p>
+					<TextInput bind:value={metaMaskState.publicKey} disabled>
+						<CopyButton data={String(metaMaskState.publicKey)} />
+					</TextInput>
+				{/if}
+				{#if metaMaskState.ownerKey}
+					<p>MetaMask Public Key (Owner)</p>
+					<TextInput bind:value={metaMaskState.ownerKey} disabled>
+						<CopyButton data={String(metaMaskState.ownerKey)} />
+					</TextInput>
+				{/if}
+			{/if}
+			<h2 class="text-2xl font-semibold">Details</h2>
+			<DL>
+				<DLRow title="Snaps Directory">
+					<DD>
+						<a href="https://snaps.metamask.io/snap/npm/greymass/eos-wallet"> EOS Wallet </a>
+					</DD>
+				</DLRow>
+
+				<DLRow title="Source Code">
+					<DD>
+						<a href="https://github.com/greymass/antelope-snap/tree/eos"> GitHub </a>
+					</DD>
+				</DLRow>
+				{#if latestVersion}
+					<DLRow title="Latest Version">
+						<DD>
+							<a href="https://www.npmjs.com/package/@greymass/eos-wallet?activeTab=versions">
+								{latestVersion}
+							</a>
+						</DD>
+					</DLRow>
+				{/if}
+			</DL>
+		</Stack>
+	</div>
+</div>

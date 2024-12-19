@@ -58,16 +58,33 @@
 
 		<Card id="eos" title="EOS" class="break-after-avoid">
 			<Stack>
-				<Stack class="gap-2">
-					<h4 class="text-muted text-base leading-none">Value</h4>
-					<p class="text-xl font-semibold leading-none text-white">
-						<AssetText variant="full" value={tokenValue} />
-					</p>
-					<Chip>
-						<TradingPair value={tokenPrice} />
-						<!-- TODO: Percent change -->
-					</Chip>
-				</Stack>
+				<div
+					class="col-span-full grid min-h-12 grid-cols-subgrid items-center gap-x-4 border-mineShaft-900"
+				>
+					<div
+						class="col-start-1 col-end-3 row-start-1 flex flex-col py-2 @xs:flex-row @xs:justify-between"
+					>
+						<Stack class="gap-2">
+							<h4 class="text-muted text-base leading-none">Value</h4>
+							<p class="text-xl font-semibold leading-none text-white">
+								<AssetText variant="full" value={tokenValue} />
+							</p>
+							<Chip>
+								<TradingPair value={tokenPrice} />x
+								<!-- TODO: Percent change -->
+							</Chip>
+						</Stack>
+					</div>
+
+					<div class="col-span-2 col-start-2 row-start-1 text-right @xs:col-span-1 @xs:col-start-3">
+						<a
+							class="inline-block h-12 content-center text-skyBlue-500 hover:text-skyBlue-400"
+							href={`/${data.network}/fund`}
+						>
+							Add Funds
+						</a>
+					</div>
+				</div>
 
 				<Breakdown {isCurrentUser}>
 					<BreakdownRow
