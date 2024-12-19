@@ -143,12 +143,12 @@
 	}
 </script>
 
-<div class="mx-auto max-w-4xl px-4">
-	<h2 class="h4">Token Purchase Providers</h2>
+<div class="max-w-5xl space-y-4">
+	<h2 class="h4">{m.token_purchase_providers()}</h2>
 
-	<Grid tag="ul">
-		{#each [...ON_RAMP_PROVIDERS, ...ON_RAMP_PROVIDERS] as service}
-			<Card tag="li" class="h-full max-w-[350px] p-6">
+	<Grid tag="ul" class="grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
+		{#each ON_RAMP_PROVIDERS as service}
+			<Card tag="li" class="h-full w-full p-6">
 				<div>
 					<div class="mb-4 flex items-center justify-center">
 						<img src={service.logo} alt={service.id} class="h-24 w-3/5 object-contain" />
@@ -193,9 +193,9 @@
 		{m.where_eos_can_be_purchased()}
 	</p>
 
-	<Grid tag="ul">
+	<Grid tag="ul" class="grid-cols-2 lg:grid-cols-4">
 		{#each EXCHANGES as exchange}
-			<Card tag="li" class="h-full max-w-[250px] p-6">
+			<Card tag="li" class="h-full w-full">
 				<a
 					href={exchange.url}
 					target="_blank"

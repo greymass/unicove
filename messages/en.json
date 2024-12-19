@@ -165,5 +165,6 @@
 	"tokens_purchase_providers": "Tokens can be purchased directly through the following providers:",
 	"total_proceeds": "Total Proceeds",
 	"where_eos_can_be_purchased": "EOS can be purchased through a number of platforms, depending on the users needs and location.\n\tBelow are some of the most popular options available.",
-	"fund_account_seo_description": "Learn how to fund your account with EOS tokens through various methods including cryptocurrency exchanges and on-ramp providers."
+	"fund_account_seo_description": "Learn how to fund your account with EOS tokens through various methods including cryptocurrency exchanges and on-ramp providers.",
+	"token_purchase_providers": "Token Purchase Providers"
 }
