@@ -20,6 +20,7 @@
 	import coinbaseLogo from '$lib/assets/exchanges/coinbase.svg';
 	import Stack from '$lib/components/layout/stack.svelte';
 	import MultiCard from '$lib/components/layout/page/multicard.svelte';
+	import Cluster from '$lib/components/layout/cluster.svelte';
 
 	const ON_RAMP_PROVIDERS = [
 		{
@@ -157,9 +158,9 @@
 	<Stack>
 		<h2 class="h4">{m.token_purchase_providers()}</h2>
 
-		<MultiCard tag="ul">
+		<Cluster tag="ul">
 			{#each ON_RAMP_PROVIDERS as service}
-				<Card tag="li" class="p-6">
+				<Card tag="li" class="max-w-sm p-6">
 					<div>
 						<div class="mb-4 flex items-center justify-center">
 							<img src={service.logo} alt={service.id} class="h-24 w-3/5 object-contain" />
@@ -194,7 +195,7 @@
 					</div>
 				</Card>
 			{/each}
-		</MultiCard>
+		</Cluster>
 	</Stack>
 
 	<Stack class="gap-4">
