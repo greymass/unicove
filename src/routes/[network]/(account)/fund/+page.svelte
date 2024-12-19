@@ -211,11 +211,11 @@
 					rel="noopener noreferrer"
 					class="block h-full transition-all hover:scale-105"
 				>
-					<div class="mb-4 grid aspect-square place-items-center rounded-lg bg-mineShaft-900 p-4">
+					<div class="mb-4 aspect-square rounded-lg bg-mineShaft-900">
 						<enhanced:img
 							src={exchange.logo}
 							alt="{exchange.name} logo"
-							class="size-full object-cover p-4"
+							class="size-full object-cover object-center p-4"
 						/>
 					</div>
 					<h3 class="text-center text-lg font-medium">{exchange.name}</h3>
