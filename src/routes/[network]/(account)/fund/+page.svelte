@@ -2,14 +2,15 @@
 	import { getContext } from 'svelte';
 	import Card from '$lib/components/layout/box/card.svelte';
 	import Code from '$lib/components/code.svelte';
-	import binanceLogo from '$lib/assets/exchanges/binance.webp';
-	import coinbaseIconLogo from '$lib/assets/exchanges/coinbase-icon.webp';
-	import krakenLogo from '$lib/assets/exchanges/kraken.webp';
-	import okxLogo from '$lib/assets/exchanges/okx.webp';
-	import huobiLogo from '$lib/assets/exchanges/huobi.webp';
-	import gateioLogo from '$lib/assets/exchanges/gate-io.webp';
-	import upbitLogo from '$lib/assets/exchanges/upbit.webp';
-	import kucoinLogo from '$lib/assets/exchanges/kucoin.webp';
+	import binanceLogo from '$lib/assets/exchanges/binance.webp?enhanced';
+	import coinbaseIconLogo from '$lib/assets/exchanges/coinbase-icon.webp?enhanced';
+	import krakenLogo from '$lib/assets/exchanges/kraken.webp?enhanced';
+	import okxLogo from '$lib/assets/exchanges/okx.webp?enhanced';
+	import huobiLogo from '$lib/assets/exchanges/huobi.webp?enhanced';
+	import gateioLogo from '$lib/assets/exchanges/gate-io.webp?enhanced';
+	import upbitLogo from '$lib/assets/exchanges/upbit.webp?enhanced';
+	import kucoinLogo from '$lib/assets/exchanges/kucoin.webp?enhanced';
+	import coinbaseLogo from '$lib/assets/exchanges/coinbase.svg';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { initOnRamp, type CBPayInstanceType, type InitOnRampParams } from '@coinbase/cbpay-js';
 	import Button from '$lib/components/button/button.svelte';
@@ -17,7 +18,6 @@
 	import * as m from '$lib/paraglide/messages';
 	import Grid from '$lib/components/layout/grid.svelte';
 	import { DL, DLRow, DD } from '$lib/components/descriptionlist';
-	import coinbaseLogo from '$lib/assets/exchanges/coinbase.svg';
 
 	const ON_RAMP_PROVIDERS = [
 		{
@@ -212,7 +212,7 @@
 					class="block h-full transition-all hover:scale-105"
 				>
 					<div class="mb-4 grid aspect-square place-items-center rounded-lg bg-mineShaft-900 p-4">
-						<img
+						<enhanced:img
 							src={exchange.logo}
 							alt="{exchange.name} logo"
 							class="size-full object-cover p-4"
