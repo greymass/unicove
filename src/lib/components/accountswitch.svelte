@@ -17,6 +17,7 @@
 	import PlusIcon from 'lucide-svelte/icons/plus';
 	import { goto } from '$app/navigation';
 	import { languageTag } from '$lib/paraglide/runtime';
+	import { cn } from '$lib/utils/style';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -74,27 +75,12 @@
 	let logo = $derived(chainLogos.get(String(context.wharf.session?.chain.id)) || '');
 </script>
 
-<!-- [@media(any-hover:hover)]:hover:opacity-80 -->
-
 <!-- Trigger Button -->
 <button
-	class="
-	relative
-	z-50
-	h-10
-	text-nowrap
-	rounded-lg
-	border
-	border-mineShaft-600
-	text-base
-	font-medium
-	focus:outline-transparent
-	focus-visible:outline
-	focus-visible:ring-2
-	focus-visible:ring-inset
-	focus-visible:ring-solar-500
-	{className}
-	"
+	class={cn(
+		'relative z-50 h-10 text-nowrap rounded-lg border border-mineShaft-600 text-base font-medium focus:outline-transparent focus-visible:outline focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-solar-500',
+		className
+	)}
 	use:melt={$trigger}
 	aria-label="account-switcher-label"
 	id="account-switcher"
@@ -107,6 +93,8 @@
 					src={String(logo)}
 					alt={context.wharf.session.chain.name}
 					class="size-full object-contain"
+					height="20"
+					width="20"
 				/>
 			</picture>
 			<span class="pointer-events-none z-10 text-base text-white/90"

@@ -51,6 +51,7 @@
 		"@accuser/svelte-plausible-analytics": "^1.0.0",
 		"@coinbase/cbpay-js": "^2.4.0",
 		"@fontsource/jetbrains-mono": "^5.1.0",
+		"@sveltejs/enhanced-img": "^0.4.4",
 		"@tailwindcss/container-queries": "^0.1.1",
 		"@wharfkit/account": "^1.3.0",
 		"@wharfkit/account-creation-plugin-greymass": "^1.2.0",

@@ -11,7 +11,7 @@
 		itemWidth?: string;
 	}
 
-	const { tag, children, itemWidth = '20ch', class: className, ...props }: Props = $props();
+	const { tag = 'div', children, itemWidth = '20ch', class: className, ...props }: Props = $props();
 </script>
 
 <svelte:element
