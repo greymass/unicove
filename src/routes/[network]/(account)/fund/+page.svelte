@@ -23,8 +23,7 @@
 			details: [m.buy_or_transfer_crypto(), m.debit_and_credit_cards_supported()],
 			action: {
 				text: m.buy_eos_with_coinbase(),
-				handler: 'coinbase',
-				className: 'bg-blue-600 hover:bg-blue-500'
+				handler: 'coinbase'
 			}
 		}
 	] as const;
@@ -179,10 +178,8 @@
 					{#if !context.account}
 						<p class="text-sm">{m.must_be_logged_in_for_feature()}</p>
 					{:else}
-						<Button
-							variant="secondary"
-							class="{service.action.className} w-full"
-							onclick={() => handleOnRamp(service.id)}>{service.action.text}</Button
+						<Button variant="secondary" class="w-full" onclick={() => handleOnRamp(service.id)}
+							>{service.action.text}</Button
 						>
 					{/if}
 				</div>
