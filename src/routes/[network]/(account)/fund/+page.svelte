@@ -1,19 +1,28 @@
 <script lang="ts">
+	import { getContext } from 'svelte';
 	import Card from '$lib/components/layout/box/card.svelte';
 	import Code from '$lib/components/code.svelte';
+	import binanceLogo from '$lib/assets/exchanges/binance.webp';
+	import coinbaseIconLogo from '$lib/assets/exchanges/coinbase-icon.webp';
+	import krakenLogo from '$lib/assets/exchanges/kraken.webp';
+	import okxLogo from '$lib/assets/exchanges/okx.webp';
+	import huobiLogo from '$lib/assets/exchanges/huobi.webp';
+	import gateioLogo from '$lib/assets/exchanges/gate-io.webp';
+	import upbitLogo from '$lib/assets/exchanges/upbit.webp';
+	import kucoinLogo from '$lib/assets/exchanges/kucoin.webp';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import { getContext } from 'svelte';
 	import { initOnRamp, type CBPayInstanceType, type InitOnRampParams } from '@coinbase/cbpay-js';
 	import Button from '$lib/components/button/button.svelte';
 	import { env } from '$env/dynamic/public';
 	import * as m from '$lib/paraglide/messages';
 	import Grid from '$lib/components/layout/grid.svelte';
 	import { DL, DLRow, DD } from '$lib/components/descriptionlist';
+	import coinbaseLogo from '$lib/assets/exchanges/coinbase.svg';
 
 	const ON_RAMP_PROVIDERS = [
 		{
 			id: 'coinbase',
-			logo: '/coinbase-icon.svg',
+			logo: '$lib/assets/exchanges/coinbase.svg',
 			fees: {
 				range: '1.49% - 3.99%'
 			},
@@ -31,42 +40,42 @@
 	const EXCHANGES = [
 		{
 			name: 'Binance',
-			logo: '/binance.webp',
+			logo: binanceLogo,
 			url: 'https://www.binance.com'
 		},
 		{
 			name: 'Coinbase',
-			logo: '/coinbase.webp',
+			logo: coinbaseIconLogo,
 			url: 'https://www.coinbase.com'
 		},
 		{
 			name: 'Kraken',
-			logo: '/kraken.webp',
+			logo: krakenLogo,
 			url: 'https://www.kraken.com'
 		},
 		{
 			name: 'OKX',
-			logo: '/okx.webp',
+			logo: okxLogo,
 			url: 'https://www.okx.com'
 		},
 		{
 			name: 'Huobi Global',
-			logo: '/huobi.webp',
+			logo: huobiLogo,
 			url: 'https://global-aws.huobi.com'
 		},
 		{
 			name: 'Gate.io',
-			logo: '/gate-io.webp',
+			logo: gateioLogo,
 			url: 'https://www.gate.io'
 		},
 		{
 			name: 'Upbit',
-			logo: '/upbit.webp',
+			logo: upbitLogo,
 			url: 'https://upbit.com'
 		},
 		{
 			name: 'Kucoin',
-			logo: '/kucoin.webp',
+			logo: kucoinLogo,
 			url: 'https://kucoin.com'
 		}
 	] as const;
