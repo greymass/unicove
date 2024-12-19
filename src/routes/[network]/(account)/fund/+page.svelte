@@ -153,163 +153,49 @@
 	}
 </script>
 
-<Stack>
-	<h2 class="h4">{m.token_purchase_providers()}</h2>
+<Stack class="gap-12">
+	<Stack>
+		<h2 class="h4">{m.token_purchase_providers()}</h2>
 
-	<MultiCard tag="ul">
-		{#each ON_RAMP_PROVIDERS as service}
-			<Card tag="li" class="p-6">
-				<div>
-					<div class="mb-4 flex items-center justify-center">
-						<img src={service.logo} alt={service.id} class="h-24 w-3/5 object-contain" />
+		<MultiCard tag="ul">
+			{#each ON_RAMP_PROVIDERS as service}
+				<Card tag="li" class="p-6">
+					<div>
+						<div class="mb-4 flex items-center justify-center">
+							<img src={service.logo} alt={service.id} class="h-24 w-3/5 object-contain" />
+						</div>
+						<DL>
+							<DLRow title={m.processing_fees()}>
+								<DD>
+									<p class="text-white">{service.fees.range}</p>
+								</DD>
+							</DLRow>
+							<DLRow title={m.limits()}>
+								<DD>
+									<p class="text-white">{service.limits.daily}</p>
+								</DD>
+							</DLRow>
+							<DLRow title={m.details()}>
+								{#each service.details as detail}
+									<DD class="text-white">{detail}</DD>
+								{/each}
+							</DLRow>
+						</DL>
 					</div>
-					<DL>
-						<DLRow title={m.processing_fees()}>
-							<DD>
-								<p class="text-white">{service.fees.range}</p>
-							</DD>
-						</DLRow>
-						<DLRow title={m.limits()}>
-							<DD>
-								<p class="text-white">{service.limits.daily}</p>
-							</DD>
-						</DLRow>
-						<DLRow title={m.details()}>
-							<DD>
-								<ul class="list-disc pl-6">
-									{#each service.details as detail}
-										<li class="text-left text-sm text-white">{detail}</li>
-									{/each}
-								</ul>
-							</DD>
-						</DLRow>
-					</DL>
-				</div>
 
-				<div class="mt-6">
-					{#if !context.account}
-						<p class="text-sm">{m.must_be_logged_in_for_feature()}</p>
-					{:else}
-						<Button variant="secondary" class="w-full" onclick={() => handleOnRamp(service.id)}
-							>{service.action.text}</Button
-						>
-					{/if}
-				</div>
-			</Card><Card tag="li" class="min-w-sm p-6">
-				<div>
-					<div class="mb-4 flex items-center justify-center">
-						<img src={service.logo} alt={service.id} class="h-24 w-3/5 object-contain" />
+					<div class="mt-6">
+						{#if !context.account}
+							<p class="text-sm">{m.must_be_logged_in_for_feature()}</p>
+						{:else}
+							<Button variant="secondary" class="w-full" onclick={() => handleOnRamp(service.id)}
+								>{service.action.text}</Button
+							>
+						{/if}
 					</div>
-					<DL>
-						<DLRow title={m.processing_fees()}>
-							<DD>
-								<p class="text-white">{service.fees.range}</p>
-							</DD>
-						</DLRow>
-						<DLRow title={m.limits()}>
-							<DD>
-								<p class="text-white">{service.limits.daily}</p>
-							</DD>
-						</DLRow>
-						<DLRow title={m.details()}>
-							<DD>
-								<ul class="list-disc pl-6">
-									{#each service.details as detail}
-										<li class="text-left text-sm text-white">{detail}</li>
-									{/each}
-								</ul>
-							</DD>
-						</DLRow>
-					</DL>
-				</div>
-
-				<div class="mt-6">
-					{#if !context.account}
-						<p class="text-sm">{m.must_be_logged_in_for_feature()}</p>
-					{:else}
-						<Button variant="secondary" class="w-full" onclick={() => handleOnRamp(service.id)}
-							>{service.action.text}</Button
-						>
-					{/if}
-				</div>
-			</Card><Card tag="li" class="min-w-sm p-6">
-				<div>
-					<div class="mb-4 flex items-center justify-center">
-						<img src={service.logo} alt={service.id} class="h-24 w-3/5 object-contain" />
-					</div>
-					<DL>
-						<DLRow title={m.processing_fees()}>
-							<DD>
-								<p class="text-white">{service.fees.range}</p>
-							</DD>
-						</DLRow>
-						<DLRow title={m.limits()}>
-							<DD>
-								<p class="text-white">{service.limits.daily}</p>
-							</DD>
-						</DLRow>
-						<DLRow title={m.details()}>
-							<DD>
-								<ul class="list-disc pl-6">
-									{#each service.details as detail}
-										<li class="text-left text-sm text-white">{detail}</li>
-									{/each}
-								</ul>
-							</DD>
-						</DLRow>
-					</DL>
-				</div>
-
-				<div class="mt-6">
-					{#if !context.account}
-						<p class="text-sm">{m.must_be_logged_in_for_feature()}</p>
-					{:else}
-						<Button variant="secondary" class="w-full" onclick={() => handleOnRamp(service.id)}
-							>{service.action.text}</Button
-						>
-					{/if}
-				</div>
-			</Card>
-			<Card tag="li" class="min-w-sm p-6">
-				<div>
-					<div class="mb-4 flex items-center justify-center">
-						<img src={service.logo} alt={service.id} class="h-24 w-3/5 object-contain" />
-					</div>
-					<DL>
-						<DLRow title={m.processing_fees()}>
-							<DD>
-								<p class="text-white">{service.fees.range}</p>
-							</DD>
-						</DLRow>
-						<DLRow title={m.limits()}>
-							<DD>
-								<p class="text-white">{service.limits.daily}</p>
-							</DD>
-						</DLRow>
-						<DLRow title={m.details()}>
-							<DD>
-								<ul class="list-disc pl-6">
-									{#each service.details as detail}
-										<li class="text-left text-sm text-white">{detail}</li>
-									{/each}
-								</ul>
-							</DD>
-						</DLRow>
-					</DL>
-				</div>
-
-				<div class="mt-6">
-					{#if !context.account}
-						<p class="text-sm">{m.must_be_logged_in_for_feature()}</p>
-					{:else}
-						<Button variant="secondary" class="w-full" onclick={() => handleOnRamp(service.id)}
-							>{service.action.text}</Button
-						>
-					{/if}
-				</div>
-			</Card>
-		{/each}
-	</MultiCard>
+				</Card>
+			{/each}
+		</MultiCard>
+	</Stack>
 
 	<Stack class="gap-4">
 		<h2 class="h4">{m.exchanges()}</h2>
