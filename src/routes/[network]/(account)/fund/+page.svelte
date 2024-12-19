@@ -22,7 +22,7 @@
 	const ON_RAMP_PROVIDERS = [
 		{
 			id: 'coinbase',
-			logo: '$lib/assets/exchanges/coinbase.svg',
+			logo: coinbaseLogo,
 			fees: {
 				range: '1.49% - 3.99%'
 			},
