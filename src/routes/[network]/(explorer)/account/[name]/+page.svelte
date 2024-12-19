@@ -76,14 +76,18 @@
 						</Stack>
 					</div>
 
-					<div class="col-span-2 col-start-2 row-start-1 text-right @xs:col-span-1 @xs:col-start-3">
-						<a
-							class="inline-block h-12 content-center text-skyBlue-500 hover:text-skyBlue-400"
-							href={`/${data.network}/fund`}
+					{#if isCurrentUser}
+						<div
+							class="col-span-2 col-start-2 row-start-1 text-right @xs:col-span-1 @xs:col-start-3"
 						>
-							Add Funds
-						</a>
-					</div>
+							<a
+								class="inline-block h-12 content-center text-skyBlue-500 hover:text-skyBlue-400"
+								href={`/${data.network}/fund`}
+							>
+								Add Funds
+							</a>
+						</div>
+					{/if}
 				</div>
 
 				<Breakdown {isCurrentUser}>
