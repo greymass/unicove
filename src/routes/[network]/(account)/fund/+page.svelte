@@ -8,6 +8,7 @@
 	import { env } from '$env/dynamic/public';
 	import * as m from '$lib/paraglide/messages';
 	import { MultiCard } from '$lib/components/layout';
+	import Grid from '$lib/components/layout/grid.svelte';
 
 	const ON_RAMP_PROVIDERS = [
 		{
@@ -142,83 +143,85 @@
 	}
 </script>
 
-<h2 class="h4">Token Purchase Providers</h2>
+<div class="mx-auto max-w-4xl px-4">
+	<h2 class="h4">Token Purchase Providers</h2>
 
-<MultiCard class="max-w-[700px]">
-	{#each ON_RAMP_PROVIDERS as service}
-		<Card>
-			<div>
-				<div class="mb-4 flex items-center justify-center">
-					<img src={service.logo} alt={service.id} class="h-24 w-3/5 object-contain" />
-				</div>
-				<div class="grid grid-cols-[1fr_auto] text-sm">
-					<div class="flex items-center py-2">
-						<p class="text-md">{m.processing_fees()}</p>
-						<p class="ml-auto text-white">{service.fees.range}</p>
+	<Grid tag="ul">
+		{#each [...ON_RAMP_PROVIDERS, ...ON_RAMP_PROVIDERS] as service}
+			<Card tag="li" class="h-full max-w-[350px] p-6">
+				<div>
+					<div class="mb-4 flex items-center justify-center">
+						<img src={service.logo} alt={service.id} class="h-24 w-3/5 object-contain" />
 					</div>
-					<div class="border-gray-300 col-span-2 border-t border-t-[0.5px]"></div>
-					<div class="flex items-center py-2">
-						<p class="text-md">{m.limits()}</p>
-						<p class="ml-auto text-white">{service.limits.daily}</p>
+					<div class="grid grid-cols-[1fr_auto] text-sm">
+						<div class="flex items-center py-2">
+							<p class="text-md">{m.processing_fees()}</p>
+							<p class="ml-auto text-white">{service.fees.range}</p>
+						</div>
+						<div class="border-gray-300 col-span-2 border-t border-t-[0.5px]"></div>
+						<div class="flex items-center py-2">
+							<p class="text-md">{m.limits()}</p>
+							<p class="ml-auto text-white">{service.limits.daily}</p>
+						</div>
+						<div class="border-gray-300 col-span-2 border-t border-t-[0.5px]"></div>
 					</div>
-					<div class="border-gray-300 col-span-2 border-t border-t-[0.5px]"></div>
+					<p class="text-md my-2">{m.details()}</p>
+					<ul class="list-disc pl-6">
+						{#each service.details as detail}
+							<li class="text-sm text-white">{detail}</li>
+						{/each}
+					</ul>
 				</div>
-				<p class="text-md my-2">{m.details()}</p>
-				<ul class="list-disc pl-6">
-					{#each service.details as detail}
-						<li class="text-sm text-white">{detail}</li>
-					{/each}
-				</ul>
-			</div>
-			<div class="mt-6">
-				{#if !context.account}
-					<p class="text-gray-300 text-sm">{m.must_be_logged_in_for_feature()}</p>
-				{:else}
-					<Button
-						variant="secondary"
-						class="{service.action.className} w-full"
-						onclick={() => handleOnRamp(service.id)}>{service.action.text}</Button
-					>
-				{/if}
-			</div>
-		</Card>
-	{/each}
-</MultiCard>
-
-<h2 class="h4">{m.exchanges()}</h2>
-
-<p class="mb-6">
-	{m.where_eos_can_be_purchased()}
-</p>
-
-<MultiCard class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-	{#each EXCHANGES as exchange}
-		<Card class="h-full p-6 pb-2">
-			<a
-				href={exchange.url}
-				target="_blank"
-				rel="noopener noreferrer"
-				class="block h-full transition-all hover:scale-105"
-			>
-				<div class="mb-4 aspect-square grid place-items-center rounded-lg bg-mineShaft-900 p-4">
-					<img
-						src={exchange.logo}
-						alt="{exchange.name} logo"
-						class="size-full object-cover p-4"
-					/>
+				<div class="mt-6">
+					{#if !context.account}
+						<p class="text-gray-300 text-sm">{m.must_be_logged_in_for_feature()}</p>
+					{:else}
+						<Button
+							variant="secondary"
+							class="{service.action.className} w-full"
+							onclick={() => handleOnRamp(service.id)}>{service.action.text}</Button
+						>
+					{/if}
 				</div>
-				<h3 class="text-center text-lg font-medium">{exchange.name}</h3>
-			</a>
-		</Card>
-	{/each}
-</MultiCard>
+			</Card>
+		{/each}
+	</Grid>
 
-{#if context.settings.data.debugMode}
-	<h3 class="h3">{m.common_debugging()}</h3>
-	<Code>
-		{JSON.stringify(coinbaseOptions, null, 2)}
-	</Code>
-	<Code>
-		{JSON.stringify(coinbaseInstance, null, 2)}
-	</Code>
-{/if}
+	<h2 class="h4">{m.exchanges()}</h2>
+
+	<p class="mb-6">
+		{m.where_eos_can_be_purchased()}
+	</p>
+
+	<Grid tag="ul">
+		{#each EXCHANGES as exchange}
+			<Card tag="li" class="h-full max-w-[250px] p-6">
+				<a
+					href={exchange.url}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="block h-full transition-all hover:scale-105"
+				>
+					<div class="mb-4 grid aspect-square place-items-center rounded-lg bg-mineShaft-900 p-4">
+						<img
+							src={exchange.logo}
+							alt="{exchange.name} logo"
+							class="size-full object-cover p-4"
+						/>
+					</div>
+					<h3 class="text-center text-lg font-medium">{exchange.name}</h3>
+				</a>
+			</Card>
+		{/each}
+	</Grid>
+
+	{#if context.settings.data.debugMode}
+		<h3 class="h3">{m.common_debugging()}</h3>
+		<Code>
+			{JSON.stringify(coinbaseOptions, null, 2)}
+		</Code>
+		<Code>
+			{JSON.stringify(coinbaseInstance, null, 2)}
+		</Code>
+	{/if}
+</div>
