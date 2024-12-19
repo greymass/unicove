@@ -70,7 +70,7 @@
 								<AssetText variant="full" value={tokenValue} />
 							</p>
 							<Chip>
-								<TradingPair value={tokenPrice} />x
+								<TradingPair value={tokenPrice} />
 								<!-- TODO: Percent change -->
 							</Chip>
 						</Stack>
