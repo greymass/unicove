@@ -10,7 +10,6 @@
 	import gateioLogo from '$lib/assets/exchanges/gate-io.webp?enhanced';
 	import upbitLogo from '$lib/assets/exchanges/upbit.webp?enhanced';
 	import kucoinLogo from '$lib/assets/exchanges/kucoin.webp?enhanced';
-	import coinbaseLogo from '$lib/assets/exchanges/coinbase.svg';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { initOnRamp, type CBPayInstanceType, type InitOnRampParams } from '@coinbase/cbpay-js';
 	import Button from '$lib/components/button/button.svelte';
@@ -18,6 +17,9 @@
 	import * as m from '$lib/paraglide/messages';
 	import Grid from '$lib/components/layout/grid.svelte';
 	import { DL, DLRow, DD } from '$lib/components/descriptionlist';
+	import coinbaseLogo from '$lib/assets/exchanges/coinbase.svg';
+	import Stack from '$lib/components/layout/stack.svelte';
+	import MultiCard from '$lib/components/layout/page/multicard.svelte';
 
 	const ON_RAMP_PROVIDERS = [
 		{
@@ -151,12 +153,12 @@
 	}
 </script>
 
-<div class="max-w-5xl space-y-6">
+<Stack>
 	<h2 class="h4">{m.token_purchase_providers()}</h2>
 
-	<Grid tag="ul" class="grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
+	<MultiCard tag="ul">
 		{#each ON_RAMP_PROVIDERS as service}
-			<Card tag="li" class="h-full w-full p-6">
+			<Card tag="li" class="p-6">
 				<div>
 					<div class="mb-4 flex items-center justify-center">
 						<img src={service.logo} alt={service.id} class="h-24 w-3/5 object-contain" />
@@ -183,6 +185,119 @@
 						</DLRow>
 					</DL>
 				</div>
+
+				<div class="mt-6">
+					{#if !context.account}
+						<p class="text-sm">{m.must_be_logged_in_for_feature()}</p>
+					{:else}
+						<Button variant="secondary" class="w-full" onclick={() => handleOnRamp(service.id)}
+							>{service.action.text}</Button
+						>
+					{/if}
+				</div>
+			</Card><Card tag="li" class="min-w-sm p-6">
+				<div>
+					<div class="mb-4 flex items-center justify-center">
+						<img src={service.logo} alt={service.id} class="h-24 w-3/5 object-contain" />
+					</div>
+					<DL>
+						<DLRow title={m.processing_fees()}>
+							<DD>
+								<p class="text-white">{service.fees.range}</p>
+							</DD>
+						</DLRow>
+						<DLRow title={m.limits()}>
+							<DD>
+								<p class="text-white">{service.limits.daily}</p>
+							</DD>
+						</DLRow>
+						<DLRow title={m.details()}>
+							<DD>
+								<ul class="list-disc pl-6">
+									{#each service.details as detail}
+										<li class="text-left text-sm text-white">{detail}</li>
+									{/each}
+								</ul>
+							</DD>
+						</DLRow>
+					</DL>
+				</div>
+
+				<div class="mt-6">
+					{#if !context.account}
+						<p class="text-sm">{m.must_be_logged_in_for_feature()}</p>
+					{:else}
+						<Button variant="secondary" class="w-full" onclick={() => handleOnRamp(service.id)}
+							>{service.action.text}</Button
+						>
+					{/if}
+				</div>
+			</Card><Card tag="li" class="min-w-sm p-6">
+				<div>
+					<div class="mb-4 flex items-center justify-center">
+						<img src={service.logo} alt={service.id} class="h-24 w-3/5 object-contain" />
+					</div>
+					<DL>
+						<DLRow title={m.processing_fees()}>
+							<DD>
+								<p class="text-white">{service.fees.range}</p>
+							</DD>
+						</DLRow>
+						<DLRow title={m.limits()}>
+							<DD>
+								<p class="text-white">{service.limits.daily}</p>
+							</DD>
+						</DLRow>
+						<DLRow title={m.details()}>
+							<DD>
+								<ul class="list-disc pl-6">
+									{#each service.details as detail}
+										<li class="text-left text-sm text-white">{detail}</li>
+									{/each}
+								</ul>
+							</DD>
+						</DLRow>
+					</DL>
+				</div>
+
+				<div class="mt-6">
+					{#if !context.account}
+						<p class="text-sm">{m.must_be_logged_in_for_feature()}</p>
+					{:else}
+						<Button variant="secondary" class="w-full" onclick={() => handleOnRamp(service.id)}
+							>{service.action.text}</Button
+						>
+					{/if}
+				</div>
+			</Card>
+			<Card tag="li" class="min-w-sm p-6">
+				<div>
+					<div class="mb-4 flex items-center justify-center">
+						<img src={service.logo} alt={service.id} class="h-24 w-3/5 object-contain" />
+					</div>
+					<DL>
+						<DLRow title={m.processing_fees()}>
+							<DD>
+								<p class="text-white">{service.fees.range}</p>
+							</DD>
+						</DLRow>
+						<DLRow title={m.limits()}>
+							<DD>
+								<p class="text-white">{service.limits.daily}</p>
+							</DD>
+						</DLRow>
+						<DLRow title={m.details()}>
+							<DD>
+								<ul class="list-disc pl-6">
+									{#each service.details as detail}
+										<li class="text-left text-sm text-white">{detail}</li>
+									{/each}
+								</ul>
+							</DD>
+						</DLRow>
+					</DL>
+				</div>
+
 				<div class="mt-6">
 					{#if !context.account}
 						<p class="text-sm">{m.must_be_logged_in_for_feature()}</p>
@@ -194,35 +309,35 @@
 				</div>
 			</Card>
 		{/each}
-	</Grid>
+	</MultiCard>
 
-	<h2 class="h4">{m.exchanges()}</h2>
+	<Stack class="gap-4">
+		<h2 class="h4">{m.exchanges()}</h2>
 
-	<p class="mb-6">
-		{m.where_eos_can_be_purchased()}
-	</p>
+		<p>{m.where_eos_can_be_purchased()}</p>
 
-	<Grid tag="ul" class="grid-cols-2 lg:grid-cols-4">
-		{#each EXCHANGES as exchange}
-			<Card tag="li" class="h-full w-full">
-				<a
-					href={exchange.url}
-					target="_blank"
-					rel="noopener noreferrer"
-					class="block h-full transition-all hover:scale-105"
-				>
-					<div class="mb-4 aspect-square rounded-lg bg-mineShaft-900">
-						<enhanced:img
-							src={exchange.logo}
-							alt="{exchange.name} logo"
-							class="size-full object-cover object-center p-4"
-						/>
-					</div>
-					<h3 class="text-center text-lg font-medium">{exchange.name}</h3>
-				</a>
-			</Card>
-		{/each}
-	</Grid>
+		<Grid tag="ul" itemWidth="10rem" class="">
+			{#each EXCHANGES as exchange}
+				<Card tag="li" class="">
+					<a
+						href={exchange.url}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="block h-full transition-all hover:scale-105"
+					>
+						<div class="mb-4 grid aspect-square rounded-lg bg-mineShaft-900 p-4">
+							<enhanced:img
+								src={exchange.logo}
+								alt="{exchange.name} logo"
+								class="h-full object-cover"
+							/>
+						</div>
+						<h3 class="text-center text-lg font-medium">{exchange.name}</h3>
+					</a>
+				</Card>
+			{/each}
+		</Grid>
+	</Stack>
 
 	{#if context.settings.data.debugMode}
 		<h3 class="h3">{m.common_debugging()}</h3>
@@ -233,4 +348,4 @@
 			{JSON.stringify(coinbaseInstance, null, 2)}
 		</Code>
 	{/if}
-</div>
+</Stack>
