@@ -54,7 +54,6 @@
 		"@sveltejs/enhanced-img": "^0.4.4",
 		"@tailwindcss/container-queries": "^0.1.1",
 		"@wharfkit/account": "^1.3.0",
-		"@wharfkit/account-creation-plugin-greymass": "^1.2.0",
 		"@wharfkit/account-creation-plugin-metamask": "^1.1.1",
 		"@wharfkit/common": "^1.4.2",
 		"@wharfkit/contract": "^1.1.5",
@@ -83,12 +82,5 @@
 		"svead": "^0.0.13",
 		"tailwind-merge": "^2.5.3",
 		"typescript-svelte-plugin": "^0.3.40"
-	},
-	"resolutions": {
-		"@wharfkit/antelope": "^1.0.13",
-		"@wharfkit/account": "^1.3.0",
-		"@wharfkit/common": "^1.4.2",
-		"@wharfkit/session": "^1.4.0",
-		"svelte": "^5.1.9"
 	}
 }
