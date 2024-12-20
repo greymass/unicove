@@ -354,7 +354,7 @@
 		</p>
 		<p>
 			Unicove itself is
-			{@render link('open source', 'https://github.com/greymass/2nicove')}
+			{@render link('open source', 'https://github.com/greymass/unicove')}
 			and serves as reference material for how this integration can be performed.
 		</p>
 

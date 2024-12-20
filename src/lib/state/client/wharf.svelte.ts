@@ -96,7 +96,7 @@ export class WharfState {
 		}
 		this.sessionKit = new SessionKit(
 			{
-				appName: '2nicove',
+				appName: 'unicove',
 				chains: this.chains,
 				ui: new WebRenderer({ minimal: true }),
 				walletPlugins
