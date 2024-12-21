@@ -27,6 +27,7 @@ import { WalletPluginPrivateKey } from '@wharfkit/wallet-plugin-privatekey';
 import { WalletPluginWombat } from '@wharfkit/wallet-plugin-wombat';
 import { WalletPluginScatter } from '@wharfkit/wallet-plugin-scatter';
 import { WalletPluginTokenPocket } from '@wharfkit/wallet-plugin-tokenpocket';
+import { WalletPluginWebAuthenticator } from '@wharfkit/wallet-plugin-web-authenticator';
 import { TransactPluginResourceProvider } from '@wharfkit/transact-plugin-resource-provider';
 
 import { AccountCreationPluginMetamask } from '@wharfkit/account-creation-plugin-metamask';
@@ -50,7 +51,8 @@ const defaultWalletPlugins: WalletPlugin[] = [
 	new WalletPluginMetaMask(),
 	new WalletPluginScatter(),
 	new WalletPluginTokenPocket(),
-	new WalletPluginWombat()
+	new WalletPluginWombat(),
+	new WalletPluginWebAuthenticator()
 ];
 
 export const accountCreationPluginMetamask = new AccountCreationPluginMetamask({
