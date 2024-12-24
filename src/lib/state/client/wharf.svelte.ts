@@ -52,7 +52,9 @@ const defaultWalletPlugins: WalletPlugin[] = [
 	new WalletPluginScatter(),
 	new WalletPluginTokenPocket(),
 	new WalletPluginWombat(),
-	new WalletPluginWebAuthenticator()
+	new WalletPluginWebAuthenticator({
+		webAuthenticatorUrl: 'https://mvp.web-authenticator-a83.pages.dev'
+	})
 ];
 
 export const accountCreationPluginMetamask = new AccountCreationPluginMetamask({
