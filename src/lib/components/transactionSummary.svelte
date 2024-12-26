@@ -3,6 +3,7 @@
 	import type { Checksum256 } from '@wharfkit/antelope';
 	import Transaction from './elements/transaction.svelte';
 	import CircleCheckBig from 'lucide-svelte/icons/circle-check-big';
+	import * as m from '$lib/paraglide/messages';
 
 	interface Props {
 		transactionId?: Checksum256 | string;
@@ -22,23 +23,23 @@
 			<picture class="size-24">
 				<CircleCheckBig class="size-full text-green-300" />
 			</picture>
-			<h2 class="h3">Transaction Complete</h2>
+			<h2 class="h3">{m.common_transaction_complete()}</h2>
 		</div>
 		<!-- <h3 class="h3">{transaction.status}</h3> -->
 		<table class="table-styles">
 			<tbody>
 				<tr>
-					<td>Status</td>
+					<td>{m.common_status()}</td>
 					<td class="text-right">{transaction.status}</td>
 				</tr>
 				<tr>
-					<td>Transaction ID</td>
+					<td>{m.common_trx_id()}</td>
 					<td class="text-right"><Transaction id={transaction.transaction?.id} /> </td>
 				</tr>
 			</tbody>
 		</table>
 	{:else}
-		<h2 class="h2">Transaction Not Found</h2>
-		<p>The transaction with ID {transactionId} could not be found.</p>
+		<h2 class="h2">{m.common_trx_not_found()}</h2>
+		<p>{m.common_trx_not_found_description({ transactionId: String(transactionId) })}</p>
 	{/if}
 </div>

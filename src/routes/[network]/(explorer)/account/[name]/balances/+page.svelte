@@ -67,4 +67,6 @@
 			{/each}
 		</tbody>
 	</table>
+{:else}
+	<p>No balances found.</p>
 {/if}

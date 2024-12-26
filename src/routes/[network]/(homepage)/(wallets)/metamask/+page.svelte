@@ -20,7 +20,7 @@
 	const context = getContext<UnicoveContext>('state');
 
 	let metaMaskState: MetaMaskState = new MetaMaskState();
-	let packageInfo: any = $state();
+	let packageInfo: Record<string, any> = $state({});
 	let latestVersion: string | undefined = $state();
 	let isMetaMaskSession: boolean = $derived(
 		context.wharf.session?.walletPlugin.id === 'wallet-plugin-metamask'
