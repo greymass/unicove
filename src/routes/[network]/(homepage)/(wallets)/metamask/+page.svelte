@@ -465,7 +465,7 @@
 			{/if}
 			<h2 class="text-2xl font-semibold">{m.common_details()}</h2>
 			<DL>
-				<DLRow title="Snaps Directory">
+				<DLRow title={m.metamask_snaps_directory()}>
 					<DD>
 						<a href="https://snaps.metamask.io/snap/npm/greymass/eos-wallet">
 							{networkName} Wallet
@@ -473,7 +473,7 @@
 					</DD>
 				</DLRow>
 
-				<DLRow title="Source Code">
+				<DLRow title={m.common_source_code()}>
 					<DD>
 						<a href="https://github.com/greymass/antelope-snap/tree/eos"> GitHub </a>
 					</DD>

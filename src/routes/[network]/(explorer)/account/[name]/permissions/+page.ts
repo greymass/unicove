@@ -1,6 +1,7 @@
 import type { Permission } from '@wharfkit/account';
 import type { PageLoad } from './$types';
 import { Name } from '@wharfkit/antelope';
+import * as m from '$lib/paraglide/messages';
 
 export interface TreePermission {
 	permission: Permission;
@@ -35,11 +36,19 @@ export const load: PageLoad = async ({ params, parent }) => {
 	}
 
 	return {
-		subtitle: `Permissions on the ${network.chain.name} Network.`,
+		subtitle: m.explorer_account_permissions_subtitle({
+			network: network.chain.name
+		}),
 		tree: tree,
 		pageMetaTags: {
-			title: `Permissions | ${params.name} | ${network.chain.name} Network`,
-			description: `Permissions for ${params.name} on the ${network.chain.name} network.`
+			title: m.explorer_account_permissions_meta_title({
+				account: params.name,
+				network: network.chain.name
+			}),
+			description: m.explorer_account_permissions_meta_description({
+				account: params.name,
+				network: network.chain.name
+			})
 		}
 	};
 };

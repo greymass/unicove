@@ -18,13 +18,13 @@
 		title?: string;
 	}
 
-	const { cta, title = 'Account Balance' }: Props = $props();
+	const { cta, title = m.common_account_balance() }: Props = $props();
 </script>
 
 <Card {title}>
 	<Stack>
 		<Stack class="gap-2">
-			<h4 class="text-muted text-base leading-none">Available</h4>
+			<h4 class="text-muted text-base leading-none">{m.common_available()}</h4>
 			<p class="text-xl font-semibold leading-none text-white">
 				{#if context.account}
 					<AssetText variant="full" value={context.account?.balance?.liquid} />

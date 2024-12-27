@@ -2,6 +2,7 @@
 	import type { AccountValue } from '$lib/state/client/account.svelte';
 	import { cn, percentString } from '$lib/utils';
 	import { Card } from '../layout';
+	import * as m from '$lib/paraglide/messages';
 
 	interface Props {
 		data?: AccountValue;
@@ -9,11 +10,11 @@
 	let { data }: Props = $props();
 
 	const distributionMap = {
-		delegated: { label: 'Delegated', color: 'bg-mineShaft-300' },
-		liquid: { label: 'Available', color: 'bg-green-400' },
+		delegated: { label: m.common_delegated(), color: 'bg-mineShaft-300' },
+		liquid: { label: m.common_available(), color: 'bg-green-400' },
 		ram: { label: 'RAM', color: 'bg-solar-400' },
-		staked: { label: 'Staked', color: 'bg-skyBlue-400' },
-		unstaked: { label: 'Unstaked', color: 'bg-skyBlue-400' }
+		staked: { label: m.common_staked(), color: 'bg-skyBlue-400' },
+		unstaked: { label: m.common_unstaked(), color: 'bg-skyBlue-400' }
 	};
 
 	type DistributionItem = {
@@ -39,7 +40,7 @@
 	const displayThreshold = 0.0001;
 </script>
 
-<Card id="distribution" title="Distribution">
+<Card id="distribution" title={m.common_distribution()}>
 	{#if distribution}
 		<div id="distribution-container" class="flex gap-1">
 			{#each distribution as item}
