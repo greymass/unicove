@@ -8,6 +8,7 @@
 	import type { NetworkState } from '$lib/state/network.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
 	import Box from '$lib/components/layout/box/box.svelte';
+	import * as m from '$lib/paraglide/messages';
 
 	interface Props {
 		ramResponse: Promise<Response>;
@@ -58,10 +59,15 @@
 		<Box>
 			<TextBlock
 				{...{
-					title: `EOS: The Native Token`,
-					text: `The ${network.chain.name} network's native token, EOS, can be used for staking rewards, to buy and sell RAM, to pay transaction fees, and more. It is traded on most major exchanges.`,
+					title: m.homepage_native_token_title({
+						token: network.chain.systemToken?.symbol.name
+					}),
+					text: m.homepage_native_token_description({
+						token: network.chain.systemToken?.symbol.name,
+						network: network.chain.name
+					}),
 					button: {
-						text: 'Get Tokens',
+						text: m.common_get_tokens(),
 						href: `${network}/fund`
 					}
 				}}
@@ -77,10 +83,12 @@
 		<Box>
 			<TextBlock
 				{...{
-					title: `RAM: Tokenized Blockchain Storage`,
-					text: `Each unit of RAM ownership represents a portion of the network's total blockchain storage. RAM can be bought and sold directly from the network using the RAM Market.`,
+					title: m.homepage_ram_token_title(),
+					text: m.homepage_ram_token_description(),
 					button: {
-						text: 'EOS/RAM Market',
+						text: m.homepage_ram_token_market({
+							token: network.chain.systemToken?.symbol.name
+						}),
 						href: `${network}/ram`
 					}
 				}}
