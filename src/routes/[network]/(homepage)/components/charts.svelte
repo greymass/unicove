@@ -60,10 +60,10 @@
 			<TextBlock
 				{...{
 					title: m.homepage_native_token_title({
-						token: network.chain.systemToken?.symbol.name
+						token: String(network.chain.systemToken?.symbol.name)
 					}),
 					text: m.homepage_native_token_description({
-						token: network.chain.systemToken?.symbol.name,
+						token: String(network.chain.systemToken?.symbol.name),
 						network: network.chain.name
 					}),
 					button: {
@@ -87,7 +87,7 @@
 					text: m.homepage_ram_token_description(),
 					button: {
 						text: m.homepage_ram_token_market({
-							token: network.chain.systemToken?.symbol.name
+							token: String(network.chain.systemToken?.symbol.name)
 						}),
 						href: `${network}/ram`
 					}

@@ -32,7 +32,7 @@
 				<p>
 					{m.homepage_staking_description({
 						network: network.chain.name,
-						token: network.chain.systemToken?.symbol.name
+						token: String(network.chain.systemToken?.symbol.name)
 					})}
 				</p>
 				<div class="mt-2 flex gap-6">

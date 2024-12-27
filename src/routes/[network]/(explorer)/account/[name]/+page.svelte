@@ -59,7 +59,7 @@
 
 		<Card
 			id="system-token"
-			title={data.network.chain.systemToken.symbol.name}
+			title={String(data.network.chain.systemToken?.symbol.name)}
 			class="break-after-avoid"
 		>
 			<Stack>
@@ -135,7 +135,7 @@
 							action={{
 								text: m.common_reclaim(),
 								href: `/${data.network}/undelegate`,
-								visible: isCurrentUsers
+								visible: isCurrentUser
 							}}
 						/>
 					{/if}

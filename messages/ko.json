@@ -255,7 +255,7 @@
 	"metamask_install_faq_a9_p2": "{network} 지갑에 대한 향후 업데이트에서는 소유자 키를 사용하여 활성 키를 재설정하는 방법을 제공하여 활성 키가 변경된 경우 복구 경로를 제공할 예정입니다.",
 	"metamask_install_faq_q1": "MetaMask 스냅이란 무엇인가요?",
 	"metamask_install_faq_q10": "소유자 키와 활성 키를 어떻게 찾을 수 있나요?",
-	"metamask_install_faq_q11": "MetaMask용 { {network} 지갑을 사용하여 모든 {network} } 앱에 액세스할 수 있나요?",
+	"metamask_install_faq_q11": "MetaMask용 {network} 지갑을 사용하여 모든 {network} 앱에 액세스할 수 있나요?",
 	"metamask_install_faq_q12": "{network} Wallet 지원은 어떻게 받을 수 있나요?",
 	"metamask_install_faq_q2": "{network} 지갑을 어떻게 설치하나요?",
 	"metamask_install_faq_q3": "{network} 지갑은 무슨 역할을 하나요?",
