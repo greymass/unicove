@@ -4,6 +4,7 @@
 	import { Asset } from '@wharfkit/antelope';
 	import { chainLogos } from '@wharfkit/common';
 	import { getContext } from 'svelte';
+	import * as m from '$lib/paraglide/messages';
 
 	const { network } = getContext<UnicoveContext>('state');
 
@@ -36,7 +37,7 @@
 		</svg>
 		<div class="grid text-center uppercase">
 			<img class="mb-4 h-12 place-self-center md:h-20" src={networkLogo} alt={networkName} />
-			<span class="md:text-md text-sm text-white/60">Total Staked</span>
+			<span class="md:text-md text-sm text-white/60">{m.common_total_staked()}</span>
 			<!-- TODO: add eos formatter -->
 			<span class="text-md font-semibold md:text-xl">
 				<AssetText value={staked} variant="short" />

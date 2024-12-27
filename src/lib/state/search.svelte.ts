@@ -3,6 +3,7 @@ import { browser } from '$app/environment';
 import type { NetworkState } from './network.svelte';
 import type { UnicoveContext } from './client.svelte';
 import type { WharfState } from './client/wharf.svelte';
+import * as m from '$lib/paraglide/messages';
 
 export type SearchResult = {
 	result: string;
@@ -47,69 +48,69 @@ export const SearchCommands: SearchRecord[] = [
 		value: 'RAM Market',
 		type: SearchRecordType.PAGE,
 		keywords: ['ram'],
-		description: 'Market Overview',
+		description: m.search_result_description_ram(),
 		url: '/ram'
 	},
 	{
 		value: 'Buy RAM',
 		type: SearchRecordType.PAGE,
 		keywords: ['ram', 'buy'],
-		description: 'Purchase RAM',
+		description: m.search_result_description_buyram(),
 		url: '/ram/buy'
 	},
 	{
 		value: 'Sell RAM',
 		type: SearchRecordType.PAGE,
 		keywords: ['ram', 'sell'],
-		description: 'Sell RAM',
+		description: m.search_result_description_sellram(),
 		url: '/ram/sell'
 	},
 	{
 		value: 'Send',
 		type: SearchRecordType.PAGE,
 		keywords: ['send', 'transfer'],
-		description: 'Transfer tokens',
+		description: m.search_result_description_transfer(),
 		url: '/send'
 	},
 	{
 		value: 'Settings',
 		type: SearchRecordType.PAGE,
 		keywords: ['settings', 'preferences'],
-		description: 'Unicove Settings',
+		description: m.search_result_description_settings(),
 		url: '/settings'
 	},
 	{
 		value: 'Staking',
 		type: SearchRecordType.PAGE,
 		keywords: ['staking', 'stake'],
-		description: 'Staking overview',
+		description: m.search_result_description_staking(),
 		url: '/staking'
 	},
 	{
 		value: 'Stake',
 		type: SearchRecordType.PAGE,
 		keywords: ['stake'],
-		description: 'Stake tokens',
+		description: m.common_stake_action(),
 		url: '/staking/stake'
 	},
 	{
 		value: 'Unstake',
 		type: SearchRecordType.PAGE,
 		keywords: ['unstake'],
-		description: 'Unstake tokens',
+		description: m.common_unstake_action(),
 		url: '/staking/unstake'
 	},
 	{
 		value: 'Resources',
 		type: SearchRecordType.PAGE,
 		keywords: ['resources', 'cpu', 'net', 'powerup'],
-		description: 'Manage CPU/NET',
+		description: m.common_resources_action(),
 		url: '/resources'
 	},
 	{
 		value: 'Clear',
 		type: SearchRecordType.CLEAR,
-		description: 'Clear search history',
+		description: m.search_result_description_clear(),
 		keywords: ['clear', 'history'],
 		url: ''
 	}
@@ -147,7 +148,7 @@ export function searchAccounts(
 		.filter((s) => String(s.actor).includes(query.trim().toLowerCase()))
 		.map((s) => ({
 			data: s,
-			description: `Switch Account`,
+			description: m.common_switch_account(),
 			type: SearchRecordType.SWITCH,
 			value: `${s.actor}@${s.permission}`,
 			url: `/${network}/account/${s.actor}`

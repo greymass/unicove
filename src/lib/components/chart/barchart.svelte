@@ -3,6 +3,7 @@
 	import { Chart } from 'chart.js';
 	import 'chart.js/auto';
 	import { Card } from '$lib/components/layout';
+	import * as m from '$lib/paraglide/messages';
 
 	interface Props {
 		data: { x: number; y: number; y1?: number }[];
@@ -74,13 +75,13 @@
 		<div class="flex gap-4">
 			<div class="flex items-center gap-1">
 				<div class="size-4 rounded bg-[#00ED97]"></div>
-				<span class="text-[#00ED97]">Staked</span>
+				<span class="text-[#00ED97]">{m.common_staked()}</span>
 			</div>
 			<div class="flex items-center gap-1">
 				<div class="size-4 rounded bg-[#B2FAE0]"></div>
-				<span class="text-[#B2FAE0]">Yield</span>
+				<span class="text-[#B2FAE0]">{m.common_yield()}</span>
 			</div>
 		</div>
-		<span class="text-shark-200/70">Today</span>
+		<span class="text-shark-200/70">{m.common_today()}</span>
 	</div>
 </Card>

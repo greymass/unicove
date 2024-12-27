@@ -7,6 +7,7 @@
 	import Button from '$lib/components/button/button.svelte';
 	import type { UnstakingRecord } from '$lib/utils/staking';
 	import { languageTag } from '$lib/paraglide/runtime';
+	import * as m from '$lib/paraglide/messages';
 
 	interface Props extends HTMLAttributes<HTMLDivElement> {
 		href?: string;
@@ -17,16 +18,15 @@
 </script>
 
 {#if records.filter((r) => !r.savings).length > 0}
-	<Card {...props} title="Unstaking" class="auto-rows-max">
+	<Card {...props} title={m.common_unstaking()} class="auto-rows-max">
 		<p>
-			The tokens currently being unstaked are listed below with the date they become available.
-			These balances will continue to earn rewards until they are withdrawn.
+			{m.unstaking_description()}
 		</p>
 		<table class="table-styles mt-4">
 			<thead class="border-b-2 border-shark-100/10">
 				<tr class="caption font-medium">
-					<th class="text-left">Amount</th>
-					<th class="text-right">Date available</th>
+					<th class="text-left">{m.common_amount()}</th>
+					<th class="text-right">{m.common_date_available()}</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -44,7 +44,7 @@
 			</tbody>
 		</table>
 		{#if href}
-			<Button {href} variant="secondary">Withdraw</Button>
+			<Button {href} variant="secondary">{m.common_withdraw()}</Button>
 		{/if}
 	</Card>
 {/if}

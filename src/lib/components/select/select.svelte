@@ -3,6 +3,7 @@
 	import type { ChangeFn } from '@melt-ui/svelte/internal/helpers';
 	import { SelectTrigger, SelectMenu, SelectItem } from './elements';
 	import type { ExtendedSelectOption, SelectOptionVariant } from './types';
+	import * as m from '$lib/paraglide/messages';
 
 	interface Props {
 		options: ExtendedSelectOption[];
@@ -69,7 +70,7 @@
 	{#if selectedOption.image && typeof selectedOption.image === 'string'}
 		<img src={selectedOption.image} alt={selectedOption.label} class="mr-2 size-5 object-contain" />
 	{/if}
-	{$selectedLabel || 'Select an option'}
+	{$selectedLabel || m.common_select_an_option()}
 </SelectTrigger>
 
 {#if $open}

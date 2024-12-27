@@ -4,6 +4,7 @@
 	import { createDialog, melt } from '@melt-ui/svelte';
 	import { Session, type SerializedSession } from '@wharfkit/session';
 	import { chainLogos } from '@wharfkit/common';
+	import * as m from '$lib/paraglide/messages';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
@@ -102,7 +103,7 @@
 			>
 		</div>
 	{:else}
-		<span class="pointer-events-none z-10 px-4 py-2">Connect Wallet</span>
+		<span class="pointer-events-none z-10 px-4 py-2">{m.common_connect_wallet()}</span>
 	{/if}
 </button>
 
@@ -145,7 +146,7 @@
 
 			<section id="accounts" class="flex flex-1 flex-col gap-3 pt-2">
 				<header class="flex items-center justify-between text-xl font-semibold">
-					<span>My Accounts</span>
+					<span>{m.common_my_accounts()}</span>
 					<button
 						onclick={addSession}
 						class="grid size-12 place-items-center rounded-lg hover:bg-mineShaft-950"
@@ -198,7 +199,7 @@
 							</li>
 						{/each}
 					{:else}
-						<p>No active sessions</p>
+						<p>{m.common_no_active_sessions()}</p>
 					{/if}
 				</ul>
 			</section>

@@ -5,6 +5,7 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import TextBlock from './text-block.svelte';
 	import HomepageButton from './homepage-button.svelte';
+	import * as m from '$lib/paraglide/messages';
 
 	const { network } = getContext<UnicoveContext>('state');
 
@@ -61,13 +62,19 @@
 
 		<Box class="grid place-items-center py-8">
 			<TextBlock
-				title="The EOS Wallet for MetaMask"
-				text={`MetaMask, an the industry leading self-custody wallet, is now compatible with Unicove and the ${networkName} network. Install the ${networkName} Wallet snap for MetaMask to get started.`}
+				title={m.homepage_metamask_wallet_title({
+					network: networkName
+				})}
+				text={m.homepage_metamask_wallet_description({
+					network: networkName
+				})}
 			>
 				<HomepageButton
 					class="mt-0.5 bg-solar-500 px-8 text-solar-950
 					    hover:active:bg-solar-600 hover:active:text-solar-950 [@media(any-hover:hover)]:hover:bg-solar-400 [@media(any-hover:hover)]:hover:text-solar-950"
-					text="Install EOS Wallet"
+					text={m.homepage_metamask_wallet_install({
+						network: networkName
+					})}
 					href={`/${network}/metamask`}
 				/>
 			</TextBlock>
