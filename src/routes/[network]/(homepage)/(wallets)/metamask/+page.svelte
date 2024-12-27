@@ -21,6 +21,8 @@
 	const context = getContext<UnicoveContext>('state');
 
 	let metaMaskState: MetaMaskState = new MetaMaskState();
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	let packageInfo: Record<string, any> = $state({});
 	let latestVersion: string | undefined = $state();
 	let isMetaMaskSession: boolean = $derived(
