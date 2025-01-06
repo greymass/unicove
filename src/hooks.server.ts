@@ -1,6 +1,7 @@
 import { sequence } from '@sveltejs/kit/hooks';
 import type { Handle, RequestEvent } from '@sveltejs/kit';
 
+import { PUBLIC_ENVIRONMENT } from '$env/static/public';
 import { availableLanguageTags } from '$lib/paraglide/runtime.js';
 import { i18n } from '$lib/i18n';
 import { isNetworkShortName } from '$lib/wharf/chains';
@@ -63,7 +64,7 @@ export async function redirectHandle({ event, resolve }: HandleParams): Promise<
 	const [, pathFirst, pathSecond, ...pathMore] = pathname.split('/').map((p) => p.trim());
 
 	let lang = 'en';
-	let network: string | undefined = 'eos';
+	let network: string | undefined = PUBLIC_ENVIRONMENT !== 'production' ? 'jungle4' : 'eos';
 
 	if (isLanguage(pathFirst) && isNetwork(pathSecond)) {
 		// Proceed, correct URL
@@ -72,7 +73,6 @@ export async function redirectHandle({ event, resolve }: HandleParams): Promise<
 	} else if (isLanguage(pathFirst) && !isNetwork(pathSecond) && !pathSecond) {
 		// Only a language is specified, land on the language specific homepage
 		lang = pathFirst;
-		network = undefined;
 	} else if (isLanguage(pathFirst) && !isNetwork(pathSecond)) {
 		// The network isn't specified, but the language is - redirect to the default network
 		lang = pathFirst;
@@ -103,7 +103,6 @@ export async function redirectHandle({ event, resolve }: HandleParams): Promise<
 	}
 
 	if (pathname !== url) {
-		console.log('redirecting to', url + search);
 		return new Response(undefined, {
 			headers: { Location: url + search },
 			status: 301
