@@ -9,12 +9,12 @@ export const load: LayoutLoad = async ({ parent }) => {
 		pageMetaTags: {
 			title: [
 				m.ram_metadata_buy_title({
-					token: network.chain.systemToken?.symbol.name || m.common_tokens(),
+					token: String(network.chain.systemToken?.symbol.name || m.common_tokens()),
 					network: network.chain.name
 				})
 			].join(' | '),
 			description: m.ram_metadata_overview_description({
-				token: network.chain.systemToken?.symbol.name || m.common_tokens(),
+				token: String(network.chain.systemToken?.symbol.name || m.common_tokens()),
 				network: network.chain.name
 			})
 		}

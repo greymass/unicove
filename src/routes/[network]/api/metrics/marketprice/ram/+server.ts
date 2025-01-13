@@ -24,6 +24,9 @@ export const GET: RequestHandler = async ({ params }) => {
 	try {
 		const chain = getChainDefinitionFromParams(params.network);
 		const metricsUrl = getMetricsUrl(chain);
+		if (!metricsUrl) {
+			return json([]);
+		}
 		const response = await fetch(`${metricsUrl}/marketprice/ram/1h/7d`);
 		if (!response.ok) {
 			throw new Error(`HTTP error! status: ${response.status}`);
@@ -39,7 +42,7 @@ export const GET: RequestHandler = async ({ params }) => {
 			headers: getCacheHeaders(30)
 		});
 	} catch (error) {
-		console.error('Error fetching historical RAM prices:', error);
-		return json({ error: 'Failed to fetch RAM price history' }, { status: 500 });
+		console.log(error);
+		return json([]);
 	}
 };

@@ -6,6 +6,8 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
 
+	import * as m from '$lib/paraglide/messages';
+
 	const context = getContext<UnicoveContext>('state');
 
 	interface Props {
@@ -26,13 +28,13 @@
 			// 	text: network.chain.name,
 			// 	active: pathname[2] === String(network) && !pathname[3]
 			// },
-			{ href: `/${network}/send`, text: 'Send', active: pathname[3] === 'send' }
+			{ href: `/${network}/send`, text: m.common_send(), active: pathname[3] === 'send' }
 		];
 
 		if (network.supports('staking')) {
 			items.push({
 				href: `/${network}/staking`,
-				text: 'Staking',
+				text: m.common_staking(),
 				active: pathname[3] === 'staking'
 			});
 		}
@@ -44,7 +46,7 @@
 		if (context.settings.data.advancedMode) {
 			items.push({
 				href: `/${network}/resources`,
-				text: 'Resources',
+				text: m.common_resources(),
 				active: pathname[3] === 'resources'
 			});
 		}
@@ -60,14 +62,14 @@
 		if (context.account) {
 			items.splice(0, 0, {
 				href: `/${network}/account/${context.account.name}`,
-				text: 'My Account',
+				text: m.common_my_account(),
 				active: pathname[3] === 'account' && pathname[4] === String(context.account.name)
 			});
 		}
 
 		items.push({
 			href: `/${network}/settings`,
-			text: 'Settings',
+			text: m.common_settings(),
 			active: pathname[3] === 'settings'
 		});
 

@@ -3,6 +3,7 @@
 	import UnicoveWordmark from '$lib/assets/unicove-wordmark.svelte';
 	import bgDesktop from '$lib/assets/hero/bg1@2x.png?enhanced';
 	import bgMobile from '$lib/assets/hero/bg2@2x.png?enhanced';
+	import * as m from '$lib/paraglide/messages';
 
 	interface Props {
 		networkName: string;
@@ -52,11 +53,14 @@
 		<UnicoveWordmark class="h-7 w-auto md:h-auto" />
 		<h1 class="text-balance text-3xl font-bold leading-tight lg:text-4xl lg:leading-tight">
 			<span class="sr-only">Unicove:</span>
-			Your gateway to the {networkName} Network
+			{m.homepage_hero_title({
+				network: networkName
+			})}
 		</h1>
 		<p class="text-muted mb-2 text-balance text-xl leading-tight lg:text-xl lg:leading-tight">
-			Stake, Send, Manage Tokens, and Explore {networkName} – all with ease
+			{m.homepage_hero_description({
+				network: networkName
+			})}
 		</p>
-		<!-- <Button href={`/${data.network}/signup`}>Create your EOS account now</Button> -->
 	</Stack>
 </section>

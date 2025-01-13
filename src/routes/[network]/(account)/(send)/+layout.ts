@@ -1,13 +1,16 @@
 import type { LayoutLoad } from './$types';
+import * as m from '$lib/paraglide/messages';
 
 export const load: LayoutLoad = async ({ parent }) => {
 	const { network } = await parent();
 	return {
-		title: 'Send Tokens',
-		subtitle: 'Transfer tokens to another account.',
+		title: m.common_send_tokens(),
+		subtitle: m.common_transfer_to_another_account(),
 		pageMetaTags: {
-			title: 'Send Tokens',
-			description: `Transfer tokens from one account to another account on the ${network.chain.name} network using an ${network.chain.name} compatible wallet.`
+			title: m.common_send_tokens(),
+			description: m.send_page_description({
+				network: network.chain.name
+			})
 		}
 	};
 };

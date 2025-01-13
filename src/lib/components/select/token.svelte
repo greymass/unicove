@@ -3,6 +3,7 @@
 	import { createSelect, type SelectOption } from '@melt-ui/svelte';
 	import { SelectTrigger, SelectMenu, SelectItem } from './elements';
 	import { writable } from 'svelte/store';
+	import * as m from '$lib/paraglide/messages';
 
 	interface TokenSelectOption extends SelectOption<number> {
 		image?: string;
@@ -107,7 +108,7 @@
 	{#if selectedTokenImage}
 		<img src={selectedTokenImage} alt={$selectedLabel} class="mr-2 size-5 object-contain" />
 	{/if}
-	{$selectedLabel || 'Select an option'}
+	{$selectedLabel || m.common_select_an_option()}
 </SelectTrigger>
 
 {#if $open}

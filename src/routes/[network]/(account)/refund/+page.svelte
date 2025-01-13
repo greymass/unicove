@@ -37,9 +37,7 @@
 				{/if}
 			</Stack>
 
-			<Button disabled={!manager.refundable} onclick={() => manager.transact()} variant="primary"
-				>{m.common_refund()}</Button
-			>
+			<Button onclick={() => manager.transact()} variant="primary">{m.common_refund()}</Button>
 		</Switcher>
 	{/if}
 </Stack>

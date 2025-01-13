@@ -332,7 +332,7 @@
 					debug={context.settings.data.debugMode as boolean}
 				/>
 			{:else}
-				<p>{m.send_no_balances()}</p>
+				<p>{m.common_no_balances()}</p>
 			{/if}
 		</fieldset>
 

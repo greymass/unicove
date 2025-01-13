@@ -4,6 +4,7 @@
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
+	import * as m from '$lib/paraglide/messages';
 
 	const { data } = $props();
 	const zero = UInt64.from(0);
@@ -21,9 +22,9 @@
 
 {#snippet tableAction(asset: Asset)}
 	<td class="text-right">
-		<a class="text-skyBlue-500 hover:text-skyBlue-400" href="/{data.network}/send?quantity={asset}"
-			>Send</a
-		>
+		<a class="text-skyBlue-500 hover:text-skyBlue-400" href="/{data.network}/send?quantity={asset}">
+			{m.common_send()}
+		</a>
 	</td>
 {/snippet}
 
@@ -31,9 +32,9 @@
 	<table class="table-styles">
 		<thead>
 			<tr>
-				<th>Token</th>
-				<th class="text-right">Amount</th>
-				<th class="text-right">Value</th>
+				<th>{m.common_token()}</th>
+				<th class="text-right">{m.common_amount()}</th>
+				<th class="text-right">{m.common_value()}</th>
 				{#if isCurrentUser}
 					<th></th>
 				{/if}
@@ -67,4 +68,6 @@
 			{/each}
 		</tbody>
 	</table>
+{:else}
+	<p>{m.common_no_balances()}</p>
 {/if}

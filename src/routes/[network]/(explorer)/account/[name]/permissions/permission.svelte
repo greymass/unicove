@@ -7,6 +7,7 @@
 	import Contract from '$lib/components/elements/contract.svelte';
 	import dayjs from 'dayjs';
 	import { Clock } from 'lucide-svelte';
+	import * as m from '$lib/paraglide/messages';
 
 	interface Props {
 		permission: TreePermission;
@@ -31,16 +32,19 @@
 		class="z-20 col-span-full space-y-1 rounded-t-lg bg-mineShaft-950 px-4 py-3 md:col-span-1 md:rounded-l-lg"
 	>
 		<div>
-			<dt class="sr-only">Permission Name</dt>
+			<dt class="sr-only">{m.common_permission_name()}</dt>
 			<dd class="text-xl font-semibold text-white">{permission.perm_name}</dd>
 		</div>
 		<div class="text-muted text-nowrap *:inline">
-			<dt class="after:content-[':']"><span class="sr-only">Threshold</span> Required</dt>
+			<dt class="after:content-[':']">
+				<span class="sr-only">{m.common_permission_threshold()}</span>
+				{m.common_required()}
+			</dt>
 			<dd>{permission.required_auth.threshold}</dd>
 		</div>
 		{#if permission.linked_actions}
 			<div class="">
-				<dt class="sr-only">Actions</dt>
+				<dt class="sr-only">{m.common_actions()}</dt>
 				{#each permission.linked_actions as { action, account }}
 					<dd>
 						<Contract name={account} {action} class="flex">
@@ -62,8 +66,8 @@
 					<tr
 						class="col-span-full grid grid-cols-subgrid text-left *:pt-1 *:text-base *:font-medium"
 					>
-						<th>Weight</th>
-						<th>Authorization</th>
+						<th>{m.common_permission_weight()}</th>
+						<th>{m.common_permission_authorization()}</th>
 					</tr>
 				</thead>
 				<tbody class="col-span-full grid grid-cols-subgrid gap-x-4 gap-y-2">

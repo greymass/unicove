@@ -1,20 +1,21 @@
 import { error } from '@sveltejs/kit';
 import { getNetworkFromParams } from '$lib/state/network.svelte';
 import type { PageLoad } from './$types';
+import * as m from '$lib/paraglide/messages';
 
 export const load: PageLoad = async ({ params }) => {
 	const network = getNetworkFromParams(params.network);
 
 	if (!network.snapOrigin) {
-		throw error(404, 'Network does not support MetaMask Snaps');
+		throw error(404, m.metamask_network_unsupported());
 	}
 
 	return {
-		title: `MetaMask + ${network.chain.name} Wallet`,
-		subtitle: `Get started with MetaMask on the ${network.chain.name} Network with the ${network.chain.name} Wallet snap.`,
+		title: m.metamask_page_title({ network: network.chain.name }),
+		subtitle: m.metamask_page_subtitle({ network: network.chain.name }),
 		pageMetaTags: {
-			title: `MetaMask + ${network.chain.name} Wallet`,
-			description: `Get started with MetaMask on the ${network.chain.name} Network with the ${network.chain.name} Wallet snap.`
+			title: m.metamask_page_title({ network: network.chain.name }),
+			description: m.metamask_page_subtitle({ network: network.chain.name })
 		}
 	};
 };

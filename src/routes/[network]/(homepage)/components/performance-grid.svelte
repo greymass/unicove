@@ -6,6 +6,7 @@
 	import { calculateValue } from '$lib/utils';
 	import TextBlock from './text-block.svelte';
 	import Box from '$lib/components/layout/box/box.svelte';
+	import * as m from '$lib/paraglide/messages';
 
 	interface Props {
 		network: NetworkState;
@@ -36,14 +37,12 @@
 	>
 		<Box>
 			<TextBlock
-				{...{
-					title: `EOS Network DeFi`,
-					text: 'System-level DeFi is offered by the EOS network both staking and RAM trading. The network also supports a variety of DeFi applications, including decentralized exchanges, lending platforms, swaps, and more.'
-					// button: {
-					// 	text: 'Explore DeFi Platforms',
-					// 	href: `${network}/defi`
-					// }
-				}}
+				title={m.homepage_performance_defi({
+					network: networkName
+				})}
+				text={m.homepage_performance_defi_description({
+					network: networkName
+				})}
 			/>
 		</Box>
 	</div>
@@ -55,7 +54,7 @@
 		<div id="performance-row-1" class="grid gap-4 @lg:grid-cols-[1fr_auto_1fr]">
 			<!-- Market Cap -->
 			<Card class="grid content-between gap-4  bg-mineShaft-900/40">
-				<h3 class="text-muted text-sm">EOS Market Cap</h3>
+				<h3 class="text-muted text-sm">{network.chain.name} {m.common_market_cap()}</h3>
 				<p class="justify-self-end text-nowrap text-xl font-semibold text-white">
 					<AssetText value={network.marketcap} variant="short" />
 				</p>
@@ -78,7 +77,7 @@
 
 			<!-- Native TVL -->
 			<Card class="grid content-between gap-4 bg-mineShaft-900/60">
-				<h3 class="text-muted text-sm">Native TVL</h3>
+				<h3 class="text-muted text-sm">{m.common_native_tvl()}</h3>
 				<p class="justify-self-end text-nowrap text-xl font-semibold text-white">
 					<AssetText value={tvl} variant="short" />
 				</p>
@@ -98,7 +97,7 @@
 
 			<!-- Ram Eos pair -->
 			<Card class="grid flex-1 content-between gap-4  bg-mineShaft-900/60">
-				<h3 class="text-muted text-sm">RAM/EOS</h3>
+				<h3 class="text-muted text-sm">RAM/{network.chain.systemToken?.symbol.name}</h3>
 				<p class="justify-self-end text-nowrap text-xl font-semibold text-white">
 					<AssetText value={network.ramprice?.eos} variant="full" />
 				</p>

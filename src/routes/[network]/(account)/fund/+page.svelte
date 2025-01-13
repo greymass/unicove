@@ -162,7 +162,13 @@
 								<DD>{env.PUBLIC_EOS_COINBASE_ASSET}</DD>
 							</DLRow>
 							<DLRow title={m.send_receiving_account()}>
-								<DD>{context.account?.name}</DD>
+								<DD>
+									{#if context.account}
+										{context.account?.name}
+									{:else}
+										{m.common_not_logged_in()}
+									{/if}
+								</DD>
 							</DLRow>
 						</DL>
 					</div>

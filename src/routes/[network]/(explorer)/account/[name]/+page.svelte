@@ -11,6 +11,7 @@
 	import ResourceCard from '$lib/components/elements/resourceCard.svelte';
 	import Button from '$lib/components/button/button.svelte';
 	import { Breakdown, BreakdownRow } from '$lib/components/breakdown';
+	import * as m from '$lib/paraglide/messages';
 
 	const { data } = $props();
 
@@ -50,13 +51,17 @@
 					<DollarSign />
 				</picture>
 				<div>
-					<p>Total Account Value</p>
+					<p>{m.account_page_total_value()}</p>
 					<AssetText class="text-2xl font-bold text-white" variant="full" value={accountValue} />
 				</div>
 			</Cluster>
 		</Card>
 
-		<Card id="eos" title="EOS" class="break-after-avoid">
+		<Card
+			id="system-token"
+			title={String(data.network.chain.systemToken?.symbol.name)}
+			class="break-after-avoid"
+		>
 			<Stack>
 				<div
 					class="col-span-full grid min-h-12 grid-cols-subgrid items-center gap-x-4 border-mineShaft-900"
@@ -65,12 +70,12 @@
 						class="col-start-1 col-end-3 row-start-1 flex flex-col py-2 @xs:flex-row @xs:justify-between"
 					>
 						<Stack class="gap-2">
-							<h4 class="text-muted text-base leading-none">Value</h4>
+							<h4 class="text-muted text-base leading-none">{m.common_value()}</h4>
 							<p class="text-xl font-semibold leading-none text-white">
 								<AssetText variant="full" value={tokenValue} />
 							</p>
 							<Chip>
-								<TradingPair value={tokenPrice} />x
+								<TradingPair value={tokenPrice} />
 								<!-- TODO: Percent change -->
 							</Chip>
 						</Stack>
@@ -84,7 +89,7 @@
 								class="inline-block h-12 content-center text-skyBlue-500 hover:text-skyBlue-400"
 								href={`/${data.network}/fund`}
 							>
-								Add Funds
+								{m.common_add_funds()}
 							</a>
 						</div>
 					{/if}
@@ -92,23 +97,31 @@
 
 				<Breakdown {isCurrentUser}>
 					<BreakdownRow
-						key="Available"
+						key={m.common_available()}
 						value={tokenAvailable}
-						action={{ text: 'Send', href: `/${data.network}/send`, visible: isCurrentUser }}
+						action={{
+							text: m.common_send(),
+							href: `/${data.network}/send`,
+							visible: isCurrentUser
+						}}
 					/>
 
 					<BreakdownRow
-						key="Staked"
+						key={m.common_staked()}
 						value={tokenStaked}
-						action={{ text: 'Staking', href: `/${data.network}/staking`, visible: isCurrentUser }}
+						action={{
+							text: m.common_staking(),
+							href: `/${data.network}/staking`,
+							visible: isCurrentUser
+						}}
 					/>
 
 					{#if tokenUnstaked && tokenUnstaked.value > 0}
 						<BreakdownRow
-							key="Unstaked"
+							key={m.common_unstaking()}
 							value={tokenUnstaked}
 							action={{
-								text: 'Withdraw',
+								text: m.common_withdraw(),
 								href: `/${data.network}/staking/withdraw`,
 								visible: isCurrentUser
 							}}
@@ -117,10 +130,10 @@
 
 					{#if tokenDelegated && tokenDelegated.value > 0}
 						<BreakdownRow
-							key="Delegated"
+							key={m.common_delegated()}
 							value={tokenDelegated}
 							action={{
-								text: 'Reclaim',
+								text: m.common_reclaim(),
 								href: `/${data.network}/undelegate`,
 								visible: isCurrentUser
 							}}
@@ -129,13 +142,17 @@
 
 					{#if tokenRefunding && tokenRefunding.value > 0}
 						<BreakdownRow
-							key="Refunding"
+							key={m.common_refunding()}
 							value={tokenRefunding}
-							action={{ text: 'Claim', href: `/${data.network}/refund`, visible: isCurrentUser }}
+							action={{
+								text: m.common_claim(),
+								href: `/${data.network}/refund`,
+								visible: isCurrentUser
+							}}
 						/>
 					{/if}
 
-					<BreakdownRow key="Total" value={tokenTotal} />
+					<BreakdownRow key={m.common_total()} value={tokenTotal} />
 				</Breakdown>
 			</Stack>
 		</Card>
@@ -143,7 +160,7 @@
 		<Card id="ram" title="RAM" class="">
 			<Stack>
 				<Stack class="gap-2">
-					<h4 class="text-muted text-base leading-none">Value</h4>
+					<h4 class="text-muted text-base leading-none">{m.common_value()}</h4>
 					<p class="text-xl font-semibold leading-none text-white">
 						<AssetText variant="full" value={ramValue} />
 					</p>
@@ -158,13 +175,17 @@
 
 				<Breakdown {isCurrentUser}>
 					<BreakdownRow
-						key="Available"
+						key={m.common_available()}
 						value={ramAvailable}
-						action={{ text: 'RAM Market', href: `/${data.network}/ram`, visible: isCurrentUser }}
+						action={{
+							text: m.common_ram_market(),
+							href: `/${data.network}/ram`,
+							visible: isCurrentUser
+						}}
 					/>
 
-					<BreakdownRow key="Used" value={ramUsed} />
-					<BreakdownRow key="Total" value={ramTotal} />
+					<BreakdownRow key={m.common_used()} value={ramUsed} />
+					<BreakdownRow key={m.common_total()} value={ramTotal} />
 				</Breakdown>
 			</Stack>
 		</Card>
@@ -172,14 +193,16 @@
 		<Tokendistribution data={data.account.value} />
 
 		{#if context.settings.data.advancedMode}
-			<Card title="Resources">
+			<Card title={m.common_resources()}>
 				<div class="flex flex-wrap gap-12 *:flex-1">
 					<ResourceCard type="cpu" value={String(cpuAvailable)} vertical />
 
 					<ResourceCard type="net" value={String(netAvailable)} vertical />
 				</div>
 				{#if isCurrentUser}
-					<Button href={`/${data.network}/resources`} variant="secondary">Go to Resources</Button>
+					<Button href={`/${data.network}/resources`} variant="secondary"
+						>{m.common_resources()}</Button
+					>
 				{/if}
 			</Card>
 		{/if}

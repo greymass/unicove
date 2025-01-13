@@ -3,6 +3,7 @@
 	import PillGroup from '$lib/components/navigation/pillgroup.svelte';
 	import { type UnicoveContext } from '$lib/state/client.svelte.js';
 	import { getContext } from 'svelte';
+	import * as m from '$lib/paraglide/messages';
 
 	const { children, data } = $props();
 
@@ -14,9 +15,9 @@
 			urlBase += `/${data.seq}`;
 		}
 		return [
-			{ href: urlBase, text: 'Summary' },
+			{ href: urlBase, text: m.common_summary() },
 			// { href: `${urlBase}/resources`, text: 'Resources' },
-			{ href: `${urlBase}/data`, text: 'Data' }
+			{ href: `${urlBase}/data`, text: m.common_data() }
 		];
 	});
 </script>

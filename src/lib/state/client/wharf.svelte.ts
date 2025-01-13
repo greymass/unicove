@@ -30,7 +30,6 @@ import { WalletPluginTokenPocket } from '@wharfkit/wallet-plugin-tokenpocket';
 import { TransactPluginResourceProvider } from '@wharfkit/transact-plugin-resource-provider';
 
 import { AccountCreationPluginMetamask } from '@wharfkit/account-creation-plugin-metamask';
-import { AccountCreationPluginGreymass } from '@wharfkit/account-creation-plugin-greymass';
 
 import { TransactPluginStatusEmitter } from '$lib/wharf/plugins/status';
 
@@ -59,10 +58,7 @@ export const accountCreationPluginMetamask = new AccountCreationPluginMetamask({
 	snapOrigin: PUBLIC_METAMASK_SNAP_ORIGIN
 });
 
-const accountCreationPlugins: AccountCreationPlugin[] = [
-	accountCreationPluginMetamask,
-	new AccountCreationPluginGreymass()
-];
+const accountCreationPlugins: AccountCreationPlugin[] = [accountCreationPluginMetamask];
 
 const transactPlugins: TransactPlugin[] = [
 	new TransactPluginStatusEmitter(),
@@ -100,7 +96,7 @@ export class WharfState {
 		}
 		this.sessionKit = new SessionKit(
 			{
-				appName: '2nicove',
+				appName: 'unicove',
 				chains: this.chains,
 				ui: new WebRenderer({ minimal: true }),
 				walletPlugins

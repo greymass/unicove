@@ -6,6 +6,7 @@
 	import { getAPR } from '$lib/utils/staking';
 	import Switcher from '$lib/components/layout/switcher.svelte';
 	import Box from '$lib/components/layout/box/box.svelte';
+	import * as m from '$lib/paraglide/messages';
 
 	interface Props {
 		network: NetworkState;
@@ -21,27 +22,30 @@
 		<!-- Text -->
 		<Box class="col-span-full">
 			<Stack class="max-w-md items-start">
-				<h2 class="h3 leading-tight">EOS Staking Rewards</h2>
+				<h2 class="h3 leading-tight">{network.chain.name} {m.common_staking_rewards()}</h2>
 				<p>
-					Stake {network.chain.systemToken?.symbol.name} today for an estimated {apr}% APR<sup
-						>1</sup
-					>.
+					{m.homepage_staking_intro({
+						network: network.chain.name,
+						apr
+					})}<sup>1</sup>.
 				</p>
 				<p>
-					The {network.chain.name} staking rewards program proportionally distributes 85.6k {network
-						.chain.systemToken?.symbol.name} daily to token holders who have staked their tokens. These
-					tokens can be unstaked and will be usable again after a 21 day lockup period.
+					{m.homepage_staking_description({
+						network: network.chain.name,
+						token: String(network.chain.systemToken?.symbol.name)
+					})}
 				</p>
 				<div class="mt-2 flex gap-6">
 					<Button
 						class="border border-mineShaft-600 px-6"
 						href={`/${network}/staking`}
-						text="Stake Tokens"
+						text={m.common_stake_action()}
 					/>
 					<Button href="https://eosnetwork.com/staking-rewards/" text="Learn more" icon />
 				</div>
 				<p class="text-muted text-xs">
-					<sup>1</sup> APR is based on the total amount staked and dynamically changes over time.
+					<sup>1</sup>
+					{m.homepage_staking_intro_legend()}
 				</p>
 			</Stack>
 		</Box>

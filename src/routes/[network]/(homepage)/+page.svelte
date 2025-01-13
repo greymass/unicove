@@ -8,7 +8,7 @@
 	import PerformanceGrid from './components/performance-grid.svelte';
 
 	const { data } = $props();
-	const { ramPrices, tokenPrices } = $derived(data);
+	const { ramResponse, tokenResponse } = $derived(data);
 
 	let networkLogo = $derived(String(chainLogos.get(data.network?.chain.id.toString())));
 	let networkName = $derived(String(data.network.chain.name));
@@ -21,7 +21,7 @@
 
 	<StakingRewards network={data.network} />
 
-	<Charts {ramPrices} {tokenPrices} network={data.network} />
+	<Charts {ramResponse} {tokenResponse} network={data.network} />
 
 	<PerformanceGrid {networkLogo} {networkName} network={data.network} />
 </Subgrid>
