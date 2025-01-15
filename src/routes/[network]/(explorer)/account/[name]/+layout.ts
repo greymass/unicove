@@ -1,9 +1,10 @@
 import { AccountState } from '$lib/state/client/account.svelte';
-import { error, type LoadEvent } from '@sveltejs/kit';
+import { error } from '@sveltejs/kit';
 import { Name } from '@wharfkit/antelope';
 import * as m from '$lib/paraglide/messages';
+import type { LayoutLoad } from './$types';
 
-export const load = async ({ fetch, params, parent }: LoadEvent) => {
+export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 	const { network } = await parent();
 	let account: AccountState;
 	try {

@@ -7,13 +7,13 @@ export const load: PageLoad = async ({ params, parent, fetch, url }) => {
 	const account = params.name;
 	const startIndex = url.searchParams.get('start') || 0;
 
-	// console.log('startIndex', startIndex);
-	// console.log(`/${network}/api/account/${account}/activity/${startIndex}`);
-
 	const response = await fetch(`/${network}/api/account/${account}/activity/${-startIndex}`);
 	const json = await response.json();
 
 	return {
+		account,
+		network,
+		json,
 		subtitle: m.explorer_account_activity_subtitle({
 			network: network.chain.name
 		}),

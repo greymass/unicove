@@ -21,15 +21,13 @@ export async function GET({ fetch, params }: RequestEvent) {
 	}
 
 	const start = Number(params.start) || 1;
-	const requests = [getActivity(network.client, params.name, start)];
-	const headers = getCacheHeaders(5);
+
+	// Aggressively cache older activity
+	const headers = start > 1 ? getCacheHeaders(5) : getCacheHeaders(3600);
 
 	try {
-		// const begin = performance.now();
-		// This is slow...
-		const [activity] = await Promise.all(requests);
-		// const end = performance.now();
-		// console.log('activity', end - begin);
+		// This call is intermittently very slow...
+		const activity = await getActivity(network.client, params.name, start);
 		return json(
 			{
 				ts: new Date(),
