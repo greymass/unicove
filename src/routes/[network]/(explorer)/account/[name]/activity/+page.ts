@@ -5,9 +5,9 @@ export const load: PageLoad = async ({ params, parent, fetch, url }) => {
 	const { network } = await parent();
 
 	const account = params.name;
-	const startIndex = url.searchParams.get('start') || 0;
+	const startIndex = Number(url.searchParams.get('start')) * -1;
 
-	const response = await fetch(`/${network}/api/account/${account}/activity/${-startIndex}`);
+	const response = await fetch(`/${network}/api/account/${account}/activity/${startIndex}`);
 	const json = await response.json();
 
 	return {
