@@ -17,6 +17,7 @@
 	import type { AccountState } from '$lib/state/client/account.svelte';
 	import type { PowerUpState } from '@wharfkit/resources';
 
+	import * as m from '$lib/paraglide/messages';
 	import { calAvailableSize, preventDefault } from '$lib/utils';
 	import { RentState } from './state.svelte';
 	import { getCpuAndNetPrice, getPowerupFrac, type RentType } from './utils';
@@ -34,9 +35,9 @@
 	const cpuAvailableSize = $derived(calAvailableSize(context.account?.cpu));
 	const netAvailableSize = $derived(calAvailableSize(context.account?.net));
 	const usableTime = $derived.by(() => {
-		if (rentType === 'POWERUP') return '24 Hours';
-		if (rentType === 'REX') return '30 Days';
-		return 'Until Unstaked';
+		if (rentType === 'POWERUP') return m.resources_usable_time_24h();
+		if (rentType === 'REX') return  m.resources_usable_time_30days();
+		return m.resources_usable_time_until_unstaked();
 	});
 
 	$effect(() => {
@@ -81,13 +82,13 @@
 	const rentState: RentState = $state(new RentState(network.chain, rentType));
 	const rentDetails = $derived.by(() => {
 		const details = [];
-		details.push({ title: 'Usable for', desc: usableTime });
+		details.push({ title: m.common_usable_for(), desc: usableTime });
 		details.push({
-			title: 'Balance available',
+			title: m.common_balance_available(),
 			desc: `${rentState.balance.quantity} ${rentState.balance.symbol.name}`
 		});
 		details.push({
-			title: 'Total cost',
+			title: m.common_total_cost(),
 			desc: `${rentState.cost.quantity} ${rentState.cost.symbol.name}`
 		});
 		return details;
@@ -137,7 +138,8 @@
 		<Stack class="py-4 sm:p-4 ">
 			<fieldset class="grid gap-4">
 				<Label for="cpuNumberInput"
-					>Amount of CPU {#if rentState.cpuPricePerMs}
+					>{m.common_resouce_amount({ resource: 'CPU' })}
+					{#if rentState.cpuPricePerMs}
 						(<AssetText variant="full" value={rentState.cpuPricePerMs} />/MS){/if}</Label
 				>
 				<NumberInput
@@ -151,7 +153,8 @@
 
 			<fieldset class="grid gap-4">
 				<Label for="netNumberInput"
-					>Amount of NET {#if rentState.netPricePerKb}
+					>{m.common_resouce_amount({ resource: 'NET' })}
+					{#if rentState.netPricePerKb}
 						(<AssetText variant="full" value={rentState.netPricePerKb} />/KB){/if}</Label
 				>
 				<NumberInput
@@ -165,18 +168,18 @@
 
 			<fieldset class="flex items-center gap-3">
 				<Checkbox id="rentForSelf" bind:checked={rentState.rentingForSelf} />
-				<Label for="rentForSelf">Rent Resources for my account</Label>
+				<Label for="rentForSelf">{m.resources_rent_for_self()}</Label>
 			</fieldset>
 
 			{#if !rentState.rentingForSelf}
 				<fieldset class="semi-bold grid gap-4">
-					<Label for="thirdReceiver">Receiving Account</Label>
+					<Label for="thirdReceiver">{m.send_receiving_account()}</Label>
 					<NameInput
 						id="thirdReceiver"
 						bind:this={receiverNameInput}
 						bind:value={rentState.thirdReceiver}
 						bind:valid={rentState.thirdReceiverValid}
-						placeholder="Enter the account name"
+						placeholder={m.resources_rent_receiving_placeholder()}
 					/>
 				</fieldset>
 			{/if}
@@ -186,9 +189,9 @@
 			{/if}
 			<Button type="submit" class="w-full" disabled={!rentState.valid}>
 				{#if rentState.cost.value}
-					Rent for {rentState.cost}
+					{m.resources_rent_confirm_with_cost({ cost: rentState.cost })}
 				{:else}
-					Confirm Rent
+					{m.resources_rent_confirm()}
 				{/if}
 			</Button>
 		</Stack>
