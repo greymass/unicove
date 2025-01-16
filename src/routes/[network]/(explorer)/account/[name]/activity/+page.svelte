@@ -18,7 +18,7 @@
 {#if data.json.activity.actions.length}
 	<div class="grid gap-6 md:grid-cols-[auto_auto_auto_1fr]">
 		<div
-			class="col-span-full grid grid-cols-subgrid gap-2 border-b border-mineShaft-900 pb-6 md:gap-4"
+			class="col-span-full grid grid-cols-subgrid gap-2 border-b border-mineShaft-900 pb-4 *:text-mineShaft-50 md:gap-4"
 		>
 			<p>ID</p>
 			<p>Time</p>
@@ -27,7 +27,7 @@
 		</div>
 		{#each data.json.activity.actions as action}
 			<div
-				class="col-span-full grid grid-cols-subgrid gap-2 border-b border-mineShaft-900 pb-6 md:gap-4"
+				class="col-span-full grid grid-cols-subgrid gap-2 border-b border-mineShaft-900 pb-6 last:border-none md:gap-4"
 			>
 				<Transaction id={action.id} />
 				<p>{action.timestamp}</p>
