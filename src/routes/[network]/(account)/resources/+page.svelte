@@ -7,6 +7,7 @@
 	import RamResource from '$lib/components/elements/ramresource.svelte';
 	import AccountBalance from '$lib/components/card/accountbalance.svelte';
 	import { calAvailableSize } from '$lib/utils';
+	import * as m from '$lib/paraglide/messages';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
@@ -79,21 +80,23 @@
 			/>
 			{#if data.network.supports('powerup')}
 				<Button variant="primary" href="/{network}/resources/powerup"
-					>Rent resources with PowerUp</Button
+					>{m.resources_rent_with_powerup()}</Button
 				>
 			{/if}
 			{#if data.network.supports('rentrex')}
-				<Button variant="primary" href="/{network}/resources/rex">Rent resources with REX</Button>
+				<Button variant="primary" href="/{network}/resources/rex"
+					>{m.resources_rent_with_rex()}</Button
+				>
 			{/if}
 			{#if data.network.supports('stakeresource')}
 				<Button variant="primary" href="/{network}/resources/stake"
-					>Stake {symbolName} for resources</Button
+					>{m.resources_rent_with_stake({ symbolName })}</Button
 				>
 			{/if}
 		</Stack>
 		<Stack>
 			<RamResource ramAvailable={ramAvailableSize} {precision} />
-			<Button variant="secondary" href="/{network}/ram">RAM Market</Button>
+			<Button variant="secondary" href="/{network}/ram">{m.common_ram_market()}</Button>
 		</Stack>
 		<AccountBalance />
 	</Stack>

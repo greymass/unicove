@@ -1,13 +1,21 @@
 import type { LayoutLoad } from './$types';
+import * as m from '$lib/paraglide/messages';
 
 export const load: LayoutLoad = async ({ parent }) => {
 	const { network } = await parent();
+	const title = m.resources_network_title({
+		network: network.chain.name
+	});
 	return {
-		title: `${network.chain.name} Network Resources`,
-		subtitle: `Manage CPU, NET, and RAM resources on the ${network.chain.name} Network.`,
+		title,
+		subtitle: m.resources_network_subtitle({
+			network: network.chain.name
+		}),
 		pageMetaTags: {
-			title: `${network.chain.name} Network Resources`,
-			description: `An overview of the multiple network resources usable on the ${network.chain.name} network providing access to manage resources using an compatible wallet.`
+			title,
+			description: m.resources_metadata_overview_description({
+				network: network.chain.name
+			})
 		}
 	};
 };
