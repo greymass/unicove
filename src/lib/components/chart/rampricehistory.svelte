@@ -16,7 +16,7 @@
 			const response = await fetch(`/${network}/api/metrics/marketprice/ram`);
 			const parsedRamResponse: APIResponse = await response.json();
 
-			if (Array.isArray(parsedRamResponse)) {
+			if (Array.isArray(parsedRamResponse) && parsedRamResponse.length) {
 				return parsedRamResponse.map(
 					(price: Price) =>
 						({

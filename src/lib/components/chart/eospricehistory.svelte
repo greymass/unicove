@@ -16,7 +16,7 @@
 			const response = await fetch(`/${network}/api/metrics/marketprice/token`);
 			const parsedTokenResponse: APIResponse = await response.json();
 
-			if (Array.isArray(parsedTokenResponse)) {
+			if (Array.isArray(parsedTokenResponse) && parsedTokenResponse.length) {
 				return parsedTokenResponse.map(
 					(price: Price) =>
 						({
