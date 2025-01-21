@@ -5,7 +5,8 @@ export enum SettingKeys {
 	'debugMode' = 'debugMode',
 	'preventAccountPageSwitching' = 'preventAccountPageSwitching',
 	'searchAccountSwitch' = 'searchAccountSwitch',
-	'searchShowPages' = 'searchShowPages'
+	'searchShowPages' = 'searchShowPages',
+	'hideSideMenu' = 'hideSideMenu'
 }
 
 export type SettingsData = Record<SettingKeys, unknown>;
@@ -16,7 +17,8 @@ export class SettingsState {
 		debugMode: false,
 		preventAccountPageSwitching: false,
 		searchAccountSwitch: false,
-		searchShowPages: true
+		searchShowPages: true,
+		hideSideMenu: false
 	});
 
 	constructor() {

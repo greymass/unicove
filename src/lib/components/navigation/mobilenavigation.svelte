@@ -10,6 +10,9 @@
 
 	const context = getContext<UnicoveContext>('state');
 
+	// Always show the button when hide menu setting is active
+	const showMenuButton = $derived(!!context.settings.data.hideSideMenu);
+
 	interface Props {
 		network: NetworkState;
 		class?: string;
@@ -62,27 +65,29 @@
 	focus-visible:ring-inset
 	focus-visible:ring-solar-500
 	md:hidden
+	md:data-[show=true]:flex
 	{className}
 	"
 	use:melt={$trigger}
 	aria-label="menu-open"
 	id="menu-open"
 	data-session={!!context.wharf.session}
+	data-show={showMenuButton}
 >
 	<Unicovelogo small />
 	<Menu class="size-8 text-inherit" />
 </button>
 
 {#if $open}
-	<div class="md:hidden" use:melt={$portalled}>
+	<div use:melt={$portalled}>
 		<div
 			use:melt={$overlay}
-			class="fixed inset-0 z-50 bg-black/50 md:bg-transparent"
+			class="fixed inset-0 z-50 bg-black/50"
 			transition:fade={{ duration: 150 }}
 		></div>
 		<nav
 			use:melt={$content}
-			class="fixed left-0 top-0 z-50 grid h-svh grid-rows-[auto_1fr] gap-8 bg-shark-950 px-8 pt-4 shadow-lg focus:outline-none md:bg-transparent md:shadow-none"
+			class="fixed left-0 top-0 z-50 grid h-svh grid-rows-[auto_1fr] gap-8 bg-shark-950 px-8 pt-4 shadow-lg focus:outline-none"
 			transition:fly={{
 				x: -350,
 				duration: 300,

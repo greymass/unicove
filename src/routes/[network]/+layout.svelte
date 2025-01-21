@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Checksum256, type NameType } from '@wharfkit/antelope';
 	import { chainLogos } from '@wharfkit/common';
-	import { onMount, setContext, untrack } from 'svelte';
+	import { getContext, onMount, setContext, untrack } from 'svelte';
 	import X from 'lucide-svelte/icons/circle-x';
 	import * as env from '$env/static/public';
 
@@ -14,7 +14,6 @@
 	import MobileNavigation from '$lib/components/navigation/mobilenavigation.svelte';
 	import SideMenuContent from '$lib/components/navigation/sidemenu.svelte';
 	import AccountSwitcher from '$lib/components/accountswitch.svelte';
-	import UnicoveLogo from '$lib/assets/unicovelogo.svelte';
 	import Search from '$lib/components/search/input.svelte';
 	import { SettingsState } from '$lib/state/settings.svelte.js';
 	import Unicovelogo from '$lib/assets/unicovelogo.svelte';
@@ -43,6 +42,9 @@
 			return wharf;
 		}
 	});
+
+	const context = getContext<UnicoveContext>('state');
+	let showSideMenu = $derived(!context.settings.data.hideSideMenu);
 
 	export function setAccount(
 		state: NetworkState,
@@ -188,16 +190,18 @@
 	md:gap-x-4
 	"
 >
-	<aside
-		class="relative col-start-1 col-end-3 row-span-full row-start-1 hidden h-full grid-rows-subgrid md:grid"
-	>
-		<nav class="sticky top-4 row-span-2 grid max-h-svh grid-rows-subgrid content-start">
-			<a href="/{data.network}" class="grid h-12 items-center" aria-label="home">
-				<Unicovelogo small class="items-start" />
-			</a>
-			<SideMenuContent network={data.network} />
-		</nav>
-	</aside>
+	{#if showSideMenu}
+		<aside
+			class="relative col-start-1 col-end-3 row-span-full row-start-1 hidden h-full grid-rows-subgrid md:grid"
+		>
+			<nav class="sticky top-4 row-span-2 grid max-h-svh grid-rows-subgrid content-start">
+				<a href="/{data.network}" class="grid h-12 items-center" aria-label="home">
+					<Unicovelogo small class="items-start" />
+				</a>
+				<SideMenuContent network={data.network} />
+			</nav>
+		</aside>
+	{/if}
 
 	<header class="col-span-full row-start-1 flex h-12 items-center justify-between">
 		<MobileNavigation network={data.network} />
@@ -212,7 +216,13 @@
 	</header>
 
 	<main
-		class="col-span-full col-start-1 row-span-full row-start-2 grid grid-cols-subgrid content-start gap-x-4 *:col-span-full md:col-start-3 md:col-end-13 md:px-0 lg:col-end-12"
+		data-full-width={!showSideMenu}
+		class="col-span-full col-start-1 row-span-full row-start-2 grid grid-cols-subgrid content-start gap-x-4 *:col-span-full
+		md:col-end-13
+		md:px-0
+		md:data-[full-width=false]:col-start-3
+		lg:data-[full-width=false]:col-end-12
+		"
 	>
 		{@render children()}
 	</main>

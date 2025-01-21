@@ -357,6 +357,8 @@
 	"settings_enable_developer": "Enable Developer Mode",
 	"settings_enable_developer_desc": "Show raw data used for development and debugging",
 	"settings_general": "General",
+	"settings_hide_side_menu": "Hide Side Menu",
+	"settings_hide_side_menu_desc": "Maximize available horizontal space by collapsing the navigation menu on larger screens.",
 	"settings_language_selector": "Language Selector",
 	"settings_page_subtitle": "Configure Unicove",
 	"settings_prevent_account_page_switching": "Remain on current page when switching accounts",

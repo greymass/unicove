@@ -15,6 +15,7 @@
 	let searchShowPages = $state(!!context.settings.data.searchShowPages);
 	let advancedMode = $state(!!context.settings.data.advancedMode);
 	let debugMode = $state(!!context.settings.data.debugMode);
+	let hideSideMenu = $state(!!context.settings.data.hideSideMenu);
 
 	$effect(() => {
 		context.settings.data = {
@@ -23,7 +24,8 @@
 			searchAccountSwitch,
 			searchShowPages,
 			// Override debug mode if advanced mode is disabled
-			debugMode: advancedMode ? debugMode : false
+			debugMode: advancedMode ? debugMode : false,
+			hideSideMenu
 		};
 	});
 </script>
@@ -79,6 +81,14 @@
 		<Switch id="advanced-mode" bind:checked={advancedMode} />
 	</div>
 
+	<div class="flex items-center justify-between">
+		<Stack class="gap-1">
+			<Label for="hide-side-menu">{m.settings_hide_side_menu()}</Label>
+			<p class="caption text-sm">{m.settings_hide_side_menu_desc()}</p>
+		</Stack>
+		<Switch id="hide-side-menu" bind:checked={hideSideMenu} />
+	</div>
+
 	{#if advancedMode}
 		<div class="flex items-center justify-between">
 			<h2 class="text-muted text-xl font-semibold">{m.settings_developer()}</h2>
@@ -92,6 +102,7 @@
 		</div>
 	{/if}
 </div>
+
 {#if debugMode}
 	<Code>{JSON.stringify(context.settings.data, null, 2)}</Code>
 {/if}
