@@ -5,8 +5,8 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import SideMenuContent from '$lib/components/navigation/sidemenu.svelte';
 	import Menu from 'lucide-svelte/icons/menu';
-	import UnicoveLogo from '$lib/assets/unicovelogo.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
+	import Unicovelogo from '$lib/assets/unicovelogo.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -69,7 +69,7 @@
 	id="menu-open"
 	data-session={!!context.wharf.session}
 >
-	<UnicoveLogo small class="size-8 w-min place-self-center" />
+	<Unicovelogo small />
 	<Menu class="size-8 text-inherit" />
 </button>
 
@@ -80,27 +80,19 @@
 			class="fixed inset-0 z-50 bg-black/50 md:bg-transparent"
 			transition:fade={{ duration: 150 }}
 		></div>
-		<div
+		<nav
 			use:melt={$content}
-			class="
-			fixed
-			left-0
-			top-0
-			z-50
-			h-svh
-			bg-shark-950
-			shadow-lg
-			focus:outline-none
-			md:bg-transparent
-			md:shadow-none
-			"
+			class="fixed left-0 top-0 z-50 grid h-svh grid-rows-[auto_1fr] gap-8 bg-shark-950 px-8 pt-4 shadow-lg focus:outline-none md:bg-transparent md:shadow-none"
 			transition:fly={{
 				x: -350,
 				duration: 300,
 				opacity: 1
 			}}
 		>
+			<a href="/{network}" onclick={closeMenu} aria-label="Unicove Home">
+				<Unicovelogo wordmark />
+			</a>
 			<SideMenuContent callbackFn={closeMenu} {network} />
-		</div>
+		</nav>
 	</div>
 {/if}
