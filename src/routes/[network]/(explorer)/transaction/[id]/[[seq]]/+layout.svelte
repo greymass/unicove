@@ -14,18 +14,19 @@
 		if (data.seq) {
 			urlBase += `/${data.seq}`;
 		}
-		return [
+		const options = [
 			{ href: urlBase, text: m.common_summary() },
-			// { href: `${urlBase}/resources`, text: 'Resources' },
-			{ href: `${urlBase}/data`, text: m.common_data() }
+			{ href: `${urlBase}/traces`, text: 'Traces' }
 		];
+		if (settings.data.debugMode) {
+			options.push({ href: `${urlBase}/data`, text: m.common_data() });
+		}
+		return options;
 	});
 </script>
 
 <Stack class="@container">
-	{#if settings.data.debugMode}
-		<PillGroup {options} />
-	{/if}
+	<PillGroup {options} />
 
 	{@render children()}
 </Stack>
