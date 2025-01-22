@@ -141,6 +141,7 @@ export class AccountState {
 			balances: this.balances,
 			delegations: this.delegations,
 			permissions: this.permissions,
+			proposals: this.proposals,
 			resources: {
 				cpu: this.cpu,
 				net: this.net,
