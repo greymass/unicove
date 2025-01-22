@@ -28,7 +28,7 @@ export const GET: RequestHandler = async ({ fetch, params }) => {
 			msigContract.table('proposal', params.name).all()
 		]);
 
-		let rexbal, rexfund;
+		let rexfund;
 		let balances: LightAPIBalanceRow[] = [];
 
 		if (network.supports('lightapi')) {
@@ -36,9 +36,7 @@ export const GET: RequestHandler = async ({ fetch, params }) => {
 		}
 
 		if (network.supports('rex')) {
-			const t4 = systemContract.table('rexbal').get(params.name);
-			const t5 = systemContract.table('rexfund').get(params.name);
-			[rexbal, rexfund] = await Promise.all([t4, t5]);
+			rexfund = await systemContract.table('rexfund').get(params.name);
 		}
 
 		// If no response from the light API, add a default balance of zero
@@ -59,7 +57,6 @@ export const GET: RequestHandler = async ({ fetch, params }) => {
 				balances,
 				delegated,
 				proposals,
-				rex: rexbal,
 				rexfund: rexfund
 			},
 			{ headers }

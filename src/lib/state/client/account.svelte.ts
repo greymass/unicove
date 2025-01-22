@@ -25,7 +25,6 @@ const defaultDataSources = {
 	light_account: [],
 	delegated: [],
 	proposals: [],
-	rex: undefined,
 	rexfund: undefined
 };
 
@@ -111,7 +110,6 @@ export class AccountState {
 			light_account: json.balances,
 			delegated: json.delegated,
 			proposals: json.proposals,
-			rex: json.rex,
 			rexfund: json.rexfund
 		};
 		this.account = new Account({
@@ -256,9 +254,9 @@ export function getBalance(network: NetworkState, sources: DataSources): Balance
 
 	if (network.config.features.rex) {
 		// Add any staked (REX) tokens to total balance based on current value
-		if (sources.rex) {
+		if (sources.get_account.rex_info) {
 			if (network.rexstate) {
-				const rex = network.rexToToken(sources.rex.rex_balance);
+				const rex = network.rexToToken(sources.get_account.rex_info.rex_balance);
 				staked.units.add(rex.units);
 				total.units.add(rex.units);
 			}
