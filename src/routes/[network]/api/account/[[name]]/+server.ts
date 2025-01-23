@@ -1,10 +1,12 @@
 import { json } from '@sveltejs/kit';
+import { Asset, type NameType } from '@wharfkit/antelope';
+import type { ChainDefinition } from '@wharfkit/common';
+
 import { getChainDefinitionFromParams, NetworkState } from '$lib/state/network.svelte';
+import { getBackendNetwork, getLightAPIURL } from '$lib/wharf/client/ssr';
 import { getCacheHeaders } from '$lib/utils';
 import type { LightAPIBalanceResponse, LightAPIBalanceRow } from '$lib/types.js';
 import type { RequestHandler } from './$types';
-import { Asset, type NameType } from '@wharfkit/antelope';
-import { getBackendNetwork, getLightAPIURL } from '$lib/wharf/client/ssr';
 
 export const GET: RequestHandler = async ({ fetch, params }) => {
 	const chain = getChainDefinitionFromParams(params.network);
@@ -17,47 +19,14 @@ export const GET: RequestHandler = async ({ fetch, params }) => {
 	}
 
 	const network = getBackendNetwork(chain, fetch);
-	const { system: systemContract, msig: msigContract } = network.contracts;
+	const headers = getCacheHeaders(5);
 
 	try {
-		const headers = getCacheHeaders(5);
-
-		const [account_data, delegated, proposals] = await Promise.all([
-			network.client.v1.chain.get_account(params.name),
-			systemContract.table('delband').all({ scope: params.name }),
-			msigContract.table('proposal', params.name).all()
-		]);
-
-		let rexfund;
-		let balances: LightAPIBalanceRow[] = [];
-
-		if (network.supports('lightapi')) {
-			balances = await loadBalances(network, params.name, fetch);
-		}
-
-		if (network.supports('rex')) {
-			rexfund = await systemContract.table('rexfund').get(params.name);
-		}
-
-		// If no response from the light API, add a default balance of zero
-		if (!balances.length && chain.systemToken) {
-			const symbol = Asset.Symbol.from(network.config.symbol);
-			balances.push({
-				contract: String(chain.systemToken.contract),
-				amount: '0',
-				decimals: String(symbol.precision),
-				currency: String(symbol.code)
-			});
-		}
-
+		const response = await getAccount(network, params.name, chain);
 		return json(
 			{
 				ts: new Date(),
-				account_data,
-				balances,
-				delegated,
-				proposals,
-				rexfund: rexfund
+				...response
 			},
 			{ headers }
 		);
@@ -81,4 +50,44 @@ async function loadBalances(
 		balances.push(...json.balances);
 	}
 	return balances;
+}
+
+async function getAccount(network: NetworkState, account: NameType, chain: ChainDefinition) {
+	const { system: systemContract, msig: msigContract } = network.contracts;
+
+	const [account_data, delegated, proposals] = await Promise.all([
+		network.client.v1.chain.get_account(account),
+		systemContract.table('delband').all({ scope: account }),
+		msigContract.table('proposal', account).all()
+	]);
+
+	let rexfund;
+	let balances: LightAPIBalanceRow[] = [];
+
+	if (network.supports('lightapi')) {
+		balances = await loadBalances(network, account, fetch);
+	}
+
+	if (network.supports('rex')) {
+		rexfund = await systemContract.table('rexfund').get(account);
+	}
+
+	// If no response from the light API, add a default balance of zero
+	if (!balances.length && chain.systemToken) {
+		const symbol = Asset.Symbol.from(network.config.symbol);
+		balances.push({
+			contract: String(chain.systemToken.contract),
+			amount: '0',
+			decimals: String(symbol.precision),
+			currency: String(symbol.code)
+		});
+	}
+
+	return {
+		account_data,
+		balances,
+		delegated,
+		proposals,
+		rexfund: rexfund
+	};
 }
