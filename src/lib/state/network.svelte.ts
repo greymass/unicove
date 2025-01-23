@@ -5,6 +5,7 @@ import { ABICache, chainIdsToIndices } from '@wharfkit/session';
 import { snapOrigins } from '@wharfkit/wallet-plugin-metamask';
 
 import { Types as DelphiOracleTypes } from '$lib/wharf/contracts/delphioracle';
+import { Contract as APIContract } from '$lib/wharf/contracts/api';
 import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
 import { Contract as MSIGContract } from '$lib/wharf/contracts/msig';
 import { Contract as SystemContract, Types as SystemTypes } from '$lib/wharf/contracts/system';
@@ -92,6 +93,7 @@ export class NetworkState {
 		});
 
 		this.contracts = {
+			api: new APIContract({ client: this.client }),
 			msig: new MSIGContract({ client: this.client }),
 			token: new TokenContract({ client: this.client }),
 			system: new SystemContract({ client: this.client })

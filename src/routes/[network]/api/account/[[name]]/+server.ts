@@ -22,7 +22,12 @@ export const GET: RequestHandler = async ({ fetch, params }) => {
 	const headers = getCacheHeaders(5);
 
 	try {
-		const response = await getAccount(network, params.name, chain);
+		let response;
+		if (network.supports('apiv2')) {
+			response = await getAccount2(network, params.name, chain);
+		} else {
+			response = await getAccount(network, params.name, chain);
+		}
 		return json(
 			{
 				ts: new Date(),
@@ -88,6 +93,40 @@ async function getAccount(network: NetworkState, account: NameType, chain: Chain
 		balances,
 		delegated,
 		proposals,
-		rexfund: rexfund
+		rexfund
+	};
+}
+
+async function getAccount2(network: NetworkState, account: NameType, chain: ChainDefinition) {
+	const { api: apiContract } = network.contracts;
+
+	const [account_data, accountResponse] = await Promise.all([
+		network.client.v1.chain.get_account(account),
+		apiContract.readonly('getaccount', { account })
+	]);
+
+	let balances: LightAPIBalanceRow[] = [];
+
+	if (network.supports('lightapi')) {
+		balances = await loadBalances(network, account, fetch);
+	}
+
+	// If no response from the light API, add a default balance of zero
+	if (!balances.length && chain.systemToken) {
+		const symbol = Asset.Symbol.from(network.config.symbol);
+		balances.push({
+			contract: String(chain.systemToken.contract),
+			amount: '0',
+			decimals: String(symbol.precision),
+			currency: String(symbol.code)
+		});
+	}
+
+	return {
+		account_data,
+		balances,
+		delegated: accountResponse.delegations,
+		proposals: accountResponse.proposals,
+		rexfund: accountResponse.rexfund
 	};
 }
