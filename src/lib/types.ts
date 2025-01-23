@@ -52,7 +52,6 @@ export interface DataSources {
 	light_account: LightAPIBalanceRow[];
 	delegated: SystemContract.Types.delegated_bandwidth[];
 	proposals: MsigContract.Types.proposal[];
-	rex?: SystemContract.Types.rex_balance;
 	rexfund?: SystemContract.Types.rex_fund;
 }
 
