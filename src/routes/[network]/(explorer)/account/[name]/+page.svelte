@@ -118,7 +118,7 @@
 
 					{#if tokenUnstaked && tokenUnstaked.value > 0}
 						<BreakdownRow
-							key={m.common_unstaking()}
+							key={m.common_unstaked()}
 							value={tokenUnstaked}
 							action={{
 								text: m.common_withdraw(),

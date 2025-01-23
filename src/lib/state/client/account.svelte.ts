@@ -51,7 +51,7 @@ export class AccountState {
 	public fetch = $state(fetch);
 
 	public network: NetworkState;
-	public sources: DataSources = $state(defaultDataSources);
+	private sources: DataSources = $state(defaultDataSources);
 
 	public account: Account | undefined = $state();
 	public name: Name | undefined = $state();
@@ -78,6 +78,7 @@ export class AccountState {
 	public ram = $derived.by(() => (this.account ? this.account.resource('ram') : undefined));
 	public permissions = $derived.by(() => (this.account ? this.account.permissions : undefined));
 	public proposals = $derived.by(() => this.sources.proposals);
+	public refundRequest = $derived.by(() => this.sources.get_account?.refund_request);
 	public value = $derived.by(() => {
 		return this.network && this.balance && this.ram
 			? getAccountValue(this.network, this.balance, this.ram)
@@ -156,6 +157,7 @@ export interface AccountValue {
 	delegated: Asset;
 	liquid: Asset;
 	ram: Asset;
+	refunding: Asset;
 	staked: Asset;
 	systemtoken: Asset;
 	total: Asset;
@@ -170,6 +172,7 @@ export function getAccountValue(
 	const delegated = Asset.from('0.0000 USD');
 	const liquid = Asset.from('0.0000 USD');
 	const ram = Asset.from('0.0000 USD');
+	const refunding = Asset.from('0.0000 USD');
 	const staked = Asset.from('0.0000 USD');
 	const unstaked = Asset.from('0.0000 USD');
 	const systemtoken = Asset.from('0.0000 USD');
@@ -179,6 +182,7 @@ export function getAccountValue(
 		delegated.units.add(calculateValue(balance.delegated, network.tokenprice).units);
 		liquid.units.add(calculateValue(balance.liquid, network.tokenprice).units);
 		staked.units.add(calculateValue(balance.staked, network.tokenprice).units);
+		refunding.units.add(calculateValue(balance.refunding, network.tokenprice).units);
 		unstaked.units.add(calculateValue(balance.unstaked, network.tokenprice).units);
 		systemtoken.units.add(calculateValue(balance.total, network.tokenprice).units);
 		total.units.add(calculateValue(balance.total, network.tokenprice).units);
@@ -195,6 +199,7 @@ export function getAccountValue(
 		delegated,
 		liquid,
 		ram,
+		refunding,
 		staked,
 		unstaked,
 		systemtoken,

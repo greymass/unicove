@@ -79,8 +79,8 @@ export function getSellableREX(
 
 export function getWithdrawableBalance(network?: NetworkState, account?: AccountState): Asset {
 	const withdrawable = Int64.from(0);
-	if (account && account.loaded && account.sources.rexfund && account.sources.rexfund.balance) {
-		withdrawable.add(Asset.from(account.sources.rexfund.balance).units);
+	if (account && account.loaded && account.balance?.unstaked) {
+		withdrawable.add(account.balance?.unstaked.units);
 	}
 	return Asset.fromUnits(withdrawable, network ? network.chain.systemToken!.symbol : defaultSymbol);
 }
