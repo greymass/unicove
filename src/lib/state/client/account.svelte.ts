@@ -78,7 +78,7 @@ export class AccountState {
 	public ram = $derived.by(() => (this.account ? this.account.resource('ram') : undefined));
 	public permissions = $derived.by(() => (this.account ? this.account.permissions : undefined));
 	public proposals = $derived.by(() => this.sources.proposals);
-	public refundRequest = $derived.by(() => this.sources.get_account?.refund_request);
+	public refundRequest = $derived.by(() => this.sources.refund_request);
 	public value = $derived.by(() => {
 		return this.network && this.balance && this.ram
 			? getAccountValue(this.network, this.balance, this.ram)
@@ -111,6 +111,7 @@ export class AccountState {
 			light_account: json.balances,
 			delegated: json.delegated,
 			proposals: json.proposals,
+			refund_request: json.refund_request,
 			rexfund: json.rexfund
 		};
 		this.account = new Account({
@@ -208,11 +209,17 @@ export function getAccountValue(
 }
 
 export interface Balance {
+	// Tokens delegated from genesis or the old eosio::delegatebw action
 	delegated: Asset;
+	// Available token balance for the account on eosio.token
 	liquid: Asset;
+	// Tokens being refunded from delegated balances, claimable with eosio::refund
 	refunding: Asset;
+	// REX balance represented as staked system tokens
 	staked: Asset;
+	// System tokens idle in the eosio.rex contract (likely from eosio::sellrex)
 	unstaked: Asset;
+	// Total balance of all owned system tokens
 	total: Asset;
 }
 
@@ -249,11 +256,11 @@ export function getBalance(network: NetworkState, sources: DataSources): Balance
 	}
 
 	// Add the currently refunding balance to the total balance
-	if (sources.get_account.refund_request) {
-		const cpu = Asset.from(sources.get_account.refund_request.cpu_amount);
+	if (sources.refund_request) {
+		const cpu = Asset.from(sources.refund_request.cpu_amount);
 		refunding.units.add(cpu.units);
 		total.units.add(cpu.units);
-		const net = Asset.from(sources.get_account.refund_request.net_amount);
+		const net = Asset.from(sources.refund_request.net_amount);
 		refunding.units.add(net.units);
 		total.units.add(net.units);
 	}

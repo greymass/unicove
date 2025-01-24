@@ -93,6 +93,7 @@ async function getAccount(network: NetworkState, account: NameType, chain: Chain
 		balances,
 		delegated,
 		proposals,
+		refund_request: account_data.refund_request,
 		rexfund
 	};
 }
@@ -127,6 +128,7 @@ async function getAccount2(network: NetworkState, account: NameType, chain: Chai
 		balances,
 		delegated: accountResponse.delegations,
 		proposals: accountResponse.proposals,
+		refund_request: accountResponse.refund,
 		rexfund: accountResponse.rexfund
 	};
 }

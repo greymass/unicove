@@ -15,7 +15,7 @@ import {
 import type {ActionOptions, ContractArgs, PartialBy, Table} from '@wharfkit/contract'
 import {Contract as BaseContract} from '@wharfkit/contract'
 export const abiBlob = Blob.from(
-    'DmVvc2lvOjphYmkvMS4yAAkKY2xlYXJ0YWJsZQADCnRhYmxlX25hbWUEbmFtZQVzY29wZQVuYW1lPwhtYXhfcm93cwd1aW50NjQ/E2RlbGVnYXRlZF9iYW5kd2lkdGgABARmcm9tBG5hbWUCdG8EbmFtZQpuZXRfd2VpZ2h0BWFzc2V0CmNwdV93ZWlnaHQFYXNzZXQUZ2V0X2FjY291bnRfcmVzcG9uc2UABQdhY2NvdW50BG5hbWULZGVsZWdhdGlvbnMVZGVsZWdhdGVkX2JhbmR3aWR0aFtdCXByb3Bvc2Fscwpwcm9wb3NhbFtdBnJleGJhbAxyZXhfYmFsYW5jZT8HcmV4ZnVuZAlyZXhfZnVuZD8KZ2V0YWNjb3VudAABB2FjY291bnQEbmFtZRlwYWlyX3RpbWVfcG9pbnRfc2VjX2ludDY0AAIFZmlyc3QOdGltZV9wb2ludF9zZWMGc2Vjb25kBWludDY0CHByb3Bvc2FsAAMNcHJvcG9zYWxfbmFtZQRuYW1lEnBhY2tlZF90cmFuc2FjdGlvbgVieXRlcxJlYXJsaWVzdF9leGVjX3RpbWUMdGltZV9wb2ludD8kC3JleF9iYWxhbmNlAAYHdmVyc2lvbgV1aW50OAVvd25lcgRuYW1lCnZvdGVfc3Rha2UFYXNzZXQLcmV4X2JhbGFuY2UFYXNzZXQLbWF0dXJlZF9yZXgFaW50NjQOcmV4X21hdHVyaXRpZXMbcGFpcl90aW1lX3BvaW50X3NlY19pbnQ2NFtdCHJleF9mdW5kAAMHdmVyc2lvbgV1aW50OAVvd25lcgRuYW1lB2JhbGFuY2UFYXNzZXQEd2lwZQAAAwCAisfka1RECmNsZWFydGFibGW+AS0tLQoKc3BlY192ZXJzaW9uOiAiMC4yLjAiCnRpdGxlOiBjbGVhcnRhYmxlCnN1bW1hcnk6ICdERUJVRzogY2xlYXJ0YWJsZSBhY3Rpb24nCmljb246IGh0dHBzOi8vYXZhdGFycy5naXRodWJ1c2VyY29udGVudC5jb20vdS8xNDcyOTI4NjE/cz00MDAmdT0zYjFhZjY2ZTkwZGQ4NTFmNGQ3YzA5NmVkNmEyZmJiNGI5ZTE5MGRhCgotLS0AQJ6aImSyYgpnZXRhY2NvdW50xwEtLS0KCnNwZWNfdmVyc2lvbjogIjAuMi4wIgp0aXRsZTogZ2V0YWNjb3VudApzdW1tYXJ5OiAnUmVhZC1vbmx5IEFQSSB0byBnZXQgYWNjb3VudCBkYXRhJwppY29uOiBodHRwczovL2F2YXRhcnMuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3UvMTQ3MjkyODYxP3M9NDAwJnU9M2IxYWY2NmU5MGRkODUxZjRkN2MwOTZlZDZhMmZiYjRiOWUxOTBkYQoKLS0tAAAAAACgquMEd2lwZbIBLS0tCgpzcGVjX3ZlcnNpb246ICIwLjIuMCIKdGl0bGU6IHdpcGUKc3VtbWFyeTogJ0RFQlVHOiB3aXBlIGFjdGlvbicKaWNvbjogaHR0cHM6Ly9hdmF0YXJzLmdpdGh1YnVzZXJjb250ZW50LmNvbS91LzE0NzI5Mjg2MT9zPTQwMCZ1PTNiMWFmNjZlOTBkZDg1MWY0ZDdjMDk2ZWQ2YTJmYmI0YjllMTkwZGEKCi0tLQABA2FwaQNhcGkAAAABAECemiJksmIUZ2V0X2FjY291bnRfcmVzcG9uc2U='
+    'DmVvc2lvOjphYmkvMS4yAAoKY2xlYXJ0YWJsZQADCnRhYmxlX25hbWUEbmFtZQVzY29wZQVuYW1lPwhtYXhfcm93cwd1aW50NjQ/E2RlbGVnYXRlZF9iYW5kd2lkdGgABARmcm9tBG5hbWUCdG8EbmFtZQpuZXRfd2VpZ2h0BWFzc2V0CmNwdV93ZWlnaHQFYXNzZXQUZ2V0X2FjY291bnRfcmVzcG9uc2UABwdhY2NvdW50BG5hbWUHYmFsYW5jZQVhc3NldAtkZWxlZ2F0aW9ucxVkZWxlZ2F0ZWRfYmFuZHdpZHRoW10JcHJvcG9zYWxzCnByb3Bvc2FsW10GcmVmdW5kDnJlZnVuZF9yZXF1ZXN0BnJleGJhbAtyZXhfYmFsYW5jZQdyZXhmdW5kCHJleF9mdW5kCmdldGFjY291bnQAAQdhY2NvdW50BG5hbWUZcGFpcl90aW1lX3BvaW50X3NlY19pbnQ2NAACBWZpcnN0DnRpbWVfcG9pbnRfc2VjBnNlY29uZAVpbnQ2NAhwcm9wb3NhbAADDXByb3Bvc2FsX25hbWUEbmFtZRJwYWNrZWRfdHJhbnNhY3Rpb24FYnl0ZXMSZWFybGllc3RfZXhlY190aW1lDHRpbWVfcG9pbnQ/JA5yZWZ1bmRfcmVxdWVzdAAEBW93bmVyBG5hbWUMcmVxdWVzdF90aW1lDnRpbWVfcG9pbnRfc2VjCm5ldF9hbW91bnQFYXNzZXQKY3B1X2Ftb3VudAVhc3NldAtyZXhfYmFsYW5jZQAGB3ZlcnNpb24FdWludDgFb3duZXIEbmFtZQp2b3RlX3N0YWtlBWFzc2V0C3JleF9iYWxhbmNlBWFzc2V0C21hdHVyZWRfcmV4BWludDY0DnJleF9tYXR1cml0aWVzG3BhaXJfdGltZV9wb2ludF9zZWNfaW50NjRbXQhyZXhfZnVuZAADB3ZlcnNpb24FdWludDgFb3duZXIEbmFtZQdiYWxhbmNlBWFzc2V0BHdpcGUAAAMAgIrH5GtURApjbGVhcnRhYmxlvgEtLS0KCnNwZWNfdmVyc2lvbjogIjAuMi4wIgp0aXRsZTogY2xlYXJ0YWJsZQpzdW1tYXJ5OiAnREVCVUc6IGNsZWFydGFibGUgYWN0aW9uJwppY29uOiBodHRwczovL2F2YXRhcnMuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3UvMTQ3MjkyODYxP3M9NDAwJnU9M2IxYWY2NmU5MGRkODUxZjRkN2MwOTZlZDZhMmZiYjRiOWUxOTBkYQoKLS0tAECemiJksmIKZ2V0YWNjb3VudMcBLS0tCgpzcGVjX3ZlcnNpb246ICIwLjIuMCIKdGl0bGU6IGdldGFjY291bnQKc3VtbWFyeTogJ1JlYWQtb25seSBBUEkgdG8gZ2V0IGFjY291bnQgZGF0YScKaWNvbjogaHR0cHM6Ly9hdmF0YXJzLmdpdGh1YnVzZXJjb250ZW50LmNvbS91LzE0NzI5Mjg2MT9zPTQwMCZ1PTNiMWFmNjZlOTBkZDg1MWY0ZDdjMDk2ZWQ2YTJmYmI0YjllMTkwZGEKCi0tLQAAAAAAoKrjBHdpcGWyAS0tLQoKc3BlY192ZXJzaW9uOiAiMC4yLjAiCnRpdGxlOiB3aXBlCnN1bW1hcnk6ICdERUJVRzogd2lwZSBhY3Rpb24nCmljb246IGh0dHBzOi8vYXZhdGFycy5naXRodWJ1c2VyY29udGVudC5jb20vdS8xNDcyOTI4NjE/cz00MDAmdT0zYjFhZjY2ZTkwZGQ4NTFmNGQ3YzA5NmVkNmEyZmJiNGI5ZTE5MGRhCgotLS0AAQNhcGkDYXBpAAAAAQBAnpoiZLJiFGdldF9hY2NvdW50X3Jlc3BvbnNl'
 )
 export const abi = ABI.from(abiBlob)
 export namespace Types {
@@ -47,6 +47,17 @@ export namespace Types {
         declare packed_transaction: Bytes
         @Struct.field(TimePoint, {optional: true})
         declare earliest_exec_time?: TimePoint
+    }
+    @Struct.type('refund_request')
+    export class refund_request extends Struct {
+        @Struct.field(Name)
+        declare owner: Name
+        @Struct.field(TimePointSec)
+        declare request_time: TimePointSec
+        @Struct.field(Asset)
+        declare net_amount: Asset
+        @Struct.field(Asset)
+        declare cpu_amount: Asset
     }
     @Struct.type('pair_time_point_sec_int64')
     export class pair_time_point_sec_int64 extends Struct {
@@ -83,14 +94,18 @@ export namespace Types {
     export class get_account_response extends Struct {
         @Struct.field(Name)
         declare account: Name
+        @Struct.field(Asset)
+        declare balance: Asset
         @Struct.field(delegated_bandwidth, {array: true})
         declare delegations: delegated_bandwidth[]
         @Struct.field(proposal, {array: true})
         declare proposals: proposal[]
-        @Struct.field(rex_balance, {optional: true})
-        declare rexbal?: rex_balance
-        @Struct.field(rex_fund, {optional: true})
-        declare rexfund?: rex_fund
+        @Struct.field(refund_request)
+        declare refund: refund_request
+        @Struct.field(rex_balance)
+        declare rexbal: rex_balance
+        @Struct.field(rex_fund)
+        declare rexfund: rex_fund
     }
     @Struct.type('getaccount')
     export class getaccount extends Struct {
