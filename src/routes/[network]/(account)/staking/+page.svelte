@@ -36,7 +36,9 @@
 			.filter((r) => !r.savings)
 			.reduce(
 				(acc, record) => {
-					acc.units.add(record.balance.units);
+					if (!record.claimable) {
+						acc.units.add(record.balance.units);
+					}
 					return acc;
 				},
 				Asset.fromUnits(0, data.network.chain.systemToken!.symbol) as Asset
