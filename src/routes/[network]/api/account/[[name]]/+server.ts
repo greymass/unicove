@@ -60,7 +60,7 @@ async function loadBalances(
 async function getAccount(network: NetworkState, account: NameType, chain: ChainDefinition) {
 	const { system: systemContract, msig: msigContract } = network.contracts;
 
-	const [account_data, delegated, proposals] = await Promise.all([
+	const [get_account, delegated, proposals] = await Promise.all([
 		network.client.v1.chain.get_account(account),
 		systemContract.table('delband').all({ scope: account }),
 		msigContract.table('proposal', account).all()
@@ -89,11 +89,13 @@ async function getAccount(network: NetworkState, account: NameType, chain: Chain
 	}
 
 	return {
-		account_data,
+		get_account,
+		balance: get_account.core_liquid_balance,
 		balances,
 		delegated,
 		proposals,
-		refund_request: account_data.refund_request,
+		refund_request: get_account.refund_request,
+		rexbal: get_account.rex_info,
 		rexfund
 	};
 }
@@ -101,7 +103,7 @@ async function getAccount(network: NetworkState, account: NameType, chain: Chain
 async function getAccount2(network: NetworkState, account: NameType, chain: ChainDefinition) {
 	const { api: apiContract } = network.contracts;
 
-	const [account_data, accountResponse] = await Promise.all([
+	const [get_account, getaccount] = await Promise.all([
 		network.client.v1.chain.get_account(account),
 		apiContract.readonly('getaccount', { account })
 	]);
@@ -124,11 +126,13 @@ async function getAccount2(network: NetworkState, account: NameType, chain: Chai
 	}
 
 	return {
-		account_data,
+		get_account,
+		balance: getaccount.balance,
 		balances,
-		delegated: accountResponse.delegations,
-		proposals: accountResponse.proposals,
-		refund_request: accountResponse.refund,
-		rexfund: accountResponse.rexfund
+		delegated: getaccount.delegations,
+		proposals: getaccount.proposals,
+		refund_request: getaccount.refund,
+		rexbal: getaccount.rexbal,
+		rexfund: getaccount.rexfund
 	};
 }

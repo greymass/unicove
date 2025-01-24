@@ -20,12 +20,30 @@ import { chainMapper } from '$lib/wharf/chains';
 import { NetworkState } from '$lib/state/network.svelte';
 import { calculateValue, isSameToken } from '$lib/utils';
 
-const defaultDataSources = {
-	get_account: undefined,
+const defaultDataSources: DataSources = {
+	balance: Asset.from('0 '),
 	light_account: [],
 	delegated: [],
 	proposals: [],
-	rexfund: undefined
+	refund_request: SystemContract.Types.refund_request.from({
+		owner: '',
+		request_time: '1970-01-01T00:00:00',
+		net_amount: '0 ',
+		cpu_amount: '0 '
+	}),
+	rexbal: SystemContract.Types.rex_balance.from({
+		version: 0,
+		owner: '',
+		vote_stake: '0 ',
+		rex_balance: '0 ',
+		matured_rex: 0,
+		rex_maturities: []
+	}),
+	rexfund: SystemContract.Types.rex_fund.from({
+		version: 0,
+		owner: '',
+		balance: '0 '
+	})
 };
 
 interface VoterInfo {
@@ -107,27 +125,27 @@ export class AccountState {
 		const json = await response.json();
 		this.last_update = new Date();
 		this.sources = {
-			get_account: json.account_data,
+			get_account: json.get_account,
+			balance: json.balance,
 			light_account: json.balances,
 			delegated: json.delegated,
 			proposals: json.proposals,
 			refund_request: json.refund_request,
+			rexbal: json.rexbal,
 			rexfund: json.rexfund
 		};
 		this.account = new Account({
 			client: this.network.client,
-			data: API.v1.AccountObject.from(json.account_data)
+			data: API.v1.AccountObject.from(json.get_account)
 		});
-		if (json.account_data.voter_info) {
+		if (json.get_account.voter_info) {
 			this.voter = {
-				isProxy: json.account_data.voter_info.is_proxy,
-				proxy: Name.from(json.account_data.voter_info.proxy),
-				proxyWeight: Float64.from(json.account_data.voter_info.proxied_vote_weight),
-				weight: Float64.from(json.account_data.voter_info.last_vote_weight),
-				votes: json.account_data.voter_info.producers.map((producer: string) =>
-					Name.from(producer)
-				),
-				staked: Int64.from(json.account_data.voter_info.staked)
+				isProxy: json.get_account.voter_info.is_proxy,
+				proxy: Name.from(json.get_account.voter_info.proxy),
+				proxyWeight: Float64.from(json.get_account.voter_info.proxied_vote_weight),
+				weight: Float64.from(json.get_account.voter_info.last_vote_weight),
+				votes: json.get_account.voter_info.producers.map((producer: string) => Name.from(producer)),
+				staked: Int64.from(json.get_account.voter_info.staked)
 			};
 		}
 		this.loaded = true;
@@ -238,14 +256,11 @@ export function getBalance(network: NetworkState, sources: DataSources): Balance
 	const unstaked = Asset.fromUnits(0, network.config.symbol);
 	const total = Asset.fromUnits(0, network.config.symbol);
 
-	if (!sources.get_account) {
-		return { delegated, liquid, refunding, staked, unstaked, total };
-	}
-
 	// Add the core balance if it exists on the account
-	if (sources.get_account.core_liquid_balance) {
-		liquid.units.add(Asset.from(sources.get_account.core_liquid_balance).units);
-		total.units.add(Asset.from(sources.get_account.core_liquid_balance).units);
+	if (sources.balance) {
+		const balance = Asset.from(sources.balance);
+		liquid.units.add(balance.units);
+		total.units.add(balance.units);
 	}
 
 	// Add any delegated tokens to the total balance
@@ -267,9 +282,9 @@ export function getBalance(network: NetworkState, sources: DataSources): Balance
 
 	if (network.config.features.rex) {
 		// Add any staked (REX) tokens to total balance based on current value
-		if (sources.get_account.rex_info) {
+		if (sources.rexbal) {
 			if (network.rexstate) {
-				const rex = network.rexToToken(sources.get_account.rex_info.rex_balance);
+				const rex = network.rexToToken(sources.rexbal.rex_balance);
 				staked.units.add(rex.units);
 				total.units.add(rex.units);
 			}

@@ -48,12 +48,22 @@ export interface ActivityActionWrapper {
 }
 
 export interface DataSources {
+	// Native get_account endpoint (deprecated?)
 	get_account?: API.v1.AccountObject | undefined;
+	// Light API balances call
 	light_account: LightAPIBalanceRow[];
+	// Table rows from eosio.token::accounts
+	balance: Asset;
+	// Table rows from eosio::delband
 	delegated: SystemContract.Types.delegated_bandwidth[];
+	// Table rows from eosio.msig::proposal
 	proposals: MsigContract.Types.proposal[];
+	// Table rows from eosio::refunds
 	refund_request: SystemContract.Types.refund_request;
-	rexfund?: SystemContract.Types.rex_fund;
+	// Table row from eosio::rexbal
+	rexbal: SystemContract.Types.rex_balance;
+	// Table row from eosio::rexfund
+	rexfund: SystemContract.Types.rex_fund;
 }
 
 export interface LightAPIBalanceRow {

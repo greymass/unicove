@@ -26,8 +26,8 @@ export function getStakableBalance(network?: NetworkState, account?: AccountStat
 export function getStakedBalance(network?: NetworkState, account?: AccountState): Asset {
 	const staked = Int64.from(0);
 	if (account && account.loaded) {
-		if (account.account?.data.rex_info && network) {
-			staked.add(network.rexToToken(account.account.data.rex_info.rex_balance).units);
+		if (account.balance?.staked && network) {
+			staked.add(account.balance?.staked.units);
 		}
 	}
 	return Asset.fromUnits(staked, network ? network.chain.systemToken!.symbol : defaultSymbol);
