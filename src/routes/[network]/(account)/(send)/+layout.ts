@@ -1,5 +1,6 @@
 import type { LayoutLoad } from './$types';
 import * as m from '$lib/paraglide/messages';
+import { getOgImage } from '$lib/utils';
 
 export const load: LayoutLoad = async ({ parent }) => {
 	const { network } = await parent();
@@ -10,7 +11,8 @@ export const load: LayoutLoad = async ({ parent }) => {
 			title: m.common_send_tokens(),
 			description: m.send_page_description({
 				network: network.chain.name
-			})
+			}),
+			open_graph_image: getOgImage('send')
 		}
 	};
 };

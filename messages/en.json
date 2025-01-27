@@ -311,6 +311,8 @@
 	"navigation_votes": "Votes",
 	"no_accounts_found": "No accounts found",
 	"no_supported_funding_methods": "No supported funding methods for this blockchain.",
+	"og_title_default": "Unicove - Your gateway to the EOS Network",
+	"og_description_default": "Stake, Send, Manage Tokens, and Explore EOS – all with ease",
 	"processing_fees": "Processing fees",
 	"ram_available_balance": "RAM Available",
 	"ram_form_buy_amount": "Amount of RAM to buy:",
