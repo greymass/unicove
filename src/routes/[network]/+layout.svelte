@@ -4,6 +4,9 @@
 	import { onMount, setContext, untrack } from 'svelte';
 	import X from 'lucide-svelte/icons/circle-x';
 	import * as env from '$env/static/public';
+	import { Head, type SeoConfig } from 'svead';
+	import { page } from '$app/stores';
+	import extend from 'just-extend';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { AccountState } from '$lib/state/client/account.svelte.js';
@@ -137,7 +140,13 @@
 		// set the flag to prevent banner showing on next load
 		localStorage.setItem('hide-v1-banner', 'true');
 	}
+
+	const seo_config = $derived<SeoConfig>(
+		extend({}, data.baseMetaTags, $page.data?.pageMetaTags) as SeoConfig
+	);
 </script>
+
+<Head {seo_config} />
 
 <!-- Preload current chain logo -->
 <svelte:head>
