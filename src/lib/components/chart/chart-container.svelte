@@ -1,31 +1,61 @@
 <script lang="ts">
-	import type { Snippet } from 'svelte';
-
+	import dayjs from 'dayjs';
 	import Card from '../layout/box/card.svelte';
 	import Select from '../select/select.svelte';
 	import type { ExtendedSelectOption } from '../select/types';
+	import type { HistoricalPrice } from '$lib/types';
+	import LineChart from './line-chart.svelte';
+	import * as m from '$lib/paraglide/messages';
 
 	interface Props {
 		pair: string;
-		currentPrice: string;
-		percentChange: string;
-		range: ExtendedSelectOption[];
-		selectedRange: ExtendedSelectOption;
-		children: Snippet;
-		startDate: string;
-		endDate?: string;
+		data: HistoricalPrice[];
+		type: 'line';
 	}
 
-	let {
-		pair,
-		currentPrice,
-		percentChange,
-		range,
-		selectedRange = $bindable(),
-		children,
-		startDate,
-		endDate = 'Today'
-	}: Props = $props();
+	let { pair, data, ...props }: Props = $props();
+
+	const range: ExtendedSelectOption[] = [
+		{ label: '1D', value: 1 },
+		{ label: '1W', value: 7 },
+		{ label: '1M', value: 30 }
+		// { label: '1Y', value: 365 } // We're currently only getting data for the last 30 days
+	];
+
+	let selectedRange: ExtendedSelectOption = $state(range[1]);
+
+	const MAX_NUM_POINTS = 100; // Maximum number of points to display on the chart
+
+	let dataRange = $derived.by(() => {
+		if (data.length === 0) return [];
+		const rangeEndDate = dayjs(data[0].date);
+		const rangeStartDate = rangeEndDate.subtract(Number(selectedRange.value), 'day');
+		const filteredData = data.filter(({ date }) => dayjs(date).isAfter(rangeStartDate));
+
+		// If we have more points than MAX_NUM_POINTS, sample them evenly
+		if (filteredData.length > MAX_NUM_POINTS) {
+			const result = [];
+			const step = filteredData.length / MAX_NUM_POINTS;
+			for (let i = 0; i < MAX_NUM_POINTS; i++) {
+				const index = Math.floor(i * step);
+				result.push(filteredData[index]);
+			}
+			return result;
+		}
+
+		return filteredData;
+	});
+
+	let startDate = $derived(dataRange[dataRange.length - 1].date.toLocaleDateString());
+
+	let currentPoint = $derived(dataRange[0]);
+	let currentPrice = $derived(String(currentPoint.value));
+
+	let percentChange = $derived.by(() => {
+		const current = Number(currentPoint.value.quantity);
+		const initial = Number(dataRange[dataRange.length - 1].value.quantity);
+		return (((current - initial) / current) * 100).toFixed(2) + '%';
+	});
 </script>
 
 <Card class="relative">
@@ -37,11 +67,16 @@
 		</div>
 		<Select id="range-select" options={range} bind:selected={selectedRange} />
 	</header>
+
 	<!-- w-99 is a hack to get responsive charts, w-full doesn't work -->
 	<div class="canvas-container relative h-auto w-[99%]">
-		{@render children()}
+		{#if props.type === 'line'}
+			<LineChart label={pair} data={dataRange} />
+		{/if}
 	</div>
-	<hr class="h-px border-0 bg-shark-200/50" />
+
+	<hr class="h-px border-0 bg-mineShaft-800" />
+
 	<div class="flex items-center justify-between font-medium">
 		<span class="text-muted">{startDate}</span>
 		<div class="flex gap-4">
@@ -50,6 +85,6 @@
 				<span class="text-[#00ED97]">{pair}</span>
 			</div>
 		</div>
-		<span class="text-muted">{endDate}</span>
+		<span class="text-muted">{m.common_today()}</span>
 	</div>
 </Card>

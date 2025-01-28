@@ -189,7 +189,7 @@
 
 	{#if data.historicalPrices.length}
 		<div class="lg:col-start-2 lg:row-span-2 lg:row-start-1">
-			<RamPriceHistory data={data.historicalPrices} />
+			<RamPriceHistory />
 		</div>
 	{/if}
 
