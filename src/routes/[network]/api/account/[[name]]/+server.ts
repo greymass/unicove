@@ -23,7 +23,7 @@ export const GET: RequestHandler = async ({ fetch, params }) => {
 
 	try {
 		let response;
-		if (network.supports('apiv2')) {
+		if (network.supports('unicovecontracts')) {
 			response = await getAccount2(network, params.name, chain);
 		} else {
 			response = await getAccount(network, params.name, chain);

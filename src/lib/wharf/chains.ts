@@ -1,14 +1,14 @@
 import type { Asset, NameType } from '@wharfkit/antelope';
 import type { ChainIndices } from '@wharfkit/common';
 
-import { Contract as APIContract } from '$lib/wharf/contracts/api';
 import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
 import { Contract as MSIGContract } from '$lib/wharf/contracts/msig';
 import { Contract as SystemContract } from '$lib/wharf/contracts/system';
 import { Contract as TokenContract } from '$lib/wharf/contracts/token';
+import { Contract as UnicoveContract } from '$lib/wharf/contracts/unicove';
 
 export interface DefaultContracts {
-	api: APIContract;
+	api: UnicoveContract;
 	delphioracle?: DelphiOracleContract;
 	msig: MSIGContract;
 	token: TokenContract;
@@ -24,7 +24,7 @@ export interface ChainConfig {
 }
 
 export type FeatureType =
-	| 'apiv2'
+	| 'unicovecontracts'
 	| 'delphioracle'
 	| 'lightapi'
 	| 'rex'
@@ -54,7 +54,7 @@ export const chainConfigs: Record<string, ChainConfig> = {
 	aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906: {
 		name: 'eos',
 		features: {
-			apiv2: false,
+			unicovecontracts: true,
 			delphioracle: true,
 			lightapi: true,
 			rex: true,
@@ -73,7 +73,7 @@ export const chainConfigs: Record<string, ChainConfig> = {
 	'73e4385a2708e6d7048834fbc1079f2fabb17b3c125b146af438971e90716c4d': {
 		name: 'jungle4',
 		features: {
-			apiv2: true,
+			unicovecontracts: true,
 			delphioracle: false,
 			lightapi: false,
 			rex: true,
@@ -91,7 +91,7 @@ export const chainConfigs: Record<string, ChainConfig> = {
 	'5fff1dae8dc8e2fc4d5b23b2c7665c97f9e9d8edf2b6485a86ba311c25639191': {
 		name: 'kylin',
 		features: {
-			apiv2: false,
+			unicovecontracts: false,
 			delphioracle: false,
 			lightapi: false,
 			rex: true,
