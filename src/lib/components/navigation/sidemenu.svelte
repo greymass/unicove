@@ -1,11 +1,8 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 	import { page } from '$app/stores';
-
-	import UnicoveLogo from '$lib/assets/unicovelogo.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
-
 	import * as m from '$lib/paraglide/messages';
 
 	const context = getContext<UnicoveContext>('state');
@@ -16,7 +13,7 @@
 		class?: string;
 	}
 
-	let { callbackFn, network, class: className }: Props = $props();
+	let { callbackFn, network }: Props = $props();
 
 	// Example: ['', 'en', 'eos', 'staking', 'withdraw']
 	let pathname = $derived($page.url.pathname.split('/'));
@@ -77,29 +74,23 @@
 	});
 </script>
 
-<menu class="grid h-svh grid-rows-[auto_1fr] justify-start gap-8 px-8 md:px-0 {className}">
-	<a href="/{network}" onclick={callbackFn} class="flex pt-4 md:hidden">
-		<UnicoveLogo wordmark class="fill-shark-100" />
-	</a>
-
-	<nav class="flex flex-col gap-2 text-nowrap text-base font-medium text-white">
-		{#each destinations as option}
-			<a
-				href={option.href}
-				class="flex h-12 select-none items-center rounded-lg leading-snug transition-opacity hover:opacity-100 focus-visible:opacity-100 focus-visible:outline focus-visible:outline-solar-500"
-				class:opacity-50={!option.active}
-				class:opacity-100={option.active}
-				aria-current={!!option.active}
-				onclick={callbackFn}
+<menu class="flex flex-col gap-2 text-nowrap text-base font-medium text-white">
+	{#each destinations as option}
+		<a
+			href={option.href}
+			class="flex h-12 select-none items-center rounded-lg leading-snug transition-opacity hover:opacity-100 focus-visible:opacity-100 focus-visible:outline focus-visible:outline-solar-500"
+			class:opacity-50={!option.active}
+			class:opacity-100={option.active}
+			aria-current={!!option.active}
+			onclick={callbackFn}
+		>
+			<span
+				class="border-b-2 pb-1"
+				class:border-transparent={!option.active}
+				class:border-skyBlue-500={option.active}
 			>
-				<span
-					class="border-b-2 pb-1"
-					class:border-transparent={!option.active}
-					class:border-skyBlue-500={option.active}
-				>
-					{option.text}
-				</span>
-			</a>
-		{/each}
-	</nav>
+				{option.text}
+			</span>
+		</a>
+	{/each}
 </menu>
