@@ -3,18 +3,19 @@ import * as m from '$lib/paraglide/messages';
 
 export const load: LayoutLoad = async ({ parent }) => {
 	const { network } = await parent();
+	const token = String(network.chain.systemToken?.symbol.name || m.common_tokens());
 	return {
-		title: `${network.chain.systemToken?.symbol.name}/RAM Market`,
-		subtitle: `An overview of the ${network.chain.systemToken?.symbol.name}/RAM market on the ${network.chain.name} network.`,
+		title: m.ram_overview_titlle({ token }),
+		subtitle: m.ram_overview_subtitlle({ token, network: network.chain.name }),
 		pageMetaTags: {
 			title: [
 				m.ram_metadata_buy_title({
-					token: String(network.chain.systemToken?.symbol.name || m.common_tokens()),
+					token: token,
 					network: network.chain.name
 				})
 			].join(' | '),
 			description: m.ram_metadata_overview_description({
-				token: String(network.chain.systemToken?.symbol.name || m.common_tokens()),
+				token: token,
 				network: network.chain.name
 			})
 		}
