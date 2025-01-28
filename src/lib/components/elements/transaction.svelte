@@ -8,7 +8,7 @@
 
 	let { id }: { id?: Checksum256 | string } = $props();
 
-	const truncatedString = truncateCenter(String(id));
+	const truncatedString = $derived(truncateCenter(String(id)));
 </script>
 
 {#if id}

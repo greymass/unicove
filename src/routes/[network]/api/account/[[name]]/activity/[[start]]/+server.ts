@@ -20,12 +20,14 @@ export async function GET({ fetch, params }: RequestEvent) {
 		return json({ error: `Activity not supported on ${network.chain.name}.` }, { status: 500 });
 	}
 
-	const start = Number(params.start) || 1;
-	const requests = [getActivity(network.client, params.name, start)];
-	const headers = getCacheHeaders(5);
+	const start = params.start === '0' ? 1 : Number(params.start);
+
+	// Aggressively cache older activity
+	const headers = start === 1 ? getCacheHeaders(5) : getCacheHeaders(3600);
 
 	try {
-		const [activity] = await Promise.all(requests);
+		// This call is intermittently very slow...
+		const activity = await getActivity(network.client, params.name, start);
 		return json(
 			{
 				ts: new Date(),

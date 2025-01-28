@@ -8,13 +8,18 @@ export async function getActivity(
 	start: number
 ): Promise<Activity> {
 	const robo = new RoborovskiClient(client);
+
 	let response: API.v1.GetActionsResponse;
 	try {
+		// This is where we see some occasional performance slowdowns
+		// const robo_begin = performance.now();
 		response = await robo.get_actions(name, {
 			limit: 20,
 			start: start,
 			reverse: true
 		});
+		// const robo_end = performance.now();
+		// console.log('roboGetActions', robo_end - robo_begin);
 	} catch {
 		throw new Error(`Error while loading activity for ${name}.`);
 	}

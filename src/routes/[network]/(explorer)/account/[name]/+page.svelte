@@ -42,6 +42,10 @@
 	const netAvailable = $derived(data.account.net?.available);
 </script>
 
+<svelte:head>
+	<link rel="prefetch" href={`/${context.network}/api/account/${data.account.name}/activity/0`} />
+</svelte:head>
+
 <!-- What gets shown on this page if data.account doesn't exist? -->
 {#if data.account}
 	<MultiCard>
