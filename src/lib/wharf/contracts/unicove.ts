@@ -1,4 +1,4 @@
-import type {Action, NameType, UInt64Type} from '@wharfkit/antelope'
+import type {Action, NameType} from '@wharfkit/antelope'
 import {
     ABI,
     Asset,
@@ -9,22 +9,35 @@ import {
     Struct,
     TimePoint,
     TimePointSec,
-    UInt64,
     UInt8,
 } from '@wharfkit/antelope'
 import type {ActionOptions, ContractArgs, PartialBy, Table} from '@wharfkit/contract'
 import {Contract as BaseContract} from '@wharfkit/contract'
 export const abiBlob = Blob.from(
-    'DmVvc2lvOjphYmkvMS4yAA4IYWRkdG9rZW4AAghjb250cmFjdARuYW1lBnN5bWJvbAZzeW1ib2wKY29uZmlnX3JvdwAED3N5c3RlbV9jb250cmFjdARuYW1lFHN5c3RlbV9jb250cmFjdF9tc2lnBG5hbWUVc3lzdGVtX3Rva2VuX2NvbnRyYWN0BG5hbWUTc3lzdGVtX3Rva2VuX3N5bWJvbAZzeW1ib2wTZGVsZWdhdGVkX2JhbmR3aWR0aAAEBGZyb20EbmFtZQJ0bwRuYW1lCm5ldF93ZWlnaHQFYXNzZXQKY3B1X3dlaWdodAVhc3NldBRnZXRfYWNjb3VudF9yZXNwb25zZQAHB2FjY291bnQEbmFtZQdiYWxhbmNlBWFzc2V0C2RlbGVnYXRpb25zFWRlbGVnYXRlZF9iYW5kd2lkdGhbXQlwcm9wb3NhbHMKcHJvcG9zYWxbXQZyZWZ1bmQOcmVmdW5kX3JlcXVlc3QGcmV4YmFsC3JleF9iYWxhbmNlB3JleGZ1bmQIcmV4X2Z1bmQKZ2V0YWNjb3VudAABB2FjY291bnQEbmFtZQtnZXRiYWxhbmNlcwABB2FjY291bnQEbmFtZRlwYWlyX3RpbWVfcG9pbnRfc2VjX2ludDY0AAIFZmlyc3QOdGltZV9wb2ludF9zZWMGc2Vjb25kBWludDY0CHByb3Bvc2FsAAMNcHJvcG9zYWxfbmFtZQRuYW1lEnBhY2tlZF90cmFuc2FjdGlvbgVieXRlcxJlYXJsaWVzdF9leGVjX3RpbWUMdGltZV9wb2ludD8kDnJlZnVuZF9yZXF1ZXN0AAQFb3duZXIEbmFtZQxyZXF1ZXN0X3RpbWUOdGltZV9wb2ludF9zZWMKbmV0X2Ftb3VudAVhc3NldApjcHVfYW1vdW50BWFzc2V0C3JlbW92ZXRva2VuAAECaWQGdWludDY0C3JleF9iYWxhbmNlAAYHdmVyc2lvbgV1aW50OAVvd25lcgRuYW1lCnZvdGVfc3Rha2UFYXNzZXQLcmV4X2JhbGFuY2UFYXNzZXQLbWF0dXJlZF9yZXgFaW50NjQOcmV4X21hdHVyaXRpZXMbcGFpcl90aW1lX3BvaW50X3NlY19pbnQ2NFtdCHJleF9mdW5kAAMHdmVyc2lvbgV1aW50OAVvd25lcgRuYW1lB2JhbGFuY2UFYXNzZXQJc2V0Y29uZmlnAAQPc3lzdGVtX2NvbnRyYWN0BG5hbWUUc3lzdGVtX2NvbnRyYWN0X21zaWcEbmFtZRVzeXN0ZW1fdG9rZW5fY29udHJhY3QEbmFtZRNzeXN0ZW1fdG9rZW5fc3ltYm9sBnN5bWJvbAl0b2tlbl9yb3cAAwJpZAZ1aW50NjQIY29udHJhY3QEbmFtZQZzeW1ib2wGc3ltYm9sBQAAAFNBmlMyCGFkZHRva2VuAABAnpoiZLJiCmdldGFjY291bnTHAS0tLQoKc3BlY192ZXJzaW9uOiAiMC4yLjAiCnRpdGxlOiBnZXRhY2NvdW50CnN1bW1hcnk6ICdSZWFkLW9ubHkgQVBJIHRvIGdldCBhY2NvdW50IGRhdGEnCmljb246IGh0dHBzOi8vYXZhdGFycy5naXRodWJ1c2VyY29udGVudC5jb20vdS8xNDcyOTI4NjE/cz00MDAmdT0zYjFhZjY2ZTkwZGQ4NTFmNGQ3YzA5NmVkNmEyZmJiNGI5ZTE5MGRhCgotLS0AsELTRHOyYgtnZXRiYWxhbmNlcwAApoI0q02lugtyZW1vdmV0b2tlbgAAAGBuTYqywglzZXRjb25maWcAAgAAAAAwtyZFA2k2NAAACmNvbmZpZ19yb3cAAAAA4KkgzQNpNjQAAAl0b2tlbl9yb3cBA2FwaQNhcGkAAAACAECemiJksmIUZ2V0X2FjY291bnRfcmVzcG9uc2UAsELTRHOyYgdhc3NldFtd'
+    'DmVvc2lvOjphYmkvMS4yAAwHYWNjb3VudAABB2FjY291bnQEbmFtZQhiYWxhbmNlcwADB2FjY291bnQEbmFtZQZ0b2tlbnMSdG9rZW5fZGVmaW5pdGlvbltdDHplcm9iYWxhbmNlcwRib29sCmNvbmZpZ19yb3cABA9zeXN0ZW1fY29udHJhY3QEbmFtZRRzeXN0ZW1fY29udHJhY3RfbXNpZwRuYW1lFXN5c3RlbV90b2tlbl9jb250cmFjdARuYW1lE3N5c3RlbV90b2tlbl9zeW1ib2wGc3ltYm9sE2RlbGVnYXRlZF9iYW5kd2lkdGgABARmcm9tBG5hbWUCdG8EbmFtZQpuZXRfd2VpZ2h0BWFzc2V0CmNwdV93ZWlnaHQFYXNzZXQUZ2V0X2FjY291bnRfcmVzcG9uc2UABwdhY2NvdW50BG5hbWUHYmFsYW5jZQVhc3NldAtkZWxlZ2F0aW9ucxVkZWxlZ2F0ZWRfYmFuZHdpZHRoW10JcHJvcG9zYWxzCnByb3Bvc2FsW10GcmVmdW5kDnJlZnVuZF9yZXF1ZXN0BnJleGJhbAtyZXhfYmFsYW5jZQdyZXhmdW5kCHJleF9mdW5kGXBhaXJfdGltZV9wb2ludF9zZWNfaW50NjQAAgVmaXJzdA50aW1lX3BvaW50X3NlYwZzZWNvbmQFaW50NjQIcHJvcG9zYWwAAw1wcm9wb3NhbF9uYW1lBG5hbWUScGFja2VkX3RyYW5zYWN0aW9uBWJ5dGVzEmVhcmxpZXN0X2V4ZWNfdGltZQx0aW1lX3BvaW50PyQOcmVmdW5kX3JlcXVlc3QABAVvd25lcgRuYW1lDHJlcXVlc3RfdGltZQ50aW1lX3BvaW50X3NlYwpuZXRfYW1vdW50BWFzc2V0CmNwdV9hbW91bnQFYXNzZXQLcmV4X2JhbGFuY2UABgd2ZXJzaW9uBXVpbnQ4BW93bmVyBG5hbWUKdm90ZV9zdGFrZQVhc3NldAtyZXhfYmFsYW5jZQVhc3NldAttYXR1cmVkX3JleAVpbnQ2NA5yZXhfbWF0dXJpdGllcxtwYWlyX3RpbWVfcG9pbnRfc2VjX2ludDY0W10IcmV4X2Z1bmQAAwd2ZXJzaW9uBXVpbnQ4BW93bmVyBG5hbWUHYmFsYW5jZQVhc3NldAlzZXRjb25maWcABA9zeXN0ZW1fY29udHJhY3QEbmFtZRRzeXN0ZW1fY29udHJhY3RfbXNpZwRuYW1lFXN5c3RlbV90b2tlbl9jb250cmFjdARuYW1lE3N5c3RlbV90b2tlbl9zeW1ib2wGc3ltYm9sEHRva2VuX2RlZmluaXRpb24AAghjb250cmFjdARuYW1lBnN5bWJvbAZzeW1ib2wDAAAAIE9NETIHYWNjb3VudL8BLS0tCgpzcGVjX3ZlcnNpb246ICIwLjIuMCIKdGl0bGU6IGFjY291bnQKc3VtbWFyeTogJ1JldHJpZXZlIGFjY291bnQgaW5mb3JtYXRpb24nCmljb246IGh0dHBzOi8vYXZhdGFycy5naXRodWJ1c2VyY29udGVudC5jb20vdS8xNDcyOTI4NjE/cz00MDAmdT0zYjFhZjY2ZTkwZGQ4NTFmNGQ3YzA5NmVkNmEyZmJiNGI5ZTE5MGRhCgotLS0AAABYoWmiOQhiYWxhbmNlc8YBLS0tCgpzcGVjX3ZlcnNpb246ICIwLjIuMCIKdGl0bGU6IGJhbGFuY2VzCnN1bW1hcnk6ICdSZXRyaWV2ZSB0b2tlbiBiYWxhbmNlIGluZm9ybWF0aW9uJwppY29uOiBodHRwczovL2F2YXRhcnMuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3UvMTQ3MjkyODYxP3M9NDAwJnU9M2IxYWY2NmU5MGRkODUxZjRkN2MwOTZlZDZhMmZiYjRiOWUxOTBkYQoKLS0tAABgbk2KssIJc2V0Y29uZmlnvwEtLS0KCnNwZWNfdmVyc2lvbjogIjAuMi4wIgp0aXRsZTogc2V0Y29uZmlnCnN1bW1hcnk6ICdTZXQgY29udHJhY3QgY29uZmlndXJhdGlvbicKaWNvbjogaHR0cHM6Ly9hdmF0YXJzLmdpdGh1YnVzZXJjb250ZW50LmNvbS91LzE0NzI5Mjg2MT9zPTQwMCZ1PTNiMWFmNjZlOTBkZDg1MWY0ZDdjMDk2ZWQ2YTJmYmI0YjllMTkwZGEKCi0tLQEAAAAAMLcmRQNpNjQAAApjb25maWdfcm93AQNhcGkDYXBpAAAAAgAAACBPTREyFGdldF9hY2NvdW50X3Jlc3BvbnNlAAAAWKFpojkHYXNzZXRbXQ=='
 )
 export const abi = ABI.from(abiBlob)
 export namespace Types {
-    @Struct.type('addtoken')
-    export class addtoken extends Struct {
+    @Struct.type('account')
+    export class account extends Struct {
+        @Struct.field(Name)
+        declare account: Name
+    }
+    @Struct.type('token_definition')
+    export class token_definition extends Struct {
         @Struct.field(Name)
         declare contract: Name
         @Struct.field(Asset.Symbol)
         declare symbol: Asset.Symbol
+    }
+    @Struct.type('balances')
+    export class balances extends Struct {
+        @Struct.field(Name)
+        declare account: Name
+        @Struct.field(token_definition, {array: true})
+        declare tokens: token_definition[]
+        @Struct.field('bool')
+        declare zerobalances: boolean
     }
     @Struct.type('config_row')
     export class config_row extends Struct {
@@ -116,21 +129,6 @@ export namespace Types {
         @Struct.field(rex_fund)
         declare rexfund: rex_fund
     }
-    @Struct.type('getaccount')
-    export class getaccount extends Struct {
-        @Struct.field(Name)
-        declare account: Name
-    }
-    @Struct.type('getbalances')
-    export class getbalances extends Struct {
-        @Struct.field(Name)
-        declare account: Name
-    }
-    @Struct.type('removetoken')
-    export class removetoken extends Struct {
-        @Struct.field(UInt64)
-        declare id: UInt64
-    }
     @Struct.type('setconfig')
     export class setconfig extends Struct {
         @Struct.field(Name)
@@ -142,40 +140,29 @@ export namespace Types {
         @Struct.field(Asset.Symbol)
         declare system_token_symbol: Asset.Symbol
     }
-    @Struct.type('token_row')
-    export class token_row extends Struct {
-        @Struct.field(UInt64)
-        declare id: UInt64
-        @Struct.field(Name)
-        declare contract: Name
-        @Struct.field(Asset.Symbol)
-        declare symbol: Asset.Symbol
-    }
 }
 export const TableMap = {
     config: Types.config_row,
-    tokens: Types.token_row,
 }
 export interface TableTypes {
     config: Types.config_row
-    tokens: Types.token_row
 }
 export type RowType<T> = T extends keyof TableTypes ? TableTypes[T] : any
 export type TableNames = keyof TableTypes
 export namespace ActionParams {
-    export namespace Type {}
-    export interface addtoken {
-        contract: NameType
-        symbol: Asset.SymbolType
+    export namespace Type {
+        export interface token_definition {
+            contract: NameType
+            symbol: Asset.SymbolType
+        }
     }
-    export interface getaccount {
+    export interface account {
         account: NameType
     }
-    export interface getbalances {
+    export interface balances {
         account: NameType
-    }
-    export interface removetoken {
-        id: UInt64Type
+        tokens: Type.token_definition[]
+        zerobalances: boolean
     }
     export interface setconfig {
         system_contract: NameType
@@ -185,16 +172,14 @@ export namespace ActionParams {
     }
 }
 export interface ActionNameParams {
-    addtoken: ActionParams.addtoken
-    getaccount: ActionParams.getaccount
-    getbalances: ActionParams.getbalances
-    removetoken: ActionParams.removetoken
+    account: ActionParams.account
+    balances: ActionParams.balances
     setconfig: ActionParams.setconfig
 }
 export type ActionNames = keyof ActionNameParams
 export interface ActionReturnValues {
-    getaccount: Types.get_account_response
-    getbalances: Asset[]
+    account: Types.get_account_response
+    balances: Asset[]
 }
 export type ActionReturnNames = keyof ActionReturnValues
 export class Contract extends BaseContract {
