@@ -8,11 +8,11 @@ import { Contract as TokenContract } from '$lib/wharf/contracts/token';
 import { Contract as UnicoveContract } from '$lib/wharf/contracts/unicove';
 
 export interface DefaultContracts {
-	api: UnicoveContract;
-	delphioracle?: DelphiOracleContract;
+	delphioracle: DelphiOracleContract;
 	msig: MSIGContract;
-	token: TokenContract;
 	system: SystemContract;
+	token: TokenContract;
+	unicove: UnicoveContract;
 }
 
 export interface ChainConfig {

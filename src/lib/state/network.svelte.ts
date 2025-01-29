@@ -93,15 +93,12 @@ export class NetworkState {
 		});
 
 		this.contracts = {
-			api: new UnicoveContract({ client: this.client }),
+			delphioracle: new DelphiOracleContract({ client: this.client }),
 			msig: new MSIGContract({ client: this.client }),
+			system: new SystemContract({ client: this.client }),
 			token: new TokenContract({ client: this.client }),
-			system: new SystemContract({ client: this.client })
+			unicove: new UnicoveContract({ client: this.client })
 		};
-
-		if (this.supports('delphioracle')) {
-			this.contracts.delphioracle = new DelphiOracleContract({ client: this.client });
-		}
 	}
 
 	async refresh() {
