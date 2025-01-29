@@ -54,7 +54,7 @@ export const chainConfigs: Record<string, ChainConfig> = {
 	aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906: {
 		name: 'eos',
 		features: {
-			unicovecontracts: true,
+			unicovecontracts: false,
 			delphioracle: true,
 			lightapi: true,
 			rex: true,
