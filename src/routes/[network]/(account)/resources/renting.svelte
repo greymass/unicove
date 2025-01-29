@@ -36,7 +36,7 @@
 	const netAvailableSize = $derived(calAvailableSize(context.account?.net));
 	const usableTime = $derived.by(() => {
 		if (rentType === 'POWERUP') return m.resources_usable_time_24h();
-		if (rentType === 'REX') return  m.resources_usable_time_30days();
+		if (rentType === 'REX') return m.resources_usable_time_30days();
 		return m.resources_usable_time_until_unstaked();
 	});
 
