@@ -65,7 +65,7 @@
 	});
 
 	$effect(() => {
-		wharf.setSettings(settings);
+		wharf.setSettings(data.network, settings);
 	});
 
 	async function setupWharf() {

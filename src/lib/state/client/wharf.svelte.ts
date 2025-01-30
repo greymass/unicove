@@ -122,9 +122,9 @@ export class WharfState {
 		});
 	}
 
-	public setSettings(settings: SettingsState) {
+	public setSettings(network: NetworkState, settings: SettingsState) {
 		this.settings = settings;
-		this.init();
+		this.init(network);
 	}
 
 	public async login(options?: LoginOptions) {
