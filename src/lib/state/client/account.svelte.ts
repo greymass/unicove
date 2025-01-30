@@ -74,6 +74,9 @@ export class AccountState {
 	public account: Account | undefined = $state();
 	public name: Name | undefined = $state();
 	public last_update: Date = $state(new Date());
+	public contract: boolean = $derived(
+		Number(new Date(`${this.sources.get_account.last_code_update}z`)) > 0
+	);
 	public loaded: boolean = $state(false);
 
 	public balance = $derived.by(() =>
@@ -156,6 +159,7 @@ export class AccountState {
 			last_update: this.last_update,
 			value: this.value,
 			chain: this.network.chain,
+			contract: this.contract,
 			name: this.name,
 			balance: this.balance,
 			balances: this.balances,
