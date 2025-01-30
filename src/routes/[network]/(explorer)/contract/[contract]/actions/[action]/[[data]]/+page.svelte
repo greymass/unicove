@@ -1,6 +1,6 @@
 <script lang="ts">
 	/* eslint-disable @typescript-eslint/no-explicit-any */
-	import { getContext } from 'svelte';
+	import { getContext, onMount } from 'svelte';
 	import { Bytes, Serializer } from '@wharfkit/antelope';
 	import type { Contract } from '@wharfkit/contract';
 
@@ -15,6 +15,7 @@
 
 	import Fields from './fields.svelte';
 	import { MultiCard } from '$lib/components/layout';
+	import Checkbox from '$lib/components/input/checkbox.svelte';
 
 	const { data } = $props();
 
@@ -95,9 +96,15 @@
 		}
 	});
 
+	const allowReadOnly = $derived.by(() => {
+		return data.abi.action_results.find((s: any) => s.name === data.action.name);
+	});
+	let useReadOnly = $state(false);
+	let readonlyResult = $state();
+
 	const link = $derived(
 		serialized
-			? `${$page.url.protocol}//${$page.url.host}/${data.network}/contract/${data.contract}/actions/${data.action.name}/${serialized}`
+			? `${$page.url.protocol}//${$page.url.host}/${data.network}/contract/${data.contract}/actions/${data.action.name}/${serialized}?readonly=${useReadOnly}`
 			: undefined
 	);
 
@@ -105,25 +112,53 @@
 		if (!serialized) {
 			return;
 		}
-		const action = contract.action(data.action.name, serialized);
-		context.wharf
-			.transact({ action })
-			.then((result) => {
-				console.log('Transaction result', result);
-			})
-			.catch((error) => {
-				console.error('Transaction error', error);
-			});
+		if (useReadOnly && data.contract) {
+			context.wharf
+				.readonly(data.contract, data.action.name, decoded)
+				.then((result) => {
+					readonlyResult = result;
+				})
+				.catch((error) => {
+					console.error('Readonly error', error);
+				});
+		} else {
+			const action = contract.action(data.action.name, serialized);
+
+			context.wharf
+				.transact({ action })
+				.then((result) => {
+					console.log('Transaction result', result);
+				})
+				.catch((error) => {
+					console.error('Transaction error', error);
+				});
+		}
 	}
+
+	onMount(() => {
+		useReadOnly = $page.url.searchParams.get('readonly') === 'true';
+	});
 </script>
 
 <MultiCard>
 	<Card>
 		<Fields abi={data.abi} fields={data.actionData?.fields || []} {state} />
-		<Button onclick={transact} disabled={!decoded}>Perform Action</Button>
+		{#if allowReadOnly}
+			<fieldset class="flex items-center gap-3">
+				<Checkbox id="readonly" bind:checked={useReadOnly} />
+				<Label for="readonly">Call as readonly action?</Label>
+			</fieldset>
+		{/if}
+		<Button onclick={transact} disabled={!decoded}>
+			{#if useReadOnly}
+				Call readonly action
+			{:else}
+				Perform transaction
+			{/if}
+		</Button>
 	</Card>
 	<Card>
-		{#if data.ricardian}
+		{#if data.ricardian && (data.ricardian.meta || data.ricardian.text)}
 			<h4 class="h4">Ricardian Contract</h4>
 			{#if data.ricardian.meta}
 				<p>Title: {data.ricardian.meta.title}</p>
@@ -133,7 +168,7 @@
 				<p>{data.ricardian.text}</p>
 			{/if}
 		{/if}
-		<h4 class="h4">Data Representation</h4>
+		<h4 class="h4">Action Data</h4>
 		{#if decoded}
 			<Code>{JSON.stringify(decoded, null, 2)}</Code>
 		{:else}
@@ -141,6 +176,13 @@
 		{/if}
 	</Card>
 </MultiCard>
+
+{#if readonlyResult}
+	<Card>
+		<h4 class="h4">Readonly Action Result</h4>
+		<Code>{JSON.stringify(readonlyResult, null, 2)}</Code>
+	</Card>
+{/if}
 
 <h4 class="h4 mt-4">Transaction Link</h4>
 <fieldset class="grid gap-2">

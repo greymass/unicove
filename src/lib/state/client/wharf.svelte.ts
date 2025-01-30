@@ -10,6 +10,7 @@ import {
 	type AccountCreationPlugin,
 	type CreateAccountOptions,
 	type LoginOptions,
+	type NameType,
 	type RestoreArgs,
 	type SerializedSession,
 	type TransactArgs,
@@ -44,6 +45,8 @@ import {
 import { chainMapper } from '$lib/wharf/chains';
 import type { SettingsState } from '../settings.svelte';
 import { WalletPluginCleos } from '@wharfkit/wallet-plugin-cleos';
+import type { NetworkState } from '../network.svelte';
+import ContractKit, { Contract, type ActionDataType } from '@wharfkit/contract';
 
 const defaultWalletPlugins: WalletPlugin[] = [
 	new WalletPluginAnchor(),
@@ -71,8 +74,10 @@ if (PUBLIC_LOCAL_SIGNER) {
 }
 
 export class WharfState {
+	public chain?: ChainDefinition = $state();
 	public chains: ChainDefinition[] = [Chains.EOS, Chains.Jungle4, Chains.KylinTestnet];
 	public chainsSession: Record<string, SerializedSession | undefined> = $state({});
+	public contractKit?: ContractKit;
 	public session?: Session = $state<Session>();
 	public sessions: SerializedSession[] = $state([]);
 	public sessionKit?: SessionKit;
@@ -86,10 +91,14 @@ export class WharfState {
 		}
 	}
 
-	init() {
+	init(network: NetworkState) {
 		if (!browser) {
 			throw new Error('Wharf should only be used in the browser');
 		}
+		this.chain = network.chain;
+		this.contractKit = new ContractKit({
+			client: network.client
+		});
 		const walletPlugins = [...defaultWalletPlugins];
 		if (this.settings.data.advancedMode) {
 			walletPlugins.push(new WalletPluginCleos());
@@ -234,6 +243,17 @@ export class WharfState {
 		// transaction.toastId = id;
 		queueTransaction(transaction);
 
+		return result;
+	}
+
+	async readonly(account: NameType, action: NameType, data?: ActionDataType) {
+		if (!this.contractKit) {
+			throw new Error('ContractKit not initialized');
+		}
+		const contract = await this.contractKit.load(account);
+		this.transacting = true;
+		const result = await contract.readonly(action, data);
+		this.transacting = false;
 		return result;
 	}
 }
