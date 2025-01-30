@@ -78,17 +78,3 @@ export function isSameToken(token1?: TokenKeyParams, token2?: TokenKeyParams): b
 export const goto: typeof svelteGoto = (url, opts = {}) => {
 	return svelteGoto(`/${languageTag()}${url}`, opts);
 };
-
-/**
- * Retrieves the opengraph image for a specified route
- */
-export function getOgImage(route = 'default') {
-	try {
-		const url = new URL(`../assets/opengraph/${languageTag()}/${route}.png`, import.meta.url)
-			.pathname;
-		return url;
-	} catch (e) {
-		console.error(e);
-		return new URL(`../assets/opengraph/${languageTag()}/default.png`, import.meta.url).pathname;
-	}
-}
