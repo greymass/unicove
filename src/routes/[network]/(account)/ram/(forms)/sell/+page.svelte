@@ -67,8 +67,8 @@
 	});
 
 	$effect(() => {
-		if (data.network.ramprice) {
-			sellRamState.pricePerKB = data.network.ramprice.eos;
+		if (data.network.resources.ram.price.rammarket) {
+			sellRamState.pricePerKB = data.network.resources.ram.price.rammarket;
 		}
 	});
 

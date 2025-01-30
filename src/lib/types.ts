@@ -11,9 +11,14 @@ import {
 	UInt128,
 	Asset
 } from '@wharfkit/antelope';
+import type { SampleUsage } from '@wharfkit/resources';
 
 import * as MsigContract from '$lib/wharf/contracts/msig';
 import * as SystemContract from '$lib/wharf/contracts/system';
+
+import { Types as DelphioracleTypes } from '$lib/wharf/contracts/delphioracle';
+import { Types as SystemTypes } from '$lib/wharf/contracts/system';
+import { Types as UnicoveTypes } from '$lib/wharf/contracts/unicove';
 
 export interface Activity {
 	actions: ActivityAction[];
@@ -47,7 +52,7 @@ export interface ActivityActionWrapper {
 	actionData: string;
 }
 
-export interface DataSources {
+export interface AccountDataSources {
 	// Native get_account endpoint (deprecated?)
 	get_account?: API.v1.AccountObject | undefined;
 	// Light API balances call
@@ -66,6 +71,25 @@ export interface DataSources {
 	rexfund: SystemContract.Types.rex_fund;
 }
 
+@Struct.type('sampledusage')
+export class SampledUsage extends Struct {
+	@Struct.field(API.v1.AccountObject) declare account: API.v1.AccountObject;
+	@Struct.field(UInt128) declare cpu: UInt128;
+	@Struct.field(UInt128) declare net: UInt128;
+}
+
+@Struct.type('networksources')
+export class NetworkDataSources extends Struct {
+	@Struct.field(SystemTypes.eosio_global_state) declare global: SystemTypes.eosio_global_state;
+	@Struct.field(DelphioracleTypes.datapoints, { optional: true })
+	declare oracle?: DelphioracleTypes.datapoints;
+	@Struct.field(SystemTypes.powerup_state) declare powerup: SystemTypes.powerup_state;
+	@Struct.field(SystemTypes.exchange_state) declare ram: SystemTypes.exchange_state;
+	@Struct.field(SystemTypes.rex_pool) declare rex: SystemTypes.rex_pool;
+	@Struct.field(SampledUsage, { optional: true }) declare sample?: SampledUsage;
+	@Struct.field(UnicoveTypes.token_supply) declare token: UnicoveTypes.token_supply;
+}
+
 export interface LightAPIBalanceRow {
 	currency: string;
 	contract: string;
@@ -78,13 +102,6 @@ export interface LightAPIBalanceResponse {
 	balances: LightAPIBalanceRow[];
 }
 
-@Struct.type('sampledusage')
-export class SampledUsage extends Struct {
-	@Struct.field(API.v1.AccountObject) declare account: API.v1.AccountObject;
-	@Struct.field(UInt128) declare cpu: UInt128;
-	@Struct.field(UInt128) declare net: UInt128;
-}
-
 export interface HistoricalPrice {
 	date: Date;
 	value: Asset;
@@ -93,3 +110,13 @@ export type DescriptionItem = {
 	key: string;
 	value: string;
 };
+
+export interface NetworkResponse {
+	global: SystemTypes.eosio_global_state;
+	oracle?: DelphioracleTypes.datapoints;
+	powerup: SystemTypes.powerup_state;
+	ram: SystemTypes.exchange_state;
+	rex: SystemTypes.rex_pool;
+	sample?: SampleUsage;
+	token: UnicoveTypes.token_supply;
+}

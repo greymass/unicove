@@ -3,6 +3,8 @@
 	import type { Action, NameType } from '@wharfkit/antelope';
 
 	let { data } = $props();
+
+	/* eslint-disable @typescript-eslint/no-explicit-any */
 	const deduplicateTraces = (traces: any) => {
 		return Object.values(
 			traces.reduce((item: any, trace: any) => {

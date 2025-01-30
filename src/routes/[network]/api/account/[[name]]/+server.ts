@@ -10,6 +10,7 @@ import type { RequestHandler } from './$types';
 
 export const GET: RequestHandler = async ({ fetch, params }) => {
 	const chain = getChainDefinitionFromParams(params.network);
+
 	if (!chain) {
 		return json({ error: 'Invalid chain specified' }, { status: 400 });
 	}
@@ -101,11 +102,9 @@ async function getAccount(network: NetworkState, account: NameType, chain: Chain
 }
 
 async function getAccount2(network: NetworkState, account: NameType, chain: ChainDefinition) {
-	const { api: apiContract } = network.contracts;
-
 	const [get_account, getaccount] = await Promise.all([
 		network.client.v1.chain.get_account(account),
-		apiContract.readonly('getaccount', { account })
+		network.contracts.unicove.readonly('account', { account })
 	]);
 
 	let balances: LightAPIBalanceRow[] = [];

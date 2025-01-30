@@ -46,7 +46,7 @@ import { chainMapper } from '$lib/wharf/chains';
 import type { SettingsState } from '../settings.svelte';
 import { WalletPluginCleos } from '@wharfkit/wallet-plugin-cleos';
 import type { NetworkState } from '../network.svelte';
-import ContractKit, { Contract, type ActionDataType } from '@wharfkit/contract';
+import ContractKit, { type ActionDataType } from '@wharfkit/contract';
 
 const defaultWalletPlugins: WalletPlugin[] = [
 	new WalletPluginAnchor(),

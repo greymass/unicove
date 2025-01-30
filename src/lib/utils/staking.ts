@@ -145,6 +145,6 @@ export function getUnstakableBalance(
 
 export function getAPR(network: NetworkState): string {
 	const annualReward = 31250000;
-	const totalStaked = Number(network.rexstate!.total_lendable.value);
+	const totalStaked = Number(network.token.distribution.staked.value);
 	return ((annualReward / totalStaked) * 100).toFixed(1);
 }

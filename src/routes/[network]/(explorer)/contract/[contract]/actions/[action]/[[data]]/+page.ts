@@ -11,11 +11,11 @@ export const load: PageLoad = async ({ params, parent }: LoadEvent) => {
 	if (!action) {
 		error(404);
 	}
-	const actionData = p.abi.structs.find((s: ABI.Struct) => s.name === action.type);
+	const struct = p.abi.structs.find((s: ABI.Struct) => s.name === action.type);
 	const ricardian = parseRicardian(action);
 	return {
 		action,
-		actionData,
+		struct,
 		data: params.data,
 		pageMetaTags: {
 			title: [

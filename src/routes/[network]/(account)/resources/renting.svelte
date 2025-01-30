@@ -15,12 +15,11 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
 	import type { AccountState } from '$lib/state/client/account.svelte';
-	import type { PowerUpState } from '@wharfkit/resources';
 
 	import * as m from '$lib/paraglide/messages';
 	import { calAvailableSize, preventDefault } from '$lib/utils';
 	import { RentState } from './state.svelte';
-	import { getCpuAndNetPrice, getPowerupFrac, type RentType } from './utils';
+	import { type RentType } from './utils';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -45,30 +44,29 @@
 			if (account.name) {
 				rentState.payer = account.name;
 			}
-			const stateType =
-				rentType === 'POWERUP'
-					? network.powerupstate
-					: rentType === 'REX'
-						? network.rexstate
-						: network.sampledUsage?.account;
-			if (stateType && network.sampledUsage && network.chain.systemToken) {
-				if (rentType === 'POWERUP') {
-					const fracs = getPowerupFrac(stateType as PowerUpState, network.sampledUsage, {
-						cpuAmout: Number(rentState.cpuAmount || 0),
-						netAmount: Number(rentState.netAmount || 0)
-					});
+
+			switch (rentType) {
+				case 'POWERUP': {
+					const fracs = network.getPowerupFrac(
+						Number(rentState.cpuAmount || 0),
+						Number(rentState.netAmount || 0)
+					);
 					rentState.cpuFrac = fracs[0];
 					rentState.netFrac = fracs[1];
+					rentState.cpuPricePerMs = network.resources.cpu.price.powerup;
+					rentState.netPricePerKb = network.resources.net.price.powerup;
+					break;
 				}
-				const prices = getCpuAndNetPrice(
-					rentType,
-					stateType,
-					network.sampledUsage,
-					network.chain.systemToken.symbol
-				);
-				rentState.cpuPricePerMs = prices.cpuPrice;
-				rentState.netPricePerKb = prices.netPrice;
+				case 'REX': {
+					rentState.cpuPricePerMs = network.resources.cpu.price.rex;
+					rentState.netPricePerKb = network.resources.net.price.rex;
+					break;
+				}
+				default: {
+					break;
+				}
 			}
+
 			if (account.balance) rentState.balance = account.balance.liquid;
 		} else {
 			rentState.reset();

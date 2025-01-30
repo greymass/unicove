@@ -15,12 +15,12 @@ import { Account, Resource } from '@wharfkit/account';
 import { TokenMeta, TokenBalance, TokenIdentifier } from '@wharfkit/common';
 
 import * as SystemContract from '$lib/wharf/contracts/system';
-import { type DataSources } from '$lib/types';
+import { type AccountDataSources } from '$lib/types';
 import { chainMapper } from '$lib/wharf/chains';
 import { NetworkState } from '$lib/state/network.svelte';
 import { calculateValue, isSameToken } from '$lib/utils';
 
-const defaultDataSources: DataSources = {
+const defaultDataSources: AccountDataSources = {
 	balance: Asset.from('0 '),
 	light_account: [],
 	delegated: [],
@@ -69,7 +69,7 @@ export class AccountState {
 	public fetch = $state(fetch);
 
 	public network: NetworkState;
-	private sources: DataSources = $state(defaultDataSources);
+	private sources: AccountDataSources = $state(defaultDataSources);
 
 	public account: Account | undefined = $state();
 	public name: Name | undefined = $state();
@@ -197,18 +197,18 @@ export function getAccountValue(
 	const systemtoken = Asset.from('0.0000 USD');
 	const total = Asset.from('0.0000 USD');
 
-	if (network.tokenprice) {
-		delegated.units.add(calculateValue(balance.delegated, network.tokenprice).units);
-		liquid.units.add(calculateValue(balance.liquid, network.tokenprice).units);
-		staked.units.add(calculateValue(balance.staked, network.tokenprice).units);
-		refunding.units.add(calculateValue(balance.refunding, network.tokenprice).units);
-		unstaked.units.add(calculateValue(balance.unstaked, network.tokenprice).units);
-		systemtoken.units.add(calculateValue(balance.total, network.tokenprice).units);
-		total.units.add(calculateValue(balance.total, network.tokenprice).units);
-		if (network.ramprice) {
+	if (network.token.price.units.gt(UInt64.from(0))) {
+		delegated.units.add(calculateValue(balance.delegated, network.token.price).units);
+		liquid.units.add(calculateValue(balance.liquid, network.token.price).units);
+		staked.units.add(calculateValue(balance.staked, network.token.price).units);
+		refunding.units.add(calculateValue(balance.refunding, network.token.price).units);
+		unstaked.units.add(calculateValue(balance.unstaked, network.token.price).units);
+		systemtoken.units.add(calculateValue(balance.total, network.token.price).units);
+		total.units.add(calculateValue(balance.total, network.token.price).units);
+		if (network.resources.ram.price.rammarket) {
 			const ramAsset = Asset.from(`${ramResources.max.dividing(1000)} RAM`);
-			const ramValue = calculateValue(ramAsset, network.ramprice.eos);
-			const ramUsdValue = calculateValue(ramValue, network.tokenprice);
+			const ramValue = calculateValue(ramAsset, network.resources.ram.price.rammarket);
+			const ramUsdValue = calculateValue(ramValue, network.token.price);
 			ram.units.add(ramUsdValue.units);
 			total.units.add(ramUsdValue.units);
 		}
@@ -241,7 +241,7 @@ export interface Balance {
 	total: Asset;
 }
 
-export function getBalance(network: NetworkState, sources: DataSources): Balance {
+export function getBalance(network: NetworkState, sources: AccountDataSources): Balance {
 	if (!network) {
 		throw new Error('Network not initialized');
 	}
@@ -283,7 +283,7 @@ export function getBalance(network: NetworkState, sources: DataSources): Balance
 	if (network.config.features.rex) {
 		// Add any staked (REX) tokens to total balance based on current value
 		if (sources.rexbal) {
-			if (network.rexstate) {
+			if (network.supports('rex')) {
 				const rex = network.rexToToken(sources.rexbal.rex_balance);
 				staked.units.add(rex.units);
 				total.units.add(rex.units);
@@ -309,7 +309,7 @@ export function getBalance(network: NetworkState, sources: DataSources): Balance
 
 export function getBalances(
 	network: NetworkState,
-	sources: DataSources,
+	sources: AccountDataSources,
 	chain: Checksum256,
 	tokenmeta?: TokenMeta[],
 	liquid?: Asset
@@ -371,18 +371,21 @@ export function getBalances(
 		});
 
 		// Move system token to the top of the list regardless of alphabetical order
-		const systemToken = network.chain.systemToken;
-		if (systemToken) {
-			balances.sort((a, b) => {
-				if (a.asset.symbol.equals(systemToken.symbol)) {
-					return -1;
-				}
-				if (b.asset.symbol.equals(systemToken.symbol)) {
-					return 1;
-				}
-				return 0;
-			});
-		}
+		balances.sort((a, b) => {
+			if (
+				a.contract.equals(network.token.definition.contract) &&
+				a.asset.symbol.equals(network.token.definition.symbol)
+			) {
+				return -1;
+			}
+			if (
+				b.contract.equals(network.token.definition.contract) &&
+				b.asset.symbol.equals(network.token.definition.symbol)
+			) {
+				return 1;
+			}
+			return 0;
+		});
 
 		return balances;
 	}
@@ -402,7 +405,9 @@ export function getDelegated(
 	return Asset.fromUnits(delegatedUnits, symbol);
 }
 
-export function getDelegations(sources: DataSources): SystemContract.Types.delegated_bandwidth[] {
+export function getDelegations(
+	sources: AccountDataSources
+): SystemContract.Types.delegated_bandwidth[] {
 	const { delegated_bandwidth } = SystemContract.Types;
 	return sources.delegated.map((delegation) => delegated_bandwidth.from(delegation));
 }

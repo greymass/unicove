@@ -1,10 +1,10 @@
 <script lang="ts">
 	/* eslint-disable @typescript-eslint/no-explicit-any */
 	import { getContext, onMount } from 'svelte';
-	import { Bytes, Serializer } from '@wharfkit/antelope';
+	import { ABI, Bytes, Serializer } from '@wharfkit/antelope';
 	import type { Contract } from '@wharfkit/contract';
 
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import Button from '$lib/components/button/button.svelte';
@@ -21,6 +21,11 @@
 
 	const context = getContext<UnicoveContext>('state');
 	const contract = getContext<Contract>('contract');
+
+	let ready = $state(false);
+	let actionInputs: Record<string, string | boolean> = $state({});
+	let useReadOnly: boolean = $state(false);
+	let readonlyResult = $state();
 
 	const flatten = (
 		obj: Record<string, any>,
@@ -39,24 +44,8 @@
 			{}
 		);
 
-	let state: Record<string, any> = $state({});
-	if (data.data) {
-		try {
-			const action = Serializer.decode({
-				data: Bytes.from(data.data),
-				abi: data.abi,
-				type: String(data.action.name)
-			});
-			if (action) {
-				state = flatten(Serializer.objectify(action));
-			}
-		} catch (e) {
-			console.error('Error decoding action:', e);
-		}
-	}
-
 	const restructured = $derived.by(() => {
-		return Object.keys(state).reduce((acc, key) => {
+		return Object.keys(actionInputs).reduce((acc, key) => {
 			const parts = key.split('->');
 			let obj: Record<string, any> = acc;
 			for (let i = 0; i < parts.length - 1; i++) {
@@ -65,7 +54,12 @@
 				}
 				obj = obj[parts[i]];
 			}
-			obj[parts[parts.length - 1]] = state[key];
+			try {
+				obj[parts[parts.length - 1]] = JSON.parse(actionInputs[key] as string);
+			} catch (e) {
+				console.log(e);
+				obj[parts[parts.length - 1]] = actionInputs[key];
+			}
 			return acc;
 		}, {});
 	});
@@ -99,12 +93,10 @@
 	const allowReadOnly = $derived.by(() => {
 		return data.abi.action_results.find((s: any) => s.name === data.action.name);
 	});
-	let useReadOnly = $state(false);
-	let readonlyResult = $state();
 
 	const link = $derived(
 		serialized
-			? `${$page.url.protocol}//${$page.url.host}/${data.network}/contract/${data.contract}/actions/${data.action.name}/${serialized}?readonly=${useReadOnly}`
+			? `${page.url.protocol}//${page.url.host}/${data.network}/contract/${data.contract}/actions/${data.action.name}/${serialized}?readonly=${useReadOnly}`
 			: undefined
 	);
 
@@ -113,8 +105,9 @@
 			return;
 		}
 		if (useReadOnly && data.contract) {
+			readonlyResult = undefined;
 			context.wharf
-				.readonly(data.contract, data.action.name, decoded)
+				.readonly(data.contract, data.action.name, JSON.parse(JSON.stringify(decoded)))
 				.then((result) => {
 					readonlyResult = result;
 				})
@@ -136,18 +129,49 @@
 	}
 
 	onMount(() => {
-		useReadOnly = $page.url.searchParams.get('readonly') === 'true';
+		useReadOnly = page.url.searchParams.get('readonly') === 'true';
+		data.struct.fields.forEach((field: ABI.Field) => {
+			switch (field.type) {
+				case 'bool': {
+					actionInputs[field.name] = false;
+					break;
+				}
+				default: {
+					actionInputs[field.name] = '';
+					break;
+				}
+			}
+		});
+		if (data.data) {
+			try {
+				const action = Serializer.decode({
+					data: Bytes.from(data.data),
+					abi: data.abi,
+					type: String(data.action.name)
+				});
+				if (action) {
+					const test = Serializer.objectify(action);
+					Object.keys(test).forEach((key) => {
+						if (typeof test[key] === 'object') {
+							test[key] = JSON.stringify(test[key]);
+						} else {
+							test[key] = test[key];
+						}
+					});
+					actionInputs = flatten(test);
+				}
+			} catch (e) {
+				console.error('Error decoding action:', e);
+			}
+		}
+		ready = true;
 	});
 </script>
 
 <MultiCard>
 	<Card>
-		<Fields abi={data.abi} fields={data.actionData?.fields || []} {state} />
-		{#if allowReadOnly}
-			<fieldset class="flex items-center gap-3">
-				<Checkbox id="readonly" bind:checked={useReadOnly} />
-				<Label for="readonly">Call as readonly action?</Label>
-			</fieldset>
+		{#if ready}
+			<Fields abi={data.abi} fields={data.struct.fields} state={actionInputs} />
 		{/if}
 		<Button onclick={transact} disabled={!decoded}>
 			{#if useReadOnly}
@@ -156,6 +180,12 @@
 				Perform transaction
 			{/if}
 		</Button>
+		{#if allowReadOnly}
+			<fieldset class="flex items-center gap-3">
+				<Checkbox id="readonly" bind:checked={useReadOnly} />
+				<Label for="readonly">Call as readonly action?</Label>
+			</fieldset>
+		{/if}
 	</Card>
 	<Card>
 		{#if data.ricardian && (data.ricardian.meta || data.ricardian.text)}
@@ -197,12 +227,12 @@
 </fieldset>
 
 {#if context.settings.data.debugMode}
-	<p>State</p>
-	<Code>{JSON.stringify(state, null, 2)}</Code>
+	<p>Input Data</p>
+	<Code>{JSON.stringify(actionInputs, null, 2)}</Code>
 	<p>Decoded</p>
 	<Code>{JSON.stringify(decoded, null, 2)}</Code>
 	<p>Action</p>
 	<Code>{JSON.stringify(data.action, null, 2)}</Code>
-	<p>Action Data</p>
-	<Code>{JSON.stringify(data.actionData, null, 2)}</Code>
+	<p>Struct</p>
+	<Code>{JSON.stringify(data.struct, null, 2)}</Code>
 {/if}
