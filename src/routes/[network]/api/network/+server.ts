@@ -7,6 +7,7 @@ import { Types as DelphioracleTypes } from '$lib/wharf/contracts/delphioracle.js
 import { Types as SystemTypes } from '$lib/wharf/contracts/system';
 import { getBackendNetwork } from '$lib/wharf/client/ssr';
 import type { API, Asset } from '@wharfkit/antelope';
+import * as m from '$lib/paraglide/messages';
 
 type ResponseType =
 	| Asset[]
@@ -96,6 +97,7 @@ export async function GET({ fetch, params }: RequestEvent) {
 	return json(
 		{
 			ts: new Date(),
+			test: m.common_debugging(),
 			globalstate,
 			lockedsupply,
 			ramstate,
