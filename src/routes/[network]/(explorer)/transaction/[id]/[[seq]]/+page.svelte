@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Code from '$lib/components/code.svelte';
+	import * as m from '$lib/paraglide/messages';
 
 	// import SendSummary from '$lib/components/summary/eosio.token/transfer.svelte';
 	// import DepositSummary from '$lib/components/summary/eosio/deposit.svelte';
@@ -50,10 +51,10 @@
 	<table class="table-styles">
 		<thead>
 			<tr>
-				<th>Contract</th>
-				<th>Action</th>
-				<th>Authorization</th>
-				<th>Data</th>
+				<th>{m.common_contract()}</th>
+				<th>{m.common_action()}</th>
+				<th>{m.common_permission_authorization()}</th>
+				<th>{m.common_data()}</th>
 			</tr>
 		</thead>
 		<tbody>

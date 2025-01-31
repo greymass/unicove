@@ -40,7 +40,9 @@
 			<h2 class="h3 flex items-center gap-2">
 				<ArrowLeftRight class="size-5" />
 				{transactions.length}
-				{transactions.length === 1 ? 'Transaction' : 'Transactions'}
+				{transactions.length === 1
+					? m.common_transaction_unit_single()
+					: m.common_transaction_unit_multi()}
 			</h2>
 
 			{#if transactions.length}

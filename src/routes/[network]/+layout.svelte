@@ -17,6 +17,7 @@
 	import UnicoveLogo from '$lib/assets/unicovelogo.svelte';
 	import Search from '$lib/components/search/input.svelte';
 	import { SettingsState } from '$lib/state/settings.svelte.js';
+	import Unicovelogo from '$lib/assets/unicovelogo.svelte';
 
 	let { children, data } = $props();
 
@@ -183,19 +184,22 @@
 	md:h-auto
 	md:min-h-svh
 	md:grid-cols-12
-	md:grid-rows-[min-content_minmax(0,1fr)]
+	md:grid-rows-[min-content_auto_minmax(0,1fr)]
 	md:gap-x-4
 	"
 >
-	<header class="col-span-full flex h-12 items-center justify-between">
-		<!-- Larger breakpoints only	 -->
-		<a
-			href="/{data.network}"
-			class="hidden w-min place-self-center rounded-sm focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-solar-500 md:block"
-		>
-			<UnicoveLogo small />
-		</a>
+	<aside
+		class="relative col-start-1 col-end-3 row-span-full row-start-1 hidden h-full grid-rows-subgrid md:grid"
+	>
+		<nav class="sticky top-4 row-span-2 grid max-h-svh grid-rows-subgrid content-start">
+			<a href="/{data.network}" class="grid h-12 items-center" aria-label="home">
+				<Unicovelogo small class="items-start" />
+			</a>
+			<SideMenuContent network={data.network} />
+		</nav>
+	</aside>
 
+	<header class="col-span-full row-start-1 flex h-12 items-center justify-between">
 		<MobileNavigation network={data.network} />
 
 		<div
@@ -207,12 +211,8 @@
 		</div>
 	</header>
 
-	<aside class="relative row-start-2 hidden h-full md:block">
-		<SideMenuContent class="" network={data.network} />
-	</aside>
-
 	<main
-		class="col-span-full col-start-1 row-start-2 grid grid-cols-subgrid content-start gap-x-4 *:col-span-full md:col-start-3 md:col-end-13 md:px-0 lg:col-end-12"
+		class="col-span-full col-start-1 row-span-full row-start-2 grid grid-cols-subgrid content-start gap-x-4 *:col-span-full md:col-start-3 md:col-end-13 md:px-0 lg:col-end-12"
 	>
 		{@render children()}
 	</main>

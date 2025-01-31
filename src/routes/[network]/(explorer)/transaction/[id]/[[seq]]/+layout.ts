@@ -1,11 +1,19 @@
 import { truncateCenter } from '$lib/utils';
-import type { Load } from '@sveltejs/kit';
+import { error, type Load } from '@sveltejs/kit';
 import * as m from '$lib/paraglide/messages';
 
 export const load: Load = async ({ fetch, params, parent }) => {
 	const { network } = await parent();
 	const response = await fetch(`/${params.network}/api/transaction/${params.id}`);
 	const json = await response.json();
+	if (!json?.transaction?.id) {
+		error(404, {
+			message: m.transaction_404({
+				transaction: truncateCenter(params.id || '', 14)
+			}),
+			code: 'NOT_FOUND'
+		});
+	}
 	return {
 		...json,
 		title: `${truncateCenter(json.transaction.id, 14)}`,

@@ -3,16 +3,34 @@
 	import type { Action, NameType } from '@wharfkit/antelope';
 
 	let { data } = $props();
+	const deduplicateTraces = (traces: any) => {
+		return Object.values(
+			traces.reduce((item: any, trace: any) => {
+				const contract = trace.act.account;
+				if (!item[contract]) {
+					item[contract] = { ...trace, receivers: new Set() };
+				}
+				item[contract].receivers.add(trace.receiver);
+				delete item[contract].receiver;
+				delete item[contract].receipt.receiver;
+				return item;
+			}, {})
+		).map((trace: any) => ({
+			...trace,
+			receivers: [...trace.receivers] // Convert Set to Array
+		}));
+	};
 
+	const traces = deduplicateTraces(data.transaction?.traces);
 	// Define the Action interface
 	interface Trace {
 		act: Action;
-		receipt: { receiver: NameType };
+		receivers: [NameType];
 	}
 </script>
 
-{#if data.transaction?.traces}
-	{@const actions = data.transaction.traces as Trace[]}
+{#if traces}
+	{@const actions = traces as Trace[]}
 	<table class="table-styles">
 		<thead>
 			<tr>
@@ -36,7 +54,9 @@
 						</a>
 					</td>
 					<td>
-						{action.receipt.receiver}
+						{#each action.receivers as receiver}
+							<div>{receiver}</div>
+						{/each}
 					</td>
 					<td>
 						{#each action.act.authorization as auth}
