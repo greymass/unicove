@@ -75,7 +75,7 @@ export class AccountState {
 	public name: Name | undefined = $state();
 	public last_update: Date = $state(new Date());
 	public contract: boolean = $derived(
-		Number(new Date(`${this.sources.get_account.last_code_update}z`)) > 0
+		Number(new Date(`${this.sources?.get_account?.last_code_update}z`)) > 0
 	);
 	public loaded: boolean = $state(false);
 

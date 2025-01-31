@@ -15,13 +15,15 @@ export async function GET({ fetch, params }: RequestEvent) {
 		return json({ error: 'Malformed URL.' }, { status: 500 });
 	}
 
+	const { action } = params;
+
 	const network = getBackendNetwork(chain, fetch);
 	const contractKit = new ContractKit({
 		client: network.client
 	});
 	const contract = await contractKit.load(params.contract);
 
-	const act = contract.action(params.action, params.data || {});
+	const act = contract.action(action, params.data || {});
 	// Remove authorizations
 	act.authorization = [];
 	// Assemble readonly transaction
@@ -38,9 +40,7 @@ export async function GET({ fetch, params }: RequestEvent) {
 	}
 	// Decode and return results
 	const hexData = response.processed.action_traces[0].return_value_hex_data;
-	const returnType = contract.abi.action_results.find((a) =>
-		Name.from(a.name).equals(params.action)
-	);
+	const returnType = contract.abi.action_results.find((a) => Name.from(a.name).equals(action));
 	if (!returnType) {
 		throw new Error(`Return type for ${name} not defined in the ABI.`);
 	}
