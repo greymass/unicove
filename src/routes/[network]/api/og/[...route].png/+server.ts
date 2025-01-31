@@ -11,5 +11,13 @@ export const GET: RequestHandler = async ({ url, fetch, params }) => {
 	const uri = new URL(API_OPENGRAPH_GENERATOR);
 	uri.searchParams.set('text', text);
 	uri.searchParams.set('lang', lang);
-	return await fetch(uri.toString());
+
+	const response = await fetch(uri.toString());
+
+	return new Response(await response.arrayBuffer(), {
+		headers: {
+			'Content-Type': 'image/png',
+			'Cache-Control': 'public, max-age=86400, stale-while-revalidate=86400'
+		}
+	});
 };
