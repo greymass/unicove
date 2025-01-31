@@ -18,8 +18,11 @@ import {
 	type TransactPlugin,
 	type TransactResult,
 	type WalletPlugin,
+	Name,
+	Serializer,
 	Session,
-	SessionKit
+	SessionKit,
+	Transaction
 } from '@wharfkit/session';
 import WebRenderer from '@wharfkit/web-renderer';
 import { WalletPluginAnchor } from '@wharfkit/wallet-plugin-anchor';
@@ -246,14 +249,40 @@ export class WharfState {
 		return result;
 	}
 
-	async readonly(account: NameType, action: NameType, data?: ActionDataType) {
+	async readonly(account: NameType, action: NameType, data: ActionDataType = {}) {
 		if (!this.contractKit) {
 			throw new Error('ContractKit not initialized');
 		}
 		const contract = await this.contractKit.load(account);
 		this.transacting = true;
-		const result = await contract.readonly(action, data);
-		this.transacting = false;
-		return result;
+		const act = contract.action(action, data);
+		// Remove authorizations
+		act.authorization = [];
+		// Assemble readonly transaction
+		const transaction = Transaction.from({
+			ref_block_num: 0,
+			ref_block_prefix: 0,
+			expiration: 0,
+			actions: [act]
+		});
+		// Execute and retrieve response
+		const response = await this.contractKit.client.v1.chain.send_read_only_transaction(transaction);
+		if (response.processed.except) {
+			throw new Error(JSON.stringify(response.processed.except));
+		}
+		// Decode and return results
+		const hexData = response.processed.action_traces[0].return_value_hex_data;
+		const returnType = contract.abi.action_results.find((a) => Name.from(a.name).equals(action));
+		if (!returnType) {
+			throw new Error(`Return type for ${name} not defined in the ABI.`);
+		}
+
+		this.transacting = true;
+
+		return Serializer.decode({
+			data: hexData,
+			type: returnType.result_type,
+			abi: contract.abi
+		});
 	}
 }

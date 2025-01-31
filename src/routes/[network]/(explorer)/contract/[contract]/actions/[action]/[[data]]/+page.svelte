@@ -16,6 +16,7 @@
 	import Fields from './fields.svelte';
 	import { MultiCard } from '$lib/components/layout';
 	import Checkbox from '$lib/components/input/checkbox.svelte';
+	import { readonly } from 'svelte/store';
 
 	const { data } = $props();
 
@@ -25,6 +26,7 @@
 	let ready = $state(false);
 	let actionInputs: Record<string, string | boolean> = $state({});
 	let useReadOnly: boolean = $state(false);
+	let readonlyError = $state();
 	let readonlyResult = $state();
 
 	const flatten = (
@@ -57,7 +59,6 @@
 			try {
 				obj[parts[parts.length - 1]] = JSON.parse(actionInputs[key] as string);
 			} catch (e) {
-				console.log(e);
 				obj[parts[parts.length - 1]] = actionInputs[key];
 			}
 			return acc;
@@ -72,7 +73,7 @@
 				type: String(data.action.name)
 			});
 		} catch (e) {
-			console.log(e);
+			// console.log(e);
 			return undefined;
 		}
 	});
@@ -85,7 +86,7 @@
 				type: String(data.action.name)
 			});
 		} catch (e) {
-			console.log(e);
+			// console.log(e);
 			return undefined;
 		}
 	});
@@ -100,11 +101,18 @@
 			: undefined
 	);
 
+	const api = $derived(
+		serialized
+			? `${page.url.protocol}//${page.url.host}/${data.network}/api/readonly/${data.contract}/${data.action.name}/${serialized}`
+			: undefined
+	);
+
 	function transact() {
 		if (!serialized) {
 			return;
 		}
 		if (useReadOnly && data.contract) {
+			readonlyError = undefined;
 			readonlyResult = undefined;
 			context.wharf
 				.readonly(data.contract, data.action.name, JSON.parse(JSON.stringify(decoded)))
@@ -113,6 +121,7 @@
 				})
 				.catch((error) => {
 					console.error('Readonly error', error);
+					readonlyError = JSON.parse(error.message);
 				});
 		} else {
 			const action = contract.action(data.action.name, serialized);
@@ -171,7 +180,7 @@
 <MultiCard>
 	<Card>
 		{#if ready}
-			<Fields abi={data.abi} fields={data.struct.fields} state={actionInputs} />
+			<Fields abi={data.abi} fields={data.struct.fields} bind:state={actionInputs} />
 		{/if}
 		<Button onclick={transact} disabled={!decoded}>
 			{#if useReadOnly}
@@ -207,6 +216,13 @@
 	</Card>
 </MultiCard>
 
+{#if readonlyError}
+	<Card>
+		<h4 class="h4">Error during readonly call...</h4>
+		<Code>{JSON.stringify(readonlyError, null, 2)}</Code>
+	</Card>
+{/if}
+
 {#if readonlyResult}
 	<Card>
 		<h4 class="h4">Readonly Action Result</h4>
@@ -214,17 +230,30 @@
 	</Card>
 {/if}
 
-<h4 class="h4 mt-4">Transaction Link</h4>
+<h4 class="h4 mt-4">Links</h4>
 <fieldset class="grid gap-2">
 	<Label for="tx-link">
 		{#if link}
-			<a href={link}> The link to this transaction </a>
+			<a href={link}> The link to this page with using the data filled out above. </a>
 		{:else}
 			Complete the transaction above to generate a shareable link.
 		{/if}
 	</Label>
 	<Textinput value={link} readonly />
 </fieldset>
+
+{#if useReadOnly}
+	<fieldset class="grid gap-2">
+		<Label for="tx-link">
+			{#if api}
+				<a href={api}> The to an API call for this transaction. </a>
+			{:else}
+				Complete the transaction above to generate a link.
+			{/if}
+		</Label>
+		<Textinput value={api} readonly />
+	</fieldset>
+{/if}
 
 {#if context.settings.data.debugMode}
 	<p>Input Data</p>
