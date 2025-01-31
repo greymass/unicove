@@ -11,7 +11,7 @@ export async function GET({ fetch, params }: RequestEvent) {
 		return json({ error: 'Invalid chain specified' }, { status: 400 });
 	}
 
-	if (!params.contract || !params.action || !params.data) {
+	if (!params.contract || !params.action) {
 		return json({ error: 'Malformed URL.' }, { status: 500 });
 	}
 
@@ -21,7 +21,7 @@ export async function GET({ fetch, params }: RequestEvent) {
 	});
 	const contract = await contractKit.load(params.contract);
 
-	const act = contract.action(params.action, params.data);
+	const act = contract.action(params.action, params.data || {});
 	// Remove authorizations
 	act.authorization = [];
 	// Assemble readonly transaction
