@@ -11,12 +11,12 @@
 	import Card from '$lib/components/layout/box/card.svelte';
 	import Code from '$lib/components/code.svelte';
 	import Label from '$lib/components/input/label.svelte';
-	import Textinput from '$lib/components/input/text.svelte';
+	import TextInput from '$lib/components/input/text.svelte';
+	import CopyButton from '$lib/components/button/copy.svelte';
 
 	import Fields from './fields.svelte';
 	import { MultiCard } from '$lib/components/layout';
 	import Checkbox from '$lib/components/input/checkbox.svelte';
-	import { readonly } from 'svelte/store';
 
 	const { data } = $props();
 
@@ -230,29 +230,28 @@
 	</Card>
 {/if}
 
-<h4 class="h4 mt-4">Links</h4>
-<fieldset class="grid gap-2">
-	<Label for="tx-link">
-		{#if link}
-			<a href={link}> The link to this page with using the data filled out above. </a>
-		{:else}
-			Complete the transaction above to generate a shareable link.
-		{/if}
-	</Label>
-	<Textinput value={link} readonly />
-</fieldset>
+{#if link}
+	<h4 class="h4 mt-4">Links</h4>
 
-{#if useReadOnly}
 	<fieldset class="grid gap-2">
 		<Label for="tx-link">
-			{#if api}
-				<a href={api}> The to an API call for this transaction. </a>
-			{:else}
-				Complete the transaction above to generate a link.
-			{/if}
+			<a href={link}> Sharable URL for this action and data </a>
 		</Label>
-		<Textinput value={api} readonly />
+		<TextInput value={link} disabled>
+			<CopyButton data={link} />
+		</TextInput>
 	</fieldset>
+
+	{#if useReadOnly && api}
+		<fieldset class="grid gap-2">
+			<Label for="tx-link">
+				<a href={api}> API call which runs this readonly action </a>
+			</Label>
+			<TextInput value={api} disabled>
+				<CopyButton data={api} />
+			</TextInput>
+		</fieldset>
+	{/if}
 {/if}
 
 {#if context.settings.data.debugMode}
