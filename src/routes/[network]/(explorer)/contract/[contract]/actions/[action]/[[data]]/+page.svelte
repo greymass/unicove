@@ -26,6 +26,7 @@
 	let ready = $state(false);
 	let actionInputs: Record<string, string | boolean> = $state({});
 	let useReadOnly: boolean = $state(false);
+	let triggerOnPageLoad: boolean = $state(false);
 	let readonlyError = $state();
 	let readonlyResult = $state();
 
@@ -59,6 +60,7 @@
 			try {
 				obj[parts[parts.length - 1]] = JSON.parse(actionInputs[key] as string);
 			} catch (e) {
+				console.log(e);
 				obj[parts[parts.length - 1]] = actionInputs[key];
 			}
 			return acc;
@@ -73,7 +75,7 @@
 				type: String(data.action.name)
 			});
 		} catch (e) {
-			// console.log(e);
+			console.log(e);
 			return undefined;
 		}
 	});
@@ -86,7 +88,7 @@
 				type: String(data.action.name)
 			});
 		} catch (e) {
-			// console.log(e);
+			console.log(e);
 			return undefined;
 		}
 	});
@@ -97,7 +99,7 @@
 
 	const link = $derived(
 		serialized
-			? `${page.url.protocol}//${page.url.host}/${data.network}/contract/${data.contract}/actions/${data.action.name}/${serialized}?readonly=${useReadOnly}`
+			? `${page.url.protocol}//${page.url.host}/${data.network}/contract/${data.contract}/actions/${data.action.name}/${serialized}?readonly=${useReadOnly}&triggerOnPageLoad=${triggerOnPageLoad}`
 			: undefined
 	);
 
@@ -139,6 +141,7 @@
 
 	onMount(() => {
 		useReadOnly = page.url.searchParams.get('readonly') === 'true';
+		triggerOnPageLoad = page.url.searchParams.get('triggerOnPageLoad') === 'true';
 		data.struct.fields.forEach((field: ABI.Field) => {
 			switch (field.type) {
 				case 'bool': {
@@ -151,27 +154,32 @@
 				}
 			}
 		});
-		if (data.data) {
-			try {
-				const action = Serializer.decode({
-					data: Bytes.from(data.data),
-					abi: data.abi,
-					type: String(data.action.name)
+		try {
+			const action = Serializer.decode({
+				data: Bytes.from(data.data || '00'),
+				abi: data.abi,
+				type: String(data.action.name)
+			});
+			if (action) {
+				const data = Serializer.objectify(action);
+				Object.keys(data).forEach((key) => {
+					if (typeof data[key] === 'object') {
+						data[key] = JSON.stringify(data[key]);
+					} else {
+						data[key] = data[key];
+					}
 				});
-				if (action) {
-					const test = Serializer.objectify(action);
-					Object.keys(test).forEach((key) => {
-						if (typeof test[key] === 'object') {
-							test[key] = JSON.stringify(test[key]);
-						} else {
-							test[key] = test[key];
-						}
-					});
-					actionInputs = flatten(test);
+				actionInputs = flatten(data);
+				if (useReadOnly && triggerOnPageLoad) {
+					console.log('Triggering readonly action on page load');
+					setTimeout(() => {
+						console.log('now');
+						transact();
+					}, 500);
 				}
-			} catch (e) {
-				console.error('Error decoding action:', e);
 			}
+		} catch (e) {
+			console.error('Error decoding action:', e);
 		}
 		ready = true;
 	});
@@ -193,6 +201,10 @@
 			<fieldset class="flex items-center gap-3">
 				<Checkbox id="readonly" bind:checked={useReadOnly} />
 				<Label for="readonly">Call as readonly action?</Label>
+			</fieldset>
+			<fieldset class="flex items-center gap-3">
+				<Checkbox id="pageload" bind:checked={triggerOnPageLoad} />
+				<Label for="pageload">Trigger when page loads?</Label>
 			</fieldset>
 		{/if}
 	</Card>
@@ -225,7 +237,7 @@
 
 {#if readonlyResult}
 	<Card>
-		<h4 class="h4">Readonly Action Result</h4>
+		<h4 class="h4">API Response</h4>
 		<Code>{JSON.stringify(readonlyResult, null, 2)}</Code>
 	</Card>
 {/if}
