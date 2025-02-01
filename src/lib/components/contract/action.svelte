@@ -10,6 +10,7 @@
 	import Brackets from 'lucide-svelte/icons/brackets';
 	import { SquareTerminal } from 'lucide-svelte';
 	import { parse } from 'yaml';
+	import { parseRicardian } from '$lib/utils/ricardian';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -21,14 +22,7 @@
 	}
 	let { abi, action, contract, network }: Props = $props();
 
-	const [, yaml, text] = $derived(action.ricardian_contract.split('---'));
-	const metadata = $derived.by(() => {
-		try {
-			return yaml ? parse(yaml) : {};
-		} catch (e) {
-			return {};
-		}
-	});
+	const ricardian = $derived(parseRicardian(action));
 
 	const struct = $derived(abi.structs.find((s) => s.name === action.type));
 	const response: ABI.Field[] = $derived.by(() => {
@@ -71,14 +65,18 @@
 
 <li class="relative col-span-full grid grid-cols-subgrid bg-shark-950">
 	<div
-		class="col-span-full space-y-1 rounded-t-lg bg-mineShaft-950 px-4 py-3 md:col-span-1 md:rounded-l-lg"
+		class="col-span-full space-y-1 rounded-t-lg bg-mineShaft-950 px-4 py-3 md:col-span-1 md:max-w-xs md:rounded-l-lg"
 	>
 		<div class="flex items-center">
 			<SquareTerminal class="mr-2" />
-			<Contract name={contract} action={Name.from(action.name)} class="text-2xl font-bold">
+			<Contract name={contract} action={Name.from(action.name)} class="text-3xl font-bold">
 				{action.name}
 			</Contract>
 		</div>
+		{#if ricardian}
+			<p class="text-md text-white">{ricardian.meta?.title}</p>
+			<p class="text-muted text-sm">{ricardian.meta?.summary}</p>
+		{/if}
 	</div>
 
 	<div class="grid grid-cols-2 gap-4">
