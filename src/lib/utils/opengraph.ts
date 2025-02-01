@@ -13,7 +13,12 @@ export function ogImage(url: URL) {
 /**
  * A map of valid route names to their captions. Prevents users from generating invalid opengraph images.
  */
-export const captions = {
-	default: m.og_default_caption(),
-	send: m.og_send_caption()
-};
+
+export function getCaption(route: string) {
+	switch (route) {
+		case 'send':
+			return m.og_send_caption();
+		default:
+			return m.og_default_caption();
+	}
+}
