@@ -1,28 +1,33 @@
 <script lang="ts">
+	import type { NameType } from '@wharfkit/antelope';
+	import { getContext, type Snippet } from 'svelte';
+
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { cn } from '$lib/utils';
-	import type { Name } from '@wharfkit/antelope';
-	import { getContext, type Snippet } from 'svelte';
 
 	const { network } = getContext<UnicoveContext>('state');
 
 	interface Props {
+		name: NameType;
+		action?: NameType;
+		struct?: NameType;
+		table?: NameType;
 		children?: Snippet;
-		name?: Name | string;
-		action?: Name | string;
-		struct?: Name;
 		class?: string;
 	}
 
-	let { name, action, struct, children, ...props }: Props = $props();
+	let { name, action, struct, table, children, ...props }: Props = $props();
 
 	let href = $derived.by(() => {
-		const base = `/${network}/contract/${String(name)}`;
+		const base = `/${network}/contract/${name}`;
 		if (action) {
 			return base + `/actions/${action}`;
 		}
 		if (struct) {
 			return base + `/structs/${struct}`;
+		}
+		if (table) {
+			return base + `/tables/${table}`;
 		}
 		return base;
 	});
@@ -33,7 +38,7 @@
 		{#if children}
 			{@render children()}
 		{:else}
-			{String(name)}
+			{name}
 		{/if}
 	</a>
 {/if}

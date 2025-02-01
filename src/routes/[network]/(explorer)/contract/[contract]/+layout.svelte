@@ -1,7 +1,8 @@
 <script lang="ts">
-	import PillGroup from '$lib/components/navigation/pillgroup.svelte';
 	import { Contract } from '@wharfkit/contract';
 	import { setContext } from 'svelte';
+
+	import PillGroup from '$lib/components/navigation/pillgroup.svelte';
 
 	const { children, data } = $props();
 
@@ -9,7 +10,7 @@
 		'contract',
 		new Contract({
 			abi: data.abi,
-			account: String(data.contract),
+			account: data.contract,
 			client: data.network.client
 		})
 	);
@@ -35,13 +36,6 @@
 		];
 	});
 </script>
-
-<!-- <Stack class="gap-2"> -->
-<!-- 	<h1 class="h2 leading-none text-muted">Contract</h1> -->
-<!-- 	{#if data.contract} -->
-<!-- 		<h2 class="h1 font-bold text-white">{data.contract}</h2> -->
-<!-- 	{/if} -->
-<!-- </Stack> -->
 
 <PillGroup {options} />
 

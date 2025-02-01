@@ -1,15 +1,29 @@
 <script lang="ts">
 	import Stack from '$lib/components/layout/stack.svelte';
-	import Action from './action.svelte';
+	import TextInput from '$lib/components/input/text.svelte';
+	import Action from '$lib/components/contract/action.svelte';
 
+	let filter = $state('');
 	const { data } = $props();
+
+	let filteredActions = $derived.by(() => {
+		if (!filter) return data.abi.actions;
+		return data.abi.actions.filter((action) => String(action.name).includes(filter));
+	});
 </script>
 
 <Stack>
 	<p>The actions for this contract with their input parameters and potential response data.</p>
-	<ul class="grid grid-cols-[auto_1fr] gap-2 overflow-x-auto">
-		{#each data.abi.actions as action}
+	<TextInput bind:value={filter} autofocus placeholder="Filter actions..." />
+	<ul class="grid grid-cols-[auto_1fr] gap-4 overflow-x-auto">
+		{#each filteredActions as action}
 			<Action abi={data.abi} contract={data.contract} network={data.network} {action} />
+		{:else}
+			{#if filter}
+				<p>No actions match filter</p>
+			{:else}
+				<p>No actions</p>
+			{/if}
 		{/each}
 	</ul>
 </Stack>

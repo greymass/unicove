@@ -82,6 +82,7 @@
 		"runed": "^0.15.3",
 		"svead": "^0.0.13",
 		"tailwind-merge": "^2.5.3",
-		"typescript-svelte-plugin": "^0.3.40"
+		"typescript-svelte-plugin": "^0.3.40",
+		"yaml": "^2.7.0"
 	}
 }
