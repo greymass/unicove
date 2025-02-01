@@ -43,6 +43,6 @@
 <!-- 	{/if} -->
 <!-- </Stack> -->
 
-<PillGroup {options} class="mb-6" />
+<PillGroup {options} />
 
 {@render children()}

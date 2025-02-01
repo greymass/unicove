@@ -10,15 +10,19 @@
 		children?: Snippet;
 		name?: Name | string;
 		action?: Name | string;
+		struct?: Name;
 		class?: string;
 	}
 
-	let { name, action, children, ...props }: Props = $props();
+	let { name, action, struct, children, ...props }: Props = $props();
 
 	let href = $derived.by(() => {
 		const base = `/${network}/contract/${String(name)}`;
 		if (action) {
 			return base + `/actions/${action}`;
+		}
+		if (struct) {
+			return base + `/structs/${struct}`;
 		}
 		return base;
 	});
