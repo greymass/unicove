@@ -7,6 +7,7 @@
 	import { page } from '$app/state';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import Action from '$lib/components/contract/action.svelte';
 	import Button from '$lib/components/button/button.svelte';
 	import Card from '$lib/components/layout/box/card.svelte';
 	import Code from '$lib/components/code.svelte';
@@ -171,9 +172,7 @@
 				});
 				actionInputs = flatten(data);
 				if (useReadOnly && triggerOnPageLoad) {
-					console.log('Triggering readonly action on page load');
 					setTimeout(() => {
-						console.log('now');
 						transact();
 					}, 500);
 				}
@@ -187,6 +186,7 @@
 
 <MultiCard>
 	<Card>
+		<h4 class="h4">Perform Action</h4>
 		{#if ready}
 			<Fields abi={data.abi} fields={data.struct.fields} bind:state={actionInputs} />
 		{/if}
@@ -209,21 +209,32 @@
 		{/if}
 	</Card>
 	<Card>
-		{#if data.ricardian && (data.ricardian.meta || data.ricardian.text)}
-			<h4 class="h4">Ricardian Contract</h4>
-			{#if data.ricardian.meta}
-				<p>Title: {data.ricardian.meta.title}</p>
-				<p>Summary: {data.ricardian.meta.summary}</p>
-			{/if}
-			{#if data.ricardian.text}
-				<p>{data.ricardian.text}</p>
-			{/if}
-		{/if}
 		<h4 class="h4">Action Data</h4>
 		{#if decoded}
 			<Code>{JSON.stringify(decoded, null, 2)}</Code>
 		{:else}
 			<p>Fill out the form to create a representation of the data in this type of action.</p>
+		{/if}
+		{#if link}
+			<fieldset class="grid gap-2">
+				<Label for="tx-link">
+					<a href={link}> Sharable URL for this action and data </a>
+				</Label>
+				<TextInput value={link} disabled>
+					<CopyButton data={link} />
+				</TextInput>
+			</fieldset>
+
+			{#if useReadOnly && api}
+				<fieldset class="grid gap-2">
+					<Label for="tx-link">
+						<a href={api}> API call which runs this readonly action </a>
+					</Label>
+					<TextInput value={api} disabled>
+						<CopyButton data={api} />
+					</TextInput>
+				</fieldset>
+			{/if}
 		{/if}
 	</Card>
 </MultiCard>
@@ -242,29 +253,9 @@
 	</Card>
 {/if}
 
-{#if link}
-	<h4 class="h4 mt-4">Links</h4>
-
-	<fieldset class="grid gap-2">
-		<Label for="tx-link">
-			<a href={link}> Sharable URL for this action and data </a>
-		</Label>
-		<TextInput value={link} disabled>
-			<CopyButton data={link} />
-		</TextInput>
-	</fieldset>
-
-	{#if useReadOnly && api}
-		<fieldset class="grid gap-2">
-			<Label for="tx-link">
-				<a href={api}> API call which runs this readonly action </a>
-			</Label>
-			<TextInput value={api} disabled>
-				<CopyButton data={api} />
-			</TextInput>
-		</fieldset>
-	{/if}
-{/if}
+<ul class="grid grid-cols-[auto_1fr] gap-4 overflow-x-auto">
+	<Action abi={data.abi} contract={data.contract} network={data.network} action={data.action} />
+</ul>
 
 {#if context.settings.data.debugMode}
 	<p>Input Data</p>
