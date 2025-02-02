@@ -18,6 +18,9 @@
 	import Fields from './fields.svelte';
 	import { MultiCard } from '$lib/components/layout';
 	import Checkbox from '$lib/components/input/checkbox.svelte';
+	import type { TransactResult } from '@wharfkit/session';
+	import TransactionSummary from '$lib/components/transactionSummary.svelte';
+	import { WharfState } from '$lib/state/client/wharf.svelte';
 
 	const { data } = $props();
 
@@ -30,6 +33,7 @@
 	let triggerOnPageLoad: boolean = $state(false);
 	let readonlyError = $state();
 	let readonlyResult = $state();
+	let transactResult: TransactResult | undefined = $state();
 
 	const flatten = (
 		obj: Record<string, any>,
@@ -132,12 +136,16 @@
 			context.wharf
 				.transact({ action })
 				.then((result) => {
-					console.log('Transaction result', result);
+					transactResult = result;
 				})
 				.catch((error) => {
 					console.error('Transaction error', error);
 				});
 		}
+	}
+
+	function clear() {
+		transactResult = undefined;
 	}
 
 	onMount(() => {
@@ -186,26 +194,31 @@
 
 <MultiCard>
 	<Card>
-		<h4 class="h4">Perform Action</h4>
-		{#if ready}
-			<Fields abi={data.abi} fields={data.struct.fields} bind:state={actionInputs} />
-		{/if}
-		<Button onclick={transact} disabled={!decoded}>
-			{#if useReadOnly}
-				Call readonly action
-			{:else}
-				Perform transaction
+		{#if transactResult && transactResult.resolved}
+			<TransactionSummary transactionId={transactResult.resolved.transaction.id} />
+			<Button onclick={clear}>Clear Results</Button>
+		{:else}
+			<h4 class="h4">Perform Action</h4>
+			{#if ready}
+				<Fields abi={data.abi} fields={data.struct.fields} bind:state={actionInputs} />
 			{/if}
-		</Button>
-		{#if allowReadOnly}
-			<fieldset class="flex items-center gap-3">
-				<Checkbox id="readonly" bind:checked={useReadOnly} />
-				<Label for="readonly">Call as readonly action?</Label>
-			</fieldset>
-			<fieldset class="flex items-center gap-3">
-				<Checkbox id="pageload" bind:checked={triggerOnPageLoad} />
-				<Label for="pageload">Trigger when page loads?</Label>
-			</fieldset>
+			<Button onclick={transact} disabled={!decoded || context.wharf.transacting}>
+				{#if useReadOnly}
+					Call readonly action
+				{:else}
+					Perform transaction
+				{/if}
+			</Button>
+			{#if allowReadOnly}
+				<fieldset class="flex items-center gap-3">
+					<Checkbox id="readonly" bind:checked={useReadOnly} />
+					<Label for="readonly">Call as readonly action?</Label>
+				</fieldset>
+				<fieldset class="flex items-center gap-3">
+					<Checkbox id="pageload" bind:checked={triggerOnPageLoad} />
+					<Label for="pageload">Trigger when page loads?</Label>
+				</fieldset>
+			{/if}
 		{/if}
 	</Card>
 	<Card>
@@ -251,6 +264,22 @@
 		<h4 class="h4">API Response</h4>
 		<Code>{JSON.stringify(readonlyResult, null, 2)}</Code>
 	</Card>
+{/if}
+
+{#if transactResult}
+	{#if transactResult.response}
+		{#if transactResult.response.processed && transactResult.response.processed.action_traces}
+			<Card>
+				<h4 class="h4">Action Traces</h4>
+				<Code>{JSON.stringify(transactResult.response.processed.action_traces, null, 2)}</Code>
+			</Card>
+		{/if}
+
+		<Card>
+			<h4 class="h4">API Response</h4>
+			<Code>{JSON.stringify(transactResult.response, null, 2)}</Code>
+		</Card>
+	{/if}
 {/if}
 
 <ul class="grid grid-cols-[auto_1fr] gap-4 overflow-x-auto">
