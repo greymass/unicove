@@ -7,7 +7,6 @@
 	import Code from '$lib/components/code.svelte';
 	import Button from '$lib/components/button/button.svelte';
 	import TextInput from '$lib/components/input/text.svelte';
-	import { PUBLIC_CANONICAL_ORIGIN } from '$env/static/public';
 	import { goto } from '$app/navigation';
 
 	const { data } = $props();
@@ -26,7 +25,7 @@
 	// });
 
 	let pageUrl = $derived.by(() => {
-		let url = `${PUBLIC_CANONICAL_ORIGIN}/${data.network}/contract/${data.contract}/tables/${data.table}`;
+		let url = `/${data.network}/contract/${data.contract}/tables/${data.table}`;
 		if (scope) {
 			url += `/${scope}`;
 		}
