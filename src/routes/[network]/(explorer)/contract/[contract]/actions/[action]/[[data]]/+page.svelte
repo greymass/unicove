@@ -20,7 +20,6 @@
 	import Checkbox from '$lib/components/input/checkbox.svelte';
 	import type { TransactResult } from '@wharfkit/session';
 	import TransactionSummary from '$lib/components/transactionSummary.svelte';
-	import { WharfState } from '$lib/state/client/wharf.svelte';
 
 	const { data } = $props();
 
