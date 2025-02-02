@@ -1,17 +1,13 @@
 <script lang="ts">
-	import { getContext } from 'svelte';
 	import { Name, type ABI } from '@wharfkit/antelope';
+	import SquareDashedBottomCode from 'lucide-svelte/icons/square-dashed-bottom';
 
-	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
 
 	import Code from '$lib/components/code.svelte';
 
-	import { SquareDashedBottomCode } from 'lucide-svelte';
 	import Contract from '../elements/contract.svelte';
 	import { parseRootType } from '$lib/utils/abi';
-
-	const context = getContext<UnicoveContext>('state');
 
 	interface Props {
 		abi: ABI;

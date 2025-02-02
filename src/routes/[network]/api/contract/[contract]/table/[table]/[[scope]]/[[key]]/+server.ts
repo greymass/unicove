@@ -41,7 +41,7 @@ export const GET: RequestHandler = async ({ fetch, params, url }: RequestEvent) 
 			{
 				ts: new Date(),
 				rows,
-				next: cursor.next_key
+				next: cursor.nextkey
 			},
 			{ headers }
 		);

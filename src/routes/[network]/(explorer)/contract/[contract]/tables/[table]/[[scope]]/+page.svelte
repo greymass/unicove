@@ -1,7 +1,4 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import { page } from '$app/state';
-
 	import Stack from '$lib/components/layout/stack.svelte';
 	import Table from '$lib/components/contract/table.svelte';
 	import Code from '$lib/components/code.svelte';
@@ -12,17 +9,12 @@
 	const { data } = $props();
 
 	const table = data.abi.tables.find((t) => t.name === data.table);
-	const struct = data.abi.structs.find((s) => s.name === table.type);
+	const struct = table && data.abi.structs.find((s) => s.name === table.type);
 
 	let rows = $derived(data.rows);
 	let scope = $state(data.scope || data.contract);
-	let next = $state(data.next);
 	let lower = $state(data.lower);
 	let upper = $state(data.upper);
-
-	// onMount(() => {
-	// 	rows = data.rows;
-	// });
 
 	let pageUrl = $derived.by(() => {
 		let url = `/${data.network}/contract/${data.contract}/tables/${data.table}`;
@@ -96,9 +88,11 @@
 			<table class="table-styles">
 				<thead>
 					<tr>
-						{#each struct?.fields as field}
-							<th> {field.name} </th>
-						{/each}
+						{#if struct}
+							{#each struct.fields as field}
+								<th> {field.name} </th>
+							{/each}
+						{/if}
 					</tr>
 				</thead>
 				<tbody>
@@ -124,5 +118,7 @@
 		{/if}
 	</div>
 
-	<Table abi={data.abi} contract={data.contract} network={data.network} {table} />
+	{#if table}
+		<Table abi={data.abi} contract={data.contract} network={data.network} {table} />
+	{/if}
 </Stack>

@@ -1,7 +1,6 @@
 import { languageTag } from '$lib/paraglide/runtime';
 import { goto as svelteGoto } from '$app/navigation';
-import { ABI, Asset, type NameType } from '@wharfkit/antelope';
-import yaml from 'yaml';
+import { Asset, type NameType } from '@wharfkit/antelope';
 
 export * from './strings';
 export * from './ricardian';
