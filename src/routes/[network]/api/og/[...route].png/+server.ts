@@ -1,4 +1,4 @@
-import { API_OPENGRAPH_GENERATOR } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 import { PUBLIC_ENVIRONMENT } from '$env/static/public';
 import type { RequestHandler } from './$types';
 import { i18n } from '$lib/i18n';
@@ -10,6 +10,9 @@ export const GET: RequestHandler = async ({ url, fetch, params }) => {
 	const lang = i18n.getLanguageFromUrl(url);
 	const route = params.route;
 	const text = getCaption(route);
+
+	// Handle non-existant env variable
+	const API_OPENGRAPH_GENERATOR = env.API_OPENGRAPH_GENERATOR;
 
 	// Uses a local image if no API is provided
 	if (!API_OPENGRAPH_GENERATOR) {
