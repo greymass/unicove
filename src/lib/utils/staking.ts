@@ -26,8 +26,8 @@ export function getStakableBalance(network?: NetworkState, account?: AccountStat
 export function getStakedBalance(network?: NetworkState, account?: AccountState): Asset {
 	const staked = Int64.from(0);
 	if (account && account.loaded) {
-		if (account.account?.data.rex_info && network) {
-			staked.add(network.rexToToken(account.account.data.rex_info.rex_balance).units);
+		if (account.balance?.staked && network) {
+			staked.add(account.balance?.staked.units);
 		}
 	}
 	return Asset.fromUnits(staked, network ? network.chain.systemToken!.symbol : defaultSymbol);
@@ -79,8 +79,8 @@ export function getSellableREX(
 
 export function getWithdrawableBalance(network?: NetworkState, account?: AccountState): Asset {
 	const withdrawable = Int64.from(0);
-	if (account && account.loaded && account.sources.rexfund && account.sources.rexfund.balance) {
-		withdrawable.add(Asset.from(account.sources.rexfund.balance).units);
+	if (account && account.loaded && account.balance?.unstaked) {
+		withdrawable.add(account.balance?.unstaked.units);
 	}
 	return Asset.fromUnits(withdrawable, network ? network.chain.systemToken!.symbol : defaultSymbol);
 }
@@ -145,6 +145,6 @@ export function getUnstakableBalance(
 
 export function getAPR(network: NetworkState): string {
 	const annualReward = 31250000;
-	const totalStaked = Number(network.rexstate!.total_lendable.value);
+	const totalStaked = Number(network.token.distribution.staked.value);
 	return ((annualReward / totalStaked) * 100).toFixed(1);
 }

@@ -12,22 +12,10 @@ export class RefundManager {
 	public txid: string = $state('');
 
 	public refunding: Asset = $derived.by(() => {
-		if (!this.account || !this.network || !this.network.chain.systemToken) {
+		if (!this.account || !this.account.balance) {
 			return Asset.fromUnits(0, '0,UNKNOWN');
 		}
-		const refunding = Asset.fromUnits(0, this.network.chain.systemToken.symbol);
-
-		const cpu = this.account?.sources.get_account?.refund_request?.cpu_amount;
-		if (cpu) {
-			refunding.units.add(Asset.from(cpu).units);
-		}
-
-		const net = this.account?.sources.get_account?.refund_request?.net_amount;
-		if (net) {
-			refunding.units.add(Asset.from(net).units);
-		}
-
-		return refunding;
+		return this.account.balance.refunding;
 	});
 
 	public reclaimable: boolean = $derived.by(() => {

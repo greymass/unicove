@@ -12,6 +12,7 @@
 	import Button from '$lib/components/button/button.svelte';
 	import { Breakdown, BreakdownRow } from '$lib/components/breakdown';
 	import * as m from '$lib/paraglide/messages';
+	import { calculateValue } from '$lib/utils/index.js';
 
 	const { data } = $props();
 
@@ -24,7 +25,7 @@
 	const accountValue = $derived(data.account.value?.total);
 
 	const tokenValue = $derived(data.account.value?.systemtoken);
-	const tokenPrice = $derived(data.network.tokenprice);
+	const tokenPrice = $derived(data.network.token.price);
 	const tokenAvailable = $derived(data.account.balance?.liquid);
 	const tokenRefunding = $derived(data.account.balance?.refunding);
 	const tokenStaked = $derived(data.account.balance?.staked);
@@ -36,7 +37,9 @@
 	const ramTotal = $derived(Asset.fromUnits(data.account.ram?.max, '3,KB'));
 	const ramUsed = $derived(Asset.fromUnits(data.account.ram?.used, '3,KB'));
 	const ramAvailable = $derived(Asset.fromUnits(data.account.ram?.available, '3,KB'));
-	const ramPrice = $derived(data.network.ramprice?.usd);
+	const ramPrice = $derived(
+		calculateValue(data.network.resources.ram.price.rammarket, data.network.token.price)
+	);
 
 	const cpuAvailable = $derived(data.account.cpu?.available);
 	const netAvailable = $derived(data.account.net?.available);
@@ -118,7 +121,7 @@
 
 					{#if tokenUnstaked && tokenUnstaked.value > 0}
 						<BreakdownRow
-							key={m.common_unstaking()}
+							key={m.common_unstaked()}
 							value={tokenUnstaked}
 							action={{
 								text: m.common_withdraw(),

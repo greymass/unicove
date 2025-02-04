@@ -25,7 +25,7 @@
 	let apr: string = $derived(getAPR(data.network));
 	let usdValue = $derived(
 		Asset.from(
-			staked.value * (data.network.tokenprice ? data.network.tokenprice.value : 0),
+			staked.value * (data.network.token.price ? data.network.token.price.value : 0),
 			'2,USD'
 		)
 	);

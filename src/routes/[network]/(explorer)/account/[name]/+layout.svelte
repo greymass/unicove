@@ -30,6 +30,8 @@
 					text: m.navigation_proposals()
 				});
 			}
+
+			items.push({ href: `/${network}/account/${account}/data`, text: m.common_data() });
 		}
 
 		if (context.settings.data.debugMode) {

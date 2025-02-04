@@ -6,7 +6,7 @@
 
 <div class="space-y-4">
 	<h3 class="h3">RAM Prices</h3>
-	<Code>{JSON.stringify(data.network.ramprice, null, 2)}</Code>
+	<Code>{JSON.stringify(data.network.resources.ram.price.rammarket, null, 2)}</Code>
 
 	{#if data.account}
 		<h3 class="h3">RAM</h3>

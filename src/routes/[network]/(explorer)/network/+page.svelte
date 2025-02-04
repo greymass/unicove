@@ -18,7 +18,6 @@
 	});
 
 	async function updateState() {
-		console.log('update state');
 		state = await data.network.client.v1.chain.get_info();
 	}
 </script>

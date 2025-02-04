@@ -30,20 +30,25 @@
 			<Self {abi} codePath={[...codePath, field.name]} fields={subfields} {state} />
 		{:else}
 			{@const fieldName = [...codePath, field.name].join('->')}
-			<fieldset class="grid gap-2">
-				<Label for="{fieldName}-input">
-					{fieldName} ({field.type})
-				</Label>
-				{#if field.type === 'bool'}
-					<Checkbox bind:checked={state[fieldName]} id="{fieldName}-input" />
-				{:else}
+			{#if field.type === 'bool'}
+				<fieldset class="flex items-center gap-3">
+					<Checkbox id="{fieldName}-input" bind:checked={state[fieldName]} />
+					<Label for="{fieldName}-input">
+						{fieldName} ({field.type})
+					</Label>
+				</fieldset>
+			{:else}
+				<fieldset class="grid gap-2">
+					<Label for="{fieldName}-input">
+						{fieldName} ({field.type})
+					</Label>
 					<Textinput
 						bind:value={state[fieldName]}
 						placeholder={field.name}
 						id="{fieldName}-input"
 					/>
-				{/if}
-			</fieldset>
+				</fieldset>
+			{/if}
 		{/if}
 	{/each}
 </div>

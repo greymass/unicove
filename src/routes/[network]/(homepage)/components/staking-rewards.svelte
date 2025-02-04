@@ -52,9 +52,7 @@
 
 		<!-- Graphics -->
 		<div class="col-span-full grid place-items-center">
-			{#if network.rexstate}
-				<StakedHEX staked={network.rexstate.total_lendable} {apr} />
-			{/if}
+			<StakedHEX staked={network.token.distribution.staked} {apr} />
 		</div>
 	</Switcher>
 </section>

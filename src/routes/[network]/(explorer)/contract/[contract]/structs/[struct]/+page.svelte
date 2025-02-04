@@ -1,14 +1,14 @@
 <script lang="ts">
 	import type { ABI } from '@wharfkit/antelope';
 
-	import type { PageData } from './$types';
-	import Code from '$lib/components/code.svelte';
-	import { Stack } from '$lib/components/layout';
+	import Struct from '$lib/components/contract/struct.svelte';
 
-	const { data }: { data: PageData } = $props();
+	const { data } = $props();
 	const struct = data.abi.structs.find((s: ABI.Struct) => s.name === data.struct);
 </script>
 
-<Stack>
-	<Code lang="json">{JSON.stringify(struct, null, 2)}</Code>
-</Stack>
+{#if struct}
+	<ul class="grid grid-cols-[auto_1fr] gap-4 overflow-x-auto">
+		<Struct abi={data.abi} contract={data.contract} network={data.network} {struct} />
+	</ul>
+{/if}

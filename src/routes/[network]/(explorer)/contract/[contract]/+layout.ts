@@ -1,8 +1,8 @@
 import * as m from '$lib/paraglide/messages.js';
-import type { LoadEvent } from '@sveltejs/kit';
-import type { ABI } from '@wharfkit/antelope';
+import { Name, type ABI } from '@wharfkit/antelope';
+import type { LayoutLoad } from './$types';
 
-export const load = async ({ fetch, params, parent }: LoadEvent) => {
+export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 	const { network } = await parent();
 	const response = await fetch(`/${params.network}/api/contract/${params.contract}`);
 	const json = await response.json();
@@ -10,7 +10,7 @@ export const load = async ({ fetch, params, parent }: LoadEvent) => {
 
 	return {
 		abi,
-		contract: params.contract,
+		contract: Name.from(params.contract),
 
 		title: params.contract,
 		subtitle: 'Contract',

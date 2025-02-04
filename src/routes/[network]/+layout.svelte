@@ -66,12 +66,12 @@
 	});
 
 	$effect(() => {
-		wharf.setSettings(settings);
+		wharf.setSettings(data.network, settings);
 	});
 
 	async function setupWharf() {
 		if (!wharf.sessionKit) {
-			wharf.init();
+			wharf.init(data.network);
 		}
 
 		const sessions = await wharf.sessionKit?.getSessions();
