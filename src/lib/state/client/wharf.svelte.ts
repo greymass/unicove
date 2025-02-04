@@ -277,7 +277,7 @@ export class WharfState {
 			throw new Error(`Return type for ${name} not defined in the ABI.`);
 		}
 
-		this.transacting = true;
+		this.transacting = false;
 
 		return Serializer.decode({
 			data: hexData,

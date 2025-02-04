@@ -13,7 +13,7 @@
 </script>
 
 <Stack>
-	<p>The data tableures defined by this contract.</p>
+	<p>The data tables defined by this contract.</p>
 	<TextInput bind:value={filter} autofocus placeholder="Filter tables..." />
 	<ul class="grid grid-cols-[auto_1fr] gap-4 overflow-x-auto">
 		{#each filteredTables as table}
