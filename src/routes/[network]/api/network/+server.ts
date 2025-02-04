@@ -121,13 +121,17 @@ async function getNetwork(network: NetworkState): Promise<NetworkResponse> {
 	const sampleUsage = getResponse(results, sampleUsageIndex);
 	const supplyResult = getResponse(results, supplyIndex) as API.v1.GetCurrencyStatsResponse;
 	const lockedsupplyResponse = getResponse(results, lockedsupplyIndex);
-	const lockedsupply = lockedsupplyResponse
-		? (lockedsupplyResponse as AssetType[])[0]
+	const lockedsupply: Asset = lockedsupplyResponse
+		? Asset.from((lockedsupplyResponse as AssetType[])[0])
 		: Asset.fromUnits(0, network.chain.systemToken!.symbol);
 	const tokenstate = getResponse(results, tokenStateIndex);
 
 	const index = String(network.chain.systemToken?.symbol.name);
 	const supply = supplyResult[index];
+	const circulating = Asset.fromUnits(
+		supply.max_supply.units.subtracting(lockedsupply.units),
+		supply.max_supply.symbol
+	);
 
 	return {
 		global: globalstate as SystemTypes.eosio_global_state,
@@ -136,6 +140,7 @@ async function getNetwork(network: NetworkState): Promise<NetworkResponse> {
 				contract: network.chain.systemToken!.contract,
 				symbol: network.chain.systemToken!.symbol
 			},
+			circulating,
 			locked: lockedsupply,
 			supply: supply.supply,
 			max: supply.max_supply
