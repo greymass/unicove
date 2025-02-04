@@ -4,6 +4,9 @@
 	import { onMount, setContext, untrack } from 'svelte';
 	import X from 'lucide-svelte/icons/circle-x';
 	import * as env from '$env/static/public';
+	import { Head, type SeoConfig } from 'svead';
+	import { page } from '$app/stores';
+	import extend from 'just-extend';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { AccountState } from '$lib/state/client/account.svelte.js';
@@ -14,7 +17,6 @@
 	import MobileNavigation from '$lib/components/navigation/mobilenavigation.svelte';
 	import SideMenuContent from '$lib/components/navigation/sidemenu.svelte';
 	import AccountSwitcher from '$lib/components/accountswitch.svelte';
-	import UnicoveLogo from '$lib/assets/unicovelogo.svelte';
 	import Search from '$lib/components/search/input.svelte';
 	import { SettingsState } from '$lib/state/settings.svelte.js';
 	import Unicovelogo from '$lib/assets/unicovelogo.svelte';
@@ -137,7 +139,13 @@
 		// set the flag to prevent banner showing on next load
 		localStorage.setItem('hide-v1-banner', 'true');
 	}
+
+	const seo_config = $derived<SeoConfig>(
+		extend({}, data.baseMetaTags, $page.data?.pageMetaTags) as SeoConfig
+	);
 </script>
+
+<Head {seo_config} />
 
 <!-- Preload current chain logo -->
 <svelte:head>

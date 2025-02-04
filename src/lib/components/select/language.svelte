@@ -70,6 +70,7 @@
 				data-[highlighted]:text-solar-950
 				data-[disabled]:opacity-50"
 				use:melt={$option({ value: lang, label: lang })}
+				data-sveltekit-replacestate
 			>
 				{lang}
 			</a>
