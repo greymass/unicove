@@ -165,9 +165,8 @@ export class NetworkState {
 		this.sources = NetworkDataSources.from(json);
 		this.last_update = new Date();
 
-		const { def, supply, locked, max } = this.sources.token;
+		const { circulating, def, supply, locked, max } = this.sources.token;
 
-		const circulating = Asset.fromUnits(supply.units.subtracting(locked.units), def.symbol);
 		const price = Asset.fromUnits(this.sources.oracle?.median || 0, '4,USD');
 
 		this.token = SystemToken.from({
