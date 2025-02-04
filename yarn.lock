@@ -1849,7 +1849,7 @@
     "@wharfkit/token" "^1.1.2"
     tslib "^2.1.0"
 
-"@wharfkit/account-creation-plugin-metamask@^1.2.0":
+"@wharfkit/account-creation-plugin-metamask@^1.2.1":
   version "1.2.1"
   resolved "https://registry.npmjs.org/@wharfkit/account-creation-plugin-metamask/-/account-creation-plugin-metamask-1.2.1.tgz"
   integrity sha512-7wLIsnxa+iVEy9+fomzE6Ba8ZJC4Xuuon5o3Vb4XjluETNpXwuVjiwXSI+EapxCE3qhxC78VayN8OmdX0fyf0g==
