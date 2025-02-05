@@ -16,9 +16,11 @@
 	import User from 'lucide-svelte/icons/user';
 	import UserCheck from 'lucide-svelte/icons/user-check';
 	import PlusIcon from 'lucide-svelte/icons/plus';
+	import UserPlus from 'lucide-svelte/icons/user-plus';
 	import { goto } from '$app/navigation';
 	import { languageTag } from '$lib/paraglide/runtime';
 	import { cn } from '$lib/utils/style';
+	import Button from './button/button.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -69,7 +71,7 @@
 		elements: { trigger, overlay, content, close, portalled },
 		states: { open }
 	} = createDialog({
-		// defaultOpen: true, // dev only
+		defaultOpen: true, // dev only
 		forceVisible: true
 	});
 
@@ -142,17 +144,17 @@
 				<NetworkSwitch currentNetwork={network} class="" />
 			</section>
 
-			<hr class=" border border-mineShaft-950" />
+			<Button onclick={addSession} variant="secondary" class="grow-0 text-white">
+				<!-- <div class="flex items-center gap-2 text-sm font-semibold"> -->
+				<div class="flex items-center gap-2">
+					<UserPlus class=" size-5" />
+					<span>Add Account</span>
+				</div>
+			</Button>
 
 			<section id="accounts" class="flex flex-1 flex-col gap-3 pt-2">
 				<header class="flex items-center justify-between text-xl font-semibold">
 					<span>{m.common_my_accounts()}</span>
-					<button
-						onclick={addSession}
-						class="grid size-12 place-items-center rounded-lg hover:bg-mineShaft-950"
-					>
-						<PlusIcon class="size-6" />
-					</button>
 				</header>
 
 				<!-- {#if context.wharf.sessions.length} -->
