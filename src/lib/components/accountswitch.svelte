@@ -2,7 +2,7 @@
 	import { getContext } from 'svelte';
 	import { fade, fly } from 'svelte/transition';
 	import { createDialog, melt } from '@melt-ui/svelte';
-	import { Session, type SerializedSession } from '@wharfkit/session';
+	import { Session, type SerializedSession, type WalletPlugin } from '@wharfkit/session';
 	import { chainLogos } from '@wharfkit/common';
 	import * as m from '$lib/paraglide/messages';
 
@@ -23,6 +23,7 @@
 	import { cn } from '$lib/utils/style';
 	import Button from './button/button.svelte';
 	import Text from './input/text.svelte';
+	import { Wallet } from 'lucide-svelte';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -60,6 +61,13 @@
 		closeDrawer();
 	}
 
+	async function connectWallet(wallet: WalletPlugin) {
+		context.wharf.login({
+			chain: context.network.chain,
+			walletPlugin: wallet.id
+		});
+	}
+
 	let filterValue = $state('');
 
 	function clearFilter() {
@@ -87,7 +95,7 @@
 		elements: { trigger, overlay, content, close, portalled },
 		states: { open }
 	} = createDialog({
-		defaultOpen: true, // dev only
+		// defaultOpen: true, // dev only
 		forceVisible: true
 	});
 
@@ -137,14 +145,14 @@
 		<!-- Content -->
 		<div
 			use:melt={$content}
-			class="fixed right-0 top-0 z-50 flex h-svh max-w-fit flex-col space-y-4 overflow-y-auto overflow-x-hidden bg-shark-950 px-4 py-4 shadow-lg focus:outline-none md:px-6"
+			class="fixed right-0 top-0 z-50 flex h-svh min-w-80 max-w-fit flex-col space-y-4 overflow-y-auto overflow-x-hidden bg-shark-950 px-4 py-4 shadow-lg focus:outline-none md:px-6"
 			transition:fly={{
 				x: 350,
 				duration: 300,
 				opacity: 1
 			}}
 		>
-			<section
+			<header
 				data-advanced={context.settings.data.advancedMode}
 				class="flex flex-row-reverse justify-between gap-2 data-[advanced=false]:items-center md:gap-4"
 			>
@@ -158,37 +166,37 @@
 				</button>
 
 				<NetworkSwitch currentNetwork={network} class="" />
-			</section>
+			</header>
 
-			<Button onclick={addSession} variant="secondary" class="grow-0 text-white">
-				<div class="flex items-center gap-2">
-					<UserPlus class="mb-0.5 size-5" />
-					<span>Add Account</span>
-				</div>
-			</Button>
+			{#if chainSessions.length}
+				<Button onclick={addSession} variant="secondary" class="grow-0 text-white">
+					<div class="flex items-center gap-2">
+						<UserPlus class="mb-0.5 size-5" />
+						<span>Add Account</span>
+					</div>
+				</Button>
 
-			<section id="accounts" class="flex flex-1 flex-col gap-4 pt-2">
-				<header class="grid gap-3 text-xl font-semibold">
-					<span>{m.common_my_accounts()}</span>
-					{#if chainSessions.length > 4}
-						<Text
-							class="rounded-full bg-transparent text-sm"
-							placeholder="Filter accounts"
-							bind:value={filterValue}
-						>
-							{#if filterValue}
-								<button onclick={clearFilter} class="grid place-items-center">
-									<CircleX class="size-4" />
-								</button>
-							{:else}
-								<Search class="size-4" />
-							{/if}
-						</Text>
-					{/if}
-				</header>
+				<section id="accounts" class="flex flex-1 flex-col gap-4 pt-2">
+					<header class="grid gap-3 text-xl font-semibold">
+						<span>{m.common_my_accounts()}</span>
+						{#if chainSessions.length > 4}
+							<Text
+								class="rounded-full bg-transparent text-sm"
+								placeholder="Filter accounts"
+								bind:value={filterValue}
+							>
+								{#if filterValue}
+									<button onclick={clearFilter} class="grid place-items-center">
+										<CircleX class="size-4" />
+									</button>
+								{:else}
+									<Search class="size-4" />
+								{/if}
+							</Text>
+						{/if}
+					</header>
 
-				<ul class="grid gap-2">
-					{#if chainSessions.length}
+					<ul class="grid gap-2">
 						{#each chainSessions as session}
 							{@const isCurrent = currentSession?.actor.toString() === session.actor}
 							<li class="grid grid-cols-[1fr_auto] gap-2">
@@ -226,11 +234,41 @@
 								</button>
 							</li>
 						{/each}
-					{:else}
-						<p>{m.common_no_active_sessions()}</p>
-					{/if}
-				</ul>
-			</section>
+					</ul>
+				</section>
+			{:else}
+				<hr class="border-mineShaft-900" />
+				<header class=" grid justify-center gap-2 py-4 text-center">
+					<span class="h4">Login to Unicove</span>
+					<span class=" text-muted text-sm font-medium">Connect your wallet to login</span>
+				</header>
+
+				{#if context.wharf.sessionKit}
+					<ul class="grid grid-cols-[auto_1fr_auto]">
+						{#each context.wharf.sessionKit?.walletPlugins as wallet}
+							<li
+								class="table-row-background table-row-border col-span-full grid grid-cols-subgrid"
+							>
+								<button
+									class="col-span-full grid grid-cols-subgrid gap-4 px-2 py-4 font-semibold text-white"
+									onclick={() => connectWallet(wallet)}
+								>
+									{#if wallet.metadata.logo}
+										<img
+											class="size-6"
+											src={wallet.metadata.logo.toString()}
+											alt={wallet.metadata.name}
+										/>
+									{:else}
+										<Wallet class="size-6" />
+									{/if}
+									<span class="text-left">{wallet.metadata.name}</span>
+								</button>
+							</li>
+						{/each}
+					</ul>
+				{/if}
+			{/if}
 
 			<!-- <Button
 					class="hidden"
