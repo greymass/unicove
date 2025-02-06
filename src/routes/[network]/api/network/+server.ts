@@ -107,9 +107,10 @@ async function getNetwork(network: NetworkState): Promise<NetworkResponse> {
 		);
 	}
 	if (network.supports('delphioracle')) {
+		const pairname = `${network.chain.systemToken!.symbol.name.toLowerCase()}usd`;
 		tokenStateIndex = addRequest(
 			requests,
-			network.contracts.delphioracle.table('datapoints', 'eosusd').get()
+			network.contracts.delphioracle.table('datapoints', pairname).get()
 		);
 	}
 
