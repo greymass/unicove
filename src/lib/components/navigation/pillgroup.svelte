@@ -63,7 +63,7 @@
 
 	{#if $open}
 		<menu
-			class=" z-10 flex max-h-[300px] flex-col overflow-y-auto rounded-lg border border-shark-900 bg-shark-950 py-2 shadow focus:!ring-0"
+			class="z-50 flex max-h-[300px] flex-col overflow-y-auto rounded-lg border border-shark-900 bg-shark-950 py-2 shadow focus:!ring-0"
 			use:melt={$menu}
 			transition:fade={{ duration: 150 }}
 		>
