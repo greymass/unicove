@@ -130,8 +130,8 @@ async function getNetwork(network: NetworkState): Promise<NetworkResponse> {
 	const index = String(network.chain.systemToken?.symbol.name);
 	const supply = supplyResult[index];
 	const circulating = Asset.fromUnits(
-		supply.max_supply.units.subtracting(lockedsupply.units),
-		supply.max_supply.symbol
+		supply.supply.units.subtracting(lockedsupply.units),
+		supply.supply.symbol
 	);
 
 	return {
