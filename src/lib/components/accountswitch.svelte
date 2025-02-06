@@ -12,13 +12,17 @@
 	import NetworkSwitch from '$lib/components/networkswitch.svelte';
 
 	import X from 'lucide-svelte/icons/x';
+	import CircleX from 'lucide-svelte/icons/circle-x';
 	import LogOut from 'lucide-svelte/icons/log-out';
 	import User from 'lucide-svelte/icons/user';
 	import UserCheck from 'lucide-svelte/icons/user-check';
-	import PlusIcon from 'lucide-svelte/icons/plus';
+	import UserPlus from 'lucide-svelte/icons/user-plus';
+	import Search from 'lucide-svelte/icons/search';
 	import { goto } from '$app/navigation';
 	import { languageTag } from '$lib/paraglide/runtime';
 	import { cn } from '$lib/utils/style';
+	import Button from './button/button.svelte';
+	import Text from './input/text.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -56,20 +60,34 @@
 		closeDrawer();
 	}
 
+	let filterValue = $state('');
+
+	function clearFilter() {
+		filterValue = '';
+	}
+
 	// function removeAllSessions() {
 	// 	context.wharf.logout();
 	// 	closeDrawer();
 	// }
 
-	let chainSessions = $derived(
-		context.wharf.sessions.filter((session) => network.chain.id.equals(session.chain))
-	);
+	let chainSessions = $derived.by(() => {
+		let sessions = context.wharf.sessions.filter((session) =>
+			network.chain.id.equals(session.chain)
+		);
+
+		if (filterValue) {
+			sessions = sessions.filter((session) => session.actor.toString().includes(filterValue));
+		}
+
+		return sessions;
+	});
 
 	const {
 		elements: { trigger, overlay, content, close, portalled },
 		states: { open }
 	} = createDialog({
-		// defaultOpen: true, // dev only
+		defaultOpen: true, // dev only
 		forceVisible: true
 	});
 
@@ -142,22 +160,32 @@
 				<NetworkSwitch currentNetwork={network} class="" />
 			</section>
 
-			<hr class=" border border-mineShaft-950" />
+			<Button onclick={addSession} variant="secondary" class="grow-0 text-white">
+				<div class="flex items-center gap-2">
+					<UserPlus class="mb-0.5 size-5" />
+					<span>Add Account</span>
+				</div>
+			</Button>
 
-			<section id="accounts" class="flex flex-1 flex-col gap-3 pt-2">
-				<header class="flex items-center justify-between text-xl font-semibold">
+			<section id="accounts" class="flex flex-1 flex-col gap-4 pt-2">
+				<header class="grid gap-3 text-xl font-semibold">
 					<span>{m.common_my_accounts()}</span>
-					<button
-						onclick={addSession}
-						class="grid size-12 place-items-center rounded-lg hover:bg-mineShaft-950"
-					>
-						<PlusIcon class="size-6" />
-					</button>
+					{#if chainSessions.length > 4}
+						<Text
+							class="rounded-full bg-transparent text-sm"
+							placeholder="Filter accounts"
+							bind:value={filterValue}
+						>
+							{#if filterValue}
+								<button onclick={clearFilter} class="grid place-items-center">
+									<CircleX class="size-4" />
+								</button>
+							{:else}
+								<Search class="size-4" />
+							{/if}
+						</Text>
+					{/if}
 				</header>
-
-				<!-- {#if context.wharf.sessions.length} -->
-				<!-- 	<Button onclick={removeAllSessions} variant="secondary">Logout (All Accounts)</Button> -->
-				<!-- {/if} -->
 
 				<ul class="grid gap-2">
 					{#if chainSessions.length}
