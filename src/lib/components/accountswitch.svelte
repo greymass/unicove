@@ -96,7 +96,7 @@
 		states: { open }
 	} = createDialog({
 		// defaultOpen: true, // dev only
-		forceVisible: true
+		preventScroll: false
 	});
 
 	let logo = $derived(chainLogos.get(String(context.wharf.session?.chain.id)) || '');
