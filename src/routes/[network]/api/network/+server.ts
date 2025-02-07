@@ -107,9 +107,10 @@ async function getNetwork(network: NetworkState): Promise<NetworkResponse> {
 		);
 	}
 	if (network.supports('delphioracle')) {
+		const pairname = `${network.chain.systemToken!.symbol.name.toLowerCase()}usd`;
 		tokenStateIndex = addRequest(
 			requests,
-			network.contracts.delphioracle.table('datapoints', 'eosusd').get()
+			network.contracts.delphioracle.table('datapoints', pairname).get()
 		);
 	}
 
@@ -129,8 +130,8 @@ async function getNetwork(network: NetworkState): Promise<NetworkResponse> {
 	const index = String(network.chain.systemToken?.symbol.name);
 	const supply = supplyResult[index];
 	const circulating = Asset.fromUnits(
-		supply.max_supply.units.subtracting(lockedsupply.units),
-		supply.max_supply.symbol
+		supply.supply.units.subtracting(lockedsupply.units),
+		supply.supply.symbol
 	);
 
 	return {

@@ -26,6 +26,7 @@ export interface ChainConfig {
 export type FeatureType =
 	| 'unicovecontracts'
 	| 'delphioracle'
+	| 'directfunding'
 	| 'lightapi'
 	| 'rex'
 	| 'robo'
@@ -34,7 +35,8 @@ export type FeatureType =
 	| 'powerup'
 	| 'rentrex'
 	| 'stakeresource'
-	| 'staking';
+	| 'staking'
+	| 'metamask';
 
 export type ChainShortName = (typeof chainShortNames)[number];
 export const chainIndiceMapping: Record<ChainShortName, ChainIndices> = {
@@ -64,7 +66,9 @@ export const chainConfigs: Record<string, ChainConfig> = {
 			rentrex: false,
 			powerup: true,
 			stakeresource: false,
-			staking: true
+			staking: true,
+			metamask: true,
+			directfunding: true
 		},
 		lockedsupply: ['eosio'],
 		symbol: '4,EOS'
@@ -83,7 +87,9 @@ export const chainConfigs: Record<string, ChainConfig> = {
 			powerup: true,
 			rentrex: true,
 			stakeresource: true,
-			staking: true
+			staking: true,
+			metamask: true,
+			directfunding: false
 		},
 		symbol: '4,EOS'
 	},
@@ -101,7 +107,9 @@ export const chainConfigs: Record<string, ChainConfig> = {
 			rentrex: true,
 			powerup: true,
 			stakeresource: true,
-			staking: true
+			staking: true,
+			metamask: false,
+			directfunding: false
 		},
 		symbol: '4,EOS'
 	}

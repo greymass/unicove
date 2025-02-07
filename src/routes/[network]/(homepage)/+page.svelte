@@ -6,19 +6,25 @@
 	import StakingRewards from './components/staking-rewards.svelte';
 	import Charts from './components/charts.svelte';
 	import PerformanceGrid from './components/performance-grid.svelte';
+	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import { getContext } from 'svelte';
 
 	const { data } = $props();
+	const { network } = getContext<UnicoveContext>('state');
 
 	let networkLogo = $derived(String(chainLogos.get(data.network?.chain.id.toString())));
 	let networkName = $derived(String(data.network.chain.name));
+	let networkShortname = $derived(String(data.network));
 </script>
 
 <Subgrid id="homepage" class="mb-4 content-start items-start gap-y-32 md:pt-0">
-	<Hero {networkLogo} {networkName} />
+	<Hero {networkLogo} {networkName} {networkShortname} />
 
 	<Carousel {networkLogo} {networkName} />
 
-	<StakingRewards network={data.network} />
+	{#if network.supports('staking')}
+		<StakingRewards network={data.network} />
+	{/if}
 
 	<Charts />
 
