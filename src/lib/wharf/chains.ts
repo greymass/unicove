@@ -35,7 +35,6 @@ export type FeatureType =
 	| 'powerup'
 	| 'rentrex'
 	| 'stakeresource'
-	| 'staking';
 	| 'staking'
 	| 'metamask';
 
