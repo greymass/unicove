@@ -26,11 +26,9 @@ install:
 		bun install --yarn $(package); \
 	fi
 
-%:
-	$(MAKE) install package=$*
-
 codegen:
 	npx @wharfkit/cli generate -u $(API_EOS_CHAIN) -f src/lib/wharf/contracts/system.ts eosio
 	npx @wharfkit/cli generate -u $(API_EOS_CHAIN) -f src/lib/wharf/contracts/token.ts eosio.token
 	npx @wharfkit/cli generate -u $(API_EOS_CHAIN) -f src/lib/wharf/contracts/msig.ts eosio.msig
 	npx @wharfkit/cli generate -u $(API_EOS_CHAIN) -f src/lib/wharf/contracts/delphioracle.ts delphioracle
+	npx @wharfkit/cli generate -u $(API_EOS_CHAIN) -f src/lib/wharf/contracts/unicove.ts unicove.gm

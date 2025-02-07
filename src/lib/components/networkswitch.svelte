@@ -47,6 +47,7 @@
 	} = createSelect<string>({
 		forceVisible: true,
 		onSelectedChange,
+		preventScroll: false,
 		positioning: {
 			placement: 'bottom',
 			fitViewport: true,

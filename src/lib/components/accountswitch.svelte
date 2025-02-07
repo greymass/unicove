@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 	import { fade, fly } from 'svelte/transition';
-	import { createDialog, melt } from '@melt-ui/svelte';
-	import { Session, type SerializedSession } from '@wharfkit/session';
+	import { createDialog, melt, type CreateDialogProps } from '@melt-ui/svelte';
+	import { Session, type SerializedSession, type WalletPlugin } from '@wharfkit/session';
 	import { chainLogos } from '@wharfkit/common';
 	import * as m from '$lib/paraglide/messages';
 
@@ -12,13 +12,18 @@
 	import NetworkSwitch from '$lib/components/networkswitch.svelte';
 
 	import X from 'lucide-svelte/icons/x';
+	import CircleX from 'lucide-svelte/icons/circle-x';
 	import LogOut from 'lucide-svelte/icons/log-out';
 	import User from 'lucide-svelte/icons/user';
 	import UserCheck from 'lucide-svelte/icons/user-check';
-	import PlusIcon from 'lucide-svelte/icons/plus';
+	import UserPlus from 'lucide-svelte/icons/user-plus';
+	import Search from 'lucide-svelte/icons/search';
 	import { goto } from '$app/navigation';
 	import { languageTag } from '$lib/paraglide/runtime';
 	import { cn } from '$lib/utils/style';
+	import Button from './button/button.svelte';
+	import Text from './input/text.svelte';
+	import { Wallet } from 'lucide-svelte';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -36,9 +41,7 @@
 	}
 
 	function addSession() {
-		context.wharf.login({
-			chain: network.chain.id
-		});
+		addingAccount = true;
 	}
 
 	function switchSession(session: SerializedSession) {
@@ -56,21 +59,57 @@
 		closeDrawer();
 	}
 
+	async function connectWallet(wallet: WalletPlugin) {
+		context.wharf.login({
+			chain: context.network.chain,
+			walletPlugin: wallet.id
+		});
+	}
+
+	let filterValue = $state('');
+	let addingAccount = $state(false);
+
+	function closeAddingAccount() {
+		if (addingAccount) {
+			addingAccount = false;
+		} else {
+			closeDrawer();
+		}
+	}
+
+	const resetAddingAccount: CreateDialogProps['onOpenChange'] = ({ next }) => {
+		addingAccount = false;
+		return next;
+	};
+
+	function clearFilter() {
+		filterValue = '';
+	}
+
 	// function removeAllSessions() {
 	// 	context.wharf.logout();
 	// 	closeDrawer();
 	// }
 
-	let chainSessions = $derived(
-		context.wharf.sessions.filter((session) => network.chain.id.equals(session.chain))
-	);
+	let chainSessions = $derived.by(() => {
+		let sessions = context.wharf.sessions.filter((session) =>
+			network.chain.id.equals(session.chain)
+		);
+
+		if (filterValue) {
+			sessions = sessions.filter((session) => session.actor.toString().includes(filterValue));
+		}
+
+		return sessions;
+	});
 
 	const {
 		elements: { trigger, overlay, content, close, portalled },
 		states: { open }
 	} = createDialog({
 		// defaultOpen: true, // dev only
-		forceVisible: true
+		preventScroll: false,
+		onOpenChange: resetAddingAccount
 	});
 
 	let logo = $derived(chainLogos.get(String(context.wharf.session?.chain.id)) || '');
@@ -119,14 +158,14 @@
 		<!-- Content -->
 		<div
 			use:melt={$content}
-			class="fixed right-0 top-0 z-50 flex h-svh max-w-fit flex-col space-y-4 overflow-y-auto overflow-x-hidden bg-shark-950 px-4 py-4 shadow-lg focus:outline-none md:px-6"
+			class="fixed right-0 top-0 z-50 flex h-svh min-w-80 max-w-fit flex-col space-y-4 overflow-y-auto overflow-x-hidden bg-shark-950 px-4 py-4 shadow-lg focus:outline-none md:px-6"
 			transition:fly={{
 				x: 350,
 				duration: 300,
 				opacity: 1
 			}}
 		>
-			<section
+			<header
 				data-advanced={context.settings.data.advancedMode}
 				class="flex flex-row-reverse justify-between gap-2 data-[advanced=false]:items-center md:gap-4"
 			>
@@ -140,78 +179,129 @@
 				</button>
 
 				<NetworkSwitch currentNetwork={network} class="" />
-			</section>
+			</header>
 
-			<hr class=" border border-mineShaft-950" />
-
-			<section id="accounts" class="flex flex-1 flex-col gap-3 pt-2">
-				<header class="flex items-center justify-between text-xl font-semibold">
-					<span>{m.common_my_accounts()}</span>
-					<button
-						onclick={addSession}
-						class="grid size-12 place-items-center rounded-lg hover:bg-mineShaft-950"
+			<section id="content" class="grid">
+				{#if chainSessions.length && !addingAccount}
+					<div
+						id="accounts"
+						class="col-start-1 row-start-1 grid content-start gap-4"
+						in:fly={{ x: -100, duration: 100 }}
+						out:fly={{ x: -100, duration: 100 }}
 					>
-						<PlusIcon class="size-6" />
-					</button>
-				</header>
+						<Button onclick={addSession} variant="secondary" class="grow-0 text-white">
+							<div class="flex items-center gap-2">
+								<UserPlus class="mb-0.5 size-5" />
+								<span>Add Account</span>
+							</div>
+						</Button>
 
-				<!-- {#if context.wharf.sessions.length} -->
-				<!-- 	<Button onclick={removeAllSessions} variant="secondary">Logout (All Accounts)</Button> -->
-				<!-- {/if} -->
-
-				<ul class="grid gap-2">
-					{#if chainSessions.length}
-						{#each chainSessions as session}
-							{@const isCurrent = currentSession?.actor.toString() === session.actor}
-							<li class="grid grid-cols-[1fr_auto] gap-2">
-								<button
-									data-current={isCurrent}
-									onclick={() => switchSession(session)}
-									class="flex h-12 items-center gap-1 rounded-lg px-4
-									data-[current=true]:bg-skyBlue-700
-									data-[current=true]:text-skyBlue-50
-									[@media(any-hover:hover)]:data-[current=false]:hover:bg-mineShaft-950
-									[@media(any-hover:hover)]:data-[current=false]:hover:text-mineShaft-50
-									"
+						<header class="grid gap-3 pt-2 text-xl font-semibold">
+							<span>{m.common_my_accounts()}</span>
+							{#if chainSessions.length > 4}
+								<Text
+									class="rounded-full bg-transparent text-sm"
+									placeholder="Filter accounts"
+									bind:value={filterValue}
 								>
-									<div class="w-6">
-										{#if isCurrent}
-											<UserCheck class="ml-0.5 size-4 stroke-2" />
-										{:else}
-											<User class="size-4" />
-										{/if}
-									</div>
+									{#if filterValue}
+										<button onclick={clearFilter} class="grid place-items-center">
+											<CircleX class="size-4" />
+										</button>
+									{:else}
+										<Search class="size-4" />
+									{/if}
+								</Text>
+							{/if}
+						</header>
 
-									<span class="font-medium">
-										{session.actor}@{session.permission}
-									</span>
-								</button>
-								<button
-									onclick={() => removeSession(session)}
-									data-current={isCurrent}
-									class="text-muted grid size-12 place-items-center rounded-lg
-									[@media(any-hover:hover)]:hover:bg-mineShaft-950
-									[@media(any-hover:hover)]:hover:text-mineShaft-50
-									"
-								>
-									<LogOut class="size-4" />
-								</button>
-							</li>
-						{/each}
-					{:else}
-						<p>{m.common_no_active_sessions()}</p>
-					{/if}
-				</ul>
+						<ul class="grid gap-2">
+							{#each chainSessions as session}
+								{@const isCurrent = currentSession?.actor.toString() === session.actor}
+								<li class="grid grid-cols-[1fr_auto] gap-2">
+									<button
+										data-current={isCurrent}
+										onclick={() => switchSession(session)}
+										class="flex h-12 items-center gap-1 rounded-lg px-4
+										data-[current=true]:bg-skyBlue-700
+										data-[current=true]:text-skyBlue-50
+										[@media(any-hover:hover)]:data-[current=false]:hover:bg-mineShaft-950
+										[@media(any-hover:hover)]:data-[current=false]:hover:text-mineShaft-50
+										"
+									>
+										<div class="w-6">
+											{#if isCurrent}
+												<UserCheck class="ml-0.5 size-4 stroke-2" />
+											{:else}
+												<User class="size-4" />
+											{/if}
+										</div>
+
+										<span class="font-medium">
+											{session.actor}@{session.permission}
+										</span>
+									</button>
+									<button
+										onclick={() => removeSession(session)}
+										data-current={isCurrent}
+										class="text-muted grid size-12 place-items-center rounded-lg
+										[@media(any-hover:hover)]:hover:bg-mineShaft-950
+										[@media(any-hover:hover)]:hover:text-mineShaft-50
+										"
+									>
+										<LogOut class="size-4" />
+									</button>
+								</li>
+							{/each}
+						</ul>
+					</div>
+				{:else}
+					<div class="col-start-1 row-start-1">
+						{@render connectWalletScreen()}
+					</div>
+				{/if}
 			</section>
-
-			<!-- <Button
-					class="hidden"
-					href={`/${network}/signup`}
-					onclick={closeDrawer}
-					variant="secondary"
-				>
-					Create account
-				</Button> -->
 		</div>
 	</div>
 {/if}
+
+{#snippet connectWalletScreen()}
+	<div class="space-y-4" in:fly={{ x: 100, duration: 150 }} out:fly={{ x: 100, duration: 100 }}>
+		<hr class="border-mineShaft-900" />
+
+		<header class="grid justify-center gap-2 py-4 text-center">
+			<span class="h4">Login to Unicove</span>
+			<span class="text-muted text-sm font-medium">Connect your wallet to login</span>
+		</header>
+
+		{#if context.wharf.sessionKit}
+			<ul class="grid grid-cols-[auto_1fr_auto]">
+				{#each context.wharf.sessionKit?.walletPlugins as wallet}
+					<li class="table-row-background table-row-border col-span-full grid grid-cols-subgrid">
+						<button
+							class="col-span-full grid grid-cols-subgrid gap-4 px-2 py-4 font-semibold text-white"
+							onclick={() => connectWallet(wallet)}
+						>
+							{#if wallet.metadata.logo}
+								<img
+									class="size-6"
+									src={wallet.metadata.logo.toString()}
+									alt={wallet.metadata.name}
+								/>
+							{:else}
+								<Wallet class="size-6" />
+							{/if}
+							<span class="text-left">{wallet.metadata.name}</span>
+						</button>
+					</li>
+				{/each}
+			</ul>
+		{/if}
+		<div class="grid">
+			<!-- <Button  href={`/${network}/signup`} onclick={closeDrawer} variant="primary"> -->
+			<!-- 	Create account -->
+			<!-- </Button> -->
+			<Button class="text-white" onclick={closeAddingAccount} variant="secondary">Cancel</Button>
+		</div>
+	</div>
+{/snippet}

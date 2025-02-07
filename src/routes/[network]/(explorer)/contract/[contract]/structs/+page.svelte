@@ -1,13 +1,29 @@
 <script lang="ts">
 	import Stack from '$lib/components/layout/stack.svelte';
+	import TextInput from '$lib/components/input/text.svelte';
+	import Struct from '$lib/components/contract/struct.svelte';
 
+	let filter = $state('');
 	const { data } = $props();
+
+	let filteredStructs = $derived.by(() => {
+		if (!filter) return data.abi.structs;
+		return data.abi.structs.filter((struct) => String(struct.name).includes(filter));
+	});
 </script>
 
 <Stack>
-	{#each data.abi.structs as struct}
-		<a href="/{data.network}/contract/{data.contract}/structs/{struct.name}">
-			{struct.name}
-		</a>
-	{/each}
+	<p>The data structures defined by this contract.</p>
+	<TextInput bind:value={filter} autofocus placeholder="Filter structs..." />
+	<ul class="grid grid-cols-[auto_1fr] gap-4 overflow-x-auto">
+		{#each filteredStructs as struct}
+			<Struct abi={data.abi} contract={data.contract} network={data.network} {struct} />
+		{:else}
+			{#if filter}
+				<p>No actions match filter</p>
+			{:else}
+				<p>No actions</p>
+			{/if}
+		{/each}
+	</ul>
 </Stack>

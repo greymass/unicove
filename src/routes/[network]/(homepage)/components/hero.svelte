@@ -8,21 +8,24 @@
 	interface Props {
 		networkName: string;
 		networkLogo: string;
+		networkShortname: string;
 	}
 
-	let { networkName, networkLogo }: Props = $props();
+	let { networkName, networkLogo, networkShortname }: Props = $props();
 </script>
 
 <section id="hero" class="col-span-full grid grid-cols-subgrid gap-y-14 pt-6 md:items-center">
-	<div id="hero-background" class="col-span-full row-start-1 hidden md:block">
-		<enhanced:img
-			class="h-auto w-auto object-contain"
-			src={bgDesktop}
-			alt=""
-			fetchpriority="high"
-			loading="eager"
-		/>
-	</div>
+	{#if networkShortname === 'eos'}
+		<div id="hero-background" class="col-span-full row-start-1 hidden md:block">
+			<enhanced:img
+				class="h-auto w-auto object-contain"
+				src={bgDesktop}
+				alt=""
+				fetchpriority="high"
+				loading="eager"
+			/>
+		</div>
+	{/if}
 
 	<picture
 		id="network-logo"
@@ -37,13 +40,15 @@
 			height="512"
 			width="512"
 		/>
-		<enhanced:img
-			class="absolute left-1/2 top-0 -translate-x-1/2 object-contain md:hidden"
-			src={bgMobile}
-			alt=""
-			fetchpriority="high"
-			loading="eager"
-		/>
+		{#if networkShortname === 'eos'}
+			<enhanced:img
+				class="absolute left-1/2 top-0 -translate-x-1/2 object-contain md:hidden"
+				src={bgMobile}
+				alt=""
+				fetchpriority="high"
+				loading="eager"
+			/>
+		{/if}
 	</picture>
 
 	<!-- Text block -->

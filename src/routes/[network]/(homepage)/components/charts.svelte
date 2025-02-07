@@ -9,6 +9,8 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 
 	const { network } = getContext<UnicoveContext>('state');
+
+	const funding = network.supports('directfunding');
 </script>
 
 <section
@@ -28,10 +30,15 @@
 						token: String(network.chain.systemToken?.symbol.name),
 						network: network.chain.name
 					}),
-					button: {
-						text: m.common_get_tokens(),
-						href: `${network}/fund`
-					}
+					button: funding
+						? {
+								text: m.common_get_tokens(),
+								href: `${network}/fund`
+							}
+						: {
+								text: m.common_send_tokens(),
+								href: `${network}/send`
+							}
 				}}
 			/>
 		</Box>

@@ -36,7 +36,9 @@
 			.filter((r) => !r.savings)
 			.reduce(
 				(acc, record) => {
-					acc.units.add(record.balance.units);
+					if (!record.claimable) {
+						acc.units.add(record.balance.units);
+					}
 					return acc;
 				},
 				Asset.fromUnits(0, data.network.chain.systemToken!.symbol) as Asset
@@ -52,9 +54,7 @@
 	);
 
 	let apr = $derived(getAPR(data.network));
-	let usdValue = $derived(
-		Asset.from(total.value * (data.network.tokenprice ? data.network.tokenprice.value : 0), '2,USD')
-	);
+	let usdValue = $derived(Asset.from(total.value * data.network.token.price.value, '2,USD'));
 
 	let activity = $derived(
 		staked.units.gt(UInt64.from(0)) ||
@@ -141,11 +141,7 @@
 		</Stack>
 	</Card>
 	<AccountBalance cta={{ href: `/${networkName}/staking/stake`, label: m.common_stake() }} />
-	<StakingCalculator
-		{apr}
-		network={data.network}
-		tokenprice={data.network.tokenprice || Asset.from(0, '2,USD')}
-	/>
+	<StakingCalculator {apr} network={data.network} tokenprice={data.network.token.price} />
 	<UnstakingBalances records={unstaking} />
 </MultiCard>
 

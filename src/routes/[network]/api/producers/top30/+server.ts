@@ -12,9 +12,6 @@ export async function GET({ fetch, params }: RequestEvent) {
 	}
 
 	const network = getBackendNetwork(chain, fetch);
-	if (!network.resources) {
-		return json({ error: 'Network resources not initialized' }, { status: 500 });
-	}
 
 	const all = await getProducersRecursive(network);
 	const producers = all

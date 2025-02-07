@@ -75,8 +75,8 @@
 	});
 
 	$effect(() => {
-		if (data.network.ramprice) {
-			buyRamState.pricePerKB = data.network.ramprice.eos;
+		if (data.network.resources.ram.price.rammarket) {
+			buyRamState.pricePerKB = data.network.resources.ram.price.rammarket;
 		}
 	});
 
@@ -187,7 +187,7 @@
 </Stack>
 
 {#if context.settings.data.debugMode}
-	<h3 class="h3">{m.common_debugging()}}</h3>
+	<h3 class="h3">{m.common_debugging()}</h3>
 	<Code
 		>{JSON.stringify(
 			{

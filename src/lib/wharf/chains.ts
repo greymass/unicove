@@ -5,12 +5,14 @@ import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphiora
 import { Contract as MSIGContract } from '$lib/wharf/contracts/msig';
 import { Contract as SystemContract } from '$lib/wharf/contracts/system';
 import { Contract as TokenContract } from '$lib/wharf/contracts/token';
+import { Contract as UnicoveContract } from '$lib/wharf/contracts/unicove';
 
 export interface DefaultContracts {
-	delphioracle?: DelphiOracleContract;
+	delphioracle: DelphiOracleContract;
 	msig: MSIGContract;
-	token: TokenContract;
 	system: SystemContract;
+	token: TokenContract;
+	unicove: UnicoveContract;
 }
 
 export interface ChainConfig {
@@ -22,7 +24,9 @@ export interface ChainConfig {
 }
 
 export type FeatureType =
+	| 'unicovecontracts'
 	| 'delphioracle'
+	| 'directfunding'
 	| 'lightapi'
 	| 'rex'
 	| 'robo'
@@ -31,7 +35,8 @@ export type FeatureType =
 	| 'powerup'
 	| 'rentrex'
 	| 'stakeresource'
-	| 'staking';
+	| 'staking'
+	| 'metamask';
 
 export type ChainShortName = (typeof chainShortNames)[number];
 export const chainIndiceMapping: Record<ChainShortName, ChainIndices> = {
@@ -51,6 +56,7 @@ export const chainConfigs: Record<string, ChainConfig> = {
 	aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906: {
 		name: 'eos',
 		features: {
+			unicovecontracts: false,
 			delphioracle: true,
 			lightapi: true,
 			rex: true,
@@ -60,7 +66,9 @@ export const chainConfigs: Record<string, ChainConfig> = {
 			rentrex: false,
 			powerup: true,
 			stakeresource: false,
-			staking: true
+			staking: true,
+			metamask: true,
+			directfunding: true
 		},
 		lockedsupply: ['eosio'],
 		symbol: '4,EOS'
@@ -69,6 +77,7 @@ export const chainConfigs: Record<string, ChainConfig> = {
 	'73e4385a2708e6d7048834fbc1079f2fabb17b3c125b146af438971e90716c4d': {
 		name: 'jungle4',
 		features: {
+			unicovecontracts: true,
 			delphioracle: false,
 			lightapi: false,
 			rex: true,
@@ -78,7 +87,9 @@ export const chainConfigs: Record<string, ChainConfig> = {
 			powerup: true,
 			rentrex: true,
 			stakeresource: true,
-			staking: true
+			staking: true,
+			metamask: true,
+			directfunding: false
 		},
 		symbol: '4,EOS'
 	},
@@ -86,6 +97,7 @@ export const chainConfigs: Record<string, ChainConfig> = {
 	'5fff1dae8dc8e2fc4d5b23b2c7665c97f9e9d8edf2b6485a86ba311c25639191': {
 		name: 'kylin',
 		features: {
+			unicovecontracts: false,
 			delphioracle: false,
 			lightapi: false,
 			rex: true,
@@ -95,7 +107,9 @@ export const chainConfigs: Record<string, ChainConfig> = {
 			rentrex: true,
 			powerup: true,
 			stakeresource: true,
-			staking: true
+			staking: true,
+			metamask: false,
+			directfunding: false
 		},
 		symbol: '4,EOS'
 	}
