@@ -41,9 +41,7 @@
 	}
 
 	function addSession() {
-		context.wharf.login({
-			chain: network.chain.id
-		});
+		addingAccount = true;
 	}
 
 	function switchSession(session: SerializedSession) {
@@ -69,6 +67,15 @@
 	}
 
 	let filterValue = $state('');
+	let addingAccount = $state(false);
+
+	function closeAddingAccount() {
+		if (addingAccount) {
+			addingAccount = false;
+		} else {
+			closeDrawer();
+		}
+	}
 
 	function clearFilter() {
 		filterValue = '';
@@ -168,116 +175,127 @@
 				<NetworkSwitch currentNetwork={network} class="" />
 			</header>
 
-			{#if chainSessions.length}
-				<Button onclick={addSession} variant="secondary" class="grow-0 text-white">
-					<div class="flex items-center gap-2">
-						<UserPlus class="mb-0.5 size-5" />
-						<span>Add Account</span>
-					</div>
-				</Button>
+			<section id="content" class="grid">
+				{#if chainSessions.length && !addingAccount}
+					<div
+						id="accounts"
+						class="col-start-1 row-start-1 grid content-start gap-4"
+						in:fly={{ x: -100, duration: 100 }}
+						out:fly={{ x: -100, duration: 100 }}
+					>
+						<Button onclick={addSession} variant="secondary" class="grow-0 text-white">
+							<div class="flex items-center gap-2">
+								<UserPlus class="mb-0.5 size-5" />
+								<span>Add Account</span>
+							</div>
+						</Button>
 
-				<section id="accounts" class="flex flex-1 flex-col gap-4 pt-2">
-					<header class="grid gap-3 text-xl font-semibold">
-						<span>{m.common_my_accounts()}</span>
-						{#if chainSessions.length > 4}
-							<Text
-								class="rounded-full bg-transparent text-sm"
-								placeholder="Filter accounts"
-								bind:value={filterValue}
-							>
-								{#if filterValue}
-									<button onclick={clearFilter} class="grid place-items-center">
-										<CircleX class="size-4" />
-									</button>
-								{:else}
-									<Search class="size-4" />
-								{/if}
-							</Text>
-						{/if}
-					</header>
-
-					<ul class="grid gap-2">
-						{#each chainSessions as session}
-							{@const isCurrent = currentSession?.actor.toString() === session.actor}
-							<li class="grid grid-cols-[1fr_auto] gap-2">
-								<button
-									data-current={isCurrent}
-									onclick={() => switchSession(session)}
-									class="flex h-12 items-center gap-1 rounded-lg px-4
-									data-[current=true]:bg-skyBlue-700
-									data-[current=true]:text-skyBlue-50
-									[@media(any-hover:hover)]:data-[current=false]:hover:bg-mineShaft-950
-									[@media(any-hover:hover)]:data-[current=false]:hover:text-mineShaft-50
-									"
+						<header class="grid gap-3 pt-2 text-xl font-semibold">
+							<span>{m.common_my_accounts()}</span>
+							{#if chainSessions.length > 4}
+								<Text
+									class="rounded-full bg-transparent text-sm"
+									placeholder="Filter accounts"
+									bind:value={filterValue}
 								>
-									<div class="w-6">
-										{#if isCurrent}
-											<UserCheck class="ml-0.5 size-4 stroke-2" />
-										{:else}
-											<User class="size-4" />
-										{/if}
-									</div>
-
-									<span class="font-medium">
-										{session.actor}@{session.permission}
-									</span>
-								</button>
-								<button
-									onclick={() => removeSession(session)}
-									data-current={isCurrent}
-									class="text-muted grid size-12 place-items-center rounded-lg
-									[@media(any-hover:hover)]:hover:bg-mineShaft-950
-									[@media(any-hover:hover)]:hover:text-mineShaft-50
-									"
-								>
-									<LogOut class="size-4" />
-								</button>
-							</li>
-						{/each}
-					</ul>
-				</section>
-			{:else}
-				<hr class="border-mineShaft-900" />
-				<header class=" grid justify-center gap-2 py-4 text-center">
-					<span class="h4">Login to Unicove</span>
-					<span class=" text-muted text-sm font-medium">Connect your wallet to login</span>
-				</header>
-
-				{#if context.wharf.sessionKit}
-					<ul class="grid grid-cols-[auto_1fr_auto]">
-						{#each context.wharf.sessionKit?.walletPlugins as wallet}
-							<li
-								class="table-row-background table-row-border col-span-full grid grid-cols-subgrid"
-							>
-								<button
-									class="col-span-full grid grid-cols-subgrid gap-4 px-2 py-4 font-semibold text-white"
-									onclick={() => connectWallet(wallet)}
-								>
-									{#if wallet.metadata.logo}
-										<img
-											class="size-6"
-											src={wallet.metadata.logo.toString()}
-											alt={wallet.metadata.name}
-										/>
+									{#if filterValue}
+										<button onclick={clearFilter} class="grid place-items-center">
+											<CircleX class="size-4" />
+										</button>
 									{:else}
-										<Wallet class="size-6" />
+										<Search class="size-4" />
 									{/if}
-									<span class="text-left">{wallet.metadata.name}</span>
-								</button>
-							</li>
-						{/each}
-					</ul>
-				{/if}
-			{/if}
+								</Text>
+							{/if}
+						</header>
 
-			<!-- <Button
-					class="hidden"
-					href={`/${network}/signup`}
-					onclick={closeDrawer}
-					variant="secondary"
-				>
-					Create account
-				</Button> -->
+						<ul class="grid gap-2">
+							{#each chainSessions as session}
+								{@const isCurrent = currentSession?.actor.toString() === session.actor}
+								<li class="grid grid-cols-[1fr_auto] gap-2">
+									<button
+										data-current={isCurrent}
+										onclick={() => switchSession(session)}
+										class="flex h-12 items-center gap-1 rounded-lg px-4
+										data-[current=true]:bg-skyBlue-700
+										data-[current=true]:text-skyBlue-50
+										[@media(any-hover:hover)]:data-[current=false]:hover:bg-mineShaft-950
+										[@media(any-hover:hover)]:data-[current=false]:hover:text-mineShaft-50
+										"
+									>
+										<div class="w-6">
+											{#if isCurrent}
+												<UserCheck class="ml-0.5 size-4 stroke-2" />
+											{:else}
+												<User class="size-4" />
+											{/if}
+										</div>
+
+										<span class="font-medium">
+											{session.actor}@{session.permission}
+										</span>
+									</button>
+									<button
+										onclick={() => removeSession(session)}
+										data-current={isCurrent}
+										class="text-muted grid size-12 place-items-center rounded-lg
+										[@media(any-hover:hover)]:hover:bg-mineShaft-950
+										[@media(any-hover:hover)]:hover:text-mineShaft-50
+										"
+									>
+										<LogOut class="size-4" />
+									</button>
+								</li>
+							{/each}
+						</ul>
+					</div>
+				{:else}
+					<div class="col-start-1 row-start-1">
+						{@render connectWalletScreen()}
+					</div>
+				{/if}
+			</section>
 		</div>
 	</div>
 {/if}
+
+{#snippet connectWalletScreen()}
+	<div class="space-y-4" in:fly={{ x: 100, duration: 150 }} out:fly={{ x: 100, duration: 100 }}>
+		<hr class="border-mineShaft-900" />
+
+		<header class="grid justify-center gap-2 py-4 text-center">
+			<span class="h4">Login to Unicove</span>
+			<span class="text-muted text-sm font-medium">Connect your wallet to login</span>
+		</header>
+
+		{#if context.wharf.sessionKit}
+			<ul class="grid grid-cols-[auto_1fr_auto]">
+				{#each context.wharf.sessionKit?.walletPlugins as wallet}
+					<li class="table-row-background table-row-border col-span-full grid grid-cols-subgrid">
+						<button
+							class="col-span-full grid grid-cols-subgrid gap-4 px-2 py-4 font-semibold text-white"
+							onclick={() => connectWallet(wallet)}
+						>
+							{#if wallet.metadata.logo}
+								<img
+									class="size-6"
+									src={wallet.metadata.logo.toString()}
+									alt={wallet.metadata.name}
+								/>
+							{:else}
+								<Wallet class="size-6" />
+							{/if}
+							<span class="text-left">{wallet.metadata.name}</span>
+						</button>
+					</li>
+				{/each}
+			</ul>
+		{/if}
+		<div class="grid">
+			<!-- <Button  href={`/${network}/signup`} onclick={closeDrawer} variant="primary"> -->
+			<!-- 	Create account -->
+			<!-- </Button> -->
+			<Button class="text-white" onclick={closeAddingAccount} variant="secondary">Cancel</Button>
+		</div>
+	</div>
+{/snippet}
