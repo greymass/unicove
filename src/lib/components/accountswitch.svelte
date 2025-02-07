@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 	import { fade, fly } from 'svelte/transition';
-	import { createDialog, melt } from '@melt-ui/svelte';
+	import { createDialog, melt, type CreateDialogProps } from '@melt-ui/svelte';
 	import { Session, type SerializedSession, type WalletPlugin } from '@wharfkit/session';
 	import { chainLogos } from '@wharfkit/common';
 	import * as m from '$lib/paraglide/messages';
@@ -77,6 +77,11 @@
 		}
 	}
 
+	const resetAddingAccount: CreateDialogProps['onOpenChange'] = ({ next }) => {
+		addingAccount = false;
+		return next;
+	};
+
 	function clearFilter() {
 		filterValue = '';
 	}
@@ -103,7 +108,8 @@
 		states: { open }
 	} = createDialog({
 		// defaultOpen: true, // dev only
-		preventScroll: false
+		preventScroll: false,
+		onOpenChange: resetAddingAccount
 	});
 
 	let logo = $derived(chainLogos.get(String(context.wharf.session?.chain.id)) || '');
