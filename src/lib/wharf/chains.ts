@@ -1,12 +1,15 @@
 import type { Asset, Checksum256, Checksum256Type, Name, NameType } from '@wharfkit/antelope';
-import { PUBLIC_CHAINS } from '$env/static/public';
+import { ChainDefinition, TokenIdentifier, type TokenIdentifierType } from '@wharfkit/common';
 
 import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
 import { Contract as MSIGContract } from '$lib/wharf/contracts/msig';
 import { Contract as SystemContract } from '$lib/wharf/contracts/system';
 import { Contract as TokenContract } from '$lib/wharf/contracts/token';
 import { Contract as UnicoveContract } from '$lib/wharf/contracts/unicove';
-import { ChainDefinition, TokenIdentifier } from '@wharfkit/common';
+
+import { PUBLIC_CHAINS } from '$env/static/public';
+
+export const chains = JSON.parse(PUBLIC_CHAINS) as ChainConfig[];
 
 export interface DefaultContracts {
 	delphioracle: DelphiOracleContract;
@@ -24,7 +27,7 @@ export interface ChainEndpoints {
 }
 
 export interface ChainBackend {
-	id: Checksum256;
+	id: Checksum256Type;
 	name: string;
 	endpoints: ChainEndpoints;
 }
@@ -40,19 +43,19 @@ export interface ChainMetaMaskConfig {
 }
 
 export interface ChainToken {
-	contract: Name;
-	symbol: Asset.Symbol;
+	contract: NameType;
+	symbol: Asset.SymbolType;
 }
 
 export interface ChainConfig {
-	id: Checksum256;
+	id: Checksum256Type;
 	name: string;
 	features: Record<FeatureType, boolean>;
 	endpoints: ChainEndpoints;
 	lockedsupply?: NameType[]; // Accounts where tokens exist but are not in circulation
 	coinbase?: ChainCoinbaseConfig;
 	metamask?: ChainMetaMaskConfig;
-	systemtoken: TokenIdentifier;
+	systemtoken: ChainToken;
 	tokens: ChainToken[];
 }
 
@@ -70,8 +73,6 @@ export type FeatureType =
 	| 'stakeresource'
 	| 'staking'
 	| 'metamask';
-
-export const chains = JSON.parse(PUBLIC_CHAINS) as ChainConfig[];
 
 export function getChainConfigByName(name: string): ChainConfig {
 	const chain = chains.find((c) => c.name === name);

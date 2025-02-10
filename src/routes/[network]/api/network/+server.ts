@@ -134,7 +134,7 @@ async function getNetwork(network: NetworkState): Promise<NetworkResponse> {
 		supply.supply.symbol
 	);
 
-	return {
+	const response: NetworkResponse = {
 		global: globalstate as SystemTypes.eosio_global_state,
 		token: UnicoveTypes.token_supply.from({
 			def: {
@@ -148,10 +148,18 @@ async function getNetwork(network: NetworkState): Promise<NetworkResponse> {
 		}),
 		ram: ramstate as SystemTypes.exchange_state,
 		rex: rexstate as SystemTypes.rex_pool,
-		oracle: tokenstate as DelphioracleTypes.datapoints,
-		powerup: powerupstate as SystemTypes.powerup_state,
 		sample: sampleUsage as SampleUsage
 	};
+
+	if (network.supports('powerup')) {
+		response.powerup = powerupstate as SystemTypes.powerup_state;
+	}
+
+	if (network.supports('delphioracle')) {
+		response.oracle = tokenstate as DelphioracleTypes.datapoints;
+	}
+
+	return response;
 }
 
 async function getNetwork2(network: NetworkState): Promise<NetworkResponse> {
