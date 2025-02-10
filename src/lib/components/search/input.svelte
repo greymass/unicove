@@ -327,7 +327,7 @@
 		class="group/row group-has-[:hover]/list:text-muted col-span-full grid h-12 grid-cols-subgrid items-center justify-items-start rounded-lg focus:outline-none group-has-[:hover]/list:bg-transparent group-has-[:hover]/list:hover:bg-mineShaft-900 group-has-[:hover]/list:hover:text-mineShaft-50 data-[active=true]:bg-mineShaft-900 data-[active=true]:text-mineShaft-50"
 		data-active={active}
 	>
-		<Result class="sm:col-span-3" {active} record={item} onclick={closeSearch}>
+		<Result class="col-span-3 sm:col-span-3" {active} record={item} onclick={closeSearch}>
 			<div
 				data-active={active}
 				class="hidden size-12 place-items-center text-mineShaft-50 group-hover/row:grid data-[active=true]:grid group-has-[:hover]/list:data-[active=true]:hidden group-has-[:hover]/list:group-hover/row:data-[active=true]:grid"
