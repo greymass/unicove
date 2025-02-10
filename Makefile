@@ -1,5 +1,3 @@
-include .env
-
 API_EOS_CHAIN ?= https://eos.greymass.com
 SHELL := /usr/bin/env bash
 BIN := ./node_modules/.bin
@@ -20,10 +18,10 @@ format: node_modules
 install:
 	@if [ -z "$(package)" ]; then \
 		echo "Installing all dependencies:"; \
-		bun install --yarn; \
+		bun install --yarn --frozen-lockfile; \
 	else \
 		echo "Installing package: $(package)"; \
-		bun install --yarn $(package); \
+		bun install --yarn --frozen-lockfile $(package); \
 	fi
 
 codegen:
@@ -32,3 +30,9 @@ codegen:
 	npx @wharfkit/cli generate -u $(API_EOS_CHAIN) -f src/lib/wharf/contracts/msig.ts eosio.msig
 	npx @wharfkit/cli generate -u $(API_EOS_CHAIN) -f src/lib/wharf/contracts/delphioracle.ts delphioracle
 	npx @wharfkit/cli generate -u $(API_EOS_CHAIN) -f src/lib/wharf/contracts/unicove.ts unicove.gm
+
+config:
+	bun run scripts/env/env.ts
+
+config/custom:
+	cp ./scripts/env/default/* ./scripts/env/custom

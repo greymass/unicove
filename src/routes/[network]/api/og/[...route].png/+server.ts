@@ -11,7 +11,6 @@ export const GET: RequestHandler = async ({ url, fetch, params }) => {
 	const cacheAge = PUBLIC_ENVIRONMENT === 'production' ? 86400 : 300;
 	let response: Response;
 
-	// Handle non-existant env variable
 	const API_OPENGRAPH_GENERATOR = env.API_OPENGRAPH_GENERATOR;
 
 	if (API_OPENGRAPH_GENERATOR) {

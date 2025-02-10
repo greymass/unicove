@@ -1,11 +1,5 @@
-import { browser } from '$app/environment';
-import {
-	PUBLIC_LOCAL_SIGNER,
-	PUBLIC_METAMASK_SERVICE_URL,
-	PUBLIC_METAMASK_SNAP_ORIGIN
-} from '$env/static/public';
-
-import { ChainDefinition, Chains } from '@wharfkit/common';
+import { ChainDefinition } from '@wharfkit/common';
+import ContractKit, { type ActionDataType } from '@wharfkit/contract';
 import {
 	type AccountCreationPlugin,
 	type CreateAccountOptions,
@@ -25,17 +19,23 @@ import {
 	Transaction
 } from '@wharfkit/session';
 import WebRenderer from '@wharfkit/web-renderer';
+
+// Wallet Plugins
 import { WalletPluginAnchor } from '@wharfkit/wallet-plugin-anchor';
+import { WalletPluginCleos } from '@wharfkit/wallet-plugin-cleos';
 import { WalletPluginMetaMask } from '@wharfkit/wallet-plugin-metamask';
 import { WalletPluginPrivateKey } from '@wharfkit/wallet-plugin-privatekey';
 import { WalletPluginWombat } from '@wharfkit/wallet-plugin-wombat';
 import { WalletPluginScatter } from '@wharfkit/wallet-plugin-scatter';
 import { WalletPluginTokenPocket } from '@wharfkit/wallet-plugin-tokenpocket';
-import { TransactPluginResourceProvider } from '@wharfkit/transact-plugin-resource-provider';
 
+// Other Plugins
 import { AccountCreationPluginMetamask } from '@wharfkit/account-creation-plugin-metamask';
-
+import { TransactPluginResourceProvider } from '@wharfkit/transact-plugin-resource-provider';
 import { TransactPluginStatusEmitter } from '$lib/wharf/plugins/status';
+
+import { browser } from '$app/environment';
+import * as env from '$env/static/public';
 
 import {
 	type QueuedTransaction,
@@ -45,11 +45,9 @@ import {
 	// sendSuccessToast
 } from '$lib/wharf/transact.svelte';
 
-import { chainMapper } from '$lib/wharf/chains';
-import type { SettingsState } from '../settings.svelte';
-import { WalletPluginCleos } from '@wharfkit/wallet-plugin-cleos';
-import type { NetworkState } from '../network.svelte';
-import ContractKit, { type ActionDataType } from '@wharfkit/contract';
+import { chainMapper, chains, getChainDefinitionFromParams } from '$lib/wharf/chains';
+import type { SettingsState } from '$lib/state/settings.svelte';
+import type { NetworkState } from '$lib/state/network.svelte';
 
 const defaultWalletPlugins: WalletPlugin[] = [
 	new WalletPluginAnchor(),
@@ -59,26 +57,23 @@ const defaultWalletPlugins: WalletPlugin[] = [
 	new WalletPluginWombat()
 ];
 
-export const accountCreationPluginMetamask = new AccountCreationPluginMetamask({
-	accountCreationServiceUrl: PUBLIC_METAMASK_SERVICE_URL,
-	snapOrigin: PUBLIC_METAMASK_SNAP_ORIGIN
-});
-
-const accountCreationPlugins: AccountCreationPlugin[] = [accountCreationPluginMetamask];
-
 const transactPlugins: TransactPlugin[] = [
 	new TransactPluginStatusEmitter(),
 	new TransactPluginResourceProvider()
 ];
 
 // If a local key is provided, add the private key wallet
-if (PUBLIC_LOCAL_SIGNER) {
-	defaultWalletPlugins.unshift(new WalletPluginPrivateKey(PUBLIC_LOCAL_SIGNER));
+if (env.PUBLIC_LOCAL_SIGNER) {
+	defaultWalletPlugins.unshift(new WalletPluginPrivateKey(env.PUBLIC_LOCAL_SIGNER));
 }
+
+const chainDefs: ChainDefinition[] = chains.map((chain) =>
+	getChainDefinitionFromParams(chain.name)
+);
 
 export class WharfState {
 	public chain?: ChainDefinition = $state();
-	public chains: ChainDefinition[] = [Chains.EOS, Chains.Jungle4, Chains.KylinTestnet];
+	public chains: ChainDefinition[] = chainDefs;
 	public chainsSession: Record<string, SerializedSession | undefined> = $state({});
 	public contractKit?: ContractKit;
 	public session?: Session = $state<Session>();
@@ -86,6 +81,8 @@ export class WharfState {
 	public sessionKit?: SessionKit;
 	public transacting = $state(false);
 	public settings: SettingsState = $state() as SettingsState;
+
+	public metamaskPlugin?: AccountCreationPluginMetamask;
 
 	constructor(settings: SettingsState) {
 		this.settings = settings;
@@ -106,6 +103,17 @@ export class WharfState {
 		if (this.settings.data.advancedMode) {
 			walletPlugins.push(new WalletPluginCleos());
 		}
+
+		const accountCreationPlugins: AccountCreationPlugin[] = [];
+
+		if (network.config.metamask) {
+			this.metamaskPlugin = new AccountCreationPluginMetamask({
+				accountCreationServiceUrl: network.config.metamask.serviceurl,
+				snapOrigin: network.config.metamask.snaporigin
+			});
+			accountCreationPlugins.push(this.metamaskPlugin);
+		}
+
 		this.sessionKit = new SessionKit(
 			{
 				appName: 'unicove',

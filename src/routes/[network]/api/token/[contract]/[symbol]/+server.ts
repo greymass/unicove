@@ -1,8 +1,9 @@
 import { json, type RequestEvent } from '@sveltejs/kit';
 
-import { getChainDefinitionFromParams, NetworkState } from '$lib/state/network.svelte';
+import { NetworkState } from '$lib/state/network.svelte';
 import { getCacheHeaders } from '$lib/utils';
 import { getBackendNetwork, getLightAPIURL } from '$lib/wharf/client/ssr';
+import { getChainDefinitionFromParams } from '$lib/wharf/chains';
 
 export async function GET({ fetch, params, url }: RequestEvent) {
 	const chain = getChainDefinitionFromParams(String(params.network));

@@ -1,17 +1,9 @@
 import { APIClient, FetchProvider } from '@wharfkit/antelope';
-import { ChainDefinition, Chains } from '@wharfkit/common';
+import { ChainDefinition } from '@wharfkit/common';
 
-import {
-	API_EOS_CHAIN,
-	API_EOS_HISTORY,
-	API_EOS_LIGHTAPI,
-	API_JUNGLE4_CHAIN,
-	API_JUNGLE4_HISTORY,
-	API_KYLIN_CHAIN,
-	API_KYLIN_HISTORY
-} from '$env/static/private';
+import { PRIVATE_BACKENDS } from '$env/static/private';
 
-import { chainIndiceMapping, chainMapper, type ChainShortName } from '../chains';
+import { chainMapper, getChainConfigByName, type ChainBackend, type ChainConfig } from '../chains';
 import { getNetwork } from '$lib/state/network.svelte';
 
 interface GetBackendClientOptions {
@@ -19,34 +11,32 @@ interface GetBackendClientOptions {
 	headers: Record<string, string>;
 }
 
+const backends = JSON.parse(PRIVATE_BACKENDS) as ChainBackend[];
+
+export function getChainConfigByNamePrivate(chain: string): ChainConfig {
+	const result = getChainConfigByName(chain);
+	const backend = backends.find((b) => b.id === result.id);
+	if (backend) {
+		return {
+			...result,
+			endpoints: {
+				...result.endpoints,
+				...backend.endpoints
+			}
+		};
+	}
+	return result;
+}
+
 export function getBackendClient(
 	fetch: typeof window.fetch,
-	chain: ChainShortName = 'eos',
+	chain: string = 'eos',
 	options: Partial<GetBackendClientOptions> = {}
 ): APIClient {
-	if (!chainIndiceMapping[chain]) {
-		throw new Error(`Chain ${chain} not supported`);
-	}
-	const chainDef = Chains[chainIndiceMapping[chain]];
-	switch (chain) {
-		case 'eos': {
-			chainDef.url = options.history ? API_EOS_HISTORY : API_EOS_CHAIN;
-			break;
-		}
-		case 'jungle4': {
-			chainDef.url = options.history ? API_JUNGLE4_HISTORY : API_JUNGLE4_CHAIN;
-			break;
-		}
-		case 'kylin': {
-			chainDef.url = options.history ? API_KYLIN_HISTORY : API_KYLIN_CHAIN;
-			break;
-		}
-		default: {
-			throw new Error(`Chain ${chain} not supported`);
-		}
-	}
+	const config = getChainConfigByNamePrivate(chain);
+	const url = options.history ? config.endpoints.history : config.endpoints.api;
 	return new APIClient({
-		provider: new FetchProvider(chainDef.url, { fetch, headers: options.headers })
+		provider: new FetchProvider(url, { fetch, headers: options.headers })
 	});
 }
 
@@ -61,13 +51,6 @@ export function getBackendNetwork(
 	return getNetwork(chain, { client });
 }
 
-export function getLightAPIURL(chain: ChainShortName = 'eos') {
-	switch (chain) {
-		case 'eos': {
-			return API_EOS_LIGHTAPI;
-		}
-		default: {
-			throw new Error(`Chain ${chain} does not have a light API defined`);
-		}
-	}
+export function getLightAPIURL(chain: string) {
+	return getChainConfigByNamePrivate(chain).endpoints.lightapi;
 }

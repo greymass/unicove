@@ -3,7 +3,7 @@
 	import { chainLogos } from '@wharfkit/common';
 	import { onMount, setContext, untrack } from 'svelte';
 	import X from 'lucide-svelte/icons/circle-x';
-	import * as env from '$env/static/public';
+	import { env } from '$env/dynamic/public';
 	import { Head, type SeoConfig } from 'svead';
 	import { page } from '$app/stores';
 	import extend from 'just-extend';

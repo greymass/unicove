@@ -2,11 +2,12 @@ import { json } from '@sveltejs/kit';
 import { Asset, type NameType } from '@wharfkit/antelope';
 import type { ChainDefinition } from '@wharfkit/common';
 
-import { getChainDefinitionFromParams, NetworkState } from '$lib/state/network.svelte';
+import { NetworkState } from '$lib/state/network.svelte';
 import { getBackendNetwork, getLightAPIURL } from '$lib/wharf/client/ssr';
 import { getCacheHeaders } from '$lib/utils';
 import type { LightAPIBalanceResponse, LightAPIBalanceRow } from '$lib/types.js';
 import type { RequestHandler } from './$types';
+import { getChainDefinitionFromParams } from '$lib/wharf/chains';
 
 export const GET: RequestHandler = async ({ fetch, params }) => {
 	const chain = getChainDefinitionFromParams(params.network);
@@ -80,7 +81,7 @@ async function getAccount(network: NetworkState, account: NameType, chain: Chain
 
 	// If no response from the light API, add a default balance of zero
 	if (!balances.length && chain.systemToken) {
-		const symbol = Asset.Symbol.from(network.config.symbol);
+		const symbol = Asset.Symbol.from(network.config.systemtoken.symbol);
 		balances.push({
 			contract: String(chain.systemToken.contract),
 			amount: '0',
@@ -115,7 +116,7 @@ async function getAccount2(network: NetworkState, account: NameType, chain: Chai
 
 	// If no response from the light API, add a default balance of zero
 	if (!balances.length && chain.systemToken) {
-		const symbol = Asset.Symbol.from(network.config.symbol);
+		const symbol = Asset.Symbol.from(network.config.systemtoken.symbol);
 		balances.push({
 			contract: String(chain.systemToken.contract),
 			amount: '0',

@@ -1,8 +1,8 @@
 import { json, type RequestEvent } from '@sveltejs/kit';
-
-import { getChainDefinitionFromParams } from '$lib/state/network.svelte';
-import { getBackendNetwork } from '$lib/wharf/client/ssr.js';
 import { PublicKey } from '@wharfkit/antelope';
+
+import { getBackendNetwork } from '$lib/wharf/client/ssr.js';
+import { getChainDefinitionFromParams } from '$lib/wharf/chains';
 
 export async function GET({ fetch, params }: RequestEvent) {
 	const chain = getChainDefinitionFromParams(String(params.network));

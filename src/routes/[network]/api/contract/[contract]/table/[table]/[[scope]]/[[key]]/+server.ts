@@ -1,10 +1,11 @@
 import { json } from '@sveltejs/kit';
+import { ContractKit } from '@wharfkit/contract';
+
 import type { RequestEvent, RequestHandler } from './$types';
 
-import { getChainDefinitionFromParams } from '$lib/state/network.svelte';
 import { getCacheHeaders } from '$lib/utils';
 import { getBackendNetwork } from '$lib/wharf/client/ssr';
-import { ContractKit } from '@wharfkit/contract';
+import { getChainDefinitionFromParams } from '$lib/wharf/chains';
 
 export const GET: RequestHandler = async ({ fetch, params, url }: RequestEvent) => {
 	const chain = getChainDefinitionFromParams(String(params.network));

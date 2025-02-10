@@ -7,9 +7,9 @@ import {
 	UInt64,
 	type AssetType
 } from '@wharfkit/antelope';
-import { Chains, ChainDefinition, TokenMeta } from '@wharfkit/common';
+import { ChainDefinition, TokenMeta, TokenIdentifier } from '@wharfkit/common';
 import { RAMState, Resources as ResourceClient, REXState, PowerUpState } from '@wharfkit/resources';
-import { ABICache, chainIdsToIndices } from '@wharfkit/session';
+import { ABICache } from '@wharfkit/session';
 import { snapOrigins } from '@wharfkit/wallet-plugin-metamask';
 
 import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
@@ -19,15 +19,14 @@ import { Contract as TokenContract } from '$lib/wharf/contracts/token';
 import { Contract as UnicoveContract, Types as UnicoveTypes } from '$lib/wharf/contracts/unicove';
 
 import {
-	chainConfigs,
 	chainMapper,
+	getChainDefinitionFromParams,
+	getChainConfigById,
 	type ChainConfig,
-	type ChainShortName,
 	type DefaultContracts,
 	type FeatureType
 } from '$lib/wharf/chains';
 
-import { tokens } from '../../routes/[network]/api/tokens/tokens';
 import { calculateValue } from '$lib/utils';
 import { NetworkDataSources } from '$lib/types';
 
@@ -87,7 +86,7 @@ export class NetworkState {
 	public fetch = fetch;
 	public last_update: Date = $state(new Date());
 	public loaded = $state(false);
-	public shortname: keyof typeof tokens;
+	public shortname: string;
 	public snapOrigin?: string = $state();
 
 	public contracts: DefaultContracts;
@@ -104,10 +103,17 @@ export class NetworkState {
 
 	constructor(chain: ChainDefinition, options: NetworkStateOptions = {}) {
 		this.chain = chain;
-		this.config = chainConfigs[String(this.chain.id)];
+		this.config = getChainConfigById(this.chain.id);
 		this.shortname = chainMapper.toShortName(String(this.chain.id));
 		this.snapOrigin = snapOrigins.get(this.shortname);
-		this.tokenmeta = tokens[this.shortname];
+		this.tokenmeta = this.config.tokens.map((token) =>
+			TokenMeta.from({
+				id: TokenIdentifier.from({
+					chain: this.chain.id,
+					...token
+				})
+			})
+		);
 
 		if (options.fetch) {
 			this.fetch = options.fetch;
@@ -117,16 +123,16 @@ export class NetworkState {
 		this.token = SystemToken.from({
 			definition: UnicoveTypes.token_definition.from({
 				contract: 'eosio.token',
-				symbol: this.config.symbol
+				symbol: this.config.systemtoken.symbol
 			}),
 			distribution: {
-				circulating: Asset.fromUnits(0, this.config.symbol),
-				locked: Asset.fromUnits(0, this.config.symbol),
-				staked: Asset.fromUnits(0, this.config.symbol),
-				supply: Asset.fromUnits(0, this.config.symbol),
-				max: Asset.fromUnits(0, this.config.symbol)
+				circulating: Asset.fromUnits(0, this.config.systemtoken.symbol),
+				locked: Asset.fromUnits(0, this.config.systemtoken.symbol),
+				staked: Asset.fromUnits(0, this.config.systemtoken.symbol),
+				supply: Asset.fromUnits(0, this.config.systemtoken.symbol),
+				max: Asset.fromUnits(0, this.config.systemtoken.symbol)
 			},
-			marketcap: calculateValue(Asset.fromUnits(0, this.config.symbol), price),
+			marketcap: calculateValue(Asset.fromUnits(0, this.config.systemtoken.symbol), price),
 			price
 		});
 		this.resources = this.getResources();
@@ -337,19 +343,6 @@ export function getNetwork(
 ): NetworkState {
 	const network = new NetworkState(chain, options);
 	return network;
-}
-
-export function getChainDefinitionFromParams(network: string): ChainDefinition {
-	if (network) {
-		const id = chainMapper.toChainId(network as ChainShortName);
-		const name = chainIdsToIndices.get(id);
-		if (name) {
-			// Return the chain that's found
-			return Chains[name];
-		}
-	}
-	// Return EOS as the default network if params.network is not defined
-	return Chains.EOS;
 }
 
 export function getNetworkFromParams(network: string, fetch?: typeof window.fetch): NetworkState {
