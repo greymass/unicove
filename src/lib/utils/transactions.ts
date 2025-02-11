@@ -62,22 +62,12 @@ const otherActions: Record<string, string> = {
 	unregprod: 'Unreg Producer'
 };
 
-const EOSIO_TOKEN = Name.from('eosio.token');
-
 function getActionNameAndStyle(currentAccount: string, action: ActivityAction) {
 	const act = String(action.action);
 	let actionName;
 	if (transferActions.includes(act)) {
 		if (!isMyActionTrace(currentAccount, action)) {
 			return ['', ''];
-		}
-		if (EOSIO_TOKEN.equals(action.contract)) {
-			if (currentAccount === action.data['from']) {
-				return ['Sent Token', 'bg-solar-500'];
-			}
-			if (currentAccount === action.data['to']) {
-				return ['Received Token', 'bg-green-500'];
-			}
 		}
 	} else if ((actionName = ramActions[act])) {
 		if (!isMyActionTrace(currentAccount, action)) {

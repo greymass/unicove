@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
-	import EOSPriceHistory from '$lib/components/chart/eospricehistory.svelte';
+	import TokenPriceHistory from '$lib/components/chart/tokenpricehistory.svelte';
 	import RamPriceHistory from '$lib/components/chart/rampricehistory.svelte';
 	import TextBlock from './text-block.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
@@ -18,7 +18,7 @@
 	class="col-span-full grid grid-cols-2 gap-12 @container xl:grid-cols-9 xl:gap-x-4"
 >
 	<Stack class="col-span-full @3xl:col-span-1 xl:col-span-4">
-		<EOSPriceHistory />
+		<TokenPriceHistory />
 
 		<Box>
 			<TextBlock

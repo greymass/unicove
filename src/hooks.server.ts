@@ -1,7 +1,7 @@
 import { sequence } from '@sveltejs/kit/hooks';
 import type { Handle, RequestEvent } from '@sveltejs/kit';
 
-import { PUBLIC_ENVIRONMENT } from '$env/static/public';
+import { PUBLIC_ENVIRONMENT, PUBLIC_DEFAULT_CHAIN } from '$env/static/public';
 import { availableLanguageTags } from '$lib/paraglide/runtime.js';
 import { i18n } from '$lib/i18n';
 import { isNetworkShortName } from '$lib/wharf/chains';
@@ -72,7 +72,7 @@ export async function redirectHandle({ event, resolve }: HandleParams): Promise<
 	const [, pathFirst, pathSecond, ...pathMore] = pathname.split('/').map((p) => p.trim());
 
 	let lang = 'en';
-	let network: string | undefined = PUBLIC_ENVIRONMENT !== 'production' ? 'jungle4' : 'eos';
+	let network: string = PUBLIC_DEFAULT_CHAIN;
 
 	if (isLanguage(pathFirst) && isNetwork(pathSecond)) {
 		// Proceed, correct URL

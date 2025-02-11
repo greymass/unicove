@@ -12,7 +12,7 @@ const configs = {
 const output = {
 	ORIGIN: 'http://localhost:5173',
 	PUBLIC_ENVIRONMENT: 'development',
-	PUBLIC_CHAIN_NAME: 'Jungle4',
+	PUBLIC_DEFAULT_CHAIN: 'jungle4',
 	PUBLIC_LOCAL_SIGNER: '',
 	PUBLIC_CANONICAL_ORIGIN: 'http://localhost:5173'
 };
