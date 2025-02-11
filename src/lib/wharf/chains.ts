@@ -1,5 +1,5 @@
-import type { Asset, Checksum256, Checksum256Type, Name, NameType } from '@wharfkit/antelope';
-import { ChainDefinition, TokenIdentifier, type TokenIdentifierType } from '@wharfkit/common';
+import type { Asset, Checksum256Type, NameType } from '@wharfkit/antelope';
+import { ChainDefinition, TokenIdentifier } from '@wharfkit/common';
 
 import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
 import { Contract as MSIGContract } from '$lib/wharf/contracts/msig';
@@ -27,7 +27,6 @@ export interface ChainEndpoints {
 }
 
 export interface ChainBackend {
-	id: Checksum256Type;
 	name: string;
 	endpoints: ChainEndpoints;
 }

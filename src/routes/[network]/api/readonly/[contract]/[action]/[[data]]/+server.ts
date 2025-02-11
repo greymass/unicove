@@ -1,28 +1,16 @@
-import { json, type RequestEvent } from '@sveltejs/kit';
+import { json } from '@sveltejs/kit';
 
-import { getBackendNetwork } from '$lib/wharf/client/ssr.js';
 import { ContractKit } from '@wharfkit/contract';
 import { Name, Serializer, Transaction } from '@wharfkit/antelope';
-import { getChainDefinitionFromParams } from '$lib/wharf/chains';
+import type { RequestEvent } from './$types';
 
-export async function GET({ fetch, params }: RequestEvent) {
-	const chain = getChainDefinitionFromParams(String(params.network));
-	if (!chain) {
-		return json({ error: 'Invalid chain specified' }, { status: 400 });
-	}
-
-	if (!params.contract || !params.action) {
-		return json({ error: 'Malformed URL.' }, { status: 500 });
-	}
-
-	const { action } = params;
-
-	const network = getBackendNetwork(chain, fetch);
+export async function GET({ locals: { network }, params }: RequestEvent) {
 	const contractKit = new ContractKit({
 		client: network.client
 	});
 	const contract = await contractKit.load(params.contract);
 
+	const { action } = params;
 	const act = contract.action(action, params.data || {});
 	// Remove authorizations
 	act.authorization = [];

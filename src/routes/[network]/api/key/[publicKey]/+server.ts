@@ -1,16 +1,9 @@
-import { json, type RequestEvent } from '@sveltejs/kit';
+import { json } from '@sveltejs/kit';
 import { PublicKey } from '@wharfkit/antelope';
 
-import { getBackendNetwork } from '$lib/wharf/client/ssr.js';
-import { getChainDefinitionFromParams } from '$lib/wharf/chains';
+import type { RequestEvent } from './$types';
 
-export async function GET({ fetch, params }: RequestEvent) {
-	const chain = getChainDefinitionFromParams(String(params.network));
-	if (!chain) {
-		return json({ error: 'Invalid chain specified' }, { status: 400 });
-	}
-
-	const network = getBackendNetwork(chain, fetch);
+export async function GET({ locals: { network }, params }: RequestEvent) {
 	try {
 		// Validate public key format before making request
 		let publicKey;

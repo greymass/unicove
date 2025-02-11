@@ -4,8 +4,8 @@ import type { Handle, RequestEvent } from '@sveltejs/kit';
 import { PUBLIC_ENVIRONMENT } from '$env/static/public';
 import { availableLanguageTags } from '$lib/paraglide/runtime.js';
 import { i18n } from '$lib/i18n';
-import { getChainDefinitionFromParams, isNetworkShortName } from '$lib/wharf/chains';
-import { getBackendNetwork } from '$lib/wharf/client/ssr';
+import { isNetworkShortName } from '$lib/wharf/chains';
+import { getBackendNetworkByName } from '$lib/wharf/client/ssr';
 
 export const i18nHandle = i18n.handle();
 type HandleParams = Parameters<Handle>[0];
@@ -57,8 +57,7 @@ function isManualRedirectPath(pathMore: string[]): boolean {
 
 export async function networkHandle({ event, resolve }: HandleParams): Promise<Response> {
 	if (event.params.network) {
-		const chain = getChainDefinitionFromParams(String(event.params.network));
-		event.locals.network = getBackendNetwork(chain, event.fetch);
+		event.locals.network = getBackendNetworkByName(event.params.network, event.fetch);
 	}
 	return await resolve(event);
 }

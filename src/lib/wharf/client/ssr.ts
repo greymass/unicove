@@ -1,5 +1,4 @@
 import { APIClient, FetchProvider } from '@wharfkit/antelope';
-import { ChainDefinition } from '@wharfkit/common';
 
 import { PRIVATE_BACKENDS } from '$env/static/private';
 
@@ -13,9 +12,9 @@ interface GetBackendClientOptions {
 
 const backends = JSON.parse(PRIVATE_BACKENDS) as ChainBackend[];
 
-export function getChainConfigByNamePrivate(chain: string): ChainConfig {
+function getMergedConfig(chain: string): ChainConfig {
 	const result = getChainConfigByName(chain);
-	const backend = backends.find((b) => b.id === result.id);
+	const backend = backends.find((b) => b.name === result.name);
 	if (backend) {
 		return {
 			...result,
@@ -29,11 +28,11 @@ export function getChainConfigByNamePrivate(chain: string): ChainConfig {
 }
 
 export function getBackendClient(
+	network: string,
 	fetch: typeof window.fetch,
-	chain: string = 'eos',
 	options: Partial<GetBackendClientOptions> = {}
 ): APIClient {
-	const config = getChainConfigByNamePrivate(chain);
+	const config = getMergedConfig(network);
 	const url = options.history ? config.endpoints.history : config.endpoints.api;
 	return new APIClient({
 		provider: new FetchProvider(url, { fetch, headers: options.headers })
@@ -41,16 +40,21 @@ export function getBackendClient(
 }
 
 export function getBackendNetwork(
-	chain: ChainDefinition,
+	config: ChainConfig,
 	fetch: typeof window.fetch,
 	history: boolean = false
 ) {
-	const client = getBackendClient(fetch, chainMapper.toShortName(String(chain.id)), {
+	const client = getBackendClient(chainMapper.toShortName(String(config.id)), fetch, {
 		history
 	});
-	return getNetwork(chain, { client });
+	return getNetwork(config, { client });
 }
 
-export function getLightAPIURL(chain: string) {
-	return getChainConfigByNamePrivate(chain).endpoints.lightapi;
+export function getBackendNetworkByName(
+	network: string,
+	fetch: typeof window.fetch,
+	history: boolean = false
+) {
+	const config = getMergedConfig(network);
+	return getBackendNetwork(config, fetch, history);
 }

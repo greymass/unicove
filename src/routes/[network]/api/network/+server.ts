@@ -1,4 +1,4 @@
-import { json, type RequestEvent } from '@sveltejs/kit';
+import { json } from '@sveltejs/kit';
 import { Asset, type API, type AssetType } from '@wharfkit/antelope';
 import type { RAMState, REXState, PowerUpState, SampleUsage } from '@wharfkit/resources';
 
@@ -6,10 +6,9 @@ import { getCacheHeaders } from '$lib/utils';
 import { Types as DelphioracleTypes } from '$lib/wharf/contracts/delphioracle.js';
 import { Types as SystemTypes } from '$lib/wharf/contracts/system';
 import { Types as UnicoveTypes } from '$lib/wharf/contracts/unicove';
-import { getBackendNetwork } from '$lib/wharf/client/ssr';
 import type { NetworkState } from '$lib/state/network.svelte';
 import type { NetworkResponse } from '$lib/types';
-import { getChainDefinitionFromParams } from '$lib/wharf/chains';
+import type { RequestEvent } from './$types';
 
 type ResponseType =
 	| Asset[]
@@ -23,14 +22,7 @@ type ResponseType =
 	| UnicoveTypes.get_network_response
 	| undefined;
 
-export async function GET({ fetch, params }: RequestEvent) {
-	const chain = getChainDefinitionFromParams(String(params.network));
-	if (!chain) {
-		return json({ error: 'Invalid chain specified' }, { status: 400 });
-	}
-
-	const network = getBackendNetwork(chain, fetch);
-
+export async function GET({ locals: { network } }: RequestEvent) {
 	let response;
 	if (network.supports('unicovecontracts')) {
 		response = await getNetwork2(network);

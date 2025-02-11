@@ -1,22 +1,10 @@
-import { json, type RequestEvent } from '@sveltejs/kit';
+import { json } from '@sveltejs/kit';
 
 import { NetworkState } from '$lib/state/network.svelte';
 import { getCacheHeaders } from '$lib/utils';
-import { getBackendNetwork, getLightAPIURL } from '$lib/wharf/client/ssr';
-import { getChainDefinitionFromParams } from '$lib/wharf/chains';
+import type { RequestEvent } from './$types';
 
-export async function GET({ fetch, params, url }: RequestEvent) {
-	const chain = getChainDefinitionFromParams(String(params.network));
-	if (!chain) {
-		return json({ error: 'Invalid chain specified' }, { status: 400 });
-	}
-	const network = getBackendNetwork(chain, fetch, true);
-	if (!params.contract) {
-		return json({ error: 'Invalid contract specified' }, { status: 400 });
-	}
-	if (!params.symbol) {
-		return json({ error: 'Invalid symbol specified' }, { status: 400 });
-	}
+export async function GET({ locals: { network }, params, url }: RequestEvent) {
 	const contract = params.contract.toLocaleLowerCase();
 	const symbol = params.symbol?.toLocaleUpperCase();
 	const count = Number(url.searchParams.get('count')) || 100;
@@ -48,7 +36,7 @@ async function getTopHolders(
 	number = 100
 ) {
 	const response = await fetch(
-		`${getLightAPIURL(network.shortname)}/api/topholders/${network}/${contract}/${symbol}/${number}`
+		`${network.config.endpoints.lightapi}/api/topholders/${network}/${contract}/${symbol}/${number}`
 	);
 	return (await response.json()).map((result: string[]) => ({
 		account: result[0],
@@ -58,7 +46,7 @@ async function getTopHolders(
 
 async function getNumHolders(network: NetworkState, contract: string, symbol: string) {
 	const response = await fetch(
-		`${getLightAPIURL(network.shortname)}/api/holdercount/${network}/${contract}/${symbol}`
+		`${network.config.endpoints.lightapi}/api/holdercount/${network}/${contract}/${symbol}`
 	);
 	return response.json();
 }

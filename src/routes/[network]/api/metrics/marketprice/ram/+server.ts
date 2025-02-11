@@ -2,20 +2,18 @@ import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import { Asset } from '@wharfkit/antelope';
 import { getCacheHeaders } from '$lib/utils';
-import { getChainConfigByNamePrivate } from '$lib/wharf/client/ssr';
 
 interface HistoricalPrice {
 	date: Date;
 	value: Asset;
 }
 
-export const GET: RequestHandler = async ({ params }) => {
+export const GET: RequestHandler = async ({ locals: { network } }) => {
 	try {
-		const config = getChainConfigByNamePrivate(params.network);
-		if (!config.endpoints.metrics) {
+		if (!network.config.endpoints.metrics) {
 			return json([]);
 		}
-		const response = await fetch(`${config.endpoints.metrics}/marketprice/ram/1h/7d`);
+		const response = await fetch(`${network.config.endpoints.metrics}/marketprice/ram/1h/7d`);
 		if (!response.ok) {
 			throw new Error(`HTTP error! status: ${response.status}`);
 		}

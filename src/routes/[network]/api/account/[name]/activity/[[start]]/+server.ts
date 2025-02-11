@@ -1,21 +1,10 @@
-import { json, type RequestEvent } from '@sveltejs/kit';
+import { json } from '@sveltejs/kit';
 
-import { getBackendNetwork } from '$lib/wharf/client/ssr.js';
 import { getActivity } from './activity';
 import { getCacheHeaders } from '$lib/utils';
-import { getChainDefinitionFromParams } from '$lib/wharf/chains';
+import type { RequestEvent } from './$types';
 
-export async function GET({ fetch, params }: RequestEvent) {
-	const chain = getChainDefinitionFromParams(String(params.network));
-	if (!chain) {
-		return json({ error: 'Invalid chain specified' }, { status: 400 });
-	}
-
-	if (!params.name) {
-		return json({ error: 'Account name not specified.' }, { status: 500 });
-	}
-
-	const network = getBackendNetwork(chain, fetch, true);
+export async function GET({ locals: { network }, params }: RequestEvent) {
 	if (!network.supports('robo')) {
 		return json({ error: `Activity not supported on ${network.chain.name}.` }, { status: 500 });
 	}

@@ -24,7 +24,8 @@ import {
 	getChainConfigById,
 	type ChainConfig,
 	type DefaultContracts,
-	type FeatureType
+	type FeatureType,
+	getChainConfigByName
 } from '$lib/wharf/chains';
 
 import { calculateValue } from '$lib/utils';
@@ -101,9 +102,9 @@ export class NetworkState {
 	public tokenmeta?: TokenMeta[] = $state();
 	public tvl?: Asset = $state();
 
-	constructor(chain: ChainDefinition, options: NetworkStateOptions = {}) {
-		this.chain = chain;
-		this.config = getChainConfigById(this.chain.id);
+	constructor(config: ChainConfig, options: NetworkStateOptions = {}) {
+		this.config = config;
+		this.chain = getChainDefinitionFromParams(config.name);
 		this.shortname = chainMapper.toShortName(String(this.chain.id));
 		this.snapOrigin = snapOrigins.get(this.shortname);
 		this.tokenmeta = this.config.tokens.map((token) =>
@@ -337,16 +338,12 @@ export class NetworkState {
 	}
 }
 
-export function getNetwork(
-	chain: ChainDefinition,
-	options: NetworkStateOptions = {}
-): NetworkState {
-	const network = new NetworkState(chain, options);
-	return network;
+export function getNetwork(config: ChainConfig, options: NetworkStateOptions = {}): NetworkState {
+	return new NetworkState(config, options);
 }
 
 export function getNetworkFromParams(network: string, fetch?: typeof window.fetch): NetworkState {
-	const chain = getChainDefinitionFromParams(network);
-	const state = getNetwork(chain, { fetch });
+	const config = getChainConfigByName(network);
+	const state = getNetwork(config, { fetch });
 	return state;
 }

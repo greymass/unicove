@@ -2,13 +2,11 @@ import { json } from '@sveltejs/kit';
 import { Asset, type NameType } from '@wharfkit/antelope';
 
 import { NetworkState } from '$lib/state/network.svelte';
-import { getLightAPIURL } from '$lib/wharf/client/ssr';
 import { getCacheHeaders } from '$lib/utils';
 import type { LightAPIBalanceResponse, LightAPIBalanceRow } from '$lib/types.js';
 import type { RequestEvent, RequestHandler } from './$types';
 
-export const GET: RequestHandler = async ({ locals, params }: RequestEvent) => {
-	const { network } = locals;
+export const GET: RequestHandler = async ({ locals: { network }, params }: RequestEvent) => {
 	const headers = getCacheHeaders(5);
 
 	try {
@@ -37,9 +35,9 @@ async function loadBalances(
 	f: typeof fetch
 ): Promise<LightAPIBalanceRow[]> {
 	const balances = [];
-	if (network.supports('lightapi')) {
+	if (network.supports('lightapi') && network.config.endpoints.lightapi) {
 		const result = await f(
-			`${getLightAPIURL(network.shortname)}/api/balances/${network}/${account}`
+			`${network.config.endpoints.lightapi}/api/balances/${network}/${account}`
 		);
 		const json: LightAPIBalanceResponse = await result.json();
 		balances.push(...json.balances);
