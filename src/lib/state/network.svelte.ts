@@ -21,7 +21,6 @@ import { Contract as UnicoveContract, Types as UnicoveTypes } from '$lib/wharf/c
 import {
 	chainMapper,
 	getChainDefinitionFromParams,
-	getChainConfigById,
 	type ChainConfig,
 	type DefaultContracts,
 	type FeatureType,

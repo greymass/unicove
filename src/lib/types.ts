@@ -114,7 +114,7 @@ export type DescriptionItem = {
 export interface NetworkResponse {
 	global: SystemTypes.eosio_global_state;
 	oracle?: DelphioracleTypes.datapoints;
-	powerup: SystemTypes.powerup_state;
+	powerup?: SystemTypes.powerup_state;
 	ram: SystemTypes.exchange_state;
 	rex: SystemTypes.rex_pool;
 	sample?: SampleUsage;

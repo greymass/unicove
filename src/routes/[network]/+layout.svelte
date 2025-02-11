@@ -11,7 +11,6 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { AccountState } from '$lib/state/client/account.svelte.js';
 	import { WharfState } from '$lib/state/client/wharf.svelte.js';
-	import { NetworkState, getNetwork } from '$lib/state/network.svelte.js';
 	import { SearchRecordStorage } from '$lib/state/search.svelte.js';
 
 	import MobileNavigation from '$lib/components/navigation/mobilenavigation.svelte';
@@ -20,7 +19,6 @@
 	import Search from '$lib/components/search/input.svelte';
 	import { SettingsState } from '$lib/state/settings.svelte.js';
 	import Unicovelogo from '$lib/assets/unicovelogo.svelte';
-	import { getChainConfigById } from '$lib/wharf/chains.js';
 
 	let { children, data } = $props();
 
@@ -47,11 +45,7 @@
 		}
 	});
 
-	export function setAccount(
-		state: NetworkState,
-		name: NameType,
-		fetchOverride?: typeof fetch
-	): AccountState {
+	export function setAccount(name: NameType, fetchOverride?: typeof fetch): AccountState {
 		account = new AccountState(data.network, name, fetchOverride);
 		account.refresh();
 		return account;
@@ -61,7 +55,7 @@
 		const { session } = wharf;
 		untrack(() => {
 			if (session) {
-				setAccount(data.network, session.actor);
+				setAccount(session.actor);
 			} else {
 				account = undefined;
 			}

@@ -13,7 +13,6 @@ export async function GET({ locals: { network }, params }: RequestEvent) {
 		{
 			ts: new Date(),
 			proposer: params.proposer,
-			name: params.proposal,
 			proposals
 		},
 		{
