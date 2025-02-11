@@ -11,7 +11,7 @@ export async function GET({ locals: { network }, params }: RequestEvent) {
 	}
 
 	const start = Number(params.start) || 1;
-	const client = getBackendClient(params.name, fetch, { history: true });
+	const client = getBackendClient(String(network), fetch, { history: true });
 	const requests = [getActivity(client, params.name, start)];
 	const headers = getCacheHeaders(5);
 
