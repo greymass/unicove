@@ -1,5 +1,5 @@
 import type { ActivityAction, ActivityActionWrapper } from '$lib/types';
-import { Checksum256, Name } from '@wharfkit/antelope';
+import { Checksum256 } from '@wharfkit/antelope';
 
 export function convertActivityAction(
 	currentAcount: string,
