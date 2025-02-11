@@ -3,6 +3,7 @@ import { json } from '@sveltejs/kit';
 import { getActivity } from './activity';
 import { getCacheHeaders } from '$lib/utils';
 import type { RequestEvent } from './$types';
+import { getBackendClient } from '$lib/wharf/client/ssr';
 
 export async function GET({ locals: { network }, params }: RequestEvent) {
 	if (!network.supports('robo')) {
@@ -10,7 +11,8 @@ export async function GET({ locals: { network }, params }: RequestEvent) {
 	}
 
 	const start = Number(params.start) || 1;
-	const requests = [getActivity(network.client, params.name, start)];
+	const client = getBackendClient(params.name, fetch, { history: true });
+	const requests = [getActivity(client, params.name, start)];
 	const headers = getCacheHeaders(5);
 
 	try {

@@ -1,12 +1,15 @@
-import { error, json, type RequestEvent } from '@sveltejs/kit';
+import { error, json } from '@sveltejs/kit';
 import type { API } from '@wharfkit/antelope';
 
 import { getCacheHeaders } from '$lib/utils';
+import { getBackendClient } from '$lib/wharf/client/ssr';
+import type { RequestEvent } from './$types';
 
-export async function GET({ locals: { network }, params }: RequestEvent) {
+export async function GET({ params }: RequestEvent) {
 	let transaction: API.v1.GetTransactionResponse;
 	try {
-		transaction = await network.client.v1.history.get_transaction(String(params.id));
+		const client = getBackendClient(params.id, fetch, { history: true });
+		transaction = await client.v1.history.get_transaction(String(params.id));
 	} catch (e) {
 		return error(500, {
 			message: `Error while loading transaction ${params.id}: ${e}.`

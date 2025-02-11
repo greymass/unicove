@@ -2,7 +2,7 @@ import { APIClient, FetchProvider } from '@wharfkit/antelope';
 
 import { PRIVATE_BACKENDS } from '$env/static/private';
 
-import { chainMapper, getChainConfigByName, type ChainBackend, type ChainConfig } from '../chains';
+import { getChainConfigByName, type ChainBackend, type ChainConfig } from '$lib/wharf/chains';
 import { getNetwork } from '$lib/state/network.svelte';
 
 interface GetBackendClientOptions {
@@ -42,19 +42,17 @@ export function getBackendClient(
 export function getBackendNetwork(
 	config: ChainConfig,
 	fetch: typeof window.fetch,
-	history: boolean = false
+	options: Partial<GetBackendClientOptions> = {}
 ) {
-	const client = getBackendClient(chainMapper.toShortName(String(config.id)), fetch, {
-		history
-	});
+	const client = getBackendClient(config.name, fetch, options);
 	return getNetwork(config, { client });
 }
 
 export function getBackendNetworkByName(
 	network: string,
 	fetch: typeof window.fetch,
-	history: boolean = false
+	options: Partial<GetBackendClientOptions> = {}
 ) {
 	const config = getMergedConfig(network);
-	return getBackendNetwork(config, fetch, history);
+	return getBackendNetwork(config, fetch, options);
 }
