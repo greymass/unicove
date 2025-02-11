@@ -19,7 +19,6 @@
 	import coinbaseLogo from '$lib/assets/exchanges/coinbase.svg';
 	import Stack from '$lib/components/layout/stack.svelte';
 	import Cluster from '$lib/components/layout/cluster.svelte';
-	import { getChainConfigByName } from '$lib/wharf/chains';
 
 	const ON_RAMP_PROVIDERS = [
 		{
@@ -78,17 +77,16 @@
 	const context = getContext<UnicoveContext>('state');
 
 	const coinbaseOptions: InitOnRampParams | undefined = $derived.by(() => {
-		const config = getChainConfigByName(String(context.network));
-		if (!config.coinbase) {
+		if (!context.network.config.coinbase) {
 			return;
 		}
 		return {
-			appId: config.coinbase.appid,
+			appId: context.network.config.coinbase.appid,
 			widgetParameters: {
 				addresses: {
 					[String(context.account?.name)]: ['eosio']
 				},
-				assets: config.coinbase.assets
+				assets: context.network.config.coinbase.assets
 			},
 			onSuccess: () => {
 				console.log('success');

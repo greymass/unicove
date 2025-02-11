@@ -20,6 +20,7 @@
 	import Search from '$lib/components/search/input.svelte';
 	import { SettingsState } from '$lib/state/settings.svelte.js';
 	import Unicovelogo from '$lib/assets/unicovelogo.svelte';
+	import { getChainConfigById } from '$lib/wharf/chains.js';
 
 	let { children, data } = $props();
 
@@ -60,7 +61,7 @@
 		const { session } = wharf;
 		untrack(() => {
 			if (session) {
-				setAccount(getNetwork(session.chain), session.actor);
+				setAccount(data.network, session.actor);
 			} else {
 				account = undefined;
 			}
