@@ -65,7 +65,7 @@
 
 	<span
 		data-active={active}
-		class="align-center hidden text-base font-medium capitalize text-inherit sm:block"
+		class="align-center truncate text-nowrap pr-2 text-right text-base font-medium capitalize text-inherit sm:block sm:pr-0 sm:text-left"
 	>
 		{#if record.description}
 			{record.description}
