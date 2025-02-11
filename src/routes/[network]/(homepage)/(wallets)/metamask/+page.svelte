@@ -24,6 +24,7 @@
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	let packageInfo: Record<string, any> = $state({});
 	let latestVersion: string | undefined = $state();
+	let packageName: string | undefined = $state();
 	let isMetaMaskSession: boolean = $derived(
 		context.wharf.session?.walletPlugin.id === 'wallet-plugin-metamask'
 	);
@@ -56,6 +57,8 @@
 		}
 	});
 
+	$inspect(packageInfo);
+
 	onMount(async () => {
 		if (!data.network.snapOrigin) {
 			return goto(`/404`);
@@ -76,6 +79,7 @@
 
 		const response = await fetch(`https://registry.npmjs.org/${npmPackage}/latest`);
 		packageInfo = await response.json();
+		packageName = packageInfo.name.slice(1);
 		latestVersion = packageInfo.version;
 	}
 
@@ -214,7 +218,7 @@
 							{m.metamask_install_ready_description({
 								network: networkName
 							})}
-							<a href="https://www.npmjs.com/package/@greymass/eos-wallet/v/{currentVersion}"
+							<a href="https://www.npmjs.com/package/@{packageName}/v/{currentVersion}"
 								>{m.common_version()} {currentVersion}</a
 							>.
 						</p>
@@ -304,7 +308,7 @@
 			})}
 			{@render link(
 				m.metamask_snaps_directory(),
-				'https://snaps.metamask.io/snap/npm/greymass/eos-wallet'
+				`https://snaps.metamask.io/snap/npm/${packageName}`
 			)}.
 			{m.metamask_install_faq_a2_p2({
 				network: networkName
@@ -468,7 +472,7 @@
 			<DL>
 				<DLRow title={m.metamask_snaps_directory()}>
 					<DD>
-						<a href="https://snaps.metamask.io/snap/npm/greymass/eos-wallet">
+						<a href="https://snaps.metamask.io/snap/npm/{packageName}">
 							{networkName} Wallet
 						</a>
 					</DD>
@@ -476,13 +480,13 @@
 
 				<DLRow title={m.common_source_code()}>
 					<DD>
-						<a href="https://github.com/greymass/antelope-snap/tree/eos"> GitHub </a>
+						<a href="https://github.com/greymass/antelope-snap/tree/{context.network}"> GitHub </a>
 					</DD>
 				</DLRow>
 				{#if latestVersion}
 					<DLRow title="Latest Version">
 						<DD>
-							<a href="https://www.npmjs.com/package/@greymass/eos-wallet?activeTab=versions">
+							<a href="https://www.npmjs.com/package/@{packageName}?activeTab=versions">
 								{latestVersion}
 							</a>
 						</DD>
