@@ -122,7 +122,7 @@ export class NetworkState {
 		const price = Asset.fromUnits(0, '4,USD');
 		this.token = SystemToken.from({
 			definition: UnicoveTypes.token_definition.from({
-				contract: 'eosio.token',
+				contract: this.config.systemtoken.contract,
 				symbol: this.config.systemtoken.symbol
 			}),
 			distribution: {

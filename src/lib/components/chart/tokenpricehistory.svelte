@@ -33,10 +33,13 @@
 			throw new Error(String(e));
 		}
 	};
+
+	let systemtoken = Asset.Symbol.from(network.config.systemtoken.symbol);
+	let pair = $derived(String(systemtoken.name) + '/USD');
 </script>
 
 {#await fetchTokenPrices()}
-	<Loading pair="EOS/USD" />
-{:then eosPrices}
-	<ChartContainer pair="EOS/USD" data={eosPrices} type="line" />
+	<Loading {pair} />
+{:then prices}
+	<ChartContainer {pair} data={prices} type="line" />
 {/await}
