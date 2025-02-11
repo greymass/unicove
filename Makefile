@@ -18,10 +18,10 @@ format: node_modules
 install:
 	@if [ -z "$(package)" ]; then \
 		echo "Installing all dependencies:"; \
-		bun install --yarn --frozen-lockfile; \
+		bun install --frozen-lockfile; \
 	else \
 		echo "Installing package: $(package)"; \
-		bun install --yarn --frozen-lockfile $(package); \
+		bun install --frozen-lockfile $(package); \
 	fi
 
 codegen:
