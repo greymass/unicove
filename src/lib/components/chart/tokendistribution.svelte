@@ -22,7 +22,7 @@
 		value: number;
 	};
 
-	const distribution = $derived(
+	const distribution: DistributionItem[] = $derived(
 		data &&
 			Object.entries(data)
 				.filter(([key]) => Object.keys(distributionMap).includes(key))
@@ -36,38 +36,30 @@
 				)
 	);
 
-	// values under this threshold will not be displayed visually in the chart
-	const displayThreshold = 0.0001;
+	const filtered = $derived(distribution.filter((item) => item.value > 0));
 </script>
 
 <Card id="distribution" title={m.common_distribution()}>
 	{#if distribution}
 		<div id="distribution-container" class="flex gap-1">
-			{#each distribution as item}
-				{#if item.value > displayThreshold}
-					<div
-						id={`distribution-${item.key}`}
-						style="width:{percentString(item.value)}"
-						class={cn('h-12 rounded-md', distributionMap[item.key].color)}
-					></div>
-				{/if}
+			{#each filtered as item}
+				<div
+					id={`distribution-${item.key}`}
+					style="width:{percentString(item.value)}"
+					class={cn('h-12 rounded-md', distributionMap[item.key].color)}
+				></div>
 			{/each}
 		</div>
 
 		<table class="table-styles">
 			<tbody class="text-muted">
-				{#each distribution as item}
+				{#each filtered as item}
 					<tr data-hover-effect="false">
 						<td class="flex items-center gap-2">
 							<div class={cn('size-3 rounded', distributionMap[item.key].color)}></div>
 							{distributionMap[item.key].label}
 						</td>
-						<td class="text-right tabular-nums text-white">
-							<!-- Will still show something for non-zero values that don't meet the threshold -->
-							{item.value <= displayThreshold && item.value > 0
-								? '<' + percentString(displayThreshold)
-								: percentString(item.value)}
-						</td>
+						<td class="text-right tabular-nums text-white"> {percentString(item.value)} </td>
 					</tr>
 				{/each}
 			</tbody>
