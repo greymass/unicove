@@ -307,6 +307,10 @@
 	"navigation_votes": "投票",
 	"no_accounts_found": "未找到账户",
 	"no_supported_funding_methods": "该区块链无可用注资途径。",
+	"og_default_caption": "您到EOS网络的网关",
+	"og_default_description": "轻松获取,发送,管理令牌和探索EOS",
+	"og_default_title": "Unicove-您通往EOS网络的网关",
+	"og_send_caption": "将令牌从一个帐户转移到另一个帐户",
 	"processing_fees": "手续费",
 	"ram_available_balance": "可用 RAM",
 	"ram_form_buy_amount": "要购买的 RAM 数量：",
@@ -384,9 +388,5 @@
 	"transaction_page_meta_title": "{id} | {network} 网络",
 	"transaction_page_subtitle": "{date} 的交易",
 	"unstaking_description": "当前正在解质押的代币及其可用日期列在下方。这些代币在提取前将继续赚取奖励。",
-	"where_eos_can_be_purchased": "EOS 可以通过多个平台购买，具体取决于用户需求和所在地。以下是一些最受欢迎的选项。",
-	"og_default_title": "Unicove-您通往EOS网络的网关",
-	"og_default_description": "轻松获取,发送,管理令牌和探索EOS",
-	"og_default_caption": "您到EOS网络的网关",
-	"og_send_caption": "将令牌从一个帐户转移到另一个帐户"
+	"where_eos_can_be_purchased": "EOS 可以通过多个平台购买，具体取决于用户需求和所在地。以下是一些最受欢迎的选项。"
 }
