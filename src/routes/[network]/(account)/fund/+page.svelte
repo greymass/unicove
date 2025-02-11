@@ -20,12 +20,16 @@
 	import Stack from '$lib/components/layout/stack.svelte';
 	import Cluster from '$lib/components/layout/cluster.svelte';
 
+	const context = getContext<UnicoveContext>('state');
+
 	const ON_RAMP_PROVIDERS = [
 		{
 			id: 'coinbase',
 			logo: coinbaseLogo,
 			action: {
-				text: m.buy_eos_with_coinbase(),
+				text: m.buy_token_with_coinbase({
+					token: context.network.token.definition.symbol.name
+				}),
 				handler: 'coinbase'
 			}
 		}
@@ -73,8 +77,6 @@
 			url: 'https://kucoin.com'
 		}
 	] as const;
-
-	const context = getContext<UnicoveContext>('state');
 
 	const coinbaseOptions: InitOnRampParams | undefined = $derived.by(() => {
 		if (!context.network.config.coinbase) {
@@ -139,7 +141,11 @@
 <Stack class="gap-12">
 	<Stack class="gap-4">
 		<h2 class="h4">{m.fund_direct_purchase()}</h2>
-		<p>{m.fund_direct_purchase_description()}</p>
+		<p>
+			{m.fund_direct_purchase_description({
+				token: context.network.token.definition.symbol.name
+			})}
+		</p>
 		<Cluster tag="ul">
 			{#each ON_RAMP_PROVIDERS as service}
 				<Card tag="li" class="max-w-sm p-6">
@@ -183,7 +189,9 @@
 		<h2 class="h4">{m.common_exchanges()}</h2>
 
 		<p>
-			{m.fund_exchange_description()}
+			{m.fund_exchange_description({
+				token: context.network.token.definition.symbol.name
+			})}
 		</p>
 
 		<Grid tag="ul" itemWidth="10rem" class="">

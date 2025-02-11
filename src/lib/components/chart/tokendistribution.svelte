@@ -23,17 +23,18 @@
 	};
 
 	const distribution: DistributionItem[] = $derived(
-		data &&
-			Object.entries(data)
-				.filter(([key]) => Object.keys(distributionMap).includes(key))
-				.sort((a, b) => b[1].value - a[1].value)
-				.map(
-					([key, asset]) =>
-						({
-							key,
-							value: asset.value / data.total.value
-						}) as DistributionItem
-				)
+		data
+			? Object.entries(data)
+					.filter(([key]) => Object.keys(distributionMap).includes(key))
+					.sort((a, b) => b[1].value - a[1].value)
+					.map(
+						([key, asset]) =>
+							({
+								key,
+								value: asset.value / data.total.value
+							}) as DistributionItem
+					)
+			: []
 	);
 
 	const filtered = $derived(distribution.filter((item) => item.value > 0));

@@ -1,4 +1,5 @@
 import * as m from '$lib/paraglide/messages';
+import type { NetworkState } from '$lib/state/network.svelte';
 
 /**
  * Creates the api url to generate an opengraph image for the specified route.
@@ -14,11 +15,13 @@ export function ogImage(url: URL) {
  * A map of valid route names to their captions. Prevents users from generating invalid opengraph images.
  */
 
-export function getCaption(route: string) {
+export function getCaption(route: string, network: NetworkState) {
 	switch (route) {
 		case 'send':
 			return m.og_send_caption();
 		default:
-			return m.og_default_caption();
+			return m.og_default_caption({
+				network: network.chain.name
+			});
 	}
 }

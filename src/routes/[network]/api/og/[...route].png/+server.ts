@@ -4,10 +4,10 @@ import type { RequestHandler } from './$types';
 import { i18n } from '$lib/i18n';
 import { getCaption } from '$lib/utils/opengraph';
 
-export const GET: RequestHandler = async ({ url, fetch, params }) => {
+export const GET: RequestHandler = async ({ locals, url, fetch, params }) => {
 	const lang = i18n.getLanguageFromUrl(url);
 	const route = params.route;
-	const text = getCaption(route);
+	const text = getCaption(route, locals.network);
 	const cacheAge = PUBLIC_ENVIRONMENT === 'production' ? 86400 : 300;
 	let response: Response;
 
