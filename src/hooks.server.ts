@@ -5,6 +5,7 @@ import { PUBLIC_ENVIRONMENT } from '$env/static/public';
 import { availableLanguageTags } from '$lib/paraglide/runtime.js';
 import { i18n } from '$lib/i18n';
 import { isNetworkShortName } from '$lib/wharf/chains';
+import { getBackendNetworkByName } from '$lib/wharf/client/ssr';
 
 export const i18nHandle = i18n.handle();
 type HandleParams = Parameters<Handle>[0];
@@ -52,6 +53,13 @@ function getManualRedirectPath(pathMore: string[]): string {
 function isManualRedirectPath(pathMore: string[]): boolean {
 	const pathname = '/' + pathMore.join('/');
 	return pathname in redirects;
+}
+
+export async function networkHandle({ event, resolve }: HandleParams): Promise<Response> {
+	if (event.params.network) {
+		event.locals.network = getBackendNetworkByName(event.params.network, event.fetch);
+	}
+	return await resolve(event);
 }
 
 export async function redirectHandle({ event, resolve }: HandleParams): Promise<Response> {
@@ -113,4 +121,4 @@ export async function redirectHandle({ event, resolve }: HandleParams): Promise<
 	return response;
 }
 
-export const handle: Handle = sequence(i18nHandle, redirectHandle);
+export const handle: Handle = sequence(i18nHandle, networkHandle, redirectHandle);

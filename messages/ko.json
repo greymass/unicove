@@ -108,7 +108,7 @@
 	"common_resources_action": "CPU/NET 관리",
 	"common_restart": "다시 시작",
 	"common_role": "역할",
-	"common_search": "찾다...",
+	"common_search": "{network} 찾다...",
 	"common_search_instructions": "Unicove 기능을 검색하거나 네트워크의 계정 이름, 공개 키 또는 거래 ID를 입력하세요.",
 	"common_search_no_results": "검색 결과가 없습니다",
 	"common_search_results": "검색 결과",

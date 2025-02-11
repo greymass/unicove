@@ -1,33 +1,20 @@
 import { json } from '@sveltejs/kit';
 import { Asset, type NameType } from '@wharfkit/antelope';
-import type { ChainDefinition } from '@wharfkit/common';
 
-import { getChainDefinitionFromParams, NetworkState } from '$lib/state/network.svelte';
-import { getBackendNetwork, getLightAPIURL } from '$lib/wharf/client/ssr';
+import { NetworkState } from '$lib/state/network.svelte';
 import { getCacheHeaders } from '$lib/utils';
 import type { LightAPIBalanceResponse, LightAPIBalanceRow } from '$lib/types.js';
-import type { RequestHandler } from './$types';
+import type { RequestEvent, RequestHandler } from './$types';
 
-export const GET: RequestHandler = async ({ fetch, params }) => {
-	const chain = getChainDefinitionFromParams(params.network);
-
-	if (!chain) {
-		return json({ error: 'Invalid chain specified' }, { status: 400 });
-	}
-
-	if (!params.name) {
-		return json({ error: 'Account name not specified.' }, { status: 500 });
-	}
-
-	const network = getBackendNetwork(chain, fetch);
+export const GET: RequestHandler = async ({ locals: { network }, params }: RequestEvent) => {
 	const headers = getCacheHeaders(5);
 
 	try {
 		let response;
 		if (network.supports('unicovecontracts')) {
-			response = await getAccount2(network, params.name, chain);
+			response = await getAccount2(network, params.name);
 		} else {
-			response = await getAccount(network, params.name, chain);
+			response = await getAccount(network, params.name);
 		}
 		return json(
 			{
@@ -48,9 +35,9 @@ async function loadBalances(
 	f: typeof fetch
 ): Promise<LightAPIBalanceRow[]> {
 	const balances = [];
-	if (network.supports('lightapi')) {
+	if (network.supports('lightapi') && network.config.endpoints.lightapi) {
 		const result = await f(
-			`${getLightAPIURL(network.shortname)}/api/balances/${network}/${account}`
+			`${network.config.endpoints.lightapi}/api/balances/${network}/${account}`
 		);
 		const json: LightAPIBalanceResponse = await result.json();
 		balances.push(...json.balances);
@@ -58,7 +45,7 @@ async function loadBalances(
 	return balances;
 }
 
-async function getAccount(network: NetworkState, account: NameType, chain: ChainDefinition) {
+async function getAccount(network: NetworkState, account: NameType) {
 	const { system: systemContract, msig: msigContract } = network.contracts;
 
 	const [get_account, delegated, proposals] = await Promise.all([
@@ -79,10 +66,10 @@ async function getAccount(network: NetworkState, account: NameType, chain: Chain
 	}
 
 	// If no response from the light API, add a default balance of zero
-	if (!balances.length && chain.systemToken) {
-		const symbol = Asset.Symbol.from(network.config.symbol);
+	if (!balances.length && network.chain.systemToken) {
+		const symbol = Asset.Symbol.from(network.config.systemtoken.symbol);
 		balances.push({
-			contract: String(chain.systemToken.contract),
+			contract: String(network.chain.systemToken.contract),
 			amount: '0',
 			decimals: String(symbol.precision),
 			currency: String(symbol.code)
@@ -101,7 +88,7 @@ async function getAccount(network: NetworkState, account: NameType, chain: Chain
 	};
 }
 
-async function getAccount2(network: NetworkState, account: NameType, chain: ChainDefinition) {
+async function getAccount2(network: NetworkState, account: NameType) {
 	const [get_account, getaccount] = await Promise.all([
 		network.client.v1.chain.get_account(account),
 		network.contracts.unicove.readonly('account', { account })
@@ -114,10 +101,10 @@ async function getAccount2(network: NetworkState, account: NameType, chain: Chai
 	}
 
 	// If no response from the light API, add a default balance of zero
-	if (!balances.length && chain.systemToken) {
-		const symbol = Asset.Symbol.from(network.config.symbol);
+	if (!balances.length && network.chain.systemToken) {
+		const symbol = Asset.Symbol.from(network.config.systemtoken.symbol);
 		balances.push({
-			contract: String(chain.systemToken.contract),
+			contract: String(network.chain.systemToken.contract),
 			amount: '0',
 			decimals: String(symbol.precision),
 			currency: String(symbol.code)

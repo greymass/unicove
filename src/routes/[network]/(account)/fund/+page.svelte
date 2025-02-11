@@ -13,7 +13,6 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { initOnRamp, type CBPayInstanceType, type InitOnRampParams } from '@coinbase/cbpay-js';
 	import Button from '$lib/components/button/button.svelte';
-	import { env } from '$env/dynamic/public';
 	import * as m from '$lib/paraglide/messages';
 	import Grid from '$lib/components/layout/grid.svelte';
 	import { DL, DLRow, DD } from '$lib/components/descriptionlist';
@@ -78,25 +77,16 @@
 	const context = getContext<UnicoveContext>('state');
 
 	const coinbaseOptions: InitOnRampParams | undefined = $derived.by(() => {
-		let appId = '';
-		let asset = '';
-		switch (String(context.network)) {
-			case 'eos':
-				if (env.PUBLIC_EOS_COINBASE_APPID && env.PUBLIC_EOS_COINBASE_ASSET) {
-					appId = env.PUBLIC_EOS_COINBASE_APPID;
-					asset = env.PUBLIC_EOS_COINBASE_ASSET;
-				}
-				break;
-			default:
-				return;
+		if (!context.network.config.coinbase) {
+			return;
 		}
 		return {
-			appId,
+			appId: context.network.config.coinbase.appid,
 			widgetParameters: {
 				addresses: {
 					[String(context.account?.name)]: ['eosio']
 				},
-				assets: [asset]
+				assets: context.network.config.coinbase.assets
 			},
 			onSuccess: () => {
 				console.log('success');
@@ -158,9 +148,11 @@
 							<img src={service.logo} alt={service.id} class="h-24 w-3/5 object-contain" />
 						</div>
 						<DL>
-							<DLRow title={m.fund_token_to_purchase()}>
-								<DD>{env.PUBLIC_EOS_COINBASE_ASSET}</DD>
-							</DLRow>
+							{#if context.network.config.coinbase}
+								<DLRow title={m.fund_token_to_purchase()}>
+									<DD>{context.network.config.coinbase.assets.join(', ')}</DD>
+								</DLRow>
+							{/if}
 							<DLRow title={m.send_receiving_account()}>
 								<DD>
 									{#if context.account}

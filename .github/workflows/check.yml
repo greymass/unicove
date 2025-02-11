@@ -3,22 +3,6 @@ name: Code Checks
 on:
   push:
 
-env:
-  PUBLIC_ENVIRONMENT: 'development'
-  PUBLIC_LOCAL_SIGNER: ''
-  PUBLIC_ACCOUNT_UPDATE_INTERVAL: 3000
-  PUBLIC_NETWORK_UPDATE_INTERVAL: 3000
-  PUBLIC_METAMASK_SNAP_ORIGIN: 'npm:@greymass/eos-wallet'
-  PUBLIC_METAMASK_SERVICE_URL: 'https://eos.account.unicove.com/buy'
-  API_EOS_CHAIN: ''
-  API_EOS_HISTORY: ''
-  API_EOS_LIGHTAPI: ''
-  API_EOS_METRICS: ''
-  API_JUNGLE4_CHAIN: ''
-  API_JUNGLE4_HISTORY: ''
-  API_KYLIN_CHAIN: ''
-  API_KYLIN_HISTORY: ''
-
 jobs:
   check:
     runs-on: ubuntu-latest

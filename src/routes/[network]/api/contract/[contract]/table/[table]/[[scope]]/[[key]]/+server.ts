@@ -1,19 +1,10 @@
 import { json } from '@sveltejs/kit';
-import type { RequestEvent, RequestHandler } from './$types';
-
-import { getChainDefinitionFromParams } from '$lib/state/network.svelte';
-import { getCacheHeaders } from '$lib/utils';
-import { getBackendNetwork } from '$lib/wharf/client/ssr';
 import { ContractKit } from '@wharfkit/contract';
 
-export const GET: RequestHandler = async ({ fetch, params, url }: RequestEvent) => {
-	const chain = getChainDefinitionFromParams(String(params.network));
-	if (!chain) {
-		return json({ error: 'Invalid chain specified' }, { status: 400 });
-	}
+import type { RequestEvent, RequestHandler } from './$types';
+import { getCacheHeaders } from '$lib/utils';
 
-	const network = getBackendNetwork(chain, fetch);
-
+export const GET: RequestHandler = async ({ locals: { network }, params, url }: RequestEvent) => {
 	const kit = new ContractKit({ client: network.client });
 	const contract = await kit.load(params.contract);
 

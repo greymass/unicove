@@ -1,15 +1,14 @@
-import { json, type RequestEvent } from '@sveltejs/kit';
-
-import { getChainDefinitionFromParams } from '$lib/state/network.svelte';
-import { getCacheHeaders } from '$lib/utils';
+import { json } from '@sveltejs/kit';
+import { Asset, type API, type AssetType } from '@wharfkit/antelope';
 import type { RAMState, REXState, PowerUpState, SampleUsage } from '@wharfkit/resources';
+
+import { getCacheHeaders } from '$lib/utils';
 import { Types as DelphioracleTypes } from '$lib/wharf/contracts/delphioracle.js';
 import { Types as SystemTypes } from '$lib/wharf/contracts/system';
 import { Types as UnicoveTypes } from '$lib/wharf/contracts/unicove';
-import { getBackendNetwork } from '$lib/wharf/client/ssr';
-import { Asset, type API, type AssetType } from '@wharfkit/antelope';
 import type { NetworkState } from '$lib/state/network.svelte';
 import type { NetworkResponse } from '$lib/types';
+import type { RequestEvent } from './$types';
 
 type ResponseType =
 	| Asset[]
@@ -23,14 +22,7 @@ type ResponseType =
 	| UnicoveTypes.get_network_response
 	| undefined;
 
-export async function GET({ fetch, params }: RequestEvent) {
-	const chain = getChainDefinitionFromParams(String(params.network));
-	if (!chain) {
-		return json({ error: 'Invalid chain specified' }, { status: 400 });
-	}
-
-	const network = getBackendNetwork(chain, fetch);
-
+export async function GET({ locals: { network } }: RequestEvent) {
 	let response;
 	if (network.supports('unicovecontracts')) {
 		response = await getNetwork2(network);
@@ -134,7 +126,7 @@ async function getNetwork(network: NetworkState): Promise<NetworkResponse> {
 		supply.supply.symbol
 	);
 
-	return {
+	const response: NetworkResponse = {
 		global: globalstate as SystemTypes.eosio_global_state,
 		token: UnicoveTypes.token_supply.from({
 			def: {
@@ -148,10 +140,18 @@ async function getNetwork(network: NetworkState): Promise<NetworkResponse> {
 		}),
 		ram: ramstate as SystemTypes.exchange_state,
 		rex: rexstate as SystemTypes.rex_pool,
-		oracle: tokenstate as DelphioracleTypes.datapoints,
-		powerup: powerupstate as SystemTypes.powerup_state,
 		sample: sampleUsage as SampleUsage
 	};
+
+	if (network.supports('powerup')) {
+		response.powerup = powerupstate as SystemTypes.powerup_state;
+	}
+
+	if (network.supports('delphioracle')) {
+		response.oracle = tokenstate as DelphioracleTypes.datapoints;
+	}
+
+	return response;
 }
 
 async function getNetwork2(network: NetworkState): Promise<NetworkResponse> {

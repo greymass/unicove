@@ -108,7 +108,7 @@
 	"common_resources_action": "管理 CPU/NET",
 	"common_restart": "重新开始",
 	"common_role": "角色",
-	"common_search": "搜索...",
+	"common_search": "{network} 搜索...",
 	"common_search_instructions": "搜索 Unicove 特性，或输入账户名、公钥或交易 ID。",
 	"common_search_no_results": "未找到结果",
 	"common_search_results": "搜索结果",

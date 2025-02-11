@@ -10,7 +10,6 @@
 	import { MetaMaskState } from '$lib/state/metamask.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
 	import { Cluster, Stack } from '$lib/components/layout/index.js';
-	import { accountCreationPluginMetamask } from '$lib/state/client/wharf.svelte';
 	import { chainLogos } from '@wharfkit/common';
 	import { DD, DL, DLRow } from '$lib/components/descriptionlist/index.js';
 	import TextInput from '$lib/components/input/text.svelte';
@@ -42,9 +41,9 @@
 					metaMaskState.isFlask = isFlask;
 					checkForSnap(metaMaskState).then((isInstalled) => {
 						metaMaskState.isInstalled = isInstalled;
-						if (isInstalled) {
+						if (isInstalled && context.wharf.metamaskPlugin) {
 							connect();
-							accountCreationPluginMetamask
+							context.wharf.metamaskPlugin
 								.retrievePublicKeys(data.network.chain.id)
 								.then((publicKey) => {
 									metaMaskState.publicKey = publicKey.activePublicKey;

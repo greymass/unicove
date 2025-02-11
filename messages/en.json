@@ -109,7 +109,7 @@
 	"common_resources_action": "Manage CPU/NET",
 	"common_restart": "Restart",
 	"common_role": "Role",
-	"common_search": "Search...",
+	"common_search": "Search {network}...",
 	"common_search_instructions": "Search for Unicove features or enter an account name, public key, or transaction ID on the network.",
 	"common_search_no_results": "No results found",
 	"common_search_results": "Search Results",
