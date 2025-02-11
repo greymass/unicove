@@ -108,7 +108,7 @@
 	"common_resources_action": "CPU/NET 관리",
 	"common_restart": "다시 시작",
 	"common_role": "역할",
-	"common_search": "찾다...",
+	"common_search": "{network} 찾다...",
 	"common_search_instructions": "Unicove 기능을 검색하거나 네트워크의 계정 이름, 공개 키 또는 거래 ID를 입력하세요.",
 	"common_search_no_results": "검색 결과가 없습니다",
 	"common_search_results": "검색 결과",
@@ -307,10 +307,6 @@
 	"navigation_votes": "투표",
 	"no_accounts_found": "계정을 찾을 수 없습니다",
 	"no_supported_funding_methods": "이 블록체인에 대해 지원되는 자금 조달 방법이 없습니다.",
-	"og_default_caption": "EOS 네트워크로가는 관문",
-	"og_default_description": "토큰을 스테이크, 보내기, 관리 및 EOS – 모두 쉽게 탐색",
-	"og_default_title": "Unicove-EOS 네트워크로가는 관문",
-	"og_send_caption": "한 계정에서 다른 계정으로 토큰 전송",
 	"processing_fees": "처리 수수료",
 	"ram_available_balance": "사용 가능한 RAM",
 	"ram_form_buy_amount": "구매할 RAM 용량:",
@@ -388,5 +384,9 @@
 	"transaction_page_meta_title": "{id} | {network} 네트워크",
 	"transaction_page_subtitle": "{date} 에 대한 거래",
 	"unstaking_description": "현재 스테이킹 해제 중인 토큰은 아래와 같이 출시 날짜와 함께 나열되어 있습니다. 이 잔액은 인출될 때까지 계속해서 보상을 받게 됩니다.",
-	"where_eos_can_be_purchased": "EOS는 사용자의 요구와 위치에 따라 다양한 플랫폼을 통해 구매할 수 있습니다. 가장 인기 있는 옵션은 다음과 같습니다."
+	"where_eos_can_be_purchased": "EOS는 사용자의 요구와 위치에 따라 다양한 플랫폼을 통해 구매할 수 있습니다. 가장 인기 있는 옵션은 다음과 같습니다.",
+	"og_default_title": "Unicove-EOS 네트워크로가는 관문",
+	"og_default_description": "토큰을 스테이크, 보내기, 관리 및 EOS – 모두 쉽게 탐색",
+	"og_default_caption": "EOS 네트워크로가는 관문",
+	"og_send_caption": "한 계정에서 다른 계정으로 토큰 전송"
 }

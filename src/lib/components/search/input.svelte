@@ -225,7 +225,11 @@
 >
 	<span class="inline-flex items-center gap-2">
 		<SearchIcon class="size-6 text-inherit md:size-5" />
-		<span class="hidden md:inline"> {m.common_search()} </span>
+		<span class="hidden md:inline">
+			{m.common_search({
+				network: String(context.network.chain.name).slice(0, 3)
+			})}
+		</span>
 	</span>
 
 	{#if shortcutKey}
