@@ -15,7 +15,7 @@ export const GET: RequestHandler = async ({ locals: { network } }) => {
 		}
 		const systemtoken = Asset.Symbol.from(network.config.systemtoken.symbol);
 		const response = await fetch(
-			`${network.config.endpoints.metrics}/marketprice/${systemtoken.name}usd/1h/7d`
+			`${network.config.endpoints.metrics}/marketprice/${systemtoken.name.toLowerCase()}usd/1h/7d`
 		);
 		if (!response.ok) {
 			throw new Error(`HTTP error! status: ${response.status}`);
