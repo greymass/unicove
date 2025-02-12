@@ -21,7 +21,7 @@ export async function load({ fetch, parent }: LoadEvent): Promise<LoadData> {
 		} else if (Array.isArray(parsedResponse)) {
 			historicalPrices = parsedResponse.map((price: { date: string; value: number }) => ({
 				date: new Date(price.date),
-				value: Asset.from(price.value / 10000, network.systemtoken.symbol || '0,UNKNOWN')
+				value: Asset.from(price.value / 10000, network.config.systemtoken.symbol || '0,UNKNOWN')
 			}));
 		}
 	} catch (error: unknown) {
