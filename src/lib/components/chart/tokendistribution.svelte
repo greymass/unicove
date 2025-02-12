@@ -38,9 +38,6 @@
 	);
 
 	const filtered = $derived(distribution.filter((item) => item.value > 0));
-
-	$inspect(distribution);
-	$inspect(filtered);
 </script>
 
 {#if filtered.length}
