@@ -14,13 +14,16 @@
 
 	let networkLogo = $derived(String(chainLogos.get(data.network?.chain.id.toString())));
 	let networkName = $derived(String(data.network.chain.name));
+	let productName = $derived(String(data.network.config.metamask?.name));
 	let networkShortname = $derived(String(data.network));
 </script>
 
 <Subgrid id="homepage" class="mb-4 content-start items-start gap-y-32 md:pt-0">
 	<Hero {networkLogo} {networkName} {networkShortname} />
 
-	<Carousel {networkLogo} {networkName} />
+	{#if network.supports('metamask') && productName}
+		<Carousel {networkLogo} {networkName} {productName} />
+	{/if}
 
 	{#if network.supports('staking')}
 		<StakingRewards network={data.network} />

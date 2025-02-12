@@ -15,7 +15,7 @@
 			"stakeresource": false,
 			"staking": true,
 			"timeseries": true,
-			"unicovecontracts": false
+			"unicovecontracts": true
 		},
 		"endpoints": { "api": "https://eos.greymass.com", "history": "https://eos.greymass.com" },
 		"lockedsupply": ["eosio"],
@@ -24,6 +24,7 @@
 			"assets": ["EOS"]
 		},
 		"metamask": {
+			"name": "EOS Wallet",
 			"snaporigin": "npm:@greymass/eos-wallet",
 			"serviceurl": "https://dev.account-creation-portal.pages.dev/buy"
 		},
@@ -51,6 +52,11 @@
 			"staking": true,
 			"timeseries": false,
 			"unicovecontracts": true
+		},
+		"metamask": {
+			"name": "EOS Wallet",
+			"snaporigin": "npm:@greymass/eos-wallet",
+			"serviceurl": "https://dev.account-creation-portal.pages.dev/buy"
 		},
 		"systemtoken": { "contract": "eosio.token", "symbol": "4,EOS" },
 		"tokens": [
