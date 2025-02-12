@@ -38,10 +38,13 @@
 	);
 
 	const filtered = $derived(distribution.filter((item) => item.value > 0));
+
+	$inspect(distribution);
+	$inspect(filtered);
 </script>
 
-<Card id="distribution" title={m.common_distribution()}>
-	{#if distribution}
+{#if filtered.length}
+	<Card id="distribution" title={m.common_distribution()}>
 		<div id="distribution-container" class="flex gap-1">
 			{#each filtered as item}
 				<div
@@ -65,5 +68,5 @@
 				{/each}
 			</tbody>
 		</table>
-	{/if}
-</Card>
+	</Card>
+{/if}
