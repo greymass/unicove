@@ -1,9 +1,11 @@
-API_EOS_CHAIN ?= https://eos.greymass.com
+include .env
+
 SHELL := /usr/bin/env bash
 BIN := ./node_modules/.bin
+CONTRACTS=./src/lib/wharf/contracts
 
 .PHONY: dev
-dev: node_modules
+dev: node_modules codegen
 	bun run dev --host 
 
 .PHONY: check
@@ -24,12 +26,27 @@ install:
 		bun install --frozen-lockfile $(package); \
 	fi
 
-codegen:
-	npx @wharfkit/cli generate -u $(API_EOS_CHAIN) -f src/lib/wharf/contracts/system.ts eosio
-	npx @wharfkit/cli generate -u $(API_EOS_CHAIN) -f src/lib/wharf/contracts/token.ts eosio.token
-	npx @wharfkit/cli generate -u $(API_EOS_CHAIN) -f src/lib/wharf/contracts/msig.ts eosio.msig
-	npx @wharfkit/cli generate -u $(API_EOS_CHAIN) -f src/lib/wharf/contracts/delphioracle.ts delphioracle
-	npx @wharfkit/cli generate -u $(API_EOS_CHAIN) -f src/lib/wharf/contracts/unicove.ts unicove.gm
+$(CONTRACTS)/system.ts:
+	bunx @wharfkit/cli generate -u $(CONTRACTS_API) -f $(CONTRACTS)/system.ts eosio
+
+$(CONTRACTS)/token.ts:
+	bunx @wharfkit/cli generate -u $(CONTRACTS_API) -f $(CONTRACTS)/token.ts eosio.token
+
+$(CONTRACTS)/msig.ts:
+	bunx @wharfkit/cli generate -u $(CONTRACTS_API) -f $(CONTRACTS)/msig.ts eosio.msig
+
+$(CONTRACTS)/delphioracle.ts:
+	bunx @wharfkit/cli generate -u $(CONTRACTS_API) -f $(CONTRACTS)/delphioracle.ts delphioracle
+
+$(CONTRACTS)/unicove.ts:
+	bunx @wharfkit/cli generate -u $(CONTRACTS_API) -f $(CONTRACTS)/unicove.ts unicove.gm
+
+codegen: $(CONTRACTS)/system.ts $(CONTRACTS)/token.ts $(CONTRACTS)/msig.ts $(CONTRACTS)/delphioracle.ts $(CONTRACTS)/unicove.ts
+	mkdir -p $(CONTRACTS)
+
+.PHONY: clean
+codegen/clean:
+	rm -rf $(CONTRACTS)/*.ts
 
 config:
 	bun run scripts/env/env.ts
