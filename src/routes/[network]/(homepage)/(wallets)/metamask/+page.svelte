@@ -91,7 +91,7 @@
 			await requestSnap(metaMaskState, latestVersion);
 		} catch (error) {
 			console.error('Error updating snap:', error);
-			alert('Error updating the {network} Wallet snap. Please try again.');
+			alert(`Error updating the ${data.network.config.metamask?.name} snap. Please try again.`);
 		}
 	}
 
@@ -124,6 +124,7 @@
 
 	const networkLogo = String(chainLogos.get(String(data.network.chain.id)));
 	const networkName = data.network.chain.name;
+	const productName = data.network.config.metamask?.name || '';
 </script>
 
 <section class="col-span-full @container">
@@ -175,18 +176,19 @@
 			{#if !metaMaskState.isMetaMaskReady}
 				<h2 class="text-xl font-semibold">
 					{m.metamask_install_title({
-						network: networkName
+						name: productName
 					})}
 				</h2>
 				<Stack class="mb-1 gap-2">
 					<p class="leading-snug">
 						{m.metamask_install_p1({
+							name: productName,
 							network: networkName
 						})}
 					</p>
 					<p class="leading-snug">
 						{m.metamask_install_p2({
-							network: networkName
+							name: productName
 						})}
 					</p>
 				</Stack>
@@ -197,26 +199,26 @@
 			{:else if currentVersion}
 				<h2 class="text-xl font-semibold">
 					{m.metamask_install_update({
-						network: networkName
+						name: productName
 					})}
 				</h2>
 				{#if needsUpdate}
 					<p class="mb-1 leading-snug">
 						{m.metamask_install_update_description({
-							network: networkName,
+							name: productName,
 							latestVersion: String(latestVersion)
 						})}
 					</p>
 					<Button onclick={handleUpdateSnap}
 						>{m.metamask_install_update_action({
-							network: networkName
+							name: productName
 						})}</Button
 					>
 				{:else}
 					<Stack class="mb-1 gap-2">
 						<p class="leading-snug">
 							{m.metamask_install_ready_description({
-								network: networkName
+								name: productName
 							})}
 							<a href="https://www.npmjs.com/package/@{packageName}/v/{currentVersion}"
 								>{m.common_version()} {currentVersion}</a
@@ -259,20 +261,21 @@
 			{:else}
 				<h2 class="text-xl font-semibold">
 					{m.metamask_install_add_to_metamask({
-						network: networkName
+						name: productName
 					})}
 				</h2>
 				<Stack class="mb-1 gap-2">
 					<p class="leading-snug">{m.metamask_install_add_p1()}</p>
 					<p class="leading-snug">
 						{m.metamask_install_add_p2({
+							name: productName,
 							network: networkName
 						})}
 					</p>
 				</Stack>
 				<Button onclick={connect}
 					>{m.homepage_metamask_wallet_install({
-						network: networkName
+						name: productName
 					})}</Button
 				>
 			{/if}
@@ -293,53 +296,55 @@
 		<p>
 			{@render link('MetaMask Snaps', 'https://metamask.io/snaps/')}
 			{m.metamask_install_faq_a1({
+				name: productName,
 				network: networkName
 			})}
 		</p>
 
 		<h3 class="text-md font-semibold">
 			{m.metamask_install_faq_q2({
-				network: networkName
+				name: productName
 			})}
 		</h3>
 		<p>
 			{m.metamask_install_faq_a2_p1({
-				network: networkName
+				name: productName
 			})}
 			{@render link(
 				m.metamask_snaps_directory(),
 				`https://snaps.metamask.io/snap/npm/${packageName}`
 			)}.
 			{m.metamask_install_faq_a2_p2({
-				network: networkName
+				name: productName
 			})}
 		</p>
 
 		<h3 class="text-md font-semibold">
 			{m.metamask_install_faq_q3({
-				network: networkName
+				name: productName
 			})}
 		</h3>
 		<p>
 			{m.metamask_install_faq_a3({
+				name: productName,
 				network: networkName
 			})}
 		</p>
 
 		<h3 class="text-md font-semibold">
 			{m.metamask_install_faq_q4({
-				network: networkName
+				name: productName
 			})}
 		</h3>
 		<p>
 			{m.metamask_install_faq_a4({
-				network: networkName
+				name: productName
 			})}
 		</p>
 
 		<h3 class="text-md font-semibold">
 			{m.metamask_install_faq_q5({
-				network: networkName
+				name: productName
 			})}
 		</h3>
 		<p>
@@ -354,11 +359,12 @@
 
 		<h3 class="text-md font-semibold">
 			{m.metamask_install_faq_q6({
-				network: networkName
+				name: productName
 			})}
 		</h3>
 		<p>
 			{m.metamask_install_faq_a6_p1({
+				name: productName,
 				network: networkName
 			})}
 		</p>
@@ -385,11 +391,12 @@
 
 		<h3 class="text-md font-semibold">
 			{m.metamask_install_faq_q8({
-				network: networkName
+				name: productName
 			})}
 		</h3>
 		<p>
 			{m.metamask_install_faq_a8({
+				name: productName,
 				network: networkName
 			})}
 		</p>
@@ -397,29 +404,31 @@
 		<h3 class="text-md font-semibold">{m.metamask_install_faq_q9()}</h3>
 		<p>
 			{m.metamask_install_faq_a9_p1({
-				network: networkName
+				name: productName
 			})}
 		</p>
 		<p>
 			{m.metamask_install_faq_a9_p2({
-				network: networkName
+				name: productName
 			})}
 		</p>
 
 		<h3 class="text-md font-semibold">{m.metamask_install_faq_q10()}</h3>
 		<p>
 			{m.metamask_install_faq_a10({
-				network: networkName
+				name: productName
 			})}
 		</p>
 
 		<h3 class="text-md font-semibold">
 			{m.metamask_install_faq_q11({
+				name: productName,
 				network: networkName
 			})}
 		</h3>
 		<p>
 			{m.metamask_install_faq_a11_p1({
+				name: productName,
 				network: networkName
 			})}
 			{@render link('Wharf', 'https://wharfkit.com/')}
@@ -437,12 +446,12 @@
 
 		<h3 class="text-md font-semibold">
 			{m.metamask_install_faq_q12({
-				network: networkName
+				name: productName
 			})}
 		</h3>
 		<p>
 			{m.metamask_install_faq_a12({
-				network: networkName
+				name: productName
 			})}
 		</p>
 		<address class="text-muted inline">

@@ -37,6 +37,7 @@ export interface ChainCoinbaseConfig {
 }
 
 export interface ChainMetaMaskConfig {
+	name: string;
 	snaporigin: string;
 	serviceurl: string;
 }
