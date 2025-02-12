@@ -3,7 +3,7 @@ const configs = {
 	backends: Bun.file('./scripts/env/default/backends.json')
 };
 
-let contents = ` # GENERATED FILE - DO NOT EDIT - SEE README
+let contents = `# GENERATED FILE - DO NOT EDIT - SEE README
 
 # The nodeos API that will be used by Wharf during the build process to generate contract code
 CONTRACTS_API=https://jungle4.greymass.com
