@@ -3,6 +3,8 @@ include .env
 
 SHELL := /usr/bin/env bash
 BIN := ./node_modules/.bin
+
+ENVS=./scripts/env
 CONTRACTS=./src/lib/wharf/contracts
 
 .PHONY: dev
@@ -49,8 +51,13 @@ codegen: $(CONTRACTS)/system.ts $(CONTRACTS)/token.ts $(CONTRACTS)/msig.ts $(CON
 codegen/clean:
 	rm -rf $(CONTRACTS)/*.ts
 
-config:
-	bun run scripts/env/env.ts
+$(ENVS)/local/backends.json:
+	cp $(ENVS)/default/backends.json $(ENVS)/local/backends.json
 
-config/custom:
-	cp ./scripts/env/default/* ./scripts/env/custom
+$(ENVS)/local/chains.json:
+	cp $(ENVS)/default/chains.json $(ENVS)/local/chains.json
+
+config/local: $(ENVS)/local/backends.json $(ENVS)/local/chains.json 
+
+config: config/local
+	bun run scripts/env/local.ts
