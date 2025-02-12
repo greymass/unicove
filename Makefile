@@ -61,3 +61,6 @@ config/local: $(ENVS)/local/backends.json $(ENVS)/local/chains.json
 
 config: config/local
 	bun run scripts/env/local.ts
+
+config/default:
+	bun run scripts/env/default.ts
