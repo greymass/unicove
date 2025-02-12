@@ -3,7 +3,7 @@
 	import { chainLogos } from '@wharfkit/common';
 	import { onMount, setContext, untrack } from 'svelte';
 	import X from 'lucide-svelte/icons/circle-x';
-	import * as env from '$env/static/public';
+	import { env } from '$env/dynamic/public';
 	import { Head, type SeoConfig } from 'svead';
 	import { page } from '$app/stores';
 	import extend from 'just-extend';
@@ -11,7 +11,6 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { AccountState } from '$lib/state/client/account.svelte.js';
 	import { WharfState } from '$lib/state/client/wharf.svelte.js';
-	import { NetworkState, getNetwork } from '$lib/state/network.svelte.js';
 	import { SearchRecordStorage } from '$lib/state/search.svelte.js';
 
 	import MobileNavigation from '$lib/components/navigation/mobilenavigation.svelte';
@@ -46,11 +45,7 @@
 		}
 	});
 
-	export function setAccount(
-		state: NetworkState,
-		name: NameType,
-		fetchOverride?: typeof fetch
-	): AccountState {
+	export function setAccount(name: NameType, fetchOverride?: typeof fetch): AccountState {
 		account = new AccountState(data.network, name, fetchOverride);
 		account.refresh();
 		return account;
@@ -60,7 +55,7 @@
 		const { session } = wharf;
 		untrack(() => {
 			if (session) {
-				setAccount(getNetwork(session.chain), session.actor);
+				setAccount(session.actor);
 			} else {
 				account = undefined;
 			}

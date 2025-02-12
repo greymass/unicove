@@ -2,7 +2,12 @@
 	import { getContext } from 'svelte';
 	import { fade, fly } from 'svelte/transition';
 	import { createDialog, melt, type CreateDialogProps } from '@melt-ui/svelte';
-	import { Session, type SerializedSession, type WalletPlugin } from '@wharfkit/session';
+	import {
+		Session,
+		type NameType,
+		type SerializedSession,
+		type WalletPlugin
+	} from '@wharfkit/session';
 	import { chainLogos } from '@wharfkit/common';
 	import * as m from '$lib/paraglide/messages';
 
@@ -36,60 +41,8 @@
 
 	let currentSession = $derived(context.wharf.session);
 
-	function closeDrawer() {
-		$open = false;
-	}
-
-	function addSession() {
-		addingAccount = true;
-	}
-
-	function switchSession(session: SerializedSession) {
-		context.wharf.switch(session);
-		if (!context.settings.data.preventAccountPageSwitching) {
-			goto(`/${languageTag()}/${network}/account/${session.actor}`);
-		}
-		closeDrawer();
-	}
-
-	function removeSession(session?: Session | SerializedSession) {
-		if (session) {
-			context.wharf.logout(session);
-		}
-		closeDrawer();
-	}
-
-	async function connectWallet(wallet: WalletPlugin) {
-		context.wharf.login({
-			chain: context.network.chain,
-			walletPlugin: wallet.id
-		});
-	}
-
 	let filterValue = $state('');
 	let addingAccount = $state(false);
-
-	function closeAddingAccount() {
-		if (addingAccount) {
-			addingAccount = false;
-		} else {
-			closeDrawer();
-		}
-	}
-
-	const resetAddingAccount: CreateDialogProps['onOpenChange'] = ({ next }) => {
-		addingAccount = false;
-		return next;
-	};
-
-	function clearFilter() {
-		filterValue = '';
-	}
-
-	// function removeAllSessions() {
-	// 	context.wharf.logout();
-	// 	closeDrawer();
-	// }
 
 	let chainSessions = $derived.by(() => {
 		let sessions = context.wharf.sessions.filter((session) =>
@@ -103,6 +56,11 @@
 		return sessions;
 	});
 
+	const resetAddingAccount: CreateDialogProps['onOpenChange'] = ({ next }) => {
+		addingAccount = false;
+		return next;
+	};
+
 	const {
 		elements: { trigger, overlay, content, close, portalled },
 		states: { open }
@@ -113,6 +71,59 @@
 	});
 
 	let logo = $derived(chainLogos.get(String(context.wharf.session?.chain.id)) || '');
+
+	function closeDrawer() {
+		$open = false;
+		addingAccount = false;
+	}
+
+	function addAccount() {
+		addingAccount = true;
+	}
+
+	function redirect(account: NameType) {
+		if (!context.settings.data.preventAccountPageSwitching) {
+			goto(`/${languageTag()}/${network}/account/${account}`);
+		}
+	}
+
+	function switchSession(session: SerializedSession) {
+		context.wharf.switch(session);
+		redirect(session.actor);
+		closeDrawer();
+	}
+
+	function removeSession(session?: Session | SerializedSession) {
+		if (session) {
+			context.wharf.logout(session);
+		}
+	}
+
+	async function connectWallet(wallet: WalletPlugin) {
+		const session = await context.wharf.login({
+			chain: context.network.chain,
+			walletPlugin: wallet.id
+		});
+		redirect(session.actor);
+		closeDrawer();
+	}
+
+	function closeAddingAccount() {
+		if (addingAccount) {
+			addingAccount = false;
+		} else {
+			closeDrawer();
+		}
+	}
+
+	function clearFilter() {
+		filterValue = '';
+	}
+
+	// function removeAllSessions() {
+	// 	context.wharf.logout();
+	// 	closeDrawer();
+	// }
 </script>
 
 <!-- Trigger Button -->
@@ -189,7 +200,7 @@
 						in:fly={{ x: -100, duration: 100 }}
 						out:fly={{ x: -100, duration: 100 }}
 					>
-						<Button onclick={addSession} variant="secondary" class="grow-0 text-white">
+						<Button onclick={addAccount} variant="secondary" class="grow-0 text-white">
 							<div class="flex items-center gap-2">
 								<UserPlus class="mb-0.5 size-5" />
 								<span>Add Account</span>

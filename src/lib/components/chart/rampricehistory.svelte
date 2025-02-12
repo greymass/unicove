@@ -36,10 +36,13 @@
 			throw new Error(String(e));
 		}
 	};
+
+	let systemtoken = Asset.Symbol.from(network.config.systemtoken.symbol);
+	let pair = $derived(String(systemtoken.name) + '/RAM');
 </script>
 
 {#await fetchRamPrices()}
-	<Loading pair="EOS/RAM" />
+	<Loading {pair} />
 {:then ramPrices}
-	<ChartContainer pair="EOS/RAM" data={ramPrices} type="line" />
+	<ChartContainer {pair} data={ramPrices} type="line" />
 {/await}

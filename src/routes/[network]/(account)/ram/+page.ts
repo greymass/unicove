@@ -1,17 +1,14 @@
 import { Asset } from '@wharfkit/antelope';
 
 import type { LoadEvent } from '@sveltejs/kit';
-import { getChainDefinitionFromParams } from '$lib/state/network.svelte';
 import type { HistoricalPrice } from '$lib/types';
 
 interface LoadData {
 	historicalPrices: HistoricalPrice[];
 }
 
-export async function load({ fetch, params }: LoadEvent): Promise<LoadData> {
-	const { network } = params;
-
-	const chain = getChainDefinitionFromParams(String(network));
+export async function load({ fetch, parent }: LoadEvent): Promise<LoadData> {
+	const { network } = await parent();
 
 	let historicalPrices: HistoricalPrice[] = [];
 
@@ -24,7 +21,7 @@ export async function load({ fetch, params }: LoadEvent): Promise<LoadData> {
 		} else if (Array.isArray(parsedResponse)) {
 			historicalPrices = parsedResponse.map((price: { date: string; value: number }) => ({
 				date: new Date(price.date),
-				value: Asset.from(price.value / 10000, chain.systemToken?.symbol || '0,UNKNOWN')
+				value: Asset.from(price.value / 10000, network.systemtoken.symbol || '0,UNKNOWN')
 			}));
 		}
 	} catch (error: unknown) {

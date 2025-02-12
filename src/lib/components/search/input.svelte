@@ -225,7 +225,11 @@
 >
 	<span class="inline-flex items-center gap-2">
 		<SearchIcon class="size-6 text-inherit md:size-5" />
-		<span class="hidden md:inline"> {m.common_search()} </span>
+		<span class="hidden md:inline">
+			{m.common_search({
+				network: String(context.network.chain.name).slice(0, 3)
+			})}
+		</span>
 	</span>
 
 	{#if shortcutKey}
@@ -244,7 +248,7 @@
 		></div>
 		<div
 			use:melt={$content}
-			class="fixed left-1/2 top-20 z-50 max-h-[85vh] w-[90vw] max-w-lg -translate-x-1/2 transform rounded-2xl bg-mineShaft-950 p-4 shadow-lg"
+			class="fixed left-1/2 top-20 z-50 max-h-[85vh] w-[90vw] max-w-lg -translate-x-1/2 transform overflow-hidden rounded-2xl bg-mineShaft-950 p-4 shadow-lg"
 			transition:scale={{
 				duration: 100,
 				start: 0.95
@@ -271,7 +275,7 @@
 					</div>
 				</form>
 
-				<div class="table-styles grid grid-cols-[1fr_auto] gap-x-4 sm:grid-cols-[1fr_1fr_auto]">
+				<div class="table-styles grid grid-cols-[1fr_1fr] gap-x-4 sm:grid-cols-[1fr_1fr_auto]">
 					{#if results.length > 0}
 						<div class="table-head-styles col-span-full grid select-none grid-cols-subgrid">
 							{#if searchValue}
@@ -279,10 +283,10 @@
 							{:else}
 								<span class="pl-2">{m.common_recent_activity()}</span>
 							{/if}
-							<span class="hidden sm:block">{m.common_action()}</span>
+							<span class="text-right sm:text-left">{m.common_action()}</span>
 							{#if !searchValue}
 								<button
-									class="justify-self-end focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-solar-500"
+									class="hidden justify-self-end focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-solar-500 sm:block"
 									onclick={() => context.history.clear()}
 								>
 									{m.common_clear()}
@@ -303,7 +307,7 @@
 						</ul>
 					{:else}
 						<!-- No results -->
-						<div class="col-span-full m-4 grid h-12 items-center justify-items-center">
+						<div class="col-span-full m-4 grid items-center justify-items-center">
 							{#if searchValue}
 								<span class="text-muted col-span-full text-center">
 									{m.common_search_no_results()}
@@ -327,10 +331,10 @@
 		class="group/row group-has-[:hover]/list:text-muted col-span-full grid h-12 grid-cols-subgrid items-center justify-items-start rounded-lg focus:outline-none group-has-[:hover]/list:bg-transparent group-has-[:hover]/list:hover:bg-mineShaft-900 group-has-[:hover]/list:hover:text-mineShaft-50 data-[active=true]:bg-mineShaft-900 data-[active=true]:text-mineShaft-50"
 		data-active={active}
 	>
-		<Result class="sm:col-span-3" {active} record={item} onclick={closeSearch}>
+		<Result class="col-span-2 sm:col-span-3" {active} record={item} onclick={closeSearch}>
 			<div
 				data-active={active}
-				class="hidden size-12 place-items-center text-mineShaft-50 group-hover/row:grid data-[active=true]:grid group-has-[:hover]/list:data-[active=true]:hidden group-has-[:hover]/list:group-hover/row:data-[active=true]:grid"
+				class="hidden size-12 place-items-center text-mineShaft-50 sm:group-hover/row:grid sm:data-[active=true]:grid sm:group-has-[:hover]/list:data-[active=true]:hidden sm:group-has-[:hover]/list:group-hover/row:data-[active=true]:grid"
 			>
 				<ArrowRight />
 			</div>
@@ -344,13 +348,13 @@
 		class="group-has-[:hover]/list:text-muted col-span-full grid h-12 grid-cols-subgrid items-center justify-items-start rounded-lg focus:outline-none group-has-[:hover]/list:bg-transparent group-has-[:hover]/list:hover:bg-mineShaft-900 group-has-[:hover]/list:hover:text-mineShaft-50 data-[active=true]:bg-mineShaft-900 data-[active=true]:text-mineShaft-50"
 		data-active={active}
 	>
-		<Result {active} record={item} onclick={closeSearch} />
-
-		<button
-			class="text-muted grid size-12 place-items-center justify-self-end hover:text-white focus-visible:outline-none focus-visible:ring focus-visible:ring-inset focus-visible:ring-solar-500"
-			onclick={() => context.history.remove(index)}
-		>
-			<X class="text-inherit" />
-		</button>
+		<Result class="col-span-2 sm:col-span-3" {active} record={item} onclick={closeSearch}>
+			<button
+				class="text-muted grid hidden size-12 place-items-center justify-self-end hover:text-white focus-visible:outline-none focus-visible:ring focus-visible:ring-inset focus-visible:ring-solar-500 sm:block"
+				onclick={() => context.history.remove(index)}
+			>
+				<X class="text-inherit" />
+			</button>
+		</Result>
 	</li>
 {/snippet}

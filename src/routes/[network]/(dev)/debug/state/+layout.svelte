@@ -19,6 +19,11 @@
 			href: `/${data.network}/debug/state/network`,
 			text: 'Network'
 		},
+		{
+			active: activeItem === 'config',
+			href: `/${data.network}/debug/state/config`,
+			text: 'Chain'
+		},
 		{ active: activeItem === 'wharf', href: `/${data.network}/debug/state/wharf`, text: 'Wharf' }
 	]}
 />

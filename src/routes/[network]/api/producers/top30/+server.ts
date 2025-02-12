@@ -1,18 +1,10 @@
-import { json, type RequestEvent } from '@sveltejs/kit';
+import { json } from '@sveltejs/kit';
 
-import { getChainDefinitionFromParams } from '$lib/state/network.svelte';
 import { getCacheHeaders } from '$lib/utils';
-import { getBackendNetwork } from '$lib/wharf/client/ssr';
 import { getProducersRecursive } from '../utils';
+import type { RequestEvent } from './$types';
 
-export async function GET({ fetch, params }: RequestEvent) {
-	const chain = getChainDefinitionFromParams(String(params.network));
-	if (!chain) {
-		return json({ error: 'Invalid chain specified' }, { status: 400 });
-	}
-
-	const network = getBackendNetwork(chain, fetch);
-
+export async function GET({ locals: { network } }: RequestEvent) {
 	const all = await getProducersRecursive(network);
 	const producers = all
 		.sort((a, b) => Number(b.total_votes) - Number(a.total_votes))

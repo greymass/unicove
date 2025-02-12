@@ -83,7 +83,8 @@ export class NetworkDataSources extends Struct {
 	@Struct.field(SystemTypes.eosio_global_state) declare global: SystemTypes.eosio_global_state;
 	@Struct.field(DelphioracleTypes.datapoints, { optional: true })
 	declare oracle?: DelphioracleTypes.datapoints;
-	@Struct.field(SystemTypes.powerup_state) declare powerup: SystemTypes.powerup_state;
+	@Struct.field(SystemTypes.powerup_state, { optional: true })
+	declare powerup?: SystemTypes.powerup_state;
 	@Struct.field(SystemTypes.exchange_state) declare ram: SystemTypes.exchange_state;
 	@Struct.field(SystemTypes.rex_pool) declare rex: SystemTypes.rex_pool;
 	@Struct.field(SampledUsage, { optional: true }) declare sample?: SampledUsage;
@@ -114,7 +115,7 @@ export type DescriptionItem = {
 export interface NetworkResponse {
 	global: SystemTypes.eosio_global_state;
 	oracle?: DelphioracleTypes.datapoints;
-	powerup: SystemTypes.powerup_state;
+	powerup?: SystemTypes.powerup_state;
 	ram: SystemTypes.exchange_state;
 	rex: SystemTypes.rex_pool;
 	sample?: SampleUsage;

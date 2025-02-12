@@ -13,7 +13,6 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { initOnRamp, type CBPayInstanceType, type InitOnRampParams } from '@coinbase/cbpay-js';
 	import Button from '$lib/components/button/button.svelte';
-	import { env } from '$env/dynamic/public';
 	import * as m from '$lib/paraglide/messages';
 	import Grid from '$lib/components/layout/grid.svelte';
 	import { DL, DLRow, DD } from '$lib/components/descriptionlist';
@@ -21,12 +20,16 @@
 	import Stack from '$lib/components/layout/stack.svelte';
 	import Cluster from '$lib/components/layout/cluster.svelte';
 
+	const context = getContext<UnicoveContext>('state');
+
 	const ON_RAMP_PROVIDERS = [
 		{
 			id: 'coinbase',
 			logo: coinbaseLogo,
 			action: {
-				text: m.buy_eos_with_coinbase(),
+				text: m.buy_token_with_coinbase({
+					token: context.network.token.definition.symbol.name
+				}),
 				handler: 'coinbase'
 			}
 		}
@@ -75,28 +78,17 @@
 		}
 	] as const;
 
-	const context = getContext<UnicoveContext>('state');
-
 	const coinbaseOptions: InitOnRampParams | undefined = $derived.by(() => {
-		let appId = '';
-		let asset = '';
-		switch (String(context.network)) {
-			case 'eos':
-				if (env.PUBLIC_EOS_COINBASE_APPID && env.PUBLIC_EOS_COINBASE_ASSET) {
-					appId = env.PUBLIC_EOS_COINBASE_APPID;
-					asset = env.PUBLIC_EOS_COINBASE_ASSET;
-				}
-				break;
-			default:
-				return;
+		if (!context.network.config.coinbase) {
+			return;
 		}
 		return {
-			appId,
+			appId: context.network.config.coinbase.appid,
 			widgetParameters: {
 				addresses: {
 					[String(context.account?.name)]: ['eosio']
 				},
-				assets: [asset]
+				assets: context.network.config.coinbase.assets
 			},
 			onSuccess: () => {
 				console.log('success');
@@ -149,7 +141,11 @@
 <Stack class="gap-12">
 	<Stack class="gap-4">
 		<h2 class="h4">{m.fund_direct_purchase()}</h2>
-		<p>{m.fund_direct_purchase_description()}</p>
+		<p>
+			{m.fund_direct_purchase_description({
+				token: context.network.token.definition.symbol.name
+			})}
+		</p>
 		<Cluster tag="ul">
 			{#each ON_RAMP_PROVIDERS as service}
 				<Card tag="li" class="max-w-sm p-6">
@@ -158,9 +154,11 @@
 							<img src={service.logo} alt={service.id} class="h-24 w-3/5 object-contain" />
 						</div>
 						<DL>
-							<DLRow title={m.fund_token_to_purchase()}>
-								<DD>{env.PUBLIC_EOS_COINBASE_ASSET}</DD>
-							</DLRow>
+							{#if context.network.config.coinbase}
+								<DLRow title={m.fund_token_to_purchase()}>
+									<DD>{context.network.config.coinbase.assets.join(', ')}</DD>
+								</DLRow>
+							{/if}
 							<DLRow title={m.send_receiving_account()}>
 								<DD>
 									{#if context.account}
@@ -191,7 +189,9 @@
 		<h2 class="h4">{m.common_exchanges()}</h2>
 
 		<p>
-			{m.fund_exchange_description()}
+			{m.fund_exchange_description({
+				token: context.network.token.definition.symbol.name
+			})}
 		</p>
 
 		<Grid tag="ul" itemWidth="10rem" class="">

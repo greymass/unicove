@@ -1,5 +1,5 @@
 import { Asset } from '@wharfkit/antelope';
-import { Chains, type ChainDefinition } from '@wharfkit/session';
+import { type ChainDefinition } from '@wharfkit/session';
 
 const defaultSymbol = Asset.Symbol.from('0,UNKNOWN');
 const defaultQuantity = Asset.fromUnits(0, defaultSymbol);
@@ -8,7 +8,7 @@ const defaultKBAmount = Asset.fromUnits(0, kbSymbol);
 
 export class RAMCalculatorState {
 	public tokens: Asset = $state(defaultQuantity);
-	public chain: ChainDefinition = $state(Chains.EOS);
+	public chain: ChainDefinition = $state() as ChainDefinition;
 	public pricePerKB: Asset = $state(defaultQuantity);
 	public format: 'asset' | 'bytes' = $state('asset');
 

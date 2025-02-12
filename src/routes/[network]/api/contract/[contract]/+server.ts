@@ -1,19 +1,10 @@
 import { json } from '@sveltejs/kit';
 import { type API } from '@wharfkit/antelope';
+
 import type { RequestEvent, RequestHandler } from './$types';
-
-import { getChainDefinitionFromParams } from '$lib/state/network.svelte';
 import { getCacheHeaders } from '$lib/utils';
-import { getBackendNetwork } from '$lib/wharf/client/ssr';
 
-export const GET: RequestHandler = async ({ fetch, params }: RequestEvent) => {
-	const chain = getChainDefinitionFromParams(String(params.network));
-	if (!chain) {
-		return json({ error: 'Invalid chain specified' }, { status: 400 });
-	}
-
-	const network = getBackendNetwork(chain, fetch);
-
+export const GET: RequestHandler = async ({ locals: { network }, params }: RequestEvent) => {
 	const requests: [Promise<API.v1.GetAbiResponse>] = [
 		network.client.v1.chain.get_abi(params.contract)
 	];
