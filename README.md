@@ -32,3 +32,7 @@ To override the more complex JSON stored in `PUBLIC_CHAINS` and `PRIVATE_BACKEND
 4. Run `make config` to write a copy of your modified config files into `.env.local`.
 
 Anytime changes are made to either `scripts/env/local/backends.json` or `scripts/env/local/chains.json`, run `make config` again to regenerate the `.env.local` file and update the values.
+
+With Unicove running, the current configuration can be viewed in the Debug State section:
+
+http://localhost:5173/debug/state/config
