@@ -15,7 +15,7 @@
 			"stakeresource": false,
 			"staking": true,
 			"timeseries": true,
-			"unicovecontracts": false
+			"unicovecontracts": true
 		},
 		"endpoints": { "api": "https://eos.greymass.com", "history": "https://eos.greymass.com" },
 		"lockedsupply": ["eosio"],
