@@ -84,7 +84,7 @@
 						</Stack>
 					</div>
 
-					{#if isCurrentUser}
+					{#if data.network.supports('directfunding') && isCurrentUser}
 						<div
 							class="col-span-2 col-start-2 row-start-1 text-right @xs:col-span-1 @xs:col-start-3"
 						>
