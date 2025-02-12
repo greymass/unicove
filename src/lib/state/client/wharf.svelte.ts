@@ -138,7 +138,7 @@ export class WharfState {
 		this.init(network);
 	}
 
-	public async login(options?: LoginOptions) {
+	public async login(options?: LoginOptions): Promise<Session> {
 		if (!this.sessionKit) {
 			throw new Error('User not initialized');
 		}
@@ -147,6 +147,7 @@ export class WharfState {
 		this.session = session;
 		this.chainsSession[String(session.chain.id)] = session.serialize();
 		this.sessions = await this.sessionKit.getSessions();
+		return session;
 	}
 
 	public async createAccount(createAccountOptions?: CreateAccountOptions) {
