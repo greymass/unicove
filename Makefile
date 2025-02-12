@@ -1,4 +1,5 @@
 include .env
+-include .env.local
 
 SHELL := /usr/bin/env bash
 BIN := ./node_modules/.bin
