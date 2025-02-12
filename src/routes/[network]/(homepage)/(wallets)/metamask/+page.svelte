@@ -57,8 +57,6 @@
 		}
 	});
 
-	$inspect(packageInfo);
-
 	onMount(async () => {
 		if (!data.network.snapOrigin) {
 			return goto(`/404`);
