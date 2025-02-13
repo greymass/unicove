@@ -52,6 +52,9 @@
 		);
 
 	const restructured = $derived.by(() => {
+		if (Object.keys(actionInputs).length === 0) {
+			return {};
+		}
 		return Object.keys(actionInputs).reduce((acc, key) => {
 			const parts = key.split('->');
 			let obj: Record<string, any> = acc;
@@ -72,6 +75,9 @@
 	});
 
 	const serialized = $derived.by(() => {
+		if (Object.keys(restructured).length === 0) {
+			return undefined;
+		}
 		try {
 			return Serializer.encode({
 				object: restructured,
@@ -85,6 +91,9 @@
 	});
 
 	const decoded = $derived.by(() => {
+		if (!serialized) {
+			return undefined;
+		}
 		try {
 			return Serializer.decode({
 				data: serialized,
@@ -185,7 +194,7 @@
 				}
 			}
 		} catch (e) {
-			console.error('Error decoding action:', e);
+			console.log('Error decoding action:', e);
 		}
 		ready = true;
 	});
