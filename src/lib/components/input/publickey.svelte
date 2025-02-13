@@ -19,11 +19,12 @@
 	}: PublicKeyInputProps = $props();
 
 	/** The string value bound to the form input */
-	let input: string = $state('');
+	let input: string = $state(_value ? String(_value) : '');
 
 	/** The derived public key from the formatted input */
 	const pubkey: PublicKey | undefined = $derived.by(() => {
 		try {
+			if (!input) return;
 			return PublicKey.from(input);
 		} catch (e) {
 			console.warn(e);
