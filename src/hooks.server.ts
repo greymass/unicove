@@ -121,4 +121,4 @@ export async function redirectHandle({ event, resolve }: HandleParams): Promise<
 	return response;
 }
 
-export const handle: Handle = sequence(i18nHandle, networkHandle, redirectHandle);
+export const handle: Handle = sequence(i18nHandle, redirectHandle, networkHandle);
