@@ -17,6 +17,9 @@
 		<a href="debug/input/name">Input/Name</a>
 	</li>
 	<li>
+		<a href="debug/opengraph">Opengraph Images</a>
+	</li>
+	<li>
 		<a href="debug/state">State</a>
 	</li>
 	<li>
