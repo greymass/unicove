@@ -5,10 +5,10 @@ import { getCacheHeaders } from '$lib/utils';
 import { getBackendClient } from '$lib/wharf/client/ssr';
 import type { RequestEvent } from './$types';
 
-export async function GET({ params }: RequestEvent) {
+export async function GET({ locals, params }: RequestEvent) {
 	let transaction: API.v1.GetTransactionResponse;
 	try {
-		const client = getBackendClient(params.id, fetch, { history: true });
+		const client = getBackendClient(String(locals.network), fetch, { history: true });
 		transaction = await client.v1.history.get_transaction(String(params.id));
 	} catch (e) {
 		return error(500, {
