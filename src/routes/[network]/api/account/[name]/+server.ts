@@ -12,7 +12,13 @@ export const GET: RequestHandler = async ({ locals: { network }, params }: Reque
 	try {
 		let response;
 		if (network.supports('unicovecontracts')) {
-			response = await getAccount2(network, params.name);
+			try {
+				response = await getAccount2(network, params.name);
+			} catch (e) {
+				// Fallback to old method on failure
+				console.error('getAccount2 failure', e);
+				response = await getAccount(network, params.name);
+			}
 		} else {
 			response = await getAccount(network, params.name);
 		}
