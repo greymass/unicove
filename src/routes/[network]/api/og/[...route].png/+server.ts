@@ -12,12 +12,17 @@ export const GET: RequestHandler = async ({ locals, url, fetch, params }) => {
 	let response: Response;
 
 	const API_OPENGRAPH_GENERATOR = env.API_OPENGRAPH_GENERATOR;
+	const API_OPENGRAPH_TOKEN = env.API_OPENGRAPH_TOKEN;
 
 	if (API_OPENGRAPH_GENERATOR) {
 		const uri = new URL(API_OPENGRAPH_GENERATOR);
 		uri.searchParams.set('text', text);
 		uri.searchParams.set('lang', lang);
-		response = await fetch(uri.toString());
+		response = await fetch(uri.toString(), {
+			headers: {
+				Authorization: `Bearer ${API_OPENGRAPH_TOKEN}`
+			}
+		});
 	} else {
 		// Uses a local image if no API is provided
 		response = await fetch('/opengraph/default.png');

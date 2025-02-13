@@ -14,7 +14,6 @@ export function ogImage(url: URL) {
 /**
  * A map of valid route names to their captions. Prevents users from generating invalid opengraph images.
  */
-
 export function getCaption(route: string, network: NetworkState) {
 	switch (route) {
 		case 'send':
