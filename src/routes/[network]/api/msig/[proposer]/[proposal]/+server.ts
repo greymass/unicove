@@ -4,7 +4,7 @@ import { Name } from '@wharfkit/antelope';
 import { getCacheHeaders } from '$lib/utils';
 import type { RequestEvent } from './$types';
 
-export async function GET({ locals: { network }, params }: RequestEvent) {
+export async function GET({ fetch, locals: { network }, params }: RequestEvent) {
 	const scope = Name.from(params.proposer);
 	const name = Name.from(params.proposal);
 
