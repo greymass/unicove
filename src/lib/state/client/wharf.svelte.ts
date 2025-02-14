@@ -53,7 +53,7 @@ const defaultWalletPlugins: WalletPlugin[] = [
 	new WalletPluginTokenPocket(),
 	new WalletPluginWombat(),
 	new WalletPluginWebAuthenticator({
-		webAuthenticatorUrl: 'https://mvp.web-authenticator-a83.pages.dev'
+		webAuthenticatorUrl: 'http://localhost:5173'
 	})
 ];
 
