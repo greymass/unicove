@@ -4,6 +4,7 @@
 	import { createDialog, melt, type CreateDialogProps } from '@melt-ui/svelte';
 	import {
 		Session,
+		type LoginOptions,
 		type NameType,
 		type SerializedSession,
 		type WalletPlugin
@@ -100,10 +101,13 @@
 	}
 
 	async function connectWallet(wallet: WalletPlugin) {
-		const session = await context.wharf.login({
-			chain: context.network.chain,
+		const options: LoginOptions = {
 			walletPlugin: wallet.id
-		});
+		};
+		if (wallet.id !== 'cleos') {
+			options.chain = context.network.chain;
+		}
+		const session = await context.wharf.login(options);
 		redirect(session.actor);
 		closeDrawer();
 	}
