@@ -14,7 +14,9 @@ export const GET: RequestHandler = async ({ locals, url, fetch, params }) => {
 	const API_OPENGRAPH_GENERATOR = env.API_OPENGRAPH_GENERATOR;
 	const API_OPENGRAPH_TOKEN = env.API_OPENGRAPH_TOKEN;
 
-	if (API_OPENGRAPH_GENERATOR) {
+	if (!API_OPENGRAPH_GENERATOR || !API_OPENGRAPH_TOKEN) {
+		response = await fetch('/opengraph/default.png'); // default local image
+	} else {
 		const uri = new URL(API_OPENGRAPH_GENERATOR);
 		uri.searchParams.set('text', text);
 		if (title) uri.searchParams.set('title', title);
@@ -25,9 +27,6 @@ export const GET: RequestHandler = async ({ locals, url, fetch, params }) => {
 				Authorization: `Bearer ${API_OPENGRAPH_TOKEN}`
 			}
 		});
-	} else {
-		// Uses the default local image if no API is provided e.g. dev env
-		response = await fetch('/opengraph/default.png');
 	}
 
 	return new Response(await response.arrayBuffer(), {
