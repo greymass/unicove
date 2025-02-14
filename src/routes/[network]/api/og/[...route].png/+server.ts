@@ -2,12 +2,12 @@ import { env } from '$env/dynamic/private';
 import { PUBLIC_ENVIRONMENT } from '$env/static/public';
 import type { RequestHandler } from './$types';
 import { i18n } from '$lib/i18n';
-import { getCaption } from '$lib/utils/opengraph';
+import { ogImageData } from './data';
 
 export const GET: RequestHandler = async ({ locals, url, fetch, params }) => {
 	const lang = i18n.getLanguageFromUrl(url);
 	const route = params.route;
-	const text = getCaption(route, locals.network);
+	const { text, title, layout } = ogImageData(route, locals.network);
 	const cacheAge = PUBLIC_ENVIRONMENT === 'production' ? 86400 : 300;
 	let response: Response;
 
@@ -17,6 +17,8 @@ export const GET: RequestHandler = async ({ locals, url, fetch, params }) => {
 	if (API_OPENGRAPH_GENERATOR) {
 		const uri = new URL(API_OPENGRAPH_GENERATOR);
 		uri.searchParams.set('text', text);
+		if (title) uri.searchParams.set('title', title);
+		if (layout) uri.searchParams.set('layout', String(layout));
 		uri.searchParams.set('lang', lang);
 		response = await fetch(uri.toString(), {
 			headers: {
@@ -24,7 +26,7 @@ export const GET: RequestHandler = async ({ locals, url, fetch, params }) => {
 			}
 		});
 	} else {
-		// Uses a local image if no API is provided
+		// Uses the default local image if no API is provided e.g. dev env
 		response = await fetch('/opengraph/default.png');
 	}
 

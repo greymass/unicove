@@ -1,7 +1,7 @@
 import { type SeoConfig } from 'svead';
 import { i18n } from '$lib/i18n';
 import * as m from '$lib/paraglide/messages';
-import { ogImage } from '$lib/utils/opengraph';
+import { ogImageUrl } from '$lib/utils/opengraph';
 import type { LayoutServerLoad } from './$types';
 import type { NetworkState } from '$lib/state/network.svelte';
 
@@ -17,7 +17,7 @@ function generateMetadata(url: URL, network: NetworkState): SeoConfig {
 		description: m.og_default_description({
 			network: network.chain.name
 		}),
-		open_graph_image: ogImage(url)
+		open_graph_image: ogImageUrl(url)
 	};
 }
 
