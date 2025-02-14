@@ -60,7 +60,7 @@
 	type FormStates = 'account' | 'publickey' | 'create' | 'complete' | 'error';
 
 	// The events which can modify state
-	type FormEvents = 'next' | 'previous' | 'reset' | 'success' | 'error';
+	type FormEvents = 'next' | 'previous' | 'ready' | 'reset' | 'success' | 'error';
 
 	// For debugging, show all fields
 	const showAll = false;
@@ -69,6 +69,7 @@
 		account: {
 			next: () => 'publickey',
 			reset,
+			ready: () => 'create',
 			_enter: () => tick().then(() => accountRef?.focus())
 		},
 		publickey: {
@@ -110,6 +111,9 @@
 				if (params.has('owner')) {
 					ownerPublicKey = PublicKey.from(params.get('owner') as string);
 					ownerPublicKeyInput?.set(String(ownerPublicKey));
+				}
+				if (params.has('account') && params.has('active') && params.has('owner')) {
+					f.send('ready');
 				}
 			} catch (e) {
 				console.warn('Unable to process URL parameters', params, e);
