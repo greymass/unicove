@@ -60,19 +60,19 @@ export interface ChainConfig {
 }
 
 export type FeatureType =
-	| 'unicovecontracts'
 	| 'delphioracle'
 	| 'directfunding'
 	| 'lightapi'
+	| 'metamask'
+	| 'powerup'
+	| 'rammarket'
+	| 'rentrex'
 	| 'rex'
 	| 'robo'
-	| 'timeseries'
-	| 'rammarket'
-	| 'powerup'
-	| 'rentrex'
 	| 'stakeresource'
 	| 'staking'
-	| 'metamask';
+	| 'timeseries'
+	| 'unicovecontracts';
 
 export function getChainConfigByName(name: string): ChainConfig {
 	const chain = chains.find((c) => c.name === name);
