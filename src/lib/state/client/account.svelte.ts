@@ -11,12 +11,11 @@ import {
 	type NameType
 } from '@wharfkit/antelope';
 import type { REXState } from '@wharfkit/resources';
-import { Account, Resource } from '@wharfkit/account';
+import { Account } from '@wharfkit/account';
 import { TokenMeta, TokenBalance, TokenIdentifier } from '@wharfkit/common';
 
 import * as SystemContract from '$lib/wharf/contracts/system';
-import { type AccountDataSources } from '$lib/types';
-import { chainMapper } from '$lib/wharf/chains';
+import { gifted_ram, type AccountDataSources } from '$lib/types';
 import { NetworkState } from '$lib/state/network.svelte';
 import { calculateValue, isSameToken } from '$lib/utils';
 
@@ -24,6 +23,11 @@ const defaultDataSources: AccountDataSources = {
 	balance: Asset.from('0 '),
 	light_account: [],
 	delegated: [],
+	giftedram: gifted_ram.from({
+		gifter: '',
+		giftee: '',
+		ram_bytes: 0
+	}),
 	proposals: [],
 	refund_request: SystemContract.Types.refund_request.from({
 		owner: '',
@@ -94,15 +98,15 @@ export class AccountState {
 			: []
 	);
 	public delegations = $derived(getDelegations(this.sources));
-	public cpu = $derived.by(() => (this.account ? this.account.resource('cpu') : undefined));
-	public net = $derived.by(() => (this.account ? this.account.resource('net') : undefined));
-	public ram = $derived.by(() => (this.account ? this.account.resource('ram') : undefined));
+
+	public resources = $derived.by(() => getResources(this.sources, this.network));
+
 	public permissions = $derived.by(() => (this.account ? this.account.permissions : undefined));
 	public proposals = $derived.by(() => this.sources.proposals);
 	public refundRequest = $derived.by(() => this.sources.refund_request);
 	public value = $derived.by(() => {
-		return this.network && this.balance && this.ram
-			? getAccountValue(this.network, this.balance, this.ram)
+		return this.network && this.balance && this.resources
+			? getAccountValue(this.network, this.balance, this.resources.ram)
 			: undefined;
 	});
 	public voter: VoterInfo = $state(defaultVoteInfo);
@@ -122,14 +126,13 @@ export class AccountState {
 	}
 
 	async refresh() {
-		const response = await this.fetch(
-			`/${chainMapper.toShortName(String(this.network.chain.id))}/api/account/${this.name}`
-		);
+		const response = await this.fetch(`/${this.network.shortname}/api/account/${this.name}`);
 		const json = await response.json();
 		this.last_update = new Date();
 		this.sources = {
 			get_account: json.get_account,
 			balance: json.balance,
+			giftedram: json.giftedram,
 			light_account: json.balances,
 			delegated: json.delegated,
 			proposals: json.proposals,
@@ -166,14 +169,109 @@ export class AccountState {
 			delegations: this.delegations,
 			permissions: this.permissions,
 			proposals: this.proposals,
-			resources: {
-				cpu: this.cpu,
-				net: this.net,
-				ram: this.ram
-			},
+			resources: this.resources,
 			voter: this.voter
 		};
 	}
+}
+
+export type AccountResourceType = 'cpu' | 'net' | 'ram';
+
+export interface AccountResource {
+	resource: AccountResourceType;
+	available: Int64;
+	used: Int64;
+	max: Int64;
+}
+
+export interface AccountResourceCPU extends AccountResource {
+	resource: 'cpu';
+	current_used: Int64;
+}
+
+export interface AccountResourceNET extends AccountResource {
+	resource: 'net';
+	current_used: Int64;
+}
+
+export interface AccountResourceRAM extends AccountResource {
+	resource: 'ram';
+	gifted: Int64;
+	creator: Int64;
+	system: Int64;
+	balance: Int64;
+	owned: Int64;
+}
+
+export interface AccountResources {
+	cpu: AccountResourceCPU;
+	net: AccountResourceNET;
+	ram: AccountResourceRAM;
+}
+
+export function getResources(
+	sources: AccountDataSources,
+	network?: NetworkState
+): AccountResources {
+	if (!sources.get_account) {
+		throw new Error('Account data sources not initialized');
+	}
+
+	// Original API values
+	const quota = Int64.from(sources.get_account.ram_quota);
+	const usage = Int64.from(sources.get_account.ram_usage);
+	const available = quota.subtracting(usage);
+
+	// A gifted balance from another account (such as the creator)
+	const creator = Int64.from(sources.giftedram ? sources.giftedram.ram_bytes : 0);
+
+	// A gifted balance from the system (typically 1400 bytes)
+	const system = Int64.from(network ? network.resources.ram.gift : 0);
+
+	// Total gifted balance
+	const gifted = creator.adding(system);
+
+	// The amount of RAM this account owns, for value calculation
+	const owned = Int64.from(quota.subtracting(gifted));
+
+	// Calculate RAM (Asset) balance
+	const balance = Int64.from(0);
+
+	// The amount of RAM that can be traded/transferred
+	const giftAvailable = gifted.subtracting(usage);
+	if (giftAvailable.gt(Int64.from(0))) {
+		balance.add(available.subtracting(giftAvailable));
+	} else {
+		balance.add(available);
+	}
+
+	return {
+		cpu: {
+			resource: 'cpu',
+			available: Int64.from(sources.get_account.cpu_limit.available),
+			used: Int64.from(sources.get_account.cpu_limit.used),
+			max: Int64.from(sources.get_account.cpu_limit.max),
+			current_used: Int64.from(sources.get_account.cpu_limit.current_used)
+		},
+		net: {
+			resource: 'net',
+			available: Int64.from(sources.get_account.net_limit.available),
+			used: Int64.from(sources.get_account.net_limit.used),
+			max: Int64.from(sources.get_account.net_limit.max),
+			current_used: Int64.from(sources.get_account.net_limit.current_used)
+		},
+		ram: {
+			resource: 'ram',
+			available,
+			balance,
+			used: usage,
+			max: quota,
+			gifted,
+			creator,
+			system,
+			owned
+		}
+	};
 }
 
 export interface AccountValue {
@@ -190,7 +288,7 @@ export interface AccountValue {
 export function getAccountValue(
 	network: NetworkState,
 	balance: Balance,
-	ramResources: Resource
+	ramResources: AccountResourceRAM
 ): AccountValue {
 	const delegated = Asset.from('0.0000 USD');
 	const liquid = Asset.from('0.0000 USD');
@@ -210,7 +308,7 @@ export function getAccountValue(
 		systemtoken.units.add(calculateValue(balance.total, network.token.price).units);
 		total.units.add(calculateValue(balance.total, network.token.price).units);
 		if (network.resources.ram.price.rammarket) {
-			const ramAsset = Asset.from(`${ramResources.max.dividing(1000)} RAM`);
+			const ramAsset = Asset.fromUnits(ramResources.owned, '3,KB');
 			const ramValue = calculateValue(ramAsset, network.resources.ram.price.rammarket);
 			const ramUsdValue = calculateValue(ramValue, network.token.price);
 			ram.units.add(ramUsdValue.units);

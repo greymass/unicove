@@ -15,9 +15,9 @@
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');
 
-	const cpuAvailableSize = $derived(calAvailableSize(context.account?.cpu));
-	const netAvailableSize = $derived(calAvailableSize(context.account?.net));
-	const ramAvailableSize = $derived(calAvailableSize(context.account?.ram));
+	const cpuAvailableSize = $derived(calAvailableSize(context.account?.resources.cpu));
+	const netAvailableSize = $derived(calAvailableSize(context.account?.resources.net));
+	const ramAvailableSize = $derived(calAvailableSize(context.account?.resources.ram));
 
 	const network = String(data.network);
 	const chainName = data.network.chain.name;

@@ -59,6 +59,7 @@ export interface SystemResourceCPUNET {
 export interface SystemResourceRAM {
 	price: SystemResourceSourcesRAM;
 	supply: UInt64;
+	gift: UInt64;
 }
 
 export interface SystemResources {
@@ -255,7 +256,8 @@ export class NetworkState {
 				price: {
 					rammarket: defaultValue
 				},
-				supply: UInt64.from(0)
+				supply: UInt64.from(0),
+				gift: UInt64.from(this.sources ? this.sources.ram_gift_bytes : 0)
 			}
 		};
 

@@ -31,8 +31,8 @@
 
 	const { rentType, network, account }: Props = $props();
 
-	const cpuAvailableSize = $derived(calAvailableSize(context.account?.cpu));
-	const netAvailableSize = $derived(calAvailableSize(context.account?.net));
+	const cpuAvailableSize = $derived(calAvailableSize(context.account?.resources.cpu));
+	const netAvailableSize = $derived(calAvailableSize(context.account?.resources.net));
 	const usableTime = $derived.by(() => {
 		if (rentType === 'POWERUP') return m.resources_usable_time_24h();
 		if (rentType === 'REX') return m.resources_usable_time_30days();

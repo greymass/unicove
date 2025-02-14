@@ -62,6 +62,7 @@ export interface ChainConfig {
 export type FeatureType =
 	| 'delphioracle'
 	| 'directfunding'
+	| 'giftedram'
 	| 'lightapi'
 	| 'metamask'
 	| 'powerup'

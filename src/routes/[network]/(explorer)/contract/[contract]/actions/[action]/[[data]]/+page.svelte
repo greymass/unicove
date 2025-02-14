@@ -76,7 +76,7 @@
 
 	const serialized = $derived.by(() => {
 		if (Object.keys(restructured).length === 0) {
-			return undefined;
+			return Bytes.from('00');
 		}
 		try {
 			return Serializer.encode({

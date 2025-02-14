@@ -13,11 +13,11 @@
 		<Card>
 			<h4 class="mb-2 text-lg font-semibold">Total:</h4>
 			<ul class="space-y-2">
-				<li><RAM bytes={Number(data.account.ram?.max || 0)} /></li>
+				<li><RAM bytes={Number(data.account.resources.ram.max || 0)} /></li>
 				{#if data.network.resources.ram.price.rammarket}
 					<li>
 						{calculateValue(
-							Asset.fromUnits(data.account.ram?.max, '3,RAM'),
+							Asset.fromUnits(data.account.resources.ram.max, '3,RAM'),
 							data.network.resources.ram.price.rammarket
 						)}
 					</li>
@@ -27,11 +27,25 @@
 		<Card>
 			<h4 class="mb-2 text-lg font-semibold">Available:</h4>
 			<ul class="space-y-2">
-				<li><RAM bytes={Number(data.account.ram?.available || 0)} /></li>
+				<li><RAM bytes={Number(data.account.resources.ram.available || 0)} /></li>
 				{#if data.network.resources.ram.price.rammarket}
 					<li>
 						{calculateValue(
-							Asset.fromUnits(data.account.ram?.available, '3,RAM'),
+							Asset.fromUnits(data.account.resources.ram.available, '3,RAM'),
+							data.network.resources.ram.price.rammarket
+						)}
+					</li>
+				{/if}
+			</ul>
+		</Card>
+		<Card>
+			<h4 class="mb-2 text-lg font-semibold">Usable:</h4>
+			<ul class="space-y-2">
+				<li><RAM bytes={Number(data.account.resources.ram.available || 0)} /></li>
+				{#if data.network.resources.ram.price.rammarket}
+					<li>
+						{calculateValue(
+							Asset.fromUnits(data.account.resources.ram.available, '3,RAM'),
 							data.network.resources.ram.price.rammarket
 						)}
 					</li>
@@ -41,11 +55,11 @@
 		<Card>
 			<h4 class="mb-2 text-lg font-semibold">Used:</h4>
 			<ul class="space-y-2">
-				<li><RAM bytes={Number(data.account.ram?.used || 0)} /></li>
+				<li><RAM bytes={Number(data.account.resources.ram.used || 0)} /></li>
 				{#if data.network.resources.ram.price.rammarket}
 					<li>
 						{calculateValue(
-							Asset.fromUnits(data.account.ram?.used, '3,RAM'),
+							Asset.fromUnits(data.account.resources.ram.used, '3,RAM'),
 							data.network.resources.ram.price.rammarket
 						)}
 					</li>

@@ -34,15 +34,20 @@
 	const tokenTotal = $derived(data.account.balance?.total);
 
 	const ramValue = $derived(data.account.value?.ram);
-	const ramTotal = $derived(Asset.fromUnits(data.account.ram?.max, '3,KB'));
-	const ramUsed = $derived(Asset.fromUnits(data.account.ram?.used, '3,KB'));
-	const ramAvailable = $derived(Asset.fromUnits(data.account.ram?.available, '3,KB'));
+	const ramOwned = $derived(Asset.fromUnits(data.account.resources.ram.owned, '3,KB'));
+	const ramMax = $derived(Asset.fromUnits(data.account.resources.ram.max, '3,KB'));
+	const ramUsed = $derived(Asset.fromUnits(data.account.resources.ram.used, '3,KB'));
+	const ramGifted = $derived(Asset.fromUnits(data.account.resources.ram.gifted, '3,KB'));
+	const ramCreator = $derived(Asset.fromUnits(data.account.resources.ram.creator, '3,KB'));
+	const ramSystem = $derived(Asset.fromUnits(data.account.resources.ram.system, '3,KB'));
+	const ramAvailable = $derived(Asset.fromUnits(data.account.resources.ram.available, '3,KB'));
+	const ramBalance = $derived(Asset.fromUnits(data.account.resources.ram.balance, '3,KB'));
 	const ramPrice = $derived(
 		calculateValue(data.network.resources.ram.price.rammarket, data.network.token.price)
 	);
 
-	const cpuAvailable = $derived(data.account.cpu?.available);
-	const netAvailable = $derived(data.account.net?.available);
+	const cpuAvailable = $derived(data.account.resources.cpu.available);
+	const netAvailable = $derived(data.account.resources.net.available);
 </script>
 
 <!-- What gets shown on this page if data.account doesn't exist? -->
@@ -179,17 +184,28 @@
 				<Breakdown {isCurrentUser}>
 					<BreakdownRow
 						key={m.common_available()}
-						value={ramAvailable}
+						value={ramBalance}
 						action={{
 							text: m.common_ram_market(),
 							href: `/${data.network}/ram`,
 							visible: isCurrentUser
 						}}
 					/>
-
-					<BreakdownRow key={m.common_used()} value={ramUsed} />
-					<BreakdownRow key={m.common_total()} value={ramTotal} />
+					<BreakdownRow key={m.common_total()} value={ramOwned} />
 				</Breakdown>
+
+				{#if context.settings.data.debugMode}
+					<Breakdown title="RAM Usage">
+						<BreakdownRow key={m.common_available()} value={ramAvailable} />
+						<BreakdownRow key={m.common_used()} value={ramUsed} />
+						<BreakdownRow key={m.common_total()} value={ramMax} />
+					</Breakdown>
+					<Breakdown title="Gifted RAM">
+						<BreakdownRow key="Gifted (System)" value={ramSystem} />
+						<BreakdownRow key="Gifted (Creator)" value={ramCreator} />
+						<BreakdownRow key="Total" value={ramGifted} />
+					</Breakdown>
+				{/if}
 			</Stack>
 		</Card>
 

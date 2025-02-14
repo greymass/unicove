@@ -29,7 +29,7 @@
 	const { data } = $props();
 
 	const buyRamState: BuyRAMState = $state(new BuyRAMState(data.network.chain));
-	const ramAvailableSize = $derived(calAvailableSize(context.account?.ram));
+	const ramAvailableSize = $derived(calAvailableSize(context.account?.resources.ram));
 
 	let transactionId: Checksum256 | undefined = $state();
 

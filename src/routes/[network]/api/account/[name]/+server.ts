@@ -62,6 +62,7 @@ async function getAccount(network: NetworkState, account: NameType) {
 
 	let rexfund;
 	let balances: LightAPIBalanceRow[] = [];
+	let giftedram;
 
 	if (network.supports('lightapi')) {
 		balances = await loadBalances(network, account, fetch);
@@ -69,6 +70,10 @@ async function getAccount(network: NetworkState, account: NameType) {
 
 	if (network.supports('rex')) {
 		rexfund = await systemContract.table('rexfund').get(account);
+	}
+
+	if (network.supports('giftedram')) {
+		giftedram = await systemContract.table('giftedram').get(account);
 	}
 
 	// If no response from the light API, add a default balance of zero
@@ -87,6 +92,7 @@ async function getAccount(network: NetworkState, account: NameType) {
 		balance: get_account.core_liquid_balance,
 		balances,
 		delegated,
+		giftedram,
 		proposals,
 		refund_request: get_account.refund_request,
 		rexbal: get_account.rex_info,
@@ -122,6 +128,7 @@ async function getAccount2(network: NetworkState, account: NameType) {
 		balance: getaccount.balance,
 		balances,
 		delegated: getaccount.delegations,
+		giftedram: getaccount.giftedram,
 		proposals: getaccount.proposals,
 		refund_request: getaccount.refund,
 		rexbal: getaccount.rexbal,

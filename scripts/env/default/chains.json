@@ -5,6 +5,7 @@
 		"features": {
 			"delphioracle": true,
 			"directfunding": true,
+			"giftedram": false,
 			"lightapi": true,
 			"metamask": true,
 			"powerup": true,
@@ -41,6 +42,7 @@
 		"features": {
 			"delphioracle": false,
 			"directfunding": false,
+			"giftedram": true,
 			"lightapi": false,
 			"metamask": true,
 			"powerup": true,

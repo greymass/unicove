@@ -52,6 +52,18 @@ export interface ActivityActionWrapper {
 	actionData: string;
 }
 
+// TODO: remove and use system contract version once its deployed
+// Will be available from here: SystemContract.Types.gifted_ram
+@Struct.type('gifted_ram')
+export class gifted_ram extends Struct {
+	@Struct.field(Name)
+	declare giftee: Name;
+	@Struct.field(Name)
+	declare gifter: Name;
+	@Struct.field(Int64)
+	declare ram_bytes: Int64;
+}
+
 export interface AccountDataSources {
 	// Native get_account endpoint (deprecated?)
 	get_account?: API.v1.AccountObject | undefined;
@@ -61,6 +73,8 @@ export interface AccountDataSources {
 	balance: Asset;
 	// Table rows from eosio::delband
 	delegated: SystemContract.Types.delegated_bandwidth[];
+	// Table row from eosio::giftedram
+	giftedram?: gifted_ram;
 	// Table rows from eosio.msig::proposal
 	proposals: MsigContract.Types.proposal[];
 	// Table rows from eosio::refunds
@@ -89,6 +103,7 @@ export class NetworkDataSources extends Struct {
 	@Struct.field(SystemTypes.rex_pool) declare rex: SystemTypes.rex_pool;
 	@Struct.field(SampledUsage, { optional: true }) declare sample?: SampledUsage;
 	@Struct.field(UnicoveTypes.token_supply) declare token: UnicoveTypes.token_supply;
+	@Struct.field(Int64, { optional: true }) declare ram_gift_bytes?: Int64;
 }
 
 export interface LightAPIBalanceRow {
@@ -120,4 +135,5 @@ export interface NetworkResponse {
 	rex: SystemTypes.rex_pool;
 	sample?: SampleUsage;
 	token: UnicoveTypes.token_supply;
+	ram_gift_bytes?: Int64;
 }

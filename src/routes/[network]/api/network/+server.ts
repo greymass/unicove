@@ -1,5 +1,5 @@
 import { json } from '@sveltejs/kit';
-import { Asset, type API, type AssetType } from '@wharfkit/antelope';
+import { Asset, Int64, type API, type AssetType } from '@wharfkit/antelope';
 import type { RAMState, REXState, PowerUpState, SampleUsage } from '@wharfkit/resources';
 
 import { getCacheHeaders } from '$lib/utils';
@@ -140,7 +140,8 @@ async function getNetwork(network: NetworkState): Promise<NetworkResponse> {
 		}),
 		ram: ramstate as SystemTypes.exchange_state,
 		rex: rexstate as SystemTypes.rex_pool,
-		sample: sampleUsage as SampleUsage
+		sample: sampleUsage as SampleUsage,
+		ram_gift_bytes: Int64.from(1400) // Not possible to get from native APIs?
 	};
 
 	if (network.supports('powerup')) {
