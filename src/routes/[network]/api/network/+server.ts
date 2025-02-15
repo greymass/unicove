@@ -25,7 +25,13 @@ type ResponseType =
 export async function GET({ locals: { network } }: RequestEvent) {
 	let response;
 	if (network.supports('unicovecontracts')) {
-		response = await getNetwork2(network);
+		try {
+			response = await getNetwork2(network);
+		} catch (e) {
+			// Fallback to old method on failure
+			console.error('getNetwork2 failure', e);
+			response = await getNetwork(network);
+		}
 	} else {
 		response = await getNetwork(network);
 	}
