@@ -15,7 +15,7 @@ export async function getActivity(
 			start: start,
 			reverse: true
 		});
-	} catch (e) {
+	} catch {
 		throw new Error(`Error while loading activity for ${name}.`);
 	}
 
