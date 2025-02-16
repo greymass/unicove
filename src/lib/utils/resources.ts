@@ -1,4 +1,4 @@
-import type { AccountResource } from '$lib/state/client/account.svelte';
+import type { AccountResource } from '$lib/types';
 
 export const calAvailableSize = (resource?: AccountResource) => {
 	let size = 0;
