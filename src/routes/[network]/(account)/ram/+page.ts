@@ -1,18 +1,14 @@
 import { Asset } from '@wharfkit/antelope';
 
-import type { LoadEvent } from '@sveltejs/kit';
 import type { HistoricalPrice } from '$lib/types';
+import type { PageLoad } from './$types';
 
-interface LoadData {
-	historicalPrices: HistoricalPrice[];
-}
-
-export async function load({ fetch, parent }: LoadEvent): Promise<LoadData> {
+export const load: PageLoad = async ({ parent }) => {
 	const { network } = await parent();
 
 	let historicalPrices: HistoricalPrice[] = [];
 
-	if (network.supports('metrics')) {
+	if (network.supports('timeseries')) {
 		try {
 			const response: Response = await fetch(`/${network}/api/metrics/marketprice/ram`);
 			const parsedResponse: { date: string; value: number }[] | { error: string } =
@@ -31,4 +27,4 @@ export async function load({ fetch, parent }: LoadEvent): Promise<LoadData> {
 	}
 
 	return { historicalPrices };
-}
+};
