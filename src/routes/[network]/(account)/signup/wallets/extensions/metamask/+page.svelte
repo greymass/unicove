@@ -45,6 +45,8 @@
 				pluginId: 'account-creation-plugin-metamask'
 			});
 			await wharf.login({
+				chain: accountCreationResponse.chain,
+				permissionLevel: `${accountCreationResponse.accountName}@active`,
 				walletPlugin: 'wallet-plugin-metamask'
 			});
 		} catch (error) {
