@@ -78,14 +78,31 @@ export interface SystemResourceSourcesRAM {
 	rammarket: Asset;
 }
 
+interface ChainConnectionState {
+	connected: boolean;
+	endpoint: string;
+	updated: Date;
+}
+
+const initialChainConnectionState = {
+	connected: false,
+	endpoint: '',
+	updated: new Date()
+};
+
+export interface SerializedNetworkState {
+	config: ChainConfig;
+	sources?: NetworkDataSources;
+}
+
 export class NetworkState {
 	private sources?: NetworkDataSources = $state();
 
 	public client: APIClient;
 	public chain: ChainDefinition;
 	public config: ChainConfig;
+	public connection: ChainConnectionState = $state(initialChainConnectionState);
 	public fetch = fetch;
-	public last_update: Date = $state(new Date());
 	public loaded = $state(false);
 	public shortname: string;
 	public snapOrigin?: string = $state();
@@ -97,6 +114,7 @@ export class NetworkState {
 
 	public resources: SystemResources = $state() as SystemResources;
 	public resourceClient?: ResourceClient = $state();
+	public rex?: REXState = $state();
 
 	public token: SystemToken = $state() as SystemToken;
 	public tokenmeta?: TokenMeta[] = $state();
@@ -142,7 +160,7 @@ export class NetworkState {
 			this.client = options.client;
 		} else {
 			this.client = new APIClient(
-				new FetchProvider(this.chain.url, {
+				new FetchProvider(this.config.endpoints.api, {
 					fetch: this.fetch
 				})
 			);
@@ -162,15 +180,40 @@ export class NetworkState {
 			token: new TokenContract({ client: this.client }),
 			unicove: new UnicoveContract({ client: this.client })
 		};
+
+		this.connection.endpoint = (this.client.provider as FetchProvider).url;
+	}
+
+	static restore(
+		serialized: SerializedNetworkState,
+		options: NetworkStateOptions = {}
+	): NetworkState {
+		const state = new NetworkState(serialized.config, options);
+		if (serialized.sources) {
+			state.setState(serialized.sources);
+		}
+		return state;
 	}
 
 	async refresh() {
 		const response = await this.fetch(
 			`/${chainMapper.toShortName(String(this.chain.id))}/api/network`
 		);
-		const json = await response.json();
-		this.sources = NetworkDataSources.from(json);
-		this.last_update = new Date();
+		this.connection.updated = new Date();
+		if (response.ok) {
+			this.connection.connected = true;
+			const json = await response.json();
+			this.setState(json);
+			this.loaded = true;
+		} else {
+			this.connection.connected = false;
+		}
+	}
+
+	setState(state: NetworkDataSources) {
+		this.sources = NetworkDataSources.from(state);
+
+		this.rex = REXState.from(this.sources.rex);
 
 		const { circulating, def, supply, locked, max } = this.sources.token;
 
@@ -191,30 +234,39 @@ export class NetworkState {
 
 		this.resources = this.getResources();
 		this.tvl = this.calculateTvl();
+	}
 
-		this.loaded = true;
+	get serialized(): SerializedNetworkState {
+		return this.getState();
+	}
+
+	getState(): SerializedNetworkState {
+		return {
+			config: this.config,
+			sources: this.sources
+		};
 	}
 
 	supports = (feature: FeatureType): boolean => this.config.features[feature];
 
-	tokenToRex = (token: AssetType) => {
-		if (!this.sources?.rex) {
-			throw new Error('REX state not initialized');
+	tokenToRex = (token: AssetType): Asset => {
+		if (!this.rex) {
+			return Asset.fromUnits(0, this.token.definition.symbol);
 		}
 		const asset = Asset.from(token);
-		const { total_lendable, total_rex } = REXState.from(this.sources.rex);
+		const { total_lendable, total_rex } = this.rex;
 		const S1 = total_lendable.units.adding(asset.units);
 		const R1 = Int128.from(S1).multiplying(total_rex.units).dividing(total_lendable.units);
 		const result = R1.subtracting(total_rex.units);
 		return Asset.fromUnits(result, total_rex.symbol);
 	};
 
-	rexToToken = (rex: AssetType) => {
-		if (!this.sources?.rex) {
-			throw new Error('REX state not initialized');
+	rexToToken = (rex: AssetType): Asset => {
+		if (!this.rex) {
+			return Asset.fromUnits(0, this.token.definition.symbol);
 		}
 		const asset = Asset.from(rex);
-		const { total_lendable, total_rex } = REXState.from(this.sources.rex);
+		const { total_lendable, total_rex } = this.rex;
 		const R1 = total_rex.units.adding(asset.units);
 		const S1 = Int128.from(R1).multiplying(total_lendable.units).dividing(total_rex.units);
 		const result = S1.subtracting(total_lendable.units);
@@ -281,14 +333,13 @@ export class NetworkState {
 			);
 		}
 
-		if (this.supports('rentrex') && this.sources?.rex && this.sources?.sample) {
-			const rstate = REXState.from(this.sources.rex);
+		if (this.supports('rentrex') && this.rex && this.sources?.sample) {
 			response.cpu.price.rex = Asset.from(
-				rstate.cpu_price_per_ms(this.sources.sample, 30),
+				this.rex.cpu_price_per_ms(this.sources.sample, 30),
 				this.token.definition.symbol
 			);
 			response.net.price.rex = Asset.from(
-				rstate.net_price_per_kb(this.sources.sample, 30),
+				this.rex.net_price_per_kb(this.sources.sample, 30),
 				this.token.definition.symbol
 			);
 		}
@@ -327,7 +378,7 @@ export class NetworkState {
 			abis: this.abis?.cache,
 			chain: this.chain,
 			config: this.config,
-			last_update: this.last_update,
+			connection: this.connection,
 			loaded: this.loaded,
 			resources: this.resources,
 			shortname: this.shortname,
@@ -343,8 +394,8 @@ export function getNetwork(config: ChainConfig, options: NetworkStateOptions = {
 	return new NetworkState(config, options);
 }
 
-export function getNetworkFromParams(network: string, fetch?: typeof window.fetch): NetworkState {
-	const config = getChainConfigByName(network);
+export function getNetworkByName(name: string, fetch?: typeof window.fetch): NetworkState {
+	const config = getChainConfigByName(name);
 	const state = getNetwork(config, { fetch });
 	return state;
 }

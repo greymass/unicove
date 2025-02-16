@@ -13,10 +13,8 @@ import {
 } from '@wharfkit/antelope';
 import type { SampleUsage } from '@wharfkit/resources';
 
-import * as MsigContract from '$lib/wharf/contracts/msig';
-import * as SystemContract from '$lib/wharf/contracts/system';
-
 import { Types as DelphioracleTypes } from '$lib/wharf/contracts/delphioracle';
+import { Types as MsigTypes } from '$lib/wharf/contracts/msig';
 import { Types as SystemTypes } from '$lib/wharf/contracts/system';
 import { Types as UnicoveTypes } from '$lib/wharf/contracts/unicove';
 
@@ -53,7 +51,7 @@ export interface ActivityActionWrapper {
 }
 
 // TODO: remove and use system contract version once its deployed
-// Will be available from here: SystemContract.Types.gifted_ram
+// Will be available from here: SystemTypes.gifted_ram
 @Struct.type('gifted_ram')
 export class gifted_ram extends Struct {
 	@Struct.field(Name)
@@ -66,23 +64,23 @@ export class gifted_ram extends Struct {
 
 export interface AccountDataSources {
 	// Native get_account endpoint (deprecated?)
-	get_account?: API.v1.AccountObject | undefined;
+	get_account: API.v1.AccountObject;
 	// Light API balances call
-	light_account: LightAPIBalanceRow[];
+	light_api: LightAPIBalanceRow[];
 	// Table rows from eosio.token::accounts
 	balance: Asset;
 	// Table rows from eosio::delband
-	delegated: SystemContract.Types.delegated_bandwidth[];
+	delegated: SystemTypes.delegated_bandwidth[];
 	// Table row from eosio::giftedram
 	giftedram?: gifted_ram;
 	// Table rows from eosio.msig::proposal
-	proposals: MsigContract.Types.proposal[];
+	proposals: MsigTypes.proposal[];
 	// Table rows from eosio::refunds
-	refund_request: SystemContract.Types.refund_request;
+	refund_request: SystemTypes.refund_request;
 	// Table row from eosio::rexbal
-	rexbal: SystemContract.Types.rex_balance;
+	rexbal: SystemTypes.rex_balance;
 	// Table row from eosio::rexfund
-	rexfund: SystemContract.Types.rex_fund;
+	rexfund: SystemTypes.rex_fund;
 }
 
 @Struct.type('sampledusage')
@@ -136,4 +134,38 @@ export interface NetworkResponse {
 	sample?: SampleUsage;
 	token: UnicoveTypes.token_supply;
 	ram_gift_bytes?: Int64;
+}
+
+export type AccountResourceType = 'cpu' | 'net' | 'ram';
+
+export interface AccountResource {
+	resource: AccountResourceType;
+	available: Int64;
+	used: Int64;
+	max: Int64;
+}
+
+export interface AccountResourceCPU extends AccountResource {
+	resource: 'cpu';
+	current_used: Int64;
+}
+
+export interface AccountResourceNET extends AccountResource {
+	resource: 'net';
+	current_used: Int64;
+}
+
+export interface AccountResourceRAM extends AccountResource {
+	resource: 'ram';
+	gifted: Int64;
+	creator: Int64;
+	system: Int64;
+	balance: Int64;
+	owned: Int64;
+}
+
+export interface AccountResources {
+	cpu: AccountResourceCPU;
+	net: AccountResourceNET;
+	ram: AccountResourceRAM;
 }

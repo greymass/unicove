@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Asset } from '@wharfkit/antelope';
 	import { TokenBalance } from '@wharfkit/common';
-	import { Checksum256 } from '@wharfkit/session';
+	import { Checksum256 } from '@wharfkit/antelope';
 	import { getContext, tick } from 'svelte';
 	import { FiniteStateMachine } from 'runed';
 	import * as m from '$lib/paraglide/messages.js';

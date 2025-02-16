@@ -15,13 +15,58 @@ import { Account } from '@wharfkit/account';
 import { TokenMeta, TokenBalance, TokenIdentifier } from '@wharfkit/common';
 
 import * as SystemContract from '$lib/wharf/contracts/system';
-import { gifted_ram, type AccountDataSources } from '$lib/types';
-import { NetworkState } from '$lib/state/network.svelte';
+import {
+	gifted_ram,
+	type AccountDataSources,
+	type AccountResourceRAM,
+	type AccountResources
+} from '$lib/types';
+import { NetworkState, type SerializedNetworkState } from '$lib/state/network.svelte';
 import { calculateValue, isSameToken } from '$lib/utils';
 
 const defaultDataSources: AccountDataSources = {
+	get_account: API.v1.AccountObject.from({
+		account_name: '',
+		head_block_num: 0,
+		head_block_time: '1970-01-01T00:00:00.000',
+		privileged: false,
+		last_code_update: '1970-01-01T00:00:00.000',
+		created: '1970-01-01T00:00:00.000',
+		ram_quota: 0,
+		net_weight: 0,
+		cpu_weight: 0,
+		net_limit: {
+			used: 0,
+			available: 0,
+			max: 0,
+			last_usage_update_time: '1970-01-01T00:00:00.000',
+			current_used: 0
+		},
+		cpu_limit: {
+			used: 0,
+			available: 0,
+			max: 0,
+			last_usage_update_time: '1970-01-01T00:00:00.000',
+			current_used: 0
+		},
+		subjective_cpu_bill_limit: {
+			used: 0,
+			available: 0,
+			max: 0,
+			last_usage_update_time: '1970-01-01T00:00:00.000',
+			current_used: 0
+		},
+		ram_usage: 0,
+		permissions: [],
+		total_resources: {
+			owner: '',
+			net_weight: '0.0000 EOS',
+			cpu_weight: '0.0000 EOS',
+			ram_bytes: 0
+		}
+	}),
 	balance: Asset.from('0 '),
-	light_account: [],
+	light_api: [],
 	delegated: [],
 	giftedram: gifted_ram.from({
 		gifter: '',
@@ -68,6 +113,12 @@ const defaultVoteInfo: VoterInfo = {
 	staked: Int64.from(0)
 };
 
+export interface SerializedAccountState {
+	name: string;
+	network: SerializedNetworkState;
+	sources: AccountDataSources;
+}
+
 export class AccountState {
 	public client?: APIClient = $state();
 	public fetch = $state(fetch);
@@ -76,7 +127,7 @@ export class AccountState {
 	private sources: AccountDataSources = $state(defaultDataSources);
 
 	public account: Account | undefined = $state();
-	public name: Name | undefined = $state();
+	public name: Name = $state(Name.from(''));
 	public last_update: Date = $state(new Date());
 	public contract: boolean = $derived(
 		Number(new Date(`${this.sources?.get_account?.last_code_update}z`)) > 0
@@ -127,31 +178,47 @@ export class AccountState {
 
 	async refresh() {
 		const response = await this.fetch(`/${this.network.shortname}/api/account/${this.name}`);
-		const json = await response.json();
+		if (response.ok) {
+			const json = await response.json();
+			this.setState(json);
+		}
+	}
+
+	get serialized(): SerializedAccountState {
+		return {
+			name: String(this.name),
+			network: this.network.serialized,
+			sources: this.sources
+		};
+	}
+
+	setState(data: AccountDataSources) {
 		this.last_update = new Date();
 		this.sources = {
-			get_account: json.get_account,
-			balance: json.balance,
-			giftedram: json.giftedram,
-			light_account: json.balances,
-			delegated: json.delegated,
-			proposals: json.proposals,
-			refund_request: json.refund_request,
-			rexbal: json.rexbal,
-			rexfund: json.rexfund
+			get_account: data.get_account,
+			balance: data.balance,
+			giftedram: data.giftedram,
+			light_api: data.light_api,
+			delegated: data.delegated,
+			proposals: data.proposals,
+			refund_request: data.refund_request,
+			rexbal: data.rexbal,
+			rexfund: data.rexfund
 		};
 		this.account = new Account({
 			client: this.network.client,
-			data: API.v1.AccountObject.from(json.get_account)
+			data: API.v1.AccountObject.from(this.sources.get_account)
 		});
-		if (json.get_account.voter_info) {
+		if (data.get_account && data.get_account.voter_info) {
 			this.voter = {
-				isProxy: json.get_account.voter_info.is_proxy,
-				proxy: Name.from(json.get_account.voter_info.proxy),
-				proxyWeight: Float64.from(json.get_account.voter_info.proxied_vote_weight),
-				weight: Float64.from(json.get_account.voter_info.last_vote_weight),
-				votes: json.get_account.voter_info.producers.map((producer: string) => Name.from(producer)),
-				staked: Int64.from(json.get_account.voter_info.staked)
+				isProxy: data.get_account.voter_info.is_proxy,
+				proxy: Name.from(data.get_account.voter_info.proxy),
+				proxyWeight: Float64.from(data.get_account.voter_info.proxied_vote_weight),
+				weight: Float64.from(data.get_account.voter_info.last_vote_weight),
+				votes: data.get_account.voter_info.producers.map((producer: NameType) =>
+					Name.from(producer)
+				),
+				staked: Int64.from(data.get_account.voter_info.staked)
 			};
 		}
 		this.loaded = true;
@@ -175,48 +242,10 @@ export class AccountState {
 	}
 }
 
-export type AccountResourceType = 'cpu' | 'net' | 'ram';
-
-export interface AccountResource {
-	resource: AccountResourceType;
-	available: Int64;
-	used: Int64;
-	max: Int64;
-}
-
-export interface AccountResourceCPU extends AccountResource {
-	resource: 'cpu';
-	current_used: Int64;
-}
-
-export interface AccountResourceNET extends AccountResource {
-	resource: 'net';
-	current_used: Int64;
-}
-
-export interface AccountResourceRAM extends AccountResource {
-	resource: 'ram';
-	gifted: Int64;
-	creator: Int64;
-	system: Int64;
-	balance: Int64;
-	owned: Int64;
-}
-
-export interface AccountResources {
-	cpu: AccountResourceCPU;
-	net: AccountResourceNET;
-	ram: AccountResourceRAM;
-}
-
 export function getResources(
 	sources: AccountDataSources,
 	network?: NetworkState
 ): AccountResources {
-	if (!sources.get_account) {
-		throw new Error('Account data sources not initialized');
-	}
-
 	// Original API values
 	const quota = Int64.from(sources.get_account.ram_quota);
 	const usage = Int64.from(sources.get_account.ram_usage);
@@ -419,14 +448,14 @@ export function getBalances(
 	tokenmeta?: TokenMeta[],
 	liquid?: Asset
 ): TokenBalance[] {
-	if (sources.light_account) {
+	if (sources.light_api) {
 		const balances: TokenBalance[] = [];
 
 		//If the value of system token is 0,
 		//for example, the chain does not support lightapi.
 		//replace it with the value of liquid
-		sources.light_account?.forEach((lightAccount) => {
-			let amount = lightAccount.amount;
+		sources.light_api?.forEach((balance) => {
+			let amount = balance.amount;
 			if (
 				!Number(amount) &&
 				network.chain.systemToken &&
@@ -436,16 +465,16 @@ export function getBalances(
 						symbol: network.chain.systemToken.symbol.name
 					},
 					{
-						contract: lightAccount.contract,
-						symbol: lightAccount.currency
+						contract: balance.contract,
+						symbol: balance.currency
 					}
 				) &&
 				liquid
 			) {
 				amount = liquid.quantity;
 			}
-			const asset = Asset.from(`${amount} ${lightAccount.currency}`);
-			const contract = Name.from(lightAccount.contract);
+			const asset = Asset.from(`${amount} ${balance.currency}`);
+			const contract = Name.from(balance.contract);
 			const id = TokenIdentifier.from({
 				chain: chain,
 				contract: contract,

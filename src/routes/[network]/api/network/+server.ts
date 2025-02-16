@@ -22,18 +22,39 @@ type ResponseType =
 	| UnicoveTypes.get_network_response
 	| undefined;
 
+async function getNativeResponse(network: NetworkState): Promise<NetworkResponse> {
+	return getNetworkNative(network);
+}
+
+async function getContractResponse(network: NetworkState): Promise<NetworkResponse> {
+	try {
+		return getNetworkContract(network);
+	} catch (e) {
+		// Fallback to old method on failure
+		console.error('getNetworkContract failure', e);
+		return getNativeResponse(network);
+	}
+}
+
 export async function GET({ locals: { network } }: RequestEvent) {
 	let response;
-	if (network.supports('unicovecontracts')) {
-		try {
-			response = await getNetwork2(network);
-		} catch (e) {
-			// Fallback to old method on failure
-			console.error('getNetwork2 failure', e);
-			response = await getNetwork(network);
+	try {
+		if (network.supports('unicovecontracts')) {
+			response = await getContractResponse(network);
+		} else {
+			response = await getNetworkNative(network);
 		}
-	} else {
-		response = await getNetwork(network);
+	} catch (e) {
+		console.error('GET network error', e);
+		return json(
+			{
+				ts: new Date(),
+				error: String(e)
+			},
+			{
+				status: 500
+			}
+		);
 	}
 
 	const headers = getCacheHeaders(5);
@@ -57,7 +78,7 @@ function getResponse(list: ResponseType[], index: number) {
 	return index >= 0 && list.length > index ? list[index] : undefined;
 }
 
-async function getNetwork(network: NetworkState): Promise<NetworkResponse> {
+async function getNetworkNative(network: NetworkState): Promise<NetworkResponse> {
 	const requests: Promise<ResponseType>[] = [];
 	let globalStateIndex = -1;
 	let lockedsupplyIndex = -1;
@@ -161,7 +182,7 @@ async function getNetwork(network: NetworkState): Promise<NetworkResponse> {
 	return response;
 }
 
-async function getNetwork2(network: NetworkState): Promise<NetworkResponse> {
+async function getNetworkContract(network: NetworkState): Promise<NetworkResponse> {
 	let oracle: DelphioracleTypes.datapoints | undefined;
 	let sample: SampleUsage | undefined;
 
