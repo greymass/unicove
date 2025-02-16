@@ -1,7 +1,6 @@
+import { API, Checksum256 } from '@wharfkit/antelope';
 import {
 	AbstractTransactPlugin,
-	API,
-	Checksum256,
 	TransactContext,
 	type TransactHookResponseType,
 	TransactHookTypes,

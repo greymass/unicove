@@ -1,10 +1,10 @@
 import { ChainDefinition } from '@wharfkit/common';
 import ContractKit, { type ActionDataType } from '@wharfkit/contract';
+import { type NameType, Name, Serializer, Transaction } from '@wharfkit/antelope';
 import {
 	type AccountCreationPlugin,
 	type CreateAccountOptions,
 	type LoginOptions,
-	type NameType,
 	type RestoreArgs,
 	type SerializedSession,
 	type TransactArgs,
@@ -12,11 +12,8 @@ import {
 	type TransactPlugin,
 	type TransactResult,
 	type WalletPlugin,
-	Name,
-	Serializer,
 	Session,
-	SessionKit,
-	Transaction
+	SessionKit
 } from '@wharfkit/session';
 import WebRenderer from '@wharfkit/web-renderer';
 

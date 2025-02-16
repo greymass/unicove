@@ -9,7 +9,8 @@
 	import TransactionSummary from '$lib/components/transactionSummary.svelte';
 	import CpuAndNetResource from '$lib/components/elements/cpunetresource.svelte';
 
-	import { Checksum256, type TransactResult } from '@wharfkit/session';
+	import { Checksum256 } from '@wharfkit/antelope';
+	import { type TransactResult } from '@wharfkit/session';
 
 	import { getContext } from 'svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';

@@ -9,7 +9,7 @@ import {
 } from '@wharfkit/antelope';
 import { ChainDefinition, TokenMeta, TokenIdentifier } from '@wharfkit/common';
 import { RAMState, Resources as ResourceClient, REXState, PowerUpState } from '@wharfkit/resources';
-import { ABICache } from '@wharfkit/session';
+import { ABICache } from '@wharfkit/abicache';
 import { snapOrigins } from '@wharfkit/wallet-plugin-metamask';
 
 import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';

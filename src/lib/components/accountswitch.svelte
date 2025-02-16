@@ -2,10 +2,10 @@
 	import { getContext } from 'svelte';
 	import { fade, fly } from 'svelte/transition';
 	import { createDialog, melt, type CreateDialogProps } from '@melt-ui/svelte';
+	import { type NameType } from '@wharfkit/antelope';
 	import {
 		Session,
 		type LoginOptions,
-		type NameType,
 		type SerializedSession,
 		type WalletPlugin
 	} from '@wharfkit/session';
