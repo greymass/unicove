@@ -114,7 +114,6 @@ export class UnstakeManager {
 			if (!this.txid) {
 				this.error = 'no txid';
 			}
-			console.log(`txid: ${this.txid}`);
 		} catch (error) {
 			this.error = String(error);
 		}

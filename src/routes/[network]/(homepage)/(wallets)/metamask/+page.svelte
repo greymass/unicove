@@ -106,8 +106,6 @@
 				chain: data.network.chain,
 				pluginId: 'account-creation-plugin-metamask'
 			});
-			console.log(`Account created: ${accountCreationResponse.accountName}`);
-
 			await context.wharf.login({
 				permissionLevel: `${accountCreationResponse.accountName}@active`,
 				walletPlugin: 'wallet-plugin-metamask'

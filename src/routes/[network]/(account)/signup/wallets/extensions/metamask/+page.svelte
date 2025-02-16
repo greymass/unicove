@@ -44,8 +44,6 @@
 				chain: getChainDefinitionFromParams($page.params.network),
 				pluginId: 'account-creation-plugin-metamask'
 			});
-			console.log(`Account created: ${accountCreationResponse.accountName}`);
-
 			await wharf.login({
 				walletPlugin: 'wallet-plugin-metamask'
 			});

@@ -67,7 +67,7 @@
 			try {
 				obj[parts[parts.length - 1]] = JSON.parse(actionInputs[key] as string);
 			} catch (e) {
-				console.log(e);
+				console.warn('restructured error', e);
 				obj[parts[parts.length - 1]] = actionInputs[key];
 			}
 			return acc;
@@ -85,7 +85,7 @@
 				type: String(data.action.name)
 			});
 		} catch (e) {
-			console.log(e);
+			console.warn('serialized error', e);
 			return undefined;
 		}
 	});
@@ -101,7 +101,7 @@
 				type: String(data.action.name)
 			});
 		} catch (e) {
-			console.log(e);
+			console.warn('decoded error', e);
 			return undefined;
 		}
 	});
@@ -194,7 +194,7 @@
 				}
 			}
 		} catch (e) {
-			console.log('Error decoding action:', e);
+			console.error('Error decoding action:', e);
 		}
 		ready = true;
 	});
