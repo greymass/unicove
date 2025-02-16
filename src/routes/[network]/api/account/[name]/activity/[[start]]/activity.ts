@@ -8,16 +8,16 @@ export async function getActivity(
 	start: number
 ): Promise<Activity> {
 	const robo = new RoborovskiClient(client);
-	let response: API.v1.GetActionsResponse;
-	try {
-		response = await robo.get_actions(name, {
-			limit: 20,
-			start: start,
-			reverse: true
-		});
-	} catch {
-		throw new Error(`Error while loading activity for ${name}.`);
-	}
+	// let response: API.v1.GetActionsResponse;
+	// try {
+	const response = await robo.get_actions(name, {
+		limit: 20,
+		start: start,
+		reverse: true
+	});
+	// } catch (e) {
+	// 	throw new Error(`Error while loading activity for ${name}.`);
+	// }
 
 	return Serializer.objectify({
 		actions: response.actions.map((action) => {
