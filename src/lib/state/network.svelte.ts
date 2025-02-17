@@ -33,7 +33,7 @@ import { calculateValue } from '$lib/utils';
 
 import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
 import { Contract as MSIGContract } from '$lib/wharf/contracts/msig';
-import { Contract as SystemContract } from '$lib/wharf/contracts/system';
+import { Contract as SystemContract, Types as SystemTypes } from '$lib/wharf/contracts/system';
 import { Contract as TokenContract } from '$lib/wharf/contracts/token';
 import { Contract as UnicoveContract, Types as UnicoveTypes } from '$lib/wharf/contracts/unicove';
 import { defaultPrice, defaultPriceSymbol } from './defaults/network';
@@ -54,7 +54,7 @@ export class NetworkState {
 
 	// Derived network state
 	readonly resources = $derived(this.getResources());
-	readonly rex = $derived(REXState.from(this.sources?.rex));
+	readonly rex = $derived(this.getRexState());
 	readonly token = $derived.by(() => this.getSystemToken());
 	readonly tvl = $derived(this.calculateTvl());
 
@@ -188,11 +188,31 @@ export class NetworkState {
 		});
 	}
 
+	getRexState() {
+		if (this.sources?.rex) {
+			return REXState.from(this.sources.rex);
+		}
+		return this.defaultRexState;
+	}
+
+	get defaultRexState(): REXState {
+		return REXState.from({
+			loan_num: 0,
+			namebid_proceeds: Asset.fromUnits(0, this.config.systemtoken.symbol),
+			total_lendable: Asset.fromUnits(0, this.config.systemtoken.symbol),
+			total_lent: Asset.fromUnits(0, this.config.systemtoken.symbol),
+			total_rent: Asset.fromUnits(0, this.config.systemtoken.symbol),
+			total_rex: Asset.fromUnits(0, this.config.systemtoken.symbol),
+			total_unlent: Asset.fromUnits(0, this.config.systemtoken.symbol),
+			version: 0
+		});
+	}
+
 	supports = (feature: FeatureType): boolean => this.config.features[feature];
 
 	tokenToRex = (token: AssetType): Asset => {
-		if (!this.rex) {
-			return Asset.fromUnits(0, this.token.definition.symbol);
+		if (!this.supports('rex')) {
+			throw new Error(`The ${this.shortname} network does not support REX.`);
 		}
 		const asset = Asset.from(token);
 		const { total_lendable, total_rex } = this.rex;
@@ -203,8 +223,8 @@ export class NetworkState {
 	};
 
 	rexToToken = (rex: AssetType): Asset => {
-		if (!this.rex) {
-			return Asset.fromUnits(0, this.token.definition.symbol);
+		if (!this.supports('rex')) {
+			throw new Error(`The ${this.shortname} network does not support REX.`);
 		}
 		const asset = Asset.from(rex);
 		const { total_lendable, total_rex } = this.rex;
@@ -215,6 +235,9 @@ export class NetworkState {
 	};
 
 	getPowerupFrac = (cpu: number, net: number): [number, number] => {
+		if (!this.supports('powerup')) {
+			throw new Error(`The ${this.shortname} network does not support powerup.`);
+		}
 		if (!this.sources?.powerup) {
 			throw new Error('PowerUp state not initialized');
 		}
