@@ -7,7 +7,7 @@ import { Types as DelphioracleTypes } from '$lib/wharf/contracts/delphioracle.js
 import { Types as SystemTypes } from '$lib/wharf/contracts/system';
 import { Types as UnicoveTypes } from '$lib/wharf/contracts/unicove';
 import type { NetworkState } from '$lib/state/network.svelte';
-import type { NetworkResponse } from '$lib/types/network';
+import { NetworkDataSources } from '$lib/types/network';
 import type { RequestEvent } from './$types';
 
 type ResponseType =
@@ -22,11 +22,11 @@ type ResponseType =
 	| UnicoveTypes.get_network_response
 	| undefined;
 
-async function getNativeResponse(network: NetworkState): Promise<NetworkResponse> {
+async function getNativeResponse(network: NetworkState): Promise<NetworkDataSources> {
 	return getNetworkNative(network);
 }
 
-async function getContractResponse(network: NetworkState): Promise<NetworkResponse> {
+async function getContractResponse(network: NetworkState): Promise<NetworkDataSources> {
 	try {
 		return getNetworkContract(network);
 	} catch (e) {
@@ -57,15 +57,13 @@ export async function GET({ locals: { network } }: RequestEvent) {
 		);
 	}
 
-	const headers = getCacheHeaders(5);
-
 	return json(
 		{
 			ts: new Date(),
 			...response
 		},
 		{
-			headers
+			headers: getCacheHeaders(5)
 		}
 	);
 }
@@ -78,7 +76,7 @@ function getResponse(list: ResponseType[], index: number) {
 	return index >= 0 && list.length > index ? list[index] : undefined;
 }
 
-async function getNetworkNative(network: NetworkState): Promise<NetworkResponse> {
+async function getNetworkNative(network: NetworkState): Promise<NetworkDataSources> {
 	const requests: Promise<ResponseType>[] = [];
 	let globalStateIndex = -1;
 	let lockedsupplyIndex = -1;
@@ -153,23 +151,25 @@ async function getNetworkNative(network: NetworkState): Promise<NetworkResponse>
 		supply.supply.symbol
 	);
 
-	const response: NetworkResponse = {
+	const token = UnicoveTypes.token_supply.from({
+		def: {
+			contract: network.chain.systemToken!.contract,
+			symbol: network.chain.systemToken!.symbol
+		},
+		circulating,
+		locked: lockedsupply,
+		supply: supply.supply,
+		max: supply.max_supply
+	});
+
+	const response = NetworkDataSources.from({
 		global: globalstate as SystemTypes.eosio_global_state,
-		token: UnicoveTypes.token_supply.from({
-			def: {
-				contract: network.chain.systemToken!.contract,
-				symbol: network.chain.systemToken!.symbol
-			},
-			circulating,
-			locked: lockedsupply,
-			supply: supply.supply,
-			max: supply.max_supply
-		}),
+		token,
 		ram: ramstate as SystemTypes.exchange_state,
 		rex: rexstate as SystemTypes.rex_pool,
 		sample: sampleUsage as SampleUsage,
 		ram_gift_bytes: Int64.from(1400) // Not possible to get from native APIs?
-	};
+	});
 
 	if (network.supports('powerup')) {
 		response.powerup = powerupstate as SystemTypes.powerup_state;
@@ -182,7 +182,7 @@ async function getNetworkNative(network: NetworkState): Promise<NetworkResponse>
 	return response;
 }
 
-async function getNetworkContract(network: NetworkState): Promise<NetworkResponse> {
+async function getNetworkContract(network: NetworkState): Promise<NetworkDataSources> {
 	let oracle: DelphioracleTypes.datapoints | undefined;
 	let sample: SampleUsage | undefined;
 
@@ -203,9 +203,9 @@ async function getNetworkContract(network: NetworkState): Promise<NetworkRespons
 		oracle = await network.contracts.delphioracle.table('datapoints', 'eosusd').get();
 	}
 
-	return {
+	return NetworkDataSources.from({
 		...networkState,
 		oracle,
 		sample
-	};
+	});
 }

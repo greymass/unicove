@@ -40,17 +40,6 @@ export class NetworkDataSources extends Struct {
 	@Struct.field(Int64, { optional: true }) declare ram_gift_bytes?: Int64;
 }
 
-export interface NetworkResponse {
-	global: SystemTypes.eosio_global_state;
-	oracle?: DelphioracleTypes.datapoints;
-	powerup?: SystemTypes.powerup_state;
-	ram: SystemTypes.exchange_state;
-	rex: SystemTypes.rex_pool;
-	sample?: SampleUsage;
-	token: UnicoveTypes.token_supply;
-	ram_gift_bytes?: Int64;
-}
-
 export interface Activity {
 	actions: ActivityAction[];
 	first: Int64;
