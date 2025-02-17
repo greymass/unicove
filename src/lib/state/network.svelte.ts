@@ -112,6 +112,13 @@ export class NetworkState {
 		};
 	}
 
+	get serialized(): SerializedNetworkState {
+		return {
+			config: this.config,
+			sources: this.sources
+		};
+	}
+
 	static restore(
 		serialized: SerializedNetworkState,
 		options: NetworkStateOptions = {}
@@ -121,6 +128,10 @@ export class NetworkState {
 			state.setState(serialized.sources);
 		}
 		return state;
+	}
+
+	public setState(state: NetworkDataSources) {
+		this.sources = NetworkDataSources.from(state);
 	}
 
 	public async refresh() {
@@ -136,17 +147,6 @@ export class NetworkState {
 		} else {
 			this.connection.connected = false;
 		}
-	}
-
-	public setState(state: NetworkDataSources) {
-		this.sources = NetworkDataSources.from(state);
-	}
-
-	get serialized(): SerializedNetworkState {
-		return {
-			config: this.config,
-			sources: this.sources
-		};
 	}
 
 	getSystemToken(): SystemToken {
