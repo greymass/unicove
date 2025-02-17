@@ -86,10 +86,13 @@ export class AccountState {
 
 	async refresh() {
 		const response = await this.fetch(`/${this.network.shortname}/api/account/${this.name}`);
-		if (response.ok) {
-			const json = await response.json();
-			this.setState(json);
+		if (!response.ok) {
+			throw new Error(
+				`Failed to fetch account data for ${this.name} on ${this.network.chain.name}`
+			);
 		}
+		const json = await response.json();
+		this.setState(json);
 	}
 
 	get serialized(): SerializedAccountState {
