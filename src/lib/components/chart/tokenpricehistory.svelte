@@ -14,7 +14,7 @@
 	const fetchTokenPrices = async () => {
 		if (network.supports('timeseries')) {
 			try {
-				const response = await fetch(`/${network}/api/metrics/marketprice/token`);
+				const response = await network.fetch(`/${network}/api/metrics/marketprice/token`);
 				const parsedTokenResponse: APIResponse = await response.json();
 
 				if (Array.isArray(parsedTokenResponse) && parsedTokenResponse.length) {

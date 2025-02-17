@@ -69,7 +69,7 @@ async function getAccount(network: NetworkState, account: NameType): Promise<Acc
 	let giftedram;
 
 	if (network.supports('lightapi')) {
-		balances = await loadBalances(network, account, fetch);
+		balances = await loadBalances(network, account, network.fetch);
 	}
 
 	if (network.supports('rex')) {
@@ -115,7 +115,7 @@ async function getAccount2(network: NetworkState, account: NameType): Promise<Ac
 	let balances: LightAPIBalanceRow[] = [];
 
 	if (network.supports('lightapi')) {
-		balances = await loadBalances(network, account, fetch);
+		balances = await loadBalances(network, account, network.fetch);
 	}
 
 	// If no response from the light API, add a default balance of zero

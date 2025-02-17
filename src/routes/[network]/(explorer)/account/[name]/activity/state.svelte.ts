@@ -87,7 +87,7 @@ export class ActivityLoader {
 		try {
 			this.scene.setLoading(true);
 			const startIndex = more ? this.scene!.loadStart : 1;
-			const response = await fetch(
+			const response = await this.network.fetch(
 				`/${this.network}/api/account/${this.account}/activity/${startIndex}`
 			);
 			const json: { activity: { actions: string[]; first: number; last: number } } =

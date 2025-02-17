@@ -32,7 +32,7 @@
 
 	const fetchAccount: CreateLinkPreviewProps['onOpenChange'] = ({ next }) => {
 		if (preview && next && network) {
-			AccountState.for(network, Name.from(String(name)), fetch).then(
+			AccountState.for(network, Name.from(String(name)), network.fetch).then(
 				(accountState) => (account = accountState)
 			);
 		}
