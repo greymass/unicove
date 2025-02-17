@@ -86,3 +86,6 @@ export const defaultAccountDataSources: AccountDataSources = {
 	rexbal: defaultRexBalance,
 	rexfund: defaultRexFund
 };
+
+export const defaultPriceSymbol = Asset.Symbol.from('4,USD');
+export const defaultPrice = Asset.fromUnits(0, defaultPriceSymbol);

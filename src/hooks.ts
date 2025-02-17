@@ -39,7 +39,7 @@ export const transport: Transport = {
 	NetworkState: {
 		encode: (state) => {
 			if (state instanceof NetworkState) {
-				return state.getState();
+				return state.serialized;
 			}
 		},
 		decode: (serialized: SerializedNetworkState) => {

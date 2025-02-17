@@ -33,38 +33,40 @@ import { calculateValue } from '$lib/utils';
 
 import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
 import { Contract as MSIGContract } from '$lib/wharf/contracts/msig';
-import { Contract as SystemContract, Types as SystemTypes } from '$lib/wharf/contracts/system';
+import { Contract as SystemContract } from '$lib/wharf/contracts/system';
 import { Contract as TokenContract } from '$lib/wharf/contracts/token';
 import { Contract as UnicoveContract, Types as UnicoveTypes } from '$lib/wharf/contracts/unicove';
+import { defaultPrice, defaultPriceSymbol } from './defaults/network';
 
 export class NetworkState {
+	// Readonly state
+	readonly client: APIClient;
+	readonly chain: ChainDefinition;
+	readonly config: ChainConfig;
+	readonly contracts: DefaultContracts;
+	readonly fetch = fetch;
+	readonly shortname: string;
+	readonly snapOrigin?: string;
+	readonly resourceClient: ResourceClient;
+
+	// Raw data sources used to populate network state
 	private sources?: NetworkDataSources = $state();
 
-	public client: APIClient;
-	public chain: ChainDefinition;
-	public config: ChainConfig;
+	// Derived network state
+	readonly resources = $derived(this.getResources());
+	readonly rex = $derived(REXState.from(this.sources?.rex));
+	readonly token = $derived.by(() => this.getSystemToken());
+	readonly tvl = $derived(this.calculateTvl());
+
+	// Writable state
+	public abis?: ABICache = $state();
 	public connection: ChainConnectionState = $state({
 		connected: false,
 		endpoint: '',
 		updated: new Date()
 	});
-	public fetch = fetch;
 	public loaded = $state(false);
-	public shortname: string;
-	public snapOrigin?: string = $state();
-
-	public contracts: DefaultContracts;
-
-	public abis?: ABICache = $state();
-	public global?: SystemTypes.eosio_global_state = $state();
-
-	public resources: SystemResources = $state() as SystemResources;
-	public resourceClient?: ResourceClient = $state();
-	public rex?: REXState = $state();
-
-	public token: SystemToken = $state() as SystemToken;
 	public tokens?: TokenMeta[] = $state();
-	public tvl?: Asset = $state();
 
 	constructor(config: ChainConfig, options: NetworkStateOptions = {}) {
 		this.config = config;
@@ -84,24 +86,6 @@ export class NetworkState {
 			this.fetch = options.fetch;
 		}
 
-		const price = Asset.fromUnits(0, '4,USD');
-		this.token = SystemToken.from({
-			definition: UnicoveTypes.token_definition.from({
-				contract: this.config.systemtoken.contract,
-				symbol: this.config.systemtoken.symbol
-			}),
-			distribution: {
-				circulating: Asset.fromUnits(0, this.config.systemtoken.symbol),
-				locked: Asset.fromUnits(0, this.config.systemtoken.symbol),
-				staked: Asset.fromUnits(0, this.config.systemtoken.symbol),
-				supply: Asset.fromUnits(0, this.config.systemtoken.symbol),
-				max: Asset.fromUnits(0, this.config.systemtoken.symbol)
-			},
-			marketcap: calculateValue(Asset.fromUnits(0, this.config.systemtoken.symbol), price),
-			price
-		});
-		this.resources = this.getResources();
-
 		if (options.client) {
 			this.client = options.client;
 		} else {
@@ -113,11 +97,11 @@ export class NetworkState {
 		}
 
 		this.abis = new ABICache(this.client);
-
 		this.resourceClient = new ResourceClient({
 			api: this.client,
 			sampleAccount: 'eosio.reserv'
 		});
+		this.connection.endpoint = (this.client.provider as FetchProvider).url;
 
 		this.contracts = {
 			delphioracle: new DelphiOracleContract({ client: this.client }),
@@ -126,8 +110,6 @@ export class NetworkState {
 			token: new TokenContract({ client: this.client }),
 			unicove: new UnicoveContract({ client: this.client })
 		};
-
-		this.connection.endpoint = (this.client.provider as FetchProvider).url;
 	}
 
 	static restore(
@@ -141,7 +123,7 @@ export class NetworkState {
 		return state;
 	}
 
-	async refresh() {
+	public async refresh() {
 		const response = await this.fetch(
 			`/${chainMapper.toShortName(String(this.chain.id))}/api/network`
 		);
@@ -156,41 +138,54 @@ export class NetworkState {
 		}
 	}
 
-	setState(state: NetworkDataSources) {
+	public setState(state: NetworkDataSources) {
 		this.sources = NetworkDataSources.from(state);
-
-		this.rex = REXState.from(this.sources.rex);
-
-		const { circulating, def, supply, locked, max } = this.sources.token;
-
-		const price = Asset.fromUnits(this.sources.oracle?.median || 0, '4,USD');
-
-		this.token = SystemToken.from({
-			definition: def,
-			distribution: {
-				circulating,
-				locked,
-				staked: this.sources.rex.total_lendable,
-				supply,
-				max
-			},
-			marketcap: calculateValue(circulating, price),
-			price
-		});
-
-		this.resources = this.getResources();
-		this.tvl = this.calculateTvl();
 	}
 
 	get serialized(): SerializedNetworkState {
-		return this.getState();
-	}
-
-	getState(): SerializedNetworkState {
 		return {
 			config: this.config,
 			sources: this.sources
 		};
+	}
+
+	getSystemToken(): SystemToken {
+		if (this.sources?.token) {
+			return SystemToken.from({
+				definition: this.sources.token.def,
+				distribution: {
+					circulating: this.sources.token.circulating,
+					locked: this.sources.token.locked,
+					staked: this.sources.rex.total_lendable,
+					supply: this.sources.token.supply,
+					max: this.sources.token.max
+				},
+				marketcap: calculateValue(
+					this.sources.token.circulating,
+					Asset.fromUnits(this.sources.oracle?.median || 0, defaultPriceSymbol)
+				),
+				price: Asset.fromUnits(this.sources.oracle?.median || 0, defaultPriceSymbol)
+			});
+		}
+		return this.defaultSystemToken;
+	}
+
+	get defaultSystemToken(): SystemToken {
+		return SystemToken.from({
+			definition: UnicoveTypes.token_definition.from({
+				contract: this.config.systemtoken.contract,
+				symbol: this.config.systemtoken.symbol
+			}),
+			distribution: {
+				circulating: Asset.fromUnits(0, this.config.systemtoken.symbol),
+				locked: Asset.fromUnits(0, this.config.systemtoken.symbol),
+				staked: Asset.fromUnits(0, this.config.systemtoken.symbol),
+				supply: Asset.fromUnits(0, this.config.systemtoken.symbol),
+				max: Asset.fromUnits(0, this.config.systemtoken.symbol)
+			},
+			marketcap: calculateValue(Asset.fromUnits(0, this.config.systemtoken.symbol), defaultPrice),
+			price: defaultPrice
+		});
 	}
 
 	supports = (feature: FeatureType): boolean => this.config.features[feature];
