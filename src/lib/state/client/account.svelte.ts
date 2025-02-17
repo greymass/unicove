@@ -51,7 +51,7 @@ export class AccountState {
 					this.network,
 					this.sources,
 					this.network.chain.id,
-					this.network.tokenmeta,
+					this.network.tokens,
 					this.balance?.liquid
 				)
 			: []
@@ -353,7 +353,7 @@ export function getBalances(
 	network: NetworkState,
 	sources: AccountDataSources,
 	chain: Checksum256,
-	tokenmeta?: TokenMeta[],
+	tokens?: TokenMeta[],
 	liquid?: Asset
 ): TokenBalance[] {
 	if (sources.light_api) {
@@ -389,9 +389,7 @@ export function getBalances(
 				symbol: asset.symbol
 			});
 			const metadata =
-				tokenmeta && tokenmeta.length > 0
-					? tokenmeta.find((meta) => meta.id.equals(id))
-					: undefined;
+				tokens && tokens.length > 0 ? tokens.find((meta) => meta.id.equals(id)) : undefined;
 			balances.push(
 				TokenBalance.from({
 					asset,

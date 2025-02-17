@@ -63,7 +63,7 @@ export class NetworkState {
 	public rex?: REXState = $state();
 
 	public token: SystemToken = $state() as SystemToken;
-	public tokenmeta?: TokenMeta[] = $state();
+	public tokens?: TokenMeta[] = $state();
 	public tvl?: Asset = $state();
 
 	constructor(config: ChainConfig, options: NetworkStateOptions = {}) {
@@ -71,7 +71,7 @@ export class NetworkState {
 		this.chain = getChainDefinitionFromParams(config.name);
 		this.shortname = chainMapper.toShortName(String(this.chain.id));
 		this.snapOrigin = snapOrigins.get(this.shortname);
-		this.tokenmeta = this.config.tokens.map((token) =>
+		this.tokens = this.config.tokens.map((token) =>
 			TokenMeta.from({
 				id: TokenIdentifier.from({
 					chain: this.chain.id,
@@ -330,7 +330,7 @@ export class NetworkState {
 			shortname: this.shortname,
 			snapOrigins: this.snapOrigin,
 			token: this.token,
-			tokenmeta: this.tokenmeta,
+			tokens: this.tokens,
 			tvl: this.tvl
 		};
 	}
