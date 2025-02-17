@@ -1,8 +1,9 @@
-import { Struct, API, Int64, Name, Asset } from '@wharfkit/antelope';
+import { Struct, API, Int64, Name, Asset, Float64 } from '@wharfkit/antelope';
 
 import { Types as MsigTypes } from '$lib/wharf/contracts/msig';
 import { Types as SystemTypes } from '$lib/wharf/contracts/system';
 import type { LightAPIBalanceRow } from '$lib/types/lightapi';
+import type { SerializedNetworkState } from '$lib/types/network';
 
 // TODO: remove and use system contract version once its deployed
 // Will be available from here: SystemTypes.gifted_ram
@@ -14,6 +15,15 @@ export class gifted_ram extends Struct {
 	declare gifter: Name;
 	@Struct.field(Int64)
 	declare ram_bytes: Int64;
+}
+
+export interface VoterInfo {
+	isProxy: boolean;
+	proxyWeight: Float64;
+	proxy: Name;
+	weight: Float64;
+	votes: Name[];
+	staked: Int64;
 }
 
 export interface AccountDataSources {
@@ -69,4 +79,10 @@ export interface AccountResources {
 	cpu: AccountResourceCPU;
 	net: AccountResourceNET;
 	ram: AccountResourceRAM;
+}
+
+export interface SerializedAccountState {
+	name: string;
+	network: SerializedNetworkState;
+	sources: AccountDataSources;
 }

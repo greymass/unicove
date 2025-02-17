@@ -12,7 +12,7 @@
 	import Card from '$lib/components/layout/box/card.svelte';
 	import Label from '$lib/components/input/label.svelte';
 	import RamPriceHistory from '$lib/components/chart/rampricehistory.svelte';
-	import type { SystemResources } from '$lib/state/network.svelte';
+	import type { SystemResources } from '$lib/types/network';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import AccountBalance from '$lib/components/card/accountbalance.svelte';
 

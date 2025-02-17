@@ -14,117 +14,25 @@ import type { REXState } from '@wharfkit/resources';
 import { Account } from '@wharfkit/account';
 import { TokenMeta, TokenBalance, TokenIdentifier } from '@wharfkit/common';
 
-import * as SystemContract from '$lib/wharf/contracts/system';
-import {
-	gifted_ram,
-	type AccountDataSources,
-	type AccountResourceRAM,
-	type AccountResources
+import type { NetworkState } from '$lib/state/network.svelte';
+import type {
+	AccountDataSources,
+	AccountResourceRAM,
+	AccountResources,
+	SerializedAccountState,
+	VoterInfo
 } from '$lib/types/account';
-import { NetworkState, type SerializedNetworkState } from '$lib/state/network.svelte';
+
 import { calculateValue, isSameToken } from '$lib/utils';
-
-const defaultDataSources: AccountDataSources = {
-	get_account: API.v1.AccountObject.from({
-		account_name: '',
-		head_block_num: 0,
-		head_block_time: '1970-01-01T00:00:00.000',
-		privileged: false,
-		last_code_update: '1970-01-01T00:00:00.000',
-		created: '1970-01-01T00:00:00.000',
-		ram_quota: 0,
-		net_weight: 0,
-		cpu_weight: 0,
-		net_limit: {
-			used: 0,
-			available: 0,
-			max: 0,
-			last_usage_update_time: '1970-01-01T00:00:00.000',
-			current_used: 0
-		},
-		cpu_limit: {
-			used: 0,
-			available: 0,
-			max: 0,
-			last_usage_update_time: '1970-01-01T00:00:00.000',
-			current_used: 0
-		},
-		subjective_cpu_bill_limit: {
-			used: 0,
-			available: 0,
-			max: 0,
-			last_usage_update_time: '1970-01-01T00:00:00.000',
-			current_used: 0
-		},
-		ram_usage: 0,
-		permissions: [],
-		total_resources: {
-			owner: '',
-			net_weight: '0.0000 EOS',
-			cpu_weight: '0.0000 EOS',
-			ram_bytes: 0
-		}
-	}),
-	balance: Asset.from('0 '),
-	light_api: [],
-	delegated: [],
-	giftedram: gifted_ram.from({
-		gifter: '',
-		giftee: '',
-		ram_bytes: 0
-	}),
-	proposals: [],
-	refund_request: SystemContract.Types.refund_request.from({
-		owner: '',
-		request_time: '1970-01-01T00:00:00',
-		net_amount: '0 ',
-		cpu_amount: '0 '
-	}),
-	rexbal: SystemContract.Types.rex_balance.from({
-		version: 0,
-		owner: '',
-		vote_stake: '0 ',
-		rex_balance: '0 ',
-		matured_rex: 0,
-		rex_maturities: []
-	}),
-	rexfund: SystemContract.Types.rex_fund.from({
-		version: 0,
-		owner: '',
-		balance: '0 '
-	})
-};
-
-interface VoterInfo {
-	isProxy: boolean;
-	proxyWeight: Float64;
-	proxy: Name;
-	weight: Float64;
-	votes: Name[];
-	staked: Int64;
-}
-
-const defaultVoteInfo: VoterInfo = {
-	isProxy: false,
-	proxy: Name.from(''),
-	proxyWeight: Float64.from(0),
-	weight: Float64.from(0),
-	votes: [],
-	staked: Int64.from(0)
-};
-
-export interface SerializedAccountState {
-	name: string;
-	network: SerializedNetworkState;
-	sources: AccountDataSources;
-}
+import { defaultAccountDataSources, defaultVoteInfo } from '$lib/state/defaults/account';
+import * as SystemContract from '$lib/wharf/contracts/system';
 
 export class AccountState {
 	public client?: APIClient = $state();
 	public fetch = $state(fetch);
 
 	public network: NetworkState;
-	private sources: AccountDataSources = $state(defaultDataSources);
+	private sources: AccountDataSources = $state(defaultAccountDataSources);
 
 	public account: Account | undefined = $state();
 	public name: Name = $state(Name.from(''));

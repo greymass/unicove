@@ -8,13 +8,16 @@ import {
 	PermissionLevel,
 	TimePointSec,
 	UInt64,
-	UInt128
+	UInt128,
+	APIClient,
+	Asset
 } from '@wharfkit/antelope';
 import type { SampleUsage } from '@wharfkit/resources';
 
 import { Types as DelphioracleTypes } from '$lib/wharf/contracts/delphioracle';
 import { Types as SystemTypes } from '$lib/wharf/contracts/system';
 import { Types as UnicoveTypes } from '$lib/wharf/contracts/unicove';
+import type { ChainConfig } from '$lib/wharf/chains';
 
 @Struct.type('sampledusage')
 export class SampledUsage extends Struct {
@@ -78,4 +81,63 @@ export interface ActivityActionWrapper {
 	actionName: string;
 	actionStyle: string;
 	actionData: string;
+}
+
+export interface NetworkStateOptions {
+	fetch?: typeof fetch;
+	client?: APIClient;
+}
+
+@Struct.type('distribution')
+export class SystemTokenDistribution extends Struct {
+	@Struct.field(Asset) declare circulating: Asset;
+	@Struct.field(Asset) declare locked: Asset;
+	@Struct.field(Asset) declare staked: Asset;
+	@Struct.field(Asset) declare supply: Asset;
+	@Struct.field(Asset) declare max: Asset;
+}
+
+@Struct.type('systemtoken')
+export class SystemToken extends Struct {
+	@Struct.field(UnicoveTypes.token_definition) declare definition: UnicoveTypes.token_definition;
+	@Struct.field(SystemTokenDistribution) declare distribution: SystemTokenDistribution;
+	@Struct.field(Asset) declare marketcap: Asset;
+	@Struct.field(Asset) declare price: Asset;
+}
+
+export interface SystemResourceCPUNET {
+	price: SystemResourceSourcesCPUNET;
+}
+
+export interface SystemResourceRAM {
+	price: SystemResourceSourcesRAM;
+	supply: UInt64;
+	gift: UInt64;
+}
+
+export interface SystemResources {
+	cpu: SystemResourceCPUNET;
+	net: SystemResourceCPUNET;
+	ram: SystemResourceRAM;
+}
+
+export interface SystemResourceSourcesCPUNET {
+	powerup: Asset;
+	rex: Asset;
+	staking: Asset;
+}
+
+export interface SystemResourceSourcesRAM {
+	rammarket: Asset;
+}
+
+export interface ChainConnectionState {
+	connected: boolean;
+	endpoint: string;
+	updated: Date;
+}
+
+export interface SerializedNetworkState {
+	config: ChainConfig;
+	sources?: NetworkDataSources;
 }

@@ -3,7 +3,6 @@ import {
 	Asset,
 	FetchProvider,
 	Int128,
-	Struct,
 	UInt64,
 	type AssetType
 } from '@wharfkit/antelope';
@@ -12,11 +11,14 @@ import { RAMState, Resources as ResourceClient, REXState, PowerUpState } from '@
 import { ABICache } from '@wharfkit/abicache';
 import { snapOrigins } from '@wharfkit/wallet-plugin-metamask';
 
-import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
-import { Contract as MSIGContract } from '$lib/wharf/contracts/msig';
-import { Contract as SystemContract, Types as SystemTypes } from '$lib/wharf/contracts/system';
-import { Contract as TokenContract } from '$lib/wharf/contracts/token';
-import { Contract as UnicoveContract, Types as UnicoveTypes } from '$lib/wharf/contracts/unicove';
+import {
+	NetworkDataSources,
+	SystemToken,
+	type ChainConnectionState,
+	type NetworkStateOptions,
+	type SerializedNetworkState,
+	type SystemResources
+} from '$lib/types/network';
 
 import {
 	chainMapper,
@@ -28,72 +30,12 @@ import {
 } from '$lib/wharf/chains';
 
 import { calculateValue } from '$lib/utils';
-import { NetworkDataSources } from '$lib/types/network';
 
-export interface NetworkStateOptions {
-	fetch?: typeof fetch;
-	client?: APIClient;
-}
-
-@Struct.type('distribution')
-export class SystemTokenDistribution extends Struct {
-	@Struct.field(Asset) declare circulating: Asset;
-	@Struct.field(Asset) declare locked: Asset;
-	@Struct.field(Asset) declare staked: Asset;
-	@Struct.field(Asset) declare supply: Asset;
-	@Struct.field(Asset) declare max: Asset;
-}
-
-@Struct.type('systemtoken')
-export class SystemToken extends Struct {
-	@Struct.field(UnicoveTypes.token_definition) declare definition: UnicoveTypes.token_definition;
-	@Struct.field(SystemTokenDistribution) declare distribution: SystemTokenDistribution;
-	@Struct.field(Asset) declare marketcap: Asset;
-	@Struct.field(Asset) declare price: Asset;
-}
-
-export interface SystemResourceCPUNET {
-	price: SystemResourceSourcesCPUNET;
-}
-
-export interface SystemResourceRAM {
-	price: SystemResourceSourcesRAM;
-	supply: UInt64;
-	gift: UInt64;
-}
-
-export interface SystemResources {
-	cpu: SystemResourceCPUNET;
-	net: SystemResourceCPUNET;
-	ram: SystemResourceRAM;
-}
-
-export interface SystemResourceSourcesCPUNET {
-	powerup: Asset;
-	rex: Asset;
-	staking: Asset;
-}
-
-export interface SystemResourceSourcesRAM {
-	rammarket: Asset;
-}
-
-interface ChainConnectionState {
-	connected: boolean;
-	endpoint: string;
-	updated: Date;
-}
-
-const initialChainConnectionState = {
-	connected: false,
-	endpoint: '',
-	updated: new Date()
-};
-
-export interface SerializedNetworkState {
-	config: ChainConfig;
-	sources?: NetworkDataSources;
-}
+import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
+import { Contract as MSIGContract } from '$lib/wharf/contracts/msig';
+import { Contract as SystemContract, Types as SystemTypes } from '$lib/wharf/contracts/system';
+import { Contract as TokenContract } from '$lib/wharf/contracts/token';
+import { Contract as UnicoveContract, Types as UnicoveTypes } from '$lib/wharf/contracts/unicove';
 
 export class NetworkState {
 	private sources?: NetworkDataSources = $state();
@@ -101,7 +43,11 @@ export class NetworkState {
 	public client: APIClient;
 	public chain: ChainDefinition;
 	public config: ChainConfig;
-	public connection: ChainConnectionState = $state(initialChainConnectionState);
+	public connection: ChainConnectionState = $state({
+		connected: false,
+		endpoint: '',
+		updated: new Date()
+	});
 	public fetch = fetch;
 	public loaded = $state(false);
 	public shortname: string;
