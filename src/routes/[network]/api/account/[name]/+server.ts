@@ -3,11 +3,9 @@ import { Asset, type NameType } from '@wharfkit/antelope';
 
 import { NetworkState } from '$lib/state/network.svelte';
 import { getCacheHeaders } from '$lib/utils';
-import type {
-	AccountDataSources,
-	LightAPIBalanceResponse,
-	LightAPIBalanceRow
-} from '$lib/types.js';
+import type { AccountDataSources } from '$lib/types/account';
+import type { LightAPIBalanceResponse, LightAPIBalanceRow } from '$lib/types/lightapi';
+
 import type { RequestEvent, RequestHandler } from './$types';
 
 import { Types as SystemTypes } from '$lib/wharf/contracts/system';

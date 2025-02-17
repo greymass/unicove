@@ -28,7 +28,7 @@ import {
 } from '$lib/wharf/chains';
 
 import { calculateValue } from '$lib/utils';
-import { NetworkDataSources } from '$lib/types';
+import { NetworkDataSources } from '$lib/types/network';
 
 export interface NetworkStateOptions {
 	fetch?: typeof fetch;

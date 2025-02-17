@@ -2,7 +2,7 @@
 	import Stack from '$lib/components/layout/stack.svelte';
 	import { onMount } from 'svelte';
 	import { ActivityLoader } from './state.svelte.js';
-	import type { ActivityActionWrapper } from '$lib/types.js';
+	import type { ActivityActionWrapper } from '$lib/types/network';
 	import Code from '$lib/components/code.svelte';
 	import Transaction from '$lib/components/elements/transaction.svelte';
 	import Button from '$lib/components/button/button.svelte';

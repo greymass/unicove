@@ -20,7 +20,7 @@ import {
 	type AccountDataSources,
 	type AccountResourceRAM,
 	type AccountResources
-} from '$lib/types';
+} from '$lib/types/account';
 import { NetworkState, type SerializedNetworkState } from '$lib/state/network.svelte';
 import { calculateValue, isSameToken } from '$lib/utils';
 

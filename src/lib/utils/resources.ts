@@ -1,4 +1,4 @@
-import type { AccountResource } from '$lib/types';
+import type { AccountResource } from '$lib/types/account';
 
 export const calAvailableSize = (resource?: AccountResource) => {
 	let size = 0;

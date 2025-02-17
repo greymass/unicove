@@ -7,7 +7,7 @@ import { Types as DelphioracleTypes } from '$lib/wharf/contracts/delphioracle.js
 import { Types as SystemTypes } from '$lib/wharf/contracts/system';
 import { Types as UnicoveTypes } from '$lib/wharf/contracts/unicove';
 import type { NetworkState } from '$lib/state/network.svelte';
-import type { NetworkResponse } from '$lib/types';
+import type { NetworkResponse } from '$lib/types/network';
 import type { RequestEvent } from './$types';
 
 type ResponseType =

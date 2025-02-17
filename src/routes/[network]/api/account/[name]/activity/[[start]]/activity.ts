@@ -1,5 +1,5 @@
 import { API, APIClient, Serializer } from '@wharfkit/antelope';
-import type { Activity } from '$lib/types';
+import type { Activity } from '$lib/types/network';
 import { RoborovskiClient } from '@wharfkit/roborovski';
 
 export async function getActivity(
