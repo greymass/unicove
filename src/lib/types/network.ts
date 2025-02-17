@@ -12,7 +12,6 @@ import {
 	APIClient,
 	Asset
 } from '@wharfkit/antelope';
-import type { SampleUsage } from '@wharfkit/resources';
 
 import { Types as DelphioracleTypes } from '$lib/wharf/contracts/delphioracle';
 import { Types as SystemTypes } from '$lib/wharf/contracts/system';
