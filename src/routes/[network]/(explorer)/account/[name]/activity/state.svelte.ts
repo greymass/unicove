@@ -43,17 +43,22 @@ export class ActivityLoader {
 	private static instance: ActivityLoader;
 
 	private network: string;
+	private fetch: typeof fetch;
 	private account?: string;
 
 	public scene: Scene = $state(new Scene());
 
-	private constructor(network: string) {
+	private constructor(network: string, fetchOverride: typeof fetch) {
 		this.network = network;
+		this.fetch = fetchOverride;
 	}
 
-	public static getInst(network: string): ActivityLoader {
+	public static getInst(network: string, fetchOverride: typeof fetch): ActivityLoader {
 		if (!ActivityLoader.instance || ActivityLoader.instance.network !== network) {
-			ActivityLoader.instance = ActivityLoader.instance = new ActivityLoader(network);
+			ActivityLoader.instance = ActivityLoader.instance = new ActivityLoader(
+				network,
+				fetchOverride
+			);
 		}
 		return ActivityLoader.instance;
 	}
@@ -75,7 +80,7 @@ export class ActivityLoader {
 		this.loadRemote(false);
 	}
 
-	public laodMore() {
+	public loadMore() {
 		if (!this.account) throw new Error('set account first');
 
 		if (this.scene.isLoading || !this.scene.hasMore) return;
@@ -87,7 +92,7 @@ export class ActivityLoader {
 		try {
 			this.scene.setLoading(true);
 			const startIndex = more ? this.scene!.loadStart : 1;
-			const response = await this.network.fetch(
+			const response = await this.fetch(
 				`/${this.network}/api/account/${this.account}/activity/${startIndex}`
 			);
 			const json: { activity: { actions: string[]; first: number; last: number } } =

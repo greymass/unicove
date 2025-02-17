@@ -12,13 +12,13 @@
 	const networkName = String(data.network);
 
 	onMount(() => {
-		const loader = ActivityLoader.getInst(networkName);
+		const loader = ActivityLoader.getInst(networkName, data.network.fetch);
 		loader.setAccount(String(data.name));
 		loader.load();
 	});
 
 	const activityLoader: ActivityLoader = $derived.by(() => {
-		return ActivityLoader.getInst(networkName);
+		return ActivityLoader.getInst(networkName, data.network.fetch);
 	});
 
 	const isLoading = $derived.by(() => {
@@ -40,7 +40,7 @@
 	});
 
 	function clickLoadMore() {
-		activityLoader.laodMore();
+		activityLoader.loadMore();
 	}
 </script>
 
