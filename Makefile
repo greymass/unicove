@@ -28,7 +28,7 @@ install:
 		bun install --frozen-lockfile; \
 	else \
 		echo "Installing package: $(package)"; \
-		bun install --frozen-lockfile $(package); \
+		bun install --yarn --frozen-lockfile $(package); \
 	fi
 
 $(CONTRACTS)/system.ts:
