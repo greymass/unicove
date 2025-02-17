@@ -1,4 +1,4 @@
-import type { ActivityAction, ActivityActionWrapper } from '$lib/types';
+import type { ActivityAction, ActivityActionWrapper } from '$lib/types/network';
 import { Checksum256 } from '@wharfkit/antelope';
 
 export function convertActivityAction(

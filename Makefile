@@ -1,5 +1,7 @@
 include .env
 -include .env.local
+-include .env.development
+-include .env.production
 
 SHELL := /usr/bin/env bash
 BIN := ./node_modules/.bin
@@ -26,7 +28,7 @@ install:
 		bun install --frozen-lockfile; \
 	else \
 		echo "Installing package: $(package)"; \
-		bun install --frozen-lockfile $(package); \
+		bun install --yarn --frozen-lockfile $(package); \
 	fi
 
 $(CONTRACTS)/system.ts:

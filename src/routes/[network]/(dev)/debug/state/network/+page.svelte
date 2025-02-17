@@ -37,7 +37,7 @@
 			</tr>
 			<tr>
 				<td>Last Updated</td>
-				<td>{network?.last_update}</td>
+				<td>{network?.connection.updated}</td>
 			</tr>
 		</tbody>
 	</table>

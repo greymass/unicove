@@ -1,4 +1,4 @@
-import { ActivityAction, type ActivityActionWrapper } from '$lib/types';
+import { ActivityAction, type ActivityActionWrapper } from '$lib/types/network';
 import { convertActivityAction } from '$lib/utils';
 
 export class Scene {

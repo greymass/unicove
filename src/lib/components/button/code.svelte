@@ -1,12 +1,8 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
 	import { goto } from '$app/navigation';
-	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { cn } from '$lib/utils';
 	import Code from 'lucide-svelte/icons/code';
-	import { getContext } from 'svelte';
-
-	const context = getContext<UnicoveContext>('state');
 
 	interface Props {
 		data: string;

@@ -5,7 +5,7 @@ import { getCacheHeaders } from '$lib/utils';
 import type { RequestEvent } from './$types';
 import { getBackendClient } from '$lib/wharf/client/ssr';
 
-export async function GET({ locals: { network }, params }: RequestEvent) {
+export async function GET({ fetch, locals: { network }, params }: RequestEvent) {
 	if (!network.supports('robo')) {
 		return json({ error: `Activity not supported on ${network.chain.name}.` }, { status: 500 });
 	}

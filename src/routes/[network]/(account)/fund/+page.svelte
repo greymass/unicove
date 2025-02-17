@@ -90,9 +90,7 @@
 				},
 				assets: context.network.config.coinbase.assets
 			},
-			onSuccess: () => {
-				console.log('success');
-			},
+			onSuccess: () => {},
 			experienceLoggedIn: 'popup',
 			experienceLoggedOut: 'popup',
 			closeOnExit: true,

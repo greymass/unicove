@@ -12,7 +12,7 @@
 	import Card from '$lib/components/layout/box/card.svelte';
 	import Label from '$lib/components/input/label.svelte';
 	import RamPriceHistory from '$lib/components/chart/rampricehistory.svelte';
-	import type { SystemResources } from '$lib/state/network.svelte';
+	import type { SystemResources } from '$lib/types/network';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import AccountBalance from '$lib/components/card/accountbalance.svelte';
 
@@ -35,11 +35,11 @@
 	);
 	let marketCapFiat = $derived(calculateValue(marketCapToken, data.network.token.price));
 
-	let ramAvailable = $derived(
-		Asset.from(Number(context.account?.ram?.available || 0) / 1000, '3,KB')
+	let ramLiquid = $derived(
+		Asset.from(Number(context.account?.resources.ram.balance || 0) / 1000, '3,KB')
 	);
 
-	const balanceValueToken = $derived(calculateValue(ramAvailable, resources.ram.price.rammarket));
+	const balanceValueToken = $derived(calculateValue(ramLiquid, resources.ram.price.rammarket));
 	const balanceValueFiat = $derived(calculateValue(balanceValueToken, data.network.token.price));
 	const kbValueToken = $derived(resources.ram.price.rammarket);
 	const kbValueFiat = $derived(calculateValue(kbValueToken, data.network.token.price));
@@ -71,7 +71,7 @@
 		<div class="grid content-between gap-4">
 			<div class="grid">
 				<h3 class="text-muted text-base">{m.common_labeled_unit_available({ unit: 'RAM' })}</h3>
-				<AssetText class="text-xl font-semibold" variant="full" value={ramAvailable} />
+				<AssetText class="text-xl font-semibold" variant="full" value={ramLiquid} />
 			</div>
 			<Button variant="secondary" href="/{String(data.network)}/ram/buy">{m.common_buy()}</Button>
 		</div>
@@ -79,7 +79,7 @@
 		<div class="grid content-between gap-4">
 			<div>
 				<h3 class="text-muted text-base">
-					{m.common_labeled_unit_value({ unit: data.network.chain.name })}
+					{m.common_labeled_unit_value({ unit: balanceValueToken.symbol.name })}
 				</h3>
 				<AssetText class="text-xl font-semibold" variant="full" value={balanceValueToken} />
 				<div>

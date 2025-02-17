@@ -70,7 +70,6 @@
 		"@wharfkit/wallet-plugin-wombat": "^1.5.1",
 		"@wharfkit/web-renderer": "^1.4.1",
 		"big.js": "^6.2.1",
-		"caniuse-lite": "^1.0.30001696",
 		"chart.js": "^4.4.3",
 		"clsx": "^2.1.1",
 		"dayjs": "^1.11.13",

@@ -21,8 +21,7 @@ function generateMetadata(url: URL, network: NetworkState): SeoConfig {
 	};
 }
 
-export const load: LayoutServerLoad = async ({ locals, url }) => {
-	const { network } = locals;
+export const load: LayoutServerLoad = async ({ locals: { network }, url }) => {
 	const baseMetaTags = generateMetadata(url, network);
 	return {
 		baseMetaTags

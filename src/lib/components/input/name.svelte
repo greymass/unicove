@@ -19,7 +19,7 @@
 	}: NameInputProps = $props();
 
 	/** The string value bound to the form input */
-	let input: string = $state('');
+	let input: string = $state(String(_value));
 
 	/** The derived name from the formatted input */
 	const name: Name = $derived(Name.from(input));

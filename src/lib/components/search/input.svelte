@@ -77,7 +77,7 @@
 			case SearchRecordType.PAGE:
 				return `/${context.network}/${searchValue}`;
 			default:
-				console.log('unknown search type', searchType);
+				console.warn('unknown search type', searchType);
 				return null;
 		}
 	});

@@ -2,9 +2,10 @@
 	import { getContext } from 'svelte';
 	import { fade, fly } from 'svelte/transition';
 	import { createDialog, melt, type CreateDialogProps } from '@melt-ui/svelte';
+	import { type NameType } from '@wharfkit/antelope';
 	import {
 		Session,
-		type NameType,
+		type LoginOptions,
 		type SerializedSession,
 		type WalletPlugin
 	} from '@wharfkit/session';
@@ -100,10 +101,13 @@
 	}
 
 	async function connectWallet(wallet: WalletPlugin) {
-		const session = await context.wharf.login({
-			chain: context.network.chain,
+		const options: LoginOptions = {
 			walletPlugin: wallet.id
-		});
+		};
+		if (wallet.id !== 'cleos') {
+			options.chain = context.network.chain;
+		}
+		const session = await context.wharf.login(options);
 		redirect(session.actor);
 		closeDrawer();
 	}

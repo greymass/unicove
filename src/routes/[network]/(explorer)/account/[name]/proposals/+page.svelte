@@ -4,7 +4,7 @@
 	const { data } = $props();
 </script>
 
-{#each data.proposals as proposal}
+{#each data.account.proposals as proposal}
 	<Card>
 		<h2>
 			<a href={`/${data.network}/msig/${data.name}/${proposal.proposal_name}`}

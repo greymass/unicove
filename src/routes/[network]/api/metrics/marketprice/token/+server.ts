@@ -31,7 +31,7 @@ export const GET: RequestHandler = async ({ locals: { network } }) => {
 			headers: getCacheHeaders(30)
 		});
 	} catch (error) {
-		console.log(error);
+		console.warn(error);
 		return json([]);
 	}
 };

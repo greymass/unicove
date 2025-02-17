@@ -28,6 +28,13 @@ export default [
 		}
 	},
 	{
-		ignores: ['build/', '.svelte-kit/', 'dist/', 'src/lib/wharf/contracts/']
+		ignores: [
+			'build/',
+			'.svelte-kit/',
+			'dist/',
+			'src/lib/wharf/contracts/',
+			'src/lib/paraglide',
+			'src/paraglide'
+		]
 	}
 ];

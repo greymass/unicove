@@ -28,7 +28,7 @@
 	const { data } = $props();
 
 	const sellRamState: SellRAMState = $state(new SellRAMState(data.network.chain));
-	const ramAvailableSize = $derived(calAvailableSize(context.account?.ram));
+	const ramAvailableSize = $derived(calAvailableSize(context.account?.resources.ram));
 
 	let transactionId: Checksum256 | undefined = $state();
 
@@ -62,7 +62,7 @@
 			if (context.account.name) {
 				sellRamState.account = context.account.name;
 			}
-			sellRamState.max = Number(context.account.ram?.available || 0);
+			sellRamState.max = Number(context.account.resources.ram.available || 0);
 		}
 	});
 
