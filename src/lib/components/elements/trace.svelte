@@ -11,4 +11,11 @@
 	let { trace, variant = 'json' }: Props = $props();
 </script>
 
-<ActionElement action={trace.action} decoded={trace.act.data} {variant} />
+<ActionElement
+	action={trace.action}
+	decoded={trace.act.data}
+	notified={trace.notifications}
+	id={trace.trx_id}
+	datetime={trace.block_time.toDate()}
+	{variant}
+/>

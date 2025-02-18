@@ -18,6 +18,7 @@
 
 	interface Props {
 		action: Action;
+		datetime?: Date;
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		decoded?: Record<string, any>;
 		id?: Checksum256Type;
@@ -25,7 +26,7 @@
 		variant?: ActionDisplayVariants;
 	}
 
-	let { action, decoded, id, notified, variant = 'json' }: Props = $props();
+	let { action, datetime, decoded, id, notified, variant = 'json' }: Props = $props();
 
 	async function decode() {
 		if (!context.network.abis) return;
@@ -68,14 +69,12 @@
 {/snippet}
 
 <div>
-	<div>
-		{#if id}
-			Transaction: <Transaction {id} />
-		{/if}
-	</div>
 	<div class="bg-mineShaft-900 p-4">
 		{#if id}
 			<div>Transaction: <Transaction {id} /></div>
+		{/if}
+		{#if datetime}
+			<div>Date/Time: {datetime}</div>
 		{/if}
 		Contract:
 		<Contract name={action.account} action={action.name}>
@@ -129,12 +128,5 @@
 				{JSON.stringify(action, null, 2)}
 			</Code>
 		{/if}
-	</div>
-	<div>
-		{#each action.authorization as auth}
-			<Account name={Name.from(auth.actor)}>
-				{PermissionLevel.from(auth)}
-			</Account>
-		{/each}
 	</div>
 </div>
