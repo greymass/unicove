@@ -4,8 +4,6 @@ import {
 	Checksum256,
 	Int32,
 	Int64,
-	Name,
-	PermissionLevel,
 	TimePointSec,
 	UInt64,
 	UInt128,

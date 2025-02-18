@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
-	// import { CircleCheck, CircleHelp } from 'lucide-svelte';
 
 	import Button from '$lib/components/button/button.svelte';
 	import { DD, DL, DLRow } from '$lib/components/descriptionlist/index.js';
@@ -11,6 +10,7 @@
 	import * as m from '$lib/paraglide/messages';
 
 	import { ApprovalManager } from './manager.svelte';
+	import type { ActionDisplayVariants } from '$lib/types';
 
 	let { data } = $props();
 
@@ -22,6 +22,8 @@
 	});
 
 	const top21 = data.producers.splice(0, 21);
+
+	let variant: ActionDisplayVariants = $state('pretty');
 </script>
 
 <Stack>
@@ -156,8 +158,18 @@
 
 	<Stack>
 		<h2 class="h3">{m.msig_proposed_actions()}</h2>
-		{#each manager.actions as action}
-			<ActionCard {action} />
+		<div class="flex gap-2">
+			<Button onclick={() => (variant = 'json')}>JSON</Button>
+			<Button onclick={() => (variant = 'decoded')}>Decoded</Button>
+			<Button onclick={() => (variant = 'pretty')}>Pretty</Button>
+			<Button onclick={() => (variant = 'ricardian')}>Ricardian</Button>
+			<Button onclick={() => (variant = 'summary')}>Summary</Button>
+		</div>
+		{#each manager.readable as decodedAction}
+			<!-- <Code>
+				{JSON.stringify(decodedAction, null, 2)}
+			</Code> -->
+			<ActionCard action={decodedAction.action} decoded={decodedAction.readable?.data} {variant} />
 		{/each}
 	</Stack>
 </Stack>

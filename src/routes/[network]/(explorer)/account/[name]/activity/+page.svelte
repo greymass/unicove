@@ -3,9 +3,9 @@
 	import { onMount } from 'svelte';
 	import { ActivityLoader } from './state.svelte.js';
 	import Button from '$lib/components/button/button.svelte';
-	import Action from '$lib/components/elements/action.svelte';
 	import type { ActivityResponseAction } from '$lib/types/transaction.js';
 	import type { ActionDisplayVariants } from '$lib/types.js';
+	import Trace from '$lib/components/elements/trace.svelte';
 
 	const { data } = $props();
 
@@ -44,7 +44,7 @@
 		activityLoader.loadMore();
 	}
 
-	let variant: ActionDisplayVariants = $state('json');
+	let variant: ActionDisplayVariants = $state('pretty');
 </script>
 
 <Stack class="pb-8">
@@ -56,11 +56,16 @@
 		</div>
 	{/if}
 	{#if activityActions.length}
-		<div>
-			{#each activityActions as activityAction}
-				<Action action={activityAction.action} id={activityAction.action_trace.trx_id} {variant} />
-			{/each}
+		<div class="flex gap-2">
+			<Button onclick={() => (variant = 'json')}>JSON</Button>
+			<Button onclick={() => (variant = 'decoded')}>Decoded</Button>
+			<Button onclick={() => (variant = 'pretty')}>Pretty</Button>
+			<Button onclick={() => (variant = 'ricardian')}>Ricardian</Button>
+			<Button onclick={() => (variant = 'summary')}>Summary</Button>
 		</div>
+		{#each activityActions as activityAction}
+			<Trace trace={activityAction.trace} {variant} />
+		{/each}
 
 		{#if hasMore}
 			<Button onclick={clickLoadMore} variant="primary" class="">

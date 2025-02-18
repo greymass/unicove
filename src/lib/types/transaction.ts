@@ -14,31 +14,31 @@ import {
 	Transaction,
 	TransactionHeader,
 	UInt32,
-	UInt64,
-	type AnyAction
+	UInt64
 } from '@wharfkit/antelope';
 
-@Struct.type('transaction_response_action_decoded')
+@Struct.type('action_decoded')
 export class ActionDecoded extends Action {
 	@Struct.field('string') declare hex_data: string;
 }
 
-@Struct.type('transaction_response_ram_delta')
-export class TransactionResponseRamDelta extends Struct {
+@Struct.type('account_ram_delta')
+export class AccountRamDelta extends Struct {
 	@Struct.field(Int32) declare delta: Int32;
 	@Struct.field(Name) declare account: Name;
 }
 
-@Struct.type('transaction_response_action')
-export class TransactionResponseAction extends Struct {
-	@Struct.field('name') account!: Name;
-	@Struct.field('name') name!: Name;
-	@Struct.field(PermissionLevel, { array: true }) authorization!: PermissionLevel[];
-	@Struct.field('any') data!: Record<string, any>;
-	@Struct.field('string') hex_data!: string;
+@Struct.type('action_trace_action')
+export class ActionTraceAction extends Struct {
+	@Struct.field(Name) declare account: Name;
+	@Struct.field(Name) declare name: Name;
+	@Struct.field(PermissionLevel, { array: true }) declare authorization: PermissionLevel[];
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	@Struct.field('any', { optional: true }) declare data?: any;
+	@Struct.field('string') declare hex_data: string;
 }
 
-@Struct.type('transaction_response_trace_receipt')
+@Struct.type('action_trace_receipt')
 export class ActionTraceReceipt extends Struct {
 	@Struct.field(UInt64) declare abi_sequence: UInt64;
 	@Struct.field(Checksum256) declare act_digest: Checksum256;
@@ -50,11 +50,11 @@ export class ActionTraceReceipt extends Struct {
 	@Struct.field(UInt64) declare recv_sequence: UInt64;
 }
 
-@Struct.type('transaction_response_trace')
+@Struct.type('action_trace')
 export class ActionTrace extends Struct {
-	@Struct.field(TransactionResponseRamDelta, { array: true })
-	declare account_ram_deltas: TransactionResponseRamDelta[];
-	@Struct.field('any') declare act: TransactionResponseAction;
+	@Struct.field(AccountRamDelta, { array: true })
+	declare account_ram_deltas: AccountRamDelta[];
+	@Struct.field(ActionTraceAction) declare act: ActionTraceAction;
 	@Struct.field(UInt32) declare action_ordinal: UInt32;
 	@Struct.field(UInt32) declare block_num: UInt32;
 	@Struct.field(BlockTimestamp) declare block_time: BlockTimestamp;
@@ -74,6 +74,15 @@ export class ActionTrace extends Struct {
 			authorization: this.act.authorization,
 			data: this.act.hex_data
 		});
+	}
+}
+
+@Struct.type('action_trace_filtered')
+export class ActionTraceFiltered extends ActionTrace {
+	@Struct.field(ActionTraceReceipt, { array: true }) declare receipts: ActionTraceReceipt[];
+
+	get notifications(): Name[] {
+		return this.receipts.map((receipt) => receipt.receiver);
 	}
 }
 
@@ -121,15 +130,28 @@ export class TransactionResponse extends Struct {
 	@Struct.field(TransactionResponseTrx) declare trx: TransactionResponseTrx;
 
 	// A deduplicated/filtered list of the traces
-	get filtered(): ActionTrace[] {
+	get filtered(): ActionTraceFiltered[] {
 		const digests: string[] = [];
-		const traces: ActionTrace[] = this.traces.filter((trace) => {
-			if (digests.includes(String(trace.receipt.act_digest))) {
-				return false;
-			}
-			digests.push(String(trace.receipt.act_digest));
-			return true;
-		});
+		const receipts: Record<string, ActionTraceReceipt[]> = {};
+		const traces: ActionTraceFiltered[] = this.traces
+			.filter((trace) => {
+				if (!receipts[String(trace.receipt.act_digest)]) {
+					receipts[String(trace.receipt.act_digest)] = [];
+				}
+				receipts[String(trace.receipt.act_digest)].push(trace.receipt);
+
+				if (digests.includes(String(trace.receipt.act_digest))) {
+					return false;
+				}
+				digests.push(String(trace.receipt.act_digest));
+				return true;
+			})
+			.map((trace) => {
+				return ActionTraceFiltered.from({
+					...trace,
+					receipts: receipts[String(trace.receipt.act_digest)]
+				});
+			});
 		return traces;
 	}
 
@@ -181,12 +203,18 @@ export class ActivityResponseAction extends Struct {
 	@Struct.field(ActionTrace) declare action_trace: ActionTrace;
 
 	get action(): Action {
-		console.log(this.action_trace);
 		return Action.from({
 			account: this.action_trace.act.account,
 			name: this.action_trace.act.name,
 			authorization: this.action_trace.act.authorization,
 			data: this.action_trace.act.hex_data
+		});
+	}
+
+	get trace(): ActionTraceFiltered {
+		return ActionTraceFiltered.from({
+			...this.action_trace,
+			receipts: [this.action_trace.receipt]
 		});
 	}
 }

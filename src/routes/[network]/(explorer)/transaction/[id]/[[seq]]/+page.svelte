@@ -1,8 +1,6 @@
 <script lang="ts">
 	import Button from '$lib/components/button/button.svelte';
-	import Action from '$lib/components/elements/action.svelte';
 	import Trace from '$lib/components/elements/trace.svelte';
-	import * as m from '$lib/paraglide/messages';
 	import type { ActionDisplayVariants } from '$lib/types.js';
 
 	let { data } = $props();

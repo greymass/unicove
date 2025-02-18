@@ -1,6 +1,4 @@
-import { ActivityAction, type ActivityActionWrapper } from '$lib/types/network';
 import { ActivityResponse, ActivityResponseAction } from '$lib/types/transaction';
-import { convertActivityAction } from '$lib/utils';
 import { UInt64 } from '@wharfkit/session';
 
 export class Scene {
