@@ -1,16 +1,25 @@
 <script lang="ts">
+	import Button from '$lib/components/button/button.svelte';
 	import Action from '$lib/components/elements/action.svelte';
+	import Trace from '$lib/components/elements/trace.svelte';
 	import * as m from '$lib/paraglide/messages';
+	import type { ActionDisplayVariants } from '$lib/types.js';
 
 	let { data } = $props();
+
+	let variant: ActionDisplayVariants = $state('pretty');
 </script>
 
-<h3 class="h3">
-	{m.transaction_num_actions({
-		number: data.transaction.actions.length
-	})}
-</h3>
+Actions ({data.transaction.actions.length})
 
-{#each data.transaction.actions as action}
-	<Action {action} />
+<div class="flex gap-2">
+	<Button onclick={() => (variant = 'json')}>JSON</Button>
+	<Button onclick={() => (variant = 'decoded')}>Decoded</Button>
+	<Button onclick={() => (variant = 'pretty')}>Pretty</Button>
+	<Button onclick={() => (variant = 'ricardian')}>Ricardian</Button>
+	<Button onclick={() => (variant = 'summary')}>Summary</Button>
+</div>
+
+{#each data.transaction.filtered as trace}
+	<Trace {trace} {variant} />
 {/each}

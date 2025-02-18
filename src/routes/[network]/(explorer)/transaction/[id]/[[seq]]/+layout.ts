@@ -20,19 +20,23 @@ export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 	const transaction = TransactionResponse.from(json);
 	return {
 		transaction,
-		title: `${truncateCenter(String(json.id), 14)}`,
-		subtitle: m.transaction_page_subtitle({
-			date: String(json.block_time)
+		title: m.transaction_page_subtitle({
+			date: String(transaction.block_time)
 		}),
+		subtitle: transaction.id,
+		// title: `${truncateCenter(String(json.id), 14)}`,
+		// subtitle: m.transaction_page_subtitle({
+		// 	date: String(json.block_time)
+		// }),
 		id: params.id,
 		seq: params.seq,
 		pageMetaTags: {
 			title: m.transaction_page_meta_title({
-				id: String(json.id),
+				id: String(transaction.id),
 				network: network.chain.name
 			}),
 			description: m.transaction_page_meta_description({
-				date: String(json.block_time),
+				date: String(transaction.block_time),
 				network: network.chain.name
 			})
 		}

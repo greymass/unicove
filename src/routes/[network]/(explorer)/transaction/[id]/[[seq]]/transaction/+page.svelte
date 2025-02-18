@@ -4,8 +4,8 @@
 	export let data: PageData;
 </script>
 
-<p>Traces ({data.transaction.traces.length})</p>
+<p>Transaction</p>
 
 <pre>
-{JSON.stringify(data.transaction.traces, null, 2)}
+{JSON.stringify(data.transaction.transaction, null, 2)}
 </pre>

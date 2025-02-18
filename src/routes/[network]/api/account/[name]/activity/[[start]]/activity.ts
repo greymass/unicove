@@ -1,12 +1,12 @@
-import { API, APIClient, Serializer } from '@wharfkit/antelope';
-import type { Activity } from '$lib/types/network';
+import { API, APIClient } from '@wharfkit/antelope';
 import { RoborovskiClient } from '@wharfkit/roborovski';
+import { ActivityResponse } from '$lib/types/transaction';
 
 export async function getActivity(
 	client: APIClient,
 	name: string,
 	start: number
-): Promise<Activity> {
+): Promise<ActivityResponse> {
 	const robo = new RoborovskiClient(client);
 	let response: API.v1.GetActionsResponse;
 	try {
@@ -15,23 +15,12 @@ export async function getActivity(
 			start: start,
 			reverse: true
 		});
+		console.log(response);
 	} catch {
 		throw new Error(`Error while loading activity for ${name}.`);
 	}
-
-	return Serializer.objectify({
-		actions: response.actions.map((action) => {
-			return {
-				id: action.action_trace.trx_id,
-				seq: action.global_action_seq,
-				timestamp: action.block_time,
-				contract: action.action_trace.act.account,
-				action: action.action_trace.act.name,
-				authorizations: action.action_trace.act.authorization,
-				data: action.action_trace.act.data,
-				raw: action
-			};
-		}),
+	return ActivityResponse.from({
+		actions: response.actions,
 		first: response.actions[0].account_action_seq,
 		last: response.actions[response.actions.length - 1].account_action_seq,
 		head_block_num: response.actions[0].block_num

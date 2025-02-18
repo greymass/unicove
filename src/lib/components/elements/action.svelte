@@ -1,29 +1,79 @@
 <script lang="ts">
-	import { Name, PermissionLevel, type AnyAction } from '@wharfkit/antelope';
+	import {
+		Action,
+		Name,
+		PermissionLevel,
+		Serializer,
+		type AnyAction,
+		type Checksum256Type
+	} from '@wharfkit/antelope';
 	import Code from '../code.svelte';
 	import Account from '$lib/components/elements/account.svelte';
 	import Contract from '$lib/components/elements/contract.svelte';
+	import type { ActionDisplayVariants } from '$lib/types';
+	import Transaction from './transaction.svelte';
+	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import { getContext } from 'svelte';
 
-	type VariantTypes = 'json';
+	const context = getContext<UnicoveContext>('state');
 
 	interface Props {
-		action: AnyAction;
-		variant?: VariantTypes;
+		action: Action;
+		id?: Checksum256Type;
+		variant?: ActionDisplayVariants;
 	}
 
-	let { action, variant = 'json' }: Props = $props();
+	let { action, id, variant = 'json' }: Props = $props();
+
+	async function decode() {
+		if (!context.network.abis) return;
+		const abi = await context.network.abis?.getAbi(action.account);
+		const test = Action.from(action, abi);
+		return Serializer.decode({
+			data: action.data,
+			type: String(action.name),
+			abi: abi
+		});
+	}
 </script>
 
 <div>
 	<div>
-		<Contract name={action.account} action={action.name}>{action.name}</Contract>
+		{#if id}
+			Transaction: <Transaction {id} />
+		{/if}
+	</div>
+	<div>
+		<Contract name={action.account} action={action.name}>
+			{action.name}
+		</Contract>
 		-
 		<Contract name={action.account} />
 	</div>
 	<div>
-		{#if variant === 'json'}
+		{#if variant === 'summary'}
+			summary not implemented
+		{:else if variant === 'ricardian'}
+			ricardian not implemented
+		{:else if variant === 'pretty'}
+			{#each Object.keys(action.data) as key}
+				<div>
+					{key}
+				</div>
+			{/each}
+		{:else if variant === 'decoded'}
 			<Code>
-				{JSON.stringify(action.data, null, 2)}
+				{#await decode()}
+					Loading...
+				{:then decoded}
+					{JSON.stringify(decoded, null, 2)}
+				{:catch}
+					{JSON.stringify(action, null, 2)}
+				{/await}
+			</Code>
+		{:else if variant === 'json'}
+			<Code>
+				{JSON.stringify(action, null, 2)}
 			</Code>
 		{/if}
 	</div>
