@@ -1,39 +1,37 @@
 <script lang="ts">
-	import { type Action } from '@wharfkit/antelope';
+	import { Name, PermissionLevel, type AnyAction } from '@wharfkit/antelope';
 	import Code from '../code.svelte';
-	import { DL, DLRow, DD } from '../descriptionlist';
-	import { Stack } from '../layout';
-	import Account from './account.svelte';
+	import Account from '$lib/components/elements/account.svelte';
+	import Contract from '$lib/components/elements/contract.svelte';
+
+	type VariantTypes = 'json';
 
 	interface Props {
-		action: Action;
+		action: AnyAction;
+		variant?: VariantTypes;
 	}
 
-	let { action }: Props = $props();
-
-	// const arr = action.authorization.map((auth) => [Account, auth]);
-	// let test = [Account];
+	let { action, variant = 'json' }: Props = $props();
 </script>
 
-{#if action}
-	<div class="grid grid-cols-2 items-start gap-6">
-		<Code>{JSON.stringify(action.data, null, 2)}</Code>
-		<Stack class="gap-2">
-			<h3 class="h4">{String(action.name)}</h3>
-			<DL>
-				<DLRow title="Contract">
-					<DD>
-						<Account name={action.account} contract />
-					</DD>
-				</DLRow>
-				<DLRow title="Authorization">
-					{#each action.authorization as auth}
-						<DD>
-							<Account name={auth.actor}>{auth}</Account>
-						</DD>
-					{/each}
-				</DLRow>
-			</DL>
-		</Stack>
+<div>
+	<div>
+		<Contract name={action.account} action={action.name}>{action.name}</Contract>
+		-
+		<Contract name={action.account} />
 	</div>
-{/if}
+	<div>
+		{#if variant === 'json'}
+			<Code>
+				{JSON.stringify(action.data, null, 2)}
+			</Code>
+		{/if}
+	</div>
+	<div>
+		{#each action.authorization as auth}
+			<Account name={Name.from(auth.actor)}>
+				{PermissionLevel.from(auth)}
+			</Account>
+		{/each}
+	</div>
+</div>

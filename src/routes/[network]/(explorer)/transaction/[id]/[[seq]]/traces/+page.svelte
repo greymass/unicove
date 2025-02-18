@@ -23,7 +23,7 @@
 		}));
 	};
 
-	const traces = deduplicateTraces(data.transaction?.traces);
+	const traces = deduplicateTraces(data.transaction.traces);
 	// Define the Action interface
 	interface Trace {
 		act: Action;

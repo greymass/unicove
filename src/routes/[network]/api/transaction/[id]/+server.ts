@@ -1,15 +1,22 @@
 import { error, json } from '@sveltejs/kit';
-import type { API } from '@wharfkit/antelope';
+import { Checksum256 } from '@wharfkit/antelope';
 
+import type { RequestEvent } from './$types';
 import { getCacheHeaders } from '$lib/utils';
 import { getBackendClient } from '$lib/wharf/client/ssr';
-import type { RequestEvent } from './$types';
+import { TransactionResponse } from '$lib/types/transaction';
 
 export async function GET({ fetch, locals, params }: RequestEvent) {
-	let transaction: API.v1.GetTransactionResponse;
+	let transaction: TransactionResponse;
 	try {
 		const client = getBackendClient(String(locals.network), fetch, { history: true });
-		transaction = await client.v1.history.get_transaction(String(params.id));
+		transaction = await client.call({
+			path: '/v1/history/get_transaction',
+			params: {
+				id: Checksum256.from(params.id)
+			},
+			responseType: TransactionResponse
+		});
 	} catch (e) {
 		return error(500, {
 			message: `Error while loading transaction ${params.id}: ${e}.`
@@ -18,14 +25,7 @@ export async function GET({ fetch, locals, params }: RequestEvent) {
 
 	const irreversible = transaction.last_irreversible_block.gte(transaction.block_num);
 	const headers = getCacheHeaders(5, irreversible);
-
-	return json(
-		{
-			ts: new Date(),
-			transaction
-		},
-		{
-			headers
-		}
-	);
+	return json(transaction, {
+		headers
+	});
 }
