@@ -6,13 +6,16 @@
 
 	const { network } = getContext<UnicoveContext>('state');
 
-	let { id }: { id: Checksum256Type } = $props();
+	let { id, class: className }: { id: Checksum256Type; class?: string } = $props();
 
 	const truncatedString = truncateCenter(String(id));
 </script>
 
 {#if id}
-	<a class="text-skyBlue-500 hover:text-skyBlue-400" href="/{network}/transaction/{String(id)}">
+	<a
+		class="text-skyBlue-500 hover:text-skyBlue-400 {className}"
+		href="/{network}/transaction/{String(id)}"
+	>
 		{truncatedString}
 	</a>
 {/if}

@@ -8,6 +8,7 @@
 	import Trace from '$lib/components/elements/trace.svelte';
 	import SelectActionVariant from '$lib/components/select/actionvariant.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
+	import { getActionSummaryComponent } from '$lib/components/summary/index.js';
 
 	const { data } = $props();
 
@@ -62,7 +63,10 @@
 		<SelectActionVariant />
 
 		{#each activityActions as activityAction}
-			<Trace trace={activityAction.trace} {variant} trxid />
+			{@const contract = String(activityAction.trace.action.account)}
+			{@const action = String(activityAction.trace.action.name)}
+			{@const summary = getActionSummaryComponent(contract, action)}
+			<Trace trace={activityAction.trace} {summary} trxid {variant} />
 		{/each}
 
 		{#if hasMore}
