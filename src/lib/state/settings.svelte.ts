@@ -13,7 +13,7 @@ export type SettingsData = Record<SettingKeys, unknown>;
 
 export class SettingsState {
 	data = $state<SettingsData>({
-		actionDisplayVariant: 'summary',
+		actionDisplayVariant: 'pretty',
 		advancedMode: false,
 		debugMode: false,
 		preventAccountPageSwitching: false,
