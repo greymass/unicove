@@ -12,21 +12,30 @@
 	import type { ActionDisplayVariants } from '$lib/types';
 	import Transaction from './transaction.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import { getContext } from 'svelte';
+	import { getContext, type Component } from 'svelte';
+	import type { DecodedActionData } from '$lib/types/transaction';
 
 	const context = getContext<UnicoveContext>('state');
 
 	interface Props {
 		action: Action;
 		datetime?: Date;
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		decoded?: Record<string, any>;
+		decoded?: DecodedActionData;
 		id?: Checksum256Type;
 		notified?: Name[];
+		summary?: Component<any, {}>;
 		variant?: ActionDisplayVariants;
 	}
 
-	let { action, datetime, decoded, id, notified, variant = 'json' }: Props = $props();
+	let {
+		action,
+		datetime,
+		decoded,
+		id,
+		notified,
+		summary: Summary,
+		variant = 'json'
+	}: Props = $props();
 
 	async function decode() {
 		if (!context.network.abis) return;
@@ -42,20 +51,27 @@
 {#snippet KeyValue(key: string, value: string)}
 	{@const isArray = Array.isArray(value)}
 	{@const isObject = typeof value === 'object'}
-	<div>
-		<span class="text-muted">
-			{#if isArray || isObject}
-				{key}
-			{:else}
-				{key}:
-			{/if}
-		</span>
+	<div class="font-mono text-white">
+		{#if key}
+			<span class="text-muted">
+				{#if isArray || isObject}
+					{key}:
+					{#if isArray}
+						({value.length})
+					{/if}
+				{:else}
+					{key}:
+				{/if}
+			</span>
+		{/if}
 		{#if isArray}
-			{#each value as v}
-				{@render KeyValue('', v)}
-			{:else}
-				[]
-			{/each}
+			<ol class="list-decimal pl-4">
+				{#each value as v}
+					<li class="ml-4">
+						{@render KeyValue('', v)}
+					</li>
+				{/each}
+			</ol>
 		{:else if isObject}
 			<div class="ml-4">
 				{#each Object.keys(value) as k}
@@ -66,6 +82,35 @@
 			{value}
 		{/if}
 	</div>
+{/snippet}
+
+{#snippet Json()}
+	<Code>
+		{JSON.stringify(action, null, 2)}
+	</Code>
+{/snippet}
+
+{#snippet Decoded()}
+	<Code>
+		{#await decode()}
+			Loading...
+		{:then decoded}
+			{JSON.stringify(decoded, null, 2)}
+		{:catch error}
+			{error.message}
+			{JSON.stringify(action, null, 2)}
+		{/await}
+	</Code>
+{/snippet}
+
+{#snippet Pretty(data: DecodedActionData | undefined)}
+	{#if data}
+		{#each Object.keys(data) as key}
+			{@render KeyValue(key, data[key])}
+		{/each}
+	{:else}
+		<div class="text-muted">No decoded data</div>
+	{/if}
 {/snippet}
 
 <div>
@@ -101,32 +146,17 @@
 	</div>
 	<div class="bg-mineShaft-950 p-4">
 		{#if variant === 'summary'}
-			summary not implemented
-		{:else if variant === 'ricardian'}
-			ricardian not implemented
-		{:else if variant === 'pretty'}
-			{#if decoded}
-				{#each Object.keys(decoded) as key}
-					{@render KeyValue(key, decoded[key])}
-				{/each}
+			{#if decoded && Summary}
+				<Summary action={{ data: decoded }} />
 			{:else}
-				<div class="text-muted">No decoded data</div>
+				{@render Pretty(decoded)}
 			{/if}
+		{:else if variant === 'pretty'}
+			{@render Pretty(decoded)}
 		{:else if variant === 'decoded'}
-			<Code>
-				{#await decode()}
-					Loading...
-				{:then decoded}
-					{JSON.stringify(decoded, null, 2)}
-				{:catch error}
-					{error.message}
-					{JSON.stringify(action, null, 2)}
-				{/await}
-			</Code>
+			{@render Decoded()}
 		{:else if variant === 'json'}
-			<Code>
-				{JSON.stringify(action, null, 2)}
-			</Code>
+			{@render Json()}
 		{/if}
 	</div>
 </div>

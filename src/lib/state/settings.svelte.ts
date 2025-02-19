@@ -1,6 +1,7 @@
 import { browser } from '$app/environment';
 
 export enum SettingKeys {
+	'actionDisplayVariant' = 'actionDisplayVariant',
 	'advancedMode' = 'advancedMode',
 	'debugMode' = 'debugMode',
 	'preventAccountPageSwitching' = 'preventAccountPageSwitching',
@@ -12,6 +13,7 @@ export type SettingsData = Record<SettingKeys, unknown>;
 
 export class SettingsState {
 	data = $state<SettingsData>({
+		actionDisplayVariant: 'summary',
 		advancedMode: false,
 		debugMode: false,
 		preventAccountPageSwitching: false,

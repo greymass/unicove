@@ -7,6 +7,7 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
 	import Account from '$lib/components/elements/account.svelte';
 	import ActionCard from '$lib/components/elements/action.svelte';
+	import SelectActionVariant from '$lib/components/select/actionvariant.svelte';
 	import * as m from '$lib/paraglide/messages';
 
 	import { ApprovalManager } from './manager.svelte';
@@ -23,7 +24,7 @@
 
 	const top21 = data.producers.splice(0, 21);
 
-	let variant: ActionDisplayVariants = $state('pretty');
+	let variant = $derived(context.settings.data.actionDisplayVariant as ActionDisplayVariants);
 </script>
 
 <Stack>
@@ -158,13 +159,7 @@
 
 	<Stack>
 		<h2 class="h3">{m.msig_proposed_actions()}</h2>
-		<div class="flex gap-2">
-			<Button onclick={() => (variant = 'json')}>JSON</Button>
-			<Button onclick={() => (variant = 'decoded')}>Decoded</Button>
-			<Button onclick={() => (variant = 'pretty')}>Pretty</Button>
-			<Button onclick={() => (variant = 'ricardian')}>Ricardian</Button>
-			<Button onclick={() => (variant = 'summary')}>Summary</Button>
-		</div>
+		<SelectActionVariant />
 		{#each manager.readable as decodedAction}
 			<!-- <Code>
 				{JSON.stringify(decodedAction, null, 2)}

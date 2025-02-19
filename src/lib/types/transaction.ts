@@ -17,6 +17,9 @@ import {
 	UInt64
 } from '@wharfkit/antelope';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type DecodedActionData = Record<string, any>;
+
 @Struct.type('action_decoded')
 export class ActionDecoded extends Action {
 	@Struct.field('string') declare hex_data: string;
@@ -33,8 +36,7 @@ export class ActionTraceAction extends Struct {
 	@Struct.field(Name) declare account: Name;
 	@Struct.field(Name) declare name: Name;
 	@Struct.field(PermissionLevel, { array: true }) declare authorization: PermissionLevel[];
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	@Struct.field('any', { optional: true }) declare data?: any;
+	@Struct.field('any', { optional: true }) declare data?: DecodedActionData;
 	@Struct.field('string') declare hex_data: string;
 }
 

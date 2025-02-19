@@ -1,15 +1,18 @@
 <script lang="ts">
 	import Stack from '$lib/components/layout/stack.svelte';
-	import { onMount } from 'svelte';
+	import { getContext, onMount } from 'svelte';
 	import { ActivityLoader } from './state.svelte.js';
 	import Button from '$lib/components/button/button.svelte';
 	import type { ActivityResponseAction } from '$lib/types/transaction.js';
 	import type { ActionDisplayVariants } from '$lib/types.js';
 	import Trace from '$lib/components/elements/trace.svelte';
+	import SelectActionVariant from '$lib/components/select/actionvariant.svelte';
+	import type { UnicoveContext } from '$lib/state/client.svelte.js';
 
 	const { data } = $props();
 
 	const networkName = String(data.network);
+	const context = getContext<UnicoveContext>('state');
 
 	onMount(() => {
 		const loader = ActivityLoader.getInst(networkName, data.network.fetch);
@@ -44,7 +47,7 @@
 		activityLoader.loadMore();
 	}
 
-	let variant: ActionDisplayVariants = $state('pretty');
+	let variant = $derived(context.settings.data.actionDisplayVariant as ActionDisplayVariants);
 </script>
 
 <Stack class="pb-8">
@@ -56,13 +59,8 @@
 		</div>
 	{/if}
 	{#if activityActions.length}
-		<div class="flex gap-2">
-			<Button onclick={() => (variant = 'json')}>JSON</Button>
-			<Button onclick={() => (variant = 'decoded')}>Decoded</Button>
-			<Button onclick={() => (variant = 'pretty')}>Pretty</Button>
-			<Button onclick={() => (variant = 'ricardian')}>Ricardian</Button>
-			<Button onclick={() => (variant = 'summary')}>Summary</Button>
-		</div>
+		<SelectActionVariant />
+
 		{#each activityActions as activityAction}
 			<Trace trace={activityAction.trace} {variant} />
 		{/each}
