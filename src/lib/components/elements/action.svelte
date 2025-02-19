@@ -147,6 +147,9 @@
 			</Contract>
 		</div>
 		<div class="text-muted flex-1 text-right align-baseline text-sm">
+			{#if datetime}
+				<DateTime {datetime} />
+			{/if}
 			<div class="text-2xl text-white">
 				{#if id}
 					<div>
@@ -154,9 +157,6 @@
 					</div>
 				{/if}
 			</div>
-			{#if datetime}
-				<DateTime {datetime} />
-			{/if}
 		</div>
 	</div>
 {/snippet}
