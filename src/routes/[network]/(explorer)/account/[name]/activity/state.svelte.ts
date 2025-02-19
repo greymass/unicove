@@ -90,22 +90,27 @@ export class ActivityLoader {
 
 	private async loadRemote(more: boolean) {
 		try {
+			if (!this.account) return;
+			const account = this.account;
 			this.scene.setLoading(true);
 			const startIndex = more ? this.scene!.loadStart : 1;
 			const response = await this.fetch(
-				`/${this.network}/api/account/${this.account}/activity/${startIndex}`
+				`/${this.network}/api/account/${account}/activity/${startIndex}`
 			);
 			if (!response.ok) {
-				throw new Error(`Error while loading activity for ${this.account}.`);
+				throw new Error(`Error while loading activity for ${account}.`);
 			}
 			const json = await response.json();
 			const activity = ActivityResponse.from(json.activity);
 			const nextStart = -Number(activity.last);
 			const hasMore = activity.actions.length > 0 && activity.last.gt(UInt64.from(0));
+			const filtered = activity.actions.filter((action) =>
+				action.action_trace.receiver.equals(account)
+			);
 			if (!more) {
-				this.scene.setList(activity.actions, nextStart, hasMore);
+				this.scene.setList(filtered, nextStart, hasMore);
 			} else {
-				this.scene.appendList(activity.actions, nextStart, hasMore);
+				this.scene.appendList(filtered, nextStart, hasMore);
 			}
 		} catch (error: unknown) {
 			console.error('Error fetching activity actions:', error);
