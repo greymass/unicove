@@ -21,6 +21,7 @@
 
 	$effect(() => {
 		context.settings.data = {
+			...context.settings.data,
 			advancedMode,
 			preventAccountPageSwitching,
 			searchAccountSwitch,

@@ -13,7 +13,7 @@
 	import Transaction from './transaction.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext, type Component } from 'svelte';
-	import type { DecodedActionData } from '$lib/types/transaction';
+	import type { ActionSummaryProps, DecodedActionData } from '$lib/types/transaction';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -23,7 +23,7 @@
 		decoded?: DecodedActionData;
 		id?: Checksum256Type;
 		notified?: Name[];
-		summary?: Component<any, {}>;
+		summary?: Component<ActionSummaryProps, object>;
 		variant?: ActionDisplayVariants;
 	}
 
@@ -33,7 +33,7 @@
 		decoded,
 		id,
 		notified,
-		summary: Summary,
+		summary: ActionSummary,
 		variant = 'json'
 	}: Props = $props();
 
@@ -113,6 +113,14 @@
 	{/if}
 {/snippet}
 
+{#snippet Summary()}
+	{#if decoded && ActionSummary}
+		<ActionSummary data={decoded} />
+	{:else}
+		{@render Pretty(decoded)}
+	{/if}
+{/snippet}
+
 <div>
 	<div class="bg-mineShaft-900 p-4">
 		{#if id}
@@ -146,11 +154,7 @@
 	</div>
 	<div class="bg-mineShaft-950 p-4">
 		{#if variant === 'summary'}
-			{#if decoded && Summary}
-				<Summary action={{ data: decoded }} />
-			{:else}
-				{@render Pretty(decoded)}
-			{/if}
+			{@render Summary()}
 		{:else if variant === 'pretty'}
 			{@render Pretty(decoded)}
 		{:else if variant === 'decoded'}

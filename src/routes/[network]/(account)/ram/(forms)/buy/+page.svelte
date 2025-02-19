@@ -176,9 +176,9 @@
 
 				{#if buyRamState.valid}
 					{#if buyRamState.format === 'asset'}
-						<SummaryBuyRAM class="hidden" action={{ data: buyRamState.toJSON() }} />
+						<SummaryBuyRAM class="hidden" data={buyRamState.toJSON()} />
 					{:else}
-						<SummaryBuyRAMBytes class="hidden" action={{ data: buyRamState.toJSON() }} />
+						<SummaryBuyRAMBytes class="hidden" data={buyRamState.toJSON()} />
 					{/if}
 				{/if}
 			</Stack>

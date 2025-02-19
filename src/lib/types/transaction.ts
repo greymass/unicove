@@ -1,5 +1,6 @@
 import {
 	Action,
+	Asset,
 	BlockTimestamp,
 	Bytes,
 	Checksum256,
@@ -19,6 +20,12 @@ import {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type DecodedActionData = Record<string, any>;
+
+export interface ActionSummaryProps {
+	class?: string;
+	data: DecodedActionData;
+	value?: Asset;
+}
 
 @Struct.type('action_decoded')
 export class ActionDecoded extends Action {

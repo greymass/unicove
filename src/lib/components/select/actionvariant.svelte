@@ -1,17 +1,12 @@
 <script lang="ts">
-	import type { ActionDisplayVariants } from '$lib/types';
-	import type { HTMLAttributes } from 'svelte/elements';
-	import Button from '../button/button.svelte';
-	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
+	import type { ActionDisplayVariants } from '$lib/types';
+	import Button from '$lib/components/button/button.svelte';
+	import type { UnicoveContext } from '$lib/state/client.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 
 	let current = $derived(context.settings.data.actionDisplayVariant);
-
-	interface Props extends HTMLAttributes<HTMLSpanElement> {
-		variant: ActionDisplayVariants;
-	}
 
 	function set(variant: ActionDisplayVariants) {
 		context.settings.data.actionDisplayVariant = variant;

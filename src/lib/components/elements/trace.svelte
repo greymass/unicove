@@ -3,22 +3,23 @@
 
 	import ActionElement from '$lib/components/elements/action.svelte';
 	import type { ActionDisplayVariants } from '$lib/types';
-	import type { ActionTraceFiltered } from '$lib/types/transaction';
+	import type { ActionSummaryProps, ActionTraceFiltered } from '$lib/types/transaction';
 
 	interface Props {
-		summary?: Component<any, {}>;
+		summary?: Component<ActionSummaryProps, object>;
 		trace: ActionTraceFiltered;
 		variant?: ActionDisplayVariants;
+		trxid?: boolean;
 	}
 
-	let { trace, summary, variant = 'json' }: Props = $props();
+	let { trace, trxid = false, summary, variant = 'json' }: Props = $props();
 </script>
 
 <ActionElement
 	action={trace.action}
 	datetime={trace.block_time.toDate()}
 	decoded={trace.act.data}
-	id={trace.trx_id}
+	id={trxid ? trace.trx_id : undefined}
 	notified={trace.notifications}
 	{summary}
 	{variant}
