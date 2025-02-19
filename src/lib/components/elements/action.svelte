@@ -9,6 +9,7 @@
 	import Code from '../code.svelte';
 	import Account from '$lib/components/elements/account.svelte';
 	import Contract from '$lib/components/elements/contract.svelte';
+	import DateTime from '$lib/components/elements/datetime.svelte';
 	import type { ActionDisplayVariants } from '$lib/types';
 	import Transaction from './transaction.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
@@ -86,28 +87,34 @@
 
 {#snippet Json()}
 	<Code>
-		{JSON.stringify(action, null, 2)}
+		<div class="overflow-auto rounded bg-shark-950 p-4">
+			{JSON.stringify(action, null, 2)}
+		</div>
 	</Code>
 {/snippet}
 
 {#snippet Decoded()}
 	<Code>
-		{#await decode()}
-			Loading...
-		{:then decoded}
-			{JSON.stringify(decoded, null, 2)}
-		{:catch error}
-			{error.message}
-			{JSON.stringify(action, null, 2)}
-		{/await}
+		<div class="overflow-auto rounded bg-shark-950 p-4">
+			{#await decode()}
+				Loading...
+			{:then decoded}
+				{JSON.stringify(decoded, null, 2)}
+			{:catch error}
+				{error.message}
+				{JSON.stringify(action, null, 2)}
+			{/await}
+		</div>
 	</Code>
 {/snippet}
 
 {#snippet Pretty(data: DecodedActionData | undefined)}
 	{#if data}
-		{#each Object.keys(data) as key}
-			{@render KeyValue(key, data[key])}
-		{/each}
+		<div class="overflow-auto rounded bg-shark-950 p-8">
+			{#each Object.keys(data) as key}
+				{@render KeyValue(key, data[key])}
+			{/each}
+		</div>
 	{:else}
 		<div class="text-muted">No decoded data</div>
 	{/if}
@@ -121,38 +128,34 @@
 	{/if}
 {/snippet}
 
-<div>
-	<div class="bg-mineShaft-900 p-4">
+<div class="rounded bg-mineShaft-950 p-2">
+	<div class="border-bottom p-4">
 		{#if id}
 			<div>Transaction: <Transaction {id} /></div>
 		{/if}
-		{#if datetime}
-			<div>Date/Time: {datetime}</div>
-		{/if}
-		Contract:
-		<Contract name={action.account} action={action.name}>
-			{action.name}
-		</Contract>
-		/ Action: <Contract name={action.account} />
 
-		<p>
-			Auths:
-			{#each action.authorization as auth}
-				<Account name={Name.from(auth.actor)}>
-					{PermissionLevel.from(auth)}
-				</Account>
-			{/each}
+		<div class="flex">
+			<div>
+				<Contract name={action.account} action={action.name}>
+					<div class="text-2xl text-white">
+						{action.name}
+					</div>
+				</Contract>
+				<Contract name={action.account}>
+					<span class="text-muted">
+						{action.account} contract
+					</span>
+				</Contract>
+			</div>
 
-			{#if notified}
-				/ Notifications:
-				{#each notified as account}
-					<Account name={Name.from(account)} />
-				{/each}
+			{#if datetime}
+				<div class="text-muted flex-1 text-right align-baseline text-sm">
+					<DateTime {datetime} />
+				</div>
 			{/if}
-			/ Mode: {variant}
-		</p>
+		</div>
 	</div>
-	<div class="bg-mineShaft-950 p-4">
+	<div class="p-4">
 		{#if variant === 'summary'}
 			{@render Summary()}
 		{:else if variant === 'pretty'}
@@ -162,5 +165,28 @@
 		{:else if variant === 'json'}
 			{@render Json()}
 		{/if}
+	</div>
+	<div class="flex p-4">
+		{#if id}
+			<div>Transaction: <Transaction {id} /></div>
+		{/if}
+
+		<div>
+			<span class="text-muted">Authorization:</span>
+			{#each action.authorization as auth}
+				<Account name={Name.from(auth.actor)}>
+					{PermissionLevel.from(auth)}
+				</Account>
+			{/each}
+		</div>
+
+		<div class="flex-1 text-right">
+			{#if notified}
+				{#each notified as account}
+					<Account name={Name.from(account)} />
+				{/each}
+				<span class="text-muted"> notified </span>
+			{/if}
+		</div>
 	</div>
 </div>

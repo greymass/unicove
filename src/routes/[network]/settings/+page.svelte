@@ -20,15 +20,23 @@
 	let { data } = $props();
 
 	$effect(() => {
-		context.settings.data = {
-			...context.settings.data,
-			advancedMode,
-			preventAccountPageSwitching,
-			searchAccountSwitch,
-			searchShowPages,
-			// Override debug mode if advanced mode is disabled
-			debugMode: advancedMode ? debugMode : false
-		};
+		context.settings.data.advancedMode = advancedMode;
+	});
+
+	$effect(() => {
+		context.settings.data.preventAccountPageSwitching = preventAccountPageSwitching;
+	});
+
+	$effect(() => {
+		context.settings.data.searchAccountSwitch = searchAccountSwitch;
+	});
+
+	$effect(() => {
+		context.settings.data.searchShowPages = searchShowPages;
+	});
+
+	$effect(() => {
+		context.settings.data.debugMode = advancedMode ? debugMode : false;
 	});
 </script>
 
