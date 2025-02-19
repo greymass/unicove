@@ -20,12 +20,16 @@ export function parseRicardian(action: ABI.Action | undefined): RicardianData | 
 		return undefined;
 	}
 
-	const ricardianData = ricardianRegExp.exec(action.ricardian_contract);
-	const meta: RicardianMeta =
-		ricardianData && ricardianData.length ? yaml.parse(ricardianData[1]) : undefined;
-	const text = ricardianData && ricardianData.length ? ricardianData[2] : undefined;
-	return {
-		meta,
-		text
-	};
+	try {
+		const ricardianData = ricardianRegExp.exec(action.ricardian_contract);
+		const meta: RicardianMeta =
+			ricardianData && ricardianData.length ? yaml.parse(ricardianData[1]) : undefined;
+		const text = ricardianData && ricardianData.length ? ricardianData[2] : undefined;
+		return {
+			meta,
+			text
+		};
+	} catch {
+		return {};
+	}
 }
