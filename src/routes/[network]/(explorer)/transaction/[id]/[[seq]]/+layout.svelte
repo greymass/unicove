@@ -16,13 +16,14 @@
 		}
 		const options = [
 			{ href: urlBase, text: m.common_summary() },
-			{ href: `${urlBase}/actions`, text: 'Actions' },
-			{ href: `${urlBase}/contracts`, text: 'Contracts' },
-			{ href: `${urlBase}/resources`, text: 'Resources' },
-			{ href: `${urlBase}/traces`, text: 'Traces' },
+			// { href: `${urlBase}/resources`, text: 'Resources' },
 			{ href: `${urlBase}/transaction`, text: 'Transaction' }
 		];
 		if (settings.data.debugMode) {
+			options.push({
+				href: `${urlBase}/traces`,
+				text: `Traces (${data.transaction.traces.length})`
+			});
 			options.push({ href: `${urlBase}/data`, text: m.common_data() });
 		}
 		return options;
@@ -31,12 +32,6 @@
 
 <Stack class="@container">
 	<PillGroup {options} />
-
-	<h3 class="h3">
-		{m.transaction_num_actions({
-			number: data.transaction.actions.length
-		})}
-	</h3>
 
 	{@render children()}
 </Stack>

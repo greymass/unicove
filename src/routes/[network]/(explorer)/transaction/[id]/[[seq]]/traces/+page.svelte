@@ -1,11 +1,15 @@
 <script lang="ts">
+	import Code from '$lib/components/code.svelte';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
 </script>
 
-<p>Traces ({data.transaction.traces.length})</p>
+<div class="p-2">
+	<h2 class="h2 text-2xl">Traces ({data.transaction.traces.length})</h2>
+	<p>The individual transaction traces from the transaction.</p>
+</div>
 
-<pre>
-{JSON.stringify(data.transaction.traces, null, 2)}
-</pre>
+{#each data.transaction.traces as trace}
+	<Code>{JSON.stringify(trace, null, 2)}</Code>
+{/each}

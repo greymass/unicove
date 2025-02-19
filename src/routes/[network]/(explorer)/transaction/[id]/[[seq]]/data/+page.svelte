@@ -5,6 +5,9 @@
 	export let data: PageData;
 </script>
 
-<Code>
-	{JSON.stringify(data.transaction, null, 2)}
-</Code>
+<div class="p-2">
+	<h2 class="h2 text-2xl">Data</h2>
+	<p>The raw data for the transaction.</p>
+</div>
+
+<Code>{JSON.stringify(data.transaction, null, 2)}</Code>

@@ -161,9 +161,6 @@
 		<h2 class="h3">{m.msig_proposed_actions()}</h2>
 		<SelectActionVariant />
 		{#each manager.readable as decodedAction}
-			<!-- <Code>
-				{JSON.stringify(decodedAction, null, 2)}
-			</Code> -->
 			<ActionCard action={decodedAction.action} decoded={decodedAction.readable?.data} {variant} />
 		{/each}
 	</Stack>

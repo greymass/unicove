@@ -7,5 +7,5 @@
 </script>
 
 <Card class={cn('text-large gap-6 @container', props.class)}>
-	The resources usage for this transaction was sponsored by Fuel.
+	The resources usage for this transaction was provided by Fuel.
 </Card>

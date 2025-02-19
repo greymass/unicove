@@ -4,6 +4,8 @@ import { truncateCenter } from '$lib/utils';
 import { TransactionResponse } from '$lib/types/transaction';
 import * as m from '$lib/paraglide/messages';
 import type { LayoutLoad } from './$types';
+import { languageTag } from '$lib/paraglide/runtime';
+import { formatDateTime } from '$lib/utils/date';
 
 export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 	const { network } = await parent();
@@ -18,16 +20,16 @@ export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 		});
 	}
 	const transaction = TransactionResponse.from(json);
+	const lang = languageTag();
 	return {
 		transaction,
-		title: m.transaction_page_subtitle({
-			date: String(transaction.block_time)
+		title: `${truncateCenter(String(json.id), 14)}`,
+		subtitle: m.transaction_page_subtitle({
+			date: formatDateTime(transaction.block_time.toDate(), lang, {
+				dateStyle: 'long',
+				timeZone: 'UTC'
+			})
 		}),
-		subtitle: transaction.id,
-		// title: `${truncateCenter(String(json.id), 14)}`,
-		// subtitle: m.transaction_page_subtitle({
-		// 	date: String(json.block_time)
-		// }),
 		id: params.id,
 		seq: params.seq,
 		pageMetaTags: {
@@ -36,7 +38,10 @@ export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 				network: network.chain.name
 			}),
 			description: m.transaction_page_meta_description({
-				date: String(transaction.block_time),
+				date: formatDateTime(transaction.block_time.toDate(), lang, {
+					dateStyle: 'long',
+					timeZone: 'UTC'
+				}),
 				network: network.chain.name
 			})
 		}

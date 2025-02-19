@@ -6,18 +6,19 @@
 	import type { ActionSummaryProps, ActionTraceFiltered } from '$lib/types/transaction';
 
 	interface Props {
+		date?: boolean;
 		summary?: Component<ActionSummaryProps, object>;
 		trace: ActionTraceFiltered;
 		variant?: ActionDisplayVariants;
 		trxid?: boolean;
 	}
 
-	let { trace, trxid = false, summary, variant = 'json' }: Props = $props();
+	let { date = false, trace, trxid = false, summary, variant = 'json' }: Props = $props();
 </script>
 
 <ActionElement
 	action={trace.action}
-	datetime={trace.block_time.toDate()}
+	datetime={date ? trace.block_time.toDate() : undefined}
 	decoded={trace.act.data}
 	id={trxid ? trace.trx_id : undefined}
 	notified={trace.notifications}

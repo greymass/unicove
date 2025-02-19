@@ -98,7 +98,7 @@
 
 {#snippet Decoded()}
 	{#await decode()}
-		Loading...
+		{@render CodeBox('Loading...')}
 	{:then decoded}
 		{@render CodeBox(decoded)}
 	{:catch error}
@@ -121,6 +121,14 @@
 	</Code>
 {/snippet}
 
+{#snippet Ricardian()}
+	<Code>
+		<div class="overflow-auto rounded bg-shark-950 p-4">
+			Rendering of the ricardian contract is not yet supported.
+		</div>
+	</Code>
+{/snippet}
+
 {#snippet Summary()}
 	{#if typeof decoded === 'object' && ActionSummary}
 		<ActionSummary data={decoded} />
@@ -136,7 +144,7 @@
 				<SquareTerminal />
 			</picture>
 		</div>
-		<div>
+		<div class="font-mono">
 			<div>
 				<Contract name={action.account} class="text-muted">
 					{action.account}
@@ -152,7 +160,7 @@
 			{/if}
 			<div class="text-2xl text-white">
 				{#if id}
-					<div>
+					<div class="font-mono">
 						<Transaction {id} class="text-muted" />
 					</div>
 				{/if}
@@ -162,20 +170,22 @@
 {/snippet}
 
 {#snippet Footer()}
-	<div class="flex p-4">
-		<div>
-			<span class="text-muted">Authorized:</span>
-			{#each action.authorization as auth}
-				<Account name={Name.from(auth.actor)}>
-					{PermissionLevel.from(auth)}
-				</Account>
-			{/each}
+	<div class="flex px-4">
+		<div class="text-sm">
+			{#if action.authorization.length}
+				<span class="text-muted">Signed by:</span>
+				{#each action.authorization as auth}
+					<Account name={Name.from(auth.actor)} class="text-white">
+						{PermissionLevel.from(auth)}
+					</Account>
+				{/each}
+			{/if}
 		</div>
 
 		<div class="flex-1 text-right">
 			{#if advancedMode && notified}
 				{#each notified as account}
-					<Account name={Name.from(account)} />
+					<Account name={Name.from(account)} class="text-white" />
 				{/each}
 				<span class="text-muted"> notified </span>
 			{/if}
@@ -188,6 +198,8 @@
 		{@render Header()}
 		{#if variant === 'summary'}
 			{@render Summary()}
+		{:else if variant === 'ricardian'}
+			{@render Ricardian()}
 		{:else if variant === 'pretty'}
 			{@render Pretty(decoded)}
 		{:else if variant === 'decoded'}

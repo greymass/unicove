@@ -66,7 +66,7 @@
 			{@const contract = String(activityAction.trace.action.account)}
 			{@const action = String(activityAction.trace.action.name)}
 			{@const summary = getActionSummaryComponent(contract, action)}
-			<Trace trace={activityAction.trace} {summary} trxid {variant} />
+			<Trace trace={activityAction.trace} {summary} date trxid {variant} />
 		{/each}
 
 		{#if hasMore}

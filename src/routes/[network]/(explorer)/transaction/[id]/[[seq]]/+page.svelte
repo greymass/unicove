@@ -6,6 +6,7 @@
 	import { getActionSummaryComponent } from '$lib/components/summary/index.js';
 	import Trace from '$lib/components/elements/trace.svelte';
 	import SelectActionVariant from '$lib/components/select/actionvariant.svelte';
+	import TransactionHeader from '$lib/components/transaction/header.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -14,7 +15,9 @@
 	let variant = $derived(context.settings.data.actionDisplayVariant as ActionDisplayVariants);
 </script>
 
-Actions ({data.transaction.actions.length})
+<TransactionHeader transaction={data.transaction} />
+
+<h2 class="h2 px-4 text-2xl">Actions ({data.transaction.filtered.length})</h2>
 
 <SelectActionVariant />
 
