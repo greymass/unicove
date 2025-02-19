@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-interface */
 import type { Action, NameType } from '@wharfkit/antelope';
 import {
 	ABI,
@@ -463,7 +462,6 @@ export interface TableTypes {
 }
 export type RowType<T> = T extends keyof TableTypes ? TableTypes[T] : any;
 export type TableNames = keyof TableTypes;
-export interface ActionParams {}
 export namespace ActionParams {
 	export namespace Type {
 		export interface token_definition {
@@ -527,7 +525,6 @@ export namespace ActionParams {
 	}
 	export interface wipe {}
 }
-export const ActionParams: ActionParams = {} as ActionParams;
 export interface ActionNameParams {
 	account: ActionParams.account;
 	available: ActionParams.available;
