@@ -1,7 +1,5 @@
 <script lang="ts">
-	import { formatCurrency } from '$lib/i18n';
-	import { Card, Stack } from '$lib/components/layout';
-	import * as TokenContract from '$lib/wharf/contracts/token';
+	import { Card } from '$lib/components/layout';
 	import { cn } from '$lib/utils';
 	import type { ActionSummaryProps } from '$lib/types/transaction';
 
