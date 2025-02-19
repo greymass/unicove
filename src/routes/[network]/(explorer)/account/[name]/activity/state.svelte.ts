@@ -1,10 +1,10 @@
-import { ActivityAction, type ActivityActionWrapper } from '$lib/types/network';
-import { convertActivityAction } from '$lib/utils';
+import { ActivityResponse, ActivityResponseAction } from '$lib/types/transaction';
+import { UInt64 } from '@wharfkit/session';
 
 export class Scene {
 	firstTime: number = $state(0);
 	updatedTime: number = $state(0);
-	list: ActivityActionWrapper[] = $state([]);
+	list: ActivityResponseAction[] = $state([]);
 	loadStart: number = $state(0);
 	isLoading: boolean = $state(false);
 	hasMore: boolean = $state(false);
@@ -13,7 +13,7 @@ export class Scene {
 		this.isLoading = isLoading;
 	}
 
-	setList(list: ActivityActionWrapper[], loadStart: number, hasMore: boolean) {
+	setList(list: ActivityResponseAction[], loadStart: number, hasMore: boolean) {
 		this.list = [...list];
 		this.isLoading = false;
 		this.loadStart = loadStart;
@@ -21,7 +21,7 @@ export class Scene {
 		this.firstTime = this.updatedTime = Date.now();
 	}
 
-	appendList(list: ActivityActionWrapper[], loadStart: number, hasMore: boolean) {
+	appendList(list: ActivityResponseAction[], loadStart: number, hasMore: boolean) {
 		this.list = [...this.list, ...list];
 		this.isLoading = false;
 		this.loadStart = loadStart;
@@ -90,35 +90,27 @@ export class ActivityLoader {
 
 	private async loadRemote(more: boolean) {
 		try {
+			if (!this.account) return;
+			const account = this.account;
 			this.scene.setLoading(true);
 			const startIndex = more ? this.scene!.loadStart : 1;
 			const response = await this.fetch(
-				`/${this.network}/api/account/${this.account}/activity/${startIndex}`
+				`/${this.network}/api/account/${account}/activity/${startIndex}`
 			);
-			const json: { activity: { actions: string[]; first: number; last: number } } =
-				await response.json();
-
-			const newBatch: ActivityActionWrapper[] = [];
-			json.activity.actions.forEach((item) => {
-				let action = undefined;
-				try {
-					action = ActivityAction.from(item);
-				} catch (e) {
-					console.error('Conver to ActivityAction error ', e);
-				}
-				if (action) {
-					const actionWrapper = convertActivityAction(this.account!, action);
-					if (actionWrapper) {
-						newBatch.push(actionWrapper);
-					}
-				}
-			});
-			const nextStart = -json.activity.last;
-			const hasMore = newBatch.length > 0 && json.activity.last > 0;
+			if (!response.ok) {
+				throw new Error(`Error while loading activity for ${account}.`);
+			}
+			const json = await response.json();
+			const activity = ActivityResponse.from(json.activity);
+			const nextStart = -Number(activity.last);
+			const hasMore = activity.actions.length > 0 && activity.last.gt(UInt64.from(0));
+			const filtered = activity.actions.filter((action) =>
+				action.action_trace.receiver.equals(account)
+			);
 			if (!more) {
-				this.scene.setList(newBatch, nextStart, hasMore);
+				this.scene.setList(filtered, nextStart, hasMore);
 			} else {
-				this.scene.appendList(newBatch, nextStart, hasMore);
+				this.scene.appendList(filtered, nextStart, hasMore);
 			}
 		} catch (error: unknown) {
 			console.error('Error fetching activity actions:', error);

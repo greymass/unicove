@@ -4,13 +4,12 @@ import {
 	Checksum256,
 	Int32,
 	Int64,
-	Name,
-	PermissionLevel,
 	TimePointSec,
 	UInt64,
 	UInt128,
 	APIClient,
-	Asset
+	Asset,
+	Action
 } from '@wharfkit/antelope';
 
 import { Types as DelphioracleTypes } from '$lib/wharf/contracts/delphioracle';
@@ -47,15 +46,10 @@ export interface Activity {
 }
 
 @Struct.type('activity_action')
-export class ActivityAction extends Struct {
+export class ActivityAction extends Action {
 	@Struct.field(Checksum256) declare id: Checksum256;
 	@Struct.field(UInt64) declare seq: UInt64;
 	@Struct.field(TimePointSec) declare timestamp: TimePointSec;
-	@Struct.field(Name) declare contract: Name;
-	@Struct.field(Name) declare action: Name;
-	@Struct.field(PermissionLevel, { array: true }) declare authorizations: PermissionLevel[];
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	@Struct.field('any') declare data: any;
 	@Struct.field(API.v1.OrderedActionsResult) declare raw: API.v1.OrderedActionsResult;
 }
 

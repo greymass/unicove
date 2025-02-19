@@ -33,7 +33,7 @@ import { calculateValue } from '$lib/utils';
 
 import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
 import { Contract as MSIGContract } from '$lib/wharf/contracts/msig';
-import { Contract as SystemContract, Types as SystemTypes } from '$lib/wharf/contracts/system';
+import { Contract as SystemContract } from '$lib/wharf/contracts/system';
 import { Contract as TokenContract } from '$lib/wharf/contracts/token';
 import { Contract as UnicoveContract, Types as UnicoveTypes } from '$lib/wharf/contracts/unicove';
 import { defaultPrice, defaultPriceSymbol } from './defaults/network';

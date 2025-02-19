@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
-	// import { CircleCheck, CircleHelp } from 'lucide-svelte';
 
 	import Button from '$lib/components/button/button.svelte';
 	import { DD, DL, DLRow } from '$lib/components/descriptionlist/index.js';
@@ -8,9 +7,11 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
 	import Account from '$lib/components/elements/account.svelte';
 	import ActionCard from '$lib/components/elements/action.svelte';
+	import SelectActionVariant from '$lib/components/select/actionvariant.svelte';
 	import * as m from '$lib/paraglide/messages';
 
 	import { ApprovalManager } from './manager.svelte';
+	import type { ActionDisplayVariants } from '$lib/types';
 
 	let { data } = $props();
 
@@ -22,6 +23,8 @@
 	});
 
 	const top21 = data.producers.splice(0, 21);
+
+	let variant = $derived(context.settings.data.actionDisplayVariant as ActionDisplayVariants);
 </script>
 
 <Stack>
@@ -156,8 +159,9 @@
 
 	<Stack>
 		<h2 class="h3">{m.msig_proposed_actions()}</h2>
-		{#each manager.actions as action}
-			<ActionCard {action} />
+		<SelectActionVariant />
+		{#each manager.readable as decodedAction}
+			<ActionCard action={decodedAction.action} decoded={decodedAction.readable?.data} {variant} />
 		{/each}
 	</Stack>
 </Stack>

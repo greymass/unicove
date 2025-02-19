@@ -9,3 +9,5 @@ export type DescriptionItem = {
 	key: string;
 	value: string;
 };
+
+export type ActionDisplayVariants = 'summary' | 'ricardian' | 'pretty' | 'decoded' | 'json';

@@ -162,7 +162,7 @@
 			</DL>
 
 			{#if sellRamState.valid}
-				<SummarySellRAM class="hidden" action={{ data: sellRamState.toJSON() }} />
+				<SummarySellRAM class="hidden" data={sellRamState.toJSON()} />
 			{/if}
 		</Stack>
 	</form>
