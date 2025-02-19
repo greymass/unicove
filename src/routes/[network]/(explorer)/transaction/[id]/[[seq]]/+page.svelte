@@ -22,5 +22,5 @@ Actions ({data.transaction.actions.length})
 	{@const contract = String(trace.action.account)}
 	{@const action = String(trace.action.name)}
 	{@const summary = getActionSummaryComponent(contract, action)}
-	<Trace {trace} {variant} {summary} trxid={false} />
+	<Trace {trace} {variant} {summary} />
 {/each}

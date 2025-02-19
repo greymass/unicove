@@ -62,7 +62,7 @@
 		<SelectActionVariant />
 
 		{#each activityActions as activityAction}
-			<Trace trace={activityAction.trace} {variant} />
+			<Trace trace={activityAction.trace} {variant} trxid />
 		{/each}
 
 		{#if hasMore}

@@ -130,10 +130,6 @@
 
 <div class="rounded bg-mineShaft-950 p-2">
 	<div class="border-bottom p-4">
-		{#if id}
-			<div>Transaction: <Transaction {id} /></div>
-		{/if}
-
 		<div class="flex">
 			<div>
 				<Contract name={action.account} action={action.name}>
@@ -148,11 +144,16 @@
 				</Contract>
 			</div>
 
-			{#if datetime}
-				<div class="text-muted flex-1 text-right align-baseline text-sm">
+			<div class="text-muted flex-1 text-right align-baseline text-sm">
+				{#if datetime}
 					<DateTime {datetime} />
-				</div>
-			{/if}
+				{/if}
+				{#if id}
+					<div>
+						ID: <Transaction {id} />
+					</div>
+				{/if}
+			</div>
 		</div>
 	</div>
 	<div class="p-4">
@@ -167,10 +168,6 @@
 		{/if}
 	</div>
 	<div class="flex p-4">
-		{#if id}
-			<div>Transaction: <Transaction {id} /></div>
-		{/if}
-
 		<div>
 			<span class="text-muted">Authorization:</span>
 			{#each action.authorization as auth}
