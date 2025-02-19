@@ -1,10 +1,11 @@
 <script lang="ts">
 	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import type { Int } from '@wharfkit/antelope';
 	import { getContext } from 'svelte';
 
 	const { network } = getContext<UnicoveContext>('state');
 
-	let { number }: { number?: number | string } = $props();
+	let { number }: { number?: Int | number | string } = $props();
 </script>
 
 {#if number}

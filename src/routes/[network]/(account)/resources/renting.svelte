@@ -9,7 +9,8 @@
 	import TransactionSummary from '$lib/components/transactionSummary.svelte';
 	import CpuAndNetResource from '$lib/components/elements/cpunetresource.svelte';
 
-	import { Checksum256, type TransactResult } from '@wharfkit/session';
+	import { Checksum256 } from '@wharfkit/antelope';
+	import { type TransactResult } from '@wharfkit/session';
 
 	import { getContext } from 'svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
@@ -31,8 +32,8 @@
 
 	const { rentType, network, account }: Props = $props();
 
-	const cpuAvailableSize = $derived(calAvailableSize(context.account?.cpu));
-	const netAvailableSize = $derived(calAvailableSize(context.account?.net));
+	const cpuAvailableSize = $derived(calAvailableSize(context.account?.resources.cpu));
+	const netAvailableSize = $derived(calAvailableSize(context.account?.resources.net));
 	const usableTime = $derived.by(() => {
 		if (rentType === 'POWERUP') return m.resources_usable_time_24h();
 		if (rentType === 'REX') return m.resources_usable_time_30days();

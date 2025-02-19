@@ -1,5 +1,5 @@
 import { Asset } from '@wharfkit/antelope';
-import { type ChainDefinition } from '@wharfkit/session';
+import { type ChainDefinition } from '@wharfkit/common';
 
 const defaultSymbol = Asset.Symbol.from('0,UNKNOWN');
 const defaultQuantity = Asset.fromUnits(0, defaultSymbol);

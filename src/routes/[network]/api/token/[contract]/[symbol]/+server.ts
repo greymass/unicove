@@ -35,7 +35,7 @@ async function getTopHolders(
 	symbol: string,
 	number = 100
 ) {
-	const response = await fetch(
+	const response = await network.fetch(
 		`${network.config.endpoints.lightapi}/api/topholders/${network}/${contract}/${symbol}/${number}`
 	);
 	return (await response.json()).map((result: string[]) => ({
@@ -45,7 +45,7 @@ async function getTopHolders(
 }
 
 async function getNumHolders(network: NetworkState, contract: string, symbol: string) {
-	const response = await fetch(
+	const response = await network.fetch(
 		`${network.config.endpoints.lightapi}/api/holdercount/${network}/${contract}/${symbol}`
 	);
 	return response.json();

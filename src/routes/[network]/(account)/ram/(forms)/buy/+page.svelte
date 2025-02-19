@@ -29,7 +29,7 @@
 	const { data } = $props();
 
 	const buyRamState: BuyRAMState = $state(new BuyRAMState(data.network.chain));
-	const ramAvailableSize = $derived(calAvailableSize(context.account?.ram));
+	const ramAvailableSize = $derived(calAvailableSize(context.account?.resources.ram));
 
 	let transactionId: Checksum256 | undefined = $state();
 
@@ -176,9 +176,9 @@
 
 				{#if buyRamState.valid}
 					{#if buyRamState.format === 'asset'}
-						<SummaryBuyRAM class="hidden" action={{ data: buyRamState.toJSON() }} />
+						<SummaryBuyRAM class="hidden" data={buyRamState.toJSON()} />
 					{:else}
-						<SummaryBuyRAMBytes class="hidden" action={{ data: buyRamState.toJSON() }} />
+						<SummaryBuyRAMBytes class="hidden" data={buyRamState.toJSON()} />
 					{/if}
 				{/if}
 			</Stack>

@@ -8,7 +8,7 @@ interface HistoricalPrice {
 	value: Asset;
 }
 
-export const GET: RequestHandler = async ({ locals: { network } }) => {
+export const GET: RequestHandler = async ({ fetch, locals: { network } }) => {
 	try {
 		if (!network.config.endpoints.metrics) {
 			return json([]);
@@ -31,7 +31,7 @@ export const GET: RequestHandler = async ({ locals: { network } }) => {
 			headers: getCacheHeaders(30)
 		});
 	} catch (error) {
-		console.log(error);
+		console.warn(error);
 		return json([]);
 	}
 };

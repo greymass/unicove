@@ -12,25 +12,29 @@
 	type APIResponse = Price[] | { error: string };
 
 	const fetchTokenPrices = async () => {
-		try {
-			const response = await fetch(`/${network}/api/metrics/marketprice/token`);
-			const parsedTokenResponse: APIResponse = await response.json();
+		if (network.supports('timeseries')) {
+			try {
+				const response = await network.fetch(`/${network}/api/metrics/marketprice/token`);
+				const parsedTokenResponse: APIResponse = await response.json();
 
-			if (Array.isArray(parsedTokenResponse) && parsedTokenResponse.length) {
-				return parsedTokenResponse.map(
-					(price: Price) =>
-						({
-							date: new Date(price.date),
-							value: Asset.from(price.value / 10000, '4,USD')
-						}) as HistoricalPrice
-				);
-			} else if ('error' in parsedTokenResponse && parsedTokenResponse.error) {
-				throw new Error(String(parsedTokenResponse.error));
-			} else {
-				throw new Error('Error fetching RAM prices');
+				if (Array.isArray(parsedTokenResponse) && parsedTokenResponse.length) {
+					return parsedTokenResponse.map(
+						(price: Price) =>
+							({
+								date: new Date(price.date),
+								value: Asset.from(price.value / 10000, '4,USD')
+							}) as HistoricalPrice
+					);
+				} else if ('error' in parsedTokenResponse && parsedTokenResponse.error) {
+					throw new Error(String(parsedTokenResponse.error));
+				} else {
+					throw new Error('Error fetching RAM prices');
+				}
+			} catch (e) {
+				throw new Error(String(e));
 			}
-		} catch (e) {
-			throw new Error(String(e));
+		} else {
+			return [];
 		}
 	};
 
@@ -41,5 +45,7 @@
 {#await fetchTokenPrices()}
 	<Loading {pair} />
 {:then prices}
-	<ChartContainer {pair} data={prices} type="line" />
+	{#if prices.length}
+		<ChartContainer {pair} data={prices} type="line" />
+	{/if}
 {/await}

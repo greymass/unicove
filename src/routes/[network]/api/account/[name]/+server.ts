@@ -3,14 +3,18 @@ import { Asset, type NameType } from '@wharfkit/antelope';
 
 import { NetworkState } from '$lib/state/network.svelte';
 import { getCacheHeaders } from '$lib/utils';
-import type { LightAPIBalanceResponse, LightAPIBalanceRow } from '$lib/types.js';
+import type { AccountDataSources } from '$lib/types/account';
+import type { LightAPIBalanceResponse, LightAPIBalanceRow } from '$lib/types/lightapi';
+
 import type { RequestEvent, RequestHandler } from './$types';
+
+import { Types as SystemTypes } from '$lib/wharf/contracts/system';
 
 export const GET: RequestHandler = async ({ locals: { network }, params }: RequestEvent) => {
 	const headers = getCacheHeaders(5);
 
 	try {
-		let response;
+		let response: AccountDataSources;
 		if (network.supports('unicovecontracts')) {
 			try {
 				response = await getAccount2(network, params.name);
@@ -51,7 +55,7 @@ async function loadBalances(
 	return balances;
 }
 
-async function getAccount(network: NetworkState, account: NameType) {
+async function getAccount(network: NetworkState, account: NameType): Promise<AccountDataSources> {
 	const { system: systemContract, msig: msigContract } = network.contracts;
 
 	const [get_account, delegated, proposals] = await Promise.all([
@@ -62,13 +66,18 @@ async function getAccount(network: NetworkState, account: NameType) {
 
 	let rexfund;
 	let balances: LightAPIBalanceRow[] = [];
+	let giftedram;
 
 	if (network.supports('lightapi')) {
-		balances = await loadBalances(network, account, fetch);
+		balances = await loadBalances(network, account, network.fetch);
 	}
 
 	if (network.supports('rex')) {
 		rexfund = await systemContract.table('rexfund').get(account);
+	}
+
+	if (network.supports('giftedram')) {
+		giftedram = await systemContract.table('giftedram').get(account);
 	}
 
 	// If no response from the light API, add a default balance of zero
@@ -82,19 +91,22 @@ async function getAccount(network: NetworkState, account: NameType) {
 		});
 	}
 
+	const defaultBalance = Asset.fromUnits(0, network.config.systemtoken.symbol);
+
 	return {
 		get_account,
-		balance: get_account.core_liquid_balance,
-		balances,
+		balance: get_account.core_liquid_balance || defaultBalance,
+		light_api: balances,
 		delegated,
+		giftedram,
 		proposals,
-		refund_request: get_account.refund_request,
-		rexbal: get_account.rex_info,
-		rexfund
+		refund_request: SystemTypes.refund_request.from(get_account.refund_request),
+		rexbal: SystemTypes.rex_balance.from(get_account.rex_info),
+		rexfund: SystemTypes.rex_fund.from(rexfund)
 	};
 }
 
-async function getAccount2(network: NetworkState, account: NameType) {
+async function getAccount2(network: NetworkState, account: NameType): Promise<AccountDataSources> {
 	const [get_account, getaccount] = await Promise.all([
 		network.client.v1.chain.get_account(account),
 		network.contracts.unicove.readonly('account', { account })
@@ -103,7 +115,7 @@ async function getAccount2(network: NetworkState, account: NameType) {
 	let balances: LightAPIBalanceRow[] = [];
 
 	if (network.supports('lightapi')) {
-		balances = await loadBalances(network, account, fetch);
+		balances = await loadBalances(network, account, network.fetch);
 	}
 
 	// If no response from the light API, add a default balance of zero
@@ -120,8 +132,9 @@ async function getAccount2(network: NetworkState, account: NameType) {
 	return {
 		get_account,
 		balance: getaccount.balance,
-		balances,
+		light_api: balances,
 		delegated: getaccount.delegations,
+		giftedram: getaccount.giftedram,
 		proposals: getaccount.proposals,
 		refund_request: getaccount.refund,
 		rexbal: getaccount.rexbal,

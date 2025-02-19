@@ -32,10 +32,12 @@
 					<td>{m.common_status()}</td>
 					<td class="text-right">{transaction.status}</td>
 				</tr>
-				<tr>
-					<td>{m.common_trx_id()}</td>
-					<td class="text-right"><Transaction id={transaction.transaction?.id} /> </td>
-				</tr>
+				{#if transaction.transaction}
+					<tr>
+						<td>{m.common_trx_id()}</td>
+						<td class="text-right"><Transaction id={transaction.transaction.id} /> </td>
+					</tr>
+				{/if}
 			</tbody>
 		</table>
 	{:else}

@@ -1,10 +1,9 @@
 import { error } from '@sveltejs/kit';
-import { getNetworkFromParams } from '$lib/state/network.svelte';
 import type { PageLoad } from './$types';
 import * as m from '$lib/paraglide/messages';
 
-export const load: PageLoad = async ({ params }) => {
-	const network = getNetworkFromParams(params.network);
+export const load: PageLoad = async ({ parent }) => {
+	const { network } = await parent();
 
 	if (!network.config.metamask) {
 		throw error(404, m.metamask_network_unsupported());

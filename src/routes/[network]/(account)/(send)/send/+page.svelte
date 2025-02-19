@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Asset } from '@wharfkit/antelope';
 	import { TokenBalance } from '@wharfkit/common';
-	import { Checksum256 } from '@wharfkit/session';
+	import { Checksum256 } from '@wharfkit/antelope';
 	import { getContext, tick } from 'svelte';
 	import { FiniteStateMachine } from 'runed';
 	import * as m from '$lib/paraglide/messages.js';
@@ -388,10 +388,7 @@
 {/snippet}
 
 {#snippet Memo()}
-	<SummarySend
-		action={{ data: sendState.toJSON() }}
-		class={f.current !== 'memo' ? 'hidden' : undefined}
-	/>
+	<SummarySend data={sendState.toJSON()} class={f.current !== 'memo' ? 'hidden' : undefined} />
 
 	<fieldset class="grid gap-2" class:hidden={f.current !== 'memo'}>
 		<Label for="memo-input">{m.common_memo()} ({m.common_optional()})</Label>

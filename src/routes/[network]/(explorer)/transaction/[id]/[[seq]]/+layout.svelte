@@ -16,9 +16,14 @@
 		}
 		const options = [
 			{ href: urlBase, text: m.common_summary() },
-			{ href: `${urlBase}/traces`, text: 'Traces' }
+			// { href: `${urlBase}/resources`, text: 'Resources' },
+			{ href: `${urlBase}/transaction`, text: 'Transaction' }
 		];
 		if (settings.data.debugMode) {
+			options.push({
+				href: `${urlBase}/traces`,
+				text: `Traces (${data.transaction.traces.length})`
+			});
 			options.push({ href: `${urlBase}/data`, text: m.common_data() });
 		}
 		return options;

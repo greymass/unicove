@@ -398,6 +398,7 @@
 	"tokens_purchase_providers": "Tokens can be purchased directly through the following providers:",
 	"total_proceeds": "Total Proceeds",
 	"transaction_404": "Transaction not found: {transaction}",
+	"transaction_num_actions": "{number} Actions",
 	"transaction_page_meta_description": "A transaction performed at {date} on the {network} Network.",
 	"transaction_page_meta_title": "{id} | {network} Network",
 	"transaction_page_subtitle": "Transaction on {date}",

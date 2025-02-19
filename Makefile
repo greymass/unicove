@@ -1,5 +1,7 @@
 include .env
 -include .env.local
+-include .env.development
+-include .env.production
 
 SHELL := /usr/bin/env bash
 BIN := ./node_modules/.bin

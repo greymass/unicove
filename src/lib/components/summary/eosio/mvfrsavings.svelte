@@ -1,18 +1,14 @@
 <script lang="ts">
 	import { formatCurrency } from '$lib/i18n';
-	import type { Asset } from '@wharfkit/antelope';
 	import { Card, Stack, Switcher } from '$lib/components/layout';
 	import * as SystemContract from '$lib/wharf/contracts/system';
+	import type { ActionSummaryProps } from '$lib/types/transaction';
 
-	interface MvfrsavingsProps {
-		action: {
-			data: SystemContract.Types.mvfrsavings;
-		};
-		class?: string;
-		value?: Asset;
+	interface MvfrsavingsProps extends Omit<ActionSummaryProps, 'data'> {
+		data: SystemContract.Types.mvfrsavings;
 	}
 
-	const { action, class: className = '', value, ...props }: MvfrsavingsProps = $props();
+	const { class: className = '', data, value }: MvfrsavingsProps = $props();
 </script>
 
 <Card class="gap-5 text-center {className}">
@@ -20,11 +16,11 @@
 	<Switcher threshold="20rem">
 		<Stack class="gap-0">
 			<p class="caption">owner</p>
-			<p class="h3">{action.data.owner}</p>
+			<p class="h3">{data.owner}</p>
 		</Stack>
 		<Stack class="gap-0">
 			<p class="caption">REX</p>
-			<p class="h3">{action.data.rex}</p>
+			<p class="h3">{data.rex}</p>
 			{#if value}
 				<p class="mt-1.5 self-start rounded bg-shark-800/60 px-2">USD {formatCurrency(value)}</p>
 			{/if}
