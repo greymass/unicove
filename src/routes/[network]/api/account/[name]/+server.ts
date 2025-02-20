@@ -64,7 +64,7 @@ async function getAccount(network: NetworkState, account: NameType): Promise<Acc
 		msigContract.table('proposal', account).all()
 	]);
 
-	let rexfund;
+	let rex;
 	let balances: LightAPIBalanceRow[] = [];
 	let giftedram;
 
@@ -73,7 +73,7 @@ async function getAccount(network: NetworkState, account: NameType): Promise<Acc
 	}
 
 	if (network.supports('rex')) {
-		rexfund = await systemContract.table('rexfund').get(account);
+		rex = await systemContract.table('rexfund').get(account);
 	}
 
 	if (network.supports('giftedram')) {
@@ -93,6 +93,21 @@ async function getAccount(network: NetworkState, account: NameType): Promise<Acc
 
 	const defaultBalance = Asset.fromUnits(0, network.config.systemtoken.symbol);
 
+	let refund_request: SystemTypes.refund_request | undefined;
+	if (get_account.refund_request) {
+		refund_request = SystemTypes.refund_request.from(get_account.refund_request);
+	}
+
+	let rexbal: SystemTypes.rex_balance | undefined;
+	if (get_account.rex_info) {
+		rexbal = SystemTypes.rex_balance.from(get_account.rex_info);
+	}
+
+	let rexfund: SystemTypes.rex_fund | undefined;
+	if (rex) {
+		rexfund = SystemTypes.rex_fund.from(rex);
+	}
+
 	return {
 		get_account,
 		balance: get_account.core_liquid_balance || defaultBalance,
@@ -100,9 +115,9 @@ async function getAccount(network: NetworkState, account: NameType): Promise<Acc
 		delegated,
 		giftedram,
 		proposals,
-		refund_request: SystemTypes.refund_request.from(get_account.refund_request),
-		rexbal: SystemTypes.rex_balance.from(get_account.rex_info),
-		rexfund: SystemTypes.rex_fund.from(rexfund)
+		refund_request,
+		rexbal,
+		rexfund
 	};
 }
 

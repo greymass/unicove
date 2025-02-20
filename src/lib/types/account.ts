@@ -40,11 +40,11 @@ export interface AccountDataSources {
 	// Table rows from eosio.msig::proposal
 	proposals: MsigTypes.proposal[];
 	// Table rows from eosio::refunds
-	refund_request: SystemTypes.refund_request;
+	refund_request?: SystemTypes.refund_request;
 	// Table row from eosio::rexbal
-	rexbal: SystemTypes.rex_balance;
+	rexbal?: SystemTypes.rex_balance;
 	// Table row from eosio::rexfund
-	rexfund: SystemTypes.rex_fund;
+	rexfund?: SystemTypes.rex_fund;
 }
 
 export type AccountResourceType = 'cpu' | 'net' | 'ram';
