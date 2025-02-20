@@ -37,7 +37,7 @@
 		id,
 		notified,
 		summary: ActionSummary,
-		variant = 'json'
+		variant = 'pretty'
 	}: Props = $props();
 
 	async function decode() {

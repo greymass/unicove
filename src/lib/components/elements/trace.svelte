@@ -13,7 +13,7 @@
 		trxid?: boolean;
 	}
 
-	let { date = false, trace, trxid = false, summary, variant = 'json' }: Props = $props();
+	let { date = false, trace, trxid = false, summary, variant = 'pretty' }: Props = $props();
 </script>
 
 <ActionElement
