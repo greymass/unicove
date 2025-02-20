@@ -4,7 +4,6 @@
 	import AccountButton from '$lib/components/button/account.svelte';
 	import ContractButton from '$lib/components/button/contract.svelte';
 	import CopyButton from '$lib/components/button/copy.svelte';
-	import { languageTag } from '$lib/paraglide/runtime';
 	import { type NetworkState } from '$lib/state/network.svelte';
 	import { chainLogos } from '@wharfkit/common';
 	import ChevronLeft from 'lucide-svelte/icons/chevron-left';
@@ -30,10 +29,8 @@
 	let logo = $derived(chainLogos.get(String(props.network.chain.id)) || '');
 
 	let routePath = $derived(page.url.pathname.split('/')[3]);
-	let contractPath = $derived(
-		`${languageTag()}/${props.network.shortname}/contract/${props.title}`
-	);
-	let accountPath = $derived(`${languageTag()}/${props.network.shortname}/account/${props.title}`);
+	let contractPath = $derived(`/${props.network.shortname}/contract/${props.title}`);
+	let accountPath = $derived(`/${props.network.shortname}/account/${props.title}`);
 </script>
 
 <header class="col-span-full flex min-h-16 items-center gap-4">
