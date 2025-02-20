@@ -2,7 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import AccountButton from '$lib/components/button/account.svelte';
-	import CodeButton from '$lib/components/button/code.svelte';
+	import ContractButton from '$lib/components/button/contract.svelte';
 	import CopyButton from '$lib/components/button/copy.svelte';
 	import { languageTag } from '$lib/paraglide/runtime';
 	import { type NetworkState } from '$lib/state/network.svelte';
@@ -60,10 +60,12 @@
 			{#if routePath === 'account'}
 				<CopyButton data={props.title} slop={false} />
 				{#if props.contract}
-					<CodeButton data={contractPath} slop={false} />
+					<ContractButton data={contractPath} slop={false} />
 				{/if}
 			{/if}
+
 			{#if routePath === 'contract'}
+				<CopyButton data={props.title} slop={false} />
 				<AccountButton data={accountPath} slop={false} />
 			{/if}
 		</h1>
