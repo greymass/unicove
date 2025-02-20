@@ -3,7 +3,7 @@ WORKDIR /usr/src/app
 RUN npm install -g bun
 
 COPY package*.json bun.lock ./
-RUN bun install
+RUN bun install --frozen-lockfile
 COPY . .
 
 ENV NODE_ENV production
