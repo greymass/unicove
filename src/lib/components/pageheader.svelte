@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import AccountButton from '$lib/components/button/account.svelte';
 	import CodeButton from '$lib/components/button/code.svelte';
 	import CopyButton from '$lib/components/button/copy.svelte';
@@ -29,7 +29,7 @@
 
 	let logo = $derived(chainLogos.get(String(props.network.chain.id)) || '');
 
-	let routePath = $derived($page.url.pathname.split('/')[3]);
+	let routePath = $derived(page.url.pathname.split('/')[3]);
 	let contractPath = $derived(
 		`${languageTag()}/${props.network.shortname}/contract/${props.title}`
 	);
