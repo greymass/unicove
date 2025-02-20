@@ -214,6 +214,7 @@
 	});
 
 	const allValid = $derived(toValid && assetValid && memoValid);
+	const ready = $derived(allValid && !context.wharf.transacting);
 
 	const progress = $derived.by(() => {
 		switch (f.current) {
@@ -424,7 +425,7 @@
 		{/if}
 
 		{#if f.current === 'memo'}
-			<Button class="col-end-3" onclick={transact} disabled={!allValid}>{m.common_submit()}</Button>
+			<Button class="col-end-3" onclick={transact} disabled={!ready}>{m.common_submit()}</Button>
 		{:else if f.current !== 'complete'}
 			<Button class="col-end-3" type="submit" onclick={preventDefault(next)} disabled={!nextValid}>
 				{m.common_next()}

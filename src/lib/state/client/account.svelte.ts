@@ -11,7 +11,6 @@ import {
 	type NameType
 } from '@wharfkit/antelope';
 import type { REXState } from '@wharfkit/resources';
-import { Account } from '@wharfkit/account';
 import { TokenMeta, TokenBalance, TokenIdentifier } from '@wharfkit/common';
 
 import type { NetworkState } from '$lib/state/network.svelte';
@@ -34,7 +33,6 @@ export class AccountState {
 	public network: NetworkState;
 	private sources: AccountDataSources = $state(defaultAccountDataSources);
 
-	public account: Account | undefined = $state();
 	public name: Name = $state(Name.from(''));
 	public last_update: Date = $state(new Date());
 	public contract: boolean = $derived(
@@ -59,8 +57,8 @@ export class AccountState {
 	public delegations = $derived(getDelegations(this.sources));
 
 	public resources = $derived.by(() => getResources(this.sources, this.network));
-
-	public permissions = $derived.by(() => (this.account ? this.account.permissions : undefined));
+	public rex = $derived(SystemContract.Types.rex_balance.from(this.sources.rexbal));
+	public permissions = $derived(API.v1.AccountObject.from(this.sources.get_account).permissions);
 	public proposals = $derived.by(() => this.sources.proposals);
 	public refundRequest = $derived.by(() => this.sources.refund_request);
 	public value = $derived.by(() => {
@@ -116,10 +114,6 @@ export class AccountState {
 			rexbal: data.rexbal,
 			rexfund: data.rexfund
 		};
-		this.account = new Account({
-			client: this.network.client,
-			data: API.v1.AccountObject.from(this.sources.get_account)
-		});
 		if (data.get_account && data.get_account.voter_info) {
 			this.voter = {
 				isProxy: data.get_account.voter_info.is_proxy,
