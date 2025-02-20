@@ -104,13 +104,14 @@ export class ActivityLoader {
 			const activity = ActivityResponse.from(json.activity);
 			const nextStart = -Number(activity.last);
 			const hasMore = activity.actions.length > 0 && activity.last.gt(UInt64.from(0));
-			const filtered = activity.actions.filter((action) =>
-				action.action_trace.receiver.equals(account)
-			);
+			// const filtered = activity.actions.filter((action) => {
+			// 	console.log(String(account), String(action.action_trace.receiver), action);
+			// 	return action.action_trace.receiver.equals(account);
+			// });
 			if (!more) {
-				this.scene.setList(filtered, nextStart, hasMore);
+				this.scene.setList(activity.actions, nextStart, hasMore);
 			} else {
-				this.scene.appendList(filtered, nextStart, hasMore);
+				this.scene.appendList(activity.actions, nextStart, hasMore);
 			}
 		} catch (error: unknown) {
 			console.error('Error fetching activity actions:', error);

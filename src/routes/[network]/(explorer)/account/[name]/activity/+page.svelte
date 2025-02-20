@@ -30,7 +30,6 @@
 		return scence.isLoading && !scence.list.length;
 	});
 
-	$inspect(JSON.stringify(activityLoader));
 	const hasMore = $derived(activityLoader.scene.hasMore);
 	const loadingText = $derived.by(() => {
 		const scence = activityLoader.scene;
