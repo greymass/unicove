@@ -5,7 +5,8 @@
 	import TokenCard from '$lib/components/elements/tokencard.svelte';
 	import Button from '$lib/components/button/button.svelte';
 	import Label from '$lib/components/input/label.svelte';
-	import TransactionSummary from '$lib/components/transactionSummary.svelte';
+	import TransactSummary from '$lib/components/transact/summary.svelte';
+	import TransactError from '$lib/components/transact/error.svelte';
 	import { DL } from '$lib/components/descriptionlist';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
@@ -26,14 +27,24 @@
 			manager.sync(data.network, context.account, context.wharf);
 		}
 	});
+
+	function resetState() {
+		manager = new UnstakeManager(data.network);
+	}
 </script>
 
 <Stack>
 	{#if manager.txid}
-		<TransactionSummary transactionId={manager.txid} />
+		<TransactSummary transactionId={manager.txid} />
+		<Button href={`/${data.network}/staking`} variant="secondary">
+			{m.search_result_description_staking()}
+		</Button>
+		<Button href={`/${data.network}/account/${context.account?.name}`}>
+			{m.common_view_my_account()}
+		</Button>
 	{:else if manager.error}
-		<h2 class="h2">{m.common_transaction_error()}</h2>
-		<p>{m.common_transaction_error_subtitle()}</p>
+		<TransactError error={manager.error} />
+		<Button onclick={resetState}>{m.common_close()}</Button>
 	{:else}
 		<TokenCard
 			token={manager.tokenBalance}

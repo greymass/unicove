@@ -34,14 +34,7 @@ import { TransactPluginStatusEmitter } from '$lib/wharf/plugins/status';
 import { browser } from '$app/environment';
 import * as env from '$env/static/public';
 
-import {
-	type QueuedTransaction,
-	StatusType,
-	queueTransaction,
-	sendErrorToast
-	// sendSuccessToast
-} from '$lib/wharf/transact.svelte';
-
+import { type QueuedTransaction, StatusType, queueTransaction } from '$lib/wharf/transact.svelte';
 import { chainMapper, chains, getChainDefinitionFromParams } from '$lib/wharf/chains';
 import type { SettingsState } from '$lib/state/settings.svelte';
 import type { NetworkState } from '$lib/state/network.svelte';
@@ -213,8 +206,6 @@ export class WharfState {
 			throw new Error('No active session available to transact with.');
 		}
 
-		this.transacting = true;
-
 		const transaction: QueuedTransaction = {
 			status: StatusType.CREATED,
 			chain: this.session.chain.id,
@@ -223,12 +214,12 @@ export class WharfState {
 			options
 		};
 
+		this.transacting = true;
+
 		const result = await this.session.transact(args).catch((e: Error) => {
 			transaction.status = StatusType.ERROR;
 			transaction.error = String(e);
 			queueTransaction(transaction);
-			const { id } = sendErrorToast(transaction);
-			transaction.toastId = id;
 			this.transacting = false;
 			throw e;
 		});
@@ -238,9 +229,6 @@ export class WharfState {
 		if (!result.resolved || !result.response) {
 			transaction.status = StatusType.ERROR;
 			transaction.error = 'Transaction was not resolved.';
-			const { id } = sendErrorToast(transaction);
-			transaction.toastId = id;
-
 			queueTransaction(transaction);
 			throw new Error('Transaction was not resolved.');
 		}
@@ -248,8 +236,7 @@ export class WharfState {
 		transaction.status = StatusType.BROADCAST;
 		transaction.response = result.response;
 		transaction.transaction = result.resolved.transaction;
-		// const { id } = sendSuccessToast(transaction);
-		// transaction.toastId = id;
+
 		queueTransaction(transaction);
 
 		return result;

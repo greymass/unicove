@@ -19,7 +19,8 @@
 	import { MultiCard } from '$lib/components/layout';
 	import Checkbox from '$lib/components/input/checkbox.svelte';
 	import type { TransactResult } from '@wharfkit/session';
-	import TransactionSummary from '$lib/components/transactionSummary.svelte';
+	import TransactSummary from '$lib/components/transact/summary.svelte';
+	import TransactError from '$lib/components/transact/error.svelte';
 
 	const { data } = $props();
 
@@ -33,6 +34,7 @@
 	let readonlyError = $state();
 	let readonlyResult = $state();
 	let transactResult: TransactResult | undefined = $state();
+	let error: string | undefined = $state();
 
 	const flatten = (
 		obj: Record<string, any>,
@@ -146,7 +148,8 @@
 				.then((result) => {
 					transactResult = result;
 				})
-				.catch((error) => {
+				.catch((e) => {
+					error = e;
 					console.error('Transaction error', error);
 				});
 		}
@@ -203,7 +206,10 @@
 <MultiCard>
 	<Card>
 		{#if transactResult && transactResult.resolved}
-			<TransactionSummary transactionId={transactResult.resolved.transaction.id} />
+			<TransactSummary transactionId={transactResult.resolved.transaction.id} />
+			<Button onclick={clear}>Clear Results</Button>
+		{:else if error}
+			<TransactError {error} />
 			<Button onclick={clear}>Clear Results</Button>
 		{:else}
 			<h4 class="h4">Perform Action</h4>

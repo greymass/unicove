@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { transactions } from '$lib/wharf/transact.svelte';
 	import type { Checksum256 } from '@wharfkit/antelope';
-	import Transaction from './elements/transaction.svelte';
+	import Transaction from '../elements/transaction.svelte';
 	import CircleCheckBig from 'lucide-svelte/icons/circle-check-big';
 	import * as m from '$lib/paraglide/messages';
 
