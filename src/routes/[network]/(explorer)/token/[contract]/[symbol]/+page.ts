@@ -1,4 +1,6 @@
 import { API, Asset, Name, Struct, type AssetType, type NameType } from '@wharfkit/antelope';
+import { error } from '@sveltejs/kit';
+
 import type { PageLoad } from './$types';
 
 interface LightAPIHolder {
@@ -18,6 +20,9 @@ export const load: PageLoad = async ({ fetch, params, parent, url }) => {
 	const count = Number(url.searchParams.get('count')) || 100;
 	const baseUrl = `/${network}/api/token/${params.contract}/${params.symbol}?count=${count}`;
 	const response = await fetch(baseUrl);
+	if (!response.ok) {
+		return error(404, 'Token not found');
+	}
 	const json = await response.json();
 
 	const stats = API.v1.GetCurrencyStatsItemResponse.from(json.stats);
