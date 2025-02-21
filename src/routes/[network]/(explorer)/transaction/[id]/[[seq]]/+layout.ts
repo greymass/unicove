@@ -5,7 +5,7 @@ import { TransactionResponse } from '$lib/types/transaction';
 import * as m from '$lib/paraglide/messages';
 import type { LayoutLoad } from './$types';
 import { languageTag } from '$lib/paraglide/runtime';
-import { formatDateTime } from '$lib/utils/date';
+import { formatDateTime } from '$lib/utils/intl';
 
 export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 	const { network } = await parent();
