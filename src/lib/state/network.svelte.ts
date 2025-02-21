@@ -1,9 +1,12 @@
 import {
+	Action,
 	APIClient,
 	Asset,
 	FetchProvider,
 	Int128,
+	Serializer,
 	UInt64,
+	type ABISerializable,
 	type AssetType
 } from '@wharfkit/antelope';
 import { ChainDefinition, TokenMeta, TokenIdentifier } from '@wharfkit/common';
@@ -37,6 +40,7 @@ import { Contract as SystemContract } from '$lib/wharf/contracts/system';
 import { Contract as TokenContract } from '$lib/wharf/contracts/token';
 import { Contract as UnicoveContract, Types as UnicoveTypes } from '$lib/wharf/contracts/unicove';
 import { defaultPrice, defaultPriceSymbol } from './defaults/network';
+import type { ObjectifiedActionData } from '$lib/types/transaction';
 
 export class NetworkState {
 	// Readonly state
@@ -331,6 +335,19 @@ export class NetworkState {
 			return calculateValue(token, this.token.price);
 		}
 		return token;
+	}
+
+	async decodeAction(action: Action): Promise<ABISerializable> {
+		const abi = await this.abis?.getAbi(action.account);
+		return Serializer.decode({
+			data: action.data,
+			type: String(action.name),
+			abi: abi
+		});
+	}
+
+	async objectifyAction(action: Action): Promise<ObjectifiedActionData> {
+		return Serializer.objectify(await this.decodeAction(action));
 	}
 
 	toString() {

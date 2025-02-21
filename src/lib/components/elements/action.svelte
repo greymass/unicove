@@ -3,7 +3,6 @@
 		Action,
 		Name,
 		PermissionLevel,
-		Serializer,
 		type ABISerializable,
 		type Checksum256Type
 	} from '@wharfkit/antelope';
@@ -15,7 +14,7 @@
 	import Transaction from './transaction.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext, type Component } from 'svelte';
-	import type { ActionSummaryProps, DecodedActionData } from '$lib/types/transaction';
+	import type { ActionSummaryProps, ObjectifiedActionData } from '$lib/types/transaction';
 	import SquareTerminal from 'lucide-svelte/icons/square-terminal';
 
 	const context = getContext<UnicoveContext>('state');
@@ -23,7 +22,7 @@
 	interface Props {
 		action: Action;
 		datetime?: Date;
-		decoded?: DecodedActionData;
+		objectified?: ObjectifiedActionData;
 		id?: Checksum256Type;
 		notified?: Name[];
 		summary?: Component<ActionSummaryProps, object>;
@@ -33,21 +32,12 @@
 	let {
 		action,
 		datetime,
-		decoded,
+		objectified,
 		id,
 		notified,
 		summary: ActionSummary,
 		variant = 'pretty'
 	}: Props = $props();
-
-	async function decode() {
-		const abi = await context.network.abis?.getAbi(action.account);
-		return Serializer.decode({
-			data: action.data,
-			type: String(action.name),
-			abi: abi
-		});
-	}
 
 	let advancedMode = $derived(context.settings.data.advancedMode);
 </script>
@@ -97,17 +87,17 @@
 {/snippet}
 
 {#snippet Decoded()}
-	{#await decode()}
+	{#await context.network.decodeAction(action)}
 		{@render CodeBox('Loading...')}
-	{:then decoded}
-		{@render CodeBox(decoded)}
+	{:then result}
+		{@render CodeBox(result)}
 	{:catch error}
 		{error.message}
 		{@render CodeBox(action)}
 	{/await}
 {/snippet}
 
-{#snippet Pretty(data: DecodedActionData | undefined)}
+{#snippet Pretty(data: ObjectifiedActionData | undefined)}
 	<Code>
 		<div class="overflow-auto rounded bg-shark-950 p-4">
 			{#if data}
@@ -130,10 +120,10 @@
 {/snippet}
 
 {#snippet Summary()}
-	{#if typeof decoded === 'object' && ActionSummary}
-		<ActionSummary data={decoded} />
+	{#if typeof objectified === 'object' && ActionSummary}
+		<ActionSummary data={objectified} />
 	{:else}
-		{@render Pretty(decoded)}
+		{@render Pretty(objectified)}
 	{/if}
 {/snippet}
 
@@ -201,7 +191,7 @@
 		{:else if variant === 'ricardian'}
 			{@render Ricardian()}
 		{:else if variant === 'pretty'}
-			{@render Pretty(decoded)}
+			{@render Pretty(objectified)}
 		{:else if variant === 'decoded'}
 			{@render Decoded()}
 		{:else if variant === 'json'}

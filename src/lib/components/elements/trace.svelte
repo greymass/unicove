@@ -19,7 +19,7 @@
 <ActionElement
 	action={trace.action}
 	datetime={date ? trace.block_time.toDate() : undefined}
-	decoded={trace.act.data}
+	objectified={trace.act.data}
 	id={trxid ? trace.trx_id : undefined}
 	notified={trace.notifications}
 	{summary}

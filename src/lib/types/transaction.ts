@@ -19,11 +19,11 @@ import {
 } from '@wharfkit/antelope';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type DecodedActionData = Record<string, any>;
+export type ObjectifiedActionData = Record<string, any>;
 
 export interface ActionSummaryProps {
 	class?: string;
-	data: DecodedActionData;
+	data: ObjectifiedActionData;
 	value?: Asset;
 }
 
@@ -43,7 +43,7 @@ export class ActionTraceAction extends Struct {
 	@Struct.field(Name) declare account: Name;
 	@Struct.field(Name) declare name: Name;
 	@Struct.field(PermissionLevel, { array: true }) declare authorization: PermissionLevel[];
-	@Struct.field('any', { optional: true }) declare data?: DecodedActionData;
+	@Struct.field('any', { optional: true }) declare data?: ObjectifiedActionData;
 	@Struct.field('string') declare hex_data: string;
 }
 
