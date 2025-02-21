@@ -1,6 +1,6 @@
 import { API, Asset } from '@wharfkit/antelope';
 
-import { gifted_ram, type AccountDataSources } from '$lib/types/account';
+import { gifted_ram } from '$lib/types/account';
 
 import * as SystemContract from '$lib/wharf/contracts/system';
 
@@ -74,18 +74,6 @@ export const defaultRexFund = SystemContract.Types.rex_fund.from({
 	owner: '',
 	balance: '0 '
 });
-
-export const defaultAccountDataSources: AccountDataSources = {
-	get_account: defaultGetAccount,
-	balance: defaultAsset,
-	light_api: [],
-	delegated: [],
-	giftedram: defaultGiftedRam,
-	proposals: [],
-	refund_request: defaultRefundRequest,
-	rexbal: defaultRexBalance,
-	rexfund: defaultRexFund
-};
 
 export const defaultPriceSymbol = Asset.Symbol.from('4,USD');
 export const defaultPrice = Asset.fromUnits(0, defaultPriceSymbol);

@@ -22,7 +22,7 @@
 	async function copyToClipboard() {
 		try {
 			await navigator.clipboard.writeText(props.data);
-			if (context.settings.data.debugMode) console.log(props.data, 'copied to clipboard');
+			if (context.settings.data.debugMode) console.info(props.data, 'copied to clipboard');
 			hint = true;
 			setTimeout(() => (hint = false), 300);
 		} catch (err) {

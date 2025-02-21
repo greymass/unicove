@@ -23,7 +23,11 @@ import type {
 } from '$lib/types/account';
 
 import { calculateValue, isSameToken } from '$lib/utils';
-import { defaultAccountDataSources, defaultVoteInfo } from '$lib/state/defaults/account';
+import {
+	defaultAccountDataSources,
+	defaultVoteInfo,
+	nullContractHash
+} from '$lib/state/defaults/account';
 import * as SystemContract from '$lib/wharf/contracts/system';
 
 export class AccountState {
@@ -35,9 +39,7 @@ export class AccountState {
 
 	public name: Name = $state(Name.from(''));
 	public last_update: Date = $state(new Date());
-	public contract: boolean = $derived(
-		Number(new Date(`${this.sources?.get_account?.last_code_update}z`)) > 0
-	);
+	public contract: boolean = $derived(!this.sources.contract_hash.equals(nullContractHash));
 	public loaded: boolean = $state(false);
 
 	public balance = $derived.by(() =>
@@ -105,6 +107,7 @@ export class AccountState {
 		this.last_update = new Date();
 		this.sources = {
 			get_account: data.get_account,
+			contract_hash: Checksum256.from(data.contract_hash),
 			balance: data.balance,
 			giftedram: data.giftedram,
 			light_api: data.light_api,

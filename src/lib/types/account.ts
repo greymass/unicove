@@ -1,4 +1,13 @@
-import { Struct, API, Int64, Name, Asset, Float64 } from '@wharfkit/antelope';
+import {
+	Struct,
+	API,
+	Int64,
+	Name,
+	Asset,
+	Float64,
+	type Checksum256Type,
+	Checksum256
+} from '@wharfkit/antelope';
 
 import { Types as MsigTypes } from '$lib/wharf/contracts/msig';
 import { Types as SystemTypes } from '$lib/wharf/contracts/system';
@@ -29,6 +38,8 @@ export interface VoterInfo {
 export interface AccountDataSources {
 	// Native get_account endpoint (deprecated?)
 	get_account: API.v1.AccountObject;
+	// Hash of the contract on the account
+	contract_hash: Checksum256;
 	// Light API balances call
 	light_api: LightAPIBalanceRow[];
 	// Table rows from eosio.token::accounts
