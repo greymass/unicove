@@ -2,7 +2,7 @@ import { error, type LoadEvent } from '@sveltejs/kit';
 import type { ABI } from '@wharfkit/antelope';
 
 import * as m from '$lib/paraglide/messages.js';
-import { parseRicardian } from '$lib/utils';
+import { parseRicardian } from '$lib/utils/ricardian';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ params, parent }: LoadEvent) => {
@@ -11,11 +11,11 @@ export const load: PageLoad = async ({ params, parent }: LoadEvent) => {
 	if (!action) {
 		error(404);
 	}
-	const actionData = p.abi.structs.find((s: ABI.Struct) => s.name === action.type);
+	const struct = p.abi.structs.find((s: ABI.Struct) => s.name === action.type);
 	const ricardian = parseRicardian(action);
 	return {
 		action,
-		actionData,
+		struct,
 		data: params.data,
 		pageMetaTags: {
 			title: [

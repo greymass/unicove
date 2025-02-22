@@ -12,36 +12,18 @@ export class RefundManager {
 	public txid: string = $state('');
 
 	public refunding: Asset = $derived.by(() => {
-		if (!this.account || !this.network || !this.network.chain.systemToken) {
+		if (!this.account || !this.account.balance) {
 			return Asset.fromUnits(0, '0,UNKNOWN');
 		}
-		const refunding = Asset.fromUnits(0, this.network.chain.systemToken.symbol);
 
-		const cpu = this.account?.sources.get_account?.refund_request?.cpu_amount;
-		if (cpu) {
-			refunding.units.add(Asset.from(cpu).units);
-		}
-
-		const net = this.account?.sources.get_account?.refund_request?.net_amount;
-		if (net) {
-			refunding.units.add(Asset.from(net).units);
-		}
-
-		return refunding;
+		return this.account.balance.refunding;
 	});
 
 	public dateAvailable: Date | undefined = $derived.by(() => {
-		if (
-			!this.account ||
-			!this.network ||
-			!this.account.sources.get_account ||
-			!this.account.sources.get_account.refund_request
-		) {
+		if (!this.account || !this.network || !this.account.refundRequest) {
 			return undefined;
 		}
-		const initiated = new Date(
-			String(this.account.sources.get_account.refund_request.request_time + 'z')
-		);
+		const initiated = new Date(String(this.account.refundRequest.request_time + 'z'));
 		const available = new Date(initiated.setHours(initiated.getHours() + 72));
 		return available;
 	});

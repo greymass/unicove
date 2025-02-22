@@ -36,7 +36,9 @@
 			.filter((r) => !r.savings)
 			.reduce(
 				(acc, record) => {
-					acc.units.add(record.balance.units);
+					if (!record.claimable) {
+						acc.units.add(record.balance.units);
+					}
 					return acc;
 				},
 				Asset.fromUnits(0, data.network.chain.systemToken!.symbol) as Asset
@@ -52,9 +54,7 @@
 	);
 
 	let apr = $derived(getAPR(data.network));
-	let usdValue = $derived(
-		Asset.from(total.value * (data.network.tokenprice ? data.network.tokenprice.value : 0), '2,USD')
-	);
+	let usdValue = $derived(Asset.from(total.value * data.network.token.price.value, '2,USD'));
 
 	let activity = $derived(
 		staked.units.gt(UInt64.from(0)) ||
@@ -141,35 +141,6 @@
 		</Stack>
 	</Card>
 	<AccountBalance cta={{ href: `/${networkName}/staking/stake`, label: m.common_stake() }} />
-	<StakingCalculator
-		{apr}
-		network={data.network}
-		tokenprice={data.network.tokenprice || Asset.from(0, '2,USD')}
-	/>
+	<StakingCalculator {apr} network={data.network} tokenprice={data.network.token.price} />
 	<UnstakingBalances records={unstaking} />
 </MultiCard>
-
-<div class="gap-6 *:mb-6 *:inline-block *:w-full last:*:mb-0 @2xl:columns-2">
-	<div>
-		<Card
-			class="hidden gap-5"
-			title={m.common_about_something({
-				thing: m.common_staking()
-			})}
-		>
-			<Stack class="gap-5">
-				<p class="caption">
-					The APR is an estimate, and may fluctuate based on how many and much others are staking.
-					Your 21 day lockup period starts when you unstake your EOS.
-				</p>
-				<p class="caption">You will never get back less EOS.</p>
-
-				<p class="caption">
-					Unstaking balances will still accrue rewards until they are claimed. However, any
-					operation you do (staking more for instance) will automatically claim your fully unstaked
-					positions.
-				</p>
-			</Stack>
-		</Card>
-	</div>
-</div>

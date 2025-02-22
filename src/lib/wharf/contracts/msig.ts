@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-interface */
 import type { Action, BytesType, Checksum256Type, NameType, UInt16Type } from '@wharfkit/antelope';
 import {
 	ABI,
@@ -181,6 +182,7 @@ export interface TableTypes {
 }
 export type RowType<T> = T extends keyof TableTypes ? TableTypes[T] : any;
 export type TableNames = keyof TableTypes;
+export interface ActionParams {}
 export namespace ActionParams {
 	export namespace Type {
 		export interface permission_level {
@@ -234,6 +236,7 @@ export namespace ActionParams {
 		level: Type.permission_level;
 	}
 }
+export const ActionParams: ActionParams = {} as ActionParams;
 export interface ActionNameParams {
 	approve: ActionParams.approve;
 	cancel: ActionParams.cancel;

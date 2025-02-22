@@ -11,7 +11,8 @@
 	import Code from '$lib/components/code.svelte';
 	import Label from '$lib/components/input/label.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
-	import TransactionSummary from '$lib/components/transactionSummary.svelte';
+	import TransactSummary from '$lib/components/transact/summary.svelte';
+	import TransactError from '$lib/components/transact/error.svelte';
 	import AssetInput from '$lib/components/input/asset.svelte';
 	import BytesInput from '$lib/components/input/bytes.svelte';
 	import AssetText from '$lib/components/elements/asset.svelte';
@@ -29,11 +30,14 @@
 	const { data } = $props();
 
 	const buyRamState: BuyRAMState = $state(new BuyRAMState(data.network.chain));
-	const ramAvailableSize = $derived(calAvailableSize(context.account?.ram));
+	const ramAvailableSize = $derived(calAvailableSize(context.account?.resources.ram));
 
 	let transactionId: Checksum256 | undefined = $state();
+	let errorMessage: string | undefined = $state();
+	let ready = $derived(buyRamState.valid && !context.wharf.transacting);
 
 	async function handleBuyRAM() {
+		errorMessage = undefined;
 		if (!context.wharf || !context.wharf.session) {
 			alert(m.common_not_logged_in());
 			return;
@@ -51,11 +55,13 @@
 
 			resetState();
 		} catch (error) {
+			errorMessage = String(error);
 			console.error(error);
 		}
 	}
 
 	function resetState() {
+		errorMessage = undefined;
 		buyRamState.reset();
 		bytesInput?.reset();
 		assetInput?.reset();
@@ -75,8 +81,8 @@
 	});
 
 	$effect(() => {
-		if (data.network.ramprice) {
-			buyRamState.pricePerKB = data.network.ramprice.eos;
+		if (data.network.resources.ram.price.rammarket) {
+			buyRamState.pricePerKB = data.network.resources.ram.price.rammarket;
 		}
 	});
 
@@ -94,7 +100,16 @@
 
 <Stack>
 	{#if transactionId}
-		<TransactionSummary {transactionId} />
+		<TransactSummary {transactionId} />
+		<Button href={`/${data.network}/ram`} variant="secondary">
+			{m.common_ram_market()}
+		</Button>
+		<Button href={`/${data.network}/account/${context.account?.name}`}>
+			{m.common_view_my_account()}
+		</Button>
+	{:else if errorMessage}
+		<TransactError error={errorMessage} />
+		<Button onclick={resetState}>{m.common_close()}</Button>
 	{:else}
 		<form onsubmit={preventDefault(handleBuyRAM)} class="mx-auto max-w-2xl space-y-4">
 			<RamResource class="hidden" ramAvailable={ramAvailableSize} />
@@ -135,7 +150,7 @@
 				</p>
 			</Stack>
 
-			<Button type="submit" class="mt-4 w-full" disabled={!buyRamState.valid}>
+			<Button type="submit" class="mt-4 w-full" disabled={!ready}>
 				{m.common_unit_buy({ unit: 'RAM' })}
 			</Button>
 
@@ -176,9 +191,9 @@
 
 				{#if buyRamState.valid}
 					{#if buyRamState.format === 'asset'}
-						<SummaryBuyRAM class="hidden" action={{ data: buyRamState.toJSON() }} />
+						<SummaryBuyRAM class="hidden" data={buyRamState.toJSON()} />
 					{:else}
-						<SummaryBuyRAMBytes class="hidden" action={{ data: buyRamState.toJSON() }} />
+						<SummaryBuyRAMBytes class="hidden" data={buyRamState.toJSON()} />
 					{/if}
 				{/if}
 			</Stack>
@@ -187,7 +202,7 @@
 </Stack>
 
 {#if context.settings.data.debugMode}
-	<h3 class="h3">{m.common_debugging()}}</h3>
+	<h3 class="h3">{m.common_debugging()}</h3>
 	<Code
 		>{JSON.stringify(
 			{

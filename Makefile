@@ -1,11 +1,16 @@
 include .env
+-include .env.local
+-include .env.development
+-include .env.production
 
-API_EOS_CHAIN ?= https://eos.greymass.com
 SHELL := /usr/bin/env bash
 BIN := ./node_modules/.bin
 
+ENVS=./scripts/env
+CONTRACTS=./src/lib/wharf/contracts
+
 .PHONY: dev
-dev: node_modules
+dev: node_modules codegen
 	bun run dev --host 
 
 .PHONY: check
@@ -20,17 +25,44 @@ format: node_modules
 install:
 	@if [ -z "$(package)" ]; then \
 		echo "Installing all dependencies:"; \
-		bun install --yarn; \
+		bun install --frozen-lockfile; \
 	else \
 		echo "Installing package: $(package)"; \
-		bun install --yarn $(package); \
+		bun install --frozen-lockfile $(package); \
 	fi
 
-%:
-	$(MAKE) install package=$*
+$(CONTRACTS)/system.ts:
+	bunx @wharfkit/cli generate -u $(CONTRACTS_API) -f $(CONTRACTS)/system.ts eosio
 
-codegen:
-	npx @wharfkit/cli generate -u $(API_EOS_CHAIN) -f src/lib/wharf/contracts/system.ts eosio
-	npx @wharfkit/cli generate -u $(API_EOS_CHAIN) -f src/lib/wharf/contracts/token.ts eosio.token
-	npx @wharfkit/cli generate -u $(API_EOS_CHAIN) -f src/lib/wharf/contracts/msig.ts eosio.msig
-	npx @wharfkit/cli generate -u $(API_EOS_CHAIN) -f src/lib/wharf/contracts/delphioracle.ts delphioracle
+$(CONTRACTS)/token.ts:
+	bunx @wharfkit/cli generate -u $(CONTRACTS_API) -f $(CONTRACTS)/token.ts eosio.token
+
+$(CONTRACTS)/msig.ts:
+	bunx @wharfkit/cli generate -u $(CONTRACTS_API) -f $(CONTRACTS)/msig.ts eosio.msig
+
+$(CONTRACTS)/delphioracle.ts:
+	bunx @wharfkit/cli generate -u $(CONTRACTS_API) -f $(CONTRACTS)/delphioracle.ts delphioracle
+
+$(CONTRACTS)/unicove.ts:
+	bunx @wharfkit/cli generate -u $(CONTRACTS_API) -f $(CONTRACTS)/unicove.ts unicove.gm
+
+codegen: $(CONTRACTS)/system.ts $(CONTRACTS)/token.ts $(CONTRACTS)/msig.ts $(CONTRACTS)/delphioracle.ts $(CONTRACTS)/unicove.ts
+	mkdir -p $(CONTRACTS)
+
+.PHONY: clean
+codegen/clean:
+	rm -rf $(CONTRACTS)/*.ts
+
+$(ENVS)/local/backends.json:
+	cp $(ENVS)/default/backends.json $(ENVS)/local/backends.json
+
+$(ENVS)/local/chains.json:
+	cp $(ENVS)/default/chains.json $(ENVS)/local/chains.json
+
+config/local: $(ENVS)/local/backends.json $(ENVS)/local/chains.json 
+
+config: config/local
+	bun run scripts/env/local.ts
+
+config/default:
+	bun run scripts/env/default.ts

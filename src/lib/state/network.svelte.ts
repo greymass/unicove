@@ -1,74 +1,90 @@
-import { APIClient, Asset, FetchProvider, Int128, type AssetType } from '@wharfkit/antelope';
-import { Chains, ChainDefinition, TokenMeta } from '@wharfkit/common';
-import { RAMState, Resources, REXState, PowerUpState } from '@wharfkit/resources';
-import { ABICache, chainIdsToIndices } from '@wharfkit/session';
+import {
+	Action,
+	APIClient,
+	Asset,
+	FetchProvider,
+	Int128,
+	Serializer,
+	UInt64,
+	type ABISerializable,
+	type AssetType
+} from '@wharfkit/antelope';
+import { ChainDefinition, TokenMeta, TokenIdentifier } from '@wharfkit/common';
+import { RAMState, Resources as ResourceClient, REXState, PowerUpState } from '@wharfkit/resources';
+import { ABICache } from '@wharfkit/abicache';
 import { snapOrigins } from '@wharfkit/wallet-plugin-metamask';
 
-import { Types as DelphiOracleTypes } from '$lib/wharf/contracts/delphioracle';
-import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
-import { Contract as MSIGContract } from '$lib/wharf/contracts/msig';
-import { Contract as SystemContract, Types as SystemTypes } from '$lib/wharf/contracts/system';
-import { Contract as TokenContract } from '$lib/wharf/contracts/token';
+import {
+	NetworkDataSources,
+	SystemToken,
+	type ChainConnectionState,
+	type NetworkStateOptions,
+	type SerializedNetworkState,
+	type SystemResources
+} from '$lib/types/network';
 
 import {
-	chainConfigs,
 	chainMapper,
+	getChainDefinitionFromParams,
 	type ChainConfig,
-	type ChainShortName,
 	type DefaultContracts,
-	type FeatureType
+	type FeatureType,
+	getChainConfigByName
 } from '$lib/wharf/chains';
 
-import { tokens } from '../../routes/[network]/api/tokens/tokens';
 import { calculateValue } from '$lib/utils';
-import { SampledUsage } from '$lib/types';
 
-export interface NetworkStateOptions {
-	fetch?: typeof fetch;
-	client?: APIClient;
-}
+import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
+import { Contract as MSIGContract } from '$lib/wharf/contracts/msig';
+import { Contract as SystemContract } from '$lib/wharf/contracts/system';
+import { Contract as TokenContract } from '$lib/wharf/contracts/token';
+import { Contract as UnicoveContract, Types as UnicoveTypes } from '$lib/wharf/contracts/unicove';
+import { defaultPrice, defaultPriceSymbol } from './defaults/network';
+import type { ObjectifiedActionData } from '$lib/types/transaction';
 
 export class NetworkState {
-	public client: APIClient;
-	public chain: ChainDefinition;
-	public config: ChainConfig;
-	public fetch = fetch;
-	public last_update: Date = $state(new Date());
-	public loaded = $state(false);
-	public shortname: keyof typeof tokens;
-	public snapOrigin?: string = $state();
+	// Readonly state
+	readonly client: APIClient;
+	readonly chain: ChainDefinition;
+	readonly config: ChainConfig;
+	readonly contracts: DefaultContracts;
+	readonly fetch = fetch;
+	readonly shortname: string;
+	readonly snapOrigin?: string;
+	readonly resourceClient: ResourceClient;
 
-	public contracts: DefaultContracts;
+	// Raw data sources used to populate network state
+	private sources?: NetworkDataSources = $state();
 
+	// Derived network state
+	readonly resources = $derived(this.getResources());
+	readonly rex = $derived(this.getRexState());
+	readonly token = $derived.by(() => this.getSystemToken());
+	readonly tvl = $derived(this.calculateTvl());
+
+	// Writable state
 	public abis?: ABICache = $state();
-	public globalstate?: SystemTypes.eosio_global_state = $state();
-	public marketcap: Asset = $derived.by(() => {
-		if (this.supply && this.tokenprice) {
-			return calculateValue(this.supply, this.tokenprice);
-		}
-		return Asset.fromUnits(0, '4,USD');
+	public connection: ChainConnectionState = $state({
+		connected: false,
+		endpoint: '',
+		updated: new Date()
 	});
-	public ramstate?: RAMState = $state();
-	public resources?: Resources = $state();
-	public rexstate?: REXState = $state();
-	public powerupstate?: PowerUpState = $state();
-	public sampledUsage?: SampledUsage = $state();
-	public supply?: Asset = $state();
-	public tokenmeta?: TokenMeta[] = $state();
-	public tokenstate?: DelphiOracleTypes.datapoints = $state();
-	public tokenprice = $derived.by(() => {
-		return this.tokenstate ? Asset.fromUnits(this.tokenstate.median, '4,USD') : undefined;
-	});
-	public ramprice = $derived(
-		this.ramstate ? getRAMPrice(this.ramstate, this.tokenprice) : undefined
-	);
+	public loaded = $state(false);
+	public tokens?: TokenMeta[] = $state();
 
-	constructor(chain: ChainDefinition, options: NetworkStateOptions = {}) {
-		this.chain = chain;
-		this.config = chainConfigs[String(this.chain.id)];
+	constructor(config: ChainConfig, options: NetworkStateOptions = {}) {
+		this.config = config;
+		this.chain = getChainDefinitionFromParams(config.name);
 		this.shortname = chainMapper.toShortName(String(this.chain.id));
 		this.snapOrigin = snapOrigins.get(this.shortname);
-		this.tokenmeta = tokens[this.shortname];
+		this.tokens = this.config.tokens.map((token) =>
+			TokenMeta.from({
+				id: TokenIdentifier.from({
+					chain: this.chain.id,
+					...token
+				})
+			})
+		);
 
 		if (options.fetch) {
 			this.fetch = options.fetch;
@@ -78,168 +94,289 @@ export class NetworkState {
 			this.client = options.client;
 		} else {
 			this.client = new APIClient(
-				new FetchProvider(this.chain.url, {
+				new FetchProvider(this.config.endpoints.api, {
 					fetch: this.fetch
 				})
 			);
 		}
 
 		this.abis = new ABICache(this.client);
-
-		this.resources = new Resources({
+		this.resourceClient = new ResourceClient({
 			api: this.client,
 			sampleAccount: 'eosio.reserv'
 		});
+		this.connection.endpoint = (this.client.provider as FetchProvider).url;
 
 		this.contracts = {
+			delphioracle: new DelphiOracleContract({ client: this.client }),
 			msig: new MSIGContract({ client: this.client }),
+			system: new SystemContract({ client: this.client }),
 			token: new TokenContract({ client: this.client }),
-			system: new SystemContract({ client: this.client })
+			unicove: new UnicoveContract({ client: this.client })
 		};
-
-		if (this.supports('delphioracle')) {
-			this.contracts.delphioracle = new DelphiOracleContract({ client: this.client });
-		}
 	}
 
-	async refresh() {
+	get serialized(): SerializedNetworkState {
+		return {
+			config: this.config,
+			sources: this.sources
+		};
+	}
+
+	static restore(
+		serialized: SerializedNetworkState,
+		options: NetworkStateOptions = {}
+	): NetworkState {
+		const state = new NetworkState(serialized.config, options);
+		if (serialized.sources) {
+			state.setState(serialized.sources);
+		}
+		return state;
+	}
+
+	public setState(state: NetworkDataSources) {
+		this.sources = NetworkDataSources.from(state);
+	}
+
+	public async refresh() {
 		const response = await this.fetch(
 			`/${chainMapper.toShortName(String(this.chain.id))}/api/network`
 		);
-		const json = await response.json();
-		this.last_update = new Date();
-		this.tokenstate = json.tokenstate;
-
-		try {
-			this.globalstate = SystemTypes.eosio_global_state.from(json.globalstate);
-		} catch (error) {
-			console.log('GlobalState Parse', error);
-			console.log(json);
+		this.connection.updated = new Date();
+		if (response.ok) {
+			this.connection.connected = true;
+			const json = await response.json();
+			this.setState(json);
+			this.loaded = true;
+		} else {
+			this.connection.connected = false;
 		}
+	}
 
-		try {
-			this.ramstate = RAMState.from(json.ramstate);
-		} catch (error) {
-			console.log('RAMState parse', error);
-			console.log(json);
+	getSystemToken(): SystemToken {
+		if (this.sources?.token) {
+			return SystemToken.from({
+				definition: this.sources.token.def,
+				distribution: {
+					circulating: this.sources.token.circulating,
+					locked: this.sources.token.locked,
+					staked: this.sources.rex.total_lendable,
+					supply: this.sources.token.supply,
+					max: this.sources.token.max
+				},
+				marketcap: calculateValue(
+					this.sources.token.circulating,
+					Asset.fromUnits(this.sources.oracle?.median || 0, defaultPriceSymbol)
+				),
+				price: Asset.fromUnits(this.sources.oracle?.median || 0, defaultPriceSymbol)
+			});
 		}
+		return this.defaultSystemToken;
+	}
 
-		try {
-			this.rexstate = REXState.from(json.rexstate);
-		} catch (error) {
-			console.log('REXState parse', error);
-			console.log(json);
+	get defaultSystemToken(): SystemToken {
+		return SystemToken.from({
+			definition: UnicoveTypes.token_definition.from({
+				contract: this.config.systemtoken.contract,
+				symbol: this.config.systemtoken.symbol
+			}),
+			distribution: {
+				circulating: Asset.fromUnits(0, this.config.systemtoken.symbol),
+				locked: Asset.fromUnits(0, this.config.systemtoken.symbol),
+				staked: Asset.fromUnits(0, this.config.systemtoken.symbol),
+				supply: Asset.fromUnits(0, this.config.systemtoken.symbol),
+				max: Asset.fromUnits(0, this.config.systemtoken.symbol)
+			},
+			marketcap: calculateValue(Asset.fromUnits(0, this.config.systemtoken.symbol), defaultPrice),
+			price: defaultPrice
+		});
+	}
+
+	getRexState() {
+		if (this.sources?.rex) {
+			return REXState.from(this.sources.rex);
 		}
+		return this.defaultRexState;
+	}
 
-		try {
-			this.powerupstate = PowerUpState.from(json.powerupstate);
-		} catch (error) {
-			console.log('PowerUpState parse', error);
-			console.log(json);
-		}
-
-		try {
-			this.sampledUsage = SampledUsage.from(json.sampleUsage);
-		} catch (error) {
-			console.log('SampledUsage Parse', error);
-			console.log(json);
-		}
-
-		try {
-			const index = String(this.chain.systemToken?.symbol.name);
-			const supply = Asset.from(json.supply[index].supply);
-			if (json.lockedsupply && json.lockedsupply.length) {
-				for (const balance of json.lockedsupply) {
-					const locked = Asset.from(balance);
-					supply.units.subtract(locked.units);
-				}
-			}
-			this.supply = supply;
-		} catch (error) {
-			console.log('Supply Parse', error);
-			console.log(json);
-		}
-
-		this.loaded = true;
+	get defaultRexState(): REXState {
+		return REXState.from({
+			loan_num: 0,
+			namebid_proceeds: Asset.fromUnits(0, this.config.systemtoken.symbol),
+			total_lendable: Asset.fromUnits(0, this.config.systemtoken.symbol),
+			total_lent: Asset.fromUnits(0, this.config.systemtoken.symbol),
+			total_rent: Asset.fromUnits(0, this.config.systemtoken.symbol),
+			total_rex: Asset.fromUnits(0, this.config.systemtoken.symbol),
+			total_unlent: Asset.fromUnits(0, this.config.systemtoken.symbol),
+			version: 0
+		});
 	}
 
 	supports = (feature: FeatureType): boolean => this.config.features[feature];
 
-	tokenToRex = (token: AssetType) => {
-		if (!this.rexstate) {
-			throw new Error('REX state not initialized');
+	tokenToRex = (token: AssetType): Asset => {
+		if (!this.supports('rex')) {
+			throw new Error(`The ${this.shortname} network does not support REX.`);
 		}
 		const asset = Asset.from(token);
-		const { total_lendable, total_rex } = this.rexstate;
+		const { total_lendable, total_rex } = this.rex;
 		const S1 = total_lendable.units.adding(asset.units);
 		const R1 = Int128.from(S1).multiplying(total_rex.units).dividing(total_lendable.units);
 		const result = R1.subtracting(total_rex.units);
 		return Asset.fromUnits(result, total_rex.symbol);
 	};
 
-	rexToToken = (rex: AssetType) => {
-		if (!this.rexstate) {
-			throw new Error('REX state not initialized');
+	rexToToken = (rex: AssetType): Asset => {
+		if (!this.supports('rex')) {
+			throw new Error(`The ${this.shortname} network does not support REX.`);
 		}
 		const asset = Asset.from(rex);
-		const { total_lendable, total_rex } = this.rexstate;
+		const { total_lendable, total_rex } = this.rex;
 		const R1 = total_rex.units.adding(asset.units);
 		const S1 = Int128.from(R1).multiplying(total_lendable.units).dividing(total_rex.units);
 		const result = S1.subtracting(total_lendable.units);
 		return Asset.fromUnits(result, total_lendable.symbol);
 	};
 
+	getPowerupFrac = (cpu: number, net: number): [number, number] => {
+		if (!this.supports('powerup')) {
+			throw new Error(`The ${this.shortname} network does not support powerup.`);
+		}
+		if (!this.sources?.powerup) {
+			throw new Error('PowerUp state not initialized');
+		}
+		if (!this.sources?.sample) {
+			throw new Error('PowerUp state not initialized');
+		}
+		const powerup = PowerUpState.from(this.sources?.powerup);
+		return [
+			powerup.cpu.frac_by_ms(this.sources.sample, cpu),
+			powerup.net.frac_by_kb(this.sources.sample, net)
+		];
+	};
+
+	getResources(): SystemResources {
+		const defaultValue = Asset.fromUnits(0, this.token.definition.symbol);
+		const response: SystemResources = {
+			cpu: {
+				price: {
+					powerup: defaultValue,
+					rex: defaultValue,
+					staking: defaultValue
+				}
+			},
+			net: {
+				price: {
+					powerup: defaultValue,
+					rex: defaultValue,
+					staking: defaultValue
+				}
+			},
+			ram: {
+				price: {
+					rammarket: defaultValue
+				},
+				supply: UInt64.from(0),
+				gift: UInt64.from(this.sources ? this.sources.ram_gift_bytes : 0)
+			}
+		};
+
+		if (this.sources?.global) {
+			response.ram.supply = this.sources.global.max_ram_size;
+		}
+
+		if (this.supports('rammarket') && this.sources?.ram) {
+			response.ram.price.rammarket = RAMState.from(this.sources.ram).price_per_kb(1);
+		}
+
+		if (this.supports('powerup') && this.sources?.powerup && this.sources?.sample) {
+			const pstate = PowerUpState.from(this.sources.powerup);
+			response.cpu.price.powerup = Asset.from(
+				pstate.cpu.price_per_ms(this.sources.sample, 1),
+				this.token.definition.symbol
+			);
+			response.net.price.powerup = Asset.from(
+				pstate.net.price_per_kb(this.sources.sample, 1),
+				this.token.definition.symbol
+			);
+		}
+
+		if (this.supports('rentrex') && this.rex && this.sources?.sample) {
+			response.cpu.price.rex = Asset.from(
+				this.rex.cpu_price_per_ms(this.sources.sample, 30),
+				this.token.definition.symbol
+			);
+			response.net.price.rex = Asset.from(
+				this.rex.net_price_per_kb(this.sources.sample, 30),
+				this.token.definition.symbol
+			);
+		}
+
+		if (this.supports('stakeresource') && this.sources?.sample) {
+			const account = this.sources.sample.account;
+			const cpuPrice = account.cpu_weight.multiplying(1000).dividing(account.cpu_limit.max);
+			const netPrice = account.net_weight.multiplying(1000).dividing(account.net_limit.max);
+			response.cpu.price.staking = Asset.fromUnits(cpuPrice, this.token.definition.symbol);
+			response.net.price.staking = Asset.fromUnits(netPrice, this.token.definition.symbol);
+		}
+
+		return response;
+	}
+
+	calculateTvl(): Asset {
+		const token = Asset.fromUnits(0, this.chain.systemToken!.symbol);
+		if (this.supports('rex') && this.sources?.rex) {
+			token.units.add(this.sources.rex.total_lendable.units);
+		}
+		if (this.supports('rammarket') && this.sources?.ram) {
+			token.units.add(this.sources.ram.quote.balance.units);
+		}
+		if (this.token.price.units.gt(UInt64.from(0))) {
+			return calculateValue(token, this.token.price);
+		}
+		return token;
+	}
+
+	async decodeAction(action: Action): Promise<ABISerializable> {
+		const abi = await this.abis?.getAbi(action.account);
+		return Serializer.decode({
+			data: action.data,
+			type: String(action.name),
+			abi: abi
+		});
+	}
+
+	async objectifyAction(action: Action): Promise<ObjectifiedActionData> {
+		return Serializer.objectify(await this.decodeAction(action));
+	}
+
 	toString() {
-		return chainMapper.toShortName(String(this.chain.id));
+		return this.shortname;
 	}
 
 	toJSON() {
 		return {
+			abis: this.abis?.cache,
 			chain: this.chain,
-			last_update: this.last_update,
-			marketcap: this.marketcap,
-			ramstate: this.ramstate,
-			ramprice: this.ramprice,
-			rexstate: this.rexstate,
-			sampleAccount: this.resources?.sampleAccount,
-			supply: this.supply,
-			tokenprice: this.tokenprice,
-			tokenstate: this.tokenstate
+			config: this.config,
+			connection: this.connection,
+			loaded: this.loaded,
+			resources: this.resources,
+			shortname: this.shortname,
+			snapOrigins: this.snapOrigin,
+			token: this.token,
+			tokens: this.tokens,
+			tvl: this.tvl
 		};
 	}
 }
 
-export function getRAMPrice(state: RAMState, systemTokenPrice?: Asset) {
-	const cost = state.price_per_kb(1);
-	return {
-		eos: cost,
-		usd: systemTokenPrice ? calculateValue(cost, systemTokenPrice) : undefined
-	};
+export function getNetwork(config: ChainConfig, options: NetworkStateOptions = {}): NetworkState {
+	return new NetworkState(config, options);
 }
 
-export function getNetwork(
-	chain: ChainDefinition,
-	options: NetworkStateOptions = {}
-): NetworkState {
-	const network = new NetworkState(chain, options);
-	return network;
-}
-
-export function getChainDefinitionFromParams(network: string): ChainDefinition {
-	if (network) {
-		const id = chainMapper.toChainId(network as ChainShortName);
-		const name = chainIdsToIndices.get(id);
-		if (name) {
-			// Return the chain that's found
-			return Chains[name];
-		}
-	}
-	// Return EOS as the default network if params.network is not defined
-	return Chains.EOS;
-}
-
-export function getNetworkFromParams(network: string, fetch?: typeof window.fetch): NetworkState {
-	const chain = getChainDefinitionFromParams(network);
-	const state = getNetwork(chain, { fetch });
+export function getNetworkByName(name: string, fetch?: typeof window.fetch): NetworkState {
+	const config = getChainConfigByName(name);
+	const state = getNetwork(config, { fetch });
 	return state;
 }

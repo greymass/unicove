@@ -26,8 +26,8 @@ export function getStakableBalance(network?: NetworkState, account?: AccountStat
 export function getStakedBalance(network?: NetworkState, account?: AccountState): Asset {
 	const staked = Int64.from(0);
 	if (account && account.loaded) {
-		if (account.account?.data.rex_info && network) {
-			staked.add(network.rexToToken(account.account.data.rex_info.rex_balance).units);
+		if (account.balance?.staked && network) {
+			staked.add(account.balance?.staked.units);
 		}
 	}
 	return Asset.fromUnits(staked, network ? network.chain.systemToken!.symbol : defaultSymbol);
@@ -79,8 +79,8 @@ export function getSellableREX(
 
 export function getWithdrawableBalance(network?: NetworkState, account?: AccountState): Asset {
 	const withdrawable = Int64.from(0);
-	if (account && account.loaded && account.sources.rexfund && account.sources.rexfund.balance) {
-		withdrawable.add(Asset.from(account.sources.rexfund.balance).units);
+	if (account && account.loaded && account.balance?.unstaked) {
+		withdrawable.add(account.balance?.unstaked.units);
 	}
 	return Asset.fromUnits(withdrawable, network ? network.chain.systemToken!.symbol : defaultSymbol);
 }
@@ -91,34 +91,33 @@ export function getUnstakingBalances(
 ): Array<UnstakingRecord> {
 	// matured_rex + claimable buckets
 	const records: Array<UnstakingRecord> = [];
-	if (network && account && account.loaded && account.account?.data.rex_info) {
-		const rexInfo = account.account.data.rex_info;
-		if (rexInfo.matured_rex && rexInfo.matured_rex.gt(Int64.from(0))) {
+	if (network && account && account.loaded && account.rex) {
+		if (account.rex.matured_rex && account.rex.matured_rex.gt(Int64.from(0))) {
 			// construct matured as one rex bucket
 			records.push({
 				date: undefined,
 				balance: network.rexToToken(
-					Asset.fromUnits(rexInfo.matured_rex, rexInfo.rex_balance.symbol)
+					Asset.fromUnits(account.rex.matured_rex, account.rex.rex_balance.symbol)
 				),
-				rex: Asset.fromUnits(rexInfo.matured_rex, rexInfo.rex_balance.symbol),
+				rex: Asset.fromUnits(account.rex.matured_rex, account.rex.rex_balance.symbol),
 				claimable: true,
 				savings: false
 			});
 		}
 
-		if (rexInfo.rex_maturities) {
+		if (account.rex.rex_maturities) {
 			// transform real rex buckets
 			const fiveYearsFromNow = new Date().getTime() + 1000 * 60 * 60 * 24 * 365 * 5;
 			const now = new Date();
-			for (const maturity of rexInfo.rex_maturities) {
+			for (const maturity of account.rex.rex_maturities) {
 				if (maturity.first && maturity.second) {
 					const date = new Date(maturity.first.toString() + 'Z');
 					records.push({
 						date,
 						balance: network.rexToToken(
-							Asset.fromUnits(maturity.second, rexInfo.rex_balance.symbol)
+							Asset.fromUnits(maturity.second, account.rex.rex_balance.symbol)
 						),
-						rex: Asset.fromUnits(maturity.second, rexInfo.rex_balance.symbol),
+						rex: Asset.fromUnits(maturity.second, account.rex.rex_balance.symbol),
 						claimable: date < now,
 						savings: +date > +fiveYearsFromNow
 					});
@@ -145,6 +144,10 @@ export function getUnstakableBalance(
 
 export function getAPR(network: NetworkState): string {
 	const annualReward = 31250000;
-	const totalStaked = Number(network.rexstate!.total_lendable.value);
+	const totalStaked = Number(network.token.distribution.staked.value);
+	// Prevent division by zero
+	if (totalStaked === 0) {
+		return '0';
+	}
 	return ((annualReward / totalStaked) * 100).toFixed(1);
 }

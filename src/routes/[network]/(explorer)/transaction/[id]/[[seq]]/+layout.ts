@@ -1,19 +1,49 @@
-import { truncateCenter } from '$lib/utils';
-import type { Load } from '@sveltejs/kit';
+import { error } from '@sveltejs/kit';
 
-export const load: Load = async ({ fetch, params, parent }) => {
+import { truncateCenter } from '$lib/utils';
+import { TransactionResponse } from '$lib/types/transaction';
+import * as m from '$lib/paraglide/messages';
+import type { LayoutLoad } from './$types';
+import { languageTag } from '$lib/paraglide/runtime';
+import { formatDateTime } from '$lib/utils/intl';
+
+export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 	const { network } = await parent();
 	const response = await fetch(`/${params.network}/api/transaction/${params.id}`);
-	const json = await response.json();
+	const json: TransactionResponse = await response.json();
+	if (!json.id) {
+		error(404, {
+			message: m.transaction_404({
+				transaction: truncateCenter(params.id || '', 14)
+			}),
+			code: 'NOT_FOUND'
+		});
+	}
+	const transaction = TransactionResponse.from(json);
+	const lang = languageTag();
 	return {
-		...json,
-		title: `${truncateCenter(json.transaction.id, 14)}`,
-		subtitle: `Transaction on ${String(json.transaction.block_time)}`,
+		transaction,
+		title: `${truncateCenter(String(json.id), 14)}`,
+		subtitle: m.transaction_page_subtitle({
+			date: formatDateTime(transaction.block_time.toDate(), lang, {
+				dateStyle: 'long',
+				timeZone: 'UTC'
+			})
+		}),
 		id: params.id,
 		seq: params.seq,
 		pageMetaTags: {
-			title: `${json.transaction.id} | ${network.chain.name} Network`,
-			description: `A transaction performed at ${json.transaction.block_time} on the ${network.chain.name} Network.`
+			title: m.transaction_page_meta_title({
+				id: String(transaction.id),
+				network: network.chain.name
+			}),
+			description: m.transaction_page_meta_description({
+				date: formatDateTime(transaction.block_time.toDate(), lang, {
+					dateStyle: 'long',
+					timeZone: 'UTC'
+				}),
+				network: network.chain.name
+			})
 		}
 	};
 };

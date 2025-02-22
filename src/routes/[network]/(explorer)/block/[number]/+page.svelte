@@ -6,6 +6,7 @@
 	import { ArrowLeftRight, ArrowRight, ArrowLeft } from 'lucide-svelte';
 	import { DD, DL, DLRow } from '$lib/components/descriptionlist/index.js';
 	import { goto } from '$lib/utils';
+	import * as m from '$lib/paraglide/messages';
 
 	let { data } = $props();
 
@@ -39,17 +40,19 @@
 			<h2 class="h3 flex items-center gap-2">
 				<ArrowLeftRight class="size-5" />
 				{transactions.length}
-				{transactions.length === 1 ? 'Transaction' : 'Transactions'}
+				{transactions.length === 1
+					? m.common_transaction_unit_single()
+					: m.common_transaction_unit_multi()}
 			</h2>
 
 			{#if transactions.length}
 				<table class="table-styles">
 					<thead>
 						<tr>
-							<th>Transaction</th>
-							<th class="text-right">Actions</th>
-							<th class="text-right">CPU (μs)</th>
-							<th class="text-right">NET (Bytes)</th>
+							<th>{m.common_transaction()}</th>
+							<th class="text-right">{m.common_actions()}</th>
+							<th class="text-right">{m.common_cpu_us()}</th>
+							<th class="text-right">{m.common_net_bytes()}</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -68,41 +71,41 @@
 					</tbody>
 				</table>
 			{:else}
-				<p>No transactions</p>
+				<p>{m.common_no_transactions()}</p>
 			{/if}
 		</Stack>
 	{/if}
 
 	<Stack class="gap-4" id="details">
-		<h2 class="h3">Block Details</h2>
+		<h2 class="h3">{m.block_page_details()}</h2>
 
 		<DL>
-			<DLRow title={'Block Number'}>
+			<DLRow title={m.common_block_number()}>
 				<DD>
 					{data.details.blockNumber}
 				</DD>
 			</DLRow>
-			<DLRow title={'Producer Name'}>
+			<DLRow title={m.common_producer_name()}>
 				<DD>
 					<AccountText name={data.details.blockProducer} />
 				</DD>
 			</DLRow>
-			<DLRow title={'Total CPU'}>
+			<DLRow title={m.common_cpu_total()}>
 				<DD>
 					{data.details.totalCpu} μs
 				</DD>
 			</DLRow>
-			<DLRow title={'Total NET'}>
+			<DLRow title={m.common_net_total()}>
 				<DD>
 					{data.details.totalNet * 8} Bytes
 				</DD>
 			</DLRow>
-			<DLRow title={'Total Actions'}>
+			<DLRow title={m.common_total_actions()}>
 				<DD>
 					{data.details.totalActions}
 				</DD>
 			</DLRow>
-			<DLRow title={'Block ID'}>
+			<DLRow title={m.common_block_id()}>
 				<DD>
 					{data.details.blockId}
 				</DD>
@@ -113,13 +116,15 @@
 			{#if data.height > 1}
 				<Button href={previousBlockLink} variant="secondary">
 					<span class="inline-flex items-center gap-1">
-						<ArrowLeft class="size-4" /> Previous Block
+						<ArrowLeft class="size-4" />
+						{m.common_block_previous()}
 					</span>
 				</Button>
 			{/if}
 			<Button href={nextBlockLink} variant="secondary">
 				<span class="inline-flex items-center gap-1">
-					Next Block <ArrowRight class="size-4" />
+					{m.common_block_next()}
+					<ArrowRight class="size-4" />
 				</span>
 			</Button>
 		</Switcher>

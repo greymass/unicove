@@ -1,16 +1,19 @@
 <script lang="ts">
-	import ChevronLeft from 'lucide-svelte/icons/chevron-left';
-	import { chainLogos } from '@wharfkit/common';
 	import { goto } from '$app/navigation';
-	import { type NetworkState } from '$lib/state/network.svelte';
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
+	import AccountButton from '$lib/components/button/account.svelte';
+	import ContractButton from '$lib/components/button/contract.svelte';
 	import CopyButton from '$lib/components/button/copy.svelte';
+	import { type NetworkState } from '$lib/state/network.svelte';
+	import { chainLogos } from '@wharfkit/common';
+	import ChevronLeft from 'lucide-svelte/icons/chevron-left';
 
 	interface Props {
 		title: string;
 		subtitle?: string;
 		backPath?: string;
 		network: NetworkState;
+		contract?: boolean;
 	}
 
 	let props: Props = $props();
@@ -25,7 +28,9 @@
 
 	let logo = $derived(chainLogos.get(String(props.network.chain.id)) || '');
 
-	let routePath = $derived($page.url.pathname.split('/')[3]);
+	let routePath = $derived(page.url.pathname.split('/')[3]);
+	let contractPath = $derived(`/${props.network.shortname}/contract/${props.title}`);
+	let accountPath = $derived(`/${props.network.shortname}/account/${props.title}`);
 </script>
 
 <header class="col-span-full flex min-h-16 items-center gap-4">
@@ -50,7 +55,15 @@
 		<h1 class="w-fit text-3xl font-bold leading-none text-white">
 			<span>{props.title}</span>
 			{#if routePath === 'account'}
-				<CopyButton data={props.title} />
+				<CopyButton data={props.title} slop={false} />
+				{#if props.contract}
+					<ContractButton data={contractPath} slop={false} />
+				{/if}
+			{/if}
+
+			{#if routePath === 'contract'}
+				<CopyButton data={props.title} slop={false} />
+				<AccountButton data={accountPath} slop={false} />
 			{/if}
 		</h1>
 		{#if props.subtitle}

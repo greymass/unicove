@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
-	// import { CircleCheck, CircleHelp } from 'lucide-svelte';
 
 	import Button from '$lib/components/button/button.svelte';
 	import { DD, DL, DLRow } from '$lib/components/descriptionlist/index.js';
@@ -8,8 +7,11 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
 	import Account from '$lib/components/elements/account.svelte';
 	import ActionCard from '$lib/components/elements/action.svelte';
+	import SelectActionVariant from '$lib/components/select/actionvariant.svelte';
+	import * as m from '$lib/paraglide/messages';
 
 	import { ApprovalManager } from './manager.svelte';
+	import type { ActionDisplayVariants } from '$lib/types';
 
 	let { data } = $props();
 
@@ -21,12 +23,14 @@
 	});
 
 	const top21 = data.producers.splice(0, 21);
+
+	let variant = $derived(context.settings.data.actionDisplayVariant as ActionDisplayVariants);
 </script>
 
 <Stack>
 	<Switcher class="items-start gap-6" threshold="40rem">
 		<Stack class="gap-4">
-			<h2 class="h3">Requested Approvals</h2>
+			<h2 class="h3">{m.msig_requested_approvals()}</h2>
 
 			<div
 				id="msig-vis"
@@ -43,7 +47,7 @@
 							<!-- <Check class="size-5 fill-inherit" />  -->
 							{manager.totalApproved}
 						</span>
-						Approved
+						{m.msig_approved()}
 					</div>
 
 					<div class="">
@@ -52,17 +56,17 @@
 							<!-- <UserCheck class="size-5 fill-inherit" />  -->
 							{manager.totalRequested}
 						</span>
-						Requested
+						{m.msig_requested()}
 					</div>
 				</div>
 			</div>
 			<table class="table-styles">
 				<thead>
 					<tr>
-						<th class="text-left">Actor</th>
-						<th class="text-left">Permission</th>
-						<th class="text-left">Role</th>
-						<th class="text-right">Status</th>
+						<th class="text-left">{m.common_actor()}</th>
+						<th class="text-left">{m.common_permission()}</th>
+						<th class="text-left">{m.common_role()}</th>
+						<th class="text-right">{m.common_status()}</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -74,18 +78,18 @@
 							<td class="text-muted">{participant.permission}</td>
 							<td>
 								{#if isTop21}
-									Top 21
+									{m.common_producer_top21()}
 								{:else if isProducer}
-									Standby
+									{m.common_producer_standby()}
 								{:else}
-									Signer
+									{m.common_signer()}
 								{/if}
 							</td>
 							<td class="text-right">
 								{#if manager.accountHasApproved(participant)}
-									<span class="text-green-300">Approved</span>
+									<span class="text-green-300">{m.msig_approved()}</span>
 								{:else}
-									<span class="text-muted">Requested</span>
+									<span class="text-muted">{m.msig_requested()}</span>
 								{/if}
 							</td>
 						</tr>
@@ -95,25 +99,25 @@
 		</Stack>
 
 		<Stack class="gap-4" id="details">
-			<h2 class="h3">Multisig Details</h2>
+			<h2 class="h3">{m.msig_details()}</h2>
 
 			<DL>
-				<DLRow title={'Proposer'}>
+				<DLRow title={m.msig_proposer()}>
 					<DD>
 						<Account name={manager.proposal.proposer} />
 					</DD>
 				</DLRow>
-				<DLRow title={'Proposal Name'}>
+				<DLRow title={m.msig_proposal_name()}>
 					<DD>
 						{manager.proposal.name}
 					</DD>
 				</DLRow>
-				<DLRow title={manager.expired ? 'Expired' : 'Expiration'}>
+				<DLRow title={manager.expired ? m.msig_expired() : m.msig_expiration()}>
 					<DD>
 						{manager.proposal.transaction.expiration} ({manager.expiresIn})
 					</DD>
 				</DLRow>
-				<DLRow title={'Hash'}>
+				<DLRow title={m.common_hash()}>
 					<DD>
 						{manager.proposal.hash}
 					</DD>
@@ -125,14 +129,14 @@
 					<Button
 						variant="secondary"
 						onclick={() => manager.unapprove()}
-						disabled={context.wharf.transacting}>Unapprove</Button
+						disabled={context.wharf.transacting}>{m.common_unapprove()}</Button
 					>
 				{:else}
 					<Button
 						class="bg-green-400 text-green-950 hover:active:bg-green-500 [@media(any-hover:hover)]:hover:bg-green-300"
 						variant="primary"
 						onclick={() => manager.approve()}
-						disabled={context.wharf.transacting}>Approve</Button
+						disabled={context.wharf.transacting}>{m.common_approve()}</Button
 					>
 				{/if}
 			{/if}
@@ -141,22 +145,27 @@
 				<Button
 					variant="secondary"
 					disabled={context.wharf.transacting}
-					onclick={() => manager.cancel()}>Cancel MSIG</Button
+					onclick={() => manager.cancel()}>{m.msig_cancel_action()}</Button
 				>
 			{/if}
 
 			<Button
 				variant="primary"
 				disabled={context.wharf.transacting}
-				onclick={() => manager.execute()}>Execute</Button
+				onclick={() => manager.execute()}>{m.msig_execute_action()}</Button
 			>
 		</Stack>
 	</Switcher>
 
 	<Stack>
-		<h2 class="h3">Proposed Actions</h2>
-		{#each manager.actions as action}
-			<ActionCard {action} />
+		<h2 class="h3">{m.msig_proposed_actions()}</h2>
+		<SelectActionVariant />
+		{#each manager.readable as decodedAction}
+			<ActionCard
+				action={decodedAction.action}
+				objectified={decodedAction.readable?.data}
+				{variant}
+			/>
 		{/each}
 	</Stack>
 </Stack>

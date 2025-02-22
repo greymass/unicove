@@ -1,11 +1,11 @@
 <script lang="ts">
 	import Card from '$lib/components/layout/box/card.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
-	import { Asset } from '@wharfkit/antelope';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import { calculateValue } from '$lib/utils';
 	import TextBlock from './text-block.svelte';
 	import Box from '$lib/components/layout/box/box.svelte';
+	import * as m from '$lib/paraglide/messages';
 
 	interface Props {
 		network: NetworkState;
@@ -14,19 +14,6 @@
 	}
 
 	let { network, networkLogo, networkName }: Props = $props();
-	const tvl = $derived.by(() => {
-		const token = Asset.fromUnits(0, network.chain.systemToken!.symbol);
-		if (network.supports('rex') && network.rexstate) {
-			token.units.add(network.rexstate.total_lendable.units);
-		}
-		if (network.supports('rammarket') && network.ramstate) {
-			token.units.add(network.ramstate.quote.balance.units);
-		}
-		if (network.tokenprice) {
-			return calculateValue(token, network.tokenprice);
-		}
-		return token;
-	});
 </script>
 
 <section class="col-span-full grid grid-cols-subgrid gap-4">
@@ -36,14 +23,12 @@
 	>
 		<Box>
 			<TextBlock
-				{...{
-					title: `EOS Network DeFi`,
-					text: 'System-level DeFi is offered by the EOS network both staking and RAM trading. The network also supports a variety of DeFi applications, including decentralized exchanges, lending platforms, swaps, and more.'
-					// button: {
-					// 	text: 'Explore DeFi Platforms',
-					// 	href: `${network}/defi`
-					// }
-				}}
+				title={m.homepage_performance_defi({
+					network: networkName
+				})}
+				text={m.homepage_performance_defi_description({
+					network: networkName
+				})}
 			/>
 		</Box>
 	</div>
@@ -55,9 +40,9 @@
 		<div id="performance-row-1" class="grid gap-4 @lg:grid-cols-[1fr_auto_1fr]">
 			<!-- Market Cap -->
 			<Card class="grid content-between gap-4  bg-mineShaft-900/40">
-				<h3 class="text-muted text-sm">EOS Market Cap</h3>
+				<h3 class="text-muted text-sm">{network.chain.name} {m.common_market_cap()}</h3>
 				<p class="justify-self-end text-nowrap text-xl font-semibold text-white">
-					<AssetText value={network.marketcap} variant="short" />
+					<AssetText value={network.token.marketcap} variant="short" />
 				</p>
 			</Card>
 
@@ -78,9 +63,9 @@
 
 			<!-- Native TVL -->
 			<Card class="grid content-between gap-4 bg-mineShaft-900/60">
-				<h3 class="text-muted text-sm">Native TVL</h3>
+				<h3 class="text-muted text-sm">{m.common_native_tvl()}</h3>
 				<p class="justify-self-end text-nowrap text-xl font-semibold text-white">
-					<AssetText value={tvl} variant="short" />
+					<AssetText value={network.tvl} variant="short" />
 				</p>
 			</Card>
 		</div>
@@ -89,28 +74,33 @@
 			<!-- Token price -->
 			<Card class="grid flex-1 content-between gap-4 @sm:shrink">
 				<h3 class="text-muted text-sm">
-					{network.chain.systemToken?.symbol.name}/{network.tokenprice?.symbol.name}
+					{network.token.definition.symbol.name}/{network.token.price.symbol.name}
 				</h3>
 				<p class="justify-self-end text-nowrap text-xl font-semibold text-white">
-					<AssetText value={network.tokenprice} variant="full" />
+					<AssetText value={network.token.price} variant="full" />
 				</p>
 			</Card>
 
 			<!-- Ram Eos pair -->
 			<Card class="grid flex-1 content-between gap-4  bg-mineShaft-900/60">
-				<h3 class="text-muted text-sm">RAM/EOS</h3>
+				<h3 class="text-muted text-sm">RAM/{network.token.definition.symbol.name}</h3>
 				<p class="justify-self-end text-nowrap text-xl font-semibold text-white">
-					<AssetText value={network.ramprice?.eos} variant="full" />
+					<AssetText value={network.resources.ram.price.rammarket} variant="full" />
 				</p>
 			</Card>
 
 			<!-- Ram price -->
-			<Card class="grid flex-1 content-between gap-4 bg-mineShaft-900/40">
-				<h3 class="text-muted text-sm">RAM/USD</h3>
-				<p class="justify-self-end text-nowrap text-xl font-semibold text-white">
-					<AssetText value={network.ramprice?.usd} variant="full" />
-				</p>
-			</Card>
+			{#if network.resources && network.resources.ram.price.rammarket}
+				<Card class="grid flex-1 content-between gap-4 bg-mineShaft-900/40">
+					<h3 class="text-muted text-sm">RAM/USD</h3>
+					<p class="justify-self-end text-nowrap text-xl font-semibold text-white">
+						<AssetText
+							value={calculateValue(network.resources.ram.price.rammarket, network.token.price)}
+							variant="full"
+						/>
+					</p>
+				</Card>
+			{/if}
 		</div>
 	</div>
 </section>

@@ -10,7 +10,7 @@ export const load: PageLoad = async ({ fetch, params, parent }) => {
 		pubkey = PublicKey.from(String(params.publicKey));
 	} catch (e) {
 		error(404, {
-			message: `Key not found: ${e}`,
+			message: m.key_404({ error: String(e) }),
 			code: 'KEY_NOT_FOUND'
 		});
 	}

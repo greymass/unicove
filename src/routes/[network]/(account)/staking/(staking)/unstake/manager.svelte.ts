@@ -42,7 +42,7 @@ export class UnstakeManager {
 				contract: this.network.contracts.token.account,
 				symbol: this.network.chain.systemToken!.symbol
 			};
-			const meta = (this.network.tokenmeta || []).find((item) => item.id.equals(tokenIdentifier));
+			const meta = (this.network.tokens || []).find((item) => item.id.equals(tokenIdentifier));
 			if (meta) {
 				balance = TokenBalance.from({
 					asset: this.staked,
@@ -114,7 +114,6 @@ export class UnstakeManager {
 			if (!this.txid) {
 				this.error = 'no txid';
 			}
-			console.log(`txid: ${this.txid}`);
 		} catch (error) {
 			this.error = String(error);
 		}

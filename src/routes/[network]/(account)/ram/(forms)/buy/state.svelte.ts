@@ -1,5 +1,5 @@
 import { Asset, Name, Serializer, Int64 } from '@wharfkit/antelope';
-import { Chains, type ChainDefinition } from '@wharfkit/session';
+import { type ChainDefinition } from '@wharfkit/common';
 
 const defaultName = Name.from('');
 const defaultSymbol = Asset.Symbol.from('0,UNKNOWN');
@@ -12,7 +12,7 @@ export class BuyRAMState {
 	public receiver: Name = $state(defaultName);
 	public tokens: Asset = $state(defaultQuantity);
 	public balance: Asset = $state(defaultQuantity);
-	public chain: ChainDefinition = $state(Chains.EOS);
+	public chain: ChainDefinition = $state() as ChainDefinition;
 	public pricePerKB: Asset = $state(defaultQuantity);
 	public format: 'asset' | 'bytes' = $state('asset');
 
@@ -73,7 +73,6 @@ export class BuyRAMState {
 
 	constructor(chain: ChainDefinition) {
 		this.chain = chain;
-
 		this.reset();
 	}
 

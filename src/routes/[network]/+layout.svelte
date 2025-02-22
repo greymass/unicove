@@ -3,23 +3,22 @@
 	import { chainLogos } from '@wharfkit/common';
 	import { onMount, setContext, untrack } from 'svelte';
 	import X from 'lucide-svelte/icons/circle-x';
-	import {
-		PUBLIC_ACCOUNT_UPDATE_INTERVAL,
-		PUBLIC_NETWORK_UPDATE_INTERVAL
-	} from '$env/static/public';
+	import { env } from '$env/dynamic/public';
+	import { Head, type SeoConfig } from 'svead';
+	import { page } from '$app/stores';
+	import extend from 'just-extend';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { AccountState } from '$lib/state/client/account.svelte.js';
 	import { WharfState } from '$lib/state/client/wharf.svelte.js';
-	import { NetworkState, getNetwork } from '$lib/state/network.svelte.js';
 	import { SearchRecordStorage } from '$lib/state/search.svelte.js';
 
 	import MobileNavigation from '$lib/components/navigation/mobilenavigation.svelte';
 	import SideMenuContent from '$lib/components/navigation/sidemenu.svelte';
 	import AccountSwitcher from '$lib/components/accountswitch.svelte';
-	import UnicoveLogo from '$lib/assets/unicovelogo.svelte';
 	import Search from '$lib/components/search/input.svelte';
 	import { SettingsState } from '$lib/state/settings.svelte.js';
+	import Unicovelogo from '$lib/assets/unicovelogo.svelte';
 
 	let { children, data } = $props();
 
@@ -46,11 +45,7 @@
 		}
 	});
 
-	export function setAccount(
-		state: NetworkState,
-		name: NameType,
-		fetchOverride?: typeof fetch
-	): AccountState {
+	export function setAccount(name: NameType, fetchOverride?: typeof fetch): AccountState {
 		account = new AccountState(data.network, name, fetchOverride);
 		account.refresh();
 		return account;
@@ -60,7 +55,7 @@
 		const { session } = wharf;
 		untrack(() => {
 			if (session) {
-				setAccount(getNetwork(session.chain), session.actor);
+				setAccount(session.actor);
 			} else {
 				account = undefined;
 			}
@@ -68,12 +63,12 @@
 	});
 
 	$effect(() => {
-		wharf.setSettings(settings);
+		wharf.setSettings(data.network, settings);
 	});
 
 	async function setupWharf() {
 		if (!wharf.sessionKit) {
-			wharf.init();
+			wharf.init(data.network);
 		}
 
 		const sessions = await wharf.sessionKit?.getSessions();
@@ -105,8 +100,8 @@
 	});
 
 	// Number of ms between network updates
-	const ACCOUNT_UPDATE_INTERVAL = Number(PUBLIC_ACCOUNT_UPDATE_INTERVAL) || 3_000;
-	const NETWORK_UPDATE_INTERVAL = Number(PUBLIC_NETWORK_UPDATE_INTERVAL) || 3_000;
+	const ACCOUNT_UPDATE_INTERVAL = Number(env.PUBLIC_ACCOUNT_UPDATE_INTERVAL) || 3_000;
+	const NETWORK_UPDATE_INTERVAL = Number(env.PUBLIC_NETWORK_UPDATE_INTERVAL) || 3_000;
 
 	// Default to not show a banner (avoids flash of banner when hidden)
 	let showBanner = $state(false);
@@ -139,7 +134,13 @@
 		// set the flag to prevent banner showing on next load
 		localStorage.setItem('hide-v1-banner', 'true');
 	}
+
+	const seo_config = $derived<SeoConfig>(
+		extend({}, data.baseMetaTags, $page.data?.pageMetaTags) as SeoConfig
+	);
 </script>
+
+<Head {seo_config} />
 
 <!-- Preload current chain logo -->
 <svelte:head>
@@ -186,19 +187,22 @@
 	md:h-auto
 	md:min-h-svh
 	md:grid-cols-12
-	md:grid-rows-[min-content_minmax(0,1fr)]
+	md:grid-rows-[min-content_auto_minmax(0,1fr)]
 	md:gap-x-4
 	"
 >
-	<header class="col-span-full flex h-12 items-center justify-between">
-		<!-- Larger breakpoints only	 -->
-		<a
-			href="/{data.network}"
-			class="hidden w-min place-self-center rounded-sm focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-solar-500 md:block"
-		>
-			<UnicoveLogo small />
-		</a>
+	<aside
+		class="relative col-start-1 col-end-3 row-span-full row-start-1 hidden h-full grid-rows-subgrid md:grid"
+	>
+		<nav class="sticky top-4 row-span-2 grid max-h-svh grid-rows-subgrid content-start">
+			<a href="/{data.network}" class="grid h-12 items-center" aria-label="home">
+				<Unicovelogo small class="items-start" />
+			</a>
+			<SideMenuContent network={data.network} />
+		</nav>
+	</aside>
 
+	<header class="col-span-full row-start-1 flex h-12 items-center justify-between">
 		<MobileNavigation network={data.network} />
 
 		<div
@@ -210,12 +214,8 @@
 		</div>
 	</header>
 
-	<aside class="relative row-start-2 hidden h-full md:block">
-		<SideMenuContent class="" network={data.network} />
-	</aside>
-
 	<main
-		class="col-span-full col-start-1 row-start-2 grid grid-cols-subgrid content-start gap-x-4 *:col-span-full md:col-start-3 md:col-end-13 md:px-0 lg:col-end-12"
+		class="col-span-full col-start-1 row-span-full row-start-2 grid grid-cols-subgrid content-start gap-x-4 *:col-span-full md:col-start-3 md:col-end-13 md:px-0 lg:col-end-12"
 	>
 		{@render children()}
 	</main>

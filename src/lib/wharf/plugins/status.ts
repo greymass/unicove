@@ -1,7 +1,6 @@
+import { API, Checksum256 } from '@wharfkit/antelope';
 import {
 	AbstractTransactPlugin,
-	API,
-	Checksum256,
 	TransactContext,
 	type TransactHookResponseType,
 	TransactHookTypes,
@@ -49,7 +48,7 @@ async function checkStatus(
 						updateStatus(transactionId, StatusType[response.state]);
 						break;
 					default:
-						console.log(
+						console.warn(
 							'Unknown state returned from get_transaction_status',
 							response.state,
 							JSON.stringify(response)

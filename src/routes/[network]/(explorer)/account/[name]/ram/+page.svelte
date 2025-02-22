@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Asset } from '@wharfkit/session';
+	import { Asset } from '@wharfkit/antelope';
 	import Card from '$lib/components/layout/box/card.svelte';
 	import RAM from '$lib/components/elements/ram.svelte';
 	import { calculateValue } from '$lib/utils';
@@ -13,66 +13,56 @@
 		<Card>
 			<h4 class="mb-2 text-lg font-semibold">Total:</h4>
 			<ul class="space-y-2">
-				<li><RAM bytes={Number(data.account.ram?.max || 0)} /></li>
-				{#if data.account.network.ramprice}
+				<li><RAM bytes={Number(data.account.resources.ram.max || 0)} /></li>
+				{#if data.network.resources.ram.price.rammarket}
 					<li>
 						{calculateValue(
-							Asset.fromUnits(data.account.ram?.max, '3,RAM'),
-							data.account.network.ramprice.eos
+							Asset.fromUnits(data.account.resources.ram.max, '3,RAM'),
+							data.network.resources.ram.price.rammarket
 						)}
 					</li>
-					{#if data.account.network.ramprice.usd}
-						<li>
-							{calculateValue(
-								Asset.fromUnits(data.account.ram?.max, '3,RAM'),
-								data.account.network.ramprice.usd
-							)}
-						</li>
-					{/if}
 				{/if}
 			</ul>
 		</Card>
 		<Card>
 			<h4 class="mb-2 text-lg font-semibold">Available:</h4>
 			<ul class="space-y-2">
-				<li><RAM bytes={Number(data.account.ram?.available || 0)} /></li>
-				{#if data.account.network.ramprice}
+				<li><RAM bytes={Number(data.account.resources.ram.available || 0)} /></li>
+				{#if data.network.resources.ram.price.rammarket}
 					<li>
 						{calculateValue(
-							Asset.fromUnits(data.account.ram?.available, '3,RAM'),
-							data.account.network.ramprice.eos
+							Asset.fromUnits(data.account.resources.ram.available, '3,RAM'),
+							data.network.resources.ram.price.rammarket
 						)}
 					</li>
-					{#if data.account.network.ramprice.usd}
-						<li>
-							{calculateValue(
-								Asset.fromUnits(data.account.ram?.available, '3,RAM'),
-								data.account.network.ramprice.usd
-							)}
-						</li>
-					{/if}
+				{/if}
+			</ul>
+		</Card>
+		<Card>
+			<h4 class="mb-2 text-lg font-semibold">Usable:</h4>
+			<ul class="space-y-2">
+				<li><RAM bytes={Number(data.account.resources.ram.available || 0)} /></li>
+				{#if data.network.resources.ram.price.rammarket}
+					<li>
+						{calculateValue(
+							Asset.fromUnits(data.account.resources.ram.available, '3,RAM'),
+							data.network.resources.ram.price.rammarket
+						)}
+					</li>
 				{/if}
 			</ul>
 		</Card>
 		<Card>
 			<h4 class="mb-2 text-lg font-semibold">Used:</h4>
 			<ul class="space-y-2">
-				<li><RAM bytes={Number(data.account.ram?.used || 0)} /></li>
-				{#if data.account.network.ramprice}
+				<li><RAM bytes={Number(data.account.resources.ram.used || 0)} /></li>
+				{#if data.network.resources.ram.price.rammarket}
 					<li>
 						{calculateValue(
-							Asset.fromUnits(data.account.ram?.used, '3,RAM'),
-							data.account.network.ramprice.eos
+							Asset.fromUnits(data.account.resources.ram.used, '3,RAM'),
+							data.network.resources.ram.price.rammarket
 						)}
 					</li>
-					{#if data.account.network.ramprice.usd}
-						<li>
-							{calculateValue(
-								Asset.fromUnits(data.account.ram?.used, '3,RAM'),
-								data.account.network.ramprice.usd
-							)}
-						</li>
-					{/if}
 				{/if}
 			</ul>
 		</Card>
@@ -81,15 +71,14 @@
 	<p>Loading account RAM details...</p>
 {/if}
 
-{#if data.account.network}
+{#if data.network}
 	<Card>
 		<h3 class="mb-2 text-xl font-semibold">Current RAM Prices</h3>
 		<ul class="space-y-2">
 			<li>
-				{data.account.network.ramprice?.eos.value || 'N/A'}
+				{data.network.resources.ram.price.rammarket.quantity}
 				{data.account.network.chain.systemToken?.symbol.code || ''}/KB
 			</li>
-			<li>${data.account.network.ramprice?.usd?.value || 'N/A'} USD/KB</li>
 		</ul>
 	</Card>
 {/if}

@@ -7,6 +7,7 @@
 	import RamResource from '$lib/components/elements/ramresource.svelte';
 	import AccountBalance from '$lib/components/card/accountbalance.svelte';
 	import { calAvailableSize } from '$lib/utils';
+	import * as m from '$lib/paraglide/messages';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
@@ -14,9 +15,9 @@
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');
 
-	const cpuAvailableSize = $derived(calAvailableSize(context.account?.cpu));
-	const netAvailableSize = $derived(calAvailableSize(context.account?.net));
-	const ramAvailableSize = $derived(calAvailableSize(context.account?.ram));
+	const cpuAvailableSize = $derived(calAvailableSize(context.account?.resources.cpu));
+	const netAvailableSize = $derived(calAvailableSize(context.account?.resources.net));
+	const ramAvailableSize = $derived(calAvailableSize(context.account?.resources.ram));
 
 	const network = String(data.network);
 	const chainName = data.network.chain.name;
@@ -79,21 +80,23 @@
 			/>
 			{#if data.network.supports('powerup')}
 				<Button variant="primary" href="/{network}/resources/powerup"
-					>Rent resources with PowerUp</Button
+					>{m.resources_rent_with_powerup()}</Button
 				>
 			{/if}
 			{#if data.network.supports('rentrex')}
-				<Button variant="primary" href="/{network}/resources/rex">Rent resources with REX</Button>
+				<Button variant="primary" href="/{network}/resources/rex"
+					>{m.resources_rent_with_rex()}</Button
+				>
 			{/if}
 			{#if data.network.supports('stakeresource')}
 				<Button variant="primary" href="/{network}/resources/stake"
-					>Stake {symbolName} for resources</Button
+					>{m.resources_rent_with_stake({ symbolName })}</Button
 				>
 			{/if}
 		</Stack>
 		<Stack>
 			<RamResource ramAvailable={ramAvailableSize} {precision} />
-			<Button variant="secondary" href="/{network}/ram">RAM Market</Button>
+			<Button variant="secondary" href="/{network}/ram">{m.common_ram_market()}</Button>
 		</Stack>
 		<AccountBalance />
 	</Stack>

@@ -6,6 +6,7 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
 	import { cn } from '$lib/utils';
+	import * as m from '$lib/paraglide/messages';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -21,7 +22,7 @@
 	async function copyToClipboard() {
 		try {
 			await navigator.clipboard.writeText(props.data);
-			if (context.settings.data.debugMode) console.log(props.data, 'copied to clipboard');
+			if (context.settings.data.debugMode) console.info(props.data, 'copied to clipboard');
 			hint = true;
 			setTimeout(() => (hint = false), 300);
 		} catch (err) {
@@ -43,7 +44,7 @@
 				'peer absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 focus-visible:outline-none',
 				buttonSize
 			)}
-			aria-label="Copy"
+			aria-label={m.common_copy()}
 		>
 			<!-- Button is done this way with absolute positioning so we can maintain a decent hit slop on mobile without affecting layout -->
 		</button>
@@ -53,7 +54,7 @@
 				in:fly={{ x: -20, easing: quartOut, duration: 100 }}
 				out:fade={{ easing: quadIn, duration: 200 }}
 				class="absolute inset-y-0 left-full translate-x-2 select-none text-nowrap text-xs text-skyBlue-400"
-				>Copied!</span
+				>{m.common_copied_result()}</span
 			>
 		{/if}
 	</div>

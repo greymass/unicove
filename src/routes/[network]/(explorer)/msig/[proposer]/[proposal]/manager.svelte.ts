@@ -30,6 +30,13 @@ interface Approvals {
 	provided: PermissionLevel[];
 }
 
+interface DecodedAction {
+	abi?: ABI;
+	action: Action;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	readable?: Record<string, any>;
+}
+
 export class ApprovalManager {
 	network: NetworkState = $state() as NetworkState;
 	wharf: WharfState = $state() as WharfState;
@@ -37,6 +44,7 @@ export class ApprovalManager {
 
 	// States related to proposal
 	actions: Action[] = $state([]);
+	readable: DecodedAction[] = $state([]);
 
 	expiration = $derived.by(() => this.proposal.transaction.expiration.toDate());
 	expired = $derived.by(() => dayjs(this.expiration).isBefore());
@@ -78,7 +86,8 @@ export class ApprovalManager {
 		this.wharf = wharf;
 
 		const overrides: Record<string, ABI> = {};
-		const readable: Action[] = [];
+		const readable: DecodedAction[] = [];
+		this.actions = this.proposal.transaction.actions;
 		for (const action of this.proposal.transaction.actions) {
 			// Check if an ABI override exists
 			let abi: ABI | undefined = overrides[String(action.account)];
@@ -94,14 +103,20 @@ export class ApprovalManager {
 
 			// If unavailable, abort decoding and return raw
 			if (!abi) {
-				readable.push(action);
+				readable.push({ action });
 				continue;
 			}
 
 			// Decode action data and push to readable
 			const decoded = action.decodeData(abi);
-			action.data = Serializer.objectify(decoded);
-			readable.push(action);
+			readable.push({
+				action,
+				abi,
+				readable: {
+					...action,
+					data: Serializer.objectify(decoded)
+				}
+			});
 
 			// If this action is a setabi, set override for future actions in loop
 			if (action.account.equals('eosio') && action.name.equals('setabi')) {
@@ -113,7 +128,7 @@ export class ApprovalManager {
 				overrides[String(setabi.account)] = decoded;
 			}
 		}
-		this.actions = readable;
+		this.readable = readable;
 	}
 
 	accountHasApproved = (account?: PermissionLevel) => {

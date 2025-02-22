@@ -3,25 +3,29 @@
 	import UnicoveWordmark from '$lib/assets/unicove-wordmark.svelte';
 	import bgDesktop from '$lib/assets/hero/bg1@2x.png?enhanced';
 	import bgMobile from '$lib/assets/hero/bg2@2x.png?enhanced';
+	import * as m from '$lib/paraglide/messages';
 
 	interface Props {
 		networkName: string;
 		networkLogo: string;
+		networkShortname: string;
 	}
 
-	let { networkName, networkLogo }: Props = $props();
+	let { networkName, networkLogo, networkShortname }: Props = $props();
 </script>
 
 <section id="hero" class="col-span-full grid grid-cols-subgrid gap-y-14 pt-6 md:items-center">
-	<div id="hero-background" class="col-span-full row-start-1 hidden md:block">
-		<enhanced:img
-			class="h-auto w-auto object-contain"
-			src={bgDesktop}
-			alt=""
-			fetchpriority="high"
-			loading="eager"
-		/>
-	</div>
+	{#if networkShortname === 'eos'}
+		<div id="hero-background" class="col-span-full row-start-1 hidden md:block">
+			<enhanced:img
+				class="h-auto w-auto object-contain"
+				src={bgDesktop}
+				alt=""
+				fetchpriority="high"
+				loading="eager"
+			/>
+		</div>
+	{/if}
 
 	<picture
 		id="network-logo"
@@ -36,13 +40,15 @@
 			height="512"
 			width="512"
 		/>
-		<enhanced:img
-			class="absolute left-1/2 top-0 -translate-x-1/2 object-contain md:hidden"
-			src={bgMobile}
-			alt=""
-			fetchpriority="high"
-			loading="eager"
-		/>
+		{#if networkShortname === 'eos'}
+			<enhanced:img
+				class="absolute left-1/2 top-0 -translate-x-1/2 object-contain md:hidden"
+				src={bgMobile}
+				alt=""
+				fetchpriority="high"
+				loading="eager"
+			/>
+		{/if}
 	</picture>
 
 	<!-- Text block -->
@@ -52,11 +58,14 @@
 		<UnicoveWordmark class="h-7 w-auto md:h-auto" />
 		<h1 class="text-balance text-3xl font-bold leading-tight lg:text-4xl lg:leading-tight">
 			<span class="sr-only">Unicove:</span>
-			Your gateway to the {networkName} Network
+			{m.homepage_hero_title({
+				network: networkName
+			})}
 		</h1>
 		<p class="text-muted mb-2 text-balance text-xl leading-tight lg:text-xl lg:leading-tight">
-			Stake, Send, Manage Tokens, and Explore {networkName} – all with ease
+			{m.homepage_hero_description({
+				network: networkName
+			})}
 		</p>
-		<!-- <Button href={`/${data.network}/signup`}>Create your EOS account now</Button> -->
 	</Stack>
 </section>

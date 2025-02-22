@@ -1,6 +1,6 @@
-import type { Resource } from '@wharfkit/account';
+import type { AccountResource } from '$lib/types/account';
 
-export const calAvailableSize = (resource?: Resource) => {
+export const calAvailableSize = (resource?: AccountResource) => {
 	let size = 0;
 	const available = Number(resource?.available);
 	if (!isNaN(available)) size = available / 1000;

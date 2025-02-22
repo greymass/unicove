@@ -5,6 +5,7 @@
 
 	interface NumberInputProps extends Omit<HTMLInputAttributes, 'type' | 'value'> {
 		ref?: HTMLInputElement;
+		valid?: boolean;
 		value?: number;
 		unit?: string;
 		min?: number;
@@ -14,6 +15,7 @@
 
 	let {
 		ref = $bindable(),
+		valid = $bindable(false),
 		value: _value = $bindable(),
 		unit = '',
 		debug = false,
@@ -26,11 +28,12 @@
 		inputValue = String(value || '');
 	}
 
-	let satisfiesMinimum = $derived(inputValue && (!props.min || Number(inputValue) >= props.min));
-	let satisfiesMaxmimum = $derived(inputValue && (!props.max || Number(inputValue) <= props.max));
+	let satisfiesMinimum = $derived(!!inputValue && (!props.min || Number(inputValue) >= props.min));
+	let satisfiesMaxmimum = $derived(!!inputValue && (!props.max || Number(inputValue) <= props.max));
 	let satisfies = $derived(satisfiesMinimum && satisfiesMaxmimum);
 
 	$effect(() => {
+		valid = satisfies;
 		if (inputValue && satisfies) {
 			_value = Number(inputValue);
 		} else {

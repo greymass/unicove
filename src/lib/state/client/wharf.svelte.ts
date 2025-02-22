@@ -1,11 +1,6 @@
-import { browser } from '$app/environment';
-import {
-	PUBLIC_LOCAL_SIGNER,
-	PUBLIC_METAMASK_SERVICE_URL,
-	PUBLIC_METAMASK_SNAP_ORIGIN
-} from '$env/static/public';
-
-import { ChainDefinition, Chains } from '@wharfkit/common';
+import { ChainDefinition } from '@wharfkit/common';
+import ContractKit, { type ActionDataType } from '@wharfkit/contract';
+import { type NameType, Name, Serializer, Transaction } from '@wharfkit/antelope';
 import {
 	type AccountCreationPlugin,
 	type CreateAccountOptions,
@@ -21,30 +16,29 @@ import {
 	SessionKit
 } from '@wharfkit/session';
 import WebRenderer from '@wharfkit/web-renderer';
+
+// Wallet Plugins
 import { WalletPluginAnchor } from '@wharfkit/wallet-plugin-anchor';
+import { WalletPluginCleos } from '@wharfkit/wallet-plugin-cleos';
 import { WalletPluginMetaMask } from '@wharfkit/wallet-plugin-metamask';
 import { WalletPluginPrivateKey } from '@wharfkit/wallet-plugin-privatekey';
 import { WalletPluginWombat } from '@wharfkit/wallet-plugin-wombat';
 import { WalletPluginScatter } from '@wharfkit/wallet-plugin-scatter';
 import { WalletPluginTokenPocket } from '@wharfkit/wallet-plugin-tokenpocket';
 import { WalletPluginWebAuthenticator } from '@wharfkit/wallet-plugin-web-authenticator';
-import { TransactPluginResourceProvider } from '@wharfkit/transact-plugin-resource-provider';
 
+// Other Plugins
 import { AccountCreationPluginMetamask } from '@wharfkit/account-creation-plugin-metamask';
-
+import { TransactPluginResourceProvider } from '@wharfkit/transact-plugin-resource-provider';
 import { TransactPluginStatusEmitter } from '$lib/wharf/plugins/status';
 
-import {
-	type QueuedTransaction,
-	StatusType,
-	queueTransaction,
-	sendErrorToast
-	// sendSuccessToast
-} from '$lib/wharf/transact.svelte';
+import { browser } from '$app/environment';
+import * as env from '$env/static/public';
 
-import { chainMapper } from '$lib/wharf/chains';
-import type { SettingsState } from '../settings.svelte';
-import { WalletPluginCleos } from '@wharfkit/wallet-plugin-cleos';
+import { type QueuedTransaction, StatusType, queueTransaction } from '$lib/wharf/transact.svelte';
+import { chainMapper, chains, getChainDefinitionFromParams } from '$lib/wharf/chains';
+import type { SettingsState } from '$lib/state/settings.svelte';
+import type { NetworkState } from '$lib/state/network.svelte';
 
 const defaultWalletPlugins: WalletPlugin[] = [
 	new WalletPluginAnchor(),
@@ -57,31 +51,32 @@ const defaultWalletPlugins: WalletPlugin[] = [
 	})
 ];
 
-export const accountCreationPluginMetamask = new AccountCreationPluginMetamask({
-	accountCreationServiceUrl: PUBLIC_METAMASK_SERVICE_URL,
-	snapOrigin: PUBLIC_METAMASK_SNAP_ORIGIN
-});
-
-const accountCreationPlugins: AccountCreationPlugin[] = [accountCreationPluginMetamask];
-
 const transactPlugins: TransactPlugin[] = [
 	new TransactPluginStatusEmitter(),
 	new TransactPluginResourceProvider()
 ];
 
 // If a local key is provided, add the private key wallet
-if (PUBLIC_LOCAL_SIGNER) {
-	defaultWalletPlugins.unshift(new WalletPluginPrivateKey(PUBLIC_LOCAL_SIGNER));
+if (env.PUBLIC_LOCAL_SIGNER) {
+	defaultWalletPlugins.unshift(new WalletPluginPrivateKey(env.PUBLIC_LOCAL_SIGNER));
 }
 
+const chainDefs: ChainDefinition[] = chains.map((chain) =>
+	getChainDefinitionFromParams(chain.name)
+);
+
 export class WharfState {
-	public chains: ChainDefinition[] = [Chains.EOS, Chains.Jungle4, Chains.KylinTestnet];
+	public chain?: ChainDefinition = $state();
+	public chains: ChainDefinition[] = chainDefs;
 	public chainsSession: Record<string, SerializedSession | undefined> = $state({});
+	public contractKit?: ContractKit;
 	public session?: Session = $state<Session>();
 	public sessions: SerializedSession[] = $state([]);
 	public sessionKit?: SessionKit;
 	public transacting = $state(false);
 	public settings: SettingsState = $state() as SettingsState;
+
+	public metamaskPlugin?: AccountCreationPluginMetamask;
 
 	constructor(settings: SettingsState) {
 		this.settings = settings;
@@ -90,14 +85,29 @@ export class WharfState {
 		}
 	}
 
-	init() {
+	init(network: NetworkState) {
 		if (!browser) {
 			throw new Error('Wharf should only be used in the browser');
 		}
+		this.chain = network.chain;
+		this.contractKit = new ContractKit({
+			client: network.client
+		});
 		const walletPlugins = [...defaultWalletPlugins];
 		if (this.settings.data.advancedMode) {
 			walletPlugins.push(new WalletPluginCleos());
 		}
+
+		const accountCreationPlugins: AccountCreationPlugin[] = [];
+
+		if (network.config.metamask) {
+			this.metamaskPlugin = new AccountCreationPluginMetamask({
+				accountCreationServiceUrl: network.config.metamask.serviceurl,
+				snapOrigin: network.config.metamask.snaporigin
+			});
+			accountCreationPlugins.push(this.metamaskPlugin);
+		}
+
 		this.sessionKit = new SessionKit(
 			{
 				appName: 'unicove',
@@ -117,12 +127,12 @@ export class WharfState {
 		});
 	}
 
-	public setSettings(settings: SettingsState) {
+	public setSettings(network: NetworkState, settings: SettingsState) {
 		this.settings = settings;
-		this.init();
+		this.init(network);
 	}
 
-	public async login(options?: LoginOptions) {
+	public async login(options?: LoginOptions): Promise<Session> {
 		if (!this.sessionKit) {
 			throw new Error('User not initialized');
 		}
@@ -131,6 +141,7 @@ export class WharfState {
 		this.session = session;
 		this.chainsSession[String(session.chain.id)] = session.serialize();
 		this.sessions = await this.sessionKit.getSessions();
+		return session;
 	}
 
 	public async createAccount(createAccountOptions?: CreateAccountOptions) {
@@ -199,8 +210,6 @@ export class WharfState {
 			throw new Error('No active session available to transact with.');
 		}
 
-		this.transacting = true;
-
 		const transaction: QueuedTransaction = {
 			status: StatusType.CREATED,
 			chain: this.session.chain.id,
@@ -209,12 +218,12 @@ export class WharfState {
 			options
 		};
 
+		this.transacting = true;
+
 		const result = await this.session.transact(args).catch((e: Error) => {
 			transaction.status = StatusType.ERROR;
 			transaction.error = String(e);
 			queueTransaction(transaction);
-			const { id } = sendErrorToast(transaction);
-			transaction.toastId = id;
 			this.transacting = false;
 			throw e;
 		});
@@ -224,9 +233,6 @@ export class WharfState {
 		if (!result.resolved || !result.response) {
 			transaction.status = StatusType.ERROR;
 			transaction.error = 'Transaction was not resolved.';
-			const { id } = sendErrorToast(transaction);
-			transaction.toastId = id;
-
 			queueTransaction(transaction);
 			throw new Error('Transaction was not resolved.');
 		}
@@ -234,10 +240,46 @@ export class WharfState {
 		transaction.status = StatusType.BROADCAST;
 		transaction.response = result.response;
 		transaction.transaction = result.resolved.transaction;
-		// const { id } = sendSuccessToast(transaction);
-		// transaction.toastId = id;
+
 		queueTransaction(transaction);
 
 		return result;
+	}
+
+	async readonly(account: NameType, action: NameType, data: ActionDataType = {}) {
+		if (!this.contractKit) {
+			throw new Error('ContractKit not initialized');
+		}
+		const contract = await this.contractKit.load(account);
+		this.transacting = true;
+		const act = contract.action(action, data);
+		// Remove authorizations
+		act.authorization = [];
+		// Assemble readonly transaction
+		const transaction = Transaction.from({
+			ref_block_num: 0,
+			ref_block_prefix: 0,
+			expiration: 0,
+			actions: [act]
+		});
+		// Execute and retrieve response
+		const response = await this.contractKit.client.v1.chain.send_read_only_transaction(transaction);
+		if (response.processed.except) {
+			throw new Error(JSON.stringify(response.processed.except));
+		}
+		// Decode and return results
+		const hexData = response.processed.action_traces[0].return_value_hex_data;
+		const returnType = contract.abi.action_results.find((a) => Name.from(a.name).equals(action));
+		if (!returnType) {
+			throw new Error(`Return type for ${name} not defined in the ABI.`);
+		}
+
+		this.transacting = false;
+
+		return Serializer.decode({
+			data: hexData,
+			type: returnType.result_type,
+			abi: contract.abi
+		});
 	}
 }

@@ -1,9 +1,11 @@
 import { sequence } from '@sveltejs/kit/hooks';
 import type { Handle, RequestEvent } from '@sveltejs/kit';
 
+import { PUBLIC_DEFAULT_CHAIN } from '$env/static/public';
 import { availableLanguageTags } from '$lib/paraglide/runtime.js';
 import { i18n } from '$lib/i18n';
 import { isNetworkShortName } from '$lib/wharf/chains';
+import { getBackendNetworkByName } from '$lib/wharf/client/ssr';
 
 export const i18nHandle = i18n.handle();
 type HandleParams = Parameters<Handle>[0];
@@ -53,6 +55,13 @@ function isManualRedirectPath(pathMore: string[]): boolean {
 	return pathname in redirects;
 }
 
+export async function networkHandle({ event, resolve }: HandleParams): Promise<Response> {
+	if (event.params.network) {
+		event.locals.network = getBackendNetworkByName(event.params.network, event.fetch);
+	}
+	return await resolve(event);
+}
+
 export async function redirectHandle({ event, resolve }: HandleParams): Promise<Response> {
 	const { pathname, search } = new URL(event.request.url);
 
@@ -63,7 +72,7 @@ export async function redirectHandle({ event, resolve }: HandleParams): Promise<
 	const [, pathFirst, pathSecond, ...pathMore] = pathname.split('/').map((p) => p.trim());
 
 	let lang = 'en';
-	let network: string | undefined = 'eos';
+	let network: string = PUBLIC_DEFAULT_CHAIN;
 
 	if (isLanguage(pathFirst) && isNetwork(pathSecond)) {
 		// Proceed, correct URL
@@ -72,7 +81,6 @@ export async function redirectHandle({ event, resolve }: HandleParams): Promise<
 	} else if (isLanguage(pathFirst) && !isNetwork(pathSecond) && !pathSecond) {
 		// Only a language is specified, land on the language specific homepage
 		lang = pathFirst;
-		network = undefined;
 	} else if (isLanguage(pathFirst) && !isNetwork(pathSecond)) {
 		// The network isn't specified, but the language is - redirect to the default network
 		lang = pathFirst;
@@ -103,7 +111,6 @@ export async function redirectHandle({ event, resolve }: HandleParams): Promise<
 	}
 
 	if (pathname !== url) {
-		console.log('redirecting to', url + search);
 		return new Response(undefined, {
 			headers: { Location: url + search },
 			status: 301
@@ -114,4 +121,4 @@ export async function redirectHandle({ event, resolve }: HandleParams): Promise<
 	return response;
 }
 
-export const handle: Handle = sequence(i18nHandle, redirectHandle);
+export const handle: Handle = sequence(i18nHandle, redirectHandle, networkHandle);

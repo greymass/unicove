@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { cn } from '$lib/utils/style';
 	import type { Snippet } from 'svelte';
 	import type { HTMLInputAttributes } from 'svelte/elements';
 
@@ -7,11 +8,19 @@
 		children?: Snippet;
 	}
 
-	let { ref = $bindable(), value = $bindable(), ...props }: TextInputProps = $props();
+	let {
+		ref = $bindable(),
+		value = $bindable(),
+		class: className,
+		...props
+	}: TextInputProps = $props();
 </script>
 
 <div
-	class="relative flex h-12 gap-2 rounded-lg border-2 border-mineShaft-600 px-4 *:content-center focus-within:border-skyBlue-500 focus-within:ring focus-within:ring-1 focus-within:ring-inset focus-within:ring-skyBlue-500"
+	class={cn(
+		'relative flex h-12 gap-2 rounded-lg border-2 border-mineShaft-600 px-4 *:content-center focus-within:border-skyBlue-500 focus-within:ring focus-within:ring-1 focus-within:ring-inset focus-within:ring-skyBlue-500',
+		className
+	)}
 >
 	<input
 		class="placeholder:text-muted w-full rounded-lg bg-transparent font-medium focus:outline-none"

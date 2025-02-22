@@ -10,7 +10,8 @@
 	import Code from '$lib/components/code.svelte';
 	import Label from '$lib/components/input/label.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
-	import TransactionSummary from '$lib/components/transactionSummary.svelte';
+	import TransactSummary from '$lib/components/transact/summary.svelte';
+	import TransactError from '$lib/components/transact/error.svelte';
 	import AssetInput from '$lib/components/input/asset.svelte';
 	import BytesInput from '$lib/components/input/bytes.svelte';
 	import AssetText from '$lib/components/elements/asset.svelte';
@@ -28,9 +29,11 @@
 	const { data } = $props();
 
 	const sellRamState: SellRAMState = $state(new SellRAMState(data.network.chain));
-	const ramAvailableSize = $derived(calAvailableSize(context.account?.ram));
+	const ramAvailableSize = $derived(calAvailableSize(context.account?.resources.ram));
 
 	let transactionId: Checksum256 | undefined = $state();
+	let errorMessage: string | undefined = $state();
+	let ready = $derived(sellRamState.valid && !context.wharf.transacting);
 
 	async function handleSellRAM() {
 		if (!context.wharf || !context.wharf.session) {
@@ -38,20 +41,22 @@
 			return;
 		}
 
-		try {
-			const transactionResult = await context.wharf.transact({
+		return context.wharf
+			.transact({
 				action: data.network.contracts.system.action('sellram', sellRamState.toJSON())
+			})
+			.then((transactionResult) => {
+				transactionId = transactionResult.resolved?.transaction.id;
+				resetState();
+			})
+			.catch((error) => {
+				errorMessage = error;
+				console.error(error);
 			});
-
-			transactionId = transactionResult.resolved?.transaction.id;
-
-			resetState();
-		} catch (error) {
-			console.error(error);
-		}
 	}
 
 	function resetState() {
+		errorMessage = undefined;
 		sellRamState.reset();
 		bytesInput?.reset();
 		assetInput?.reset();
@@ -62,13 +67,13 @@
 			if (context.account.name) {
 				sellRamState.account = context.account.name;
 			}
-			sellRamState.max = Number(context.account.ram?.available || 0);
+			sellRamState.max = Number(context.account.resources.ram.available || 0);
 		}
 	});
 
 	$effect(() => {
-		if (data.network.ramprice) {
-			sellRamState.pricePerKB = data.network.ramprice.eos;
+		if (data.network.resources.ram.price.rammarket) {
+			sellRamState.pricePerKB = data.network.resources.ram.price.rammarket;
 		}
 	});
 
@@ -84,89 +89,100 @@
 	}
 </script>
 
-{#if transactionId}
-	<TransactionSummary {transactionId} />
-{:else}
-	<form onsubmit={preventDefault(handleSellRAM)} class="mx-auto max-w-2xl space-y-4">
-		<RamResource class="hidden" ramAvailable={ramAvailableSize} />
-
-		<Stack class="gap-3">
-			<Label class="text-lg" for="bytesInput">{m.ram_sale_value()}</Label>
-			<div class="flex gap-4">
-				<div class="flex-1">
-					<BytesInput
-						autofocus
-						bind:value={sellRamState.bytes}
-						bind:this={bytesInput}
-						oninput={setBytesAmount}
-					/>
-				</div>
-				<div class="flex-1">
-					<AssetInput
-						bind:value={sellRamState.tokens}
-						bind:this={assetInput}
-						oninput={setAssetAmount}
-					/>
-				</div>
-			</div>
-			{#if sellRamState.insufficientRAM}
-				<p class="text-red-500">{m.form_validation_insufficient_balance({ unit: 'RAM' })}</p>
-			{/if}
-			<p>
-				{m.common_labeled_unit_available({ unit: 'RAM' })}
-				{#if context.account}
-					{sellRamState.maxInKBs}
-				{:else}
-					0 KB
-				{/if}
-			</p>
-		</Stack>
-
-		<Button type="submit" class="mt-4 w-full" disabled={!sellRamState.valid}>
-			{m.common_unit_sell({ unit: 'RAM' })}
+<Stack>
+	{#if transactionId}
+		<TransactSummary {transactionId} />
+		<Button href={`/${data.network}/ram`} variant="secondary">
+			{m.common_ram_market()}
 		</Button>
+		<Button href={`/${data.network}/account/${context.account?.name}`}>
+			{m.common_view_my_account()}
+		</Button>
+	{:else if errorMessage}
+		<TransactError error={errorMessage} />
+		<Button onclick={resetState}>{m.common_close()}</Button>
+	{:else}
+		<form onsubmit={preventDefault(handleSellRAM)} class="mx-auto max-w-2xl space-y-4">
+			<RamResource class="hidden" ramAvailable={ramAvailableSize} />
 
-		<Stack class="gap-3">
-			<DL>
-				<DLRow
-					title={` ${m.common_labeled_unit_price({ unit: `${context.network.chain.systemToken?.symbol.name}/RAM` })} (KB) `}
-				>
-					<DD>
-						<AssetText variant="full" value={sellRamState.pricePerKB} />
-					</DD>
-				</DLRow>
+			<Stack class="gap-3">
+				<Label class="text-lg" for="bytesInput">{m.ram_sale_value()}</Label>
+				<div class="flex gap-4">
+					<div class="flex-1">
+						<BytesInput
+							autofocus
+							bind:value={sellRamState.bytes}
+							bind:this={bytesInput}
+							oninput={setBytesAmount}
+						/>
+					</div>
+					<div class="flex-1">
+						<AssetInput
+							bind:value={sellRamState.tokens}
+							bind:this={assetInput}
+							oninput={setAssetAmount}
+						/>
+					</div>
+				</div>
+				{#if sellRamState.insufficientRAM}
+					<p class="text-red-500">{m.form_validation_insufficient_balance({ unit: 'RAM' })}</p>
+				{/if}
+				<p>
+					{m.common_labeled_unit_available({ unit: 'RAM' })}
+					{#if context.account}
+						{sellRamState.maxInKBs}
+					{:else}
+						0 KB
+					{/if}
+				</p>
+			</Stack>
 
-				<DLRow title={m.ram_to_sell()}>
-					<DD>
-						<AssetText variant="full" value={sellRamState.kbsToSell} />
-					</DD>
-				</DLRow>
+			<Button type="submit" class="mt-4 w-full" disabled={!ready}>
+				{m.common_unit_sell({ unit: 'RAM' })}
+			</Button>
 
-				<DLRow title={m.total_proceeds()}>
-					<DD>
-						<AssetText variant="full" value={sellRamState.bytesValue} />
-					</DD>
-				</DLRow>
+			<Stack class="gap-3">
+				<DL>
+					<DLRow
+						title={` ${m.common_labeled_unit_price({ unit: `${context.network.chain.systemToken?.symbol.name}/RAM` })} (KB) `}
+					>
+						<DD>
+							<AssetText variant="full" value={sellRamState.pricePerKB} />
+						</DD>
+					</DLRow>
 
-				<DLRow title={` ${m.common_network_fees()} (0.5%) `}>
-					<DD>
-						<AssetText variant="full" value={sellRamState.fee} />
-					</DD>
-				</DLRow>
+					<DLRow title={m.ram_to_sell()}>
+						<DD>
+							<AssetText variant="full" value={sellRamState.kbsToSell} />
+						</DD>
+					</DLRow>
 
-				<DLRow title={m.common_expected_receive()}>
-					<DD>
-						<AssetText variant="full" value={sellRamState.expectedToReceive} />
-					</DD>
-				</DLRow>
-			</DL>
+					<DLRow title={m.total_proceeds()}>
+						<DD>
+							<AssetText variant="full" value={sellRamState.bytesValue} />
+						</DD>
+					</DLRow>
 
-			{#if sellRamState.valid}
-				<SummarySellRAM class="hidden" action={{ data: sellRamState.toJSON() }} />
-			{/if}
-		</Stack>
-	</form>
-{/if}
+					<DLRow title={` ${m.common_network_fees()} (0.5%) `}>
+						<DD>
+							<AssetText variant="full" value={sellRamState.fee} />
+						</DD>
+					</DLRow>
+
+					<DLRow title={m.common_expected_receive()}>
+						<DD>
+							<AssetText variant="full" value={sellRamState.expectedToReceive} />
+						</DD>
+					</DLRow>
+				</DL>
+
+				{#if sellRamState.valid}
+					<SummarySellRAM class="hidden" data={sellRamState.toJSON()} />
+				{/if}
+			</Stack>
+		</form>
+	{/if}
+</Stack>
 
 {#if context.settings.data.debugMode}
 	<h3 class="h3">{m.common_debugging()}</h3>

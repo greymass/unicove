@@ -1,15 +1,16 @@
 import { languageTag } from '$lib/paraglide/runtime';
 import type { PageLoad } from './$types';
+import * as m from '$lib/paraglide/messages';
 
 export const load: PageLoad = async ({ params, parent }) => {
 	const { network } = await parent();
 	return {
-		title: 'Rent Resources',
-		subtitle: `Rent CPU and NET resources on the ${network.chain.name} network.`,
+		title: m.resources_rent_title(),
+		subtitle: m.resources_rent_subtitle({ network: network.chain.name }),
 		backPath: `/${languageTag()}/${params.network}/resources`,
 		pageMetaTags: {
-			title: `Rent Resources | ${network.chain.name} Network`,
-			description: `Rent CPU and NET resources on the ${network.chain.name} network using an ${network.chain.name} compatible wallet.`
+			title: m.resources_rent_metadata_title({ network: network.chain.name }),
+			description: m.resources_rent_metadata_description({ network: network.chain.name })
 		}
 	};
 };

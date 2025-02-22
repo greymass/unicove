@@ -2,55 +2,53 @@
 	import { getContext } from 'svelte';
 	import { Asset } from '@wharfkit/antelope';
 
-	import RamPriceHistory from '$lib/components/chart/rampricehistory.svelte';
-	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import Card from '$lib/components/layout/box/card.svelte';
-	import Button from '$lib/components/button/button.svelte';
 	import { calculateValue } from '$lib/utils';
-	import { RAMCalculatorState } from './state.svelte';
-	import AccountBalance from '$lib/components/card/accountbalance.svelte';
-	import AssetInput from '$lib/components/input/asset.svelte';
-	import BytesInput from '$lib/components/input/bytes.svelte';
-	import AssetText from '$lib/components/elements/asset.svelte';
 	import { MultiCard, Stack } from '$lib/components/layout';
-	import Label from '$lib/components/input/label.svelte';
 	import * as m from '$lib/paraglide/messages.js';
+	import AssetInput from '$lib/components/input/asset.svelte';
+	import AssetText from '$lib/components/elements/asset.svelte';
+	import Button from '$lib/components/button/button.svelte';
+	import BytesInput from '$lib/components/input/bytes.svelte';
+	import Card from '$lib/components/layout/box/card.svelte';
+	import Label from '$lib/components/input/label.svelte';
+	import RamPriceHistory from '$lib/components/chart/rampricehistory.svelte';
+	import type { SystemResources } from '$lib/types/network';
+	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import AccountBalance from '$lib/components/card/accountbalance.svelte';
+
+	import { RAMCalculatorState } from './state.svelte';
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');
 
-	const ramState = $derived(data.network.ramstate);
+	const resources: SystemResources = $derived(data.network.resources);
 
-	let marketCapEOS: Asset | undefined = $state();
-	let marketCapUSD: Asset | undefined = $state();
-	let ramSupply: Asset | undefined = $state();
-
-	const totalRamSupply = $derived(Number(data.network.globalstate?.max_ram_size || 0));
-
-	$effect(() => {
-		if (ramState) {
-			const marketCapEOSValue =
-				(Number(data.network.ramprice?.eos.value || 0) * totalRamSupply) / 1000;
-			marketCapEOS = Asset.from(
-				marketCapEOSValue,
-				data.network.chain.systemToken?.symbol || '0, UNKNOWN'
-			);
-			const marketCapUSDValue =
-				(Number(data.network.ramprice?.usd?.value || 0) * totalRamSupply) / 1000;
-			marketCapUSD = Asset.from(marketCapUSDValue, '2,USD');
-			ramSupply = Asset.from(totalRamSupply / (1000 * 1000 * 1000), '2,GB');
-		}
-	});
-
-	let ramAvailable = $derived(
-		Asset.from(Number(context.account?.ram?.available || 0) / 1000, '3,KB')
+	const totalRamSupply = $derived(
+		Asset.fromUnits(resources.ram.supply.value / 1000 / 1000, '3,GB')
 	);
+
+	let marketCapToken = $derived(
+		Asset.from(
+			(resources.ram.price.rammarket.value / 1000) * resources.ram.supply.value,
+			data.network.chain.systemToken?.symbol || '0, UNKNOWN'
+		)
+	);
+	let marketCapFiat = $derived(calculateValue(marketCapToken, data.network.token.price));
+
+	let ramLiquid = $derived(
+		Asset.from(Number(context.account?.resources.ram.balance || 0) / 1000, '3,KB')
+	);
+
+	const balanceValueToken = $derived(calculateValue(ramLiquid, resources.ram.price.rammarket));
+	const balanceValueFiat = $derived(calculateValue(balanceValueToken, data.network.token.price));
+	const kbValueToken = $derived(resources.ram.price.rammarket);
+	const kbValueFiat = $derived(calculateValue(kbValueToken, data.network.token.price));
 
 	const ramCalculatorState = new RAMCalculatorState(data.network.chain);
 
 	$effect(() => {
-		if (data.network.ramprice) {
-			ramCalculatorState.pricePerKB = data.network.ramprice.eos;
+		if (resources.ram.price.rammarket) {
+			ramCalculatorState.pricePerKB = resources.ram.price.rammarket;
 		}
 	});
 
@@ -73,7 +71,7 @@
 		<div class="grid content-between gap-4">
 			<div class="grid">
 				<h3 class="text-muted text-base">{m.common_labeled_unit_available({ unit: 'RAM' })}</h3>
-				<AssetText class="text-xl font-semibold" variant="full" value={ramAvailable} />
+				<AssetText class="text-xl font-semibold" variant="full" value={ramLiquid} />
 			</div>
 			<Button variant="secondary" href="/{String(data.network)}/ram/buy">{m.common_buy()}</Button>
 		</div>
@@ -81,24 +79,12 @@
 		<div class="grid content-between gap-4">
 			<div>
 				<h3 class="text-muted text-base">
-					{m.common_labeled_unit_value({ unit: data.network.chain.name })}
+					{m.common_labeled_unit_value({ unit: balanceValueToken.symbol.name })}
 				</h3>
-				<AssetText
-					class="text-xl font-semibold"
-					variant="full"
-					value={data.network.ramprice?.eos &&
-						calculateValue(ramAvailable, data.network.ramprice?.eos)}
-				/>
-				{#if data.network.ramprice?.usd}
-					<div>
-						<AssetText
-							class="text-muted text-base"
-							variant="full"
-							value={data.network.ramprice?.usd &&
-								Asset.from(calculateValue(ramAvailable, data.network.ramprice?.usd).value, '2,USD')}
-						/>
-					</div>
-				{/if}
+				<AssetText class="text-xl font-semibold" variant="full" value={balanceValueToken} />
+				<div>
+					<AssetText class="text-muted text-base" variant="full" value={balanceValueFiat} />
+				</div>
 			</div>
 			<Button variant="secondary" href="/{String(data.network)}/ram/sell">{m.common_sell()}</Button>
 		</div>
@@ -138,44 +124,32 @@
 			<table class="">
 				<tbody class="*:border-b *:border-mineShaft-900 *:pt-8 last:*:border-b-0 *:even:text-right">
 					<tr class="*:py-2">
-						<td class="text-muted text-base"> EOS/RAM (KB) </td>
+						<td class="text-muted text-base">
+							{data.network.token.definition.symbol.code || ''}/RAM (KB)
+						</td>
+						<td class="text-right font-medium text-white">
+							<AssetText variant="full" value={kbValueToken} />
+						</td>
+					</tr>
+					<tr class="*:py-2">
+						<td class="text-muted text-base"> USD/RAM (KB) </td>
+						<td class="text-right font-medium text-white">
+							<AssetText variant="full" value={kbValueFiat} />
+						</td>
+					</tr>
+					<tr class="*:py-2">
+						<td class="text-muted text-base">
+							{m.common_labeled_unit_price({
+								unit: 'USD'
+							})}
+						</td>
 						<td class="text-right font-medium text-white">
 							<AssetText
 								variant="full"
-								value={ramCalculatorState.pricePerKB
-									? Asset.from(ramCalculatorState.pricePerKB)
-									: Asset.from(0, data.network.chain.systemToken?.symbol || '0,UNKNOWN')}
+								value={calculateValue(ramCalculatorState.tokens, data.network.token.price)}
 							/>
 						</td>
 					</tr>
-					{#if data.network.ramprice?.usd}
-						<tr class="*:py-2">
-							<td class="text-muted text-base"> USD/RAM (KB) </td>
-							<td class="text-right font-medium text-white">
-								<AssetText
-									variant="full"
-									value={ramCalculatorState.pricePerKB && data.network.ramprice?.usd
-										? data.network.ramprice?.usd
-										: Asset.from(0, '2,USD')}
-								/>
-							</td>
-						</tr>
-						<tr class="*:py-2">
-							<td class="text-muted text-base">
-								{m.common_labeled_unit_price({
-									unit: 'USD'
-								})}
-							</td>
-							<td class="text-right font-medium text-white">
-								<AssetText
-									variant="full"
-									value={data.network.ramprice?.usd
-										? calculateValue(ramCalculatorState.tokens, data.network.ramprice.usd)
-										: Asset.from('0.0000 EOS')}
-								/>
-							</td>
-						</tr>
-					{/if}
 					<tr class="*:py-2">
 						<td class="text-muted text-base"> {m.common_network_fees()} </td>
 						<td class="text-right font-medium text-white">
@@ -189,7 +163,7 @@
 
 	{#if data.historicalPrices.length}
 		<div class="lg:col-start-2 lg:row-span-2 lg:row-start-1">
-			<RamPriceHistory data={data.historicalPrices} />
+			<RamPriceHistory />
 		</div>
 	{/if}
 
@@ -201,21 +175,19 @@
 						>{m.common_market_cap()} ({data.network.chain.systemToken?.symbol.code || ''})</td
 					>
 					<td class="text-right font-medium text-white">
-						<AssetText variant="full" value={marketCapEOS} />
+						<AssetText variant="full" value={marketCapToken} />
 					</td>
 				</tr>
-				{#if data.network.ramprice?.usd}
-					<tr class="*:py-2">
-						<td class="text-muted text-base">{m.common_market_cap()} (USD)</td>
-						<td class="text-right font-medium text-white">
-							<AssetText variant="full" value={marketCapUSD} />
-						</td>
-					</tr>
-				{/if}
+				<tr class="*:py-2">
+					<td class="text-muted text-base">{m.common_market_cap()} (USD)</td>
+					<td class="text-right font-medium text-white">
+						<AssetText variant="full" value={marketCapFiat} />
+					</td>
+				</tr>
 				<tr class="*:py-2">
 					<td class="text-muted text-base">{m.common_supply()}</td>
 					<td class="text-right font-medium text-white">
-						<AssetText variant="full" value={ramSupply} />
+						<AssetText variant="full" value={totalRamSupply} />
 					</td>
 				</tr>
 			</tbody>

@@ -11,6 +11,7 @@
 	import { goto } from '$app/navigation';
 	import { languageTag } from '$lib/paraglide/runtime';
 	import type { NetworkState } from '$lib/state/network.svelte';
+	import * as m from '$lib/paraglide/messages';
 
 	interface Props {
 		currentNetwork: NetworkState;
@@ -46,6 +47,7 @@
 	} = createSelect<string>({
 		forceVisible: true,
 		onSelectedChange,
+		preventScroll: false,
 		positioning: {
 			placement: 'bottom',
 			fitViewport: true,
@@ -84,7 +86,7 @@
 
 		{#if context.settings.data.advancedMode}
 			<div class="font-regular m-0 flex items-center gap-1 pr-1 text-base text-zinc-400">
-				<span use:melt={$label}>Change network</span>
+				<span use:melt={$label}>{m.change_network()}</span>
 				<ChevronDown
 					data-open={$open}
 					class="size-4 transition-transform duration-100 data-[open=true]:rotate-180"

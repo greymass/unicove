@@ -1,18 +1,14 @@
 <script lang="ts">
 	import { formatCurrency } from '$lib/i18n';
-	import type { Asset } from '@wharfkit/antelope';
 	import { Card, Stack, Switcher } from '$lib/components/layout';
 	import * as SystemContract from '$lib/wharf/contracts/system';
+	import type { ActionSummaryProps } from '$lib/types/transaction';
 
-	interface SellREXProps {
-		action: {
-			data: SystemContract.Types.sellrex;
-		};
-		class?: string;
-		value?: Asset;
+	interface SellREXProps extends Omit<ActionSummaryProps, 'data'> {
+		data: SystemContract.Types.sellrex;
 	}
 
-	const { action, class: className = '', value, ...props }: SellREXProps = $props();
+	const { class: className = '', data, value }: SellREXProps = $props();
 </script>
 
 <Card class="gap-5 text-center {className}">
@@ -20,11 +16,11 @@
 	<Switcher threshold="20rem">
 		<Stack class="gap-0">
 			<p class="caption">From</p>
-			<p class="h3">{action.data.from}</p>
+			<p class="h3">{data.from}</p>
 		</Stack>
 		<Stack class="gap-0">
 			<p class="caption">Rex</p>
-			<p class="h3">{action.data.rex}</p>
+			<p class="h3">{data.rex}</p>
 			{#if value}
 				<p class="mt-1.5 self-start rounded bg-shark-800/60 px-2">USD {formatCurrency(value)}</p>
 			{/if}

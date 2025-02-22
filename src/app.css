@@ -7,6 +7,7 @@
 		@apply h-full bg-shark-950 text-white;
 		color-scheme: dark;
 		touch-action: manipulation;
+		scrollbar-gutter: stable;
 	}
 
 	body {

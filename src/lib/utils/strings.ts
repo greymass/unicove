@@ -7,7 +7,7 @@ import { languageTag } from '$lib/paraglide/runtime';
 export const truncateCenter = (s: string, len: number = 12): string => {
 	if (s.length <= len) return s;
 	const l = Math.floor((len - 1) / 2);
-	return s.slice(0, l) + '..' + s.slice(-l);
+	return s.slice(0, l) + '…' + s.slice(-l);
 };
 
 /**

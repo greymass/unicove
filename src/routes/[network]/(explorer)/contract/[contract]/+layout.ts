@@ -1,16 +1,25 @@
-import * as m from '$lib/paraglide/messages.js';
-import type { LoadEvent } from '@sveltejs/kit';
-import type { ABI } from '@wharfkit/antelope';
+import { Name, type ABI } from '@wharfkit/antelope';
+import { error } from '@sveltejs/kit';
 
-export const load = async ({ fetch, params, parent }: LoadEvent) => {
+import * as m from '$lib/paraglide/messages.js';
+import type { LayoutLoad } from './$types';
+
+export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 	const { network } = await parent();
 	const response = await fetch(`/${params.network}/api/contract/${params.contract}`);
 	const json = await response.json();
+
+	if (!response.ok || !json.abi.abi) {
+		return error(404, {
+			message: `No contract is currently deployed to the ${params.contract} account.`,
+			code: 'NOT_FOUND'
+		});
+	}
 	const abi: ABI = json.abi.abi;
 
 	return {
 		abi,
-		contract: params.contract,
+		contract: Name.from(params.contract),
 
 		title: params.contract,
 		subtitle: 'Contract',
