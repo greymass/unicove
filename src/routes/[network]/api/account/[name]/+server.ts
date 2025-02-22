@@ -9,6 +9,7 @@ import type { LightAPIBalanceResponse, LightAPIBalanceRow } from '$lib/types/lig
 import type { RequestEvent, RequestHandler } from './$types';
 
 import { Types as SystemTypes } from '$lib/wharf/contracts/system';
+import { nullContractHash } from '$lib/state/defaults/account';
 
 export const GET: RequestHandler = async ({ locals: { network }, params }: RequestEvent) => {
 	const headers = getCacheHeaders(5);
@@ -58,10 +59,11 @@ async function loadBalances(
 async function getAccount(network: NetworkState, account: NameType): Promise<AccountDataSources> {
 	const { system: systemContract, msig: msigContract } = network.contracts;
 
-	const [get_account, delegated, proposals] = await Promise.all([
+	const [get_account, delegated, proposals, hash] = await Promise.all([
 		network.client.v1.chain.get_account(account),
 		systemContract.table('delband').all({ scope: account }),
-		msigContract.table('proposal', account).all()
+		msigContract.table('proposal', account).all(),
+		systemContract.table('abihash').get(account)
 	]);
 
 	let rex;
@@ -108,8 +110,11 @@ async function getAccount(network: NetworkState, account: NameType): Promise<Acc
 		rexfund = SystemTypes.rex_fund.from(rex);
 	}
 
+	const contract_hash = hash?.hash || nullContractHash;
+
 	return {
 		get_account,
+		contract_hash,
 		balance: get_account.core_liquid_balance || defaultBalance,
 		light_api: balances,
 		delegated,
@@ -146,6 +151,7 @@ async function getAccount2(network: NetworkState, account: NameType): Promise<Ac
 
 	return {
 		get_account,
+		contract_hash: getaccount.contracthash,
 		balance: getaccount.balance,
 		light_api: balances,
 		delegated: getaccount.delegations,

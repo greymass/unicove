@@ -25,7 +25,7 @@
 	const name: Name = $derived(Name.from(input));
 
 	/** Validation states */
-	const satisfiesLength = $derived(String(name).length > 0 && String(name).length <= 13);
+	const satisfiesLength = $derived(String(name).length > 0 && String(name).length <= 12);
 	const satisfiesNameMatch = $derived(String(name) === input);
 
 	/** Whether or not the input value is valid */

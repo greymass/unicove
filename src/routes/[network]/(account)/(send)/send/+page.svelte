@@ -26,7 +26,8 @@
 	import { NetworkState } from '$lib/state/network.svelte';
 	import { page } from '$app/stores';
 	import { SingleCard, Stack } from '$lib/components/layout';
-	import TransactionSummary from '$lib/components/transactionSummary.svelte';
+	import TransactSummary from '$lib/components/transact/summary.svelte';
+	import TransactError from '$lib/components/transact/error.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
@@ -41,11 +42,13 @@
 	let memoRef: HTMLInputElement | undefined = $state();
 
 	let id: Checksum256 | undefined = $state();
+	let error: string | undefined = $state();
 
 	function transact() {
 		if (!context.wharf || !context.wharf.session) {
 			return;
 		}
+		error = undefined;
 		const balance = context.account?.balances.find((b) =>
 			b.asset.symbol.equals(sendState.quantity.symbol)
 		);
@@ -60,8 +63,9 @@
 					id = result?.resolved?.transaction.id;
 					f.send('success');
 				})
-				.catch((error) => {
-					console.error('Transaction error', error);
+				.catch((e) => {
+					console.error('Transaction error', e);
+					error = e;
 					f.send('error');
 				});
 		} else {
@@ -214,6 +218,7 @@
 	});
 
 	const allValid = $derived(toValid && assetValid && memoValid);
+	const ready = $derived(allValid && !context.wharf.transacting);
 
 	const progress = $derived.by(() => {
 		switch (f.current) {
@@ -403,14 +408,11 @@
 {/snippet}
 
 {#snippet Complete()}
-	<TransactionSummary hidden={f.current !== 'complete'} transactionId={id} />
+	<TransactSummary hidden={f.current !== 'complete'} transactionId={id} />
 {/snippet}
 
 {#snippet Error()}
-	<div class:hidden={f.current !== 'error'}>
-		<h2 class="h2">{m.common_transaction_error()}</h2>
-		<p>{m.common_transaction_error_subtitle()}</p>
-	</div>
+	<TransactError hidden={f.current !== 'error'} {error} />
 {/snippet}
 
 {#snippet ButtonGroup()}
@@ -418,13 +420,16 @@
 		{#if f.current === 'to'}
 			<Button variant="secondary" onclick={() => resetURL()}>{m.common_restart()}</Button>
 		{:else if f.current === 'complete'}
-			<Button onclick={() => resetURL()}>{m.send_start_new()}</Button>
+			<Button variant="secondary" onclick={() => resetURL()}>{m.send_start_new()}</Button>
+			<Button href={`/${data.network}/account/${context.account?.name}`}>
+				{m.common_view_my_account()}
+			</Button>
 		{:else}
 			<Button variant="secondary" onclick={previous}>{m.common_back()}</Button>
 		{/if}
 
 		{#if f.current === 'memo'}
-			<Button class="col-end-3" onclick={transact} disabled={!allValid}>{m.common_submit()}</Button>
+			<Button class="col-end-3" onclick={transact} disabled={!ready}>{m.common_submit()}</Button>
 		{:else if f.current !== 'complete'}
 			<Button class="col-end-3" type="submit" onclick={preventDefault(next)} disabled={!nextValid}>
 				{m.common_next()}

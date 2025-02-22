@@ -1,4 +1,4 @@
-import { API, Asset, Float64, Int64, Name } from '@wharfkit/antelope';
+import { API, Asset, Checksum256, Float64, Int64, Name } from '@wharfkit/antelope';
 
 import { gifted_ram, type AccountDataSources, type VoterInfo } from '$lib/types/account';
 
@@ -75,8 +75,13 @@ export const defaultRexFund = SystemContract.Types.rex_fund.from({
 	balance: '0 '
 });
 
+export const nullContractHash = Checksum256.from(
+	'0000000000000000000000000000000000000000000000000000000000000000'
+);
+
 export const defaultAccountDataSources: AccountDataSources = {
 	get_account: defaultGetAccount,
+	contract_hash: nullContractHash,
 	balance: defaultAsset,
 	light_api: [],
 	delegated: [],

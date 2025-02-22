@@ -11,7 +11,6 @@ import {
 	type NameType
 } from '@wharfkit/antelope';
 import type { REXState } from '@wharfkit/resources';
-import { Account } from '@wharfkit/account';
 import { TokenMeta, TokenBalance, TokenIdentifier } from '@wharfkit/common';
 
 import type { NetworkState } from '$lib/state/network.svelte';
@@ -24,7 +23,11 @@ import type {
 } from '$lib/types/account';
 
 import { calculateValue, isSameToken } from '$lib/utils';
-import { defaultAccountDataSources, defaultVoteInfo } from '$lib/state/defaults/account';
+import {
+	defaultAccountDataSources,
+	defaultVoteInfo,
+	nullContractHash
+} from '$lib/state/defaults/account';
 import * as SystemContract from '$lib/wharf/contracts/system';
 
 export class AccountState {
@@ -34,12 +37,9 @@ export class AccountState {
 	public network: NetworkState;
 	private sources: AccountDataSources = $state(defaultAccountDataSources);
 
-	public account: Account | undefined = $state();
 	public name: Name = $state(Name.from(''));
 	public last_update: Date = $state(new Date());
-	public contract: boolean = $derived(
-		Number(new Date(`${this.sources?.get_account?.last_code_update}z`)) > 0
-	);
+	public contract: boolean = $derived(!this.sources.contract_hash.equals(nullContractHash));
 	public loaded: boolean = $state(false);
 
 	public balance = $derived.by(() =>
@@ -59,8 +59,8 @@ export class AccountState {
 	public delegations = $derived(getDelegations(this.sources));
 
 	public resources = $derived.by(() => getResources(this.sources, this.network));
-
-	public permissions = $derived.by(() => (this.account ? this.account.permissions : undefined));
+	public rex = $derived(SystemContract.Types.rex_balance.from(this.sources.rexbal));
+	public permissions = $derived(API.v1.AccountObject.from(this.sources.get_account).permissions);
 	public proposals = $derived.by(() => this.sources.proposals);
 	public refundRequest = $derived.by(() => this.sources.refund_request);
 	public value = $derived.by(() => {
@@ -107,6 +107,7 @@ export class AccountState {
 		this.last_update = new Date();
 		this.sources = {
 			get_account: data.get_account,
+			contract_hash: Checksum256.from(data.contract_hash),
 			balance: data.balance,
 			giftedram: data.giftedram,
 			light_api: data.light_api,
@@ -116,10 +117,6 @@ export class AccountState {
 			rexbal: data.rexbal,
 			rexfund: data.rexfund
 		};
-		this.account = new Account({
-			client: this.network.client,
-			data: API.v1.AccountObject.from(this.sources.get_account)
-		});
 		if (data.get_account && data.get_account.voter_info) {
 			this.voter = {
 				isProxy: data.get_account.voter_info.is_proxy,

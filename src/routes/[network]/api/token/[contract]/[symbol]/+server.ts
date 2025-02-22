@@ -9,6 +9,10 @@ export async function GET({ locals: { network }, params, url }: RequestEvent) {
 	const symbol = params.symbol?.toLocaleUpperCase();
 	const count = Number(url.searchParams.get('count')) || 100;
 	const stats = await network.client.v1.chain.get_currency_stats(contract, symbol);
+	if (stats[symbol] === undefined) {
+		console.log('abort');
+		return json({ error: 'Token not found' }, { status: 404 });
+	}
 	const topholders = await getTopHolders(network, contract, symbol, count);
 	const numholders = await getNumHolders(network, contract, symbol);
 

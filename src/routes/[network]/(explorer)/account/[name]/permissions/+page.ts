@@ -1,10 +1,9 @@
-import type { Permission } from '@wharfkit/account';
 import type { PageLoad } from './$types';
-import { Name } from '@wharfkit/antelope';
+import { API, Name } from '@wharfkit/antelope';
 import * as m from '$lib/paraglide/messages';
 
 export interface TreePermission {
-	permission: Permission;
+	permission: API.v1.AccountPermission;
 	children?: TreePermission[];
 }
 
