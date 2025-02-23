@@ -297,21 +297,23 @@ export class WharfState {
 		if (!this.sessionKit) {
 			throw new Error('User not initialized');
 		}
+
 		await this.sessionKit.logout(session);
+		this.session = undefined;
+
+		this.sessions = await this.sessionKit.getSessions();
+
 		if (session) {
-			if (session instanceof Session) {
-				this.chainsSession[String(session.chain.id)] = undefined;
-			} else {
-				this.chainsSession[String(session.chain)] = undefined;
+			const chain = session instanceof Session ? session.chain.id : Checksum256.from(session.chain);
+			this.chainsSession[String(chain)] = undefined;
+			if (this.sessions) {
+				const newSession = this.sessions.find((s) => Checksum256.from(s.chain).equals(chain));
+				if (newSession) {
+					await this.switch(newSession);
+				}
 			}
 		} else {
 			this.chainsSession = {};
-		}
-		this.sessions = await this.sessionKit.getSessions();
-		if (this.sessions.length > 0) {
-			await this.switch(this.sessions[0]);
-		} else {
-			this.session = undefined;
 		}
 	}
 
