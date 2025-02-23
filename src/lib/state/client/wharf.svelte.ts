@@ -1,12 +1,10 @@
-import { cancelable, ChainDefinition, type Cancelable } from '@wharfkit/common';
+import { ChainDefinition } from '@wharfkit/common';
 import ContractKit, { type ActionDataType } from '@wharfkit/contract';
 import {
 	type NameType,
-	type PrivateKeyType,
 	Checksum256,
 	Name,
 	PermissionLevel,
-	PrivateKey,
 	Serializer,
 	Transaction
 } from '@wharfkit/antelope';
@@ -18,176 +16,21 @@ import {
 	type SerializedSession,
 	type TransactArgs,
 	type TransactOptions,
-	type TransactPlugin,
 	type TransactResult,
-	type WalletPlugin,
-	type WalletPluginConfig,
-	type WalletPluginLoginResponse,
-	type WalletPluginSignResponse,
-	AbstractWalletPlugin,
-	LoginContext,
-	ResolvedSigningRequest,
 	Session,
-	SessionKit,
-	TransactContext,
-	WalletPluginMetadata
+	SessionKit
 } from '@wharfkit/session';
 import WebRenderer from '@wharfkit/web-renderer';
-
-// Wallet Plugins
-import { WalletPluginAnchor } from '@wharfkit/wallet-plugin-anchor';
 import { WalletPluginCleos } from '@wharfkit/wallet-plugin-cleos';
-import { WalletPluginMetaMask } from '@wharfkit/wallet-plugin-metamask';
-import { WalletPluginPrivateKey } from '@wharfkit/wallet-plugin-privatekey';
-import { WalletPluginWombat } from '@wharfkit/wallet-plugin-wombat';
-import { WalletPluginScatter } from '@wharfkit/wallet-plugin-scatter';
-import { WalletPluginTokenPocket } from '@wharfkit/wallet-plugin-tokenpocket';
-
-// Other Plugins
 import { AccountCreationPluginMetamask } from '@wharfkit/account-creation-plugin-metamask';
-import { TransactPluginResourceProvider } from '@wharfkit/transact-plugin-resource-provider';
-import { TransactPluginStatusEmitter } from '$lib/wharf/plugins/status';
 
 import { browser } from '$app/environment';
-import * as env from '$env/static/public';
 
 import { type QueuedTransaction, StatusType, queueTransaction } from '$lib/wharf/transact.svelte';
-import { chainMapper, chains, getChainDefinitionFromParams } from '$lib/wharf/chains';
+import { chainMapper } from '$lib/wharf/chains';
 import type { SettingsState } from '$lib/state/settings.svelte';
 import type { NetworkState } from '$lib/state/network.svelte';
-
-import { Contract as MsigContract } from '$lib/wharf/contracts/msig';
-import { generateRandomName } from '$lib/utils/random';
-
-export class WalletPluginMultiSig extends AbstractWalletPlugin implements WalletPlugin {
-	public id = 'wallet-plugin-multisig';
-	readonly config: WalletPluginConfig = {
-		requiresChainSelect: true,
-		requiresPermissionEntry: true,
-		requiresPermissionSelect: true
-	};
-	readonly metadata: WalletPluginMetadata = WalletPluginMetadata.from({
-		name: 'MultiSig Proposer',
-		description: ''
-	});
-	constructor() {
-		super();
-		// const privateKey = PrivateKey.from(privateKeyData)
-		// this.data.privateKey = privateKey
-		// this.metadata.publicKey = String(privateKey.toPublic())
-		// this.metadata.description = `An unsecured wallet that can sign for authorities using the ${
-		//     String(this.data.publicKey).substring(0, 11) +
-		//     '...' +
-		//     String(this.data.publicKey).substring(
-		//         String(this.data.publicKey).length - 4,
-		//         String(this.data.publicKey).length
-		//     )
-		// } public key.`
-	}
-	login(context: LoginContext): Cancelable<WalletPluginLoginResponse> {
-		let chain: Checksum256;
-		// Persist the parent session
-		this.data.session = context.arbitrary.session;
-		if (context.chain) {
-			chain = context.chain.id;
-		} else {
-			chain = context.chains[0].id;
-		}
-		return cancelable(
-			new Promise((resolve, reject) => {
-				if (!context.permissionLevel) {
-					return reject(
-						'Calling login() without a permissionLevel is not supported by the WalletPluginMultiSig plugin.'
-					);
-				}
-				resolve({
-					chain,
-					permissionLevel: context.permissionLevel
-				});
-			})
-		);
-	}
-	sign(
-		resolved: ResolvedSigningRequest,
-		context: TransactContext
-	): Cancelable<WalletPluginSignResponse> {
-		return cancelable(
-			new Promise((resolve) => {
-				const walletPlugin = defaultWalletPlugins.find(
-					(plugin) => plugin.id === this.data.session.walletPlugin.id
-				);
-				if (!walletPlugin) {
-					throw new Error('Wallet plugin not found');
-				}
-				const session = new Session(
-					{
-						chain: context.chain,
-						permissionLevel: PermissionLevel.from({
-							actor: this.data.session.actor,
-							permission: this.data.session.permission
-						}),
-						walletPlugin
-					},
-					{
-						ui: context.ui
-					}
-				);
-				const transaction = Transaction.from(resolved.transaction);
-				context.client.v1.chain.get_account(resolved.signer.actor).then((account) => {
-					const permission = account.permissions.find((p) =>
-						p.perm_name.equals(resolved.signer.permission)
-					);
-					if (!permission) {
-						throw new Error('Requested permission not found');
-					}
-					const requested = permission.required_auth.accounts.map((a) => a.permission);
-					const msig = new MsigContract({ client: context.client });
-					const action = msig.action(
-						'propose',
-						{
-							proposal_name: generateRandomName(),
-							proposer: session.actor,
-							requested,
-							trx: transaction
-						},
-						{
-							authorization: [session.permissionLevel]
-						}
-					);
-					session.transact({ action }, { broadcast: false }).then((result) => {
-						resolve({
-							resolved: result.resolved,
-							signatures: result.signatures
-						});
-					});
-				});
-			})
-		);
-	}
-}
-
-const defaultWalletPlugins: WalletPlugin[] = [
-	new WalletPluginAnchor(),
-	new WalletPluginMetaMask(),
-	new WalletPluginScatter(),
-	new WalletPluginTokenPocket(),
-	new WalletPluginWombat(),
-	new WalletPluginMultiSig()
-];
-
-const transactPlugins: TransactPlugin[] = [
-	new TransactPluginStatusEmitter(),
-	new TransactPluginResourceProvider()
-];
-
-// If a local key is provided, add the private key wallet
-if (env.PUBLIC_LOCAL_SIGNER) {
-	defaultWalletPlugins.unshift(new WalletPluginPrivateKey(env.PUBLIC_LOCAL_SIGNER));
-}
-
-const chainDefs: ChainDefinition[] = chains.map((chain) =>
-	getChainDefinitionFromParams(chain.name)
-);
+import { chainDefs, transactPlugins, walletPlugins } from '$lib/wharf/plugins';
 
 export class WharfState {
 	public chain?: ChainDefinition = $state();
@@ -217,13 +60,12 @@ export class WharfState {
 		this.contractKit = new ContractKit({
 			client: network.client
 		});
-		const walletPlugins = [...defaultWalletPlugins];
+
 		if (this.settings.data.advancedMode) {
 			walletPlugins.push(new WalletPluginCleos());
 		}
 
 		const accountCreationPlugins: AccountCreationPlugin[] = [];
-
 		if (network.config.metamask) {
 			this.metamaskPlugin = new AccountCreationPluginMetamask({
 				accountCreationServiceUrl: network.config.metamask.serviceurl,
@@ -247,24 +89,7 @@ export class WharfState {
 		$inspect(this.chainsSession);
 		$effect.root(() => {
 			$effect(() => {
-				console.log('effect chainSessions setItem', JSON.stringify(this.chainsSession));
 				localStorage.setItem('chainsSession', JSON.stringify(this.chainsSession));
-			});
-			$effect(() => {
-				console.log('effect session', JSON.stringify(this.session?.actor));
-				if (this.sessionKit && this.session) {
-					// Don't allow multi-sig wallets to recursively setup more multi-sig wallets
-					if (this.session.walletPlugin.id !== 'wallet-plugin-multisig') {
-						const index = this.sessionKit.walletPlugins.findIndex(
-							(plugin) => plugin.id === 'wallet-plugin-multisig'
-						);
-						if (index !== -1) {
-							this.sessionKit.walletPlugins.splice(index, 1);
-						}
-						this.sessionKit.walletPlugins.push(new WalletPluginMultiSig(this.session.serialize()));
-						console.log('added multisig wallet plugin for ', String(this.session.actor));
-					}
-				}
 			});
 		});
 	}
@@ -321,9 +146,6 @@ export class WharfState {
 		if (!this.sessionKit) {
 			throw new Error('User not initialized');
 		}
-		// if (args?.walletPlugin.id === 'wallet-plugin-multisig') {
-		// 	this.sessionKit.walletPlugins.push(new WalletPluginMultiSig(args.walletPlugin.data.session));
-		// }
 		// TODO: If the current account matches the account we're switching to, just return the current session
 		const session = await this.sessionKit.restore(args, options);
 		if (session) {
