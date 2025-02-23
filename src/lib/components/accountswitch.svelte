@@ -107,7 +107,7 @@
 		const options: LoginOptions = {
 			walletPlugin: wallet.id
 		};
-		if (wallet.id !== 'cleos') {
+		if (wallet.id !== 'cleos' && wallet.id !== 'wallet-plugin-multisig') {
 			options.chain = context.network.chain;
 		}
 		const session = await context.wharf.login(options);
@@ -302,23 +302,25 @@
 		{#if context.wharf.sessionKit}
 			<ul class="grid grid-cols-[auto_1fr_auto]">
 				{#each context.wharf.sessionKit?.walletPlugins as wallet}
-					<li class="table-row-background table-row-border col-span-full grid grid-cols-subgrid">
-						<button
-							class="col-span-full grid grid-cols-subgrid gap-4 px-2 py-4 font-semibold text-white"
-							onclick={() => connectWallet(wallet)}
-						>
-							{#if wallet.metadata.logo}
-								<img
-									class="size-6"
-									src={wallet.metadata.logo.toString()}
-									alt={wallet.metadata.name}
-								/>
-							{:else}
-								<Wallet class="size-6" />
-							{/if}
-							<span class="text-left">{wallet.metadata.name}</span>
-						</button>
-					</li>
+					{#if wallet.id !== 'wallet-plugin-multisig'}
+						<li class="table-row-background table-row-border col-span-full grid grid-cols-subgrid">
+							<button
+								class="col-span-full grid grid-cols-subgrid gap-4 px-2 py-4 font-semibold text-white"
+								onclick={() => connectWallet(wallet)}
+							>
+								{#if wallet.metadata.logo}
+									<img
+										class="size-6"
+										src={wallet.metadata.logo.toString()}
+										alt={wallet.metadata.name}
+									/>
+								{:else}
+									<Wallet class="size-6" />
+								{/if}
+								<span class="text-left">{wallet.metadata.name}</span>
+							</button>
+						</li>
+					{/if}
 				{/each}
 			</ul>
 		{/if}
