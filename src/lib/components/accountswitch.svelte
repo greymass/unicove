@@ -94,9 +94,12 @@
 		closeDrawer();
 	}
 
-	function removeSession(session?: Session | SerializedSession) {
+	async function removeSession(session?: Session | SerializedSession) {
 		if (session) {
-			context.wharf.logout(session);
+			await context.wharf.logout(session);
+			if (currentSession) {
+				redirect(currentSession.actor);
+			}
 		}
 	}
 
