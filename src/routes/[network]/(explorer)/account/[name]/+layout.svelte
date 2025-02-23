@@ -4,6 +4,7 @@
 	import PillGroup from '$lib/components/navigation/pillgroup.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
 	import * as m from '$lib/paraglide/messages';
+	import dayjs from 'dayjs';
 
 	const context = getContext<UnicoveContext>('state');
 	const { children, data } = $props();
@@ -49,20 +50,33 @@
 		return items;
 	});
 
+	let updated: ReturnType<typeof setInterval>;
+	let lastUpdate = $state(0);
 	let refresh: ReturnType<typeof setInterval>;
 	onMount(() => {
+		updated = setInterval(() => {
+			const account = dayjs(data.account.last_update);
+			const current = dayjs(new Date());
+			lastUpdate = account.diff(current, 'seconds') * -1;
+		}, 1000);
 		refresh = setInterval(() => {
 			data.account.refresh();
-		}, 10000);
+		}, 100000);
 	});
 
 	onDestroy(() => {
+		clearInterval(updated);
 		clearInterval(refresh);
 	});
 </script>
 
 <Stack class="gap-6 @container">
 	<PillGroup {options} />
-
 	{@render children()}
 </Stack>
+
+{#if context.settings.data.debugMode}
+	<div class="text-muted text-center text-sm">
+		Account updated {lastUpdate} seconds ago
+	</div>
+{/if}
