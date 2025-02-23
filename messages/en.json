@@ -306,7 +306,7 @@
 	"navigation_balances": "Balances",
 	"navigation_overview": "Overview",
 	"navigation_permissions": "Permissions",
-	"navigation_proposals": "Proposals",
+	"navigation_proposals": "Proposals ({number})",
 	"navigation_resources": "Resources",
 	"navigation_staked": "Staked",
 	"navigation_votes": "Votes",

@@ -301,7 +301,7 @@
 	"navigation_balances": "余额",
 	"navigation_overview": "概览",
 	"navigation_permissions": "权限",
-	"navigation_proposals": "提案",
+	"navigation_proposals": "提案 ({number})",
 	"navigation_resources": "资源",
 	"navigation_staked": "质押中",
 	"navigation_votes": "投票",

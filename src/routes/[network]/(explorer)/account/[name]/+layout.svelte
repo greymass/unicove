@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getContext } from 'svelte';
+	import { getContext, onDestroy, onMount } from 'svelte';
 	import { Stack } from '$lib/components/layout';
 	import PillGroup from '$lib/components/navigation/pillgroup.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
@@ -23,13 +23,15 @@
 				text: m.navigation_permissions()
 			});
 			items.push({ href: `/${network}/account/${account}/votes`, text: m.navigation_votes() });
-
 			if (data.account.proposals.length > 0) {
 				items.push({
 					href: `/${network}/account/${account}/proposals`,
-					text: m.navigation_proposals()
+					text: m.navigation_proposals({
+						number: data.account.proposals.length
+					})
 				});
 			}
+			items.push({ href: `/${network}/account/${account}/authority`, text: 'Authority' });
 
 			items.push({ href: `/${network}/account/${account}/data`, text: m.common_data() });
 		}
@@ -45,6 +47,17 @@
 		}
 
 		return items;
+	});
+
+	let refresh: Timer;
+	onMount(() => {
+		refresh = setInterval(() => {
+			data.account.refresh();
+		}, 10000);
+	});
+
+	onDestroy(() => {
+		clearInterval(refresh);
 	});
 </script>
 
