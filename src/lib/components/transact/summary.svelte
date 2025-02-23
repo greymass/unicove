@@ -46,8 +46,8 @@
 				<h3 class="h3">Multi-Sig Proposal Created</h3>
 				<p class="text-center">
 					The multi-sig proposal for this transaction has been created and now needs to be approved.
+					View the proposal below and share it with the parties who need to sign.
 				</p>
-				/en/jungle4/msig/oracle1.gm/t1p5cc1bx5bm
 				{#each proposals as proposal}
 					<Button href="/{context.network}/msig/{proposal.proposer}/{proposal.proposal_name}">
 						View Proposal ({proposal.proposer}/{proposal.proposal_name})
