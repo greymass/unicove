@@ -57,7 +57,7 @@
 
 	<p class="*:block">
 		<span class="font-semibold text-white">
-			<NumberFormat number={props.value} />
+			<NumberFormat number={props.value.dividing(1000)} />
 			{unit}
 		</span>
 		<span>{m.common_available()}</span>

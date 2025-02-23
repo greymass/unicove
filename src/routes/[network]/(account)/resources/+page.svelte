@@ -1,28 +1,26 @@
 <script lang="ts">
-	import Stack from '$lib/components/layout/stack.svelte';
-	import Button from '$lib/components/button/button.svelte';
+	import { Int64 } from '@wharfkit/antelope';
+	import { getContext } from 'svelte';
 	import { CpuIcon, WifiIcon, HardDrive } from 'lucide-svelte';
 
+	import Stack from '$lib/components/layout/stack.svelte';
+	import Button from '$lib/components/button/button.svelte';
 	import CpuAndNetResource from '$lib/components/elements/cpunetresource.svelte';
 	import RamResource from '$lib/components/elements/ramresource.svelte';
 	import AccountBalance from '$lib/components/card/accountbalance.svelte';
-	import { calAvailableSize } from '$lib/utils';
 	import * as m from '$lib/paraglide/messages';
-
 	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import { getContext } from 'svelte';
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');
 
-	const cpuAvailableSize = $derived(calAvailableSize(context.account?.resources.cpu));
-	const netAvailableSize = $derived(calAvailableSize(context.account?.resources.net));
-	const ramAvailableSize = $derived(calAvailableSize(context.account?.resources.ram));
+	const cpuAvailableSize = $derived(context.account?.resources.cpu.available || Int64.from(0));
+	const netAvailableSize = $derived(context.account?.resources.net.available || Int64.from(0));
+	const ramAvailableSize = $derived(context.account?.resources.ram.available || Int64.from(0));
 
 	const network = String(data.network);
 	const chainName = data.network.chain.name;
 	const symbolName = data.network.chain.systemToken?.symbol.name || 'token';
-	const precision = 2;
 
 	const explanations = [
 		{
@@ -73,11 +71,9 @@
 <div class="flex flex-col gap-9 sm:gap-12 xl:flex-row xl:justify-between xl:gap-8">
 	<Stack class="max-w-lg flex-1 gap-9">
 		<Stack>
-			<CpuAndNetResource
-				cpuAvailable={cpuAvailableSize}
-				netAvailable={netAvailableSize}
-				{precision}
-			/>
+			{#if cpuAvailableSize && netAvailableSize}
+				<CpuAndNetResource cpuAvailable={cpuAvailableSize} netAvailable={netAvailableSize} />
+			{/if}
 			{#if data.network.supports('powerup')}
 				<Button variant="primary" href="/{network}/resources/powerup"
 					>{m.resources_rent_with_powerup()}</Button
@@ -95,7 +91,7 @@
 			{/if}
 		</Stack>
 		<Stack>
-			<RamResource ramAvailable={ramAvailableSize} {precision} />
+			<RamResource ramAvailable={ramAvailableSize} />
 			<Button variant="secondary" href="/{network}/ram">{m.common_ram_market()}</Button>
 		</Stack>
 		<AccountBalance />

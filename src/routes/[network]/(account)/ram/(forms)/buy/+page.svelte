@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
-	import { Checksum256 } from '@wharfkit/antelope';
+	import { Checksum256, Int64 } from '@wharfkit/antelope';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 
@@ -20,7 +20,7 @@
 	import * as m from '$lib/paraglide/messages';
 
 	import { BuyRAMState } from './state.svelte';
-	import { calAvailableSize, preventDefault } from '$lib/utils';
+	import { preventDefault } from '$lib/utils';
 	import { DD, DL, DLRow } from '$lib/components/descriptionlist';
 
 	let bytesInput: BytesInput | undefined = $state();
@@ -30,7 +30,7 @@
 	const { data } = $props();
 
 	const buyRamState: BuyRAMState = $state(new BuyRAMState(data.network.chain));
-	const ramAvailableSize = $derived(calAvailableSize(context.account?.resources.ram));
+	const ramAvailableSize = $derived(context.account?.resources.ram.available || Int64.from(0));
 
 	let transactionId: Checksum256 | undefined = $state();
 	let errorMessage: string | undefined = $state();
@@ -199,27 +199,26 @@
 			</Stack>
 		</form>
 	{/if}
+	{#if context.settings.data.debugMode}
+		<h3 class="h3">{m.common_debugging()}</h3>
+		<Code
+			>{JSON.stringify(
+				{
+					payer: buyRamState.payer,
+					receiver: buyRamState.receiver,
+					bytes: buyRamState.bytes,
+					balance: buyRamState.balance,
+					chain: buyRamState.chain,
+					pricePerKB: buyRamState.pricePerKB,
+					pricePerByte: buyRamState.pricePerByte,
+					bytesValue: buyRamState.bytesValue,
+					valid: buyRamState.valid,
+					insufficientBalance: buyRamState.insufficientBalance,
+					balances: context.account?.balances
+				},
+				undefined,
+				2
+			)}</Code
+		>
+	{/if}
 </Stack>
-
-{#if context.settings.data.debugMode}
-	<h3 class="h3">{m.common_debugging()}</h3>
-	<Code
-		>{JSON.stringify(
-			{
-				payer: buyRamState.payer,
-				receiver: buyRamState.receiver,
-				bytes: buyRamState.bytes,
-				balance: buyRamState.balance,
-				chain: buyRamState.chain,
-				pricePerKB: buyRamState.pricePerKB,
-				pricePerByte: buyRamState.pricePerByte,
-				bytesValue: buyRamState.bytesValue,
-				valid: buyRamState.valid,
-				insufficientBalance: buyRamState.insufficientBalance,
-				balances: context.account?.balances
-			},
-			undefined,
-			2
-		)}</Code
-	>
-{/if}

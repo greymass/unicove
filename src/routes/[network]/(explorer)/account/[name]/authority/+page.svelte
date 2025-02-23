@@ -1,18 +1,14 @@
 <script lang="ts">
-	import AssetText from '$lib/components/elements/asset.svelte';
-	import { API, Asset, PermissionLevel, UInt64 } from '@wharfkit/antelope';
+	import { PermissionLevel } from '@wharfkit/antelope';
+	import { getContext } from 'svelte';
+	import { goto } from '$app/navigation';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import { getContext, onMount } from 'svelte';
-	import * as m from '$lib/paraglide/messages';
 	import { Card } from '$lib/components/layout/index.js';
-	import Code from '$lib/components/code.svelte';
 	import Account from '$lib/components/elements/account.svelte';
 	import Button from '$lib/components/button/button.svelte';
 
 	const { data } = $props();
-	const zero = UInt64.from(0);
-	const balances = $derived(data.account.balances.filter((item) => item.asset.units.gt(zero)));
 
 	const context = getContext<UnicoveContext>('state');
 	const isCurrentUser = $derived(
@@ -23,13 +19,18 @@
 			data.account.name.equals(context.account.name)
 	);
 
-	function signin(auth: PermissionLevel) {
-		context.wharf.multisig(auth);
+	async function signin(auth: PermissionLevel) {
+		await context.wharf.multisig(auth);
+		goto(`/${data.account.network}/account/${auth.actor}`);
 	}
 </script>
 
+<p>
+	The {data.account.name} account has some form of authority assigned to the other accounts listed below.
+</p>
+
 {#await data.authorizations then authorizations}
-	{#each authorizations.accounts as auth, i}
+	{#each authorizations.accounts as auth}
 		{@const permission = PermissionLevel.from(`${auth.account_name}@${auth.permission_name}`)}
 		<Card>
 			<div class="flex">
@@ -43,7 +44,12 @@
 				</div>
 				<div class="flex-end">
 					{#if isCurrentUser}
-						<Button onclick={() => signin(permission)}>Setup Multi-Sig</Button>
+						<Button onclick={() => signin(permission)}>
+							Login as {permission}
+							<div class="text-xs">
+								↳ multisig using {data.account.name}
+							</div>
+						</Button>
 					{/if}
 				</div>
 			</div>
