@@ -5,7 +5,6 @@
 	import CircleCheckBig from 'lucide-svelte/icons/circle-check-big';
 	import ClipboardPen from 'lucide-svelte/icons/clipboard-pen';
 	import * as m from '$lib/paraglide/messages';
-	import Code from '$lib/components/code.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
 

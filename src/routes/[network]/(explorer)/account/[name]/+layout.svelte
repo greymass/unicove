@@ -49,7 +49,7 @@
 		return items;
 	});
 
-	let refresh: Timer;
+	let refresh: ReturnType<typeof setInterval>;
 	onMount(() => {
 		refresh = setInterval(() => {
 			data.account.refresh();

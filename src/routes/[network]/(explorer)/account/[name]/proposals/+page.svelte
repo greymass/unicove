@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Code from '$lib/components/code.svelte';
 	import Link from '$lib/components/elements/link.svelte';
 	import Card from '$lib/components/layout/box/card.svelte';
 
