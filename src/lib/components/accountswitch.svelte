@@ -232,7 +232,9 @@
 
 						<ul class="grid gap-2">
 							{#each chainSessions as session}
-								{@const isCurrent = currentSession?.actor.toString() === session.actor}
+								{@const isCurrent =
+									currentSession?.actor.equals(session.actor) &&
+									currentSession?.permission.equals(session.permission)}
 								<li class="grid grid-cols-[1fr_auto] gap-2">
 									<button
 										data-current={isCurrent}
