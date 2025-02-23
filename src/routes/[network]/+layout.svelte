@@ -62,10 +62,6 @@
 		});
 	});
 
-	$effect(() => {
-		wharf.setSettings(data.network, settings);
-	});
-
 	async function setupWharf() {
 		if (!wharf.sessionKit) {
 			wharf.init(data.network);
