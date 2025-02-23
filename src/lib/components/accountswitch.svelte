@@ -257,9 +257,14 @@
 											{/if}
 										</div>
 
-										<span class="font-medium">
-											{session.actor}@{session.permission}
-										</span>
+										<div class="text-left font-medium">
+											<div>{session.actor}@{session.permission}</div>
+											{#if session.walletPlugin.id === 'wallet-plugin-multisig'}
+												<div class="text-xs">
+													↳ multisig using {session.walletPlugin.data.session.actor}
+												</div>
+											{/if}
+										</div>
 									</button>
 									<button
 										onclick={() => removeSession(session)}
