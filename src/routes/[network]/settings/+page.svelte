@@ -57,13 +57,12 @@
 		{ label: '1 month', value: TimeSeconds['1mo'] },
 		{ label: '1 year', value: TimeSeconds['1y'] }
 	];
+	const defaultRangeIndex = 3;
 
 	let expireSeconds = $derived(context.wharf.session?.walletPlugin.data.expireSeconds);
 
-	let selectedRange: ExtendedSelectOption | undefined = $derived(
-		range.find((r) => {
-			return r.value === expireSeconds;
-		}) || undefined
+	let selectedRange: ExtendedSelectOption = $derived(
+		range.find((r) => r.value === expireSeconds) || range[defaultRangeIndex]
 	);
 
 	const onExpireSelectedChange: ChangeFn<ExtendedSelectOption | undefined> = ({ next }) => {
