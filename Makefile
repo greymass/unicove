@@ -46,7 +46,10 @@ $(CONTRACTS)/delphioracle.ts:
 $(CONTRACTS)/unicove.ts:
 	bunx @wharfkit/cli generate -u $(CONTRACTS_API) -f $(CONTRACTS)/unicove.ts unicove.gm
 
-codegen: $(CONTRACTS)/system.ts $(CONTRACTS)/token.ts $(CONTRACTS)/msig.ts $(CONTRACTS)/delphioracle.ts $(CONTRACTS)/unicove.ts
+$(CONTRACTS)/eosntime.ts:
+	bunx @wharfkit/cli generate -u $(CONTRACTS_API) -f $(CONTRACTS)/eosntime.ts time.eosn
+
+codegen: $(CONTRACTS)/system.ts $(CONTRACTS)/token.ts $(CONTRACTS)/msig.ts $(CONTRACTS)/delphioracle.ts $(CONTRACTS)/unicove.ts $(CONTRACTS)/eosntime.ts
 	mkdir -p $(CONTRACTS)
 
 .PHONY: clean

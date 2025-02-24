@@ -26,21 +26,20 @@
 	});
 
 	const isLoading = $derived.by(() => {
-		const scence = activityLoader.scene;
-		return scence.isLoading && !scence.list.length;
+		const scene = activityLoader.scene;
+		return scene.isLoading && !scene.list.length;
 	});
 
 	const hasMore = $derived(activityLoader.scene.hasMore);
 	const loadingText = $derived.by(() => {
-		const scence = activityLoader.scene;
-		if (!scence.hasMore) return 'No more';
-		if (scence.isLoading) return 'Loading';
+		const scene = activityLoader.scene;
+		if (!scene.hasMore) return 'No more';
+		if (scene.isLoading) return 'Loading';
 		return 'Load more';
 	});
 
 	const activityActions: ActivityResponseAction[] = $derived.by(() => {
-		const scence = activityLoader.scene;
-		return [...scence.list];
+		return [...activityLoader.scene.list];
 	});
 
 	function clickLoadMore() {

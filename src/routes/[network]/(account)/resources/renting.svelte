@@ -1,4 +1,8 @@
 <script lang="ts">
+	import { Checksum256, Int64 } from '@wharfkit/antelope';
+	import { type TransactResult } from '@wharfkit/session';
+	import { getContext } from 'svelte';
+
 	import Stack from '$lib/components/layout/stack.svelte';
 	import NumberInput from '$lib/components/input/number.svelte';
 	import Label from '$lib/components/input/label.svelte';
@@ -10,16 +14,12 @@
 	import TransactError from '$lib/components/transact/error.svelte';
 	import CpuAndNetResource from '$lib/components/elements/cpunetresource.svelte';
 
-	import { Checksum256 } from '@wharfkit/antelope';
-	import { type TransactResult } from '@wharfkit/session';
-
-	import { getContext } from 'svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
 	import type { AccountState } from '$lib/state/client/account.svelte';
 
 	import * as m from '$lib/paraglide/messages';
-	import { calAvailableSize, preventDefault } from '$lib/utils';
+	import { preventDefault } from '$lib/utils';
 	import { RentState } from './state.svelte';
 	import { type RentType } from './utils';
 
@@ -33,8 +33,8 @@
 
 	const { rentType, network, account }: Props = $props();
 
-	const cpuAvailableSize = $derived(calAvailableSize(context.account?.resources.cpu));
-	const netAvailableSize = $derived(calAvailableSize(context.account?.resources.net));
+	const cpuAvailableSize = $derived(context.account?.resources.cpu.available || Int64.from(0));
+	const netAvailableSize = $derived(context.account?.resources.net.available || Int64.from(0));
 	const usableTime = $derived.by(() => {
 		if (rentType === 'POWERUP') return m.resources_usable_time_24h();
 		if (rentType === 'REX') return m.resources_usable_time_30days();
@@ -94,7 +94,6 @@
 		return details;
 	});
 
-	const precision = 2;
 	let transactionId: Checksum256 | undefined = $state();
 	let errorMessage: string | undefined = $state();
 
@@ -141,11 +140,7 @@
 	<Button onclick={resetStateAfterTrasaction}>{m.common_close()}</Button>
 {:else}
 	<div class="mx-auto max-w-md space-y-3">
-		<CpuAndNetResource
-			cpuAvailable={cpuAvailableSize}
-			netAvailable={netAvailableSize}
-			{precision}
-		/>
+		<CpuAndNetResource cpuAvailable={cpuAvailableSize} netAvailable={netAvailableSize} />
 		<form onsubmit={preventDefault(handleRent)}>
 			<Stack class="py-4 sm:p-4 ">
 				<fieldset class="grid gap-4">

@@ -4,7 +4,6 @@ import { Asset, type NameType } from '@wharfkit/antelope';
 
 export * from './strings';
 export * from './ricardian';
-export * from './resources';
 export * from './style';
 
 export function calculateValue(balance: Asset, currency: Asset): Asset {

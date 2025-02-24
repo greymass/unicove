@@ -1,5 +1,10 @@
-import { ActivityResponse, ActivityResponseAction } from '$lib/types/transaction';
-import { UInt64 } from '@wharfkit/session';
+import {
+	ActionTraceFiltered,
+	ActionTraceReceipt,
+	ActivityResponse,
+	ActivityResponseAction
+} from '$lib/types/transaction';
+import { Checksum256, UInt64 } from '@wharfkit/session';
 
 export class Scene {
 	firstTime: number = $state(0);
@@ -88,6 +93,10 @@ export class ActivityLoader {
 		this.loadRemote(true);
 	}
 
+	public makeKey(trx: Checksum256, act: Checksum256) {
+		return `${trx}-${act}`;
+	}
+
 	private async loadRemote(more: boolean) {
 		try {
 			if (!this.account) return;
@@ -104,14 +113,36 @@ export class ActivityLoader {
 			const activity = ActivityResponse.from(json.activity);
 			const nextStart = -Number(activity.last);
 			const hasMore = activity.actions.length > 0 && activity.last.gt(UInt64.from(0));
-			// const filtered = activity.actions.filter((action) => {
-			// 	console.log(String(account), String(action.action_trace.receiver), action);
-			// 	return action.action_trace.receiver.equals(account);
-			// });
+
+			const digests: string[] = [];
+			const receipts: Record<string, ActionTraceReceipt[]> = {};
+			const filtered = activity.actions
+				.filter((action) => {
+					const key = this.makeKey(action.trace.trx_id, action.trace.receipt.act_digest);
+					if (!receipts[key]) {
+						receipts[key] = [];
+					}
+					receipts[key].push(action.trace.receipt);
+					if (digests.includes(key)) {
+						return false;
+					}
+					digests.push(key);
+					return true;
+				})
+				.map((action) => {
+					const key = this.makeKey(action.trace.trx_id, action.trace.receipt.act_digest);
+					return ActivityResponseAction.from({
+						...action,
+						action_trace: ActionTraceFiltered.from({
+							...action.action_trace,
+							receipts: receipts[key]
+						})
+					});
+				});
 			if (!more) {
-				this.scene.setList(activity.actions, nextStart, hasMore);
+				this.scene.setList(filtered, nextStart, hasMore);
 			} else {
-				this.scene.appendList(activity.actions, nextStart, hasMore);
+				this.scene.appendList(filtered, nextStart, hasMore);
 			}
 		} catch (error: unknown) {
 			console.error('Error fetching activity actions:', error);

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getContext, onMount } from 'svelte';
-	import { goto } from '$app/navigation';
+	import { goto } from '$lib/utils';
 	import { getSnapsProvider, checkIsFlask } from '@wharfkit/wallet-plugin-metamask';
 
 	import Button from '$lib/components/button/button.svelte';
