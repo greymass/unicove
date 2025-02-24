@@ -24,7 +24,6 @@
 	import { ArrowRight } from 'lucide-svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { SerializedSession } from '@wharfkit/session';
-	import { languageTag } from '$lib/paraglide/runtime';
 
 	const context = getContext<UnicoveContext>('state');
 

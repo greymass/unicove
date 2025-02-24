@@ -2,7 +2,6 @@
 	import { getContext } from 'svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
 	import { goto } from '$lib/utils';
-	import { languageTag } from '$lib/paraglide/runtime.js';
 	import { page } from '$app/stores';
 	import Pageheader from '$lib/components/pageheader.svelte';
 	import { Stack } from '$lib/components/layout';
