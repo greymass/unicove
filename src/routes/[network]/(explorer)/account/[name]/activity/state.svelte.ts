@@ -4,7 +4,7 @@ import {
 	ActivityResponse,
 	ActivityResponseAction
 } from '$lib/types/transaction';
-import { Checksum256, Serializer, UInt64 } from '@wharfkit/session';
+import { Checksum256, UInt64 } from '@wharfkit/session';
 
 export class Scene {
 	firstTime: number = $state(0);

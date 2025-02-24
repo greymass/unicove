@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { BlockTimestamp } from '@wharfkit/antelope';
-	import { getContext, onMount } from 'svelte';
+	import { getContext } from 'svelte';
 	import type { ChangeFn } from '@melt-ui/svelte/internal/helpers';
 
 	import Switch from '$lib/components/input/switch.svelte';
@@ -16,7 +16,6 @@
 	import { TimeSeconds } from '$lib/state/settings.svelte.js';
 	import DatetimeInput from '$lib/components/input/datetime.svelte';
 	import type { FormEventHandler } from 'svelte/elements';
-	import Link from '$lib/components/elements/link.svelte';
 	import Button from '$lib/components/button/button.svelte';
 
 	const context = getContext<UnicoveContext>('state');
