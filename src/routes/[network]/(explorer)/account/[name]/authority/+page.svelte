@@ -35,7 +35,7 @@
 		<Card>
 			<div class="flex">
 				<div class="flex-1">
-					<Account name={auth.account_name} class="h2">
+					<Account name={auth.account_name} class="h4">
 						{permission}
 					</Account>
 					<p>
