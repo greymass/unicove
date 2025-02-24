@@ -24,8 +24,7 @@
 	import UserCheck from 'lucide-svelte/icons/user-check';
 	import UserPlus from 'lucide-svelte/icons/user-plus';
 	import Search from 'lucide-svelte/icons/search';
-	import { goto } from '$app/navigation';
-	import { languageTag } from '$lib/paraglide/runtime';
+	import { goto } from '$lib/utils';
 	import { cn } from '$lib/utils/style';
 	import Button from './button/button.svelte';
 	import Text from './input/text.svelte';
@@ -84,7 +83,7 @@
 
 	function redirect(account: NameType) {
 		if (!context.settings.data.preventAccountPageSwitching) {
-			goto(`/${languageTag()}/${network}/account/${account}`);
+			goto(`/${network}/account/${account}`);
 		}
 	}
 

@@ -12,7 +12,7 @@
 
 	import { ApprovalManager } from './manager.svelte';
 	import type { ActionDisplayVariants } from '$lib/types';
-	import { goto } from '$app/navigation';
+	import { goto } from '$lib/utils';
 
 	let { data } = $props();
 

@@ -3,7 +3,7 @@
 	import { createDialog, melt, type CreateDialogProps } from '@melt-ui/svelte';
 	import type TextInput from '../input/text.svelte';
 	import { preventDefault } from '$lib/utils';
-	import { goto } from '$app/navigation';
+	import { goto } from '$lib/utils';
 	import { fade, scale } from 'svelte/transition';
 	import * as m from '$lib/paraglide/messages';
 	import {
@@ -160,7 +160,7 @@
 			context.wharf.switch(result.data as SerializedSession);
 			// Navigate if needed
 			if (!context.settings.data.preventAccountPageSwitching) {
-				goto(`/${languageTag()}${result.url}`);
+				goto(result.url);
 			}
 			return;
 		}
@@ -172,7 +172,7 @@
 
 		// Should this result type navigate to the URL?
 		if (![SearchRecordType.SWITCH, SearchRecordType.UNKNOWN].includes(result.type)) {
-			goto(`/${languageTag()}${result.url}`);
+			goto(result.url);
 		}
 	}
 

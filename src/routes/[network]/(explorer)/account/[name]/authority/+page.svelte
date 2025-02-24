@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { PermissionLevel } from '@wharfkit/antelope';
 	import { getContext } from 'svelte';
-	import { goto } from '$app/navigation';
+	import { goto } from '$lib/utils';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { Card } from '$lib/components/layout/index.js';

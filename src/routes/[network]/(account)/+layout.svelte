@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
-	import { goto } from '$app/navigation';
+	import { goto } from '$lib/utils';
 	import { languageTag } from '$lib/paraglide/runtime.js';
 	import { page } from '$app/stores';
 	import Pageheader from '$lib/components/pageheader.svelte';
@@ -14,12 +14,7 @@
 	// the network matching the account.
 	$effect(() => {
 		if (context.account && !context.account.network.chain.equals(data.network.chain)) {
-			goto(
-				$page.url.pathname.replace(
-					`/${languageTag()}/${data.network}/`,
-					`/${languageTag()}/${context.account.network}/`
-				)
-			);
+			goto($page.url.pathname.replace(`/${data.network}/`, `/${context.account.network}/`));
 		}
 	});
 </script>
