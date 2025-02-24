@@ -209,7 +209,7 @@
 						<Button onclick={addAccount} variant="secondary" class="grow-0 text-white">
 							<div class="flex items-center gap-2">
 								<UserPlus class="mb-0.5 size-5" />
-								<span>Add Account</span>
+								<span>{m.common_add_account()}</span>
 							</div>
 						</Button>
 
@@ -260,7 +260,9 @@
 											<div>{session.actor}@{session.permission}</div>
 											{#if session.walletPlugin.id === 'wallet-plugin-multisig'}
 												<div class="text-xs">
-													↳ multisig using {session.walletPlugin.data.session.actor}
+													↳ {m.common_account_multisig_using_account({
+														account: session.walletPlugin.data.session.actor
+													})}
 												</div>
 											{/if}
 										</div>
@@ -294,8 +296,8 @@
 		<hr class="border-mineShaft-900" />
 
 		<header class="grid justify-center gap-2 py-4 text-center">
-			<span class="h4">Login to Unicove</span>
-			<span class="text-muted text-sm font-medium">Connect your wallet to login</span>
+			<span class="h4">{m.common_login_to_unicove()}</span>
+			<span class="text-muted text-sm font-medium">{m.common_connect_wallet_login()}</span>
 		</header>
 
 		{#if context.wharf.sessionKit}
@@ -327,7 +329,9 @@
 			<!-- <Button  href={`/${network}/signup`} onclick={closeDrawer} variant="primary"> -->
 			<!-- 	Create account -->
 			<!-- </Button> -->
-			<Button class="text-white" onclick={closeAddingAccount} variant="secondary">Cancel</Button>
+			<Button class="text-white" onclick={closeAddingAccount} variant="secondary"
+				>{m.common_cancel()}</Button
+			>
 		</div>
 	</div>
 {/snippet}
