@@ -7,7 +7,7 @@
 
 	interface Props {
 		options: ExtendedSelectOption[];
-		selected: ExtendedSelectOption;
+		selected?: ExtendedSelectOption;
 		onSelectedChange?: ChangeFn<ExtendedSelectOption | undefined>;
 		variant?: SelectOptionVariant;
 		id: string;
