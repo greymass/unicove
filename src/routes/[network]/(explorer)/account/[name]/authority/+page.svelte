@@ -54,5 +54,9 @@
 				</div>
 			</div>
 		</Card>
+	{:else}
+		<Card>
+			<p>No authority assigned.</p>
+		</Card>
 	{/each}
 {/await}
