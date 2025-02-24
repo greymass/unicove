@@ -11,10 +11,13 @@ import {
 	Session,
 	PermissionLevel,
 	ResolvedSigningRequest,
-	type WalletPluginSignResponse
+	type WalletPluginSignResponse,
+	Transaction,
+	TimePoint
 } from '@wharfkit/session';
 
 import { Contract as MsigContract } from '$lib/wharf/contracts/msig';
+import { Contract as TimeContract } from '$lib/wharf/contracts/eosntime';
 import { generateRandomName } from '$lib/utils/random';
 
 export interface WalletPluginMultiSigOptions {
@@ -46,6 +49,7 @@ export class WalletPluginMultiSig extends AbstractWalletPlugin implements Wallet
 		let chain: Checksum256;
 		// Persist the parent session that was passed in arbitrary
 		this.data.session = context.arbitrary.session;
+		this.data.expireSeconds = 60 * 60 * 24 * 365; // 1 year
 		if (context.chain) {
 			chain = context.chain.id;
 		} else {
@@ -104,19 +108,46 @@ export class WalletPluginMultiSig extends AbstractWalletPlugin implements Wallet
 		const requested = await this.getSigners(resolved.signer, context);
 		const session = this.getSession(context);
 		const msig = new MsigContract({ client: context.client });
-		const action = msig.action(
-			'propose',
-			{
-				proposal_name: generateRandomName(),
-				proposer: session.actor,
-				requested,
-				trx: resolved.transaction
-			},
-			{
-				authorization: [session.permissionLevel]
-			}
-		);
-		const result = await session.transact({ action }, { broadcast: false });
+		const eosntime = new TimeContract({ client: context.client });
+
+		let expireSeconds = 60 * 60 * 24 * 30; // 1 month
+		if (this.data.expireSeconds) {
+			expireSeconds = this.data.expireSeconds;
+		}
+
+		if (!context.info) {
+			throw new Error('Missing transaction info');
+		}
+
+		const trx = Transaction.from({
+			...context.info.getTransactionHeader(expireSeconds),
+			actions: resolved.transaction.actions,
+			context_free_actions: [],
+			transaction_extensions: []
+		});
+
+		const actions = [
+			msig.action(
+				'propose',
+				{
+					proposal_name: generateRandomName(),
+					proposer: session.actor,
+					requested,
+					trx
+				},
+				{
+					authorization: [session.permissionLevel]
+				}
+			)
+		];
+
+		if (this.data.earliestExecution) {
+			const date = new Date(this.data.earliestExecution);
+			const time = TimePoint.fromDate(date);
+			actions.push(eosntime.action('checktime', { time }));
+		}
+
+		const result = await session.transact({ actions }, { broadcast: false });
 		return {
 			resolved: result.resolved,
 			signatures: result.signatures

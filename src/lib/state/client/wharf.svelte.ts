@@ -86,7 +86,6 @@ export class WharfState {
 				transactPlugins
 			}
 		);
-		$inspect(this.chainsSession);
 		$effect.root(() => {
 			$effect(() => {
 				localStorage.setItem('chainsSession', JSON.stringify(this.chainsSession));
@@ -97,6 +96,13 @@ export class WharfState {
 	public setSettings(network: NetworkState, settings: SettingsState) {
 		this.settings = settings;
 		this.init(network);
+	}
+
+	public setWalletSetting(key: string, value: unknown) {
+		if (this.sessionKit && this.session) {
+			this.session.walletPlugin.data[key] = value;
+			this.sessionKit.persistSession(this.session);
+		}
 	}
 
 	public async login(options?: LoginOptions): Promise<Session> {
