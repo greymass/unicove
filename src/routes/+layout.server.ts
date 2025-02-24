@@ -4,6 +4,7 @@ import * as m from '$lib/paraglide/messages';
 import { ogImageUrl } from '$lib/utils/opengraph';
 import type { LayoutServerLoad } from './$types';
 import type { NetworkState } from '$lib/state/network.svelte';
+import { error } from '@sveltejs/kit';
 
 function generateMetadata(url: URL, network: NetworkState): SeoConfig {
 	const modified = new URL(url);
@@ -22,6 +23,11 @@ function generateMetadata(url: URL, network: NetworkState): SeoConfig {
 }
 
 export const load: LayoutServerLoad = async ({ locals: { network }, url }) => {
+	if (!network) {
+		error(404, {
+			message: 'Page not found'
+		});
+	}
 	const baseMetaTags = generateMetadata(url, network);
 	return {
 		baseMetaTags

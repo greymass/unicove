@@ -221,9 +221,13 @@ export class ActivityResponseAction extends Struct {
 	}
 
 	get trace(): ActionTraceFiltered {
+		let receipts: ActionTraceReceipt[] = [this.action_trace.receipt];
+		if ((this.action_trace as ActionTraceFiltered).receipts) {
+			receipts = (this.action_trace as ActionTraceFiltered).receipts;
+		}
 		return ActionTraceFiltered.from({
 			...this.action_trace,
-			receipts: [this.action_trace.receipt]
+			receipts
 		});
 	}
 }

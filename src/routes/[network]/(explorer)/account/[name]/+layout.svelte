@@ -1,9 +1,10 @@
 <script lang="ts">
-	import { getContext } from 'svelte';
+	import { getContext, onDestroy, onMount } from 'svelte';
 	import { Stack } from '$lib/components/layout';
 	import PillGroup from '$lib/components/navigation/pillgroup.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
 	import * as m from '$lib/paraglide/messages';
+	import dayjs from 'dayjs';
 
 	const context = getContext<UnicoveContext>('state');
 	const { children, data } = $props();
@@ -23,13 +24,15 @@
 				text: m.navigation_permissions()
 			});
 			items.push({ href: `/${network}/account/${account}/votes`, text: m.navigation_votes() });
-
 			if (data.account.proposals.length > 0) {
 				items.push({
 					href: `/${network}/account/${account}/proposals`,
-					text: m.navigation_proposals()
+					text: m.navigation_proposals({
+						number: data.account.proposals.length
+					})
 				});
 			}
+			items.push({ href: `/${network}/account/${account}/authority`, text: 'Authority' });
 
 			items.push({ href: `/${network}/account/${account}/data`, text: m.common_data() });
 		}
@@ -46,10 +49,34 @@
 
 		return items;
 	});
+
+	let updated: ReturnType<typeof setInterval>;
+	let lastUpdate = $state(0);
+	let refresh: ReturnType<typeof setInterval>;
+	onMount(() => {
+		updated = setInterval(() => {
+			const account = dayjs(data.account.last_update);
+			const current = dayjs(new Date());
+			lastUpdate = account.diff(current, 'seconds') * -1;
+		}, 1000);
+		refresh = setInterval(() => {
+			data.account.refresh();
+		}, 100000);
+	});
+
+	onDestroy(() => {
+		clearInterval(updated);
+		clearInterval(refresh);
+	});
 </script>
 
 <Stack class="gap-6 @container">
 	<PillGroup {options} />
-
 	{@render children()}
 </Stack>
+
+{#if context.settings.data.debugMode}
+	<div class="text-muted text-center text-sm">
+		Account updated {lastUpdate} seconds ago
+	</div>
+{/if}

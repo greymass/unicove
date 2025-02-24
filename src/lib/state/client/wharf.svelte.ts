@@ -1,6 +1,13 @@
 import { ChainDefinition } from '@wharfkit/common';
 import ContractKit, { type ActionDataType } from '@wharfkit/contract';
-import { type NameType, Name, Serializer, Transaction } from '@wharfkit/antelope';
+import {
+	type NameType,
+	Checksum256,
+	Name,
+	PermissionLevel,
+	Serializer,
+	Transaction
+} from '@wharfkit/antelope';
 import {
 	type AccountCreationPlugin,
 	type CreateAccountOptions,
@@ -9,57 +16,21 @@ import {
 	type SerializedSession,
 	type TransactArgs,
 	type TransactOptions,
-	type TransactPlugin,
 	type TransactResult,
-	type WalletPlugin,
 	Session,
 	SessionKit
 } from '@wharfkit/session';
 import WebRenderer from '@wharfkit/web-renderer';
-
-// Wallet Plugins
-import { WalletPluginAnchor } from '@wharfkit/wallet-plugin-anchor';
 import { WalletPluginCleos } from '@wharfkit/wallet-plugin-cleos';
-import { WalletPluginMetaMask } from '@wharfkit/wallet-plugin-metamask';
-import { WalletPluginPrivateKey } from '@wharfkit/wallet-plugin-privatekey';
-import { WalletPluginWombat } from '@wharfkit/wallet-plugin-wombat';
-import { WalletPluginScatter } from '@wharfkit/wallet-plugin-scatter';
-import { WalletPluginTokenPocket } from '@wharfkit/wallet-plugin-tokenpocket';
-
-// Other Plugins
 import { AccountCreationPluginMetamask } from '@wharfkit/account-creation-plugin-metamask';
-import { TransactPluginResourceProvider } from '@wharfkit/transact-plugin-resource-provider';
-import { TransactPluginStatusEmitter } from '$lib/wharf/plugins/status';
 
 import { browser } from '$app/environment';
-import * as env from '$env/static/public';
 
 import { type QueuedTransaction, StatusType, queueTransaction } from '$lib/wharf/transact.svelte';
-import { chainMapper, chains, getChainDefinitionFromParams } from '$lib/wharf/chains';
+import { chainMapper } from '$lib/wharf/chains';
 import type { SettingsState } from '$lib/state/settings.svelte';
 import type { NetworkState } from '$lib/state/network.svelte';
-
-const defaultWalletPlugins: WalletPlugin[] = [
-	new WalletPluginAnchor(),
-	new WalletPluginMetaMask(),
-	new WalletPluginScatter(),
-	new WalletPluginTokenPocket(),
-	new WalletPluginWombat()
-];
-
-const transactPlugins: TransactPlugin[] = [
-	new TransactPluginStatusEmitter(),
-	new TransactPluginResourceProvider()
-];
-
-// If a local key is provided, add the private key wallet
-if (env.PUBLIC_LOCAL_SIGNER) {
-	defaultWalletPlugins.unshift(new WalletPluginPrivateKey(env.PUBLIC_LOCAL_SIGNER));
-}
-
-const chainDefs: ChainDefinition[] = chains.map((chain) =>
-	getChainDefinitionFromParams(chain.name)
-);
+import { chainDefs, transactPlugins, walletPlugins } from '$lib/wharf/plugins';
 
 export class WharfState {
 	public chain?: ChainDefinition = $state();
@@ -89,13 +60,12 @@ export class WharfState {
 		this.contractKit = new ContractKit({
 			client: network.client
 		});
-		const walletPlugins = [...defaultWalletPlugins];
+
 		if (this.settings.data.advancedMode) {
 			walletPlugins.push(new WalletPluginCleos());
 		}
 
 		const accountCreationPlugins: AccountCreationPlugin[] = [];
-
 		if (network.config.metamask) {
 			this.metamaskPlugin = new AccountCreationPluginMetamask({
 				accountCreationServiceUrl: network.config.metamask.serviceurl,
@@ -128,6 +98,13 @@ export class WharfState {
 		this.init(network);
 	}
 
+	public setWalletSetting(key: string, value: unknown) {
+		if (this.sessionKit && this.session) {
+			this.session.walletPlugin.data[key] = value;
+			this.sessionKit.persistSession(this.session);
+		}
+	}
+
 	public async login(options?: LoginOptions): Promise<Session> {
 		if (!this.sessionKit) {
 			throw new Error('User not initialized');
@@ -151,21 +128,23 @@ export class WharfState {
 		if (!this.sessionKit) {
 			throw new Error('User not initialized');
 		}
+
 		await this.sessionKit.logout(session);
+		this.session = undefined;
+
+		this.sessions = await this.sessionKit.getSessions();
+
 		if (session) {
-			if (session instanceof Session) {
-				this.chainsSession[String(session.chain.id)] = undefined;
-			} else {
-				this.chainsSession[String(session.chain)] = undefined;
+			const chain = session instanceof Session ? session.chain.id : Checksum256.from(session.chain);
+			this.chainsSession[String(chain)] = undefined;
+			if (this.sessions) {
+				const newSession = this.sessions.find((s) => Checksum256.from(s.chain).equals(chain));
+				if (newSession) {
+					await this.switch(newSession);
+				}
 			}
 		} else {
 			this.chainsSession = {};
-		}
-		this.sessions = await this.sessionKit.getSessions();
-		if (this.sessions.length > 0) {
-			await this.switch(this.sessions[0]);
-		} else {
-			this.session = undefined;
 		}
 	}
 
@@ -199,6 +178,23 @@ export class WharfState {
 
 	public reset() {
 		this.session = undefined;
+	}
+
+	public async multisig(permissionLevel: PermissionLevel) {
+		if (!this.session || !this.chain || !this.sessionKit) {
+			throw new Error('Session or chain not initialized');
+		}
+		const { session } = await this.sessionKit.login({
+			arbitrary: {
+				session: this.session.serialize()
+			},
+			chain: this.chain,
+			permissionLevel,
+			walletPlugin: 'wallet-plugin-multisig'
+		});
+		this.session = session;
+		this.chainsSession[String(session.chain.id)] = session.serialize();
+		this.sessions = await this.sessionKit.getSessions();
 	}
 
 	async transact(args: TransactArgs, options?: TransactOptions): Promise<TransactResult> {

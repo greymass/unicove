@@ -24,8 +24,7 @@
 	import UserCheck from 'lucide-svelte/icons/user-check';
 	import UserPlus from 'lucide-svelte/icons/user-plus';
 	import Search from 'lucide-svelte/icons/search';
-	import { goto } from '$app/navigation';
-	import { languageTag } from '$lib/paraglide/runtime';
+	import { goto } from '$lib/utils';
 	import { cn } from '$lib/utils/style';
 	import Button from './button/button.svelte';
 	import Text from './input/text.svelte';
@@ -84,7 +83,7 @@
 
 	function redirect(account: NameType) {
 		if (!context.settings.data.preventAccountPageSwitching) {
-			goto(`/${languageTag()}/${network}/account/${account}`);
+			goto(`/${network}/account/${account}`);
 		}
 	}
 
@@ -94,9 +93,12 @@
 		closeDrawer();
 	}
 
-	function removeSession(session?: Session | SerializedSession) {
+	async function removeSession(session?: Session | SerializedSession) {
 		if (session) {
-			context.wharf.logout(session);
+			await context.wharf.logout(session);
+			if (currentSession) {
+				redirect(currentSession.actor);
+			}
 		}
 	}
 
@@ -104,7 +106,7 @@
 		const options: LoginOptions = {
 			walletPlugin: wallet.id
 		};
-		if (wallet.id !== 'cleos') {
+		if (wallet.id !== 'cleos' && wallet.id !== 'wallet-plugin-multisig') {
 			options.chain = context.network.chain;
 		}
 		const session = await context.wharf.login(options);
@@ -207,7 +209,7 @@
 						<Button onclick={addAccount} variant="secondary" class="grow-0 text-white">
 							<div class="flex items-center gap-2">
 								<UserPlus class="mb-0.5 size-5" />
-								<span>Add Account</span>
+								<span>{m.common_add_account()}</span>
 							</div>
 						</Button>
 
@@ -232,7 +234,9 @@
 
 						<ul class="grid gap-2">
 							{#each chainSessions as session}
-								{@const isCurrent = currentSession?.actor.toString() === session.actor}
+								{@const isCurrent =
+									currentSession?.actor.equals(session.actor) &&
+									currentSession?.permission.equals(session.permission)}
 								<li class="grid grid-cols-[1fr_auto] gap-2">
 									<button
 										data-current={isCurrent}
@@ -252,9 +256,16 @@
 											{/if}
 										</div>
 
-										<span class="font-medium">
-											{session.actor}@{session.permission}
-										</span>
+										<div class="text-left font-medium">
+											<div>{session.actor}@{session.permission}</div>
+											{#if session.walletPlugin.id === 'wallet-plugin-multisig'}
+												<div class="text-xs">
+													↳ {m.common_account_multisig_using_account({
+														account: session.walletPlugin.data.session.actor
+													})}
+												</div>
+											{/if}
+										</div>
 									</button>
 									<button
 										onclick={() => removeSession(session)}
@@ -285,30 +296,32 @@
 		<hr class="border-mineShaft-900" />
 
 		<header class="grid justify-center gap-2 py-4 text-center">
-			<span class="h4">Login to Unicove</span>
-			<span class="text-muted text-sm font-medium">Connect your wallet to login</span>
+			<span class="h4">{m.common_login_to_unicove()}</span>
+			<span class="text-muted text-sm font-medium">{m.common_connect_wallet_login()}</span>
 		</header>
 
 		{#if context.wharf.sessionKit}
 			<ul class="grid grid-cols-[auto_1fr_auto]">
 				{#each context.wharf.sessionKit?.walletPlugins as wallet}
-					<li class="table-row-background table-row-border col-span-full grid grid-cols-subgrid">
-						<button
-							class="col-span-full grid grid-cols-subgrid gap-4 px-2 py-4 font-semibold text-white"
-							onclick={() => connectWallet(wallet)}
-						>
-							{#if wallet.metadata.logo}
-								<img
-									class="size-6"
-									src={wallet.metadata.logo.toString()}
-									alt={wallet.metadata.name}
-								/>
-							{:else}
-								<Wallet class="size-6" />
-							{/if}
-							<span class="text-left">{wallet.metadata.name}</span>
-						</button>
-					</li>
+					{#if wallet.id !== 'wallet-plugin-multisig'}
+						<li class="table-row-background table-row-border col-span-full grid grid-cols-subgrid">
+							<button
+								class="col-span-full grid grid-cols-subgrid gap-4 px-2 py-4 font-semibold text-white"
+								onclick={() => connectWallet(wallet)}
+							>
+								{#if wallet.metadata.logo}
+									<img
+										class="size-6"
+										src={wallet.metadata.logo.toString()}
+										alt={wallet.metadata.name}
+									/>
+								{:else}
+									<Wallet class="size-6" />
+								{/if}
+								<span class="text-left">{wallet.metadata.name}</span>
+							</button>
+						</li>
+					{/if}
 				{/each}
 			</ul>
 		{/if}
@@ -316,7 +329,9 @@
 			<!-- <Button  href={`/${network}/signup`} onclick={closeDrawer} variant="primary"> -->
 			<!-- 	Create account -->
 			<!-- </Button> -->
-			<Button class="text-white" onclick={closeAddingAccount} variant="secondary">Cancel</Button>
+			<Button class="text-white" onclick={closeAddingAccount} variant="secondary"
+				>{m.common_cancel()}</Button
+			>
 		</div>
 	</div>
 {/snippet}

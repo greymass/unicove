@@ -8,8 +8,7 @@
 	import { createSelect, melt, type CreateSelectProps } from '@melt-ui/svelte';
 	import { fade } from 'svelte/transition';
 	import { chainMap } from '$lib/wharf/chains';
-	import { goto } from '$app/navigation';
-	import { languageTag } from '$lib/paraglide/runtime';
+	import { goto } from '$lib/utils';
 	import type { NetworkState } from '$lib/state/network.svelte';
 	import * as m from '$lib/paraglide/messages';
 
@@ -37,7 +36,7 @@
 	);
 
 	const onSelectedChange: CreateSelectProps<string>['onSelectedChange'] = ({ next }) => {
-		if (next !== undefined) goto(`/${languageTag()}/${next.label}`);
+		if (next !== undefined) goto(`/${next.label}`);
 		return next;
 	};
 

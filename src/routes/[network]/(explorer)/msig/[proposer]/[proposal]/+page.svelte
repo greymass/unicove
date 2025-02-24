@@ -12,6 +12,7 @@
 
 	import { ApprovalManager } from './manager.svelte';
 	import type { ActionDisplayVariants } from '$lib/types';
+	import { goto } from '$lib/utils';
 
 	let { data } = $props();
 
@@ -25,6 +26,13 @@
 	const top21 = data.producers.splice(0, 21);
 
 	let variant = $derived(context.settings.data.actionDisplayVariant as ActionDisplayVariants);
+
+	async function cancel() {
+		await manager.cancel();
+		goto(`/${data.network}/account/${data.proposal.proposer}/proposals`, {
+			invalidateAll: true
+		});
+	}
 </script>
 
 <Stack>
@@ -142,10 +150,8 @@
 			{/if}
 
 			{#if manager.userIsProposer}
-				<Button
-					variant="secondary"
-					disabled={context.wharf.transacting}
-					onclick={() => manager.cancel()}>{m.msig_cancel_action()}</Button
+				<Button variant="secondary" disabled={context.wharf.transacting} onclick={cancel}
+					>{m.msig_cancel_action()}</Button
 				>
 			{/if}
 

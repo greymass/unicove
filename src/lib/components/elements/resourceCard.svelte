@@ -1,13 +1,16 @@
 <script lang="ts">
+	import type { Int } from '@wharfkit/antelope';
 	import { type Icon } from 'lucide-svelte';
 	import CpuIcon from 'lucide-svelte/icons/cpu';
 	import Wifi from 'lucide-svelte/icons/wifi';
 	import HardDrive from 'lucide-svelte/icons/hard-drive';
+
 	import * as m from '$lib/paraglide/messages';
+	import NumberFormat from '$lib/components/elements/number.svelte';
 
 	interface Props {
 		type: keyof typeof resourceMap;
-		value: string;
+		value: Int;
 		vertical?: boolean;
 	}
 
@@ -53,7 +56,10 @@
 	</h3>
 
 	<p class="*:block">
-		<span class="font-semibold text-white">{props.value} {unit}</span>
+		<span class="font-semibold text-white">
+			<NumberFormat number={props.value.dividing(1000)} />
+			{unit}
+		</span>
 		<span>{m.common_available()}</span>
 	</p>
 </div>

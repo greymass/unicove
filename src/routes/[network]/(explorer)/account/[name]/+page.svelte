@@ -214,9 +214,9 @@
 		{#if context.settings.data.advancedMode}
 			<Card title={m.common_resources()}>
 				<div class="flex flex-wrap gap-12 *:flex-1">
-					<ResourceCard type="cpu" value={String(cpuAvailable)} vertical />
+					<ResourceCard type="cpu" value={cpuAvailable} vertical />
 
-					<ResourceCard type="net" value={String(netAvailable)} vertical />
+					<ResourceCard type="net" value={netAvailable} vertical />
 				</div>
 				{#if isCurrentUser}
 					<Button href={`/${data.network}/resources`} variant="secondary"

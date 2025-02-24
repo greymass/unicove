@@ -141,6 +141,6 @@
 		</Stack>
 	</Card>
 	<AccountBalance cta={{ href: `/${networkName}/staking/stake`, label: m.common_stake() }} />
-	<StakingCalculator {apr} network={data.network} tokenprice={data.network.token.price} />
 	<UnstakingBalances records={unstaking} />
+	<StakingCalculator {apr} network={data.network} tokenprice={data.network.token.price} />
 </MultiCard>

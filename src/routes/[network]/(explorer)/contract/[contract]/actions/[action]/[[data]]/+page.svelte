@@ -156,6 +156,7 @@
 	}
 
 	function clear() {
+		error = undefined;
 		transactResult = undefined;
 	}
 
