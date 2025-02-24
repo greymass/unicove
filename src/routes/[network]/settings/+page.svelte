@@ -51,7 +51,7 @@
 	});
 
 	const range: ExtendedSelectOption[] = [
-		{ label: '15 mintes', value: TimeSeconds['15m'] },
+		{ label: '15 minutes', value: TimeSeconds['15m'] },
 		{ label: '1 day', value: TimeSeconds['1d'] },
 		{ label: '1 week', value: TimeSeconds['1w'] },
 		{ label: '1 month', value: TimeSeconds['1mo'] },
