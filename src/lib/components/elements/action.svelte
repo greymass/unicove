@@ -1,6 +1,7 @@
 <script lang="ts">
 	import {
 		Action,
+		Checksum256,
 		Name,
 		PermissionLevel,
 		type ABISerializable,
@@ -66,7 +67,7 @@
 					</li>
 				{/each}
 			</ol>
-		{:else if isObject}
+		{:else if isObject && value}
 			<div class="ml-4">
 				{#each Object.keys(value) as k}
 					{@render KeyValue(k, value[k])}
@@ -196,6 +197,9 @@
 			{@render Decoded()}
 		{:else if variant === 'json'}
 			{@render CodeBox(action)}
+		{/if}
+		{#if objectified && objectified.code}
+			{@render Pretty({ hash: String(Checksum256.hash(objectified.code)) })}
 		{/if}
 		{#if variant !== 'summary'}
 			{@render Footer()}

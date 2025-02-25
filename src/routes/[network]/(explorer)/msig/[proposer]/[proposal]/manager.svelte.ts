@@ -122,7 +122,10 @@ export class ApprovalManager {
 
 			// If this action is a setabi, set override for future actions in loop
 			if (action.account.equals('eosio') && action.name.equals('setabi')) {
-				const setabi = SystemContract.Types.setabi.from(action.data);
+				const setabi = Serializer.decode({
+					type: SystemContract.Types.setabi,
+					data: action.data
+				});
 				const decoded = Serializer.decode({
 					type: ABI,
 					data: setabi.abi
