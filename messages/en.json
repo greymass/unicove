@@ -18,7 +18,7 @@
 	"change_network": "Change network",
 	"coinbase_service_unavailable": "Coinbase service is currently unavailable.",
 	"common_about_something": "About {thing}",
-	"common_account": "Actor",
+	"common_account": "Account",
 	"common_account_balance": "Account Balance",
 	"common_account_multisig_using_account": "multisig using {account}",
 	"common_action": "Action",
