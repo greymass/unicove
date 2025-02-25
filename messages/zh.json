@@ -17,6 +17,7 @@
 	"change_network": "切换网络",
 	"coinbase_service_unavailable": "Coinbase 服务目前不可用。",
 	"common_about_something": "关于{thing}",
+	"common_account": "行为人",
 	"common_account_balance": "账户余额",
 	"common_action": "操作",
 	"common_actions": "操作",
