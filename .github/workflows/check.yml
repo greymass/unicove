@@ -28,7 +28,7 @@ jobs:
         run: bun run build-paraglide
 
       - name: Install Playwright
-        run: npm install -D @playwright/test
+        run: npm install -D @playwright/test --legacy-peer-deps
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
