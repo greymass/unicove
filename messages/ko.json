@@ -17,6 +17,7 @@
 	"change_network": "네트워크 변경",
 	"coinbase_service_unavailable": "현재 Coinbase 서비스를 이용할 수 없습니다.",
 	"common_about_something": "{thing} 에 대한 정보",
+	"common_account": "배우",
 	"common_account_balance": "계정 잔액",
 	"common_action": "행동",
 	"common_actions": "행위",
