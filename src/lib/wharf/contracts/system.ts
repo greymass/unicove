@@ -1095,7 +1095,7 @@ export namespace Types {
 		declare account: Name;
 		@Struct.field(Bytes)
 		declare abi: Bytes;
-		@Struct.field('string', { optional: true })
+		@Struct.field('string', { extension: true })
 		declare memo?: string;
 	}
 	@Struct.type('setacctcpu')
