@@ -11,7 +11,6 @@ import {
 	type NameType
 } from '@wharfkit/antelope';
 import type { REXState } from '@wharfkit/resources';
-import { TokenMeta, TokenBalance, TokenIdentifier } from '@wharfkit/common';
 
 import type { NetworkState } from '$lib/state/network.svelte';
 import type {
@@ -29,6 +28,8 @@ import {
 	nullContractHash
 } from '$lib/state/defaults/account';
 import * as SystemContract from '$lib/wharf/contracts/system';
+import { TokenDefinition, TokenMeta, type Token } from '$lib/types/token';
+import { TokenBalance } from '@wharfkit/common';
 
 export class AccountState {
 	public client?: APIClient = $state();
@@ -360,7 +361,7 @@ export function getBalances(
 	network: NetworkState,
 	sources: AccountDataSources,
 	chain: Checksum256,
-	tokens?: TokenMeta[],
+	tokens?: Token[],
 	liquid?: Asset
 ): TokenBalance[] {
 	if (sources.light_api) {
@@ -390,13 +391,13 @@ export function getBalances(
 			}
 			const asset = Asset.from(`${amount} ${balance.currency}`);
 			const contract = Name.from(balance.contract);
-			const id = TokenIdentifier.from({
-				chain: chain,
+			const id = TokenDefinition.from({
+				chainId: chain,
 				contract: contract,
 				symbol: asset.symbol
 			});
 			const metadata =
-				tokens && tokens.length > 0 ? tokens.find((meta) => meta.id.equals(id)) : undefined;
+				tokens && tokens.length > 0 ? tokens.find((token) => token.meta.id.equals(id)) : undefined;
 			balances.push(
 				TokenBalance.from({
 					asset,
@@ -420,14 +421,14 @@ export function getBalances(
 		// Move system token to the top of the list regardless of alphabetical order
 		balances.sort((a, b) => {
 			if (
-				a.contract.equals(network.token.definition.contract) &&
-				a.asset.symbol.equals(network.token.definition.symbol)
+				a.contract.equals(network.token.contract) &&
+				a.asset.symbol.equals(network.token.symbol)
 			) {
 				return -1;
 			}
 			if (
-				b.contract.equals(network.token.definition.contract) &&
-				b.asset.symbol.equals(network.token.definition.symbol)
+				b.contract.equals(network.token.contract) &&
+				b.asset.symbol.equals(network.token.symbol)
 			) {
 				return 1;
 			}

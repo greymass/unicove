@@ -50,9 +50,11 @@
 			</Stack>
 		</Box>
 
-		<!-- Graphics -->
-		<div class="col-span-full grid place-items-center">
-			<StakedHEX staked={network.token.distribution.staked} {apr} />
-		</div>
+		{#if network.token.distribution}
+			<!-- Graphics -->
+			<div class="col-span-full grid place-items-center">
+				<StakedHEX staked={network.token.distribution.staked} {apr} />
+			</div>
+		{/if}
 	</Switcher>
 </section>

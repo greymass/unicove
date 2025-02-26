@@ -125,7 +125,7 @@
 				<tbody class="*:border-b *:border-mineShaft-900 *:pt-8 last:*:border-b-0 *:even:text-right">
 					<tr class="*:py-2">
 						<td class="text-muted text-base">
-							{data.network.token.definition.symbol.code || ''}/RAM (KB)
+							{data.network.token.symbol.code || ''}/RAM (KB)
 						</td>
 						<td class="text-right font-medium text-white">
 							<AssetText variant="full" value={kbValueToken} />

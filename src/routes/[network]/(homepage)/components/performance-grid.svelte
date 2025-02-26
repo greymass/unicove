@@ -74,7 +74,7 @@
 			<!-- Token price -->
 			<Card class="grid flex-1 content-between gap-4 @sm:shrink">
 				<h3 class="text-muted text-sm">
-					{network.token.definition.symbol.name}/{network.token.price.symbol.name}
+					{network.token.symbol.name}/{network.token.price.symbol.name}
 				</h3>
 				<p class="justify-self-end text-nowrap text-xl font-semibold text-white">
 					<AssetText value={network.token.price} variant="full" />
@@ -83,7 +83,7 @@
 
 			<!-- Ram Eos pair -->
 			<Card class="grid flex-1 content-between gap-4  bg-mineShaft-900/60">
-				<h3 class="text-muted text-sm">RAM/{network.token.definition.symbol.name}</h3>
+				<h3 class="text-muted text-sm">RAM/{network.token.symbol.name}</h3>
 				<p class="justify-self-end text-nowrap text-xl font-semibold text-white">
 					<AssetText value={network.resources.ram.price.rammarket} variant="full" />
 				</p>

@@ -50,7 +50,7 @@ export class StakeManager {
 				contract: this.network.contracts.token.account,
 				symbol: this.network.chain.systemToken!.symbol
 			};
-			const meta = (this.network.tokens || []).find((item) => item.id.equals(tokenIdentifier));
+			const meta = (this.network.tokens || []).find((item) => item.meta.id.equals(tokenIdentifier));
 			if (meta) {
 				balance = TokenBalance.from({
 					asset: this.staked,

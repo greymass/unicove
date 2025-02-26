@@ -16,7 +16,6 @@ import { snapOrigins } from '@wharfkit/wallet-plugin-metamask';
 
 import {
 	NetworkDataSources,
-	SystemToken,
 	type ChainConnectionState,
 	type NetworkStateOptions,
 	type SerializedNetworkState,
@@ -32,6 +31,8 @@ import {
 	getChainConfigByName
 } from '$lib/wharf/chains';
 
+import { type TokenType, TokenDistribution, Token } from '$lib/types/token';
+
 import { calculateValue } from '$lib/utils';
 
 import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
@@ -39,8 +40,8 @@ import { Contract as MSIGContract } from '$lib/wharf/contracts/msig';
 import { Contract as SystemContract } from '$lib/wharf/contracts/system';
 import { Contract as TimeContract } from '$lib/wharf/contracts/eosntime';
 import { Contract as TokenContract } from '$lib/wharf/contracts/token';
-import { Contract as UnicoveContract, Types as UnicoveTypes } from '$lib/wharf/contracts/unicove';
-import { defaultPrice, defaultPriceSymbol } from './defaults/network';
+import { Contract as UnicoveContract } from '$lib/wharf/contracts/unicove';
+import { defaultPriceSymbol } from './defaults/network';
 import type { ObjectifiedActionData } from '$lib/types/transaction';
 
 export class NetworkState {
@@ -71,21 +72,13 @@ export class NetworkState {
 		updated: new Date()
 	});
 	public loaded = $state(false);
-	public tokens?: TokenMeta[] = $state();
+	public tokens: Token[] = $state([]);
 
 	constructor(config: ChainConfig, options: NetworkStateOptions = {}) {
 		this.config = config;
 		this.chain = getChainDefinitionFromParams(config.name);
 		this.shortname = chainMapper.toShortName(String(this.chain.id));
 		this.snapOrigin = snapOrigins.get(this.shortname);
-		this.tokens = this.config.tokens.map((token) =>
-			TokenMeta.from({
-				id: TokenIdentifier.from({
-					chain: this.chain.id,
-					...token
-				})
-			})
-		);
 
 		if (options.fetch) {
 			this.fetch = options.fetch;
@@ -155,43 +148,38 @@ export class NetworkState {
 		}
 	}
 
-	getSystemToken(): SystemToken {
-		if (this.sources?.token) {
-			return SystemToken.from({
-				definition: this.sources.token.def,
-				distribution: {
-					circulating: this.sources.token.circulating,
-					locked: this.sources.token.locked,
-					staked: this.sources.rex.total_lendable,
-					supply: this.sources.token.supply,
-					max: this.sources.token.max
-				},
-				marketcap: calculateValue(
-					this.sources.token.circulating,
-					Asset.fromUnits(this.sources.oracle?.median || 0, defaultPriceSymbol)
-				),
-				price: Asset.fromUnits(this.sources.oracle?.median || 0, defaultPriceSymbol)
-			});
-		}
-		return this.defaultSystemToken;
-	}
-
-	get defaultSystemToken(): SystemToken {
-		return SystemToken.from({
-			definition: UnicoveTypes.token_definition.from({
-				contract: this.config.systemtoken.contract,
-				symbol: this.config.systemtoken.symbol
-			}),
-			distribution: {
-				circulating: Asset.fromUnits(0, this.config.systemtoken.symbol),
-				locked: Asset.fromUnits(0, this.config.systemtoken.symbol),
-				staked: Asset.fromUnits(0, this.config.systemtoken.symbol),
-				supply: Asset.fromUnits(0, this.config.systemtoken.symbol),
-				max: Asset.fromUnits(0, this.config.systemtoken.symbol)
-			},
-			marketcap: calculateValue(Asset.fromUnits(0, this.config.systemtoken.symbol), defaultPrice),
-			price: defaultPrice
+	getSystemToken(): Token {
+		const id = TokenIdentifier.from({
+			chain: this.chain.id,
+			symbol: this.config.systemtoken.symbol,
+			contract: this.config.systemtoken.contract
 		});
+
+		const meta = TokenMeta.from({
+			id,
+			logo: this.chain.logo,
+			website: ''
+		});
+
+		const tokenData: TokenType = {
+			meta,
+			price: Asset.fromUnits(this.sources?.oracle?.median || 0, defaultPriceSymbol),
+			prices: []
+		};
+
+		if (this.sources) {
+			tokenData.distribution = TokenDistribution.from({
+				circulating: this.sources.token.circulating,
+				locked: this.sources.token.locked,
+				staked: this.sources.rex.total_lendable,
+				supply: this.sources.token.supply,
+				max: this.sources.token.max
+			});
+
+			tokenData.marketcap = calculateValue(this.sources?.token?.circulating, tokenData.price);
+		}
+
+		return Token.from(tokenData);
 	}
 
 	getRexState() {
@@ -258,7 +246,7 @@ export class NetworkState {
 	};
 
 	getResources(): SystemResources {
-		const defaultValue = Asset.fromUnits(0, this.token.definition.symbol);
+		const defaultValue = Asset.fromUnits(0, this.token.symbol);
 		const response: SystemResources = {
 			cpu: {
 				price: {
@@ -295,22 +283,22 @@ export class NetworkState {
 			const pstate = PowerUpState.from(this.sources.powerup);
 			response.cpu.price.powerup = Asset.from(
 				pstate.cpu.price_per_ms(this.sources.sample, 1),
-				this.token.definition.symbol
+				this.token.symbol
 			);
 			response.net.price.powerup = Asset.from(
 				pstate.net.price_per_kb(this.sources.sample, 1),
-				this.token.definition.symbol
+				this.token.symbol
 			);
 		}
 
 		if (this.supports('rentrex') && this.rex && this.sources?.sample) {
 			response.cpu.price.rex = Asset.from(
 				this.rex.cpu_price_per_ms(this.sources.sample, 30),
-				this.token.definition.symbol
+				this.token.symbol
 			);
 			response.net.price.rex = Asset.from(
 				this.rex.net_price_per_kb(this.sources.sample, 30),
-				this.token.definition.symbol
+				this.token.symbol
 			);
 		}
 
@@ -318,8 +306,8 @@ export class NetworkState {
 			const account = this.sources.sample.account;
 			const cpuPrice = account.cpu_weight.multiplying(1000).dividing(account.cpu_limit.max);
 			const netPrice = account.net_weight.multiplying(1000).dividing(account.net_limit.max);
-			response.cpu.price.staking = Asset.fromUnits(cpuPrice, this.token.definition.symbol);
-			response.net.price.staking = Asset.fromUnits(netPrice, this.token.definition.symbol);
+			response.cpu.price.staking = Asset.fromUnits(cpuPrice, this.token.symbol);
+			response.net.price.staking = Asset.fromUnits(netPrice, this.token.symbol);
 		}
 
 		return response;
