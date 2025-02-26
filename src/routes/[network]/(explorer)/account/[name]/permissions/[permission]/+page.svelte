@@ -3,6 +3,7 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext, onMount } from 'svelte';
 	import * as m from '$lib/paraglide/messages';
+	import TextInput from '$lib/components/input/text.svelte';
 	import Permission from '../permission.svelte';
 	import {
 		API,
@@ -26,9 +27,10 @@
 	import Contract from '$lib/components/elements/contract.svelte';
 	import Account from '$lib/components/button/account.svelte';
 	import dayjs from 'dayjs';
-	import { Clock } from 'lucide-svelte';
+	import { Clock, XIcon } from 'lucide-svelte';
 	import CopyButton from '$lib/components/button/copy.svelte';
 	import Key from '$lib/components/elements/key.svelte';
+	import { i18n } from '$lib/i18n';
 
 	interface PermissionWeight {
 		permission: {
@@ -268,189 +270,224 @@
 </script>
 
 {#if data.permission}
-	<li class="relative col-span-full grid grid-cols-subgrid bg-shark-950">
-		<dl
-			class="z-20 col-span-full space-y-1 rounded-t-lg bg-mineShaft-950 px-4 py-3 md:col-span-1 md:rounded-l-lg"
-		>
-			<div>
-				<dt class="sr-only">{m.common_permission_name()}</dt>
-				<dd class="text-xl font-semibold text-white">{data.permission.perm_name}</dd>
-			</div>
-			<div class="text-muted text-nowrap *:inline">
-				<dt class="after:content-[':']">
-					<span class="sr-only">{m.common_permission_threshold()}</span>
-					{m.common_required()}
-				</dt>
-				<dd>{data.permission.required_auth.threshold}</dd>
-			</div>
-			{#if data.permission.linked_actions}
-				<div class="">
-					<dt class="sr-only">{m.common_actions()}</dt>
-					{#each data.permission.linked_actions as { action, account }}
-						<dd>
-							<Contract name={account} {action} class="flex">
-								<span class="account">{account}</span>
-								{#if action}
-									<span class="action">::{action}</span>
-								{/if}
-							</Contract>
-						</dd>
-					{/each}
+	<article class="relative col-span-full grid gap-12">
+		<section class="grid grid-cols-[12ch_1fr_1fr_auto] gap-6">
+			<header class="col-span-full">
+				<h2 class="text-xl font-semibold text-white">Authorizations</h2>
+				<p>
+					Edit which authorizations are available for the {data.permission.perm_name} permission of the
+					{data.name} account
+				</p>
+			</header>
+
+			<div class="col-span-full grid gap-4 rounded-lg bg-mineShaft-950/50 p-4">
+				<div class="col-span-full space-y-1">
+					<h3 class="h4 font-semibold">Threshold</h3>
+					<p class="">
+						Define how many accounts, keys, or waits are required to authorize the permission
+					</p>
 				</div>
-			{/if}
-		</dl>
+				<fieldset class="grid gap-2">
+					<Label class="text-xs" for="threshold">{m.common_required()}</Label>
+					<NumberInput
+						id="threshold"
+						placeholder={m.common_permission_threshold()}
+						bind:value={threshold}
+					/>
+				</fieldset>
+			</div>
 
-		<div class="space-y-4 rounded-b-lg bg-mineShaft-950/50 px-4 py-3 md:rounded-r-lg">
-			<Button onclick={addKey}>Add Key</Button>
-			<Button onclick={addAccount}>Add Account</Button>
-			<Button onclick={addWait}>Add Wait</Button>
-			<fieldset class="grid gap-2">
-				<Label for="threshold">{m.common_permission_threshold()}</Label>
-				<NumberInput
-					id="threshold"
-					placeholder={m.common_permission_threshold()}
-					bind:value={threshold}
-				/>
-			</fieldset>
-			{#if keys.length}
-				<table>
-					<thead>
-						<tr>
-							<th>{m.common_permission_weight()}</th>
-							<th>{m.common_public_key()}</th>
-						</tr>
-					</thead>
-					<tbody>
+			<div class="subgrid gap-4 rounded-lg bg-mineShaft-950/50 p-4">
+				<div class="col-span-full space-y-1">
+					<h3 class="h4 font-semibold">Keys</h3>
+					<p class="">Additional keys that can authorize the permission</p>
+				</div>
+				{#if keys.length}
+					<div class="subgrid gap-2">
+						<div class="subgrid">
+							<span>{m.common_permission_weight()}</span>
+							<span>{m.common_public_key()}</span>
+						</div>
 						{#each keys as key, index (key)}
-							<tr data-hover-effect="false">
-								<td>
-									<fieldset class="grid gap-2">
-										<NumberInput
-											min={1}
-											bind:value={keys[index].value.weight}
-											bind:valid={keys[index].valid.weight}
-										/>
-									</fieldset>
-								</td>
-								<td>
-									<fieldset class="grid gap-2">
-										<PublicKeyInput
-											id="key-{index}-key"
-											placeholder={m.common_public_key()}
-											bind:value={keys[index].value.key}
-											bind:valid={keys[index].valid.key}
-										/>
-									</fieldset>
-								</td>
-								<td>
-									<Button variant="secondary" onclick={() => removeKey(index)}
-										>{m.common_remove()}</Button
-									>
-								</td>
-							</tr>
+							<div class="subgrid">
+								<NumberInput
+									id={`key-${index}-weight`}
+									min={1}
+									bind:value={keys[index].value.weight}
+									bind:valid={keys[index].valid.weight}
+								/>
+
+								<PublicKeyInput
+									class="col-span-2"
+									id="key-{index}-key"
+									placeholder={m.common_public_key()}
+									bind:value={keys[index].value.key}
+									bind:valid={keys[index].valid.key}
+								/>
+
+								<button
+									class="text-muted grid size-12 place-items-center hover:text-white"
+									onclick={() => removeKey(index)}
+								>
+									<XIcon class="size-6" />
+								</button>
+							</div>
 						{/each}
-					</tbody>
-				</table>
-			{/if}
-			{#if accounts.length}
-				<table>
-					<thead>
-						<tr>
-							<th>{m.common_permission_weight()}</th>
-							<th>{m.common_account_name()}</th>
-							<th>{m.common_permission_name()}</th>
-							<th>thing</th>
-						</tr>
-					</thead>
-					<tbody>
+					</div>
+				{/if}
+
+				<Button class="col-span-full justify-self-start" variant="primary" onclick={addKey}
+					>Add Key</Button
+				>
+			</div>
+
+			<div class="subgrid gap-4 rounded-lg bg-mineShaft-950/50 p-4">
+				<div class="col-span-full space-y-1">
+					<h3 class="h4 font-semibold">Accounts</h3>
+					<p class="">Additional accounts that can authorize the permission</p>
+				</div>
+				{#if accounts.length}
+					<div class="subgrid gap-2">
+						<div class="subgrid">
+							<span>{m.common_permission_weight()}</span>
+							<span>{m.common_account_name()}</span>
+							<span>{m.common_permission_name()}</span>
+						</div>
 						{#each accounts as account, index (account)}
-							<tr data-hover-effect="false">
-								<td>
-									<fieldset class="grid gap-2">
-										<NumberInput
-											min={1}
-											placeholder={m.common_permission_weight()}
-											bind:value={accounts[index].value.weight}
-											bind:valid={accounts[index].valid.weight}
-										/>
-									</fieldset>
-								</td>
-								<td>
-									<fieldset class="grid gap-2">
-										<NameInput
-											placeholder={m.common_account()}
-											bind:value={accounts[index].value.permission.actor}
-											bind:valid={accounts[index].valid.actor}
-										/>
-									</fieldset>
-								</td>
-								<td>
-									<fieldset class="grid gap-2">
-										<NameInput
-											placeholder={m.common_permission()}
-											bind:value={accounts[index].value.permission.permission}
-											bind:valid={accounts[index].valid.permission}
-										/>
-									</fieldset>
-								</td>
-								<td>
-									<Button variant="secondary" onclick={() => removeAccount(index)}
-										>{m.common_remove()}</Button
-									>
-								</td>
-							</tr>
+							<div class="subgrid">
+								<fieldset class="grid gap-2">
+									<NumberInput
+										min={1}
+										placeholder={m.common_permission_weight()}
+										bind:value={accounts[index].value.weight}
+										bind:valid={accounts[index].valid.weight}
+									/>
+								</fieldset>
+
+								<fieldset class="grid gap-2">
+									<NameInput
+										placeholder={m.common_account()}
+										bind:value={accounts[index].value.permission.actor}
+										bind:valid={accounts[index].valid.actor}
+									/>
+								</fieldset>
+
+								<fieldset class="grid gap-2">
+									<NameInput
+										placeholder={m.common_permission()}
+										bind:value={accounts[index].value.permission.permission}
+										bind:valid={accounts[index].valid.permission}
+									/>
+								</fieldset>
+
+								<button
+									class="text-muted grid size-12 place-items-center hover:text-white"
+									onclick={() => removeAccount(index)}
+								>
+									<XIcon />
+								</button>
+							</div>
 						{/each}
-					</tbody>
-				</table>
-			{/if}
-			{#if waits.length}
-				<table>
-					<thead>
-						<tr>
-							<th>{m.common_permission_weight()}</th>
-							<th>Wait (Seconds)</th>
-						</tr>
-					</thead>
-					<tbody>
+					</div>
+				{/if}
+				<Button class="col-span-full justify-self-start" variant="primary" onclick={addAccount}
+					>Add Account</Button
+				>
+			</div>
+
+			<div class="subgrid gap-4 rounded-lg bg-mineShaft-950/50 p-4">
+				<div class="col-span-full space-y-1">
+					<h3 class="h4 font-semibold">Waits</h3>
+					<p class="">Increase the amount of time required to execute a transaction</p>
+				</div>
+				{#if waits.length}
+					<div class="subgrid gap-2">
+						<div class="subgrid">
+							<span>{m.common_permission_weight()}</span>
+							<span>Wait (Seconds)</span>
+						</div>
+
 						{#each waits as wait, index (wait)}
-							<tr>
-								<td>
-									<fieldset class="grid gap-2">
-										<NumberInput
-											placeholder={m.common_permission_weight()}
-											min={1}
-											bind:value={waits[index].value.weight}
-											bind:valid={waits[index].valid.weight}
-										/>
-									</fieldset>
-								</td>
-								<td>
-									<fieldset class="grid gap-2">
-										<NumberInput
-											bind:value={waits[index].value.wait_sec}
-											bind:valid={waits[index].valid.wait_sec}
-										/>
-									</fieldset>
-								</td>
-								<td>
-									<Button variant="secondary" onclick={() => removeWait(index)}
-										>{m.common_remove()}</Button
-									>
-								</td>
-							</tr>
+							<div class="subgrid">
+								<NumberInput
+									placeholder={m.common_permission_weight()}
+									min={1}
+									bind:value={waits[index].value.weight}
+									bind:valid={waits[index].valid.weight}
+								/>
+
+								<NumberInput
+									class="col-span-2"
+									bind:value={waits[index].value.wait_sec}
+									bind:valid={waits[index].valid.wait_sec}
+								/>
+
+								<button
+									class="text-muted grid size-12 place-items-center hover:text-white"
+									onclick={() => removeWait(index)}
+								>
+									<XIcon />
+								</button>
+							</div>
 						{/each}
-					</tbody>
-				</table>
-			{/if}
-		</div>
-	</li>
+					</div>
+				{/if}
+				<Button class="col-span-full justify-self-start" variant="primary" onclick={addWait}
+					>Add Wait</Button
+				>
+			</div>
+		</section>
+
+		<section class="grid grid-cols-[1fr_1fr_auto] gap-6">
+			<header class="col-span-full">
+				<h2 class="text-xl font-semibold text-white">Contracts</h2>
+				<p>
+					Add or remove contracts associated with the {data.permission.perm_name} permission of the
+					{data.name}
+					account
+				</p>
+			</header>
+
+			<div class="subgrid gap-4 rounded-lg bg-mineShaft-950/50 p-4">
+				{#if keys.length}
+					<div class="subgrid gap-2">
+						<div class="subgrid text-muted">
+							<span>Contract</span>
+							<span>Action</span>
+						</div>
+						{#each data.permission.linked_actions as { action, account }}
+							<div class="subgrid items-center">
+								<span class="account">{account}</span>
+								<span class="action">::{action}</span>
+
+								<button
+									class=" text-muted grid size-12 place-items-center justify-self-end hover:text-white"
+									onclick={() => {}}
+								>
+									<!-- TODO: Remove contract on click -->
+									<XIcon class="size-6" />
+								</button>
+							</div>
+						{/each}
+
+						<TextInput />
+						<TextInput />
+						<Button variant="primary" onclick={addKey}>Add Contract</Button>
+					</div>
+				{/if}
+			</div>
+		</section>
+
+		<footer class="col-span-full flex justify-end gap-4 *:flex-none">
+			<Button variant="tertiary" href={i18n.route(data.backPath)}>Cancel</Button>
+			<Button variant="primary" disabled={!allValid} onclick={transact}>Save</Button>
+		</footer>
+	</article>
 {/if}
 
-{#if modified}
-	<Permission permission={{ permission: modified, children: [] }} />
-{/if}
-
-<Button disabled={!allValid} onclick={transact}>Go</Button>
+<!-- {#if modified} -->
+<!-- 	<Permission permission={{ permission: modified, children: [] }} /> -->
+<!-- {/if} -->
 
 {#if context.settings.data.debugMode}
 	<Code

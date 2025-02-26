@@ -6,7 +6,7 @@
 	import Account from '$lib/components/elements/account.svelte';
 	import Contract from '$lib/components/elements/contract.svelte';
 	import dayjs from 'dayjs';
-	import { Clock } from 'lucide-svelte';
+	import { Clock, Edit, LogIn } from 'lucide-svelte';
 	import * as m from '$lib/paraglide/messages';
 
 	interface Props {
@@ -21,6 +21,10 @@
 			permission.required_auth.keys.length ||
 			permission.required_auth.waits.length
 	);
+
+	const editUrl = $derived('permissions/' + permission.perm_name);
+
+	const isCurrentUser = $derived(true); // TODO:
 </script>
 
 <li
@@ -29,11 +33,20 @@
 	class:pt-6={level !== 0}
 >
 	<dl
-		class="z-20 col-span-full space-y-1 rounded-t-lg bg-mineShaft-950 px-4 py-3 md:col-span-1 md:rounded-l-lg"
+		class="z-20 col-span-full space-y-1 rounded-t-lg bg-mineShaft-950 px-4 py-3 md:col-span-1 md:rounded-l-lg md:rounded-r-none"
 	>
 		<div>
 			<dt class="sr-only">{m.common_permission_name()}</dt>
-			<dd class="text-xl font-semibold text-white">{permission.perm_name}</dd>
+			<dd class="text-xl font-semibold text-white">
+				{#if isCurrentUser}
+					<button onclick={() => {}} class="flex items-center gap-2">
+						{permission.perm_name}
+						<LogIn class="text-muted size-4 hover:text-white" />
+					</button>
+				{:else}
+					{permission.perm_name}
+				{/if}
+			</dd>
 		</div>
 		<div class="text-muted text-nowrap *:inline">
 			<dt class="after:content-[':']">
@@ -59,7 +72,7 @@
 		{/if}
 	</dl>
 
-	<div class="rounded-b-lg bg-mineShaft-950/50 px-4 py-3 md:rounded-r-lg">
+	<div class="rounded-b-lg bg-mineShaft-950/50 px-4 py-3 md:rounded-l-none md:rounded-r-lg">
 		{#if anyPermissions}
 			<table class="grid grid-cols-[auto_1fr_auto] gap-x-4 gap-y-2">
 				<thead class="col-span-full grid grid-cols-subgrid">
@@ -68,6 +81,11 @@
 					>
 						<th>{m.common_permission_weight()}</th>
 						<th>{m.common_permission_authorization()}</th>
+						<th class="flex items-center gap-2">
+							<a href={editUrl}>
+								<Edit class="size-4" />
+							</a>
+						</th>
 					</tr>
 				</thead>
 				<tbody class="col-span-full grid grid-cols-subgrid gap-x-4 gap-y-2">
@@ -83,7 +101,7 @@
 								<td>
 									<Key {key} icon />
 								</td>
-								<td>
+								<td class="grid h-full items-center justify-items-end">
 									<CopyButton data={key.toString()} slop={false} />
 								</td>
 							</tr>
