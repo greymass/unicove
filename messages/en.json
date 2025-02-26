@@ -211,7 +211,7 @@
 	"explorer_account_balances_subtitle": "Token balances on the {network} Network.",
 	"explorer_account_permissions_meta_description": "Permissions for {account} on the {network} network.",
 	"explorer_account_permissions_meta_title": "Permissions | {account} | {network} Network",
-	"explorer_account_permissions_subtitle": "Permissions on the {network} Network.",
+	"explorer_account_permissions_subtitle": "Permissions on the {network} Network",
 	"form_validation_insufficient_balance": "Insufficient {unit} balance. Please enter a smaller amount.",
 	"form_validation_invalid_number_decimals": "Invalid number, too many decimal places.",
 	"fund_account": "Fund Account",
