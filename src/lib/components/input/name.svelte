@@ -3,7 +3,7 @@
 	import type { ComponentProps } from 'svelte';
 	import TextInput from './text.svelte';
 
-	interface NameInputProps extends ComponentProps<TextInput> {
+	interface NameInputProps extends ComponentProps<typeof TextInput> {
 		valid?: boolean;
 		value: Name;
 		debug?: boolean;
