@@ -1,3 +1,4 @@
+import { Name } from '@wharfkit/antelope';
 import type { PageLoad } from './$types';
 import * as m from '$lib/paraglide/messages';
 
@@ -10,7 +11,7 @@ export const load: PageLoad = async ({ params, parent, url }) => {
 
 	return {
 		permission,
-		permissionName: params.permission,
+		permissionName: Name.from(params.permission),
 		backPath,
 		title: params.permission,
 		subtitle: 'Edit permission for ' + params.name + ' on ' + network.chain.name,
