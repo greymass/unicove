@@ -126,4 +126,8 @@
 	.text-muted {
 		@apply text-zinc-400;
 	}
+
+	.subgrid {
+		@apply col-span-full grid grid-cols-subgrid;
+	}
 }
