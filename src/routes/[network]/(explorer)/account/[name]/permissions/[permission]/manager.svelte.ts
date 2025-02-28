@@ -327,6 +327,11 @@ export class PermissionState {
 	constructor(permissionName: Name, permission?: API.v1.AccountPermission) {
 		this.permissionName = permissionName;
 		this.permission = permission;
+		this.setDefaults();
+	}
+
+	setDefaults() {
+		const { permission, permissionName } = this;
 		this.threshold = Number(permission?.required_auth.threshold || 1);
 		this.name = {
 			value: { name: permissionName || Name.from('') },
@@ -449,6 +454,15 @@ export class PermissionState {
 	public removeKey = (index: number) => this.keys.splice(index, 1);
 	public removeWait = (index: number) => this.waits.splice(index, 1);
 	public removeLinked = (index: number) => this.linked.splice(index, 1);
+
+	get modifiedPermission(): API.v1.AccountPermission {
+		return API.v1.AccountPermission.from({
+			perm_name: this.name.value.name,
+			parent: this.parent.value,
+			required_auth: this.auth,
+			linked_actions: this.derivedLinkedActions
+		});
+	}
 
 	toJSON() {
 		return {

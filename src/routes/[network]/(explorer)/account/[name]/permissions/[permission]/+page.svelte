@@ -24,6 +24,7 @@
 	import type { ExtendedSelectOption } from '$lib/components/select/types.js';
 	import type { ChangeFn } from '@melt-ui/svelte/internal/helpers';
 	import Code from '$lib/components/code.svelte';
+	import Permission from '../permission.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
@@ -34,13 +35,17 @@
 		permissionName: data.permissionName
 	});
 
-	let msigMode: boolean = $state(manager.data.isMsig);
+	let primaryElement: HTMLElement;
+
+	const requiresMsigInterface = manager.data.isMsig || manager.data.hasAccountsOrWaits;
+	let msigMode: boolean = $state(requiresMsigInterface);
 	let permissionTypeSelected: SelectOption = $state(
-		manager.data.isMsig ? permissionTypeMsig : permissionTypeBasic
+		requiresMsigInterface ? permissionTypeMsig : permissionTypeBasic
 	);
 
 	let transactionId: Checksum256Type | undefined = $state();
 	let transactError: string | undefined = $state();
+	let confirming: boolean = $state(false);
 
 	async function transact() {
 		manager
@@ -52,6 +57,9 @@
 			.catch((e) => {
 				console.error('Transaction error', e);
 				transactError = e;
+			})
+			.finally(() => {
+				confirming = false;
 			});
 	}
 
@@ -68,8 +76,20 @@
 			});
 	}
 
+	function confirm() {
+		confirming = true;
+		primaryElement.scrollIntoView({ behavior: 'smooth' });
+	}
+
+	function back() {
+		transactError = undefined;
+		confirming = false;
+		primaryElement.scrollIntoView({ behavior: 'smooth' });
+	}
+
 	const onPermissionTypeChange: ChangeFn<ExtendedSelectOption | undefined> = ({ next }) => {
 		msigMode = next?.value === 'msig';
+		manager.data.setDefaults();
 		return next;
 	};
 </script>
@@ -110,6 +130,7 @@
 			variant="form"
 			bind:selected={permissionTypeSelected}
 		/>
+		<p>Changing the type of permission will reset edits made to this permission.</p>
 	</fieldset>
 {/snippet}
 
@@ -145,7 +166,7 @@
 		/>
 
 		<PublicKeyInput
-			class="col-span-2"
+			class={msigMode ? 'col-span-2' : 'col-span-3'}
 			id="key-{index}-key"
 			placeholder={m.common_public_key()}
 			bind:value={manager.data.keys[index].value.key}
@@ -159,6 +180,8 @@
 			>
 				<XIcon class="size-6" />
 			</button>
+		{:else}
+			<div class="size-12"></div>
 		{/if}
 	</div>
 {/snippet}
@@ -368,69 +391,109 @@
 	</div>
 {/snippet}
 
-{#if transactError}
-	<TransactError error={transactError} />
-	<Button variant="primary" onclick={() => (transactError = undefined)}>Back</Button>
-{:else if transactionId}
-	<TransactSummary transactionId={String(transactionId)} />
-	<Button href={`/${data.network}/account/${data.account.name}/permissions`} variant="secondary">
-		Back to Permissions
-	</Button>
-	<Button href={`/${data.network}/account/${data.account.name}`}>
-		{m.common_view_my_account()}
-	</Button>
-{:else}
-	<article class="relative col-span-full grid gap-12">
-		<section class="grid grid-cols-[12ch_1fr_1fr_auto] gap-6">
-			<div class="col-span-full grid gap-4 rounded-lg">
-				<div class="col-span-full space-y-1">
-					<h3 class="h3 font-semibold">Permission</h3>
-					<p class="">The name and parent permission of this permission.</p>
-				</div>
-				{@render PermissionName()}
-				{#if !manager.isOwnerPermission}
-					{@render PermissionParent()}
-				{/if}
-				{@render PermissionType()}
+{#snippet ConfirmingDetails()}
+	<section class="grid grid-cols-[12ch_1fr_1fr_auto] gap-6">
+		<div class="col-span-full grid gap-4 rounded-lg">
+			<div class="col-span-full space-y-1">
+				<h3 class="h3 font-semibold">Confirm Details</h3>
+				<p class="">
+					Carefully review and confirm the details of this transaction. Incorrectly setting your
+					permissions could cause the loss of access to this permission or account.
+				</p>
 			</div>
+			<ul class="grid grid-cols-[auto_1fr] overflow-x-auto">
+				<Permission
+					account={manager.data.name.value.name}
+					advancedMode={false}
+					currentUser={false}
+					loggedIn={false}
+					msigMode={false}
+					signin={async () => {}}
+					permission={{
+						permission: manager.data.modifiedPermission,
+						children: []
+					}}
+				/>
+			</ul>
+			<Button onclick={back} variant="secondary">Back</Button>
+			<Button onclick={transact} variant="primary">Save Permission</Button>
+		</div>
+	</section>
+{/snippet}
 
-			{#if msigMode}
-				<header class="col-span-full">
-					<h2 class="text-xl font-semibold text-white">Authorizations</h2>
-					<p>
-						Configure the keys, accounts, and waits required to authorize actions using this
-						permission.
-					</p>
-				</header>
-				{@render WaitThreshold()}
-			{/if}
+<div class="pt-6" bind:this={primaryElement}>
+	{#if transactionId}
+		<TransactSummary transactionId={String(transactionId)} />
+		<Button href={`/${data.network}/account/${data.account.name}/permissions`} variant="secondary">
+			Back to Permissions
+		</Button>
+		<Button href={`/${data.network}/account/${data.account.name}`}>
+			{m.common_view_my_account()}
+		</Button>
+	{:else}
+		<div class:hidden={!transactError}>
+			<TransactError error={transactError} />
+			<Button variant="primary" onclick={back}>Back</Button>
+		</div>
 
-			{@render KeyAuthDisplay()}
+		<article class:hidden={!confirming || transactError} class="relative col-span-full grid gap-12">
+			{@render ConfirmingDetails()}
+		</article>
 
-			{#if msigMode}
-				{@render AccountAuthDisplay()}
-				{@render WaitAuthDisplay()}
-				{#if manager.data.allowLinkedActions}
-					{@render LinkedAuthDisplay()}
+		<article class:hidden={confirming || transactError} class="relative col-span-full grid gap-12">
+			<section class="grid grid-cols-[12ch_1fr_1fr_auto] gap-6">
+				<div class="col-span-full grid gap-4 rounded-lg">
+					<div class="col-span-full space-y-1">
+						<h3 class="h3 font-semibold">Permission</h3>
+						<p class="">The name, parent, and type of permission.</p>
+					</div>
+					<div class="col-span-full grid gap-4 rounded-lg bg-mineShaft-950/50 p-4">
+						{@render PermissionName()}
+						{#if !manager.isOwnerPermission}
+							{@render PermissionParent()}
+						{/if}
+						{@render PermissionType()}
+					</div>
+				</div>
+
+				{#if msigMode}
+					{@render WaitThreshold()}
+					<header class="col-span-full">
+						<h2 class="text-xl font-semibold text-white">Authorizations</h2>
+						<p>
+							Configure the keys, accounts, and waits required to authorize actions using this
+							permission.
+						</p>
+					</header>
 				{/if}
-			{/if}
 
-			<footer class="col-span-full flex justify-end gap-4 *:flex-none">
-				{#if manager.permission && !manager.data.isActive && !manager.data.isOwner}
-					<Button class="text-solar-700 " variant="tertiary" onclick={deleteAuth}
-						>Delete Permission</Button
+				{@render KeyAuthDisplay()}
+
+				{#if msigMode}
+					{@render AccountAuthDisplay()}
+					{@render WaitAuthDisplay()}
+					{#if manager.data.allowLinkedActions}
+						{@render LinkedAuthDisplay()}
+					{/if}
+				{/if}
+
+				<footer class="col-span-full flex justify-end gap-4 *:flex-none">
+					{#if manager.permission && !manager.data.isActive && !manager.data.isOwner}
+						<Button class="text-solar-700 " variant="tertiary" onclick={deleteAuth}
+							>Delete Permission</Button
+						>
+					{/if}
+					<Button variant="tertiary" href={i18n.route(data.backPath)}>Cancel</Button>
+					<Button
+						variant="primary"
+						disabled={!manager.data.ready || context.wharf.transacting}
+						onclick={confirm}>Confirm Details</Button
 					>
-				{/if}
-				<Button variant="tertiary" href={i18n.route(data.backPath)}>Cancel</Button>
-				<Button
-					variant="primary"
-					disabled={!manager.data.ready || context.wharf.transacting}
-					onclick={transact}>Save Permission</Button
-				>
-			</footer>
-		</section>
-	</article>
-{/if}
+				</footer>
+			</section>
+		</article>
+	{/if}
+</div>
 
 {#if context.settings.data.debugMode}
 	<Code json={manager} />
