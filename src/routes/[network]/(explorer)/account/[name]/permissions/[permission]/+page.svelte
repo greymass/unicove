@@ -25,7 +25,7 @@
 		permissionName: data.permissionName
 	});
 
-	let msigMode: boolean = $state(false);
+	let msigMode: boolean = $state(manager.data.isProbablyMsig);
 
 	let transactionId: Checksum256Type | undefined = $state();
 	let transactError: string | undefined = $state();
