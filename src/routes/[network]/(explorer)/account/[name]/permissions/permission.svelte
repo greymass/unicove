@@ -188,6 +188,7 @@
 					{account}
 					{advancedMode}
 					{currentUser}
+					{loggedIn}
 					{msigMode}
 					{signin}
 					permission={child}
