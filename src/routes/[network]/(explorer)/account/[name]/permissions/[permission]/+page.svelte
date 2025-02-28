@@ -58,7 +58,7 @@
 			<header class="col-span-full">
 				<h2 class="text-xl font-semibold text-white">Authorizations</h2>
 				<p>
-					Edit which authorizations are available for the {name} permission of the
+					Edit which authorizations are available for the {data.permissionName} permission of the
 					{data.name} account
 				</p>
 			</header>
