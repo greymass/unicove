@@ -1,11 +1,27 @@
 <script lang="ts">
+	import type { Name, PermissionLevel } from '@wharfkit/session';
 	import Permission from './permission.svelte';
+	import type { TreePermission } from './+page';
 
-	let props = $props();
+	interface Props {
+		account: Name;
+		advancedMode: boolean;
+		currentUser: boolean;
+		signin: (auth: PermissionLevel) => Promise<void>;
+		permissions: TreePermission[];
+		level?: number;
+	}
+	let props: Props = $props();
 </script>
 
 <ul class="grid grid-cols-[auto_1fr] overflow-x-auto">
 	{#each props.permissions as permission}
-		<Permission {permission} />
+		<Permission
+			account={props.account}
+			advancedMode={props.advancedMode}
+			currentUser={props.currentUser}
+			signin={props.signin}
+			{permission}
+		/>
 	{/each}
 </ul>
