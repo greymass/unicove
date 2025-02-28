@@ -52,7 +52,7 @@
 		<div>
 			<dt class="sr-only">{m.common_permission_name()}</dt>
 			<dd class="text-xl font-semibold text-white">
-				<button onclick={() => {}} class="flex items-center gap-2">
+				<div class="flex items-center gap-2">
 					{permission.perm_name}
 					{#if advancedMode && loggedIn && !msigMode}
 						<LogIn
@@ -61,7 +61,7 @@
 							class="text-muted size-4 hover:text-white"
 						/>
 					{/if}
-				</button>
+				</div>
 			</dd>
 		</div>
 		<div class="text-muted text-nowrap *:inline">
