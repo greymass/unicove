@@ -1,6 +1,5 @@
 <script lang="ts">
 	import Self from './permission.svelte';
-	import type { TreePermission } from './+page';
 	import Key from '$lib/components/elements/key.svelte';
 	import CopyButton from '$lib/components/button/copy.svelte';
 	import Account from '$lib/components/elements/account.svelte';
@@ -8,12 +7,18 @@
 	import dayjs from 'dayjs';
 	import { Clock, Edit, LogIn } from 'lucide-svelte';
 	import * as m from '$lib/paraglide/messages';
+	import { Name, PermissionLevel } from '@wharfkit/antelope';
+	import type { TreePermission } from './+page';
 
 	interface Props {
+		account: Name;
+		advancedMode: boolean;
+		currentUser: boolean;
+		signin: (auth: PermissionLevel) => Promise<void>;
 		permission: TreePermission;
 		level?: number;
 	}
-	let { level = 0, ...props }: Props = $props();
+	let { account, advancedMode, currentUser, signin, level = 0, ...props }: Props = $props();
 	let { permission, children } = $derived(props.permission);
 
 	const anyPermissions = $derived(
@@ -23,8 +28,6 @@
 	);
 
 	const editUrl = $derived('permissions/' + permission.perm_name);
-
-	const isCurrentUser = $derived(true); // TODO:
 </script>
 
 <li
@@ -38,14 +41,16 @@
 		<div>
 			<dt class="sr-only">{m.common_permission_name()}</dt>
 			<dd class="text-xl font-semibold text-white">
-				{#if isCurrentUser}
-					<button onclick={() => {}} class="flex items-center gap-2">
-						{permission.perm_name}
-						<LogIn class="text-muted size-4 hover:text-white" />
-					</button>
-				{:else}
+				<button onclick={() => {}} class="flex items-center gap-2">
 					{permission.perm_name}
-				{/if}
+					{#if advancedMode}
+						<LogIn
+							onclick={() =>
+								signin(PermissionLevel.from({ actor: account, permission: permission.perm_name }))}
+							class="text-muted size-4 hover:text-white"
+						/>
+					{/if}
+				</button>
 			</dd>
 		</div>
 		<div class="text-muted text-nowrap *:inline">
@@ -82,9 +87,11 @@
 						<th>{m.common_permission_weight()}</th>
 						<th>{m.common_permission_authorization()}</th>
 						<th class="flex items-center gap-2">
-							<a href={editUrl}>
-								<Edit class="size-4" />
-							</a>
+							{#if currentUser}
+								<a href={editUrl}>
+									<Edit class="size-4" />
+								</a>
+							{/if}
 						</th>
 					</tr>
 				</thead>
@@ -166,7 +173,14 @@
 		>
 			<!-- style={`margin-left:calc(1rem * ${level + 1})`} -->
 			{#each children as child}
-				<Self permission={child} level={level + 1} />
+				<Self
+					{account}
+					{advancedMode}
+					{currentUser}
+					{signin}
+					permission={child}
+					level={level + 1}
+				/>
 			{/each}
 		</ul>
 	</li>

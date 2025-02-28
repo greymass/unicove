@@ -134,13 +134,11 @@
 					<h3 class="h4 font-semibold">Keys Pairs</h3>
 					<p class="">Enter the Public Keys which can sign on behalf of this permission.</p>
 				</div>
-				{#if msigMode}
-					<div class="col-span-2 space-y-1">
-						<Button class="float-right" variant="primary" onclick={manager.data.addKey}
-							>Add Key</Button
-						>
-					</div>
-				{/if}
+				<div class="col-span-2 space-y-1">
+					<Button class="float-right" variant="primary" onclick={manager.data.addKey}
+						>Add Key</Button
+					>
+				</div>
 				{#if manager.data.keys.length}
 					<div class="subgrid gap-2">
 						<div class="subgrid">
@@ -349,7 +347,7 @@
 			{/if}
 
 			<footer class="col-span-full flex justify-end gap-4 *:flex-none">
-				{#if !manager.data.isActive && !manager.data.isOwner}
+				{#if manager.permission && !manager.data.isActive && !manager.data.isOwner}
 					<Button class="text-solar-700 " variant="tertiary" onclick={deleteAuth}
 						>Delete Permission</Button
 					>

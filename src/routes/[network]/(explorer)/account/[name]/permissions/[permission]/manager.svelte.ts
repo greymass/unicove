@@ -308,10 +308,9 @@ export class PermissionState {
 			value: { name: permissionName || Name.from('') },
 			valid: { name: false }
 		};
-		console.log(this.name);
 		this.parent = {
-			label: String(permission?.parent || Name.from('')),
-			value: permission?.parent || Name.from('')
+			label: String(permission?.parent || Name.from('active')),
+			value: permission?.parent || Name.from('active')
 		};
 		this.accounts =
 			permission?.required_auth.accounts.map((account) => ({
