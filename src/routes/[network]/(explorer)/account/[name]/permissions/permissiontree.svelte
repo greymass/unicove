@@ -7,6 +7,7 @@
 		account: Name;
 		advancedMode: boolean;
 		currentUser: boolean;
+		msigMode: boolean;
 		signin: (auth: PermissionLevel) => Promise<void>;
 		permissions: TreePermission[];
 		level?: number;
@@ -20,6 +21,7 @@
 			account={props.account}
 			advancedMode={props.advancedMode}
 			currentUser={props.currentUser}
+			msigMode={props.msigMode}
 			signin={props.signin}
 			{permission}
 		/>

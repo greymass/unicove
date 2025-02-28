@@ -34,6 +34,18 @@ interface PermissionManagerArgs {
 	permissionName: Name;
 }
 
+export const permissionTypeBasic: SelectOption = {
+	label: 'Basic',
+	value: 'basic'
+};
+
+export const permissionTypeMsig: SelectOption = {
+	label: 'MSIG',
+	value: 'msig'
+};
+
+export const permissionTypeSelects: SelectOption[] = [permissionTypeBasic, permissionTypeMsig];
+
 export class PermissionManager {
 	// Required config
 	readonly context = $state() as UnicoveContext;
@@ -161,6 +173,14 @@ export class PermissionManager {
 		}
 
 		return this.context.wharf.transact({ actions: [...unlinkauth, deleteauth] });
+	}
+
+	toJSON() {
+		return {
+			permissionName: this.permissionName,
+			permission: this.permission,
+			data: this.data
+		};
 	}
 }
 
@@ -429,6 +449,18 @@ export class PermissionState {
 	public removeKey = (index: number) => this.keys.splice(index, 1);
 	public removeWait = (index: number) => this.waits.splice(index, 1);
 	public removeLinked = (index: number) => this.linked.splice(index, 1);
+
+	toJSON() {
+		return {
+			name: this.name,
+			parent: this.parent,
+			accounts: this.accounts,
+			keys: this.keys,
+			waits: this.waits,
+			linked: this.linked,
+			threshold: this.threshold
+		};
+	}
 }
 
 // Ensure each value in an AntelopeValid object is valid/true
