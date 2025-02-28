@@ -139,6 +139,29 @@ export class PermissionManager {
 		}
 		return this.context.wharf.transact({ actions });
 	}
+
+	async deleteAuth() {
+		const deleteauth = this.contract.action('deleteauth', {
+			account: this.account.name,
+			permission: this.data.name.value.name
+		});
+
+		const unlinkauth: Action[] = [];
+
+		if (this.permission) {
+			this.permission.linked_actions.forEach((linkedAction) => {
+				unlinkauth.push(
+					this.contract.action('unlinkauth', {
+						account: this.account.name,
+						code: linkedAction.account,
+						type: linkedAction.action || ''
+					})
+				);
+			});
+		}
+
+		return this.context.wharf.transact({ actions: [...unlinkauth, deleteauth] });
+	}
 }
 
 interface NameSelectOption extends ExtendedSelectOption {
