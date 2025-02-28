@@ -14,11 +14,20 @@
 		account: Name;
 		advancedMode: boolean;
 		currentUser: boolean;
+		msigMode: boolean;
 		signin: (auth: PermissionLevel) => Promise<void>;
 		permission: TreePermission;
 		level?: number;
 	}
-	let { account, advancedMode, currentUser, signin, level = 0, ...props }: Props = $props();
+	let {
+		account,
+		advancedMode,
+		currentUser,
+		msigMode,
+		signin,
+		level = 0,
+		...props
+	}: Props = $props();
 	let { permission, children } = $derived(props.permission);
 
 	const anyPermissions = $derived(
@@ -43,7 +52,7 @@
 			<dd class="text-xl font-semibold text-white">
 				<button onclick={() => {}} class="flex items-center gap-2">
 					{permission.perm_name}
-					{#if advancedMode}
+					{#if advancedMode && !msigMode}
 						<LogIn
 							onclick={() =>
 								signin(PermissionLevel.from({ actor: account, permission: permission.perm_name }))}
@@ -177,6 +186,7 @@
 					{account}
 					{advancedMode}
 					{currentUser}
+					{msigMode}
 					{signin}
 					permission={child}
 					level={level + 1}

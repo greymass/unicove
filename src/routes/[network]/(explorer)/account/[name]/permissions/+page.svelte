@@ -37,6 +37,7 @@
 	);
 
 	const advancedMode = !!context.settings.data.advancedMode;
+	const msigMode = context.wharf.session?.walletPlugin.id === 'wallet-plugin-multisig';
 
 	async function signin(auth: PermissionLevel) {
 		await context.wharf.multisig(auth);
@@ -53,4 +54,11 @@
 	</Button>
 {/if}
 
-<PermissionTree account={data.account.name} {advancedMode} {currentUser} {signin} {permissions} />
+<PermissionTree
+	account={data.account.name}
+	{advancedMode}
+	{currentUser}
+	{msigMode}
+	{signin}
+	{permissions}
+/>
