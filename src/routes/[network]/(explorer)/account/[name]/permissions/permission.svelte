@@ -98,7 +98,7 @@
 						<th>{m.common_permission_weight()}</th>
 						<th>{m.common_permission_authorization()}</th>
 						<th class="flex items-center gap-2">
-							{#if currentUser}
+							{#if loggedIn && currentUser}
 								<a href={editUrl}>
 									<Edit class="size-4" />
 								</a>
