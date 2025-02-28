@@ -20,9 +20,11 @@
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
 
-	const manager = $derived(
-		new PermissionManager({ context, account: data.account, permissionName: data.permissionName })
-	);
+	const manager = new PermissionManager({
+		context,
+		account: data.account,
+		permissionName: data.permissionName
+	});
 
 	let transactionId: Checksum256Type | undefined = $state();
 	let transactError: string | undefined = $state();

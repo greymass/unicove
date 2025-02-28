@@ -43,7 +43,7 @@ export class PermissionManager {
 	readonly contract;
 
 	// Permission derived from account
-	public permission = $state() as API.v1.AccountPermission;
+	public permission: API.v1.AccountPermission | undefined = $state();
 
 	// Permission State
 	public data;
@@ -68,17 +68,14 @@ export class PermissionManager {
 		const permission = args.account.permissions.find((p) =>
 			p.perm_name.equals(args.permissionName)
 		);
-		if (!permission) {
-			throw new Error('Permission not found');
-		}
 		this.permission = permission;
-		this.data = new PermissionState(permission);
+		this.data = new PermissionState(args.permissionName, permission);
 	}
 
 	async transact() {
 		const updateauth = this.contract.action('updateauth', {
 			account: this.account.name,
-			permission: this.permissionName,
+			permission: this.data.name.value.name,
 			parent: this.data.parent.value,
 			auth: this.data.auth
 		});
@@ -125,7 +122,7 @@ export class PermissionManager {
 				linkauth.push(
 					this.contract.action('linkauth', {
 						account: this.account.name,
-						requirement: this.permissionName,
+						requirement: this.data.name.value.name,
 						code: current.value.account,
 						type: current.value.action
 					})
@@ -150,6 +147,7 @@ interface NameSelectOption extends ExtendedSelectOption {
 
 export class PermissionState {
 	readonly permission: API.v1.AccountPermission | undefined = $state();
+	readonly permissionName: Name = $state() as Name;
 
 	// Editable authority state
 	public threshold = $state(1);
@@ -279,22 +277,21 @@ export class PermissionState {
 	// Whether or not the form is ready to submit
 	public ready = $derived(this.modified && this.allValid);
 
-	constructor(permission?: API.v1.AccountPermission) {
-		if (!permission) {
-			return;
-		}
+	constructor(permissionName: Name, permission?: API.v1.AccountPermission) {
+		this.permissionName = permissionName;
 		this.permission = permission;
-		this.threshold = Number(permission.required_auth.threshold || 1);
+		this.threshold = Number(permission?.required_auth.threshold || 1);
 		this.name = {
-			value: { name: permission.perm_name },
+			value: { name: permissionName || Name.from('') },
 			valid: { name: false }
 		};
+		console.log(this.name);
 		this.parent = {
-			label: String(permission.parent || Name.from('')),
-			value: permission.parent || Name.from('')
+			label: String(permission?.parent || Name.from('')),
+			value: permission?.parent || Name.from('')
 		};
 		this.accounts =
-			permission.required_auth.accounts.map((account) => ({
+			permission?.required_auth.accounts.map((account) => ({
 				value: Serializer.objectify(account),
 				valid: {
 					actor: false,
@@ -303,7 +300,7 @@ export class PermissionState {
 				}
 			})) || [];
 		this.keys =
-			permission.required_auth.keys.map((key) => ({
+			permission?.required_auth.keys.map((key) => ({
 				value: Serializer.objectify(key),
 				valid: {
 					key: false,
@@ -311,7 +308,7 @@ export class PermissionState {
 				}
 			})) || [];
 		this.waits =
-			permission.required_auth.waits.map((wait) => ({
+			permission?.required_auth.waits.map((wait) => ({
 				value: Serializer.objectify(wait),
 				valid: {
 					wait_sec: false,
@@ -319,7 +316,7 @@ export class PermissionState {
 				}
 			})) || [];
 		this.linked =
-			permission.linked_actions.map((linked) => ({
+			permission?.linked_actions.map((linked) => ({
 				value: {
 					action: Name.from(''),
 					...Serializer.objectify(linked)
