@@ -1,4 +1,4 @@
-import { Asset } from '@wharfkit/antelope';
+import { Asset, Name, Struct } from '@wharfkit/antelope';
 
 export interface HistoricalPrice {
 	date: Date;
@@ -11,3 +11,9 @@ export type DescriptionItem = {
 };
 
 export type ActionDisplayVariants = 'summary' | 'ricardian' | 'pretty' | 'decoded' | 'json';
+
+@Struct.type('account_linked_action')
+export class AccountLinkedAction extends Struct {
+	@Struct.field('name') declare account: Name;
+	@Struct.field('name', { optional: true }) declare action?: Name;
+}
