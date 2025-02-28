@@ -184,6 +184,10 @@ export class PermissionState {
 	// Validation states
 	public isOwner = $derived(this.name.value.name.equals('owner'));
 	public isActive = $derived(this.name.value.name.equals('active'));
+	public hasAccountsOrWaits = $derived(this.accounts.length + this.waits.length > 0);
+	public keyWeights = $derived(this.keys.reduce((acc, k) => acc + k.value.weight, 0));
+	public hasUnevenWeights = $derived(this.keyWeights > this.keys.length);
+	public isProbablyMsig = $derived(this.hasUnevenWeights || this.hasAccountsOrWaits);
 	public hasAuth = $derived(this.accounts.length + this.keys.length > 0);
 	public totalAccountWeight = $derived(
 		this.accounts.reduce((acc, a) => acc.adding(a.value.weight), UInt16.from(0))
