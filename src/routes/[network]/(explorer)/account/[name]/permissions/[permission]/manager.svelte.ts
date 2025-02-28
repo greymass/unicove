@@ -187,7 +187,7 @@ export class PermissionState {
 	public hasAccountsOrWaits = $derived(this.accounts.length + this.waits.length > 0);
 	public keyWeights = $derived(this.keys.reduce((acc, k) => acc + k.value.weight, 0));
 	public hasUnevenWeights = $derived(this.keyWeights > this.keys.length);
-	public isProbablyMsig = $derived(this.hasUnevenWeights || this.hasAccountsOrWaits);
+	public isMsig = $derived(this.threshold > 1);
 	public hasAuth = $derived(this.accounts.length + this.keys.length > 0);
 	public totalAccountWeight = $derived(
 		this.accounts.reduce((acc, a) => acc.adding(a.value.weight), UInt16.from(0))
