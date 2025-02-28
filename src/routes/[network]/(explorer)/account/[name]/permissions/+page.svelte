@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { API, Name, PermissionLevel } from '@wharfkit/antelope';
+	import { Name, PermissionLevel } from '@wharfkit/antelope';
 	import PermissionTree from './permissiontree.svelte';
 	import Button from '$lib/components/button/button.svelte';
 	import { generateRandomName } from '$lib/utils/random';
@@ -37,7 +37,8 @@
 	);
 
 	const advancedMode = !!context.settings.data.advancedMode;
-	const msigMode = context.wharf.session?.walletPlugin.id === 'wallet-plugin-multisig';
+	const loggedIn = $derived(!!context.wharf.session);
+	const msigMode = $derived(context.wharf.session?.walletPlugin.id === 'wallet-plugin-multisig');
 
 	async function signin(auth: PermissionLevel) {
 		await context.wharf.multisig(auth);
@@ -58,6 +59,7 @@
 	account={data.account.name}
 	{advancedMode}
 	{currentUser}
+	{loggedIn}
 	{msigMode}
 	{signin}
 	{permissions}

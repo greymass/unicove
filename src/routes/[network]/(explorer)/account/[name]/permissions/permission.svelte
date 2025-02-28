@@ -14,6 +14,7 @@
 		account: Name;
 		advancedMode: boolean;
 		currentUser: boolean;
+		loggedIn: boolean;
 		msigMode: boolean;
 		signin: (auth: PermissionLevel) => Promise<void>;
 		permission: TreePermission;
@@ -23,6 +24,7 @@
 		account,
 		advancedMode,
 		currentUser,
+		loggedIn,
 		msigMode,
 		signin,
 		level = 0,
@@ -52,7 +54,7 @@
 			<dd class="text-xl font-semibold text-white">
 				<button onclick={() => {}} class="flex items-center gap-2">
 					{permission.perm_name}
-					{#if advancedMode && !msigMode}
+					{#if advancedMode && loggedIn && !msigMode}
 						<LogIn
 							onclick={() =>
 								signin(PermissionLevel.from({ actor: account, permission: permission.perm_name }))}
