@@ -432,4 +432,6 @@
 	</article>
 {/if}
 
-<Code json={manager} />
+{#if context.settings.data.debugMode}
+	<Code json={manager} />
+{/if}
