@@ -19,6 +19,7 @@ import {
 import { Contract as MsigContract } from '$lib/wharf/contracts/msig';
 import { Contract as TimeContract } from '$lib/wharf/contracts/eosntime';
 import { generateRandomName } from '$lib/utils/random';
+import { msigInternalPlugins } from '$lib/wharf/plugins';
 
 export interface WalletPluginMultiSigOptions {
 	walletPlugins: WalletPlugin[];
@@ -147,7 +148,10 @@ export class WalletPluginMultiSig extends AbstractWalletPlugin implements Wallet
 			actions.push(eosntime.action('checktime', { time }));
 		}
 
-		const result = await session.transact({ actions }, { broadcast: false });
+		const result = await session.transact(
+			{ actions },
+			{ broadcast: false, transactPlugins: msigInternalPlugins }
+		);
 		return {
 			resolved: result.resolved,
 			signatures: result.signatures
