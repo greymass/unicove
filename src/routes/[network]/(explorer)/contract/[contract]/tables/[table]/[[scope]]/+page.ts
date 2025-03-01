@@ -23,6 +23,7 @@ export const load: PageLoad = async ({ fetch, params, parent, url }) => {
 		table: params.table,
 		scope: params.scope,
 		lower: url.searchParams.get('lower'),
-		upper: url.searchParams.get('upper')
+		upper: url.searchParams.get('upper'),
+		reverse: url.searchParams.get('reverse') === 'true'
 	};
 };

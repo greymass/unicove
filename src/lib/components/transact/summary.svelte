@@ -10,6 +10,7 @@
 
 	import { Types as MsigTypes } from '$lib/wharf/contracts/msig';
 	import Button from '$lib/components/button/button.svelte';
+	import Code from '../code.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -62,21 +63,22 @@
 				</h3>
 			{/if}
 		</div>
-		<!-- <h3 class="h3">{transaction.status}</h3> -->
-		<table class="table-styles">
-			<tbody>
-				<tr>
-					<td>{m.common_status()}</td>
-					<td class="text-right">{transaction.status}</td>
-				</tr>
-				{#if transaction.transaction}
+		<Code>
+			<table class="table-styles">
+				<tbody>
 					<tr>
-						<td>{m.common_trx_id()}</td>
-						<td class="text-right"><Transaction id={transaction.transaction.id} /> </td>
+						<td>{m.common_status()}</td>
+						<td class="text-right">{transaction.status}</td>
 					</tr>
-				{/if}
-			</tbody>
-		</table>
+					{#if transaction.transaction}
+						<tr>
+							<td>{m.common_trx_id()}</td>
+							<td class="text-right"><Transaction id={transaction.transaction.id} /> </td>
+						</tr>
+					{/if}
+				</tbody>
+			</table>
+		</Code>
 	{:else}
 		<h2 class="h2">{m.common_trx_not_found()}</h2>
 		<p>{m.common_trx_not_found_description({ transactionId: String(transactionId) })}</p>

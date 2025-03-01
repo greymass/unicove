@@ -1,19 +1,35 @@
 <script lang="ts">
 	import Self from './permission.svelte';
-	import type { TreePermission } from './+page';
 	import Key from '$lib/components/elements/key.svelte';
 	import CopyButton from '$lib/components/button/copy.svelte';
 	import Account from '$lib/components/elements/account.svelte';
 	import Contract from '$lib/components/elements/contract.svelte';
 	import dayjs from 'dayjs';
-	import { Clock } from 'lucide-svelte';
+	import { Clock, Edit, LogIn } from 'lucide-svelte';
 	import * as m from '$lib/paraglide/messages';
+	import { Name, PermissionLevel, UInt64 } from '@wharfkit/antelope';
+	import type { TreePermission } from './+page';
 
 	interface Props {
+		account: Name;
+		advancedMode: boolean;
+		currentUser: boolean;
+		loggedIn: boolean;
+		msigMode: boolean;
+		signin: (auth: PermissionLevel) => Promise<void>;
 		permission: TreePermission;
 		level?: number;
 	}
-	let { level = 0, ...props }: Props = $props();
+	let {
+		account,
+		advancedMode,
+		currentUser,
+		loggedIn,
+		msigMode,
+		signin,
+		level = 0,
+		...props
+	}: Props = $props();
 	let { permission, children } = $derived(props.permission);
 
 	const anyPermissions = $derived(
@@ -21,6 +37,9 @@
 			permission.required_auth.keys.length ||
 			permission.required_auth.waits.length
 	);
+	const isMSIG = $derived(permission.required_auth.threshold.gt(UInt64.from(1)));
+
+	const editUrl = $derived('permissions/' + permission.perm_name);
 </script>
 
 <li
@@ -29,11 +48,22 @@
 	class:pt-6={level !== 0}
 >
 	<dl
-		class="z-20 col-span-full space-y-1 rounded-t-lg bg-mineShaft-950 px-4 py-3 md:col-span-1 md:rounded-l-lg"
+		class="z-20 col-span-full space-y-1 rounded-t-lg bg-mineShaft-950 px-4 py-3 md:col-span-1 md:rounded-l-lg md:rounded-r-none"
 	>
 		<div>
 			<dt class="sr-only">{m.common_permission_name()}</dt>
-			<dd class="text-xl font-semibold text-white">{permission.perm_name}</dd>
+			<dd class="text-xl font-semibold text-white">
+				<div class="flex items-center gap-2">
+					{permission.perm_name}
+					{#if isMSIG && advancedMode && loggedIn && !msigMode}
+						<LogIn
+							onclick={() =>
+								signin(PermissionLevel.from({ actor: account, permission: permission.perm_name }))}
+							class="text-muted size-4 hover:text-white"
+						/>
+					{/if}
+				</div>
+			</dd>
 		</div>
 		<div class="text-muted text-nowrap *:inline">
 			<dt class="after:content-[':']">
@@ -59,7 +89,7 @@
 		{/if}
 	</dl>
 
-	<div class="rounded-b-lg bg-mineShaft-950/50 px-4 py-3 md:rounded-r-lg">
+	<div class="rounded-b-lg bg-mineShaft-950/50 px-4 py-3 md:rounded-l-none md:rounded-r-lg">
 		{#if anyPermissions}
 			<table class="grid grid-cols-[auto_1fr_auto] gap-x-4 gap-y-2">
 				<thead class="col-span-full grid grid-cols-subgrid">
@@ -68,6 +98,13 @@
 					>
 						<th>{m.common_permission_weight()}</th>
 						<th>{m.common_permission_authorization()}</th>
+						<th class="flex items-center gap-2">
+							{#if loggedIn && currentUser}
+								<a href={editUrl}>
+									<Edit class="size-4" />
+								</a>
+							{/if}
+						</th>
 					</tr>
 				</thead>
 				<tbody class="col-span-full grid grid-cols-subgrid gap-x-4 gap-y-2">
@@ -83,7 +120,7 @@
 								<td>
 									<Key {key} icon />
 								</td>
-								<td>
+								<td class="grid h-full items-center justify-items-end">
 									<CopyButton data={key.toString()} slop={false} />
 								</td>
 							</tr>
@@ -148,7 +185,16 @@
 		>
 			<!-- style={`margin-left:calc(1rem * ${level + 1})`} -->
 			{#each children as child}
-				<Self permission={child} level={level + 1} />
+				<Self
+					{account}
+					{advancedMode}
+					{currentUser}
+					{loggedIn}
+					{msigMode}
+					{signin}
+					permission={child}
+					level={level + 1}
+				/>
 			{/each}
 		</ul>
 	</li>
