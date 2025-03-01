@@ -20,7 +20,7 @@
 			"unicovecontracts": true
 		},
 		"endpoints": { "api": "https://eos.greymass.com", "history": "https://eos.greymass.com" },
-		"lockedsupply": ["eosio"],
+		"lockedsupply": ["eosio", "eosio.null"],
 		"coinbase": {
 			"appid": "2b4cca18-e6eb-4265-ae56-da19983c60fb",
 			"assets": ["EOS"]
