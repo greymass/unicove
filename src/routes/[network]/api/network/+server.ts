@@ -147,7 +147,10 @@ async function getNetworkNative(network: NetworkState): Promise<NetworkDataSourc
 	const lockedsupply: Asset = Asset.fromUnits(0, network.chain.systemToken!.symbol);
 	lockedsupplyIndexes.forEach((lockedsupplyIndex) => {
 		const response = getResponse(results, lockedsupplyIndex) as AssetType[];
-		lockedsupply.units.add(Asset.from(response[0]));
+		if (!response || !response.length) {
+			return;
+		}
+		lockedsupply.units.add(Asset.from(response[0]).units);
 	});
 
 	const tokenstate = getResponse(results, tokenStateIndex);
