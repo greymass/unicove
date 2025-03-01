@@ -79,7 +79,7 @@ function getResponse(list: ResponseType[], index: number) {
 async function getNetworkNative(network: NetworkState): Promise<NetworkDataSources> {
 	const requests: Promise<ResponseType>[] = [];
 	let globalStateIndex = -1;
-	let lockedsupplyIndex = -1;
+	const lockedsupplyIndexes: number[] = [];
 	let ramStateIndex = -1;
 	let rexStateIndex = -1;
 	let powerupStateIndex = -1;
@@ -114,14 +114,19 @@ async function getNetworkNative(network: NetworkState): Promise<NetworkDataSourc
 		);
 	}
 	if (network.chain.systemToken && network.config.lockedsupply) {
-		lockedsupplyIndex = addRequest(
-			requests,
-			network.client.v1.chain.get_currency_balance(
-				network.chain.systemToken.contract,
-				network.config.lockedsupply[0],
-				network.chain.systemToken.symbol.name
-			)
-		);
+		const systemToken = network.chain.systemToken;
+		network.config.lockedsupply.forEach((account) => {
+			lockedsupplyIndexes.push(
+				addRequest(
+					requests,
+					network.client.v1.chain.get_currency_balance(
+						systemToken.contract,
+						account,
+						systemToken.symbol.name
+					)
+				)
+			);
+		});
 	}
 	if (network.supports('delphioracle')) {
 		const pairname = `${network.chain.systemToken!.symbol.name.toLowerCase()}usd`;
@@ -138,10 +143,13 @@ async function getNetworkNative(network: NetworkState): Promise<NetworkDataSourc
 	const powerupstate = getResponse(results, powerupStateIndex);
 	const sampleUsage = getResponse(results, sampleUsageIndex);
 	const supplyResult = getResponse(results, supplyIndex) as API.v1.GetCurrencyStatsResponse;
-	const lockedsupplyResponse = getResponse(results, lockedsupplyIndex);
-	const lockedsupply: Asset = lockedsupplyResponse
-		? Asset.from((lockedsupplyResponse as AssetType[])[0])
-		: Asset.fromUnits(0, network.chain.systemToken!.symbol);
+
+	const lockedsupply: Asset = Asset.fromUnits(0, network.chain.systemToken!.symbol);
+	lockedsupplyIndexes.forEach((lockedsupplyIndex) => {
+		const response = getResponse(results, lockedsupplyIndex) as AssetType[];
+		lockedsupply.units.add(Asset.from(response[0]));
+	});
+
 	const tokenstate = getResponse(results, tokenStateIndex);
 
 	const index = String(network.chain.systemToken?.symbol.name);
