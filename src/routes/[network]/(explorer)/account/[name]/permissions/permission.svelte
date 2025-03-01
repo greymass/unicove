@@ -7,7 +7,7 @@
 	import dayjs from 'dayjs';
 	import { Clock, Edit, LogIn } from 'lucide-svelte';
 	import * as m from '$lib/paraglide/messages';
-	import { Name, PermissionLevel } from '@wharfkit/antelope';
+	import { Name, PermissionLevel, UInt64 } from '@wharfkit/antelope';
 	import type { TreePermission } from './+page';
 
 	interface Props {
@@ -37,6 +37,7 @@
 			permission.required_auth.keys.length ||
 			permission.required_auth.waits.length
 	);
+	const isMSIG = $derived(permission.required_auth.threshold.gt(UInt64.from(1)));
 
 	const editUrl = $derived('permissions/' + permission.perm_name);
 </script>
@@ -54,7 +55,7 @@
 			<dd class="text-xl font-semibold text-white">
 				<div class="flex items-center gap-2">
 					{permission.perm_name}
-					{#if advancedMode && loggedIn && !msigMode}
+					{#if isMSIG && advancedMode && loggedIn && !msigMode}
 						<LogIn
 							onclick={() =>
 								signin(PermissionLevel.from({ actor: account, permission: permission.perm_name }))}
