@@ -3,7 +3,7 @@
 	import ValueText from '$lib/components/elements/currency/value.svelte';
 	import { Asset, UInt64 } from '@wharfkit/antelope';
 
-	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte';
+	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
 	import * as m from '$lib/paraglide/messages';
 
