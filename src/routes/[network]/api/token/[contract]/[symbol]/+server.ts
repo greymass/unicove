@@ -1,5 +1,5 @@
 import { json } from '@sveltejs/kit';
-import { Asset } from '@wharfkit/antelope';
+import { Asset, type AssetType, type NameType } from '@wharfkit/antelope';
 
 import { NetworkState } from '$lib/state/network.svelte';
 import { getCacheHeaders } from '$lib/utils';
@@ -13,8 +13,12 @@ export async function GET({ locals: { network }, params, url }: RequestEvent) {
 	if (stats[symbol] === undefined) {
 		return json({ error: 'Token not found' }, { status: 404 });
 	}
-	const topholders = await getTopHolders(network, contract, symbol, count);
-	const numholders = await getNumHolders(network, contract, symbol);
+	let topholders: TokenHolders[] = [];
+	let numholders: number = 0;
+	if (network.supports('lightapi')) {
+		topholders = await getTopHolders(network, contract, symbol, count);
+		numholders = await getNumHolders(network, contract, symbol);
+	}
 
 	const supply = stats[symbol].supply;
 	const locked = Asset.fromUnits(0, stats[symbol].supply.symbol);
@@ -49,12 +53,17 @@ export async function GET({ locals: { network }, params, url }: RequestEvent) {
 	);
 }
 
+interface TokenHolders {
+	account: NameType;
+	balance: AssetType;
+}
+
 async function getTopHolders(
 	network: NetworkState,
 	contract: string,
 	symbol: string,
 	number = 100
-) {
+): Promise<TokenHolders[]> {
 	const response = await network.fetch(
 		`${network.config.endpoints.lightapi}/api/topholders/${network}/${contract}/${symbol}/${number}`
 	);

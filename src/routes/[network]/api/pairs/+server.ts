@@ -6,7 +6,10 @@ import { TokenDataSources, TokenDefinition, TokenPair } from '$lib/types/token';
 import { Asset, TimePointSec } from '@wharfkit/session';
 
 export async function GET({ locals: { network } }: RequestEvent) {
-	const pairs = await delphioracle(network);
+	const pairs: TokenPair[] = [];
+	if (network.supports('delphioracle')) {
+		pairs.push(...(await delphioracle(network)));
+	}
 	return json(
 		TokenDataSources.from({
 			ts: new Date(),
