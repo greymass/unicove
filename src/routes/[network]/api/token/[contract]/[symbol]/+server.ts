@@ -1,4 +1,5 @@
 import { json } from '@sveltejs/kit';
+import { Asset } from '@wharfkit/antelope';
 
 import { NetworkState } from '$lib/state/network.svelte';
 import { getCacheHeaders } from '$lib/utils';
@@ -15,13 +16,29 @@ export async function GET({ locals: { network }, params, url }: RequestEvent) {
 	const topholders = await getTopHolders(network, contract, symbol, count);
 	const numholders = await getNumHolders(network, contract, symbol);
 
+	const supply = stats[symbol].supply;
+	const locked = Asset.fromUnits(0, stats[symbol].supply.symbol);
+	if (network.chain.systemToken && network.config.lockedsupply) {
+		const promises = network.config.lockedsupply.map((account) =>
+			network.client.v1.chain.get_currency_balance(contract, account, symbol)
+		);
+		const lockedaccounts = await Promise.all(promises);
+		lockedaccounts.forEach((balance) => {
+			if (balance.length) {
+				supply.units.subtract(balance[0].units);
+				locked.units.add(balance[0].units);
+			}
+		});
+	}
+
 	return json(
 		{
 			ts: new Date(),
 			numholders,
 			topholders,
 			stats: {
-				supply: stats[symbol].supply,
+				supply,
+				locked,
 				max_supply: stats[symbol].max_supply,
 				issuer: stats[symbol].issuer
 			}

@@ -8,7 +8,7 @@
 	import { page } from '$app/stores';
 	import extend from 'just-extend';
 
-	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte';
 	import { AccountState } from '$lib/state/client/account.svelte.js';
 	import { WharfState } from '$lib/state/client/wharf.svelte.js';
 	import { SearchRecordStorage } from '$lib/state/search.svelte.js';
@@ -19,12 +19,15 @@
 	import Search from '$lib/components/search/input.svelte';
 	import { SettingsState } from '$lib/state/settings.svelte.js';
 	import Unicovelogo from '$lib/assets/unicovelogo.svelte';
+	import { MarketState } from '$lib/state/market.svelte.js';
+	import { AccountValueState, NetworkValueState } from '$lib/state/value.svelte.js';
 
 	let { children, data } = $props();
 
 	let account: AccountState | undefined = $state();
 	const history = new SearchRecordStorage(data.network);
 	const settings = new SettingsState();
+	const market = new MarketState(data.network, settings);
 	const wharf = new WharfState(settings);
 
 	setContext<UnicoveContext>('state', {
@@ -45,8 +48,34 @@
 		}
 	});
 
+	const networkValue = new NetworkValueState({
+		network: data.network,
+		market: market,
+		settings: settings
+	});
+
+	let accountValue: AccountValueState | undefined = $state();
+
+	setContext<MarketContext>('market', {
+		get account() {
+			return accountValue;
+		},
+		get market() {
+			return market;
+		},
+		get network() {
+			return networkValue;
+		}
+	});
+
 	export function setAccount(name: NameType, fetchOverride?: typeof fetch): AccountState {
 		account = new AccountState(data.network, name, fetchOverride);
+		accountValue = new AccountValueState({
+			account,
+			network: data.network,
+			market: market,
+			settings: settings
+		});
 		account.refresh();
 		return account;
 	}
@@ -58,6 +87,7 @@
 				setAccount(session.actor);
 			} else {
 				account = undefined;
+				accountValue = undefined;
 			}
 		});
 	});
@@ -98,6 +128,7 @@
 	// Number of ms between network updates
 	const ACCOUNT_UPDATE_INTERVAL = Number(env.PUBLIC_ACCOUNT_UPDATE_INTERVAL) || 5_000;
 	const NETWORK_UPDATE_INTERVAL = Number(env.PUBLIC_NETWORK_UPDATE_INTERVAL) || 5_000;
+	const MARKET_UPDATE_INTERVAL = Number(env.PUBLIC_MARKET_UPDATE_INTERVAL) || 60_000;
 
 	// Default to not show a banner (avoids flash of banner when hidden)
 	let showBanner = $state(false);
@@ -115,12 +146,21 @@
 			data.network.refresh();
 		}, NETWORK_UPDATE_INTERVAL);
 
+		// Update the market state on a set interval
+		const marketInterval = setInterval(() => {
+			data.network.refresh();
+		}, MARKET_UPDATE_INTERVAL);
+
 		// Show the banner if localStorage has no flag set
 		showBanner = !localStorage.getItem('hide-v1-banner');
+
+		// Load markets immediately
+		market.refresh();
 
 		return () => {
 			clearInterval(accountInterval);
 			clearInterval(networkInterval);
+			clearInterval(marketInterval);
 		};
 	});
 

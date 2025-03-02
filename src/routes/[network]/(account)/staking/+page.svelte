@@ -5,7 +5,7 @@
 
 	import { Card, MultiCard, Stack } from '$lib/components/layout';
 	import AssetText from '$lib/components/elements/asset.svelte';
-	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte';
 	import type { UnstakingRecord } from '$lib/utils/staking';
 	import {
 		getClaimableBalance,
@@ -21,8 +21,11 @@
 	import Cluster from '$lib/components/layout/cluster.svelte';
 	import Chip from '$lib/components/chip.svelte';
 	import * as m from '$lib/paraglide/messages';
+	import { Currencies } from '$lib/types/currencies';
 
 	const context = getContext<UnicoveContext>('state');
+	const market = getContext<MarketContext>('market');
+
 	const { data } = $props();
 	const networkName = String(data.network);
 
@@ -54,12 +57,16 @@
 	);
 
 	let apr = $derived(getAPR(data.network));
-	let usdValue = $derived(Asset.from(total.value * data.network.token.price.value, '2,USD'));
 
 	let activity = $derived(
 		staked.units.gt(UInt64.from(0)) ||
 			unstakingTotal.units.gt(UInt64.from(0)) ||
 			totalWithdraw.units.gt(UInt64.from(0))
+	);
+
+	const currency = $derived(Currencies[context.settings.data.displayCurrency]);
+	let currencyValue = $derived(
+		market.account ? market.account.systemtoken.staked : Asset.fromUnits(0, currency.symbol)
 	);
 </script>
 
@@ -98,7 +105,7 @@
 					<AssetText variant="full" value={total} />
 				</p>
 				<Chip>
-					<AssetText variant="full" value={usdValue} />
+					<AssetText variant="full" value={currencyValue} />
 					<!-- TODO: Percent change -->
 				</Chip>
 			</Stack>
@@ -142,5 +149,5 @@
 	</Card>
 	<AccountBalance cta={{ href: `/${networkName}/staking/stake`, label: m.common_stake() }} />
 	<UnstakingBalances records={unstaking} />
-	<StakingCalculator {apr} network={data.network} tokenprice={data.network.token.price} />
+	<StakingCalculator {apr} network={data.network} tokenprice={market.network.systemtoken.price} />
 </MultiCard>

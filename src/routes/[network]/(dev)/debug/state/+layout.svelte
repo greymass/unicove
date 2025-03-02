@@ -24,6 +24,11 @@
 			href: `/${data.network}/debug/state/config`,
 			text: 'Chain'
 		},
+		{
+			active: activeItem === 'market',
+			href: `/${data.network}/debug/state/market`,
+			text: 'Market'
+		},
 		{ active: activeItem === 'wharf', href: `/${data.network}/debug/state/wharf`, text: 'Wharf' }
 	]}
 />

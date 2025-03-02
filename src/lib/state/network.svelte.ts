@@ -9,7 +9,7 @@ import {
 	type ABISerializable,
 	type AssetType
 } from '@wharfkit/antelope';
-import { ChainDefinition, TokenMeta, TokenIdentifier } from '@wharfkit/common';
+import { ChainDefinition } from '@wharfkit/common';
 import { RAMState, Resources as ResourceClient, REXState, PowerUpState } from '@wharfkit/resources';
 import { ABICache } from '@wharfkit/abicache';
 import { snapOrigins } from '@wharfkit/wallet-plugin-metamask';
@@ -31,9 +31,7 @@ import {
 	getChainConfigByName
 } from '$lib/wharf/chains';
 
-import { type TokenType, TokenDistribution, Token } from '$lib/types/token';
-
-import { calculateValue } from '$lib/utils';
+import { type TokenType, TokenDistribution, Token, TokenDefinition } from '$lib/types/token';
 
 import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
 import { Contract as MSIGContract } from '$lib/wharf/contracts/msig';
@@ -41,7 +39,6 @@ import { Contract as SystemContract } from '$lib/wharf/contracts/system';
 import { Contract as TimeContract } from '$lib/wharf/contracts/eosntime';
 import { Contract as TokenContract } from '$lib/wharf/contracts/token';
 import { Contract as UnicoveContract } from '$lib/wharf/contracts/unicove';
-import { defaultPriceSymbol } from './defaults/network';
 import type { ObjectifiedActionData } from '$lib/types/transaction';
 
 export class NetworkState {
@@ -62,7 +59,6 @@ export class NetworkState {
 	readonly resources = $derived(this.getResources());
 	readonly rex = $derived(this.getRexState());
 	readonly token = $derived.by(() => this.getSystemToken());
-	readonly tvl = $derived(this.calculateTvl());
 
 	// Writable state
 	public abis?: ABICache = $state();
@@ -149,22 +145,14 @@ export class NetworkState {
 	}
 
 	getSystemToken(): Token {
-		const id = TokenIdentifier.from({
+		const id = TokenDefinition.from({
 			chain: this.chain.id,
 			symbol: this.config.systemtoken.symbol,
 			contract: this.config.systemtoken.contract
 		});
 
-		const meta = TokenMeta.from({
-			id,
-			logo: this.chain.logo,
-			website: ''
-		});
-
 		const tokenData: TokenType = {
-			meta,
-			price: Asset.fromUnits(this.sources?.oracle?.median || 0, defaultPriceSymbol),
-			prices: []
+			id
 		};
 
 		if (this.sources) {
@@ -175,8 +163,6 @@ export class NetworkState {
 				supply: this.sources.token.supply,
 				max: this.sources.token.max
 			});
-
-			tokenData.marketcap = calculateValue(this.sources?.token?.circulating, tokenData.price);
 		}
 
 		return Token.from(tokenData);
@@ -244,6 +230,10 @@ export class NetworkState {
 			powerup.net.frac_by_kb(this.sources.sample, net)
 		];
 	};
+
+	get foo() {
+		return this.sources?.ram;
+	}
 
 	getResources(): SystemResources {
 		const defaultValue = Asset.fromUnits(0, this.token.symbol);
@@ -313,20 +303,6 @@ export class NetworkState {
 		return response;
 	}
 
-	calculateTvl(): Asset {
-		const token = Asset.fromUnits(0, this.chain.systemToken!.symbol);
-		if (this.supports('rex') && this.sources?.rex) {
-			token.units.add(this.sources.rex.total_lendable.units);
-		}
-		if (this.supports('rammarket') && this.sources?.ram) {
-			token.units.add(this.sources.ram.quote.balance.units);
-		}
-		if (this.token.price.units.gt(UInt64.from(0))) {
-			return calculateValue(token, this.token.price);
-		}
-		return token;
-	}
-
 	async decodeAction(action: Action): Promise<ABISerializable> {
 		const abi = await this.abis?.getAbi(action.account);
 		return Serializer.decode({
@@ -355,8 +331,7 @@ export class NetworkState {
 			shortname: this.shortname,
 			snapOrigins: this.snapOrigin,
 			token: this.token,
-			tokens: this.tokens,
-			tvl: this.tvl
+			tokens: this.tokens
 		};
 	}
 }

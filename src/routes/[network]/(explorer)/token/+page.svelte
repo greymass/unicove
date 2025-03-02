@@ -5,5 +5,5 @@
 </script>
 
 <Code>
-	{JSON.stringify(data.tokens, undefined, 2)}
+	{JSON.stringify(data, undefined, 2)}
 </Code>

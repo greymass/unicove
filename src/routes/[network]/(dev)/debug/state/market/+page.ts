@@ -2,10 +2,10 @@ import type { PageLoad } from './$types';
 
 export const load: PageLoad = async () => {
 	return {
-		title: `Token Directory`,
+		title: `Market State`,
 		subtitle: ``,
 		pageMetaTags: {
-			title: `Token Directory`,
+			title: `Market State`,
 			description: ``
 		}
 	};

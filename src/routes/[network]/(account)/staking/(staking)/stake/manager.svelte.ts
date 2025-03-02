@@ -4,14 +4,13 @@ import type { NetworkState } from '$lib/state/network.svelte';
 import type { WharfState } from '$lib/state/client/wharf.svelte';
 import AssetInput from '$lib/components/input/asset.svelte';
 
-import { TokenBalance } from '@wharfkit/common';
-
 import {
 	defaultQuantity,
 	getStakableBalance,
 	getAPR,
 	getUnstakableBalance
 } from '$lib/utils/staking';
+import { TokenBalance, TokenDefinition } from '$lib/types/token';
 
 export class StakeManager {
 	public input: AssetInput | undefined = $state();
@@ -45,17 +44,19 @@ export class StakeManager {
 	public tokenBalance: TokenBalance | undefined = $derived.by(() => {
 		let balance: TokenBalance | undefined = undefined;
 		if (this.network) {
-			const tokenIdentifier = {
+			const id = TokenDefinition.from({
 				chain: this.network.chain.id,
 				contract: this.network.contracts.token.account,
 				symbol: this.network.chain.systemToken!.symbol
-			};
-			const meta = (this.network.tokens || []).find((item) => item.meta.id.equals(tokenIdentifier));
+			});
+			const meta = (this.network.tokens || []).find((item) => item.id.equals(id));
 			if (meta) {
 				balance = TokenBalance.from({
-					asset: this.staked,
-					contract: this.network.contracts.token.account,
-					metadata: meta
+					balance: this.staked,
+					token: {
+						id,
+						contract: this.network.contracts.token.account
+					}
 				});
 			}
 		}

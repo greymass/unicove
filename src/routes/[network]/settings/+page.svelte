@@ -17,6 +17,7 @@
 	import DatetimeInput from '$lib/components/input/datetime.svelte';
 	import type { FormEventHandler } from 'svelte/elements';
 	import Button from '$lib/components/button/button.svelte';
+	import { SupportedCurrencies, SupportedCurrenciesList } from '$lib/types/currencies.js';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -72,6 +73,19 @@
 		return next;
 	};
 
+	const currencies: ExtendedSelectOption[] = SupportedCurrenciesList.map((c) => ({
+		label: c,
+		value: c
+	}));
+	let selectedCurrency: ExtendedSelectOption | undefined = $derived(
+		currencies.find((r) => r.value === context.settings.data.displayCurrency)
+	);
+	const onCurrencySelectedChange: ChangeFn<ExtendedSelectOption | undefined> = ({ next }) => {
+		context.settings.data.displayCurrency =
+			(next?.value as SupportedCurrencies) || SupportedCurrencies.USD;
+		return next;
+	};
+
 	let earliestExecution: Date | undefined = $derived(
 		context.wharf.session?.walletPlugin.data.earliestExecution
 	);
@@ -106,11 +120,11 @@
 			</div>
 			<div class="flex items-center justify-between">
 				<Stack class="gap-1">
-					<Label for="search-show-pages">Proposal Expiration</Label>
+					<Label for="proposal-expiration">Proposal Expiration</Label>
 					<p class="caption text-sm">The expiration date set on multisig proposals.</p>
 				</Stack>
 				<Select
-					id="range-select"
+					id="proposal-expiration"
 					options={range}
 					onSelectedChange={onExpireSelectedChange}
 					selected={selectedRange}
@@ -150,6 +164,19 @@
 				<!-- <p class="caption text-sm">Choose a language</p> -->
 			</Stack>
 			<LanguageSelect />
+		</div>
+
+		<div class="flex items-center justify-between">
+			<Stack class="gap-1">
+				<Label for="proposal-expiration">Display Currency</Label>
+				<p class="caption text-sm">The currency used to display the value of tokens.</p>
+			</Stack>
+			<Select
+				id="proposal-expiration"
+				options={currencies}
+				onSelectedChange={onCurrencySelectedChange}
+				selected={selectedCurrency}
+			/>
 		</div>
 
 		<div class="flex items-center justify-between">
