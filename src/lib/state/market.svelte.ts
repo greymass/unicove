@@ -32,11 +32,44 @@ export class MarketState {
 		if (response.ok) {
 			const json = await response.json();
 			const pairs = json.pairs.map((pair: typeof TokenPair) => TokenPair.from(pair));
+			// Push RAM token pair
 			pairs.push(
 				TokenPair.from({
 					base: ramKb,
 					quote: this.network.token.id,
 					price: this.network.resources.ram.price.rammarket,
+					updated: this.network.connection.updated
+				})
+			);
+			// Push BRAM token pair
+			pairs.push(
+				TokenPair.from({
+					base: TokenDefinition.from({
+						symbol: '0,BRAM',
+						contract: 'ram.defi',
+						chain: this.network.chain.id
+					}),
+					quote: this.network.token.id,
+					price: Asset.fromUnits(
+						this.network.resources.ram.price.rammarket.units.dividing(1000),
+						this.network.token.symbol
+					),
+					updated: this.network.connection.updated
+				})
+			);
+			// Push WRAM token pair
+			pairs.push(
+				TokenPair.from({
+					base: TokenDefinition.from({
+						symbol: '0,WRAM',
+						contract: 'eosio.wram',
+						chain: this.network.chain.id
+					}),
+					quote: this.network.token.id,
+					price: Asset.fromUnits(
+						this.network.resources.ram.price.rammarket.units.dividing(1000),
+						this.network.token.symbol
+					),
 					updated: this.network.connection.updated
 				})
 			);
