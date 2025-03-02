@@ -12,7 +12,6 @@
 	const balances = $derived(data.account.balances.filter((item) => item.balance.units.gt(zero)));
 
 	const context = getContext<UnicoveContext>('state');
-	const market = getContext<MarketContext>('market');
 
 	const isCurrentUser = $derived(
 		context.account &&
