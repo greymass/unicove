@@ -12,11 +12,19 @@
 	import Button from '$lib/components/button/button.svelte';
 	import { Breakdown, BreakdownRow } from '$lib/components/breakdown';
 	import * as m from '$lib/paraglide/messages';
+	import { AccountValueState } from '$lib/state/value.svelte.js';
 
 	const { data } = $props();
 
 	const context = getContext<UnicoveContext>('state');
 	const market = getContext<MarketContext>('market');
+
+	const currentAccountValue = new AccountValueState({
+		account: data.account,
+		network: data.network,
+		settings: context.settings,
+		market: market.market
+	});
 
 	const isCurrentUser = $derived(
 		(context.account?.name && data.account.name?.equals(context.account.name)) || false
@@ -43,20 +51,20 @@
 </script>
 
 <!-- What gets shown on this page if data.account doesn't exist? -->
-{#if data.account && market.account}
+{#if data.account && currentAccountValue}
 	<MultiCard>
 		<Card id="account-value" style="column-span: all;">
 			<Cluster class="items-center">
 				<picture class="grid size-12 place-items-center rounded-full bg-mineShaft-900">
 					<DollarSign />
 				</picture>
-				{#if market.account}
+				{#if currentAccountValue}
 					<div>
 						<p>{m.account_page_total_value()}</p>
 						<AssetText
 							class="text-2xl font-bold text-white"
 							variant="full"
-							value={market.account.systemtoken.total}
+							value={currentAccountValue.systemtoken.total}
 						/>
 					</div>
 				{/if}
@@ -78,9 +86,9 @@
 						<Stack class="gap-2">
 							<h4 class="text-muted text-base leading-none">{m.common_value()}</h4>
 							<p class="text-xl font-semibold leading-none text-white">
-								<AssetText variant="full" value={market.account.systemtoken.systemtoken} />
+								<AssetText variant="full" value={currentAccountValue.systemtoken.systemtoken} />
 							</p>
-							{#if market.account.pair}
+							{#if currentAccountValue.pair}
 								<Chip>
 									<TradingPair value={market.network.systemtoken} />
 									<!-- TODO: Percent change -->
@@ -170,9 +178,9 @@
 				<Stack class="gap-2">
 					<h4 class="text-muted text-base leading-none">{m.common_value()}</h4>
 					<p class="text-xl font-semibold leading-none text-white">
-						<AssetText variant="full" value={market.account.systemtoken.ram} />
+						<AssetText variant="full" value={currentAccountValue.systemtoken.ram} />
 					</p>
-					{#if market.account.pair}
+					{#if currentAccountValue.pair}
 						<Chip>
 							<TradingPair value={market.network.ram} />
 							<!-- TODO: Percent change -->
@@ -208,7 +216,7 @@
 			</Stack>
 		</Card>
 
-		<Tokendistribution data={market.account.systemtoken} />
+		<Tokendistribution data={currentAccountValue.systemtoken} />
 
 		{#if context.settings.data.advancedMode}
 			<Card title={m.common_resources()}>
