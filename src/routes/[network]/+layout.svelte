@@ -47,14 +47,15 @@
 		}
 	});
 
-	let market = $state(new MarketState(data.network, settings));
-	let networkValue = $state(
-		new NetworkValueState({
-			network: data.network,
-			market: market,
-			settings: settings
-		})
-	);
+	const initialMarketValue = new MarketState(data.network, settings);
+	const initialNetworkValue = new NetworkValueState({
+		network: data.network,
+		market: initialMarketValue,
+		settings: settings
+	});
+
+	let market = $state(initialMarketValue);
+	let networkValue = $state(initialNetworkValue);
 
 	let accountValue: AccountValueState | undefined = $state();
 
@@ -77,13 +78,13 @@
 		market.refresh();
 		networkValue = new NetworkValueState({
 			network: data.network,
-			market: market,
+			market,
 			settings: settings
 		});
 		accountValue = new AccountValueState({
 			account,
 			network: data.network,
-			market: market,
+			market,
 			settings: settings
 		});
 		return account;
