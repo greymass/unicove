@@ -48,7 +48,7 @@ export async function GET({ locals: { network }, params, url }: RequestEvent) {
 			}
 		},
 		{
-			headers: getCacheHeaders(3600)
+			headers: getCacheHeaders(300)
 		}
 	);
 }
