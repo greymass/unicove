@@ -215,9 +215,11 @@
 
 						<header class="grid gap-3 pt-2 text-xl font-semibold">
 							<span>{m.common_my_accounts()}</span>
-							{#if chainSessions.length > 4}
+
+							<!-- Filter or Search accounts -->
+							{#if chainSessions.length > 4 || filterValue}
 								<Text
-									class="rounded-full bg-transparent text-sm"
+									class="rounded-full bg-transparent pl-6 text-sm"
 									placeholder="Filter accounts"
 									bind:value={filterValue}
 								>
