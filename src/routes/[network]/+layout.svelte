@@ -27,7 +27,6 @@
 	let account: AccountState | undefined = $state();
 	const history = new SearchRecordStorage(data.network);
 	const settings = new SettingsState();
-	const market = new MarketState(data.network, settings);
 	const wharf = new WharfState(settings);
 
 	setContext<UnicoveContext>('state', {
@@ -48,11 +47,14 @@
 		}
 	});
 
-	const networkValue = new NetworkValueState({
-		network: data.network,
-		market: market,
-		settings: settings
-	});
+	let market = $state(new MarketState(data.network, settings));
+	let networkValue = $state(
+		new NetworkValueState({
+			network: data.network,
+			market: market,
+			settings: settings
+		})
+	);
 
 	let accountValue: AccountValueState | undefined = $state();
 
@@ -70,13 +72,20 @@
 
 	export function setAccount(name: NameType, fetchOverride?: typeof fetch): AccountState {
 		account = new AccountState(data.network, name, fetchOverride);
+		account.refresh();
+		market = new MarketState(data.network, settings);
+		market.refresh();
+		networkValue = new NetworkValueState({
+			network: data.network,
+			market: market,
+			settings: settings
+		});
 		accountValue = new AccountValueState({
 			account,
 			network: data.network,
 			market: market,
 			settings: settings
 		});
-		account.refresh();
 		return account;
 	}
 
@@ -148,7 +157,7 @@
 
 		// Update the market state on a set interval
 		const marketInterval = setInterval(() => {
-			data.network.refresh();
+			market.refresh();
 		}, MARKET_UPDATE_INTERVAL);
 
 		// Show the banner if localStorage has no flag set
