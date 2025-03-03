@@ -2,32 +2,44 @@
 	import { Checksum256, type NameType } from '@wharfkit/antelope';
 	import { chainLogos } from '@wharfkit/common';
 	import { onMount, setContext, untrack } from 'svelte';
-	import X from 'lucide-svelte/icons/circle-x';
-	import { env } from '$env/dynamic/public';
 	import { Head, type SeoConfig } from 'svead';
-	import { page } from '$app/stores';
 	import extend from 'just-extend';
 
-	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte';
-	import { AccountState } from '$lib/state/client/account.svelte.js';
-	import { WharfState } from '$lib/state/client/wharf.svelte.js';
-	import { SearchRecordStorage } from '$lib/state/search.svelte.js';
+	import X from 'lucide-svelte/icons/circle-x';
+	import { env } from '$env/dynamic/public';
+	import { page } from '$app/state';
 
-	import MobileNavigation from '$lib/components/navigation/mobilenavigation.svelte';
-	import SideMenuContent from '$lib/components/navigation/sidemenu.svelte';
+	import { AccountState } from '$lib/state/client/account.svelte.js';
+	import { AccountValueState, NetworkValueState } from '$lib/state/value.svelte.js';
+	import { MarketState } from '$lib/state/market.svelte.js';
+	import { SearchRecordStorage } from '$lib/state/search.svelte.js';
+	import { SettingsState } from '$lib/state/settings.svelte.js';
+	import { WharfState } from '$lib/state/client/wharf.svelte.js';
+	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte';
+
 	import AccountSwitcher from '$lib/components/accountswitch.svelte';
 	import Search from '$lib/components/search/input.svelte';
-	import { SettingsState } from '$lib/state/settings.svelte.js';
+	import SideMenuContent from '$lib/components/navigation/sidemenu.svelte';
 	import Unicovelogo from '$lib/assets/unicovelogo.svelte';
-	import { MarketState } from '$lib/state/market.svelte.js';
-	import { AccountValueState, NetworkValueState } from '$lib/state/value.svelte.js';
+	import MobileNavigation from '$lib/components/navigation/mobilenavigation.svelte';
 
 	let { children, data } = $props();
 
-	let account: AccountState | undefined = $state();
 	const history = new SearchRecordStorage(data.network);
 	const settings = new SettingsState();
 	const wharf = new WharfState(settings);
+	const initialMarketValue = new MarketState(data.network, settings);
+	const initialNetworkValue = new NetworkValueState({
+		network: data.network,
+		market: initialMarketValue,
+		settings: settings
+	});
+
+	let market = $state(initialMarketValue);
+	let networkValue = $state(initialNetworkValue);
+
+	let account: AccountState | undefined = $state();
+	let accountValue: AccountValueState | undefined = $state();
 
 	setContext<UnicoveContext>('state', {
 		get account() {
@@ -46,19 +58,6 @@
 			return wharf;
 		}
 	});
-
-	const initialMarketValue = new MarketState(data.network, settings);
-	const initialNetworkValue = new NetworkValueState({
-		network: data.network,
-		market: initialMarketValue,
-		settings: settings
-	});
-
-	let market = $state(initialMarketValue);
-	let networkValue = $state(initialNetworkValue);
-
-	let accountValue: AccountValueState | undefined = $state();
-
 	setContext<MarketContext>('market', {
 		get account() {
 			return accountValue;
@@ -182,7 +181,7 @@
 	}
 
 	const seo_config = $derived<SeoConfig>(
-		extend({}, data.baseMetaTags, $page.data?.pageMetaTags) as SeoConfig
+		extend({}, data.baseMetaTags, page.data?.pageMetaTags) as SeoConfig
 	);
 </script>
 
