@@ -37,8 +37,6 @@
 
 	let { network, networkLogo, networkName }: Props = $props();
 
-	$inspect(market.market);
-
 	const tvl = $derived(calculateTvl(network, market.network));
 	const marketcap = $derived(
 		network.token.distribution
