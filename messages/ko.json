@@ -356,8 +356,6 @@
 	"send_tokens_to_send": "보낼 토큰",
 	"settings_advanced": "고급의",
 	"settings_developer": "개발자",
-	"settings_enable_advanced": "고급 옵션 활성화",
-	"settings_enable_advanced_desc": "네트워크 리소스 관리, 자산 정확도 향상 등",
 	"settings_enable_developer": "개발자 모드 활성화",
 	"settings_enable_developer_desc": "개발 및 디버깅에 사용되는 원시 데이터 표시",
 	"settings_general": "일반적인",

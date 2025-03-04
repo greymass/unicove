@@ -6,7 +6,7 @@
 	import Switch from '$lib/components/input/switch.svelte';
 	import LanguageSelect from '$lib/components/select/language.svelte';
 	import Label from '$lib/components/input/label.svelte';
-	import { Stack } from '$lib/components/layout';
+	import { Card, Stack } from '$lib/components/layout';
 	import { type MarketContext, type UnicoveContext } from '$lib/state/client.svelte';
 	import Code from '$lib/components/code.svelte';
 	import * as m from '$lib/paraglide/messages';
@@ -18,6 +18,7 @@
 	import type { FormEventHandler } from 'svelte/elements';
 	import Button from '$lib/components/button/button.svelte';
 	import { SupportedCurrencies, SupportedCurrenciesList } from '$lib/types/currencies.js';
+	import { availableLanguageTags } from '$lib/paraglide/runtime';
 
 	const context = getContext<UnicoveContext>('state');
 	const market = getContext<MarketContext>('market');
@@ -117,119 +118,135 @@
 	/>
 	<div class="grid max-w-screen-sm gap-8">
 		{#if context.wharf.session?.walletPlugin.id === 'wallet-plugin-multisig'}
+			<Card class="grid gap-8 border border-mineShaft-900">
+				<div class="flex items-center justify-between">
+					<h2 class="text-muted text-2xl font-semibold">MSIG Configuration</h2>
+				</div>
+				<div class="flex items-center justify-between">
+					<Stack class="gap-2">
+						<Label for="proposal-expiration">Proposal Expiration</Label>
+						<p class="caption text-sm">The expiration date set on multisig proposals.</p>
+					</Stack>
+					<Select
+						id="proposal-expiration"
+						options={range}
+						onSelectedChange={onExpireSelectedChange}
+						selected={selectedRange}
+					/>
+				</div>
+				{#if advancedMode}
+					<fieldset class="grid gap-4">
+						<Label for="search-show-pages">Proposal Earliest Execution</Label>
+						<p class="caption text-sm">
+							Set a datetime to specify the earliest a proposal can be executed. This value will be
+							reset after each proposal is created.
+						</p>
+						<DatetimeInput
+							bind:this={refEarliestExecution}
+							oninput={onEarliestExecutionChange}
+							date={earliestExecution}
+						>
+							Local&nbsp;Time
+						</DatetimeInput>
+						{#if timestamp}
+							<p class="text-sm">
+								Set for UTC: {timestamp}
+								<Button variant="pill" onclick={clearEarliestExecution}>Clear</Button>
+							</p>
+						{/if}
+					</fieldset>
+				{/if}
+			</Card>
+		{/if}
+
+		<Card class="grid gap-8 border border-mineShaft-900">
 			<div class="flex items-center justify-between">
-				<h2 class="text-muted text-xl font-semibold">Multisig Configuration</h2>
+				<h2 class="text-muted text-2xl font-semibold">Preferences</h2>
 			</div>
+			<div class="flex items-center justify-between gap-2">
+				<Stack class="gap-2">
+					<Label for="language-select">
+						<div class="flex justify-between gap-2">
+							{#each availableLanguageTags as lang}
+								<span>{m.settings_language_selector({}, { languageTag: lang })}</span>
+							{/each}
+						</div>
+					</Label>
+					<p class="caption text-sm">The language used throughout Unicove.</p>
+				</Stack>
+				<LanguageSelect />
+			</div>
+
 			<div class="flex items-center justify-between">
-				<Stack class="gap-1">
-					<Label for="proposal-expiration">Proposal Expiration</Label>
-					<p class="caption text-sm">The expiration date set on multisig proposals.</p>
+				<Stack class="gap-2">
+					<Label for="proposal-expiration">Display Currency</Label>
+					<p class="caption text-sm">The currency used to display the value of tokens.</p>
 				</Stack>
 				<Select
 					id="proposal-expiration"
-					options={range}
-					onSelectedChange={onExpireSelectedChange}
-					selected={selectedRange}
+					options={currencies}
+					onSelectedChange={onCurrencySelectedChange}
+					selected={selectedCurrency}
 				/>
 			</div>
-			{#if advancedMode}
-				<fieldset class="grid gap-4">
-					<Label for="search-show-pages">Proposal Earliest Execution</Label>
-					<p class="caption text-sm">
-						Set a datetime to specify the earliest a proposal can be executed. This value will be
-						reset after each proposal is created.
-					</p>
-					<DatetimeInput
-						bind:this={refEarliestExecution}
-						oninput={onEarliestExecutionChange}
-						date={earliestExecution}
+		</Card>
+
+		<Card class="grid gap-8 border border-mineShaft-900">
+			<div class="flex items-center justify-between">
+				<h2 class="text-muted text-2xl font-semibold">Navigation</h2>
+			</div>
+			<div class="flex items-center justify-between">
+				<Stack class="gap-2">
+					<Label for="search-show-pages">{m.settings_search_show_pages()}</Label>
+					<p class="caption text-sm">{m.settings_search_show_pages_desc()}</p>
+				</Stack>
+				<Switch id="search-show-pages" bind:checked={searchShowPages} />
+			</div>
+			<div class="flex items-center justify-between">
+				<Stack class="gap-2">
+					<Label for="search-account-switch">{m.settings_search_account_switch()}</Label>
+					<p class="caption text-sm">{m.settings_search_account_switch_desc()}</p>
+				</Stack>
+				<Switch id="search-account-switch" bind:checked={searchAccountSwitch} />
+			</div>
+			<div class="flex items-center justify-between">
+				<Stack class="gap-2">
+					<Label for="prevent-account-page-switching"
+						>{m.settings_prevent_account_page_switching()}</Label
 					>
-						Local&nbsp;Time
-					</DatetimeInput>
-					{#if timestamp}
-						<p class="text-sm">
-							Set for UTC: {timestamp}
-							<Button variant="pill" onclick={clearEarliestExecution}>Clear</Button>
-						</p>
-					{/if}
-				</fieldset>
-			{/if}
-		{/if}
+					<p class="caption text-sm">{m.settings_prevent_account_page_switching_desc()}</p>
+				</Stack>
+				<Switch id="prevent-account-page-switching" bind:checked={preventAccountPageSwitching} />
+			</div>
+		</Card>
 
-		<div class="flex items-center justify-between">
-			<h2 class="text-muted text-xl font-semibold">{m.settings_general()}</h2>
-		</div>
+		<Card class="grid gap-8 border border-mineShaft-900">
+			<div class="flex items-center justify-between">
+				<h2 class="text-muted text-2xl font-semibold">{m.settings_advanced()}</h2>
+			</div>
 
-		<div class="flex items-center justify-between">
-			<Stack class="gap-1">
-				<Label for="language-select">{m.settings_language_selector()}</Label>
-				<!-- <p class="caption text-sm">Choose a language</p> -->
-			</Stack>
-			<LanguageSelect />
-		</div>
-
-		<div class="flex items-center justify-between">
-			<Stack class="gap-1">
-				<Label for="proposal-expiration">Display Currency</Label>
-				<p class="caption text-sm">The currency used to display the value of tokens.</p>
-			</Stack>
-			<Select
-				id="proposal-expiration"
-				options={currencies}
-				onSelectedChange={onCurrencySelectedChange}
-				selected={selectedCurrency}
-			/>
-		</div>
-
-		<div class="flex items-center justify-between">
-			<Stack class="gap-1">
-				<Label for="search-show-pages">{m.settings_search_show_pages()}</Label>
-				<p class="caption text-sm">{m.settings_search_show_pages_desc()}</p>
-			</Stack>
-			<Switch id="search-show-pages" bind:checked={searchShowPages} />
-		</div>
-
-		<div class="flex items-center justify-between">
-			<Stack class="gap-1">
-				<Label for="search-account-switch">{m.settings_search_account_switch()}</Label>
-				<p class="caption text-sm">{m.settings_search_account_switch_desc()}</p>
-			</Stack>
-			<Switch id="search-account-switch" bind:checked={searchAccountSwitch} />
-		</div>
-
-		<div class="flex items-center justify-between">
-			<Stack class="gap-1">
-				<Label for="prevent-account-page-switching"
-					>{m.settings_prevent_account_page_switching()}</Label
-				>
-				<p class="caption text-sm">{m.settings_prevent_account_page_switching_desc()}</p>
-			</Stack>
-			<Switch id="prevent-account-page-switching" bind:checked={preventAccountPageSwitching} />
-		</div>
-
-		<div class="flex items-center justify-between">
-			<h2 class="text-muted text-xl font-semibold">{m.settings_advanced()}</h2>
-		</div>
-
-		<div class="flex items-center justify-between">
-			<Stack class="gap-1">
-				<Label for="advanced-mode">{m.settings_enable_advanced()}</Label>
-				<p class="caption text-sm">{m.settings_enable_advanced_desc()}</p>
-			</Stack>
-			<Switch id="advanced-mode" bind:checked={advancedMode} />
-		</div>
+			<div class="flex items-center justify-between">
+				<Stack class="gap-2">
+					<Label for="advanced-mode">{m.settings_enable_advanced()}</Label>
+					<p class="caption text-sm">{m.settings_enable_advanced_desc()}</p>
+				</Stack>
+				<Switch id="advanced-mode" bind:checked={advancedMode} />
+			</div>
+		</Card>
 
 		{#if advancedMode}
-			<div class="flex items-center justify-between">
-				<h2 class="text-muted text-xl font-semibold">{m.settings_developer()}</h2>
-			</div>
-			<div class="flex items-center justify-between">
-				<Stack class="gap-1">
-					<Label for="debug-mode">{m.settings_enable_developer()}</Label>
-					<p class="caption text-sm">{m.settings_enable_developer_desc()}</p>
-				</Stack>
-				<Switch id="debug-mode" bind:checked={debugMode} />
-			</div>
+			<Card class="grid gap-8 border border-mineShaft-900">
+				<div class="flex items-center justify-between">
+					<h2 class="text-muted text-2xl font-semibold">{m.settings_developer()}</h2>
+				</div>
+				<div class="flex items-center justify-between">
+					<Stack class="gap-2">
+						<Label for="debug-mode">{m.settings_enable_developer()}</Label>
+						<p class="caption text-sm">{m.settings_enable_developer_desc()}</p>
+					</Stack>
+					<Switch id="debug-mode" bind:checked={debugMode} />
+				</div>
+			</Card>
 		{/if}
 	</div>
 	{#if debugMode}
