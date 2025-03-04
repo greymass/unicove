@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
 import type { Action } from '@wharfkit/antelope';
-import { ABI, Asset, Blob, Name, Struct } from '@wharfkit/antelope';
+import { ABI, Asset, Blob, Name, Struct, TimePoint } from '@wharfkit/antelope';
 import type { ActionOptions, ContractArgs, PartialBy, Table } from '@wharfkit/contract';
 import { Contract as BaseContract } from '@wharfkit/contract';
 export const abiBlob = Blob.from(
-	'DmVvc2lvOjphYmkvMS4yAAQIZ2V0cGFpcnMAABB0b2tlbl9kZWZpbml0aW9uAAIGc3ltYm9sBnN5bWJvbAhjb250cmFjdARuYW1lCnRva2VuX3BhaXIAAwRiYXNlEHRva2VuX2RlZmluaXRpb24FcXVvdGUQdG9rZW5fZGVmaW5pdGlvbgVwcmljZQVhc3NldAl0b2tlbnBhaXIAAAIAAAD4OlOzYghnZXRwYWlycwAAALjO1KkgzQl0b2tlbnBhaXIAAAEDYXBpA2FwaQAAAAIAAAD4OlOzYgx0b2tlbl9wYWlyW10AALjO1KkgzQp0b2tlbl9wYWly'
+	'DmVvc2lvOjphYmkvMS4yAAQIZ2V0cGFpcnMAABB0b2tlbl9kZWZpbml0aW9uAAIGc3ltYm9sBnN5bWJvbAhjb250cmFjdARuYW1lCnRva2VuX3BhaXIABARiYXNlEHRva2VuX2RlZmluaXRpb24FcXVvdGUQdG9rZW5fZGVmaW5pdGlvbgVwcmljZQVhc3NldAd1cGRhdGVkCnRpbWVfcG9pbnQJdG9rZW5wYWlyAAACAAAA+DpTs2IIZ2V0cGFpcnMAAAC4ztSpIM0JdG9rZW5wYWlyAAABA2FwaQNhcGkAAAACAAAA+DpTs2IMdG9rZW5fcGFpcltdAAC4ztSpIM0KdG9rZW5fcGFpcg=='
 );
 export const abi = ABI.from(abiBlob);
 export namespace Types {
@@ -25,6 +25,8 @@ export namespace Types {
 		declare quote: token_definition;
 		@Struct.field(Asset)
 		declare price: Asset;
+		@Struct.field(TimePoint)
+		declare updated: TimePoint;
 	}
 	@Struct.type('tokenpair')
 	export class tokenpair extends Struct {}

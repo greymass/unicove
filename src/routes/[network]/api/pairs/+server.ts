@@ -57,7 +57,7 @@ export async function GET({ fetch, locals: { network } }: RequestEvent) {
 	);
 
 	if (network.supports('delphihelper')) {
-		pairs.push(...(await delphihelper(network)));
+\		pairs.push(...(await delphihelper(network)));
 	} else if (network.supports('delphioracle')) {
 		pairs.push(...(await delphioracle(network)));
 	}
@@ -116,13 +116,31 @@ async function delphioracle(network: NetworkState): Promise<TokenPair[]> {
 }
 
 async function delphihelper(network: NetworkState): Promise<TokenPair[]> {
-	const pairs = await network.contracts.delphihelper.readonly('getpairs');
-	return pairs.map((pair) =>
-		TokenPair.from({
-			...pair,
-			updated: new Date()
-		})
-	);
+	const rows = await network.contracts.delphihelper.readonly('getpairs');
+	const pairs = [];
+	for (const pair of rows) {
+		// Skip prices older than 24hrs
+		const updated = pair.updated.toDate();
+		if (Number(updated) < new Date().getTime() - 1000 * 60 * 60 * 24) {
+			continue;
+		}
+		pairs.push(
+			TokenPair.from({
+				...pair,
+				base: TokenDefinition.from({
+					symbol: pair.base.symbol,
+					contract: pair.base.contract.equals('') ? undefined : pair.base.contract,
+					chain: pair.base.contract.equals('') ? undefined : network.chain.id
+				}),
+				quote: TokenDefinition.from({
+					symbol: pair.quote.symbol,
+					contract: pair.quote.contract.equals('') ? undefined : pair.quote.contract,
+					chain: pair.quote.contract.equals('') ? undefined : network.chain.id
+				})
+			})
+		);
+	}
+	return pairs;
 }
 
 const USDT = TokenDefinition.from({
