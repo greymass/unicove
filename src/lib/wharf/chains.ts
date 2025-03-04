@@ -1,6 +1,7 @@
 import type { Asset, Checksum256Type, NameType } from '@wharfkit/antelope';
 import { ChainDefinition, TokenIdentifier } from '@wharfkit/common';
 
+import { Contract as DelphiHelperContract } from '$lib/wharf/contracts/delphihelper';
 import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
 import { Contract as MSIGContract } from '$lib/wharf/contracts/msig';
 import { Contract as SystemContract } from '$lib/wharf/contracts/system';
@@ -13,6 +14,7 @@ import { PUBLIC_CHAINS } from '$env/static/public';
 export const chains = JSON.parse(PUBLIC_CHAINS) as ChainConfig[];
 
 export interface DefaultContracts {
+	delphihelper: DelphiHelperContract;
 	delphioracle: DelphiOracleContract;
 	eosntime: TimeContract;
 	msig: MSIGContract;
@@ -62,6 +64,7 @@ export interface ChainConfig {
 }
 
 export type FeatureType =
+	| 'delphihelper'
 	| 'delphioracle'
 	| 'directfunding'
 	| 'eosntime'

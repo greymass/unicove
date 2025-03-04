@@ -33,6 +33,7 @@ import {
 
 import { type TokenType, TokenDistribution, Token, TokenDefinition } from '$lib/types/token';
 
+import { Contract as DelphiHelperContract } from '$lib/wharf/contracts/delphihelper';
 import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
 import { Contract as MSIGContract } from '$lib/wharf/contracts/msig';
 import { Contract as SystemContract } from '$lib/wharf/contracts/system';
@@ -98,6 +99,7 @@ export class NetworkState {
 		this.connection.endpoint = (this.client.provider as FetchProvider).url;
 
 		this.contracts = {
+			delphihelper: new DelphiHelperContract({ client: this.client }),
 			delphioracle: new DelphiOracleContract({ client: this.client }),
 			eosntime: new TimeContract({ client: this.client }),
 			msig: new MSIGContract({ client: this.client }),

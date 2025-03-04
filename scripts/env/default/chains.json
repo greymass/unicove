@@ -4,6 +4,7 @@
 		"name": "eos",
 		"features": {
 			"delphioracle": true,
+			"delphihelper": true,
 			"directfunding": true,
 			"eosntime": true,
 			"giftedram": false,
@@ -42,6 +43,7 @@
 		},
 		"features": {
 			"delphioracle": false,
+			"delphihelper": false,
 			"directfunding": false,
 			"eosntime": false,
 			"giftedram": true,
@@ -77,6 +79,7 @@
 		},
 		"features": {
 			"delphioracle": false,
+			"delphihelper": false,
 			"directfunding": false,
 			"eosntime": false,
 			"lightapi": false,

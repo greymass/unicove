@@ -56,9 +56,12 @@ export async function GET({ fetch, locals: { network } }: RequestEvent) {
 		})
 	);
 
-	if (network.supports('delphioracle')) {
+	if (network.supports('delphihelper')) {
+		pairs.push(...(await delphihelper(network)));
+	} else if (network.supports('delphioracle')) {
 		pairs.push(...(await delphioracle(network)));
 	}
+
 	const derived = deriveAdditionalPairs(pairs);
 	return json(
 		TokenDataSources.from({
@@ -110,6 +113,11 @@ async function delphioracle(network: NetworkState): Promise<TokenPair[]> {
 		}
 	}
 	return pairs;
+}
+
+async function delphihelper(network: NetworkState): Promise<TokenPair[]> {
+	const pairs = await network.contracts.delphihelper.readonly('getpairs');
+	return pairs.map((pair) => TokenPair.from(pair));
 }
 
 const USDT = TokenDefinition.from({

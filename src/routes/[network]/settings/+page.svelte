@@ -20,6 +20,7 @@
 	import { SupportedCurrencies, SupportedCurrenciesList } from '$lib/types/currencies.js';
 
 	const context = getContext<UnicoveContext>('state');
+	const market = getContext<MarketContext>('market');
 
 	let preventAccountPageSwitching = $state(!!context.settings.data.preventAccountPageSwitching);
 	let searchAccountSwitch = $state(!!context.settings.data.searchAccountSwitch);
