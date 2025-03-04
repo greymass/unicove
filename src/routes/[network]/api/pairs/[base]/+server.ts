@@ -1,5 +1,5 @@
 import { getCacheHeaders } from '$lib/utils';
-import { TokenDataSources, TokenDefinition, TokenPair } from '$lib/types/token';
+import { TokenDataSources, TokenDefinition, tokenEquals, TokenPair } from '$lib/types/token';
 import { Serializer } from '@wharfkit/session';
 import type { RequestEvent } from './$types';
 import { json } from '@sveltejs/kit';
@@ -16,12 +16,11 @@ export async function GET({ fetch, locals: { network }, params }: RequestEvent) 
 		return json({ error: 'Failed to fetch pairs' }, { status: 500 });
 	}
 	const data = await response.json();
+	const pairs = data.pairs.filter((pair: TokenPair) => tokenEquals(pair.base, basePair));
 	return json(
 		TokenDataSources.from({
 			ts: new Date(),
-			pairs: data.pairs.filter((pair: TokenPair) =>
-				TokenDefinition.from(pair.base).equals(basePair)
-			)
+			pairs
 		}),
 		{
 			headers: getCacheHeaders(300)

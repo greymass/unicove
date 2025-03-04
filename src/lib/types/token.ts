@@ -76,3 +76,11 @@ export class TokenDataSources extends Struct {
 	@Struct.field(TimePointSec) declare ts: TimePointSec;
 	@Struct.field(TokenPair, { array: true }) declare pairs: TokenPair[];
 }
+
+export function tokenEquals(first: TokenDefinition, second: TokenDefinition) {
+	return (
+		String(first.chain) === String(second.chain) &&
+		String(first.contract) === String(second.contract) &&
+		String(first.symbol) === String(second.symbol)
+	);
+}

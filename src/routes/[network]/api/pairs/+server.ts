@@ -2,9 +2,10 @@ import { json, type RequestEvent } from '@sveltejs/kit';
 
 import { getCacheHeaders } from '$lib/utils';
 import type { NetworkState } from '$lib/state/network.svelte';
-import { TokenDataSources, TokenDefinition, TokenPair } from '$lib/types/token';
+import { TokenDataSources, TokenDefinition, tokenEquals, TokenPair } from '$lib/types/token';
 import { Asset, Chains, TimePointSec } from '@wharfkit/session';
 import { Currencies, ramKb } from '$lib/types/currencies';
+import { RAMState } from '@wharfkit/resources';
 
 export async function GET({ fetch, locals: { network } }: RequestEvent) {
 	const pairs: TokenPair[] = [];
@@ -14,12 +15,15 @@ export async function GET({ fetch, locals: { network } }: RequestEvent) {
 		pairs.push(...fiat.pairs.map((pair: TokenPair) => TokenPair.from(pair)));
 	}
 
+	const ram = await network.resourceClient.v1.ram.get_state();
+	const rammarket = RAMState.from(ram).price_per_kb(1);
+
 	// Push RAM token pair
 	pairs.push(
 		TokenPair.from({
 			base: ramKb,
 			quote: network.token.id,
-			price: network.resources.ram.price.rammarket,
+			price: rammarket,
 			updated: network.connection.updated
 		})
 	);
@@ -32,10 +36,7 @@ export async function GET({ fetch, locals: { network } }: RequestEvent) {
 				chain: network.chain.id
 			}),
 			quote: network.token.id,
-			price: Asset.fromUnits(
-				network.resources.ram.price.rammarket.units.dividing(1000),
-				network.token.symbol
-			),
+			price: Asset.fromUnits(rammarket.units.dividing(1000), network.token.symbol),
 			updated: network.connection.updated
 		})
 	);
@@ -48,10 +49,7 @@ export async function GET({ fetch, locals: { network } }: RequestEvent) {
 				chain: network.chain.id
 			}),
 			quote: network.token.id,
-			price: Asset.fromUnits(
-				network.resources.ram.price.rammarket.units.dividing(1000),
-				network.token.symbol
-			),
+			price: Asset.fromUnits(rammarket.units.dividing(1000), network.token.symbol),
 			updated: network.connection.updated
 		})
 	);
@@ -71,14 +69,6 @@ export async function GET({ fetch, locals: { network } }: RequestEvent) {
 		{
 			headers: getCacheHeaders(300)
 		}
-	);
-}
-
-function tokenEquals(first: TokenDefinition, second: TokenDefinition) {
-	return (
-		String(first.chain) === String(second.chain) &&
-		String(first.contract) === String(second.contract) &&
-		String(first.symbol) === String(second.symbol)
 	);
 }
 
