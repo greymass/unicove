@@ -103,14 +103,6 @@
 		});
 	});
 
-	$effect(() => {
-		const currency = settings.data.displayCurrency;
-		untrack(() => {
-			console.log('refreshing currency');
-			market.refresh();
-		});
-	});
-
 	async function setupWharf() {
 		if (!wharf.sessionKit) {
 			wharf.init(data.network);

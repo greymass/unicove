@@ -2,7 +2,7 @@
 	import Button from '$lib/components/button/button.svelte';
 	import Code from '$lib/components/code.svelte';
 	import type { MarketContext } from '$lib/state/client.svelte.js';
-	import { getContext, onMount } from 'svelte';
+	import { getContext } from 'svelte';
 
 	const context = getContext<MarketContext>('market');
 

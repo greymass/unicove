@@ -83,6 +83,7 @@
 	const onCurrencySelectedChange: ChangeFn<ExtendedSelectOption | undefined> = ({ next }) => {
 		context.settings.data.displayCurrency =
 			(next?.value as SupportedCurrencies) || SupportedCurrencies.USD;
+		market.market.refresh();
 		return next;
 	};
 
