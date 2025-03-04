@@ -1,8 +1,8 @@
-import { Asset, TimePointSec } from '@wharfkit/antelope';
+import { Asset, Serializer, TimePointSec } from '@wharfkit/antelope';
 
 import { TokenDataSources, TokenPair } from '$lib/types/token';
 import { TokenDefinition } from '$lib/types/token';
-import { ramKb } from '$lib/types/currencies';
+import { Currencies, ramKb } from '$lib/types/currencies';
 
 import type { NetworkState } from './network.svelte';
 import type { SettingsState } from './settings.svelte';
@@ -15,7 +15,10 @@ export class MarketState {
 	readonly settings = $state() as SettingsState;
 	readonly network = $state() as NetworkState;
 
-	readonly pairs = $derived(deriveAdditionalPairs(this.sources.pairs));
+	readonly pairs = $derived([
+		...this.sources.pairs,
+		...this.sources.pairs.map((pair) => pair.reversed)
+	]);
 
 	constructor(network: NetworkState, settings: SettingsState) {
 		this.network = network;
@@ -28,55 +31,12 @@ export class MarketState {
 	}
 
 	public async refresh() {
-		const response = await this.network.fetch(`/${this.network}/api/pairs`);
+		const basePair = Currencies[this.settings.data.displayCurrency];
+		const encoded = Serializer.encode({ object: basePair });
+		const response = await this.network.fetch(`/${this.network}/api/pairs/${encoded}`);
 		if (response.ok) {
 			const json = await response.json();
-			const pairs = json.pairs.map((pair: typeof TokenPair) => TokenPair.from(pair));
-			// Push RAM token pair
-			pairs.push(
-				TokenPair.from({
-					base: ramKb,
-					quote: this.network.token.id,
-					price: this.network.resources.ram.price.rammarket,
-					updated: this.network.connection.updated
-				})
-			);
-			// Push BRAM token pair
-			pairs.push(
-				TokenPair.from({
-					base: TokenDefinition.from({
-						symbol: '0,BRAM',
-						contract: 'ram.defi',
-						chain: this.network.chain.id
-					}),
-					quote: this.network.token.id,
-					price: Asset.fromUnits(
-						this.network.resources.ram.price.rammarket.units.dividing(1000),
-						this.network.token.symbol
-					),
-					updated: this.network.connection.updated
-				})
-			);
-			// Push WRAM token pair
-			pairs.push(
-				TokenPair.from({
-					base: TokenDefinition.from({
-						symbol: '0,WRAM',
-						contract: 'eosio.wram',
-						chain: this.network.chain.id
-					}),
-					quote: this.network.token.id,
-					price: Asset.fromUnits(
-						this.network.resources.ram.price.rammarket.units.dividing(1000),
-						this.network.token.symbol
-					),
-					updated: this.network.connection.updated
-				})
-			);
-			this.sources = TokenDataSources.from({
-				pairs,
-				ts: new Date(json.ts)
-			});
+			this.sources = TokenDataSources.from(json);
 			this.refreshed = TimePointSec.from(new Date());
 		}
 	}
@@ -143,45 +103,4 @@ export class MarketState {
 			pairs: this.pairs
 		};
 	}
-}
-
-export function deriveAdditionalPairs(pairs: TokenPair[]): TokenPair[] {
-	const derived: TokenPair[] = [...pairs];
-
-	// Add any pairs that can be derived from the existing pairs (e.g. EOS/BTC -> BTC/CNY = EOS/CNY)
-	// TODO: Refactor for better recursion
-	for (const pair of pairs) {
-		const derivablePairs = pairs.filter((p) => p.base.equals(pair.quote));
-		for (const possiblePair of derivablePairs) {
-			const exists = !!pairs.find(
-				(p) => p.base.equals(pair.base) && p.quote.equals(possiblePair.quote)
-			);
-			if (!exists) {
-				const pairDate = pair.updated.toDate();
-				const possiblePairDate = possiblePair.updated.toDate();
-				const updated = pairDate < possiblePairDate ? pairDate : possiblePairDate;
-				derived.push(
-					TokenPair.from({
-						base: pair.base,
-						quote: possiblePair.quote,
-						// Use floats since precision lengths can be mixed
-						price: Asset.fromFloat(
-							Number(pair.price.value) * Number(possiblePair.price.value),
-							possiblePair.quote.symbol
-						),
-						updated
-					})
-				);
-			}
-		}
-	}
-
-	// Continue to derive pairs until no new pairs are found
-	if (pairs.length !== derived.length) {
-		const more = deriveAdditionalPairs(derived);
-		if (more.length !== derived.length) {
-			return more;
-		}
-	}
-	return derived;
 }

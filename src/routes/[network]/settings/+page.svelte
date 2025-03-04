@@ -7,7 +7,7 @@
 	import LanguageSelect from '$lib/components/select/language.svelte';
 	import Label from '$lib/components/input/label.svelte';
 	import { Stack } from '$lib/components/layout';
-	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import { type MarketContext, type UnicoveContext } from '$lib/state/client.svelte';
 	import Code from '$lib/components/code.svelte';
 	import * as m from '$lib/paraglide/messages';
 	import Pageheader from '$lib/components/pageheader.svelte';
@@ -105,6 +105,9 @@
 		refEarliestExecution?.set(undefined);
 		context.wharf.setWalletSetting('earliestExecution', undefined);
 	}
+
+	const market = getContext<MarketContext>('market');
+	const pairs = $derived(market.market.pairs);
 </script>
 
 <Stack tag="article" class="gap-6">
@@ -113,6 +116,12 @@
 		title={m.common_settings()}
 		subtitle={m.settings_page_subtitle()}
 	/>
+	<h3 class="h3">Pairs</h3>
+	<Code>
+		{#each pairs as pair}
+			<p>{pair.base.symbol}-{pair.quote.symbol} @ {pair.price}</p>
+		{/each}
+	</Code>
 	<div class="grid max-w-screen-sm gap-8">
 		{#if context.wharf.session?.walletPlugin.id === 'wallet-plugin-multisig'}
 			<div class="flex items-center justify-between">

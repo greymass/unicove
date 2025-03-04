@@ -73,13 +73,15 @@
 	export function setAccount(name: NameType, fetchOverride?: typeof fetch): AccountState {
 		account = new AccountState(data.network, name, fetchOverride);
 		account.refresh();
-		market = new MarketState(data.network, settings);
-		market.refresh();
-		networkValue = new NetworkValueState({
-			network: data.network,
-			market,
-			settings: settings
-		});
+		if (!data.network.chain.id.equals(account.network.chain.id)) {
+			market = new MarketState(data.network, settings);
+			market.refresh();
+			networkValue = new NetworkValueState({
+				network: data.network,
+				market,
+				settings: settings
+			});
+		}
 		accountValue = new AccountValueState({
 			account,
 			network: data.network,
@@ -98,6 +100,14 @@
 				account = undefined;
 				accountValue = undefined;
 			}
+		});
+	});
+
+	$effect(() => {
+		const currency = settings.data.displayCurrency;
+		untrack(() => {
+			console.log('refreshing currency');
+			market.refresh();
 		});
 	});
 

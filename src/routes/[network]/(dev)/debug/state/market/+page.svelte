@@ -8,15 +8,18 @@
 
 	const pairs = $derived(context.market.pairs);
 	const refreshed = $derived(context.market.refreshed);
-
-	onMount(() => {
-		context.market.refresh();
-	});
 </script>
 
 <h3 class="h3">Trading Pairs</h3>
 <p>{refreshed} ({pairs.length} records)</p>
 <Button onclick={() => context.market.refresh()}>Refresh</Button>
+
+<h3 class="h3">Pairs</h3>
+<Code>
+	{#each pairs as pair}
+		<p>{pair.base.symbol}-{pair.quote.symbol} @ {pair.price}</p>
+	{/each}
+</Code>
 
 <h3 class="h3">Context</h3>
 <Code>

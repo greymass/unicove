@@ -13,6 +13,15 @@ export class TokenPair extends Struct {
 	@Struct.field(TokenDefinition) declare quote: TokenDefinition;
 	@Struct.field(Asset) declare price: Asset;
 	@Struct.field(TimePointSec) declare updated: TimePointSec;
+
+	get reversed(): TokenPair {
+		return new TokenPair({
+			base: this.quote,
+			quote: this.base,
+			price: Asset.fromFloat(this.price.value ? 1 / this.price.value : 0, this.base.symbol),
+			updated: this.updated
+		});
+	}
 }
 
 @Struct.type('distribution')

@@ -61,7 +61,7 @@
 		}, 1000);
 		refresh = setInterval(() => {
 			data.account.refresh();
-		}, 100000);
+		}, 60000);
 	});
 
 	onDestroy(() => {
