@@ -78,7 +78,6 @@
 		const response = await fetch(`https://registry.npmjs.org/${npmPackage}/latest`);
 		packageInfo = await response.json();
 		packageName = packageInfo.name.slice(1);
-		console.log(packageInfo);
 		latestVersion = packageInfo.version;
 	}
 
