@@ -4,6 +4,7 @@
 		"name": "eos",
 		"features": {
 			"delphioracle": true,
+			"delphihelper": true,
 			"directfunding": true,
 			"eosntime": true,
 			"giftedram": false,
@@ -20,7 +21,7 @@
 			"unicovecontracts": true
 		},
 		"endpoints": { "api": "https://eos.greymass.com", "history": "https://eos.greymass.com" },
-		"lockedsupply": ["eosio"],
+		"lockedsupply": ["eosio", "eosio.null"],
 		"coinbase": {
 			"appid": "2b4cca18-e6eb-4265-ae56-da19983c60fb",
 			"assets": ["EOS"]
@@ -42,6 +43,7 @@
 		},
 		"features": {
 			"delphioracle": false,
+			"delphihelper": false,
 			"directfunding": false,
 			"eosntime": false,
 			"giftedram": true,
@@ -77,6 +79,7 @@
 		},
 		"features": {
 			"delphioracle": false,
+			"delphihelper": false,
 			"directfunding": false,
 			"eosntime": false,
 			"lightapi": false,

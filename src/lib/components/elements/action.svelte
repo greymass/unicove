@@ -198,7 +198,7 @@
 		{:else if variant === 'json'}
 			{@render CodeBox(action)}
 		{/if}
-		{#if objectified && objectified.code}
+		{#if action.account.equals('eosio') && action.name.equals('setcode') && objectified && objectified.code}
 			{@render Pretty({ hash: String(Checksum256.hash(objectified.code)) })}
 		{/if}
 		{#if variant !== 'summary'}

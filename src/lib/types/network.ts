@@ -70,23 +70,6 @@ export interface NetworkStateOptions {
 	client?: APIClient;
 }
 
-@Struct.type('distribution')
-export class SystemTokenDistribution extends Struct {
-	@Struct.field(Asset) declare circulating: Asset;
-	@Struct.field(Asset) declare locked: Asset;
-	@Struct.field(Asset) declare staked: Asset;
-	@Struct.field(Asset) declare supply: Asset;
-	@Struct.field(Asset) declare max: Asset;
-}
-
-@Struct.type('systemtoken')
-export class SystemToken extends Struct {
-	@Struct.field(UnicoveTypes.token_definition) declare definition: UnicoveTypes.token_definition;
-	@Struct.field(SystemTokenDistribution) declare distribution: SystemTokenDistribution;
-	@Struct.field(Asset) declare marketcap: Asset;
-	@Struct.field(Asset) declare price: Asset;
-}
-
 export interface SystemResourceCPUNET {
 	price: SystemResourceSourcesCPUNET;
 }

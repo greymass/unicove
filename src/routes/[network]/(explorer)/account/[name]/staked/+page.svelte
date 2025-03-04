@@ -12,6 +12,11 @@
 	} from '$lib/utils/staking';
 
 	import UnstakingBalances from '$lib/components/elements/unstaking.svelte';
+	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte.js';
+	import { getContext } from 'svelte';
+
+	const context = getContext<UnicoveContext>('state');
+	const { network } = getContext<MarketContext>('value');
 
 	const { data } = $props();
 
@@ -25,7 +30,7 @@
 	let apr: string = $derived(getAPR(data.network));
 	let usdValue = $derived(
 		Asset.from(
-			staked.value * (data.network.token.price ? data.network.token.price.value : 0),
+			staked.value * (network.systemtoken.price ? network.systemtoken.price.value : 0),
 			'2,USD'
 		)
 	);
@@ -54,11 +59,11 @@
 
 							<tr>
 								<td>Savings</td>
-								<td>{data.network.tokenToRex(unstakable)}</td>
+								<td>{context.network.tokenToRex(unstakable)}</td>
 							</tr>
 							<tr>
 								<td>Available for claim</td>
-								<td>{data.network.tokenToRex(claimable)}</td>
+								<td>{context.network.tokenToRex(claimable)}</td>
 							</tr>
 							<tr>
 								<td>REX fund</td>

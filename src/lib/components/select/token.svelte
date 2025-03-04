@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { TokenBalance } from '@wharfkit/common';
 	import { createSelect, type SelectOption } from '@melt-ui/svelte';
 	import { SelectTrigger, SelectMenu, SelectItem } from './elements';
 	import { writable } from 'svelte/store';
 	import * as m from '$lib/paraglide/messages';
+	import { TokenBalance } from '$lib/types/token';
 
 	interface TokenSelectOption extends SelectOption<number> {
 		image?: string;
@@ -36,15 +36,13 @@
 	const variant = 'form';
 
 	const label = (balance: TokenBalance) =>
-		`${String(balance.asset.symbol.code)} (${balance.asset.quantity})`;
-
-	const image = (balance: TokenBalance) => balance.metadata.logo;
+		`${String(balance.token.symbol.code)} (${balance.balance.quantity})`;
 
 	const createOption = (balance: TokenBalance, index: number): TokenSelectOption => {
 		return {
 			value: index,
-			label: label(balance),
-			image: image(balance)
+			label: label(balance)
+			// image: image(balance)
 		};
 	};
 
@@ -79,7 +77,7 @@
 	let selectedTokenBalance = $derived.by(() => options[$selectedTokenOption.value] || options[0]);
 
 	// Get the image from the selected TokenBalance object
-	let selectedTokenImage = $derived(image(selectedTokenBalance));
+	// let selectedTokenImage = $derived(image(selectedTokenBalance));
 
 	// Sync the currently selected object with the bound selected prop
 	$effect(() => {
@@ -105,9 +103,9 @@
 </script>
 
 <SelectTrigger {variant} {id} {open} {trigger} class={className}>
-	{#if selectedTokenImage}
+	<!-- {#if selectedTokenImage}
 		<img src={selectedTokenImage} alt={$selectedLabel} class="mr-2 size-5 object-contain" />
-	{/if}
+	{/if} -->
 	{$selectedLabel || m.common_select_an_option()}
 </SelectTrigger>
 

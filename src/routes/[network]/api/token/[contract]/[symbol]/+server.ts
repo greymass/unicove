@@ -1,4 +1,5 @@
 import { json } from '@sveltejs/kit';
+import { Asset, type AssetType, type NameType } from '@wharfkit/antelope';
 
 import { NetworkState } from '$lib/state/network.svelte';
 import { getCacheHeaders } from '$lib/utils';
@@ -12,8 +13,27 @@ export async function GET({ locals: { network }, params, url }: RequestEvent) {
 	if (stats[symbol] === undefined) {
 		return json({ error: 'Token not found' }, { status: 404 });
 	}
-	const topholders = await getTopHolders(network, contract, symbol, count);
-	const numholders = await getNumHolders(network, contract, symbol);
+	let topholders: TokenHolders[] = [];
+	let numholders: number = 0;
+	if (network.supports('lightapi')) {
+		topholders = await getTopHolders(network, contract, symbol, count);
+		numholders = await getNumHolders(network, contract, symbol);
+	}
+
+	const supply = stats[symbol].supply;
+	const locked = Asset.fromUnits(0, stats[symbol].supply.symbol);
+	if (network.chain.systemToken && network.config.lockedsupply) {
+		const promises = network.config.lockedsupply.map((account) =>
+			network.client.v1.chain.get_currency_balance(contract, account, symbol)
+		);
+		const lockedaccounts = await Promise.all(promises);
+		lockedaccounts.forEach((balance) => {
+			if (balance.length) {
+				supply.units.subtract(balance[0].units);
+				locked.units.add(balance[0].units);
+			}
+		});
+	}
 
 	return json(
 		{
@@ -21,15 +41,21 @@ export async function GET({ locals: { network }, params, url }: RequestEvent) {
 			numholders,
 			topholders,
 			stats: {
-				supply: stats[symbol].supply,
+				supply,
+				locked,
 				max_supply: stats[symbol].max_supply,
 				issuer: stats[symbol].issuer
 			}
 		},
 		{
-			headers: getCacheHeaders(3600)
+			headers: getCacheHeaders(300)
 		}
 	);
+}
+
+interface TokenHolders {
+	account: NameType;
+	balance: AssetType;
 }
 
 async function getTopHolders(
@@ -37,7 +63,7 @@ async function getTopHolders(
 	contract: string,
 	symbol: string,
 	number = 100
-) {
+): Promise<TokenHolders[]> {
 	const response = await network.fetch(
 		`${network.config.endpoints.lightapi}/api/topholders/${network}/${contract}/${symbol}/${number}`
 	);

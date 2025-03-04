@@ -40,6 +40,9 @@ $(CONTRACTS)/token.ts:
 $(CONTRACTS)/msig.ts:
 	bunx @wharfkit/cli generate -u $(CONTRACTS_API) -f $(CONTRACTS)/msig.ts eosio.msig
 
+$(CONTRACTS)/delphihelper.ts:
+	bunx @wharfkit/cli generate -u $(CONTRACTS_API) -f $(CONTRACTS)/delphihelper.ts delphihelper
+
 $(CONTRACTS)/delphioracle.ts:
 	bunx @wharfkit/cli generate -u $(CONTRACTS_API) -f $(CONTRACTS)/delphioracle.ts delphioracle
 
@@ -49,7 +52,7 @@ $(CONTRACTS)/unicove.ts:
 $(CONTRACTS)/eosntime.ts:
 	bunx @wharfkit/cli generate -u $(CONTRACTS_API) -f $(CONTRACTS)/eosntime.ts time.eosn
 
-codegen: $(CONTRACTS)/system.ts $(CONTRACTS)/token.ts $(CONTRACTS)/msig.ts $(CONTRACTS)/delphioracle.ts $(CONTRACTS)/unicove.ts $(CONTRACTS)/eosntime.ts
+codegen: $(CONTRACTS)/system.ts $(CONTRACTS)/token.ts $(CONTRACTS)/msig.ts $(CONTRACTS)/delphihelper.ts $(CONTRACTS)/delphioracle.ts $(CONTRACTS)/unicove.ts $(CONTRACTS)/eosntime.ts
 	mkdir -p $(CONTRACTS)
 
 .PHONY: clean
