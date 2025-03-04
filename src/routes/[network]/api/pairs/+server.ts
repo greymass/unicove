@@ -117,7 +117,12 @@ async function delphioracle(network: NetworkState): Promise<TokenPair[]> {
 
 async function delphihelper(network: NetworkState): Promise<TokenPair[]> {
 	const pairs = await network.contracts.delphihelper.readonly('getpairs');
-	return pairs.map((pair) => TokenPair.from(pair));
+	return pairs.map((pair) =>
+		TokenPair.from({
+			...pair,
+			updated: new Date()
+		})
+	);
 }
 
 const USDT = TokenDefinition.from({
