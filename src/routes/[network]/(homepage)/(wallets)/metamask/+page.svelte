@@ -61,13 +61,13 @@
 		if (!data.network.snapOrigin) {
 			return goto(`/404`);
 		}
+		await getLatestSnapVersion();
 
 		metaMaskState.snapProvider = await getSnapsProvider();
 	});
 
 	async function connect() {
 		await requestSnap(metaMaskState);
-		await getLatestSnapVersion();
 	}
 
 	async function getLatestSnapVersion() {
@@ -78,6 +78,7 @@
 		const response = await fetch(`https://registry.npmjs.org/${npmPackage}/latest`);
 		packageInfo = await response.json();
 		packageName = packageInfo.name.slice(1);
+		console.log(packageInfo);
 		latestVersion = packageInfo.version;
 	}
 
