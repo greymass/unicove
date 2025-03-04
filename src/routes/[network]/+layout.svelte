@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Checksum256, type NameType } from '@wharfkit/antelope';
-	import { chainLogos } from '@wharfkit/common';
+	import { ChainDefinition, chainLogos } from '@wharfkit/common';
 	import { onMount, setContext, untrack } from 'svelte';
 	import { Head, type SeoConfig } from 'svead';
 	import extend from 'just-extend';
@@ -22,6 +22,7 @@
 	import SideMenuContent from '$lib/components/navigation/sidemenu.svelte';
 	import Unicovelogo from '$lib/assets/unicovelogo.svelte';
 	import MobileNavigation from '$lib/components/navigation/mobilenavigation.svelte';
+	import type { NetworkState } from '$lib/state/network.svelte.js';
 
 	let { children, data } = $props();
 
@@ -35,6 +36,7 @@
 		settings: settings
 	});
 
+	let chain: ChainDefinition | undefined = $state();
 	let market = $state(initialMarketValue);
 	let networkValue = $state(initialNetworkValue);
 
@@ -74,21 +76,33 @@
 		account = new AccountState(data.network, name, fetchOverride);
 		account.refresh();
 		if (!data.network.chain.id.equals(account.network.chain.id)) {
-			market = new MarketState(data.network, settings);
-			market.refresh();
-			networkValue = new NetworkValueState({
-				network: data.network,
-				market,
-				settings: settings
-			});
+			setMarket(data.network);
+			setMarketNetwork(data.network);
 		}
+		setMarketAccount(data.network, account);
+		return account;
+	}
+
+	async function setMarket(network: NetworkState) {
+		market = new MarketState(network, settings);
+		market.refresh();
+	}
+
+	function setMarketNetwork(network: NetworkState) {
+		networkValue = new NetworkValueState({
+			network,
+			market,
+			settings
+		});
+	}
+
+	function setMarketAccount(network: NetworkState, account: AccountState) {
 		accountValue = new AccountValueState({
 			account,
-			network: data.network,
+			network,
 			market,
-			settings: settings
+			settings
 		});
-		return account;
 	}
 
 	$effect(() => {
@@ -127,13 +141,19 @@
 
 	$effect(() => {
 		const { network } = data; // Destructure to force reactivity
-		if (!account) {
-			// no account loaded
-			setupWharf();
-		} else if (account && !account.network.chain.equals(network.chain)) {
-			// account loaded but for a different network
-			setupWharf();
-		}
+		untrack(() => {
+			if (chain && !network.chain.equals(chain)) {
+				// Set new chain
+				chain = network.chain;
+
+				// Set Wharf for new chain
+				setupWharf();
+
+				// Set markets for new chain
+				setMarket(data.network);
+				setMarketNetwork(data.network);
+			}
+		});
 	});
 
 	// Number of ms between network updates
@@ -145,6 +165,9 @@
 	let showBanner = $state(false);
 
 	onMount(() => {
+		// Set the chain to the current network chain
+		chain = data.network.chain;
+
 		// Update account state on a set interval
 		const accountInterval = setInterval(() => {
 			if (account) {
@@ -165,8 +188,12 @@
 		// Show the banner if localStorage has no flag set
 		showBanner = !localStorage.getItem('hide-v1-banner');
 
-		// Load markets immediately
-		market.refresh();
+		// Enable Wharf
+		setupWharf();
+
+		// Load markets based off chain
+		setMarket(data.network);
+		setMarketNetwork(data.network);
 
 		return () => {
 			clearInterval(accountInterval);

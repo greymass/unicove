@@ -19,12 +19,14 @@
 	const context = getContext<UnicoveContext>('state');
 	const market = getContext<MarketContext>('market');
 
-	const currentAccountValue = new AccountValueState({
-		account: data.account,
-		network: data.network,
-		settings: context.settings,
-		market: market.market
-	});
+	const currentAccountValue = $derived(
+		new AccountValueState({
+			account: data.account,
+			network: data.network,
+			settings: context.settings,
+			market: market.market
+		})
+	);
 
 	const isCurrentUser = $derived(
 		(context.account?.name && data.account.name?.equals(context.account.name)) || false
