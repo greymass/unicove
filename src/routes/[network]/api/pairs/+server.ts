@@ -57,7 +57,7 @@ export async function GET({ fetch, locals: { network } }: RequestEvent) {
 	);
 
 	if (network.supports('delphihelper')) {
-\		pairs.push(...(await delphihelper(network)));
+		pairs.push(...(await delphihelper(network)));
 	} else if (network.supports('delphioracle')) {
 		pairs.push(...(await delphioracle(network)));
 	}
