@@ -3,11 +3,12 @@
 	import Select from '$lib/components/select/select.svelte';
 	import type { ExtendedSelectOption } from '$lib/components/select/types';
 	import Label from '$lib/components/input/label.svelte';
-	import { Chains, TokenBalance, TokenIdentifier } from '@wharfkit/common';
+	import { Chains } from '@wharfkit/common';
 	import TokenSelect from '$lib/components/select/token.svelte';
 	import type { SelectOption } from '@melt-ui/svelte';
 	import Button from '$lib/components/button/button.svelte';
 	import Code from '$lib/components/code.svelte';
+	import { TokenBalance, TokenDefinition } from '$lib/types/token';
 
 	const options: SelectOption[] = [
 		{ value: 30, label: '30d' },
@@ -46,27 +47,23 @@
 
 	const tokenOptions: TokenBalance[] = [
 		TokenBalance.from({
-			asset: '1.2345 EOS',
-			contract: 'eosio.token',
-			metadata: {
-				id: TokenIdentifier.from({
+			balance: '1.2345 EOS',
+			token: {
+				id: TokenDefinition.from({
 					chain: Chains.EOS.id,
 					contract: 'eosio.token',
 					symbol: '4,EOS'
-				}),
-				logo: 'https://assets.wharfkit.com/chain/eos.png'
+				})
 			}
 		}),
 		TokenBalance.from({
-			asset: '9876 SCRAP',
-			contract: 'scrap',
-			metadata: {
-				id: TokenIdentifier.from({
+			balance: '9876 SCRAP',
+			token: {
+				id: TokenDefinition.from({
 					chain: Chains.EOS.id,
-					contract: 'scrap',
-					symbol: '0,SCRAP'
-				}),
-				logo: 'https://scrapload.io/favicon.ico'
+					contract: 'eosio.token',
+					symbol: '4,EOS'
+				})
 			}
 		})
 	];
@@ -131,7 +128,7 @@
 				options={tokenOptions}
 				bind:selected={tokenSelected}
 			/>
-			<Code>Value in parent: {JSON.stringify(tokenSelected.metadata.id, null, 2)}</Code>
+			<Code>Value in parent: {JSON.stringify(tokenSelected.token, null, 2)}</Code>
 		</Stack>
 	</Stack>
 </Stack>

@@ -2,7 +2,7 @@
 	import { Stack, Card, MultiCard, Cluster } from '$lib/components/layout';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import { Asset } from '@wharfkit/antelope';
-	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
 	import DollarSign from 'lucide-svelte/icons/dollar-sign';
 	import TradingPair from '$lib/components/elements/tradingpair.svelte';
@@ -12,20 +12,26 @@
 	import Button from '$lib/components/button/button.svelte';
 	import { Breakdown, BreakdownRow } from '$lib/components/breakdown';
 	import * as m from '$lib/paraglide/messages';
-	import { calculateValue } from '$lib/utils/index.js';
+	import { AccountValueState } from '$lib/state/value.svelte.js';
 
 	const { data } = $props();
 
 	const context = getContext<UnicoveContext>('state');
+	const market = getContext<MarketContext>('market');
+
+	const currentAccountValue = $derived(
+		new AccountValueState({
+			account: data.account,
+			network: data.network,
+			settings: context.settings,
+			market: market.market
+		})
+	);
 
 	const isCurrentUser = $derived(
 		(context.account?.name && data.account.name?.equals(context.account.name)) || false
 	);
 
-	const accountValue = $derived(data.account.value?.total);
-
-	const tokenValue = $derived(data.account.value?.systemtoken);
-	const tokenPrice = $derived(data.network.token.price);
 	const tokenAvailable = $derived(data.account.balance?.liquid);
 	const tokenRefunding = $derived(data.account.balance?.refunding);
 	const tokenStaked = $derived(data.account.balance?.staked);
@@ -33,7 +39,6 @@
 	const tokenDelegated = $derived(data.account.balance?.delegated);
 	const tokenTotal = $derived(data.account.balance?.total);
 
-	const ramValue = $derived(data.account.value?.ram);
 	const ramOwned = $derived(Asset.fromUnits(data.account.resources.ram.owned, '3,KB'));
 	const ramMax = $derived(Asset.fromUnits(data.account.resources.ram.max, '3,KB'));
 	const ramUsed = $derived(Asset.fromUnits(data.account.resources.ram.used, '3,KB'));
@@ -42,26 +47,29 @@
 	const ramSystem = $derived(Asset.fromUnits(data.account.resources.ram.system, '3,KB'));
 	const ramAvailable = $derived(Asset.fromUnits(data.account.resources.ram.available, '3,KB'));
 	const ramBalance = $derived(Asset.fromUnits(data.account.resources.ram.balance, '3,KB'));
-	const ramPrice = $derived(
-		calculateValue(data.network.resources.ram.price.rammarket, data.network.token.price)
-	);
 
 	const cpuAvailable = $derived(data.account.resources.cpu.available);
 	const netAvailable = $derived(data.account.resources.net.available);
 </script>
 
 <!-- What gets shown on this page if data.account doesn't exist? -->
-{#if data.account}
+{#if data.account && currentAccountValue}
 	<MultiCard>
 		<Card id="account-value" style="column-span: all;">
 			<Cluster class="items-center">
 				<picture class="grid size-12 place-items-center rounded-full bg-mineShaft-900">
 					<DollarSign />
 				</picture>
-				<div>
-					<p>{m.account_page_total_value()}</p>
-					<AssetText class="text-2xl font-bold text-white" variant="full" value={accountValue} />
-				</div>
+				{#if currentAccountValue}
+					<div>
+						<p>{m.account_page_total_value()}</p>
+						<AssetText
+							class="text-2xl font-bold text-white"
+							variant="full"
+							value={currentAccountValue.systemtoken.total}
+						/>
+					</div>
+				{/if}
 			</Cluster>
 		</Card>
 
@@ -80,12 +88,14 @@
 						<Stack class="gap-2">
 							<h4 class="text-muted text-base leading-none">{m.common_value()}</h4>
 							<p class="text-xl font-semibold leading-none text-white">
-								<AssetText variant="full" value={tokenValue} />
+								<AssetText variant="full" value={currentAccountValue.systemtoken.systemtoken} />
 							</p>
-							<Chip>
-								<TradingPair value={tokenPrice} />
-								<!-- TODO: Percent change -->
-							</Chip>
+							{#if currentAccountValue.pair}
+								<Chip>
+									<TradingPair value={market.network.systemtoken} />
+									<!-- TODO: Percent change -->
+								</Chip>
+							{/if}
 						</Stack>
 					</div>
 
@@ -170,15 +180,14 @@
 				<Stack class="gap-2">
 					<h4 class="text-muted text-base leading-none">{m.common_value()}</h4>
 					<p class="text-xl font-semibold leading-none text-white">
-						<AssetText variant="full" value={ramValue} />
+						<AssetText variant="full" value={currentAccountValue.systemtoken.ram} />
 					</p>
-					<Chip>
-						<!-- TODO: Get TradingPair working with RAM  -->
-						<span>
-							<AssetText value={ramPrice} /> USD/KB
-						</span>
-						<!-- TODO: Percent change -->
-					</Chip>
+					{#if currentAccountValue.pair}
+						<Chip>
+							<TradingPair value={market.network.ram} />
+							<!-- TODO: Percent change -->
+						</Chip>
+					{/if}
 				</Stack>
 
 				<Breakdown {isCurrentUser}>
@@ -209,7 +218,7 @@
 			</Stack>
 		</Card>
 
-		<Tokendistribution data={data.account.value} />
+		<Tokendistribution data={currentAccountValue.systemtoken} />
 
 		{#if context.settings.data.advancedMode}
 			<Card title={m.common_resources()}>

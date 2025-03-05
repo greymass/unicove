@@ -32,17 +32,17 @@
 			{
 				time: m.common_timeframe_daily(),
 				value: daily,
-				usd: Asset.from(daily.value * price, '2,USD')
+				currency: Asset.from(daily.value * price, tokenprice.symbol)
 			},
 			{
 				time: m.common_timeframe_monthly(),
 				value: monthly,
-				usd: Asset.from(monthly.value * price, '2,USD')
+				currency: Asset.from(monthly.value * price, tokenprice.symbol)
 			},
 			{
 				time: m.common_timeframe_yearly(),
 				value: yearly,
-				usd: Asset.from(yearly.value * price, '2,USD')
+				currency: Asset.from(yearly.value * price, tokenprice.symbol)
 			}
 		];
 	});
@@ -66,7 +66,7 @@
 					<td class="text-right text-sm"
 						><AssetText class="text-white" variant="full" value={record.value} /></td
 					>
-					<td class="text-right text-sm">{record.usd}</td>
+					<td class="text-right text-sm">{record.currency}</td>
 				</tr>
 			{/each}
 		</tbody>

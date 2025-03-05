@@ -11,24 +11,23 @@ import {
 	type NameType
 } from '@wharfkit/antelope';
 import type { REXState } from '@wharfkit/resources';
-import { TokenMeta, TokenBalance, TokenIdentifier } from '@wharfkit/common';
 
 import type { NetworkState } from '$lib/state/network.svelte';
 import type {
 	AccountDataSources,
-	AccountResourceRAM,
 	AccountResources,
 	SerializedAccountState,
 	VoterInfo
 } from '$lib/types/account';
 
-import { calculateValue, isSameToken } from '$lib/utils';
+import { isSameToken } from '$lib/utils';
 import {
 	defaultAccountDataSources,
 	defaultVoteInfo,
 	nullContractHash
 } from '$lib/state/defaults/account';
 import * as SystemContract from '$lib/wharf/contracts/system';
+import { Token, TokenBalance, TokenDefinition } from '$lib/types/token';
 
 export class AccountState {
 	public client?: APIClient = $state();
@@ -63,11 +62,6 @@ export class AccountState {
 	public permissions = $derived(API.v1.AccountObject.from(this.sources.get_account).permissions);
 	public proposals = $derived.by(() => this.sources.proposals);
 	public refundRequest = $derived.by(() => this.sources.refund_request);
-	public value = $derived.by(() => {
-		return this.network && this.balance && this.resources
-			? getAccountValue(this.network, this.balance, this.resources.ram)
-			: undefined;
-	});
 	public voter: VoterInfo = $state(defaultVoteInfo);
 
 	constructor(network: NetworkState, name: NameType, fetchOverride?: typeof fetch) {
@@ -135,7 +129,7 @@ export class AccountState {
 	toJSON() {
 		return {
 			last_update: this.last_update,
-			value: this.value,
+			// value: this.value,
 			chain: this.network.chain,
 			contract: this.contract,
 			name: this.name,
@@ -229,49 +223,6 @@ export interface AccountValue {
 	unstaked: Asset;
 }
 
-export function getAccountValue(
-	network: NetworkState,
-	balance: Balance,
-	ramResources: AccountResourceRAM
-): AccountValue {
-	const delegated = Asset.from('0.0000 USD');
-	const liquid = Asset.from('0.0000 USD');
-	const ram = Asset.from('0.0000 USD');
-	const refunding = Asset.from('0.0000 USD');
-	const staked = Asset.from('0.0000 USD');
-	const unstaked = Asset.from('0.0000 USD');
-	const systemtoken = Asset.from('0.0000 USD');
-	const total = Asset.from('0.0000 USD');
-
-	if (network.token.price.units.gt(UInt64.from(0))) {
-		delegated.units.add(calculateValue(balance.delegated, network.token.price).units);
-		liquid.units.add(calculateValue(balance.liquid, network.token.price).units);
-		staked.units.add(calculateValue(balance.staked, network.token.price).units);
-		refunding.units.add(calculateValue(balance.refunding, network.token.price).units);
-		unstaked.units.add(calculateValue(balance.unstaked, network.token.price).units);
-		systemtoken.units.add(calculateValue(balance.total, network.token.price).units);
-		total.units.add(calculateValue(balance.total, network.token.price).units);
-		if (network.resources.ram.price.rammarket) {
-			const ramAsset = Asset.fromUnits(ramResources.owned, '3,KB');
-			const ramValue = calculateValue(ramAsset, network.resources.ram.price.rammarket);
-			const ramUsdValue = calculateValue(ramValue, network.token.price);
-			ram.units.add(ramUsdValue.units);
-			total.units.add(ramUsdValue.units);
-		}
-	}
-
-	return {
-		delegated,
-		liquid,
-		ram,
-		refunding,
-		staked,
-		unstaked,
-		systemtoken,
-		total
-	};
-}
-
 export interface Balance {
 	// Tokens delegated from genesis or the old eosio::delegatebw action
 	delegated: Asset;
@@ -360,7 +311,7 @@ export function getBalances(
 	network: NetworkState,
 	sources: AccountDataSources,
 	chain: Checksum256,
-	tokens?: TokenMeta[],
+	tokens?: Token[],
 	liquid?: Asset
 ): TokenBalance[] {
 	if (sources.light_api) {
@@ -390,28 +341,31 @@ export function getBalances(
 			}
 			const asset = Asset.from(`${amount} ${balance.currency}`);
 			const contract = Name.from(balance.contract);
-			const id = TokenIdentifier.from({
-				chain: chain,
+			const id = TokenDefinition.from({
+				chain,
 				contract: contract,
 				symbol: asset.symbol
 			});
-			const metadata =
-				tokens && tokens.length > 0 ? tokens.find((meta) => meta.id.equals(id)) : undefined;
+			const token =
+				tokens && tokens.length > 0
+					? tokens.find((token) => token.id.equals(id))
+					: Token.from({
+							id
+						});
 			balances.push(
 				TokenBalance.from({
-					asset,
-					contract,
-					metadata: metadata || TokenMeta.from({ id: { chain, contract, symbol: asset.symbol } })
+					balance: asset,
+					token
 				})
 			);
 		});
 
 		// Sort balances alphabetically
 		balances.sort((a, b) => {
-			if (a.asset.symbol.name < b.asset.symbol.name) {
+			if (a.token.symbol.name < b.token.symbol.name) {
 				return -1;
 			}
-			if (a.asset.symbol.name > b.asset.symbol.name) {
+			if (a.token.symbol.name > b.token.symbol.name) {
 				return 1;
 			}
 			return 0;
@@ -419,16 +373,10 @@ export function getBalances(
 
 		// Move system token to the top of the list regardless of alphabetical order
 		balances.sort((a, b) => {
-			if (
-				a.contract.equals(network.token.definition.contract) &&
-				a.asset.symbol.equals(network.token.definition.symbol)
-			) {
+			if (a.token.id.equals(network.token.id)) {
 				return -1;
 			}
-			if (
-				b.contract.equals(network.token.definition.contract) &&
-				b.asset.symbol.equals(network.token.definition.symbol)
-			) {
+			if (b.token.id.equals(network.token.id)) {
 				return 1;
 			}
 			return 0;

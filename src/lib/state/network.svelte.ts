@@ -9,14 +9,13 @@ import {
 	type ABISerializable,
 	type AssetType
 } from '@wharfkit/antelope';
-import { ChainDefinition, TokenMeta, TokenIdentifier } from '@wharfkit/common';
+import { ChainDefinition } from '@wharfkit/common';
 import { RAMState, Resources as ResourceClient, REXState, PowerUpState } from '@wharfkit/resources';
 import { ABICache } from '@wharfkit/abicache';
 import { snapOrigins } from '@wharfkit/wallet-plugin-metamask';
 
 import {
 	NetworkDataSources,
-	SystemToken,
 	type ChainConnectionState,
 	type NetworkStateOptions,
 	type SerializedNetworkState,
@@ -32,15 +31,15 @@ import {
 	getChainConfigByName
 } from '$lib/wharf/chains';
 
-import { calculateValue } from '$lib/utils';
+import { type TokenType, TokenDistribution, Token, TokenDefinition } from '$lib/types/token';
 
+import { Contract as DelphiHelperContract } from '$lib/wharf/contracts/delphihelper';
 import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
 import { Contract as MSIGContract } from '$lib/wharf/contracts/msig';
 import { Contract as SystemContract } from '$lib/wharf/contracts/system';
 import { Contract as TimeContract } from '$lib/wharf/contracts/eosntime';
 import { Contract as TokenContract } from '$lib/wharf/contracts/token';
-import { Contract as UnicoveContract, Types as UnicoveTypes } from '$lib/wharf/contracts/unicove';
-import { defaultPrice, defaultPriceSymbol } from './defaults/network';
+import { Contract as UnicoveContract } from '$lib/wharf/contracts/unicove';
 import type { ObjectifiedActionData } from '$lib/types/transaction';
 
 export class NetworkState {
@@ -61,7 +60,6 @@ export class NetworkState {
 	readonly resources = $derived(this.getResources());
 	readonly rex = $derived(this.getRexState());
 	readonly token = $derived.by(() => this.getSystemToken());
-	readonly tvl = $derived(this.calculateTvl());
 
 	// Writable state
 	public abis?: ABICache = $state();
@@ -71,21 +69,13 @@ export class NetworkState {
 		updated: new Date()
 	});
 	public loaded = $state(false);
-	public tokens?: TokenMeta[] = $state();
+	public tokens: Token[] = $state([]);
 
 	constructor(config: ChainConfig, options: NetworkStateOptions = {}) {
 		this.config = config;
 		this.chain = getChainDefinitionFromParams(config.name);
 		this.shortname = chainMapper.toShortName(String(this.chain.id));
 		this.snapOrigin = snapOrigins.get(this.shortname);
-		this.tokens = this.config.tokens.map((token) =>
-			TokenMeta.from({
-				id: TokenIdentifier.from({
-					chain: this.chain.id,
-					...token
-				})
-			})
-		);
 
 		if (options.fetch) {
 			this.fetch = options.fetch;
@@ -109,6 +99,7 @@ export class NetworkState {
 		this.connection.endpoint = (this.client.provider as FetchProvider).url;
 
 		this.contracts = {
+			delphihelper: new DelphiHelperContract({ client: this.client }),
 			delphioracle: new DelphiOracleContract({ client: this.client }),
 			eosntime: new TimeContract({ client: this.client }),
 			msig: new MSIGContract({ client: this.client }),
@@ -155,43 +146,28 @@ export class NetworkState {
 		}
 	}
 
-	getSystemToken(): SystemToken {
-		if (this.sources?.token) {
-			return SystemToken.from({
-				definition: this.sources.token.def,
-				distribution: {
-					circulating: this.sources.token.circulating,
-					locked: this.sources.token.locked,
-					staked: this.sources.rex.total_lendable,
-					supply: this.sources.token.supply,
-					max: this.sources.token.max
-				},
-				marketcap: calculateValue(
-					this.sources.token.circulating,
-					Asset.fromUnits(this.sources.oracle?.median || 0, defaultPriceSymbol)
-				),
-				price: Asset.fromUnits(this.sources.oracle?.median || 0, defaultPriceSymbol)
+	getSystemToken(): Token {
+		const id = TokenDefinition.from({
+			chain: this.chain.id,
+			symbol: this.config.systemtoken.symbol,
+			contract: this.config.systemtoken.contract
+		});
+
+		const tokenData: TokenType = {
+			id
+		};
+
+		if (this.sources) {
+			tokenData.distribution = TokenDistribution.from({
+				circulating: this.sources.token.circulating,
+				locked: this.sources.token.locked,
+				staked: this.sources.rex.total_lendable,
+				supply: this.sources.token.supply,
+				max: this.sources.token.max
 			});
 		}
-		return this.defaultSystemToken;
-	}
 
-	get defaultSystemToken(): SystemToken {
-		return SystemToken.from({
-			definition: UnicoveTypes.token_definition.from({
-				contract: this.config.systemtoken.contract,
-				symbol: this.config.systemtoken.symbol
-			}),
-			distribution: {
-				circulating: Asset.fromUnits(0, this.config.systemtoken.symbol),
-				locked: Asset.fromUnits(0, this.config.systemtoken.symbol),
-				staked: Asset.fromUnits(0, this.config.systemtoken.symbol),
-				supply: Asset.fromUnits(0, this.config.systemtoken.symbol),
-				max: Asset.fromUnits(0, this.config.systemtoken.symbol)
-			},
-			marketcap: calculateValue(Asset.fromUnits(0, this.config.systemtoken.symbol), defaultPrice),
-			price: defaultPrice
-		});
+		return Token.from(tokenData);
 	}
 
 	getRexState() {
@@ -257,8 +233,12 @@ export class NetworkState {
 		];
 	};
 
+	get foo() {
+		return this.sources?.ram;
+	}
+
 	getResources(): SystemResources {
-		const defaultValue = Asset.fromUnits(0, this.token.definition.symbol);
+		const defaultValue = Asset.fromUnits(0, this.token.symbol);
 		const response: SystemResources = {
 			cpu: {
 				price: {
@@ -295,22 +275,22 @@ export class NetworkState {
 			const pstate = PowerUpState.from(this.sources.powerup);
 			response.cpu.price.powerup = Asset.from(
 				pstate.cpu.price_per_ms(this.sources.sample, 1),
-				this.token.definition.symbol
+				this.token.symbol
 			);
 			response.net.price.powerup = Asset.from(
 				pstate.net.price_per_kb(this.sources.sample, 1),
-				this.token.definition.symbol
+				this.token.symbol
 			);
 		}
 
 		if (this.supports('rentrex') && this.rex && this.sources?.sample) {
 			response.cpu.price.rex = Asset.from(
 				this.rex.cpu_price_per_ms(this.sources.sample, 30),
-				this.token.definition.symbol
+				this.token.symbol
 			);
 			response.net.price.rex = Asset.from(
 				this.rex.net_price_per_kb(this.sources.sample, 30),
-				this.token.definition.symbol
+				this.token.symbol
 			);
 		}
 
@@ -318,25 +298,11 @@ export class NetworkState {
 			const account = this.sources.sample.account;
 			const cpuPrice = account.cpu_weight.multiplying(1000).dividing(account.cpu_limit.max);
 			const netPrice = account.net_weight.multiplying(1000).dividing(account.net_limit.max);
-			response.cpu.price.staking = Asset.fromUnits(cpuPrice, this.token.definition.symbol);
-			response.net.price.staking = Asset.fromUnits(netPrice, this.token.definition.symbol);
+			response.cpu.price.staking = Asset.fromUnits(cpuPrice, this.token.symbol);
+			response.net.price.staking = Asset.fromUnits(netPrice, this.token.symbol);
 		}
 
 		return response;
-	}
-
-	calculateTvl(): Asset {
-		const token = Asset.fromUnits(0, this.chain.systemToken!.symbol);
-		if (this.supports('rex') && this.sources?.rex) {
-			token.units.add(this.sources.rex.total_lendable.units);
-		}
-		if (this.supports('rammarket') && this.sources?.ram) {
-			token.units.add(this.sources.ram.quote.balance.units);
-		}
-		if (this.token.price.units.gt(UInt64.from(0))) {
-			return calculateValue(token, this.token.price);
-		}
-		return token;
 	}
 
 	async decodeAction(action: Action): Promise<ABISerializable> {
@@ -367,8 +333,7 @@ export class NetworkState {
 			shortname: this.shortname,
 			snapOrigins: this.snapOrigin,
 			token: this.token,
-			tokens: this.tokens,
-			tvl: this.tvl
+			tokens: this.tokens
 		};
 	}
 }

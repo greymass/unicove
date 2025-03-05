@@ -34,7 +34,6 @@
 				});
 			}
 			items.push({ href: `/${network}/account/${account}/authority`, text: 'Authority' });
-
 			items.push({ href: `/${network}/account/${account}/data`, text: m.common_data() });
 		}
 
@@ -62,7 +61,7 @@
 		}, 1000);
 		refresh = setInterval(() => {
 			data.account.refresh();
-		}, 100000);
+		}, 60000);
 	});
 
 	onDestroy(() => {
