@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ComponentProps, Snippet } from 'svelte';
+	import type { Snippet } from 'svelte';
 
 	interface CodeProps {
 		json?: unknown;
