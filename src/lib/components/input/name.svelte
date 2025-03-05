@@ -1,16 +1,18 @@
 <script lang="ts">
-	import { Name } from '@wharfkit/antelope';
+	import { Name, type NameType } from '@wharfkit/antelope';
 	import type { ComponentProps } from 'svelte';
 	import TextInput from './text.svelte';
 
-	interface NameInputProps extends ComponentProps<TextInput> {
+	interface NameInputProps extends ComponentProps<typeof TextInput> {
+		optional?: boolean;
 		valid?: boolean;
-		value: Name;
+		value: NameType;
 		debug?: boolean;
 	}
 
 	let {
 		autofocus = false,
+		optional = false,
 		ref = $bindable(),
 		valid = $bindable(false),
 		value: _value = $bindable(),
@@ -19,7 +21,7 @@
 	}: NameInputProps = $props();
 
 	/** The string value bound to the form input */
-	let input: string = $state(String(_value));
+	let input: string = $state(_value ? String(_value) : '');
 
 	/** The derived name from the formatted input */
 	const name: Name = $derived(Name.from(input));
@@ -29,7 +31,7 @@
 	const satisfiesNameMatch = $derived(String(name) === input);
 
 	/** Whether or not the input value is valid */
-	const satisfies: boolean = $derived(satisfiesLength && satisfiesNameMatch);
+	const satisfies: boolean = $derived(optional || (satisfiesLength && satisfiesNameMatch));
 
 	/** Set the input value from a parent */
 	export function set(name: string) {

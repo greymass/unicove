@@ -8,7 +8,7 @@
 
 	interface ButtonProps extends HTMLAttributes {
 		href?: string;
-		variant?: 'primary' | 'secondary' | 'pill';
+		variant?: 'primary' | 'secondary' | 'tertiary' | 'pill';
 		disabled?: boolean;
 		active?: boolean;
 		blank?: boolean;
@@ -53,10 +53,14 @@
 	const pillStyles =
 		'relative inline-flex h-10 items-center justify-center text-nowrap rounded-full border-2 border-transparent px-5 text-center text-base font-medium leading-4 transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-solar-500 hover:active:bg-mineShaft-950 aria-[current]:border-mineShaft-200/30 [@media(any-hover:hover)]:hover:bg-mineShaft-900 [@media(any-hover:hover)]:hover:text-mineShaft-100';
 
+	const tertiaryStyles =
+		'relative flex h-12 grow items-center justify-center text-nowrap rounded-lg px-8 text-center text-base font-medium text-skyBlue-400    transition-all  focus-visible:outline-none focus-visible:ring-solar-500   disabled:cursor-not-allowed disabled:text-mineShaft-400 disabled:opacity-30 disabled:hover:bg-transparent  [@media(any-hover:hover)]:hover:text-skyBlue-300';
+
 	let styles = {
 		primary: primaryStyles,
 		secondary: secondaryStyles,
-		pill: pillStyles
+		pill: pillStyles,
+		tertiary: tertiaryStyles
 	};
 </script>
 
