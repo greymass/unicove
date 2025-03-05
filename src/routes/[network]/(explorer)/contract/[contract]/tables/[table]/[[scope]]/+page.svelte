@@ -4,7 +4,7 @@
 	import Code from '$lib/components/code.svelte';
 	import Button from '$lib/components/button/button.svelte';
 	import TextInput from '$lib/components/input/text.svelte';
-	import { goto } from '$app/navigation';
+	import { goto } from '$lib/utils';
 
 	const { data } = $props();
 

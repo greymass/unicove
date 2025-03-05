@@ -59,7 +59,7 @@ export class AccountState {
 	public delegations = $derived(getDelegations(this.sources));
 
 	public resources = $derived.by(() => getResources(this.sources, this.network));
-	public rex = $derived(SystemContract.Types.rex_balance.from(this.sources.rexbal));
+	public rex = $derived.by(() => getRex(this.sources));
 	public permissions = $derived(API.v1.AccountObject.from(this.sources.get_account).permissions);
 	public proposals = $derived.by(() => this.sources.proposals);
 	public refundRequest = $derived.by(() => this.sources.refund_request);
@@ -148,6 +148,13 @@ export class AccountState {
 			voter: this.voter
 		};
 	}
+}
+
+export function getRex(sources: AccountDataSources) {
+	if (!sources.rexbal) {
+		return defaultAccountDataSources.rexbal;
+	}
+	return SystemContract.Types.rex_balance.from(sources.rexbal);
 }
 
 export function getResources(

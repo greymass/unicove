@@ -13,6 +13,7 @@ import type { UnicoveContext } from '$lib/state/client.svelte';
 import type { WharfState } from '$lib/state/client/wharf.svelte';
 import type { NetworkState } from '$lib/state/network.svelte';
 import * as SystemContract from '$lib/wharf/contracts/system';
+import type { TransactResult } from '@wharfkit/session';
 
 type Proposal = {
 	proposer: string;
@@ -43,6 +44,7 @@ export class ApprovalManager {
 	proposal: Proposal;
 
 	// States related to proposal
+	result: TransactResult | null = $state(null);
 	actions: Action[] = $state([]);
 	readable: DecodedAction[] = $state([]);
 
@@ -120,7 +122,10 @@ export class ApprovalManager {
 
 			// If this action is a setabi, set override for future actions in loop
 			if (action.account.equals('eosio') && action.name.equals('setabi')) {
-				const setabi = SystemContract.Types.setabi.from(action.data);
+				const setabi = Serializer.decode({
+					type: SystemContract.Types.setabi,
+					data: action.data
+				});
 				const decoded = Serializer.decode({
 					type: ABI,
 					data: setabi.abi
@@ -164,7 +169,7 @@ export class ApprovalManager {
 			proposal_hash: this.proposal.hash
 		});
 
-		await this.wharf.transact({ action });
+		this.result = await this.wharf.transact({ action });
 		this.accountApprove(this.wharf.session.permissionLevel);
 	}
 
@@ -179,7 +184,7 @@ export class ApprovalManager {
 			level: this.wharf.session.permissionLevel
 		});
 
-		await this.wharf.transact({ action });
+		this.result = await this.wharf.transact({ action });
 		this.accountUnapprove(this.wharf.session.permissionLevel);
 	}
 
@@ -194,7 +199,7 @@ export class ApprovalManager {
 			executer: this.wharf.session.actor
 		});
 
-		await this.wharf.transact({ action });
+		this.result = await this.wharf.transact({ action });
 	}
 
 	async cancel() {
@@ -208,7 +213,7 @@ export class ApprovalManager {
 			canceler: this.wharf.session.actor
 		});
 
-		await this.wharf.transact({ action });
+		this.result = await this.wharf.transact({ action });
 	}
 
 	toJSON() {

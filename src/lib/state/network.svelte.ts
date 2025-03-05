@@ -37,6 +37,7 @@ import { calculateValue } from '$lib/utils';
 import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
 import { Contract as MSIGContract } from '$lib/wharf/contracts/msig';
 import { Contract as SystemContract } from '$lib/wharf/contracts/system';
+import { Contract as TimeContract } from '$lib/wharf/contracts/eosntime';
 import { Contract as TokenContract } from '$lib/wharf/contracts/token';
 import { Contract as UnicoveContract, Types as UnicoveTypes } from '$lib/wharf/contracts/unicove';
 import { defaultPrice, defaultPriceSymbol } from './defaults/network';
@@ -109,6 +110,7 @@ export class NetworkState {
 
 		this.contracts = {
 			delphioracle: new DelphiOracleContract({ client: this.client }),
+			eosntime: new TimeContract({ client: this.client }),
 			msig: new MSIGContract({ client: this.client }),
 			system: new SystemContract({ client: this.client }),
 			token: new TokenContract({ client: this.client }),

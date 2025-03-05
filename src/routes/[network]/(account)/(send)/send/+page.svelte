@@ -334,7 +334,6 @@
 					options={tokenOptions}
 					bind:this={tokenSelect}
 					bind:selected={sendState.balance}
-					debug={context.settings.data.debugMode as boolean}
 				/>
 			{:else}
 				<p>{m.common_no_balances()}</p>

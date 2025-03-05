@@ -62,10 +62,6 @@
 		});
 	});
 
-	$effect(() => {
-		wharf.setSettings(data.network, settings);
-	});
-
 	async function setupWharf() {
 		if (!wharf.sessionKit) {
 			wharf.init(data.network);
@@ -100,8 +96,8 @@
 	});
 
 	// Number of ms between network updates
-	const ACCOUNT_UPDATE_INTERVAL = Number(env.PUBLIC_ACCOUNT_UPDATE_INTERVAL) || 3_000;
-	const NETWORK_UPDATE_INTERVAL = Number(env.PUBLIC_NETWORK_UPDATE_INTERVAL) || 3_000;
+	const ACCOUNT_UPDATE_INTERVAL = Number(env.PUBLIC_ACCOUNT_UPDATE_INTERVAL) || 5_000;
+	const NETWORK_UPDATE_INTERVAL = Number(env.PUBLIC_NETWORK_UPDATE_INTERVAL) || 5_000;
 
 	// Default to not show a banner (avoids flash of banner when hidden)
 	let showBanner = $state(false);
