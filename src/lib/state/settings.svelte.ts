@@ -43,21 +43,27 @@ export interface SettingsData {
 	searchShowPages?: boolean;
 }
 
+const defaultSettings: SettingsData = {
+	actionDisplayVariant: 'pretty',
+	advancedMode: false,
+	displayCurrency: SupportedCurrencies.USD,
+	debugMode: false,
+	preventAccountPageSwitching: false,
+	searchAccountSwitch: false,
+	searchShowPages: true
+};
+
 export class SettingsState {
-	data = $state<SettingsData>({
-		actionDisplayVariant: 'pretty',
-		advancedMode: false,
-		displayCurrency: SupportedCurrencies.USD,
-		debugMode: false,
-		preventAccountPageSwitching: false,
-		searchAccountSwitch: false,
-		searchShowPages: true
-	});
+	data = $state<SettingsData>(defaultSettings);
 
 	constructor() {
 		if (browser) {
 			const item = localStorage.getItem('unicove-settings');
-			if (item) this.data = this.deserialize(item);
+			if (item)
+				this.data = {
+					...defaultSettings,
+					...this.deserialize(item)
+				};
 		}
 		$effect(() => {
 			localStorage.setItem('unicove-settings', this.serialize(this.data));
