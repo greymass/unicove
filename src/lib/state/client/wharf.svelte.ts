@@ -47,7 +47,7 @@ const defaultWalletPlugins: WalletPlugin[] = [
 	new WalletPluginTokenPocket(),
 	new WalletPluginWombat(),
 	new WalletPluginWebAuthenticator({
-		webAuthenticatorUrl: 'http://localhost:5173'
+		webAuthenticatorUrl: 'https://moving-signing-logic-to-plug.web-authenticator-a83.pages.dev'
 	})
 ];
 
