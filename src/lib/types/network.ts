@@ -16,6 +16,7 @@ import { Types as DelphioracleTypes } from '$lib/wharf/contracts/delphioracle';
 import { Types as SystemTypes } from '$lib/wharf/contracts/system';
 import { Types as UnicoveTypes } from '$lib/wharf/contracts/unicove';
 import type { ChainConfig } from '$lib/wharf/chains';
+import { rex_pool } from './rex';
 
 @Struct.type('sampledusage')
 export class SampledUsage extends Struct {
@@ -32,7 +33,7 @@ export class NetworkDataSources extends Struct {
 	@Struct.field(SystemTypes.powerup_state, { optional: true })
 	declare powerup?: SystemTypes.powerup_state;
 	@Struct.field(SystemTypes.exchange_state) declare ram: SystemTypes.exchange_state;
-	@Struct.field(SystemTypes.rex_pool) declare rex: SystemTypes.rex_pool;
+	@Struct.field(rex_pool, { optional: true }) declare rex: rex_pool;
 	@Struct.field(SampledUsage, { optional: true }) declare sample?: SampledUsage;
 	@Struct.field(UnicoveTypes.token_supply) declare token: UnicoveTypes.token_supply;
 	@Struct.field(Int64, { optional: true }) declare ram_gift_bytes?: Int64;
