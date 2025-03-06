@@ -10,7 +10,7 @@ jobs:
       matrix:
         chain: ['jungle4', 'kylin', 'eos', 'telos', 'wax']
     runs-on: ubuntu-latest
-    name: Check against v${{ matrix.chain }}
+    name: Check against ${{ matrix.chain }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
