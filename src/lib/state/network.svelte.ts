@@ -158,12 +158,32 @@ export class NetworkState {
 		};
 
 		if (this.sources) {
+			const circulating = Asset.fromUnits(0, this.config.systemtoken.symbol);
+			if (this.sources.token.circulating) {
+				circulating.units.add(this.sources.token.circulating.units);
+			}
+			const locked = Asset.fromUnits(0, this.config.systemtoken.symbol);
+			if (this.sources.token.locked) {
+				locked.units.add(this.sources.token.locked.units);
+			}
+			const staked = Asset.fromUnits(0, this.config.systemtoken.symbol);
+			if (this.sources.rex.total_lendable) {
+				staked.units.add(this.sources.rex.total_lendable.units);
+			}
+			const supply = Asset.fromUnits(0, this.config.systemtoken.symbol);
+			if (this.sources.token.supply) {
+				supply.units.add(this.sources.token.supply.units);
+			}
+			const max = Asset.fromUnits(0, this.config.systemtoken.symbol);
+			if (this.sources.token.max) {
+				max.units.add(this.sources.token.max.units);
+			}
 			tokenData.distribution = TokenDistribution.from({
-				circulating: this.sources.token.circulating,
-				locked: this.sources.token.locked,
-				staked: this.sources.rex.total_lendable,
-				supply: this.sources.token.supply,
-				max: this.sources.token.max
+				circulating,
+				locked,
+				staked,
+				supply,
+				max
 			});
 		}
 
@@ -268,7 +288,8 @@ export class NetworkState {
 		}
 
 		if (this.supports('rammarket') && this.sources?.ram) {
-			response.ram.price.rammarket = RAMState.from(this.sources.ram).price_per_kb(1);
+			const price = RAMState.from(this.sources.ram).price_per_kb(1);
+			response.ram.price.rammarket = Asset.fromUnits(price.units, this.token.symbol);
 		}
 
 		if (this.supports('powerup') && this.sources?.powerup && this.sources?.sample) {

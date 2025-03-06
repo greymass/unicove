@@ -245,13 +245,16 @@ export function getBalance(network: NetworkState, sources: AccountDataSources): 
 	if (!network.config) {
 		throw new Error('Network configuration not initialized');
 	}
+
+	const symbol = network.config.systemtoken.symbol;
+
 	// Create an empty balance to start adding to
-	const delegated = Asset.fromUnits(0, network.config.systemtoken.symbol);
-	const refunding = Asset.fromUnits(0, network.config.systemtoken.symbol);
-	const liquid = Asset.fromUnits(0, network.config.systemtoken.symbol);
-	const staked = Asset.fromUnits(0, network.config.systemtoken.symbol);
-	const unstaked = Asset.fromUnits(0, network.config.systemtoken.symbol);
-	const total = Asset.fromUnits(0, network.config.systemtoken.symbol);
+	const delegated = Asset.fromUnits(0, symbol);
+	const refunding = Asset.fromUnits(0, symbol);
+	const liquid = Asset.fromUnits(0, symbol);
+	const staked = Asset.fromUnits(0, symbol);
+	const unstaked = Asset.fromUnits(0, symbol);
+	const total = Asset.fromUnits(0, symbol);
 
 	// Add the core balance if it exists on the account
 	if (sources.balance) {
@@ -262,10 +265,7 @@ export function getBalance(network: NetworkState, sources: AccountDataSources): 
 
 	// Add any delegated tokens to the total balance
 	if (sources.delegated.length > 0) {
-		const delegatedTokens = getDelegated(
-			getDelegations(sources),
-			network.config.systemtoken.symbol
-		);
+		const delegatedTokens = getDelegated(getDelegations(sources), symbol);
 		delegated.units.add(delegatedTokens.units);
 		total.units.add(delegatedTokens.units);
 	}

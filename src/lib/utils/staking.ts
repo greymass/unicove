@@ -94,11 +94,12 @@ export function getUnstakingBalances(
 	if (network && account && account.loaded && account.rex) {
 		if (account.rex.matured_rex && account.rex.matured_rex.gt(Int64.from(0))) {
 			// construct matured as one rex bucket
+			const balance = network.rexToToken(
+				Asset.fromUnits(account.rex.matured_rex, account.rex.rex_balance.symbol)
+			);
 			records.push({
 				date: undefined,
-				balance: network.rexToToken(
-					Asset.fromUnits(account.rex.matured_rex, account.rex.rex_balance.symbol)
-				),
+				balance: Asset.fromUnits(balance.units, network.token.symbol),
 				rex: Asset.fromUnits(account.rex.matured_rex, account.rex.rex_balance.symbol),
 				claimable: true,
 				savings: false
@@ -112,11 +113,12 @@ export function getUnstakingBalances(
 			for (const maturity of account.rex.rex_maturities) {
 				if (maturity.first && maturity.second) {
 					const date = new Date(maturity.first.toString() + 'Z');
+					const balance = network.rexToToken(
+						Asset.fromUnits(maturity.second, account.rex.rex_balance.symbol)
+					);
 					records.push({
 						date,
-						balance: network.rexToToken(
-							Asset.fromUnits(maturity.second, account.rex.rex_balance.symbol)
-						),
+						balance: Asset.fromUnits(balance.units, network.token.symbol),
 						rex: Asset.fromUnits(maturity.second, account.rex.rex_balance.symbol),
 						claimable: date < now,
 						savings: +date > +fiveYearsFromNow

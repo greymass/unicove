@@ -1,12 +1,15 @@
 <script lang="ts">
-	import Stack from '$lib/components/layout/stack.svelte';
+	import { Asset } from '@wharfkit/antelope';
+
 	import type { NetworkState } from '$lib/state/network.svelte';
-	import Button from './homepage-button.svelte';
-	import StakedHEX from './stakedhex.svelte';
 	import { getAPR } from '$lib/utils/staking';
+	import Stack from '$lib/components/layout/stack.svelte';
 	import Switcher from '$lib/components/layout/switcher.svelte';
 	import Box from '$lib/components/layout/box/box.svelte';
 	import * as m from '$lib/paraglide/messages';
+
+	import Button from './homepage-button.svelte';
+	import StakedHEX from './stakedhex.svelte';
 
 	interface Props {
 		network: NetworkState;
@@ -32,7 +35,7 @@
 				<p>
 					{m.homepage_staking_description({
 						network: network.chain.name,
-						token: String(network.chain.systemToken?.symbol.name)
+						token: Asset.Symbol.from(network.config.systemtoken.symbol).code
 					})}
 				</p>
 				<div class="mt-2 flex gap-6">
