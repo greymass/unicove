@@ -14,7 +14,7 @@ dev: node_modules codegen
 	bun run dev --host 
 
 .PHONY: check
-check: node_modules
+check: node_modules codegen
 	bun run check && bun run lint
 
 .PHONY: format
