@@ -5,7 +5,12 @@ on:
 
 jobs:
   check:
+    strategy:
+      fail-fast: false
+      matrix:
+        chain: ['jungle4', 'kylin', 'eos', 'telos', 'wax']
     runs-on: ubuntu-latest
+    name: Check against v${{ matrix.chain }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -14,5 +19,6 @@ jobs:
       - uses: oven-sh/setup-bun@v2
       - run: bun install
       - run: bun run build-paraglide
+      - run: make config/${{ matrix.chain }}
       - run: bun run check
       - run: bun run lint
