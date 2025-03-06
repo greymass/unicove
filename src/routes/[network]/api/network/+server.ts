@@ -39,6 +39,7 @@ async function getContractResponse(network: NetworkState): Promise<NetworkDataSo
 export async function GET({ locals: { network } }: RequestEvent) {
 	let response;
 	try {
+		console.log(network.supports('unicovecontracts'));
 		if (network.supports('unicovecontracts')) {
 			response = await getContractResponse(network);
 		} else {

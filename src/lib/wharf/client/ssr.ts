@@ -1,8 +1,8 @@
 import { APIClient, FetchProvider } from '@wharfkit/antelope';
 
-import { PRIVATE_BACKENDS } from '$env/static/private';
+import * as env from '$env/static/private';
 
-import { getChainConfigByName, type ChainBackend, type ChainConfig } from '$lib/wharf/chains';
+import { getChainConfigByName, type ChainConfig, type ChainEndpoints } from '$lib/wharf/chains';
 import { getNetwork } from '$lib/state/network.svelte';
 
 interface GetBackendClientOptions {
@@ -10,21 +10,22 @@ interface GetBackendClientOptions {
 	headers: Record<string, string>;
 }
 
-const backends = JSON.parse(PRIVATE_BACKENDS) as ChainBackend[];
+const backendEndpoints: ChainEndpoints = {
+	api: env.BACKEND_API_CHAIN,
+	history: env.BACKEND_API_HISTORY,
+	lightapi: env.BACKEND_API_LIGHTAPI,
+	metrics: env.BACKEND_API_METRICS
+};
 
 function getMergedConfig(chain: string): ChainConfig {
 	const result = getChainConfigByName(chain);
-	const backend = backends.find((b) => b.name === result.name);
-	if (backend) {
-		return {
-			...result,
-			endpoints: {
-				...result.endpoints,
-				...backend.endpoints
-			}
-		};
-	}
-	return result;
+	return {
+		...result,
+		endpoints: {
+			...result.endpoints,
+			...backendEndpoints
+		}
+	};
 }
 
 export function getBackendClient(

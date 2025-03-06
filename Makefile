@@ -32,25 +32,25 @@ install:
 	fi
 
 $(CONTRACTS)/system.ts:
-	bunx @wharfkit/cli generate -u $(CONTRACTS_API) -f $(CONTRACTS)/system.ts eosio
+	bunx @wharfkit/cli generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/system.ts eosio
 
 $(CONTRACTS)/token.ts:
-	bunx @wharfkit/cli generate -u $(CONTRACTS_API) -f $(CONTRACTS)/token.ts eosio.token
+	bunx @wharfkit/cli generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/token.ts eosio.token
 
 $(CONTRACTS)/msig.ts:
-	bunx @wharfkit/cli generate -u $(CONTRACTS_API) -f $(CONTRACTS)/msig.ts eosio.msig
+	bunx @wharfkit/cli generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/msig.ts eosio.msig
 
 $(CONTRACTS)/delphihelper.ts:
-	bunx @wharfkit/cli generate -u $(CONTRACTS_API) -f $(CONTRACTS)/delphihelper.ts delphihelper
+	bunx @wharfkit/cli generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/delphihelper.ts delphihelper
 
 $(CONTRACTS)/delphioracle.ts:
-	bunx @wharfkit/cli generate -u $(CONTRACTS_API) -f $(CONTRACTS)/delphioracle.ts delphioracle
+	bunx @wharfkit/cli generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/delphioracle.ts delphioracle
 
 $(CONTRACTS)/unicove.ts:
-	bunx @wharfkit/cli generate -u $(CONTRACTS_API) -f $(CONTRACTS)/unicove.ts unicove.gm
+	bunx @wharfkit/cli generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/unicove.ts unicove.gm
 
 $(CONTRACTS)/eosntime.ts:
-	bunx @wharfkit/cli generate -u $(CONTRACTS_API) -f $(CONTRACTS)/eosntime.ts time.eosn
+	bunx @wharfkit/cli generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/eosntime.ts time.eosn
 
 codegen: $(CONTRACTS)/system.ts $(CONTRACTS)/token.ts $(CONTRACTS)/msig.ts $(CONTRACTS)/delphihelper.ts $(CONTRACTS)/delphioracle.ts $(CONTRACTS)/unicove.ts $(CONTRACTS)/eosntime.ts
 	mkdir -p $(CONTRACTS)
@@ -59,16 +59,11 @@ codegen: $(CONTRACTS)/system.ts $(CONTRACTS)/token.ts $(CONTRACTS)/msig.ts $(CON
 codegen/clean:
 	rm -rf $(CONTRACTS)/*.ts
 
-$(ENVS)/local/backends.json:
-	cp $(ENVS)/default/backends.json $(ENVS)/local/backends.json
+config/eos:
+	cp ./configs/.env.eos .env.local
 
-$(ENVS)/local/chains.json:
-	cp $(ENVS)/default/chains.json $(ENVS)/local/chains.json
+config/jungle4:
+	cp ./configs/.env.jungle4 .env.local
 
-config/local: $(ENVS)/local/backends.json $(ENVS)/local/chains.json 
-
-config: config/local
-	bun run scripts/env/local.ts
-
-config/default:
-	bun run scripts/env/default.ts
+config/kylin:
+	cp ./configs/.env.kylin .env.local
