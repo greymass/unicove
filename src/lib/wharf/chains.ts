@@ -1,4 +1,4 @@
-import { Name, type Asset, type Checksum256Type, type NameType } from '@wharfkit/antelope';
+import { Asset, Name, type Checksum256Type, type NameType } from '@wharfkit/antelope';
 import { ChainDefinition, TokenIdentifier } from '@wharfkit/common';
 
 import { Contract as DelphiHelperContract } from '$lib/wharf/contracts/delphihelper';
@@ -32,6 +32,10 @@ const lockedsupply = env.PUBLIC_FEATURE_METAMASK
 	? env.PUBLIC_SYSTEM_TOKEN_LOCKED_SUPPLY.split(',').map((account) => Name.from(account))
 	: undefined;
 
+const systemtokenalt = env.PUBLIC_SYSTEM_TOKEN_SYMBOL_ALT
+	? env.PUBLIC_SYSTEM_TOKEN_SYMBOL_ALT.split('|').map((symbol) => Asset.Symbol.from(symbol))
+	: [];
+
 const isTrue = (value: string) => value === 'true';
 
 export const chainConfig: ChainConfig = {
@@ -41,6 +45,7 @@ export const chainConfig: ChainConfig = {
 		contract: env.PUBLIC_SYSTEM_TOKEN_CONTRACT,
 		symbol: env.PUBLIC_SYSTEM_TOKEN_SYMBOL
 	},
+	systemtokenalt,
 	lockedsupply,
 	tokens: [],
 	endpoints: {
@@ -118,6 +123,7 @@ export interface ChainConfig {
 	coinbase?: ChainCoinbaseConfig;
 	metamask?: ChainMetaMaskConfig;
 	systemtoken: ChainToken;
+	systemtokenalt: Asset.Symbol[];
 	tokens: ChainToken[];
 }
 
