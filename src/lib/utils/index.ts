@@ -8,7 +8,7 @@ export * from './style';
 
 export function calculateValue(balance: Asset, currency: Asset): Asset {
 	return Asset.from(
-		`${(currency.value * balance.value).toFixed(currency.symbol.precision)} ${currency.symbol.code}`
+		`${(currency.value * Number(balance.quantity)).toFixed(currency.symbol.precision)} ${currency.symbol.code}`
 	);
 }
 
