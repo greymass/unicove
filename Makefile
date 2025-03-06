@@ -77,14 +77,18 @@ codegen: $(CONTRACTS)/system.ts $(CONTRACTS)/token.ts $(CONTRACTS)/msig.ts $(CON
 codegen/clean:
 	rm -rf $(CONTRACTS)/*.ts
 
-config/eos: codegen/clean codegen
+config/eos: codegen/clean
 	cp ./configs/.env.eos .env.local
 
-config/jungle4: codegen/clean codegen
+config/jungle4: codegen/clean
 	cp ./configs/.env.jungle4 .env.local
 
-config/kylin: codegen/clean codegen
+config/kylin: codegen/clean
 	cp ./configs/.env.kylin .env.local
 
-config/telos: codegen/clean codegen
+config/telos: codegen/clean
 	cp ./configs/.env.telos .env.local
+
+config/wax: codegen/clean 
+	cp ./configs/.env.wax .env.local
+	
