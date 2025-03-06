@@ -32,6 +32,7 @@ export default [
 			'build/',
 			'.svelte-kit/',
 			'dist/',
+			'configs/contracts',
 			'src/lib/wharf/contracts/',
 			'src/lib/paraglide',
 			'src/paraglide'
