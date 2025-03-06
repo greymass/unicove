@@ -43,28 +43,28 @@ $(CONTRACTS)/msig.ts:
 	bunx @wharfkit/cli generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/msig.ts eosio.msig
 
 $(CONTRACTS)/delphihelper.ts:
-ifeq ($(PUBLIC_FEATURE_DELPHIHELPER),"true")
+ifeq ($(PUBLIC_FEATURE_DELPHIHELPER),true)
 	bunx @wharfkit/cli generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/delphihelper.ts delphihelper
 else
 	cp ./configs/contracts/delphihelper.ts $(CONTRACTS)/delphihelper.ts
 endif
 
 $(CONTRACTS)/delphioracle.ts:
-ifeq ($(PUBLIC_FEATURE_DELPHIORACLE),"true")
+ifeq ($(PUBLIC_FEATURE_DELPHIORACLE),true)
 	bunx @wharfkit/cli generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/delphioracle.ts delphioracle
 else
 	cp ./configs/contracts/delphioracle.ts $(CONTRACTS)/delphioracle.ts
 endif
 
 $(CONTRACTS)/unicove.ts:
-ifeq ($(PUBLIC_FEATURE_UNICOVECONTRACTS),"true")
+ifeq ($(PUBLIC_FEATURE_UNICOVECONTRACTS),true)
 	bunx @wharfkit/cli generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/unicove.ts unicove.gm
 else
 	cp ./configs/contracts/unicove.ts $(CONTRACTS)/unicove.ts
 endif
 
 $(CONTRACTS)/eosntime.ts:
-ifeq ($(PUBLIC_FEATURE_EOSNTIME),"true")
+ifeq ($(PUBLIC_FEATURE_EOSNTIME),true)
 	bunx @wharfkit/cli generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/eosntime.ts time.eosn
 else
 	cp ./configs/contracts/eosntime.ts $(CONTRACTS)/eosntime.ts
