@@ -46,14 +46,18 @@
 	}
 </script>
 
-{#if currentUser}
-	<Button
-		href="/{data.network}/account/{data.account.name}/permissions/{generateRandomName()}"
-		class="mb-4"
-	>
-		New Permission
-	</Button>
-{/if}
+<div class="flex flex-wrap items-center justify-between gap-4">
+	<h2 class="h4">Keys and Permissions</h2>
+
+	{#if currentUser}
+		<Button
+			href="/{data.network}/account/{data.account.name}/permissions/{generateRandomName()}"
+			class="flex-none"
+		>
+			New Permission
+		</Button>
+	{/if}
+</div>
 
 <PermissionTree
 	account={data.account.name}
