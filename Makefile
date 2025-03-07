@@ -31,7 +31,10 @@ install:
 		bun install --frozen-lockfile $(package); \
 	fi
 	$(CONTRACTS)/system.ts
-	
+
+.PHONY: build
+build: node_modules codegen
+	bun run build
 
 $(CONTRACTS)/system.ts:
 	bunx @wharfkit/cli generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/system.ts eosio
