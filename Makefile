@@ -10,30 +10,23 @@ ENVS=./scripts/env
 CONTRACTS=./src/lib/wharf/contracts
 
 .PHONY: dev
-dev: node_modules codegen
+dev: install codegen
 	bun run dev --host 
 
 .PHONY: check
-check: node_modules codegen
+check: install codegen
 	bun run check && bun run lint
 
 .PHONY: format
-format: node_modules
+format: install codegen
 	bun run format
 
 .PHONY: install
-install:
-	@if [ -z "$(package)" ]; then \
-		echo "Installing all dependencies:"; \
-		bun install --frozen-lockfile; \
-	else \
-		echo "Installing package: $(package)"; \
-		bun install --frozen-lockfile $(package); \
-	fi
-	$(CONTRACTS)/system.ts
+install: node_modules
+	bun install --frozen-lockfile;
 
 .PHONY: build
-build: node_modules codegen
+build: install codegen
 	bun run build
 
 $(CONTRACTS)/system.ts:
