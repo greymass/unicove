@@ -9,6 +9,7 @@ import type { LightAPIBalanceResponse, LightAPIBalanceRow } from '$lib/types/lig
 import type { RequestEvent, RequestHandler } from './$types';
 
 import { Types as SystemTypes } from '$lib/wharf/contracts/system';
+import { Types as UnicoveTypes } from '$lib/wharf/contracts/unicove';
 import { nullContractHash } from '$lib/state/defaults/account';
 
 export const GET: RequestHandler = async ({ locals: { network }, params }: RequestEvent) => {
@@ -68,7 +69,7 @@ async function getAccount(network: NetworkState, account: NameType): Promise<Acc
 
 	let rex;
 	let balances: LightAPIBalanceRow[] = [];
-	let giftedram;
+	let giftedram: UnicoveTypes.gifted_ram | undefined;
 
 	if (network.supports('lightapi')) {
 		balances = await loadBalances(network, account, network.fetch);
