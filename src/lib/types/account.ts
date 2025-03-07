@@ -1,21 +1,10 @@
-import { Struct, API, Int64, Name, Asset, Float64, Checksum256 } from '@wharfkit/antelope';
+import { API, Int64, Name, Asset, Float64, Checksum256 } from '@wharfkit/antelope';
 
 import { Types as MsigTypes } from '$lib/wharf/contracts/msig';
 import { Types as SystemTypes } from '$lib/wharf/contracts/system';
+import { Types as UnicoveTypes } from '$lib/wharf/contracts/unicove';
 import type { LightAPIBalanceRow } from '$lib/types/lightapi';
 import type { SerializedNetworkState } from '$lib/types/network';
-
-// TODO: remove and use system contract version once its deployed
-// Will be available from here: SystemTypes.gifted_ram
-@Struct.type('gifted_ram')
-export class gifted_ram extends Struct {
-	@Struct.field(Name)
-	declare giftee: Name;
-	@Struct.field(Name)
-	declare gifter: Name;
-	@Struct.field(Int64)
-	declare ram_bytes: Int64;
-}
 
 export interface VoterInfo {
 	isProxy: boolean;
@@ -38,7 +27,7 @@ export interface AccountDataSources {
 	// Table rows from eosio::delband
 	delegated: SystemTypes.delegated_bandwidth[];
 	// Table row from eosio::giftedram
-	giftedram?: gifted_ram;
+	giftedram?: UnicoveTypes.gifted_ram;
 	// Table rows from eosio.msig::proposal
 	proposals: MsigTypes.proposal[];
 	// Table rows from eosio::refunds

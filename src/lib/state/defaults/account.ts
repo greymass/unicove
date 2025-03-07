@@ -1,7 +1,8 @@
 import { API, Asset, Checksum256, Float64, Int64, Name } from '@wharfkit/antelope';
 
-import { gifted_ram, type AccountDataSources, type VoterInfo } from '$lib/types/account';
+import { type AccountDataSources, type VoterInfo } from '$lib/types/account';
 import * as SystemContract from '$lib/wharf/contracts/system';
+import { Types as UnicoveTypes } from '$lib/wharf/contracts/unicove';
 import { rex_balance, rex_fund } from '$lib/types/rex';
 
 export const defaultGetAccount = API.v1.AccountObject.from({
@@ -47,7 +48,7 @@ export const defaultGetAccount = API.v1.AccountObject.from({
 
 export const defaultAsset = Asset.from('0 ');
 
-export const defaultGiftedRam = gifted_ram.from({
+export const defaultGiftedRam = UnicoveTypes.gifted_ram.from({
 	gifter: '',
 	giftee: '',
 	ram_bytes: 0

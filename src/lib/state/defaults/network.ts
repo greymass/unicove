@@ -1,8 +1,7 @@
 import { API, Asset } from '@wharfkit/antelope';
 
-import { gifted_ram } from '$lib/types/account';
-
 import * as SystemContract from '$lib/wharf/contracts/system';
+import { Types as UnicoveTypes } from '$lib/wharf/contracts/unicove';
 
 export const defaultGetAccount = API.v1.AccountObject.from({
 	account_name: '',
@@ -47,7 +46,7 @@ export const defaultGetAccount = API.v1.AccountObject.from({
 
 export const defaultAsset = Asset.from('0 ');
 
-export const defaultGiftedRam = gifted_ram.from({
+export const defaultGiftedRam = UnicoveTypes.gifted_ram.from({
 	gifter: '',
 	giftee: '',
 	ram_bytes: 0
