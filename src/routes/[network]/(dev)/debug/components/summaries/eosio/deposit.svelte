@@ -1,9 +1,9 @@
 <script>
-	import * as SystemContract from '$lib/wharf/contracts/system';
 	import Code from '$lib/components/code.svelte';
 	import Deposit from '$lib/components/summary/eosio/deposit.svelte';
+	import { Types } from '$lib/types/rex';
 
-	const data = SystemContract.Types.deposit.from({
+	const data = Types.deposit.from({
 		owner: 'foo',
 		amount: '10000.0000 EOS'
 	});

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Asset, Name, PublicKey } from '@wharfkit/antelope';
+	import { Action, Asset, Name, PublicKey } from '@wharfkit/antelope';
 	import { getContext, onMount, tick } from 'svelte';
 	import { FiniteStateMachine } from 'runed';
 	import { goto } from '$app/navigation';
@@ -19,6 +19,8 @@
 	import Checkbox from '$lib/components/input/checkbox.svelte';
 	import { browser } from '$app/environment';
 	import AccountText from '$lib/components/elements/account.svelte';
+	import { PlaceholderAuth } from '@wharfkit/session';
+	import { Types as RAMTypes } from '$lib/types/ram';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -214,11 +216,16 @@
 			})
 		];
 		if (ramBytesUseTransfer) {
-			const ramtransfer = contract.action('ramtransfer', {
-				from: context.wharf.session.actor,
-				to: accountName,
-				bytes: ramBytes,
-				memo: ''
+			const ramtransfer = Action.from({
+				account: contract.account,
+				name: 'ramtransfer',
+				authorization: [PlaceholderAuth],
+				data: RAMTypes.ramtransfer.from({
+					from: context.wharf.session.actor,
+					to: accountName,
+					bytes: ramBytes,
+					memo: ''
+				})
 			});
 			actions.push(ramtransfer);
 		} else {

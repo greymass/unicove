@@ -1,4 +1,4 @@
-import { Asset } from '@wharfkit/antelope';
+import { Action, Asset } from '@wharfkit/antelope';
 import type { AccountState } from '$lib/state/client/account.svelte';
 import type { NetworkState } from '$lib/state/network.svelte';
 import type { WharfState } from '$lib/state/client/wharf.svelte';
@@ -12,6 +12,8 @@ import {
 	getUnstakingBalances
 } from '$lib/utils/staking';
 import { TokenBalance, TokenDefinition } from '$lib/types/token';
+import { PlaceholderAuth } from '@wharfkit/session';
+import { Types as REXTypes } from '$lib/types/rex';
 
 export class UnstakeManager {
 	public input: AssetInput | undefined = $state();
@@ -104,14 +106,15 @@ export class UnstakeManager {
 			if (!this.network || !this.account || !this.account.name || !this.assetValue || !this.wharf) {
 				throw new Error("Can't sign, data not ready");
 			}
-			let rex = this.network.tokenToRex(this.assetValue);
-			if (this.assetValue.equals(this.unstakable)) {
-				rex = getUnstakableREX(this.network, this.account);
-			}
 
-			const mvfrsavings = this.network.contracts.system.action('mvfrsavings', {
-				owner: this.account.name,
-				rex
+			const mvfrsavings = Action.from({
+				account: this.network.contracts.system.account,
+				name: 'mvfrsavings',
+				authorization: [PlaceholderAuth],
+				data: REXTypes.mvfrsavings.from({
+					owner: this.account.name,
+					rex: this.network.tokenToRex(this.assetValue)
+				})
 			});
 
 			const result = await this.wharf.transact({

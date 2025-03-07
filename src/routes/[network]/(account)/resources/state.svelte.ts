@@ -1,8 +1,10 @@
-import { type Action, Asset, Name } from '@wharfkit/antelope';
+import { Action, Asset, Name } from '@wharfkit/antelope';
+import { PlaceholderAuth } from '@wharfkit/session';
 import { ChainDefinition } from '@wharfkit/common';
 import type { Contract } from '@wharfkit/contract';
 
 import type { RentType } from './utils';
+import { Types as REXTypes } from '$lib/types/rex';
 
 const defaultName = Name.from('');
 const defaultSymbol = Asset.Symbol.from('0,UNKNOWN');
@@ -120,29 +122,47 @@ export class RentState {
 
 	private getRexActions(contract: Contract) {
 		const actions = [];
-		const depositData = {
-			owner: this.payer,
-			amount: this.cost
-		};
-		actions.push(contract.action('deposit', depositData));
+		actions.push(
+			Action.from({
+				account: contract.account,
+				name: 'deposit',
+				authorization: [PlaceholderAuth],
+				data: REXTypes.deposit.from({
+					owner: this.payer,
+					amount: this.cost
+				})
+			})
+		);
 		if (this.cpuQuantity.value) {
-			const rentCpuData = {
-				from: this.payer,
-				receiver: this.receiver,
-				loan_payment: this.cpuQuantity,
-				loan_fund: Asset.fromUnits(0, this.chain.systemToken!.symbol)
-			};
-			actions.push(contract.action('rentcpu', rentCpuData));
+			actions.push(
+				Action.from({
+					account: contract.account,
+					name: 'rentcpu',
+					authorization: [PlaceholderAuth],
+					data: REXTypes.rentcpu.from({
+						from: this.payer,
+						receiver: this.receiver,
+						loan_payment: this.cpuQuantity,
+						loan_fund: Asset.fromUnits(0, this.chain.systemToken!.symbol)
+					})
+				})
+			);
 		}
 
 		if (this.netQuantity.value) {
-			const rentNetData = {
-				from: this.payer,
-				receiver: this.receiver,
-				loan_payment: this.netQuantity,
-				loan_fund: Asset.fromUnits(0, this.chain.systemToken!.symbol)
-			};
-			actions.push(contract.action('rentnet', rentNetData));
+			actions.push(
+				Action.from({
+					account: contract.account,
+					name: 'rentnet',
+					authorization: [PlaceholderAuth],
+					data: REXTypes.rentcpu.from({
+						from: this.payer,
+						receiver: this.receiver,
+						loan_payment: this.netQuantity,
+						loan_fund: Asset.fromUnits(0, this.chain.systemToken!.symbol)
+					})
+				})
+			);
 		}
 		return actions;
 	}

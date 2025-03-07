@@ -1,9 +1,9 @@
 <script>
-	import * as SystemContract from '$lib/wharf/contracts/system';
 	import Code from '$lib/components/code.svelte';
 	import Sellrex from '$lib/components/summary/eosio/sellrex.svelte';
+	import { Types } from '$lib/types/rex';
 
-	const data = SystemContract.Types.sellrex.from({
+	const data = Types.sellrex.from({
 		from: 'eosio',
 		rex: '10000.0000 REX'
 	});

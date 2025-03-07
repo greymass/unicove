@@ -3,7 +3,7 @@ import { API, Asset, Checksum256, Float64, Int64, Name } from '@wharfkit/antelop
 import { type AccountDataSources, type VoterInfo } from '$lib/types/account';
 import * as SystemContract from '$lib/wharf/contracts/system';
 import { Types as UnicoveTypes } from '$lib/wharf/contracts/unicove';
-import { rex_balance, rex_fund } from '$lib/types/rex';
+import { Types as REXTypes } from '$lib/types/rex';
 
 export const defaultGetAccount = API.v1.AccountObject.from({
 	account_name: '',
@@ -61,7 +61,7 @@ export const defaultRefundRequest = SystemContract.Types.refund_request.from({
 	cpu_amount: '0 '
 });
 
-export const defaultRexBalance = rex_balance.from({
+export const defaultRexBalance = REXTypes.rex_balance.from({
 	version: 0,
 	owner: '',
 	vote_stake: '0 ',
@@ -70,7 +70,7 @@ export const defaultRexBalance = rex_balance.from({
 	rex_maturities: []
 });
 
-export const defaultRexFund = rex_fund.from({
+export const defaultRexFund = REXTypes.rex_fund.from({
 	version: 0,
 	owner: '',
 	balance: '0 '

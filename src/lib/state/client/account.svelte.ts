@@ -27,6 +27,7 @@ import {
 	nullContractHash
 } from '$lib/state/defaults/account';
 import * as SystemContract from '$lib/wharf/contracts/system';
+import { Types as REXTypes } from '$lib/types/rex';
 import { Token, TokenBalance, TokenDefinition } from '$lib/types/token';
 
 export class AccountState {
@@ -148,7 +149,7 @@ export function getRex(sources: AccountDataSources) {
 	if (!sources.rexbal) {
 		return defaultAccountDataSources.rexbal;
 	}
-	return SystemContract.Types.rex_balance.from(sources.rexbal);
+	return REXTypes.rex_balance.from(sources.rexbal);
 }
 
 export function getResources(

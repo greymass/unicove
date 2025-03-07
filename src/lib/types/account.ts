@@ -3,6 +3,7 @@ import { API, Int64, Name, Asset, Float64, Checksum256 } from '@wharfkit/antelop
 import { Types as MsigTypes } from '$lib/wharf/contracts/msig';
 import { Types as SystemTypes } from '$lib/wharf/contracts/system';
 import { Types as UnicoveTypes } from '$lib/wharf/contracts/unicove';
+import { Types as REXTypes } from '$lib/types/rex';
 import type { LightAPIBalanceRow } from '$lib/types/lightapi';
 import type { SerializedNetworkState } from '$lib/types/network';
 
@@ -33,9 +34,9 @@ export interface AccountDataSources {
 	// Table rows from eosio::refunds
 	refund_request?: SystemTypes.refund_request;
 	// Table row from eosio::rexbal
-	rexbal?: SystemTypes.rex_balance;
+	rexbal?: REXTypes.rex_balance;
 	// Table row from eosio::rexfund
-	rexfund?: SystemTypes.rex_fund;
+	rexfund?: REXTypes.rex_fund;
 }
 
 export type AccountResourceType = 'cpu' | 'net' | 'ram';

@@ -1,6 +1,7 @@
 import { API, Asset } from '@wharfkit/antelope';
 
 import * as SystemContract from '$lib/wharf/contracts/system';
+import { Types as REXTypes } from '$lib/types/rex';
 import { Types as UnicoveTypes } from '$lib/wharf/contracts/unicove';
 
 export const defaultGetAccount = API.v1.AccountObject.from({
@@ -59,7 +60,7 @@ export const defaultRefundRequest = SystemContract.Types.refund_request.from({
 	cpu_amount: '0 '
 });
 
-export const defaultRexBalance = SystemContract.Types.rex_balance.from({
+export const defaultRexBalance = REXTypes.rex_balance.from({
 	version: 0,
 	owner: '',
 	vote_stake: '0 ',
@@ -68,7 +69,7 @@ export const defaultRexBalance = SystemContract.Types.rex_balance.from({
 	rex_maturities: []
 });
 
-export const defaultRexFund = SystemContract.Types.rex_fund.from({
+export const defaultRexFund = REXTypes.rex_fund.from({
 	version: 0,
 	owner: '',
 	balance: '0 '

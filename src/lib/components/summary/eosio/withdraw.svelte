@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { formatCurrency } from '$lib/i18n';
 	import { Card, Stack, Switcher } from '$lib/components/layout';
-	import * as SystemContract from '$lib/wharf/contracts/system';
 	import type { ActionSummaryProps } from '$lib/types/transaction';
+	import { Types } from '$lib/types/rex';
 
 	interface WithdrawProps extends Omit<ActionSummaryProps, 'data'> {
-		data: SystemContract.Types.withdraw;
+		data: Types.withdraw;
 	}
 
 	const { class: className = '', data, value }: WithdrawProps = $props();

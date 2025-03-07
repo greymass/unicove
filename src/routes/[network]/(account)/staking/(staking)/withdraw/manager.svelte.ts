@@ -1,4 +1,4 @@
-import { Asset, UInt64 } from '@wharfkit/antelope';
+import { Action, Asset, UInt64 } from '@wharfkit/antelope';
 import type { AccountState } from '$lib/state/client/account.svelte';
 import type { NetworkState } from '$lib/state/network.svelte';
 import type { WharfState } from '$lib/state/client/wharf.svelte';
@@ -12,6 +12,8 @@ import {
 	getSellableREX,
 	getTotalRexSavings
 } from '$lib/utils/staking';
+import { PlaceholderAuth } from '@wharfkit/session';
+import { Types as REXTypes } from '$lib/types/rex';
 
 export class WithdrawManager {
 	public network: NetworkState | undefined = $state();
@@ -88,17 +90,27 @@ export class WithdrawManager {
 					);
 				}
 				actions.push(
-					this.network.contracts.system.action('sellrex', {
-						from: this.account.name,
-						rex: this.sellable
+					Action.from({
+						account: this.network.contracts.system.account,
+						name: 'sellrex',
+						authorization: [PlaceholderAuth],
+						data: REXTypes.sellrex.from({
+							from: this.account.name,
+							rex: this.sellable
+						})
 					})
 				);
 			}
 			if (this.total) {
 				actions.push(
-					this.network.contracts.system.action('withdraw', {
-						owner: this.account.name,
-						amount: this.total
+					Action.from({
+						account: this.network.contracts.system.account,
+						name: 'withdraw',
+						authorization: [PlaceholderAuth],
+						data: REXTypes.withdraw.from({
+							owner: this.account.name,
+							amount: this.total
+						})
 					})
 				);
 			}
