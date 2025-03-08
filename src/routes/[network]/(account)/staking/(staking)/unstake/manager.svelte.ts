@@ -107,13 +107,18 @@ export class UnstakeManager {
 				throw new Error("Can't sign, data not ready");
 			}
 
+			let rex = this.network.tokenToRex(this.assetValue);
+			if (this.assetValue.equals(this.unstakable)) {
+				rex = getUnstakableREX(this.network, this.account);
+			}
+
 			const mvfrsavings = Action.from({
 				account: this.network.contracts.system.account,
 				name: 'mvfrsavings',
 				authorization: [PlaceholderAuth],
 				data: REXTypes.mvfrsavings.from({
 					owner: this.account.name,
-					rex: this.network.tokenToRex(this.assetValue)
+					rex
 				})
 			});
 
