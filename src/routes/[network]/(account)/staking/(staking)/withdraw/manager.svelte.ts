@@ -9,7 +9,8 @@ import {
 	getUnstakingBalances,
 	getClaimableBalance,
 	getWithdrawableBalance,
-	getSellableREX
+	getSellableREX,
+	getTotalRexSavings
 } from '$lib/utils/staking';
 
 export class WithdrawManager {
@@ -28,6 +29,12 @@ export class WithdrawManager {
 	);
 	public sellable: Asset = $derived(getSellableREX(this.network, this.account, this.unstaking));
 	public withdrawable: Asset = $derived(getWithdrawableBalance(this.network, this.account));
+	public totalRex: Asset = $derived(getTotalRexSavings(this.network, this.account));
+	public sellingAll = $derived(this.sellable.equals(this.totalRex));
+	public voting = $derived(
+		this.account && (!this.account.voter.proxy.equals('') || this.account.voter.votes.length > 0)
+	);
+
 	public total: Asset = $derived(
 		this.network
 			? Asset.fromUnits(
@@ -70,6 +77,16 @@ export class WithdrawManager {
 
 			const actions = [];
 			if (this.sellable && this.sellable.units.gt(UInt64.from(0))) {
+				// If they are voting, uncast their votes automatically
+				if (this.sellingAll && this.voting) {
+					actions.push(
+						this.network.contracts.system.action('voteproducer', {
+							voter: this.account.name,
+							proxy: '',
+							producers: []
+						})
+					);
+				}
 				actions.push(
 					this.network.contracts.system.action('sellrex', {
 						from: this.account.name,

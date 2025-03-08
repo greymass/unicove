@@ -5,7 +5,12 @@ import type { WharfState } from '$lib/state/client/wharf.svelte';
 import AssetInput from '$lib/components/input/asset.svelte';
 
 import type { UnstakingRecord } from '$lib/utils/staking';
-import { defaultQuantity, getUnstakableBalance, getUnstakingBalances } from '$lib/utils/staking';
+import {
+	defaultQuantity,
+	getUnstakableBalance,
+	getUnstakableREX,
+	getUnstakingBalances
+} from '$lib/utils/staking';
 import { TokenBalance, TokenDefinition } from '$lib/types/token';
 
 export class UnstakeManager {
@@ -99,9 +104,14 @@ export class UnstakeManager {
 			if (!this.network || !this.account || !this.account.name || !this.assetValue || !this.wharf) {
 				throw new Error("Can't sign, data not ready");
 			}
+			let rex = this.network.tokenToRex(this.assetValue);
+			if (this.assetValue.equals(this.unstakable)) {
+				rex = getUnstakableREX(this.network, this.account);
+			}
+
 			const mvfrsavings = this.network.contracts.system.action('mvfrsavings', {
 				owner: this.account.name,
-				rex: this.network.tokenToRex(this.assetValue)
+				rex
 			});
 
 			const result = await this.wharf.transact({

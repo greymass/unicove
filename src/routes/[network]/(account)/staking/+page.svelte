@@ -13,7 +13,9 @@
 		getStakedBalance,
 		getUnstakingBalances,
 		getAPR,
-		getUnstakableBalance
+		getUnstakableBalance,
+		getUnstakableREX,
+		getUnstakingRex
 	} from '$lib/utils/staking';
 	import UnstakingBalances from '$lib/components/elements/unstaking.svelte';
 	import AccountBalance from '$lib/components/card/accountbalance.svelte';
@@ -31,9 +33,11 @@
 
 	let total: Asset = $derived(getStakedBalance(data.network, context.account));
 	let staked: Asset = $derived(getUnstakableBalance(data.network, context.account));
+	let stakedRex: Asset = $derived(getUnstakableREX(data.network, context.account));
 	let unstaking: Array<UnstakingRecord> = $derived(
 		getUnstakingBalances(data.network, context.account)
 	);
+	let unstakingRex: Asset = $derived(getUnstakingRex(data.network, context.account));
 	let unstakingTotal: Asset = $derived(
 		unstaking
 			.filter((r) => !r.savings)
@@ -118,7 +122,15 @@
 								<tr>
 									<td>{m.common_staked()}</td>
 									<td class="text-right text-white">
+										{#if staked.units.equals(0)}
+											<span class="font-mono">&lt;</span>
+										{/if}
 										<AssetText variant="full" value={staked} />
+										{#if context.settings.data.advancedMode}
+											<p>
+												<AssetText variant="full" value={stakedRex} />
+											</p>
+										{/if}
 									</td>
 									{@render tableAction([m.common_unstake(), `/${data.network}/staking/unstake`])}
 								</tr>
@@ -128,6 +140,11 @@
 									<td>{m.common_unstaking()}</td>
 									<td class="text-right text-white">
 										<AssetText variant="full" value={unstakingTotal} />
+										{#if context.settings.data.advancedMode}
+											<p>
+												<AssetText variant="full" value={unstakingRex} />
+											</p>
+										{/if}
 									</td>
 									<td></td>
 								</tr>
@@ -137,6 +154,11 @@
 									<td>{m.common_unstaked()}</td>
 									<td class="text-right text-white">
 										<AssetText variant="full" value={totalWithdraw} />
+										{#if context.settings.data.advancedMode}
+											<p>
+												<AssetText variant="full" value={unstakingRex} />
+											</p>
+										{/if}
 									</td>
 									{@render tableAction([m.common_withdraw(), `/${data.network}/staking/withdraw`])}
 								</tr>
