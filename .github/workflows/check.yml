@@ -24,6 +24,9 @@ jobs:
       - name: Install dependencies with Bun
         run: bun install
 
+      - name: Install missing dependency @wharfkit/protocol-scatter
+        run: bun add @wharfkit/protocol-scatter
+
       - name: Build Paraglide
         run: bun run build-paraglide
 
