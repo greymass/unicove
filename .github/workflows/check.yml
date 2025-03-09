@@ -27,6 +27,9 @@ jobs:
       - name: Build Paraglide
         run: bun run build-paraglide
 
+      - name: Sync SvelteKit
+        run: bunx svelte-kit sync
+
       - name: Install Playwright
         run: npm install -D @playwright/test --legacy-peer-deps
 
