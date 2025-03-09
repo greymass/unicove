@@ -4,15 +4,48 @@ on:
   push:
 
 jobs:
-  check:
+  test:
+    timeout-minutes: 5
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 1
-      - uses: oven-sh/setup-bun@v2
-      - run: bun install
-      - run: bun run build-paraglide
-      - run: bun run check
-      - run: bun run lint
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install dependencies with Bun
+        run: bun install
+
+      - name: Build Paraglide
+        run: bun run build-paraglide
+
+      - name: Install Playwright
+        run: npm install -D @playwright/test --legacy-peer-deps
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: Run Playwright tests with Bunx
+        run: bunx playwright test
+
+      - name: Run Check
+        run: bun run check
+
+      - name: Lint
+        run: bun run lint
+
+      - name: Upload Playwright Report
+        uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
