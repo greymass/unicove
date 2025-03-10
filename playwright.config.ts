@@ -67,8 +67,8 @@ export default defineConfig({
 	webServer: {
 		command: 'make dev',
 		url: 'http://localhost:5173/',
-		reuseExistingServer: !process.env.CI,
-		timeout: 30000,
+		reuseExistingServer: true,
+		timeout: 5 * 1000,
 		stdout: 'pipe',
 	},
 	use: {
