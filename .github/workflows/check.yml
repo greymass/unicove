@@ -39,6 +39,11 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
+      - name: Launch Debug Bun Server
+        run: |
+          bun run dev
+          curl -v http://localhost:5173 || echo "Server not responding!"
+
       - name: Run Playwright tests with Bunx
         run: bunx playwright test
 
