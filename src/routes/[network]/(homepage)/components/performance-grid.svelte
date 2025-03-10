@@ -114,7 +114,7 @@
 			<Card class="grid flex-1 content-between gap-4  bg-mineShaft-900/60">
 				<h3 class="text-muted text-sm">RAM/{network.token.symbol.name}</h3>
 				<p class="justify-self-end text-nowrap text-xl font-semibold text-white">
-					<AssetText value={network.resources.ram.price.rammarket} variant="full" />
+					<AssetText value={network.resources.ram.price.rammarket} variant="short" />
 				</p>
 			</Card>
 
