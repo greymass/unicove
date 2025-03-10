@@ -6,8 +6,7 @@ test('test', async ({ page }) => {
 	await page.waitForLoadState('networkidle');
 	await page.getByRole('button', { name: 'Login' }).click({ force: true });
 	await expect(page.getByLabel('account-switcher-label').locator('div')).toContainText(
-		'wharfkit1133',
-		{ timeout: 30 * 1000 }
+		'wharfkit1133'
 	);
 
 	// Go to the main page.
