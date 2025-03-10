@@ -8,7 +8,10 @@ test('test', async ({ page }) => {
 
 	// Debugging: Ensure the button is clicked
 	console.log('Button clicked');
-
+	// Wait for the label to appear
+	console.log('Waiting for account-switcher-label...');
+	await page.waitForSelector('label[for="account-switcher-label"]', { timeout: 10000 });
+	console.log('Label found.');
 	try {
 		await expect(page.getByLabel('account-switcher-label').locator('div')).toContainText(
 			'wharfkit1133'
