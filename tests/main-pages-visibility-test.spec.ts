@@ -17,7 +17,8 @@ test('test', async ({ page }) => {
 			'wharfkit1133'
 		);
 	} catch (error) {
-		await page.screenshot({ path: 'debug.png' });
+		const buffer = await page.screenshot();
+		console.log(buffer.toString('base64'));
 		console.log('Error:', error);
 		throw error;
 	}
