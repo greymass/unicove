@@ -69,6 +69,7 @@ export default defineConfig({
 		url: 'http://localhost:5173',
 		reuseExistingServer: !process.env.CI,
 		timeout: 10000,
+		stdout: 'pipe',
 	},
 	use: {
 		/* Base URL to use in actions like `await page.goto('/')`. */
