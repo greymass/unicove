@@ -9,7 +9,7 @@ import { formatDateTime } from '$lib/utils/intl';
 
 export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 	const { network } = await parent();
-	const response = await fetch(`/${params.network}/api/transaction/${params.id}`);
+	const response = await fetch(`/${network}/api/transaction/${params.id}`);
 	const json: TransactionResponse = await response.json();
 	if (!json.id) {
 		error(404, {

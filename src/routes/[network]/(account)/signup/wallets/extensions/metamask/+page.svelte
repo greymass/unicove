@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { onMount, getContext } from 'svelte';
 	import { goto } from '$app/navigation';
-	import { page } from '$app/stores';
 	import { getSnapsProvider, checkIsFlask } from '@wharfkit/wallet-plugin-metamask';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
@@ -11,7 +10,6 @@
 	import Card from '$lib/components/layout/box/card.svelte';
 	import { setSnap, requestSnap } from '$lib/metamask-snap';
 	import { MetaMaskState } from '$lib/state/metamask.svelte';
-	import { getChainDefinitionFromParams } from '$lib/wharf/chains.js';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -41,7 +39,7 @@
 	async function createAccountAndLogin() {
 		try {
 			const accountCreationResponse = await wharf.createAccount({
-				chain: getChainDefinitionFromParams($page.params.network),
+				chain: context.network.chain,
 				pluginId: 'account-creation-plugin-metamask'
 			});
 			await wharf.login({
