@@ -5,9 +5,19 @@ test('test', async ({ page }) => {
 	await page.goto('./en/jungle4/debug/account');
 	await page.waitForLoadState('networkidle');
 	await page.getByRole('button', { name: 'Login' }).click({ force: true });
-	await expect(page.getByLabel('account-switcher-label').locator('div')).toContainText(
-		'wharfkit1133'
-	);
+
+	// Debugging: Ensure the button is clicked
+	console.log('Button clicked');
+
+	try {
+		await expect(page.getByLabel('account-switcher-label').locator('div')).toContainText(
+			'wharfkit1133'
+		);
+	} catch (error) {
+		await page.screenshot({ path: 'debug.png' });
+		console.log('Error:', error);
+		throw error;
+	}
 
 	// Go to the main page.
 	await page.getByRole('link', { name: 'My Account' }).click();
