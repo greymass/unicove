@@ -69,7 +69,7 @@ export default defineConfig({
 		url: 'http://localhost:5173',
 		reuseExistingServer: true,
 		timeout: 25 * 1000,
-		stdout: 'pipe',
+		stdout: 'pipe'
 	},
 	use: {
 		/* Base URL to use in actions like `await page.goto('/')`. */
@@ -77,5 +77,5 @@ export default defineConfig({
 
 		/* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
 		trace: 'on-first-retry'
-	},
+	}
 });
