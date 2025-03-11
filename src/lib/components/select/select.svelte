@@ -43,6 +43,7 @@
 		disabled,
 		multiple,
 		forceVisible: true,
+		preventScroll: false,
 		positioning: {
 			placement: 'bottom-start',
 			fitViewport: true,
