@@ -19,3 +19,9 @@ Thumbs.db
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .wrangler
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
