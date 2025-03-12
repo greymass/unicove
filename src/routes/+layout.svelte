@@ -4,7 +4,7 @@
 	import '$lib/utils/dayjs'; // setup dayjs
 	import { ParaglideJS } from '@inlang/paraglide-sveltekit';
 	import { PlausibleAnalytics } from '@accuser/svelte-plausible-analytics';
-	import { PUBLIC_ENVIRONMENT } from '$env/static/public';
+	import { PUBLIC_ANALYTICS_DOMAIN, PUBLIC_ENVIRONMENT } from '$env/static/public';
 
 	import { i18n } from '$lib/i18n';
 	import Toaster from '$lib/components/toast/toaster.svelte';
@@ -24,4 +24,4 @@
 	{@render children()}
 </ParaglideJS>
 
-<PlausibleAnalytics apiHost="https://stats.greymass.com" domain="unicove.com" />
+<PlausibleAnalytics apiHost="https://stats.greymass.com" domain={PUBLIC_ANALYTICS_DOMAIN} />
