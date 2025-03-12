@@ -5,6 +5,7 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
 	import * as m from '$lib/paraglide/messages';
 	import dayjs from 'dayjs';
+	import Button from '$lib/components/button/button.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 	const { children, data } = $props();
@@ -33,7 +34,6 @@
 				});
 			}
 			items.push({ href: `/${network}/account/${account}/authority`, text: 'Authority' });
-
 			items.push({ href: `/${network}/account/${account}/data`, text: m.common_data() });
 		}
 
@@ -61,7 +61,7 @@
 		}, 1000);
 		refresh = setInterval(() => {
 			data.account.refresh();
-		}, 100000);
+		}, 60000);
 	});
 
 	onDestroy(() => {
@@ -77,6 +77,7 @@
 
 {#if context.settings.data.debugMode}
 	<div class="text-muted text-center text-sm">
-		Account updated {lastUpdate} seconds ago
+		props.account updated {lastUpdate} seconds ago
+		<Button onclick={() => data.account.refresh()}>Refresh</Button>
 	</div>
 {/if}

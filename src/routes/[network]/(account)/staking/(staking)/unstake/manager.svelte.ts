@@ -1,13 +1,19 @@
-import { Asset } from '@wharfkit/antelope';
+import { Action, Asset } from '@wharfkit/antelope';
 import type { AccountState } from '$lib/state/client/account.svelte';
 import type { NetworkState } from '$lib/state/network.svelte';
 import type { WharfState } from '$lib/state/client/wharf.svelte';
 import AssetInput from '$lib/components/input/asset.svelte';
 
-import { TokenBalance } from '@wharfkit/common';
-
 import type { UnstakingRecord } from '$lib/utils/staking';
-import { defaultQuantity, getUnstakableBalance, getUnstakingBalances } from '$lib/utils/staking';
+import {
+	defaultQuantity,
+	getUnstakableBalance,
+	getUnstakableREX,
+	getUnstakingBalances
+} from '$lib/utils/staking';
+import { TokenBalance, TokenDefinition } from '$lib/types/token';
+import { PlaceholderAuth } from '@wharfkit/session';
+import { Types as REXTypes } from '$lib/types/rex';
 
 export class UnstakeManager {
 	public input: AssetInput | undefined = $state();
@@ -37,17 +43,16 @@ export class UnstakeManager {
 	public tokenBalance: TokenBalance | undefined = $derived.by(() => {
 		let balance: TokenBalance | undefined = undefined;
 		if (this.network) {
-			const tokenIdentifier = {
+			const id = TokenDefinition.from({
 				chain: this.network.chain.id,
 				contract: this.network.contracts.token.account,
 				symbol: this.network.chain.systemToken!.symbol
-			};
-			const meta = (this.network.tokens || []).find((item) => item.id.equals(tokenIdentifier));
+			});
+			const meta = (this.network.tokens || []).find((item) => item.id.equals(id));
 			if (meta) {
 				balance = TokenBalance.from({
-					asset: this.staked,
-					contract: this.network.contracts.token.account,
-					metadata: meta
+					token: { id },
+					balance: this.staked
 				});
 			}
 		}
@@ -101,9 +106,20 @@ export class UnstakeManager {
 			if (!this.network || !this.account || !this.account.name || !this.assetValue || !this.wharf) {
 				throw new Error("Can't sign, data not ready");
 			}
-			const mvfrsavings = this.network.contracts.system.action('mvfrsavings', {
-				owner: this.account.name,
-				rex: this.network.tokenToRex(this.assetValue)
+
+			let rex = this.network.tokenToRex(this.assetValue);
+			if (this.assetValue.equals(this.unstakable)) {
+				rex = getUnstakableREX(this.network, this.account);
+			}
+
+			const mvfrsavings = Action.from({
+				account: this.network.contracts.system.account,
+				name: 'mvfrsavings',
+				authorization: [PlaceholderAuth],
+				data: REXTypes.mvfrsavings.from({
+					owner: this.account.name,
+					rex
+				})
 			});
 
 			const result = await this.wharf.transact({

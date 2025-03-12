@@ -356,8 +356,6 @@
 	"send_tokens_to_send": "代币",
 	"settings_advanced": "高级",
 	"settings_developer": "开发者模式",
-	"settings_enable_advanced": "启用高级选项",
-	"settings_enable_advanced_desc": "管理网络资源、更高的资产粒度等。",
 	"settings_enable_developer": "启用开发者模式",
 	"settings_enable_developer_desc": "显示用于开发和调试的原始数据",
 	"settings_general": "常规",

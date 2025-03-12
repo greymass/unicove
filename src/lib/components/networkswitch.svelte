@@ -83,7 +83,7 @@
 			>{currentNetwork.chain.name}</span
 		>
 
-		{#if context.settings.data.advancedMode}
+		{#if options.length > 1 && context.settings.data.advancedMode}
 			<div class="font-regular m-0 flex items-center gap-1 pr-1 text-base text-zinc-400">
 				<span use:melt={$label}>{m.change_network()}</span>
 				<ChevronDown

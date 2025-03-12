@@ -128,6 +128,20 @@ export function getUnstakingBalances(
 	return records;
 }
 
+export function getUnstakingRex(
+	network?: NetworkState,
+	account?: AccountState,
+	unstaking?: Array<UnstakingRecord>
+): Asset {
+	if (!unstaking) {
+		unstaking = getUnstakingBalances(network, account);
+	}
+	const sum = unstaking
+		.filter((r) => !r.savings)
+		.reduce((acc, r) => acc.adding(r.rex.units), Int64.from(0));
+	return Asset.fromUnits(sum, '4,REX');
+}
+
 export function getUnstakableBalance(
 	network?: NetworkState,
 	account?: AccountState,
@@ -142,9 +156,29 @@ export function getUnstakableBalance(
 		: Asset.from(0, network ? network.chain.systemToken!.symbol : defaultSymbol);
 }
 
+export function getUnstakableREX(
+	network?: NetworkState,
+	account?: AccountState,
+	unstaking?: Array<UnstakingRecord>
+): Asset {
+	if (!unstaking) {
+		unstaking = getUnstakingBalances(network, account);
+	}
+	const savings = unstaking.find((r) => r.savings);
+	return savings ? savings.rex : Asset.from(0, '4,REX');
+}
+
+export function getTotalRexSavings(network?: NetworkState, account?: AccountState): Asset {
+	const sum = getUnstakingBalances(network, account).reduce(
+		(acc, r) => acc.adding(r.rex.units),
+		Int64.from(0)
+	);
+	return Asset.fromUnits(sum, '4,REX');
+}
+
 export function getAPR(network: NetworkState): string {
 	const annualReward = 31250000;
-	const totalStaked = Number(network.token.distribution.staked.value);
+	const totalStaked = Number(network.token.distribution?.staked.value || 0);
 	// Prevent division by zero
 	if (totalStaked === 0) {
 		return '0';

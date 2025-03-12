@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
-	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte';
 
 	import { Card, Stack } from '$lib/components/layout';
 	import Button from '$lib/components/button/button.svelte';
@@ -9,6 +9,7 @@
 	import * as m from '$lib/paraglide/messages';
 
 	const context = getContext<UnicoveContext>('state');
+	const market = getContext<MarketContext>('market');
 
 	interface Props {
 		cta?: {
@@ -32,9 +33,9 @@
 					{m.common_not_logged_in()}
 				{/if}
 			</p>
-			{#if context.account?.value?.liquid}
+			{#if market.account?.systemtoken?.liquid}
 				<Chip>
-					<AssetText variant="full" value={context.account?.value?.liquid} />
+					<AssetText variant="full" value={market.account?.systemtoken?.liquid} />
 					<!-- TODO: Percent change -->
 				</Chip>
 			{/if}

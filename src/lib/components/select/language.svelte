@@ -5,8 +5,9 @@
 	import { createSelect, melt } from '@melt-ui/svelte';
 	import { fade } from 'svelte/transition';
 	import ChevronDown from 'lucide-svelte/icons/chevron-down';
+	import * as m from '$lib/paraglide/messages';
 
-	let defaultLang = { value: languageTag(), label: languageTag() };
+	let defaultLang = { value: languageTag(), label: m[`common_${languageTag()}`]() };
 
 	const {
 		elements: { trigger, menu, option },
@@ -72,7 +73,7 @@
 				use:melt={$option({ value: lang, label: lang })}
 				data-sveltekit-replacestate
 			>
-				{lang}
+				{m[`common_${lang}`]()}
 			</a>
 		{/each}
 	</div>

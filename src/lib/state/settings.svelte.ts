@@ -1,5 +1,6 @@
 import { browser } from '$app/environment';
 import type { ActionDisplayVariants } from '$lib/types';
+import { SupportedCurrencies } from '$lib/types/currencies';
 
 export enum SettingKeys {
 	'actionDisplayVariant' = 'actionDisplayVariant',
@@ -35,26 +36,34 @@ export enum TimeSeconds {
 export interface SettingsData {
 	actionDisplayVariant?: ActionDisplayVariants;
 	advancedMode?: boolean;
+	displayCurrency: SupportedCurrencies;
 	debugMode?: boolean;
 	preventAccountPageSwitching?: boolean;
 	searchAccountSwitch?: boolean;
 	searchShowPages?: boolean;
 }
 
+const defaultSettings: SettingsData = {
+	actionDisplayVariant: 'pretty',
+	advancedMode: false,
+	displayCurrency: SupportedCurrencies.USD,
+	debugMode: false,
+	preventAccountPageSwitching: false,
+	searchAccountSwitch: false,
+	searchShowPages: true
+};
+
 export class SettingsState {
-	data = $state<SettingsData>({
-		actionDisplayVariant: 'pretty',
-		advancedMode: false,
-		debugMode: false,
-		preventAccountPageSwitching: false,
-		searchAccountSwitch: false,
-		searchShowPages: true
-	});
+	data = $state<SettingsData>(defaultSettings);
 
 	constructor() {
 		if (browser) {
 			const item = localStorage.getItem('unicove-settings');
-			if (item) this.data = this.deserialize(item);
+			if (item)
+				this.data = {
+					...defaultSettings,
+					...this.deserialize(item)
+				};
 		}
 		$effect(() => {
 			localStorage.setItem('unicove-settings', this.serialize(this.data));

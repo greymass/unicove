@@ -1,5 +1,12 @@
 <script lang="ts">
-	const props = $props();
+	import type { Snippet } from 'svelte';
+
+	interface CodeProps {
+		json?: unknown;
+		inline?: boolean;
+		children?: Snippet;
+	}
+	const props: CodeProps = $props();
 	const tag = props.inline ? 'code' : 'pre';
 
 	const codeStyles = 'bg-shark-900/40 text-xs text-white font-mono rounded-md px-2 py-1';
@@ -8,12 +15,20 @@
 
 {#if props.inline}
 	<svelte:element this={tag} class={codeStyles}>
-		{@render props.children()}
+		{#if props.json}
+			{JSON.stringify(props.json, undefined, 2)}
+		{:else if props.children}
+			{@render props.children()}
+		{/if}
 	</svelte:element>
 {:else}
 	<svelte:element this={tag} class={preStyles}>
 		<div class="overflow-x-auto rounded bg-shark-950 p-4">
-			{@render props.children()}
+			{#if props.json}
+				{JSON.stringify(props.json, undefined, 2)}
+			{:else if props.children}
+				{@render props.children()}
+			{/if}
 		</div>
 	</svelte:element>
 {/if}

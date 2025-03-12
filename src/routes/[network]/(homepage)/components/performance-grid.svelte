@@ -6,6 +6,11 @@
 	import TextBlock from './text-block.svelte';
 	import Box from '$lib/components/layout/box/box.svelte';
 	import * as m from '$lib/paraglide/messages';
+	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte';
+	import { Asset, Int64 } from '@wharfkit/antelope';
+	import { getContext } from 'svelte';
+	import { Currencies } from '$lib/types/currencies';
+	import type { NetworkValueState } from '$lib/state/value.svelte';
 
 	interface Props {
 		network: NetworkState;
@@ -13,7 +18,31 @@
 		networkLogo: string;
 	}
 
+	const context = getContext<UnicoveContext>('state');
+	const market = getContext<MarketContext>('market');
+
+	function calculateTvl(network: NetworkState, networkValue: NetworkValueState): Asset {
+		const token = Asset.fromUnits(0, network.token.symbol);
+		if (network.supports('rex') && network.token.distribution) {
+			token.units.add(network.token.distribution.staked.units);
+		}
+		if (network.supports('rammarket') && network.token.distribution) {
+			token.units.add(network.foo?.quote.balance.units);
+		}
+		if (networkValue.systemtoken.price.units.gt(Int64.from(0))) {
+			return calculateValue(token, networkValue.systemtoken.price);
+		}
+		return token;
+	}
+
 	let { network, networkLogo, networkName }: Props = $props();
+
+	const tvl = $derived(calculateTvl(network, market.network));
+	const marketcap = $derived(
+		network.token.distribution
+			? calculateValue(network.token.distribution.circulating, market.network.systemtoken.price)
+			: Asset.fromUnits(0, Currencies[context.settings.data.displayCurrency].symbol)
+	);
 </script>
 
 <section class="col-span-full grid grid-cols-subgrid gap-4">
@@ -42,7 +71,7 @@
 			<Card class="grid content-between gap-4  bg-mineShaft-900/40">
 				<h3 class="text-muted text-sm">{network.chain.name} {m.common_market_cap()}</h3>
 				<p class="justify-self-end text-nowrap text-xl font-semibold text-white">
-					<AssetText value={network.token.marketcap} variant="short" />
+					<AssetText value={marketcap} variant="short" />
 				</p>
 			</Card>
 
@@ -65,7 +94,7 @@
 			<Card class="grid content-between gap-4 bg-mineShaft-900/60">
 				<h3 class="text-muted text-sm">{m.common_native_tvl()}</h3>
 				<p class="justify-self-end text-nowrap text-xl font-semibold text-white">
-					<AssetText value={network.tvl} variant="short" />
+					<AssetText value={tvl} variant="short" />
 				</p>
 			</Card>
 		</div>
@@ -74,18 +103,18 @@
 			<!-- Token price -->
 			<Card class="grid flex-1 content-between gap-4 @sm:shrink">
 				<h3 class="text-muted text-sm">
-					{network.token.definition.symbol.name}/{network.token.price.symbol.name}
+					{network.token.symbol.name}/{market.network.systemtoken.price.symbol.name}
 				</h3>
 				<p class="justify-self-end text-nowrap text-xl font-semibold text-white">
-					<AssetText value={network.token.price} variant="full" />
+					<AssetText value={market.network.systemtoken.price} variant="full" />
 				</p>
 			</Card>
 
 			<!-- Ram Eos pair -->
 			<Card class="grid flex-1 content-between gap-4  bg-mineShaft-900/60">
-				<h3 class="text-muted text-sm">RAM/{network.token.definition.symbol.name}</h3>
+				<h3 class="text-muted text-sm">RAM/{network.token.symbol.name}</h3>
 				<p class="justify-self-end text-nowrap text-xl font-semibold text-white">
-					<AssetText value={network.resources.ram.price.rammarket} variant="full" />
+					<AssetText value={network.resources.ram.price.rammarket} variant="short" />
 				</p>
 			</Card>
 
@@ -95,7 +124,10 @@
 					<h3 class="text-muted text-sm">RAM/USD</h3>
 					<p class="justify-self-end text-nowrap text-xl font-semibold text-white">
 						<AssetText
-							value={calculateValue(network.resources.ram.price.rammarket, network.token.price)}
+							value={calculateValue(
+								network.resources.ram.price.rammarket,
+								market.network.systemtoken.price
+							)}
 							variant="full"
 						/>
 					</p>

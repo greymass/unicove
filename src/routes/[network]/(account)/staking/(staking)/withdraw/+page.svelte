@@ -8,6 +8,7 @@
 	import { getContext } from 'svelte';
 	import { WithdrawManager } from './manager.svelte';
 	import * as m from '$lib/paraglide/messages';
+	import Card from '$lib/components/layout/box/card.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
@@ -43,10 +44,18 @@
 				<h3 class="text-muted leading-none">{m.common_withdrawable_currently()}</h3>
 				<p class="text-2xl font-bold text-white">{String(manager.total)}</p>
 			</Stack>
-
 			<Button disabled={!manager.total.value} onclick={() => manager.transact()} variant="primary"
 				>{m.common_withdraw()}</Button
 			>
+			{#if manager.voting && manager.sellingAll}
+				<Card>
+					<h4 class="h4 text-solar-500">Notice: Withdrawing will also clear votes</h4>
+					<p>
+						Withdrawing and removing all tokens from staking requires we unset any votes that were
+						previously cast for either block producers or proxies.
+					</p>
+				</Card>
+			{/if}
 		</Switcher>
 	{/if}
 </Stack>

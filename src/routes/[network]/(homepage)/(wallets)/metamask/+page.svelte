@@ -61,13 +61,13 @@
 		if (!data.network.snapOrigin) {
 			return goto(`/404`);
 		}
+		await getLatestSnapVersion();
 
 		metaMaskState.snapProvider = await getSnapsProvider();
 	});
 
 	async function connect() {
 		await requestSnap(metaMaskState);
-		await getLatestSnapVersion();
 	}
 
 	async function getLatestSnapVersion() {
