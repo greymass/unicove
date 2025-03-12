@@ -1,7 +1,7 @@
 import { sequence } from '@sveltejs/kit/hooks';
 import type { Handle, RequestEvent } from '@sveltejs/kit';
 
-import { PUBLIC_DEFAULT_CHAIN } from '$env/static/public';
+import { PUBLIC_CHAIN_SHORT } from '$env/static/public';
 import { availableLanguageTags } from '$lib/paraglide/runtime.js';
 import { i18n } from '$lib/i18n';
 import { isNetworkShortName } from '$lib/wharf/chains';
@@ -9,6 +9,15 @@ import { getBackendNetworkByName } from '$lib/wharf/client/ssr';
 
 export const i18nHandle = i18n.handle();
 type HandleParams = Parameters<Handle>[0];
+
+// TODO: Find a better home for this data
+const mappings: Record<string, string> = {
+	eos: 'https://unicove.com',
+	telos: 'https://telos.unicove.com',
+	wax: 'https://wax.unicove.com',
+	jungle4: 'https://jungle4.unicove.com',
+	kylin: 'https://kylin.unicove.com'
+};
 
 export function getHeaderLang(event: RequestEvent) {
 	const acceptLanguage = event.request.headers.get('accept-language');
@@ -39,6 +48,10 @@ function isNetwork(value: string) {
 	return isNetworkShortName(value);
 }
 
+function isAlternativeNetwork(value: string) {
+	return value !== PUBLIC_CHAIN_SHORT && Object.keys(mappings).includes(value);
+}
+
 const redirects: Record<string, string> = {
 	'/earn': '/staking',
 	'/resources/ram/buy': '/ram/buy',
@@ -56,9 +69,7 @@ function isManualRedirectPath(pathMore: string[]): boolean {
 }
 
 export async function networkHandle({ event, resolve }: HandleParams): Promise<Response> {
-	if (event.params.network) {
-		event.locals.network = getBackendNetworkByName(event.params.network, event.fetch);
-	}
+	event.locals.network = getBackendNetworkByName(PUBLIC_CHAIN_SHORT, event.fetch);
 	return await resolve(event);
 }
 
@@ -72,7 +83,8 @@ export async function redirectHandle({ event, resolve }: HandleParams): Promise<
 	const [, pathFirst, pathSecond, ...pathMore] = pathname.split('/').map((p) => p.trim());
 
 	let lang = 'en';
-	let network: string = PUBLIC_DEFAULT_CHAIN;
+	let network: string = PUBLIC_CHAIN_SHORT;
+	let alternativeNetwork: string | undefined;
 
 	if (isLanguage(pathFirst) && isNetwork(pathSecond)) {
 		// Proceed, correct URL
@@ -81,6 +93,10 @@ export async function redirectHandle({ event, resolve }: HandleParams): Promise<
 	} else if (isLanguage(pathFirst) && !isNetwork(pathSecond) && !pathSecond) {
 		// Only a language is specified, land on the language specific homepage
 		lang = pathFirst;
+	} else if (isLanguage(pathFirst) && isAlternativeNetwork(pathSecond)) {
+		// A language is specified, but the network is an alternative - need to redirect
+		lang = pathFirst;
+		alternativeNetwork = pathSecond;
 	} else if (isLanguage(pathFirst) && !isNetwork(pathSecond)) {
 		// The network isn't specified, but the language is - redirect to the default network
 		lang = pathFirst;
@@ -89,6 +105,9 @@ export async function redirectHandle({ event, resolve }: HandleParams): Promise<
 		// The language isn't specified, but the network is - redirect to the default language with the network provided
 		network = pathFirst;
 		pathMore.unshift(pathSecond);
+	} else if (!isLanguage(pathFirst) && isAlternativeNetwork(pathFirst)) {
+		// No language, but an alternative network is specified - redirect to the default language with the alternative network
+		alternativeNetwork = pathFirst;
 	} else {
 		// Neither language nor network is specified - redirect to the default language and network
 		pathMore.unshift(pathSecond);
@@ -99,15 +118,22 @@ export async function redirectHandle({ event, resolve }: HandleParams): Promise<
 	(event.locals as { lang: string }).lang = lang;
 
 	let url = `/${lang}`;
-	if (network) {
+	if (alternativeNetwork) {
+		url += `/${alternativeNetwork}`;
+	} else if (network) {
 		url += `/${network}`;
 	}
+
 	if (pathMore.length > 0) {
 		if (isManualRedirectPath(pathMore)) {
 			url += getManualRedirectPath(pathMore);
 		} else {
 			url += `/${pathMore.join('/')}`;
 		}
+	}
+
+	if (alternativeNetwork) {
+		url = mappings[alternativeNetwork] + url;
 	}
 
 	if (pathname !== url) {

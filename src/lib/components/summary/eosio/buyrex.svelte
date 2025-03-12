@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { formatCurrency } from '$lib/i18n';
 	import { Card, Stack, Switcher } from '$lib/components/layout';
-	import * as SystemContract from '$lib/wharf/contracts/system';
+	import { Types } from '$lib/types/rex';
 	import type { ActionSummaryProps } from '$lib/types/transaction';
 
 	interface BuyREXProps extends Omit<ActionSummaryProps, 'data'> {
-		data: SystemContract.Types.buyrex;
+		data: Types.buyrex;
 	}
 
 	const { class: className = '', data, value }: BuyREXProps = $props();

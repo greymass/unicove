@@ -9,6 +9,7 @@ import { Types as UnicoveTypes } from '$lib/wharf/contracts/unicove';
 import type { NetworkState } from '$lib/state/network.svelte';
 import { NetworkDataSources } from '$lib/types/network';
 import type { RequestEvent } from './$types';
+import { Types as REXTypes } from '$lib/types/rex';
 
 type ResponseType =
 	| Asset[]
@@ -174,10 +175,10 @@ async function getNetworkNative(network: NetworkState): Promise<NetworkDataSourc
 	});
 
 	const response = NetworkDataSources.from({
-		global: globalstate as SystemTypes.eosio_global_state,
+		global: SystemTypes.eosio_global_state.from(globalstate),
 		token,
 		ram: ramstate as SystemTypes.exchange_state,
-		rex: rexstate as SystemTypes.rex_pool,
+		rex: rexstate as REXTypes.rex_pool,
 		sample: sampleUsage as SampleUsage,
 		ram_gift_bytes: Int64.from(1400) // Not possible to get from native APIs?
 	});

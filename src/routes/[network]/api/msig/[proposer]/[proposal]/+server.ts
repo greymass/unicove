@@ -11,7 +11,7 @@ export async function GET({ fetch, locals: { network }, params }: RequestEvent) 
 	const proposal = await network.contracts.msig.table('proposal', scope).get(name);
 	const approvals = await network.contracts.msig.table('approvals2', scope).get(name);
 
-	const response = await fetch(`/${params.network}/api/producers/top30`);
+	const response = await fetch(`/${network}/api/producers/top30`);
 	const { producers } = await response.json();
 
 	return json(

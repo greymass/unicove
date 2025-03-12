@@ -1,9 +1,9 @@
 <script>
-	import * as SystemContract from '$lib/wharf/contracts/system';
 	import Code from '$lib/components/code.svelte';
 	import Buyrex from '$lib/components/summary/eosio/buyrex.svelte';
+	import { Types } from '$lib/types/rex';
 
-	const data = SystemContract.Types.buyrex.from({
+	const data = Types.buyrex.from({
 		from: 'foo',
 		amount: '10000.0000 EOS'
 	});

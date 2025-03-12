@@ -161,7 +161,8 @@ export class NetworkState {
 			tokenData.distribution = TokenDistribution.from({
 				circulating: this.sources.token.circulating,
 				locked: this.sources.token.locked,
-				staked: this.sources.rex.total_lendable,
+				staked:
+					this.sources.rex?.total_lendable || Asset.fromUnits(0, this.config.systemtoken.symbol),
 				supply: this.sources.token.supply,
 				max: this.sources.token.max
 			});

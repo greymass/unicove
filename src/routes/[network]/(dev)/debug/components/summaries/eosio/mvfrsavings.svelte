@@ -1,9 +1,9 @@
 <script>
-	import * as SystemContract from '$lib/wharf/contracts/system';
 	import Code from '$lib/components/code.svelte';
 	import Mvfrsavings from '$lib/components/summary/eosio/mvfrsavings.svelte';
+	import { Types } from '$lib/types/rex';
 
-	const data = SystemContract.Types.mvfrsavings.from({
+	const data = Types.mvfrsavings.from({
 		owner: 'foo',
 		rex: '10000.0000 REX'
 	});

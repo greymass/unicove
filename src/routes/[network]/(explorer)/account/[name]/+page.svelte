@@ -124,15 +124,17 @@
 						}}
 					/>
 
-					<BreakdownRow
-						key={m.common_staked()}
-						value={tokenStaked}
-						action={{
-							text: m.common_staking(),
-							href: `/${data.network}/staking`,
-							visible: isCurrentUser
-						}}
-					/>
+					{#if data.network.supports('staking')}
+						<BreakdownRow
+							key={m.common_staked()}
+							value={tokenStaked}
+							action={{
+								text: m.common_staking(),
+								href: `/${data.network}/staking`,
+								visible: isCurrentUser
+							}}
+						/>
+					{/if}
 
 					{#if tokenUnstaked && tokenUnstaked.value > 0}
 						<BreakdownRow

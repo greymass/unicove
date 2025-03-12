@@ -60,7 +60,28 @@ export async function GET({ fetch, locals: { network } }: RequestEvent) {
 		pairs.push(...(await delphioracle(network)));
 	}
 
+	for (const alt of network.config.systemtokenalt) {
+		const altPair = TokenDefinition.from({
+			symbol: alt
+		});
+
+		pairs.forEach((pair) => {
+			if (tokenEquals(pair.base, altPair)) {
+				pairs.push(
+					TokenPair.from({
+						base: network.token.id,
+						quote: pair.quote,
+						price: pair.price,
+						updated: network.connection.updated
+					})
+				);
+			}
+			return;
+		});
+	}
+
 	const derived = deriveAdditionalPairs(pairs);
+
 	return json(
 		TokenDataSources.from({
 			ts: new Date(),
