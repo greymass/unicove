@@ -14,11 +14,14 @@
 		class: className,
 		...props
 	}: TextInputProps = $props();
+
+	console.log(props.disabled);
 </script>
 
 <div
 	class={cn(
-		'relative flex h-12 gap-2 rounded-lg border-2 border-mineShaft-600 px-4 *:content-center focus-within:border-skyBlue-500 focus-within:ring focus-within:ring-1 focus-within:ring-inset focus-within:ring-skyBlue-500',
+		'relative flex h-12 gap-2 rounded-lg border-2 border-mineShaft-600 px-4 *:content-center focus-within:border-skyBlue-500 focus-within:ring focus-within:ring-1 focus-within:ring-inset focus-within:ring-skyBlue-500 ',
+		props.disabled && 'text-muted border-mineShaft-600/20',
 		className
 	)}
 >
