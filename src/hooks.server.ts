@@ -13,10 +13,12 @@ type HandleParams = Parameters<Handle>[0];
 // TODO: Find a better home for this data
 const mappings: Record<string, string> = {
 	eos: 'https://unicove.com',
-	telos: 'https://telos.unicove.com',
-	wax: 'https://wax.unicove.com',
 	jungle4: 'https://jungle4.unicove.com',
-	kylin: 'https://kylin.unicove.com'
+	kylin: 'https://kylin.unicove.com',
+	telos: 'https://telos.unicove.com',
+	telostestnet: 'https://telostestnet.unicove.com',
+	wax: 'https://wax.unicove.com',
+	waxtestnet: 'https://waxtestnet.unicove.com'
 };
 
 export function getHeaderLang(event: RequestEvent) {
