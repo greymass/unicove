@@ -8,7 +8,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        chain: ['jungle4', 'kylin', 'eos', 'telos', 'wax']
+        chain: ['jungle4', 'kylin', 'eos', 'telos', 'telostestnet', 'wax', 'waxtestnet']
     runs-on: ubuntu-latest
     name: Check against ${{ matrix.chain }}
     steps:
