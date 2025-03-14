@@ -95,6 +95,11 @@ config/kylin: codegen/clean
 config/telos: codegen/clean
 	cp ./configs/.env.telos .env.local
 
+config/telostestnet: codegen/clean
+	cp ./configs/.env.telostestnet .env.local
+
 config/wax: codegen/clean 
 	cp ./configs/.env.wax .env.local
 	
+config/waxtestnet: codegen/clean 
+	cp ./configs/.env.waxtestnet .env.local
