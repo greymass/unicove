@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 const account_name = 'ash.gm';
 
-test('test', async ({ page }) => {
+test('Main Page Visibility', async ({ page }) => {
 	// Login with test account.
 	await page.goto('./');
 	await page.waitForLoadState('networkidle');
@@ -33,6 +33,36 @@ test('test', async ({ page }) => {
 	// Enable Advanced Mode and Developer Mode in Settings.
 	await page.getByRole('switch', { name: 'Enable Advanced Mode' }).click();
  	await page.getByRole('switch', { name: 'Enable Developer Mode' }).click();
+
+	// Go to the Resources page.
+	await page.getByRole('link', { name: 'Resources' }).click();
+
+	// Check if the page contains the text Manage CPU, NET, and RAM string.
+	await expect(page.getByText('Manage CPU, NET, and RAM')).toBeVisible();
+
+	// Go to the Rent resources with PowerUp page.
+	await page.getByRole('link', { name: 'Rent resources with PowerUp' }).click();
+
+	// Check if the page contains the text Rent CPU and NET resources string.
+ 	await expect(page.getByText('Rent CPU and NET resources on')).toBeVisible();
+
+	// Go back to Resources page.
+	await page.locator('header').filter({ hasText: 'Rent Resources Rent CPU and' }).getByRole('button').click();
+
+	// Go to the Rent resources with REX page.
+	await page.getByRole('link', { name: 'Rent resources with REX' }).click();
+
+	// Check if the page contains the text Rent with REX string.
+ 	await expect(page.getByText('Rent with Rex')).toBeVisible();
+
+	// Go back to Resources page.
+	await page.locator('header').filter({ hasText: 'Jungle 4 (Testnet) Network' }).getByRole('button').click();
+
+	// Go to the Stake EOS for resources page.
+	await page.getByRole('link', { name: 'Stake EOS for resources' }).click();
+
+	// Check if the page contains the text Renting string.
+ 	await expect(page.getByText('Renting', { exact: true })).toBeVisible();
 
 	// Search for a specific account.
 	await page.getByRole('button', { name: 'search' }).click();
