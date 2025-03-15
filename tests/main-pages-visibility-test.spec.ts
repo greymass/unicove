@@ -30,6 +30,10 @@ test('test', async ({ page }) => {
 	// Check if the page contains the text Settings string.
 	await expect(page.getByRole('heading', { name: 'Settings' }).locator('span')).toBeVisible();
 
+	// Enable Advanced Mode and Developer Mode in Settings.
+	await page.getByRole('switch', { name: 'Enable Advanced Mode' }).click();
+ 	await page.getByRole('switch', { name: 'Enable Developer Mode' }).click();
+
 	// Search for a specific account.
 	await page.getByRole('button', { name: 'search' }).click();
 
