@@ -14,8 +14,6 @@
 		class: className,
 		...props
 	}: TextInputProps = $props();
-
-	console.log(props.disabled);
 </script>
 
 <div
