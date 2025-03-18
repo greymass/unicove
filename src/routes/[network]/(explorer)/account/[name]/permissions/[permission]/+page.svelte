@@ -524,7 +524,9 @@
 		</footer>
 	{:else if transactError}
 		<!-- Unsuccessful transaction -->
-		<div>
+		<div
+			class="flex flex-col justify-center gap-8 rounded-xl bg-shark-900/20 px-4 py-12 sm:items-center"
+		>
 			<TransactError error={transactError} />
 			<Button variant="primary" onclick={back}>Back</Button>
 		</div>
