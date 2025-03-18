@@ -558,16 +558,15 @@
 
 			<FormDivider />
 
-			<footer class="flex flex-wrap gap-4">
+			<footer class="flex flex-col justify-between gap-y-12 @lg:flex-row">
 				{#if manager.permission && !manager.data.isActive && !manager.data.isOwner}
-					<!-- {#if true} -->
 					<Button
-						class="grow-0 px-0 text-red-400 [@media(any-hover:hover)]:hover:text-red-300"
+						class="grow-0 border border-red-300/30  text-red-400 [@media(any-hover:hover)]:hover:text-red-300"
 						variant="tertiary"
 						onclick={deleteAuth}>Delete Permission</Button
 					>
 				{/if}
-				<div class="flex grow flex-wrap justify-end gap-4">
+				<div class="flex grow flex-col flex-wrap justify-end gap-6 @lg:flex-row">
 					<Button class="grow-0" variant="tertiary" href={i18n.route(data.backPath)}>Cancel</Button>
 					<Button
 						class="grow-0"
