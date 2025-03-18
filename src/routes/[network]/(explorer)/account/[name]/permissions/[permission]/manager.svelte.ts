@@ -40,7 +40,7 @@ export const permissionTypeBasic: SelectOption = {
 };
 
 export const permissionTypeMsig: SelectOption = {
-	label: 'MSIG',
+	label: 'Advanced',
 	value: 'msig'
 };
 

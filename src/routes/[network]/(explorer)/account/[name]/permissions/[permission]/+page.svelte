@@ -493,7 +493,7 @@
 	<FormSection>
 		<FormSectionHeader
 			title="Basic Information"
-			text="The name, parent permission, and type (Basic or MSIG). Name and parent fields cannot be modified after the permission is created."
+			text="The name, parent permission, and type (Basic or Advanced). Name and parent fields cannot be modified after the permission is created."
 		/>
 
 		<FormSectionContent>
