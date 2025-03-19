@@ -211,7 +211,7 @@
 	{/if}
 </svelte:head>
 
-<PageBanner />
+<PageBanner network={data.network} />
 
 <div
 	class="

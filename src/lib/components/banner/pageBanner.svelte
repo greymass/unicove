@@ -3,10 +3,12 @@
 	import X from 'lucide-svelte/icons/x';
 	import * as m from '$lib/paraglide/messages';
 
+	let props = $props();
+
 	function hideBanner() {
 		// update the store to immediately hide the banner
 		showBanner = false;
-		// set the flag to prevent banner showing on next load
+		// set the flag to prevent banner showing on next page load
 		localStorage.setItem('hide-vaulta-rebrand-banner', 'true');
 	}
 
@@ -14,8 +16,11 @@
 	let showBanner = $state(false);
 
 	onMount(() => {
-		// Show the banner if localStorage has no flag set
-		showBanner = !localStorage.getItem('hide-vaulta-rebrand-banner');
+		// This banner is only for EOS/Vaulta
+		if (props.network.shortname === 'eos') {
+			// Show the banner if localStorage has no flag set
+			showBanner = !localStorage.getItem('hide-vaulta-rebrand-banner');
+		}
 	});
 </script>
 
