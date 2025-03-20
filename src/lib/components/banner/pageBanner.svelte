@@ -10,7 +10,7 @@
 	 * Set the date this banner was updated. At this time, we'll only have one banner.
 	 * Note: we can force the banner to be visible on every page load by setting a future date, after which it'll be permanently dismissable.
 	 */
-	const BANNER_DATE = '2025-03-21';
+	const BANNER_DATE = '2025-03-20';
 
 	function hideBanner() {
 		// update the store to immediately hide the banner
