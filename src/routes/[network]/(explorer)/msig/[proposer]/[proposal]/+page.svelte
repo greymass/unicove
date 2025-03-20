@@ -185,7 +185,7 @@
 		background: linear-gradient(
 			to right,
 			theme(colors.green.400) 50%,
-			theme(colors.mine-shaft.950) 50%
+			theme(colors.mine.950) 50%
 		);
 		background-size: 200% 100%;
 		background-position: var(--bg-pos);

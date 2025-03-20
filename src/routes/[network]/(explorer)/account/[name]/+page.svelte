@@ -57,7 +57,7 @@
 	<MultiCard>
 		<Card id="account-value" style="column-span: all;">
 			<Cluster class="items-center">
-				<picture class="grid size-12 place-items-center rounded-full bg-mine-shaft-900">
+				<picture class="grid size-12 place-items-center rounded-full bg-mine-900">
 					<DollarSign />
 				</picture>
 				{#if currentAccountValue}
@@ -80,7 +80,7 @@
 		>
 			<Stack>
 				<div
-					class="col-span-full grid min-h-12 grid-cols-subgrid items-center gap-x-4 border-mine-shaft-900"
+					class="col-span-full grid min-h-12 grid-cols-subgrid items-center gap-x-4 border-mine-900"
 				>
 					<div
 						class="col-start-1 col-end-3 row-start-1 flex flex-col py-2 @xs:flex-row @xs:justify-between"
@@ -104,7 +104,7 @@
 							class="col-span-2 col-start-2 row-start-1 text-right @xs:col-span-1 @xs:col-start-3"
 						>
 							<a
-								class="inline-block h-12 content-center text-sky-blue-500 hover:text-sky-blue-400"
+								class="inline-block h-12 content-center text-sky-500 hover:text-sky-400"
 								href={`/${data.network}/fund`}
 							>
 								{m.common_add_funds()}

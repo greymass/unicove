@@ -32,7 +32,7 @@
 	gap-2
 	rounded-full
 	border-2
-	border-mine-shaft-600
+	border-mine-600
 	bg-transparent
 	py-2
 	pl-4
@@ -55,7 +55,7 @@
 
 {#if $open}
 	<div
-		class="z-10 flex max-h-[300px] flex-col overflow-y-auto rounded-2xl border-2 border-mine-shaft-600 bg-shark-950 px-1 py-1 shadow-sm focus:ring-0!"
+		class="z-10 flex max-h-[300px] flex-col overflow-y-auto rounded-2xl border-2 border-mine-600 bg-shark-950 px-1 py-1 shadow-sm focus:ring-0!"
 		use:melt={$menu}
 		in:fade={{ duration: 100 }}
 	>

@@ -16,7 +16,7 @@
 
 {#if key}
 	<a
-		class="inline-grid grid-cols-[auto_1fr] items-start gap-2 font-mono text-sky-blue-500 hover:text-sky-blue-400"
+		class="inline-grid grid-cols-[auto_1fr] items-start gap-2 font-mono text-sky-500 hover:text-sky-400"
 		href="/{network}/key/{String(key)}"
 	>
 		{#if icon}

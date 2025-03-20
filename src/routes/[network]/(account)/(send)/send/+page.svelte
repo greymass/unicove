@@ -365,7 +365,7 @@
 
 			{#if context.account}
 				<button
-					class="text-sky-blue-500 hover:text-sky-blue-400"
+					class="text-sky-500 hover:text-sky-400"
 					disabled={!context.account}
 					onclick={max}
 				>

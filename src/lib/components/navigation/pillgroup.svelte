@@ -74,7 +74,7 @@
 			{#each options as { href, text }}
 				<li class="text-muted flex h-12">
 					<a
-						class="grow content-center rounded-lg px-4 focus:z-10 data-highlighted:bg-mine-shaft-950 data-highlighted:text-mine-shaft-50 data-disabled:opacity-50"
+						class="grow content-center rounded-lg px-4 focus:z-10 data-highlighted:bg-mine-950 data-highlighted:text-mine-50 data-disabled:opacity-50"
 						{href}
 						aria-current={isCurrent(href) ? 'page' : undefined}
 						use:melt={$option({ value: href, label: text })}

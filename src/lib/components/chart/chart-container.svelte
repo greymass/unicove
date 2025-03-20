@@ -75,7 +75,7 @@
 		{/if}
 	</div>
 
-	<hr class="h-px border-0 bg-mine-shaft-800" />
+	<hr class="h-px border-0 bg-mine-800" />
 
 	<div class="flex items-center justify-between font-medium">
 		<span class="text-muted">{startDate}</span>

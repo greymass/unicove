@@ -58,41 +58,41 @@
 	--color-shark-900: #363c43;
 	--color-shark-950: #1b1f24;
 
-	--color-mine-shaft-50: #f4f5f7;
-	--color-mine-shaft-100: #e4e7e9;
-	--color-mine-shaft-200: #cbd1d6;
-	--color-mine-shaft-300: #a7b1b9;
-	--color-mine-shaft-400: #7c8894;
-	--color-mine-shaft-500: #616d79;
-	--color-mine-shaft-600: #535c67;
-	--color-mine-shaft-700: #474d57;
-	--color-mine-shaft-800: #3f444b;
-	--color-mine-shaft-900: #383c41;
-	--color-mine-shaft-950: #22252a;
+	--color-mine-50: #f4f5f7;
+	--color-mine-100: #e4e7e9;
+	--color-mine-200: #cbd1d6;
+	--color-mine-300: #a7b1b9;
+	--color-mine-400: #7c8894;
+	--color-mine-500: #616d79;
+	--color-mine-600: #535c67;
+	--color-mine-700: #474d57;
+	--color-mine-800: #3f444b;
+	--color-mine-900: #383c41;
+	--color-mine-950: #22252a;
 
-	--color-sky-blue-50: #eff9ff;
-	--color-sky-blue-100: #def3ff;
-	--color-sky-blue-200: #b6e8ff;
-	--color-sky-blue-300: #75d9ff;
-	--color-sky-blue-400: #2cc6ff;
-	--color-sky-blue-500: #00b5ff;
-	--color-sky-blue-600: #008cd4;
-	--color-sky-blue-700: #006fab;
-	--color-sky-blue-800: #005e8d;
-	--color-sky-blue-900: #064e74;
-	--color-sky-blue-950: #04314d;
+	--color-sky-50: #eff9ff;
+	--color-sky-100: #def3ff;
+	--color-sky-200: #b6e8ff;
+	--color-sky-300: #75d9ff;
+	--color-sky-400: #2cc6ff;
+	--color-sky-500: #00b5ff;
+	--color-sky-600: #008cd4;
+	--color-sky-700: #006fab;
+	--color-sky-800: #005e8d;
+	--color-sky-900: #064e74;
+	--color-sky-950: #04314d;
 
-	--color-spring-green-50: #edfff8;
-	--color-spring-green-100: #d5fff0;
-	--color-spring-green-200: #aeffe2;
-	--color-spring-green-300: #70ffcc;
-	--color-spring-green-400: #2bfdb0;
-	--color-spring-green-500: #00ed97;
-	--color-spring-green-600: #00c076;
-	--color-spring-green-700: #00965f;
-	--color-spring-green-800: #06754e;
-	--color-spring-green-900: #076042;
-	--color-spring-green-950: #003724;
+	--color-spring-50: #edfff8;
+	--color-spring-100: #d5fff0;
+	--color-spring-200: #aeffe2;
+	--color-spring-300: #70ffcc;
+	--color-spring-400: #2bfdb0;
+	--color-spring-500: #00ed97;
+	--color-spring-600: #00c076;
+	--color-spring-700: #00965f;
+	--color-spring-800: #06754e;
+	--color-spring-900: #076042;
+	--color-spring-950: #003724;
 
 	--color-solar-50: #fffdea;
 	--color-solar-100: #fff8c5;
@@ -226,11 +226,11 @@
 }
 
 @utility table-row-border {
-	@apply border-mine-shaft-900 border-b last:border-none;
+	@apply border-mine-900 border-b last:border-none;
 }
 
 @utility table-row-background {
-	@apply odd:via-mine-shaft-950 hover:via-sky-blue-500/10 data-[active=true]:via-sky-blue-500/10 data-[hover-effect=false]:odd:hover:via-mine-shaft-950 bg-linear-to-r from-transparent to-transparent data-[clickable=true]:cursor-pointer data-[hover-effect=false]:hover:via-transparent;
+	@apply odd:via-mine-950 data-[hover-effect=false]:odd:hover:via-mine-950 bg-linear-to-r from-transparent to-transparent hover:via-sky-500/10 data-[active=true]:via-sky-500/10 data-[clickable=true]:cursor-pointer data-[hover-effect=false]:hover:via-transparent;
 }
 
 @utility bg-hero-gradient {

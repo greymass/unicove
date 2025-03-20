@@ -10,11 +10,11 @@
 	let { data }: Props = $props();
 
 	const distributionMap = {
-		delegated: { label: m.common_delegated(), color: 'bg-mine-shaft-300' },
+		delegated: { label: m.common_delegated(), color: 'bg-mine-300' },
 		liquid: { label: m.common_available(), color: 'bg-green-400' },
 		ram: { label: 'RAM', color: 'bg-solar-400' },
-		staked: { label: m.common_staked(), color: 'bg-sky-blue-400' },
-		unstaked: { label: m.common_unstaked(), color: 'bg-sky-blue-400' }
+		staked: { label: m.common_staked(), color: 'bg-sky-400' },
+		unstaked: { label: m.common_unstaked(), color: 'bg-sky-400' }
 	};
 
 	type DistributionItem = {

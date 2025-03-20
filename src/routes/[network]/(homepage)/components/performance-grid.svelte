@@ -68,7 +68,7 @@
 	>
 		<div id="performance-row-1" class="grid gap-4 @-lg:grid-cols-[1fr_auto_1fr]">
 			<!-- Market Cap -->
-			<Card class="grid content-between gap-4  bg-mine-shaft-900/40">
+			<Card class="grid content-between gap-4  bg-mine-900/40">
 				<h3 class="text-muted text-sm">{network.chain.name} {m.common_market_cap()}</h3>
 				<p class="justify-self-end text-nowrap text-xl font-semibold text-white">
 					<AssetText value={marketcap} variant="short" />
@@ -91,7 +91,7 @@
 			</Card>
 
 			<!-- Native TVL -->
-			<Card class="grid content-between gap-4 bg-mine-shaft-900/60">
+			<Card class="grid content-between gap-4 bg-mine-900/60">
 				<h3 class="text-muted text-sm">{m.common_native_tvl()}</h3>
 				<p class="justify-self-end text-nowrap text-xl font-semibold text-white">
 					<AssetText value={tvl} variant="short" />
@@ -111,7 +111,7 @@
 			</Card>
 
 			<!-- Ram Eos pair -->
-			<Card class="grid flex-1 content-between gap-4  bg-mine-shaft-900/60">
+			<Card class="grid flex-1 content-between gap-4  bg-mine-900/60">
 				<h3 class="text-muted text-sm">RAM/{network.token.symbol.name}</h3>
 				<p class="justify-self-end text-nowrap text-xl font-semibold text-white">
 					<AssetText value={network.resources.ram.price.rammarket} variant="short" />
@@ -120,7 +120,7 @@
 
 			<!-- Ram price -->
 			{#if network.resources && network.resources.ram.price.rammarket}
-				<Card class="grid flex-1 content-between gap-4 bg-mine-shaft-900/40">
+				<Card class="grid flex-1 content-between gap-4 bg-mine-900/40">
 					<h3 class="text-muted text-sm">RAM/USD</h3>
 					<p class="justify-self-end text-nowrap text-xl font-semibold text-white">
 						<AssetText

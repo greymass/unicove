@@ -135,7 +135,7 @@
 <!-- Trigger Button -->
 <button
 	class={cn(
-		'border-mine-shaft-600 focus-visible:ring-solar-500 relative z-50 h-10 rounded-lg border text-base font-medium text-nowrap focus:outline-transparent focus-visible:ring-2 focus-visible:outline focus-visible:ring-inset',
+		'border-mine-600 focus-visible:ring-solar-500 relative z-50 h-10 rounded-lg border text-base font-medium text-nowrap focus:outline-transparent focus-visible:ring-2 focus-visible:outline focus-visible:ring-inset',
 		className
 	)}
 	use:melt={$trigger}
@@ -243,7 +243,7 @@
 									<button
 										data-current={isCurrent}
 										onclick={() => switchSession(session)}
-										class="data-[current=true]:bg-sky-blue-700 data-[current=true]:text-sky-blue-50 data-[current=false]:hover:bg-mine-shaft-950 data-[current=false]:hover:text-mine-shaft-50 flex h-12 items-center gap-1 rounded-lg px-4"
+										class="data-[current=true]:bg-sky-700 data-[current=true]:text-sky-50 data-[current=false]:hover:bg-mine-950 data-[current=false]:hover:text-mine-50 flex h-12 items-center gap-1 rounded-lg px-4"
 									>
 										<div class="w-6">
 											{#if isCurrent}
@@ -267,7 +267,7 @@
 									<button
 										onclick={() => removeSession(session)}
 										data-current={isCurrent}
-										class="text-muted hover:bg-mine-shaft-950 hover:text-mine-shaft-50 grid size-12 place-items-center rounded-lg"
+										class="text-muted hover:bg-mine-950 hover:text-mine-50 grid size-12 place-items-center rounded-lg"
 									>
 										<LogOut class="size-4" />
 									</button>
@@ -287,7 +287,7 @@
 
 {#snippet connectWalletScreen()}
 	<div class="space-y-4" in:fly={{ x: 100, duration: 150 }} out:fly={{ x: 100, duration: 100 }}>
-		<hr class="border-mine-shaft-900" />
+		<hr class="border-mine-900" />
 
 		<header class="grid justify-center gap-2 py-4 text-center">
 			<span class="h4">{m.common_login_to_unicove()}</span>

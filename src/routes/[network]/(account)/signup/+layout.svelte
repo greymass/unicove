@@ -75,13 +75,13 @@
 					<!-- Bottom indicator -->
 					<div
 						data-incomplete={isIncompleteStep}
-						class="h-1 w-full rounded-full data-[incomplete=false]:bg-sky-blue-400 data-[incomplete=true]:bg-white/10"
+						class="h-1 w-full rounded-full data-[incomplete=false]:bg-sky-400 data-[incomplete=true]:bg-white/10"
 					></div>
 					{#if isCurrentStep}
 						<div
 							in:send={{ key: 'step' }}
 							out:receive={{ key: 'step' }}
-							class="absolute bottom-0 left-1/2 h-1 w-full -translate-x-1/2 rounded-full bg-sky-blue-400"
+							class="absolute bottom-0 left-1/2 h-1 w-full -translate-x-1/2 rounded-full bg-sky-400"
 						></div>
 					{/if}
 				</a>

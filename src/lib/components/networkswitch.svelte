@@ -58,8 +58,8 @@
 <button
 	id="network-switcher"
 	class={cn(
-		'flex items-center gap-3 rounded-2xl px-4 py-3.5  focus:bg-mine-shaft-950 focus:outline-hidden',
-		!!context.settings.data.advancedMode && 'hover:bg-mine-shaft-950',
+		'flex items-center gap-3 rounded-2xl px-4 py-3.5  focus:bg-mine-950 focus:outline-hidden',
+		!!context.settings.data.advancedMode && 'hover:bg-mine-950',
 		className
 	)}
 	use:melt={$trigger}
@@ -97,7 +97,7 @@
 
 {#if $open}
 	<div
-		class="z-50 flex max-h-[300px] flex-col overflow-y-auto rounded-lg bg-mine-shaft-950 p-1 shadow-sm focus:ring-0!"
+		class="z-50 flex max-h-[300px] flex-col overflow-y-auto rounded-lg bg-mine-950 p-1 shadow-sm focus:ring-0!"
 		use:melt={$menu}
 		transition:fade={{ duration: 150 }}
 	>

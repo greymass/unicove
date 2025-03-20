@@ -37,7 +37,7 @@
 				</p>
 				<div class="mt-2 flex gap-6">
 					<Button
-						class="border border-mine-shaft-600 px-6"
+						class="border border-mine-600 px-6"
 						href={`/${network}/staking`}
 						text={m.common_stake_action()}
 					/>

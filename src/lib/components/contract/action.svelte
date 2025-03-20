@@ -26,13 +26,13 @@
 
 <li class="relative col-span-full grid grid-cols-subgrid bg-shark-950">
 	<div
-		class="col-span-full space-y-1 rounded-t-lg bg-mine-shaft-950 px-4 py-3 md:col-span-1 md:max-w-xs md:rounded-l-lg"
+		class="col-span-full space-y-1 rounded-t-lg bg-mine-950 px-4 py-3 md:col-span-1 md:max-w-xs md:rounded-l-lg"
 	>
 		<ContractActionOverview {action} {contract} />
 	</div>
 
 	<div class="grid grid-cols-2 gap-4">
-		<div class="rounded-b-lg bg-mine-shaft-950/50 px-4 py-3 md:rounded-r-lg">
+		<div class="rounded-b-lg bg-mine-950/50 px-4 py-3 md:rounded-r-lg">
 			{#if struct}
 				<ContractActionParams {abi} {contract} {struct} />
 			{/if}
@@ -40,7 +40,7 @@
 				<Code>{JSON.stringify(struct, null, 2)}</Code>
 			{/if}
 		</div>
-		<div class="rounded-b-lg bg-mine-shaft-950/50 px-4 py-3 md:rounded-r-lg">
+		<div class="rounded-b-lg bg-mine-950/50 px-4 py-3 md:rounded-r-lg">
 			{#if actionResult}
 				<ContractActionResponse {abi} {contract} {actionResult} />
 			{/if}

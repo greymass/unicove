@@ -36,7 +36,7 @@
 <!-- Styled as a trailing element. Will need to change it if we want to use it inline with other elements following it.  -->
 {#if browser && 'clipboard' in navigator}
 	<div
-		class="relative inline-flex text-sky-blue-500 hover:text-sky-blue-400 focus-visible:text-sky-blue-400 has-focus-visible:text-solar-500"
+		class="relative inline-flex text-sky-500 hover:text-sky-400 focus-visible:text-sky-400 has-focus-visible:text-solar-500"
 	>
 		<button
 			onclick={copyToClipboard}
@@ -53,7 +53,7 @@
 			<span
 				in:fly={{ x: -20, easing: quartOut, duration: 100 }}
 				out:fade={{ easing: quadIn, duration: 200 }}
-				class="absolute inset-y-0 left-full translate-x-2 select-none text-nowrap text-xs text-sky-blue-400"
+				class="absolute inset-y-0 left-full translate-x-2 select-none text-nowrap text-xs text-sky-400"
 				>{m.common_copied_result()}</span
 			>
 		{/if}

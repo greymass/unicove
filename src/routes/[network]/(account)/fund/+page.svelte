@@ -201,7 +201,7 @@
 						rel="noopener noreferrer"
 						class="block h-full transition-all hover:scale-105"
 					>
-						<div class="mb-4 grid aspect-square rounded-lg bg-mine-shaft-900 p-4">
+						<div class="mb-4 grid aspect-square rounded-lg bg-mine-900 p-4">
 							<enhanced:img
 								src={exchange.logo}
 								alt="{exchange.name} logo"

@@ -16,7 +16,7 @@
 <!-- Styled as a trailing element. Will need to change it if we want to use it inline with other elements following it.  -->
 {#if browser}
 	<div
-		class="relative inline-flex text-sky-blue-500 hover:text-sky-blue-400 focus-visible:text-sky-blue-400 has-focus-visible:text-solar-500"
+		class="relative inline-flex text-sky-500 hover:text-sky-400 focus-visible:text-sky-400 has-focus-visible:text-solar-500"
 	>
 		<a
 			href={props.data}

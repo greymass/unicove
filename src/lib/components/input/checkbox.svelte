@@ -52,24 +52,24 @@
 			rounded
 			border
 			border-solid
-			border-mine-shaft-700
+			border-mine-700
 			bg-transparent
-		text-sky-blue-950
+		text-sky-950
 			focus-visible:border-solar-500
 			focus-visible:outline
 			focus-visible:outline-2
 			focus-visible:outline-offset-[-2px]
 			focus-visible:outline-solar-500
 			disabled:cursor-not-allowed
-		disabled:border-mine-shaft-950
-		disabled:bg-mine-shaft-950
+		disabled:border-mine-950
+		disabled:bg-mine-950
 			disabled:text-white/30
-			data-[state=checked]:border-sky-blue-500
-			data-[state=checked]:bg-sky-blue-500
-			data-[state=checked]:hover:border-sky-blue-400
-			data-[state=checked]:hover:bg-sky-blue-400
-			data-[state=checked]:disabled:border-mine-shaft-950
-			data-[state=checked]:disabled:bg-mine-shaft-950
+			data-[state=checked]:border-sky-500
+			data-[state=checked]:bg-sky-500
+			data-[state=checked]:hover:border-sky-400
+			data-[state=checked]:hover:bg-sky-400
+			data-[state=checked]:disabled:border-mine-950
+			data-[state=checked]:disabled:bg-mine-950
 			"
 		{id}
 		aria-labelledby={ariaLabelledBy}

@@ -19,7 +19,7 @@
 </script>
 
 <section class="@container col-span-full">
-	<div class="bg-mine-shaft-950 grid min-h-72 rounded-2xl px-4 @xl:grid-cols-2 @xl:gap-4">
+	<div class="bg-mine-950 grid min-h-72 rounded-2xl px-4 @xl:grid-cols-2 @xl:gap-4">
 		<div class="grid place-items-center">
 			<svg
 				class="col-start-1 row-start-1 h-full w-full object-cover"
@@ -52,7 +52,7 @@
 					<path d="M18.008 0v36M36.008 18h-36" stroke="#fff" />
 				</svg>
 				<img
-					class="bg-mine-shaft-950 h-40 rounded-full object-contain px-2 py-4"
+					class="bg-mine-950 h-40 rounded-full object-contain px-2 py-4"
 					src={networkLogo}
 					alt={networkName}
 					height="160"

@@ -13,7 +13,7 @@
 
 {#if id}
 	<a
-		class="text-sky-blue-500 hover:text-sky-blue-400 {className}"
+		class="text-sky-500 hover:text-sky-400 {className}"
 		href="/{network}/transaction/{String(id)}"
 	>
 		{truncatedString}
