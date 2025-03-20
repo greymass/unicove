@@ -1,5 +1,6 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
 import containerQueries from '@tailwindcss/container-queries';
+import typography from '@tailwindcss/typography';
 import colors from 'tailwindcss/colors';
 
 /** @type {import('tailwindcss').Config} */
@@ -93,5 +94,5 @@ export default {
 			}
 		}
 	},
-	plugins: [containerQueries]
+	plugins: [containerQueries, typography]
 };
