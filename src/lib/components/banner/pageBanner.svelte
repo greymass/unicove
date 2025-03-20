@@ -1,25 +1,40 @@
-<script>
+<script lang="ts">
 	import { onMount } from 'svelte';
 	import X from 'lucide-svelte/icons/x';
 	import * as m from '$lib/paraglide/messages';
+	import dayjs from 'dayjs';
 
 	let props = $props();
+
+	/**
+	 * Set the date this banner was updated. Right now, we'll only have one banner.
+	 * Note: we can force the banner to be visible on every page load by setting a future date, after which it'll be permanently dismissable.
+	 */
+	const BANNER_UPDATED_AT = '2025-03-20';
 
 	function hideBanner() {
 		// update the store to immediately hide the banner
 		showBanner = false;
 		// set the flag to prevent banner showing on next page load
-		localStorage.setItem('hide-vaulta-rebrand-banner', 'true');
+		localStorage.setItem('hide-banner', new Date().toISOString());
 	}
 
 	// Default to not show a banner (avoids flash of banner when hidden)
 	let showBanner = $state(false);
+	let dismissable = $state(true);
 
 	onMount(() => {
 		// This banner is only for EOS/Vaulta
-		if (props.network.shortname === 'eos') {
-			// Show the banner if localStorage has no flag set
-			showBanner = !localStorage.getItem('hide-vaulta-rebrand-banner');
+		if (props.network.shortname !== 'eos') return;
+
+		const prevHidden = localStorage.getItem('hide-banner');
+		if (!prevHidden) {
+			showBanner = true;
+			dismissable = dayjs().isSameOrAfter(BANNER_UPDATED_AT);
+		} else {
+			// Show banner if the above date is newer than the date in localstorage
+			showBanner = dayjs(prevHidden).isBefore(BANNER_UPDATED_AT);
+			dismissable = dayjs(prevHidden).isSameOrAfter(BANNER_UPDATED_AT);
 		}
 	});
 </script>
@@ -48,11 +63,13 @@
 			{m.banner_vaulta_rebrand()}
 		</a>
 
-		<button
-			class="col-start-3 grid size-12 place-items-center justify-self-end text-inherit"
-			onclick={hideBanner}
-		>
-			<X class="size-4 " />
-		</button>
+		{#if dismissable}
+			<button
+				class="col-start-3 grid size-12 place-items-center justify-self-end text-inherit"
+				onclick={hideBanner}
+			>
+				<X class="size-4 " />
+			</button>
+		{/if}
 	</aside>
 {/if}
