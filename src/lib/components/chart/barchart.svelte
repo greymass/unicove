@@ -69,16 +69,16 @@
 <Card>
 	<p class="h3 font-semibold">{title}</p>
 	<canvas bind:this={ctx}></canvas>
-	<hr class="h-px border-0 bg-shark-200/50" />
+	<hr class="bg-shark-200/50 h-px border-0" />
 	<div class="flex items-center justify-between font-medium">
 		<!-- <span class="text-shark-200/70">{String(data.length)} days</span> -->
 		<div class="flex gap-4">
 			<div class="flex items-center gap-1">
-				<div class="size-4 rounded bg-[#00ED97]"></div>
+				<div class="size-4 rounded-sm bg-[#00ED97]"></div>
 				<span class="text-[#00ED97]">{m.common_staked()}</span>
 			</div>
 			<div class="flex items-center gap-1">
-				<div class="size-4 rounded bg-[#B2FAE0]"></div>
+				<div class="size-4 rounded-sm bg-[#B2FAE0]"></div>
 				<span class="text-[#B2FAE0]">{m.common_yield()}</span>
 			</div>
 		</div>

@@ -15,7 +15,7 @@
 <a
 	{href}
 	class={cn(
-		'inline-flex items-center gap-2 text-skyBlue-500 hover:text-skyBlue-400 focus-visible:outline focus-visible:outline-solar-500 ',
+		'focus-visible:outline-solar-500 inline-flex items-center gap-2 text-sky-500 hover:text-sky-400 focus-visible:outline ',
 		props.class
 	)}
 >

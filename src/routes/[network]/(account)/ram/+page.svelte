@@ -125,7 +125,7 @@
 		<Stack class="gap-2">
 			<h4 class="text-md font-semibold">{m.common_details()}</h4>
 			<table class="">
-				<tbody class="*:border-b *:border-mineShaft-900 *:pt-8 last:*:border-b-0 *:even:text-right">
+				<tbody class="*:border-mine-900 *:border-b *:pt-8 *:last:border-b-0 even:*:text-right">
 					<tr class="*:py-2">
 						<td class="text-muted text-base">
 							{data.network.token.id.symbol.code || ''}/RAM (KB)
@@ -174,7 +174,7 @@
 
 	<Card>
 		<table>
-			<tbody class="*:border-b *:border-mineShaft-900 *:pt-8 last:*:border-b-0 *:even:text-right">
+			<tbody class="*:border-mine-900 *:border-b *:pt-8 *:last:border-b-0 even:*:text-right">
 				<tr class="*:py-2">
 					<td class="text-muted text-base"
 						>{m.common_market_cap()} ({data.network.chain.systemToken?.symbol.code || ''})</td

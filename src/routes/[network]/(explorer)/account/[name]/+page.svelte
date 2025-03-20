@@ -57,7 +57,7 @@
 	<MultiCard>
 		<Card id="account-value" style="column-span: all;">
 			<Cluster class="items-center">
-				<picture class="grid size-12 place-items-center rounded-full bg-mineShaft-900">
+				<picture class="bg-mine-900 grid size-12 place-items-center rounded-full">
 					<DollarSign />
 				</picture>
 				{#if currentAccountValue}
@@ -80,14 +80,14 @@
 		>
 			<Stack>
 				<div
-					class="col-span-full grid min-h-12 grid-cols-subgrid items-center gap-x-4 border-mineShaft-900"
+					class="border-mine-900 col-span-full grid min-h-12 grid-cols-subgrid items-center gap-x-4"
 				>
 					<div
 						class="col-start-1 col-end-3 row-start-1 flex flex-col py-2 @xs:flex-row @xs:justify-between"
 					>
 						<Stack class="gap-2">
 							<h4 class="text-muted text-base leading-none">{m.common_value()}</h4>
-							<p class="text-xl font-semibold leading-none text-white">
+							<p class="text-xl leading-none font-semibold text-white">
 								<AssetText variant="full" value={currentAccountValue.systemtoken.systemtoken} />
 							</p>
 							{#if currentAccountValue.pair}
@@ -104,7 +104,7 @@
 							class="col-span-2 col-start-2 row-start-1 text-right @xs:col-span-1 @xs:col-start-3"
 						>
 							<a
-								class="inline-block h-12 content-center text-skyBlue-500 hover:text-skyBlue-400"
+								class="inline-block h-12 content-center text-sky-500 hover:text-sky-400"
 								href={`/${data.network}/fund`}
 							>
 								{m.common_add_funds()}
@@ -181,7 +181,7 @@
 			<Stack>
 				<Stack class="gap-2">
 					<h4 class="text-muted text-base leading-none">{m.common_value()}</h4>
-					<p class="text-xl font-semibold leading-none text-white">
+					<p class="text-xl leading-none font-semibold text-white">
 						<AssetText variant="full" value={currentAccountValue.systemtoken.ram} />
 					</p>
 					{#if currentAccountValue.pair}

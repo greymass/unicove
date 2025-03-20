@@ -6,6 +6,6 @@
 	const { ...props }: ActionSummaryProps = $props();
 </script>
 
-<Card class={cn('text-large gap-6 @container', props.class)}>
+<Card class={cn('text-large @container gap-6', props.class)}>
 	The resources usage for this transaction was provided by Fuel.
 </Card>

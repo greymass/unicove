@@ -23,7 +23,7 @@
 	</svelte:element>
 {:else}
 	<svelte:element this={tag} class={preStyles}>
-		<div class="overflow-x-auto rounded bg-shark-950 p-4">
+		<div class="bg-shark-950 overflow-x-auto rounded-sm p-4">
 			{#if props.json}
 				{JSON.stringify(props.json, undefined, 2)}
 			{:else if props.children}

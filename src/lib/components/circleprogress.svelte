@@ -24,14 +24,14 @@
 
 <div class="relative h-[80px] w-[80px]">
 	<svg viewBox="0 0 60 60">
-		<circle cx="30" cy="30" r="28" class="fill-none stroke-[#575757] stroke-[4]" />
+		<circle cx="30" cy="30" r="28" class="fill-none stroke-[#575757] stroke-4" />
 		<circle
 			cx="30"
 			cy="30"
 			r="28"
 			transform="rotate(-90, 30, 30)"
 			stroke-dasharray={dasharray}
-			class="fill-none stroke-skyBlue-400 stroke-[4]"
+			class="fill-none stroke-sky-400 stroke-4"
 		/>
 	</svg>
 	{#if children}

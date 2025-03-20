@@ -13,17 +13,17 @@
 				<Stack class="gap-0">
 					<p class="caption">Currently Staked - 34% APR</p>
 					<p class="h3">0.0 EOS</p>
-					<p class="mt-1.5 self-start rounded bg-shark-800/60 px-2">USD Value $0.0</p>
+					<p class="bg-shark-800/60 mt-1.5 self-start rounded-sm px-2">USD Value $0.0</p>
 				</Stack>
 				<Switcher threshold="20rem">
-					<Button variant="secondary" class="text-skyBlue-500">Stake</Button>
-					<Button variant="secondary" class="text-skyBlue-500">Unstake</Button>
+					<Button variant="secondary" class="text-sky-500">Stake</Button>
+					<Button variant="secondary" class="text-sky-500">Unstake</Button>
 				</Switcher>
 			</Card>
 
 			<Card title="Unstaking Balances Is A Long Title">
 				<table class="table-styles">
-					<thead class="border-b-2 border-shark-100/10">
+					<thead class="border-shark-100/10 border-b-2">
 						<tr class="caption font-medium">
 							<th class="p-4 text-left">Amount</th>
 							<th class="p-4 text-right">Date available</th>
@@ -36,7 +36,7 @@
 						</tr>
 					</tbody>
 				</table>
-				<Button variant="secondary" class="text-skyBlue-500">Withdraw</Button>
+				<Button variant="secondary" class="text-sky-500">Withdraw</Button>
 			</Card>
 		</Switcher>
 	</div>

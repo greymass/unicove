@@ -22,7 +22,7 @@
 			<p class="caption">Amount</p>
 			<p class="h3">{data.amount}</p>
 			{#if value}
-				<p class="mt-1.5 self-start rounded bg-shark-800/60 px-2">USD {formatCurrency(value)}</p>
+				<p class="bg-shark-800/60 mt-1.5 self-start rounded-sm px-2">USD {formatCurrency(value)}</p>
 			{/if}
 		</Stack>
 	</Switcher>

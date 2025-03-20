@@ -18,13 +18,13 @@
 
 <div
 	class={cn(
-		'relative flex h-12 gap-2 rounded-lg border-2 border-mineShaft-600 px-4 *:content-center focus-within:border-skyBlue-500 focus-within:ring focus-within:ring-1 focus-within:ring-inset focus-within:ring-skyBlue-500 ',
-		props.disabled && 'text-muted border-mineShaft-600/20',
+		'border-mine-600 relative flex h-12 gap-2 rounded-lg border-2 px-4 *:content-center focus-within:border-sky-500 focus-within:ring-1 focus-within:ring-3 focus-within:ring-sky-500 focus-within:ring-inset ',
+		props.disabled && 'text-muted border-mine-600/20',
 		className
 	)}
 >
 	<input
-		class="placeholder:text-muted w-full rounded-lg bg-transparent font-medium focus:outline-none"
+		class="placeholder:text-muted w-full rounded-lg bg-transparent font-medium focus:outline-hidden"
 		type="text"
 		autocorrect="off"
 		autocomplete="off"

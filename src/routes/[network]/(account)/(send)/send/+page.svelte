@@ -364,11 +364,7 @@
 			{/if}
 
 			{#if context.account}
-				<button
-					class="text-skyBlue-500 hover:text-skyBlue-400"
-					disabled={!context.account}
-					onclick={max}
-				>
+				<button class="text-sky-500 hover:text-sky-400" disabled={!context.account} onclick={max}>
 					{m.common_fill_max()}
 				</button>
 			{/if}
