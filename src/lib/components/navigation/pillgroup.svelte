@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Button from '$lib/components/button/button.svelte';
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import { cn } from '$lib/utils';
 	import { createSelect, melt } from '@melt-ui/svelte';
 	import { fade } from 'svelte/transition';
@@ -16,11 +16,15 @@
 		class?: string;
 	}
 
-	const { class: className, options, ...props }: Props = $props();
+	const { options, ...props }: Props = $props();
 
-	let pathWithoutLanguageTag = $derived($page.url.pathname.slice(3));
+	let pathWithoutLanguageTag = $derived(page.url.pathname.slice(3));
 
-	const isCurrent = (href: string) => pathWithoutLanguageTag === href;
+	let currentOption = $derived(
+		options.map((o) => o.href).findLast((h) => pathWithoutLanguageTag.startsWith(h))
+	);
+
+	const isCurrent = (href: string) => currentOption === href;
 
 	const {
 		elements: { trigger, menu, option },
@@ -35,7 +39,7 @@
 	});
 </script>
 
-<menu aria-label="page functions" class={cn('hidden gap-2 overflow-auto lg:flex', className)}>
+<menu aria-label="page functions" class={cn('hidden gap-2 overflow-auto lg:flex', props.class)}>
 	{#each options as option}
 		<li>
 			<Button

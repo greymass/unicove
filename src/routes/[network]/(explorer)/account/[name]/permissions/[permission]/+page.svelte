@@ -1,6 +1,11 @@
 <script lang="ts">
-	import XIcon from 'lucide-svelte/icons/x';
 	import { getContext } from 'svelte';
+
+	import FormDivider from '$lib/components/form/divider.svelte';
+	import FormSection from '$lib/components/form/section.svelte';
+	import FormSectionHeader from '$lib/components/form/sectionHeader.svelte';
+	import FormSectionContent from '$lib/components/form/sectionContent.svelte';
+	import RemoveRowButton from '$lib/components/form/removeRowButton.svelte';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import * as m from '$lib/paraglide/messages';
@@ -19,12 +24,16 @@
 		permissionTypeMsig,
 		permissionTypeSelects
 	} from './manager.svelte.js';
-	import type { Checksum256Type } from '@wharfkit/session';
+	import { type Checksum256Type } from '@wharfkit/session';
 	import type { SelectOption } from '@melt-ui/svelte';
 	import type { ExtendedSelectOption } from '$lib/components/select/types.js';
 	import type { ChangeFn } from '@melt-ui/svelte/internal/helpers';
 	import Code from '$lib/components/code.svelte';
-	import Permission from '../permission.svelte';
+	import PermissionComponent from '../permission.svelte';
+	import { fly } from 'svelte/transition';
+	import { cubicOut } from 'svelte/easing';
+	import Fieldset from '$lib/components/input/fieldset.svelte';
+	import FormContainer from '$lib/components/form/formContainer.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
@@ -39,6 +48,7 @@
 
 	const requiresMsigInterface = manager.data.isMsig || manager.data.hasAccountsOrWaits;
 	let msigMode: boolean = $state(requiresMsigInterface);
+	// let msigMode = true;
 	let permissionTypeSelected: SelectOption = $state(
 		requiresMsigInterface ? permissionTypeMsig : permissionTypeBasic
 	);
@@ -92,11 +102,20 @@
 		manager.data.setDefaults();
 		return next;
 	};
+
+	// Adds a default field for the first key on a new (basic) permission
+	$effect(() => {
+		if (!manager.data.keys.length && !msigMode) {
+			manager.data.addKey();
+		}
+	});
+
+	$inspect(manager.data.keys);
 </script>
 
 {#snippet PermissionName()}
-	<fieldset class="grid gap-2">
-		<Label class="text-xs" for="permission_name">{m.common_permission_name()}</Label>
+	<fieldset class="grid gap-3">
+		<Label for="permission_name">{m.common_permission_name()}</Label>
 		<NameInput
 			id="permission_name"
 			disabled={!manager.newPermission}
@@ -108,8 +127,8 @@
 {/snippet}
 
 {#snippet PermissionParent()}
-	<fieldset class="grid gap-2">
-		<Label class="text-xs" for="permission_parent">Parent Permission</Label>
+	<fieldset class="grid gap-3">
+		<Label for="permission_parent">{m.common_parent_permission()}</Label>
 		<Select
 			id="permission_parent"
 			disabled={!manager.newPermission}
@@ -121,8 +140,8 @@
 {/snippet}
 
 {#snippet PermissionType()}
-	<fieldset class="grid gap-2">
-		<Label class="text-xs" for="permission_type">Permission Type</Label>
+	<fieldset class="grid gap-3">
+		<Label for="permission_type">{m.common_permission_type()}</Label>
 		<Select
 			id="permission_type"
 			onSelectedChange={onPermissionTypeChange}
@@ -130,368 +149,432 @@
 			variant="form"
 			bind:selected={permissionTypeSelected}
 		/>
-		<p>Changing the type of permission will reset edits made to this permission.</p>
+		<p class="mt-2 text-pretty">
+			{m.common_permission_form_reset()}
+		</p>
 	</fieldset>
 {/snippet}
 
-{#snippet WaitThreshold()}
-	<div class="col-span-full grid gap-4 rounded-lg bg-mineShaft-950/50 p-4">
-		<div class="col-span-full space-y-1">
-			<h3 class="h4 font-semibold">Weight Threshold</h3>
-			<p class="">
-				The total weight of all keys, accounts, and waits must be greater than or equal to this
-				threshold to approve a transaction.
-			</p>
-		</div>
-		<fieldset class="grid gap-2">
-			<Label class="text-xs" for="threshold">{m.common_required()}</Label>
-			<NumberInput
-				id="threshold"
-				min={1}
-				placeholder={m.common_permission_threshold()}
-				bind:value={manager.data.threshold}
-			/>
-		</fieldset>
-	</div>
+{#snippet WeightThreshold()}
+	<FormSection>
+		<FormSectionHeader
+			title={m.common_weight_threshold()}
+			text={m.common_weight_threshold_description()}
+		/>
+		<FormSectionContent>
+			<Fieldset>
+				<Label for="threshold">{m.common_required()}</Label>
+				<NumberInput
+					id="threshold"
+					min={1}
+					placeholder={m.common_permission_threshold()}
+					bind:value={manager.data.threshold}
+				/>
+			</Fieldset>
+		</FormSectionContent>
+	</FormSection>
 {/snippet}
 
 {#snippet KeyAuthInput(index: number)}
-	<div class="subgrid">
-		<NumberInput
-			class={msigMode ? '' : 'hidden'}
-			id={`key-${index}-weight`}
-			min={1}
-			bind:value={manager.data.keys[index].value.weight}
-			bind:valid={manager.data.keys[index].valid.weight}
-		/>
+	<!-- Don't transition the first input field -->
+	{@const ms = index > 0 ? 120 : 0}
+	{#if msigMode}
+		<!-- Vertical gap is handled with 'my-2' to allow for the field 'labels' to be closer than if we used 'gap-4' -->
+		<li
+			in:fly|global={{ x: ms, duration: ms, easing: cubicOut }}
+			id={`key-${index}-inputs`}
+			class="subgrid my-2 gap-2 text-white first:mt-0 last:mb-0"
+		>
+			<Fieldset>
+				<Label for={`key-${index}-weight`} class={index > 0 ? 'hidden' : ''}>
+					<span>{m.common_permission_weight()}</span>
+				</Label>
+				<NumberInput
+					id={`key-${index}-weight`}
+					min={1}
+					bind:value={manager.data.keys[index].value.weight}
+					bind:valid={manager.data.keys[index].valid.weight}
+				/>
+			</Fieldset>
 
-		<PublicKeyInput
-			class={msigMode ? 'col-span-2' : 'col-span-3'}
-			id="key-{index}-key"
-			placeholder={m.common_public_key()}
-			bind:value={manager.data.keys[index].value.key}
-			bind:valid={manager.data.keys[index].valid.key}
-		/>
+			<Fieldset>
+				<Label for={`key-${index}-key`} class={index > 0 ? 'hidden' : ''}>
+					<span>{m.common_public_key()}</span>
+				</Label>
+				<PublicKeyInput
+					class="col-span-1"
+					id="key-{index}-key"
+					placeholder={m.common_public_key()}
+					bind:value={manager.data.keys[index].value.key}
+					bind:valid={manager.data.keys[index].valid.key}
+				/>
+			</Fieldset>
 
-		{#if msigMode || index > 0}
-			<button
-				class="text-muted grid size-12 place-items-center hover:text-white"
-				onclick={() => manager.data.removeKey(index)}
-			>
-				<XIcon class="size-6" />
-			</button>
-		{:else}
-			<div class="size-12"></div>
-		{/if}
-	</div>
+			<RemoveRowButton onclick={() => manager.data.removeKey(index)} />
+		</li>
+	{:else}
+		<!-- Basic mode -->
+		<!-- Vertical gap is handled with 'my-2' to allow for the field 'labels' to be closer than if we used 'gap-4' -->
+		<li
+			in:fly|global={{ x: ms, duration: ms, easing: cubicOut }}
+			id={`key-${index}-input`}
+			class="subgrid my-2 gap-x-2 text-white first:mt-0 last:mb-0"
+		>
+			<NumberInput
+				class="hidden"
+				min={1}
+				bind:value={manager.data.keys[index].value.weight}
+				bind:valid={manager.data.keys[index].valid.weight}
+			/>
+
+			<PublicKeyInput
+				class={index > 0 ? 'col-span-2' : 'col-span-full'}
+				id="key-{index}-key"
+				placeholder={'PUB_K1...'}
+				bind:value={manager.data.keys[index].value.key}
+				bind:valid={manager.data.keys[index].valid.key}
+			/>
+
+			{#if index > 0}
+				<RemoveRowButton onclick={() => manager.data.removeKey(index)} />
+			{/if}
+		</li>
+	{/if}
 {/snippet}
 
 {#snippet KeyAuthDisplay()}
-	<div class="subgrid gap-4 rounded-lg bg-mineShaft-950/50 p-4">
-		<div class="col-span-2 space-y-1">
-			<h3 class="h4 font-semibold">Keys Pairs</h3>
-			<p class="">Enter the Public Keys which can sign on behalf of this permission.</p>
-		</div>
-		<div class="col-span-2 space-y-1">
-			<Button class="float-right" variant="primary" onclick={manager.data.addKey}>Add Key</Button>
-		</div>
-		{#if manager.data.keys.length}
-			<div class="subgrid gap-2">
-				<div class="subgrid">
-					{#if msigMode}
-						<span>{m.common_permission_weight()}</span>
-					{/if}
-					<span>{m.common_public_key()}</span>
-				</div>
-				{#each manager.data.keys as key, index (key)}
-					{@render KeyAuthInput(index)}
-				{/each}
-			</div>
-		{/if}
-	</div>
+	<FormSection>
+		<FormSectionHeader title={m.common_key_pairs()} text={m.common_key_pairs_description()} />
+
+		<FormSectionContent>
+			{#if manager.data.keys.length}
+				<ul class="grid grid-cols-[8ch_1fr_auto] gap-x-2">
+					{#each manager.data.keys as key, index (key)}
+						{@render KeyAuthInput(index)}
+					{/each}
+				</ul>
+			{/if}
+
+			<Button class="float-right" variant="primary" onclick={manager.data.addKey}
+				>{m.common_add_key()}</Button
+			>
+		</FormSectionContent>
+	</FormSection>
 {/snippet}
 
 {#snippet AccountAuthInput(index: number)}
 	{@const state = manager.data.accounts[index]}
-	<div class="subgrid">
-		<fieldset class="grid gap-2">
+	<!-- We don't transition the first input field -->
+	{@const ms = index > 0 ? 120 : 0}
+	<!-- Vertical gap is handled with 'my-2' to allow for the field 'labels' to be closer than if we used 'gap-4' -->
+	<li
+		class="@md:subgrid card col-span-full my-2 grid grid-cols-2 gap-4 rounded-lg p-4 text-white first:mt-0 last:mb-0 @md:gap-2 @md:bg-transparent @md:p-0"
+		in:fly|global={{ x: ms, duration: ms, easing: cubicOut }}
+	>
+		<Fieldset class="">
+			<Label for={`account-${index}-weight`} class={index > 0 ? '@md:hidden' : ''}>
+				<span>{m.common_permission_weight()}</span>
+			</Label>
 			<NumberInput
+				id={`account-${index}-weight`}
 				min={1}
 				placeholder={m.common_permission_weight()}
 				bind:value={state.value.weight}
 				bind:valid={state.valid.weight}
 			/>
-		</fieldset>
+		</Fieldset>
 
-		<fieldset class="grid gap-2">
+		<Fieldset>
+			<Label for={`account-${index}-name`} class={index > 0 ? '@md:hidden' : ''}>
+				<span>{m.common_account_name()}</span>
+			</Label>
 			<NameInput
+				id={`account-${index}-name`}
 				placeholder={m.common_account()}
 				bind:value={state.value.permission.actor}
 				bind:valid={state.valid.actor}
 			/>
-		</fieldset>
+		</Fieldset>
 
-		<fieldset class="grid gap-2">
+		<Fieldset>
+			<Label for={`account-${index}-permission`} class={index > 0 ? '@md:hidden' : ''}>
+				<span>{m.common_permission_name()}</span>
+			</Label>
 			<NameInput
+				id={`account-${index}-permission`}
 				placeholder={m.common_permission()}
 				bind:value={state.value.permission.permission}
 				bind:valid={state.valid.permission}
 			/>
-		</fieldset>
+		</Fieldset>
 
-		<button
-			class="text-muted grid size-12 place-items-center hover:text-white"
+		<RemoveRowButton
+			class="col-start-2 row-start-1 self-start justify-self-end @md:col-start-auto @md:row-start-auto @md:self-end @md:justify-self-center"
 			onclick={() => manager.data.removeAccount(index)}
-		>
-			<XIcon />
-		</button>
-	</div>
+		/>
+	</li>
 {/snippet}
 
 {#snippet AccountAuthDisplay()}
-	<div class="subgrid gap-4 rounded-lg bg-mineShaft-950/50 p-4">
-		<div class="col-span-2 space-y-1">
-			<h3 class="h4 font-semibold">Other Accounts</h3>
-			<p class="">
-				Specify the account and permission names of other accounts that can control this permission.
-			</p>
-		</div>
-		<div class="col-span-2 space-y-1">
-			<Button class="float-right" variant="primary" onclick={manager.data.addAccount}
-				>Add Account</Button
-			>
-		</div>
-		{#if manager.data.accounts.length}
-			<div class="subgrid gap-2">
-				<div class="subgrid">
-					<span>{m.common_permission_weight()}</span>
-					<span>{m.common_account_name()}</span>
-					<span>{m.common_permission_name()}</span>
-				</div>
-				{#each manager.data.accounts as account, index (account)}
-					{@render AccountAuthInput(index)}
-				{/each}
-			</div>
-		{/if}
-	</div>
+	<FormSection>
+		<FormSectionHeader
+			title={m.common_permission_other_accounts()}
+			text={m.common_permission_other_accounts_description()}
+		/>
+
+		<FormSectionContent>
+			{#if manager.data.accounts.length}
+				<ul class="grid grid-cols-[8ch_1fr_1fr_auto] gap-x-2 @container">
+					{#each manager.data.accounts as account, index (account)}
+						{@render AccountAuthInput(index)}
+					{/each}
+				</ul>
+			{/if}
+
+			<Button class="float-right" variant="primary" onclick={manager.data.addAccount}>
+				{m.common_add_account()}
+			</Button>
+		</FormSectionContent>
+	</FormSection>
 {/snippet}
 
 {#snippet WaitAuthInput(index: number)}
 	{@const state = manager.data.waits[index]}
-	<div class="subgrid">
-		<NumberInput
-			placeholder={m.common_permission_weight()}
-			min={1}
-			bind:value={state.value.weight}
-			bind:valid={state.valid.weight}
-		/>
+	<li class="subgrid text-white">
+		<Fieldset>
+			<Label for={`wait-${index}-name`} class={index > 0 ? 'hidden' : ''}>
+				<span>{m.common_permission_weight()}</span>
+			</Label>
+			<NumberInput
+				id={`wait-${index}-name`}
+				placeholder={m.common_permission_weight()}
+				min={1}
+				bind:value={state.value.weight}
+				bind:valid={state.valid.weight}
+			/>
+		</Fieldset>
 
-		<NumberInput
-			class="col-span-2"
-			min={1}
-			bind:value={state.value.wait_sec}
-			bind:valid={state.valid.wait_sec}
-		/>
+		<Fieldset>
+			<Label for={`wait-${index}-value`} class={index > 0 ? 'hidden' : ''}>
+				<span>{m.common_wait_seconds()}</span>
+			</Label>
+			<NumberInput
+				id={`wait-${index}-value`}
+				min={1}
+				bind:value={state.value.wait_sec}
+				bind:valid={state.valid.wait_sec}
+			/>
+		</Fieldset>
 
-		<button
-			class="text-muted grid size-12 place-items-center hover:text-white"
-			onclick={() => manager.data.removeWait(index)}
-		>
-			<XIcon />
-		</button>
-	</div>
+		<RemoveRowButton onclick={() => manager.data.removeWait(index)} />
+	</li>
 {/snippet}
 
 {#snippet WaitAuthDisplay()}
-	<div class="subgrid gap-4 rounded-lg bg-mineShaft-950/50 p-4">
-		<div class="col-span-2 space-y-1">
-			<h3 class="h4 font-semibold">Waiting Period</h3>
-			<p class="">
-				Specify a minimum time (in seconds) the proposal must be active before the transaction can
-				be completed.
-			</p>
-		</div>
-		<div class="col-span-2 space-y-1">
-			<Button class="float-right" variant="primary" onclick={manager.data.addWait}>Add Wait</Button>
-		</div>
-		{#if manager.data.waits.length}
-			<div class="subgrid gap-2">
-				<div class="subgrid">
-					<span>{m.common_permission_weight()}</span>
-					<span>Wait (Seconds)</span>
-				</div>
+	<FormSection>
+		<FormSectionHeader
+			title={m.common_waiting_period()}
+			text={m.common_waiting_period_description()}
+		/>
 
-				{#each manager.data.waits as wait, index (wait)}
-					{@render WaitAuthInput(index)}
-				{/each}
-			</div>
-		{/if}
-	</div>
+		<FormSectionContent>
+			{#if manager.data.waits.length}
+				<ul class="grid grid-cols-[8ch_1fr_auto] gap-2">
+					{#each manager.data.waits as wait, index (wait)}
+						{@render WaitAuthInput(index)}
+					{/each}
+				</ul>
+			{/if}
+
+			<Button
+				disabled={manager.data.waits.length > 0}
+				class="float-right"
+				variant="primary"
+				onclick={manager.data.addWait}>{m.common_add_wait()}</Button
+			>
+		</FormSectionContent>
+	</FormSection>
 {/snippet}
 
 {#snippet LinkedAuthInput(index: number)}
 	{@const state = manager.data.linked[index]}
-	<div class="subgrid">
-		<fieldset class="grid gap-2">
+	<!-- Don't transition the first input field -->
+	{@const ms = index > 0 ? 120 : 0}
+	<li
+		class="subgrid my-2 text-white first:mt-0 last:mb-0"
+		in:fly|global={{ x: ms, duration: ms, easing: cubicOut }}
+	>
+		<Fieldset>
+			<Label for={`contract-${index}-account`} class={index > 0 ? 'hidden' : ''}>
+				<span>{m.common_contract()}</span>
+			</Label>
 			<NameInput
+				id={`contract-${index}-account`}
 				placeholder={m.common_contract()}
 				bind:value={state.value.account}
 				bind:valid={state.valid.account}
 			/>
-		</fieldset>
+		</Fieldset>
 
-		<fieldset class="grid gap-2">
+		<Fieldset>
+			<Label for={`contract-${index}-action`} class={index > 0 ? 'hidden' : ''}>
+				<span>{m.common_action()}</span>
+			</Label>
 			<NameInput
 				optional
-				placeholder={m.common_permission()}
+				id={`contract-${index}-action`}
+				placeholder={m.common_action()}
 				bind:value={state.value.action}
 				bind:valid={state.valid.action}
 			/>
-		</fieldset>
+		</Fieldset>
 
-		<button
-			class="text-muted grid size-12 place-items-center hover:text-white"
-			onclick={() => manager.data.removeLinked(index)}
-		>
-			<XIcon />
-		</button>
-	</div>
+		<RemoveRowButton onclick={() => manager.data.removeLinked(index)} />
+	</li>
 {/snippet}
 
 {#snippet LinkedAuthDisplay()}
-	<header class="col-span-full">
-		<h2 class="text-xl font-semibold text-white">Contract Isolation</h2>
-		<p>If specified, restrict this permission to the contracts and actions listed.</p>
-	</header>
-	<div class="subgrid gap-4 rounded-lg bg-mineShaft-950/50 p-4">
-		<div class="col-span-2 space-y-1">
-			<h3 class="h4 font-semibold">Contracts</h3>
-			<p class="">Enter each contract and action this permission can perform.</p>
-		</div>
-		<div class="col-span-2 space-y-1">
-			<Button class="float-right" variant="primary" onclick={manager.data.addLinked}>
-				Add Contract
-			</Button>
-		</div>
+	<FormSection>
+		<FormSectionHeader
+			title={m.common_contract_isolation()}
+			text={m.common_contract_isolation_description()}
+		/>
 
-		{#if manager.data.linked.length}
-			<div class="subgrid gap-2">
-				<div class="subgrid">
-					<span>{m.common_contract()}</span>
-					<span>{m.common_action()}</span>
-				</div>
-				{#each manager.data.linked as linkedaction, index (linkedaction)}
-					{@render LinkedAuthInput(index)}
-				{/each}
-			</div>
-			<div class="col-span-2 space-y-1">
-				<p class="">Leave the action blank to allow all actions on a contract.</p>
-			</div>
-		{/if}
-	</div>
+		<FormSectionContent>
+			{#if manager.data.linked.length}
+				<ul class="grid grid-cols-[1fr_1fr_auto] gap-x-2">
+					{#each manager.data.linked as linkedaction, index (linkedaction)}
+						{@render LinkedAuthInput(index)}
+					{/each}
+				</ul>
+			{/if}
+
+			<Button class="float-right" variant="primary" onclick={manager.data.addLinked}>
+				{m.common_add_contract()}
+			</Button>
+		</FormSectionContent>
+	</FormSection>
 {/snippet}
 
 {#snippet ConfirmingDetails()}
-	<section class="grid grid-cols-[12ch_1fr_1fr_auto] gap-6">
-		<div class="col-span-full grid gap-4 rounded-lg">
-			<div class="col-span-full space-y-1">
-				<h3 class="h3 font-semibold">Confirm Details</h3>
-				<p class="">
-					Carefully review and confirm the details of this transaction. Incorrectly setting your
-					permissions could cause the loss of access to this permission or account.
-				</p>
-			</div>
-			<ul class="grid grid-cols-[auto_1fr] overflow-x-auto">
-				<Permission
-					account={manager.data.name.value.name}
-					advancedMode={false}
-					currentUser={false}
-					loggedIn={false}
-					msigMode={false}
-					signin={async () => {}}
-					permission={{
-						permission: manager.data.modifiedPermission,
-						children: []
-					}}
-				/>
-			</ul>
-			<Button onclick={back} variant="secondary">Back</Button>
-			<Button onclick={transact} variant="primary">Save Permission</Button>
-		</div>
-	</section>
+	<article class="grid gap-8 @3xl:gap-12">
+		<FormSectionHeader
+			title={m.common_confirm_details()}
+			text={m.common_confirm_permission_details()}
+		></FormSectionHeader>
+
+		<ul class="grid grid-cols-[auto_1fr] overflow-x-auto">
+			<PermissionComponent
+				account={manager.data.name.value.name}
+				advancedMode={false}
+				currentUser={false}
+				loggedIn={false}
+				msigMode={false}
+				signin={async () => {}}
+				permission={{
+					permission: manager.data.modifiedPermission,
+					children: []
+				}}
+			/>
+		</ul>
+
+		<footer class="flex gap-4">
+			<Button onclick={back} variant="secondary">{m.common_back()}</Button>
+			<Button onclick={transact} variant="primary">{m.common_save_permission()}</Button>
+		</footer>
+	</article>
+{/snippet}
+
+{#snippet BasicInformation()}
+	<FormSection>
+		<FormSectionHeader
+			title={m.common_basic_information()}
+			text={m.common_basic_permission_description()}
+		/>
+
+		<FormSectionContent>
+			{@render PermissionName()}
+			{#if !manager.isOwnerPermission}
+				{@render PermissionParent()}
+			{/if}
+			{@render PermissionType()}
+		</FormSectionContent>
+	</FormSection>
 {/snippet}
 
 <div class="pt-6" bind:this={primaryElement}>
 	{#if transactionId}
+		<!-- Successful transaction -->
 		<TransactSummary transactionId={String(transactionId)} />
-		<Button href={`/${data.network}/account/${data.account.name}/permissions`} variant="secondary">
-			Back to Permissions
-		</Button>
-		<Button href={`/${data.network}/account/${data.account.name}`}>
-			{m.common_view_my_account()}
-		</Button>
-	{:else}
-		<div class:hidden={!transactError}>
+
+		<footer class="">
+			<Button
+				href={`/${data.network}/account/${data.account.name}/permissions`}
+				variant="secondary"
+			>
+				{m.common_back_to_permissions()}
+			</Button>
+			<Button href={`/${data.network}/account/${data.account.name}`}>
+				{m.common_view_my_account()}
+			</Button>
+		</footer>
+	{:else if transactError}
+		<!-- Unsuccessful transaction -->
+		<div
+			class="flex flex-col justify-center gap-8 rounded-xl bg-shark-900/20 px-4 py-12 sm:items-center"
+		>
 			<TransactError error={transactError} />
-			<Button variant="primary" onclick={back}>Back</Button>
+			<Button variant="primary" onclick={back}>{m.common_back()}</Button>
 		</div>
+	{:else if confirming}
+		{@render ConfirmingDetails()}
+	{:else}
+		<!-- Editing Permission -->
+		<FormContainer>
+			{@render BasicInformation()}
+			<FormDivider />
 
-		<article class:hidden={!confirming || transactError} class="relative col-span-full grid gap-12">
-			{@render ConfirmingDetails()}
-		</article>
+			{#if msigMode}
+				{@render WeightThreshold()}
+				<FormDivider />
+			{/if}
 
-		<article class:hidden={confirming || transactError} class="relative col-span-full grid gap-12">
-			<section class="grid grid-cols-[12ch_1fr_1fr_auto] gap-6">
-				<div class="col-span-full grid gap-4 rounded-lg">
-					<div class="col-span-full space-y-1">
-						<h3 class="h3 font-semibold">Permission</h3>
-						<p class="">The name, parent, and type of permission.</p>
-					</div>
-					<div class="col-span-full grid gap-4 rounded-lg bg-mineShaft-950/50 p-4">
-						{@render PermissionName()}
-						{#if !manager.isOwnerPermission}
-							{@render PermissionParent()}
-						{/if}
-						{@render PermissionType()}
-					</div>
-				</div>
+			{@render KeyAuthDisplay()}
 
-				{#if msigMode}
-					{@render WaitThreshold()}
-					<header class="col-span-full">
-						<h2 class="text-xl font-semibold text-white">Authorizations</h2>
-						<p>
-							Configure the keys, accounts, and waits required to authorize actions using this
-							permission.
-						</p>
-					</header>
+			{#if msigMode}
+				<FormDivider />
+				{@render AccountAuthDisplay()}
+				<FormDivider />
+				{@render WaitAuthDisplay()}
+				{#if manager.data.allowLinkedActions}
+					<FormDivider />
+					{@render LinkedAuthDisplay()}
 				{/if}
+			{/if}
 
-				{@render KeyAuthDisplay()}
+			<FormDivider />
 
-				{#if msigMode}
-					{@render AccountAuthDisplay()}
-					{@render WaitAuthDisplay()}
-					{#if manager.data.allowLinkedActions}
-						{@render LinkedAuthDisplay()}
-					{/if}
-				{/if}
-
-				<footer class="col-span-full flex justify-end gap-4 *:flex-none">
-					{#if manager.permission && !manager.data.isActive && !manager.data.isOwner}
-						<Button class="text-solar-700 " variant="tertiary" onclick={deleteAuth}
-							>Delete Permission</Button
-						>
-					{/if}
-					<Button variant="tertiary" href={i18n.route(data.backPath)}>Cancel</Button>
+			<footer class="flex flex-col justify-between gap-y-12 @lg:flex-row">
+				{#if manager.permission && !manager.data.isActive && !manager.data.isOwner}
 					<Button
+						class="grow-0 border border-red-300/30  text-red-400 [@media(any-hover:hover)]:hover:text-red-300"
+						variant="tertiary"
+						onclick={deleteAuth}>{m.common_delete_permission()}</Button
+					>
+				{/if}
+				<div class="flex grow flex-col flex-wrap justify-end gap-6 @lg:flex-row">
+					<Button class="grow-0" variant="tertiary" href={i18n.route(data.backPath)}
+						>{m.common_cancel()}</Button
+					>
+					<Button
+						class="grow-0"
 						variant="primary"
 						disabled={!manager.data.ready || context.wharf.transacting}
-						onclick={confirm}>Confirm Details</Button
+						onclick={confirm}>{m.common_confirm()}</Button
 					>
-				</footer>
-			</section>
-		</article>
+				</div>
+			</footer>
+		</FormContainer>
 	{/if}
 </div>
 

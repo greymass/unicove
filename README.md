@@ -26,6 +26,18 @@ The `.env` file contains the default configuration for Unicove running the Jungl
 
 A number of complete chain configurations are available in the `./configs` directory. These configs can be loaded in using one of the Makefile config commands (e.g. `make config/eos`). This will copy the configuration for a specific chain and paste it into `.env.local` to override the defaults in the `.env` file.
 
+Available configuration commands:
+
+```
+make config/eos
+make config/jungle4
+make config/kylin
+make config/telos
+make config/telostestnet
+make config/wax
+make config/waxtestnet
+```
+
 With Unicove running, the current configuration can be viewed in the Debug State section:
 
 http://localhost:5173/debug/state/config

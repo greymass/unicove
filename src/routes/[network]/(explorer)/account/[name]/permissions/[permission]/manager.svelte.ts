@@ -28,6 +28,8 @@ import type { AccountState } from '$lib/state/client/account.svelte';
 import type { UnicoveContext } from '$lib/state/client.svelte';
 import type { ExtendedSelectOption } from '$lib/components/select/types';
 
+import * as m from '$lib/paraglide/messages';
+
 interface PermissionManagerArgs {
 	account: AccountState;
 	context: UnicoveContext;
@@ -35,12 +37,12 @@ interface PermissionManagerArgs {
 }
 
 export const permissionTypeBasic: SelectOption = {
-	label: 'Basic',
+	label: m.common_basic(),
 	value: 'basic'
 };
 
 export const permissionTypeMsig: SelectOption = {
-	label: 'MSIG',
+	label: m.common_advanced(),
 	value: 'msig'
 };
 
