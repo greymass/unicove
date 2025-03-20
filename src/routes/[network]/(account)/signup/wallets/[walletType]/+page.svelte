@@ -53,13 +53,13 @@
 			<a
 				href="/{data.network}/{wallet.route}"
 				class="group grid grid-cols-[auto_1fr_auto] items-center gap-4 rounded-2xl border border-white/20 p-4
-				hover:bg-mineShaft-950 focus-visible:outline focus-visible:outline-transparent focus-visible:ring-2 focus-visible:ring-solar-500"
+				hover:bg-mine-shaft-950 focus-visible:outline focus-visible:outline-transparent focus-visible:ring-2 focus-visible:ring-solar-500"
 			>
 				<div class="grid size-12 place-items-center">
 					{#if wallet.logo}
 						<img src={wallet.logo} alt={wallet.name} class="" />
 					{:else}
-						<div class="rounded-full bg-mineShaft-900/60 p-3"></div>
+						<div class="rounded-full bg-mine-shaft-900/60 p-3"></div>
 					{/if}
 				</div>
 				<div class="space-y-1">
@@ -68,7 +68,7 @@
 					</h4>
 					<!-- <p>{wallet.description}</p> -->
 				</div>
-				<ChevronRight class="size-6 group-hover:stroke-skyBlue-500" />
+				<ChevronRight class="size-6 group-hover:stroke-sky-blue-500" />
 			</a>
 		{/each}
 

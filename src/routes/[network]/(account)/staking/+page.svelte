@@ -76,7 +76,7 @@
 
 {#snippet tableAction([text, href]: string[])}
 	<td class="text-right">
-		<a class="text-skyBlue-500 hover:text-skyBlue-400" {href}>{text}</a>
+		<a class="text-sky-blue-500 hover:text-sky-blue-400" {href}>{text}</a>
 	</td>
 {/snippet}
 
@@ -84,7 +84,7 @@
 	<MultiCard>
 		<Card id="account-value" style="column-span: all;">
 			<Cluster class="items-center">
-				<picture class="grid size-12 place-items-center rounded-full bg-mineShaft-900">
+				<picture class="grid size-12 place-items-center rounded-full bg-mine-shaft-900">
 					<ChartLine />
 				</picture>
 				<div>

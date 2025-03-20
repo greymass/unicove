@@ -22,7 +22,7 @@
 			<p class="caption">Rex</p>
 			<p class="h3">{data.rex}</p>
 			{#if value}
-				<p class="mt-1.5 self-start rounded bg-shark-800/60 px-2">USD {formatCurrency(value)}</p>
+				<p class="mt-1.5 self-start rounded-sm bg-shark-800/60 px-2">USD {formatCurrency(value)}</p>
 			{/if}
 		</Stack>
 	</Switcher>

@@ -11,7 +11,7 @@
 
 <div
 	class={cn(
-		'w-fit rounded-md bg-mineShaft-900 px-2 py-1 text-xs font-semibold leading-none text-mineShaft-50',
+		'w-fit rounded-md bg-mine-shaft-900 px-2 py-1 text-xs font-semibold leading-none text-mine-shaft-50',
 		props.class
 	)}
 >

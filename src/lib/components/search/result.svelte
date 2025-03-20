@@ -28,7 +28,7 @@
 <a
 	data-active={active}
 	class={cn(
-		'grid select-none grid-cols-subgrid items-center rounded-lg focus-visible:outline-none focus-visible:ring focus-visible:ring-inset focus-visible:ring-solar-500 sm:col-span-2',
+		'grid select-none grid-cols-subgrid items-center rounded-lg focus-visible:outline-hidden focus-visible:ring-3 focus-visible:ring-inset focus-visible:ring-solar-500 sm:col-span-2',
 		props.class
 	)}
 	href={record.url}

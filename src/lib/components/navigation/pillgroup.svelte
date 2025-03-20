@@ -54,10 +54,10 @@
 </menu>
 
 <div
-	class="flex flex-col rounded-lg border border-shark-900 bg-shark-950 bg-transparent focus:outline-none focus-visible:border-solar-500 lg:hidden"
+	class="flex flex-col rounded-lg border border-shark-900 bg-shark-950 bg-transparent focus:outline-hidden focus-visible:border-solar-500 lg:hidden"
 >
 	<button
-		class="flex h-12 items-center justify-between px-4 text-base font-medium text-white focus:outline-none"
+		class="flex h-12 items-center justify-between px-4 text-base font-medium text-white focus:outline-hidden"
 		use:melt={$trigger}
 		aria-label="Page"
 	>
@@ -67,14 +67,14 @@
 
 	{#if $open}
 		<menu
-			class="z-50 flex max-h-[300px] flex-col overflow-y-auto rounded-lg border border-shark-900 bg-shark-950 py-2 shadow focus:!ring-0"
+			class="z-50 flex max-h-[300px] flex-col overflow-y-auto rounded-lg border border-shark-900 bg-shark-950 py-2 shadow-sm focus:ring-0!"
 			use:melt={$menu}
 			transition:fade={{ duration: 150 }}
 		>
 			{#each options as { href, text }}
 				<li class="text-muted flex h-12">
 					<a
-						class="grow content-center rounded-lg px-4 focus:z-10 data-[highlighted]:bg-mineShaft-950 data-[highlighted]:text-mineShaft-50 data-[disabled]:opacity-50"
+						class="grow content-center rounded-lg px-4 focus:z-10 data-highlighted:bg-mine-shaft-950 data-highlighted:text-mine-shaft-50 data-disabled:opacity-50"
 						{href}
 						aria-current={isCurrent(href) ? 'page' : undefined}
 						use:melt={$option({ value: href, label: text })}

@@ -9,16 +9,16 @@
 		<p class="text-muted my-0">{props.pair}</p>
 		<div class="flex justify-between">
 			<div>
-				<div class="mt-1 h-4 w-32 animate-pulse rounded-full bg-mineShaft-900"></div>
-				<div class="mt-1 h-4 w-16 animate-pulse rounded-full bg-mineShaft-900"></div>
+				<div class="mt-1 h-4 w-32 animate-pulse rounded-full bg-mine-shaft-900"></div>
+				<div class="mt-1 h-4 w-16 animate-pulse rounded-full bg-mine-shaft-900"></div>
 			</div>
-			<div class="mt-1 h-4 w-16 animate-pulse rounded-full bg-mineShaft-900"></div>
+			<div class="mt-1 h-4 w-16 animate-pulse rounded-full bg-mine-shaft-900"></div>
 		</div>
 	</header>
 
 	<div class="grid h-32 place-items-center">
 		<svg
-			class="size-8 animate-spin text-mineShaft-700"
+			class="size-8 animate-spin text-mine-shaft-700"
 			xmlns="http://www.w3.org/2000/svg"
 			fill="none"
 			viewBox="0 0 24 24"
@@ -33,16 +33,16 @@
 		</svg>
 	</div>
 
-	<hr class="h-px border-0 bg-mineShaft-800" />
+	<hr class="h-px border-0 bg-mine-shaft-800" />
 
 	<div class="flex items-center justify-between font-medium">
-		<div class="mt-1 h-4 w-16 animate-pulse rounded-full bg-mineShaft-900"></div>
+		<div class="mt-1 h-4 w-16 animate-pulse rounded-full bg-mine-shaft-900"></div>
 		<div class="flex gap-4">
 			<div class="flex items-center gap-1">
-				<div class="size-4 rounded bg-[#00ED97]"></div>
+				<div class="size-4 rounded-sm bg-[#00ED97]"></div>
 				<span class="text-[#00ED97]">{props.pair}</span>
 			</div>
 		</div>
-		<div class="mt-1 h-4 w-16 animate-pulse rounded-full bg-mineShaft-900"></div>
+		<div class="mt-1 h-4 w-16 animate-pulse rounded-full bg-mine-shaft-900"></div>
 	</div>
 </Card>

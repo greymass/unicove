@@ -18,8 +18,8 @@
 	let { networkName, networkLogo, productName }: Props = $props();
 </script>
 
-<section class="col-span-full @container">
-	<div class="grid min-h-72 rounded-2xl bg-mineShaft-950 px-4 @xl:grid-cols-2 @xl:gap-4">
+<section class="@container col-span-full">
+	<div class="bg-mine-shaft-950 grid min-h-72 rounded-2xl px-4 @xl:grid-cols-2 @xl:gap-4">
 		<div class="grid place-items-center">
 			<svg
 				class="col-start-1 row-start-1 h-full w-full object-cover"
@@ -52,7 +52,7 @@
 					<path d="M18.008 0v36M36.008 18h-36" stroke="#fff" />
 				</svg>
 				<img
-					class="h-40 rounded-full bg-mineShaft-950 object-contain px-2 py-4"
+					class="bg-mine-shaft-950 h-40 rounded-full object-contain px-2 py-4"
 					src={networkLogo}
 					alt={networkName}
 					height="160"
@@ -73,8 +73,8 @@
 				})}
 			>
 				<HomepageButton
-					class="mt-0.5 bg-solar-500 px-8 text-solar-950
-					    hover:active:bg-solar-600 hover:active:text-solar-950 [@media(any-hover:hover)]:hover:bg-solar-400 [@media(any-hover:hover)]:hover:text-solar-950"
+					class="bg-solar-500 text-solar-950 hover:active:bg-solar-600 hover:active:text-solar-950
+					    hover:bg-solar-400 hover:text-solar-950 mt-0.5 px-8"
 					text={m.homepage_metamask_wallet_install({
 						name: productName
 					})}

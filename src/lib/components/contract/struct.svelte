@@ -58,7 +58,7 @@
 
 <li class="relative col-span-full grid grid-cols-subgrid bg-shark-950">
 	<div
-		class="col-span-full space-y-1 rounded-t-lg bg-mineShaft-950 px-4 py-3 md:col-span-1 md:rounded-l-lg"
+		class="col-span-full space-y-1 rounded-t-lg bg-mine-shaft-950 px-4 py-3 md:col-span-1 md:rounded-l-lg"
 	>
 		<div class="flex items-center">
 			<SquareDashedBottomCode class="mr-2" />
@@ -122,7 +122,7 @@
 		{/each}
 	</div>
 
-	<div class="rounded-b-lg bg-mineShaft-950/50 px-4 py-3 md:rounded-r-lg">
+	<div class="rounded-b-lg bg-mine-shaft-950/50 px-4 py-3 md:rounded-r-lg">
 		<Code>{JSON.stringify(struct, null, 2)}</Code>
 	</div>
 </li>

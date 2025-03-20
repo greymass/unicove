@@ -34,11 +34,11 @@
 	hover:text-black/95
 	focus:z-10
 	focus:text-solar-950
-	data-[variant=form]:rounded-sm
+	data-[variant=form]:rounded-xs
 	data-[variant=pill]:rounded-xl
 	data-[highlighted=true]:bg-solar-500
 	data-[highlighted=true]:text-solar-950
-	data-[disabled]:opacity-50
+	data-disabled:opacity-50
 	"
 	data-variant={props.variant}
 	use:melt={$option(props.item)}

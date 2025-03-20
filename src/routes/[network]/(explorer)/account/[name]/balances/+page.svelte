@@ -24,7 +24,7 @@
 
 {#snippet tableAction(asset: Asset)}
 	<td class="text-right">
-		<a class="text-skyBlue-500 hover:text-skyBlue-400" href="/{data.network}/send?quantity={asset}">
+		<a class="text-sky-blue-500 hover:text-sky-blue-400" href="/{data.network}/send?quantity={asset}">
 			{m.common_send()}
 		</a>
 	</td>

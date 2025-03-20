@@ -51,11 +51,11 @@
 		w-[52px]
 		rounded-full
 		border-2
-		border-mineShaft-600
+		border-mine-shaft-600
 		bg-transparent
 		*:size-4
 		*:translate-x-1.5
-		*:bg-mineShaft-400
+		*:bg-mine-shaft-400
 		*:transition-transform
 		focus-visible:border-solar-500
 		focus-visible:outline
@@ -64,13 +64,13 @@
 		focus-visible:outline-solar-500
 		disabled:cursor-not-allowed
 		disabled:opacity-40
-		data-[state=checked]:border-skyBlue-500
-		data-[state=checked]:bg-skyBlue-500
-		*:data-[state=checked]:translate-x-[26px]
-		*:data-[state=checked]:scale-150
-		*:data-[state=checked]:bg-skyBlue-50
-		data-[state=checked]:hover:border-skyBlue-400
-		data-[state=checked]:hover:bg-skyBlue-400
+		data-[state=checked]:border-sky-blue-500
+		data-[state=checked]:bg-sky-blue-500
+		data-[state=checked]:*:translate-x-[26px]
+		data-[state=checked]:*:scale-150
+		data-[state=checked]:*:bg-sky-blue-50
+		data-[state=checked]:hover:border-sky-blue-400
+		data-[state=checked]:hover:bg-sky-blue-400
 "
 		{id}
 		aria-labelledby={ariaLabelledBy}

@@ -47,7 +47,7 @@
 <a
 	href={path}
 	class={cn(
-		'inline-flex items-center gap-2 text-skyBlue-500 hover:text-skyBlue-400 focus-visible:outline focus-visible:outline-solar-500 ',
+		'inline-flex items-center gap-2 text-sky-blue-500 hover:text-sky-blue-400 focus-visible:outline focus-visible:outline-solar-500 ',
 		props.class
 	)}
 	use:melt={$trigger}
@@ -66,17 +66,17 @@
 	<div
 		use:melt={$content}
 		transition:fly={{ y: -5, duration: 100 }}
-		class="z-10 rounded-xl bg-mineShaft-900 shadow-sm"
+		class="z-10 rounded-xl bg-mine-shaft-900 shadow-xs"
 	>
-		<div class="w-72 rounded-xl bg-mineShaft-900 p-5 shadow-sm">
+		<div class="w-72 rounded-xl bg-mine-shaft-900 p-5 shadow-xs">
 			<div class="flex flex-col gap-2">
 				<div class="flex gap-4">
-					<picture class="block grid size-12 place-items-center rounded-full bg-mineShaft-700">
+					<picture class="block grid size-12 place-items-center rounded-full bg-mine-shaft-700">
 						<User />
 					</picture>
 
 					<div>
-						<div class="font-bold text-mineShaft-50">{name}</div>
+						<div class="font-bold text-mine-shaft-50">{name}</div>
 						<div class="text-muted">{account.balance?.total}</div>
 					</div>
 				</div>

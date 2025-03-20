@@ -81,7 +81,7 @@
 
 {#snippet CodeBox(data: Action | ABISerializable)}
 	<Code>
-		<div class="overflow-auto rounded bg-shark-950 p-4">
+		<div class="overflow-auto rounded-sm bg-shark-950 p-4">
 			{JSON.stringify(data, null, 4)}
 		</div>
 	</Code>
@@ -100,7 +100,7 @@
 
 {#snippet Pretty(data: ObjectifiedActionData | undefined)}
 	<Code>
-		<div class="overflow-auto rounded bg-shark-950 p-4">
+		<div class="overflow-auto rounded-sm bg-shark-950 p-4">
 			{#if data}
 				{#each Object.keys(data) as key}
 					{@render KeyValue(key, data[key])}
@@ -114,7 +114,7 @@
 
 {#snippet Ricardian()}
 	<Code>
-		<div class="overflow-auto rounded bg-shark-950 p-4">
+		<div class="overflow-auto rounded-sm bg-shark-950 p-4">
 			Rendering of the ricardian contract is not yet supported.
 		</div>
 	</Code>
@@ -131,7 +131,7 @@
 {#snippet Header()}
 	<div class="flex">
 		<div>
-			<picture class="mr-4 grid size-14 place-items-center rounded-full bg-mineShaft-900">
+			<picture class="mr-4 grid size-14 place-items-center rounded-full bg-mine-shaft-900">
 				<SquareTerminal />
 			</picture>
 		</div>
@@ -184,7 +184,7 @@
 	</div>
 {/snippet}
 
-<div class="rounded bg-mineShaft-950 p-4">
+<div class="rounded-sm bg-mine-shaft-950 p-4">
 	<div class="space-y-4">
 		{@render Header()}
 		{#if variant === 'summary'}

@@ -116,9 +116,9 @@
 		title={m.common_settings()}
 		subtitle={m.settings_page_subtitle()}
 	/>
-	<div class="grid max-w-screen-sm gap-8">
+	<div class="grid max-w-(--breakpoint-sm) gap-8">
 		{#if context.wharf.session?.walletPlugin.id === 'wallet-plugin-multisig'}
-			<Card class="grid gap-8 border border-mineShaft-900">
+			<Card class="grid gap-8 border border-mine-shaft-900">
 				<div class="flex items-center justify-between">
 					<h2 class="text-muted text-2xl font-semibold">MSIG Configuration</h2>
 				</div>
@@ -159,7 +159,7 @@
 			</Card>
 		{/if}
 
-		<Card class="grid gap-8 border border-mineShaft-900">
+		<Card class="grid gap-8 border border-mine-shaft-900">
 			<div class="flex items-center justify-between">
 				<h2 class="text-muted text-2xl font-semibold">Preferences</h2>
 			</div>
@@ -191,7 +191,7 @@
 			</div>
 		</Card>
 
-		<Card class="grid gap-8 border border-mineShaft-900">
+		<Card class="grid gap-8 border border-mine-shaft-900">
 			<div class="flex items-center justify-between">
 				<h2 class="text-muted text-2xl font-semibold">Navigation</h2>
 			</div>
@@ -220,7 +220,7 @@
 			</div>
 		</Card>
 
-		<Card class="grid gap-8 border border-mineShaft-900">
+		<Card class="grid gap-8 border border-mine-shaft-900">
 			<div class="flex items-center justify-between">
 				<h2 class="text-muted text-2xl font-semibold">{m.settings_advanced()}</h2>
 			</div>
@@ -235,7 +235,7 @@
 		</Card>
 
 		{#if advancedMode}
-			<Card class="grid gap-8 border border-mineShaft-900">
+			<Card class="grid gap-8 border border-mine-shaft-900">
 				<div class="flex items-center justify-between">
 					<h2 class="text-muted text-2xl font-semibold">{m.settings_developer()}</h2>
 				</div>

@@ -125,7 +125,7 @@
 </script>
 
 <section class="col-span-full @container">
-	<div class="grid min-h-72 rounded-2xl bg-mineShaft-950 px-4 @2xl:grid-cols-2 @2xl:gap-4">
+	<div class="grid min-h-72 rounded-2xl bg-mine-shaft-950 px-4 @2xl:grid-cols-2 @2xl:gap-4">
 		<div class="grid place-items-center">
 			<svg
 				class="col-start-1 row-start-1 h-full w-full object-cover"
@@ -154,7 +154,7 @@
 				class="col-start-1 row-start-1 grid max-w-sm grid-cols-3 items-center justify-items-center"
 			>
 				<img
-					class="h-40 rounded-full bg-mineShaft-950 object-contain"
+					class="h-40 rounded-full bg-mine-shaft-950 object-contain"
 					src={Metamask}
 					alt="metamask"
 				/>
@@ -162,7 +162,7 @@
 					<path d="M18.008 0v36M36.008 18h-36" stroke="#fff" />
 				</svg>
 				<img
-					class="h-40 rounded-full bg-mineShaft-950 object-contain px-2 py-4"
+					class="h-40 rounded-full bg-mine-shaft-950 object-contain px-2 py-4"
 					src={networkLogo}
 					alt={networkName}
 				/>

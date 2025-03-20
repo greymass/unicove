@@ -37,7 +37,7 @@
 	{#if props.backPath}
 		<button
 			onclick={goBack}
-			class="grid size-12 place-items-center rounded-full bg-mineShaft-900 text-skyBlue-500 hover:bg-mineShaft-800 hover:text-skyBlue-400"
+			class="grid size-12 place-items-center rounded-full bg-mine-shaft-900 text-sky-blue-500 hover:bg-mine-shaft-800 hover:text-sky-blue-400"
 		>
 			<ChevronLeft size={24} />
 		</button>

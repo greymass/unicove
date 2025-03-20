@@ -19,7 +19,7 @@
 {#if props.open}
 	<div
 		class={cn(
-			'z-90 flex max-h-[300px] flex-col overflow-y-auto border-2 border-mineShaft-600 bg-shark-950 py-1 shadow focus:!ring-0 data-[variant=form]:rounded-lg data-[variant=pill]:rounded-2xl data-[variant=form]:px-2 data-[variant=form]:py-2 data-[variant=pill]:px-1 data-[variant=pill]:py-1 ',
+			'z-90 flex max-h-[300px] flex-col overflow-y-auto border-2 border-mine-shaft-600 bg-shark-950 py-1 shadow-sm focus:ring-0! data-[variant=form]:rounded-lg data-[variant=pill]:rounded-2xl data-[variant=form]:px-2 data-[variant=form]:py-2 data-[variant=pill]:px-1 data-[variant=pill]:py-1 ',
 			className
 		)}
 		data-variant={props.variant}

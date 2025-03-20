@@ -34,7 +34,7 @@
 
 	<Stack class="rounded-2xl border border-white/20 p-4">
 		<div class="flex items-start space-x-4">
-			<div class="mt-2 rounded-full bg-mineShaft-800">
+			<div class="mt-2 rounded-full bg-mine-shaft-800">
 				<img src={recommendedWallet.logo} alt={`${recommendedWallet.name} logo`} width={96} />
 			</div>
 			<div>
@@ -58,9 +58,9 @@
 				<a
 					href={wallet.route}
 					class="group grid grid-cols-[auto_1fr_auto] items-center gap-4 rounded-2xl border border-white/20 p-4
-					hover:bg-mineShaft-950 focus-visible:outline focus-visible:outline-transparent focus-visible:ring-2 focus-visible:ring-solar-500"
+					hover:bg-mine-shaft-950 focus-visible:outline focus-visible:outline-transparent focus-visible:ring-2 focus-visible:ring-solar-500"
 				>
-					<div class="rounded-full bg-mineShaft-900/60">
+					<div class="rounded-full bg-mine-shaft-900/60">
 						{#if wallet.logo}
 							<img src={wallet.logo} alt={`${wallet.name} logo`} width="52" />
 						{/if}
@@ -71,7 +71,7 @@
 						</h4>
 						<p>{wallet.description}</p>
 					</div>
-					<ChevronRight class="size-6 group-hover:stroke-skyBlue-500" />
+					<ChevronRight class="size-6 group-hover:stroke-sky-blue-500" />
 				</a>
 			</Stack>
 		{/each}
@@ -82,12 +82,12 @@
 			<a
 				href="/{data.network}/signup/wallets"
 				class="group grid grid-cols-[auto_1fr_auto] items-center gap-4 rounded-2xl border border-white/20 p-4
-				hover:bg-mineShaft-950 focus-visible:outline focus-visible:outline-transparent focus-visible:ring-2 focus-visible:ring-solar-500"
+				hover:bg-mine-shaft-950 focus-visible:outline focus-visible:outline-transparent focus-visible:ring-2 focus-visible:ring-solar-500"
 			>
-				<div class="rounded-full bg-mineShaft-900/60 p-3">
+				<div class="rounded-full bg-mine-shaft-900/60 p-3">
 					{#if currentWalletType.icon}
 						{@const Component = currentWalletType.icon}
-						<Component class="size-6 group-hover:stroke-skyBlue-500" />
+						<Component class="size-6 group-hover:stroke-sky-blue-500" />
 					{/if}
 				</div>
 				<div class="space-y-1">
@@ -100,7 +100,7 @@
 							.replace(/,([^,]*)$/, ' and$1')}
 					</p>
 				</div>
-				<ChevronRight class="size-6 group-hover:stroke-skyBlue-500" />
+				<ChevronRight class="size-6 group-hover:stroke-sky-blue-500" />
 			</a>
 		</Stack>
 	{/if}

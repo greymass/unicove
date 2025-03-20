@@ -87,7 +87,7 @@
 			<span
 				class="border-b-2 pb-1"
 				class:border-transparent={!option.active}
-				class:border-skyBlue-500={option.active}
+				class:border-sky-blue-500={option.active}
 			>
 				{option.text}
 			</span>

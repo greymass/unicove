@@ -14,7 +14,7 @@
 <Stack>
 	<Card>
 		<div class="flex gap-6">
-			<picture class="grid size-12 shrink-0 place-items-center rounded-full bg-mineShaft-900">
+			<picture class="grid size-12 shrink-0 place-items-center rounded-full bg-mine-shaft-900">
 				<Key />
 			</picture>
 			<div class="space-y-0.5 text-balance *:break-all">
@@ -33,7 +33,7 @@
 					<li class="flex">
 						<Account
 							name={account}
-							class="h-12 content-center rounded-lg px-4 hover:bg-mineShaft-900/50  focus-visible:bg-mineShaft-900 focus-visible:text-mineShaft-50"
+							class="h-12 content-center rounded-lg px-4 hover:bg-mine-shaft-900/50  focus-visible:bg-mine-shaft-900 focus-visible:text-mine-shaft-50"
 						/>
 					</li>
 				{/each}

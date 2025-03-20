@@ -221,7 +221,7 @@
 	h-full
 	min-h-svh
 	w-[calc(100%-2rem)]
-	max-w-screen-2xl
+	max-w-(--breakpoint-2xl)
 	grid-cols-2
 	grid-rows-[min-content_minmax(0,1fr)]
 	gap-y-6

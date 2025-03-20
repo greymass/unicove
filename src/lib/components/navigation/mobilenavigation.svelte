@@ -40,27 +40,25 @@
 
 <svelte:window bind:innerWidth />
 
-<!-- [@media(any-hover:hover)]:hover:opacity-80 -->
-
 <button
 	class="
+	focus-visible:ring-solar-500
 	relative
 	flex
 	h-10
 	items-center
 	gap-2
-	text-nowrap
 	rounded-lg
 	py-3.5
 	text-base
 	font-medium
+	text-nowrap
 	text-white/50
 	transition-opacity
 	focus:outline-transparent
-	focus-visible:outline
 	focus-visible:ring-2
+	focus-visible:outline
 	focus-visible:ring-inset
-	focus-visible:ring-solar-500
 	md:hidden
 	{className}
 	"
@@ -82,7 +80,7 @@
 		></div>
 		<nav
 			use:melt={$content}
-			class="fixed left-0 top-0 z-50 grid h-svh grid-rows-[auto_1fr] gap-8 bg-shark-950 px-8 pt-4 shadow-lg focus:outline-none md:bg-transparent md:shadow-none"
+			class="bg-shark-950 fixed top-0 left-0 z-50 grid h-svh grid-rows-[auto_1fr] gap-8 px-8 pt-4 shadow-lg focus:outline-hidden md:bg-transparent md:shadow-none"
 			transition:fly={{
 				x: -350,
 				duration: 300,
