@@ -65,7 +65,7 @@
 
 		{#if dismissable}
 			<button
-				class="col-start-3 grid size-12 place-items-center justify-self-end text-inherit"
+				class="col-start-3 m-4 grid size-8 place-items-center justify-self-end rounded-full text-inherit hover:bg-black/10"
 				onclick={hideBanner}
 			>
 				<X class="size-4 " />
