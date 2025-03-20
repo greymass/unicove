@@ -34,7 +34,7 @@
 
 	<Stack class="rounded-2xl border border-white/20 p-4">
 		<div class="flex items-start space-x-4">
-			<div class="mt-2 rounded-full bg-mine-800">
+			<div class="bg-mine-800 mt-2 rounded-full">
 				<img src={recommendedWallet.logo} alt={`${recommendedWallet.name} logo`} width={96} />
 			</div>
 			<div>
@@ -57,10 +57,10 @@
 			<Stack>
 				<a
 					href={wallet.route}
-					class="group grid grid-cols-[auto_1fr_auto] items-center gap-4 rounded-2xl border border-white/20 p-4
-					hover:bg-mine-950 focus-visible:outline focus-visible:outline-transparent focus-visible:ring-2 focus-visible:ring-solar-500"
+					class="group hover:bg-mine-950 focus-visible:ring-solar-500 grid grid-cols-[auto_1fr_auto] items-center gap-4 rounded-2xl border
+					border-white/20 p-4 focus-visible:ring-2 focus-visible:outline focus-visible:outline-transparent"
 				>
-					<div class="rounded-full bg-mine-900/60">
+					<div class="bg-mine-900/60 rounded-full">
 						{#if wallet.logo}
 							<img src={wallet.logo} alt={`${wallet.name} logo`} width="52" />
 						{/if}
@@ -81,10 +81,10 @@
 		<Stack>
 			<a
 				href="/{data.network}/signup/wallets"
-				class="group grid grid-cols-[auto_1fr_auto] items-center gap-4 rounded-2xl border border-white/20 p-4
-				hover:bg-mine-950 focus-visible:outline focus-visible:outline-transparent focus-visible:ring-2 focus-visible:ring-solar-500"
+				class="group hover:bg-mine-950 focus-visible:ring-solar-500 grid grid-cols-[auto_1fr_auto] items-center gap-4 rounded-2xl border
+				border-white/20 p-4 focus-visible:ring-2 focus-visible:outline focus-visible:outline-transparent"
 			>
-				<div class="rounded-full bg-mine-900/60 p-3">
+				<div class="bg-mine-900/60 rounded-full p-3">
 					{#if currentWalletType.icon}
 						{@const Component = currentWalletType.icon}
 						<Component class="size-6 group-hover:stroke-sky-500" />

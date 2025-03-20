@@ -22,7 +22,7 @@
 
 <div
 	class={cn(
-		'col-span-full grid min-h-12 grid-cols-subgrid items-center gap-x-4 border-b border-mine-900 last:border-none ',
+		'border-mine-900 col-span-full grid min-h-12 grid-cols-subgrid items-center gap-x-4 border-b last:border-none ',
 		isTotal && 'font-semibold'
 	)}
 >

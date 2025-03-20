@@ -182,11 +182,7 @@
 
 <style lang="postcss">
 	#msig-vis {
-		background: linear-gradient(
-			to right,
-			theme(colors.green.400) 50%,
-			theme(colors.mine.950) 50%
-		);
+		background: linear-gradient(to right, theme(colors.green.400) 50%, theme(colors.mine.950) 50%);
 		background-size: 200% 100%;
 		background-position: var(--bg-pos);
 		transition: all var(--ease) var(--duration);

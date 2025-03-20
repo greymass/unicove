@@ -37,7 +37,7 @@
 	{#if props.backPath}
 		<button
 			onclick={goBack}
-			class="grid size-12 place-items-center rounded-full bg-mine-900 text-sky-500 hover:bg-mine-800 hover:text-sky-400"
+			class="bg-mine-900 hover:bg-mine-800 grid size-12 place-items-center rounded-full text-sky-500 hover:text-sky-400"
 		>
 			<ChevronLeft size={24} />
 		</button>
@@ -52,7 +52,7 @@
 	{/if}
 
 	<div class="grid gap-2">
-		<h1 class="w-fit text-3xl font-bold leading-none text-white">
+		<h1 class="w-fit text-3xl leading-none font-bold text-white">
 			<span>{props.title}</span>
 			{#if routePath === 'account'}
 				<CopyButton data={props.title} slop={false} />

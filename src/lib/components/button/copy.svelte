@@ -36,12 +36,12 @@
 <!-- Styled as a trailing element. Will need to change it if we want to use it inline with other elements following it.  -->
 {#if browser && 'clipboard' in navigator}
 	<div
-		class="relative inline-flex text-sky-500 hover:text-sky-400 focus-visible:text-sky-400 has-focus-visible:text-solar-500"
+		class="has-focus-visible:text-solar-500 relative inline-flex text-sky-500 hover:text-sky-400 focus-visible:text-sky-400"
 	>
 		<button
 			onclick={copyToClipboard}
 			class={cn(
-				'peer absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 focus-visible:outline-hidden',
+				'peer absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 focus-visible:outline-hidden',
 				buttonSize
 			)}
 			aria-label={m.common_copy()}
@@ -53,7 +53,7 @@
 			<span
 				in:fly={{ x: -20, easing: quartOut, duration: 100 }}
 				out:fade={{ easing: quadIn, duration: 200 }}
-				class="absolute inset-y-0 left-full translate-x-2 select-none text-nowrap text-xs text-sky-400"
+				class="absolute inset-y-0 left-full translate-x-2 text-xs text-nowrap text-sky-400 select-none"
 				>{m.common_copied_result()}</span
 			>
 		{/if}

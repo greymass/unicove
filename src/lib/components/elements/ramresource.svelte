@@ -12,6 +12,6 @@
 	const { ramAvailable, ...props }: Props = $props();
 </script>
 
-<div class={cn('rounded-xl bg-mine-900/70 p-4 pb-2', props.class)}>
+<div class={cn('bg-mine-900/70 rounded-xl p-4 pb-2', props.class)}>
 	<ResourceCard type="ram" value={ramAvailable} />
 </div>

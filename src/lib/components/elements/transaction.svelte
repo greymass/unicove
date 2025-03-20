@@ -12,10 +12,7 @@
 </script>
 
 {#if id}
-	<a
-		class="text-sky-500 hover:text-sky-400 {className}"
-		href="/{network}/transaction/{String(id)}"
-	>
+	<a class="text-sky-500 hover:text-sky-400 {className}" href="/{network}/transaction/{String(id)}">
 		{truncatedString}
 	</a>
 {/if}

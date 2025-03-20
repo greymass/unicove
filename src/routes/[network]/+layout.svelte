@@ -225,8 +225,8 @@
 	grid-cols-2
 	grid-rows-[min-content_minmax(0,1fr)]
 	gap-y-6
-	pb-12
 	pt-4
+	pb-12
 	sm:grid-cols-4
 	md:h-auto
 	md:min-h-svh

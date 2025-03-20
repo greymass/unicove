@@ -46,22 +46,22 @@
 	<button
 		use:melt={$root}
 		class="
+		border-mine-600
+		*:bg-mine-400
+		focus-visible:border-solar-500
+		focus-visible:outline-solar-500
 		relative
 		h-8
 		w-[52px]
 		rounded-full
 		border-2
-		border-mine-600
 		bg-transparent
 		*:size-4
 		*:translate-x-1.5
-		*:bg-mine-400
 		*:transition-transform
-		focus-visible:border-solar-500
 		focus-visible:outline
 		focus-visible:outline-2
 		focus-visible:outline-offset-[-2px]
-		focus-visible:outline-solar-500
 		disabled:cursor-not-allowed
 		disabled:opacity-40
 		data-[state=checked]:border-sky-500

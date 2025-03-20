@@ -16,12 +16,12 @@
 <!-- Styled as a trailing element. Will need to change it if we want to use it inline with other elements following it.  -->
 {#if browser}
 	<div
-		class="relative inline-flex text-sky-500 hover:text-sky-400 focus-visible:text-sky-400 has-focus-visible:text-solar-500"
+		class="has-focus-visible:text-solar-500 relative inline-flex text-sky-500 hover:text-sky-400 focus-visible:text-sky-400"
 	>
 		<a
 			href={props.data}
 			class={cn(
-				'peer absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 focus-visible:outline-hidden',
+				'peer absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 focus-visible:outline-hidden',
 				buttonSize
 			)}
 		>

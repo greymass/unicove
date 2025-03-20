@@ -70,7 +70,7 @@
 	});
 </script>
 
-<Stack class="gap-6 @container">
+<Stack class="@container gap-6">
 	<PillGroup {options} />
 	{@render children()}
 </Stack>

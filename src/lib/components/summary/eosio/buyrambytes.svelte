@@ -26,7 +26,7 @@
 			<p class="caption">Bytes</p>
 			<p class="h3">{data.bytes}</p>
 			{#if value}
-				<p class="mt-1.5 self-start rounded-sm bg-shark-800/60 px-2">USD {formatCurrency(value)}</p>
+				<p class="bg-shark-800/60 mt-1.5 self-start rounded-sm px-2">USD {formatCurrency(value)}</p>
 			{/if}
 		</Stack>
 	</Switcher>

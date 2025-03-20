@@ -73,7 +73,7 @@
 
 <Stack>
 	<div>
-		<div class="rounded-t-lg bg-mine-950 px-4 py-3 md:rounded-l-lg">
+		<div class="bg-mine-950 rounded-t-lg px-4 py-3 md:rounded-l-lg">
 			<h2 class="h2 pb-6">Table Browser</h2>
 			{#if scope}
 				Scope: {scope}
@@ -89,7 +89,7 @@
 			{/if}
 		</div>
 
-		<div class="overflow-x-auto rounded-b-lg bg-mine-950/50 px-4 py-3 md:rounded-r-lg">
+		<div class="bg-mine-950/50 overflow-x-auto rounded-b-lg px-4 py-3 md:rounded-r-lg">
 			<form onsubmit={query}>
 				<div class="flex gap-2">
 					<TextInput placeholder="Scope" bind:value={scope} />

@@ -26,7 +26,7 @@
 	<Stack>
 		<Stack class="gap-2">
 			<h4 class="text-muted text-base leading-none">{m.common_available()}</h4>
-			<p class="text-xl font-semibold leading-none text-white">
+			<p class="text-xl leading-none font-semibold text-white">
 				{#if context.account}
 					<AssetText variant="full" value={context.account?.balance?.liquid} />
 				{:else}

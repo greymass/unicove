@@ -20,6 +20,10 @@
 
 <div
 	class="
+	hover:bg-solar-500
+	focus:text-solar-950
+	data-[highlighted=true]:bg-solar-500
+	data-[highlighted=true]:text-solar-950
 	relative
 	grid
 	cursor-pointer
@@ -30,15 +34,11 @@
 	px-2
 	py-1
 	font-medium
-	hover:bg-solar-500
 	hover:text-black/95
 	focus:z-10
-	focus:text-solar-950
+	data-disabled:opacity-50
 	data-[variant=form]:rounded-xs
 	data-[variant=pill]:rounded-xl
-	data-[highlighted=true]:bg-solar-500
-	data-[highlighted=true]:text-solar-950
-	data-disabled:opacity-50
 	"
 	data-variant={props.variant}
 	use:melt={$option(props.item)}

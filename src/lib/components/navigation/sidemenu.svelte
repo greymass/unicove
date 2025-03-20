@@ -74,11 +74,11 @@
 	});
 </script>
 
-<menu class="flex flex-col gap-2 text-nowrap text-base font-medium text-white">
+<menu class="flex flex-col gap-2 text-base font-medium text-nowrap text-white">
 	{#each destinations as option}
 		<a
 			href={option.href}
-			class="flex h-12 select-none items-center rounded-lg leading-snug transition-opacity hover:opacity-100 focus-visible:opacity-100 focus-visible:outline focus-visible:outline-solar-500"
+			class="focus-visible:outline-solar-500 flex h-12 items-center rounded-lg leading-snug transition-opacity select-none hover:opacity-100 focus-visible:opacity-100 focus-visible:outline"
 			class:opacity-50={!option.active}
 			class:opacity-100={option.active}
 			aria-current={!!option.active}

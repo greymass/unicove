@@ -69,7 +69,7 @@
 <Card>
 	<p class="h3 font-semibold">{title}</p>
 	<canvas bind:this={ctx}></canvas>
-	<hr class="h-px border-0 bg-shark-200/50" />
+	<hr class="bg-shark-200/50 h-px border-0" />
 	<div class="flex items-center justify-between font-medium">
 		<!-- <span class="text-shark-200/70">{String(data.length)} days</span> -->
 		<div class="flex gap-4">
