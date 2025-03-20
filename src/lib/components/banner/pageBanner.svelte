@@ -1,15 +1,22 @@
-<script>
+<script lang="ts">
 	import { onMount } from 'svelte';
 	import X from 'lucide-svelte/icons/x';
 	import * as m from '$lib/paraglide/messages';
+	import dayjs from 'dayjs';
 
 	let props = $props();
+
+	/**
+	 * Set the date this banner was updated. At this time, we'll only have one banner.
+	 * Note: we can force the banner to be visible on every page load by setting a future date, after which it'll be permanently dismissable.
+	 */
+	const BANNER_DATE = '2025-03-21';
 
 	function hideBanner() {
 		// update the store to immediately hide the banner
 		showBanner = false;
 		// set the flag to prevent banner showing on next page load
-		localStorage.setItem('hide-vaulta-rebrand-banner', 'true');
+		localStorage.setItem('hide-banner', new Date().toISOString());
 	}
 
 	// Default to not show a banner (avoids flash of banner when hidden)
@@ -17,9 +24,14 @@
 
 	onMount(() => {
 		// This banner is only for EOS/Vaulta
-		if (props.network.shortname === 'eos') {
-			// Show the banner if localStorage has no flag set
-			showBanner = !localStorage.getItem('hide-vaulta-rebrand-banner');
+		if (props.network.shortname !== 'eos') return;
+
+		const prevHidden = localStorage.getItem('hide-banner');
+		if (!prevHidden) {
+			showBanner = true;
+		} else {
+			// Show banner if the above date is newer than the date in localstorage
+			showBanner = dayjs(prevHidden).isBefore(BANNER_DATE);
 		}
 	});
 </script>
