@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { useIntersectionObserver } from 'runed';
-	import { fade } from 'svelte/transition';
 
 	let target = $state<HTMLElement | null>(null);
 	let root = $state<HTMLElement | null>(null);
@@ -21,12 +20,13 @@
 	<header class="col-span-full" bind:this={target}>
 		<div class="h-56 rounded-lg bg-red-200"></div>
 	</header>
-	{#if !isIntersecting}
-		<aside transition:fade={{ duration: 100 }} class="relative col-start-3 row-start-2">
-			<div class="sticky top-8 h-48 rounded-lg bg-red-200"></div>
-		</aside>
-	{/if}
-	<section class="prose prose-invert col-span-full text-pretty md:col-span-2">
+	<aside
+		class:opacity-0={isIntersecting}
+		class="relative col-span-full row-start-3 transition-opacity xl:col-start-3 xl:row-start-2"
+	>
+		<div class="sticky top-8 h-48 rounded-lg bg-red-200"></div>
+	</aside>
+	<section class="prose prose-invert col-span-full text-pretty xl:col-span-2">
 		<h2 class="h2 text-pretty leading-tight">
 			EOS to Vaulta: A Major Rebrand Launching Web3 Banking
 		</h2>
