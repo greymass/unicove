@@ -180,7 +180,7 @@
 	<pre>{JSON.stringify(manager.actions, null, 2)}</pre>
 {/if}
 
-<style lang="postcss">
+<style>
 	#msig-vis {
 		background: linear-gradient(to right, var(--colors-green-400) 50%, var(--colors-mine-950) 50%);
 		background-size: 200% 100%;
