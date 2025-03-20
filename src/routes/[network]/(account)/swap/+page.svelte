@@ -10,18 +10,15 @@
 		() => target,
 		(entries) => {
 			const entry = entries[0];
-			if (!entry) console.log('no entry');
-			console.log(entry);
+			if (!entry) return;
 			isIntersecting = entry.isIntersecting;
 		},
 		{ root: () => root }
 	);
-
-	$inspect(isIntersecting);
 </script>
 
 <article class="grid grid-cols-3 gap-12">
-	<header class="col-span-3" bind:this={target}>
+	<header class="col-span-full" bind:this={target}>
 		<div class="h-56 rounded-lg bg-red-200"></div>
 	</header>
 	{#if !isIntersecting}
@@ -29,7 +26,7 @@
 			<div class="sticky top-8 h-48 rounded-lg bg-red-200"></div>
 		</aside>
 	{/if}
-	<section class="prose prose-invert col-span-2 text-pretty">
+	<section class="prose prose-invert col-span-full text-pretty md:col-span-2">
 		<h2 class="h2 text-pretty leading-tight">
 			EOS to Vaulta: A Major Rebrand Launching Web3 Banking
 		</h2>
