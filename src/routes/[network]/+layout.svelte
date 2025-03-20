@@ -5,7 +5,6 @@
 	import { Head, type SeoConfig } from 'svead';
 	import extend from 'just-extend';
 
-	import X from 'lucide-svelte/icons/circle-x';
 	import { env } from '$env/dynamic/public';
 	import { page } from '$app/state';
 
@@ -23,6 +22,7 @@
 	import Unicovelogo from '$lib/assets/unicovelogo.svelte';
 	import MobileNavigation from '$lib/components/navigation/mobilenavigation.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte.js';
+	import PageBanner from '$lib/components/banner/pageBanner.svelte';
 
 	let { children, data } = $props();
 
@@ -161,9 +161,6 @@
 	const NETWORK_UPDATE_INTERVAL = Number(env.PUBLIC_NETWORK_UPDATE_INTERVAL) || 5_000;
 	const MARKET_UPDATE_INTERVAL = Number(env.PUBLIC_MARKET_UPDATE_INTERVAL) || 60_000;
 
-	// Default to not show a banner (avoids flash of banner when hidden)
-	let showBanner = $state(false);
-
 	onMount(() => {
 		// Set the chain to the current network chain
 		chain = data.network.chain;
@@ -185,9 +182,6 @@
 			market.refresh();
 		}, MARKET_UPDATE_INTERVAL);
 
-		// Show the banner if localStorage has no flag set
-		showBanner = !localStorage.getItem('hide-v1-banner');
-
 		// Enable Wharf
 		setupWharf();
 
@@ -201,13 +195,6 @@
 			clearInterval(marketInterval);
 		};
 	});
-
-	function hideBanner() {
-		// update the store to immediately hide the banner
-		showBanner = false;
-		// set the flag to prevent banner showing on next load
-		localStorage.setItem('hide-v1-banner', 'true');
-	}
 
 	const seo_config = $derived<SeoConfig>(
 		extend({}, data.baseMetaTags, page.data?.pageMetaTags) as SeoConfig
@@ -224,24 +211,7 @@
 	{/if}
 </svelte:head>
 
-{#if showBanner}
-	<aside
-		class="grid grid-cols-[auto_1fr_auto] items-center justify-items-center gap-4 bg-mineShaft-950 shadow *:row-start-1"
-	>
-		<p
-			class="col-start-2 py-4 font-medium text-mineShaft-50 md:col-span-3 md:col-start-1 md:text-center"
-		>
-			Looking for the old version of Unicove? Go to
-			<a class="underline" href="https://v1.unicove.com">v1.unicove.com</a>
-		</p>
-		<button
-			class="col-start-3 grid size-12 place-items-center justify-self-end text-inherit"
-			onclick={hideBanner}
-		>
-			<X class="size-4 " />
-		</button>
-	</aside>
-{/if}
+<PageBanner network={data.network} />
 
 <div
 	class="
