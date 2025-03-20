@@ -10,14 +10,14 @@
 	const { error, hidden }: Props = $props();
 </script>
 
-<div class="space-y-6 rounded-lg" class:hidden>
-	<div class="flex flex-col items-center gap-6">
-		<picture class="size-24">
-			<CircleX class="size-full text-red-300" />
-		</picture>
+<div class="space-y-6 rounded-lg text-center" class:hidden>
+	<CircleX class="inline size-24 text-red-300" />
+
+	<div class=" space-y-3">
 		<h2 class="h3">{m.common_transaction_error()}</h2>
+
+		<p class="mx-auto max-w-prose break-words">
+			{error}
+		</p>
 	</div>
-	<p class="py-4">
-		{error}
-	</p>
 </div>

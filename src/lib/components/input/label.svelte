@@ -8,6 +8,7 @@
 	}
 
 	import { createLabel, melt } from '@melt-ui/svelte';
+	import { cn } from '$lib/utils/style';
 
 	const {
 		elements: { root }
@@ -16,6 +17,6 @@
 	let props: Props = $props();
 </script>
 
-<label for={props.for} use:melt={$root} class="h5 semi-bold">
+<label for={props.for} use:melt={$root} class={cn('h5 semi-bold leading-tight', props.class)}>
 	{@render props.children()}
 </label>
