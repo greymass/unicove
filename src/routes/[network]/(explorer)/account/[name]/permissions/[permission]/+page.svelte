@@ -128,7 +128,7 @@
 
 {#snippet PermissionParent()}
 	<fieldset class="grid gap-3">
-		<Label for="permission_parent">Parent Permission</Label>
+		<Label for="permission_parent">{m.common_parent_permission()}</Label>
 		<Select
 			id="permission_parent"
 			disabled={!manager.newPermission}
@@ -141,7 +141,7 @@
 
 {#snippet PermissionType()}
 	<fieldset class="grid gap-3">
-		<Label for="permission_type">Permission Type</Label>
+		<Label for="permission_type">{m.common_permission_type()}</Label>
 		<Select
 			id="permission_type"
 			onSelectedChange={onPermissionTypeChange}
@@ -150,7 +150,7 @@
 			bind:selected={permissionTypeSelected}
 		/>
 		<p class="mt-2 text-pretty">
-			Note: Changing the permission type will reset any unsaved edits made to this permission.
+			{m.common_permission_form_reset()}
 		</p>
 	</fieldset>
 {/snippet}
@@ -158,8 +158,8 @@
 {#snippet WeightThreshold()}
 	<FormSection>
 		<FormSectionHeader
-			title="Weight Threshold"
-			text=" The total weight of all keys, accounts, and waits must be greater than or equal to this threshold to approve a transaction. "
+			title={m.common_weight_threshold()}
+			text={m.common_weight_threshold_description()}
 		/>
 		<FormSectionContent>
 			<Fieldset>
@@ -244,10 +244,7 @@
 
 {#snippet KeyAuthDisplay()}
 	<FormSection>
-		<FormSectionHeader
-			title="Key Pairs"
-			text="Enter the Public Key(s) which can sign on behalf of this permission. "
-		/>
+		<FormSectionHeader title={m.common_key_pairs()} text={m.common_key_pairs_description()} />
 
 		<FormSectionContent>
 			{#if manager.data.keys.length}
@@ -258,7 +255,9 @@
 				</ul>
 			{/if}
 
-			<Button class="float-right" variant="primary" onclick={manager.data.addKey}>Add Key</Button>
+			<Button class="float-right" variant="primary" onclick={manager.data.addKey}
+				>{m.common_add_key()}</Button
+			>
 		</FormSectionContent>
 	</FormSection>
 {/snippet}
@@ -319,8 +318,8 @@
 {#snippet AccountAuthDisplay()}
 	<FormSection>
 		<FormSectionHeader
-			title="Other Accounts"
-			text="Specify other accounts and permissions that can control this permission."
+			title={m.common_permission_other_accounts()}
+			text={m.common_permission_other_accounts_description()}
 		/>
 
 		<FormSectionContent>
@@ -333,7 +332,7 @@
 			{/if}
 
 			<Button class="float-right" variant="primary" onclick={manager.data.addAccount}>
-				Add Account
+				{m.common_add_account()}
 			</Button>
 		</FormSectionContent>
 	</FormSection>
@@ -357,7 +356,7 @@
 
 		<Fieldset>
 			<Label for={`wait-${index}-value`} class={index > 0 ? 'hidden' : ''}>
-				<span>Wait (Seconds)</span>
+				<span>{m.common_wait_seconds()}</span>
 			</Label>
 			<NumberInput
 				id={`wait-${index}-value`}
@@ -374,8 +373,8 @@
 {#snippet WaitAuthDisplay()}
 	<FormSection>
 		<FormSectionHeader
-			title="Waiting Period"
-			text="Specify the minimum amount of time a proposal must be active before the transaction can be completed."
+			title={m.common_waiting_period()}
+			text={m.common_waiting_period_description()}
 		/>
 
 		<FormSectionContent>
@@ -391,7 +390,7 @@
 				disabled={manager.data.waits.length > 0}
 				class="float-right"
 				variant="primary"
-				onclick={manager.data.addWait}>Add Wait</Button
+				onclick={manager.data.addWait}>{m.common_add_wait()}</Button
 			>
 		</FormSectionContent>
 	</FormSection>
@@ -437,8 +436,8 @@
 {#snippet LinkedAuthDisplay()}
 	<FormSection>
 		<FormSectionHeader
-			title="Contract Isolation"
-			text="Restrict this permission to specific contracts and actions. Leave the action blank to allow all actions on a contract."
+			title={m.common_contract_isolation()}
+			text={m.common_contract_isolation_description()}
 		/>
 
 		<FormSectionContent>
@@ -451,7 +450,7 @@
 			{/if}
 
 			<Button class="float-right" variant="primary" onclick={manager.data.addLinked}>
-				Add Contract
+				{m.common_add_contract()}
 			</Button>
 		</FormSectionContent>
 	</FormSection>
@@ -460,11 +459,8 @@
 {#snippet ConfirmingDetails()}
 	<article class="grid gap-8 @3xl:gap-12">
 		<FormSectionHeader
-			title="Confirm Details"
-			text="
-				Carefully review and confirm the details of this transaction. Incorrectly setting your
-				permissions could cause permanent loss of access to this permission or account!
-			"
+			title={m.common_confirm_details()}
+			text={m.common_confirm_permission_details()}
 		></FormSectionHeader>
 
 		<ul class="grid grid-cols-[auto_1fr] overflow-x-auto">
@@ -483,8 +479,8 @@
 		</ul>
 
 		<footer class="flex gap-4">
-			<Button onclick={back} variant="secondary">Back</Button>
-			<Button onclick={transact} variant="primary">Save Permission</Button>
+			<Button onclick={back} variant="secondary">{m.common_back()}</Button>
+			<Button onclick={transact} variant="primary">{m.common_save_permission()}</Button>
 		</footer>
 	</article>
 {/snippet}
@@ -492,8 +488,8 @@
 {#snippet BasicInformation()}
 	<FormSection>
 		<FormSectionHeader
-			title="Basic Information"
-			text="The name, parent permission, and type (Basic or Advanced). Name and parent fields cannot be modified after the permission is created."
+			title={m.common_basic_information()}
+			text={m.common_basic_permission_description()}
 		/>
 
 		<FormSectionContent>
@@ -516,7 +512,7 @@
 				href={`/${data.network}/account/${data.account.name}/permissions`}
 				variant="secondary"
 			>
-				Back to Permissions
+				{m.common_back_to_permissions()}
 			</Button>
 			<Button href={`/${data.network}/account/${data.account.name}`}>
 				{m.common_view_my_account()}
@@ -528,7 +524,7 @@
 			class="flex flex-col justify-center gap-8 rounded-xl bg-shark-900/20 px-4 py-12 sm:items-center"
 		>
 			<TransactError error={transactError} />
-			<Button variant="primary" onclick={back}>Back</Button>
+			<Button variant="primary" onclick={back}>{m.common_back()}</Button>
 		</div>
 	{:else if confirming}
 		{@render ConfirmingDetails()}
@@ -563,16 +559,18 @@
 					<Button
 						class="grow-0 border border-red-300/30  text-red-400 [@media(any-hover:hover)]:hover:text-red-300"
 						variant="tertiary"
-						onclick={deleteAuth}>Delete Permission</Button
+						onclick={deleteAuth}>{m.common_delete_permission()}</Button
 					>
 				{/if}
 				<div class="flex grow flex-col flex-wrap justify-end gap-6 @lg:flex-row">
-					<Button class="grow-0" variant="tertiary" href={i18n.route(data.backPath)}>Cancel</Button>
+					<Button class="grow-0" variant="tertiary" href={i18n.route(data.backPath)}
+						>{m.common_cancel()}</Button
+					>
 					<Button
 						class="grow-0"
 						variant="primary"
 						disabled={!manager.data.ready || context.wharf.transacting}
-						onclick={confirm}>Confirm</Button
+						onclick={confirm}>{m.common_confirm()}</Button
 					>
 				</div>
 			</footer>
