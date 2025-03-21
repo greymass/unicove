@@ -8,7 +8,22 @@ export async function GET({ fetch, locals: { network }, params }: RequestEvent) 
 	const scope = Name.from(params.proposer);
 	const name = Name.from(params.proposal);
 
-	const proposal = await network.contracts.msig.table('proposal', scope).get(name);
+	const proposalRows = await network.client.v1.chain.get_table_rows({
+		code: 'eosio.msig',
+		scope: scope,
+		table: 'proposal',
+		json: true,
+		lower_bound: name,
+		upper_bound: name
+	});
+	if (!proposalRows.rows.length) {
+		return json({ error: 'Proposal not found' }, { status: 404 });
+	}
+	const proposal = proposalRows.rows[0];
+
+	// TODO: This is broken?
+	// const proposal = await network.contracts.msig.table('proposal', scope).get(name);
+
 	const approvals = await network.contracts.msig.table('approvals2', scope).get(name);
 
 	const response = await fetch(`/${network}/api/producers/top30`);
