@@ -182,13 +182,13 @@
 
 <style>
 	#msig-vis {
-		background: linear-gradient(to right, var(--colors-green-400) 50%, var(--colors-mine-950) 50%);
+		background: linear-gradient(to right, var(--color-green-400) 50%, var(--color-mine-950) 50%);
 		background-size: 200% 100%;
 		background-position: var(--bg-pos);
 		transition: all var(--ease) var(--duration);
 	}
 	#msig-vis > div {
-		background: linear-gradient(to right, var(--colors-green-950) 50%, var(--colors-zinc-400) 50%);
+		background: linear-gradient(to right, var(--color-green-950) 50%, var(--color-zinc-400) 50%);
 		background-size: 200% 100%;
 		background-position: var(--bg-pos);
 		background-clip: text;
