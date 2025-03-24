@@ -15,8 +15,6 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
 
-	import NetworkSwitch from '$lib/components/networkswitch.svelte';
-
 	import X from 'lucide-svelte/icons/x';
 	import CircleX from 'lucide-svelte/icons/circle-x';
 	import LogOut from 'lucide-svelte/icons/log-out';
@@ -182,20 +180,28 @@
 				opacity: 1
 			}}
 		>
-			<header
-				data-advanced={context.settings.data.advancedMode}
-				class="flex flex-row-reverse justify-between gap-2 data-[advanced=false]:items-center md:gap-4"
-			>
+			<header class="flex items-center justify-start gap-2 py-3 pl-2 md:gap-3">
+				{#if logo}
+					<picture class="flex size-10 justify-center">
+						<img
+							src={String(logo)}
+							class="h-full object-contain"
+							alt={String(currentSession?.chain.name)}
+						/>
+					</picture>
+				{/if}
+
+				<span class="m-0 flex-1 text-xl leading-none font-bold text-ellipsis md:text-2xl">
+					{network.chain.name}
+				</span>
+
 				<button
 					use:melt={$close}
 					aria-label="Close"
-					data-advanced={context.settings.data.advancedMode}
-					class="text-muted grid size-12 appearance-none place-items-center rounded-lg focus:text-white focus:outline-hidden md:data-[advanced=false]:pt-0 md:data-[advanced=true]:pt-2.5"
+					class="text-muted grid size-12 appearance-none place-items-center justify-self-end rounded-lg focus:text-white focus:outline-hidden"
 				>
-					<X class="size-4 " />
+					<X class="size-4" />
 				</button>
-
-				<NetworkSwitch currentNetwork={network} class="" />
 			</header>
 
 			<section id="content" class="grid">
