@@ -42,10 +42,6 @@ function skipRedirect(pathname: string) {
 	return isAPIPath(pathname);
 }
 
-function isLanguage(value: string) {
-	return availableLanguageTags.find((l: string) => l.toLowerCase() === value.toLowerCase());
-}
-
 function isNetwork(value: string) {
 	return isNetworkShortName(value);
 }
