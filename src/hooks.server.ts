@@ -1,7 +1,7 @@
 import { sequence } from '@sveltejs/kit/hooks';
 import type { Handle, RequestEvent } from '@sveltejs/kit';
 
-import { PUBLIC_CHAIN_SHORT } from '$env/static/public';
+import { PUBLIC_CHAIN_SHORT, PUBLIC_ENVIRONMENT } from '$env/static/public';
 import { availableLanguageTags } from '$lib/paraglide/runtime.js';
 import { i18n } from '$lib/i18n';
 import { isNetworkShortName } from '$lib/wharf/chains';
@@ -84,36 +84,18 @@ export async function redirectHandle({ event, resolve }: HandleParams): Promise<
 
 	const [, pathFirst, pathSecond, ...pathMore] = pathname.split('/').map((p) => p.trim());
 
-	let lang = 'en';
+	let lang = pathFirst;
 	let network: string = PUBLIC_CHAIN_SHORT;
 	let alternativeNetwork: string | undefined;
 
-	if (isLanguage(pathFirst) && isNetwork(pathSecond)) {
-		// Proceed, correct URL
-		lang = pathFirst;
-		network = pathSecond;
-	} else if (isLanguage(pathFirst) && !isNetwork(pathSecond) && !pathSecond) {
-		// Only a language is specified, land on the language specific homepage
-		lang = pathFirst;
-	} else if (isLanguage(pathFirst) && isAlternativeNetwork(pathSecond)) {
-		// A language is specified, but the network is an alternative - need to redirect
-		lang = pathFirst;
+	if (PUBLIC_ENVIRONMENT === 'production' && isAlternativeNetwork(pathSecond)) {
 		alternativeNetwork = pathSecond;
-	} else if (isLanguage(pathFirst) && !isNetwork(pathSecond)) {
-		// The network isn't specified, but the language is - redirect to the default network
+	}
+
+	if (!isNetwork(pathSecond) && !isAlternativeNetwork(pathSecond)) {
 		lang = pathFirst;
+		network = PUBLIC_CHAIN_SHORT;
 		pathMore.unshift(pathSecond);
-	} else if (!isLanguage(pathFirst) && isNetwork(pathFirst)) {
-		// The language isn't specified, but the network is - redirect to the default language with the network provided
-		network = pathFirst;
-		pathMore.unshift(pathSecond);
-	} else if (!isLanguage(pathFirst) && isAlternativeNetwork(pathFirst)) {
-		// No language, but an alternative network is specified - redirect to the default language with the alternative network
-		alternativeNetwork = pathFirst;
-	} else {
-		// Neither language nor network is specified - redirect to the default language and network
-		pathMore.unshift(pathSecond);
-		pathMore.unshift(pathFirst);
 	}
 
 	// Ensure that the 'lang' property exists on the 'Locals' type
