@@ -19,13 +19,21 @@ export interface AccountValueStates extends ValueStates {
 }
 
 export interface AccountValueSystemTokenValues {
+	// Value of tokens delegated during genesis or the old eosio::delegatebw action
 	delegated: Asset;
+	// Available token balance for the account on the token contract
 	liquid: Asset;
+	// Value of RAM owned by the account
 	ram: Asset;
+	// Tokens being refunded from delegated balances, claimable with eosio::refund
 	refunding: Asset;
+	// Value of REX balance represented as staked system tokens
 	staked: Asset;
+	// Sum value of the system token values (minus RAM)
 	systemtoken: Asset;
+	// Sum of all values
 	total: Asset;
+	// System tokens idle in the eosio.rex contract (likely from eosio::sellrex)
 	unstaked: Asset;
 }
 
