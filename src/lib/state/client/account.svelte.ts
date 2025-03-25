@@ -224,7 +224,7 @@ export interface AccountValue {
 	unstaked: Asset;
 }
 
-export interface Balance {
+export interface SystemTokenBalance {
 	// Tokens delegated from genesis or the old eosio::delegatebw action
 	delegated: Asset;
 	// Available token balance for the account on eosio.token
@@ -239,7 +239,7 @@ export interface Balance {
 	total: Asset;
 }
 
-export function getBalance(network: NetworkState, sources: AccountDataSources): Balance {
+export function getBalance(network: NetworkState, sources: AccountDataSources): SystemTokenBalance {
 	if (!network) {
 		throw new Error('Network not initialized');
 	}
