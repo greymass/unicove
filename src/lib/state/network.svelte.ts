@@ -39,7 +39,7 @@ import { Contract as MSIGContract } from '$lib/wharf/contracts/msig';
 import { Contract as SystemContract } from '$lib/wharf/contracts/system';
 import { Contract as TimeContract } from '$lib/wharf/contracts/eosntime';
 import { Contract as TokenContract } from '$lib/wharf/contracts/token';
-import { Contract as UnicoveContract } from '$lib/wharf/contracts/unicove';
+import { Contract as UnicoveContract } from '$lib/wharf/contracts/unicove.api';
 import type { ObjectifiedActionData } from '$lib/types/transaction';
 import { PUBLIC_FEATURE_UNICOVE_CONTRACT_API } from '$env/static/public';
 
@@ -99,6 +99,7 @@ export class NetworkState {
 		});
 		this.connection.endpoint = (this.client.provider as FetchProvider).url;
 
+		console.log(PUBLIC_FEATURE_UNICOVE_CONTRACT_API);
 		this.contracts = {
 			delphihelper: new DelphiHelperContract({ client: this.client }),
 			delphioracle: new DelphiOracleContract({ client: this.client }),

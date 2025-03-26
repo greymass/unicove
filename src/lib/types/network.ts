@@ -14,7 +14,7 @@ import {
 
 import { Types as DelphioracleTypes } from '$lib/wharf/contracts/delphioracle';
 import { Types as SystemTypes } from '$lib/wharf/contracts/system';
-import { Types as UnicoveTypes } from '$lib/wharf/contracts/unicove';
+import { Types as UnicoveTypes } from '$lib/wharf/contracts/unicove.api';
 import { Types as REXTypes } from './rex';
 import type { ChainConfig } from '$lib/wharf/chains';
 

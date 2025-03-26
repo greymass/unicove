@@ -10,7 +10,7 @@ import type { RequestEvent, RequestHandler } from './$types';
 
 import { Types as SystemTypes, type TableTypes } from '$lib/wharf/contracts/system';
 import { Types as REXTypes } from '$lib/types/rex';
-import { Types as UnicoveTypes } from '$lib/wharf/contracts/unicove';
+import { Types as UnicoveTypes } from '$lib/wharf/contracts/unicove.api';
 import { nullContractHash } from '$lib/state/defaults/account';
 
 export const GET: RequestHandler = async ({ locals: { network }, params }: RequestEvent) => {

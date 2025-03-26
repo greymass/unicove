@@ -2,7 +2,7 @@ import { API, Int64, Name, Asset, Float64, Checksum256 } from '@wharfkit/antelop
 
 import { Types as MsigTypes } from '$lib/wharf/contracts/msig';
 import { Types as SystemTypes } from '$lib/wharf/contracts/system';
-import { Types as UnicoveTypes } from '$lib/wharf/contracts/unicove';
+import { Types as UnicoveTypes } from '$lib/wharf/contracts/unicove.api';
 import { Types as REXTypes } from '$lib/types/rex';
 import type { LightAPIBalanceRow } from '$lib/types/lightapi';
 import type { SerializedNetworkState } from '$lib/types/network';

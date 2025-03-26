@@ -5,7 +5,7 @@ import type { RAMState, REXState, PowerUpState, SampleUsage } from '@wharfkit/re
 import { getCacheHeaders } from '$lib/utils';
 import { Types as DelphioracleTypes } from '$lib/wharf/contracts/delphioracle.js';
 import { Types as SystemTypes } from '$lib/wharf/contracts/system';
-import { Types as UnicoveTypes } from '$lib/wharf/contracts/unicove';
+import { Types as UnicoveTypes } from '$lib/wharf/contracts/unicove.api';
 import type { NetworkState } from '$lib/state/network.svelte';
 import { NetworkDataSources } from '$lib/types/network';
 import type { RequestEvent } from './$types';

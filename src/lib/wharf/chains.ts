@@ -7,7 +7,7 @@ import { Contract as MSIGContract } from '$lib/wharf/contracts/msig';
 import { Contract as SystemContract } from '$lib/wharf/contracts/system';
 import { Contract as TimeContract } from '$lib/wharf/contracts/eosntime';
 import { Contract as TokenContract } from '$lib/wharf/contracts/token';
-import { Contract as UnicoveContract } from '$lib/wharf/contracts/unicove';
+import { Contract as UnicoveContract } from '$lib/wharf/contracts/unicove.api';
 
 import * as env from '$env/static/public';
 

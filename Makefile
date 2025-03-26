@@ -62,11 +62,11 @@ else
 	cp ./configs/contracts/delphioracle.ts $(CONTRACTS)/delphioracle.ts
 endif
 
-$(CONTRACTS)/unicove.ts:
-ifeq ($(PUBLIC_FEATURE_UNICOVE_CONTRACT_API),true)
-	bunx @wharfkit/cli generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/unicove.ts unicove.gm
+$(CONTRACTS)/unicove.api.ts:
+ifeq ($(PUBLIC_FEATURE_UNICOVE_CONTRACT_API),"")
+	cp ./configs/contracts/unicove.api.ts $(CONTRACTS)/unicove.api.ts
 else
-	cp ./configs/contracts/unicove.ts $(CONTRACTS)/unicove.ts
+	bunx @wharfkit/cli generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/unicove.api.ts $(PUBLIC_FEATURE_UNICOVE_CONTRACT_API)
 endif
 
 $(CONTRACTS)/eosntime.ts:
@@ -76,7 +76,7 @@ else
 	cp ./configs/contracts/eosntime.ts $(CONTRACTS)/eosntime.ts
 endif
 
-codegen: $(CONTRACTS)/system.ts $(CONTRACTS)/token.ts $(CONTRACTS)/msig.ts $(CONTRACTS)/delphihelper.ts $(CONTRACTS)/delphioracle.ts $(CONTRACTS)/unicove.ts $(CONTRACTS)/eosntime.ts
+codegen: $(CONTRACTS)/system.ts $(CONTRACTS)/token.ts $(CONTRACTS)/msig.ts $(CONTRACTS)/delphihelper.ts $(CONTRACTS)/delphioracle.ts $(CONTRACTS)/unicove.api.ts $(CONTRACTS)/eosntime.ts
 	mkdir -p $(CONTRACTS)
 
 .PHONY: clean
