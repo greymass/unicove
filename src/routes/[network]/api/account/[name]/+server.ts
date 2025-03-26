@@ -18,7 +18,7 @@ export const GET: RequestHandler = async ({ locals: { network }, params }: Reque
 
 	try {
 		let response: AccountDataSources;
-		if (network.supports('unicovecontracts')) {
+		if (network.supports('unicovecontractapi')) {
 			try {
 				response = await getAccount2(network, params.name);
 			} catch (e) {

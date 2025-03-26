@@ -68,7 +68,7 @@ export const chainConfig: ChainConfig = {
 		stakeresource: isTrue(env.PUBLIC_FEATURE_STAKERESOURCE),
 		staking: isTrue(env.PUBLIC_FEATURE_STAKING),
 		timeseries: isTrue(env.PUBLIC_FEATURE_TIMESERIES),
-		unicovecontracts: isTrue(env.PUBLIC_FEATURE_UNICOVECONTRACTS)
+		unicovecontractapi: !!env.PUBLIC_FEATURE_UNICOVE_CONTRACT_API
 	},
 	metamask,
 	coinbase
@@ -143,7 +143,7 @@ export type FeatureType =
 	| 'stakeresource'
 	| 'staking'
 	| 'timeseries'
-	| 'unicovecontracts';
+	| 'unicovecontractapi';
 
 export function getChainConfigByName(name: string): ChainConfig {
 	const chain = chains.find((c) => c.name === name);

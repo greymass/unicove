@@ -41,6 +41,7 @@ import { Contract as TimeContract } from '$lib/wharf/contracts/eosntime';
 import { Contract as TokenContract } from '$lib/wharf/contracts/token';
 import { Contract as UnicoveContract } from '$lib/wharf/contracts/unicove';
 import type { ObjectifiedActionData } from '$lib/types/transaction';
+import { PUBLIC_FEATURE_UNICOVE_CONTRACT_API } from '$env/static/public';
 
 export class NetworkState {
 	// Readonly state
@@ -105,7 +106,10 @@ export class NetworkState {
 			msig: new MSIGContract({ client: this.client }),
 			system: new SystemContract({ client: this.client }),
 			token: new TokenContract({ client: this.client }),
-			unicove: new UnicoveContract({ client: this.client })
+			unicove: new UnicoveContract({
+				account: PUBLIC_FEATURE_UNICOVE_CONTRACT_API,
+				client: this.client
+			})
 		};
 	}
 
@@ -233,10 +237,6 @@ export class NetworkState {
 			powerup.net.frac_by_kb(this.sources.sample, net)
 		];
 	};
-
-	get foo() {
-		return this.sources?.ram;
-	}
 
 	getResources(): SystemResources {
 		const defaultValue = Asset.fromUnits(0, this.token.symbol);

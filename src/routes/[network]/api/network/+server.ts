@@ -40,7 +40,7 @@ async function getContractResponse(network: NetworkState): Promise<NetworkDataSo
 export async function GET({ locals: { network } }: RequestEvent) {
 	let response;
 	try {
-		if (network.supports('unicovecontracts')) {
+		if (network.supports('unicovecontractapi')) {
 			response = await getContractResponse(network);
 		} else {
 			response = await getNetworkNative(network);
@@ -198,7 +198,7 @@ async function getNetworkContract(network: NetworkState): Promise<NetworkDataSou
 	let oracle: DelphioracleTypes.datapoints | undefined;
 	let sample: SampleUsage | undefined;
 
-	if (!network.supports('unicovecontracts')) {
+	if (!network.supports('unicovecontractapi')) {
 		throw new Error('Unicove contract not available');
 	}
 
