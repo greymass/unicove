@@ -63,7 +63,7 @@ else
 endif
 
 $(CONTRACTS)/unicove.api.ts:
-ifeq ($(PUBLIC_FEATURE_UNICOVE_CONTRACT_API),"")
+ifeq ($(PUBLIC_FEATURE_UNICOVE_CONTRACT_API),)
 	cp ./configs/contracts/unicove.api.ts $(CONTRACTS)/unicove.api.ts
 else
 	bunx @wharfkit/cli generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/unicove.api.ts $(PUBLIC_FEATURE_UNICOVE_CONTRACT_API)
