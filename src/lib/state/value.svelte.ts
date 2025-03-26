@@ -6,7 +6,7 @@ import type { SettingsState } from './settings.svelte';
 import { Currencies, ramKb } from '$lib/types/currencies';
 import { Asset, UInt64 } from '@wharfkit/antelope';
 import { calculateValue } from '$lib/utils';
-import { TokenPair, type TokenDefinition } from '$lib/types/token';
+import { TokenDefinition, TokenPair } from '$lib/types/token';
 
 export interface ValueStates {
 	network: NetworkState;
@@ -21,6 +21,8 @@ export interface AccountValueStates extends ValueStates {
 export interface AccountValueSystemTokenValues {
 	// Value of tokens delegated during genesis or the old eosio::delegatebw action
 	delegated: Asset;
+	// Value of any legacy tokens that have not yet been converted to system tokens
+	legacy: Asset;
 	// Available token balance for the account on the token contract
 	liquid: Asset;
 	// Value of RAM owned by the account
@@ -33,6 +35,8 @@ export interface AccountValueSystemTokenValues {
 	systemtoken: Asset;
 	// Sum of all values
 	total: Asset;
+	// Value of all non-system tokens owned by the account
+	tokens: Asset;
 	// System tokens idle in the eosio.rex contract (likely from eosio::sellrex)
 	unstaked: Asset;
 }
@@ -89,6 +93,21 @@ export class NetworkValueState {
 		return pair;
 	});
 
+	readonly legacytoken = $derived.by(() => {
+		const base = TokenDefinition.from(this.states.network.config.legacytoken);
+		const quote = this.currency;
+		const pair = this.states.market.getPair(base, quote);
+		if (!pair) {
+			return TokenPair.from({
+				base,
+				quote,
+				price: Asset.fromUnits(0, quote.symbol),
+				updated: new Date()
+			});
+		}
+		return pair;
+	});
+
 	readonly systemtoken = $derived.by(() => {
 		const quote = this.currency;
 		const pair = this.states.market.getSystemTokenPair(quote);
@@ -114,6 +133,7 @@ export class NetworkValueState {
 	toJSON() {
 		return {
 			currency: this.currency,
+			legacytoken: this.legacytoken,
 			systemtoken: this.systemtoken
 		};
 	}
@@ -129,16 +149,19 @@ export function getAccountValue(
 		: Asset.fromUnits(0, currency.symbol);
 
 	const delegated = Asset.fromUnits(0, currency.symbol);
+	const legacy = Asset.fromUnits(0, currency.symbol);
 	const liquid = Asset.fromUnits(0, currency.symbol);
 	const ram = Asset.fromUnits(0, currency.symbol);
 	const refunding = Asset.fromUnits(0, currency.symbol);
 	const staked = Asset.fromUnits(0, currency.symbol);
 	const unstaked = Asset.fromUnits(0, currency.symbol);
 	const systemtoken = Asset.fromUnits(0, currency.symbol);
+	const tokens = Asset.fromUnits(0, currency.symbol);
 	const total = Asset.fromUnits(0, currency.symbol);
 
 	if (states.account.balance && systemTokenPrice.units.gt(UInt64.from(0))) {
 		delegated.units.add(calculateValue(states.account.balance.delegated, systemTokenPrice).units);
+		legacy.units.add(calculateValue(states.account.balance.legacy, systemTokenPrice).units);
 		liquid.units.add(calculateValue(states.account.balance.liquid, systemTokenPrice).units);
 		staked.units.add(calculateValue(states.account.balance.staked, systemTokenPrice).units);
 		refunding.units.add(calculateValue(states.account.balance.refunding, systemTokenPrice).units);
@@ -156,12 +179,14 @@ export function getAccountValue(
 
 	return {
 		delegated,
+		legacy,
 		liquid,
 		ram,
 		refunding,
 		staked,
 		unstaked,
 		systemtoken,
+		tokens,
 		total
 	};
 }

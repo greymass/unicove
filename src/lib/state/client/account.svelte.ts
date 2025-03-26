@@ -104,6 +104,7 @@ export class AccountState {
 			get_account: data.get_account,
 			contract_hash: Checksum256.from(data.contract_hash),
 			balance: data.balance,
+			balances: data.balances,
 			giftedram: data.giftedram,
 			light_api: data.light_api,
 			delegated: data.delegated,
@@ -125,6 +126,10 @@ export class AccountState {
 			};
 		}
 		this.loaded = true;
+	}
+
+	getSources() {
+		return this.sources;
 	}
 
 	toJSON() {
@@ -214,29 +219,41 @@ export function getResources(
 }
 
 export interface AccountValue {
+	// Value of tokens delegated during genesis or the old eosio::delegatebw action
 	delegated: Asset;
+	// Available token balance for the account on the token contract
 	liquid: Asset;
+	// Value of RAM owned by the account
 	ram: Asset;
+	// Tokens being refunded from delegated balances, claimable with eosio::refund
 	refunding: Asset;
+	// Value of REX balance represented as staked system tokens
 	staked: Asset;
+	// Sum value of the system token values (minus RAM)
 	systemtoken: Asset;
+	// Sum of all values
 	total: Asset;
+	// Value of all non-system tokens owned by the account
+	tokens: Asset;
+	// System tokens idle in the eosio.rex contract (likely from eosio::sellrex)
 	unstaked: Asset;
 }
 
 export interface SystemTokenBalance {
-	// Tokens delegated from genesis or the old eosio::delegatebw action
+	// Tokens delegated during genesis or the old eosio::delegatebw action
 	delegated: Asset;
-	// Available token balance for the account on eosio.token
+	// Available token balance for the account on the token contract
 	liquid: Asset;
+	// Legacy token balance
+	legacy: Asset;
 	// Tokens being refunded from delegated balances, claimable with eosio::refund
 	refunding: Asset;
 	// REX balance represented as staked system tokens
 	staked: Asset;
-	// System tokens idle in the eosio.rex contract (likely from eosio::sellrex)
-	unstaked: Asset;
 	// Total balance of all owned system tokens
 	total: Asset;
+	// System tokens idle in the eosio.rex contract (likely from eosio::sellrex)
+	unstaked: Asset;
 }
 
 export function getBalance(network: NetworkState, sources: AccountDataSources): SystemTokenBalance {
@@ -253,6 +270,7 @@ export function getBalance(network: NetworkState, sources: AccountDataSources): 
 	const staked = Asset.fromUnits(0, network.config.systemtoken.symbol);
 	const unstaked = Asset.fromUnits(0, network.config.systemtoken.symbol);
 	const total = Asset.fromUnits(0, network.config.systemtoken.symbol);
+	let legacy = Asset.fromUnits(0, network.config.systemtoken.symbol);
 
 	// Add the core balance if it exists on the account
 	if (sources.balance) {
@@ -269,6 +287,19 @@ export function getBalance(network: NetworkState, sources: AccountDataSources): 
 		);
 		delegated.units.add(delegatedTokens.units);
 		total.units.add(delegatedTokens.units);
+	}
+
+	// Add any legacy tokens
+	if (network.config.legacytoken) {
+		const legacyDefinition = TokenDefinition.from(network.config.legacytoken);
+		const legacyBalance = sources.balances.find((b) =>
+			TokenBalance.from(b).token.id.equals(legacyDefinition)
+		);
+		if (legacyBalance) {
+			const legacyAsset = Asset.from(legacyBalance.balance);
+			legacy = legacyAsset;
+			total.units.add(legacyAsset.units);
+		}
 	}
 
 	// Add the currently refunding balance to the total balance
@@ -300,6 +331,7 @@ export function getBalance(network: NetworkState, sources: AccountDataSources): 
 
 	return {
 		delegated,
+		legacy,
 		liquid,
 		refunding,
 		staked,
@@ -316,7 +348,7 @@ export function getBalances(
 	liquid?: Asset
 ): TokenBalance[] {
 	if (sources.light_api) {
-		const balances: TokenBalance[] = [];
+		const balances: TokenBalance[] = sources.balances.map((b) => TokenBalance.from(b));
 
 		//If the value of system token is 0,
 		//for example, the chain does not support lightapi.

@@ -168,6 +168,7 @@
 	"common_submit": "Submit",
 	"common_summary": "Summary",
 	"common_supply": "Supply",
+	"common_swap_to_token": "Swap to {token}",
 	"common_switch_account": "Switch Account",
 	"common_timeframe_daily": "Daily",
 	"common_timeframe_monthly": "Monthly",

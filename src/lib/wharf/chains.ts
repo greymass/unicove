@@ -11,6 +11,8 @@ import { Contract as UnicoveContract } from '$lib/wharf/contracts/unicove.api';
 
 import * as env from '$env/static/public';
 
+import type { TokenDefinitionType } from '$lib/types/token';
+
 const coinbase =
 	env.PUBLIC_FEATURE_DIRECTFUNDING === 'true'
 		? {
@@ -25,6 +27,14 @@ const metamask =
 				name: env.PUBLIC_FEATURE_METAMASK_PRODUCT_NAME,
 				snaporigin: env.PUBLIC_FEATURE_METAMASK_SNAP_ORIGIN,
 				serviceurl: env.PUBLIC_FEATURE_METAMASK_SERVICE_URL
+			}
+		: undefined;
+
+const legacytoken =
+	env.PUBLIC_LEGACY_TOKEN_CONTRACT && env.PUBLIC_LEGACY_TOKEN_SYMBOL
+		? {
+				contract: Name.from(env.PUBLIC_LEGACY_TOKEN_CONTRACT),
+				symbol: Asset.Symbol.from(env.PUBLIC_LEGACY_TOKEN_SYMBOL)
 			}
 		: undefined;
 
@@ -46,6 +56,7 @@ export const chainConfig: ChainConfig = {
 		symbol: env.PUBLIC_SYSTEM_TOKEN_SYMBOL
 	},
 	systemtokenalt,
+	legacytoken,
 	lockedsupply,
 	tokens: [],
 	endpoints: {
@@ -109,22 +120,18 @@ export interface ChainMetaMaskConfig {
 	serviceurl: string;
 }
 
-export interface ChainToken {
-	contract: NameType;
-	symbol: Asset.SymbolType;
-}
-
 export interface ChainConfig {
 	id: Checksum256Type;
 	name: string;
 	features: Record<FeatureType, boolean>;
 	endpoints: ChainEndpoints;
+	legacytoken?: TokenDefinitionType;
 	lockedsupply?: NameType[]; // Accounts where tokens exist but are not in circulation
 	coinbase?: ChainCoinbaseConfig;
 	metamask?: ChainMetaMaskConfig;
-	systemtoken: ChainToken;
+	systemtoken: TokenDefinitionType;
 	systemtokenalt: Asset.Symbol[];
-	tokens: ChainToken[];
+	tokens: TokenDefinitionType[];
 }
 
 export type FeatureType =

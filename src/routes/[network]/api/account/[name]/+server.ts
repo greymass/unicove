@@ -12,6 +12,7 @@ import { Types as SystemTypes, type TableTypes } from '$lib/wharf/contracts/syst
 import { Types as REXTypes } from '$lib/types/rex';
 import { Types as UnicoveTypes } from '$lib/wharf/contracts/unicove.api';
 import { nullContractHash } from '$lib/state/defaults/account';
+import { TokenBalance } from '$lib/types/token';
 
 export const GET: RequestHandler = async ({ locals: { network }, params }: RequestEvent) => {
 	const headers = getCacheHeaders(5);
@@ -121,6 +122,7 @@ async function getAccount(network: NetworkState, account: NameType): Promise<Acc
 		get_account,
 		contract_hash,
 		balance: get_account.core_liquid_balance || defaultBalance,
+		balances: [],
 		light_api: balances,
 		delegated,
 		giftedram,
@@ -132,23 +134,49 @@ async function getAccount(network: NetworkState, account: NameType): Promise<Acc
 }
 
 async function getAccount2(network: NetworkState, account: NameType): Promise<AccountDataSources> {
+	const tokens = [];
+	if (network.config.legacytoken?.contract && network.config.legacytoken?.symbol) {
+		tokens.push({
+			contract: network.config.legacytoken.contract,
+			symbol: network.config.legacytoken.symbol
+		});
+	}
+
 	const [get_account, getaccount] = await Promise.all([
 		network.client.v1.chain.get_account(account),
-		network.contracts.unicove.readonly('account', { account })
+		network.contracts.unicove.readonly('account', { account, tokens })
 	]);
 
-	let balances: LightAPIBalanceRow[] = [];
+	const balances: TokenBalance[] = [];
+
+	let lightapi: LightAPIBalanceRow[] = [];
+
+	if (getaccount.balances) {
+		for (const token of tokens) {
+			const balance = getaccount.balances.find((b) => b.symbol.equals(token.symbol));
+			if (balance) {
+				balances.push(
+					TokenBalance.from({
+						token: {
+							id: token
+						},
+						balance
+					})
+				);
+			}
+		}
+	}
 
 	if (network.supports('lightapi')) {
-		balances = await loadBalances(network, account, network.fetch);
+		lightapi = await loadBalances(network, account, network.fetch);
 	}
 
 	// If no response from the light API, add a default balance of zero
-	if (!balances.length && network.chain.systemToken) {
+	if (!lightapi.length && network.chain.systemToken) {
 		const symbol = Asset.Symbol.from(network.config.systemtoken.symbol);
-		balances.push({
+		lightapi.push({
 			contract: String(network.chain.systemToken.contract),
-			amount: '0',
+			amount: Asset.fromUnits(0, symbol).quantity,
 			decimals: String(symbol.precision),
 			currency: String(symbol.code)
 		});
@@ -158,7 +186,8 @@ async function getAccount2(network: NetworkState, account: NameType): Promise<Ac
 		get_account,
 		contract_hash: getaccount.contracthash,
 		balance: getaccount.balance,
-		light_api: balances,
+		balances,
+		light_api: lightapi,
 		delegated: getaccount.delegations,
 		giftedram: getaccount.giftedram,
 		proposals: getaccount.proposals,

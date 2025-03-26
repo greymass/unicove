@@ -95,11 +95,11 @@ export class NetworkState {
 		this.abis = new ABICache(this.client);
 		this.resourceClient = new ResourceClient({
 			api: this.client,
-			sampleAccount: 'eosio.reserv'
+			sampleAccount: 'eosio.reserv',
+			symbol: String(this.config.systemtoken.symbol)
 		});
 		this.connection.endpoint = (this.client.provider as FetchProvider).url;
 
-		console.log(PUBLIC_FEATURE_UNICOVE_CONTRACT_API);
 		this.contracts = {
 			delphihelper: new DelphiHelperContract({ client: this.client }),
 			delphioracle: new DelphiOracleContract({ client: this.client }),

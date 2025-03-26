@@ -1,4 +1,18 @@
-import { Asset, Checksum256, Name, Struct, TimePointSec } from '@wharfkit/antelope';
+import {
+	Asset,
+	Checksum256,
+	Name,
+	Struct,
+	TimePointSec,
+	type Checksum256Type,
+	type NameType
+} from '@wharfkit/antelope';
+
+export interface TokenDefinitionType {
+	symbol: Asset.SymbolType;
+	chain?: Checksum256Type;
+	contract?: NameType;
+}
 
 @Struct.type('token_definition')
 export class TokenDefinition extends Struct {

@@ -33,6 +33,7 @@
 	);
 
 	const tokenAvailable = $derived(data.account.balance?.liquid);
+	const tokenLegacy = $derived(data.account.balance?.legacy);
 	const tokenRefunding = $derived(data.account.balance?.refunding);
 	const tokenStaked = $derived(data.account.balance?.staked);
 	const tokenUnstaked = $derived(data.account.balance?.unstaked);
@@ -176,6 +177,48 @@
 				</Breakdown>
 			</Stack>
 		</Card>
+
+		{#if data.network.config.legacytoken}
+			{@const legacySymbol = Asset.Symbol.from(data.network.config.legacytoken.symbol)}
+			<Card id="legacy-token" title={legacySymbol.name} class="break-after-avoid">
+				<Stack>
+					<div
+						class="border-mine-900 col-span-full grid min-h-12 grid-cols-subgrid items-center gap-x-4"
+					>
+						<div
+							class="col-start-1 col-end-3 row-start-1 flex flex-col py-2 @xs:flex-row @xs:justify-between"
+						>
+							<Stack class="gap-2">
+								<h4 class="text-muted text-base leading-none">{m.common_value()}</h4>
+								<p class="text-xl leading-none font-semibold text-white">
+									<AssetText variant="full" value={currentAccountValue.systemtoken.legacy} />
+								</p>
+								{#if currentAccountValue.pair}
+									<Chip>
+										<TradingPair value={market.network.legacytoken} />
+										<!-- TODO: Percent change -->
+									</Chip>
+								{/if}
+							</Stack>
+						</div>
+					</div>
+
+					<Breakdown {isCurrentUser}>
+						<BreakdownRow
+							key={m.common_available()}
+							value={tokenLegacy}
+							action={{
+								text: m.common_swap_to_token({
+									token: data.network.chain.systemToken?.symbol.name || ''
+								}),
+								href: `/${data.network}/swap`,
+								visible: isCurrentUser
+							}}
+						/>
+					</Breakdown>
+				</Stack>
+			</Card>
+		{/if}
 
 		<Card id="ram" title="RAM" class="">
 			<Stack>

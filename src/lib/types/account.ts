@@ -6,6 +6,7 @@ import { Types as UnicoveTypes } from '$lib/wharf/contracts/unicove.api';
 import { Types as REXTypes } from '$lib/types/rex';
 import type { LightAPIBalanceRow } from '$lib/types/lightapi';
 import type { SerializedNetworkState } from '$lib/types/network';
+import type { TokenBalance } from './token';
 
 export interface VoterInfo {
 	isProxy: boolean;
@@ -25,6 +26,8 @@ export interface AccountDataSources {
 	light_api: LightAPIBalanceRow[];
 	// Table rows from eosio.token::accounts
 	balance: Asset;
+	// List of all loaded token balances
+	balances: TokenBalance[];
 	// Table rows from eosio::delband
 	delegated: SystemTypes.delegated_bandwidth[];
 	// Table row from eosio::giftedram
