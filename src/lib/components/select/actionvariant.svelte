@@ -3,6 +3,8 @@
 	import type { ActionDisplayVariants } from '$lib/types';
 	import Button from '$lib/components/button/button.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import Cluster from '../layout/cluster.svelte';
+	import Grid from '../layout/grid.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -14,7 +16,7 @@
 </script>
 
 {#if context.settings.data.debugMode}
-	<div class="flex gap-2">
+	<Grid>
 		<Button
 			variant={current !== 'summary' ? 'secondary' : 'primary'}
 			onclick={() => set('summary')}
@@ -39,5 +41,5 @@
 		<Button variant={current !== 'json' ? 'secondary' : 'primary'} onclick={() => set('json')}>
 			JSON
 		</Button>
-	</div>
+	</Grid>
 {/if}

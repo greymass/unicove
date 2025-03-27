@@ -17,8 +17,8 @@
 
 <TransactionHeader transaction={data.transaction} />
 
-<div class="p-2">
-	<h2 class="h2 text-2xl">Resulting Actions ({data.transaction.filtered.length})</h2>
+<div class="space-y-2">
+	<h2 class="h3">Resulting Actions ({data.transaction.filtered.length})</h2>
 	<p>The actions and inline actions performed as a result of the transaction.</p>
 </div>
 

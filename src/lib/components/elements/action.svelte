@@ -4,7 +4,6 @@
 		Checksum256,
 		Name,
 		PermissionLevel,
-		type ABISerializable,
 		type Checksum256Type
 	} from '@wharfkit/antelope';
 	import Code from '../code.svelte';
@@ -17,6 +16,7 @@
 	import { getContext, type Component } from 'svelte';
 	import type { ActionSummaryProps, ObjectifiedActionData } from '$lib/types/transaction';
 	import SquareTerminal from 'lucide-svelte/icons/square-terminal';
+	import Card from '../layout/box/card.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -79,36 +79,26 @@
 	</div>
 {/snippet}
 
-{#snippet CodeBox(data: Action | ABISerializable)}
-	<Code>
-		<div class="bg-shark-950 overflow-auto rounded-sm p-4">
-			{JSON.stringify(data, null, 4)}
-		</div>
-	</Code>
-{/snippet}
-
 {#snippet Decoded()}
 	{#await context.network.decodeAction(action)}
-		{@render CodeBox('Loading...')}
+		<Code json={'Loading...'} />
 	{:then result}
-		{@render CodeBox(result)}
+		<Code json={result} />
 	{:catch error}
 		{error.message}
-		{@render CodeBox(action)}
+		<Code json={action} />
 	{/await}
 {/snippet}
 
 {#snippet Pretty(data: ObjectifiedActionData | undefined)}
 	<Code>
-		<div class="bg-shark-950 overflow-auto rounded-sm p-4">
-			{#if data}
-				{#each Object.keys(data) as key}
-					{@render KeyValue(key, data[key])}
-				{/each}
-			{:else}
-				<span class="text-muted">No data</span>
-			{/if}
-		</div>
+		{#if data}
+			{#each Object.keys(data) as key}
+				{@render KeyValue(key, data[key])}
+			{/each}
+		{:else}
+			<span class="text-muted">No data</span>
+		{/if}
 	</Code>
 {/snippet}
 
@@ -129,80 +119,78 @@
 {/snippet}
 
 {#snippet Header()}
-	<div class="flex">
-		<div>
-			<picture class="bg-mine-900 mr-4 grid size-14 place-items-center rounded-full">
-				<SquareTerminal />
-			</picture>
-		</div>
-		<div class="font-mono">
-			<div>
-				<Contract name={action.account} class="text-muted">
-					{action.account}
-				</Contract>
-			</div>
-			<Contract name={action.account} action={action.name} class="text-2xl text-white">
+	<div class="flex flex-wrap items-center gap-x-4 gap-y-2">
+		<picture class="bg-mine-900/50 grid size-14 place-items-center rounded-full">
+			<SquareTerminal />
+		</picture>
+
+		<div class="flex flex-col gap-1 font-mono">
+			<Contract name={action.account} class="text-muted leading-none">
+				{action.account}
+			</Contract>
+
+			<Contract name={action.account} action={action.name} class="text-2xl leading-none text-white">
 				{action.name}
 			</Contract>
 		</div>
-		<div class="text-muted flex-1 text-right align-baseline text-sm">
-			{#if datetime}
-				<DateTime {datetime} />
+
+		<div class="flex flex-1 flex-col gap-1 text-right text-nowrap">
+			{#if id}
+				<Transaction {id} class="block font-mono text-2xl leading-none" />
 			{/if}
-			<div class="text-2xl text-white">
-				{#if id}
-					<div class="font-mono">
-						<Transaction {id} class="text-muted" />
-					</div>
-				{/if}
-			</div>
+
+			{#if datetime}
+				<span class="text-muted text-sm leading-none tabular-nums">
+					<DateTime {datetime} />
+				</span>
+			{/if}
 		</div>
 	</div>
 {/snippet}
 
 {#snippet Footer()}
-	<div class="flex px-4">
-		<div class="text-sm">
+	<div class="flex flex-wrap justify-between gap-2 px-1">
+		<div>
 			{#if action.authorization.length}
-				<span class="text-muted">Signed by:</span>
+				<span class="text-muted">Signed by</span>
 				{#each action.authorization as auth}
-					<Account name={Name.from(auth.actor)} class="text-white">
+					<Account name={Name.from(auth.actor)} class="mr-1 text-white underline">
 						{PermissionLevel.from(auth)}
 					</Account>
 				{/each}
 			{/if}
 		</div>
 
-		<div class="flex-1 text-right">
+		<div class="text-right">
 			{#if advancedMode && notified}
 				{#each notified as account}
-					<Account name={Name.from(account)} class="text-white" />
+					<Account name={Name.from(account)} class="ml-1 text-white underline first:ml-0" />
 				{/each}
-				<span class="text-muted"> notified </span>
+				<span class="text-muted">notified</span>
 			{/if}
 		</div>
 	</div>
 {/snippet}
 
-<div class="bg-mine-950 rounded-sm p-4">
-	<div class="space-y-4">
-		{@render Header()}
-		{#if variant === 'summary'}
-			{@render Summary()}
-		{:else if variant === 'ricardian'}
-			{@render Ricardian()}
-		{:else if variant === 'pretty'}
-			{@render Pretty(objectified)}
-		{:else if variant === 'decoded'}
-			{@render Decoded()}
-		{:else if variant === 'json'}
-			{@render CodeBox(action)}
-		{/if}
-		{#if action.account.equals('eosio') && action.name.equals('setcode') && objectified && objectified.code}
-			{@render Pretty({ hash: String(Checksum256.hash(objectified.code)) })}
-		{/if}
-		{#if variant !== 'summary'}
-			{@render Footer()}
-		{/if}
-	</div>
-</div>
+<Card class="gap-6">
+	{@render Header()}
+	{#if variant === 'summary'}
+		{@render Summary()}
+	{:else if variant === 'ricardian'}
+		{@render Ricardian()}
+	{:else if variant === 'pretty'}
+		{@render Pretty(objectified)}
+	{:else if variant === 'decoded'}
+		{@render Decoded()}
+	{:else if variant === 'json'}
+		<Code json={action} />
+	{/if}
+
+	{#if action.account.equals('eosio') && action.name.equals('setcode') && objectified && objectified.code}
+		{@render Pretty({ hash: String(Checksum256.hash(objectified.code)) })}
+	{/if}
+
+	{#if variant !== 'summary'}
+		{@render Footer()}
+	{/if}
+</Card>

@@ -4,6 +4,7 @@
 	import Block from '../elements/block.svelte';
 	import Contract from '../elements/contract.svelte';
 	import DateTime from '../elements/datetime.svelte';
+	import { DD, DL, DLRow } from '$lib/components/descriptionlist';
 
 	interface TransactionHeaderProps {
 		transaction: TransactionResponse;
@@ -13,36 +14,28 @@
 </script>
 
 <Card>
-	<table class="table-styles">
-		<tbody>
-			<tr>
-				<td>Finality Status</td>
-				<td>{transaction.irreversible ? 'Irreversible' : 'Reversible'}</td>
-			</tr>
-			<tr>
-				<td>Date</td>
-				<td><DateTime datetime={transaction.block_time.toDate()} /></td>
-			</tr>
-			<tr>
-				<td>Transaction ID</td>
-				<td>{transaction.id}</td>
-			</tr>
-			<tr>
-				<td>Included in block</td>
-				<td>
-					<Block number={transaction.block_num} />
-				</td>
-			</tr>
-			<tr>
-				<td>Contracts used</td>
-				<td>
-					<div class="flex gap-2">
-						{#each transaction.contracts as contract}
-							<Contract name={contract} />
-						{/each}
-					</div>
-				</td>
-			</tr>
-		</tbody>
-	</table>
+	<DL>
+		<DLRow
+			title="Finality Status"
+			description={transaction.irreversible ? 'Irreversible' : 'Reversible'}
+		></DLRow>
+		<DLRow title="Date">
+			<DD>
+				<DateTime datetime={transaction.block_time.toDate()} />
+			</DD>
+		</DLRow>
+		<DLRow title="Transaction ID" description={transaction.id.toString()}></DLRow>
+		<DLRow title="Included in Block">
+			<DD>
+				<Block number={transaction.block_num} />
+			</DD>
+		</DLRow>
+		<DLRow title="Contracts Used">
+			<DD class="layout-cluster justify-end">
+				{#each transaction.contracts as contract}
+					<Contract name={contract} />
+				{/each}
+			</DD>
+		</DLRow>
+	</DL>
 </Card>

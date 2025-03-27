@@ -10,7 +10,7 @@
 	const tag = props.inline ? 'code' : 'pre';
 
 	const codeStyles = 'bg-shark-900/40 text-xs text-white font-mono rounded-md px-2 py-1';
-	const preStyles = 'bg-shark-900/20 text-sm text-white font-mono rounded-lg px-2 py-2';
+	const preStyles = 'bg-shark-950 p-6 text-sm text-white font-mono rounded-xl overflow-x-auto';
 </script>
 
 {#if props.inline}
@@ -23,12 +23,10 @@
 	</svelte:element>
 {:else}
 	<svelte:element this={tag} class={preStyles}>
-		<div class="bg-shark-950 overflow-x-auto rounded-sm p-4">
-			{#if props.json}
-				{JSON.stringify(props.json, undefined, 2)}
-			{:else if props.children}
-				{@render props.children()}
-			{/if}
-		</div>
+		{#if props.json}
+			{JSON.stringify(props.json, undefined, 2)}
+		{:else if props.children}
+			{@render props.children()}
+		{/if}
 	</svelte:element>
 {/if}
