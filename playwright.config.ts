@@ -68,7 +68,7 @@ export default defineConfig({
 		command: 'make dev',
 		url: 'http://localhost:5173',
 		reuseExistingServer: true,
-		timeout: 25 * 1000,
+		timeout: 30_000,
 		stdout: 'pipe'
 	},
 	use: {
