@@ -8,6 +8,7 @@ import { WalletPluginMultiSig } from '$lib/wharf/plugins/multisig';
 import { WalletPluginPrivateKey } from '@wharfkit/wallet-plugin-privatekey';
 import { WalletPluginScatter } from '@wharfkit/wallet-plugin-scatter';
 import { WalletPluginTokenPocket } from '@wharfkit/wallet-plugin-tokenpocket';
+import { WalletPluginWebAuthenticator } from '@wharfkit/wallet-plugin-web-authenticator';
 import { WalletPluginWombat } from '@wharfkit/wallet-plugin-wombat';
 
 import { TransactPluginResourceProvider } from '@wharfkit/transact-plugin-resource-provider';
@@ -20,7 +21,10 @@ export const baseWalletPlugins: WalletPlugin[] = [
 	new WalletPluginMetaMask(),
 	new WalletPluginScatter(),
 	new WalletPluginTokenPocket(),
-	new WalletPluginWombat()
+	new WalletPluginWombat(),
+	new WalletPluginWebAuthenticator({
+		webAuthenticatorUrl: 'https://adding-metakeep-signing-meth.web-authenticator-a83.pages.dev'
+	})
 ];
 
 // If a local key is provided, add the private key wallet
