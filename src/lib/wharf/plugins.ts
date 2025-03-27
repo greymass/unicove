@@ -23,7 +23,7 @@ export const baseWalletPlugins: WalletPlugin[] = [
 	new WalletPluginTokenPocket(),
 	new WalletPluginWombat(),
 	new WalletPluginWebAuthenticator({
-		webAuthenticatorUrl: 'https://moving-signing-logic-to-plug.web-authenticator-a83.pages.dev'
+		webAuthenticatorUrl: 'https://adding-metakeep-signing-meth.web-authenticator-a83.pages.dev'
 	})
 ];
 
