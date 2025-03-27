@@ -324,14 +324,12 @@ test('Unicove pages visibility', async ({ page }) => {
 
 	// Visit each page and check for the expected textToCheck
 	for (const pageInfo of pages) {
-		// Add the comment with the description
 		console.log(pageInfo.description);
 
 		try {
-			// Use domcontentloaded instead of networkidle
 			await page.goto(pageInfo.url, { waitUntil: 'domcontentloaded', timeout: 30000 });
 
-			// Wait for text to be visible instead of network idle
+			// Wait for text to be visible
 			await expect(page.getByText(pageInfo.textToCheck)).toBeVisible({ timeout: 10000 });
 		} catch (error) {
 			console.error(`Failed to test page "${pageInfo.url}" with text "${pageInfo.textToCheck}"`);
