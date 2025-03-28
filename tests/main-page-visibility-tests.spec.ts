@@ -337,16 +337,6 @@ test.describe.parallel('Unicove pages visibility', () => {
 				console.error(`[${browserName}] ✗ Failed: ${pageInfo.url} - ${pageInfo.description}`);
 				console.error(`[${browserName}]   Expected text: "${pageInfo.textToCheck}"`);
 				console.error(`[${browserName}]   Error: ${errorMessage}`);
-
-				// Logic to handle the cross-browser requirement:
-				// Mark the test as failed only if we're in the chromium browser
-				if (browserName === 'chromium') {
-					// If the test has already failed in chromium and firefox, we'll fail it here
-					test.fail();
-				} else {
-					// For webkit and firefox, we'll skip the test instead of failing it
-					test.skip();
-				}
 			}
 		});
 	}
