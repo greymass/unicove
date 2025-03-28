@@ -65,7 +65,7 @@ export default defineConfig({
 
 	/* Run your local dev server before starting the tests */
 	webServer: {
-		command: 'bun run dev 2>&1 | grep -v "^\\[WebServer\\]"',
+		command: 'bun run dev --silent',
 		url: 'http://localhost:5173',
 		reuseExistingServer: true,
 		timeout: 30_000,
