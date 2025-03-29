@@ -21,17 +21,8 @@ jobs:
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
 
-      - name: Install dependencies with Bun
-        run: bun install
-
-      - name: Install missing dependency @wharfkit/protocol-scatter
-        run: bun add @wharfkit/protocol-scatter
-
-      - name: Build Paraglide
-        run: bun run build-paraglide
-
-      - name: Sync SvelteKit
-        run: bunx svelte-kit sync
+      - name: Make Unicove preview build
+        run: make build
 
       - name: Install Playwright
         run: npm install -D @playwright/test --legacy-peer-deps

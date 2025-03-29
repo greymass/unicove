@@ -65,15 +65,15 @@ export default defineConfig({
 
 	/* Run your local dev server before starting the tests */
 	webServer: {
-		command: 'bun run dev',
-		url: 'http://localhost:5173',
+		command: 'bun run preview',
+		url: 'http://localhost:4173',
 		reuseExistingServer: true,
 		timeout: 30_000,
 		stdout: 'pipe'
 	},
 	use: {
 		/* Base URL to use in actions like `await page.goto('/')`. */
-		baseURL: 'http://localhost:5173',
+		baseURL: 'http://localhost:4173',
 
 		/* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
 		trace: 'on-first-retry'
