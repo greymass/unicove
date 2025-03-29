@@ -330,9 +330,7 @@ test.describe.parallel('Unicove pages visibility', () => {
 				await expect(page.getByText(pageInfo.textToCheck)).toBeVisible({ timeout: 10000 });
 				console.log(`[${browserName}] ✓ Passed: ${pageInfo.description}`);
 			} catch (error: unknown) {
-				const errorMessage = error instanceof Error
-					? error.message
-					: String(error);
+				const errorMessage = error instanceof Error ? error.message : String(error);
 
 				console.error(`[${browserName}] ✗ Failed: ${pageInfo.url} - ${pageInfo.description}`);
 				console.error(`[${browserName}]   Expected text: "${pageInfo.textToCheck}"`);
