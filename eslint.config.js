@@ -35,7 +35,8 @@ export default [
 			'configs/contracts',
 			'src/lib/wharf/contracts/',
 			'src/lib/paraglide',
-			'src/paraglide'
+			'src/paraglide',
+			'tests/**/*.spec.ts'
 		]
 	}
 ];
