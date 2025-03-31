@@ -346,7 +346,7 @@ export function getBalances(
 			children: [
 				{
 					id,
-					balance: Asset.fromUnits(resources.ram.balance, id.symbol),
+					balance: Asset.fromUnits(resources.ram.used, id.symbol),
 					name: 'used'
 				},
 				{
