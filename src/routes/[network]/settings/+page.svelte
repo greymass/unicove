@@ -234,7 +234,7 @@
 				{#if debugMode}
 					<div class="flex items-center justify-between">
 						<Stack class="gap-2">
-							<Label for="debug-mode">Mock token price</Label>
+							<Label for="debug-mode">{m.settings_enable_mockprice()}</Label>
 							<p class="caption text-sm">
 								{m.settings_enable_mockprice_desc({
 									mockValue: '$1.2345 USD'
