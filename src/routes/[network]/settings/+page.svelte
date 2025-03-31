@@ -236,8 +236,9 @@
 						<Stack class="gap-2">
 							<Label for="debug-mode">Mock token price</Label>
 							<p class="caption text-sm">
-								Force the system token price to equal $1 USD for testing in environments without
-								pricing information.
+								{m.settings_enable_mockprice_desc({
+									mockValue: '$1.2345 USD'
+								})}
 							</p>
 						</Stack>
 						<Switch id="mock-price" bind:checked={mockPrice} />
