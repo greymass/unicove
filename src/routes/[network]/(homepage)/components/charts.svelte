@@ -24,10 +24,10 @@
 			<TextBlock
 				{...{
 					title: m.homepage_native_token_title({
-						token: String(network.chain.systemToken?.symbol.name)
+						token: String(network.token.symbol.name)
 					}),
 					text: m.homepage_native_token_description({
-						token: String(network.chain.systemToken?.symbol.name),
+						token: String(network.token.symbol.name),
 						network: network.chain.name
 					}),
 					button: funding
@@ -36,7 +36,9 @@
 								href: `${network}/fund`
 							}
 						: {
-								text: m.common_send_tokens(),
+								text: m.common_send_tokens({
+									token: String(network.token.symbol.name)
+								}),
 								href: `${network}/send`
 							}
 				}}

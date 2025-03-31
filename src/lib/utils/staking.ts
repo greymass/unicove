@@ -16,8 +16,8 @@ export const defaultQuantity = Asset.fromUnits(0, defaultSymbol);
 export function getStakableBalance(network?: NetworkState, account?: AccountState): Asset {
 	const balance = Int64.from(0);
 	if (account && account.balance) {
-		if (account.balance && account.balance.liquid) {
-			balance.add(account.balance.liquid.units);
+		if (account.balance && account.balance.balance) {
+			balance.add(account.balance.balance.units);
 		}
 	}
 	return Asset.fromUnits(balance, network ? network.chain.systemToken!.symbol : defaultSymbol);
@@ -26,8 +26,8 @@ export function getStakableBalance(network?: NetworkState, account?: AccountStat
 export function getStakedBalance(network?: NetworkState, account?: AccountState): Asset {
 	const staked = Int64.from(0);
 	if (account && account.loaded) {
-		if (account.balance?.staked && network) {
-			staked.add(account.balance?.staked.units);
+		if (account.balance?.child('staked') && network) {
+			staked.add(account.balance?.child('staked').balance.units);
 		}
 	}
 	return Asset.fromUnits(staked, network ? network.chain.systemToken!.symbol : defaultSymbol);
@@ -79,8 +79,8 @@ export function getSellableREX(
 
 export function getWithdrawableBalance(network?: NetworkState, account?: AccountState): Asset {
 	const withdrawable = Int64.from(0);
-	if (account && account.loaded && account.balance?.unstaked) {
-		withdrawable.add(account.balance?.unstaked.units);
+	if (account && account.loaded && account.balance?.child('unstaked')) {
+		withdrawable.add(account.balance?.child('unstaked').balance.units);
 	}
 	return Asset.fromUnits(withdrawable, network ? network.chain.systemToken!.symbol : defaultSymbol);
 }

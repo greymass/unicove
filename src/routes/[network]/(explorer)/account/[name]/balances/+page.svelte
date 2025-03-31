@@ -48,14 +48,14 @@
 					<td>
 						<div class="flex items-center gap-3">
 							<div class="flex h-6 w-6 items-center justify-center rounded-full bg-black">
-								<!-- {#if tokenBalance.token.meta.logo}
-									<img class="h-5 w-5" src={tokenBalance.token.meta.logo} alt="LOGO" />
+								<!-- {#if tokenBalance.id.meta.logo}
+									<img class="h-5 w-5" src={tokenBalance.id.meta.logo} alt="LOGO" />
 								{/if} -->
 							</div>
 							<a
-								href={`/${context.network}/token/${tokenBalance.token.contract}/${tokenBalance.token.symbol.name}`}
+								href={`/${context.network}/token/${tokenBalance.id.contract}/${tokenBalance.id.symbol.name}`}
 							>
-								{tokenBalance.token.symbol.name}
+								{tokenBalance.id.symbol.name}
 							</a>
 						</div>
 					</td>
@@ -63,7 +63,7 @@
 						<AssetText value={tokenBalance.balance} />
 					</td>
 					<td class="text-right">
-						<ValueText token={tokenBalance.token.id} balance={tokenBalance.balance} />
+						<ValueText token={tokenBalance.id} balance={tokenBalance.balance} />
 					</td>
 					{#if isCurrentUser}
 						{@render tableAction(tokenBalance.balance)}

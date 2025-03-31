@@ -69,7 +69,7 @@
 				}
 			}
 
-			if (account.balance) rentState.balance = account.balance.liquid;
+			if (account.balance) rentState.balance = account.balance.balance;
 		} else {
 			rentState.reset();
 		}

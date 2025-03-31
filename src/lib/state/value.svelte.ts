@@ -3,7 +3,7 @@ import type { MarketState } from './market.svelte';
 import type { NetworkState } from './network.svelte';
 import type { SettingsState } from './settings.svelte';
 
-import { Currencies, ramKb } from '$lib/types/currencies';
+import { Currencies } from '$lib/types/currencies';
 import { Asset, UInt64 } from '@wharfkit/antelope';
 import { calculateValue } from '$lib/utils';
 import { TokenDefinition, TokenPair } from '$lib/types/token';
@@ -46,6 +46,7 @@ export class AccountValueState {
 
 	readonly currency = $derived(Currencies[this.states.settings.data.displayCurrency]);
 	readonly pair = $derived(this.states.market.getSystemTokenPair(this.currency));
+	readonly hasPrice = $derived(this.price.units.gt(UInt64.from(0)));
 	readonly systemtoken: AccountValueSystemTokenValues = $derived(
 		getAccountValue(this.states, this.currency)
 	);
@@ -83,6 +84,7 @@ export class NetworkValueState {
 		const quote = this.currency;
 		const pair = this.states.market.getRAMTokenPair(quote);
 		if (!pair) {
+			const ramKb = this.states.network.getRamTokenDefinition();
 			return TokenPair.from({
 				base: ramKb,
 				quote: this.states.network.token.id,
@@ -93,10 +95,11 @@ export class NetworkValueState {
 		return pair;
 	});
 
+	// Currently hardcoded to use the systemtoken price for the legacytoken
 	readonly legacytoken = $derived.by(() => {
-		const base = TokenDefinition.from(this.states.network.config.legacytoken);
+		const base = TokenDefinition.from(this.states.network.legacytoken);
 		const quote = this.currency;
-		const pair = this.states.market.getPair(base, quote);
+		const pair = this.states.market.getSystemTokenPair(quote);
 		if (!pair) {
 			return TokenPair.from({
 				base,
@@ -105,7 +108,10 @@ export class NetworkValueState {
 				updated: new Date()
 			});
 		}
-		return pair;
+		return TokenPair.from({
+			...pair,
+			base
+		});
 	});
 
 	readonly systemtoken = $derived.by(() => {
@@ -160,14 +166,30 @@ export function getAccountValue(
 	const total = Asset.fromUnits(0, currency.symbol);
 
 	if (states.account.balance && systemTokenPrice.units.gt(UInt64.from(0))) {
-		delegated.units.add(calculateValue(states.account.balance.delegated, systemTokenPrice).units);
-		legacy.units.add(calculateValue(states.account.balance.legacy, systemTokenPrice).units);
-		liquid.units.add(calculateValue(states.account.balance.liquid, systemTokenPrice).units);
-		staked.units.add(calculateValue(states.account.balance.staked, systemTokenPrice).units);
-		refunding.units.add(calculateValue(states.account.balance.refunding, systemTokenPrice).units);
-		unstaked.units.add(calculateValue(states.account.balance.unstaked, systemTokenPrice).units);
-		systemtoken.units.add(calculateValue(states.account.balance.total, systemTokenPrice).units);
-		total.units.add(calculateValue(states.account.balance.total, systemTokenPrice).units);
+		delegated.units.add(
+			calculateValue(states.account.balance.child('delegated').balance, systemTokenPrice).units
+		);
+		legacy.units.add(
+			calculateValue(states.account.balance.child('legacy').balance, systemTokenPrice).units
+		);
+		liquid.units.add(
+			calculateValue(states.account.balance.child('liquid').balance, systemTokenPrice).units
+		);
+		staked.units.add(
+			calculateValue(states.account.balance.child('staked').balance, systemTokenPrice).units
+		);
+		refunding.units.add(
+			calculateValue(states.account.balance.child('refunding').balance, systemTokenPrice).units
+		);
+		unstaked.units.add(
+			calculateValue(states.account.balance.child('unstaked').balance, systemTokenPrice).units
+		);
+		systemtoken.units.add(
+			calculateValue(states.account.balance.child('total').balance, systemTokenPrice).units
+		);
+		total.units.add(
+			calculateValue(states.account.balance.child('total').balance, systemTokenPrice).units
+		);
 		if (states.network.resources.ram.price.rammarket) {
 			const ramAsset = Asset.fromUnits(states.account.resources.ram.owned, '3,KB');
 			const ramValue = calculateValue(ramAsset, states.network.resources.ram.price.rammarket);

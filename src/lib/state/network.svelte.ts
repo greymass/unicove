@@ -151,6 +151,27 @@ export class NetworkState {
 		}
 	}
 
+	get legacytoken(): Token | undefined {
+		if (!this.config.legacytoken) {
+			return undefined;
+		}
+		return Token.from({
+			id: {
+				chain: this.chain.id,
+				symbol: this.config.legacytoken.symbol,
+				contract: this.config.legacytoken.contract
+			}
+		});
+	}
+
+	getRamTokenDefinition(): TokenDefinition {
+		return TokenDefinition.from({
+			symbol: Asset.Symbol.from('3,KB'),
+			contract: 'eosio',
+			chain: this.chain.id
+		});
+	}
+
 	getSystemToken(): Token {
 		const id = TokenDefinition.from({
 			chain: this.chain.id,

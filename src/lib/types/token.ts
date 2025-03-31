@@ -69,6 +69,10 @@ export class Token extends Struct {
 		return this.id.contract;
 	}
 
+	get name(): string {
+		return this.id.symbol.name;
+	}
+
 	get symbol(): Asset.Symbol {
 		return this.id.symbol;
 	}
@@ -79,15 +83,63 @@ export class Token extends Struct {
 	// }
 }
 
-@Struct.type('token_balance')
-export class TokenBalance extends Struct {
-	@Struct.field(Token) declare token: Token;
+export type TokenBalanceStates =
+	// Tokens delegated during genesis or the old eosio::delegatebw action
+	| 'delegated'
+	// Available token balance for the account on the token contract
+	| 'liquid'
+	// Legacy token balance
+	| 'legacy'
+	// Tokens being refunded from delegated balances, claimable with eosio::refund
+	| 'refunding'
+	// REX balance represented as staked system tokens
+	| 'staked'
+	// Total balance of all owned system tokens
+	| 'total'
+	// System tokens idle in the eosio.rex contract (likely from eosio::sellrex)
+	| 'unstaked';
+
+// @Struct.type('token_balance_state')
+// export class TokenBalanceState extends Struct {
+// 	@Struct.field(Name) declare state: Name;
+// 	@Struct.field(TokenBalance) declare balance: TokenBalance;
+// }
+
+@Struct.type('token_balance_base')
+export class TokenBalanceBase extends Struct {
+	@Struct.field(TokenDefinition) declare id: TokenDefinition;
 	@Struct.field(Asset) declare balance: Asset;
+}
+
+@Struct.type('token_balance_child')
+export class TokenBalanceChild extends TokenBalanceBase {
+	@Struct.field(Name) declare name: Name;
+}
+
+@Struct.type('token_balance')
+export class TokenBalance extends TokenBalanceBase {
+	@Struct.field(TokenBalanceChild, { array: true, optional: true })
+	declare children?: TokenBalanceChild[];
+
+	child(name: NameType): TokenBalanceChild {
+		if (this.children) {
+			const balance = this.children.find((c) => c.name.equals(name));
+			if (balance) {
+				return balance;
+			}
+		}
+		return new TokenBalanceChild({
+			name: Name.from(name),
+			id: this.id,
+			balance: Asset.fromUnits(0, this.id.symbol)
+		});
+	}
 }
 
 @Struct.type('token_sources')
 export class TokenDataSources extends Struct {
 	@Struct.field(TimePointSec) declare ts: TimePointSec;
+	@Struct.field(Asset, { optional: true }) declare mockPrice?: Asset;
 	@Struct.field(TokenPair, { array: true }) declare pairs: TokenPair[];
 }
 

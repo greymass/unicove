@@ -85,7 +85,6 @@ export const defaultAccountDataSources: AccountDataSources = {
 	contract_hash: nullContractHash,
 	balance: defaultAsset,
 	balances: [],
-	light_api: [],
 	delegated: [],
 	giftedram: defaultGiftedRam,
 	proposals: [],

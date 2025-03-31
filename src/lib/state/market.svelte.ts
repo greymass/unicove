@@ -2,7 +2,7 @@ import { Asset, Serializer, TimePointSec } from '@wharfkit/antelope';
 
 import { TokenDataSources, TokenPair } from '$lib/types/token';
 import { TokenDefinition } from '$lib/types/token';
-import { Currencies, ramKb } from '$lib/types/currencies';
+import { Currencies } from '$lib/types/currencies';
 
 import type { NetworkState } from './network.svelte';
 import type { SettingsState } from './settings.svelte';
@@ -33,7 +33,12 @@ export class MarketState {
 	public async refresh() {
 		const basePair = Currencies[this.settings.data.displayCurrency];
 		const encoded = Serializer.encode({ object: basePair });
-		const response = await this.network.fetch(`/${this.network}/api/pairs/${encoded}`);
+		let url = `/${this.network}/api/pairs/${encoded}`;
+		if (this.settings.data.mockPrice) {
+			// Allow mock data for prices to be passed for testing
+			url += `?mock=${Asset.fromUnits(12345, basePair.symbol)}`;
+		}
+		const response = await this.network.fetch(url);
 		if (response.ok) {
 			const json = await response.json();
 			this.sources = TokenDataSources.from(json);
@@ -59,6 +64,7 @@ export class MarketState {
 	}
 
 	getRAMTokenPair(quote: TokenDefinition): TokenPair | undefined {
+		const ramKb = this.network.getRamTokenDefinition();
 		const pair = this.pairs.find((pair) => {
 			const matchBase = TokenDefinition.from(pair.base).equals(ramKb);
 			const matchQuote = TokenDefinition.from(pair.quote).equals(TokenDefinition.from(quote));

@@ -4,7 +4,7 @@
 	import type { ExtendedSelectOption } from '$lib/components/select/types';
 	import Label from '$lib/components/input/label.svelte';
 	import { Chains } from '@wharfkit/common';
-	import TokenSelect from '$lib/components/select/token.svelte';
+	import TokenSelect from '$lib/components/select/balance.svelte';
 	import type { SelectOption } from '@melt-ui/svelte';
 	import Button from '$lib/components/button/button.svelte';
 	import Code from '$lib/components/code.svelte';
@@ -48,23 +48,19 @@
 	const tokenOptions: TokenBalance[] = [
 		TokenBalance.from({
 			balance: '1.2345 EOS',
-			token: {
-				id: TokenDefinition.from({
-					chain: Chains.EOS.id,
-					contract: 'eosio.token',
-					symbol: '4,EOS'
-				})
-			}
+			id: TokenDefinition.from({
+				chain: Chains.EOS.id,
+				contract: 'eosio.token',
+				symbol: '4,EOS'
+			})
 		}),
 		TokenBalance.from({
 			balance: '9876 SCRAP',
-			token: {
-				id: TokenDefinition.from({
-					chain: Chains.EOS.id,
-					contract: 'eosio.token',
-					symbol: '4,EOS'
-				})
-			}
+			id: TokenDefinition.from({
+				chain: Chains.EOS.id,
+				contract: 'scrap',
+				symbol: '0,SCRAP'
+			})
 		})
 	];
 	let tokenSelected = $state(tokenOptions[0]);
@@ -128,7 +124,7 @@
 				options={tokenOptions}
 				bind:selected={tokenSelected}
 			/>
-			<Code>Value in parent: {JSON.stringify(tokenSelected.token, null, 2)}</Code>
+			<Code>Value in parent: {JSON.stringify(tokenSelected, null, 2)}</Code>
 		</Stack>
 	</Stack>
 </Stack>

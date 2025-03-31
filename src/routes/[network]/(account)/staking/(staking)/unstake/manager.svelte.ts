@@ -51,7 +51,7 @@ export class UnstakeManager {
 			const meta = (this.network.tokens || []).find((item) => item.id.equals(id));
 			if (meta) {
 				balance = TokenBalance.from({
-					token: { id },
+					id,
 					balance: this.staked
 				});
 			}
