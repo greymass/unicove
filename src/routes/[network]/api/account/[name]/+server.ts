@@ -196,32 +196,5 @@ async function getBalances(
 			}
 		}
 	}
-	// if (getaccount.balance) {
-	// 	if (
-	// 		network.config.legacytoken &&
-	// 		Asset.Symbol.from(network.config.legacytoken.symbol).equals(getaccount.balance.symbol)
-	// 	) {
-	// 		balances.push(
-	// 			TokenBalance.from({
-	// 				id: network.config.legacytoken,
-	// 				balance: getaccount.balance
-	// 			})
-	// 		);
-	// 	} else if (network.token.symbol.equals(getaccount.balance.symbol)) {
-	// 		balances.push(
-	// 			TokenBalance.from({
-	// 				id: network.token.id,
-	// 				balance: getaccount.balance
-	// 			})
-	// 		);
-	// 	}
-	// } else {
-	// 	balances.push(
-	// 		TokenBalance.from({
-	// 			id: network.chain.systemToken,
-	// 			balance: Asset.fromUnits(0, network.token.symbol)
-	// 		})
-	// 	);
-	// }
 	return balances;
 }

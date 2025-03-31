@@ -51,7 +51,6 @@ export interface TokenType {
 	id: TokenDefinition;
 	distribution?: TokenDistribution;
 	marketcap?: Asset;
-	// price: Asset;
 }
 
 @Struct.type('token')
@@ -59,7 +58,6 @@ export class Token extends Struct {
 	@Struct.field(TokenDefinition) declare id: TokenDefinition;
 	@Struct.field(TokenDistribution, { optional: true })
 	declare distribution?: TokenDistribution;
-	// @Struct.field(Asset) declare price: Asset;
 
 	get chain(): Checksum256 | undefined {
 		return this.id.chain;
@@ -98,12 +96,6 @@ export type TokenBalanceStates =
 	| 'total'
 	// System tokens idle in the eosio.rex contract (likely from eosio::sellrex)
 	| 'unstaked';
-
-// @Struct.type('token_balance_state')
-// export class TokenBalanceState extends Struct {
-// 	@Struct.field(Name) declare state: Name;
-// 	@Struct.field(TokenBalance) declare balance: TokenBalance;
-// }
 
 @Struct.type('token_balance_base')
 export class TokenBalanceBase extends Struct {
