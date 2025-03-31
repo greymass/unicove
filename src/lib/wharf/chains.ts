@@ -73,6 +73,7 @@ export const chainConfig: ChainConfig = {
 		metamask: isTrue(env.PUBLIC_FEATURE_METAMASK),
 		powerup: isTrue(env.PUBLIC_FEATURE_POWERUP),
 		rammarket: isTrue(env.PUBLIC_FEATURE_RAMMARKET),
+		ramtransfer: isTrue(env.PUBLIC_FEATURE_RAMTRANSFER),
 		rentrex: isTrue(env.PUBLIC_FEATURE_RENTREX),
 		rex: isTrue(env.PUBLIC_FEATURE_REX),
 		robo: isTrue(env.PUBLIC_FEATURE_ROBO),
@@ -144,6 +145,7 @@ export type FeatureType =
 	| 'metamask'
 	| 'powerup'
 	| 'rammarket'
+	| 'ramtransfer'
 	| 'rentrex'
 	| 'rex'
 	| 'robo'
