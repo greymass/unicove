@@ -120,6 +120,7 @@ export class TokenBalanceChild extends TokenBalanceBase {
 export class TokenBalance extends TokenBalanceBase {
 	@Struct.field(TokenBalanceChild, { array: true, optional: true })
 	declare children?: TokenBalanceChild[];
+	@Struct.field('bool', { optional: true }) declare locked?: boolean;
 
 	child(name: NameType): TokenBalanceChild {
 		if (this.children) {

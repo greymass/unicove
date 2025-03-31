@@ -88,11 +88,13 @@
 			<BreakdownRow
 				key={m.common_available()}
 				value={balance.balance}
-				action={{
-					text: m.common_send(),
-					href: `/${network}/send/${balance.id.contract}/${balance.id.symbol}`,
-					visible: isCurrentUser
-				}}
+				action={!balance.locked
+					? {
+							text: m.common_send(),
+							href: `/${network}/send/${balance.id.contract}/${balance.id.symbol}`,
+							visible: isCurrentUser
+						}
+					: undefined}
 			/>
 
 			{#if balance.id.equals(network.token.id)}

@@ -256,7 +256,7 @@
 
 	const tokenOptions: TokenBalance[] = $derived.by(() => {
 		if (context.account && context.account.balances) {
-			return context.account.balances;
+			return context.account.balances.filter((b) => !b.locked);
 		}
 		return [];
 	});

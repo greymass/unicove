@@ -66,7 +66,9 @@
 						<ValueText token={tokenBalance.id} balance={tokenBalance.balance} />
 					</td>
 					{#if isCurrentUser}
-						{@render tableAction(tokenBalance.balance)}
+						{#if !tokenBalance.locked}
+							{@render tableAction(tokenBalance.balance)}
+						{/if}
 					{/if}
 				</tr>
 			{/each}
