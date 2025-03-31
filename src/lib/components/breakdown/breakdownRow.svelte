@@ -31,7 +31,7 @@
 	>
 		<div class="text-muted">{key}</div>
 		<div class="text-white">
-			<AssetText class="text-nowrap" variant="full" {value} />
+			<AssetText class="text-nowrap tabular-nums" variant="full" {value} />
 		</div>
 	</div>
 
