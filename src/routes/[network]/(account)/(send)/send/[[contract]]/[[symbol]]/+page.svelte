@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Asset } from '@wharfkit/antelope';
 	import { Checksum256 } from '@wharfkit/antelope';
-	import { getContext, tick } from 'svelte';
+	import { getContext, onMount, tick, untrack } from 'svelte';
 	import { FiniteStateMachine } from 'runed';
 	import * as m from '$lib/paraglide/messages.js';
 
@@ -15,19 +15,18 @@
 	import Progress from '$lib/components/progress.svelte';
 	import SummarySend from '$lib/components/summary/eosio.token/transfer.svelte';
 	import TextInput from '$lib/components/input/text.svelte';
-	import TokenSelect from '$lib/components/select/token.svelte';
+	import TokenSelect from '$lib/components/select/balance.svelte';
 
-	import { defaultQuantity, SendState } from './state.svelte';
+	import { defaultBalance, SendState } from '../../state.svelte';
 
 	import { formatCurrency } from '$lib/i18n';
 	import { goto } from '$app/navigation';
 	import { preventDefault } from '$lib/utils';
-	import { NetworkState } from '$lib/state/network.svelte';
 	import { page } from '$app/state';
 	import { SingleCard, Stack } from '$lib/components/layout';
 	import TransactSummary from '$lib/components/transact/summary.svelte';
 	import TransactError from '$lib/components/transact/error.svelte';
-	import type { TokenBalance } from '$lib/types/token';
+	import { type TokenBalance } from '$lib/types/token';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
@@ -44,21 +43,31 @@
 	let id: Checksum256 | undefined = $state();
 	let error: string | undefined = $state();
 
+	// Show all fields, useful for development
+	let showAll = $state(false);
+
 	function transact() {
 		if (!context.wharf || !context.wharf.session) {
 			return;
 		}
 		error = undefined;
 		const balance = context.account?.balances.find((b) =>
-			b.token.id.symbol.equals(sendState.quantity.symbol)
+			b.id.symbol.equals(sendState.quantity.symbol)
 		);
 		if (balance) {
 			let action = data.network.contracts.token.action('transfer', sendState.toJSON());
+			// Override to allow RAM transfers
+			if (balance.id.equals(data.network.getRamTokenDefinition())) {
+				action = data.network.contracts.system.action('ramtransfer', {
+					...sendState.toJSON(),
+					bytes: sendState.quantity.units
+				});
+			}
 			if (
-				balance.token.id.contract &&
-				!balance.token.id.contract.equals(data.network.contracts.token.account)
+				balance.id.contract &&
+				!balance.id.contract.equals(data.network.contracts.token.account)
 			) {
-				action.account = balance.token.id.contract;
+				action.account = balance.id.contract;
 			}
 			context.wharf
 				.transact({ action })
@@ -82,21 +91,6 @@
 		}
 	}
 
-	// Effect to handle token swapping
-	$effect(() => {
-		// Only trigger when the states quantity and balance do not match tokens
-		if (!sendState.balance.token.symbol.equals(sendState.quantity.symbol)) {
-			// Reset the quantity to 0
-			const quantity = Asset.fromUnits(0, sendState.balance.token.symbol);
-			// Reset the values
-			quantityInput?.set(quantity);
-			sendState.quantity = quantity;
-			// Focus the quantity input
-			quantityRef?.focus();
-		}
-	});
-
-	// Effect to handle URL changes
 	$effect(() => {
 		const to = page.url.searchParams.get('to');
 		if (quantityRef && to && !String(sendState.to)) {
@@ -104,66 +98,41 @@
 			quantityRef?.focus();
 			tick().then(() => f.send('next'));
 		}
+	});
 
-		const quantity = page.url.searchParams.get('quantity');
-		if (
-			quantity &&
-			quantityRef &&
-			context.account &&
-			context.account.balances &&
-			context.account.balances.length &&
-			sendState.quantity.equals(defaultQuantity)
-		) {
-			const asset = Asset.from(quantity);
-			quantityInput?.set(asset);
-			const balance = context.account.balances.find((b) => b.token.id.symbol.equals(asset.symbol));
-			if (balance) {
-				tokenSelect?.set(balance);
-			}
-			memoRef?.focus();
-			tick().then(() => f.send('next'));
+	onMount(() => {
+		if (!sendState.quantity.symbol.equals(data.symbol)) {
+			quantityInput?.set(Asset.fromUnits(0, data.symbol));
 		}
 	});
 
 	// Effect to handle needed state changes when setting the account
 	$effect(() => {
 		if (context.account) {
-			const { name } = context.account;
-			// Change the from field on the transfer
-			if (name && sendState.from !== name) {
-				f.send('reset');
-			}
-
-			// Set the balance to the default if it is not set
-			if (
-				sendState.quantity.equals(defaultQuantity) &&
-				context.account.balances &&
-				context.account.balances.length
-			) {
-				const balance = getDefaultBalance(data.network, context.account.balances);
-				if (balance) {
-					sendState.balance = balance;
-					sendState.quantity = Asset.fromUnits(0, balance.token.symbol);
-					tokenSelect?.set(balance);
-					quantityInput?.set(Asset.fromUnits(0, balance.token.symbol));
+			const { balances, name } = context.account;
+			untrack(() => {
+				// Has account changed?
+				if (name && sendState.from !== name) {
+					// Change the from field on the transfer
+					sendState.from = name;
+					// Reset balance
+					sendState.setBalance(defaultBalance);
+					quantityInput?.set(sendState.quantity);
+					f.send('reset');
 				}
-			}
+				// Change the balance field on the transfer
+				const { token } = data;
+				if (sendState.balance.equals(defaultBalance) && context.account) {
+					const balance = balances.find((b) => b.id.equals(token.id));
+					if (balance) {
+						tokenSelect?.set(balance);
+						sendState.setBalance(balance);
+						quantityInput?.set(sendState.quantity);
+					}
+				}
+			});
 		}
 	});
-
-	function getDefaultBalance(network: NetworkState, balances: TokenBalance[]) {
-		const firstBalanceFound = balances[0];
-		const systemTokenBalance = balances.find((b) => b.token.id.equals(network.token.id));
-
-		const quantity = page.url.searchParams.get('quantity');
-		let selectedBalance: TokenBalance | undefined;
-		if (quantity) {
-			const asset = Asset.from(quantity);
-			selectedBalance = balances.find((b) => b.token.symbol.equals(asset.symbol));
-		}
-		const balance = selectedBalance || systemTokenBalance || firstBalanceFound;
-		return balance;
-	}
 
 	// The state which the submit form can exist in
 	type FormStates = 'to' | 'quantity' | 'memo' | 'complete' | 'error';
@@ -236,25 +205,26 @@
 	const next = () => f.send('next');
 	const previous = () => f.send('previous');
 
+	function resetBalance() {
+		if (context.account) {
+			const balance = context.account.balances.find((b) => b.id.equals(data.token.id));
+			if (balance) {
+				tokenSelect?.set(balance);
+				sendState.setBalance(balance);
+				quantityInput?.set(sendState.quantity);
+			}
+		}
+	}
+
 	async function resetState() {
 		// Reset the inputs
-		if (toInput) {
-			toInput.set('');
-		}
-		if (quantityInput) {
-			quantityInput.set(null);
-		}
-
-		// Reset the form state itself
-		sendState.reset();
+		toInput?.set('');
+		resetBalance();
+		tokenSelect?.set(sendState.balance);
+		sendState.memo = '';
 
 		// Reset associated transaction ID
 		id = undefined;
-
-		// Default back to the account as the sender
-		if (context.account && context.account.name) {
-			sendState.from = context.account.name;
-		}
 
 		// Focus the "to" input field
 		await tick();
@@ -285,8 +255,8 @@
 	};
 
 	const tokenOptions: TokenBalance[] = $derived.by(() => {
-		if (context.account && context.account.balances && context.account.balances.length) {
-			return context.account.balances.filter((b) => b.balance.value > 0);
+		if (context.account && context.account.balances) {
+			return context.account.balances;
 		}
 		return [];
 	});
@@ -311,7 +281,7 @@
 </script>
 
 {#snippet Recipient()}
-	<fieldset class="grid gap-2" class:hidden={f.current !== 'to'}>
+	<fieldset class="grid gap-2" class:hidden={!showAll && f.current !== 'to'}>
 		<Label for="to-input">{m.send_receiving_account()}</Label>
 		<NameInput
 			bind:this={toInput}
@@ -326,15 +296,23 @@
 {/snippet}
 
 {#snippet Quantity()}
-	<section class="grid gap-6" class:hidden={f.current !== 'quantity'}>
+	<section class="grid gap-6" class:hidden={!showAll && f.current !== 'quantity'}>
 		<fieldset class="grid gap-2">
 			<Label for="token-select">{m.send_tokens_to_send()}</Label>
-			{#if tokenOptions.length && sendState.balance}
+			{#if tokenOptions.length}
 				<TokenSelect
 					id="token-select"
-					options={tokenOptions}
 					bind:this={tokenSelect}
-					bind:selected={sendState.balance}
+					options={tokenOptions}
+					onSelectedChange={({ curr, next }) => {
+						if (next) {
+							const balance = tokenOptions[next.value];
+							sendState.setBalance(balance);
+							quantityInput?.set(sendState.quantity);
+							return next;
+						}
+						return curr;
+					}}
 				/>
 			{:else}
 				<p>{m.common_no_balances()}</p>
@@ -343,25 +321,22 @@
 
 		<fieldset class="grid gap-2">
 			<Label for="quantity-input">{m.send_amount_to_send()}</Label>
-			{#if sendState.balance}
-				<AssetInput
-					id="quantity-input"
-					bind:this={quantityInput}
-					bind:ref={quantityRef}
-					bind:value={sendState.quantity}
-					bind:valid={assetValid}
-					bind:validPrecision={assetValidPrecision}
-					bind:validMinimum={assetValidMinimum}
-					bind:validMaximum={assetValidMaximum}
-					min={sendState.min || 0}
-					max={sendState.max || 0}
-					{onkeydown}
-					placeholder={m.send_enter_amount({
-						token: sendState.balance?.token.symbol.code
-					})}
-					debug={context.settings.data.debugMode as boolean}
-				/>
-			{/if}
+			<AssetInput
+				id="quantity-input"
+				bind:this={quantityInput}
+				bind:ref={quantityRef}
+				bind:value={sendState.quantity}
+				bind:valid={assetValid}
+				bind:validPrecision={assetValidPrecision}
+				bind:validMinimum={assetValidMinimum}
+				bind:validMaximum={assetValidMaximum}
+				min={sendState.min || 0}
+				max={sendState.max || 0}
+				{onkeydown}
+				placeholder={m.send_enter_amount({
+					token: sendState.quantity.symbol.code
+				})}
+			/>
 
 			{#if context.account}
 				<button class="text-sky-500 hover:text-sky-400" disabled={!context.account} onclick={max}>
@@ -389,18 +364,20 @@
 {/snippet}
 
 {#snippet Memo()}
-	<SummarySend data={sendState.toJSON()} class={f.current !== 'memo' ? 'hidden' : undefined} />
+	<div class:hidden={!showAll && f.current !== 'memo'}>
+		<SummarySend data={sendState.toJSON()} />
 
-	<fieldset class="grid gap-2" class:hidden={f.current !== 'memo'}>
-		<Label for="memo-input">{m.common_memo()} ({m.common_optional()})</Label>
-		<TextInput
-			id="memo-input"
-			bind:ref={memoRef}
-			bind:value={sendState.memo}
-			{onkeydown}
-			placeholder={m.send_memo_placeholder()}
-		/>
-	</fieldset>
+		<fieldset class="grid gap-2">
+			<Label for="memo-input">{m.common_memo()} ({m.common_optional()})</Label>
+			<TextInput
+				id="memo-input"
+				bind:ref={memoRef}
+				bind:value={sendState.memo}
+				{onkeydown}
+				placeholder={m.send_memo_placeholder()}
+			/>
+		</fieldset>
+	</div>
 {/snippet}
 
 {#snippet Complete()}
@@ -460,9 +437,9 @@
 	<Code
 		>{JSON.stringify(
 			{
-				state: sendState,
-				price: sendState.price,
-				value: sendState.value,
+				state: sendState.toJSON(),
+				// price: sendState.price,
+				// value: sendState.value,
 				current: f.current,
 				balance: sendState.balance,
 				max: sendState.max,

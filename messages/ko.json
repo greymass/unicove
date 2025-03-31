@@ -153,7 +153,7 @@
 	"common_select_an_option": "옵션을 선택하세요",
 	"common_sell": "팔다",
 	"common_send": "보내다",
-	"common_send_tokens": "토큰 보내기",
+	"common_send_tokens": "Send {token} Tokens",
 	"common_settings": "설정",
 	"common_signer": "서명자",
 	"common_source_code": "소스 코드",

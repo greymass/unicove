@@ -1,18 +1,15 @@
-import { Token, TokenBalance, TokenDefinition } from '$lib/types/token';
+import { TokenBalance, TokenDefinition } from '$lib/types/token';
 import { calculateValue } from '$lib/utils';
 import { Asset, Name, Serializer } from '@wharfkit/antelope';
 
-const defaultSymbol = Asset.Symbol.from('0,UNKNOWN');
+export const defaultSymbol = Asset.Symbol.from('0,UNKNOWN');
 export const defaultQuantity = Asset.fromUnits(0, defaultSymbol);
-const defaultBalance = TokenBalance.from({
+export const defaultBalance = TokenBalance.from({
 	balance: defaultQuantity,
-	contract: '',
-	token: Token.from({
-		id: TokenDefinition.from({
-			chain: '0000000000000000000000000000000000000000000000000000000000000000',
-			contract: '',
-			symbol: defaultSymbol
-		})
+	id: TokenDefinition.from({
+		chain: '0000000000000000000000000000000000000000000000000000000000000000',
+		contract: '',
+		symbol: defaultSymbol
 	})
 });
 
@@ -33,12 +30,16 @@ export class SendState {
 	);
 	public max: number | undefined = $derived(this.balance ? this.balance.balance.value : undefined);
 
-	reset() {
-		this.from = Name.from('');
-		this.to = Name.from('');
-		this.quantity = defaultQuantity;
-		this.memo = '';
-		this.balance = defaultBalance;
+	constructor(initialBalance?: TokenBalance) {
+		if (initialBalance) {
+			this.balance = initialBalance;
+			this.quantity = Asset.fromUnits(0, initialBalance.balance.symbol);
+		}
+	}
+
+	setBalance(balance: TokenBalance) {
+		this.balance = balance;
+		this.quantity = Asset.fromUnits(0, balance.id.symbol);
 	}
 
 	toJSON() {
