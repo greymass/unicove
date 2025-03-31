@@ -342,6 +342,7 @@ export function getBalances(
 		TokenBalance.from({
 			id,
 			balance: Asset.fromUnits(resources.ram.available, id.symbol),
+			locked: !network.supports('ramtransfer'),
 			children: [
 				{
 					id,
