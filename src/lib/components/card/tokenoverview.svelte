@@ -71,7 +71,7 @@
 					</Stack>
 				</div>
 
-				{#if network.supports('directfunding') && isCurrentUser}
+				{#if network.supports('directfunding') && balance.id.equals(network.getSystemToken().id) && isCurrentUser}
 					<div class="col-span-2 col-start-2 row-start-1 text-right @xs:col-span-1 @xs:col-start-3">
 						<a
 							class="inline-block h-12 content-center text-sky-500 hover:text-sky-400"
