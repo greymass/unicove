@@ -47,7 +47,7 @@
 	<div
 		bind:this={node}
 		class={cn(
-			'bg-shark-950 relative overflow-x-auto overflow-y-hidden rounded-xl p-6 font-mono text-sm text-white',
+			'bg-shark-900/20 relative overflow-x-auto overflow-y-hidden rounded-xl p-6 font-mono text-sm text-white',
 			collapsible ? 'max-h-56' : 'max-h-full',
 			props.class
 		)}
@@ -61,9 +61,9 @@
 			</button>
 		{/if}
 		{#if props.json}
-			{JSON.stringify(props.json, undefined, indent)}
+			<pre><code>{JSON.stringify(props.json, undefined, indent)}</code></pre>
 		{:else if props.children}
-			{@render props.children()}
+			<pre><code>{@render props.children()}</code></pre>
 		{/if}
 	</div>
 {/if}
