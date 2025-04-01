@@ -64,7 +64,7 @@
 		errorMessage = undefined;
 		buyRamState.reset();
 		bytesInput?.reset();
-		assetInput?.reset();
+		assetInput?.set(null);
 	}
 
 	$effect(() => {
