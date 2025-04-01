@@ -1,12 +1,19 @@
 <script lang="ts">
-	import { Asset } from '@wharfkit/antelope';
+	import { Action, Asset } from '@wharfkit/antelope';
 	import { Checksum256 } from '@wharfkit/antelope';
+	import { PlaceholderAuth } from '@wharfkit/session';
 	import { getContext, onMount, tick, untrack } from 'svelte';
+	import { goto } from '$app/navigation';
+	import { page } from '$app/state';
 	import { FiniteStateMachine } from 'runed';
+
 	import * as m from '$lib/paraglide/messages.js';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import { type TokenBalance } from '$lib/types/token';
+	import { Types as RAMTypes } from '$lib/types/ram';
 
+	import { SingleCard, Stack } from '$lib/components/layout';
 	import AssetInput from '$lib/components/input/asset.svelte';
 	import Button from '$lib/components/button/button.svelte';
 	import Code from '$lib/components/code.svelte';
@@ -16,17 +23,13 @@
 	import SummarySend from '$lib/components/summary/eosio.token/transfer.svelte';
 	import TextInput from '$lib/components/input/text.svelte';
 	import TokenSelect from '$lib/components/select/balance.svelte';
-
-	import { defaultBalance, SendState } from '../../state.svelte';
+	import TransactError from '$lib/components/transact/error.svelte';
+	import TransactSummary from '$lib/components/transact/summary.svelte';
 
 	import { formatCurrency } from '$lib/i18n';
-	import { goto } from '$app/navigation';
 	import { preventDefault } from '$lib/utils';
-	import { page } from '$app/state';
-	import { SingleCard, Stack } from '$lib/components/layout';
-	import TransactSummary from '$lib/components/transact/summary.svelte';
-	import TransactError from '$lib/components/transact/error.svelte';
-	import { type TokenBalance } from '$lib/types/token';
+
+	import { defaultBalance, SendState } from '../../state.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
@@ -58,9 +61,14 @@
 			let action = data.network.contracts.token.action('transfer', sendState.toJSON());
 			// Override to allow RAM transfers
 			if (balance.id.equals(data.network.getRamTokenDefinition())) {
-				action = data.network.contracts.system.action('ramtransfer', {
-					...sendState.toJSON(),
-					bytes: sendState.quantity.units
+				action = Action.from({
+					account: 'eosio',
+					name: 'ramtransfer',
+					authorization: [PlaceholderAuth],
+					data: RAMTypes.ramtransfer.from({
+						...sendState.toJSON(),
+						bytes: sendState.quantity.units
+					})
 				});
 			}
 			if (
