@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { Card } from '$lib/components/layout';
 	import type { TransactionResponse } from '$lib/types/transaction';
 	import Block from '../elements/block.svelte';
 	import Contract from '../elements/contract.svelte';
