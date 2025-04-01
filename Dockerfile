@@ -3,10 +3,12 @@ WORKDIR /usr/src/app
 RUN npm install -g bun
 
 COPY package*.json bun.lock ./
+COPY Makefile ./
 RUN bun install --frozen-lockfile
 COPY . .
 
 ENV NODE_ENV production
-RUN bun run build-docker
+RUN apt -y install make ca-certificates
+RUN make build
 
 CMD [ "bun", "build/index.js" ]
