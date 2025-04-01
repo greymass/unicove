@@ -1,4 +1,4 @@
-import type { LayoutLoad } from '../../../$types';
+import type { LayoutLoad } from './$types';
 import * as m from '$lib/paraglide/messages';
 import { ogImageUrl } from '$lib/utils/opengraph';
 import { Token } from '$lib/types/token';
