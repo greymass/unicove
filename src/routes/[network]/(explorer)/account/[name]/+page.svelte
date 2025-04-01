@@ -32,7 +32,7 @@
 	);
 
 	const rambalance = $derived(
-		context.account?.balances.find((b) => b.id.equals(data.network.getRamTokenDefinition()))
+		data.account.balances.find((b) => b.id.equals(data.network.getRamTokenDefinition()))
 	);
 
 	const cpuAvailable = $derived(data.account.resources.cpu.available);
