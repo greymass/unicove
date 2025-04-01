@@ -9,6 +9,6 @@ COPY . .
 
 ENV NODE_ENV production
 RUN apt -y install make ca-certificates
-RUN make build
+RUN make build/docker
 
 CMD [ "bun", "build/index.js" ]
