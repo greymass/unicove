@@ -39,6 +39,10 @@ node_modules:
 build: node_modules codegen
 	bun run build
 
+.PHONY: build/docker
+build/docker: node_modules codegen
+	bun run build-docker
+
 $(CONTRACTS)/system.ts:
 	bunx @wharfkit/cli generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/system.ts eosio
 
