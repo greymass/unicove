@@ -215,26 +215,8 @@
 <PageBanner network={data.network} />
 
 <div
-	class="
-	relative
-	mx-auto
-	grid
-	h-full
-	min-h-svh
-	w-[calc(100%-2rem)]
-	max-w-(--breakpoint-2xl)
-	grid-cols-2
-	grid-rows-[min-content_minmax(0,1fr)]
-	gap-y-6
-	pt-4
-	pb-12
-	sm:grid-cols-4
-	md:h-auto
-	md:min-h-svh
-	md:grid-cols-12
-	md:grid-rows-[min-content_auto_minmax(0,1fr)]
-	md:gap-x-4
-	"
+	data-theme={data.network}
+	class="relative mx-auto grid h-full min-h-svh w-[calc(100%-2rem)] max-w-(--breakpoint-2xl) grid-cols-2 grid-rows-[min-content_minmax(0,1fr)] gap-y-6 pt-4 pb-12 sm:grid-cols-4 md:h-auto md:min-h-svh md:grid-cols-12 md:grid-rows-[min-content_auto_minmax(0,1fr)] md:gap-x-4"
 >
 	<aside
 		class="relative col-start-1 col-end-3 row-span-full row-start-1 hidden h-full grid-rows-subgrid md:grid"

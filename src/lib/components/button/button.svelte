@@ -45,7 +45,7 @@
 	);
 
 	const primaryStyles =
-		'relative inline-flex h-12 grow items-center justify-center text-nowrap rounded-lg bg-sky-700 px-8 text-center text-base font-medium text-sky-50 transition-all focus:outline-transparent focus-visible:outline focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-solar-500 hover:active:bg-sky-800 disabled:cursor-not-allowed disabled:bg-mine-900 disabled:text-white/60 disabled:opacity-30 disabled:hover:bg-mine-900 hover:bg-sky-600';
+		'relative inline-flex h-12 grow items-center justify-center text-nowrap rounded-lg bg-primary px-8 text-center text-base font-medium text-sky-50 transition-all focus:outline-transparent focus-visible:outline focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-solar-500 hover:active:bg-sky-800 disabled:cursor-not-allowed disabled:bg-mine-900 disabled:text-white/60 disabled:opacity-30 disabled:hover:bg-mine-900 hover:bg-sky-600';
 
 	const secondaryStyles =
 		'relative flex h-12 grow items-center justify-center text-nowrap rounded-lg px-8 text-center text-base font-medium text-sky-400 ring-2 ring-inset ring-mine-600 transition-all hover:ring-transparent focus-visible:outline-hidden focus-visible:ring-solar-500 hover:active:bg-mine-950 hover:active:ring-mine-900 disabled:cursor-not-allowed disabled:text-mine-400 disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:ring-mine-600 disabled:active:ring-mine-600 hover:bg-mine-900';

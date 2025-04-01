@@ -13,6 +13,7 @@
 	import Charts from './sections/charts.svelte';
 	import Tooltips from './sections/tooltips.svelte';
 	import Chips from './sections/chips.svelte';
+	import Colors from './sections/colors.svelte';
 </script>
 
 <h1 class="h1 mb-8">Design System</h1>
@@ -23,6 +24,10 @@
 
 <Stack class="space-y-12 pb-12">
 	<Typography />
+
+	{@render divider()}
+
+	<Colors />
 
 	{@render divider()}
 

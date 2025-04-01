@@ -106,6 +106,37 @@
 	--color-solar-900: #7c3b0b;
 	--color-solar-950: #481d00;
 
+	/* Jungle4 Palette */
+	--color-niagara-50: #f2fbf8;
+	--color-niagara-100: #d3f4ea;
+	--color-niagara-200: #a8e7d5;
+	--color-niagara-300: #74d4bc;
+	--color-niagara-400: #47baa0;
+	--color-niagara-500: #2e9e87;
+	--color-niagara-600: #227f6d;
+	--color-niagara-700: #1f6659;
+	--color-niagara-800: #1d5249;
+	--color-niagara-900: #1c453e;
+	--color-niagara-950: #0b2825;
+
+	/* Color Roles and default values */
+	--color-primary: #481d00;
+	--color-on-primary: #481d00;
+	--color-primary-container: #481d00;
+	--color-on-primary-container: #481d00;
+	--color-secondary: #481d00;
+	--color-on-secondary: #481d00;
+	--color-secondary-container: #481d00;
+	--color-on-secondary-container: #481d00;
+	--color-tertiary: #481d00;
+	--color-on-tertiary: #481d00;
+	--color-tertiary-container: #481d00;
+	--color-on-tertiary-container: #481d00;
+	--color-on-surface: #481d00;
+	--color-on-surface-variant: #481d00;
+	--color-outline: #481d00;
+	--color-outline-variant: #481d00;
+
 	--breakpoint-xs: 480px;
 
 	--font-sans: Inter, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
@@ -129,6 +160,20 @@
 	::backdrop,
 	::file-selector-button {
 		border-color: var(--color-gray-200, currentColor);
+	}
+
+	[data-theme='eos'] {
+		--color-primary: var(--color-solar-400);
+		--color-on-primary: var(--color-solar-900);
+		--color-primary-container: var(--color-solar-200);
+		--color-on-primary-container: var(--color-solar-700);
+	}
+
+	[data-theme='jungle4'] {
+		--color-primary: var(--color-niagara-400);
+		--color-on-primary: var(--color-niagara-950);
+		--color-primary-container: var(--color-niagara-700);
+		--color-on-primary-container: var(--color-niagara-200);
 	}
 }
 
