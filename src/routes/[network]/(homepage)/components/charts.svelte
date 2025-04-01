@@ -15,7 +15,7 @@
 
 <section
 	id="charts"
-	class="@container col-span-full grid grid-cols-2 gap-12 xl:grid-cols-9 xl:gap-x-4"
+	class="@container col-span-full grid grid-cols-2 gap-12 xl:grid-cols-2 xl:gap-x-4"
 >
 	<Stack class="col-span-full xl:col-span-4 @3xl:col-span-1">
 		<TokenPriceHistory />
