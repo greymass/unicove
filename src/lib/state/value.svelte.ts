@@ -97,6 +97,9 @@ export class NetworkValueState {
 
 	// Currently hardcoded to use the systemtoken price for the legacytoken
 	readonly legacytoken = $derived.by(() => {
+		if (!this.states.network.legacytoken) {
+			return undefined;
+		}
 		const base = TokenDefinition.from(this.states.network.legacytoken);
 		const quote = this.currency;
 		const pair = this.states.market.getSystemTokenPair(quote);
