@@ -47,7 +47,7 @@
 	});
 </script>
 
-<Stack class="@container">
+<Stack class="@container gap-12">
 	<PillGroup {options} />
 
 	{@render children()}

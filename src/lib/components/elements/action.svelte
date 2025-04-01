@@ -43,40 +43,50 @@
 	let advancedMode = $derived(context.settings.data.advancedMode);
 </script>
 
-{#snippet KeyValue(key: string, value: string)}
+{#snippet KeyValue(key: string | null, value: string)}
 	{@const isArray = Array.isArray(value)}
 	{@const isObject = typeof value === 'object'}
-	<div class="font-mono text-white">
-		{#if key}
-			<span class="text-muted">
-				{#if isArray || isObject}
-					{key}:
-					{#if isArray}
-						({value.length})
-					{/if}
-				{:else}
-					{key}:
-				{/if}
-			</span>
+
+	{#if key}
+		{#if isArray || isObject}
+			<dt class="text-muted inline after:content-[':']">
+				{key}
+			</dt>
+			{#if isArray}
+				<dd class="inline">
+					<span class="sr-only">length</span>({value.length})
+				</dd>
+			{/if}
+		{:else}
+			<dt class="text-muted inline after:content-[':']">
+				{key}
+			</dt>
 		{/if}
-		{#if isArray}
-			<ol class="list-decimal pl-4">
+	{/if}
+
+	{#if isArray}
+		<dd>
+			<ol class="ml-4 list-inside list-decimal">
 				{#each value as v}
-					<li class="ml-4">
-						{@render KeyValue('', v)}
+					<li class="marker:text-muted text-sm text-white">
+						{@render KeyValue(null, v)}
 					</li>
 				{/each}
 			</ol>
-		{:else if isObject && value}
-			<div class="ml-4">
-				{#each Object.keys(value) as k}
+		</dd>
+	{:else if isObject && value}
+		<ul class="ml-4">
+			{#each Object.keys(value) as k}
+				<li class="text-sm">
 					{@render KeyValue(k, value[k])}
-				{/each}
-			</div>
-		{:else}
+				</li>
+			{/each}
+		</ul>
+	{:else}
+		<dd class="inline text-white">
 			{value}
-		{/if}
-	</div>
+		</dd>
+	{/if}
 {/snippet}
 
 {#snippet Decoded()}
@@ -91,11 +101,15 @@
 {/snippet}
 
 {#snippet Pretty(data: ObjectifiedActionData | undefined)}
-	<Code>
+	<Code collapsible class="bg-shark-950/30 mt-1" indent={4}>
 		{#if data}
-			{#each Object.keys(data) as key}
-				{@render KeyValue(key, data[key])}
-			{/each}
+			<dl>
+				{#each Object.keys(data) as key}
+					<div>
+						{@render KeyValue(key, data[key])}
+					</div>
+				{/each}
+			</dl>
 		{:else}
 			<span class="text-muted">No data</span>
 		{/if}
@@ -120,7 +134,7 @@
 
 {#snippet Header()}
 	<div class="flex flex-wrap items-center gap-x-4 gap-y-2">
-		<picture class="bg-mine-900/50 grid size-14 place-items-center rounded-full">
+		<picture class="bg-shark-950/30 grid size-14 place-items-center rounded-full">
 			<SquareTerminal />
 		</picture>
 
@@ -149,30 +163,42 @@
 {/snippet}
 
 {#snippet Footer()}
-	<div class="flex flex-wrap justify-between gap-2 px-1">
+	<div class="flex justify-between gap-6 px-1">
 		<div>
 			{#if action.authorization.length}
-				<span class="text-muted">Signed by</span>
-				{#each action.authorization as auth}
-					<Account name={Name.from(auth.actor)} class="mr-1 text-white underline">
-						{PermissionLevel.from(auth)}
-					</Account>
-				{/each}
+				<span class="text-muted text-xs">Signed by</span>
+				<ul class="inline">
+					{#each action.authorization as auth}
+						<li class="inline">
+							<Account name={Name.from(auth.actor)} class="mr-1 text-xs  text-white">
+								{PermissionLevel.from(auth)}
+							</Account>
+						</li>
+					{/each}
+				</ul>
 			{/if}
 		</div>
 
-		<div class="text-right">
+		<!-- This section is reversed so the list reads better for a11y -->
+		<div class="flex flex-row-reverse flex-wrap-reverse items-baseline gap-1 text-right">
 			{#if advancedMode && notified}
-				{#each notified as account}
-					<Account name={Name.from(account)} class="ml-1 text-white underline first:ml-0" />
-				{/each}
-				<span class="text-muted">notified</span>
+				<span class="text-muted text-xs">notified</span>
+				<ul class="inline">
+					{#each notified as account}
+						<li class="group inline text-xs nth-last-2:after:content-['and_']">
+							<Account
+								name={Name.from(account)}
+								class="after:text-muted gap-0 text-xs text-white group-has-nth-3:bg-red-300 not-group-nth-last-2:not-group-last:after:content-[','] first:ml-0"
+							/>
+						</li>
+					{/each}
+				</ul>
 			{/if}
 		</div>
 	</div>
 {/snippet}
 
-<Card class="gap-6">
+<Card class="gap-4">
 	{@render Header()}
 	{#if variant === 'summary'}
 		{@render Summary()}
