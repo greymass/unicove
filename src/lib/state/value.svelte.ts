@@ -172,9 +172,7 @@ export function getAccountValue(
 		legacy.units.add(
 			calculateValue(states.account.balance.child('legacy').balance, systemTokenPrice).units
 		);
-		liquid.units.add(
-			calculateValue(states.account.balance.child('liquid').balance, systemTokenPrice).units
-		);
+		liquid.units.add(calculateValue(states.account.balance.balance, systemTokenPrice).units);
 		staked.units.add(
 			calculateValue(states.account.balance.child('staked').balance, systemTokenPrice).units
 		);
