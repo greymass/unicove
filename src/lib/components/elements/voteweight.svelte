@@ -5,6 +5,7 @@
 
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import { Chains } from '@wharfkit/common';
 
 	interface Props extends HTMLAttributes<HTMLSpanElement> {
 		variant?: 'value' | 'full';
@@ -12,8 +13,11 @@
 		weight: Float64; // Weight of vote
 	}
 
-	let { weight, decay = 52, ...props }: Props = $props();
 	let { network } = getContext<UnicoveContext>('state');
+	const defaultDecay =
+		network.chain.equals(Chains.WAX) || network.chain.equals(Chains.WAXTestnet) ? 13 : 52;
+
+	let { weight, decay = defaultDecay, ...props }: Props = $props();
 	const precision = 10 ** network.chain.systemToken!.symbol.precision;
 
 	const tokens = $derived(
