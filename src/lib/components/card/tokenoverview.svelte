@@ -41,13 +41,21 @@
 	const balanceTotal = $derived(balance.child('total'));
 
 	const hasValue = $derived(value.units.gt(UInt64.from(0)));
+
+	const isRamToken = $derived(balance.id.equals(network.getRamTokenDefinition()));
 </script>
 
 <Card id="{balance.id.contract}-{balance.id.symbol.name}-token" class={className}>
 	<div class="card-title h4">
-		<a href="/{network}/token/{balance.id.contract}/{balance.id.symbol.name}">
-			{balance.id.symbol.name}
-		</a>
+		{#if isRamToken}
+			<a href="/{network}/ram">
+				{balance.id.symbol.name} (RAM)
+			</a>
+		{:else}
+			<a href="/{network}/token/{balance.id.contract}/{balance.id.symbol.name}">
+				{balance.id.symbol.name}
+			</a>
+		{/if}
 	</div>
 	<Stack>
 		{#if network.supports('delphioracle')}
