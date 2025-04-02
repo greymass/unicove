@@ -84,6 +84,13 @@ async function getAccount(network: NetworkState, account: NameType): Promise<Acc
 
 	if (network.supports('lightapi')) {
 		balances = await loadBalances(network, account, network.fetch);
+	} else {
+		balances = [
+			TokenBalance.from({
+				id: network.token,
+				balance: get_account.core_liquid_balance || Asset.fromUnits(0, network.token.symbol)
+			})
+		];
 	}
 
 	if (network.supports('rex')) {
