@@ -9,6 +9,6 @@ export async function GET({ locals: { network } }: RequestEvent) {
 		return json({ error: 'Unable to load configuration in production.' }, { status: 500 });
 	}
 	return json(network.config, {
-		headers: getCacheHeaders(3600)
+		headers: getCacheHeaders(300)
 	});
 }

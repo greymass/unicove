@@ -5,7 +5,7 @@ import * as m from '$lib/paraglide/messages';
 
 export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 	const { network } = await parent();
-	const response = await fetch(`/${params.network}/api/msig/${params.proposer}/${params.proposal}`);
+	const response = await fetch(`/${network}/api/msig/${params.proposer}/${params.proposal}`);
 	const json = await response.json();
 
 	if ('error' in json) {

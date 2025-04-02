@@ -1,6 +1,7 @@
-import type { Asset, Checksum256Type, NameType } from '@wharfkit/antelope';
+import { Asset, Name, type Checksum256Type, type NameType } from '@wharfkit/antelope';
 import { ChainDefinition, TokenIdentifier } from '@wharfkit/common';
 
+import { Contract as DelphiHelperContract } from '$lib/wharf/contracts/delphihelper';
 import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
 import { Contract as MSIGContract } from '$lib/wharf/contracts/msig';
 import { Contract as SystemContract } from '$lib/wharf/contracts/system';
@@ -8,11 +9,75 @@ import { Contract as TimeContract } from '$lib/wharf/contracts/eosntime';
 import { Contract as TokenContract } from '$lib/wharf/contracts/token';
 import { Contract as UnicoveContract } from '$lib/wharf/contracts/unicove';
 
-import { PUBLIC_CHAINS } from '$env/static/public';
+import * as env from '$env/static/public';
 
-export const chains = JSON.parse(PUBLIC_CHAINS) as ChainConfig[];
+const coinbase =
+	env.PUBLIC_FEATURE_DIRECTFUNDING === 'true'
+		? {
+				appid: env.PUBLIC_FEATURE_COINBASE_APPID,
+				assets: env.PUBLIC_FEATURE_COINBASE_ASSETS.split(',')
+			}
+		: undefined;
+
+const metamask =
+	env.PUBLIC_FEATURE_METAMASK === 'true'
+		? {
+				name: env.PUBLIC_FEATURE_METAMASK_PRODUCT_NAME,
+				snaporigin: env.PUBLIC_FEATURE_METAMASK_SNAP_ORIGIN,
+				serviceurl: env.PUBLIC_FEATURE_METAMASK_SERVICE_URL
+			}
+		: undefined;
+
+const lockedsupply = env.PUBLIC_FEATURE_METAMASK
+	? env.PUBLIC_SYSTEM_TOKEN_LOCKED_SUPPLY.split(',').map((account) => Name.from(account))
+	: undefined;
+
+const systemtokenalt = env.PUBLIC_SYSTEM_TOKEN_SYMBOL_ALT
+	? env.PUBLIC_SYSTEM_TOKEN_SYMBOL_ALT.split('|').map((symbol) => Asset.Symbol.from(symbol))
+	: [];
+
+const isTrue = (value: string) => value === 'true';
+
+export const chainConfig: ChainConfig = {
+	id: env.PUBLIC_CHAIN_ID,
+	name: env.PUBLIC_CHAIN_SHORT,
+	systemtoken: {
+		contract: env.PUBLIC_SYSTEM_TOKEN_CONTRACT,
+		symbol: env.PUBLIC_SYSTEM_TOKEN_SYMBOL
+	},
+	systemtokenalt,
+	lockedsupply,
+	tokens: [],
+	endpoints: {
+		api: env.PUBLIC_API_CHAIN,
+		history: env.PUBLIC_API_HISTORY
+	},
+	features: {
+		delphihelper: isTrue(env.PUBLIC_FEATURE_DELPHIHELPER),
+		delphioracle: isTrue(env.PUBLIC_FEATURE_DELPHIORACLE),
+		directfunding: isTrue(env.PUBLIC_FEATURE_DIRECTFUNDING),
+		eosntime: isTrue(env.PUBLIC_FEATURE_EOSNTIME),
+		giftedram: isTrue(env.PUBLIC_FEATURE_GIFTEDRAM),
+		lightapi: isTrue(env.PUBLIC_FEATURE_LIGHTAPI),
+		metamask: isTrue(env.PUBLIC_FEATURE_METAMASK),
+		powerup: isTrue(env.PUBLIC_FEATURE_POWERUP),
+		rammarket: isTrue(env.PUBLIC_FEATURE_RAMMARKET),
+		rentrex: isTrue(env.PUBLIC_FEATURE_RENTREX),
+		rex: isTrue(env.PUBLIC_FEATURE_REX),
+		robo: isTrue(env.PUBLIC_FEATURE_ROBO),
+		stakeresource: isTrue(env.PUBLIC_FEATURE_STAKERESOURCE),
+		staking: isTrue(env.PUBLIC_FEATURE_STAKING),
+		timeseries: isTrue(env.PUBLIC_FEATURE_TIMESERIES),
+		unicovecontracts: isTrue(env.PUBLIC_FEATURE_UNICOVECONTRACTS)
+	},
+	metamask,
+	coinbase
+};
+
+export const chains = [chainConfig];
 
 export interface DefaultContracts {
+	delphihelper: DelphiHelperContract;
 	delphioracle: DelphiOracleContract;
 	eosntime: TimeContract;
 	msig: MSIGContract;
@@ -58,10 +123,12 @@ export interface ChainConfig {
 	coinbase?: ChainCoinbaseConfig;
 	metamask?: ChainMetaMaskConfig;
 	systemtoken: ChainToken;
+	systemtokenalt: Asset.Symbol[];
 	tokens: ChainToken[];
 }
 
 export type FeatureType =
+	| 'delphihelper'
 	| 'delphioracle'
 	| 'directfunding'
 	| 'eosntime'

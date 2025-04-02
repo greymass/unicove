@@ -1,16 +1,18 @@
 <script lang="ts">
-	import { PublicKey } from '@wharfkit/antelope';
+	import { PublicKey, type PublicKeyType } from '@wharfkit/antelope';
 	import type { ComponentProps } from 'svelte';
 	import TextInput from './text.svelte';
 
 	interface PublicKeyInputProps extends ComponentProps<typeof TextInput> {
+		optional?: boolean;
 		valid?: boolean;
-		value: PublicKey | undefined;
+		value: PublicKeyType | undefined;
 		debug?: boolean;
 	}
 
 	let {
 		autofocus = false,
+		optional = false,
 		ref = $bindable(),
 		valid = $bindable(false),
 		value: _value = $bindable(),
@@ -38,7 +40,7 @@
 	);
 
 	/** Whether or not the input value is valid */
-	const satisfies: boolean = $derived(satisfiesPublicKeyMatch);
+	const satisfies: boolean = $derived(optional || satisfiesPublicKeyMatch);
 
 	/** Set the input value from a parent */
 	export function set(publickey: string) {

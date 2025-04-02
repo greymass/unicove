@@ -37,7 +37,7 @@
 				</p>
 				<div class="mt-2 flex gap-6">
 					<Button
-						class="border border-mineShaft-600 px-6"
+						class="border-mine-600 border px-6"
 						href={`/${network}/staking`}
 						text={m.common_stake_action()}
 					/>
@@ -50,9 +50,11 @@
 			</Stack>
 		</Box>
 
-		<!-- Graphics -->
-		<div class="col-span-full grid place-items-center">
-			<StakedHEX staked={network.token.distribution.staked} {apr} />
-		</div>
+		{#if network.token.distribution}
+			<!-- Graphics -->
+			<div class="col-span-full grid place-items-center">
+				<StakedHEX staked={network.token.distribution.staked} {apr} />
+			</div>
+		{/if}
 	</Switcher>
 </section>

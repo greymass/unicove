@@ -7,7 +7,7 @@
 
 	interface Props {
 		options: ExtendedSelectOption[];
-		selected: ExtendedSelectOption;
+		selected?: ExtendedSelectOption;
 		onSelectedChange?: ChangeFn<ExtendedSelectOption | undefined>;
 		variant?: SelectOptionVariant;
 		id: string;
@@ -43,6 +43,7 @@
 		disabled,
 		multiple,
 		forceVisible: true,
+		preventScroll: false,
 		positioning: {
 			placement: 'bottom-start',
 			fitViewport: true,
@@ -66,7 +67,7 @@
 	);
 </script>
 
-<SelectTrigger class={triggerClass} {variant} {id} {open} {trigger}>
+<SelectTrigger class={triggerClass} {variant} {id} {open} {trigger} {disabled}>
 	{#if selectedOption.image && typeof selectedOption.image === 'string'}
 		<img src={selectedOption.image} alt={selectedOption.label} class="mr-2 size-5 object-contain" />
 	{/if}

@@ -11,7 +11,7 @@
 	let props: Props = $props();
 </script>
 
-<Stack class="gap-2 @container">
+<Stack class="@container gap-2">
 	<h5 class="h5">
 		{props.title || m.common_breakdown()}
 	</h5>

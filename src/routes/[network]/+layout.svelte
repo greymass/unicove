@@ -1,31 +1,47 @@
 <script lang="ts">
 	import { Checksum256, type NameType } from '@wharfkit/antelope';
-	import { chainLogos } from '@wharfkit/common';
+	import { ChainDefinition, chainLogos } from '@wharfkit/common';
 	import { onMount, setContext, untrack } from 'svelte';
-	import X from 'lucide-svelte/icons/circle-x';
-	import { env } from '$env/dynamic/public';
 	import { Head, type SeoConfig } from 'svead';
-	import { page } from '$app/stores';
 	import extend from 'just-extend';
 
-	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import { AccountState } from '$lib/state/client/account.svelte.js';
-	import { WharfState } from '$lib/state/client/wharf.svelte.js';
-	import { SearchRecordStorage } from '$lib/state/search.svelte.js';
+	import { env } from '$env/dynamic/public';
+	import { page } from '$app/state';
 
-	import MobileNavigation from '$lib/components/navigation/mobilenavigation.svelte';
-	import SideMenuContent from '$lib/components/navigation/sidemenu.svelte';
+	import { AccountState } from '$lib/state/client/account.svelte.js';
+	import { AccountValueState, NetworkValueState } from '$lib/state/value.svelte.js';
+	import { MarketState } from '$lib/state/market.svelte.js';
+	import { SearchRecordStorage } from '$lib/state/search.svelte.js';
+	import { SettingsState } from '$lib/state/settings.svelte.js';
+	import { WharfState } from '$lib/state/client/wharf.svelte.js';
+	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte';
+
 	import AccountSwitcher from '$lib/components/accountswitch.svelte';
 	import Search from '$lib/components/search/input.svelte';
-	import { SettingsState } from '$lib/state/settings.svelte.js';
+	import SideMenuContent from '$lib/components/navigation/sidemenu.svelte';
 	import Unicovelogo from '$lib/assets/unicovelogo.svelte';
+	import MobileNavigation from '$lib/components/navigation/mobilenavigation.svelte';
+	import type { NetworkState } from '$lib/state/network.svelte.js';
+	import PageBanner from '$lib/components/banner/pageBanner.svelte';
 
 	let { children, data } = $props();
 
-	let account: AccountState | undefined = $state();
 	const history = new SearchRecordStorage(data.network);
 	const settings = new SettingsState();
 	const wharf = new WharfState(settings);
+	const initialMarketValue = new MarketState(data.network, settings);
+	const initialNetworkValue = new NetworkValueState({
+		network: data.network,
+		market: initialMarketValue,
+		settings: settings
+	});
+
+	let chain: ChainDefinition | undefined = $state();
+	let market = $state(initialMarketValue);
+	let networkValue = $state(initialNetworkValue);
+
+	let account: AccountState | undefined = $state();
+	let accountValue: AccountValueState | undefined = $state();
 
 	setContext<UnicoveContext>('state', {
 		get account() {
@@ -44,11 +60,49 @@
 			return wharf;
 		}
 	});
+	setContext<MarketContext>('market', {
+		get account() {
+			return accountValue;
+		},
+		get market() {
+			return market;
+		},
+		get network() {
+			return networkValue;
+		}
+	});
 
 	export function setAccount(name: NameType, fetchOverride?: typeof fetch): AccountState {
 		account = new AccountState(data.network, name, fetchOverride);
 		account.refresh();
+		if (!data.network.chain.id.equals(account.network.chain.id)) {
+			setMarket(data.network);
+			setMarketNetwork(data.network);
+		}
+		setMarketAccount(data.network, account);
 		return account;
+	}
+
+	async function setMarket(network: NetworkState) {
+		market = new MarketState(network, settings);
+		market.refresh();
+	}
+
+	function setMarketNetwork(network: NetworkState) {
+		networkValue = new NetworkValueState({
+			network,
+			market,
+			settings
+		});
+	}
+
+	function setMarketAccount(network: NetworkState, account: AccountState) {
+		accountValue = new AccountValueState({
+			account,
+			network,
+			market,
+			settings
+		});
 	}
 
 	$effect(() => {
@@ -58,6 +112,7 @@
 				setAccount(session.actor);
 			} else {
 				account = undefined;
+				accountValue = undefined;
 			}
 		});
 	});
@@ -86,23 +141,30 @@
 
 	$effect(() => {
 		const { network } = data; // Destructure to force reactivity
-		if (!account) {
-			// no account loaded
-			setupWharf();
-		} else if (account && !account.network.chain.equals(network.chain)) {
-			// account loaded but for a different network
-			setupWharf();
-		}
+		untrack(() => {
+			if (chain && !network.chain.equals(chain)) {
+				// Set new chain
+				chain = network.chain;
+
+				// Set Wharf for new chain
+				setupWharf();
+
+				// Set markets for new chain
+				setMarket(data.network);
+				setMarketNetwork(data.network);
+			}
+		});
 	});
 
 	// Number of ms between network updates
 	const ACCOUNT_UPDATE_INTERVAL = Number(env.PUBLIC_ACCOUNT_UPDATE_INTERVAL) || 5_000;
 	const NETWORK_UPDATE_INTERVAL = Number(env.PUBLIC_NETWORK_UPDATE_INTERVAL) || 5_000;
-
-	// Default to not show a banner (avoids flash of banner when hidden)
-	let showBanner = $state(false);
+	const MARKET_UPDATE_INTERVAL = Number(env.PUBLIC_MARKET_UPDATE_INTERVAL) || 60_000;
 
 	onMount(() => {
+		// Set the chain to the current network chain
+		chain = data.network.chain;
+
 		// Update account state on a set interval
 		const accountInterval = setInterval(() => {
 			if (account) {
@@ -115,24 +177,27 @@
 			data.network.refresh();
 		}, NETWORK_UPDATE_INTERVAL);
 
-		// Show the banner if localStorage has no flag set
-		showBanner = !localStorage.getItem('hide-v1-banner');
+		// Update the market state on a set interval
+		const marketInterval = setInterval(() => {
+			market.refresh();
+		}, MARKET_UPDATE_INTERVAL);
+
+		// Enable Wharf
+		setupWharf();
+
+		// Load markets based off chain
+		setMarket(data.network);
+		setMarketNetwork(data.network);
 
 		return () => {
 			clearInterval(accountInterval);
 			clearInterval(networkInterval);
+			clearInterval(marketInterval);
 		};
 	});
 
-	function hideBanner() {
-		// update the store to immediately hide the banner
-		showBanner = false;
-		// set the flag to prevent banner showing on next load
-		localStorage.setItem('hide-v1-banner', 'true');
-	}
-
 	const seo_config = $derived<SeoConfig>(
-		extend({}, data.baseMetaTags, $page.data?.pageMetaTags) as SeoConfig
+		extend({}, data.baseMetaTags, page.data?.pageMetaTags) as SeoConfig
 	);
 </script>
 
@@ -146,24 +211,7 @@
 	{/if}
 </svelte:head>
 
-{#if showBanner}
-	<aside
-		class="grid grid-cols-[auto_1fr_auto] items-center justify-items-center gap-4 bg-mineShaft-950 shadow *:row-start-1"
-	>
-		<p
-			class="col-start-2 py-4 font-medium text-mineShaft-50 md:col-span-3 md:col-start-1 md:text-center"
-		>
-			Looking for the old version of Unicove? Go to
-			<a class="underline" href="https://v1.unicove.com">v1.unicove.com</a>
-		</p>
-		<button
-			class="col-start-3 grid size-12 place-items-center justify-self-end text-inherit"
-			onclick={hideBanner}
-		>
-			<X class="size-4 " />
-		</button>
-	</aside>
-{/if}
+<PageBanner network={data.network} />
 
 <div
 	class="
@@ -173,12 +221,12 @@
 	h-full
 	min-h-svh
 	w-[calc(100%-2rem)]
-	max-w-screen-2xl
+	max-w-(--breakpoint-2xl)
 	grid-cols-2
 	grid-rows-[min-content_minmax(0,1fr)]
 	gap-y-6
-	pb-12
 	pt-4
+	pb-12
 	sm:grid-cols-4
 	md:h-auto
 	md:min-h-svh
@@ -211,7 +259,7 @@
 	</header>
 
 	<main
-		class="col-span-full col-start-1 row-span-full row-start-2 grid grid-cols-subgrid content-start gap-x-4 *:col-span-full md:col-start-3 md:col-end-13 md:px-0 lg:col-end-12"
+		class="col-span-full col-start-1 row-span-full row-start-2 grid grid-cols-subgrid content-start gap-x-4 *:col-span-full md:col-start-3 md:col-end-13 md:px-0 xl:col-end-12"
 	>
 		{@render children()}
 	</main>

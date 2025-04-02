@@ -22,16 +22,21 @@ The `make check` command will run through Svelte checks, eslint, and prettier. A
 
 #### Local Configuration
 
-The `.env` file contains the minimal configuration required for Unicove to operate and is included in the root of this repository. This file shouldn't be modified for local changes, and instead a `.env.development` file should be created to selectively override the defaults in the `.env`.
+The `.env` file contains the default configuration for Unicove running the Jungle 4 testnet. This file shouldn't be modified for local changes, and instead a `.env.development` file should be created to selectively override the defaults in the `.env`.
 
-To override the more complex JSON stored in `PUBLIC_CHAINS` and `PRIVATE_BACKENDS`, a specific build process has been setup to generate an `.env.local` automatically based on the contents of the JSON files in `scripts/env/local`. These files can be created and updated using the steps below.
+A number of complete chain configurations are available in the `./configs` directory. These configs can be loaded in using one of the Makefile config commands (e.g. `make config/eos`). This will copy the configuration for a specific chain and paste it into `.env.local` to override the defaults in the `.env` file.
 
-1. If this is the first time altering these values, run `make config` to generate `backends.json` and `chains.json` in `./scripts/env/local`.
-2. Edit the `chains.json` file to alter which chains are supported along with their features/endpoints.
-3. Edit the `backends.json` file to alter how the SSR backend retrieves data about each chain defined in `chains.json`.
-4. Run `make config` to write a copy of your modified config files into `.env.local`.
+Available configuration commands:
 
-Anytime changes are made to either `scripts/env/local/backends.json` or `scripts/env/local/chains.json`, run `make config` again to regenerate the `.env.local` file and update the values.
+```
+make config/eos
+make config/jungle4
+make config/kylin
+make config/telos
+make config/telostestnet
+make config/wax
+make config/waxtestnet
+```
 
 With Unicove running, the current configuration can be viewed in the Debug State section:
 

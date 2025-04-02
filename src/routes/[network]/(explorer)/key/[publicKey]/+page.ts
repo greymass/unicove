@@ -2,6 +2,7 @@ import { error } from '@sveltejs/kit';
 import * as m from '$lib/paraglide/messages.js';
 import { PublicKey } from '@wharfkit/antelope';
 import type { PageLoad } from './$types';
+import { PUBLIC_CHAIN_SHORT } from '$env/static/public';
 
 export const load: PageLoad = async ({ fetch, params, parent }) => {
 	let pubkey: PublicKey;
@@ -16,7 +17,7 @@ export const load: PageLoad = async ({ fetch, params, parent }) => {
 	}
 
 	const { network } = await parent();
-	const accounts = await fetch(`/${params.network}/api/key/${params.publicKey}`)
+	const accounts = await fetch(`/${PUBLIC_CHAIN_SHORT}/api/key/${params.publicKey}`)
 		.then((response) => response.json())
 		.then((json) => json.accounts || []);
 
@@ -32,7 +33,7 @@ export const load: PageLoad = async ({ fetch, params, parent }) => {
 		subtitle,
 		publicKey: pubkey,
 		accounts,
-		network: params.network,
+		network: PUBLIC_CHAIN_SHORT,
 		pageMetaTags: {
 			title: `${pubkey} | ${network.chain.name} Network`,
 			description

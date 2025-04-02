@@ -30,7 +30,7 @@ import { type QueuedTransaction, StatusType, queueTransaction } from '$lib/wharf
 import { chainMapper } from '$lib/wharf/chains';
 import type { SettingsState } from '$lib/state/settings.svelte';
 import type { NetworkState } from '$lib/state/network.svelte';
-import { chainDefs, transactPlugins, walletPlugins } from '$lib/wharf/plugins';
+import { chainDefs, msigTransactPlugins, transactPlugins, walletPlugins } from '$lib/wharf/plugins';
 
 export class WharfState {
 	public chain?: ChainDefinition = $state();
@@ -188,8 +188,9 @@ export class WharfState {
 			arbitrary: {
 				session: this.session.serialize()
 			},
-			chain: this.chain,
+			chain: this.session.chain,
 			permissionLevel,
+			transactPlugins: msigTransactPlugins,
 			walletPlugin: 'wallet-plugin-multisig'
 		});
 		this.session = session;

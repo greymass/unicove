@@ -49,7 +49,7 @@
 	let variant = $derived(context.settings.data.actionDisplayVariant as ActionDisplayVariants);
 </script>
 
-<Stack class="pb-8">
+<Stack class="py-4">
 	{#if isLoading}
 		<div class="flex items-center justify-center gap-4 py-20">
 			<div class="bounce bounce-1 h-3 w-3 rounded-full bg-white"></div>
@@ -60,15 +60,19 @@
 	{#if activityActions.length}
 		<SelectActionVariant />
 
-		{#each activityActions as activityAction}
-			{@const contract = String(activityAction.trace.action.account)}
-			{@const action = String(activityAction.trace.action.name)}
-			{@const summary = getActionSummaryComponent(contract, action)}
-			<Trace trace={activityAction.trace} {summary} date trxid {variant} />
-		{/each}
+		<ol class="grid gap-12">
+			{#each activityActions as activityAction}
+				{@const contract = String(activityAction.trace.action.account)}
+				{@const action = String(activityAction.trace.action.name)}
+				{@const summary = getActionSummaryComponent(contract, action)}
+				<li class="">
+					<Trace trace={activityAction.trace} {summary} date trxid {variant} />
+				</li>
+			{/each}
+		</ol>
 
 		{#if hasMore}
-			<Button onclick={clickLoadMore} variant="primary" class="">
+			<Button onclick={clickLoadMore} variant="primary" class="place-self-center">
 				{loadingText}
 			</Button>
 		{/if}

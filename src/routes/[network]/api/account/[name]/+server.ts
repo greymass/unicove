@@ -8,7 +8,9 @@ import type { LightAPIBalanceResponse, LightAPIBalanceRow } from '$lib/types/lig
 
 import type { RequestEvent, RequestHandler } from './$types';
 
-import { Types as SystemTypes } from '$lib/wharf/contracts/system';
+import { Types as SystemTypes, type TableTypes } from '$lib/wharf/contracts/system';
+import { Types as REXTypes } from '$lib/types/rex';
+import { Types as UnicoveTypes } from '$lib/wharf/contracts/unicove';
 import { nullContractHash } from '$lib/state/defaults/account';
 
 export const GET: RequestHandler = async ({ locals: { network }, params }: RequestEvent) => {
@@ -68,18 +70,21 @@ async function getAccount(network: NetworkState, account: NameType): Promise<Acc
 
 	let rex;
 	let balances: LightAPIBalanceRow[] = [];
-	let giftedram;
+	let giftedram: UnicoveTypes.gifted_ram | undefined;
 
 	if (network.supports('lightapi')) {
 		balances = await loadBalances(network, account, network.fetch);
 	}
 
 	if (network.supports('rex')) {
-		rex = await systemContract.table('rexfund').get(account);
+		rex = await systemContract.table('rexfund' as keyof TableTypes).get(account);
 	}
 
 	if (network.supports('giftedram')) {
-		giftedram = await systemContract.table('giftedram').get(account);
+		// Had to overridde type safety because this table doesn't always exist.
+		giftedram = (await systemContract
+			.table('giftedram' as keyof TableTypes)
+			.get(account)) as unknown as UnicoveTypes.gifted_ram;
 	}
 
 	// If no response from the light API, add a default balance of zero
@@ -100,14 +105,14 @@ async function getAccount(network: NetworkState, account: NameType): Promise<Acc
 		refund_request = SystemTypes.refund_request.from(get_account.refund_request);
 	}
 
-	let rexbal: SystemTypes.rex_balance | undefined;
+	let rexbal: REXTypes.rex_balance | undefined;
 	if (get_account.rex_info) {
-		rexbal = SystemTypes.rex_balance.from(get_account.rex_info);
+		rexbal = REXTypes.rex_balance.from(get_account.rex_info);
 	}
 
-	let rexfund: SystemTypes.rex_fund | undefined;
+	let rexfund: REXTypes.rex_fund | undefined;
 	if (rex) {
-		rexfund = SystemTypes.rex_fund.from(rex);
+		rexfund = REXTypes.rex_fund.from(rex);
 	}
 
 	const contract_hash = hash?.hash || nullContractHash;

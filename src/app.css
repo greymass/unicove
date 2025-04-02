@@ -1,84 +1,197 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-@layer components {
-	html {
-		@apply h-full bg-shark-950 text-white;
-		color-scheme: dark;
-		touch-action: manipulation;
-		scrollbar-gutter: stable;
+@plugin '@tailwindcss/container-queries';
+
+@theme {
+	--color-*: initial;
+	--color-transparent: transparent;
+	--color-current-color: currentColor;
+	--color-inherit: inherit;
+	--color-black: #000;
+	--color-white: #fff;
+
+	--color-red-50: #fef2f2;
+	--color-red-100: #fee2e2;
+	--color-red-200: #fecaca;
+	--color-red-300: #fca5a5;
+	--color-red-400: #f87171;
+	--color-red-500: #ef4444;
+	--color-red-600: #dc2626;
+	--color-red-700: #b91c1c;
+	--color-red-800: #991b1b;
+	--color-red-900: #7f1d1d;
+	--color-red-950: #450a0a;
+
+	--color-green-50: #f0fdf4;
+	--color-green-100: #dcfce7;
+	--color-green-200: #bbf7d0;
+	--color-green-300: #86efac;
+	--color-green-400: #4ade80;
+	--color-green-500: #22c55e;
+	--color-green-600: #16a34a;
+	--color-green-700: #15803d;
+	--color-green-800: #166534;
+	--color-green-900: #14532d;
+	--color-green-950: #052e16;
+
+	--color-zinc-50: #fafafa;
+	--color-zinc-100: #f4f4f5;
+	--color-zinc-200: #e4e4e7;
+	--color-zinc-300: #d4d4d8;
+	--color-zinc-400: #a1a1aa;
+	--color-zinc-500: #71717a;
+	--color-zinc-600: #52525b;
+	--color-zinc-700: #3f3f46;
+	--color-zinc-800: #27272a;
+	--color-zinc-900: #18181b;
+	--color-zinc-950: #09090b;
+
+	--color-shark-50: #f4f6f7;
+	--color-shark-100: #e2e8eb;
+	--color-shark-200: #c9d3d8;
+	--color-shark-300: #a3b3bd;
+	--color-shark-400: #768c9a;
+	--color-shark-500: #5a7080;
+	--color-shark-600: #4e5e6c;
+	--color-shark-700: #434f5b;
+	--color-shark-800: #3c454e;
+	--color-shark-900: #363c43;
+	--color-shark-950: #1b1f24;
+
+	--color-mine-50: #f4f5f7;
+	--color-mine-100: #e4e7e9;
+	--color-mine-200: #cbd1d6;
+	--color-mine-300: #a7b1b9;
+	--color-mine-400: #7c8894;
+	--color-mine-500: #616d79;
+	--color-mine-600: #535c67;
+	--color-mine-700: #474d57;
+	--color-mine-800: #3f444b;
+	--color-mine-900: #383c41;
+	--color-mine-950: #22252a;
+
+	--color-sky-50: #eff9ff;
+	--color-sky-100: #def3ff;
+	--color-sky-200: #b6e8ff;
+	--color-sky-300: #75d9ff;
+	--color-sky-400: #2cc6ff;
+	--color-sky-500: #00b5ff;
+	--color-sky-600: #008cd4;
+	--color-sky-700: #006fab;
+	--color-sky-800: #005e8d;
+	--color-sky-900: #064e74;
+	--color-sky-950: #04314d;
+
+	--color-spring-50: #edfff8;
+	--color-spring-100: #d5fff0;
+	--color-spring-200: #aeffe2;
+	--color-spring-300: #70ffcc;
+	--color-spring-400: #2bfdb0;
+	--color-spring-500: #00ed97;
+	--color-spring-600: #00c076;
+	--color-spring-700: #00965f;
+	--color-spring-800: #06754e;
+	--color-spring-900: #076042;
+	--color-spring-950: #003724;
+
+	--color-solar-50: #fffdea;
+	--color-solar-100: #fff8c5;
+	--color-solar-200: #fff185;
+	--color-solar-300: #ffe246;
+	--color-solar-400: #ffd11b;
+	--color-solar-500: #ffb000;
+	--color-solar-600: #e28600;
+	--color-solar-700: #bb5d02;
+	--color-solar-800: #984808;
+	--color-solar-900: #7c3b0b;
+	--color-solar-950: #481d00;
+
+	--breakpoint-xs: 480px;
+
+	--font-sans: Inter, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+		'Segoe UI Symbol', 'Noto Color Emoji';
+	--font-mono: JetBrains Mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+		'Liberation Mono', 'Courier New', monospace;
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+	*,
+	::after,
+	::before,
+	::backdrop,
+	::file-selector-button {
+		border-color: var(--color-gray-200, currentColor);
 	}
+}
 
-	body {
-		@apply h-auto min-h-svh text-white;
-	}
-
+@utility h1 {
 	/* Headings are defined by class instead of tag to preserve semantic html independent of style */
 	/* Typography */
-	.h1 {
-		@apply text-5xl font-semibold leading-none;
-	}
+	@apply text-5xl leading-none font-semibold;
+}
 
-	.h2 {
-		@apply text-3xl font-semibold leading-none;
-	}
+@utility h2 {
+	@apply text-3xl leading-none font-semibold;
+}
 
-	.h3 {
-		@apply text-2xl font-semibold leading-none;
-	}
+@utility h3 {
+	@apply text-2xl leading-none font-semibold;
+}
 
-	.h4 {
-		@apply text-lg font-medium leading-none;
-	}
+@utility h4 {
+	@apply text-lg leading-none font-medium;
+}
 
-	.h5 {
-		@apply text-base font-medium leading-none;
-	}
+@utility h5 {
+	@apply text-base leading-none font-medium;
+}
 
-	.caption {
-		@apply text-muted text-base font-medium;
-	}
+@utility caption {
+	@apply text-muted text-base font-medium;
+}
 
-	p,
-	li {
-		@apply text-muted text-base font-normal;
-	}
-
+@utility card {
 	/* Layout */
+	@apply bg-shark-900/20 grid gap-4 rounded-xl p-5;
+}
 
-	.card {
-		@apply grid gap-4 rounded-xl bg-shark-900/20 p-5;
-	}
+@utility layout-stack {
+	@apply flex flex-col gap-6;
+}
 
-	.layout-stack {
-		@apply flex flex-col gap-6;
-	}
+@utility layout-center {
+	@apply mx-auto box-content max-w-prose;
+}
 
-	.layout-center {
-		@apply mx-auto box-content max-w-prose;
-	}
+@utility layout-switcher {
+	@apply flex flex-wrap gap-4;
 
-	.layout-switcher {
-		@apply flex flex-wrap gap-4;
-	}
-
-	.layout-switcher > * {
+	& > * {
 		flex-grow: 1;
 		flex-basis: calc((var(--switcher-threshold) - 100%) * 999);
 	}
+}
 
-	.layout-grid {
-		@apply grid gap-4;
-		grid-template-columns: repeat(auto-fit, minmax(min(var(--grid-itemWidth), 100%), 1fr));
-	}
+@utility layout-grid {
+	@apply grid gap-4;
+	grid-template-columns: repeat(auto-fit, minmax(min(var(--grid-itemWidth), 100%), 1fr));
+}
 
-	.layout-cluster {
-		@apply flex flex-wrap gap-4;
-	}
+@utility layout-cluster {
+	@apply flex flex-wrap gap-4;
+}
 
+@utility table-styles {
 	/* table styles */
-	:where(.table-styles) {
+	:where(&) {
 		@apply w-full table-auto overflow-x-auto;
 
 		thead tr {
@@ -92,38 +205,58 @@
 
 		th,
 		.table-head-styles {
-			@apply text-muted py-1.5 pl-2 pr-2 text-left text-base font-medium first:pl-0 last:pr-0;
+			@apply text-muted py-1.5 pr-2 pl-2 text-left text-base font-medium first:pl-0 last:pr-0;
 		}
 
 		td,
 		.table-cell-styles {
-			@apply py-3 pl-2 pr-2 text-base first:pl-0 last:pr-0;
+			@apply py-3 pr-2 pl-2 text-base first:pl-0 last:pr-0;
 		}
 	}
 }
 
-@layer utilities {
-	.px-page {
-		@apply px-4;
+@utility px-page {
+	@apply px-4;
+}
+
+@utility mx-page {
+	@apply px-4;
+}
+
+@utility table-row-border {
+	@apply border-mine-900 border-b last:border-none;
+}
+
+@utility table-row-background {
+	@apply odd:via-mine-950 data-[hover-effect=false]:odd:hover:via-mine-950 bg-linear-to-r from-transparent to-transparent hover:via-sky-500/10 data-[active=true]:via-sky-500/10 data-[clickable=true]:cursor-pointer data-[hover-effect=false]:hover:via-transparent;
+}
+
+@utility bg-hero-gradient {
+	background-image: radial-gradient(var(--bg-menu) 0%, transparent 50%);
+}
+
+@utility text-muted {
+	@apply text-zinc-400;
+}
+
+@utility subgrid {
+	@apply col-span-full grid grid-cols-subgrid;
+}
+
+@layer components {
+	html {
+		@apply bg-shark-950 h-full text-white;
+		color-scheme: dark;
+		touch-action: manipulation;
+		scrollbar-gutter: stable;
 	}
 
-	.mx-page {
-		@apply px-4;
+	body {
+		@apply h-auto min-h-svh text-white;
 	}
 
-	.table-row-border {
-		@apply border-b border-mineShaft-900 last:border-none;
-	}
-
-	.table-row-background {
-		@apply bg-gradient-to-r from-transparent to-transparent odd:via-mineShaft-950 hover:via-skyBlue-500/10 data-[clickable=true]:cursor-pointer data-[active=true]:via-skyBlue-500/10 data-[hover-effect=false]:hover:via-transparent data-[hover-effect=false]:odd:hover:via-mineShaft-950;
-	}
-
-	.bg-hero-gradient {
-		background-image: radial-gradient(var(--bg-menu) 0%, transparent 50%);
-	}
-
-	.text-muted {
-		@apply text-zinc-400;
+	p,
+	li {
+		@apply text-muted text-base font-normal;
 	}
 }

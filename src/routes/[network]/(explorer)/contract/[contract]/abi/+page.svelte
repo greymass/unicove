@@ -6,5 +6,5 @@
 </script>
 
 <Stack>
-	<Code lang="json">{JSON.stringify(data.abi, null, 2)}</Code>
+	<Code>{JSON.stringify(data.abi, null, 2)}</Code>
 </Stack>

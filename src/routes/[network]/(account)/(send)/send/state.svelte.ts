@@ -1,14 +1,14 @@
+import { Token, TokenBalance, TokenDefinition } from '$lib/types/token';
 import { calculateValue } from '$lib/utils';
 import { Asset, Name, Serializer } from '@wharfkit/antelope';
-import { TokenBalance, TokenIdentifier, TokenMeta } from '@wharfkit/common';
 
 const defaultSymbol = Asset.Symbol.from('0,UNKNOWN');
 export const defaultQuantity = Asset.fromUnits(0, defaultSymbol);
 const defaultBalance = TokenBalance.from({
-	asset: defaultQuantity,
+	balance: defaultQuantity,
 	contract: '',
-	metadata: TokenMeta.from({
-		id: TokenIdentifier.from({
+	token: Token.from({
+		id: TokenDefinition.from({
 			chain: '0000000000000000000000000000000000000000000000000000000000000000',
 			contract: '',
 			symbol: defaultSymbol
@@ -29,9 +29,9 @@ export class SendState {
 	);
 
 	public min: number | undefined = $derived(
-		this.balance ? Asset.fromUnits(1, this.balance.asset.symbol).value : undefined
+		this.balance ? Asset.fromUnits(1, this.balance.balance.symbol).value : undefined
 	);
-	public max: number | undefined = $derived(this.balance ? this.balance.asset.value : undefined);
+	public max: number | undefined = $derived(this.balance ? this.balance.balance.value : undefined);
 
 	reset() {
 		this.from = Name.from('');

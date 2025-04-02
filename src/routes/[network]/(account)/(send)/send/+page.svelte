@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { Asset } from '@wharfkit/antelope';
-	import { TokenBalance } from '@wharfkit/common';
 	import { Checksum256 } from '@wharfkit/antelope';
 	import { getContext, tick } from 'svelte';
 	import { FiniteStateMachine } from 'runed';
@@ -24,10 +23,11 @@
 	import { goto } from '$app/navigation';
 	import { preventDefault } from '$lib/utils';
 	import { NetworkState } from '$lib/state/network.svelte';
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import { SingleCard, Stack } from '$lib/components/layout';
 	import TransactSummary from '$lib/components/transact/summary.svelte';
 	import TransactError from '$lib/components/transact/error.svelte';
+	import type { TokenBalance } from '$lib/types/token';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
@@ -50,12 +50,15 @@
 		}
 		error = undefined;
 		const balance = context.account?.balances.find((b) =>
-			b.asset.symbol.equals(sendState.quantity.symbol)
+			b.token.id.symbol.equals(sendState.quantity.symbol)
 		);
 		if (balance) {
 			let action = data.network.contracts.token.action('transfer', sendState.toJSON());
-			if (!balance.contract.equals(data.network.contracts.token.account)) {
-				action.account = balance.contract;
+			if (
+				balance.token.id.contract &&
+				!balance.token.id.contract.equals(data.network.contracts.token.account)
+			) {
+				action.account = balance.token.id.contract;
 			}
 			context.wharf
 				.transact({ action })
@@ -75,16 +78,16 @@
 
 	function max() {
 		if (sendState.balance) {
-			quantityInput?.set(sendState.balance.asset);
+			quantityInput?.set(sendState.balance.balance);
 		}
 	}
 
 	// Effect to handle token swapping
 	$effect(() => {
 		// Only trigger when the states quantity and balance do not match tokens
-		if (!sendState.balance.asset.symbol.equals(sendState.quantity.symbol)) {
+		if (!sendState.balance.token.symbol.equals(sendState.quantity.symbol)) {
 			// Reset the quantity to 0
-			const quantity = Asset.fromUnits(0, sendState.balance.asset.symbol);
+			const quantity = Asset.fromUnits(0, sendState.balance.token.symbol);
 			// Reset the values
 			quantityInput?.set(quantity);
 			sendState.quantity = quantity;
@@ -95,14 +98,14 @@
 
 	// Effect to handle URL changes
 	$effect(() => {
-		const to = $page.url.searchParams.get('to');
+		const to = page.url.searchParams.get('to');
 		if (quantityRef && to && !String(sendState.to)) {
 			toInput?.set(to);
 			quantityRef?.focus();
 			tick().then(() => f.send('next'));
 		}
 
-		const quantity = $page.url.searchParams.get('quantity');
+		const quantity = page.url.searchParams.get('quantity');
 		if (
 			quantity &&
 			quantityRef &&
@@ -113,7 +116,7 @@
 		) {
 			const asset = Asset.from(quantity);
 			quantityInput?.set(asset);
-			const balance = context.account.balances.find((b) => b.asset.symbol.equals(asset.symbol));
+			const balance = context.account.balances.find((b) => b.token.id.symbol.equals(asset.symbol));
 			if (balance) {
 				tokenSelect?.set(balance);
 			}
@@ -140,9 +143,9 @@
 				const balance = getDefaultBalance(data.network, context.account.balances);
 				if (balance) {
 					sendState.balance = balance;
-					sendState.quantity = Asset.fromUnits(0, balance.asset.symbol);
+					sendState.quantity = Asset.fromUnits(0, balance.token.symbol);
 					tokenSelect?.set(balance);
-					quantityInput?.set(Asset.fromUnits(0, balance.asset.symbol));
+					quantityInput?.set(Asset.fromUnits(0, balance.token.symbol));
 				}
 			}
 		}
@@ -150,15 +153,13 @@
 
 	function getDefaultBalance(network: NetworkState, balances: TokenBalance[]) {
 		const firstBalanceFound = balances[0];
-		const systemTokenBalance = balances.find((b) =>
-			b.metadata.id.equals(network.chain.systemToken)
-		);
+		const systemTokenBalance = balances.find((b) => b.token.id.equals(network.token.id));
 
-		const quantity = $page.url.searchParams.get('quantity');
+		const quantity = page.url.searchParams.get('quantity');
 		let selectedBalance: TokenBalance | undefined;
 		if (quantity) {
 			const asset = Asset.from(quantity);
-			selectedBalance = balances.find((b) => b.asset.symbol.equals(asset.symbol));
+			selectedBalance = balances.find((b) => b.token.symbol.equals(asset.symbol));
 		}
 		const balance = selectedBalance || systemTokenBalance || firstBalanceFound;
 		return balance;
@@ -261,9 +262,9 @@
 	}
 
 	async function resetURL() {
-		$page.url.searchParams.delete('to');
-		$page.url.searchParams.delete('quantity');
-		await goto(`?${$page.url.searchParams.toString()}`);
+		page.url.searchParams.delete('to');
+		page.url.searchParams.delete('quantity');
+		await goto(`?${page.url.searchParams.toString()}`);
 		f.send('reset');
 	}
 
@@ -285,7 +286,7 @@
 
 	const tokenOptions: TokenBalance[] = $derived.by(() => {
 		if (context.account && context.account.balances && context.account.balances.length) {
-			return context.account.balances.filter((b) => b.asset.value > 0);
+			return context.account.balances.filter((b) => b.balance.value > 0);
 		}
 		return [];
 	});
@@ -356,18 +357,14 @@
 					max={sendState.max || 0}
 					{onkeydown}
 					placeholder={m.send_enter_amount({
-						token: sendState.balance?.asset.symbol.code
+						token: sendState.balance?.token.symbol.code
 					})}
 					debug={context.settings.data.debugMode as boolean}
 				/>
 			{/if}
 
 			{#if context.account}
-				<button
-					class="text-skyBlue-500 hover:text-skyBlue-400"
-					disabled={!context.account}
-					onclick={max}
-				>
+				<button class="text-sky-500 hover:text-sky-400" disabled={!context.account} onclick={max}>
 					{m.common_fill_max()}
 				</button>
 			{/if}

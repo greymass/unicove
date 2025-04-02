@@ -55,7 +55,7 @@ export class SellRAMState {
 	public insufficientRAM: boolean = $derived(!!this.max && this.insufficientRAMForSale);
 
 	public valid: boolean = $derived(
-		!!(this.bytes !== undefined && this.bytes > 0 && !this.insufficientRAM && this.account.value)
+		!!(this.bytes !== undefined && this.bytes > 0 && !this.insufficientRAM)
 	);
 
 	constructor(chain: ChainDefinition) {

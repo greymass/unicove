@@ -13,13 +13,14 @@
 	import Label from '$lib/components/input/label.svelte';
 	import RamPriceHistory from '$lib/components/chart/rampricehistory.svelte';
 	import type { SystemResources } from '$lib/types/network';
-	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte';
 	import AccountBalance from '$lib/components/card/accountbalance.svelte';
 
 	import { RAMCalculatorState } from './state.svelte';
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');
+	const market = getContext<MarketContext>('market');
 
 	const resources: SystemResources = $derived(data.network.resources);
 
@@ -33,16 +34,18 @@
 			data.network.chain.systemToken?.symbol || '0, UNKNOWN'
 		)
 	);
-	let marketCapFiat = $derived(calculateValue(marketCapToken, data.network.token.price));
+	let marketCapFiat = $derived(calculateValue(marketCapToken, market.network.systemtoken.price));
 
 	let ramLiquid = $derived(
 		Asset.from(Number(context.account?.resources.ram.balance || 0) / 1000, '3,KB')
 	);
 
 	const balanceValueToken = $derived(calculateValue(ramLiquid, resources.ram.price.rammarket));
-	const balanceValueFiat = $derived(calculateValue(balanceValueToken, data.network.token.price));
+	const balanceValueFiat = $derived(
+		calculateValue(balanceValueToken, market.network.systemtoken.price)
+	);
 	const kbValueToken = $derived(resources.ram.price.rammarket);
-	const kbValueFiat = $derived(calculateValue(kbValueToken, data.network.token.price));
+	const kbValueFiat = $derived(calculateValue(kbValueToken, market.network.systemtoken.price));
 
 	const ramCalculatorState = new RAMCalculatorState(data.network.chain);
 
@@ -122,17 +125,19 @@
 		<Stack class="gap-2">
 			<h4 class="text-md font-semibold">{m.common_details()}</h4>
 			<table class="">
-				<tbody class="*:border-b *:border-mineShaft-900 *:pt-8 last:*:border-b-0 *:even:text-right">
+				<tbody class="*:border-mine-900 *:border-b *:pt-8 *:last:border-b-0 even:*:text-right">
 					<tr class="*:py-2">
 						<td class="text-muted text-base">
-							{data.network.token.definition.symbol.code || ''}/RAM (KB)
+							{data.network.token.id.symbol.code || ''}/RAM (KB)
 						</td>
 						<td class="text-right font-medium text-white">
 							<AssetText variant="full" value={kbValueToken} />
 						</td>
 					</tr>
 					<tr class="*:py-2">
-						<td class="text-muted text-base"> USD/RAM (KB) </td>
+						<td class="text-muted text-base">
+							{market.network.currency.symbol.code}/RAM (KB)
+						</td>
 						<td class="text-right font-medium text-white">
 							<AssetText variant="full" value={kbValueFiat} />
 						</td>
@@ -140,13 +145,13 @@
 					<tr class="*:py-2">
 						<td class="text-muted text-base">
 							{m.common_labeled_unit_price({
-								unit: 'USD'
+								unit: market.network.currency.symbol.code
 							})}
 						</td>
 						<td class="text-right font-medium text-white">
 							<AssetText
 								variant="full"
-								value={calculateValue(ramCalculatorState.tokens, data.network.token.price)}
+								value={calculateValue(ramCalculatorState.tokens, market.network.systemtoken.price)}
 							/>
 						</td>
 					</tr>
@@ -169,7 +174,7 @@
 
 	<Card>
 		<table>
-			<tbody class="*:border-b *:border-mineShaft-900 *:pt-8 last:*:border-b-0 *:even:text-right">
+			<tbody class="*:border-mine-900 *:border-b *:pt-8 *:last:border-b-0 even:*:text-right">
 				<tr class="*:py-2">
 					<td class="text-muted text-base"
 						>{m.common_market_cap()} ({data.network.chain.systemToken?.symbol.code || ''})</td
@@ -179,7 +184,9 @@
 					</td>
 				</tr>
 				<tr class="*:py-2">
-					<td class="text-muted text-base">{m.common_market_cap()} (USD)</td>
+					<td class="text-muted text-base"
+						>{m.common_market_cap()} ({market.network.currency.symbol.code})</td
+					>
 					<td class="text-right font-medium text-white">
 						<AssetText variant="full" value={marketCapFiat} />
 					</td>

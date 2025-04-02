@@ -43,6 +43,9 @@ export const transactPlugins: TransactPlugin[] = [
 	new TransactPluginResourceProvider()
 ];
 
+export const msigTransactPlugins: TransactPlugin[] = [new TransactPluginStatusEmitter()];
+export const msigInternalPlugins: TransactPlugin[] = [new TransactPluginResourceProvider()];
+
 export const chainDefs: ChainDefinition[] = chains.map((chain) =>
 	getChainDefinitionFromParams(chain.name)
 );

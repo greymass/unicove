@@ -209,7 +209,7 @@
 				{#each rentDetails as detail}
 					<!-- TODO: Color audit -->
 					<li
-						class="flex justify-between border-b border-mineShaft-300/10 bg-gradient-to-r from-transparent to-transparent py-3 last:border-none odd:via-mineShaft-950"
+						class="border-mine-300/10 odd:via-mine-950 flex justify-between border-b bg-linear-to-r from-transparent to-transparent py-3 last:border-none"
 					>
 						<span class="text-base font-medium">{detail.title}</span>
 						<span class="text-base font-medium text-white">{detail.desc}</span>
@@ -221,7 +221,7 @@
 {/if}
 
 {#if context.settings.data.debugMode}
-	<div class="mx-auto mt-6 max-w-md border-2 border-skyBlue-500 p-6">
+	<div class="mx-auto mt-6 max-w-md border-2 border-sky-500 p-6">
 		<h3 class="h3 text-center">Debug Info</h3>
 		<table class="table-styles">
 			<tbody>

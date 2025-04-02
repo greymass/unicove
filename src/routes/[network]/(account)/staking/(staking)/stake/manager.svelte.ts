@@ -1,10 +1,8 @@
-import { Asset } from '@wharfkit/antelope';
+import { Action, Asset } from '@wharfkit/antelope';
 import type { AccountState } from '$lib/state/client/account.svelte';
 import type { NetworkState } from '$lib/state/network.svelte';
 import type { WharfState } from '$lib/state/client/wharf.svelte';
 import AssetInput from '$lib/components/input/asset.svelte';
-
-import { TokenBalance } from '@wharfkit/common';
 
 import {
 	defaultQuantity,
@@ -12,6 +10,9 @@ import {
 	getAPR,
 	getUnstakableBalance
 } from '$lib/utils/staking';
+import { TokenBalance, TokenDefinition } from '$lib/types/token';
+import { Types as REXTypes } from '$lib/types/rex';
+import { PlaceholderAuth } from '@wharfkit/session';
 
 export class StakeManager {
 	public input: AssetInput | undefined = $state();
@@ -45,17 +46,19 @@ export class StakeManager {
 	public tokenBalance: TokenBalance | undefined = $derived.by(() => {
 		let balance: TokenBalance | undefined = undefined;
 		if (this.network) {
-			const tokenIdentifier = {
+			const id = TokenDefinition.from({
 				chain: this.network.chain.id,
 				contract: this.network.contracts.token.account,
 				symbol: this.network.chain.systemToken!.symbol
-			};
-			const meta = (this.network.tokens || []).find((item) => item.id.equals(tokenIdentifier));
+			});
+			const meta = (this.network.tokens || []).find((item) => item.id.equals(id));
 			if (meta) {
 				balance = TokenBalance.from({
-					asset: this.staked,
-					contract: this.network.contracts.token.account,
-					metadata: meta
+					balance: this.staked,
+					token: {
+						id,
+						contract: this.network.contracts.token.account
+					}
 				});
 			}
 		}
@@ -110,13 +113,24 @@ export class StakeManager {
 				throw new Error("Can't sign, data not ready");
 			}
 
-			const deposit = this.network.contracts.system.action('deposit', {
-				owner: this.account.name,
-				amount: this.assetValue
+			const deposit = Action.from({
+				account: this.network.contracts.system.account,
+				name: 'deposit',
+				authorization: [PlaceholderAuth],
+				data: REXTypes.deposit.from({
+					owner: this.account.name,
+					amount: this.assetValue
+				})
 			});
-			const buyrex = this.network.contracts.system.action('buyrex', {
-				from: this.account.name,
-				amount: this.assetValue
+
+			const buyrex = Action.from({
+				account: this.network.contracts.system.account,
+				name: 'buyrex',
+				authorization: [PlaceholderAuth],
+				data: REXTypes.buyrex.from({
+					from: this.account.name,
+					amount: this.assetValue
+				})
 			});
 
 			const result = await this.wharf.transact({

@@ -1,9 +1,9 @@
 <script>
-	import * as SystemContract from '$lib/wharf/contracts/system';
 	import Code from '$lib/components/code.svelte';
 	import Withdraw from '$lib/components/summary/eosio/withdraw.svelte';
+	import { Types } from '$lib/types/rex';
 
-	const data = SystemContract.Types.withdraw.from({
+	const data = Types.withdraw.from({
 		owner: 'foo',
 		amount: '10000.0000 EOS'
 	});

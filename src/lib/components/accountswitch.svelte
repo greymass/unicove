@@ -15,8 +15,6 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
 
-	import NetworkSwitch from '$lib/components/networkswitch.svelte';
-
 	import X from 'lucide-svelte/icons/x';
 	import CircleX from 'lucide-svelte/icons/circle-x';
 	import LogOut from 'lucide-svelte/icons/log-out';
@@ -135,7 +133,7 @@
 <!-- Trigger Button -->
 <button
 	class={cn(
-		'relative z-50 h-10 text-nowrap rounded-lg border border-mineShaft-600 text-base font-medium focus:outline-transparent focus-visible:outline focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-solar-500',
+		'border-mine-600 focus-visible:ring-solar-500 relative z-50 h-10 rounded-lg border text-base font-medium text-nowrap focus:outline-transparent focus-visible:ring-2 focus-visible:outline focus-visible:ring-inset',
 		className
 	)}
 	use:melt={$trigger}
@@ -144,7 +142,7 @@
 	data-session={!!context.wharf.session}
 >
 	{#if context.wharf.session}
-		<div class="flex items-center gap-2 pl-3.5 pr-4">
+		<div class="flex items-center gap-2 pr-4 pl-3.5">
 			<picture class="size-5">
 				<img
 					src={String(logo)}
@@ -175,27 +173,35 @@
 		<!-- Content -->
 		<div
 			use:melt={$content}
-			class="fixed right-0 top-0 z-50 flex h-svh min-w-80 max-w-fit flex-col space-y-4 overflow-y-auto overflow-x-hidden bg-shark-950 px-4 py-4 shadow-lg focus:outline-none md:px-6"
+			class="bg-shark-950 fixed top-0 right-0 z-50 flex h-svh max-w-fit min-w-80 flex-col space-y-4 overflow-x-hidden overflow-y-auto px-4 py-4 shadow-lg focus:outline-hidden md:px-6"
 			transition:fly={{
 				x: 350,
 				duration: 300,
 				opacity: 1
 			}}
 		>
-			<header
-				data-advanced={context.settings.data.advancedMode}
-				class="flex flex-row-reverse justify-between gap-2 data-[advanced=false]:items-center md:gap-4"
-			>
+			<header class="flex items-center justify-start gap-2 py-3 pl-2 md:gap-3">
+				{#if logo}
+					<picture class="flex size-10 justify-center">
+						<img
+							src={String(logo)}
+							class="h-full object-contain"
+							alt={String(currentSession?.chain.name)}
+						/>
+					</picture>
+				{/if}
+
+				<span class="m-0 flex-1 text-xl leading-none font-bold text-ellipsis md:text-2xl">
+					{network.chain.name}
+				</span>
+
 				<button
 					use:melt={$close}
 					aria-label="Close"
-					data-advanced={context.settings.data.advancedMode}
-					class="text-muted grid size-12 appearance-none place-items-center rounded-lg focus:text-white focus:outline-none md:data-[advanced=false]:pt-0 md:data-[advanced=true]:pt-2.5"
+					class="text-muted grid size-12 appearance-none place-items-center justify-self-end rounded-lg focus:text-white focus:outline-hidden"
 				>
-					<X class="size-4 " />
+					<X class="size-4" />
 				</button>
-
-				<NetworkSwitch currentNetwork={network} class="" />
 			</header>
 
 			<section id="content" class="grid">
@@ -215,9 +221,11 @@
 
 						<header class="grid gap-3 pt-2 text-xl font-semibold">
 							<span>{m.common_my_accounts()}</span>
-							{#if chainSessions.length > 4}
+
+							<!-- Filter or Search accounts -->
+							{#if chainSessions.length > 4 || filterValue}
 								<Text
-									class="rounded-full bg-transparent text-sm"
+									class="rounded-full bg-transparent pl-6 text-sm"
 									placeholder="Filter accounts"
 									bind:value={filterValue}
 								>
@@ -241,12 +249,7 @@
 									<button
 										data-current={isCurrent}
 										onclick={() => switchSession(session)}
-										class="flex h-12 items-center gap-1 rounded-lg px-4
-										data-[current=true]:bg-skyBlue-700
-										data-[current=true]:text-skyBlue-50
-										[@media(any-hover:hover)]:data-[current=false]:hover:bg-mineShaft-950
-										[@media(any-hover:hover)]:data-[current=false]:hover:text-mineShaft-50
-										"
+										class="data-[current=false]:hover:bg-mine-950 data-[current=false]:hover:text-mine-50 flex h-12 items-center gap-1 rounded-lg px-4 data-[current=true]:bg-sky-700 data-[current=true]:text-sky-50"
 									>
 										<div class="w-6">
 											{#if isCurrent}
@@ -270,10 +273,7 @@
 									<button
 										onclick={() => removeSession(session)}
 										data-current={isCurrent}
-										class="text-muted grid size-12 place-items-center rounded-lg
-										[@media(any-hover:hover)]:hover:bg-mineShaft-950
-										[@media(any-hover:hover)]:hover:text-mineShaft-50
-										"
+										class="text-muted hover:bg-mine-950 hover:text-mine-50 grid size-12 place-items-center rounded-lg"
 									>
 										<LogOut class="size-4" />
 									</button>
@@ -293,7 +293,7 @@
 
 {#snippet connectWalletScreen()}
 	<div class="space-y-4" in:fly={{ x: 100, duration: 150 }} out:fly={{ x: 100, duration: 100 }}>
-		<hr class="border-mineShaft-900" />
+		<hr class="border-mine-900" />
 
 		<header class="grid justify-center gap-2 py-4 text-center">
 			<span class="h4">{m.common_login_to_unicove()}</span>

@@ -1,10 +1,11 @@
 import type { LayoutLoad } from './$types';
 import * as m from '$lib/paraglide/messages.js';
 import { API, TimePoint } from '@wharfkit/antelope';
+import { PUBLIC_CHAIN_SHORT } from '$env/static/public';
 
 export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 	const { network } = await parent();
-	const response = await fetch(`/${params.network}/api/block/${params.number}`);
+	const response = await fetch(`/${network}/api/block/${params.number}`);
 	const json = await response.json();
 	const block = json.block as API.v1.GetBlockResponse;
 
@@ -45,7 +46,7 @@ export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 		subtitle: date.toISOString(),
 		block,
 		details,
-		network: params.network,
+		network: PUBLIC_CHAIN_SHORT,
 		height: Number(params.number),
 		pageMetaTags: {
 			title: `${title} | ${network.chain.name} Network`,

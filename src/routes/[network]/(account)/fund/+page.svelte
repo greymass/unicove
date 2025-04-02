@@ -28,7 +28,7 @@
 			logo: coinbaseLogo,
 			action: {
 				text: m.buy_token_with_coinbase({
-					token: context.network.token.definition.symbol.name
+					token: context.network.token.symbol.name
 				}),
 				handler: 'coinbase'
 			}
@@ -141,7 +141,7 @@
 		<h2 class="h4">{m.fund_direct_purchase()}</h2>
 		<p>
 			{m.fund_direct_purchase_description({
-				token: context.network.token.definition.symbol.name
+				token: context.network.token.symbol.name
 			})}
 		</p>
 		<Cluster tag="ul">
@@ -188,7 +188,7 @@
 
 		<p>
 			{m.fund_exchange_description({
-				token: context.network.token.definition.symbol.name
+				token: context.network.token.symbol.name
 			})}
 		</p>
 
@@ -201,7 +201,7 @@
 						rel="noopener noreferrer"
 						class="block h-full transition-all hover:scale-105"
 					>
-						<div class="mb-4 grid aspect-square rounded-lg bg-mineShaft-900 p-4">
+						<div class="bg-mine-900 mb-4 grid aspect-square rounded-lg p-4">
 							<enhanced:img
 								src={exchange.logo}
 								alt="{exchange.name} logo"

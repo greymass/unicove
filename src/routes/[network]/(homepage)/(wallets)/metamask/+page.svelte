@@ -61,13 +61,13 @@
 		if (!data.network.snapOrigin) {
 			return goto(`/404`);
 		}
+		await getLatestSnapVersion();
 
 		metaMaskState.snapProvider = await getSnapsProvider();
 	});
 
 	async function connect() {
 		await requestSnap(metaMaskState);
-		await getLatestSnapVersion();
 	}
 
 	async function getLatestSnapVersion() {
@@ -124,8 +124,8 @@
 	const productName = data.network.config.metamask?.name || '';
 </script>
 
-<section class="col-span-full @container">
-	<div class="grid min-h-72 rounded-2xl bg-mineShaft-950 px-4 @2xl:grid-cols-2 @2xl:gap-4">
+<section class="@container col-span-full">
+	<div class="bg-mine-950 grid min-h-72 rounded-2xl px-4 @2xl:grid-cols-2 @2xl:gap-4">
 		<div class="grid place-items-center">
 			<svg
 				class="col-start-1 row-start-1 h-full w-full object-cover"
@@ -153,23 +153,19 @@
 			<div
 				class="col-start-1 row-start-1 grid max-w-sm grid-cols-3 items-center justify-items-center"
 			>
-				<img
-					class="h-40 rounded-full bg-mineShaft-950 object-contain"
-					src={Metamask}
-					alt="metamask"
-				/>
+				<img class="bg-mine-950 h-40 rounded-full object-contain" src={Metamask} alt="metamask" />
 				<svg width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path d="M18.008 0v36M36.008 18h-36" stroke="#fff" />
 				</svg>
 				<img
-					class="h-40 rounded-full bg-mineShaft-950 object-contain px-2 py-4"
+					class="bg-mine-950 h-40 rounded-full object-contain px-2 py-4"
 					src={networkLogo}
 					alt={networkName}
 				/>
 			</div>
 		</div>
 
-		<Box class="grid content-start justify-items-start gap-4 text-pretty py-8 *:shrink">
+		<Box class="grid content-start justify-items-start gap-4 py-8 text-pretty *:shrink">
 			{#if !metaMaskState.isMetaMaskReady}
 				<h2 class="text-xl font-semibold">
 					{m.metamask_install_title({
@@ -190,7 +186,7 @@
 					</p>
 				</Stack>
 				<Button href={'https://metamask.io/download/'} blank>{m.metamask_install_action()}</Button>
-				<p class="text-balance text-xs">
+				<p class="text-xs text-balance">
 					{m.metamask_install_action_note()}
 				</p>
 			{:else if currentVersion}

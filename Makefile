@@ -14,7 +14,7 @@ dev: node_modules codegen
 	bun run dev --host 
 
 .PHONY: check
-check: node_modules
+check: node_modules codegen
 	bun run check && bun run lint
 
 .PHONY: format
@@ -22,7 +22,7 @@ format: node_modules
 	bun run format
 
 .PHONY: install
-install:
+install: node_modules
 	@if [ -z "$(package)" ]; then \
 		echo "Installing all dependencies:"; \
 		bun install --frozen-lockfile; \
@@ -31,41 +31,79 @@ install:
 		bun install --frozen-lockfile $(package); \
 	fi
 
+.PHONY: node_modules
+node_modules:
+	bun install --frozen-lockfile
+
+.PHONY: build
+build: node_modules codegen
+	bun run build
+
+.PHONY: build/docker
+build/docker: node_modules codegen
+	bun run build-docker
+
 $(CONTRACTS)/system.ts:
-	bunx @wharfkit/cli generate -u $(CONTRACTS_API) -f $(CONTRACTS)/system.ts eosio
+	bunx @wharfkit/cli generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/system.ts eosio
 
 $(CONTRACTS)/token.ts:
-	bunx @wharfkit/cli generate -u $(CONTRACTS_API) -f $(CONTRACTS)/token.ts eosio.token
+	bunx @wharfkit/cli generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/token.ts eosio.token
 
 $(CONTRACTS)/msig.ts:
-	bunx @wharfkit/cli generate -u $(CONTRACTS_API) -f $(CONTRACTS)/msig.ts eosio.msig
+	bunx @wharfkit/cli generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/msig.ts eosio.msig
+
+$(CONTRACTS)/delphihelper.ts:
+ifeq ($(PUBLIC_FEATURE_DELPHIHELPER),true)
+	bunx @wharfkit/cli generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/delphihelper.ts delphihelper
+else
+	cp ./configs/contracts/delphihelper.ts $(CONTRACTS)/delphihelper.ts
+endif
 
 $(CONTRACTS)/delphioracle.ts:
-	bunx @wharfkit/cli generate -u $(CONTRACTS_API) -f $(CONTRACTS)/delphioracle.ts delphioracle
+ifeq ($(PUBLIC_FEATURE_DELPHIORACLE),true)
+	bunx @wharfkit/cli generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/delphioracle.ts delphioracle
+else
+	cp ./configs/contracts/delphioracle.ts $(CONTRACTS)/delphioracle.ts
+endif
 
 $(CONTRACTS)/unicove.ts:
-	bunx @wharfkit/cli generate -u $(CONTRACTS_API) -f $(CONTRACTS)/unicove.ts unicove.gm
+ifeq ($(PUBLIC_FEATURE_UNICOVECONTRACTS),true)
+	bunx @wharfkit/cli generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/unicove.ts unicove.gm
+else
+	cp ./configs/contracts/unicove.ts $(CONTRACTS)/unicove.ts
+endif
 
 $(CONTRACTS)/eosntime.ts:
-	bunx @wharfkit/cli generate -u $(CONTRACTS_API) -f $(CONTRACTS)/eosntime.ts time.eosn
+ifeq ($(PUBLIC_FEATURE_EOSNTIME),true)
+	bunx @wharfkit/cli generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/eosntime.ts time.eosn
+else
+	cp ./configs/contracts/eosntime.ts $(CONTRACTS)/eosntime.ts
+endif
 
-codegen: $(CONTRACTS)/system.ts $(CONTRACTS)/token.ts $(CONTRACTS)/msig.ts $(CONTRACTS)/delphioracle.ts $(CONTRACTS)/unicove.ts $(CONTRACTS)/eosntime.ts
+codegen: $(CONTRACTS)/system.ts $(CONTRACTS)/token.ts $(CONTRACTS)/msig.ts $(CONTRACTS)/delphihelper.ts $(CONTRACTS)/delphioracle.ts $(CONTRACTS)/unicove.ts $(CONTRACTS)/eosntime.ts
 	mkdir -p $(CONTRACTS)
 
 .PHONY: clean
 codegen/clean:
 	rm -rf $(CONTRACTS)/*.ts
 
-$(ENVS)/local/backends.json:
-	cp $(ENVS)/default/backends.json $(ENVS)/local/backends.json
+config/eos: codegen/clean
+	cp ./configs/.env.eos .env.local
 
-$(ENVS)/local/chains.json:
-	cp $(ENVS)/default/chains.json $(ENVS)/local/chains.json
+config/jungle4: codegen/clean
+	cp ./configs/.env.jungle4 .env.local
 
-config/local: $(ENVS)/local/backends.json $(ENVS)/local/chains.json 
+config/kylin: codegen/clean
+	cp ./configs/.env.kylin .env.local
 
-config: config/local
-	bun run scripts/env/local.ts
+config/telos: codegen/clean
+	cp ./configs/.env.telos .env.local
 
-config/default:
-	bun run scripts/env/default.ts
+config/telostestnet: codegen/clean
+	cp ./configs/.env.telostestnet .env.local
+
+config/wax: codegen/clean 
+	cp ./configs/.env.wax .env.local
+	
+config/waxtestnet: codegen/clean 
+	cp ./configs/.env.waxtestnet .env.local

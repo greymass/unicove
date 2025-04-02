@@ -11,11 +11,13 @@ export const GET: RequestHandler = async ({ locals: { network }, params, url }: 
 	const lower = url.searchParams.get('lower') || undefined;
 	const upper = url.searchParams.get('upper') || undefined;
 	const limit = url.searchParams.get('limit') || 10;
+	const reverse = url.searchParams.get('reverse') === 'true';
 
 	const table = await contract.table(params.table, params.scope);
 	const cursor = table.query({
 		from: lower,
-		to: upper
+		to: upper,
+		reverse
 	});
 
 	let rows = [];

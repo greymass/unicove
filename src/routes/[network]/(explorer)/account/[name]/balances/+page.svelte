@@ -1,5 +1,6 @@
 <script lang="ts">
 	import AssetText from '$lib/components/elements/asset.svelte';
+	import ValueText from '$lib/components/elements/currency/value.svelte';
 	import { Asset, UInt64 } from '@wharfkit/antelope';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
@@ -8,9 +9,10 @@
 
 	const { data } = $props();
 	const zero = UInt64.from(0);
-	const balances = $derived(data.account.balances.filter((item) => item.asset.units.gt(zero)));
+	const balances = $derived(data.account.balances.filter((item) => item.balance.units.gt(zero)));
 
 	const context = getContext<UnicoveContext>('state');
+
 	const isCurrentUser = $derived(
 		context.account &&
 			context.account.name &&
@@ -22,7 +24,7 @@
 
 {#snippet tableAction(asset: Asset)}
 	<td class="text-right">
-		<a class="text-skyBlue-500 hover:text-skyBlue-400" href="/{data.network}/send?quantity={asset}">
+		<a class="text-sky-500 hover:text-sky-400" href="/{data.network}/send?quantity={asset}">
 			{m.common_send()}
 		</a>
 	</td>
@@ -34,35 +36,37 @@
 			<tr>
 				<th>{m.common_token()}</th>
 				<th class="text-right">{m.common_amount()}</th>
-				<th class="text-right">{m.common_value()}</th>
+				<th class="text-right">{m.common_value()} ({context.settings.data.displayCurrency})</th>
 				{#if isCurrentUser}
 					<th></th>
 				{/if}
 			</tr>
 		</thead>
 		<tbody>
-			{#each balances as balance}
+			{#each balances as tokenBalance}
 				<tr>
 					<td>
 						<div class="flex items-center gap-3">
 							<div class="flex h-6 w-6 items-center justify-center rounded-full bg-black">
-								{#if balance.metadata?.logo}
-									<img class="h-5 w-5" src={balance.metadata?.logo} alt="LOGO" />
-								{/if}
+								<!-- {#if tokenBalance.token.meta.logo}
+									<img class="h-5 w-5" src={tokenBalance.token.meta.logo} alt="LOGO" />
+								{/if} -->
 							</div>
 							<a
-								href={`/${context.network}/token/${balance.contract}/${balance.asset.symbol.name}`}
+								href={`/${context.network}/token/${tokenBalance.token.contract}/${tokenBalance.token.symbol.name}`}
 							>
-								{balance.asset.symbol.name}
+								{tokenBalance.token.symbol.name}
 							</a>
 						</div>
 					</td>
 					<td class="text-right">
-						<AssetText value={balance.asset} />
+						<AssetText value={tokenBalance.balance} />
 					</td>
-					<td></td>
+					<td class="text-right">
+						<ValueText token={tokenBalance.token.id} balance={tokenBalance.balance} />
+					</td>
 					{#if isCurrentUser}
-						{@render tableAction(balance.asset)}
+						{@render tableAction(tokenBalance.balance)}
 					{/if}
 				</tr>
 			{/each}

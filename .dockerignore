@@ -14,7 +14,6 @@ README.md
 src/lib/paraglide
 LICENSE
 .vscode
-Makefile
 helm-charts
 .editorconfig
 .idea

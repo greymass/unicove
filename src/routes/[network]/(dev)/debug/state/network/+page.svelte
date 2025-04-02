@@ -43,7 +43,5 @@
 	</table>
 
 	<Button class="self-start" onclick={() => network.refresh()}>Update network state</Button>
-	<Code>
-		{JSON.stringify(network, null, 2)}
-	</Code>
+	<Code>{JSON.stringify(network, null, 2)}</Code>
 </Stack>

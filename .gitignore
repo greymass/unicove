@@ -10,8 +10,12 @@ node_modules
 .DS_Store
 Thumbs.db
 
-# Env
-.env.*
+# Env (follows Bun https://bun.sh/docs/runtime/env)
+.env
+.env.local
+.env.development
+.env.production
+.env.test
 !.env.example
 !.env.test
 

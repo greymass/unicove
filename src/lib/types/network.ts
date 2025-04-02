@@ -15,6 +15,7 @@ import {
 import { Types as DelphioracleTypes } from '$lib/wharf/contracts/delphioracle';
 import { Types as SystemTypes } from '$lib/wharf/contracts/system';
 import { Types as UnicoveTypes } from '$lib/wharf/contracts/unicove';
+import { Types as REXTypes } from './rex';
 import type { ChainConfig } from '$lib/wharf/chains';
 
 @Struct.type('sampledusage')
@@ -32,7 +33,7 @@ export class NetworkDataSources extends Struct {
 	@Struct.field(SystemTypes.powerup_state, { optional: true })
 	declare powerup?: SystemTypes.powerup_state;
 	@Struct.field(SystemTypes.exchange_state) declare ram: SystemTypes.exchange_state;
-	@Struct.field(SystemTypes.rex_pool) declare rex: SystemTypes.rex_pool;
+	@Struct.field(REXTypes.rex_pool, { optional: true }) declare rex: REXTypes.rex_pool;
 	@Struct.field(SampledUsage, { optional: true }) declare sample?: SampledUsage;
 	@Struct.field(UnicoveTypes.token_supply) declare token: UnicoveTypes.token_supply;
 	@Struct.field(Int64, { optional: true }) declare ram_gift_bytes?: Int64;
@@ -68,23 +69,6 @@ export interface ActivityActionWrapper {
 export interface NetworkStateOptions {
 	fetch?: typeof fetch;
 	client?: APIClient;
-}
-
-@Struct.type('distribution')
-export class SystemTokenDistribution extends Struct {
-	@Struct.field(Asset) declare circulating: Asset;
-	@Struct.field(Asset) declare locked: Asset;
-	@Struct.field(Asset) declare staked: Asset;
-	@Struct.field(Asset) declare supply: Asset;
-	@Struct.field(Asset) declare max: Asset;
-}
-
-@Struct.type('systemtoken')
-export class SystemToken extends Struct {
-	@Struct.field(UnicoveTypes.token_definition) declare definition: UnicoveTypes.token_definition;
-	@Struct.field(SystemTokenDistribution) declare distribution: SystemTokenDistribution;
-	@Struct.field(Asset) declare marketcap: Asset;
-	@Struct.field(Asset) declare price: Asset;
 }
 
 export interface SystemResourceCPUNET {
