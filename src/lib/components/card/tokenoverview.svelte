@@ -50,7 +50,7 @@
 		</a>
 	</div>
 	<Stack>
-		{#if hasValue}
+		{#if network.supports('delphioracle')}
 			<div
 				class="border-mine-900 col-span-full grid min-h-12 grid-cols-subgrid items-center gap-x-4"
 			>
@@ -60,11 +60,19 @@
 					<Stack class="gap-2">
 						<h4 class="text-muted text-base leading-none">{m.common_value()}</h4>
 						<p class="text-xl leading-none font-semibold text-white">
-							<AssetText variant="full" {value} />
+							{#if value.units.gt(UInt64.from(0))}
+								<AssetText variant="full" {value} />
+							{:else}
+								<span class="bg-mine-900 animate-pulse rounded tabular-nums">&nbsp;</span>
+							{/if}
 						</p>
 						{#if pair}
 							<Chip>
-								<TradingPair value={pair} />
+								{#if pair.price.units.gt(UInt64.from(0))}
+									<TradingPair value={pair} />
+								{:else}
+									<span class="bg-mine-900 animate-pulse rounded tabular-nums">&nbsp;</span>
+								{/if}
 								<!-- TODO: Percent change -->
 							</Chip>
 						{/if}

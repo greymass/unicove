@@ -40,7 +40,7 @@
 </script>
 
 <MultiCard>
-	{#if currentAccountValue.hasPrice}
+	{#if data.network.supports('delphioracle')}
 		<Card id="account-value" style="column-span: all;">
 			<Cluster class="items-center">
 				<picture class="bg-mine-900 grid size-12 place-items-center rounded-full">
@@ -49,11 +49,17 @@
 				{#if currentAccountValue}
 					<div>
 						<p>{m.account_page_total_value()}</p>
-						<AssetText
-							class="text-2xl font-bold text-white"
-							variant="full"
-							value={currentAccountValue.systemtoken.total}
-						/>
+						{#if currentAccountValue.hasPrice}
+							<AssetText
+								class="text-2xl font-bold text-white"
+								variant="full"
+								value={currentAccountValue.systemtoken.total}
+							/>
+						{:else}
+							<div class="bg-mine-900 w-48 animate-pulse rounded text-2xl font-bold text-white">
+								&nbsp;
+							</div>
+						{/if}
 					</div>
 				{/if}
 				<CurrencySelect />
