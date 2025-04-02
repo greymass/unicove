@@ -40,8 +40,6 @@
 	const balanceDelegated = $derived(balance.child('delegated'));
 	const balanceTotal = $derived(balance.child('total'));
 
-	const hasValue = $derived(value.units.gt(UInt64.from(0)));
-
 	const isRamToken = $derived(balance.id.equals(network.getRamTokenDefinition()));
 </script>
 
