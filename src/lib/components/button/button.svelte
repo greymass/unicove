@@ -44,30 +44,34 @@
 			: {}
 	);
 
-	const primaryStyles =
-		'relative inline-flex h-12 grow items-center justify-center text-nowrap rounded-lg bg-primary px-8 text-center text-base font-medium text-sky-50 transition-all focus:outline-transparent focus-visible:outline focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-solar-500 hover:active:bg-sky-800 disabled:cursor-not-allowed disabled:bg-mine-900 disabled:text-white/60 disabled:opacity-30 disabled:hover:bg-mine-900 hover:bg-sky-600';
+	const filledStyles =
+		' inline-flex h-12 grow    rounded-lg bg-primary px-8  text-on-primary  focus:outline-transparent focus-visible:outline focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-solar-500   disabled:bg-mine-900 disabled:text-white/60   ';
 
-	const secondaryStyles =
-		'relative flex h-12 grow items-center justify-center text-nowrap rounded-lg px-8 text-center text-base font-medium text-sky-400 ring-2 ring-inset ring-mine-600 transition-all hover:ring-transparent focus-visible:outline-hidden focus-visible:ring-solar-500 hover:active:bg-mine-950 hover:active:ring-mine-900 disabled:cursor-not-allowed disabled:text-mine-400 disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:ring-mine-600 disabled:active:ring-mine-600 hover:bg-mine-900';
+	const outlinedStyles =
+		' flex h-12 grow    rounded-lg px-8  text-primary ring-2 ring-inset ring-mine-600   focus-visible:outline-hidden focus-visible:ring-solar-500  hover:active:ring-mine-900  disabled:text-mine-400  disabled:hover:bg-transparent disabled:hover:ring-mine-600 disabled:active:ring-mine-600 ';
 
 	const pillStyles =
-		'relative inline-flex h-10 items-center justify-center text-nowrap rounded-full border-2 border-transparent px-5 text-center text-base font-medium leading-4 transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-solar-500 hover:active:bg-mine-950 aria-[current]:border-mine-200/30 hover:bg-mine-900 hover:text-mine-100';
+		' inline-flex h-10    rounded-full border-2 border-transparent px-5  leading-4  focus-visible:border-solar-500  focus-visible:outline-hidden   hover:active:bg-mine-950 aria-[current]:border-mine-200/30 aria-[current]:focus-visible:border-solar-500 hover:bg-mine-900 hover:text-mine-100';
 
-	const tertiaryStyles =
-		'relative flex h-12 grow items-center justify-center text-nowrap rounded-lg px-8 text-center text-base font-medium text-sky-400    transition-all  focus-visible:outline-hidden focus-visible:ring-solar-500   disabled:cursor-not-allowed disabled:text-mine-400 disabled:opacity-30 disabled:hover:bg-transparent  hover:text-sky-300';
+	const textStyles =
+		' flex h-12 grow    rounded-lg px-8  text-primary    focus-visible:outline-hidden focus-visible:ring-solar-500    disabled:text-mine-400  disabled:hover:bg-transparent  hover:text-sky-300';
 
 	let styles = {
-		primary: primaryStyles,
-		secondary: secondaryStyles,
+		primary: filledStyles,
+		secondary: outlinedStyles,
 		pill: pillStyles,
-		tertiary: tertiaryStyles
+		tertiary: textStyles
 	};
 </script>
 
 <svelte:element
 	this={tag}
 	use:melt={$meltElement}
-	class={cn(styles[variant], className)}
+	class={cn(
+		'group relative cursor-pointer items-center justify-center text-center text-base font-medium text-nowrap transition-all disabled:cursor-default disabled:opacity-30',
+		styles[variant],
+		className
+	)}
 	role={ariaRole}
 	aria-current={ariaCurrent}
 	{disabled}
@@ -75,5 +79,10 @@
 	{...props}
 	{...linkProps}
 >
-	<span class="pointer-events-none relative text-inherit">{@render props.children()}</span>
+	<div
+		class="state-layer pointer-events-none absolute inset-0 rounded-[inherit] bg-current opacity-0 transition-opacity group-hover:opacity-8 group-focus-visible:opacity-10 group-active:group-hover:opacity-16 group-disabled:hidden"
+	></div>
+	<span class="content-layer pointer-events-none relative text-inherit">
+		{@render props.children()}
+	</span>
 </svelte:element>

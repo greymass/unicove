@@ -42,7 +42,7 @@
 			</Stack>
 			<Stack class="gap-1">
 				<p class="caption">Active</p>
-				<Button variant="pill" active={true} onclick={() => {}}>EOS (MAX)</Button>
+				<Button variant="pill" aria-current={true} onclick={() => {}}>EOS (MAX)</Button>
 			</Stack>
 		</Cluster>
 	</Stack>
