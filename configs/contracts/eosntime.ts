@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-interface */
 import type { Action, TimePointType } from '@wharfkit/antelope';
 import { ABI, Blob, Name, Struct, TimePoint } from '@wharfkit/antelope';
 import type { ActionOptions, ContractArgs, PartialBy, Table } from '@wharfkit/contract';
@@ -18,14 +17,12 @@ export const TableMap = {};
 export interface TableTypes {}
 export type RowType<T> = T extends keyof TableTypes ? TableTypes[T] : any;
 export type TableNames = keyof TableTypes;
-export interface ActionParams {}
 export namespace ActionParams {
 	export namespace Type {}
 	export interface checktime {
 		time: TimePointType;
 	}
 }
-export const ActionParams: ActionParams = {} as ActionParams;
 export interface ActionNameParams {
 	checktime: ActionParams.checktime;
 }

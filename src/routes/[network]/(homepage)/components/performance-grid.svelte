@@ -26,8 +26,8 @@
 		if (network.supports('rex') && network.token.distribution) {
 			token.units.add(network.token.distribution.staked.units);
 		}
-		if (network.supports('rammarket') && network.token.distribution) {
-			token.units.add(network.foo?.quote.balance.units);
+		if (network.supports('rammarket')) {
+			token.units.add(network.resources.ram.supply);
 		}
 		if (networkValue.systemtoken.price.units.gt(Int64.from(0))) {
 			return calculateValue(token, networkValue.systemtoken.price);

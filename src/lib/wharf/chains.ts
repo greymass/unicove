@@ -7,9 +7,11 @@ import { Contract as MSIGContract } from '$lib/wharf/contracts/msig';
 import { Contract as SystemContract } from '$lib/wharf/contracts/system';
 import { Contract as TimeContract } from '$lib/wharf/contracts/eosntime';
 import { Contract as TokenContract } from '$lib/wharf/contracts/token';
-import { Contract as UnicoveContract } from '$lib/wharf/contracts/unicove';
+import { Contract as UnicoveContract } from '$lib/wharf/contracts/unicove.api';
 
 import * as env from '$env/static/public';
+
+import type { TokenDefinitionType } from '$lib/types/token';
 
 const coinbase =
 	env.PUBLIC_FEATURE_DIRECTFUNDING === 'true'
@@ -25,6 +27,14 @@ const metamask =
 				name: env.PUBLIC_FEATURE_METAMASK_PRODUCT_NAME,
 				snaporigin: env.PUBLIC_FEATURE_METAMASK_SNAP_ORIGIN,
 				serviceurl: env.PUBLIC_FEATURE_METAMASK_SERVICE_URL
+			}
+		: undefined;
+
+const legacytoken =
+	env.PUBLIC_LEGACY_TOKEN_CONTRACT && env.PUBLIC_LEGACY_TOKEN_SYMBOL
+		? {
+				contract: Name.from(env.PUBLIC_LEGACY_TOKEN_CONTRACT),
+				symbol: Asset.Symbol.from(env.PUBLIC_LEGACY_TOKEN_SYMBOL)
 			}
 		: undefined;
 
@@ -46,6 +56,7 @@ export const chainConfig: ChainConfig = {
 		symbol: env.PUBLIC_SYSTEM_TOKEN_SYMBOL
 	},
 	systemtokenalt,
+	legacytoken,
 	lockedsupply,
 	tokens: [],
 	endpoints: {
@@ -62,13 +73,14 @@ export const chainConfig: ChainConfig = {
 		metamask: isTrue(env.PUBLIC_FEATURE_METAMASK),
 		powerup: isTrue(env.PUBLIC_FEATURE_POWERUP),
 		rammarket: isTrue(env.PUBLIC_FEATURE_RAMMARKET),
+		ramtransfer: isTrue(env.PUBLIC_FEATURE_RAMTRANSFER),
 		rentrex: isTrue(env.PUBLIC_FEATURE_RENTREX),
 		rex: isTrue(env.PUBLIC_FEATURE_REX),
 		robo: isTrue(env.PUBLIC_FEATURE_ROBO),
 		stakeresource: isTrue(env.PUBLIC_FEATURE_STAKERESOURCE),
 		staking: isTrue(env.PUBLIC_FEATURE_STAKING),
 		timeseries: isTrue(env.PUBLIC_FEATURE_TIMESERIES),
-		unicovecontracts: isTrue(env.PUBLIC_FEATURE_UNICOVECONTRACTS)
+		unicovecontractapi: !!env.PUBLIC_FEATURE_UNICOVE_CONTRACT_API
 	},
 	metamask,
 	coinbase
@@ -109,22 +121,18 @@ export interface ChainMetaMaskConfig {
 	serviceurl: string;
 }
 
-export interface ChainToken {
-	contract: NameType;
-	symbol: Asset.SymbolType;
-}
-
 export interface ChainConfig {
 	id: Checksum256Type;
 	name: string;
 	features: Record<FeatureType, boolean>;
 	endpoints: ChainEndpoints;
+	legacytoken?: TokenDefinitionType;
 	lockedsupply?: NameType[]; // Accounts where tokens exist but are not in circulation
 	coinbase?: ChainCoinbaseConfig;
 	metamask?: ChainMetaMaskConfig;
-	systemtoken: ChainToken;
+	systemtoken: TokenDefinitionType;
 	systemtokenalt: Asset.Symbol[];
-	tokens: ChainToken[];
+	tokens: TokenDefinitionType[];
 }
 
 export type FeatureType =
@@ -137,13 +145,14 @@ export type FeatureType =
 	| 'metamask'
 	| 'powerup'
 	| 'rammarket'
+	| 'ramtransfer'
 	| 'rentrex'
 	| 'rex'
 	| 'robo'
 	| 'stakeresource'
 	| 'staking'
 	| 'timeseries'
-	| 'unicovecontracts';
+	| 'unicovecontractapi';
 
 export function getChainConfigByName(name: string): ChainConfig {
 	const chain = chains.find((c) => c.name === name);

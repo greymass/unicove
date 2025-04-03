@@ -77,7 +77,7 @@
 
 					<div>
 						<div class="text-mine-50 font-bold">{name}</div>
-						<div class="text-muted">{account.balance?.total}</div>
+						<div class="text-muted">{account.balance.child('total')}</div>
 					</div>
 				</div>
 			</div>

@@ -2,10 +2,10 @@ import { API, Int64, Name, Asset, Float64, Checksum256 } from '@wharfkit/antelop
 
 import { Types as MsigTypes } from '$lib/wharf/contracts/msig';
 import { Types as SystemTypes } from '$lib/wharf/contracts/system';
-import { Types as UnicoveTypes } from '$lib/wharf/contracts/unicove';
+import { Types as UnicoveTypes } from '$lib/wharf/contracts/unicove.api';
 import { Types as REXTypes } from '$lib/types/rex';
-import type { LightAPIBalanceRow } from '$lib/types/lightapi';
 import type { SerializedNetworkState } from '$lib/types/network';
+import type { TokenBalance } from './token';
 
 export interface VoterInfo {
 	isProxy: boolean;
@@ -21,10 +21,10 @@ export interface AccountDataSources {
 	get_account: API.v1.AccountObject;
 	// Hash of the contract on the account
 	contract_hash: Checksum256;
-	// Light API balances call
-	light_api: LightAPIBalanceRow[];
 	// Table rows from eosio.token::accounts
 	balance: Asset;
+	// List of all loaded token balances
+	balances: TokenBalance[];
 	// Table rows from eosio::delband
 	delegated: SystemTypes.delegated_bandwidth[];
 	// Table row from eosio::giftedram

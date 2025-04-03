@@ -153,7 +153,7 @@
 	"common_select_an_option": "选择一个选项",
 	"common_sell": "出售",
 	"common_send": "发送",
-	"common_send_tokens": "发送代币",
+	"common_send_tokens": "Send {token} Tokens",
 	"common_settings": "设置",
 	"common_signer": "签名者",
 	"common_source_code": "源代码",

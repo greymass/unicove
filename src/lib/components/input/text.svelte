@@ -14,6 +14,11 @@
 		class: className,
 		...props
 	}: TextInputProps = $props();
+
+	/** Set the input value from a parent */
+	export function set(newValue: string | undefined) {
+		value = newValue;
+	}
 </script>
 
 <div

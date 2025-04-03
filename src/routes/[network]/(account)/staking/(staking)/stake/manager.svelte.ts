@@ -55,8 +55,8 @@ export class StakeManager {
 			if (meta) {
 				balance = TokenBalance.from({
 					balance: this.staked,
-					token: {
-						id,
+					id: {
+						...id,
 						contract: this.network.contracts.token.account
 					}
 				});

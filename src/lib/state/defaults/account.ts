@@ -2,7 +2,7 @@ import { API, Asset, Checksum256, Float64, Int64, Name } from '@wharfkit/antelop
 
 import { type AccountDataSources, type VoterInfo } from '$lib/types/account';
 import * as SystemContract from '$lib/wharf/contracts/system';
-import { Types as UnicoveTypes } from '$lib/wharf/contracts/unicove';
+import { Types as UnicoveTypes } from '$lib/wharf/contracts/unicove.api';
 import { Types as REXTypes } from '$lib/types/rex';
 
 export const defaultGetAccount = API.v1.AccountObject.from({
@@ -84,7 +84,7 @@ export const defaultAccountDataSources: AccountDataSources = {
 	get_account: defaultGetAccount,
 	contract_hash: nullContractHash,
 	balance: defaultAsset,
-	light_api: [],
+	balances: [],
 	delegated: [],
 	giftedram: defaultGiftedRam,
 	proposals: [],

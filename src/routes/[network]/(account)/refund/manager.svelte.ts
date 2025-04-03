@@ -16,7 +16,7 @@ export class RefundManager {
 			return Asset.fromUnits(0, '0,UNKNOWN');
 		}
 
-		return this.account.balance.refunding;
+		return this.account.balance.child('refunding').balance;
 	});
 
 	public dateAvailable: Date | undefined = $derived.by(() => {

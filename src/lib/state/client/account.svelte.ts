@@ -20,7 +20,6 @@ import type {
 	VoterInfo
 } from '$lib/types/account';
 
-import { isSameToken } from '$lib/utils';
 import {
 	defaultAccountDataSources,
 	defaultVoteInfo,
@@ -28,7 +27,7 @@ import {
 } from '$lib/state/defaults/account';
 import * as SystemContract from '$lib/wharf/contracts/system';
 import { Types as REXTypes } from '$lib/types/rex';
-import { Token, TokenBalance, TokenDefinition } from '$lib/types/token';
+import { TokenBalance, TokenDefinition } from '$lib/types/token';
 
 export class AccountState {
 	public client?: APIClient = $state();
@@ -42,22 +41,10 @@ export class AccountState {
 	public contract: boolean = $derived(!this.sources.contract_hash.equals(nullContractHash));
 	public loaded: boolean = $state(false);
 
-	public balance = $derived.by(() =>
-		this.network ? getBalance(this.network, this.sources) : undefined
-	);
-	public balances: TokenBalance[] = $derived.by(() =>
-		this.network
-			? getBalances(
-					this.network,
-					this.sources,
-					this.network.chain.id,
-					this.network.tokens,
-					this.balance?.liquid
-				)
-			: []
-	);
-	public delegations = $derived(getDelegations(this.sources));
+	public balance = $derived.by(() => getBalance(this.network, this.sources));
+	public balances = $derived.by(() => getBalances(this.network, this.sources, this.resources));
 
+	public delegations = $derived(getDelegations(this.sources));
 	public resources = $derived.by(() => getResources(this.sources, this.network));
 	public rex = $derived.by(() => getRex(this.sources));
 	public permissions = $derived(API.v1.AccountObject.from(this.sources.get_account).permissions);
@@ -104,8 +91,8 @@ export class AccountState {
 			get_account: data.get_account,
 			contract_hash: Checksum256.from(data.contract_hash),
 			balance: data.balance,
+			balances: data.balances,
 			giftedram: data.giftedram,
-			light_api: data.light_api,
 			delegated: data.delegated,
 			proposals: data.proposals,
 			refund_request: data.refund_request,
@@ -125,6 +112,10 @@ export class AccountState {
 			};
 		}
 		this.loaded = true;
+	}
+
+	getSources() {
+		return this.sources;
 	}
 
 	toJSON() {
@@ -214,54 +205,43 @@ export function getResources(
 }
 
 export interface AccountValue {
+	// Value of tokens delegated during genesis or the old eosio::delegatebw action
 	delegated: Asset;
+	// Available token balance for the account on the token contract
 	liquid: Asset;
+	// Value of RAM owned by the account
 	ram: Asset;
-	refunding: Asset;
-	staked: Asset;
-	systemtoken: Asset;
-	total: Asset;
-	unstaked: Asset;
-}
-
-export interface Balance {
-	// Tokens delegated from genesis or the old eosio::delegatebw action
-	delegated: Asset;
-	// Available token balance for the account on eosio.token
-	liquid: Asset;
 	// Tokens being refunded from delegated balances, claimable with eosio::refund
 	refunding: Asset;
-	// REX balance represented as staked system tokens
+	// Value of REX balance represented as staked system tokens
 	staked: Asset;
+	// Sum value of the system token values (minus RAM)
+	systemtoken: Asset;
+	// Sum of all values
+	total: Asset;
+	// Value of all non-system tokens owned by the account
+	tokens: Asset;
 	// System tokens idle in the eosio.rex contract (likely from eosio::sellrex)
 	unstaked: Asset;
-	// Total balance of all owned system tokens
-	total: Asset;
 }
 
-export function getBalance(network: NetworkState, sources: AccountDataSources): Balance {
+export function getBalance(network: NetworkState, sources: AccountDataSources): TokenBalance {
 	if (!network) {
 		throw new Error('Network not initialized');
 	}
 	if (!network.config) {
 		throw new Error('Network configuration not initialized');
 	}
-	// Create an empty balance to start adding to
-	const delegated = Asset.fromUnits(0, network.config.systemtoken.symbol);
-	const refunding = Asset.fromUnits(0, network.config.systemtoken.symbol);
-	const liquid = Asset.fromUnits(0, network.config.systemtoken.symbol);
-	const staked = Asset.fromUnits(0, network.config.systemtoken.symbol);
-	const unstaked = Asset.fromUnits(0, network.config.systemtoken.symbol);
-	const total = Asset.fromUnits(0, network.config.systemtoken.symbol);
 
-	// Add the core balance if it exists on the account
+	const total = Asset.fromUnits(0, network.config.systemtoken.symbol);
+	const liquid = Asset.fromUnits(0, network.config.systemtoken.symbol);
 	if (sources.balance) {
 		const balance = Asset.from(sources.balance);
 		liquid.units.add(balance.units);
 		total.units.add(balance.units);
 	}
 
-	// Add any delegated tokens to the total balance
+	const delegated = Asset.fromUnits(0, network.config.systemtoken.symbol);
 	if (sources.delegated.length > 0) {
 		const delegatedTokens = getDelegated(
 			getDelegations(sources),
@@ -271,7 +251,19 @@ export function getBalance(network: NetworkState, sources: AccountDataSources): 
 		total.units.add(delegatedTokens.units);
 	}
 
-	// Add the currently refunding balance to the total balance
+	let legacy = Asset.fromUnits(0, network.config.systemtoken.symbol);
+	if (network.legacytoken) {
+		const legacyDefinition = TokenDefinition.from(network.legacytoken);
+		const legacyBalance = sources.balances.find((b) => {
+			return TokenBalance.from(b).id.equals(legacyDefinition);
+		});
+		if (legacyBalance) {
+			const legacyAsset = Asset.from(legacyBalance.balance);
+			legacy = legacyAsset;
+		}
+	}
+
+	const refunding = Asset.fromUnits(0, network.config.systemtoken.symbol);
 	if (sources.refund_request) {
 		const cpu = Asset.from(sources.refund_request.cpu_amount);
 		refunding.units.add(cpu.units);
@@ -281,16 +273,14 @@ export function getBalance(network: NetworkState, sources: AccountDataSources): 
 		total.units.add(net.units);
 	}
 
-	if (network.config.features.rex) {
-		// Add any staked (REX) tokens to total balance based on current value
+	const staked = Asset.fromUnits(0, network.config.systemtoken.symbol);
+	const unstaked = Asset.fromUnits(0, network.config.systemtoken.symbol);
+	if (network.supports('rex')) {
 		if (sources.rexbal) {
-			if (network.supports('rex')) {
-				const rex = network.rexToToken(sources.rexbal.rex_balance);
-				staked.units.add(rex.units);
-				total.units.add(rex.units);
-			}
+			const rex = network.rexToToken(sources.rexbal.rex_balance);
+			staked.units.add(rex.units);
+			total.units.add(rex.units);
 		}
-		// Add rex fund to total balance based on current value
 		if (sources.rexfund && sources.rexfund.balance) {
 			const balance = Asset.from(sources.rexfund.balance);
 			unstaked.units.add(balance.units);
@@ -298,95 +288,99 @@ export function getBalance(network: NetworkState, sources: AccountDataSources): 
 		}
 	}
 
-	return {
-		delegated,
-		liquid,
-		refunding,
-		staked,
-		unstaked,
-		total
-	};
+	const children = [
+		{
+			name: 'delegated',
+			id: network.token.id,
+			balance: delegated
+		},
+		{
+			name: 'refunding',
+			id: network.token.id,
+			balance: refunding
+		},
+		{
+			name: 'staked',
+			id: network.token.id,
+			balance: staked
+		},
+		{
+			name: 'total',
+			id: network.token.id,
+			balance: total
+		},
+		{
+			name: 'unstaked',
+			id: network.token.id,
+			balance: unstaked
+		}
+	];
+
+	if (network.legacytoken) {
+		children.push({
+			name: 'legacy',
+			id: network.token.id,
+			balance: legacy
+		});
+	}
+
+	return TokenBalance.from({
+		id: network.token.id,
+		balance: liquid,
+		children
+	});
 }
 
 export function getBalances(
 	network: NetworkState,
 	sources: AccountDataSources,
-	chain: Checksum256,
-	tokens?: Token[],
-	liquid?: Asset
+	resources: AccountResources
 ): TokenBalance[] {
-	if (sources.light_api) {
-		const balances: TokenBalance[] = [];
+	const balances: TokenBalance[] = sources.balances.map((b) => TokenBalance.from(b));
+	const id = network.getRamTokenDefinition();
+	balances.push(
+		TokenBalance.from({
+			id,
+			balance: Asset.fromUnits(resources.ram.available, id.symbol),
+			locked: !network.supports('ramtransfer'),
+			children: [
+				{
+					id,
+					balance: Asset.fromUnits(resources.ram.used, id.symbol),
+					name: 'used'
+				},
+				{
+					id,
+					balance: Asset.fromUnits(resources.ram.owned, id.symbol),
+					name: 'total'
+				}
+			]
+		})
+	);
 
-		//If the value of system token is 0,
-		//for example, the chain does not support lightapi.
-		//replace it with the value of liquid
-		sources.light_api?.forEach((balance) => {
-			let amount = balance.amount;
-			if (
-				!Number(amount) &&
-				network.chain.systemToken &&
-				isSameToken(
-					{
-						contract: network.chain.systemToken.contract,
-						symbol: network.chain.systemToken.symbol.name
-					},
-					{
-						contract: balance.contract,
-						symbol: balance.currency
-					}
-				) &&
-				liquid
-			) {
-				amount = liquid.quantity;
-			}
-			const asset = Asset.from(`${amount} ${balance.currency}`);
-			const contract = Name.from(balance.contract);
-			const id = TokenDefinition.from({
-				chain,
-				contract: contract,
-				symbol: asset.symbol
-			});
-			const token =
-				tokens && tokens.length > 0
-					? tokens.find((token) => token.id.equals(id))
-					: Token.from({
-							id
-						});
-			balances.push(
-				TokenBalance.from({
-					balance: asset,
-					token
-				})
-			);
-		});
+	// Sort balances alphabetically
+	balances.sort((a, b) => {
+		if (a.id.symbol.name < b.id.symbol.name) {
+			return -1;
+		}
+		if (a.id.symbol.name > b.id.symbol.name) {
+			return 1;
+		}
+		return 0;
+	});
 
-		// Sort balances alphabetically
-		balances.sort((a, b) => {
-			if (a.token.symbol.name < b.token.symbol.name) {
-				return -1;
-			}
-			if (a.token.symbol.name > b.token.symbol.name) {
-				return 1;
-			}
-			return 0;
-		});
+	// Move system token to the top of the list regardless of alphabetical order
+	balances.sort((a, b) => {
+		if (a.id.equals(network.token.id)) {
+			return -1;
+		}
+		if (b.id.equals(network.token.id)) {
+			return 1;
+		}
+		return 0;
+	});
 
-		// Move system token to the top of the list regardless of alphabetical order
-		balances.sort((a, b) => {
-			if (a.token.id.equals(network.token.id)) {
-				return -1;
-			}
-			if (b.token.id.equals(network.token.id)) {
-				return 1;
-			}
-			return 0;
-		});
-
-		return balances;
-	}
-
-	return [];
+	return balances;
 }
 
 export function getDelegated(

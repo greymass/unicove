@@ -59,7 +59,6 @@
 		}
 	});
 
-	/** Set the input value from a parent */
 	export function reset() {
 		input = null;
 		value = undefined;
