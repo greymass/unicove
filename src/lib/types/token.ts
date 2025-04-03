@@ -19,6 +19,10 @@ export class TokenDefinition extends Struct {
 	@Struct.field(Asset.Symbol) declare symbol: Asset.Symbol;
 	@Struct.field(Checksum256, { optional: true }) declare chain?: Checksum256;
 	@Struct.field(Name, { optional: true }) declare contract?: Name;
+
+	get url(): string {
+		return `${this.contract}/${String(this.symbol).toLowerCase()}`;
+	}
 }
 
 @Struct.type('token_pair')
