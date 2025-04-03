@@ -6,11 +6,11 @@
 	import ClipboardPen from 'lucide-svelte/icons/clipboard-pen';
 	import * as m from '$lib/paraglide/messages';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import { getContext, type Snippet } from 'svelte';
+	import { getContext } from 'svelte';
 
 	import { Types as MsigTypes } from '$lib/wharf/contracts/msig';
 	import Button from '$lib/components/button/button.svelte';
-	import Code from '../code.svelte';
+	import Code from '$lib/components/code.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 

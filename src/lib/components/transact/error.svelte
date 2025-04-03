@@ -1,5 +1,4 @@
 <script lang="ts">
-	import type { Snippet } from 'svelte';
 	import CircleX from 'lucide-svelte/icons/circle-x';
 	import * as m from '$lib/paraglide/messages';
 
