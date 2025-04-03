@@ -4,7 +4,7 @@
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",
-		"build-paraglide": "npx @inlang/paraglide-js compile --project ./project.inlang --outdir ./src/lib/paraglide",
+		"build-paraglide": "bunx @inlang/paraglide-js compile --project ./project.inlang --outdir ./src/lib/paraglide",
 		"build": "bun run build-paraglide && vite build",
 		"build-docker": "bun run build-paraglide && ADAPTER=bun vite build",
 		"preview": "vite preview",
