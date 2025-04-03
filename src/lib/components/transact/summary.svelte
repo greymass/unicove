@@ -17,7 +17,7 @@
 	interface Props {
 		transactionId?: Checksum256 | string;
 		hidden?: boolean;
-		onsuccess?: Snippet;
+		onsuccess?: () => ReturnType<import('svelte').Snippet>;
 	}
 
 	const { transactionId, hidden, onsuccess }: Props = $props();

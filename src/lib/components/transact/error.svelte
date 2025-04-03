@@ -6,7 +6,7 @@
 	interface Props {
 		error?: string;
 		hidden?: boolean;
-		onfailure?: Snippet;
+		onfailure?: () => ReturnType<import('svelte').Snippet>;
 	}
 
 	const { error, hidden, onfailure }: Props = $props();

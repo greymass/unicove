@@ -8,9 +8,9 @@
 	interface TransactFormProps {
 		children: Snippet;
 		id?: Checksum256;
-		onsuccess?: Snippet;
+		onsuccess?: () => ReturnType<import('svelte').Snippet>;
 		error?: string;
-		onfailure?: Snippet;
+		onfailure?: () => ReturnType<import('svelte').Snippet>;
 	}
 
 	let { error, id, onfailure, onsuccess, ...props }: TransactFormProps = $props();
