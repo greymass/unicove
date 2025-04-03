@@ -102,10 +102,10 @@
 		quoteQuantity = quote;
 	}
 
-	function baseChange(e: Event & { target: EventTarget & HTMLInputElement }) {
+	function baseChange(e: Event & { currentTarget: EventTarget & HTMLInputElement }) {
 		if (pair) {
 			const quote = Asset.fromFloat(
-				Number(e.target.value) * pair.price.value,
+				Number(e.currentTarget.value) * pair.price.value,
 				quoteQuantity.symbol
 			);
 			quoteQuantity = quote;
@@ -113,9 +113,12 @@
 		}
 	}
 
-	function quoteChange(e: Event & { target: EventTarget & HTMLInputElement }) {
+	function quoteChange(e: Event & { currentTarget: EventTarget & HTMLInputElement }) {
 		if (pair) {
-			const base = Asset.fromFloat(Number(e.target.value) / pair.price.value, baseQuantity.symbol);
+			const base = Asset.fromFloat(
+				Number(e.currentTarget.value) / pair.price.value,
+				baseQuantity.symbol
+			);
 			baseQuantity = base;
 			baseInput?.set(base);
 		}
