@@ -109,7 +109,7 @@
 		<ul class="space-y-4 xl:space-y-0">
 			{#each explanations as explanation}
 				<li class="grid grid-cols-1 gap-y-4 sm:grid-cols-[25%_75%]">
-					<div class="flex justify-center sm:pl-5 sm:pt-5">
+					<div class="flex justify-center sm:pt-5 sm:pl-5">
 						{#if explanation.icon}
 							{@const Component = explanation.icon}
 							<Component class="size-5 text-white" />

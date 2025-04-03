@@ -39,8 +39,9 @@ import { Contract as MSIGContract } from '$lib/wharf/contracts/msig';
 import { Contract as SystemContract } from '$lib/wharf/contracts/system';
 import { Contract as TimeContract } from '$lib/wharf/contracts/eosntime';
 import { Contract as TokenContract } from '$lib/wharf/contracts/token';
-import { Contract as UnicoveContract } from '$lib/wharf/contracts/unicove';
+import { Contract as UnicoveContract } from '$lib/wharf/contracts/unicove.api';
 import type { ObjectifiedActionData } from '$lib/types/transaction';
+import { PUBLIC_FEATURE_UNICOVE_CONTRACT_API } from '$env/static/public';
 
 export class NetworkState {
 	// Readonly state
@@ -94,7 +95,8 @@ export class NetworkState {
 		this.abis = new ABICache(this.client);
 		this.resourceClient = new ResourceClient({
 			api: this.client,
-			sampleAccount: 'eosio.reserv'
+			sampleAccount: 'eosio.reserv',
+			symbol: String(this.config.systemtoken.symbol)
 		});
 		this.connection.endpoint = (this.client.provider as FetchProvider).url;
 
@@ -105,7 +107,10 @@ export class NetworkState {
 			msig: new MSIGContract({ client: this.client }),
 			system: new SystemContract({ client: this.client }),
 			token: new TokenContract({ client: this.client }),
-			unicove: new UnicoveContract({ client: this.client })
+			unicove: new UnicoveContract({
+				account: PUBLIC_FEATURE_UNICOVE_CONTRACT_API,
+				client: this.client
+			})
 		};
 	}
 
@@ -144,6 +149,27 @@ export class NetworkState {
 		} else {
 			this.connection.connected = false;
 		}
+	}
+
+	get legacytoken(): Token | undefined {
+		if (!this.config.legacytoken) {
+			return undefined;
+		}
+		return Token.from({
+			id: {
+				chain: this.chain.id,
+				symbol: this.config.legacytoken.symbol,
+				contract: this.config.legacytoken.contract
+			}
+		});
+	}
+
+	getRamTokenDefinition(): TokenDefinition {
+		return TokenDefinition.from({
+			symbol: Asset.Symbol.from('3,KB'),
+			contract: 'eosio',
+			chain: this.chain.id
+		});
 	}
 
 	getSystemToken(): Token {
@@ -233,10 +259,6 @@ export class NetworkState {
 			powerup.net.frac_by_kb(this.sources.sample, net)
 		];
 	};
-
-	get foo() {
-		return this.sources?.ram;
-	}
 
 	getResources(): SystemResources {
 		const defaultValue = Asset.fromUnits(0, this.token.symbol);

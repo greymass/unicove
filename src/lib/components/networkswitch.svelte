@@ -58,8 +58,8 @@
 <button
 	id="network-switcher"
 	class={cn(
-		'flex items-center gap-3 rounded-2xl px-4 py-3.5  focus:bg-mineShaft-950 focus:outline-none',
-		!!context.settings.data.advancedMode && 'hover:bg-mineShaft-950',
+		'focus:bg-mine-950 flex items-center gap-3 rounded-2xl px-4  py-3.5 focus:outline-hidden',
+		!!context.settings.data.advancedMode && 'hover:bg-mine-950',
 		className
 	)}
 	use:melt={$trigger}
@@ -79,7 +79,7 @@
 	</picture>
 
 	<div class="grid flex-1 justify-items-start gap-0.5 md:gap-0">
-		<span class="m-0 overflow-ellipsis text-xl font-bold leading-none md:text-2xl"
+		<span class="m-0 text-xl leading-none font-bold text-ellipsis md:text-2xl"
 			>{currentNetwork.chain.name}</span
 		>
 
@@ -97,19 +97,19 @@
 
 {#if $open}
 	<div
-		class="z-50 flex max-h-[300px] flex-col overflow-y-auto rounded-lg bg-mineShaft-950 p-1 shadow focus:!ring-0"
+		class="bg-mine-950 z-50 flex max-h-[300px] flex-col overflow-y-auto rounded-lg p-1 shadow-sm focus:ring-0!"
 		use:melt={$menu}
 		transition:fade={{ duration: 150 }}
 	>
 		{#each options as chain}
 			<div
 				class="
-				relative flex h-12
-				cursor-pointer items-center gap-2 rounded-lg
+				data-highlighted:bg-solar-200 data-highlighted:text-solar-900 relative
+				flex h-12 cursor-pointer items-center
+					gap-2
+					rounded-lg
 					px-4
-					data-[highlighted]:bg-solar-200
-					data-[highlighted]:text-solar-900
-					data-[disabled]:opacity-50"
+					data-disabled:opacity-50"
 				use:melt={$option(chain)}
 			>
 				<picture class="flex size-6 items-center justify-center">

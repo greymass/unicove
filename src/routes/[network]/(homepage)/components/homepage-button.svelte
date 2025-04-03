@@ -14,7 +14,7 @@
 
 <Button
 	class={cn(
-		'-mt-2 bg-transparent px-0 text-solar-500 hover:active:bg-transparent hover:active:text-solar-600 [@media(any-hover:hover)]:hover:bg-transparent [@media(any-hover:hover)]:hover:text-solar-400',
+		'text-solar-500 hover:active:text-solar-600 hover:text-solar-400 -mt-2 bg-transparent px-0 hover:bg-transparent hover:active:bg-transparent',
 		props.class
 	)}
 	href={props.href}

@@ -4,21 +4,22 @@ import { Asset, type NameType } from '@wharfkit/antelope';
 import { NetworkState } from '$lib/state/network.svelte';
 import { getCacheHeaders } from '$lib/utils';
 import type { AccountDataSources } from '$lib/types/account';
-import type { LightAPIBalanceResponse, LightAPIBalanceRow } from '$lib/types/lightapi';
+import type { LightAPIBalanceResponse } from '$lib/types/lightapi';
 
 import type { RequestEvent, RequestHandler } from './$types';
 
 import { Types as SystemTypes, type TableTypes } from '$lib/wharf/contracts/system';
 import { Types as REXTypes } from '$lib/types/rex';
-import { Types as UnicoveTypes } from '$lib/wharf/contracts/unicove';
+import { Types as UnicoveTypes } from '$lib/wharf/contracts/unicove.api';
 import { nullContractHash } from '$lib/state/defaults/account';
+import { TokenBalance, TokenDefinition } from '$lib/types/token';
 
 export const GET: RequestHandler = async ({ locals: { network }, params }: RequestEvent) => {
 	const headers = getCacheHeaders(5);
 
 	try {
 		let response: AccountDataSources;
-		if (network.supports('unicovecontracts')) {
+		if (network.supports('unicovecontractapi')) {
 			try {
 				response = await getAccount2(network, params.name);
 			} catch (e) {
@@ -46,14 +47,23 @@ async function loadBalances(
 	network: NetworkState,
 	account: NameType,
 	f: typeof fetch
-): Promise<LightAPIBalanceRow[]> {
-	const balances = [];
+): Promise<TokenBalance[]> {
+	let balances: TokenBalance[] = [];
 	if (network.supports('lightapi') && network.config.endpoints.lightapi) {
 		const result = await f(
 			`${network.config.endpoints.lightapi}/api/balances/${network}/${account}`
 		);
 		const json: LightAPIBalanceResponse = await result.json();
-		balances.push(...json.balances);
+		balances = json.balances.map((b) =>
+			TokenBalance.from({
+				id: TokenDefinition.from({
+					chain: network.chain.id,
+					contract: b.contract,
+					symbol: `${b.decimals},${b.currency}`
+				}),
+				balance: Asset.fromFloat(Number(b.amount), `${b.decimals},${b.currency}`)
+			})
+		);
 	}
 	return balances;
 }
@@ -69,11 +79,18 @@ async function getAccount(network: NetworkState, account: NameType): Promise<Acc
 	]);
 
 	let rex;
-	let balances: LightAPIBalanceRow[] = [];
+	let balances: TokenBalance[] = [];
 	let giftedram: UnicoveTypes.gifted_ram | undefined;
 
 	if (network.supports('lightapi')) {
 		balances = await loadBalances(network, account, network.fetch);
+	} else {
+		balances = [
+			TokenBalance.from({
+				id: network.token,
+				balance: get_account.core_liquid_balance || Asset.fromUnits(0, network.token.symbol)
+			})
+		];
 	}
 
 	if (network.supports('rex')) {
@@ -85,17 +102,6 @@ async function getAccount(network: NetworkState, account: NameType): Promise<Acc
 		giftedram = (await systemContract
 			.table('giftedram' as keyof TableTypes)
 			.get(account)) as unknown as UnicoveTypes.gifted_ram;
-	}
-
-	// If no response from the light API, add a default balance of zero
-	if (!balances.length && network.chain.systemToken) {
-		const symbol = Asset.Symbol.from(network.config.systemtoken.symbol);
-		balances.push({
-			contract: String(network.chain.systemToken.contract),
-			amount: '0',
-			decimals: String(symbol.precision),
-			currency: String(symbol.code)
-		});
 	}
 
 	const defaultBalance = Asset.fromUnits(0, network.config.systemtoken.symbol);
@@ -121,7 +127,7 @@ async function getAccount(network: NetworkState, account: NameType): Promise<Acc
 		get_account,
 		contract_hash,
 		balance: get_account.core_liquid_balance || defaultBalance,
-		light_api: balances,
+		balances,
 		delegated,
 		giftedram,
 		proposals,
@@ -132,33 +138,28 @@ async function getAccount(network: NetworkState, account: NameType): Promise<Acc
 }
 
 async function getAccount2(network: NetworkState, account: NameType): Promise<AccountDataSources> {
+	const tokens: UnicoveTypes.token_definition[] = [];
+	if (network.legacytoken) {
+		tokens.push(
+			UnicoveTypes.token_definition.from({
+				contract: network.legacytoken.contract,
+				symbol: network.legacytoken.symbol
+			})
+		);
+	}
+
 	const [get_account, getaccount] = await Promise.all([
 		network.client.v1.chain.get_account(account),
-		network.contracts.unicove.readonly('account', { account })
+		network.contracts.unicove.readonly('account', { account, tokens })
 	]);
 
-	let balances: LightAPIBalanceRow[] = [];
-
-	if (network.supports('lightapi')) {
-		balances = await loadBalances(network, account, network.fetch);
-	}
-
-	// If no response from the light API, add a default balance of zero
-	if (!balances.length && network.chain.systemToken) {
-		const symbol = Asset.Symbol.from(network.config.systemtoken.symbol);
-		balances.push({
-			contract: String(network.chain.systemToken.contract),
-			amount: '0',
-			decimals: String(symbol.precision),
-			currency: String(symbol.code)
-		});
-	}
+	const balances = await getBalances(network, tokens, getaccount);
 
 	return {
 		get_account,
 		contract_hash: getaccount.contracthash,
 		balance: getaccount.balance,
-		light_api: balances,
+		balances,
 		delegated: getaccount.delegations,
 		giftedram: getaccount.giftedram,
 		proposals: getaccount.proposals,
@@ -166,4 +167,41 @@ async function getAccount2(network: NetworkState, account: NameType): Promise<Ac
 		rexbal: getaccount.rexbal,
 		rexfund: getaccount.rexfund
 	};
+}
+
+async function getBalances(
+	network: NetworkState,
+	requested: TokenDefinition[],
+	getaccount: UnicoveTypes.get_account_response
+): Promise<TokenBalance[]> {
+	const balances: TokenBalance[] = [];
+	if (network.supports('lightapi')) {
+		const results = await loadBalances(network, getaccount.account, network.fetch);
+		balances.push(...results);
+	}
+	if (getaccount.balance) {
+		balances.push(
+			TokenBalance.from({
+				id: network.token,
+				balance: getaccount.balance
+			})
+		);
+	}
+	if (getaccount.balances) {
+		for (const token of requested) {
+			const balance = getaccount.balances.find((b) => b.symbol.equals(token.symbol));
+			if (balance) {
+				balances.push(
+					TokenBalance.from({
+						id: {
+							...token,
+							chain: network.chain.id
+						},
+						balance
+					})
+				);
+			}
+		}
+	}
+	return balances;
 }

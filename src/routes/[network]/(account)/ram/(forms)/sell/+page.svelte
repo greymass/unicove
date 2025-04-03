@@ -59,7 +59,7 @@
 		errorMessage = undefined;
 		sellRamState.reset();
 		bytesInput?.reset();
-		assetInput?.reset();
+		assetInput?.set(null);
 	}
 
 	$effect(() => {

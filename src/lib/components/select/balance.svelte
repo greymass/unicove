@@ -4,14 +4,16 @@
 	import { writable } from 'svelte/store';
 	import * as m from '$lib/paraglide/messages';
 	import { TokenBalance } from '$lib/types/token';
+	import type { ChangeFn } from '@melt-ui/svelte/internal/helpers';
+	import Code from '../code.svelte';
 
-	interface TokenSelectOption extends SelectOption<number> {
+	interface BalanceSelectOption extends SelectOption<number> {
 		image?: string;
 	}
 
 	interface Props {
 		options: TokenBalance[];
-		selected: TokenBalance;
+		selected?: TokenBalance;
 		debug?: boolean;
 		id: string;
 		disabled?: boolean;
@@ -19,6 +21,7 @@
 		multiple?: boolean;
 		sameWidth?: boolean;
 		class?: string;
+		onSelectedChange?: ChangeFn<BalanceSelectOption | undefined>;
 	}
 
 	let {
@@ -30,15 +33,16 @@
 		required = false,
 		multiple = false,
 		sameWidth = true,
-		class: className = ''
+		class: className = '',
+		onSelectedChange
 	}: Props = $props();
 
 	const variant = 'form';
 
 	const label = (balance: TokenBalance) =>
-		`${String(balance.token.symbol.code)} (${balance.balance.quantity})`;
+		`${String(balance.id.symbol.code)} (${balance.balance.quantity})`;
 
-	const createOption = (balance: TokenBalance, index: number): TokenSelectOption => {
+	const createOption = (balance: TokenBalance, index: number): BalanceSelectOption => {
 		return {
 			value: index,
 			label: label(balance)
@@ -48,20 +52,28 @@
 
 	// Convert the options to the format of SelectOption<number>
 	// Using an index as the value instead of the TokenBalance object
-	const balanceOptions: TokenSelectOption[] = options.map((balance: TokenBalance, index) =>
-		createOption(balance, index)
+	const balanceOptions: BalanceSelectOption[] = $derived(
+		options.map((balance: TokenBalance, index) => createOption(balance, index))
 	);
 
 	// Create a typed store for the selected option
-	let selectedTokenOption = writable<TokenSelectOption>(balanceOptions[0]);
+	let selectedBalanceOption = writable<BalanceSelectOption>();
 
 	// Build the select component with the custom store
 	const {
 		elements: { trigger, menu, option },
-		states: { open, selected, selectedLabel },
+		states: { open },
 		helpers: { isSelected }
 	} = createSelect({
-		selected: selectedTokenOption,
+		selected: selectedBalanceOption,
+		onSelectedChange: ({ curr, next }) => {
+			if (next) {
+				_selected = options[next.value];
+			}
+			if (onSelectedChange) {
+				return onSelectedChange({ curr, next });
+			}
+		},
 		required,
 		disabled,
 		multiple,
@@ -73,30 +85,20 @@
 		}
 	});
 
-	// Get the whole TokenBalance object from the selected option by index
-	let selectedTokenBalance = $derived.by(() => options[$selectedTokenOption.value] || options[0]);
-
-	// Get the image from the selected TokenBalance object
-	// let selectedTokenImage = $derived(image(selectedTokenBalance));
-
-	// Sync the currently selected object with the bound selected prop
-	$effect(() => {
-		if (selected) {
-			_selected = selectedTokenBalance;
-		}
-	});
-
 	/** Set the value from a parent */
 	export function set(balance: TokenBalance | null) {
 		if (!balance) {
 			_selected = options[0];
+			selectedBalanceOption.set(balanceOptions[0]);
 		} else {
 			_selected = balance;
 			const option = balanceOptions.find((o) =>
 				TokenBalance.from(options[o.value]).equals(balance)
 			);
 			if (option) {
-				selectedTokenOption.set(option);
+				selectedBalanceOption.set(option);
+			} else {
+				selectedBalanceOption.set(balanceOptions[0]);
 			}
 		}
 	}
@@ -106,7 +108,7 @@
 	<!-- {#if selectedTokenImage}
 		<img src={selectedTokenImage} alt={$selectedLabel} class="mr-2 size-5 object-contain" />
 	{/if} -->
-	{$selectedLabel || m.common_select_an_option()}
+	{_selected ? label(_selected) : m.common_select_an_option()}
 </SelectTrigger>
 
 {#if $open}
@@ -118,12 +120,12 @@
 {/if}
 
 {#if debug}
-	<h3>Component State</h3>
-	<pre>
-
-_selected (store): {JSON.stringify(_selected, null, 2)}
-selectedOption (store): {JSON.stringify($selectedTokenOption, null, 2)}
-options (store): {JSON.stringify(options, null, 2)}
-balanceOptions (store): {JSON.stringify(balanceOptions, null, 2)}
-</pre>
+	<Code
+		json={{
+			_selected,
+			selectedBalanceOption,
+			options,
+			balanceOptions
+		}}
+	/>
 {/if}

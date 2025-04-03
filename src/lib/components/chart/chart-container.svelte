@@ -75,13 +75,13 @@
 		{/if}
 	</div>
 
-	<hr class="h-px border-0 bg-mineShaft-800" />
+	<hr class="bg-mine-800 h-px border-0" />
 
 	<div class="flex items-center justify-between font-medium">
 		<span class="text-muted">{startDate}</span>
 		<div class="flex gap-4">
 			<div class="flex items-center gap-1">
-				<div class="size-4 rounded bg-[#00ED97]"></div>
+				<div class="size-4 rounded-sm bg-[#00ED97]"></div>
 				<span class="text-[#00ED97]">{pair}</span>
 			</div>
 		</div>

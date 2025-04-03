@@ -46,7 +46,7 @@
 	</div>
 
 	<!-- Small hex -->
-	<div class="absolute -bottom-4 -right-2 grid place-items-center *:col-start-1 *:row-start-1">
+	<div class="absolute -right-2 -bottom-4 grid place-items-center *:col-start-1 *:row-start-1">
 		<svg
 			class="size-24 object-contain md:size-full"
 			width="95"

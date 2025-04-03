@@ -19,7 +19,7 @@
 			<tbody>
 				{#if context.account.balances}
 					<tr>
-						<td>Balances (light_api)</td>
+						<td>Balances</td>
 						<td>{context.account.balances.length}</td>
 					</tr>
 				{/if}

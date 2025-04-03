@@ -76,7 +76,7 @@
 
 {#snippet tableAction([text, href]: string[])}
 	<td class="text-right">
-		<a class="text-skyBlue-500 hover:text-skyBlue-400" {href}>{text}</a>
+		<a class="text-sky-500 hover:text-sky-400" {href}>{text}</a>
 	</td>
 {/snippet}
 
@@ -84,7 +84,7 @@
 	<MultiCard>
 		<Card id="account-value" style="column-span: all;">
 			<Cluster class="items-center">
-				<picture class="grid size-12 place-items-center rounded-full bg-mineShaft-900">
+				<picture class="bg-mine-900 grid size-12 place-items-center rounded-full">
 					<ChartLine />
 				</picture>
 				<div>
@@ -101,12 +101,12 @@
 		>
 			<Stack>
 				<Stack class="gap-2">
-					<h4 class="text-muted text-base capitalize leading-none">
+					<h4 class="text-muted text-base leading-none capitalize">
 						{m.common_labeled_unit_staked({
 							unit: m.common_tokens()
 						})}
 					</h4>
-					<p class="text-xl font-semibold leading-none text-white">
+					<p class="text-xl leading-none font-semibold text-white">
 						<AssetText variant="full" value={total} />
 					</p>
 					<Chip>

@@ -12,7 +12,7 @@
 
 <button
 	class={cn(
-		' text-muted grid size-12 place-items-center self-end rounded-lg focus-visible:outline-none focus-visible:ring focus-visible:ring-inset focus-visible:ring-solar-500 [@media(any-hover:hover)]:hover:text-white',
+		' text-muted focus-visible:ring-solar-500 grid size-12 place-items-center self-end rounded-lg hover:text-white focus-visible:ring-3 focus-visible:outline-hidden focus-visible:ring-inset',
 		props.class
 	)}
 	{onclick}

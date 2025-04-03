@@ -324,7 +324,7 @@
 
 		<FormSectionContent>
 			{#if manager.data.accounts.length}
-				<ul class="grid grid-cols-[8ch_1fr_1fr_auto] gap-x-2 @container">
+				<ul class="@container grid grid-cols-[8ch_1fr_1fr_auto] gap-x-2">
 					{#each manager.data.accounts as account, index (account)}
 						{@render AccountAuthInput(index)}
 					{/each}
@@ -521,7 +521,7 @@
 	{:else if transactError}
 		<!-- Unsuccessful transaction -->
 		<div
-			class="flex flex-col justify-center gap-8 rounded-xl bg-shark-900/20 px-4 py-12 sm:items-center"
+			class="bg-shark-900/20 flex flex-col justify-center gap-8 rounded-xl px-4 py-12 sm:items-center"
 		>
 			<TransactError error={transactError} />
 			<Button variant="primary" onclick={back}>{m.common_back()}</Button>
@@ -557,7 +557,7 @@
 			<footer class="flex flex-col justify-between gap-y-12 @lg:flex-row">
 				{#if manager.permission && !manager.data.isActive && !manager.data.isOwner}
 					<Button
-						class="grow-0 border border-red-300/30  text-red-400 [@media(any-hover:hover)]:hover:text-red-300"
+						class="grow-0 border border-red-300/30  text-red-400 hover:text-red-300"
 						variant="tertiary"
 						onclick={deleteAuth}>{m.common_delete_permission()}</Button
 					>

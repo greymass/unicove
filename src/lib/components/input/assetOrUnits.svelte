@@ -8,7 +8,7 @@
 	import Stack from '$lib/components/layout/stack.svelte';
 	import Code from '../code.svelte';
 
-	interface AssetOrUnitsProps extends ComponentProps<TextInput> {
+	interface AssetOrUnitsProps extends ComponentProps<typeof TextInput> {
 		assetValue: Asset;
 		unitsValue: number | undefined;
 		unitName: string;

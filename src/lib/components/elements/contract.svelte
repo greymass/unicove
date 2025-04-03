@@ -34,7 +34,7 @@
 </script>
 
 {#if name}
-	<a class={cn('text-skyBlue-500 hover:text-skyBlue-400', props.class)} {href}>
+	<a class={cn('text-sky-500 hover:text-sky-400', props.class)} {href}>
 		{#if children}
 			{@render children()}
 		{:else}

@@ -4,10 +4,10 @@ import { getCacheHeaders } from '$lib/utils';
 import type { NetworkState } from '$lib/state/network.svelte';
 import { TokenDataSources, TokenDefinition, tokenEquals, TokenPair } from '$lib/types/token';
 import { Asset, Chains, TimePointSec } from '@wharfkit/session';
-import { Currencies, ramKb } from '$lib/types/currencies';
+import { Currencies } from '$lib/types/currencies';
 import { RAMState } from '@wharfkit/resources';
 
-export async function GET({ fetch, locals: { network } }: RequestEvent) {
+export async function GET({ fetch, locals: { network }, url }: RequestEvent) {
 	const pairs: TokenPair[] = [];
 	const currency = await fetch(`/${network}/api/currency/usd`);
 	if (currency.ok) {
@@ -18,15 +18,39 @@ export async function GET({ fetch, locals: { network } }: RequestEvent) {
 	const ram = await network.resourceClient.v1.ram.get_state();
 	const rammarket = RAMState.from(ram).price_per_kb(1);
 
+	// Allow mock data for prices to be passed for testing
+	const mockPrice = url.searchParams.get('mock');
+	if (mockPrice) {
+		pairs.push(
+			TokenPair.from({
+				base: network.token.id,
+				quote: Currencies.USD,
+				price: mockPrice,
+				updated: TimePointSec.from(new Date())
+			})
+		);
+		if (network.legacytoken) {
+			pairs.push(
+				TokenPair.from({
+					base: network.legacytoken.id,
+					quote: Currencies.USD,
+					price: mockPrice,
+					updated: TimePointSec.from(new Date())
+				})
+			);
+		}
+	}
+
 	// Push RAM token pair
 	pairs.push(
 		TokenPair.from({
-			base: ramKb,
+			base: network.getRamTokenDefinition(),
 			quote: network.token.id,
 			price: rammarket,
 			updated: network.connection.updated
 		})
 	);
+
 	// Push BRAM token pair
 	pairs.push(
 		TokenPair.from({
@@ -40,6 +64,7 @@ export async function GET({ fetch, locals: { network } }: RequestEvent) {
 			updated: network.connection.updated
 		})
 	);
+
 	// Push WRAM token pair
 	pairs.push(
 		TokenPair.from({
@@ -85,6 +110,7 @@ export async function GET({ fetch, locals: { network } }: RequestEvent) {
 	return json(
 		TokenDataSources.from({
 			ts: new Date(),
+			mockPrice,
 			pairs: derived
 		}),
 		{

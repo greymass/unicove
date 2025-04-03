@@ -2,7 +2,7 @@ import { API, Asset } from '@wharfkit/antelope';
 
 import * as SystemContract from '$lib/wharf/contracts/system';
 import { Types as REXTypes } from '$lib/types/rex';
-import { Types as UnicoveTypes } from '$lib/wharf/contracts/unicove';
+import { Types as UnicoveTypes } from '$lib/wharf/contracts/unicove.api';
 
 export const defaultGetAccount = API.v1.AccountObject.from({
 	account_name: '',

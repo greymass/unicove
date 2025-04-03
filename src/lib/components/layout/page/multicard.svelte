@@ -16,7 +16,7 @@
 <!-- https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout/Masonry_layout -->
 <svelte:element
 	this={props.tag || 'div'}
-	class={cn('gap-6 *:mb-6 *:w-full *:break-inside-avoid last:*:mb-0 @2xl:columns-2', props.class)}
+	class={cn('gap-6 *:mb-6 *:w-full *:break-inside-avoid *:last:mb-0 @2xl:columns-2', props.class)}
 >
 	{@render props.children()}
 </svelte:element>

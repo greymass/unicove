@@ -64,7 +64,7 @@
 		errorMessage = undefined;
 		buyRamState.reset();
 		bytesInput?.reset();
-		assetInput?.reset();
+		assetInput?.set(null);
 	}
 
 	$effect(() => {
@@ -75,7 +75,7 @@
 			}
 
 			if (context.account.balance) {
-				buyRamState.balance = context.account.balance?.liquid;
+				buyRamState.balance = context.account.balance?.balance;
 			}
 		}
 	});
@@ -143,7 +143,7 @@
 				<p class="text-right">
 					{m.common_balance()}
 					{#if context.account}
-						{context.account.balance?.liquid}
+						{context.account.balance?.balance}
 					{:else}
 						0.0000 {data.network.chain.systemToken?.symbol.code || ''}
 					{/if}

@@ -65,8 +65,8 @@
 					href={step.path}
 					data-current={isCurrentStep}
 					data-incomplete={isIncompleteStep}
-					class="relative flex flex-col justify-between gap-2 text-white/50 hover:text-white/80 focus-visible:outline focus-visible:outline-offset-2
- focus-visible:outline-solar-500 data-[incomplete=true]:pointer-events-none data-[current=true]:text-white
+					class="focus-visible:outline-solar-500 relative flex flex-col justify-between gap-2 text-white/50 hover:text-white/80 focus-visible:outline
+ focus-visible:outline-offset-2 data-[current=true]:text-white data-[incomplete=true]:pointer-events-none
 					"
 					tabindex={isIncompleteStep ? -1 : 0}
 				>
@@ -75,13 +75,13 @@
 					<!-- Bottom indicator -->
 					<div
 						data-incomplete={isIncompleteStep}
-						class="h-1 w-full rounded-full data-[incomplete=false]:bg-skyBlue-400 data-[incomplete=true]:bg-white/10"
+						class="h-1 w-full rounded-full data-[incomplete=false]:bg-sky-400 data-[incomplete=true]:bg-white/10"
 					></div>
 					{#if isCurrentStep}
 						<div
 							in:send={{ key: 'step' }}
 							out:receive={{ key: 'step' }}
-							class="absolute bottom-0 left-1/2 h-1 w-full -translate-x-1/2 rounded-full bg-skyBlue-400"
+							class="absolute bottom-0 left-1/2 h-1 w-full -translate-x-1/2 rounded-full bg-sky-400"
 						></div>
 					{/if}
 				</a>
@@ -91,7 +91,7 @@
 
 	<div class="relative">
 		<Stack
-			class="gap-6 *:z-10 before:absolute before:-inset-4 before:z-0 before:bg-shark-900/10 md:mx-auto md:max-w-md md:p-6 md:pb-10 md:before:inset-0 md:before:rounded-2xl"
+			class="before:bg-shark-900/10 gap-6 *:z-10 before:absolute before:-inset-4 before:z-0 md:mx-auto md:max-w-md md:p-6 md:pb-10 md:before:inset-0 md:before:rounded-2xl"
 		>
 			{@render children()}
 		</Stack>

@@ -43,12 +43,12 @@
 </script>
 
 <li
-	class="relative col-span-full grid grid-cols-subgrid bg-shark-950"
+	class="bg-shark-950 relative col-span-full grid grid-cols-subgrid"
 	class:pl-4={level !== 0}
 	class:pt-6={level !== 0}
 >
 	<dl
-		class="z-20 col-span-full space-y-1 rounded-t-lg bg-mineShaft-950 px-4 py-3 md:col-span-1 md:rounded-l-lg md:rounded-r-none"
+		class="bg-mine-950 z-20 col-span-full space-y-1 rounded-t-lg px-4 py-3 md:col-span-1 md:rounded-l-lg md:rounded-r-none"
 	>
 		<div>
 			<dt class="sr-only">{m.common_permission_name()}</dt>
@@ -89,7 +89,7 @@
 		{/if}
 	</dl>
 
-	<div class="rounded-b-lg bg-mineShaft-950/50 px-4 py-3 md:rounded-l-none md:rounded-r-lg">
+	<div class="bg-mine-950/50 rounded-b-lg px-4 py-3 md:rounded-l-none md:rounded-r-lg">
 		{#if anyPermissions}
 			<table class="grid grid-cols-[auto_1fr_auto] gap-x-4 gap-y-2">
 				<thead class="col-span-full grid grid-cols-subgrid">
@@ -155,7 +155,7 @@
 								<td>
 									+{weight.toString()}
 								</td>
-								<td class="flex items-center gap-2 text-mineShaft-100">
+								<td class="text-mine-100 flex items-center gap-2">
 									<Clock class="size-4" />
 									{wait_sec.toString()}s ({dayjs
 										.duration(wait_sec.toNumber(), 'seconds')
@@ -179,7 +179,7 @@
 		<!-- The border on this ul is the through line -->
 		<ul
 			data-solo={children.length === 1}
-			class="children col-span-full grid grid-cols-subgrid *:data-[solo=false]:border-l last:*:data-[solo=false]:border-transparent"
+			class="children col-span-full grid grid-cols-subgrid data-[solo=false]:*:border-l data-[solo=false]:*:last:border-transparent"
 			class:ml-8={level > 0}
 			class:ml-4={level === 0}
 		>

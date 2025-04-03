@@ -42,7 +42,7 @@
 
 			<div
 				id="msig-vis"
-				class="rounded-2xl pb-4 pt-8"
+				class="rounded-2xl pt-8 pb-4"
 				style="
 				--bg-pos: calc(100% - {manager.approvalRatio}%); 
 				--ease: {manager.userHasApproved ? 'ease-out' : 'ease-in'};
@@ -141,7 +141,7 @@
 					>
 				{:else}
 					<Button
-						class="bg-green-400 text-green-950 hover:active:bg-green-500 [@media(any-hover:hover)]:hover:bg-green-300"
+						class="bg-green-400 text-green-950 hover:bg-green-300 hover:active:bg-green-500"
 						variant="primary"
 						onclick={() => manager.approve()}
 						disabled={context.wharf.transacting}>{m.common_approve()}</Button
@@ -180,19 +180,15 @@
 	<pre>{JSON.stringify(manager.actions, null, 2)}</pre>
 {/if}
 
-<style lang="postcss">
+<style>
 	#msig-vis {
-		background: linear-gradient(
-			to right,
-			theme(colors.green.400) 50%,
-			theme(colors.mineShaft.950) 50%
-		);
+		background: linear-gradient(to right, var(--color-green-400) 50%, var(--color-mine-950) 50%);
 		background-size: 200% 100%;
 		background-position: var(--bg-pos);
 		transition: all var(--ease) var(--duration);
 	}
 	#msig-vis > div {
-		background: linear-gradient(to right, theme(colors.green.950) 50%, theme(colors.zinc.400) 50%);
+		background: linear-gradient(to right, var(--color-green-950) 50%, var(--color-zinc-400) 50%);
 		background-size: 200% 100%;
 		background-position: var(--bg-pos);
 		background-clip: text;
