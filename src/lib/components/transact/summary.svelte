@@ -6,7 +6,7 @@
 	import ClipboardPen from 'lucide-svelte/icons/clipboard-pen';
 	import * as m from '$lib/paraglide/messages';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import { getContext } from 'svelte';
+	import { getContext, type Snippet } from 'svelte';
 
 	import { Types as MsigTypes } from '$lib/wharf/contracts/msig';
 	import Button from '$lib/components/button/button.svelte';
@@ -17,9 +17,10 @@
 	interface Props {
 		transactionId?: Checksum256 | string;
 		hidden?: boolean;
+		onsuccess?: Snippet;
 	}
 
-	const { transactionId, hidden }: Props = $props();
+	const { transactionId, hidden, onsuccess }: Props = $props();
 
 	const transaction = $derived(
 		transactions.find((t) => t.transaction?.id.equals(String(transactionId)))
@@ -82,5 +83,8 @@
 	{:else}
 		<h2 class="h2">{m.common_trx_not_found()}</h2>
 		<p>{m.common_trx_not_found_description({ transactionId: String(transactionId) })}</p>
+	{/if}
+	{#if onsuccess}
+		{@render onsuccess()}
 	{/if}
 </div>

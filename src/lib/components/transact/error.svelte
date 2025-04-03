@@ -1,13 +1,15 @@
 <script lang="ts">
+	import type { Snippet } from 'svelte';
 	import CircleX from 'lucide-svelte/icons/circle-x';
 	import * as m from '$lib/paraglide/messages';
 
 	interface Props {
 		error?: string;
 		hidden?: boolean;
+		onfailure?: Snippet;
 	}
 
-	const { error, hidden }: Props = $props();
+	const { error, hidden, onfailure }: Props = $props();
 </script>
 
 <div class="space-y-6 rounded-lg text-center" class:hidden>
@@ -20,4 +22,8 @@
 			{error}
 		</p>
 	</div>
+
+	{#if onfailure}
+		{@render onfailure()}
+	{/if}
 </div>
