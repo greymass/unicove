@@ -85,6 +85,17 @@ export class AccountState {
 		};
 	}
 
+	getBalance(token: TokenDefinition): TokenBalance {
+		const balance = this.balances.find((b) => b.id.equals(token));
+		if (!balance) {
+			return TokenBalance.from({
+				id: token,
+				balance: Asset.fromUnits(0, token.symbol)
+			});
+		}
+		return balance;
+	}
+
 	setState(data: AccountDataSources) {
 		this.last_update = new Date();
 		this.sources = {
