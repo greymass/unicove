@@ -1,6 +1,8 @@
 <script>
 	import { Cluster, Stack } from '$lib/components/layout';
 	import Button from '$lib/components/button/button.svelte';
+	import IconButton from '$lib/components/button/icon.svelte';
+	import { User } from 'lucide-svelte';
 </script>
 
 <Stack id="buttons">
@@ -52,6 +54,14 @@
 		<Cluster>
 			<Button variant="secondary" onclick={() => {}}>Cancel</Button>
 			<Button variant="primary" onclick={() => {}}>Confirm</Button>
+		</Cluster>
+	</Stack>
+
+	<Stack class="items-start">
+		<h3 class="h3">Icon Buttons</h3>
+		<Cluster>
+			<IconButton size="large" icon={User} onclick={() => {}}>Cancel</IconButton>
+			<IconButton icon={User} onclick={() => {}}>Cancel</IconButton>
 		</Cluster>
 	</Stack>
 </Stack>
