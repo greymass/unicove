@@ -97,6 +97,9 @@ config/eos: codegen/clean
 config/jungle4: codegen/clean
 	cp ./configs/.env.jungle4 .env.local
 
+config/jungle4/vaulta: codegen/clean
+	cp ./configs/.env.jungle4.vaulta .env.local
+
 config/kylin: codegen/clean
 	cp ./configs/.env.kylin .env.local
 
