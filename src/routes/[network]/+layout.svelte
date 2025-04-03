@@ -23,6 +23,8 @@
 	import MobileNavigation from '$lib/components/navigation/mobilenavigation.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte.js';
 	import PageBanner from '$lib/components/banner/pageBanner.svelte';
+	import UnicoveWordmark from '$lib/assets/unicove-wordmark.svelte';
+	import { fade } from 'svelte/transition';
 
 	let { children, data } = $props();
 
@@ -42,6 +44,8 @@
 
 	let account: AccountState | undefined = $state();
 	let accountValue: AccountValueState | undefined = $state();
+
+	let loading = $state<boolean>(true);
 
 	setContext<UnicoveContext>('state', {
 		get account() {
@@ -114,6 +118,7 @@
 				account = undefined;
 				accountValue = undefined;
 			}
+			loading = false;
 		});
 	});
 
@@ -214,53 +219,53 @@
 <PageBanner network={data.network} />
 
 <div
-	class="
-	relative
-	mx-auto
-	grid
-	h-full
-	min-h-svh
-	w-[calc(100%-2rem)]
-	max-w-(--breakpoint-2xl)
-	grid-cols-2
-	grid-rows-[min-content_minmax(0,1fr)]
-	gap-y-6
-	pt-4
-	pb-12
-	sm:grid-cols-4
-	md:h-auto
-	md:min-h-svh
-	md:grid-cols-12
-	md:grid-rows-[min-content_auto_minmax(0,1fr)]
-	md:gap-x-4
-	"
+	class=" relative mx-auto grid h-full min-h-svh w-[calc(100%-2rem)] max-w-(--breakpoint-2xl) grid-cols-2 grid-rows-[min-content_minmax(0,1fr)] gap-y-6 pt-4 pb-12 sm:grid-cols-4 md:h-auto md:min-h-svh md:grid-cols-12 md:grid-rows-[min-content_auto_minmax(0,1fr)] md:gap-x-4"
 >
-	<aside
-		class="relative col-start-1 col-end-3 row-span-full row-start-1 hidden h-full grid-rows-subgrid md:grid"
-	>
-		<nav class="sticky top-4 row-span-2 grid max-h-svh grid-rows-subgrid content-start">
-			<a href="/{data.network}" class="grid h-12 items-center" aria-label="home">
-				<Unicovelogo small class="items-start" />
-			</a>
-			<SideMenuContent network={data.network} />
-		</nav>
-	</aside>
-
-	<header class="col-span-full row-start-1 flex h-12 items-center justify-between">
-		<MobileNavigation network={data.network} />
-
+	{#if loading}
 		<div
-			class="flex items-center justify-end gap-4 sm:col-start-4 md:col-span-full md:col-start-9 md:flex-1 md:gap-4"
+			class="col-span-full row-span-full grid h-svh w-full place-items-center *:col-start-1 *:row-start-1"
+			out:fade={{ duration: 500 }}
 		>
-			<Search class="max-w-56 flex-1" />
-
-			<AccountSwitcher network={data.network} class="" />
+			<!-- preload the fonts and give screen readers some content -->
+			<p class=" sr-only font-bold">Loading</p>
+			<p class=" font-regular sr-only">.</p>
+			<p class=" sr-only font-semibold">.</p>
+			<p class=" sr-only font-medium">.</p>
+			<UnicoveWordmark class="animate-pulse" />
 		</div>
-	</header>
+	{:else}
+		<aside
+			class="relative col-start-1 col-end-3 row-span-full row-start-1 hidden h-full grid-rows-subgrid md:grid"
+			in:fade={{ duration: 500 }}
+		>
+			<nav class="sticky top-4 row-span-2 grid max-h-svh grid-rows-subgrid content-start">
+				<a href="/{data.network}" class="grid h-12 items-center" aria-label="home">
+					<Unicovelogo small class="items-start" />
+				</a>
+				<SideMenuContent network={data.network} />
+			</nav>
+		</aside>
 
-	<main
-		class="col-span-full col-start-1 row-span-full row-start-2 grid grid-cols-subgrid content-start gap-x-4 *:col-span-full md:col-start-3 md:col-end-13 md:px-0 xl:col-end-12"
-	>
-		{@render children()}
-	</main>
+		<header
+			in:fade={{ duration: 500 }}
+			class="col-span-full row-start-1 flex h-12 items-center justify-between"
+		>
+			<MobileNavigation network={data.network} />
+
+			<div
+				class="flex items-center justify-end gap-4 sm:col-start-4 md:col-span-full md:col-start-9 md:flex-1 md:gap-4"
+			>
+				<Search class="max-w-56 flex-1" />
+
+				<AccountSwitcher network={data.network} class="" />
+			</div>
+		</header>
+
+		<main
+			in:fade={{ duration: 500 }}
+			class="col-span-full col-start-1 row-span-full row-start-2 grid grid-cols-subgrid content-start gap-x-4 *:col-span-full md:col-start-3 md:col-end-13 md:px-0 xl:col-end-12"
+		>
+			{@render children()}
+		</main>
+	{/if}
 </div>
