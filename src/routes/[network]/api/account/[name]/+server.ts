@@ -171,7 +171,7 @@ async function getAccount2(network: NetworkState, account: NameType): Promise<Ac
 
 async function getBalances(
 	network: NetworkState,
-	requested: TokenDefinition[],
+	requested: UnicoveTypes.token_definition[],
 	getaccount: UnicoveTypes.get_account_response
 ): Promise<TokenBalance[]> {
 	const balances: TokenBalance[] = [];
