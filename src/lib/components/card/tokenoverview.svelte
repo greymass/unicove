@@ -86,12 +86,9 @@
 
 				{#if network.supports('directfunding') && tokenEquals(balance.token.id, network.getSystemToken().id) && isCurrentUser}
 					<div class="col-span-2 col-start-2 row-start-1 text-right @xs:col-span-1 @xs:col-start-3">
-						<a
-							class="inline-block h-12 content-center text-sky-500 hover:text-sky-400"
-							href={`/${network}/fund`}
-						>
+						<Button href={`/${network}/fund`}>
 							{m.common_add_funds()}
-						</a>
+						</Button>
 					</div>
 				{/if}
 			</div>

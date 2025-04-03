@@ -2,6 +2,7 @@
 	import { Asset } from '@wharfkit/antelope';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import { cn } from '$lib/utils';
+	import Button from '../button/button.svelte';
 
 	type BreakdownAction = {
 		href: string;
@@ -37,12 +38,9 @@
 
 	{#if action && action.visible}
 		<div class="col-span-2 col-start-2 row-start-1 text-right @xs:col-span-1 @xs:col-start-3">
-			<a
-				class="inline-block h-12 content-center text-sky-500 hover:text-sky-400"
-				href={action.href}
-			>
+			<Button variant="tertiary" class="justify-end" href={action.href}>
 				{action.text}
-			</a>
+			</Button>
 		</div>
 	{/if}
 </div>
