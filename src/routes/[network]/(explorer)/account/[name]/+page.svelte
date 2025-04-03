@@ -37,6 +37,11 @@
 
 	const cpuAvailable = $derived(data.account.resources.cpu.available);
 	const netAvailable = $derived(data.account.resources.net.available);
+
+	const legacytoken = data.network.legacytoken;
+	const legacybalance = legacytoken
+		? data.account.balances.find((b) => b.id.equals(legacytoken.id))
+		: undefined;
 </script>
 
 <MultiCard>
@@ -70,6 +75,13 @@
 	{#if data.account.balance}
 		<TokenOverview
 			balance={data.account.balance}
+			cta={legacytoken
+				? {
+						text: m.common_swap_to_token({ token: legacytoken.name }),
+						href: `/${data.network}/swap/${data.network.token.id.url}/${legacytoken.id.url}`,
+						visible: isCurrentUser
+					}
+				: undefined}
 			{isCurrentUser}
 			network={data.network}
 			pair={currentAccountValue.pair}
@@ -77,23 +89,19 @@
 		/>
 	{/if}
 
-	{#if data.network.legacytoken}
-		{@const legacytoken = data.network.legacytoken}
-		{@const legacybalance = data.account.balances.find((b) => b.id.equals(legacytoken.id))}
-		{#if legacybalance}
-			<TokenOverview
-				balance={legacybalance}
-				cta={{
-					text: m.common_swap_to_token({ token: data.network.token.name }),
-					href: `/${data.network}/swap`,
-					visible: isCurrentUser
-				}}
-				{isCurrentUser}
-				network={data.network}
-				pair={currentAccountValue.pair}
-				value={currentAccountValue.systemtoken.legacy}
-			/>
-		{/if}
+	{#if legacytoken && legacybalance}
+		<TokenOverview
+			balance={legacybalance}
+			cta={{
+				text: m.common_swap_to_token({ token: data.network.token.name }),
+				href: `/${data.network}/swap/${legacytoken.id.url}/${data.network.token.id.url}`,
+				visible: isCurrentUser
+			}}
+			{isCurrentUser}
+			network={data.network}
+			pair={currentAccountValue.pair}
+			value={currentAccountValue.systemtoken.legacy}
+		/>
 	{/if}
 
 	{#if rambalance}
