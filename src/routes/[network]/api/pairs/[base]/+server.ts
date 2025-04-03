@@ -22,7 +22,10 @@ export async function GET({ fetch, locals: { network }, params, url }: RequestEv
 		return json({ error: 'Failed to fetch pairs' }, { status: 500 });
 	}
 	const data = await response.json();
-	const pairs = data.pairs.filter((pair: TokenPair) => tokenEquals(pair.base, basePair));
+	const pairs = data.pairs.filter(
+		(pair: TokenPair) =>
+			tokenEquals(pair.base, basePair) || tokenEquals(pair.base, network.token.id)
+	);
 	if (tokenEquals(basePair, network.token.id)) {
 		network.config.systemtokenalt.forEach((altSymbol: Asset.Symbol) => {
 			const altPair = TokenDefinition.from({
