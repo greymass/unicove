@@ -161,7 +161,7 @@
 </button>
 
 {#if $open}
-	<div class="" use:melt={$portalled}>
+	<div data-theme={network} class="" use:melt={$portalled}>
 		<!-- Scrim -->
 		<div
 			use:melt={$overlay}
@@ -248,7 +248,7 @@
 									<button
 										data-current={isCurrent}
 										onclick={() => switchSession(session)}
-										class="data-[current=false]:hover:bg-mine-950 data-[current=false]:hover:text-mine-50 flex h-12 items-center gap-1 rounded-lg px-4 data-[current=true]:bg-sky-700 data-[current=true]:text-sky-50"
+										class="data-[current=false]:hover:bg-mine-950 data-[current=false]:hover:text-mine-50 data-[current=true]:bg-primary data-[current=true]:text-on-primary flex h-12 items-center gap-1 rounded-lg px-4"
 									>
 										<div class="w-6">
 											{#if isCurrent}
