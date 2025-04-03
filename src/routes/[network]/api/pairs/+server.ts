@@ -6,6 +6,7 @@ import { TokenDataSources, TokenDefinition, tokenEquals, TokenPair } from '$lib/
 import { Asset, Chains, TimePointSec } from '@wharfkit/session';
 import { Currencies } from '$lib/types/currencies';
 import { RAMState } from '@wharfkit/resources';
+import { PUBLIC_LEGACY_TOKEN_EXCHANGERATE } from '$env/static/public';
 
 export async function GET({ fetch, locals: { network }, url }: RequestEvent) {
 	const pairs: TokenPair[] = [];
@@ -39,6 +40,19 @@ export async function GET({ fetch, locals: { network }, url }: RequestEvent) {
 				})
 			);
 		}
+	}
+
+	// If the legacy token exists and has an exchange rate, add it
+	if (network.legacytoken && PUBLIC_LEGACY_TOKEN_EXCHANGERATE) {
+		const exchangeRate = Asset.from(PUBLIC_LEGACY_TOKEN_EXCHANGERATE);
+		pairs.push(
+			TokenPair.from({
+				base: network.token.id,
+				quote: network.legacytoken.id,
+				price: exchangeRate,
+				updated: TimePointSec.from(new Date())
+			})
+		);
 	}
 
 	// Push RAM token pair
