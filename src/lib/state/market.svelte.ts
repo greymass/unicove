@@ -1,6 +1,6 @@
-import { Asset, Serializer, TimePointSec } from '@wharfkit/antelope';
+import { Asset, Serializer, TimePointSec, UInt64 } from '@wharfkit/antelope';
 
-import { TokenDataSources, TokenPair } from '$lib/types/token';
+import { TokenDataSources, tokenEquals, TokenPair, TokenSwap } from '$lib/types/token';
 import { TokenDefinition } from '$lib/types/token';
 import { Currencies } from '$lib/types/currencies';
 
@@ -10,7 +10,8 @@ import type { SettingsState } from './settings.svelte';
 export class MarketState {
 	private sources: TokenDataSources = $state() as TokenDataSources;
 
-	public refreshed: TimePointSec = TimePointSec.from(new Date());
+	public refreshed: TimePointSec = $state(TimePointSec.fromInteger(0));
+	readonly loaded = $derived(this.refreshed.value.gt(UInt64.from(0)));
 
 	readonly settings = $state() as SettingsState;
 	readonly network = $state() as NetworkState;
@@ -19,6 +20,8 @@ export class MarketState {
 		...this.sources.pairs,
 		...this.sources.pairs.map((pair) => pair.reversed)
 	]);
+
+	readonly swaps = $derived(getSwaps(this.network, this.pairs));
 
 	constructor(network: NetworkState, settings: SettingsState) {
 		this.network = network;
@@ -61,6 +64,15 @@ export class MarketState {
 			const matchQuote = TokenDefinition.from(pair.quote).equals(TokenDefinition.from(quote));
 			return matchBase && matchQuote;
 		});
+	}
+
+	getSwap(base: TokenDefinition, quote: TokenDefinition): TokenSwap | undefined {
+		const swap = this.swaps.find(
+			(swap) => tokenEquals(swap.pair.base, base) && tokenEquals(swap.pair.quote, quote)
+		);
+		if (swap) {
+			return swap;
+		}
 	}
 
 	getRAMTokenPair(quote: TokenDefinition): TokenPair | undefined {
@@ -109,4 +121,40 @@ export class MarketState {
 			pairs: this.pairs
 		};
 	}
+}
+
+function getSwaps(network: NetworkState, pairs: TokenPair[]): TokenSwap[] {
+	const swaps: TokenSwap[] = [];
+	if (network.legacytoken) {
+		const { token, legacytoken } = network;
+
+		const legacyPair = pairs.find(
+			(pair) => tokenEquals(pair.base, legacytoken.id) && tokenEquals(pair.quote, token.id)
+		);
+		if (legacyPair) {
+			swaps.push(
+				TokenSwap.from({
+					pair: legacyPair,
+					contract: network.token.contract,
+					action: 'transfer',
+					fee: Asset.fromUnits(0, network.token.symbol)
+				})
+			);
+		}
+
+		const newPair = pairs.find(
+			(pair) => tokenEquals(pair.base, token.id) && tokenEquals(pair.quote, legacytoken.id)
+		);
+		if (newPair) {
+			swaps.push(
+				TokenSwap.from({
+					pair: newPair,
+					contract: network.token.contract,
+					action: 'transfer',
+					fee: Asset.fromUnits(0, network.legacytoken.symbol)
+				})
+			);
+		}
+	}
+	return swaps;
 }

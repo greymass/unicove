@@ -42,6 +42,14 @@ export class TokenPair extends Struct {
 	}
 }
 
+@Struct.type('token_swap')
+export class TokenSwap extends Struct {
+	@Struct.field(TokenPair) declare pair: TokenPair;
+	@Struct.field(Name) declare contract: Name;
+	@Struct.field(Name) declare action: Name;
+	@Struct.field(Asset) declare fee: Asset;
+}
+
 @Struct.type('distribution')
 export class TokenDistribution extends Struct {
 	@Struct.field(Asset) declare circulating: Asset;

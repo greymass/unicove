@@ -40,9 +40,12 @@
 		context.account ? context.account.getBalance(data.quote) : quoteDefault
 	);
 
-	const pair = $derived.by(() => market.market.getPair(data.base, data.quote));
+	const swap = $derived.by(() => market.market.getSwap(data.base, data.quote));
 
 	async function transact() {
+		if (!swap || !swap.pair.base.contract) {
+			throw new Error('No swap available for this pair');
+		}
 		if (!context.account) {
 			throw new Error('No account');
 		}
@@ -53,12 +56,12 @@
 			throw new Error('Base balance does not exist');
 		}
 		const action = {
-			account: data.base.contract,
-			name: 'transfer',
+			account: swap.pair.base.contract,
+			name: swap.action,
 			authorization: [PlaceholderAuth],
 			data: {
 				from: context.account.name,
-				to: 'core.vaulta',
+				to: swap.contract,
 				quantity: baseQuantity,
 				memo: ''
 			}
@@ -103,9 +106,9 @@
 	}
 
 	function baseChange(e: Event & { currentTarget: EventTarget & HTMLInputElement }) {
-		if (pair) {
+		if (swap) {
 			const quote = Asset.fromFloat(
-				Number(e.currentTarget.value) * pair.price.value,
+				Number(e.currentTarget.value) * swap.pair.price.value,
 				quoteQuantity.symbol
 			);
 			quoteQuantity = quote;
@@ -114,9 +117,9 @@
 	}
 
 	function quoteChange(e: Event & { currentTarget: EventTarget & HTMLInputElement }) {
-		if (pair) {
+		if (swap) {
 			const base = Asset.fromFloat(
-				Number(e.currentTarget.value) / pair.price.value,
+				Number(e.currentTarget.value) / swap.pair.price.value,
 				baseQuantity.symbol
 			);
 			baseQuantity = base;
@@ -140,7 +143,7 @@
 	</div>
 {/snippet}
 
-<TransactForm {id} {error} onsuccess={Success} onfailure={Failure}>
+{#snippet Balances()}
 	<div class="flex gap-4">
 		<div class="bg-shark-900/40 flex-1 rounded-md">
 			{baseBalance.balance.symbol.name}
@@ -163,50 +166,67 @@
 			<p>Available</p>
 		</div>
 	</div>
-	<div class="flex gap-4">
-		<div class="flex-1 space-y-2">
-			<Label for="base-quantity">Swap {baseQuantity.symbol.name}</Label>
-			<AssetInput
-				id="base-quantity"
-				bind:value={baseQuantity}
-				bind:this={baseInput}
-				oninput={baseChange}
-				disabled={context.wharf.transacting}
-			/>
-		</div>
-		<div class="flex-1 space-y-2">
-			<Label for="base-quantity">For {quoteQuantity.symbol.name}</Label>
-			<AssetInput
-				bind:value={quoteQuantity}
-				bind:this={quoteInput}
-				oninput={quoteChange}
-				disabled={context.wharf.transacting}
-			/>
-		</div>
-	</div>
+{/snippet}
 
-	<p class="text-center">
-		This swap will exchange
-		<AssetText class="font-bold text-white" value={baseQuantity} variant="full" />
-		for
-		<AssetText class="font-bold text-white" value={quoteQuantity} variant="full" />.
-	</p>
+{#snippet BaseField()}
+	<Label for="base-quantity">Swap {baseQuantity.symbol.name}</Label>
+	<AssetInput
+		id="base-quantity"
+		bind:value={baseQuantity}
+		bind:this={baseInput}
+		oninput={baseChange}
+		disabled={context.wharf.transacting}
+	/>
+{/snippet}
 
-	<Button onclick={transact} disabled={context.wharf.transacting}>
-		{m.common_swap_to_token({
-			token: String(data.quote.symbol.name)
-		})}
-	</Button>
+{#snippet QuoteField()}
+	<Label for="base-quantity">For {quoteQuantity.symbol.name}</Label>
+	<AssetInput
+		bind:value={quoteQuantity}
+		bind:this={quoteInput}
+		oninput={quoteChange}
+		disabled={context.wharf.transacting}
+	/>
+{/snippet}
+
+<TransactForm {id} {error} onsuccess={Success} onfailure={Failure}>
+	{@render Balances()}
+
+	{#if swap}
+		<div class="flex gap-4">
+			<div class="flex-1 space-y-2">{@render BaseField()}</div>
+			<div class="flex-1 space-y-2">{@render QuoteField()}</div>
+		</div>
+
+		<p class="text-center">
+			This swap will exchange
+			<AssetText class="font-bold text-white" value={baseQuantity} variant="full" />
+			for
+			<AssetText class="font-bold text-white" value={quoteQuantity} variant="full" />.
+		</p>
+
+		<Button onclick={transact} disabled={context.wharf.transacting}>
+			{m.common_swap_to_token({
+				token: String(data.quote.symbol.name)
+			})}
+		</Button>
+	{:else if !market.market.loaded}
+		<p>Loading</p>
+	{:else}
+		<p class="text-center">No swaps available for this pair.</p>
+	{/if}
 </TransactForm>
 
 {#if context.settings.data.debugMode}
 	<Code
 		json={{
+			loaded: market.market.loaded,
+			refreshed: market.market.refreshed,
 			baseQuantity,
 			quoteQuantity,
 			base: data.base,
 			quote: data.quote,
-			pair
+			swap
 		}}
 	/>
 {/if}
