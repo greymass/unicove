@@ -1,6 +1,8 @@
 <script>
 	import { Cluster, Stack } from '$lib/components/layout';
 	import Button from '$lib/components/button/button.svelte';
+	import IconButton from '$lib/components/button/icon.svelte';
+	import { User } from 'lucide-svelte';
 </script>
 
 <Stack id="buttons">
@@ -42,16 +44,39 @@
 			</Stack>
 			<Stack class="gap-1">
 				<p class="caption">Active</p>
-				<Button variant="pill" active={true} onclick={() => {}}>EOS (MAX)</Button>
+				<Button variant="pill" aria-current={true} onclick={() => {}}>EOS (MAX)</Button>
+			</Stack>
+		</Cluster>
+	</Stack>
+
+	<Stack class="items-start">
+		<h3 class="h3">Text</h3>
+		<Cluster>
+			<Stack class="gap-1">
+				<p class="caption">Default</p>
+				<Button variant="tertiary" onclick={() => {}}>EOS (MAX)</Button>
+			</Stack>
+			<Stack class="gap-1">
+				<p class="caption">Disabled</p>
+				<Button variant="tertiary" disabled onclick={() => {}}>EOS (MAX)</Button>
 			</Stack>
 		</Cluster>
 	</Stack>
 
 	<Stack class="items-start">
 		<h3 class="h3">Side by side</h3>
-		<Cluster>
+		<Cluster class="items-center">
+			<Button variant="tertiary" onclick={() => {}}>Delete</Button>
 			<Button variant="secondary" onclick={() => {}}>Cancel</Button>
 			<Button variant="primary" onclick={() => {}}>Confirm</Button>
+		</Cluster>
+	</Stack>
+
+	<Stack class="items-start">
+		<h3 class="h3">Icon Buttons</h3>
+		<Cluster>
+			<IconButton size="large" icon={User} onclick={() => {}}>Cancel</IconButton>
+			<IconButton icon={User} onclick={() => {}}>Cancel</IconButton>
 		</Cluster>
 	</Stack>
 </Stack>
