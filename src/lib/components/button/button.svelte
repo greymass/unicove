@@ -54,7 +54,7 @@
 		' inline-flex h-10    rounded-full border-2 border-transparent px-5  leading-4  focus-visible:border-solar-500  focus-visible:outline-hidden   hover:active:bg-mine-950 aria-[current]:border-mine-200/30 aria-[current]:focus-visible:border-solar-500 hover:bg-mine-900 hover:text-mine-100';
 
 	const textStyles =
-		'inline-flex h-10  rounded-lg px-3  text-primary   focus-visible:ring-inset focus-visible:ring-solar-500 focus-visible:outline-hidden focus-visible:ring  disabled:text-mine-400  disabled:hover:bg-transparent';
+		'inline-flex  h-10  rounded-lg px-3  text-primary   focus-visible:ring-inset focus-visible:ring-solar-500 focus-visible:outline-hidden focus-visible:ring  disabled:text-mine-400  disabled:hover:bg-transparent';
 
 	let styles = {
 		primary: filledStyles,
