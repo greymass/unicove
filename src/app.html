@@ -1,54 +1,55 @@
 <!doctype html>
 <html lang="%paraglide.lang%" dir="%paraglide.textDirection%">
+	<head>
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, interactive-widget=resizes-content"
+		/>
+		<meta name="color-scheme" content="dark" />
+		<link rel="icon" href="/favicon.ico" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<meta name="apple-mobile-web-app-title" content="Unicove" />
+		<!-- <link rel="manifest" href="/site.webmanifest" /> -->
+		<style>
+			@font-face {
+				font-family: 'Inter';
+				font-style: normal;
+				font-weight: 400;
+				font-display: swap;
+				src: url('/fonts/inter/web-latin/Inter-Regular-subset.woff2?v=4.0') format('woff2');
+			}
 
-<head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-content" />
-	<meta name="color-scheme" content="dark" />
-	<link rel="icon" href="/favicon.ico" />
-	<link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any" />
-	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-	<meta name="apple-mobile-web-app-title" content="Unicove" />
-	<!-- <link rel="manifest" href="/site.webmanifest" /> -->
-	<style>
-		@font-face {
-			font-family: 'Inter';
-			font-style: normal;
-			font-weight: 400;
-			font-display: swap;
-			src: url('/fonts/inter/web-latin/Inter-Regular-subset.woff2?v=4.0') format('woff2');
-		}
+			@font-face {
+				font-family: 'Inter';
+				font-style: normal;
+				font-weight: 500;
+				font-display: swap;
+				src: url('/fonts/inter/web-latin/Inter-Medium-subset.woff2?v=4.0') format('woff2');
+			}
 
-		@font-face {
-			font-family: 'Inter';
-			font-style: normal;
-			font-weight: 500;
-			font-display: swap;
-			src: url('/fonts/inter/web-latin/Inter-Medium-subset.woff2?v=4.0') format('woff2');
-		}
+			@font-face {
+				font-family: 'Inter';
+				font-style: normal;
+				font-weight: 600;
+				font-display: swap;
+				src: url('/fonts/inter/web-latin/Inter-SemiBold-subset.woff2?v=4.0') format('woff2');
+			}
 
-		@font-face {
-			font-family: 'Inter';
-			font-style: normal;
-			font-weight: 600;
-			font-display: swap;
-			src: url('/fonts/inter/web-latin/Inter-SemiBold-subset.woff2?v=4.0') format('woff2');
-		}
+			@font-face {
+				font-family: 'Inter';
+				font-style: normal;
+				font-weight: 700;
+				font-display: swap;
+				src: url('/fonts/inter/web-latin/Inter-Bold-subset.woff2?v=4.0') format('woff2');
+			}
+		</style>
+		<link rel="preconnect" href="https://assets.wharfkit.com" />
+		%sveltekit.head%
+	</head>
 
-		@font-face {
-			font-family: 'Inter';
-			font-style: normal;
-			font-weight: 700;
-			font-display: swap;
-			src: url('/fonts/inter/web-latin/Inter-Bold-subset.woff2?v=4.0') format('woff2');
-		}
-	</style>
-	<link rel="preconnect" href="https://assets.wharfkit.com" />
-	%sveltekit.head%
-</head>
-
-<body data-sveltekit-preload-data="hover">
-	<div style="display: contents">%sveltekit.body%</div>
-</body>
-
+	<body data-sveltekit-preload-data="hover">
+		<div style="display: contents">%sveltekit.body%</div>
+	</body>
 </html>
