@@ -219,7 +219,7 @@
 	aria-label="search"
 	id="search"
 	class={cn(
-		'text-muted focus-visible:border-solar-500 md:border-mine-600 relative z-50 inline-flex h-10 items-center justify-between rounded-lg bg-transparent py-3.5 text-base leading-4 font-medium text-nowrap focus:outline-hidden md:justify-between md:border md:py-2 md:pr-0 md:pl-3',
+		'text-muted focus-visible:ring-solar-500 focus-visible:border-solar-500 md:border-mine-600  relative z-50 inline-flex h-10 items-center justify-between rounded-lg bg-transparent py-3.5 text-base leading-4 font-medium text-nowrap focus:outline-hidden focus-visible:ring focus-visible:ring-inset md:justify-between md:border md:py-2 md:pr-0 md:pl-3',
 		className
 	)}
 >
@@ -240,7 +240,7 @@
 </button>
 
 {#if $open}
-	<div use:melt={$portalled}>
+	<div use:melt={$portalled} data-theme={context.network}>
 		<div
 			use:melt={$overlay}
 			class="fixed inset-0 z-50 bg-black/50"
@@ -265,7 +265,7 @@
 							bind:this={ref}
 							bind:value={searchValue}
 							placeholder={m.common_search_unicove()}
-							class="w-full rounded-lg border-2 border-sky-500 bg-transparent p-4 focus:outline-hidden"
+							class="border-primary w-full rounded-lg border-2 bg-transparent p-4 focus:outline-hidden"
 						/>
 						<div
 							class="text-muted bg-mine-950 absolute inset-y-1 right-4 hidden place-items-center sm:grid"
