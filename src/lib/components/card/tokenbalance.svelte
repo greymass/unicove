@@ -9,6 +9,11 @@
 	import { Breakdown, BreakdownRow } from '../breakdown';
 	import * as m from '$lib/paraglide/messages';
 	import Button from '../button/button.svelte';
+	import { getContext } from 'svelte';
+	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import { text } from '@sveltejs/kit';
+
+	const context = getContext<UnicoveContext>('state');
 
 	interface TokenOverviewProps {
 		balance: TokenBalance | TokenBalanceChild;
@@ -46,13 +51,33 @@
 	const balanceDelegated = $derived(isPrimaryBalance ? _balance.child('delegated') : undefined);
 	const balanceTotal = $derived(isPrimaryBalance ? _balance.child('total') : undefined);
 	const isRamToken = $derived(_balance.id.equals(network.getRamTokenDefinition()));
+	const hasValue = $derived(network.supports('delphioracle') || context.settings.data.mockPrice);
+
+	$inspect(String(balance.balance));
 </script>
 
-<div class={cn('bg-mine-950 card p-4', className)}>
+{#snippet SubBalance(label: string, value: Asset, action?: { text: string; href: string })}
 	<div class="flex flex-wrap items-center gap-x-4 gap-y-2">
-		<picture class="bg-shark-950/30 grid size-14 place-items-center rounded-full">
+		<div class="flex flex-col gap-1">
+			{label}
+		</div>
+		<div class="flex flex-1 flex-col gap-1 text-right text-nowrap">
+			<AssetText {value} />
+		</div>
+		<div class="flex w-14 flex-col gap-1 text-right text-nowrap">
+			{#if action && isCurrentUser}
+				<a class="text-sky-500 hover:text-sky-400" href={action.href}>
+					{action.text}
+				</a>
+			{/if}
+		</div>
+	</div>
+{/snippet}
+
+<div class={cn('bg-mine-950', className)}>
+	<div class="bg-shark-900/30 flex flex-wrap items-center gap-x-4 gap-y-2 p-6">
+		<picture class="size-14 place-items-center">
 			<img
-				class="h-12 w-12"
 				alt="{_balance.id.symbol.name} Logo"
 				src="https://assets.wharfkit.com/chain/{_balance.id.symbol.name.toLowerCase()}.png"
 			/>
@@ -69,7 +94,7 @@
 					</a>
 				{/if}
 			</h4>
-			{#if pair}
+			{#if pair && hasValue}
 				{#if pair.price.units.gt(UInt64.from(0))}
 					<TradingPair value={pair} />
 				{:else}
@@ -78,7 +103,7 @@
 			{/if}
 		</div>
 		<div class="flex flex-1 flex-col gap-1 text-right text-nowrap">
-			{#if pair}
+			{#if pair && hasValue}
 				<h4 class="text-xl font-bold text-white capitalize">
 					{#if value.units.gt(UInt64.from(0))}
 						<AssetText variant="full" {value} />
@@ -86,13 +111,10 @@
 						<span class="bg-mine-900 animate-pulse rounded tabular-nums">&nbsp;</span>
 					{/if}
 				</h4>
-				<AssetText value={balanceTotal ? balanceTotal.balance : balance.balance} variant="full" />
 			{/if}
+			<AssetText value={balance.balance} />
 		</div>
-		<button
-			class="bg-shark-950/30 size-14 cursor-pointer place-items-center"
-			onclick={() => (open = !open)}
-		>
+		<button class="size-14 cursor-pointer place-items-center" onclick={() => (open = !open)}>
 			{#if open}
 				<ChevronDown />
 			{:else}
@@ -101,70 +123,38 @@
 		</button>
 	</div>
 	{#if open && _balance instanceof TokenBalance}
-		<div class="p-4">
-			<Breakdown {isCurrentUser}>
-				<BreakdownRow
-					key={m.common_available()}
-					value={_balance.balance}
-					action={!_balance.locked
-						? {
-								text: m.common_send(),
-								href: `/${network}/send/${balance.id.contract}/${balance.id.symbol}`,
-								visible: isCurrentUser
-							}
-						: undefined}
-				/>
+		<div class="space-y-2 p-6">
+			{@render SubBalance(m.common_available(), _balance.balance, {
+				text: m.common_send(),
+				href: `/${network}/send/${balance.id.url}`
+			})}
 
-				{#if balance.id.equals(network.token.id)}
-					{#if network.supports('staking') && balanceStaked}
-						<BreakdownRow
-							key={m.common_staked()}
-							value={balanceStaked.balance}
-							action={{
-								text: m.common_staking(),
-								href: `/${network}/staking`,
-								visible: isCurrentUser
-							}}
-						/>
-					{/if}
-
-					{#if balanceUnstaked && balanceUnstaked.balance.value > 0}
-						<BreakdownRow
-							key={m.common_unstaked()}
-							value={balanceUnstaked.balance}
-							action={{
-								text: m.common_withdraw(),
-								href: `/${network}/staking/withdraw`,
-								visible: isCurrentUser
-							}}
-						/>
-					{/if}
-
-					{#if balanceDelegated && balanceDelegated.balance.value > 0}
-						<BreakdownRow
-							key={m.common_delegated()}
-							value={balanceDelegated.balance}
-							action={{
-								text: m.common_reclaim(),
-								href: `/${network}/undelegate`,
-								visible: isCurrentUser
-							}}
-						/>
-					{/if}
-
-					{#if balanceRefunding && balanceRefunding.balance.value > 0}
-						<BreakdownRow
-							key={m.common_refunding()}
-							value={balanceRefunding.balance}
-							action={{
-								text: m.common_claim(),
-								href: `/${network}/refund`,
-								visible: isCurrentUser
-							}}
-						/>
-					{/if}
+			{#if balance.id.equals(network.token.id)}
+				{#if network.supports('staking') && balanceStaked}
+					{@render SubBalance(m.common_staked(), balanceStaked.balance, {
+						text: m.common_staking(),
+						href: `/${network}/staking`
+					})}
 				{/if}
-			</Breakdown>
+				{#if balanceUnstaked && balanceUnstaked.balance.value > 0}
+					{@render SubBalance(m.common_unstaked(), balanceUnstaked.balance, {
+						text: m.common_withdraw(),
+						href: `/${network}/staking/withdraw`
+					})}
+				{/if}
+				{#if balanceDelegated && balanceDelegated.balance.value > 0}
+					{@render SubBalance(m.common_delegated(), balanceDelegated.balance, {
+						text: m.common_reclaim(),
+						href: `/${network}/undelegate`
+					})}
+				{/if}
+				{#if balanceRefunding && balanceRefunding.balance.value > 0}
+					{@render SubBalance(m.common_refunding(), balanceRefunding.balance, {
+						text: m.common_claim(),
+						href: `/${network}/refund`
+					})}
+				{/if}
+			{/if}
 
 			{#if cta}
 				<Button class="mt-4 {cta.visible ? '' : 'hidden'}" variant="secondary" href={cta.href}>

@@ -31,6 +31,10 @@
 		(context.account?.name && data.account.name?.equals(context.account.name)) || false
 	);
 
+	const hasValue = $derived(
+		data.network.supports('delphioracle') || context.settings.data.mockPrice
+	);
+
 	const rambalance = $derived(
 		data.account.balances.find((b) => b.id.equals(data.network.getRamTokenDefinition()))
 	);
@@ -42,38 +46,42 @@
 	const legacybalance = legacytoken
 		? data.account.balances.find((b) => b.id.equals(legacytoken.id))
 		: undefined;
+
+	$inspect(String(legacybalance?.balance));
 </script>
 
 <div class="xs:grid-cols-[100%] grid gap-6 lg:grid-cols-[60%_40%]">
 	<div class="space-y-6">
-		<Card id="account-value" style="column-span: all;">
-			<div class="flex flex-wrap items-center gap-x-4 gap-y-2">
-				<picture class="bg-mine-900 grid size-12 place-items-center rounded-full">
-					<DollarSign />
-				</picture>
+		{#if hasValue}
+			<Card id="account-value" style="column-span: all;">
+				<div class="flex flex-wrap items-center gap-x-4 gap-y-2">
+					<picture class="bg-mine-900 grid size-12 place-items-center rounded-full">
+						<DollarSign />
+					</picture>
 
-				{#if currentAccountValue}
-					<div class="flex flex-1 flex-col gap-1">
-						<p>{m.account_page_total_value()}</p>
-						{#if currentAccountValue.hasPrice}
-							<AssetText
-								class="text-2xl font-bold text-white"
-								variant="full"
-								value={currentAccountValue.systemtoken.total}
-							/>
-						{:else}
-							<div class="bg-mine-900 w-48 animate-pulse rounded text-2xl font-bold text-white">
-								&nbsp;
-							</div>
-						{/if}
+					{#if currentAccountValue}
+						<div class="flex flex-1 flex-col gap-1">
+							<p>{m.account_page_total_value()}</p>
+							{#if currentAccountValue.hasPrice}
+								<AssetText
+									class="text-2xl font-bold text-white"
+									variant="full"
+									value={currentAccountValue.systemtoken.total}
+								/>
+							{:else}
+								<div class="bg-mine-900 w-48 animate-pulse rounded text-2xl font-bold text-white">
+									&nbsp;
+								</div>
+							{/if}
+						</div>
+					{/if}
+
+					<div class="flex flex-col gap-1 text-right text-nowrap">
+						<CurrencySelect />
 					</div>
-				{/if}
-
-				<div class="flex flex-col gap-1 text-right text-nowrap">
-					<CurrencySelect />
 				</div>
-			</div>
-		</Card>
+			</Card>
+		{/if}
 
 		{#if data.account.balance}
 			<TokenBalance
