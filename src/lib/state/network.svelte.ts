@@ -41,7 +41,10 @@ import { Contract as TimeContract } from '$lib/wharf/contracts/eosntime';
 import { Contract as TokenContract } from '$lib/wharf/contracts/token';
 import { Contract as UnicoveContract } from '$lib/wharf/contracts/unicove.api';
 import type { ObjectifiedActionData } from '$lib/types/transaction';
-import { PUBLIC_FEATURE_UNICOVE_CONTRACT_API } from '$env/static/public';
+import {
+	PUBLIC_FEATURE_UNICOVE_CONTRACT_API,
+	PUBLIC_SYSTEM_CONTRACT_PROXY
+} from '$env/static/public';
 
 export class NetworkState {
 	// Readonly state
@@ -105,7 +108,10 @@ export class NetworkState {
 			delphioracle: new DelphiOracleContract({ client: this.client }),
 			eosntime: new TimeContract({ client: this.client }),
 			msig: new MSIGContract({ client: this.client }),
-			system: new SystemContract({ client: this.client }),
+			system: new SystemContract({
+				account: PUBLIC_SYSTEM_CONTRACT_PROXY,
+				client: this.client
+			}),
 			token: new TokenContract({ client: this.client }),
 			unicove: new UnicoveContract({
 				account: PUBLIC_FEATURE_UNICOVE_CONTRACT_API,
