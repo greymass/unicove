@@ -4,8 +4,8 @@
 	import { getContext } from 'svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import TextBlock from './text-block.svelte';
-	import HomepageButton from './homepage-button.svelte';
 	import * as m from '$lib/paraglide/messages';
+	import Button from '$lib/components/button/button.svelte';
 
 	const { network } = getContext<UnicoveContext>('state');
 
@@ -72,14 +72,11 @@
 					network: networkName
 				})}
 			>
-				<HomepageButton
-					class="bg-solar-500 text-solar-950 hover:active:bg-solar-600 hover:active:text-solar-950
-					    hover:bg-solar-400 hover:text-solar-950 mt-0.5 px-8"
-					text={m.homepage_metamask_wallet_install({
+				<Button variant="primary" href={`/${network}/metamask`}>
+					{m.homepage_metamask_wallet_install({
 						name: productName
 					})}
-					href={`/${network}/metamask`}
-				/>
+				</Button>
 			</TextBlock>
 		</Box>
 	</div>

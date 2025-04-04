@@ -1,6 +1,7 @@
 <script lang="ts">
-	import Button from './homepage-button.svelte';
+	import Button from '$lib/components/button/button.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
+	import { ArrowRight } from 'lucide-svelte';
 	import type { Snippet } from 'svelte';
 
 	interface Props {
@@ -16,7 +17,12 @@
 	<h2 class="h3 leading-tight">{props.title}</h2>
 	<p>{props.text}</p>
 	{#if props.button && props.button.href}
-		<Button text={props.button.text} href={props.button.href} icon />
+		<Button class="-ml-3" variant="tertiary" href={props.button.href}>
+			<span class="flex items-center gap-2">
+				{props.button.text}
+				<ArrowRight class="size-4" />
+			</span>
+		</Button>
 	{/if}
 	{@render props.children?.()}
 </Stack>
