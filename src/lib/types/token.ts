@@ -65,11 +65,23 @@ export interface TokenType {
 	marketcap?: Asset;
 }
 
+@Struct.type('token_media_asset')
+export class TokenMediaAsset extends Struct {
+	@Struct.field('string') declare light: Name;
+	@Struct.field('string') declare dark: Name;
+}
+
+@Struct.type('token_media')
+export class TokenMedia extends Struct {
+	@Struct.field(TokenMediaAsset) declare logo: TokenMediaAsset;
+}
+
 @Struct.type('token')
 export class Token extends Struct {
 	@Struct.field(TokenDefinition) declare id: TokenDefinition;
 	@Struct.field(TokenDistribution, { optional: true })
 	declare distribution?: TokenDistribution;
+	@Struct.field(TokenMedia, { optional: true }) declare media?: TokenMedia;
 
 	get chain(): Checksum256 | undefined {
 		return this.id.chain;

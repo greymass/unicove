@@ -1,17 +1,17 @@
 <script lang="ts">
-	import TokenOverview from '$lib/components/card/tokenoverview.svelte';
-
-	import { Card, MultiCard, Cluster } from '$lib/components/layout';
-	import AssetText from '$lib/components/elements/asset.svelte';
-	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
 	import DollarSign from 'lucide-svelte/icons/dollar-sign';
-	import Tokendistribution from '$lib/components/chart/tokendistribution.svelte';
-	import ResourceCard from '$lib/components/elements/resourceCard.svelte';
-	import Button from '$lib/components/button/button.svelte';
-	import * as m from '$lib/paraglide/messages';
+
 	import { AccountValueState } from '$lib/state/value.svelte.js';
+	import { Card } from '$lib/components/layout';
+	import * as m from '$lib/paraglide/messages';
+	import AssetText from '$lib/components/elements/asset.svelte';
+	import Button from '$lib/components/button/button.svelte';
 	import CurrencySelect from '$lib/components/select/currency.svelte';
+	import ResourceCard from '$lib/components/elements/resourceCard.svelte';
+	import TokenBalance from '$lib/components/card/tokenbalance.svelte';
+	import Tokendistribution from '$lib/components/chart/tokendistribution.svelte';
+	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte';
 
 	const { data } = $props();
 
@@ -44,15 +44,16 @@
 		: undefined;
 </script>
 
-<MultiCard>
-	{#if data.network.supports('delphioracle')}
+<div class="xs:grid-cols-[100%] grid gap-6 lg:grid-cols-[60%_40%]">
+	<div class="space-y-6">
 		<Card id="account-value" style="column-span: all;">
-			<Cluster class="items-center">
+			<div class="flex flex-wrap items-center gap-x-4 gap-y-2">
 				<picture class="bg-mine-900 grid size-12 place-items-center rounded-full">
 					<DollarSign />
 				</picture>
+
 				{#if currentAccountValue}
-					<div>
+					<div class="flex flex-1 flex-col gap-1">
 						<p>{m.account_page_total_value()}</p>
 						{#if currentAccountValue.hasPrice}
 							<AssetText
@@ -67,73 +68,79 @@
 						{/if}
 					</div>
 				{/if}
-				<CurrencySelect />
-			</Cluster>
-		</Card>
-	{/if}
 
-	{#if data.account.balance}
-		<TokenOverview
-			balance={data.account.balance}
-			cta={legacytoken
-				? {
-						text: m.common_swap_to_token({ token: legacytoken.name }),
-						href: `/${data.network}/swap/${data.network.token.id.url}/${legacytoken.id.url}`,
-						visible: isCurrentUser
-					}
-				: undefined}
-			{isCurrentUser}
-			network={data.network}
-			pair={currentAccountValue.pair}
-			value={currentAccountValue.systemtoken.systemtoken}
-		/>
-	{/if}
-
-	{#if legacytoken && legacybalance}
-		<TokenOverview
-			balance={legacybalance}
-			cta={{
-				text: m.common_swap_to_token({ token: data.network.token.name }),
-				href: `/${data.network}/swap/${legacytoken.id.url}/${data.network.token.id.url}`,
-				visible: isCurrentUser
-			}}
-			{isCurrentUser}
-			network={data.network}
-			pair={currentAccountValue.pair}
-			value={currentAccountValue.systemtoken.legacy}
-		/>
-	{/if}
-
-	{#if rambalance}
-		<TokenOverview
-			balance={rambalance}
-			cta={{
-				text: m.common_ram_market(),
-				href: `/${data.network}/ram`,
-				visible: isCurrentUser
-			}}
-			class=""
-			{isCurrentUser}
-			network={data.network}
-			pair={market.network.ram}
-			value={currentAccountValue.systemtoken.ram}
-		/>
-	{/if}
-
-	<Tokendistribution data={currentAccountValue.systemtoken} />
-
-	{#if context.settings.data.advancedMode}
-		<Card title={m.common_resources()}>
-			<div class="flex flex-wrap gap-12 *:flex-1">
-				<ResourceCard type="cpu" value={cpuAvailable} vertical />
-
-				<ResourceCard type="net" value={netAvailable} vertical />
+				<div class="flex flex-col gap-1 text-right text-nowrap">
+					<CurrencySelect />
+				</div>
 			</div>
-			{#if isCurrentUser}
-				<Button href={`/${data.network}/resources`} variant="secondary"
-					>{m.common_resources()}</Button
-				>
-			{/if}
 		</Card>
-	{/if}
-</MultiCard>
+
+		{#if data.account.balance}
+			<TokenBalance
+				balance={data.account.balance}
+				child="total"
+				cta={legacytoken
+					? {
+							text: m.common_swap_to_token({ token: legacytoken.name }),
+							href: `/${data.network}/swap/${data.network.token.id.url}/${legacytoken.id.url}`,
+							visible: isCurrentUser
+						}
+					: undefined}
+				{isCurrentUser}
+				open
+				network={data.network}
+				pair={currentAccountValue.pair}
+				value={currentAccountValue.systemtoken.systemtoken}
+			/>
+		{/if}
+
+		{#if legacytoken && legacybalance}
+			<TokenBalance
+				balance={legacybalance}
+				cta={{
+					text: m.common_swap_to_token({ token: data.network.token.name }),
+					href: `/${data.network}/swap/${legacytoken.id.url}/${data.network.token.id.url}`,
+					visible: isCurrentUser
+				}}
+				{isCurrentUser}
+				open
+				network={data.network}
+				pair={currentAccountValue.pair}
+				value={currentAccountValue.systemtoken.legacy}
+			/>
+		{/if}
+
+		{#if rambalance}
+			<TokenBalance
+				balance={rambalance}
+				cta={{
+					text: m.common_ram_market(),
+					href: `/${data.network}/ram`,
+					visible: isCurrentUser
+				}}
+				class=""
+				{isCurrentUser}
+				network={data.network}
+				pair={market.network.ram}
+				value={currentAccountValue.systemtoken.ram}
+			/>
+		{/if}
+	</div>
+	<div class="space-y-6">
+		<Tokendistribution data={currentAccountValue.systemtoken} />
+		{#if context.settings.data.advancedMode}
+			<Card title={m.common_resources()}>
+				<div class="flex flex-wrap gap-12 *:flex-1">
+					<ResourceCard type="cpu" value={cpuAvailable} vertical />
+
+					<ResourceCard type="net" value={netAvailable} vertical />
+				</div>
+				{#if isCurrentUser}
+					<Button href={`/${data.network}/resources`} variant="secondary"
+						>{m.common_resources()}</Button
+					>
+				{/if}
+			</Card>
+		{/if}
+	</div>
+</div>
