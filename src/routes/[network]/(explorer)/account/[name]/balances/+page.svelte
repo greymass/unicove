@@ -53,9 +53,9 @@
 								{/if} -->
 							</div>
 							<a
-								href={`/${context.network}/token/${tokenBalance.id.contract}/${tokenBalance.id.symbol.name}`}
+								href={`/${context.network}/token/${tokenBalance.token.contract}/${tokenBalance.token.name}`}
 							>
-								{tokenBalance.id.symbol.name}
+								{tokenBalance.token.name}
 							</a>
 						</div>
 					</td>
@@ -63,7 +63,7 @@
 						<AssetText value={tokenBalance.balance} />
 					</td>
 					<td class="text-right">
-						<ValueText token={tokenBalance.id} balance={tokenBalance.balance} />
+						<ValueText token={tokenBalance.token.id} balance={tokenBalance.balance} />
 					</td>
 					{#if isCurrentUser}
 						{#if !tokenBalance.locked}

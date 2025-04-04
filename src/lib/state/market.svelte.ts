@@ -59,16 +59,12 @@ export class MarketState {
 	}
 
 	getPair(base: TokenDefinition, quote: TokenDefinition): TokenPair | undefined {
-		return this.pairs.find((pair) => {
-			const matchBase = TokenDefinition.from(pair.base).equals(TokenDefinition.from(base));
-			const matchQuote = TokenDefinition.from(pair.quote).equals(TokenDefinition.from(quote));
-			return matchBase && matchQuote;
-		});
+		return this.pairs.find((p) => tokenEquals(p.base.id, base) && tokenEquals(p.quote.id, quote));
 	}
 
 	getSwap(base: TokenDefinition, quote: TokenDefinition): TokenSwap | undefined {
 		const swap = this.swaps.find(
-			(swap) => tokenEquals(swap.pair.base, base) && tokenEquals(swap.pair.quote, quote)
+			(swap) => tokenEquals(swap.pair.base.id, base) && tokenEquals(swap.pair.quote.id, quote)
 		);
 		if (swap) {
 			return swap;
@@ -94,11 +90,9 @@ export class MarketState {
 	}
 
 	getSystemTokenPair(quote: TokenDefinition): TokenPair | undefined {
-		const pair = this.pairs.find((pair) => {
-			const matchBase = TokenDefinition.from(pair.base).equals(this.network.token.id);
-			const matchQuote = TokenDefinition.from(pair.quote).equals(TokenDefinition.from(quote));
-			return matchBase && matchQuote;
-		});
+		const pair = this.pairs.find(
+			(p) => tokenEquals(p.base.id, this.network.token.id) && tokenEquals(p.quote.id, quote)
+		);
 		if (!pair) {
 			return TokenPair.from({
 				base: this.network.token.id,
@@ -129,7 +123,7 @@ function getSwaps(network: NetworkState, pairs: TokenPair[]): TokenSwap[] {
 		const { token, legacytoken } = network;
 
 		const legacyPair = pairs.find(
-			(pair) => tokenEquals(pair.base, legacytoken.id) && tokenEquals(pair.quote, token.id)
+			(pair) => tokenEquals(pair.base.id, legacytoken.id) && tokenEquals(pair.quote.id, token.id)
 		);
 		if (legacyPair) {
 			swaps.push(
@@ -143,7 +137,7 @@ function getSwaps(network: NetworkState, pairs: TokenPair[]): TokenSwap[] {
 		}
 
 		const newPair = pairs.find(
-			(pair) => tokenEquals(pair.base, token.id) && tokenEquals(pair.quote, legacytoken.id)
+			(pair) => tokenEquals(pair.base.id, token.id) && tokenEquals(pair.quote.id, legacytoken.id)
 		);
 		if (newPair) {
 			swaps.push(

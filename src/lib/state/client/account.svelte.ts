@@ -27,7 +27,7 @@ import {
 } from '$lib/state/defaults/account';
 import * as SystemContract from '$lib/wharf/contracts/system';
 import { Types as REXTypes } from '$lib/types/rex';
-import { TokenBalance, TokenDefinition } from '$lib/types/token';
+import { TokenBalance, TokenDefinition, tokenEquals } from '$lib/types/token';
 
 export class AccountState {
 	public client?: APIClient = $state();
@@ -86,7 +86,7 @@ export class AccountState {
 	}
 
 	getBalance(token: TokenDefinition): TokenBalance {
-		const balance = this.balances.find((b) => b.id.equals(token));
+		const balance = this.balances.find((b) => tokenEquals(b.token.id, token));
 		if (!balance) {
 			return TokenBalance.from({
 				id: token,
@@ -265,9 +265,7 @@ export function getBalance(network: NetworkState, sources: AccountDataSources): 
 	let legacy = Asset.fromUnits(0, network.config.systemtoken.symbol);
 	if (network.legacytoken) {
 		const legacyDefinition = TokenDefinition.from(network.legacytoken);
-		const legacyBalance = sources.balances.find((b) => {
-			return TokenBalance.from(b).id.equals(legacyDefinition);
-		});
+		const legacyBalance = sources.balances.find((b) => tokenEquals(b.token.id, legacyDefinition));
 		if (legacyBalance) {
 			const legacyAsset = Asset.from(legacyBalance.balance);
 			legacy = legacyAsset;
@@ -371,10 +369,10 @@ export function getBalances(
 
 	// Sort balances alphabetically
 	balances.sort((a, b) => {
-		if (a.id.symbol.name < b.id.symbol.name) {
+		if (a.token.id.symbol.name < b.token.id.symbol.name) {
 			return -1;
 		}
-		if (a.id.symbol.name > b.id.symbol.name) {
+		if (a.token.id.symbol.name > b.token.id.symbol.name) {
 			return 1;
 		}
 		return 0;
@@ -382,10 +380,10 @@ export function getBalances(
 
 	// Move system token to the top of the list regardless of alphabetical order
 	balances.sort((a, b) => {
-		if (a.id.equals(network.token.id)) {
+		if (a.token.id.equals(network.token.id)) {
 			return -1;
 		}
-		if (b.id.equals(network.token.id)) {
+		if (b.token.id.equals(network.token.id)) {
 			return 1;
 		}
 		return 0;

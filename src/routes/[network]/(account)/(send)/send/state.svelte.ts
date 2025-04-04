@@ -39,7 +39,7 @@ export class SendState {
 
 	setBalance(balance: TokenBalance) {
 		this.balance = balance;
-		this.quantity = Asset.fromUnits(0, balance.id.symbol);
+		this.quantity = Asset.fromUnits(0, balance.token.symbol);
 	}
 
 	toJSON() {

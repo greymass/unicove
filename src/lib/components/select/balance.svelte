@@ -40,7 +40,7 @@
 	const variant = 'form';
 
 	const label = (balance: TokenBalance) =>
-		`${String(balance.id.symbol.code)} (${balance.balance.quantity})`;
+		`${String(balance.token.symbol.code)} (${balance.balance.quantity})`;
 
 	const createOption = (balance: TokenBalance, index: number): BalanceSelectOption => {
 		return {

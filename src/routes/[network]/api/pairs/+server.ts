@@ -105,10 +105,10 @@ export async function GET({ fetch, locals: { network }, url }: RequestEvent) {
 		});
 
 		pairs.forEach((pair) => {
-			if (tokenEquals(pair.base, altPair)) {
+			if (tokenEquals(pair.base.id, altPair)) {
 				pairs.push(
 					TokenPair.from({
-						base: network.token.id,
+						base: network.token,
 						quote: pair.quote,
 						price: pair.price,
 						updated: network.connection.updated
@@ -208,11 +208,11 @@ const mappings = [
 ];
 
 function findMatchingBasePairs(pairs: TokenPair[], base: TokenDefinition): TokenPair[] {
-	const matches = pairs.filter((pair) => tokenEquals(pair.base, base));
+	const matches = pairs.filter((pair) => tokenEquals(pair.base.id, base));
 	const mapping = mappings.find((mapping) => tokenEquals(mapping.original, base));
 	if (mapping) {
 		for (const variant of mapping.variants) {
-			const match = pairs.find((pair) => tokenEquals(pair.base, variant));
+			const match = pairs.find((pair) => tokenEquals(pair.base.id, variant));
 			if (match) {
 				matches.push(match);
 			}
@@ -227,10 +227,11 @@ function deriveAdditionalPairs(pairs: TokenPair[]): TokenPair[] {
 	// Add any pairs that can be derived from the existing pairs (e.g. EOS/BTC -> BTC/CNY = EOS/CNY)
 	// TODO: Refactor for better recursion
 	for (const pair of pairs) {
-		const derivablePairs = findMatchingBasePairs(pairs, pair.quote);
+		const derivablePairs = findMatchingBasePairs(pairs, pair.quote.id);
 		for (const possiblePair of derivablePairs) {
 			const exists = !!pairs.find(
-				(p) => tokenEquals(p.base, pair.base) && tokenEquals(p.quote, possiblePair.quote)
+				(p) =>
+					tokenEquals(p.base.id, pair.base.id) && tokenEquals(p.quote.id, possiblePair.quote.id)
 			);
 			if (!exists) {
 				const pairDate = pair.updated.toDate();
@@ -267,7 +268,7 @@ function deriveAdditionalPairs(pairs: TokenPair[]): TokenPair[] {
 			continue;
 		}
 		const exists = pairs.find(
-			(p) => tokenEquals(p.base, pair.quote) && tokenEquals(p.quote, pair.base)
+			(p) => tokenEquals(p.base.id, pair.quote.id) && tokenEquals(p.quote.id, pair.base.id)
 		);
 		if (!exists) {
 			derived.push(pair.reversed);

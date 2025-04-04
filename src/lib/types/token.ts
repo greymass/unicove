@@ -25,31 +25,6 @@ export class TokenDefinition extends Struct {
 	}
 }
 
-@Struct.type('token_pair')
-export class TokenPair extends Struct {
-	@Struct.field(TokenDefinition) declare base: TokenDefinition;
-	@Struct.field(TokenDefinition) declare quote: TokenDefinition;
-	@Struct.field(Asset) declare price: Asset;
-	@Struct.field(TimePointSec) declare updated: TimePointSec;
-
-	get reversed(): TokenPair {
-		return new TokenPair({
-			base: this.quote,
-			quote: this.base,
-			price: Asset.fromFloat(this.price.value ? 1 / this.price.value : 0, this.base.symbol),
-			updated: this.updated
-		});
-	}
-}
-
-@Struct.type('token_swap')
-export class TokenSwap extends Struct {
-	@Struct.field(TokenPair) declare pair: TokenPair;
-	@Struct.field(Name) declare contract: Name;
-	@Struct.field(Name) declare action: Name;
-	@Struct.field(Asset) declare fee: Asset;
-}
-
 @Struct.type('distribution')
 export class TokenDistribution extends Struct {
 	@Struct.field(Asset) declare circulating: Asset;
@@ -105,6 +80,31 @@ export class Token extends Struct {
 	// }
 }
 
+@Struct.type('token_pair')
+export class TokenPair extends Struct {
+	@Struct.field(Token) declare base: Token;
+	@Struct.field(Token) declare quote: Token;
+	@Struct.field(Asset) declare price: Asset;
+	@Struct.field(TimePointSec) declare updated: TimePointSec;
+
+	get reversed(): TokenPair {
+		return new TokenPair({
+			base: this.quote,
+			quote: this.base,
+			price: Asset.fromFloat(this.price.value ? 1 / this.price.value : 0, this.base.symbol),
+			updated: this.updated
+		});
+	}
+}
+
+@Struct.type('token_swap')
+export class TokenSwap extends Struct {
+	@Struct.field(TokenPair) declare pair: TokenPair;
+	@Struct.field(Name) declare contract: Name;
+	@Struct.field(Name) declare action: Name;
+	@Struct.field(Asset) declare fee: Asset;
+}
+
 export type TokenBalanceStates =
 	// Tokens delegated during genesis or the old eosio::delegatebw action
 	| 'delegated'
@@ -123,7 +123,7 @@ export type TokenBalanceStates =
 
 @Struct.type('token_balance_base')
 export class TokenBalanceBase extends Struct {
-	@Struct.field(TokenDefinition) declare id: TokenDefinition;
+	@Struct.field(Token) declare token: Token;
 	@Struct.field(Asset) declare balance: Asset;
 }
 
@@ -147,8 +147,8 @@ export class TokenBalance extends TokenBalanceBase {
 		}
 		return new TokenBalanceChild({
 			name: Name.from(name),
-			id: this.id,
-			balance: Asset.fromUnits(0, this.id.symbol)
+			token: this.token,
+			balance: Asset.fromUnits(0, this.token.symbol)
 		});
 	}
 }

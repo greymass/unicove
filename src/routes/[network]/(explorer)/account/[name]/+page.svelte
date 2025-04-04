@@ -12,6 +12,7 @@
 	import TokenBalance from '$lib/components/card/tokenbalance.svelte';
 	import Tokendistribution from '$lib/components/chart/tokendistribution.svelte';
 	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte';
+	import { tokenEquals } from '$lib/types/token.js';
 
 	const { data } = $props();
 
@@ -36,7 +37,7 @@
 	);
 
 	const rambalance = $derived(
-		data.account.balances.find((b) => b.id.equals(data.network.getRamTokenDefinition()))
+		data.account.balances.find((b) => tokenEquals(b.token.id, data.network.getRamTokenDefinition()))
 	);
 
 	const cpuAvailable = $derived(data.account.resources.cpu.available);
@@ -44,7 +45,7 @@
 
 	const legacytoken = data.network.legacytoken;
 	const legacybalance = legacytoken
-		? data.account.balances.find((b) => b.id.equals(legacytoken.id))
+		? data.account.balances.find((b) => tokenEquals(b.token.id, legacytoken.id))
 		: undefined;
 
 	$inspect(String(legacybalance?.balance));

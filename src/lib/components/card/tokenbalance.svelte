@@ -4,14 +4,17 @@
 	import TradingPair from '$lib/components/elements/tradingpair.svelte';
 	import { cn } from '$lib/utils/style';
 	import type { NetworkState } from '$lib/state/network.svelte';
-	import { TokenBalance, type TokenBalanceChild, type TokenPair } from '$lib/types/token';
+	import {
+		TokenBalance,
+		tokenEquals,
+		type TokenBalanceChild,
+		type TokenPair
+	} from '$lib/types/token';
 	import { ChevronDown, ChevronRight } from 'lucide-svelte';
-	import { Breakdown, BreakdownRow } from '../breakdown';
 	import * as m from '$lib/paraglide/messages';
 	import Button from '../button/button.svelte';
 	import { getContext } from 'svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import { text } from '@sveltejs/kit';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -50,7 +53,7 @@
 	const balanceUnstaked = $derived(isPrimaryBalance ? _balance.child('unstaked') : undefined);
 	const balanceDelegated = $derived(isPrimaryBalance ? _balance.child('delegated') : undefined);
 	const balanceTotal = $derived(isPrimaryBalance ? _balance.child('total') : undefined);
-	const isRamToken = $derived(_balance.id.equals(network.getRamTokenDefinition()));
+	const isRamToken = $derived(tokenEquals(_balance.token.id, network.getRamTokenDefinition()));
 	const hasValue = $derived(network.supports('delphioracle') || context.settings.data.mockPrice);
 
 	$inspect(String(balance.balance));
@@ -78,19 +81,19 @@
 	<div class="bg-shark-900/30 flex flex-wrap items-center gap-x-4 gap-y-2 p-6">
 		<picture class="size-14 place-items-center">
 			<img
-				alt="{_balance.id.symbol.name} Logo"
-				src="https://assets.wharfkit.com/chain/{_balance.id.symbol.name.toLowerCase()}.png"
+				alt="{_balance.token.name} Logo"
+				src="https://assets.wharfkit.com/chain/{_balance.token.name.toLowerCase()}.png"
 			/>
 		</picture>
 		<div class="flex flex-col gap-1">
 			<h4 class="text-xl font-bold text-white capitalize">
 				{#if isRamToken}
 					<a href="/{network}/ram">
-						{balance.id.symbol.name} (RAM)
+						{balance.token.name} (RAM)
 					</a>
 				{:else}
-					<a href="/{network}/token/{balance.id.contract}/{balance.id.symbol.name}">
-						{balance.id.symbol.name}
+					<a href="/{network}/token/{balance.token.contract}/{balance.token.name}">
+						{balance.token.name}
 					</a>
 				{/if}
 			</h4>
@@ -126,10 +129,10 @@
 		<div class="space-y-2 p-6">
 			{@render SubBalance(m.common_available(), _balance.balance, {
 				text: m.common_send(),
-				href: `/${network}/send/${balance.id.url}`
+				href: `/${network}/send/${balance.token.id.url}`
 			})}
 
-			{#if balance.id.equals(network.token.id)}
+			{#if tokenEquals(balance.token.id, network.token.id)}
 				{#if network.supports('staking') && balanceStaked}
 					{@render SubBalance(m.common_staked(), balanceStaked.balance, {
 						text: m.common_staking(),
