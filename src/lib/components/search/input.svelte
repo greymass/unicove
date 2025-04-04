@@ -91,6 +91,7 @@
 		elements: { trigger, portalled, overlay, content },
 		states: { open }
 	} = createDialog({
+		preventScroll: false,
 		forceVisible: true,
 		onOpenChange: resetSelectedIndex
 	});
