@@ -121,7 +121,7 @@
 									<Key {key} icon />
 								</td>
 								<td class="grid h-full items-center justify-items-end">
-									<CopyButton data={key.toString()} slop={false} />
+									<CopyButton data={key.toString()} />
 								</td>
 							</tr>
 						{/each}
@@ -141,7 +141,7 @@
 									</Account>
 								</td>
 								<td class="*:pt-1">
-									<CopyButton data={account.toString()} slop={false} />
+									<CopyButton data={account.toString()} />
 								</td>
 							</tr>
 						{/each}
