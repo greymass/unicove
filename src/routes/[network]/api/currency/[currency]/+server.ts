@@ -1,7 +1,7 @@
 import { json } from '@sveltejs/kit';
 
 import { getCacheHeaders } from '$lib/utils';
-import { TokenDataSources, TokenDefinition, TokenPair } from '$lib/types/token';
+import { TokenDataSources, TokenPair } from '$lib/types/token';
 import { Asset, TimePointSec } from '@wharfkit/session';
 import { Currencies, SupportedCurrencies } from '$lib/types/currencies';
 import type { RequestEvent } from './$types';

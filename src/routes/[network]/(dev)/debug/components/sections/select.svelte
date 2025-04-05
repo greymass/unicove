@@ -8,7 +8,7 @@
 	import type { SelectOption } from '@melt-ui/svelte';
 	import Button from '$lib/components/button/button.svelte';
 	import Code from '$lib/components/code.svelte';
-	import { TokenBalance, TokenDefinition } from '$lib/types/token';
+	import { TokenBalance } from '$lib/types/token';
 
 	const options: SelectOption[] = [
 		{ value: 30, label: '30d' },
