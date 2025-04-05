@@ -45,12 +45,12 @@
 	}: TokenOverviewProps = $props();
 
 	const balance = $derived(child ? _balance.child(child) : _balance);
+	const isRamToken = $derived(tokenEquals(_balance.token.id, network.getRamToken().id));
 	const hasValue = $derived(network.supports('delphioracle') || context.settings.data.mockPrice);
 	const balanceRefunding = $derived(_balance.child('refunding'));
 	const balanceStaked = $derived(_balance.child('staked'));
 	const balanceUnstaked = $derived(_balance.child('unstaked'));
 	const balanceDelegated = $derived(_balance.child('delegated'));
-	const isRamToken = $derived(tokenEquals(_balance.token.id, network.getRamTokenDefinition()));
 	const balanceUsed = $derived(_balance.child('used'));
 </script>
 

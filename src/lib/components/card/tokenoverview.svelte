@@ -40,7 +40,7 @@
 	const balanceDelegated = $derived(balance.child('delegated'));
 	const balanceTotal = $derived(balance.child('total'));
 
-	const isRamToken = $derived(tokenEquals(balance.token.id, network.getRamTokenDefinition()));
+	const isRamToken = $derived(tokenEquals(balance.token.id, network.getRamToken().id));
 </script>
 
 <Card id="{balance.token.contract}-{balance.token.symbol.name}-token" class={className}>

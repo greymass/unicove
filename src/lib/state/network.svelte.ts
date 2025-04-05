@@ -29,10 +29,11 @@ import {
 	type DefaultContracts,
 	type FeatureType,
 	getChainConfigByName,
-	systemtoken
+	systemtoken,
+	ramtoken
 } from '$lib/wharf/chains';
 
-import { TokenDistribution, Token, TokenDefinition, ZeroUnits } from '$lib/types/token';
+import { TokenDistribution, Token, ZeroUnits } from '$lib/types/token';
 
 import { Contract as DelphiHelperContract } from '$lib/wharf/contracts/delphihelper';
 import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
@@ -159,17 +160,7 @@ export class NetworkState {
 	}
 
 	getRamToken(): Token {
-		return Token.from({
-			id: this.getRamTokenDefinition()
-		});
-	}
-
-	getRamTokenDefinition(): TokenDefinition {
-		return TokenDefinition.from({
-			symbol: Asset.Symbol.from('3,KB'),
-			contract: 'eosio',
-			chain: this.chain.id
-		});
+		return Token.from(ramtoken);
 	}
 
 	getSystemToken(): Token {

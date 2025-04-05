@@ -62,13 +62,26 @@ const systemtokenalt = env.PUBLIC_SYSTEM_TOKEN_SYMBOL_ALT
 
 const isTrue = (value: string) => value === 'true';
 
+const ramtokenasset = TokenMediaAsset.from({});
 const systemtokenasset = TokenMediaAsset.from({});
 if (env.PUBLIC_SYSTEM_TOKEN_LOGO_LIGHT) {
+	ramtokenasset.light = env.PUBLIC_SYSTEM_TOKEN_LOGO_LIGHT;
 	systemtokenasset.light = env.PUBLIC_SYSTEM_TOKEN_LOGO_LIGHT;
 }
 if (env.PUBLIC_SYSTEM_TOKEN_LOGO_DARK) {
+	ramtokenasset.dark = env.PUBLIC_SYSTEM_TOKEN_LOGO_DARK;
 	systemtokenasset.dark = env.PUBLIC_SYSTEM_TOKEN_LOGO_DARK;
 }
+export const ramtoken = Token.from({
+	id: {
+		chain: env.PUBLIC_CHAIN_ID,
+		contract: env.PUBLIC_SYSTEM_CONTRACT,
+		symbol: '3,KB'
+	},
+	media: TokenMedia.from({
+		logo: ramtokenasset
+	})
+});
 export const systemtoken = Token.from({
 	id: {
 		chain: env.PUBLIC_CHAIN_ID,
