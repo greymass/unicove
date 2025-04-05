@@ -13,15 +13,18 @@
 
 	const context = getContext<UnicoveContext>('state');
 
+	interface CTA {
+		text: string;
+		href: string;
+		variant?: 'primary' | 'secondary' | 'tertiary' | 'pill';
+		visible: boolean;
+	}
+
 	interface TokenOverviewProps {
 		balance: TokenBalance;
 		class?: string;
 		child?: string;
-		cta?: {
-			text: string;
-			href: string;
-			visible: boolean;
-		};
+		cta?: CTA[];
 		isCurrentUser: boolean;
 		open?: boolean;
 		network: NetworkState;
@@ -42,13 +45,13 @@
 	}: TokenOverviewProps = $props();
 
 	const balance = $derived(child ? _balance.child(child) : _balance);
+	const hasValue = $derived(network.supports('delphioracle') || context.settings.data.mockPrice);
 	const balanceRefunding = $derived(_balance.child('refunding'));
 	const balanceStaked = $derived(_balance.child('staked'));
 	const balanceUnstaked = $derived(_balance.child('unstaked'));
 	const balanceDelegated = $derived(_balance.child('delegated'));
 	const isRamToken = $derived(tokenEquals(_balance.token.id, network.getRamTokenDefinition()));
 	const balanceUsed = $derived(_balance.child('used'));
-	const hasValue = $derived(network.supports('delphioracle') || context.settings.data.mockPrice);
 </script>
 
 {#snippet SubBalance(label: string, value: Asset, action?: { text: string; href: string })}
@@ -152,10 +155,18 @@
 				{@render SubBalance(m.common_used(), balanceUsed.balance)}
 			{/if}
 
-			{#if cta}
-				<Button class="mt-4 {cta.visible ? '' : 'hidden'}" variant="secondary" href={cta.href}>
-					{cta.text}
-				</Button>
+			{#if cta && cta.length}
+				<div class="flex gap-6">
+					{#each cta as action}
+						<Button
+							class="mt-4 {action.visible ? '' : 'hidden'}"
+							variant={action.variant || 'secondary'}
+							href={action.href}
+						>
+							{action.text}
+						</Button>
+					{/each}
+				</div>
 			{/if}
 		</div>
 	{/if}
