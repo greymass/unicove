@@ -28,16 +28,22 @@ export interface AccountDataSources {
 	// Table rows from eosio::delband
 	delegated: SystemTypes.delegated_bandwidth[];
 	// Table row from eosio::giftedram
-	giftedram?: UnicoveTypes.gifted_ram;
+	giftedram: UnicoveTypes.gifted_ram;
 	// Table rows from eosio.msig::proposal
 	proposals: MsigTypes.proposal[];
 	// Table rows from eosio::refunds
-	refund_request?: SystemTypes.refund_request;
+	refund_request: SystemTypes.refund_request;
 	// Table row from eosio::rexbal
-	rexbal?: REXTypes.rex_balance;
+	rexbal: REXTypes.rex_balance;
 	// Table row from eosio::rexfund
-	rexfund?: REXTypes.rex_fund;
+	rexfund: REXTypes.rex_fund;
 }
+
+export type AccountDataSourcesKeys = keyof AccountDataSources;
+
+export type AccountDataSourcesHashes = {
+	[key in AccountDataSourcesKeys]: Checksum256;
+};
 
 export type AccountResourceType = 'cpu' | 'net' | 'ram';
 

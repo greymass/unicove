@@ -1,6 +1,10 @@
 import { API, Asset, Checksum256, Float64, Int64, Name } from '@wharfkit/antelope';
 
-import { type AccountDataSources, type VoterInfo } from '$lib/types/account';
+import {
+	type AccountDataSources,
+	type AccountDataSourcesHashes,
+	type VoterInfo
+} from '$lib/types/account';
 import * as SystemContract from '$lib/wharf/contracts/system';
 import { Types as UnicoveTypes } from '$lib/wharf/contracts/unicove.api';
 import { Types as REXTypes } from '$lib/types/rex';
@@ -99,6 +103,19 @@ export const defaultAccountDataSources: AccountDataSources = {
 	refund_request: defaultRefundRequest,
 	rexbal: defaultRexBalance,
 	rexfund: defaultRexFund
+};
+
+export const defaultAccountDataHashes: AccountDataSourcesHashes = {
+	get_account: nullContractHash,
+	contract_hash: nullContractHash,
+	balance: nullContractHash,
+	balances: nullContractHash,
+	delegated: nullContractHash,
+	giftedram: nullContractHash,
+	proposals: nullContractHash,
+	refund_request: nullContractHash,
+	rexbal: nullContractHash,
+	rexfund: nullContractHash
 };
 
 export const defaultVoteInfo: VoterInfo = {

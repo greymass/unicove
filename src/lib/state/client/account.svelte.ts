@@ -2,6 +2,7 @@ import {
 	API,
 	APIClient,
 	Asset,
+	Bytes,
 	Checksum256,
 	Float64,
 	Int128,
@@ -15,12 +16,15 @@ import type { REXState } from '@wharfkit/resources';
 import type { NetworkState } from '$lib/state/network.svelte';
 import type {
 	AccountDataSources,
+	AccountDataSourcesKeys,
+	AccountDataSourcesHashes,
 	AccountResources,
 	SerializedAccountState,
 	VoterInfo
 } from '$lib/types/account';
 
 import {
+	defaultAccountDataHashes,
 	defaultAccountDataSources,
 	defaultVoteInfo,
 	nullContractHash
@@ -35,6 +39,7 @@ export class AccountState {
 
 	public network: NetworkState;
 	private sources: AccountDataSources = $state(defaultAccountDataSources);
+	private hashes: AccountDataSourcesHashes = $state(defaultAccountDataHashes);
 
 	public name: Name = $state(Name.from(''));
 	public last_update: Date = $state(new Date());
@@ -106,20 +111,35 @@ export class AccountState {
 		}
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	updateSource(source: AccountDataSourcesKeys, data: any) {
+		const hash = Checksum256.hash(Bytes.from(JSON.stringify(data), 'utf8'));
+		if (!this.hashes[source] || !hash.equals(this.hashes[source])) {
+			this.hashes[source] = hash;
+			this.sources[source] = data;
+		}
+	}
+
 	setState(data: AccountDataSources) {
 		this.last_update = new Date();
-		this.sources = {
-			get_account: data.get_account,
-			contract_hash: Checksum256.from(data.contract_hash),
-			balance: data.balance,
-			balances: data.balances,
-			giftedram: data.giftedram,
-			delegated: data.delegated,
-			proposals: data.proposals,
-			refund_request: data.refund_request,
-			rexbal: data.rexbal,
-			rexfund: data.rexfund
-		};
+		this.sources.contract_hash = Checksum256.from(data.contract_hash);
+
+		// Since we are performing optimistic updates against some data, we need to
+		// ensure that the optimistic updates are not lost when the data is fetched,
+		// unless the actual data has changed from the last update.
+		//
+		// This will no longer be necessary when we switch to using an API which streams
+		// updates to the account data only when they occur.
+		this.updateSource('balance', data.balance);
+		this.updateSource('balances', data.balances);
+		this.updateSource('delegated', data.delegated);
+		this.updateSource('get_account', data.get_account);
+		this.updateSource('giftedram', data.giftedram);
+		this.updateSource('proposals', data.proposals);
+		this.updateSource('refund_request', data.refund_request);
+		this.updateSource('rexbal', data.rexbal);
+		this.updateSource('rexfund', data.rexfund);
+
 		if (data.get_account && data.get_account.voter_info) {
 			this.voter = {
 				isProxy: data.get_account.voter_info.is_proxy,

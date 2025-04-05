@@ -11,7 +11,13 @@ import type { RequestEvent, RequestHandler } from './$types';
 import { Types as SystemTypes, type TableTypes } from '$lib/wharf/contracts/system';
 import { Types as REXTypes } from '$lib/types/rex';
 import { Types as UnicoveTypes } from '$lib/wharf/contracts/unicove.api';
-import { nullContractHash } from '$lib/state/defaults/account';
+import {
+	defaultGiftedRam,
+	defaultRefundRequest,
+	defaultRexBalance,
+	defaultRexFund,
+	nullContractHash
+} from '$lib/state/defaults/account';
 import { TokenBalance, TokenDefinition, tokenEquals } from '$lib/types/token';
 
 export const GET: RequestHandler = async ({ locals: { network }, params }: RequestEvent) => {
@@ -82,7 +88,7 @@ async function getAccount(network: NetworkState, account: NameType): Promise<Acc
 
 	let rex;
 	let balances: TokenBalance[] = [];
-	let giftedram: UnicoveTypes.gifted_ram | undefined;
+	let giftedram = defaultGiftedRam;
 
 	if (network.supports('lightapi')) {
 		balances = await loadBalances(network, account, network.fetch);
@@ -108,17 +114,17 @@ async function getAccount(network: NetworkState, account: NameType): Promise<Acc
 
 	const defaultBalance = Asset.fromUnits(0, network.config.systemtoken.symbol);
 
-	let refund_request: SystemTypes.refund_request | undefined;
+	let refund_request = defaultRefundRequest;
 	if (get_account.refund_request) {
 		refund_request = SystemTypes.refund_request.from(get_account.refund_request);
 	}
 
-	let rexbal: REXTypes.rex_balance | undefined;
+	let rexbal = defaultRexBalance;
 	if (get_account.rex_info) {
 		rexbal = REXTypes.rex_balance.from(get_account.rex_info);
 	}
 
-	let rexfund: REXTypes.rex_fund | undefined;
+	let rexfund = defaultRexFund;
 	if (rex) {
 		rexfund = REXTypes.rex_fund.from(rex);
 	}
