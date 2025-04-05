@@ -87,10 +87,10 @@
 			<TokenBalance
 				balance={data.account.balance}
 				child="total"
-				cta={legacytoken
+				cta={data.network.supports('directfunding')
 					? {
-							text: m.common_swap_to_token({ token: legacytoken.name }),
-							href: `/${data.network}/swap/${data.network.token.id.url}/${legacytoken.id.url}`,
+							text: m.common_add_funds(),
+							href: `/${data.network}/fund`,
 							visible: isCurrentUser
 						}
 					: undefined}
