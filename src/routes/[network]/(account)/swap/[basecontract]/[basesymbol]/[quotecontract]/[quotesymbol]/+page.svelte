@@ -254,13 +254,6 @@
 	</Stack>
 </SingleCard>
 
-<Code
-	json={{
-		base: String(baseBalance.balance),
-		quote: String(quoteBalance.balance)
-	}}
-/>
-
 {#if context.settings.data.debugMode}
 	<Code
 		json={{
