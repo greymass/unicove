@@ -28,7 +28,8 @@ import {
 	type ChainConfig,
 	type DefaultContracts,
 	type FeatureType,
-	getChainConfigByName
+	getChainConfigByName,
+	systemtoken
 } from '$lib/wharf/chains';
 
 import { type TokenType, TokenDistribution, Token, TokenDefinition } from '$lib/types/token';
@@ -172,18 +173,10 @@ export class NetworkState {
 	}
 
 	getSystemToken(): Token {
-		const id = TokenDefinition.from({
-			chain: this.chain.id,
-			symbol: this.config.systemtoken.symbol,
-			contract: this.config.systemtoken.contract
-		});
-
-		const tokenData: TokenType = {
-			id
-		};
+		const token = Token.from(systemtoken);
 
 		if (this.sources) {
-			tokenData.distribution = TokenDistribution.from({
+			token.distribution = TokenDistribution.from({
 				circulating: this.sources.token.circulating,
 				locked: this.sources.token.locked,
 				staked:
@@ -193,7 +186,7 @@ export class NetworkState {
 			});
 		}
 
-		return Token.from(tokenData);
+		return token;
 	}
 
 	getRexState() {

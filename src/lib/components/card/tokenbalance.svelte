@@ -72,10 +72,7 @@
 <div class={cn('bg-mine-950', className)}>
 	<div class="bg-shark-900/30 flex flex-wrap items-center gap-x-4 gap-y-2 p-6">
 		<picture class="size-14 place-items-center">
-			<img
-				alt="{_balance.token.name} Logo"
-				src="https://assets.wharfkit.com/chain/{_balance.token.name.toLowerCase()}.png"
-			/>
+			<img alt="{_balance.token.name} Logo" src={_balance.token.media?.logo?.light} />
 		</picture>
 		<div class="flex flex-col gap-1">
 			<h4 class="text-xl font-bold text-white capitalize">

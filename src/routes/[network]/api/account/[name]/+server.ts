@@ -12,7 +12,7 @@ import { Types as SystemTypes, type TableTypes } from '$lib/wharf/contracts/syst
 import { Types as REXTypes } from '$lib/types/rex';
 import { Types as UnicoveTypes } from '$lib/wharf/contracts/unicove.api';
 import { nullContractHash } from '$lib/state/defaults/account';
-import { TokenBalance } from '$lib/types/token';
+import { TokenBalance, TokenDefinition, tokenEquals } from '$lib/types/token';
 
 export const GET: RequestHandler = async ({ locals: { network }, params }: RequestEvent) => {
 	const headers = getCacheHeaders(5);
@@ -89,7 +89,7 @@ async function getAccount(network: NetworkState, account: NameType): Promise<Acc
 	} else {
 		balances = [
 			TokenBalance.from({
-				id: network.token,
+				token: network.token,
 				balance: get_account.core_liquid_balance || Asset.fromUnits(0, network.token.symbol)
 			})
 		];
@@ -128,7 +128,10 @@ async function getAccount(network: NetworkState, account: NameType): Promise<Acc
 	return {
 		get_account,
 		contract_hash,
-		balance: get_account.core_liquid_balance || defaultBalance,
+		balance: TokenBalance.from({
+			token: network.token,
+			balance: get_account.core_liquid_balance || defaultBalance
+		}),
 		balances,
 		delegated,
 		giftedram,
@@ -160,7 +163,7 @@ async function getAccount2(network: NetworkState, account: NameType): Promise<Ac
 	return {
 		get_account,
 		contract_hash: getaccount.contracthash,
-		balance: getaccount.balance,
+		balance: TokenBalance.from(getaccount.balance),
 		balances,
 		delegated: getaccount.delegations,
 		giftedram: getaccount.giftedram,
@@ -184,26 +187,38 @@ async function getBalances(
 	if (getaccount.balance) {
 		balances.push(
 			TokenBalance.from({
-				token: network.token,
-				balance: getaccount.balance
+				token: network.getSystemToken(),
+				balance: getaccount.balance.balance
 			})
 		);
 	}
 	if (getaccount.balances) {
-		for (const token of requested) {
-			const balance = getaccount.balances.find((b) => b.symbol.equals(token.symbol));
+		for (const requestedToken of requested) {
+			const balance = getaccount.balances.find((b) =>
+				b.token.id.symbol.equals(requestedToken.symbol)
+			);
 			if (balance) {
-				balances.push(
-					TokenBalance.from({
-						token: {
-							id: {
-								...token,
-								chain: network.chain.id
+				const id = TokenDefinition.from({
+					...balance.token.id,
+					chain: network.chain.id
+				});
+				if (network.config.legacytoken && tokenEquals(id, network.config.legacytoken.id)) {
+					balances.push(
+						TokenBalance.from({
+							...balance,
+							token: network.config.legacytoken
+						})
+					);
+				} else {
+					balances.push(
+						TokenBalance.from({
+							...balance,
+							token: {
+								id
 							}
-						},
-						balance
-					})
-				);
+						})
+					);
+				}
 			}
 		}
 	}

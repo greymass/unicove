@@ -22,7 +22,7 @@ export interface AccountDataSources {
 	// Hash of the contract on the account
 	contract_hash: Checksum256;
 	// Table rows from eosio.token::accounts
-	balance: Asset;
+	balance: TokenBalance;
 	// List of all loaded token balances
 	balances: TokenBalance[];
 	// Table rows from eosio::delband

@@ -28,8 +28,8 @@ export interface TokenType {
 
 @Struct.type('token_media_asset')
 export class TokenMediaAsset extends Struct {
-	@Struct.field('string', { optional: true }) declare light?: Name;
-	@Struct.field('string', { optional: true }) declare dark?: Name;
+	@Struct.field('string', { optional: true }) declare light?: string;
+	@Struct.field('string', { optional: true }) declare dark?: string;
 }
 
 @Struct.type('token_media')

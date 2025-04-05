@@ -247,7 +247,7 @@ export function getBalance(network: NetworkState, sources: AccountDataSources): 
 	const total = Asset.fromUnits(0, network.config.systemtoken.symbol);
 	const liquid = Asset.fromUnits(0, network.config.systemtoken.symbol);
 	if (sources.balance) {
-		const balance = Asset.from(sources.balance);
+		const balance = Asset.from(sources.balance.balance);
 		liquid.units.add(balance.units);
 		total.units.add(balance.units);
 	}

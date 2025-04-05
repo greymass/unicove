@@ -11,7 +11,7 @@ import { Contract as UnicoveContract } from '$lib/wharf/contracts/unicove.api';
 
 import * as env from '$env/static/public';
 
-import { Token } from '$lib/types/token';
+import { Token, TokenMedia, TokenMediaAsset } from '$lib/types/token';
 
 const coinbase =
 	env.PUBLIC_FEATURE_DIRECTFUNDING === 'true'
@@ -30,6 +30,14 @@ const metamask =
 			}
 		: undefined;
 
+const legacytokenasset = TokenMediaAsset.from({});
+if (env.PUBLIC_LEGACY_TOKEN_LOGO_LIGHT) {
+	legacytokenasset.light = env.PUBLIC_LEGACY_TOKEN_LOGO_LIGHT;
+}
+if (env.PUBLIC_LEGACY_TOKEN_LOGO_DARK) {
+	legacytokenasset.dark = env.PUBLIC_LEGACY_TOKEN_LOGO_DARK;
+}
+
 const legacytoken =
 	env.PUBLIC_LEGACY_TOKEN_CONTRACT && env.PUBLIC_LEGACY_TOKEN_SYMBOL
 		? Token.from({
@@ -37,7 +45,10 @@ const legacytoken =
 					chain: env.PUBLIC_CHAIN_ID,
 					contract: env.PUBLIC_LEGACY_TOKEN_CONTRACT,
 					symbol: env.PUBLIC_LEGACY_TOKEN_SYMBOL
-				}
+				},
+				media: TokenMedia.from({
+					logo: legacytokenasset
+				})
 			})
 		: undefined;
 
@@ -51,12 +62,22 @@ const systemtokenalt = env.PUBLIC_SYSTEM_TOKEN_SYMBOL_ALT
 
 const isTrue = (value: string) => value === 'true';
 
+const systemtokenasset = TokenMediaAsset.from({});
+if (env.PUBLIC_SYSTEM_TOKEN_LOGO_LIGHT) {
+	systemtokenasset.light = env.PUBLIC_SYSTEM_TOKEN_LOGO_LIGHT;
+}
+if (env.PUBLIC_SYSTEM_TOKEN_LOGO_DARK) {
+	systemtokenasset.dark = env.PUBLIC_SYSTEM_TOKEN_LOGO_DARK;
+}
 export const systemtoken = Token.from({
 	id: {
 		chain: env.PUBLIC_CHAIN_ID,
 		contract: env.PUBLIC_SYSTEM_TOKEN_CONTRACT,
 		symbol: env.PUBLIC_SYSTEM_TOKEN_SYMBOL
-	}
+	},
+	media: TokenMedia.from({
+		logo: systemtokenasset
+	})
 });
 
 export const chainConfig: ChainConfig = {
