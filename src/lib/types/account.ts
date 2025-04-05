@@ -1,4 +1,4 @@
-import { API, Int64, Name, Asset, Float64, Checksum256 } from '@wharfkit/antelope';
+import { API, Int64, Name, Float64, Checksum256 } from '@wharfkit/antelope';
 
 import { Types as MsigTypes } from '$lib/wharf/contracts/msig';
 import { Types as SystemTypes } from '$lib/wharf/contracts/system';

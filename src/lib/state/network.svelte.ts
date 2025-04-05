@@ -32,7 +32,7 @@ import {
 	systemtoken
 } from '$lib/wharf/chains';
 
-import { type TokenType, TokenDistribution, Token, TokenDefinition } from '$lib/types/token';
+import { TokenDistribution, Token, TokenDefinition } from '$lib/types/token';
 
 import { Contract as DelphiHelperContract } from '$lib/wharf/contracts/delphihelper';
 import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
