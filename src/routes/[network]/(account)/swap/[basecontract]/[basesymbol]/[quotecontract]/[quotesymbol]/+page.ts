@@ -1,24 +1,24 @@
 import type { PageLoad } from './$types';
-import { Token } from '$lib/types/token';
+import { TokenDefinition } from '$lib/types/token';
 import * as m from '$lib/paraglide/messages';
 
 export const load: PageLoad = async ({ params, parent }) => {
 	const { network } = await parent();
 	const { basecontract, basesymbol, quotecontract, quotesymbol } = params;
-	const base = Token.from({
-		id: {
+	const base = network.getToken(
+		TokenDefinition.from({
 			contract: basecontract,
 			symbol: basesymbol.toUpperCase(),
 			chain: network.chain.id
-		}
-	});
-	const quote = Token.from({
-		id: {
+		})
+	);
+	const quote = network.getToken(
+		TokenDefinition.from({
 			contract: quotecontract,
 			symbol: quotesymbol.toUpperCase(),
 			chain: network.chain.id
-		}
-	});
+		})
+	);
 	return {
 		base,
 		quote,

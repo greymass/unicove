@@ -33,7 +33,13 @@ import {
 	ramtoken
 } from '$lib/wharf/chains';
 
-import { TokenDistribution, Token, ZeroUnits } from '$lib/types/token';
+import {
+	TokenDistribution,
+	Token,
+	ZeroUnits,
+	TokenDefinition,
+	tokenEquals
+} from '$lib/types/token';
 
 import { Contract as DelphiHelperContract } from '$lib/wharf/contracts/delphihelper';
 import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
@@ -178,6 +184,21 @@ export class NetworkState {
 		}
 
 		return token;
+	}
+
+	getToken(id: TokenDefinition): Token {
+		if (tokenEquals(id, systemtoken.id)) {
+			return this.getSystemToken();
+		}
+		if (tokenEquals(id, ramtoken.id)) {
+			return this.getRamToken();
+		}
+		if (this.config.legacytoken && tokenEquals(id, this.config.legacytoken.id)) {
+			return this.config.legacytoken;
+		}
+		return Token.from({
+			id
+		});
 	}
 
 	getRexState() {
