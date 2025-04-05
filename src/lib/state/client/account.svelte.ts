@@ -96,6 +96,16 @@ export class AccountState {
 		return balance;
 	}
 
+	// Optimistic update of a balance change, will be overwritten by the next fetch
+	setBalance(balance: TokenBalance) {
+		const index = this.sources.balances.findIndex((b) => tokenEquals(b.token.id, balance.token.id));
+		if (index !== -1) {
+			this.sources.balances[index] = balance;
+		} else {
+			this.sources.balances.push(balance);
+		}
+	}
+
 	setState(data: AccountDataSources) {
 		this.last_update = new Date();
 		this.sources = {

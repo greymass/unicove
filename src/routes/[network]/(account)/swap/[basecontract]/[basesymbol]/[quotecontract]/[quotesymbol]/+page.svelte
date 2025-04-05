@@ -67,27 +67,32 @@
 				memo: ''
 			}
 		};
-		if (context.wharf) {
-			context.wharf
+		const { account, wharf } = context;
+		if (wharf && account) {
+			wharf
 				.transact({
 					action
 				})
 				.then((result) => {
 					id = result?.resolved?.transaction.id;
-					baseBalance = TokenBalance.from({
-						...baseBalance,
-						balance: Asset.fromUnits(
-							baseBalance.balance.units.subtracting(baseQuantity.units),
-							baseBalance.balance.symbol
-						)
-					});
-					quoteBalance = TokenBalance.from({
-						...quoteBalance,
-						balance: Asset.fromUnits(
-							quoteBalance.balance.units.adding(quoteQuantity.units),
-							quoteBalance.balance.symbol
-						)
-					});
+					account.setBalance(
+						TokenBalance.from({
+							...baseBalance,
+							balance: Asset.fromUnits(
+								baseBalance.balance.units.subtracting(baseQuantity.units),
+								baseBalance.balance.symbol
+							)
+						})
+					);
+					account.setBalance(
+						TokenBalance.from({
+							...quoteBalance,
+							balance: Asset.fromUnits(
+								quoteBalance.balance.units.adding(quoteQuantity.units),
+								quoteBalance.balance.symbol
+							)
+						})
+					);
 				})
 				.catch((e) => {
 					console.error('Transaction error', e);
