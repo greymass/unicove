@@ -75,8 +75,8 @@
 	</div>
 {/snippet}
 
-<div class={cn('bg-mine-950', className)}>
-	<div class="bg-shark-900/30 flex flex-wrap items-center gap-x-4 gap-y-2 p-6">
+<div class={cn('bg-mine-950 rounded', className)}>
+	<div class="bg-shark-900/30 flex flex-wrap items-center gap-x-2 gap-y-2 p-4 lg:gap-x-4 lg:p-6">
 		<picture class="size-14 place-items-center">
 			<img alt="{_balance.token.name} Logo" src={_balance.token.media?.logo?.light} />
 		</picture>

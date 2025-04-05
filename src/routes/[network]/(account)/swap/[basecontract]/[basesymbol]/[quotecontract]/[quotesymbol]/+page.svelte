@@ -14,6 +14,7 @@
 	import { TokenBalance } from '$lib/types/token.js';
 	import { ArrowRightLeft } from 'lucide-svelte';
 	import Label from '$lib/components/input/label.svelte';
+	import { SingleCard, Stack } from '$lib/components/layout';
 
 	const { data } = $props();
 
@@ -125,11 +126,18 @@
 			baseInput?.set(base);
 		}
 	}
+
+	function onkeydown(event: Event) {
+		const { key } = event as KeyboardEvent;
+		if (key === 'Enter') {
+			transact();
+		}
+	}
 </script>
 
 {#snippet Success()}
 	<div class="flex gap-4">
-		<Button variant="secondary" onclick={() => (id = undefined)}>Back to Swap</Button>
+		<Button variant="secondary" onclick={() => (id = undefined)}>{m.common_back()}</Button>
 		<Button href={`/${data.network}/account/${context.account?.name}`}>
 			{m.common_view_my_account()}
 		</Button>
@@ -144,10 +152,15 @@
 
 {#snippet Balances()}
 	<div class="flex gap-4">
-		<div class="bg-shark-900/40 flex-1 rounded-md">
-			{baseBalance.balance.symbol.name}
-			<p><AssetText value={baseBalance.balance} /></p>
-			<p>Available</p>
+		<div class="bg-shark-900/40 flex-1 space-y-2 rounded-md p-4">
+			<div class="flex items-center gap-x-2">
+				<picture class="size-8 place-items-center">
+					<img alt="{baseBalance.token.name} Logo" src={baseBalance.token.media?.logo?.light} />
+				</picture>
+				<h3 class="h3">{baseBalance.balance.symbol.name}</h3>
+			</div>
+			<AssetText class="text-white" value={baseBalance.balance} />
+			<p>{m.common_available()}</p>
 		</div>
 		<div class="flex-1">
 			<Button
@@ -159,62 +172,89 @@
 				<ArrowRightLeft />
 			</Button>
 		</div>
-		<div class="bg-shark-900/40 flex-1 rounded-md">
-			{quoteBalance.balance.symbol.name}
-			<p><AssetText value={quoteBalance.balance} variant="full" /></p>
-			<p>Available</p>
+		<div class="bg-shark-900/40 flex-1 space-y-2 rounded-md p-4">
+			<div class="flex items-center gap-x-2">
+				<picture class="size-8 place-items-center">
+					<img alt="{quoteBalance.token.name} Logo" src={quoteBalance.token.media?.logo?.light} />
+				</picture>
+				<h3 class="h3">{quoteBalance.balance.symbol.name}</h3>
+			</div>
+			<AssetText class="text-white" value={quoteBalance.balance} />
+			<p>{m.common_available()}</p>
 		</div>
 	</div>
 {/snippet}
 
 {#snippet BaseField()}
-	<Label for="base-quantity">Swap {baseQuantity.symbol.name}</Label>
+	<Label for="base-quantity">
+		{m.common_send_tokens({
+			token: data.base.name
+		})}
+	</Label>
 	<AssetInput
+		autofocus
 		id="base-quantity"
 		bind:value={baseQuantity}
 		bind:this={baseInput}
 		oninput={baseChange}
+		{onkeydown}
 		disabled={context.wharf.transacting}
 	/>
 {/snippet}
 
 {#snippet QuoteField()}
-	<Label for="base-quantity">For {quoteQuantity.symbol.name}</Label>
+	<Label for="base-quantity">
+		{m.common_receive_tokens({
+			token: data.quote.name
+		})}
+	</Label>
 	<AssetInput
 		bind:value={quoteQuantity}
 		bind:this={quoteInput}
 		oninput={quoteChange}
+		{onkeydown}
 		disabled={context.wharf.transacting}
 	/>
 {/snippet}
 
-<TransactForm {id} {error} onsuccess={Success} onfailure={Failure}>
-	{@render Balances()}
+<SingleCard>
+	<Stack>
+		<TransactForm {id} {error} onsuccess={Success} onfailure={Failure}>
+			{@render Balances()}
 
-	{#if swap}
-		<div class="flex gap-4">
-			<div class="flex-1 space-y-2">{@render BaseField()}</div>
-			<div class="flex-1 space-y-2">{@render QuoteField()}</div>
-		</div>
+			{#if swap}
+				<div class="flex gap-4">
+					<div class="flex-1 space-y-2">{@render BaseField()}</div>
+					<div class="flex-1 space-y-2">{@render QuoteField()}</div>
+				</div>
 
-		<p class="text-center">
-			This swap will exchange
-			<AssetText class="font-bold text-white" value={baseQuantity} variant="full" />
-			for
-			<AssetText class="font-bold text-white" value={quoteQuantity} variant="full" />.
-		</p>
+				<p class="text-center">
+					This swap will exchange
+					<AssetText class="font-bold text-white" value={baseQuantity} variant="full" />
+					for
+					<AssetText class="font-bold text-white" value={quoteQuantity} variant="full" />.
+				</p>
 
-		<Button onclick={transact} disabled={context.wharf.transacting}>
-			{m.common_swap_to_token({
-				token: String(data.quote.symbol.name)
-			})}
-		</Button>
-	{:else if !market.market.loaded}
-		<p>Loading</p>
-	{:else}
-		<p class="text-center">No swaps available for this pair.</p>
-	{/if}
-</TransactForm>
+				<Button onclick={transact} disabled={context.wharf.transacting}>
+					{m.common_swap_to_token({
+						token: String(data.quote.symbol.name)
+					})}
+				</Button>
+			{:else if !market.market.loaded}
+				<p>{m.common_loading()}</p>
+			{:else}
+				<p class="text-center">{m.common_no_swap_pair()}</p>
+			{/if}
+		</TransactForm>
+	</Stack>
+</SingleCard>
+
+<Code
+	json={{
+		base: String(baseBalance.balance),
+		quote: String(quoteBalance.balance)
+	}}
+/>
 
 {#if context.settings.data.debugMode}
 	<Code
