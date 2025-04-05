@@ -400,7 +400,7 @@ export function getDelegated(
 		acc.add(delegation.net_weight.units);
 		acc.add(delegation.cpu_weight.units);
 		return acc;
-	}, ZeroUnits);
+	}, UInt64.from(ZeroUnits.value));
 	return Asset.fromUnits(delegatedUnits, symbol);
 }
 

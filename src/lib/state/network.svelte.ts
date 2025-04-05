@@ -264,7 +264,7 @@ export class NetworkState {
 				price: {
 					rammarket: defaultValue
 				},
-				supply: ZeroUnits,
+				supply: UInt64.from(ZeroUnits.value),
 				gift: UInt64.from(this.sources ? this.sources.ram_gift_bytes : 0)
 			}
 		};
