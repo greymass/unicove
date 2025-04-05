@@ -60,7 +60,7 @@
 		if (balance) {
 			let action = data.network.contracts.token.action('transfer', sendState.toJSON());
 			// Override to allow RAM transfers
-			if (tokenEquals(balance.token.id, data.network.getRamTokenDefinition())) {
+			if (tokenEquals(balance.token.id, data.network.getRamToken().id)) {
 				action = Action.from({
 					account: 'eosio',
 					name: 'ramtransfer',
