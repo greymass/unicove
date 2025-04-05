@@ -12,7 +12,7 @@ import { Types as SystemTypes, type TableTypes } from '$lib/wharf/contracts/syst
 import { Types as REXTypes } from '$lib/types/rex';
 import { Types as UnicoveTypes } from '$lib/wharf/contracts/unicove.api';
 import { nullContractHash } from '$lib/state/defaults/account';
-import { TokenBalance, TokenDefinition } from '$lib/types/token';
+import { TokenBalance } from '$lib/types/token';
 
 export const GET: RequestHandler = async ({ locals: { network }, params }: RequestEvent) => {
 	const headers = getCacheHeaders(5);
@@ -56,11 +56,13 @@ async function loadBalances(
 		const json: LightAPIBalanceResponse = await result.json();
 		balances = json.balances.map((b) =>
 			TokenBalance.from({
-				id: TokenDefinition.from({
-					chain: network.chain.id,
-					contract: b.contract,
-					symbol: `${b.decimals},${b.currency}`
-				}),
+				token: {
+					id: {
+						chain: network.chain.id,
+						contract: b.contract,
+						symbol: `${b.decimals},${b.currency}`
+					}
+				},
 				balance: Asset.fromFloat(Number(b.amount), `${b.decimals},${b.currency}`)
 			})
 		);
@@ -182,7 +184,7 @@ async function getBalances(
 	if (getaccount.balance) {
 		balances.push(
 			TokenBalance.from({
-				id: network.token,
+				token: network.token,
 				balance: getaccount.balance
 			})
 		);
@@ -193,9 +195,11 @@ async function getBalances(
 			if (balance) {
 				balances.push(
 					TokenBalance.from({
-						id: {
-							...token,
-							chain: network.chain.id
+						token: {
+							id: {
+								...token,
+								chain: network.chain.id
+							}
 						},
 						balance
 					})

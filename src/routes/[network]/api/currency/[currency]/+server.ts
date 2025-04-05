@@ -18,12 +18,16 @@ export async function GET({ fetch, params }: RequestEvent) {
 	const data = await fiat.json();
 	const pairs = Object.keys(data.rates).map((rate) => {
 		return TokenPair.from({
-			base: TokenDefinition.from({
-				symbol: '4,USD'
-			}),
-			quote: TokenDefinition.from({
-				symbol: `4,${rate}`
-			}),
+			base: {
+				id: {
+					symbol: '4,USD'
+				}
+			},
+			quote: {
+				id: {
+					symbol: `4,${rate}`
+				}
+			},
 			price: Asset.fromFloat(data.rates[rate], `4,${rate}`),
 			updated: TimePointSec.from(new Date(data.date))
 		});

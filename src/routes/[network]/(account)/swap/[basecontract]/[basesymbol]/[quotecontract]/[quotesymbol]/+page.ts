@@ -1,18 +1,22 @@
 import type { PageLoad } from './$types';
-import { TokenDefinition } from '$lib/types/token';
+import { Token } from '$lib/types/token';
 
 export const load: PageLoad = async ({ params, parent }) => {
 	const { network } = await parent();
 	const { basecontract, basesymbol, quotecontract, quotesymbol } = params;
-	const base = TokenDefinition.from({
-		contract: basecontract,
-		symbol: basesymbol.toUpperCase(),
-		chain: network.chain.id
+	const base = Token.from({
+		id: {
+			contract: basecontract,
+			symbol: basesymbol.toUpperCase(),
+			chain: network.chain.id
+		}
 	});
-	const quote = TokenDefinition.from({
-		contract: quotecontract,
-		symbol: quotesymbol.toUpperCase(),
-		chain: network.chain.id
+	const quote = Token.from({
+		id: {
+			contract: quotecontract,
+			symbol: quotesymbol.toUpperCase(),
+			chain: network.chain.id
+		}
 	});
 	return {
 		base,

@@ -1,6 +1,6 @@
 import { Asset, Serializer, TimePointSec, UInt64 } from '@wharfkit/antelope';
 
-import { TokenDataSources, tokenEquals, TokenPair, TokenSwap } from '$lib/types/token';
+import { Token, TokenDataSources, tokenEquals, TokenPair, TokenSwap } from '$lib/types/token';
 import { TokenDefinition } from '$lib/types/token';
 import { Currencies } from '$lib/types/currencies';
 
@@ -71,13 +71,11 @@ export class MarketState {
 		}
 	}
 
-	getRAMTokenPair(quote: TokenDefinition): TokenPair | undefined {
-		const ramKb = this.network.getRamTokenDefinition();
-		const pair = this.pairs.find((pair) => {
-			const matchBase = TokenDefinition.from(pair.base).equals(ramKb);
-			const matchQuote = TokenDefinition.from(pair.quote).equals(TokenDefinition.from(quote));
-			return matchBase && matchQuote;
-		});
+	getRAMTokenPair(quote: Token): TokenPair | undefined {
+		const ramKb = this.network.getRamToken();
+		const pair = this.pairs.find(
+			(pair) => tokenEquals(pair.base.id, ramKb.id) && tokenEquals(pair.quote.id, quote.id)
+		);
 		if (!pair) {
 			return TokenPair.from({
 				base: ramKb,
@@ -89,13 +87,13 @@ export class MarketState {
 		return pair;
 	}
 
-	getSystemTokenPair(quote: TokenDefinition): TokenPair | undefined {
+	getSystemTokenPair(quote: Token): TokenPair | undefined {
 		const pair = this.pairs.find(
-			(p) => tokenEquals(p.base.id, this.network.token.id) && tokenEquals(p.quote.id, quote)
+			(p) => tokenEquals(p.base.id, this.network.token.id) && tokenEquals(p.quote.id, quote.id)
 		);
 		if (!pair) {
 			return TokenPair.from({
-				base: this.network.token.id,
+				base: this.network.token,
 				quote,
 				price: Asset.fromUnits(0, quote.symbol),
 				updated: new Date()

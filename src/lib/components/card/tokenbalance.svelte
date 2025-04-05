@@ -4,12 +4,7 @@
 	import TradingPair from '$lib/components/elements/tradingpair.svelte';
 	import { cn } from '$lib/utils/style';
 	import type { NetworkState } from '$lib/state/network.svelte';
-	import {
-		TokenBalance,
-		tokenEquals,
-		type TokenBalanceChild,
-		type TokenPair
-	} from '$lib/types/token';
+	import { TokenBalance, tokenEquals, type TokenPair } from '$lib/types/token';
 	import { ChevronDown, ChevronRight } from 'lucide-svelte';
 	import * as m from '$lib/paraglide/messages';
 	import Button from '../button/button.svelte';
@@ -19,7 +14,7 @@
 	const context = getContext<UnicoveContext>('state');
 
 	interface TokenOverviewProps {
-		balance: TokenBalance | TokenBalanceChild;
+		balance: TokenBalance;
 		class?: string;
 		child?: string;
 		cta?: {
@@ -46,17 +41,14 @@
 		value
 	}: TokenOverviewProps = $props();
 
-	const isPrimaryBalance = _balance instanceof TokenBalance;
-	const balance = $derived(isPrimaryBalance && child ? _balance.child(child) : _balance);
-	const balanceRefunding = $derived(isPrimaryBalance ? _balance.child('refunding') : undefined);
-	const balanceStaked = $derived(isPrimaryBalance ? _balance.child('staked') : undefined);
-	const balanceUnstaked = $derived(isPrimaryBalance ? _balance.child('unstaked') : undefined);
-	const balanceDelegated = $derived(isPrimaryBalance ? _balance.child('delegated') : undefined);
-	const balanceTotal = $derived(isPrimaryBalance ? _balance.child('total') : undefined);
+	const balance = $derived(child ? _balance.child(child) : _balance);
+	const balanceRefunding = $derived(_balance.child('refunding'));
+	const balanceStaked = $derived(_balance.child('staked'));
+	const balanceUnstaked = $derived(_balance.child('unstaked'));
+	const balanceDelegated = $derived(_balance.child('delegated'));
 	const isRamToken = $derived(tokenEquals(_balance.token.id, network.getRamTokenDefinition()));
+	const balanceUsed = $derived(_balance.child('used'));
 	const hasValue = $derived(network.supports('delphioracle') || context.settings.data.mockPrice);
-
-	$inspect(String(balance.balance));
 </script>
 
 {#snippet SubBalance(label: string, value: Asset, action?: { text: string; href: string })}
@@ -157,6 +149,10 @@
 						href: `/${network}/refund`
 					})}
 				{/if}
+			{/if}
+
+			{#if balanceUsed && balanceUsed.balance.value > 0}
+				{@render SubBalance(m.common_used(), balanceUsed.balance)}
 			{/if}
 
 			{#if cta}

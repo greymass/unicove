@@ -170,6 +170,12 @@ export class NetworkState {
 		});
 	}
 
+	getRamToken(): Token {
+		return Token.from({
+			id: this.getRamTokenDefinition()
+		});
+	}
+
 	getRamTokenDefinition(): TokenDefinition {
 		return TokenDefinition.from({
 			symbol: Asset.Symbol.from('3,KB'),

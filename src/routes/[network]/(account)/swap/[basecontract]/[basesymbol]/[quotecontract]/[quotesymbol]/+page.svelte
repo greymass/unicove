@@ -24,9 +24,9 @@
 	let error: string | undefined = $state();
 
 	const baseDefaultAsset = Asset.fromUnits(0, data.base.symbol);
-	const baseDefault = TokenBalance.from({ id: data.base, balance: baseDefaultAsset });
+	const baseDefault = TokenBalance.from({ token: data.base, balance: baseDefaultAsset });
 	const quoteDefaultAsset = Asset.fromUnits(0, data.quote.symbol);
-	const quoteDefault = TokenBalance.from({ id: data.quote, balance: quoteDefaultAsset });
+	const quoteDefault = TokenBalance.from({ token: data.quote, balance: quoteDefaultAsset });
 
 	let baseInput: AssetInput | undefined = $state();
 	let baseQuantity = $state(Asset.from(baseDefaultAsset));
@@ -40,7 +40,7 @@
 		context.account ? context.account.getBalance(data.quote) : quoteDefault
 	);
 
-	const swap = $derived.by(() => market.market.getSwap(data.base, data.quote));
+	const swap = $derived.by(() => market.market.getSwap(data.base.id, data.quote.id));
 
 	async function transact() {
 		if (!swap || !swap.pair.base.contract) {
@@ -80,7 +80,6 @@
 							baseBalance.balance.symbol
 						)
 					});
-
 					quoteBalance = TokenBalance.from({
 						...quoteBalance,
 						balance: Asset.fromUnits(
@@ -152,7 +151,7 @@
 		</div>
 		<div class="flex-1">
 			<Button
-				href="/{data.network}/swap/{data.quote.url}/{data.base.url}"
+				href="/{data.network}/swap/{data.quote.id.url}/{data.base.id.url}"
 				onclick={flip}
 				disabled={context.wharf.transacting}
 				variant="secondary"

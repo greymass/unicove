@@ -6,7 +6,7 @@ import type { SettingsState } from './settings.svelte';
 import { Currencies } from '$lib/types/currencies';
 import { Asset, UInt64 } from '@wharfkit/antelope';
 import { calculateValue } from '$lib/utils';
-import { TokenDefinition, TokenPair } from '$lib/types/token';
+import { Token, TokenPair } from '$lib/types/token';
 
 export interface ValueStates {
 	network: NetworkState;
@@ -44,7 +44,9 @@ export interface AccountValueSystemTokenValues {
 export class AccountValueState {
 	readonly states = $state() as AccountValueStates;
 
-	readonly currency = $derived(Currencies[this.states.settings.data.displayCurrency]);
+	readonly currency = $derived(
+		Token.from({ id: Currencies[this.states.settings.data.displayCurrency] })
+	);
 	readonly pair = $derived(this.states.market.getSystemTokenPair(this.currency));
 	readonly hasPrice = $derived(this.price.units.gt(UInt64.from(0)));
 	readonly systemtoken: AccountValueSystemTokenValues = $derived(
@@ -78,16 +80,18 @@ export class AccountValueState {
 export class NetworkValueState {
 	readonly states = $state() as ValueStates;
 
-	readonly currency = $derived(Currencies[this.states.settings.data.displayCurrency]);
+	readonly currency = $derived(
+		Token.from({ id: Currencies[this.states.settings.data.displayCurrency] })
+	);
 
 	readonly ram = $derived.by(() => {
 		const quote = this.currency;
 		const pair = this.states.market.getRAMTokenPair(quote);
 		if (!pair) {
-			const ramKb = this.states.network.getRamTokenDefinition();
+			const ramKb = this.states.network.getRamToken();
 			return TokenPair.from({
 				base: ramKb,
-				quote: this.states.network.token.id,
+				quote: this.states.network.token,
 				price: Asset.fromUnits(0, quote.symbol),
 				updated: new Date()
 			});
@@ -100,12 +104,11 @@ export class NetworkValueState {
 		if (!this.states.network.legacytoken) {
 			return undefined;
 		}
-		const base = TokenDefinition.from(this.states.network.legacytoken);
 		const quote = this.currency;
 		const pair = this.states.market.getSystemTokenPair(quote);
 		if (!pair) {
 			return TokenPair.from({
-				base,
+				base: this.states.network.legacytoken,
 				quote,
 				price: Asset.fromUnits(0, quote.symbol),
 				updated: new Date()
@@ -113,7 +116,7 @@ export class NetworkValueState {
 		}
 		return TokenPair.from({
 			...pair,
-			base
+			base: this.states.network.legacytoken
 		});
 	});
 
@@ -122,7 +125,7 @@ export class NetworkValueState {
 		const pair = this.states.market.getSystemTokenPair(quote);
 		if (!pair) {
 			return TokenPair.from({
-				base: this.states.network.token.id,
+				base: this.states.network.token,
 				quote,
 				price: Asset.fromUnits(0, quote.symbol),
 				updated: new Date()
@@ -150,7 +153,7 @@ export class NetworkValueState {
 
 export function getAccountValue(
 	states: AccountValueStates,
-	currency: TokenDefinition
+	currency: Token
 ): AccountValueSystemTokenValues {
 	const systemTokenPair = states.market.getSystemTokenPair(currency);
 	const systemTokenPrice = systemTokenPair

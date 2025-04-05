@@ -44,14 +44,14 @@
 	const netAvailable = $derived(data.account.resources.net.available);
 
 	const legacytoken = data.network.legacytoken;
-	const legacybalance = legacytoken
-		? data.account.balances.find((b) => tokenEquals(b.token.id, legacytoken.id))
-		: undefined;
-
-	$inspect(String(legacybalance?.balance));
+	const legacybalance = $derived(
+		legacytoken
+			? data.account.balances.find((b) => tokenEquals(b.token.id, legacytoken.id))
+			: undefined
+	);
 </script>
 
-<div class="xs:grid-cols-[100%] grid gap-6 lg:grid-cols-[60%_40%]">
+<div class="xs:grid-cols-[100%] grid gap-6 lg:grid-cols-[60%_35%]">
 	<div class="space-y-6">
 		{#if hasValue}
 			<Card id="account-value" style="column-span: all;">
@@ -84,7 +84,7 @@
 			</Card>
 		{/if}
 
-		{#if data.account.balance}
+		{#if data.account && data.account.balance}
 			<TokenBalance
 				balance={data.account.balance}
 				child="total"
@@ -128,6 +128,7 @@
 					visible: isCurrentUser
 				}}
 				class=""
+				child="total"
 				{isCurrentUser}
 				network={data.network}
 				pair={market.network.ram}

@@ -24,8 +24,8 @@ export async function GET({ fetch, locals: { network }, url }: RequestEvent) {
 	if (mockPrice) {
 		pairs.push(
 			TokenPair.from({
-				base: network.token.id,
-				quote: Currencies.USD,
+				base: network.token,
+				quote: { id: Currencies.USD },
 				price: mockPrice,
 				updated: TimePointSec.from(new Date())
 			})
@@ -33,8 +33,8 @@ export async function GET({ fetch, locals: { network }, url }: RequestEvent) {
 		if (network.legacytoken) {
 			pairs.push(
 				TokenPair.from({
-					base: network.legacytoken.id,
-					quote: Currencies.USD,
+					base: network.legacytoken,
+					quote: { id: Currencies.USD },
 					price: mockPrice,
 					updated: TimePointSec.from(new Date())
 				})
@@ -47,8 +47,8 @@ export async function GET({ fetch, locals: { network }, url }: RequestEvent) {
 		const exchangeRate = Asset.from(PUBLIC_LEGACY_TOKEN_EXCHANGERATE);
 		pairs.push(
 			TokenPair.from({
-				base: network.token.id,
-				quote: network.legacytoken.id,
+				base: network.token,
+				quote: network.legacytoken,
 				price: exchangeRate,
 				updated: TimePointSec.from(new Date())
 			})
@@ -58,8 +58,8 @@ export async function GET({ fetch, locals: { network }, url }: RequestEvent) {
 	// Push RAM token pair
 	pairs.push(
 		TokenPair.from({
-			base: network.getRamTokenDefinition(),
-			quote: network.token.id,
+			base: network.getRamToken(),
+			quote: network.token,
 			price: rammarket,
 			updated: network.connection.updated
 		})
@@ -68,12 +68,14 @@ export async function GET({ fetch, locals: { network }, url }: RequestEvent) {
 	// Push BRAM token pair
 	pairs.push(
 		TokenPair.from({
-			base: TokenDefinition.from({
-				symbol: '0,BRAM',
-				contract: 'ram.defi',
-				chain: network.chain.id
-			}),
-			quote: network.token.id,
+			base: {
+				id: {
+					symbol: '0,BRAM',
+					contract: 'ram.defi',
+					chain: network.chain.id
+				}
+			},
+			quote: network.token,
 			price: Asset.fromUnits(rammarket.units.dividing(1000), network.token.symbol),
 			updated: network.connection.updated
 		})
@@ -82,12 +84,14 @@ export async function GET({ fetch, locals: { network }, url }: RequestEvent) {
 	// Push WRAM token pair
 	pairs.push(
 		TokenPair.from({
-			base: TokenDefinition.from({
-				symbol: '0,WRAM',
-				contract: 'eosio.wram',
-				chain: network.chain.id
-			}),
-			quote: network.token.id,
+			base: {
+				id: {
+					symbol: '0,WRAM',
+					contract: 'eosio.wram',
+					chain: network.chain.id
+				}
+			},
+			quote: network.token,
 			price: Asset.fromUnits(rammarket.units.dividing(1000), network.token.symbol),
 			updated: network.connection.updated
 		})
@@ -147,16 +151,20 @@ async function delphioracle(network: NetworkState): Promise<TokenPair[]> {
 			const quoteSymbol = Asset.Symbol.from(`${pair.quoted_precision},${pair.quote_symbol.code}`);
 			pairs.push(
 				TokenPair.from({
-					base: TokenDefinition.from({
-						symbol: pair.base_symbol,
-						contract: !pair.base_contract.equals('') ? pair.base_contract : undefined,
-						chain: !pair.base_contract.equals('') ? network.chain.id : undefined
-					}),
-					quote: TokenDefinition.from({
-						symbol: quoteSymbol,
-						contract: !pair.quote_contract.equals('') ? pair.quote_contract : undefined,
-						chain: !pair.quote_contract.equals('') ? network.chain.id : undefined
-					}),
+					base: {
+						id: {
+							symbol: pair.base_symbol,
+							contract: !pair.base_contract.equals('') ? pair.base_contract : undefined,
+							chain: !pair.base_contract.equals('') ? network.chain.id : undefined
+						}
+					},
+					quote: {
+						id: {
+							symbol: quoteSymbol,
+							contract: !pair.quote_contract.equals('') ? pair.quote_contract : undefined,
+							chain: !pair.quote_contract.equals('') ? network.chain.id : undefined
+						}
+					},
 					price: Asset.fromUnits(latest.median, quoteSymbol),
 					updated: TimePointSec.from(updated)
 				})
@@ -178,16 +186,20 @@ async function delphihelper(network: NetworkState): Promise<TokenPair[]> {
 		pairs.push(
 			TokenPair.from({
 				...pair,
-				base: TokenDefinition.from({
-					symbol: pair.base.symbol,
-					contract: pair.base.contract.equals('') ? undefined : pair.base.contract,
-					chain: pair.base.contract.equals('') ? undefined : network.chain.id
-				}),
-				quote: TokenDefinition.from({
-					symbol: pair.quote.symbol,
-					contract: pair.quote.contract.equals('') ? undefined : pair.quote.contract,
-					chain: pair.quote.contract.equals('') ? undefined : network.chain.id
-				})
+				base: {
+					id: {
+						symbol: pair.base.symbol,
+						contract: pair.base.contract.equals('') ? undefined : pair.base.contract,
+						chain: pair.base.contract.equals('') ? undefined : network.chain.id
+					}
+				},
+				quote: {
+					id: {
+						symbol: pair.quote.symbol,
+						contract: pair.quote.contract.equals('') ? undefined : pair.quote.contract,
+						chain: pair.quote.contract.equals('') ? undefined : network.chain.id
+					}
+				}
 			})
 		);
 	}

@@ -109,8 +109,6 @@
 			manager.data.addKey();
 		}
 	});
-
-	$inspect(manager.data.keys);
 </script>
 
 {#snippet PermissionName()}

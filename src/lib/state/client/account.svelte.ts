@@ -27,7 +27,7 @@ import {
 } from '$lib/state/defaults/account';
 import * as SystemContract from '$lib/wharf/contracts/system';
 import { Types as REXTypes } from '$lib/types/rex';
-import { TokenBalance, TokenDefinition, tokenEquals } from '$lib/types/token';
+import { Token, TokenBalance, TokenDefinition, tokenEquals } from '$lib/types/token';
 
 export class AccountState {
 	public client?: APIClient = $state();
@@ -85,11 +85,11 @@ export class AccountState {
 		};
 	}
 
-	getBalance(token: TokenDefinition): TokenBalance {
-		const balance = this.balances.find((b) => tokenEquals(b.token.id, token));
+	getBalance(token: Token): TokenBalance {
+		const balance = this.balances.find((b) => tokenEquals(b.token.id, token.id));
 		if (!balance) {
 			return TokenBalance.from({
-				id: token,
+				token,
 				balance: Asset.fromUnits(0, token.symbol)
 			});
 		}
@@ -300,27 +300,27 @@ export function getBalance(network: NetworkState, sources: AccountDataSources): 
 	const children = [
 		{
 			name: 'delegated',
-			id: network.token.id,
+			token: network.token,
 			balance: delegated
 		},
 		{
 			name: 'refunding',
-			id: network.token.id,
+			token: network.token,
 			balance: refunding
 		},
 		{
 			name: 'staked',
-			id: network.token.id,
+			token: network.token,
 			balance: staked
 		},
 		{
 			name: 'total',
-			id: network.token.id,
+			token: network.token,
 			balance: total
 		},
 		{
 			name: 'unstaked',
-			id: network.token.id,
+			token: network.token,
 			balance: unstaked
 		}
 	];
@@ -328,13 +328,13 @@ export function getBalance(network: NetworkState, sources: AccountDataSources): 
 	if (network.legacytoken) {
 		children.push({
 			name: 'legacy',
-			id: network.token.id,
+			token: network.token,
 			balance: legacy
 		});
 	}
 
 	return TokenBalance.from({
-		id: network.token.id,
+		token: network.token,
 		balance: liquid,
 		children
 	});
@@ -346,21 +346,21 @@ export function getBalances(
 	resources: AccountResources
 ): TokenBalance[] {
 	const balances: TokenBalance[] = sources.balances.map((b) => TokenBalance.from(b));
-	const id = network.getRamTokenDefinition();
+	const token = network.getRamToken();
 	balances.push(
 		TokenBalance.from({
-			id,
-			balance: Asset.fromUnits(resources.ram.available, id.symbol),
+			token,
+			balance: Asset.fromUnits(resources.ram.available, token.symbol),
 			locked: !network.supports('ramtransfer'),
 			children: [
 				{
-					id,
-					balance: Asset.fromUnits(resources.ram.used, id.symbol),
+					token,
+					balance: Asset.fromUnits(resources.ram.used, token.symbol),
 					name: 'used'
 				},
 				{
-					id,
-					balance: Asset.fromUnits(resources.ram.owned, id.symbol),
+					token,
+					balance: Asset.fromUnits(resources.ram.owned, token.symbol),
 					name: 'total'
 				}
 			]
