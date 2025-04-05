@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { TokenBalance } from '$lib/types/token';
+	import type { TokenBalance, TokenBalanceChild } from '$lib/types/token';
 	import { Card } from '../layout';
 	interface Props {
-		token?: TokenBalance;
+		token?: TokenBalance | TokenBalanceChild;
 		title: string;
 		description: string;
 	}

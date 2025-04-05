@@ -417,7 +417,7 @@
 	"settings_enable_developer": "Enable Developer Mode",
 	"settings_enable_developer_desc": "Show raw data used for development and debugging",
 	"settings_enable_mockprice": "Mock token price",
-	"settings_enable_mockprice_desc": "Force the system token price to equal {mockValue} for testing in environments\n\t\t\t\t\t\t\t\twithout pricing information.",
+	"settings_enable_mockprice_desc": "Force the system token price to equal {mockValue} for testing in environments without pricing information.",
 	"settings_general": "General",
 	"settings_language_selector": "Language Selector",
 	"settings_page_subtitle": "Configure Unicove",

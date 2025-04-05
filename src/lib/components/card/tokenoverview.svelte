@@ -7,7 +7,7 @@
 	import { Breakdown, BreakdownRow } from '$lib/components/breakdown';
 	import * as m from '$lib/paraglide/messages';
 	import type { NetworkState } from '$lib/state/network.svelte';
-	import type { TokenBalance, TokenPair } from '$lib/types/token';
+	import { tokenEquals, type TokenBalance, type TokenPair } from '$lib/types/token';
 	import Button from '../button/button.svelte';
 
 	interface TokenOverviewProps {
@@ -40,18 +40,18 @@
 	const balanceDelegated = $derived(balance.child('delegated'));
 	const balanceTotal = $derived(balance.child('total'));
 
-	const isRamToken = $derived(balance.id.equals(network.getRamTokenDefinition()));
+	const isRamToken = $derived(tokenEquals(balance.token.id, network.getRamTokenDefinition()));
 </script>
 
-<Card id="{balance.id.contract}-{balance.id.symbol.name}-token" class={className}>
+<Card id="{balance.token.contract}-{balance.token.symbol.name}-token" class={className}>
 	<div class="card-title h4">
 		{#if isRamToken}
 			<a href="/{network}/ram">
-				{balance.id.symbol.name} (RAM)
+				{balance.token.symbol.name} (RAM)
 			</a>
 		{:else}
-			<a href="/{network}/token/{balance.id.contract}/{balance.id.symbol.name}">
-				{balance.id.symbol.name}
+			<a href="/{network}/token/{balance.token.contract}/{balance.token.name}">
+				{balance.token.symbol.name}
 			</a>
 		{/if}
 	</div>
@@ -85,7 +85,7 @@
 					</Stack>
 				</div>
 
-				{#if network.supports('directfunding') && balance.id.equals(network.getSystemToken().id) && isCurrentUser}
+				{#if network.supports('directfunding') && tokenEquals(balance.token.id, network.getSystemToken().id) && isCurrentUser}
 					<div class="col-span-2 col-start-2 row-start-1 text-right @xs:col-span-1 @xs:col-start-3">
 						<a
 							class="inline-block h-12 content-center text-sky-500 hover:text-sky-400"
@@ -105,13 +105,13 @@
 				action={!balance.locked
 					? {
 							text: m.common_send(),
-							href: `/${network}/send/${balance.id.contract}/${balance.id.symbol}`,
+							href: `/${network}/send/${balance.token.id.url}`,
 							visible: isCurrentUser
 						}
 					: undefined}
 			/>
 
-			{#if balance.id.equals(network.token.id)}
+			{#if tokenEquals(balance.token.id, network.token.id)}
 				{#if network.supports('staking')}
 					<BreakdownRow
 						key={m.common_staked()}

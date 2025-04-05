@@ -10,7 +10,7 @@
 	import * as m from '$lib/paraglide/messages.js';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import { type TokenBalance } from '$lib/types/token';
+	import { tokenEquals, type TokenBalance } from '$lib/types/token';
 	import { Types as RAMTypes } from '$lib/types/ram';
 
 	import { SingleCard, Stack } from '$lib/components/layout';
@@ -55,12 +55,12 @@
 		}
 		error = undefined;
 		const balance = context.account?.balances.find((b) =>
-			b.id.symbol.equals(sendState.quantity.symbol)
+			b.token.symbol.equals(sendState.quantity.symbol)
 		);
 		if (balance) {
 			let action = data.network.contracts.token.action('transfer', sendState.toJSON());
 			// Override to allow RAM transfers
-			if (balance.id.equals(data.network.getRamTokenDefinition())) {
+			if (tokenEquals(balance.token.id, data.network.getRamTokenDefinition())) {
 				action = Action.from({
 					account: 'eosio',
 					name: 'ramtransfer',
@@ -72,10 +72,10 @@
 				});
 			}
 			if (
-				balance.id.contract &&
-				!balance.id.contract.equals(data.network.contracts.token.account)
+				balance.token.contract &&
+				!balance.token.contract.equals(data.network.contracts.token.account)
 			) {
-				action.account = balance.id.contract;
+				action.account = balance.token.contract;
 			}
 			context.wharf
 				.transact({ action })
@@ -131,7 +131,7 @@
 				// Change the balance field on the transfer
 				const { token } = data;
 				if (sendState.balance.equals(defaultBalance) && context.account) {
-					const balance = balances.find((b) => b.id.equals(token.id));
+					const balance = balances.find((b) => tokenEquals(b.token.id, token.id));
 					if (balance) {
 						tokenSelect?.set(balance);
 						sendState.setBalance(balance);
@@ -215,7 +215,7 @@
 
 	function resetBalance() {
 		if (context.account) {
-			const balance = context.account.balances.find((b) => b.id.equals(data.token.id));
+			const balance = context.account.balances.find((b) => tokenEquals(b.token.id, data.token.id));
 			if (balance) {
 				tokenSelect?.set(balance);
 				sendState.setBalance(balance);

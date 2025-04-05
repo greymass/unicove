@@ -8,7 +8,7 @@
 	import type { SelectOption } from '@melt-ui/svelte';
 	import Button from '$lib/components/button/button.svelte';
 	import Code from '$lib/components/code.svelte';
-	import { TokenBalance, TokenDefinition } from '$lib/types/token';
+	import { TokenBalance } from '$lib/types/token';
 
 	const options: SelectOption[] = [
 		{ value: 30, label: '30d' },
@@ -48,19 +48,23 @@
 	const tokenOptions: TokenBalance[] = [
 		TokenBalance.from({
 			balance: '1.2345 EOS',
-			id: TokenDefinition.from({
-				chain: Chains.EOS.id,
-				contract: 'eosio.token',
-				symbol: '4,EOS'
-			})
+			token: {
+				id: {
+					chain: Chains.EOS.id,
+					contract: 'eosio.token',
+					symbol: '4,EOS'
+				}
+			}
 		}),
 		TokenBalance.from({
 			balance: '9876 SCRAP',
-			id: TokenDefinition.from({
-				chain: Chains.EOS.id,
-				contract: 'scrap',
-				symbol: '0,SCRAP'
-			})
+			token: {
+				id: {
+					chain: Chains.EOS.id,
+					contract: 'scrap',
+					symbol: '0,SCRAP'
+				}
+			}
 		})
 	];
 	let tokenSelected = $state(tokenOptions[0]);

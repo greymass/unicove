@@ -6,6 +6,7 @@ import { TokenDataSources, TokenDefinition, tokenEquals, TokenPair } from '$lib/
 import { Asset, Chains, TimePointSec } from '@wharfkit/session';
 import { Currencies } from '$lib/types/currencies';
 import { RAMState } from '@wharfkit/resources';
+import { PUBLIC_LEGACY_TOKEN_EXCHANGERATE } from '$env/static/public';
 
 export async function GET({ fetch, locals: { network }, url }: RequestEvent) {
 	const pairs: TokenPair[] = [];
@@ -23,17 +24,17 @@ export async function GET({ fetch, locals: { network }, url }: RequestEvent) {
 	if (mockPrice) {
 		pairs.push(
 			TokenPair.from({
-				base: network.token.id,
-				quote: Currencies.USD,
+				base: network.token,
+				quote: { id: Currencies.USD },
 				price: mockPrice,
 				updated: TimePointSec.from(new Date())
 			})
 		);
-		if (network.legacytoken) {
+		if (network.config.legacytoken) {
 			pairs.push(
 				TokenPair.from({
-					base: network.legacytoken.id,
-					quote: Currencies.USD,
+					base: network.config.legacytoken,
+					quote: { id: Currencies.USD },
 					price: mockPrice,
 					updated: TimePointSec.from(new Date())
 				})
@@ -41,11 +42,24 @@ export async function GET({ fetch, locals: { network }, url }: RequestEvent) {
 		}
 	}
 
+	// If the legacy token exists and has an exchange rate, add it
+	if (network.config.legacytoken && PUBLIC_LEGACY_TOKEN_EXCHANGERATE) {
+		const exchangeRate = Asset.from(PUBLIC_LEGACY_TOKEN_EXCHANGERATE);
+		pairs.push(
+			TokenPair.from({
+				base: network.token,
+				quote: network.config.legacytoken,
+				price: exchangeRate,
+				updated: TimePointSec.from(new Date())
+			})
+		);
+	}
+
 	// Push RAM token pair
 	pairs.push(
 		TokenPair.from({
-			base: network.getRamTokenDefinition(),
-			quote: network.token.id,
+			base: network.getRamToken(),
+			quote: network.token,
 			price: rammarket,
 			updated: network.connection.updated
 		})
@@ -54,12 +68,14 @@ export async function GET({ fetch, locals: { network }, url }: RequestEvent) {
 	// Push BRAM token pair
 	pairs.push(
 		TokenPair.from({
-			base: TokenDefinition.from({
-				symbol: '0,BRAM',
-				contract: 'ram.defi',
-				chain: network.chain.id
-			}),
-			quote: network.token.id,
+			base: {
+				id: {
+					symbol: '0,BRAM',
+					contract: 'ram.defi',
+					chain: network.chain.id
+				}
+			},
+			quote: network.token,
 			price: Asset.fromUnits(rammarket.units.dividing(1000), network.token.symbol),
 			updated: network.connection.updated
 		})
@@ -68,12 +84,14 @@ export async function GET({ fetch, locals: { network }, url }: RequestEvent) {
 	// Push WRAM token pair
 	pairs.push(
 		TokenPair.from({
-			base: TokenDefinition.from({
-				symbol: '0,WRAM',
-				contract: 'eosio.wram',
-				chain: network.chain.id
-			}),
-			quote: network.token.id,
+			base: {
+				id: {
+					symbol: '0,WRAM',
+					contract: 'eosio.wram',
+					chain: network.chain.id
+				}
+			},
+			quote: network.token,
 			price: Asset.fromUnits(rammarket.units.dividing(1000), network.token.symbol),
 			updated: network.connection.updated
 		})
@@ -91,10 +109,10 @@ export async function GET({ fetch, locals: { network }, url }: RequestEvent) {
 		});
 
 		pairs.forEach((pair) => {
-			if (tokenEquals(pair.base, altPair)) {
+			if (tokenEquals(pair.base.id, altPair)) {
 				pairs.push(
 					TokenPair.from({
-						base: network.token.id,
+						base: network.token,
 						quote: pair.quote,
 						price: pair.price,
 						updated: network.connection.updated
@@ -133,16 +151,20 @@ async function delphioracle(network: NetworkState): Promise<TokenPair[]> {
 			const quoteSymbol = Asset.Symbol.from(`${pair.quoted_precision},${pair.quote_symbol.code}`);
 			pairs.push(
 				TokenPair.from({
-					base: TokenDefinition.from({
-						symbol: pair.base_symbol,
-						contract: !pair.base_contract.equals('') ? pair.base_contract : undefined,
-						chain: !pair.base_contract.equals('') ? network.chain.id : undefined
-					}),
-					quote: TokenDefinition.from({
-						symbol: quoteSymbol,
-						contract: !pair.quote_contract.equals('') ? pair.quote_contract : undefined,
-						chain: !pair.quote_contract.equals('') ? network.chain.id : undefined
-					}),
+					base: {
+						id: {
+							symbol: pair.base_symbol,
+							contract: !pair.base_contract.equals('') ? pair.base_contract : undefined,
+							chain: !pair.base_contract.equals('') ? network.chain.id : undefined
+						}
+					},
+					quote: {
+						id: {
+							symbol: quoteSymbol,
+							contract: !pair.quote_contract.equals('') ? pair.quote_contract : undefined,
+							chain: !pair.quote_contract.equals('') ? network.chain.id : undefined
+						}
+					},
 					price: Asset.fromUnits(latest.median, quoteSymbol),
 					updated: TimePointSec.from(updated)
 				})
@@ -164,16 +186,20 @@ async function delphihelper(network: NetworkState): Promise<TokenPair[]> {
 		pairs.push(
 			TokenPair.from({
 				...pair,
-				base: TokenDefinition.from({
-					symbol: pair.base.symbol,
-					contract: pair.base.contract.equals('') ? undefined : pair.base.contract,
-					chain: pair.base.contract.equals('') ? undefined : network.chain.id
-				}),
-				quote: TokenDefinition.from({
-					symbol: pair.quote.symbol,
-					contract: pair.quote.contract.equals('') ? undefined : pair.quote.contract,
-					chain: pair.quote.contract.equals('') ? undefined : network.chain.id
-				})
+				base: {
+					id: {
+						symbol: pair.base.symbol,
+						contract: pair.base.contract.equals('') ? undefined : pair.base.contract,
+						chain: pair.base.contract.equals('') ? undefined : network.chain.id
+					}
+				},
+				quote: {
+					id: {
+						symbol: pair.quote.symbol,
+						contract: pair.quote.contract.equals('') ? undefined : pair.quote.contract,
+						chain: pair.quote.contract.equals('') ? undefined : network.chain.id
+					}
+				}
 			})
 		);
 	}
@@ -194,11 +220,11 @@ const mappings = [
 ];
 
 function findMatchingBasePairs(pairs: TokenPair[], base: TokenDefinition): TokenPair[] {
-	const matches = pairs.filter((pair) => tokenEquals(pair.base, base));
+	const matches = pairs.filter((pair) => tokenEquals(pair.base.id, base));
 	const mapping = mappings.find((mapping) => tokenEquals(mapping.original, base));
 	if (mapping) {
 		for (const variant of mapping.variants) {
-			const match = pairs.find((pair) => tokenEquals(pair.base, variant));
+			const match = pairs.find((pair) => tokenEquals(pair.base.id, variant));
 			if (match) {
 				matches.push(match);
 			}
@@ -213,10 +239,11 @@ function deriveAdditionalPairs(pairs: TokenPair[]): TokenPair[] {
 	// Add any pairs that can be derived from the existing pairs (e.g. EOS/BTC -> BTC/CNY = EOS/CNY)
 	// TODO: Refactor for better recursion
 	for (const pair of pairs) {
-		const derivablePairs = findMatchingBasePairs(pairs, pair.quote);
+		const derivablePairs = findMatchingBasePairs(pairs, pair.quote.id);
 		for (const possiblePair of derivablePairs) {
 			const exists = !!pairs.find(
-				(p) => tokenEquals(p.base, pair.base) && tokenEquals(p.quote, possiblePair.quote)
+				(p) =>
+					tokenEquals(p.base.id, pair.base.id) && tokenEquals(p.quote.id, possiblePair.quote.id)
 			);
 			if (!exists) {
 				const pairDate = pair.updated.toDate();
@@ -253,7 +280,7 @@ function deriveAdditionalPairs(pairs: TokenPair[]): TokenPair[] {
 			continue;
 		}
 		const exists = pairs.find(
-			(p) => tokenEquals(p.base, pair.quote) && tokenEquals(p.quote, pair.base)
+			(p) => tokenEquals(p.base.id, pair.quote.id) && tokenEquals(p.quote.id, pair.base.id)
 		);
 		if (!exists) {
 			derived.push(pair.reversed);

@@ -4,6 +4,7 @@ import { type AccountDataSources, type VoterInfo } from '$lib/types/account';
 import * as SystemContract from '$lib/wharf/contracts/system';
 import { Types as UnicoveTypes } from '$lib/wharf/contracts/unicove.api';
 import { Types as REXTypes } from '$lib/types/rex';
+import { TokenBalance } from '$lib/types/token';
 
 export const defaultGetAccount = API.v1.AccountObject.from({
 	account_name: '',
@@ -83,7 +84,14 @@ export const nullContractHash = Checksum256.from(
 export const defaultAccountDataSources: AccountDataSources = {
 	get_account: defaultGetAccount,
 	contract_hash: nullContractHash,
-	balance: defaultAsset,
+	balance: TokenBalance.from({
+		token: {
+			id: {
+				symbol: Asset.Symbol.from('0,UNKNOWN')
+			}
+		},
+		balance: defaultAsset
+	}),
 	balances: [],
 	delegated: [],
 	giftedram: defaultGiftedRam,

@@ -12,7 +12,7 @@ export const load: LayoutLoad = async ({ url, params, parent }) => {
 		contract = Name.from(params.contract);
 	}
 	if (params.symbol) {
-		symbol = Asset.Symbol.from(params.symbol);
+		symbol = Asset.Symbol.from(params.symbol.toUpperCase());
 	}
 	let token: Token | undefined;
 	if (contract && symbol) {

@@ -6,11 +6,13 @@ export const defaultSymbol = Asset.Symbol.from('0,UNKNOWN');
 export const defaultQuantity = Asset.fromUnits(0, defaultSymbol);
 export const defaultBalance = TokenBalance.from({
 	balance: defaultQuantity,
-	id: TokenDefinition.from({
-		chain: '0000000000000000000000000000000000000000000000000000000000000000',
-		contract: '',
-		symbol: defaultSymbol
-	})
+	token: {
+		id: TokenDefinition.from({
+			chain: '0000000000000000000000000000000000000000000000000000000000000000',
+			contract: '',
+			symbol: defaultSymbol
+		})
+	}
 });
 
 export class SendState {
@@ -39,7 +41,7 @@ export class SendState {
 
 	setBalance(balance: TokenBalance) {
 		this.balance = balance;
-		this.quantity = Asset.fromUnits(0, balance.id.symbol);
+		this.quantity = Asset.fromUnits(0, balance.token.symbol);
 	}
 
 	toJSON() {

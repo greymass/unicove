@@ -1,40 +1,13 @@
-import {
-	Asset,
-	Checksum256,
-	Name,
-	Struct,
-	TimePointSec,
-	type Checksum256Type,
-	type NameType
-} from '@wharfkit/antelope';
-
-export interface TokenDefinitionType {
-	symbol: Asset.SymbolType;
-	chain?: Checksum256Type;
-	contract?: NameType;
-}
+import { Asset, Checksum256, Name, Struct, TimePointSec, type NameType } from '@wharfkit/antelope';
 
 @Struct.type('token_definition')
 export class TokenDefinition extends Struct {
 	@Struct.field(Asset.Symbol) declare symbol: Asset.Symbol;
 	@Struct.field(Checksum256, { optional: true }) declare chain?: Checksum256;
 	@Struct.field(Name, { optional: true }) declare contract?: Name;
-}
 
-@Struct.type('token_pair')
-export class TokenPair extends Struct {
-	@Struct.field(TokenDefinition) declare base: TokenDefinition;
-	@Struct.field(TokenDefinition) declare quote: TokenDefinition;
-	@Struct.field(Asset) declare price: Asset;
-	@Struct.field(TimePointSec) declare updated: TimePointSec;
-
-	get reversed(): TokenPair {
-		return new TokenPair({
-			base: this.quote,
-			quote: this.base,
-			price: Asset.fromFloat(this.price.value ? 1 / this.price.value : 0, this.base.symbol),
-			updated: this.updated
-		});
+	get url(): string {
+		return `${this.contract}/${String(this.symbol).toLowerCase()}`;
 	}
 }
 
@@ -53,11 +26,23 @@ export interface TokenType {
 	marketcap?: Asset;
 }
 
+@Struct.type('token_media_asset')
+export class TokenMediaAsset extends Struct {
+	@Struct.field('string', { optional: true }) declare light?: string;
+	@Struct.field('string', { optional: true }) declare dark?: string;
+}
+
+@Struct.type('token_media')
+export class TokenMedia extends Struct {
+	@Struct.field(TokenMediaAsset, { optional: true }) declare logo?: TokenMediaAsset;
+}
+
 @Struct.type('token')
 export class Token extends Struct {
 	@Struct.field(TokenDefinition) declare id: TokenDefinition;
 	@Struct.field(TokenDistribution, { optional: true })
 	declare distribution?: TokenDistribution;
+	@Struct.field(TokenMedia, { optional: true }) declare media?: TokenMedia;
 
 	get chain(): Checksum256 | undefined {
 		return this.id.chain;
@@ -81,6 +66,31 @@ export class Token extends Struct {
 	// }
 }
 
+@Struct.type('token_pair')
+export class TokenPair extends Struct {
+	@Struct.field(Token) declare base: Token;
+	@Struct.field(Token) declare quote: Token;
+	@Struct.field(Asset) declare price: Asset;
+	@Struct.field(TimePointSec) declare updated: TimePointSec;
+
+	get reversed(): TokenPair {
+		return new TokenPair({
+			base: this.quote,
+			quote: this.base,
+			price: Asset.fromFloat(this.price.value ? 1 / this.price.value : 0, this.base.symbol),
+			updated: this.updated
+		});
+	}
+}
+
+@Struct.type('token_swap')
+export class TokenSwap extends Struct {
+	@Struct.field(TokenPair) declare pair: TokenPair;
+	@Struct.field(Name) declare contract: Name;
+	@Struct.field(Name) declare action: Name;
+	@Struct.field(Asset) declare fee: Asset;
+}
+
 export type TokenBalanceStates =
 	// Tokens delegated during genesis or the old eosio::delegatebw action
 	| 'delegated'
@@ -99,7 +109,7 @@ export type TokenBalanceStates =
 
 @Struct.type('token_balance_base')
 export class TokenBalanceBase extends Struct {
-	@Struct.field(TokenDefinition) declare id: TokenDefinition;
+	@Struct.field(Token) declare token: Token;
 	@Struct.field(Asset) declare balance: Asset;
 }
 
@@ -123,8 +133,8 @@ export class TokenBalance extends TokenBalanceBase {
 		}
 		return new TokenBalanceChild({
 			name: Name.from(name),
-			id: this.id,
-			balance: Asset.fromUnits(0, this.id.symbol)
+			token: this.token,
+			balance: Asset.fromUnits(0, this.token.symbol)
 		});
 	}
 }

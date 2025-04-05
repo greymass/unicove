@@ -12,7 +12,7 @@ import { Types as SystemTypes, type TableTypes } from '$lib/wharf/contracts/syst
 import { Types as REXTypes } from '$lib/types/rex';
 import { Types as UnicoveTypes } from '$lib/wharf/contracts/unicove.api';
 import { nullContractHash } from '$lib/state/defaults/account';
-import { TokenBalance, TokenDefinition } from '$lib/types/token';
+import { TokenBalance, TokenDefinition, tokenEquals } from '$lib/types/token';
 
 export const GET: RequestHandler = async ({ locals: { network }, params }: RequestEvent) => {
 	const headers = getCacheHeaders(5);
@@ -56,11 +56,13 @@ async function loadBalances(
 		const json: LightAPIBalanceResponse = await result.json();
 		balances = json.balances.map((b) =>
 			TokenBalance.from({
-				id: TokenDefinition.from({
-					chain: network.chain.id,
-					contract: b.contract,
-					symbol: `${b.decimals},${b.currency}`
-				}),
+				token: {
+					id: {
+						chain: network.chain.id,
+						contract: b.contract,
+						symbol: `${b.decimals},${b.currency}`
+					}
+				},
 				balance: Asset.fromFloat(Number(b.amount), `${b.decimals},${b.currency}`)
 			})
 		);
@@ -87,7 +89,7 @@ async function getAccount(network: NetworkState, account: NameType): Promise<Acc
 	} else {
 		balances = [
 			TokenBalance.from({
-				id: network.token,
+				token: network.token,
 				balance: get_account.core_liquid_balance || Asset.fromUnits(0, network.token.symbol)
 			})
 		];
@@ -126,7 +128,10 @@ async function getAccount(network: NetworkState, account: NameType): Promise<Acc
 	return {
 		get_account,
 		contract_hash,
-		balance: get_account.core_liquid_balance || defaultBalance,
+		balance: TokenBalance.from({
+			token: network.token,
+			balance: get_account.core_liquid_balance || defaultBalance
+		}),
 		balances,
 		delegated,
 		giftedram,
@@ -139,11 +144,11 @@ async function getAccount(network: NetworkState, account: NameType): Promise<Acc
 
 async function getAccount2(network: NetworkState, account: NameType): Promise<AccountDataSources> {
 	const tokens: UnicoveTypes.token_definition[] = [];
-	if (network.legacytoken) {
+	if (network.config.legacytoken) {
 		tokens.push(
 			UnicoveTypes.token_definition.from({
-				contract: network.legacytoken.contract,
-				symbol: network.legacytoken.symbol
+				contract: network.config.legacytoken.contract,
+				symbol: network.config.legacytoken.symbol
 			})
 		);
 	}
@@ -158,7 +163,7 @@ async function getAccount2(network: NetworkState, account: NameType): Promise<Ac
 	return {
 		get_account,
 		contract_hash: getaccount.contracthash,
-		balance: getaccount.balance,
+		balance: TokenBalance.from(getaccount.balance),
 		balances,
 		delegated: getaccount.delegations,
 		giftedram: getaccount.giftedram,
@@ -171,7 +176,7 @@ async function getAccount2(network: NetworkState, account: NameType): Promise<Ac
 
 async function getBalances(
 	network: NetworkState,
-	requested: TokenDefinition[],
+	requested: UnicoveTypes.token_definition[],
 	getaccount: UnicoveTypes.get_account_response
 ): Promise<TokenBalance[]> {
 	const balances: TokenBalance[] = [];
@@ -182,24 +187,38 @@ async function getBalances(
 	if (getaccount.balance) {
 		balances.push(
 			TokenBalance.from({
-				id: network.token,
-				balance: getaccount.balance
+				token: network.getSystemToken(),
+				balance: getaccount.balance.balance
 			})
 		);
 	}
 	if (getaccount.balances) {
-		for (const token of requested) {
-			const balance = getaccount.balances.find((b) => b.symbol.equals(token.symbol));
+		for (const requestedToken of requested) {
+			const balance = getaccount.balances.find((b) =>
+				b.token.id.symbol.equals(requestedToken.symbol)
+			);
 			if (balance) {
-				balances.push(
-					TokenBalance.from({
-						id: {
-							...token,
-							chain: network.chain.id
-						},
-						balance
-					})
-				);
+				const id = TokenDefinition.from({
+					...balance.token.id,
+					chain: network.chain.id
+				});
+				if (network.config.legacytoken && tokenEquals(id, network.config.legacytoken.id)) {
+					balances.push(
+						TokenBalance.from({
+							...balance,
+							token: network.config.legacytoken
+						})
+					);
+				} else {
+					balances.push(
+						TokenBalance.from({
+							...balance,
+							token: {
+								id
+							}
+						})
+					);
+				}
 			}
 		}
 	}

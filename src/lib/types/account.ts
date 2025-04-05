@@ -1,4 +1,4 @@
-import { API, Int64, Name, Asset, Float64, Checksum256 } from '@wharfkit/antelope';
+import { API, Int64, Name, Float64, Checksum256 } from '@wharfkit/antelope';
 
 import { Types as MsigTypes } from '$lib/wharf/contracts/msig';
 import { Types as SystemTypes } from '$lib/wharf/contracts/system';
@@ -22,7 +22,7 @@ export interface AccountDataSources {
 	// Hash of the contract on the account
 	contract_hash: Checksum256;
 	// Table rows from eosio.token::accounts
-	balance: Asset;
+	balance: TokenBalance;
 	// List of all loaded token balances
 	balances: TokenBalance[];
 	// Table rows from eosio::delband

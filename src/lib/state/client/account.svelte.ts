@@ -27,7 +27,7 @@ import {
 } from '$lib/state/defaults/account';
 import * as SystemContract from '$lib/wharf/contracts/system';
 import { Types as REXTypes } from '$lib/types/rex';
-import { TokenBalance, TokenDefinition } from '$lib/types/token';
+import { Token, TokenBalance, TokenDefinition, tokenEquals } from '$lib/types/token';
 
 export class AccountState {
 	public client?: APIClient = $state();
@@ -83,6 +83,17 @@ export class AccountState {
 			network: this.network.serialized,
 			sources: this.sources
 		};
+	}
+
+	getBalance(token: Token): TokenBalance {
+		const balance = this.balances.find((b) => tokenEquals(b.token.id, token.id));
+		if (!balance) {
+			return TokenBalance.from({
+				token,
+				balance: Asset.fromUnits(0, token.symbol)
+			});
+		}
+		return balance;
 	}
 
 	setState(data: AccountDataSources) {
@@ -236,7 +247,7 @@ export function getBalance(network: NetworkState, sources: AccountDataSources): 
 	const total = Asset.fromUnits(0, network.config.systemtoken.symbol);
 	const liquid = Asset.fromUnits(0, network.config.systemtoken.symbol);
 	if (sources.balance) {
-		const balance = Asset.from(sources.balance);
+		const balance = Asset.from(sources.balance.balance);
 		liquid.units.add(balance.units);
 		total.units.add(balance.units);
 	}
@@ -252,11 +263,9 @@ export function getBalance(network: NetworkState, sources: AccountDataSources): 
 	}
 
 	let legacy = Asset.fromUnits(0, network.config.systemtoken.symbol);
-	if (network.legacytoken) {
-		const legacyDefinition = TokenDefinition.from(network.legacytoken);
-		const legacyBalance = sources.balances.find((b) => {
-			return TokenBalance.from(b).id.equals(legacyDefinition);
-		});
+	if (network.config.legacytoken) {
+		const legacyDefinition = TokenDefinition.from(network.config.legacytoken);
+		const legacyBalance = sources.balances.find((b) => tokenEquals(b.token.id, legacyDefinition));
 		if (legacyBalance) {
 			const legacyAsset = Asset.from(legacyBalance.balance);
 			legacy = legacyAsset;
@@ -291,41 +300,41 @@ export function getBalance(network: NetworkState, sources: AccountDataSources): 
 	const children = [
 		{
 			name: 'delegated',
-			id: network.token.id,
+			token: network.token,
 			balance: delegated
 		},
 		{
 			name: 'refunding',
-			id: network.token.id,
+			token: network.token,
 			balance: refunding
 		},
 		{
 			name: 'staked',
-			id: network.token.id,
+			token: network.token,
 			balance: staked
 		},
 		{
 			name: 'total',
-			id: network.token.id,
+			token: network.token,
 			balance: total
 		},
 		{
 			name: 'unstaked',
-			id: network.token.id,
+			token: network.token,
 			balance: unstaked
 		}
 	];
 
-	if (network.legacytoken) {
+	if (network.config.legacytoken) {
 		children.push({
 			name: 'legacy',
-			id: network.token.id,
+			token: network.token,
 			balance: legacy
 		});
 	}
 
 	return TokenBalance.from({
-		id: network.token.id,
+		token: network.token,
 		balance: liquid,
 		children
 	});
@@ -337,21 +346,21 @@ export function getBalances(
 	resources: AccountResources
 ): TokenBalance[] {
 	const balances: TokenBalance[] = sources.balances.map((b) => TokenBalance.from(b));
-	const id = network.getRamTokenDefinition();
+	const token = network.getRamToken();
 	balances.push(
 		TokenBalance.from({
-			id,
-			balance: Asset.fromUnits(resources.ram.available, id.symbol),
+			token,
+			balance: Asset.fromUnits(resources.ram.available, token.symbol),
 			locked: !network.supports('ramtransfer'),
 			children: [
 				{
-					id,
-					balance: Asset.fromUnits(resources.ram.used, id.symbol),
+					token,
+					balance: Asset.fromUnits(resources.ram.used, token.symbol),
 					name: 'used'
 				},
 				{
-					id,
-					balance: Asset.fromUnits(resources.ram.owned, id.symbol),
+					token,
+					balance: Asset.fromUnits(resources.ram.owned, token.symbol),
 					name: 'total'
 				}
 			]
@@ -360,10 +369,10 @@ export function getBalances(
 
 	// Sort balances alphabetically
 	balances.sort((a, b) => {
-		if (a.id.symbol.name < b.id.symbol.name) {
+		if (a.token.id.symbol.name < b.token.id.symbol.name) {
 			return -1;
 		}
-		if (a.id.symbol.name > b.id.symbol.name) {
+		if (a.token.id.symbol.name > b.token.id.symbol.name) {
 			return 1;
 		}
 		return 0;
@@ -371,10 +380,10 @@ export function getBalances(
 
 	// Move system token to the top of the list regardless of alphabetical order
 	balances.sort((a, b) => {
-		if (a.id.equals(network.token.id)) {
+		if (a.token.id.equals(network.token.id)) {
 			return -1;
 		}
-		if (b.id.equals(network.token.id)) {
+		if (b.token.id.equals(network.token.id)) {
 			return 1;
 		}
 		return 0;

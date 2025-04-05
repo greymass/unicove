@@ -22,13 +22,16 @@ export async function GET({ fetch, locals: { network }, params, url }: RequestEv
 		return json({ error: 'Failed to fetch pairs' }, { status: 500 });
 	}
 	const data = await response.json();
-	const pairs = data.pairs.filter((pair: TokenPair) => tokenEquals(pair.base, basePair));
+	const pairs = data.pairs.filter(
+		(pair: TokenPair) =>
+			tokenEquals(pair.base.id, basePair) || tokenEquals(pair.base.id, network.token.id)
+	);
 	if (tokenEquals(basePair, network.token.id)) {
 		network.config.systemtokenalt.forEach((altSymbol: Asset.Symbol) => {
 			const altPair = TokenDefinition.from({
 				symbol: altSymbol
 			});
-			const newPairs = data.pairs.filter((pair: TokenPair) => tokenEquals(pair.base, altPair));
+			const newPairs = data.pairs.filter((pair: TokenPair) => tokenEquals(pair.base.id, altPair));
 			pairs.push(...newPairs);
 		});
 	}
