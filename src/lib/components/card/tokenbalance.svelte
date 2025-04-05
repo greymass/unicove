@@ -10,6 +10,7 @@
 	import Button from '../button/button.svelte';
 	import { getContext } from 'svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import Code from '../code.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -25,6 +26,7 @@
 		class?: string;
 		child?: string;
 		cta?: CTA[];
+		debug?: boolean;
 		isCurrentUser: boolean;
 		open?: boolean;
 		network: NetworkState;
@@ -37,6 +39,7 @@
 		class: className = 'break-after-avoid',
 		child,
 		cta,
+		debug = false,
 		isCurrentUser,
 		network,
 		open = $bindable(false),
@@ -169,5 +172,8 @@
 				</div>
 			{/if}
 		</div>
+	{/if}
+	{#if debug}
+		<Code json={_balance} />
 	{/if}
 </div>
