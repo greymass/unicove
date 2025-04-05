@@ -1,15 +1,17 @@
 <script lang="ts">
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import ValueText from '$lib/components/elements/currency/value.svelte';
-	import { Asset, UInt64 } from '@wharfkit/antelope';
+	import { Asset } from '@wharfkit/antelope';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
 	import * as m from '$lib/paraglide/messages';
+	import { ZeroUnits } from '$lib/types/token.js';
 
 	const { data } = $props();
-	const zero = UInt64.from(0);
-	const balances = $derived(data.account.balances.filter((item) => item.balance.units.gt(zero)));
+	const balances = $derived(
+		data.account.balances.filter((item) => item.balance.units.gt(ZeroUnits))
+	);
 
 	const context = getContext<UnicoveContext>('state');
 

@@ -1,10 +1,10 @@
 <script lang="ts">
 	import AssetText from '$lib/components/elements/asset.svelte';
-	import { Asset, UInt64 } from '@wharfkit/antelope';
+	import { Asset } from '@wharfkit/antelope';
 	import TradingPair from '$lib/components/elements/tradingpair.svelte';
 	import { cn } from '$lib/utils/style';
 	import type { NetworkState } from '$lib/state/network.svelte';
-	import { TokenBalance, tokenEquals, type TokenPair } from '$lib/types/token';
+	import { TokenBalance, tokenEquals, ZeroUnits, type TokenPair } from '$lib/types/token';
 	import { ChevronDown, ChevronRight } from 'lucide-svelte';
 	import * as m from '$lib/paraglide/messages';
 	import Button from '../button/button.svelte';
@@ -87,7 +87,7 @@
 				{/if}
 			</h4>
 			{#if pair && hasValue}
-				{#if pair.price.units.gt(UInt64.from(0))}
+				{#if pair.price.units.gt(ZeroUnits)}
 					<TradingPair value={pair} />
 				{:else}
 					<span class="bg-mine-900 animate-pulse rounded tabular-nums">&nbsp;</span>
@@ -97,7 +97,7 @@
 		<div class="flex flex-1 flex-col gap-1 text-right text-nowrap">
 			{#if pair && hasValue}
 				<h4 class="text-xl font-bold text-white capitalize">
-					{#if value.units.gt(UInt64.from(0))}
+					{#if value.units.gt(ZeroUnits)}
 						<AssetText variant="full" {value} />
 					{:else}
 						<span class="bg-mine-900 animate-pulse rounded tabular-nums">&nbsp;</span>

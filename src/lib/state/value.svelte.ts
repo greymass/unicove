@@ -4,9 +4,9 @@ import type { NetworkState } from './network.svelte';
 import type { SettingsState } from './settings.svelte';
 
 import { Currencies } from '$lib/types/currencies';
-import { Asset, UInt64 } from '@wharfkit/antelope';
+import { Asset } from '@wharfkit/antelope';
 import { calculateValue } from '$lib/utils';
-import { Token, TokenPair } from '$lib/types/token';
+import { Token, TokenPair, ZeroUnits } from '$lib/types/token';
 
 export interface ValueStates {
 	network: NetworkState;
@@ -48,7 +48,7 @@ export class AccountValueState {
 		Token.from({ id: Currencies[this.states.settings.data.displayCurrency] })
 	);
 	readonly pair = $derived(this.states.market.getSystemTokenPair(this.currency));
-	readonly hasPrice = $derived(this.price.units.gt(UInt64.from(0)));
+	readonly hasPrice = $derived(this.price.units.gt(ZeroUnits));
 	readonly systemtoken: AccountValueSystemTokenValues = $derived(
 		getAccountValue(this.states, this.currency)
 	);
@@ -171,7 +171,7 @@ export function getAccountValue(
 	const tokens = Asset.fromUnits(0, currency.symbol);
 	const total = Asset.fromUnits(0, currency.symbol);
 
-	if (states.account.balance && systemTokenPrice.units.gt(UInt64.from(0))) {
+	if (states.account.balance && systemTokenPrice.units.gt(ZeroUnits)) {
 		delegated.units.add(
 			calculateValue(states.account.balance.child('delegated').balance, systemTokenPrice).units
 		);

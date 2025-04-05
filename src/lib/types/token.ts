@@ -1,4 +1,14 @@
-import { Asset, Checksum256, Name, Struct, TimePointSec, type NameType } from '@wharfkit/antelope';
+import {
+	Asset,
+	Checksum256,
+	Name,
+	Struct,
+	TimePointSec,
+	UInt64,
+	type NameType
+} from '@wharfkit/antelope';
+
+export const ZeroUnits = UInt64.from(0);
 
 @Struct.type('token_definition')
 export class TokenDefinition extends Struct {

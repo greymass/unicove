@@ -32,7 +32,7 @@ import {
 	systemtoken
 } from '$lib/wharf/chains';
 
-import { TokenDistribution, Token, TokenDefinition } from '$lib/types/token';
+import { TokenDistribution, Token, TokenDefinition, ZeroUnits } from '$lib/types/token';
 
 import { Contract as DelphiHelperContract } from '$lib/wharf/contracts/delphihelper';
 import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
@@ -273,7 +273,7 @@ export class NetworkState {
 				price: {
 					rammarket: defaultValue
 				},
-				supply: UInt64.from(0),
+				supply: ZeroUnits,
 				gift: UInt64.from(this.sources ? this.sources.ram_gift_bytes : 0)
 			}
 		};

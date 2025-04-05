@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { Stack, Card } from '$lib/components/layout';
 	import AssetText from '$lib/components/elements/asset.svelte';
-	import { Asset, UInt64 } from '@wharfkit/antelope';
+	import { Asset } from '@wharfkit/antelope';
 	import TradingPair from '$lib/components/elements/tradingpair.svelte';
 	import Chip from '$lib/components/chip.svelte';
 	import { Breakdown, BreakdownRow } from '$lib/components/breakdown';
 	import * as m from '$lib/paraglide/messages';
 	import type { NetworkState } from '$lib/state/network.svelte';
-	import { tokenEquals, type TokenBalance, type TokenPair } from '$lib/types/token';
+	import { tokenEquals, ZeroUnits, type TokenBalance, type TokenPair } from '$lib/types/token';
 	import Button from '../button/button.svelte';
 
 	interface TokenOverviewProps {
@@ -66,7 +66,7 @@
 					<Stack class="gap-2">
 						<h4 class="text-muted text-base leading-none">{m.common_value()}</h4>
 						<p class="text-xl leading-none font-semibold text-white">
-							{#if value.units.gt(UInt64.from(0))}
+							{#if value.units.gt(ZeroUnits)}
 								<AssetText variant="full" {value} />
 							{:else}
 								<span class="bg-mine-900 animate-pulse rounded tabular-nums">&nbsp;</span>
@@ -74,7 +74,7 @@
 						</p>
 						{#if pair}
 							<Chip>
-								{#if pair.price.units.gt(UInt64.from(0))}
+								{#if pair.price.units.gt(ZeroUnits)}
 									<TradingPair value={pair} />
 								{:else}
 									<span class="bg-mine-900 animate-pulse rounded tabular-nums">&nbsp;</span>

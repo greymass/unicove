@@ -1,6 +1,13 @@
-import { Asset, Serializer, TimePointSec, UInt64 } from '@wharfkit/antelope';
+import { Asset, Serializer, TimePointSec } from '@wharfkit/antelope';
 
-import { Token, TokenDataSources, tokenEquals, TokenPair, TokenSwap } from '$lib/types/token';
+import {
+	Token,
+	TokenDataSources,
+	tokenEquals,
+	TokenPair,
+	TokenSwap,
+	ZeroUnits
+} from '$lib/types/token';
 import { TokenDefinition } from '$lib/types/token';
 import { Currencies } from '$lib/types/currencies';
 
@@ -11,7 +18,7 @@ export class MarketState {
 	private sources: TokenDataSources = $state() as TokenDataSources;
 
 	public refreshed: TimePointSec = $state(TimePointSec.fromInteger(0));
-	readonly loaded = $derived(this.refreshed.value.gt(UInt64.from(0)));
+	readonly loaded = $derived(this.refreshed.value.gt(ZeroUnits));
 
 	readonly settings = $state() as SettingsState;
 	readonly network = $state() as NetworkState;

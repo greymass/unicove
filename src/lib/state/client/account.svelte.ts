@@ -27,7 +27,7 @@ import {
 } from '$lib/state/defaults/account';
 import * as SystemContract from '$lib/wharf/contracts/system';
 import { Types as REXTypes } from '$lib/types/rex';
-import { Token, TokenBalance, TokenDefinition, tokenEquals } from '$lib/types/token';
+import { Token, TokenBalance, TokenDefinition, tokenEquals, ZeroUnits } from '$lib/types/token';
 
 export class AccountState {
 	public client?: APIClient = $state();
@@ -400,7 +400,7 @@ export function getDelegated(
 		acc.add(delegation.net_weight.units);
 		acc.add(delegation.cpu_weight.units);
 		return acc;
-	}, UInt64.from(0));
+	}, ZeroUnits);
 	return Asset.fromUnits(delegatedUnits, symbol);
 }
 

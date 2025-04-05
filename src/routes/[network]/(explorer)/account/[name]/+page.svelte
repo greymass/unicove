@@ -12,7 +12,7 @@
 	import TokenBalance from '$lib/components/card/tokenbalance.svelte';
 	import Tokendistribution from '$lib/components/chart/tokendistribution.svelte';
 	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte';
-	import { tokenEquals } from '$lib/types/token.js';
+	import { tokenEquals, ZeroUnits } from '$lib/types/token.js';
 
 	const { data } = $props();
 
@@ -83,7 +83,6 @@
 				</div>
 			</Card>
 		{/if}
-
 		{#if data.account && data.account.balance}
 			<TokenBalance
 				balance={data.account.balance}
@@ -103,7 +102,7 @@
 			/>
 		{/if}
 
-		{#if legacytoken && legacybalance}
+		{#if legacytoken && legacybalance && legacybalance.balance.units.gt(ZeroUnits)}
 			<TokenBalance
 				balance={legacybalance}
 				cta={{

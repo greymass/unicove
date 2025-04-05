@@ -1,10 +1,11 @@
+import { ZeroUnits } from '$lib/types/token';
 import {
 	ActionTraceFiltered,
 	ActionTraceReceipt,
 	ActivityResponse,
 	ActivityResponseAction
 } from '$lib/types/transaction';
-import { Checksum256, UInt64 } from '@wharfkit/session';
+import { Checksum256 } from '@wharfkit/session';
 
 export class Scene {
 	firstTime: number = $state(0);
@@ -112,7 +113,7 @@ export class ActivityLoader {
 			const json = await response.json();
 			const activity = ActivityResponse.from(json.activity);
 			const nextStart = -Number(activity.last);
-			const hasMore = activity.actions.length > 0 && activity.last.gt(UInt64.from(0));
+			const hasMore = activity.actions.length > 0 && activity.last.gt(ZeroUnits);
 
 			const digests: string[] = [];
 			const receipts: Record<string, ActionTraceReceipt[]> = {};
