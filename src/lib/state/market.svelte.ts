@@ -117,8 +117,11 @@ export class MarketState {
 
 function getSwaps(network: NetworkState, pairs: TokenPair[]): TokenSwap[] {
 	const swaps: TokenSwap[] = [];
-	if (network.legacytoken) {
-		const { token, legacytoken } = network;
+	if (network.config.legacytoken) {
+		const {
+			token,
+			config: { legacytoken }
+		} = network;
 
 		const legacyPair = pairs.find(
 			(pair) => tokenEquals(pair.base.id, legacytoken.id) && tokenEquals(pair.quote.id, token.id)
@@ -143,7 +146,7 @@ function getSwaps(network: NetworkState, pairs: TokenPair[]): TokenSwap[] {
 					pair: newPair,
 					contract: network.token.contract,
 					action: 'transfer',
-					fee: Asset.fromUnits(0, network.legacytoken.symbol)
+					fee: Asset.fromUnits(0, network.config.legacytoken.symbol)
 				})
 			);
 		}

@@ -43,7 +43,7 @@
 	const cpuAvailable = $derived(data.account.resources.cpu.available);
 	const netAvailable = $derived(data.account.resources.net.available);
 
-	const legacytoken = data.network.legacytoken;
+	const legacytoken = data.network.config.legacytoken;
 	const legacybalance = $derived(
 		legacytoken
 			? data.account.balances.find((b) => tokenEquals(b.token.id, legacytoken.id))

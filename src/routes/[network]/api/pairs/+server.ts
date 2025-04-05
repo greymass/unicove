@@ -30,10 +30,10 @@ export async function GET({ fetch, locals: { network }, url }: RequestEvent) {
 				updated: TimePointSec.from(new Date())
 			})
 		);
-		if (network.legacytoken) {
+		if (network.config.legacytoken) {
 			pairs.push(
 				TokenPair.from({
-					base: network.legacytoken,
+					base: network.config.legacytoken,
 					quote: { id: Currencies.USD },
 					price: mockPrice,
 					updated: TimePointSec.from(new Date())
@@ -43,12 +43,12 @@ export async function GET({ fetch, locals: { network }, url }: RequestEvent) {
 	}
 
 	// If the legacy token exists and has an exchange rate, add it
-	if (network.legacytoken && PUBLIC_LEGACY_TOKEN_EXCHANGERATE) {
+	if (network.config.legacytoken && PUBLIC_LEGACY_TOKEN_EXCHANGERATE) {
 		const exchangeRate = Asset.from(PUBLIC_LEGACY_TOKEN_EXCHANGERATE);
 		pairs.push(
 			TokenPair.from({
 				base: network.token,
-				quote: network.legacytoken,
+				quote: network.config.legacytoken,
 				price: exchangeRate,
 				updated: TimePointSec.from(new Date())
 			})

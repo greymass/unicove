@@ -263,8 +263,8 @@ export function getBalance(network: NetworkState, sources: AccountDataSources): 
 	}
 
 	let legacy = Asset.fromUnits(0, network.config.systemtoken.symbol);
-	if (network.legacytoken) {
-		const legacyDefinition = TokenDefinition.from(network.legacytoken);
+	if (network.config.legacytoken) {
+		const legacyDefinition = TokenDefinition.from(network.config.legacytoken);
 		const legacyBalance = sources.balances.find((b) => tokenEquals(b.token.id, legacyDefinition));
 		if (legacyBalance) {
 			const legacyAsset = Asset.from(legacyBalance.balance);
@@ -325,7 +325,7 @@ export function getBalance(network: NetworkState, sources: AccountDataSources): 
 		}
 	];
 
-	if (network.legacytoken) {
+	if (network.config.legacytoken) {
 		children.push({
 			name: 'legacy',
 			token: network.token,

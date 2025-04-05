@@ -141,11 +141,11 @@ async function getAccount(network: NetworkState, account: NameType): Promise<Acc
 
 async function getAccount2(network: NetworkState, account: NameType): Promise<AccountDataSources> {
 	const tokens: UnicoveTypes.token_definition[] = [];
-	if (network.legacytoken) {
+	if (network.config.legacytoken) {
 		tokens.push(
 			UnicoveTypes.token_definition.from({
-				contract: network.legacytoken.contract,
-				symbol: network.legacytoken.symbol
+				contract: network.config.legacytoken.contract,
+				symbol: network.config.legacytoken.symbol
 			})
 		);
 	}

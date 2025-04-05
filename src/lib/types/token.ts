@@ -1,18 +1,4 @@
-import {
-	Asset,
-	Checksum256,
-	Name,
-	Struct,
-	TimePointSec,
-	type Checksum256Type,
-	type NameType
-} from '@wharfkit/antelope';
-
-export interface TokenDefinitionType {
-	symbol: Asset.SymbolType;
-	chain?: Checksum256Type;
-	contract?: NameType;
-}
+import { Asset, Checksum256, Name, Struct, TimePointSec, type NameType } from '@wharfkit/antelope';
 
 @Struct.type('token_definition')
 export class TokenDefinition extends Struct {
@@ -42,13 +28,13 @@ export interface TokenType {
 
 @Struct.type('token_media_asset')
 export class TokenMediaAsset extends Struct {
-	@Struct.field('string') declare light: Name;
-	@Struct.field('string') declare dark: Name;
+	@Struct.field('string', { optional: true }) declare light?: Name;
+	@Struct.field('string', { optional: true }) declare dark?: Name;
 }
 
 @Struct.type('token_media')
 export class TokenMedia extends Struct {
-	@Struct.field(TokenMediaAsset) declare logo: TokenMediaAsset;
+	@Struct.field(TokenMediaAsset, { optional: true }) declare logo?: TokenMediaAsset;
 }
 
 @Struct.type('token')

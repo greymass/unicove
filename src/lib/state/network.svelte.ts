@@ -157,19 +157,6 @@ export class NetworkState {
 		}
 	}
 
-	get legacytoken(): Token | undefined {
-		if (!this.config.legacytoken) {
-			return undefined;
-		}
-		return Token.from({
-			id: {
-				chain: this.chain.id,
-				symbol: this.config.legacytoken.symbol,
-				contract: this.config.legacytoken.contract
-			}
-		});
-	}
-
 	getRamToken(): Token {
 		return Token.from({
 			id: this.getRamTokenDefinition()
