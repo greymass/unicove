@@ -65,7 +65,7 @@
 		<div class="flex flex-1 flex-col gap-1 text-right text-nowrap">
 			<AssetText {value} />
 		</div>
-		<div class="flex w-14 flex-col gap-1 text-right text-nowrap">
+		<div class="flex w-14 flex-col gap-1 text-nowrap">
 			{#if action && isCurrentUser}
 				<a class="text-sky-500 hover:text-sky-400" href={action.href}>
 					{action.text}
@@ -110,7 +110,7 @@
 					{/if}
 				</h4>
 			{/if}
-			<AssetText value={balance.balance} />
+			<AssetText value={balance.balance} variant="full" />
 		</div>
 		<button class="size-14 cursor-pointer place-items-center" onclick={() => (open = !open)}>
 			{#if open}
