@@ -413,7 +413,7 @@
 	"settings_enable_advanced": "Enable Advanced Mode",
 	"settings_enable_advanced_desc": "Enable features for more advanced use cases.",
 	"settings_enable_developer": "启用开发者模式",
-	"settings_enable_developer_desc": "显示用于开发和调试的原始数据",
+	"settings_enable_developer_desc": "",
 	"settings_general": "常规",
 	"settings_language_selector": "语言选择器",
 	"settings_page_subtitle": "配置 Unicove",

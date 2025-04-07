@@ -413,7 +413,7 @@
 	"settings_enable_advanced": "Enable Advanced Mode",
 	"settings_enable_advanced_desc": "Enable features for more advanced use cases.",
 	"settings_enable_developer": "개발자 모드 활성화",
-	"settings_enable_developer_desc": "개발 및 디버깅에 사용되는 원시 데이터 표시",
+	"settings_enable_developer_desc": "",
 	"settings_general": "일반적인",
 	"settings_language_selector": "언어 선택기",
 	"settings_page_subtitle": "Unicove 구성",

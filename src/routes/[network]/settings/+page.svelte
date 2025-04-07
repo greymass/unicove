@@ -27,7 +27,9 @@
 	let searchShowPages = $state(!!context.settings.data.searchShowPages);
 	let advancedMode = $state(!!context.settings.data.advancedMode);
 	let debugMode = $state(!!context.settings.data.debugMode);
+	let developerMode = $state(!!context.settings.data.developerMode);
 	let mockPrice = $state(!!context.settings.data.mockPrice);
+	let increasedPrecision = $state(!!context.settings.data.increasedPrecision);
 
 	let refEarliestExecution: DatetimeInput | undefined = $state();
 
@@ -51,6 +53,14 @@
 
 	$effect(() => {
 		context.settings.data.debugMode = advancedMode ? debugMode : false;
+	});
+
+	$effect(() => {
+		context.settings.data.developerMode = advancedMode ? developerMode : false;
+	});
+
+	$effect(() => {
+		context.settings.data.increasedPrecision = advancedMode ? increasedPrecision : false;
 	});
 
 	$effect(() => {
@@ -169,10 +179,18 @@
 
 			<div class="flex items-center justify-between">
 				<Stack class="gap-2">
-					<Label for="proposal-expiration">Display Currency</Label>
+					<Label for="proposal-expiration">Prefered Currency</Label>
 					<p class="caption text-sm">The currency used to display the value of tokens.</p>
 				</Stack>
 				<CurrencySelect />
+			</div>
+
+			<div class="flex items-center justify-between">
+				<Stack class="gap-2">
+					<Label for="proposal-expiration">Increased Precision</Label>
+					<p class="caption text-sm">Use more decimals to increase currency precision.</p>
+				</Stack>
+				<Switch id="increased-precision" bind:checked={increasedPrecision} />
 			</div>
 		</Card>
 
@@ -229,9 +247,9 @@
 						<Label for="debug-mode">{m.settings_enable_developer()}</Label>
 						<p class="caption text-sm">{m.settings_enable_developer_desc()}</p>
 					</Stack>
-					<Switch id="debug-mode" bind:checked={debugMode} />
+					<Switch id="debug-mode" bind:checked={developerMode} />
 				</div>
-				{#if debugMode}
+				{#if developerMode}
 					<div class="flex items-center justify-between">
 						<Stack class="gap-2">
 							<Label for="debug-mode">{m.settings_enable_mockprice()}</Label>
@@ -242,6 +260,13 @@
 							</p>
 						</Stack>
 						<Switch id="mock-price" bind:checked={mockPrice} />
+					</div>
+					<div class="flex items-center justify-between">
+						<Stack class="gap-2">
+							<Label for="debug-mode">{m.settings_enable_debug()}</Label>
+							<p class="caption text-sm"></p>
+						</Stack>
+						<Switch id="debug-mode" bind:checked={debugMode} />
 					</div>
 				{/if}
 			</Card>
