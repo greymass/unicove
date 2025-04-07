@@ -33,13 +33,7 @@ import {
 	ramtoken
 } from '$lib/wharf/chains';
 
-import {
-	TokenDistribution,
-	Token,
-	ZeroUnits,
-	TokenDefinition,
-	tokenEquals
-} from '$lib/types/token';
+import { Token, ZeroUnits, TokenDefinition, tokenEquals } from '$lib/types/token';
 
 import { Contract as DelphiHelperContract } from '$lib/wharf/contracts/delphihelper';
 import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
@@ -172,15 +166,8 @@ export class NetworkState {
 	getSystemToken(): Token {
 		const token = Token.from(systemtoken);
 
-		if (this.sources) {
-			token.distribution = TokenDistribution.from({
-				circulating: this.sources.token.circulating,
-				locked: this.sources.token.locked,
-				staked:
-					this.sources.rex?.total_lendable || Asset.fromUnits(0, this.config.systemtoken.symbol),
-				supply: this.sources.token.supply,
-				max: this.sources.token.max
-			});
+		if (this.sources && this.sources.token.distribution) {
+			token.distribution = this.sources.token.distribution;
 		}
 
 		return token;

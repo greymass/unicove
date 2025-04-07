@@ -35,7 +35,7 @@ export class NetworkDataSources extends Struct {
 	@Struct.field(SystemTypes.exchange_state) declare ram: SystemTypes.exchange_state;
 	@Struct.field(REXTypes.rex_pool, { optional: true }) declare rex: REXTypes.rex_pool;
 	@Struct.field(SampledUsage, { optional: true }) declare sample?: SampledUsage;
-	@Struct.field(UnicoveTypes.token_supply) declare token: UnicoveTypes.token_supply;
+	@Struct.field(UnicoveTypes.token) declare token: UnicoveTypes.token;
 	@Struct.field(Int64, { optional: true }) declare ram_gift_bytes?: Int64;
 }
 
