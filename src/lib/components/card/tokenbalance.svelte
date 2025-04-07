@@ -122,10 +122,16 @@
 	</div>
 	{#if open && _balance instanceof TokenBalance}
 		<div class="space-y-2 p-6">
-			{@render SubBalance(m.common_available(), _balance.balance, {
-				text: m.common_send(),
-				href: `/${network}/send/${balance.token.id.url}`
-			})}
+			{@render SubBalance(
+				m.common_available(),
+				_balance.balance,
+				!_balance.locked
+					? {
+							text: m.common_send(),
+							href: `/${network}/send/${balance.token.id.url}`
+						}
+					: undefined
+			)}
 
 			{#if tokenEquals(balance.token.id, network.token.id)}
 				{#if network.supports('staking') && balanceStaked}
