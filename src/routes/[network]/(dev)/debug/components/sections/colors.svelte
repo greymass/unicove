@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Stack } from '$lib/components/layout';
-	import Card from '$lib/components/layout/box/card.svelte';
+	// import Card from '$lib/components/layout/box/card.svelte';
 	import Cluster from '$lib/components/layout/cluster.svelte';
 	// import { cn } from '$lib/utils/style';
 
@@ -50,7 +50,6 @@
 {/snippet}
 
 <Stack id="colors" class="rounded-xl bg-black/10  p-6">
-	<h2 class="h2">Colors</h2>
 	<!-- <Cluster> -->
 	<!-- 	{#each values as value} -->
 	<!-- 		<span class="w-20 text-center">{String(value)}</span> -->
@@ -66,21 +65,13 @@
 	<!-- {@render palette('spring')} -->
 	<!-- {@render palette('solar')} -->
 
-	<h2 class="h2">Roles</h2>
-	<h3 class="h3">Dark</h3>
+	<h2 class="h2">Color Roles</h2>
 
-	<Cluster>
+	<div class="flex gap-4">
 		{@render roles('eos')}
 		{@render roles('jungle4')}
 		{@render roles('vaulta')}
-	</Cluster>
-
-	<h3 class="h3">Light</h3>
-	<Card class="bg-white text-black">
-		<Cluster>
-			{@render roles('eos', 'light')}
-			{@render roles('jungle4', 'light')}
-			{@render roles('vaulta', 'light')}
-		</Cluster>
-	</Card>
+		{@render roles('telos')}
+		{@render roles('wax')}
+	</div>
 </Stack>
