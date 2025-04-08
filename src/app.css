@@ -747,6 +747,10 @@
 		color-scheme: dark;
 		touch-action: manipulation;
 		scrollbar-gutter: stable;
+
+		::selection {
+			@apply bg-primary text-on-primary;
+		}
 	}
 
 	body {
