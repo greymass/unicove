@@ -23,7 +23,7 @@
 
 <div
 	class={cn(
-		'border-mine-900 col-span-full grid min-h-12 grid-cols-subgrid items-center gap-x-4 border-b last:border-none ',
+		'border-outline col-span-full grid min-h-12 grid-cols-subgrid items-center gap-x-4 border-b last:border-none ',
 		isTotal && 'font-semibold'
 	)}
 >
@@ -31,7 +31,7 @@
 		class="col-start-1 col-end-3 row-start-1 flex flex-col py-2 @xs:flex-row @xs:justify-between"
 	>
 		<div class="text-muted">{key}</div>
-		<div class="text-white">
+		<div class="text-on-surface">
 			<AssetText class="text-nowrap tabular-nums" variant="full" {value} />
 		</div>
 	</div>

@@ -65,7 +65,7 @@
 				>
 					<Stack class="gap-2">
 						<h4 class="text-muted text-base leading-none">{m.common_value()}</h4>
-						<p class="text-xl leading-none font-semibold text-white">
+						<p class="text-on-surface text-xl leading-none font-semibold">
 							{#if value.units.gt(ZeroUnits)}
 								<AssetText variant="full" {value} />
 							{:else}

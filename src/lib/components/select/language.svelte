@@ -28,7 +28,7 @@
 </script>
 
 <button
-	class="border-mine-600 focus:border-primary flex h-10 items-center justify-between gap-2 rounded-full border-2 bg-transparent py-2 pr-3 pl-4 font-medium transition-opacity hover:opacity-90 focus:outline-none"
+	class="border-outline focus:border-primary flex h-10 items-center justify-between gap-2 rounded-full border-2 bg-transparent py-2 pr-3 pl-4 font-medium transition-opacity hover:opacity-90 focus:outline-none"
 	use:melt={$trigger}
 	aria-label="langauge-select-label"
 	id="language-select"
@@ -40,7 +40,7 @@
 {#if $open}
 	<div
 		data-theme={context.network}
-		class="border-mine-600 bg-shark-950 z-10 flex max-h-[300px] flex-col overflow-y-auto rounded-2xl border-2 px-1 py-1 shadow-sm focus:ring-0!"
+		class="border-outline bg-surface-container z-10 flex max-h-[300px] flex-col overflow-y-auto rounded-2xl border-2 px-1 py-1 shadow-sm focus:ring-0!"
 		use:melt={$menu}
 		in:fade={{ duration: 100 }}
 	>

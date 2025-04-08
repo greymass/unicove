@@ -65,8 +65,8 @@
 					href={step.path}
 					data-current={isCurrentStep}
 					data-incomplete={isIncompleteStep}
-					class="focus-visible:outline-solar-500 relative flex flex-col justify-between gap-2 text-white/50 hover:text-white/80 focus-visible:outline
- focus-visible:outline-offset-2 data-[current=true]:text-white data-[incomplete=true]:pointer-events-none
+					class="focus-visible:outline-solar-500 relative flex flex-col justify-between gap-2 text-on-surface/50 hover:text-on-surface/80 focus-visible:outline
+ focus-visible:outline-offset-2 data-[current=true]:text-on-surface data-[incomplete=true]:pointer-events-none
 					"
 					tabindex={isIncompleteStep ? -1 : 0}
 				>

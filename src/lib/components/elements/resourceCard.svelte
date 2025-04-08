@@ -56,7 +56,7 @@
 	</h3>
 
 	<p class="*:block">
-		<span class="font-semibold text-white">
+		<span class="text-on-surface font-semibold">
 			<NumberFormat number={props.value.dividing(1000)} />
 			{unit}
 		</span>

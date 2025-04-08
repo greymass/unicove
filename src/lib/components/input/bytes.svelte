@@ -168,7 +168,7 @@
 	<button
 		onclick={cycleUnit}
 		type="button"
-		class="focus-visible:ring-solar-500 flex h-full items-center gap-1 rounded-md bg-transparent text-sky-500 select-none hover:text-sky-300 focus:outline-hidden focus-visible:ring-3 focus-visible:ring-inset"
+		class="focus-visible:ring-solar-500 text-primary flex h-full cursor-pointer items-center gap-1 rounded-md bg-transparent select-none focus:outline-hidden focus-visible:ring-3 focus-visible:ring-inset"
 	>
 		<span class="text-sm font-medium">{unit}</span>
 		<ArrowUpDown class="size-4" />

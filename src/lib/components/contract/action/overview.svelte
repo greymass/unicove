@@ -22,6 +22,6 @@
 </div>
 
 {#if ricardian}
-	<p class="text-md text-white">{ricardian.meta?.title}</p>
+	<p class="text-md text-on-surface">{ricardian.meta?.title}</p>
 	<p class="text-muted text-sm">{ricardian.meta?.summary}</p>
 {/if}

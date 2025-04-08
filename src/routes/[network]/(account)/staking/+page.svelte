@@ -85,12 +85,12 @@
 	<MultiCard>
 		<Card id="account-value" style="column-span: all;">
 			<Cluster class="items-center">
-				<picture class="bg-mine-900 grid size-12 place-items-center rounded-full">
+				<picture class="bg-surface-container-high grid size-12 place-items-center rounded-full">
 					<ChartLine />
 				</picture>
 				<div>
 					<p>{m.common_apr_current()}</p>
-					<p class="text-2xl font-bold text-white">{apr}%</p>
+					<p class="text-on-surface text-2xl font-bold">{apr}%</p>
 				</div>
 			</Cluster>
 		</Card>
@@ -107,7 +107,7 @@
 							unit: m.common_tokens()
 						})}
 					</h4>
-					<p class="text-xl leading-none font-semibold text-white">
+					<p class="text-on-surface text-xl leading-none font-semibold">
 						<AssetText variant="full" value={total} />
 					</p>
 					<Chip>
@@ -123,7 +123,7 @@
 								{#if staked.units.gt(ZeroUnits)}
 									<tr>
 										<td>{m.common_staked()}</td>
-										<td class="text-right text-white">
+										<td class="text-on-surface text-right">
 											{#if staked.units.equals(0)}
 												<span class="font-mono">&lt;</span>
 											{/if}
@@ -140,7 +140,7 @@
 								{#if unstakingTotal.units.gt(ZeroUnits)}
 									<tr>
 										<td>{m.common_unstaking()}</td>
-										<td class="text-right text-white">
+										<td class="text-on-surface text-right">
 											<AssetText variant="full" value={unstakingTotal} />
 											{#if context.settings.data.advancedMode}
 												<p>
@@ -154,7 +154,7 @@
 								{#if totalWithdraw.units.gt(ZeroUnits)}
 									<tr>
 										<td>{m.common_unstaked()}</td>
-										<td class="text-right text-white">
+										<td class="text-on-surface text-right">
 											<AssetText variant="full" value={totalWithdraw} />
 											{#if context.settings.data.advancedMode}
 												<p>

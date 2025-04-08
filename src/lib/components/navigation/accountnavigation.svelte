@@ -22,7 +22,7 @@
 			<a
 				aria-current={option.active && 'page'}
 				href={option.href}
-				class="focus-visible:outline-solar-500 block py-6 text-nowrap -outline-offset-2 focus-visible:outline focus-visible:outline-2 aria-[current=page]:border-b-2 aria-[current=page]:border-sky-400 aria-[current=page]:text-white"
+				class="focus-visible:outline-solar-500 aria-[current=page]:border-primary aria-[current=page]:text-on-surface block py-6 text-nowrap -outline-offset-2 focus-visible:outline focus-visible:outline-2 aria-[current=page]:border-b-2"
 			>
 				{option.text}
 			</a>
