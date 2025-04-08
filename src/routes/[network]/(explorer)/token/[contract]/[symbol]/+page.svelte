@@ -54,7 +54,13 @@
 				<tr>
 					<td>{idx + 1}</td>
 					<td>
-						<Account name={holder.account} />
+						<Account name={holder.account}>
+							{#if data.network.config.lockedsupply?.find( (locked) => holder.account.equals(locked) )}
+								{holder.account} <span class="text-muted">(Locked Supply)</span>
+							{:else}
+								{holder.account}
+							{/if}
+						</Account>
 					</td>
 					<td class="text-right">
 						<AssetText value={holder.balance} />
