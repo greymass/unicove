@@ -51,7 +51,7 @@
 		' flex h-12 grow    rounded-lg px-8  text-primary ring-2 ring-inset ring-outline   focus-visible:outline-hidden focus-visible:ring-solar-500  hover:active:ring-outline  disabled:text-mine-400  disabled:hover:bg-transparent disabled:hover:ring-mine-600 disabled:active:ring-mine-600 ';
 
 	const pillStyles =
-		' inline-flex h-10    rounded-full border-2 border-transparent px-5  leading-4  focus-visible:border-solar-500  focus-visible:outline-hidden   hover:active:bg-mine-950 aria-[current]:border-mine-200/30 aria-[current]:focus-visible:border-solar-500 hover:bg-mine-900 hover:text-mine-100';
+		' inline-flex h-10    rounded-full border-2 border-transparent px-5  leading-4  focus-visible:border-solar-500  focus-visible:outline-hidden    aria-[current]:border-outline-variant aria-[current]:focus-visible:border-solar-500';
 
 	const textStyles =
 		'inline-flex  h-10  rounded-lg px-3  text-primary   focus-visible:ring-inset focus-visible:ring-solar-500 focus-visible:outline-hidden focus-visible:ring  disabled:text-mine-400  disabled:hover:bg-transparent';
