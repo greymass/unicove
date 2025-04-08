@@ -204,11 +204,11 @@ async function getBalances(
 				b.token.id.symbol.equals(requestedToken.symbol)
 			);
 			if (balance) {
-				const id = TokenDefinition.from({
-					...balance.token.id,
-					chain: network.chain.id
-				});
-				if (network.config.legacytoken && tokenEquals(id, network.config.legacytoken.id)) {
+				// If this is the legacy token, merge in configured token metadata
+				if (
+					network.config.legacytoken &&
+					tokenEquals(TokenDefinition.from(balance.token.id), network.config.legacytoken.id)
+				) {
 					balances.push(
 						TokenBalance.from({
 							...balance,
@@ -218,10 +218,7 @@ async function getBalances(
 				} else {
 					balances.push(
 						TokenBalance.from({
-							...balance,
-							token: {
-								id
-							}
+							...balance
 						})
 					);
 				}
