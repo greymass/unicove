@@ -119,26 +119,97 @@
 	--color-niagara-900: #1c453e;
 	--color-niagara-950: #0b2825;
 
-	/* Color Roles and default values */
-	--color-primary: #481d00;
-	--color-on-primary: #481d00;
-	--color-primary-container: #481d00;
-	--color-on-primary-container: #481d00;
-	--color-secondary: #481d00;
-	--color-on-secondary: #481d00;
-	--color-secondary-container: #481d00;
-	--color-on-secondary-container: #481d00;
-	--color-tertiary: #481d00;
-	--color-on-tertiary: #481d00;
-	--color-tertiary-container: #481d00;
-	--color-on-tertiary-container: #481d00;
-	--color-on-surface: #481d00;
-	--color-on-surface-variant: #481d00;
-	--color-outline: #481d00;
-	--color-outline-variant: #481d00;
+	/* Vaulta Palette */
+	--color-cobalt-50: #ebf3ff;
+	--color-cobalt-100: #dbe8ff;
+	--color-cobalt-200: #bed5ff;
+	--color-cobalt-300: #97b7ff;
+	--color-cobalt-400: #6e8dff;
+	--color-cobalt-500: #4c65ff;
+	--color-cobalt-600: #2e3bff;
+	--color-cobalt-700: #2028e2;
+	--color-cobalt-800: #1d26b6;
+	--color-cobalt-900: #20298f;
+	--color-cobalt-950: #131753;
 
+	/* Color Roles and default values */
+	/* --color-primary: #481d00; */
+	/* --color-on-primary: #481d00; */
+	/* --color-primary-container: #481d00; */
+	/* --color-on-primary-container: #481d00; */
+	/**/
+	/* --color-secondary: #481d00; */
+	/* --color-on-secondary: #481d00; */
+	/* --color-secondary-container: #481d00; */
+	/* --color-on-secondary-container: #481d00; */
+	/**/
+	/* --color-tertiary: #481d00; */
+	/* --color-on-tertiary: #481d00; */
+	/* --color-tertiary-container: #481d00; */
+	/* --color-on-tertiary-container: #481d00; */
+	/**/
+	/* --color-surface: var(--color-shark-950); */
+	/* --color-surface: var(--color-red-200); */
+	/* --color-on-surface: var(--color-white); */
+	/* --color-on-surface-variant: var(--color-zinc-400); */
+	/*  */
+	/* --color-outline: #481d00; */
+	/* --color-outline-variant: #481d00; */
+
+	--color-primary: rgb(112 217 191);
+	--color-surface-tint: rgb(112 217 191);
+	--color-on-primary: rgb(0 56 45);
+	--color-primary-container: rgb(50 161 138);
+	--color-on-primary-container: rgb(0 45 36);
+	--color-secondary: rgb(167 207 194);
+	--color-on-secondary: rgb(16 54 46);
+	--color-secondary-container: rgb(43 80 70);
+	--color-on-secondary-container: rgb(154 193 180);
+	--color-tertiary: rgb(205 189 255);
+	--color-on-tertiary: rgb(53 35 105);
+	--color-tertiary-container: rgb(151 133 210);
+	--color-on-tertiary-container: rgb(43 24 95);
+	--color-error: rgb(255 180 171);
+	--color-on-error: rgb(105 0 5);
+	--color-error-container: rgb(147 0 10);
+	--color-on-error-container: rgb(255 218 214);
+	--color-background: rgb(15 20 19);
+	--color-on-background: rgb(223 228 224);
+	--color-surface: rgb(15 20 19);
+	--color-on-surface: rgb(223 228 224);
+	--color-surface-variant: rgb(61 73 69);
+	--color-on-surface-variant: rgb(189 201 196);
+	--color-outline: rgb(135 147 143);
+	--color-outline-variant: rgb(61 73 69);
+	--color-shadow: rgb(0 0 0);
+	--color-scrim: rgb(0 0 0);
+	--color-inverse-surface: rgb(223 228 224);
+	--color-inverse-on-surface: rgb(44 50 47);
+	--color-inverse-primary: rgb(0 107 89);
+	--color-primary-fixed: rgb(141 245 219);
+	--color-on-primary-fixed: rgb(0 32 26);
+	--color-primary-fixed-dim: rgb(112 217 191);
+	--color-on-primary-fixed-variant: rgb(0 81 67);
+	--color-secondary-fixed: rgb(195 235 222);
+	--color-on-secondary-fixed: rgb(0 32 26);
+	--color-secondary-fixed-dim: rgb(167 207 194);
+	--color-on-secondary-fixed-variant: rgb(41 77 68);
+	--color-tertiary-fixed: rgb(232 221 255);
+	--color-on-tertiary-fixed: rgb(32 9 84);
+	--color-tertiary-fixed-dim: rgb(205 189 255);
+	--color-on-tertiary-fixed-variant: rgb(76 59 129);
+	--color-surface-dim: rgb(15 20 19);
+	--color-surface-bright: rgb(53 58 56);
+	--color-surface-container-lowest: rgb(10 15 14);
+	--color-surface-container-low: rgb(23 29 27);
+	--color-surface-container: rgb(27 33 31);
+	--color-surface-container-high: rgb(38 43 41);
+	--color-surface-container-highest: rgb(48 54 52);
+
+	/* Other values */
 	--breakpoint-xs: 480px;
 
+	/* Fonts */
 	--font-sans: Inter, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
 		'Segoe UI Symbol', 'Noto Color Emoji';
 	--font-mono: JetBrains Mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
@@ -159,21 +230,401 @@
 	::before,
 	::backdrop,
 	::file-selector-button {
-		border-color: var(--color-gray-200, currentColor);
+		border-color: var(--color-mine-200, currentColor);
 	}
 
 	[data-theme='eos'] {
-		--color-primary: var(--color-solar-400);
-		--color-on-primary: var(--color-solar-900);
-		--color-primary-container: var(--color-solar-200);
-		--color-on-primary-container: var(--color-solar-700);
+		/* --color-primary: var(--color-solar-400); */
+		/* --color-on-primary: var(--color-solar-900); */
+		/* --color-primary-container: var(--color-solar-200); */
+		/* --color-on-primary-container: var(--color-solar-700); */
+		--color-primary: rgb(255 181 150);
+		--color-surface-tint: rgb(255 181 150);
+		--color-on-primary: rgb(84 33 6);
+		--color-primary-container: rgb(113 54 26);
+		--color-on-primary-container: rgb(255 219 205);
+		--color-secondary: rgb(230 190 173);
+		--color-on-secondary: rgb(68 42 31);
+		--color-secondary-container: rgb(93 64 52);
+		--color-on-secondary-container: rgb(255 219 205);
+		--color-tertiary: rgb(210 199 143);
+		--color-on-tertiary: rgb(55 49 6);
+		--color-tertiary-container: rgb(78 71 27);
+		--color-on-tertiary-container: rgb(239 227 169);
+		--color-error: rgb(255 180 171);
+		--color-on-error: rgb(105 0 5);
+		--color-error-container: rgb(147 0 10);
+		--color-on-error-container: rgb(255 218 214);
+		--color-background: rgb(26 17 14);
+		--color-on-background: rgb(241 223 216);
+		--color-surface: rgb(26 17 14);
+		--color-on-surface: rgb(241 223 216);
+		--color-surface-variant: rgb(83 68 62);
+		--color-on-surface-variant: rgb(216 194 186);
+		--color-outline: rgb(160 141 133);
+		--color-outline-variant: rgb(83 68 62);
+		--color-shadow: rgb(0 0 0);
+		--color-scrim: rgb(0 0 0);
+		--color-inverse-surface: rgb(241 223 216);
+		--color-inverse-on-surface: rgb(56 46 42);
+		--color-inverse-primary: rgb(142 77 47);
+		--color-primary-fixed: rgb(255 219 205);
+		--color-on-primary-fixed: rgb(54 15 0);
+		--color-primary-fixed-dim: rgb(255 181 150);
+		--color-on-primary-fixed-variant: rgb(113 54 26);
+		--color-secondary-fixed: rgb(255 219 205);
+		--color-on-secondary-fixed: rgb(44 22 12);
+		--color-secondary-fixed-dim: rgb(230 190 173);
+		--color-on-secondary-fixed-variant: rgb(93 64 52);
+		--color-tertiary-fixed: rgb(239 227 169);
+		--color-on-tertiary-fixed: rgb(32 28 0);
+		--color-tertiary-fixed-dim: rgb(210 199 143);
+		--color-on-tertiary-fixed-variant: rgb(78 71 27);
+		--color-surface-dim: rgb(26 17 14);
+		--color-surface-bright: rgb(66 55 51);
+		--color-surface-container-lowest: rgb(20 12 9);
+		--color-surface-container-low: rgb(35 26 22);
+		--color-surface-container: rgb(39 30 26);
+		--color-surface-container-high: rgb(50 40 36);
+		--color-surface-container-highest: rgb(61 50 46);
+	}
+
+	[data-theme='telos'] {
+		--color-primary: rgb(207 189 254);
+		--color-surface-tint: rgb(207 189 254);
+		--color-on-primary: rgb(54 38 93);
+		--color-primary-container: rgb(77 61 117);
+		--color-on-primary-container: rgb(233 221 255);
+		--color-secondary: rgb(204 194 219);
+		--color-on-secondary: rgb(51 45 65);
+		--color-secondary-container: rgb(74 68 88);
+		--color-on-secondary-container: rgb(232 222 248);
+		--color-tertiary: rgb(239 184 200);
+		--color-on-tertiary: rgb(74 37 50);
+		--color-tertiary-container: rgb(99 59 72);
+		--color-on-tertiary-container: rgb(255 217 227);
+		--color-error: rgb(255 180 171);
+		--color-on-error: rgb(105 0 5);
+		--color-error-container: rgb(147 0 10);
+		--color-on-error-container: rgb(255 218 214);
+		--color-background: rgb(20 18 24);
+		--color-on-background: rgb(230 224 233);
+		--color-surface: rgb(20 18 24);
+		--color-on-surface: rgb(230 224 233);
+		--color-surface-variant: rgb(73 69 78);
+		--color-on-surface-variant: rgb(202 196 207);
+		--color-outline: rgb(148 143 153);
+		--color-outline-variant: rgb(73 69 78);
+		--color-shadow: rgb(0 0 0);
+		--color-scrim: rgb(0 0 0);
+		--color-inverse-surface: rgb(230 224 233);
+		--color-inverse-on-surface: rgb(50 47 53);
+		--color-inverse-primary: rgb(101 85 143);
+		--color-primary-fixed: rgb(233 221 255);
+		--color-on-primary-fixed: rgb(33 16 71);
+		--color-primary-fixed-dim: rgb(207 189 254);
+		--color-on-primary-fixed-variant: rgb(77 61 117);
+		--color-secondary-fixed: rgb(232 222 248);
+		--color-on-secondary-fixed: rgb(30 25 43);
+		--color-secondary-fixed-dim: rgb(204 194 219);
+		--color-on-secondary-fixed-variant: rgb(74 68 88);
+		--color-tertiary-fixed: rgb(255 217 227);
+		--color-on-tertiary-fixed: rgb(49 16 29);
+		--color-tertiary-fixed-dim: rgb(239 184 200);
+		--color-on-tertiary-fixed-variant: rgb(99 59 72);
+		--color-surface-dim: rgb(20 18 24);
+		--color-surface-bright: rgb(59 56 62);
+		--color-surface-container-lowest: rgb(15 13 19);
+		--color-surface-container-low: rgb(29 27 32);
+		--color-surface-container: rgb(33 31 36);
+		--color-surface-container-high: rgb(43 41 47);
+		--color-surface-container-highest: rgb(54 52 58);
 	}
 
 	[data-theme='jungle4'] {
-		--color-primary: var(--color-niagara-400);
-		--color-on-primary: var(--color-niagara-950);
-		--color-primary-container: var(--color-niagara-700);
-		--color-on-primary-container: var(--color-niagara-200);
+		/* --color-primary: var(--color-niagara-400); */
+		/* --color-on-primary: var(--color-niagara-950); */
+		/* --color-primary-container: var(--color-niagara-700); */
+		/* --color-on-primary-container: var(--color-niagara-200); */
+		/* --color-surface: var(--color-shark-950); */
+		/* --color-on-surface: var(--color-white); */
+		/* --color-on-surface-variant: var(--color-zinc-400); */
+		--color-primary: rgb(112 217 191);
+		--color-surface-tint: rgb(112 217 191);
+		--color-on-primary: rgb(0 56 45);
+		--color-primary-container: rgb(50 161 138);
+		--color-on-primary-container: rgb(0 45 36);
+		--color-secondary: rgb(167 207 194);
+		--color-on-secondary: rgb(16 54 46);
+		--color-secondary-container: rgb(43 80 70);
+		--color-on-secondary-container: rgb(154 193 180);
+		--color-tertiary: rgb(205 189 255);
+		--color-on-tertiary: rgb(53 35 105);
+		--color-tertiary-container: rgb(151 133 210);
+		--color-on-tertiary-container: rgb(43 24 95);
+		--color-error: rgb(255 180 171);
+		--color-on-error: rgb(105 0 5);
+		--color-error-container: rgb(147 0 10);
+		--color-on-error-container: rgb(255 218 214);
+		--color-background: rgb(15 20 19);
+		--color-on-background: rgb(223 228 224);
+		--color-surface: rgb(15 20 19);
+		--color-on-surface: rgb(223 228 224);
+		--color-surface-variant: rgb(61 73 69);
+		--color-on-surface-variant: rgb(189 201 196);
+		--color-outline: rgb(135 147 143);
+		--color-outline-variant: rgb(61 73 69);
+		--color-shadow: rgb(0 0 0);
+		--color-scrim: rgb(0 0 0);
+		--color-inverse-surface: rgb(223 228 224);
+		--color-inverse-on-surface: rgb(44 50 47);
+		--color-inverse-primary: rgb(0 107 89);
+		--color-primary-fixed: rgb(141 245 219);
+		--color-on-primary-fixed: rgb(0 32 26);
+		--color-primary-fixed-dim: rgb(112 217 191);
+		--color-on-primary-fixed-variant: rgb(0 81 67);
+		--color-secondary-fixed: rgb(195 235 222);
+		--color-on-secondary-fixed: rgb(0 32 26);
+		--color-secondary-fixed-dim: rgb(167 207 194);
+		--color-on-secondary-fixed-variant: rgb(41 77 68);
+		--color-tertiary-fixed: rgb(232 221 255);
+		--color-on-tertiary-fixed: rgb(32 9 84);
+		--color-tertiary-fixed-dim: rgb(205 189 255);
+		--color-on-tertiary-fixed-variant: rgb(76 59 129);
+		--color-surface-dim: rgb(15 20 19);
+		--color-surface-bright: rgb(53 58 56);
+		--color-surface-container-lowest: rgb(10 15 14);
+		--color-surface-container-low: rgb(23 29 27);
+		--color-surface-container: rgb(27 33 31);
+		--color-surface-container-high: rgb(38 43 41);
+		--color-surface-container-highest: rgb(48 54 52);
+	}
+
+	[data-theme='vaulta'] {
+		--color-primary: var(--color-cobalt-200);
+		--color-on-primary: var(--color-cobalt-800);
+		--color-primary-container: var(--color-cobalt-600);
+		--color-on-primary-container: var(--color-cobalt-100);
+	}
+
+	/* Vaulta */
+	[data-theme='jungle4'] {
+		--color-primary: rgb(190 194 255);
+		--color-surface-tint: rgb(190 194 255);
+		--color-on-primary: rgb(0 8 168);
+		--color-primary-container: rgb(46 59 255);
+		--color-on-primary-container: rgb(209 211 255);
+		--color-secondary: rgb(190 194 255);
+		--color-on-secondary: rgb(29 35 126);
+		--color-secondary-container: rgb(56 63 152);
+		--color-on-secondary-container: rgb(173 178 255);
+		--color-tertiary: rgb(246 173 255);
+		--color-on-tertiary: rgb(86 0 104);
+		--color-tertiary-container: rgb(157 5 188);
+		--color-on-tertiary-container: rgb(251 196 255);
+		--color-error: rgb(255 180 171);
+		--color-on-error: rgb(105 0 5);
+		--color-error-container: rgb(147 0 10);
+		--color-on-error-container: rgb(255 218 214);
+		--color-background: rgb(18 19 29);
+		--color-on-background: rgb(227 225 240);
+		--color-surface: rgb(18 19 29);
+		--color-on-surface: rgb(227 225 240);
+		--color-surface-variant: rgb(69 69 87);
+		--color-on-surface-variant: rgb(197 197 218);
+		--color-outline: rgb(143 143 163);
+		--color-outline-variant: rgb(69 69 87);
+		--color-shadow: rgb(0 0 0);
+		--color-scrim: rgb(0 0 0);
+		--color-inverse-surface: rgb(227 225 240);
+		--color-inverse-on-surface: rgb(47 47 59);
+		--color-inverse-primary: rgb(49 61 255);
+		--color-primary-fixed: rgb(224 224 255);
+		--color-on-primary-fixed: rgb(0 3 107);
+		--color-primary-fixed-dim: rgb(190 194 255);
+		--color-on-primary-fixed-variant: rgb(0 15 233);
+		--color-secondary-fixed: rgb(224 224 255);
+		--color-on-secondary-fixed: rgb(0 3 107);
+		--color-secondary-fixed-dim: rgb(190 194 255);
+		--color-on-secondary-fixed-variant: rgb(53 61 149);
+		--color-tertiary-fixed: rgb(254 214 255);
+		--color-on-tertiary-fixed: rgb(53 0 65);
+		--color-tertiary-fixed-dim: rgb(246 173 255);
+		--color-on-tertiary-fixed-variant: rgb(122 0 147);
+		--color-surface-dim: rgb(18 19 29);
+		--color-surface-bright: rgb(56 56 68);
+		--color-surface-container-lowest: rgb(13 13 23);
+		--color-surface-container-low: rgb(26 27 37);
+		--color-surface-container: rgb(30 31 41);
+		--color-surface-container-high: rgb(41 41 52);
+		--color-surface-container-highest: rgb(51 52 63);
+	}
+
+	/* Light Mode Themes */
+	@media (prefers-color-scheme: light) {
+		[data-theme='eos'] {
+			--color-primary: rgb(142 77 47);
+			--color-surface-tint: rgb(142 77 47);
+			--color-on-primary: rgb(255 255 255);
+			--color-primary-container: rgb(255 219 205);
+			--color-on-primary-container: rgb(113 54 26);
+			--color-secondary: rgb(119 87 74);
+			--color-on-secondary: rgb(255 255 255);
+			--color-secondary-container: rgb(255 219 205);
+			--color-on-secondary-container: rgb(93 64 52);
+			--color-tertiary: rgb(103 95 48);
+			--color-on-tertiary: rgb(255 255 255);
+			--color-tertiary-container: rgb(239 227 169);
+			--color-on-tertiary-container: rgb(78 71 27);
+			--color-error: rgb(186 26 26);
+			--color-on-error: rgb(255 255 255);
+			--color-error-container: rgb(255 218 214);
+			--color-on-error-container: rgb(147 0 10);
+			--color-background: rgb(255 248 246);
+			--color-on-background: rgb(35 26 22);
+			--color-surface: rgb(255 248 246);
+			--color-on-surface: rgb(35 26 22);
+			--color-surface-variant: rgb(245 222 213);
+			--color-on-surface-variant: rgb(83 68 62);
+			--color-outline: rgb(133 115 108);
+			--color-outline-variant: rgb(216 194 186);
+			--color-shadow: rgb(0 0 0);
+			--color-scrim: rgb(0 0 0);
+			--color-inverse-surface: rgb(56 46 42);
+			--color-inverse-on-surface: rgb(255 237 231);
+			--color-inverse-primary: rgb(255 181 150);
+			--color-primary-fixed: rgb(255 219 205);
+			--color-on-primary-fixed: rgb(54 15 0);
+			--color-primary-fixed-dim: rgb(255 181 150);
+			--color-on-primary-fixed-variant: rgb(113 54 26);
+			--color-secondary-fixed: rgb(255 219 205);
+			--color-on-secondary-fixed: rgb(44 22 12);
+			--color-secondary-fixed-dim: rgb(230 190 173);
+			--color-on-secondary-fixed-variant: rgb(93 64 52);
+			--color-tertiary-fixed: rgb(239 227 169);
+			--color-on-tertiary-fixed: rgb(32 28 0);
+			--color-tertiary-fixed-dim: rgb(210 199 143);
+			--color-on-tertiary-fixed-variant: rgb(78 71 27);
+			--color-surface-dim: rgb(232 214 208);
+			--color-surface-bright: rgb(255 248 246);
+			--color-surface-container-lowest: rgb(255 255 255);
+			--color-surface-container-low: rgb(255 241 236);
+			--color-surface-container: rgb(252 234 228);
+			--color-surface-container-high: rgb(246 228 222);
+			--color-surface-container-highest: rgb(241 223 216);
+		}
+
+		[data-theme='jungle4'] {
+			--color-primary: rgb(0 104 87);
+			--color-surface-tint: rgb(0 107 89);
+			--color-on-primary: rgb(255 255 255);
+			--color-primary-container: rgb(0 132 111);
+			--color-on-primary-container: rgb(244 255 250);
+			--color-secondary: rgb(65 101 91);
+			--color-on-secondary: rgb(255 255 255);
+			--color-secondary-container: rgb(192 232 219);
+			--color-on-secondary-container: rgb(69 106 96);
+			--color-tertiary: rgb(98 80 152);
+			--color-on-tertiary: rgb(255 255 255);
+			--color-tertiary-container: rgb(123 105 179);
+			--color-on-tertiary-container: rgb(255 251 255);
+			--color-error: rgb(186 26 26);
+			--color-on-error: rgb(255 255 255);
+			--color-error-container: rgb(255 218 214);
+			--color-on-error-container: rgb(147 0 10);
+			--color-background: rgb(246 250 247);
+			--color-on-background: rgb(23 29 27);
+			--color-surface: rgb(246 250 247);
+			--color-on-surface: rgb(23 29 27);
+			--color-surface-variant: rgb(217 229 224);
+			--color-on-surface-variant: rgb(61 73 69);
+			--color-outline: rgb(109 122 117);
+			--color-outline-variant: rgb(189 201 196);
+			--color-shadow: rgb(0 0 0);
+			--color-scrim: rgb(0 0 0);
+			--color-inverse-surface: rgb(44 50 47);
+			--color-inverse-on-surface: rgb(237 242 238);
+			--color-inverse-primary: rgb(112 217 191);
+			--color-primary-fixed: rgb(141 245 219);
+			--color-on-primary-fixed: rgb(0 32 26);
+			--color-primary-fixed-dim: rgb(112 217 191);
+			--color-on-primary-fixed-variant: rgb(0 81 67);
+			--color-secondary-fixed: rgb(195 235 222);
+			--color-on-secondary-fixed: rgb(0 32 26);
+			--color-secondary-fixed-dim: rgb(167 207 194);
+			--color-on-secondary-fixed-variant: rgb(41 77 68);
+			--color-tertiary-fixed: rgb(232 221 255);
+			--color-on-tertiary-fixed: rgb(32 9 84);
+			--color-tertiary-fixed-dim: rgb(205 189 255);
+			--color-on-tertiary-fixed-variant: rgb(76 59 129);
+			--color-surface-dim: rgb(214 219 216);
+			--color-surface-bright: rgb(246 250 247);
+			--color-surface-container-lowest: rgb(255 255 255);
+			--color-surface-container-low: rgb(240 245 241);
+			--color-surface-container: rgb(234 239 236);
+			--color-surface-container-high: rgb(228 233 230);
+			--color-surface-container-highest: rgb(223 228 224);
+		}
+
+		[data-theme='vaulta'] {
+			--color-primary: var(--color-cobalt-700);
+			--color-on-primary: var(--color-cobalt-50);
+			--color-primary-container: var(--color-cobalt-600);
+			--color-on-primary-container: var(--color-cobalt-100);
+		}
+
+		/* Vaulta */
+		[data-theme='jungle4'] {
+			--color-primary: rgb(0 15 230);
+			--color-surface-tint: rgb(49 61 255);
+			--color-on-primary: rgb(255 255 255);
+			--color-primary-container: rgb(46 59 255);
+			--color-on-primary-container: rgb(209 211 255);
+			--color-secondary: rgb(78 85 175);
+			--color-on-secondary: rgb(255 255 255);
+			--color-secondary-container: rgb(153 161 255);
+			--color-on-secondary-container: rgb(43 50 139);
+			--color-tertiary: rgb(120 0 144);
+			--color-on-tertiary: rgb(255 255 255);
+			--color-tertiary-container: rgb(157 5 188);
+			--color-on-tertiary-container: rgb(251 196 255);
+			--color-error: rgb(186 26 26);
+			--color-on-error: rgb(255 255 255);
+			--color-error-container: rgb(255 218 214);
+			--color-on-error-container: rgb(147 0 10);
+			--color-background: rgb(251 248 255);
+			--color-on-background: rgb(26 27 37);
+			--color-surface: rgb(251 248 255);
+			--color-on-surface: rgb(26 27 37);
+			--color-surface-variant: rgb(226 224 246);
+			--color-on-surface-variant: rgb(69 69 87);
+			--color-outline: rgb(117 117 137);
+			--color-outline-variant: rgb(197 197 218);
+			--color-shadow: rgb(0 0 0);
+			--color-scrim: rgb(0 0 0);
+			--color-inverse-surface: rgb(47 47 59);
+			--color-inverse-on-surface: rgb(241 239 254);
+			--color-inverse-primary: rgb(190 194 255);
+			--color-primary-fixed: rgb(224 224 255);
+			--color-on-primary-fixed: rgb(0 3 107);
+			--color-primary-fixed-dim: rgb(190 194 255);
+			--color-on-primary-fixed-variant: rgb(0 15 233);
+			--color-secondary-fixed: rgb(224 224 255);
+			--color-on-secondary-fixed: rgb(0 3 107);
+			--color-secondary-fixed-dim: rgb(190 194 255);
+			--color-on-secondary-fixed-variant: rgb(53 61 149);
+			--color-tertiary-fixed: rgb(254 214 255);
+			--color-on-tertiary-fixed: rgb(53 0 65);
+			--color-tertiary-fixed-dim: rgb(246 173 255);
+			--color-on-tertiary-fixed-variant: rgb(122 0 147);
+			--color-surface-dim: rgb(218 216 231);
+			--color-surface-bright: rgb(251 248 255);
+			--color-surface-container-lowest: rgb(255 255 255);
+			--color-surface-container-low: rgb(244 242 255);
+			--color-surface-container: rgb(238 236 251);
+			--color-surface-container-high: rgb(232 230 246);
+			--color-surface-container-highest: rgb(227 225 240);
+		}
 	}
 }
 
@@ -205,7 +656,8 @@
 
 @utility card {
 	/* Layout */
-	@apply bg-shark-900/20 grid gap-4 rounded-xl p-5;
+	/* @apply bg-shark-900/20 grid gap-4 rounded-xl p-5; */
+	@apply bg-surface-container-low grid gap-4 rounded-xl p-5;
 }
 
 @utility layout-stack {
@@ -269,11 +721,11 @@
 }
 
 @utility table-row-border {
-	@apply border-mine-900 border-b last:border-none;
+	@apply border-outline-variant border-b last:border-none;
 }
 
 @utility table-row-background {
-	@apply odd:via-mine-950 data-[hover-effect=false]:odd:hover:via-mine-950 bg-linear-to-r from-transparent to-transparent hover:via-sky-500/10 data-[active=true]:via-sky-500/10 data-[clickable=true]:cursor-pointer data-[hover-effect=false]:hover:via-transparent;
+	@apply odd:via-surface-container-high/50 data-[hover-effect=false]:odd:hover:via-mine-950 hover:via-primary/10 data-[active=true]:via-primary/10 bg-linear-to-r from-transparent to-transparent data-[clickable=true]:cursor-pointer data-[hover-effect=false]:hover:via-transparent;
 }
 
 @utility bg-hero-gradient {
@@ -281,7 +733,8 @@
 }
 
 @utility text-muted {
-	@apply text-zinc-400;
+	/* @apply text-zinc-400; */
+	@apply text-on-surface-variant;
 }
 
 @utility subgrid {
@@ -290,14 +743,14 @@
 
 @layer components {
 	html {
-		@apply bg-shark-950 h-full text-white;
+		@apply bg-surface text-on-surface h-full;
 		color-scheme: dark;
 		touch-action: manipulation;
 		scrollbar-gutter: stable;
 	}
 
 	body {
-		@apply h-auto min-h-svh text-white;
+		@apply h-auto min-h-svh;
 	}
 
 	p,
