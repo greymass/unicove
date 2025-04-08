@@ -56,15 +56,15 @@
 		<div class="text-primary flex h-fit w-fit items-center">
 			<h1 class="text-on-surface mb-2 text-3xl leading-none font-bold">{props.title}</h1>
 			{#if routePath === 'account'}
-				<CopyButton data={props.title} />
+				<CopyButton data={props.title} hideBackground />
 				{#if props.contract}
-					<IconButton icon={Code} href={contractPath} />
+					<IconButton icon={Code} href={contractPath} hideBackground />
 				{/if}
 			{/if}
 
 			{#if routePath === 'contract'}
-				<CopyButton data={props.title} />
-				<IconButton icon={User} href={accountPath} />
+				<CopyButton data={props.title} hideBackground />
+				<IconButton icon={User} href={accountPath} hideBackground />
 			{/if}
 		</div>
 
