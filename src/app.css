@@ -656,7 +656,6 @@
 
 @utility card {
 	/* Layout */
-	/* @apply bg-shark-900/20 grid gap-4 rounded-xl p-5; */
 	@apply bg-surface-container-low grid gap-4 rounded-xl p-5;
 }
 
@@ -725,7 +724,7 @@
 }
 
 @utility table-row-background {
-	@apply odd:via-surface-container-high/50 data-[hover-effect=false]:odd:hover:via-mine-950 hover:via-primary/10 data-[active=true]:via-primary/10 bg-linear-to-r from-transparent to-transparent data-[clickable=true]:cursor-pointer data-[hover-effect=false]:hover:via-transparent;
+	@apply odd:via-outline-variant/10 data-[hover-effect=false]:odd:hover:via-outline-variant/10 hover:via-primary/10 data-[active=true]:via-primary/10 bg-linear-to-r from-transparent to-transparent data-[clickable=true]:cursor-pointer data-[hover-effect=false]:hover:via-transparent;
 }
 
 @utility bg-hero-gradient {
@@ -733,7 +732,6 @@
 }
 
 @utility text-muted {
-	/* @apply text-zinc-400; */
 	@apply text-on-surface-variant;
 }
 
@@ -744,7 +742,7 @@
 @layer components {
 	html {
 		@apply bg-surface text-on-surface h-full;
-		color-scheme: dark;
+		color-scheme: dark light;
 		touch-action: manipulation;
 		scrollbar-gutter: stable;
 
