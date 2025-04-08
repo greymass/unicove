@@ -57,10 +57,12 @@
 	>
 		{#if collapsed}
 			<button
-				class="from-surface-container-low absolute inset-0 top-0 left-0 flex cursor-pointer items-end justify-center bg-linear-to-t to-transparent to-40% pb-4 font-sans font-semibold"
+				class="from-surface-container-low group absolute inset-0 top-0 left-0 flex cursor-pointer items-end justify-center bg-linear-to-t to-transparent to-40% pb-4 font-sans font-semibold"
 				onclick={expandNode}
 			>
-				{m.common_more()}
+				<span class="group-hover:bg-surface-container-high rounded-full bg-transparent px-4 py-2">
+					{m.common_more()}
+				</span>
 			</button>
 		{/if}
 		{#if props.json}
