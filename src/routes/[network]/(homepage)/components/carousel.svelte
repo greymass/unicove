@@ -19,7 +19,7 @@
 </script>
 
 <section class="@container col-span-full">
-	<div class="bg-mine-950 grid min-h-72 rounded-2xl px-4 @xl:grid-cols-2 @xl:gap-4">
+	<div class="bg-surface-container grid min-h-72 rounded-2xl px-4 @xl:grid-cols-2 @xl:gap-4">
 		<div class="grid place-items-center">
 			<svg
 				class="col-start-1 row-start-1 h-full w-full object-cover"
@@ -31,17 +31,17 @@
 			>
 				<path
 					d="M201.577-49.292h231.851l115.925 200.789-115.925 200.788H201.577L85.652 151.497 201.577-49.292Z"
-					stroke="#fff"
+					stroke="currentColor"
 					stroke-opacity=".1"
 				/>
 				<path
 					d="M179.906 13.903 367.864-36.46l137.594 137.594-50.363 187.957-187.957 50.363L129.543 201.86l50.363-187.957Z"
-					stroke="#fff"
+					stroke="currentColor"
 					stroke-opacity=".5"
 				/>
 				<path
 					d="M179.009 72.29 317.506-7.424l138.497 79.712v159.422l-138.497 79.712-138.497-79.712V72.289Z"
-					stroke="#fff"
+					stroke="currentColor"
 				/>
 			</svg>
 			<div
@@ -52,7 +52,7 @@
 					<path d="M18.008 0v36M36.008 18h-36" stroke="#fff" />
 				</svg>
 				<img
-					class="bg-mine-950 h-40 rounded-full object-contain px-2 py-4"
+					class="bg-surface-container h-40 rounded-full object-contain px-2 py-4"
 					src={networkLogo}
 					alt={networkName}
 					height="160"
