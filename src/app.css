@@ -408,57 +408,57 @@
 	}
 
 	/* Vaulta */
-	[data-theme='jungle4'] {
-		--color-primary: rgb(190 194 255);
-		--color-surface-tint: rgb(190 194 255);
-		--color-on-primary: rgb(0 8 168);
-		--color-primary-container: rgb(46 59 255);
-		--color-on-primary-container: rgb(209 211 255);
-		--color-secondary: rgb(190 194 255);
-		--color-on-secondary: rgb(29 35 126);
-		--color-secondary-container: rgb(56 63 152);
-		--color-on-secondary-container: rgb(173 178 255);
-		--color-tertiary: rgb(246 173 255);
-		--color-on-tertiary: rgb(86 0 104);
-		--color-tertiary-container: rgb(157 5 188);
-		--color-on-tertiary-container: rgb(251 196 255);
-		--color-error: rgb(255 180 171);
-		--color-on-error: rgb(105 0 5);
-		--color-error-container: rgb(147 0 10);
-		--color-on-error-container: rgb(255 218 214);
-		--color-background: rgb(18 19 29);
-		--color-on-background: rgb(227 225 240);
-		--color-surface: rgb(18 19 29);
-		--color-on-surface: rgb(227 225 240);
-		--color-surface-variant: rgb(69 69 87);
-		--color-on-surface-variant: rgb(197 197 218);
-		--color-outline: rgb(143 143 163);
-		--color-outline-variant: rgb(69 69 87);
-		--color-shadow: rgb(0 0 0);
-		--color-scrim: rgba(0 0 0 / 0.5);
-		--color-inverse-surface: rgb(227 225 240);
-		--color-inverse-on-surface: rgb(47 47 59);
-		--color-inverse-primary: rgb(49 61 255);
-		--color-primary-fixed: rgb(224 224 255);
-		--color-on-primary-fixed: rgb(0 3 107);
-		--color-primary-fixed-dim: rgb(190 194 255);
-		--color-on-primary-fixed-variant: rgb(0 15 233);
-		--color-secondary-fixed: rgb(224 224 255);
-		--color-on-secondary-fixed: rgb(0 3 107);
-		--color-secondary-fixed-dim: rgb(190 194 255);
-		--color-on-secondary-fixed-variant: rgb(53 61 149);
-		--color-tertiary-fixed: rgb(254 214 255);
-		--color-on-tertiary-fixed: rgb(53 0 65);
-		--color-tertiary-fixed-dim: rgb(246 173 255);
-		--color-on-tertiary-fixed-variant: rgb(122 0 147);
-		--color-surface-dim: rgb(18 19 29);
-		--color-surface-bright: rgb(56 56 68);
-		--color-surface-container-lowest: rgb(13 13 23);
-		--color-surface-container-low: rgb(26 27 37);
-		--color-surface-container: rgb(30 31 41);
-		--color-surface-container-high: rgb(41 41 52);
-		--color-surface-container-highest: rgb(51 52 63);
-	}
+	/* [data-theme='jungle4'] { */
+	/* 	--color-primary: rgb(190 194 255); */
+	/* 	--color-surface-tint: rgb(190 194 255); */
+	/* 	--color-on-primary: rgb(0 8 168); */
+	/* 	--color-primary-container: rgb(46 59 255); */
+	/* 	--color-on-primary-container: rgb(209 211 255); */
+	/* 	--color-secondary: rgb(190 194 255); */
+	/* 	--color-on-secondary: rgb(29 35 126); */
+	/* 	--color-secondary-container: rgb(56 63 152); */
+	/* 	--color-on-secondary-container: rgb(173 178 255); */
+	/* 	--color-tertiary: rgb(246 173 255); */
+	/* 	--color-on-tertiary: rgb(86 0 104); */
+	/* 	--color-tertiary-container: rgb(157 5 188); */
+	/* 	--color-on-tertiary-container: rgb(251 196 255); */
+	/* 	--color-error: rgb(255 180 171); */
+	/* 	--color-on-error: rgb(105 0 5); */
+	/* 	--color-error-container: rgb(147 0 10); */
+	/* 	--color-on-error-container: rgb(255 218 214); */
+	/* 	--color-background: rgb(18 19 29); */
+	/* 	--color-on-background: rgb(227 225 240); */
+	/* 	--color-surface: rgb(18 19 29); */
+	/* 	--color-on-surface: rgb(227 225 240); */
+	/* 	--color-surface-variant: rgb(69 69 87); */
+	/* 	--color-on-surface-variant: rgb(197 197 218); */
+	/* 	--color-outline: rgb(143 143 163); */
+	/* 	--color-outline-variant: rgb(69 69 87); */
+	/* 	--color-shadow: rgb(0 0 0); */
+	/* 	--color-scrim: rgba(0 0 0 / 0.5); */
+	/* 	--color-inverse-surface: rgb(227 225 240); */
+	/* 	--color-inverse-on-surface: rgb(47 47 59); */
+	/* 	--color-inverse-primary: rgb(49 61 255); */
+	/* 	--color-primary-fixed: rgb(224 224 255); */
+	/* 	--color-on-primary-fixed: rgb(0 3 107); */
+	/* 	--color-primary-fixed-dim: rgb(190 194 255); */
+	/* 	--color-on-primary-fixed-variant: rgb(0 15 233); */
+	/* 	--color-secondary-fixed: rgb(224 224 255); */
+	/* 	--color-on-secondary-fixed: rgb(0 3 107); */
+	/* 	--color-secondary-fixed-dim: rgb(190 194 255); */
+	/* 	--color-on-secondary-fixed-variant: rgb(53 61 149); */
+	/* 	--color-tertiary-fixed: rgb(254 214 255); */
+	/* 	--color-on-tertiary-fixed: rgb(53 0 65); */
+	/* 	--color-tertiary-fixed-dim: rgb(246 173 255); */
+	/* 	--color-on-tertiary-fixed-variant: rgb(122 0 147); */
+	/* 	--color-surface-dim: rgb(18 19 29); */
+	/* 	--color-surface-bright: rgb(56 56 68); */
+	/* 	--color-surface-container-lowest: rgb(13 13 23); */
+	/* 	--color-surface-container-low: rgb(26 27 37); */
+	/* 	--color-surface-container: rgb(30 31 41); */
+	/* 	--color-surface-container-high: rgb(41 41 52); */
+	/* 	--color-surface-container-highest: rgb(51 52 63); */
+	/* } */
 
 	/* Light Mode Themes */
 	@media (prefers-color-scheme: light) {
@@ -574,57 +574,57 @@
 		}
 
 		/* Vaulta */
-		[data-theme='jungle4'] {
-			--color-primary: rgb(0 15 230);
-			--color-surface-tint: rgb(49 61 255);
-			--color-on-primary: rgb(255 255 255);
-			--color-primary-container: rgb(46 59 255);
-			--color-on-primary-container: rgb(209 211 255);
-			--color-secondary: rgb(78 85 175);
-			--color-on-secondary: rgb(255 255 255);
-			--color-secondary-container: rgb(153 161 255);
-			--color-on-secondary-container: rgb(43 50 139);
-			--color-tertiary: rgb(120 0 144);
-			--color-on-tertiary: rgb(255 255 255);
-			--color-tertiary-container: rgb(157 5 188);
-			--color-on-tertiary-container: rgb(251 196 255);
-			--color-error: rgb(186 26 26);
-			--color-on-error: rgb(255 255 255);
-			--color-error-container: rgb(255 218 214);
-			--color-on-error-container: rgb(147 0 10);
-			--color-background: rgb(251 248 255);
-			--color-on-background: rgb(26 27 37);
-			--color-surface: rgb(251 248 255);
-			--color-on-surface: rgb(26 27 37);
-			--color-surface-variant: rgb(226 224 246);
-			--color-on-surface-variant: rgb(69 69 87);
-			--color-outline: rgb(117 117 137);
-			--color-outline-variant: rgb(197 197 218);
-			--color-shadow: rgb(0 0 0);
-			--color-scrim: rgba(0 0 0 / 0.5);
-			--color-inverse-surface: rgb(47 47 59);
-			--color-inverse-on-surface: rgb(241 239 254);
-			--color-inverse-primary: rgb(190 194 255);
-			--color-primary-fixed: rgb(224 224 255);
-			--color-on-primary-fixed: rgb(0 3 107);
-			--color-primary-fixed-dim: rgb(190 194 255);
-			--color-on-primary-fixed-variant: rgb(0 15 233);
-			--color-secondary-fixed: rgb(224 224 255);
-			--color-on-secondary-fixed: rgb(0 3 107);
-			--color-secondary-fixed-dim: rgb(190 194 255);
-			--color-on-secondary-fixed-variant: rgb(53 61 149);
-			--color-tertiary-fixed: rgb(254 214 255);
-			--color-on-tertiary-fixed: rgb(53 0 65);
-			--color-tertiary-fixed-dim: rgb(246 173 255);
-			--color-on-tertiary-fixed-variant: rgb(122 0 147);
-			--color-surface-dim: rgb(218 216 231);
-			--color-surface-bright: rgb(251 248 255);
-			--color-surface-container-lowest: rgb(255 255 255);
-			--color-surface-container-low: rgb(244 242 255);
-			--color-surface-container: rgb(238 236 251);
-			--color-surface-container-high: rgb(232 230 246);
-			--color-surface-container-highest: rgb(227 225 240);
-		}
+		/* [data-theme='jungle4'] { */
+		/* 	--color-primary: rgb(0 15 230); */
+		/* 	--color-surface-tint: rgb(49 61 255); */
+		/* 	--color-on-primary: rgb(255 255 255); */
+		/* 	--color-primary-container: rgb(46 59 255); */
+		/* 	--color-on-primary-container: rgb(209 211 255); */
+		/* 	--color-secondary: rgb(78 85 175); */
+		/* 	--color-on-secondary: rgb(255 255 255); */
+		/* 	--color-secondary-container: rgb(153 161 255); */
+		/* 	--color-on-secondary-container: rgb(43 50 139); */
+		/* 	--color-tertiary: rgb(120 0 144); */
+		/* 	--color-on-tertiary: rgb(255 255 255); */
+		/* 	--color-tertiary-container: rgb(157 5 188); */
+		/* 	--color-on-tertiary-container: rgb(251 196 255); */
+		/* 	--color-error: rgb(186 26 26); */
+		/* 	--color-on-error: rgb(255 255 255); */
+		/* 	--color-error-container: rgb(255 218 214); */
+		/* 	--color-on-error-container: rgb(147 0 10); */
+		/* 	--color-background: rgb(251 248 255); */
+		/* 	--color-on-background: rgb(26 27 37); */
+		/* 	--color-surface: rgb(251 248 255); */
+		/* 	--color-on-surface: rgb(26 27 37); */
+		/* 	--color-surface-variant: rgb(226 224 246); */
+		/* 	--color-on-surface-variant: rgb(69 69 87); */
+		/* 	--color-outline: rgb(117 117 137); */
+		/* 	--color-outline-variant: rgb(197 197 218); */
+		/* 	--color-shadow: rgb(0 0 0); */
+		/* 	--color-scrim: rgba(0 0 0 / 0.5); */
+		/* 	--color-inverse-surface: rgb(47 47 59); */
+		/* 	--color-inverse-on-surface: rgb(241 239 254); */
+		/* 	--color-inverse-primary: rgb(190 194 255); */
+		/* 	--color-primary-fixed: rgb(224 224 255); */
+		/* 	--color-on-primary-fixed: rgb(0 3 107); */
+		/* 	--color-primary-fixed-dim: rgb(190 194 255); */
+		/* 	--color-on-primary-fixed-variant: rgb(0 15 233); */
+		/* 	--color-secondary-fixed: rgb(224 224 255); */
+		/* 	--color-on-secondary-fixed: rgb(0 3 107); */
+		/* 	--color-secondary-fixed-dim: rgb(190 194 255); */
+		/* 	--color-on-secondary-fixed-variant: rgb(53 61 149); */
+		/* 	--color-tertiary-fixed: rgb(254 214 255); */
+		/* 	--color-on-tertiary-fixed: rgb(53 0 65); */
+		/* 	--color-tertiary-fixed-dim: rgb(246 173 255); */
+		/* 	--color-on-tertiary-fixed-variant: rgb(122 0 147); */
+		/* 	--color-surface-dim: rgb(218 216 231); */
+		/* 	--color-surface-bright: rgb(251 248 255); */
+		/* 	--color-surface-container-lowest: rgb(255 255 255); */
+		/* 	--color-surface-container-low: rgb(244 242 255); */
+		/* 	--color-surface-container: rgb(238 236 251); */
+		/* 	--color-surface-container-high: rgb(232 230 246); */
+		/* 	--color-surface-container-highest: rgb(227 225 240); */
+		/* } */
 	}
 }
 

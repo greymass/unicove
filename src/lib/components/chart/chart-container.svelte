@@ -62,7 +62,7 @@
 	<header class="flex justify-between">
 		<div>
 			<p class="text-muted">{pair}</p>
-			<p class="text-xl font-semibold text-on-surface">{currentPrice}</p>
+			<p class="text-on-surface text-xl font-semibold">{currentPrice}</p>
 			<p class="text-muted">{percentChange}</p>
 		</div>
 		<Select id="range-select" options={range} bind:selected={selectedRange} />
@@ -75,7 +75,7 @@
 		{/if}
 	</div>
 
-	<hr class="bg-mine-800 h-px border-0" />
+	<hr class="bg-outline h-px border-0" />
 
 	<div class="flex items-center justify-between font-medium">
 		<span class="text-muted">{startDate}</span>
