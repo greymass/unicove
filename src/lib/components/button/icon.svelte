@@ -64,7 +64,7 @@
 >
 	<div
 		data-variant={variant}
-		class="state-layer bg-mine-500 pointer-events-none size-8 rounded-full opacity-0 transition-opacity group-hover:opacity-8 group-focus-visible:opacity-10 group-active:group-hover:opacity-16 group-disabled:hidden group-data-[size=large]:size-10 data-[variant=filled]:opacity-8"
+		class="state-layer bg-on-surface-variant pointer-events-none size-8 rounded-full opacity-0 transition-opacity group-hover:opacity-8 group-focus-visible:opacity-10 group-active:group-hover:opacity-16 group-disabled:hidden group-data-[size=large]:size-10 data-[variant=filled]:opacity-8"
 	></div>
 
 	{#if props.icon}
