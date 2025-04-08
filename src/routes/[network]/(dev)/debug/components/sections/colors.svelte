@@ -1,7 +1,5 @@
 <script lang="ts">
 	import { Stack } from '$lib/components/layout';
-	// import Card from '$lib/components/layout/box/card.svelte';
-	import Cluster from '$lib/components/layout/cluster.svelte';
 	// import { cn } from '$lib/utils/style';
 
 	// const values = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
@@ -73,5 +71,6 @@
 		{@render roles('vaulta')}
 		{@render roles('telos')}
 		{@render roles('wax')}
+		{@render roles('kylin')}
 	</div>
 </Stack>

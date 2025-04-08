@@ -13,7 +13,10 @@
 	const options = [
 		{ label: 'eos', value: 'eos' },
 		{ label: 'jungle4', value: 'jungle4' },
-		{ label: 'vaulta', value: 'vaulta' }
+		{ label: 'vaulta', value: 'vaulta' },
+		{ label: 'wax', value: 'wax' },
+		{ label: 'telos', value: 'telos' },
+		{ label: 'kylin', value: 'kylin' }
 	];
 </script>
 
