@@ -22,13 +22,15 @@
 	$effect(() => {
 		if (node && collapsible && node.offsetHeight > collapseThreshold) {
 			collapsed = true;
+			node.classList.replace('overflow-x-auto', 'overflow-x-hidden');
 		}
 	});
 
 	function expandNode() {
 		if (node) {
 			collapsed = false;
-			node.classList.add('max-h-full');
+			node.classList.replace('max-h-56', 'max-h-full');
+			node.classList.replace('overflow-x-hidden', 'overflow-x-auto');
 		}
 	}
 </script>
@@ -51,7 +53,7 @@
 		bind:this={node}
 		class={cn(
 			'bg-surface-container-low text-on-surface relative overflow-x-auto overflow-y-hidden rounded-xl p-6 font-mono text-sm',
-			collapsible ? 'max-h-56' : 'max-h-full',
+			collapsible ? 'max-h-56' : 'max-h-full ',
 			props.class
 		)}
 	>
