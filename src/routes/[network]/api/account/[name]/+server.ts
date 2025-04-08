@@ -189,8 +189,7 @@ async function getBalances(
 	if (network.supports('lightapi')) {
 		const results = await loadBalances(network, getaccount.account, network.fetch);
 		balances.push(...results);
-	}
-	if (getaccount.balance) {
+	} else if (getaccount.balance) {
 		balances.push(
 			TokenBalance.from({
 				token: network.getSystemToken(),
