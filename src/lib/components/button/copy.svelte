@@ -28,7 +28,7 @@
 </script>
 
 {#if browser && 'clipboard' in navigator}
-	<IconButton icon={Copy} onclick={copyToClipboard} />
+	<IconButton icon={Copy} onclick={copyToClipboard} {...props} />
 	{#if hint}
 		<!-- 		<span -->
 		<!-- 			in:fly={{ x: -20, easing: quartOut, duration: 100 }} -->
