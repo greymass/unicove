@@ -118,7 +118,7 @@
 
 {#snippet Ricardian()}
 	<Code>
-		<div class="bg-shark-950 overflow-auto rounded-sm p-4">
+		<div class="bg-surface-container overflow-auto rounded-sm p-4">
 			Rendering of the ricardian contract is not yet supported.
 		</div>
 	</Code>
@@ -134,7 +134,7 @@
 
 {#snippet Header()}
 	<div class="flex flex-wrap items-center gap-x-4 gap-y-2">
-		<picture class="bg-shark-950/30 grid size-14 place-items-center rounded-full">
+		<picture class="bg-surface-container-high grid size-14 place-items-center rounded-full">
 			<SquareTerminal />
 		</picture>
 

@@ -17,12 +17,13 @@
 			href: string;
 		};
 		title?: string;
+		class?: string;
 	}
 
-	const { cta, title = m.common_account_balance() }: Props = $props();
+	const { cta, title = m.common_account_balance(), ...props }: Props = $props();
 </script>
 
-<Card {title}>
+<Card class={props.class} {title}>
 	<Stack>
 		<Stack class="gap-2">
 			<h4 class="text-muted text-base leading-none">{m.common_available()}</h4>
