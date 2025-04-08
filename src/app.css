@@ -182,7 +182,7 @@
 	--color-outline: rgb(135 147 143);
 	--color-outline-variant: rgb(61 73 69);
 	--color-shadow: rgb(0 0 0);
-	--color-scrim: rgb(0 0 0);
+	--color-scrim: rgba(0 0 0 / 0.5);
 	--color-inverse-surface: rgb(223 228 224);
 	--color-inverse-on-surface: rgb(44 50 47);
 	--color-inverse-primary: rgb(0 107 89);
@@ -264,7 +264,7 @@
 		--color-outline: rgb(160 141 133);
 		--color-outline-variant: rgb(83 68 62);
 		--color-shadow: rgb(0 0 0);
-		--color-scrim: rgb(0 0 0);
+		--color-scrim: rgba(0 0 0 / 0.5);
 		--color-inverse-surface: rgb(241 223 216);
 		--color-inverse-on-surface: rgb(56 46 42);
 		--color-inverse-primary: rgb(142 77 47);
@@ -316,7 +316,7 @@
 		--color-outline: rgb(148 143 153);
 		--color-outline-variant: rgb(73 69 78);
 		--color-shadow: rgb(0 0 0);
-		--color-scrim: rgb(0 0 0);
+		--color-scrim: rgba(0 0 0 / 0.5);
 		--color-inverse-surface: rgb(230 224 233);
 		--color-inverse-on-surface: rgb(50 47 53);
 		--color-inverse-primary: rgb(101 85 143);
@@ -375,7 +375,7 @@
 		--color-outline: rgb(135 147 143);
 		--color-outline-variant: rgb(61 73 69);
 		--color-shadow: rgb(0 0 0);
-		--color-scrim: rgb(0 0 0);
+		--color-scrim: rgba(0 0 0 / 0.5);
 		--color-inverse-surface: rgb(223 228 224);
 		--color-inverse-on-surface: rgb(44 50 47);
 		--color-inverse-primary: rgb(0 107 89);
@@ -435,7 +435,7 @@
 		--color-outline: rgb(143 143 163);
 		--color-outline-variant: rgb(69 69 87);
 		--color-shadow: rgb(0 0 0);
-		--color-scrim: rgb(0 0 0);
+		--color-scrim: rgba(0 0 0 / 0.5);
 		--color-inverse-surface: rgb(227 225 240);
 		--color-inverse-on-surface: rgb(47 47 59);
 		--color-inverse-primary: rgb(49 61 255);
@@ -489,7 +489,7 @@
 			--color-outline: rgb(133 115 108);
 			--color-outline-variant: rgb(216 194 186);
 			--color-shadow: rgb(0 0 0);
-			--color-scrim: rgb(0 0 0);
+			--color-scrim: rgba(0 0 0 / 0.5);
 			--color-inverse-surface: rgb(56 46 42);
 			--color-inverse-on-surface: rgb(255 237 231);
 			--color-inverse-primary: rgb(255 181 150);
@@ -541,7 +541,7 @@
 			--color-outline: rgb(109 122 117);
 			--color-outline-variant: rgb(189 201 196);
 			--color-shadow: rgb(0 0 0);
-			--color-scrim: rgb(0 0 0);
+			--color-scrim: rgba(0 0 0 / 0.5);
 			--color-inverse-surface: rgb(44 50 47);
 			--color-inverse-on-surface: rgb(237 242 238);
 			--color-inverse-primary: rgb(112 217 191);
@@ -601,7 +601,7 @@
 			--color-outline: rgb(117 117 137);
 			--color-outline-variant: rgb(197 197 218);
 			--color-shadow: rgb(0 0 0);
-			--color-scrim: rgb(0 0 0);
+			--color-scrim: rgba(0 0 0 / 0.5);
 			--color-inverse-surface: rgb(47 47 59);
 			--color-inverse-on-surface: rgb(241 239 254);
 			--color-inverse-primary: rgb(190 194 255);
