@@ -35,7 +35,7 @@
 	}
 </script>
 
-<Stack>
+<Stack class="mt-6">
 	<Switcher class="items-start gap-6" threshold="40rem">
 		<Stack class="gap-4">
 			<h2 class="h3">{m.msig_requested_approvals()}</h2>
@@ -182,13 +182,21 @@
 
 <style>
 	#msig-vis {
-		background: linear-gradient(to right, var(--color-green-400) 50%, var(--color-mine-950) 50%);
+		background: linear-gradient(
+			to right,
+			var(--color-green-400) 50%,
+			var(--color-surface-container) 50%
+		);
 		background-size: 200% 100%;
 		background-position: var(--bg-pos);
 		transition: all var(--ease) var(--duration);
 	}
 	#msig-vis > div {
-		background: linear-gradient(to right, var(--color-green-950) 50%, var(--color-zinc-400) 50%);
+		background: linear-gradient(
+			to right,
+			var(--color-green-950) 50%,
+			var(--color-on-surface-variant) 50%
+		);
 		background-size: 200% 100%;
 		background-position: var(--bg-pos);
 		background-clip: text;
