@@ -11,7 +11,7 @@
 
 <div
 	class={cn(
-		'bg-mine-900 text-mine-50 w-fit rounded-md px-2 py-1 text-xs leading-none font-semibold',
+		'bg-surface-container-highest text-on-surface-variant w-fit rounded-md px-2 py-1 text-xs leading-none font-semibold',
 		props.class
 	)}
 >

@@ -112,11 +112,11 @@
 					<div class="flex justify-center sm:pt-5 sm:pl-5">
 						{#if explanation.icon}
 							{@const Component = explanation.icon}
-							<Component class="size-5 text-white" />
+							<Component class="size-5 text-on-surface" />
 						{/if}
 					</div>
 					<div class="space-y-4 px-5 py-3">
-						<h3 class="h5 text-white">{explanation.title}</h3>
+						<h3 class="h5 text-on-surface">{explanation.title}</h3>
 						<ul class="space-y-1">
 							{#each explanation.descriptions as desc}
 								<li>- {desc}</li>

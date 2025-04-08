@@ -212,7 +212,7 @@
 						class="border-mine-300/10 odd:via-mine-950 flex justify-between border-b bg-linear-to-r from-transparent to-transparent py-3 last:border-none"
 					>
 						<span class="text-base font-medium">{detail.title}</span>
-						<span class="text-base font-medium text-white">{detail.desc}</span>
+						<span class="text-base font-medium text-on-surface">{detail.desc}</span>
 					</li>
 				{/each}
 			</ul>

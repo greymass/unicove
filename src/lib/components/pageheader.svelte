@@ -54,7 +54,7 @@
 
 	<div class="">
 		<div class="text-primary flex h-fit w-fit items-center">
-			<h1 class="mb-2 text-3xl leading-none font-bold text-white">{props.title}</h1>
+			<h1 class="text-on-surface mb-2 text-3xl leading-none font-bold">{props.title}</h1>
 			{#if routePath === 'account'}
 				<CopyButton data={props.title} />
 				{#if props.contract}

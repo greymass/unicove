@@ -57,7 +57,7 @@
 	class="border-shark-900 bg-shark-950 focus-visible:border-solar-500 flex flex-col rounded-lg border bg-transparent focus:outline-hidden lg:hidden"
 >
 	<button
-		class="flex h-12 items-center justify-between px-4 text-base font-medium text-white focus:outline-hidden"
+		class="flex h-12 items-center justify-between px-4 text-base font-medium text-on-surface focus:outline-hidden"
 		use:melt={$trigger}
 		aria-label="Page"
 	>

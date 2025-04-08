@@ -1,12 +1,28 @@
-<script>
+<script lang="ts">
 	import { Cluster, Stack } from '$lib/components/layout';
 	import Button from '$lib/components/button/button.svelte';
 	import IconButton from '$lib/components/button/icon.svelte';
 	import { User } from 'lucide-svelte';
+	import { getContext } from 'svelte';
+	import { type UnicoveContext } from '$lib/state/client.svelte';
+	import Select from '$lib/components/select/select.svelte';
+
+	const context = getContext<UnicoveContext>('state');
+	let theme = $state({ label: context.network.toString(), value: context.network.toString() });
+
+	const options = [
+		{ label: 'eos', value: 'eos' },
+		{ label: 'jungle4', value: 'jungle4' },
+		{ label: 'vaulta', value: 'vaulta' }
+	];
 </script>
 
-<Stack id="buttons">
-	<h2 class="h2">Buttons</h2>
+<Stack id="buttons" data-theme={theme.value}>
+	<Cluster>
+		<h2 class="h2">Buttons</h2>
+		<Select id="theme-picker" {options} bind:selected={theme} />
+	</Cluster>
+
 	<Stack class="items-start">
 		<h3 class="h3">Primary</h3>
 		<Cluster>

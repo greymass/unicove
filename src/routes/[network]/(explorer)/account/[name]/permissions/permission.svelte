@@ -52,14 +52,14 @@
 	>
 		<div>
 			<dt class="sr-only">{m.common_permission_name()}</dt>
-			<dd class="text-xl font-semibold text-white">
+			<dd class="text-xl font-semibold text-on-surface">
 				<div class="flex items-center gap-2">
 					{permission.perm_name}
 					{#if isMSIG && advancedMode && loggedIn && !msigMode}
 						<LogIn
 							onclick={() =>
 								signin(PermissionLevel.from({ actor: account, permission: permission.perm_name }))}
-							class="text-muted size-4 hover:text-white"
+							class="text-muted size-4 hover:text-on-surface"
 						/>
 					{/if}
 				</div>
@@ -111,7 +111,7 @@
 					{#if permission.required_auth.keys}
 						{#each permission.required_auth.keys as { weight, key }}
 							<tr
-								class="col-span-full grid grid-cols-subgrid items-start bg-none text-white"
+								class="col-span-full grid grid-cols-subgrid items-start bg-none text-on-surface"
 								data-hover-effect="false"
 							>
 								<td>
@@ -129,7 +129,7 @@
 					{#if permission.required_auth.accounts}
 						{#each permission.required_auth.accounts as { weight, permission: account }}
 							<tr
-								class="col-span-full grid grid-cols-subgrid bg-none text-white"
+								class="col-span-full grid grid-cols-subgrid bg-none text-on-surface"
 								data-hover-effect="false"
 							>
 								<td>
@@ -149,7 +149,7 @@
 					{#if permission.required_auth.waits}
 						{#each permission.required_auth.waits as { weight, wait_sec }}
 							<tr
-								class="col-span-full grid grid-cols-subgrid bg-none text-white"
+								class="col-span-full grid grid-cols-subgrid bg-none text-on-surface"
 								data-hover-effect="false"
 							>
 								<td>

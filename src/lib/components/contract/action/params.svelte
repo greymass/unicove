@@ -28,7 +28,7 @@
 				{@const fieldType = abi.structs.find((s) => s.name === parseRootType(field.type))}
 				<tr>
 					<td>
-						<span class="text-white">
+						<span class="text-on-surface">
 							{field.name}
 						</span>
 					</td>

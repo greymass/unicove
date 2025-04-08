@@ -130,7 +130,7 @@
 						<td class="text-muted text-base">
 							{data.network.token.id.symbol.code || ''}/RAM (KB)
 						</td>
-						<td class="text-right font-medium text-white">
+						<td class="text-right font-medium text-on-surface">
 							<AssetText variant="full" value={kbValueToken} />
 						</td>
 					</tr>
@@ -138,7 +138,7 @@
 						<td class="text-muted text-base">
 							{market.network.currency.symbol.code}/RAM (KB)
 						</td>
-						<td class="text-right font-medium text-white">
+						<td class="text-right font-medium text-on-surface">
 							<AssetText variant="full" value={kbValueFiat} />
 						</td>
 					</tr>
@@ -148,7 +148,7 @@
 								unit: market.network.currency.symbol.code
 							})}
 						</td>
-						<td class="text-right font-medium text-white">
+						<td class="text-right font-medium text-on-surface">
 							<AssetText
 								variant="full"
 								value={calculateValue(ramCalculatorState.tokens, market.network.systemtoken.price)}
@@ -157,7 +157,7 @@
 					</tr>
 					<tr class="*:py-2">
 						<td class="text-muted text-base"> {m.common_network_fees()} </td>
-						<td class="text-right font-medium text-white">
+						<td class="text-right font-medium text-on-surface">
 							<AssetText variant="full" value={ramCalculatorState.fee} />
 						</td>
 					</tr>
@@ -179,7 +179,7 @@
 					<td class="text-muted text-base"
 						>{m.common_market_cap()} ({data.network.chain.systemToken?.symbol.code || ''})</td
 					>
-					<td class="text-right font-medium text-white">
+					<td class="text-right font-medium text-on-surface">
 						<AssetText variant="full" value={marketCapToken} />
 					</td>
 				</tr>
@@ -187,13 +187,13 @@
 					<td class="text-muted text-base"
 						>{m.common_market_cap()} ({market.network.currency.symbol.code})</td
 					>
-					<td class="text-right font-medium text-white">
+					<td class="text-right font-medium text-on-surface">
 						<AssetText variant="full" value={marketCapFiat} />
 					</td>
 				</tr>
 				<tr class="*:py-2">
 					<td class="text-muted text-base">{m.common_supply()}</td>
-					<td class="text-right font-medium text-white">
+					<td class="text-right font-medium text-on-surface">
 						<AssetText variant="full" value={totalRamSupply} />
 					</td>
 				</tr>

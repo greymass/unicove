@@ -36,7 +36,7 @@
 		</svg>
 		<div class="grid text-center uppercase">
 			<img class="mb-4 h-12 place-self-center md:h-20" src={tokenLogo} alt={tokenName} />
-			<span class="md:text-md text-sm text-white/60">{m.common_total_staked()}</span>
+			<span class="md:text-md text-muted text-sm">{m.common_total_staked()}</span>
 			<!-- TODO: add eos formatter -->
 			<span class="text-md font-semibold md:text-xl">
 				<AssetText value={staked} variant="short" />
@@ -60,7 +60,7 @@
 			/>
 		</svg>
 		<div class="grid text-center uppercase">
-			<span class="md:text-md text-sm text-white/60">APR</span>
+			<span class="md:text-md text-muted text-sm">APR</span>
 			<span class="text-md font-semibold md:text-xl">{apr}%</span>
 		</div>
 	</div>

@@ -219,7 +219,7 @@
 	aria-label="search"
 	id="search"
 	class={cn(
-		'text-muted focus-visible:ring-solar-500 focus-visible:border-solar-500 md:border-mine-600  relative z-50 inline-flex h-10 items-center justify-between rounded-lg bg-transparent py-3.5 text-base leading-4 font-medium text-nowrap focus:outline-hidden focus-visible:ring focus-visible:ring-inset md:justify-between md:border md:py-2 md:pr-0 md:pl-3',
+		'text-muted focus-visible:ring-solar-500 focus-visible:border-solar-500 md:border-outline  relative z-50 inline-flex h-10 items-center justify-between rounded-lg bg-transparent py-3.5 text-base leading-4 font-medium text-nowrap focus:outline-hidden focus-visible:ring focus-visible:ring-inset md:justify-between md:border md:py-2 md:pr-0 md:pl-3',
 		className
 	)}
 >
@@ -233,7 +233,7 @@
 	</span>
 
 	{#if shortcutKey}
-		<span class="border-mine-900 m-2 hidden rounded-sm border px-2 py-1 md:inline">
+		<span class="border-on-surface/30 m-2 hidden rounded-sm border px-2 py-1 md:inline">
 			{shortcutKey}
 		</span>
 	{/if}
@@ -243,12 +243,12 @@
 	<div use:melt={$portalled} data-theme={context.network}>
 		<div
 			use:melt={$overlay}
-			class="fixed inset-0 z-50 bg-black/50"
+			class="bg-scrim fixed inset-0 z-50"
 			transition:fade={{ duration: 100 }}
 		></div>
 		<div
 			use:melt={$content}
-			class="bg-mine-950 fixed top-20 left-1/2 z-50 max-h-[85vh] w-[90vw] max-w-lg -translate-x-1/2 transform overflow-hidden rounded-2xl p-4 shadow-lg"
+			class="bg-surface-container fixed top-20 left-1/2 z-50 max-h-[85vh] w-[90vw] max-w-lg -translate-x-1/2 transform overflow-hidden rounded-2xl p-4 shadow-lg"
 			transition:scale={{
 				duration: 100,
 				start: 0.95
@@ -267,9 +267,7 @@
 							placeholder={m.common_search_unicove()}
 							class="border-primary w-full rounded-lg border-2 bg-transparent p-4 focus:outline-hidden"
 						/>
-						<div
-							class="text-muted bg-mine-950 absolute inset-y-1 right-4 hidden place-items-center sm:grid"
-						>
+						<div class="text-muted absolute inset-y-1 right-4 hidden place-items-center sm:grid">
 							<SearchIcon class="size-5 " />
 						</div>
 					</div>
@@ -328,7 +326,7 @@
 {#snippet ResultRow(index: number, item: SearchRecord)}
 	{@const active = index === selectedIndex}
 	<li
-		class="group/row group-has-[:hover]/list:text-muted hover:group-has-[:hover]/list:bg-mine-900 hover:group-has-[:hover]/list:text-mine-50 data-[active=true]:bg-mine-900 data-[active=true]:text-mine-50 col-span-full grid h-12 grid-cols-subgrid items-center justify-items-start rounded-lg group-has-[:hover]/list:bg-transparent focus:outline-hidden"
+		class="group/row group-has-[:hover]/list:text-muted hover:group-has-[:hover]/list:bg-surface-container-high hover:group-has-[:hover]/list:text-on-surfac data-[active=true]:bg-surface-container-high data-[active=true]:text-on-surface col-span-full grid h-12 grid-cols-subgrid items-center justify-items-start rounded-lg group-has-[:hover]/list:bg-transparent focus:outline-hidden"
 		data-active={active}
 	>
 		<Result class="col-span-2 sm:col-span-3" {active} record={item} onclick={closeSearch}>
@@ -345,12 +343,12 @@
 {#snippet HistoryRow(index: number, item: SearchRecord)}
 	{@const active = index === selectedIndex}
 	<li
-		class="group-has-[:hover]/list:text-muted hover:group-has-[:hover]/list:bg-mine-900 hover:group-has-[:hover]/list:text-mine-50 data-[active=true]:bg-mine-900 data-[active=true]:text-mine-50 col-span-full grid h-12 grid-cols-subgrid items-center justify-items-start rounded-lg group-has-[:hover]/list:bg-transparent focus:outline-hidden"
+		class="group-has-[:hover]/list:text-muted hover:group-has-[:hover]/list:bg-surface-container-high hover:group-has-[:hover]/list:text-on-surface data-[active=true]:bg-surface-container-high data-[active=true]:text-on-surface col-span-full grid h-12 grid-cols-subgrid items-center justify-items-start rounded-lg group-has-[:hover]/list:bg-transparent focus:outline-hidden"
 		data-active={active}
 	>
 		<Result class="col-span-2 sm:col-span-3" {active} record={item} onclick={closeSearch}>
 			<button
-				class="text-muted focus-visible:ring-solar-500 grid hidden size-12 place-items-center justify-self-end hover:text-white focus-visible:ring-3 focus-visible:outline-hidden focus-visible:ring-inset sm:block"
+				class="text-muted focus-visible:ring-solar-500 hover:text-on-surface grid hidden size-12 place-items-center justify-self-end focus-visible:ring-3 focus-visible:outline-hidden focus-visible:ring-inset sm:block"
 				onclick={() => context.history.remove(index)}
 			>
 				<X class="text-inherit" />

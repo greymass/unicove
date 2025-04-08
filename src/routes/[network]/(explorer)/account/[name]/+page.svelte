@@ -60,7 +60,7 @@
 		{#if hasValue}
 			<Card id="account-value" style="column-span: all;">
 				<div class="flex flex-wrap items-center gap-x-4 gap-y-2">
-					<picture class="bg-mine-900 grid size-12 place-items-center rounded-full">
+					<picture class="bg-surface-container-high grid size-12 place-items-center rounded-full">
 						<DollarSign />
 					</picture>
 
@@ -69,12 +69,14 @@
 							<p>{m.account_page_total_value()}</p>
 							{#if currentAccountValue.hasPrice}
 								<AssetText
-									class="text-2xl font-bold text-white"
+									class="text-on-surface text-2xl font-bold"
 									variant="full"
 									value={currentAccountValue.systemtoken.total}
 								/>
 							{:else}
-								<div class="bg-mine-900 w-48 animate-pulse rounded text-2xl font-bold text-white">
+								<div
+									class="bg-surface-container-high text-on-surface w-48 animate-pulse rounded text-2xl font-bold"
+								>
 									&nbsp;
 								</div>
 							{/if}
