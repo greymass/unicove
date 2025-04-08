@@ -248,7 +248,7 @@
 		></div>
 		<div
 			use:melt={$content}
-			class="bg-surface-container fixed top-20 left-1/2 z-50 max-h-[85vh] w-[90vw] max-w-lg -translate-x-1/2 transform overflow-hidden rounded-2xl p-4 shadow-lg"
+			class="bg-surface-container-lowest fixed top-20 left-1/2 z-50 max-h-[85vh] w-[90vw] max-w-lg -translate-x-1/2 transform overflow-hidden rounded-2xl p-4 shadow-lg"
 			transition:scale={{
 				duration: 100,
 				start: 0.95
