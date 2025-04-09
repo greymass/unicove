@@ -79,7 +79,6 @@
 								{:else}
 									<span class="bg-mine-900 animate-pulse rounded tabular-nums">&nbsp;</span>
 								{/if}
-								<!-- TODO: Percent change -->
 							</Chip>
 						{/if}
 					</Stack>

@@ -28,6 +28,8 @@ export class MarketState {
 		...this.sources.pairs.map((pair) => pair.reversed)
 	]);
 
+	readonly historic = $derived(this.sources.historic);
+
 	readonly swaps = $derived(getSwaps(this.network, this.pairs));
 
 	constructor(network: NetworkState, settings: SettingsState) {

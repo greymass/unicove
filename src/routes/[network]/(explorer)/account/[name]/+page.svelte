@@ -39,6 +39,9 @@
 	const rambalance = $derived(
 		data.account.balances.find((b) => tokenEquals(b.token.id, data.network.getRamToken().id))
 	);
+	const historicTimeframe = 'quarter';
+	const ramhistoric = $derived(market.market.historic?.ram?.[historicTimeframe]);
+	const systemtokenhistoric = $derived(market.market.historic?.systemtoken?.[historicTimeframe]);
 
 	const cpuAvailable = $derived(data.account.resources.cpu.available);
 	const netAvailable = $derived(data.account.resources.net.available);
@@ -99,6 +102,8 @@
 				{isCurrentUser}
 				open
 				network={data.network}
+				historic={systemtokenhistoric}
+				{historicTimeframe}
 				pair={currentAccountValue.pair}
 				value={currentAccountValue.systemtoken.systemtoken}
 			/>
@@ -117,6 +122,8 @@
 				{isCurrentUser}
 				open
 				network={data.network}
+				historic={systemtokenhistoric}
+				{historicTimeframe}
 				pair={currentAccountValue.pair}
 				value={currentAccountValue.systemtoken.legacy}
 			/>
@@ -136,6 +143,8 @@
 				child="total"
 				{isCurrentUser}
 				network={data.network}
+				historic={ramhistoric}
+				{historicTimeframe}
 				pair={market.network.ram}
 				value={currentAccountValue.systemtoken.ram}
 			/>

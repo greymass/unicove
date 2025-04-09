@@ -149,11 +149,33 @@ export class TokenBalance extends TokenBalanceBase {
 	}
 }
 
+@Struct.type('token_historic_price')
+export class TokenHistoricPrice extends Struct {
+	@Struct.field(Asset) declare value: Asset;
+	@Struct.field(TimePointSec) declare date: TimePointSec;
+}
+
+@Struct.type('token_historic_prices')
+export class TokenHistoricPrices extends Struct {
+	@Struct.field(TokenHistoricPrice, { optional: true }) declare day?: TokenHistoricPrice;
+	@Struct.field(TokenHistoricPrice, { optional: true }) declare week?: TokenHistoricPrice;
+	@Struct.field(TokenHistoricPrice, { optional: true }) declare month?: TokenHistoricPrice;
+	@Struct.field(TokenHistoricPrice, { optional: true }) declare quarter?: TokenHistoricPrice;
+	@Struct.field(TokenHistoricPrice, { optional: true }) declare year?: TokenHistoricPrice;
+}
+
+@Struct.type('system_historic_prices')
+export class SystemHistoricPrices extends Struct {
+	@Struct.field(TokenHistoricPrices, { optional: true }) declare ram?: TokenHistoricPrices;
+	@Struct.field(TokenHistoricPrices, { optional: true }) declare systemtoken?: TokenHistoricPrices;
+}
+
 @Struct.type('token_sources')
 export class TokenDataSources extends Struct {
 	@Struct.field(TimePointSec) declare ts: TimePointSec;
 	@Struct.field(Asset, { optional: true }) declare mockPrice?: Asset;
 	@Struct.field(TokenPair, { array: true }) declare pairs: TokenPair[];
+	@Struct.field(SystemHistoricPrices, { optional: true }) declare historic?: SystemHistoricPrices;
 }
 
 export function tokenEquals(first: TokenDefinition, second: TokenDefinition) {

@@ -36,7 +36,6 @@
 			{#if market.account?.systemtoken?.liquid}
 				<Chip>
 					<AssetText variant="full" value={market.account?.systemtoken?.liquid} />
-					<!-- TODO: Percent change -->
 				</Chip>
 			{/if}
 		</Stack>

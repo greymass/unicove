@@ -4,7 +4,13 @@
 	import TradingPair from '$lib/components/elements/tradingpair.svelte';
 	import { cn } from '$lib/utils/style';
 	import type { NetworkState } from '$lib/state/network.svelte';
-	import { TokenBalance, tokenEquals, ZeroUnits, type TokenPair } from '$lib/types/token';
+	import {
+		TokenBalance,
+		tokenEquals,
+		TokenHistoricPrice,
+		ZeroUnits,
+		type TokenPair
+	} from '$lib/types/token';
 	import { ChevronDown, ChevronRight } from 'lucide-svelte';
 	import * as m from '$lib/paraglide/messages';
 	import Button from '../button/button.svelte';
@@ -30,6 +36,8 @@
 		isCurrentUser: boolean;
 		open?: boolean;
 		network: NetworkState;
+		historic?: TokenHistoricPrice;
+		historicTimeframe?: string;
 		pair?: TokenPair;
 		value: Asset;
 	}
@@ -43,6 +51,8 @@
 		isCurrentUser,
 		network,
 		open = $bindable(false),
+		historic,
+		historicTimeframe,
 		pair,
 		value
 	}: TokenOverviewProps = $props();
@@ -94,7 +104,7 @@
 			</h4>
 			{#if pair && hasValue}
 				{#if pair.price.units.gt(ZeroUnits)}
-					<TradingPair value={pair} />
+					<TradingPair {historic} {historicTimeframe} value={pair} />
 				{:else}
 					<span class="bg-mine-900 animate-pulse rounded tabular-nums">&nbsp;</span>
 				{/if}
