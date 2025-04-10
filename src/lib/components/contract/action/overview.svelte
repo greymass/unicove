@@ -15,13 +15,13 @@
 </script>
 
 <div class="flex items-center">
-	<SquareTerminal class="mr-2" />
+	<SquareTerminal class="mt-0.5 mr-2" />
 	<Contract name={contract} action={Name.from(action.name)} class="text-3xl font-bold">
 		{action.name}
 	</Contract>
 </div>
 
 {#if ricardian}
-	<p class="text-md text-on-surface">{ricardian.meta?.title}</p>
-	<p class="text-muted text-sm">{ricardian.meta?.summary}</p>
+	<p class="text-on-surface text-lg text-pretty">{ricardian.meta?.title}</p>
+	<p class="text-muted text-sm text-balance">{ricardian.meta?.summary}</p>
 {/if}
