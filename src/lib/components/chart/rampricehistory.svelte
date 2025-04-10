@@ -2,11 +2,12 @@
 	import { getContext } from 'svelte';
 	import { Asset } from '@wharfkit/antelope';
 	import ChartContainer from './chart-container.svelte';
-	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte';
 	import type { HistoricalPrice } from '$lib/types';
 	import Loading from './loading.svelte';
 
 	const { network } = getContext<UnicoveContext>('state');
+	const market = getContext<MarketContext>('market');
 
 	type Price = { date: string; value: number };
 	type APIResponse = Price[] | { error: string };
@@ -49,6 +50,10 @@
 	<Loading {pair} />
 {:then ramPrices}
 	{#if ramPrices.length}
-		<ChartContainer {pair} data={ramPrices} type="line" />
+		<ChartContainer
+			{pair}
+			data={[{ date: new Date(), value: market.network.ramtoken.price }, ...ramPrices]}
+			type="line"
+		/>
 	{/if}
 {/await}
