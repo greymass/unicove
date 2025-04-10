@@ -67,25 +67,23 @@
 	const balanceDelegated = $derived(_balance.child('delegated'));
 	const balanceUsed = $derived(_balance.child('used'));
 
-	let shouldBeOpen = $derived(open && _balance instanceof TokenBalance);
-
 	let detailsElement = $state<HTMLDetailsElement>();
 
-	const toggleOpen = (e: Event) => {
-		e.preventDefault();
-		if (!detailsElement || !(_balance instanceof TokenBalance)) return;
-		if (open) {
-			open = false;
-			detailsElement.removeAttribute('open');
-		} else {
-			detailsElement.open = true;
+	const syncOpen = () => {
+		if (!detailsElement) return;
+		if (detailsElement.open) {
+			console.log('we are open');
 			open = true;
+		} else {
+			console.log('we are not open');
+			open = false;
 		}
+		console.log(open, detailsElement.open, 'should be same');
 	};
 </script>
 
 {#snippet SubBalance(label: string, value: Asset, action?: { text: string; href: string })}
-	<div class="col-span-full grid grid-cols-subgrid items-center gap-x-4">
+	<div class="col-span-full grid h-10 grid-cols-subgrid items-center gap-x-4">
 		<div class="flex flex-col gap-1">
 			{label}
 		</div>
@@ -105,11 +103,11 @@
 <details
 	bind:this={detailsElement}
 	class={cn('group token-balance-card bg-surface-container rounded-xl', className)}
-	open={shouldBeOpen}
+	open={open && _balance instanceof TokenBalance}
 >
 	<summary
-		class="focus-visible:outline-solar-500 @container grid cursor-pointer grid-cols-[auto_1fr_auto] gap-3 rounded-xl p-5 focus-visible:outline"
-		onclick={(e) => toggleOpen(e)}
+		class="focus-visible:outline-solar-500 @container grid cursor-pointer grid-cols-[auto_1fr_auto] gap-3 rounded-xl p-5 select-none focus-visible:outline"
+		onclick={syncOpen}
 	>
 		<picture class="size-6 place-items-center">
 			<img alt="{_balance.token.name} Logo" src={_balance.token.media?.logo?.light} />
