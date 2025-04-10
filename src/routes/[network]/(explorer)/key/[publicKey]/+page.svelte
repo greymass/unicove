@@ -18,7 +18,7 @@
 				<Key />
 			</picture>
 			<div class="space-y-0.5 text-balance *:break-all">
-				<p class="font-semibold text-white">
+				<p class="font-semibold text-on-surface">
 					{pubKey}
 					<CopyButton data={pubKey} />
 				</p>

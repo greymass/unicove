@@ -16,7 +16,7 @@
 		<h5 class="text-xl font-bold">{title}</h5>
 	</div>
 	<p class="*:block">
-		<span class="text-white">{token?.balance}</span>
+		<span class="text-on-surface">{token?.balance}</span>
 		<span>{description}</span>
 	</p>
 </Card>

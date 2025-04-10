@@ -118,7 +118,7 @@
 	/>
 	<div class="grid max-w-2xl gap-8">
 		{#if context.wharf.session?.walletPlugin.id === 'wallet-plugin-multisig'}
-			<Card class="border-mine-900 grid gap-8 border">
+			<Card class=" grid gap-8 ">
 				<div class="flex items-center justify-between">
 					<h2 class="text-muted text-2xl font-semibold">MSIG Configuration</h2>
 				</div>
@@ -159,7 +159,7 @@
 			</Card>
 		{/if}
 
-		<Card class="border-mine-900 grid gap-8 border">
+		<Card class=" grid gap-8 ">
 			<div class="flex items-center justify-between">
 				<h2 class="text-muted text-2xl font-semibold">Preferences</h2>
 			</div>
@@ -194,7 +194,7 @@
 			</div>
 		</Card>
 
-		<Card class="border-mine-900 grid gap-8 border">
+		<Card class=" grid gap-8 ">
 			<div class="flex items-center justify-between">
 				<h2 class="text-muted text-2xl font-semibold">Navigation</h2>
 			</div>
@@ -223,7 +223,7 @@
 			</div>
 		</Card>
 
-		<Card class="border-mine-900 grid gap-8 border">
+		<Card class=" grid gap-8 ">
 			<div class="flex items-center justify-between">
 				<h2 class="text-muted text-2xl font-semibold">{m.settings_advanced()}</h2>
 			</div>
@@ -238,7 +238,7 @@
 		</Card>
 
 		{#if advancedMode}
-			<Card class="border-mine-900 grid gap-8 border">
+			<Card class=" grid gap-8 ">
 				<div class="flex items-center justify-between">
 					<h2 class="text-muted text-2xl font-semibold">{m.settings_developer()}</h2>
 				</div>
@@ -253,7 +253,7 @@
 					<div class="flex items-center justify-between">
 						<Stack class="gap-2">
 							<Label for="debug-mode">{m.settings_enable_mockprice()}</Label>
-							<p class="caption text-sm">
+							<p class="caption text-sm text-balance">
 								{m.settings_enable_mockprice_desc({
 									mockValue: '$1.2345 USD'
 								})}

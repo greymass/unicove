@@ -34,7 +34,7 @@
 		<Switcher>
 			<Stack class="gap-2">
 				<h3 class="text-muted leading-none">Delegated Amount</h3>
-				<p class="text-2xl font-bold text-white">
+				<p class="text-on-surface text-2xl font-bold">
 					{String(manager.account?.balance.child('delegated').balance)}
 				</p>
 			</Stack>
