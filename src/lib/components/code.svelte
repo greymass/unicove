@@ -52,7 +52,7 @@
 	<div
 		bind:this={node}
 		class={cn(
-			'bg-surface-container-low text-on-surface relative overflow-x-auto overflow-y-hidden rounded-xl p-6 font-mono text-sm',
+			'bg-surface-container text-on-surface relative overflow-x-auto overflow-y-hidden rounded-xl p-6 font-mono text-sm',
 			collapsible ? 'max-h-56' : 'max-h-full ',
 			props.class
 		)}

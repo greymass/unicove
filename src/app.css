@@ -104,38 +104,40 @@
 	--color-solar-900: #7c3b0b;
 	--color-solar-950: #481d00;
 
-	/* Color Roles and default dark values */
+	/* Seeds - Not for use */
 	--color-seed: var(--color-sky-500);
+	/* --color-neutral-seed: oklch(from var(--color-seed) l 0.01 h); */
+	/* --color-neutral-variant-seed: oklch(from var(--color-seed) l 0.015 h); */
 
+	/* Color Roles and default dark values */
 	--color-primary: oklch(from var(--color-seed) 0.82 c h);
-	--color-surface-tint: var(--color-primary);
 	--color-on-primary: oklch(from var(--color-seed) 0.2 c h);
 
-	--color-primary-container: rgb(50 161 138);
-	--color-on-primary-container: rgb(0 45 36);
+	--color-primary-container: oklch(from var(--color-seed) 0.39 0.086 h);
+	--color-on-primary-container: oklch(from var(--color-seed) 0.9 0.085 h);
 
 	--color-error: rgb(255 180 171);
 	--color-on-error: rgb(105 0 5);
 	--color-error-container: rgb(147 0 10);
 	--color-on-error-container: rgb(255 218 214);
 
-	--color-shadow: var(--color-black);
-	--color-scrim: oklch(from var(--color-black) l c h / 0.5);
+	--color-shadow: oklch(0 0 0);
+	--color-scrim: oklch(0 0 0 / 0.5);
 
 	/* --color-inverse-surface: rgb(223 228 224); */
 	/* --color-inverse-on-surface: rgb(44 50 47); */
 	/* --color-inverse-primary: rgb(0 107 89); */
 
+	--color-surface-tint: var(--color-primary);
 	--color-surface: color-mix(in oklab, var(--color-shark-950) 100%, var(--color-surface-tint) 1.5%);
-	--color-surface-variant: rgb(61 73 69);
 	--color-background: var(--color-surface);
 
 	--color-on-surface: oklch(from var(--color-surface) 0.95 c h);
 	--color-on-surface-variant: oklch(from var(--color-surface) 0.8 calc(c * 2) h);
 	--color-on-background: var(--color-on-surface);
 
-	--color-outline: oklch(from var(--color-surface) 0.6 c h);
-	--color-outline-variant: oklch(from var(--color-surface) 0.3 c h);
+	--color-outline: oklch(from var(--color-surface) 0.65 c h);
+	--color-outline-variant: oklch(from var(--color-surface) 0.4 c h);
 
 	/* Surface Containers ranked by emphasis (contrast) */
 	--color-surface-container-lowest: oklch(from var(--color-surface) calc(l - 0.01) c h);
@@ -159,7 +161,7 @@
 	::before,
 	::backdrop,
 	::file-selector-button {
-		border-color: var(--color-mine-200, currentColor);
+		border-color: var(--color-outline, currentColor);
 	}
 
 	[data-theme='eos'] {
