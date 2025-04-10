@@ -2,6 +2,8 @@
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import type { HTMLAttributes } from 'svelte/elements';
 	import type { TokenHistoricPrice, TokenPair } from '$lib/types/token';
+	import { cn } from '$lib/utils/style';
+	import { Triangle } from 'lucide-svelte';
 
 	interface Props extends HTMLAttributes<HTMLSpanElement> {
 		historic?: TokenHistoricPrice;
@@ -38,17 +40,21 @@
 	});
 </script>
 
-<span class={props.class}>
-	<AssetText value={pair.price} />
-	{pair.base.symbol.code}/{pair.quote.symbol.code}
+<span class={cn('flex flex-wrap gap-x-2 gap-y-1', props.class)}>
+	<span>
+		<AssetText value={pair.price} />
+		{pair.base.symbol.code}/{pair.quote.symbol.code}
+	</span>
 	{#if historic}
 		{#if percentChangePositive}
-			<span class="text-green-500">
-				▲ {percentChangeString}% {timeframeString}
+			<span class="inline-flex gap-1.5 leading-none text-green-500">
+				<Triangle fill="currentColor" class="size-4" />
+				{percentChangeString}% {timeframeString}
 			</span>
 		{:else}
-			<span class="text-red-500">
-				▼ {percentChangeString}% {timeframeString}
+			<span class="inline-flex gap-1.5 leading-none text-red-500">
+				<Triangle fill="currentColor" class="size-4 rotate-180" />
+				{percentChangeString}% {timeframeString}
 			</span>
 		{/if}
 	{/if}

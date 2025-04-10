@@ -66,10 +66,10 @@
 
 					{#if currentAccountValue}
 						<div class="flex flex-1 flex-col gap-1">
-							<p>{m.account_page_total_value()}</p>
+							<p class="leading-none">{m.account_page_total_value()}</p>
 							{#if currentAccountValue.hasPrice}
 								<AssetText
-									class="text-on-surface text-2xl font-bold"
+									class="text-on-surface text-2xl leading-none font-bold"
 									variant="full"
 									value={currentAccountValue.systemtoken.total}
 								/>
