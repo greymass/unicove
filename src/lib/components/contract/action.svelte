@@ -10,6 +10,7 @@
 	import ContractActionResponse from '$lib/components/contract/action/response.svelte';
 	import Code from '$lib/components/code.svelte';
 	import Switcher from '../layout/switcher.svelte';
+	import Stack from '../layout/stack.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -26,29 +27,29 @@
 </script>
 
 <li
-	class="border-b-outline-variant/50 relative col-span-full space-y-4 border-b py-20 first:pt-4 last:border-none"
+	class="border-b-outline-variant/50 relative col-span-full space-y-4 border-b py-12 first:pt-4 last:border-none"
 >
 	<div class="contract-action-overview col-span-full space-y-1">
 		<ContractActionOverview {action} {contract} />
 	</div>
 
 	<Switcher class="gap-6">
-		<div>
+		<Stack>
 			{#if struct}
 				<ContractActionParams {abi} {contract} {struct} />
 			{/if}
 			{#if context.settings.data.debugMode}
 				<Code>{JSON.stringify(struct, null, 2)}</Code>
 			{/if}
-		</div>
+		</Stack>
 
-		<div>
+		<Stack>
 			{#if actionResult}
 				<ContractActionResponse {abi} {contract} {actionResult} />
 			{/if}
 			{#if context.settings.data.debugMode}
 				<Code>{JSON.stringify(actionResult, null, 2)}</Code>
 			{/if}
-		</div>
+		</Stack>
 	</Switcher>
 </li>
