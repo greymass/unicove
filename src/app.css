@@ -111,6 +111,7 @@
 
 	/* Color Roles and default dark values */
 	--color-primary: oklch(from var(--color-seed) 0.82 c h);
+	--color-primary-hover: oklch(from var(--color-seed) 0.9 c h);
 	--color-on-primary: oklch(from var(--color-seed) 0.2 c h);
 
 	--color-primary-container: oklch(from var(--color-seed) 0.39 0.086 h);
