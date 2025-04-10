@@ -2,12 +2,12 @@
 	import Copy from 'lucide-svelte/icons/copy';
 	import { browser } from '$app/environment';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import { getContext } from 'svelte';
+	import { getContext, type ComponentProps } from 'svelte';
 	import IconButton from '$lib/components/button/icon.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 
-	interface Props {
+	interface Props extends Omit<ComponentProps<typeof IconButton>, 'icon'> {
 		data: string;
 	}
 
