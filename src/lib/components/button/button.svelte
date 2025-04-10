@@ -68,7 +68,7 @@
 	this={tag}
 	use:melt={$meltElement}
 	class={cn(
-		'group relative cursor-pointer items-center justify-center text-center text-base font-medium text-nowrap transition-all disabled:cursor-default disabled:opacity-30',
+		'group/button relative cursor-pointer items-center justify-center text-center text-base font-medium text-nowrap transition-all disabled:cursor-default disabled:opacity-30',
 		styles[variant],
 		className
 	)}
@@ -80,7 +80,7 @@
 	{...linkProps}
 >
 	<div
-		class="state-layer pointer-events-none absolute inset-0 rounded-[inherit] bg-current opacity-0 transition-opacity group-hover:opacity-8 group-focus-visible:opacity-10 group-active:group-hover:opacity-16 group-disabled:hidden"
+		class="state-layer group-active/button:group-hove/buttonr:opacity-16 pointer-events-none absolute inset-0 rounded-[inherit] bg-current opacity-0 transition-opacity group-hover/button:opacity-8 group-focus-visible/button:opacity-10 group-disabled/button:hidden"
 	></div>
 	<span class="content-layer pointer-events-none relative text-inherit">
 		{@render props.children()}
