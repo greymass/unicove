@@ -34,6 +34,7 @@
 		elements: { trigger, overlay, content, portalled },
 		states: { open }
 	} = createDialog({
+		preventScroll: false,
 		defaultOpen: false,
 		forceVisible: true
 	});

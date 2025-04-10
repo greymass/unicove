@@ -31,6 +31,7 @@
 		states: { selectedLabel, open }
 	} = createSelect<string>({
 		forceVisible: true,
+		preventScroll: false,
 		positioning: {
 			placement: 'bottom',
 			fitViewport: true,
@@ -57,7 +58,7 @@
 	class="border-shark-900 bg-shark-950 focus-visible:border-solar-500 flex flex-col rounded-lg border bg-transparent focus:outline-hidden lg:hidden"
 >
 	<button
-		class="flex h-12 items-center justify-between px-4 text-base font-medium text-on-surface focus:outline-hidden"
+		class="text-on-surface flex h-12 items-center justify-between px-4 text-base font-medium focus:outline-hidden"
 		use:melt={$trigger}
 		aria-label="Page"
 	>

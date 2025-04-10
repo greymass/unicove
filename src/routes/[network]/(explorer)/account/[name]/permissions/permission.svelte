@@ -49,7 +49,7 @@
 	class:pt-6={level !== 0}
 >
 	<dl
-		class="bg-surface-container-highest z-20 col-span-full space-y-1 rounded-t-lg px-4 py-3 md:col-span-1 md:rounded-l-lg md:rounded-r-none"
+		class="bg-surface-container-high z-20 col-span-full space-y-1 rounded-t-lg px-4 py-3 md:col-span-1 md:rounded-l-lg md:rounded-r-none"
 	>
 		<div>
 			<dt class="sr-only">{m.common_permission_name()}</dt>
