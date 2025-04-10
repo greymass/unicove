@@ -21,7 +21,9 @@ export function ogImageData(route: string, network: NetworkState): OpengraphImag
 		case 'send':
 			return {
 				text: m.og_send_caption(),
-				title: m.common_send_tokens(),
+				title: m.common_send_tokens({
+					token: ''
+				}),
 				layout: 1
 			};
 		default:

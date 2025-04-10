@@ -75,7 +75,7 @@
 
 			<Label for="quantity-input">
 				<button
-					class="text-skyBlue-500 hover:text-skyBlue-400"
+					class="text-sky-500 hover:text-sky-400"
 					onclick={() => {
 						manager.setMaxValue();
 					}}

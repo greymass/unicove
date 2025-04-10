@@ -11,7 +11,6 @@ import {
 	getUnstakableREX,
 	getUnstakingBalances
 } from '$lib/utils/staking';
-import { TokenBalance, TokenDefinition } from '$lib/types/token';
 import { PlaceholderAuth } from '@wharfkit/session';
 import { Types as REXTypes } from '$lib/types/rex';
 
@@ -40,24 +39,7 @@ export class UnstakeManager {
 	public unstakable: Asset = $derived(
 		getUnstakableBalance(this.network, this.account, this.unstaking)
 	);
-	public tokenBalance: TokenBalance | undefined = $derived.by(() => {
-		let balance: TokenBalance | undefined = undefined;
-		if (this.network) {
-			const id = TokenDefinition.from({
-				chain: this.network.chain.id,
-				contract: this.network.contracts.token.account,
-				symbol: this.network.chain.systemToken!.symbol
-			});
-			const meta = (this.network.tokens || []).find((item) => item.id.equals(id));
-			if (meta) {
-				balance = TokenBalance.from({
-					token: { id },
-					balance: this.staked
-				});
-			}
-		}
-		return balance;
-	});
+	public tokenBalance = $derived(this.account?.balance.child('staked'));
 
 	constructor(network: NetworkState) {
 		this.network = network;

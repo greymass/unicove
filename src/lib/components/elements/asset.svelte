@@ -31,7 +31,7 @@
 		style: 'currency',
 		currency: asset?.symbol.name,
 		currencyDisplay: 'narrowSymbol',
-		minimumFractionDigits: context.settings.data.advancedMode ? asset?.symbol.precision : undefined
+		minimumFractionDigits: context.settings.data.increasedPrecision ? asset?.symbol.precision : 2
 	};
 
 	function abbreviatedValue(): string {

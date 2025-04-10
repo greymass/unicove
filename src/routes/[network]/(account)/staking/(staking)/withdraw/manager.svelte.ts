@@ -1,4 +1,4 @@
-import { Action, Asset, UInt64 } from '@wharfkit/antelope';
+import { Action, Asset } from '@wharfkit/antelope';
 import type { AccountState } from '$lib/state/client/account.svelte';
 import type { NetworkState } from '$lib/state/network.svelte';
 import type { WharfState } from '$lib/state/client/wharf.svelte';
@@ -14,6 +14,7 @@ import {
 } from '$lib/utils/staking';
 import { PlaceholderAuth } from '@wharfkit/session';
 import { Types as REXTypes } from '$lib/types/rex';
+import { ZeroUnits } from '$lib/types/token';
 
 export class WithdrawManager {
 	public network: NetworkState | undefined = $state();
@@ -78,7 +79,7 @@ export class WithdrawManager {
 			}
 
 			const actions = [];
-			if (this.sellable && this.sellable.units.gt(UInt64.from(0))) {
+			if (this.sellable && this.sellable.units.gt(ZeroUnits)) {
 				// If they are voting, uncast their votes automatically
 				if (this.sellingAll && this.voting) {
 					actions.push(

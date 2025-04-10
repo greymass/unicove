@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-interface */
 import type { Action } from '@wharfkit/antelope';
 import { ABI, Asset, Blob, Name, Struct, TimePoint } from '@wharfkit/antelope';
 import type { ActionOptions, ContractArgs, PartialBy, Table } from '@wharfkit/contract';
@@ -35,13 +34,11 @@ export const TableMap = {};
 export interface TableTypes {}
 export type RowType<T> = T extends keyof TableTypes ? TableTypes[T] : any;
 export type TableNames = keyof TableTypes;
-export interface ActionParams {}
 export namespace ActionParams {
 	export namespace Type {}
 	export interface getpairs {}
 	export interface tokenpair {}
 }
-export const ActionParams: ActionParams = {} as ActionParams;
 export interface ActionNameParams {
 	getpairs: ActionParams.getpairs;
 	tokenpair: ActionParams.tokenpair;

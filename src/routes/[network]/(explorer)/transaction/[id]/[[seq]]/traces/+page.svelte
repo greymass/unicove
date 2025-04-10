@@ -11,5 +11,5 @@
 </div>
 
 {#each data.transaction.traces as trace}
-	<Code>{JSON.stringify(trace, null, 2)}</Code>
+	<Code collapsible json={trace} />
 {/each}

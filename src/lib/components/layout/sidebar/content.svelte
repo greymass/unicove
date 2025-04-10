@@ -18,7 +18,7 @@ and directly on the element is simpler than a style tag.
 -->
 <svelte:element
 	this={tag}
-	class={`sidebar-content grow-[999] basis-0`}
+	class={`sidebar-content grow-999 basis-0`}
 	style={`min-width: ${threshold}`}
 	{...props}
 >

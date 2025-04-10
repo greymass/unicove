@@ -2,11 +2,7 @@ import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import { Asset } from '@wharfkit/antelope';
 import { getCacheHeaders } from '$lib/utils';
-
-interface HistoricalPrice {
-	date: Date;
-	value: Asset;
-}
+import type { HistoricalPrice } from '$lib/types';
 
 export const GET: RequestHandler = async ({ fetch, locals: { network } }) => {
 	try {

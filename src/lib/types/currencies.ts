@@ -139,7 +139,3 @@ export const Currencies: Record<SupportedCurrencies, TokenDefinition> = {
 		symbol: '4,ZAR'
 	})
 };
-
-export const ramKb = TokenDefinition.from({
-	symbol: '3,KB'
-});

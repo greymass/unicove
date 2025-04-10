@@ -28,7 +28,7 @@
 <a
 	data-active={active}
 	class={cn(
-		'grid select-none grid-cols-subgrid items-center rounded-lg focus-visible:outline-none focus-visible:ring focus-visible:ring-inset focus-visible:ring-solar-500 sm:col-span-2',
+		'focus-visible:ring-solar-500 grid grid-cols-subgrid items-center rounded-lg select-none focus-visible:ring-3 focus-visible:outline-hidden focus-visible:ring-inset sm:col-span-2',
 		props.class
 	)}
 	href={record.url}
@@ -65,7 +65,7 @@
 
 	<span
 		data-active={active}
-		class="align-center truncate text-nowrap pr-2 text-right text-base font-medium capitalize text-inherit sm:block sm:pr-0 sm:text-left"
+		class="align-center truncate pr-2 text-right text-base font-medium text-nowrap text-inherit capitalize sm:block sm:pr-0 sm:text-left"
 	>
 		{#if record.description}
 			{record.description}
