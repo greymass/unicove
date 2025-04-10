@@ -1,15 +1,17 @@
 <script lang="ts">
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import ValueText from '$lib/components/elements/currency/value.svelte';
-	import { Asset, UInt64 } from '@wharfkit/antelope';
+	import { Asset } from '@wharfkit/antelope';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
 	import * as m from '$lib/paraglide/messages';
+	import { ZeroUnits } from '$lib/types/token.js';
 
 	const { data } = $props();
-	const zero = UInt64.from(0);
-	const balances = $derived(data.account.balances.filter((item) => item.balance.units.gt(zero)));
+	const balances = $derived(
+		data.account.balances.filter((item) => item.balance.units.gt(ZeroUnits))
+	);
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -53,9 +55,9 @@
 								{/if} -->
 							</div>
 							<a
-								href={`/${context.network}/token/${tokenBalance.id.contract}/${tokenBalance.id.symbol.name}`}
+								href={`/${context.network}/token/${tokenBalance.token.contract}/${tokenBalance.token.name}`}
 							>
-								{tokenBalance.id.symbol.name}
+								{tokenBalance.token.name}
 							</a>
 						</div>
 					</td>
@@ -63,7 +65,7 @@
 						<AssetText value={tokenBalance.balance} />
 					</td>
 					<td class="text-right">
-						<ValueText token={tokenBalance.id} balance={tokenBalance.balance} />
+						<ValueText token={tokenBalance.token.id} balance={tokenBalance.balance} />
 					</td>
 					{#if isCurrentUser}
 						{#if !tokenBalance.locked}

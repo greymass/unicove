@@ -11,7 +11,7 @@ import { Contract as UnicoveContract } from '$lib/wharf/contracts/unicove.api';
 
 import * as env from '$env/static/public';
 
-import type { TokenDefinitionType } from '$lib/types/token';
+import { Token, TokenMedia, TokenMediaAsset } from '$lib/types/token';
 
 const coinbase =
 	env.PUBLIC_FEATURE_DIRECTFUNDING === 'true'
@@ -30,12 +30,26 @@ const metamask =
 			}
 		: undefined;
 
+const legacytokenasset = TokenMediaAsset.from({});
+if (env.PUBLIC_LEGACY_TOKEN_LOGO_LIGHT) {
+	legacytokenasset.light = env.PUBLIC_LEGACY_TOKEN_LOGO_LIGHT;
+}
+if (env.PUBLIC_LEGACY_TOKEN_LOGO_DARK) {
+	legacytokenasset.dark = env.PUBLIC_LEGACY_TOKEN_LOGO_DARK;
+}
+
 const legacytoken =
 	env.PUBLIC_LEGACY_TOKEN_CONTRACT && env.PUBLIC_LEGACY_TOKEN_SYMBOL
-		? {
-				contract: Name.from(env.PUBLIC_LEGACY_TOKEN_CONTRACT),
-				symbol: Asset.Symbol.from(env.PUBLIC_LEGACY_TOKEN_SYMBOL)
-			}
+		? Token.from({
+				id: {
+					chain: env.PUBLIC_CHAIN_ID,
+					contract: env.PUBLIC_LEGACY_TOKEN_CONTRACT,
+					symbol: env.PUBLIC_LEGACY_TOKEN_SYMBOL
+				},
+				media: TokenMedia.from({
+					logo: legacytokenasset
+				})
+			})
 		: undefined;
 
 const lockedsupply = env.PUBLIC_FEATURE_METAMASK
@@ -48,17 +62,44 @@ const systemtokenalt = env.PUBLIC_SYSTEM_TOKEN_SYMBOL_ALT
 
 const isTrue = (value: string) => value === 'true';
 
-export const chainConfig: ChainConfig = {
-	id: env.PUBLIC_CHAIN_ID,
-	name: env.PUBLIC_CHAIN_SHORT,
-	systemtoken: {
+const ramtokenasset = TokenMediaAsset.from({});
+const systemtokenasset = TokenMediaAsset.from({});
+if (env.PUBLIC_SYSTEM_TOKEN_LOGO_LIGHT) {
+	ramtokenasset.light = env.PUBLIC_SYSTEM_TOKEN_LOGO_LIGHT;
+	systemtokenasset.light = env.PUBLIC_SYSTEM_TOKEN_LOGO_LIGHT;
+}
+if (env.PUBLIC_SYSTEM_TOKEN_LOGO_DARK) {
+	ramtokenasset.dark = env.PUBLIC_SYSTEM_TOKEN_LOGO_DARK;
+	systemtokenasset.dark = env.PUBLIC_SYSTEM_TOKEN_LOGO_DARK;
+}
+export const ramtoken = Token.from({
+	id: {
+		chain: env.PUBLIC_CHAIN_ID,
+		contract: env.PUBLIC_SYSTEM_CONTRACT,
+		symbol: '3,KB'
+	},
+	media: TokenMedia.from({
+		logo: ramtokenasset
+	})
+});
+export const systemtoken = Token.from({
+	id: {
+		chain: env.PUBLIC_CHAIN_ID,
 		contract: env.PUBLIC_SYSTEM_TOKEN_CONTRACT,
 		symbol: env.PUBLIC_SYSTEM_TOKEN_SYMBOL
 	},
+	media: TokenMedia.from({
+		logo: systemtokenasset
+	})
+});
+
+export const chainConfig: ChainConfig = {
+	id: env.PUBLIC_CHAIN_ID,
+	name: env.PUBLIC_CHAIN_SHORT,
+	systemtoken,
 	systemtokenalt,
 	legacytoken,
 	lockedsupply,
-	tokens: [],
 	endpoints: {
 		api: env.PUBLIC_API_CHAIN,
 		history: env.PUBLIC_API_HISTORY
@@ -126,13 +167,12 @@ export interface ChainConfig {
 	name: string;
 	features: Record<FeatureType, boolean>;
 	endpoints: ChainEndpoints;
-	legacytoken?: TokenDefinitionType;
+	legacytoken?: Token;
 	lockedsupply?: NameType[]; // Accounts where tokens exist but are not in circulation
 	coinbase?: ChainCoinbaseConfig;
 	metamask?: ChainMetaMaskConfig;
-	systemtoken: TokenDefinitionType;
+	systemtoken: Token;
 	systemtokenalt: Asset.Symbol[];
-	tokens: TokenDefinitionType[];
 }
 
 export type FeatureType =

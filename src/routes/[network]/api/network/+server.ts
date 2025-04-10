@@ -163,22 +163,28 @@ async function getNetworkNative(network: NetworkState): Promise<NetworkDataSourc
 		supply.supply.symbol
 	);
 
-	const token = UnicoveTypes.token_supply.from({
-		def: {
+	const rex = rexstate as REXTypes.rex_pool;
+
+	const token = UnicoveTypes.token.from({
+		id: {
+			chain: network.chain.id,
 			contract: network.chain.systemToken!.contract,
 			symbol: network.chain.systemToken!.symbol
 		},
-		circulating,
-		locked: lockedsupply,
-		supply: supply.supply,
-		max: supply.max_supply
+		distribution: {
+			circulating,
+			locked: lockedsupply,
+			supply: supply.supply,
+			staked: rex.total_lendable,
+			max: supply.max_supply
+		}
 	});
 
 	const response = NetworkDataSources.from({
 		global: SystemTypes.eosio_global_state.from(globalstate),
 		token,
 		ram: ramstate as SystemTypes.exchange_state,
-		rex: rexstate as REXTypes.rex_pool,
+		rex,
 		sample: sampleUsage as SampleUsage,
 		ram_gift_bytes: Int64.from(1400) // Not possible to get from native APIs?
 	});

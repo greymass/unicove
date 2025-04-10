@@ -5,9 +5,10 @@
 	interface Props {
 		error?: string;
 		hidden?: boolean;
+		onfailure?: () => ReturnType<import('svelte').Snippet>;
 	}
 
-	const { error, hidden }: Props = $props();
+	const { error, hidden, onfailure }: Props = $props();
 </script>
 
 <div class="space-y-6 rounded-lg text-center" class:hidden>
@@ -20,4 +21,8 @@
 			{error}
 		</p>
 	</div>
+
+	{#if onfailure}
+		{@render onfailure()}
+	{/if}
 </div>

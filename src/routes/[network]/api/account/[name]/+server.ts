@@ -11,8 +11,14 @@ import type { RequestEvent, RequestHandler } from './$types';
 import { Types as SystemTypes, type TableTypes } from '$lib/wharf/contracts/system';
 import { Types as REXTypes } from '$lib/types/rex';
 import { Types as UnicoveTypes } from '$lib/wharf/contracts/unicove.api';
-import { nullContractHash } from '$lib/state/defaults/account';
-import { TokenBalance, TokenDefinition } from '$lib/types/token';
+import {
+	defaultGiftedRam,
+	defaultRefundRequest,
+	defaultRexBalance,
+	defaultRexFund,
+	nullContractHash
+} from '$lib/state/defaults/account';
+import { TokenBalance, TokenDefinition, tokenEquals } from '$lib/types/token';
 
 export const GET: RequestHandler = async ({ locals: { network }, params }: RequestEvent) => {
 	const headers = getCacheHeaders(5);
@@ -56,11 +62,13 @@ async function loadBalances(
 		const json: LightAPIBalanceResponse = await result.json();
 		balances = json.balances.map((b) =>
 			TokenBalance.from({
-				id: TokenDefinition.from({
-					chain: network.chain.id,
-					contract: b.contract,
-					symbol: `${b.decimals},${b.currency}`
-				}),
+				token: {
+					id: {
+						chain: network.chain.id,
+						contract: b.contract,
+						symbol: `${b.decimals},${b.currency}`
+					}
+				},
 				balance: Asset.fromFloat(Number(b.amount), `${b.decimals},${b.currency}`)
 			})
 		);
@@ -80,14 +88,14 @@ async function getAccount(network: NetworkState, account: NameType): Promise<Acc
 
 	let rex;
 	let balances: TokenBalance[] = [];
-	let giftedram: UnicoveTypes.gifted_ram | undefined;
+	let giftedram = defaultGiftedRam;
 
 	if (network.supports('lightapi')) {
 		balances = await loadBalances(network, account, network.fetch);
 	} else {
 		balances = [
 			TokenBalance.from({
-				id: network.token,
+				token: network.token,
 				balance: get_account.core_liquid_balance || Asset.fromUnits(0, network.token.symbol)
 			})
 		];
@@ -106,17 +114,17 @@ async function getAccount(network: NetworkState, account: NameType): Promise<Acc
 
 	const defaultBalance = Asset.fromUnits(0, network.config.systemtoken.symbol);
 
-	let refund_request: SystemTypes.refund_request | undefined;
+	let refund_request = defaultRefundRequest;
 	if (get_account.refund_request) {
 		refund_request = SystemTypes.refund_request.from(get_account.refund_request);
 	}
 
-	let rexbal: REXTypes.rex_balance | undefined;
+	let rexbal = defaultRexBalance;
 	if (get_account.rex_info) {
 		rexbal = REXTypes.rex_balance.from(get_account.rex_info);
 	}
 
-	let rexfund: REXTypes.rex_fund | undefined;
+	let rexfund = defaultRexFund;
 	if (rex) {
 		rexfund = REXTypes.rex_fund.from(rex);
 	}
@@ -126,7 +134,10 @@ async function getAccount(network: NetworkState, account: NameType): Promise<Acc
 	return {
 		get_account,
 		contract_hash,
-		balance: get_account.core_liquid_balance || defaultBalance,
+		balance: TokenBalance.from({
+			token: network.token,
+			balance: get_account.core_liquid_balance || defaultBalance
+		}),
 		balances,
 		delegated,
 		giftedram,
@@ -139,11 +150,11 @@ async function getAccount(network: NetworkState, account: NameType): Promise<Acc
 
 async function getAccount2(network: NetworkState, account: NameType): Promise<AccountDataSources> {
 	const tokens: UnicoveTypes.token_definition[] = [];
-	if (network.legacytoken) {
+	if (network.config.legacytoken) {
 		tokens.push(
 			UnicoveTypes.token_definition.from({
-				contract: network.legacytoken.contract,
-				symbol: network.legacytoken.symbol
+				contract: network.config.legacytoken.contract,
+				symbol: network.config.legacytoken.symbol
 			})
 		);
 	}
@@ -158,7 +169,7 @@ async function getAccount2(network: NetworkState, account: NameType): Promise<Ac
 	return {
 		get_account,
 		contract_hash: getaccount.contracthash,
-		balance: getaccount.balance,
+		balance: TokenBalance.from(getaccount.balance),
 		balances,
 		delegated: getaccount.delegations,
 		giftedram: getaccount.giftedram,
@@ -171,35 +182,45 @@ async function getAccount2(network: NetworkState, account: NameType): Promise<Ac
 
 async function getBalances(
 	network: NetworkState,
-	requested: TokenDefinition[],
+	requested: UnicoveTypes.token_definition[],
 	getaccount: UnicoveTypes.get_account_response
 ): Promise<TokenBalance[]> {
 	const balances: TokenBalance[] = [];
 	if (network.supports('lightapi')) {
 		const results = await loadBalances(network, getaccount.account, network.fetch);
 		balances.push(...results);
-	}
-	if (getaccount.balance) {
+	} else if (getaccount.balance) {
 		balances.push(
 			TokenBalance.from({
-				id: network.token,
-				balance: getaccount.balance
+				token: network.getSystemToken(),
+				balance: getaccount.balance.balance
 			})
 		);
 	}
 	if (getaccount.balances) {
-		for (const token of requested) {
-			const balance = getaccount.balances.find((b) => b.symbol.equals(token.symbol));
+		for (const requestedToken of requested) {
+			const balance = getaccount.balances.find((b) =>
+				b.token.id.symbol.equals(requestedToken.symbol)
+			);
 			if (balance) {
-				balances.push(
-					TokenBalance.from({
-						id: {
-							...token,
-							chain: network.chain.id
-						},
-						balance
-					})
-				);
+				// If this is the legacy token, merge in configured token metadata
+				if (
+					network.config.legacytoken &&
+					tokenEquals(TokenDefinition.from(balance.token.id), network.config.legacytoken.id)
+				) {
+					balances.push(
+						TokenBalance.from({
+							...balance,
+							token: network.config.legacytoken
+						})
+					);
+				} else {
+					balances.push(
+						TokenBalance.from({
+							...balance
+						})
+					);
+				}
 			}
 		}
 	}
