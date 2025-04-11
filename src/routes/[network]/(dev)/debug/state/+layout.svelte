@@ -15,19 +15,19 @@
 			text: 'Account'
 		},
 		{
-			active: activeItem === 'network',
-			href: `/${data.network}/debug/state/network`,
-			text: 'Network'
-		},
-		{
 			active: activeItem === 'config',
 			href: `/${data.network}/debug/state/config`,
-			text: 'Chain'
+			text: 'Config'
 		},
 		{
 			active: activeItem === 'market',
 			href: `/${data.network}/debug/state/market`,
 			text: 'Market'
+		},
+		{
+			active: activeItem === 'network',
+			href: `/${data.network}/debug/state/network`,
+			text: 'Network'
 		},
 		{ active: activeItem === 'wharf', href: `/${data.network}/debug/state/wharf`, text: 'Wharf' }
 	]}
