@@ -55,7 +55,7 @@
 	);
 </script>
 
-<div class="xs:grid-cols-[100%] grid gap-6 lg:grid-cols-[60%_35%]">
+<div class="xs:grid-cols-full grid gap-6 lg:grid-cols-[60%_1fr]">
 	<div class="space-y-6">
 		{#if hasValue}
 			<Card id="account-value" style="column-span: all;">
@@ -159,8 +159,8 @@
 	<div class="space-y-6">
 		<Tokendistribution data={currentAccountValue.systemtoken} />
 		{#if context.settings.data.advancedMode}
-			<Card title={m.common_resources()}>
-				<div class="flex flex-wrap gap-12 *:flex-1">
+			<Card class="@container" title={m.common_resources()}>
+				<div class="flex gap-12 *:flex-1 @sm:justify-between @sm:*:flex-auto">
 					<ResourceCard type="cpu" value={cpuAvailable} vertical />
 
 					<ResourceCard type="net" value={netAvailable} vertical />
