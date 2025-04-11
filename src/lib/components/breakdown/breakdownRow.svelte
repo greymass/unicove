@@ -22,7 +22,7 @@
 
 <div
 	class={cn(
-		'col-span-full grid min-h-12 grid-cols-subgrid items-center gap-x-4 border-b border-mineShaft-900 last:border-none ',
+		'border-mine-900 col-span-full grid min-h-12 grid-cols-subgrid items-center gap-x-4 border-b last:border-none ',
 		isTotal && 'font-semibold'
 	)}
 >
@@ -31,14 +31,14 @@
 	>
 		<div class="text-muted">{key}</div>
 		<div class="text-white">
-			<AssetText class="text-nowrap" variant="full" {value} />
+			<AssetText class="text-nowrap tabular-nums" variant="full" {value} />
 		</div>
 	</div>
 
 	{#if action && action.visible}
 		<div class="col-span-2 col-start-2 row-start-1 text-right @xs:col-span-1 @xs:col-start-3">
 			<a
-				class="inline-block h-12 content-center text-skyBlue-500 hover:text-skyBlue-400"
+				class="inline-block h-12 content-center text-sky-500 hover:text-sky-400"
 				href={action.href}
 			>
 				{action.text}

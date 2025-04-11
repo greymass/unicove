@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Asset, UInt64 } from '@wharfkit/antelope';
+	import { Asset } from '@wharfkit/antelope';
 	import { getContext } from 'svelte';
 	import { ChartLine } from 'lucide-svelte';
 
@@ -24,6 +24,7 @@
 	import Chip from '$lib/components/chip.svelte';
 	import * as m from '$lib/paraglide/messages';
 	import { Currencies } from '$lib/types/currencies';
+	import { ZeroUnits } from '$lib/types/token';
 
 	const context = getContext<UnicoveContext>('state');
 	const market = getContext<MarketContext>('market');
@@ -63,9 +64,9 @@
 	let apr = $derived(getAPR(data.network));
 
 	let activity = $derived(
-		staked.units.gt(UInt64.from(0)) ||
-			unstakingTotal.units.gt(UInt64.from(0)) ||
-			totalWithdraw.units.gt(UInt64.from(0))
+		staked.units.gt(ZeroUnits) ||
+			unstakingTotal.units.gt(ZeroUnits) ||
+			totalWithdraw.units.gt(ZeroUnits)
 	);
 
 	const currency = $derived(Currencies[context.settings.data.displayCurrency]);
@@ -76,7 +77,7 @@
 
 {#snippet tableAction([text, href]: string[])}
 	<td class="text-right">
-		<a class="text-skyBlue-500 hover:text-skyBlue-400" {href}>{text}</a>
+		<a class="text-sky-500 hover:text-sky-400" {href}>{text}</a>
 	</td>
 {/snippet}
 
@@ -84,7 +85,7 @@
 	<MultiCard>
 		<Card id="account-value" style="column-span: all;">
 			<Cluster class="items-center">
-				<picture class="grid size-12 place-items-center rounded-full bg-mineShaft-900">
+				<picture class="bg-mine-900 grid size-12 place-items-center rounded-full">
 					<ChartLine />
 				</picture>
 				<div>
@@ -101,12 +102,12 @@
 		>
 			<Stack>
 				<Stack class="gap-2">
-					<h4 class="text-muted text-base capitalize leading-none">
+					<h4 class="text-muted text-base leading-none capitalize">
 						{m.common_labeled_unit_staked({
 							unit: m.common_tokens()
 						})}
 					</h4>
-					<p class="text-xl font-semibold leading-none text-white">
+					<p class="text-xl leading-none font-semibold text-white">
 						<AssetText variant="full" value={total} />
 					</p>
 					<Chip>
@@ -119,7 +120,7 @@
 					<Stack class="gap-2">
 						<table class="table-styles text-muted">
 							<tbody>
-								{#if staked.units.gt(UInt64.from(0))}
+								{#if staked.units.gt(ZeroUnits)}
 									<tr>
 										<td>{m.common_staked()}</td>
 										<td class="text-right text-white">
@@ -136,7 +137,7 @@
 										{@render tableAction([m.common_unstake(), `/${data.network}/staking/unstake`])}
 									</tr>
 								{/if}
-								{#if unstakingTotal.units.gt(UInt64.from(0))}
+								{#if unstakingTotal.units.gt(ZeroUnits)}
 									<tr>
 										<td>{m.common_unstaking()}</td>
 										<td class="text-right text-white">
@@ -150,7 +151,7 @@
 										<td></td>
 									</tr>
 								{/if}
-								{#if totalWithdraw.units.gt(UInt64.from(0))}
+								{#if totalWithdraw.units.gt(ZeroUnits)}
 									<tr>
 										<td>{m.common_unstaked()}</td>
 										<td class="text-right text-white">

@@ -1,8 +1,15 @@
 import { Asset, Serializer, TimePointSec } from '@wharfkit/antelope';
 
-import { TokenDataSources, TokenPair } from '$lib/types/token';
+import {
+	Token,
+	TokenDataSources,
+	tokenEquals,
+	TokenPair,
+	TokenSwap,
+	ZeroUnits
+} from '$lib/types/token';
 import { TokenDefinition } from '$lib/types/token';
-import { Currencies, ramKb } from '$lib/types/currencies';
+import { Currencies } from '$lib/types/currencies';
 
 import type { NetworkState } from './network.svelte';
 import type { SettingsState } from './settings.svelte';
@@ -10,7 +17,8 @@ import type { SettingsState } from './settings.svelte';
 export class MarketState {
 	private sources: TokenDataSources = $state() as TokenDataSources;
 
-	public refreshed: TimePointSec = TimePointSec.from(new Date());
+	public refreshed: TimePointSec = $state(TimePointSec.fromInteger(0));
+	readonly loaded = $derived(this.refreshed.value.gt(ZeroUnits));
 
 	readonly settings = $state() as SettingsState;
 	readonly network = $state() as NetworkState;
@@ -19,6 +27,10 @@ export class MarketState {
 		...this.sources.pairs,
 		...this.sources.pairs.map((pair) => pair.reversed)
 	]);
+
+	readonly historic = $derived(this.sources.historic);
+
+	readonly swaps = $derived(getSwaps(this.network, this.pairs));
 
 	constructor(network: NetworkState, settings: SettingsState) {
 		this.network = network;
@@ -33,7 +45,12 @@ export class MarketState {
 	public async refresh() {
 		const basePair = Currencies[this.settings.data.displayCurrency];
 		const encoded = Serializer.encode({ object: basePair });
-		const response = await this.network.fetch(`/${this.network}/api/pairs/${encoded}`);
+		let url = `/${this.network}/api/pairs/${encoded}`;
+		if (this.settings.data.mockPrice) {
+			// Allow mock data for prices to be passed for testing
+			url += `?mock=${Asset.fromUnits(12345, basePair.symbol)}`;
+		}
+		const response = await this.network.fetch(url);
 		if (response.ok) {
 			const json = await response.json();
 			this.sources = TokenDataSources.from(json);
@@ -51,19 +68,23 @@ export class MarketState {
 	}
 
 	getPair(base: TokenDefinition, quote: TokenDefinition): TokenPair | undefined {
-		return this.pairs.find((pair) => {
-			const matchBase = TokenDefinition.from(pair.base).equals(TokenDefinition.from(base));
-			const matchQuote = TokenDefinition.from(pair.quote).equals(TokenDefinition.from(quote));
-			return matchBase && matchQuote;
-		});
+		return this.pairs.find((p) => tokenEquals(p.base.id, base) && tokenEquals(p.quote.id, quote));
 	}
 
-	getRAMTokenPair(quote: TokenDefinition): TokenPair | undefined {
-		const pair = this.pairs.find((pair) => {
-			const matchBase = TokenDefinition.from(pair.base).equals(ramKb);
-			const matchQuote = TokenDefinition.from(pair.quote).equals(TokenDefinition.from(quote));
-			return matchBase && matchQuote;
-		});
+	getSwap(base: TokenDefinition, quote: TokenDefinition): TokenSwap | undefined {
+		const swap = this.swaps.find(
+			(swap) => tokenEquals(swap.pair.base.id, base) && tokenEquals(swap.pair.quote.id, quote)
+		);
+		if (swap) {
+			return swap;
+		}
+	}
+
+	getRAMTokenPair(quote: Token): TokenPair | undefined {
+		const ramKb = this.network.getRamToken();
+		const pair = this.pairs.find(
+			(pair) => tokenEquals(pair.base.id, ramKb.id) && tokenEquals(pair.quote.id, quote.id)
+		);
 		if (!pair) {
 			return TokenPair.from({
 				base: ramKb,
@@ -75,15 +96,13 @@ export class MarketState {
 		return pair;
 	}
 
-	getSystemTokenPair(quote: TokenDefinition): TokenPair | undefined {
-		const pair = this.pairs.find((pair) => {
-			const matchBase = TokenDefinition.from(pair.base).equals(this.network.token.id);
-			const matchQuote = TokenDefinition.from(pair.quote).equals(TokenDefinition.from(quote));
-			return matchBase && matchQuote;
-		});
+	getSystemTokenPair(quote: Token): TokenPair | undefined {
+		const pair = this.pairs.find(
+			(p) => tokenEquals(p.base.id, this.network.token.id) && tokenEquals(p.quote.id, quote.id)
+		);
 		if (!pair) {
 			return TokenPair.from({
-				base: this.network.token.id,
+				base: this.network.token,
 				quote,
 				price: Asset.fromUnits(0, quote.symbol),
 				updated: new Date()
@@ -103,4 +122,43 @@ export class MarketState {
 			pairs: this.pairs
 		};
 	}
+}
+
+function getSwaps(network: NetworkState, pairs: TokenPair[]): TokenSwap[] {
+	const swaps: TokenSwap[] = [];
+	if (network.config.legacytoken) {
+		const {
+			token,
+			config: { legacytoken }
+		} = network;
+
+		const legacyPair = pairs.find(
+			(pair) => tokenEquals(pair.base.id, legacytoken.id) && tokenEquals(pair.quote.id, token.id)
+		);
+		if (legacyPair) {
+			swaps.push(
+				TokenSwap.from({
+					pair: legacyPair,
+					contract: network.token.contract,
+					action: 'transfer',
+					fee: Asset.fromUnits(0, network.token.symbol)
+				})
+			);
+		}
+
+		const newPair = pairs.find(
+			(pair) => tokenEquals(pair.base.id, token.id) && tokenEquals(pair.quote.id, legacytoken.id)
+		);
+		if (newPair) {
+			swaps.push(
+				TokenSwap.from({
+					pair: newPair,
+					contract: network.token.contract,
+					action: 'transfer',
+					fee: Asset.fromUnits(0, network.config.legacytoken.symbol)
+				})
+			);
+		}
+	}
+	return swaps;
 }

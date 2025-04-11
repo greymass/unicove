@@ -218,7 +218,7 @@
 	aria-label="search"
 	id="search"
 	class={cn(
-		'text-muted relative z-50 inline-flex h-10 items-center justify-between text-nowrap rounded-lg bg-transparent py-3.5 text-base font-medium leading-4 focus:outline-none focus-visible:border-solar-500 md:justify-between md:border md:border-mineShaft-600 md:py-2 md:pl-3 md:pr-0',
+		'text-muted focus-visible:border-solar-500 md:border-mine-600 relative z-50 inline-flex h-10 items-center justify-between rounded-lg bg-transparent py-3.5 text-base leading-4 font-medium text-nowrap focus:outline-hidden md:justify-between md:border md:py-2 md:pr-0 md:pl-3',
 		className
 	)}
 >
@@ -232,7 +232,7 @@
 	</span>
 
 	{#if shortcutKey}
-		<span class="m-2 hidden rounded border border-mineShaft-900 px-2 py-1 md:inline">
+		<span class="border-mine-900 m-2 hidden rounded-sm border px-2 py-1 md:inline">
 			{shortcutKey}
 		</span>
 	{/if}
@@ -247,7 +247,7 @@
 		></div>
 		<div
 			use:melt={$content}
-			class="fixed left-1/2 top-20 z-50 max-h-[85vh] w-[90vw] max-w-lg -translate-x-1/2 transform overflow-hidden rounded-2xl bg-mineShaft-950 p-4 shadow-lg"
+			class="bg-mine-950 fixed top-20 left-1/2 z-50 max-h-[85vh] w-[90vw] max-w-lg -translate-x-1/2 transform overflow-hidden rounded-2xl p-4 shadow-lg"
 			transition:scale={{
 				duration: 100,
 				start: 0.95
@@ -264,10 +264,10 @@
 							bind:this={ref}
 							bind:value={searchValue}
 							placeholder={m.common_search_unicove()}
-							class="w-full rounded-lg border-2 border-skyBlue-500 bg-transparent p-4 focus:outline-none"
+							class="w-full rounded-lg border-2 border-sky-500 bg-transparent p-4 focus:outline-hidden"
 						/>
 						<div
-							class="text-muted absolute inset-y-1 right-4 hidden place-items-center bg-mineShaft-950 sm:grid"
+							class="text-muted bg-mine-950 absolute inset-y-1 right-4 hidden place-items-center sm:grid"
 						>
 							<SearchIcon class="size-5 " />
 						</div>
@@ -276,7 +276,7 @@
 
 				<div class="table-styles grid grid-cols-[1fr_1fr] gap-x-4 sm:grid-cols-[1fr_1fr_auto]">
 					{#if results.length > 0}
-						<div class="table-head-styles col-span-full grid select-none grid-cols-subgrid">
+						<div class="table-head-styles col-span-full grid grid-cols-subgrid select-none">
 							{#if searchValue}
 								<span class="pl-2">{m.common_search_results()}</span>
 							{:else}
@@ -285,7 +285,7 @@
 							<span class="text-right sm:text-left">{m.common_action()}</span>
 							{#if !searchValue}
 								<button
-									class="hidden justify-self-end focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-solar-500 sm:block"
+									class="focus-visible:outline-solar-500 hidden justify-self-end focus-visible:outline focus-visible:outline-offset-2 sm:block"
 									onclick={() => context.history.clear()}
 								>
 									{m.common_clear()}
@@ -327,13 +327,13 @@
 {#snippet ResultRow(index: number, item: SearchRecord)}
 	{@const active = index === selectedIndex}
 	<li
-		class="group/row group-has-[:hover]/list:text-muted col-span-full grid h-12 grid-cols-subgrid items-center justify-items-start rounded-lg focus:outline-none group-has-[:hover]/list:bg-transparent group-has-[:hover]/list:hover:bg-mineShaft-900 group-has-[:hover]/list:hover:text-mineShaft-50 data-[active=true]:bg-mineShaft-900 data-[active=true]:text-mineShaft-50"
+		class="group/row group-has-[:hover]/list:text-muted hover:group-has-[:hover]/list:bg-mine-900 hover:group-has-[:hover]/list:text-mine-50 data-[active=true]:bg-mine-900 data-[active=true]:text-mine-50 col-span-full grid h-12 grid-cols-subgrid items-center justify-items-start rounded-lg group-has-[:hover]/list:bg-transparent focus:outline-hidden"
 		data-active={active}
 	>
 		<Result class="col-span-2 sm:col-span-3" {active} record={item} onclick={closeSearch}>
 			<div
 				data-active={active}
-				class="hidden size-12 place-items-center text-mineShaft-50 sm:group-hover/row:grid sm:data-[active=true]:grid sm:group-has-[:hover]/list:data-[active=true]:hidden sm:group-has-[:hover]/list:group-hover/row:data-[active=true]:grid"
+				class="text-mine-50 hidden size-12 place-items-center sm:group-hover/row:grid sm:data-[active=true]:grid sm:data-[active=true]:group-has-[:hover]/list:hidden sm:data-[active=true]:group-hover/row:group-has-[:hover]/list:grid"
 			>
 				<ArrowRight />
 			</div>
@@ -344,12 +344,12 @@
 {#snippet HistoryRow(index: number, item: SearchRecord)}
 	{@const active = index === selectedIndex}
 	<li
-		class="group-has-[:hover]/list:text-muted col-span-full grid h-12 grid-cols-subgrid items-center justify-items-start rounded-lg focus:outline-none group-has-[:hover]/list:bg-transparent group-has-[:hover]/list:hover:bg-mineShaft-900 group-has-[:hover]/list:hover:text-mineShaft-50 data-[active=true]:bg-mineShaft-900 data-[active=true]:text-mineShaft-50"
+		class="group-has-[:hover]/list:text-muted hover:group-has-[:hover]/list:bg-mine-900 hover:group-has-[:hover]/list:text-mine-50 data-[active=true]:bg-mine-900 data-[active=true]:text-mine-50 col-span-full grid h-12 grid-cols-subgrid items-center justify-items-start rounded-lg group-has-[:hover]/list:bg-transparent focus:outline-hidden"
 		data-active={active}
 	>
 		<Result class="col-span-2 sm:col-span-3" {active} record={item} onclick={closeSearch}>
 			<button
-				class="text-muted grid hidden size-12 place-items-center justify-self-end hover:text-white focus-visible:outline-none focus-visible:ring focus-visible:ring-inset focus-visible:ring-solar-500 sm:block"
+				class="text-muted focus-visible:ring-solar-500 grid hidden size-12 place-items-center justify-self-end hover:text-white focus-visible:ring-3 focus-visible:outline-hidden focus-visible:ring-inset sm:block"
 				onclick={() => context.history.remove(index)}
 			>
 				<X class="text-inherit" />

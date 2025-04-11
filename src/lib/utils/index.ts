@@ -14,7 +14,7 @@ export function calculateValue(balance: Asset, currency: Asset): Asset {
 
 export function getCacheHeaders(ttl: number, irreversible: boolean = false) {
 	// Maintain a ttl cache by default
-	let browser = `public, max-age=${ttl}, s-max-age=${ttl}, stale-while-revalidate=${ttl}`;
+	let browser = `public, max-age=${ttl}, s-max-age=${ttl}, stale-while-revalidate=${ttl + 30}`;
 	let cloudflare = `max-age=${ttl}, s-max-age=${ttl}`;
 
 	// If the data is irreversible, set 1 year and immutable

@@ -7,21 +7,24 @@
 	const context = getContext<MarketContext>('market');
 
 	const pairs = $derived(context.market.pairs);
+	const pairsList = $derived(
+		pairs.map((pair) => `${pair.base.symbol}-${pair.quote.symbol} @ ${pair.price}`)
+	);
 	const refreshed = $derived(context.market.refreshed);
 </script>
 
-<h3 class="h3">Trading Pairs</h3>
-<p>{refreshed} ({pairs.length} records)</p>
-<Button onclick={() => context.market.refresh()}>Refresh</Button>
+<div class="space-y-6">
+	<Button onclick={() => context.market.refresh()}>Refresh</Button>
+	<p>Updated {refreshed}</p>
 
-<h3 class="h3">Pairs</h3>
-<Code>
-	{#each pairs as pair}
-		<p>{pair.base.symbol}-{pair.quote.symbol} @ {pair.price}</p>
-	{/each}
-</Code>
+	<h3 class="h3">TokenPairs ({pairs.length})</h3>
+	<Code collapsible json={pairsList}></Code>
 
-<h3 class="h3">Context</h3>
-<Code>
-	{JSON.stringify(context, undefined, 2)}
-</Code>
+	<h3 class="h3">Historic</h3>
+	<Code collapsible json={context.market.historic}></Code>
+
+	<h3 class="h3">MarketContext</h3>
+	<Code>
+		{JSON.stringify(context, undefined, 2)}
+	</Code>
+</div>

@@ -6,6 +6,9 @@ export enum SettingKeys {
 	'actionDisplayVariant' = 'actionDisplayVariant',
 	'advancedMode' = 'advancedMode',
 	'debugMode' = 'debugMode',
+	'developerMode' = 'developerMode',
+	'increasedPrecision' = 'increasedPrecision',
+	'mockPrice' = 'mockPrice',
 	'preventAccountPageSwitching' = 'preventAccountPageSwitching',
 	'searchAccountSwitch' = 'searchAccountSwitch',
 	'searchShowPages' = 'searchShowPages'
@@ -38,6 +41,9 @@ export interface SettingsData {
 	advancedMode?: boolean;
 	displayCurrency: SupportedCurrencies;
 	debugMode?: boolean;
+	developerMode?: boolean;
+	increasedPrecision?: boolean;
+	mockPrice?: boolean;
 	preventAccountPageSwitching?: boolean;
 	searchAccountSwitch?: boolean;
 	searchShowPages?: boolean;
@@ -48,6 +54,9 @@ const defaultSettings: SettingsData = {
 	advancedMode: false,
 	displayCurrency: SupportedCurrencies.USD,
 	debugMode: false,
+	developerMode: false,
+	increasedPrecision: false,
+	mockPrice: false,
 	preventAccountPageSwitching: false,
 	searchAccountSwitch: false,
 	searchShowPages: true

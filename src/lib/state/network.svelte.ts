@@ -28,10 +28,12 @@ import {
 	type ChainConfig,
 	type DefaultContracts,
 	type FeatureType,
-	getChainConfigByName
+	getChainConfigByName,
+	systemtoken,
+	ramtoken
 } from '$lib/wharf/chains';
 
-import { type TokenType, TokenDistribution, Token, TokenDefinition } from '$lib/types/token';
+import { Token, ZeroUnits, TokenDefinition, tokenEquals } from '$lib/types/token';
 
 import { Contract as DelphiHelperContract } from '$lib/wharf/contracts/delphihelper';
 import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
@@ -39,8 +41,12 @@ import { Contract as MSIGContract } from '$lib/wharf/contracts/msig';
 import { Contract as SystemContract } from '$lib/wharf/contracts/system';
 import { Contract as TimeContract } from '$lib/wharf/contracts/eosntime';
 import { Contract as TokenContract } from '$lib/wharf/contracts/token';
-import { Contract as UnicoveContract } from '$lib/wharf/contracts/unicove';
+import { Contract as UnicoveContract } from '$lib/wharf/contracts/unicove.api';
 import type { ObjectifiedActionData } from '$lib/types/transaction';
+import {
+	PUBLIC_FEATURE_UNICOVE_CONTRACT_API,
+	PUBLIC_SYSTEM_CONTRACT_PROXY
+} from '$env/static/public';
 
 export class NetworkState {
 	// Readonly state
@@ -94,7 +100,8 @@ export class NetworkState {
 		this.abis = new ABICache(this.client);
 		this.resourceClient = new ResourceClient({
 			api: this.client,
-			sampleAccount: 'eosio.reserv'
+			sampleAccount: 'eosio.reserv',
+			symbol: String(this.config.systemtoken.symbol)
 		});
 		this.connection.endpoint = (this.client.provider as FetchProvider).url;
 
@@ -103,9 +110,15 @@ export class NetworkState {
 			delphioracle: new DelphiOracleContract({ client: this.client }),
 			eosntime: new TimeContract({ client: this.client }),
 			msig: new MSIGContract({ client: this.client }),
-			system: new SystemContract({ client: this.client }),
+			system: new SystemContract({
+				account: PUBLIC_SYSTEM_CONTRACT_PROXY,
+				client: this.client
+			}),
 			token: new TokenContract({ client: this.client }),
-			unicove: new UnicoveContract({ client: this.client })
+			unicove: new UnicoveContract({
+				account: PUBLIC_FEATURE_UNICOVE_CONTRACT_API,
+				client: this.client
+			})
 		};
 	}
 
@@ -146,29 +159,33 @@ export class NetworkState {
 		}
 	}
 
+	getRamToken(): Token {
+		return Token.from(ramtoken);
+	}
+
 	getSystemToken(): Token {
-		const id = TokenDefinition.from({
-			chain: this.chain.id,
-			symbol: this.config.systemtoken.symbol,
-			contract: this.config.systemtoken.contract
-		});
+		const token = Token.from(systemtoken);
 
-		const tokenData: TokenType = {
-			id
-		};
-
-		if (this.sources) {
-			tokenData.distribution = TokenDistribution.from({
-				circulating: this.sources.token.circulating,
-				locked: this.sources.token.locked,
-				staked:
-					this.sources.rex?.total_lendable || Asset.fromUnits(0, this.config.systemtoken.symbol),
-				supply: this.sources.token.supply,
-				max: this.sources.token.max
-			});
+		if (this.sources && this.sources.token.distribution) {
+			token.distribution = this.sources.token.distribution;
 		}
 
-		return Token.from(tokenData);
+		return token;
+	}
+
+	getToken(id: TokenDefinition): Token {
+		if (tokenEquals(id, systemtoken.id)) {
+			return this.getSystemToken();
+		}
+		if (tokenEquals(id, ramtoken.id)) {
+			return this.getRamToken();
+		}
+		if (this.config.legacytoken && tokenEquals(id, this.config.legacytoken.id)) {
+			return this.config.legacytoken;
+		}
+		return Token.from({
+			id
+		});
 	}
 
 	getRexState() {
@@ -234,10 +251,6 @@ export class NetworkState {
 		];
 	};
 
-	get foo() {
-		return this.sources?.ram;
-	}
-
 	getResources(): SystemResources {
 		const defaultValue = Asset.fromUnits(0, this.token.symbol);
 		const response: SystemResources = {
@@ -259,7 +272,7 @@ export class NetworkState {
 				price: {
 					rammarket: defaultValue
 				},
-				supply: UInt64.from(0),
+				supply: UInt64.from(ZeroUnits.value),
 				gift: UInt64.from(this.sources ? this.sources.ram_gift_bytes : 0)
 			}
 		};

@@ -143,7 +143,7 @@
 			publicKeyInput.set('');
 		}
 		if (privateKeyInput) {
-			privateKeyInput.set('');
+			privateKeyInput?.set('');
 		}
 
 		accountName = Name.from('');

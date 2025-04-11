@@ -6,7 +6,7 @@
 	const { children, data } = $props();
 </script>
 
-<Stack tag="article" class="gap-6 @container">
+<Stack tag="article" class="@container gap-6">
 	<Pageheader
 		network={data.network}
 		title={page.data.title}
