@@ -111,7 +111,7 @@
 		</picture>
 
 		<div class="text-muted grid gap-y-4 text-nowrap @sm:grid-cols-[auto_1fr] @sm:gap-x-2">
-			<div class="left grid gap-1">
+			<div class="left flex flex-col justify-center gap-1">
 				<h4 class="text-on-surface text-xl leading-none font-bold capitalize">
 					{#if isRamToken}
 						<Link class="text-on-surface" href="/{network}/ram">
@@ -136,7 +136,7 @@
 				{/if}
 			</div>
 
-			<div class="text-muted grid content-start items-start gap-1 @sm:justify-items-end">
+			<div class="right text-muted grid content-start items-start gap-1 @sm:justify-items-end">
 				{#if pair && hasValue}
 					{#if value.units.gt(ZeroUnits)}
 						<h4 class="text-on-surface text-xl leading-none font-bold capitalize">
