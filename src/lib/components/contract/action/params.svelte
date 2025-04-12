@@ -17,7 +17,7 @@
 	<table class="table-styles">
 		<thead>
 			<tr>
-				<th colspan="2" class="flex items-center text-lg font-bold">
+				<th colspan="2" class="text-lg font-bold">
 					Request Parameters
 					<Braces class="ml-2 inline" />
 				</th>
@@ -28,7 +28,7 @@
 				{@const fieldType = abi.structs.find((s) => s.name === parseRootType(field.type))}
 				<tr>
 					<td>
-						<span class="text-white">
+						<span class="text-on-surface">
 							{field.name}
 						</span>
 					</td>

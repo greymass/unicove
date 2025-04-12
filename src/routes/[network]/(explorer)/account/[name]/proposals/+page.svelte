@@ -8,9 +8,8 @@
 </script>
 
 {#each proposals as proposal}
-	<Card>
-		Proposal ID
-		<h2 class="h2">
+	<Card titleTag="span" title="Proposal ID">
+		<h2 class="">
 			<Link href={`/${data.network}/msig/${data.name}/${proposal.proposal_name}`}>
 				{proposal.proposal_name}
 			</Link>

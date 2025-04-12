@@ -14,28 +14,28 @@
 		heading. This is easily achieved by applying the h2 class to the h1 tag.
 	</p>
 	<Cluster class="items-center">
-		<p class="h1">Heading 1 (Inter 48)</p>
-		<code class=" bg-mine-300 rounded-lg p-2 text-black">class='h1'</code>
+		<p class="h1 text-on-surface">Heading 1 (Inter 48)</p>
+		<code class=" bg-surface-container-highest text-on-surface rounded-lg p-2">class='h1'</code>
 	</Cluster>
 	<Cluster class="items-center">
-		<p class="h2">Heading 2 (Inter 32)</p>
-		<code class=" bg-mine-300 rounded-lg p-2 text-black">class='h2'</code>
+		<p class="h2 text-on-surface">Heading 2 (Inter 32)</p>
+		<code class=" bg-surface-container-highest text-on-surface rounded-lg p-2">class='h2'</code>
 	</Cluster>
 	<Cluster class="items-center">
-		<p class="h3">Heading 3 (Inter 24)</p>
-		<code class=" bg-mine-300 rounded-lg p-2 text-black">class='h3'</code>
+		<p class="h3 text-on-surface">Heading 3 (Inter 24)</p>
+		<code class=" bg-surface-container-highest text-on-surface rounded-lg p-2">class='h3'</code>
 	</Cluster>
 	<Cluster class="items-center">
-		<p class="h4">Heading 4 (Inter 18)</p>
-		<code class=" bg-mine-300 rounded-lg p-2 text-black">class='h4'</code>
+		<p class="h4 text-on-surface">Heading 4 (Inter 18)</p>
+		<code class=" bg-surface-container-highest text-on-surface rounded-lg p-2">class='h4'</code>
 	</Cluster>
 	<Cluster class="items-center">
-		<p class="h5">Heading 5 (Inter 16)</p>
-		<code class="bg-mine-300 rounded-lg p-2 text-black">class='h5'</code>
+		<p class="h5 text-on-surface">Heading 5 (Inter 16)</p>
+		<code class="bg-surface-container-highest text-on-surface rounded-lg p-2">class='h5'</code>
 	</Cluster>
 	<Cluster class="items-center">
 		<p class="caption">Caption (Inter 12)</p>
-		<code class="bg-mine-300 rounded-lg p-2 text-black">class='caption'</code>
+		<code class="bg-surface-container-highest text-on-surface rounded-lg p-2">class='caption'</code>
 	</Cluster>
 	<p>
 		Paragraph - lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor

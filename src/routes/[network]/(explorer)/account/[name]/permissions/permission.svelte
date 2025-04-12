@@ -2,6 +2,7 @@
 	import Self from './permission.svelte';
 	import Key from '$lib/components/elements/key.svelte';
 	import CopyButton from '$lib/components/button/copy.svelte';
+	import IconButton from '$lib/components/button/icon.svelte';
 	import Account from '$lib/components/elements/account.svelte';
 	import Contract from '$lib/components/elements/contract.svelte';
 	import dayjs from 'dayjs';
@@ -43,23 +44,23 @@
 </script>
 
 <li
-	class="bg-shark-950 relative col-span-full grid grid-cols-subgrid"
+	class="relative col-span-full grid grid-cols-subgrid"
 	class:pl-4={level !== 0}
 	class:pt-6={level !== 0}
 >
 	<dl
-		class="bg-mine-950 z-20 col-span-full space-y-1 rounded-t-lg px-4 py-3 md:col-span-1 md:rounded-l-lg md:rounded-r-none"
+		class="bg-surface-container-high z-20 col-span-full space-y-1 rounded-t-lg px-4 py-3 md:col-span-1 md:rounded-l-lg md:rounded-r-none"
 	>
 		<div>
 			<dt class="sr-only">{m.common_permission_name()}</dt>
-			<dd class="text-xl font-semibold text-white">
+			<dd class="text-on-surface text-xl font-semibold">
 				<div class="flex items-center gap-2">
 					{permission.perm_name}
 					{#if isMSIG && advancedMode && loggedIn && !msigMode}
 						<LogIn
 							onclick={() =>
 								signin(PermissionLevel.from({ actor: account, permission: permission.perm_name }))}
-							class="text-muted size-4 hover:text-white"
+							class="text-muted hover:text-on-surface size-4"
 						/>
 					{/if}
 				</div>
@@ -89,7 +90,7 @@
 		{/if}
 	</dl>
 
-	<div class="bg-mine-950/50 rounded-b-lg px-4 py-3 md:rounded-l-none md:rounded-r-lg">
+	<div class="bg-surface-container rounded-b-lg px-4 py-3 md:rounded-l-none md:rounded-r-lg">
 		{#if anyPermissions}
 			<table class="grid grid-cols-[auto_1fr_auto] gap-x-4 gap-y-2">
 				<thead class="col-span-full grid grid-cols-subgrid">
@@ -100,9 +101,7 @@
 						<th>{m.common_permission_authorization()}</th>
 						<th class="flex items-center gap-2">
 							{#if loggedIn && currentUser}
-								<a href={editUrl}>
-									<Edit class="size-4" />
-								</a>
+								<IconButton icon={Edit} href={editUrl}></IconButton>
 							{/if}
 						</th>
 					</tr>
@@ -111,7 +110,7 @@
 					{#if permission.required_auth.keys}
 						{#each permission.required_auth.keys as { weight, key }}
 							<tr
-								class="col-span-full grid grid-cols-subgrid items-start bg-none text-white"
+								class="text-on-surface col-span-full grid grid-cols-subgrid items-start bg-none"
 								data-hover-effect="false"
 							>
 								<td>
@@ -121,7 +120,7 @@
 									<Key {key} icon />
 								</td>
 								<td class="grid h-full items-center justify-items-end">
-									<CopyButton data={key.toString()} slop={false} />
+									<CopyButton data={key.toString()} />
 								</td>
 							</tr>
 						{/each}
@@ -129,7 +128,7 @@
 					{#if permission.required_auth.accounts}
 						{#each permission.required_auth.accounts as { weight, permission: account }}
 							<tr
-								class="col-span-full grid grid-cols-subgrid bg-none text-white"
+								class="text-on-surface col-span-full grid grid-cols-subgrid bg-none"
 								data-hover-effect="false"
 							>
 								<td>
@@ -141,7 +140,7 @@
 									</Account>
 								</td>
 								<td class="*:pt-1">
-									<CopyButton data={account.toString()} slop={false} />
+									<CopyButton data={account.toString()} />
 								</td>
 							</tr>
 						{/each}
@@ -149,13 +148,13 @@
 					{#if permission.required_auth.waits}
 						{#each permission.required_auth.waits as { weight, wait_sec }}
 							<tr
-								class="col-span-full grid grid-cols-subgrid bg-none text-white"
+								class="text-on-surface col-span-full grid grid-cols-subgrid bg-none"
 								data-hover-effect="false"
 							>
 								<td>
 									+{weight.toString()}
 								</td>
-								<td class="text-mine-100 flex items-center gap-2">
+								<td class="text-on-surface flex items-center gap-2">
 									<Clock class="size-4" />
 									{wait_sec.toString()}s ({dayjs
 										.duration(wait_sec.toNumber(), 'seconds')
@@ -170,7 +169,9 @@
 	</div>
 	<!-- The curved connector line -->
 	{#if level > 0}
-		<div class="absolute -left-px z-10 size-12 rounded-bl-xl border-b border-l"></div>
+		<div
+			class="border-outline absolute -left-px z-10 size-12 rounded-bl-xl border-b border-l"
+		></div>
 	{/if}
 </li>
 
@@ -179,7 +180,7 @@
 		<!-- The border on this ul is the through line -->
 		<ul
 			data-solo={children.length === 1}
-			class="children col-span-full grid grid-cols-subgrid data-[solo=false]:*:border-l data-[solo=false]:*:last:border-transparent"
+			class="children data-[solo=false]:*:border-outline col-span-full grid grid-cols-subgrid data-[solo=false]:*:border-l data-[solo=false]:*:last:border-transparent"
 			class:ml-8={level > 0}
 			class:ml-4={level === 0}
 		>

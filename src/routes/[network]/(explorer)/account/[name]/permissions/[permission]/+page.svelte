@@ -181,7 +181,7 @@
 		<li
 			in:fly|global={{ x: ms, duration: ms, easing: cubicOut }}
 			id={`key-${index}-inputs`}
-			class="subgrid my-2 gap-2 text-white first:mt-0 last:mb-0"
+			class="subgrid my-2 gap-2 text-on-surface first:mt-0 last:mb-0"
 		>
 			<Fieldset>
 				<Label for={`key-${index}-weight`} class={index > 0 ? 'hidden' : ''}>
@@ -216,7 +216,7 @@
 		<li
 			in:fly|global={{ x: ms, duration: ms, easing: cubicOut }}
 			id={`key-${index}-input`}
-			class="subgrid my-2 gap-x-2 text-white first:mt-0 last:mb-0"
+			class="subgrid my-2 gap-x-2 text-on-surface first:mt-0 last:mb-0"
 		>
 			<NumberInput
 				class="hidden"
@@ -266,7 +266,7 @@
 	{@const ms = index > 0 ? 120 : 0}
 	<!-- Vertical gap is handled with 'my-2' to allow for the field 'labels' to be closer than if we used 'gap-4' -->
 	<li
-		class="@md:subgrid card col-span-full my-2 grid grid-cols-2 gap-4 rounded-lg p-4 text-white first:mt-0 last:mb-0 @md:gap-2 @md:bg-transparent @md:p-0"
+		class="@md:subgrid card col-span-full my-2 grid grid-cols-2 gap-4 rounded-lg p-4 text-on-surface first:mt-0 last:mb-0 @md:gap-2 @md:bg-transparent @md:p-0"
 		in:fly|global={{ x: ms, duration: ms, easing: cubicOut }}
 	>
 		<Fieldset class="">
@@ -338,7 +338,7 @@
 
 {#snippet WaitAuthInput(index: number)}
 	{@const state = manager.data.waits[index]}
-	<li class="subgrid text-white">
+	<li class="subgrid text-on-surface">
 		<Fieldset>
 			<Label for={`wait-${index}-name`} class={index > 0 ? 'hidden' : ''}>
 				<span>{m.common_permission_weight()}</span>
@@ -399,7 +399,7 @@
 	<!-- Don't transition the first input field -->
 	{@const ms = index > 0 ? 120 : 0}
 	<li
-		class="subgrid my-2 text-white first:mt-0 last:mb-0"
+		class="subgrid my-2 text-on-surface first:mt-0 last:mb-0"
 		in:fly|global={{ x: ms, duration: ms, easing: cubicOut }}
 	>
 		<Fieldset>

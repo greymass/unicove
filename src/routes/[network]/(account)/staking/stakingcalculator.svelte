@@ -64,7 +64,7 @@
 				<tr>
 					<td class="text-sm">{record.time}</td>
 					<td class="text-right text-sm"
-						><AssetText class="text-white" variant="full" value={record.value} /></td
+						><AssetText class="text-on-surface" variant="full" value={record.value} /></td
 					>
 					<td class="text-right text-sm">{record.currency}</td>
 				</tr>

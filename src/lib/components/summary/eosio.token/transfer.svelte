@@ -24,11 +24,11 @@
 		<div class="grid gap-4 @md:grid-cols-3">
 			<div>
 				<p>Sender</p>
-				<p class="text-xl font-semibold text-nowrap text-white">{data.from}</p>
+				<p class="text-xl font-semibold text-nowrap text-on-surface">{data.from}</p>
 			</div>
 			<div>
 				<p>Tokens</p>
-				<p class="text-xl font-semibold text-nowrap text-white">{data.quantity}</p>
+				<p class="text-xl font-semibold text-nowrap text-on-surface">{data.quantity}</p>
 				{#if value}
 					<p class="bg-shark-800/60 mt-1.5 self-start rounded-sm px-2">
 						USD {formatCurrency(value)}
@@ -37,7 +37,7 @@
 			</div>
 			<div>
 				<p>Receiver</p>
-				<p class="text-xl font-semibold text-nowrap text-white">{data.to}</p>
+				<p class="text-xl font-semibold text-nowrap text-on-surface">{data.to}</p>
 			</div>
 		</div>
 	</Card>

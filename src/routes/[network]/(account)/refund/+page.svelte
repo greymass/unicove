@@ -35,10 +35,10 @@
 		<Switcher>
 			<Stack class="gap-2">
 				<h3 class="text-muted leading-none">{m.common_refunding()}</h3>
-				<p class="text-2xl font-bold text-white">{String(manager.refunding)}</p>
+				<p class="text-2xl font-bold text-on-surface">{String(manager.refunding)}</p>
 				{#if manager.dateAvailable}
 					<h3 class="text-muted mt-8 leading-none">{m.common_date_available()}</h3>
-					<p class="font-bold text-white">{String(manager.dateAvailable?.toLocaleString())}</p>
+					<p class="font-bold text-on-surface">{String(manager.dateAvailable?.toLocaleString())}</p>
 				{/if}
 			</Stack>
 

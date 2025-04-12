@@ -79,7 +79,7 @@
 </script>
 
 <footer
-	class="col-span-full mt-20 grid grid-cols-subgrid border-t border-white/10 py-8 md:col-start-3 md:col-end-12"
+	class="border-outline col-span-full mt-20 grid grid-cols-subgrid border-t py-8 md:col-start-3 md:col-end-12"
 >
 	<nav class="col-span-full grid grid-cols-subgrid gap-y-8">
 		<UnicoveLogo wordmark class="justify-self-start md:col-span-2 xl:col-span-1" />
@@ -87,7 +87,7 @@
 		<menu class="contents">
 			{#each data as { title, links }}
 				<li class="space-y-2 md:col-span-2 xl:col-span-1">
-					<h3 class="text-sm font-semibold text-white/60">{title}</h3>
+					<h3 class="text-muted text-sm font-semibold">{title}</h3>
 					<ul class="space-y-1">
 						{#each links as { name, href }}
 							<li>

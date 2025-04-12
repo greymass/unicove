@@ -60,7 +60,7 @@
 							<div class={cn('size-3 rounded-sm', distributionMap[item.key].color)}></div>
 							{distributionMap[item.key].label}
 						</td>
-						<td class="text-right text-white tabular-nums"> {percentString(item.value)} </td>
+						<td class="text-right text-on-surface tabular-nums"> {percentString(item.value)} </td>
 					</tr>
 				{/each}
 			</tbody>

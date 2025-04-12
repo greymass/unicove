@@ -7,6 +7,8 @@
 	import { getContext } from 'svelte';
 	import * as m from '$lib/paraglide/messages';
 	import { ZeroUnits } from '$lib/types/token.js';
+	import Button from '$lib/components/button/button.svelte';
+	import { valueOrDefault } from 'chart.js/helpers';
 
 	const { data } = $props();
 	const balances = $derived(
@@ -26,9 +28,9 @@
 
 {#snippet tableAction(asset: Asset)}
 	<td class="text-right">
-		<a class="text-sky-500 hover:text-sky-400" href="/{data.network}/send?quantity={asset}">
+		<Button variant="tertiary" href="/{data.network}/send?quantity={asset}">
 			{m.common_send()}
-		</a>
+		</Button>
 	</td>
 {/snippet}
 

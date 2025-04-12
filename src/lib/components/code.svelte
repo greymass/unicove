@@ -22,20 +22,25 @@
 	$effect(() => {
 		if (node && collapsible && node.offsetHeight > collapseThreshold) {
 			collapsed = true;
+			node.classList.replace('overflow-x-auto', 'overflow-x-hidden');
 		}
 	});
 
 	function expandNode() {
 		if (node) {
 			collapsed = false;
-			node.classList.add('max-h-full');
+			node.classList.replace('max-h-56', 'max-h-full');
+			node.classList.replace('overflow-x-hidden', 'overflow-x-auto');
 		}
 	}
 </script>
 
 {#if props.inline}
 	<code
-		class={cn('bg-shark-900/40 rounded-md px-2 py-1 font-mono text-xs text-white', props.class)}
+		class={cn(
+			'bg-surface-container-high text-on-surface rounded-md px-2 py-1 font-mono text-xs',
+			props.class
+		)}
 	>
 		{#if props.json}
 			{JSON.stringify(props.json, undefined, indent)}
@@ -47,17 +52,19 @@
 	<div
 		bind:this={node}
 		class={cn(
-			'bg-shark-900/20 relative overflow-x-auto overflow-y-hidden rounded-xl p-6 font-mono text-sm text-white',
-			collapsible ? 'max-h-56' : 'max-h-full',
+			'bg-surface-container text-on-surface relative overflow-x-auto overflow-y-hidden rounded-xl p-6 font-mono text-sm',
+			collapsible ? 'max-h-56' : 'max-h-full ',
 			props.class
 		)}
 	>
 		{#if collapsed}
 			<button
-				class="from-shark-950 absolute inset-0 top-0 left-0 flex cursor-pointer items-end justify-center bg-linear-to-t to-transparent to-40% pb-4 font-sans font-semibold"
+				class="from-surface-container-low group absolute inset-0 top-0 left-0 flex cursor-pointer items-end justify-center bg-linear-to-t to-transparent to-40% pb-4 font-sans font-semibold"
 				onclick={expandNode}
 			>
-				{m.common_more()}
+				<span class="group-hover:bg-surface-container-high rounded-full bg-transparent px-4 py-2">
+					{m.common_more()}
+				</span>
 			</button>
 		{/if}
 		{#if props.json}
