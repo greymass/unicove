@@ -1,5 +1,5 @@
 import { Asset, Name, type Checksum256Type, type NameType } from '@wharfkit/antelope';
-import { ChainDefinition, TokenIdentifier } from '@wharfkit/common';
+import { ChainDefinition, Logo, TokenIdentifier } from '@wharfkit/common';
 
 import { Contract as DelphiHelperContract } from '$lib/wharf/contracts/delphihelper';
 import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
@@ -97,7 +97,10 @@ export const chainConfig: ChainConfig = {
 	id: env.PUBLIC_CHAIN_ID,
 	short: env.PUBLIC_CHAIN_SHORT,
 	name: env.PUBLIC_CHAIN_NAME,
-	logo: env.PUBLIC_CHAIN_LOGO,
+	logo: Logo.from({
+		dark: env.PUBLIC_CHAIN_LOGO_DARK,
+		light: env.PUBLIC_CHAIN_LOGO_LIGHT
+	}),
 	systemtoken,
 	systemtokenalt,
 	legacytoken,
@@ -168,7 +171,7 @@ export interface ChainConfig {
 	id: Checksum256Type;
 	name: string;
 	short: string;
-	logo: string;
+	logo: Logo;
 	features: Record<FeatureType, boolean>;
 	endpoints: ChainEndpoints;
 	legacytoken?: Token;

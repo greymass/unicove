@@ -5,7 +5,6 @@
 	import ContractButton from '$lib/components/button/contract.svelte';
 	import CopyButton from '$lib/components/button/copy.svelte';
 	import { type NetworkState } from '$lib/state/network.svelte';
-	import { chainLogos } from '@wharfkit/common';
 	import ChevronLeft from 'lucide-svelte/icons/chevron-left';
 
 	interface Props {

@@ -9,7 +9,6 @@
 		type SerializedSession,
 		type WalletPlugin
 	} from '@wharfkit/session';
-	import { chainLogos } from '@wharfkit/common';
 	import * as m from '$lib/paraglide/messages';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
@@ -68,7 +67,7 @@
 		onOpenChange: resetAddingAccount
 	});
 
-	let logo = $derived(chainLogos.get(String(context.wharf.session?.chain.id)) || '');
+	let logo = $derived(context.network.config.logo || '');
 
 	function closeDrawer() {
 		$open = false;
