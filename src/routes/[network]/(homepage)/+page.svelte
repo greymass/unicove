@@ -12,7 +12,7 @@
 	const { network } = getContext<UnicoveContext>('state');
 
 	let networkLogo = $derived(String(data.network.config.logo));
-	let networkName = $derived(String(data.network.chain.name));
+	let networkName = $derived(String(data.network.config.name));
 	let productName = $derived(String(data.network.config.metamask?.name));
 	let networkShortname = $derived(String(data.network));
 </script>

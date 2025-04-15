@@ -23,7 +23,6 @@ import {
 } from '$lib/types/network';
 
 import {
-	chainMapper,
 	getChainDefinitionFromParams,
 	type ChainConfig,
 	type DefaultContracts,
