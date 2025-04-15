@@ -17,6 +17,7 @@ const mappings: Record<string, string> = {
 	kylin: 'https://kylin.unicove.com',
 	telos: 'https://telos.unicove.com',
 	telostestnet: 'https://testnet.telos.unicove.com',
+	vaulta: 'https://unicove.com',
 	wax: 'https://wax.unicove.com',
 	waxtestnet: 'https://testnet.wax.unicove.com'
 };
