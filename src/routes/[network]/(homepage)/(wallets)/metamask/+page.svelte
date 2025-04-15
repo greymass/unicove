@@ -158,7 +158,7 @@
 				</svg>
 				<img
 					class="bg-mine-950 h-40 rounded-full object-contain px-2 py-4"
-					src={networkLogo}
+					src={String(networkLogo)}
 					alt={networkName}
 				/>
 			</div>
