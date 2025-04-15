@@ -56,8 +56,14 @@ async function loadBalances(
 ): Promise<TokenBalance[]> {
 	let balances: TokenBalance[] = [];
 	if (network.supports('lightapi') && network.config.endpoints.lightapi) {
+		// TODO: Remove this when the lightapi supports pathing to /vaulta URLs
+		let shortname = String(network);
+		if (shortname === 'vaulta') {
+			// Force /vaulta to /eos in URLs for the lightapi
+			shortname = 'eos';
+		}
 		const result = await f(
-			`${network.config.endpoints.lightapi}/api/balances/${network}/${account}`
+			`${network.config.endpoints.lightapi}/api/balances/${shortname}/${account}`
 		);
 		const json: LightAPIBalanceResponse = await result.json();
 		balances = json.balances.map((b) =>

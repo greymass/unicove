@@ -55,7 +55,6 @@ export class NetworkState {
 	readonly config: ChainConfig;
 	readonly contracts: DefaultContracts;
 	readonly fetch = fetch;
-	readonly shortname: string;
 	readonly snapOrigin?: string;
 	readonly resourceClient: ResourceClient;
 
@@ -79,9 +78,8 @@ export class NetworkState {
 
 	constructor(config: ChainConfig, options: NetworkStateOptions = {}) {
 		this.config = config;
-		this.chain = getChainDefinitionFromParams(config.name);
-		this.shortname = chainMapper.toShortName(String(this.chain.id));
-		this.snapOrigin = snapOrigins.get(this.shortname);
+		this.chain = getChainDefinitionFromParams(config.short);
+		this.snapOrigin = snapOrigins.get(String(this));
 
 		if (options.fetch) {
 			this.fetch = options.fetch;
@@ -145,9 +143,7 @@ export class NetworkState {
 	}
 
 	public async refresh() {
-		const response = await this.fetch(
-			`/${chainMapper.toShortName(String(this.chain.id))}/api/network`
-		);
+		const response = await this.fetch(`/${this}/api/network`);
 		this.connection.updated = new Date();
 		if (response.ok) {
 			this.connection.connected = true;
@@ -212,7 +208,7 @@ export class NetworkState {
 
 	tokenToRex = (token: AssetType): Asset => {
 		if (!this.supports('rex')) {
-			throw new Error(`The ${this.shortname} network does not support REX.`);
+			throw new Error(`The ${this} network does not support REX.`);
 		}
 		const asset = Asset.from(token);
 		const { total_lendable, total_rex } = this.rex;
@@ -224,7 +220,7 @@ export class NetworkState {
 
 	rexToToken = (rex: AssetType): Asset => {
 		if (!this.supports('rex')) {
-			throw new Error(`The ${this.shortname} network does not support REX.`);
+			throw new Error(`The ${this} network does not support REX.`);
 		}
 		const asset = Asset.from(rex);
 		const { total_lendable, total_rex } = this.rex;
@@ -236,7 +232,7 @@ export class NetworkState {
 
 	getPowerupFrac = (cpu: number, net: number): [number, number] => {
 		if (!this.supports('powerup')) {
-			throw new Error(`The ${this.shortname} network does not support powerup.`);
+			throw new Error(`The ${this} network does not support powerup.`);
 		}
 		if (!this.sources?.powerup) {
 			throw new Error('PowerUp state not initialized');
@@ -333,7 +329,7 @@ export class NetworkState {
 	}
 
 	toString() {
-		return this.shortname;
+		return this.config.short;
 	}
 
 	toJSON() {
@@ -344,7 +340,6 @@ export class NetworkState {
 			connection: this.connection,
 			loaded: this.loaded,
 			resources: this.resources,
-			shortname: this.shortname,
 			snapOrigins: this.snapOrigin,
 			token: this.token,
 			tokens: this.tokens

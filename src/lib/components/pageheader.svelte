@@ -26,11 +26,11 @@
 		}
 	}
 
-	let logo = $derived(chainLogos.get(String(props.network.chain.id)) || '');
+	let logo = $derived(props.network.config.logo || '');
 
 	let routePath = $derived(page.url.pathname.split('/')[3]);
-	let contractPath = $derived(`/${props.network.shortname}/contract/${props.title}`);
-	let accountPath = $derived(`/${props.network.shortname}/account/${props.title}`);
+	let contractPath = $derived(`/${props.network}/contract/${props.title}`);
+	let accountPath = $derived(`/${props.network}/account/${props.title}`);
 </script>
 
 <header class="col-span-full flex min-h-16 items-center gap-4">

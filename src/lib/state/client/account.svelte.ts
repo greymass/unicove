@@ -72,7 +72,7 @@ export class AccountState {
 	}
 
 	async refresh() {
-		const response = await this.fetch(`/${this.network.shortname}/api/account/${this.name}`);
+		const response = await this.fetch(`/${this.network}/api/account/${this.name}`);
 		if (!response.ok) {
 			throw new Error(
 				`Failed to fetch account data for ${this.name} on ${this.network.chain.name}`

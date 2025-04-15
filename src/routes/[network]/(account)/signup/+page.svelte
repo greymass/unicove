@@ -13,7 +13,7 @@
 		currentEnvironment ? walletTypes[currentEnvironment] : undefined
 	);
 	const recommendedWallet = $derived(currentWalletType?.wallets[0]);
-	const otherWallets = $derived(currentWalletType?.networkWallets(data.network.shortname).slice(1));
+	const otherWallets = $derived(currentWalletType?.networkWallets(String(data.network)).slice(1));
 
 	const WalletComponent = $derived(currentWalletType?.icon);
 </script>

@@ -95,7 +95,9 @@ export const systemtoken = Token.from({
 
 export const chainConfig: ChainConfig = {
 	id: env.PUBLIC_CHAIN_ID,
-	name: env.PUBLIC_CHAIN_SHORT,
+	short: env.PUBLIC_CHAIN_SHORT,
+	name: env.PUBLIC_CHAIN_NAME,
+	logo: env.PUBLIC_CHAIN_LOGO,
 	systemtoken,
 	systemtokenalt,
 	legacytoken,
@@ -165,6 +167,8 @@ export interface ChainMetaMaskConfig {
 export interface ChainConfig {
 	id: Checksum256Type;
 	name: string;
+	short: string;
+	logo: string;
 	features: Record<FeatureType, boolean>;
 	endpoints: ChainEndpoints;
 	legacytoken?: Token;
@@ -195,7 +199,7 @@ export type FeatureType =
 	| 'unicovecontractapi';
 
 export function getChainConfigByName(name: string): ChainConfig {
-	const chain = chains.find((c) => c.name === name);
+	const chain = chains.find((c) => c.short === name);
 	if (!chain) {
 		throw new Error(`Chain ${name} not configured for use in getChainConfigByName.`);
 	}
@@ -230,7 +234,7 @@ export function getChainDefinitionFromParams(network: string): ChainDefinition {
 	});
 }
 
-export const chainShortNames = chains.map((chain) => chain.name) as string[];
+export const chainShortNames = chains.map((chain) => chain.short) as string[];
 export function isNetworkShortName(value: string) {
 	return chainShortNames.includes(value);
 }
