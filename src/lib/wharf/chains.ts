@@ -82,6 +82,7 @@ export const ramtoken = Token.from({
 		logo: ramtokenasset
 	})
 });
+
 export const systemtoken = Token.from({
 	id: {
 		chain: env.PUBLIC_CHAIN_ID,
@@ -101,6 +102,7 @@ export const chainConfig: ChainConfig = {
 		dark: env.PUBLIC_CHAIN_LOGO_DARK,
 		light: env.PUBLIC_CHAIN_LOGO_LIGHT
 	}),
+	systemcontract: Name.from(env.PUBLIC_SYSTEM_CONTRACT),
 	systemtoken,
 	systemtokenalt,
 	legacytoken,
@@ -178,6 +180,7 @@ export interface ChainConfig {
 	lockedsupply?: NameType[]; // Accounts where tokens exist but are not in circulation
 	coinbase?: ChainCoinbaseConfig;
 	metamask?: ChainMetaMaskConfig;
+	systemcontract: Name;
 	systemtoken: Token;
 	systemtokenalt: Asset.Symbol[];
 }
