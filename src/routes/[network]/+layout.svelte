@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Checksum256, type NameType } from '@wharfkit/antelope';
-	import { ChainDefinition, chainLogos } from '@wharfkit/common';
+	import { ChainDefinition } from '@wharfkit/common';
 	import { onMount, setContext, untrack } from 'svelte';
 	import { Head, type SeoConfig } from 'svead';
 	import extend from 'just-extend';
@@ -205,10 +205,7 @@
 
 <!-- Preload current chain logo -->
 <svelte:head>
-	{#if chainLogos.get(String(data.network.chain.id)) !== undefined}
-		{@const chainLogo = String(chainLogos.get(String(data.network.chain.id)))}
-		<link rel="preload" href={chainLogo} as="image" type="image/png" />
-	{/if}
+	<link rel="preload" href={String(data.network.config.logo)} as="image" type="image/png" />
 </svelte:head>
 
 <PageBanner network={data.network} />

@@ -2,13 +2,12 @@
 	import Button from '$lib/components/button/button.svelte';
 	import Code from '$lib/components/code.svelte';
 	import { page } from '$app/stores';
-	import { chainMapper } from '$lib/wharf/chains';
 	import { Stack } from '$lib/components/layout';
 
 	const { data } = $props();
 	const { network } = $derived(data);
 
-	const shortName = $derived(chainMapper.toShortName(String(network?.chain.id)));
+	const shortName = $derived(network.config.short);
 	const apiPath = $derived(`${$page.url.protocol}//${$page.url.host}/${shortName}/api/network`);
 </script>
 

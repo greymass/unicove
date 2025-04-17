@@ -42,5 +42,5 @@ export const msigTransactPlugins: TransactPlugin[] = [new TransactPluginStatusEm
 export const msigInternalPlugins: TransactPlugin[] = [new TransactPluginResourceProvider()];
 
 export const chainDefs: ChainDefinition[] = chains.map((chain) =>
-	getChainDefinitionFromParams(chain.name)
+	getChainDefinitionFromParams(chain.short)
 );

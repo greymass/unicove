@@ -1,6 +1,5 @@
 <script lang="ts">
 	import Subgrid from '$lib/components/layout/subgrid.svelte';
-	import { chainLogos } from '@wharfkit/common';
 	import Hero from './components/hero.svelte';
 	import Carousel from './components/carousel.svelte';
 	import StakingRewards from './components/staking-rewards.svelte';
@@ -12,8 +11,8 @@
 	const { data } = $props();
 	const { network } = getContext<UnicoveContext>('state');
 
-	let networkLogo = $derived(String(chainLogos.get(data.network?.chain.id.toString())));
-	let networkName = $derived(String(data.network.chain.name));
+	let networkLogo = $derived(String(data.network.config.logo));
+	let networkName = $derived(String(data.network.config.name));
 	let productName = $derived(String(data.network.config.metamask?.name));
 	let networkShortname = $derived(String(data.network));
 </script>

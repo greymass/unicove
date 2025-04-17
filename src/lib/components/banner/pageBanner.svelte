@@ -25,7 +25,7 @@
 
 	onMount(() => {
 		// This banner is only for EOS/Vaulta
-		if (props.network.shortname !== 'eos') return;
+		if (String(props.network) !== 'eos' && String(props.network) !== 'vaulta') return;
 
 		const prevHidden = localStorage.getItem('hide-banner');
 		if (!prevHidden) {

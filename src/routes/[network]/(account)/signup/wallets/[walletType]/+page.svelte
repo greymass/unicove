@@ -49,7 +49,7 @@
 <Stack>
 	<h3 class="h2">Available Wallets</h3>
 	<Stack>
-		{#each currentWalletType.networkWallets(data.network.shortname) as wallet}
+		{#each currentWalletType.networkWallets(String(data.network)) as wallet}
 			<a
 				href="/{data.network}/{wallet.route}"
 				class="group hover:bg-mine-950 focus-visible:ring-solar-500 grid grid-cols-[auto_1fr_auto] items-center gap-4 rounded-2xl border

@@ -23,7 +23,7 @@
 
 	const { class: className, currentNetwork, ...props }: Props = $props();
 
-	let logo = $derived(chainLogos.get(currentNetwork?.chain.id.toString()));
+	let logo = $derived(currentNetwork.config.logo);
 
 	let options = $derived(
 		Object.entries(chainMap)

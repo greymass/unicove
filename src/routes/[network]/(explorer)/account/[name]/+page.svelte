@@ -13,6 +13,7 @@
 	import Tokendistribution from '$lib/components/chart/tokendistribution.svelte';
 	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte';
 	import { tokenEquals, ZeroUnits } from '$lib/types/token.js';
+	import { ramtoken } from '$lib/wharf/chains.js';
 
 	const { data } = $props();
 
@@ -39,7 +40,7 @@
 	const rambalance = $derived(
 		data.account.balances.find((b) => tokenEquals(b.token.id, data.network.getRamToken().id))
 	);
-	const historicTimeframe = 'quarter';
+	const historicTimeframe = 'day';
 	const ramhistoric = $derived(market.market.historic?.ram?.[historicTimeframe]);
 	const systemtokenhistoric = $derived(market.market.historic?.systemtoken?.[historicTimeframe]);
 
@@ -134,8 +135,11 @@
 				balance={rambalance}
 				cta={[
 					{
-						text: m.common_ram_market(),
-						href: `/${data.network}/ram`,
+						text: m.common_swap_base_quote({
+							base: data.network.token.name,
+							quote: data.network.getRamToken().name
+						}),
+						href: `/${data.network}/swap/${data.network.token.id.url}/${ramtoken.id.url}`,
 						visible: isCurrentUser
 					}
 				]}

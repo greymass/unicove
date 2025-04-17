@@ -267,7 +267,7 @@
 	"homepage_ram_token_market": "{token} /RAM 마켓",
 	"homepage_ram_token_title": "RAM: 토큰화된 블록체인 스토리지",
 	"homepage_staking_description": "{network} 스테이킹 보상 프로그램은 토큰을 스테이킹한 토큰 보유자에게 매일 85.6k {token} 비례적으로 분배합니다. 토큰은 스테이킹 해제가 가능하며, 21일 잠금 기간 후 다시 사용할 수 있습니다.",
-	"homepage_staking_intro": "오늘 {network} 에 투자하면 예상 연이율 {apr} %가 됩니다.",
+	"homepage_staking_intro": "오늘 {token} 에 투자하면 예상 연이율 {apr} %가 됩니다.",
 	"homepage_staking_intro_legend": "APR은 총 지분 금액을 기준으로 하며 시간이 지남에 따라 동적으로 변경됩니다.",
 	"key_404": "Key not found: {error}",
 	"key_page_description": "{network} {accounts} 계정과 연관된 공개 키입니다.",
