@@ -20,6 +20,11 @@
 			text: 'Config'
 		},
 		{
+			active: activeItem === 'contracts',
+			href: `/${data.network}/debug/state/contracts`,
+			text: 'Contracts'
+		},
+		{
 			active: activeItem === 'market',
 			href: `/${data.network}/debug/state/market`,
 			text: 'Market'
