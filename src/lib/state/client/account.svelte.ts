@@ -377,6 +377,8 @@ export function getBalances(
 ): TokenBalance[] {
 	const balances: TokenBalance[] = sources.balances.map((b) => TokenBalance.from(b));
 	const token = network.getRamToken();
+
+	// Add RAM balance to the list of balances
 	balances.push(
 		TokenBalance.from({
 			token,

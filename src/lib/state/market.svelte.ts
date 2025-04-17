@@ -13,6 +13,7 @@ import { Currencies } from '$lib/types/currencies';
 
 import type { NetworkState } from './network.svelte';
 import type { SettingsState } from './settings.svelte';
+import { ramtoken } from '$lib/wharf/chains';
 
 export class MarketState {
 	private sources: TokenDataSources = $state() as TokenDataSources;
@@ -125,6 +126,14 @@ export class MarketState {
 }
 
 function getSwaps(network: NetworkState, pairs: TokenPair[]): TokenSwap[] {
+	const swaps: TokenSwap[] = [
+		...getRAMTokenSwaps(network, pairs),
+		...getLegacyTokenSwaps(network, pairs)
+	];
+	return swaps;
+}
+
+function getLegacyTokenSwaps(network: NetworkState, pairs: TokenPair[]): TokenSwap[] {
 	const swaps: TokenSwap[] = [];
 	if (network.config.legacytoken) {
 		const {
@@ -140,8 +149,7 @@ function getSwaps(network: NetworkState, pairs: TokenPair[]): TokenSwap[] {
 				TokenSwap.from({
 					pair: legacyPair,
 					contract: network.token.contract,
-					action: 'transfer',
-					fee: Asset.fromUnits(0, network.token.symbol)
+					action: 'transfer'
 				})
 			);
 		}
@@ -154,11 +162,52 @@ function getSwaps(network: NetworkState, pairs: TokenPair[]): TokenSwap[] {
 				TokenSwap.from({
 					pair: newPair,
 					contract: network.token.contract,
-					action: 'transfer',
-					fee: Asset.fromUnits(0, network.config.legacytoken.symbol)
+					action: 'transfer'
 				})
 			);
 		}
 	}
+	return swaps;
+}
+
+// Create pairs for RAM buy/sell as "swap" actions
+function getRAMTokenSwaps(network: NetworkState, pairs: TokenPair[]): TokenSwap[] {
+	const swaps: TokenSwap[] = [];
+	const { token } = network;
+
+	const ramsystemtoken = pairs.find(
+		(pair) => tokenEquals(pair.base.id, ramtoken.id) && tokenEquals(pair.quote.id, token.id)
+	);
+	if (ramsystemtoken) {
+		swaps.push(
+			TokenSwap.from({
+				pair: ramsystemtoken,
+				contract: network.config.systemcontract,
+				action: 'sellram',
+				fee: {
+					token,
+					ramfee: true
+				}
+			})
+		);
+	}
+
+	const systemtokenram = pairs.find(
+		(pair) => tokenEquals(pair.base.id, token.id) && tokenEquals(pair.quote.id, ramtoken.id)
+	);
+	if (systemtokenram) {
+		swaps.push(
+			TokenSwap.from({
+				pair: systemtokenram,
+				contract: network.config.systemcontract,
+				action: 'buyram',
+				fee: {
+					token,
+					ramfee: true
+				}
+			})
+		);
+	}
+
 	return swaps;
 }

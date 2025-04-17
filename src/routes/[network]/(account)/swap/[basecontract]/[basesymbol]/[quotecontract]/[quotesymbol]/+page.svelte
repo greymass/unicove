@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Asset, Checksum256 } from '@wharfkit/antelope';
+	import { Asset, Checksum256, type AnyAction } from '@wharfkit/antelope';
 	import { getContext } from 'svelte';
 
 	import Code from '$lib/components/code.svelte';
@@ -9,12 +9,12 @@
 	import TransactForm from '$lib/components/transact/form.svelte';
 
 	import * as m from '$lib/paraglide/messages';
-	import { PlaceholderAuth } from '@wharfkit/signing-request';
 	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte.js';
-	import { TokenBalance } from '$lib/types/token.js';
+	import { TokenBalance, TokenSwap, ZeroUnits } from '$lib/types/token.js';
 	import { ArrowRightLeft } from 'lucide-svelte';
 	import Label from '$lib/components/input/label.svelte';
 	import { SingleCard, Stack } from '$lib/components/layout';
+	import { deriveSwapAction } from '../../../../swap.js';
 
 	const { data } = $props();
 
@@ -43,6 +43,29 @@
 
 	const swap = $derived.by(() => market.market.getSwap(data.base.id, data.quote.id));
 
+	const feeAppliedTo = $derived(
+		swap && swap.fee && swap.fee.token.symbol.equals(baseQuantity.symbol)
+			? baseQuantity
+			: quoteQuantity
+	);
+
+	const fee = $derived.by(() => {
+		let amount = Asset.fromUnits(0, feeAppliedTo.symbol);
+		if (swap && swap.fee) {
+			if (swap.fee.ramfee) {
+				// See: https://github.com/AntelopeIO/reference-contracts/blob/c526479a48370981a1e9f0ac6b3bb0e4f737afa2/contracts/eosio.system/src/delegate_bandwidth.cpp#L60C7-L60C47
+				amount.units.add(feeAppliedTo.units.adding(199).dividing(200));
+			}
+		}
+		return amount;
+	});
+
+	const action: AnyAction | undefined = $derived.by(() => {
+		if (context.account && swap) {
+			return deriveSwapAction(context.network, context.account, swap, baseQuantity);
+		}
+	});
+
 	async function transact() {
 		if (!swap || !swap.pair.base.contract) {
 			throw new Error('No swap available for this pair');
@@ -56,17 +79,6 @@
 		if (!baseBalance) {
 			throw new Error('Base balance does not exist');
 		}
-		const action = {
-			account: swap.pair.base.contract,
-			name: swap.action,
-			authorization: [PlaceholderAuth],
-			data: {
-				from: context.account.name,
-				to: swap.contract,
-				quantity: baseQuantity,
-				memo: ''
-			}
-		};
 		const { account, wharf } = context;
 		if (wharf && account) {
 			wharf
@@ -102,18 +114,31 @@
 	}
 
 	function flip() {
-		const base = Asset.from(quoteQuantity);
-		const quote = Asset.from(baseQuantity);
+		const base = Asset.fromUnits(0, quoteQuantity.symbol);
+		const quote = Asset.fromUnits(0, baseQuantity.symbol);
 		baseInput?.set(base);
 		baseQuantity = base;
 		quoteInput?.set(quote);
 		quoteQuantity = quote;
 	}
 
+	function calculateFee(swap: TokenSwap, feeAppliedTo: Asset): Asset {
+		let feeAmount = Asset.fromUnits(0, feeAppliedTo.symbol);
+		if (swap && swap.fee) {
+			if (swap.fee.ramfee) {
+				// See: https://github.com/AntelopeIO/reference-contracts/blob/c526479a48370981a1e9f0ac6b3bb0e4f737afa2/contracts/eosio.system/src/delegate_bandwidth.cpp#L60C7-L60C47
+				feeAmount.units.add(feeAppliedTo.units.adding(199).dividing(200));
+			}
+		}
+
+		return feeAmount;
+	}
+
 	function baseChange(e: Event & { currentTarget: EventTarget & HTMLInputElement }) {
 		if (swap) {
+			const feeAmount = calculateFee(swap, feeAppliedTo);
 			const quote = Asset.fromFloat(
-				Number(e.currentTarget.value) * swap.pair.price.value,
+				(Number(e.currentTarget.value) - feeAmount.value) * swap.pair.price.value,
 				quoteQuantity.symbol
 			);
 			quoteQuantity = quote;
@@ -123,8 +148,9 @@
 
 	function quoteChange(e: Event & { currentTarget: EventTarget & HTMLInputElement }) {
 		if (swap) {
+			const feeAmount = calculateFee(swap, feeAppliedTo);
 			const base = Asset.fromFloat(
-				Number(e.currentTarget.value) / swap.pair.price.value,
+				(Number(e.currentTarget.value) + feeAmount.value) / swap.pair.price.value,
 				baseQuantity.symbol
 			);
 			baseQuantity = base;
@@ -234,10 +260,9 @@
 				</div>
 
 				<p class="text-center">
-					This swap will exchange
-					<AssetText class="font-bold text-white" value={baseQuantity} variant="full" />
-					for
-					<AssetText class="font-bold text-white" value={quoteQuantity} variant="full" />.
+					{#if swap.fee?.ramfee}
+						System Fee: <AssetText class="font-bold text-white" value={fee} variant="full" /> (0.5%)
+					{/if}
 				</p>
 
 				<Button onclick={transact} disabled={context.wharf.transacting}>
@@ -257,10 +282,17 @@
 {#if context.settings.data.debugMode}
 	<Code
 		json={{
+			fee,
+			baseQuantity,
+			quoteQuantity
+		}}
+	/>
+
+	<Code
+		json={{
+			action,
 			loaded: market.market.loaded,
 			refreshed: market.market.refreshed,
-			baseQuantity,
-			quoteQuantity,
 			base: data.base,
 			quote: data.quote,
 			swap
