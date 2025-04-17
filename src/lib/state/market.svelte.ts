@@ -1,19 +1,23 @@
 import { Asset, Serializer, TimePointSec } from '@wharfkit/antelope';
 
 import {
+	SystemHistoricPrices,
 	Token,
 	TokenDataSources,
 	tokenEquals,
+	TokenHistoricPrice,
+	TokenHistoricPrices,
 	TokenPair,
 	TokenSwap,
 	ZeroUnits
 } from '$lib/types/token';
 import { TokenDefinition } from '$lib/types/token';
-import { Currencies } from '$lib/types/currencies';
+import { Currencies, SupportedCurrencies } from '$lib/types/currencies';
 
 import type { NetworkState } from './network.svelte';
 import type { SettingsState } from './settings.svelte';
 import { ramtoken } from '$lib/wharf/chains';
+import { calculateValue } from '$lib/utils';
 
 export class MarketState {
 	private sources: TokenDataSources = $state() as TokenDataSources;
@@ -29,7 +33,11 @@ export class MarketState {
 		...this.sources.pairs.map((pair) => pair.reversed)
 	]);
 
-	readonly historic = $derived(this.sources.historic);
+	readonly historic = $derived(
+		this.sources.historic
+			? this.getHistoric(this.sources.historic, this.settings.data.displayCurrency)
+			: undefined
+	);
 
 	readonly swaps = $derived(getSwaps(this.network, this.pairs));
 
@@ -110,6 +118,35 @@ export class MarketState {
 			});
 		}
 		return pair;
+	}
+
+	getHistoric(
+		historic: SystemHistoricPrices,
+		displayCurrency: SupportedCurrencies
+	): SystemHistoricPrices {
+		const currency = Currencies[displayCurrency];
+		if (historic.ram?.day?.value.symbol.equals(currency.symbol)) {
+			// Return as-is if the display currency is correct
+			return historic;
+		}
+		// Convert the values to the display currency
+		const pair = this.getPair(Currencies.USD, currency);
+		if (pair) {
+			for (const key in historic) {
+				const assetType = key as keyof SystemHistoricPrices;
+				const asset = historic[assetType] as TokenHistoricPrices;
+				if (asset) {
+					for (const timeframe in historic[assetType]) {
+						const timeframeType = timeframe as keyof TokenHistoricPrices;
+						const price = asset[timeframeType] as TokenHistoricPrice;
+						if (price) {
+							price.value = calculateValue(price.value, pair.price);
+						}
+					}
+				}
+			}
+		}
+		return historic;
 	}
 
 	getPairs(token: TokenDefinition): TokenPair[] {

@@ -39,7 +39,7 @@
 	const rambalance = $derived(
 		data.account.balances.find((b) => tokenEquals(b.token.id, data.network.getRamToken().id))
 	);
-	const historicTimeframe = 'quarter';
+	const historicTimeframe = 'day';
 	const ramhistoric = $derived(market.market.historic?.ram?.[historicTimeframe]);
 	const systemtokenhistoric = $derived(market.market.historic?.systemtoken?.[historicTimeframe]);
 

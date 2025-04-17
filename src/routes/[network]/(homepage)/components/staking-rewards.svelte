@@ -25,7 +25,7 @@
 				<h2 class="h3 leading-tight">{network.chain.name} {m.common_staking_rewards()}</h2>
 				<p>
 					{m.homepage_staking_intro({
-						network: network.chain.name,
+						token: network.token.name,
 						apr
 					})}<sup>1</sup>.
 				</p>
