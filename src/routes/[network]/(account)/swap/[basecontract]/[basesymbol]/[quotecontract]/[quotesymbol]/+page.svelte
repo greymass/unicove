@@ -10,7 +10,7 @@
 
 	import * as m from '$lib/paraglide/messages';
 	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte.js';
-	import { TokenBalance, TokenSwap, ZeroUnits } from '$lib/types/token.js';
+	import { TokenBalance, TokenSwap } from '$lib/types/token.js';
 	import { ArrowRightLeft } from 'lucide-svelte';
 	import Label from '$lib/components/input/label.svelte';
 	import { SingleCard, Stack } from '$lib/components/layout';
