@@ -104,7 +104,7 @@
 			walletPlugin: wallet.id
 		};
 		if (wallet.id !== 'cleos' && wallet.id !== 'wallet-plugin-multisig') {
-			options.chain = context.network.chain;
+			options.chain = context.network.chain.id;
 		}
 		const session = await context.wharf.login(options);
 		redirect(session.actor);
