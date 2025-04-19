@@ -91,6 +91,9 @@ export class AccountState {
 	}
 
 	getBalance(token: Token): TokenBalance {
+		if (tokenEquals(token.id, this.network.token.id)) {
+			return this.balance;
+		}
 		const balance = this.balances.find((b) => tokenEquals(b.token.id, token.id));
 		if (!balance) {
 			return TokenBalance.from({
