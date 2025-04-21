@@ -9,7 +9,6 @@
 		type SerializedSession,
 		type WalletPlugin
 	} from '@wharfkit/session';
-	import { chainLogos } from '@wharfkit/common';
 	import * as m from '$lib/paraglide/messages';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
@@ -68,7 +67,7 @@
 		onOpenChange: resetAddingAccount
 	});
 
-	let logo = $derived(chainLogos.get(String(context.wharf.session?.chain.id)) || '');
+	let logo = $derived(context.network.config.logo || '');
 
 	function closeDrawer() {
 		$open = false;
@@ -105,7 +104,7 @@
 			walletPlugin: wallet.id
 		};
 		if (wallet.id !== 'cleos' && wallet.id !== 'wallet-plugin-multisig') {
-			options.chain = context.network.chain;
+			options.chain = context.network.chain.id;
 		}
 		const session = await context.wharf.login(options);
 		redirect(session.actor);

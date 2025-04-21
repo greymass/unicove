@@ -267,7 +267,7 @@
 	"homepage_ram_token_market": "{token}/RAM 市场",
 	"homepage_ram_token_title": "RAM：代币化区块链存储",
 	"homepage_staking_description": "{network} 质押奖励计划每天按比例向已质押代币的代币持有者分发 85.6k {token}。这些代币可以解除质押，并在 21 天锁定期后由用户自由支配。",
-	"homepage_staking_intro": "现在质押 {network}，可获得预计 {apr}% 的年化收益",
+	"homepage_staking_intro": "现在质押 {token}，可获得预计 {apr}% 的年化收益",
 	"homepage_staking_intro_legend": "年化收益率基于总质押金额，且会随时间动态变化。",
 	"key_404": "Key not found: {error}",
 	"key_page_description": "与 {network} 网络上的 {accounts} 个账户关联的公钥",

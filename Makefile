@@ -113,6 +113,9 @@ config/telos: codegen/clean
 config/telostestnet: codegen/clean
 	cp ./configs/.env.telostestnet .env.local
 
+config/vaulta: codegen/clean
+	cp ./configs/.env.vaulta .env.local
+
 config/wax: codegen/clean 
 	cp ./configs/.env.wax .env.local
 	

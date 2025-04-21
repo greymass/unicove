@@ -1,5 +1,5 @@
 import { Asset, Name, type Checksum256Type, type NameType } from '@wharfkit/antelope';
-import { ChainDefinition, TokenIdentifier } from '@wharfkit/common';
+import { ChainDefinition, Logo, TokenIdentifier } from '@wharfkit/common';
 
 import { Contract as DelphiHelperContract } from '$lib/wharf/contracts/delphihelper';
 import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
@@ -62,26 +62,13 @@ const systemtokenalt = env.PUBLIC_SYSTEM_TOKEN_SYMBOL_ALT
 
 const isTrue = (value: string) => value === 'true';
 
-const ramtokenasset = TokenMediaAsset.from({});
 const systemtokenasset = TokenMediaAsset.from({});
 if (env.PUBLIC_SYSTEM_TOKEN_LOGO_LIGHT) {
-	ramtokenasset.light = env.PUBLIC_SYSTEM_TOKEN_LOGO_LIGHT;
 	systemtokenasset.light = env.PUBLIC_SYSTEM_TOKEN_LOGO_LIGHT;
 }
 if (env.PUBLIC_SYSTEM_TOKEN_LOGO_DARK) {
-	ramtokenasset.dark = env.PUBLIC_SYSTEM_TOKEN_LOGO_DARK;
 	systemtokenasset.dark = env.PUBLIC_SYSTEM_TOKEN_LOGO_DARK;
 }
-export const ramtoken = Token.from({
-	id: {
-		chain: env.PUBLIC_CHAIN_ID,
-		contract: env.PUBLIC_SYSTEM_CONTRACT,
-		symbol: '3,KB'
-	},
-	media: TokenMedia.from({
-		logo: ramtokenasset
-	})
-});
 export const systemtoken = Token.from({
 	id: {
 		chain: env.PUBLIC_CHAIN_ID,
@@ -93,9 +80,33 @@ export const systemtoken = Token.from({
 	})
 });
 
+const ramtokenasset = TokenMediaAsset.from({});
+if (env.PUBLIC_RAM_TOKEN_LOGO_LIGHT) {
+	ramtokenasset.light = env.PUBLIC_RAM_TOKEN_LOGO_LIGHT;
+}
+if (env.PUBLIC_RAM_TOKEN_LOGO_DARK) {
+	ramtokenasset.dark = env.PUBLIC_RAM_TOKEN_LOGO_DARK;
+}
+export const ramtoken = Token.from({
+	id: {
+		chain: env.PUBLIC_CHAIN_ID,
+		contract: env.PUBLIC_SYSTEM_CONTRACT,
+		symbol: '3,KB'
+	},
+	media: TokenMedia.from({
+		logo: ramtokenasset
+	})
+});
+
 export const chainConfig: ChainConfig = {
 	id: env.PUBLIC_CHAIN_ID,
-	name: env.PUBLIC_CHAIN_SHORT,
+	short: env.PUBLIC_CHAIN_SHORT,
+	name: env.PUBLIC_CHAIN_NAME,
+	logo: Logo.from({
+		dark: env.PUBLIC_CHAIN_LOGO_DARK,
+		light: env.PUBLIC_CHAIN_LOGO_LIGHT
+	}),
+	systemcontract: Name.from(env.PUBLIC_SYSTEM_CONTRACT),
 	systemtoken,
 	systemtokenalt,
 	legacytoken,
@@ -165,12 +176,15 @@ export interface ChainMetaMaskConfig {
 export interface ChainConfig {
 	id: Checksum256Type;
 	name: string;
+	short: string;
+	logo: Logo;
 	features: Record<FeatureType, boolean>;
 	endpoints: ChainEndpoints;
 	legacytoken?: Token;
 	lockedsupply?: NameType[]; // Accounts where tokens exist but are not in circulation
 	coinbase?: ChainCoinbaseConfig;
 	metamask?: ChainMetaMaskConfig;
+	systemcontract: Name;
 	systemtoken: Token;
 	systemtokenalt: Asset.Symbol[];
 }
@@ -195,7 +209,7 @@ export type FeatureType =
 	| 'unicovecontractapi';
 
 export function getChainConfigByName(name: string): ChainConfig {
-	const chain = chains.find((c) => c.name === name);
+	const chain = chains.find((c) => c.short === name);
 	if (!chain) {
 		throw new Error(`Chain ${name} not configured for use in getChainConfigByName.`);
 	}
@@ -230,7 +244,7 @@ export function getChainDefinitionFromParams(network: string): ChainDefinition {
 	});
 }
 
-export const chainShortNames = chains.map((chain) => chain.name) as string[];
+export const chainShortNames = chains.map((chain) => chain.short) as string[];
 export function isNetworkShortName(value: string) {
 	return chainShortNames.includes(value);
 }

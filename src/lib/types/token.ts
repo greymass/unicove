@@ -93,12 +93,19 @@ export class TokenPair extends Struct {
 	}
 }
 
+@Struct.type('token_swap_fee')
+export class TokenSwapFee extends Struct {
+	@Struct.field(Token) declare token: Token;
+	// This swap incurs a percentage fee of 0.5% matching the system contract
+	@Struct.field('bool', { optional: true }) declare ramfee?: boolean;
+}
+
 @Struct.type('token_swap')
 export class TokenSwap extends Struct {
 	@Struct.field(TokenPair) declare pair: TokenPair;
 	@Struct.field(Name) declare contract: Name;
 	@Struct.field(Name) declare action: Name;
-	@Struct.field(Asset) declare fee: Asset;
+	@Struct.field(TokenSwapFee, { optional: true }) declare fee?: TokenSwapFee;
 }
 
 export type TokenBalanceStates =

@@ -10,7 +10,6 @@
 	import { MetaMaskState } from '$lib/state/metamask.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
 	import { Cluster, Stack } from '$lib/components/layout/index.js';
-	import { chainLogos } from '@wharfkit/common';
 	import { DD, DL, DLRow } from '$lib/components/descriptionlist/index.js';
 	import TextInput from '$lib/components/input/text.svelte';
 	import CopyButton from '$lib/components/button/copy.svelte';
@@ -119,7 +118,7 @@
 		}
 	}
 
-	const networkLogo = String(chainLogos.get(String(data.network.chain.id)));
+	const networkLogo = data.network.config.logo;
 	const networkName = data.network.chain.name;
 	const productName = data.network.config.metamask?.name || '';
 </script>
@@ -159,7 +158,7 @@
 				</svg>
 				<img
 					class="bg-mine-950 h-40 rounded-full object-contain px-2 py-4"
-					src={networkLogo}
+					src={String(networkLogo)}
 					alt={networkName}
 				/>
 			</div>

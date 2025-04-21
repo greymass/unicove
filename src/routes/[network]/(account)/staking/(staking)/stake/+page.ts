@@ -7,16 +7,16 @@ export const load: PageLoad = async ({ parent }) => {
 	return {
 		title: m.common_stake(),
 		subtitle: m.common_stake_tokens({
-			token: String(network.chain.systemToken?.symbol.name)
+			token: String(network.token.symbol.name)
 		}),
 		backPath: `/${languageTag()}/${network}/staking`,
 		pageMetaTags: {
 			title: m.common_stake_tokens({
-				token: String(network.chain.systemToken?.symbol.name)
+				token: String(network.token.symbol.name)
 			}),
 			description: m.staking_metadata_stake_description({
 				network: String(network.chain.name),
-				token: String(network.chain.systemToken?.symbol.name)
+				token: String(network.token.symbol.name)
 			})
 		}
 	};

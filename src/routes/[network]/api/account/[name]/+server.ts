@@ -18,7 +18,7 @@ import {
 	defaultRexFund,
 	nullContractHash
 } from '$lib/state/defaults/account';
-import { TokenBalance, TokenDefinition, tokenEquals } from '$lib/types/token';
+import { Token, TokenBalance, TokenDefinition, tokenEquals } from '$lib/types/token';
 
 export const GET: RequestHandler = async ({ locals: { network }, params }: RequestEvent) => {
 	const headers = getCacheHeaders(5);
@@ -56,22 +56,38 @@ async function loadBalances(
 ): Promise<TokenBalance[]> {
 	let balances: TokenBalance[] = [];
 	if (network.supports('lightapi') && network.config.endpoints.lightapi) {
+		// TODO: Remove this when the lightapi supports pathing to /vaulta URLs
+		let shortname = String(network);
+		if (shortname === 'vaulta') {
+			// Force /vaulta to /eos in URLs for the lightapi
+			shortname = 'eos';
+		}
 		const result = await f(
-			`${network.config.endpoints.lightapi}/api/balances/${network}/${account}`
+			`${network.config.endpoints.lightapi}/api/balances/${shortname}/${account}`
 		);
 		const json: LightAPIBalanceResponse = await result.json();
-		balances = json.balances.map((b) =>
-			TokenBalance.from({
-				token: {
-					id: {
-						chain: network.chain.id,
-						contract: b.contract,
-						symbol: `${b.decimals},${b.currency}`
-					}
-				},
+		balances = json.balances.map((b) => {
+			let token = Token.from({
+				id: {
+					chain: network.chain.id,
+					contract: b.contract,
+					symbol: `${b.decimals},${b.currency}`
+				}
+			});
+			if (
+				network.config.legacytoken &&
+				tokenEquals(TokenDefinition.from(token.id), network.config.legacytoken.id)
+			) {
+				token = network.config.legacytoken;
+			} else if (tokenEquals(TokenDefinition.from(token.id), network.token.id)) {
+				token = network.token;
+			}
+
+			return TokenBalance.from({
+				token,
 				balance: Asset.fromFloat(Number(b.amount), `${b.decimals},${b.currency}`)
-			})
-		);
+			});
+		});
 	}
 	return balances;
 }
@@ -212,6 +228,14 @@ async function getBalances(
 						TokenBalance.from({
 							...balance,
 							token: network.config.legacytoken
+						})
+					);
+				} else if (tokenEquals(TokenDefinition.from(balance.token.id), network.token.id)) {
+					// If this is the system token, merge in configured token metadata
+					balances.push(
+						TokenBalance.from({
+							...balance,
+							token: network.token
 						})
 					);
 				} else {

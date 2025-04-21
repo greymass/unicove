@@ -5,7 +5,6 @@
 	import ContractButton from '$lib/components/button/contract.svelte';
 	import CopyButton from '$lib/components/button/copy.svelte';
 	import { type NetworkState } from '$lib/state/network.svelte';
-	import { chainLogos } from '@wharfkit/common';
 	import ChevronLeft from 'lucide-svelte/icons/chevron-left';
 
 	interface Props {
@@ -26,11 +25,11 @@
 		}
 	}
 
-	let logo = $derived(chainLogos.get(String(props.network.chain.id)) || '');
+	let logo = $derived(props.network.config.logo || '');
 
 	let routePath = $derived(page.url.pathname.split('/')[3]);
-	let contractPath = $derived(`/${props.network.shortname}/contract/${props.title}`);
-	let accountPath = $derived(`/${props.network.shortname}/account/${props.title}`);
+	let contractPath = $derived(`/${props.network}/contract/${props.title}`);
+	let accountPath = $derived(`/${props.network}/account/${props.title}`);
 </script>
 
 <header class="col-span-full flex min-h-16 items-center gap-4">

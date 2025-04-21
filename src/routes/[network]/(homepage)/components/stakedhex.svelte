@@ -2,14 +2,13 @@
 	import { type UnicoveContext } from '$lib/state/client.svelte';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import { Asset } from '@wharfkit/antelope';
-	import { chainLogos } from '@wharfkit/common';
 	import { getContext } from 'svelte';
 	import * as m from '$lib/paraglide/messages';
 
 	const { network } = getContext<UnicoveContext>('state');
 
-	let networkLogo = $derived(String(chainLogos.get(network?.chain.id.toString() || '')));
-	let networkName = $derived(String(network?.chain.name));
+	let networkLogo = $derived(String(network.config.logo));
+	let networkName = $derived(String(network.chain.name));
 
 	interface PageProps {
 		staked: Asset;
