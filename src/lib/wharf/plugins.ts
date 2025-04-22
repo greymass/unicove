@@ -17,7 +17,9 @@ import { chains, getChainDefinitionFromParams } from '$lib/wharf/chains';
 
 export const baseWalletPlugins: WalletPlugin[] = [
 	new WalletPluginAnchor(),
-	new WalletPluginMetaMask(),
+	new WalletPluginMetaMask({
+		snapOrigin: env.PUBLIC_FEATURE_METAMASK_SNAP_ORIGIN
+	}),
 	new WalletPluginScatter(),
 	new WalletPluginTokenPocket(),
 	new WalletPluginWombat()

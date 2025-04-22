@@ -17,4 +17,17 @@ export class MetaMaskState {
 	public isMetaMaskReady = $derived(
 		isLocalSnap(this.snapOrigin || '') ? this.isFlask : this.snapsDetected
 	);
+
+	toJSON() {
+		return {
+			snapProvider: this.snapProvider,
+			snapOrigin: this.snapOrigin,
+			isFlask: this.isFlask,
+			isInstalled: this.isInstalled,
+			error: this.error,
+			installedSnap: this.installedSnap,
+			publicKey: this.publicKey,
+			ownerKey: this.ownerKey
+		};
+	}
 }

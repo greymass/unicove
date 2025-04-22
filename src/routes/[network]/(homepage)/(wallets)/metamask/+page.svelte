@@ -14,6 +14,7 @@
 	import TextInput from '$lib/components/input/text.svelte';
 	import CopyButton from '$lib/components/button/copy.svelte';
 	import * as m from '$lib/paraglide/messages';
+	import Code from '$lib/components/code.svelte';
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');
@@ -76,7 +77,12 @@
 
 		const response = await fetch(`https://registry.npmjs.org/${npmPackage}/latest`);
 		packageInfo = await response.json();
-		packageName = packageInfo.name.slice(1);
+		if (String(packageInfo.name).startsWith('@')) {
+			packageName = packageInfo.name.slice(1);
+		} else {
+			packageName = packageInfo.name;
+		}
+		console.log(String(packageInfo.name));
 		latestVersion = packageInfo.version;
 	}
 
@@ -94,7 +100,7 @@
 
 	async function login() {
 		context.wharf.login({
-			chain: data.network.chain,
+			chain: data.network.chain.id,
 			walletPlugin: 'wallet-plugin-metamask'
 		});
 	}
@@ -212,7 +218,7 @@
 							{m.metamask_install_ready_description({
 								name: productName
 							})}
-							<a href="https://www.npmjs.com/package/@{packageName}/v/{currentVersion}"
+							<a href="https://www.npmjs.com/package/{packageName}/v/{currentVersion}"
 								>{m.common_version()} {currentVersion}</a
 							>.
 						</p>
@@ -274,6 +280,10 @@
 		</Box>
 	</div>
 </section>
+
+{#if context.settings.data.debugMode}
+	<Code json={metaMaskState} />
+{/if}
 
 {#snippet link(text: string, href: string)}
 	<a {href} class="underline hover:text-zinc-300" target="_blank">
@@ -487,7 +497,7 @@
 				{#if latestVersion}
 					<DLRow title="Latest Version">
 						<DD>
-							<a href="https://www.npmjs.com/package/@{packageName}?activeTab=versions">
+							<a href="https://www.npmjs.com/package/{packageName}?activeTab=versions">
 								{latestVersion}
 							</a>
 						</DD>
