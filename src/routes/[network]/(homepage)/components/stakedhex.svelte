@@ -7,8 +7,8 @@
 
 	const { network } = getContext<UnicoveContext>('state');
 
-	let networkLogo = $derived(String(network.config.logo));
-	let networkName = $derived(String(network.chain.name));
+	let tokenLogo = $derived(String(network.token.media?.logo?.dark));
+	let tokenName = $derived(String(network.token.name));
 
 	interface PageProps {
 		staked: Asset;
@@ -35,7 +35,7 @@
 			/>
 		</svg>
 		<div class="grid text-center uppercase">
-			<img class="mb-4 h-12 place-self-center md:h-20" src={networkLogo} alt={networkName} />
+			<img class="mb-4 h-12 place-self-center md:h-20" src={tokenLogo} alt={tokenName} />
 			<span class="md:text-md text-sm text-white/60">{m.common_total_staked()}</span>
 			<!-- TODO: add eos formatter -->
 			<span class="text-md font-semibold md:text-xl">
