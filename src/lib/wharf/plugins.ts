@@ -1,4 +1,4 @@
-import { env } from '$env/dynamic/public';
+import { PUBLIC_FEATURE_METAMASK_SNAP_ORIGIN, PUBLIC_LOCAL_SIGNER } from '$env/static/public';
 import type { ChainDefinition } from '@wharfkit/common';
 import type { WalletPlugin, TransactPlugin } from '@wharfkit/session';
 
@@ -15,12 +15,12 @@ import { TransactPluginStatusEmitter } from '$lib/wharf/plugins/status';
 
 import { chains, getChainDefinitionFromParams } from '$lib/wharf/chains';
 
-console.log('env snap origin', env.PUBLIC_FEATURE_METAMASK_SNAP_ORIGIN);
+console.log('env snap origin', PUBLIC_FEATURE_METAMASK_SNAP_ORIGIN);
 
 export const baseWalletPlugins: WalletPlugin[] = [
 	new WalletPluginAnchor(),
 	new WalletPluginMetaMask({
-		snapOrigin: env.PUBLIC_FEATURE_METAMASK_SNAP_ORIGIN
+		snapOrigin: PUBLIC_FEATURE_METAMASK_SNAP_ORIGIN
 	}),
 	new WalletPluginScatter(),
 	new WalletPluginTokenPocket(),
@@ -29,13 +29,13 @@ export const baseWalletPlugins: WalletPlugin[] = [
 
 console.log(
 	new WalletPluginMetaMask({
-		snapOrigin: env.PUBLIC_FEATURE_METAMASK_SNAP_ORIGIN
+		snapOrigin: PUBLIC_FEATURE_METAMASK_SNAP_ORIGIN
 	})
 );
 
 // If a local key is provided, add the private key wallet
-if (env.PUBLIC_LOCAL_SIGNER) {
-	baseWalletPlugins.unshift(new WalletPluginPrivateKey(env.PUBLIC_LOCAL_SIGNER));
+if (PUBLIC_LOCAL_SIGNER) {
+	baseWalletPlugins.unshift(new WalletPluginPrivateKey(PUBLIC_LOCAL_SIGNER));
 }
 
 export const walletPlugins = [
