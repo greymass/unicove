@@ -1,8 +1,8 @@
-import { env } from '$env/dynamic/private';
 import { PUBLIC_ENVIRONMENT } from '$env/static/public';
 import type { RequestHandler } from './$types';
 import { i18n } from '$lib/i18n';
 import { ogImageData } from './data';
+import { API_OPENGRAPH_GENERATOR, API_OPENGRAPH_TOKEN } from '$env/static/private';
 
 export const GET: RequestHandler = async ({ locals, url, fetch, params }) => {
 	const lang = i18n.getLanguageFromUrl(url);
@@ -10,9 +10,6 @@ export const GET: RequestHandler = async ({ locals, url, fetch, params }) => {
 	const { text, title, layout } = ogImageData(route, locals.network);
 	const cacheAge = PUBLIC_ENVIRONMENT === 'production' ? 86400 : 300;
 	let response: Response;
-
-	const API_OPENGRAPH_GENERATOR = env.API_OPENGRAPH_GENERATOR;
-	const API_OPENGRAPH_TOKEN = env.API_OPENGRAPH_TOKEN;
 
 	if (!API_OPENGRAPH_GENERATOR || !API_OPENGRAPH_TOKEN) {
 		response = await fetch('/opengraph/default.png'); // default local image

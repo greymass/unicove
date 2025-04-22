@@ -22,7 +22,7 @@
 		<!-- Text -->
 		<Box class="col-span-full">
 			<Stack class="max-w-md items-start">
-				<h2 class="h3 leading-tight">{network.chain.name} {m.common_staking_rewards()}</h2>
+				<h2 class="h3 leading-tight">{network.token.name} {m.common_staking_rewards()}</h2>
 				<p>
 					{m.homepage_staking_intro({
 						token: network.token.name,
@@ -31,7 +31,7 @@
 				</p>
 				<p>
 					{m.homepage_staking_description({
-						network: network.chain.name,
+						network: network.token.name,
 						token: String(network.chain.systemToken?.symbol.name)
 					})}
 				</p>

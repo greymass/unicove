@@ -69,7 +69,7 @@
 		<div id="performance-row-1" class="grid gap-4 @-lg:grid-cols-[1fr_auto_1fr]">
 			<!-- Market Cap -->
 			<Card class="bg-mine-900/40 grid content-between  gap-4">
-				<h3 class="text-muted text-sm">{network.chain.name} {m.common_market_cap()}</h3>
+				<h3 class="text-muted text-sm">{network.token.name} {m.common_market_cap()}</h3>
 				<p class="justify-self-end text-xl font-semibold text-nowrap text-white">
 					<AssetText value={marketcap} variant="short" />
 				</p>
