@@ -82,7 +82,6 @@
 		} else {
 			packageName = packageInfo.name;
 		}
-		console.log(String(packageInfo.name));
 		latestVersion = packageInfo.version;
 	}
 
