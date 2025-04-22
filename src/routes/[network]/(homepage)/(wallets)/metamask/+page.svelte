@@ -282,7 +282,17 @@
 </section>
 
 {#if context.settings.data.debugMode}
-	<Code json={metaMaskState} />
+	<Code
+		json={{
+			snapOrigin: metaMaskState.snapOrigin,
+			isFlask: metaMaskState.isFlask,
+			isInstalled: metaMaskState.isInstalled,
+			error: metaMaskState.error,
+			installedSnap: metaMaskState.installedSnap,
+			publicKey: metaMaskState.publicKey,
+			ownerKey: metaMaskState.ownerKey
+		}}
+	/>
 {/if}
 
 {#snippet link(text: string, href: string)}
