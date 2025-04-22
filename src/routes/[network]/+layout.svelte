@@ -5,7 +5,11 @@
 	import { Head, type SeoConfig } from 'svead';
 	import extend from 'just-extend';
 
-	import { env } from '$env/dynamic/public';
+	import {
+		PUBLIC_ACCOUNT_UPDATE_INTERVAL,
+		PUBLIC_NETWORK_UPDATE_INTERVAL,
+		PUBLIC_MARKET_UPDATE_INTERVAL
+	} from '$env/static/public';
 	import { page } from '$app/state';
 
 	import { AccountState } from '$lib/state/client/account.svelte.js';
@@ -157,9 +161,9 @@
 	});
 
 	// Number of ms between network updates
-	const ACCOUNT_UPDATE_INTERVAL = Number(env.PUBLIC_ACCOUNT_UPDATE_INTERVAL) || 5_000;
-	const NETWORK_UPDATE_INTERVAL = Number(env.PUBLIC_NETWORK_UPDATE_INTERVAL) || 5_000;
-	const MARKET_UPDATE_INTERVAL = Number(env.PUBLIC_MARKET_UPDATE_INTERVAL) || 60_000;
+	const ACCOUNT_UPDATE_INTERVAL = Number(PUBLIC_ACCOUNT_UPDATE_INTERVAL);
+	const NETWORK_UPDATE_INTERVAL = Number(PUBLIC_NETWORK_UPDATE_INTERVAL);
+	const MARKET_UPDATE_INTERVAL = Number(PUBLIC_MARKET_UPDATE_INTERVAL);
 
 	onMount(() => {
 		// Set the chain to the current network chain
