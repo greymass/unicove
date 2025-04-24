@@ -191,34 +191,29 @@
 
 	/* Light Mode Themes */
 	@media (prefers-color-scheme: light) {
-		[data-theme='eos'] {
-			--color-seed: rgb(134 83 0);
-		}
-
-		[data-theme='jungle4'] {
-			--color-seed: rgb(0 104 87);
-		}
-
-		[data-theme='vaulta'] {
-			--color-seed: var(--color-cobalt-700);
-		}
-
-		/* Vaulta */
-		/* [data-theme='jungle4'] { */
-		/* 	--color-seed: rgb(0 15 230); */
+		/* [data-theme='eos'] { */
+		/* 	--color-seed: rgb(134 83 0); */
 		/* } */
-
-		[data-theme='telos'] {
-			--color-seed: rgb(101 85 143);
-		}
-
-		[data-theme='wax'] {
-			--color-seed: rgb(136 81 29);
-		}
-
-		[data-theme='kylin'] {
-			--color-seed: rgb(144 75 64);
-		}
+		/**/
+		/* [data-theme='jungle4'] { */
+		/* 	--color-seed: rgb(0 104 87); */
+		/* } */
+		/**/
+		/* [data-theme='vaulta'] { */
+		/* 	--color-seed: #2e3bff; */
+		/* } */
+		/**/
+		/* [data-theme='telos'] { */
+		/* 	--color-seed: rgb(101 85 143); */
+		/* } */
+		/**/
+		/* [data-theme='wax'] { */
+		/* 	--color-seed: rgb(136 81 29); */
+		/* } */
+		/**/
+		/* [data-theme='kylin'] { */
+		/* 	--color-seed: rgb(144 75 64); */
+		/* } */
 	}
 }
 
