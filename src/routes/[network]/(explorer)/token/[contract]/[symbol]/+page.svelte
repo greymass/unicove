@@ -40,7 +40,7 @@
 </table>
 
 {#if data.topholders.length}
-	<h2 class="text-2xl font-semibold text-on-surface">Top 100 Accounts</h2>
+	<h2 class="text-on-surface text-2xl font-semibold">Top 100 Accounts</h2>
 	<table class="table-styles">
 		<thead>
 			<tr>
