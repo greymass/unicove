@@ -66,17 +66,17 @@
 	<div
 		use:melt={$content}
 		transition:fly={{ y: -5, duration: 100 }}
-		class="bg-mine-900 z-10 rounded-xl shadow-xs"
+		class="z-10 rounded-xl bg-red-900 shadow-xs"
 	>
-		<div class="bg-mine-900 w-72 rounded-xl p-5 shadow-xs">
+		<div class="w-72 rounded-xl bg-red-900 p-5 shadow-xs">
 			<div class="flex flex-col gap-2">
 				<div class="flex gap-4">
-					<picture class="bg-mine-700 block grid size-12 place-items-center rounded-full">
+					<picture class="block grid size-12 place-items-center rounded-full bg-red-700">
 						<User />
 					</picture>
 
 					<div>
-						<div class="text-mine-50 font-bold">{name}</div>
+						<div class="font-bold text-red-50">{name}</div>
 						<div class="text-muted">{account.balance.child('total')}</div>
 					</div>
 				</div>

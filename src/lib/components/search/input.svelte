@@ -332,7 +332,7 @@
 		<Result class="col-span-2 sm:col-span-3" {active} record={item} onclick={closeSearch}>
 			<div
 				data-active={active}
-				class="text-mine-50 hidden size-12 place-items-center sm:group-hover/row:grid sm:data-[active=true]:grid sm:data-[active=true]:group-has-[:hover]/list:hidden sm:data-[active=true]:group-hover/row:group-has-[:hover]/list:grid"
+				class="text-on-surface hidden size-12 place-items-center sm:group-hover/row:grid sm:data-[active=true]:grid sm:data-[active=true]:group-has-[:hover]/list:hidden sm:data-[active=true]:group-hover/row:group-has-[:hover]/list:grid"
 			>
 				<ArrowRight />
 			</div>

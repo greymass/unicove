@@ -183,16 +183,17 @@
 
 {#snippet Balances()}
 	<div class="flex gap-4">
-		<div class="bg-shark-900/40 flex-1 space-y-2 rounded-md p-4">
+		<div class="bg-surface-container-high flex-1 space-y-2 rounded-md p-4">
 			<div class="flex items-center gap-x-2">
 				<picture class="size-8 place-items-center">
 					<img alt="{baseBalance.token.name} Logo" src={baseBalance.token.media?.logo?.light} />
 				</picture>
 				<h3 class="h3">{baseBalance.balance.symbol.name}</h3>
 			</div>
-			<AssetText class="text-white" value={baseBalance.balance} />
+			<AssetText class="text-on-surface" value={baseBalance.balance} />
 			<p>{m.common_available()}</p>
 		</div>
+
 		<div class="flex-1">
 			<Button
 				href="/{data.network}/swap/{data.quote.id.url}/{data.base.id.url}"
@@ -203,14 +204,15 @@
 				<ArrowRightLeft />
 			</Button>
 		</div>
-		<div class="bg-shark-900/40 flex-1 space-y-2 rounded-md p-4">
+
+		<div class="bg-surface-container-high flex-1 space-y-2 rounded-md p-4">
 			<div class="flex items-center gap-x-2">
 				<picture class="size-8 place-items-center">
 					<img alt="{quoteBalance.token.name} Logo" src={quoteBalance.token.media?.logo?.light} />
 				</picture>
 				<h3 class="h3">{quoteBalance.balance.symbol.name}</h3>
 			</div>
-			<AssetText class="text-white" value={quoteBalance.balance} />
+			<AssetText class="text-on-surface" value={quoteBalance.balance} />
 			<p>{m.common_available()}</p>
 		</div>
 	</div>
@@ -261,8 +263,12 @@
 
 				<p class="text-center">
 					{#if swap.fee?.ramfee}
-						System Fee: <AssetText class="font-bold text-white" value={fee} variant="full" /> (0.5%)
+						System Fee: <AssetText class="text-on-surface font-bold" value={fee} variant="full" /> (0.5%)
 					{/if}
+					This swap will exchange
+					<AssetText class="text-on-surface font-bold" value={baseQuantity} variant="full" />
+					for
+					<AssetText class="text-on-surface font-bold" value={quoteQuantity} variant="full" />.
 				</p>
 
 				<Button onclick={transact} disabled={context.wharf.transacting}>

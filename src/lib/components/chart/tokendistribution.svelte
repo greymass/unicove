@@ -14,7 +14,7 @@
 		liquid: { label: m.common_available(), color: 'bg-green-400' },
 		ram: { label: 'RAM', color: 'bg-solar-400' },
 		staked: { label: m.common_staked(), color: 'bg-sky-400' },
-		unstaked: { label: m.common_unstaked(), color: 'bg-sky-400' }
+		unstaked: { label: m.common_unstaked(), color: 'bg-sky-600' }
 	};
 
 	type DistributionItem = {
@@ -60,7 +60,7 @@
 							<div class={cn('size-3 rounded-sm', distributionMap[item.key].color)}></div>
 							{distributionMap[item.key].label}
 						</td>
-						<td class="text-right text-on-surface tabular-nums"> {percentString(item.value)} </td>
+						<td class="text-on-surface text-right tabular-nums"> {percentString(item.value)} </td>
 					</tr>
 				{/each}
 			</tbody>
