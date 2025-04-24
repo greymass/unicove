@@ -3,6 +3,7 @@
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
+	import { SingleCard } from '$lib/components/layout';
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');
@@ -11,6 +12,7 @@
 	const account = $derived(context.account);
 </script>
 
-<div class="sm:bg-shark-900/20 container rounded-2xl pb-4 sm:p-6 sm:pb-10">
+<!-- TODO: SingleCard layout -->
+<SingleCard>
 	<Renting rentType="REX" {network} {account}></Renting>
-</div>
+</SingleCard>

@@ -22,6 +22,7 @@
 	import { preventDefault } from '$lib/utils';
 	import { RentState } from './state.svelte';
 	import { type RentType } from './utils';
+	import { DD, DL, DLRow } from '$lib/components/descriptionlist';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -139,11 +140,11 @@
 	<TransactError error={errorMessage} />
 	<Button onclick={resetStateAfterTrasaction}>{m.common_close()}</Button>
 {:else}
-	<div class="mx-auto max-w-md space-y-3">
+	<div class="mx-auto space-y-6">
 		<CpuAndNetResource cpuAvailable={cpuAvailableSize} netAvailable={netAvailableSize} />
 		<form onsubmit={preventDefault(handleRent)}>
-			<Stack class="py-4 sm:p-4 ">
-				<fieldset class="grid gap-4">
+			<Stack>
+				<fieldset class="grid gap-2">
 					<Label for="cpuNumberInput"
 						>{m.common_resouce_amount({ resource: 'CPU' })}
 						{#if rentState.cpuPricePerMs}
@@ -158,7 +159,7 @@
 					/>
 				</fieldset>
 
-				<fieldset class="grid gap-4">
+				<fieldset class="grid gap-2">
 					<Label for="netNumberInput"
 						>{m.common_resouce_amount({ resource: 'NET' })}
 						{#if rentState.netPricePerKb}
@@ -179,7 +180,7 @@
 				</fieldset>
 
 				{#if !rentState.rentingForSelf}
-					<fieldset class="semi-bold grid gap-4">
+					<fieldset class="semi-bold grid gap-2">
 						<Label for="thirdReceiver">{m.send_receiving_account()}</Label>
 						<NameInput
 							id="thirdReceiver"
@@ -204,24 +205,18 @@
 			</Stack>
 		</form>
 
-		<Stack class="sm:px-4">
-			<ul>
-				{#each rentDetails as detail}
-					<!-- TODO: Color audit -->
-					<li
-						class="border-mine-300/10 odd:via-mine-950 flex justify-between border-b bg-linear-to-r from-transparent to-transparent py-3 last:border-none"
-					>
-						<span class="text-base font-medium">{detail.title}</span>
-						<span class="text-base font-medium text-on-surface">{detail.desc}</span>
-					</li>
-				{/each}
-			</ul>
-		</Stack>
+		<DL>
+			{#each rentDetails as detail}
+				<DLRow title={detail.title}>
+					<DD>{detail.desc}</DD>
+				</DLRow>
+			{/each}
+		</DL>
 	</div>
 {/if}
 
 {#if context.settings.data.debugMode}
-	<div class="mx-auto mt-6 max-w-md border-2 border-sky-500 p-6">
+	<div class="border-primary mx-auto mt-6 max-w-md border-2 p-6">
 		<h3 class="h3 text-center">Debug Info</h3>
 		<table class="table-styles">
 			<tbody>
