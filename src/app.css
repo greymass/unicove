@@ -178,13 +178,8 @@
 	}
 
 	[data-theme='vaulta'] {
-		--color-seed: blue;
+		--color-seed: #2e3bff;
 	}
-
-	/* Vaulta */
-	/* [data-theme='jungle4'] { */
-	/* 	--color-seed: rgb(190 194 255); */
-	/* } */
 
 	[data-theme='wax'] {
 		--color-seed: rgb(255 183 123);
