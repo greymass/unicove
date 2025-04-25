@@ -16,7 +16,7 @@ export const GET: RequestHandler = async ({ fetch, locals: { network } }) => {
 			systemtoken = Asset.Symbol.from('4,EOS');
 		}
 		const response = await fetch(
-			`${network.config.endpoints.metrics}/marketprice/${systemtoken.name.toLowerCase()}usd/1h/7d`
+			`${network.config.endpoints.metrics}/marketprice/${systemtoken.name.toLowerCase()}usd/1h/1mo`
 		);
 		if (!response.ok) {
 			throw new Error(`HTTP error! status: ${response.status}`);
@@ -29,7 +29,7 @@ export const GET: RequestHandler = async ({ fetch, locals: { network } }) => {
 		);
 
 		return json(historicalPrices, {
-			headers: getCacheHeaders(30)
+			headers: getCacheHeaders(3600)
 		});
 	} catch (error) {
 		console.warn(error);

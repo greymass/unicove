@@ -26,7 +26,7 @@ export const GET: RequestHandler = async ({ locals: { network } }) => {
 			year: await getHistoricPrice(network, systemTokenPair, '1y', Currencies.USD.symbol)
 		});
 
-		const rameos = TokenHistoricPrices.from({
+		const ramsystemtoken = TokenHistoricPrices.from({
 			day: await getHistoricPrice(network, systemRamPair, '1d', network.token.symbol),
 			week: await getHistoricPrice(network, systemRamPair, '1w', network.token.symbol),
 			month: await getHistoricPrice(network, systemRamPair, '1mo', network.token.symbol),
@@ -35,17 +35,17 @@ export const GET: RequestHandler = async ({ locals: { network } }) => {
 		});
 
 		const ram = TokenHistoricPrices.from({
-			day: convertRamToUSD(rameos.day, systemtoken.day),
-			week: convertRamToUSD(rameos.week, systemtoken.week),
-			month: convertRamToUSD(rameos.month, systemtoken.month),
-			quarter: convertRamToUSD(rameos.quarter, systemtoken.quarter),
-			year: convertRamToUSD(rameos.year, systemtoken.year)
+			day: convertRamToUSD(ramsystemtoken.day, systemtoken.day),
+			week: convertRamToUSD(ramsystemtoken.week, systemtoken.week),
+			month: convertRamToUSD(ramsystemtoken.month, systemtoken.month),
+			quarter: convertRamToUSD(ramsystemtoken.quarter, systemtoken.quarter),
+			year: convertRamToUSD(ramsystemtoken.year, systemtoken.year)
 		});
 
 		return json(
 			{
 				ram,
-				rameos,
+				ramsystemtoken,
 				systemtoken
 			},
 			{

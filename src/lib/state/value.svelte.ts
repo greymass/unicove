@@ -99,6 +99,21 @@ export class NetworkValueState {
 		return pair;
 	});
 
+	readonly ramtoken = $derived.by(() => {
+		const quote = this.systemtoken.base;
+		const pair = this.states.market.getRAMTokenPair(quote);
+		if (!pair) {
+			const ramKb = this.states.network.getRamToken();
+			return TokenPair.from({
+				base: ramKb,
+				quote: this.states.network.token,
+				price: Asset.fromUnits(0, quote.symbol),
+				updated: new Date()
+			});
+		}
+		return pair;
+	});
+
 	// Currently hardcoded to use the systemtoken price for the legacytoken
 	readonly legacytoken = $derived.by(() => {
 		if (!this.states.network.config.legacytoken) {

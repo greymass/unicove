@@ -16,9 +16,9 @@
 	let { pair, data, ...props }: Props = $props();
 
 	const range: ExtendedSelectOption[] = [
-		{ label: '1D', value: 1 },
-		{ label: '1W', value: 7 },
-		{ label: '1M', value: 30 }
+		{ label: '1d', value: 1 },
+		{ label: '1w', value: 7 },
+		{ label: '1mo', value: 30 }
 		// { label: '1Y', value: 365 } // We're currently only getting data for the last 30 days
 	];
 
