@@ -55,26 +55,28 @@
 	);
 </script>
 
-<div class="xs:grid-cols-[100%] grid gap-6 lg:grid-cols-[60%_35%]">
+<div class="xs:grid-cols-full grid gap-6 lg:grid-cols-[60%_1fr]">
 	<div class="space-y-6">
 		{#if hasValue}
 			<Card id="account-value" style="column-span: all;">
 				<div class="flex flex-wrap items-center gap-x-4 gap-y-2">
-					<picture class="bg-mine-900 grid size-12 place-items-center rounded-full">
+					<picture class="bg-surface-container-high grid size-12 place-items-center rounded-full">
 						<DollarSign />
 					</picture>
 
 					{#if currentAccountValue}
 						<div class="flex flex-1 flex-col gap-1">
-							<p>{m.account_page_total_value()}</p>
+							<p class="leading-none">{m.account_page_total_value()}</p>
 							{#if currentAccountValue.hasPrice}
 								<AssetText
-									class="text-2xl font-bold text-white"
+									class="text-on-surface text-2xl leading-none font-bold"
 									variant="full"
 									value={currentAccountValue.systemtoken.total}
 								/>
 							{:else}
-								<div class="bg-mine-900 w-48 animate-pulse rounded text-2xl font-bold text-white">
+								<div
+									class="bg-surface-container-high text-on-surface w-48 animate-pulse rounded text-2xl font-bold"
+								>
 									&nbsp;
 								</div>
 							{/if}
@@ -157,8 +159,8 @@
 	<div class="space-y-6">
 		<Tokendistribution data={currentAccountValue.systemtoken} />
 		{#if context.settings.data.advancedMode}
-			<Card title={m.common_resources()}>
-				<div class="flex flex-wrap gap-12 *:flex-1">
+			<Card class="@container" title={m.common_resources()}>
+				<div class="flex gap-12 *:flex-1 @sm:justify-between @sm:*:flex-auto">
 					<ResourceCard type="cpu" value={cpuAvailable} vertical />
 
 					<ResourceCard type="net" value={netAvailable} vertical />

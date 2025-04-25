@@ -69,7 +69,9 @@ function isManualRedirectPath(pathMore: string[]): boolean {
 
 export async function networkHandle({ event, resolve }: HandleParams): Promise<Response> {
 	event.locals.network = getBackendNetworkByName(PUBLIC_CHAIN_SHORT, event.fetch);
-	return await resolve(event);
+	return await resolve(event, {
+		transformPageChunk: ({ html }) => html.replace('%network%', event.locals.network.toString())
+	});
 }
 
 export async function redirectHandle({ event, resolve }: HandleParams): Promise<Response> {

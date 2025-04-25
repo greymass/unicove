@@ -129,7 +129,7 @@
 </script>
 
 <section class="@container col-span-full">
-	<div class="bg-mine-950 grid min-h-72 rounded-2xl px-4 @2xl:grid-cols-2 @2xl:gap-4">
+	<div class="bg-surface-container grid min-h-72 rounded-2xl px-4 @2xl:grid-cols-2 @2xl:gap-4">
 		<div class="grid place-items-center">
 			<svg
 				class="col-start-1 row-start-1 h-full w-full object-cover"
@@ -157,12 +157,16 @@
 			<div
 				class="col-start-1 row-start-1 grid max-w-sm grid-cols-3 items-center justify-items-center"
 			>
-				<img class="bg-mine-950 h-40 rounded-full object-contain" src={Metamask} alt="metamask" />
+				<img
+					class="bg-surface-container h-40 rounded-full object-contain"
+					src={Metamask}
+					alt="metamask"
+				/>
 				<svg width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path d="M18.008 0v36M36.008 18h-36" stroke="#fff" />
 				</svg>
 				<img
-					class="bg-mine-950 h-40 rounded-full object-contain px-2 py-4"
+					class="bg-surface-container h-40 rounded-full object-contain px-2 py-4"
 					src={String(networkLogo)}
 					alt={networkName}
 				/>
@@ -295,7 +299,7 @@
 {/if}
 
 {#snippet link(text: string, href: string)}
-	<a {href} class="underline hover:text-zinc-300" target="_blank">
+	<a {href} class="hover:text-muted underline" target="_blank">
 		{text}
 	</a>
 {/snippet}

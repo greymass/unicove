@@ -15,29 +15,29 @@
 <div class="flex justify-center">
 	<Card
 		class={cn(
-			'bg-shark-950  bg-mine-900/30 @container w-full max-w-2xl gap-4 text-center',
+			' bg-surface-container-high @container w-full max-w-2xl gap-4 text-center',
 			props.class
 		)}
 	>
 		<span class="text-xl font-semibold">Token Transfer</span>
-		<hr class="text-zinc-400/10" />
+		<hr class="text-outline-variant" />
 		<div class="grid gap-4 @md:grid-cols-3">
 			<div>
 				<p>Sender</p>
-				<p class="text-xl font-semibold text-nowrap text-white">{data.from}</p>
+				<p class="text-on-surface text-xl font-semibold text-nowrap">{data.from}</p>
 			</div>
 			<div>
 				<p>Tokens</p>
-				<p class="text-xl font-semibold text-nowrap text-white">{data.quantity}</p>
+				<p class="text-on-surface text-xl font-semibold text-nowrap">{data.quantity}</p>
 				{#if value}
-					<p class="bg-shark-800/60 mt-1.5 self-start rounded-sm px-2">
+					<p class="bg-surface-container-highest mt-1.5 self-start rounded-sm px-2">
 						USD {formatCurrency(value)}
 					</p>
 				{/if}
 			</div>
 			<div>
 				<p>Receiver</p>
-				<p class="text-xl font-semibold text-nowrap text-white">{data.to}</p>
+				<p class="text-on-surface text-xl font-semibold text-nowrap">{data.to}</p>
 			</div>
 		</div>
 	</Card>

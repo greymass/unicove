@@ -58,8 +58,8 @@
 <button
 	id="network-switcher"
 	class={cn(
-		'focus:bg-mine-950 flex items-center gap-3 rounded-2xl px-4  py-3.5 focus:outline-hidden',
-		!!context.settings.data.advancedMode && 'hover:bg-mine-950',
+		'focus:bg-surface-container flex items-center gap-3 rounded-2xl px-4  py-3.5 focus:outline-hidden',
+		!!context.settings.data.advancedMode && 'hover:bg-transparent',
 		className
 	)}
 	use:melt={$trigger}
@@ -84,7 +84,7 @@
 		>
 
 		{#if options.length > 1 && context.settings.data.advancedMode}
-			<div class="font-regular m-0 flex items-center gap-1 pr-1 text-base text-zinc-400">
+			<div class="font-regular text-muted m-0 flex items-center gap-1 pr-1 text-base">
 				<span use:melt={$label}>{m.change_network()}</span>
 				<ChevronDown
 					data-open={$open}
@@ -97,7 +97,7 @@
 
 {#if $open}
 	<div
-		class="bg-mine-950 z-50 flex max-h-[300px] flex-col overflow-y-auto rounded-lg p-1 shadow-sm focus:ring-0!"
+		class="bg-surface-container z-50 flex max-h-[300px] flex-col overflow-y-auto rounded-lg p-1 shadow-sm focus:ring-0!"
 		use:melt={$menu}
 		transition:fade={{ duration: 150 }}
 	>
@@ -116,7 +116,7 @@
 					{#if chain.logo}
 						<img class="h-full object-contain" src={String(chain.logo)} alt={chain.label} />
 					{:else}
-						<FileQuestion class="size-4 text-zinc-400" />
+						<FileQuestion class="text-muted size-4" />
 					{/if}
 				</picture>
 				<span> {chain.label} </span>

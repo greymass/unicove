@@ -132,7 +132,7 @@
 <!-- Trigger Button -->
 <button
 	class={cn(
-		'border-mine-600 focus-visible:ring-solar-500 relative z-50 h-10 rounded-lg border text-base font-medium text-nowrap focus:outline-transparent focus-visible:ring-2 focus-visible:outline focus-visible:ring-inset',
+		'border-outline focus-visible:ring-solar-500 relative z-50 h-10 rounded-lg border text-base font-medium text-nowrap focus:outline-transparent focus-visible:ring-2 focus-visible:outline focus-visible:ring-inset',
 		className
 	)}
 	use:melt={$trigger}
@@ -151,7 +151,7 @@
 					width="20"
 				/>
 			</picture>
-			<span class="pointer-events-none z-10 text-base text-white/90"
+			<span class="text-on-surface pointer-events-none z-10 text-base"
 				>{context.wharf.session.actor}</span
 			>
 		</div>
@@ -161,18 +161,18 @@
 </button>
 
 {#if $open}
-	<div class="" use:melt={$portalled}>
+	<div data-theme={network} class="" use:melt={$portalled}>
 		<!-- Scrim -->
 		<div
 			use:melt={$overlay}
-			class="fixed inset-0 z-50 bg-black/50"
+			class="bg-scrim fixed inset-0 z-50"
 			transition:fade={{ duration: 150 }}
 		></div>
 
 		<!-- Content -->
 		<div
 			use:melt={$content}
-			class="bg-shark-950 fixed top-0 right-0 z-50 flex h-svh max-w-fit min-w-80 flex-col space-y-4 overflow-x-hidden overflow-y-auto px-4 py-4 shadow-lg focus:outline-hidden md:px-6"
+			class="bg-surface-container fixed top-0 right-0 z-50 flex h-svh max-w-fit min-w-80 flex-col space-y-4 overflow-x-hidden overflow-y-auto px-4 py-4 shadow-lg focus:outline-hidden md:px-6"
 			transition:fly={{
 				x: 350,
 				duration: 300,
@@ -197,7 +197,7 @@
 				<button
 					use:melt={$close}
 					aria-label="Close"
-					class="text-muted grid size-12 appearance-none place-items-center justify-self-end rounded-lg focus:text-white focus:outline-hidden"
+					class="text-muted focus:text-on-surface grid size-12 appearance-none place-items-center justify-self-end rounded-lg focus:outline-hidden"
 				>
 					<X class="size-4" />
 				</button>
@@ -211,7 +211,7 @@
 						in:fly={{ x: -100, duration: 100 }}
 						out:fly={{ x: -100, duration: 100 }}
 					>
-						<Button onclick={addAccount} variant="secondary" class="grow-0 text-white">
+						<Button onclick={addAccount} variant="secondary" class="text-on-surface grow-0">
 							<div class="flex items-center gap-2">
 								<UserPlus class="mb-0.5 size-5" />
 								<span>{m.common_add_account()}</span>
@@ -248,7 +248,7 @@
 									<button
 										data-current={isCurrent}
 										onclick={() => switchSession(session)}
-										class="data-[current=false]:hover:bg-mine-950 data-[current=false]:hover:text-mine-50 flex h-12 items-center gap-1 rounded-lg px-4 data-[current=true]:bg-sky-700 data-[current=true]:text-sky-50"
+										class="text-on-surface-variant data-[current=false]:hover:bg-surface-container-high data-[current=false]:hover:text-on-surface data-[current=true]:bg-primary data-[current=true]:text-on-primary flex h-12 items-center gap-1 rounded-lg px-4"
 									>
 										<div class="w-6">
 											{#if isCurrent}
@@ -272,7 +272,7 @@
 									<button
 										onclick={() => removeSession(session)}
 										data-current={isCurrent}
-										class="text-muted hover:bg-mine-950 hover:text-mine-50 grid size-12 place-items-center rounded-lg"
+										class="text-muted hover:bg-surface-container-high hover:text-on-surface grid size-12 place-items-center rounded-lg"
 									>
 										<LogOut class="size-4" />
 									</button>
@@ -292,7 +292,7 @@
 
 {#snippet connectWalletScreen()}
 	<div class="space-y-4" in:fly={{ x: 100, duration: 150 }} out:fly={{ x: 100, duration: 100 }}>
-		<hr class="border-mine-900" />
+		<hr class="border-outline-variant" />
 
 		<header class="grid justify-center gap-2 py-4 text-center">
 			<span class="h4">{m.common_login_to_unicove()}</span>
@@ -305,7 +305,7 @@
 					{#if wallet.id !== 'wallet-plugin-multisig'}
 						<li class="table-row-background table-row-border col-span-full grid grid-cols-subgrid">
 							<button
-								class="col-span-full grid grid-cols-subgrid gap-4 px-2 py-4 font-semibold text-white"
+								class="text-on-surface col-span-full grid grid-cols-subgrid gap-4 px-2 py-4 font-semibold"
 								onclick={() => connectWallet(wallet)}
 							>
 								{#if wallet.metadata.logo}
@@ -328,7 +328,7 @@
 			<!-- <Button  href={`/${network}/signup`} onclick={closeDrawer} variant="primary"> -->
 			<!-- 	Create account -->
 			<!-- </Button> -->
-			<Button class="text-white" onclick={closeAddingAccount} variant="secondary"
+			<Button class="text-on-surface" onclick={closeAddingAccount} variant="secondary"
 				>{m.common_cancel()}</Button
 			>
 		</div>

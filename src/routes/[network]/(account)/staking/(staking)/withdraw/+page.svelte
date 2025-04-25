@@ -42,7 +42,7 @@
 		<Switcher>
 			<Stack class="gap-2">
 				<h3 class="text-muted leading-none">{m.common_withdrawable_currently()}</h3>
-				<p class="text-2xl font-bold text-white">{String(manager.total)}</p>
+				<p class="text-on-surface text-2xl font-bold">{String(manager.total)}</p>
 			</Stack>
 			<Button disabled={!manager.total.value} onclick={() => manager.transact()} variant="primary"
 				>{m.common_withdraw()}</Button

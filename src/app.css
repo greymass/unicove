@@ -3,6 +3,16 @@
 @plugin '@tailwindcss/container-queries';
 
 @theme {
+	/* Custom Values */
+	--breakpoint-xs: 480px;
+
+	/* Fonts */
+	--font-sans: Inter, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+		'Segoe UI Symbol', 'Noto Color Emoji';
+	--font-mono: JetBrains Mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+		'Liberation Mono', 'Courier New', monospace;
+
+	/* Colors */
 	--color-*: initial;
 	--color-transparent: transparent;
 	--color-current-color: currentColor;
@@ -33,18 +43,6 @@
 	--color-green-800: #166534;
 	--color-green-900: #14532d;
 	--color-green-950: #052e16;
-
-	--color-zinc-50: #fafafa;
-	--color-zinc-100: #f4f4f5;
-	--color-zinc-200: #e4e4e7;
-	--color-zinc-300: #d4d4d8;
-	--color-zinc-400: #a1a1aa;
-	--color-zinc-500: #71717a;
-	--color-zinc-600: #52525b;
-	--color-zinc-700: #3f3f46;
-	--color-zinc-800: #27272a;
-	--color-zinc-900: #18181b;
-	--color-zinc-950: #09090b;
 
 	--color-shark-50: #f4f6f7;
 	--color-shark-100: #e2e8eb;
@@ -82,18 +80,6 @@
 	--color-sky-900: #064e74;
 	--color-sky-950: #04314d;
 
-	--color-spring-50: #edfff8;
-	--color-spring-100: #d5fff0;
-	--color-spring-200: #aeffe2;
-	--color-spring-300: #70ffcc;
-	--color-spring-400: #2bfdb0;
-	--color-spring-500: #00ed97;
-	--color-spring-600: #00c076;
-	--color-spring-700: #00965f;
-	--color-spring-800: #06754e;
-	--color-spring-900: #076042;
-	--color-spring-950: #003724;
-
 	--color-solar-50: #fffdea;
 	--color-solar-100: #fff8c5;
 	--color-solar-200: #fff185;
@@ -106,12 +92,44 @@
 	--color-solar-900: #7c3b0b;
 	--color-solar-950: #481d00;
 
-	--breakpoint-xs: 480px;
+	/* Seeds - Not for general use */
+	--color-seed: var(--color-sky-500);
+	/* --color-neutral-seed: oklch(from var(--color-seed) l 0.01 h); */
+	/* --color-neutral-variant-seed: oklch(from var(--color-seed) l 0.015 h); */
 
-	--font-sans: Inter, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-		'Segoe UI Symbol', 'Noto Color Emoji';
-	--font-mono: JetBrains Mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-		'Liberation Mono', 'Courier New', monospace;
+	/* Color Roles and default dark values */
+	--color-primary: oklch(from var(--color-seed) 0.82 c h);
+	--color-primary-hover: oklch(from var(--color-seed) 0.9 c h);
+	--color-on-primary: oklch(from var(--color-seed) 0.2 c h);
+
+	--color-primary-container: oklch(from var(--color-seed) 0.39 0.086 h);
+	--color-on-primary-container: oklch(from var(--color-seed) 0.9 0.085 h);
+
+	--color-error: rgb(255 180 171);
+	--color-on-error: rgb(105 0 5);
+	--color-error-container: rgb(147 0 10);
+	--color-on-error-container: rgb(255 218 214);
+
+	--color-shadow: oklch(0 0 0);
+	--color-scrim: oklch(0 0 0 / 0.5);
+
+	--color-surface-tint: var(--color-primary);
+	--color-surface: color-mix(in oklab, var(--color-shark-950) 100%, var(--color-surface-tint) 1.5%);
+	--color-background: var(--color-surface);
+
+	--color-on-surface: oklch(from var(--color-surface) 0.95 c h);
+	--color-on-surface-variant: oklch(from var(--color-surface) 0.8 calc(c * 2) h);
+	--color-on-background: var(--color-on-surface);
+
+	--color-outline: oklch(from var(--color-surface) 0.65 c h);
+	--color-outline-variant: oklch(from var(--color-surface) 0.4 c h);
+
+	/* Surface Containers ranked by emphasis (contrast) */
+	--color-surface-container-lowest: oklch(from var(--color-surface) calc(l - 0.01) c h);
+	--color-surface-container-low: oklch(from var(--color-surface) calc(l + 0.01) c h);
+	--color-surface-container: oklch(from var(--color-surface) calc(l + 0.023) c h);
+	--color-surface-container-high: oklch(from var(--color-surface) calc(l + 0.05) c h);
+	--color-surface-container-highest: oklch(from var(--color-surface) calc(l + 0.1) c h);
 }
 
 /*
@@ -128,13 +146,40 @@
 	::before,
 	::backdrop,
 	::file-selector-button {
-		border-color: var(--color-gray-200, currentColor);
+		border-color: var(--color-outline, currentColor);
+	}
+
+	[data-theme='eos'] {
+		--color-seed: rgb(248 187 113);
+	}
+
+	[data-theme='telos'] {
+		--color-seed: rgb(207 189 254);
+	}
+
+	[data-theme='jungle4'] {
+		--color-seed: #2e9e87;
+	}
+
+	[data-theme='vaulta'] {
+		--color-seed: #2e3bff;
+	}
+
+	[data-theme='wax'] {
+		--color-seed: rgb(255 183 123);
+	}
+
+	[data-theme='kylin'] {
+		--color-seed: rgb(255 180 168);
+	}
+
+	/* Light Mode Themes */
+	@media (prefers-color-scheme: light) {
 	}
 }
 
 @utility h1 {
 	/* Headings are defined by class instead of tag to preserve semantic html independent of style */
-	/* Typography */
 	@apply text-5xl leading-none font-semibold;
 }
 
@@ -160,7 +205,7 @@
 
 @utility card {
 	/* Layout */
-	@apply bg-shark-900/20 grid gap-4 rounded-xl p-5;
+	@apply bg-surface-container grid gap-4 rounded-xl p-5;
 }
 
 @utility layout-stack {
@@ -224,11 +269,11 @@
 }
 
 @utility table-row-border {
-	@apply border-mine-900 border-b last:border-none;
+	@apply border-outline-variant border-b last:border-none;
 }
 
 @utility table-row-background {
-	@apply odd:via-mine-950 data-[hover-effect=false]:odd:hover:via-mine-950 bg-linear-to-r from-transparent to-transparent hover:via-sky-500/10 data-[active=true]:via-sky-500/10 data-[clickable=true]:cursor-pointer data-[hover-effect=false]:hover:via-transparent;
+	@apply odd:via-outline-variant/10 data-[hover-effect=false]:odd:hover:via-outline-variant/10 hover:via-primary/5 data-[active=true]:via-primary/10 bg-linear-to-r from-transparent to-transparent data-[clickable=true]:cursor-pointer data-[hover-effect=false]:hover:via-transparent;
 }
 
 @utility bg-hero-gradient {
@@ -236,7 +281,7 @@
 }
 
 @utility text-muted {
-	@apply text-zinc-400;
+	@apply text-on-surface-variant;
 }
 
 @utility subgrid {
@@ -245,14 +290,18 @@
 
 @layer components {
 	html {
-		@apply bg-shark-950 h-full text-white;
-		color-scheme: dark;
+		@apply bg-background text-on-background h-full;
+		color-scheme: dark light;
 		touch-action: manipulation;
 		scrollbar-gutter: stable;
+
+		::selection {
+			@apply bg-primary text-on-primary;
+		}
 	}
 
 	body {
-		@apply h-auto min-h-svh text-white;
+		@apply h-auto min-h-svh;
 	}
 
 	p,

@@ -13,7 +13,7 @@
 </script>
 
 <div
-	class="border-mine-900 flex flex-wrap items-center justify-between gap-x-4 border-b py-3 last:border-none @xs:flex-nowrap"
+	class="border-outline-variant flex flex-wrap items-center justify-between gap-x-4 border-b py-3 last:border-none @xs:flex-nowrap"
 >
 	<DT>{title}</DT>
 	<div

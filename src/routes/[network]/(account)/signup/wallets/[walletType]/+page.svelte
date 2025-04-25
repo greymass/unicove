@@ -68,7 +68,7 @@
 					</h4>
 					<!-- <p>{wallet.description}</p> -->
 				</div>
-				<ChevronRight class="size-6 group-hover:stroke-sky-500" />
+				<ChevronRight class="group-hover:stroke-primary size-6" />
 			</a>
 		{/each}
 

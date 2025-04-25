@@ -9,16 +9,16 @@
 		<p class="text-muted my-0">{props.pair}</p>
 		<div class="flex justify-between">
 			<div>
-				<div class="bg-mine-900 mt-1 h-4 w-32 animate-pulse rounded-full"></div>
-				<div class="bg-mine-900 mt-1 h-4 w-16 animate-pulse rounded-full"></div>
+				<div class="bg-surface-container mt-1 h-4 w-32 animate-pulse rounded-full"></div>
+				<div class="bg-surface-container mt-1 h-4 w-16 animate-pulse rounded-full"></div>
 			</div>
-			<div class="bg-mine-900 mt-1 h-4 w-16 animate-pulse rounded-full"></div>
+			<div class="bg-surface-container mt-1 h-4 w-16 animate-pulse rounded-full"></div>
 		</div>
 	</header>
 
 	<div class="grid h-32 place-items-center">
 		<svg
-			class="text-mine-700 size-8 animate-spin"
+			class="text-muted size-8 animate-spin"
 			xmlns="http://www.w3.org/2000/svg"
 			fill="none"
 			viewBox="0 0 24 24"
@@ -33,16 +33,16 @@
 		</svg>
 	</div>
 
-	<hr class="bg-mine-800 h-px border-0" />
+	<hr class="bg-outline-variant h-px border-0" />
 
 	<div class="flex items-center justify-between font-medium">
-		<div class="bg-mine-900 mt-1 h-4 w-16 animate-pulse rounded-full"></div>
+		<div class="bg-surface-container mt-1 h-4 w-16 animate-pulse rounded-full"></div>
 		<div class="flex gap-4">
 			<div class="flex items-center gap-1">
 				<div class="size-4 rounded-sm bg-[#00ED97]"></div>
 				<span class="text-[#00ED97]">{props.pair}</span>
 			</div>
 		</div>
-		<div class="bg-mine-900 mt-1 h-4 w-16 animate-pulse rounded-full"></div>
+		<div class="bg-surface-container mt-1 h-4 w-16 animate-pulse rounded-full"></div>
 	</div>
 </Card>

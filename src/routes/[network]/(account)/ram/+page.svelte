@@ -17,6 +17,7 @@
 	import AccountBalance from '$lib/components/card/accountbalance.svelte';
 
 	import { RAMCalculatorState } from './state.svelte';
+	import { DD, DL, DLRow } from '$lib/components/descriptionlist';
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');
@@ -124,45 +125,35 @@
 
 		<Stack class="gap-2">
 			<h4 class="text-md font-semibold">{m.common_details()}</h4>
-			<table class="">
-				<tbody class="*:border-mine-900 *:border-b *:pt-8 *:last:border-b-0 even:*:text-right">
-					<tr class="*:py-2">
-						<td class="text-muted text-base">
-							{data.network.token.id.symbol.code || ''}/RAM (KB)
-						</td>
-						<td class="text-right font-medium text-white">
-							<AssetText variant="full" value={kbValueToken} />
-						</td>
-					</tr>
-					<tr class="*:py-2">
-						<td class="text-muted text-base">
-							{market.network.currency.symbol.code}/RAM (KB)
-						</td>
-						<td class="text-right font-medium text-white">
-							<AssetText variant="full" value={kbValueFiat} />
-						</td>
-					</tr>
-					<tr class="*:py-2">
-						<td class="text-muted text-base">
-							{m.common_labeled_unit_price({
-								unit: market.network.currency.symbol.code
-							})}
-						</td>
-						<td class="text-right font-medium text-white">
-							<AssetText
-								variant="full"
-								value={calculateValue(ramCalculatorState.tokens, market.network.systemtoken.price)}
-							/>
-						</td>
-					</tr>
-					<tr class="*:py-2">
-						<td class="text-muted text-base"> {m.common_network_fees()} </td>
-						<td class="text-right font-medium text-white">
-							<AssetText variant="full" value={ramCalculatorState.fee} />
-						</td>
-					</tr>
-				</tbody>
-			</table>
+			<DL>
+				<DLRow title={` ${data.network.token.id.symbol.code || ''}/RAM (KB) `}>
+					<DD>
+						<AssetText variant="full" value={kbValueToken} />
+					</DD>
+				</DLRow>
+				<DLRow title={` ${market.network.currency.symbol.code}/RAM (KB) `}>
+					<DD>
+						<AssetText variant="full" value={kbValueFiat} />
+					</DD>
+				</DLRow>
+				<DLRow
+					title={m.common_labeled_unit_price({
+						unit: market.network.currency.symbol.code
+					})}
+				>
+					<DD>
+						<AssetText
+							variant="full"
+							value={calculateValue(ramCalculatorState.tokens, market.network.systemtoken.price)}
+						/>
+					</DD>
+				</DLRow>
+				<DLRow title={m.common_network_fees()}>
+					<DD>
+						<AssetText variant="full" value={ramCalculatorState.fee} />
+					</DD>
+				</DLRow>
+			</DL>
 		</Stack>
 	</Card>
 
@@ -173,31 +164,24 @@
 	{/if}
 
 	<Card>
-		<table>
-			<tbody class="*:border-mine-900 *:border-b *:pt-8 *:last:border-b-0 even:*:text-right">
-				<tr class="*:py-2">
-					<td class="text-muted text-base"
-						>{m.common_market_cap()} ({data.network.chain.systemToken?.symbol.code || ''})</td
-					>
-					<td class="text-right font-medium text-white">
-						<AssetText variant="full" value={marketCapToken} />
-					</td>
-				</tr>
-				<tr class="*:py-2">
-					<td class="text-muted text-base"
-						>{m.common_market_cap()} ({market.network.currency.symbol.code})</td
-					>
-					<td class="text-right font-medium text-white">
-						<AssetText variant="full" value={marketCapFiat} />
-					</td>
-				</tr>
-				<tr class="*:py-2">
-					<td class="text-muted text-base">{m.common_supply()}</td>
-					<td class="text-right font-medium text-white">
-						<AssetText variant="full" value={totalRamSupply} />
-					</td>
-				</tr>
-			</tbody>
-		</table>
+		<DL>
+			<DLRow
+				title={`${m.common_market_cap()} (${data.network.chain.systemToken?.symbol.code || ''})`}
+			>
+				<DD>
+					<AssetText variant="full" value={marketCapToken} />
+				</DD>
+			</DLRow>
+			<DLRow title={`${m.common_market_cap()} (${market.network.currency.symbol.code})`}>
+				<DD>
+					<AssetText variant="full" value={marketCapFiat} />
+				</DD>
+			</DLRow>
+			<DLRow title={m.common_supply()}>
+				<DD>
+					<AssetText variant="full" value={totalRamSupply} />
+				</DD>
+			</DLRow>
+		</DL>
 	</Card>
 </MultiCard>

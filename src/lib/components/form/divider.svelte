@@ -1,1 +1,1 @@
-<hr class="text-mine-900/50" />
+<hr class="border-outline-variant" />

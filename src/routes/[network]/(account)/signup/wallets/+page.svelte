@@ -19,7 +19,7 @@ border-white/20 p-4 focus-visible:ring-2 focus-visible:outline focus-visible:out
 				<div class="bg-mine-900/60 rounded-full p-3">
 					{#if walletType.icon}
 						{@const Component = walletType.icon}
-						<Component class="size-6 group-hover:stroke-sky-500" />
+						<Component class="group-hover:stroke-primary size-6" />
 					{/if}
 				</div>
 				<div class="space-y-1">
@@ -28,7 +28,7 @@ border-white/20 p-4 focus-visible:ring-2 focus-visible:outline focus-visible:out
 					</h4>
 					<p>{walletType.description}</p>
 				</div>
-				<ChevronRight class="size-6 group-hover:stroke-sky-500" />
+				<ChevronRight class="group-hover:stroke-primary size-6" />
 			</a>
 		{/each}
 	</Stack>

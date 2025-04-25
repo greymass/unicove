@@ -2,6 +2,7 @@
 	import { Asset } from '@wharfkit/antelope';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import { cn } from '$lib/utils';
+	import Button from '../button/button.svelte';
 
 	type BreakdownAction = {
 		href: string;
@@ -22,7 +23,7 @@
 
 <div
 	class={cn(
-		'border-mine-900 col-span-full grid min-h-12 grid-cols-subgrid items-center gap-x-4 border-b last:border-none ',
+		'border-outline-variant col-span-full grid min-h-12 grid-cols-subgrid items-center gap-x-4 border-b last:border-none ',
 		isTotal && 'font-semibold'
 	)}
 >
@@ -30,19 +31,16 @@
 		class="col-start-1 col-end-3 row-start-1 flex flex-col py-2 @xs:flex-row @xs:justify-between"
 	>
 		<div class="text-muted">{key}</div>
-		<div class="text-white">
+		<div class="text-on-surface">
 			<AssetText class="text-nowrap tabular-nums" variant="full" {value} />
 		</div>
 	</div>
 
 	{#if action && action.visible}
 		<div class="col-span-2 col-start-2 row-start-1 text-right @xs:col-span-1 @xs:col-start-3">
-			<a
-				class="inline-block h-12 content-center text-sky-500 hover:text-sky-400"
-				href={action.href}
-			>
+			<Button variant="tertiary" class="justify-end" href={action.href}>
 				{action.text}
-			</a>
+			</Button>
 		</div>
 	{/if}
 </div>

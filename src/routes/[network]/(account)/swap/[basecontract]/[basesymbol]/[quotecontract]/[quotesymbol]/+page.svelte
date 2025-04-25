@@ -6,6 +6,7 @@
 	import AssetInput from '$lib/components/input/asset.svelte';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import Button from '$lib/components/button/button.svelte';
+	import IconButton from '$lib/components/button/icon.svelte';
 	import TransactForm from '$lib/components/transact/form.svelte';
 
 	import * as m from '$lib/paraglide/messages';
@@ -15,6 +16,7 @@
 	import Label from '$lib/components/input/label.svelte';
 	import { SingleCard, Stack } from '$lib/components/layout';
 	import { deriveSwapAction } from '../../../../swap.js';
+	import Switcher from '$lib/components/layout/switcher.svelte';
 
 	const { data } = $props();
 
@@ -182,70 +184,81 @@
 {/snippet}
 
 {#snippet Balances()}
-	<div class="flex gap-4">
-		<div class="bg-shark-900/40 flex-1 space-y-2 rounded-md p-4">
+	<div class="grid grid-rows-2 gap-4 sm:grid-cols-2 sm:grid-rows-1">
+		<div
+			class="bg-surface-container-high col-start-1 row-start-1 space-y-2 rounded-xl p-6 sm:col-span-1 sm:col-start-1"
+		>
 			<div class="flex items-center gap-x-2">
 				<picture class="size-8 place-items-center">
 					<img alt="{baseBalance.token.name} Logo" src={baseBalance.token.media?.logo?.light} />
 				</picture>
 				<h3 class="h3">{baseBalance.balance.symbol.name}</h3>
 			</div>
-			<AssetText class="text-white" value={baseBalance.balance} />
+			<AssetText class="text-on-surface" value={baseBalance.balance} />
 			<p>{m.common_available()}</p>
 		</div>
-		<div class="flex-1">
-			<Button
+
+		<div
+			class="bg-surface-container z-10 col-span-full row-span-full rotate-90 place-self-center rounded-full sm:rotate-0"
+		>
+			<IconButton
+				icon={ArrowRightLeft}
 				href="/{data.network}/swap/{data.quote.id.url}/{data.base.id.url}"
 				onclick={flip}
 				disabled={context.wharf.transacting}
-				variant="secondary"
-			>
-				<ArrowRightLeft />
-			</Button>
+				size="large"
+			/>
 		</div>
-		<div class="bg-shark-900/40 flex-1 space-y-2 rounded-md p-4">
+
+		<div
+			class="bg-surface-container-high col-start-1 row-start-2 space-y-2 rounded-xl p-6 sm:col-span-1 sm:col-start-2 sm:row-start-1"
+		>
 			<div class="flex items-center gap-x-2">
 				<picture class="size-8 place-items-center">
 					<img alt="{quoteBalance.token.name} Logo" src={quoteBalance.token.media?.logo?.light} />
 				</picture>
-				<h3 class="h3">{quoteBalance.balance.symbol.name}</h3>
+				<span class="h3">{quoteBalance.balance.symbol.name}</span>
 			</div>
-			<AssetText class="text-white" value={quoteBalance.balance} />
+			<AssetText class="text-on-surface" value={quoteBalance.balance} />
 			<p>{m.common_available()}</p>
 		</div>
 	</div>
 {/snippet}
 
 {#snippet BaseField()}
-	<Label for="base-quantity">
-		{m.common_send_tokens({
-			token: data.base.name
-		})}
-	</Label>
-	<AssetInput
-		autofocus
-		id="base-quantity"
-		bind:value={baseQuantity}
-		bind:this={baseInput}
-		oninput={baseChange}
-		{onkeydown}
-		disabled={context.wharf.transacting}
-	/>
+	<Stack class="gap-1">
+		<Label for="base-quantity">
+			{m.common_send_tokens({
+				token: data.base.name
+			})}
+		</Label>
+		<AssetInput
+			autofocus
+			id="base-quantity"
+			bind:value={baseQuantity}
+			bind:this={baseInput}
+			oninput={baseChange}
+			{onkeydown}
+			disabled={context.wharf.transacting}
+		/>
+	</Stack>
 {/snippet}
 
 {#snippet QuoteField()}
-	<Label for="base-quantity">
-		{m.common_receive_tokens({
-			token: data.quote.name
-		})}
-	</Label>
-	<AssetInput
-		bind:value={quoteQuantity}
-		bind:this={quoteInput}
-		oninput={quoteChange}
-		{onkeydown}
-		disabled={context.wharf.transacting}
-	/>
+	<Stack class="gap-1">
+		<Label for="base-quantity">
+			{m.common_receive_tokens({
+				token: data.quote.name
+			})}
+		</Label>
+		<AssetInput
+			bind:value={quoteQuantity}
+			bind:this={quoteInput}
+			oninput={quoteChange}
+			{onkeydown}
+			disabled={context.wharf.transacting}
+		/>
+	</Stack>
 {/snippet}
 
 <SingleCard>
@@ -254,15 +267,20 @@
 			{@render Balances()}
 
 			{#if swap}
-				<div class="flex gap-4">
-					<div class="flex-1 space-y-2">{@render BaseField()}</div>
-					<div class="flex-1 space-y-2">{@render QuoteField()}</div>
-				</div>
+				<Switcher>
+					{@render BaseField()}
+					{@render QuoteField()}
+				</Switcher>
 
-				<p class="text-center">
+				<p class="text-center text-balance">
 					{#if swap.fee?.ramfee}
-						System Fee: <AssetText class="font-bold text-white" value={fee} variant="full" /> (0.5%)
+						System Fee: <AssetText class="text-on-surface font-bold" value={fee} variant="full" /> (0.5%)
+						<br />
 					{/if}
+					This swap will exchange
+					<AssetText class="text-on-surface font-bold" value={baseQuantity} variant="full" />
+					for
+					<AssetText class="text-on-surface font-bold" value={quoteQuantity} variant="full" />.
 				</p>
 
 				<Button onclick={transact} disabled={context.wharf.transacting}>

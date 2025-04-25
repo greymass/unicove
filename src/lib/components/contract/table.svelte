@@ -26,9 +26,9 @@
 	});
 </script>
 
-<li class="bg-shark-950 relative col-span-full grid grid-cols-subgrid">
+<li class="relative col-span-full grid grid-cols-subgrid">
 	<div
-		class="bg-mine-950 col-span-full space-y-1 rounded-t-lg px-4 py-3 md:col-span-1 md:rounded-l-lg"
+		class="bg-surface-container col-span-full space-y-1 rounded-t-lg px-4 py-3 md:col-span-1 md:rounded-l-lg"
 	>
 		<div class="flex items-center">
 			<Database class="mr-2" />
@@ -47,7 +47,7 @@
 		{/if}
 	</div>
 
-	<div class="bg-mine-950/50 rounded-b-lg px-4 py-3 md:rounded-r-lg">
+	<div class="bg-surface-container rounded-b-lg px-4 py-3 md:rounded-r-lg">
 		{#if tableRow}
 			<table class="table-styles table-fixed">
 				<thead>
@@ -61,7 +61,7 @@
 						{@const fieldType = abi.structs.find((s) => s.name === parseRootType(field.type))}
 						<tr>
 							<td>
-								<span class="text-white">
+								<span class="text-on-surface">
 									{field.name}
 								</span>
 							</td>

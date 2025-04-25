@@ -68,7 +68,7 @@
 		<dd>
 			<ol class="ml-4 list-inside list-decimal">
 				{#each value as v}
-					<li class="marker:text-muted text-sm text-white">
+					<li class="marker:text-muted text-on-surface text-sm">
 						{@render KeyValue(null, v)}
 					</li>
 				{/each}
@@ -83,7 +83,7 @@
 			{/each}
 		</ul>
 	{:else}
-		<dd class="inline text-white">
+		<dd class="text-on-surface inline">
 			{value}
 		</dd>
 	{/if}
@@ -101,7 +101,7 @@
 {/snippet}
 
 {#snippet Pretty(data: ObjectifiedActionData | undefined)}
-	<Code collapsible class="bg-shark-950/30 mt-1" indent={4}>
+	<Code collapsible class="bg-surface-container-high mt-1" indent={4}>
 		{#if data}
 			<dl>
 				{#each Object.keys(data) as key}
@@ -118,7 +118,7 @@
 
 {#snippet Ricardian()}
 	<Code>
-		<div class="bg-shark-950 overflow-auto rounded-sm p-4">
+		<div class="bg-surface-container overflow-auto rounded-sm p-4">
 			Rendering of the ricardian contract is not yet supported.
 		</div>
 	</Code>
@@ -134,7 +134,7 @@
 
 {#snippet Header()}
 	<div class="flex flex-wrap items-center gap-x-4 gap-y-2">
-		<picture class="bg-shark-950/30 grid size-14 place-items-center rounded-full">
+		<picture class="bg-surface-container-high grid size-14 place-items-center rounded-full">
 			<SquareTerminal />
 		</picture>
 
@@ -143,7 +143,11 @@
 				{action.account}
 			</Contract>
 
-			<Contract name={action.account} action={action.name} class="text-2xl leading-none text-white">
+			<Contract
+				name={action.account}
+				action={action.name}
+				class="text-on-surface text-2xl leading-none"
+			>
 				{action.name}
 			</Contract>
 		</div>
@@ -170,7 +174,7 @@
 				<ul class="inline">
 					{#each action.authorization as auth}
 						<li class="inline">
-							<Account name={Name.from(auth.actor)} class="mr-1 text-xs  text-white">
+							<Account name={Name.from(auth.actor)} class="text-on-surface mr-1  text-xs">
 								{PermissionLevel.from(auth)}
 							</Account>
 						</li>
@@ -188,7 +192,7 @@
 						<li class="group inline text-xs nth-last-2:after:content-['and_']">
 							<Account
 								name={Name.from(account)}
-								class="after:text-muted gap-0 text-xs text-white group-has-nth-3:bg-red-300 not-group-nth-last-2:not-group-last:after:content-[','] first:ml-0"
+								class="after:text-muted text-on-surface gap-0 text-xs group-has-nth-3:bg-red-300 not-group-nth-last-2:not-group-last:after:content-[','] first:ml-0"
 							/>
 						</li>
 					{/each}

@@ -69,9 +69,9 @@
 <Card>
 	<p class="h3 font-semibold">{title}</p>
 	<canvas bind:this={ctx}></canvas>
-	<hr class="bg-shark-200/50 h-px border-0" />
+	<hr class="bg-outline h-px border-0" />
 	<div class="flex items-center justify-between font-medium">
-		<!-- <span class="text-shark-200/70">{String(data.length)} days</span> -->
+		<!-- <span class="text-on-surface">{String(data.length)} days</span> -->
 		<div class="flex gap-4">
 			<div class="flex items-center gap-1">
 				<div class="size-4 rounded-sm bg-[#00ED97]"></div>
@@ -82,6 +82,6 @@
 				<span class="text-[#B2FAE0]">{m.common_yield()}</span>
 			</div>
 		</div>
-		<span class="text-shark-200/70">{m.common_today()}</span>
+		<span class="text-muted">{m.common_today()}</span>
 	</div>
 </Card>

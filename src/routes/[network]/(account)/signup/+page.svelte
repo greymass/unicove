@@ -71,7 +71,7 @@
 						</h4>
 						<p>{wallet.description}</p>
 					</div>
-					<ChevronRight class="size-6 group-hover:stroke-sky-500" />
+					<ChevronRight class="group-hover:stroke-primary size-6" />
 				</a>
 			</Stack>
 		{/each}
@@ -87,7 +87,7 @@
 				<div class="bg-mine-900/60 rounded-full p-3">
 					{#if currentWalletType.icon}
 						{@const Component = currentWalletType.icon}
-						<Component class="size-6 group-hover:stroke-sky-500" />
+						<Component class="group-hover:stroke-primary size-6" />
 					{/if}
 				</div>
 				<div class="space-y-1">
@@ -100,7 +100,7 @@
 							.replace(/,([^,]*)$/, ' and$1')}
 					</p>
 				</div>
-				<ChevronRight class="size-6 group-hover:stroke-sky-500" />
+				<ChevronRight class="group-hover:stroke-primary size-6" />
 			</a>
 		</Stack>
 	{/if}

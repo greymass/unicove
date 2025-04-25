@@ -22,7 +22,7 @@
 	<!-- Big hex -->
 	<div class="grid place-items-center *:col-start-1 *:row-start-1">
 		<svg
-			class="size-64 object-contain md:size-full"
+			class="text-surface-container size-64 object-contain md:size-full"
 			width="296"
 			height="342"
 			viewBox="0 0 296 342"
@@ -31,12 +31,12 @@
 		>
 			<path
 				d="m148.245.755 147.437 85.123v170.245l-147.437 85.123L.809 256.123V85.878L148.245.755Z"
-				fill="#202429"
+				fill="currentColor"
 			/>
 		</svg>
 		<div class="grid text-center uppercase">
 			<img class="mb-4 h-12 place-self-center md:h-20" src={tokenLogo} alt={tokenName} />
-			<span class="md:text-md text-sm text-white/60">{m.common_total_staked()}</span>
+			<span class="md:text-md text-muted text-sm">{m.common_total_staked()}</span>
 			<!-- TODO: add eos formatter -->
 			<span class="text-md font-semibold md:text-xl">
 				<AssetText value={staked} variant="short" />
@@ -47,7 +47,7 @@
 	<!-- Small hex -->
 	<div class="absolute -right-2 -bottom-4 grid place-items-center *:col-start-1 *:row-start-1">
 		<svg
-			class="size-24 object-contain md:size-full"
+			class="text-surface-container-highest size-24 object-contain md:size-full"
 			width="95"
 			height="110"
 			viewBox="0 0 95 110"
@@ -56,11 +56,11 @@
 		>
 			<path
 				d="m47.522.804 47.18 27.24v54.478l-47.18 27.239-47.18-27.24V28.044L47.522.804Z"
-				fill="#2B3035"
+				fill="currentColor"
 			/>
 		</svg>
 		<div class="grid text-center uppercase">
-			<span class="md:text-md text-sm text-white/60">APR</span>
+			<span class="md:text-md text-muted text-sm">APR</span>
 			<span class="text-md font-semibold md:text-xl">{apr}%</span>
 		</div>
 	</div>

@@ -85,15 +85,14 @@
 			{/if}
 
 			<Label for="quantity-input">
-				<button
-					class="text-sky-500 hover:text-sky-400"
+				<Button
+					variant="tertiary"
 					onclick={() => {
 						manager.setMaxValue();
 					}}
-					type="button"
 					>{m.common_labeled_unit_available({ unit: '' })}:
 					<AssetText value={manager.stakable} />
-				</button>
+				</Button>
 			</Label>
 			<Button disabled={!ready} onclick={() => manager.transact()} variant="primary"
 				>{m.common_stake()}</Button

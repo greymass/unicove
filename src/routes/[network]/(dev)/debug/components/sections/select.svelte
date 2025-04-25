@@ -98,6 +98,16 @@
 				/>
 			</Stack>
 			<span>Value in parent: {selectedFormOption.label}</span>
+			<Stack class="gap-2">
+				<Label for="form-select-1">Disabled</Label>
+				<Select
+					variant="form"
+					id="form-select-1"
+					options={formOptions}
+					disabled
+					bind:selected={selectedFormOption}
+				/>
+			</Stack>
 		</Cluster>
 	</Stack>
 

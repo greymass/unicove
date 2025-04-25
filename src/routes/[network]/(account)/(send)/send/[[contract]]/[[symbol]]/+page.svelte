@@ -347,9 +347,9 @@
 			/>
 
 			{#if context.account}
-				<button class="text-sky-500 hover:text-sky-400" disabled={!context.account} onclick={max}>
+				<Button variant="tertiary" disabled={!context.account} onclick={max}>
 					{m.common_fill_max()}
-				</button>
+				</Button>
 			{/if}
 
 			{#if assetValid && sendState.value}

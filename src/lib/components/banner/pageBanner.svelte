@@ -41,10 +41,10 @@
 
 {#if showBanner}
 	<aside
-		class="grid grid-cols-[auto_1fr_auto] items-center justify-items-center gap-4 bg-linear-to-r from-[#1C2399] to-[#2E3BFF] text-white shadow-lg *:row-start-1"
+		class="text-on-surface grid grid-cols-[auto_1fr_auto] items-center justify-items-center gap-4 bg-linear-to-r from-[#1C2399] to-[#2E3BFF] shadow-lg *:row-start-1"
 	>
 		<a
-			class="col-start-2 py-4 text-white underline underline-offset-4 md:col-span-3 md:col-start-1 md:text-center"
+			class="text-on-surface col-start-2 py-4 underline underline-offset-4 md:col-span-3 md:col-start-1 md:text-center"
 			href="https://eosnetwork.com/resources/opening-the-gateway-to-web3-banking/"
 		>
 			<svg

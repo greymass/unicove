@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import AccountButton from '$lib/components/button/account.svelte';
-	import ContractButton from '$lib/components/button/contract.svelte';
+	import IconButton from './button/icon.svelte';
 	import CopyButton from '$lib/components/button/copy.svelte';
 	import { type NetworkState } from '$lib/state/network.svelte';
+	import { Code, User } from 'lucide-svelte';
 	import ChevronLeft from 'lucide-svelte/icons/chevron-left';
 
 	interface Props {
@@ -34,14 +34,15 @@
 
 <header class="col-span-full flex min-h-16 items-center gap-4">
 	{#if props.backPath}
-		<button
+		<IconButton
+			size="large"
+			variant="filled"
+			class="text-primary shrink-0"
 			onclick={goBack}
-			class="bg-mine-900 hover:bg-mine-800 grid size-12 place-items-center rounded-full text-sky-500 hover:text-sky-400"
-		>
-			<ChevronLeft size={24} />
-		</button>
+			icon={ChevronLeft}
+		/>
 	{:else}
-		<picture class="size-12">
+		<picture class="size-12 shrink-0">
 			<img
 				src={String(logo)}
 				alt={String(props.network.chain.name)}
@@ -50,21 +51,22 @@
 		</picture>
 	{/if}
 
-	<div class="grid gap-2">
-		<h1 class="w-fit text-3xl leading-none font-bold text-white">
-			<span>{props.title}</span>
+	<div class="">
+		<div class="text-primary flex h-fit w-fit items-center">
+			<h1 class="text-on-surface mb-2 text-3xl leading-none font-bold">{props.title}</h1>
 			{#if routePath === 'account'}
-				<CopyButton data={props.title} slop={false} />
+				<CopyButton data={props.title} hideBackground />
 				{#if props.contract}
-					<ContractButton data={contractPath} slop={false} />
+					<IconButton icon={Code} href={contractPath} hideBackground />
 				{/if}
 			{/if}
 
 			{#if routePath === 'contract'}
-				<CopyButton data={props.title} slop={false} />
-				<AccountButton data={accountPath} slop={false} />
+				<CopyButton data={props.title} hideBackground />
+				<IconButton icon={User} href={accountPath} hideBackground />
 			{/if}
-		</h1>
+		</div>
+
 		{#if props.subtitle}
 			<p class="text-muted text-base leading-none">{props.subtitle}</p>
 		{/if}

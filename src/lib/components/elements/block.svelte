@@ -9,7 +9,7 @@
 </script>
 
 {#if number}
-	<a class="text-sky-500 hover:text-sky-400" href="/{network}/block/{String(number)}">
+	<a class="text-primary hover:text-primary-container" href="/{network}/block/{String(number)}">
 		{String(number)}
 	</a>
 {/if}

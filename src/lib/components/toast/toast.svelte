@@ -16,7 +16,7 @@
 
 <!-- TODO: Color audit -->
 <div
-	class="bg-mine-800 rounded-lg text-white shadow-md"
+	class="bg-surface-container text-on-surface rounded-lg shadow-md"
 	in:fly={{ duration: 150, x: '100%' }}
 	out:fly={{ duration: 150, x: '100%' }}
 	use:melt={$content(id)}
@@ -33,7 +33,7 @@
 				</div>
 			</div>
 			<button
-				class="hover:bg-mine-700/50 absolute top-4 right-4 grid size-6 place-items-center rounded-full"
+				class="hover:bg-on-surface-container absolute top-4 right-4 grid size-6 place-items-center rounded-full"
 				use:melt={$close(id)}
 				aria-label="close notification"
 			>
