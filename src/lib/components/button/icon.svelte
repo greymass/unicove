@@ -53,7 +53,7 @@
 	use:melt={$meltElement}
 	data-size={size}
 	class={cn(
-		'touch-target group  focus-visible:text-solar-500 relative grid size-10  cursor-pointer place-items-center transition-all  *:col-start-1  *:row-start-1   focus-visible:outline-hidden disabled:cursor-default disabled:opacity-30  disabled:hover:bg-transparent  data-[size=large]:size-12 md:size-fit',
+		'touch-target group  focus-visible:text-solar-500 relative grid size-10 cursor-pointer  place-items-center rounded-full transition-all  *:col-start-1  *:row-start-1   focus-visible:outline-hidden disabled:cursor-default disabled:opacity-30  disabled:hover:bg-transparent  data-[size=large]:size-12 md:size-fit',
 		className
 	)}
 	role={ariaRole}
@@ -66,7 +66,7 @@
 	<div
 		data-variant={variant}
 		class:bg-transparent={props.hideBackground}
-		class="state-layer bg-on-surface-variant pointer-events-none size-8 rounded-full opacity-0 transition-opacity group-hover:opacity-8 group-focus-visible:opacity-10 group-active:group-hover:opacity-16 group-disabled:hidden group-data-[size=large]:size-10 data-[variant=filled]:opacity-8"
+		class="state-layer bg-on-surface-variant pointer-events-none size-8 rounded-[inherit] opacity-0 transition-opacity group-hover:opacity-8 group-focus-visible:opacity-10 group-active:group-hover:opacity-16 group-disabled:hidden group-data-[size=large]:size-10 data-[variant=filled]:opacity-8"
 	></div>
 
 	{#if props.icon}
