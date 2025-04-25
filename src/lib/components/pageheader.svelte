@@ -4,7 +4,6 @@
 	import IconButton from './button/icon.svelte';
 	import CopyButton from '$lib/components/button/copy.svelte';
 	import { type NetworkState } from '$lib/state/network.svelte';
-	import { chainLogos } from '@wharfkit/common';
 	import { Code, User } from 'lucide-svelte';
 	import ChevronLeft from 'lucide-svelte/icons/chevron-left';
 

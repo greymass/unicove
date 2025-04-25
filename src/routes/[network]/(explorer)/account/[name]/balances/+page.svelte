@@ -8,7 +8,6 @@
 	import * as m from '$lib/paraglide/messages';
 	import { ZeroUnits } from '$lib/types/token.js';
 	import Button from '$lib/components/button/button.svelte';
-	import { valueOrDefault } from 'chart.js/helpers';
 
 	const { data } = $props();
 	const balances = $derived(
