@@ -37,12 +37,12 @@
 		<IconButton
 			size="large"
 			variant="filled"
-			class="text-primary"
+			class="text-primary shrink-0"
 			onclick={goBack}
 			icon={ChevronLeft}
 		/>
 	{:else}
-		<picture class="size-12">
+		<picture class="size-12 shrink-0">
 			<img
 				src={String(logo)}
 				alt={String(props.network.chain.name)}
