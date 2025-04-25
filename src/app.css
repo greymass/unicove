@@ -44,18 +44,6 @@
 	--color-green-900: #14532d;
 	--color-green-950: #052e16;
 
-	--color-zinc-50: #fafafa;
-	--color-zinc-100: #f4f4f5;
-	--color-zinc-200: #e4e4e7;
-	--color-zinc-300: #d4d4d8;
-	--color-zinc-400: #a1a1aa;
-	--color-zinc-500: #71717a;
-	--color-zinc-600: #52525b;
-	--color-zinc-700: #3f3f46;
-	--color-zinc-800: #27272a;
-	--color-zinc-900: #18181b;
-	--color-zinc-950: #09090b;
-
 	--color-shark-50: #f4f6f7;
 	--color-shark-100: #e2e8eb;
 	--color-shark-200: #c9d3d8;
@@ -104,7 +92,7 @@
 	--color-solar-900: #7c3b0b;
 	--color-solar-950: #481d00;
 
-	/* Seeds - Not for use */
+	/* Seeds - Not for general use */
 	--color-seed: var(--color-sky-500);
 	/* --color-neutral-seed: oklch(from var(--color-seed) l 0.01 h); */
 	/* --color-neutral-variant-seed: oklch(from var(--color-seed) l 0.015 h); */
@@ -124,10 +112,6 @@
 
 	--color-shadow: oklch(0 0 0);
 	--color-scrim: oklch(0 0 0 / 0.5);
-
-	/* --color-inverse-surface: rgb(223 228 224); */
-	/* --color-inverse-on-surface: rgb(44 50 47); */
-	/* --color-inverse-primary: rgb(0 107 89); */
 
 	--color-surface-tint: var(--color-primary);
 	--color-surface: color-mix(in oklab, var(--color-shark-950) 100%, var(--color-surface-tint) 1.5%);
@@ -191,29 +175,6 @@
 
 	/* Light Mode Themes */
 	@media (prefers-color-scheme: light) {
-		/* [data-theme='eos'] { */
-		/* 	--color-seed: rgb(134 83 0); */
-		/* } */
-		/**/
-		/* [data-theme='jungle4'] { */
-		/* 	--color-seed: rgb(0 104 87); */
-		/* } */
-		/**/
-		/* [data-theme='vaulta'] { */
-		/* 	--color-seed: #2e3bff; */
-		/* } */
-		/**/
-		/* [data-theme='telos'] { */
-		/* 	--color-seed: rgb(101 85 143); */
-		/* } */
-		/**/
-		/* [data-theme='wax'] { */
-		/* 	--color-seed: rgb(136 81 29); */
-		/* } */
-		/**/
-		/* [data-theme='kylin'] { */
-		/* 	--color-seed: rgb(144 75 64); */
-		/* } */
 	}
 }
 

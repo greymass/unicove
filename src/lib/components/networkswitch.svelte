@@ -84,7 +84,7 @@
 		>
 
 		{#if options.length > 1 && context.settings.data.advancedMode}
-			<div class="font-regular m-0 flex items-center gap-1 pr-1 text-base text-zinc-400">
+			<div class="font-regular text-muted m-0 flex items-center gap-1 pr-1 text-base">
 				<span use:melt={$label}>{m.change_network()}</span>
 				<ChevronDown
 					data-open={$open}
@@ -116,7 +116,7 @@
 					{#if chain.logo}
 						<img class="h-full object-contain" src={String(chain.logo)} alt={chain.label} />
 					{:else}
-						<FileQuestion class="size-4 text-zinc-400" />
+						<FileQuestion class="text-muted size-4" />
 					{/if}
 				</picture>
 				<span> {chain.label} </span>

@@ -299,7 +299,7 @@
 {/if}
 
 {#snippet link(text: string, href: string)}
-	<a {href} class="underline hover:text-zinc-300" target="_blank">
+	<a {href} class="hover:text-muted underline" target="_blank">
 		{text}
 	</a>
 {/snippet}
