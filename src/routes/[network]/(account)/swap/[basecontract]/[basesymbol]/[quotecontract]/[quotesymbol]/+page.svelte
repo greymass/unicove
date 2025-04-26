@@ -276,8 +276,9 @@
 
 				<p class="text-center text-balance">
 					{#if swap.fee?.ramfee}
-						System Fee: <AssetText class="text-on-surface font-bold" value={fee} variant="full" /> (0.5%)
-						<br />
+						{m.common_network_fee_amount()}
+						<AssetText class="text-on-surface font-bold" value={fee} variant="full" />
+						(0.5%)
 					{/if}
 				</p>
 
