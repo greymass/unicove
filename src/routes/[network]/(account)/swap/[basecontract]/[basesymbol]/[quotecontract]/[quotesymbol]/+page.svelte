@@ -26,10 +26,12 @@
 	let id: Checksum256 | undefined = $state();
 	let error: string | undefined = $state();
 
-	const baseDefaultAsset = Asset.fromUnits(0, data.base.symbol);
-	const baseDefault = TokenBalance.from({ token: data.base, balance: baseDefaultAsset });
-	const quoteDefaultAsset = Asset.fromUnits(0, data.quote.symbol);
-	const quoteDefault = TokenBalance.from({ token: data.quote, balance: quoteDefaultAsset });
+	const baseDefaultAsset = $derived(Asset.fromUnits(0, data.base.symbol));
+	const baseDefault = $derived(TokenBalance.from({ token: data.base, balance: baseDefaultAsset }));
+	const quoteDefaultAsset = $derived(Asset.fromUnits(0, data.quote.symbol));
+	const quoteDefault = $derived(
+		TokenBalance.from({ token: data.quote, balance: quoteDefaultAsset })
+	);
 
 	let baseInput: AssetInput | undefined = $state();
 	let baseQuantity = $state(Asset.from(baseDefaultAsset));
