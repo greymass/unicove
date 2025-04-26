@@ -279,10 +279,6 @@
 						System Fee: <AssetText class="text-on-surface font-bold" value={fee} variant="full" /> (0.5%)
 						<br />
 					{/if}
-					This swap will exchange
-					<AssetText class="text-on-surface font-bold" value={baseQuantity} variant="full" />
-					for
-					<AssetText class="text-on-surface font-bold" value={quoteQuantity} variant="full" />.
 				</p>
 
 				<Button onclick={transact} disabled={context.wharf.transacting}>
