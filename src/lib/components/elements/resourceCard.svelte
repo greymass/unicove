@@ -43,10 +43,10 @@
 	const { icon, title, unit } = $derived(resourceMap[props.type]);
 </script>
 
-<div class="text-right @xl:grid @xl:justify-center @xl:gap-2">
+<div class="text-right">
 	<h3
 		data-vertical={props.vertical}
-		class="flex flex-col items-end gap-2 text-xl font-bold @xl:flex-row @xl:items-center @xl:justify-between"
+		class="flex flex-col items-end gap-2 text-xl font-bold @md:flex-row @md:justify-between"
 	>
 		{#if icon}
 			{@const IconComponent = icon}
@@ -55,7 +55,7 @@
 		{title}
 	</h3>
 
-	<p class="mt-0.5 flex-wrap gap-x-2 *:block @xl:flex">
+	<p class="mt-0.5 flex-wrap gap-x-2 *:block">
 		<span class="text-on-surface font-semibold">
 			<NumberFormat number={props.value.dividing(1000)} />
 			{unit}
