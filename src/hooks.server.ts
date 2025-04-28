@@ -18,7 +18,9 @@ const mappings: Record<string, string> = {
 	telostestnet: 'https://testnet.telos.unicove.com',
 	vaulta: 'https://unicove.com',
 	wax: 'https://wax.unicove.com',
-	waxtestnet: 'https://testnet.wax.unicove.com'
+	waxtestnet: 'https://testnet.wax.unicove.com',
+	// Deprecated
+	eos: 'https://unicove.com'
 };
 
 export function getHeaderLang(event: RequestEvent) {
