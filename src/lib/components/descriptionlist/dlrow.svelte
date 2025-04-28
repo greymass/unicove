@@ -4,7 +4,7 @@
 	import DD from './dd.svelte';
 
 	interface Props {
-		title: string;
+		title: string | Snippet;
 		description?: string;
 		children?: Snippet;
 	}
@@ -15,7 +15,13 @@
 <div
 	class="border-outline-variant flex flex-wrap items-center justify-between gap-x-4 border-b py-3 last:border-none @xs:flex-nowrap"
 >
-	<DT>{title}</DT>
+	<DT>
+		{#if typeof title === 'string'}
+			{title}
+		{:else}
+			{@render title()}
+		{/if}
+	</DT>
 	<div
 		class="grow bg-red-500 before:content-['ERROR_Missing_DD_element_'] has-[dd]:bg-transparent has-[dd]:before:hidden"
 	>

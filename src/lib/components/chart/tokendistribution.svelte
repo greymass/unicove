@@ -3,6 +3,7 @@
 	import { cn, percentString } from '$lib/utils';
 	import { Card } from '../layout';
 	import * as m from '$lib/paraglide/messages';
+	import { DD, DL, DLRow } from '../descriptionlist';
 
 	interface Props {
 		data?: AccountValue;
@@ -52,18 +53,18 @@
 			{/each}
 		</div>
 
-		<table class="table-styles">
-			<tbody class="text-muted">
-				{#each filtered as item}
-					<tr data-hover-effect="false">
-						<td class="flex items-center gap-2">
+		<DL>
+			{#each filtered as item}
+				<DLRow>
+					{#snippet title()}
+						<div class="flex items-center gap-2">
 							<div class={cn('size-3 rounded-sm', distributionMap[item.key].color)}></div>
 							{distributionMap[item.key].label}
-						</td>
-						<td class="text-on-surface text-right tabular-nums"> {percentString(item.value)} </td>
-					</tr>
-				{/each}
-			</tbody>
-		</table>
+						</div>
+					{/snippet}
+					<DD class="text-on-surface text-right tabular-nums">{percentString(item.value)}</DD>
+				</DLRow>
+			{/each}
+		</DL>
 	</Card>
 {/if}
