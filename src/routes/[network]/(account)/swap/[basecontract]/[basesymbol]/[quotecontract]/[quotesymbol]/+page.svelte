@@ -34,13 +34,13 @@
 	);
 
 	let baseInput: AssetInput | undefined = $state();
-	let baseQuantity = $state(Asset.from(baseDefaultAsset));
+	let baseQuantity = $derived(Asset.from(baseDefaultAsset));
 	let baseBalance: TokenBalance = $derived(
 		context.account ? context.account.getBalance(data.base) : baseDefault
 	);
 
 	let quoteInput: AssetInput | undefined = $state();
-	let quoteQuantity = $state(Asset.from(quoteDefaultAsset));
+	let quoteQuantity = $derived(Asset.from(quoteDefaultAsset));
 	let quoteBalance: TokenBalance = $derived(
 		context.account ? context.account.getBalance(data.quote) : quoteDefault
 	);
@@ -282,7 +282,7 @@
 					{/if}
 				</p>
 
-				<Button onclick={transact} disabled={context.wharf.transacting}>
+				<Button onclick={transact} disabled={context.wharf.transacting || !context.account}>
 					{m.common_swap_to_token({
 						token: String(data.quote.symbol.name)
 					})}
