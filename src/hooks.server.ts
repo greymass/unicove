@@ -12,7 +12,6 @@ type HandleParams = Parameters<Handle>[0];
 
 // TODO: Find a better home for this data
 const mappings: Record<string, string> = {
-	eos: 'https://unicove.com',
 	jungle4: 'https://jungle4.unicove.com',
 	kylin: 'https://kylin.unicove.com',
 	telos: 'https://telos.unicove.com',
