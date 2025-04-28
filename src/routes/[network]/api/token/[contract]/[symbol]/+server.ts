@@ -64,18 +64,36 @@ async function getTopHolders(
 	symbol: string,
 	number = 100
 ): Promise<TokenHolders[]> {
+	// TODO: Remove this when the lightapi supports pathing to /vaulta URLs
+	let shortname = String(network);
+	if (shortname === 'vaulta') {
+		// Force /vaulta to /eos in URLs for the lightapi
+		shortname = 'eos';
+	}
 	const response = await network.fetch(
-		`${network.config.endpoints.lightapi}/api/topholders/${network}/${contract}/${symbol}/${number}`
+		`${network.config.endpoints.lightapi}/api/topholders/${shortname}/${contract}/${symbol}/${number}`
 	);
-	return (await response.json()).map((result: string[]) => ({
-		account: result[0],
-		balance: result[1]
-	}));
+	if (response.ok) {
+		return (await response.json()).map((result: string[]) => ({
+			account: result[0],
+			balance: result[1]
+		}));
+	}
+	return [];
 }
 
 async function getNumHolders(network: NetworkState, contract: string, symbol: string) {
+	// TODO: Remove this when the lightapi supports pathing to /vaulta URLs
+	let shortname = String(network);
+	if (shortname === 'vaulta') {
+		// Force /vaulta to /eos in URLs for the lightapi
+		shortname = 'eos';
+	}
 	const response = await network.fetch(
-		`${network.config.endpoints.lightapi}/api/holdercount/${network}/${contract}/${symbol}`
+		`${network.config.endpoints.lightapi}/api/holdercount/${shortname}/${contract}/${symbol}`
 	);
+	if (!response.ok) {
+		return 0;
+	}
 	return response.json();
 }
