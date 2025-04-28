@@ -103,16 +103,20 @@
 	open={open && _balance instanceof TokenBalance}
 >
 	<summary
-		class="focus-visible:outline-solar-500 @container grid cursor-pointer grid-cols-[auto_1fr_auto] gap-3 rounded-xl p-5 select-none focus-visible:outline"
+		class="focus-visible:outline-solar-500 @container flex cursor-pointer justify-between gap-4 rounded-xl p-5 select-none focus-visible:outline"
 		onclick={syncOpen}
 	>
-		<picture class="size-6 place-items-center">
-			<img alt="{_balance.token.name} Logo" src={_balance.token.media?.logo?.light} />
-		</picture>
-
-		<div class="text-muted grid gap-y-4 text-nowrap @sm:grid-cols-[auto_1fr] @sm:gap-x-2">
-			<div class="left flex flex-col justify-center gap-1">
-				<h4 class="text-on-surface text-xl leading-none font-bold capitalize">
+		<div class="text-muted flex flex-1 flex-wrap justify-between gap-y-4 text-nowrap">
+			<!-- Left -->
+			<div class="left flex flex-col justify-center gap-2">
+				<h4
+					class="text-on-surface inline-flex items-center gap-2 text-xl leading-none font-bold capitalize"
+				>
+					<img
+						class="size-6 object-contain"
+						alt="{_balance.token.name} Logo"
+						src={_balance.token.media?.logo?.light}
+					/>
 					{#if isRamToken}
 						<Link class="text-on-surface" href="/{network}/ram">
 							{balance.token.name} (RAM)
@@ -136,26 +140,23 @@
 				{/if}
 			</div>
 
-			<div class="right text-muted grid content-start items-start gap-1 @sm:justify-items-end">
+			<!-- Right -->
+			<div class="right text-muted flex flex-col justify-between gap-2">
 				{#if pair && hasValue}
-					{#if value.units.gt(ZeroUnits)}
-						<h4 class="text-on-surface text-xl leading-none font-bold capitalize">
-							<AssetText variant="full" {value} />
-						</h4>
-					{:else}
-						<div
-							class="bg-surface-container-high w-full max-w-48 animate-pulse rounded-md text-right"
-						>
-							&nbsp;
-						</div>
-					{/if}
+					<div class="h-6 w-full content-center">
+						{#if value.units.gt(ZeroUnits)}
+							<h4 class="text-on-surface text-xl leading-none font-bold capitalize">
+								<AssetText variant="full" {value} />
+							</h4>
+						{:else}
+							<div class="bg-surface-container-high max-w-48 animate-pulse rounded-md text-right">
+								&nbsp;
+							</div>
+						{/if}
+					</div>
 				{/if}
 
-				<AssetText
-					class="text-auto justify-center leading-none"
-					value={balance.balance}
-					variant="full"
-				/>
+				<AssetText class="leading-none" value={balance.balance} variant="full" />
 			</div>
 		</div>
 

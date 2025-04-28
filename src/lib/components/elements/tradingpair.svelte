@@ -40,20 +40,20 @@
 	});
 </script>
 
-<span class={cn('flex flex-wrap gap-x-2 gap-y-1', props.class)}>
+<span class={cn('flex flex-wrap gap-2', props.class)}>
 	<span>
 		<AssetText value={pair.price} />
 		{pair.base.symbol.code}/{pair.quote.symbol.code}
 	</span>
 	{#if historic}
 		{#if percentChangePositive}
-			<span class="inline-flex gap-1.5 leading-none text-green-500">
-				<Triangle fill="currentColor" class="size-4" />
+			<span class="inline-flex items-center gap-1.5 leading-none text-green-300">
+				<Triangle fill="currentColor" class="size-2" />
 				{percentChangeString}% {timeframeString}
 			</span>
 		{:else}
-			<span class="inline-flex gap-1.5 leading-none text-red-500">
-				<Triangle fill="currentColor" class="size-4 rotate-180" />
+			<span class="inline-flex items-center gap-1.5 leading-none text-red-300">
+				<Triangle fill="currentColor" class="size-2 rotate-180" />
 				{percentChangeString}% {timeframeString}
 			</span>
 		{/if}
