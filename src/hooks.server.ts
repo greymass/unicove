@@ -18,9 +18,11 @@ const mappings: Record<string, string> = {
 	telostestnet: 'https://testnet.telos.unicove.com',
 	vaulta: 'https://unicove.com',
 	wax: 'https://wax.unicove.com',
-	waxtestnet: 'https://testnet.wax.unicove.com',
-	// Deprecated
-	eos: 'https://unicove.com'
+	waxtestnet: 'https://testnet.wax.unicove.com'
+};
+
+const renamedNetworks: Record<string, string> = {
+	eos: 'vaulta'
 };
 
 export function getHeaderLang(event: RequestEvent) {
@@ -93,7 +95,7 @@ export async function redirectHandle({ event, resolve }: HandleParams): Promise<
 		alternativeNetwork = pathSecond;
 	}
 
-	if (!isNetwork(pathSecond) && !isAlternativeNetwork(pathSecond)) {
+	if (!isNetwork(pathSecond) && !isAlternativeNetwork(pathSecond) && !renamedNetworks[pathSecond]) {
 		lang = pathFirst;
 		network = PUBLIC_CHAIN_SHORT;
 		pathMore.unshift(pathSecond);
