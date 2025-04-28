@@ -3,6 +3,7 @@
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
+	import { SingleCard } from '$lib/components/layout';
 
 	const { data } = $props();
 
@@ -12,6 +13,6 @@
 	const account = $derived(context.account);
 </script>
 
-<div class="container rounded-2xl pb-4 sm:bg-shark-900/20 sm:p-6 sm:pb-10">
+<SingleCard>
 	<Renting rentType="POWERUP" {network} {account}></Renting>
-</div>
+</SingleCard>

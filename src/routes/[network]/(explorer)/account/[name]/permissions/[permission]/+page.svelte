@@ -109,8 +109,6 @@
 			manager.data.addKey();
 		}
 	});
-
-	$inspect(manager.data.keys);
 </script>
 
 {#snippet PermissionName()}
@@ -183,7 +181,7 @@
 		<li
 			in:fly|global={{ x: ms, duration: ms, easing: cubicOut }}
 			id={`key-${index}-inputs`}
-			class="subgrid my-2 gap-2 text-white first:mt-0 last:mb-0"
+			class="subgrid text-on-surface my-2 gap-2 first:mt-0 last:mb-0"
 		>
 			<Fieldset>
 				<Label for={`key-${index}-weight`} class={index > 0 ? 'hidden' : ''}>
@@ -218,7 +216,7 @@
 		<li
 			in:fly|global={{ x: ms, duration: ms, easing: cubicOut }}
 			id={`key-${index}-input`}
-			class="subgrid my-2 gap-x-2 text-white first:mt-0 last:mb-0"
+			class="subgrid text-on-surface my-2 gap-x-2 first:mt-0 last:mb-0"
 		>
 			<NumberInput
 				class="hidden"
@@ -268,7 +266,7 @@
 	{@const ms = index > 0 ? 120 : 0}
 	<!-- Vertical gap is handled with 'my-2' to allow for the field 'labels' to be closer than if we used 'gap-4' -->
 	<li
-		class="@md:subgrid card col-span-full my-2 grid grid-cols-2 gap-4 rounded-lg p-4 text-white first:mt-0 last:mb-0 @md:gap-2 @md:bg-transparent @md:p-0"
+		class="@md:subgrid card text-on-surface col-span-full my-2 grid grid-cols-2 gap-4 rounded-lg p-4 first:mt-0 last:mb-0 @md:gap-2 @md:bg-transparent @md:p-0"
 		in:fly|global={{ x: ms, duration: ms, easing: cubicOut }}
 	>
 		<Fieldset class="">
@@ -324,7 +322,7 @@
 
 		<FormSectionContent>
 			{#if manager.data.accounts.length}
-				<ul class="grid grid-cols-[8ch_1fr_1fr_auto] gap-x-2 @container">
+				<ul class="@container grid grid-cols-[8ch_1fr_1fr_auto] gap-x-2">
 					{#each manager.data.accounts as account, index (account)}
 						{@render AccountAuthInput(index)}
 					{/each}
@@ -340,7 +338,7 @@
 
 {#snippet WaitAuthInput(index: number)}
 	{@const state = manager.data.waits[index]}
-	<li class="subgrid text-white">
+	<li class="subgrid text-on-surface">
 		<Fieldset>
 			<Label for={`wait-${index}-name`} class={index > 0 ? 'hidden' : ''}>
 				<span>{m.common_permission_weight()}</span>
@@ -401,7 +399,7 @@
 	<!-- Don't transition the first input field -->
 	{@const ms = index > 0 ? 120 : 0}
 	<li
-		class="subgrid my-2 text-white first:mt-0 last:mb-0"
+		class="subgrid text-on-surface my-2 first:mt-0 last:mb-0"
 		in:fly|global={{ x: ms, duration: ms, easing: cubicOut }}
 	>
 		<Fieldset>
@@ -521,7 +519,7 @@
 	{:else if transactError}
 		<!-- Unsuccessful transaction -->
 		<div
-			class="flex flex-col justify-center gap-8 rounded-xl bg-shark-900/20 px-4 py-12 sm:items-center"
+			class="bg-surface-container flex flex-col justify-center gap-8 rounded-xl px-4 py-12 sm:items-center"
 		>
 			<TransactError error={transactError} />
 			<Button variant="primary" onclick={back}>{m.common_back()}</Button>
@@ -557,7 +555,7 @@
 			<footer class="flex flex-col justify-between gap-y-12 @lg:flex-row">
 				{#if manager.permission && !manager.data.isActive && !manager.data.isOwner}
 					<Button
-						class="grow-0 border border-red-300/30  text-red-400 [@media(any-hover:hover)]:hover:text-red-300"
+						class="grow-0 border border-red-300/30  text-red-400 hover:text-red-300"
 						variant="tertiary"
 						onclick={deleteAuth}>{m.common_delete_permission()}</Button
 					>

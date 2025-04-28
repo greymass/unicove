@@ -13,7 +13,7 @@
 		currentEnvironment ? walletTypes[currentEnvironment] : undefined
 	);
 	const recommendedWallet = $derived(currentWalletType?.wallets[0]);
-	const otherWallets = $derived(currentWalletType?.networkWallets(data.network.shortname).slice(1));
+	const otherWallets = $derived(currentWalletType?.networkWallets(String(data.network)).slice(1));
 
 	const WalletComponent = $derived(currentWalletType?.icon);
 </script>
@@ -34,7 +34,7 @@
 
 	<Stack class="rounded-2xl border border-white/20 p-4">
 		<div class="flex items-start space-x-4">
-			<div class="mt-2 rounded-full bg-mineShaft-800">
+			<div class="bg-mine-800 mt-2 rounded-full">
 				<img src={recommendedWallet.logo} alt={`${recommendedWallet.name} logo`} width={96} />
 			</div>
 			<div>
@@ -57,10 +57,10 @@
 			<Stack>
 				<a
 					href={wallet.route}
-					class="group grid grid-cols-[auto_1fr_auto] items-center gap-4 rounded-2xl border border-white/20 p-4
-					hover:bg-mineShaft-950 focus-visible:outline focus-visible:outline-transparent focus-visible:ring-2 focus-visible:ring-solar-500"
+					class="group hover:bg-mine-950 focus-visible:ring-solar-500 grid grid-cols-[auto_1fr_auto] items-center gap-4 rounded-2xl border
+					border-white/20 p-4 focus-visible:ring-2 focus-visible:outline focus-visible:outline-transparent"
 				>
-					<div class="rounded-full bg-mineShaft-900/60">
+					<div class="bg-mine-900/60 rounded-full">
 						{#if wallet.logo}
 							<img src={wallet.logo} alt={`${wallet.name} logo`} width="52" />
 						{/if}
@@ -71,7 +71,7 @@
 						</h4>
 						<p>{wallet.description}</p>
 					</div>
-					<ChevronRight class="size-6 group-hover:stroke-skyBlue-500" />
+					<ChevronRight class="group-hover:stroke-primary size-6" />
 				</a>
 			</Stack>
 		{/each}
@@ -81,13 +81,13 @@
 		<Stack>
 			<a
 				href="/{data.network}/signup/wallets"
-				class="group grid grid-cols-[auto_1fr_auto] items-center gap-4 rounded-2xl border border-white/20 p-4
-				hover:bg-mineShaft-950 focus-visible:outline focus-visible:outline-transparent focus-visible:ring-2 focus-visible:ring-solar-500"
+				class="group hover:bg-mine-950 focus-visible:ring-solar-500 grid grid-cols-[auto_1fr_auto] items-center gap-4 rounded-2xl border
+				border-white/20 p-4 focus-visible:ring-2 focus-visible:outline focus-visible:outline-transparent"
 			>
-				<div class="rounded-full bg-mineShaft-900/60 p-3">
+				<div class="bg-mine-900/60 rounded-full p-3">
 					{#if currentWalletType.icon}
 						{@const Component = currentWalletType.icon}
-						<Component class="size-6 group-hover:stroke-skyBlue-500" />
+						<Component class="group-hover:stroke-primary size-6" />
 					{/if}
 				</div>
 				<div class="space-y-1">
@@ -100,7 +100,7 @@
 							.replace(/,([^,]*)$/, ' and$1')}
 					</p>
 				</div>
-				<ChevronRight class="size-6 group-hover:stroke-skyBlue-500" />
+				<ChevronRight class="group-hover:stroke-primary size-6" />
 			</a>
 		</Stack>
 	{/if}

@@ -5,6 +5,10 @@ export interface HistoricalPrice {
 	value: Asset;
 }
 
+export interface HistoricalPrices {
+	[timeframe: string]: HistoricalPrice;
+}
+
 export type DescriptionItem = {
 	key: string;
 	value: string;

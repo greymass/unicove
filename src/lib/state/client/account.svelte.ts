@@ -2,6 +2,7 @@ import {
 	API,
 	APIClient,
 	Asset,
+	Bytes,
 	Checksum256,
 	Float64,
 	Int128,
@@ -15,20 +16,22 @@ import type { REXState } from '@wharfkit/resources';
 import type { NetworkState } from '$lib/state/network.svelte';
 import type {
 	AccountDataSources,
+	AccountDataSourcesKeys,
+	AccountDataSourcesHashes,
 	AccountResources,
 	SerializedAccountState,
 	VoterInfo
 } from '$lib/types/account';
 
-import { isSameToken } from '$lib/utils';
 import {
+	defaultAccountDataHashes,
 	defaultAccountDataSources,
 	defaultVoteInfo,
 	nullContractHash
 } from '$lib/state/defaults/account';
 import * as SystemContract from '$lib/wharf/contracts/system';
 import { Types as REXTypes } from '$lib/types/rex';
-import { Token, TokenBalance, TokenDefinition } from '$lib/types/token';
+import { Token, TokenBalance, TokenDefinition, tokenEquals, ZeroUnits } from '$lib/types/token';
 
 export class AccountState {
 	public client?: APIClient = $state();
@@ -36,28 +39,17 @@ export class AccountState {
 
 	public network: NetworkState;
 	private sources: AccountDataSources = $state(defaultAccountDataSources);
+	private hashes: AccountDataSourcesHashes = $state(defaultAccountDataHashes);
 
 	public name: Name = $state(Name.from(''));
 	public last_update: Date = $state(new Date());
 	public contract: boolean = $derived(!this.sources.contract_hash.equals(nullContractHash));
 	public loaded: boolean = $state(false);
 
-	public balance = $derived.by(() =>
-		this.network ? getBalance(this.network, this.sources) : undefined
-	);
-	public balances: TokenBalance[] = $derived.by(() =>
-		this.network
-			? getBalances(
-					this.network,
-					this.sources,
-					this.network.chain.id,
-					this.network.tokens,
-					this.balance?.liquid
-				)
-			: []
-	);
-	public delegations = $derived(getDelegations(this.sources));
+	public balance = $derived.by(() => getBalance(this.network, this.sources));
+	public balances = $derived.by(() => getBalances(this.network, this.sources, this.resources));
 
+	public delegations = $derived(getDelegations(this.sources));
 	public resources = $derived.by(() => getResources(this.sources, this.network));
 	public rex = $derived.by(() => getRex(this.sources));
 	public permissions = $derived(API.v1.AccountObject.from(this.sources.get_account).permissions);
@@ -80,7 +72,7 @@ export class AccountState {
 	}
 
 	async refresh() {
-		const response = await this.fetch(`/${this.network.shortname}/api/account/${this.name}`);
+		const response = await this.fetch(`/${this.network}/api/account/${this.name}`);
 		if (!response.ok) {
 			throw new Error(
 				`Failed to fetch account data for ${this.name} on ${this.network.chain.name}`
@@ -98,20 +90,59 @@ export class AccountState {
 		};
 	}
 
+	getBalance(token: Token): TokenBalance {
+		if (tokenEquals(token.id, this.network.token.id)) {
+			return this.balance;
+		}
+		const balance = this.balances.find((b) => tokenEquals(b.token.id, token.id));
+		if (!balance) {
+			return TokenBalance.from({
+				token,
+				balance: Asset.fromUnits(0, token.symbol)
+			});
+		}
+		return balance;
+	}
+
+	// Optimistic update of a balance change, will be overwritten by the next fetch
+	setBalance(balance: TokenBalance) {
+		const index = this.sources.balances.findIndex((b) => tokenEquals(b.token.id, balance.token.id));
+		if (index !== -1) {
+			this.sources.balances[index] = balance;
+		} else {
+			this.sources.balances.push(balance);
+		}
+	}
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	updateSource(source: AccountDataSourcesKeys, data: any) {
+		const hash = Checksum256.hash(Bytes.from(JSON.stringify(data), 'utf8'));
+		if (!this.hashes[source] || !hash.equals(this.hashes[source])) {
+			this.hashes[source] = hash;
+			this.sources[source] = data;
+		}
+	}
+
 	setState(data: AccountDataSources) {
 		this.last_update = new Date();
-		this.sources = {
-			get_account: data.get_account,
-			contract_hash: Checksum256.from(data.contract_hash),
-			balance: data.balance,
-			giftedram: data.giftedram,
-			light_api: data.light_api,
-			delegated: data.delegated,
-			proposals: data.proposals,
-			refund_request: data.refund_request,
-			rexbal: data.rexbal,
-			rexfund: data.rexfund
-		};
+		this.sources.contract_hash = Checksum256.from(data.contract_hash);
+
+		// Since we are performing optimistic updates against some data, we need to
+		// ensure that the optimistic updates are not lost when the data is fetched,
+		// unless the actual data has changed from the last update.
+		//
+		// This will no longer be necessary when we switch to using an API which streams
+		// updates to the account data only when they occur.
+		this.updateSource('balance', data.balance);
+		this.updateSource('balances', data.balances);
+		this.updateSource('delegated', data.delegated);
+		this.updateSource('get_account', data.get_account);
+		this.updateSource('giftedram', data.giftedram);
+		this.updateSource('proposals', data.proposals);
+		this.updateSource('refund_request', data.refund_request);
+		this.updateSource('rexbal', data.rexbal);
+		this.updateSource('rexfund', data.rexfund);
+
 		if (data.get_account && data.get_account.voter_info) {
 			this.voter = {
 				isProxy: data.get_account.voter_info.is_proxy,
@@ -125,6 +156,10 @@ export class AccountState {
 			};
 		}
 		this.loaded = true;
+	}
+
+	getSources() {
+		return this.sources;
 	}
 
 	toJSON() {
@@ -214,54 +249,43 @@ export function getResources(
 }
 
 export interface AccountValue {
+	// Value of tokens delegated during genesis or the old eosio::delegatebw action
 	delegated: Asset;
+	// Available token balance for the account on the token contract
 	liquid: Asset;
+	// Value of RAM owned by the account
 	ram: Asset;
-	refunding: Asset;
-	staked: Asset;
-	systemtoken: Asset;
-	total: Asset;
-	unstaked: Asset;
-}
-
-export interface Balance {
-	// Tokens delegated from genesis or the old eosio::delegatebw action
-	delegated: Asset;
-	// Available token balance for the account on eosio.token
-	liquid: Asset;
 	// Tokens being refunded from delegated balances, claimable with eosio::refund
 	refunding: Asset;
-	// REX balance represented as staked system tokens
+	// Value of REX balance represented as staked system tokens
 	staked: Asset;
+	// Sum value of the system token values (minus RAM)
+	systemtoken: Asset;
+	// Sum of all values
+	total: Asset;
+	// Value of all non-system tokens owned by the account
+	tokens: Asset;
 	// System tokens idle in the eosio.rex contract (likely from eosio::sellrex)
 	unstaked: Asset;
-	// Total balance of all owned system tokens
-	total: Asset;
 }
 
-export function getBalance(network: NetworkState, sources: AccountDataSources): Balance {
+export function getBalance(network: NetworkState, sources: AccountDataSources): TokenBalance {
 	if (!network) {
 		throw new Error('Network not initialized');
 	}
 	if (!network.config) {
 		throw new Error('Network configuration not initialized');
 	}
-	// Create an empty balance to start adding to
-	const delegated = Asset.fromUnits(0, network.config.systemtoken.symbol);
-	const refunding = Asset.fromUnits(0, network.config.systemtoken.symbol);
-	const liquid = Asset.fromUnits(0, network.config.systemtoken.symbol);
-	const staked = Asset.fromUnits(0, network.config.systemtoken.symbol);
-	const unstaked = Asset.fromUnits(0, network.config.systemtoken.symbol);
-	const total = Asset.fromUnits(0, network.config.systemtoken.symbol);
 
-	// Add the core balance if it exists on the account
+	const total = Asset.fromUnits(0, network.config.systemtoken.symbol);
+	const liquid = Asset.fromUnits(0, network.config.systemtoken.symbol);
 	if (sources.balance) {
-		const balance = Asset.from(sources.balance);
+		const balance = Asset.from(sources.balance.balance);
 		liquid.units.add(balance.units);
 		total.units.add(balance.units);
 	}
 
-	// Add any delegated tokens to the total balance
+	const delegated = Asset.fromUnits(0, network.config.systemtoken.symbol);
 	if (sources.delegated.length > 0) {
 		const delegatedTokens = getDelegated(
 			getDelegations(sources),
@@ -271,7 +295,17 @@ export function getBalance(network: NetworkState, sources: AccountDataSources): 
 		total.units.add(delegatedTokens.units);
 	}
 
-	// Add the currently refunding balance to the total balance
+	let legacy = Asset.fromUnits(0, network.config.systemtoken.symbol);
+	if (network.config.legacytoken) {
+		const legacyDefinition = TokenDefinition.from(network.config.legacytoken);
+		const legacyBalance = sources.balances.find((b) => tokenEquals(b.token.id, legacyDefinition));
+		if (legacyBalance) {
+			const legacyAsset = Asset.from(legacyBalance.balance);
+			legacy = legacyAsset;
+		}
+	}
+
+	const refunding = Asset.fromUnits(0, network.config.systemtoken.symbol);
 	if (sources.refund_request) {
 		const cpu = Asset.from(sources.refund_request.cpu_amount);
 		refunding.units.add(cpu.units);
@@ -281,16 +315,14 @@ export function getBalance(network: NetworkState, sources: AccountDataSources): 
 		total.units.add(net.units);
 	}
 
-	if (network.config.features.rex) {
-		// Add any staked (REX) tokens to total balance based on current value
+	const staked = Asset.fromUnits(0, network.config.systemtoken.symbol);
+	const unstaked = Asset.fromUnits(0, network.config.systemtoken.symbol);
+	if (network.supports('rex')) {
 		if (sources.rexbal) {
-			if (network.supports('rex')) {
-				const rex = network.rexToToken(sources.rexbal.rex_balance);
-				staked.units.add(rex.units);
-				total.units.add(rex.units);
-			}
+			const rex = network.rexToToken(sources.rexbal.rex_balance);
+			staked.units.add(rex.units);
+			total.units.add(rex.units);
 		}
-		// Add rex fund to total balance based on current value
 		if (sources.rexfund && sources.rexfund.balance) {
 			const balance = Asset.from(sources.rexfund.balance);
 			unstaked.units.add(balance.units);
@@ -298,95 +330,101 @@ export function getBalance(network: NetworkState, sources: AccountDataSources): 
 		}
 	}
 
-	return {
-		delegated,
-		liquid,
-		refunding,
-		staked,
-		unstaked,
-		total
-	};
+	const children = [
+		{
+			name: 'delegated',
+			token: network.token,
+			balance: delegated
+		},
+		{
+			name: 'refunding',
+			token: network.token,
+			balance: refunding
+		},
+		{
+			name: 'staked',
+			token: network.token,
+			balance: staked
+		},
+		{
+			name: 'total',
+			token: network.token,
+			balance: total
+		},
+		{
+			name: 'unstaked',
+			token: network.token,
+			balance: unstaked
+		}
+	];
+
+	if (network.config.legacytoken) {
+		children.push({
+			name: 'legacy',
+			token: network.token,
+			balance: legacy
+		});
+	}
+
+	return TokenBalance.from({
+		token: network.token,
+		balance: liquid,
+		children
+	});
 }
 
 export function getBalances(
 	network: NetworkState,
 	sources: AccountDataSources,
-	chain: Checksum256,
-	tokens?: Token[],
-	liquid?: Asset
+	resources: AccountResources
 ): TokenBalance[] {
-	if (sources.light_api) {
-		const balances: TokenBalance[] = [];
+	const balances: TokenBalance[] = sources.balances.map((b) => TokenBalance.from(b));
+	const token = network.getRamToken();
 
-		//If the value of system token is 0,
-		//for example, the chain does not support lightapi.
-		//replace it with the value of liquid
-		sources.light_api?.forEach((balance) => {
-			let amount = balance.amount;
-			if (
-				!Number(amount) &&
-				network.chain.systemToken &&
-				isSameToken(
-					{
-						contract: network.chain.systemToken.contract,
-						symbol: network.chain.systemToken.symbol.name
-					},
-					{
-						contract: balance.contract,
-						symbol: balance.currency
-					}
-				) &&
-				liquid
-			) {
-				amount = liquid.quantity;
-			}
-			const asset = Asset.from(`${amount} ${balance.currency}`);
-			const contract = Name.from(balance.contract);
-			const id = TokenDefinition.from({
-				chain,
-				contract: contract,
-				symbol: asset.symbol
-			});
-			const token =
-				tokens && tokens.length > 0
-					? tokens.find((token) => token.id.equals(id))
-					: Token.from({
-							id
-						});
-			balances.push(
-				TokenBalance.from({
-					balance: asset,
-					token
-				})
-			);
-		});
+	// Add RAM balance to the list of balances
+	balances.push(
+		TokenBalance.from({
+			token,
+			balance: Asset.fromUnits(resources.ram.available, token.symbol),
+			locked: !network.supports('ramtransfer'),
+			children: [
+				{
+					token,
+					balance: Asset.fromUnits(resources.ram.used, token.symbol),
+					name: 'used'
+				},
+				{
+					token,
+					balance: Asset.fromUnits(resources.ram.owned, token.symbol),
+					name: 'total'
+				}
+			]
+		})
+	);
 
-		// Sort balances alphabetically
-		balances.sort((a, b) => {
-			if (a.token.symbol.name < b.token.symbol.name) {
-				return -1;
-			}
-			if (a.token.symbol.name > b.token.symbol.name) {
-				return 1;
-			}
-			return 0;
-		});
+	// Sort balances alphabetically
+	balances.sort((a, b) => {
+		if (a.token.id.symbol.name < b.token.id.symbol.name) {
+			return -1;
+		}
+		if (a.token.id.symbol.name > b.token.id.symbol.name) {
+			return 1;
+		}
+		return 0;
+	});
 
-		// Move system token to the top of the list regardless of alphabetical order
-		balances.sort((a, b) => {
-			if (a.token.id.equals(network.token.id)) {
-				return -1;
-			}
-			if (b.token.id.equals(network.token.id)) {
-				return 1;
-			}
-			return 0;
-		});
+	// Move system token to the top of the list regardless of alphabetical order
+	balances.sort((a, b) => {
+		if (a.token.id.equals(network.token.id)) {
+			return -1;
+		}
+		if (b.token.id.equals(network.token.id)) {
+			return 1;
+		}
+		return 0;
+	});
 
-		return balances;
-	}
-
-	return [];
+	return balances;
 }
 
 export function getDelegated(
@@ -397,7 +435,7 @@ export function getDelegated(
 		acc.add(delegation.net_weight.units);
 		acc.add(delegation.cpu_weight.units);
 		return acc;
-	}, UInt64.from(0));
+	}, UInt64.from(ZeroUnits.value));
 	return Asset.fromUnits(delegatedUnits, symbol);
 }
 

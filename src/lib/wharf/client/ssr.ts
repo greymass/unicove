@@ -45,7 +45,7 @@ export function getBackendNetwork(
 	fetch: typeof window.fetch,
 	options: Partial<GetBackendClientOptions> = {}
 ) {
-	const client = getBackendClient(config.name, fetch, options);
+	const client = getBackendClient(config.short, fetch, options);
 	return getNetwork(config, { client });
 }
 

@@ -4,11 +4,11 @@
 	import type { ExtendedSelectOption } from '$lib/components/select/types';
 	import Label from '$lib/components/input/label.svelte';
 	import { Chains } from '@wharfkit/common';
-	import TokenSelect from '$lib/components/select/token.svelte';
+	import TokenSelect from '$lib/components/select/balance.svelte';
 	import type { SelectOption } from '@melt-ui/svelte';
 	import Button from '$lib/components/button/button.svelte';
 	import Code from '$lib/components/code.svelte';
-	import { TokenBalance, TokenDefinition } from '$lib/types/token';
+	import { TokenBalance } from '$lib/types/token';
 
 	const options: SelectOption[] = [
 		{ value: 30, label: '30d' },
@@ -49,21 +49,21 @@
 		TokenBalance.from({
 			balance: '1.2345 EOS',
 			token: {
-				id: TokenDefinition.from({
+				id: {
 					chain: Chains.EOS.id,
 					contract: 'eosio.token',
 					symbol: '4,EOS'
-				})
+				}
 			}
 		}),
 		TokenBalance.from({
 			balance: '9876 SCRAP',
 			token: {
-				id: TokenDefinition.from({
+				id: {
 					chain: Chains.EOS.id,
-					contract: 'eosio.token',
-					symbol: '4,EOS'
-				})
+					contract: 'scrap',
+					symbol: '0,SCRAP'
+				}
 			}
 		})
 	];
@@ -98,6 +98,16 @@
 				/>
 			</Stack>
 			<span>Value in parent: {selectedFormOption.label}</span>
+			<Stack class="gap-2">
+				<Label for="form-select-1">Disabled</Label>
+				<Select
+					variant="form"
+					id="form-select-1"
+					options={formOptions}
+					disabled
+					bind:selected={selectedFormOption}
+				/>
+			</Stack>
 		</Cluster>
 	</Stack>
 
@@ -128,7 +138,7 @@
 				options={tokenOptions}
 				bind:selected={tokenSelected}
 			/>
-			<Code>Value in parent: {JSON.stringify(tokenSelected.token, null, 2)}</Code>
+			<Code>Value in parent: {JSON.stringify(tokenSelected, null, 2)}</Code>
 		</Stack>
 	</Stack>
 </Stack>

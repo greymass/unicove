@@ -56,9 +56,9 @@
 	});
 </script>
 
-<li class="relative col-span-full grid grid-cols-subgrid bg-shark-950">
+<li class=" relative col-span-full grid grid-cols-subgrid">
 	<div
-		class="col-span-full space-y-1 rounded-t-lg bg-mineShaft-950 px-4 py-3 md:col-span-1 md:rounded-l-lg"
+		class="bg-surface-container col-span-full space-y-1 rounded-t-lg px-4 py-3 md:col-span-1 md:rounded-l-lg"
 	>
 		<div class="flex items-center">
 			<SquareDashedBottomCode class="mr-2" />
@@ -122,7 +122,7 @@
 		{/each}
 	</div>
 
-	<div class="rounded-b-lg bg-mineShaft-950/50 px-4 py-3 md:rounded-r-lg">
+	<div class="bg-surface-container rounded-b-lg px-4 py-3 md:rounded-r-lg">
 		<Code>{JSON.stringify(struct, null, 2)}</Code>
 	</div>
 </li>

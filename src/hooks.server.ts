@@ -1,7 +1,7 @@
 import { sequence } from '@sveltejs/kit/hooks';
 import type { Handle, RequestEvent } from '@sveltejs/kit';
 
-import { PUBLIC_CHAIN_SHORT } from '$env/static/public';
+import { PUBLIC_CHAIN_SHORT, PUBLIC_ENVIRONMENT } from '$env/static/public';
 import { availableLanguageTags } from '$lib/paraglide/runtime.js';
 import { i18n } from '$lib/i18n';
 import { isNetworkShortName } from '$lib/wharf/chains';
@@ -17,6 +17,7 @@ const mappings: Record<string, string> = {
 	kylin: 'https://kylin.unicove.com',
 	telos: 'https://telos.unicove.com',
 	telostestnet: 'https://testnet.telos.unicove.com',
+	vaulta: 'https://unicove.com',
 	wax: 'https://wax.unicove.com',
 	waxtestnet: 'https://testnet.wax.unicove.com'
 };
@@ -42,10 +43,6 @@ function skipRedirect(pathname: string) {
 	return isAPIPath(pathname);
 }
 
-function isLanguage(value: string) {
-	return availableLanguageTags.find((l: string) => l.toLowerCase() === value.toLowerCase());
-}
-
 function isNetwork(value: string) {
 	return isNetworkShortName(value);
 }
@@ -57,7 +54,8 @@ function isAlternativeNetwork(value: string) {
 const redirects: Record<string, string> = {
 	'/earn': '/staking',
 	'/resources/ram/buy': '/ram/buy',
-	'/resources/ram/sell': '/ram/sell'
+	'/resources/ram/sell': '/ram/sell',
+	'/swap/vaulta': '/swap/eosio.token/4,eos/core.vaulta/4,xyz'
 };
 
 function getManualRedirectPath(pathMore: string[]): string {
@@ -72,7 +70,9 @@ function isManualRedirectPath(pathMore: string[]): boolean {
 
 export async function networkHandle({ event, resolve }: HandleParams): Promise<Response> {
 	event.locals.network = getBackendNetworkByName(PUBLIC_CHAIN_SHORT, event.fetch);
-	return await resolve(event);
+	return await resolve(event, {
+		transformPageChunk: ({ html }) => html.replace('%network%', event.locals.network.toString())
+	});
 }
 
 export async function redirectHandle({ event, resolve }: HandleParams): Promise<Response> {
@@ -84,36 +84,18 @@ export async function redirectHandle({ event, resolve }: HandleParams): Promise<
 
 	const [, pathFirst, pathSecond, ...pathMore] = pathname.split('/').map((p) => p.trim());
 
-	let lang = 'en';
+	let lang = pathFirst;
 	let network: string = PUBLIC_CHAIN_SHORT;
 	let alternativeNetwork: string | undefined;
 
-	if (isLanguage(pathFirst) && isNetwork(pathSecond)) {
-		// Proceed, correct URL
-		lang = pathFirst;
-		network = pathSecond;
-	} else if (isLanguage(pathFirst) && !isNetwork(pathSecond) && !pathSecond) {
-		// Only a language is specified, land on the language specific homepage
-		lang = pathFirst;
-	} else if (isLanguage(pathFirst) && isAlternativeNetwork(pathSecond)) {
-		// A language is specified, but the network is an alternative - need to redirect
-		lang = pathFirst;
+	if (PUBLIC_ENVIRONMENT === 'production' && isAlternativeNetwork(pathSecond)) {
 		alternativeNetwork = pathSecond;
-	} else if (isLanguage(pathFirst) && !isNetwork(pathSecond)) {
-		// The network isn't specified, but the language is - redirect to the default network
+	}
+
+	if (!isNetwork(pathSecond) && !isAlternativeNetwork(pathSecond)) {
 		lang = pathFirst;
+		network = PUBLIC_CHAIN_SHORT;
 		pathMore.unshift(pathSecond);
-	} else if (!isLanguage(pathFirst) && isNetwork(pathFirst)) {
-		// The language isn't specified, but the network is - redirect to the default language with the network provided
-		network = pathFirst;
-		pathMore.unshift(pathSecond);
-	} else if (!isLanguage(pathFirst) && isAlternativeNetwork(pathFirst)) {
-		// No language, but an alternative network is specified - redirect to the default language with the alternative network
-		alternativeNetwork = pathFirst;
-	} else {
-		// Neither language nor network is specified - redirect to the default language and network
-		pathMore.unshift(pathSecond);
-		pathMore.unshift(pathFirst);
 	}
 
 	// Ensure that the 'lang' property exists on the 'Locals' type

@@ -7,7 +7,7 @@
 	import LanguageSelect from '$lib/components/select/language.svelte';
 	import Label from '$lib/components/input/label.svelte';
 	import { Card, Stack } from '$lib/components/layout';
-	import { type MarketContext, type UnicoveContext } from '$lib/state/client.svelte';
+	import { type UnicoveContext } from '$lib/state/client.svelte';
 	import Code from '$lib/components/code.svelte';
 	import * as m from '$lib/paraglide/messages';
 	import Pageheader from '$lib/components/pageheader.svelte';
@@ -17,17 +17,19 @@
 	import DatetimeInput from '$lib/components/input/datetime.svelte';
 	import type { FormEventHandler } from 'svelte/elements';
 	import Button from '$lib/components/button/button.svelte';
-	import { SupportedCurrencies, SupportedCurrenciesList } from '$lib/types/currencies.js';
 	import { availableLanguageTags } from '$lib/paraglide/runtime';
+	import CurrencySelect from '$lib/components/select/currency.svelte';
 
 	const context = getContext<UnicoveContext>('state');
-	const market = getContext<MarketContext>('market');
 
 	let preventAccountPageSwitching = $state(!!context.settings.data.preventAccountPageSwitching);
 	let searchAccountSwitch = $state(!!context.settings.data.searchAccountSwitch);
 	let searchShowPages = $state(!!context.settings.data.searchShowPages);
 	let advancedMode = $state(!!context.settings.data.advancedMode);
 	let debugMode = $state(!!context.settings.data.debugMode);
+	let developerMode = $state(!!context.settings.data.developerMode);
+	let mockPrice = $state(!!context.settings.data.mockPrice);
+	let increasedPrecision = $state(!!context.settings.data.increasedPrecision);
 
 	let refEarliestExecution: DatetimeInput | undefined = $state();
 
@@ -53,6 +55,18 @@
 		context.settings.data.debugMode = advancedMode ? debugMode : false;
 	});
 
+	$effect(() => {
+		context.settings.data.developerMode = advancedMode ? developerMode : false;
+	});
+
+	$effect(() => {
+		context.settings.data.increasedPrecision = advancedMode ? increasedPrecision : false;
+	});
+
+	$effect(() => {
+		context.settings.data.mockPrice = advancedMode ? mockPrice : false;
+	});
+
 	const range: ExtendedSelectOption[] = [
 		{ label: '15 minutes', value: TimeSeconds['15m'] },
 		{ label: '1 day', value: TimeSeconds['1d'] },
@@ -72,20 +86,6 @@
 		if (context.wharf.session) {
 			context.wharf.setWalletSetting('expireSeconds', next?.value || TimeSeconds['1mo']);
 		}
-		return next;
-	};
-
-	const currencies: ExtendedSelectOption[] = SupportedCurrenciesList.map((c) => ({
-		label: c,
-		value: c
-	}));
-	let selectedCurrency: ExtendedSelectOption | undefined = $derived(
-		currencies.find((r) => r.value === context.settings.data.displayCurrency)
-	);
-	const onCurrencySelectedChange: ChangeFn<ExtendedSelectOption | undefined> = ({ next }) => {
-		context.settings.data.displayCurrency =
-			(next?.value as SupportedCurrencies) || SupportedCurrencies.USD;
-		market.market.refresh();
 		return next;
 	};
 
@@ -116,9 +116,9 @@
 		title={m.common_settings()}
 		subtitle={m.settings_page_subtitle()}
 	/>
-	<div class="grid max-w-screen-sm gap-8">
+	<div class="grid max-w-2xl gap-8">
 		{#if context.wharf.session?.walletPlugin.id === 'wallet-plugin-multisig'}
-			<Card class="grid gap-8 border border-mineShaft-900">
+			<Card class=" grid gap-8 ">
 				<div class="flex items-center justify-between">
 					<h2 class="text-muted text-2xl font-semibold">MSIG Configuration</h2>
 				</div>
@@ -159,7 +159,7 @@
 			</Card>
 		{/if}
 
-		<Card class="grid gap-8 border border-mineShaft-900">
+		<Card class=" grid gap-8 ">
 			<div class="flex items-center justify-between">
 				<h2 class="text-muted text-2xl font-semibold">Preferences</h2>
 			</div>
@@ -179,19 +179,22 @@
 
 			<div class="flex items-center justify-between">
 				<Stack class="gap-2">
-					<Label for="proposal-expiration">Display Currency</Label>
+					<Label for="proposal-expiration">Prefered Currency</Label>
 					<p class="caption text-sm">The currency used to display the value of tokens.</p>
 				</Stack>
-				<Select
-					id="proposal-expiration"
-					options={currencies}
-					onSelectedChange={onCurrencySelectedChange}
-					selected={selectedCurrency}
-				/>
+				<CurrencySelect />
+			</div>
+
+			<div class="flex items-center justify-between">
+				<Stack class="gap-2">
+					<Label for="proposal-expiration">Increased Precision</Label>
+					<p class="caption text-sm">Use more decimals to increase currency precision.</p>
+				</Stack>
+				<Switch id="increased-precision" bind:checked={increasedPrecision} />
 			</div>
 		</Card>
 
-		<Card class="grid gap-8 border border-mineShaft-900">
+		<Card class=" grid gap-8 ">
 			<div class="flex items-center justify-between">
 				<h2 class="text-muted text-2xl font-semibold">Navigation</h2>
 			</div>
@@ -220,7 +223,7 @@
 			</div>
 		</Card>
 
-		<Card class="grid gap-8 border border-mineShaft-900">
+		<Card class=" grid gap-8 ">
 			<div class="flex items-center justify-between">
 				<h2 class="text-muted text-2xl font-semibold">{m.settings_advanced()}</h2>
 			</div>
@@ -235,7 +238,7 @@
 		</Card>
 
 		{#if advancedMode}
-			<Card class="grid gap-8 border border-mineShaft-900">
+			<Card class=" grid gap-8 ">
 				<div class="flex items-center justify-between">
 					<h2 class="text-muted text-2xl font-semibold">{m.settings_developer()}</h2>
 				</div>
@@ -244,8 +247,28 @@
 						<Label for="debug-mode">{m.settings_enable_developer()}</Label>
 						<p class="caption text-sm">{m.settings_enable_developer_desc()}</p>
 					</Stack>
-					<Switch id="debug-mode" bind:checked={debugMode} />
+					<Switch id="debug-mode" bind:checked={developerMode} />
 				</div>
+				{#if developerMode}
+					<div class="flex items-center justify-between">
+						<Stack class="gap-2">
+							<Label for="debug-mode">{m.settings_enable_mockprice()}</Label>
+							<p class="caption text-sm text-balance">
+								{m.settings_enable_mockprice_desc({
+									mockValue: '$1.2345 USD'
+								})}
+							</p>
+						</Stack>
+						<Switch id="mock-price" bind:checked={mockPrice} />
+					</div>
+					<div class="flex items-center justify-between">
+						<Stack class="gap-2">
+							<Label for="debug-mode">{m.settings_enable_debug()}</Label>
+							<p class="caption text-sm"></p>
+						</Stack>
+						<Switch id="debug-mode" bind:checked={debugMode} />
+					</div>
+				{/if}
 			</Card>
 		{/if}
 	</div>

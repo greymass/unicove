@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { Checksum256Type } from '@wharfkit/antelope';
-	import { truncateCenter } from '$lib/utils';
+	import { cn, truncateCenter } from '$lib/utils';
 	import { getContext } from 'svelte';
 
 	const { network } = getContext<UnicoveContext>('state');
@@ -13,7 +13,7 @@
 
 {#if id}
 	<a
-		class="text-skyBlue-500 hover:text-skyBlue-400 {className}"
+		class={cn('text-primary hover:text-primary-container', className)}
 		href="/{network}/transaction/{String(id)}"
 	>
 		{truncatedString}

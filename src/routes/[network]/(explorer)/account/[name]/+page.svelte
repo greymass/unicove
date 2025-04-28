@@ -1,18 +1,19 @@
 <script lang="ts">
-	import { Stack, Card, MultiCard, Cluster } from '$lib/components/layout';
-	import AssetText from '$lib/components/elements/asset.svelte';
-	import { Asset } from '@wharfkit/antelope';
-	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
 	import DollarSign from 'lucide-svelte/icons/dollar-sign';
-	import TradingPair from '$lib/components/elements/tradingpair.svelte';
-	import Chip from '$lib/components/chip.svelte';
-	import Tokendistribution from '$lib/components/chart/tokendistribution.svelte';
-	import ResourceCard from '$lib/components/elements/resourceCard.svelte';
-	import Button from '$lib/components/button/button.svelte';
-	import { Breakdown, BreakdownRow } from '$lib/components/breakdown';
-	import * as m from '$lib/paraglide/messages';
+
 	import { AccountValueState } from '$lib/state/value.svelte.js';
+	import { Card } from '$lib/components/layout';
+	import * as m from '$lib/paraglide/messages';
+	import AssetText from '$lib/components/elements/asset.svelte';
+	import Button from '$lib/components/button/button.svelte';
+	import CurrencySelect from '$lib/components/select/currency.svelte';
+	import ResourceCard from '$lib/components/elements/resourceCard.svelte';
+	import TokenBalance from '$lib/components/card/tokenbalance.svelte';
+	import Tokendistribution from '$lib/components/chart/tokendistribution.svelte';
+	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte';
+	import { tokenEquals, ZeroUnits } from '$lib/types/token.js';
+	import { ramtoken } from '$lib/wharf/chains.js';
 
 	const { data } = $props();
 
@@ -32,199 +33,134 @@
 		(context.account?.name && data.account.name?.equals(context.account.name)) || false
 	);
 
-	const tokenAvailable = $derived(data.account.balance?.liquid);
-	const tokenRefunding = $derived(data.account.balance?.refunding);
-	const tokenStaked = $derived(data.account.balance?.staked);
-	const tokenUnstaked = $derived(data.account.balance?.unstaked);
-	const tokenDelegated = $derived(data.account.balance?.delegated);
-	const tokenTotal = $derived(data.account.balance?.total);
+	const hasValue = $derived(
+		data.network.supports('delphioracle') || context.settings.data.mockPrice
+	);
 
-	const ramOwned = $derived(Asset.fromUnits(data.account.resources.ram.owned, '3,KB'));
-	const ramMax = $derived(Asset.fromUnits(data.account.resources.ram.max, '3,KB'));
-	const ramUsed = $derived(Asset.fromUnits(data.account.resources.ram.used, '3,KB'));
-	const ramGifted = $derived(Asset.fromUnits(data.account.resources.ram.gifted, '3,KB'));
-	const ramCreator = $derived(Asset.fromUnits(data.account.resources.ram.creator, '3,KB'));
-	const ramSystem = $derived(Asset.fromUnits(data.account.resources.ram.system, '3,KB'));
-	const ramAvailable = $derived(Asset.fromUnits(data.account.resources.ram.available, '3,KB'));
-	const ramBalance = $derived(Asset.fromUnits(data.account.resources.ram.balance, '3,KB'));
+	const rambalance = $derived(
+		data.account.balances.find((b) => tokenEquals(b.token.id, data.network.getRamToken().id))
+	);
+	const historicTimeframe = 'day';
+	const ramhistoric = $derived(market.market.historic?.ram?.[historicTimeframe]);
+	const systemtokenhistoric = $derived(market.market.historic?.systemtoken?.[historicTimeframe]);
 
 	const cpuAvailable = $derived(data.account.resources.cpu.available);
 	const netAvailable = $derived(data.account.resources.net.available);
+
+	const legacytoken = data.network.config.legacytoken;
+	const legacybalance = $derived(
+		legacytoken
+			? data.account.balances.find((b) => tokenEquals(b.token.id, legacytoken.id))
+			: undefined
+	);
 </script>
 
-<!-- What gets shown on this page if data.account doesn't exist? -->
-{#if data.account && currentAccountValue}
-	<MultiCard>
-		<Card id="account-value" style="column-span: all;">
-			<Cluster class="items-center">
-				<picture class="grid size-12 place-items-center rounded-full bg-mineShaft-900">
-					<DollarSign />
-				</picture>
-				{#if currentAccountValue}
-					<div>
-						<p>{m.account_page_total_value()}</p>
-						<AssetText
-							class="text-2xl font-bold text-white"
-							variant="full"
-							value={currentAccountValue.systemtoken.total}
-						/>
-					</div>
-				{/if}
-			</Cluster>
-		</Card>
+<div class="xs:grid-cols-full grid gap-6 lg:grid-cols-[60%_1fr]">
+	<div class="space-y-6">
+		{#if hasValue}
+			<Card id="account-value" style="column-span: all;">
+				<div class="flex flex-wrap items-center gap-x-4 gap-y-2">
+					<picture class="bg-surface-container-high grid size-12 place-items-center rounded-full">
+						<DollarSign />
+					</picture>
 
-		<Card
-			id="system-token"
-			title={String(data.network.chain.systemToken?.symbol.name)}
-			class="break-after-avoid"
-		>
-			<Stack>
-				<div
-					class="col-span-full grid min-h-12 grid-cols-subgrid items-center gap-x-4 border-mineShaft-900"
-				>
-					<div
-						class="col-start-1 col-end-3 row-start-1 flex flex-col py-2 @xs:flex-row @xs:justify-between"
-					>
-						<Stack class="gap-2">
-							<h4 class="text-muted text-base leading-none">{m.common_value()}</h4>
-							<p class="text-xl font-semibold leading-none text-white">
-								<AssetText variant="full" value={currentAccountValue.systemtoken.systemtoken} />
-							</p>
-							{#if currentAccountValue.pair}
-								<Chip>
-									<TradingPair value={market.network.systemtoken} />
-									<!-- TODO: Percent change -->
-								</Chip>
+					{#if currentAccountValue}
+						<div class="flex flex-1 flex-col gap-1">
+							<p class="leading-none">{m.account_page_total_value()}</p>
+							{#if currentAccountValue.hasPrice}
+								<AssetText
+									class="text-on-surface text-left text-2xl leading-none font-bold"
+									variant="full"
+									value={currentAccountValue.systemtoken.total}
+								/>
+							{:else}
+								<div
+									class="bg-surface-container-high text-on-surface w-48 animate-pulse rounded text-2xl font-bold"
+								>
+									&nbsp;
+								</div>
 							{/if}
-						</Stack>
-					</div>
-
-					{#if data.network.supports('directfunding') && isCurrentUser}
-						<div
-							class="col-span-2 col-start-2 row-start-1 text-right @xs:col-span-1 @xs:col-start-3"
-						>
-							<a
-								class="inline-block h-12 content-center text-skyBlue-500 hover:text-skyBlue-400"
-								href={`/${data.network}/fund`}
-							>
-								{m.common_add_funds()}
-							</a>
 						</div>
 					{/if}
+
+					<div class="flex flex-col gap-1 text-right text-nowrap">
+						<CurrencySelect />
+					</div>
 				</div>
-
-				<Breakdown {isCurrentUser}>
-					<BreakdownRow
-						key={m.common_available()}
-						value={tokenAvailable}
-						action={{
-							text: m.common_send(),
-							href: `/${data.network}/send`,
-							visible: isCurrentUser
-						}}
-					/>
-
-					{#if data.network.supports('staking')}
-						<BreakdownRow
-							key={m.common_staked()}
-							value={tokenStaked}
-							action={{
-								text: m.common_staking(),
-								href: `/${data.network}/staking`,
+			</Card>
+		{/if}
+		{#if data.account && data.account.balance}
+			<TokenBalance
+				balance={data.account.balance}
+				child="total"
+				cta={data.network.supports('directfunding')
+					? [
+							{
+								text: m.common_add_funds(),
+								href: `/${data.network}/fund`,
 								visible: isCurrentUser
-							}}
-						/>
-					{/if}
+							}
+						]
+					: undefined}
+				{isCurrentUser}
+				open
+				network={data.network}
+				historic={systemtokenhistoric}
+				{historicTimeframe}
+				pair={currentAccountValue.pair}
+				value={currentAccountValue.systemtoken.systemtoken}
+			/>
+		{/if}
 
-					{#if tokenUnstaked && tokenUnstaked.value > 0}
-						<BreakdownRow
-							key={m.common_unstaked()}
-							value={tokenUnstaked}
-							action={{
-								text: m.common_withdraw(),
-								href: `/${data.network}/staking/withdraw`,
-								visible: isCurrentUser
-							}}
-						/>
-					{/if}
+		{#if legacytoken && legacybalance && legacybalance.balance.units.gt(ZeroUnits)}
+			<TokenBalance
+				balance={legacybalance}
+				cta={[
+					{
+						text: m.common_swap_to_token({ token: data.network.token.name }),
+						href: `/${data.network}/swap/${legacytoken.id.url}/${data.network.token.id.url}`,
+						visible: isCurrentUser
+					}
+				]}
+				{isCurrentUser}
+				open
+				network={data.network}
+				historic={systemtokenhistoric}
+				{historicTimeframe}
+				pair={currentAccountValue.pair}
+				value={currentAccountValue.systemtoken.legacy}
+			/>
+		{/if}
 
-					{#if tokenDelegated && tokenDelegated.value > 0}
-						<BreakdownRow
-							key={m.common_delegated()}
-							value={tokenDelegated}
-							action={{
-								text: m.common_reclaim(),
-								href: `/${data.network}/undelegate`,
-								visible: isCurrentUser
-							}}
-						/>
-					{/if}
-
-					{#if tokenRefunding && tokenRefunding.value > 0}
-						<BreakdownRow
-							key={m.common_refunding()}
-							value={tokenRefunding}
-							action={{
-								text: m.common_claim(),
-								href: `/${data.network}/refund`,
-								visible: isCurrentUser
-							}}
-						/>
-					{/if}
-
-					<BreakdownRow key={m.common_total()} value={tokenTotal} />
-				</Breakdown>
-			</Stack>
-		</Card>
-
-		<Card id="ram" title="RAM" class="">
-			<Stack>
-				<Stack class="gap-2">
-					<h4 class="text-muted text-base leading-none">{m.common_value()}</h4>
-					<p class="text-xl font-semibold leading-none text-white">
-						<AssetText variant="full" value={currentAccountValue.systemtoken.ram} />
-					</p>
-					{#if currentAccountValue.pair}
-						<Chip>
-							<TradingPair value={market.network.ram} />
-							<!-- TODO: Percent change -->
-						</Chip>
-					{/if}
-				</Stack>
-
-				<Breakdown {isCurrentUser}>
-					<BreakdownRow
-						key={m.common_available()}
-						value={ramBalance}
-						action={{
-							text: m.common_ram_market(),
-							href: `/${data.network}/ram`,
-							visible: isCurrentUser
-						}}
-					/>
-					<BreakdownRow key={m.common_total()} value={ramOwned} />
-				</Breakdown>
-
-				{#if context.settings.data.debugMode}
-					<Breakdown title="RAM Usage">
-						<BreakdownRow key={m.common_available()} value={ramAvailable} />
-						<BreakdownRow key={m.common_used()} value={ramUsed} />
-						<BreakdownRow key={m.common_total()} value={ramMax} />
-					</Breakdown>
-					<Breakdown title="Gifted RAM">
-						<BreakdownRow key="Gifted (System)" value={ramSystem} />
-						<BreakdownRow key="Gifted (Creator)" value={ramCreator} />
-						<BreakdownRow key="Total" value={ramGifted} />
-					</Breakdown>
-				{/if}
-			</Stack>
-		</Card>
-
+		{#if rambalance}
+			<TokenBalance
+				balance={rambalance}
+				cta={[
+					{
+						text: m.common_swap_base_quote({
+							base: data.network.token.name,
+							quote: data.network.getRamToken().name
+						}),
+						href: `/${data.network}/swap/${data.network.token.id.url}/${ramtoken.id.url}`,
+						visible: isCurrentUser
+					}
+				]}
+				class=""
+				child="total"
+				{isCurrentUser}
+				network={data.network}
+				historic={ramhistoric}
+				{historicTimeframe}
+				pair={market.network.ram}
+				value={currentAccountValue.systemtoken.ram}
+			/>
+		{/if}
+	</div>
+	<div class="space-y-6">
 		<Tokendistribution data={currentAccountValue.systemtoken} />
-
 		{#if context.settings.data.advancedMode}
-			<Card title={m.common_resources()}>
-				<div class="flex flex-wrap gap-12 *:flex-1">
+			<Card class="@container" title={m.common_resources()}>
+				<div class="flex gap-12 *:flex-1 @sm:justify-between @sm:*:flex-auto">
 					<ResourceCard type="cpu" value={cpuAvailable} vertical />
 
 					<ResourceCard type="net" value={netAvailable} vertical />
@@ -236,5 +172,5 @@
 				{/if}
 			</Card>
 		{/if}
-	</MultiCard>
-{/if}
+	</div>
+</div>

@@ -40,7 +40,7 @@
 </table>
 
 {#if data.topholders.length}
-	<h2 class="text-2xl font-semibold text-white">Top 100 Accounts</h2>
+	<h2 class="text-on-surface text-2xl font-semibold">Top 100 Accounts</h2>
 	<table class="table-styles">
 		<thead>
 			<tr>
@@ -54,7 +54,13 @@
 				<tr>
 					<td>{idx + 1}</td>
 					<td>
-						<Account name={holder.account} />
+						<Account name={holder.account}>
+							{#if data.network.config.lockedsupply?.find( (locked) => holder.account.equals(locked) )}
+								{holder.account} <span class="text-muted">(Locked Supply)</span>
+							{:else}
+								{holder.account}
+							{/if}
+						</Account>
 					</td>
 					<td class="text-right">
 						<AssetText value={holder.balance} />

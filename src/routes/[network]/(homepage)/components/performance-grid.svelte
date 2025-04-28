@@ -26,8 +26,8 @@
 		if (network.supports('rex') && network.token.distribution) {
 			token.units.add(network.token.distribution.staked.units);
 		}
-		if (network.supports('rammarket') && network.token.distribution) {
-			token.units.add(network.foo?.quote.balance.units);
+		if (network.supports('rammarket')) {
+			token.units.add(network.resources.ram.supply);
 		}
 		if (networkValue.systemtoken.price.units.gt(Int64.from(0))) {
 			return calculateValue(token, networkValue.systemtoken.price);
@@ -64,13 +64,13 @@
 
 	<!-- Grid -->
 	<div
-		class="col-span-full grid content-start gap-4 @container lg:col-start-4 xl:col-span-5 xl:col-start-5"
+		class="@container col-span-full grid content-start gap-4 lg:col-start-4 xl:col-span-5 xl:col-start-5"
 	>
-		<div id="performance-row-1" class="grid gap-4 @lg:grid-cols-[1fr_auto_1fr]">
+		<div id="performance-row-1" class="grid gap-4 @-lg:grid-cols-[1fr_auto_1fr]">
 			<!-- Market Cap -->
-			<Card class="grid content-between gap-4  bg-mineShaft-900/40">
-				<h3 class="text-muted text-sm">{network.chain.name} {m.common_market_cap()}</h3>
-				<p class="justify-self-end text-nowrap text-xl font-semibold text-white">
+			<Card class="bg-surface-container-high grid content-between  gap-4">
+				<h3 class="text-muted text-sm">{network.token.name} {m.common_market_cap()}</h3>
+				<p class="text-on-surface justify-self-end text-xl font-semibold text-nowrap">
 					<AssetText value={marketcap} variant="short" />
 				</p>
 			</Card>
@@ -91,9 +91,9 @@
 			</Card>
 
 			<!-- Native TVL -->
-			<Card class="grid content-between gap-4 bg-mineShaft-900/60">
+			<Card class="bg-surface-container-highest grid content-between gap-4">
 				<h3 class="text-muted text-sm">{m.common_native_tvl()}</h3>
-				<p class="justify-self-end text-nowrap text-xl font-semibold text-white">
+				<p class="text-on-surface justify-self-end text-xl font-semibold text-nowrap">
 					<AssetText value={tvl} variant="short" />
 				</p>
 			</Card>
@@ -105,24 +105,24 @@
 				<h3 class="text-muted text-sm">
 					{network.token.symbol.name}/{market.network.systemtoken.price.symbol.name}
 				</h3>
-				<p class="justify-self-end text-nowrap text-xl font-semibold text-white">
+				<p class="text-on-surface justify-self-end text-xl font-semibold text-nowrap">
 					<AssetText value={market.network.systemtoken.price} variant="full" />
 				</p>
 			</Card>
 
 			<!-- Ram Eos pair -->
-			<Card class="grid flex-1 content-between gap-4  bg-mineShaft-900/60">
+			<Card class="bg-surface-container-highest grid flex-1 content-between  gap-4">
 				<h3 class="text-muted text-sm">RAM/{network.token.symbol.name}</h3>
-				<p class="justify-self-end text-nowrap text-xl font-semibold text-white">
+				<p class="text-on-surface justify-self-end text-xl font-semibold text-nowrap">
 					<AssetText value={network.resources.ram.price.rammarket} variant="short" />
 				</p>
 			</Card>
 
 			<!-- Ram price -->
 			{#if network.resources && network.resources.ram.price.rammarket}
-				<Card class="grid flex-1 content-between gap-4 bg-mineShaft-900/40">
+				<Card class="bg-surface-container-high grid flex-1 content-between gap-4">
 					<h3 class="text-muted text-sm">RAM/USD</h3>
-					<p class="justify-self-end text-nowrap text-xl font-semibold text-white">
+					<p class="text-on-surface justify-self-end text-xl font-semibold text-nowrap">
 						<AssetText
 							value={calculateValue(
 								network.resources.ram.price.rammarket,

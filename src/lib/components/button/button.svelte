@@ -44,30 +44,34 @@
 			: {}
 	);
 
-	const primaryStyles =
-		'relative inline-flex h-12 grow items-center justify-center text-nowrap rounded-lg bg-skyBlue-700 px-8 text-center text-base font-medium text-skyBlue-50 transition-all focus:outline-transparent focus-visible:outline focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-solar-500 hover:active:bg-skyBlue-800 disabled:cursor-not-allowed disabled:bg-mineShaft-900 disabled:text-white/60 disabled:opacity-30 disabled:hover:bg-mineShaft-900 [@media(any-hover:hover)]:hover:bg-skyBlue-600';
+	const filledStyles =
+		' inline-flex h-12 grow  rounded-lg bg-primary px-8  text-on-primary  focus:outline-transparent focus-visible:outline focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-solar-500 disabled:bg-on-surface/12 disabled:text-on-surface/40';
 
-	const secondaryStyles =
-		'relative flex h-12 grow items-center justify-center text-nowrap rounded-lg px-8 text-center text-base font-medium text-skyBlue-400 ring-2 ring-inset ring-mineShaft-600 transition-all hover:ring-transparent focus-visible:outline-none focus-visible:ring-solar-500 hover:active:bg-mineShaft-950 hover:active:ring-mineShaft-900 disabled:cursor-not-allowed disabled:text-mineShaft-400 disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:ring-mineShaft-600 disabled:active:ring-mineShaft-600 [@media(any-hover:hover)]:hover:bg-mineShaft-900';
+	const outlinedStyles =
+		' flex h-12 grow  rounded-lg px-8  text-primary ring-2 ring-inset ring-outline   focus-visible:outline-hidden focus-visible:ring-solar-500  hover:active:ring-outline  disabled:text-on-surface/40  disabled:hover:bg-transparent disabled:hover:ring-on-surface/12 disabled:ring-on-surface/12  ';
 
 	const pillStyles =
-		'relative inline-flex h-10 items-center justify-center text-nowrap rounded-full border-2 border-transparent px-5 text-center text-base font-medium leading-4 transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-solar-500 hover:active:bg-mineShaft-950 aria-[current]:border-mineShaft-200/30 [@media(any-hover:hover)]:hover:bg-mineShaft-900 [@media(any-hover:hover)]:hover:text-mineShaft-100';
+		' inline-flex h-10  rounded-full border-2 border-transparent px-5  leading-4  focus-visible:border-solar-500  focus-visible:outline-hidden   aria-[current]:border-outline-variant aria-[current]:focus-visible:border-solar-500';
 
-	const tertiaryStyles =
-		'relative flex h-12 grow items-center justify-center text-nowrap rounded-lg px-8 text-center text-base font-medium text-skyBlue-400    transition-all  focus-visible:outline-none focus-visible:ring-solar-500   disabled:cursor-not-allowed disabled:text-mineShaft-400 disabled:opacity-30 disabled:hover:bg-transparent  [@media(any-hover:hover)]:hover:text-skyBlue-300';
+	const textStyles =
+		'inline-flex  h-10  rounded-lg px-3  text-primary   focus-visible:ring-inset focus-visible:ring-solar-500 focus-visible:outline-hidden focus-visible:ring  disabled:text-on-surface/40  disabled:hover:bg-transparent';
 
 	let styles = {
-		primary: primaryStyles,
-		secondary: secondaryStyles,
+		primary: filledStyles,
+		secondary: outlinedStyles,
 		pill: pillStyles,
-		tertiary: tertiaryStyles
+		tertiary: textStyles
 	};
 </script>
 
 <svelte:element
 	this={tag}
 	use:melt={$meltElement}
-	class={cn(styles[variant], className)}
+	class={cn(
+		'group/button relative cursor-pointer items-center justify-center text-center text-base font-medium text-nowrap transition-all disabled:cursor-default disabled:opacity-30',
+		styles[variant],
+		className
+	)}
 	role={ariaRole}
 	aria-current={ariaCurrent}
 	{disabled}
@@ -75,5 +79,10 @@
 	{...props}
 	{...linkProps}
 >
-	<span class="pointer-events-none relative text-inherit">{@render props.children()}</span>
+	<div
+		class="state-layer group-active/button:group-hove/buttonr:opacity-16 pointer-events-none absolute inset-0 rounded-[inherit] bg-current opacity-0 transition-opacity group-hover/button:opacity-8 group-focus-visible/button:opacity-10 group-disabled/button:hidden"
+	></div>
+	<span class="content-layer pointer-events-none relative text-inherit">
+		{@render props.children()}
+	</span>
 </svelte:element>

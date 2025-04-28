@@ -10,6 +10,7 @@
 	import AccountBalance from '$lib/components/card/accountbalance.svelte';
 	import * as m from '$lib/paraglide/messages';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import { SingleCard } from '$lib/components/layout/index.js';
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');
@@ -68,33 +69,31 @@
 	];
 </script>
 
-<div class="flex flex-col gap-9 sm:gap-12 xl:flex-row xl:justify-between xl:gap-8">
-	<Stack class="max-w-lg flex-1 gap-9">
-		<Stack>
-			{#if cpuAvailableSize && netAvailableSize}
-				<CpuAndNetResource cpuAvailable={cpuAvailableSize} netAvailable={netAvailableSize} />
-			{/if}
-			{#if data.network.supports('powerup')}
-				<Button variant="primary" href="/{network}/resources/powerup"
-					>{m.resources_rent_with_powerup()}</Button
-				>
-			{/if}
-			{#if data.network.supports('rentrex')}
-				<Button variant="primary" href="/{network}/resources/rex"
-					>{m.resources_rent_with_rex()}</Button
-				>
-			{/if}
-			{#if data.network.supports('stakeresource')}
-				<Button variant="primary" href="/{network}/resources/stake"
-					>{m.resources_rent_with_stake({ symbolName })}</Button
-				>
-			{/if}
-		</Stack>
-		<Stack>
-			<RamResource ramAvailable={ramAvailableSize} />
-			<Button variant="secondary" href="/{network}/ram">{m.common_ram_market()}</Button>
-		</Stack>
-		<AccountBalance />
+<SingleCard class="">
+	<Stack>
+		{#if cpuAvailableSize && netAvailableSize}
+			<CpuAndNetResource cpuAvailable={cpuAvailableSize} netAvailable={netAvailableSize} />
+		{/if}
+		{#if data.network.supports('powerup')}
+			<Button variant="primary" href="/{network}/resources/powerup"
+				>{m.resources_rent_with_powerup()}</Button
+			>
+		{/if}
+		{#if data.network.supports('rentrex')}
+			<Button variant="primary" href="/{network}/resources/rex"
+				>{m.resources_rent_with_rex()}</Button
+			>
+		{/if}
+		{#if data.network.supports('stakeresource')}
+			<Button variant="primary" href="/{network}/resources/stake"
+				>{m.resources_rent_with_stake({ symbolName })}</Button
+			>
+		{/if}
+
+		<RamResource ramAvailable={ramAvailableSize} />
+		<Button variant="secondary" href="/{network}/ram">{m.common_ram_market()}</Button>
+
+		<AccountBalance class="bg-surface-container-high" />
 	</Stack>
 	<Stack class="hidden max-w-lg flex-1 gap-4">
 		<Stack class="gap-4 px-5 py-3">
@@ -109,14 +108,14 @@
 		<ul class="space-y-4 xl:space-y-0">
 			{#each explanations as explanation}
 				<li class="grid grid-cols-1 gap-y-4 sm:grid-cols-[25%_75%]">
-					<div class="flex justify-center sm:pl-5 sm:pt-5">
+					<div class="flex justify-center sm:pt-5 sm:pl-5">
 						{#if explanation.icon}
 							{@const Component = explanation.icon}
-							<Component class="size-5 text-white" />
+							<Component class="text-on-surface size-5" />
 						{/if}
 					</div>
 					<div class="space-y-4 px-5 py-3">
-						<h3 class="h5 text-white">{explanation.title}</h3>
+						<h3 class="h5 text-on-surface">{explanation.title}</h3>
 						<ul class="space-y-1">
 							{#each explanation.descriptions as desc}
 								<li>- {desc}</li>
@@ -127,4 +126,4 @@
 			{/each}
 		</ul>
 	</Stack>
-</div>
+</SingleCard>

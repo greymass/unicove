@@ -10,11 +10,11 @@
 	const { cpuAvailable, netAvailable }: Props = $props();
 </script>
 
-<div class="flex gap-px *:flex-1 *:bg-mineShaft-900/70 *:p-4 *:pb-2">
-	<div class="rounded-l-lg">
+<div class="*:bg-surface-container-high flex gap-px *:flex-1 *:p-4 *:pb-2">
+	<div class="rounded-l-xl">
 		<ResourceCard type="cpu" value={cpuAvailable} />
 	</div>
-	<div class="rounded-r-lg">
+	<div class="rounded-r-xl">
 		<ResourceCard type="net" value={netAvailable} />
 	</div>
 </div>

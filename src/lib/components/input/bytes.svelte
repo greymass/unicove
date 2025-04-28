@@ -59,7 +59,6 @@
 		}
 	});
 
-	/** Set the input value from a parent */
 	export function reset() {
 		input = null;
 		value = undefined;
@@ -169,7 +168,7 @@
 	<button
 		onclick={cycleUnit}
 		type="button"
-		class="flex h-full select-none items-center gap-1 rounded-md bg-transparent text-skyBlue-500 hover:text-skyBlue-300 focus:outline-none focus-visible:ring focus-visible:ring-inset focus-visible:ring-solar-500"
+		class="focus-visible:ring-solar-500 text-primary flex h-full cursor-pointer items-center gap-1 rounded-md bg-transparent select-none focus:outline-hidden focus-visible:ring-3 focus-visible:ring-inset"
 	>
 		<span class="text-sm font-medium">{unit}</span>
 		<ArrowUpDown class="size-4" />

@@ -17,18 +17,19 @@
 			href: string;
 		};
 		title?: string;
+		class?: string;
 	}
 
-	const { cta, title = m.common_account_balance() }: Props = $props();
+	const { cta, title = m.common_account_balance(), ...props }: Props = $props();
 </script>
 
-<Card {title}>
+<Card class={props.class} {title}>
 	<Stack>
 		<Stack class="gap-2">
 			<h4 class="text-muted text-base leading-none">{m.common_available()}</h4>
-			<p class="text-xl font-semibold leading-none text-white">
+			<p class="text-on-surface text-xl leading-none font-semibold">
 				{#if context.account}
-					<AssetText variant="full" value={context.account?.balance?.liquid} />
+					<AssetText variant="full" value={context.account?.balance?.balance} />
 				{:else}
 					{m.common_not_logged_in()}
 				{/if}
@@ -36,7 +37,6 @@
 			{#if market.account?.systemtoken?.liquid}
 				<Chip>
 					<AssetText variant="full" value={market.account?.systemtoken?.liquid} />
-					<!-- TODO: Percent change -->
 				</Chip>
 			{/if}
 		</Stack>

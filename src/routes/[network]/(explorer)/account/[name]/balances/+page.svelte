@@ -1,15 +1,18 @@
 <script lang="ts">
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import ValueText from '$lib/components/elements/currency/value.svelte';
-	import { Asset, UInt64 } from '@wharfkit/antelope';
+	import { Asset } from '@wharfkit/antelope';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
 	import * as m from '$lib/paraglide/messages';
+	import { ZeroUnits } from '$lib/types/token.js';
+	import Button from '$lib/components/button/button.svelte';
 
 	const { data } = $props();
-	const zero = UInt64.from(0);
-	const balances = $derived(data.account.balances.filter((item) => item.balance.units.gt(zero)));
+	const balances = $derived(
+		data.account.balances.filter((item) => item.balance.units.gt(ZeroUnits))
+	);
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -24,9 +27,9 @@
 
 {#snippet tableAction(asset: Asset)}
 	<td class="text-right">
-		<a class="text-skyBlue-500 hover:text-skyBlue-400" href="/{data.network}/send?quantity={asset}">
+		<Button variant="tertiary" href="/{data.network}/send?quantity={asset}">
 			{m.common_send()}
-		</a>
+		</Button>
 	</td>
 {/snippet}
 
@@ -48,14 +51,14 @@
 					<td>
 						<div class="flex items-center gap-3">
 							<div class="flex h-6 w-6 items-center justify-center rounded-full bg-black">
-								<!-- {#if tokenBalance.token.meta.logo}
-									<img class="h-5 w-5" src={tokenBalance.token.meta.logo} alt="LOGO" />
+								<!-- {#if tokenBalance.id.meta.logo}
+									<img class="h-5 w-5" src={tokenBalance.id.meta.logo} alt="LOGO" />
 								{/if} -->
 							</div>
 							<a
-								href={`/${context.network}/token/${tokenBalance.token.contract}/${tokenBalance.token.symbol.name}`}
+								href={`/${context.network}/token/${tokenBalance.token.contract}/${tokenBalance.token.name}`}
 							>
-								{tokenBalance.token.symbol.name}
+								{tokenBalance.token.name}
 							</a>
 						</div>
 					</td>
@@ -66,7 +69,9 @@
 						<ValueText token={tokenBalance.token.id} balance={tokenBalance.balance} />
 					</td>
 					{#if isCurrentUser}
-						{@render tableAction(tokenBalance.balance)}
+						{#if !tokenBalance.locked}
+							{@render tableAction(tokenBalance.balance)}
+						{/if}
 					{/if}
 				</tr>
 			{/each}

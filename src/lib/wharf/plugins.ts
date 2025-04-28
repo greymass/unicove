@@ -1,4 +1,4 @@
-import { env } from '$env/dynamic/public';
+import { PUBLIC_FEATURE_METAMASK_SNAP_ORIGIN, PUBLIC_LOCAL_SIGNER } from '$env/static/public';
 import type { ChainDefinition } from '@wharfkit/common';
 import type { WalletPlugin, TransactPlugin } from '@wharfkit/session';
 
@@ -17,15 +17,17 @@ import { chains, getChainDefinitionFromParams } from '$lib/wharf/chains';
 
 export const baseWalletPlugins: WalletPlugin[] = [
 	new WalletPluginAnchor(),
-	new WalletPluginMetaMask(),
+	new WalletPluginMetaMask({
+		snapOrigin: PUBLIC_FEATURE_METAMASK_SNAP_ORIGIN
+	}),
 	new WalletPluginScatter(),
 	new WalletPluginTokenPocket(),
 	new WalletPluginWombat()
 ];
 
 // If a local key is provided, add the private key wallet
-if (env.PUBLIC_LOCAL_SIGNER) {
-	baseWalletPlugins.unshift(new WalletPluginPrivateKey(env.PUBLIC_LOCAL_SIGNER));
+if (PUBLIC_LOCAL_SIGNER) {
+	baseWalletPlugins.unshift(new WalletPluginPrivateKey(PUBLIC_LOCAL_SIGNER));
 }
 
 export const walletPlugins = [
@@ -42,5 +44,5 @@ export const msigTransactPlugins: TransactPlugin[] = [new TransactPluginStatusEm
 export const msigInternalPlugins: TransactPlugin[] = [new TransactPluginResourceProvider()];
 
 export const chainDefs: ChainDefinition[] = chains.map((chain) =>
-	getChainDefinitionFromParams(chain.name)
+	getChainDefinitionFromParams(chain.short)
 );

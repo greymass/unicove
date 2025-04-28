@@ -10,7 +10,6 @@ import {
 	getAPR,
 	getUnstakableBalance
 } from '$lib/utils/staking';
-import { TokenBalance, TokenDefinition } from '$lib/types/token';
 import { Types as REXTypes } from '$lib/types/rex';
 import { PlaceholderAuth } from '@wharfkit/session';
 
@@ -43,27 +42,7 @@ export class StakeManager {
 				)
 			: defaultQuantity
 	);
-	public tokenBalance: TokenBalance | undefined = $derived.by(() => {
-		let balance: TokenBalance | undefined = undefined;
-		if (this.network) {
-			const id = TokenDefinition.from({
-				chain: this.network.chain.id,
-				contract: this.network.contracts.token.account,
-				symbol: this.network.chain.systemToken!.symbol
-			});
-			const meta = (this.network.tokens || []).find((item) => item.id.equals(id));
-			if (meta) {
-				balance = TokenBalance.from({
-					balance: this.staked,
-					token: {
-						id,
-						contract: this.network.contracts.token.account
-					}
-				});
-			}
-		}
-		return balance;
-	});
+	public tokenBalance = $derived(this.account?.balance.child('staked'));
 
 	constructor(network: NetworkState) {
 		this.network = network;

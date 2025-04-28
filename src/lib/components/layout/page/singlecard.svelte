@@ -12,6 +12,6 @@
 	let props: Props = $props();
 </script>
 
-<Card class={cn('flex justify-center py-6 *:max-w-md *:grow', props.class)}>
+<Card class={cn('flex justify-center py-6 *:max-w-lg *:grow', props.class)}>
 	{@render props.children()}
 </Card>

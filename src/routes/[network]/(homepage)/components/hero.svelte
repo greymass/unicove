@@ -42,7 +42,7 @@
 		/>
 		{#if networkShortname === 'eos'}
 			<enhanced:img
-				class="absolute left-1/2 top-0 -translate-x-1/2 object-contain md:hidden"
+				class="absolute top-0 left-1/2 -translate-x-1/2 object-contain md:hidden"
 				src={bgMobile}
 				alt=""
 				fetchpriority="high"
@@ -56,13 +56,13 @@
 		class="z-10 col-span-full grid gap-5 md:col-span-5 md:col-start-1 md:row-start-1 lg:col-span-4 lg:col-start-1 xl:col-start-2"
 	>
 		<UnicoveWordmark class="h-7 w-auto md:h-auto" />
-		<h1 class="text-balance text-3xl font-bold leading-tight lg:text-4xl lg:leading-tight">
+		<h1 class="text-3xl leading-tight font-bold text-balance lg:text-4xl lg:leading-tight">
 			<span class="sr-only">Unicove:</span>
 			{m.homepage_hero_title({
 				network: networkName
 			})}
 		</h1>
-		<p class="text-muted mb-2 text-balance text-xl leading-tight lg:text-xl lg:leading-tight">
+		<p class="text-muted mb-2 text-xl leading-tight text-balance lg:text-xl lg:leading-tight">
 			{m.homepage_hero_description({
 				network: networkName
 			})}

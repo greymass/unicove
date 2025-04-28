@@ -1,11 +1,15 @@
 <script lang="ts">
 	import { Checksum256, type NameType } from '@wharfkit/antelope';
-	import { ChainDefinition, chainLogos } from '@wharfkit/common';
+	import { ChainDefinition } from '@wharfkit/common';
 	import { onMount, setContext, untrack } from 'svelte';
 	import { Head, type SeoConfig } from 'svead';
 	import extend from 'just-extend';
 
-	import { env } from '$env/dynamic/public';
+	import {
+		PUBLIC_ACCOUNT_UPDATE_INTERVAL,
+		PUBLIC_NETWORK_UPDATE_INTERVAL,
+		PUBLIC_MARKET_UPDATE_INTERVAL
+	} from '$env/static/public';
 	import { page } from '$app/state';
 
 	import { AccountState } from '$lib/state/client/account.svelte.js';
@@ -157,9 +161,9 @@
 	});
 
 	// Number of ms between network updates
-	const ACCOUNT_UPDATE_INTERVAL = Number(env.PUBLIC_ACCOUNT_UPDATE_INTERVAL) || 5_000;
-	const NETWORK_UPDATE_INTERVAL = Number(env.PUBLIC_NETWORK_UPDATE_INTERVAL) || 5_000;
-	const MARKET_UPDATE_INTERVAL = Number(env.PUBLIC_MARKET_UPDATE_INTERVAL) || 60_000;
+	const ACCOUNT_UPDATE_INTERVAL = Number(PUBLIC_ACCOUNT_UPDATE_INTERVAL);
+	const NETWORK_UPDATE_INTERVAL = Number(PUBLIC_NETWORK_UPDATE_INTERVAL);
+	const MARKET_UPDATE_INTERVAL = Number(PUBLIC_MARKET_UPDATE_INTERVAL);
 
 	onMount(() => {
 		// Set the chain to the current network chain
@@ -205,35 +209,14 @@
 
 <!-- Preload current chain logo -->
 <svelte:head>
-	{#if chainLogos.get(String(data.network.chain.id)) !== undefined}
-		{@const chainLogo = String(chainLogos.get(String(data.network.chain.id)))}
-		<link rel="preload" href={chainLogo} as="image" type="image/png" />
-	{/if}
+	<link rel="preload" href={String(data.network.config.logo)} as="image" type="image/png" />
 </svelte:head>
 
 <PageBanner network={data.network} />
 
 <div
-	class="
-	relative
-	mx-auto
-	grid
-	h-full
-	min-h-svh
-	w-[calc(100%-2rem)]
-	max-w-screen-2xl
-	grid-cols-2
-	grid-rows-[min-content_minmax(0,1fr)]
-	gap-y-6
-	pb-12
-	pt-4
-	sm:grid-cols-4
-	md:h-auto
-	md:min-h-svh
-	md:grid-cols-12
-	md:grid-rows-[min-content_auto_minmax(0,1fr)]
-	md:gap-x-4
-	"
+	data-theme={data.network}
+	class="relative mx-auto grid h-full min-h-svh w-[calc(100%-2rem)] max-w-(--breakpoint-2xl) grid-cols-2 grid-rows-[min-content_minmax(0,1fr)] gap-y-6 pt-4 pb-12 sm:grid-cols-4 md:h-auto md:min-h-svh md:grid-cols-12 md:grid-rows-[min-content_auto_minmax(0,1fr)] md:gap-x-4 xl:w-[calc(100%-6rem)]"
 >
 	<aside
 		class="relative col-start-1 col-end-3 row-span-full row-start-1 hidden h-full grid-rows-subgrid md:grid"
@@ -259,7 +242,7 @@
 	</header>
 
 	<main
-		class="col-span-full col-start-1 row-span-full row-start-2 grid grid-cols-subgrid content-start gap-x-4 *:col-span-full md:col-start-3 md:col-end-13 md:px-0 xl:col-end-12"
+		class="col-span-full col-start-1 row-span-full row-start-2 grid grid-cols-subgrid content-start gap-x-4 *:col-span-full md:col-start-3 md:col-end-13 md:px-0 xl:col-end-13"
 	>
 		{@render children()}
 	</main>

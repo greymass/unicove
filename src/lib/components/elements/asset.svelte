@@ -31,7 +31,7 @@
 		style: 'currency',
 		currency: asset?.symbol.name,
 		currencyDisplay: 'narrowSymbol',
-		minimumFractionDigits: context.settings.data.advancedMode ? asset?.symbol.precision : undefined
+		minimumFractionDigits: context.settings.data.increasedPrecision ? asset?.symbol.precision : 2
 	};
 
 	function abbreviatedValue(): string {
@@ -66,7 +66,7 @@
 </script>
 
 {#snippet span(string: string)}
-	<span class={cn('text-right tabular-nums', props.class)} {...props}>{string}</span>
+	<span {...props} class={cn('text-right text-nowrap tabular-nums', props.class)}>{string}</span>
 {/snippet}
 
 {#if variant === 'short'}

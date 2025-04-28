@@ -55,12 +55,12 @@
 
 <div
 	class={cn(
-		'relative flex h-12 gap-2 rounded-lg border-2 border-mineShaft-600 px-4 *:content-center focus-within:border-skyBlue-500 focus-within:ring focus-within:ring-1 focus-within:ring-inset focus-within:ring-skyBlue-500',
+		'border-outline focus-within:border-primary focus-within:ring-primary relative flex h-12 gap-2 rounded-lg border-2 px-4 *:content-center focus-within:ring-1 focus-within:ring-3 focus-within:ring-inset',
 		className
 	)}
 >
 	<input
-		class="placeholder:text-muted w-full rounded-lg bg-transparent font-medium focus:outline-none"
+		class="placeholder:text-muted w-full rounded-lg bg-transparent font-medium focus:outline-hidden"
 		type="datetime-local"
 		{min}
 		bind:value

@@ -14,11 +14,13 @@
 <Stack>
 	<Card>
 		<div class="flex gap-6">
-			<picture class="grid size-12 shrink-0 place-items-center rounded-full bg-mineShaft-900">
+			<picture
+				class="bg-surface-container-high grid size-12 shrink-0 place-items-center rounded-full"
+			>
 				<Key />
 			</picture>
 			<div class="space-y-0.5 text-balance *:break-all">
-				<p class="font-semibold text-white">
+				<p class="text-on-surface font-semibold">
 					{pubKey}
 					<CopyButton data={pubKey} />
 				</p>
@@ -33,7 +35,7 @@
 					<li class="flex">
 						<Account
 							name={account}
-							class="h-12 content-center rounded-lg px-4 hover:bg-mineShaft-900/50  focus-visible:bg-mineShaft-900 focus-visible:text-mineShaft-50"
+							class="hover:bg-surface-container-high hover:text-on-surface h-12 content-center rounded-lg px-4"
 						/>
 					</li>
 				{/each}

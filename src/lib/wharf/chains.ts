@@ -1,5 +1,5 @@
 import { Asset, Name, type Checksum256Type, type NameType } from '@wharfkit/antelope';
-import { ChainDefinition, TokenIdentifier } from '@wharfkit/common';
+import { ChainDefinition, Logo, TokenIdentifier } from '@wharfkit/common';
 
 import { Contract as DelphiHelperContract } from '$lib/wharf/contracts/delphihelper';
 import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
@@ -7,9 +7,11 @@ import { Contract as MSIGContract } from '$lib/wharf/contracts/msig';
 import { Contract as SystemContract } from '$lib/wharf/contracts/system';
 import { Contract as TimeContract } from '$lib/wharf/contracts/eosntime';
 import { Contract as TokenContract } from '$lib/wharf/contracts/token';
-import { Contract as UnicoveContract } from '$lib/wharf/contracts/unicove';
+import { Contract as UnicoveContract } from '$lib/wharf/contracts/unicove.api';
 
 import * as env from '$env/static/public';
+
+import { Token, TokenMedia, TokenMediaAsset } from '$lib/types/token';
 
 const coinbase =
 	env.PUBLIC_FEATURE_DIRECTFUNDING === 'true'
@@ -28,6 +30,28 @@ const metamask =
 			}
 		: undefined;
 
+const legacytokenasset = TokenMediaAsset.from({});
+if (env.PUBLIC_LEGACY_TOKEN_LOGO_LIGHT) {
+	legacytokenasset.light = env.PUBLIC_LEGACY_TOKEN_LOGO_LIGHT;
+}
+if (env.PUBLIC_LEGACY_TOKEN_LOGO_DARK) {
+	legacytokenasset.dark = env.PUBLIC_LEGACY_TOKEN_LOGO_DARK;
+}
+
+const legacytoken =
+	env.PUBLIC_LEGACY_TOKEN_CONTRACT && env.PUBLIC_LEGACY_TOKEN_SYMBOL
+		? Token.from({
+				id: {
+					chain: env.PUBLIC_CHAIN_ID,
+					contract: env.PUBLIC_LEGACY_TOKEN_CONTRACT,
+					symbol: env.PUBLIC_LEGACY_TOKEN_SYMBOL
+				},
+				media: TokenMedia.from({
+					logo: legacytokenasset
+				})
+			})
+		: undefined;
+
 const lockedsupply = env.PUBLIC_FEATURE_METAMASK
 	? env.PUBLIC_SYSTEM_TOKEN_LOCKED_SUPPLY.split(',').map((account) => Name.from(account))
 	: undefined;
@@ -38,16 +62,55 @@ const systemtokenalt = env.PUBLIC_SYSTEM_TOKEN_SYMBOL_ALT
 
 const isTrue = (value: string) => value === 'true';
 
-export const chainConfig: ChainConfig = {
-	id: env.PUBLIC_CHAIN_ID,
-	name: env.PUBLIC_CHAIN_SHORT,
-	systemtoken: {
+const systemtokenasset = TokenMediaAsset.from({});
+if (env.PUBLIC_SYSTEM_TOKEN_LOGO_LIGHT) {
+	systemtokenasset.light = env.PUBLIC_SYSTEM_TOKEN_LOGO_LIGHT;
+}
+if (env.PUBLIC_SYSTEM_TOKEN_LOGO_DARK) {
+	systemtokenasset.dark = env.PUBLIC_SYSTEM_TOKEN_LOGO_DARK;
+}
+export const systemtoken = Token.from({
+	id: {
+		chain: env.PUBLIC_CHAIN_ID,
 		contract: env.PUBLIC_SYSTEM_TOKEN_CONTRACT,
 		symbol: env.PUBLIC_SYSTEM_TOKEN_SYMBOL
 	},
+	media: TokenMedia.from({
+		logo: systemtokenasset
+	})
+});
+
+const ramtokenasset = TokenMediaAsset.from({});
+if (env.PUBLIC_RAM_TOKEN_LOGO_LIGHT) {
+	ramtokenasset.light = env.PUBLIC_RAM_TOKEN_LOGO_LIGHT;
+}
+if (env.PUBLIC_RAM_TOKEN_LOGO_DARK) {
+	ramtokenasset.dark = env.PUBLIC_RAM_TOKEN_LOGO_DARK;
+}
+export const ramtoken = Token.from({
+	id: {
+		chain: env.PUBLIC_CHAIN_ID,
+		contract: env.PUBLIC_SYSTEM_CONTRACT,
+		symbol: '3,KB'
+	},
+	media: TokenMedia.from({
+		logo: ramtokenasset
+	})
+});
+
+export const chainConfig: ChainConfig = {
+	id: env.PUBLIC_CHAIN_ID,
+	short: env.PUBLIC_CHAIN_SHORT,
+	name: env.PUBLIC_CHAIN_NAME,
+	logo: Logo.from({
+		dark: env.PUBLIC_CHAIN_LOGO_DARK,
+		light: env.PUBLIC_CHAIN_LOGO_LIGHT
+	}),
+	systemcontract: Name.from(env.PUBLIC_SYSTEM_CONTRACT),
+	systemtoken,
 	systemtokenalt,
+	legacytoken,
 	lockedsupply,
-	tokens: [],
 	endpoints: {
 		api: env.PUBLIC_API_CHAIN,
 		history: env.PUBLIC_API_HISTORY
@@ -62,13 +125,14 @@ export const chainConfig: ChainConfig = {
 		metamask: isTrue(env.PUBLIC_FEATURE_METAMASK),
 		powerup: isTrue(env.PUBLIC_FEATURE_POWERUP),
 		rammarket: isTrue(env.PUBLIC_FEATURE_RAMMARKET),
+		ramtransfer: isTrue(env.PUBLIC_FEATURE_RAMTRANSFER),
 		rentrex: isTrue(env.PUBLIC_FEATURE_RENTREX),
 		rex: isTrue(env.PUBLIC_FEATURE_REX),
 		robo: isTrue(env.PUBLIC_FEATURE_ROBO),
 		stakeresource: isTrue(env.PUBLIC_FEATURE_STAKERESOURCE),
 		staking: isTrue(env.PUBLIC_FEATURE_STAKING),
 		timeseries: isTrue(env.PUBLIC_FEATURE_TIMESERIES),
-		unicovecontracts: isTrue(env.PUBLIC_FEATURE_UNICOVECONTRACTS)
+		unicovecontractapi: !!env.PUBLIC_FEATURE_UNICOVE_CONTRACT_API
 	},
 	metamask,
 	coinbase
@@ -109,22 +173,20 @@ export interface ChainMetaMaskConfig {
 	serviceurl: string;
 }
 
-export interface ChainToken {
-	contract: NameType;
-	symbol: Asset.SymbolType;
-}
-
 export interface ChainConfig {
 	id: Checksum256Type;
 	name: string;
+	short: string;
+	logo: Logo;
 	features: Record<FeatureType, boolean>;
 	endpoints: ChainEndpoints;
+	legacytoken?: Token;
 	lockedsupply?: NameType[]; // Accounts where tokens exist but are not in circulation
 	coinbase?: ChainCoinbaseConfig;
 	metamask?: ChainMetaMaskConfig;
-	systemtoken: ChainToken;
+	systemcontract: Name;
+	systemtoken: Token;
 	systemtokenalt: Asset.Symbol[];
-	tokens: ChainToken[];
 }
 
 export type FeatureType =
@@ -137,16 +199,17 @@ export type FeatureType =
 	| 'metamask'
 	| 'powerup'
 	| 'rammarket'
+	| 'ramtransfer'
 	| 'rentrex'
 	| 'rex'
 	| 'robo'
 	| 'stakeresource'
 	| 'staking'
 	| 'timeseries'
-	| 'unicovecontracts';
+	| 'unicovecontractapi';
 
 export function getChainConfigByName(name: string): ChainConfig {
-	const chain = chains.find((c) => c.name === name);
+	const chain = chains.find((c) => c.short === name);
 	if (!chain) {
 		throw new Error(`Chain ${name} not configured for use in getChainConfigByName.`);
 	}
@@ -181,7 +244,7 @@ export function getChainDefinitionFromParams(network: string): ChainDefinition {
 	});
 }
 
-export const chainShortNames = chains.map((chain) => chain.name) as string[];
+export const chainShortNames = chains.map((chain) => chain.short) as string[];
 export function isNetworkShortName(value: string) {
 	return chainShortNames.includes(value);
 }

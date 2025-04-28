@@ -11,7 +11,7 @@
 </script>
 
 <!-- Unicove Logo centered with wordmark -->
-<div class={cn('mt-0.5 flex flex-col items-center gap-3 fill-shark-100', className)}>
+<div class={cn('fill-on-surface-variant mt-0.5 flex flex-col items-center gap-3', className)}>
 	<svg
 		class:size-8={small}
 		class:size-10={!small}

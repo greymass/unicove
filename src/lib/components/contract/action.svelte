@@ -9,6 +9,8 @@
 	import ContractActionParams from '$lib/components/contract/action/params.svelte';
 	import ContractActionResponse from '$lib/components/contract/action/response.svelte';
 	import Code from '$lib/components/code.svelte';
+	import Switcher from '../layout/switcher.svelte';
+	import Stack from '../layout/stack.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -24,29 +26,30 @@
 	const actionResult = $derived(abi.action_results.find((s) => s.name === action.name));
 </script>
 
-<li class="relative col-span-full grid grid-cols-subgrid bg-shark-950">
-	<div
-		class="col-span-full space-y-1 rounded-t-lg bg-mineShaft-950 px-4 py-3 md:col-span-1 md:max-w-xs md:rounded-l-lg"
-	>
+<li
+	class="border-b-outline-variant/50 relative col-span-full space-y-4 border-b py-12 first:pt-4 last:border-none"
+>
+	<div class="contract-action-overview col-span-full space-y-1">
 		<ContractActionOverview {action} {contract} />
 	</div>
 
-	<div class="grid grid-cols-2 gap-4">
-		<div class="rounded-b-lg bg-mineShaft-950/50 px-4 py-3 md:rounded-r-lg">
+	<Switcher class="gap-6">
+		<Stack>
 			{#if struct}
 				<ContractActionParams {abi} {contract} {struct} />
 			{/if}
 			{#if context.settings.data.debugMode}
 				<Code>{JSON.stringify(struct, null, 2)}</Code>
 			{/if}
-		</div>
-		<div class="rounded-b-lg bg-mineShaft-950/50 px-4 py-3 md:rounded-r-lg">
+		</Stack>
+
+		<Stack>
 			{#if actionResult}
 				<ContractActionResponse {abi} {contract} {actionResult} />
 			{/if}
 			{#if context.settings.data.debugMode}
 				<Code>{JSON.stringify(actionResult, null, 2)}</Code>
 			{/if}
-		</div>
-	</div>
+		</Stack>
+	</Switcher>
 </li>

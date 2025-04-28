@@ -23,7 +23,7 @@
 			{m.unstaking_description()}
 		</p>
 		<table class="table-styles mt-4">
-			<thead class="border-b-2 border-shark-100/10">
+			<thead class="">
 				<tr class="caption font-medium">
 					<th class="text-left">{m.common_amount()}</th>
 					<th class="text-right">{m.common_date_available()}</th>

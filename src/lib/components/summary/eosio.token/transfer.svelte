@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { formatCurrency } from '$lib/i18n';
-	import { Card, Stack } from '$lib/components/layout';
+	import { Card } from '$lib/components/layout';
 	import * as TokenContract from '$lib/wharf/contracts/token';
 	import { cn } from '$lib/utils';
 	import type { ActionSummaryProps } from '$lib/types/transaction';
@@ -12,23 +12,33 @@
 	const { data, value, ...props }: SendProps = $props();
 </script>
 
-<Card class={cn('gap-6 text-center @container', props.class)}>
-	<h3 class="h3">Token Transfer</h3>
-	<div class="flex flex-col justify-evenly gap-2 *:flex-1 @sm:flex-row">
-		<Stack class="gap-0">
-			<p class="caption">Sender</p>
-			<p class="text-nowrap text-xl font-semibold text-white">{data.from}</p>
-		</Stack>
-		<Stack class="gap-0">
-			<p class="caption">Tokens</p>
-			<p class="text-nowrap text-xl font-semibold text-white">{data.quantity}</p>
-			{#if value}
-				<p class="mt-1.5 self-start rounded bg-shark-800/60 px-2">USD {formatCurrency(value)}</p>
-			{/if}
-		</Stack>
-		<Stack class="gap-0">
-			<p class="caption">Receiver</p>
-			<p class="text-nowrap text-xl font-semibold text-white">{data.to}</p>
-		</Stack>
-	</div>
-</Card>
+<div class="flex justify-center">
+	<Card
+		class={cn(
+			' bg-surface-container-high @container w-full max-w-2xl gap-4 text-center',
+			props.class
+		)}
+	>
+		<span class="text-xl font-semibold">Token Transfer</span>
+		<hr class="text-outline-variant" />
+		<div class="grid gap-4 @md:grid-cols-3">
+			<div>
+				<p>Sender</p>
+				<p class="text-on-surface text-xl font-semibold text-nowrap">{data.from}</p>
+			</div>
+			<div>
+				<p>Tokens</p>
+				<p class="text-on-surface text-xl font-semibold text-nowrap">{data.quantity}</p>
+				{#if value}
+					<p class="bg-surface-container-highest mt-1.5 self-start rounded-sm px-2">
+						USD {formatCurrency(value)}
+					</p>
+				{/if}
+			</div>
+			<div>
+				<p>Receiver</p>
+				<p class="text-on-surface text-xl font-semibold text-nowrap">{data.to}</p>
+			</div>
+		</div>
+	</Card>
+</div>

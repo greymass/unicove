@@ -39,6 +39,10 @@ node_modules:
 build: node_modules codegen
 	bun run build
 
+.PHONY: build/docker
+build/docker: node_modules codegen
+	bun run build-docker
+
 $(CONTRACTS)/system.ts:
 	bunx @wharfkit/cli generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/system.ts eosio
 
@@ -62,11 +66,11 @@ else
 	cp ./configs/contracts/delphioracle.ts $(CONTRACTS)/delphioracle.ts
 endif
 
-$(CONTRACTS)/unicove.ts:
-ifeq ($(PUBLIC_FEATURE_UNICOVECONTRACTS),true)
-	bunx @wharfkit/cli generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/unicove.ts unicove.gm
+$(CONTRACTS)/unicove.api.ts:
+ifeq ($(PUBLIC_FEATURE_UNICOVE_CONTRACT_API),)
+	cp ./configs/contracts/unicove.api.ts $(CONTRACTS)/unicove.api.ts
 else
-	cp ./configs/contracts/unicove.ts $(CONTRACTS)/unicove.ts
+	bunx @wharfkit/cli generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/unicove.api.ts $(PUBLIC_FEATURE_UNICOVE_CONTRACT_API)
 endif
 
 $(CONTRACTS)/eosntime.ts:
@@ -76,8 +80,16 @@ else
 	cp ./configs/contracts/eosntime.ts $(CONTRACTS)/eosntime.ts
 endif
 
-codegen: $(CONTRACTS)/system.ts $(CONTRACTS)/token.ts $(CONTRACTS)/msig.ts $(CONTRACTS)/delphihelper.ts $(CONTRACTS)/delphioracle.ts $(CONTRACTS)/unicove.ts $(CONTRACTS)/eosntime.ts
+codegen: $(CONTRACTS)/system.ts $(CONTRACTS)/token.ts $(CONTRACTS)/msig.ts $(CONTRACTS)/delphihelper.ts $(CONTRACTS)/delphioracle.ts $(CONTRACTS)/unicove.api.ts $(CONTRACTS)/eosntime.ts
 	mkdir -p $(CONTRACTS)
+
+.PHONY: codegen/base
+codegen/base:
+	bunx @wharfkit/cli generate -u https://eos.greymass.com -f ./configs/contracts/delphihelper.ts delphihelper
+	bunx @wharfkit/cli generate -u https://eos.greymass.com -f ./configs/contracts/delphioracle.ts delphioracle
+	bunx @wharfkit/cli generate -u https://eos.greymass.com -f ./configs/contracts/eosntime.ts time.eosn
+	bunx @wharfkit/cli generate -u $(PUBLIC_API_CHAIN) -f ./configs/contracts/unicove.api.ts $(PUBLIC_FEATURE_UNICOVE_CONTRACT_API)
+	make format
 
 .PHONY: clean
 codegen/clean:
@@ -89,6 +101,9 @@ config/eos: codegen/clean
 config/jungle4: codegen/clean
 	cp ./configs/.env.jungle4 .env.local
 
+config/jungle4/vaulta: codegen/clean
+	cp ./configs/.env.jungle4.vaulta .env.local
+
 config/kylin: codegen/clean
 	cp ./configs/.env.kylin .env.local
 
@@ -97,6 +112,9 @@ config/telos: codegen/clean
 
 config/telostestnet: codegen/clean
 	cp ./configs/.env.telostestnet .env.local
+
+config/vaulta: codegen/clean
+	cp ./configs/.env.vaulta .env.local
 
 config/wax: codegen/clean 
 	cp ./configs/.env.wax .env.local

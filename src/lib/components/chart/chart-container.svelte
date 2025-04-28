@@ -16,9 +16,9 @@
 	let { pair, data, ...props }: Props = $props();
 
 	const range: ExtendedSelectOption[] = [
-		{ label: '1D', value: 1 },
-		{ label: '1W', value: 7 },
-		{ label: '1M', value: 30 }
+		{ label: '1d', value: 1 },
+		{ label: '1w', value: 7 },
+		{ label: '1mo', value: 30 }
 		// { label: '1Y', value: 365 } // We're currently only getting data for the last 30 days
 	];
 
@@ -62,7 +62,7 @@
 	<header class="flex justify-between">
 		<div>
 			<p class="text-muted">{pair}</p>
-			<p class="text-xl font-semibold text-white">{currentPrice}</p>
+			<p class="text-on-surface text-xl font-semibold">{currentPrice}</p>
 			<p class="text-muted">{percentChange}</p>
 		</div>
 		<Select id="range-select" options={range} bind:selected={selectedRange} />
@@ -75,13 +75,13 @@
 		{/if}
 	</div>
 
-	<hr class="h-px border-0 bg-mineShaft-800" />
+	<hr class="bg-outline h-px border-0" />
 
 	<div class="flex items-center justify-between font-medium">
 		<span class="text-muted">{startDate}</span>
 		<div class="flex gap-4">
 			<div class="flex items-center gap-1">
-				<div class="size-4 rounded bg-[#00ED97]"></div>
+				<div class="size-4 rounded-sm bg-[#00ED97]"></div>
 				<span class="text-[#00ED97]">{pair}</span>
 			</div>
 		</div>

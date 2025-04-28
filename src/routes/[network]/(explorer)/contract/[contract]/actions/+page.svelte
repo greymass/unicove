@@ -15,7 +15,7 @@
 <Stack>
 	<p>The actions for this contract with their input parameters and potential response data.</p>
 	<TextInput bind:value={filter} autofocus placeholder="Filter actions..." />
-	<ul class="grid grid-cols-[auto_1fr] gap-4 overflow-x-auto">
+	<ul class="grid grid-cols-[auto_1fr] gap-x-4 overflow-x-auto">
 		{#each filteredActions as action}
 			<Action abi={data.abi} contract={data.contract} network={data.network} {action} />
 		{:else}

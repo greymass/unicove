@@ -42,7 +42,7 @@
 	<div
 		use:melt={$tooltipContent}
 		transition:fade={{ duration: fadeDuration }}
-		class="z-50 flex max-w-xs items-center rounded-md border border-mineShaft-600 bg-shark-900/20 px-4 py-3 text-sm text-white shadow-md"
+		class="border-outline bg-surface-container text-on-surface z-50 flex max-w-xs items-center rounded-md border px-4 py-3 text-sm shadow-md"
 	>
 		{#if icon}
 			{@const IconComponent = icon}

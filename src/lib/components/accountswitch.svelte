@@ -9,13 +9,10 @@
 		type SerializedSession,
 		type WalletPlugin
 	} from '@wharfkit/session';
-	import { chainLogos } from '@wharfkit/common';
 	import * as m from '$lib/paraglide/messages';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
-
-	import NetworkSwitch from '$lib/components/networkswitch.svelte';
 
 	import X from 'lucide-svelte/icons/x';
 	import CircleX from 'lucide-svelte/icons/circle-x';
@@ -70,7 +67,7 @@
 		onOpenChange: resetAddingAccount
 	});
 
-	let logo = $derived(chainLogos.get(String(context.wharf.session?.chain.id)) || '');
+	let logo = $derived(context.network.config.logo || '');
 
 	function closeDrawer() {
 		$open = false;
@@ -107,7 +104,7 @@
 			walletPlugin: wallet.id
 		};
 		if (wallet.id !== 'cleos' && wallet.id !== 'wallet-plugin-multisig') {
-			options.chain = context.network.chain;
+			options.chain = context.network.chain.id;
 		}
 		const session = await context.wharf.login(options);
 		redirect(session.actor);
@@ -135,7 +132,7 @@
 <!-- Trigger Button -->
 <button
 	class={cn(
-		'relative z-50 h-10 text-nowrap rounded-lg border border-mineShaft-600 text-base font-medium focus:outline-transparent focus-visible:outline focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-solar-500',
+		'border-outline focus-visible:ring-solar-500 relative z-50 h-10 rounded-lg border text-base font-medium text-nowrap focus:outline-transparent focus-visible:ring-2 focus-visible:outline focus-visible:ring-inset',
 		className
 	)}
 	use:melt={$trigger}
@@ -144,7 +141,7 @@
 	data-session={!!context.wharf.session}
 >
 	{#if context.wharf.session}
-		<div class="flex items-center gap-2 pl-3.5 pr-4">
+		<div class="flex items-center gap-2 pr-4 pl-3.5">
 			<picture class="size-5">
 				<img
 					src={String(logo)}
@@ -154,7 +151,7 @@
 					width="20"
 				/>
 			</picture>
-			<span class="pointer-events-none z-10 text-base text-white/90"
+			<span class="text-on-surface pointer-events-none z-10 text-base"
 				>{context.wharf.session.actor}</span
 			>
 		</div>
@@ -164,38 +161,46 @@
 </button>
 
 {#if $open}
-	<div class="" use:melt={$portalled}>
+	<div data-theme={network} class="" use:melt={$portalled}>
 		<!-- Scrim -->
 		<div
 			use:melt={$overlay}
-			class="fixed inset-0 z-50 bg-black/50"
+			class="bg-scrim fixed inset-0 z-50"
 			transition:fade={{ duration: 150 }}
 		></div>
 
 		<!-- Content -->
 		<div
 			use:melt={$content}
-			class="fixed right-0 top-0 z-50 flex h-svh min-w-80 max-w-fit flex-col space-y-4 overflow-y-auto overflow-x-hidden bg-shark-950 px-4 py-4 shadow-lg focus:outline-none md:px-6"
+			class="bg-surface-container fixed top-0 right-0 z-50 flex h-svh max-w-fit min-w-80 flex-col space-y-4 overflow-x-hidden overflow-y-auto px-4 py-4 shadow-lg focus:outline-hidden md:px-6"
 			transition:fly={{
 				x: 350,
 				duration: 300,
 				opacity: 1
 			}}
 		>
-			<header
-				data-advanced={context.settings.data.advancedMode}
-				class="flex flex-row-reverse justify-between gap-2 data-[advanced=false]:items-center md:gap-4"
-			>
+			<header class="flex items-center justify-start gap-2 py-3 pl-2 md:gap-3">
+				{#if logo}
+					<picture class="flex size-10 justify-center">
+						<img
+							src={String(logo)}
+							class="h-full object-contain"
+							alt={String(currentSession?.chain.name)}
+						/>
+					</picture>
+				{/if}
+
+				<span class="m-0 flex-1 text-xl leading-none font-bold text-ellipsis md:text-2xl">
+					{network.chain.name}
+				</span>
+
 				<button
 					use:melt={$close}
 					aria-label="Close"
-					data-advanced={context.settings.data.advancedMode}
-					class="text-muted grid size-12 appearance-none place-items-center rounded-lg focus:text-white focus:outline-none md:data-[advanced=false]:pt-0 md:data-[advanced=true]:pt-2.5"
+					class="text-muted focus:text-on-surface grid size-12 appearance-none place-items-center justify-self-end rounded-lg focus:outline-hidden"
 				>
-					<X class="size-4 " />
+					<X class="size-4" />
 				</button>
-
-				<NetworkSwitch currentNetwork={network} class="" />
 			</header>
 
 			<section id="content" class="grid">
@@ -206,7 +211,7 @@
 						in:fly={{ x: -100, duration: 100 }}
 						out:fly={{ x: -100, duration: 100 }}
 					>
-						<Button onclick={addAccount} variant="secondary" class="grow-0 text-white">
+						<Button onclick={addAccount} variant="secondary" class="text-on-surface grow-0">
 							<div class="flex items-center gap-2">
 								<UserPlus class="mb-0.5 size-5" />
 								<span>{m.common_add_account()}</span>
@@ -243,12 +248,7 @@
 									<button
 										data-current={isCurrent}
 										onclick={() => switchSession(session)}
-										class="flex h-12 items-center gap-1 rounded-lg px-4
-										data-[current=true]:bg-skyBlue-700
-										data-[current=true]:text-skyBlue-50
-										[@media(any-hover:hover)]:data-[current=false]:hover:bg-mineShaft-950
-										[@media(any-hover:hover)]:data-[current=false]:hover:text-mineShaft-50
-										"
+										class="text-on-surface-variant data-[current=false]:hover:bg-surface-container-high data-[current=false]:hover:text-on-surface data-[current=true]:bg-primary data-[current=true]:text-on-primary flex h-12 items-center gap-1 rounded-lg px-4"
 									>
 										<div class="w-6">
 											{#if isCurrent}
@@ -272,10 +272,7 @@
 									<button
 										onclick={() => removeSession(session)}
 										data-current={isCurrent}
-										class="text-muted grid size-12 place-items-center rounded-lg
-										[@media(any-hover:hover)]:hover:bg-mineShaft-950
-										[@media(any-hover:hover)]:hover:text-mineShaft-50
-										"
+										class="text-muted hover:bg-surface-container-high hover:text-on-surface grid size-12 place-items-center rounded-lg"
 									>
 										<LogOut class="size-4" />
 									</button>
@@ -295,7 +292,7 @@
 
 {#snippet connectWalletScreen()}
 	<div class="space-y-4" in:fly={{ x: 100, duration: 150 }} out:fly={{ x: 100, duration: 100 }}>
-		<hr class="border-mineShaft-900" />
+		<hr class="border-outline-variant" />
 
 		<header class="grid justify-center gap-2 py-4 text-center">
 			<span class="h4">{m.common_login_to_unicove()}</span>
@@ -308,7 +305,7 @@
 					{#if wallet.id !== 'wallet-plugin-multisig'}
 						<li class="table-row-background table-row-border col-span-full grid grid-cols-subgrid">
 							<button
-								class="col-span-full grid grid-cols-subgrid gap-4 px-2 py-4 font-semibold text-white"
+								class="text-on-surface col-span-full grid grid-cols-subgrid gap-4 px-2 py-4 font-semibold"
 								onclick={() => connectWallet(wallet)}
 							>
 								{#if wallet.metadata.logo}
@@ -331,7 +328,7 @@
 			<!-- <Button  href={`/${network}/signup`} onclick={closeDrawer} variant="primary"> -->
 			<!-- 	Create account -->
 			<!-- </Button> -->
-			<Button class="text-white" onclick={closeAddingAccount} variant="secondary"
+			<Button class="text-on-surface" onclick={closeAddingAccount} variant="secondary"
 				>{m.common_cancel()}</Button
 			>
 		</div>

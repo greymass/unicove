@@ -10,11 +10,11 @@
 	import { MetaMaskState } from '$lib/state/metamask.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
 	import { Cluster, Stack } from '$lib/components/layout/index.js';
-	import { chainLogos } from '@wharfkit/common';
 	import { DD, DL, DLRow } from '$lib/components/descriptionlist/index.js';
 	import TextInput from '$lib/components/input/text.svelte';
 	import CopyButton from '$lib/components/button/copy.svelte';
 	import * as m from '$lib/paraglide/messages';
+	import Code from '$lib/components/code.svelte';
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');
@@ -77,7 +77,11 @@
 
 		const response = await fetch(`https://registry.npmjs.org/${npmPackage}/latest`);
 		packageInfo = await response.json();
-		packageName = packageInfo.name.slice(1);
+		if (String(packageInfo.name).startsWith('@')) {
+			packageName = packageInfo.name.slice(1);
+		} else {
+			packageName = packageInfo.name;
+		}
 		latestVersion = packageInfo.version;
 	}
 
@@ -95,7 +99,7 @@
 
 	async function login() {
 		context.wharf.login({
-			chain: data.network.chain,
+			chain: data.network.chain.id,
 			walletPlugin: 'wallet-plugin-metamask'
 		});
 	}
@@ -119,13 +123,13 @@
 		}
 	}
 
-	const networkLogo = String(chainLogos.get(String(data.network.chain.id)));
+	const networkLogo = data.network.config.logo;
 	const networkName = data.network.chain.name;
 	const productName = data.network.config.metamask?.name || '';
 </script>
 
-<section class="col-span-full @container">
-	<div class="grid min-h-72 rounded-2xl bg-mineShaft-950 px-4 @2xl:grid-cols-2 @2xl:gap-4">
+<section class="@container col-span-full">
+	<div class="bg-surface-container grid min-h-72 rounded-2xl px-4 @2xl:grid-cols-2 @2xl:gap-4">
 		<div class="grid place-items-center">
 			<svg
 				class="col-start-1 row-start-1 h-full w-full object-cover"
@@ -154,7 +158,7 @@
 				class="col-start-1 row-start-1 grid max-w-sm grid-cols-3 items-center justify-items-center"
 			>
 				<img
-					class="h-40 rounded-full bg-mineShaft-950 object-contain"
+					class="bg-surface-container h-40 rounded-full object-contain"
 					src={Metamask}
 					alt="metamask"
 				/>
@@ -162,14 +166,14 @@
 					<path d="M18.008 0v36M36.008 18h-36" stroke="#fff" />
 				</svg>
 				<img
-					class="h-40 rounded-full bg-mineShaft-950 object-contain px-2 py-4"
-					src={networkLogo}
+					class="bg-surface-container h-40 rounded-full object-contain px-2 py-4"
+					src={String(networkLogo)}
 					alt={networkName}
 				/>
 			</div>
 		</div>
 
-		<Box class="grid content-start justify-items-start gap-4 text-pretty py-8 *:shrink">
+		<Box class="grid content-start justify-items-start gap-4 py-8 text-pretty *:shrink">
 			{#if !metaMaskState.isMetaMaskReady}
 				<h2 class="text-xl font-semibold">
 					{m.metamask_install_title({
@@ -190,7 +194,7 @@
 					</p>
 				</Stack>
 				<Button href={'https://metamask.io/download/'} blank>{m.metamask_install_action()}</Button>
-				<p class="text-balance text-xs">
+				<p class="text-xs text-balance">
 					{m.metamask_install_action_note()}
 				</p>
 			{:else if currentVersion}
@@ -217,7 +221,7 @@
 							{m.metamask_install_ready_description({
 								name: productName
 							})}
-							<a href="https://www.npmjs.com/package/@{packageName}/v/{currentVersion}"
+							<a href="https://www.npmjs.com/package/{packageName}/v/{currentVersion}"
 								>{m.common_version()} {currentVersion}</a
 							>.
 						</p>
@@ -280,8 +284,22 @@
 	</div>
 </section>
 
+{#if context.settings.data.debugMode}
+	<Code
+		json={{
+			snapOrigin: metaMaskState.snapOrigin,
+			isFlask: metaMaskState.isFlask,
+			isInstalled: metaMaskState.isInstalled,
+			error: metaMaskState.error,
+			installedSnap: metaMaskState.installedSnap,
+			publicKey: metaMaskState.publicKey,
+			ownerKey: metaMaskState.ownerKey
+		}}
+	/>
+{/if}
+
 {#snippet link(text: string, href: string)}
-	<a {href} class="underline hover:text-zinc-300" target="_blank">
+	<a {href} class="hover:text-muted underline" target="_blank">
 		{text}
 	</a>
 {/snippet}
@@ -492,7 +510,7 @@
 				{#if latestVersion}
 					<DLRow title="Latest Version">
 						<DD>
-							<a href="https://www.npmjs.com/package/@{packageName}?activeTab=versions">
+							<a href="https://www.npmjs.com/package/{packageName}?activeTab=versions">
 								{latestVersion}
 							</a>
 						</DD>

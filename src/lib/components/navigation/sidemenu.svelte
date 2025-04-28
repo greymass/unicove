@@ -74,12 +74,12 @@
 	});
 </script>
 
-<menu class="flex flex-col gap-2 text-nowrap text-base font-medium text-white">
+<menu class="text-on-surface flex flex-col gap-2 text-base font-medium text-nowrap">
 	{#each destinations as option}
 		<a
 			href={option.href}
-			class="flex h-12 select-none items-center rounded-lg leading-snug transition-opacity hover:opacity-100 focus-visible:opacity-100 focus-visible:outline focus-visible:outline-solar-500"
-			class:opacity-50={!option.active}
+			class="focus-visible:outline-solar-500 flex h-12 items-center rounded-lg leading-snug transition-opacity select-none hover:opacity-100 focus-visible:opacity-100 focus-visible:outline"
+			class:opacity-60={!option.active}
 			class:opacity-100={option.active}
 			aria-current={!!option.active}
 			onclick={callbackFn}
@@ -87,7 +87,7 @@
 			<span
 				class="border-b-2 pb-1"
 				class:border-transparent={!option.active}
-				class:border-skyBlue-500={option.active}
+				class:border-primary={option.active}
 			>
 				{option.text}
 			</span>

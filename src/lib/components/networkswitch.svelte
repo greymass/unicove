@@ -23,7 +23,7 @@
 
 	const { class: className, currentNetwork, ...props }: Props = $props();
 
-	let logo = $derived(chainLogos.get(currentNetwork?.chain.id.toString()));
+	let logo = $derived(currentNetwork.config.logo);
 
 	let options = $derived(
 		Object.entries(chainMap)
@@ -58,8 +58,8 @@
 <button
 	id="network-switcher"
 	class={cn(
-		'flex items-center gap-3 rounded-2xl px-4 py-3.5  focus:bg-mineShaft-950 focus:outline-none',
-		!!context.settings.data.advancedMode && 'hover:bg-mineShaft-950',
+		'focus:bg-surface-container flex items-center gap-3 rounded-2xl px-4  py-3.5 focus:outline-hidden',
+		!!context.settings.data.advancedMode && 'hover:bg-transparent',
 		className
 	)}
 	use:melt={$trigger}
@@ -79,12 +79,12 @@
 	</picture>
 
 	<div class="grid flex-1 justify-items-start gap-0.5 md:gap-0">
-		<span class="m-0 overflow-ellipsis text-xl font-bold leading-none md:text-2xl"
+		<span class="m-0 text-xl leading-none font-bold text-ellipsis md:text-2xl"
 			>{currentNetwork.chain.name}</span
 		>
 
 		{#if options.length > 1 && context.settings.data.advancedMode}
-			<div class="font-regular m-0 flex items-center gap-1 pr-1 text-base text-zinc-400">
+			<div class="font-regular text-muted m-0 flex items-center gap-1 pr-1 text-base">
 				<span use:melt={$label}>{m.change_network()}</span>
 				<ChevronDown
 					data-open={$open}
@@ -97,26 +97,26 @@
 
 {#if $open}
 	<div
-		class="z-50 flex max-h-[300px] flex-col overflow-y-auto rounded-lg bg-mineShaft-950 p-1 shadow focus:!ring-0"
+		class="bg-surface-container z-50 flex max-h-[300px] flex-col overflow-y-auto rounded-lg p-1 shadow-sm focus:ring-0!"
 		use:melt={$menu}
 		transition:fade={{ duration: 150 }}
 	>
 		{#each options as chain}
 			<div
 				class="
-				relative flex h-12
-				cursor-pointer items-center gap-2 rounded-lg
+				data-highlighted:bg-solar-200 data-highlighted:text-solar-900 relative
+				flex h-12 cursor-pointer items-center
+					gap-2
+					rounded-lg
 					px-4
-					data-[highlighted]:bg-solar-200
-					data-[highlighted]:text-solar-900
-					data-[disabled]:opacity-50"
+					data-disabled:opacity-50"
 				use:melt={$option(chain)}
 			>
 				<picture class="flex size-6 items-center justify-center">
 					{#if chain.logo}
 						<img class="h-full object-contain" src={String(chain.logo)} alt={chain.label} />
 					{:else}
-						<FileQuestion class="size-4 text-zinc-400" />
+						<FileQuestion class="text-muted size-4" />
 					{/if}
 				</picture>
 				<span> {chain.label} </span>
