@@ -73,7 +73,7 @@
 	<!-- Buy Sell Card -->
 	<Card class="flex *:flex-1">
 		<div class="grid content-between gap-4">
-			<div class="grid">
+			<div>
 				<h3 class="text-muted text-base">{m.common_labeled_unit_available({ unit: 'RAM' })}</h3>
 				<AssetText class="text-xl font-semibold" variant="full" value={ramLiquid} />
 			</div>
