@@ -372,7 +372,7 @@
 {/snippet}
 
 {#snippet Memo()}
-	<div class:hidden={!showAll && f.current !== 'memo'}>
+	<div class:hidden={!showAll && f.current !== 'memo'} class="space-y-4">
 		<SummarySend data={sendState.toJSON()} />
 
 		<fieldset class="grid gap-2">
