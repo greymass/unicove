@@ -5,9 +5,10 @@ import * as m from '$lib/paraglide/messages';
 import { getNetworkByName } from '$lib/state/network.svelte';
 import type { LayoutLoad } from './$types';
 import { PUBLIC_CHAIN_SHORT } from '$env/static/public';
+import { Code } from 'lucide-svelte';
 
 export const load: LayoutLoad = async ({ fetch, params }) => {
-	const network = await getNetworkByName(PUBLIC_CHAIN_SHORT, fetch);
+	const network = getNetworkByName(PUBLIC_CHAIN_SHORT, fetch);
 	if (!network.loaded) {
 		await network.refresh();
 	}
@@ -30,6 +31,10 @@ export const load: LayoutLoad = async ({ fetch, params }) => {
 		subtitle: m.account_page_subtitle({
 			network: network.chain.name
 		}),
+		header: {
+			copyData: params.name,
+			actions: [{ icon: Code, href: `/${network}/contract/${params.name}` }]
+		},
 		pageMetaTags: {
 			title: m.account_meta_title({
 				account: String(params.name),

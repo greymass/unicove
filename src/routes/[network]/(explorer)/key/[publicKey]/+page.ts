@@ -21,6 +21,9 @@ export const load: PageLoad = async ({ fetch, params, parent }) => {
 		.then((response) => response.json())
 		.then((json) => json.accounts || []);
 
+	// TODO: The title should follow the rest of the sections of the explorer and be the public key.
+	// The pageheader component should be in charge of visually truncating the text but the full text should
+	// still be in the DOM for a11y and SEO
 	const title = m.key_page_title();
 	const description = m.key_page_description({
 		accounts: accounts.length,
@@ -31,6 +34,9 @@ export const load: PageLoad = async ({ fetch, params, parent }) => {
 	return {
 		title,
 		subtitle,
+		header: {
+			copyData: pubkey
+		},
 		publicKey: pubkey,
 		accounts,
 		network: PUBLIC_CHAIN_SHORT,

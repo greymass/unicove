@@ -44,6 +44,9 @@ export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 		number: params.number,
 		title,
 		subtitle: date.toISOString(),
+		header: {
+			copyData: params.number
+		},
 		block,
 		details,
 		network: PUBLIC_CHAIN_SHORT,
