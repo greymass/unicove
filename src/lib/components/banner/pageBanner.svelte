@@ -45,7 +45,7 @@
 	>
 		<a
 			class="text-on-surface col-start-2 py-4 underline underline-offset-4 md:col-span-3 md:col-start-1 md:text-center"
-			href="https://eosnetwork.com/resources/opening-the-gateway-to-web3-banking/"
+			href="https://www.vaulta.com/resources/opening-the-gateway-to-web3-banking"
 		>
 			<svg
 				class="mr-4 inline h-5 w-auto"
