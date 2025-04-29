@@ -1,10 +1,8 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import { SingleCard, Stack } from '$lib/components/layout';
 	import Generic404 from '$lib/components/errors/generic.svelte';
 	// import Code from '$lib/components/code.svelte';
-
-	// const debugMode = getDebugMode() // TODO: merge ux-suggestion branch first
 </script>
 
 <!-- This error page gets triggered if any of the routes in the sibling directories fail -->
@@ -17,8 +15,8 @@
 			<Generic404 />
 		</div>
 		<h1 class="h2">
-			{#if $page.error?.message}
-				{$page.error.message}
+			{#if page.error?.message}
+				{page.error.message}
 			{:else}
 				Page not found
 			{/if}

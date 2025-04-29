@@ -1,7 +1,23 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
+	import { Stack } from '$lib/components/layout';
+	import Generic404 from '$lib/components/errors/generic.svelte';
+	import Button from '$lib/components/button/button.svelte';
 </script>
 
-<!-- This error page would get triggered if the user entered an invalid URL like /en/eos/asdf  -->
-<!-- TODO: We'll need some alternative styling here since it doesn't inherit any layout from the rest of the site. -->
-<pre>{JSON.stringify($page.error, null, 2)}</pre>
+<div class="mx-auto max-w-prose">
+	<Stack class="py-8 text-center">
+		<div class=" *:object-fit mx-auto max-w-prose *:size-full">
+			<Generic404 />
+		</div>
+		<h1 class="h2">
+			{#if page.error?.message}
+				{page.error.message}
+			{:else}
+				Page not found
+			{/if}
+		</h1>
+
+		<Button class="mx-auto max-w-fit" variant="primary" href="/">Go to Unicove</Button>
+	</Stack>
+</div>
