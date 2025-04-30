@@ -18,7 +18,7 @@ import {
 	defaultRexFund,
 	nullContractHash
 } from '$lib/state/defaults/account';
-import { Token, TokenBalance, TokenDefinition, tokenEquals } from '$lib/types/token';
+import { TokenBalance, TokenDefinition, tokenEquals } from '$lib/types/token';
 
 export const GET: RequestHandler = async ({ locals: { network }, params }: RequestEvent) => {
 	const headers = getCacheHeaders(5);
