@@ -58,7 +58,7 @@ const redirects: Record<string, string> = {
 	'/earn': '/staking',
 	'/resources/ram/buy': '/ram/buy',
 	'/resources/ram/sell': '/ram/sell',
-	'/swap/vaulta': '/swap/eosio.token/4,eos/core.vaulta/4,xyz'
+	'/swap/eos': '/swap/eosio.token/4,eos/core.vaulta/4,xyz'
 };
 
 function getManualRedirectPath(pathMore: string[]): string {

@@ -31,7 +31,14 @@ import {
 } from '$lib/state/defaults/account';
 import * as SystemContract from '$lib/wharf/contracts/system';
 import { Types as REXTypes } from '$lib/types/rex';
-import { Token, TokenBalance, TokenDefinition, tokenEquals, ZeroUnits } from '$lib/types/token';
+import {
+	Token,
+	TokenBalance,
+	TokenBalanceChild,
+	TokenDefinition,
+	tokenEquals,
+	ZeroUnits
+} from '$lib/types/token';
 
 export class AccountState {
 	public client?: APIClient = $state();
@@ -381,24 +388,44 @@ export function getBalances(
 	const balances: TokenBalance[] = sources.balances.map((b) => TokenBalance.from(b));
 	const token = network.getRamToken();
 
+	// Calculate RAM child balances
+	const ramtotal = TokenBalanceChild.from({
+		token,
+		balance: Asset.fromUnits(resources.ram.owned, token.symbol),
+		name: 'total'
+	});
+	const ramused = TokenBalanceChild.from({
+		token,
+		balance: Asset.fromUnits(resources.ram.used, token.symbol),
+		name: 'used'
+	});
+
+	let wrambalance: TokenBalanceChild | undefined;
+	if (network.supports('wram')) {
+		const wram = network.getWRAMToken();
+		const balance = balances.find((b) => tokenEquals(b.token.id, wram.id));
+		const wramasset = balance ? balance.balance : Asset.fromUnits(0, wram.symbol);
+		ramtotal.balance.units.add(wramasset.units);
+		wrambalance = TokenBalanceChild.from({
+			token: wram,
+			balance: wramasset,
+			name: 'wram'
+		});
+	}
+
+	const children: TokenBalanceChild[] = [ramtotal, ramused];
+
+	if (wrambalance) {
+		children.push(wrambalance);
+	}
+
 	// Add RAM balance to the list of balances
 	balances.push(
 		TokenBalance.from({
 			token,
 			balance: Asset.fromUnits(resources.ram.available, token.symbol),
 			locked: !network.supports('ramtransfer'),
-			children: [
-				{
-					token,
-					balance: Asset.fromUnits(resources.ram.used, token.symbol),
-					name: 'used'
-				},
-				{
-					token,
-					balance: Asset.fromUnits(resources.ram.owned, token.symbol),
-					name: 'total'
-				}
-			]
+			children
 		})
 	);
 

@@ -18,7 +18,7 @@ import {
 	defaultRexFund,
 	nullContractHash
 } from '$lib/state/defaults/account';
-import { Token, TokenBalance, TokenDefinition, tokenEquals } from '$lib/types/token';
+import { TokenBalance, TokenDefinition, tokenEquals } from '$lib/types/token';
 
 export const GET: RequestHandler = async ({ locals: { network }, params }: RequestEvent) => {
 	const headers = getCacheHeaders(5);
@@ -67,13 +67,13 @@ async function loadBalances(
 		);
 		const json: LightAPIBalanceResponse = await result.json();
 		balances = json.balances.map((b) => {
-			let token = Token.from({
-				id: {
+			let token = network.getToken(
+				TokenDefinition.from({
 					chain: network.chain.id,
 					contract: b.contract,
 					symbol: `${b.decimals},${b.currency}`
-				}
-			});
+				})
+			);
 			if (
 				network.config.legacytoken &&
 				tokenEquals(TokenDefinition.from(token.id), network.config.legacytoken.id)

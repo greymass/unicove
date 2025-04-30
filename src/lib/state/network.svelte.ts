@@ -12,7 +12,6 @@ import {
 import { ChainDefinition } from '@wharfkit/common';
 import { RAMState, Resources as ResourceClient, REXState, PowerUpState } from '@wharfkit/resources';
 import { ABICache } from '@wharfkit/abicache';
-import { snapOrigins } from '@wharfkit/wallet-plugin-metamask';
 
 import {
 	NetworkDataSources,
@@ -29,7 +28,8 @@ import {
 	type FeatureType,
 	getChainConfigByName,
 	systemtoken,
-	ramtoken
+	ramtoken,
+	wramtoken
 } from '$lib/wharf/chains';
 
 import { Token, ZeroUnits, TokenDefinition, tokenEquals } from '$lib/types/token';
@@ -42,7 +42,10 @@ import { Contract as TimeContract } from '$lib/wharf/contracts/eosntime';
 import { Contract as TokenContract } from '$lib/wharf/contracts/token';
 import { Contract as UnicoveContract } from '$lib/wharf/contracts/unicove.api';
 import type { ObjectifiedActionData } from '$lib/types/transaction';
-import { PUBLIC_FEATURE_UNICOVE_CONTRACT_API } from '$env/static/public';
+import {
+	PUBLIC_FEATURE_METAMASK_SNAP_ORIGIN,
+	PUBLIC_FEATURE_UNICOVE_CONTRACT_API
+} from '$env/static/public';
 
 export class NetworkState {
 	// Readonly state
@@ -75,7 +78,7 @@ export class NetworkState {
 	constructor(config: ChainConfig, options: NetworkStateOptions = {}) {
 		this.config = config;
 		this.chain = getChainDefinitionFromParams(config.short);
-		this.snapOrigin = snapOrigins.get(String(this));
+		this.snapOrigin = PUBLIC_FEATURE_METAMASK_SNAP_ORIGIN;
 
 		if (options.fetch) {
 			this.fetch = options.fetch;
@@ -155,6 +158,10 @@ export class NetworkState {
 		return Token.from(ramtoken);
 	}
 
+	getWRAMToken(): Token {
+		return Token.from(wramtoken);
+	}
+
 	getSystemToken(): Token {
 		const token = Token.from(systemtoken);
 
@@ -171,6 +178,9 @@ export class NetworkState {
 		}
 		if (tokenEquals(id, ramtoken.id)) {
 			return this.getRamToken();
+		}
+		if (tokenEquals(id, wramtoken.id)) {
+			return this.getWRAMToken();
 		}
 		if (this.config.legacytoken && tokenEquals(id, this.config.legacytoken.id)) {
 			return this.config.legacytoken;
@@ -336,7 +346,7 @@ export class NetworkState {
 			connection: this.connection,
 			loaded: this.loaded,
 			resources: this.resources,
-			snapOrigins: this.snapOrigin,
+			snapOrigin: this.snapOrigin,
 			token: this.token,
 			tokens: this.tokens
 		};

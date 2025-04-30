@@ -35,7 +35,7 @@
 	// Only use melt builder element if passed as a prop
 	let meltElement = $derived(meltAction ?? emptyMeltElement);
 
-	let linkProps = $derived(() =>
+	let linkProps = $derived.by(() =>
 		props.href && props.blank
 			? {
 					target: '_blank',

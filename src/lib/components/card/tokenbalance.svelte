@@ -66,6 +66,7 @@
 	const balanceUnstaked = $derived(_balance.child('unstaked'));
 	const balanceDelegated = $derived(_balance.child('delegated'));
 	const balanceUsed = $derived(_balance.child('used'));
+	const balanceWRAM = $derived(_balance.child('wram'));
 
 	let detailsElement = $state<HTMLDetailsElement>();
 
@@ -207,6 +208,13 @@
 
 		{#if balanceUsed && balanceUsed.balance.value > 0}
 			{@render SubBalance(m.common_used(), balanceUsed.balance)}
+		{/if}
+
+		{#if isRamToken && balanceWRAM}
+			{@render SubBalance('WRAM', balanceWRAM.balance, {
+				text: 'Swap',
+				href: `/${network}/swap/${balanceWRAM.token.id.url}/${network.getRamToken().id.url}`
+			})}
 		{/if}
 
 		{#if cta && cta.length}

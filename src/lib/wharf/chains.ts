@@ -97,6 +97,16 @@ export const ramtoken = Token.from({
 		logo: ramtokenasset
 	})
 });
+export const wramtoken = Token.from({
+	id: {
+		chain: env.PUBLIC_CHAIN_ID,
+		contract: 'eosio.wram',
+		symbol: '0,WRAM'
+	},
+	media: TokenMedia.from({
+		logo: ramtokenasset
+	})
+});
 
 export const chainConfig: ChainConfig = {
 	id: env.PUBLIC_CHAIN_ID,
@@ -132,7 +142,8 @@ export const chainConfig: ChainConfig = {
 		stakeresource: isTrue(env.PUBLIC_FEATURE_STAKERESOURCE),
 		staking: isTrue(env.PUBLIC_FEATURE_STAKING),
 		timeseries: isTrue(env.PUBLIC_FEATURE_TIMESERIES),
-		unicovecontractapi: !!env.PUBLIC_FEATURE_UNICOVE_CONTRACT_API
+		unicovecontractapi: !!env.PUBLIC_FEATURE_UNICOVE_CONTRACT_API,
+		wram: isTrue(env.PUBLIC_FEATURE_WRAM)
 	},
 	metamask,
 	coinbase
@@ -206,7 +217,8 @@ export type FeatureType =
 	| 'stakeresource'
 	| 'staking'
 	| 'timeseries'
-	| 'unicovecontractapi';
+	| 'unicovecontractapi'
+	| 'wram';
 
 export function getChainConfigByName(name: string): ChainConfig {
 	const chain = chains.find((c) => c.short === name);

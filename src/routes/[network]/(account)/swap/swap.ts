@@ -46,6 +46,15 @@ export function deriveSwapAction(
 					};
 					break;
 				}
+				case 'ramtransfer': {
+					data = {
+						from: account.name,
+						to: swap.pair.quote.contract,
+						bytes: String(quantity.units),
+						memo: ''
+					};
+					break;
+				}
 				default: {
 					data = defaultSwap;
 					break;

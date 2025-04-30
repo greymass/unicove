@@ -475,28 +475,32 @@
 		<p class="inline">{m.metamask_install_faq_a12_p2()}</p>
 		<p>{@render link('https://support.greymass.com', 'https://support.greymass.com')}</p>
 	</section>
+
 	<div class="w-80">
 		<Stack class="gap-4">
 			{#if context.settings.data.advancedMode}
-				<h2 class="text-2xl font-semibold">{m.common_your_public_keys()}</h2>
-				{#if metaMaskState.publicKey}
-					<p>{m.metamask_public_key_active()}</p>
-					<TextInput bind:value={metaMaskState.publicKey} disabled>
-						<CopyButton data={String(metaMaskState.publicKey)} />
-					</TextInput>
-				{/if}
-				{#if metaMaskState.ownerKey}
-					<p>{m.metamask_public_key_owner()}</p>
-					<TextInput bind:value={metaMaskState.ownerKey} disabled>
-						<CopyButton data={String(metaMaskState.ownerKey)} />
-					</TextInput>
+				{#if metaMaskState.publicKey || metaMaskState.ownerKey}
+					<h2 class="text-2xl font-semibold">{m.common_your_public_keys()}</h2>
+					{#if metaMaskState.publicKey}
+						<p>{m.metamask_public_key_active()}</p>
+						<TextInput bind:value={metaMaskState.publicKey} disabled>
+							<CopyButton data={String(metaMaskState.publicKey)} />
+						</TextInput>
+					{/if}
+					{#if metaMaskState.ownerKey}
+						<p>{m.metamask_public_key_owner()}</p>
+						<TextInput bind:value={metaMaskState.ownerKey} disabled>
+							<CopyButton data={String(metaMaskState.ownerKey)} />
+						</TextInput>
+					{/if}
 				{/if}
 			{/if}
+
 			<h2 class="text-2xl font-semibold">{m.common_details()}</h2>
 			<DL>
 				<DLRow title={m.metamask_snaps_directory()}>
 					<DD>
-						<a href="https://snaps.metamask.io/snap/npm/{packageName}">
+						<a class="text-nowrap" href="https://snaps.metamask.io/snap/npm/{packageName}">
 							{networkName} Wallet
 						</a>
 					</DD>
