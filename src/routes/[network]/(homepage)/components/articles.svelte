@@ -4,7 +4,7 @@
 	import Button from '$lib/components/button/button.svelte';
 	import IconButton from '$lib/components/button/icon.svelte';
 	import type { Article } from '$lib/types/content';
-	import { ChevronLeft, ChevronRight, Circle } from 'lucide-svelte';
+	import { ChevronLeft, ChevronRight, Circle, ExternalLink } from 'lucide-svelte';
 
 	interface Props {
 		articles: Article[];
@@ -40,7 +40,10 @@
 			</div>
 			<div class="col-span-full grid place-items-center @3xl:col-span-1">
 				<TextBlock title={article.title} text={article.description}>
-					<Button variant="primary" href={article.slug} blank>{m.common_read_more()}</Button>
+					<Button variant="primary" href={article.slug} blank>
+						{m.common_read_more()}
+						<ExternalLink class="mb-1 ml-1 inline size-4" />
+					</Button>
 				</TextBlock>
 			</div>
 			<IconButton
