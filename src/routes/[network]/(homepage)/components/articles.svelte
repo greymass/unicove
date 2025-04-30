@@ -1,28 +1,54 @@
 <script lang="ts">
-	import Box from '$lib/components/layout/box/box.svelte';
 	import TextBlock from './text-block.svelte';
 	import * as m from '$lib/paraglide/messages';
 	import Button from '$lib/components/button/button.svelte';
+	import IconButton from '$lib/components/button/icon.svelte';
 	import type { Article } from '$lib/types/content';
+	import { ChevronLeft, ChevronRight } from 'lucide-svelte';
 
 	interface Props {
 		articles: Article[];
 	}
 
 	let { articles }: Props = $props();
+
+	let index = $state(0);
+	const onNext = () => (index = (index + 1) % articles.length);
+	const onPrevious = () => (index = (index - 1 + articles.length) % articles.length);
 </script>
 
-{#each articles as article}
-	<section class="@container col-span-full">
-		<div class="bg-surface-container grid min-h-72 rounded-2xl px-4 @xl:grid-cols-2 @xl:gap-4">
-			<div class="grid place-items-center">
-				<img src={article.thumbnail} alt={article.title} class="rounded-2xl" />
+<section class="@container col-span-full grid *:col-span-full *:col-start-1 *:row-start-1">
+	{#each articles as article, i}
+		<div
+			class:sr-only={i !== index}
+			class="grid min-h-72 grid-cols-2 items-center gap-8 rounded-2xl p-4 @3xl:grid-cols-[auto_1fr_1fr_auto]"
+		>
+			<IconButton
+				icon={ChevronLeft}
+				size="large"
+				class="text-muted col-span-1 row-start-3 @3xl:row-start-1"
+				onclick={onPrevious}
+			/>
+			<div class="col-span-full grid place-items-center @3xl:col-span-1">
+				<img
+					src={article.thumbnail}
+					alt={article.title}
+					class="rounded-2xl"
+					width="512"
+					height="288"
+				/>
 			</div>
-			<Box class="grid place-items-center py-8">
+			<div class="col-span-full grid place-items-center @3xl:col-span-1">
 				<TextBlock title={article.title} text={article.description}>
-					<Button variant="primary" href={article.slug}>{m.common_read_more()}</Button>
+					<Button variant="primary" href={article.slug} blank>{m.common_read_more()}</Button>
 				</TextBlock>
-			</Box>
+			</div>
+			<IconButton
+				icon={ChevronRight}
+				size="large"
+				class="text-muted col-start-2 row-start-3 justify-self-end @3xl:col-start-4 @3xl:row-start-1"
+				onclick={onNext}
+			/>
 		</div>
-	</section>
-{/each}
+	{/each}
+</section>
