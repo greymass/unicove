@@ -1,7 +1,6 @@
 import { apiPlugin, storyblokInit, useStoryblokApi } from '@storyblok/svelte';
 import type { PageLoad } from './$types';
-import type { ResourceTypeStoryblok } from '$lib/storyblok/storyblok';
-import type { Article } from '$lib/types/content';
+import type { Article, StoryBlokArticle } from '$lib/types/content';
 import {
 	PUBLIC_STORYBLOK_CONTENT_TYPE,
 	PUBLIC_STORYBLOK_REGION,
@@ -27,7 +26,7 @@ async function getStoryblokStories(limit = 3): Promise<Article[]> {
 			content_type: PUBLIC_STORYBLOK_CONTENT_TYPE,
 			per_page: limit
 		});
-		return data.data.stories.map((story: ResourceTypeStoryblok) => ({
+		return data.data.stories.map((story: StoryBlokArticle) => ({
 			title: story.content.title,
 			date: story.content.date,
 			thumbnail: story.content.seo[0].image.filename,
