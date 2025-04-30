@@ -135,6 +135,7 @@
 	"common_producer_top21": "Top 21",
 	"common_public_key": "Public Key",
 	"common_ram_market": "RAM Market",
+	"common_read_more": "Read more",
 	"common_receive_tokens": "Receive {token} Tokens",
 	"common_recent_activity": "Recent Activity",
 	"common_recipient": "Recipient",
@@ -457,6 +458,5 @@
 	"transaction_page_meta_title": "{id} | {network} Network",
 	"transaction_page_subtitle": "Transaction on {date}",
 	"unstaking_description": "The tokens currently being unstaked are listed below with the date they become available. These balances will continue to earn rewards until they are withdrawn.",
-	"where_eos_can_be_purchased": "EOS can be purchased through a number of platforms, depending on the users needs and location. Below are some of the most popular options available.",
-	"common_read_more": "Read more"
+	"where_eos_can_be_purchased": "EOS can be purchased through a number of platforms, depending on the users needs and location. Below are some of the most popular options available."
 }
