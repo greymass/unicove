@@ -10,10 +10,8 @@
 
 	let { data = $bindable() }: { data: PageData } = $props();
 	let story = $state(data.story);
-	let loaded = $state(false);
 
 	onMount(() => {
-		loaded = true;
 		if (story) {
 			useStoryblokBridge(data.story.id, (newStory) => (story = newStory), {
 				preventClicks: true,
@@ -25,14 +23,15 @@
 	let resolvedRichText = $derived(renderRichText(story.content.content));
 </script>
 
+{#if context.settings.data.debugMode}
+	<Code json={story} />
+{/if}
+
 {#key story}
-	{#if loaded && story && story.content}
+	{#if story && story.content}
 		{#each story.content.body as blok}
 			<StoryblokComponent {blok} />
 		{/each}
-		{#if context.settings.data.debugMode}
-			<Code json={story} />
-		{/if}
 		{@html resolvedRichText}
 	{/if}
 {/key}
