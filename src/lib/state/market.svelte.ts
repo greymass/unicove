@@ -165,6 +165,7 @@ export class MarketState {
 function getSwaps(network: NetworkState, pairs: TokenPair[]): TokenSwap[] {
 	const swaps: TokenSwap[] = [
 		...getRAMTokenSwaps(network, pairs),
+		...getWRAMTokenSwaps(network, pairs),
 		...getLegacyTokenSwaps(network, pairs)
 	];
 	return swaps;
@@ -245,6 +246,48 @@ function getRAMTokenSwaps(network: NetworkState, pairs: TokenPair[]): TokenSwap[
 			})
 		);
 	}
+
+	return swaps;
+}
+
+// Create pairs for RAM buy/sell as "swap" actions
+function getWRAMTokenSwaps(network: NetworkState, pairs: TokenPair[]): TokenSwap[] {
+	if (!network.supports('wram')) {
+		return [];
+	}
+
+	const ram = network.getRamToken();
+	const wram = network.getWRAMToken();
+	const swaps: TokenSwap[] = [];
+
+	console.log('pairs', JSON.stringify(pairs));
+	swaps.push(
+		TokenSwap.from({
+			pair: TokenPair.from({
+				base: ram,
+				quote: wram,
+				price: Asset.fromUnits(1000, wram.symbol),
+				updated: new Date()
+			}),
+			contract: network.config.systemcontract,
+			action: 'ramtransfer'
+		})
+	);
+
+	swaps.push(
+		TokenSwap.from({
+			pair: TokenPair.from({
+				base: wram,
+				quote: ram,
+				price: Asset.fromUnits(1, ram.symbol),
+				updated: new Date()
+			}),
+			contract: 'eosio.wram',
+			action: 'transfer'
+		})
+	);
+
+	console.log(swaps);
 
 	return swaps;
 }

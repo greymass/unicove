@@ -59,6 +59,7 @@
 				{#each articles as article, i}
 					<button onclick={() => (index = i)}>
 						<Circle
+							id={article.slug}
 							aria-selected={i === index}
 							class="stroke-on-background aria-selected:fill-on-background size-2"
 						/>
