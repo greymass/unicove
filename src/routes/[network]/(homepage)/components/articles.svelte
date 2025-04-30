@@ -57,10 +57,12 @@
 				class="col-span-full col-start-1 row-start-3 flex items-center justify-center gap-2 @3xl:row-start-2"
 			>
 				{#each articles as article, i}
-					<Circle
-						aria-selected={i === index}
-						class="stroke-on-background aria-selected:fill-on-background size-2"
-					/>
+					<button onclick={() => (index = i)}>
+						<Circle
+							aria-selected={i === index}
+							class="stroke-on-background aria-selected:fill-on-background size-2"
+						/>
+					</button>
 				{/each}
 			</div>
 		</div>
