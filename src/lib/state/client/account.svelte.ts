@@ -389,16 +389,16 @@ export function getBalances(
 	const token = network.getRamToken();
 
 	// Calculate RAM child balances
-	const ramtotal = {
+	const ramtotal = TokenBalanceChild.from({
 		token,
 		balance: Asset.fromUnits(resources.ram.owned, token.symbol),
 		name: 'total'
-	};
-	const ramused = {
+	});
+	const ramused = TokenBalanceChild.from({
 		token,
 		balance: Asset.fromUnits(resources.ram.used, token.symbol),
 		name: 'used'
-	};
+	});
 
 	let wrambalance: TokenBalanceChild | undefined;
 	if (network.supports('wram')) {
@@ -413,13 +413,19 @@ export function getBalances(
 		});
 	}
 
+	const children: TokenBalanceChild[] = [ramtotal, ramused];
+
+	if (wrambalance) {
+		children.push(wrambalance);
+	}
+
 	// Add RAM balance to the list of balances
 	balances.push(
 		TokenBalance.from({
 			token,
 			balance: Asset.fromUnits(resources.ram.available, token.symbol),
 			locked: !network.supports('ramtransfer'),
-			children: [ramtotal, ramused, wrambalance]
+			children
 		})
 	);
 
