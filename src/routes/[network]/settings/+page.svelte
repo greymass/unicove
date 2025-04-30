@@ -19,6 +19,7 @@
 	import Button from '$lib/components/button/button.svelte';
 	import { availableLanguageTags } from '$lib/paraglide/runtime';
 	import CurrencySelect from '$lib/components/select/currency.svelte';
+	import DebugToggle from '$lib/components/select/debug.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -26,7 +27,6 @@
 	let searchAccountSwitch = $state(!!context.settings.data.searchAccountSwitch);
 	let searchShowPages = $state(!!context.settings.data.searchShowPages);
 	let advancedMode = $state(!!context.settings.data.advancedMode);
-	let debugMode = $state(!!context.settings.data.debugMode);
 	let developerMode = $state(!!context.settings.data.developerMode);
 	let mockPrice = $state(!!context.settings.data.mockPrice);
 	let increasedPrecision = $state(!!context.settings.data.increasedPrecision);
@@ -49,10 +49,6 @@
 
 	$effect(() => {
 		context.settings.data.searchShowPages = searchShowPages;
-	});
-
-	$effect(() => {
-		context.settings.data.debugMode = advancedMode ? debugMode : false;
 	});
 
 	$effect(() => {
@@ -266,13 +262,13 @@
 							<Label for="debug-mode">{m.settings_enable_debug()}</Label>
 							<p class="caption text-sm"></p>
 						</Stack>
-						<Switch id="debug-mode" bind:checked={debugMode} />
+						<DebugToggle />
 					</div>
 				{/if}
 			</Card>
 		{/if}
 	</div>
-	{#if debugMode}
+	{#if context.settings.data.debugMode}
 		<Code>{JSON.stringify(context.settings.data, null, 2)}</Code>
 	{/if}
 </Stack>

@@ -84,13 +84,7 @@ export async function GET({ fetch, locals: { network }, url }: RequestEvent) {
 	// Push WRAM token pair
 	pairs.push(
 		TokenPair.from({
-			base: {
-				id: {
-					symbol: '0,WRAM',
-					contract: 'eosio.wram',
-					chain: network.chain.id
-				}
-			},
+			base: network.getWRAMToken(),
 			quote: network.token,
 			price: Asset.fromUnits(rammarket.units.dividing(1000), network.token.symbol),
 			updated: network.connection.updated

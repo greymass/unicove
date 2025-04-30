@@ -28,7 +28,8 @@ import {
 	type FeatureType,
 	getChainConfigByName,
 	systemtoken,
-	ramtoken
+	ramtoken,
+	wramtoken
 } from '$lib/wharf/chains';
 
 import { Token, ZeroUnits, TokenDefinition, tokenEquals } from '$lib/types/token';
@@ -157,6 +158,10 @@ export class NetworkState {
 		return Token.from(ramtoken);
 	}
 
+	getWRAMToken(): Token {
+		return Token.from(wramtoken);
+	}
+
 	getSystemToken(): Token {
 		const token = Token.from(systemtoken);
 
@@ -173,6 +178,9 @@ export class NetworkState {
 		}
 		if (tokenEquals(id, ramtoken.id)) {
 			return this.getRamToken();
+		}
+		if (tokenEquals(id, wramtoken.id)) {
+			return this.getWRAMToken();
 		}
 		if (this.config.legacytoken && tokenEquals(id, this.config.legacytoken.id)) {
 			return this.config.legacytoken;
