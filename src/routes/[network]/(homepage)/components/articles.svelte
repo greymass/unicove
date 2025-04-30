@@ -4,7 +4,7 @@
 	import Button from '$lib/components/button/button.svelte';
 	import IconButton from '$lib/components/button/icon.svelte';
 	import type { Article } from '$lib/types/content';
-	import { ChevronLeft, ChevronRight } from 'lucide-svelte';
+	import { ChevronLeft, ChevronRight, Circle } from 'lucide-svelte';
 
 	interface Props {
 		articles: Article[];
@@ -21,12 +21,12 @@
 	{#each articles as article, i}
 		<div
 			class:sr-only={i !== index}
-			class="grid min-h-72 grid-cols-2 items-center gap-8 rounded-2xl p-4 @3xl:grid-cols-[auto_1fr_1fr_auto]"
+			class="grid min-h-72 grid-cols-2 items-center gap-8 rounded-2xl p-4 @3xl:grid-cols-[auto_1fr_1fr_auto] @3xl:gap-y-10"
 		>
 			<IconButton
 				icon={ChevronLeft}
 				size="large"
-				class="text-muted col-span-1 row-start-3 @3xl:row-start-1"
+				class="text-muted col-start-1  row-start-3 @3xl:row-start-1"
 				onclick={onPrevious}
 			/>
 			<div class="col-span-full grid place-items-center @3xl:col-span-1">
@@ -49,6 +49,17 @@
 				class="text-muted col-start-2 row-start-3 justify-self-end @3xl:col-start-4 @3xl:row-start-1"
 				onclick={onNext}
 			/>
+
+			<div
+				class="col-span-full col-start-1 row-start-3 flex items-center justify-center gap-2 @3xl:row-start-2"
+			>
+				{#each articles as article, i}
+					<Circle
+						aria-selected={i === index}
+						class="stroke-on-background aria-selected:fill-on-background size-2"
+					/>
+				{/each}
+			</div>
 		</div>
 	{/each}
 </section>
