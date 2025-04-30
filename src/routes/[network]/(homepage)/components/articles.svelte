@@ -21,7 +21,7 @@
 	{#each articles as article, i}
 		<div
 			class:sr-only={i !== index}
-			class="grid min-h-72 grid-cols-2 items-center gap-8 rounded-2xl p-4 @3xl:grid-cols-[auto_1fr_1fr_auto] @3xl:gap-y-10"
+			class="grid min-h-72 grid-cols-2 items-center gap-8 rounded-2xl @3xl:grid-cols-[auto_1fr_1fr_auto] @3xl:gap-y-10"
 		>
 			<IconButton
 				icon={ChevronLeft}
