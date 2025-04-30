@@ -4,6 +4,7 @@
 	import TextInput from './text.svelte';
 	import Big from 'big.js';
 	import Code from '../code.svelte';
+	import { ZeroUnits } from '$lib/types/token';
 
 	interface AssetInputProps extends ComponentProps<typeof TextInput> {
 		min?: number;
@@ -34,7 +35,7 @@
 	const zeroValue = $derived(Asset.fromUnits(0, _value.symbol));
 
 	/** The string value bound to the form input */
-	let input: string | null = $state(null);
+	let input: string | null = $state(_value.units.gt(ZeroUnits) ? _value.quantity : null);
 
 	/** Whether or not the input is a valid number */
 	const satisfiesNumber = $derived(!!input && !isNaN(Number(input)));
