@@ -16,7 +16,7 @@
 	import { getContext } from 'svelte';
 
 	const context = getContext<UnicoveContext>('state');
-	const { network } = getContext<MarketContext>('value');
+	const { network } = getContext<MarketContext>('market');
 
 	const { data } = $props();
 
