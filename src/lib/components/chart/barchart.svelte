@@ -21,13 +21,13 @@
 				labels: data.map((_, i) => i + 1),
 				datasets: [
 					{
-						label: 'Staked',
+						label: m.common_staked(),
 						data: data.map((d) => d.y),
 						backgroundColor: '#00ED97',
 						borderRadius: 4
 					},
 					{
-						label: 'Yield',
+						label: m.common_yield(),
 						data: data.map((d) => d.y1),
 						backgroundColor: '#B2FAE0',
 						borderRadius: 4

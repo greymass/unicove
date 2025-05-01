@@ -14,17 +14,16 @@ export const load: PageLoad = async ({ params, parent, url }) => {
 		permissionName: Name.from(params.permission),
 		backPath,
 		title: params.permission,
-		subtitle: 'Edit permission for ' + params.name + ' on ' + network.chain.name,
-		// subtitle: 'Edit permission',
-		// subtitle: m.explorer_account_permissions_subtitle({
-		// 	network: network.chain.name
-		// }),
+		subtitle: m.common_edit_permission_for_account({
+			account: params.name,
+			network: network.chain.name
+		}),
 		pageMetaTags: {
 			title: m.explorer_account_permissions_meta_title({
 				account: params.name,
 				network: network.chain.name
 			}),
-			description: m.explorer_account_permissions_meta_description({
+			description: m.common_edit_permission_for_account({
 				account: params.name,
 				network: network.chain.name
 			})

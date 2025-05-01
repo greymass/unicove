@@ -45,14 +45,13 @@
 				<picture class="size-24">
 					<ClipboardPen class="size-full text-green-300" />
 				</picture>
-				<h3 class="h3">Multi-Sig Proposal Created</h3>
+				<h3 class="h3">{m.common_msig_proposal_created()}</h3>
 				<p class="text-center">
-					The multi-sig proposal for this transaction has been created and now needs to be approved.
-					View the proposal below and share it with the parties who need to sign.
+					{m.common_msig_proposal_description()}
 				</p>
 				{#each proposals as proposal}
 					<Button href="/{context.network}/msig/{proposal.proposer}/{proposal.proposal_name}">
-						View Proposal ({proposal.proposer}/{proposal.proposal_name})
+						{m.common_view_proposal()} ({proposal.proposer}/{proposal.proposal_name})
 					</Button>
 				{/each}
 			{:else}

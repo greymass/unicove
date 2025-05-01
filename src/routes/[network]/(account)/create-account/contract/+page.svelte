@@ -179,7 +179,7 @@
 
 {#snippet AccountName()}
 	<fieldset class="grid gap-2" class:hidden={!showAll && f.current !== 'account'}>
-		<Label for="account-input">Account Name</Label>
+		<Label for="account-input">{m.common_account_name()}</Label>
 		<NameInput
 			bind:this={accountInput}
 			bind:ref={accountRef}
@@ -187,14 +187,14 @@
 			bind:valid={accountValid}
 			{onkeydown}
 			id="account-input"
-			placeholder="Account Name"
+			placeholder={m.common_account_name()}
 		/>
 	</fieldset>
 {/snippet}
 
 {#snippet PublicKey()}
 	<fieldset class="grid gap-2" class:hidden={!showAll && f.current !== 'publickey'}>
-		<Label for="public-key-input">Public Key</Label>
+		<Label for="public-key-input">{m.common_public_key}</Label>
 		<PublicKeyInput
 			bind:this={publicKeyInput}
 			bind:ref={publicKeyRef}
@@ -202,49 +202,51 @@
 			bind:valid={publicKeyValid}
 			{onkeydown}
 			id="public-key-input"
-			placeholder="Public Key"
+			placeholder={m.common_public_key()}
 		/>
-		<Button variant="secondary" onclick={generate}>Generate Key</Button>
+		<Button variant="secondary" onclick={generate}>{m.common_generate_key()}</Button>
 	</fieldset>
 {/snippet}
 
 {#snippet Generate()}
 	<div class:hidden={!showAll && f.current !== 'privatekey'}>
 		<fieldset class="grid gap-2">
-			<Label for="private-key-input">Private Key <CopyButton data={String(privateKey)} /></Label>
+			<Label for="private-key-input"
+				>{m.common_private_key()} <CopyButton data={String(privateKey)} /></Label
+			>
 
 			<TextInput
 				bind:ref={privateKeyRef}
 				bind:value={privateKey}
 				disabled
 				id="private-key-input"
-				placeholder="Private Key"
+				placeholder={m.common_private_key()}
 			>
 				<CopyButton data={String(privateKey)} />
 			</TextInput>
 		</fieldset>
 		<p class="my-3 flex items-center gap-3">
-			This is your new private key. Copy it someplace safe, import it into your wallet, and never
-			share it with anyone. If you lose this key, you will lose access to your account.
+			{m.common_private_key_safety_warning()}
 		</p>
 		<fieldset class="flex items-center gap-3" class:hidden={!showAll && f.current !== 'privatekey'}>
 			<Checkbox id="private-key-copied" bind:checked={privateKeyCopied} />
-			<Label for="private-key-copied">I have saved this private key.</Label>
+			<Label for="private-key-copied">{m.common_private_key_safety_ack()}</Label>
 		</fieldset>
 	</div>
 {/snippet}
 
 {#snippet Create()}
 	<div class="grid gap-2" class:hidden={!showAll && f.current !== 'create'}>
-		<h2 class="h2 flex gap-2">Instructions</h2>
+		<h2 class="h2 flex gap-2">{m.common_instructions()}</h2>
 		<p class="flex gap-2">
-			Send EOS from an exchange or over a bridge to the account below with the memo provided to
-			create your account.
+			{m.common_create_account_by_sending()}
 		</p>
 		<fieldset class="grid gap-2">
-			<Label for="send-account-input"
-				>Send {context.network.chain.systemToken?.symbol.name} to account</Label
-			>
+			<Label for="send-account-input">
+				{m.common_send_token_to_account({
+					token: context.network.token.name
+				})}
+			</Label>
 
 			{#if cost}
 				<TextInput is="send-account-input" value={sendAccount} disabled>
@@ -254,9 +256,11 @@
 		</fieldset>
 
 		<fieldset class="grid gap-2">
-			<Label for="cost-amount-input"
-				>Amount of {context.network.chain.systemToken?.symbol.name} to send</Label
-			>
+			<Label for="cost-amount-input">
+				{m.common_send_token_amount({
+					token: context.network.token.name
+				})}
+			</Label>
 
 			{#if cost}
 				<TextInput id="cost-amount-input" value={costAmount} disabled>
@@ -266,7 +270,7 @@
 		</fieldset>
 
 		<fieldset class="grid gap-2">
-			<Label for="memo-input">Transfer Memo</Label>
+			<Label for="memo-input">{m.common_transfer_memo()}</Label>
 
 			<TextInput id="memo-input" value={memo} disabled>
 				<CopyButton data={String(memo)} />
@@ -274,8 +278,7 @@
 		</fieldset>
 
 		<p class="flex gap-2">
-			Once the transfer is complete, use your private key to import your account into the wallet of
-			your choosing.
+			{m.common_create_account_by_sending_complete()}
 		</p>
 	</div>
 {/snippet}

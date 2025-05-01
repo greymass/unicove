@@ -258,7 +258,7 @@
 
 {#snippet AccountName()}
 	<fieldset class="grid gap-2" class:hidden={!showAll && f.current !== 'account'}>
-		<Label for="account-input">Account Name</Label>
+		<Label for="account-input">{m.common_account_name}</Label>
 		<NameInput
 			bind:this={accountInput}
 			bind:ref={accountRef}
@@ -266,14 +266,14 @@
 			bind:valid={accountValid}
 			{onkeydown}
 			id="account-input"
-			placeholder="Account Name"
+			placeholder={m.common_account_name()}
 		/>
 	</fieldset>
 {/snippet}
 
 {#snippet PublicKeys()}
 	<fieldset class="grid gap-2" class:hidden={!showAll && f.current !== 'publickey'}>
-		<Label for="owner-public-key-input">Owner Public Key</Label>
+		<Label for="owner-public-key-input">Owner {m.common_public_key()}</Label>
 		<PublicKeyInput
 			bind:this={ownerPublicKeyInput}
 			bind:ref={ownerPublicKeyRef}
@@ -281,12 +281,12 @@
 			bind:valid={ownerPublicKeyValid}
 			{onkeydown}
 			id="owner-public-key-input"
-			placeholder="Owner Public Key"
+			placeholder={`Owner ${m.common_public_key()}`}
 		/>
 	</fieldset>
 
 	<fieldset class="grid gap-2" class:hidden={!showAll && f.current !== 'publickey'}>
-		<Label for="active-public-key-input">Active Public Key</Label>
+		<Label for="active-public-key-input">Active {m.common_public_key()}</Label>
 		<PublicKeyInput
 			bind:this={activePublicKeyInput}
 			bind:ref={activePublicKeyRef}
@@ -294,7 +294,7 @@
 			bind:valid={activePublicKeyValid}
 			{onkeydown}
 			id="active-public-key-input"
-			placeholder="Active Public Key"
+			placeholder={`Active ${m.common_public_key()}`}
 		/>
 	</fieldset>
 {/snippet}
@@ -302,17 +302,17 @@
 {#snippet RAMBytes()}
 	<div class="space-y-6">
 		<DL>
-			<DLRow title="Account Name">
+			<DLRow title={m.common_account_name()}>
 				<DD>
 					{accountName}
 				</DD>
 			</DLRow>
-			<DLRow title="Owner Key">
+			<DLRow title={`Owner ${m.common_public_key()}`}>
 				<DD>
 					{ownerPublicKey}
 				</DD>
 			</DLRow>
-			<DLRow title="Active Key">
+			<DLRow title={`Active ${m.common_public_key()}`}>
 				<DD>
 					{activePublicKey}
 				</DD>
@@ -325,15 +325,17 @@
 		</DL>
 		<fieldset class="flex items-center gap-3">
 			<Checkbox bind:checked={ramBytesUseCustom} id="rambytes-custom" />
-			<Label for="rambytes-custom">Change RAM options for new account</Label>
+			<Label for="rambytes-custom">{m.common_create_account_change_ram_options()}</Label>
 		</fieldset>
 		<fieldset class="grid gap-3">
 			{#if ramBytesUseCustom}
 				<SingleCard>
 					<Stack>
-						<Label for="account-input"
-							>RAM bytes to purchase for new account (min: {ramBytesMin})</Label
-						>
+						<Label for="account-input">
+							{m.common_create_account_ram_to_purchase({
+								min: ramBytesMin
+							})}
+						</Label>
 						<NumberInput
 							bind:this={ramBytesInput}
 							bind:ref={ramBytesRef}
@@ -347,9 +349,13 @@
 						{#if context.settings.data.advancedMode}
 							<fieldset class="flex items-center gap-3">
 								<Checkbox bind:checked={ramBytesUseTransfer} id="rambytes-transfer" />
-								<Label for="rambytes-transfer">
-									Transfer RAM from my account: {context.wharf.session?.actor}
-								</Label>
+								{#if context.wharf.session}
+									<Label for="rambytes-transfer">
+										{m.common_transfer_ram_from_my_account({
+											account: context.wharf.session.actor
+										})}
+									</Label>
+								{/if}
 							</fieldset>
 						{/if}
 					</Stack>
@@ -363,17 +369,19 @@
 	<div class="grid gap-2" class:hidden={!showAll && f.current !== 'create'}>
 		{@render RAMBytes()}
 		<Button disabled={!ready} onclick={() => transact()}>
-			Create Account
-			{#if ramBytesUseTransfer}
-				by transferring {ramBytes} bytes of RAM
-			{:else}
-				by paying {ramCost} for RAM
-			{/if}
+			{m.common_create_account_by({
+				how: ramBytesUseTransfer
+					? m.common_create_account_by_transfer({
+							bytes: ramBytes
+						})
+					: m.common_create_account_by_paying({
+							cost: String(ramCost)
+						})
+			})}
 		</Button>
 		{#if !context.wharf.session}
 			<p class="text-center text-red-500">
-				You must be logged in with an existing account in order to create another account on this
-				page.
+				{m.common_create_account_login_first()}
 			</p>
 		{/if}
 	</div>
@@ -395,15 +403,16 @@
 
 {#snippet TransactError()}
 	<div class:hidden={f.current !== 'error'}>
-		<h3 class="h3 mb-4">An error occurred</h3>
+		<h3 class="h3 mb-4">{m.common_error}</h3>
 		<p>{transactError}</p>
 	</div>
 {/snippet}
 
 {#snippet TransactResult()}
 	<div class:hidden={f.current !== 'complete'}>
-		<h3 class="h3 mb-4">Account Created</h3>
-		<p>The <AccountText name={accountName} /> account was successfully created.</p>
+		<h3 class="h3 mb-4">{m.common_account_created()}</h3>
+		<p>{m.common_account_created_description()}</p>
+		<p><AccountText name={accountName} /></p>
 	</div>
 {/snippet}
 

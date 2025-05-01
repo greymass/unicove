@@ -5,6 +5,8 @@
 	import DateTime from '../elements/datetime.svelte';
 	import { DD, DL, DLRow } from '$lib/components/descriptionlist';
 
+	import * as m from '$lib/paraglide/messages';
+
 	interface TransactionHeaderProps {
 		transaction: TransactionResponse;
 	}
@@ -14,8 +16,8 @@
 
 <DL>
 	<DLRow
-		title="Finality Status"
-		description={transaction.irreversible ? 'Irreversible' : 'Reversible'}
+		title={m.common_finality_status()}
+		description={transaction.irreversible ? m.common_irreversible() : m.common_reversible()}
 	></DLRow>
 	<DLRow title="Date">
 		<DD>
