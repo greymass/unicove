@@ -92,23 +92,27 @@
 	--color-solar-900: #7c3b0b;
 	--color-solar-950: #481d00;
 
-	/* Seeds - Not for general use */
-	--color-seed: var(--color-sky-500);
-	/* --color-neutral-seed: oklch(from var(--color-seed) l 0.01 h); */
-	/* --color-neutral-variant-seed: oklch(from var(--color-seed) l 0.015 h); */
+	--theme-seed: var(--color-sky-500);
 
 	/* Color Roles and default dark values */
-	--color-primary: oklch(from var(--color-seed) 0.82 c h);
-	--color-primary-hover: oklch(from var(--color-seed) 0.9 c h);
-	--color-on-primary: oklch(from var(--color-seed) 0.2 c h);
+	--color-primary: oklch(from var(--theme-seed) 0.82 c h);
+	--color-primary-hover: oklch(from var(--theme-seed) 0.9 c h);
+	--color-on-primary: oklch(from var(--theme-seed) 0.2 c h);
 
-	--color-primary-container: oklch(from var(--color-seed) 0.39 0.086 h);
-	--color-on-primary-container: oklch(from var(--color-seed) 0.9 0.085 h);
+	--color-primary-container: oklch(from var(--theme-seed) 0.39 0.086 h);
+	--color-on-primary-container: oklch(from var(--theme-seed) 0.9 0.085 h);
 
-	--color-error: rgb(255 180 171);
-	--color-on-error: rgb(105 0 5);
-	--color-error-container: rgb(147 0 10);
-	--color-on-error-container: rgb(255 218 214);
+	--error-hue: 27;
+	--color-error: oklch(0.84 0.089 var(--error-hue));
+	--color-on-error: oklch(0.33 0.134 var(--error-hue));
+	--color-error-container: oklch(0.42 0.17 var(--error-hue));
+	--color-on-error-container: oklch(0.92 0.042 var(--error-hue));
+
+	--success-hue: 152;
+	--color-success: oklch(0.84 0.089 var(--success-hue));
+	--color-on-success: oklch(0.33 0.134 var(--success-hue));
+	--color-success-container: oklch(0.42 0.17 var(--success-hue));
+	--color-on-success-container: oklch(0.92 0.042 var(--success-hue));
 
 	--color-shadow: oklch(0 0 0);
 	--color-scrim: oklch(0 0 0 / 0.5);
@@ -150,31 +154,73 @@
 	}
 
 	[data-theme='eos'] {
-		--color-seed: rgb(248 187 113);
+		--theme-seed: rgb(248 187 113);
 	}
 
 	[data-theme='telos'] {
-		--color-seed: rgb(207 189 254);
+		--theme-seed: rgb(207 189 254);
 	}
 
 	[data-theme='jungle4'] {
-		--color-seed: #2e9e87;
+		--theme-seed: #2e9e87;
 	}
 
 	[data-theme='vaulta'] {
-		--color-seed: #2e3bff;
+		--theme-seed: #2e3bff;
 	}
 
 	[data-theme='wax'] {
-		--color-seed: rgb(255 183 123);
+		--theme-seed: rgb(255 183 123);
 	}
 
 	[data-theme='kylin'] {
-		--color-seed: rgb(255 180 168);
+		--theme-seed: rgb(255 180 168);
 	}
 
-	/* Light Mode Themes */
-	@media (prefers-color-scheme: light) {
+	[data-theme] {
+		/* Light Mode Themes */
+		@media (prefers-color-scheme: light) {
+			--color-primary: oklch(from var(--theme-seed) 0.4 c h);
+			--color-primary-hover: oklch(from var(--theme-seed) 0.9 c h);
+			--color-on-primary: oklch(from var(--theme-seed) 1 0 h);
+
+			--color-primary-container: oklch(from var(--theme-seed) 0.9 0.086 h);
+			--color-on-primary-container: oklch(from var(--theme-seed) 0.218 0.085 h);
+
+			--color-error: oklch(0.51 0.1927 var(--error-hue));
+			--color-on-error: oklch(1 0 var(--error-hue));
+			--color-error-container: oklch(0.92 0.042 var(--error-hue));
+			--color-on-error-container: oklch(0.42 0.17 var(--error-hue));
+
+			--color-success: oklch(0.51 0.1927 var(--success-hue));
+			--color-on-success: oklch(1 0 var(--success-hue));
+			--color-success-container: oklch(0.92 0.042 var(--success-hue));
+			--color-on-success-container: oklch(0.42 0.17 var(--success-hue));
+
+			--color-shadow: oklch(0 0 0);
+			--color-scrim: oklch(0 0 0 / 0.5);
+
+			--color-surface-tint: var(--color-primary);
+			--color-surface: oklch(
+				from color-mix(in oklab, var(--color-shark-50) 100%, var(--color-surface-tint) 2.3%) 0.98 c
+					h
+			);
+			--color-on-surface: oklch(from var(--color-surface) 0.22 c h);
+			--color-on-surface-variant: oklch(from var(--color-surface) 0.4 0.015 h);
+
+			--color-background: var(--color-surface);
+			--color-on-background: var(--color-on-surface);
+
+			--color-outline: oklch(from var(--color-surface) 0.5664 c h);
+			--color-outline-variant: oklch(from var(--color-surface) 0.8267 c h);
+
+			/* Surface Containers ranked by emphasis (contrast) */
+			--color-surface-container-lowest: oklch(from var(--color-surface) 1 c h);
+			--color-surface-container-low: oklch(from var(--color-surface) 0.97 c h);
+			--color-surface-container: oklch(from var(--color-surface) 0.95 c h);
+			--color-surface-container-high: oklch(from var(--color-surface) 0.93 c h);
+			--color-surface-container-highest: oklch(from var(--color-surface) 0.91 c h);
+		}
 	}
 }
 
