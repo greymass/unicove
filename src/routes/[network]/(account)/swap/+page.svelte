@@ -1,0 +1,41 @@
+<script lang="ts">
+	import { getContext } from 'svelte';
+
+	import Code from '$lib/components/code.svelte';
+
+	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte.js';
+	import AssetText from '$lib/components/elements/asset.svelte';
+	import Button from '$lib/components/button/button.svelte';
+	import { SingleCard, Stack } from '$lib/components/layout';
+	import { Asset } from '@wharfkit/session';
+
+	const { data } = $props();
+
+	const context = getContext<UnicoveContext>('state');
+	const market = getContext<MarketContext>('market');
+</script>
+
+{#each market.market.swaps as swap}
+	<SingleCard class="col-span-full">
+		<Stack>
+			<h2 class="h3">{swap.pair.base.symbol.name} / {swap.pair.quote.symbol.name}</h2>
+			<p>
+				<AssetText value={Asset.fromFloat(1, swap.pair.base.symbol)} variant="full" />
+				=
+				{swap.pair.price}
+			</p>
+			<div class="flex gap-4">
+				<Button
+					class="border-mine-600 border px-6"
+					href={`/${data.network}/swap/${swap.pair.base.id.url}/${swap.pair.quote.id.url}`}
+				>
+					Swap
+				</Button>
+			</div>
+		</Stack>
+	</SingleCard>
+{/each}
+
+{#if context.settings.data.debugMode}
+	<Code json={market.market.swaps} />
+{/if}
