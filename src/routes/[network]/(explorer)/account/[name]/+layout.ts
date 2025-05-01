@@ -24,6 +24,13 @@ export const load: LayoutLoad = async ({ fetch, params }) => {
 			code: 'NOT_FOUND'
 		});
 	}
+
+	const actions = [];
+
+	if (account.contract) {
+		actions.push({ icon: Code, href: `/${network}/contract/${params.name}` });
+	}
+
 	return {
 		account,
 		name: params.name,
@@ -33,7 +40,7 @@ export const load: LayoutLoad = async ({ fetch, params }) => {
 		}),
 		header: {
 			copyData: params.name,
-			actions: [{ icon: Code, href: `/${network}/contract/${params.name}` }]
+			actions: actions
 		},
 		pageMetaTags: {
 			title: m.account_meta_title({

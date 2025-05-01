@@ -27,10 +27,6 @@
 	}
 
 	let logo = $derived(props.network.config.logo || '');
-
-	// let routePath = $derived(page.url.pathname.split('/')[3]);
-	// let contractPath = $derived(`/${props.network}/contract/${props.title}`);
-	// let accountPath = $derived(`/${props.network}/account/${props.title}`);
 </script>
 
 <header class="col-span-full flex min-h-16 items-center gap-4">
@@ -65,17 +61,6 @@
 					<IconButton icon={action.icon} href={action.href} hideBackground />
 				{/each}
 			{/if}
-
-			<!---->
-			<!-- {#if routePath === 'account'} -->
-			<!-- 	{#if props.contract} -->
-			<!-- 		<IconButton icon={Code} href={contractPath} hideBackground /> -->
-			<!-- 	{/if} -->
-			<!-- {/if} -->
-			<!---->
-			<!-- {#if routePath === 'contract'} -->
-			<!-- 	<IconButton icon={User} href={accountPath} hideBackground /> -->
-			<!-- {/if} -->
 		</div>
 
 		{#if props.subtitle}
