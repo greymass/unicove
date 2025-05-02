@@ -39,6 +39,9 @@ export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 			proposer: params.proposer,
 			network: network.chain.name
 		}),
+		header: {
+			copyData: params.proposal
+		},
 		proposal: {
 			approvals: { proposal_name, requested_approvals, provided_approvals, version },
 			proposer: params.proposer,

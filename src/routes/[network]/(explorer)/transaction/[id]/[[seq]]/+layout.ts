@@ -30,6 +30,9 @@ export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 				timeZone: 'UTC'
 			})
 		}),
+		header: {
+			copyData: params.id
+		},
 		id: params.id,
 		seq: params.seq,
 		pageMetaTags: {
