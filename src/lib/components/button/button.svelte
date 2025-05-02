@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { cn } from '$lib/utils';
 	import { emptyMeltElement, melt, type AnyMeltElement } from '@melt-ui/svelte';
+	import ExternalLink from 'lucide-svelte/icons/external-link';
 	import type { Snippet } from 'svelte';
 	import type { HTMLButtonAttributes, HTMLLinkAttributes } from 'svelte/elements';
 
@@ -84,5 +85,9 @@
 	></div>
 	<span class="content-layer pointer-events-none relative text-inherit">
 		{@render props.children()}
+		<ExternalLink
+			data-external={/^https?:\/\//.test(props.href || '')}
+			class="mb-1 ml-1 hidden size-4 data-[external=true]:inline"
+		/>
 	</span>
 </svelte:element>

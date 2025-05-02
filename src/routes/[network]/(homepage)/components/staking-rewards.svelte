@@ -7,7 +7,6 @@
 	import Box from '$lib/components/layout/box/box.svelte';
 	import * as m from '$lib/paraglide/messages';
 	import Button from '$lib/components/button/button.svelte';
-	import { ArrowRight } from 'lucide-svelte';
 
 	interface Props {
 		network: NetworkState;
@@ -41,9 +40,7 @@
 						{m.common_stake_action()}
 					</Button>
 					<Button variant="tertiary" href="https://eosnetwork.com/staking-rewards/">
-						<span class="flex items-center gap-2">
-							Learn more <ArrowRight class="size-4" />
-						</span>
+						Learn more
 					</Button>
 				</div>
 				<p class="text-muted text-xs">
