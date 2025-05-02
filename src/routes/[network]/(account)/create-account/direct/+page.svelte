@@ -258,7 +258,7 @@
 
 {#snippet AccountName()}
 	<fieldset class="grid gap-2" class:hidden={!showAll && f.current !== 'account'}>
-		<Label for="account-input">{m.common_account_name}</Label>
+		<Label for="account-input">{m.common_account_name()}</Label>
 		<NameInput
 			bind:this={accountInput}
 			bind:ref={accountRef}
