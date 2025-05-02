@@ -179,5 +179,9 @@
 		<StakingCalculator {apr} network={data.network} tokenprice={market.network.systemtoken.price} />
 	</MultiCard>
 {:else}
-	<p>This staking interface is not available on {data.network}.</p>
+	<p>
+		{m.common_staking_unavailable_network({
+			network: data.network.chain.name
+		})}
+	</p>
 {/if}

@@ -18,6 +18,8 @@
 	import SquareTerminal from 'lucide-svelte/icons/square-terminal';
 	import Card from '../layout/box/card.svelte';
 
+	import * as m from '$lib/paraglide/messages';
+
 	const context = getContext<UnicoveContext>('state');
 
 	interface Props {
@@ -54,7 +56,7 @@
 			</dt>
 			{#if isArray}
 				<dd class="inline">
-					<span class="sr-only">length</span>({value.length})
+					<span class="sr-only">{m.common_length()}</span>({value.length})
 				</dd>
 			{/if}
 		{:else}
@@ -91,7 +93,7 @@
 
 {#snippet Decoded()}
 	{#await context.network.decodeAction(action)}
-		<Code json={'Loading...'} />
+		<Code json={m.common_loading()} />
 	{:then result}
 		<Code json={result} />
 	{:catch error}
@@ -111,7 +113,7 @@
 				{/each}
 			</dl>
 		{:else}
-			<span class="text-muted">No data</span>
+			<span class="text-muted">{m.common_no_data()}</span>
 		{/if}
 	</Code>
 {/snippet}
@@ -170,7 +172,7 @@
 	<div class="flex justify-between gap-6 px-1">
 		<div>
 			{#if action.authorization.length}
-				<span class="text-muted text-xs">Signed by</span>
+				<span class="text-muted text-xs">{m.common_signed_by()}</span>
 				<ul class="inline">
 					{#each action.authorization as auth}
 						<li class="inline">
@@ -186,7 +188,7 @@
 		<!-- This section is reversed so the list reads better for a11y -->
 		<div class="flex flex-row-reverse flex-wrap-reverse items-baseline gap-1 text-right">
 			{#if advancedMode && notified}
-				<span class="text-muted text-xs">notified</span>
+				<span class="text-muted text-xs">{m.common_notified()}</span>
 				<ul class="inline">
 					{#each notified as account}
 						<li class="group inline text-xs nth-last-2:after:content-['and_']">

@@ -4,6 +4,8 @@
 	import RAMDelta from '$lib/components/elements/ramdelta.svelte';
 	import Card from '$lib/components/layout/box/card.svelte';
 
+	import * as m from '$lib/paraglide/messages';
+
 	let { data } = $props();
 
 	const ramDeltas = $derived(
@@ -12,8 +14,8 @@
 </script>
 
 <div class="p-2">
-	<h2 class="h2 text-2xl">RAM Usage</h2>
-	<p>The deltas in RAM usage for each trace in the transaction.</p>
+	<h2 class="h2 text-2xl">{m.common_ram_usage()}</h2>
+	<p>{m.common_ram_usage_description()}</p>
 </div>
 
 <Card>
@@ -22,8 +24,8 @@
 			<tr>
 				<td class="text-right">Bytes</td>
 				<td>Owner</td>
-				<td class="text-right">Contract</td>
-				<td>Action</td>
+				<td class="text-right">{m.common_contract()}</td>
+				<td>{m.common_action()}</td>
 			</tr>
 		</thead>
 		<tbody>

@@ -9,6 +9,8 @@
 	import TransactionHeader from '$lib/components/transaction/header.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
 
+	import * as m from '$lib/paraglide/messages.js';
+
 	const context = getContext<UnicoveContext>('state');
 
 	let { data } = $props();
@@ -17,15 +19,17 @@
 </script>
 
 <div class="space-y-2">
-	<h2 class="h3">Transaction Details</h2>
+	<h2 class="h3">{m.common_transaction_details()}</h2>
 	<TransactionHeader transaction={data.transaction} />
 </div>
 
 <Stack class="gap-8">
 	<div class="space-y-1">
-		<h2 class="h3">Resulting Actions ({data.transaction.filtered.length})</h2>
+		<h2 class="h3">
+			{m.common_transaction_resulting_actions()} ({data.transaction.filtered.length})
+		</h2>
 		<p class="text-pretty">
-			The actions and inline actions performed as a result of the transaction.
+			{m.common_transaction_resulting_actions_description()}
 		</p>
 	</div>
 
