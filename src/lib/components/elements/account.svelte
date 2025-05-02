@@ -47,7 +47,7 @@
 <a
 	href={path}
 	class={cn(
-		'focus-visible:outline-solar-500 text-primary hover:text-primary-container inline-flex items-center gap-2 focus-visible:outline ',
+		'focus-visible:outline-solar-500 text-primary hover:text-primary-hover inline-flex items-center gap-2 focus-visible:outline ',
 		props.class
 	)}
 	use:melt={$trigger}
