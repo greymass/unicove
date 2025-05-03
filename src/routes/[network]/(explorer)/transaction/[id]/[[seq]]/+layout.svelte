@@ -26,20 +26,20 @@
 		const options = [
 			{ href: urlBase, text: m.common_summary() },
 			// { href: `${urlBase}/resources`, text: 'Resources' },
-			{ href: `${urlBase}/transaction`, text: 'Transaction' },
+			{ href: `${urlBase}/transaction`, text: m.common_transaction() },
 			{
 				href: `${urlBase}/actions`,
-				text: `Actions (${data.transaction.transaction.actions.length})`
+				text: `${m.common_actions()} (${data.transaction.transaction.actions.length})`
 			}
 		];
 		if (settings.data.advancedMode) {
 			options.push({
 				href: `${urlBase}/traces`,
-				text: `Traces (${data.transaction.traces.length})`
+				text: `${m.common_traces()} (${data.transaction.traces.length})`
 			});
 			options.push({
 				href: `${urlBase}/ram`,
-				text: `RAM Deltas (${ramDeltas})`
+				text: `${m.common_ram_usage()} (${ramDeltas})`
 			});
 			options.push({ href: `${urlBase}/data`, text: m.common_data() });
 		}

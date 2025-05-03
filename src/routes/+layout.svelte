@@ -4,7 +4,7 @@
 	import '$lib/utils/dayjs'; // setup dayjs
 	import { ParaglideJS } from '@inlang/paraglide-sveltekit';
 	import { PlausibleAnalytics } from '@accuser/svelte-plausible-analytics';
-	import * as env from '$env/static/public';
+	import { PUBLIC_ENVIRONMENT, PUBLIC_ANALYTICS_DOMAIN } from '$env/static/public';
 
 	import { i18n } from '$lib/i18n';
 	import Toaster from '$lib/components/toast/toaster.svelte';
@@ -13,7 +13,7 @@
 </script>
 
 <svelte:head>
-	{#if !env.PUBLIC_ENVIRONMENT || env.PUBLIC_ENVIRONMENT !== 'production'}
+	{#if PUBLIC_ENVIRONMENT !== 'production'}
 		<meta name="robots" content="noindex" />
 	{/if}
 </svelte:head>
@@ -24,6 +24,6 @@
 	{@render children()}
 </ParaglideJS>
 
-{#if env.PUBLIC_ANALYTICS_DOMAIN}
-	<PlausibleAnalytics apiHost="https://stats.greymass.com" domain={env.PUBLIC_ANALYTICS_DOMAIN} />
+{#if PUBLIC_ENVIRONMENT === 'production'}
+	<PlausibleAnalytics apiHost="https://stats.greymass.com" domain={PUBLIC_ANALYTICS_DOMAIN} />
 {/if}

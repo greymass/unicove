@@ -8,16 +8,9 @@ export const load: PageLoad = async ({ params, parent }) => {
 	});
 	return {
 		authorizations,
-		subtitle: 'Accounts allowing this account to sign on their behalf',
+		subtitle: m.common_authorities_description({ account: params.name }),
 		pageMetaTags: {
-			title: m.explorer_account_balances_meta_title({
-				account: params.name,
-				network: network.chain.name
-			}),
-			description: m.explorer_account_balances_meta_description({
-				account: params.name,
-				network: network.chain.name
-			})
+			description: m.common_authorities_description({ account: params.name })
 		}
 	};
 };

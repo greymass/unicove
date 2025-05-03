@@ -18,6 +18,8 @@
 			{/if}
 		</h1>
 
-		<Button class="mx-auto max-w-fit" variant="primary" href="/">Go to Unicove</Button>
+		<Button class="mx-auto max-w-fit" variant="primary" data-sveltekit-reload href="/">
+			Go to Unicove
+		</Button>
 	</Stack>
 </div>

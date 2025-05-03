@@ -1,12 +1,18 @@
 import type { PageLoad } from './$types';
+import * as m from '$lib/paraglide/messages';
 
 export const load: PageLoad = async ({ params, parent }) => {
 	const { network } = await parent();
 	return {
-		subtitle: `Multisig proposals by ${params.name} on the ${network.chain.name} Network.`,
+		subtitle: m.common_msig_proposals_by({
+			account: params.name,
+			network: network.chain.name
+		}),
 		pageMetaTags: {
-			title: `Multisig Proposals | ${params.name} | ${network.chain.name} Network`,
-			description: `Multisig proposals by ${params.name} on the ${network.chain.name} Network.`
+			description: m.common_msig_proposals_by({
+				account: params.name,
+				network: network.chain.name
+			})
 		}
 	};
 };

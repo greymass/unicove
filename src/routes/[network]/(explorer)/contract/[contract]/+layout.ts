@@ -3,6 +3,7 @@ import { error } from '@sveltejs/kit';
 
 import * as m from '$lib/paraglide/messages.js';
 import type { LayoutLoad } from './$types';
+import { User } from 'lucide-svelte';
 
 export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 	const { network } = await parent();
@@ -23,7 +24,10 @@ export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 
 		title: params.contract,
 		subtitle: 'Contract',
-
+		header: {
+			copyData: String(params.contract),
+			actions: [{ icon: User, href: `/${network}/account/${params.contract}` }]
+		},
 		pageMetaTags: {
 			title: m.contract_view_title({
 				contract: String(params.contract),

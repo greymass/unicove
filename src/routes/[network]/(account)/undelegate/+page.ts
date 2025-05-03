@@ -1,13 +1,20 @@
 import type { PageLoad } from './$types';
+import * as m from '$lib/paraglide/messages';
 
 export const load: PageLoad = async ({ parent }) => {
 	const { network } = await parent();
 	return {
-		title: `Reclaim`,
-		subtitle: `Undelegate and reclaim previously delegated ${network.chain.systemToken?.symbol.code} tokens`,
+		title: m.common_reclaim(),
+		subtitle: m.common_reclaim_delegated_tokens_description({
+			token: network.token.name
+		}),
 		pageMetaTags: {
-			title: `Reclaim Delegated ${network.chain.name} Tokens`,
-			description: `Undelegate and reclaim previously delegated ${network.chain.systemToken?.symbol.code} tokens.`
+			title: m.common_reclaim_delegated_tokens({
+				token: network.token.name
+			}),
+			description: m.common_reclaim_delegated_tokens_description({
+				token: network.token.name
+			})
 		}
 	};
 };

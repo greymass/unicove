@@ -157,6 +157,15 @@
 		{/if}
 	</div>
 	<div class="space-y-6">
+		{#if context.settings.data.advancedMode && context.wharf.session}
+			<Button
+				variant="secondary"
+				href={`/${data.network}/account/${data.name}/contract`}
+				class="w-full"
+			>
+				Upload Contract
+			</Button>
+		{/if}
 		<Tokendistribution data={currentAccountValue.systemtoken} />
 		{#if context.settings.data.advancedMode}
 			<Card class="@container" title={m.common_resources()}>

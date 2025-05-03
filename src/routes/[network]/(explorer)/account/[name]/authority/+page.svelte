@@ -8,6 +8,8 @@
 	import Account from '$lib/components/elements/account.svelte';
 	import Button from '$lib/components/button/button.svelte';
 
+	import * as m from '$lib/paraglide/messages';
+
 	const { data } = $props();
 
 	const context = getContext<UnicoveContext>('state');
@@ -26,7 +28,9 @@
 </script>
 
 <p>
-	The {data.account.name} account has some form of authority assigned to the other accounts listed below.
+	{m.common_account_authority_description({
+		account: data.account.name
+	})}
 </p>
 
 {#await data.authorizations then authorizations}
@@ -39,15 +43,21 @@
 						{permission}
 					</Account>
 					<p>
-						Weight of {auth.weight} and threshold of {auth.threshold}.
+						{m.common_authority_weight_threshold_description({
+							weight: auth.weight,
+							threshold: auth.threshold
+						})}
 					</p>
 				</div>
 				<div class="flex-end">
 					{#if isCurrentUser}
-						<Button onclick={() => signin(permission)}>
-							Login as {permission}
+						<Button onclick={() => signin(permission)}
+							>}
+							{m.common_login_as({ permission })}
 							<div class="text-xs">
-								↳ multisig using {data.account.name}
+								↳ {m.common_multisig_using({
+									account: data.account.name
+								})}
 							</div>
 						</Button>
 					{/if}
@@ -56,7 +66,7 @@
 		</Card>
 	{:else}
 		<Card>
-			<p>No authority assigned.</p>
+			<p>{m.common_no_authorities()}</p>
 		</Card>
 	{/each}
 {/await}

@@ -165,7 +165,7 @@ export class MarketState {
 function getSwaps(network: NetworkState, pairs: TokenPair[]): TokenSwap[] {
 	const swaps: TokenSwap[] = [
 		...getRAMTokenSwaps(network, pairs),
-		...getWRAMTokenSwaps(network, pairs),
+		...getWRAMTokenSwaps(network),
 		...getLegacyTokenSwaps(network, pairs)
 	];
 	return swaps;
@@ -250,18 +250,14 @@ function getRAMTokenSwaps(network: NetworkState, pairs: TokenPair[]): TokenSwap[
 	return swaps;
 }
 
-// Create pairs for RAM buy/sell as "swap" actions
-function getWRAMTokenSwaps(network: NetworkState, pairs: TokenPair[]): TokenSwap[] {
+// Create pairs for WRAM "swap" actions
+function getWRAMTokenSwaps(network: NetworkState): TokenSwap[] {
 	if (!network.supports('wram')) {
 		return [];
 	}
-
 	const ram = network.getRamToken();
 	const wram = network.getWRAMToken();
-	const swaps: TokenSwap[] = [];
-
-	console.log('pairs', JSON.stringify(pairs));
-	swaps.push(
+	return [
 		TokenSwap.from({
 			pair: TokenPair.from({
 				base: ram,
@@ -271,10 +267,7 @@ function getWRAMTokenSwaps(network: NetworkState, pairs: TokenPair[]): TokenSwap
 			}),
 			contract: network.config.systemcontract,
 			action: 'ramtransfer'
-		})
-	);
-
-	swaps.push(
+		}),
 		TokenSwap.from({
 			pair: TokenPair.from({
 				base: wram,
@@ -285,9 +278,5 @@ function getWRAMTokenSwaps(network: NetworkState, pairs: TokenPair[]): TokenSwap
 			contract: 'eosio.wram',
 			action: 'transfer'
 		})
-	);
-
-	console.log(swaps);
-
-	return swaps;
+	];
 }
