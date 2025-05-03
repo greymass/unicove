@@ -9,7 +9,7 @@
 	const context = getContext<UnicoveContext>('state');
 </script>
 
-{#if context.settings.data.advancedMode && context.wharf.session}
+{#if context.wharf.session}
 	<Button variant="secondary" href={`/${data.network}/upload/${data.contract}`} class="w-full">
 		Upload Contract
 	</Button>
