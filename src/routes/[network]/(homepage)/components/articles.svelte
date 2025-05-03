@@ -40,7 +40,7 @@
 			</div>
 			<div class="col-span-full grid place-items-center @3xl:col-span-1">
 				<TextBlock title={article.title} text={article.description}>
-					<Button variant="primary" href={article.slug} blank>
+					<Button variant="primary" href={article.slug}>
 						{m.common_read_more()}
 					</Button>
 				</TextBlock>
