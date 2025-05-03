@@ -1,20 +1,31 @@
 <script lang="ts">
 	import AssetText from '$lib/components/elements/asset.svelte';
-	import ValueText from '$lib/components/elements/currency/value.svelte';
 	import { Asset } from '@wharfkit/antelope';
 
-	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
 	import * as m from '$lib/paraglide/messages';
-	import { ZeroUnits } from '$lib/types/token.js';
+	import { TokenBalanceValue, ZeroUnits } from '$lib/types/token.js';
 	import Button from '$lib/components/button/button.svelte';
+	import { Currencies } from '$lib/types/currencies.js';
 
 	const { data } = $props();
-	const balances = $derived(
-		data.account.balances.filter((item) => item.balance.units.gt(ZeroUnits))
-	);
-
 	const context = getContext<UnicoveContext>('state');
+	const market = getContext<MarketContext>('market');
+
+	const currency = Currencies[context.settings.data.displayCurrency];
+
+	const balances = $derived(
+		data.account.balances
+			.filter((item) => item.balance.units.gt(ZeroUnits))
+			.map((item) =>
+				TokenBalanceValue.from({
+					...item,
+					value: market.market.value(item.token.id, currency, item.balance)
+				})
+			)
+			.sort((a, b) => (a.value.units.gt(b.value.units) ? -1 : 1))
+	);
 
 	const isCurrentUser = $derived(
 		context.account &&
@@ -66,7 +77,7 @@
 						<AssetText value={tokenBalance.balance} />
 					</td>
 					<td class="text-right">
-						<ValueText token={tokenBalance.token.id} balance={tokenBalance.balance} />
+						<AssetText value={tokenBalance.value} />
 					</td>
 					{#if isCurrentUser}
 						{#if !tokenBalance.locked}
