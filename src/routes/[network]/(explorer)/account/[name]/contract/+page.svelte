@@ -38,7 +38,7 @@
 		}
 	}
 
-	function setabi(this: FileReader, ev: ProgressEvent<FileReader>) {
+	function setabi(this: FileReader) {
 		const abi = ABI.from(JSON.parse(new TextDecoder().decode(this.result as ArrayBuffer)));
 		actions.push(
 			data.network.contracts.system.action('setabi', {
@@ -48,7 +48,7 @@
 		);
 	}
 
-	function setcode(this: FileReader, ev: ProgressEvent<FileReader>) {
+	function setcode(this: FileReader) {
 		actions.push(
 			data.network.contracts.system.action('setcode', {
 				account: data.name,
