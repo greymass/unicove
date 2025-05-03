@@ -1,8 +1,19 @@
 <script lang="ts">
+	import { getContext } from 'svelte';
+
+	import type { UnicoveContext } from '$lib/state/client.svelte.js';
 	import Contract from '$lib/components/elements/contract.svelte';
+	import Button from '$lib/components/button/button.svelte';
 
 	const { data } = $props();
+	const context = getContext<UnicoveContext>('state');
 </script>
+
+{#if context.settings.data.advancedMode && context.wharf.session}
+	<Button variant="secondary" href={`/${data.network}/upload/${data.contract}`} class="w-full">
+		Upload Contract
+	</Button>
+{/if}
 
 <h2 class="h2">Actions</h2>
 <div class="flex flex-wrap gap-4">

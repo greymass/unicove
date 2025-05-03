@@ -1,18 +1,34 @@
 <script lang="ts">
-	import { ABI, Action, Bytes, Checksum256, Serializer } from '@wharfkit/antelope';
+	import { ABI, Action, Bytes, Checksum256, Name, Serializer } from '@wharfkit/antelope';
 	import Card from '$lib/components/layout/box/card.svelte';
 	import Code from '$lib/components/code.svelte';
-	import { getContext } from 'svelte';
+	import { getContext, onMount } from 'svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
+	import NameInput from '$lib/components/input/name.svelte';
 	import TransactForm from '$lib/components/transact/form.svelte';
 	import Button from '$lib/components/button/button.svelte';
 
 	import * as m from '$lib/paraglide/messages';
 	import { SingleCard } from '$lib/components/layout/index.js';
 	import Stack from '$lib/components/layout/stack.svelte';
+	import Label from '$lib/components/input/label.svelte';
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');
+
+	let accountInput: NameInput | undefined = $state();
+	let accountRef: HTMLInputElement | undefined = $state();
+	let accountValid = $state(false);
+	let accountName: Name = $state(Name.from(''));
+
+	onMount(() => {
+		if (data.name) {
+			accountName = Name.from(data.name);
+			if (accountInput) {
+				accountInput?.set(data.name);
+			}
+		}
+	});
 
 	const actions: Action[] = $state([]);
 	let id: Checksum256 | undefined = $state();
@@ -42,7 +58,7 @@
 		const abi = ABI.from(JSON.parse(new TextDecoder().decode(this.result as ArrayBuffer)));
 		actions.push(
 			data.network.contracts.system.action('setabi', {
-				account: data.name,
+				account: accountName,
 				abi: Serializer.encode({ object: abi })
 			})
 		);
@@ -51,7 +67,7 @@
 	function setcode(this: FileReader) {
 		actions.push(
 			data.network.contracts.system.action('setcode', {
-				account: data.name,
+				account: accountName,
 				code: Bytes.from(this.result as ArrayBuffer),
 				vmtype: 0,
 				vmversion: 0
@@ -93,23 +109,38 @@
 <SingleCard>
 	<Stack>
 		<TransactForm {id} {error} onsuccess={Success} onfailure={Failure}>
-			<h2 class="h2">Upload Contract</h2>
 			<p>
-				Select an ABI and/or WASM file to upload to the {data.name} account using the authority of the
-				currently logged in account.
+				Enter an account name and select an ABI and/or WASM file to upload using the authority of
+				the currently logged in account.
 			</p>
 
-			<div
-				class="border-outline focus-within:border-primary focus-within:ring-primary relative flex h-12 gap-2 rounded-lg border-2 px-4 *:content-center focus-within:ring-1 focus-within:ring-inset"
-			>
-				<input
-					type="file"
-					accept=".abi,.wasm"
-					multiple
-					onchange={set}
-					class="placeholder:text-muted w-full rounded-lg bg-transparent font-medium focus:outline-hidden"
+			<fieldset class="grid gap-2">
+				<Label for="account-input">{m.common_account_name()}</Label>
+				<NameInput
+					autofocus
+					bind:this={accountInput}
+					bind:ref={accountRef}
+					bind:value={accountName}
+					bind:valid={accountValid}
+					id="account-input"
+					placeholder={m.common_account_name()}
 				/>
-			</div>
+			</fieldset>
+
+			<fieldset class="grid gap-2">
+				<Label for="account-input">Contract Files</Label>
+				<div
+					class="border-outline focus-within:border-primary focus-within:ring-primary relative flex h-12 gap-2 rounded-lg border-2 px-4 *:content-center focus-within:ring-1 focus-within:ring-inset"
+				>
+					<input
+						type="file"
+						accept=".abi,.wasm"
+						multiple
+						onchange={set}
+						class="placeholder:text-muted w-full rounded-lg bg-transparent font-medium focus:outline-hidden"
+					/>
+				</div>
+			</fieldset>
 
 			<Button onclick={transact} disabled={actions.length === 0}>Upload</Button>
 
