@@ -8,6 +8,7 @@ import { Contract as SystemContract } from '$lib/wharf/contracts/system';
 import { Contract as TimeContract } from '$lib/wharf/contracts/eosntime';
 import { Contract as TokenContract } from '$lib/wharf/contracts/token';
 import { Contract as UnicoveContract } from '$lib/wharf/contracts/unicove.api';
+import { Contract as VaultaContract } from '$lib/wharf/contracts/core.vaulta';
 
 import * as env from '$env/static/public';
 
@@ -159,6 +160,7 @@ export interface DefaultContracts {
 	system: SystemContract;
 	token: TokenContract;
 	unicove: UnicoveContract;
+	vaulta: VaultaContract;
 }
 
 export interface ChainEndpoints {
