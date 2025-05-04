@@ -28,6 +28,7 @@
 		objectified?: ObjectifiedActionData;
 		id?: Checksum256Type;
 		notified?: Name[];
+		perspectiveOf?: Name;
 		summary?: Component<ActionSummaryProps, object>;
 		variant?: ActionDisplayVariants;
 	}
@@ -36,6 +37,7 @@
 		action,
 		datetime,
 		objectified,
+		perspectiveOf,
 		id,
 		notified,
 		summary: ActionSummary,
@@ -128,7 +130,7 @@
 
 {#snippet Summary()}
 	{#if typeof objectified === 'object' && ActionSummary}
-		<ActionSummary data={objectified} />
+			<ActionSummary data={objectified} {perspectiveOf} />
 	{:else}
 		{@render Pretty(objectified)}
 	{/if}
