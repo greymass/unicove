@@ -24,6 +24,7 @@ export type ObjectifiedActionData = Record<string, any>;
 export interface ActionSummaryProps {
 	class?: string;
 	data: ObjectifiedActionData;
+	perspectiveOf?: Name;
 	value?: Asset;
 }
 
