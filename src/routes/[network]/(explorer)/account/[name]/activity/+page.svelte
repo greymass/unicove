@@ -1,6 +1,8 @@
 <script lang="ts">
 	import Stack from '$lib/components/layout/stack.svelte';
 	import { getContext, onMount } from 'svelte';
+	import { Name } from '@wharfkit/antelope';
+
 	import { ActivityLoader } from './state.svelte.js';
 	import Button from '$lib/components/button/button.svelte';
 	import type { ActivityResponseAction } from '$lib/types/transaction.js';
@@ -66,7 +68,14 @@
 				{@const action = String(activityAction.trace.action.name)}
 				{@const summary = getActionSummaryComponent(contract, action)}
 				<li class="">
-					<Trace trace={activityAction.trace} {summary} date trxid {variant} />
+					<Trace
+						perspectiveOf={Name.from(data.name)}
+						trace={activityAction.trace}
+						{summary}
+						date
+						trxid
+						{variant}
+					/>
 				</li>
 			{/each}
 		</ol>
