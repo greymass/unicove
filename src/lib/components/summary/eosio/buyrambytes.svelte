@@ -1,35 +1,30 @@
 <script lang="ts">
-	import { formatCurrency } from '$lib/i18n';
-	import { Card, Stack, Switcher } from '$lib/components/layout';
+	import { Asset, Name } from '@wharfkit/antelope';
+
 	import * as SystemContract from '$lib/wharf/contracts/system';
 	import type { ActionSummaryProps } from '$lib/types/transaction';
+	import AccountElement from '$lib/components/elements/account.svelte';
+	import AssetElement from '$lib/components/elements/asset.svelte';
+	import Chip from '$lib/components/chip.svelte';
+	import { ramtoken } from '$lib/wharf/chains';
 
 	interface Props extends Omit<ActionSummaryProps, 'data'> {
 		data: SystemContract.Types.buyrambytes;
 	}
 
-	const { class: className = '', data, value }: Props = $props();
+	const { data }: Props = $props();
 </script>
 
-<Card class="gap-5 text-center {className}">
-	<h3 class="h3">Buy RAM Bytes</h3>
-	<Switcher threshold="20rem">
-		<Stack class="gap-0">
-			<p class="caption">Payer</p>
-			<p class="h3">{data.payer}</p>
-		</Stack>
-		<Stack class="gap-0">
-			<p class="caption">Receiver</p>
-			<p class="h3">{data.receiver}</p>
-		</Stack>
-		<Stack class="gap-0">
-			<p class="caption">Bytes</p>
-			<p class="h3">{data.bytes}</p>
-			{#if value}
-				<p class="bg-surface-container-highest mt-1.5 self-start rounded-sm px-2">
-					USD {formatCurrency(value)}
-				</p>
-			{/if}
-		</Stack>
-	</Switcher>
-</Card>
+<Chip class="col-start-1 col-end-2 w-full text-center">Action</Chip>
+<AssetElement
+	class="col-start-2 col-end-4"
+	value={Asset.fromUnits(data.bytes, ramtoken.symbol)}
+	variant="full"
+/>
+<AccountElement class="col-start-4 col-end-6" name={Name.from(data.payer)} />
+{#if !Name.from(data.receiver).equals(data.payer)}
+	<span class="col-start-6 col-end-12">
+		(Receiver:
+		<AccountElement name={Name.from(data.receiver)} />)
+	</span>
+{/if}

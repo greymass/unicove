@@ -1,16 +1,18 @@
 import type { Component } from 'svelte';
 
 // Contract action summary components
-import eosio from '$lib/components/summary/eosio/index.js';
-import token from '$lib/components/summary/eosio.token/index.js';
-import greymassnoop from '$lib/components/summary/greymassnoop/index.js';
+import eosio from '$lib/components/summary/eosio';
+import rex from '$lib/components/summary/eosio.rex';
+import token from '$lib/components/summary/eosio.token';
+import greymassnoop from '$lib/components/summary/greymassnoop';
 import type { ObjectifiedActionData } from '$lib/types/transaction';
 import { Asset, Name } from '@wharfkit/antelope';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const summaries: Record<string, any> = {
-	eosio: eosio,
 	'core.vaulta': eosio,
+	eosio: eosio,
+	'eosio.rex': rex,
 	'eosio.token': token,
 	greymassnoop
 };
