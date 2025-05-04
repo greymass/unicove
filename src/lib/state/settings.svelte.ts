@@ -50,7 +50,7 @@ export interface SettingsData {
 }
 
 const defaultSettings: SettingsData = {
-	actionDisplayVariant: 'pretty',
+	actionDisplayVariant: 'summary',
 	advancedMode: false,
 	displayCurrency: SupportedCurrencies.USD,
 	debugMode: false,
@@ -71,7 +71,11 @@ export class SettingsState {
 			if (item)
 				this.data = {
 					...defaultSettings,
-					...this.deserialize(item)
+					...this.deserialize(item),
+					// TODO: Once we want this to persist, remove this
+					// Currently running as a soft migratio for users
+					// to not have to deal changing the setting.
+					actionDisplayVariant: 'summary'
 				};
 		}
 		$effect(() => {
