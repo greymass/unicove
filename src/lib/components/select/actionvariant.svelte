@@ -14,7 +14,7 @@
 	}
 </script>
 
-{#if context.settings.data.debugMode}
+{#if context.settings.data.developerMode}
 	<Grid>
 		<Button
 			variant={current !== 'summary' ? 'secondary' : 'primary'}
