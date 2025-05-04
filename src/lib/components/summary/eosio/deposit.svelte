@@ -4,11 +4,11 @@
 	import type { ActionSummaryProps } from '$lib/types/transaction';
 	import { Types } from '$lib/types/rex';
 
-	interface StakeProps extends Omit<ActionSummaryProps, 'data'> {
+	interface Props extends Omit<ActionSummaryProps, 'data'> {
 		data: Types.deposit;
 	}
 
-	const { class: className = '', data, value }: StakeProps = $props();
+	const { class: className = '', data, value }: Props = $props();
 </script>
 
 <Card class="gap-5 text-center {className}">

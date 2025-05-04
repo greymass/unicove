@@ -4,11 +4,11 @@
 	import { Types } from '$lib/types/rex';
 	import type { ActionSummaryProps } from '$lib/types/transaction';
 
-	interface BuyREXProps extends Omit<ActionSummaryProps, 'data'> {
+	interface Props extends Omit<ActionSummaryProps, 'data'> {
 		data: Types.buyrex;
 	}
 
-	const { class: className = '', data, value }: BuyREXProps = $props();
+	const { class: className = '', data, value }: Props = $props();
 </script>
 
 <Card class="gap-5 text-center {className}">
