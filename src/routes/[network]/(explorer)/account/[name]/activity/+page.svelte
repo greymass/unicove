@@ -1,16 +1,16 @@
 <script lang="ts">
-	import Stack from '$lib/components/layout/stack.svelte';
 	import { getContext, onMount } from 'svelte';
 	import { Name } from '@wharfkit/antelope';
 
 	import { ActivityLoader } from './state.svelte.js';
-	import Button from '$lib/components/button/button.svelte';
-	import type { ActivityResponseAction } from '$lib/types/transaction.js';
-	import type { ActionDisplayVariants } from '$lib/types.js';
-	import Trace from '$lib/components/elements/trace.svelte';
-	import SelectActionVariant from '$lib/components/select/actionvariant.svelte';
-	import type { UnicoveContext } from '$lib/state/client.svelte.js';
 	import { getActionSummaryComponent } from '$lib/components/summary/index.js';
+	import Button from '$lib/components/button/button.svelte';
+	import SelectActionVariant from '$lib/components/select/actionvariant.svelte';
+	import Trace from '$lib/components/elements/trace.svelte';
+	import type { ActionDisplayVariants } from '$lib/types.js';
+	import type { ActivityResponseAction } from '$lib/types/transaction.js';
+	import type { UnicoveContext } from '$lib/state/client.svelte.js';
+	import Stack from '$lib/components/layout/stack.svelte';
 
 	const { data } = $props();
 
@@ -66,7 +66,11 @@
 			{#each activityActions as activityAction}
 				{@const contract = String(activityAction.trace.action.account)}
 				{@const action = String(activityAction.trace.action.name)}
-				{@const summary = getActionSummaryComponent(contract, action)}
+				{@const summary = getActionSummaryComponent(
+					contract,
+					action,
+					activityAction.trace.act.data
+				)}
 				<li class="">
 					<Trace
 						perspectiveOf={Name.from(data.name)}

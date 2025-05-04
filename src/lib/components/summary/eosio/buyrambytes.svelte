@@ -4,11 +4,11 @@
 	import * as SystemContract from '$lib/wharf/contracts/system';
 	import type { ActionSummaryProps } from '$lib/types/transaction';
 
-	interface BuyRAMBytesProps extends Omit<ActionSummaryProps, 'data'> {
+	interface Props extends Omit<ActionSummaryProps, 'data'> {
 		data: SystemContract.Types.buyrambytes;
 	}
 
-	const { class: className = '', data, value }: BuyRAMBytesProps = $props();
+	const { class: className = '', data, value }: Props = $props();
 </script>
 
 <Card class="gap-5 text-center {className}">
