@@ -16,9 +16,9 @@
 </script>
 
 <Chip class="col-start-1 col-end-2 w-full text-center">Action</Chip>
-<AccountElement class="col-start-2 col-end-3" name={Name.from(data.account)} />
 <AssetElement
-	class="col-start-4 col-end-12 text-left"
+	class="col-start-2 col-end-4"
 	value={Asset.fromUnits(data.bytes, ramtoken.symbol)}
 	variant="full"
 />
+<AccountElement class="col-start-4 col-end-6" name={Name.from(data.account)} />
