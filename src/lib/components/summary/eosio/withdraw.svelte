@@ -11,7 +11,7 @@
 		data: Types.withdraw;
 	}
 
-	const { class: className = '', data, value }: Props = $props();
+	const { data }: Props = $props();
 </script>
 
 <Chip class="col-start-1 col-end-2 w-full text-center">Staking</Chip>
