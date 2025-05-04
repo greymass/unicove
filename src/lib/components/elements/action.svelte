@@ -130,7 +130,9 @@
 
 {#snippet Summary()}
 	{#if typeof objectified === 'object' && ActionSummary}
+		<div class="grid grid-cols-12 gap-4">
 			<ActionSummary data={objectified} {perspectiveOf} />
+		</div>
 	{:else}
 		{@render Pretty(objectified)}
 	{/if}
