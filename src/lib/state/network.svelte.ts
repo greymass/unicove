@@ -41,10 +41,12 @@ import { Contract as SystemContract } from '$lib/wharf/contracts/system';
 import { Contract as TimeContract } from '$lib/wharf/contracts/eosntime';
 import { Contract as TokenContract } from '$lib/wharf/contracts/token';
 import { Contract as UnicoveContract } from '$lib/wharf/contracts/unicove.api';
+import { Contract as VaultaContract } from '$lib/wharf/contracts/core.vaulta';
 import type { ObjectifiedActionData } from '$lib/types/transaction';
 import {
 	PUBLIC_FEATURE_METAMASK_SNAP_ORIGIN,
-	PUBLIC_FEATURE_UNICOVE_CONTRACT_API
+	PUBLIC_FEATURE_UNICOVE_CONTRACT_API,
+	PUBLIC_FEATURE_VAULTA_CORE_CONTRACT
 } from '$env/static/public';
 
 export class NetworkState {
@@ -114,6 +116,10 @@ export class NetworkState {
 			token: new TokenContract({ client: this.client }),
 			unicove: new UnicoveContract({
 				account: PUBLIC_FEATURE_UNICOVE_CONTRACT_API,
+				client: this.client
+			}),
+			vaulta: new VaultaContract({
+				account: PUBLIC_FEATURE_VAULTA_CORE_CONTRACT,
 				client: this.client
 			})
 		};

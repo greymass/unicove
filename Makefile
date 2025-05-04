@@ -73,6 +73,13 @@ else
 	bunx @wharfkit/cli generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/unicove.api.ts $(PUBLIC_FEATURE_UNICOVE_CONTRACT_API)
 endif
 
+$(CONTRACTS)/core.vaulta.ts:
+ifeq ($(PUBLIC_FEATURE_VAULTA_CORE_CONTRACT),)
+	cp ./configs/contracts/core.vaulta.ts $(CONTRACTS)/core.vaulta.ts
+else
+	bunx @wharfkit/cli generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/core.vaulta.ts $(PUBLIC_FEATURE_VAULTA_CORE_CONTRACT)
+endif
+
 $(CONTRACTS)/eosntime.ts:
 ifeq ($(PUBLIC_FEATURE_EOSNTIME),true)
 	bunx @wharfkit/cli generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/eosntime.ts time.eosn
@@ -80,7 +87,7 @@ else
 	cp ./configs/contracts/eosntime.ts $(CONTRACTS)/eosntime.ts
 endif
 
-codegen: $(CONTRACTS)/system.ts $(CONTRACTS)/token.ts $(CONTRACTS)/msig.ts $(CONTRACTS)/delphihelper.ts $(CONTRACTS)/delphioracle.ts $(CONTRACTS)/unicove.api.ts $(CONTRACTS)/eosntime.ts
+codegen: $(CONTRACTS)/system.ts $(CONTRACTS)/token.ts $(CONTRACTS)/msig.ts $(CONTRACTS)/delphihelper.ts $(CONTRACTS)/delphioracle.ts $(CONTRACTS)/unicove.api.ts $(CONTRACTS)/eosntime.ts $(CONTRACTS)/core.vaulta.ts
 	mkdir -p $(CONTRACTS)
 
 .PHONY: codegen/base
@@ -88,6 +95,7 @@ codegen/base:
 	bunx @wharfkit/cli generate -u https://eos.greymass.com -f ./configs/contracts/delphihelper.ts delphihelper
 	bunx @wharfkit/cli generate -u https://eos.greymass.com -f ./configs/contracts/delphioracle.ts delphioracle
 	bunx @wharfkit/cli generate -u https://eos.greymass.com -f ./configs/contracts/eosntime.ts time.eosn
+	bunx @wharfkit/cli generate -u $(PUBLIC_API_CHAIN) -f ./configs/contracts/core.vaulta.ts $(PUBLIC_FEATURE_VAULTA_CORE_CONTRACT)
 	bunx @wharfkit/cli generate -u $(PUBLIC_API_CHAIN) -f ./configs/contracts/unicove.api.ts $(PUBLIC_FEATURE_UNICOVE_CONTRACT_API)
 	make format
 
