@@ -10,6 +10,7 @@ import { Asset, Name } from '@wharfkit/antelope';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const summaries: Record<string, any> = {
 	eosio: eosio,
+	'core.vaulta': eosio,
 	'eosio.token': token,
 	greymassnoop
 };
