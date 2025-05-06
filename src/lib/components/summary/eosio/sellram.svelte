@@ -7,6 +7,7 @@
 	import AccountElement from '$lib/components/elements/account.svelte';
 	import AssetElement from '$lib/components/elements/asset.svelte';
 	import Chip from '$lib/components/chip.svelte';
+	import Row from '../components/row.svelte';
 
 	interface Props extends Omit<ActionSummaryProps, 'data'> {
 		data: SystemContract.Types.sellram;
@@ -15,10 +16,8 @@
 	const { data }: Props = $props();
 </script>
 
-<Chip class="col-start-1 col-end-2 w-full text-center">Action</Chip>
-<AssetElement
-	class="col-start-2 col-end-4"
-	value={Asset.fromUnits(data.bytes, ramtoken.symbol)}
-	variant="full"
-/>
-<AccountElement class="col-start-4 col-end-6" name={Name.from(data.account)} />
+<Row>
+	<Chip>Action</Chip>
+	<AssetElement value={Asset.fromUnits(data.bytes, ramtoken.symbol)} variant="full" />
+	<AccountElement name={Name.from(data.account)} />
+</Row>
