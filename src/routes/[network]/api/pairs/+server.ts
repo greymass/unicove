@@ -6,7 +6,12 @@ import { TokenDataSources, TokenDefinition, tokenEquals, TokenPair } from '$lib/
 import { Asset, Chains, TimePointSec } from '@wharfkit/session';
 import { Currencies } from '$lib/types/currencies';
 import { RAMState } from '@wharfkit/resources';
-import { PUBLIC_LEGACY_TOKEN_EXCHANGERATE } from '$env/static/public';
+import {
+	PUBLIC_FEATURE_CMC_APIKEY,
+	PUBLIC_FEATURE_CMC_PAIRS,
+	PUBLIC_LEGACY_TOKEN_EXCHANGERATE
+} from '$env/static/public';
+import { cmctokens } from './cmctokenmap';
 
 export async function GET({ fetch, locals: { network }, url }: RequestEvent) {
 	const pairs: TokenPair[] = [];
@@ -90,6 +95,10 @@ export async function GET({ fetch, locals: { network }, url }: RequestEvent) {
 			updated: network.connection.updated
 		})
 	);
+
+	// Push CMC token pairs
+	const cmcpairs = await deriveCMCPairs();
+	pairs.push(...cmcpairs);
 
 	if (network.supports('delphihelper')) {
 		pairs.push(...(await delphihelper(network)));
@@ -282,4 +291,48 @@ function deriveAdditionalPairs(pairs: TokenPair[]): TokenPair[] {
 	}
 
 	return derived;
+}
+
+// Very rough CoinMarketCap API response types - missing lots of fields
+interface CMCDataQuote {
+	price: number;
+}
+interface CMCDataResult {
+	id: number;
+	name: string;
+	quote: Record<string, CMCDataQuote>;
+}
+interface CMCData {
+	data: Record<number, CMCDataResult>;
+}
+
+async function deriveCMCPairs(): Promise<TokenPair[]> {
+	if (PUBLIC_FEATURE_CMC_APIKEY) {
+		try {
+			const response = await fetch(
+				`https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?id=${PUBLIC_FEATURE_CMC_PAIRS}`,
+				{
+					headers: {
+						'X-CMC_PRO_API_KEY': PUBLIC_FEATURE_CMC_APIKEY
+					}
+				}
+			);
+			const json = (await response.json()) as CMCData;
+			const pairs = [];
+			for (const id in json.data) {
+				pairs.push(
+					TokenPair.from({
+						base: cmctokens[id],
+						quote: { id: Currencies.USD },
+						price: Asset.fromFloat(json.data[id].quote['USD'].price, USDT.symbol),
+						updated: new Date()
+					})
+				);
+			}
+			return pairs;
+		} catch (error) {
+			console.error('Error fetching CoinMarketCap data:', error);
+		}
+	}
+	return [];
 }

@@ -18,12 +18,28 @@
 	const balances = $derived(
 		data.account.balances
 			.filter((item) => item.balance.units.gt(ZeroUnits))
-			.map((item) =>
-				TokenBalanceValue.from({
-					...item,
-					value: market.market.value(item.token.id, currency, item.balance)
-				})
-			)
+			.map((item) => {
+				const pair = market.market.getPair(item.token.id, currency);
+				if (pair) {
+					return TokenBalanceValue.from({
+						...item,
+						token: {
+							...item.token,
+							// Merge media from token and pair
+							media: {
+								...item.token.media,
+								...pair.base.media
+							}
+						},
+						value: market.market.value(item.token.id, currency, item.balance)
+					});
+				} else {
+					return TokenBalanceValue.from({
+						...item,
+						value: Asset.fromUnits(0, currency.symbol)
+					});
+				}
+			})
 			.sort((a, b) => (a.value.units.gt(b.value.units) ? -1 : 1))
 	);
 
@@ -62,9 +78,13 @@
 					<td>
 						<div class="flex items-center gap-3">
 							<div class="flex h-6 w-6 items-center justify-center rounded-full bg-black">
-								<!-- {#if tokenBalance.id.meta.logo}
-									<img class="h-5 w-5" src={tokenBalance.id.meta.logo} alt="LOGO" />
-								{/if} -->
+								{#if tokenBalance.token.media?.logo?.dark}
+									<img
+										class="h-5 w-5"
+										src={tokenBalance.token.media?.logo?.dark}
+										alt={`${tokenBalance.token.name} Logo`}
+									/>
+								{/if}
 							</div>
 							<a
 								href={`/${context.network}/token/${tokenBalance.token.contract}/${tokenBalance.token.name}`}
@@ -77,7 +97,9 @@
 						<AssetText value={tokenBalance.balance} />
 					</td>
 					<td class="text-right">
-						<AssetText value={tokenBalance.value} />
+						{#if tokenBalance.value.units.gt(ZeroUnits)}
+							<AssetText value={tokenBalance.value} />
+						{/if}
 					</td>
 					{#if isCurrentUser}
 						{#if !tokenBalance.locked}
