@@ -1,12 +1,14 @@
 import type { Component } from 'svelte';
+import { Asset, Name } from '@wharfkit/antelope';
+
+import type { ObjectifiedActionData } from '$lib/types/transaction';
+import * as m from '$lib/paraglide/messages';
 
 // Contract action summary components
 import eosio from '$lib/components/summary/eosio';
 import rex from '$lib/components/summary/eosio.rex';
 import token from '$lib/components/summary/eosio.token';
 import greymassnoop from '$lib/components/summary/greymassnoop';
-import type { ObjectifiedActionData } from '$lib/types/transaction';
-import { Asset, Name } from '@wharfkit/antelope';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const summaries: Record<string, any> = {
@@ -15,6 +17,11 @@ export const summaries: Record<string, any> = {
 	'eosio.rex': rex,
 	'eosio.token': token,
 	greymassnoop
+};
+
+export const summaryTitles: Record<string, string> = {
+	greymassnoop_noop: m.summary_title_greymassnoop_noop(),
+	'eosio.token_transfer': m.summary_title_eosiotoken_transfer()
 };
 
 export function isStandardTokenTransfer(data: ObjectifiedActionData) {
