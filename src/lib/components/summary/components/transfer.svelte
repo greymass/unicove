@@ -6,6 +6,7 @@
 	import { ArrowBigRight } from 'lucide-svelte';
 	import Chip from '$lib/components/chip.svelte';
 	import type { Snippet } from 'svelte';
+	import Row from './row.svelte';
 
 	interface Props {
 		from: NameType;
@@ -22,21 +23,26 @@
 	const isReceive = $derived(perspectiveOf && perspectiveOf.equals(to));
 </script>
 
-{#if isSend}
-	<Chip class="col-start-1 col-end-2 w-full bg-red-600 text-center text-white">Sent</Chip>
-{:else if isReceive}
-	<Chip class="col-start-1 col-end-2 w-full bg-green-600 text-center text-white">Received</Chip>
-{:else}
-	<Chip class="col-start-1 col-end-2 w-full text-center">Transfer</Chip>
-{/if}
-<AssetElement class="col-start-2 col-end-4" value={Asset.from(quantity)} variant="full" />
-<AccountLink class="col-start-4 col-end-5" name={Name.from(from)} />
-<div class="col-start-5 col-end-6 items-center justify-self-center">
-	<ArrowBigRight />
-</div>
-<AccountLink class="col-start-6 col-end-7" name={Name.from(to)} />
-{#if props.children}
-	<span>
-		{@render props.children()}
-	</span>
-{/if}
+<Row>
+	{#if isSend}
+		<Chip class="bg-error text-on-error">Sent</Chip>
+	{:else if isReceive}
+		<Chip class="bg-success text-on-success">Received</Chip>
+	{:else}
+		<Chip class="">Transfer</Chip>
+	{/if}
+
+	<AssetElement class="" value={Asset.from(quantity)} variant="full" />
+
+	<AccountLink class="" name={Name.from(from)} />
+
+	<ArrowBigRight class="size-6" />
+
+	<AccountLink class="" name={Name.from(to)} />
+
+	{#if props.children}
+		<span>
+			{@render props.children()}
+		</span>
+	{/if}
+</Row>

@@ -19,6 +19,7 @@
 	import Card from '../layout/box/card.svelte';
 
 	import * as m from '$lib/paraglide/messages';
+	import ActionSummaryContainer from '$lib/components/summary/components/container.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -130,9 +131,9 @@
 
 {#snippet Summary()}
 	{#if typeof objectified === 'object' && ActionSummary}
-		<div class="grid grid-cols-12 gap-4">
+		<ActionSummaryContainer>
 			<ActionSummary data={objectified} {perspectiveOf} />
-		</div>
+		</ActionSummaryContainer>
 	{:else}
 		{@render Pretty(objectified)}
 	{/if}
