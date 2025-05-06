@@ -20,6 +20,7 @@
 
 	import * as m from '$lib/paraglide/messages';
 	import ActionSummaryContainer from '$lib/components/summary/components/container.svelte';
+	import Switcher from '../layout/switcher.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -140,26 +141,28 @@
 {/snippet}
 
 {#snippet Header()}
-	<div class="flex flex-wrap items-center gap-x-4 gap-y-2">
-		<picture class="bg-surface-container-high grid size-14 place-items-center rounded-full">
-			<SquareTerminal />
-		</picture>
+	<Switcher class="items-center gap-x-2 gap-y-2">
+		<div class="flex items-center gap-4">
+			<picture class="bg-surface-container-high grid size-14 place-items-center rounded-full">
+				<SquareTerminal />
+			</picture>
 
-		<div class="flex flex-col gap-1 font-mono">
-			<Contract name={action.account} class="text-muted leading-none">
-				{action.account}
-			</Contract>
+			<div class="grid gap-px font-mono">
+				<Contract name={action.account} class="text-muted leading-none">
+					{action.account}
+				</Contract>
 
-			<Contract
-				name={action.account}
-				action={action.name}
-				class="text-on-surface text-2xl leading-none"
-			>
-				{action.name}
-			</Contract>
+				<Contract
+					name={action.account}
+					action={action.name}
+					class="text-on-surface text-2xl leading-none"
+				>
+					{action.name}
+				</Contract>
+			</div>
 		</div>
 
-		<div class="flex flex-1 flex-col gap-1 text-right text-nowrap">
+		<div class="grid gap-1 text-right text-nowrap">
 			{#if id}
 				<Transaction {id} class="block font-mono text-2xl leading-none" />
 			{/if}
@@ -170,7 +173,7 @@
 				</span>
 			{/if}
 		</div>
-	</div>
+	</Switcher>
 {/snippet}
 
 {#snippet Footer()}
