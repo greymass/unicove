@@ -323,7 +323,7 @@ const pages = [
 test.describe.parallel('Unicove pages visibility', () => {
 	for (const pageInfo of pages) {
 		test(`${pageInfo.description}`, async ({ page, browserName }) => {
-			test.setTimeout(300_000); // Timeout per individual test
+			test.setTimeout(5000); // Timeout per individual test
 
 			try {
 				await page.goto(pageInfo.url, { waitUntil: 'domcontentloaded', timeout: 30000 });
