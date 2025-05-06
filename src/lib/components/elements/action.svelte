@@ -21,6 +21,7 @@
 	import * as m from '$lib/paraglide/messages';
 	import ActionSummaryContainer from '$lib/components/summary/components/container.svelte';
 	import Switcher from '../layout/switcher.svelte';
+	import { summaryTitles } from '../summary';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -47,6 +48,8 @@
 	}: Props = $props();
 
 	let advancedMode = $derived(context.settings.data.advancedMode);
+
+	let summaryTitle = $derived(summaryTitles[`${action.account}_${action.name}`]);
 </script>
 
 {#snippet KeyValue(key: string | null, value: string)}
@@ -148,17 +151,31 @@
 			</picture>
 
 			<div class="grid gap-px font-mono">
-				<Contract name={action.account} class="text-muted leading-none">
-					{action.account}
-				</Contract>
+				<div>
+					<Contract name={action.account} class="text-muted leading-none">
+						{action.account}
+					</Contract>
+					{#if summaryTitle}
+						::
+						<Contract name={action.account} action={action.name} class="text-muted leading-none">
+							{action.name}
+						</Contract>
+					{/if}
+				</div>
 
-				<Contract
-					name={action.account}
-					action={action.name}
-					class="text-on-surface text-2xl leading-none"
-				>
-					{action.name}
-				</Contract>
+				{#if summaryTitle}
+					<div class="text-on-surface text-2xl leading-none">
+						{summaryTitle}
+					</div>
+				{:else}
+					<Contract
+						name={action.account}
+						action={action.name}
+						class="text-on-surface text-2xl leading-none"
+					>
+						{action.name}
+					</Contract>
+				{/if}
 			</div>
 		</div>
 
