@@ -9,11 +9,13 @@ import eosio from '$lib/components/summary/eosio';
 import rex from '$lib/components/summary/eosio.rex';
 import token from '$lib/components/summary/eosio.token';
 import greymassnoop from '$lib/components/summary/greymassnoop';
+import delphioracle from '$lib/components/summary/delphioracle';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const summaries: Record<string, any> = {
 	'core.vaulta': eosio,
-	eosio: eosio,
+	delphioracle,
+	eosio,
 	'eosio.rex': rex,
 	'eosio.token': token,
 	greymassnoop

@@ -11,6 +11,7 @@ import mvfrsavings from './mvfrsavings.svelte';
 import ramtransfer from './ramtransfer.svelte';
 import sellram from './sellram.svelte';
 import sellrex from './sellrex.svelte';
+import setpriv from './setpriv.svelte';
 import swaptrace from './swaptrace.svelte';
 import withdraw from './withdraw.svelte';
 
@@ -28,6 +29,7 @@ export default {
 	ramtransfer,
 	sellram,
 	sellrex,
+	setpriv,
 	swaptrace,
 	withdraw
 };
