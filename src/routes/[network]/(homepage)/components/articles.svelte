@@ -10,7 +10,8 @@
 		articles: Article[];
 	}
 
-	let { articles }: Props = $props();
+	let props: Props = $props();
+	let articles = $derived(props.articles);
 
 	let index = $state(0);
 	const onNext = () => (index = (index + 1) % articles.length);
