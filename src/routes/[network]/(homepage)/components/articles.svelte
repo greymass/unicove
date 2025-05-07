@@ -32,13 +32,15 @@
 					onclick={onPrevious}
 				/>
 				<div class="col-span-full grid place-items-center @3xl:col-span-1">
-					<img
-						src={article.thumbnail}
-						alt={article.title}
-						class="rounded-2xl"
-						width="512"
-						height="288"
-					/>
+					<a href={article.slug}>
+						<img
+							src={article.thumbnail}
+							alt={article.title}
+							class="rounded-2xl"
+							width="512"
+							height="288"
+						/>
+					</a>
 				</div>
 				<div class="col-span-full grid place-items-center @3xl:col-span-1">
 					<TextBlock title={article.title} text={article.description}>
