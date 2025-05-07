@@ -33,7 +33,9 @@ export class StakeManager {
 
 	public staked: Asset = $derived(getUnstakableBalance(this.network, this.account));
 	public stakable: Asset = $derived(getStakableBalance(this.network, this.account));
-	public apr: string = $derived(this.network ? getAPR(this.network) : '0');
+	public apr: string = $derived(
+		this.network ? getAPR(this.network.token.distribution?.staked) : '0'
+	);
 	public estimateYield: Asset = $derived(
 		this.network
 			? Asset.from(

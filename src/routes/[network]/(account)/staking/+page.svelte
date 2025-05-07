@@ -61,7 +61,7 @@
 		)
 	);
 
-	let apr = $derived(getAPR(data.network));
+	let apr = $derived(getAPR(data.network.token.distribution?.staked));
 
 	let activity = $derived(
 		staked.units.gt(ZeroUnits) ||

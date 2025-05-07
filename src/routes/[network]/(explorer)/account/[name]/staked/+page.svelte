@@ -27,7 +27,7 @@
 		getUnstakingBalances(data.network, data.account)
 	);
 	let unstakable: Asset = $derived(getUnstakableBalance(data.network, data.account, unstaking));
-	let apr: string = $derived(getAPR(data.network));
+	let apr: string = $derived(getAPR(data.network.token.distribution?.staked));
 	let usdValue = $derived(
 		Asset.from(
 			staked.value * (network.systemtoken.price ? network.systemtoken.price.value : 0),

@@ -156,6 +156,11 @@ export class TokenBalance extends TokenBalanceBase {
 	}
 }
 
+@Struct.type('token_balance_value')
+export class TokenBalanceValue extends TokenBalance {
+	@Struct.field(Asset) declare value: Asset;
+}
+
 @Struct.type('token_historic_price')
 export class TokenHistoricPrice extends Struct {
 	@Struct.field(Asset) declare value: Asset;

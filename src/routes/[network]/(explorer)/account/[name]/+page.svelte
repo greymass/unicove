@@ -14,6 +14,8 @@
 	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte';
 	import { tokenEquals, ZeroUnits } from '$lib/types/token.js';
 	import { ramtoken } from '$lib/wharf/chains.js';
+	import { Currencies } from '$lib/types/currencies.js';
+	import { getNonSystemTokenBalances } from '$lib/utils/balance.js';
 
 	const { data } = $props();
 
@@ -52,6 +54,12 @@
 		legacytoken
 			? data.account.balances.find((b) => tokenEquals(b.token.id, legacytoken.id))
 			: undefined
+	);
+
+	const showAllBalances = false; // TODO: remove this when we have a better way to show all balances
+	const currency = Currencies[context.settings.data.displayCurrency];
+	const balances = $derived(
+		getNonSystemTokenBalances(data.network, market.market, currency, data.account.balances)
 	);
 </script>
 
@@ -145,7 +153,6 @@
 						visible: isCurrentUser
 					}
 				]}
-				class=""
 				child="total"
 				{isCurrentUser}
 				network={data.network}
@@ -154,6 +161,14 @@
 				pair={market.network.ram}
 				value={currentAccountValue.systemtoken.ram}
 			/>
+		{/if}
+
+		{#if showAllBalances}
+			{#each balances as balance}
+				{@const pair = market.market.getPair(balance.token.id, currency)}
+				{@const value = market.market.value(balance.token.id, currency, balance.balance)}
+				<TokenBalance {balance} {isCurrentUser} network={data.network} {pair} {value} />
+			{/each}
 		{/if}
 	</div>
 	<div class="space-y-6">

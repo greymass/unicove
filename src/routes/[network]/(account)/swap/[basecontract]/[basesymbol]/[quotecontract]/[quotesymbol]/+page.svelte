@@ -191,9 +191,11 @@
 			class="bg-surface-container-high col-start-1 row-start-1 space-y-2 rounded-xl p-6 sm:col-span-1 sm:col-start-1"
 		>
 			<div class="flex items-center gap-x-2">
-				<picture class="size-8 place-items-center">
-					<img alt="{baseBalance.token.name} Logo" src={baseBalance.token.media?.logo?.light} />
-				</picture>
+				{#if baseBalance.token.media?.logo?.light}
+					<picture class="size-8 place-items-center">
+						<img alt="{baseBalance.token.name} Logo" src={baseBalance.token.media?.logo?.light} />
+					</picture>
+				{/if}
 				<h3 class="h3">{baseBalance.balance.symbol.name}</h3>
 			</div>
 			<AssetText class="text-on-surface" value={baseBalance.balance} />
@@ -216,9 +218,11 @@
 			class="bg-surface-container-high col-start-1 row-start-2 space-y-2 rounded-xl p-6 sm:col-span-1 sm:col-start-2 sm:row-start-1"
 		>
 			<div class="flex items-center gap-x-2">
-				<picture class="size-8 place-items-center">
-					<img alt="{quoteBalance.token.name} Logo" src={quoteBalance.token.media?.logo?.light} />
-				</picture>
+				{#if quoteBalance.token.media?.logo?.light}
+					<picture class="size-8 place-items-center">
+						<img alt="{quoteBalance.token.name} Logo" src={quoteBalance.token.media?.logo?.light} />
+					</picture>
+				{/if}
 				<span class="h3">{quoteBalance.balance.symbol.name}</span>
 			</div>
 			<AssetText class="text-on-surface" value={quoteBalance.balance} />

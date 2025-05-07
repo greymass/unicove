@@ -30,7 +30,9 @@ export async function GET({ fetch, locals: { network }, params, url }: RequestEv
 	const data = await response.json();
 	const pairs = data.pairs.filter(
 		(pair: TokenPair) =>
-			tokenEquals(pair.base.id, basePair) || tokenEquals(pair.base.id, network.token.id)
+			tokenEquals(pair.base.id, basePair) ||
+			tokenEquals(pair.base.id, network.token.id) ||
+			tokenEquals(pair.quote.id, basePair)
 	);
 	if (tokenEquals(basePair, network.token.id)) {
 		network.config.systemtokenalt.forEach((altSymbol: Asset.Symbol) => {
