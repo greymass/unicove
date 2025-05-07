@@ -176,9 +176,9 @@ export function getTotalRexSavings(network?: NetworkState, account?: AccountStat
 	return Asset.fromUnits(sum, '4,REX');
 }
 
-export function getAPR(network: NetworkState): string {
+export function getAPR(staked?: Asset): string {
 	const annualReward = 31250000;
-	const totalStaked = Number(network.token.distribution?.staked.value || 0);
+	const totalStaked = Number(staked ? staked.value : 0);
 	// Prevent division by zero
 	if (totalStaked === 0) {
 		return '0';

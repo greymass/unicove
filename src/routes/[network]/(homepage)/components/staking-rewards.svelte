@@ -14,7 +14,7 @@
 
 	let { network }: Props = $props();
 
-	const apr = $derived(getAPR(network));
+	const apr = $derived(getAPR(network.token.distribution?.staked));
 </script>
 
 <section class="col-span-full">
