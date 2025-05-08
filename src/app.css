@@ -92,9 +92,41 @@
 	--color-solar-900: #7c3b0b;
 	--color-solar-950: #481d00;
 
-	--theme-seed: var(--color-sky-500);
+	--error-hue: 27;
+	--success-hue: 152;
 
-	/* Color Roles and default dark values */
+	--color-primary: inherit;
+	--color-primary-hover: inherit;
+	--color-on-primary: inherit;
+	--color-primary-container: inherit;
+	--color-on-primary-container: inherit;
+	--color-error: inherit;
+	--color-on-error: inherit;
+	--color-error-container: inherit;
+	--color-on-error-container: inherit;
+	--color-success: inherit;
+	--color-on-success: inherit;
+	--color-success-container: inherit;
+	--color-on-success-container: inherit;
+
+	--color-shadow: oklch(0 0 0);
+	--color-scrim: oklch(0 0 0 / 0.5);
+
+	--color-outline: inherit;
+	--color-outline-variant: inherit;
+	--color-surface: inherit;
+	--color-on-surface: inherit;
+	--color-on-surface-variant: inherit;
+	--color-surface-container-lowest: inherit;
+	--color-surface-container-low: inherit;
+	--color-surface-container: inherit;
+	--color-surface-container-high: inherit;
+	--color-surface-container-highest: inherit;
+	--color-background: inherit;
+	--color-on-background: inherit;
+}
+
+@utility dark-scheme {
 	--color-primary: oklch(from var(--theme-seed) 0.82 c h);
 	--color-primary-hover: oklch(from var(--theme-seed) 0.9 c h);
 	--color-on-primary: oklch(from var(--theme-seed) 0.2 c h);
@@ -102,30 +134,24 @@
 	--color-primary-container: oklch(from var(--theme-seed) 0.39 0.086 h);
 	--color-on-primary-container: oklch(from var(--theme-seed) 0.9 0.085 h);
 
-	--error-hue: 27;
 	--color-error: oklch(0.84 0.089 var(--error-hue));
 	--color-on-error: oklch(0.33 0.134 var(--error-hue));
 	--color-error-container: oklch(0.42 0.17 var(--error-hue));
 	--color-on-error-container: oklch(0.92 0.042 var(--error-hue));
 
-	--success-hue: 152;
 	--color-success: oklch(0.84 0.089 var(--success-hue));
 	--color-on-success: oklch(0.33 0.134 var(--success-hue));
 	--color-success-container: oklch(0.42 0.17 var(--success-hue));
 	--color-on-success-container: oklch(0.92 0.042 var(--success-hue));
 
-	--color-shadow: oklch(0 0 0);
-	--color-scrim: oklch(0 0 0 / 0.5);
-
-	--color-surface: color-mix(in oklab, var(--color-shark-950) 100%, var(--color-primary) 1.5%);
-	--color-background: var(--color-surface);
-
-	--color-on-surface: oklch(from var(--color-surface) 0.95 c h);
-	--color-on-surface-variant: oklch(from var(--color-surface) 0.8 calc(c * 2) h);
-	--color-on-background: var(--color-on-surface);
-
 	--color-outline: oklch(from var(--color-surface) 0.65 c h);
 	--color-outline-variant: oklch(from var(--color-surface) 0.4 c h);
+
+	--color-surface: oklch(
+		from color-mix(in oklab, var(--color-shark-950) 100%, var(--color-primary) 1.5%) l c h
+	);
+	--color-on-surface: oklch(from var(--color-surface) 0.95 c h);
+	--color-on-surface-variant: oklch(from var(--color-surface) 0.8 calc(c * 2) h);
 
 	/* Surface Containers ranked by emphasis (contrast) */
 	--color-surface-container-lowest: oklch(from var(--color-surface) calc(l - 0.01) c h);
@@ -133,45 +159,57 @@
 	--color-surface-container: oklch(from var(--color-surface) calc(l + 0.023) c h);
 	--color-surface-container-high: oklch(from var(--color-surface) calc(l + 0.05) c h);
 	--color-surface-container-highest: oklch(from var(--color-surface) calc(l + 0.1) c h);
+
+	--color-background: var(--color-surface);
+	--color-on-background: var(--color-on-surface);
 }
 
-/*
-  The default border color has changed to `currentColor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
+@utility light-scheme {
+	--color-primary: oklch(from var(--theme-seed) 0.4 c h);
+	--color-primary-hover: oklch(from var(--theme-seed) 0.5 c h);
+	--color-on-primary: oklch(from var(--theme-seed) 1 0 h);
 
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
+	--color-primary-container: oklch(from var(--theme-seed) 0.9 0.086 h);
+	--color-on-primary-container: oklch(from var(--theme-seed) 0.218 0.085 h);
+
+	--color-error: oklch(0.51 0.1927 var(--error-hue));
+	--color-on-error: oklch(1 0 var(--error-hue));
+	--color-error-container: oklch(0.92 0.042 var(--error-hue));
+	--color-on-error-container: oklch(0.42 0.17 var(--error-hue));
+
+	--color-success: oklch(0.51 0.1927 var(--success-hue));
+	--color-on-success: oklch(1 0 var(--success-hue));
+	--color-success-container: oklch(0.92 0.042 var(--success-hue));
+	--color-on-success-container: oklch(0.42 0.17 var(--success-hue));
+
+	--color-outline: oklch(from var(--color-surface) 0.5664 c h);
+	--color-outline-variant: oklch(from var(--color-surface) 0.8267 c h);
+
+	--color-surface: oklch(from var(--color-primary) 0.98 0.0076 h);
+	--color-on-surface: oklch(from var(--color-surface) 0.22 c h);
+	--color-on-surface-variant: oklch(from var(--color-surface) 0.4 0.015 h);
+
+	--color-surface-container-lowest: oklch(from var(--color-surface) calc(l + 0.01) c h);
+	--color-surface-container-low: oklch(from var(--color-surface) calc(l - 0.01) c h);
+	--color-surface-container: oklch(from var(--color-surface) calc(l - 0.023) c h);
+	--color-surface-container-high: oklch(from var(--color-surface) calc(l - 0.05) c h);
+	--color-surface-container-highest: oklch(from var(--color-surface) calc(l - 0.1) c h);
+
+	--color-background: var(--color-surface);
+	--color-on-background: var(--color-on-surface);
+}
+
 @layer base {
-	*,
-	::after,
-	::before,
-	::backdrop,
-	::file-selector-button {
-		border-color: var(--color-outline, currentColor);
+	/* Schemes */
+	[data-scheme='light'] {
+		@apply light-scheme;
 	}
 
-	html {
-		@apply bg-background text-on-background h-full;
-		color-scheme: dark light;
-		touch-action: manipulation;
-		scrollbar-gutter: stable;
-
-		::selection {
-			@apply bg-primary text-on-primary;
-		}
+	[data-scheme='dark'] {
+		@apply dark-scheme;
 	}
 
-	body {
-		@apply h-auto min-h-svh;
-	}
-
-	p,
-	li {
-		@apply text-muted text-base font-normal;
-	}
-
+	/* Themes */
 	[data-theme='eos'] {
 		--theme-seed: rgb(248 187 113);
 	}
@@ -196,50 +234,29 @@
 		--theme-seed: rgb(255 180 168);
 	}
 
-	[data-theme] {
-		@media (prefers-color-scheme: light) {
-			--color-primary: oklch(from var(--theme-seed) 0.4 c h);
-			--color-primary-hover: oklch(from var(--theme-seed) 0.9 c h);
-			--color-on-primary: oklch(from var(--theme-seed) 1 0 h);
+	/* Element defaults */
+	:root {
+		@apply bg-background text-on-background h-full;
+		color-scheme: dark light;
+		touch-action: manipulation;
+		scrollbar-gutter: stable;
 
-			--color-primary-container: oklch(from var(--theme-seed) 0.9 0.086 h);
-			--color-on-primary-container: oklch(from var(--theme-seed) 0.218 0.085 h);
-
-			--color-error: oklch(0.51 0.1927 var(--error-hue));
-			--color-on-error: oklch(1 0 var(--error-hue));
-			--color-error-container: oklch(0.92 0.042 var(--error-hue));
-			--color-on-error-container: oklch(0.42 0.17 var(--error-hue));
-
-			--color-success: oklch(0.51 0.1927 var(--success-hue));
-			--color-on-success: oklch(1 0 var(--success-hue));
-			--color-success-container: oklch(0.92 0.042 var(--success-hue));
-			--color-on-success-container: oklch(0.42 0.17 var(--success-hue));
-
-			--color-shadow: oklch(0 0 0);
-			--color-scrim: oklch(0 0 0 / 0.5);
-
-			--color-surface: oklch(from var(--color-primary) 0.92 0.0076 h);
-			--color-on-surface: oklch(from var(--color-surface) 0.22 c h);
-			--color-on-surface-variant: oklch(from var(--color-surface) 0.4 0.015 h);
-
-			--color-background: var(--color-surface);
-			--color-on-background: var(--color-on-surface);
-
-			--color-outline: oklch(from var(--color-surface) 0.5664 c h);
-			--color-outline-variant: oklch(from var(--color-surface) 0.8267 c h);
-
-			/* Surface Containers ranked by emphasis (contrast) */
-			--color-surface-container-lowest: oklch(from var(--color-surface) 0.9 c h);
-			--color-surface-container-low: oklch(from var(--color-surface) 0.935 c h);
-			--color-surface-container: oklch(from var(--color-surface) 0.955 c h);
-			--color-surface-container-high: oklch(from var(--color-surface) 0.975 c h);
-			--color-surface-container-highest: oklch(from var(--color-surface) 1 c h);
+		::selection {
+			@apply bg-primary text-on-primary;
 		}
+	}
+
+	body {
+		@apply h-auto min-h-svh;
+	}
+
+	p,
+	li {
+		@apply text-muted text-base font-normal;
 	}
 }
 
 @utility h1 {
-	/* Headings are defined by class instead of tag to preserve semantic html independent of style */
 	@apply text-5xl leading-none font-semibold;
 }
 
