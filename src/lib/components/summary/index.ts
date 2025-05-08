@@ -6,6 +6,7 @@ import * as m from '$lib/paraglide/messages';
 
 // Contract action summary components
 import eosio from '$lib/components/summary/eosio';
+import reserv from '$lib/components/summary/eosio.reserv';
 import rex from '$lib/components/summary/eosio.rex';
 import token from '$lib/components/summary/eosio.token';
 import greymassnoop from '$lib/components/summary/greymassnoop';
@@ -16,14 +17,25 @@ export const summaries: Record<string, any> = {
 	'core.vaulta': eosio,
 	delphioracle,
 	eosio,
+	'eosio.reserv': reserv,
 	'eosio.rex': rex,
 	'eosio.token': token,
 	greymassnoop
 };
 
 export const summaryTitles: Record<string, string> = {
-	greymassnoop_noop: m.summary_title_greymassnoop_noop(),
-	'eosio.token_transfer': m.summary_title_eosiotoken_transfer()
+	eosio_buyrambytes: m.search_result_description_buyram(),
+	eosio_buyrex: m.common_stake_action(),
+	eosio_deposit: m.summary_staking_deposit(),
+	eosio_logbuyram: m.summary_eosio_logbuyram(),
+	eosio_logramchange: m.common_balance_change(),
+	eosio_logsystemfee: m.common_network_fees(),
+	eosio_powerup: m.common_network_resource_rental(),
+	eosio_refund: m.common_refund(),
+	'eosio.reserv_powupresult': m.common_network_resources_received(),
+	'eosio.rex_buyresult': m.common_result(),
+	'eosio.token_transfer': m.summary_title_eosiotoken_transfer(),
+	greymassnoop_noop: m.summary_title_greymassnoop_noop()
 };
 
 export function isStandardTokenTransfer(data: ObjectifiedActionData) {
