@@ -183,7 +183,7 @@
 
 			<div class="flex items-center justify-between">
 				<Stack class="gap-2">
-					<Label for="proposal-expiration">Increased Precision</Label>
+					<Label for="increased-precision">Increased Precision</Label>
 					<p class="caption text-sm">Use more decimals to increase currency precision.</p>
 				</Stack>
 				<Switch id="increased-precision" bind:checked={increasedPrecision} />
