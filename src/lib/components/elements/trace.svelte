@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Component } from 'svelte';
+	import type { Name } from '@wharfkit/antelope';
 
 	import ActionElement from '$lib/components/elements/action.svelte';
 	import type { ActionDisplayVariants } from '$lib/types';
@@ -7,13 +8,21 @@
 
 	interface Props {
 		date?: boolean;
+		perspectiveOf?: Name;
 		summary?: Component<ActionSummaryProps, object>;
 		trace: ActionTraceFiltered;
-		variant?: ActionDisplayVariants;
 		trxid?: boolean;
+		variant?: ActionDisplayVariants;
 	}
 
-	let { date = false, trace, trxid = false, summary, variant = 'pretty' }: Props = $props();
+	let {
+		date = false,
+		perspectiveOf,
+		trace,
+		trxid = false,
+		summary,
+		variant = 'pretty'
+	}: Props = $props();
 </script>
 
 <ActionElement
@@ -22,6 +31,7 @@
 	objectified={trace.act.data}
 	id={trxid ? trace.trx_id : undefined}
 	notified={trace.notifications}
+	{perspectiveOf}
 	{summary}
 	{variant}
 />

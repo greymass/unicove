@@ -175,7 +175,9 @@ async function getNetworkNative(network: NetworkState): Promise<NetworkDataSourc
 			circulating,
 			locked: lockedsupply,
 			supply: supply.supply,
-			staked: rex.total_lendable,
+			staked: network.supports('rex')
+				? rex.total_lendable
+				: Asset.fromUnits(0, supply.supply.symbol),
 			max: supply.max_supply
 		}
 	});

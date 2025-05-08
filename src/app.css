@@ -149,6 +149,25 @@
 		border-color: var(--color-outline, currentColor);
 	}
 
+	html {
+		@apply bg-background text-on-background h-full;
+		color-scheme: dark light;
+		touch-action: manipulation;
+		scrollbar-gutter: stable;
+
+		::selection {
+			@apply bg-primary text-on-primary;
+		}
+	}
+
+	body {
+		@apply h-auto min-h-svh;
+	}
+
+	p,
+	li {
+		@apply text-muted text-base font-normal;
+	}
 	[data-theme='eos'] {
 		--color-seed: rgb(248 187 113);
 	}
@@ -235,7 +254,6 @@
 }
 
 @utility table-styles {
-	/* table styles */
 	:where(&) {
 		@apply w-full table-auto overflow-x-auto;
 
@@ -289,23 +307,4 @@
 }
 
 @layer components {
-	html {
-		@apply bg-background text-on-background h-full;
-		color-scheme: dark light;
-		touch-action: manipulation;
-		scrollbar-gutter: stable;
-
-		::selection {
-			@apply bg-primary text-on-primary;
-		}
-	}
-
-	body {
-		@apply h-auto min-h-svh;
-	}
-
-	p,
-	li {
-		@apply text-muted text-base font-normal;
-	}
 }

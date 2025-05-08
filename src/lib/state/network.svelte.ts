@@ -37,14 +37,20 @@ import { Token, ZeroUnits, TokenDefinition, tokenEquals } from '$lib/types/token
 import { Contract as DelphiHelperContract } from '$lib/wharf/contracts/delphihelper';
 import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
 import { Contract as MSIGContract } from '$lib/wharf/contracts/msig';
+import { Contract as ReserveContract } from '$lib/wharf/contracts/eosio.reserv';
+import { Contract as REXContract } from '$lib/wharf/contracts/eosio.rex';
 import { Contract as SystemContract } from '$lib/wharf/contracts/system';
 import { Contract as TimeContract } from '$lib/wharf/contracts/eosntime';
 import { Contract as TokenContract } from '$lib/wharf/contracts/token';
 import { Contract as UnicoveContract } from '$lib/wharf/contracts/unicove.api';
+import { Contract as VaultaContract } from '$lib/wharf/contracts/core.vaulta';
+import { Contract as WRAMContract } from '$lib/wharf/contracts/eosio.wram';
+
 import type { ObjectifiedActionData } from '$lib/types/transaction';
 import {
 	PUBLIC_FEATURE_METAMASK_SNAP_ORIGIN,
-	PUBLIC_FEATURE_UNICOVE_CONTRACT_API
+	PUBLIC_FEATURE_UNICOVE_CONTRACT_API,
+	PUBLIC_FEATURE_VAULTA_CORE_CONTRACT
 } from '$env/static/public';
 
 export class NetworkState {
@@ -107,6 +113,12 @@ export class NetworkState {
 			delphioracle: new DelphiOracleContract({ client: this.client }),
 			eosntime: new TimeContract({ client: this.client }),
 			msig: new MSIGContract({ client: this.client }),
+			reserve: new ReserveContract({
+				client: this.client
+			}),
+			rex: new REXContract({
+				client: this.client
+			}),
 			system: new SystemContract({
 				account: this.config.systemcontract,
 				client: this.client
@@ -114,6 +126,13 @@ export class NetworkState {
 			token: new TokenContract({ client: this.client }),
 			unicove: new UnicoveContract({
 				account: PUBLIC_FEATURE_UNICOVE_CONTRACT_API,
+				client: this.client
+			}),
+			vaulta: new VaultaContract({
+				account: PUBLIC_FEATURE_VAULTA_CORE_CONTRACT,
+				client: this.client
+			}),
+			wram: new WRAMContract({
 				client: this.client
 			})
 		};
@@ -251,6 +270,23 @@ export class NetworkState {
 			powerup.cpu.frac_by_ms(this.sources.sample, cpu),
 			powerup.net.frac_by_kb(this.sources.sample, net)
 		];
+	};
+
+	getPowerupResources = (cpu_frac: number, net_frac: number) => {
+		if (!this.supports('powerup')) {
+			throw new Error(`The ${this} network does not support powerup.`);
+		}
+		if (!this.sources?.powerup) {
+			throw new Error('PowerUp state not initialized');
+		}
+		if (!this.sources?.sample) {
+			throw new Error('PowerUp state not initialized');
+		}
+		const powerup = PowerUpState.from(this.sources?.powerup);
+		return {
+			cpu: powerup.cpu.weight_to_us(this.sources.sample.cpu, cpu_frac),
+			net: powerup.net.weight_to_bytes(this.sources.sample.net, net_frac)
+		};
 	};
 
 	getResources(): SystemResources {
