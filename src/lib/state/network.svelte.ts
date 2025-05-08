@@ -259,6 +259,23 @@ export class NetworkState {
 		];
 	};
 
+	getPowerupResources = (cpu_frac: number, net_frac: number) => {
+		if (!this.supports('powerup')) {
+			throw new Error(`The ${this} network does not support powerup.`);
+		}
+		if (!this.sources?.powerup) {
+			throw new Error('PowerUp state not initialized');
+		}
+		if (!this.sources?.sample) {
+			throw new Error('PowerUp state not initialized');
+		}
+		const powerup = PowerUpState.from(this.sources?.powerup);
+		return {
+			cpu: powerup.cpu.weight_to_us(this.sources.sample.cpu, cpu_frac),
+			net: powerup.net.weight_to_bytes(this.sources.sample.net, net_frac)
+		};
+	};
+
 	getResources(): SystemResources {
 		const defaultValue = Asset.fromUnits(0, this.token.symbol);
 		const response: SystemResources = {

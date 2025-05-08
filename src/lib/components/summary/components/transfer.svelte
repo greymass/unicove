@@ -25,9 +25,9 @@
 
 <Row>
 	{#if isSend}
-		<Chip class="bg-error text-on-error">Sent</Chip>
+		<Chip class="bg-red-700 text-white">Sent</Chip>
 	{:else if isReceive}
-		<Chip class="bg-success text-on-success">Received</Chip>
+		<Chip class="bg-green-700 text-white">Received</Chip>
 	{:else}
 		<Chip class="">Transfer</Chip>
 	{/if}

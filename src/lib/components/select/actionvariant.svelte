@@ -14,7 +14,7 @@
 	}
 </script>
 
-{#if context.settings.data.developerMode}
+{#if context.settings.data.advancedMode}
 	<Grid>
 		<Button
 			variant={current !== 'summary' ? 'secondary' : 'primary'}
@@ -22,23 +22,27 @@
 		>
 			Summary
 		</Button>
-		<Button
-			variant={current !== 'ricardian' ? 'secondary' : 'primary'}
-			onclick={() => set('ricardian')}
-		>
-			Ricardian
-		</Button>
+		{#if context.settings.data.debugMode}
+			<Button
+				variant={current !== 'ricardian' ? 'secondary' : 'primary'}
+				onclick={() => set('ricardian')}
+			>
+				Ricardian
+			</Button>
+		{/if}
 		<Button variant={current !== 'pretty' ? 'secondary' : 'primary'} onclick={() => set('pretty')}>
 			Pretty Print
 		</Button>
-		<Button
-			variant={current !== 'decoded' ? 'secondary' : 'primary'}
-			onclick={() => set('decoded')}
-		>
-			Decoded
-		</Button>
-		<Button variant={current !== 'json' ? 'secondary' : 'primary'} onclick={() => set('json')}>
-			JSON
-		</Button>
+		{#if context.settings.data.developerMode}
+			<Button
+				variant={current !== 'decoded' ? 'secondary' : 'primary'}
+				onclick={() => set('decoded')}
+			>
+				Decoded
+			</Button>
+			<Button variant={current !== 'json' ? 'secondary' : 'primary'} onclick={() => set('json')}>
+				JSON
+			</Button>
+		{/if}
 	</Grid>
 {/if}

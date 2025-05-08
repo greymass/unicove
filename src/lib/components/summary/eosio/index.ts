@@ -8,7 +8,9 @@ import logramchange from './logramchange.svelte';
 import logsellram from './logsellram.svelte';
 import logsystemfee from './logsystemfee.svelte';
 import mvfrsavings from './mvfrsavings.svelte';
+import powerup from './powerup.svelte';
 import ramtransfer from './ramtransfer.svelte';
+import refund from './refund.svelte';
 import sellram from './sellram.svelte';
 import sellrex from './sellrex.svelte';
 import setpriv from './setpriv.svelte';
@@ -26,7 +28,9 @@ export default {
 	logsellram,
 	logsystemfee,
 	mvfrsavings,
+	powerup,
 	ramtransfer,
+	refund,
 	sellram,
 	sellrex,
 	setpriv,
