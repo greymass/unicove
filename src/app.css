@@ -185,15 +185,15 @@
 	--color-outline: oklch(from var(--color-surface) 0.5664 c h);
 	--color-outline-variant: oklch(from var(--color-surface) 0.8267 c h);
 
-	--color-surface: oklch(from var(--color-primary) 0.98 0.0076 h);
+	--color-surface: oklch(from var(--color-primary) 0.98 0.007 h);
 	--color-on-surface: oklch(from var(--color-surface) 0.22 c h);
 	--color-on-surface-variant: oklch(from var(--color-surface) 0.4 0.015 h);
 
-	--color-surface-container-lowest: oklch(from var(--color-surface) calc(l + 0.01) c h);
-	--color-surface-container-low: oklch(from var(--color-surface) calc(l - 0.01) c h);
-	--color-surface-container: oklch(from var(--color-surface) calc(l - 0.023) c h);
-	--color-surface-container-high: oklch(from var(--color-surface) calc(l - 0.05) c h);
-	--color-surface-container-highest: oklch(from var(--color-surface) calc(l - 0.1) c h);
+	--color-surface-container-lowest: oklch(from var(--color-surface) calc(l + 0.01) 0.01 h);
+	--color-surface-container-low: oklch(from var(--color-surface) calc(l - 0.01) 0.01 h);
+	--color-surface-container: oklch(from var(--color-surface) calc(l - 0.023) 0.01 h);
+	--color-surface-container-high: oklch(from var(--color-surface) calc(l - 0.05) 0.01 h);
+	--color-surface-container-highest: oklch(from var(--color-surface) calc(l - 0.1) 0.01 h);
 
 	--color-background: var(--color-surface);
 	--color-on-background: var(--color-on-surface);
