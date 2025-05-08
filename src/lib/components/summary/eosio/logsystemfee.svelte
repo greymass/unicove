@@ -6,6 +6,7 @@
 	import AssetElement from '$lib/components/elements/asset.svelte';
 	import Chip from '$lib/components/chip.svelte';
 	import Row from '../components/row.svelte';
+	import * as m from '$lib/paraglide/messages';
 
 	interface Props extends Omit<ActionSummaryProps, 'data'> {
 		data: RAMTypes.logsystemfee;
@@ -15,6 +16,6 @@
 </script>
 
 <Row>
-	<Chip>Fee</Chip>
+	<Chip>{m.common_fee()}</Chip>
 	<AssetElement value={Asset.from(data.fee)} variant="full" />
 </Row>

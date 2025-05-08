@@ -151,6 +151,20 @@
 			</picture>
 
 			<div class="grid gap-px font-mono">
+				{#if summaryTitle}
+					<div class="text-on-surface leading-none md:text-2xl">
+						{summaryTitle}
+					</div>
+				{:else}
+					<Contract
+						name={action.account}
+						action={action.name}
+						class="text-on-surface leading-none md:text-2xl"
+					>
+						{action.name}
+					</Contract>
+				{/if}
+
 				<div>
 					<Contract name={action.account} class="text-muted leading-none">
 						{action.account}
@@ -162,26 +176,12 @@
 						</Contract>
 					{/if}
 				</div>
-
-				{#if summaryTitle}
-					<div class="text-on-surface text-2xl leading-none">
-						{summaryTitle}
-					</div>
-				{:else}
-					<Contract
-						name={action.account}
-						action={action.name}
-						class="text-on-surface text-2xl leading-none"
-					>
-						{action.name}
-					</Contract>
-				{/if}
 			</div>
 		</div>
 
 		<div class="grid gap-1 text-right text-nowrap">
 			{#if id}
-				<Transaction {id} class="block font-mono text-2xl leading-none" />
+				<Transaction {id} class="block font-mono leading-none md:text-2xl" />
 			{/if}
 
 			{#if datetime}

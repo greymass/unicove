@@ -7,6 +7,7 @@
 	import Chip from '$lib/components/chip.svelte';
 	import type { Snippet } from 'svelte';
 	import Row from './row.svelte';
+	import * as m from '$lib/paraglide/messages';
 
 	interface Props {
 		from: NameType;
@@ -25,9 +26,9 @@
 
 <Row>
 	{#if isSend}
-		<Chip class="bg-red-700 text-white">Sent</Chip>
+		<Chip class="bg-red-700 text-white">{m.common_sent()}</Chip>
 	{:else if isReceive}
-		<Chip class="bg-green-700 text-white">Received</Chip>
+		<Chip class="bg-green-700 text-white">{m.common_received()}</Chip>
 	{:else}
 		<Chip class="">Transfer</Chip>
 	{/if}

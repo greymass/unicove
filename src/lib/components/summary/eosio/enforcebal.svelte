@@ -17,7 +17,6 @@
 </script>
 
 <Row>
-	<Chip>Staking</Chip>
 	<AssetElement value={Asset.from(data.expected_eos_balance)} variant="full" />
 	<AccountElement name={Name.from(data.account)} />
 </Row>

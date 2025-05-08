@@ -15,6 +15,5 @@
 </script>
 
 <Row>
-	<Chip>Privileged</Chip>
 	<AccountElement name={Name.from(data.account)} /> = {data.is_priv ? 'true' : 'false'}
 </Row>
