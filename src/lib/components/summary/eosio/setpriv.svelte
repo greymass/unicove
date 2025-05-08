@@ -4,7 +4,6 @@
 	import * as SystemContract from '$lib/wharf/contracts/system';
 	import type { ActionSummaryProps } from '$lib/types/transaction';
 	import AccountElement from '$lib/components/elements/account.svelte';
-	import Chip from '$lib/components/chip.svelte';
 	import Row from '../components/row.svelte';
 
 	interface Props extends Omit<ActionSummaryProps, 'data'> {

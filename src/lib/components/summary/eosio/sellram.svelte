@@ -6,7 +6,6 @@
 	import { ramtoken } from '$lib/wharf/chains';
 	import AccountElement from '$lib/components/elements/account.svelte';
 	import AssetElement from '$lib/components/elements/asset.svelte';
-	import Chip from '$lib/components/chip.svelte';
 	import Row from '../components/row.svelte';
 
 	interface Props extends Omit<ActionSummaryProps, 'data'> {

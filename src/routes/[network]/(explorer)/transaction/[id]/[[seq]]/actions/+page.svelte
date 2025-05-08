@@ -2,7 +2,6 @@
 	import { getContext } from 'svelte';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
-	import type { ActionDisplayVariants } from '$lib/types.js';
 	import { getActionSummaryComponent } from '$lib/components/summary/index.js';
 	import SelectActionVariant from '$lib/components/select/actionvariant.svelte';
 	import ActionElement from '$lib/components/elements/action.svelte';
@@ -11,8 +10,6 @@
 	const context = getContext<UnicoveContext>('state');
 
 	let { data } = $props();
-
-	let variant = $derived(context.settings.data.actionDisplayVariant as ActionDisplayVariants);
 </script>
 
 <div class="p-2">

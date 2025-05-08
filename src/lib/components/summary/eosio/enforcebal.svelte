@@ -4,7 +4,6 @@
 	import type { ActionSummaryProps } from '$lib/types/transaction';
 	import AccountElement from '$lib/components/elements/account.svelte';
 	import AssetElement from '$lib/components/elements/asset.svelte';
-	import Chip from '$lib/components/chip.svelte';
 
 	import { Types } from '$lib/wharf/contracts/core.vaulta';
 	import Row from '../components/row.svelte';
