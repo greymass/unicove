@@ -37,11 +37,15 @@ import { Token, ZeroUnits, TokenDefinition, tokenEquals } from '$lib/types/token
 import { Contract as DelphiHelperContract } from '$lib/wharf/contracts/delphihelper';
 import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
 import { Contract as MSIGContract } from '$lib/wharf/contracts/msig';
+import { Contract as ReserveContract } from '$lib/wharf/contracts/eosio.reserv';
+import { Contract as REXContract } from '$lib/wharf/contracts/eosio.rex';
 import { Contract as SystemContract } from '$lib/wharf/contracts/system';
 import { Contract as TimeContract } from '$lib/wharf/contracts/eosntime';
 import { Contract as TokenContract } from '$lib/wharf/contracts/token';
 import { Contract as UnicoveContract } from '$lib/wharf/contracts/unicove.api';
 import { Contract as VaultaContract } from '$lib/wharf/contracts/core.vaulta';
+import { Contract as WRAMContract } from '$lib/wharf/contracts/eosio.wram';
+
 import type { ObjectifiedActionData } from '$lib/types/transaction';
 import {
 	PUBLIC_FEATURE_METAMASK_SNAP_ORIGIN,
@@ -109,6 +113,12 @@ export class NetworkState {
 			delphioracle: new DelphiOracleContract({ client: this.client }),
 			eosntime: new TimeContract({ client: this.client }),
 			msig: new MSIGContract({ client: this.client }),
+			reserve: new ReserveContract({
+				client: this.client
+			}),
+			rex: new REXContract({
+				client: this.client
+			}),
 			system: new SystemContract({
 				account: this.config.systemcontract,
 				client: this.client
@@ -120,6 +130,9 @@ export class NetworkState {
 			}),
 			vaulta: new VaultaContract({
 				account: PUBLIC_FEATURE_VAULTA_CORE_CONTRACT,
+				client: this.client
+			}),
+			wram: new WRAMContract({
 				client: this.client
 			})
 		};
