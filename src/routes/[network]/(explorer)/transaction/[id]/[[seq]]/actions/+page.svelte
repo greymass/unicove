@@ -27,6 +27,6 @@
 	{@const name = String(action.name)}
 	{@const summary = getActionSummaryComponent(contract, name)}
 	{#await context.network.objectifyAction(action) then objectified}
-		<ActionElement {action} {objectified} {variant} {summary} />
+		<ActionElement {action} {objectified} variant="pretty" {summary} />
 	{/await}
 {/each}

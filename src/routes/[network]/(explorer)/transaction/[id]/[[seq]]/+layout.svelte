@@ -26,11 +26,11 @@
 		const options = [
 			{ href: urlBase, text: m.common_summary() },
 			// { href: `${urlBase}/resources`, text: 'Resources' },
-			{ href: `${urlBase}/transaction`, text: m.common_transaction() },
 			{
 				href: `${urlBase}/actions`,
 				text: `${m.common_actions()} (${data.transaction.transaction.actions.length})`
-			}
+			},
+			{ href: `${urlBase}/transaction`, text: m.common_transaction() }
 		];
 		if (settings.data.advancedMode) {
 			options.push({
@@ -47,8 +47,7 @@
 	});
 </script>
 
-<Stack class="@container gap-12">
+<Stack class="@container gap-8">
 	<PillGroup {options} />
-
 	{@render children()}
 </Stack>

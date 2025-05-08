@@ -5,9 +5,9 @@
 	import type { ActionSummaryProps } from '$lib/types/transaction';
 	import AccountElement from '$lib/components/elements/account.svelte';
 	import AssetElement from '$lib/components/elements/asset.svelte';
-	import Chip from '$lib/components/chip.svelte';
 	import { ramtoken } from '$lib/wharf/chains';
 	import Row from '../components/row.svelte';
+	import * as m from '$lib/paraglide/messages';
 
 	interface Props extends Omit<ActionSummaryProps, 'data'> {
 		data: SystemContract.Types.buyrambytes;
@@ -17,6 +17,7 @@
 </script>
 
 <Row>
+	{m.common_requesting()}
 	<AssetElement value={Asset.fromUnits(data.bytes, ramtoken.symbol)} variant="full" />
 	<AccountElement name={Name.from(data.payer)} />
 	{#if !Name.from(data.receiver).equals(data.payer)}
