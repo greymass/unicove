@@ -17,7 +17,6 @@
 </script>
 
 <Row>
-	<Chip>Action</Chip>
 	<AssetElement value={Asset.fromUnits(data.bytes, ramtoken.symbol)} variant="full" />
 	<AccountElement name={Name.from(data.account)} />
 </Row>

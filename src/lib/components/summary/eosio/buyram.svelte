@@ -16,7 +16,6 @@
 </script>
 
 <Row>
-	<Chip>Action</Chip>
 	<AssetElement value={Asset.from(data.quant)} variant="full" />
 	<AccountElement name={Name.from(data.payer)} />
 	{#if !Name.from(data.receiver).equals(data.payer)}

@@ -19,7 +19,9 @@
 	<Row>
 		<Chip>{m.common_resources()}</Chip>
 		<AccountElement name={Name.from(data.payer)} />
-		renting CPU for
+		{m.common_renting_resources_for({
+			resource: 'CPU'
+		})}
 		<AccountElement name={Name.from(data.receiver)} />
 		({data.cpu_frac})
 	</Row>
@@ -29,7 +31,9 @@
 	<Row>
 		<Chip>{m.common_resources()}</Chip>
 		<AccountElement name={Name.from(data.payer)} />
-		renting NET for
+		{m.common_renting_resources_for({
+			resource: 'NET'
+		})}
 		<AccountElement name={Name.from(data.receiver)} />
 		({data.net_frac})
 	</Row>

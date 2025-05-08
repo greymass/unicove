@@ -7,6 +7,7 @@
 	import AssetElement from '$lib/components/elements/asset.svelte';
 	import Chip from '$lib/components/chip.svelte';
 	import Row from '../components/row.svelte';
+	import * as m from '$lib/paraglide/messages';
 
 	interface Props extends Omit<ActionSummaryProps, 'data'> {
 		data: Types.buyrex;
@@ -16,7 +17,7 @@
 </script>
 
 <Row>
-	<Chip>Staking</Chip>
+	<Chip>{m.common_staking()}</Chip>
 	<AssetElement value={Asset.from(data.amount)} variant="full" />
 	<AccountElement name={Name.from(data.from)} />
 </Row>

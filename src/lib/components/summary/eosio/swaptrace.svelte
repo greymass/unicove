@@ -16,7 +16,6 @@
 </script>
 
 <Row>
-	<Chip>Action</Chip>
 	<AssetElement value={Asset.from(data.quantity)} variant="full" />
 	<AccountElement name={Name.from(data.account)} />
 </Row>
