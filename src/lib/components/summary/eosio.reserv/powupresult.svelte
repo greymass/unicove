@@ -8,6 +8,7 @@
 	import type { powupresult } from '$lib/types/powerup';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
+	import { browser } from '$app/environment';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -17,20 +18,30 @@
 
 	const { data }: Props = $props();
 	const resources = $derived(
-		context.network.getPowerupResources(Number(data.powup_cpu), Number(data.powup_net))
+		browser
+			? context.network.getPowerupResources(Number(data.powup_cpu), Number(data.powup_net))
+			: { cpu: 0, net: 0 }
 	);
 </script>
 
 {#if Int64.from(data.powup_cpu).gt(ZeroUnits)}
 	<Row>
 		<Chip>{m.common_resources()}</Chip>
-		+ {(resources.cpu / 1000).toFixed(3)} ms (CPU)
+		{#if browser}
+			+ {(resources.cpu / 1000).toFixed(3)} ms (CPU)
+		{:else}
+			Weight: {data.powup_cpu}
+		{/if}
 	</Row>
 {/if}
 
 {#if Int64.from(data.powup_net).gt(ZeroUnits)}
 	<Row>
 		<Chip>{m.common_resources()}</Chip>
-		+ {(resources.net / 1000).toFixed(3)} kb (NET)
+		{#if browser}
+			+ {(resources.net / 1000).toFixed(3)} kb (NET)
+		{:else}
+			Weight: {data.powup_net}
+		{/if}
 	</Row>
 {/if}
