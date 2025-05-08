@@ -10,6 +10,7 @@
 	import TransactionHeader from '$lib/components/transaction/header.svelte';
 
 	import * as m from '$lib/paraglide/messages.js';
+	import Card from '$lib/components/layout/box/card.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 
