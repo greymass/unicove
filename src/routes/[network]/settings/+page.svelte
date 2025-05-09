@@ -2,6 +2,7 @@
 	import { BlockTimestamp } from '@wharfkit/antelope';
 	import { getContext } from 'svelte';
 	import type { ChangeFn } from '@melt-ui/svelte/internal/helpers';
+	import { browser } from '$app/environment';
 
 	import Switch from '$lib/components/input/switch.svelte';
 	import LanguageSelect from '$lib/components/select/language.svelte';
@@ -31,7 +32,7 @@
 	let developerMode = $state(!!context.settings.data.developerMode);
 	let mockPrice = $state(!!context.settings.data.mockPrice);
 	let increasedPrecision = $state(!!context.settings.data.increasedPrecision);
-	let darkMode = $state(localStorage.getItem('color-scheme') === 'dark');
+	let darkMode = $state(browser && localStorage.getItem('color-scheme') === 'dark');
 
 	let refEarliestExecution: DatetimeInput | undefined = $state();
 

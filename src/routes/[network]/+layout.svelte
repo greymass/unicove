@@ -215,12 +215,14 @@
 	<!-- Init color scheme on page load -->
 	<script>
 		(function () {
-			const storedTheme = localStorage.getItem('color-scheme');
-			const theme =
-				storedTheme ||
-				(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-			document.documentElement.setAttribute('data-scheme', theme);
-			if (!storedTheme) localStorage.setItem('color-scheme', theme);
+			if (typeof window !== undefined) {
+				const storedTheme = localStorage.getItem('color-scheme');
+				const theme =
+					storedTheme ||
+					(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+				document.documentElement.setAttribute('data-scheme', theme);
+				if (!storedTheme) localStorage.setItem('color-scheme', theme);
+			}
 		})();
 	</script>
 </svelte:head>
