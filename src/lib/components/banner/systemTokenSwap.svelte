@@ -1,12 +1,10 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import X from 'lucide-svelte/icons/x';
 	import * as m from '$lib/paraglide/messages';
-	import dayjs from 'dayjs';
 	import type { AccountState } from '$lib/state/client/account.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import Button from '$lib/components/button/button.svelte';
+	import Link from '$lib/components/elements/link.svelte';
 
 	interface Props {
 		account?: AccountState;
@@ -21,15 +19,24 @@
 	>
 		<div class="text-on-surface col-start-2 py-4 md:col-span-3 md:col-start-1 md:text-center">
 			<p class="text-lg font-semibold">
-				Vaulta now uses the {props.network.token.name} token
+				{m.common_system_token_changed({
+					network: props.network.chain.name,
+					token: props.network.token.name
+				})}
 			</p>
 			<p class="text-sm">
 				<AssetText
 					variant="full"
 					value={props.account.getBalance(props.network.config.legacytoken).balance}
 				/>
-				available to swap.
+				{m.common_balance_available_to_swap()}
 			</p>
+			<Link
+				class="text-sm text-white"
+				href="https://www.vaulta.com/resources/vaulta-token-swap-a-begins-may-14"
+			>
+				{m.common_read_announcement()}
+			</Link>
 		</div>
 		<Button
 			href="/{props.network}/swap/{props.network.config.legacytoken.id.url}/{props.network.token.id
