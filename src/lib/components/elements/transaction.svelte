@@ -13,7 +13,7 @@
 
 {#if id}
 	<a
-		class={cn('text-primary hover:text-primary-container', className)}
+		class={cn('text-primary hover:text-primary-hover', className)}
 		href="/{network}/transaction/{String(id)}"
 	>
 		{truncatedString}

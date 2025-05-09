@@ -41,7 +41,7 @@
 
 {#if showBanner}
 	<aside
-		class="text-on-surface grid grid-cols-[auto_1fr_auto] items-center justify-items-center gap-4 bg-linear-to-r from-[#1C2399] to-[#2E3BFF] shadow-lg *:row-start-1"
+		class="text-white grid grid-cols-[auto_1fr_auto] items-center justify-items-center gap-4 bg-linear-to-r from-[#1C2399] to-[#2E3BFF] shadow-lg *:row-start-1"
 	>
 		<a
 			class="text-on-surface col-start-2 py-4 underline underline-offset-4 md:col-span-3 md:col-start-1 md:text-center"

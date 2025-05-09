@@ -47,12 +47,12 @@
 	</span>
 	{#if historic}
 		{#if percentChangePositive}
-			<span class="inline-flex items-center gap-1.5 leading-none text-green-300">
+			<span class="text-success inline-flex items-center gap-1.5 leading-none">
 				<Triangle fill="currentColor" class="size-2" />
 				{percentChangeString}% {timeframeString}
 			</span>
 		{:else}
-			<span class="inline-flex items-center gap-1.5 leading-none text-red-300">
+			<span class="text-error inline-flex items-center gap-1.5 leading-none">
 				<Triangle fill="currentColor" class="size-2 rotate-180" />
 				{percentChangeString}% {timeframeString}
 			</span>
