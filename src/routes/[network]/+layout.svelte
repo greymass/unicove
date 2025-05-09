@@ -29,10 +29,12 @@
 	import PageBanner from '$lib/components/banner/pageBanner.svelte';
 	import DebugToggle from '$lib/components/select/debug.svelte';
 	import { CodeIcon } from 'lucide-svelte';
+	import { MetaState } from '$lib/state/meta.svelte.js';
 
 	let { children, data } = $props();
 
 	const history = new SearchRecordStorage(data.network);
+	const meta = new MetaState();
 	const settings = new SettingsState();
 	const wharf = new WharfState(settings);
 	const initialMarketValue = new MarketState(data.network, settings);
@@ -55,6 +57,9 @@
 		},
 		get history() {
 			return history;
+		},
+		get meta() {
+			return meta;
 		},
 		get network() {
 			return data.network;
