@@ -5,19 +5,31 @@ export const defaultTags: MetaTag[] = [
 	MetaTag.from({
 		id: 0,
 		tag: 'system',
-		description: 'System contract'
+		description: 'System Contract'
 	}),
 	MetaTag.from({
-		id: 0,
+		id: 1,
 		tag: 'network',
-		description: 'System contract'
+		description: 'Network Account'
 	}),
 	MetaTag.from({
 		id: 2,
+		tag: 'producer',
+		description: 'Block Producere Account'
+	}),
+	MetaTag.from({
+		id: 3,
+		tag: 'top21',
+		description: 'Elected Block Producer Account'
+	}),
+	MetaTag.from({
+		id: 4,
 		tag: 'exchange',
 		description: 'Known exchange account'
 	})
 ];
+
+const systemAccounts = ['admin.grants'];
 
 const systemContracts = [
 	'core.vaulta',
@@ -42,7 +54,8 @@ const exchanges = ['coinbasebase', 'krakenkraken', 'okbtothemoon', 'maineosofbin
 
 export const defaultTaggedAccounts: MetaTaggedAccount[] = [
 	...systemContracts.map((a) => MetaTaggedAccount.from({ account: Name.from(a).value, tags: [0] })),
-	...exchanges.map((a) => MetaTaggedAccount.from({ account: Name.from(a).value, tags: [2] }))
+	...systemAccounts.map((a) => MetaTaggedAccount.from({ account: Name.from(a).value, tags: [1] })),
+	...exchanges.map((a) => MetaTaggedAccount.from({ account: Name.from(a).value, tags: [4] }))
 ];
 
 export class MetaState {
