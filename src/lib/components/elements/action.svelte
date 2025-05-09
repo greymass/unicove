@@ -16,6 +16,7 @@
 	import { getContext, type Component } from 'svelte';
 	import type { ActionSummaryProps, ObjectifiedActionData } from '$lib/types/transaction';
 	import SquareTerminal from 'lucide-svelte/icons/square-terminal';
+	import AccountTags from '$lib/components/tags/account.svelte';
 	import Card from '../layout/box/card.svelte';
 
 	import * as m from '$lib/paraglide/messages';
@@ -50,6 +51,8 @@
 	let advancedMode = $derived(context.settings.data.advancedMode);
 
 	let summaryTitle = $derived(summaryTitles[`${action.account}_${action.name}`]);
+
+	const tags = $derived(context.meta.getAccountTags(action.account));
 </script>
 
 {#snippet KeyValue(key: string | null, value: string)}
@@ -146,20 +149,24 @@
 {#snippet Header()}
 	<Switcher class="items-center gap-x-2 gap-y-2">
 		<div class="flex items-center gap-4">
-			<picture class="bg-surface-container-high grid size-14 place-items-center rounded-full">
-				<SquareTerminal />
+			<picture class="bg-surface-container-high grid size-10 place-items-center rounded-full">
+				{#if tags.length}
+					<AccountTags network={context.network} {tags} />
+				{:else}
+					<SquareTerminal />
+				{/if}
 			</picture>
 
 			<div class="grid gap-px font-mono">
 				{#if summaryTitle}
-					<div class="text-on-surface leading-none md:text-2xl">
+					<div class="text-on-surface leading-none md:text-lg">
 						{summaryTitle}
 					</div>
 				{:else}
 					<Contract
 						name={action.account}
 						action={action.name}
-						class="text-on-surface leading-none md:text-2xl"
+						class="text-on-surface leading-none md:text-lg"
 					>
 						{action.name}
 					</Contract>
@@ -181,7 +188,7 @@
 
 		<div class="grid gap-1 text-right text-nowrap">
 			{#if id}
-				<Transaction {id} class="block font-mono leading-none md:text-2xl" />
+				<Transaction {id} class="block font-mono leading-none md:text-lg" />
 			{/if}
 
 			{#if datetime}
