@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Stack } from '$lib/components/layout';
 	import Typography from './sections/typography.svelte';
+	import Accounts from './sections/accounts.svelte';
 	import Buttons from './sections/buttons.svelte';
 	import Select from './sections/select.svelte';
 	import Inputs from './sections/inputs.svelte';
@@ -28,6 +29,10 @@
 	{@render divider()}
 
 	<Colors />
+
+	{@render divider()}
+
+	<Accounts />
 
 	{@render divider()}
 
