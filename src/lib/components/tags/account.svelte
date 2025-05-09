@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { FileBadge2, BadgeCheck, BadgeHelp } from 'lucide-svelte';
+	import { FileBadge2, BadgeCheck, BadgeHelp, BadgeDollarSign } from 'lucide-svelte';
 	import Tooltip from '$lib/components/tooltip/tooltip.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
 	import * as m from '$lib/paraglide/messages';
@@ -29,8 +29,8 @@
 				<BadgeCheck class={cn('text-solar-500', props.class)} />
 			</Tooltip>
 		{:else if tag.tag.equals('exchange')}
-			<Tooltip content={m.tooltip_exchange_account()} icon={BadgeCheck}>
-				<BadgeCheck class={cn('text-solar-500', props.class)} />
+			<Tooltip content={m.tooltip_exchange_account()} icon={BadgeDollarSign}>
+				<BadgeDollarSign class={cn('text-solar-500', props.class)} />
 			</Tooltip>
 		{:else}
 			<Tooltip content={m.tooltip_tagged_account({ tag: tag.tag })} icon={BadgeHelp}>
