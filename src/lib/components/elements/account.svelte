@@ -16,9 +16,10 @@
 		children?: Snippet;
 		preview?: boolean;
 		icon?: boolean;
+		tag?: boolean;
 	}
 
-	let { name, contract = false, preview = false, children, ...props }: Props = $props();
+	let { name, contract = false, preview = false, tag = true, children, ...props }: Props = $props();
 
 	let { meta, network } = getContext<UnicoveContext>('state');
 
@@ -48,7 +49,12 @@
 </script>
 
 <span class="inline-flex items-center gap-2">
-	<AccountTags {network} {tags} class="inline" />
+	{#if props.icon}
+		<UserIcon class="size-4" />
+	{:else if tag}
+		<AccountTags {network} {tags} class="inline" />
+	{/if}
+
 	<a
 		href={path}
 		class={cn(
@@ -57,10 +63,6 @@
 		)}
 		use:melt={$trigger}
 	>
-		{#if props.icon}
-			<UserIcon class="size-4" />
-		{/if}
-
 		{#if children}
 			{@render children()}
 		{:else}
