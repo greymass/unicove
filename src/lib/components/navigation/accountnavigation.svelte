@@ -7,7 +7,6 @@
 
 	interface Props {
 		options: Option[];
-		class?: string;
 	}
 
 	const props: Props = $props();

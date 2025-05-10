@@ -3,27 +3,36 @@ import ts from 'typescript-eslint';
 import svelte from 'eslint-plugin-svelte';
 import prettier from 'eslint-config-prettier';
 import globals from 'globals';
+import svelteConfig from './svelte.config.js';
 
-/** @type {import('eslint').Linter.FlatConfig[]} */
-export default [
+export default ts.config([
 	js.configs.recommended,
 	...ts.configs.recommended,
-	...svelte.configs['flat/recommended'],
+	...svelte.configs.recommended,
 	prettier,
-	...svelte.configs['flat/prettier'],
+	{
+		files: ['**/*.svelte', '**/*.svelte.ts', '**/*.svelte.js'],
+		languageOptions: {
+			parserOptions: {
+				projectService: true,
+				extraFileExtensions: ['.svelte'],
+				parser: ts.parser,
+				svelteConfig
+			}
+		}
+	},
+	{
+		rules: {
+			'svelte/require-each-key': 'off',
+			'svelte/no-useless-mustaches': 'off',
+			'svelte/no-inspect': 'off'
+		}
+	},
 	{
 		languageOptions: {
 			globals: {
 				...globals.browser,
 				...globals.node
-			}
-		}
-	},
-	{
-		files: ['**/*.svelte'],
-		languageOptions: {
-			parserOptions: {
-				parser: ts.parser
 			}
 		}
 	},
@@ -35,7 +44,8 @@ export default [
 			'configs/contracts',
 			'src/lib/wharf/contracts/',
 			'src/lib/paraglide',
-			'src/paraglide'
+			'src/paraglide',
+			'svelte.config.js'
 		]
 	}
-];
+]);

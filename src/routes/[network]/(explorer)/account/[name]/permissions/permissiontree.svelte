@@ -11,7 +11,6 @@
 		msigMode: boolean;
 		signin: (auth: PermissionLevel) => Promise<void>;
 		permissions: TreePermission[];
-		level?: number;
 	}
 	let props: Props = $props();
 </script>

@@ -2,13 +2,12 @@
 	import { cn } from '$lib/utils/style';
 	import { type AnyMeltElement, melt } from '@melt-ui/svelte';
 	import { type Snippet } from 'svelte';
-	import type { Readable } from 'svelte/store';
 	import { fade } from 'svelte/transition';
 	interface Props {
 		variant: 'pill' | 'form';
 		id: string;
 		children: Snippet;
-		open: Readable<boolean>;
+		open: boolean;
 		menu: AnyMeltElement;
 		class?: string;
 	}

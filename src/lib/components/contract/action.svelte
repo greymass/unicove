@@ -3,7 +3,6 @@
 	import { Name, type ABI } from '@wharfkit/antelope';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import type { NetworkState } from '$lib/state/network.svelte';
 
 	import ContractActionOverview from '$lib/components/contract/action/overview.svelte';
 	import ContractActionParams from '$lib/components/contract/action/params.svelte';
@@ -18,7 +17,6 @@
 		abi: ABI;
 		action: ABI.Action;
 		contract: Name;
-		network: NetworkState;
 	}
 	let { abi, action, contract }: Props = $props();
 
