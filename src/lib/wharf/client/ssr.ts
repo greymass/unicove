@@ -7,12 +7,14 @@ import { getNetwork } from '$lib/state/network.svelte';
 
 interface GetBackendClientOptions {
 	history: boolean;
+	hyperion: boolean;
 	headers: Record<string, string>;
 }
 
 const backendEndpoints: ChainEndpoints = {
 	api: env.BACKEND_API_CHAIN,
 	history: env.BACKEND_API_HISTORY,
+	hyperion: env.BACKEND_API_HYPERION,
 	lightapi: env.BACKEND_API_LIGHTAPI,
 	metrics: env.BACKEND_API_METRICS
 };
@@ -34,7 +36,12 @@ export function getBackendClient(
 	options: Partial<GetBackendClientOptions> = {}
 ): APIClient {
 	const config = getMergedConfig(network);
-	const url = options.history ? config.endpoints.history : config.endpoints.api;
+	let url = config.endpoints.api;
+	if (options.hyperion && config.endpoints.hyperion) {
+		url = config.endpoints.hyperion;
+	} else if (options.history) {
+		url = config.endpoints.history;
+	}
 	return new APIClient({
 		provider: new FetchProvider(url, { fetch, headers: options.headers })
 	});

@@ -5,7 +5,7 @@ import {
 	ActivityResponse,
 	ActivityResponseAction
 } from '$lib/types/transaction';
-import { Checksum256 } from '@wharfkit/session';
+import { Checksum256, UInt64 } from '@wharfkit/session';
 
 export class Scene {
 	firstTime: number = $state(0);
@@ -94,8 +94,8 @@ export class ActivityLoader {
 		this.loadRemote(true);
 	}
 
-	public makeKey(trx: Checksum256, act: Checksum256) {
-		return `${trx}-${act}`;
+	public makeKey(trx: Checksum256, ordinal: UInt64) {
+		return `${trx}-${ordinal}`;
 	}
 
 	private async loadRemote(more: boolean) {
@@ -105,7 +105,7 @@ export class ActivityLoader {
 			this.scene.setLoading(true);
 			const startIndex = more ? this.scene!.loadStart : 1;
 			const response = await this.fetch(
-				`/${this.network}/api/account/${account}/activity/${startIndex}`
+				`/${this.network}/api/account/${account}/actions/${startIndex}`
 			);
 			if (!response.ok) {
 				throw new Error(`Error while loading activity for ${account}.`);
@@ -119,7 +119,7 @@ export class ActivityLoader {
 			const receipts: Record<string, ActionTraceReceipt[]> = {};
 			const filtered = activity.actions
 				.filter((action) => {
-					const key = this.makeKey(action.trace.trx_id, action.trace.receipt.act_digest);
+					const key = this.makeKey(action.trace.trx_id, action.trace.receipt.global_sequence);
 					if (!receipts[key]) {
 						receipts[key] = [];
 					}
@@ -131,7 +131,7 @@ export class ActivityLoader {
 					return true;
 				})
 				.map((action) => {
-					const key = this.makeKey(action.trace.trx_id, action.trace.receipt.act_digest);
+					const key = this.makeKey(action.trace.trx_id, action.trace.receipt.global_sequence);
 					return ActivityResponseAction.from({
 						...action,
 						action_trace: ActionTraceFiltered.from({
