@@ -231,17 +231,28 @@
 
 <Card class="gap-4">
 	{@render Header()}
-	{#if variant === 'summary'}
-		{@render Summary()}
-	{:else if variant === 'ricardian'}
-		{@render Ricardian()}
-	{:else if variant === 'pretty'}
-		{@render Pretty(objectified)}
-	{:else if variant === 'decoded'}
-		{@render Decoded()}
-	{:else if variant === 'json'}
-		<Code json={action} />
-	{/if}
+	<svelte:boundary
+		onerror={(error) =>
+			console.warn(`Summary Component Rendering error for ${action.account}:${action.name}`, error)}
+	>
+		{#snippet failed()}
+			{#if context.settings.data.developerMode}
+				Error decoding for action summary, displaying raw data instead.
+			{/if}
+			{@render Pretty(objectified)}
+		{/snippet}
+		{#if variant === 'summary'}
+			{@render Summary()}
+		{:else if variant === 'ricardian'}
+			{@render Ricardian()}
+		{:else if variant === 'pretty'}
+			{@render Pretty(objectified)}
+		{:else if variant === 'decoded'}
+			{@render Decoded()}
+		{:else if variant === 'json'}
+			<Code json={action} />
+		{/if}
+	</svelte:boundary>
 
 	{#if action.account.equals('eosio') && action.name.equals('setcode') && objectified && objectified.code}
 		{@render Pretty({ hash: String(Checksum256.hash(objectified.code)) })}
