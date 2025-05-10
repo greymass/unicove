@@ -17,10 +17,10 @@
 
 	const context = getContext<UnicoveContext>('state');
 
-	const { class: className, menu, ...props }: Props = $props();
+	const { class: className, menu, open, ...props }: Props = $props();
 </script>
 
-{#if props.open}
+{#if $open}
 	<div
 		data-theme={context.network}
 		data-variant={props.variant}
