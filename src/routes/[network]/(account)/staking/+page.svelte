@@ -25,6 +25,7 @@
 	import * as m from '$lib/paraglide/messages';
 	import { Currencies } from '$lib/types/currencies';
 	import { ZeroUnits } from '$lib/types/token';
+	import SystemTokenSwap from '$lib/components/banner/systemTokenSwap.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 	const market = getContext<MarketContext>('market');
@@ -175,6 +176,7 @@
 			</Stack>
 		</Card>
 		<AccountBalance cta={{ href: `/${networkName}/staking/stake`, label: m.common_stake() }} />
+		<SystemTokenSwap account={context.account} network={data.network} />
 		<UnstakingBalances records={unstaking} />
 		<StakingCalculator {apr} network={data.network} tokenprice={market.network.systemtoken.price} />
 	</MultiCard>

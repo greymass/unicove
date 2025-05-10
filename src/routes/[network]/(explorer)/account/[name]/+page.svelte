@@ -16,6 +16,7 @@
 	import { ramtoken } from '$lib/wharf/chains.js';
 	import { Currencies } from '$lib/types/currencies.js';
 	import { getNonSystemTokenBalances } from '$lib/utils/balance.js';
+	import SystemTokenSwap from '$lib/components/banner/systemTokenSwap.svelte';
 
 	const { data } = $props();
 
@@ -97,11 +98,17 @@
 				</div>
 			</Card>
 		{/if}
+
+		{#if isCurrentUser}
+			<SystemTokenSwap account={data.account} network={data.network} />
+		{/if}
+
 		{#if data.account && data.account.balance}
 			<TokenBalance
 				balance={data.account.balance}
 				child="total"
-				cta={data.network.supports('directfunding')
+				cta={data.network.supports('directfunding') &&
+				data.network.config.coinbase?.assets.includes(data.account.balance.token.name)
 					? [
 							{
 								text: m.common_add_funds(),
@@ -123,13 +130,6 @@
 		{#if legacytoken && legacybalance && legacybalance.balance.units.gt(ZeroUnits)}
 			<TokenBalance
 				balance={legacybalance}
-				cta={[
-					{
-						text: m.common_swap_to_token({ token: data.network.token.name }),
-						href: `/${data.network}/swap/${legacytoken.id.url}/${data.network.token.id.url}`,
-						visible: isCurrentUser
-					}
-				]}
 				{isCurrentUser}
 				open
 				network={data.network}

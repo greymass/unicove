@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Subgrid from '$lib/components/layout/subgrid.svelte';
+	import LegacyTokenSwap from './components/legacy-token-swap.svelte';
 	import Articles from './components/articles.svelte';
 	import Hero from './components/hero.svelte';
 	import Carousel from './components/carousel.svelte';
@@ -20,6 +21,8 @@
 
 <Subgrid id="homepage" class="mb-4 content-start items-start gap-y-32 md:pt-0">
 	<Hero {networkLogo} {networkName} {networkShortname} />
+
+	<LegacyTokenSwap {network} />
 	<Articles articles={data.articles} />
 
 	{#if network.supports('metamask') && productName}

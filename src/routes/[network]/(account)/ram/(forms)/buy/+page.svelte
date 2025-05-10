@@ -17,6 +17,7 @@
 	import BytesInput from '$lib/components/input/bytes.svelte';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import RamResource from '$lib/components/elements/ramresource.svelte';
+	import SystemTokenSwap from '$lib/components/banner/systemTokenSwap.svelte';
 	import * as m from '$lib/paraglide/messages';
 
 	import { BuyRAMState } from './state.svelte';
@@ -99,6 +100,7 @@
 </script>
 
 <Stack>
+	<SystemTokenSwap account={context.account} network={data.network} />
 	{#if transactionId}
 		<TransactSummary {transactionId} />
 		<Button href={`/${data.network}/ram`} variant="secondary">
