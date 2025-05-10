@@ -17,7 +17,7 @@
 	<TextInput bind:value={filter} autofocus placeholder="Filter tables..." />
 	<ul class="grid grid-cols-[auto_1fr] gap-4 overflow-x-auto">
 		{#each filteredTables as table}
-			<Table abi={data.abi} contract={data.contract} network={data.network} {table} />
+			<Table abi={data.abi} contract={data.contract} {table} />
 		{:else}
 			{#if filter}
 				<p>No actions match filter</p>

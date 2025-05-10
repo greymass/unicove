@@ -298,7 +298,7 @@
 {/if}
 
 <ul class="grid grid-cols-[auto_1fr] gap-4 overflow-x-auto">
-	<Action abi={data.abi} contract={data.contract} network={data.network} action={data.action} />
+	<Action abi={data.abi} contract={data.contract} action={data.action} />
 </ul>
 
 {#if context.settings.data.debugMode}

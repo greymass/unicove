@@ -12,7 +12,6 @@
 		title={page.data.title}
 		subtitle={page.data.subtitle}
 		backPath={page.data.backPath}
-		contract={page.data.account?.contract}
 		actions={page.data?.header?.actions}
 		copyData={page.data?.header?.copyData}
 	/>
