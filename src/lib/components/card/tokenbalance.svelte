@@ -1,8 +1,10 @@
 <script lang="ts">
-	import AssetText from '$lib/components/elements/asset.svelte';
 	import { Asset } from '@wharfkit/antelope';
+	import { getContext } from 'svelte';
+	import { Info } from 'lucide-svelte';
+
+	import AssetText from '$lib/components/elements/asset.svelte';
 	import TradingPair from '$lib/components/elements/tradingpair.svelte';
-	import { cn } from '$lib/utils/style';
 	import type { NetworkState } from '$lib/state/network.svelte';
 	import {
 		TokenBalance,
@@ -11,13 +13,12 @@
 		ZeroUnits,
 		type TokenPair
 	} from '$lib/types/token';
-	import { ChevronRight, Info } from 'lucide-svelte';
 	import * as m from '$lib/paraglide/messages';
-	import Button from '../button/button.svelte';
-	import { getContext } from 'svelte';
+	import Button from '$lib/components/button/button.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import Code from '../code.svelte';
-	import Link from '../elements/link.svelte';
+	import Code from '$lib/components/code.svelte';
+	import Link from '$lib/components/elements/link.svelte';
+	import Accordion from '$lib/components/accordion.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -67,17 +68,6 @@
 	const balanceDelegated = $derived(_balance.child('delegated'));
 	const balanceUsed = $derived(_balance.child('used'));
 	const balanceWRAM = $derived(_balance.child('wram'));
-
-	let detailsElement = $state<HTMLDetailsElement>();
-
-	const syncOpen = () => {
-		if (!detailsElement) return;
-		if (detailsElement.open) {
-			open = true;
-		} else {
-			open = false;
-		}
-	};
 </script>
 
 {#snippet SubBalance(label: string, value: Asset, action?: { text: string; href: string })}
@@ -98,140 +88,127 @@
 	</div>
 {/snippet}
 
-<details
-	bind:this={detailsElement}
-	class={cn('group token-balance-card bg-surface-container rounded-xl', className)}
-	open={open && _balance instanceof TokenBalance}
->
-	<summary
-		class="focus-visible:outline-solar-500 @container flex cursor-pointer justify-between gap-4 rounded-xl p-5 select-none focus-visible:outline"
-		onclick={syncOpen}
-	>
-		<div class="text-muted flex flex-1 flex-wrap justify-between gap-y-4 text-nowrap">
-			<!-- Left -->
-			<div class="left flex flex-col justify-center gap-2">
-				<h4
-					class="text-on-surface inline-flex items-center gap-2 text-xl leading-none font-bold capitalize"
+{#snippet AccordionHeader()}
+	<!-- Left -->
+	<div class="left flex flex-col justify-center gap-2">
+		<h4
+			class="text-on-surface inline-flex items-center gap-2 text-xl leading-none font-bold capitalize"
+		>
+			<img
+				class="size-6 object-contain"
+				alt="{_balance.token.name} Logo"
+				src={_balance.token.media?.logo?.light}
+			/>
+			{#if isRamToken}
+				<Link class="text-on-surface" href="/{network}/ram">
+					{balance.token.name} (RAM)
+				</Link>
+			{:else}
+				<Link
+					class="text-on-surface"
+					href="/{network}/token/{balance.token.contract}/{balance.token.name}"
 				>
-					<img
-						class="size-6 object-contain"
-						alt="{_balance.token.name} Logo"
-						src={_balance.token.media?.logo?.light}
-					/>
-					{#if isRamToken}
-						<Link class="text-on-surface" href="/{network}/ram">
-							{balance.token.name} (RAM)
-						</Link>
-					{:else}
-						<Link
-							class="text-on-surface"
-							href="/{network}/token/{balance.token.contract}/{balance.token.name}"
-						>
-							{balance.token.name}
-							<Info class="text-muted size-5" />
-						</Link>
-					{/if}
-				</h4>
-
-				{#if pair && hasValue}
-					{#if pair.price.units.gt(ZeroUnits)}
-						<TradingPair class="leading-none" {historic} {historicTimeframe} value={pair} />
-					{:else}
-						<div class="bg-surface-container-high h-4 w-32 animate-pulse rounded">&nbsp;</div>
-					{/if}
-				{/if}
-			</div>
-
-			<!-- Right -->
-			<div class="right text-muted flex flex-col justify-between gap-2">
-				<div class="h-6 w-full content-center">
-					<h4 class="text-on-surface text-right text-xl leading-none font-bold capitalize">
-						<AssetText value={balance.balance} />
-					</h4>
-				</div>
-
-				{#if pair && hasValue}
-					{#if value.units.gt(ZeroUnits)}
-						<AssetText class="leading-none" variant="full" {value} />
-					{:else}
-						<div class="bg-surface-container-high max-w-48 animate-pulse rounded-md">&nbsp;</div>
-					{/if}
-				{/if}
-			</div>
-		</div>
-
-		<ChevronRight class="text-muted transition-transform duration-100 group-open:rotate-90" />
-	</summary>
-
-	<div class="bg-surface-container-low grid grid-cols-[auto_1fr_auto] rounded-b-xl p-5 pt-3">
-		{@render SubBalance(
-			m.common_available(),
-			_balance.balance,
-			!_balance.locked
-				? {
-						text: m.common_send(),
-						href: `/${network}/send/${balance.token.id.url}`
-					}
-				: undefined
-		)}
-
-		{#if tokenEquals(balance.token.id, network.token.id)}
-			{#if network.supports('staking') && balanceStaked}
-				{@render SubBalance(m.common_staked(), balanceStaked.balance, {
-					text: m.common_staking(),
-					href: `/${network}/staking`
-				})}
+					{balance.token.name}
+					<Info class="text-muted size-5" />
+				</Link>
 			{/if}
+		</h4>
 
-			{#if balanceUnstaked && balanceUnstaked.balance.value > 0}
-				{@render SubBalance(m.common_unstaked(), balanceUnstaked.balance, {
-					text: m.common_withdraw(),
-					href: `/${network}/staking/withdraw`
-				})}
+		{#if pair && hasValue}
+			{#if pair.price.units.gt(ZeroUnits)}
+				<TradingPair class="leading-none" {historic} {historicTimeframe} value={pair} />
+			{:else}
+				<div class="bg-surface-container-high h-4 w-32 animate-pulse rounded">&nbsp;</div>
 			{/if}
-
-			{#if balanceDelegated && balanceDelegated.balance.value > 0}
-				{@render SubBalance(m.common_delegated(), balanceDelegated.balance, {
-					text: m.common_reclaim(),
-					href: `/${network}/undelegate`
-				})}
-			{/if}
-
-			{#if balanceRefunding && balanceRefunding.balance.value > 0}
-				{@render SubBalance(m.common_refunding(), balanceRefunding.balance, {
-					text: m.common_claim(),
-					href: `/${network}/refund`
-				})}
-			{/if}
-		{/if}
-
-		{#if balanceUsed && balanceUsed.balance.value > 0}
-			{@render SubBalance(m.common_used(), balanceUsed.balance)}
-		{/if}
-
-		{#if isRamToken && balanceWRAM}
-			{@render SubBalance('WRAM', balanceWRAM.balance, {
-				text: m.common_swap(),
-				href: `/${network}/swap/${balanceWRAM.token.id.url}/${network.getRamToken().id.url}`
-			})}
-		{/if}
-
-		{#if cta && cta.length}
-			<div class="col-span-full flex gap-6">
-				{#each cta as action}
-					<Button
-						class="mt-4 {action.visible ? '' : 'hidden'}"
-						variant={action.variant || 'secondary'}
-						href={action.href}
-					>
-						{action.text}
-					</Button>
-				{/each}
-			</div>
 		{/if}
 	</div>
 
-	{#if debug}
-		<Code json={_balance} />
+	<!-- Right -->
+	<div class="right text-muted flex flex-col justify-between gap-2">
+		<div class="h-6 w-full content-center">
+			<h4 class="text-on-surface text-right text-xl leading-none font-bold capitalize">
+				<AssetText value={balance.balance} />
+			</h4>
+		</div>
+
+		{#if pair && hasValue}
+			{#if value.units.gt(ZeroUnits)}
+				<AssetText class="leading-none" variant="full" {value} />
+			{:else}
+				<div class="bg-surface-container-high max-w-48 animate-pulse rounded-md">&nbsp;</div>
+			{/if}
+		{/if}
+	</div>
+{/snippet}
+
+<Accordion class={className} header={AccordionHeader} {open}>
+	{@render SubBalance(
+		m.common_available(),
+		_balance.balance,
+		!_balance.locked
+			? {
+					text: m.common_send(),
+					href: `/${network}/send/${balance.token.id.url}`
+				}
+			: undefined
+	)}
+
+	{#if tokenEquals(balance.token.id, network.token.id)}
+		{#if network.supports('staking') && balanceStaked}
+			{@render SubBalance(m.common_staked(), balanceStaked.balance, {
+				text: m.common_staking(),
+				href: `/${network}/staking`
+			})}
+		{/if}
+
+		{#if balanceUnstaked && balanceUnstaked.balance.value > 0}
+			{@render SubBalance(m.common_unstaked(), balanceUnstaked.balance, {
+				text: m.common_withdraw(),
+				href: `/${network}/staking/withdraw`
+			})}
+		{/if}
+
+		{#if balanceDelegated && balanceDelegated.balance.value > 0}
+			{@render SubBalance(m.common_delegated(), balanceDelegated.balance, {
+				text: m.common_reclaim(),
+				href: `/${network}/undelegate`
+			})}
+		{/if}
+
+		{#if balanceRefunding && balanceRefunding.balance.value > 0}
+			{@render SubBalance(m.common_refunding(), balanceRefunding.balance, {
+				text: m.common_claim(),
+				href: `/${network}/refund`
+			})}
+		{/if}
 	{/if}
-</details>
+
+	{#if balanceUsed && balanceUsed.balance.value > 0}
+		{@render SubBalance(m.common_used(), balanceUsed.balance)}
+	{/if}
+
+	{#if isRamToken && balanceWRAM}
+		{@render SubBalance('WRAM', balanceWRAM.balance, {
+			text: m.common_swap(),
+			href: `/${network}/swap/${balanceWRAM.token.id.url}/${network.getRamToken().id.url}`
+		})}
+	{/if}
+
+	{#if cta && cta.length}
+		<div class="col-span-full flex gap-6">
+			{#each cta as action}
+				<Button
+					class="mt-4 {action.visible ? '' : 'hidden'}"
+					variant={action.variant || 'secondary'}
+					href={action.href}
+				>
+					{action.text}
+				</Button>
+			{/each}
+		</div>
+	{/if}
+</Accordion>
+
+{#if debug}
+	<Code json={_balance} />
+{/if}
