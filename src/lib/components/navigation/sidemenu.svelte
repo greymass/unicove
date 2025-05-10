@@ -10,7 +10,6 @@
 	interface Props {
 		callbackFn?: (event: MouseEvent) => void;
 		network: NetworkState;
-		class?: string;
 	}
 
 	let { callbackFn, network }: Props = $props();

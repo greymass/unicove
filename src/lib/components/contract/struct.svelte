@@ -2,8 +2,6 @@
 	import { Name, type ABI } from '@wharfkit/antelope';
 	import SquareDashedBottomCode from 'lucide-svelte/icons/square-dashed-bottom';
 
-	import type { NetworkState } from '$lib/state/network.svelte';
-
 	import Code from '$lib/components/code.svelte';
 
 	import Contract from '../elements/contract.svelte';
@@ -13,7 +11,6 @@
 		abi: ABI;
 		struct: ABI.Struct;
 		contract: Name;
-		network: NetworkState;
 	}
 	let { abi, struct, contract }: Props = $props();
 

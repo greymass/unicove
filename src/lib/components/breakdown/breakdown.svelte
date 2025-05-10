@@ -5,7 +5,6 @@
 	interface Props {
 		children: Snippet;
 		isCurrentUser?: boolean;
-		title?: string;
 	}
 	let props: Props = $props();
 </script>

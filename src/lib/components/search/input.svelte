@@ -31,7 +31,7 @@
 		debug?: boolean;
 	}
 
-	let { ref = $bindable(), debug = false, class: className }: NameInputProps = $props();
+	let { ref = $bindable(), debug = false, ...props }: NameInputProps = $props();
 
 	let searchValue: string = $state('');
 	let selectedIndex: number = $state(0);
@@ -220,7 +220,7 @@
 	id="search"
 	class={cn(
 		'text-muted focus-visible:ring-solar-500 focus-visible:border-solar-500 md:border-outline  relative z-50 inline-flex h-10 items-center justify-between rounded-lg bg-transparent py-3.5 text-base leading-4 font-medium text-nowrap focus:outline-hidden focus-visible:ring focus-visible:ring-inset md:justify-between md:border md:py-2 md:pr-0 md:pl-3',
-		className
+		props.class
 	)}
 >
 	<span class="inline-flex items-center gap-2">

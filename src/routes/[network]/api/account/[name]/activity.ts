@@ -34,9 +34,9 @@ export interface ActivityFilter {
 
 export async function getFilteredActivity(
 	client: APIClient,
-	name: string,
-	start: number,
-	filter: ActivityFilter
+	name: string
+	// start: number,
+	// filter: ActivityFilter
 ): Promise<ActivityResponse> {
 	const hyperion = new HyperionAPIClient(client);
 	let response: Types.v2.GetActionsResponse;
