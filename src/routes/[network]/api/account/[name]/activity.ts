@@ -46,7 +46,6 @@ export async function getFilteredActivity(
 			// global_sequence: String(start),
 			// reverse: true
 		});
-		console.log('Response:', response);
 	} catch (e) {
 		throw new Error(`Error while loading activity for ${name}: ${e}`);
 	}

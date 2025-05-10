@@ -17,7 +17,7 @@
 	<TextInput bind:value={filter} autofocus placeholder="Filter actions..." />
 	<ul class="grid grid-cols-[auto_1fr] gap-x-4 overflow-x-auto">
 		{#each filteredActions as action}
-			<Action abi={data.abi} contract={data.contract} network={data.network} {action} />
+			<Action abi={data.abi} contract={data.contract} {action} />
 		{:else}
 			{#if filter}
 				<p>No actions match filter</p>
