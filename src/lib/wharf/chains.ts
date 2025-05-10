@@ -172,6 +172,7 @@ export interface DefaultContracts {
 export interface ChainEndpoints {
 	api: string;
 	history: string;
+	hyperion?: string;
 	lightapi?: string;
 	metrics?: string;
 }

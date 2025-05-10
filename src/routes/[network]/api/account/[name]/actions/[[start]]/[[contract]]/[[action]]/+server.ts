@@ -1,6 +1,6 @@
 import { json } from '@sveltejs/kit';
 
-import { getActivity } from '../../activity';
+import { getFilteredActivity } from '../../../../activity';
 import { getCacheHeaders } from '$lib/utils';
 import type { RequestEvent } from './$types';
 import { getBackendClient } from '$lib/wharf/client/ssr';
@@ -11,8 +11,13 @@ export async function GET({ fetch, locals: { network }, params }: RequestEvent) 
 	}
 
 	const start = Number(params.start) || 1;
-	const client = getBackendClient(String(network), fetch, { history: true });
-	const requests = [getActivity(client, params.name, start)];
+	const client = getBackendClient(String(network), fetch, { hyperion: true });
+	const requests = [
+		getFilteredActivity(client, params.name, start, {
+			account: params.contract,
+			action: params.action
+		})
+	];
 	const headers = getCacheHeaders(5);
 
 	try {
