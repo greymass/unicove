@@ -11,7 +11,7 @@
 		ZeroUnits,
 		type TokenPair
 	} from '$lib/types/token';
-	import { ChevronRight } from 'lucide-svelte';
+	import { ChevronRight, Info } from 'lucide-svelte';
 	import * as m from '$lib/paraglide/messages';
 	import Button from '../button/button.svelte';
 	import { getContext } from 'svelte';
@@ -128,6 +128,7 @@
 							href="/{network}/token/{balance.token.contract}/{balance.token.name}"
 						>
 							{balance.token.name}
+							<Info class="text-muted size-5" />
 						</Link>
 					{/if}
 				</h4>
@@ -143,21 +144,19 @@
 
 			<!-- Right -->
 			<div class="right text-muted flex flex-col justify-between gap-2">
-				{#if pair && hasValue}
-					<div class="h-6 w-full content-center">
-						{#if value.units.gt(ZeroUnits)}
-							<h4 class="text-on-surface text-xl leading-none font-bold capitalize">
-								<AssetText variant="full" {value} />
-							</h4>
-						{:else}
-							<div class="bg-surface-container-high max-w-48 animate-pulse rounded-md text-right">
-								&nbsp;
-							</div>
-						{/if}
-					</div>
-				{/if}
+				<div class="h-6 w-full content-center">
+					<h4 class="text-on-surface text-right text-xl leading-none font-bold capitalize">
+						<AssetText value={balance.balance} />
+					</h4>
+				</div>
 
-				<AssetText class="leading-none" value={balance.balance} variant="full" />
+				{#if pair && hasValue}
+					{#if value.units.gt(ZeroUnits)}
+						<AssetText class="leading-none" variant="full" {value} />
+					{:else}
+						<div class="bg-surface-container-high max-w-48 animate-pulse rounded-md">&nbsp;</div>
+					{/if}
+				{/if}
 			</div>
 		</div>
 
