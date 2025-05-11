@@ -135,6 +135,7 @@ export const chainConfig: ChainConfig = {
 		directfunding: isTrue(env.PUBLIC_FEATURE_DIRECTFUNDING),
 		eosntime: isTrue(env.PUBLIC_FEATURE_EOSNTIME),
 		giftedram: isTrue(env.PUBLIC_FEATURE_GIFTEDRAM),
+		hyperion: isTrue(env.PUBLIC_FEATURE_HYPERION),
 		lightapi: isTrue(env.PUBLIC_FEATURE_LIGHTAPI),
 		metamask: isTrue(env.PUBLIC_FEATURE_METAMASK),
 		powerup: isTrue(env.PUBLIC_FEATURE_POWERUP),
@@ -215,6 +216,7 @@ export type FeatureType =
 	| 'directfunding'
 	| 'eosntime'
 	| 'giftedram'
+	| 'hyperion'
 	| 'lightapi'
 	| 'metamask'
 	| 'powerup'
