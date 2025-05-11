@@ -34,15 +34,24 @@ export interface ActivityFilter {
 
 export async function getFilteredActivity(
 	client: APIClient,
-	name: string
-	// start: number,
-	// filter: ActivityFilter
+	name: string,
+	start: number,
+	filter: ActivityFilter
 ): Promise<ActivityResponse> {
 	const hyperion = new HyperionAPIClient(client);
 	let response: Types.v2.GetActionsResponse;
 	try {
+		let filterParams: string | undefined = undefined;
+		if (filter && filter.account) {
+			if (filter.action) {
+				filterParams = `${filter.account}:${filter.action}`;
+			} else {
+				filterParams = filter.account;
+			}
+		}
 		response = await hyperion.v2.history.get_actions(name, {
-			limit: 20
+			limit: 20,
+			filter: filterParams
 			// global_sequence: String(start),
 			// reverse: true
 		});
