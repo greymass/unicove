@@ -222,7 +222,7 @@ export class ActivityResponseAction extends Struct {
 		}
 		const receipt = ActionTraceReceipt.from({
 			abi_sequence: 0,
-			act_digest: action.trx_id,
+			act_digest: Checksum256.hash(action.global_sequence.byteArray),
 			auth_sequence: accountReceipt.auth_sequence,
 			code_sequence: 0,
 			global_sequence: accountReceipt.global_sequence,
