@@ -18,7 +18,7 @@
 			return Asset.from(data.quant);
 		} catch {
 			try {
-				return Asset.fromUnits(data.quant, systemtoken.symbol);
+				return Asset.fromFloat(Number(data.quant), systemtoken.symbol);
 			} catch (error) {
 				console.error('Error parsing quant:', error);
 			}
