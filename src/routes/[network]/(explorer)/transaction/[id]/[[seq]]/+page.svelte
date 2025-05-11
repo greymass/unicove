@@ -38,7 +38,7 @@
 				{@const action = String(trace.action.name)}
 				{@const summary = getActionSummaryComponent(contract, action, trace.act.data)}
 				<li class="">
-					<Trace {trace} {variant} {summary} />
+					<Trace {trace} {variant} {summary} perspectiveOf={trace.action.authorization[0].actor} />
 				</li>
 			{/each}
 		</ol>
