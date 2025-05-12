@@ -109,7 +109,7 @@
 					href="/{network}/token/{balance.token.contract}/{balance.token.name}"
 				>
 					{balance.token.name}
-					<Info class="text-muted size-5" />
+					<Info class="text-muted size-4" />
 				</Link>
 			{/if}
 		</h4>
