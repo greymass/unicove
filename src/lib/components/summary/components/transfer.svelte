@@ -3,7 +3,7 @@
 
 	import AccountLink from '$lib/components/elements/account.svelte';
 	import AssetElement from '$lib/components/elements/asset.svelte';
-	import { ArrowBigRight } from 'lucide-svelte';
+	import { ArrowBigRight, NotebookText } from 'lucide-svelte';
 	import Chip from '$lib/components/chip.svelte';
 	import type { Snippet } from 'svelte';
 	import Row from './row.svelte';
@@ -18,7 +18,7 @@
 		perspectiveOf?: Name;
 	}
 
-	const { from, to, quantity, perspectiveOf, ...props }: Props = $props();
+	const { from, to, quantity, memo, perspectiveOf, ...props }: Props = $props();
 
 	const isSend = $derived(perspectiveOf && perspectiveOf.equals(from));
 	const isReceive = $derived(perspectiveOf && perspectiveOf.equals(to));
@@ -40,6 +40,13 @@
 	<ArrowBigRight class="size-6" />
 
 	<AccountLink class="" name={Name.from(to)} />
+
+	{#if memo}
+		<div class="flex table-caption max-w-fit items-center gap-2 overflow-auto px-4 text-nowrap">
+			<NotebookText class="inline size-5" />
+			Memo: {memo}
+		</div>
+	{/if}
 
 	{#if props.children}
 		<span>
