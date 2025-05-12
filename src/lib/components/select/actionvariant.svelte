@@ -31,7 +31,7 @@
 			</Button>
 		{/if}
 		<Button variant={current !== 'pretty' ? 'secondary' : 'primary'} onclick={() => set('pretty')}>
-			Pretty Print
+			Action Data
 		</Button>
 		{#if context.settings.data.developerMode}
 			<Button
