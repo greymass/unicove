@@ -99,10 +99,6 @@
 			</Card>
 		{/if}
 
-		{#if isCurrentUser}
-			<SystemTokenSwap account={data.account} network={data.network} />
-		{/if}
-
 		{#if data.account && data.account.balance}
 			<TokenBalance
 				balance={data.account.balance}
@@ -173,6 +169,9 @@
 	</div>
 	<div class="space-y-6">
 		<Tokendistribution data={currentAccountValue.systemtoken} />
+		{#if isCurrentUser}
+			<SystemTokenSwap account={data.account} network={data.network} />
+		{/if}
 		{#if context.settings.data.advancedMode}
 			<Card class="@container" title={m.common_resources()}>
 				<div class="flex gap-12 *:flex-1 @sm:justify-between @sm:*:flex-auto">

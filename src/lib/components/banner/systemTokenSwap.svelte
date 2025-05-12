@@ -15,21 +15,24 @@
 
 {#if props.account && props.network.config.legacytoken && props.account.getBalance(props.network.config.legacytoken)}
 	<aside
-		class="flex justify-between gap-6 rounded-lg bg-linear-to-r from-[#1C2399] to-[#2E3BFF] p-4 shadow-lg *:row-start-1"
+		class="from-primary-container to-primary-container/70 grid gap-4 rounded-lg bg-gradient-to-br p-4 text-center shadow-lg"
 	>
-		<div class="xs:gap-1 grid gap-2">
+		<div class="grid gap-1">
 			<a
-				class="text-lg leading-tight font-semibold text-balance text-white"
+				class="text-on-primary-container content-center text-xl leading-tight font-semibold text-balance"
 				href="https://www.vaulta.com/resources/vaulta-token-swap-a-begins-may-14"
 			>
-				{m.common_system_token_changed({
-					network: props.network.chain.name,
-					token: props.network.token.name
-				})}
-				<HelpCircle class="inline size-3" />
+				<span>
+					{m.common_system_token_changed({
+						network: props.network.chain.name,
+						token: props.network.token.name
+					})}
+				</span>
+
+				<HelpCircle class="mb-0.5 inline size-4" />
 			</a>
 
-			<p class="text-sm leading-tight text-balance text-white/80">
+			<p class="text-on-primary-container/80 text-sm leading-tight text-balance">
 				<AssetText
 					variant="full"
 					value={props.account.getBalance(props.network.config.legacytoken).balance}
@@ -39,7 +42,7 @@
 		</div>
 
 		<Button
-			class="grow-0 bg-black/20 text-white "
+			class="justify-self-center shadow-md"
 			href="/{props.network}/swap/{props.network.config.legacytoken.id.url}/{props.network.token.id
 				.url}"
 		>
