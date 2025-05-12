@@ -8,6 +8,7 @@
 	import { Name } from '@wharfkit/antelope';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { AccountState } from '$lib/state/client/account.svelte';
+	import AccountTags from '$lib/components/tags/account.svelte';
 
 	interface Props extends HTMLAnchorAttributes {
 		name: Name | string;
@@ -15,11 +16,12 @@
 		children?: Snippet;
 		preview?: boolean;
 		icon?: boolean;
+		tag?: boolean;
 	}
 
-	let { name, contract = false, preview = false, children, ...props }: Props = $props();
+	let { name, contract = false, preview = false, tag = true, children, ...props }: Props = $props();
 
-	let { network } = getContext<UnicoveContext>('state');
+	let { meta, network } = getContext<UnicoveContext>('state');
 
 	const path = $derived(contract ? `/${network}/contract/${name}` : `/${network}/account/${name}`);
 
@@ -42,46 +44,53 @@
 		onOpenChange: fetchAccount,
 		openDelay: 500
 	});
+
+	const tags = $derived(meta.getAccountTags(name));
 </script>
 
-<a
-	href={path}
-	class={cn(
-		'focus-visible:outline-solar-500 text-primary hover:text-primary-container inline-flex items-center gap-2 focus-visible:outline ',
-		props.class
-	)}
-	use:melt={$trigger}
->
+<span class="inline-flex items-center gap-2">
 	{#if props.icon}
 		<UserIcon class="size-4" />
+	{:else if tag}
+		<AccountTags {network} {tags} class="inline" />
 	{/if}
-	{#if children}
-		{@render children()}
-	{:else}
-		{name}
-	{/if}
-</a>
 
-{#if $open && account}
-	<div
-		use:melt={$content}
-		transition:fly={{ y: -5, duration: 100 }}
-		class="z-10 rounded-xl bg-red-900 shadow-xs"
+	<a
+		href={path}
+		class={cn(
+			'focus-visible:outline-solar-500 text-primary hover:text-primary-container focus-visible:outline ',
+			props.class
+		)}
+		use:melt={$trigger}
 	>
-		<div class="w-72 rounded-xl bg-red-900 p-5 shadow-xs">
-			<div class="flex flex-col gap-2">
-				<div class="flex gap-4">
-					<picture class="block grid size-12 place-items-center rounded-full bg-red-700">
-						<User />
-					</picture>
+		{#if children}
+			{@render children()}
+		{:else}
+			{name}
+		{/if}
+	</a>
 
-					<div>
-						<div class="font-bold text-red-50">{name}</div>
-						<div class="text-muted">{account.balance.child('total')}</div>
+	{#if $open && account}
+		<div
+			use:melt={$content}
+			transition:fly={{ y: -5, duration: 100 }}
+			class="z-10 rounded-xl bg-red-900 shadow-xs"
+		>
+			<div class="w-72 rounded-xl bg-red-900 p-5 shadow-xs">
+				<div class="flex flex-col gap-2">
+					<div class="flex gap-4">
+						<picture class="block grid size-12 place-items-center rounded-full bg-red-700">
+							<User />
+						</picture>
+
+						<div>
+							<div class="font-bold text-red-50">{name}</div>
+							<div class="text-muted">{account.balance.child('total')}</div>
+						</div>
 					</div>
 				</div>
 			</div>
+			<div use:melt={$arrow}></div>
 		</div>
-		<div use:melt={$arrow}></div>
-	</div>
-{/if}
+	{/if}
+</span>

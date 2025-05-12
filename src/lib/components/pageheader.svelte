@@ -5,6 +5,8 @@
 	import { type NetworkState } from '$lib/state/network.svelte';
 	import ChevronLeft from 'lucide-svelte/icons/chevron-left';
 	import type { ComponentProps } from 'svelte';
+	import type { MetaTag } from '$lib/types/meta';
+	import AccountTags from '$lib/components/tags/account.svelte';
 
 	interface Props {
 		title: string;
@@ -13,6 +15,7 @@
 		network: NetworkState;
 		copyData?: string;
 		actions?: ComponentProps<typeof IconButton>[];
+		tags?: MetaTag[];
 	}
 
 	let props: Props = $props();
@@ -49,7 +52,10 @@
 
 	<div class="">
 		<div class="text-primary flex h-fit w-fit items-center">
-			<h1 class="text-on-surface mb-2 text-3xl leading-none font-bold">{props.title}</h1>
+			<h1 class="text-on-surface mb-2 text-3xl leading-none font-bold">
+				<AccountTags network={props.network} tags={props.tags} class="inline" />
+				{props.title}
+			</h1>
 
 			{#if props.copyData}
 				<CopyButton data={props.copyData} hideBackground />
