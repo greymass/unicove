@@ -165,22 +165,12 @@ async function getAccount(network: NetworkState, account: NameType): Promise<Acc
 }
 
 async function getAccount2(network: NetworkState, account: NameType): Promise<AccountDataSources> {
-	const tokens: UnicoveTypes.token_definition[] = [];
-	if (network.config.legacytoken) {
-		tokens.push(
-			UnicoveTypes.token_definition.from({
-				contract: network.config.legacytoken.contract,
-				symbol: network.config.legacytoken.symbol
-			})
-		);
-	}
-
 	const [get_account, getaccount] = await Promise.all([
 		network.client.v1.chain.get_account(account),
-		network.contracts.unicove.readonly('account', { account, tokens })
+		network.contracts.unicove.readonly('account', { account })
 	]);
 
-	const balances = await getBalances(network, tokens, getaccount);
+	const balances = await getBalances(network, [], getaccount);
 
 	return {
 		get_account,
