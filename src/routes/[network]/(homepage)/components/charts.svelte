@@ -6,6 +6,7 @@
 	import Stack from '$lib/components/layout/stack.svelte';
 	import * as m from '$lib/paraglide/messages';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import { ramtoken, systemtoken } from '$lib/wharf/chains';
 
 	const { network } = getContext<UnicoveContext>('state');
 
@@ -49,12 +50,17 @@
 		<TextBlock
 			{...{
 				title: m.homepage_ram_token_title(),
-				text: m.homepage_ram_token_description(),
+				text: m.homepage_ram_token_description({
+					bytes: 1000,
+					ramtoken: ramtoken.name,
+					systemtoken: systemtoken.name
+				}),
 				button: {
-					text: m.homepage_ram_token_market({
-						token: String(network.chain.systemToken?.symbol.name)
+					text: m.swap_base_quote({
+						base: String(network.chain.systemToken?.symbol.name),
+						quote: String(ramtoken.name)
 					}),
-					href: `${network}/ram`
+					href: `${network}/swap/${systemtoken.id.url}/${ramtoken.id.url}`
 				}
 			}}
 		/>
