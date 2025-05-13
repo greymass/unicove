@@ -6,8 +6,8 @@
 	import jungle4 from '$lib/assets/hero/jungle4/logo.svg';
 	import telos from '$lib/assets/hero/telos/logo.svg';
 	import vaultaLogo from '$lib/assets/hero/vaulta/vector.svg';
-	import waxLight from '$lib/assets/hero/wax/light.png';
-	import waxDark from '$lib/assets/hero/wax/dark.png';
+	// import waxLight from '$lib/assets/hero/wax/light.png?enhanced';
+	import waxDark from '$lib/assets/hero/wax/dark.png?enhanced';
 	import UnicoveOutline from '$lib/assets/unicove-outline.svg';
 
 	import * as m from '$lib/paraglide/messages';
@@ -24,8 +24,7 @@
 	const logo = {
 		vaulta: vaultaLogo,
 		telos: telos,
-		jungle4: jungle4,
-		wax: waxDark
+		jungle4: jungle4
 	};
 </script>
 
@@ -137,34 +136,37 @@
 {#snippet wax()}
 	<section
 		id="hero"
-		class="relative col-span-full grid grid-cols-subgrid gap-y-12 overflow-x-clip pt-6 pt-24 md:items-center"
+		class="relative col-span-full grid grid-cols-subgrid gap-y-6 overflow-x-clip pt-6 pt-24 md:items-center"
 	>
-		<img
-			class="absolute h-full justify-self-center object-cover blur-sm md:hidden"
-			src={UnicoveOutline}
-			alt={networkName}
-			fetchpriority="high"
-			loading="eager"
-			height="512"
-			width="512"
-		/>
+		<div
+			id="network-logo"
+			class="relative col-span-full md:col-span-5 md:col-start-6 lg:col-span-6 lg:col-start-5"
+		>
+			<!-- Unicove Outline -->
+			<img
+				class="relative size-3/4 object-contain md:hidden"
+				src={UnicoveOutline}
+				alt={networkName}
+				fetchpriority="high"
+				loading="eager"
+				height="512"
+				width="512"
+			/>
 
-		<div class="col-span-full col-start-1 row-start-1">
-			{@render textblock()}
+			<!-- Network Logo -->
+			<enhanced:img
+				class="absolute inset-y-0 right-0 size-full object-contain md:relative"
+				src={waxDark}
+				alt={networkName}
+				fetchpriority="high"
+				loading="eager"
+			/>
 		</div>
 
 		<div
-			id="network-logo"
-			class="relative col-span-full row-start-2 -ml-4 grid w-screen overflow-x-clip md:col-start-7 md:w-auto md:px-0 xl:col-start-6"
+			class="col-span-full col-start-1 row-start-2 md:col-span-5 md:col-start-1 md:row-start-1 lg:col-span-4 lg:col-start-1"
 		>
-			<!-- Network Logo -->
-			<picture
-				class="relative col-start-1 row-start-1 self-end object-contain md:place-self-center"
-			>
-				<source srcset={waxDark} media="(prefers-color-scheme: dark)" />
-				<source srcset={waxLight} media="(prefers-color-scheme: light)" />
-				<img src={waxDark} alt={networkName} fetchpriority="high" loading="eager" />
-			</picture>
+			{@render textblock()}
 		</div>
 	</section>
 {/snippet}
