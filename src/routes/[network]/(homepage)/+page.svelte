@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Subgrid from '$lib/components/layout/subgrid.svelte';
 	import LegacyTokenSwap from './components/legacy-token-swap.svelte';
 	import Articles from './components/articles.svelte';
 	import Hero from './components/hero.svelte';
