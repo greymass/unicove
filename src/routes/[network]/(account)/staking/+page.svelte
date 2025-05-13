@@ -78,7 +78,7 @@
 
 {#snippet tableAction([text, href]: string[])}
 	<td class="text-right">
-		<a class="text-primary hover:text-primary-container" {href}>{text}</a>
+		<a class="text-primary hover:text-primary-hover" {href}>{text}</a>
 	</td>
 {/snippet}
 

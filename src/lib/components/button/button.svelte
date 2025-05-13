@@ -49,7 +49,7 @@
 		' inline-flex h-12 grow  rounded-lg bg-primary px-8  text-on-primary  focus:outline-transparent focus-visible:outline focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-solar-500 disabled:bg-on-surface/12 disabled:text-on-surface/40';
 
 	const outlinedStyles =
-		' flex h-12 grow  rounded-lg px-8  text-primary ring-2 ring-inset ring-outline   focus-visible:outline-hidden focus-visible:ring-solar-500  hover:active:ring-outline  disabled:text-on-surface/40  disabled:hover:bg-transparent disabled:hover:ring-on-surface/12 disabled:ring-on-surface/12  ';
+		' flex h-12 grow  rounded-lg px-8  text-primary ring-2 ring-inset ring-outline-variant   focus-visible:outline-hidden focus-visible:ring-solar-500  hover:active:ring-outline-variant  disabled:text-on-surface/40  disabled:hover:bg-transparent disabled:hover:ring-on-surface/12 disabled:ring-on-surface/12  ';
 
 	const pillStyles =
 		' inline-flex h-10  rounded-full border-2 border-transparent px-5  leading-4  focus-visible:border-solar-500  focus-visible:outline-hidden   aria-[current]:border-outline-variant aria-[current]:focus-visible:border-solar-500';
@@ -81,7 +81,7 @@
 	{...linkProps}
 >
 	<div
-		class="state-layer group-active/button:group-hove/buttonr:opacity-16 pointer-events-none absolute inset-0 rounded-[inherit] bg-current opacity-0 transition-opacity group-hover/button:opacity-8 group-focus-visible/button:opacity-10 group-disabled/button:hidden"
+		class="state-layer pointer-events-none absolute inset-0 rounded-[inherit] bg-current opacity-0 transition-opacity group-hover/button:opacity-8 group-focus-visible/button:opacity-10 group-active/button:group-hover/button:opacity-16 group-disabled/button:hidden"
 	></div>
 	<span class="content-layer pointer-events-none relative text-inherit">
 		{@render props.children()}

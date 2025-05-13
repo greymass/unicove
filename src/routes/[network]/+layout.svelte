@@ -208,9 +208,23 @@
 
 <Head {seo_config} />
 
-<!-- Preload current chain logo -->
 <svelte:head>
+	<!-- Preload current chain logo -->
 	<link rel="preload" href={String(data.network.config.logo)} as="image" type="image/png" />
+
+	<!-- Init color scheme on page load -->
+	<script>
+		(function () {
+			if (typeof window !== undefined) {
+				const storedTheme = localStorage.getItem('color-scheme');
+				const theme =
+					storedTheme ||
+					(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+				document.documentElement.setAttribute('data-scheme', theme);
+				if (!storedTheme) localStorage.setItem('color-scheme', theme);
+			}
+		})();
+	</script>
 </svelte:head>
 
 <div
