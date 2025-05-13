@@ -23,7 +23,10 @@
 	<Hero {networkLogo} {networkName} {networkShortname} />
 
 	<LegacyTokenSwap {network} />
-	<Articles articles={data.articles} />
+
+	{#if data.articles.length}
+		<Articles articles={data.articles} />
+	{/if}
 
 	{#if network.supports('metamask') && productName}
 		<Carousel {networkLogo} {networkName} {productName} />

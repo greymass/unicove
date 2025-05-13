@@ -18,7 +18,10 @@
 	const onPrevious = () => (index = (index - 1 + articles.length) % articles.length);
 </script>
 
-<section class="@container col-span-full grid *:col-span-full *:col-start-1 *:row-start-1">
+<section
+	id="articles"
+	class="@container col-span-full grid *:col-span-full *:col-start-1 *:row-start-1"
+>
 	{#each articles as article, i}
 		{#key article.slug}
 			<div
