@@ -136,11 +136,11 @@
 {#snippet wax()}
 	<section
 		id="hero"
-		class="relative col-span-full grid grid-cols-subgrid gap-y-6 overflow-x-clip pt-6 pt-24 md:items-center"
+		class="relative col-span-full grid grid-cols-2 gap-y-6 overflow-x-clip pt-6 pt-24 md:items-center"
 	>
 		<div
 			id="network-logo"
-			class="relative col-span-full md:col-span-5 md:col-start-6 lg:col-span-6 lg:col-start-5"
+			class="relative col-span-full md:col-span-1 md:col-start-2 md:row-start-1"
 		>
 			<!-- Unicove Outline -->
 			<img
@@ -164,7 +164,7 @@
 		</div>
 
 		<div
-			class="col-span-full col-start-1 row-start-2 md:col-span-5 md:col-start-1 md:row-start-1 lg:col-span-4 lg:col-start-1"
+			class="col-span-full col-start-1 row-start-2 max-w-xl md:col-span-1 md:col-start-1 md:row-start-1"
 		>
 			{@render textblock()}
 		</div>
