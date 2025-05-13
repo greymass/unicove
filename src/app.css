@@ -147,9 +147,11 @@
 	--color-outline: oklch(from var(--color-surface) 0.65 c h);
 	--color-outline-variant: oklch(from var(--color-surface) 0.4 c h);
 
-	--color-surface: oklch(
-		from color-mix(in oklab, var(--color-shark-950) 100%, var(--color-primary) 1.5%) l c h
-	);
+	/* --color-surface: oklch( */
+	/* 	from color-mix(in oklab, var(--color-shark-950) 100%, var(--color-primary) 1.5%) l c h */
+	/* ); */
+
+	--color-surface: oklch(from var(--color-primary) 0.24 0.001 h);
 	--color-on-surface: oklch(from var(--color-surface) 0.95 c h);
 	--color-on-surface-variant: oklch(from var(--color-surface) 0.8 calc(c * 2) h);
 
@@ -216,18 +218,30 @@
 
 	[data-theme='telos'] {
 		--theme-seed: rgb(207 189 254);
+		&[data-scheme='dark'] {
+			--color-surface: oklch(from var(--color-primary) 0.24 0.02 h);
+		}
 	}
 
 	[data-theme='jungle4'] {
 		--theme-seed: #2e9e87;
+		&[data-scheme='dark'] {
+			--color-surface: oklch(from var(--color-primary) 0.24 0.005 h);
+		}
 	}
 
 	[data-theme='vaulta'] {
 		--theme-seed: #2e3bff;
+		&[data-scheme='dark'] {
+			--color-surface: oklch(from var(--color-primary) 0.24 0.02 h);
+		}
 	}
 
 	[data-theme='wax'] {
 		--theme-seed: rgb(255 183 123);
+		&[data-scheme='dark'] {
+			--color-surface: oklch(from var(--color-primary) 0.24 0.001 h);
+		}
 	}
 
 	[data-theme='kylin'] {
