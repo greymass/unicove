@@ -227,6 +227,10 @@
 	</svg>
 
 	<style>
+		body {
+			position: relative;
+		}
+
 		body::before {
 			background: linear-gradient(to bottom, transparent 70svh, var(--color-background) 100svh),
 				radial-gradient(
@@ -254,8 +258,12 @@
 			content: '';
 			filter: url(#n);
 		}
-		body {
-			position: relative;
+
+		/* Safari can't use the noise filter */
+		@supports (-webkit-hyphens: none) {
+			body::before {
+				filter: none;
+			}
 		}
 	</style>
 {/snippet}
