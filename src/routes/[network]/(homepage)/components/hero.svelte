@@ -5,6 +5,7 @@
 	import bgMobile from '$lib/assets/hero/eos/bg2@2x.png?enhanced';
 	import jungle4 from '$lib/assets/hero/jungle4/logo.svg';
 	import telos from '$lib/assets/hero/telos/logo.svg';
+	import kylin from '$lib/assets/hero/kylin/logo.webp';
 	import vaultaLogo from '$lib/assets/hero/vaulta/vector.svg';
 	// import waxLight from '$lib/assets/hero/wax/light.png?enhanced';
 	import waxDark from '$lib/assets/hero/wax/dark.png?enhanced';
@@ -24,7 +25,8 @@
 	const logo = {
 		vaulta: vaultaLogo,
 		telos: telos,
-		jungle4: jungle4
+		jungle4: jungle4,
+		kylin: kylin
 	};
 </script>
 
@@ -35,12 +37,12 @@
 {:else if networkShortname === 'wax'}
 	{@render wax()}
 {:else}
-	<section id="hero" class="col-span-full grid grid-cols-subgrid gap-y-14 pt-6 md:items-center">
-		<div class="col-span-full row-start-1 flex justify-center md:col-start-7 xl:col-start-6">
+	<section id="hero" class="grid gap-y-14 pt-6 md:grid-cols-2 md:items-center">
+		<div class="row-start-1 flex justify-center">
 			<div id="network-logo" class="relative size-[256px]">
 				<!-- Unicove Outline -->
 				<img
-					class="relative size-3/4 object-contain md:hidden"
+					class="relative size-3/4 object-contain"
 					src={UnicoveOutline}
 					alt={networkName}
 					fetchpriority="high"
@@ -53,7 +55,7 @@
 				<img
 					class="absolute right-0 bottom-0 size-3/4 object-contain"
 					src={logo[networkShortname as keyof typeof logo]}
-					alt={networkName}
+					alt={networkShortname}
 					fetchpriority="high"
 					loading="eager"
 					height="512"
@@ -62,9 +64,7 @@
 			</div>
 		</div>
 
-		<div
-			class="z-10 col-span-full grid gap-5 md:col-span-5 md:col-start-1 md:row-start-1 lg:col-span-4 lg:col-start-1 xl:col-start-2"
-		>
+		<div class="z-10 grid gap-5 md:col-start-1 md:row-start-1">
 			{@render textblock()}
 		</div>
 	</section>
