@@ -229,6 +229,7 @@
 	<style>
 		body {
 			position: relative;
+			contain: paint;
 		}
 
 		body::before {
