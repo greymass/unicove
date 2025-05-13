@@ -253,7 +253,7 @@
 			filter: url(#n);
 		}
 		body {
-			backdrop-filter: blur(1px);
+			position: relative;
 		}
 	</style>
 {/snippet}
