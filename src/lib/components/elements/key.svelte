@@ -16,7 +16,7 @@
 
 {#if key}
 	<a
-		class="text-primary hover:text-primary-container inline-grid grid-cols-[auto_1fr] items-start gap-2 font-mono"
+		class="text-primary hover:text-primary-hover inline-grid grid-cols-[auto_1fr] items-start gap-2 font-mono"
 		href="/{network}/key/{String(key)}"
 	>
 		{#if icon}

@@ -2,7 +2,7 @@
 	import { Stack } from '$lib/components/layout';
 </script>
 
-<Stack id="colors" class="rounded-xl bg-black/10  p-6">
+<Stack id="colors" class="bg-surface-container rounded-xl  p-6">
 	<h2 class="h2">Color Roles</h2>
 
 	<div>
@@ -50,6 +50,32 @@
 					</div>
 				</div>
 			</div>
+		</div>
+
+		<div class="bg-error min-h-20 p-4">
+			<span class="text-on-error font-bold">error</span>
+		</div>
+		<div class="bg-on-error min-h-20 p-4">
+			<span class="text-error font-bold">On error</span>
+		</div>
+		<div class="bg-error-container min-h-20 p-4">
+			<span class="text-on-error-container font-bold">error Container</span>
+		</div>
+		<div class="bg-on-error-container min-h-20 p-4">
+			<span class="text-error-container font-bold">On error Container</span>
+		</div>
+
+		<div class="bg-success min-h-20 p-4">
+			<span class="text-on-success font-bold">success</span>
+		</div>
+		<div class="bg-on-success min-h-20 p-4">
+			<span class="text-success font-bold">On success</span>
+		</div>
+		<div class="bg-success-container min-h-20 p-4">
+			<span class="text-on-success-container font-bold">success Container</span>
+		</div>
+		<div class="bg-on-success-container min-h-20 p-4">
+			<span class="text-success-container font-bold">On success Container</span>
 		</div>
 	</div>
 </Stack>

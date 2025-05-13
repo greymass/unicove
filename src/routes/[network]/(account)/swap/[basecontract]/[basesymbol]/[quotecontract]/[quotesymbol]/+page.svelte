@@ -168,6 +168,11 @@
 			transact();
 		}
 	}
+
+	function max() {
+		baseInput?.set(baseBalance.balance);
+		baseQuantity = baseBalance.balance;
+	}
 </script>
 
 {#snippet Success()}
@@ -233,10 +238,16 @@
 
 {#snippet BaseField()}
 	<Stack class="gap-1">
-		<Label for="base-quantity">
+		<Label
+			for="base-quantity"
+			class="items-baseline-last grid h-10 grid-cols-[1fr_auto] items-center"
+		>
 			{m.common_send_tokens({
 				token: data.base.name
 			})}
+			<Button variant="tertiary" disabled={!context.account} onclick={max}>
+				{m.common_fill_max()}
+			</Button>
 		</Label>
 		<AssetInput
 			autofocus
@@ -252,7 +263,10 @@
 
 {#snippet QuoteField()}
 	<Stack class="gap-1">
-		<Label for="base-quantity">
+		<Label
+			for="base-quantity"
+			class="items-baseline-last grid h-10 grid-cols-[1fr_auto] items-center"
+		>
 			{m.common_receive_tokens({
 				token: data.quote.name
 			})}
