@@ -26,7 +26,6 @@
 	import Unicovelogo from '$lib/assets/unicovelogo.svelte';
 	import MobileNavigation from '$lib/components/navigation/mobilenavigation.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte.js';
-	import PageBanner from '$lib/components/banner/pageBanner.svelte';
 	import DebugToggle from '$lib/components/select/debug.svelte';
 	import { CodeIcon } from 'lucide-svelte';
 
@@ -213,8 +212,6 @@
 <svelte:head>
 	<link rel="preload" href={String(data.network.config.logo)} as="image" type="image/png" />
 </svelte:head>
-
-<PageBanner network={data.network} />
 
 <div
 	data-theme={data.network}

@@ -11,6 +11,7 @@
 	import { getContext } from 'svelte';
 	import { Currencies } from '$lib/types/currencies';
 	import type { NetworkValueState } from '$lib/state/value.svelte';
+	import { ramtoken } from '$lib/wharf/chains';
 
 	interface Props {
 		network: NetworkState;
@@ -112,7 +113,7 @@
 
 			<!-- Ram Eos pair -->
 			<Card class="bg-surface-container-highest grid flex-1 content-between  gap-4">
-				<h3 class="text-muted text-sm">RAM/{network.token.symbol.name}</h3>
+				<h3 class="text-muted text-sm">{ramtoken.name}/{network.token.symbol.name}</h3>
 				<p class="text-on-surface justify-self-end text-xl font-semibold text-nowrap">
 					<AssetText value={network.resources.ram.price.rammarket} variant="short" />
 				</p>
@@ -121,7 +122,7 @@
 			<!-- Ram price -->
 			{#if network.resources && network.resources.ram.price.rammarket}
 				<Card class="bg-surface-container-high grid flex-1 content-between gap-4">
-					<h3 class="text-muted text-sm">RAM/USD</h3>
+					<h3 class="text-muted text-sm">{ramtoken.name}/USD</h3>
 					<p class="text-on-surface justify-self-end text-xl font-semibold text-nowrap">
 						<AssetText
 							value={calculateValue(

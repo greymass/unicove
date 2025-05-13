@@ -18,6 +18,7 @@
 
 	import { RAMCalculatorState } from './state.svelte';
 	import { DD, DL, DLRow } from '$lib/components/descriptionlist';
+	import SystemTokenSwap from '$lib/components/banner/systemTokenSwap.svelte';
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');
@@ -95,6 +96,7 @@
 	</Card>
 
 	<AccountBalance />
+	<SystemTokenSwap account={context.account} network={data.network} />
 
 	<!-- RAM Calculator -->
 

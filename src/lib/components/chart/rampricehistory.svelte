@@ -5,6 +5,8 @@
 	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte';
 	import type { HistoricalPrice } from '$lib/types';
 	import Loading from './loading.svelte';
+	import { ramtoken } from '$lib/wharf/chains';
+	import { ZeroUnits } from '$lib/types/token';
 
 	const { network } = getContext<UnicoveContext>('state');
 	const market = getContext<MarketContext>('market');
@@ -43,17 +45,19 @@
 	};
 
 	let systemtoken = Asset.Symbol.from(network.config.systemtoken.symbol);
-	let pair = $derived(String(systemtoken.name) + '/RAM');
+	let pair = $derived(`${ramtoken.name}/${systemtoken.name}`);
 </script>
 
 {#await fetchRamPrices()}
 	<Loading {pair} />
 {:then ramPrices}
 	{#if ramPrices.length}
-		<ChartContainer
-			{pair}
-			data={[{ date: new Date(), value: market.network.ramtoken.price }, ...ramPrices]}
-			type="line"
-		/>
+		{@const latest = {
+			date: new Date(),
+			value: market.network.ramtoken.price.units.gt(ZeroUnits)
+				? market.network.ramtoken.price
+				: ramPrices[0].value
+		}}
+		<ChartContainer {pair} data={[latest, ...ramPrices]} type="line" />
 	{/if}
 {/await}
