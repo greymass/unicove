@@ -46,27 +46,21 @@
 	);
 </script>
 
-<section class="col-span-full grid grid-cols-subgrid gap-4">
+<section class="@container grid grid-cols-2 items-start gap-y-12">
 	<!-- Text -->
-	<div
-		class="col-span-full row-start-2 grid items-center text-balance lg:col-span-3 lg:row-start-1"
-	>
-		<Box>
-			<TextBlock
-				title={m.homepage_performance_defi({
-					network: networkName
-				})}
-				text={m.homepage_performance_defi_description({
-					network: networkName
-				})}
-			/>
-		</Box>
+	<div class="col-span-full row-start-1 grid items-center text-balance">
+		<TextBlock
+			title={m.homepage_performance_defi({
+				network: networkName
+			})}
+			text={m.homepage_performance_defi_description({
+				network: networkName
+			})}
+		/>
 	</div>
 
 	<!-- Grid -->
-	<div
-		class="@container col-span-full grid content-start gap-4 lg:col-start-4 xl:col-span-5 xl:col-start-5"
-	>
+	<div class="@container col-span-full grid content-start gap-4 @3xl:col-start-2 @3xl:row-start-1">
 		<div id="performance-row-1" class="grid gap-4 @-lg:grid-cols-[1fr_auto_1fr]">
 			<!-- Market Cap -->
 			<Card class="bg-surface-container-high grid content-between  gap-4">

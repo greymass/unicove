@@ -19,7 +19,7 @@
 	let networkShortname = $derived(String(data.network));
 </script>
 
-<Subgrid id="homepage" class="mb-4 content-start items-start gap-y-32 md:pt-0">
+<div id="homepage" class="mb-4 grid content-start items-start gap-y-32 md:pt-0">
 	<Hero {networkLogo} {networkName} {networkShortname} />
 
 	<LegacyTokenSwap {network} />
@@ -39,4 +39,4 @@
 	<Charts />
 
 	<PerformanceGrid {networkLogo} {networkName} network={data.network} />
-</Subgrid>
+</div>

@@ -18,7 +18,7 @@
 	let { networkName, networkLogo, productName }: Props = $props();
 </script>
 
-<section class="@container col-span-full">
+<section class="@container">
 	<div class="bg-surface-container grid min-h-72 rounded-2xl px-4 @xl:grid-cols-2 @xl:gap-4">
 		<div class="grid place-items-center">
 			<svg
