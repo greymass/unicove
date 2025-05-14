@@ -16,7 +16,6 @@
 
 	interface Props {
 		networkName: string;
-		networkLogo: string;
 		networkShortname: string;
 	}
 
