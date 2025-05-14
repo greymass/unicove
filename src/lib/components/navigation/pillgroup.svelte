@@ -78,7 +78,7 @@
 			{#each options as { href, text }}
 				<li class="text-muted flex h-12">
 					<a
-						class="data-selected:text-on-surface data-highlighted:text-solar-500 grow content-center px-4"
+						class="data-selected:text-on-surface data-highlighted:text-primary grow content-center px-4"
 						{href}
 						aria-current={isCurrent(href) ? 'page' : undefined}
 						use:melt={$option({ value: href, label: text })}
