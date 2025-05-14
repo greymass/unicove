@@ -25,13 +25,15 @@
 				<div class="col-span-full grid place-items-center @3xl:col-span-1">
 					<a href={article.slug}>
 						{#key article.thumbnail}
-							<img
-								src={article.thumbnail}
-								alt={article.title}
-								class="h-[288px] rounded-2xl object-cover"
-								width="512"
-								height="288"
-							/>
+							<picture class="h-[288px]">
+								<img
+									src={article.thumbnail}
+									alt={article.title}
+									class="rounded-2xl object-contain"
+									width="512"
+									height="288"
+								/>
+							</picture>
 						{/key}
 					</a>
 				</div>
