@@ -18,60 +18,58 @@
 	const onPrevious = () => (index = (index - 1 + articles.length) % articles.length);
 </script>
 
-<section class="@container col-span-full grid *:col-span-full *:col-start-1 *:row-start-1">
+<section id="articles" class="@container grid gap-y-6">
 	{#each articles as article, i}
 		{#key article.slug}
-			<div
-				class:sr-only={i !== index}
-				class="grid min-h-72 grid-cols-2 items-center gap-8 rounded-2xl @3xl:grid-cols-[auto_1fr_1fr_auto] @3xl:gap-y-10"
-			>
-				<IconButton
-					icon={ChevronLeft}
-					size="large"
-					class="text-muted col-start-1  row-start-3 @3xl:row-start-1"
-					onclick={onPrevious}
-				/>
+			<div class:sr-only={i !== index} class="grid min-h-72 grid-cols-2 gap-8 rounded-2xl">
 				<div class="col-span-full grid place-items-center @3xl:col-span-1">
 					<a href={article.slug}>
 						{#key article.thumbnail}
-							<img
-								src={article.thumbnail}
-								alt={article.title}
-								class="rounded-2xl"
-								width="512"
-								height="288"
-							/>
+							<picture class="h-[288px]">
+								<img
+									src={article.thumbnail}
+									alt={article.title}
+									class="rounded-2xl object-contain"
+									width="512"
+									height="288"
+								/>
+							</picture>
 						{/key}
 					</a>
 				</div>
-				<div class="col-span-full grid place-items-center @3xl:col-span-1">
-					<TextBlock title={article.title} text={article.description}>
+
+				<div class="col-span-full grid place-items-center @3xl:col-span-1 @3xl:justify-start">
+					<TextBlock class="max-w-lg" title={article.title} text={article.description}>
 						<Button variant="primary" href={article.slug}>
 							{m.common_read_more()}
 						</Button>
 					</TextBlock>
 				</div>
-				<IconButton
-					icon={ChevronRight}
-					size="large"
-					class="text-muted col-start-2 row-start-3 justify-self-end @3xl:col-start-4 @3xl:row-start-1"
-					onclick={onNext}
-				/>
-
-				<div
-					class="col-span-full col-start-1 row-start-3 flex items-center justify-center gap-2 @3xl:row-start-2"
-				>
-					{#each articles as article, i}
-						<button onclick={() => (index = i)}>
-							<Circle
-								id={article.slug}
-								aria-selected={i === index}
-								class="stroke-on-background aria-selected:fill-on-background size-2"
-							/>
-						</button>
-					{/each}
-				</div>
 			</div>
 		{/key}
 	{/each}
+
+	<div class="flex items-center justify-center gap-2">
+		<IconButton
+			icon={ChevronLeft}
+			size="large"
+			class="text-muted col-start-1  row-start-3 @3xl:row-start-1"
+			onclick={onPrevious}
+		/>
+		{#each articles as article, i}
+			<button onclick={() => (index = i)}>
+				<Circle
+					id={article.slug}
+					aria-selected={i === index}
+					class="stroke-on-background aria-selected:fill-on-background size-2"
+				/>
+			</button>
+		{/each}
+		<IconButton
+			icon={ChevronRight}
+			size="large"
+			class="text-muted col-start-2 row-start-3 justify-self-end @3xl:col-start-4 @3xl:row-start-1"
+			onclick={onNext}
+		/>
+	</div>
 </section>

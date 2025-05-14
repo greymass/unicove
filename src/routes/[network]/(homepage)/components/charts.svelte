@@ -13,11 +13,8 @@
 	const funding = network.supports('directfunding');
 </script>
 
-<section
-	id="charts"
-	class="@container col-span-full grid grid-cols-2 gap-12 xl:grid-cols-2 xl:gap-x-4"
->
-	<Stack class="col-span-full xl:col-span-4 @3xl:col-span-1">
+<section id="charts" class="@container grid grid-cols-2 gap-12 xl:grid-cols-2 xl:gap-x-12">
+	<Stack class="col-span-full @3xl:col-span-1">
 		<TokenPriceHistory />
 
 		<TextBlock
@@ -44,7 +41,7 @@
 		/>
 	</Stack>
 
-	<Stack class="col-span-full xl:col-span-4 xl:col-start-6 @3xl:col-span-1">
+	<Stack class="col-span-full @3xl:col-span-1">
 		<RamPriceHistory />
 
 		<TextBlock
