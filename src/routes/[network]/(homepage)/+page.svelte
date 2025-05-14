@@ -19,7 +19,7 @@
 </script>
 
 <div id="homepage" class="mb-4 grid content-start items-start gap-y-12 sm:gap-y-32 md:pt-0">
-	<Hero {networkLogo} {networkName} {networkShortname} />
+	<Hero {networkName} {networkShortname} />
 
 	<LegacyTokenSwap {network} />
 
