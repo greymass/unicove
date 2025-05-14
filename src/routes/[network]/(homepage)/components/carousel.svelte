@@ -64,8 +64,7 @@
 		<Box class="grid place-items-center py-8">
 			<TextBlock
 				title={m.homepage_metamask_wallet_title({
-					name: productName,
-					network: networkName
+					name: productName
 				})}
 				text={m.homepage_metamask_wallet_description({
 					name: productName,
