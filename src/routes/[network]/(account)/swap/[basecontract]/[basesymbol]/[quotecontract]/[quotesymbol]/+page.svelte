@@ -179,7 +179,7 @@
 		}
 	}
 
-	function max(e: Event) {
+	function max() {
 		baseInput?.set(baseBalance.balance);
 		baseQuantity = baseBalance.balance;
 		calculateQuote(String(baseBalance.balance.value));
