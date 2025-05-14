@@ -50,14 +50,14 @@
 		class="hidden"
 	>
 		<filter id="nd" x="0" y="0" width="100%" height="100%">
-			<feTurbulence type="fractalNoise" baseFrequency="0.4" />
-			<feColorMatrix type="saturate" values="0" />
+			<feTurbulence type="fractalNoise" baseFrequency="0.9" />
+			<feDisplacementMap in="turbulence" scale="1000" />
 			<feBlend in="SourceGraphic" mode="multiply" />
 		</filter>
 
 		<filter id="nl" x="0" y="0" width="100%" height="100%">
-			<feTurbulence type="fractalNoise" baseFrequency="0.5" />
-			<feColorMatrix type="saturate" values="0" />
+			<feTurbulence type="fractalNoise" baseFrequency="0.9" />
+			<feDisplacementMap in="turbulence" scale="1000" />
 			<feBlend in="SourceGraphic" mode="screen" />
 		</filter>
 	</svg>
@@ -109,17 +109,13 @@
 			background: linear-gradient(to bottom, transparent 70svh, var(--color-background) 90svh),
 				radial-gradient(
 					farthest-side at 150% 30%,
-					#190d1c,
-					#190d1c 30%,
-					#2e3bff30 40%,
+					#190d1c 40%,
+					#2e3bff30 45%,
 					#667cff80 52%,
-					#667cff95 56%,
-					#667cff90 57%,
 					transparent 65%
 				),
 				radial-gradient(
-					circle at top 0rem left -40%,
-					#190d1c,
+					circle at top 0rem left -50%,
 					#190d1c 10%,
 					#2e3bff50 15%,
 					#667cff30 35%,

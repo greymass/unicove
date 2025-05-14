@@ -199,7 +199,7 @@
 				})}.
 			</h1>
 			<p
-				class="text-muted mb-2 max-w-md rounded-lg text-xl leading-tight text-pretty backdrop-blur lg:text-xl lg:leading-tight"
+				class="text-muted mb-2 max-w-md rounded-lg text-xl leading-tight text-pretty lg:text-xl lg:leading-tight"
 			>
 				{m.homepage_hero_description({
 					network: networkName
