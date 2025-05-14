@@ -87,6 +87,13 @@ export namespace Types {
 		@Struct.field(Asset)
 		declare rex: Asset;
 	}
+	@Struct.type('mvtosavings')
+	export class mvtosavings extends Struct {
+		@Struct.field(Name)
+		declare owner: Name;
+		@Struct.field(Asset)
+		declare rex: Asset;
+	}
 	@Struct.type('donatetorex')
 	export class donatetorex extends Struct {
 		@Struct.field(Name)

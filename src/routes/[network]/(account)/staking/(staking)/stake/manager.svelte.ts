@@ -8,7 +8,9 @@ import {
 	defaultQuantity,
 	getStakableBalance,
 	getAPR,
-	getUnstakableBalance
+	getUnstakableBalance,
+	getUnstakingBalances,
+	type UnstakingRecord
 } from '$lib/utils/staking';
 import { Types as REXTypes } from '$lib/types/rex';
 import { PlaceholderAuth } from '@wharfkit/session';
@@ -31,6 +33,9 @@ export class StakeManager {
 	public error: string = $state('');
 	public txid: string = $state('');
 
+	public unstaking: Array<UnstakingRecord> = $derived(
+		getUnstakingBalances(this.network, this.account)
+	);
 	public staked: Asset = $derived(getUnstakableBalance(this.network, this.account));
 	public stakable: Asset = $derived(getStakableBalance(this.network, this.account));
 	public apr: string = $derived(
@@ -114,8 +119,28 @@ export class StakeManager {
 				})
 			});
 
+			const actions = [deposit, buyrex];
+
+			const maturedRex = this.account.rex ? Number(this.account.rex.matured_rex) / 10000 : 0;
+			const claimableBalance =
+				maturedRex + this.unstaking.reduce((acc, x) => acc + parseFloat(x.rex.toString()), 0);
+
+			if (claimableBalance > 0 && claimableBalance < 10000) {
+				actions.unshift(
+					Action.from({
+						account: this.network.contracts.system.account,
+						name: 'mvtosavings',
+						authorization: [PlaceholderAuth],
+						data: REXTypes.mvtosavings.from({
+							owner: this.account.name,
+							rex: `${claimableBalance.toFixed(4)} REX`
+						})
+					})
+				);
+			}
+
 			const result = await this.wharf.transact({
-				actions: [deposit, buyrex]
+				actions
 			});
 
 			this.txid = String(result?.response?.transaction_id);
