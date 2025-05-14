@@ -233,7 +233,7 @@
 	</span>
 
 	{#if shortcutKey}
-		<span class="border-on-surface/30 m-2 hidden rounded-sm border px-2 py-1 md:inline">
+		<span class="border-outline-variant m-2 hidden rounded-sm border px-2 py-1 md:inline">
 			{shortcutKey}
 		</span>
 	{/if}
