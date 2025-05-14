@@ -252,13 +252,13 @@
 		{:else if variant === 'json'}
 			<Code json={action} />
 		{/if}
+
+		{#if action.account.equals('eosio') && action.name.equals('setcode') && objectified && objectified.code}
+			{@render Pretty({ hash: String(Checksum256.hash(objectified.code)) })}
+		{/if}
+
+		{#if variant !== 'summary'}
+			{@render Footer()}
+		{/if}
 	</svelte:boundary>
-
-	{#if action.account.equals('eosio') && action.name.equals('setcode') && objectified && objectified.code}
-		{@render Pretty({ hash: String(Checksum256.hash(objectified.code)) })}
-	{/if}
-
-	{#if variant !== 'summary'}
-		{@render Footer()}
-	{/if}
 </Card>
