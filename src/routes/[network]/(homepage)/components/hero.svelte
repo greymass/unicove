@@ -174,7 +174,7 @@
 {#snippet vaulta()}
 	<section
 		id="hero"
-		class="@container col-span-full grid h-[70svh] place-content-center pt-12 md:pt-0"
+		class="@container col-span-full grid h-[70svh] max-h-156 place-content-center sm:pt-12 md:pt-0"
 	>
 		<Stack class="relative grid justify-items-center gap-5  text-center">
 			<img
@@ -199,8 +199,9 @@
 				})}
 			</p>
 
-			<div class="grid gap-4 @2xl:grid-cols-2">
-				<Button variant="primary">Create your Vaulta account</Button>
+			<div class="grid gap-4">
+				<!-- <div class="grid gap-4 @2xl:grid-cols-2"> -->
+				<!-- <Button variant="primary">Create your Vaulta account</Button> -->
 				<Button
 					class="text-primary bg-black/20  backdrop-blur"
 					href="https://www.vaulta.com/resources/opening-the-gateway-to-web3-banking"
@@ -233,19 +234,19 @@
 		}
 
 		body::before {
-			background: linear-gradient(to bottom, transparent 70svh, var(--color-background) 100svh),
+			background: linear-gradient(to bottom, transparent 70svh, var(--color-background) 90svh),
 				radial-gradient(
-					circle at top 100rem right -100rem,
+					farthest-side at 150% 30%,
 					#190d1c,
-					#190d1c 40%,
-					#2e3bff30 50%,
+					#190d1c 30%,
+					#2e3bff30 40%,
 					#667cff80 55%,
 					#667cff99 56%,
 					#667cff90 57%,
 					transparent 65%
 				),
 				radial-gradient(
-					circle at top -0rem left -100rem,
+					circle at top 0rem left -40%,
 					#190d1c,
 					#190d1c 10%,
 					#2e3bff50 15%,
@@ -254,6 +255,10 @@
 				),
 				#190d1c;
 			background-repeat: no-repeat;
+			background-size:
+				100% 100%,
+				100% 300vh,
+				100% 100vh;
 			position: absolute;
 			inset: 0;
 			content: '';
