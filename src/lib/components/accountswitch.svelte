@@ -22,7 +22,6 @@
 	import UserPlus from 'lucide-svelte/icons/user-plus';
 	import Search from 'lucide-svelte/icons/search';
 	import { goto } from '$lib/utils';
-	import { cn } from '$lib/utils/style';
 	import Button from './button/button.svelte';
 	import Text from './input/text.svelte';
 	import { Wallet } from 'lucide-svelte';
@@ -30,11 +29,10 @@
 	const context = getContext<UnicoveContext>('state');
 
 	interface PageProps {
-		class?: string;
 		network: NetworkState;
 	}
 
-	let { class: className = '', network }: PageProps = $props();
+	let { network }: PageProps = $props();
 
 	let currentSession = $derived(context.wharf.session);
 
@@ -130,18 +128,14 @@
 </script>
 
 <!-- Trigger Button -->
-<button
-	class={cn(
-		'bg-primary-container  focus-visible:ring-solar-500 relative z-50 h-10 cursor-pointer rounded-lg font-medium text-nowrap focus:outline-transparent focus-visible:ring-2 focus-visible:outline focus-visible:ring-inset',
-		!context.wharf.session && 'bg-primary text-on-primary',
-		className
-	)}
-	use:melt={$trigger}
-	aria-label="account-switcher-label"
-	id="account-switcher"
-	data-session={!!context.wharf.session}
->
-	{#if context.wharf.session}
+{#if context.wharf.session}
+	<Button
+		variant="secondary"
+		class="h-10 grow-0 px-0"
+		meltAction={trigger}
+		aria-label="account-switcher-label"
+		id="account-switcher"
+	>
 		<div class="flex items-center gap-2 pr-4 pl-3.5">
 			<picture class="size-5">
 				<img
@@ -156,10 +150,17 @@
 				>{context.wharf.session.actor}</span
 			>
 		</div>
-	{:else}
-		<span class="pointer-events-none z-10 px-4 py-2">{m.common_connect_wallet()}</span>
-	{/if}
-</button>
+	</Button>
+{:else}
+	<Button
+		class="h-10 grow-0 px-4"
+		meltAction={trigger}
+		aria-label="account-switcher-label"
+		id="account-switcher"
+	>
+		{m.common_connect_wallet()}
+	</Button>
+{/if}
 
 {#if $open}
 	<div data-theme={network} class="" use:melt={$portalled}>
