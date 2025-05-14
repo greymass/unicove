@@ -140,24 +140,24 @@
 
 	function calculateQuote(value: string) {
 		const number = Number(value);
-		if (number > 0) {
-			const feeAmount = calculateFee(swap, feeAppliedTo);
-			const quote = Asset.fromFloat(
-				(number - feeAmount.value) * swap.pair.price.value,
-				quoteQuantity.symbol
-			);
-			quoteQuantity = quote;
-			quoteInput?.set(quote);
-		} else {
-			quoteInput?.set(quoteDefaultAsset);
-			quoteQuantity = quoteDefaultAsset;
+		if (swap) {
+			if (number > 0) {
+				const feeAmount = calculateFee(swap, feeAppliedTo);
+				const quote = Asset.fromFloat(
+					(number - feeAmount.value) * swap.pair.price.value,
+					quoteQuantity.symbol
+				);
+				quoteQuantity = quote;
+				quoteInput?.set(quote);
+			} else {
+				quoteInput?.set(quoteDefaultAsset);
+				quoteQuantity = quoteDefaultAsset;
+			}
 		}
 	}
 
 	function baseChange(e: Event & { currentTarget: EventTarget & HTMLInputElement }) {
-		if (swap) {
-			calculateQuote(e.currentTarget.value);
-		}
+		calculateQuote(e.currentTarget.value);
 	}
 
 	function quoteChange(e: Event & { currentTarget: EventTarget & HTMLInputElement }) {
@@ -182,7 +182,7 @@
 	function max(e: Event) {
 		baseInput?.set(baseBalance.balance);
 		baseQuantity = baseBalance.balance;
-		calculateQuote(baseBalance.balance.value);
+		calculateQuote(String(baseBalance.balance.value));
 	}
 </script>
 
