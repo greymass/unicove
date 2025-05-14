@@ -126,6 +126,8 @@
 	--color-on-background: inherit;
 }
 
+@custom-variant dark (&:where([data-scheme=dark], [data-scheme=dark] *));
+
 @utility dark-scheme {
 	--color-primary: oklch(from var(--theme-seed) 0.82 c h);
 	--color-primary-hover: oklch(from var(--theme-seed) 0.9 c h);
