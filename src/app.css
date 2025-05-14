@@ -144,12 +144,8 @@
 	--color-success-container: oklch(0.42 0.17 var(--success-hue));
 	--color-on-success-container: oklch(0.92 0.042 var(--success-hue));
 
-	--color-outline: oklch(from var(--color-surface) 0.65 c h);
-	--color-outline-variant: oklch(from var(--color-surface) 0.4 c h);
-
-	/* --color-surface: oklch( */
-	/* 	from color-mix(in oklab, var(--color-shark-950) 100%, var(--color-primary) 1.5%) l c h */
-	/* ); */
+	--color-outline: oklch(from var(--color-primary) 0.65 0.08 h);
+	--color-outline-variant: oklch(from var(--color-outline) 0.4 0.05 h);
 
 	--color-surface: oklch(from var(--color-primary) 0.24 0.001 h);
 	--color-on-surface: oklch(from var(--color-surface) 0.95 c h);
@@ -184,8 +180,8 @@
 	--color-success-container: oklch(0.92 0.042 var(--success-hue));
 	--color-on-success-container: oklch(0.42 0.17 var(--success-hue));
 
-	--color-outline: oklch(from var(--color-surface) 0.5664 c h);
-	--color-outline-variant: oklch(from var(--color-surface) 0.8267 c h);
+	--color-outline: oklch(from var(--color-primary) 0.57 0.08 h);
+	--color-outline-variant: oklch(from var(--color-outline) 0.83 0.04 h);
 
 	--color-surface: oklch(from var(--color-primary) 0.98 0.007 h);
 	--color-on-surface: oklch(from var(--color-surface) 0.22 c h);
