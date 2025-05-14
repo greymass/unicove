@@ -136,6 +136,10 @@ export class NetworkState {
 				client: this.client
 			})
 		};
+		for (const name of Object.keys(this.contracts)) {
+			const contract = this.contracts[name as keyof DefaultContracts];
+			this.abis.cache.set(String(contract.account), contract.abi);
+			console.log(`Contract on ${contract.account} cached`);
 	}
 
 	get serialized(): SerializedNetworkState {
