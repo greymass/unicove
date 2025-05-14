@@ -68,6 +68,12 @@
 			contain: paint;
 		}
 
+		#site-logo,
+		#side-menu a {
+			color: var(--color-on-surface);
+			fill: var(--color-on-surface);
+		}
+
 		[data-scheme='light'] {
 			body::before {
 				background: linear-gradient(to bottom, transparent 60svh, var(--color-background) 95svh),
