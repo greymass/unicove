@@ -2,9 +2,19 @@ import buyram from './buyram.svelte';
 import buyrambytes from './buyrambytes.svelte';
 import buyrex from './buyrex.svelte';
 import deposit from './deposit.svelte';
+import enforcebal from './enforcebal.svelte';
+import logbuyram from './logbuyram.svelte';
+import logramchange from './logramchange.svelte';
+import logsellram from './logsellram.svelte';
+import logsystemfee from './logsystemfee.svelte';
 import mvfrsavings from './mvfrsavings.svelte';
+import powerup from './powerup.svelte';
+import ramtransfer from './ramtransfer.svelte';
+import refund from './refund.svelte';
 import sellram from './sellram.svelte';
 import sellrex from './sellrex.svelte';
+import setpriv from './setpriv.svelte';
+import swaptrace from './swaptrace.svelte';
 import withdraw from './withdraw.svelte';
 
 export default {
@@ -12,8 +22,18 @@ export default {
 	buyrambytes,
 	buyrex,
 	deposit,
+	enforcebal,
+	logbuyram,
+	logramchange,
+	logsellram,
+	logsystemfee,
 	mvfrsavings,
+	powerup,
+	ramtransfer,
+	refund,
 	sellram,
 	sellrex,
+	setpriv,
+	swaptrace,
 	withdraw
 };

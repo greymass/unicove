@@ -1,5 +1,4 @@
 <script>
-	let props = $props();
 </script>
 
 <h1 class="h2">Debug</h1>

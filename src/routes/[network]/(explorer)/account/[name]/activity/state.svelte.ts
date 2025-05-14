@@ -51,6 +51,8 @@ export class ActivityLoader {
 	private network: string;
 	private fetch: typeof fetch;
 	private account?: string;
+	private contract?: string;
+	private action?: string;
 
 	public scene: Scene = $state(new Scene());
 
@@ -78,6 +80,14 @@ export class ActivityLoader {
 		}
 	}
 
+	public setContract(account: string) {
+		this.contract = account;
+	}
+
+	public setAction(action: string) {
+		this.action = action;
+	}
+
 	public load() {
 		if (!this.account) throw new Error('set account first');
 
@@ -94,8 +104,8 @@ export class ActivityLoader {
 		this.loadRemote(true);
 	}
 
-	public makeKey(trx: Checksum256, act: Checksum256) {
-		return `${trx}-${act}`;
+	public makeKey(trx: Checksum256, ordinal: Checksum256) {
+		return `${trx}-${ordinal}`;
 	}
 
 	private async loadRemote(more: boolean) {
@@ -104,9 +114,16 @@ export class ActivityLoader {
 			const account = this.account;
 			this.scene.setLoading(true);
 			const startIndex = more ? this.scene!.loadStart : 1;
-			const response = await this.fetch(
-				`/${this.network}/api/account/${account}/activity/${startIndex}`
-			);
+			// Use the /activity endpoint (robo) for generic activity feeds
+			let path = `/${this.network}/api/account/${account}/activity/${startIndex}`;
+			// If filters are defined, use the /actions endpoint (hyperion) for specific contract actions
+			if (this.contract) {
+				path = `/${this.network}/api/account/${account}/actions/${startIndex}/${this.contract}`;
+				if (this.action) {
+					path += `/${this.action}`;
+				}
+			}
+			const response = await this.fetch(path);
 			if (!response.ok) {
 				throw new Error(`Error while loading activity for ${account}.`);
 			}
@@ -118,6 +135,7 @@ export class ActivityLoader {
 			const digests: string[] = [];
 			const receipts: Record<string, ActionTraceReceipt[]> = {};
 			const filtered = activity.actions
+				.filter((action) => action.trace.receipt.receiver.equals(account))
 				.filter((action) => {
 					const key = this.makeKey(action.trace.trx_id, action.trace.receipt.act_digest);
 					if (!receipts[key]) {

@@ -137,6 +137,6 @@
 	</div>
 
 	{#if table}
-		<Table abi={data.abi} contract={data.contract} network={data.network} {table} />
+		<Table abi={data.abi} contract={data.contract} {table} />
 	{/if}
 </Stack>

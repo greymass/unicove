@@ -17,7 +17,7 @@
 	<TextInput bind:value={filter} autofocus placeholder="Filter structs..." />
 	<ul class="grid grid-cols-[auto_1fr] gap-4 overflow-x-auto">
 		{#each filteredStructs as struct}
-			<Struct abi={data.abi} contract={data.contract} network={data.network} {struct} />
+			<Struct abi={data.abi} contract={data.contract} {struct} />
 		{:else}
 			{#if filter}
 				<p>No actions match filter</p>

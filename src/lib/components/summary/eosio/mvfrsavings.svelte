@@ -1,31 +1,23 @@
 <script lang="ts">
-	import { formatCurrency } from '$lib/i18n';
-	import { Card, Stack, Switcher } from '$lib/components/layout';
+	import { Asset, Name } from '@wharfkit/session';
+
 	import type { ActionSummaryProps } from '$lib/types/transaction';
 	import { Types } from '$lib/types/rex';
+	import AccountElement from '$lib/components/elements/account.svelte';
+	import AssetElement from '$lib/components/elements/asset.svelte';
+	import Chip from '$lib/components/chip.svelte';
+	import Row from '../components/row.svelte';
+	import * as m from '$lib/paraglide/messages';
 
-	interface MvfrsavingsProps extends Omit<ActionSummaryProps, 'data'> {
+	interface Props extends Omit<ActionSummaryProps, 'data'> {
 		data: Types.mvfrsavings;
 	}
 
-	const { class: className = '', data, value }: MvfrsavingsProps = $props();
+	const { data }: Props = $props();
 </script>
 
-<Card class="gap-5 text-center {className}">
-	<h3 class="h3">Move out from savings</h3>
-	<Switcher threshold="20rem">
-		<Stack class="gap-0">
-			<p class="caption">owner</p>
-			<p class="h3">{data.owner}</p>
-		</Stack>
-		<Stack class="gap-0">
-			<p class="caption">REX</p>
-			<p class="h3">{data.rex}</p>
-			{#if value}
-				<p class="bg-surface-container-highest mt-1.5 self-start rounded-sm px-2">
-					USD {formatCurrency(value)}
-				</p>
-			{/if}
-		</Stack>
-	</Switcher>
-</Card>
+<Row>
+	<Chip>{m.common_staking()}</Chip>
+	<AssetElement value={Asset.from(data.rex)} variant="full" />
+	<AccountElement name={Name.from(data.owner)} />
+</Row>

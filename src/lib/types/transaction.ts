@@ -15,8 +15,11 @@ import {
 	Transaction,
 	TransactionHeader,
 	UInt32,
-	UInt64
+	UInt64,
+	type NameType
 } from '@wharfkit/antelope';
+
+import { Types as HyperionTypes } from '@wharfkit/hyperion';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type ObjectifiedActionData = Record<string, any>;
@@ -24,6 +27,7 @@ export type ObjectifiedActionData = Record<string, any>;
 export interface ActionSummaryProps {
 	class?: string;
 	data: ObjectifiedActionData;
+	perspectiveOf?: Name;
 	value?: Asset;
 }
 
@@ -205,11 +209,56 @@ export class TransactionResponse extends Struct {
 
 @Struct.type('activity_response_action')
 export class ActivityResponseAction extends Struct {
-	@Struct.field(UInt64) declare global_action_seq: UInt64;
-	@Struct.field(UInt64) declare account_action_seq: UInt64;
+	@Struct.field(UInt64, { optional: true }) declare global_action_seq?: UInt64;
+	@Struct.field(UInt64, { optional: true }) declare account_action_seq?: UInt64;
 	@Struct.field(UInt32) declare block_num: UInt32;
 	@Struct.field(BlockTimestamp) declare block_time: BlockTimestamp;
 	@Struct.field(ActionTrace) declare action_trace: ActionTrace;
+
+	static fromHyperion(account: NameType, action: HyperionTypes.v2.Action): ActivityResponseAction {
+		let accountReceipt = action.receipts.find((receipt) => receipt.receiver.equals(account));
+		if (!accountReceipt) {
+			accountReceipt = action.receipts[0];
+		}
+		const receipt = ActionTraceReceipt.from({
+			abi_sequence: 0,
+			act_digest: Checksum256.hash(action.global_sequence.byteArray),
+			auth_sequence: accountReceipt.auth_sequence,
+			code_sequence: 0,
+			global_sequence: accountReceipt.global_sequence,
+			receiver: accountReceipt.receiver,
+			recv_sequence: accountReceipt.recv_sequence
+		});
+		const act = ActionTraceAction.from({
+			account: action.act.account,
+			name: action.act.name,
+			authorization: action.act.authorization,
+			data: action.act.data,
+			hex_data: ''
+		});
+		const trace = ActionTrace.from({
+			account_ram_deltas: [],
+			act,
+			action_ordinal: action.action_ordinal,
+			block_num: action.block_num,
+			block_time: action.timestamp,
+			closest_unnotified_ancestor_action_ordinal: 0,
+			context_free: false,
+			creator_action_ordinal: 0,
+			elapsed: 0,
+			producer_block_id: action.block_id,
+			receipt,
+			receiver: accountReceipt.receiver,
+			trx_id: action.trx_id
+		});
+		return ActivityResponseAction.from({
+			global_action_seq: action.global_sequence,
+			account_action_seq: action.global_sequence,
+			block_num: action.block_num,
+			block_time: action.timestamp,
+			action_trace: trace
+		});
+	}
 
 	get action(): Action {
 		return Action.from({
@@ -238,4 +287,18 @@ export class ActivityResponse extends Struct {
 	@Struct.field(Int64) declare first: Int64;
 	@Struct.field(Int64) declare last: Int64;
 	@Struct.field(UInt32) declare head_block_num: UInt32;
+
+	static fromHyperion(
+		account: NameType,
+		response: HyperionTypes.v2.GetActionsResponse
+	): ActivityResponse {
+		return ActivityResponse.from({
+			actions: response.actions.map((action) =>
+				ActivityResponseAction.fromHyperion(account, action)
+			),
+			first: response.actions[0].global_sequence,
+			last: response.actions[response.actions.length - 1].global_sequence,
+			head_block_num: response.actions[0].block_num
+		});
+	}
 }

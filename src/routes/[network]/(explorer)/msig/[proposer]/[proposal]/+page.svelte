@@ -13,6 +13,7 @@
 	import { ApprovalManager } from './manager.svelte';
 	import type { ActionDisplayVariants } from '$lib/types';
 	import { goto } from '$lib/utils';
+	import { getActionSummaryComponent } from '$lib/components/summary';
 
 	let { data } = $props();
 
@@ -164,12 +165,16 @@
 	</Switcher>
 
 	<Stack>
-		<h2 class="h3">{m.msig_proposed_actions()}</h2>
+		<h2 class="h3">{m.msig_proposed_actions()} ({variant})</h2>
 		<SelectActionVariant />
 		{#each manager.readable as decodedAction}
+			{@const contract = String(decodedAction.action.account)}
+			{@const action = String(decodedAction.action.name)}
+			{@const summary = getActionSummaryComponent(contract, action, decodedAction.action.data)}
 			<ActionCard
 				action={decodedAction.action}
 				objectified={decodedAction.readable?.data}
+				{summary}
 				{variant}
 			/>
 		{/each}

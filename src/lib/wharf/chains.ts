@@ -4,10 +4,14 @@ import { ChainDefinition, Logo, TokenIdentifier } from '@wharfkit/common';
 import { Contract as DelphiHelperContract } from '$lib/wharf/contracts/delphihelper';
 import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
 import { Contract as MSIGContract } from '$lib/wharf/contracts/msig';
+import { Contract as ReserveContract } from '$lib/wharf/contracts/eosio.reserv';
+import { Contract as REXContract } from '$lib/wharf/contracts/eosio.rex';
 import { Contract as SystemContract } from '$lib/wharf/contracts/system';
 import { Contract as TimeContract } from '$lib/wharf/contracts/eosntime';
 import { Contract as TokenContract } from '$lib/wharf/contracts/token';
 import { Contract as UnicoveContract } from '$lib/wharf/contracts/unicove.api';
+import { Contract as VaultaContract } from '$lib/wharf/contracts/core.vaulta';
+import { Contract as WRAMContract } from '$lib/wharf/contracts/eosio.wram';
 
 import * as env from '$env/static/public';
 
@@ -131,6 +135,7 @@ export const chainConfig: ChainConfig = {
 		directfunding: isTrue(env.PUBLIC_FEATURE_DIRECTFUNDING),
 		eosntime: isTrue(env.PUBLIC_FEATURE_EOSNTIME),
 		giftedram: isTrue(env.PUBLIC_FEATURE_GIFTEDRAM),
+		hyperion: isTrue(env.PUBLIC_FEATURE_HYPERION),
 		lightapi: isTrue(env.PUBLIC_FEATURE_LIGHTAPI),
 		metamask: isTrue(env.PUBLIC_FEATURE_METAMASK),
 		powerup: isTrue(env.PUBLIC_FEATURE_POWERUP),
@@ -156,14 +161,19 @@ export interface DefaultContracts {
 	delphioracle: DelphiOracleContract;
 	eosntime: TimeContract;
 	msig: MSIGContract;
+	reserve: ReserveContract;
+	rex: REXContract;
 	system: SystemContract;
 	token: TokenContract;
 	unicove: UnicoveContract;
+	vaulta: VaultaContract;
+	wram: WRAMContract;
 }
 
 export interface ChainEndpoints {
 	api: string;
 	history: string;
+	hyperion?: string;
 	lightapi?: string;
 	metrics?: string;
 }
@@ -206,6 +216,7 @@ export type FeatureType =
 	| 'directfunding'
 	| 'eosntime'
 	| 'giftedram'
+	| 'hyperion'
 	| 'lightapi'
 	| 'metamask'
 	| 'powerup'
