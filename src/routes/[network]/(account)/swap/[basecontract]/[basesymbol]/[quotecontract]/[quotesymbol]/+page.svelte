@@ -11,7 +11,7 @@
 
 	import * as m from '$lib/paraglide/messages';
 	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte.js';
-	import { TokenBalance, TokenSwap } from '$lib/types/token.js';
+	import { TokenBalance, TokenSwap, ZeroUnits } from '$lib/types/token.js';
 	import { ArrowRightLeft } from 'lucide-svelte';
 	import Label from '$lib/components/input/label.svelte';
 	import { SingleCard, Stack } from '$lib/components/layout';
@@ -138,15 +138,25 @@
 		return feeAmount;
 	}
 
-	function baseChange(e: Event & { currentTarget: EventTarget & HTMLInputElement }) {
-		if (swap) {
+	function calculateQuote(value: string) {
+		const number = Number(value);
+		if (number > 0) {
 			const feeAmount = calculateFee(swap, feeAppliedTo);
 			const quote = Asset.fromFloat(
-				(Number(e.currentTarget.value) - feeAmount.value) * swap.pair.price.value,
+				(number - feeAmount.value) * swap.pair.price.value,
 				quoteQuantity.symbol
 			);
 			quoteQuantity = quote;
 			quoteInput?.set(quote);
+		} else {
+			quoteInput?.set(quoteDefaultAsset);
+			quoteQuantity = quoteDefaultAsset;
+		}
+	}
+
+	function baseChange(e: Event & { currentTarget: EventTarget & HTMLInputElement }) {
+		if (swap) {
+			calculateQuote(e.currentTarget.value);
 		}
 	}
 
@@ -169,9 +179,10 @@
 		}
 	}
 
-	function max() {
+	function max(e: Event) {
 		baseInput?.set(baseBalance.balance);
 		baseQuantity = baseBalance.balance;
+		calculateQuote(baseBalance.balance.value);
 	}
 </script>
 
@@ -300,7 +311,12 @@
 					{/if}
 				</p>
 
-				<Button onclick={transact} disabled={context.wharf.transacting || !context.account}>
+				<Button
+					onclick={transact}
+					disabled={context.wharf.transacting ||
+						!context.account ||
+						baseQuantity.units.lte(ZeroUnits)}
+				>
 					{m.common_swap_to_token({
 						token: String(data.quote.symbol.name)
 					})}
