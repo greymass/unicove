@@ -132,7 +132,8 @@
 <!-- Trigger Button -->
 <button
 	class={cn(
-		'border-outline focus-visible:ring-solar-500 relative z-50 h-10 rounded-lg border text-base font-medium text-nowrap focus:outline-transparent focus-visible:ring-2 focus-visible:outline focus-visible:ring-inset',
+		'bg-primary-container  focus-visible:ring-solar-500 relative z-50 h-10 cursor-pointer rounded-lg font-medium text-nowrap focus:outline-transparent focus-visible:ring-2 focus-visible:outline focus-visible:ring-inset',
+		!context.wharf.session && 'bg-primary text-on-primary',
 		className
 	)}
 	use:melt={$trigger}
@@ -151,7 +152,7 @@
 					width="20"
 				/>
 			</picture>
-			<span class="text-on-surface pointer-events-none z-10 text-base"
+			<span class="text-on-primary-container pointer-events-none z-10"
 				>{context.wharf.session.actor}</span
 			>
 		</div>
