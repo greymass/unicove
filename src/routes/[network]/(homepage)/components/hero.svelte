@@ -177,13 +177,19 @@
 		class="@container col-span-full grid h-[70svh] max-h-156 place-content-center sm:pt-12 md:pt-0"
 	>
 		<Stack class="relative grid justify-items-center gap-5  text-center">
-			<img
-				class="relative z-50 mb-8"
-				src={vaultaLogo}
-				alt={networkName}
-				fetchpriority="high"
-				loading="eager"
-			/>
+			<svg
+				class="z-50 mb-2 h-auto w-64"
+				width="81"
+				height="33"
+				viewBox="0 0 81 33"
+				fill="none"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<path
+					d="M53.9058 8.10812H42.9195C42.4884 8.10812 42.0742 8.27376 41.7692 8.56834L16.4699 33H0V9.47065L9.79565 0.00043682V26.2295H11.1953L36.759 1.54238C37.7818 0.554629 39.1685 0 40.6146 0H53.9058V8.10855V8.10812ZM81 0H64.5297L39.2308 24.4312C38.9258 24.7258 38.5116 24.8912 38.0805 24.8912H27.0942V32.9996H40.3739C41.8274 32.9996 43.2214 32.4423 44.2487 31.4495L69.8042 6.77093H71.2039V28.9321H55.4209V33H71.2039L72.6579 31.5944L74.0137 30.2837L81 23.5298V0Z"
+					fill="currentColor"
+				/>
+			</svg>
 
 			<h1
 				class="max-w-128 text-3xl leading-tight font-bold text-balance lg:text-4xl lg:leading-tight"
@@ -193,7 +199,9 @@
 					network: networkName
 				})}.
 			</h1>
-			<p class="text-muted mb-2 text-xl leading-tight text-balance lg:text-xl lg:leading-tight">
+			<p
+				class="text-muted mb-2 max-w-md rounded-lg text-xl leading-tight text-pretty backdrop-blur lg:text-xl lg:leading-tight"
+			>
 				{m.homepage_hero_description({
 					network: networkName
 				})}
@@ -203,7 +211,7 @@
 				<!-- <div class="grid gap-4 @2xl:grid-cols-2"> -->
 				<!-- <Button variant="primary">Create your Vaulta account</Button> -->
 				<Button
-					class="text-primary bg-black/20  backdrop-blur"
+					class="text-primary bg-surface-container-lowest/20  backdrop-blur"
 					href="https://www.vaulta.com/resources/opening-the-gateway-to-web3-banking"
 				>
 					About the Vaulta rebrand
@@ -220,10 +228,16 @@
 		height="300"
 		class="hidden"
 	>
-		<filter id="n" x="0" y="0" width="100%" height="100%">
+		<filter id="nd" x="0" y="0" width="100%" height="100%">
 			<feTurbulence type="fractalNoise" baseFrequency="0.4" />
 			<feColorMatrix type="saturate" values="0" />
 			<feBlend in="SourceGraphic" mode="multiply" />
+		</filter>
+
+		<filter id="nl" x="0" y="0" width="100%" height="100%">
+			<feTurbulence type="fractalNoise" baseFrequency="0.5" />
+			<feColorMatrix type="saturate" values="0" />
+			<feBlend in="SourceGraphic" mode="screen" />
 		</filter>
 	</svg>
 
@@ -233,6 +247,37 @@
 			contain: paint;
 		}
 
+		[data-scheme='light'] {
+			body::before {
+				background: linear-gradient(to bottom, transparent 60svh, var(--color-background) 95svh),
+					radial-gradient(
+						farthest-side at 150% 30%,
+						var(--color-background),
+						#2e3bff30 30%,
+						oklch(from var(--color-primary) l c calc(h - 10) / 0.4) 45%,
+						oklch(from var(--color-primary) l c calc(h - 10) / 0.6) 50%,
+						transparent 65%
+					),
+					radial-gradient(
+						circle at top 0rem left -60%,
+						var(--color-background),
+						#2e3bff50 5%,
+						oklch(from var(--color-primary) l c calc(h - 10) / 0.9) 10%,
+						transparent 50%
+					),
+					var(--color-background);
+				background-repeat: no-repeat;
+				background-size:
+					100% 100%,
+					100% 300vh,
+					100% 100vh;
+				position: absolute;
+				inset: 0;
+				content: '';
+				filter: url(#nl);
+			}
+		}
+
 		body::before {
 			background: linear-gradient(to bottom, transparent 70svh, var(--color-background) 90svh),
 				radial-gradient(
@@ -240,8 +285,8 @@
 					#190d1c,
 					#190d1c 30%,
 					#2e3bff30 40%,
-					#667cff80 55%,
-					#667cff99 56%,
+					#667cff80 52%,
+					#667cff95 56%,
 					#667cff90 57%,
 					transparent 65%
 				),
@@ -262,7 +307,7 @@
 			position: absolute;
 			inset: 0;
 			content: '';
-			filter: url(#n);
+			filter: url(#nd);
 		}
 
 		/* Safari can't use the noise filter */
