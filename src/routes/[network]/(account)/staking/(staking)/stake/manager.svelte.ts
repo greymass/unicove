@@ -123,8 +123,10 @@ export class StakeManager {
 
 			const maturedRex = this.account.rex ? Number(this.account.rex.matured_rex) / 10000 : 0;
 			const claimableBalance =
-				maturedRex + this.unstaking.reduce((acc, x) => acc + parseFloat(x.rex.toString()), 0);
-
+				maturedRex +
+				this.unstaking
+					.filter((b) => b.claimable)
+					.reduce((acc, x) => acc + parseFloat(x.rex.toString()), 0);
 			if (claimableBalance > 0 && claimableBalance < 10000) {
 				actions.unshift(
 					Action.from({
