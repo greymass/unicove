@@ -134,8 +134,28 @@ export class ActivityLoader {
 
 			const digests: string[] = [];
 			const receipts: Record<string, ActionTraceReceipt[]> = {};
+			// These actions don't follow the receiver match pattern, so we just need to allow them
+			const filterExceptions = ['eosio::setcode', 'eosio::setabi'];
 			const filtered = activity.actions
-				.filter((action) => action.trace.receipt.receiver.equals(account))
+				.filter((action) => {
+					const allowedViaException = filterExceptions.includes(
+						`${action.trace.act.account}::${action.trace.act.name}`
+					);
+					const allowedViaReceiver = action.trace.receipt.receiver.equals(account);
+					const allowed = allowedViaException || allowedViaReceiver;
+					if (!allowed) {
+						console.warn('Action filtered out', {
+							contract: String(action.trace.act.account),
+							action: String(action.trace.act.name),
+							receiver: String(action.trace.receipt.receiver),
+							account,
+							allowedViaException,
+							allowedViaReceiver,
+							allowed
+						});
+					}
+					return allowed;
+				})
 				.filter((action) => {
 					const key = this.makeKey(action.trace.trx_id, action.trace.receipt.act_digest);
 					if (!receipts[key]) {
