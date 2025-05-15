@@ -52,6 +52,14 @@ export class AccountValueState {
 	readonly systemtoken: AccountValueSystemTokenValues = $derived(
 		getAccountValue(this.states, this.currency)
 	);
+	readonly value = $derived(
+		Asset.fromUnits(
+			this.systemtoken.legacy
+				? this.systemtoken.total.units.adding(this.systemtoken.legacy.units)
+				: this.systemtoken.total.units,
+			this.currency.symbol
+		)
+	);
 
 	constructor(args: AccountValueStates) {
 		this.states = {
@@ -71,7 +79,10 @@ export class AccountValueState {
 
 	toJSON() {
 		return {
+			hasPrice: this.hasPrice,
 			currency: this.currency,
+			value: this.value,
+			pair: this.pair,
 			systemtoken: this.systemtoken
 		};
 	}

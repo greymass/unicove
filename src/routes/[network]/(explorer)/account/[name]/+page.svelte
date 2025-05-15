@@ -80,7 +80,7 @@
 								<AssetText
 									class="text-on-surface text-left text-2xl leading-none font-bold"
 									variant="full"
-									value={currentAccountValue.systemtoken.total}
+									value={currentAccountValue.value}
 								/>
 							{:else}
 								<div
