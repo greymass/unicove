@@ -43,9 +43,10 @@ const redirects: Record<string, string> = {
 	'/earn': '/staking',
 	'/resources/ram/buy': '/ram/buy',
 	'/resources/ram/sell': '/ram/sell',
-	'/swap/eos': '/swap/${systemtoken.id.url}/core.vaulta/4,a',
+	'/swap/eos': `/swap/${systemtoken.id.url}/core.vaulta/4,a`,
 	'/swap/kb': `/swap/${systemtoken.id.url}/${ramtoken.id.url}}`,
-	'/swap/ram': `/swap/${systemtoken.id.url}/${ramtoken.id.url}}`
+	'/swap/ram': `/swap/${systemtoken.id.url}/${ramtoken.id.url}}`,
+	'/swap/eosio/4,eos/core.vaulta/4,a': '/swap/eosio.token/4,eos/core.vaulta/4,a'
 };
 
 function getManualRedirectPath(pathMore: string[]): string {
