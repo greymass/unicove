@@ -6,8 +6,9 @@ import { getNetworkByName } from '$lib/state/network.svelte';
 import type { LayoutLoad } from './$types';
 import { PUBLIC_CHAIN_SHORT } from '$env/static/public';
 import { Code } from 'lucide-svelte';
+import { ogImageURL } from '$lib/utils/opengraph';
 
-export const load: LayoutLoad = async ({ fetch, params }) => {
+export const load: LayoutLoad = async ({ fetch, url, params }) => {
 	const network = getNetworkByName(PUBLIC_CHAIN_SHORT, fetch);
 	if (!network.loaded) {
 		await network.refresh();
@@ -31,6 +32,15 @@ export const load: LayoutLoad = async ({ fetch, params }) => {
 		actions.push({ icon: Code, href: `/${network}/contract/${params.name}` });
 	}
 
+	const metaTitle = m.account_meta_title({
+		account: String(params.name),
+		network: network.chain.name
+	});
+	const metaDescription = m.account_meta_description({
+		account: String(params.name),
+		network: network.chain.name
+	});
+
 	return {
 		account,
 		name: params.name,
@@ -43,13 +53,11 @@ export const load: LayoutLoad = async ({ fetch, params }) => {
 			actions: actions
 		},
 		pageMetaTags: {
-			title: m.account_meta_title({
-				account: String(params.name),
-				network: network.chain.name
-			}),
-			description: m.account_meta_description({
-				account: String(params.name),
-				network: network.chain.name
+			title: metaTitle,
+			description: metaDescription,
+			open_graph_image: ogImageURL(url, {
+				title: params.name,
+				text: metaTitle
 			})
 		}
 	};
