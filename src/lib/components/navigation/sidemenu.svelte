@@ -73,13 +73,13 @@
 	});
 </script>
 
-<menu class="text-on-surface flex flex-col gap-2 text-base font-medium text-nowrap">
+<menu id="side-menu" class="flex flex-col gap-2 text-base font-medium text-nowrap">
 	{#each destinations as option}
 		<a
 			href={option.href}
-			class="focus-visible:outline-solar-500 flex h-12 items-center rounded-lg leading-snug transition-opacity select-none hover:opacity-100 focus-visible:opacity-100 focus-visible:outline"
-			class:opacity-70={!option.active}
-			class:opacity-100={option.active}
+			class="focus-visible:outline-solar-500 hover:text-on-surface flex h-12 items-center rounded-lg leading-snug select-none focus-visible:opacity-100 focus-visible:outline"
+			class:text-on-surface-variant={!option.active}
+			class:text-on-surface={option.active}
 			aria-current={!!option.active}
 			onclick={callbackFn}
 		>

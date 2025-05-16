@@ -15,7 +15,7 @@
 
 {#if props.account && props.network.config.legacytoken && props.account.getBalance(props.network.config.legacytoken)}
 	<aside
-		class="from-primary-container to-primary-container/70 grid gap-4 rounded-lg bg-gradient-to-br p-4 text-center shadow-lg"
+		class="from-primary-container to-primary-container/70 grid gap-4 rounded-lg bg-gradient-to-br p-4 text-center"
 	>
 		<div class="grid gap-1">
 			<a
