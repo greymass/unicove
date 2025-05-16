@@ -160,7 +160,7 @@
 	--color-surface-container-high: oklch(from var(--color-surface) calc(l + 0.05) c h);
 	--color-surface-container-highest: oklch(from var(--color-surface) calc(l + 0.1) c h);
 
-	--color-background: var(--color-surface);
+	--color-background: var(--color-surface-container-lowest);
 	--color-on-background: var(--color-on-surface);
 }
 
@@ -195,7 +195,7 @@
 	--color-surface-container-high: oklch(from var(--color-surface) calc(l - 0.05) 0.01 h);
 	--color-surface-container-highest: oklch(from var(--color-surface) calc(l - 0.1) 0.01 h);
 
-	--color-background: var(--color-surface);
+	--color-background: var(--color-surface-container-high);
 	--color-on-background: var(--color-on-surface);
 }
 
@@ -294,7 +294,7 @@
 
 @utility card {
 	/* Layout */
-	@apply bg-surface-container grid gap-4 rounded-xl p-5;
+	@apply bg-surface grid gap-4 rounded-xl p-5;
 }
 
 @utility layout-stack {

@@ -26,27 +26,58 @@
 
 			<div class="bg-surface p-4">
 				<span class="text-on-surface col-span-full font-bold">Surface</span>
+				<div class=" rounded-lg p-6">
+					<div class="text-on-surface font-black">On Surface</div>
+					<div class="text-on-surface-variant font-bold">On Surface Variant</div>
+					<div class="border-outline text-outline mt-6 rounded-lg border p-4 font-bold">
+						Outline
+					</div>
+					<div
+						class="border-outline-variant text-outline-variant mt-2 rounded-lg border p-4 font-bold"
+					>
+						Outline Variant
+					</div>
+				</div>
+			</div>
+
+			<div class="bg-surface-container-lowest min-h-20 p-4">
+				<span class="text-on-surface font-bold">Surface Container Lowest</span>
 				<div class="flex *:flex-1">
-					<div class="bg-on-surface min-h-20 p-4">
-						<span class="text-surface font-bold">On Surface</span>
+					<div class="bg-surface min-h-20 p-4">
+						<span class="text-on-surface font-bold">Surface</span>
 					</div>
-					<div class="bg-on-surface-variant min-h-20 p-4">
-						<span class="text-surface font-bold">On Surface Variant</span>
+				</div>
+			</div>
+
+			<div class="bg-surface-container-low min-h-20 p-4">
+				<span class="text-on-surface font-bold">Surface Container Low</span>
+				<div class="flex *:flex-1">
+					<div class="bg-surface min-h-20 p-4">
+						<span class="text-on-surface font-bold">Surface</span>
 					</div>
-					<div class="bg-surface-container-lowest min-h-20 p-4">
-						<span class="text-on-surface font-bold">Surface Container Lowest</span>
+				</div>
+			</div>
+			<div class="bg-surface-container min-h-20 p-4">
+				<span class="text-on-surface font-bold">Surface Container (Default)</span>
+				<div class="flex *:flex-1">
+					<div class="bg-surface min-h-20 p-4">
+						<span class="text-on-surface font-bold">Surface</span>
 					</div>
-					<div class="bg-surface-container-low min-h-20 p-4">
-						<span class="text-on-surface font-bold">Surface Container Low</span>
+				</div>
+			</div>
+			<div class="bg-surface-container-high min-h-20 p-4">
+				<span class="text-on-surface font-bold">Surface Container High</span>
+				<div class="flex *:flex-1">
+					<div class="bg-surface min-h-20 p-4">
+						<span class="text-on-surface font-bold">Surface</span>
 					</div>
-					<div class="bg-surface-container min-h-20 p-4">
-						<span class="text-on-surface font-bold">Surface Container (Default)</span>
-					</div>
-					<div class="bg-surface-container-high min-h-20 p-4">
-						<span class="text-on-surface font-bold">Surface Container High</span>
-					</div>
-					<div class="bg-surface-container-highest min-h-20 p-4">
-						<span class="text-on-surface font-bold">Surface Container Highest</span>
+				</div>
+			</div>
+			<div class="bg-surface-container-highest min-h-20 p-4">
+				<span class="text-on-surface font-bold">Surface Container Highest</span>
+				<div class="flex *:flex-1">
+					<div class="bg-surface min-h-20 p-4">
+						<span class="text-on-surface font-bold">Surface</span>
 					</div>
 				</div>
 			</div>
