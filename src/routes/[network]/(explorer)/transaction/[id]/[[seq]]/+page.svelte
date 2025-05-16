@@ -36,9 +36,12 @@
 			{#each data.transaction.filtered as trace}
 				{@const contract = String(trace.action.account)}
 				{@const action = String(trace.action.name)}
+				{@const firstAuthorization = trace.action.authorization[0]
+					? trace.action.authorization[0].actor
+					: undefined}
 				{@const summary = getActionSummaryComponent(contract, action, trace.act.data)}
 				<li class="">
-					<Trace {trace} {variant} {summary} perspectiveOf={trace.action.authorization[0].actor} />
+					<Trace {trace} {variant} {summary} perspectiveOf={firstAuthorization} />
 				</li>
 			{/each}
 		</ol>
