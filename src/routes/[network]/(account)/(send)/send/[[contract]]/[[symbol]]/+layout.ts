@@ -1,6 +1,6 @@
 import type { LayoutLoad } from './$types';
 import * as m from '$lib/paraglide/messages';
-import { ogImageUrl } from '$lib/utils/opengraph';
+import { ogImageURL } from '$lib/utils/opengraph';
 import { Token } from '$lib/types/token';
 import { Asset, Name } from '@wharfkit/antelope';
 
@@ -40,7 +40,10 @@ export const load: LayoutLoad = async ({ url, params, parent }) => {
 			description: m.send_page_description({
 				network: network.chain.name
 			}),
-			open_graph_image: ogImageUrl(url)
+			open_graph_image: ogImageURL(url, {
+				title: m.common_send_tokens({ token: symbol.name }),
+				text: m.common_transfer_to_another_account()
+			})
 		}
 	};
 };

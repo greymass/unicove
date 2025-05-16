@@ -453,6 +453,7 @@
 	"og_default_description": "Stake, Send, Manage Tokens, and Explore {network} – all with ease",
 	"og_default_title": "Unicove - Your gateway to the {network} Network",
 	"og_send_caption": "Transfer tokens from one account to another account",
+	"og_staking_caption": "Stake and earn rewards using a {network} compatible wallet",
 	"processing_fees": "Processing fees",
 	"ram_available_balance": "RAM Available",
 	"ram_form_buy_amount": "Amount of RAM to buy:",
