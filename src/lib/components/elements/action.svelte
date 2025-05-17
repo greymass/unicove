@@ -136,7 +136,7 @@
 {#snippet Summary()}
 	{#if typeof objectified === 'object' && ActionSummary}
 		<ActionSummaryContainer>
-			<ActionSummary data={objectified} {perspectiveOf} />
+			<ActionSummary data={objectified} authorization={action.authorization} {perspectiveOf} />
 		</ActionSummaryContainer>
 	{:else}
 		{@render Pretty(objectified)}
