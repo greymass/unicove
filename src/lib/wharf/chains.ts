@@ -73,6 +73,7 @@ if (env.PUBLIC_SYSTEM_TOKEN_LOGO_LIGHT) {
 if (env.PUBLIC_SYSTEM_TOKEN_LOGO_DARK) {
 	systemtokenasset.dark = env.PUBLIC_SYSTEM_TOKEN_LOGO_DARK;
 }
+export const systemcontract = Name.from(env.PUBLIC_SYSTEM_CONTRACT);
 export const systemtoken = Token.from({
 	id: {
 		chain: env.PUBLIC_CHAIN_ID,
