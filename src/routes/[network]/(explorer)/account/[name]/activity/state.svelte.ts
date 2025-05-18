@@ -1,3 +1,4 @@
+import { Checksum256, Name } from '@wharfkit/antelope';
 import { ZeroUnits } from '$lib/types/token';
 import {
 	ActionTraceFiltered,
@@ -5,7 +6,7 @@ import {
 	ActivityResponse,
 	ActivityResponseAction
 } from '$lib/types/transaction';
-import { Checksum256 } from '@wharfkit/session';
+import { systemcontract } from '$lib/wharf/chains';
 
 export class Scene {
 	firstTime: number = $state(0);
@@ -138,11 +139,19 @@ export class ActivityLoader {
 			const filterExceptions = ['eosio::setcode', 'eosio::setabi'];
 			const filtered = activity.actions
 				.filter((action) => {
+					const allowViaSystemAction = action.trace.act.account.equals(systemcontract);
 					const allowedViaException = filterExceptions.includes(
 						`${action.trace.act.account}::${action.trace.act.name}`
 					);
+					const allowedViaAuthorization = action.trace.receipt.auth_sequence.some((auth) =>
+						Name.from(auth[0]).equals(account)
+					);
 					const allowedViaReceiver = action.trace.receipt.receiver.equals(account);
-					const allowed = allowedViaException || allowedViaReceiver;
+					const allowed =
+						allowedViaException ||
+						allowedViaAuthorization ||
+						allowedViaReceiver ||
+						allowViaSystemAction;
 					if (!allowed) {
 						console.warn('Action filtered out', {
 							contract: String(action.trace.act.account),
@@ -151,6 +160,7 @@ export class ActivityLoader {
 							account,
 							allowedViaException,
 							allowedViaReceiver,
+							allowViaSystemAction,
 							allowed
 						});
 					}
