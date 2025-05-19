@@ -2,12 +2,12 @@ import { sequence } from '@sveltejs/kit/hooks';
 import type { Handle, RequestEvent } from '@sveltejs/kit';
 
 import { PUBLIC_CHAIN_SHORT } from '$env/static/public';
-import { availableLanguageTags } from '$lib/paraglide/runtime.js';
-import { i18n } from '$lib/i18n';
+import { getLocale, locales } from '$lib/paraglide/runtime.js';
+
 import { isNetworkShortName, ramtoken, systemtoken } from '$lib/wharf/chains';
 import { getBackendNetworkByName } from '$lib/wharf/client/ssr';
+import { paraglideMiddleware } from '$lib/paraglide/server';
 
-export const i18nHandle = i18n.handle();
 type HandleParams = Parameters<Handle>[0];
 
 const renamedNetworks: Record<string, string> = {
@@ -16,11 +16,11 @@ const renamedNetworks: Record<string, string> = {
 
 export function getHeaderLang(event: RequestEvent) {
 	const acceptLanguage = event.request.headers.get('accept-language');
-	const locales =
+	const acceptedLocales =
 		acceptLanguage?.split(',')?.map((lang: string) => lang.split(';')[0].split('-')[0].trim()) ??
 		[];
-	for (const locale of locales) {
-		if (availableLanguageTags.find((l: string) => l.toLowerCase() === locale.toLowerCase())) {
+	for (const locale of acceptedLocales) {
+		if (locales.find((l: string) => l.toLowerCase() === locale.toLowerCase())) {
 			return locale;
 		}
 	}
@@ -31,8 +31,17 @@ function isAPIPath(pathname: string) {
 	return /^\/[a-z0-9]+\/api/gm.test(pathname);
 }
 
+function isSvelteKitData(pathname: string) {
+	// if it contains __data.json, it is a sveltekit data request
+	return pathname.includes('__data.json');
+}
+
+function isWellKnownPath(pathname: string) {
+	return /\.well-known/gm.test(pathname);
+}
+
 function skipRedirect(pathname: string) {
-	return isAPIPath(pathname);
+	return isSvelteKitData(pathname) || isWellKnownPath(pathname) || isAPIPath(pathname);
 }
 
 function isNetwork(value: string) {
@@ -73,6 +82,8 @@ export async function redirectHandle({ event, resolve }: HandleParams): Promise<
 		return await resolve(event);
 	}
 
+	console.log('redirectHandle', event.request.url);
+
 	const [, pathFirst, pathSecond, ...pathMore] = pathname.split('/').map((p) => p.trim());
 
 	let lang = pathFirst;
@@ -97,6 +108,7 @@ export async function redirectHandle({ event, resolve }: HandleParams): Promise<
 	}
 
 	if (pathname !== url) {
+		console.log('Redirecting from', pathname, 'to', url);
 		return new Response(undefined, {
 			headers: { Location: url + search },
 			status: 302
@@ -107,4 +119,15 @@ export async function redirectHandle({ event, resolve }: HandleParams): Promise<
 	return response;
 }
 
-export const handle: Handle = sequence(i18nHandle, redirectHandle, networkHandle);
+const paraglideHandle: Handle = ({ event, resolve }) =>
+	paraglideMiddleware(event.request, ({ request: localizedRequest, locale }) => {
+		event.request = localizedRequest;
+		// console.log('paraglideHandle', event.request.url, locale);
+		return resolve(event, {
+			transformPageChunk: ({ html }) => {
+				return html.replace('%lang%', locale);
+			}
+		});
+	});
+
+export const handle: Handle = sequence(redirectHandle, paraglideHandle, networkHandle);

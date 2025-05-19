@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { formatNumber, type IntlNumberTypes } from '$lib/utils/intl';
-	import { languageTag } from '$lib/paraglide/runtime';
+	import { getLocale } from '$lib/paraglide/runtime';
 
 	interface Props {
 		number: IntlNumberTypes;
@@ -14,5 +14,5 @@
 </script>
 
 <span class={className}>
-	{#if prefix}{symbol}{/if}{formatNumber(number, languageTag())}
+	{#if prefix}{symbol}{/if}{formatNumber(number, getLocale())}
 </span>

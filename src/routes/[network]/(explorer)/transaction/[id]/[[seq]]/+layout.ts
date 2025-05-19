@@ -4,8 +4,8 @@ import { truncateCenter } from '$lib/utils';
 import { TransactionResponse } from '$lib/types/transaction';
 import * as m from '$lib/paraglide/messages';
 import type { LayoutLoad } from './$types';
-import { languageTag } from '$lib/paraglide/runtime';
 import { formatDateTime } from '$lib/utils/intl';
+import { getLocale } from '$lib/paraglide/runtime';
 
 export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 	const { network } = await parent();
@@ -20,7 +20,7 @@ export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 		});
 	}
 	const transaction = TransactionResponse.from(json);
-	const lang = languageTag();
+	const lang = getLocale();
 	return {
 		transaction,
 		title: `${truncateCenter(String(json.id), 14)}`,

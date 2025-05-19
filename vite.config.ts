@@ -1,4 +1,5 @@
-import { paraglide } from '@inlang/paraglide-sveltekit/vite';
+import { paraglideVitePlugin } from '@inlang/paraglide-js';
+import devtoolsJson from 'vite-plugin-devtools-json';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { enhancedImages } from '@sveltejs/enhanced-img';
 import tailwindcss from '@tailwindcss/vite';
@@ -7,7 +8,23 @@ import path from 'node:path';
 
 export default defineConfig({
 	plugins: [
-		paraglide({ project: './project.inlang', outdir: './src/lib/paraglide' }),
+		devtoolsJson(),
+		paraglideVitePlugin({
+			project: './project.inlang',
+			outdir: './src/lib/paraglide',
+			strategy: ['url', 'preferredLanguage'],
+			urlPatterns: [
+				{
+					pattern: '/:path(.*)?',
+					localized: [
+						['ko', '/ko/:path(.*)?'],
+						['zh', '/zh/:path(.*)?'],
+						['en', '/en/:path(.*)?']
+					]
+				}
+			],
+			disableAsyncLocalStorage: true
+		}),
 		enhancedImages(),
 		sveltekit(),
 		tailwindcss()

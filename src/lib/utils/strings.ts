@@ -1,4 +1,4 @@
-import { languageTag } from '$lib/paraglide/runtime';
+import { getLocale } from '$lib/paraglide/runtime';
 
 /**
  * truncates a long string with a two-dot ellipsis in the center
@@ -15,7 +15,7 @@ export const truncateCenter = (s: string, len: number = 12): string => {
  * @example "0.123456" => "12.35%"
  */
 export function percentString(number: number, len: number = 2): string {
-	return Intl.NumberFormat(languageTag(), { style: 'percent', minimumFractionDigits: len }).format(
+	return Intl.NumberFormat(getLocale(), { style: 'percent', minimumFractionDigits: len }).format(
 		number
 	);
 }

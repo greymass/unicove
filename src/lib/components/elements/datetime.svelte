@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { languageTag } from '$lib/paraglide/runtime';
+	import { getLocale } from '$lib/paraglide/runtime';
 	import { formatDateTime } from '$lib/utils/intl';
 
 	interface Props {
@@ -9,4 +9,4 @@
 	let { datetime }: Props = $props();
 </script>
 
-{formatDateTime(datetime, languageTag())}
+{formatDateTime(datetime, getLocale())}

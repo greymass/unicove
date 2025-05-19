@@ -18,10 +18,10 @@
 	import DatetimeInput from '$lib/components/input/datetime.svelte';
 	import type { FormEventHandler } from 'svelte/elements';
 	import Button from '$lib/components/button/button.svelte';
-	import { availableLanguageTags } from '$lib/paraglide/runtime';
 	import CurrencySelect from '$lib/components/select/currency.svelte';
 	import DebugToggle from '$lib/components/select/debug.svelte';
 	import type { CreateSwitchProps } from '@melt-ui/svelte';
+	import { locales } from '$lib/paraglide/runtime.js';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -177,8 +177,8 @@
 				<Stack class="gap-2">
 					<Label for="language-select">
 						<div class="flex justify-between gap-2">
-							{#each availableLanguageTags as lang}
-								<span>{m.settings_language_selector({}, { languageTag: lang })}</span>
+							{#each locales as lang}
+								<span>{m.settings_language_selector({}, { locale: lang })}</span>
 							{/each}
 						</div>
 					</Label>

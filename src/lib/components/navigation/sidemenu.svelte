@@ -4,6 +4,7 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
 	import * as m from '$lib/paraglide/messages';
+	import { localizeHref } from '$lib/paraglide/runtime';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -24,7 +25,11 @@
 			// 	text: network.chain.name,
 			// 	active: pathname[2] === String(network) && !pathname[3]
 			// },
-			{ href: `/${network}/send`, text: m.common_send(), active: pathname[3] === 'send' }
+			{
+				href: localizeHref(`/${network}/send`),
+				text: m.common_send(),
+				active: pathname[3] === 'send'
+			}
 		];
 
 		if (network.supports('staking')) {
