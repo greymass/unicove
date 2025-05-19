@@ -1,15 +1,14 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { i18n } from '$lib/i18n';
-	import { availableLanguageTags, languageTag } from '$lib/paraglide/runtime.js';
 	import { createSelect, melt } from '@melt-ui/svelte';
 	import { fade } from 'svelte/transition';
 	import ChevronDown from 'lucide-svelte/icons/chevron-down';
-	import * as m from '$lib/paraglide/messages';
+	import { m } from '$lib/paraglide/messages';
 	import { getContext } from 'svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import { getLocale, locales, localizeHref } from '$lib/paraglide/runtime';
 
-	let defaultLang = { value: languageTag(), label: m[`common_${languageTag()}`]() };
+	let defaultLang = { value: getLocale(), label: m[`common_${getLocale()}`]() };
 	const context = getContext<UnicoveContext>('state');
 
 	const {
@@ -44,11 +43,11 @@
 		use:melt={$menu}
 		in:fade={{ duration: 100 }}
 	>
-		{#each availableLanguageTags as lang}
+		{#each locales as lang}
 			<a
-				href={i18n.route($page.url.pathname)}
+				href={localizeHref($page.url.pathname, { locale: lang })}
 				hreflang={lang}
-				aria-current={lang === languageTag() ? 'page' : undefined}
+				aria-current={lang === getLocale() ? 'page' : undefined}
 				class=" hover:bg-primary hover:text-on-primary focus:text-on-primary data-highlighted:bg-primary data-highlighted:text-on-primary relative cursor-pointer rounded-xl px-2 py-1 font-medium focus:z-10 data-disabled:opacity-50"
 				use:melt={$option({ value: lang, label: lang })}
 				data-sveltekit-replacestate

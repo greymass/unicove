@@ -1,6 +1,6 @@
-import { languageTag } from '$lib/paraglide/runtime';
 import type { PageLoad } from './$types';
 import * as m from '$lib/paraglide/messages';
+import { getLocale } from '$lib/paraglide/runtime';
 
 export const load: PageLoad = async ({ parent }) => {
 	const { network } = await parent();
@@ -9,7 +9,7 @@ export const load: PageLoad = async ({ parent }) => {
 		subtitle: m.common_withdraw_tokens({
 			token: String(network.chain.systemToken?.symbol.name)
 		}),
-		backPath: `/${languageTag()}/${network}/staking`,
+		backPath: `/${getLocale()}/${network}/staking`,
 		pageMetaTags: {
 			title: m.common_withdraw_tokens({
 				token: String(network.chain.systemToken?.symbol.name)

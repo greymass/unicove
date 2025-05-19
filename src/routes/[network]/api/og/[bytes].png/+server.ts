@@ -1,12 +1,12 @@
 import { PUBLIC_ENVIRONMENT } from '$env/static/public';
 import type { RequestHandler } from './$types';
-import { i18n } from '$lib/i18n';
 import { API_OPENGRAPH_GENERATOR, API_OPENGRAPH_TOKEN } from '$env/static/private';
 import { error } from '@sveltejs/kit';
 import { Serializer } from '@wharfkit/antelope';
 import { OpengraphImageData } from '$lib/types/opengraph';
+import { getLocale } from '$lib/paraglide/runtime';
 
-export const GET: RequestHandler = async ({ locals, url, fetch, params }) => {
+export const GET: RequestHandler = async ({ locals, fetch, params }) => {
 	if (!API_OPENGRAPH_GENERATOR || !API_OPENGRAPH_TOKEN) {
 		error(401, 'Unauthorized');
 	}
@@ -18,7 +18,7 @@ export const GET: RequestHandler = async ({ locals, url, fetch, params }) => {
 		error(400, JSON.stringify(e));
 	}
 	const { title, text } = data;
-	const lang = i18n.getLanguageFromUrl(url);
+	const lang = getLocale();
 	const network = locals.network.toString();
 
 	const body = {

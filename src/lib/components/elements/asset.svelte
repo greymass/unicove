@@ -2,7 +2,7 @@
 	import type { Asset } from '@wharfkit/antelope';
 	import type { HTMLAttributes } from 'svelte/elements';
 
-	import { languageTag } from '$lib/paraglide/runtime.js';
+	import { getLocale } from '$lib/paraglide/runtime.js';
 	import { cn } from '$lib/utils';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
@@ -21,7 +21,7 @@
 	// TODO: Move somewhere else.
 	const SUPPORTED_CURRENCIES = ['USD'];
 
-	const locale = languageTag();
+	const locale = getLocale();
 
 	const assetOptions: Intl.NumberFormatOptions = {
 		minimumFractionDigits: asset?.symbol.precision

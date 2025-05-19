@@ -14,7 +14,6 @@
 	import NumberInput from '$lib/components/input/number.svelte';
 	import Button from '$lib/components/button/button.svelte';
 	import Label from '$lib/components/input/label.svelte';
-	import { i18n } from '$lib/i18n';
 	import Select from '$lib/components/select/select.svelte';
 	import TransactSummary from '$lib/components/transact/summary.svelte';
 	import TransactError from '$lib/components/transact/error.svelte';
@@ -34,6 +33,7 @@
 	import { cubicOut } from 'svelte/easing';
 	import Fieldset from '$lib/components/input/fieldset.svelte';
 	import FormContainer from '$lib/components/form/formContainer.svelte';
+	import { localizeHref } from '$lib/paraglide/runtime.js';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
@@ -561,7 +561,7 @@
 					>
 				{/if}
 				<div class="flex grow flex-col flex-wrap justify-end gap-6 @lg:flex-row">
-					<Button class="grow-0" variant="tertiary" href={i18n.route(data.backPath)}
+					<Button class="grow-0" variant="tertiary" href={localizeHref(data.backPath)}
 						>{m.common_cancel()}</Button
 					>
 					<Button

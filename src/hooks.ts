@@ -1,13 +1,17 @@
 import type { Transport } from '@sveltejs/kit';
 
-import { i18n } from '$lib/i18n';
 import { NetworkState } from '$lib/state/network.svelte';
 import { AccountState } from '$lib/state/client/account.svelte';
 import { Name } from '@wharfkit/antelope';
 import type { SerializedAccountState } from '$lib/types/account';
 import type { SerializedNetworkState } from '$lib/types/network';
 
-export const reroute = i18n.reroute();
+import type { Reroute } from '@sveltejs/kit';
+import { deLocalizeUrl } from '$lib/paraglide/runtime';
+
+export const reroute: Reroute = (request) => {
+	return deLocalizeUrl(request.url).pathname;
+};
 
 export const transport: Transport = {
 	AccountState: {

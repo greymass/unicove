@@ -15,12 +15,14 @@
 		"prettier": "prettier --check .",
 		"eslint": "eslint .",
 		"format": "prettier --write .",
-		"test": "bun test"
+		"test": "bun test",
+		"machine-translate": "inlang machine translate --project project.inlang"
 	},
 	"devDependencies": {
-		"@inlang/paraglide-js": "^1.11.3",
-		"@inlang/paraglide-sveltekit": "^0.11.5",
-		"@inlang/paraglide-vite": "^1.2.76",
+		"@inlang/cli": "^3.0.0",
+		"@inlang/paraglide-js": "2.0.12",
+		"@inlang/paraglide-sveltekit": "^0.16.1",
+		"@inlang/paraglide-vite": "^1.4.0",
 		"@melt-ui/pp": "^0.3.2",
 		"@melt-ui/svelte": "^0.83.0",
 		"@sveltejs/adapter-auto": "^5.0.0",
@@ -46,7 +48,8 @@
 		"tslib": "^2.6.3",
 		"typescript": "^5.5.4",
 		"typescript-eslint": "^8.32.0",
-		"vite": "^6.2.4"
+		"vite": "^6.2.4",
+		"vite-plugin-devtools-json": "^0.1.0"
 	},
 	"type": "module",
 	"dependencies": {

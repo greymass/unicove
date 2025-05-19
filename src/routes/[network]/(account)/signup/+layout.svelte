@@ -10,12 +10,11 @@
 	import { crossfade } from 'svelte/transition';
 	import { cubicInOut } from 'svelte/easing';
 	import { getWalletNameFromPath, getWalletTypeFromPath } from './walletTypes.js';
-
-	import { i18n } from '$lib/i18n';
+	import { getLocale } from '$lib/paraglide/runtime.js';
 
 	const { data, children } = $props();
 
-	const locale = i18n.getLanguageFromUrl($page.url);
+	const locale = getLocale();
 
 	let steps: SignupStep[] = $derived([
 		{

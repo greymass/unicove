@@ -6,7 +6,7 @@
 	import { Card } from '$lib/components/layout';
 	import Button from '$lib/components/button/button.svelte';
 	import type { UnstakingRecord } from '$lib/utils/staking';
-	import { languageTag } from '$lib/paraglide/runtime';
+	import { getLocale } from '$lib/paraglide/runtime';
 	import * as m from '$lib/paraglide/messages';
 
 	interface Props extends HTMLAttributes<HTMLDivElement> {
@@ -35,8 +35,8 @@
 						<tr>
 							<td><AssetText variant="full" value={record.balance} /></td>
 							<td class="text-right">
-								{record.date ? record.date.toLocaleTimeString(languageTag()) : '--'}
-								{record.date ? record.date.toLocaleDateString(languageTag()) : '--'}
+								{record.date ? record.date.toLocaleTimeString(getLocale()) : '--'}
+								{record.date ? record.date.toLocaleDateString(getLocale()) : '--'}
 							</td>
 						</tr>
 					{/if}
