@@ -55,5 +55,8 @@ export function getActionSummaryTitle(
 	if (data && isStandardTokenTransfer(data)) {
 		return summaries['eosio.token'].titles['transfer'];
 	}
-	return summaries[String(contractName)].titles[String(action)];
+	if (summaries[String(contractName)]) {
+		return summaries[String(contractName)].titles[String(action)];
+	}
+	return;
 }
