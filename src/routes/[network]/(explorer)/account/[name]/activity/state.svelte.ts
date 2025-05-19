@@ -136,22 +136,24 @@ export class ActivityLoader {
 			const digests: string[] = [];
 			const receipts: Record<string, ActionTraceReceipt[]> = {};
 			// These actions don't follow the receiver match pattern, so we just need to allow them
-			const filterExceptions = ['eosio::setcode', 'eosio::setabi'];
+			const allowExceptions: string[] = []; // = ['eosio::setcode', 'eosio::setabi'];
+			const disallowExceptions: string[] = ['core.vaulta::enforcebal'];
 			const filtered = activity.actions
 				.filter((action) => {
+					const shortname = `${action.trace.act.account}::${action.trace.act.name}`;
 					const allowViaSystemAction = action.trace.act.account.equals(systemcontract);
-					const allowedViaException = filterExceptions.includes(
-						`${action.trace.act.account}::${action.trace.act.name}`
-					);
+					const allowedViaException = allowExceptions.includes(shortname);
 					const allowedViaAuthorization = action.trace.receipt.auth_sequence.some((auth) =>
 						Name.from(auth[0]).equals(account)
 					);
 					const allowedViaReceiver = action.trace.receipt.receiver.equals(account);
+					const disallowedViaExceptions = disallowExceptions.includes(shortname);
 					const allowed =
-						allowedViaException ||
-						allowedViaAuthorization ||
-						allowedViaReceiver ||
-						allowViaSystemAction;
+						!disallowedViaExceptions &&
+						(allowedViaException ||
+							allowedViaAuthorization ||
+							allowedViaReceiver ||
+							allowViaSystemAction);
 					if (!allowed) {
 						console.warn('Action filtered out', {
 							contract: String(action.trace.act.account),
