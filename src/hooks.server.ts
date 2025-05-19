@@ -2,7 +2,7 @@ import { sequence } from '@sveltejs/kit/hooks';
 import type { Handle, RequestEvent } from '@sveltejs/kit';
 
 import { PUBLIC_CHAIN_SHORT } from '$env/static/public';
-import { getLocale, locales } from '$lib/paraglide/runtime.js';
+import { locales } from '$lib/paraglide/runtime.js';
 
 import { isNetworkShortName, ramtoken, systemtoken } from '$lib/wharf/chains';
 import { getBackendNetworkByName } from '$lib/wharf/client/ssr';
