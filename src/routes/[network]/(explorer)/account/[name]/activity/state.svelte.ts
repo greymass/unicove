@@ -135,8 +135,9 @@ export class ActivityLoader {
 
 			const digests: string[] = [];
 			const receipts: Record<string, ActionTraceReceipt[]> = {};
-			// These actions don't follow the receiver match pattern, so we just need to allow them
-			const allowExceptions: string[] = []; // = ['eosio::setcode', 'eosio::setabi'];
+			// Display any action matching these exceptions
+			const allowExceptions: string[] = [];
+			// Don't display any action matching these exceptions
 			const disallowExceptions: string[] = ['core.vaulta::enforcebal'];
 			const filtered = activity.actions
 				.filter((action) => {
