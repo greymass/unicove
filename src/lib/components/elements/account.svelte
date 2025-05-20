@@ -8,6 +8,7 @@
 	import { Name } from '@wharfkit/antelope';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { AccountState } from '$lib/state/client/account.svelte';
+	import AccountTags from '$lib/components/tags/account.svelte';
 
 	interface Props extends HTMLAnchorAttributes {
 		name: Name | string;
@@ -15,11 +16,12 @@
 		children?: Snippet;
 		preview?: boolean;
 		icon?: boolean;
+		tag?: boolean;
 	}
 
-	let { name, contract = false, preview = false, children, ...props }: Props = $props();
+	let { name, contract = false, preview = false, tag = true, children, ...props }: Props = $props();
 
-	let { network } = getContext<UnicoveContext>('state');
+	let { meta, network } = getContext<UnicoveContext>('state');
 
 	const path = $derived(contract ? `/${network}/contract/${name}` : `/${network}/account/${name}`);
 
@@ -42,6 +44,8 @@
 		onOpenChange: fetchAccount,
 		openDelay: 500
 	});
+
+	const tags = $derived(meta.getAccountTags(name));
 </script>
 
 <a
@@ -54,6 +58,8 @@
 >
 	{#if props.icon}
 		<UserIcon class="size-4" />
+	{:else if tag}
+		<AccountTags {network} {tags} class="inline" />
 	{/if}
 	{#if children}
 		{@render children()}
