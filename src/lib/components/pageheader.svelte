@@ -11,7 +11,6 @@
 		subtitle?: string;
 		backPath?: string;
 		network: NetworkState;
-		contract?: boolean;
 		copyData?: string;
 		actions?: ComponentProps<typeof IconButton>[];
 	}

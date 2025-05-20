@@ -87,6 +87,13 @@ export namespace Types {
 		@Struct.field(Asset)
 		declare rex: Asset;
 	}
+	@Struct.type('mvtosavings')
+	export class mvtosavings extends Struct {
+		@Struct.field(Name)
+		declare owner: Name;
+		@Struct.field(Asset)
+		declare rex: Asset;
+	}
 	@Struct.type('donatetorex')
 	export class donatetorex extends Struct {
 		@Struct.field(Name)
@@ -117,5 +124,27 @@ export namespace Types {
 		declare loan_payment: Asset;
 		@Struct.field(Asset)
 		declare loan_fund: Asset;
+	}
+	@Struct.type('buyresult')
+	export class buyresult extends Struct {
+		@Struct.field(Asset)
+		declare rex_received: Asset;
+	}
+	@Struct.type('orderresult')
+	export class orderresult extends Struct {
+		@Struct.field(Name)
+		declare owner: Name;
+		@Struct.field(Asset)
+		declare proceeds: Asset;
+	}
+	@Struct.type('rentresult')
+	export class rentresult extends Struct {
+		@Struct.field(Asset)
+		declare rented_tokens: Asset;
+	}
+	@Struct.type('sellresult')
+	export class sellresult extends Struct {
+		@Struct.field(Asset)
+		declare proceeds: Asset;
 	}
 }

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Subgrid from '$lib/components/layout/subgrid.svelte';
+	import LegacyTokenSwap from './components/legacy-token-swap.svelte';
 	import Articles from './components/articles.svelte';
 	import Hero from './components/hero.svelte';
 	import Carousel from './components/carousel.svelte';
@@ -18,9 +18,14 @@
 	let networkShortname = $derived(String(data.network));
 </script>
 
-<Subgrid id="homepage" class="mb-4 content-start items-start gap-y-32 md:pt-0">
-	<Hero {networkLogo} {networkName} {networkShortname} />
-	<Articles articles={data.articles} />
+<div id="homepage" class="mb-4 grid content-start items-start gap-y-12 sm:gap-y-32 md:pt-0">
+	<Hero {networkName} {networkShortname} />
+
+	<LegacyTokenSwap {network} />
+
+	{#if data.articles.length}
+		<Articles articles={data.articles} />
+	{/if}
 
 	{#if network.supports('metamask') && productName}
 		<Carousel {networkLogo} {networkName} {productName} />
@@ -33,4 +38,4 @@
 	<Charts />
 
 	<PerformanceGrid {networkLogo} {networkName} network={data.network} />
-</Subgrid>
+</div>

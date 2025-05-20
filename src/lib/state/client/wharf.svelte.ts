@@ -17,6 +17,7 @@ import {
 	type TransactArgs,
 	type TransactOptions,
 	type TransactResult,
+	ABICache,
 	Session,
 	SessionKit
 } from '@wharfkit/session';
@@ -33,6 +34,7 @@ import type { NetworkState } from '$lib/state/network.svelte';
 import { chainDefs, msigTransactPlugins, transactPlugins, walletPlugins } from '$lib/wharf/plugins';
 
 export class WharfState {
+	public abiCache?: ABICache;
 	public chain?: ChainDefinition = $state();
 	public chains: ChainDefinition[] = chainDefs;
 	public chainsSession: Record<string, SerializedSession | undefined> = $state({});
@@ -56,6 +58,7 @@ export class WharfState {
 		if (!browser) {
 			throw new Error('Wharf should only be used in the browser');
 		}
+		this.abiCache = network.abis;
 		this.chain = network.chain;
 		this.contractKit = new ContractKit({
 			client: network.client
@@ -213,13 +216,15 @@ export class WharfState {
 
 		this.transacting = true;
 
-		const result = await this.session.transact(args).catch((e: Error) => {
-			transaction.status = StatusType.ERROR;
-			transaction.error = String(e);
-			queueTransaction(transaction);
-			this.transacting = false;
-			throw e;
-		});
+		const result = await this.session
+			.transact(args, { abiCache: this.abiCache })
+			.catch((e: Error) => {
+				transaction.status = StatusType.ERROR;
+				transaction.error = String(e);
+				queueTransaction(transaction);
+				this.transacting = false;
+				throw e;
+			});
 
 		this.transacting = false;
 

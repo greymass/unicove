@@ -1,13 +1,16 @@
 import { json } from '@sveltejs/kit';
 
-import { getActivity } from './activity';
+import { getActivity } from '../../activity';
 import { getCacheHeaders } from '$lib/utils';
 import type { RequestEvent } from './$types';
 import { getBackendClient } from '$lib/wharf/client/ssr';
 
 export async function GET({ fetch, locals: { network }, params }: RequestEvent) {
 	if (!network.supports('robo')) {
-		return json({ error: `Activity not supported on ${network.chain.name}.` }, { status: 500 });
+		return json(
+			{ error: `Activity lookups via Robo not enabled on ${network.chain.name}.` },
+			{ status: 500 }
+		);
 	}
 
 	const start = Number(params.start) || 1;

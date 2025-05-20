@@ -1,3 +1,4 @@
+import { Checksum256, Name } from '@wharfkit/antelope';
 import { ZeroUnits } from '$lib/types/token';
 import {
 	ActionTraceFiltered,
@@ -5,7 +6,7 @@ import {
 	ActivityResponse,
 	ActivityResponseAction
 } from '$lib/types/transaction';
-import { Checksum256 } from '@wharfkit/session';
+import { systemcontract } from '$lib/wharf/chains';
 
 export class Scene {
 	firstTime: number = $state(0);
@@ -51,6 +52,8 @@ export class ActivityLoader {
 	private network: string;
 	private fetch: typeof fetch;
 	private account?: string;
+	private contract?: string;
+	private action?: string;
 
 	public scene: Scene = $state(new Scene());
 
@@ -78,6 +81,14 @@ export class ActivityLoader {
 		}
 	}
 
+	public setContract(account: string) {
+		this.contract = account;
+	}
+
+	public setAction(action: string) {
+		this.action = action;
+	}
+
 	public load() {
 		if (!this.account) throw new Error('set account first');
 
@@ -94,8 +105,8 @@ export class ActivityLoader {
 		this.loadRemote(true);
 	}
 
-	public makeKey(trx: Checksum256, act: Checksum256) {
-		return `${trx}-${act}`;
+	public makeKey(trx: Checksum256, ordinal: Checksum256) {
+		return `${trx}-${ordinal}`;
 	}
 
 	private async loadRemote(more: boolean) {
@@ -104,9 +115,16 @@ export class ActivityLoader {
 			const account = this.account;
 			this.scene.setLoading(true);
 			const startIndex = more ? this.scene!.loadStart : 1;
-			const response = await this.fetch(
-				`/${this.network}/api/account/${account}/activity/${startIndex}`
-			);
+			// Use the /activity endpoint (robo) for generic activity feeds
+			let path = `/${this.network}/api/account/${account}/activity/${startIndex}`;
+			// If filters are defined, use the /actions endpoint (hyperion) for specific contract actions
+			if (this.contract) {
+				path = `/${this.network}/api/account/${account}/actions/${startIndex}/${this.contract}`;
+				if (this.action) {
+					path += `/${this.action}`;
+				}
+			}
+			const response = await this.fetch(path);
 			if (!response.ok) {
 				throw new Error(`Error while loading activity for ${account}.`);
 			}
@@ -117,7 +135,40 @@ export class ActivityLoader {
 
 			const digests: string[] = [];
 			const receipts: Record<string, ActionTraceReceipt[]> = {};
+			// Display any action matching these exceptions
+			const allowExceptions: string[] = [];
+			// Don't display any action matching these exceptions
+			const disallowExceptions: string[] = ['core.vaulta::enforcebal'];
 			const filtered = activity.actions
+				.filter((action) => {
+					const shortname = `${action.trace.act.account}::${action.trace.act.name}`;
+					const allowViaSystemAction = action.trace.act.account.equals(systemcontract);
+					const allowedViaException = allowExceptions.includes(shortname);
+					const allowedViaAuthorization = action.trace.receipt.auth_sequence.some((auth) =>
+						Name.from(auth[0]).equals(account)
+					);
+					const allowedViaReceiver = action.trace.receipt.receiver.equals(account);
+					const disallowedViaExceptions = disallowExceptions.includes(shortname);
+					const allowed =
+						!disallowedViaExceptions &&
+						(allowedViaException ||
+							allowedViaAuthorization ||
+							allowedViaReceiver ||
+							allowViaSystemAction);
+					if (!allowed) {
+						console.warn('Action filtered out', {
+							contract: String(action.trace.act.account),
+							action: String(action.trace.act.name),
+							receiver: String(action.trace.receipt.receiver),
+							account,
+							allowedViaException,
+							allowedViaReceiver,
+							allowViaSystemAction,
+							allowed
+						});
+					}
+					return allowed;
+				})
 				.filter((action) => {
 					const key = this.makeKey(action.trace.trx_id, action.trace.receipt.act_digest);
 					if (!receipts[key]) {

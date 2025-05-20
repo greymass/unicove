@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { ogImageUrl } from '$lib/utils/opengraph';
+	import { ogImageURL } from '$lib/utils/opengraph';
 
 	let { data } = $props();
 	const { url, baseMetaTags } = data;
@@ -13,7 +13,25 @@
 <section class="space-y-6">
 	<h1 class="h2">Opengraph Images</h1>
 	<img src={og_default} alt="" />
-	<img src={ogImageUrl(test1)} alt="" />
-	<img src={ogImageUrl(test2)} alt="" />
-	<img src={ogImageUrl(test3)} alt="" />
+	<img
+		src={ogImageURL(test1, {
+			title: 'Test 1',
+			text: 'Text 1'
+		})}
+		alt=""
+	/>
+	<img
+		src={ogImageURL(test2, {
+			title: 'Test 1',
+			text: 'Text 1'
+		})}
+		alt=""
+	/>
+	<img
+		src={ogImageURL(test3, {
+			title: 'Test 1',
+			text: 'Text 1'
+		})}
+		alt=""
+	/>
 </section>

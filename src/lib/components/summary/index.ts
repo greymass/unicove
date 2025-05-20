@@ -1,19 +1,62 @@
 import type { Component } from 'svelte';
+import { Asset, Name, type NameType } from '@wharfkit/antelope';
 
-// Contract action summary components
-import eosio from '$lib/components/summary/eosio/index.js';
-import token from '$lib/components/summary/eosio.token/index.js';
-import greymassnoop from '$lib/components/summary/greymassnoop/index.js';
+import type { ContractSummaries, ObjectifiedActionData } from '$lib/types/transaction';
+import { systemcontract } from '$lib/wharf/chains';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const summaries: Record<string, any> = {
+import eosio from '$lib/components/summary/eosio';
+import reserv from '$lib/components/summary/eosio.reserv';
+import rex from '$lib/components/summary/eosio.rex';
+import token from '$lib/components/summary/eosio.token';
+import greymassnoop from '$lib/components/summary/greymassnoop';
+import delphioracle from '$lib/components/summary/delphioracle';
+import wram from '$lib/components/summary/eosio.wram';
+
+export const summaries: Record<string, ContractSummaries> = {
+	'core.vaulta': eosio,
+	delphioracle: delphioracle,
 	eosio: eosio,
+	'eosio.reserv': reserv,
+	'eosio.rex': rex,
 	'eosio.token': token,
-	greymassnoop
+	greymassnoop: greymassnoop,
+	'eosio.wram': wram
 };
 
-export function getActionSummaryComponent(contract: string, action: string): Component | undefined {
-	const summary = summaries[contract];
+export function isStandardTokenTransfer(data: ObjectifiedActionData) {
+	const from = data?.from && Name.from(data.from).equals(data.from);
+	const to = data?.to && Name.from(data.to).equals(data.to);
+	const quantity = data?.quantity && Asset.from(data.quantity).equals(data.quantity);
+	return from && to && quantity;
+}
+
+export function getActionSummaryComponent(
+	contract: NameType,
+	action: NameType,
+	data?: ObjectifiedActionData
+): Component | undefined {
+	if (data && isStandardTokenTransfer(data)) {
+		return summaries['eosio.token'].components.transfer;
+	}
+	const summary = summaries[String(contract)];
 	if (!summary) return undefined;
-	return summary[action];
+	return summary.components[String(action)];
+}
+
+export function getActionSummaryTitle(
+	contract: NameType,
+	action: NameType,
+	data?: ObjectifiedActionData
+): string | undefined {
+	let contractName = contract;
+	if (systemcontract.equals(contract)) {
+		contractName = 'eosio';
+	}
+	if (data && isStandardTokenTransfer(data)) {
+		return summaries['eosio.token'].titles['transfer'];
+	}
+	if (summaries[String(contractName)]) {
+		return summaries[String(contractName)].titles[String(action)];
+	}
+	return;
 }

@@ -6,17 +6,15 @@
 	import Stack from '$lib/components/layout/stack.svelte';
 	import * as m from '$lib/paraglide/messages';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import { ramtoken, systemtoken } from '$lib/wharf/chains';
 
 	const { network } = getContext<UnicoveContext>('state');
 
 	const funding = network.supports('directfunding');
 </script>
 
-<section
-	id="charts"
-	class="@container col-span-full grid grid-cols-2 gap-12 xl:grid-cols-2 xl:gap-x-4"
->
-	<Stack class="col-span-full xl:col-span-4 @3xl:col-span-1">
+<section id="charts" class="@container grid grid-cols-2 gap-12 xl:grid-cols-2 xl:gap-x-12">
+	<Stack class="col-span-full @3xl:col-span-1">
 		<TokenPriceHistory />
 
 		<TextBlock
@@ -43,18 +41,23 @@
 		/>
 	</Stack>
 
-	<Stack class="col-span-full xl:col-span-4 xl:col-start-6 @3xl:col-span-1">
+	<Stack class="col-span-full @3xl:col-span-1">
 		<RamPriceHistory />
 
 		<TextBlock
 			{...{
 				title: m.homepage_ram_token_title(),
-				text: m.homepage_ram_token_description(),
+				text: m.homepage_ram_token_description({
+					bytes: 1000,
+					ramtoken: ramtoken.name,
+					systemtoken: systemtoken.name
+				}),
 				button: {
-					text: m.homepage_ram_token_market({
-						token: String(network.chain.systemToken?.symbol.name)
+					text: m.swap_base_quote({
+						base: String(network.chain.systemToken?.symbol.name),
+						quote: String(ramtoken.name)
 					}),
-					href: `${network}/ram`
+					href: `${network}/swap/${systemtoken.id.url}/${ramtoken.id.url}`
 				}
 			}}
 		/>

@@ -1,7 +1,7 @@
 import { type SeoConfig } from 'svead';
 import { i18n } from '$lib/i18n';
 import * as m from '$lib/paraglide/messages';
-import { ogImageUrl } from '$lib/utils/opengraph';
+import { ogImageURL } from '$lib/utils/opengraph';
 import type { LayoutServerLoad } from './$types';
 import type { NetworkState } from '$lib/state/network.svelte';
 import { error } from '@sveltejs/kit';
@@ -13,7 +13,10 @@ function generateMetadata(url: URL, network: NetworkState): SeoConfig {
 
 	let open_graph_image = undefined;
 	if (API_OPENGRAPH_GENERATOR && API_OPENGRAPH_TOKEN) {
-		open_graph_image = ogImageUrl(url);
+		open_graph_image = ogImageURL(url, {
+			title: 'Unicove',
+			text: 'Your gateway to Web3'
+		});
 	}
 
 	return {

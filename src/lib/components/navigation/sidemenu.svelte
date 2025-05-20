@@ -10,7 +10,6 @@
 	interface Props {
 		callbackFn?: (event: MouseEvent) => void;
 		network: NetworkState;
-		class?: string;
 	}
 
 	let { callbackFn, network }: Props = $props();
@@ -79,7 +78,7 @@
 		<a
 			href={option.href}
 			class="focus-visible:outline-solar-500 flex h-12 items-center rounded-lg leading-snug transition-opacity select-none hover:opacity-100 focus-visible:opacity-100 focus-visible:outline"
-			class:opacity-60={!option.active}
+			class:opacity-70={!option.active}
 			class:opacity-100={option.active}
 			aria-current={!!option.active}
 			onclick={callbackFn}

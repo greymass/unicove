@@ -1,11 +1,13 @@
 <script lang="ts">
-	import { Card } from '$lib/components/layout';
-	import { cn } from '$lib/utils';
-	import type { ActionSummaryProps } from '$lib/types/transaction';
+	import AccountElement from '$lib/components/elements/account.svelte';
+	import * as m from '$lib/paraglide/messages';
 
-	const { ...props }: ActionSummaryProps = $props();
+	const { authorization } = $props();
 </script>
 
-<Card class={cn('text-large @container gap-6', props.class)}>
-	The resources usage for this transaction was provided by Fuel.
-</Card>
+{#if authorization}
+	<AccountElement name={authorization[0].actor} />
+	provided the network resources for this transaction.
+{:else}
+	{m.common_resources_provided_3rd_party()}
+{/if}

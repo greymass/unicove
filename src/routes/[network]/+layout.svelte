@@ -26,7 +26,6 @@
 	import Unicovelogo from '$lib/assets/unicovelogo.svelte';
 	import MobileNavigation from '$lib/components/navigation/mobilenavigation.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte.js';
-	import PageBanner from '$lib/components/banner/pageBanner.svelte';
 	import DebugToggle from '$lib/components/select/debug.svelte';
 	import { CodeIcon } from 'lucide-svelte';
 
@@ -209,12 +208,24 @@
 
 <Head {seo_config} />
 
-<!-- Preload current chain logo -->
 <svelte:head>
+	<!-- Preload current chain logo -->
 	<link rel="preload" href={String(data.network.config.logo)} as="image" type="image/png" />
-</svelte:head>
 
-<PageBanner network={data.network} />
+	<!-- Init color scheme on page load -->
+	<script>
+		(function () {
+			if (typeof window !== undefined) {
+				const storedTheme = localStorage.getItem('color-scheme');
+				const theme =
+					storedTheme ||
+					(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+				document.documentElement.setAttribute('data-scheme', theme);
+				if (!storedTheme) localStorage.setItem('color-scheme', theme);
+			}
+		})();
+	</script>
+</svelte:head>
 
 <div
 	data-theme={data.network}

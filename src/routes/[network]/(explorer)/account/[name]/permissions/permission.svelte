@@ -10,6 +10,8 @@
 	import * as m from '$lib/paraglide/messages';
 	import { Name, PermissionLevel, UInt64 } from '@wharfkit/antelope';
 	import type { TreePermission } from './+page';
+	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import { getContext } from 'svelte';
 
 	interface Props {
 		account: Name;
@@ -33,12 +35,15 @@
 	}: Props = $props();
 	let { permission, children } = $derived(props.permission);
 
+	const context = getContext<UnicoveContext>('state');
+
 	const anyPermissions = $derived(
 		permission.required_auth.accounts.length ||
 			permission.required_auth.keys.length ||
 			permission.required_auth.waits.length
 	);
 	const isMSIG = $derived(permission.required_auth.threshold.gt(UInt64.from(1)));
+	const isDebugMode = $derived(context.settings.data.debugMode);
 
 	const editUrl = $derived('permissions/' + permission.perm_name);
 </script>
@@ -56,7 +61,7 @@
 			<dd class="text-on-surface text-xl font-semibold">
 				<div class="flex items-center gap-2">
 					{permission.perm_name}
-					{#if isMSIG && advancedMode && loggedIn && !msigMode}
+					{#if loggedIn && (isDebugMode || (isMSIG && advancedMode && !msigMode))}
 						<LogIn
 							onclick={() =>
 								signin(PermissionLevel.from({ actor: account, permission: permission.perm_name }))}

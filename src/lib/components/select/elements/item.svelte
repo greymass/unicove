@@ -19,7 +19,7 @@
 </script>
 
 <div
-	class=" hover:bg-primary focus:text-on-primary data-highlighted:bg-primary data-highlighted:text-on-primary relative grid cursor-pointer grid-cols-[auto_1fr] items-center gap-2 rounded-xl px-2 py-1 font-medium hover:text-black/95 focus:z-10 data-disabled:opacity-50 data-[variant=form]:rounded-xs data-[variant=pill]:rounded-xl"
+	class=" hover:bg-primary focus:text-on-primary data-highlighted:bg-primary data-highlighted:text-on-primary hover:text-on-primary relative grid cursor-pointer grid-cols-[auto_1fr] items-center gap-2 rounded-xl px-2 py-1 font-medium focus:z-10 data-disabled:opacity-50 data-[variant=form]:rounded-xs data-[variant=pill]:rounded-xl"
 	data-variant={props.variant}
 	use:melt={$option(props.item)}
 >

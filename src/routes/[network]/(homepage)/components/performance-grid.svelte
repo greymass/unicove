@@ -4,13 +4,13 @@
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import { calculateValue } from '$lib/utils';
 	import TextBlock from './text-block.svelte';
-	import Box from '$lib/components/layout/box/box.svelte';
 	import * as m from '$lib/paraglide/messages';
 	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte';
 	import { Asset, Int64 } from '@wharfkit/antelope';
 	import { getContext } from 'svelte';
 	import { Currencies } from '$lib/types/currencies';
 	import type { NetworkValueState } from '$lib/state/value.svelte';
+	import { ramtoken } from '$lib/wharf/chains';
 
 	interface Props {
 		network: NetworkState;
@@ -45,30 +45,26 @@
 	);
 </script>
 
-<section class="col-span-full grid grid-cols-subgrid gap-4">
+<section class="@container grid grid-cols-2 items-start gap-x-4 gap-y-12">
 	<!-- Text -->
-	<div
-		class="col-span-full row-start-2 grid items-center text-balance lg:col-span-3 lg:row-start-1"
-	>
-		<Box>
-			<TextBlock
-				title={m.homepage_performance_defi({
-					network: networkName
-				})}
-				text={m.homepage_performance_defi_description({
-					network: networkName
-				})}
-			/>
-		</Box>
+	<div class="col-span-full row-start-1 grid items-center text-balance @3xl:col-span-1">
+		<TextBlock
+			title={m.homepage_performance_defi({
+				network: networkName
+			})}
+			text={m.homepage_performance_defi_description({
+				network: networkName
+			})}
+		/>
 	</div>
 
 	<!-- Grid -->
 	<div
-		class="@container col-span-full grid content-start gap-4 lg:col-start-4 xl:col-span-5 xl:col-start-5"
+		class="@3xl:col-span-auto @container col-span-full row-start-2 grid content-start gap-4 @3xl:col-start-2 @3xl:row-start-1"
 	>
-		<div id="performance-row-1" class="grid gap-4 @-lg:grid-cols-[1fr_auto_1fr]">
+		<div id="performance-row-1" class="grid gap-4 @lg:grid-cols-[1fr_auto_1fr]">
 			<!-- Market Cap -->
-			<Card class="bg-surface-container-high grid content-between  gap-4">
+			<Card class="bg-surface-container-high grid content-between gap-4">
 				<h3 class="text-muted text-sm">{network.token.name} {m.common_market_cap()}</h3>
 				<p class="text-on-surface justify-self-end text-xl font-semibold text-nowrap">
 					<AssetText value={marketcap} variant="short" />
@@ -76,19 +72,14 @@
 			</Card>
 
 			<!-- Network logo -->
-			<!-- contain:size lets us keep the auto grid height while preventing the content from setting the height -->
-			<Card
-				class="order-first flex justify-center @lg:order-none @lg:aspect-square @lg:[contain:size]"
-			>
-				<img
-					class="max-h-24 object-contain"
-					src={networkLogo}
-					alt={networkName}
-					loading="lazy"
-					width="200"
-					height="200"
-				/>
-			</Card>
+			<img
+				class="order-first max-h-24 w-auto justify-self-center object-contain @lg:order-none"
+				src={networkLogo}
+				alt={networkName}
+				loading="lazy"
+				width="200"
+				height="200"
+			/>
 
 			<!-- Native TVL -->
 			<Card class="bg-surface-container-highest grid content-between gap-4">
@@ -112,7 +103,7 @@
 
 			<!-- Ram Eos pair -->
 			<Card class="bg-surface-container-highest grid flex-1 content-between  gap-4">
-				<h3 class="text-muted text-sm">RAM/{network.token.symbol.name}</h3>
+				<h3 class="text-muted text-sm">{ramtoken.name}/{network.token.symbol.name}</h3>
 				<p class="text-on-surface justify-self-end text-xl font-semibold text-nowrap">
 					<AssetText value={network.resources.ram.price.rammarket} variant="short" />
 				</p>
@@ -121,7 +112,7 @@
 			<!-- Ram price -->
 			{#if network.resources && network.resources.ram.price.rammarket}
 				<Card class="bg-surface-container-high grid flex-1 content-between gap-4">
-					<h3 class="text-muted text-sm">RAM/USD</h3>
+					<h3 class="text-muted text-sm">{ramtoken.name}/USD</h3>
 					<p class="text-on-surface justify-self-end text-xl font-semibold text-nowrap">
 						<AssetText
 							value={calculateValue(

@@ -12,6 +12,8 @@
 	import { StakeManager } from './manager.svelte';
 	import { DL } from '$lib/components/descriptionlist';
 	import * as m from '$lib/paraglide/messages';
+	import SystemTokenSwap from '$lib/components/banner/systemTokenSwap.svelte';
+	import Code from '$lib/components/code.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
@@ -58,6 +60,7 @@
 			title={m.common_staked()}
 			description={m.common_staked_currently()}
 		/>
+		<SystemTokenSwap account={context.account} network={data.network} />
 		<Stack class="gap-3">
 			<Label for="assetInput"
 				>{m.common_amount_to_act({
@@ -100,5 +103,15 @@
 		</Stack>
 
 		<DL items={hints} />
+	{/if}
+	{#if context.settings.data.debugMode}
+		<Code
+			json={{
+				rex: manager.unstaking,
+				staked: manager.staked,
+				stakable: manager.stakable,
+				tokenBalance: manager.tokenBalance
+			}}
+		/>
 	{/if}
 </Stack>

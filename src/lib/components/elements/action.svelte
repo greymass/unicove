@@ -19,6 +19,9 @@
 	import Card from '../layout/box/card.svelte';
 
 	import * as m from '$lib/paraglide/messages';
+	import ActionSummaryContainer from '$lib/components/summary/components/container.svelte';
+	import Switcher from '../layout/switcher.svelte';
+	import { getActionSummaryTitle } from '../summary';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -28,6 +31,7 @@
 		objectified?: ObjectifiedActionData;
 		id?: Checksum256Type;
 		notified?: Name[];
+		perspectiveOf?: Name;
 		summary?: Component<ActionSummaryProps, object>;
 		variant?: ActionDisplayVariants;
 	}
@@ -36,6 +40,7 @@
 		action,
 		datetime,
 		objectified,
+		perspectiveOf,
 		id,
 		notified,
 		summary: ActionSummary,
@@ -43,6 +48,8 @@
 	}: Props = $props();
 
 	let advancedMode = $derived(context.settings.data.advancedMode);
+
+	let summaryTitle = $derived(getActionSummaryTitle(action.account, action.name, objectified));
 </script>
 
 {#snippet KeyValue(key: string | null, value: string)}
@@ -128,44 +135,80 @@
 
 {#snippet Summary()}
 	{#if typeof objectified === 'object' && ActionSummary}
-		<ActionSummary data={objectified} />
+		<ActionSummaryContainer>
+			<ActionSummary data={objectified} authorization={action.authorization} {perspectiveOf} />
+		</ActionSummaryContainer>
 	{:else}
 		{@render Pretty(objectified)}
 	{/if}
 {/snippet}
 
+{#snippet DateTimeTransactionLink()}
+	{#if datetime}
+		{#if id}
+			<Transaction {id} class="text-muted text-sm leading-none tabular-nums">
+				<DateTime {datetime} />
+			</Transaction>
+		{:else}
+			<DateTime {datetime} />
+		{/if}
+	{/if}
+{/snippet}
+
 {#snippet Header()}
-	<div class="flex flex-wrap items-center gap-x-4 gap-y-2">
-		<picture class="bg-surface-container-high grid size-14 place-items-center rounded-full">
-			<SquareTerminal />
-		</picture>
+	<Switcher class="items-center gap-x-2 gap-y-2">
+		<div class="flex items-center gap-4">
+			<picture class="bg-surface-container-high grid size-14 place-items-center rounded-full">
+				<SquareTerminal />
+			</picture>
 
-		<div class="flex flex-col gap-1 font-mono">
-			<Contract name={action.account} class="text-muted leading-none">
-				{action.account}
-			</Contract>
-
-			<Contract
-				name={action.account}
-				action={action.name}
-				class="text-on-surface text-2xl leading-none"
-			>
-				{action.name}
-			</Contract>
+			<div class="grid gap-1 text-nowrap">
+				{#if summaryTitle}
+					<div class="text-on-surface leading-none md:text-lg">
+						{summaryTitle}
+					</div>
+					<div>
+						{@render DateTimeTransactionLink()}
+					</div>
+				{:else}
+					<div>
+						<Contract
+							name={action.account}
+							action={action.name}
+							class="text-on-surface leading-none md:text-lg"
+						>
+							{action.name}
+						</Contract>
+						::
+						<Contract name={action.account} class="text-muted leading-none">
+							{action.account}
+						</Contract>
+					</div>
+					<div>
+						{@render DateTimeTransactionLink()}
+					</div>
+				{/if}
+			</div>
 		</div>
 
-		<div class="flex flex-1 flex-col gap-1 text-right text-nowrap">
+		<div class="grid gap-1 text-right text-nowrap">
 			{#if id}
-				<Transaction {id} class="block font-mono text-2xl leading-none" />
+				<Transaction {id} class="block leading-none md:text-lg" />
 			{/if}
 
-			{#if datetime}
-				<span class="text-muted text-sm leading-none tabular-nums">
-					<DateTime {datetime} />
-				</span>
-			{/if}
+			{#if summaryTitle}
+				<div>
+					<Contract name={action.account} class="text-muted leading-none">
+						{action.account}
+					</Contract>
+					::
+					<Contract name={action.account} action={action.name} class="text-muted leading-none">
+						{action.name}
+					</Contract>
+				</div>
+			{:else}{/if}
 		</div>
-	</div>
+	</Switcher>
 {/snippet}
 
 {#snippet Footer()}
@@ -206,23 +249,34 @@
 
 <Card class="gap-4">
 	{@render Header()}
-	{#if variant === 'summary'}
-		{@render Summary()}
-	{:else if variant === 'ricardian'}
-		{@render Ricardian()}
-	{:else if variant === 'pretty'}
-		{@render Pretty(objectified)}
-	{:else if variant === 'decoded'}
-		{@render Decoded()}
-	{:else if variant === 'json'}
-		<Code json={action} />
-	{/if}
+	<svelte:boundary
+		onerror={(error) =>
+			console.warn(`Summary Component Rendering error for ${action.account}:${action.name}`, error)}
+	>
+		{#snippet failed()}
+			{#if context.settings.data.developerMode}
+				Error decoding for action summary, displaying raw data instead.
+			{/if}
+			{@render Pretty(objectified)}
+		{/snippet}
+		{#if variant === 'summary'}
+			{@render Summary()}
+		{:else if variant === 'ricardian'}
+			{@render Ricardian()}
+		{:else if variant === 'pretty'}
+			{@render Pretty(objectified)}
+		{:else if variant === 'decoded'}
+			{@render Decoded()}
+		{:else if variant === 'json'}
+			<Code json={action} />
+		{/if}
 
-	{#if action.account.equals('eosio') && action.name.equals('setcode') && objectified && objectified.code}
-		{@render Pretty({ hash: String(Checksum256.hash(objectified.code)) })}
-	{/if}
+		{#if action.account.equals('eosio') && action.name.equals('setcode') && objectified && objectified.code}
+			{@render Pretty({ hash: String(Checksum256.hash(objectified.code)) })}
+		{/if}
 
-	{#if variant !== 'summary'}
-		{@render Footer()}
-	{/if}
+		{#if variant !== 'summary'}
+			{@render Footer()}
+		{/if}
+	</svelte:boundary>
 </Card>

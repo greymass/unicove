@@ -4,14 +4,19 @@ import { ChainDefinition, Logo, TokenIdentifier } from '@wharfkit/common';
 import { Contract as DelphiHelperContract } from '$lib/wharf/contracts/delphihelper';
 import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
 import { Contract as MSIGContract } from '$lib/wharf/contracts/msig';
+import { Contract as ReserveContract } from '$lib/wharf/contracts/eosio.reserv';
+import { Contract as REXContract } from '$lib/wharf/contracts/eosio.rex';
 import { Contract as SystemContract } from '$lib/wharf/contracts/system';
 import { Contract as TimeContract } from '$lib/wharf/contracts/eosntime';
 import { Contract as TokenContract } from '$lib/wharf/contracts/token';
 import { Contract as UnicoveContract } from '$lib/wharf/contracts/unicove.api';
+import { Contract as VaultaContract } from '$lib/wharf/contracts/core.vaulta';
+import { Contract as WRAMContract } from '$lib/wharf/contracts/eosio.wram';
 
 import * as env from '$env/static/public';
 
 import { Token, TokenMedia, TokenMediaAsset } from '$lib/types/token';
+import { isENVTrue } from '$lib/utils/strings';
 
 const coinbase =
 	env.PUBLIC_FEATURE_DIRECTFUNDING === 'true'
@@ -60,8 +65,6 @@ const systemtokenalt = env.PUBLIC_SYSTEM_TOKEN_SYMBOL_ALT
 	? env.PUBLIC_SYSTEM_TOKEN_SYMBOL_ALT.split('|').map((symbol) => Asset.Symbol.from(symbol))
 	: [];
 
-const isTrue = (value: string) => value === 'true';
-
 const systemtokenasset = TokenMediaAsset.from({});
 if (env.PUBLIC_SYSTEM_TOKEN_LOGO_LIGHT) {
 	systemtokenasset.light = env.PUBLIC_SYSTEM_TOKEN_LOGO_LIGHT;
@@ -69,6 +72,7 @@ if (env.PUBLIC_SYSTEM_TOKEN_LOGO_LIGHT) {
 if (env.PUBLIC_SYSTEM_TOKEN_LOGO_DARK) {
 	systemtokenasset.dark = env.PUBLIC_SYSTEM_TOKEN_LOGO_DARK;
 }
+export const systemcontract = Name.from(env.PUBLIC_SYSTEM_CONTRACT);
 export const systemtoken = Token.from({
 	id: {
 		chain: env.PUBLIC_CHAIN_ID,
@@ -126,24 +130,25 @@ export const chainConfig: ChainConfig = {
 		history: env.PUBLIC_API_HISTORY
 	},
 	features: {
-		delphihelper: isTrue(env.PUBLIC_FEATURE_DELPHIHELPER),
-		delphioracle: isTrue(env.PUBLIC_FEATURE_DELPHIORACLE),
-		directfunding: isTrue(env.PUBLIC_FEATURE_DIRECTFUNDING),
-		eosntime: isTrue(env.PUBLIC_FEATURE_EOSNTIME),
-		giftedram: isTrue(env.PUBLIC_FEATURE_GIFTEDRAM),
-		lightapi: isTrue(env.PUBLIC_FEATURE_LIGHTAPI),
-		metamask: isTrue(env.PUBLIC_FEATURE_METAMASK),
-		powerup: isTrue(env.PUBLIC_FEATURE_POWERUP),
-		rammarket: isTrue(env.PUBLIC_FEATURE_RAMMARKET),
-		ramtransfer: isTrue(env.PUBLIC_FEATURE_RAMTRANSFER),
-		rentrex: isTrue(env.PUBLIC_FEATURE_RENTREX),
-		rex: isTrue(env.PUBLIC_FEATURE_REX),
-		robo: isTrue(env.PUBLIC_FEATURE_ROBO),
-		stakeresource: isTrue(env.PUBLIC_FEATURE_STAKERESOURCE),
-		staking: isTrue(env.PUBLIC_FEATURE_STAKING),
-		timeseries: isTrue(env.PUBLIC_FEATURE_TIMESERIES),
+		delphihelper: isENVTrue(env.PUBLIC_FEATURE_DELPHIHELPER),
+		delphioracle: isENVTrue(env.PUBLIC_FEATURE_DELPHIORACLE),
+		directfunding: isENVTrue(env.PUBLIC_FEATURE_DIRECTFUNDING),
+		eosntime: isENVTrue(env.PUBLIC_FEATURE_EOSNTIME),
+		giftedram: isENVTrue(env.PUBLIC_FEATURE_GIFTEDRAM),
+		hyperion: isENVTrue(env.PUBLIC_FEATURE_HYPERION),
+		lightapi: isENVTrue(env.PUBLIC_FEATURE_LIGHTAPI),
+		metamask: isENVTrue(env.PUBLIC_FEATURE_METAMASK),
+		powerup: isENVTrue(env.PUBLIC_FEATURE_POWERUP),
+		rammarket: isENVTrue(env.PUBLIC_FEATURE_RAMMARKET),
+		ramtransfer: isENVTrue(env.PUBLIC_FEATURE_RAMTRANSFER),
+		rentrex: isENVTrue(env.PUBLIC_FEATURE_RENTREX),
+		rex: isENVTrue(env.PUBLIC_FEATURE_REX),
+		robo: isENVTrue(env.PUBLIC_FEATURE_ROBO),
+		stakeresource: isENVTrue(env.PUBLIC_FEATURE_STAKERESOURCE),
+		staking: isENVTrue(env.PUBLIC_FEATURE_STAKING),
+		timeseries: isENVTrue(env.PUBLIC_FEATURE_TIMESERIES),
 		unicovecontractapi: !!env.PUBLIC_FEATURE_UNICOVE_CONTRACT_API,
-		wram: isTrue(env.PUBLIC_FEATURE_WRAM)
+		wram: isENVTrue(env.PUBLIC_FEATURE_WRAM)
 	},
 	metamask,
 	coinbase
@@ -156,14 +161,19 @@ export interface DefaultContracts {
 	delphioracle: DelphiOracleContract;
 	eosntime: TimeContract;
 	msig: MSIGContract;
+	reserve: ReserveContract;
+	rex: REXContract;
 	system: SystemContract;
 	token: TokenContract;
 	unicove: UnicoveContract;
+	vaulta: VaultaContract;
+	wram: WRAMContract;
 }
 
 export interface ChainEndpoints {
 	api: string;
 	history: string;
+	hyperion?: string;
 	lightapi?: string;
 	metrics?: string;
 }
@@ -206,6 +216,7 @@ export type FeatureType =
 	| 'directfunding'
 	| 'eosntime'
 	| 'giftedram'
+	| 'hyperion'
 	| 'lightapi'
 	| 'metamask'
 	| 'powerup'

@@ -58,7 +58,7 @@
 	});
 </script>
 
-<Card class="relative">
+<Card class="relative [contain:paint]">
 	<header class="flex justify-between">
 		<div>
 			<p class="text-muted">{pair}</p>

@@ -11,7 +11,7 @@
 
 	import * as m from '$lib/paraglide/messages';
 	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte.js';
-	import { TokenBalance, TokenSwap } from '$lib/types/token.js';
+	import { TokenBalance, TokenSwap, ZeroUnits } from '$lib/types/token.js';
 	import { ArrowRightLeft } from 'lucide-svelte';
 	import Label from '$lib/components/input/label.svelte';
 	import { SingleCard, Stack } from '$lib/components/layout';
@@ -138,16 +138,26 @@
 		return feeAmount;
 	}
 
-	function baseChange(e: Event & { currentTarget: EventTarget & HTMLInputElement }) {
+	function calculateQuote(value: string) {
+		const number = Number(value);
 		if (swap) {
-			const feeAmount = calculateFee(swap, feeAppliedTo);
-			const quote = Asset.fromFloat(
-				(Number(e.currentTarget.value) - feeAmount.value) * swap.pair.price.value,
-				quoteQuantity.symbol
-			);
-			quoteQuantity = quote;
-			quoteInput?.set(quote);
+			if (number > 0) {
+				const feeAmount = calculateFee(swap, feeAppliedTo);
+				const quote = Asset.fromFloat(
+					(number - feeAmount.value) * swap.pair.price.value,
+					quoteQuantity.symbol
+				);
+				quoteQuantity = quote;
+				quoteInput?.set(quote);
+			} else {
+				quoteInput?.set(quoteDefaultAsset);
+				quoteQuantity = quoteDefaultAsset;
+			}
 		}
+	}
+
+	function baseChange(e: Event & { currentTarget: EventTarget & HTMLInputElement }) {
+		calculateQuote(e.currentTarget.value);
 	}
 
 	function quoteChange(e: Event & { currentTarget: EventTarget & HTMLInputElement }) {
@@ -167,6 +177,12 @@
 		if (key === 'Enter') {
 			transact();
 		}
+	}
+
+	function max() {
+		baseInput?.set(baseBalance.balance);
+		baseQuantity = baseBalance.balance;
+		calculateQuote(String(baseBalance.balance.value));
 	}
 </script>
 
@@ -233,10 +249,16 @@
 
 {#snippet BaseField()}
 	<Stack class="gap-1">
-		<Label for="base-quantity">
+		<Label
+			for="base-quantity"
+			class="items-baseline-last grid h-10 grid-cols-[1fr_auto] items-center"
+		>
 			{m.common_send_tokens({
 				token: data.base.name
 			})}
+			<Button variant="tertiary" disabled={!context.account} onclick={max}>
+				{m.common_fill_max()}
+			</Button>
 		</Label>
 		<AssetInput
 			autofocus
@@ -252,7 +274,10 @@
 
 {#snippet QuoteField()}
 	<Stack class="gap-1">
-		<Label for="base-quantity">
+		<Label
+			for="base-quantity"
+			class="items-baseline-last grid h-10 grid-cols-[1fr_auto] items-center"
+		>
 			{m.common_receive_tokens({
 				token: data.quote.name
 			})}
@@ -286,7 +311,12 @@
 					{/if}
 				</p>
 
-				<Button onclick={transact} disabled={context.wharf.transacting || !context.account}>
+				<Button
+					onclick={transact}
+					disabled={context.wharf.transacting ||
+						!context.account ||
+						baseQuantity.units.lte(ZeroUnits)}
+				>
 					{m.common_swap_to_token({
 						token: String(data.quote.symbol.name)
 					})}

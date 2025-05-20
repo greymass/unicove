@@ -19,3 +19,5 @@ export function percentString(number: number, len: number = 2): string {
 		number
 	);
 }
+
+export const isENVTrue = (value: string) => value === 'true';

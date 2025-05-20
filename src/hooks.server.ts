@@ -4,7 +4,7 @@ import type { Handle, RequestEvent } from '@sveltejs/kit';
 import { PUBLIC_CHAIN_SHORT } from '$env/static/public';
 import { availableLanguageTags } from '$lib/paraglide/runtime.js';
 import { i18n } from '$lib/i18n';
-import { isNetworkShortName } from '$lib/wharf/chains';
+import { isNetworkShortName, ramtoken, systemtoken } from '$lib/wharf/chains';
 import { getBackendNetworkByName } from '$lib/wharf/client/ssr';
 
 export const i18nHandle = i18n.handle();
@@ -43,7 +43,10 @@ const redirects: Record<string, string> = {
 	'/earn': '/staking',
 	'/resources/ram/buy': '/ram/buy',
 	'/resources/ram/sell': '/ram/sell',
-	'/swap/eos': '/swap/eosio.token/4,eos/core.vaulta/4,a'
+	'/swap/eos': `/swap/${systemtoken.id.url}/core.vaulta/4,a`,
+	'/swap/kb': `/swap/${systemtoken.id.url}/${ramtoken.id.url}}`,
+	'/swap/ram': `/swap/${systemtoken.id.url}/${ramtoken.id.url}}`,
+	'/swap/eosio/4,eos/core.vaulta/4,a': '/swap/eosio.token/4,eos/core.vaulta/4,a'
 };
 
 function getManualRedirectPath(pathMore: string[]): string {

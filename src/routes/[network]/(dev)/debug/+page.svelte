@@ -1,5 +1,4 @@
 <script>
-	let props = $props();
 </script>
 
 <h1 class="h2">Debug</h1>
@@ -33,5 +32,8 @@
 	</li>
 	<li>
 		<a href="debug/state/wharf">State/Wharf</a>
+	</li>
+	<li>
+		<a href="debug/definition/token">Token Definitions</a>
 	</li>
 </ul>
