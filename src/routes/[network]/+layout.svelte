@@ -27,7 +27,8 @@
 	import MobileNavigation from '$lib/components/navigation/mobilenavigation.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte.js';
 	import DebugToggle from '$lib/components/select/debug.svelte';
-	import { CodeIcon } from 'lucide-svelte';
+	import { CodeIcon, MoonIcon } from 'lucide-svelte';
+	import SchemeToggle from '$lib/components/select/scheme.svelte';
 
 	let { children, data } = $props();
 
@@ -251,11 +252,13 @@
 			{#if settings.data.developerMode}
 				<CodeIcon /> Debug?
 				<DebugToggle />
+				<MoonIcon />
+				<SchemeToggle />
 			{/if}
 
 			<Search class="max-w-56 flex-1" />
 
-			<AccountSwitcher network={data.network} class="" />
+			<AccountSwitcher network={data.network} />
 		</div>
 	</header>
 
