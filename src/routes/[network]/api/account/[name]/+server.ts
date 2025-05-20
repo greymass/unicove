@@ -1,5 +1,5 @@
 import { json } from '@sveltejs/kit';
-import { Asset, type NameType } from '@wharfkit/antelope';
+import { Asset, Serializer, type NameType } from '@wharfkit/antelope';
 
 import { NetworkState } from '$lib/state/network.svelte';
 import { getCacheHeaders } from '$lib/utils';
@@ -19,6 +19,7 @@ import {
 	nullContractHash
 } from '$lib/state/defaults/account';
 import { TokenBalance, TokenDefinition, tokenEquals } from '$lib/types/token';
+import { PUBLIC_FEATURE_UNICOVE_CONTRACT_API_TOKENS } from '$env/static/public';
 
 export const GET: RequestHandler = async ({ locals: { network }, params }: RequestEvent) => {
 	const headers = getCacheHeaders(5);
@@ -165,12 +166,20 @@ async function getAccount(network: NetworkState, account: NameType): Promise<Acc
 }
 
 async function getAccount2(network: NetworkState, account: NameType): Promise<AccountDataSources> {
+	let tokens: UnicoveTypes.token_definition[] = [];
+	if (PUBLIC_FEATURE_UNICOVE_CONTRACT_API_TOKENS) {
+		tokens = Serializer.decode({
+			type: 'token_definition[]',
+			customTypes: [TokenDefinition],
+			data: PUBLIC_FEATURE_UNICOVE_CONTRACT_API_TOKENS
+		}) as UnicoveTypes.token_definition[];
+	}
 	const [get_account, getaccount] = await Promise.all([
 		network.client.v1.chain.get_account(account),
-		network.contracts.unicove.readonly('account', { account })
+		network.contracts.unicove.readonly('account', { account, tokens })
 	]);
 
-	const balances = await getBalances(network, [], getaccount);
+	const balances = await getBalances(network, tokens, getaccount);
 
 	return {
 		get_account,
