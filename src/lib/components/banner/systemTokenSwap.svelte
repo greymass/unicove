@@ -15,7 +15,7 @@
 
 {#if props.account && props.network.config.legacytoken && props.account.getBalance(props.network.config.legacytoken)}
 	<aside
-		class="from-primary-container to-primary-container/70 grid gap-4 rounded-lg bg-gradient-to-br p-4 text-center"
+		class="from-primary-container to-primary-container/50 border-outline-variant grid gap-4 rounded-lg border border-2 bg-gradient-to-br p-4 text-center"
 	>
 		<div class="grid gap-1">
 			<a
@@ -42,7 +42,7 @@
 		</div>
 
 		<Button
-			class="justify-self-center shadow-md"
+			class="justify-self-center"
 			href="/{props.network}/swap/{props.network.config.legacytoken.id.url}/{props.network.token.id
 				.url}"
 		>
