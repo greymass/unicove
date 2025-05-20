@@ -33,4 +33,7 @@
 	<li>
 		<a href="debug/state/wharf">State/Wharf</a>
 	</li>
+	<li>
+		<a href="debug/definition/token">Token Definitions</a>
+	</li>
 </ul>
