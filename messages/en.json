@@ -329,6 +329,7 @@
 	"debit_and_credit_cards_supported": "Debit and credit cards supported",
 	"delegation_metadata_refund_description": "Claim previously delegated {network} tokens.",
 	"delegation_metadata_refund_title": "Refund Delegated {network} Tokens",
+	"delphioracle_write": "DelphiOracle Data",
 	"details": "Details",
 	"error_loading_accounts": "Error loading accounts: {error}",
 	"exchanges": "Exchanges",

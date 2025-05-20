@@ -22,8 +22,7 @@
 	<AccountElement name={Name.from(data.payer)} />
 	{#if !Name.from(data.receiver).equals(data.payer)}
 		<span>
-			(Receiver:
-			<AccountElement name={Name.from(data.receiver)} />)
+			( Receiver: <AccountElement name={Name.from(data.receiver)} /> )
 		</span>
 	{/if}
 </Row>

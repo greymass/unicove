@@ -21,7 +21,7 @@
 	import * as m from '$lib/paraglide/messages';
 	import ActionSummaryContainer from '$lib/components/summary/components/container.svelte';
 	import Switcher from '../layout/switcher.svelte';
-	import { summaryTitles } from '../summary';
+	import { getActionSummaryTitle } from '../summary';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -49,7 +49,7 @@
 
 	let advancedMode = $derived(context.settings.data.advancedMode);
 
-	let summaryTitle = $derived(summaryTitles[`${action.account}_${action.name}`]);
+	let summaryTitle = $derived(getActionSummaryTitle(action.account, action.name, objectified));
 </script>
 
 {#snippet KeyValue(key: string | null, value: string)}
@@ -143,6 +143,18 @@
 	{/if}
 {/snippet}
 
+{#snippet DateTimeTransactionLink()}
+	{#if datetime}
+		{#if id}
+			<Transaction {id} class="text-muted text-sm leading-none tabular-nums">
+				<DateTime {datetime} />
+			</Transaction>
+		{:else}
+			<DateTime {datetime} />
+		{/if}
+	{/if}
+{/snippet}
+
 {#snippet Header()}
 	<Switcher class="items-center gap-x-2 gap-y-2">
 		<div class="flex items-center gap-4">
@@ -150,45 +162,51 @@
 				<SquareTerminal />
 			</picture>
 
-			<div class="grid gap-px font-mono">
+			<div class="grid gap-1 text-nowrap">
 				{#if summaryTitle}
-					<div class="text-on-surface leading-none md:text-2xl">
+					<div class="text-on-surface leading-none md:text-lg">
 						{summaryTitle}
 					</div>
+					<div>
+						{@render DateTimeTransactionLink()}
+					</div>
 				{:else}
-					<Contract
-						name={action.account}
-						action={action.name}
-						class="text-on-surface leading-none md:text-2xl"
-					>
-						{action.name}
-					</Contract>
-				{/if}
-
-				<div>
-					<Contract name={action.account} class="text-muted leading-none">
-						{action.account}
-					</Contract>
-					{#if summaryTitle}
-						::
-						<Contract name={action.account} action={action.name} class="text-muted leading-none">
+					<div>
+						<Contract
+							name={action.account}
+							action={action.name}
+							class="text-on-surface leading-none md:text-lg"
+						>
 							{action.name}
 						</Contract>
-					{/if}
-				</div>
+						::
+						<Contract name={action.account} class="text-muted leading-none">
+							{action.account}
+						</Contract>
+					</div>
+					<div>
+						{@render DateTimeTransactionLink()}
+					</div>
+				{/if}
 			</div>
 		</div>
 
 		<div class="grid gap-1 text-right text-nowrap">
 			{#if id}
-				<Transaction {id} class="block font-mono leading-none md:text-2xl" />
+				<Transaction {id} class="block leading-none md:text-lg" />
 			{/if}
 
-			{#if datetime}
-				<span class="text-muted text-sm leading-none tabular-nums">
-					<DateTime {datetime} />
-				</span>
-			{/if}
+			{#if summaryTitle}
+				<div>
+					<Contract name={action.account} class="text-muted leading-none">
+						{action.account}
+					</Contract>
+					::
+					<Contract name={action.account} action={action.name} class="text-muted leading-none">
+						{action.name}
+					</Contract>
+				</div>
+			{:else}{/if}
 		</div>
 	</Switcher>
 {/snippet}

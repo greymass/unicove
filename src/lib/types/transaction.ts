@@ -18,11 +18,16 @@ import {
 	UInt64,
 	type NameType
 } from '@wharfkit/antelope';
-
 import { Types as HyperionTypes } from '@wharfkit/hyperion';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type ObjectifiedActionData = Record<string, any>;
+
+export interface ContractSummaries {
+	titles: Record<string, string>;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	components: Record<string, any>;
+}
 
 export interface ActionSummaryProps {
 	class?: string;
