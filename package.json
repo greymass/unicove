@@ -57,7 +57,7 @@
 		"@sveltejs/enhanced-img": "^0.4.4",
 		"@tailwindcss/container-queries": "^0.1.1",
 		"@wharfkit/account-creation-plugin-metamask": "^1.2.1",
-		"@wharfkit/common": "^1.5.0-rc1",
+		"@wharfkit/common": "^1.5.0",
 		"@wharfkit/contract": "^1.2.1",
 		"@wharfkit/hyperion": "^1.0.4",
 		"@wharfkit/resources": "^1.3.1",
