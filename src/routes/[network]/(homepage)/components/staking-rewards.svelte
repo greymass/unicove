@@ -42,7 +42,7 @@
 			<Button variant="secondary" href={`/${network}/staking`}>
 				{m.common_stake_action()}
 			</Button>
-			<Button variant="tertiary" href="https://eosnetwork.com/staking-rewards/">Learn more</Button>
+			<Button variant="text" href="https://eosnetwork.com/staking-rewards/">Learn more</Button>
 		</div>
 		<p class="text-muted text-xs">
 			<sup>1</sup>

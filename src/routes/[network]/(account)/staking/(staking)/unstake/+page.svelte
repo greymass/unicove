@@ -75,7 +75,7 @@
 
 			<Label for="quantity-input">
 				<Button
-					variant="tertiary"
+					variant="text"
 					onclick={() => {
 						manager.setMaxValue();
 					}}

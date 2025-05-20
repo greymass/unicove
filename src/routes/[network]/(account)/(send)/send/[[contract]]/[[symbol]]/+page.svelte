@@ -347,7 +347,7 @@
 			/>
 
 			{#if context.account}
-				<Button variant="tertiary" disabled={!context.account} onclick={max}>
+				<Button variant="text" disabled={!context.account} onclick={max}>
 					{m.common_fill_max()}
 				</Button>
 			{/if}

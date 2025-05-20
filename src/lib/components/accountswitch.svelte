@@ -130,7 +130,7 @@
 <!-- Trigger Button -->
 {#if context.wharf.session}
 	<Button
-		variant="secondary"
+		variant="outlined"
 		class="h-10 grow-0 px-0"
 		meltAction={trigger}
 		aria-label="account-switcher-label"

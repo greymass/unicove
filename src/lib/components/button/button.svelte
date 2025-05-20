@@ -9,7 +9,7 @@
 
 	interface ButtonProps extends HTMLAttributes {
 		href?: string;
-		variant?: 'primary' | 'secondary' | 'tertiary' | 'pill';
+		variant?: 'primary' | 'secondary' | 'text' | 'pill' | 'outlined';
 		disabled?: boolean;
 		active?: boolean;
 		blank?: boolean;
@@ -65,7 +65,7 @@
 		outlined: outlinedStyles,
 		secondary: secondaryFilledStyles,
 		pill: pillStyles,
-		tertiary: textStyles
+		text: textStyles
 	};
 </script>
 
