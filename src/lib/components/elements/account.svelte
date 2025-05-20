@@ -58,7 +58,9 @@
 	{#if children}
 		{@render children()}
 	{:else}
-		{name}
+		<span class="font-mono">
+			{name}
+		</span>
 	{/if}
 </a>
 
