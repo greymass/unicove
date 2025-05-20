@@ -219,7 +219,7 @@
 						<li class="group inline text-xs nth-last-2:after:content-['and_']">
 							<Account
 								name={Name.from(account)}
-								class="after:text-muted text-on-surface gap-0 text-xs group-has-nth-3:bg-red-300 not-group-nth-last-2:not-group-last:after:content-[','] first:ml-0"
+								class="after:text-muted text-on-surface group-has-nth-3:bg-error gap-0 text-xs not-group-nth-last-2:not-group-last:after:content-[','] first:ml-0"
 							/>
 						</li>
 					{/each}

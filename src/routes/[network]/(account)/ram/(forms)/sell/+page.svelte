@@ -125,7 +125,7 @@
 					</div>
 				</div>
 				{#if sellRamState.insufficientRAM}
-					<p class="text-red-500">{m.form_validation_insufficient_balance({ unit: 'RAM' })}</p>
+					<p class="text-error">{m.form_validation_insufficient_balance({ unit: 'RAM' })}</p>
 				{/if}
 				<p>
 					{m.common_labeled_unit_available({ unit: 'RAM' })}

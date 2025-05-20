@@ -361,11 +361,11 @@
 			{/if}
 
 			{#if !assetValidPrecision}
-				<p class="text-red-500">{m.common_invalid_number_decimals()}</p>
+				<p class="text-error">{m.common_invalid_number_decimals()}</p>
 			{/if}
 
 			{#if !assetValidMaximum}
-				<p class="text-red-500">{m.common_amount_exceeds_balance()}</p>
+				<p class="text-error">{m.common_amount_exceeds_balance()}</p>
 			{/if}
 		</fieldset>
 	</section>

@@ -26,9 +26,9 @@
 
 <Row>
 	{#if isSend}
-		<Chip class="bg-red-700 text-white">{m.common_sent()}</Chip>
+		<Chip class="bg-error-container text-white">{m.common_sent()}</Chip>
 	{:else if isReceive}
-		<Chip class="bg-green-700 text-white">{m.common_received()}</Chip>
+		<Chip class="bg-success-container text-white">{m.common_received()}</Chip>
 	{:else}
 		<Chip class="">Transfer</Chip>
 	{/if}

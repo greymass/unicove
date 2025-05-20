@@ -136,7 +136,7 @@
 					</div>
 				</div>
 				{#if buyRamState.insufficientBalance}
-					<p class="text-red-500">
+					<p class="text-error">
 						{m.form_validation_insufficient_balance({
 							unit: String(context.network.chain.systemToken?.symbol.name)
 						})}
