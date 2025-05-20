@@ -3,6 +3,7 @@
 	import Button from '$lib/components/button/button.svelte';
 
 	import * as m from '$lib/paraglide/messages';
+	import { Chains } from '@wharfkit/common';
 
 	interface Props {
 		network: NetworkState;
@@ -10,7 +11,7 @@
 	let props: Props = $props();
 </script>
 
-{#if props.network.config.legacytoken}
+{#if props.network.chain.equals(Chains.Vaulta) && props.network.config.legacytoken}
 	<section class="@container col-span-full">
 		<aside
 			class="flex flex-wrap items-center gap-4 gap-y-6 rounded-lg bg-linear-to-r from-[#1C2399] to-[#2E3BFF] p-4 shadow-lg"
