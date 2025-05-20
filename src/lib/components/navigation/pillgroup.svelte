@@ -55,7 +55,7 @@
 </menu>
 
 <div
-	class="border-outline-variant focus-visible:border-solar-500 flex flex-col rounded-lg border bg-transparent lg:hidden"
+	class="border-outline-variant focus-visible:border-solar-500 flex flex-col rounded-lg border-2 bg-transparent lg:hidden"
 >
 	<button
 		class="text-on-surface focus-visible:outline-solar-500 flex h-12 items-center justify-between rounded-[inherit] px-4 text-base font-medium focus-visible:outline"
