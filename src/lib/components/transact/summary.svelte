@@ -43,7 +43,7 @@
 		<div class="flex flex-col items-center gap-6">
 			{#if proposals && proposals.length}
 				<picture class="size-24">
-					<ClipboardPen class="size-full text-green-300" />
+					<ClipboardPen class="text-success size-full" />
 				</picture>
 				<h3 class="h3">{m.common_msig_proposal_created()}</h3>
 				<p class="text-center">
@@ -56,7 +56,7 @@
 				{/each}
 			{:else}
 				<picture class="size-24">
-					<CircleCheckBig class="size-full text-green-300" />
+					<CircleCheckBig class="text-success size-full" />
 				</picture>
 				<h3 class="h3">
 					{m.common_transaction_complete()}

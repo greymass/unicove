@@ -36,7 +36,7 @@ export function updateStatus(id: Checksum256, status: StatusType) {
 			updateToast(tx.toastId, {
 				title: tx.status,
 				description: String(tx.transaction?.id),
-				color: 'bg-green-200'
+				color: 'bg-success'
 			});
 		}
 
