@@ -20,6 +20,8 @@
         "@wharfkit/transact-plugin-resource-provider": "^1.1.2",
         "@wharfkit/wallet-plugin-anchor": "^1.4.0",
         "@wharfkit/wallet-plugin-cleos": "^1.2.0",
+        "@wharfkit/wallet-plugin-cloudwallet": "^1.4.0",
+        "@wharfkit/wallet-plugin-imtoken": "^1.1.0",
         "@wharfkit/wallet-plugin-metamask": "^1.2.1",
         "@wharfkit/wallet-plugin-privatekey": "^1.1.0",
         "@wharfkit/wallet-plugin-scatter": "^1.5.1",
@@ -570,6 +572,10 @@
     "@wharfkit/wallet-plugin-anchor": ["@wharfkit/wallet-plugin-anchor@1.4.0", "", { "dependencies": { "@wharfkit/antelope": "^1.0.5", "@wharfkit/protocol-esr": "^1.3.2", "isomorphic-ws": "^5.0.0", "ws": "^8.13.0" }, "peerDependencies": { "@wharfkit/session": "^1.2.7" } }, "sha512-4BHWmxTk/wYRwUfATTbxOY3WYvmURkaQojvmm6HM6PB4PRQqTVcl5F/DBJQHgwu83SW7wsQ+g01U+dSpEZ0a/A=="],
 
     "@wharfkit/wallet-plugin-cleos": ["@wharfkit/wallet-plugin-cleos@1.2.0", "", { "dependencies": { "tslib": "^2.1.0" }, "peerDependencies": { "@wharfkit/session": "^1.3.1" } }, "sha512-lO1AjLfyzRaj2kZc7vAoRhXWwsltNsW3j8uV9EDWmrpBuHYbq+odgQLgTZFenvxfUjsrnvCP1RHFyubDpo1QQg=="],
+
+    "@wharfkit/wallet-plugin-cloudwallet": ["@wharfkit/wallet-plugin-cloudwallet@1.4.0", "", { "dependencies": { "tslib": "^2.1.0" }, "peerDependencies": { "@wharfkit/session": "^1.2.7" } }, "sha512-U3iF3iSOcedD5bzKt5aHDjDyDQJM/q1fTiL17YRvIJSkKNx//f+6mf7dj0zkdkC8/z9mrnQ6NN6EHmsXNNdKqg=="],
+
+    "@wharfkit/wallet-plugin-imtoken": ["@wharfkit/wallet-plugin-imtoken@1.1.0", "", { "dependencies": { "tslib": "^2.1.0" }, "peerDependencies": { "@wharfkit/session": "^1.1.0" } }, "sha512-zb4VQ0PNpbIG2WBYZBSJXvM0Nk2m3Xtc6DWCMk7MCtDlbWlXdc8KuOEMkN2LUlV0rU+LNJxdOTddBwgvjViSog=="],
 
     "@wharfkit/wallet-plugin-metamask": ["@wharfkit/wallet-plugin-metamask@1.2.1", "", { "dependencies": { "@metamask/providers": "^17.0.0", "tslib": "^2.1.0" }, "peerDependencies": { "@wharfkit/session": "^1.4.0" } }, "sha512-zu+sX37GNEboiDGtKa5rpaQQRPkbug9v0v3+ddAB/zoXqw0VF353/5tMEJcFCI5M7U98PUFA5/XJFVHL6zRQ/g=="],
 

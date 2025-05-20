@@ -16,6 +16,7 @@ import { Contract as WRAMContract } from '$lib/wharf/contracts/eosio.wram';
 import * as env from '$env/static/public';
 
 import { Token, TokenMedia, TokenMediaAsset } from '$lib/types/token';
+import { isENVTrue } from '$lib/utils/strings';
 
 const coinbase =
 	env.PUBLIC_FEATURE_DIRECTFUNDING === 'true'
@@ -63,8 +64,6 @@ const lockedsupply = env.PUBLIC_FEATURE_METAMASK
 const systemtokenalt = env.PUBLIC_SYSTEM_TOKEN_SYMBOL_ALT
 	? env.PUBLIC_SYSTEM_TOKEN_SYMBOL_ALT.split('|').map((symbol) => Asset.Symbol.from(symbol))
 	: [];
-
-const isTrue = (value: string) => value === 'true';
 
 const systemtokenasset = TokenMediaAsset.from({});
 if (env.PUBLIC_SYSTEM_TOKEN_LOGO_LIGHT) {
@@ -131,25 +130,25 @@ export const chainConfig: ChainConfig = {
 		history: env.PUBLIC_API_HISTORY
 	},
 	features: {
-		delphihelper: isTrue(env.PUBLIC_FEATURE_DELPHIHELPER),
-		delphioracle: isTrue(env.PUBLIC_FEATURE_DELPHIORACLE),
-		directfunding: isTrue(env.PUBLIC_FEATURE_DIRECTFUNDING),
-		eosntime: isTrue(env.PUBLIC_FEATURE_EOSNTIME),
-		giftedram: isTrue(env.PUBLIC_FEATURE_GIFTEDRAM),
-		hyperion: isTrue(env.PUBLIC_FEATURE_HYPERION),
-		lightapi: isTrue(env.PUBLIC_FEATURE_LIGHTAPI),
-		metamask: isTrue(env.PUBLIC_FEATURE_METAMASK),
-		powerup: isTrue(env.PUBLIC_FEATURE_POWERUP),
-		rammarket: isTrue(env.PUBLIC_FEATURE_RAMMARKET),
-		ramtransfer: isTrue(env.PUBLIC_FEATURE_RAMTRANSFER),
-		rentrex: isTrue(env.PUBLIC_FEATURE_RENTREX),
-		rex: isTrue(env.PUBLIC_FEATURE_REX),
-		robo: isTrue(env.PUBLIC_FEATURE_ROBO),
-		stakeresource: isTrue(env.PUBLIC_FEATURE_STAKERESOURCE),
-		staking: isTrue(env.PUBLIC_FEATURE_STAKING),
-		timeseries: isTrue(env.PUBLIC_FEATURE_TIMESERIES),
+		delphihelper: isENVTrue(env.PUBLIC_FEATURE_DELPHIHELPER),
+		delphioracle: isENVTrue(env.PUBLIC_FEATURE_DELPHIORACLE),
+		directfunding: isENVTrue(env.PUBLIC_FEATURE_DIRECTFUNDING),
+		eosntime: isENVTrue(env.PUBLIC_FEATURE_EOSNTIME),
+		giftedram: isENVTrue(env.PUBLIC_FEATURE_GIFTEDRAM),
+		hyperion: isENVTrue(env.PUBLIC_FEATURE_HYPERION),
+		lightapi: isENVTrue(env.PUBLIC_FEATURE_LIGHTAPI),
+		metamask: isENVTrue(env.PUBLIC_FEATURE_METAMASK),
+		powerup: isENVTrue(env.PUBLIC_FEATURE_POWERUP),
+		rammarket: isENVTrue(env.PUBLIC_FEATURE_RAMMARKET),
+		ramtransfer: isENVTrue(env.PUBLIC_FEATURE_RAMTRANSFER),
+		rentrex: isENVTrue(env.PUBLIC_FEATURE_RENTREX),
+		rex: isENVTrue(env.PUBLIC_FEATURE_REX),
+		robo: isENVTrue(env.PUBLIC_FEATURE_ROBO),
+		stakeresource: isENVTrue(env.PUBLIC_FEATURE_STAKERESOURCE),
+		staking: isENVTrue(env.PUBLIC_FEATURE_STAKING),
+		timeseries: isENVTrue(env.PUBLIC_FEATURE_TIMESERIES),
 		unicovecontractapi: !!env.PUBLIC_FEATURE_UNICOVE_CONTRACT_API,
-		wram: isTrue(env.PUBLIC_FEATURE_WRAM)
+		wram: isENVTrue(env.PUBLIC_FEATURE_WRAM)
 	},
 	metamask,
 	coinbase
