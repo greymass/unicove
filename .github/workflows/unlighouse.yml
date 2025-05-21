@@ -39,5 +39,5 @@ jobs:
         if: ${{ !cancelled() }}
         with:
           name: unlighthouse-report
-          path: ./.unlighthouse
+          path: .unlighthouse/**/*
           retention-days: 30
