@@ -1,0 +1,40 @@
+name: Unlighthouse Site Scan
+on: [push]
+
+jobs:
+  unlighthouse-site-scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install Dependencies
+        run: bun install -g @unlighthouse/cli puppeteer
+
+      - name: Build SvelteKit Preview
+        run: make build
+
+      # Run build in background and log output
+      - name: Start Preview Server
+        run: |
+          bun run preview --port 4173 &
+          echo "Waiting for preview to start on port 4173…"
+          bunx wait-on http://localhost:4173
+
+      - name: Run Unlighthouse Assertions & Generate Static Report
+        run: unlighthouse-ci --site http://localhost:4173 --budget 75 --build-static
+
+      - name: Upload Unlighthouse Report
+        uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: unlighthouse-report
+          path: .unlighthouse/
+          retention-days: 30
