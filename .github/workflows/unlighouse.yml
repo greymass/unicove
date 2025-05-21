@@ -18,6 +18,9 @@ jobs:
       - name: Install Dependencies
         run: bun install -g @unlighthouse/cli puppeteer
 
+      - name: Generate Jungle4 config
+        run: make config/jungle4/vaulta
+
       - name: Build SvelteKit Preview
         run: make build
 
