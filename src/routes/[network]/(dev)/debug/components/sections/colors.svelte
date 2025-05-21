@@ -1,9 +1,14 @@
 <script lang="ts">
 	import { Stack } from '$lib/components/layout';
+	import Scheme from '$lib/components/select/scheme.svelte';
 </script>
 
-<Stack id="colors" class="bg-surface-container rounded-xl  p-6">
-	<h2 class="h2">Color Roles</h2>
+<Stack id="colors" class="">
+	<h2 class="h2 flex gap-3">
+		Color Roles
+
+		<Scheme />
+	</h2>
 
 	<div>
 		<div class=" flex flex-col gap-1">
@@ -37,6 +42,14 @@
 					>
 						Outline Variant
 					</div>
+				</div>
+
+				<div class="grid grid-cols-5">
+					<div class="bg-surface-container-lowest h-20 font-bold">Lowest</div>
+					<div class="bg-surface-container-low h-20 font-bold">Low</div>
+					<div class="bg-surface-container h-20 font-bold">Default</div>
+					<div class="bg-surface-container-high h-20 font-bold">High</div>
+					<div class="bg-surface-container-highest h-20 font-bold">Highest</div>
 				</div>
 			</div>
 

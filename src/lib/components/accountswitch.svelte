@@ -131,7 +131,7 @@
 {#if context.wharf.session}
 	<Button
 		variant="outlined"
-		class="h-10 bg-surface grow-0 px-0"
+		class="md:bg-surface h-10 grow-0 px-0"
 		meltAction={trigger}
 		aria-label="account-switcher-label"
 		id="account-switcher"

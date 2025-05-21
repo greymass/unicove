@@ -23,7 +23,7 @@
 
 <div
 	class={cn(
-		'border-outline-variant bg-surface focus-within:border-primary focus-within:ring-primary relative flex h-12 gap-2 rounded-lg border-2 px-4 *:content-center  focus-within:ring-1 focus-within:ring-inset ',
+		'border-outline-variant bg-surface focus-within:border-primary  relative flex h-12 gap-2 rounded-lg border-2 px-4 *:content-center    ',
 		props.disabled && 'text-muted border-outline-variant',
 		className
 	)}
