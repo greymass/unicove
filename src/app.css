@@ -217,6 +217,7 @@
 		--color-primary: oklch(from var(--theme-seed) 0.82 c h);
 		--color-primary-hover: oklch(from var(--theme-seed) 0.9 c h);
 		--color-on-primary: oklch(from var(--theme-seed) 0.2 c h);
+		--color-background: oklch(from var(--color-primary) 0.94 0.005 h);
 		&[data-scheme='dark'] {
 			--color-background: oklch(from var(--color-primary) 0.24 0.001 h);
 		}

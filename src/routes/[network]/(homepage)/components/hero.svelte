@@ -7,12 +7,13 @@
 	import telos from '$lib/assets/hero/telos/logo.svg';
 	import kylin from '$lib/assets/hero/kylin/logo.webp';
 	import vaultaLogo from '$lib/assets/hero/vaulta/vector.svg';
-	// import waxLight from '$lib/assets/hero/wax/light.png?enhanced';
+	import waxLight from '$lib/assets/hero/wax/light.png?enhanced';
 	import waxDark from '$lib/assets/hero/wax/dark.png?enhanced';
 	import UnicoveOutline from '$lib/assets/unicove-outline.svg';
 
 	import * as m from '$lib/paraglide/messages';
 	import Button from '$lib/components/button/button.svelte';
+	import { browser } from '$app/environment';
 
 	interface Props {
 		networkName: string;
@@ -20,6 +21,8 @@
 	}
 
 	let { networkName, networkShortname }: Props = $props();
+
+	let darkMode = $state(browser && localStorage.getItem('color-scheme') === 'dark');
 
 	const logo = {
 		vaulta: vaultaLogo,
@@ -152,14 +155,24 @@
 				width="512"
 			/>
 
-			<!-- Network Logo -->
-			<enhanced:img
-				class="absolute inset-y-0 right-0 size-full object-contain md:relative"
-				src={waxDark}
-				alt={networkName}
-				fetchpriority="high"
-				loading="eager"
-			/>
+			<!-- Wax Logo -->
+			{#if darkMode}
+				<enhanced:img
+					class="absolute inset-y-0 right-0 size-full object-contain md:relative"
+					src={waxDark}
+					alt={networkName}
+					fetchpriority="high"
+					loading="eager"
+				/>
+			{:else}
+				<enhanced:img
+					class="absolute inset-y-0 right-0 size-full object-contain md:relative"
+					src={waxLight}
+					alt={networkName}
+					fetchpriority="high"
+					loading="eager"
+				/>
+			{/if}
 		</div>
 
 		<div
