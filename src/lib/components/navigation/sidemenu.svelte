@@ -1,9 +1,12 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
 	import * as m from '$lib/paraglide/messages';
+	import DebugToggle from '$lib/components/select/debug.svelte';
+	import { CodeIcon, MoonIcon } from 'lucide-svelte';
+	import SchemeToggle from '$lib/components/select/scheme.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -15,7 +18,7 @@
 	let { callbackFn, network }: Props = $props();
 
 	// Example: ['', 'en', 'eos', 'staking', 'withdraw']
-	let pathname = $derived($page.url.pathname.split('/'));
+	let pathname = $derived(page.url.pathname.split('/'));
 
 	const destinations = $derived.by(() => {
 		const items = [
@@ -92,4 +95,16 @@
 			</span>
 		</a>
 	{/each}
+	{#if context.settings.data.developerMode}
+		<div class="grid gap-4">
+			<span class="flex items-center gap-2">
+				<CodeIcon />
+				<DebugToggle />
+			</span>
+			<span class="flex items-center gap-2">
+				<MoonIcon />
+				<SchemeToggle />
+			</span>
+		</div>
+	{/if}
 </menu>

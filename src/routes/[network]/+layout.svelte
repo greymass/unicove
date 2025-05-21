@@ -26,9 +26,6 @@
 	import Unicovelogo from '$lib/assets/unicovelogo.svelte';
 	import MobileNavigation from '$lib/components/navigation/mobilenavigation.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte.js';
-	import DebugToggle from '$lib/components/select/debug.svelte';
-	import { CodeIcon, MoonIcon } from 'lucide-svelte';
-	import SchemeToggle from '$lib/components/select/scheme.svelte';
 
 	let { children, data } = $props();
 
@@ -249,13 +246,6 @@
 		<div
 			class="flex items-center justify-end gap-4 sm:col-start-4 md:col-span-full md:col-start-9 md:flex-1 md:gap-4"
 		>
-			{#if settings.data.developerMode}
-				<CodeIcon /> Debug?
-				<DebugToggle />
-				<MoonIcon />
-				<SchemeToggle />
-			{/if}
-
 			<Search class="max-w-56 flex-1" />
 
 			<AccountSwitcher network={data.network} />
