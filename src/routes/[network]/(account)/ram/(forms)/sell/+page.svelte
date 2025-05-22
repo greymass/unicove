@@ -4,8 +4,6 @@
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 
-	import SummarySellRAM from '$lib/components/summary/eosio/sellram.svelte';
-
 	import Button from '$lib/components/button/button.svelte';
 	import Code from '$lib/components/code.svelte';
 	import Label from '$lib/components/input/label.svelte';
@@ -175,10 +173,6 @@
 						</DD>
 					</DLRow>
 				</DL>
-
-				{#if sellRamState.valid}
-					<SummarySellRAM class="hidden" data={sellRamState.toJSON()} />
-				{/if}
 			</Stack>
 		</form>
 	{/if}

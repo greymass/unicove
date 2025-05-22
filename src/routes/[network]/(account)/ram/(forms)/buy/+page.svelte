@@ -4,9 +4,6 @@
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 
-	import SummaryBuyRAMBytes from '$lib/components/summary/eosio/buyrambytes.svelte';
-	import SummaryBuyRAM from '$lib/components/summary/eosio/buyram.svelte';
-
 	import Button from '$lib/components/button/button.svelte';
 	import Code from '$lib/components/code.svelte';
 	import Label from '$lib/components/input/label.svelte';
@@ -100,7 +97,6 @@
 </script>
 
 <Stack>
-	<SystemTokenSwap account={context.account} network={data.network} />
 	{#if transactionId}
 		<TransactSummary {transactionId} />
 		<Button href={`/${data.network}/ram`} variant="secondary">
@@ -156,6 +152,8 @@
 				{m.common_unit_buy({ unit: 'RAM' })}
 			</Button>
 
+			<SystemTokenSwap account={context.account} network={data.network} />
+
 			<Stack class="gap-3">
 				<DL>
 					<DLRow
@@ -190,14 +188,6 @@
 						</DD>
 					</DLRow>
 				</DL>
-
-				{#if buyRamState.valid}
-					{#if buyRamState.format === 'asset'}
-						<SummaryBuyRAM class="hidden" data={buyRamState.toJSON()} />
-					{:else}
-						<SummaryBuyRAMBytes class="hidden" data={buyRamState.toJSON()} />
-					{/if}
-				{/if}
 			</Stack>
 		</form>
 	{/if}

@@ -25,6 +25,7 @@
 	import TokenSelect from '$lib/components/select/balance.svelte';
 	import TransactError from '$lib/components/transact/error.svelte';
 	import TransactSummary from '$lib/components/transact/summary.svelte';
+	import ActionSummaryContainer from '$lib/components/summary/components/container.svelte';
 
 	import { formatCurrency } from '$lib/i18n';
 	import { preventDefault } from '$lib/utils';
@@ -373,7 +374,9 @@
 
 {#snippet Memo()}
 	<div class:hidden={!showAll && f.current !== 'memo'} class="space-y-4">
-		<SummarySend data={sendState.toJSON()} />
+		<ActionSummaryContainer>
+			<SummarySend data={sendState.toJSON()} />
+		</ActionSummaryContainer>
 
 		<fieldset class="grid gap-2">
 			<Label for="memo-input">{m.common_memo()} ({m.common_optional()})</Label>
