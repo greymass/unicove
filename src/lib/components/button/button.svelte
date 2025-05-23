@@ -73,7 +73,7 @@
 	this={tag}
 	use:melt={$meltElement}
 	class={cn(
-		'group/button relative cursor-pointer items-center justify-center text-center text-base font-medium text-nowrap transition-opacity disabled:cursor-default disabled:opacity-30',
+		'group/button relative cursor-pointer items-center justify-center text-center text-base font-medium text-nowrap transition-opacity disabled:cursor-not-allowed disabled:opacity-30',
 		styles[variant],
 		className
 	)}
