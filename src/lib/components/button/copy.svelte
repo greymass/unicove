@@ -5,6 +5,7 @@
 	import { getContext, type ComponentProps } from 'svelte';
 	import IconButton from '$lib/components/button/icon.svelte';
 	import { ClipboardCheck } from 'lucide-svelte';
+	import * as m from '$lib/paraglide/messages';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -14,14 +15,14 @@
 
 	let props: Props = $props();
 
-	let hint = $state(false);
+	let copied = $state(false);
 
 	async function copyToClipboard() {
 		try {
 			await navigator.clipboard.writeText(props.data);
 			if (context.settings.data.debugMode) console.info(props.data, 'copied to clipboard');
-			hint = true;
-			setTimeout(() => (hint = false), 500);
+			copied = true;
+			setTimeout(() => (copied = false), 500);
 		} catch (err) {
 			if (context.settings.data.debugMode) console.error('Failed to copy text: ', err);
 		}
@@ -29,9 +30,9 @@
 </script>
 
 {#if browser && 'clipboard' in navigator}
-	{#if hint}
+	{#if copied}
 		<IconButton icon={ClipboardCheck} {...props} />
 	{:else}
-		<IconButton icon={Copy} onclick={copyToClipboard} {...props} />
+		<IconButton label={m.common_copy()} icon={Copy} onclick={copyToClipboard} {...props} />
 	{/if}
 {/if}

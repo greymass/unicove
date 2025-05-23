@@ -3,6 +3,7 @@
 	import { type Icon } from 'lucide-svelte';
 	import type { HTMLButtonAttributes, HTMLLinkAttributes } from 'svelte/elements';
 	import { emptyMeltElement, melt, type AnyMeltElement } from '@melt-ui/svelte';
+	import { Tooltip } from 'melt/builders';
 
 	type HTMLAttributes = HTMLButtonAttributes & HTMLLinkAttributes;
 
@@ -18,6 +19,7 @@
 		size?: 'large' | 'small';
 		variant?: 'filled' | 'standard';
 		hideBackground?: boolean;
+		label?: string;
 	}
 
 	let {
@@ -28,6 +30,7 @@
 		size = 'small',
 		variant = 'standard',
 		class: className,
+		label,
 		...props
 	}: Props = $props();
 
@@ -46,6 +49,11 @@
 				}
 			: {}
 	);
+
+	const tooltip = new Tooltip({
+		openDelay: 600,
+		disableHoverableContent: true
+	});
 </script>
 
 <svelte:element
@@ -53,15 +61,17 @@
 	use:melt={$meltElement}
 	data-size={size}
 	class={cn(
-		'touch-target group  focus-visible:text-solar-500 relative grid size-10 cursor-pointer  place-items-center rounded-full transition-all  *:col-start-1  *:row-start-1   focus-visible:outline-hidden disabled:cursor-default disabled:opacity-30  disabled:hover:bg-transparent  data-[size=large]:size-12 md:size-fit',
+		'touch-target group  focus-visible:text-solar-500 relative grid size-10 cursor-pointer  place-items-center rounded-full transition-all  *:col-start-1  *:row-start-1   focus-visible:outline-hidden disabled:cursor-default disabled:opacity-30  disabled:hover:bg-transparent data-[size=large]:size-12 md:size-fit',
 		className
 	)}
 	role={ariaRole}
 	aria-current={ariaCurrent}
+	aria-label={label}
 	{disabled}
 	{onclick}
 	{...props}
 	{...linkProps}
+	{...tooltip.trigger}
 >
 	<div
 		data-variant={variant}
@@ -72,5 +82,15 @@
 	{#if props.icon}
 		{@const IconComponent = props.icon}
 		<IconComponent class="pointer-events-none z-50 size-4 group-data-[size=large]:size-6" />
+	{/if}
+
+	{#if label}
+		<div
+			{...tooltip.content}
+			class="bg-surface-container-high rounded-lg p-2 text-xs shadow-lg first-letter:uppercase"
+		>
+			<div {...tooltip.arrow} class="size-2 rounded-tl-xs bg-white"></div>
+			{label}
+		</div>
 	{/if}
 </svelte:element>
