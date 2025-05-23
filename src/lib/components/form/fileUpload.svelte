@@ -17,8 +17,6 @@
 		}
 		return [fileUpload.selected].filter((f): f is File => !!f);
 	});
-
-	$inspect(files);
 </script>
 
 <!-- This input is hidden -->
