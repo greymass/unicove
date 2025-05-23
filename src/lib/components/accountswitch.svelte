@@ -294,7 +294,7 @@
 
 {#snippet connectWalletScreen()}
 	<div class="space-y-4" in:fly={{ x: 100, duration: 150 }} out:fly={{ x: 100, duration: 100 }}>
-		<hr class="border-outline-variant" />
+		<hr class="border-outline" />
 
 		<header class="grid justify-center gap-2 py-4 text-center">
 			<span class="h4">{m.common_login_to_unicove()}</span>

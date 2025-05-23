@@ -52,10 +52,10 @@
 		'inline-flex h-12 grow rounded-lg bg-primary-container/60 dark:bg-primary-container/30 px-8 text-on-primary-container focus:outline-transparent focus-visible:outline focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-solar-500 disabled:bg-transparent disabled:text-on-surface disabled:-outline-offset-1 disabled:outline-dashed';
 
 	const outlinedStyles =
-		' flex h-12 grow rounded-lg px-8  text-primary ring-2 ring-inset ring-outline-variant   focus-visible:outline-hidden focus-visible:ring-solar-500  hover:active:ring-outline-variant  disabled:text-on-surface  disabled:hover:bg-transparent disabled:hover:ring-on-surface/12 disabled:ring-on-surface/12  ';
+		' flex h-12 grow rounded-lg px-8  text-primary ring-2 ring-inset ring-outline  focus-visible:outline-hidden focus-visible:ring-solar-500  hover:active:ring-outline-variant  disabled:text-on-surface  disabled:hover:bg-transparent disabled:hover:ring-on-surface/12 disabled:ring-on-surface/12  ';
 
 	const pillStyles =
-		' inline-flex h-10  rounded-full border-2 border-transparent px-5  leading-4  focus-visible:border-solar-500  focus-visible:outline-hidden   aria-[current]:border-outline-variant aria-[current]:focus-visible:border-solar-500';
+		' inline-flex h-10  rounded-full border-2 border-transparent px-5  leading-4  focus-visible:border-solar-500  focus-visible:outline-hidden   aria-[current]:border-outline aria-[current]:focus-visible:border-solar-500';
 
 	const textStyles =
 		'inline-flex  h-10  rounded-lg px-3  text-primary   focus-visible:ring-inset focus-visible:ring-solar-500 focus-visible:outline-hidden focus-visible:ring  disabled:text-on-surface  disabled:hover:bg-transparent';

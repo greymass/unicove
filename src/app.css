@@ -124,8 +124,8 @@
 	--color-success-container: oklch(0.42 0.17 var(--success-hue));
 	--color-on-success-container: oklch(0.92 0.042 var(--success-hue));
 
-	--color-outline: oklch(from var(--color-primary) 0.65 0.08 h);
-	--color-outline-variant: oklch(from var(--color-outline) 0.4 0.05 h);
+	--color-outline-variant: oklch(from var(--color-primary) 0.65 0.08 h);
+	--color-outline: oklch(from var(--color-outline-variant) 0.4 0.05 h);
 
 	--color-background: oklch(from var(--color-primary) 0.24 0.02 h);
 	--color-on-background: var(--color-on-surface);
@@ -161,8 +161,8 @@
 	--color-success-container: oklch(0.92 0.042 var(--success-hue));
 	--color-on-success-container: oklch(0.42 0.17 var(--success-hue));
 
-	--color-outline: oklch(from var(--color-primary) 0.57 0.08 h);
-	--color-outline-variant: oklch(from var(--color-outline) 0.83 0.04 h);
+	--color-outline-variant: oklch(from var(--color-primary) 0.57 0.08 h);
+	--color-outline: oklch(from var(--color-outline-variant) 0.83 0.04 h);
 
 	--color-surface: oklch(from var(--color-primary) 0.98 0.007 h);
 	--color-on-surface: oklch(from var(--color-surface) 0.22 c h);
@@ -347,11 +347,11 @@
 }
 
 @utility table-row-border {
-	@apply border-outline-variant border-b last:border-none;
+	@apply border-outline border-b last:border-none;
 }
 
 @utility table-row-background {
-	@apply odd:via-outline-variant/10 data-[hover-effect=false]:odd:hover:via-outline-variant/10 hover:via-primary/5 data-[active=true]:via-primary/10 bg-linear-to-r from-transparent to-transparent data-[clickable=true]:cursor-pointer data-[hover-effect=false]:hover:via-transparent;
+	@apply odd:via-outline/10 data-[hover-effect=false]:odd:hover:via-outline-variant/10 hover:via-primary/5 data-[active=true]:via-primary/10 bg-linear-to-r from-transparent to-transparent data-[clickable=true]:cursor-pointer data-[hover-effect=false]:hover:via-transparent;
 }
 
 @utility bg-hero-gradient {
