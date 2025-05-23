@@ -191,7 +191,7 @@
 			</svg>
 
 			<h1
-				class="max-w-128 text-3xl leading-tight font-bold text-balance lg:text-4xl lg:leading-tight"
+				class="max-w-128 text-3xl font-sans-hero leading-tight font-bold text-balance lg:text-4xl lg:leading-tight"
 			>
 				<span class="">Unicove.</span>
 				{m.homepage_hero_title({
