@@ -25,7 +25,7 @@
 </script>
 
 <li
-	class="border-b-outline-variant/50 relative col-span-full space-y-4 border-b py-12 first:pt-4 last:border-none"
+	class="border-b-outline/50 relative col-span-full space-y-4 border-b py-12 first:pt-4 last:border-none"
 >
 	<div class="contract-action-overview col-span-full space-y-1">
 		<ContractActionOverview {action} {contract} />
