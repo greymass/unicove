@@ -20,7 +20,6 @@
 
 	import * as m from '$lib/paraglide/messages';
 	import ActionSummaryContainer from '$lib/components/summary/components/container.svelte';
-	import Switcher from '../layout/switcher.svelte';
 	import { getActionSummaryTitle } from '../summary';
 
 	const context = getContext<UnicoveContext>('state');
@@ -150,65 +149,75 @@
 				<DateTime {datetime} />
 			</Transaction>
 		{:else}
-			<DateTime {datetime} />
+			<span class="text-muted text-sm leading-none tabular-nums">
+				<DateTime {datetime} />
+			</span>
 		{/if}
 	{/if}
 {/snippet}
 
 {#snippet Header()}
-	<Switcher class="items-center gap-x-2 gap-y-2">
-		<div class="flex items-center gap-4">
-			<picture class="bg-surface-container-high grid size-14 place-items-center rounded-full">
-				<SquareTerminal />
-			</picture>
+	<div
+		class="grid grid-cols-[auto_1fr] gap-x-2 gap-y-1.5 @lg:grid-cols-[auto_1fr_1fr] @lg:grid-rows-2"
+	>
+		<picture
+			class="bg-surface-container-high row-span-3 grid size-12 place-items-center rounded-full @lg:row-span-full"
+		>
+			<SquareTerminal />
+		</picture>
 
-			<div class="grid gap-1 text-nowrap">
-				{#if summaryTitle}
-					<div class="text-on-surface leading-none md:text-lg">
-						{summaryTitle}
-					</div>
-					<div>
-						{@render DateTimeTransactionLink()}
-					</div>
-				{:else}
-					<div>
-						<Contract
-							name={action.account}
-							action={action.name}
-							class="text-on-surface leading-none md:text-lg"
-						>
-							{action.name}
-						</Contract>
-						::
-						<Contract name={action.account} class="text-muted leading-none">
-							{action.account}
-						</Contract>
-					</div>
-					<div>
-						{@render DateTimeTransactionLink()}
-					</div>
-				{/if}
+		{#if summaryTitle}
+			<div
+				class="text-on-surface col-start-2 row-start-1 self-end text-lg leading-none font-semibold @lg:col-start-2"
+			>
+				{summaryTitle}
 			</div>
-		</div>
 
-		<div class="grid gap-1 text-right text-nowrap">
-			{#if id}
-				<Transaction {id} class="block leading-none md:text-lg" />
-			{/if}
+			<span class="col-start-2 row-start-2 grid content-start self-start">
+				{@render DateTimeTransactionLink()}
+			</span>
+		{:else}
+			<span class="flex gap-1 self-end text-nowrap">
+				<Contract
+					name={action.account}
+					action={action.name}
+					class="text-on-surface text-lg leading-none font-semibold"
+				>
+					{action.name}
+				</Contract>
+				<span class="text-muted text-lg leading-none">::</span>
+				<Contract name={action.account} class="text-muted text-lg leading-none">
+					{action.account}
+				</Contract>
+			</span>
 
-			{#if summaryTitle}
-				<div>
-					<Contract name={action.account} class="text-muted leading-none">
-						{action.account}
-					</Contract>
-					::
-					<Contract name={action.account} action={action.name} class="text-muted leading-none">
-						{action.name}
-					</Contract>
-				</div>
-			{:else}{/if}
-		</div>
-	</Switcher>
+			<div class="col-start-2 row-start-2 grid content-start">
+				{@render DateTimeTransactionLink()}
+			</div>
+		{/if}
+
+		<!-- Right -->
+		{#if id}
+			<Transaction
+				{id}
+				class="col-start-2 self-end text-lg leading-none text-nowrap @lg:col-start-3 @lg:justify-self-end"
+			/>
+		{/if}
+
+		{#if summaryTitle}
+			<span
+				class="col-start-2 flex content-start gap-1 self-start text-sm text-nowrap @lg:col-start-3 @lg:justify-self-end"
+			>
+				<Contract name={action.account} class="text-muted leading-none">
+					{action.account}
+				</Contract>
+				<span class="text-muted leading-none">::</span>
+				<Contract name={action.account} action={action.name} class="text-muted leading-none">
+					{action.name}
+				</Contract>
+			</span>
+		{/if}
+	</div>
 {/snippet}
 
 {#snippet Footer()}
@@ -247,7 +256,7 @@
 	</div>
 {/snippet}
 
-<Card class="gap-4">
+<Card class="@container gap-4">
 	{@render Header()}
 	<svelte:boundary
 		onerror={(error) =>

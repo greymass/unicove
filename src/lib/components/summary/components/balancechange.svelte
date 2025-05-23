@@ -22,7 +22,7 @@
 
 <Row>
 	<Chip>Update</Chip>
-	<span class="text-right">
+	<span class="text-right text-nowrap">
 		{#if Asset.from(delta).units.gt(ZeroUnits)}+{/if}
 		<AssetElement value={Asset.from(delta)} variant="full" />
 	</span>
@@ -31,7 +31,7 @@
 
 	<EqualIcon class="size-6" />
 
-	<span>
+	<span class="text-nowrap">
 		<span>New Balance:</span>
 		<AssetElement value={Asset.from(balance)} variant="full" />
 	</span>
