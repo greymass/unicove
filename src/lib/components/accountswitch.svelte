@@ -260,10 +260,10 @@
 											{/if}
 										</div>
 
-										<div class="text-left font-medium">
-											<div>{session.actor}@{session.permission}</div>
+										<div class="flex flex-col gap-px text-left font-medium">
+											<span class="leading-none">{session.actor}@{session.permission}</span>
 											{#if session.walletPlugin.id === 'wallet-plugin-multisig'}
-												<div class="text-xs">
+												<div class="text-xs font-normal">
 													↳ {m.common_account_multisig_using_account({
 														account: session.walletPlugin.data.session.actor
 													})}
