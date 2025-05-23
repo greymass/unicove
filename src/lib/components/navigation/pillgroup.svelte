@@ -64,7 +64,7 @@
 </menu>
 
 <div
-	class="border-outline-variant focus-visible:border-solar-500 flex flex-col rounded-lg border-2 bg-transparent lg:hidden"
+	class="border-outline focus-visible:border-solar-500 flex flex-col rounded-lg border-2 bg-transparent lg:hidden"
 >
 	<button
 		class="text-on-surface focus-visible:outline-solar-500 flex h-12 items-center justify-between rounded-[inherit] px-4 text-base font-medium focus-visible:outline"
@@ -80,7 +80,7 @@
 
 	{#if $open}
 		<menu
-			class="border-outline-variant bg-surface z-50 flex max-h-[300px] flex-col overflow-y-auto rounded-lg border py-2 shadow-sm focus:ring-0!"
+			class="border-outline bg-surface z-50 flex max-h-[300px] flex-col overflow-y-auto rounded-lg border py-2 shadow-sm focus:ring-0!"
 			use:melt={$menu}
 			transition:fade={{ duration: 100 }}
 		>
