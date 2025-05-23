@@ -25,7 +25,7 @@
 
 			<Card title="Unstaking Balances Is A Long Title">
 				<table class="table-styles">
-					<thead class="border-outline-variant border-b-2">
+					<thead class="border-outline border-b-2">
 						<tr class="caption font-medium">
 							<th class="p-4 text-left">Amount</th>
 							<th class="p-4 text-right">Date available</th>

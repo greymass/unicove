@@ -33,7 +33,7 @@
 		</svg>
 	</div>
 
-	<hr class="bg-outline-variant h-px border-0" />
+	<hr class="bg-outline h-px border-0" />
 
 	<div class="flex items-center justify-between font-medium">
 		<div class="bg-surface-container mt-1 h-4 w-16 animate-pulse rounded-full"></div>
