@@ -22,18 +22,6 @@
 	--color-black: #000;
 	--color-white: #fff;
 
-	--color-red-50: #fef2f2;
-	--color-red-100: #fee2e2;
-	--color-red-200: #fecaca;
-	--color-red-300: #fca5a5;
-	--color-red-400: #f87171;
-	--color-red-500: #ef4444;
-	--color-red-600: #dc2626;
-	--color-red-700: #b91c1c;
-	--color-red-800: #991b1b;
-	--color-red-900: #7f1d1d;
-	--color-red-950: #450a0a;
-
 	--color-green-50: #f0fdf4;
 	--color-green-100: #dcfce7;
 	--color-green-200: #bbf7d0;
@@ -45,18 +33,6 @@
 	--color-green-800: #166534;
 	--color-green-900: #14532d;
 	--color-green-950: #052e16;
-
-	--color-shark-50: #f4f6f7;
-	--color-shark-100: #e2e8eb;
-	--color-shark-200: #c9d3d8;
-	--color-shark-300: #a3b3bd;
-	--color-shark-400: #768c9a;
-	--color-shark-500: #5a7080;
-	--color-shark-600: #4e5e6c;
-	--color-shark-700: #434f5b;
-	--color-shark-800: #3c454e;
-	--color-shark-900: #363c43;
-	--color-shark-950: #1b1f24;
 
 	--color-mine-50: #f4f5f7;
 	--color-mine-100: #e4e7e9;
@@ -128,6 +104,8 @@
 	--color-on-background: inherit;
 }
 
+@custom-variant dark (&:where([data-scheme=dark], [data-scheme=dark] *));
+
 @utility dark-scheme {
 	--color-primary: oklch(from var(--theme-seed) 0.82 c h);
 	--color-primary-hover: oklch(from var(--theme-seed) 0.9 c h);
@@ -146,26 +124,23 @@
 	--color-success-container: oklch(0.42 0.17 var(--success-hue));
 	--color-on-success-container: oklch(0.92 0.042 var(--success-hue));
 
-	--color-outline: oklch(from var(--color-surface) 0.65 c h);
-	--color-outline-variant: oklch(from var(--color-surface) 0.4 c h);
+	--color-outline: oklch(from var(--color-primary) 0.65 0.08 h);
+	--color-outline-variant: oklch(from var(--color-outline) 0.4 0.05 h);
 
-	/* --color-surface: oklch( */
-	/* 	from color-mix(in oklab, var(--color-shark-950) 100%, var(--color-primary) 1.5%) l c h */
-	/* ); */
+	--color-background: oklch(from var(--color-primary) 0.24 0.02 h);
+	--color-on-background: var(--color-on-surface);
 
-	--color-surface: oklch(from var(--color-primary) 0.24 0.001 h);
+	/* In dark mode, the surfaces are derived from the background */
+	--color-surface: oklch(from var(--color-background) calc(l + 0.02) c h);
 	--color-on-surface: oklch(from var(--color-surface) 0.95 c h);
 	--color-on-surface-variant: oklch(from var(--color-surface) 0.8 calc(c * 2) h);
 
-	/* Surface Containers ranked by emphasis (contrast) */
+	/* Surface Containers are named by emphasis (contrast) relative to the Surface color */
 	--color-surface-container-lowest: oklch(from var(--color-surface) calc(l - 0.01) c h);
 	--color-surface-container-low: oklch(from var(--color-surface) calc(l + 0.01) c h);
 	--color-surface-container: oklch(from var(--color-surface) calc(l + 0.023) c h);
 	--color-surface-container-high: oklch(from var(--color-surface) calc(l + 0.05) c h);
 	--color-surface-container-highest: oklch(from var(--color-surface) calc(l + 0.1) c h);
-
-	--color-background: var(--color-surface);
-	--color-on-background: var(--color-on-surface);
 }
 
 @utility light-scheme {
@@ -186,20 +161,22 @@
 	--color-success-container: oklch(0.92 0.042 var(--success-hue));
 	--color-on-success-container: oklch(0.42 0.17 var(--success-hue));
 
-	--color-outline: oklch(from var(--color-surface) 0.5664 c h);
-	--color-outline-variant: oklch(from var(--color-surface) 0.8267 c h);
+	--color-outline: oklch(from var(--color-primary) 0.57 0.08 h);
+	--color-outline-variant: oklch(from var(--color-outline) 0.83 0.04 h);
 
 	--color-surface: oklch(from var(--color-primary) 0.98 0.007 h);
 	--color-on-surface: oklch(from var(--color-surface) 0.22 c h);
 	--color-on-surface-variant: oklch(from var(--color-surface) 0.4 0.015 h);
 
+	/* Surface Containers are named by emphasis (contrast) relative to the Surface color */
 	--color-surface-container-lowest: oklch(from var(--color-surface) calc(l + 0.01) 0.01 h);
 	--color-surface-container-low: oklch(from var(--color-surface) calc(l - 0.01) 0.01 h);
 	--color-surface-container: oklch(from var(--color-surface) calc(l - 0.023) 0.01 h);
 	--color-surface-container-high: oklch(from var(--color-surface) calc(l - 0.05) 0.01 h);
 	--color-surface-container-highest: oklch(from var(--color-surface) calc(l - 0.1) 0.01 h);
 
-	--color-background: var(--color-surface);
+	/* In light mode, since the surfaces are near-white the background is derived from the surface */
+	--color-background: var(--color-surface-container-high);
 	--color-on-background: var(--color-on-surface);
 }
 
@@ -214,6 +191,11 @@
 	}
 
 	/* Themes */
+	[data-theme='vaulta'] {
+		--theme-seed: #2e3bff;
+	}
+
+	/* Vaulta is the default theme. Theme tweaks are made for other networks */
 	[data-theme='eos'] {
 		--theme-seed: rgb(248 187 113);
 	}
@@ -221,28 +203,25 @@
 	[data-theme='telos'] {
 		--theme-seed: rgb(207 189 254);
 		&[data-scheme='dark'] {
-			--color-surface: oklch(from var(--color-primary) 0.24 0.02 h);
+			--color-background: oklch(from var(--color-primary) 0.24 0.02 h);
 		}
 	}
 
 	[data-theme='jungle4'] {
 		--theme-seed: #2e9e87;
 		&[data-scheme='dark'] {
-			--color-surface: oklch(from var(--color-primary) 0.24 0.005 h);
-		}
-	}
-
-	[data-theme='vaulta'] {
-		--theme-seed: #2e3bff;
-		&[data-scheme='dark'] {
-			--color-surface: oklch(from var(--color-primary) 0.24 0.02 h);
+			--color-background: oklch(from var(--color-primary) 0.24 0.005 h);
 		}
 	}
 
 	[data-theme='wax'] {
-		--theme-seed: rgb(255 183 123);
+		--theme-seed: oklch(0.74 0.1673 59.6);
+		--color-primary: oklch(from var(--theme-seed) 0.82 c h);
+		--color-primary-hover: oklch(from var(--theme-seed) 0.9 c h);
+		--color-on-primary: oklch(from var(--theme-seed) 0.2 c h);
+		--color-background: oklch(from var(--color-primary) 0.94 0.005 h);
 		&[data-scheme='dark'] {
-			--color-surface: oklch(from var(--color-primary) 0.24 0.001 h);
+			--color-background: oklch(from var(--color-primary) 0.24 0.001 h);
 		}
 	}
 
@@ -305,7 +284,7 @@
 
 @utility card {
 	/* Layout */
-	@apply bg-surface-container grid gap-4 rounded-xl p-5;
+	@apply bg-surface grid gap-4 rounded-xl p-5;
 }
 
 @utility layout-stack {

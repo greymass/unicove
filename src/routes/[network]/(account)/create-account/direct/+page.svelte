@@ -380,7 +380,7 @@
 			})}
 		</Button>
 		{#if !context.wharf.session}
-			<p class="text-center text-red-500">
+			<p class="text-error text-center">
 				{m.common_create_account_login_first()}
 			</p>
 		{/if}

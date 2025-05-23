@@ -23,7 +23,7 @@
 		{/if}
 	</DT>
 	<div
-		class="grow bg-red-500 before:content-['ERROR_Missing_DD_element_'] has-[dd]:bg-transparent has-[dd]:before:hidden"
+		class="bg-error-container grow before:content-['ERROR_Missing_DD_element_'] has-[dd]:bg-transparent has-[dd]:before:hidden"
 	>
 		{#if description}
 			<DD>{description}</DD>

@@ -38,7 +38,7 @@
 
 	{#if action && action.visible}
 		<div class="col-span-2 col-start-2 row-start-1 text-right @xs:col-span-1 @xs:col-start-3">
-			<Button variant="tertiary" class="justify-end" href={action.href}>
+			<Button variant="text" class="justify-end" href={action.href}>
 				{action.text}
 			</Button>
 		</div>

@@ -47,10 +47,10 @@
 				</div>
 			</div>
 
-			<div class="grid w-full grid-cols-1 gap-2 @sm:grid-cols-2 @3xl:w-auto">
+			<div class="grid w-full grid-cols-1 items-center gap-2 @sm:grid-cols-2 @3xl:w-auto">
 				<Button
-					class="text-white ring-white/10"
-					variant="secondary"
+					class="text-white"
+					variant="text"
 					href="https://www.vaulta.com/resources/vaulta-token-swap-a-begins-may-14"
 				>
 					{m.common_learn_more()}

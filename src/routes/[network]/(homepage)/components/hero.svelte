@@ -7,12 +7,13 @@
 	import telos from '$lib/assets/hero/telos/logo.svg';
 	import kylin from '$lib/assets/hero/kylin/logo.webp';
 	import vaultaLogo from '$lib/assets/hero/vaulta/vector.svg';
-	// import waxLight from '$lib/assets/hero/wax/light.png?enhanced';
+	import waxLight from '$lib/assets/hero/wax/light.png?enhanced';
 	import waxDark from '$lib/assets/hero/wax/dark.png?enhanced';
 	import UnicoveOutline from '$lib/assets/unicove-outline.svg';
 
 	import * as m from '$lib/paraglide/messages';
 	import Button from '$lib/components/button/button.svelte';
+	import { browser } from '$app/environment';
 
 	interface Props {
 		networkName: string;
@@ -20,6 +21,8 @@
 	}
 
 	let { networkName, networkShortname }: Props = $props();
+
+	let darkMode = $state(browser && localStorage.getItem('color-scheme') === 'dark');
 
 	const logo = {
 		vaulta: vaultaLogo,
@@ -152,14 +155,24 @@
 				width="512"
 			/>
 
-			<!-- Network Logo -->
-			<enhanced:img
-				class="absolute inset-y-0 right-0 size-full object-contain md:relative"
-				src={waxDark}
-				alt={networkName}
-				fetchpriority="high"
-				loading="eager"
-			/>
+			<!-- Wax Logo -->
+			{#if darkMode}
+				<enhanced:img
+					class="absolute inset-y-0 right-0 size-full object-contain md:relative"
+					src={waxDark}
+					alt={networkName}
+					fetchpriority="high"
+					loading="eager"
+				/>
+			{:else}
+				<enhanced:img
+					class="absolute inset-y-0 right-0 size-full object-contain md:relative"
+					src={waxLight}
+					alt={networkName}
+					fetchpriority="high"
+					loading="eager"
+				/>
+			{/if}
 		</div>
 
 		<div
@@ -199,7 +212,7 @@
 				})}.
 			</h1>
 			<p
-				class="text-muted mb-2 max-w-md rounded-lg text-xl leading-tight text-pretty backdrop-blur lg:text-xl lg:leading-tight"
+				class="text-muted mb-2 max-w-md rounded-lg text-xl leading-tight text-pretty lg:text-xl lg:leading-tight"
 			>
 				{m.homepage_hero_description({
 					network: networkName
@@ -218,102 +231,4 @@
 			</div>
 		</Stack>
 	</section>
-
-	<!-- Noise -->
-	<svg
-		xmlns="http://www.w3.org/2000/svg"
-		xmlns:xlink="http://www.w3.org/1999/xlink"
-		width="300"
-		height="300"
-		class="hidden"
-	>
-		<filter id="nd" x="0" y="0" width="100%" height="100%">
-			<feTurbulence type="fractalNoise" baseFrequency="0.4" />
-			<feColorMatrix type="saturate" values="0" />
-			<feBlend in="SourceGraphic" mode="multiply" />
-		</filter>
-
-		<filter id="nl" x="0" y="0" width="100%" height="100%">
-			<feTurbulence type="fractalNoise" baseFrequency="0.5" />
-			<feColorMatrix type="saturate" values="0" />
-			<feBlend in="SourceGraphic" mode="screen" />
-		</filter>
-	</svg>
-
-	<style>
-		body {
-			position: relative;
-			contain: paint;
-		}
-
-		[data-scheme='light'] {
-			body::before {
-				background: linear-gradient(to bottom, transparent 60svh, var(--color-background) 95svh),
-					radial-gradient(
-						farthest-side at 150% 30%,
-						var(--color-background),
-						#2e3bff30 30%,
-						oklch(from var(--color-primary) l c calc(h - 10) / 0.4) 45%,
-						oklch(from var(--color-primary) l c calc(h - 10) / 0.6) 50%,
-						transparent 65%
-					),
-					radial-gradient(
-						circle at top 0rem left -60%,
-						var(--color-background),
-						#2e3bff50 5%,
-						oklch(from var(--color-primary) l c calc(h - 10) / 0.9) 10%,
-						transparent 50%
-					),
-					var(--color-background);
-				background-repeat: no-repeat;
-				background-size:
-					100% 100%,
-					100% 300vh,
-					100% 100vh;
-				position: absolute;
-				inset: 0;
-				content: '';
-				filter: url(#nl);
-			}
-		}
-
-		body::before {
-			background: linear-gradient(to bottom, transparent 70svh, var(--color-background) 90svh),
-				radial-gradient(
-					farthest-side at 150% 30%,
-					#190d1c,
-					#190d1c 30%,
-					#2e3bff30 40%,
-					#667cff80 52%,
-					#667cff95 56%,
-					#667cff90 57%,
-					transparent 65%
-				),
-				radial-gradient(
-					circle at top 0rem left -40%,
-					#190d1c,
-					#190d1c 10%,
-					#2e3bff50 15%,
-					#667cff30 35%,
-					transparent 50%
-				),
-				#190d1c;
-			background-repeat: no-repeat;
-			background-size:
-				100% 100%,
-				100% 300vh,
-				100% 100vh;
-			position: absolute;
-			inset: 0;
-			content: '';
-			filter: url(#nd);
-		}
-
-		/* Safari can't use the noise filter */
-		@supports (-webkit-hyphens: none) {
-			body::before {
-				filter: none;
-			}
-		}
-	</style>
 {/snippet}

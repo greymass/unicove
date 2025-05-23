@@ -96,7 +96,7 @@
 							</td>
 							<td class="text-right">
 								{#if manager.accountHasApproved(participant)}
-									<span class="text-green-300">{m.msig_approved()}</span>
+									<span class="text-success">{m.msig_approved()}</span>
 								{:else}
 									<span class="text-muted">{m.msig_requested()}</span>
 								{/if}
@@ -142,7 +142,7 @@
 					>
 				{:else}
 					<Button
-						class="bg-green-400 text-green-950 hover:bg-green-300 hover:active:bg-green-500"
+						class="bg-success text-on-success"
 						variant="primary"
 						onclick={() => manager.approve()}
 						disabled={context.wharf.transacting}>{m.common_approve()}</Button
@@ -189,7 +189,7 @@
 	#msig-vis {
 		background: linear-gradient(
 			to right,
-			var(--color-green-400) 50%,
+			var(--color-success) 50%,
 			var(--color-surface-container) 50%
 		);
 		background-size: 200% 100%;
@@ -199,7 +199,7 @@
 	#msig-vis > div {
 		background: linear-gradient(
 			to right,
-			var(--color-green-950) 50%,
+			var(--color-on-success) 50%,
 			var(--color-on-surface-variant) 50%
 		);
 		background-size: 200% 100%;
