@@ -20,7 +20,7 @@
 
 <button
 	class={cn(
-		'border-outline-variant focus:border-primary flex items-center justify-between gap-2 border-2 bg-transparent pr-3 pl-4 font-medium transition-opacity   hover:opacity-90 focus:outline-hidden data-[variant=form]:h-12 data-[variant=form]:rounded-lg data-[variant=pill]:h-10 data-[variant=pill]:rounded-full',
+		'border-outline-variant focus:border-primary flex cursor-pointer items-center justify-between gap-2 border-2 bg-transparent pr-3 pl-4 font-medium transition-opacity   hover:opacity-90 focus:outline-hidden data-[variant=form]:h-12 data-[variant=form]:rounded-lg data-[variant=pill]:h-10 data-[variant=pill]:rounded-full',
 		props.disabled && 'text-on-surface/40 border-on-surface/12 opacity-30 hover:opacity-30',
 		className
 	)}
