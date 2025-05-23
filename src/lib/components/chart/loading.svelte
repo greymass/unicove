@@ -37,12 +37,6 @@
 
 	<div class="flex items-center justify-between font-medium">
 		<div class="bg-surface-container mt-1 h-4 w-16 animate-pulse rounded-full"></div>
-		<div class="flex gap-4">
-			<div class="flex items-center gap-1">
-				<div class="size-4 rounded-sm bg-[#00ED97]"></div>
-				<span class="text-[#00ED97]">{props.pair}</span>
-			</div>
-		</div>
 		<div class="bg-surface-container mt-1 h-4 w-16 animate-pulse rounded-full"></div>
 	</div>
 </Card>

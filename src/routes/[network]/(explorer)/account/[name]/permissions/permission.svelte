@@ -54,7 +54,7 @@
 	class:pt-6={level !== 0}
 >
 	<dl
-		class="bg-surface-container-high z-20 col-span-full space-y-1 rounded-t-lg px-4 py-3 md:col-span-1 md:rounded-l-lg md:rounded-r-none"
+		class="bg-surface-container z-20 col-span-full space-y-1 rounded-t-lg px-4 py-3 md:col-span-1 md:rounded-l-lg md:rounded-r-none"
 	>
 		<div>
 			<dt class="sr-only">{m.common_permission_name()}</dt>
@@ -95,7 +95,7 @@
 		{/if}
 	</dl>
 
-	<div class="bg-surface-container rounded-b-lg px-4 py-3 md:rounded-l-none md:rounded-r-lg">
+	<div class="bg-surface rounded-b-lg px-4 py-3 md:rounded-l-none md:rounded-r-lg">
 		{#if anyPermissions}
 			<table class="grid grid-cols-[auto_1fr_auto] gap-x-4 gap-y-2">
 				<thead class="col-span-full grid grid-cols-subgrid">
