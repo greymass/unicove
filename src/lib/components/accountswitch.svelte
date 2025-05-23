@@ -61,7 +61,7 @@
 		elements: { trigger, overlay, content, close, portalled },
 		states: { open }
 	} = createDialog({
-		defaultOpen: true, // dev only
+		// defaultOpen: true, // dev only
 		preventScroll: false,
 		onOpenChange: resetAddingAccount
 	});
