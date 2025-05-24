@@ -31,7 +31,12 @@ import { type QueuedTransaction, StatusType, queueTransaction } from '$lib/wharf
 import { chainMapper } from '$lib/wharf/chains';
 import type { SettingsState } from '$lib/state/settings.svelte';
 import type { NetworkState } from '$lib/state/network.svelte';
-import { chainDefs, msigTransactPlugins, transactPlugins, walletPlugins } from '$lib/wharf/plugins';
+import {
+	chainDefs,
+	msigTransactPlugins,
+	transactPlugins,
+	getWalletPlugins
+} from '$lib/wharf/plugins';
 
 export class WharfState {
 	public abiCache?: ABICache;
@@ -54,7 +59,7 @@ export class WharfState {
 		}
 	}
 
-	init(network: NetworkState) {
+	async init(network: NetworkState) {
 		if (!browser) {
 			throw new Error('Wharf should only be used in the browser');
 		}
@@ -63,6 +68,9 @@ export class WharfState {
 		this.contractKit = new ContractKit({
 			client: network.client
 		});
+
+		// Get wallet plugins asynchronously to handle dynamic imports
+		const walletPlugins = await getWalletPlugins();
 
 		if (this.settings.data.advancedMode) {
 			walletPlugins.push(new WalletPluginCleos());
@@ -96,9 +104,9 @@ export class WharfState {
 		});
 	}
 
-	public setSettings(network: NetworkState, settings: SettingsState) {
+	public async setSettings(network: NetworkState, settings: SettingsState) {
 		this.settings = settings;
-		this.init(network);
+		await this.init(network);
 	}
 
 	public setWalletSetting(key: string, value: unknown) {
