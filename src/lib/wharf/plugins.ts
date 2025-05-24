@@ -7,6 +7,7 @@ import {
 	PUBLIC_WALLET_METAMASK,
 	PUBLIC_WALLET_SCATTER,
 	PUBLIC_WALLET_TOKENPOCKET,
+	PUBLIC_WALLET_WEB_AUTHENTICATOR,
 	PUBLIC_WALLET_WOMBAT
 } from '$env/static/public';
 import type { ChainDefinition } from '@wharfkit/common';
@@ -20,6 +21,7 @@ import { WalletPluginMultiSig } from '$lib/wharf/plugins/multisig';
 import { WalletPluginPrivateKey } from '@wharfkit/wallet-plugin-privatekey';
 import { WalletPluginScatter } from '@wharfkit/wallet-plugin-scatter';
 import { WalletPluginTokenPocket } from '@wharfkit/wallet-plugin-tokenpocket';
+import { WalletPluginWebAuthenticator } from '@wharfkit/wallet-plugin-web-authenticator';
 import { WalletPluginWombat } from '@wharfkit/wallet-plugin-wombat';
 
 import { TransactPluginResourceProvider } from '@wharfkit/transact-plugin-resource-provider';
@@ -56,6 +58,14 @@ if (isENVTrue(PUBLIC_WALLET_SCATTER)) {
 
 if (isENVTrue(PUBLIC_WALLET_TOKENPOCKET)) {
 	baseWalletPlugins.push(new WalletPluginTokenPocket());
+}
+
+if (isENVTrue(PUBLIC_WALLET_WEB_AUTHENTICATOR)) {
+	baseWalletPlugins.push(
+		new WalletPluginWebAuthenticator({
+			webAuthenticatorUrl: 'https://adding-ledger-plugin.web-authenticator-a83.pages.dev'
+		})
+	);
 }
 
 if (isENVTrue(PUBLIC_WALLET_WOMBAT)) {
