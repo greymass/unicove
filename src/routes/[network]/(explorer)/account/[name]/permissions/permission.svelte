@@ -9,9 +9,9 @@
 	import { Clock, Edit, LogIn } from '@lucide/svelte';
 	import * as m from '$lib/paraglide/messages';
 	import { Name, PermissionLevel, UInt64 } from '@wharfkit/antelope';
-	import type { TreePermission } from './+page';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
+	import type { TreePermission } from '$lib/types/permission';
 
 	interface Props {
 		account: Name;
