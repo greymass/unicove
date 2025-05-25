@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { getContext, onMount } from 'svelte';
 	import { goto } from '$lib/utils';
-	import { getSnapsProvider, checkIsFlask } from '@wharfkit/wallet-plugin-metamask';
 
 	import { Button } from 'unicove-components';
 	import Box from '$lib/components/layout/box/box.svelte';
-	import { checkForSnap, requestSnap } from '$lib/metamask-snap';
+	import { requestPublicKeys, requestSnap } from '$lib/metamask-snap';
+	import MetaMaskInstall from '$lib/components/wallets/metamask/install.svelte';
+	import MetaMaskSnap from '$lib/components/wallets/metamask/snap.svelte';
 	import Metamask from '$lib/assets/metamask.svg';
-	import { MetaMaskState } from '$lib/state/metamask.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
 	import { Cluster, Stack } from 'unicove-components';
 	import { DD, DL, DLRow } from 'unicove-components';
@@ -19,8 +19,6 @@
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');
 
-	let metaMaskState: MetaMaskState = new MetaMaskState();
-
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	let packageInfo: Record<string, any> = $state({});
 	let latestVersion: string | undefined = $state();
@@ -29,46 +27,28 @@
 		context.wharf.session?.walletPlugin.id === 'wallet-plugin-metamask'
 	);
 
-	let currentVersion = $derived(metaMaskState.installedSnap?.version);
+	let currentVersion = $derived(context.metamask.installedSnap?.version);
 	let needsUpdate = $derived(
-		latestVersion && metaMaskState.installedSnap?.version !== latestVersion
+		latestVersion && context.metamask.installedSnap?.version !== latestVersion
 	);
 
-	$effect(() => {
-		if (metaMaskState.isMetaMaskReady) {
-			if (metaMaskState.snapProvider !== null) {
-				metaMaskState.snapOrigin = data.network.snapOrigin;
-				checkIsFlask(metaMaskState.snapProvider).then((isFlask) => {
-					metaMaskState.isFlask = isFlask;
-					checkForSnap(metaMaskState).then((isInstalled) => {
-						metaMaskState.isInstalled = isInstalled;
-						if (isInstalled && context.wharf.metamaskPlugin) {
-							connect();
-							context.wharf.metamaskPlugin
-								.retrievePublicKeys(data.network.chain.id)
-								.then((publicKey) => {
-									metaMaskState.publicKey = publicKey.activePublicKey;
-									metaMaskState.ownerKey = publicKey.ownerPublicKey;
-								});
-						}
-					});
-				});
-			}
-		}
-	});
+	async function connect() {
+		await requestSnap(context.metamask);
+		await requestPublicKeys(context.metamask, context.wharf);
+	}
 
 	onMount(async () => {
 		if (!data.network.snapOrigin) {
 			return goto(`/404`);
 		}
 		await getLatestSnapVersion();
-
-		metaMaskState.snapProvider = await getSnapsProvider();
 	});
 
-	async function connect() {
-		await requestSnap(metaMaskState);
-	}
+	$effect(() => {
+		if (context.metamask.isInstalled) {
+			connect();
+		}
+	});
 
 	async function getLatestSnapVersion() {
 		if (!data.network.snapOrigin?.includes('npm:')) return;
@@ -90,7 +70,7 @@
 
 		try {
 			// Force install latest version by passing it explicitly
-			await requestSnap(metaMaskState, latestVersion);
+			await requestSnap(context.metamask, latestVersion);
 		} catch (error) {
 			console.error('Error updating snap:', error);
 			alert(`Error updating the ${data.network.config.metamask?.name} snap. Please try again.`);
@@ -174,29 +154,8 @@
 		</div>
 
 		<Box class="grid content-start justify-items-start gap-4 py-8 text-pretty *:shrink">
-			{#if !metaMaskState.isMetaMaskReady}
-				<h2 class="text-xl font-semibold">
-					{m.metamask_install_title({
-						name: productName
-					})}
-				</h2>
-				<Stack class="mb-1 gap-2">
-					<p class="leading-snug">
-						{m.metamask_install_p1({
-							name: productName,
-							network: networkName
-						})}
-					</p>
-					<p class="leading-snug">
-						{m.metamask_install_p2({
-							name: productName
-						})}
-					</p>
-				</Stack>
-				<Button href={'https://metamask.io/download/'} blank>{m.metamask_install_action()}</Button>
-				<p class="text-xs text-balance">
-					{m.metamask_install_action_note()}
-				</p>
+			{#if !context.metamask.isMetaMaskReady}
+				<MetaMaskInstall {networkName} {productName} />
 			{:else if currentVersion}
 				<h2 class="text-xl font-semibold">
 					{m.metamask_install_update({
@@ -260,25 +219,7 @@
 					{/if}
 				{/if}
 			{:else}
-				<h2 class="text-xl font-semibold">
-					{m.metamask_install_add_to_metamask({
-						name: productName
-					})}
-				</h2>
-				<Stack class="mb-1 gap-2">
-					<p class="leading-snug">{m.metamask_install_add_p1()}</p>
-					<p class="leading-snug">
-						{m.metamask_install_add_p2({
-							name: productName,
-							network: networkName
-						})}
-					</p>
-				</Stack>
-				<Button onclick={connect}
-					>{m.homepage_metamask_wallet_install({
-						name: productName
-					})}</Button
-				>
+				<MetaMaskSnap {networkName} {productName} {connect} />
 			{/if}
 		</Box>
 	</div>
@@ -287,13 +228,13 @@
 {#if context.settings.data.debugMode}
 	<Code
 		json={{
-			snapOrigin: metaMaskState.snapOrigin,
-			isFlask: metaMaskState.isFlask,
-			isInstalled: metaMaskState.isInstalled,
-			error: metaMaskState.error,
-			installedSnap: metaMaskState.installedSnap,
-			publicKey: metaMaskState.publicKey,
-			ownerKey: metaMaskState.ownerKey
+			snapOrigin: context.metamask.snapOrigin,
+			isFlask: context.metamask.isFlask,
+			isInstalled: context.metamask.isInstalled,
+			error: context.metamask.error,
+			installedSnap: context.metamask.installedSnap,
+			publicKey: context.metamask.publicKey,
+			ownerKey: context.metamask.ownerKey
 		}}
 	/>
 {/if}
@@ -479,18 +420,18 @@
 	<div class="w-80">
 		<Stack class="gap-4">
 			{#if context.settings.data.advancedMode}
-				{#if metaMaskState.publicKey || metaMaskState.ownerKey}
+				{#if context.metamask.publicKey || context.metamask.ownerKey}
 					<h2 class="text-2xl font-semibold">{m.common_your_public_keys()}</h2>
-					{#if metaMaskState.publicKey}
+					{#if context.metamask.publicKey}
 						<p>{m.metamask_public_key_active()}</p>
-						<TextInput bind:value={metaMaskState.publicKey} disabled>
-							<CopyButton data={String(metaMaskState.publicKey)} />
+						<TextInput bind:value={context.metamask.publicKey} disabled>
+							<CopyButton data={String(context.metamask.publicKey)} />
 						</TextInput>
 					{/if}
-					{#if metaMaskState.ownerKey}
+					{#if context.metamask.ownerKey}
 						<p>{m.metamask_public_key_owner()}</p>
-						<TextInput bind:value={metaMaskState.ownerKey} disabled>
-							<CopyButton data={String(metaMaskState.ownerKey)} />
+						<TextInput bind:value={context.metamask.ownerKey} disabled>
+							<CopyButton data={String(context.metamask.ownerKey)} />
 						</TextInput>
 					{/if}
 				{/if}

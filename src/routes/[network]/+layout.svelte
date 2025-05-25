@@ -26,6 +26,9 @@
 	import Unicovelogo from '$lib/assets/unicovelogo.svelte';
 	import MobileNavigation from '$lib/components/navigation/mobilenavigation.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte.js';
+	import { MetaMaskState } from '$lib/state/metamask.svelte.js';
+	import { checkForSnap } from '$lib/metamask-snap.js';
+	import { checkIsFlask, getSnapsProvider } from '@wharfkit/wallet-plugin-metamask';
 
 	let { children, data } = $props();
 
@@ -33,6 +36,7 @@
 	const settings = new SettingsState();
 	const wharf = new WharfState(settings);
 	const initialMarketValue = new MarketState(data.network, settings);
+	let metaMaskState = new MetaMaskState();
 	const initialNetworkValue = new NetworkValueState({
 		network: data.network,
 		market: initialMarketValue,
@@ -52,6 +56,9 @@
 		},
 		get history() {
 			return history;
+		},
+		get metamask() {
+			return metaMaskState;
 		},
 		get network() {
 			return data.network;
@@ -159,6 +166,18 @@
 		});
 	});
 
+	$effect(() => {
+		if (metaMaskState.isMetaMaskReady && metaMaskState.snapProvider !== null) {
+			metaMaskState.snapOrigin = data.network.snapOrigin;
+			checkIsFlask(metaMaskState.snapProvider).then((isFlask) => {
+				metaMaskState.isFlask = isFlask;
+				checkForSnap(metaMaskState).then((isInstalled) => {
+					metaMaskState.isInstalled = isInstalled;
+				});
+			});
+		}
+	});
+
 	// Number of ms between network updates
 	const ACCOUNT_UPDATE_INTERVAL = Number(PUBLIC_ACCOUNT_UPDATE_INTERVAL);
 	const NETWORK_UPDATE_INTERVAL = Number(PUBLIC_NETWORK_UPDATE_INTERVAL);
@@ -191,6 +210,11 @@
 		// Load markets based off chain
 		setMarket(data.network);
 		setMarketNetwork(data.network);
+
+		// Set the MetaMask snap provider on state
+		getSnapsProvider().then((provider) => {
+			metaMaskState.snapProvider = provider;
+		});
 
 		return () => {
 			clearInterval(accountInterval);
