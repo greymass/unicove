@@ -1,8 +1,8 @@
 <script lang="ts">
 	import Button from '$lib/components/button/button.svelte';
 	import { page } from '$app/state';
-	import { cn } from '$lib/utils';
-	import { createSelect, melt } from '@melt-ui/svelte';
+	import { cn, goto } from '$lib/utils';
+	import { createSelect, melt, type CreateSelectProps } from '@melt-ui/svelte';
 	import { fade } from 'svelte/transition';
 	import { ChevronDown } from 'lucide-svelte';
 
@@ -26,12 +26,21 @@
 
 	const isCurrent = (href: string) => currentOption === href;
 
+	const handleSelect: CreateSelectProps<string>['onSelectedChange'] = ({ next }) => {
+		if (next) {
+			goto(next.value);
+		}
+
+		return next;
+	};
+
 	const {
 		elements: { trigger, menu, option },
 		states: { selectedLabel, open }
 	} = createSelect<string>({
 		forceVisible: true,
 		preventScroll: false,
+		onSelectedChange: handleSelect,
 		positioning: {
 			placement: 'bottom',
 			fitViewport: true,
@@ -76,15 +85,12 @@
 			transition:fade={{ duration: 100 }}
 		>
 			{#each options as { href, text }}
-				<li class="text-muted flex h-12">
-					<a
-						class="data-selected:text-on-surface data-highlighted:text-primary grow content-center px-4"
-						{href}
-						aria-current={isCurrent(href) ? 'page' : undefined}
-						use:melt={$option({ value: href, label: text })}
-					>
-						{text}
-					</a>
+				<li
+					class="text-muted data-selected:text-on-surface data-highlighted:text-primary h-12 grow content-center px-4"
+					use:melt={$option({ value: href, label: text })}
+					aria-current={isCurrent(href) ? 'page' : undefined}
+				>
+					{text}
 				</li>
 			{/each}
 		</menu>
