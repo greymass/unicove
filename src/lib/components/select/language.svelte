@@ -1,29 +1,42 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import { i18n } from '$lib/i18n';
-	import { availableLanguageTags, languageTag } from '$lib/paraglide/runtime.js';
-	import { createSelect, melt } from '@melt-ui/svelte';
+	import {
+		availableLanguageTags,
+		languageTag,
+		type AvailableLanguageTag
+	} from '$lib/paraglide/runtime.js';
+	import { createSelect, melt, type CreateSelectProps } from '@melt-ui/svelte';
 	import { fade } from 'svelte/transition';
 	import ChevronDown from 'lucide-svelte/icons/chevron-down';
 	import * as m from '$lib/paraglide/messages';
 	import { getContext } from 'svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import { goto } from '$app/navigation';
 
 	let defaultLang = { value: languageTag(), label: m[`common_${languageTag()}`]() };
 	const context = getContext<UnicoveContext>('state');
 
+	const handleSelect: CreateSelectProps<AvailableLanguageTag>['onSelectedChange'] = ({ next }) => {
+		const base = i18n.route(page.url.pathname);
+		const route = i18n.resolveRoute(base, next?.value);
+		goto(route);
+
+		return next;
+	};
+
 	const {
 		elements: { trigger, menu, option },
 		states: { open, selectedLabel }
-	} = createSelect<string>({
+	} = createSelect<AvailableLanguageTag>({
 		defaultSelected: defaultLang,
-		forceVisible: true,
 		preventScroll: false,
 		positioning: {
 			placement: 'bottom',
 			fitViewport: true,
 			sameWidth: true
-		}
+		},
+		onSelectedChange: handleSelect
 	});
 </script>
 
@@ -38,23 +51,20 @@
 </button>
 
 {#if $open}
-	<div
+	<ul
 		data-theme={context.network}
 		class="border-outline bg-surface-container z-10 flex max-h-[300px] flex-col overflow-y-auto rounded-2xl border-2 px-1 py-1 shadow-sm focus:ring-0!"
 		use:melt={$menu}
 		in:fade={{ duration: 100 }}
 	>
 		{#each availableLanguageTags as lang}
-			<a
-				href={i18n.route($page.url.pathname)}
-				hreflang={lang}
+			<li
 				aria-current={lang === languageTag() ? 'page' : undefined}
 				class=" hover:bg-primary hover:text-on-primary focus:text-on-primary data-highlighted:bg-primary data-highlighted:text-on-primary relative cursor-pointer rounded-xl px-2 py-1 font-medium focus:z-10 data-disabled:opacity-50"
 				use:melt={$option({ value: lang, label: lang })}
-				data-sveltekit-replacestate
 			>
 				{m[`common_${lang}`]()}
-			</a>
+			</li>
 		{/each}
-	</div>
+	</ul>
 {/if}
