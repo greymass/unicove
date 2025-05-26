@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getContext } from 'svelte';
+	import { getContext, type Snippet } from 'svelte';
 
 	import { requestSnap } from '$lib/metamask-snap';
 	import Button from '$lib/components/button/button.svelte';
@@ -7,6 +7,7 @@
 	import type { MetaMaskState } from '$lib/state/metamask.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import MetaMaskInstall from '$lib/components/wallets/metamask/install.svelte';
+	import Box from '$lib/components/layout/box/box.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -24,9 +25,10 @@
 
 	interface Props {
 		callback: () => void;
+		children: Snippet;
 	}
 
-	let { callback }: Props = $props();
+	let { callback, children }: Props = $props();
 
 	const networkName = context.network.chain.name || '';
 	const productName = context.network.config.metamask?.name || '';
@@ -36,19 +38,13 @@
 	}
 </script>
 
-{#if state === 'install'}
-	<div>
-		<h2>Install</h2>
+<Box class="grid content-start justify-items-start gap-4 py-8 text-pretty *:shrink">
+	{#if state === 'install'}
 		<MetaMaskInstall {networkName} {productName} />
-	</div>
-{:else if state === 'snap'}
-	<div>
-		<h2>Snap</h2>
+	{:else if state === 'snap'}
 		<MetaMaskSnap {connect} {networkName} {productName} />
-	</div>
-{:else}
-	<div>
-		<h2>Ready</h2>
+	{:else}
+		{@render children()}
 		<Button onclick={callback}>Next</Button>
-	</div>
-{/if}
+	{/if}
+</Box>
