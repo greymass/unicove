@@ -22,7 +22,6 @@
 	import UserPlus from 'lucide-svelte/icons/user-plus';
 	import Search from 'lucide-svelte/icons/search';
 	import { goto } from '$lib/utils';
-	import { cn } from '$lib/utils/style';
 	import Button from './button/button.svelte';
 	import Text from './input/text.svelte';
 	import { Wallet } from 'lucide-svelte';
@@ -30,11 +29,10 @@
 	const context = getContext<UnicoveContext>('state');
 
 	interface PageProps {
-		class?: string;
 		network: NetworkState;
 	}
 
-	let { class: className = '', network }: PageProps = $props();
+	let { network }: PageProps = $props();
 
 	let currentSession = $derived(context.wharf.session);
 
@@ -130,17 +128,14 @@
 </script>
 
 <!-- Trigger Button -->
-<button
-	class={cn(
-		'border-outline focus-visible:ring-solar-500 relative z-50 h-10 rounded-lg border text-base font-medium text-nowrap focus:outline-transparent focus-visible:ring-2 focus-visible:outline focus-visible:ring-inset',
-		className
-	)}
-	use:melt={$trigger}
-	aria-label="account-switcher-label"
-	id="account-switcher"
-	data-session={!!context.wharf.session}
->
-	{#if context.wharf.session}
+{#if context.wharf.session}
+	<Button
+		variant="outlined"
+		class="md:bg-surface h-10 grow-0 px-0"
+		meltAction={trigger}
+		aria-label="account-switcher-label"
+		id="account-switcher"
+	>
 		<div class="flex items-center gap-2 pr-4 pl-3.5">
 			<picture class="size-5">
 				<img
@@ -151,14 +146,21 @@
 					width="20"
 				/>
 			</picture>
-			<span class="text-on-surface pointer-events-none z-10 text-base"
+			<span class="text-on-primary-container pointer-events-none z-10"
 				>{context.wharf.session.actor}</span
 			>
 		</div>
-	{:else}
-		<span class="pointer-events-none z-10 px-4 py-2">{m.common_connect_wallet()}</span>
-	{/if}
-</button>
+	</Button>
+{:else}
+	<Button
+		class="h-10 grow-0 px-4"
+		meltAction={trigger}
+		aria-label="account-switcher-label"
+		id="account-switcher"
+	>
+		{m.common_connect_wallet()}
+	</Button>
+{/if}
 
 {#if $open}
 	<div data-theme={network} class="" use:melt={$portalled}>
@@ -258,10 +260,10 @@
 											{/if}
 										</div>
 
-										<div class="text-left font-medium">
-											<div>{session.actor}@{session.permission}</div>
+										<div class="flex flex-col gap-px text-left font-medium">
+											<span class="leading-none">{session.actor}@{session.permission}</span>
 											{#if session.walletPlugin.id === 'wallet-plugin-multisig'}
-												<div class="text-xs">
+												<div class="text-xs font-normal">
 													↳ {m.common_account_multisig_using_account({
 														account: session.walletPlugin.data.session.actor
 													})}

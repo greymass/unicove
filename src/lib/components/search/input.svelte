@@ -219,7 +219,7 @@
 	aria-label="search"
 	id="search"
 	class={cn(
-		'text-muted focus-visible:ring-solar-500 focus-visible:border-solar-500 md:border-outline  relative z-50 inline-flex h-10 items-center justify-between rounded-lg bg-transparent py-3.5 text-base leading-4 font-medium text-nowrap focus:outline-hidden focus-visible:ring focus-visible:ring-inset md:justify-between md:border md:py-2 md:pr-0 md:pl-3',
+		'text-muted focus-visible:ring-solar-500 focus-visible:border-solar-500 md:border-outline-variant md:bg-surface  relative z-50 inline-flex h-10 items-center justify-between rounded-lg py-3.5 text-base leading-4 font-medium text-nowrap focus:outline-hidden focus-visible:ring focus-visible:ring-inset md:justify-between md:border-2  md:py-2 md:pr-0 md:pl-3',
 		props.class
 	)}
 >
@@ -233,7 +233,7 @@
 	</span>
 
 	{#if shortcutKey}
-		<span class="border-on-surface/30 m-2 hidden rounded-sm border px-2 py-1 md:inline">
+		<span class="border-outline-variant m-2 hidden rounded-sm border px-2 py-1 md:inline">
 			{shortcutKey}
 		</span>
 	{/if}
@@ -248,7 +248,7 @@
 		></div>
 		<div
 			use:melt={$content}
-			class="bg-surface-container-lowest fixed top-20 left-1/2 z-50 max-h-[85vh] w-[90vw] max-w-lg -translate-x-1/2 transform overflow-hidden rounded-2xl p-4 shadow-lg"
+			class="bg-surface-container fixed top-20 left-1/2 z-50 max-h-[85vh] w-[90vw] max-w-lg -translate-x-1/2 transform overflow-hidden rounded-2xl p-4 shadow-lg"
 			transition:scale={{
 				duration: 100,
 				start: 0.95

@@ -9,7 +9,7 @@
 
 	interface ButtonProps extends HTMLAttributes {
 		href?: string;
-		variant?: 'primary' | 'secondary' | 'tertiary' | 'pill';
+		variant?: 'primary' | 'secondary' | 'text' | 'pill' | 'outlined';
 		disabled?: boolean;
 		active?: boolean;
 		blank?: boolean;
@@ -46,22 +46,26 @@
 	);
 
 	const filledStyles =
-		' inline-flex h-12 grow  rounded-lg bg-primary px-8  text-on-primary  focus:outline-transparent focus-visible:outline focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-solar-500 disabled:bg-on-surface/12 disabled:text-on-surface/40';
+		' inline-flex h-12 grow  rounded-lg bg-primary px-8  text-on-primary  focus:outline-transparent focus-visible:outline focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-solar-500 disabled:bg-transparent disabled:text-on-surface disabled:-outline-offset-1 disabled:outline-dashed';
+
+	const secondaryFilledStyles =
+		'inline-flex h-12 grow rounded-lg bg-primary-container/60 dark:bg-primary-container/30 px-8 text-on-primary-container focus:outline-transparent focus-visible:outline focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-solar-500 disabled:bg-transparent disabled:text-on-surface disabled:-outline-offset-1 disabled:outline-dashed';
 
 	const outlinedStyles =
-		' flex h-12 grow  rounded-lg px-8  text-primary ring-2 ring-inset ring-outline-variant   focus-visible:outline-hidden focus-visible:ring-solar-500  hover:active:ring-outline-variant  disabled:text-on-surface/40  disabled:hover:bg-transparent disabled:hover:ring-on-surface/12 disabled:ring-on-surface/12  ';
+		' flex h-12 grow rounded-lg px-8  text-primary ring-2 ring-inset ring-outline-variant   focus-visible:outline-hidden focus-visible:ring-solar-500  hover:active:ring-outline-variant  disabled:text-on-surface  disabled:hover:bg-transparent disabled:hover:ring-on-surface/12 disabled:ring-on-surface/12  ';
 
 	const pillStyles =
 		' inline-flex h-10  rounded-full border-2 border-transparent px-5  leading-4  focus-visible:border-solar-500  focus-visible:outline-hidden   aria-[current]:border-outline-variant aria-[current]:focus-visible:border-solar-500';
 
 	const textStyles =
-		'inline-flex  h-10  rounded-lg px-3  text-primary   focus-visible:ring-inset focus-visible:ring-solar-500 focus-visible:outline-hidden focus-visible:ring  disabled:text-on-surface/40  disabled:hover:bg-transparent';
+		'inline-flex  h-10  rounded-lg px-3  text-primary   focus-visible:ring-inset focus-visible:ring-solar-500 focus-visible:outline-hidden focus-visible:ring  disabled:text-on-surface  disabled:hover:bg-transparent';
 
 	let styles = {
 		primary: filledStyles,
-		secondary: outlinedStyles,
+		outlined: outlinedStyles,
+		secondary: secondaryFilledStyles,
 		pill: pillStyles,
-		tertiary: textStyles
+		text: textStyles
 	};
 </script>
 
@@ -69,7 +73,7 @@
 	this={tag}
 	use:melt={$meltElement}
 	class={cn(
-		'group/button relative cursor-pointer items-center justify-center text-center text-base font-medium text-nowrap transition-all disabled:cursor-default disabled:opacity-30',
+		'group/button relative cursor-pointer items-center justify-center text-center text-base font-medium text-nowrap transition-opacity disabled:cursor-not-allowed disabled:opacity-30',
 		styles[variant],
 		className
 	)}

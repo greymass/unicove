@@ -262,6 +262,7 @@ export class WharfState {
 		});
 		// Execute and retrieve response
 		const response = await this.contractKit.client.v1.chain.send_read_only_transaction(transaction);
+		this.transacting = false;
 		if (response.processed.except) {
 			throw new Error(JSON.stringify(response.processed.except));
 		}
@@ -271,8 +272,6 @@ export class WharfState {
 		if (!returnType) {
 			throw new Error(`Return type for ${name} not defined in the ABI.`);
 		}
-
-		this.transacting = false;
 
 		return Serializer.decode({
 			data: hexData,

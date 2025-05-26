@@ -10,8 +10,8 @@
 
 	let { number, colored = false }: Props = $props();
 
-	const positiveClasses = colored ? 'text-green-500' : '';
-	const negativeClasses = colored ? 'text-red-500' : '';
+	const positiveClasses = colored ? 'text-success' : '';
+	const negativeClasses = colored ? 'text-error' : '';
 	const neutralClasses = '';
 </script>
 

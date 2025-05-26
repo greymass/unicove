@@ -3,6 +3,7 @@
 	import Button from '$lib/components/button/button.svelte';
 
 	import * as m from '$lib/paraglide/messages';
+	import { Chains } from '@wharfkit/common';
 
 	interface Props {
 		network: NetworkState;
@@ -10,7 +11,7 @@
 	let props: Props = $props();
 </script>
 
-{#if props.network.config.legacytoken}
+{#if props.network.chain.equals(Chains.Vaulta) && props.network.config.legacytoken}
 	<section class="@container col-span-full">
 		<aside
 			class="flex flex-wrap items-center gap-4 gap-y-6 rounded-lg bg-linear-to-r from-[#1C2399] to-[#2E3BFF] p-4 shadow-lg"
@@ -46,10 +47,10 @@
 				</div>
 			</div>
 
-			<div class="grid w-full grid-cols-1 gap-2 @sm:grid-cols-2 @3xl:w-auto">
+			<div class="grid w-full grid-cols-1 items-center gap-2 @sm:grid-cols-2 @3xl:w-auto">
 				<Button
-					class="text-white ring-white/10"
-					variant="secondary"
+					class="text-white"
+					variant="text"
 					href="https://www.vaulta.com/resources/vaulta-token-swap-a-begins-may-14"
 				>
 					{m.common_learn_more()}

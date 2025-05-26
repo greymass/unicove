@@ -39,10 +39,10 @@
 			})}
 		</p>
 		<div class="mt-2 flex items-center gap-6">
-			<Button variant="secondary" href={`/${network}/staking`}>
+			<Button variant="primary" href={`/${network}/staking`}>
 				{m.common_stake_action()}
 			</Button>
-			<Button variant="tertiary" href="https://eosnetwork.com/staking-rewards/">Learn more</Button>
+			<Button variant="text" href="https://eosnetwork.com/staking-rewards/">Learn more</Button>
 		</div>
 		<p class="text-muted text-xs">
 			<sup>1</sup>

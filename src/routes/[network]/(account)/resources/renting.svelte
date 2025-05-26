@@ -193,7 +193,7 @@
 				{/if}
 
 				{#if rentState.insufficientBalance}
-					<p class="text-red-500">Insufficient balance. Please enter a smaller amount.</p>
+					<p class="text-error">Insufficient balance. Please enter a smaller amount.</p>
 				{/if}
 				<Button type="submit" class="w-full" disabled={!rentState.valid}>
 					{#if rentState.cost.value}

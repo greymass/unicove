@@ -12,7 +12,7 @@
 </script>
 
 <div class="space-y-6 rounded-lg text-center" class:hidden>
-	<CircleX class="inline size-24 text-red-300" />
+	<CircleX class="text-error inline size-24" />
 
 	<div class=" space-y-3">
 		<h2 class="h3">{m.common_transaction_error()}</h2>

@@ -2,7 +2,6 @@
 	import { BlockTimestamp } from '@wharfkit/antelope';
 	import { getContext } from 'svelte';
 	import type { ChangeFn } from '@melt-ui/svelte/internal/helpers';
-	import { browser } from '$app/environment';
 
 	import Switch from '$lib/components/input/switch.svelte';
 	import LanguageSelect from '$lib/components/select/language.svelte';
@@ -21,7 +20,7 @@
 	import { availableLanguageTags } from '$lib/paraglide/runtime';
 	import CurrencySelect from '$lib/components/select/currency.svelte';
 	import DebugToggle from '$lib/components/select/debug.svelte';
-	import type { CreateSwitchProps } from '@melt-ui/svelte';
+	import SchemeToggle from '$lib/components/select/scheme.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -32,7 +31,6 @@
 	let developerMode = $state(!!context.settings.data.developerMode);
 	let mockPrice = $state(!!context.settings.data.mockPrice);
 	let increasedPrecision = $state(!!context.settings.data.increasedPrecision);
-	let darkMode = $state(browser && localStorage.getItem('color-scheme') === 'dark');
 
 	let refEarliestExecution: DatetimeInput | undefined = $state();
 
@@ -107,17 +105,6 @@
 		refEarliestExecution?.set(undefined);
 		context.wharf.setWalletSetting('earliestExecution', undefined);
 	}
-
-	const onDarkModeToggle: CreateSwitchProps['onCheckedChange'] = ({ next }) => {
-		if (darkMode && localStorage.getItem('color-scheme') == 'light') {
-			localStorage.setItem('color-scheme', 'dark');
-			document.documentElement.setAttribute('data-scheme', 'dark');
-		} else if (!darkMode && localStorage.getItem('color-scheme') === 'dark') {
-			localStorage.setItem('color-scheme', 'light');
-			document.documentElement.setAttribute('data-scheme', 'light');
-		}
-		return next;
-	};
 </script>
 
 <Stack tag="article" class="gap-6">
@@ -210,7 +197,7 @@
 						Toggle site wide dark mode independent from operating system preferences.
 					</p>
 				</Stack>
-				<Switch id="color-scheme" onCheckedChange={onDarkModeToggle} bind:checked={darkMode} />
+				<SchemeToggle />
 			</div>
 		</Card>
 
