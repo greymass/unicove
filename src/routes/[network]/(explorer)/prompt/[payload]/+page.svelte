@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { getContext, onDestroy, onMount } from 'svelte';
 	import {
-		API,
 		Checksum256,
 		PlaceholderAuth,
 		PublicKey,
