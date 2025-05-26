@@ -13,7 +13,7 @@
 </script>
 
 <div
-	class="border-outline-variant flex flex-wrap items-center justify-between gap-x-4 border-b py-3 last:border-none @xs:flex-nowrap"
+	class="border-outline flex flex-wrap items-center justify-between gap-x-4 border-b py-3 last:border-none @xs:flex-nowrap"
 >
 	<DT>
 		{#if typeof title === 'string'}

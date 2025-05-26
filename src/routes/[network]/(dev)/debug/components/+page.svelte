@@ -19,7 +19,7 @@
 <h1 class="h1 mb-8">Design System</h1>
 
 {#snippet divider()}
-	<hr class="bg-outline-variant my-8 h-px border-0" />
+	<hr class="bg-outline my-8 h-px border-0" />
 {/snippet}
 
 <Stack class="space-y-12 pb-12">
