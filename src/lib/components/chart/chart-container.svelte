@@ -56,9 +56,20 @@
 		const initial = Number(dataRange[dataRange.length - 1].value.quantity);
 		return (((current - initial) / current) * 100).toFixed(2) + '%';
 	});
+
+	let chartColor = $state('');
+
+	$effect(() => {
+		if (dataRange.length < 2) return;
+		const isPositive =
+			Number(dataRange[0].value.quantity) > Number(dataRange[dataRange.length - 1].value.quantity);
+		chartColor = getComputedStyle(document.documentElement)
+			.getPropertyValue(isPositive ? '--color-success' : '--color-error')
+			.trim();
+	});
 </script>
 
-<Card class="relative [contain:paint]">
+<Card class="relative [contain:paint] ">
 	<header class="flex justify-between">
 		<div>
 			<p class="text-muted">{pair}</p>
@@ -71,20 +82,14 @@
 	<!-- w-99 is a hack to get responsive charts, w-full doesn't work -->
 	<div class="canvas-container relative h-auto w-[99%]">
 		{#if props.type === 'line'}
-			<LineChart label={pair} data={dataRange} />
+			<LineChart label={pair} data={dataRange} color={chartColor} />
 		{/if}
 	</div>
 
-	<hr class="bg-outline h-px border-0" />
+	<hr class="text-outline" />
 
-	<div class="flex items-center justify-between font-medium">
-		<span class="text-muted">{startDate}</span>
-		<div class="flex gap-4">
-			<div class="flex items-center gap-1">
-				<div class="size-4 rounded-sm bg-[#00ED97]"></div>
-				<span class="text-[#00ED97]">{pair}</span>
-			</div>
-		</div>
-		<span class="text-muted">{m.common_today()}</span>
+	<div class="flex items-center justify-between">
+		<span class="text-muted text-sm">{startDate}</span>
+		<span class="text-muted text-sm">{m.common_today()}</span>
 	</div>
 </Card>
