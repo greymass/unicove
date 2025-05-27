@@ -104,8 +104,8 @@
 				authorization: [PlaceholderAuth],
 				data: RAMTypes.giftram.from({
 					from: PlaceholderName,
-					to: accountName,
-					bytes: ramBytes,
+					receiver: accountName,
+					ram_bytes: ramBytes,
 					memo: 'Account Creation'
 				})
 			});
