@@ -127,6 +127,7 @@
 		];
 	});
 
+	let redirectLink: string | undefined = $state();
 	let redirecting = $state(false);
 	async function redirectRequest() {
 		if (actions && actions.length) {
@@ -134,9 +135,9 @@
 				zlib
 			};
 			const request = await SigningRequest.create({ actions }, opts);
-			const link = `${PUBLIC_CANONICAL_ORIGIN}/prompt/${request.encode(true, false, '')}`;
+			redirectLink = `${PUBLIC_CANONICAL_ORIGIN}/prompt/${request.encode(true, false, '')}`;
 			redirecting = true;
-			goto(link);
+			goto(redirectLink);
 		}
 	}
 </script>
@@ -166,6 +167,10 @@
 		>
 			Create Request
 		</Button>
+		{#if redirectLink}
+			<p>If you are not automatically redirected, click the button below:</p>
+			<Button href={redirectLink}>View Account Creation Request</Button>
+		{/if}
 	</div>
 {/snippet}
 
