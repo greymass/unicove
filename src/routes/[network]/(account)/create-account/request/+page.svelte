@@ -15,7 +15,6 @@
 	import Code from '$lib/components/code.svelte';
 	import { PlaceholderName, SigningRequest } from '@wharfkit/session';
 	import { requestPublicKeys, requestSnap } from '$lib/metamask-snap';
-	import { PUBLIC_CANONICAL_ORIGIN } from '$env/static/public';
 	import { goto } from '$app/navigation';
 
 	const context = getContext<UnicoveContext>('state');
@@ -135,7 +134,7 @@
 				zlib
 			};
 			const request = await SigningRequest.create({ actions }, opts);
-			redirectLink = `${PUBLIC_CANONICAL_ORIGIN}/prompt/${request.encode(true, false, '')}`;
+			redirectLink = `/${context.network}/prompt/${request.encode(true, false, '')}`;
 			redirecting = true;
 			goto(redirectLink);
 		}
