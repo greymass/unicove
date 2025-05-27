@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Name, PublicKey } from '@wharfkit/antelope';
+	import { Action, Name, PublicKey } from '@wharfkit/antelope';
 	import { getContext } from 'svelte';
 	import { Debounced, FiniteStateMachine } from 'runed';
 	import zlib from 'pako';
@@ -13,9 +13,10 @@
 	import Button from '$lib/components/button/button.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import Code from '$lib/components/code.svelte';
-	import { PlaceholderName, SigningRequest } from '@wharfkit/session';
+	import { PlaceholderAuth, PlaceholderName, SigningRequest } from '@wharfkit/session';
 	import { requestPublicKeys, requestSnap } from '$lib/metamask-snap';
 	import { goto } from '$app/navigation';
+	import { Types as RAMTypes } from '$lib/types/ram';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -97,11 +98,16 @@
 		});
 
 		if (context.network.supports('giftedram')) {
-			ramaction = contract.action('giftram', {
-				from: PlaceholderName,
-				to: accountName,
-				bytes: ramBytes,
-				memo: 'Account Creation'
+			ramaction = Action.from({
+				account: contract.account,
+				name: 'giftram',
+				authorization: [PlaceholderAuth],
+				data: RAMTypes.giftram.from({
+					from: PlaceholderName,
+					to: accountName,
+					bytes: ramBytes,
+					memo: 'Account Creation'
+				})
 			});
 		}
 
