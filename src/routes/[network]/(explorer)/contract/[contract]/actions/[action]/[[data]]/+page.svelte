@@ -205,66 +205,71 @@
 </script>
 
 <MultiCard>
-	<Card>
-		{#if transactResult && transactResult.resolved}
-			<TransactSummary transactionId={transactResult.resolved.transaction.id} />
-			<Button onclick={clear}>Clear Results</Button>
-		{:else if error}
-			<TransactError {error} />
-			<Button onclick={clear}>Clear Results</Button>
-		{:else}
-			<h4 class="h4">Perform Action</h4>
-			{#if ready}
-				<Fields abi={data.abi} fields={data.struct.fields} bind:state={actionInputs} />
-			{/if}
-			<Button onclick={transact} disabled={!decoded || context.wharf.transacting}>
-				{#if useReadOnly}
-					Call readonly action
-				{:else}
-					Perform transaction
+	{#snippet leftColumn()}
+		<Card>
+			{#if transactResult && transactResult.resolved}
+				<TransactSummary transactionId={transactResult.resolved.transaction.id} />
+				<Button onclick={clear}>Clear Results</Button>
+			{:else if error}
+				<TransactError {error} />
+				<Button onclick={clear}>Clear Results</Button>
+			{:else}
+				<h4 class="h4">Perform Action</h4>
+				{#if ready}
+					<Fields abi={data.abi} fields={data.struct.fields} bind:state={actionInputs} />
 				{/if}
-			</Button>
-			{#if allowReadOnly}
-				<fieldset class="flex items-center gap-3">
-					<Checkbox id="readonly" bind:checked={useReadOnly} />
-					<Label for="readonly">Call as readonly action?</Label>
-				</fieldset>
-				<fieldset class="flex items-center gap-3">
-					<Checkbox id="pageload" bind:checked={triggerOnPageLoad} />
-					<Label for="pageload">Trigger when page loads?</Label>
-				</fieldset>
+				<Button onclick={transact} disabled={!decoded || context.wharf.transacting}>
+					{#if useReadOnly}
+						Call readonly action
+					{:else}
+						Perform transaction
+					{/if}
+				</Button>
+				{#if allowReadOnly}
+					<fieldset class="flex items-center gap-3">
+						<Checkbox id="readonly" bind:checked={useReadOnly} />
+						<Label for="readonly">Call as readonly action?</Label>
+					</fieldset>
+					<fieldset class="flex items-center gap-3">
+						<Checkbox id="pageload" bind:checked={triggerOnPageLoad} />
+						<Label for="pageload">Trigger when page loads?</Label>
+					</fieldset>
+				{/if}
 			{/if}
-		{/if}
-	</Card>
-	<Card>
-		<h4 class="h4">Action Data</h4>
-		{#if decoded}
-			<Code>{JSON.stringify(decoded, null, 2)}</Code>
-		{:else}
-			<p>Fill out the form to create a representation of the data in this type of action.</p>
-		{/if}
-		{#if link}
-			<fieldset class="grid gap-2">
-				<Label for="tx-link">
-					<a href={link}> Sharable URL for this action and data </a>
-				</Label>
-				<TextInput value={link} disabled>
-					<CopyButton data={link} />
-				</TextInput>
-			</fieldset>
+		</Card>
+	{/snippet}
 
-			{#if useReadOnly && api}
+	{#snippet rightColumn()}
+		<Card>
+			<h4 class="h4">Action Data</h4>
+			{#if decoded}
+				<Code>{JSON.stringify(decoded, null, 2)}</Code>
+			{:else}
+				<p>Fill out the form to create a representation of the data in this type of action.</p>
+			{/if}
+			{#if link}
 				<fieldset class="grid gap-2">
 					<Label for="tx-link">
-						<a href={api}> API call which runs this readonly action </a>
+						<a href={link}> Sharable URL for this action and data </a>
 					</Label>
-					<TextInput value={api} disabled>
-						<CopyButton data={api} />
+					<TextInput value={link} disabled>
+						<CopyButton data={link} />
 					</TextInput>
 				</fieldset>
+
+				{#if useReadOnly && api}
+					<fieldset class="grid gap-2">
+						<Label for="tx-link">
+							<a href={api}> API call which runs this readonly action </a>
+						</Label>
+						<TextInput value={api} disabled>
+							<CopyButton data={api} />
+						</TextInput>
+					</fieldset>
+				{/if}
 			{/if}
-		{/if}
-	</Card>
+		</Card>
+	{/snippet}
 </MultiCard>
 
 {#if readonlyError}
