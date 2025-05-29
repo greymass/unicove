@@ -75,9 +75,12 @@
 	<Card class="flex *:flex-1">
 		<div class="grid content-between gap-4">
 			<div>
-				<h3 class="text-muted text-base">{m.common_labeled_unit_available({ unit: 'RAM' })}</h3>
-				<AssetText class="text-xl font-semibold" variant="full" value={ramLiquid} />
+				<h3 class="text-muted text-base">
+					{m.common_labeled_unit_available({ unit: 'RAM' })}
+				</h3>
+				<AssetText class=" text-xl font-semibold" variant="full" value={ramLiquid} />
 			</div>
+
 			<Button variant="secondary" href="/{String(data.network)}/ram/buy">{m.common_buy()}</Button>
 		</div>
 
@@ -86,9 +89,9 @@
 				<h3 class="text-muted text-base">
 					{m.common_labeled_unit_value({ unit: balanceValueToken.symbol.name })}
 				</h3>
-				<AssetText class="text-xl font-semibold" variant="full" value={balanceValueToken} />
+				<AssetText class=" text-xl font-semibold" variant="full" value={balanceValueToken} />
 				<div>
-					<AssetText class="text-muted text-base" variant="full" value={balanceValueFiat} />
+					<AssetText class="text-muted  text-base" variant="full" value={balanceValueFiat} />
 				</div>
 			</div>
 			<Button variant="secondary" href="/{String(data.network)}/ram/sell">{m.common_sell()}</Button>
