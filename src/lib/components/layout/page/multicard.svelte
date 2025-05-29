@@ -18,7 +18,7 @@
 <!-- https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout/Masonry_layout -->
 <svelte:element
 	this={props.tag || 'div'}
-	class={cn('grid grid-cols-2  items-start gap-6', props.class)}
+	class={cn('grid  items-start  gap-6 md:grid-cols-2', props.class)}
 	data-masonry=""
 >
 	{#if props.children}
