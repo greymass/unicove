@@ -95,83 +95,96 @@
 				</div>
 			</Cluster>
 		</Card>
-		<Card
-			id="token"
-			title={m.common_labeled_unit_balance({
-				unit: m.common_staking()
-			})}
-		>
-			<Stack>
-				<Stack class="gap-2">
-					<h4 class="text-muted text-base leading-none capitalize">
-						{m.common_labeled_unit_staked({
-							unit: m.common_tokens()
-						})}
-					</h4>
 
-					<AssetText
-						class="text-on-surface text-xl leading-none font-semibold"
-						variant="full"
-						value={total}
-					/>
+		{#snippet leftColumn()}
+			<Card
+				id="token"
+				title={m.common_labeled_unit_balance({
+					unit: m.common_staking()
+				})}
+			>
+				<Stack>
+					<Stack class="gap-2">
+						<h4 class="text-muted text-base leading-none capitalize">
+							{m.common_labeled_unit_staked({
+								unit: m.common_tokens()
+							})}
+						</h4>
 
-					<Chip>
-						<AssetText variant="full" value={currencyValue} />
-						<!-- TODO: Percent change -->
-					</Chip>
+						<AssetText
+							class="text-on-surface text-xl leading-none font-semibold"
+							variant="full"
+							value={total}
+						/>
+
+						<Chip>
+							<AssetText variant="full" value={currencyValue} />
+							<!-- TODO: Percent change -->
+						</Chip>
+					</Stack>
+
+					{#if activity}
+						<table class="table-styles text-muted">
+							<tbody>
+								{#if staked.units.gt(ZeroUnits)}
+									<tr>
+										<td>{m.common_staked()}</td>
+										<td class="text-on-surface grid text-right">
+											{#if staked.units.equals(0)}
+												<span class="font-mono">&lt;</span>
+											{/if}
+											<AssetText variant="full" value={staked} />
+											{#if context.settings.data.advancedMode}
+												<AssetText variant="full" value={stakedRex} />
+											{/if}
+										</td>
+										{@render tableAction([m.common_unstake(), `/${data.network}/staking/unstake`])}
+									</tr>
+								{/if}
+								{#if unstakingTotal.units.gt(ZeroUnits)}
+									<tr>
+										<td>{m.common_unstaking()}</td>
+										<td class="text-on-surface grid text-right">
+											<AssetText variant="full" value={unstakingTotal} />
+											{#if context.settings.data.advancedMode}
+												<AssetText variant="full" value={unstakingRex} />
+											{/if}
+										</td>
+										<td></td>
+									</tr>
+								{/if}
+								{#if totalWithdraw.units.gt(ZeroUnits)}
+									<tr>
+										<td>{m.common_unstaked()}</td>
+										<td class="text-on-surface grid text-right">
+											<AssetText variant="full" value={totalWithdraw} />
+											{#if context.settings.data.advancedMode}
+												<AssetText variant="full" value={unstakingRex} />
+											{/if}
+										</td>
+										{@render tableAction([
+											m.common_withdraw(),
+											`/${data.network}/staking/withdraw`
+										])}
+									</tr>
+								{/if}
+							</tbody>
+						</table>
+					{/if}
 				</Stack>
+			</Card>
+			<AccountBalance cta={{ href: `/${networkName}/staking/stake`, label: m.common_stake() }} />
+			<SystemTokenSwap account={context.account} network={data.network} />
+		{/snippet}
 
-				{#if activity}
-					<table class="table-styles text-muted">
-						<tbody>
-							{#if staked.units.gt(ZeroUnits)}
-								<tr>
-									<td>{m.common_staked()}</td>
-									<td class="text-on-surface grid text-right">
-										{#if staked.units.equals(0)}
-											<span class="font-mono">&lt;</span>
-										{/if}
-										<AssetText variant="full" value={staked} />
-										{#if context.settings.data.advancedMode}
-											<AssetText variant="full" value={stakedRex} />
-										{/if}
-									</td>
-									{@render tableAction([m.common_unstake(), `/${data.network}/staking/unstake`])}
-								</tr>
-							{/if}
-							{#if unstakingTotal.units.gt(ZeroUnits)}
-								<tr>
-									<td>{m.common_unstaking()}</td>
-									<td class="text-on-surface grid text-right">
-										<AssetText variant="full" value={unstakingTotal} />
-										{#if context.settings.data.advancedMode}
-											<AssetText variant="full" value={unstakingRex} />
-										{/if}
-									</td>
-									<td></td>
-								</tr>
-							{/if}
-							{#if totalWithdraw.units.gt(ZeroUnits)}
-								<tr>
-									<td>{m.common_unstaked()}</td>
-									<td class="text-on-surface grid text-right">
-										<AssetText variant="full" value={totalWithdraw} />
-										{#if context.settings.data.advancedMode}
-											<AssetText variant="full" value={unstakingRex} />
-										{/if}
-									</td>
-									{@render tableAction([m.common_withdraw(), `/${data.network}/staking/withdraw`])}
-								</tr>
-							{/if}
-						</tbody>
-					</table>
-				{/if}
-			</Stack>
-		</Card>
-		<AccountBalance cta={{ href: `/${networkName}/staking/stake`, label: m.common_stake() }} />
-		<SystemTokenSwap account={context.account} network={data.network} />
-		<UnstakingBalances records={unstaking} />
-		<StakingCalculator {apr} network={data.network} tokenprice={market.network.systemtoken.price} />
+		{#snippet rightColumn()}
+			<UnstakingBalances records={unstaking} />
+			<StakingCalculator
+				{apr}
+				network={data.network}
+				tokenprice={market.network.systemtoken.price}
+			/>
+		{/snippet}
 	</MultiCard>
 {:else}
 	<p>
