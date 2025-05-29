@@ -22,7 +22,7 @@
 <!-- This input is hidden -->
 <input {...fileUpload.input} />
 <div
-	class="bg-surface-container data-dragging:bg-surface-container-high border-outline grid h-48 place-items-center rounded-lg border border-2 p-6 text-center text-balance"
+	class="bg-surface-container data-dragging:bg-surface-container-high outline-outline grid h-48 place-items-center rounded-lg p-6 text-center text-balance outline-2 -outline-offset-2 outline-dashed"
 	{...fileUpload.dropzone}
 >
 	{#if fileUpload.isDragging}

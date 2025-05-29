@@ -46,10 +46,10 @@
 	);
 
 	const filledStyles =
-		' inline-flex h-12 grow  rounded-lg bg-primary px-8  text-on-primary  focus:outline-transparent focus-visible:outline focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-solar-500 disabled:bg-transparent disabled:text-on-surface disabled:-outline-offset-1 disabled:outline-dashed';
+		' inline-flex h-12 grow  rounded-lg bg-primary px-8  text-on-primary  focus:outline-transparent focus-visible:outline focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-solar-500  disabled:text-on-surface    disabled:bg-surface-container-highest ';
 
 	const secondaryFilledStyles =
-		'inline-flex h-12 grow rounded-lg bg-primary-container/60 dark:bg-primary-container/30 px-8 text-on-primary-container focus:outline-transparent focus-visible:outline focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-solar-500 disabled:bg-transparent disabled:text-on-surface disabled:-outline-offset-1 disabled:outline-dashed';
+		'inline-flex h-12 grow rounded-lg bg-primary-container/60 dark:bg-primary-container/30 px-8 text-on-primary-container focus:outline-transparent focus-visible:outline focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-solar-500 disabled:bg-transparent disabled:text-on-surface disabled:-outline-offset-2 disabled:outline-2 disabled:outline-on-surface-variant';
 
 	const outlinedStyles =
 		' flex h-12 grow rounded-lg px-8  text-primary ring-2 ring-inset ring-outline-variant   focus-visible:outline-hidden focus-visible:ring-solar-500  hover:active:ring-outline-variant  disabled:text-on-surface  disabled:hover:bg-transparent disabled:hover:ring-on-surface/12 disabled:ring-on-surface/12  ';
