@@ -24,21 +24,17 @@ jobs:
       - name: Build SvelteKit Preview
         run: make build
 
-      # Run build in background and log output
       - name: Start Preview Server
         run: |
           bun run preview --port 4173 &
           echo "Waiting for preview to start on port 4173…"
           bunx wait-on http://localhost:4173
 
-      - name: Run Unlighthouse Assertions & Generate Static Report
-        run: unlighthouse-ci --site http://localhost:4173 --budget 75 --build-static
-
-      - name: Upload Unlighthouse Report
-        uses: actions/upload-artifact@v4
-        if: ${{ !cancelled() }}
-        with:
-          name: unlighthouse-report
-          path: .unlighthouse/**/*
-          include-hidden-files: true
-          retention-days: 30
+      - name: Run Unlighthouse Assertions on Mobile & Generate Static Report
+        run: |
+          unlighthouse-ci \
+            --site http://localhost:4173 \
+            --config-file lh-mobile-v1.config.ts \
+            --reporter lighthouseServer \
+            --lhci-host https://lhci-server-crimson-bush-1151.fly.dev \
+            --lhci-build-token ${{ secrets.LHCI_BUILD_TOKEN }}

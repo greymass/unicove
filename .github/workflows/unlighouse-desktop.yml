@@ -1,0 +1,40 @@
+name: Unlighthouse Site Scan
+on: [push]
+
+jobs:
+  unlighthouse-site-scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install Dependencies
+        run: bun install -g @unlighthouse/cli puppeteer
+
+      - name: Generate Jungle4 config
+        run: make config/jungle4/vaulta
+
+      - name: Build SvelteKit Preview
+        run: make build
+
+      - name: Start Preview Server
+        run: |
+          bun run preview --port 4173 &
+          echo "Waiting for preview to start on port 4173…"
+          bunx wait-on http://localhost:4173
+
+      - name: Run Unlighthouse Assertions on Desktop & Generate Static Report
+        run: |
+          unlighthouse-ci \
+            --site http://localhost:4173 \
+            --config-file lh-desktop-v1.config.ts \
+            --reporter lighthouseServer \
+            --lhci-host https://lhci-server-crimson-bush-1151.fly.dev \
+            --lhci-build-token ${{ secrets.LHCI_BUILD_TOKEN }}
