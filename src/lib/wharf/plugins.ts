@@ -69,7 +69,7 @@ async function buildBasePlugins(): Promise<WalletPlugin[]> {
 		);
 		plugins.push(
 			new WalletPluginWebAuthenticator({
-				webAuthenticatorUrl: 'https://adding-ledger-plugin-followu.web-authenticator-a83.pages.dev'
+				webAuthenticatorUrl: 'https://adding-ledger-plugin-next.web-authenticator-a83.pages.dev'
 			})
 		);
 	}
