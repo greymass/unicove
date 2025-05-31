@@ -25,7 +25,7 @@
         "@wharfkit/wallet-plugin-privatekey": "^1.1.0",
         "@wharfkit/wallet-plugin-scatter": "^1.5.1",
         "@wharfkit/wallet-plugin-tokenpocket": "^1.5.1",
-        "@wharfkit/wallet-plugin-web-authenticator": "^0.2.2",
+        "@wharfkit/wallet-plugin-web-authenticator": "^0.2.1",
         "@wharfkit/wallet-plugin-wombat": "^1.5.1",
         "@wharfkit/web-renderer": "^1.4.1",
         "big.js": "^6.2.1",
