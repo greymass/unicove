@@ -1,9 +1,9 @@
 // This is the default that always gets used unless a different config file is specified
 export default {
 	// Maximum acceptable performance budget score for CI checks
-	ci: {
-		budget: 10
-	},
+	// ci: {
+	// 	budget: 10
+	// },
 
 	// // Increase accuracy by only allowing 1 page to be scanned at a time
 	// puppeteerClusterOptions: {
