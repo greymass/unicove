@@ -57,11 +57,11 @@
 		<Cluster>
 			<Stack class="gap-1">
 				<p class="caption">Default</p>
-				<Button variant="tertiary" onclick={() => {}}>EOS (MAX)</Button>
+				<Button variant="text" onclick={() => {}}>EOS (MAX)</Button>
 			</Stack>
 			<Stack class="gap-1">
 				<p class="caption">Disabled</p>
-				<Button variant="tertiary" disabled onclick={() => {}}>EOS (MAX)</Button>
+				<Button variant="text" disabled onclick={() => {}}>EOS (MAX)</Button>
 			</Stack>
 		</Cluster>
 	</Stack>
@@ -69,7 +69,7 @@
 	<Stack class="items-start">
 		<h3 class="h3">Side by side</h3>
 		<Cluster class="items-center">
-			<Button variant="tertiary" onclick={() => {}}>Delete</Button>
+			<Button variant="text" onclick={() => {}}>Delete</Button>
 			<Button variant="secondary" onclick={() => {}}>Cancel</Button>
 			<Button variant="primary" onclick={() => {}}>Confirm</Button>
 		</Cluster>

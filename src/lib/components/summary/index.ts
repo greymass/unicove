@@ -24,10 +24,14 @@ export const summaries: Record<string, ContractSummaries> = {
 };
 
 export function isStandardTokenTransfer(data: ObjectifiedActionData) {
-	const from = data?.from && Name.from(data.from).equals(data.from);
-	const to = data?.to && Name.from(data.to).equals(data.to);
-	const quantity = data?.quantity && Asset.from(data.quantity).equals(data.quantity);
-	return from && to && quantity;
+	try {
+		const from = data.from && Name.from(data.from).equals(data.from);
+		const to = data.to && Name.from(data.to).equals(data.to);
+		const quantity = data.quantity && Asset.from(data.quantity).equals(data.quantity);
+		return from && to && quantity;
+	} catch {
+		return false;
+	}
 }
 
 export function getActionSummaryComponent(

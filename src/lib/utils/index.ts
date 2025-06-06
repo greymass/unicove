@@ -14,13 +14,13 @@ export function calculateValue(balance: Asset, currency: Asset): Asset {
 
 export function getCacheHeaders(ttl: number, irreversible: boolean = false) {
 	// Maintain a ttl cache by default
-	let browser = `public, max-age=${ttl}, s-max-age=${ttl}, stale-while-revalidate=${ttl + 30}`;
-	let cloudflare = `max-age=${ttl}, s-max-age=${ttl}`;
+	let browser = `public, max-age=${ttl}, s-maxage=${ttl}, stale-while-revalidate=${30}`;
+	let cloudflare = `max-age=${ttl}, s-maxage=${ttl}`;
 
 	// If the data is irreversible, set 1 year and immutable
 	if (irreversible) {
-		browser = `public, max-age=31536000, s-max-age=31536000, immutable`;
-		cloudflare = `max-age=31536000, s-max-age=31536000`;
+		browser = `public, max-age=31536000, s-maxage=31536000, immutable`;
+		cloudflare = `max-age=31536000, s-maxage=31536000`;
 	}
 
 	return {

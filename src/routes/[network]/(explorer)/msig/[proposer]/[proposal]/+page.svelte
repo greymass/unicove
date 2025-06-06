@@ -8,6 +8,7 @@
 	import Account from '$lib/components/elements/account.svelte';
 	import ActionCard from '$lib/components/elements/action.svelte';
 	import SelectActionVariant from '$lib/components/select/actionvariant.svelte';
+	import TransactForm from '$lib/components/transact/form.svelte';
 	import * as m from '$lib/paraglide/messages';
 
 	import { ApprovalManager } from './manager.svelte';
@@ -35,6 +36,12 @@
 		});
 	}
 </script>
+
+{#snippet Complete()}
+	<div class="flex gap-4">
+		<Button onclick={() => manager.reset()}>{m.common_back()}</Button>
+	</div>
+{/snippet}
 
 <Stack class="mt-6">
 	<Switcher class="items-start gap-6" threshold="40rem">
@@ -96,7 +103,7 @@
 							</td>
 							<td class="text-right">
 								{#if manager.accountHasApproved(participant)}
-									<span class="text-green-300">{m.msig_approved()}</span>
+									<span class="text-success">{m.msig_approved()}</span>
 								{:else}
 									<span class="text-muted">{m.msig_requested()}</span>
 								{/if}
@@ -107,61 +114,68 @@
 			</table>
 		</Stack>
 
-		<Stack class="gap-4" id="details">
-			<h2 class="h3">{m.msig_details()}</h2>
+		<TransactForm
+			id={manager.result?.resolved?.transaction.id}
+			error={manager.error}
+			onsuccess={Complete}
+			onfailure={Complete}
+		>
+			<Stack class="gap-4" id="details">
+				<h2 class="h3">{m.msig_details()}</h2>
 
-			<DL>
-				<DLRow title={m.msig_proposer()}>
-					<DD>
-						<Account name={manager.proposal.proposer} />
-					</DD>
-				</DLRow>
-				<DLRow title={m.msig_proposal_name()}>
-					<DD>
-						{manager.proposal.name}
-					</DD>
-				</DLRow>
-				<DLRow title={manager.expired ? m.msig_expired() : m.msig_expiration()}>
-					<DD>
-						{manager.proposal.transaction.expiration} ({manager.expiresIn})
-					</DD>
-				</DLRow>
-				<DLRow title={m.common_hash()}>
-					<DD>
-						{manager.proposal.hash}
-					</DD>
-				</DLRow>
-			</DL>
+				<DL>
+					<DLRow title={m.msig_proposer()}>
+						<DD>
+							<Account name={manager.proposal.proposer} />
+						</DD>
+					</DLRow>
+					<DLRow title={m.msig_proposal_name()}>
+						<DD>
+							{manager.proposal.name}
+						</DD>
+					</DLRow>
+					<DLRow title={manager.expired ? m.msig_expired() : m.msig_expiration()}>
+						<DD>
+							{manager.proposal.transaction.expiration} ({manager.expiresIn})
+						</DD>
+					</DLRow>
+					<DLRow title={m.common_hash()}>
+						<DD>
+							{manager.proposal.hash}
+						</DD>
+					</DLRow>
+				</DL>
 
-			{#if manager.userIsApprover}
-				{#if manager.userHasApproved}
-					<Button
-						variant="secondary"
-						onclick={() => manager.unapprove()}
-						disabled={context.wharf.transacting}>{m.common_unapprove()}</Button
-					>
-				{:else}
-					<Button
-						class="bg-green-400 text-green-950 hover:bg-green-300 hover:active:bg-green-500"
-						variant="primary"
-						onclick={() => manager.approve()}
-						disabled={context.wharf.transacting}>{m.common_approve()}</Button
+				{#if manager.userIsApprover}
+					{#if manager.userHasApproved}
+						<Button
+							variant="secondary"
+							onclick={() => manager.unapprove()}
+							disabled={context.wharf.transacting}>{m.common_unapprove()}</Button
+						>
+					{:else}
+						<Button
+							class="bg-success text-on-success"
+							variant="primary"
+							onclick={() => manager.approve()}
+							disabled={context.wharf.transacting}>{m.common_approve()}</Button
+						>
+					{/if}
+				{/if}
+
+				{#if manager.userIsProposer}
+					<Button variant="secondary" disabled={context.wharf.transacting} onclick={cancel}
+						>{m.msig_cancel_action()}</Button
 					>
 				{/if}
-			{/if}
 
-			{#if manager.userIsProposer}
-				<Button variant="secondary" disabled={context.wharf.transacting} onclick={cancel}
-					>{m.msig_cancel_action()}</Button
+				<Button
+					variant="primary"
+					disabled={context.wharf.transacting}
+					onclick={() => manager.execute()}>{m.msig_execute_action()}</Button
 				>
-			{/if}
-
-			<Button
-				variant="primary"
-				disabled={context.wharf.transacting}
-				onclick={() => manager.execute()}>{m.msig_execute_action()}</Button
-			>
-		</Stack>
+			</Stack>
+		</TransactForm>
 	</Switcher>
 
 	<Stack>
@@ -189,7 +203,7 @@
 	#msig-vis {
 		background: linear-gradient(
 			to right,
-			var(--color-green-400) 50%,
+			var(--color-success) 50%,
 			var(--color-surface-container) 50%
 		);
 		background-size: 200% 100%;
@@ -199,7 +213,7 @@
 	#msig-vis > div {
 		background: linear-gradient(
 			to right,
-			var(--color-green-950) 50%,
+			var(--color-on-success) 50%,
 			var(--color-on-surface-variant) 50%
 		);
 		background-size: 200% 100%;

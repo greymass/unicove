@@ -554,14 +554,12 @@
 
 			<footer class="flex flex-col justify-between gap-y-12 @lg:flex-row">
 				{#if manager.permission && !manager.data.isActive && !manager.data.isOwner}
-					<Button
-						class="grow-0 border border-red-300/30  text-red-400 hover:text-red-300"
-						variant="tertiary"
-						onclick={deleteAuth}>{m.common_delete_permission()}</Button
+					<Button class="text-error" variant="text" onclick={deleteAuth}
+						>{m.common_delete_permission()}</Button
 					>
 				{/if}
 				<div class="flex grow flex-col flex-wrap justify-end gap-6 @lg:flex-row">
-					<Button class="grow-0" variant="tertiary" href={i18n.route(data.backPath)}
+					<Button class="grow-0" variant="text" href={i18n.route(data.backPath)}
 						>{m.common_cancel()}</Button
 					>
 					<Button

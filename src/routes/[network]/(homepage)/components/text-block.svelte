@@ -18,7 +18,7 @@
 	<h2 class="h3 leading-tight">{props.title}</h2>
 	<p>{props.text}</p>
 	{#if props.button && props.button.href}
-		<Button class="-ml-3" variant="tertiary" href={props.button.href}>
+		<Button class="-ml-3" variant="text" href={props.button.href}>
 			{props.button.text}
 		</Button>
 	{/if}

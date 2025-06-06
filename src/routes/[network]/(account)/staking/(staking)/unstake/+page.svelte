@@ -66,16 +66,16 @@
 			/>
 			{#if !manager.assetValid}
 				{#if !manager.assetValidPrecision}
-					<p class="text-red-500">{m.form_validation_invalid_number_decimals()}</p>
+					<p class="text-error">{m.form_validation_invalid_number_decimals()}</p>
 				{/if}
 				{#if !manager.assetValidMaximum}
-					<p class="text-red-500">{m.common_amount_exceeds_balance()}</p>
+					<p class="text-error">{m.common_amount_exceeds_balance()}</p>
 				{/if}
 			{/if}
 
 			<Label for="quantity-input">
 				<Button
-					variant="tertiary"
+					variant="text"
 					onclick={() => {
 						manager.setMaxValue();
 					}}

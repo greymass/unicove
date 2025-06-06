@@ -25,7 +25,7 @@
 	interface CTA {
 		text: string;
 		href: string;
-		variant?: 'primary' | 'secondary' | 'tertiary' | 'pill';
+		variant?: 'primary' | 'secondary' | 'text' | 'pill';
 		visible: boolean;
 	}
 
@@ -80,7 +80,7 @@
 		</div>
 		<div class="flex flex-col gap-1 text-nowrap">
 			{#if action && isCurrentUser}
-				<Button variant="tertiary" href={action.href} class="self-start">
+				<Button variant="text" href={action.href} class="self-start">
 					{action.text}
 				</Button>
 			{/if}

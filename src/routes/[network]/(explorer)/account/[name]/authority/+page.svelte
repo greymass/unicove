@@ -51,8 +51,7 @@
 				</div>
 				<div class="flex-end">
 					{#if isCurrentUser}
-						<Button onclick={() => signin(permission)}
-							>}
+						<Button onclick={() => signin(permission)}>
 							{m.common_login_as({ permission })}
 							<div class="text-xs">
 								↳ {m.common_multisig_using({

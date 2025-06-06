@@ -41,7 +41,7 @@
 					: undefined}
 				{@const summary = getActionSummaryComponent(contract, action, trace.act.data)}
 				<li class="">
-					<Trace {trace} {variant} {summary} perspectiveOf={firstAuthorization} />
+					<Trace date {trace} {variant} {summary} perspectiveOf={firstAuthorization} />
 				</li>
 			{/each}
 		</ol>
