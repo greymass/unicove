@@ -3,6 +3,7 @@
 	import { SvelteSet } from 'svelte/reactivity';
 	import IconButton from '../button/icon.svelte';
 	import { X } from 'lucide-svelte';
+	import * as m from '$lib/paraglide/messages';
 
 	let props: FileUploadProps<boolean> = $props();
 
@@ -39,7 +40,8 @@
 		{#each files as file}
 			<li class="flex items-center justify-between">
 				{file.name}
-				<IconButton icon={X} onclick={() => fileUpload.remove(file)}></IconButton>
+				<IconButton label={m.common_remove()} icon={X} onclick={() => fileUpload.remove(file)}
+				></IconButton>
 			</li>
 		{/each}
 	</ul>
