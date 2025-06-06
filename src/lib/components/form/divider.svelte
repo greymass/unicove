@@ -1,1 +1,1 @@
-<hr class="border-outline-variant" />
+<hr class="border-outline" />

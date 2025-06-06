@@ -37,9 +37,7 @@
 					<div class="border-outline text-outline mt-6 rounded-lg border p-4 font-bold">
 						Outline
 					</div>
-					<div
-						class="border-outline-variant text-outline-variant mt-2 rounded-lg border p-4 font-bold"
-					>
+					<div class="border-outline text-outline-variant mt-2 rounded-lg border p-4 font-bold">
 						Outline Variant
 					</div>
 				</div>

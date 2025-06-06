@@ -10,12 +10,17 @@
 	interface Props {
 		data: HistoricalPrice[];
 		label: string;
+		color: string;
 	}
 
-	let { data, label }: Props = $props();
+	let { data, label, color }: Props = $props();
 
 	const labels = $derived(data.map(({ date }) => String(date.toLocaleDateString())));
 	const values = $derived(data.map(({ value }) => Number(value.quantity)));
+
+	const tickColor = $derived(
+		getComputedStyle(document.documentElement).getPropertyValue('--color-on-surface-variant').trim()
+	);
 
 	onMount(() => {
 		chart = new Chart(ctx, {
@@ -27,7 +32,9 @@
 						label: label,
 						data: values,
 						fill: false,
-						borderColor: '#00ED97',
+						pointBackgroundColor: 'transparent',
+						pointBorderColor: color,
+						borderColor: color,
 						pointBorderWidth: 0
 					}
 				]
@@ -59,6 +66,9 @@
 						},
 						grid: {
 							display: false
+						},
+						ticks: {
+							color: tickColor
 						}
 					}
 				},
@@ -74,6 +84,8 @@
 	$effect(() => {
 		chart.data.labels = labels;
 		chart.data.datasets[0].data = values;
+		chart.data.datasets[0].borderColor = color;
+		chart.data.datasets[0].pointBorderColor = color;
 		chart.update();
 	});
 </script>
