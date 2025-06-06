@@ -8,6 +8,7 @@
 	import { ramtoken } from '$lib/wharf/chains';
 	import Row from '../components/row.svelte';
 	import * as m from '$lib/paraglide/messages';
+	import Chip from '$lib/components/chip.svelte';
 
 	interface Props extends Omit<ActionSummaryProps, 'data'> {
 		data: SystemContract.Types.buyrambytes;
@@ -17,12 +18,16 @@
 </script>
 
 <Row>
-	{m.common_requesting()}
-	<AssetElement value={Asset.fromUnits(data.bytes, ramtoken.symbol)} variant="full" />
+	<div class="flex items-center gap-2">
+		<Chip>{m.common_requesting()}</Chip>
+		<AssetElement value={Asset.fromUnits(data.bytes, ramtoken.symbol)} variant="full" />
+	</div>
+
 	<AccountElement name={Name.from(data.payer)} />
+
 	{#if !Name.from(data.receiver).equals(data.payer)}
 		<span>
-			( Receiver: <AccountElement name={Name.from(data.receiver)} /> )
+			(Receiver: <AccountElement name={Name.from(data.receiver)} />)
 		</span>
 	{/if}
 </Row>
