@@ -66,7 +66,7 @@
 </script>
 
 {#snippet span(string: string)}
-	<span {...props} class={cn('text-right text-nowrap tabular-nums', props.class)}>{string}</span>
+	<span {...props} class={cn('text-nowrap tabular-nums', props.class)}>{string}</span>
 {/snippet}
 
 {#if variant === 'short'}

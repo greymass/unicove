@@ -21,17 +21,18 @@
 </script>
 
 <Row>
-	<Chip>Update</Chip>
-	<span class="text-right text-nowrap">
-		{#if Asset.from(delta).units.gt(ZeroUnits)}+{/if}
-		<AssetElement value={Asset.from(delta)} variant="full" />
-	</span>
+	<div class="flex items-center gap-2">
+		<Chip>Update</Chip>
+		<span class="text-nowrap">
+			{#if Asset.from(delta).units.gt(ZeroUnits)}+{/if}
+			<AssetElement value={Asset.from(delta)} variant="full" />
+		</span>
+	</div>
 
 	<AccountLink name={Name.from(account)} />
 
-	<EqualIcon class="size-6" />
-
-	<span class="text-nowrap">
+	<span class="flex items-center gap-1 text-nowrap">
+		<EqualIcon class=" inline size-5" />
 		<span>New Balance:</span>
 		<AssetElement value={Asset.from(balance)} variant="full" />
 	</span>

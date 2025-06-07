@@ -400,7 +400,7 @@
 {/snippet}
 
 {#snippet ButtonGroup()}
-	<fieldset class="flex gap-2 *:flex-1">
+	<fieldset class="grid grid-cols-1 gap-2 @sm:grid-cols-2">
 		{#if f.current === 'to'}
 			<Button variant="secondary" onclick={() => resetURL()}>{m.common_restart()}</Button>
 		{:else if f.current === 'complete'}
@@ -413,9 +413,9 @@
 		{/if}
 
 		{#if f.current === 'memo'}
-			<Button class="col-end-3" onclick={transact} disabled={!ready}>{m.common_submit()}</Button>
+			<Button class="" onclick={transact} disabled={!ready}>{m.common_submit()}</Button>
 		{:else if f.current !== 'complete'}
-			<Button class="col-end-3" type="submit" onclick={preventDefault(next)} disabled={!nextValid}>
+			<Button class="" type="submit" onclick={preventDefault(next)} disabled={!nextValid}>
 				{m.common_next()}
 			</Button>
 		{/if}
