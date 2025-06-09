@@ -87,6 +87,7 @@
 		"lucide-svelte": "^0.424.0",
 		"runed": "^0.15.3",
 		"svead": "^0.0.13",
+		"sveltekit-sitemap": "Joonel/sveltekit-sitemap",
 		"yaml": "^2.7.0"
 	}
 }

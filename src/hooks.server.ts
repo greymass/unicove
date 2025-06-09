@@ -6,6 +6,8 @@ import { availableLanguageTags } from '$lib/paraglide/runtime.js';
 import { i18n } from '$lib/i18n';
 import { isNetworkShortName, ramtoken, systemtoken } from '$lib/wharf/chains';
 import { getBackendNetworkByName } from '$lib/wharf/client/ssr';
+import { sitemapHook, type RouteDefinitions } from "sveltekit-sitemap";
+import { sitemap } from "./sitemap";
 
 export const i18nHandle = i18n.handle();
 type HandleParams = Parameters<Handle>[0];
@@ -107,4 +109,31 @@ export async function redirectHandle({ event, resolve }: HandleParams): Promise<
 	return response;
 }
 
-export const handle: Handle = sequence(i18nHandle, redirectHandle, networkHandle);
+const SUPPORTED_NETWORKS = ['vaulta', 'jungle4']; // ✅ add all your real networks here
+
+export const handle: Handle = sequence(
+	sitemapHook(sitemap, {
+		getRoutes: async () => {
+			const routes: RouteDefinitions<typeof sitemap> = {};
+
+			for (const [pattern, enabled] of Object.entries(sitemap)) {
+				if (!enabled) continue;
+
+				for (const lang of ['en', 'ko', 'zh']) { // temp fix if availableLanguageTags isn't working
+					for (const network of SUPPORTED_NETWORKS) {
+						const finalPath = `/${lang}${pattern.replace('[network]', network)}`;
+						routes[pattern as keyof typeof sitemap] = { path: finalPath };
+					}
+				}
+			}
+
+			console.log('[sitemap] total generated routes:', Object.keys(routes).length);
+			return routes;
+		},
+
+		getRobots: async () => true
+	}),
+	i18nHandle,
+	redirectHandle,
+	networkHandle
+);
