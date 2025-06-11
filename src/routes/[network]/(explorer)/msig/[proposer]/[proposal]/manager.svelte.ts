@@ -45,6 +45,7 @@ export class ApprovalManager {
 
 	// States related to proposal
 	result: TransactResult | null = $state(null);
+	error: string | undefined = $state();
 	actions: Action[] = $state([]);
 	readable: DecodedAction[] = $state([]);
 
@@ -162,15 +163,26 @@ export class ApprovalManager {
 			throw new Error('Must be logged in to sign.');
 		}
 
+		const permissionLevel = this.wharf.session.permissionLevel;
+
 		const action = this.network.contracts.msig.action('approve', {
 			proposer: Name.from(this.proposal.proposer),
 			proposal_name: Name.from(this.proposal.name),
-			level: this.wharf.session.permissionLevel,
+			level: permissionLevel,
 			proposal_hash: this.proposal.hash
 		});
 
-		this.result = await this.wharf.transact({ action });
-		this.accountApprove(this.wharf.session.permissionLevel);
+		this.reset();
+
+		this.wharf
+			.transact({ action })
+			.then((result) => {
+				this.result = result;
+				this.accountApprove(permissionLevel);
+			})
+			.catch((error) => {
+				this.error = String(error);
+			});
 	}
 
 	async unapprove() {
@@ -178,14 +190,25 @@ export class ApprovalManager {
 			throw new Error('Must be logged in to sign.');
 		}
 
+		const permissionLevel = this.wharf.session.permissionLevel;
+
 		const action = this.network.contracts.msig.action('unapprove', {
 			proposer: Name.from(this.proposal.proposer),
 			proposal_name: Name.from(this.proposal.name),
-			level: this.wharf.session.permissionLevel
+			level: permissionLevel
 		});
 
-		this.result = await this.wharf.transact({ action });
-		this.accountUnapprove(this.wharf.session.permissionLevel);
+		this.reset();
+
+		this.wharf
+			.transact({ action })
+			.then((result) => {
+				this.result = result;
+				this.accountUnapprove(permissionLevel);
+			})
+			.catch((error) => {
+				this.error = String(error);
+			});
 	}
 
 	async execute() {
@@ -199,7 +222,16 @@ export class ApprovalManager {
 			executer: this.wharf.session.actor
 		});
 
-		this.result = await this.wharf.transact({ action });
+		this.reset();
+
+		this.wharf
+			.transact({ action })
+			.then((result) => {
+				this.result = result;
+			})
+			.catch((error) => {
+				this.error = String(error);
+			});
 	}
 
 	async cancel() {
@@ -213,7 +245,21 @@ export class ApprovalManager {
 			canceler: this.wharf.session.actor
 		});
 
-		this.result = await this.wharf.transact({ action });
+		this.reset();
+
+		this.wharf
+			.transact({ action })
+			.then((result) => {
+				this.result = result;
+			})
+			.catch((error) => {
+				this.error = String(error);
+			});
+	}
+
+	reset() {
+		this.result = null;
+		this.error = undefined;
 	}
 
 	toJSON() {

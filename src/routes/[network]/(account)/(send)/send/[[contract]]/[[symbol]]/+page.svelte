@@ -25,6 +25,7 @@
 	import TokenSelect from '$lib/components/select/balance.svelte';
 	import TransactError from '$lib/components/transact/error.svelte';
 	import TransactSummary from '$lib/components/transact/summary.svelte';
+	import ActionSummaryContainer from '$lib/components/summary/components/container.svelte';
 
 	import { formatCurrency } from '$lib/i18n';
 	import { preventDefault } from '$lib/utils';
@@ -347,7 +348,7 @@
 			/>
 
 			{#if context.account}
-				<Button variant="tertiary" disabled={!context.account} onclick={max}>
+				<Button variant="text" disabled={!context.account} onclick={max}>
 					{m.common_fill_max()}
 				</Button>
 			{/if}
@@ -361,11 +362,11 @@
 			{/if}
 
 			{#if !assetValidPrecision}
-				<p class="text-red-500">{m.common_invalid_number_decimals()}</p>
+				<p class="text-error">{m.common_invalid_number_decimals()}</p>
 			{/if}
 
 			{#if !assetValidMaximum}
-				<p class="text-red-500">{m.common_amount_exceeds_balance()}</p>
+				<p class="text-error">{m.common_amount_exceeds_balance()}</p>
 			{/if}
 		</fieldset>
 	</section>
@@ -373,7 +374,9 @@
 
 {#snippet Memo()}
 	<div class:hidden={!showAll && f.current !== 'memo'} class="space-y-4">
-		<SummarySend data={sendState.toJSON()} />
+		<ActionSummaryContainer>
+			<SummarySend data={sendState.toJSON()} />
+		</ActionSummaryContainer>
 
 		<fieldset class="grid gap-2">
 			<Label for="memo-input">{m.common_memo()} ({m.common_optional()})</Label>
@@ -397,7 +400,7 @@
 {/snippet}
 
 {#snippet ButtonGroup()}
-	<fieldset class="flex gap-2 *:flex-1">
+	<fieldset class="grid grid-cols-1 gap-2 @sm:grid-cols-2">
 		{#if f.current === 'to'}
 			<Button variant="secondary" onclick={() => resetURL()}>{m.common_restart()}</Button>
 		{:else if f.current === 'complete'}
@@ -410,9 +413,9 @@
 		{/if}
 
 		{#if f.current === 'memo'}
-			<Button class="col-end-3" onclick={transact} disabled={!ready}>{m.common_submit()}</Button>
+			<Button class="" onclick={transact} disabled={!ready}>{m.common_submit()}</Button>
 		{:else if f.current !== 'complete'}
-			<Button class="col-end-3" type="submit" onclick={preventDefault(next)} disabled={!nextValid}>
+			<Button class="" type="submit" onclick={preventDefault(next)} disabled={!nextValid}>
 				{m.common_next()}
 			</Button>
 		{/if}

@@ -4,9 +4,6 @@
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 
-	import SummaryBuyRAMBytes from '$lib/components/summary/eosio/buyrambytes.svelte';
-	import SummaryBuyRAM from '$lib/components/summary/eosio/buyram.svelte';
-
 	import Button from '$lib/components/button/button.svelte';
 	import Code from '$lib/components/code.svelte';
 	import Label from '$lib/components/input/label.svelte';
@@ -100,7 +97,6 @@
 </script>
 
 <Stack>
-	<SystemTokenSwap account={context.account} network={data.network} />
 	{#if transactionId}
 		<TransactSummary {transactionId} />
 		<Button href={`/${data.network}/ram`} variant="secondary">
@@ -136,7 +132,7 @@
 					</div>
 				</div>
 				{#if buyRamState.insufficientBalance}
-					<p class="text-red-500">
+					<p class="text-error">
 						{m.form_validation_insufficient_balance({
 							unit: String(context.network.chain.systemToken?.symbol.name)
 						})}
@@ -155,6 +151,8 @@
 			<Button type="submit" class="mt-4 w-full" disabled={!ready}>
 				{m.common_unit_buy({ unit: 'RAM' })}
 			</Button>
+
+			<SystemTokenSwap account={context.account} network={data.network} />
 
 			<Stack class="gap-3">
 				<DL>
@@ -190,14 +188,6 @@
 						</DD>
 					</DLRow>
 				</DL>
-
-				{#if buyRamState.valid}
-					{#if buyRamState.format === 'asset'}
-						<SummaryBuyRAM class="hidden" data={buyRamState.toJSON()} />
-					{:else}
-						<SummaryBuyRAMBytes class="hidden" data={buyRamState.toJSON()} />
-					{/if}
-				{/if}
 			</Stack>
 		</form>
 	{/if}

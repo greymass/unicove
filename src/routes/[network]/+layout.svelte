@@ -26,8 +26,6 @@
 	import Unicovelogo from '$lib/assets/unicovelogo.svelte';
 	import MobileNavigation from '$lib/components/navigation/mobilenavigation.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte.js';
-	import DebugToggle from '$lib/components/select/debug.svelte';
-	import { CodeIcon } from 'lucide-svelte';
 
 	let { children, data } = $props();
 
@@ -229,7 +227,7 @@
 
 <div
 	data-theme={data.network}
-	class="relative mx-auto grid h-full min-h-svh w-[calc(100%-2rem)] max-w-(--breakpoint-2xl) grid-cols-2 grid-rows-[min-content_minmax(0,1fr)] gap-y-6 pt-4 pb-12 sm:grid-cols-4 md:h-auto md:min-h-svh md:grid-cols-12 md:grid-rows-[min-content_auto_minmax(0,1fr)] md:gap-x-4 xl:w-[calc(100%-6rem)]"
+	class="mx-auto grid h-full min-h-svh w-[calc(100%-2rem)] max-w-(--breakpoint-2xl) grid-cols-2 grid-rows-[min-content_minmax(0,1fr)] gap-y-6 pt-4 pb-12 sm:grid-cols-4 md:h-auto md:min-h-svh md:grid-cols-12 md:grid-rows-[min-content_auto_minmax(0,1fr)] md:gap-x-4 xl:w-[calc(100%-6rem)]"
 >
 	<aside
 		class="relative col-start-1 col-end-3 row-span-full row-start-1 hidden h-full grid-rows-subgrid md:grid"
@@ -248,14 +246,9 @@
 		<div
 			class="flex items-center justify-end gap-4 sm:col-start-4 md:col-span-full md:col-start-9 md:flex-1 md:gap-4"
 		>
-			{#if settings.data.developerMode}
-				<CodeIcon /> Debug?
-				<DebugToggle />
-			{/if}
-
 			<Search class="max-w-56 flex-1" />
 
-			<AccountSwitcher network={data.network} class="" />
+			<AccountSwitcher network={data.network} />
 		</div>
 	</header>
 

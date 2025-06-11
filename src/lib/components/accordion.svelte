@@ -29,11 +29,7 @@
 	};
 </script>
 
-<details
-	bind:this={detailsElement}
-	class={cn('group bg-surface-container rounded-xl', className)}
-	{open}
->
+<details bind:this={detailsElement} class={cn('group bg-surface rounded-xl', className)} {open}>
 	<summary
 		class="focus-visible:outline-solar-500 @container flex cursor-pointer justify-between gap-4 rounded-xl p-5 select-none focus-visible:outline"
 		onclick={syncOpen}

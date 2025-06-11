@@ -54,7 +54,7 @@
 
 {#snippet tableAction(asset: Asset)}
 	<td class="text-right">
-		<Button variant="tertiary" href="/{data.network}/send?quantity={asset}">
+		<Button variant="text" href="/{data.network}/send?quantity={asset}">
 			{m.common_send()}
 		</Button>
 	</td>

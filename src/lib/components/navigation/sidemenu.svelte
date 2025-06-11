@@ -1,9 +1,12 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
 	import * as m from '$lib/paraglide/messages';
+	import DebugToggle from '$lib/components/select/debug.svelte';
+	import { CodeIcon, MoonIcon } from 'lucide-svelte';
+	import SchemeToggle from '$lib/components/select/scheme.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -15,7 +18,7 @@
 	let { callbackFn, network }: Props = $props();
 
 	// Example: ['', 'en', 'eos', 'staking', 'withdraw']
-	let pathname = $derived($page.url.pathname.split('/'));
+	let pathname = $derived(page.url.pathname.split('/'));
 
 	const destinations = $derived.by(() => {
 		const items = [
@@ -73,13 +76,13 @@
 	});
 </script>
 
-<menu class="text-on-surface flex flex-col gap-2 text-base font-medium text-nowrap">
+<menu id="side-menu" class="flex flex-col gap-2 text-base font-medium text-nowrap">
 	{#each destinations as option}
 		<a
 			href={option.href}
-			class="focus-visible:outline-solar-500 flex h-12 items-center rounded-lg leading-snug transition-opacity select-none hover:opacity-100 focus-visible:opacity-100 focus-visible:outline"
-			class:opacity-70={!option.active}
-			class:opacity-100={option.active}
+			class="focus-visible:outline-solar-500 hover:text-on-surface flex h-12 items-center rounded-lg leading-snug select-none focus-visible:opacity-100 focus-visible:outline"
+			class:text-on-surface-variant={!option.active}
+			class:text-on-surface={option.active}
 			aria-current={!!option.active}
 			onclick={callbackFn}
 		>
@@ -92,4 +95,16 @@
 			</span>
 		</a>
 	{/each}
+	{#if context.settings.data.developerMode}
+		<div class="grid gap-4">
+			<span class="flex items-center gap-2">
+				<CodeIcon />
+				<DebugToggle />
+			</span>
+			<span class="flex items-center gap-2">
+				<MoonIcon />
+				<SchemeToggle />
+			</span>
+		</div>
+	{/if}
 </menu>

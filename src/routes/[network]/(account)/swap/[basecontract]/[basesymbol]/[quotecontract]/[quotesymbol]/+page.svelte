@@ -256,7 +256,7 @@
 			{m.common_send_tokens({
 				token: data.base.name
 			})}
-			<Button variant="tertiary" disabled={!context.account} onclick={max}>
+			<Button variant="text" disabled={!context.account} onclick={max}>
 				{m.common_fill_max()}
 			</Button>
 		</Label>

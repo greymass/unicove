@@ -4,8 +4,6 @@
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 
-	import SummarySellRAM from '$lib/components/summary/eosio/sellram.svelte';
-
 	import Button from '$lib/components/button/button.svelte';
 	import Code from '$lib/components/code.svelte';
 	import Label from '$lib/components/input/label.svelte';
@@ -125,7 +123,7 @@
 					</div>
 				</div>
 				{#if sellRamState.insufficientRAM}
-					<p class="text-red-500">{m.form_validation_insufficient_balance({ unit: 'RAM' })}</p>
+					<p class="text-error">{m.form_validation_insufficient_balance({ unit: 'RAM' })}</p>
 				{/if}
 				<p>
 					{m.common_labeled_unit_available({ unit: 'RAM' })}
@@ -175,10 +173,6 @@
 						</DD>
 					</DLRow>
 				</DL>
-
-				{#if sellRamState.valid}
-					<SummarySellRAM class="hidden" data={sellRamState.toJSON()} />
-				{/if}
 			</Stack>
 		</form>
 	{/if}
