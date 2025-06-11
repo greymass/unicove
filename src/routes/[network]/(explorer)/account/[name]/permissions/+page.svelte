@@ -6,8 +6,8 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
 	import { goto } from '$app/navigation';
-	import type { TreePermission } from './+page';
 	import * as m from '$lib/paraglide/messages';
+	import type { TreePermission } from '$lib/types/permission';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
