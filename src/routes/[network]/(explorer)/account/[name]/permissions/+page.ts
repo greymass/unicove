@@ -1,12 +1,5 @@
-import type { API } from '@wharfkit/antelope';
-
 import type { PageLoad } from './$types';
 import * as m from '$lib/paraglide/messages';
-
-export interface TreePermission {
-	permission: API.v1.AccountPermission;
-	children?: TreePermission[];
-}
 
 export const load: PageLoad = async ({ params, parent }) => {
 	const { network } = await parent();
