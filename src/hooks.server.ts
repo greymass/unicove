@@ -32,7 +32,7 @@ function isAPIPath(pathname: string) {
 }
 
 function skipRedirect(pathname: string) {
-	return isAPIPath(pathname);
+	return isAPIPath(pathname) || pathname.endsWith('.xml');
 }
 
 function isNetwork(value: string) {
@@ -61,7 +61,7 @@ function isManualRedirectPath(pathMore: string[]): boolean {
 
 export async function networkHandle({ event, resolve }: HandleParams): Promise<Response> {
 	event.locals.network = getBackendNetworkByName(PUBLIC_CHAIN_SHORT, event.fetch);
-	return await resolve(event, {
+	return resolve(event, {
 		transformPageChunk: ({ html }) => html.replace('%network%', event.locals.network.toString())
 	});
 }
@@ -70,7 +70,7 @@ export async function redirectHandle({ event, resolve }: HandleParams): Promise<
 	const { pathname, search } = new URL(event.request.url);
 
 	if (skipRedirect(pathname)) {
-		return await resolve(event);
+		return resolve(event);
 	}
 
 	const [, pathFirst, pathSecond, ...pathMore] = pathname.split('/').map((p) => p.trim());
@@ -103,8 +103,7 @@ export async function redirectHandle({ event, resolve }: HandleParams): Promise<
 		});
 	}
 
-	const response = await resolve(event);
-	return response;
+	return resolve(event);
 }
 
 export const handle: Handle = sequence(i18nHandle, redirectHandle, networkHandle);
