@@ -46,6 +46,7 @@ export default ts.config([
 			'src/lib/paraglide',
 			'src/paraglide',
 			'svelte.config.js'
+			'tests/**/*.spec.ts'
 		]
 	}
 ]);
