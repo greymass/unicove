@@ -280,7 +280,7 @@
 			<Code json={action} />
 		{/if}
 
-		{#if action.account.equals('eosio') && action.name.equals('setcode') && objectified && objectified.code}
+		{#if (action.account.equals(PUBLIC_SYSTEM_CONTRACT) || action.account.equals('eosio')) && action.name.equals('setcode') && objectified && objectified.code}
 			{@render Pretty({ hash: String(Checksum256.hash(objectified.code)) })}
 		{/if}
 
