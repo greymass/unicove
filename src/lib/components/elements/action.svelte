@@ -21,6 +21,7 @@
 	import * as m from '$lib/paraglide/messages';
 	import ActionSummaryContainer from '$lib/components/summary/components/container.svelte';
 	import { getActionSummaryTitle } from '../summary';
+	import { PUBLIC_SYSTEM_CONTRACT } from '$env/static/public';
 
 	const context = getContext<UnicoveContext>('state');
 
