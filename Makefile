@@ -138,6 +138,9 @@ config/jungle4/vaulta: codegen/clean
 config/kylin: codegen/clean
 	cp ./configs/.env.kylin .env.local
 
+config/spring-2-testnet: codegen/clean
+	cp ./configs/.env.spring2.testnet .env.local
+
 config/telos: codegen/clean
 	cp ./configs/.env.telos .env.local
 
