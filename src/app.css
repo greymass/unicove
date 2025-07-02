@@ -191,6 +191,7 @@
 	}
 
 	/* Themes */
+	:root,
 	[data-theme='vaulta'] {
 		--theme-seed: #2e3bff;
 	}
