@@ -16,7 +16,7 @@
 	import Label from '$lib/components/input/label.svelte';
 	import { SingleCard, Stack } from '$lib/components/layout';
 	import { deriveSwapAction } from '../../../../swap.js';
-	import Switcher from '$lib/components/layout/switcher.svelte';
+	import {Switcher} from 'unicove-components';
 
 	const { data } = $props();
 
