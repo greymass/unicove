@@ -18,7 +18,7 @@
 	import { DL, DLRow, DD } from 'unicove-components';
 	import coinbaseLogo from '$lib/assets/exchanges/coinbase.svg';
 	import {Stack} from 'unicove-components';
-	import Cluster from '$lib/components/layout/cluster.svelte';
+	import {Cluster} from 'unicove-components';
 
 	const context = getContext<UnicoveContext>('state');
 

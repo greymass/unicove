@@ -4,7 +4,7 @@
 	import AssetInput from './asset.svelte';
 	import TextInput from './text.svelte';
 	import {Button} from 'unicove-components';
-	import Cluster from '$lib/components/layout/cluster.svelte';
+	import {Cluster} from 'unicove-components';
 	import {Stack} from 'unicove-components';
 	import {Code} from 'unicove-components';
 
