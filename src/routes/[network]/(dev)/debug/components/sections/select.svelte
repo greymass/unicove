@@ -7,7 +7,7 @@
 	import TokenSelect from '$lib/components/select/balance.svelte';
 	import type { SelectOption } from '@melt-ui/svelte';
 	import {Button} from 'unicove-components';
-	import Code from '$lib/components/code.svelte';
+	import {Code} from 'unicove-components';
 	import { TokenBalance } from '$lib/types/token';
 
 	const options: SelectOption[] = [

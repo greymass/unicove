@@ -7,7 +7,7 @@
 	import ContractActionOverview from '$lib/components/contract/action/overview.svelte';
 	import ContractActionParams from '$lib/components/contract/action/params.svelte';
 	import ContractActionResponse from '$lib/components/contract/action/response.svelte';
-	import Code from '$lib/components/code.svelte';
+	import {Code} from 'unicove-components';
 	import Switcher from '../layout/switcher.svelte';
 	import Stack from '../layout/stack.svelte';
 

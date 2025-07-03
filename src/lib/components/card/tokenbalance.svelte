@@ -16,7 +16,7 @@
 	import * as m from '$lib/paraglide/messages';
 	import {Button} from 'unicove-components';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import Code from '$lib/components/code.svelte';
+	import {Code} from 'unicove-components';
 	import Link from '$lib/components/elements/link.svelte';
 	import Accordion from '$lib/components/accordion.svelte';
 

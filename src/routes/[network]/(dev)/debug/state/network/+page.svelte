@@ -1,6 +1,6 @@
 <script lang="ts">
 	import {Button} from 'unicove-components';
-	import Code from '$lib/components/code.svelte';
+	import {Code} from 'unicove-components';
 	import { page } from '$app/stores';
 	import { Stack } from '$lib/components/layout';
 

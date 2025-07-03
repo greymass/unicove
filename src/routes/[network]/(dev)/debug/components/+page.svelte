@@ -6,7 +6,7 @@
 	import Inputs from './sections/inputs.svelte';
 	import Cards from './sections/cards.svelte';
 	import Navigation from './sections/navigation.svelte';
-	import Code from './sections/code.svelte';
+	import {Code} from 'unicove-components';
 	import Layouts from './sections/layouts.svelte';
 	import Progress from './sections/progress.svelte';
 	import Tables from './sections/tables.svelte';

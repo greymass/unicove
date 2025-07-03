@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 
-	import Code from '$lib/components/code.svelte';
+	import {Code} from 'unicove-components';
 
 	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte.js';
 	import AssetText from '$lib/components/elements/asset.svelte';

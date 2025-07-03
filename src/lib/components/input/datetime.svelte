@@ -2,7 +2,7 @@
 	import { cn } from '$lib/utils/style';
 	import type { Snippet } from 'svelte';
 	import type { HTMLInputAttributes } from 'svelte/elements';
-	import Code from '../code.svelte';
+	import {Code} from 'unicove-components';
 
 	interface DatetimeInputProps extends HTMLInputAttributes {
 		date?: Date;

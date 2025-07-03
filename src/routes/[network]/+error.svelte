@@ -2,7 +2,7 @@
 	import { page } from '$app/state';
 	import { SingleCard, Stack } from '$lib/components/layout';
 	import Generic404 from '$lib/components/errors/generic.svelte';
-	// import Code from '$lib/components/code.svelte';
+	// import {Code} from 'unicove-components';
 </script>
 
 <!-- This error page gets triggered if any of the routes in the sibling directories fail -->

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Stack from '$lib/components/layout/stack.svelte';
 	import Table from '$lib/components/contract/table.svelte';
-	import Code from '$lib/components/code.svelte';
+	import {Code} from 'unicove-components';
 	import {Button} from 'unicove-components';
 	import TextInput from '$lib/components/input/text.svelte';
 	import { goto } from '$lib/utils';

@@ -1,6 +1,6 @@
 <script>
 	import { Stack } from '$lib/components/layout';
-	import Code from '$lib/components/code.svelte';
+	import {Code} from 'unicove-components';
 </script>
 
 <Stack id="code">

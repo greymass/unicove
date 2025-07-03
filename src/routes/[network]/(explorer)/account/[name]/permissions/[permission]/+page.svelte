@@ -28,7 +28,7 @@
 	import type { SelectOption } from '@melt-ui/svelte';
 	import type { ExtendedSelectOption } from '$lib/components/select/types.js';
 	import type { ChangeFn } from '@melt-ui/svelte/internal/helpers';
-	import Code from '$lib/components/code.svelte';
+	import {Code} from 'unicove-components';
 	import PermissionComponent from '../permission.svelte';
 	import { fly } from 'svelte/transition';
 	import { cubicOut } from 'svelte/easing';

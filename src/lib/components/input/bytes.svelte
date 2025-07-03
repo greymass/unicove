@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { ComponentProps } from 'svelte';
 	import TextInput from './text.svelte';
-	import Code from '../code.svelte';
+	import {Code} from 'unicove-components';
 	import ArrowUpDown from 'lucide-svelte/icons/arrow-up-down';
 
 	interface BytesInputProps extends ComponentProps<typeof TextInput> {

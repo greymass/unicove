@@ -6,7 +6,7 @@
 		PermissionLevel,
 		type Checksum256Type
 	} from '@wharfkit/antelope';
-	import Code from '../code.svelte';
+	import {Code} from 'unicove-components';
 	import Account from '$lib/components/elements/account.svelte';
 	import Contract from '$lib/components/elements/contract.svelte';
 	import DateTime from '$lib/components/elements/datetime.svelte';

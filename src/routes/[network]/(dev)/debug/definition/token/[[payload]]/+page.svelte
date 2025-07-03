@@ -5,7 +5,7 @@
 	import { TokenDefinition } from '$lib/types/token';
 	import {Button} from 'unicove-components';
 	import { onMount } from 'svelte';
-	import Code from '$lib/components/code.svelte';
+	import {Code} from 'unicove-components';
 
 	const { data } = $props();
 

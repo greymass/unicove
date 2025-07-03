@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Code from '$lib/components/code.svelte';
+	import {Code} from 'unicove-components';
 	import type { PageData } from './$types';
 
 	export let data: PageData;

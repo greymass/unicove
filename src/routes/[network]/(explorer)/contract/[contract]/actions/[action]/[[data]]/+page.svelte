@@ -10,7 +10,7 @@
 	import Action from '$lib/components/contract/action.svelte';
 	import {Button} from 'unicove-components';
 	import Card from '$lib/components/layout/box/card.svelte';
-	import Code from '$lib/components/code.svelte';
+	import {Code} from 'unicove-components';
 	import Label from '$lib/components/input/label.svelte';
 	import TextInput from '$lib/components/input/text.svelte';
 	import {CopyButton} from 'unicove-components';

@@ -8,7 +8,7 @@
 	import Label from '$lib/components/input/label.svelte';
 	import { Card, Stack } from '$lib/components/layout';
 	import { type UnicoveContext } from '$lib/state/client.svelte';
-	import Code from '$lib/components/code.svelte';
+	import {Code} from 'unicove-components';
 	import * as m from '$lib/paraglide/messages';
 	import Pageheader from '$lib/components/pageheader.svelte';
 	import Select from '$lib/components/select/select.svelte';

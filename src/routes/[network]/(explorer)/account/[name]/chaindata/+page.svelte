@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Code from '$lib/components/code.svelte';
+	import {Code} from 'unicove-components';
 
 	const { data } = $props();
 </script>

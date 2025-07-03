@@ -2,7 +2,7 @@
 	import { Asset, Checksum256, type AnyAction } from '@wharfkit/antelope';
 	import { getContext } from 'svelte';
 
-	import Code from '$lib/components/code.svelte';
+	import {Code} from 'unicove-components';
 	import AssetInput from '$lib/components/input/asset.svelte';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import {Button} from 'unicove-components';

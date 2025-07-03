@@ -16,7 +16,7 @@
 	import { SingleCard, Stack } from '$lib/components/layout';
 	import AssetInput from '$lib/components/input/asset.svelte';
 	import {Button} from 'unicove-components';
-	import Code from '$lib/components/code.svelte';
+	import {Code} from 'unicove-components';
 	import Label from '$lib/components/input/label.svelte';
 	import NameInput from '$lib/components/input/name.svelte';
 	import Progress from '$lib/components/progress.svelte';

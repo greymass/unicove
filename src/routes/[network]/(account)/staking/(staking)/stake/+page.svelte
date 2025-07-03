@@ -13,7 +13,7 @@
 	import { DL } from '$lib/components/descriptionlist';
 	import * as m from '$lib/paraglide/messages';
 	import SystemTokenSwap from '$lib/components/banner/systemTokenSwap.svelte';
-	import Code from '$lib/components/code.svelte';
+	import {Code} from 'unicove-components';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();

@@ -2,7 +2,7 @@
 	import { getContext } from 'svelte';
 
 	import {Button} from 'unicove-components';
-	import Code from '$lib/components/code.svelte';
+	import {Code} from 'unicove-components';
 	import { Stack } from '$lib/components/layout';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 

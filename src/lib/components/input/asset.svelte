@@ -3,7 +3,7 @@
 	import type { ComponentProps } from 'svelte';
 	import TextInput from './text.svelte';
 	import Big from 'big.js';
-	import Code from '../code.svelte';
+	import {Code} from 'unicove-components';
 	import { ZeroUnits } from '$lib/types/token';
 
 	interface AssetInputProps extends ComponentProps<typeof TextInput> {

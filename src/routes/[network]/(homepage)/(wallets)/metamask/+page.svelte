@@ -14,7 +14,7 @@
 	import TextInput from '$lib/components/input/text.svelte';
 	import {CopyButton} from 'unicove-components';
 	import * as m from '$lib/paraglide/messages';
-	import Code from '$lib/components/code.svelte';
+	import {Code} from 'unicove-components';
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');
