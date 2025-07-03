@@ -6,7 +6,7 @@
 	import HardDrive from 'lucide-svelte/icons/hard-drive';
 
 	import * as m from '$lib/paraglide/messages';
-	import NumberFormat from '$lib/components/elements/number.svelte';
+	import { Number as NumberFormat } from 'unicove-components';
 
 	interface Props {
 		type: keyof typeof resourceMap;

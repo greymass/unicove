@@ -1,7 +1,8 @@
+<!-- TODO: Refactor to use the delta feature of the unicove-components number component -->
 <script lang="ts">
 	import { Int64, type Int } from '@wharfkit/antelope';
 
-	import NumberText from '$lib/components/elements/number.svelte';
+	import { Number as NumberText } from 'unicove-components';
 
 	interface Props {
 		number: Int;
