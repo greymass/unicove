@@ -3,7 +3,7 @@
 	import { getContext } from 'svelte';
 	import type { ChangeFn } from '@melt-ui/svelte/internal/helpers';
 
-	import Switch from '$lib/components/input/switch.svelte';
+	import { Switch } from 'unicove-components';
 	import LanguageSelect from '$lib/components/select/language.svelte';
 	import Label from '$lib/components/input/label.svelte';
 	import { Card, Stack } from 'unicove-components';
