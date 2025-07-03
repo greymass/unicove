@@ -1,8 +1,7 @@
 <script lang="ts">
 	import Account from '$lib/components/elements/account.svelte';
 	import Contract from '$lib/components/elements/contract.svelte';
-	import RAMDelta from '$lib/components/elements/ramdelta.svelte';
-	import {Card} from 'unicove-components';
+	import { Card, Number } from 'unicove-components';
 
 	import * as m from '$lib/paraglide/messages';
 
@@ -33,7 +32,7 @@
 				{#each trace.account_ram_deltas as delta}
 					<tr>
 						<td class="text-right font-mono font-bold">
-							<RAMDelta number={delta.delta} colored />
+							<Number delta number={delta.delta} colored />
 						</td>
 						<td>
 							<Account name={delta.account} />
