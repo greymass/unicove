@@ -11,7 +11,7 @@
 	import { Button } from 'unicove-components';
 	import { BytesInput } from 'unicove-components';
 	import {Card} from 'unicove-components';
-	import Label from '$lib/components/input/label.svelte';
+	import { Label } from 'unicove-components';
 	import RamPriceHistory from '$lib/components/chart/rampricehistory.svelte';
 	import type { SystemResources } from '$lib/types/network';
 	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte';

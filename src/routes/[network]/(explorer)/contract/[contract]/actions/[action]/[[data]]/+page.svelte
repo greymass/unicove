@@ -11,7 +11,7 @@
 	import { Button } from 'unicove-components';
 	import {Card} from 'unicove-components';
 	import { Code } from 'unicove-components';
-	import Label from '$lib/components/input/label.svelte';
+	import { Label } from 'unicove-components';
 	import { TextInput } from 'unicove-components';
 	import { CopyButton } from 'unicove-components';
 

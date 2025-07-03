@@ -11,7 +11,7 @@
 	import * as m from '$lib/paraglide/messages';
 	import { SingleCard } from '$lib/components/layout/index.js';
 	import { Stack } from 'unicove-components';
-	import Label from '$lib/components/input/label.svelte';
+	import { Label } from 'unicove-components';
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');

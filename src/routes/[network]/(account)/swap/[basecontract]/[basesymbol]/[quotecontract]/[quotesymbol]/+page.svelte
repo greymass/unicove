@@ -13,7 +13,7 @@
 	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte.js';
 	import { TokenBalance, TokenSwap, ZeroUnits } from '$lib/types/token.js';
 	import { ArrowRightLeft } from 'lucide-svelte';
-	import Label from '$lib/components/input/label.svelte';
+	import { Label } from 'unicove-components';
 	import { SingleCard } from '$lib/components/layout';
 	import { Stack } from 'unicove-components';
 	import { deriveSwapAction } from '../../../../swap.js';

@@ -13,7 +13,7 @@
 	import { NameInput } from 'unicove-components';
 	import { NumberInput } from 'unicove-components';
 	import { Button } from 'unicove-components';
-	import Label from '$lib/components/input/label.svelte';
+	import { Label } from 'unicove-components';
 	import { i18n } from '$lib/i18n';
 	import { Select } from 'unicove-components';
 	import TransactSummary from '$lib/components/transact/summary.svelte';

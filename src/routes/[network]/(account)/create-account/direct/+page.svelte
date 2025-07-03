@@ -8,7 +8,7 @@
 
 	import { DD, DL, DLRow } from 'unicove-components';
 	import { preventDefault } from '$lib/utils';
-	import Label from '$lib/components/input/label.svelte';
+	import { Label } from 'unicove-components';
 	import { NameInput } from 'unicove-components';
 	import { PublicKeyInput } from 'unicove-components';
 	import { NumberInput } from 'unicove-components';

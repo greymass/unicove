@@ -2,7 +2,7 @@
 	import { Cluster, Stack } from 'unicove-components';
 	import { Select } from 'unicove-components';
 	import type { ExtendedSelectOption } from '$lib/components/select/types';
-	import Label from '$lib/components/input/label.svelte';
+	import { Label } from 'unicove-components';
 	import { Chains } from '@wharfkit/common';
 	import TokenSelect from '$lib/components/select/balance.svelte';
 	import type { SelectOption } from '@melt-ui/svelte';

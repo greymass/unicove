@@ -6,7 +6,7 @@
 	import { TextInput } from 'unicove-components';
 	import { goto } from '$lib/utils';
 	import { Checkbox } from 'unicove-components';
-	import Label from '$lib/components/input/label.svelte';
+	import { Label } from 'unicove-components';
 
 	const { data } = $props();
 

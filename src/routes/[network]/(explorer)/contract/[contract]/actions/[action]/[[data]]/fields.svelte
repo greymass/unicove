@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Self from './fields.svelte';
 	import { Checkbox } from 'unicove-components';
-	import Label from '$lib/components/input/label.svelte';
+	import { Label } from 'unicove-components';
 	import { TextInput } from 'unicove-components';
 	import type { ABI } from '@wharfkit/antelope';
 

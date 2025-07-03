@@ -5,7 +5,7 @@
 
 	import { Switch } from 'unicove-components';
 	import LanguageSelect from '$lib/components/select/language.svelte';
-	import Label from '$lib/components/input/label.svelte';
+	import { Label } from 'unicove-components';
 	import { Card, Stack } from 'unicove-components';
 	import { type UnicoveContext } from '$lib/state/client.svelte';
 	import { Code } from 'unicove-components';

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Cluster, Stack } from 'unicove-components';
 	import { TextInput } from 'unicove-components';
-	import Label from '$lib/components/input/label.svelte';
+	import { Label } from 'unicove-components';
 	import AssetOrUnitsInput from '$lib/components/input/assetOrUnits.svelte';
 	import { NumberInput } from 'unicove-components';
 	import { Switch } from 'unicove-components';
