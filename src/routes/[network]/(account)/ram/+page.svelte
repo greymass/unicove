@@ -9,7 +9,7 @@
 	import { AssetInput } from 'unicove-components';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import { Button } from 'unicove-components';
-	import BytesInput from '$lib/components/input/bytes.svelte';
+	import { BytesInput } from 'unicove-components';
 	import {Card} from 'unicove-components';
 	import Label from '$lib/components/input/label.svelte';
 	import RamPriceHistory from '$lib/components/chart/rampricehistory.svelte';

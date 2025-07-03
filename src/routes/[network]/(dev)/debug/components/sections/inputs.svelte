@@ -6,7 +6,7 @@
 	import NumberInput from '$lib/components/input/number.svelte';
 	import Switch from '$lib/components/input/switch.svelte';
 	import Checkbox from '$lib/components/input/checkbox.svelte';
-	import BytesInput from '$lib/components/input/bytes.svelte';
+	import { BytesInput } from 'unicove-components';
 
 	import { Asset } from '@wharfkit/antelope';
 	import { AssetInput } from 'unicove-components';
