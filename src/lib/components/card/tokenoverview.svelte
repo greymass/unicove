@@ -3,7 +3,7 @@
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import { Asset } from '@wharfkit/antelope';
 	import TradingPair from '$lib/components/elements/tradingpair.svelte';
-	import Chip from '$lib/components/chip.svelte';
+	import {Chip} from 'unicove-components';
 	import { Breakdown, BreakdownRow } from '$lib/components/breakdown';
 	import * as m from '$lib/paraglide/messages';
 	import type { NetworkState } from '$lib/state/network.svelte';

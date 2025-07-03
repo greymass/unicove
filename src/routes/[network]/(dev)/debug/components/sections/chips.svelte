@@ -1,5 +1,5 @@
 <script>
-	import Chip from '$lib/components/chip.svelte';
+	import {Chip} from 'unicove-components';
 
 	import { Stack } from '$lib/components/layout';
 </script>

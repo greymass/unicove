@@ -4,7 +4,7 @@
 
 	import { Card, Stack } from '$lib/components/layout';
 	import {Button} from 'unicove-components';
-	import Chip from '$lib/components/chip.svelte';
+	import {Chip} from 'unicove-components';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import * as m from '$lib/paraglide/messages';
 

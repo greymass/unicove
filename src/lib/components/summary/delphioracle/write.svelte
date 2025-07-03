@@ -1,6 +1,6 @@
 <script lang="ts">
 	import * as DelphiContract from '$lib/wharf/contracts/delphioracle';
-	import Chip from '$lib/components/chip.svelte';
+	import {Chip} from 'unicove-components';
 	import type { ActionSummaryProps } from '$lib/types/transaction';
 
 	interface Props extends Omit<ActionSummaryProps, 'data'> {

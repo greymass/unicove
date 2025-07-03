@@ -21,7 +21,7 @@
 	import AccountBalance from '$lib/components/card/accountbalance.svelte';
 	import StakingCalculator from './stakingcalculator.svelte';
 	import Cluster from '$lib/components/layout/cluster.svelte';
-	import Chip from '$lib/components/chip.svelte';
+	import {Chip} from 'unicove-components';
 	import * as m from '$lib/paraglide/messages';
 	import { Currencies } from '$lib/types/currencies';
 	import { ZeroUnits } from '$lib/types/token';

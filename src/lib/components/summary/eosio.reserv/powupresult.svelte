@@ -2,7 +2,7 @@
 	import type { ActionSummaryProps } from '$lib/types/transaction';
 	import * as m from '$lib/paraglide/messages';
 	import Row from '../components/row.svelte';
-	import Chip from '$lib/components/chip.svelte';
+	import {Chip} from 'unicove-components';
 	import { Int64 } from '@wharfkit/antelope';
 	import { ZeroUnits } from '$lib/types/token';
 	import type { powupresult } from '$lib/types/powerup';
