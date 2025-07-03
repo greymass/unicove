@@ -1,10 +1,12 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 
-	import FormDivider from '$lib/components/form/divider.svelte';
-	import FormSection from '$lib/components/form/section.svelte';
-	import FormSectionHeader from '$lib/components/form/sectionHeader.svelte';
-	import FormSectionContent from '$lib/components/form/sectionContent.svelte';
+	import {
+		FormContent as FormSectionContent,
+		FormHeader as FormSectionHeader,
+		FormSection,
+		HR as FormDivider
+	} from 'unicove-components';
 	import RemoveRowButton from '$lib/components/form/removeRowButton.svelte';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
