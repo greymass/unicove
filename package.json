@@ -42,7 +42,7 @@
 		"prettier-plugin-svelte": "^3.3.3",
 		"prettier-plugin-tailwindcss": "^0.6.11",
 		"storyblok": "^3.36.0",
-		"svelte": "^5.25.6",
+		"svelte": "^5.35.0",
 		"svelte-adapter-bun": "^0.5.2",
 		"svelte-check": "^4.1.5",
 		"tailwind-merge": "^3.3.0",
@@ -87,6 +87,7 @@
 		"lucide-svelte": "^0.424.0",
 		"runed": "^0.15.3",
 		"svead": "^0.0.13",
+		"unicove-components": "link:unicove-components",
 		"yaml": "^2.7.0"
 	}
 }
