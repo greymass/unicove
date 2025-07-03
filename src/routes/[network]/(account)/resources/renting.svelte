@@ -8,7 +8,7 @@
 	import Label from '$lib/components/input/label.svelte';
 	import { NameInput } from 'unicove-components';
 	import AssetText from '$lib/components/elements/asset.svelte';
-	import Checkbox from '$lib/components/input/checkbox.svelte';
+	import { Checkbox } from 'unicove-components';
 	import {Button} from 'unicove-components';
 	import TransactSummary from '$lib/components/transact/summary.svelte';
 	import TransactError from '$lib/components/transact/error.svelte';

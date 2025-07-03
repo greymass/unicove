@@ -17,7 +17,7 @@
 	import { Button } from 'unicove-components';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { Code } from 'unicove-components';
-	import Checkbox from '$lib/components/input/checkbox.svelte';
+	import { Checkbox } from 'unicove-components';
 	import { browser } from '$app/environment';
 	import AccountText from '$lib/components/elements/account.svelte';
 	import { PlaceholderAuth } from '@wharfkit/session';

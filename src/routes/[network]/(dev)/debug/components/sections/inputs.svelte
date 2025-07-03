@@ -5,7 +5,7 @@
 	import AssetOrUnitsInput from '$lib/components/input/assetOrUnits.svelte';
 	import { NumberInput } from 'unicove-components';
 	import { Switch } from 'unicove-components';
-	import Checkbox from '$lib/components/input/checkbox.svelte';
+	import { Checkbox } from 'unicove-components';
 	import { BytesInput } from 'unicove-components';
 
 	import { Asset } from '@wharfkit/antelope';

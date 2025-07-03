@@ -17,7 +17,7 @@
 	import { CopyButton } from 'unicove-components';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { Code } from 'unicove-components';
-	import Checkbox from '$lib/components/input/checkbox.svelte';
+	import { Checkbox } from 'unicove-components';
 	import ContractKit from '@wharfkit/contract';
 	import { browser } from '$app/environment';
 

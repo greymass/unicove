@@ -17,7 +17,7 @@
 
 	import Fields from './fields.svelte';
 	import { MultiCard } from '$lib/components/layout';
-	import Checkbox from '$lib/components/input/checkbox.svelte';
+	import { Checkbox } from 'unicove-components';
 	import type { TransactResult } from '@wharfkit/session';
 	import TransactSummary from '$lib/components/transact/summary.svelte';
 	import TransactError from '$lib/components/transact/error.svelte';
