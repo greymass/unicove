@@ -3,10 +3,10 @@
 	import { type ComponentProps } from 'svelte';
 	import { AssetInput } from 'unicove-components';
 	import { TextInput } from 'unicove-components';
-	import {Button} from 'unicove-components';
-	import {Cluster} from 'unicove-components';
-	import {Stack} from 'unicove-components';
-	import {Code} from 'unicove-components';
+	import { Button } from 'unicove-components';
+	import { Cluster } from 'unicove-components';
+	import { Stack } from 'unicove-components';
+	import { Code } from 'unicove-components';
 
 	interface AssetOrUnitsProps extends ComponentProps<typeof TextInput> {
 		assetValue: Asset;

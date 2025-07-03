@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {Button} from 'unicove-components';
+	import { Button } from 'unicove-components';
 </script>
 
 <div class="space-y-4">

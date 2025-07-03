@@ -1,6 +1,6 @@
 <script>
-	import {Stack} from 'unicove-components';
-	import {Code} from 'unicove-components';
+	import { Stack } from 'unicove-components';
+	import { Code } from 'unicove-components';
 </script>
 
 <Stack id="code">

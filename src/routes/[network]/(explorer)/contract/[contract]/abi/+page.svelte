@@ -1,6 +1,6 @@
 <script lang="ts">
-	import {Code} from 'unicove-components';
-	import {Stack} from 'unicove-components';
+	import { Code } from 'unicove-components';
+	import { Stack } from 'unicove-components';
 
 	const { data } = $props();
 </script>

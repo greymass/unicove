@@ -8,7 +8,7 @@
 	import { getContext } from 'svelte';
 	import { WithdrawManager } from './manager.svelte';
 	import * as m from '$lib/paraglide/messages';
-	import {Card} from 'unicove-components';
+	import { Card } from 'unicove-components';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();

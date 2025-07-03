@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {Stack} from 'unicove-components';
+	import { Stack } from 'unicove-components';
 </script>
 
 <header class="layout-stack gap-6">

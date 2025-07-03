@@ -3,8 +3,8 @@
 	import { getContext } from 'svelte';
 	import { CpuIcon, WifiIcon, HardDrive } from '@lucide/svelte';
 
-	import {Stack} from 'unicove-components';
-	import {Button} from 'unicove-components';
+	import { Stack } from 'unicove-components';
+	import { Button } from 'unicove-components';
 	import CpuAndNetResource from '$lib/components/elements/cpunetresource.svelte';
 	import RamResource from '$lib/components/elements/ramresource.svelte';
 	import AccountBalance from '$lib/components/card/accountbalance.svelte';

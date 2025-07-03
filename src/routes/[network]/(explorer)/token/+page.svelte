@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {Code} from 'unicove-components';
+	import { Code } from 'unicove-components';
 
 	let { data } = $props();
 </script>

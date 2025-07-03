@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { AccountValue } from '$lib/state/client/account.svelte';
 	import { cn, percentString } from '$lib/utils';
-	import {Card} from 'unicove-components';
+	import { Card } from 'unicove-components';
 	import * as m from '$lib/paraglide/messages';
 	import { DD, DL, DLRow } from 'unicove-components';
 

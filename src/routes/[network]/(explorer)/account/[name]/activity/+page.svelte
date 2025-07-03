@@ -4,13 +4,13 @@
 
 	import { ActivityLoader } from './state.svelte.js';
 	import { getActionSummaryComponent } from '$lib/components/summary/index.js';
-	import {Button} from 'unicove-components';
+	import { Button } from 'unicove-components';
 	import SelectActionVariant from '$lib/components/select/actionvariant.svelte';
 	import Trace from '$lib/components/elements/trace.svelte';
 	import type { ActionDisplayVariants } from '$lib/types.js';
 	import type { ActivityResponseAction } from '$lib/types/transaction.js';
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
-	import {Stack} from 'unicove-components';
+	import { Stack } from 'unicove-components';
 	import { NameInput } from 'unicove-components';
 
 	const { data } = $props();

@@ -2,8 +2,8 @@
 	import { Asset } from '@wharfkit/antelope';
 
 	import { AssetInput } from 'unicove-components';
-	import {Button} from 'unicove-components';
-	import {Stack} from 'unicove-components';
+	import { Button } from 'unicove-components';
+	import { Stack } from 'unicove-components';
 
 	let input: AssetInput;
 

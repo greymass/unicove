@@ -4,7 +4,7 @@
 	import { goto } from '$lib/utils';
 	import { page } from '$app/stores';
 	import Pageheader from '$lib/components/pageheader.svelte';
-	import {Stack} from 'unicove-components';
+	import { Stack } from 'unicove-components';
 
 	const { children, data } = $props();
 	const context = getContext<UnicoveContext>('state');

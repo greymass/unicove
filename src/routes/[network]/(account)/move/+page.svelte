@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {Code} from 'unicove-components';
+	import { Code } from 'unicove-components';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
 

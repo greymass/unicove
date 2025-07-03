@@ -1,8 +1,8 @@
 <script lang="ts">
-	import {Stack} from 'unicove-components';
+	import { Stack } from 'unicove-components';
 	import Table from '$lib/components/contract/table.svelte';
-	import {Code} from 'unicove-components';
-	import {Button} from 'unicove-components';
+	import { Code } from 'unicove-components';
+	import { Button } from 'unicove-components';
 	import { TextInput } from 'unicove-components';
 	import { goto } from '$lib/utils';
 	import { Checkbox } from 'unicove-components';

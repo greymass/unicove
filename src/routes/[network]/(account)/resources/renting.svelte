@@ -3,13 +3,13 @@
 	import { type TransactResult } from '@wharfkit/session';
 	import { getContext } from 'svelte';
 
-	import {Stack} from 'unicove-components';
+	import { Stack } from 'unicove-components';
 	import { NumberInput } from 'unicove-components';
 	import { Label } from 'unicove-components';
 	import { NameInput } from 'unicove-components';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import { Checkbox } from 'unicove-components';
-	import {Button} from 'unicove-components';
+	import { Button } from 'unicove-components';
 	import TransactSummary from '$lib/components/transact/summary.svelte';
 	import TransactError from '$lib/components/transact/error.svelte';
 	import CpuAndNetResource from '$lib/components/elements/cpunetresource.svelte';

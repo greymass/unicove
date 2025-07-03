@@ -4,10 +4,10 @@
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 
-	import {Button} from 'unicove-components';
-	import {Code} from 'unicove-components';
+	import { Button } from 'unicove-components';
+	import { Code } from 'unicove-components';
 	import { Label } from 'unicove-components';
-	import {Stack} from 'unicove-components';
+	import { Stack } from 'unicove-components';
 	import TransactSummary from '$lib/components/transact/summary.svelte';
 	import TransactError from '$lib/components/transact/error.svelte';
 	import { AssetInput } from 'unicove-components';

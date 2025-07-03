@@ -1,7 +1,7 @@
 <script lang="ts">
 	import ShieldQuestion from '@lucide/svelte/icons/shield-question';
 	import Info from '@lucide/svelte/icons/info';
-	import {Stack} from 'unicove-components';
+	import { Stack } from 'unicove-components';
 	import Tooltip from '$lib/components/tooltip/tooltip.svelte';
 </script>
 

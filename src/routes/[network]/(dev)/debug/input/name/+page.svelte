@@ -2,8 +2,8 @@
 	import { Name } from '@wharfkit/antelope';
 
 	import { NameInput } from 'unicove-components';
-	import {Button} from 'unicove-components';
-	import {Stack} from 'unicove-components';
+	import { Button } from 'unicove-components';
+	import { Stack } from 'unicove-components';
 
 	let input: NameInput;
 

@@ -1,8 +1,8 @@
 <script lang="ts">
-	import {Button} from 'unicove-components';
-	import {Code} from 'unicove-components';
+	import { Button } from 'unicove-components';
+	import { Code } from 'unicove-components';
 	import { page } from '$app/stores';
-	import {Stack} from 'unicove-components';
+	import { Stack } from 'unicove-components';
 
 	const { data } = $props();
 	const { network } = $derived(data);

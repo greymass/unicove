@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { ABI, Action, Bytes, Checksum256, Name, Serializer } from '@wharfkit/antelope';
-	import {Card} from 'unicove-components';
+	import { Card } from 'unicove-components';
 	import { Code } from 'unicove-components';
 	import { getContext, onMount } from 'svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';

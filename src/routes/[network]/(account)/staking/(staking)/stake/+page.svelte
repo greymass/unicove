@@ -1,9 +1,9 @@
 <script lang="ts">
-	import {Stack} from 'unicove-components';
+	import { Stack } from 'unicove-components';
 	import { AssetInput } from 'unicove-components';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import TokenCard from '$lib/components/elements/tokencard.svelte';
-	import {Button} from 'unicove-components';
+	import { Button } from 'unicove-components';
 	import { Label } from 'unicove-components';
 	import TransactSummary from '$lib/components/transact/summary.svelte';
 	import TransactError from '$lib/components/transact/error.svelte';
@@ -13,7 +13,7 @@
 	import { DL } from 'unicove-components';
 	import * as m from '$lib/paraglide/messages';
 	import SystemTokenSwap from '$lib/components/banner/systemTokenSwap.svelte';
-	import {Code} from 'unicove-components';
+	import { Code } from 'unicove-components';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();

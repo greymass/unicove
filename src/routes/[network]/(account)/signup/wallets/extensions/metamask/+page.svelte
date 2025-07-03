@@ -7,7 +7,7 @@
 
 	import { Button } from 'unicove-components';
 	import Box from '$lib/components/layout/box/box.svelte';
-	import {Card} from 'unicove-components';
+	import { Card } from 'unicove-components';
 	import { setSnap, requestSnap } from '$lib/metamask-snap';
 	import { MetaMaskState } from '$lib/state/metamask.svelte';
 

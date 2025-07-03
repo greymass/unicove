@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { getContext, onDestroy, onMount } from 'svelte';
-	import {Stack} from 'unicove-components';
+	import { Stack } from 'unicove-components';
 	import PillGroup from '$lib/components/navigation/pillgroup.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
 	import * as m from '$lib/paraglide/messages';
 	import dayjs from 'dayjs';
-	import {Button} from 'unicove-components';
+	import { Button } from 'unicove-components';
 
 	const context = getContext<UnicoveContext>('state');
 	const { children, data } = $props();

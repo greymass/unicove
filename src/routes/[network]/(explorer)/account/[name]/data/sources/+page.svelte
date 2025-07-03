@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {Code} from 'unicove-components';
+	import { Code } from 'unicove-components';
 	import type { PageData } from './$types';
 
 	export let data: PageData;

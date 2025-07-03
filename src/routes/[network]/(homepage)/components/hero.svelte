@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {Stack} from 'unicove-components';
+	import { Stack } from 'unicove-components';
 	import UnicoveWordmark from '$lib/assets/unicove-wordmark.svelte';
 	import bgDesktop from '$lib/assets/hero/eos/bg1@2x.png?enhanced';
 	import bgMobile from '$lib/assets/hero/eos/bg2@2x.png?enhanced';
@@ -12,7 +12,7 @@
 	import UnicoveOutline from '$lib/assets/unicove-outline.svg';
 
 	import * as m from '$lib/paraglide/messages';
-	import {Button} from 'unicove-components';
+	import { Button } from 'unicove-components';
 	import { browser } from '$app/environment';
 
 	interface Props {

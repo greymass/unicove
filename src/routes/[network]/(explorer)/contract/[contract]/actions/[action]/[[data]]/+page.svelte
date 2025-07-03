@@ -9,7 +9,7 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import Action from '$lib/components/contract/action.svelte';
 	import { Button } from 'unicove-components';
-	import {Card} from 'unicove-components';
+	import { Card } from 'unicove-components';
 	import { Code } from 'unicove-components';
 	import { Label } from 'unicove-components';
 	import { TextInput } from 'unicove-components';

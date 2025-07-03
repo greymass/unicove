@@ -1,10 +1,10 @@
 <script lang="ts">
-	import {Stack} from 'unicove-components';
+	import { Stack } from 'unicove-components';
 	import type { NetworkState } from '$lib/state/network.svelte';
 	import StakedHEX from './stakedhex.svelte';
 	import { getAPR } from '$lib/utils/staking';
 	import * as m from '$lib/paraglide/messages';
-	import {Button} from 'unicove-components';
+	import { Button } from 'unicove-components';
 
 	interface Props {
 		network: NetworkState;

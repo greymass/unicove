@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {Code} from 'unicove-components';
+	import { Code } from 'unicove-components';
 	import type { PageData } from './$types';
 	import * as m from '$lib/paraglide/messages';
 

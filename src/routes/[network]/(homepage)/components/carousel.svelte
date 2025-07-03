@@ -5,7 +5,7 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import TextBlock from './text-block.svelte';
 	import * as m from '$lib/paraglide/messages';
-	import {Button} from 'unicove-components';
+	import { Button } from 'unicove-components';
 
 	const { network } = getContext<UnicoveContext>('state');
 

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
-	import {Card} from 'unicove-components';
+	import { Card } from 'unicove-components';
 	import { Code } from 'unicove-components';
 	import binanceLogo from '$lib/assets/exchanges/binance.webp?enhanced';
 	import coinbaseIconLogo from '$lib/assets/exchanges/coinbase-icon.webp?enhanced';

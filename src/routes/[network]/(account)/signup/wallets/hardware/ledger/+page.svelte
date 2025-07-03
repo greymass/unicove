@@ -1,7 +1,7 @@
 <script lang="ts">
 	// import Pageheader from '$lib/components/pageheader.svelte';
-	import {Stack} from 'unicove-components';
-	import {Button} from 'unicove-components';
+	import { Stack } from 'unicove-components';
+	import { Button } from 'unicove-components';
 
 	const steps = [
 		{

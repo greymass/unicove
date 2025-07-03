@@ -5,7 +5,7 @@
 	import * as m from '$lib/paraglide/messages';
 	import { TokenBalance } from '$lib/types/token';
 	import type { ChangeFn } from '@melt-ui/svelte/internal/helpers';
-	import {Code} from 'unicove-components';
+	import { Code } from 'unicove-components';
 
 	interface BalanceSelectOption extends SelectOption<number> {
 		image?: string;

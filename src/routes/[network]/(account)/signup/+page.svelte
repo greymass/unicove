@@ -1,6 +1,6 @@
 <script lang="ts">
-	import {Stack} from 'unicove-components';
-	import {Button} from 'unicove-components';
+	import { Stack } from 'unicove-components';
+	import { Button } from 'unicove-components';
 	import { walletTypes } from './walletTypes';
 	import { detectEnvironment } from '$lib/utils';
 	import ChevronRight from '@lucide/svelte/icons/chevron-right';

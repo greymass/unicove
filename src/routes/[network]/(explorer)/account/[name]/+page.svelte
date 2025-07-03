@@ -3,7 +3,7 @@
 	import DollarSign from '@lucide/svelte/icons/dollar-sign';
 
 	import { AccountValueState } from '$lib/state/value.svelte.js';
-	import {Card} from 'unicove-components';
+	import { Card } from 'unicove-components';
 	import * as m from '$lib/paraglide/messages';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import { Button } from 'unicove-components';

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import {Button} from 'unicove-components';
-	import {Stack} from 'unicove-components';
+	import { Button } from 'unicove-components';
+	import { Stack } from 'unicove-components';
 	import { walletTypes } from '../../walletTypes';
 	import ChevronRight from '@lucide/svelte/icons/chevron-right';
 

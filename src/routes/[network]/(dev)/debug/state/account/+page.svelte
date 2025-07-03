@@ -1,7 +1,7 @@
 <script lang="ts">
-	import {Code} from 'unicove-components';
-	import {Button} from 'unicove-components';
-	import {Stack} from 'unicove-components';
+	import { Code } from 'unicove-components';
+	import { Button } from 'unicove-components';
+	import { Stack } from 'unicove-components';
 	import { getContext } from 'svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 

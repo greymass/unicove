@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {Card} from 'unicove-components';
+	import { Card } from 'unicove-components';
 	import type { NetworkState } from '$lib/state/network.svelte';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import { calculateValue } from '$lib/utils';

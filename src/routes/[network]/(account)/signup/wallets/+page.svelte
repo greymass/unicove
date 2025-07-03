@@ -1,8 +1,8 @@
 <script lang="ts">
-	import {Stack} from 'unicove-components';
+	import { Stack } from 'unicove-components';
 	import ChevronRight from '@lucide/svelte/icons/chevron-right';
 	import { walletTypes } from '../walletTypes';
-	import {Button} from 'unicove-components';
+	import { Button } from 'unicove-components';
 
 	const { data } = $props();
 </script>

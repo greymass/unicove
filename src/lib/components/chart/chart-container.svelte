@@ -1,7 +1,7 @@
 <script lang="ts">
 	import dayjs from 'dayjs';
-	import {Card} from 'unicove-components';
-	import {Select} from 'unicove-components';
+	import { Card } from 'unicove-components';
+	import { Select } from 'unicove-components';
 	import type { ExtendedSelectOption } from '../select/types';
 	import type { HistoricalPrice } from '$lib/types';
 	import LineChart from './line-chart.svelte';

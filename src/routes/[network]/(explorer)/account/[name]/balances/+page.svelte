@@ -6,7 +6,7 @@
 	import { getContext } from 'svelte';
 	import * as m from '$lib/paraglide/messages';
 	import { TokenBalanceValue, ZeroUnits } from '$lib/types/token.js';
-	import {Button} from 'unicove-components';
+	import { Button } from 'unicove-components';
 	import { Currencies } from '$lib/types/currencies.js';
 
 	const { data } = $props();
