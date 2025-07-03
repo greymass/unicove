@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { createSelect, type SelectOption } from '@melt-ui/svelte';
-	import { SelectTrigger, SelectMenu, SelectItem } from './elements';
+	import { SelectTrigger, SelectMenu, SelectItem } from 'unicove-components';
 	import { writable } from 'svelte/store';
 	import * as m from '$lib/paraglide/messages';
 	import { TokenBalance } from '$lib/types/token';

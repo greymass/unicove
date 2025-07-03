@@ -15,7 +15,7 @@
 	import {Button} from 'unicove-components';
 	import Label from '$lib/components/input/label.svelte';
 	import { i18n } from '$lib/i18n';
-	import Select from '$lib/components/select/select.svelte';
+	import {Select} from 'unicove-components';
 	import TransactSummary from '$lib/components/transact/summary.svelte';
 	import TransactError from '$lib/components/transact/error.svelte';
 	import {

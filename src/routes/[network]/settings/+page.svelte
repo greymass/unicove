@@ -11,7 +11,7 @@
 	import {Code} from 'unicove-components';
 	import * as m from '$lib/paraglide/messages';
 	import Pageheader from '$lib/components/pageheader.svelte';
-	import Select from '$lib/components/select/select.svelte';
+	import {Select} from 'unicove-components';
 	import type { ExtendedSelectOption } from '$lib/components/select/types.js';
 	import { TimeSeconds } from '$lib/state/settings.svelte.js';
 	import DatetimeInput from '$lib/components/input/datetime.svelte';

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Cluster, Stack } from '$lib/components/layout';
-	import Select from '$lib/components/select/select.svelte';
+	import {Select} from 'unicove-components';
 	import type { ExtendedSelectOption } from '$lib/components/select/types';
 	import Label from '$lib/components/input/label.svelte';
 	import { Chains } from '@wharfkit/common';

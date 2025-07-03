@@ -2,7 +2,7 @@
 	import { Stack } from '$lib/components/layout';
 	import Typography from './sections/typography.svelte';
 	import Buttons from './sections/buttons.svelte';
-	import Select from './sections/select.svelte';
+	import {Select} from 'unicove-components';
 	import Inputs from './sections/inputs.svelte';
 	import Cards from './sections/cards.svelte';
 	import Navigation from './sections/navigation.svelte';
