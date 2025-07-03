@@ -4,7 +4,7 @@
 	import AccountText from '$lib/components/elements/account.svelte';
 	import {Button} from 'unicove-components';
 	import { ArrowLeftRight, ArrowRight, ArrowLeft } from 'lucide-svelte';
-	import { DD, DL, DLRow } from '$lib/components/descriptionlist/index.js';
+	import { DD, DL, DLRow } from 'unicove-components';
 	import { goto } from '$lib/utils';
 	import * as m from '$lib/paraglide/messages';
 

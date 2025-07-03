@@ -22,7 +22,7 @@
 	import { preventDefault } from '$lib/utils';
 	import { RentState } from './state.svelte';
 	import { type RentType } from './utils';
-	import { DD, DL, DLRow } from '$lib/components/descriptionlist';
+	import { DD, DL, DLRow } from 'unicove-components';
 
 	const context = getContext<UnicoveContext>('state');
 

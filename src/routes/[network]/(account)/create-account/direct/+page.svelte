@@ -6,7 +6,7 @@
 	import { page } from '$app/state';
 	import * as m from '$lib/paraglide/messages';
 
-	import { DD, DL, DLRow } from '$lib/components/descriptionlist/index.js';
+	import { DD, DL, DLRow } from 'unicove-components';
 	import { preventDefault } from '$lib/utils';
 	import Label from '$lib/components/input/label.svelte';
 	import NameInput from '$lib/components/input/name.svelte';

@@ -10,7 +10,7 @@
 
 	import { Types as MsigTypes } from '$lib/wharf/contracts/msig';
 	import {Button} from 'unicove-components';
-	import { DD, DL, DLRow } from '../descriptionlist';
+	import { DD, DL, DLRow } from 'unicove-components';
 
 	const context = getContext<UnicoveContext>('state');
 

@@ -10,7 +10,7 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
 	import { StakeManager } from './manager.svelte';
-	import { DL } from '$lib/components/descriptionlist';
+	import { DL } from 'unicove-components';
 	import * as m from '$lib/paraglide/messages';
 	import SystemTokenSwap from '$lib/components/banner/systemTokenSwap.svelte';
 	import {Code} from 'unicove-components';

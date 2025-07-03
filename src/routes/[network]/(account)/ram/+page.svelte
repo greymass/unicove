@@ -17,7 +17,7 @@
 	import AccountBalance from '$lib/components/card/accountbalance.svelte';
 
 	import { RAMCalculatorState } from './state.svelte';
-	import { DD, DL, DLRow } from '$lib/components/descriptionlist';
+	import { DD, DL, DLRow } from 'unicove-components';
 	import SystemTokenSwap from '$lib/components/banner/systemTokenSwap.svelte';
 
 	const { data } = $props();

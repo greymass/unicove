@@ -1,5 +1,5 @@
 <script>
-	import { DD, DL, DLRow } from '$lib/components/descriptionlist';
+	import { DD, DL, DLRow } from 'unicove-components';
 	import Account from '$lib/components/elements/account.svelte';
 	import { Card, Stack } from '$lib/components/layout';
 

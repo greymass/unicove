@@ -10,7 +10,7 @@
 	import { MetaMaskState } from '$lib/state/metamask.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
 	import { Cluster, Stack } from '$lib/components/layout/index.js';
-	import { DD, DL, DLRow } from '$lib/components/descriptionlist/index.js';
+	import { DD, DL, DLRow } from 'unicove-components';
 	import TextInput from '$lib/components/input/text.svelte';
 	import {CopyButton} from 'unicove-components';
 	import * as m from '$lib/paraglide/messages';

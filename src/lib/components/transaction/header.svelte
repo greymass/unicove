@@ -3,7 +3,7 @@
 	import Block from '../elements/block.svelte';
 	import Contract from '../elements/contract.svelte';
 	import DateTime from '../elements/datetime.svelte';
-	import { DD, DL, DLRow } from '$lib/components/descriptionlist';
+	import { DD, DL, DLRow } from 'unicove-components';
 
 	import * as m from '$lib/paraglide/messages';
 

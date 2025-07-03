@@ -7,7 +7,7 @@
 	import Label from '$lib/components/input/label.svelte';
 	import TransactSummary from '$lib/components/transact/summary.svelte';
 	import TransactError from '$lib/components/transact/error.svelte';
-	import { DL } from '$lib/components/descriptionlist';
+	import { DL } from 'unicove-components';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
 	import { UnstakeManager } from './manager.svelte';

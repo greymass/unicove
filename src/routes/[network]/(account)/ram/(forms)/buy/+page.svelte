@@ -19,7 +19,7 @@
 
 	import { BuyRAMState } from './state.svelte';
 	import { preventDefault } from '$lib/utils';
-	import { DD, DL, DLRow } from '$lib/components/descriptionlist';
+	import { DD, DL, DLRow } from 'unicove-components';
 
 	let bytesInput: BytesInput | undefined = $state();
 	let assetInput: AssetInput | undefined = $state();

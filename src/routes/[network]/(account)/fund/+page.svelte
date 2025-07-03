@@ -15,7 +15,7 @@
 	import {Button} from 'unicove-components';
 	import * as m from '$lib/paraglide/messages';
 	import Grid from '$lib/components/layout/grid.svelte';
-	import { DL, DLRow, DD } from '$lib/components/descriptionlist';
+	import { DL, DLRow, DD } from 'unicove-components';
 	import coinbaseLogo from '$lib/assets/exchanges/coinbase.svg';
 	import Stack from '$lib/components/layout/stack.svelte';
 	import Cluster from '$lib/components/layout/cluster.svelte';
