@@ -10,7 +10,7 @@
 	import { preventDefault } from '$lib/utils';
 	import Label from '$lib/components/input/label.svelte';
 	import { NameInput } from 'unicove-components';
-	import PublicKeyInput from '$lib/components/input/publickey.svelte';
+	import { PublicKeyInput } from 'unicove-components';
 	import { NumberInput } from 'unicove-components';
 	import { SingleCard } from '$lib/components/layout';
 	import { Stack } from 'unicove-components';
