@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { TransactionResponse } from '$lib/types/transaction';
-	import Block from '../elements/block.svelte';
+	import Block from '$lib/components/elements/block.svelte';
 	import Contract from '../elements/contract.svelte';
 	import DateTime from '../elements/datetime.svelte';
 	import { DD, DL, DLRow } from 'unicove-components';
