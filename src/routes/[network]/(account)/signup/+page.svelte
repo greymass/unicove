@@ -3,7 +3,7 @@
 	import {Button} from 'unicove-components';
 	import { walletTypes } from './walletTypes';
 	import { detectEnvironment } from '$lib/utils';
-	import ChevronRight from 'lucide-svelte/icons/chevron-right';
+	import ChevronRight from '@lucide/svelte/icons/chevron-right';
 
 	const { data } = $props();
 

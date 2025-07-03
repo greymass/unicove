@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { ABI, Name } from '@wharfkit/antelope';
-	import Braces from 'lucide-svelte/icons/brackets';
-	import Brackets from 'lucide-svelte/icons/brackets';
+	import Braces from '@lucide/svelte/icons/brackets';
+	import Brackets from '@lucide/svelte/icons/brackets';
 
 	import Contract from '$lib/components/elements/contract.svelte';
 	import { parseRootType } from '$lib/utils/abi';

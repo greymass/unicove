@@ -5,7 +5,7 @@
 	import type { NetworkState } from '$lib/state/network.svelte';
 	import * as m from '$lib/paraglide/messages';
 	import DebugToggle from '$lib/components/select/debug.svelte';
-	import { CodeIcon, MoonIcon } from 'lucide-svelte';
+	import { CodeIcon, MoonIcon } from '@lucide/svelte';
 	import SchemeToggle from '$lib/components/select/scheme.svelte';
 
 	const context = getContext<UnicoveContext>('state');

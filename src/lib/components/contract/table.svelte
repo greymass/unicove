@@ -6,7 +6,7 @@
 
 	import {Code} from 'unicove-components';
 
-	import Database from 'lucide-svelte/icons/database';
+	import Database from '@lucide/svelte/icons/database';
 	import Contract from '../elements/contract.svelte';
 	import { parseRootType } from '$lib/utils/abi';
 

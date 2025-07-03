@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
-	import DollarSign from 'lucide-svelte/icons/dollar-sign';
+	import DollarSign from '@lucide/svelte/icons/dollar-sign';
 
 	import { AccountValueState } from '$lib/state/value.svelte.js';
 	import {Card} from 'unicove-components';

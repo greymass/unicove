@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Asset } from '@wharfkit/antelope';
 	import { getContext } from 'svelte';
-	import { Info } from 'lucide-svelte';
+	import { Info } from '@lucide/svelte';
 
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import TradingPair from '$lib/components/elements/tradingpair.svelte';

@@ -4,7 +4,7 @@
 	import {Button} from 'unicove-components';
 	import {IconButton} from 'unicove-components';
 	import type { Article } from '$lib/types/content';
-	import { ChevronLeft, ChevronRight, Circle } from 'lucide-svelte';
+	import { ChevronLeft, ChevronRight, Circle } from '@lucide/svelte';
 
 	interface Props {
 		articles: Article[];

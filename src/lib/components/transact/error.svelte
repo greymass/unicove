@@ -1,5 +1,5 @@
 <script lang="ts">
-	import CircleX from 'lucide-svelte/icons/circle-x';
+	import CircleX from '@lucide/svelte/icons/circle-x';
 	import * as m from '$lib/paraglide/messages';
 
 	interface Props {

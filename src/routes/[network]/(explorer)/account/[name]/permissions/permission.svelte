@@ -6,7 +6,7 @@
 	import Account from '$lib/components/elements/account.svelte';
 	import Contract from '$lib/components/elements/contract.svelte';
 	import dayjs from 'dayjs';
-	import { Clock, Edit, LogIn } from 'lucide-svelte';
+	import { Clock, Edit, LogIn } from '@lucide/svelte';
 	import * as m from '$lib/paraglide/messages';
 	import { Name, PermissionLevel, UInt64 } from '@wharfkit/antelope';
 	import type { TreePermission } from './+page';

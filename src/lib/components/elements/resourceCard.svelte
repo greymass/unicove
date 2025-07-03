@@ -1,9 +1,9 @@
 <script lang="ts">
 	import type { Int } from '@wharfkit/antelope';
-	import { type Icon } from 'lucide-svelte';
-	import CpuIcon from 'lucide-svelte/icons/cpu';
-	import Wifi from 'lucide-svelte/icons/wifi';
-	import HardDrive from 'lucide-svelte/icons/hard-drive';
+	import { type Icon } from '@lucide/svelte';
+	import CpuIcon from '@lucide/svelte/icons/cpu';
+	import Wifi from '@lucide/svelte/icons/wifi';
+	import HardDrive from '@lucide/svelte/icons/hard-drive';
 
 	import * as m from '$lib/paraglide/messages';
 	import { Number as NumberFormat } from 'unicove-components';

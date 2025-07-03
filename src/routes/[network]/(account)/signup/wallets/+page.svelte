@@ -1,6 +1,6 @@
 <script lang="ts">
 	import {Stack} from 'unicove-components';
-	import ChevronRight from 'lucide-svelte/icons/chevron-right';
+	import ChevronRight from '@lucide/svelte/icons/chevron-right';
 	import { walletTypes } from '../walletTypes';
 	import {Button} from 'unicove-components';
 

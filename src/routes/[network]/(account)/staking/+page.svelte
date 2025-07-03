@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Asset } from '@wharfkit/antelope';
 	import { getContext } from 'svelte';
-	import { ChartLine } from 'lucide-svelte';
+	import { ChartLine } from '@lucide/svelte';
 
 	import { MultiCard } from '$lib/components/layout';
 	import { Card, Stack } from 'unicove-components';

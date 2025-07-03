@@ -2,8 +2,8 @@
 	import { transactions } from '$lib/wharf/transact.svelte';
 	import { Serializer, type Checksum256 } from '@wharfkit/antelope';
 	import Transaction from '$lib/components/elements/transaction.svelte';
-	import CircleCheckBig from 'lucide-svelte/icons/circle-check-big';
-	import ClipboardPen from 'lucide-svelte/icons/clipboard-pen';
+	import CircleCheckBig from '@lucide/svelte/icons/circle-check-big';
+	import ClipboardPen from '@lucide/svelte/icons/clipboard-pen';
 	import * as m from '$lib/paraglide/messages';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';

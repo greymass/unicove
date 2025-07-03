@@ -7,7 +7,7 @@
 		Key,
 		ReceiptText,
 		UserSearch
-	} from 'lucide-svelte';
+	} from '@lucide/svelte';
 	import type { ComponentProps, Snippet } from 'svelte';
 	import * as m from '$lib/paraglide/messages';
 

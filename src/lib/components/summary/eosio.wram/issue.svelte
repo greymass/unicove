@@ -6,7 +6,7 @@
 	import AssetElement from '$lib/components/elements/asset.svelte';
 	import { Asset, Name } from '@wharfkit/antelope';
 	import Row from '../components/row.svelte';
-	import { ArrowBigRight } from 'lucide-svelte';
+	import { ArrowBigRight } from '@lucide/svelte';
 
 	interface Props extends Omit<ActionSummaryProps, 'data'> {
 		data: WRAMContract.Types.issue;

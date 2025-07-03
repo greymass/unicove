@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Int64 } from '@wharfkit/antelope';
 	import { getContext } from 'svelte';
-	import { CpuIcon, WifiIcon, HardDrive } from 'lucide-svelte';
+	import { CpuIcon, WifiIcon, HardDrive } from '@lucide/svelte';
 
 	import {Stack} from 'unicove-components';
 	import {Button} from 'unicove-components';

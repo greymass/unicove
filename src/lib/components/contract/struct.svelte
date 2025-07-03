@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Name, type ABI } from '@wharfkit/antelope';
-	import SquareDashedBottomCode from 'lucide-svelte/icons/square-dashed-bottom';
+	import SquareDashedBottomCode from '@lucide/svelte/icons/square-dashed-bottom';
 
 	import {Code} from 'unicove-components';
 

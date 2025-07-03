@@ -2,7 +2,7 @@
 	import { Cluster, Stack } from 'unicove-components';
 	import { Button } from 'unicove-components';
 	import { IconButton } from 'unicove-components';
-	import { User } from 'lucide-svelte';
+	import { User } from '@lucide/svelte';
 </script>
 
 <Stack id="buttons">

@@ -1,8 +1,8 @@
-import TabletSmartphone from 'lucide-svelte/icons/tablet-smartphone';
-import LaptopMinimal from 'lucide-svelte/icons/laptop-minimal';
-// import LockKeyhole from 'lucide-svelte/icons/lock-keyhole';
-import GlobeLock from 'lucide-svelte/icons/globe-lock';
-import type { Icon } from 'lucide-svelte';
+import TabletSmartphone from '@lucide/svelte/icons/tablet-smartphone';
+import LaptopMinimal from '@lucide/svelte/icons/laptop-minimal';
+// import LockKeyhole from '@lucide/svelte/icons/lock-keyhole';
+import GlobeLock from '@lucide/svelte/icons/globe-lock';
+import type { Icon } from '@lucide/svelte';
 import AnchorLogo from '$lib/assets/wallets/anchor.svg';
 import WombatLogo from '$lib/assets/wallets/wombat.webp';
 import TokenPocketLogo from '$lib/assets/wallets/tokenpocket.webp';

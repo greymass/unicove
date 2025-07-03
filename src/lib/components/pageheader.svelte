@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import {IconButton} from 'unicove-components';
-	import {CopyButton} from 'unicove-components';
+	import { IconButton } from 'unicove-components';
+	import { CopyButton } from 'unicove-components';
 	import { type NetworkState } from '$lib/state/network.svelte';
-	import ChevronLeft from 'lucide-svelte/icons/chevron-left';
+	import ChevronLeft from '@lucide/svelte/icons/chevron-left';
 	import type { ComponentProps } from 'svelte';
 
 	interface Props {

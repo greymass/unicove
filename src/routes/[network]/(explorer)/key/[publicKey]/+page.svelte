@@ -2,7 +2,7 @@
 	import { Card, Stack } from 'unicove-components';
 	import * as m from '$lib/paraglide/messages.js';
 	import Account from '$lib/components/elements/account.svelte';
-	import Key from 'lucide-svelte/icons/key-round';
+	import Key from '@lucide/svelte/icons/key-round';
 	import { CopyButton } from 'unicove-components';
 
 	let { data } = $props();

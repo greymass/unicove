@@ -14,17 +14,17 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
 
-	import X from 'lucide-svelte/icons/x';
-	import CircleX from 'lucide-svelte/icons/circle-x';
-	import LogOut from 'lucide-svelte/icons/log-out';
-	import User from 'lucide-svelte/icons/user';
-	import UserCheck from 'lucide-svelte/icons/user-check';
-	import UserPlus from 'lucide-svelte/icons/user-plus';
-	import Search from 'lucide-svelte/icons/search';
+	import X from '@lucide/svelte/icons/x';
+	import CircleX from '@lucide/svelte/icons/circle-x';
+	import LogOut from '@lucide/svelte/icons/log-out';
+	import User from '@lucide/svelte/icons/user';
+	import UserCheck from '@lucide/svelte/icons/user-check';
+	import UserPlus from '@lucide/svelte/icons/user-plus';
+	import Search from '@lucide/svelte/icons/search';
 	import { goto } from '$lib/utils';
 	import { Button } from 'unicove-components';
 	import { TextInput } from 'unicove-components';
-	import { Wallet } from 'lucide-svelte';
+	import { Wallet } from '@lucide/svelte';
 
 	const context = getContext<UnicoveContext>('state');
 
