@@ -12,7 +12,7 @@
 	import { Cluster, Stack } from '$lib/components/layout/index.js';
 	import { DD, DL, DLRow } from '$lib/components/descriptionlist/index.js';
 	import TextInput from '$lib/components/input/text.svelte';
-	import CopyButton from '$lib/components/button/copy.svelte';
+	import {CopyButton} from 'unicove-components';
 	import * as m from '$lib/paraglide/messages';
 	import Code from '$lib/components/code.svelte';
 

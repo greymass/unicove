@@ -13,7 +13,7 @@
 	import Code from '$lib/components/code.svelte';
 	import Label from '$lib/components/input/label.svelte';
 	import TextInput from '$lib/components/input/text.svelte';
-	import CopyButton from '$lib/components/button/copy.svelte';
+	import {CopyButton} from 'unicove-components';
 
 	import Fields from './fields.svelte';
 	import { MultiCard } from '$lib/components/layout';

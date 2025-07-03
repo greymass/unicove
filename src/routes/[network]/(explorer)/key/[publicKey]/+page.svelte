@@ -3,7 +3,7 @@
 	import * as m from '$lib/paraglide/messages.js';
 	import Account from '$lib/components/elements/account.svelte';
 	import Key from 'lucide-svelte/icons/key-round';
-	import CopyButton from '$lib/components/button/copy.svelte';
+	import {CopyButton} from 'unicove-components';
 
 	let { data } = $props();
 
