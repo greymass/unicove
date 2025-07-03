@@ -1,8 +1,8 @@
 <script lang="ts">
 	import Self from './permission.svelte';
 	import Key from '$lib/components/elements/key.svelte';
-	import {CopyButton} from 'unicove-components';
-	import {IconButton} from 'unicove-components';
+	import { CopyButton } from 'unicove-components';
+	import { IconButton } from 'unicove-components';
 	import Account from '$lib/components/elements/account.svelte';
 	import Contract from '$lib/components/elements/contract.svelte';
 	import dayjs from 'dayjs';
