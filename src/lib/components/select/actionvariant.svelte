@@ -1,9 +1,8 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 	import type { ActionDisplayVariants } from '$lib/types';
-	import {Button} from 'unicove-components';
+	import { Button } from 'unicove-components';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import Grid from '../layout/grid.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -15,7 +14,7 @@
 </script>
 
 {#if context.settings.data.advancedMode}
-	<Grid>
+	<div class="layout-grid">
 		<Button
 			variant={current !== 'summary' ? 'secondary' : 'primary'}
 			onclick={() => set('summary')}
@@ -44,5 +43,5 @@
 				JSON
 			</Button>
 		{/if}
-	</Grid>
+	</div>
 {/if}
