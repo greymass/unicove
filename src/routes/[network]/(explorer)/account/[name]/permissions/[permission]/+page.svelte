@@ -12,10 +12,10 @@
 	import { PublicKeyInput } from 'unicove-components';
 	import { NameInput } from 'unicove-components';
 	import { NumberInput } from 'unicove-components';
-	import {Button} from 'unicove-components';
+	import { Button } from 'unicove-components';
 	import Label from '$lib/components/input/label.svelte';
 	import { i18n } from '$lib/i18n';
-	import {Select} from 'unicove-components';
+	import { Select } from 'unicove-components';
 	import TransactSummary from '$lib/components/transact/summary.svelte';
 	import TransactError from '$lib/components/transact/error.svelte';
 	import {
@@ -26,13 +26,13 @@
 	} from './manager.svelte.js';
 	import { type Checksum256Type } from '@wharfkit/session';
 	import type { SelectOption } from '@melt-ui/svelte';
-	import type { ExtendedSelectOption } from '$lib/components/select/types.js';
+	import type { ExtendedSelectOption } from 'unicove-components';
 	import type { ChangeFn } from '@melt-ui/svelte/internal/helpers';
-	import {Code} from 'unicove-components';
+	import { Code } from 'unicove-components';
 	import PermissionComponent from '../permission.svelte';
 	import { fly } from 'svelte/transition';
 	import { cubicOut } from 'svelte/easing';
-	import Fieldset from '$lib/components/input/fieldset.svelte';
+	import { Fieldset } from 'unicove-components';
 	import FormContainer from '$lib/components/form/formContainer.svelte';
 
 	const context = getContext<UnicoveContext>('state');
