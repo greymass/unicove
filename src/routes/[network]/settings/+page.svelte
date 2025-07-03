@@ -12,9 +12,9 @@
 	import * as m from '$lib/paraglide/messages';
 	import Pageheader from '$lib/components/pageheader.svelte';
 	import { Select } from 'unicove-components';
-	import type { ExtendedSelectOption } from '$lib/components/select/types.js';
+	import type { ExtendedSelectOption } from 'unicove-components';
 	import { TimeSeconds } from '$lib/state/settings.svelte.js';
-	import DatetimeInput from '$lib/components/input/datetime.svelte';
+	import { DatetimeInput } from 'unicove-components';
 	import type { FormEventHandler } from 'svelte/elements';
 	import { Button } from 'unicove-components';
 	import { availableLanguageTags } from '$lib/paraglide/runtime';
