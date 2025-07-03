@@ -6,7 +6,7 @@
 	import { MultiCard } from '$lib/components/layout';
 	import { Stack } from 'unicove-components';
 	import * as m from '$lib/paraglide/messages.js';
-	import AssetInput from '$lib/components/input/asset.svelte';
+	import { AssetInput } from 'unicove-components';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import { Button } from 'unicove-components';
 	import BytesInput from '$lib/components/input/bytes.svelte';

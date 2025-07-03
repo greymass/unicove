@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Asset } from '@wharfkit/antelope';
 	import { type ComponentProps } from 'svelte';
-	import AssetInput from './asset.svelte';
+	import { AssetInput } from 'unicove-components';
 	import { TextInput } from 'unicove-components';
 	import {Button} from 'unicove-components';
 	import {Cluster} from 'unicove-components';

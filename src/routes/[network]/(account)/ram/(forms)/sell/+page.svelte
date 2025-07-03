@@ -10,7 +10,7 @@
 	import {Stack} from 'unicove-components';
 	import TransactSummary from '$lib/components/transact/summary.svelte';
 	import TransactError from '$lib/components/transact/error.svelte';
-	import AssetInput from '$lib/components/input/asset.svelte';
+	import { AssetInput } from 'unicove-components';
 	import BytesInput from '$lib/components/input/bytes.svelte';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import RamResource from '$lib/components/elements/ramresource.svelte';

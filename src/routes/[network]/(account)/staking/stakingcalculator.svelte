@@ -5,7 +5,7 @@
 	import { Asset } from '@wharfkit/antelope';
 
 	import {Card} from 'unicove-components';
-	import AssetInput from '$lib/components/input/asset.svelte';
+	import { AssetInput } from 'unicove-components';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
 	import * as m from '$lib/paraglide/messages';

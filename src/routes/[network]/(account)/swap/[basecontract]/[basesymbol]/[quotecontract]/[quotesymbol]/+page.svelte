@@ -3,7 +3,7 @@
 	import { getContext } from 'svelte';
 
 	import { Code } from 'unicove-components';
-	import AssetInput from '$lib/components/input/asset.svelte';
+	import { AssetInput } from 'unicove-components';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import { Button } from 'unicove-components';
 	import { IconButton } from 'unicove-components';

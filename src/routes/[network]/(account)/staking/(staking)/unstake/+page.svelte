@@ -1,6 +1,6 @@
 <script lang="ts">
 	import {Stack} from 'unicove-components';
-	import AssetInput from '$lib/components/input/asset.svelte';
+	import { AssetInput } from 'unicove-components';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import TokenCard from '$lib/components/elements/tokencard.svelte';
 	import {Button} from 'unicove-components';

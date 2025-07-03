@@ -9,7 +9,7 @@
 	import BytesInput from '$lib/components/input/bytes.svelte';
 
 	import { Asset } from '@wharfkit/antelope';
-	import AssetInput from '$lib/components/input/asset.svelte';
+	import { AssetInput } from 'unicove-components';
 
 	let input: AssetInput;
 

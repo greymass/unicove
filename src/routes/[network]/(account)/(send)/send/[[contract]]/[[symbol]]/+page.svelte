@@ -15,7 +15,7 @@
 
 	import { SingleCard } from '$lib/components/layout';
 	import { Stack } from 'unicove-components';
-	import AssetInput from '$lib/components/input/asset.svelte';
+	import { AssetInput } from 'unicove-components';
 	import { Button } from 'unicove-components';
 	import { Code } from 'unicove-components';
 	import Label from '$lib/components/input/label.svelte';
