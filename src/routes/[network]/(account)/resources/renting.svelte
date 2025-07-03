@@ -9,7 +9,7 @@
 	import NameInput from '$lib/components/input/name.svelte';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import Checkbox from '$lib/components/input/checkbox.svelte';
-	import Button from '$lib/components/button/button.svelte';
+	import {Button} from 'unicove-components';
 	import TransactSummary from '$lib/components/transact/summary.svelte';
 	import TransactError from '$lib/components/transact/error.svelte';
 	import CpuAndNetResource from '$lib/components/elements/cpunetresource.svelte';

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Button from '$lib/components/button/button.svelte';
+	import {Button} from 'unicove-components';
 	import { page } from '$app/state';
 	import { cn, goto } from '$lib/utils';
 	import { createSelect, melt, type CreateSelectProps } from '@melt-ui/svelte';

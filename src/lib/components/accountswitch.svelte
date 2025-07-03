@@ -22,7 +22,7 @@
 	import UserPlus from 'lucide-svelte/icons/user-plus';
 	import Search from 'lucide-svelte/icons/search';
 	import { goto } from '$lib/utils';
-	import Button from './button/button.svelte';
+	import {Button} from 'unicove-components';
 	import Text from './input/text.svelte';
 	import { Wallet } from 'lucide-svelte';
 

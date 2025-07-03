@@ -2,7 +2,7 @@
 	import Stack from '$lib/components/layout/stack.svelte';
 	import ChevronRight from 'lucide-svelte/icons/chevron-right';
 	import { walletTypes } from '../walletTypes';
-	import Button from '$lib/components/button/button.svelte';
+	import {Button} from 'unicove-components';
 
 	const { data } = $props();
 </script>

@@ -8,7 +8,7 @@
 	import * as m from '$lib/paraglide/messages';
 	import type { NetworkState } from '$lib/state/network.svelte';
 	import { tokenEquals, ZeroUnits, type TokenBalance, type TokenPair } from '$lib/types/token';
-	import Button from '../button/button.svelte';
+	import {Button} from 'unicove-components';
 
 	interface TokenOverviewProps {
 		balance: TokenBalance;

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import TextBlock from './text-block.svelte';
 	import * as m from '$lib/paraglide/messages';
-	import Button from '$lib/components/button/button.svelte';
+	import {Button} from 'unicove-components';
 	import IconButton from '$lib/components/button/icon.svelte';
 	import type { Article } from '$lib/types/content';
 	import { ChevronLeft, ChevronRight, Circle } from 'lucide-svelte';

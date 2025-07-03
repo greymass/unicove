@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 	import type { ActionDisplayVariants } from '$lib/types';
-	import Button from '$lib/components/button/button.svelte';
+	import {Button} from 'unicove-components';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import Grid from '../layout/grid.svelte';
 

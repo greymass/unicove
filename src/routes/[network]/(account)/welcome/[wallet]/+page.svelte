@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
-	import Button from '$lib/components/button/button.svelte';
+	import {Button} from 'unicove-components';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 
 	const context = getContext<UnicoveContext>('state');

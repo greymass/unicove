@@ -6,7 +6,7 @@
 	import { Chains } from '@wharfkit/common';
 	import TokenSelect from '$lib/components/select/balance.svelte';
 	import type { SelectOption } from '@melt-ui/svelte';
-	import Button from '$lib/components/button/button.svelte';
+	import {Button} from 'unicove-components';
 	import Code from '$lib/components/code.svelte';
 	import { TokenBalance } from '$lib/types/token';
 

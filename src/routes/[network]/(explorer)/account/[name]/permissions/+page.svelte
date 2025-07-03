@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Name, PermissionLevel } from '@wharfkit/antelope';
 	import PermissionTree from './permissiontree.svelte';
-	import Button from '$lib/components/button/button.svelte';
+	import {Button} from 'unicove-components';
 	import { generateRandomName } from '$lib/utils/random';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';

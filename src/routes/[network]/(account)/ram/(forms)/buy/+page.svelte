@@ -4,7 +4,7 @@
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 
-	import Button from '$lib/components/button/button.svelte';
+	import {Button} from 'unicove-components';
 	import Code from '$lib/components/code.svelte';
 	import Label from '$lib/components/input/label.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';

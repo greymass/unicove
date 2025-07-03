@@ -12,7 +12,7 @@
 	import PublicKeyInput from '$lib/components/input/publickey.svelte';
 	import NameInput from '$lib/components/input/name.svelte';
 	import NumberInput from '$lib/components/input/number.svelte';
-	import Button from '$lib/components/button/button.svelte';
+	import {Button} from 'unicove-components';
 	import Label from '$lib/components/input/label.svelte';
 	import { i18n } from '$lib/i18n';
 	import Select from '$lib/components/select/select.svelte';

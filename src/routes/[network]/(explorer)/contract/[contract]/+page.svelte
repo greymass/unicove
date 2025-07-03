@@ -3,7 +3,7 @@
 
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
 	import Contract from '$lib/components/elements/contract.svelte';
-	import Button from '$lib/components/button/button.svelte';
+	import {Button} from 'unicove-components';
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');

@@ -2,7 +2,7 @@
 	import { Asset } from '@wharfkit/antelope';
 
 	import AssetInput from '$lib/components/input/asset.svelte';
-	import Button from '$lib/components/button/button.svelte';
+	import {Button} from 'unicove-components';
 	import { Stack } from '$lib/components/layout';
 
 	let input: AssetInput;

@@ -3,7 +3,7 @@
 	import { type ComponentProps } from 'svelte';
 	import AssetInput from './asset.svelte';
 	import TextInput from './text.svelte';
-	import Button from '../button/button.svelte';
+	import {Button} from 'unicove-components';
 	import Cluster from '$lib/components/layout/cluster.svelte';
 	import Stack from '$lib/components/layout/stack.svelte';
 	import Code from '../code.svelte';

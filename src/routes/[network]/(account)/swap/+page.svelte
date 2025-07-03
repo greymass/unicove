@@ -5,7 +5,7 @@
 
 	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte.js';
 	import AssetText from '$lib/components/elements/asset.svelte';
-	import Button from '$lib/components/button/button.svelte';
+	import {Button} from 'unicove-components';
 	import { SingleCard, Stack } from '$lib/components/layout';
 	import { Asset } from '@wharfkit/session';
 

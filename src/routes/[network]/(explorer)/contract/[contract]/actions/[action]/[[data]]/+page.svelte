@@ -8,7 +8,7 @@
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import Action from '$lib/components/contract/action.svelte';
-	import Button from '$lib/components/button/button.svelte';
+	import {Button} from 'unicove-components';
 	import Card from '$lib/components/layout/box/card.svelte';
 	import Code from '$lib/components/code.svelte';
 	import Label from '$lib/components/input/label.svelte';

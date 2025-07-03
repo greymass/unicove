@@ -5,7 +5,7 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
 	import * as m from '$lib/paraglide/messages';
 	import dayjs from 'dayjs';
-	import Button from '$lib/components/button/button.svelte';
+	import {Button} from 'unicove-components';
 
 	const context = getContext<UnicoveContext>('state');
 	const { children, data } = $props();

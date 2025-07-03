@@ -3,7 +3,7 @@
 	import { goto } from '$lib/utils';
 	import { getSnapsProvider, checkIsFlask } from '@wharfkit/wallet-plugin-metamask';
 
-	import Button from '$lib/components/button/button.svelte';
+	import {Button} from 'unicove-components';
 	import Box from '$lib/components/layout/box/box.svelte';
 	import { checkForSnap, requestSnap } from '$lib/metamask-snap';
 	import Metamask from '$lib/assets/metamask.svg';

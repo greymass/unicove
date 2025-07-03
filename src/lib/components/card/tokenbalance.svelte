@@ -14,7 +14,7 @@
 		type TokenPair
 	} from '$lib/types/token';
 	import * as m from '$lib/paraglide/messages';
-	import Button from '$lib/components/button/button.svelte';
+	import {Button} from 'unicove-components';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import Code from '$lib/components/code.svelte';
 	import Link from '$lib/components/elements/link.svelte';

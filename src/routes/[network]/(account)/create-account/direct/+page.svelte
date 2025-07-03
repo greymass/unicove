@@ -13,7 +13,7 @@
 	import PublicKeyInput from '$lib/components/input/publickey.svelte';
 	import NumberInput from '$lib/components/input/number.svelte';
 	import { SingleCard, Stack } from '$lib/components/layout';
-	import Button from '$lib/components/button/button.svelte';
+	import {Button} from 'unicove-components';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import Code from '$lib/components/code.svelte';
 	import Checkbox from '$lib/components/input/checkbox.svelte';

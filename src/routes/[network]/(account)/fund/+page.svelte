@@ -12,7 +12,7 @@
 	import kucoinLogo from '$lib/assets/exchanges/kucoin.webp?enhanced';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { initOnRamp, type CBPayInstanceType, type InitOnRampParams } from '@coinbase/cbpay-js';
-	import Button from '$lib/components/button/button.svelte';
+	import {Button} from 'unicove-components';
 	import * as m from '$lib/paraglide/messages';
 	import Grid from '$lib/components/layout/grid.svelte';
 	import { DL, DLRow, DD } from '$lib/components/descriptionlist';

@@ -5,7 +5,7 @@
 	import Code from '$lib/components/code.svelte';
 	import AssetInput from '$lib/components/input/asset.svelte';
 	import AssetText from '$lib/components/elements/asset.svelte';
-	import Button from '$lib/components/button/button.svelte';
+	import {Button} from 'unicove-components';
 	import IconButton from '$lib/components/button/icon.svelte';
 	import TransactForm from '$lib/components/transact/form.svelte';
 

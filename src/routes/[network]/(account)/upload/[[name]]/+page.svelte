@@ -6,7 +6,7 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
 	import NameInput from '$lib/components/input/name.svelte';
 	import TransactForm from '$lib/components/transact/form.svelte';
-	import Button from '$lib/components/button/button.svelte';
+	import {Button} from 'unicove-components';
 
 	import * as m from '$lib/paraglide/messages';
 	import { SingleCard } from '$lib/components/layout/index.js';

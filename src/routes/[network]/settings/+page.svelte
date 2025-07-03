@@ -16,7 +16,7 @@
 	import { TimeSeconds } from '$lib/state/settings.svelte.js';
 	import DatetimeInput from '$lib/components/input/datetime.svelte';
 	import type { FormEventHandler } from 'svelte/elements';
-	import Button from '$lib/components/button/button.svelte';
+	import {Button} from 'unicove-components';
 	import { availableLanguageTags } from '$lib/paraglide/runtime';
 	import CurrencySelect from '$lib/components/select/currency.svelte';
 	import DebugToggle from '$lib/components/select/debug.svelte';

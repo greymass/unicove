@@ -4,7 +4,7 @@
 
 	import { ActivityLoader } from './state.svelte.js';
 	import { getActionSummaryComponent } from '$lib/components/summary/index.js';
-	import Button from '$lib/components/button/button.svelte';
+	import {Button} from 'unicove-components';
 	import SelectActionVariant from '$lib/components/select/actionvariant.svelte';
 	import Trace from '$lib/components/elements/trace.svelte';
 	import type { ActionDisplayVariants } from '$lib/types.js';

@@ -12,7 +12,7 @@
 	import PublicKeyInput from '$lib/components/input/publickey.svelte';
 	import TextInput from '$lib/components/input/text.svelte';
 	import { SingleCard, Stack } from '$lib/components/layout';
-	import Button from '$lib/components/button/button.svelte';
+	import {Button} from 'unicove-components';
 	import CopyButton from '$lib/components/button/copy.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import Code from '$lib/components/code.svelte';

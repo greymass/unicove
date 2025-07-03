@@ -4,7 +4,7 @@
 	import { CpuIcon, WifiIcon, HardDrive } from 'lucide-svelte';
 
 	import Stack from '$lib/components/layout/stack.svelte';
-	import Button from '$lib/components/button/button.svelte';
+	import {Button} from 'unicove-components';
 	import CpuAndNetResource from '$lib/components/elements/cpunetresource.svelte';
 	import RamResource from '$lib/components/elements/ramresource.svelte';
 	import AccountBalance from '$lib/components/card/accountbalance.svelte';

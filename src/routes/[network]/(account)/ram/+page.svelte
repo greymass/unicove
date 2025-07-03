@@ -7,7 +7,7 @@
 	import * as m from '$lib/paraglide/messages.js';
 	import AssetInput from '$lib/components/input/asset.svelte';
 	import AssetText from '$lib/components/elements/asset.svelte';
-	import Button from '$lib/components/button/button.svelte';
+	import {Button} from 'unicove-components';
 	import BytesInput from '$lib/components/input/bytes.svelte';
 	import Card from '$lib/components/layout/box/card.svelte';
 	import Label from '$lib/components/input/label.svelte';

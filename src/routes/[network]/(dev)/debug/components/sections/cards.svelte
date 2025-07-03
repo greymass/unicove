@@ -1,5 +1,5 @@
 <script>
-	import Button from '$lib/components/button/button.svelte';
+	import {Button} from 'unicove-components';
 
 	import { Card, Stack, Switcher } from '$lib/components/layout';
 </script>

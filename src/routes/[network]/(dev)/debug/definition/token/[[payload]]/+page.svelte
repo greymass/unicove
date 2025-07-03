@@ -3,7 +3,7 @@
 	import NameInput from '$lib/components/input/name.svelte';
 	import SymbolInput from '$lib/components/input/symbol.svelte';
 	import { TokenDefinition } from '$lib/types/token';
-	import Button from '$lib/components/button/button.svelte';
+	import {Button} from 'unicove-components';
 	import { onMount } from 'svelte';
 	import Code from '$lib/components/code.svelte';
 

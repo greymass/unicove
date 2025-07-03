@@ -9,7 +9,7 @@
 	import { getContext } from 'svelte';
 
 	import { Types as MsigTypes } from '$lib/wharf/contracts/msig';
-	import Button from '$lib/components/button/button.svelte';
+	import {Button} from 'unicove-components';
 	import { DD, DL, DLRow } from '../descriptionlist';
 
 	const context = getContext<UnicoveContext>('state');

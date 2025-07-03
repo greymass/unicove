@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Button from '$lib/components/button/button.svelte';
+	import {Button} from 'unicove-components';
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
 	import { Chains } from '@wharfkit/common';
 	import { getContext } from 'svelte';

@@ -5,7 +5,7 @@
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 
-	import Button from '$lib/components/button/button.svelte';
+	import {Button} from 'unicove-components';
 	import Box from '$lib/components/layout/box/box.svelte';
 	import Card from '$lib/components/layout/box/card.svelte';
 	import { setSnap, requestSnap } from '$lib/metamask-snap';

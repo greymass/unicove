@@ -2,7 +2,7 @@
 	import Stack from '$lib/components/layout/stack.svelte';
 	import Table from '$lib/components/contract/table.svelte';
 	import Code from '$lib/components/code.svelte';
-	import Button from '$lib/components/button/button.svelte';
+	import {Button} from 'unicove-components';
 	import TextInput from '$lib/components/input/text.svelte';
 	import { goto } from '$lib/utils';
 	import Checkbox from '$lib/components/input/checkbox.svelte';

@@ -4,7 +4,7 @@
 	import StakedHEX from './stakedhex.svelte';
 	import { getAPR } from '$lib/utils/staking';
 	import * as m from '$lib/paraglide/messages';
-	import Button from '$lib/components/button/button.svelte';
+	import {Button} from 'unicove-components';
 
 	interface Props {
 		network: NetworkState;

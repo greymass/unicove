@@ -6,7 +6,7 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { Card } from '$lib/components/layout/index.js';
 	import Account from '$lib/components/elements/account.svelte';
-	import Button from '$lib/components/button/button.svelte';
+	import {Button} from 'unicove-components';
 
 	import * as m from '$lib/paraglide/messages';
 

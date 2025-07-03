@@ -12,7 +12,7 @@
 	import UnicoveOutline from '$lib/assets/unicove-outline.svg';
 
 	import * as m from '$lib/paraglide/messages';
-	import Button from '$lib/components/button/button.svelte';
+	import {Button} from 'unicove-components';
 	import { browser } from '$app/environment';
 
 	interface Props {

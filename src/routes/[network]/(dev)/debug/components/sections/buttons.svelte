@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Cluster, Stack } from '$lib/components/layout';
-	import Button from '$lib/components/button/button.svelte';
+	import {Button} from 'unicove-components';
 	import IconButton from '$lib/components/button/icon.svelte';
 	import { User } from 'lucide-svelte';
 </script>
