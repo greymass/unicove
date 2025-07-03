@@ -14,11 +14,11 @@
 		type TokenPair
 	} from '$lib/types/token';
 	import * as m from '$lib/paraglide/messages';
-	import {Button} from 'unicove-components';
+	import { Button } from 'unicove-components';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import {Code} from 'unicove-components';
+	import { Code } from 'unicove-components';
 	import Link from '$lib/components/elements/link.svelte';
-	import Accordion from '$lib/components/accordion.svelte';
+	import { Details } from 'unicove-components';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -88,7 +88,7 @@
 	</div>
 {/snippet}
 
-{#snippet AccordionHeader()}
+{#snippet DetailsHeader()}
 	<!-- Left -->
 	<div class="left flex flex-col justify-center gap-2">
 		<h4
@@ -141,7 +141,7 @@
 	</div>
 {/snippet}
 
-<Accordion class={className} header={AccordionHeader} {open}>
+<Details class={className} header={DetailsHeader} {open}>
 	{@render SubBalance(
 		m.common_available(),
 		_balance.balance,
@@ -207,7 +207,7 @@
 			{/each}
 		</div>
 	{/if}
-</Accordion>
+</Details>
 
 {#if debug}
 	<Code json={_balance} />
