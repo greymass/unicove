@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import { Chart } from 'chart.js';
 	import 'chart.js/auto';
-	import { Card } from 'unicove-components';
+	import {Card} from 'unicove-components';
 	import * as m from '$lib/paraglide/messages';
 
 	interface Props {

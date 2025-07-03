@@ -4,7 +4,7 @@
 	import { goto } from '$lib/utils';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import { Card } from 'unicove-components';
+	import {Card} from 'unicove-components';
 	import Account from '$lib/components/elements/account.svelte';
 	import { Button } from 'unicove-components';
 
