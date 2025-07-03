@@ -6,17 +6,17 @@
 		PermissionLevel,
 		type Checksum256Type
 	} from '@wharfkit/antelope';
-	import {Code} from 'unicove-components';
-	import Account from '$lib/components/elements/account.svelte';
+	import { Account } from 'unicove-components';
+	import { Code } from 'unicove-components';
 	import Contract from '$lib/components/elements/contract.svelte';
-	import DateTime from '$lib/components/elements/datetime.svelte';
+	import { DateTime } from 'unicove-components';
 	import type { ActionDisplayVariants } from '$lib/types';
 	import Transaction from './transaction.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext, type Component } from 'svelte';
 	import type { ActionSummaryProps, ObjectifiedActionData } from '$lib/types/transaction';
 	import SquareTerminal from 'lucide-svelte/icons/square-terminal';
-	import {Card} from 'unicove-components';
+	import { Card } from 'unicove-components';
 
 	import * as m from '$lib/paraglide/messages';
 	import ActionSummaryContainer from '$lib/components/summary/components/container.svelte';

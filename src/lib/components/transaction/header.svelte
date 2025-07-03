@@ -2,7 +2,7 @@
 	import type { TransactionResponse } from '$lib/types/transaction';
 	import Block from '$lib/components/elements/block.svelte';
 	import Contract from '../elements/contract.svelte';
-	import DateTime from '../elements/datetime.svelte';
+	import { DateTime } from 'unicove-components';
 	import { DD, DL, DLRow } from 'unicove-components';
 
 	import * as m from '$lib/paraglide/messages';
