@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { PublicKey, type PublicKeyType } from '@wharfkit/antelope';
 	import type { ComponentProps } from 'svelte';
-	import TextInput from './text.svelte';
+	import { TextInput } from 'unicove-components';
 
 	interface PublicKeyInputProps extends ComponentProps<typeof TextInput> {
 		optional?: boolean;

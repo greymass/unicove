@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { ComponentProps } from 'svelte';
-	import TextInput from './text.svelte';
+	import { TextInput } from 'unicove-components';
 	import {Code} from 'unicove-components';
 	import ArrowUpDown from 'lucide-svelte/icons/arrow-up-down';
 

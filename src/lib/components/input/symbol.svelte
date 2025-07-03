@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Asset } from '@wharfkit/antelope';
 	import type { ComponentProps } from 'svelte';
-	import TextInput from './text.svelte';
+	import { TextInput } from 'unicove-components';
 
 	interface SymbolInputProps extends ComponentProps<typeof TextInput> {
 		optional?: boolean;

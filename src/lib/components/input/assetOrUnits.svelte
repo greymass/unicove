@@ -2,7 +2,7 @@
 	import { Asset } from '@wharfkit/antelope';
 	import { type ComponentProps } from 'svelte';
 	import AssetInput from './asset.svelte';
-	import TextInput from './text.svelte';
+	import { TextInput } from 'unicove-components';
 	import {Button} from 'unicove-components';
 	import {Cluster} from 'unicove-components';
 	import {Stack} from 'unicove-components';

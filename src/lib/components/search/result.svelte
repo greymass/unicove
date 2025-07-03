@@ -13,7 +13,7 @@
 
 	import { SearchRecordType, type SearchRecord } from '$lib/state/search.svelte';
 	import { cn, truncateCenter } from '$lib/utils';
-	import type TextInput from '../input/text.svelte';
+	import type { TextInput } from 'unicove-components';
 
 	interface ResultProps extends ComponentProps<typeof TextInput> {
 		record: SearchRecord;

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Cluster, Stack } from '$lib/components/layout';
-	import TextInput from '$lib/components/input/text.svelte';
+	import { TextInput } from 'unicove-components';
 	import Label from '$lib/components/input/label.svelte';
 	import AssetOrUnitsInput from '$lib/components/input/assetOrUnits.svelte';
 	import NumberInput from '$lib/components/input/number.svelte';

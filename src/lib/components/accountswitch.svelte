@@ -22,8 +22,8 @@
 	import UserPlus from 'lucide-svelte/icons/user-plus';
 	import Search from 'lucide-svelte/icons/search';
 	import { goto } from '$lib/utils';
-	import {Button} from 'unicove-components';
-	import Text from './input/text.svelte';
+	import { Button } from 'unicove-components';
+	import { TextInput } from 'unicove-components';
 	import { Wallet } from 'lucide-svelte';
 
 	const context = getContext<UnicoveContext>('state');
@@ -225,7 +225,7 @@
 
 							<!-- Filter or Search accounts -->
 							{#if chainSessions.length > 4 || filterValue}
-								<Text
+								<TextInput
 									class="rounded-full bg-transparent pl-6 text-sm"
 									placeholder="Filter accounts"
 									bind:value={filterValue}
@@ -237,7 +237,7 @@
 									{:else}
 										<Search class="size-4" />
 									{/if}
-								</Text>
+								</TextInput>
 							{/if}
 						</header>
 

@@ -21,7 +21,7 @@
 	import NameInput from '$lib/components/input/name.svelte';
 	import Progress from '$lib/components/progress.svelte';
 	import SummarySend from '$lib/components/summary/eosio.token/transfer.svelte';
-	import TextInput from '$lib/components/input/text.svelte';
+	import { TextInput } from 'unicove-components';
 	import TokenSelect from '$lib/components/select/balance.svelte';
 	import TransactError from '$lib/components/transact/error.svelte';
 	import TransactSummary from '$lib/components/transact/summary.svelte';

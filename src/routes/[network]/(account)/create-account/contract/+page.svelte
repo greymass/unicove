@@ -10,7 +10,7 @@
 	import Label from '$lib/components/input/label.svelte';
 	import NameInput from '$lib/components/input/name.svelte';
 	import PublicKeyInput from '$lib/components/input/publickey.svelte';
-	import TextInput from '$lib/components/input/text.svelte';
+	import { TextInput } from 'unicove-components';
 	import { SingleCard, Stack } from '$lib/components/layout';
 	import {Button} from 'unicove-components';
 	import {CopyButton} from 'unicove-components';

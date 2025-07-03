@@ -3,7 +3,7 @@
 	import Table from '$lib/components/contract/table.svelte';
 	import {Code} from 'unicove-components';
 	import {Button} from 'unicove-components';
-	import TextInput from '$lib/components/input/text.svelte';
+	import { TextInput } from 'unicove-components';
 	import { goto } from '$lib/utils';
 	import Checkbox from '$lib/components/input/checkbox.svelte';
 	import Label from '$lib/components/input/label.svelte';

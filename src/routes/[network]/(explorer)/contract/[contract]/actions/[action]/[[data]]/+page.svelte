@@ -12,7 +12,7 @@
 	import Card from '$lib/components/layout/box/card.svelte';
 	import {Code} from 'unicove-components';
 	import Label from '$lib/components/input/label.svelte';
-	import TextInput from '$lib/components/input/text.svelte';
+	import { TextInput } from 'unicove-components';
 	import {CopyButton} from 'unicove-components';
 
 	import Fields from './fields.svelte';

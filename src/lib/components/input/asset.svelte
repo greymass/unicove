@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Asset, Int64 } from '@wharfkit/antelope';
 	import type { ComponentProps } from 'svelte';
-	import TextInput from './text.svelte';
+	import { TextInput } from 'unicove-components';
 	import Big from 'big.js';
 	import {Code} from 'unicove-components';
 	import { ZeroUnits } from '$lib/types/token';
