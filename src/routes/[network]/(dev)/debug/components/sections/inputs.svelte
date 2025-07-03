@@ -3,7 +3,7 @@
 	import { TextInput } from 'unicove-components';
 	import Label from '$lib/components/input/label.svelte';
 	import AssetOrUnitsInput from '$lib/components/input/assetOrUnits.svelte';
-	import NumberInput from '$lib/components/input/number.svelte';
+	import { NumberInput } from 'unicove-components';
 	import Switch from '$lib/components/input/switch.svelte';
 	import Checkbox from '$lib/components/input/checkbox.svelte';
 	import { BytesInput } from 'unicove-components';

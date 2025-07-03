@@ -4,7 +4,7 @@
 	import { getContext } from 'svelte';
 
 	import {Stack} from 'unicove-components';
-	import NumberInput from '$lib/components/input/number.svelte';
+	import { NumberInput } from 'unicove-components';
 	import Label from '$lib/components/input/label.svelte';
 	import { NameInput } from 'unicove-components';
 	import AssetText from '$lib/components/elements/asset.svelte';

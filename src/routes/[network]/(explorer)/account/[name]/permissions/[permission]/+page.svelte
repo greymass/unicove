@@ -11,7 +11,7 @@
 	import * as m from '$lib/paraglide/messages';
 	import PublicKeyInput from '$lib/components/input/publickey.svelte';
 	import { NameInput } from 'unicove-components';
-	import NumberInput from '$lib/components/input/number.svelte';
+	import { NumberInput } from 'unicove-components';
 	import {Button} from 'unicove-components';
 	import Label from '$lib/components/input/label.svelte';
 	import { i18n } from '$lib/i18n';

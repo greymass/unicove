@@ -11,7 +11,7 @@
 	import Label from '$lib/components/input/label.svelte';
 	import { NameInput } from 'unicove-components';
 	import PublicKeyInput from '$lib/components/input/publickey.svelte';
-	import NumberInput from '$lib/components/input/number.svelte';
+	import { NumberInput } from 'unicove-components';
 	import { SingleCard } from '$lib/components/layout';
 	import { Stack } from 'unicove-components';
 	import { Button } from 'unicove-components';
