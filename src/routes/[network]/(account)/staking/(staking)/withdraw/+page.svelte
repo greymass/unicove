@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { Stack, Switcher } from '$lib/components/layout';
-	import {Button} from 'unicove-components';
+	import { Stack, Switcher } from 'unicove-components';
+	import { Button } from 'unicove-components';
 	import TransactSummary from '$lib/components/transact/summary.svelte';
 	import TransactError from '$lib/components/transact/error.svelte';
 
@@ -8,7 +8,7 @@
 	import { getContext } from 'svelte';
 	import { WithdrawManager } from './manager.svelte';
 	import * as m from '$lib/paraglide/messages';
-	import Card from '$lib/components/layout/box/card.svelte';
+	import {Card} from 'unicove-components';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();

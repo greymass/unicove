@@ -2,7 +2,7 @@
 	import Account from '$lib/components/elements/account.svelte';
 	import Contract from '$lib/components/elements/contract.svelte';
 	import RAMDelta from '$lib/components/elements/ramdelta.svelte';
-	import Card from '$lib/components/layout/box/card.svelte';
+	import {Card} from 'unicove-components';
 
 	import * as m from '$lib/paraglide/messages';
 

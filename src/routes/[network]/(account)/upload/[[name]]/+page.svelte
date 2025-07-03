@@ -1,16 +1,16 @@
 <script lang="ts">
 	import { ABI, Action, Bytes, Checksum256, Name, Serializer } from '@wharfkit/antelope';
-	import Card from '$lib/components/layout/box/card.svelte';
-	import {Code} from 'unicove-components';
+	import {Card} from 'unicove-components';
+	import { Code } from 'unicove-components';
 	import { getContext, onMount } from 'svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
 	import NameInput from '$lib/components/input/name.svelte';
 	import TransactForm from '$lib/components/transact/form.svelte';
-	import {Button} from 'unicove-components';
+	import { Button } from 'unicove-components';
 
 	import * as m from '$lib/paraglide/messages';
 	import { SingleCard } from '$lib/components/layout/index.js';
-	import {Stack} from 'unicove-components';
+	import { Stack } from 'unicove-components';
 	import Label from '$lib/components/input/label.svelte';
 
 	const { data } = $props();

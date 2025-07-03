@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Cluster, Stack } from '$lib/components/layout';
+	import { Cluster, Stack } from 'unicove-components';
 	import { TextInput } from 'unicove-components';
 	import Label from '$lib/components/input/label.svelte';
 	import AssetOrUnitsInput from '$lib/components/input/assetOrUnits.svelte';

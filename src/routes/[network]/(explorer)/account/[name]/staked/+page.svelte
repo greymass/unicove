@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Asset } from '@wharfkit/antelope';
-	import { Card, Stack, Switcher } from '$lib/components/layout';
+	import { Card, Stack, Switcher } from 'unicove-components';
 	import type { UnstakingRecord } from '$lib/utils/staking';
 	import {
 		getStakedBalance,

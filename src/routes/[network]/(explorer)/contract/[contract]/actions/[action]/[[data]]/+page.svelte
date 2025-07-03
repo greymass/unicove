@@ -8,12 +8,12 @@
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import Action from '$lib/components/contract/action.svelte';
-	import {Button} from 'unicove-components';
-	import Card from '$lib/components/layout/box/card.svelte';
-	import {Code} from 'unicove-components';
+	import { Button } from 'unicove-components';
+	import {Card} from 'unicove-components';
+	import { Code } from 'unicove-components';
 	import Label from '$lib/components/input/label.svelte';
 	import { TextInput } from 'unicove-components';
-	import {CopyButton} from 'unicove-components';
+	import { CopyButton } from 'unicove-components';
 
 	import Fields from './fields.svelte';
 	import { MultiCard } from '$lib/components/layout';

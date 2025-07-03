@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { Card, Grid, Stack } from '$lib/components/layout';
+	import { Card, Stack } from 'unicove-components';
 	import * as m from '$lib/paraglide/messages.js';
 	import Account from '$lib/components/elements/account.svelte';
 	import Key from 'lucide-svelte/icons/key-round';
-	import {CopyButton} from 'unicove-components';
+	import { CopyButton } from 'unicove-components';
 
 	let { data } = $props();
 
@@ -30,7 +30,7 @@
 	</Card>
 	<Card title={m.accounts_using_public_key()}>
 		{#if data.accounts && data.accounts.length > 0}
-			<Grid tag="ul">
+			<ul class="layout-grid" style="--grid-itemWidth:20ch;">
 				{#each data.accounts as account}
 					<li class="flex">
 						<Account
@@ -39,7 +39,7 @@
 						/>
 					</li>
 				{/each}
-			</Grid>
+			</ul>
 		{:else}
 			<p class="text-muted text-center">{m.no_accounts_found()}</p>
 		{/if}

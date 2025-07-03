@@ -11,11 +11,12 @@
 	import NameInput from '$lib/components/input/name.svelte';
 	import PublicKeyInput from '$lib/components/input/publickey.svelte';
 	import { TextInput } from 'unicove-components';
-	import { SingleCard, Stack } from '$lib/components/layout';
-	import {Button} from 'unicove-components';
-	import {CopyButton} from 'unicove-components';
+	import { SingleCard } from '$lib/components/layout';
+	import { Stack } from 'unicove-components';
+	import { Button } from 'unicove-components';
+	import { CopyButton } from 'unicove-components';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import {Code} from 'unicove-components';
+	import { Code } from 'unicove-components';
 	import Checkbox from '$lib/components/input/checkbox.svelte';
 	import ContractKit from '@wharfkit/contract';
 	import { browser } from '$app/environment';

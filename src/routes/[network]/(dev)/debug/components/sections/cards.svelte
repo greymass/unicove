@@ -1,7 +1,7 @@
 <script>
-	import {Button} from 'unicove-components';
+	import { Button } from 'unicove-components';
 
-	import { Card, Stack, Switcher } from '$lib/components/layout';
+	import { Card, Stack, Switcher } from 'unicove-components';
 </script>
 
 <Stack id="cards">

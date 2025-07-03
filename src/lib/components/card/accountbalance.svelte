@@ -2,9 +2,9 @@
 	import { getContext } from 'svelte';
 	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte';
 
-	import { Card, Stack } from '$lib/components/layout';
-	import {Button} from 'unicove-components';
-	import {Chip} from 'unicove-components';
+	import { Card, Stack } from 'unicove-components';
+	import { Button } from 'unicove-components';
+	import { Chip } from 'unicove-components';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import * as m from '$lib/paraglide/messages';
 

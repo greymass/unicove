@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Link from '$lib/components/elements/link.svelte';
-	import Card from '$lib/components/layout/box/card.svelte';
+	import {Card} from 'unicove-components';
 	import * as m from '$lib/paraglide/messages';
 
 	const { data } = $props();

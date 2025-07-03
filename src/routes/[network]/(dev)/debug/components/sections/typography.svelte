@@ -1,5 +1,5 @@
 <script>
-	import { Cluster, Stack } from '$lib/components/layout';
+	import { Cluster, Stack } from 'unicove-components';
 </script>
 
 <Stack id="typography">

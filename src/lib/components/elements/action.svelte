@@ -16,7 +16,7 @@
 	import { getContext, type Component } from 'svelte';
 	import type { ActionSummaryProps, ObjectifiedActionData } from '$lib/types/transaction';
 	import SquareTerminal from 'lucide-svelte/icons/square-terminal';
-	import Card from '../layout/box/card.svelte';
+	import {Card} from 'unicove-components';
 
 	import * as m from '$lib/paraglide/messages';
 	import ActionSummaryContainer from '$lib/components/summary/components/container.svelte';

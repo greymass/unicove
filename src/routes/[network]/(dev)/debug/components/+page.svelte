@@ -1,13 +1,12 @@
 <script lang="ts">
-	import {Stack} from 'unicove-components';
+	import { Stack } from 'unicove-components';
 	import Typography from './sections/typography.svelte';
 	import Buttons from './sections/buttons.svelte';
-	import {Select} from 'unicove-components';
+	import SelectSection from './sections/select.svelte';
 	import Inputs from './sections/inputs.svelte';
 	import Cards from './sections/cards.svelte';
 	import Navigation from './sections/navigation.svelte';
-	import {Code} from 'unicove-components';
-	import Layouts from './sections/layouts.svelte';
+	import CodeSection from './sections/code.svelte';
 	import Progress from './sections/progress.svelte';
 	import Tables from './sections/tables.svelte';
 	import Charts from './sections/charts.svelte';
@@ -51,7 +50,7 @@
 
 	{@render divider()}
 
-	<Code />
+	<CodeSection />
 
 	{@render divider()}
 
@@ -63,15 +62,11 @@
 
 	{@render divider()}
 
-	<Select />
+	<SelectSection />
 
 	{@render divider()}
 
 	<Inputs />
-
-	{@render divider()}
-
-	<Layouts />
 
 	{@render divider()}
 

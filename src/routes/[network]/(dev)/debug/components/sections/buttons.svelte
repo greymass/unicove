@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { Cluster, Stack } from '$lib/components/layout';
-	import {Button} from 'unicove-components';
-	import {IconButton} from 'unicove-components';
+	import { Cluster, Stack } from 'unicove-components';
+	import { Button } from 'unicove-components';
+	import { IconButton } from 'unicove-components';
 	import { User } from 'lucide-svelte';
 </script>
 

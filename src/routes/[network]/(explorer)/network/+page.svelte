@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { Card, Stack } from '$lib/components/layout';
+	import { Card, Stack } from 'unicove-components';
 	import { API } from '@wharfkit/antelope';
 	// import Pageheader from '$lib/components/pageheader.svelte';
 

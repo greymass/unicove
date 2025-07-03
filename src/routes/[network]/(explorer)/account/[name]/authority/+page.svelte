@@ -4,9 +4,9 @@
 	import { goto } from '$lib/utils';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import { Card } from '$lib/components/layout/index.js';
+	import { Card } from 'unicove-components';
 	import Account from '$lib/components/elements/account.svelte';
-	import {Button} from 'unicove-components';
+	import { Button } from 'unicove-components';
 
 	import * as m from '$lib/paraglide/messages';
 

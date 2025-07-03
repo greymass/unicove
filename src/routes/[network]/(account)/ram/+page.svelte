@@ -3,13 +3,14 @@
 	import { Asset } from '@wharfkit/antelope';
 
 	import { calculateValue } from '$lib/utils';
-	import { MultiCard, Stack } from '$lib/components/layout';
+	import { MultiCard } from '$lib/components/layout';
+	import { Stack } from 'unicove-components';
 	import * as m from '$lib/paraglide/messages.js';
 	import AssetInput from '$lib/components/input/asset.svelte';
 	import AssetText from '$lib/components/elements/asset.svelte';
-	import {Button} from 'unicove-components';
+	import { Button } from 'unicove-components';
 	import BytesInput from '$lib/components/input/bytes.svelte';
-	import Card from '$lib/components/layout/box/card.svelte';
+	import {Card} from 'unicove-components';
 	import Label from '$lib/components/input/label.svelte';
 	import RamPriceHistory from '$lib/components/chart/rampricehistory.svelte';
 	import type { SystemResources } from '$lib/types/network';

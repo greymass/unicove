@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { Stack, Switcher } from '$lib/components/layout';
-	import {Button} from 'unicove-components';
+	import { Stack, Switcher } from 'unicove-components';
+	import { Button } from 'unicove-components';
 	import TransactSummary from '$lib/components/transact/summary.svelte';
 	import TransactError from '$lib/components/transact/error.svelte';
 

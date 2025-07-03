@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { SingleCard, Stack } from '$lib/components/layout';
+	import { SingleCard } from '$lib/components/layout';
+	import { Stack } from 'unicove-components';
 	import Generic404 from '$lib/components/errors/generic.svelte';
-	// import {Code} from 'unicove-components';
 </script>
 
 <!-- This error page gets triggered if any of the routes in the sibling directories fail -->

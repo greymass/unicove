@@ -13,10 +13,11 @@
 	import { tokenEquals, type TokenBalance } from '$lib/types/token';
 	import { Types as RAMTypes } from '$lib/types/ram';
 
-	import { SingleCard, Stack } from '$lib/components/layout';
+	import { SingleCard } from '$lib/components/layout';
+	import { Stack } from 'unicove-components';
 	import AssetInput from '$lib/components/input/asset.svelte';
-	import {Button} from 'unicove-components';
-	import {Code} from 'unicove-components';
+	import { Button } from 'unicove-components';
+	import { Code } from 'unicove-components';
 	import Label from '$lib/components/input/label.svelte';
 	import NameInput from '$lib/components/input/name.svelte';
 	import Progress from '$lib/components/progress.svelte';

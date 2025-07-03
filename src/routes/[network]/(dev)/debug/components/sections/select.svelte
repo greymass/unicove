@@ -1,13 +1,13 @@
 <script lang="ts">
-	import { Cluster, Stack } from '$lib/components/layout';
-	import {Select} from 'unicove-components';
+	import { Cluster, Stack } from 'unicove-components';
+	import { Select } from 'unicove-components';
 	import type { ExtendedSelectOption } from '$lib/components/select/types';
 	import Label from '$lib/components/input/label.svelte';
 	import { Chains } from '@wharfkit/common';
 	import TokenSelect from '$lib/components/select/balance.svelte';
 	import type { SelectOption } from '@melt-ui/svelte';
-	import {Button} from 'unicove-components';
-	import {Code} from 'unicove-components';
+	import { Button } from 'unicove-components';
+	import { Code } from 'unicove-components';
 	import { TokenBalance } from '$lib/types/token';
 
 	const options: SelectOption[] = [

@@ -1,12 +1,13 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 
-	import {Code} from 'unicove-components';
+	import { Code } from 'unicove-components';
 
 	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte.js';
 	import AssetText from '$lib/components/elements/asset.svelte';
-	import {Button} from 'unicove-components';
-	import { SingleCard, Stack } from '$lib/components/layout';
+	import { Button } from 'unicove-components';
+	import { SingleCard } from '$lib/components/layout';
+	import { Stack } from 'unicove-components';
 	import { Asset } from '@wharfkit/session';
 
 	import * as m from '$lib/paraglide/messages';

@@ -3,8 +3,8 @@
 <script lang="ts">
 	import type { HTMLAttributes } from 'svelte/elements';
 	import AssetText from '$lib/components/elements/asset.svelte';
-	import { Card } from '$lib/components/layout';
-	import {Button} from 'unicove-components';
+	import { Card } from 'unicove-components';
+	import { Button } from 'unicove-components';
 	import type { UnstakingRecord } from '$lib/utils/staking';
 	import { languageTag } from '$lib/paraglide/runtime';
 	import * as m from '$lib/paraglide/messages';
