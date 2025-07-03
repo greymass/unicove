@@ -3,7 +3,7 @@
 
 	import NameInput from '$lib/components/input/name.svelte';
 	import {Button} from 'unicove-components';
-	import { Stack } from '$lib/components/layout';
+	import {Stack} from 'unicove-components';
 
 	let input: NameInput;
 

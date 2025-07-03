@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Stack from '$lib/components/layout/stack.svelte';
+	import {Stack} from 'unicove-components';
 	import ChevronRight from 'lucide-svelte/icons/chevron-right';
 	import { walletTypes } from '../walletTypes';
 	import {Button} from 'unicove-components';

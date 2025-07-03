@@ -17,7 +17,7 @@
 	import Grid from '$lib/components/layout/grid.svelte';
 	import { DL, DLRow, DD } from 'unicove-components';
 	import coinbaseLogo from '$lib/assets/exchanges/coinbase.svg';
-	import Stack from '$lib/components/layout/stack.svelte';
+	import {Stack} from 'unicove-components';
 	import Cluster from '$lib/components/layout/cluster.svelte';
 
 	const context = getContext<UnicoveContext>('state');

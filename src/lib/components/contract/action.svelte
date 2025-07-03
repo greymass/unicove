@@ -9,7 +9,7 @@
 	import ContractActionResponse from '$lib/components/contract/action/response.svelte';
 	import {Code} from 'unicove-components';
 	import {Switcher} from 'unicove-components';
-	import Stack from '../layout/stack.svelte';
+	import {Stack} from 'unicove-components';
 
 	const context = getContext<UnicoveContext>('state');
 

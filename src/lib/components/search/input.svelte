@@ -17,7 +17,7 @@
 	} from '$lib/state/search.svelte';
 	import SearchIcon from 'lucide-svelte/icons/search';
 	import X from 'lucide-svelte/icons/x';
-	import { Stack } from '$lib/components/layout';
+	import {Stack} from 'unicove-components';
 	import { cn } from '$lib/utils';
 	import Result from './result.svelte';
 	import { browser } from '$app/environment';

@@ -7,7 +7,7 @@
 	import {Button} from 'unicove-components';
 	import {Code} from 'unicove-components';
 	import Label from '$lib/components/input/label.svelte';
-	import Stack from '$lib/components/layout/stack.svelte';
+	import {Stack} from 'unicove-components';
 	import TransactSummary from '$lib/components/transact/summary.svelte';
 	import TransactError from '$lib/components/transact/error.svelte';
 	import AssetInput from '$lib/components/input/asset.svelte';

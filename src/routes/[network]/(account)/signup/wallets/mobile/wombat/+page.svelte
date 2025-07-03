@@ -1,6 +1,6 @@
 <script lang="ts">
 	// import Pageheader from '$lib/components/pageheader.svelte';
-	import Stack from '$lib/components/layout/stack.svelte';
+	import {Stack} from 'unicove-components';
 	import {Button} from 'unicove-components';
 
 	let { data } = $props();

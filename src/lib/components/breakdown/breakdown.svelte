@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Stack } from '$lib/components/layout';
+	import {Stack} from 'unicove-components';
 	import type { Snippet } from 'svelte';
 
 	interface Props {

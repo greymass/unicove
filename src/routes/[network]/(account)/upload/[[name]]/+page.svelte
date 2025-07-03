@@ -10,7 +10,7 @@
 
 	import * as m from '$lib/paraglide/messages';
 	import { SingleCard } from '$lib/components/layout/index.js';
-	import Stack from '$lib/components/layout/stack.svelte';
+	import {Stack} from 'unicove-components';
 	import Label from '$lib/components/input/label.svelte';
 
 	const { data } = $props();

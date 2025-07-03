@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Stack from '$lib/components/layout/stack.svelte';
+	import {Stack} from 'unicove-components';
 	import TextInput from '$lib/components/input/text.svelte';
 	import Struct from '$lib/components/contract/struct.svelte';
 

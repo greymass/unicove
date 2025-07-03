@@ -2,7 +2,7 @@
 	import {Button} from 'unicove-components';
 	import {Code} from 'unicove-components';
 	import { page } from '$app/stores';
-	import { Stack } from '$lib/components/layout';
+	import {Stack} from 'unicove-components';
 
 	const { data } = $props();
 	const { network } = $derived(data);

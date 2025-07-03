@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { Stack } from '$lib/components/layout';
+	import {Stack} from 'unicove-components';
 	import Generic404 from '$lib/components/errors/generic.svelte';
 	import {Button} from 'unicove-components';
 </script>

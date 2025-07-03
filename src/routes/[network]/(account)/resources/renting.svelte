@@ -3,7 +3,7 @@
 	import { type TransactResult } from '@wharfkit/session';
 	import { getContext } from 'svelte';
 
-	import Stack from '$lib/components/layout/stack.svelte';
+	import {Stack} from 'unicove-components';
 	import NumberInput from '$lib/components/input/number.svelte';
 	import Label from '$lib/components/input/label.svelte';
 	import NameInput from '$lib/components/input/name.svelte';

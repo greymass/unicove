@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Stack from '$lib/components/layout/stack.svelte';
+	import {Stack} from 'unicove-components';
 	import type { NetworkState } from '$lib/state/network.svelte';
 	import StakedHEX from './stakedhex.svelte';
 	import { getAPR } from '$lib/utils/staking';

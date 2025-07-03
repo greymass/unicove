@@ -5,7 +5,7 @@
 	import TextInput from './text.svelte';
 	import {Button} from 'unicove-components';
 	import Cluster from '$lib/components/layout/cluster.svelte';
-	import Stack from '$lib/components/layout/stack.svelte';
+	import {Stack} from 'unicove-components';
 	import {Code} from 'unicove-components';
 
 	interface AssetOrUnitsProps extends ComponentProps<typeof TextInput> {

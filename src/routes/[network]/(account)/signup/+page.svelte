@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Stack from '$lib/components/layout/stack.svelte';
+	import {Stack} from 'unicove-components';
 	import {Button} from 'unicove-components';
 	import { walletTypes } from './walletTypes';
 	import { detectEnvironment } from '$lib/utils';

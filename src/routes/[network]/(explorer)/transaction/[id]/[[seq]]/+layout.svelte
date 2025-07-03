@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Stack } from '$lib/components/layout/index.js';
+	import {Stack} from 'unicove-components';
 	import PillGroup from '$lib/components/navigation/pillgroup.svelte';
 	import { type UnicoveContext } from '$lib/state/client.svelte.js';
 	import { getContext } from 'svelte';

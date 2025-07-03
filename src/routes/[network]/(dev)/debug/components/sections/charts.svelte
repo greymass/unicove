@@ -1,5 +1,5 @@
 <script>
-	import { Stack } from '$lib/components/layout';
+	import {Stack} from 'unicove-components';
 	import BarChart from '$lib/components/chart/barchart.svelte';
 </script>
 

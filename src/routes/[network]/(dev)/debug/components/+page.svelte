@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Stack } from '$lib/components/layout';
+	import {Stack} from 'unicove-components';
 	import Typography from './sections/typography.svelte';
 	import Buttons from './sections/buttons.svelte';
 	import {Select} from 'unicove-components';

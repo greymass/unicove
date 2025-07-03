@@ -1,7 +1,7 @@
 <script>
 	import {Chip} from 'unicove-components';
 
-	import { Stack } from '$lib/components/layout';
+	import {Stack} from 'unicove-components';
 </script>
 
 <Stack id="chips">

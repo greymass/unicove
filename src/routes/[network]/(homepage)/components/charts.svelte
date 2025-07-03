@@ -3,7 +3,7 @@
 	import TokenPriceHistory from '$lib/components/chart/tokenpricehistory.svelte';
 	import RamPriceHistory from '$lib/components/chart/rampricehistory.svelte';
 	import TextBlock from './text-block.svelte';
-	import Stack from '$lib/components/layout/stack.svelte';
+	import {Stack} from 'unicove-components';
 	import * as m from '$lib/paraglide/messages';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { ramtoken, systemtoken } from '$lib/wharf/chains';

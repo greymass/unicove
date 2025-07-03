@@ -10,7 +10,7 @@
 	import type { ActionDisplayVariants } from '$lib/types.js';
 	import type { ActivityResponseAction } from '$lib/types/transaction.js';
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
-	import Stack from '$lib/components/layout/stack.svelte';
+	import {Stack} from 'unicove-components';
 	import NameInput from '$lib/components/input/name.svelte';
 
 	const { data } = $props();

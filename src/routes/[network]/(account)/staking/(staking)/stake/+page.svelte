@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Stack } from '$lib/components/layout';
+	import {Stack} from 'unicove-components';
 	import AssetInput from '$lib/components/input/asset.svelte';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import TokenCard from '$lib/components/elements/tokencard.svelte';
