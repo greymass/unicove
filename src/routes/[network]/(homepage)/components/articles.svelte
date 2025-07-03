@@ -2,7 +2,7 @@
 	import TextBlock from './text-block.svelte';
 	import * as m from '$lib/paraglide/messages';
 	import {Button} from 'unicove-components';
-	import IconButton from '$lib/components/button/icon.svelte';
+	import {IconButton} from 'unicove-components';
 	import type { Article } from '$lib/types/content';
 	import { ChevronLeft, ChevronRight, Circle } from 'lucide-svelte';
 

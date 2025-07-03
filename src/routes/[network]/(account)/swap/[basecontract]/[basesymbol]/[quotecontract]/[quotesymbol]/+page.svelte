@@ -6,7 +6,7 @@
 	import AssetInput from '$lib/components/input/asset.svelte';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import {Button} from 'unicove-components';
-	import IconButton from '$lib/components/button/icon.svelte';
+	import {IconButton} from 'unicove-components';
 	import TransactForm from '$lib/components/transact/form.svelte';
 
 	import * as m from '$lib/paraglide/messages';

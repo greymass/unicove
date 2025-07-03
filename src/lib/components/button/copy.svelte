@@ -3,7 +3,7 @@
 	import { browser } from '$app/environment';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext, type ComponentProps } from 'svelte';
-	import IconButton from '$lib/components/button/icon.svelte';
+	import {IconButton} from 'unicove-components';
 	import { ClipboardCheck } from 'lucide-svelte';
 
 	const context = getContext<UnicoveContext>('state');

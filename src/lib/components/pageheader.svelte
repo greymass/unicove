@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import IconButton from './button/icon.svelte';
+	import {IconButton} from 'unicove-components';
 	import CopyButton from '$lib/components/button/copy.svelte';
 	import { type NetworkState } from '$lib/state/network.svelte';
 	import ChevronLeft from 'lucide-svelte/icons/chevron-left';
