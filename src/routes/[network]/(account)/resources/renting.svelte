@@ -6,7 +6,7 @@
 	import {Stack} from 'unicove-components';
 	import NumberInput from '$lib/components/input/number.svelte';
 	import Label from '$lib/components/input/label.svelte';
-	import NameInput from '$lib/components/input/name.svelte';
+	import { NameInput } from 'unicove-components';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import Checkbox from '$lib/components/input/checkbox.svelte';
 	import {Button} from 'unicove-components';

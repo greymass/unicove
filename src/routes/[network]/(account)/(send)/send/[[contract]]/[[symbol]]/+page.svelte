@@ -19,7 +19,7 @@
 	import { Button } from 'unicove-components';
 	import { Code } from 'unicove-components';
 	import Label from '$lib/components/input/label.svelte';
-	import NameInput from '$lib/components/input/name.svelte';
+	import { NameInput } from 'unicove-components';
 	import Progress from '$lib/components/progress.svelte';
 	import SummarySend from '$lib/components/summary/eosio.token/transfer.svelte';
 	import { TextInput } from 'unicove-components';

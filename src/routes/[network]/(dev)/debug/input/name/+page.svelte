@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Name } from '@wharfkit/antelope';
 
-	import NameInput from '$lib/components/input/name.svelte';
+	import { NameInput } from 'unicove-components';
 	import {Button} from 'unicove-components';
 	import {Stack} from 'unicove-components';
 

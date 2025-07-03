@@ -9,7 +9,7 @@
 	import { DD, DL, DLRow } from 'unicove-components';
 	import { preventDefault } from '$lib/utils';
 	import Label from '$lib/components/input/label.svelte';
-	import NameInput from '$lib/components/input/name.svelte';
+	import { NameInput } from 'unicove-components';
 	import PublicKeyInput from '$lib/components/input/publickey.svelte';
 	import NumberInput from '$lib/components/input/number.svelte';
 	import { SingleCard } from '$lib/components/layout';

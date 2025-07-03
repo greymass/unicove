@@ -10,7 +10,7 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import * as m from '$lib/paraglide/messages';
 	import PublicKeyInput from '$lib/components/input/publickey.svelte';
-	import NameInput from '$lib/components/input/name.svelte';
+	import { NameInput } from 'unicove-components';
 	import NumberInput from '$lib/components/input/number.svelte';
 	import {Button} from 'unicove-components';
 	import Label from '$lib/components/input/label.svelte';

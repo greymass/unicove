@@ -4,7 +4,7 @@
 	import { Code } from 'unicove-components';
 	import { getContext, onMount } from 'svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
-	import NameInput from '$lib/components/input/name.svelte';
+	import { NameInput } from 'unicove-components';
 	import TransactForm from '$lib/components/transact/form.svelte';
 	import { Button } from 'unicove-components';
 

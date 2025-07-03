@@ -11,7 +11,7 @@
 	import type { ActivityResponseAction } from '$lib/types/transaction.js';
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
 	import {Stack} from 'unicove-components';
-	import NameInput from '$lib/components/input/name.svelte';
+	import { NameInput } from 'unicove-components';
 
 	const { data } = $props();
 

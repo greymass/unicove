@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Asset, Name, Serializer } from '@wharfkit/antelope';
-	import NameInput from '$lib/components/input/name.svelte';
+	import { NameInput } from 'unicove-components';
 	import SymbolInput from '$lib/components/input/symbol.svelte';
 	import { TokenDefinition } from '$lib/types/token';
 	import {Button} from 'unicove-components';

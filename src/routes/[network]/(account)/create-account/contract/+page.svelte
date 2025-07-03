@@ -8,7 +8,7 @@
 
 	import { preventDefault } from '$lib/utils';
 	import Label from '$lib/components/input/label.svelte';
-	import NameInput from '$lib/components/input/name.svelte';
+	import { NameInput } from 'unicove-components';
 	import PublicKeyInput from '$lib/components/input/publickey.svelte';
 	import { TextInput } from 'unicove-components';
 	import { SingleCard } from '$lib/components/layout';
