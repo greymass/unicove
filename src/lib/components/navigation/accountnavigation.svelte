@@ -14,7 +14,7 @@
 
 <nav
 	aria-label="account functions"
-	class="px-page border-outline flex items-start gap-5 overflow-x-auto border-y"
+	class="border-outline flex items-start gap-5 overflow-x-auto border-y px-4"
 >
 	{#each props.options as option}
 		<li class="text-muted list-none">

@@ -9,7 +9,6 @@
         "@fontsource/jetbrains-mono": "^5.1.0",
         "@lucide/svelte": "^0.525.0",
         "@storyblok/svelte": "^5.0.2",
-        "@tailwindcss/container-queries": "^0.1.1",
         "@wharfkit/account-creation-plugin-metamask": "^1.2.1",
         "@wharfkit/common": "^1.5.0",
         "@wharfkit/contract": "^1.2.1",
@@ -467,8 +466,6 @@
     "@swc/helpers": ["@swc/helpers@0.5.12", "", { "dependencies": { "tslib": "^2.4.0" } }, "sha512-KMZNXiGibsW9kvZAO1Pam2JPTDBm+KSHMMHWdsyI/1DbIZjT2A6Gy3hblVXUMEDvUAKq+e0vL0X0o54owWji7g=="],
 
     "@szmarczak/http-timer": ["@szmarczak/http-timer@1.1.2", "", { "dependencies": { "defer-to-connect": "^1.0.1" } }, "sha512-XIB2XbzHTN6ieIjfIMV9hlVcfPU26s2vafYWQcZHWXHOxiaRZYEDKEwdl129Zyg50+foYV2jCgtrqSA6qNuNSA=="],
-
-    "@tailwindcss/container-queries": ["@tailwindcss/container-queries@0.1.1", "", { "peerDependencies": { "tailwindcss": ">=3.2.0" } }, "sha512-p18dswChx6WnTSaJCSGx6lTmrGzNNvm2FtXmiO6AuA1V4U5REyoqwmT6kgAsIMdjo07QdAfYXHJ4hnMtfHzWgA=="],
 
     "@tailwindcss/node": ["@tailwindcss/node@4.0.14", "", { "dependencies": { "enhanced-resolve": "^5.18.1", "jiti": "^2.4.2", "tailwindcss": "4.0.14" } }, "sha512-Ux9NbFkKWYE4rfUFz6M5JFLs/GEYP6ysxT8uSyPn6aTbh2K3xDE1zz++eVK4Vwx799fzMF8CID9sdHn4j/Ab8w=="],
 

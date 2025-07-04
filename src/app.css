@@ -1,30 +1,9 @@
 @import 'tailwindcss';
 @import 'unicove-components';
-
 @source "../node_modules/unicove-components";
 
-@plugin '@tailwindcss/container-queries';
-
 @theme {
-	/* Custom Values */
-	--breakpoint-xs: 480px;
-
-	/* Fonts */
-	--font-sans: Inter, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-		'Segoe UI Symbol', 'Noto Color Emoji';
-	--font-sans-hero: Inter, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-		'Noto Color Emoji';
-	--font-mono: JetBrains Mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-		'Liberation Mono', 'Courier New', monospace;
-
-	/* Colors */
-	--color-*: initial;
-	--color-transparent: transparent;
-	--color-current-color: currentColor;
-	--color-inherit: inherit;
-	--color-black: #000;
-	--color-white: #fff;
-
+	/* TODO: turn these into color roles and remove them */
 	--color-green-50: #f0fdf4;
 	--color-green-100: #dcfce7;
 	--color-green-200: #bbf7d0;
@@ -72,134 +51,14 @@
 	--color-solar-800: #984808;
 	--color-solar-900: #7c3b0b;
 	--color-solar-950: #481d00;
-
-	--error-hue: 27;
-	--success-hue: 152;
-
-	--color-primary: inherit;
-	--color-primary-hover: inherit;
-	--color-on-primary: inherit;
-	--color-primary-container: inherit;
-	--color-on-primary-container: inherit;
-	--color-error: inherit;
-	--color-on-error: inherit;
-	--color-error-container: inherit;
-	--color-on-error-container: inherit;
-	--color-success: inherit;
-	--color-on-success: inherit;
-	--color-success-container: inherit;
-	--color-on-success-container: inherit;
-
-	--color-shadow: oklch(0 0 0);
-	--color-scrim: oklch(0 0 0 / 0.5);
-
-	--color-outline: inherit;
-	--color-outline-variant: inherit;
-	--color-surface: inherit;
-	--color-on-surface: inherit;
-	--color-on-surface-variant: inherit;
-	--color-surface-container-lowest: inherit;
-	--color-surface-container-low: inherit;
-	--color-surface-container: inherit;
-	--color-surface-container-high: inherit;
-	--color-surface-container-highest: inherit;
-	--color-background: inherit;
-	--color-on-background: inherit;
-}
-
-@custom-variant dark (&:where([data-scheme=dark], [data-scheme=dark] *));
-
-@utility dark-scheme {
-	--color-primary: oklch(from var(--theme-seed) 0.82 c h);
-	--color-primary-hover: oklch(from var(--theme-seed) 0.9 c h);
-	--color-on-primary: oklch(from var(--theme-seed) 0.2 c h);
-
-	--color-primary-container: oklch(from var(--theme-seed) 0.39 0.086 h);
-	--color-on-primary-container: oklch(from var(--theme-seed) 0.9 0.085 h);
-
-	--color-error: oklch(0.84 0.089 var(--error-hue));
-	--color-on-error: oklch(0.33 0.134 var(--error-hue));
-	--color-error-container: oklch(0.42 0.17 var(--error-hue));
-	--color-on-error-container: oklch(0.92 0.042 var(--error-hue));
-
-	--color-success: oklch(0.84 0.089 var(--success-hue));
-	--color-on-success: oklch(0.33 0.134 var(--success-hue));
-	--color-success-container: oklch(0.42 0.17 var(--success-hue));
-	--color-on-success-container: oklch(0.92 0.042 var(--success-hue));
-
-	--color-outline-variant: oklch(from var(--color-primary) 0.65 0.08 h);
-	--color-outline: oklch(from var(--color-outline-variant) 0.4 0.05 h);
-
-	--color-background: oklch(from var(--color-primary) 0.24 0.02 h);
-	--color-on-background: var(--color-on-surface);
-
-	/* In dark mode, the surfaces are derived from the background */
-	--color-surface: oklch(from var(--color-background) calc(l + 0.02) c h);
-	--color-on-surface: oklch(from var(--color-surface) 0.95 c h);
-	--color-on-surface-variant: oklch(from var(--color-surface) 0.8 calc(c * 2) h);
-
-	/* Surface Containers are named by emphasis (contrast) relative to the Surface color */
-	--color-surface-container-lowest: oklch(from var(--color-surface) calc(l - 0.01) c h);
-	--color-surface-container-low: oklch(from var(--color-surface) calc(l + 0.01) c h);
-	--color-surface-container: oklch(from var(--color-surface) calc(l + 0.023) c h);
-	--color-surface-container-high: oklch(from var(--color-surface) calc(l + 0.05) c h);
-	--color-surface-container-highest: oklch(from var(--color-surface) calc(l + 0.1) c h);
-}
-
-@utility light-scheme {
-	--color-primary: oklch(from var(--theme-seed) 0.4 c h);
-	--color-primary-hover: oklch(from var(--theme-seed) 0.5 c h);
-	--color-on-primary: oklch(from var(--theme-seed) 1 0 h);
-
-	--color-primary-container: oklch(from var(--theme-seed) 0.9 0.086 h);
-	--color-on-primary-container: oklch(from var(--theme-seed) 0.218 0.085 h);
-
-	--color-error: oklch(0.51 0.1927 var(--error-hue));
-	--color-on-error: oklch(1 0 var(--error-hue));
-	--color-error-container: oklch(0.92 0.042 var(--error-hue));
-	--color-on-error-container: oklch(0.42 0.17 var(--error-hue));
-
-	--color-success: oklch(0.51 0.1927 var(--success-hue));
-	--color-on-success: oklch(1 0 var(--success-hue));
-	--color-success-container: oklch(0.92 0.042 var(--success-hue));
-	--color-on-success-container: oklch(0.42 0.17 var(--success-hue));
-
-	--color-outline-variant: oklch(from var(--color-primary) 0.57 0.08 h);
-	--color-outline: oklch(from var(--color-outline-variant) 0.83 0.04 h);
-
-	--color-surface: oklch(from var(--color-primary) 0.98 0.007 h);
-	--color-on-surface: oklch(from var(--color-surface) 0.22 c h);
-	--color-on-surface-variant: oklch(from var(--color-surface) 0.4 0.015 h);
-
-	/* Surface Containers are named by emphasis (contrast) relative to the Surface color */
-	--color-surface-container-lowest: oklch(from var(--color-surface) calc(l + 0.01) 0.01 h);
-	--color-surface-container-low: oklch(from var(--color-surface) calc(l - 0.01) 0.01 h);
-	--color-surface-container: oklch(from var(--color-surface) calc(l - 0.023) 0.01 h);
-	--color-surface-container-high: oklch(from var(--color-surface) calc(l - 0.05) 0.01 h);
-	--color-surface-container-highest: oklch(from var(--color-surface) calc(l - 0.1) 0.01 h);
-
-	/* In light mode, since the surfaces are near-white the background is derived from the surface */
-	--color-background: var(--color-surface-container-high);
-	--color-on-background: var(--color-on-surface);
 }
 
 @layer base {
-	/* Schemes */
-	[data-scheme='light'] {
-		@apply light-scheme;
-	}
-
-	[data-scheme='dark'] {
-		@apply dark-scheme;
-	}
-
-	/* Themes */
-	:root,
+	/* Library defaults to Vaulta colors, adding here just to be explicit */
 	[data-theme='vaulta'] {
 		--theme-seed: #2e3bff;
 	}
 
-	/* Vaulta is the default theme. Theme tweaks are made for other networks */
 	[data-theme='eos'] {
 		--theme-seed: rgb(248 187 113);
 	}
@@ -207,25 +66,26 @@
 	[data-theme='telos'] {
 		--theme-seed: rgb(207 189 254);
 		&[data-scheme='dark'] {
-			--color-background: oklch(from var(--color-primary) 0.24 0.02 h);
+			/* We can customize specific colors roles per network and per scheme */
+			--role-background: oklch(from var(--role-primary) 0.24 0.02 h);
 		}
 	}
 
 	[data-theme='jungle4'] {
 		--theme-seed: #2e9e87;
 		&[data-scheme='dark'] {
-			--color-background: oklch(from var(--color-primary) 0.24 0.005 h);
+			--role-background: oklch(from var(--role-primary) 0.24 0.005 h);
 		}
 	}
 
 	[data-theme='wax'] {
 		--theme-seed: oklch(0.74 0.1673 59.6);
-		--color-primary: oklch(from var(--theme-seed) 0.82 c h);
-		--color-primary-hover: oklch(from var(--theme-seed) 0.9 c h);
-		--color-on-primary: oklch(from var(--theme-seed) 0.2 c h);
-		--color-background: oklch(from var(--color-primary) 0.94 0.005 h);
+		--role-primary: oklch(from var(--theme-seed) 0.82 c h);
+		--role-primary-hover: oklch(from var(--theme-seed) 0.9 c h);
+		--role-on-primary: oklch(from var(--theme-seed) 0.2 c h);
+		--role-background: oklch(from var(--role-primary) 0.94 0.005 h);
 		&[data-scheme='dark'] {
-			--color-background: oklch(from var(--color-primary) 0.24 0.001 h);
+			--role-background: oklch(from var(--role-primary) 0.24 0.001 h);
 		}
 	}
 
@@ -233,142 +93,9 @@
 		--theme-seed: rgb(255 180 168);
 	}
 
-	/* Element defaults */
 	:root {
-		@apply bg-background text-on-background h-full;
-		color-scheme: dark light;
-		touch-action: manipulation;
-		scrollbar-gutter: stable;
-
-		::selection {
-			@apply bg-primary text-on-primary;
+		body {
+			@apply h-auto min-h-svh;
 		}
 	}
-
-	body {
-		@apply h-auto min-h-svh;
-	}
-
-	p,
-	li {
-		@apply text-muted text-base font-normal;
-	}
-
-	details > summary {
-		list-style: none;
-	}
-	details > summary::-webkit-details-marker {
-		display: none;
-	}
-}
-
-@utility h1 {
-	@apply text-5xl leading-none font-semibold;
-}
-
-@utility h2 {
-	@apply text-3xl leading-none font-semibold;
-}
-
-@utility h3 {
-	@apply text-2xl leading-none font-semibold;
-}
-
-@utility h4 {
-	@apply text-lg leading-none font-medium;
-}
-
-@utility h5 {
-	@apply text-base leading-none font-medium;
-}
-
-@utility caption {
-	@apply text-muted text-base font-medium;
-}
-
-@utility card {
-	/* Layout */
-	@apply bg-surface grid gap-4 rounded-xl p-5;
-}
-
-@utility layout-stack {
-	@apply flex flex-col gap-6;
-}
-
-@utility layout-center {
-	@apply mx-auto box-content max-w-prose;
-}
-
-@utility layout-switcher {
-	@apply flex flex-wrap gap-4;
-
-	& > * {
-		flex-grow: 1;
-		flex-basis: calc((var(--switcher-threshold) - 100%) * 999);
-	}
-}
-
-@utility layout-grid {
-	@apply grid gap-4;
-	grid-template-columns: repeat(auto-fit, minmax(min(var(--grid-itemWidth), 100%), 1fr));
-}
-
-@utility layout-cluster {
-	@apply flex flex-wrap gap-4;
-}
-
-@utility table-styles {
-	:where(&) {
-		@apply w-full table-auto overflow-x-auto;
-
-		thead tr {
-			@apply bg-none;
-		}
-
-		tr,
-		.table-row-styles {
-			@apply table-row-border table-row-background;
-		}
-
-		th,
-		.table-head-styles {
-			@apply text-muted py-1.5 pr-2 pl-2 text-left text-base font-medium first:pl-0 last:pr-0;
-		}
-
-		td,
-		.table-cell-styles {
-			@apply py-3 pr-2 pl-2 text-base first:pl-0 last:pr-0;
-		}
-	}
-}
-
-@utility px-page {
-	@apply px-4;
-}
-
-@utility mx-page {
-	@apply px-4;
-}
-
-@utility table-row-border {
-	@apply border-outline border-b last:border-none;
-}
-
-@utility table-row-background {
-	@apply odd:via-outline/10 data-[hover-effect=false]:odd:hover:via-outline-variant/10 hover:via-primary/5 data-[active=true]:via-primary/10 bg-linear-to-r from-transparent to-transparent data-[clickable=true]:cursor-pointer data-[hover-effect=false]:hover:via-transparent;
-}
-
-@utility bg-hero-gradient {
-	background-image: radial-gradient(var(--bg-menu) 0%, transparent 50%);
-}
-
-@utility text-muted {
-	@apply text-on-surface-variant;
-}
-
-@utility subgrid {
-	@apply col-span-full grid grid-cols-subgrid;
-}
-
-@layer components {
 }

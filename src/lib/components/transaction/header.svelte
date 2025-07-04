@@ -31,7 +31,7 @@
 		</DD>
 	</DLRow>
 	<DLRow title={m.common_contracts_used()}>
-		<DD class="layout-cluster justify-end">
+		<DD class="flex flex-wrap justify-end gap-4">
 			{#each transaction.contracts as contract}
 				<Contract name={contract} />
 			{/each}
