@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { NetworkState } from '$lib/state/network.svelte';
-	import Button from '$lib/components/button/button.svelte';
+	import { Button } from 'unicove-components';
 
 	import * as m from '$lib/paraglide/messages';
 	import { Chains } from '@wharfkit/common';

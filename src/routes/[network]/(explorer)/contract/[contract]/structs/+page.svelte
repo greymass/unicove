@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Stack from '$lib/components/layout/stack.svelte';
-	import TextInput from '$lib/components/input/text.svelte';
+	import { Stack } from 'unicove-components';
+	import { TextInput } from 'unicove-components';
 	import Struct from '$lib/components/contract/struct.svelte';
 
 	let filter = $state('');

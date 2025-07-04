@@ -1,8 +1,8 @@
 <script lang="ts">
-	import Code from '$lib/components/code.svelte';
+	import { Code } from 'unicove-components';
 	import type { PageData } from './$types';
 	import * as m from '$lib/paraglide/messages';
-	import Stack from '$lib/components/layout/stack.svelte';
+	import { Stack } from 'unicove-components';
 
 	export let data: PageData;
 </script>

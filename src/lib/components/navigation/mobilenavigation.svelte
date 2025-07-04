@@ -4,7 +4,7 @@
 	import { createDialog, melt } from '@melt-ui/svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import SideMenuContent from '$lib/components/navigation/sidemenu.svelte';
-	import Menu from 'lucide-svelte/icons/menu';
+	import Menu from '@lucide/svelte/icons/menu';
 	import type { NetworkState } from '$lib/state/network.svelte';
 	import Unicovelogo from '$lib/assets/unicovelogo.svelte';
 	import { cn } from '$lib/utils/style';

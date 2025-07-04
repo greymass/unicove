@@ -7,16 +7,17 @@
 	import * as m from '$lib/paraglide/messages';
 
 	import { preventDefault } from '$lib/utils';
-	import Label from '$lib/components/input/label.svelte';
-	import NameInput from '$lib/components/input/name.svelte';
-	import PublicKeyInput from '$lib/components/input/publickey.svelte';
-	import TextInput from '$lib/components/input/text.svelte';
-	import { SingleCard, Stack } from '$lib/components/layout';
-	import Button from '$lib/components/button/button.svelte';
-	import CopyButton from '$lib/components/button/copy.svelte';
+	import { Label } from 'unicove-components';
+	import { NameInput } from 'unicove-components';
+	import { PublicKeyInput } from 'unicove-components';
+	import { TextInput } from 'unicove-components';
+	import { SingleCard } from '$lib/components/layout';
+	import { Stack } from 'unicove-components';
+	import { Button } from 'unicove-components';
+	import { CopyButton } from 'unicove-components';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import Code from '$lib/components/code.svelte';
-	import Checkbox from '$lib/components/input/checkbox.svelte';
+	import { Code } from 'unicove-components';
+	import { Checkbox } from 'unicove-components';
 	import ContractKit from '@wharfkit/contract';
 	import { browser } from '$app/environment';
 

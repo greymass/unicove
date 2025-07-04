@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Asset } from '@wharfkit/antelope';
 	import { getContext } from 'svelte';
-	import { Info } from 'lucide-svelte';
+	import { Info } from '@lucide/svelte';
 
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import TradingPair from '$lib/components/elements/tradingpair.svelte';
@@ -14,11 +14,11 @@
 		type TokenPair
 	} from '$lib/types/token';
 	import * as m from '$lib/paraglide/messages';
-	import Button from '$lib/components/button/button.svelte';
+	import { Button } from 'unicove-components';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import Code from '$lib/components/code.svelte';
+	import { Code } from 'unicove-components';
 	import Link from '$lib/components/elements/link.svelte';
-	import Accordion from '$lib/components/accordion.svelte';
+	import { Details } from 'unicove-components';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -88,7 +88,7 @@
 	</div>
 {/snippet}
 
-{#snippet AccordionHeader()}
+{#snippet DetailsHeader()}
 	<!-- Left -->
 	<div class="left flex flex-col justify-center gap-2">
 		<h4
@@ -141,7 +141,7 @@
 	</div>
 {/snippet}
 
-<Accordion class={className} header={AccordionHeader} {open}>
+<Details class={className} header={DetailsHeader} {open}>
 	{@render SubBalance(
 		m.common_available(),
 		_balance.balance,
@@ -207,7 +207,7 @@
 			{/each}
 		</div>
 	{/if}
-</Accordion>
+</Details>
 
 {#if debug}
 	<Code json={_balance} />

@@ -1,15 +1,15 @@
 <script lang="ts">
-	import { Cluster, Stack } from '$lib/components/layout';
-	import TextInput from '$lib/components/input/text.svelte';
-	import Label from '$lib/components/input/label.svelte';
+	import { Cluster, Stack } from 'unicove-components';
+	import { TextInput } from 'unicove-components';
+	import { Label } from 'unicove-components';
 	import AssetOrUnitsInput from '$lib/components/input/assetOrUnits.svelte';
-	import NumberInput from '$lib/components/input/number.svelte';
-	import Switch from '$lib/components/input/switch.svelte';
-	import Checkbox from '$lib/components/input/checkbox.svelte';
-	import BytesInput from '$lib/components/input/bytes.svelte';
+	import { NumberInput } from 'unicove-components';
+	import { Switch } from 'unicove-components';
+	import { Checkbox } from 'unicove-components';
+	import { BytesInput } from 'unicove-components';
 
 	import { Asset } from '@wharfkit/antelope';
-	import AssetInput from '$lib/components/input/asset.svelte';
+	import { AssetInput } from 'unicove-components';
 
 	let input: AssetInput;
 

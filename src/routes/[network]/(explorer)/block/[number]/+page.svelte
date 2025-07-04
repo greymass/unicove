@@ -1,10 +1,11 @@
 <script lang="ts">
-	import { Stack, MultiCard, Switcher } from '$lib/components/layout';
+	import { MultiCard } from '$lib/components/layout';
+	import { Stack, Switcher } from 'unicove-components';
 	import TransactionText from '$lib/components/elements/transaction.svelte';
 	import AccountText from '$lib/components/elements/account.svelte';
-	import Button from '$lib/components/button/button.svelte';
-	import { ArrowLeftRight, ArrowRight, ArrowLeft } from 'lucide-svelte';
-	import { DD, DL, DLRow } from '$lib/components/descriptionlist/index.js';
+	import { Button } from 'unicove-components';
+	import { ArrowLeftRight, ArrowRight, ArrowLeft } from '@lucide/svelte';
+	import { DD, DL, DLRow } from 'unicove-components';
 	import { goto } from '$lib/utils';
 	import * as m from '$lib/paraglide/messages';
 

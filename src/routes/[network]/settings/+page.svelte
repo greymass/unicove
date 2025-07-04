@@ -3,20 +3,20 @@
 	import { getContext } from 'svelte';
 	import type { ChangeFn } from '@melt-ui/svelte/internal/helpers';
 
-	import Switch from '$lib/components/input/switch.svelte';
+	import { Switch } from 'unicove-components';
 	import LanguageSelect from '$lib/components/select/language.svelte';
-	import Label from '$lib/components/input/label.svelte';
-	import { Card, Stack } from '$lib/components/layout';
+	import { Label } from 'unicove-components';
+	import { Card, Stack } from 'unicove-components';
 	import { type UnicoveContext } from '$lib/state/client.svelte';
-	import Code from '$lib/components/code.svelte';
+	import { Code } from 'unicove-components';
 	import * as m from '$lib/paraglide/messages';
 	import Pageheader from '$lib/components/pageheader.svelte';
-	import Select from '$lib/components/select/select.svelte';
-	import type { ExtendedSelectOption } from '$lib/components/select/types.js';
+	import { Select } from 'unicove-components';
+	import type { ExtendedSelectOption } from 'unicove-components';
 	import { TimeSeconds } from '$lib/state/settings.svelte.js';
-	import DatetimeInput from '$lib/components/input/datetime.svelte';
+	import { DatetimeInput } from 'unicove-components';
 	import type { FormEventHandler } from 'svelte/elements';
-	import Button from '$lib/components/button/button.svelte';
+	import { Button } from 'unicove-components';
 	import { availableLanguageTags } from '$lib/paraglide/runtime';
 	import CurrencySelect from '$lib/components/select/currency.svelte';
 	import DebugToggle from '$lib/components/select/debug.svelte';

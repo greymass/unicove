@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { Asset } from '@wharfkit/antelope';
 	import { getContext } from 'svelte';
-	import { ChartLine } from 'lucide-svelte';
+	import { ChartLine } from '@lucide/svelte';
 
-	import { Card, MultiCard, Stack } from '$lib/components/layout';
+	import { MultiCard } from '$lib/components/layout';
+	import { Card, Stack } from 'unicove-components';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte';
 	import type { UnstakingRecord } from '$lib/utils/staking';
@@ -20,8 +21,8 @@
 	import UnstakingBalances from '$lib/components/elements/unstaking.svelte';
 	import AccountBalance from '$lib/components/card/accountbalance.svelte';
 	import StakingCalculator from './stakingcalculator.svelte';
-	import Cluster from '$lib/components/layout/cluster.svelte';
-	import Chip from '$lib/components/chip.svelte';
+	import { Cluster } from 'unicove-components';
+	import { Chip } from 'unicove-components';
 	import * as m from '$lib/paraglide/messages';
 	import { Currencies } from '$lib/types/currencies';
 	import { ZeroUnits } from '$lib/types/token';

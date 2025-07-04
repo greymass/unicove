@@ -4,21 +4,21 @@
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 
-	import Button from '$lib/components/button/button.svelte';
-	import Code from '$lib/components/code.svelte';
-	import Label from '$lib/components/input/label.svelte';
-	import Stack from '$lib/components/layout/stack.svelte';
+	import { Button } from 'unicove-components';
+	import { Code } from 'unicove-components';
+	import { Label } from 'unicove-components';
+	import { Stack } from 'unicove-components';
 	import TransactSummary from '$lib/components/transact/summary.svelte';
 	import TransactError from '$lib/components/transact/error.svelte';
-	import AssetInput from '$lib/components/input/asset.svelte';
-	import BytesInput from '$lib/components/input/bytes.svelte';
+	import { AssetInput } from 'unicove-components';
+	import { BytesInput } from 'unicove-components';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import RamResource from '$lib/components/elements/ramresource.svelte';
 	import * as m from '$lib/paraglide/messages';
 
 	import { SellRAMState } from './state.svelte';
 	import { preventDefault } from '$lib/utils';
-	import { DD, DL, DLRow } from '$lib/components/descriptionlist';
+	import { DD, DL, DLRow } from 'unicove-components';
 
 	let bytesInput: BytesInput | undefined = $state();
 	let assetInput: AssetInput | undefined = $state();

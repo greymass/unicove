@@ -4,9 +4,9 @@
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 
-	import Code from '$lib/components/code.svelte';
+	import { Code } from 'unicove-components';
 
-	import Database from 'lucide-svelte/icons/database';
+	import Database from '@lucide/svelte/icons/database';
 	import Contract from '../elements/contract.svelte';
 	import { parseRootType } from '$lib/utils/abi';
 

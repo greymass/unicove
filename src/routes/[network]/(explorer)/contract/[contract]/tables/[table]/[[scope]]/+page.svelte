@@ -1,12 +1,12 @@
 <script lang="ts">
-	import Stack from '$lib/components/layout/stack.svelte';
+	import { Stack } from 'unicove-components';
 	import Table from '$lib/components/contract/table.svelte';
-	import Code from '$lib/components/code.svelte';
-	import Button from '$lib/components/button/button.svelte';
-	import TextInput from '$lib/components/input/text.svelte';
+	import { Code } from 'unicove-components';
+	import { Button } from 'unicove-components';
+	import { TextInput } from 'unicove-components';
 	import { goto } from '$lib/utils';
-	import Checkbox from '$lib/components/input/checkbox.svelte';
-	import Label from '$lib/components/input/label.svelte';
+	import { Checkbox } from 'unicove-components';
+	import { Label } from 'unicove-components';
 
 	const { data } = $props();
 

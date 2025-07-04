@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { ABI, Name } from '@wharfkit/antelope';
-	import SquareTerminal from 'lucide-svelte/icons/square-terminal';
+	import SquareTerminal from '@lucide/svelte/icons/square-terminal';
 
 	import Contract from '$lib/components/elements/contract.svelte';
 	import { parseRicardian } from '$lib/utils/ricardian';

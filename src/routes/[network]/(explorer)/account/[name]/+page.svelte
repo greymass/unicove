@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
-	import DollarSign from 'lucide-svelte/icons/dollar-sign';
+	import DollarSign from '@lucide/svelte/icons/dollar-sign';
 
 	import { AccountValueState } from '$lib/state/value.svelte.js';
-	import { Card } from '$lib/components/layout';
+	import { Card } from 'unicove-components';
 	import * as m from '$lib/paraglide/messages';
 	import AssetText from '$lib/components/elements/asset.svelte';
-	import Button from '$lib/components/button/button.svelte';
+	import { Button } from 'unicove-components';
 	import CurrencySelect from '$lib/components/select/currency.svelte';
 	import ResourceCard from '$lib/components/elements/resourceCard.svelte';
 	import TokenBalance from '$lib/components/card/tokenbalance.svelte';

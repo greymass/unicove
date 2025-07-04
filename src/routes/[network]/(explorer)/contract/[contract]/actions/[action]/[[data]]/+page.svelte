@@ -8,16 +8,16 @@
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import Action from '$lib/components/contract/action.svelte';
-	import Button from '$lib/components/button/button.svelte';
-	import Card from '$lib/components/layout/box/card.svelte';
-	import Code from '$lib/components/code.svelte';
-	import Label from '$lib/components/input/label.svelte';
-	import TextInput from '$lib/components/input/text.svelte';
-	import CopyButton from '$lib/components/button/copy.svelte';
+	import { Button } from 'unicove-components';
+	import { Card } from 'unicove-components';
+	import { Code } from 'unicove-components';
+	import { Label } from 'unicove-components';
+	import { TextInput } from 'unicove-components';
+	import { CopyButton } from 'unicove-components';
 
 	import Fields from './fields.svelte';
 	import { MultiCard } from '$lib/components/layout';
-	import Checkbox from '$lib/components/input/checkbox.svelte';
+	import { Checkbox } from 'unicove-components';
 	import type { TransactResult } from '@wharfkit/session';
 	import TransactSummary from '$lib/components/transact/summary.svelte';
 	import TransactError from '$lib/components/transact/error.svelte';

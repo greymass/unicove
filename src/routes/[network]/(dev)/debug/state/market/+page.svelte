@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Button from '$lib/components/button/button.svelte';
-	import Code from '$lib/components/code.svelte';
+	import { Button } from 'unicove-components';
+	import { Code } from 'unicove-components';
 	import type { MarketContext } from '$lib/state/client.svelte.js';
 	import { getContext } from 'svelte';
 

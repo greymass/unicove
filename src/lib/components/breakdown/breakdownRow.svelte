@@ -2,7 +2,7 @@
 	import { Asset } from '@wharfkit/antelope';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import { cn } from '$lib/utils';
-	import Button from '../button/button.svelte';
+	import { Button } from 'unicove-components';
 
 	type BreakdownAction = {
 		href: string;

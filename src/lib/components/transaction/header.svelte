@@ -1,9 +1,9 @@
 <script lang="ts">
 	import type { TransactionResponse } from '$lib/types/transaction';
-	import Block from '../elements/block.svelte';
+	import Block from '$lib/components/elements/block.svelte';
 	import Contract from '../elements/contract.svelte';
-	import DateTime from '../elements/datetime.svelte';
-	import { DD, DL, DLRow } from '$lib/components/descriptionlist';
+	import { DateTime } from 'unicove-components';
+	import { DD, DL, DLRow } from 'unicove-components';
 
 	import * as m from '$lib/paraglide/messages';
 
@@ -31,7 +31,7 @@
 		</DD>
 	</DLRow>
 	<DLRow title={m.common_contracts_used()}>
-		<DD class="layout-cluster justify-end">
+		<DD class="flex flex-wrap justify-end gap-4">
 			{#each transaction.contracts as contract}
 				<Contract name={contract} />
 			{/each}

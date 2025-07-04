@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 
-	import Button from '$lib/components/button/button.svelte';
-	import { DD, DL, DLRow } from '$lib/components/descriptionlist/index.js';
-	import { Stack, Switcher } from '$lib/components/layout/index.js';
+	import { Button } from 'unicove-components';
+	import { DD, DL, DLRow } from 'unicove-components';
+	import { Stack, Switcher } from 'unicove-components';
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
 	import Account from '$lib/components/elements/account.svelte';
 	import ActionCard from '$lib/components/elements/action.svelte';

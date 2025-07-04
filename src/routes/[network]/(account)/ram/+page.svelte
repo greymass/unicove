@@ -3,21 +3,22 @@
 	import { Asset } from '@wharfkit/antelope';
 
 	import { calculateValue } from '$lib/utils';
-	import { MultiCard, Stack } from '$lib/components/layout';
+	import { MultiCard } from '$lib/components/layout';
+	import { Stack } from 'unicove-components';
 	import * as m from '$lib/paraglide/messages.js';
-	import AssetInput from '$lib/components/input/asset.svelte';
+	import { AssetInput } from 'unicove-components';
 	import AssetText from '$lib/components/elements/asset.svelte';
-	import Button from '$lib/components/button/button.svelte';
-	import BytesInput from '$lib/components/input/bytes.svelte';
-	import Card from '$lib/components/layout/box/card.svelte';
-	import Label from '$lib/components/input/label.svelte';
+	import { Button } from 'unicove-components';
+	import { BytesInput } from 'unicove-components';
+	import { Card } from 'unicove-components';
+	import { Label } from 'unicove-components';
 	import RamPriceHistory from '$lib/components/chart/rampricehistory.svelte';
 	import type { SystemResources } from '$lib/types/network';
 	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte';
 	import AccountBalance from '$lib/components/card/accountbalance.svelte';
 
 	import { RAMCalculatorState } from './state.svelte';
-	import { DD, DL, DLRow } from '$lib/components/descriptionlist';
+	import { DD, DL, DLRow } from 'unicove-components';
 	import SystemTokenSwap from '$lib/components/banner/systemTokenSwap.svelte';
 
 	const { data } = $props();

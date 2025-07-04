@@ -2,21 +2,22 @@
 	import { Asset, Checksum256, type AnyAction } from '@wharfkit/antelope';
 	import { getContext } from 'svelte';
 
-	import Code from '$lib/components/code.svelte';
-	import AssetInput from '$lib/components/input/asset.svelte';
+	import { Code } from 'unicove-components';
+	import { AssetInput } from 'unicove-components';
 	import AssetText from '$lib/components/elements/asset.svelte';
-	import Button from '$lib/components/button/button.svelte';
-	import IconButton from '$lib/components/button/icon.svelte';
+	import { Button } from 'unicove-components';
+	import { IconButton } from 'unicove-components';
 	import TransactForm from '$lib/components/transact/form.svelte';
 
 	import * as m from '$lib/paraglide/messages';
 	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte.js';
 	import { TokenBalance, TokenSwap, ZeroUnits } from '$lib/types/token.js';
-	import { ArrowRightLeft } from 'lucide-svelte';
-	import Label from '$lib/components/input/label.svelte';
-	import { SingleCard, Stack } from '$lib/components/layout';
+	import { ArrowRightLeft } from '@lucide/svelte';
+	import { Label } from 'unicove-components';
+	import { SingleCard } from '$lib/components/layout';
+	import { Stack } from 'unicove-components';
 	import { deriveSwapAction } from '../../../../swap.js';
-	import Switcher from '$lib/components/layout/switcher.svelte';
+	import { Switcher } from 'unicove-components';
 
 	const { data } = $props();
 
