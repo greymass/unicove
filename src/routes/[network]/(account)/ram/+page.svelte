@@ -74,7 +74,7 @@
 <MultiCard>
 	{#snippet leftColumn()}
 		<!-- Buy Sell Card -->
-		<Card class="flex *:flex-1">
+		<Card class="flex gap-4 *:flex-1">
 			<div class="grid content-between gap-4">
 				<div>
 					<h3 class="text-muted text-base">
@@ -107,62 +107,67 @@
 
 		<!-- RAM Calculator -->
 
-		<Card class="gap-6" title="RAM Calculator">
-			<div class="flex gap-4 *:flex-1">
-				<Stack class="gap-2">
-					<Label for="asset-amount" class="leading-none">
-						{data.network.chain.systemToken?.symbol.code || ''}
-					</Label>
-					<AssetInput
-						id="asset-amount"
-						bind:value={ramCalculatorState.tokens}
-						bind:this={assetInput}
-						oninput={setAssetAmount}
-					/>
-				</Stack>
+		<Card title="RAM Calculator">
+			<Stack>
+				<div class="flex gap-4 *:flex-1">
+					<Stack class="gap-2">
+						<Label for="asset-amount" class="leading-none">
+							{data.network.chain.systemToken?.symbol.code || ''}
+						</Label>
+						<AssetInput
+							id="asset-amount"
+							bind:value={ramCalculatorState.tokens}
+							bind:this={assetInput}
+							oninput={setAssetAmount}
+						/>
+					</Stack>
+
+					<Stack class="gap-2">
+						<Label for="bytes-amount" class="leading-none">{m.common_bytes()}</Label>
+						<BytesInput
+							id="bytes-amount"
+							bind:value={ramCalculatorState.bytes}
+							bind:this={bytesInput}
+							oninput={setBytesAmount}
+						/>
+					</Stack>
+				</div>
 
 				<Stack class="gap-2">
-					<Label for="bytes-amount" class="leading-none">{m.common_bytes()}</Label>
-					<BytesInput
-						id="bytes-amount"
-						bind:value={ramCalculatorState.bytes}
-						bind:this={bytesInput}
-						oninput={setBytesAmount}
-					/>
+					<h4 class="text-md font-semibold">{m.common_details()}</h4>
+					<DL>
+						<DLRow title={` ${data.network.token.id.symbol.code || ''}/RAM (KB) `}>
+							<DD>
+								<AssetText variant="full" value={kbValueToken} />
+							</DD>
+						</DLRow>
+						<DLRow title={` ${market.network.currency.symbol.code}/RAM (KB) `}>
+							<DD>
+								<AssetText variant="full" value={kbValueFiat} />
+							</DD>
+						</DLRow>
+						<DLRow
+							title={m.common_labeled_unit_price({
+								unit: market.network.currency.symbol.code
+							})}
+						>
+							<DD>
+								<AssetText
+									variant="full"
+									value={calculateValue(
+										ramCalculatorState.tokens,
+										market.network.systemtoken.price
+									)}
+								/>
+							</DD>
+						</DLRow>
+						<DLRow title={m.common_network_fees()}>
+							<DD>
+								<AssetText variant="full" value={ramCalculatorState.fee} />
+							</DD>
+						</DLRow>
+					</DL>
 				</Stack>
-			</div>
-
-			<Stack class="gap-2">
-				<h4 class="text-md font-semibold">{m.common_details()}</h4>
-				<DL>
-					<DLRow title={` ${data.network.token.id.symbol.code || ''}/RAM (KB) `}>
-						<DD>
-							<AssetText variant="full" value={kbValueToken} />
-						</DD>
-					</DLRow>
-					<DLRow title={` ${market.network.currency.symbol.code}/RAM (KB) `}>
-						<DD>
-							<AssetText variant="full" value={kbValueFiat} />
-						</DD>
-					</DLRow>
-					<DLRow
-						title={m.common_labeled_unit_price({
-							unit: market.network.currency.symbol.code
-						})}
-					>
-						<DD>
-							<AssetText
-								variant="full"
-								value={calculateValue(ramCalculatorState.tokens, market.network.systemtoken.price)}
-							/>
-						</DD>
-					</DLRow>
-					<DLRow title={m.common_network_fees()}>
-						<DD>
-							<AssetText variant="full" value={ramCalculatorState.fee} />
-						</DD>
-					</DLRow>
-				</DL>
 			</Stack>
 		</Card>
 	{/snippet}

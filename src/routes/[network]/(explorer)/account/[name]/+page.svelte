@@ -3,7 +3,7 @@
 	import DollarSign from '@lucide/svelte/icons/dollar-sign';
 
 	import { AccountValueState } from '$lib/state/value.svelte.js';
-	import { Card } from 'unicove-components';
+	import { Card, Stack } from 'unicove-components';
 	import * as m from '$lib/paraglide/messages';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import { Button } from 'unicove-components';
@@ -174,16 +174,18 @@
 		{/if}
 		{#if context.settings.data.advancedMode}
 			<Card class="@container" title={m.common_resources()}>
-				<div class="flex gap-12 *:flex-1 @sm:justify-between @sm:*:flex-auto">
-					<ResourceCard type="cpu" value={cpuAvailable} vertical />
+				<Stack>
+					<div class="flex gap-12 *:flex-1 @sm:justify-between @sm:*:flex-auto">
+						<ResourceCard type="cpu" value={cpuAvailable} vertical />
 
-					<ResourceCard type="net" value={netAvailable} vertical />
-				</div>
-				{#if isCurrentUser}
-					<Button href={`/${data.network}/resources`} variant="secondary"
-						>{m.common_resources()}</Button
-					>
-				{/if}
+						<ResourceCard type="net" value={netAvailable} vertical />
+					</div>
+					{#if isCurrentUser}
+						<Button href={`/${data.network}/resources`} variant="secondary"
+							>{m.common_resources()}</Button
+						>
+					{/if}
+				</Stack>
 			</Card>
 		{/if}
 	</div>

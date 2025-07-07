@@ -4,7 +4,7 @@
 	import type { HTMLAttributes } from 'svelte/elements';
 	import { Asset } from '@wharfkit/antelope';
 
-	import { Card } from 'unicove-components';
+	import { Card, Stack } from 'unicove-components';
 	import { AssetInput } from 'unicove-components';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
@@ -48,27 +48,29 @@
 	});
 </script>
 
-<Card {...props} class="gap-5" title={m.staking_calculator()}>
-	<p>
-		{m.staking_calculator_description({
-			apr: apr,
-			token: String(network.chain.systemToken!.symbol.name)
-		})}
-	</p>
+<Card {...props} title={m.staking_calculator()}>
+	<Stack>
+		<p>
+			{m.staking_calculator_description({
+				apr: apr,
+				token: String(network.chain.systemToken!.symbol.name)
+			})}
+		</p>
 
-	<AssetInput min={0} bind:value={assetValue} bind:valid={assetValid} />
+		<AssetInput min={0} bind:value={assetValue} bind:valid={assetValid} />
 
-	<table class="table-styles">
-		<tbody>
-			{#each records as record}
-				<tr>
-					<td class="text-sm">{record.time}</td>
-					<td class="text-right text-sm"
-						><AssetText class="text-on-surface" variant="full" value={record.value} /></td
-					>
-					<td class="text-right text-sm">{record.currency}</td>
-				</tr>
-			{/each}
-		</tbody>
-	</table>
+		<table class="table-styles">
+			<tbody>
+				{#each records as record}
+					<tr>
+						<td class="text-sm">{record.time}</td>
+						<td class="text-right text-sm"
+							><AssetText class="text-on-surface" variant="full" value={record.value} /></td
+						>
+						<td class="text-right text-sm">{record.currency}</td>
+					</tr>
+				{/each}
+			</tbody>
+		</table></Stack
+	>
 </Card>
