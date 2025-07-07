@@ -6,8 +6,6 @@
       "dependencies": {
         "@accuser/svelte-plausible-analytics": "^1.0.0",
         "@coinbase/cbpay-js": "^2.4.0",
-        "@fontsource-variable/inter": "^5.2.6",
-        "@fontsource-variable/jetbrains-mono": "^5.2.6",
         "@lucide/svelte": "^0.525.0",
         "@storyblok/svelte": "^5.0.2",
         "@wharfkit/account-creation-plugin-metamask": "^1.2.1",
@@ -195,10 +193,6 @@
     "@floating-ui/dom": ["@floating-ui/dom@1.6.8", "", { "dependencies": { "@floating-ui/core": "^1.6.0", "@floating-ui/utils": "^0.2.5" } }, "sha512-kx62rP19VZ767Q653wsP1XZCGIirkE09E0QUGNYTM/ttbbQHqcGPdSfWFxUyyNLc/W6aoJRBajOSXhP6GXjC0Q=="],
 
     "@floating-ui/utils": ["@floating-ui/utils@0.2.5", "", {}, "sha512-sTcG+QZ6fdEUObICavU+aB3Mp8HY4n14wYHdxK4fXjPmv3PXZZeY5RaguJmGyeH/CJQhX3fqKUtS4qc1LoHwhQ=="],
-
-    "@fontsource-variable/inter": ["@fontsource-variable/inter@5.2.6", "", {}, "sha512-jks/bficUPQ9nn7GvXvHtlQIPudW7Wx8CrlZoY8bhxgeobNxlQan8DclUJuYF2loYRrGpfrhCIZZspXYysiVGg=="],
-
-    "@fontsource-variable/jetbrains-mono": ["@fontsource-variable/jetbrains-mono@5.2.6", "", {}, "sha512-1pvtyK6H1paBOixbtZ9xfQgArVQ4SJMW3WSGZPOd5PiW3yg0t8umwKnjDMzW2ofb7qSdiXnsnIaHPT36vEOdlg=="],
 
     "@greymass/buoy": ["@greymass/buoy@1.0.4", "", { "dependencies": { "eventemitter3": "^4.0.7", "tslib": "^2.1.0" } }, "sha512-/O9EsjWJw81TiJcvKqMKxjrJpEfHKh8WcUK07gFT+uS0+JUKfoVrYVQn1qNOAdYWU+AZrhZJop8xP/LYmKfGHg=="],
 

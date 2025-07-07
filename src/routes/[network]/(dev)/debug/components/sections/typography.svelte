@@ -3,7 +3,7 @@
 </script>
 
 <Stack id="typography">
-	<h2 class="h2">Typography</h2>
+	<h2 class="text-headline">Typography</h2>
 	<p>
 		Styles are applied separately from their tag since there will be situations where we want to mix
 		and match styles and tags. We want to adhere to valid and semantic html as much as possible, and
@@ -14,28 +14,40 @@
 		heading. This is easily achieved by applying the h2 class to the h1 tag.
 	</p>
 	<Cluster class="items-center">
-		<p class="h1 text-on-surface">Heading 1 (Inter 48)</p>
-		<code class=" bg-surface-container-highest text-on-surface rounded-lg p-2">class='h1'</code>
+		<p class="text-display text-on-surface">Text Display</p>
+		<code class=" bg-surface-container-highest text-on-surface rounded-lg p-2"
+			>class='text-display'</code
+		>
 	</Cluster>
 	<Cluster class="items-center">
-		<p class="h2 text-on-surface">Heading 2 (Inter 32)</p>
-		<code class=" bg-surface-container-highest text-on-surface rounded-lg p-2">class='h2'</code>
+		<p class="text-headline text-on-surface">Text Headline</p>
+		<code class=" bg-surface-container-highest text-on-surface rounded-lg p-2"
+			>class='text-headline'</code
+		>
 	</Cluster>
 	<Cluster class="items-center">
-		<p class="h3 text-on-surface">Heading 3 (Inter 24)</p>
-		<code class=" bg-surface-container-highest text-on-surface rounded-lg p-2">class='h3'</code>
+		<p class="text-title text-on-surface">Text Title</p>
+		<code class=" bg-surface-container-highest text-on-surface rounded-lg p-2"
+			>class='text-title'</code
+		>
 	</Cluster>
 	<Cluster class="items-center">
-		<p class="h4 text-on-surface">Heading 4 (Inter 18)</p>
-		<code class=" bg-surface-container-highest text-on-surface rounded-lg p-2">class='h4'</code>
+		<p class="text-body text-on-surface">Text Body</p>
+		<code class=" bg-surface-container-highest text-on-surface rounded-lg p-2"
+			>class='text-body'</code
+		>
 	</Cluster>
 	<Cluster class="items-center">
-		<p class="h5 text-on-surface">Heading 5 (Inter 16)</p>
-		<code class="bg-surface-container-highest text-on-surface rounded-lg p-2">class='h5'</code>
+		<p class="text-label text-on-surface">Text Label</p>
+		<code class="bg-surface-container-highest text-on-surface rounded-lg p-2"
+			>class='text-label'</code
+		>
 	</Cluster>
 	<Cluster class="items-center">
-		<p class="caption">Caption (Inter 12)</p>
-		<code class="bg-surface-container-highest text-on-surface rounded-lg p-2">class='caption'</code>
+		<p class="text-label-sm">Text Label Small</p>
+		<code class="bg-surface-container-highest text-on-surface rounded-lg p-2"
+			>class='text-label-sm'</code
+		>
 	</Cluster>
 	<p>
 		Paragraph - lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor

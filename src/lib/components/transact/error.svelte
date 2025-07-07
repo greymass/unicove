@@ -15,7 +15,7 @@
 	<CircleX class="text-error inline size-24" />
 
 	<div class=" space-y-3">
-		<h2 class="h3">{m.common_transaction_error()}</h2>
+		<h2 class="text-title">{m.common_transaction_error()}</h2>
 
 		<p class="mx-auto max-w-prose break-words">
 			{JSON.stringify(error)}

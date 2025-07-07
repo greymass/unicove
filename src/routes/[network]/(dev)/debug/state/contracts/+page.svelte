@@ -19,7 +19,7 @@
 </script>
 
 <Stack>
-	<h2 class="h2">Embedded Contracts</h2>
+	<h2 class="text-headline">Embedded Contracts</h2>
 	<p>The wharfkit/cli generated contracts for this build and the on-chain account it uses.</p>
 	<Code>
 		{JSON.stringify(info, null, 2)}

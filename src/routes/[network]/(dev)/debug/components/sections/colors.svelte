@@ -4,7 +4,7 @@
 </script>
 
 <Stack id="colors" class="">
-	<h2 class="h2 flex gap-3">
+	<h2 class="text-headline flex gap-3">
 		Color Roles
 
 		<Scheme />

@@ -217,7 +217,7 @@
 
 {#if context.settings.data.debugMode}
 	<div class="border-primary mx-auto mt-6 max-w-md border-2 p-6">
-		<h3 class="h3 text-center">Debug Info</h3>
+		<h3 class="text-title text-center">Debug Info</h3>
 		<table class="table-styles">
 			<tbody>
 				{#each rentState.getDebugInfo() as item}

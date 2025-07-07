@@ -178,7 +178,7 @@
 	{/if}
 
 	{#if context.settings.data.debugMode}
-		<h3 class="h3">{m.common_debugging()}</h3>
+		<h3 class="text-title">{m.common_debugging()}</h3>
 		<Code
 			>{JSON.stringify(
 				{

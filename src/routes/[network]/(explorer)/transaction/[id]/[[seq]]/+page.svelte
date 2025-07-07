@@ -20,12 +20,12 @@
 
 <Stack class="gap-8">
 	<div class="space-y-2">
-		<h2 class="h3">{m.common_transaction_details()}</h2>
+		<h2 class="text-title">{m.common_transaction_details()}</h2>
 		<TransactionHeader transaction={data.transaction} />
 	</div>
 
 	<div class="space-y-2">
-		<h2 class="h3">
+		<h2 class="text-title">
 			{m.common_transaction_summary()}
 		</h2>
 		<p class="text-pretty">

@@ -147,11 +147,10 @@
 			{#if actions.length === 0}
 				<p class="text-muted">Upload files to generate actions.</p>
 			{:else}
-				<h3 class="h3">Actions</h3>
+				<h3 class="text-title">Actions</h3>
 				<p>The actions that will be performed are listed below.</p>
 				{#each actions as action, index}
-					<Card class="mb-4">
-						<h4 class="h4">{action.name}</h4>
+					<Card class="mb-4" title={String(action.name)}>
 						<Code json={action} />
 						<Button variant="secondary" onclick={() => remove(index)}>Remove Action</Button>
 					</Card>

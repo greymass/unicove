@@ -206,15 +206,18 @@
 
 <MultiCard>
 	{#snippet leftColumn()}
-		<Card>
-			{#if transactResult && transactResult.resolved}
+		{#if transactResult && transactResult.resolved}
+			<Card>
 				<TransactSummary transactionId={transactResult.resolved.transaction.id} />
 				<Button onclick={clear}>Clear Results</Button>
-			{:else if error}
+			</Card>
+		{:else if error}
+			<Card>
 				<TransactError {error} />
 				<Button onclick={clear}>Clear Results</Button>
-			{:else}
-				<h4 class="h4">Perform Action</h4>
+			</Card>
+		{:else}
+			<Card title="Perform Action">
 				{#if ready}
 					<Fields abi={data.abi} fields={data.struct.fields} bind:state={actionInputs} />
 				{/if}
@@ -235,13 +238,12 @@
 						<Label for="pageload">Trigger when page loads?</Label>
 					</fieldset>
 				{/if}
-			{/if}
-		</Card>
+			</Card>
+		{/if}
 	{/snippet}
 
 	{#snippet rightColumn()}
-		<Card>
-			<h4 class="h4">Action Data</h4>
+		<Card title="Action Data">
 			{#if decoded}
 				<Code>{JSON.stringify(decoded, null, 2)}</Code>
 			{:else}
@@ -273,15 +275,13 @@
 </MultiCard>
 
 {#if readonlyError}
-	<Card>
-		<h4 class="h4">Error during readonly call...</h4>
+	<Card title="Error during readonly call...">
 		<Code>{JSON.stringify(readonlyError, null, 2)}</Code>
 	</Card>
 {/if}
 
 {#if readonlyResult}
-	<Card>
-		<h4 class="h4">API Response</h4>
+	<Card title="API Response">
 		<Code>{JSON.stringify(readonlyResult, null, 2)}</Code>
 	</Card>
 {/if}
@@ -289,14 +289,12 @@
 {#if transactResult}
 	{#if transactResult.response}
 		{#if transactResult.response.processed && transactResult.response.processed.action_traces}
-			<Card>
-				<h4 class="h4">Action Traces</h4>
+			<Card title="Action Traces">
 				<Code>{JSON.stringify(transactResult.response.processed.action_traces, null, 2)}</Code>
 			</Card>
 		{/if}
 
-		<Card>
-			<h4 class="h4">API Response</h4>
+		<Card title="API Response">
 			<Code>{JSON.stringify(transactResult.response, null, 2)}</Code>
 		</Card>
 	{/if}

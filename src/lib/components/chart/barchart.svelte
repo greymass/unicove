@@ -67,7 +67,7 @@
 </script>
 
 <Card>
-	<p class="h3 font-semibold">{title}</p>
+	<p class="text-title font-semibold">{title}</p>
 	<canvas bind:this={ctx}></canvas>
 	<hr class="bg-outline h-px border-0" />
 	<div class="flex items-center justify-between font-medium">

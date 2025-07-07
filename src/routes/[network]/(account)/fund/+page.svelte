@@ -135,9 +135,9 @@
 	}
 </script>
 
-<Stack class="gap-12">
+<Stack class="mt-6 gap-12">
 	<Stack class="gap-4">
-		<h2 class="h4">{m.fund_direct_purchase()}</h2>
+		<h2 class="text-headline leading-4">{m.fund_direct_purchase()}</h2>
 		<p>
 			{m.fund_direct_purchase_description({
 				token: context.network.token.symbol.name
@@ -183,7 +183,7 @@
 	</Stack>
 
 	<Stack class="gap-4">
-		<h2 class="h4">{m.common_exchanges()}</h2>
+		<h2 class="text-headline leading-4">{m.common_exchanges()}</h2>
 
 		<p>
 			{m.fund_exchange_description({
@@ -215,7 +215,7 @@
 	</Stack>
 
 	{#if context.settings.data.debugMode}
-		<h3 class="h3">{m.common_debugging()}</h3>
+		<h3 class="text-title">{m.common_debugging()}</h3>
 		<Code>
 			{JSON.stringify(coinbaseOptions, null, 2)}
 		</Code>

@@ -9,7 +9,7 @@
 </script>
 
 <Stack>
-	<h2 class="h2">Account State</h2>
+	<h2 class="text-headline">Account State</h2>
 	<p>The account state for the currently active session.</p>
 	{#if context.account}
 		<Button class="self-start" onclick={() => context.account?.refresh()}

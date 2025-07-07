@@ -45,7 +45,7 @@
 				<picture class="size-24">
 					<ClipboardPen class="text-success size-full" />
 				</picture>
-				<h3 class="h3">{m.common_msig_proposal_created()}</h3>
+				<h3 class="text-title">{m.common_msig_proposal_created()}</h3>
 				<p class="text-center">
 					{m.common_msig_proposal_description()}
 				</p>
@@ -58,7 +58,7 @@
 				<picture class="size-24">
 					<CircleCheckBig class="text-success size-full" />
 				</picture>
-				<h3 class="h3 text-center">
+				<h3 class="text-title text-center">
 					{m.common_transaction_complete()}
 				</h3>
 			{/if}
@@ -75,7 +75,7 @@
 			{/if}
 		</DL>
 	{:else}
-		<h2 class="h2">{m.common_trx_not_found()}</h2>
+		<h2 class="text-headline">{m.common_trx_not_found()}</h2>
 		<p>{m.common_trx_not_found_description({ transactionId: String(transactionId) })}</p>
 	{/if}
 	{#if onsuccess}

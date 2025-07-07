@@ -213,7 +213,7 @@
 						<img alt="{baseBalance.token.name} Logo" src={baseBalance.token.media?.logo?.light} />
 					</picture>
 				{/if}
-				<h3 class="h3">{baseBalance.balance.symbol.name}</h3>
+				<h3 class="text-title">{baseBalance.balance.symbol.name}</h3>
 			</div>
 			<AssetText class="text-on-surface" value={baseBalance.balance} />
 			<p>{m.common_available()}</p>
@@ -240,7 +240,7 @@
 						<img alt="{quoteBalance.token.name} Logo" src={quoteBalance.token.media?.logo?.light} />
 					</picture>
 				{/if}
-				<span class="h3">{quoteBalance.balance.symbol.name}</span>
+				<span class="text-title">{quoteBalance.balance.symbol.name}</span>
 			</div>
 			<AssetText class="text-on-surface" value={quoteBalance.balance} />
 			<p>{m.common_available()}</p>

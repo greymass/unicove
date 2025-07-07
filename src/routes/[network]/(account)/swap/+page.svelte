@@ -21,7 +21,7 @@
 {#each market.market.swaps as swap}
 	<SingleCard class="col-span-full">
 		<Stack>
-			<h2 class="h3">{swap.pair.base.symbol.name} / {swap.pair.quote.symbol.name}</h2>
+			<h2 class="text-title">{swap.pair.base.symbol.name} / {swap.pair.quote.symbol.name}</h2>
 			<p>
 				<AssetText value={Asset.fromFloat(1, swap.pair.base.symbol)} variant="full" />
 				=

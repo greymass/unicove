@@ -20,12 +20,12 @@
 
 {#if !recommendedWallet || !currentWalletType || !WalletComponent}
 	<Stack class="gap-2">
-		<h3 class="h3">Detecting your environment...</h3>
+		<h3 class="text-title">Detecting your environment...</h3>
 		<p>Please wait while we determine the best options for you.</p>
 	</Stack>
 {:else}
 	<Stack class="gap-2">
-		<h3 class="h3">Let's get started</h3>
+		<h3 class="text-title">Let's get started</h3>
 		<p>
 			There are many options to create your first account but we recommend {recommendedWallet.name} for
 			most people new to EOS.
@@ -50,7 +50,7 @@
 	</Stack>
 	<div class="my-2 border-t border-white/20"></div>
 
-	<h3 class="h3">Other {currentWalletType?.title}</h3>
+	<h3 class="text-title">Other {currentWalletType?.title}</h3>
 
 	{#if otherWallets}
 		{#each otherWallets as wallet}

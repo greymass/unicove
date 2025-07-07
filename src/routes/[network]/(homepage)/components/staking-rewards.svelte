@@ -25,7 +25,7 @@
 
 	<!-- Text -->
 	<Stack class="max-w-md items-start">
-		<h2 class="h3 leading-tight">{network.token.name} {m.common_staking_rewards()}</h2>
+		<h2 class="text-title leading-tight">{network.token.name} {m.common_staking_rewards()}</h2>
 		<p>
 			{m.homepage_staking_intro({
 				token: network.token.name,

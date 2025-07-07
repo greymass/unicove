@@ -9,11 +9,11 @@
 
 <Stack class="gap-8">
 	<div class="space-y-2">
-		<h2 class="h3">{m.common_transaction()}</h2>
+		<h2 class="text-title">{m.common_transaction()}</h2>
 		<Code json={data.transaction.transaction} />
 	</div>
 	<div class="space-y-2">
-		<h2 class="h3">{m.common_signatures()}</h2>
+		<h2 class="text-title">{m.common_signatures()}</h2>
 		<Code json={data.transaction.signedTransaction.signatures} />
 	</div>
 </Stack>

@@ -40,10 +40,10 @@
 </script>
 
 <Stack id="tables" class="gap-8">
-	<h2 class="h2">Tables and table-like displays</h2>
+	<h2 class="text-headline">Tables and table-like displays</h2>
 
 	<Stack>
-		<h3 class="h3">Description List</h3>
+		<h3 class="text-title">Description List</h3>
 
 		<p>
 			For a simple two-column key-value type table we can use the description list component. This
@@ -88,7 +88,7 @@
 	</Stack>
 
 	<Stack>
-		<h3 class="h3">Basic table (auto width columns)</h3>
+		<h3 class="text-title">Basic table (auto width columns)</h3>
 
 		<p>
 			For data that should remain in a table format at all breakpoints we can use the table element
@@ -118,7 +118,7 @@
 	</Stack>
 
 	<Stack>
-		<h3 class="h3">Fixed width columns (even)</h3>
+		<h3 class="text-title">Fixed width columns (even)</h3>
 		<table class="table-styles table-fixed">
 			<thead>
 				<tr>
@@ -142,7 +142,7 @@
 	</Stack>
 
 	<Stack>
-		<h3 class="h3">Fixed width columns (modified width)</h3>
+		<h3 class="text-title">Fixed width columns (modified width)</h3>
 		<p>Hover effect disabled</p>
 		<table class="table-styles table-fixed">
 			<thead>
@@ -167,7 +167,7 @@
 	</Stack>
 
 	<Stack>
-		<h3 class="h3">Table with different alignments</h3>
+		<h3 class="text-title">Table with different alignments</h3>
 		<table class="table-styles">
 			<thead>
 				<tr>
@@ -189,7 +189,7 @@
 	</Stack>
 
 	<Stack>
-		<h3 class="h3">Table with alternative layouts at different breakpoints</h3>
+		<h3 class="text-title">Table with alternative layouts at different breakpoints</h3>
 
 		<p>
 			For data that cannot be displayed in multi-column format at all screen sizes, we'll need a

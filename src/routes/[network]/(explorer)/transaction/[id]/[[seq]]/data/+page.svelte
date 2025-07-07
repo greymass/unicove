@@ -6,7 +6,7 @@
 </script>
 
 <div class="p-2">
-	<h2 class="h2 text-2xl">Data</h2>
+	<h2 class="text-headline text-2xl">Data</h2>
 	<p>The raw data for the transaction.</p>
 </div>
 

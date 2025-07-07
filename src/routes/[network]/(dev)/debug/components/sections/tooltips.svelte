@@ -7,7 +7,7 @@
 
 <Stack id="tooltips" class="space-y-8">
 	<div>
-		<h2 class="h2 mb-4">Tooltips</h2>
+		<h2 class="text-headline mb-4">Tooltips</h2>
 		<p>Tooltips provide additional information when hovering over an element.</p>
 	</div>
 

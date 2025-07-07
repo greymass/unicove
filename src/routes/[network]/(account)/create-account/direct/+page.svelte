@@ -404,14 +404,14 @@
 
 {#snippet TransactError()}
 	<div class:hidden={f.current !== 'error'}>
-		<h3 class="h3 mb-4">{m.common_error}</h3>
+		<h3 class="text-title mb-4">{m.common_error}</h3>
 		<p>{transactError}</p>
 	</div>
 {/snippet}
 
 {#snippet TransactResult()}
 	<div class:hidden={f.current !== 'complete'}>
-		<h3 class="h3 mb-4">{m.common_account_created()}</h3>
+		<h3 class="text-title mb-4">{m.common_account_created()}</h3>
 		<p>{m.common_account_created_description()}</p>
 		<p><AccountText name={accountName} /></p>
 	</div>
@@ -434,7 +434,7 @@
 </SingleCard>
 
 {#if context.settings.data.debugMode}
-	<h3 class="h3">{m.common_debugging()}</h3>
+	<h3 class="text-title">{m.common_debugging()}</h3>
 	<Code
 		>{JSON.stringify(
 			{

@@ -17,13 +17,13 @@
 	<Button onclick={() => context.market.refresh()}>Refresh</Button>
 	<p>Updated {refreshed}</p>
 
-	<h3 class="h3">TokenPairs ({pairs.length})</h3>
+	<h3 class="text-title">TokenPairs ({pairs.length})</h3>
 	<Code collapsible json={pairsList}></Code>
 
-	<h3 class="h3">Historic</h3>
+	<h3 class="text-title">Historic</h3>
 	<Code collapsible json={context.market.historic}></Code>
 
-	<h3 class="h3">MarketContext</h3>
+	<h3 class="text-title">MarketContext</h3>
 	<Code>
 		{JSON.stringify(context, undefined, 2)}
 	</Code>

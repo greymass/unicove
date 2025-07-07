@@ -10,7 +10,7 @@
 		<div class=" *:object-fit mx-auto max-w-prose *:size-full">
 			<Generic404 />
 		</div>
-		<h1 class="h2">
+		<h1 class="text-headline">
 			{#if page.error?.message}
 				{page.error.message}
 			{:else}

@@ -1,7 +1,5 @@
 <script lang="ts">
 	import '../app.css';
-	import '@fontsource-variable/inter';
-	import '@fontsource-variable/jetbrains-mono';
 	import '$lib/utils/dayjs'; // setup dayjs
 	import { ParaglideJS } from '@inlang/paraglide-sveltekit';
 	import { PlausibleAnalytics } from '@accuser/svelte-plausible-analytics';

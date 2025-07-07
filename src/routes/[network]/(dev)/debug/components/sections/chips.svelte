@@ -5,7 +5,7 @@
 </script>
 
 <Stack id="chips">
-	<h2 class="h2">Chips</h2>
+	<h2 class="text-headline">Chips</h2>
 
 	<Chip>Some text</Chip>
 </Stack>

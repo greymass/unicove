@@ -49,7 +49,7 @@
 			>
 			{#if manager.voting && manager.sellingAll}
 				<Card>
-					<h4 class="h4 text-solar-500">Notice: Withdrawing will also clear votes</h4>
+					<h4 class="text-title text-solar-500">Notice: Withdrawing will also clear votes</h4>
 					<p>
 						Withdrawing and removing all tokens from staking requires we unset any votes that were
 						previously cast for either block producers or proxies.

@@ -39,7 +39,7 @@
 		{#if data.block.transactions}
 			{@const transactions = data.block.transactions}
 			<Stack id="transactions">
-				<h2 class="h3 flex items-center gap-2">
+				<h2 class="text-title flex items-center gap-2">
 					<ArrowLeftRight class="size-5" />
 					{transactions.length}
 					{transactions.length === 1
@@ -81,7 +81,7 @@
 
 	{#snippet rightColumn()}
 		<Stack class="gap-4" id="details">
-			<h2 class="h3">{m.block_page_details()}</h2>
+			<h2 class="text-title">{m.block_page_details()}</h2>
 
 			<DL>
 				<DLRow title={m.common_block_number()}>

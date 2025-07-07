@@ -46,7 +46,7 @@
 <Stack class="mt-6">
 	<Switcher class="items-start gap-6" threshold="40rem">
 		<Stack class="gap-4">
-			<h2 class="h3">{m.msig_requested_approvals()}</h2>
+			<h2 class="text-title">{m.msig_requested_approvals()}</h2>
 
 			<div
 				id="msig-vis"
@@ -121,7 +121,7 @@
 			onfailure={Complete}
 		>
 			<Stack class="gap-4" id="details">
-				<h2 class="h3">{m.msig_details()}</h2>
+				<h2 class="text-title">{m.msig_details()}</h2>
 
 				<DL>
 					<DLRow title={m.msig_proposer()}>
@@ -179,7 +179,7 @@
 	</Switcher>
 
 	<Stack>
-		<h2 class="h3">{m.msig_proposed_actions()} ({variant})</h2>
+		<h2 class="text-title">{m.msig_proposed_actions()} ({variant})</h2>
 		<SelectActionVariant />
 		{#each manager.readable as decodedAction}
 			{@const contract = String(decodedAction.action.account)}

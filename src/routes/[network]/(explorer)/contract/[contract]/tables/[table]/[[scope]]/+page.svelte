@@ -74,7 +74,7 @@
 <Stack>
 	<div>
 		<div class="bg-surface-container rounded-t-lg px-4 py-3 md:rounded-l-lg">
-			<h2 class="h2 pb-6">Table Browser</h2>
+			<h2 class="text-headline pb-6">Table Browser</h2>
 			{#if scope}
 				Scope: {scope}
 			{/if}

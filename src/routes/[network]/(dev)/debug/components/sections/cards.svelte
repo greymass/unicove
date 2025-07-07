@@ -5,14 +5,14 @@
 </script>
 
 <Stack id="cards">
-	<h2 class="h2">Cards</h2>
+	<h2 class="text-headline">Cards</h2>
 
 	<div class="flex justify-center">
 		<Switcher threshold="40rem" class="items-start">
 			<Card class="gap-5">
 				<Stack class="gap-0">
 					<p class="caption">Currently Staked - 34% APR</p>
-					<p class="h3">0.0 EOS</p>
+					<p class="text-title">0.0 EOS</p>
 					<p class="bg-on-surface-variant text-surface mt-1.5 self-start rounded-sm px-2">
 						USD Value $0.0
 					</p>

@@ -10,7 +10,7 @@
 </script>
 
 <Stack>
-	<h2 class="h2">Chain Configuration State (Client)</h2>
+	<h2 class="text-headline">Chain Configuration State (Client)</h2>
 	<p>The chain configuration as it exists in the client.</p>
 	{#if PUBLIC_ENVIRONMENT !== 'production'}
 		<p>

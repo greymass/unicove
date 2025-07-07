@@ -15,7 +15,7 @@
 	import Colors from './sections/colors.svelte';
 </script>
 
-<h1 class="h1 mb-8">Design System</h1>
+<h1 class="text-display mb-8">Design System</h1>
 
 {#snippet divider()}
 	<hr class="bg-outline my-8 h-px border-0" />

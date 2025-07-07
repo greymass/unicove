@@ -238,7 +238,7 @@
 
 {#snippet Create()}
 	<div class="grid gap-2" class:hidden={!showAll && f.current !== 'create'}>
-		<h2 class="h2 flex gap-2">{m.common_instructions()}</h2>
+		<h2 class="text-headline flex gap-2">{m.common_instructions()}</h2>
 		<p class="flex gap-2">
 			{m.common_create_account_by_sending()}
 		</p>
@@ -313,7 +313,7 @@
 </SingleCard>
 
 {#if context.settings.data.debugMode}
-	<h3 class="h3">{m.common_debugging()}</h3>
+	<h3 class="text-title">{m.common_debugging()}</h3>
 	<Code
 		>{JSON.stringify(
 			{

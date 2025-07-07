@@ -7,11 +7,11 @@
 
 <Stack id="buttons">
 	<Cluster>
-		<h2 class="h2">Buttons</h2>
+		<h2 class="text-headline">Buttons</h2>
 	</Cluster>
 
 	<Stack class="items-start">
-		<h3 class="h3">Primary</h3>
+		<h3 class="text-title">Primary</h3>
 		<Cluster>
 			<Stack class="gap-2">
 				<p class="caption">Default</p>
@@ -25,7 +25,7 @@
 	</Stack>
 
 	<Stack class="items-start">
-		<h3 class="h3">Secondary</h3>
+		<h3 class="text-title">Secondary</h3>
 		<Cluster>
 			<Stack class="gap-2">
 				<p class="caption">Default</p>
@@ -39,7 +39,7 @@
 	</Stack>
 
 	<Stack class="items-start">
-		<h3 class="h3">Pill</h3>
+		<h3 class="text-title">Pill</h3>
 		<Cluster>
 			<Stack class="gap-1">
 				<p class="caption">Default</p>
@@ -53,7 +53,7 @@
 	</Stack>
 
 	<Stack class="items-start">
-		<h3 class="h3">Text</h3>
+		<h3 class="text-title">Text</h3>
 		<Cluster>
 			<Stack class="gap-1">
 				<p class="caption">Default</p>
@@ -67,7 +67,7 @@
 	</Stack>
 
 	<Stack class="items-start">
-		<h3 class="h3">Side by side</h3>
+		<h3 class="text-title">Side by side</h3>
 		<Cluster class="items-center">
 			<Button variant="text" onclick={() => {}}>Delete</Button>
 			<Button variant="secondary" onclick={() => {}}>Cancel</Button>
@@ -76,7 +76,7 @@
 	</Stack>
 
 	<Stack class="items-start">
-		<h3 class="h3">Icon Buttons</h3>
+		<h3 class="text-title">Icon Buttons</h3>
 		<Cluster>
 			<IconButton size="large" icon={User} onclick={() => {}}>Cancel</IconButton>
 			<IconButton icon={User} onclick={() => {}}>Cancel</IconButton>

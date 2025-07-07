@@ -4,11 +4,11 @@
 </script>
 
 <Stack id="navigation">
-	<h2 class="h2">Navigation Components</h2>
+	<h2 class="text-headline">Navigation Components</h2>
 
 	<!-- NOTE: Currently unused -->
 	<!-- <Stack> -->
-	<!-- 	<h3 class="h3">Account Actions</h3> -->
+	<!-- 	<h3 class="text-title">Account Actions</h3> -->
 	<!-- 	<AccountNavigation -->
 	<!-- 		options={[ -->
 	<!-- 			{ href: '#navigation', text: 'Permissions' }, -->
@@ -23,7 +23,7 @@
 	<!-- </Stack> -->
 
 	<Stack>
-		<h3 class="h3">Page Actions</h3>
+		<h3 class="text-title">Page Actions</h3>
 		<PillGroup
 			options={[
 				{ href: '#', text: 'Overview' },

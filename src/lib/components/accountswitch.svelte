@@ -296,8 +296,8 @@
 	<div class="space-y-4" in:fly={{ x: 100, duration: 150 }} out:fly={{ x: 100, duration: 100 }}>
 		<hr class="border-outline" />
 
-		<header class="grid justify-center gap-2 py-4 text-center">
-			<span class="h4">{m.common_login_to_unicove()}</span>
+		<header class="grid justify-center gap-4 py-4 text-center">
+			<span class="text-title">{m.common_login_to_unicove()}</span>
 			<span class="text-muted text-sm font-medium">{m.common_connect_wallet_login()}</span>
 		</header>
 

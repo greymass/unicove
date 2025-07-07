@@ -7,7 +7,7 @@
 </script>
 
 <div class="p-2">
-	<h2 class="h2 text-2xl">{m.common_traces()} ({data.transaction.traces.length})</h2>
+	<h2 class="text-headline text-2xl">{m.common_traces()} ({data.transaction.traces.length})</h2>
 	<p>{m.common_traces_description()}</p>
 </div>
 
