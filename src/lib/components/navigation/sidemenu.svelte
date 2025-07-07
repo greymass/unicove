@@ -76,7 +76,7 @@
 	});
 </script>
 
-<menu id="side-menu" class="flex flex-col gap-2 text-base font-medium text-nowrap">
+<menu id="side-menu" class="flex flex-1 flex-col gap-2 text-base font-medium text-nowrap">
 	{#each destinations as option}
 		<a
 			href={option.href}
@@ -95,8 +95,9 @@
 			</span>
 		</a>
 	{/each}
+
 	{#if context.settings.data.developerMode}
-		<div class="grid gap-4">
+		<div class="mt-auto grid gap-4 pb-4">
 			<span class="flex items-center gap-2">
 				<CodeIcon />
 				<DebugToggle />
