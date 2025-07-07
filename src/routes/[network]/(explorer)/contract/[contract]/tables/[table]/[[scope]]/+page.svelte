@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { Stack } from 'unicove-components';
-	import Table from '$lib/components/contract/table.svelte';
+	import { Card, Cluster, Stack, Table, TD, TH, TR } from 'unicove-components';
+	import ContractTable from '$lib/components/contract/table.svelte';
 	import { Code } from 'unicove-components';
 	import { Button } from 'unicove-components';
 	import { TextInput } from 'unicove-components';
@@ -72,71 +72,83 @@
 </script>
 
 <Stack>
-	<div>
-		<div class="bg-surface-container rounded-t-lg px-4 py-3 md:rounded-l-lg">
-			<h2 class="text-headline pb-6">Table Browser</h2>
-			{#if scope}
-				Scope: {scope}
-			{/if}
-			{#if lower}
-				Lower: {lower}
-			{/if}
-			{#if upper}
-				Upper: {upper}
-			{/if}
-			{#if reverse}
-				Reverse: {reverse}
-			{/if}
-		</div>
+	<Stack>
+		<Stack class="gap-2">
+			<h2 class="text-headline">Table Browser</h2>
+			<Cluster>
+				{#if scope}
+					<span>
+						Scope: {scope}
+					</span>
+				{/if}
+				{#if lower}
+					<span>
+						Lower: {lower}
+					</span>
+				{/if}
+				{#if upper}
+					<span>
+						Upper: {upper}
+					</span>
+				{/if}
+				{#if reverse}
+					<span>
+						Reverse: {reverse}
+					</span>
+				{/if}
+			</Cluster>
+		</Stack>
 
-		<div class="bg-surface-container-high overflow-x-auto rounded-b-lg px-4 py-3 md:rounded-r-lg">
-			<form onsubmit={query}>
-				<div class="flex gap-2">
-					<TextInput placeholder="Scope" bind:value={scope} />
-					<TextInput name="lower" placeholder="Lower bound" bind:value={lower} />
-					<TextInput name="upper" placeholder="Upper bound" bind:value={upper} />
-					<fieldset class="flex items-center gap-3">
-						<Checkbox id="reverse" bind:checked={reverse} />
-						<Label for="reverse">Reverse?</Label>
-					</fieldset>
+		<Card class="bg-surface-container-high overflow-x-auto rounded-b-lg md:rounded-r-lg">
+			<Stack>
+				<form onsubmit={query}>
+					<Cluster class="items-end">
+						<TextInput label="Scope" placeholder="Scope" bind:value={scope} />
+						<TextInput label="Lower" name="lower" placeholder="Lower bound" bind:value={lower} />
+						<TextInput label="Upper" name="upper" placeholder="Upper bound" bind:value={upper} />
 
-					<Button>Query</Button>
-				</div>
-			</form>
-			<table class="table-styles">
-				<thead>
-					<tr>
+						<fieldset class="flex h-12 items-center gap-3">
+							<Checkbox id="reverse" bind:checked={reverse} />
+							<Label for="reverse">Reverse?</Label>
+						</fieldset>
+
+						<Button>Query</Button>
+					</Cluster>
+				</form>
+
+				<Table full>
+					{#snippet thead()}
 						{#if struct}
 							{#each struct.fields as field}
-								<th> {field.name} </th>
+								<TH>{field.name}</TH>
 							{/each}
 						{/if}
-					</tr>
-				</thead>
-				<tbody>
+					{/snippet}
+
 					{#each rows as row}
-						<tr>
+						<TR>
 							{#each Object.keys(row) as key}
-								<td class="align-top">
+								<TD>
 									<Code>
 										{JSON.stringify(row[key], null, 2)}
 									</Code>
-								</td>
+								</TD>
 							{/each}
-						</tr>
+						</TR>
 					{/each}
-				</tbody>
-			</table>
-		</div>
+				</Table>
+			</Stack>
+		</Card>
+
 		{#if data.next}
-			<div class="flex gap-2">
+			<div class="flex gap-4">
 				<Button onclick={first} variant="secondary">First Page</Button>
 				<Button onclick={more}>Next Page</Button>
 			</div>
 		{/if}
-	</div>
+	</Stack>
 
 	{#if table}
-		<Table abi={data.abi} contract={data.contract} {table} />
+		<ContractTable abi={data.abi} contract={data.contract} {table} />
 	{/if}
 </Stack>

@@ -4,7 +4,7 @@
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 
-	import { Code } from 'unicove-components';
+	import { Code, Table, TD, TH, TR } from 'unicove-components';
 
 	import Database from '@lucide/svelte/icons/database';
 	import Contract from '../elements/contract.svelte';
@@ -47,39 +47,36 @@
 
 	<div class="bg-surface-container rounded-b-lg px-4 py-3 md:rounded-r-lg">
 		{#if tableRow}
-			<table class="table-styles table-fixed">
-				<thead>
-					<tr>
-						<th> Field </th>
-						<th> Type </th>
-					</tr>
-				</thead>
-				<tbody>
-					{#each tableRow.fields as field}
-						{@const fieldType = abi.structs.find((s) => s.name === parseRootType(field.type))}
-						<tr>
-							<td>
-								<span class="text-on-surface">
-									{field.name}
-								</span>
-							</td>
-							<td>
-								{#if fieldType}
-									<Contract name={contract} struct={fieldType.name}>
-										{field.type}
-									</Contract>
-								{:else}
+			<Table full fixed>
+				{#snippet thead()}
+					<TH>Field</TH>
+					<TH>Type</TH>
+				{/snippet}
+
+				{#each tableRow.fields as field}
+					{@const fieldType = abi.structs.find((s) => s.name === parseRootType(field.type))}
+					<TR>
+						<TD>
+							<span class="text-on-surface">
+								{field.name}
+							</span>
+						</TD>
+						<TD>
+							{#if fieldType}
+								<Contract name={contract} struct={fieldType.name}>
 									{field.type}
-								{/if}
-							</td>
-						</tr>
-					{:else}
-						<tr>
-							<td class="text-muted" colspan="2"> No data in response. </td>
-						</tr>
-					{/each}
-				</tbody>
-			</table>
+								</Contract>
+							{:else}
+								{field.type}
+							{/if}
+						</TD>
+					</TR>
+				{:else}
+					<TR>
+						<TD class="text-muted" colspan="2">No data in response.</TD>
+					</TR>
+				{/each}
+			</Table>
 
 			{#if context.settings.data.debugMode}
 				<Code>{JSON.stringify(tableRow.fields, null, 2)}</Code>

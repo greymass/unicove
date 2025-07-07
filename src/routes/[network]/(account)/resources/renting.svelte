@@ -3,7 +3,7 @@
 	import { type TransactResult } from '@wharfkit/session';
 	import { getContext } from 'svelte';
 
-	import { Stack } from 'unicove-components';
+	import { Stack, Table, TD, TR } from 'unicove-components';
 	import { NumberInput } from 'unicove-components';
 	import { Label } from 'unicove-components';
 	import { NameInput } from 'unicove-components';
@@ -218,15 +218,13 @@
 {#if context.settings.data.debugMode}
 	<div class="border-primary mx-auto mt-6 max-w-md border-2 p-6">
 		<h3 class="text-title text-center">Debug Info</h3>
-		<table class="table-styles">
-			<tbody>
-				{#each rentState.getDebugInfo() as item}
-					<tr>
-						<td class="text-left">{item[0]}</td>
-						<td class="text-right">{item[1]}</td>
-					</tr>
-				{/each}
-			</tbody>
-		</table>
+		<Table full>
+			{#each rentState.getDebugInfo() as item}
+				<TR>
+					<TD>{item[0]}</TD>
+					<TD>{item[1]}</TD>
+				</TR>
+			{/each}
+		</Table>
 	</div>
 {/if}

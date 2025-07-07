@@ -31,7 +31,7 @@
 		<ContractActionOverview {action} {contract} />
 	</div>
 
-	<Switcher class="gap-6">
+	<Switcher class="items-start gap-6">
 		<Stack>
 			{#if struct}
 				<ContractActionParams {abi} {contract} {struct} />

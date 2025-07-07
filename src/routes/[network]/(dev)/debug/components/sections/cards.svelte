@@ -24,20 +24,6 @@
 			</Card>
 
 			<Card title="Unstaking Balances Is A Long Title">
-				<table class="table-styles">
-					<thead class="border-outline border-b-2">
-						<tr class="caption font-medium">
-							<th class="p-4 text-left">Amount</th>
-							<th class="p-4 text-right">Date available</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td class="p-4">0 EOS</td>
-							<td class="p-4 text-right">Not connected</td>
-						</tr>
-					</tbody>
-				</table>
 				<Button variant="secondary">Withdraw</Button>
 			</Card>
 		</Switcher>

@@ -175,7 +175,7 @@
 	<!-- The curved connector line -->
 	{#if level > 0}
 		<div
-			class="border-outline absolute -left-px z-10 size-12 rounded-bl-xl border-b border-l"
+			class="border-surface-container-highest absolute -left-[2px] z-10 size-12 rounded-bl-xl border-b-2 border-l-2"
 		></div>
 	{/if}
 </li>
@@ -185,7 +185,7 @@
 		<!-- The border on this ul is the through line -->
 		<ul
 			data-solo={children.length === 1}
-			class="children data-[solo=false]:*:border-outline col-span-full grid grid-cols-subgrid data-[solo=false]:*:border-l data-[solo=false]:*:last:border-transparent"
+			class="children data-[solo=false]:*:border-surface-container-highest col-span-full grid grid-cols-subgrid data-[solo=false]:*:border-l-2 data-[solo=false]:*:last:border-transparent"
 			class:ml-8={level > 0}
 			class:ml-4={level === 0}
 		>

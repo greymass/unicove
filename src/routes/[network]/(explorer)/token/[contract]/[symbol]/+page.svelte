@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Button } from 'unicove-components';
+	import { Button, Table, TD, TH, TR } from 'unicove-components';
 	import { Code } from 'unicove-components';
 	import Account from '$lib/components/elements/account.svelte';
 	import AssetText from '$lib/components/elements/asset.svelte';
@@ -10,65 +10,60 @@
 	const { data } = $props();
 </script>
 
-<table class="table-styles">
-	<tbody>
-		<tr>
-			<td> Total Accounts Holding </td>
-			<td class="text-right">
-				{data.numholders.toLocaleString()}
-			</td>
-		</tr>
-		<tr>
-			<td> Supply </td>
-			<td class="text-right">
-				<AssetText value={data.stats.supply} />
-			</td>
-		</tr>
-		<tr>
-			<td> Max Supply </td>
-			<td class="text-right">
-				<AssetText value={data.stats.max_supply} />
-			</td>
-		</tr>
-		<tr>
-			<td> Issuer </td>
-			<td class="text-right">
-				<Account name={data.stats.issuer} />
-			</td>
-		</tr>
-	</tbody>
-</table>
+<Table>
+	<TR>
+		<TD>Total Accounts Holding</TD>
+		<TD class="text-right">
+			{data.numholders.toLocaleString()}
+		</TD>
+	</TR>
+	<TR>
+		<TD>Supply</TD>
+		<TD class="text-right">
+			<AssetText value={data.stats.supply} />
+		</TD>
+	</TR>
+	<TR>
+		<TD>Max Supply</TD>
+		<TD class="text-right">
+			<AssetText value={data.stats.max_supply} />
+		</TD>
+	</TR>
+	<TR>
+		<TD>Issuer</TD>
+		<TD class="text-right">
+			<Account name={data.stats.issuer} />
+		</TD>
+	</TR>
+</Table>
 
 {#if data.topholders.length}
 	<h2 class="text-on-surface text-2xl font-semibold">Top 100 Accounts</h2>
-	<table class="table-styles">
-		<thead>
-			<tr>
-				<th>#</th>
-				<th>Account</th>
-				<th class="text-right">Balance</th>
-			</tr>
-		</thead>
-		<tbody>
-			{#each data.topholders as holder, idx}
-				<tr>
-					<td>{idx + 1}</td>
-					<td>
-						<Account name={holder.account}>
-							{#if data.network.config.lockedsupply?.find( (locked) => holder.account.equals(locked) )}
-								{holder.account} <span class="text-muted">(Locked Supply)</span>
-							{:else}
-								{holder.account}
-							{/if}
-						</Account>
-					</td>
-					<td class="text-right">
-						<AssetText value={holder.balance} />
-					</td>
-				</tr>
-			{/each}
-		</tbody>
-	</table>
+	<Table>
+		{#snippet thead()}
+			<TH>#</TH>
+			<TH>Account</TH>
+			<TH class="text-right">Balance</TH>
+		{/snippet}
+
+		{#each data.topholders as holder, idx}
+			<TR>
+				<TD>{idx + 1}</TD>
+				<TD>
+					<Account name={holder.account}>
+						{#if data.network.config.lockedsupply?.find((locked) => holder.account.equals(locked))}
+							{holder.account} <span class="text-muted">(Locked Supply)</span>
+						{:else}
+							{holder.account}
+						{/if}
+					</Account>
+				</TD>
+				<TD class="text-right">
+					<AssetText value={holder.balance} />
+				</TD>
+			</TR>
+		{/each}
+	</Table>
 
 	{#if data.loadMoreUrl}
 		<Button href={data.loadMoreUrl} data-sveltekit-noscroll data-sveltekit-replacestate

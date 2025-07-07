@@ -3,7 +3,7 @@
 <script lang="ts">
 	import type { HTMLAttributes } from 'svelte/elements';
 	import AssetText from '$lib/components/elements/asset.svelte';
-	import { Card, Stack } from 'unicove-components';
+	import { Card, Stack, Table, TD, TH, TR } from 'unicove-components';
 	import { Button } from 'unicove-components';
 	import type { UnstakingRecord } from '$lib/utils/staking';
 	import { languageTag } from '$lib/paraglide/runtime';
@@ -23,27 +23,24 @@
 			<p>
 				{m.unstaking_description()}
 			</p>
-			<table class="table-styles mt-4">
-				<thead class="">
-					<tr class="caption font-medium">
-						<th class="text-left">{m.common_amount()}</th>
-						<th class="text-right">{m.common_date_available()}</th>
-					</tr>
-				</thead>
-				<tbody>
-					{#each records as record}
-						{#if !record.savings}
-							<tr>
-								<td><AssetText variant="full" value={record.balance} /></td>
-								<td class="text-right">
-									{record.date ? record.date.toLocaleTimeString(languageTag()) : '--'}
-									{record.date ? record.date.toLocaleDateString(languageTag()) : '--'}
-								</td>
-							</tr>
-						{/if}
-					{/each}
-				</tbody>
-			</table>
+			<Table>
+				{#snippet thead()}
+					<TH class="text-left">{m.common_amount()}</TH>
+					<TH class="text-right">{m.common_date_available()}</TH>
+				{/snippet}
+
+				{#each records as record}
+					{#if !record.savings}
+						<TR>
+							<TD><AssetText variant="full" value={record.balance} /></TD>
+							<TD class="text-right">
+								{record.date ? record.date.toLocaleTimeString(languageTag()) : '--'}
+								{record.date ? record.date.toLocaleDateString(languageTag()) : '--'}
+							</TD>
+						</TR>
+					{/if}
+				{/each}
+			</Table>
 			{#if href}
 				<Button {href} variant="secondary">{m.common_withdraw()}</Button>
 			{/if}

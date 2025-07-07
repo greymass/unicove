@@ -4,7 +4,7 @@
 	import type { HTMLAttributes } from 'svelte/elements';
 	import { Asset } from '@wharfkit/antelope';
 
-	import { Card, Stack } from 'unicove-components';
+	import { Card, Stack, Table, TD, TR } from 'unicove-components';
 	import { AssetInput } from 'unicove-components';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
@@ -59,18 +59,16 @@
 
 		<AssetInput min={0} bind:value={assetValue} bind:valid={assetValid} />
 
-		<table class="table-styles">
-			<tbody>
-				{#each records as record}
-					<tr>
-						<td class="text-sm">{record.time}</td>
-						<td class="text-right text-sm"
-							><AssetText class="text-on-surface" variant="full" value={record.value} /></td
-						>
-						<td class="text-right text-sm">{record.currency}</td>
-					</tr>
-				{/each}
-			</tbody>
-		</table></Stack
+		<Table>
+			{#each records as record}
+				<TR>
+					<TD class="text-label-sm">{record.time}</TD>
+					<TD class="text-right text-sm">
+						<AssetText class="text-on-surface" variant="full" value={record.value} />
+					</TD>
+					<TD class="text-right text-sm">{record.currency}</TD>
+				</TR>
+			{/each}
+		</Table></Stack
 	>
 </Card>
