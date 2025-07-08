@@ -1,12 +1,12 @@
 <script lang="ts">
 	import Self from './permission.svelte';
 	import Key from '$lib/components/elements/key.svelte';
-	import CopyButton from '$lib/components/button/copy.svelte';
-	import IconButton from '$lib/components/button/icon.svelte';
+	import { CopyButton } from 'unicove-components';
+	import { IconButton } from 'unicove-components';
 	import Account from '$lib/components/elements/account.svelte';
 	import Contract from '$lib/components/elements/contract.svelte';
 	import dayjs from 'dayjs';
-	import { Clock, Edit, LogIn } from 'lucide-svelte';
+	import { Clock, Edit, LogIn } from '@lucide/svelte';
 	import * as m from '$lib/paraglide/messages';
 	import { Name, PermissionLevel, UInt64 } from '@wharfkit/antelope';
 	import type { TreePermission } from './+page';
@@ -177,7 +177,7 @@
 	<!-- The curved connector line -->
 	{#if level > 0}
 		<div
-			class="border-outline absolute -left-px z-10 size-12 rounded-bl-xl border-b border-l"
+			class="border-surface-container-highest absolute -left-[2px] z-10 size-12 rounded-bl-xl border-b-2 border-l-2"
 		></div>
 	{/if}
 </li>
@@ -187,7 +187,7 @@
 		<!-- The border on this ul is the through line -->
 		<ul
 			data-solo={children.length === 1}
-			class="children data-[solo=false]:*:border-outline col-span-full grid grid-cols-subgrid data-[solo=false]:*:border-l data-[solo=false]:*:last:border-transparent"
+			class="children data-[solo=false]:*:border-surface-container-highest col-span-full grid grid-cols-subgrid data-[solo=false]:*:border-l-2 data-[solo=false]:*:last:border-transparent"
 			class:ml-8={level > 0}
 			class:ml-4={level === 0}
 		>

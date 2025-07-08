@@ -1,13 +1,13 @@
 <script lang="ts">
-	import { Stack } from '$lib/components/layout';
-	import AssetInput from '$lib/components/input/asset.svelte';
+	import { Stack } from 'unicove-components';
+	import { AssetInput } from 'unicove-components';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import TokenCard from '$lib/components/elements/tokencard.svelte';
-	import Button from '$lib/components/button/button.svelte';
-	import Label from '$lib/components/input/label.svelte';
+	import { Button } from 'unicove-components';
+	import { Label } from 'unicove-components';
 	import TransactSummary from '$lib/components/transact/summary.svelte';
 	import TransactError from '$lib/components/transact/error.svelte';
-	import { DL } from '$lib/components/descriptionlist';
+	import { DL } from 'unicove-components';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
 	import { UnstakeManager } from './manager.svelte';

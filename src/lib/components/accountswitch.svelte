@@ -14,18 +14,19 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
 
-	import X from 'lucide-svelte/icons/x';
-	import CircleX from 'lucide-svelte/icons/circle-x';
-	import LogOut from 'lucide-svelte/icons/log-out';
-	import User from 'lucide-svelte/icons/user';
-	import UserCheck from 'lucide-svelte/icons/user-check';
-	import UserPlus from 'lucide-svelte/icons/user-plus';
-	import Search from 'lucide-svelte/icons/search';
+	import X from '@lucide/svelte/icons/x';
+	import CircleX from '@lucide/svelte/icons/circle-x';
+	import LogOut from '@lucide/svelte/icons/log-out';
+	import User from '@lucide/svelte/icons/user';
+	import UserCheck from '@lucide/svelte/icons/user-check';
+	import UserPlus from '@lucide/svelte/icons/user-plus';
+	import Search from '@lucide/svelte/icons/search';
 	import { goto } from '$lib/utils';
-	import Button from './button/button.svelte';
-	import Text from './input/text.svelte';
-	import { Wallet } from 'lucide-svelte';
+
 	import { IconButton } from 'unicove-components';
+	import { Button } from 'unicove-components';
+	import { TextInput } from 'unicove-components';
+	import { Wallet } from '@lucide/svelte';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -225,7 +226,7 @@
 
 							<!-- Filter or Search accounts -->
 							{#if chainSessions.length > 4 || filterValue}
-								<Text
+								<TextInput
 									class="rounded-full bg-transparent pl-6 text-sm"
 									placeholder="Filter accounts"
 									bind:value={filterValue}
@@ -237,7 +238,7 @@
 									{:else}
 										<Search class="size-4" />
 									{/if}
-								</Text>
+								</TextInput>
 							{/if}
 						</header>
 
@@ -262,10 +263,10 @@
 											{/if}
 										</div>
 
-										<div class="text-left font-medium">
-											<div>{session.actor}@{session.permission}</div>
+										<div class="flex flex-col gap-px text-left font-medium">
+											<span class="leading-none">{session.actor}@{session.permission}</span>
 											{#if session.walletPlugin.id === 'wallet-plugin-multisig'}
-												<div class="text-xs">
+												<div class="text-xs font-normal">
 													↳ {m.common_account_multisig_using_account({
 														account: session.walletPlugin.data.session.actor
 													})}
@@ -297,10 +298,10 @@
 
 {#snippet connectWalletScreen()}
 	<div class="space-y-4" in:fly={{ x: 100, duration: 150 }} out:fly={{ x: 100, duration: 100 }}>
-		<hr class="border-outline-variant" />
+		<hr class="border-outline" />
 
-		<header class="grid justify-center gap-2 py-4 text-center">
-			<span class="h4">{m.common_login_to_unicove()}</span>
+		<header class="grid justify-center gap-4 py-4 text-center">
+			<span class="text-title">{m.common_login_to_unicove()}</span>
 			<span class="text-muted text-sm font-medium">{m.common_connect_wallet_login()}</span>
 		</header>
 

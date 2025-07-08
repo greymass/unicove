@@ -3,8 +3,8 @@
 	import type { AccountState } from '$lib/state/client/account.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
 	import AssetText from '$lib/components/elements/asset.svelte';
-	import Button from '$lib/components/button/button.svelte';
-	import { HelpCircle } from 'lucide-svelte';
+	import { Button } from 'unicove-components';
+	import { HelpCircle } from '@lucide/svelte';
 
 	interface Props {
 		account?: AccountState;
@@ -15,7 +15,7 @@
 
 {#if props.account && props.network.config.legacytoken && props.account.getBalance(props.network.config.legacytoken)}
 	<aside
-		class="from-primary-container to-primary-container/50 border-outline-variant grid gap-4 rounded-lg border border-2 bg-gradient-to-br p-4 text-center"
+		class="from-primary-container to-primary-container/50 border-outline grid gap-4 rounded-lg border border-2 bg-gradient-to-br p-4 text-center"
 	>
 		<div class="grid gap-1">
 			<a

@@ -5,7 +5,9 @@
 
 	interface Props extends HTMLAttributes<HTMLDivElement> {
 		tag?: string;
-		children: Snippet;
+		children?: Snippet;
+		leftColumn?: Snippet;
+		rightColumn?: Snippet;
 		class?: string;
 	}
 
@@ -16,7 +18,20 @@
 <!-- https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout/Masonry_layout -->
 <svelte:element
 	this={props.tag || 'div'}
-	class={cn('gap-6 *:mb-6 *:w-full *:break-inside-avoid *:last:mb-0 @2xl:columns-2', props.class)}
+	class={cn('grid  items-start  gap-6 md:grid-cols-2', props.class)}
+	data-masonry=""
 >
-	{@render props.children()}
+	{#if props.children}
+		<div class="col-span-full">
+			{@render props.children()}
+		</div>
+	{/if}
+	{#if props.leftColumn && props.rightColumn}
+		<div class="left grid gap-6">
+			{@render props.leftColumn()}
+		</div>
+		<div class="right grid gap-6">
+			{@render props.rightColumn()}
+		</div>
+	{/if}
 </svelte:element>

@@ -2,8 +2,6 @@
 	let props = $props();
 </script>
 
-<div class="overflow-x-auto">
-	<div class="table w-fit border-spacing-4">
-		{@render props.children()}
-	</div>
+<div class="grid gap-y-4 @2xl:grid-cols-[auto_auto_1fr]">
+	{@render props.children()}
 </div>

@@ -4,7 +4,7 @@
 	import * as m from '$lib/paraglide/messages';
 	import AccountElement from '$lib/components/elements/account.svelte';
 	import Row from '../components/row.svelte';
-	import Chip from '$lib/components/chip.svelte';
+	import { Chip } from 'unicove-components';
 	import { Int64, Name } from '@wharfkit/antelope';
 	import { ZeroUnits } from '$lib/types/token';
 
@@ -18,23 +18,41 @@
 {#if Int64.from(data.cpu_frac).gt(ZeroUnits)}
 	<Row>
 		<Chip>{m.common_resources()}</Chip>
-		<AccountElement name={Name.from(data.payer)} />
-		{m.common_renting_resources_for({
-			resource: 'CPU'
-		})}
-		<AccountElement name={Name.from(data.receiver)} />
-		({data.cpu_frac})
+
+		<div>
+			<AccountElement name={Name.from(data.payer)} />
+			<span class="text-nowrap">
+				{m.common_renting_resources_for({
+					resource: 'CPU'
+				})}
+			</span>
+			<AccountElement name={Name.from(data.receiver)} />
+		</div>
+
+		<div>
+			<span class="text-nowrap">
+				({data.cpu_frac})
+			</span>
+		</div>
 	</Row>
 {/if}
 
 {#if Int64.from(data.net_frac).gt(ZeroUnits)}
 	<Row>
 		<Chip>{m.common_resources()}</Chip>
-		<AccountElement name={Name.from(data.payer)} />
-		{m.common_renting_resources_for({
-			resource: 'NET'
-		})}
-		<AccountElement name={Name.from(data.receiver)} />
-		({data.net_frac})
+
+		<div>
+			<AccountElement name={Name.from(data.payer)} />
+			<span class="text-nowrap">
+				{m.common_renting_resources_for({
+					resource: 'NET'
+				})}
+			</span>
+			<AccountElement name={Name.from(data.receiver)} />
+		</div>
+
+		<span class="text-nowrap">
+			({data.net_frac})
+		</span>
 	</Row>
 {/if}

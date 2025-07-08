@@ -3,8 +3,8 @@
 	import { getContext } from 'svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { chainLogos } from '@wharfkit/common';
-	import ChevronDown from 'lucide-svelte/icons/chevron-down';
-	import FileQuestion from 'lucide-svelte/icons/file-question';
+	import ChevronDown from '@lucide/svelte/icons/chevron-down';
+	import FileQuestion from '@lucide/svelte/icons/file-question';
 	import { createSelect, melt, type CreateSelectProps } from '@melt-ui/svelte';
 	import { fade } from 'svelte/transition';
 	import { chainMap } from '$lib/wharf/chains';

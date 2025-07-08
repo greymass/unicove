@@ -227,12 +227,10 @@
 
 <div
 	data-theme={data.network}
-	class="relative mx-auto grid h-full min-h-svh w-[calc(100%-2rem)] max-w-(--breakpoint-2xl) grid-cols-2 grid-rows-[min-content_minmax(0,1fr)] gap-y-6 pt-4 pb-12 sm:grid-cols-4 md:h-auto md:min-h-svh md:grid-cols-12 md:grid-rows-[min-content_auto_minmax(0,1fr)] md:gap-x-4 xl:w-[calc(100%-6rem)]"
+	class="mx-auto grid h-full min-h-svh w-[calc(100%-2rem)] max-w-(--breakpoint-2xl) grid-cols-2 grid-rows-[min-content_minmax(0,1fr)] gap-y-6 pt-4 pb-12 sm:grid-cols-4 md:h-auto md:min-h-svh md:grid-cols-12 md:grid-rows-[min-content_minmax(0,1fr)] md:gap-x-4 xl:w-[calc(100%-6rem)]"
 >
-	<aside
-		class="relative col-start-1 col-end-3 row-span-full row-start-1 hidden h-full grid-rows-subgrid md:grid"
-	>
-		<nav class="sticky top-4 row-span-2 grid max-h-svh grid-rows-subgrid content-start">
+	<aside class="relative col-start-1 col-end-3 row-span-full row-start-1 hidden h-full md:block">
+		<nav class="sticky top-4 row-span-2 flex h-[calc(100svh-1rem)] flex-col content-start gap-6">
 			<a href="/{data.network}" class="grid h-12 items-center" aria-label="home">
 				<Unicovelogo small class="items-start" />
 			</a>

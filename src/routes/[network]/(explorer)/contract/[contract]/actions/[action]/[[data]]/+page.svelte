@@ -8,16 +8,16 @@
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import Action from '$lib/components/contract/action.svelte';
-	import Button from '$lib/components/button/button.svelte';
-	import Card from '$lib/components/layout/box/card.svelte';
-	import Code from '$lib/components/code.svelte';
-	import Label from '$lib/components/input/label.svelte';
-	import TextInput from '$lib/components/input/text.svelte';
-	import CopyButton from '$lib/components/button/copy.svelte';
+	import { Button } from 'unicove-components';
+	import { Card } from 'unicove-components';
+	import { Code } from 'unicove-components';
+	import { Label } from 'unicove-components';
+	import { TextInput } from 'unicove-components';
+	import { CopyButton } from 'unicove-components';
 
 	import Fields from './fields.svelte';
 	import { MultiCard } from '$lib/components/layout';
-	import Checkbox from '$lib/components/input/checkbox.svelte';
+	import { Checkbox } from 'unicove-components';
 	import type { TransactResult } from '@wharfkit/session';
 	import TransactSummary from '$lib/components/transact/summary.svelte';
 	import TransactError from '$lib/components/transact/error.svelte';
@@ -205,78 +205,83 @@
 </script>
 
 <MultiCard>
-	<Card>
+	{#snippet leftColumn()}
 		{#if transactResult && transactResult.resolved}
-			<TransactSummary transactionId={transactResult.resolved.transaction.id} />
-			<Button onclick={clear}>Clear Results</Button>
+			<Card>
+				<TransactSummary transactionId={transactResult.resolved.transaction.id} />
+				<Button onclick={clear}>Clear Results</Button>
+			</Card>
 		{:else if error}
-			<TransactError {error} />
-			<Button onclick={clear}>Clear Results</Button>
+			<Card>
+				<TransactError {error} />
+				<Button onclick={clear}>Clear Results</Button>
+			</Card>
 		{:else}
-			<h4 class="h4">Perform Action</h4>
-			{#if ready}
-				<Fields abi={data.abi} fields={data.struct.fields} bind:state={actionInputs} />
-			{/if}
-			<Button onclick={transact} disabled={!decoded || context.wharf.transacting}>
-				{#if useReadOnly}
-					Call readonly action
-				{:else}
-					Perform transaction
+			<Card title="Perform Action">
+				{#if ready}
+					<Fields abi={data.abi} fields={data.struct.fields} bind:state={actionInputs} />
 				{/if}
-			</Button>
-			{#if allowReadOnly}
-				<fieldset class="flex items-center gap-3">
-					<Checkbox id="readonly" bind:checked={useReadOnly} />
-					<Label for="readonly">Call as readonly action?</Label>
-				</fieldset>
-				<fieldset class="flex items-center gap-3">
-					<Checkbox id="pageload" bind:checked={triggerOnPageLoad} />
-					<Label for="pageload">Trigger when page loads?</Label>
-				</fieldset>
-			{/if}
+				<Button onclick={transact} disabled={!decoded || context.wharf.transacting}>
+					{#if useReadOnly}
+						Call readonly action
+					{:else}
+						Perform transaction
+					{/if}
+				</Button>
+				{#if allowReadOnly}
+					<fieldset class="flex items-center gap-3">
+						<Checkbox id="readonly" bind:checked={useReadOnly} />
+						<Label for="readonly">Call as readonly action?</Label>
+					</fieldset>
+					<fieldset class="flex items-center gap-3">
+						<Checkbox id="pageload" bind:checked={triggerOnPageLoad} />
+						<Label for="pageload">Trigger when page loads?</Label>
+					</fieldset>
+				{/if}
+			</Card>
 		{/if}
-	</Card>
-	<Card>
-		<h4 class="h4">Action Data</h4>
-		{#if decoded}
-			<Code>{JSON.stringify(decoded, null, 2)}</Code>
-		{:else}
-			<p>Fill out the form to create a representation of the data in this type of action.</p>
-		{/if}
-		{#if link}
-			<fieldset class="grid gap-2">
-				<Label for="tx-link">
-					<a href={link}> Sharable URL for this action and data </a>
-				</Label>
-				<TextInput value={link} disabled>
-					<CopyButton data={link} />
-				</TextInput>
-			</fieldset>
+	{/snippet}
 
-			{#if useReadOnly && api}
+	{#snippet rightColumn()}
+		<Card title="Action Data">
+			{#if decoded}
+				<Code>{JSON.stringify(decoded, null, 2)}</Code>
+			{:else}
+				<p>Fill out the form to create a representation of the data in this type of action.</p>
+			{/if}
+			{#if link}
 				<fieldset class="grid gap-2">
 					<Label for="tx-link">
-						<a href={api}> API call which runs this readonly action </a>
+						<a href={link}> Sharable URL for this action and data </a>
 					</Label>
-					<TextInput value={api} disabled>
-						<CopyButton data={api} />
+					<TextInput value={link} disabled>
+						<CopyButton data={link} />
 					</TextInput>
 				</fieldset>
+
+				{#if useReadOnly && api}
+					<fieldset class="grid gap-2">
+						<Label for="tx-link">
+							<a href={api}> API call which runs this readonly action </a>
+						</Label>
+						<TextInput value={api} disabled>
+							<CopyButton data={api} />
+						</TextInput>
+					</fieldset>
+				{/if}
 			{/if}
-		{/if}
-	</Card>
+		</Card>
+	{/snippet}
 </MultiCard>
 
 {#if readonlyError}
-	<Card>
-		<h4 class="h4">Error during readonly call...</h4>
+	<Card title="Error during readonly call...">
 		<Code>{JSON.stringify(readonlyError, null, 2)}</Code>
 	</Card>
 {/if}
 
 {#if readonlyResult}
-	<Card>
-		<h4 class="h4">API Response</h4>
+	<Card title="API Response">
 		<Code>{JSON.stringify(readonlyResult, null, 2)}</Code>
 	</Card>
 {/if}
@@ -284,14 +289,12 @@
 {#if transactResult}
 	{#if transactResult.response}
 		{#if transactResult.response.processed && transactResult.response.processed.action_traces}
-			<Card>
-				<h4 class="h4">Action Traces</h4>
+			<Card title="Action Traces">
 				<Code>{JSON.stringify(transactResult.response.processed.action_traces, null, 2)}</Code>
 			</Card>
 		{/if}
 
-		<Card>
-			<h4 class="h4">API Response</h4>
+		<Card title="API Response">
 			<Code>{JSON.stringify(transactResult.response, null, 2)}</Code>
 		</Card>
 	{/if}

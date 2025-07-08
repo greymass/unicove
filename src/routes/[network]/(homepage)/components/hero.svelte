@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Stack from '$lib/components/layout/stack.svelte';
+	import { Stack } from 'unicove-components';
 	import UnicoveWordmark from '$lib/assets/unicove-wordmark.svelte';
 	import bgDesktop from '$lib/assets/hero/eos/bg1@2x.png?enhanced';
 	import bgMobile from '$lib/assets/hero/eos/bg2@2x.png?enhanced';
@@ -12,7 +12,7 @@
 	import UnicoveOutline from '$lib/assets/unicove-outline.svg';
 
 	import * as m from '$lib/paraglide/messages';
-	import Button from '$lib/components/button/button.svelte';
+	import { Button } from 'unicove-components';
 	import { browser } from '$app/environment';
 
 	interface Props {
@@ -204,7 +204,7 @@
 			</svg>
 
 			<h1
-				class="max-w-128 text-3xl font-sans-hero leading-tight font-bold text-balance lg:text-4xl lg:leading-tight"
+				class="font-sans-hero max-w-128 text-3xl leading-tight font-bold text-balance lg:text-4xl lg:leading-tight"
 			>
 				<span class="">Unicove.</span>
 				{m.homepage_hero_title({

@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import Button from '$lib/components/button/button.svelte';
-	import Stack from '$lib/components/layout/stack.svelte';
+	import { Button } from 'unicove-components';
+	import { Stack } from 'unicove-components';
 	import { walletTypes } from '../../walletTypes';
-	import ChevronRight from 'lucide-svelte/icons/chevron-right';
+	import ChevronRight from '@lucide/svelte/icons/chevron-right';
 
 	const { data } = $props();
 
@@ -32,12 +32,12 @@
 </script>
 
 <Stack class="gap-2">
-	<h3 class="h3">Sign Up with {currentWalletType.title}</h3>
+	<h3 class="text-title">Sign Up with {currentWalletType.title}</h3>
 	<p>{currentWalletType.description}</p>
 </Stack>
 
 <Stack class="gap-2">
-	<h3 class="h3">Benefits</h3>
+	<h3 class="text-title">Benefits</h3>
 
 	<ul class="list-inside list-disc">
 		{#each currentWalletType.benefits as benefit}
@@ -47,7 +47,7 @@
 </Stack>
 
 <Stack>
-	<h3 class="h2">Available Wallets</h3>
+	<h3 class="text-headline">Available Wallets</h3>
 	<Stack>
 		{#each currentWalletType.networkWallets(String(data.network)) as wallet}
 			<a
@@ -75,7 +75,7 @@
 		<Button variant="secondary" href="/{data.network}/signup/wallets">Back</Button>
 	</Stack>
 	<Stack class="gap-2">
-		<h3 class="h3">Why do I need a wallet?</h3>
+		<h3 class="text-title">Why do I need a wallet?</h3>
 		<p>
 			A wallet is your gateway to the blockchain, allowing you to manage your digital assets and
 			interact with decentralized applications.

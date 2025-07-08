@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { Name, type ABI } from '@wharfkit/antelope';
-	import SquareDashedBottomCode from 'lucide-svelte/icons/square-dashed-bottom';
+	import SquareDashedBottomCode from '@lucide/svelte/icons/square-dashed-bottom';
 
-	import Code from '$lib/components/code.svelte';
+	import { Code } from 'unicove-components';
 
 	import Contract from '../elements/contract.svelte';
 	import { parseRootType } from '$lib/utils/abi';

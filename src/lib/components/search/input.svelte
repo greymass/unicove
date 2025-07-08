@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { getContext, type ComponentProps } from 'svelte';
 	import { createDialog, melt, type CreateDialogProps } from '@melt-ui/svelte';
-	import type TextInput from '../input/text.svelte';
+	import type { TextInput } from 'unicove-components';
 	import { preventDefault } from '$lib/utils';
 	import { goto } from '$lib/utils';
 	import { fade, scale } from 'svelte/transition';
@@ -15,13 +15,13 @@
 		isSearchKey,
 		isSearchTransaction
 	} from '$lib/state/search.svelte';
-	import SearchIcon from 'lucide-svelte/icons/search';
-	import X from 'lucide-svelte/icons/x';
-	import { Stack } from '$lib/components/layout';
+	import SearchIcon from '@lucide/svelte/icons/search';
+	import X from '@lucide/svelte/icons/x';
+	import { Stack } from 'unicove-components';
 	import { cn } from '$lib/utils';
 	import Result from './result.svelte';
 	import { browser } from '$app/environment';
-	import { ArrowRight } from 'lucide-svelte';
+	import { ArrowRight } from '@lucide/svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { SerializedSession } from '@wharfkit/session';
 
@@ -219,7 +219,7 @@
 	aria-label="search"
 	id="search"
 	class={cn(
-		'text-muted focus-visible:ring-solar-500 focus-visible:border-solar-500 md:border-outline-variant md:bg-surface  relative z-50 inline-flex h-10 items-center justify-between rounded-lg py-3.5 text-base leading-4 font-medium text-nowrap focus:outline-hidden focus-visible:ring focus-visible:ring-inset md:justify-between md:border-2  md:py-2 md:pr-0 md:pl-3',
+		'text-muted focus-visible:ring-solar-500 focus-visible:border-solar-500 md:border-outline md:bg-surface  relative z-50 inline-flex h-10 items-center justify-between rounded-lg py-3.5 text-base leading-4 font-medium text-nowrap focus:outline-hidden focus-visible:ring focus-visible:ring-inset md:justify-between md:border-2  md:py-2 md:pr-0 md:pl-3',
 		props.class
 	)}
 >
@@ -233,7 +233,7 @@
 	</span>
 
 	{#if shortcutKey}
-		<span class="border-outline-variant m-2 hidden rounded-sm border px-2 py-1 md:inline">
+		<span class="border-outline m-2 hidden rounded-sm border px-2 py-1 md:inline">
 			{shortcutKey}
 		</span>
 	{/if}

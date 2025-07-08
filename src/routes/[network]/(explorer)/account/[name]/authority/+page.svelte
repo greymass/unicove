@@ -4,9 +4,9 @@
 	import { goto } from '$lib/utils';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import { Card } from '$lib/components/layout/index.js';
+	import { Card } from 'unicove-components';
 	import Account from '$lib/components/elements/account.svelte';
-	import Button from '$lib/components/button/button.svelte';
+	import { Button } from 'unicove-components';
 
 	import * as m from '$lib/paraglide/messages';
 
@@ -39,7 +39,7 @@
 		<Card>
 			<div class="flex">
 				<div class="flex-1">
-					<Account name={auth.account_name} class="h4">
+					<Account name={auth.account_name} class="text-title">
 						{permission}
 					</Account>
 					<p>
@@ -51,8 +51,7 @@
 				</div>
 				<div class="flex-end">
 					{#if isCurrentUser}
-						<Button onclick={() => signin(permission)}
-							>}
+						<Button onclick={() => signin(permission)}>
 							{m.common_login_as({ permission })}
 							<div class="text-xs">
 								↳ {m.common_multisig_using({

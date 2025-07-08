@@ -3,8 +3,8 @@
 
 	import AccountLink from '$lib/components/elements/account.svelte';
 	import AssetElement from '$lib/components/elements/asset.svelte';
-	import { ArrowBigRight, NotebookText } from 'lucide-svelte';
-	import Chip from '$lib/components/chip.svelte';
+	import { ArrowBigRight, NotebookText } from '@lucide/svelte';
+	import { Chip } from 'unicove-components';
 	import type { Snippet } from 'svelte';
 	import Row from './row.svelte';
 	import * as m from '$lib/paraglide/messages';
@@ -25,32 +25,36 @@
 </script>
 
 <Row>
-	{#if isSend}
-		<Chip class="bg-error-container text-on-error-container">{m.common_sent()}</Chip>
-	{:else if isReceive}
-		<Chip class="bg-success-container text-on-success-container">{m.common_received()}</Chip>
-	{:else}
-		<Chip class="">Transfer</Chip>
-	{/if}
+	<div class="grid items-center gap-x-4 gap-y-1 @2xl:flex @2xl:justify-between">
+		{#if isSend}
+			<Chip class="bg-error-container text-on-error-container">{m.common_sent()}</Chip>
+		{:else if isReceive}
+			<Chip class="bg-success-container text-on-success-container">{m.common_received()}</Chip>
+		{:else}
+			<Chip class="">Transfer</Chip>
+		{/if}
 
-	<AssetElement class="" value={Asset.from(quantity)} variant="full" />
+		<AssetElement class="text-left" value={Asset.from(quantity)} variant="full" />
+	</div>
 
-	<AccountLink class="" name={Name.from(from)} />
+	<div class="flex items-center gap-2">
+		<AccountLink class="" name={Name.from(from)} />
 
-	<ArrowBigRight class="size-6" />
+		<ArrowBigRight class="size-5 shrink-0" />
 
-	<AccountLink class="" name={Name.from(to)} />
+		<AccountLink class="" name={Name.from(to)} />
+	</div>
 
-	{#if memo}
-		<div class="flex table-caption max-w-fit items-center gap-2 overflow-auto px-4 text-nowrap">
-			<NotebookText class="inline size-5" />
+	<div class="text-balance">
+		{#if memo}
+			<NotebookText class="mb-1 inline size-4 shrink-0" />
 			Memo: {memo}
-		</div>
-	{/if}
+		{/if}
 
-	{#if props.children}
-		<span>
-			{@render props.children()}
-		</span>
-	{/if}
+		{#if props.children}
+			<span>
+				{@render props.children()}
+			</span>
+		{/if}
+	</div>
 </Row>

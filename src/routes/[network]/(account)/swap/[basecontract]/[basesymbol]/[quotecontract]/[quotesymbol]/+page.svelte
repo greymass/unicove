@@ -2,21 +2,22 @@
 	import { Asset, Checksum256, type AnyAction } from '@wharfkit/antelope';
 	import { getContext } from 'svelte';
 
-	import Code from '$lib/components/code.svelte';
-	import AssetInput from '$lib/components/input/asset.svelte';
+	import { Code } from 'unicove-components';
+	import { AssetInput } from 'unicove-components';
 	import AssetText from '$lib/components/elements/asset.svelte';
-	import Button from '$lib/components/button/button.svelte';
-	import IconButton from '$lib/components/button/icon.svelte';
+	import { Button } from 'unicove-components';
+	import { IconButton } from 'unicove-components';
 	import TransactForm from '$lib/components/transact/form.svelte';
 
 	import * as m from '$lib/paraglide/messages';
 	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte.js';
 	import { TokenBalance, TokenSwap, ZeroUnits } from '$lib/types/token.js';
-	import { ArrowRightLeft } from 'lucide-svelte';
-	import Label from '$lib/components/input/label.svelte';
-	import { SingleCard, Stack } from '$lib/components/layout';
+	import { ArrowRightLeft } from '@lucide/svelte';
+	import { Label } from 'unicove-components';
+	import { SingleCard } from '$lib/components/layout';
+	import { Stack } from 'unicove-components';
 	import { deriveSwapAction } from '../../../../swap.js';
-	import Switcher from '$lib/components/layout/switcher.svelte';
+	import { Switcher } from 'unicove-components';
 
 	const { data } = $props();
 
@@ -212,7 +213,7 @@
 						<img alt="{baseBalance.token.name} Logo" src={baseBalance.token.media?.logo?.light} />
 					</picture>
 				{/if}
-				<h3 class="h3">{baseBalance.balance.symbol.name}</h3>
+				<h3 class="text-title">{baseBalance.balance.symbol.name}</h3>
 			</div>
 			<AssetText class="text-on-surface" value={baseBalance.balance} />
 			<p>{m.common_available()}</p>
@@ -240,7 +241,7 @@
 						<img alt="{quoteBalance.token.name} Logo" src={quoteBalance.token.media?.logo?.light} />
 					</picture>
 				{/if}
-				<span class="h3">{quoteBalance.balance.symbol.name}</span>
+				<span class="text-title">{quoteBalance.balance.symbol.name}</span>
 			</div>
 			<AssetText class="text-on-surface" value={quoteBalance.balance} />
 			<p>{m.common_available()}</p>

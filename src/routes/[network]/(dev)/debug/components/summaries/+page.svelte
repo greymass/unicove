@@ -1,11 +1,11 @@
 <script lang="ts">
-	import Button from '$lib/components/button/button.svelte';
+	import { Button } from 'unicove-components';
 </script>
 
 <div class="space-y-4">
-	<h3 class="h3">Example Transactions (Vaulta)</h3>
+	<h3 class="text-headline">Example Transactions (Vaulta)</h3>
 	<p>Links to transactions that perform common types of actions.</p>
-	<h4 class="h4">Tokens</h4>
+	<h4 class="text-title">Tokens</h4>
 	<Button
 		href="/vaulta/transaction/7e933eb4e4f0833adda84b2ef1f39f4ee394da641c29bda685257f280c180913"
 	>
@@ -31,7 +31,7 @@
 	>
 		Swap WRAM to RAM
 	</Button>
-	<h4 class="h4">Staking</h4>
+	<h4 class="text-title">Staking</h4>
 	<Button
 		href="/vaulta/transaction/2395e0048b2d6e48d42078864c567a6723dd00dbf0da3befb05df9dff8b60cd2"
 	>
@@ -47,7 +47,7 @@
 	>
 		Staking Withdraw
 	</Button>
-	<h4 class="h4">Resources</h4>
+	<h4 class="text-title">Resources</h4>
 	<Button
 		href="/vaulta/transaction/22ee566f47e72aa5f293def5f126a9498e1a2a988df5f61f0dc6938e3aaef2e0"
 	>

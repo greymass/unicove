@@ -2,7 +2,7 @@
 	import { Asset } from '@wharfkit/antelope';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import { cn } from '$lib/utils';
-	import Button from '../button/button.svelte';
+	import { Button } from 'unicove-components';
 
 	type BreakdownAction = {
 		href: string;
@@ -23,7 +23,7 @@
 
 <div
 	class={cn(
-		'border-outline-variant col-span-full grid min-h-12 grid-cols-subgrid items-center gap-x-4 border-b last:border-none ',
+		'border-outline col-span-full grid min-h-12 grid-cols-subgrid items-center gap-x-4 border-b last:border-none ',
 		isTotal && 'font-semibold'
 	)}
 >
