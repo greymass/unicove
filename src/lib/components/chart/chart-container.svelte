@@ -1,8 +1,7 @@
 <script lang="ts">
 	import dayjs from 'dayjs';
 	import { Card } from 'unicove-components';
-	import { Select } from 'unicove-components';
-	import type { ExtendedSelectOption } from '../select/types';
+	import { Select, type ExtendedSelectOption } from 'unicove-components';
 	import type { HistoricalPrice } from '$lib/types';
 	import LineChart from './line-chart.svelte';
 	import * as m from '$lib/paraglide/messages';

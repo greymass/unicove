@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { Cluster, Stack } from 'unicove-components';
-	import { Select } from 'unicove-components';
-	import type { ExtendedSelectOption } from '$lib/components/select/types';
+	import { Select, type ExtendedSelectOption } from 'unicove-components';
 	import { Label } from 'unicove-components';
 	import { Chains } from '@wharfkit/common';
 	import TokenSelect from '$lib/components/select/balance.svelte';

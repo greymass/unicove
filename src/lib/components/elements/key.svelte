@@ -5,7 +5,7 @@
 
 	const { network } = getContext<UnicoveContext>('state');
 
-	let props: KeyProps = $props();
+	let props: Omit<KeyProps, 'href'> = $props();
 
 	const href = $derived(`/${network}/key/${String(props.key)}`);
 </script>

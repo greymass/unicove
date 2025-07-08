@@ -186,7 +186,7 @@ export class PermissionManager {
 	}
 }
 
-interface NameSelectOption extends ExtendedSelectOption<Name> {
+interface NameSelectOption extends ExtendedSelectOption {
 	value: Name;
 }
 

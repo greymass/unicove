@@ -5,7 +5,8 @@
 		FormContent as FormSectionContent,
 		FormHeader as FormSectionHeader,
 		FormSection,
-		HR as FormDivider
+		HR as FormDivider,
+		Form
 	} from 'unicove-components';
 	import RemoveRowButton from '$lib/components/form/removeRowButton.svelte';
 
@@ -35,7 +36,6 @@
 	import { fly } from 'svelte/transition';
 	import { cubicOut } from 'svelte/easing';
 	import { Fieldset } from 'unicove-components';
-	import FormContainer from '$lib/components/form/formContainer.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
@@ -530,7 +530,7 @@
 		{@render ConfirmingDetails()}
 	{:else}
 		<!-- Editing Permission -->
-		<FormContainer>
+		<Form>
 			{@render BasicInformation()}
 			<FormDivider />
 
@@ -572,7 +572,7 @@
 					>
 				</div>
 			</footer>
-		</FormContainer>
+		</Form>
 	{/if}
 </div>
 
