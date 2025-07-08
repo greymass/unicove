@@ -42,7 +42,7 @@
 					<Label for="{fieldName}-input">
 						{fieldName} ({field.type})
 					</Label>
-					<Textinput
+					<TextInput
 						bind:value={state[fieldName]}
 						placeholder={field.name}
 						id="{fieldName}-input"
