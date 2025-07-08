@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Asset } from '@wharfkit/antelope';
-	import { Card, Stack, Switcher } from '$lib/components/layout';
+	import { Card, DL, Stack, Switcher } from 'unicove-components';
 	import type { UnstakingRecord } from '$lib/utils/staking';
 	import {
 		getStakedBalance,
@@ -34,43 +34,43 @@
 			'2,USD'
 		)
 	);
+
+	const items = $derived([
+		{
+			title: 'Total staked',
+			description: String(staked)
+		},
+
+		{ title: 'Total value', description: String(usdValue) },
+
+		{
+			title: 'APR',
+			description: `${apr} % `
+		},
+
+		{
+			title: 'Savings',
+			description: String(context.network.tokenToRex(unstakable))
+		},
+
+		{
+			title: 'Available for claim',
+			description: String(context.network.tokenToRex(claimable))
+		},
+
+		{
+			title: 'REX fund',
+			description: String(withdrawable)
+		}
+	]);
 </script>
 
 <Stack>
 	{#if data.account}
 		<Stack>
 			<Switcher threshold="64rem" class="place-content-between">
-				<Card class="gap-5" title="Staked">
-					<table class="table-styles">
-						<tbody>
-							<tr>
-								<td>Total staked</td>
-								<td>{staked}</td>
-							</tr>
-							<tr>
-								<td>Total value</td>
-								<td>{usdValue}</td>
-							</tr>
-
-							<tr>
-								<td>APR</td>
-								<td>{apr} %</td>
-							</tr>
-
-							<tr>
-								<td>Savings</td>
-								<td>{context.network.tokenToRex(unstakable)}</td>
-							</tr>
-							<tr>
-								<td>Available for claim</td>
-								<td>{context.network.tokenToRex(claimable)}</td>
-							</tr>
-							<tr>
-								<td>REX fund</td>
-								<td>{withdrawable}</td>
-							</tr>
-						</tbody>
-					</table>
+				<Card title="Staked">
+					<DL {items} />
 				</Card>
 				<UnstakingBalances records={unstaking} />
 			</Switcher>

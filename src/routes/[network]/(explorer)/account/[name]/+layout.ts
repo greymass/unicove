@@ -5,7 +5,7 @@ import * as m from '$lib/paraglide/messages';
 import { getNetworkByName } from '$lib/state/network.svelte';
 import type { LayoutLoad } from './$types';
 import { PUBLIC_CHAIN_SHORT } from '$env/static/public';
-import { Code } from 'lucide-svelte';
+import { Code } from '@lucide/svelte';
 import { ogImageURL } from '$lib/utils/opengraph';
 
 export const load: LayoutLoad = async ({ fetch, url, params }) => {

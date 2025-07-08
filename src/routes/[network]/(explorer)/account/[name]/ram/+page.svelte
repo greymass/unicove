@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Asset } from '@wharfkit/antelope';
-	import Card from '$lib/components/layout/box/card.svelte';
-	import RAM from '$lib/components/elements/ram.svelte';
+	import { Card } from 'unicove-components';
+	import { Ram as RAM } from 'unicove-components';
 	import { calculateValue } from '$lib/utils';
 
 	const { data } = $props();

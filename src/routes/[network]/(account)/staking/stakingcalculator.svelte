@@ -4,8 +4,8 @@
 	import type { HTMLAttributes } from 'svelte/elements';
 	import { Asset } from '@wharfkit/antelope';
 
-	import { Card } from '$lib/components/layout';
-	import AssetInput from '$lib/components/input/asset.svelte';
+	import { Card, Stack, Table, TD, TR } from 'unicove-components';
+	import { AssetInput } from 'unicove-components';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
 	import * as m from '$lib/paraglide/messages';
@@ -48,27 +48,27 @@
 	});
 </script>
 
-<Card {...props} class="gap-5" title={m.staking_calculator()}>
-	<p>
-		{m.staking_calculator_description({
-			apr: apr,
-			token: String(network.chain.systemToken!.symbol.name)
-		})}
-	</p>
+<Card {...props} title={m.staking_calculator()}>
+	<Stack>
+		<p>
+			{m.staking_calculator_description({
+				apr: apr,
+				token: String(network.chain.systemToken!.symbol.name)
+			})}
+		</p>
 
-	<AssetInput min={0} bind:value={assetValue} bind:valid={assetValid} />
+		<AssetInput min={0} bind:value={assetValue} bind:valid={assetValid} />
 
-	<table class="table-styles">
-		<tbody>
+		<Table>
 			{#each records as record}
-				<tr>
-					<td class="text-sm">{record.time}</td>
-					<td class="text-right text-sm"
-						><AssetText class="text-on-surface" variant="full" value={record.value} /></td
-					>
-					<td class="text-right text-sm">{record.currency}</td>
-				</tr>
+				<TR>
+					<TD class="text-label-sm">{record.time}</TD>
+					<TD class="text-right text-sm">
+						<AssetText class="text-on-surface" variant="full" value={record.value} />
+					</TD>
+					<TD class="text-right text-sm">{record.currency}</TD>
+				</TR>
 			{/each}
-		</tbody>
-	</table>
+		</Table></Stack
+	>
 </Card>

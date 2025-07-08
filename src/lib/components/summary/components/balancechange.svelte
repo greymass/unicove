@@ -3,8 +3,8 @@
 
 	import AccountLink from '$lib/components/elements/account.svelte';
 	import AssetElement from '$lib/components/elements/asset.svelte';
-	import { EqualIcon } from 'lucide-svelte';
-	import Chip from '$lib/components/chip.svelte';
+	import { EqualIcon } from '@lucide/svelte';
+	import { Chip } from 'unicove-components';
 	import type { Snippet } from 'svelte';
 	import { ZeroUnits } from '$lib/types/token';
 	import Row from './row.svelte';

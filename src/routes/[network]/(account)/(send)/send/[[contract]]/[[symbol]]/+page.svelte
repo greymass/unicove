@@ -13,15 +13,16 @@
 	import { tokenEquals, type TokenBalance } from '$lib/types/token';
 	import { Types as RAMTypes } from '$lib/types/ram';
 
-	import { SingleCard, Stack } from '$lib/components/layout';
-	import AssetInput from '$lib/components/input/asset.svelte';
-	import Button from '$lib/components/button/button.svelte';
-	import Code from '$lib/components/code.svelte';
-	import Label from '$lib/components/input/label.svelte';
-	import NameInput from '$lib/components/input/name.svelte';
+	import { SingleCard } from '$lib/components/layout';
+	import { Stack } from 'unicove-components';
+	import { AssetInput } from 'unicove-components';
+	import { Button } from 'unicove-components';
+	import { Code } from 'unicove-components';
+	import { Label } from 'unicove-components';
+	import { NameInput } from 'unicove-components';
 	import Progress from '$lib/components/progress.svelte';
 	import SummarySend from '$lib/components/summary/eosio.token/transfer.svelte';
-	import TextInput from '$lib/components/input/text.svelte';
+	import { TextInput } from 'unicove-components';
 	import TokenSelect from '$lib/components/select/balance.svelte';
 	import TransactError from '$lib/components/transact/error.svelte';
 	import TransactSummary from '$lib/components/transact/summary.svelte';
@@ -444,7 +445,7 @@
 </SingleCard>
 
 {#if context.settings.data.debugMode}
-	<h3 class="h3">{m.common_debugging()}</h3>
+	<h3 class="text-title">{m.common_debugging()}</h3>
 	<Code
 		>{JSON.stringify(
 			{

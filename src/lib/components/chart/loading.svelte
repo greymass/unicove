@@ -1,5 +1,5 @@
 <script>
-	import Card from '../layout/box/card.svelte';
+	import { Card } from 'unicove-components';
 
 	const props = $props();
 </script>

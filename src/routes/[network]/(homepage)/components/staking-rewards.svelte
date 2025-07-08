@@ -1,10 +1,10 @@
 <script lang="ts">
-	import Stack from '$lib/components/layout/stack.svelte';
+	import { Stack } from 'unicove-components';
 	import type { NetworkState } from '$lib/state/network.svelte';
 	import StakedHEX from './stakedhex.svelte';
 	import { getAPR } from '$lib/utils/staking';
 	import * as m from '$lib/paraglide/messages';
-	import Button from '$lib/components/button/button.svelte';
+	import { Button } from 'unicove-components';
 
 	interface Props {
 		network: NetworkState;
@@ -25,7 +25,7 @@
 
 	<!-- Text -->
 	<Stack class="max-w-md items-start">
-		<h2 class="h3 leading-tight">{network.token.name} {m.common_staking_rewards()}</h2>
+		<h2 class="text-title leading-tight">{network.token.name} {m.common_staking_rewards()}</h2>
 		<p>
 			{m.homepage_staking_intro({
 				token: network.token.name,

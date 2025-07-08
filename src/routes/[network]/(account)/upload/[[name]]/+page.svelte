@@ -1,17 +1,17 @@
 <script lang="ts">
 	import { ABI, Action, Bytes, Checksum256, Name, Serializer } from '@wharfkit/antelope';
-	import Card from '$lib/components/layout/box/card.svelte';
-	import Code from '$lib/components/code.svelte';
+	import { Card, Fieldset, FileUpload } from 'unicove-components';
+	import { Code } from 'unicove-components';
 	import { getContext, onMount } from 'svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
-	import NameInput from '$lib/components/input/name.svelte';
+	import { NameInput } from 'unicove-components';
 	import TransactForm from '$lib/components/transact/form.svelte';
-	import Button from '$lib/components/button/button.svelte';
+	import { Button } from 'unicove-components';
 
 	import * as m from '$lib/paraglide/messages';
 	import { SingleCard } from '$lib/components/layout/index.js';
-	import Stack from '$lib/components/layout/stack.svelte';
-	import Label from '$lib/components/input/label.svelte';
+	import { Stack } from 'unicove-components';
+	import { Label } from 'unicove-components';
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');
@@ -34,24 +34,21 @@
 	let id: Checksum256 | undefined = $state();
 	let error: string | undefined = $state();
 
-	function set(event: Event) {
-		const input = event.target as HTMLInputElement;
-		for (const file of input.files || []) {
-			const reader = new FileReader();
-			const extension = file.name.split('.').pop();
-			switch (extension) {
-				case 'abi':
-					reader.onload = setabi;
-					break;
-				case 'wasm':
-					reader.onload = setcode;
-					break;
-				default:
-					console.error('Unsupported file type');
-					return;
-			}
-			reader.readAsArrayBuffer(file);
+	function set(file: File) {
+		const reader = new FileReader();
+		const extension = file.name.split('.').pop();
+		switch (extension) {
+			case 'abi':
+				reader.onload = setabi;
+				break;
+			case 'wasm':
+				reader.onload = setcode;
+				break;
+			default:
+				console.error('Unsupported file type');
+				return;
 		}
+		reader.readAsArrayBuffer(file);
 	}
 
 	function setabi(this: FileReader) {
@@ -114,44 +111,28 @@
 				the currently logged in account.
 			</p>
 
-			<fieldset class="grid gap-2">
-				<Label for="account-input">{m.common_account_name()}</Label>
-				<NameInput
-					autofocus
-					bind:this={accountInput}
-					bind:ref={accountRef}
-					bind:value={accountName}
-					bind:valid={accountValid}
-					id="account-input"
-					placeholder={m.common_account_name()}
-				/>
-			</fieldset>
+			<NameInput
+				label={m.common_account_name()}
+				bind:this={accountInput}
+				bind:ref={accountRef}
+				bind:value={accountName}
+				bind:valid={accountValid}
+				id="account-input"
+				placeholder={m.common_account_name()}
+			/>
 
-			<fieldset class="grid gap-2">
+			<Fieldset>
 				<Label for="account-input">Contract Files</Label>
-				<div
-					class="border-outline focus-within:border-primary focus-within:ring-primary relative flex h-12 gap-2 rounded-lg border-2 px-4 *:content-center focus-within:ring-1 focus-within:ring-inset"
-				>
-					<input
-						type="file"
-						accept=".abi,.wasm"
-						multiple
-						onchange={set}
-						class="placeholder:text-muted w-full rounded-lg bg-transparent font-medium focus:outline-hidden"
-					/>
-				</div>
-			</fieldset>
+				<FileUpload multiple={true} accept=".abi,.wasm" onAccept={set} />
+			</Fieldset>
 
 			<Button onclick={transact} disabled={actions.length === 0}>Upload</Button>
 
-			{#if actions.length === 0}
-				<p class="text-muted">Upload files to generate actions.</p>
-			{:else}
-				<h3 class="h3">Actions</h3>
+			{#if actions.length > 0}
+				<h3 class="text-title">Actions</h3>
 				<p>The actions that will be performed are listed below.</p>
 				{#each actions as action, index}
-					<Card class="mb-4">
-						<h4 class="h4">{action.name}</h4>
+					<Card class="mb-4" title={String(action.name)}>
 						<Code json={action} />
 						<Button variant="secondary" onclick={() => remove(index)}>Remove Action</Button>
 					</Card>

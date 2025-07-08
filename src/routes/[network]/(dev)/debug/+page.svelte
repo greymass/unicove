@@ -1,7 +1,7 @@
 <script>
 </script>
 
-<h1 class="h2">Debug</h1>
+<h1 class="text-headline">Debug</h1>
 <ul class="mt-4 list-disc space-y-2">
 	<li>
 		<a href="debug/account">Account</a>

@@ -11,7 +11,7 @@
 </script>
 
 <section class="space-y-6">
-	<h1 class="h2">Opengraph Images</h1>
+	<h1 class="text-headline">Opengraph Images</h1>
 	<img src={og_default} alt="" />
 	<img
 		src={ogImageURL(test1, {

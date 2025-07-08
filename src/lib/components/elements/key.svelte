@@ -1,31 +1,13 @@
 <script lang="ts">
 	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import type { PrivateKey, PublicKey } from '@wharfkit/antelope';
-	import { KeyRound } from 'lucide-svelte';
+	import { Key as KeyElement, type KeyProps } from 'unicove-components';
 	import { getContext } from 'svelte';
 
 	const { network } = getContext<UnicoveContext>('state');
 
-	interface Props {
-		key?: PublicKey | PrivateKey | string;
-		icon?: boolean;
-	}
+	let props: Omit<KeyProps, 'href'> = $props();
 
-	let { key, icon }: Props = $props();
+	const href = $derived(`/${network}/key/${String(props.key)}`);
 </script>
 
-{#if key}
-	<a
-		class="text-primary hover:text-primary-hover inline-grid grid-cols-[auto_1fr] items-start gap-2 font-mono"
-		href="/{network}/key/{String(key)}"
-	>
-		{#if icon}
-			<div class="content-center pt-1">
-				<KeyRound class="size-4 shrink-0 " />
-			</div>
-		{/if}
-		<span class="break-all">
-			{String(key)}
-		</span>
-	</a>
-{/if}
+<KeyElement {...props} {href} />

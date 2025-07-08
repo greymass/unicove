@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { cn } from '$lib/utils/style';
-	import { XIcon } from 'lucide-svelte';
+	import { XIcon } from '@lucide/svelte';
 
 	interface Props {
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any

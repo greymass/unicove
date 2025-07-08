@@ -3,18 +3,18 @@
 	import { goto } from '$lib/utils';
 	import { getSnapsProvider, checkIsFlask } from '@wharfkit/wallet-plugin-metamask';
 
-	import Button from '$lib/components/button/button.svelte';
+	import { Button } from 'unicove-components';
 	import Box from '$lib/components/layout/box/box.svelte';
 	import { checkForSnap, requestSnap } from '$lib/metamask-snap';
 	import Metamask from '$lib/assets/metamask.svg';
 	import { MetaMaskState } from '$lib/state/metamask.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
-	import { Cluster, Stack } from '$lib/components/layout/index.js';
-	import { DD, DL, DLRow } from '$lib/components/descriptionlist/index.js';
-	import TextInput from '$lib/components/input/text.svelte';
-	import CopyButton from '$lib/components/button/copy.svelte';
+	import { Cluster, Stack } from 'unicove-components';
+	import { DD, DL, DLRow } from 'unicove-components';
+	import { TextInput } from 'unicove-components';
+	import { CopyButton } from 'unicove-components';
 	import * as m from '$lib/paraglide/messages';
-	import Code from '$lib/components/code.svelte';
+	import { Code } from 'unicove-components';
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');

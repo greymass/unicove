@@ -1,16 +1,16 @@
 <script lang="ts">
-	import Code from '$lib/components/code.svelte';
-	import { Stack } from '$lib/components/layout';
+	import { Code } from 'unicove-components';
+	import { Stack } from 'unicove-components';
 	import { getContext } from 'svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import Button from '$lib/components/button/button.svelte';
+	import { Button } from 'unicove-components';
 	import { PUBLIC_ENVIRONMENT } from '$env/static/public';
 
 	const context = getContext<UnicoveContext>('state');
 </script>
 
 <Stack>
-	<h2 class="h2">Chain Configuration State (Client)</h2>
+	<h2 class="text-headline">Chain Configuration State (Client)</h2>
 	<p>The chain configuration as it exists in the client.</p>
 	{#if PUBLIC_ENVIRONMENT !== 'production'}
 		<p>
