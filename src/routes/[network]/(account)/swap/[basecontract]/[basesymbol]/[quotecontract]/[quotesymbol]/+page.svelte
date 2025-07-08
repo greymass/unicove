@@ -228,6 +228,7 @@
 				onclick={flip}
 				disabled={context.wharf.transacting}
 				size="large"
+				label={m.common_flip()}
 			/>
 		</div>
 

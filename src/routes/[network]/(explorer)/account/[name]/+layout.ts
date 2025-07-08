@@ -29,7 +29,11 @@ export const load: LayoutLoad = async ({ fetch, url, params }) => {
 	const actions = [];
 
 	if (account.contract) {
-		actions.push({ icon: Code, href: `/${network}/contract/${params.name}` });
+		actions.push({
+			icon: Code,
+			href: `/${network}/contract/${params.name}`,
+			label: m.common_contract()
+		});
 	}
 
 	const metaTitle = m.account_meta_title({

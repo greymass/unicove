@@ -55,6 +55,7 @@
 			size="large"
 			class="text-muted col-start-1  row-start-3 @3xl:row-start-1"
 			onclick={onPrevious}
+			label={m.common_previous()}
 		/>
 		{#each articles as article, i}
 			<button onclick={() => (index = i)}>
@@ -70,6 +71,7 @@
 			size="large"
 			class="text-muted col-start-2 row-start-3 justify-self-end @3xl:col-start-4 @3xl:row-start-1"
 			onclick={onNext}
+			label={m.common_next()}
 		/>
 	</div>
 </section>

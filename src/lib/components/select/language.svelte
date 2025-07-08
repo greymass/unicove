@@ -41,7 +41,7 @@
 </script>
 
 <button
-	class="border-outline focus:border-primary flex h-10 items-center justify-between gap-2 rounded-full border-2 bg-transparent py-2 pr-3 pl-4 font-medium transition-opacity hover:opacity-90 focus:outline-none"
+	class="border-outline focus:border-primary flex h-10 cursor-pointer items-center justify-between gap-2 rounded-full border-2 bg-transparent py-2 pr-3 pl-4 font-medium transition-opacity hover:opacity-90 focus:outline-none"
 	use:melt={$trigger}
 	aria-label="langauge-select-label"
 	id="language-select"
