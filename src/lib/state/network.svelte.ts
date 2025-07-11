@@ -329,25 +329,33 @@ export class NetworkState {
 
 		if (this.supports('powerup') && this.sources?.powerup && this.sources?.sample) {
 			const pstate = PowerUpState.from(this.sources.powerup);
-			response.cpu.price.powerup = Asset.from(
-				pstate.cpu.price_per_ms(this.sources.sample, 1),
-				this.token.symbol
-			);
-			response.net.price.powerup = Asset.from(
-				pstate.net.price_per_kb(this.sources.sample, 1),
-				this.token.symbol
-			);
+			try {
+				response.cpu.price.powerup = Asset.from(
+					pstate.cpu.price_per_ms(this.sources.sample, 1),
+					this.token.symbol
+				);
+				response.net.price.powerup = Asset.from(
+					pstate.net.price_per_kb(this.sources.sample, 1),
+					this.token.symbol
+				);
+			} catch (e) {
+				console.warn('Error calculating powerup prices:', e);
+			}
 		}
 
 		if (this.supports('rentrex') && this.rex && this.sources?.sample) {
-			response.cpu.price.rex = Asset.from(
-				this.rex.cpu_price_per_ms(this.sources.sample, 30),
-				this.token.symbol
-			);
-			response.net.price.rex = Asset.from(
-				this.rex.net_price_per_kb(this.sources.sample, 30),
-				this.token.symbol
-			);
+			try {
+				response.cpu.price.rex = Asset.from(
+					this.rex.cpu_price_per_ms(this.sources.sample, 30),
+					this.token.symbol
+				);
+				response.net.price.rex = Asset.from(
+					this.rex.net_price_per_kb(this.sources.sample, 30),
+					this.token.symbol
+				);
+			} catch (e) {
+				console.warn('Error calculating REX prices:', e);
+			}
 		}
 
 		if (this.supports('stakeresource') && this.sources?.sample) {

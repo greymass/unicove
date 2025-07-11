@@ -50,14 +50,18 @@
 
 			switch (rentType) {
 				case 'POWERUP': {
-					const fracs = network.getPowerupFrac(
-						Number(rentState.cpuAmount || 0),
-						Number(rentState.netAmount || 0)
-					);
-					rentState.cpuFrac = fracs[0];
-					rentState.netFrac = fracs[1];
-					rentState.cpuPricePerMs = network.resources.cpu.price.powerup;
-					rentState.netPricePerKb = network.resources.net.price.powerup;
+					try {
+						const fracs = network.getPowerupFrac(
+							Number(rentState.cpuAmount || 0),
+							Number(rentState.netAmount || 0)
+						);
+						rentState.cpuFrac = fracs[0];
+						rentState.netFrac = fracs[1];
+						rentState.cpuPricePerMs = network.resources.cpu.price.powerup;
+						rentState.netPricePerKb = network.resources.net.price.powerup;
+					} catch (e) {
+						console.warn('Error calculating powerup prices:', e);
+					}
 					break;
 				}
 				case 'REX': {
