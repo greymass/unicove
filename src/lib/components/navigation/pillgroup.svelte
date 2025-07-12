@@ -1,8 +1,8 @@
 <script lang="ts">
 	import Button from '$lib/components/button/button.svelte';
 	import { page } from '$app/state';
-	import { cn } from '$lib/utils';
-	import { createSelect, melt } from '@melt-ui/svelte';
+	import { cn, goto } from '$lib/utils';
+	import { createSelect, melt, type CreateSelectProps } from '@melt-ui/svelte';
 	import { fade } from 'svelte/transition';
 	import { ChevronDown } from 'lucide-svelte';
 
@@ -26,12 +26,21 @@
 
 	const isCurrent = (href: string) => currentOption === href;
 
+	const handleSelect: CreateSelectProps<string>['onSelectedChange'] = ({ next }) => {
+		if (next) {
+			goto(next.value);
+		}
+
+		return next;
+	};
+
 	const {
 		elements: { trigger, menu, option },
 		states: { selectedLabel, open }
 	} = createSelect<string>({
 		forceVisible: true,
 		preventScroll: false,
+		onSelectedChange: handleSelect,
 		positioning: {
 			placement: 'bottom',
 			fitViewport: true,
@@ -55,7 +64,7 @@
 </menu>
 
 <div
-	class="border-outline-variant focus-visible:border-solar-500 flex flex-col rounded-lg border-2 bg-transparent lg:hidden"
+	class="border-outline focus-visible:border-solar-500 flex flex-col rounded-lg border-2 bg-transparent lg:hidden"
 >
 	<button
 		class="text-on-surface focus-visible:outline-solar-500 flex h-12 items-center justify-between rounded-[inherit] px-4 text-base font-medium focus-visible:outline"
@@ -71,20 +80,17 @@
 
 	{#if $open}
 		<menu
-			class="border-outline-variant bg-surface z-50 flex max-h-[300px] flex-col overflow-y-auto rounded-lg border py-2 shadow-sm focus:ring-0!"
+			class="border-outline bg-surface z-50 flex max-h-[300px] flex-col overflow-y-auto rounded-lg border py-2 shadow-sm focus:ring-0!"
 			use:melt={$menu}
 			transition:fade={{ duration: 100 }}
 		>
 			{#each options as { href, text }}
-				<li class="text-muted flex h-12">
-					<a
-						class="data-selected:text-on-surface data-highlighted:text-primary grow content-center px-4"
-						{href}
-						aria-current={isCurrent(href) ? 'page' : undefined}
-						use:melt={$option({ value: href, label: text })}
-					>
-						{text}
-					</a>
+				<li
+					class="text-muted data-selected:text-on-surface data-highlighted:text-primary h-12 grow content-center px-4"
+					use:melt={$option({ value: href, label: text })}
+					aria-current={isCurrent(href) ? 'page' : undefined}
+				>
+					{text}
 				</li>
 			{/each}
 		</menu>
