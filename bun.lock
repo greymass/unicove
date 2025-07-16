@@ -13,7 +13,7 @@
         "@wharfkit/common": "^1.5.0",
         "@wharfkit/contract": "^1.2.1",
         "@wharfkit/hyperion": "^1.0.4",
-        "@wharfkit/resources": "^1.3.1",
+        "@wharfkit/resources": "^1.5.0-rc3",
         "@wharfkit/roborovski": "^1.1.0",
         "@wharfkit/session": "^1.6.0",
         "@wharfkit/transact-plugin-resource-provider": "^1.1.2",
@@ -563,7 +563,7 @@
 
     "@wharfkit/protocol-scatter": ["@wharfkit/protocol-scatter@1.3.1", "", { "dependencies": { "eosjs": "20.0.0", "scatter-ts": "^0.1.9", "tslib": "^2.1.0" }, "peerDependencies": { "@wharfkit/session": "^1.3.1" } }, "sha512-rsjPmY4rHw3fOFj7Yg6WSDLjF4afpS12vGVuEG/jGNu8zMfjYoezQbwViUwkVd+bbNPOKwYWpex2EQVLoywhNA=="],
 
-    "@wharfkit/resources": ["@wharfkit/resources@1.3.1", "", { "dependencies": { "@wharfkit/antelope": "^1.0.0", "bn.js": "^4.11.9", "js-big-decimal": "^2.0.7", "tslib": "^2.1.0" } }, "sha512-XgL/yiwcJia8chYySt2dBOxa4BRKPqMeNxaZFvvzLgBI3s7m6MUXlXpZSeBvaQH+dr9D9nlBbmgP7PCBrJITIg=="],
+    "@wharfkit/resources": ["@wharfkit/resources@1.5.0-rc3", "", { "dependencies": { "@wharfkit/antelope": "^1.1.0", "bn.js": "^4.11.9", "js-big-decimal": "^2.0.7", "tslib": "^2.1.0" } }, "sha512-vvyyym/TWQJ8oomjPEn9FpzXM8yQoQVpCQwgpbtaetTz4ksm4M4WLWpqzS+h2uwrfVMZmgAjsDL577XCV2Nsjg=="],
 
     "@wharfkit/roborovski": ["@wharfkit/roborovski@1.1.0", "", { "dependencies": { "@wharfkit/antelope": "^1.0.0", "tslib": "^2.0.3" } }, "sha512-UPZgkW+fLKcXlI4sNA8vzS/qTQoAZiFudnXhQScNHNalGTKTy3c5WEN4RPicbwcmGNUO3JVXMtKgwgrqRrUaVA=="],
 
@@ -1744,6 +1744,8 @@
     "@types/ws/@types/node": ["@types/node@20.14.12", "", { "dependencies": { "undici-types": "~5.26.4" } }, "sha512-r7wNXakLeSsGT0H1AU863vS2wa5wBOK4bWMjZz2wj+8nBx+m5PeIn0k8AloSLpRuiwdRQZwarZqHE4FNArPuJQ=="],
 
     "@typescript-eslint/typescript-estree/minimatch": ["minimatch@9.0.5", "", { "dependencies": { "brace-expansion": "^2.0.1" } }, "sha512-G6T0ZX48xgozx7587koeX9Ys2NYy6Gmv//P89sEte9V9whIapMNF4idKxnW2QtCcLiTWlb/wfCabAtAFWhhBow=="],
+
+    "@wharfkit/resources/@wharfkit/antelope": ["@wharfkit/antelope@1.1.0", "", { "dependencies": { "bn.js": "^4.11.9", "brorand": "^1.1.0", "elliptic": "^6.5.4", "hash.js": "^1.0.0", "pako": "^2.1.0", "tslib": "^2.0.3" } }, "sha512-/+zwJq/gFSvIpw3fwFPtpafLqoiipg7lkL1FROrKPyJbrQEaqB1BsCos2+hhWccY6qwKqmdE/iEmY2TZ9gfTPQ=="],
 
     "@wharfkit/session/@wharfkit/common": ["@wharfkit/common@1.4.2", "", { "dependencies": { "tslib": "^2.1.0" }, "peerDependencies": { "@wharfkit/antelope": "^1.0.0" } }, "sha512-ku3ErhtYcBsxAg/px00q8OoCwS7Z2BVFfp+eazPdQk3hpdEhuyAkojq5TBXdWUYocthI+cJ1EQH87y+Di1JI3w=="],
 
