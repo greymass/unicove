@@ -8,6 +8,7 @@
 	import { Name } from '@wharfkit/antelope';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { AccountState } from '$lib/state/client/account.svelte';
+	import { PlaceholderName } from '@wharfkit/session';
 
 	interface Props extends HTMLAnchorAttributes {
 		name: Name | string;
@@ -44,25 +45,36 @@
 	});
 </script>
 
-<a
-	href={path}
-	class={cn(
-		'focus-visible:outline-solar-500 text-primary hover:text-primary-hover inline-flex items-center gap-2 focus-visible:outline ',
-		props.class
-	)}
-	use:melt={$trigger}
->
+{#if PlaceholderName.equals(name)}
 	{#if props.icon}
 		<UserIcon class="size-4" />
 	{/if}
 	{#if children}
 		{@render children()}
 	{:else}
-		<span class="font-mono">
-			{name}
-		</span>
+		<span class="font-mono"> [[SIGNER]] </span>
 	{/if}
-</a>
+{:else}
+	<a
+		href={path}
+		class={cn(
+			'focus-visible:outline-solar-500 text-primary hover:text-primary-hover inline-flex items-center gap-2 focus-visible:outline ',
+			props.class
+		)}
+		use:melt={$trigger}
+	>
+		{#if props.icon}
+			<UserIcon class="size-4" />
+		{/if}
+		{#if children}
+			{@render children()}
+		{:else}
+			<span class="font-mono">
+				{name}
+			</span>
+		{/if}
+	</a>
+{/if}
 
 {#if $open && account}
 	<div
