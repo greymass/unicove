@@ -8,12 +8,13 @@ export async function getProducersRecursive(
 	loaded: SystemContract.Types.producer_info[] = []
 ): Promise<SystemContract.Types.producer_info[]> {
 	const producers: SystemContract.Types.producer_info[] = [...loaded];
-	const query: API.v1.GetTableRowsParams<Name> = {
+	const query: API.v1.GetTableRowsParamsTyped<Name> = {
 		code: 'eosio',
 		scope: 'eosio',
 		table: 'producers',
-		json: true,
-		limit: 1000
+		json: false,
+		limit: 1000,
+		type: SystemContract.Types.producer_info
 	};
 	if (producers.length) {
 		query.lower_bound = producers[producers.length - 1].owner;
