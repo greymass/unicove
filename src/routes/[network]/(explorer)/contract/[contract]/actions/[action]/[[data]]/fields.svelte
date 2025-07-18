@@ -1,8 +1,8 @@
 <script lang="ts">
 	import Self from './fields.svelte';
-	import Checkbox from '$lib/components/input/checkbox.svelte';
-	import Label from '$lib/components/input/label.svelte';
-	import Textinput from '$lib/components/input/text.svelte';
+	import { Checkbox } from 'unicove-components';
+	import { Label } from 'unicove-components';
+	import { TextInput } from 'unicove-components';
 	import type { ABI } from '@wharfkit/antelope';
 
 	interface PageProps {
@@ -42,7 +42,7 @@
 					<Label for="{fieldName}-input">
 						{fieldName} ({field.type})
 					</Label>
-					<Textinput
+					<TextInput
 						bind:value={state[fieldName]}
 						placeholder={field.name}
 						id="{fieldName}-input"

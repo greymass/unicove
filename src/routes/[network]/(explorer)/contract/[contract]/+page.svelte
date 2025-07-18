@@ -3,7 +3,7 @@
 
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
 	import Contract from '$lib/components/elements/contract.svelte';
-	import Button from '$lib/components/button/button.svelte';
+	import { Button } from 'unicove-components';
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');
@@ -15,7 +15,7 @@
 	</Button>
 {/if}
 
-<h2 class="h2">Actions</h2>
+<h2 class="text-headline">Actions</h2>
 <div class="flex flex-wrap gap-4">
 	{#each data.abi.actions as action}
 		<Contract name={data.contract} action={action.name}>
@@ -24,7 +24,7 @@
 	{/each}
 </div>
 
-<h2 class="h2">Structs</h2>
+<h2 class="text-headline">Structs</h2>
 <div class="flex flex-wrap gap-4">
 	{#each data.abi.structs as struct}
 		<Contract name={data.contract} struct={struct.name}>
@@ -33,7 +33,7 @@
 	{/each}
 </div>
 
-<h2 class="h2">Tables</h2>
+<h2 class="text-headline">Tables</h2>
 <div class="flex flex-wrap gap-4">
 	{#each data.abi.tables as table}
 		<Contract name={data.contract} table={table.name}>

@@ -2,8 +2,8 @@
 	import { createTooltip, melt } from '@melt-ui/svelte';
 	import { fade } from 'svelte/transition';
 	import { type Snippet } from 'svelte';
-	import { type Icon } from 'lucide-svelte';
-	import Info from 'lucide-svelte/icons/info';
+	import { type Icon } from '@lucide/svelte';
+	import Info from '@lucide/svelte/icons/info';
 
 	interface Props {
 		content: string;

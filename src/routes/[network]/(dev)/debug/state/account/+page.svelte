@@ -1,7 +1,7 @@
 <script lang="ts">
-	import Code from '$lib/components/code.svelte';
-	import Button from '$lib/components/button/button.svelte';
-	import { Stack } from '$lib/components/layout';
+	import { Code } from 'unicove-components';
+	import { Button } from 'unicove-components';
+	import { Stack } from 'unicove-components';
 	import { getContext } from 'svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 
@@ -9,7 +9,7 @@
 </script>
 
 <Stack>
-	<h2 class="h2">Account State</h2>
+	<h2 class="text-headline">Account State</h2>
 	<p>The account state for the currently active session.</p>
 	{#if context.account}
 		<Button class="self-start" onclick={() => context.account?.refresh()}

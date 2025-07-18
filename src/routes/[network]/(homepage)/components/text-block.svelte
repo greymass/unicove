@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Button from '$lib/components/button/button.svelte';
-	import Stack from '$lib/components/layout/stack.svelte';
+	import { Button } from 'unicove-components';
+	import { Stack } from 'unicove-components';
 	import { cn } from '$lib/utils/style';
 	import type { Snippet } from 'svelte';
 
@@ -15,7 +15,7 @@
 </script>
 
 <Stack class={cn('max-w-md items-start', props.class)}>
-	<h2 class="h3 leading-tight">{props.title}</h2>
+	<h2 class="text-title leading-tight">{props.title}</h2>
 	<p>{props.text}</p>
 	{#if props.button && props.button.href}
 		<Button class="-ml-3" variant="text" href={props.button.href}>

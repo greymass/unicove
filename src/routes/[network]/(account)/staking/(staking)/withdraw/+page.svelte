@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { Stack, Switcher } from '$lib/components/layout';
-	import Button from '$lib/components/button/button.svelte';
+	import { Stack, Switcher } from 'unicove-components';
+	import { Button } from 'unicove-components';
 	import TransactSummary from '$lib/components/transact/summary.svelte';
 	import TransactError from '$lib/components/transact/error.svelte';
 
@@ -8,7 +8,7 @@
 	import { getContext } from 'svelte';
 	import { WithdrawManager } from './manager.svelte';
 	import * as m from '$lib/paraglide/messages';
-	import Card from '$lib/components/layout/box/card.svelte';
+	import { Card } from 'unicove-components';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
@@ -49,7 +49,7 @@
 			>
 			{#if manager.voting && manager.sellingAll}
 				<Card>
-					<h4 class="h4 text-solar-500">Notice: Withdrawing will also clear votes</h4>
+					<h4 class="text-title text-solar-500">Notice: Withdrawing will also clear votes</h4>
 					<p>
 						Withdrawing and removing all tokens from staking requires we unset any votes that were
 						previously cast for either block producers or proxies.

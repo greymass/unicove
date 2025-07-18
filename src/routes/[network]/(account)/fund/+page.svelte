@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
-	import Card from '$lib/components/layout/box/card.svelte';
-	import Code from '$lib/components/code.svelte';
+	import { Card } from 'unicove-components';
+	import { Code } from 'unicove-components';
 	import binanceLogo from '$lib/assets/exchanges/binance.webp?enhanced';
 	import coinbaseIconLogo from '$lib/assets/exchanges/coinbase-icon.webp?enhanced';
 	import krakenLogo from '$lib/assets/exchanges/kraken.webp?enhanced';
@@ -12,13 +12,12 @@
 	import kucoinLogo from '$lib/assets/exchanges/kucoin.webp?enhanced';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { initOnRamp, type CBPayInstanceType, type InitOnRampParams } from '@coinbase/cbpay-js';
-	import Button from '$lib/components/button/button.svelte';
+	import { Button } from 'unicove-components';
 	import * as m from '$lib/paraglide/messages';
-	import Grid from '$lib/components/layout/grid.svelte';
-	import { DL, DLRow, DD } from '$lib/components/descriptionlist';
+	import { DL, DLRow, DD } from 'unicove-components';
 	import coinbaseLogo from '$lib/assets/exchanges/coinbase.svg';
-	import Stack from '$lib/components/layout/stack.svelte';
-	import Cluster from '$lib/components/layout/cluster.svelte';
+	import { Stack } from 'unicove-components';
+	import { Cluster } from 'unicove-components';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -136,9 +135,9 @@
 	}
 </script>
 
-<Stack class="gap-12">
+<Stack class="mt-6 gap-12">
 	<Stack class="gap-4">
-		<h2 class="h4">{m.fund_direct_purchase()}</h2>
+		<h2 class="text-headline leading-4">{m.fund_direct_purchase()}</h2>
 		<p>
 			{m.fund_direct_purchase_description({
 				token: context.network.token.symbol.name
@@ -184,7 +183,7 @@
 	</Stack>
 
 	<Stack class="gap-4">
-		<h2 class="h4">{m.common_exchanges()}</h2>
+		<h2 class="text-headline leading-4">{m.common_exchanges()}</h2>
 
 		<p>
 			{m.fund_exchange_description({
@@ -192,7 +191,7 @@
 			})}
 		</p>
 
-		<Grid tag="ul" itemWidth="10rem" class="">
+		<ul class="layout-grid" style="--grid-itemWidth:10rem;">
 			{#each EXCHANGES as exchange}
 				<Card tag="li" class="">
 					<a
@@ -212,11 +211,11 @@
 					</a>
 				</Card>
 			{/each}
-		</Grid>
+		</ul>
 	</Stack>
 
 	{#if context.settings.data.debugMode}
-		<h3 class="h3">{m.common_debugging()}</h3>
+		<h3 class="text-title">{m.common_debugging()}</h3>
 		<Code>
 			{JSON.stringify(coinbaseOptions, null, 2)}
 		</Code>

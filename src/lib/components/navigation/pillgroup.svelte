@@ -1,10 +1,10 @@
 <script lang="ts">
-	import Button from '$lib/components/button/button.svelte';
+	import { Button } from 'unicove-components';
 	import { page } from '$app/state';
 	import { cn, goto } from '$lib/utils';
 	import { createSelect, melt, type CreateSelectProps } from '@melt-ui/svelte';
 	import { fade } from 'svelte/transition';
-	import { ChevronDown } from 'lucide-svelte';
+	import { ChevronDown } from '@lucide/svelte';
 
 	interface Option {
 		href: string;

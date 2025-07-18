@@ -1,13 +1,12 @@
 <script lang="ts">
-	import { Cluster, Stack } from '$lib/components/layout';
-	import Select from '$lib/components/select/select.svelte';
-	import type { ExtendedSelectOption } from '$lib/components/select/types';
-	import Label from '$lib/components/input/label.svelte';
+	import { Cluster, Stack } from 'unicove-components';
+	import { Select, type ExtendedSelectOption } from 'unicove-components';
+	import { Label } from 'unicove-components';
 	import { Chains } from '@wharfkit/common';
 	import TokenSelect from '$lib/components/select/balance.svelte';
 	import type { SelectOption } from '@melt-ui/svelte';
-	import Button from '$lib/components/button/button.svelte';
-	import Code from '$lib/components/code.svelte';
+	import { Button } from 'unicove-components';
+	import { Code } from 'unicove-components';
 	import { TokenBalance } from '$lib/types/token';
 
 	const options: SelectOption[] = [
@@ -71,10 +70,10 @@
 </script>
 
 <Stack id="select">
-	<h2 class="h2">Select</h2>
+	<h2 class="text-headline">Select</h2>
 
 	<Stack class="items-start">
-		<h3 class="h3">Pill Select</h3>
+		<h3 class="text-title">Pill Select</h3>
 		<Cluster class="items-end">
 			<Stack class="gap-2">
 				<Label for="date-range">Select a date range</Label>
@@ -86,7 +85,7 @@
 	</Stack>
 
 	<Stack class="items-start">
-		<h3 class="h3">Form Select</h3>
+		<h3 class="text-title">Form Select</h3>
 		<Cluster class="items-end">
 			<Stack class="gap-2">
 				<Label for="form-select">Select a form option</Label>
@@ -112,7 +111,7 @@
 	</Stack>
 
 	<Stack class="items-start">
-		<h3 class="h3">Form Select with Images</h3>
+		<h3 class="text-title">Form Select with Images</h3>
 		<Cluster class="items-end">
 			<Stack class="gap-2">
 				<Label for="image-select">Select an option</Label>
@@ -129,7 +128,7 @@
 	</Stack>
 
 	<Stack>
-		<h3 class="h3">Token Select</h3>
+		<h3 class="text-title">Token Select</h3>
 		<Stack class="gap-2">
 			<Label for="token-select">Select a token</Label>
 			<TokenSelect

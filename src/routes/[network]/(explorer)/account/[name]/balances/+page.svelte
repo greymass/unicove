@@ -6,7 +6,7 @@
 	import { getContext } from 'svelte';
 	import * as m from '$lib/paraglide/messages';
 	import { TokenBalanceValue, ZeroUnits } from '$lib/types/token.js';
-	import Button from '$lib/components/button/button.svelte';
+	import { Button, Table, TD, TH, TR } from 'unicove-components';
 	import { Currencies } from '$lib/types/currencies.js';
 
 	const { data } = $props();
@@ -53,63 +53,62 @@
 </script>
 
 {#snippet tableAction(asset: Asset)}
-	<td class="text-right">
+	<TD class="text-right">
 		<Button variant="text" href="/{data.network}/send?quantity={asset}">
 			{m.common_send()}
 		</Button>
-	</td>
+	</TD>
 {/snippet}
 
 {#if balances.length}
-	<table class="table-styles">
-		<thead>
-			<tr>
-				<th>{m.common_token()}</th>
-				<th class="text-right">{m.common_amount()}</th>
-				<th class="text-right">{m.common_value()} ({context.settings.data.displayCurrency})</th>
-				{#if isCurrentUser}
-					<th></th>
-				{/if}
-			</tr>
-		</thead>
-		<tbody>
-			{#each balances as tokenBalance}
-				<tr>
-					<td>
-						<div class="flex items-center gap-3">
-							<div class="flex h-6 w-6 items-center justify-center rounded-full bg-black">
-								{#if tokenBalance.token.media?.logo?.dark}
-									<img
-										class="h-5 w-5"
-										src={tokenBalance.token.media?.logo?.dark}
-										alt={`${tokenBalance.token.name} Logo`}
-									/>
-								{/if}
-							</div>
-							<a
-								href={`/${context.network}/token/${tokenBalance.token.contract}/${tokenBalance.token.name}`}
-							>
-								{tokenBalance.token.name}
-							</a>
-						</div>
-					</td>
-					<td class="text-right">
-						<AssetText value={tokenBalance.balance} />
-					</td>
-					<td class="text-right">
-						{#if tokenBalance.value.units.gt(ZeroUnits)}
-							<AssetText value={tokenBalance.value} />
-						{/if}
-					</td>
-					{#if isCurrentUser}
-						{#if !tokenBalance.locked}
-							{@render tableAction(tokenBalance.balance)}
-						{/if}
+	<Table>
+		{#snippet thead()}
+			<TH>{m.common_token()}</TH>
+			<TH class="text-right">{m.common_amount()}</TH>
+			<TH class="text-right">{m.common_value()} ({context.settings.data.displayCurrency})</TH>
+			{#if isCurrentUser}
+				<TH></TH>
+			{/if}
+		{/snippet}
+
+		{#each balances as tokenBalance}
+			<TR>
+				<TD>
+					<div class="flex items-center gap-3">
+						<picture class="size-5">
+							{#if tokenBalance.token.media?.logo?.dark}
+								<img
+									class="size-full object-contain"
+									src={tokenBalance.token.media?.logo?.dark}
+									alt={`${tokenBalance.token.name} Logo`}
+								/>
+							{:else}
+								<div class="bg-surface-container size-5 rounded-full"></div>
+							{/if}
+						</picture>
+						<a
+							href={`/${context.network}/token/${tokenBalance.token.contract}/${tokenBalance.token.name}`}
+						>
+							{tokenBalance.token.name}
+						</a>
+					</div>
+				</TD>
+				<TD class="text-right">
+					<AssetText value={tokenBalance.balance} />
+				</TD>
+				<TD class="text-right">
+					{#if tokenBalance.value.units.gt(ZeroUnits)}
+						<AssetText value={tokenBalance.value} />
 					{/if}
-				</tr>
-			{/each}
-		</tbody>
-	</table>
+				</TD>
+				{#if isCurrentUser}
+					{#if !tokenBalance.locked}
+						{@render tableAction(tokenBalance.balance)}
+					{/if}
+				{/if}
+			</TR>
+		{/each}
+	</Table>
 {:else}
 	<p>{m.common_no_balances()}</p>
 {/if}

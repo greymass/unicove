@@ -8,7 +8,7 @@
 	} from '$lib/paraglide/runtime.js';
 	import { createSelect, melt, type CreateSelectProps } from '@melt-ui/svelte';
 	import { fade } from 'svelte/transition';
-	import ChevronDown from 'lucide-svelte/icons/chevron-down';
+	import ChevronDown from '@lucide/svelte/icons/chevron-down';
 	import * as m from '$lib/paraglide/messages';
 	import { getContext } from 'svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';

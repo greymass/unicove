@@ -1,7 +1,7 @@
 <script lang="ts">
-	import Stack from '$lib/components/layout/stack.svelte';
-	import TextInput from '$lib/components/input/text.svelte';
-	import Table from '$lib/components/contract/table.svelte';
+	import { Stack } from 'unicove-components';
+	import { TextInput } from 'unicove-components';
+	import ContractTable from '$lib/components/contract/table.svelte';
 
 	let filter = $state('');
 	const { data } = $props();
@@ -17,7 +17,7 @@
 	<TextInput bind:value={filter} autofocus placeholder="Filter tables..." />
 	<ul class="grid grid-cols-[auto_1fr] gap-4 overflow-x-auto">
 		{#each filteredTables as table}
-			<Table abi={data.abi} contract={data.contract} {table} />
+			<ContractTable abi={data.abi} contract={data.contract} {table} />
 		{:else}
 			{#if filter}
 				<p>No actions match filter</p>

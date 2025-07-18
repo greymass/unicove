@@ -13,7 +13,9 @@
 </script>
 
 <div class="p-2">
-	<h2 class="h2 text-2xl">{m.common_actions()} ({data.transaction.transaction.actions.length})</h2>
+	<h2 class="text-headline text-2xl">
+		{m.common_actions()} ({data.transaction.transaction.actions.length})
+	</h2>
 	<p>{m.common_transaction_actions_description()}</p>
 </div>
 

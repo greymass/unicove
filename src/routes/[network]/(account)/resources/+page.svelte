@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { Int64 } from '@wharfkit/antelope';
 	import { getContext } from 'svelte';
-	import { CpuIcon, WifiIcon, HardDrive } from 'lucide-svelte';
+	import { CpuIcon, WifiIcon, HardDrive } from '@lucide/svelte';
 
-	import Stack from '$lib/components/layout/stack.svelte';
-	import Button from '$lib/components/button/button.svelte';
+	import { Stack } from 'unicove-components';
+	import { Button } from 'unicove-components';
 	import CpuAndNetResource from '$lib/components/elements/cpunetresource.svelte';
 	import RamResource from '$lib/components/elements/ramresource.svelte';
 	import AccountBalance from '$lib/components/card/accountbalance.svelte';
@@ -97,7 +97,7 @@
 	</Stack>
 	<Stack class="hidden max-w-lg flex-1 gap-4">
 		<Stack class="gap-4 px-5 py-3">
-			<h3 class="h3">{chainName} Resources: A Simple Explanation</h3>
+			<h3 class="text-title">{chainName} Resources: A Simple Explanation</h3>
 			<p>
 				The {chainName} blockchain uses three main resources: CPU, NET, and RAM. Users need these resources
 				to interact with smart contracts and perform actions on the {chainName} blockchain. Managing
@@ -115,7 +115,7 @@
 						{/if}
 					</div>
 					<div class="space-y-4 px-5 py-3">
-						<h3 class="h5 text-on-surface">{explanation.title}</h3>
+						<h3 class="text-title text-on-surface">{explanation.title}</h3>
 						<ul class="space-y-1">
 							{#each explanation.descriptions as desc}
 								<li>- {desc}</li>

@@ -1,13 +1,13 @@
 <script lang="ts">
-	import ShieldQuestion from 'lucide-svelte/icons/shield-question';
-	import Info from 'lucide-svelte/icons/info';
-	import { Stack } from '$lib/components/layout';
+	import ShieldQuestion from '@lucide/svelte/icons/shield-question';
+	import Info from '@lucide/svelte/icons/info';
+	import { Stack } from 'unicove-components';
 	import Tooltip from '$lib/components/tooltip/tooltip.svelte';
 </script>
 
 <Stack id="tooltips" class="space-y-8">
 	<div>
-		<h2 class="h2 mb-4">Tooltips</h2>
+		<h2 class="text-headline mb-4">Tooltips</h2>
 		<p>Tooltips provide additional information when hovering over an element.</p>
 	</div>
 
