@@ -61,6 +61,7 @@
 		"@storyblok/svelte": "^5.0.2",
 		"@tailwindcss/container-queries": "^0.1.1",
 		"@wharfkit/account-creation-plugin-metamask": "^1.2.1",
+		"@wharfkit/antelope": "^1.2.0-rc1",
 		"@wharfkit/common": "^1.5.0",
 		"@wharfkit/contract": "^1.2.1",
 		"@wharfkit/hyperion": "^1.0.4",
