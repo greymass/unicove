@@ -27,6 +27,7 @@ import { TransactPluginStatusEmitter } from '$lib/wharf/plugins/status';
 
 import { chains, getChainDefinitionFromParams } from '$lib/wharf/chains';
 import { isENVTrue } from '$lib/utils/strings';
+import { browser } from '$app/environment';
 
 export const baseWalletPlugins: WalletPlugin[] = [];
 
@@ -34,8 +35,18 @@ if (isENVTrue(PUBLIC_WALLET_ANCHOR)) {
 	baseWalletPlugins.push(new WalletPluginAnchor());
 }
 
-if (isENVTrue(PUBLIC_WALLET_CLOUDWALLET)) {
-	baseWalletPlugins.push(new WalletPluginCloudWallet());
+if (isENVTrue(PUBLIC_WALLET_CLOUDWALLET) && browser) {
+	baseWalletPlugins.push(
+		new WalletPluginCloudWallet({
+			mobileAppConnectConfig: {
+				dappInfo: {
+					name: 'Unicove',
+					description: 'WAX Web Wallet and Block Explorer',
+					logoUrl: 'https://unicove.com/apple-touch-icon.png'
+				}
+			}
+		})
+	);
 }
 
 if (isENVTrue(PUBLIC_WALLET_IMTOKEN)) {
