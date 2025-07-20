@@ -8,16 +8,16 @@
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import Action from '$lib/components/contract/action.svelte';
-	import Button from '$lib/components/button/button.svelte';
-	import Card from '$lib/components/layout/box/card.svelte';
-	import Code from '$lib/components/code.svelte';
-	import Label from '$lib/components/input/label.svelte';
-	import TextInput from '$lib/components/input/text.svelte';
-	import CopyButton from '$lib/components/button/copy.svelte';
+	import { Button } from 'unicove-components';
+	import { Card } from 'unicove-components';
+	import { Code } from 'unicove-components';
+	import { Label } from 'unicove-components';
+	import { TextInput } from 'unicove-components';
+	import { CopyButton } from 'unicove-components';
 
 	import Fields from './fields.svelte';
 	import { MultiCard } from '$lib/components/layout';
-	import Checkbox from '$lib/components/input/checkbox.svelte';
+	import { Checkbox } from 'unicove-components';
 	import type { TransactResult } from '@wharfkit/session';
 	import TransactSummary from '$lib/components/transact/summary.svelte';
 	import TransactError from '$lib/components/transact/error.svelte';
@@ -206,15 +206,18 @@
 
 <MultiCard>
 	{#snippet leftColumn()}
-		<Card>
-			{#if transactResult && transactResult.resolved}
+		{#if transactResult && transactResult.resolved}
+			<Card>
 				<TransactSummary transactionId={transactResult.resolved.transaction.id} />
 				<Button onclick={clear}>Clear Results</Button>
-			{:else if error}
+			</Card>
+		{:else if error}
+			<Card>
 				<TransactError {error} />
 				<Button onclick={clear}>Clear Results</Button>
-			{:else}
-				<h4 class="h4">Perform Action</h4>
+			</Card>
+		{:else}
+			<Card title="Perform Action">
 				{#if ready}
 					<Fields abi={data.abi} fields={data.struct.fields} bind:state={actionInputs} />
 				{/if}
@@ -235,13 +238,12 @@
 						<Label for="pageload">Trigger when page loads?</Label>
 					</fieldset>
 				{/if}
-			{/if}
-		</Card>
+			</Card>
+		{/if}
 	{/snippet}
 
 	{#snippet rightColumn()}
-		<Card>
-			<h4 class="h4">Action Data</h4>
+		<Card title="Action Data">
 			{#if decoded}
 				<Code>{JSON.stringify(decoded, null, 2)}</Code>
 			{:else}
@@ -273,15 +275,13 @@
 </MultiCard>
 
 {#if readonlyError}
-	<Card>
-		<h4 class="h4">Error during readonly call...</h4>
+	<Card title="Error during readonly call...">
 		<Code>{JSON.stringify(readonlyError, null, 2)}</Code>
 	</Card>
 {/if}
 
 {#if readonlyResult}
-	<Card>
-		<h4 class="h4">API Response</h4>
+	<Card title="API Response">
 		<Code>{JSON.stringify(readonlyResult, null, 2)}</Code>
 	</Card>
 {/if}
@@ -289,14 +289,12 @@
 {#if transactResult}
 	{#if transactResult.response}
 		{#if transactResult.response.processed && transactResult.response.processed.action_traces}
-			<Card>
-				<h4 class="h4">Action Traces</h4>
+			<Card title="Action Traces">
 				<Code>{JSON.stringify(transactResult.response.processed.action_traces, null, 2)}</Code>
 			</Card>
 		{/if}
 
-		<Card>
-			<h4 class="h4">API Response</h4>
+		<Card title="API Response">
 			<Code>{JSON.stringify(transactResult.response, null, 2)}</Code>
 		</Card>
 	{/if}

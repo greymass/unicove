@@ -7,9 +7,9 @@
 	import ContractActionOverview from '$lib/components/contract/action/overview.svelte';
 	import ContractActionParams from '$lib/components/contract/action/params.svelte';
 	import ContractActionResponse from '$lib/components/contract/action/response.svelte';
-	import Code from '$lib/components/code.svelte';
-	import Switcher from '../layout/switcher.svelte';
-	import Stack from '../layout/stack.svelte';
+	import { Code } from 'unicove-components';
+	import { Switcher } from 'unicove-components';
+	import { Stack } from 'unicove-components';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -31,7 +31,7 @@
 		<ContractActionOverview {action} {contract} />
 	</div>
 
-	<Switcher class="gap-6">
+	<Switcher class="items-start gap-6">
 		<Stack>
 			{#if struct}
 				<ContractActionParams {abi} {contract} {struct} />

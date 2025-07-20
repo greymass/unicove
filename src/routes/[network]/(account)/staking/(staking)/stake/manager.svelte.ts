@@ -2,7 +2,7 @@ import { Action, Asset } from '@wharfkit/antelope';
 import type { AccountState } from '$lib/state/client/account.svelte';
 import type { NetworkState } from '$lib/state/network.svelte';
 import type { WharfState } from '$lib/state/client/wharf.svelte';
-import AssetInput from '$lib/components/input/asset.svelte';
+import { AssetInput } from 'unicove-components';
 
 import {
 	defaultQuantity,

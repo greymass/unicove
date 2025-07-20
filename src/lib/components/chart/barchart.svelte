@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import { Chart } from 'chart.js';
 	import 'chart.js/auto';
-	import { Card } from '$lib/components/layout';
+	import { Card } from 'unicove-components';
 	import * as m from '$lib/paraglide/messages';
 
 	interface Props {
@@ -67,7 +67,7 @@
 </script>
 
 <Card>
-	<p class="h3 font-semibold">{title}</p>
+	<p class="text-title font-semibold">{title}</p>
 	<canvas bind:this={ctx}></canvas>
 	<hr class="bg-outline h-px border-0" />
 	<div class="flex items-center justify-between font-medium">

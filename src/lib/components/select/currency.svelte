@@ -3,8 +3,8 @@
 	import type { ChangeFn } from '@melt-ui/svelte/internal/helpers';
 
 	import { type MarketContext, type UnicoveContext } from '$lib/state/client.svelte';
-	import Select from '$lib/components/select/select.svelte';
-	import type { ExtendedSelectOption } from '$lib/components/select/types.js';
+	import { Select } from 'unicove-components';
+	import type { ExtendedSelectOption } from 'unicove-components';
 	import { SupportedCurrencies, SupportedCurrenciesList } from '$lib/types/currencies.js';
 
 	const context = getContext<UnicoveContext>('state');

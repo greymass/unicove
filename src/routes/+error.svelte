@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { Stack } from '$lib/components/layout';
+	import { Stack } from 'unicove-components';
 	import Generic404 from '$lib/components/errors/generic.svelte';
-	import Button from '$lib/components/button/button.svelte';
+	import { Button } from 'unicove-components';
 </script>
 
 <div class="mx-auto max-w-prose">
@@ -10,7 +10,7 @@
 		<div class=" *:object-fit mx-auto max-w-prose *:size-full">
 			<Generic404 />
 		</div>
-		<h1 class="h2">
+		<h1 class="text-headline">
 			{#if page.error?.message}
 				{page.error.message}
 			{:else}

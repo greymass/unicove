@@ -26,7 +26,7 @@ import type {
 } from './types';
 import type { AccountState } from '$lib/state/client/account.svelte';
 import type { UnicoveContext } from '$lib/state/client.svelte';
-import type { ExtendedSelectOption } from '$lib/components/select/types';
+import type { ExtendedSelectOption } from 'unicove-components';
 
 import * as m from '$lib/paraglide/messages';
 

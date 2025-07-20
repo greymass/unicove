@@ -1,10 +1,11 @@
 <script lang="ts">
-	import { Stack, MultiCard, Switcher } from '$lib/components/layout';
+	import { MultiCard } from '$lib/components/layout';
+	import { Stack, Switcher, Table, TD, TH, TR } from 'unicove-components';
 	import TransactionText from '$lib/components/elements/transaction.svelte';
 	import AccountText from '$lib/components/elements/account.svelte';
-	import Button from '$lib/components/button/button.svelte';
-	import { ArrowLeftRight, ArrowRight, ArrowLeft } from 'lucide-svelte';
-	import { DD, DL, DLRow } from '$lib/components/descriptionlist/index.js';
+	import { Button } from 'unicove-components';
+	import { ArrowLeftRight, ArrowRight, ArrowLeft } from '@lucide/svelte';
+	import { DD, DL, DLRow } from 'unicove-components';
 	import { goto } from '$lib/utils';
 	import * as m from '$lib/paraglide/messages';
 
@@ -38,7 +39,7 @@
 		{#if data.block.transactions}
 			{@const transactions = data.block.transactions}
 			<Stack id="transactions">
-				<h2 class="h3 flex items-center gap-2">
+				<h2 class="text-title flex items-center gap-2">
 					<ArrowLeftRight class="size-5" />
 					{transactions.length}
 					{transactions.length === 1
@@ -47,30 +48,27 @@
 				</h2>
 
 				{#if transactions.length}
-					<table class="table-styles">
-						<thead>
-							<tr>
-								<th>{m.common_transaction()}</th>
-								<th class="text-right">{m.common_actions()}</th>
-								<th class="text-right">{m.common_cpu_us()}</th>
-								<th class="text-right">{m.common_net_bytes()}</th>
-							</tr>
-						</thead>
-						<tbody>
-							{#each transactions as transaction}
-								{#if transaction}
-									{@const txID =
-										typeof transaction.trx === 'string' ? transaction.trx : transaction.trx.id}
-									<tr>
-										<td><TransactionText id={txID} /></td>
-										<td class="text-right">{transaction.trx.transaction?.actions.length || 0}</td>
-										<td class="text-right">{transaction.cpu_usage_us}</td>
-										<td class="text-right">{Number(transaction.net_usage_words) * 8}</td>
-									</tr>
-								{/if}
-							{/each}
-						</tbody>
-					</table>
+					<Table>
+						{#snippet thead()}
+							<TH>{m.common_transaction()}</TH>
+							<TH class="text-right">{m.common_actions()}</TH>
+							<TH class="text-right">{m.common_cpu_us()}</TH>
+							<TH class="text-right">{m.common_net_bytes()}</TH>
+						{/snippet}
+
+						{#each transactions as transaction}
+							{#if transaction}
+								{@const txID =
+									typeof transaction.trx === 'string' ? transaction.trx : transaction.trx.id}
+								<TR>
+									<TD><TransactionText id={txID} /></TD>
+									<TD class="text-right">{transaction.trx.transaction?.actions.length || 0}</TD>
+									<TD class="text-right">{transaction.cpu_usage_us}</TD>
+									<TD class="text-right">{Number(transaction.net_usage_words) * 8}</TD>
+								</TR>
+							{/if}
+						{/each}
+					</Table>
 				{:else}
 					<p>{m.common_no_transactions()}</p>
 				{/if}
@@ -80,7 +78,7 @@
 
 	{#snippet rightColumn()}
 		<Stack class="gap-4" id="details">
-			<h2 class="h3">{m.block_page_details()}</h2>
+			<h2 class="text-title">{m.block_page_details()}</h2>
 
 			<DL>
 				<DLRow title={m.common_block_number()}>

@@ -4,7 +4,7 @@
 	import * as m from '$lib/paraglide/messages';
 	import AccountElement from '$lib/components/elements/account.svelte';
 	import Row from '../components/row.svelte';
-	import Chip from '$lib/components/chip.svelte';
+	import { Chip } from 'unicove-components';
 	import { Int64, Name } from '@wharfkit/antelope';
 	import { ZeroUnits } from '$lib/types/token';
 
