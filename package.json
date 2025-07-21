@@ -18,9 +18,9 @@
 		"test": "bun test"
 	},
 	"devDependencies": {
-		"@inlang/paraglide-js": "^1.11.3",
-		"@inlang/paraglide-sveltekit": "^0.11.5",
-		"@inlang/paraglide-vite": "^1.2.76",
+		"@inlang/paraglide-js": "^1.11.8",
+		"@inlang/paraglide-sveltekit": "^0.16.1",
+		"@inlang/paraglide-vite": "^1.4.0",
 		"@melt-ui/pp": "^0.3.2",
 		"@melt-ui/svelte": "^0.83.0",
 		"@sveltejs/adapter-auto": "^5.0.0",
