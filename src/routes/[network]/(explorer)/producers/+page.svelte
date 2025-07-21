@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import { getProducersRecursive } from '../../api/producers/utils.js';
 	import * as SystemContract from '$lib/wharf/contracts/system';
-	import Chip from '$lib/components/chip.svelte';
+	import { Chip } from 'unicove-components';
 	import AccountLink from '$lib/components/elements/account.svelte';
 
 	const { data } = $props();
