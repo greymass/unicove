@@ -123,6 +123,17 @@ codegen/base:
 	make format
 
 .PHONY: clean
+clean: codegen/clean clean/node_modules clean/sveltekit
+
+.PHONY: clean/node_modules
+clean/node_modules:
+	rm -rf node_modules
+
+.PHONY: clean/sveltekit
+clean/sveltekit:
+	rm -rf .svelte-kit
+
+.PHONY: codegen/clean
 codegen/clean:
 	rm -rf $(CONTRACTS)/*.ts
 
