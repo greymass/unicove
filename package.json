@@ -55,7 +55,7 @@
 	"type": "module",
 	"dependencies": {
 		"@accuser/svelte-plausible-analytics": "^1.0.0",
-		"@coinbase/cbpay-js": "^2.4.0",
+		"@coinbase/cdp-sdk": "^1.27.0",
 		"@lucide/svelte": "^0.525.0",
 		"@storyblok/svelte": "^5.0.2",
 		"@wharfkit/account-creation-plugin-metamask": "^1.2.1",
