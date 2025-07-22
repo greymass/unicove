@@ -48,6 +48,11 @@
 				text: m.common_resources(),
 				active: pathname[3] === 'resources'
 			});
+			items.push({
+				href: `/${network}/tools`,
+				text: m.common_tools(),
+				active: pathname[3] === 'tools'
+			});
 		}
 
 		if (context.settings.data.debugMode) {
