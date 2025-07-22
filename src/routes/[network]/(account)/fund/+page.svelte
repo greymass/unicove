@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 	import { Card } from 'unicove-components';
-	import { Code } from 'unicove-components';
 	import binanceLogo from '$lib/assets/exchanges/binance.webp?enhanced';
 	import coinbaseIconLogo from '$lib/assets/exchanges/coinbase-icon.webp?enhanced';
 	import krakenLogo from '$lib/assets/exchanges/kraken.webp?enhanced';
@@ -11,13 +10,13 @@
 	import upbitLogo from '$lib/assets/exchanges/upbit.webp?enhanced';
 	import kucoinLogo from '$lib/assets/exchanges/kucoin.webp?enhanced';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import { initOnRamp, type CBPayInstanceType, type InitOnRampParams } from '@coinbase/cbpay-js';
 	import { Button } from 'unicove-components';
 	import * as m from '$lib/paraglide/messages';
 	import { DL, DLRow, DD } from 'unicove-components';
 	import coinbaseLogo from '$lib/assets/exchanges/coinbase.svg';
 	import { Stack } from 'unicove-components';
 	import { Cluster } from 'unicove-components';
+	import { CoinbaseOnRamp } from './onramps/coinbase.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -77,59 +76,14 @@
 		}
 	] as const;
 
-	const coinbaseOptions: InitOnRampParams | undefined = $derived.by(() => {
-		if (!context.network.config.coinbase) {
-			return;
-		}
-		return {
-			appId: context.network.config.coinbase.appid,
-			widgetParameters: {
-				addresses: {
-					[String(context.account?.name)]: ['eosio']
-				},
-				assets: context.network.config.coinbase.assets
-			},
-			onSuccess: () => {},
-			experienceLoggedIn: 'popup',
-			experienceLoggedOut: 'popup',
-			closeOnExit: true,
-			closeOnSuccess: true
-		};
-	});
-
-	let coinbaseInstance: CBPayInstanceType | null = $state(null);
-
-	$effect(() => {
-		if (coinbaseOptions && context.account?.name) {
-			initOnRamp(coinbaseOptions, (error, instance) => {
-				if (error) {
-					console.error(error);
-					return;
-				}
-				if (instance) {
-					coinbaseInstance = instance;
-				}
-			});
-		} else {
-			coinbaseInstance = null;
-		}
-	});
-
-	function handleCoinbaseOnRamp() {
-		if (coinbaseInstance) {
-			coinbaseInstance.open();
-		} else {
-			console.error('Coinbase instance not found');
-			alert(m.coinbase_service_unavailable());
-		}
-	}
+	const coinbaseOnRamp = new CoinbaseOnRamp(context);
 
 	function handleOnRamp(service: (typeof ON_RAMP_PROVIDERS)[number]['id']) {
 		if (!context.account) {
 			return;
 		}
 		if (service === 'coinbase') {
-			return handleCoinbaseOnRamp();
+			coinbaseOnRamp.open();
 		}
 		throw new Error(`${service} on-ramp has not been implemented`);
 	}
@@ -172,8 +126,16 @@
 						{#if !context.account}
 							<p class="text-sm">{m.common_must_be_logged_in()}</p>
 						{:else}
-							<Button class="w-full" onclick={() => handleOnRamp(service.id)}
-								>{service.action.text}</Button
+							<Button
+								class="w-full"
+								disabled={coinbaseOnRamp.isLoading}
+								onclick={() => handleOnRamp(service.id)}
+							>
+								{#if coinbaseOnRamp.isLoading}
+									{m.common_loading()}
+								{:else}
+									{service.action.text}
+								{/if}</Button
 							>
 						{/if}
 					</div>
@@ -213,14 +175,4 @@
 			{/each}
 		</ul>
 	</Stack>
-
-	{#if context.settings.data.debugMode}
-		<h3 class="text-title">{m.common_debugging()}</h3>
-		<Code>
-			{JSON.stringify(coinbaseOptions, null, 2)}
-		</Code>
-		<Code>
-			{JSON.stringify(coinbaseInstance, null, 2)}
-		</Code>
-	{/if}
 </Stack>
