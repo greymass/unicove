@@ -1,10 +1,54 @@
 import { json, error as svelteKitError } from '@sveltejs/kit';
-import { generateJwt } from '@coinbase/cdp-sdk/auth';
+import * as jose from 'jose';
 import type { RequestHandler } from './$types';
 import { COINBASE_API_KEY_NAME, COINBASE_API_KEY_SECRET } from '$env/static/private';
+import { randomBytes } from 'crypto';
 
 const ONRAMP_TOKEN_HOST = 'api.developer.coinbase.com';
 const ONRAMP_TOKEN_PATH = '/onramp/v1/token';
+
+// We are manually generating the JWT instead of using the cdp-sdk as the latter includes a ton of unnecessary dependencies
+async function generateCoinbaseJwt() {
+	const decodedSecret = Buffer.from(COINBASE_API_KEY_SECRET, 'base64');
+	if (decodedSecret.length !== 64) {
+		throw new Error(
+			'Invalid Coinbase API Secret length. Expected 64 bytes, but got ' + decodedSecret.length
+		);
+	}
+	const privateKey = decodedSecret.subarray(0, 32);
+	const publicKey = decodedSecret.subarray(32, 64);
+
+	const jwk = {
+		crv: 'Ed25519',
+		kty: 'OKP',
+		d: privateKey.toString('base64url'),
+		x: publicKey.toString('base64url')
+	};
+
+	const signingKey = await jose.importJWK(jwk, 'EdDSA');
+
+	const uri = `POST ${ONRAMP_TOKEN_HOST}${ONRAMP_TOKEN_PATH}`;
+
+	const nonce = randomBytes(16).toString('hex');
+
+	const jwt = await new jose.SignJWT({
+		sub: COINBASE_API_KEY_NAME,
+		iss: 'cdp',
+		uri: uri
+	})
+		.setProtectedHeader({
+			alg: 'EdDSA',
+			typ: 'JWT',
+			kid: COINBASE_API_KEY_NAME,
+			nonce: nonce
+		})
+		.setIssuedAt()
+		.setExpirationTime('2m') // Token is valid for 2 minutes
+		.setNotBefore('0s')
+		.sign(signingKey);
+
+	return jwt;
+}
 
 export const POST: RequestHandler = async ({ request }) => {
 	const { address, assets } = await request.json();
@@ -19,13 +63,7 @@ export const POST: RequestHandler = async ({ request }) => {
 	}
 
 	try {
-		const jwt = await generateJwt({
-			apiKeyId: COINBASE_API_KEY_NAME,
-			apiKeySecret: COINBASE_API_KEY_SECRET,
-			requestMethod: 'POST',
-			requestHost: ONRAMP_TOKEN_HOST,
-			requestPath: ONRAMP_TOKEN_PATH
-		});
+		const jwt = await generateCoinbaseJwt();
 
 		const response = await fetch(`https://${ONRAMP_TOKEN_HOST}${ONRAMP_TOKEN_PATH}`, {
 			method: 'POST',
