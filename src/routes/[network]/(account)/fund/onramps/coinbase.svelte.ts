@@ -33,8 +33,9 @@ export class CoinbaseOnRamp {
 		this.isLoading = true;
 
 		try {
+			const network = this.context.network.toString();
 			// Get the unique session token
-			const response = await fetch(`api/onramp/coinbase/session`, {
+			const response = await fetch(`/${network}/api/onramp/coinbase/session`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
