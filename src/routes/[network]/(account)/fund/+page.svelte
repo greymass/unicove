@@ -20,15 +20,18 @@
 
 	const context = getContext<UnicoveContext>('state');
 
+	const coinbaseOnRamp = new CoinbaseOnRamp(context);
+
 	const ON_RAMP_PROVIDERS = [
 		{
 			id: 'coinbase',
 			logo: coinbaseLogo,
+			isLoading: coinbaseOnRamp.isLoading,
 			action: {
 				text: m.buy_token_with_coinbase({
 					token: context.network.token.symbol.name
 				}),
-				handler: 'coinbase'
+				handler: () => coinbaseOnRamp.open()
 			}
 		}
 	] as const;
@@ -75,18 +78,6 @@
 			url: 'https://kucoin.com'
 		}
 	] as const;
-
-	const coinbaseOnRamp = new CoinbaseOnRamp(context);
-
-	function handleOnRamp(service: (typeof ON_RAMP_PROVIDERS)[number]['id']) {
-		if (!context.account) {
-			return;
-		}
-		if (service === 'coinbase') {
-			coinbaseOnRamp.open();
-		}
-		throw new Error(`${service} on-ramp has not been implemented`);
-	}
 </script>
 
 <Stack class="mt-6 gap-12">
@@ -98,11 +89,11 @@
 			})}
 		</p>
 		<Cluster tag="ul">
-			{#each ON_RAMP_PROVIDERS as service}
+			{#each ON_RAMP_PROVIDERS as provider}
 				<Card tag="li" class="max-w-sm p-6">
 					<div>
 						<div class="mb-4 flex items-center justify-center">
-							<img src={service.logo} alt={service.id} class="h-24 w-3/5 object-contain" />
+							<img src={provider.logo} alt={provider.id} class="h-24 w-3/5 object-contain" />
 						</div>
 						<DL>
 							{#if context.network.config.coinbase}
@@ -128,13 +119,13 @@
 						{:else}
 							<Button
 								class="w-full"
-								disabled={coinbaseOnRamp.isLoading}
-								onclick={() => handleOnRamp(service.id)}
+								disabled={provider.isLoading}
+								onclick={provider.action.handler}
 							>
-								{#if coinbaseOnRamp.isLoading}
+								{#if provider.isLoading}
 									{m.common_loading()}
 								{:else}
-									{service.action.text}
+									{provider.action.text}
 								{/if}</Button
 							>
 						{/if}
