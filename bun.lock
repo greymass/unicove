@@ -8,7 +8,7 @@
         "@coinbase/cbpay-js": "^2.4.0",
         "@lucide/svelte": "^0.525.0",
         "@storyblok/svelte": "^5.0.2",
-        "@wharfkit/account-creation-plugin-metamask": "^1.2.1",
+        "@wharfkit/account-creation-plugin-metamask": "^1.3.0",
         "@wharfkit/common": "^1.5.0",
         "@wharfkit/contract": "^1.2.1",
         "@wharfkit/hyperion": "^1.0.4",
@@ -557,7 +557,7 @@
 
     "@wharfkit/abicache": ["@wharfkit/abicache@1.2.2", "", { "dependencies": { "@wharfkit/antelope": "^1.0.2", "@wharfkit/signing-request": "^3.1.0", "pako": "^2.0.4", "tslib": "^2.1.0" } }, "sha512-yOsYz2qQpQy7Nb8XZj62pZqp8YnmWDqFlrenYksBb9jl+1aWIpFhWd+14VEez4tUAezRH4UWW+w1SX5vhmUY9A=="],
 
-    "@wharfkit/account-creation-plugin-metamask": ["@wharfkit/account-creation-plugin-metamask@1.3.0-rc1", "", { "dependencies": { "@greymass/create-account": "^1.1.0", "@metamask/providers": "^17.0.0", "tslib": "^2.1.0" }, "peerDependencies": { "@wharfkit/session": "^1.4.0" } }, "sha512-Gc3ympZUYgXopaihDHbI+6GNuGz/F0dkDFpqY5f24Ezcg/zreFc2lnbu9Pu1/E6bWIxTYfzEnrwbXsqYXfKthQ=="],
+    "@wharfkit/account-creation-plugin-metamask": ["@wharfkit/account-creation-plugin-metamask@1.3.0", "", { "dependencies": { "@greymass/create-account": "^1.1.0", "@metamask/providers": "^17.0.0", "tslib": "^2.1.0" }, "peerDependencies": { "@wharfkit/session": "^1.4.0" } }, "sha512-7I/Gw39dUbUvy9z4Qktc9HtEnymYJIT1p1ilEiLdc116iEdufhJfB7YRT1lpdqRHS5hQqVzgJdrZJIYg4TyBBw=="],
 
     "@wharfkit/antelope": ["@wharfkit/antelope@1.0.13", "", { "dependencies": { "bn.js": "^4.11.9", "brorand": "^1.1.0", "elliptic": "^6.5.4", "hash.js": "^1.0.0", "pako": "^2.1.0", "tslib": "^2.0.3" } }, "sha512-f4O5O8+6Bd5BHpMUHTmlWQmlhX5xYb4AfzT2NJweyqIPqQOstm+aInF42AtUhSALDa8fvoY80YZoqwM0L8TUyw=="],
 
