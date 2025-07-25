@@ -1,7 +1,6 @@
 <script lang="ts">
-	import Button from '$lib/components/button/button.svelte';
-	import { Stack } from '$lib/components/layout';
 	import * as m from '$lib/paraglide/messages';
+	import { Stack, Button } from 'unicove-components';
 
 	interface Props {
 		connect: () => Promise<void>;

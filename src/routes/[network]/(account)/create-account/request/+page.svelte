@@ -1,22 +1,19 @@
 <script lang="ts">
 	import { Action, Name, PublicKey } from '@wharfkit/antelope';
+	import { PlaceholderAuth, PlaceholderName, SigningRequest } from '@wharfkit/session';
 	import { getContext } from 'svelte';
 	import { Debounced, FiniteStateMachine } from 'runed';
 	import zlib from 'pako';
 	import * as m from '$lib/paraglide/messages';
 
 	import { preventDefault } from '$lib/utils';
-	import Label from '$lib/components/input/label.svelte';
-	import NameInput from '$lib/components/input/name.svelte';
 	import MetaMaskRequired from '$lib/components/wallets/metamask/required.svelte';
-	import { SingleCard, Stack } from '$lib/components/layout';
-	import Button from '$lib/components/button/button.svelte';
+	import { SingleCard } from '$lib/components/layout';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import Code from '$lib/components/code.svelte';
-	import { PlaceholderAuth, PlaceholderName, SigningRequest } from '@wharfkit/session';
 	import { requestPublicKeys, requestSnap } from '$lib/metamask-snap';
 	import { goto } from '$app/navigation';
 	import { Types as RAMTypes } from '$lib/types/ram';
+	import { Label, NameInput, Button, Code, Stack } from 'unicove-components';
 
 	const context = getContext<UnicoveContext>('state');
 

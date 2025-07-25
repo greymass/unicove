@@ -1,7 +1,6 @@
 <script lang="ts">
+	import { Stack, Button } from 'unicove-components';
 	import * as m from '$lib/paraglide/messages';
-	import Button from '$lib/components/button/button.svelte';
-	import { Stack } from '$lib/components/layout';
 
 	interface Props {
 		networkName: string;

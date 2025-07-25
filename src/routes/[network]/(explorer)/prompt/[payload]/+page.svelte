@@ -9,6 +9,7 @@
 		SigningRequest,
 		type NameType
 	} from '@wharfkit/session';
+	import { Button, Label, TextInput, CopyButton, Code } from 'unicove-components';
 	import zlib from 'pako';
 
 	import { getActionSummaryComponent } from '$lib/components/summary/index.js';
@@ -17,12 +18,7 @@
 	import * as SystemContract from '$lib/wharf/contracts/system';
 	import AccountElement from '$lib/components/elements/account.svelte';
 	import ActionElement from '$lib/components/elements/action.svelte';
-	import Button from '$lib/components/button/button.svelte';
-	import Code from '$lib/components/code.svelte';
-	import CopyButton from '$lib/components/button/copy.svelte';
-	import Label from '$lib/components/input/label.svelte';
 	import SelectActionVariant from '$lib/components/select/actionvariant.svelte';
-	import TextInput from '$lib/components/input/text.svelte';
 	import TransactForm from '$lib/components/transact/form.svelte';
 	import type { ActionDisplayVariants } from '$lib/types.js';
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';

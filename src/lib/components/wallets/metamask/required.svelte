@@ -2,12 +2,12 @@
 	import { getContext, type Snippet } from 'svelte';
 
 	import { requestSnap } from '$lib/metamask-snap';
-	import Button from '$lib/components/button/button.svelte';
 	import MetaMaskSnap from '$lib/components/wallets/metamask/snap.svelte';
 	import type { MetaMaskState } from '$lib/state/metamask.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import MetaMaskInstall from '$lib/components/wallets/metamask/install.svelte';
 	import Box from '$lib/components/layout/box/box.svelte';
+	import { Button } from 'unicove-components';
 
 	const context = getContext<UnicoveContext>('state');
 
