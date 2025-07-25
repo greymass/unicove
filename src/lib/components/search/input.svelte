@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { getContext, type ComponentProps } from 'svelte';
 	import { createDialog, melt, type CreateDialogProps } from '@melt-ui/svelte';
-	import type TextInput from '../input/text.svelte';
+	import type { TextInput } from 'unicove-components';
 	import { preventDefault } from '$lib/utils';
 	import { goto } from '$lib/utils';
 	import { fade, scale } from 'svelte/transition';
@@ -15,13 +15,13 @@
 		isSearchKey,
 		isSearchTransaction
 	} from '$lib/state/search.svelte';
-	import SearchIcon from 'lucide-svelte/icons/search';
-	import X from 'lucide-svelte/icons/x';
-	import { Stack } from '$lib/components/layout';
+	import SearchIcon from '@lucide/svelte/icons/search';
+	import X from '@lucide/svelte/icons/x';
+	import { Stack } from 'unicove-components';
 	import { cn } from '$lib/utils';
 	import Result from './result.svelte';
 	import { browser } from '$app/environment';
-	import { ArrowRight } from 'lucide-svelte';
+	import { ArrowRight } from '@lucide/svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { SerializedSession } from '@wharfkit/session';
 

@@ -3,7 +3,7 @@ import { error } from '@sveltejs/kit';
 
 import * as m from '$lib/paraglide/messages.js';
 import type { LayoutLoad } from './$types';
-import { User } from 'lucide-svelte';
+import { User } from '@lucide/svelte';
 
 export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 	const { network } = await parent();

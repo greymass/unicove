@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { Stack } from '$lib/components/layout';
+	import { Stack } from 'unicove-components';
 	import Scheme from '$lib/components/select/scheme.svelte';
 </script>
 
 <Stack id="colors" class="">
-	<h2 class="h2 flex gap-3">
+	<h2 class="text-headline flex gap-3">
 		Color Roles
 
 		<Scheme />

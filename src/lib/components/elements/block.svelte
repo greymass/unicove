@@ -1,15 +1,13 @@
 <script lang="ts">
-	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import type { Int } from '@wharfkit/antelope';
+	import { Block, type BlockProps } from 'unicove-components';
 	import { getContext } from 'svelte';
+	import type { UnicoveContext } from '$lib/state/client.svelte';
 
-	const { network } = getContext<UnicoveContext>('state');
+	let props: Omit<BlockProps, 'href'> = $props();
 
-	let { number }: { number?: Int | number | string } = $props();
+	let { network } = getContext<UnicoveContext>('state');
+
+	const href = $derived(`/${network}/block/${String(props.number)}`);
 </script>
 
-{#if number}
-	<a class="text-primary hover:text-primary-hover" href="/{network}/block/{String(number)}">
-		{String(number)}
-	</a>
-{/if}
+<Block {...props} {href} />

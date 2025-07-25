@@ -26,6 +26,9 @@
 	import Unicovelogo from '$lib/assets/unicovelogo.svelte';
 	import MobileNavigation from '$lib/components/navigation/mobilenavigation.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte.js';
+	import { MetaMaskState } from '$lib/state/metamask.svelte.js';
+	import { checkForSnap } from '$lib/metamask-snap.js';
+	import { checkIsFlask, getSnapsProvider } from '@wharfkit/wallet-plugin-metamask';
 
 	let { children, data } = $props();
 
@@ -33,6 +36,7 @@
 	const settings = new SettingsState();
 	const wharf = new WharfState(settings);
 	const initialMarketValue = new MarketState(data.network, settings);
+	let metaMaskState = new MetaMaskState();
 	const initialNetworkValue = new NetworkValueState({
 		network: data.network,
 		market: initialMarketValue,
@@ -52,6 +56,9 @@
 		},
 		get history() {
 			return history;
+		},
+		get metamask() {
+			return metaMaskState;
 		},
 		get network() {
 			return data.network;
@@ -159,6 +166,18 @@
 		});
 	});
 
+	$effect(() => {
+		if (metaMaskState.isMetaMaskReady && metaMaskState.snapProvider !== null) {
+			metaMaskState.snapOrigin = data.network.snapOrigin;
+			checkIsFlask(metaMaskState.snapProvider).then((isFlask) => {
+				metaMaskState.isFlask = isFlask;
+				checkForSnap(metaMaskState).then((isInstalled) => {
+					metaMaskState.isInstalled = isInstalled;
+				});
+			});
+		}
+	});
+
 	// Number of ms between network updates
 	const ACCOUNT_UPDATE_INTERVAL = Number(PUBLIC_ACCOUNT_UPDATE_INTERVAL);
 	const NETWORK_UPDATE_INTERVAL = Number(PUBLIC_NETWORK_UPDATE_INTERVAL);
@@ -191,6 +210,11 @@
 		// Load markets based off chain
 		setMarket(data.network);
 		setMarketNetwork(data.network);
+
+		// Set the MetaMask snap provider on state
+		getSnapsProvider().then((provider) => {
+			metaMaskState.snapProvider = provider;
+		});
 
 		return () => {
 			clearInterval(accountInterval);
@@ -227,12 +251,10 @@
 
 <div
 	data-theme={data.network}
-	class="mx-auto grid h-full min-h-svh w-[calc(100%-2rem)] max-w-(--breakpoint-2xl) grid-cols-2 grid-rows-[min-content_minmax(0,1fr)] gap-y-6 pt-4 pb-12 sm:grid-cols-4 md:h-auto md:min-h-svh md:grid-cols-12 md:grid-rows-[min-content_auto_minmax(0,1fr)] md:gap-x-4 xl:w-[calc(100%-6rem)]"
+	class="mx-auto grid h-full min-h-svh w-[calc(100%-2rem)] max-w-(--breakpoint-2xl) grid-cols-2 grid-rows-[min-content_minmax(0,1fr)] gap-y-6 pt-4 pb-12 sm:grid-cols-4 md:h-auto md:min-h-svh md:grid-cols-12 md:grid-rows-[min-content_minmax(0,1fr)] md:gap-x-4 xl:w-[calc(100%-6rem)]"
 >
-	<aside
-		class="relative col-start-1 col-end-3 row-span-full row-start-1 hidden h-full grid-rows-subgrid md:grid"
-	>
-		<nav class="sticky top-4 row-span-2 grid max-h-svh grid-rows-subgrid content-start">
+	<aside class="relative col-start-1 col-end-3 row-span-full row-start-1 hidden h-full md:block">
+		<nav class="sticky top-4 row-span-2 flex h-[calc(100svh-1rem)] flex-col content-start gap-6">
 			<a href="/{data.network}" class="grid h-12 items-center" aria-label="home">
 				<Unicovelogo small class="items-start" />
 			</a>

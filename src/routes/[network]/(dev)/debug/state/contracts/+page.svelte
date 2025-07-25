@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Code from '$lib/components/code.svelte';
-	import { Stack } from '$lib/components/layout';
+	import { Code } from 'unicove-components';
+	import { Stack } from 'unicove-components';
 	import { getContext } from 'svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { DefaultContracts } from '$lib/wharf/chains';
@@ -19,7 +19,7 @@
 </script>
 
 <Stack>
-	<h2 class="h2">Embedded Contracts</h2>
+	<h2 class="text-headline">Embedded Contracts</h2>
 	<p>The wharfkit/cli generated contracts for this build and the on-chain account it uses.</p>
 	<Code>
 		{JSON.stringify(info, null, 2)}

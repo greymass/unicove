@@ -7,7 +7,8 @@ import {
 	Serializer,
 	UInt64,
 	type ABISerializable,
-	type AssetType
+	type AssetType,
+	type NameType
 } from '@wharfkit/antelope';
 import { ChainDefinition } from '@wharfkit/common';
 import { RAMState, Resources as ResourceClient, REXState, PowerUpState } from '@wharfkit/resources';
@@ -380,6 +381,13 @@ export class NetworkState {
 
 	async objectifyAction(action: Action): Promise<ObjectifiedActionData> {
 		return Serializer.objectify(await this.decodeAction(action));
+	}
+
+	async doesAccountExist(name: NameType): Promise<boolean> {
+		return this.client.v1.chain
+			.get_account(name)
+			.then(() => true)
+			.catch(() => false);
 	}
 
 	toString() {

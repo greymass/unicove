@@ -44,31 +44,31 @@ build/docker: node_modules codegen
 	bun run build-docker
 
 $(CONTRACTS)/system.ts:
-	bunx @wharfkit/cli generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/system.ts eosio
+	$(BIN)/wharfkit generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/system.ts eosio
 
 $(CONTRACTS)/token.ts:
-	bunx @wharfkit/cli generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/token.ts eosio.token
+	$(BIN)/wharfkit generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/token.ts eosio.token
 
 $(CONTRACTS)/msig.ts:
-	bunx @wharfkit/cli generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/msig.ts eosio.msig
+	$(BIN)/wharfkit generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/msig.ts eosio.msig
 
 $(CONTRACTS)/eosio.reserv.ts:
 ifeq ($(PUBLIC_FEATURE_POWERUP),true)
-	bunx @wharfkit/cli generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/eosio.reserv.ts eosio.reserv
+	$(BIN)/wharfkit generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/eosio.reserv.ts eosio.reserv
 else
 	cp ./configs/contracts/eosio.reserv.ts $(CONTRACTS)/eosio.reserv.ts
 endif	
 
 $(CONTRACTS)/delphihelper.ts:
 ifeq ($(PUBLIC_FEATURE_DELPHIHELPER),true)
-	bunx @wharfkit/cli generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/delphihelper.ts delphihelper
+	$(BIN)/wharfkit generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/delphihelper.ts delphihelper
 else
 	cp ./configs/contracts/delphihelper.ts $(CONTRACTS)/delphihelper.ts
 endif
 
 $(CONTRACTS)/delphioracle.ts:
 ifeq ($(PUBLIC_FEATURE_DELPHIORACLE),true)
-	bunx @wharfkit/cli generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/delphioracle.ts delphioracle
+	$(BIN)/wharfkit generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/delphioracle.ts delphioracle
 else
 	cp ./configs/contracts/delphioracle.ts $(CONTRACTS)/delphioracle.ts
 endif
@@ -77,33 +77,33 @@ $(CONTRACTS)/unicove.api.ts:
 ifeq ($(PUBLIC_FEATURE_UNICOVE_CONTRACT_API),)
 	cp ./configs/contracts/unicove.api.ts $(CONTRACTS)/unicove.api.ts
 else
-	bunx @wharfkit/cli generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/unicove.api.ts $(PUBLIC_FEATURE_UNICOVE_CONTRACT_API)
+	$(BIN)/wharfkit generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/unicove.api.ts $(PUBLIC_FEATURE_UNICOVE_CONTRACT_API)
 endif
 
 $(CONTRACTS)/core.vaulta.ts:
 ifeq ($(PUBLIC_FEATURE_VAULTA_CORE_CONTRACT),)
 	cp ./configs/contracts/core.vaulta.ts $(CONTRACTS)/core.vaulta.ts
 else
-	bunx @wharfkit/cli generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/core.vaulta.ts $(PUBLIC_FEATURE_VAULTA_CORE_CONTRACT)
+	$(BIN)/wharfkit generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/core.vaulta.ts $(PUBLIC_FEATURE_VAULTA_CORE_CONTRACT)
 endif
 
 $(CONTRACTS)/eosntime.ts:
 ifeq ($(PUBLIC_FEATURE_EOSNTIME),true)
-	bunx @wharfkit/cli generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/eosntime.ts time.eosn
+	$(BIN)/wharfkit generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/eosntime.ts time.eosn
 else
 	cp ./configs/contracts/eosntime.ts $(CONTRACTS)/eosntime.ts
 endif
 
 $(CONTRACTS)/eosio.wram.ts:
 ifeq ($(PUBLIC_FEATURE_WRAM),true)
-	bunx @wharfkit/cli generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/eosio.wram.ts eosio.wram
+	$(BIN)/wharfkit generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/eosio.wram.ts eosio.wram
 else
 	cp ./configs/contracts/eosio.wram.ts $(CONTRACTS)/eosio.wram.ts
 endif
 
 $(CONTRACTS)/eosio.rex.ts:
 ifeq ($(PUBLIC_FEATURE_WRAM),true)
-	bunx @wharfkit/cli generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/eosio.rex.ts eosio.rex
+	$(BIN)/wharfkit generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/eosio.rex.ts eosio.rex
 else
 	cp ./configs/contracts/eosio.rex.ts $(CONTRACTS)/eosio.rex.ts
 endif
@@ -113,16 +113,27 @@ codegen: $(CONTRACTS)/system.ts $(CONTRACTS)/token.ts $(CONTRACTS)/msig.ts $(CON
 
 .PHONY: codegen/base
 codegen/base:
-	bunx @wharfkit/cli generate -u https://eos.greymass.com -f ./configs/contracts/delphihelper.ts delphihelper
-	bunx @wharfkit/cli generate -u https://eos.greymass.com -f ./configs/contracts/delphioracle.ts delphioracle
-	bunx @wharfkit/cli generate -u https://eos.greymass.com -f ./configs/contracts/eosntime.ts time.eosn
-	bunx @wharfkit/cli generate -u https://jungle4.greymass.com -f ./configs/contracts/core.vaulta.ts core.vaulta
-	bunx @wharfkit/cli generate -u $(PUBLIC_API_CHAIN) -f ./configs/contracts/unicove.api.ts $(PUBLIC_FEATURE_UNICOVE_CONTRACT_API)
-	bunx @wharfkit/cli generate -u https://eos.greymass.com -f ./configs/contracts/eosio.rex.ts eosio.rex
-	bunx @wharfkit/cli generate -u https://eos.greymass.com -f ./configs/contracts/eosio.wram.ts eosio.wram
+	$(BIN)/wharfkit generate -u https://eos.greymass.com -f ./configs/contracts/delphihelper.ts delphihelper
+	$(BIN)/wharfkit generate -u https://eos.greymass.com -f ./configs/contracts/delphioracle.ts delphioracle
+	$(BIN)/wharfkit generate -u https://eos.greymass.com -f ./configs/contracts/eosntime.ts time.eosn
+	$(BIN)/wharfkit generate -u https://jungle4.greymass.com -f ./configs/contracts/core.vaulta.ts core.vaulta
+	$(BIN)/wharfkit generate -u $(PUBLIC_API_CHAIN) -f ./configs/contracts/unicove.api.ts $(PUBLIC_FEATURE_UNICOVE_CONTRACT_API)
+	$(BIN)/wharfkit generate -u https://eos.greymass.com -f ./configs/contracts/eosio.rex.ts eosio.rex
+	$(BIN)/wharfkit generate -u https://eos.greymass.com -f ./configs/contracts/eosio.wram.ts eosio.wram
 	make format
 
 .PHONY: clean
+clean: codegen/clean clean/node_modules clean/sveltekit
+
+.PHONY: clean/node_modules
+clean/node_modules:
+	rm -rf node_modules
+
+.PHONY: clean/sveltekit
+clean/sveltekit:
+	rm -rf .svelte-kit
+
+.PHONY: codegen/clean
 codegen/clean:
 	rm -rf $(CONTRACTS)/*.ts
 

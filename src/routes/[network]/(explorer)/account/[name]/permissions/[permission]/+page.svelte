@@ -1,21 +1,24 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 
-	import FormDivider from '$lib/components/form/divider.svelte';
-	import FormSection from '$lib/components/form/section.svelte';
-	import FormSectionHeader from '$lib/components/form/sectionHeader.svelte';
-	import FormSectionContent from '$lib/components/form/sectionContent.svelte';
+	import {
+		FormContent as FormSectionContent,
+		FormHeader as FormSectionHeader,
+		FormSection,
+		HR as FormDivider,
+		Form
+	} from 'unicove-components';
 	import RemoveRowButton from '$lib/components/form/removeRowButton.svelte';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import * as m from '$lib/paraglide/messages';
-	import PublicKeyInput from '$lib/components/input/publickey.svelte';
-	import NameInput from '$lib/components/input/name.svelte';
-	import NumberInput from '$lib/components/input/number.svelte';
-	import Button from '$lib/components/button/button.svelte';
-	import Label from '$lib/components/input/label.svelte';
+	import { PublicKeyInput } from 'unicove-components';
+	import { NameInput } from 'unicove-components';
+	import { NumberInput } from 'unicove-components';
+	import { Button } from 'unicove-components';
+	import { Label } from 'unicove-components';
 	import { i18n } from '$lib/i18n';
-	import Select from '$lib/components/select/select.svelte';
+	import { Select } from 'unicove-components';
 	import TransactSummary from '$lib/components/transact/summary.svelte';
 	import TransactError from '$lib/components/transact/error.svelte';
 	import {
@@ -26,14 +29,13 @@
 	} from './manager.svelte.js';
 	import { type Checksum256Type } from '@wharfkit/session';
 	import type { SelectOption } from '@melt-ui/svelte';
-	import type { ExtendedSelectOption } from '$lib/components/select/types.js';
+	import type { ExtendedSelectOption } from 'unicove-components';
 	import type { ChangeFn } from '@melt-ui/svelte/internal/helpers';
-	import Code from '$lib/components/code.svelte';
+	import { Code } from 'unicove-components';
 	import PermissionComponent from '../permission.svelte';
 	import { fly } from 'svelte/transition';
 	import { cubicOut } from 'svelte/easing';
-	import Fieldset from '$lib/components/input/fieldset.svelte';
-	import FormContainer from '$lib/components/form/formContainer.svelte';
+	import { Fieldset } from 'unicove-components';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
@@ -528,7 +530,7 @@
 		{@render ConfirmingDetails()}
 	{:else}
 		<!-- Editing Permission -->
-		<FormContainer>
+		<Form>
 			{@render BasicInformation()}
 			<FormDivider />
 
@@ -570,7 +572,7 @@
 					>
 				</div>
 			</footer>
-		</FormContainer>
+		</Form>
 	{/if}
 </div>
 

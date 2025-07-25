@@ -3,8 +3,8 @@
 
 	import AccountLink from '$lib/components/elements/account.svelte';
 	import AssetElement from '$lib/components/elements/asset.svelte';
-	import { ArrowBigRight, NotebookText } from 'lucide-svelte';
-	import Chip from '$lib/components/chip.svelte';
+	import { ArrowBigRight, NotebookText } from '@lucide/svelte';
+	import { Chip } from 'unicove-components';
 	import type { Snippet } from 'svelte';
 	import Row from './row.svelte';
 	import * as m from '$lib/paraglide/messages';

@@ -1,12 +1,12 @@
 <script lang="ts">
-	import Code from '$lib/components/code.svelte';
+	import { Code } from 'unicove-components';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
 </script>
 
 <div class="p-2">
-	<h2 class="h2 text-2xl">Data</h2>
+	<h2 class="text-headline text-2xl">Data</h2>
 	<p>The raw data for the transaction.</p>
 </div>
 

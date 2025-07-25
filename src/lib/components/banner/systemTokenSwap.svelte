@@ -3,8 +3,8 @@
 	import type { AccountState } from '$lib/state/client/account.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
 	import AssetText from '$lib/components/elements/asset.svelte';
-	import Button from '$lib/components/button/button.svelte';
-	import { HelpCircle } from 'lucide-svelte';
+	import { Button } from 'unicove-components';
+	import { HelpCircle } from '@lucide/svelte';
 
 	interface Props {
 		account?: AccountState;

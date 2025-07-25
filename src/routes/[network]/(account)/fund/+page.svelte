@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
-	import Card from '$lib/components/layout/box/card.svelte';
-	import Code from '$lib/components/code.svelte';
+	import { Card } from 'unicove-components';
 	import binanceLogo from '$lib/assets/exchanges/binance.webp?enhanced';
 	import coinbaseIconLogo from '$lib/assets/exchanges/coinbase-icon.webp?enhanced';
 	import krakenLogo from '$lib/assets/exchanges/kraken.webp?enhanced';
@@ -11,26 +10,28 @@
 	import upbitLogo from '$lib/assets/exchanges/upbit.webp?enhanced';
 	import kucoinLogo from '$lib/assets/exchanges/kucoin.webp?enhanced';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import { initOnRamp, type CBPayInstanceType, type InitOnRampParams } from '@coinbase/cbpay-js';
-	import Button from '$lib/components/button/button.svelte';
+	import { Button } from 'unicove-components';
 	import * as m from '$lib/paraglide/messages';
-	import Grid from '$lib/components/layout/grid.svelte';
-	import { DL, DLRow, DD } from '$lib/components/descriptionlist';
+	import { DL, DLRow, DD } from 'unicove-components';
 	import coinbaseLogo from '$lib/assets/exchanges/coinbase.svg';
-	import Stack from '$lib/components/layout/stack.svelte';
-	import Cluster from '$lib/components/layout/cluster.svelte';
+	import { Stack } from 'unicove-components';
+	import { Cluster } from 'unicove-components';
+	import { CoinbaseOnRamp } from './onramps/coinbase.svelte';
 
 	const context = getContext<UnicoveContext>('state');
+
+	const coinbaseOnRamp = new CoinbaseOnRamp(context);
 
 	const ON_RAMP_PROVIDERS = [
 		{
 			id: 'coinbase',
 			logo: coinbaseLogo,
+			isLoading: coinbaseOnRamp.isLoading,
 			action: {
 				text: m.buy_token_with_coinbase({
 					token: context.network.token.symbol.name
 				}),
-				handler: 'coinbase'
+				handler: () => coinbaseOnRamp.open()
 			}
 		}
 	] as const;
@@ -77,79 +78,22 @@
 			url: 'https://kucoin.com'
 		}
 	] as const;
-
-	const coinbaseOptions: InitOnRampParams | undefined = $derived.by(() => {
-		if (!context.network.config.coinbase) {
-			return;
-		}
-		return {
-			appId: context.network.config.coinbase.appid,
-			widgetParameters: {
-				addresses: {
-					[String(context.account?.name)]: ['eosio']
-				},
-				assets: context.network.config.coinbase.assets
-			},
-			onSuccess: () => {},
-			experienceLoggedIn: 'popup',
-			experienceLoggedOut: 'popup',
-			closeOnExit: true,
-			closeOnSuccess: true
-		};
-	});
-
-	let coinbaseInstance: CBPayInstanceType | null = $state(null);
-
-	$effect(() => {
-		if (coinbaseOptions && context.account?.name) {
-			initOnRamp(coinbaseOptions, (error, instance) => {
-				if (error) {
-					console.error(error);
-					return;
-				}
-				if (instance) {
-					coinbaseInstance = instance;
-				}
-			});
-		} else {
-			coinbaseInstance = null;
-		}
-	});
-
-	function handleCoinbaseOnRamp() {
-		if (coinbaseInstance) {
-			coinbaseInstance.open();
-		} else {
-			console.error('Coinbase instance not found');
-			alert(m.coinbase_service_unavailable());
-		}
-	}
-
-	function handleOnRamp(service: (typeof ON_RAMP_PROVIDERS)[number]['id']) {
-		if (!context.account) {
-			return;
-		}
-		if (service === 'coinbase') {
-			return handleCoinbaseOnRamp();
-		}
-		throw new Error(`${service} on-ramp has not been implemented`);
-	}
 </script>
 
-<Stack class="gap-12">
+<Stack class="mt-6 gap-12">
 	<Stack class="gap-4">
-		<h2 class="h4">{m.fund_direct_purchase()}</h2>
+		<h2 class="text-headline leading-4">{m.fund_direct_purchase()}</h2>
 		<p>
 			{m.fund_direct_purchase_description({
 				token: context.network.token.symbol.name
 			})}
 		</p>
 		<Cluster tag="ul">
-			{#each ON_RAMP_PROVIDERS as service}
+			{#each ON_RAMP_PROVIDERS as provider}
 				<Card tag="li" class="max-w-sm p-6">
 					<div>
 						<div class="mb-4 flex items-center justify-center">
-							<img src={service.logo} alt={service.id} class="h-24 w-3/5 object-contain" />
+							<img src={provider.logo} alt={provider.id} class="h-24 w-3/5 object-contain" />
 						</div>
 						<DL>
 							{#if context.network.config.coinbase}
@@ -173,8 +117,16 @@
 						{#if !context.account}
 							<p class="text-sm">{m.common_must_be_logged_in()}</p>
 						{:else}
-							<Button class="w-full" onclick={() => handleOnRamp(service.id)}
-								>{service.action.text}</Button
+							<Button
+								class="w-full"
+								disabled={provider.isLoading}
+								onclick={provider.action.handler}
+							>
+								{#if provider.isLoading}
+									{m.common_loading()}
+								{:else}
+									{provider.action.text}
+								{/if}</Button
 							>
 						{/if}
 					</div>
@@ -184,7 +136,7 @@
 	</Stack>
 
 	<Stack class="gap-4">
-		<h2 class="h4">{m.common_exchanges()}</h2>
+		<h2 class="text-headline leading-4">{m.common_exchanges()}</h2>
 
 		<p>
 			{m.fund_exchange_description({
@@ -192,7 +144,7 @@
 			})}
 		</p>
 
-		<Grid tag="ul" itemWidth="10rem" class="">
+		<ul class="layout-grid" style="--grid-itemWidth:10rem;">
 			{#each EXCHANGES as exchange}
 				<Card tag="li" class="">
 					<a
@@ -212,16 +164,6 @@
 					</a>
 				</Card>
 			{/each}
-		</Grid>
+		</ul>
 	</Stack>
-
-	{#if context.settings.data.debugMode}
-		<h3 class="h3">{m.common_debugging()}</h3>
-		<Code>
-			{JSON.stringify(coinbaseOptions, null, 2)}
-		</Code>
-		<Code>
-			{JSON.stringify(coinbaseInstance, null, 2)}
-		</Code>
-	{/if}
 </Stack>

@@ -3,7 +3,7 @@
 	import type { HTMLAttributes } from 'svelte/elements';
 	import type { TokenHistoricPrice, TokenPair } from '$lib/types/token';
 	import { cn } from '$lib/utils/style';
-	import { Triangle } from 'lucide-svelte';
+	import { Triangle } from '@lucide/svelte';
 
 	interface Props extends HTMLAttributes<HTMLSpanElement> {
 		historic?: TokenHistoricPrice;

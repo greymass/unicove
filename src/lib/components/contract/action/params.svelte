@@ -1,9 +1,10 @@
 <script lang="ts">
 	import type { ABI, Name } from '@wharfkit/antelope';
-	import Braces from 'lucide-svelte/icons/braces';
+	import Braces from '@lucide/svelte/icons/braces';
 
 	import Contract from '$lib/components/elements/contract.svelte';
 	import { parseRootType } from '$lib/utils/abi';
+	import { Table, TD, TH, TR } from 'unicove-components';
 
 	interface Props {
 		abi: ABI;
@@ -14,39 +15,36 @@
 </script>
 
 {#if struct}
-	<table class="table-styles">
-		<thead>
-			<tr>
-				<th colspan="2" class="text-lg font-bold">
-					Request Parameters
-					<Braces class="ml-2 inline" />
-				</th>
-			</tr>
-		</thead>
-		<tbody>
-			{#each struct.fields as field}
-				{@const fieldType = abi.structs.find((s) => s.name === parseRootType(field.type))}
-				<tr>
-					<td>
-						<span class="text-on-surface">
-							{field.name}
-						</span>
-					</td>
-					<td>
-						{#if fieldType}
-							<Contract name={contract} struct={fieldType.name}>
-								{field.type}
-							</Contract>
-						{:else}
+	<Table>
+		{#snippet thead()}
+			<TH colspan="2" class="text-lg font-bold">
+				Request Parameters
+				<Braces class="ml-2 inline" />
+			</TH>
+		{/snippet}
+
+		{#each struct.fields as field}
+			{@const fieldType = abi.structs.find((s) => s.name === parseRootType(field.type))}
+			<TR>
+				<TD>
+					<span class="text-on-surface">
+						{field.name}
+					</span>
+				</TD>
+				<TD>
+					{#if fieldType}
+						<Contract name={contract} struct={fieldType.name}>
 							{field.type}
-						{/if}
-					</td>
-				</tr>
-			{:else}
-				<tr>
-					<td class="text-muted" colspan="2"> No action parameters. </td>
-				</tr>
-			{/each}
-		</tbody>
-	</table>
+						</Contract>
+					{:else}
+						{field.type}
+					{/if}
+				</TD>
+			</TR>
+		{:else}
+			<TR>
+				<TD class="text-muted" colspan="2">No action parameters.</TD>
+			</TR>
+		{/each}
+	</Table>
 {/if}
