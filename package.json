@@ -32,6 +32,7 @@
 		"@types/bun": "^1.1.10",
 		"@types/eslint": "^9.6.1",
 		"@types/pako": "^2.0.3",
+		"@wharfkit/cli": "^2.11.0",
 		"eslint": "^9.26.0",
 		"eslint-config-prettier": "^10.1.5",
 		"eslint-plugin-svelte": "^3.5.1",
