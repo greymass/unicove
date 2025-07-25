@@ -62,10 +62,12 @@
 				<div class="flex items-center gap-2">
 					{permission.perm_name}
 					{#if loggedIn && (isDebugMode || (isMSIG && advancedMode && !msigMode))}
-						<LogIn
+						<IconButton
 							onclick={() =>
 								signin(PermissionLevel.from({ actor: account, permission: permission.perm_name }))}
-							class="text-muted hover:text-on-surface size-4"
+							class="text-muted"
+							icon={LogIn}
+							label={m.common_login_as({ permission: permission.perm_name })}
 						/>
 					{/if}
 				</div>
@@ -106,12 +108,12 @@
 						<th>{m.common_permission_authorization()}</th>
 						<th class="flex items-center gap-2">
 							{#if loggedIn && currentUser}
-								<IconButton icon={Edit} href={editUrl}></IconButton>
+								<IconButton label={m.common_edit()} icon={Edit} href={editUrl} />
 							{/if}
 						</th>
 					</tr>
 				</thead>
-				<tbody class="col-span-full grid grid-cols-subgrid gap-x-4 gap-y-2">
+				<tbody class="col-span-full grid grid-cols-subgrid gap-x-4 gap-y-2 md:gap-y-0">
 					{#if permission.required_auth.keys}
 						{#each permission.required_auth.keys as { weight, key }}
 							<tr
@@ -125,7 +127,7 @@
 									<Key {key} icon />
 								</td>
 								<td class="grid h-full items-center justify-items-end">
-									<CopyButton data={key.toString()} />
+									<CopyButton class="text-muted" data={key.toString()} />
 								</td>
 							</tr>
 						{/each}
@@ -145,7 +147,7 @@
 									</Account>
 								</td>
 								<td class="*:pt-1">
-									<CopyButton data={account.toString()} />
+									<CopyButton class="text-muted" data={account.toString()} />
 								</td>
 							</tr>
 						{/each}

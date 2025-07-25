@@ -22,6 +22,8 @@
 	import UserPlus from '@lucide/svelte/icons/user-plus';
 	import Search from '@lucide/svelte/icons/search';
 	import { goto } from '$lib/utils';
+
+	import { IconButton } from 'unicove-components';
 	import { Button } from 'unicove-components';
 	import { TextInput } from 'unicove-components';
 	import { Wallet } from '@lucide/svelte';
@@ -196,13 +198,12 @@
 					{network.chain.name}
 				</span>
 
-				<button
-					use:melt={$close}
-					aria-label="Close"
-					class="text-muted focus:text-on-surface grid size-12 appearance-none place-items-center justify-self-end rounded-lg focus:outline-hidden"
-				>
-					<X class="size-4" />
-				</button>
+				<IconButton
+					meltAction={close}
+					label={m.common_close()}
+					class="text-muted focus:text-on-surface grid size-12 appearance-none place-items-center justify-self-end  focus:outline-hidden"
+					icon={X}
+				/>
 			</header>
 
 			<section id="content" class="grid">
@@ -213,7 +214,7 @@
 						in:fly={{ x: -100, duration: 100 }}
 						out:fly={{ x: -100, duration: 100 }}
 					>
-						<Button onclick={addAccount} variant="secondary" class="text-on-surface grow-0">
+						<Button onclick={addAccount} variant="secondary" class="grow-0">
 							<div class="flex items-center gap-2">
 								<UserPlus class="mb-0.5 size-5" />
 								<span>{m.common_add_account()}</span>
@@ -246,11 +247,13 @@
 								{@const isCurrent =
 									currentSession?.actor.equals(session.actor) &&
 									currentSession?.permission.equals(session.permission)}
-								<li class="grid grid-cols-[1fr_auto] gap-2">
-									<button
+								<li class="grid grid-cols-[1fr_auto] items-center gap-2">
+									<Button
 										data-current={isCurrent}
+										variant={isCurrent ? 'primary' : 'text'}
 										onclick={() => switchSession(session)}
-										class="text-on-surface-variant data-[current=false]:hover:bg-surface-container-high data-[current=false]:hover:text-on-surface data-[current=true]:bg-primary data-[current=true]:text-on-primary flex h-12 items-center gap-1 rounded-lg px-4"
+										class="data-[current=false]:text-muted h-12 justify-start px-4"
+										contentLayerClass="flex items-center"
 									>
 										<div class="w-6">
 											{#if isCurrent}
@@ -270,14 +273,15 @@
 												</div>
 											{/if}
 										</div>
-									</button>
-									<button
+									</Button>
+
+									<IconButton
 										onclick={() => removeSession(session)}
 										data-current={isCurrent}
-										class="text-muted hover:bg-surface-container-high hover:text-on-surface grid size-12 place-items-center rounded-lg"
-									>
-										<LogOut class="size-4" />
-									</button>
+										class="text-muted"
+										icon={LogOut}
+										label={m.common_logout()}
+									/>
 								</li>
 							{/each}
 						</ul>

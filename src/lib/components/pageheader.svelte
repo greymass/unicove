@@ -36,6 +36,7 @@
 			class="text-primary shrink-0"
 			onclick={goBack}
 			icon={ChevronLeft}
+			label="back"
 		/>
 	{:else}
 		<picture class="size-12 shrink-0">
@@ -57,7 +58,7 @@
 
 			{#if props.actions}
 				{#each props.actions as action}
-					<IconButton icon={action.icon} href={action.href} hideBackground />
+					<IconButton label={action.label} icon={action.icon} href={action.href} hideBackground />
 				{/each}
 			{/if}
 		</div>
