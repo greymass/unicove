@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Name, PermissionLevel } from '@wharfkit/session';
 	import Permission from './permission.svelte';
-	import type { TreePermission } from './+page';
+	import type { TreePermission } from '$lib/types/permission';
 
 	interface Props {
 		account: Name;

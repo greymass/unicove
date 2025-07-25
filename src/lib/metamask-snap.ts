@@ -1,6 +1,8 @@
 import type { RequestArguments } from '@metamask/providers';
 
 import type { MetaMaskState } from './state/metamask.svelte';
+import type { WharfState } from './state/client/wharf.svelte';
+import { chainConfig } from './wharf/chains';
 
 export type Request = (params: RequestArguments) => Promise<unknown | null>;
 
@@ -134,4 +136,13 @@ const request = async ({ method, params }: RequestState, metaMaskState: MetaMask
 		method,
 		params
 	} as RequestArguments);
+};
+
+export const requestPublicKeys = async (metaMaskState: MetaMaskState, wharf: WharfState) => {
+	if (wharf.metamaskPlugin) {
+		wharf.metamaskPlugin.retrievePublicKeys(chainConfig.id).then((publicKey) => {
+			metaMaskState.publicKey = publicKey.activePublicKey;
+			metaMaskState.ownerKey = publicKey.ownerPublicKey;
+		});
+	}
 };
