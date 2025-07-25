@@ -21,7 +21,6 @@ import { isENVTrue } from '$lib/utils/strings';
 const coinbase =
 	env.PUBLIC_FEATURE_DIRECTFUNDING === 'true'
 		? {
-				appid: env.PUBLIC_FEATURE_COINBASE_APPID,
 				assets: env.PUBLIC_FEATURE_COINBASE_ASSETS.split(',')
 			}
 		: undefined;
@@ -184,7 +183,6 @@ export interface ChainBackend {
 }
 
 export interface ChainCoinbaseConfig {
-	appid: string;
 	assets: string[];
 }
 

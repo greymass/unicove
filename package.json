@@ -55,7 +55,6 @@
 	"type": "module",
 	"dependencies": {
 		"@accuser/svelte-plausible-analytics": "^1.0.0",
-		"@coinbase/cbpay-js": "^2.4.0",
 		"@lucide/svelte": "^0.525.0",
 		"@storyblok/svelte": "^5.0.2",
 		"@wharfkit/account-creation-plugin-metamask": "^1.2.1",
@@ -80,6 +79,7 @@
 		"clsx": "^2.1.1",
 		"dayjs": "^1.11.13",
 		"inter-ui": "^4.0.2",
+		"jose": "^6.0.12",
 		"just-extend": "^6.2.0",
 		"runed": "^0.15.3",
 		"svead": "^0.0.13",
