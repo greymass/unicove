@@ -122,7 +122,7 @@
 
 	async function setupWharf() {
 		if (!wharf.sessionKit) {
-			await wharf.init(data.network);
+			wharf.init(data.network);
 		}
 
 		const sessions = await wharf.sessionKit?.getSessions();
