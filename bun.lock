@@ -19,7 +19,7 @@
         "@wharfkit/transact-plugin-resource-provider": "^1.1.2",
         "@wharfkit/wallet-plugin-anchor": "^1.4.0",
         "@wharfkit/wallet-plugin-cleos": "^1.2.0",
-        "@wharfkit/wallet-plugin-cloudwallet": "^1.5.0-beta2",
+        "@wharfkit/wallet-plugin-cloudwallet": "^1.5.0-beta3",
         "@wharfkit/wallet-plugin-imtoken": "^1.1.0",
         "@wharfkit/wallet-plugin-metamask": "^1.2.1",
         "@wharfkit/wallet-plugin-privatekey": "^1.1.0",
@@ -759,7 +759,7 @@
 
     "@wharfkit/wallet-plugin-cleos": ["@wharfkit/wallet-plugin-cleos@1.2.0", "", { "dependencies": { "tslib": "^2.1.0" }, "peerDependencies": { "@wharfkit/session": "^1.3.1" } }, "sha512-lO1AjLfyzRaj2kZc7vAoRhXWwsltNsW3j8uV9EDWmrpBuHYbq+odgQLgTZFenvxfUjsrnvCP1RHFyubDpo1QQg=="],
 
-    "@wharfkit/wallet-plugin-cloudwallet": ["@wharfkit/wallet-plugin-cloudwallet@1.5.0-beta2", "", { "dependencies": { "@aws-amplify/api": "6.3.11", "@aws-amplify/core": "6.12.0", "@aws-sdk/client-appsync": "^3.817.0", "aws-amplify": "^6.14.4", "tslib": "^2.1.0", "uuid": "^11.1.0" }, "peerDependencies": { "@wharfkit/antelope": "^1.0.5", "@wharfkit/session": "^1.6.0" } }, "sha512-MMNsTrRxbIlg17sy85t+H5uygWiSq7bX7ctlnmDD0kTrtblxTKKfkpk+5lsLbGl4rjM1JG9tgTkacQKM1tYT6A=="],
+    "@wharfkit/wallet-plugin-cloudwallet": ["@wharfkit/wallet-plugin-cloudwallet@1.5.0-beta3", "", { "dependencies": { "@aws-amplify/api": "6.3.11", "@aws-amplify/core": "6.12.0", "@aws-sdk/client-appsync": "^3.817.0", "aws-amplify": "^6.14.4", "tslib": "^2.1.0", "uuid": "^11.1.0" }, "peerDependencies": { "@wharfkit/antelope": "^1.0.5", "@wharfkit/session": "^1.6.0" } }, "sha512-Br/qI6wWQXxH7YPoX5KPK88XfYoJQLOZ8wgUkqPItF7Ghu5pU2uBKvZYw0lxb9KqKCW6PxUv6EG57SRmx+I3nQ=="],
 
     "@wharfkit/wallet-plugin-imtoken": ["@wharfkit/wallet-plugin-imtoken@1.1.0", "", { "dependencies": { "tslib": "^2.1.0" }, "peerDependencies": { "@wharfkit/session": "^1.1.0" } }, "sha512-zb4VQ0PNpbIG2WBYZBSJXvM0Nk2m3Xtc6DWCMk7MCtDlbWlXdc8KuOEMkN2LUlV0rU+LNJxdOTddBwgvjViSog=="],
 
