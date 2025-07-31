@@ -62,6 +62,8 @@
 	"common_block_next": "Next Block",
 	"common_block_number": "Block Number",
 	"common_block_previous": "Previous Block",
+	"common_block_producers": "Block Producers",
+	"common_block_producers_description": "Validators on the {network} network.",
 	"common_breakdown": "Breakdown",
 	"common_breaking_news": "Breaking News",
 	"common_buy": "Buy",
