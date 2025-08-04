@@ -150,25 +150,12 @@ export class TransactionResponse extends Struct {
 
 	// A deduplicated/filtered list of the traces
 	get filtered(): ActionTraceFiltered[] {
-		const digests: string[] = [];
-		const receipts: Record<string, ActionTraceReceipt[]> = {};
 		const traces: ActionTraceFiltered[] = this.traces
-			.filter((trace) => {
-				if (!receipts[String(trace.receipt.act_digest)]) {
-					receipts[String(trace.receipt.act_digest)] = [];
-				}
-				receipts[String(trace.receipt.act_digest)].push(trace.receipt);
-
-				if (digests.includes(String(trace.receipt.act_digest))) {
-					return false;
-				}
-				digests.push(String(trace.receipt.act_digest));
-				return true;
-			})
+			.filter((trace) => trace.act.account.equals(trace.receipt.receiver))
 			.map((trace) => {
 				return ActionTraceFiltered.from({
 					...trace,
-					receipts: receipts[String(trace.receipt.act_digest)]
+					receipts: []
 				});
 			});
 		return traces;
