@@ -39,8 +39,8 @@
 
 	const tvl = $derived(calculateTvl(network, market.network));
 	const circulating = $derived.by(() => {
-		if (network.token.distribution) {
-			return network.token && network.legacy
+		if (network.token && network.token.distribution) {
+			return network.legacy && network.legacy.distribution
 				? Asset.fromUnits(
 						network.token.distribution.circulating.units.adding(
 							network.legacy.distribution.circulating.units
