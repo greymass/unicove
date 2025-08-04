@@ -39,14 +39,17 @@
 
 	const tvl = $derived(calculateTvl(network, market.network));
 	const circulating = $derived.by(() => {
-		return network.legacy
-			? Asset.fromUnits(
-					network.token.distribution.circulating.units.adding(
-						network.legacy.distribution.circulating.units
-					),
-					network.token.symbol
-				)
-			: network.token.distribution.circulating;
+		if (network.token.distribution) {
+			return network.token && network.legacy
+				? Asset.fromUnits(
+						network.token.distribution.circulating.units.adding(
+							network.legacy.distribution.circulating.units
+						),
+						network.token.symbol
+					)
+				: network.token.distribution.circulating;
+		}
+		return Asset.fromUnits(0, network.token.symbol);
 	});
 	const marketcap = $derived(
 		network.token.distribution
