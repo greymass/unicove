@@ -112,7 +112,7 @@
 							<Label for="reverse">Reverse?</Label>
 						</fieldset>
 
-						<Button>Query</Button>
+						<Button onclick={query}>Query</Button>
 					</Cluster>
 				</form>
 
