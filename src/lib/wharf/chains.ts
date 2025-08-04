@@ -42,7 +42,7 @@ if (env.PUBLIC_LEGACY_TOKEN_LOGO_DARK) {
 	legacytokenasset.dark = env.PUBLIC_LEGACY_TOKEN_LOGO_DARK;
 }
 
-const legacytoken =
+export const legacytoken =
 	env.PUBLIC_LEGACY_TOKEN_CONTRACT && env.PUBLIC_LEGACY_TOKEN_SYMBOL
 		? Token.from({
 				id: {

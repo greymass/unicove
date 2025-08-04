@@ -38,9 +38,19 @@
 	let { network, networkLogo, networkName }: Props = $props();
 
 	const tvl = $derived(calculateTvl(network, market.network));
+	const circulating = $derived.by(() => {
+		return network.legacy
+			? Asset.fromUnits(
+					network.token.distribution.circulating.units.adding(
+						network.legacy.distribution.circulating.units
+					),
+					network.token.symbol
+				)
+			: network.token.distribution.circulating;
+	});
 	const marketcap = $derived(
 		network.token.distribution
-			? calculateValue(network.token.distribution.circulating, market.network.systemtoken.price)
+			? calculateValue(circulating, market.network.systemtoken.price)
 			: Asset.fromUnits(0, Currencies[context.settings.data.displayCurrency].symbol)
 	);
 </script>

@@ -28,6 +28,7 @@ export class SampledUsage extends Struct {
 @Struct.type('networksources')
 export class NetworkDataSources extends Struct {
 	@Struct.field(SystemTypes.eosio_global_state) declare global: SystemTypes.eosio_global_state;
+	@Struct.field(UnicoveTypes.token, { optional: true }) declare legacy?: UnicoveTypes.token;
 	@Struct.field(DelphioracleTypes.datapoints, { optional: true })
 	declare oracle?: DelphioracleTypes.datapoints;
 	@Struct.field(SystemTypes.powerup_state, { optional: true })
