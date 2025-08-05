@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 
-	import Button from '$lib/components/button/button.svelte';
-	import { DD, DL, DLRow } from '$lib/components/descriptionlist/index.js';
-	import { Stack, Switcher } from '$lib/components/layout/index.js';
+	import { Button } from 'unicove-components';
+	import { DD, DL, DLRow } from 'unicove-components';
+	import { Stack, Switcher } from 'unicove-components';
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
 	import Account from '$lib/components/elements/account.svelte';
 	import ActionCard from '$lib/components/elements/action.svelte';
@@ -46,7 +46,7 @@
 <Stack class="mt-6">
 	<Switcher class="items-start gap-6" threshold="40rem">
 		<Stack class="gap-4">
-			<h2 class="h3">{m.msig_requested_approvals()}</h2>
+			<h2 class="text-title">{m.msig_requested_approvals()}</h2>
 
 			<div
 				id="msig-vis"
@@ -121,7 +121,7 @@
 			onfailure={Complete}
 		>
 			<Stack class="gap-4" id="details">
-				<h2 class="h3">{m.msig_details()}</h2>
+				<h2 class="text-title">{m.msig_details()}</h2>
 
 				<DL>
 					<DLRow title={m.msig_proposer()}>
@@ -179,7 +179,7 @@
 	</Switcher>
 
 	<Stack>
-		<h2 class="h3">{m.msig_proposed_actions()} ({variant})</h2>
+		<h2 class="text-title">{m.msig_proposed_actions()} ({variant})</h2>
 		<SelectActionVariant />
 		{#each manager.readable as decodedAction}
 			{@const contract = String(decodedAction.action.account)}

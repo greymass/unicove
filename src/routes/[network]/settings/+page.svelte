@@ -3,20 +3,20 @@
 	import { getContext } from 'svelte';
 	import type { ChangeFn } from '@melt-ui/svelte/internal/helpers';
 
-	import Switch from '$lib/components/input/switch.svelte';
+	import { Switch } from 'unicove-components';
 	import LanguageSelect from '$lib/components/select/language.svelte';
-	import Label from '$lib/components/input/label.svelte';
-	import { Card, Stack } from '$lib/components/layout';
+	import { Label } from 'unicove-components';
+	import { Card, Stack } from 'unicove-components';
 	import { type UnicoveContext } from '$lib/state/client.svelte';
-	import Code from '$lib/components/code.svelte';
+	import { Code } from 'unicove-components';
 	import * as m from '$lib/paraglide/messages';
 	import Pageheader from '$lib/components/pageheader.svelte';
-	import Select from '$lib/components/select/select.svelte';
-	import type { ExtendedSelectOption } from '$lib/components/select/types.js';
+	import { Select } from 'unicove-components';
+	import type { ExtendedSelectOption } from 'unicove-components';
 	import { TimeSeconds } from '$lib/state/settings.svelte.js';
-	import DatetimeInput from '$lib/components/input/datetime.svelte';
+	import { DatetimeInput } from 'unicove-components';
 	import type { FormEventHandler } from 'svelte/elements';
-	import Button from '$lib/components/button/button.svelte';
+	import { Button } from 'unicove-components';
 	import { availableLanguageTags } from '$lib/paraglide/runtime';
 	import CurrencySelect from '$lib/components/select/currency.svelte';
 	import DebugToggle from '$lib/components/select/debug.svelte';
@@ -158,7 +158,7 @@
 
 		<Card class=" grid gap-8 ">
 			<div class="flex items-center justify-between">
-				<h2 class="text-muted text-2xl font-semibold">Preferences</h2>
+				<h2 class="text-muted text-2xl font-semibold">{m.common_preferences()}</h2>
 			</div>
 			<div class="flex items-center justify-between gap-2">
 				<Stack class="gap-2">
@@ -169,32 +169,32 @@
 							{/each}
 						</div>
 					</Label>
-					<p class="caption text-sm">The language used throughout Unicove.</p>
+					<p class="caption text-sm">{m.settings_language_description()}</p>
 				</Stack>
 				<LanguageSelect />
 			</div>
 
 			<div class="flex items-center justify-between">
 				<Stack class="gap-2">
-					<Label for="proposal-expiration">Prefered Currency</Label>
-					<p class="caption text-sm">The currency used to display the value of tokens.</p>
+					<Label for="proposal-expiration">{m.settings_preferred_currency()}</Label>
+					<p class="caption text-sm">{m.settings_preferred_currency_description()}</p>
 				</Stack>
 				<CurrencySelect />
 			</div>
 
 			<div class="flex items-center justify-between">
 				<Stack class="gap-2">
-					<Label for="increased-precision">Increased Precision</Label>
-					<p class="caption text-sm">Use more decimals to increase currency precision.</p>
+					<Label for="increased-precision">{m.settings_increased_precision()}</Label>
+					<p class="caption text-sm">{m.settings_increased_precision_description()}</p>
 				</Stack>
 				<Switch id="increased-precision" bind:checked={increasedPrecision} />
 			</div>
 
 			<div class="flex items-center justify-between">
 				<Stack class="gap-2">
-					<Label for="color-scheme">Dark Mode</Label>
+					<Label for="color-scheme">{m.settings_dark_mode()}</Label>
 					<p class="caption text-sm text-balance">
-						Toggle site wide dark mode independent from operating system preferences.
+						{m.settings_dark_mode_description()}
 					</p>
 				</Stack>
 				<SchemeToggle />
@@ -203,7 +203,7 @@
 
 		<Card class=" grid gap-8 ">
 			<div class="flex items-center justify-between">
-				<h2 class="text-muted text-2xl font-semibold">Navigation</h2>
+				<h2 class="text-muted text-2xl font-semibold">{m.common_navigation()}</h2>
 			</div>
 			<div class="flex items-center justify-between">
 				<Stack class="gap-2">

@@ -1,14 +1,14 @@
 <script lang="ts">
-	import Stack from '$lib/components/layout/stack.svelte';
-	import ChevronRight from 'lucide-svelte/icons/chevron-right';
+	import { Stack } from 'unicove-components';
+	import ChevronRight from '@lucide/svelte/icons/chevron-right';
 	import { walletTypes } from '../walletTypes';
-	import Button from '$lib/components/button/button.svelte';
+	import { Button } from 'unicove-components';
 
 	const { data } = $props();
 </script>
 
 <Stack>
-	<h3 class="h2">Choose A Wallet Type</h3>
+	<h3 class="text-headline">Choose A Wallet Type</h3>
 	<Stack>
 		{#each Object.values(walletTypes) as walletType}
 			<a
@@ -36,7 +36,7 @@ border-white/20 p-4 focus-visible:ring-2 focus-visible:outline focus-visible:out
 </Stack>
 
 <Stack class="gap-2">
-	<h3 class="h3">Why do I need a wallet?</h3>
+	<h3 class="text-title">Why do I need a wallet?</h3>
 	<p>
 		A wallet is your gateway to the blockchain, allowing you to manage your digital assets and
 		interact with decentralized applications.

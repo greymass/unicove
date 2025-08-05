@@ -229,14 +229,18 @@ export function getResources(
 	return {
 		cpu: {
 			resource: 'cpu',
-			available: Int64.from(sources.get_account.cpu_limit.available),
+			available: Int64.from(sources.get_account.cpu_limit.max).subtracting(
+				Int64.from(sources.get_account.cpu_limit.current_used)
+			),
 			used: Int64.from(sources.get_account.cpu_limit.used),
 			max: Int64.from(sources.get_account.cpu_limit.max),
 			current_used: Int64.from(sources.get_account.cpu_limit.current_used)
 		},
 		net: {
 			resource: 'net',
-			available: Int64.from(sources.get_account.net_limit.available),
+			available: Int64.from(sources.get_account.net_limit.max).subtracting(
+				Int64.from(sources.get_account.net_limit.current_used)
+			),
 			used: Int64.from(sources.get_account.net_limit.used),
 			max: Int64.from(sources.get_account.net_limit.max),
 			current_used: Int64.from(sources.get_account.net_limit.current_used)

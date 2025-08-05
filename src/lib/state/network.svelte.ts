@@ -7,7 +7,8 @@ import {
 	Serializer,
 	UInt64,
 	type ABISerializable,
-	type AssetType
+	type AssetType,
+	type NameType
 } from '@wharfkit/antelope';
 import { ChainDefinition } from '@wharfkit/common';
 import { RAMState, Resources as ResourceClient, REXState, PowerUpState } from '@wharfkit/resources';
@@ -27,6 +28,7 @@ import {
 	type DefaultContracts,
 	type FeatureType,
 	getChainConfigByName,
+	legacytoken,
 	systemtoken,
 	ramtoken,
 	wramtoken
@@ -70,6 +72,7 @@ export class NetworkState {
 	readonly resources = $derived(this.getResources());
 	readonly rex = $derived(this.getRexState());
 	readonly token = $derived.by(() => this.getSystemToken());
+	readonly legacy = $derived.by(() => this.getLegacyToken());
 
 	// Writable state
 	public abis?: ABICache = $state();
@@ -193,6 +196,18 @@ export class NetworkState {
 		}
 
 		return token;
+	}
+
+	getLegacyToken(): Token | undefined {
+		if (legacytoken) {
+			const token = Token.from(legacytoken);
+
+			if (this.sources && this.sources.legacy) {
+				token.distribution = this.sources.legacy.distribution;
+			}
+
+			return token;
+		}
 	}
 
 	getToken(id: TokenDefinition): Token {
@@ -329,25 +344,33 @@ export class NetworkState {
 
 		if (this.supports('powerup') && this.sources?.powerup && this.sources?.sample) {
 			const pstate = PowerUpState.from(this.sources.powerup);
-			response.cpu.price.powerup = Asset.from(
-				pstate.cpu.price_per_ms(this.sources.sample, 1),
-				this.token.symbol
-			);
-			response.net.price.powerup = Asset.from(
-				pstate.net.price_per_kb(this.sources.sample, 1),
-				this.token.symbol
-			);
+			try {
+				response.cpu.price.powerup = Asset.from(
+					pstate.cpu.price_per_ms(this.sources.sample, 1),
+					this.token.symbol
+				);
+				response.net.price.powerup = Asset.from(
+					pstate.net.price_per_kb(this.sources.sample, 1),
+					this.token.symbol
+				);
+			} catch (e) {
+				console.warn('Error calculating powerup prices:', e);
+			}
 		}
 
 		if (this.supports('rentrex') && this.rex && this.sources?.sample) {
-			response.cpu.price.rex = Asset.from(
-				this.rex.cpu_price_per_ms(this.sources.sample, 30),
-				this.token.symbol
-			);
-			response.net.price.rex = Asset.from(
-				this.rex.net_price_per_kb(this.sources.sample, 30),
-				this.token.symbol
-			);
+			try {
+				response.cpu.price.rex = Asset.from(
+					this.rex.cpu_price_per_ms(this.sources.sample, 30),
+					this.token.symbol
+				);
+				response.net.price.rex = Asset.from(
+					this.rex.net_price_per_kb(this.sources.sample, 30),
+					this.token.symbol
+				);
+			} catch (e) {
+				console.warn('Error calculating REX prices:', e);
+			}
 		}
 
 		if (this.supports('stakeresource') && this.sources?.sample) {
@@ -372,6 +395,13 @@ export class NetworkState {
 
 	async objectifyAction(action: Action): Promise<ObjectifiedActionData> {
 		return Serializer.objectify(await this.decodeAction(action));
+	}
+
+	async doesAccountExist(name: NameType): Promise<boolean> {
+		return this.client.v1.chain
+			.get_account(name)
+			.then(() => true)
+			.catch(() => false);
 	}
 
 	toString() {

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { TokenBalance, TokenBalanceChild } from '$lib/types/token';
-	import { Card } from '../layout';
+	import { Card } from 'unicove-components';
 	interface Props {
 		token?: TokenBalance | TokenBalanceChild;
 		title: string;

@@ -8,7 +8,7 @@
 	import { ramtoken } from '$lib/wharf/chains';
 	import Row from '../components/row.svelte';
 	import * as m from '$lib/paraglide/messages';
-	import Chip from '$lib/components/chip.svelte';
+	import { Chip } from 'unicove-components';
 
 	interface Props extends Omit<ActionSummaryProps, 'data'> {
 		data: SystemContract.Types.buyrambytes;

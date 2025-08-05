@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Card from '$lib/components/layout/box/card.svelte';
+	import { Card } from 'unicove-components';
 	import type { NetworkState } from '$lib/state/network.svelte';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import { calculateValue } from '$lib/utils';
@@ -38,9 +38,22 @@
 	let { network, networkLogo, networkName }: Props = $props();
 
 	const tvl = $derived(calculateTvl(network, market.network));
+	const circulating = $derived.by(() => {
+		if (network.token && network.token.distribution) {
+			return network.legacy && network.legacy.distribution
+				? Asset.fromUnits(
+						network.token.distribution.circulating.units.adding(
+							network.legacy.distribution.circulating.units
+						),
+						network.token.symbol
+					)
+				: network.token.distribution.circulating;
+		}
+		return Asset.fromUnits(0, network.token.symbol);
+	});
 	const marketcap = $derived(
 		network.token.distribution
-			? calculateValue(network.token.distribution.circulating, market.network.systemtoken.price)
+			? calculateValue(circulating, market.network.systemtoken.price)
 			: Asset.fromUnits(0, Currencies[context.settings.data.displayCurrency].symbol)
 	);
 </script>

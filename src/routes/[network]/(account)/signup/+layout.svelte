@@ -5,7 +5,7 @@
 	}
 
 	import { page } from '$app/stores';
-	import Stack from '$lib/components/layout/stack.svelte';
+	import { Stack } from 'unicove-components';
 	// import Pageheader from '$lib/components/pageheader.svelte';
 	import { crossfade } from 'svelte/transition';
 	import { cubicInOut } from 'svelte/easing';

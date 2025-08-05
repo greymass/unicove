@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
-	import DollarSign from 'lucide-svelte/icons/dollar-sign';
+	import DollarSign from '@lucide/svelte/icons/dollar-sign';
 
 	import { AccountValueState } from '$lib/state/value.svelte.js';
-	import { Card } from '$lib/components/layout';
+	import { Card, Stack } from 'unicove-components';
 	import * as m from '$lib/paraglide/messages';
 	import AssetText from '$lib/components/elements/asset.svelte';
-	import Button from '$lib/components/button/button.svelte';
+	import { Button } from 'unicove-components';
 	import CurrencySelect from '$lib/components/select/currency.svelte';
 	import ResourceCard from '$lib/components/elements/resourceCard.svelte';
 	import TokenBalance from '$lib/components/card/tokenbalance.svelte';
@@ -126,6 +126,16 @@
 		{#if legacytoken && legacybalance && legacybalance.balance.units.gt(ZeroUnits)}
 			<TokenBalance
 				balance={legacybalance}
+				cta={data.network.supports('directfunding') &&
+				data.network.config.coinbase?.assets.includes(legacybalance.balance.symbol.name)
+					? [
+							{
+								text: m.common_add_funds(),
+								href: `/${data.network}/fund`,
+								visible: isCurrentUser
+							}
+						]
+					: undefined}
 				{isCurrentUser}
 				open
 				network={data.network}
@@ -174,16 +184,18 @@
 		{/if}
 		{#if context.settings.data.advancedMode}
 			<Card class="@container" title={m.common_resources()}>
-				<div class="flex gap-12 *:flex-1 @sm:justify-between @sm:*:flex-auto">
-					<ResourceCard type="cpu" value={cpuAvailable} vertical />
+				<Stack>
+					<div class="flex gap-12 *:flex-1 @sm:justify-between @sm:*:flex-auto">
+						<ResourceCard type="cpu" value={cpuAvailable} vertical />
 
-					<ResourceCard type="net" value={netAvailable} vertical />
-				</div>
-				{#if isCurrentUser}
-					<Button href={`/${data.network}/resources`} variant="secondary"
-						>{m.common_resources()}</Button
-					>
-				{/if}
+						<ResourceCard type="net" value={netAvailable} vertical />
+					</div>
+					{#if isCurrentUser}
+						<Button href={`/${data.network}/resources`} variant="secondary"
+							>{m.common_resources()}</Button
+						>
+					{/if}
+				</Stack>
 			</Card>
 		{/if}
 	</div>

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Stack from '$lib/components/layout/stack.svelte';
+	import { Stack } from 'unicove-components';
 	import UnicoveWordmark from '$lib/assets/unicove-wordmark.svelte';
 	import bgDesktop from '$lib/assets/hero/eos/bg1@2x.png?enhanced';
 	import bgMobile from '$lib/assets/hero/eos/bg2@2x.png?enhanced';
@@ -12,7 +12,7 @@
 	import UnicoveOutline from '$lib/assets/unicove-outline.svg';
 
 	import * as m from '$lib/paraglide/messages';
-	import Button from '$lib/components/button/button.svelte';
+	import { Button } from 'unicove-components';
 	import { browser } from '$app/environment';
 
 	interface Props {
@@ -76,7 +76,7 @@
 	<Stack class="grid gap-5">
 		<UnicoveWordmark class="h-7 w-auto md:h-auto" />
 		<h1 class="text-3xl leading-tight font-bold text-balance lg:text-4xl lg:leading-tight">
-			<span class="sr-only">Unicove:</span>
+			<span class="sr-only">Unicove -</span>
 			{m.homepage_hero_title({
 				network: networkName
 			})}
@@ -206,7 +206,7 @@
 			<h1
 				class="font-sans-hero max-w-128 text-3xl leading-tight font-bold text-balance lg:text-4xl lg:leading-tight"
 			>
-				<span class="">Unicove.</span>
+				<span class="">Unicove -</span>
 				{m.homepage_hero_title({
 					network: networkName
 				})}.
@@ -226,7 +226,7 @@
 					class="text-primary bg-surface-container-lowest/20  backdrop-blur"
 					href="https://www.vaulta.com/resources/opening-the-gateway-to-web3-banking"
 				>
-					About the Vaulta rebrand
+					EOS rebrands to Vaulta
 				</Button>
 			</div>
 		</Stack>

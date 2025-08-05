@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { Stack } from '$lib/components/layout';
+	import { Stack } from 'unicove-components';
 	import Scheme from '$lib/components/select/scheme.svelte';
 </script>
 
 <Stack id="colors" class="">
-	<h2 class="h2 flex gap-3">
+	<h2 class="text-headline flex gap-3">
 		Color Roles
 
 		<Scheme />
@@ -37,9 +37,7 @@
 					<div class="border-outline text-outline mt-6 rounded-lg border p-4 font-bold">
 						Outline
 					</div>
-					<div
-						class="border-outline-variant text-outline-variant mt-2 rounded-lg border p-4 font-bold"
-					>
+					<div class="border-outline text-outline-variant mt-2 rounded-lg border p-4 font-bold">
 						Outline Variant
 					</div>
 				</div>

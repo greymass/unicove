@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Switch from '../input/switch.svelte';
+	import { Switch } from 'unicove-components';
 	import type { CreateSwitchProps } from '@melt-ui/svelte';
 	import { browser } from '$app/environment';
 

@@ -6,17 +6,18 @@
 	import { page } from '$app/state';
 	import * as m from '$lib/paraglide/messages';
 
-	import { DD, DL, DLRow } from '$lib/components/descriptionlist/index.js';
+	import { DD, DL, DLRow } from 'unicove-components';
 	import { preventDefault } from '$lib/utils';
-	import Label from '$lib/components/input/label.svelte';
-	import NameInput from '$lib/components/input/name.svelte';
-	import PublicKeyInput from '$lib/components/input/publickey.svelte';
-	import NumberInput from '$lib/components/input/number.svelte';
-	import { SingleCard, Stack } from '$lib/components/layout';
-	import Button from '$lib/components/button/button.svelte';
+	import { Label } from 'unicove-components';
+	import { NameInput } from 'unicove-components';
+	import { PublicKeyInput } from 'unicove-components';
+	import { NumberInput } from 'unicove-components';
+	import { SingleCard } from '$lib/components/layout';
+	import { Stack } from 'unicove-components';
+	import { Button } from 'unicove-components';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import Code from '$lib/components/code.svelte';
-	import Checkbox from '$lib/components/input/checkbox.svelte';
+	import { Code } from 'unicove-components';
+	import { Checkbox } from 'unicove-components';
 	import { browser } from '$app/environment';
 	import AccountText from '$lib/components/elements/account.svelte';
 	import { PlaceholderAuth } from '@wharfkit/session';
@@ -403,14 +404,14 @@
 
 {#snippet TransactError()}
 	<div class:hidden={f.current !== 'error'}>
-		<h3 class="h3 mb-4">{m.common_error}</h3>
+		<h3 class="text-title mb-4">{m.common_error}</h3>
 		<p>{transactError}</p>
 	</div>
 {/snippet}
 
 {#snippet TransactResult()}
 	<div class:hidden={f.current !== 'complete'}>
-		<h3 class="h3 mb-4">{m.common_account_created()}</h3>
+		<h3 class="text-title mb-4">{m.common_account_created()}</h3>
 		<p>{m.common_account_created_description()}</p>
 		<p><AccountText name={accountName} /></p>
 	</div>
@@ -433,7 +434,7 @@
 </SingleCard>
 
 {#if context.settings.data.debugMode}
-	<h3 class="h3">{m.common_debugging()}</h3>
+	<h3 class="text-title">{m.common_debugging()}</h3>
 	<Code
 		>{JSON.stringify(
 			{

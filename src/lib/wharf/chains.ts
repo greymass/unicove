@@ -21,7 +21,6 @@ import { isENVTrue } from '$lib/utils/strings';
 const coinbase =
 	env.PUBLIC_FEATURE_DIRECTFUNDING === 'true'
 		? {
-				appid: env.PUBLIC_FEATURE_COINBASE_APPID,
 				assets: env.PUBLIC_FEATURE_COINBASE_ASSETS.split(',')
 			}
 		: undefined;
@@ -43,7 +42,7 @@ if (env.PUBLIC_LEGACY_TOKEN_LOGO_DARK) {
 	legacytokenasset.dark = env.PUBLIC_LEGACY_TOKEN_LOGO_DARK;
 }
 
-const legacytoken =
+export const legacytoken =
 	env.PUBLIC_LEGACY_TOKEN_CONTRACT && env.PUBLIC_LEGACY_TOKEN_SYMBOL
 		? Token.from({
 				id: {
@@ -184,7 +183,6 @@ export interface ChainBackend {
 }
 
 export interface ChainCoinbaseConfig {
-	appid: string;
 	assets: string[];
 }
 

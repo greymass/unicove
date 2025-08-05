@@ -3,6 +3,7 @@ import { Name } from '@wharfkit/antelope';
 
 import { getCacheHeaders } from '$lib/utils';
 import type { RequestEvent } from './$types';
+import * as MsigContract from '$lib/wharf/contracts/msig';
 
 export async function GET({ fetch, locals: { network }, params }: RequestEvent) {
 	const scope = Name.from(params.proposer);
@@ -12,9 +13,10 @@ export async function GET({ fetch, locals: { network }, params }: RequestEvent) 
 		code: 'eosio.msig',
 		scope: scope,
 		table: 'proposal',
-		json: true,
+		json: false,
 		lower_bound: name,
-		upper_bound: name
+		upper_bound: name,
+		type: MsigContract.Types.proposal
 	});
 	if (!proposalRows.rows.length) {
 		return json({ error: 'Proposal not found' }, { status: 404 });

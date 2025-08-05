@@ -6,8 +6,7 @@
 	import { getActionSummaryComponent } from '$lib/components/summary/index.js';
 	import Trace from '$lib/components/elements/trace.svelte';
 	import SelectActionVariant from '$lib/components/select/actionvariant.svelte';
-	import Stack from '$lib/components/layout/stack.svelte';
-	import TransactionHeader from '$lib/components/transaction/header.svelte';
+	import { Stack } from 'unicove-components';
 
 	import * as m from '$lib/paraglide/messages.js';
 
@@ -20,12 +19,7 @@
 
 <Stack class="gap-8">
 	<div class="space-y-2">
-		<h2 class="h3">{m.common_transaction_details()}</h2>
-		<TransactionHeader transaction={data.transaction} />
-	</div>
-
-	<div class="space-y-2">
-		<h2 class="h3">
+		<h2 class="text-title">
 			{m.common_transaction_summary()}
 		</h2>
 		<p class="text-pretty">
