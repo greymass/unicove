@@ -25,7 +25,7 @@
         "@wharfkit/wallet-plugin-privatekey": "^1.1.0",
         "@wharfkit/wallet-plugin-scatter": "^1.5.1",
         "@wharfkit/wallet-plugin-tokenpocket": "^1.5.1",
-        "@wharfkit/wallet-plugin-web-authenticator": "^0.2.7",
+        "@wharfkit/wallet-plugin-web-authenticator": "^0.2.8",
         "@wharfkit/wallet-plugin-wombat": "^1.5.1",
         "@wharfkit/web-renderer": "^1.4.1",
         "big.js": "^6.2.1",
@@ -592,7 +592,7 @@
 
     "@wharfkit/wallet-plugin-tokenpocket": ["@wharfkit/wallet-plugin-tokenpocket@1.5.1", "", { "dependencies": { "tslib": "^2.1.0" }, "peerDependencies": { "@wharfkit/protocol-scatter": "^1.3.1", "@wharfkit/session": "^1.4.0" } }, "sha512-Rm3ARYMW3vkWUFZe0Q1SKQVDSvGzkvb/hmlcuBdQ8xSmR0fBTRDdcIx9QgD7uc5c9hKBKuk2AecvwB+JVF3A3g=="],
 
-    "@wharfkit/wallet-plugin-web-authenticator": ["@wharfkit/wallet-plugin-web-authenticator@0.2.7", "", { "dependencies": { "@wharfkit/protocol-esr": "^1.3.2", "@wharfkit/sealed-messages": "^1.0.0", "tslib": "^2.1.0" }, "peerDependencies": { "@wharfkit/session": "next" } }, "sha512-QGZPYyv84ffgFdkGnP7uBC/BR0926vpLQplvVeLeMYSEO+12KPDASdJMt8qcXiAMj5ekH217+3JDbyF9rc8XwQ=="],
+    "@wharfkit/wallet-plugin-web-authenticator": ["@wharfkit/wallet-plugin-web-authenticator@0.2.8", "", { "dependencies": { "@greymass/buoy": "^1.0.4", "@wharfkit/protocol-esr": "^1.5.0", "@wharfkit/sealed-messages": "^1.0.0", "isomorphic-ws": "^5.0.0", "tslib": "^2.1.0" }, "peerDependencies": { "@wharfkit/session": "next" } }, "sha512-/8E8H9Lz+fKfKG86xVhiITGK+EYjldSJgJqVrJlGmQAXo8jBxjOw4q5oVM68yK4qzPvoad48nIRIL9GhKl3Mvw=="],
 
     "@wharfkit/wallet-plugin-wombat": ["@wharfkit/wallet-plugin-wombat@1.5.1", "", { "dependencies": { "tslib": "^2.1.0" }, "peerDependencies": { "@wharfkit/protocol-scatter": "^1.3.1", "@wharfkit/session": "^1.4.0" } }, "sha512-zQFBv9Nc/+N2yWLNg35BByA+4mtuU/XcSbQ8UmDcPR8MUQmhn9cRCSUK8y0anDLgZniqIDcML+lgda3MXK+5/w=="],
 
@@ -1754,6 +1754,8 @@
 
     "@wharfkit/session/@wharfkit/common": ["@wharfkit/common@1.4.2", "", { "dependencies": { "tslib": "^2.1.0" }, "peerDependencies": { "@wharfkit/antelope": "^1.0.0" } }, "sha512-ku3ErhtYcBsxAg/px00q8OoCwS7Z2BVFfp+eazPdQk3hpdEhuyAkojq5TBXdWUYocthI+cJ1EQH87y+Di1JI3w=="],
 
+    "@wharfkit/wallet-plugin-web-authenticator/@wharfkit/protocol-esr": ["@wharfkit/protocol-esr@1.5.0", "", { "dependencies": { "@greymass/buoy": "^1.0.3", "@wharfkit/antelope": "^1.1.0", "@wharfkit/sealed-messages": "^1.1.0", "isomorphic-ws": "^5.0.0", "ws": "^8.13.0" }, "peerDependencies": { "@wharfkit/session": "^1.2.7" } }, "sha512-YNcs5rK151uOuI3Gvy7jiJ4JOPx0Mu8zGiDP/KI7JhI19+yiPPUjz5+59jrCwPv5IIl23BZGUDiYA7qergbbVA=="],
+
     "accepts/mime-types": ["mime-types@3.0.1", "", { "dependencies": { "mime-db": "^1.54.0" } }, "sha512-xRc4oEhT6eaBpU1XF7AjpOFD+xQmXNB5OVKwp4tqCuBpHLS/ZbBDrc07mYTDqVMg6PfxUjjNp85O6Cd2Z/5HWA=="],
 
     "anymatch/picomatch": ["picomatch@2.3.1", "", {}, "sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA=="],
@@ -1889,6 +1891,8 @@
     "@octokit/request/@octokit/types/@octokit/openapi-types": ["@octokit/openapi-types@22.2.0", "", {}, "sha512-QBhVjcUa9W7Wwhm6DBFu6ZZ+1/t/oYxqc2tp81Pi41YNuJinbFRx8B133qVOrAaBbF7D/m0Et6f9/pZt9Rc+tg=="],
 
     "@typescript-eslint/typescript-estree/minimatch/brace-expansion": ["brace-expansion@2.0.1", "", { "dependencies": { "balanced-match": "^1.0.0" } }, "sha512-XnAIvQ8eM+kC6aULx6wuQiwVsnzsi9d3WxzV3FpWTGA19F621kwdbsAcFKXgKUHZWsy+mY6iL1sHTxWEFCytDA=="],
+
+    "@wharfkit/wallet-plugin-web-authenticator/@wharfkit/protocol-esr/@wharfkit/antelope": ["@wharfkit/antelope@1.1.0", "", { "dependencies": { "bn.js": "^4.11.9", "brorand": "^1.1.0", "elliptic": "^6.5.4", "hash.js": "^1.0.0", "pako": "^2.1.0", "tslib": "^2.0.3" } }, "sha512-/+zwJq/gFSvIpw3fwFPtpafLqoiipg7lkL1FROrKPyJbrQEaqB1BsCos2+hhWccY6qwKqmdE/iEmY2TZ9gfTPQ=="],
 
     "accepts/mime-types/mime-db": ["mime-db@1.54.0", "", {}, "sha512-aU5EJuIN2WDemCcAp2vFBfp/m4EAhWJnUNSSw0ixs7/kXbd6Pg64EmwJkNdFhB8aWt1sH2CTXrLxo/iAGV3oPQ=="],
 
