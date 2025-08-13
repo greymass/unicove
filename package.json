@@ -70,7 +70,7 @@
 		"@wharfkit/transact-plugin-resource-provider": "^1.1.2",
 		"@wharfkit/wallet-plugin-anchor": "^1.4.0",
 		"@wharfkit/wallet-plugin-cleos": "^1.2.0",
-		"@wharfkit/wallet-plugin-cloudwallet": "^1.5.0-beta3",
+		"@wharfkit/wallet-plugin-cloudwallet": "^1.5.0-beta.5",
 		"@wharfkit/wallet-plugin-imtoken": "^1.1.0",
 		"@wharfkit/wallet-plugin-metamask": "^1.2.1",
 		"@wharfkit/wallet-plugin-privatekey": "^1.1.0",
