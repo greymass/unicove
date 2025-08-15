@@ -164,6 +164,10 @@
 		useReadOnly = page.url.searchParams.get('readonly') === 'true';
 		triggerOnPageLoad = page.url.searchParams.get('triggerOnPageLoad') === 'true';
 		data.struct.fields.forEach((field: ABI.Field) => {
+			if (field.type.endsWith('[]')) {
+				actionInputs[field.name] = '[]';
+				return;
+			}
 			switch (field.type) {
 				case 'bool': {
 					actionInputs[field.name] = false;
