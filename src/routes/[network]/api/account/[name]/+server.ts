@@ -10,6 +10,7 @@ import type { RequestEvent, RequestHandler } from './$types';
 
 import { Types as SystemTypes, type TableTypes } from '$lib/wharf/contracts/system';
 import { Types as REXTypes } from '$lib/types/rex';
+import { Types as RegistryTypes } from '$lib/wharf/contracts/registry';
 import { Types as UnicoveTypes } from '$lib/wharf/contracts/unicove.api';
 import {
 	defaultGiftedRam,
@@ -21,14 +22,24 @@ import {
 import { TokenBalance, TokenDefinition, tokenEquals } from '$lib/types/token';
 import { PUBLIC_FEATURE_UNICOVE_CONTRACT_API_TOKENS } from '$env/static/public';
 
-export const GET: RequestHandler = async ({ locals: { network }, params }: RequestEvent) => {
+export const GET: RequestHandler = async ({ fetch, locals: { network }, params }: RequestEvent) => {
 	const headers = getCacheHeaders(5);
 
 	try {
 		let response: AccountDataSources;
 		if (network.supports('unicovecontractapi')) {
 			try {
-				response = await getAccount2(network, params.name);
+				let tokens: UnicoveTypes.token_definition[] = [];
+				if (network.supports('registry')) {
+					const registryTokens = await fetch(`/${network}/api/registry/tokens`);
+					if (registryTokens.ok) {
+						const json = await registryTokens.json();
+						tokens = json.tokens.map((t: RegistryTypes.token_row) =>
+							UnicoveTypes.token_definition.from(t)
+						);
+					}
+				}
+				response = await getAccount2(network, params.name, tokens);
 			} catch (e) {
 				// Fallback to old method on failure
 				console.error('getAccount2 failure', e);
@@ -165,9 +176,12 @@ async function getAccount(network: NetworkState, account: NameType): Promise<Acc
 	};
 }
 
-async function getAccount2(network: NetworkState, account: NameType): Promise<AccountDataSources> {
-	let tokens: UnicoveTypes.token_definition[] = [];
-	if (PUBLIC_FEATURE_UNICOVE_CONTRACT_API_TOKENS) {
+async function getAccount2(
+	network: NetworkState,
+	account: NameType,
+	tokens: UnicoveTypes.token_definition[] = []
+): Promise<AccountDataSources> {
+	if (!tokens.length && PUBLIC_FEATURE_UNICOVE_CONTRACT_API_TOKENS) {
 		tokens = Serializer.decode({
 			type: 'token_definition[]',
 			customTypes: [TokenDefinition],

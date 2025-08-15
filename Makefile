@@ -73,6 +73,13 @@ else
 	cp ./configs/contracts/delphioracle.ts $(CONTRACTS)/delphioracle.ts
 endif
 
+$(CONTRACTS)/registry.ts:
+ifeq ($(PUBLIC_FEATURE_UNICOVE_CONTRACT_API),)
+	cp ./configs/contracts/registry.api.ts $(CONTRACTS)/registry.api.ts
+else
+	$(BIN)/wharfkit generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/registry.ts $(PUBLIC_FEATURE_REGISTRY_CONTRACT)
+endif
+
 $(CONTRACTS)/unicove.api.ts:
 ifeq ($(PUBLIC_FEATURE_UNICOVE_CONTRACT_API),)
 	cp ./configs/contracts/unicove.api.ts $(CONTRACTS)/unicove.api.ts
@@ -108,7 +115,7 @@ else
 	cp ./configs/contracts/eosio.rex.ts $(CONTRACTS)/eosio.rex.ts
 endif
 
-codegen: $(CONTRACTS)/system.ts $(CONTRACTS)/token.ts $(CONTRACTS)/msig.ts $(CONTRACTS)/eosio.wram.ts $(CONTRACTS)/eosio.reserv.ts $(CONTRACTS)/eosio.rex.ts $(CONTRACTS)/delphihelper.ts $(CONTRACTS)/delphioracle.ts $(CONTRACTS)/unicove.api.ts $(CONTRACTS)/eosntime.ts $(CONTRACTS)/core.vaulta.ts
+codegen: $(CONTRACTS)/system.ts $(CONTRACTS)/token.ts $(CONTRACTS)/msig.ts $(CONTRACTS)/eosio.wram.ts $(CONTRACTS)/eosio.reserv.ts $(CONTRACTS)/eosio.rex.ts $(CONTRACTS)/delphihelper.ts $(CONTRACTS)/delphioracle.ts $(CONTRACTS)/unicove.api.ts $(CONTRACTS)/eosntime.ts $(CONTRACTS)/core.vaulta.ts $(CONTRACTS)/registry.ts
 	mkdir -p $(CONTRACTS)
 
 .PHONY: codegen/base
@@ -116,7 +123,8 @@ codegen/base:
 	$(BIN)/wharfkit generate -u https://eos.greymass.com -f ./configs/contracts/delphihelper.ts delphihelper
 	$(BIN)/wharfkit generate -u https://eos.greymass.com -f ./configs/contracts/delphioracle.ts delphioracle
 	$(BIN)/wharfkit generate -u https://eos.greymass.com -f ./configs/contracts/eosntime.ts time.eosn
-	$(BIN)/wharfkit generate -u https://jungle4.greymass.com -f ./configs/contracts/core.vaulta.ts core.vaulta
+	$(BIN)/wharfkit generate -u https://eos.greymass.com -f ./configs/contracts/core.vaulta.ts core.vaulta
+	$(BIN)/wharfkit generate -u https://eos.greymass.com -f ./configs/contracts/registry.ts $(PUBLIC_FEATURE_REGISTRY_CONTRACT)
 	$(BIN)/wharfkit generate -u $(PUBLIC_API_CHAIN) -f ./configs/contracts/unicove.api.ts $(PUBLIC_FEATURE_UNICOVE_CONTRACT_API)
 	$(BIN)/wharfkit generate -u https://eos.greymass.com -f ./configs/contracts/eosio.rex.ts eosio.rex
 	$(BIN)/wharfkit generate -u https://eos.greymass.com -f ./configs/contracts/eosio.wram.ts eosio.wram

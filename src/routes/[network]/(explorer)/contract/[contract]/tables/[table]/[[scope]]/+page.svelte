@@ -63,7 +63,7 @@
 		});
 	}
 
-	async function query(e: SubmitEvent) {
+	async function query(e: MouseEvent | SubmitEvent) {
 		e.preventDefault();
 		goto(pageUrl, {
 			keepFocus: true

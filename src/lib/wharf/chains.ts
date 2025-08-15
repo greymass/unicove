@@ -4,6 +4,7 @@ import { ChainDefinition, Logo, TokenIdentifier } from '@wharfkit/common';
 import { Contract as DelphiHelperContract } from '$lib/wharf/contracts/delphihelper';
 import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
 import { Contract as MSIGContract } from '$lib/wharf/contracts/msig';
+import { Contract as RegistryContract } from '$lib/wharf/contracts/registry';
 import { Contract as ReserveContract } from '$lib/wharf/contracts/eosio.reserv';
 import { Contract as REXContract } from '$lib/wharf/contracts/eosio.rex';
 import { Contract as SystemContract } from '$lib/wharf/contracts/system';
@@ -140,6 +141,7 @@ export const chainConfig: ChainConfig = {
 		powerup: isENVTrue(env.PUBLIC_FEATURE_POWERUP),
 		rammarket: isENVTrue(env.PUBLIC_FEATURE_RAMMARKET),
 		ramtransfer: isENVTrue(env.PUBLIC_FEATURE_RAMTRANSFER),
+		registry: !!env.PUBLIC_FEATURE_REGISTRY_CONTRACT,
 		rentrex: isENVTrue(env.PUBLIC_FEATURE_RENTREX),
 		rex: isENVTrue(env.PUBLIC_FEATURE_REX),
 		robo: isENVTrue(env.PUBLIC_FEATURE_ROBO),
@@ -160,6 +162,7 @@ export interface DefaultContracts {
 	delphioracle: DelphiOracleContract;
 	eosntime: TimeContract;
 	msig: MSIGContract;
+	registry: RegistryContract;
 	reserve: ReserveContract;
 	rex: REXContract;
 	system: SystemContract;
@@ -220,6 +223,7 @@ export type FeatureType =
 	| 'powerup'
 	| 'rammarket'
 	| 'ramtransfer'
+	| 'registry'
 	| 'rentrex'
 	| 'rex'
 	| 'robo'

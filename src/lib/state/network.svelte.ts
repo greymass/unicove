@@ -39,6 +39,7 @@ import { Token, ZeroUnits, TokenDefinition, tokenEquals } from '$lib/types/token
 import { Contract as DelphiHelperContract } from '$lib/wharf/contracts/delphihelper';
 import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
 import { Contract as MSIGContract } from '$lib/wharf/contracts/msig';
+import { Contract as RegistryContract } from '$lib/wharf/contracts/registry';
 import { Contract as ReserveContract } from '$lib/wharf/contracts/eosio.reserv';
 import { Contract as REXContract } from '$lib/wharf/contracts/eosio.rex';
 import { Contract as SystemContract } from '$lib/wharf/contracts/system';
@@ -116,6 +117,7 @@ export class NetworkState {
 			delphioracle: new DelphiOracleContract({ client: this.client }),
 			eosntime: new TimeContract({ client: this.client }),
 			msig: new MSIGContract({ client: this.client }),
+			registry: new RegistryContract({ client: this.client }),
 			reserve: new ReserveContract({
 				client: this.client
 			}),
