@@ -20,6 +20,7 @@
 	import { RAMCalculatorState } from './state.svelte';
 	import { DD, DL, DLRow } from 'unicove-components';
 	import SystemTokenSwap from '$lib/components/banner/systemTokenSwap.svelte';
+	import { systemcontract } from '$lib/wharf/chains';
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');
@@ -200,5 +201,20 @@
 				</DLRow>
 			</DL>
 		</Card>
+
+		{#if data.network.supports('wram')}
+			<Card>
+				<Stack>
+					<h3 class="text-title">{m.ram_wram_swap_title()}</h3>
+					<p>{m.ram_wram_swap_description()}</p>
+					<Button
+						variant="primary"
+						href={`/${String(data.network)}/swap/${systemcontract}/3,kb/eosio.wram/0,wram`}
+					>
+						{m.ram_wram_swap_button()}
+					</Button>
+				</Stack>
+			</Card>
+		{/if}
 	{/snippet}
 </MultiCard>

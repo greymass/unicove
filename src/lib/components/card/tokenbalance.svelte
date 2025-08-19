@@ -187,7 +187,7 @@
 		{@render SubBalance(m.common_used(), balanceUsed.balance)}
 	{/if}
 
-	{#if isRamToken && balanceWRAM}
+	{#if isRamToken && balanceWRAM && network.supports('wram')}
 		{@render SubBalance('WRAM', balanceWRAM.balance, {
 			text: m.common_swap(),
 			href: `/${network}/swap/${balanceWRAM.token.id.url}/${network.getRamToken().id.url}`
