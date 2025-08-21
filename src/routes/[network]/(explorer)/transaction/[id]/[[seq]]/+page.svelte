@@ -6,6 +6,8 @@
 	import { getActionSummaryComponent } from '$lib/components/summary/index.js';
 	import Trace from '$lib/components/elements/trace.svelte';
 	import SelectActionVariant from '$lib/components/select/actionvariant.svelte';
+	import TransactionHeader from '$lib/components/transaction/header.svelte';
+	import TransactionRAM from '$lib/components/transaction/ram.svelte';
 	import { Stack } from 'unicove-components';
 
 	import * as m from '$lib/paraglide/messages.js';
@@ -39,5 +41,22 @@
 				</li>
 			{/each}
 		</ol>
+
+		{#if context.settings.data.debugMode}
+			<h2 class="text-title mt-8">
+				{m.common_ram_usage()}
+			</h2>
+			<p class="text-pretty">
+				{m.common_ram_usage_description()}
+			</p>
+
+			<TransactionRAM traces={data.transaction.traces} />
+
+			<h2 class="text-title mt-8">
+				{m.common_transaction_details()}
+			</h2>
+
+			<TransactionHeader transaction={data.transaction} />
+		{/if}
 	</div>
 </Stack>
