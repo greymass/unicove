@@ -34,13 +34,15 @@ export const GET: RequestHandler = async ({ fetch, locals: { network }, params }
 					const registryTokens = await fetch(`/${network}/api/registry/tokens`);
 					if (registryTokens.ok) {
 						const json = await registryTokens.json();
-						tokens = json.tokens.map((t: RegistryTypes.token_row) =>
-							UnicoveTypes.token_definition.from({
-								chain: network.chain.id,
-								contract: t.contract,
-								symbol: Asset.Symbol.from(`0,${t.ticker}`)
-							})
-						);
+						tokens = json.tokens
+							.filter((t: RegistryTypes.token_row) => t.contract)
+							.map((t: RegistryTypes.token_row) =>
+								UnicoveTypes.token_definition.from({
+									chain: network.chain.id,
+									contract: t.contract,
+									symbol: Asset.Symbol.from(`0,${t.ticker}`)
+								})
+							);
 					}
 				}
 				response = await getAccount2(network, params.name, tokens);
