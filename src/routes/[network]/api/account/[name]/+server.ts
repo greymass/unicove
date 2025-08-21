@@ -35,7 +35,11 @@ export const GET: RequestHandler = async ({ fetch, locals: { network }, params }
 					if (registryTokens.ok) {
 						const json = await registryTokens.json();
 						tokens = json.tokens.map((t: RegistryTypes.token_row) =>
-							UnicoveTypes.token_definition.from(t)
+							UnicoveTypes.token_definition.from({
+								chain: network.chain.id,
+								contract: t.contract,
+								symbol: Asset.Symbol.from(`0,${t.ticker}`)
+							})
 						);
 					}
 				}
