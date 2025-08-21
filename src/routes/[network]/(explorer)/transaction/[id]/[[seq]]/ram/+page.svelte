@@ -30,7 +30,7 @@
 			{#each trace.account_ram_deltas as delta}
 				<TR>
 					<TD class="text-right font-mono font-bold">
-						<Number delta number={delta.delta} colored />
+						<Number delta number={-delta.delta} colored />
 					</TD>
 					<TD>
 						<Account name={delta.account} />
