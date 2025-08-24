@@ -160,6 +160,31 @@
 		transactResult = undefined;
 	}
 
+	function actionParams(field: ABI.Field, params: Record<string, any> = {}) {
+		const customStruct = data.abi.structs.find((s: any) => s.name === field.type);
+		if (customStruct) {
+			const subParam: Record<string, any> = {};
+			customStruct.fields.forEach((f) => actionParams(f, subParam));
+			params[field.name] = subParam;
+			return params;
+		}
+		switch (field.type) {
+			case 'bool': {
+				params[field.name] = false;
+				break;
+			}
+			case 'checksum256?': {
+				params[field.name] = null;
+				break;
+			}
+			default: {
+				params[field.name] = '';
+				break;
+			}
+		}
+		return params;
+	}
+
 	onMount(() => {
 		useReadOnly = page.url.searchParams.get('readonly') === 'true';
 		triggerOnPageLoad = page.url.searchParams.get('triggerOnPageLoad') === 'true';
@@ -168,37 +193,22 @@
 				actionInputs[field.name] = '[]';
 				return;
 			}
-			switch (field.type) {
-				case 'bool': {
-					actionInputs[field.name] = false;
-					break;
-				}
-				default: {
-					actionInputs[field.name] = '';
-					break;
-				}
-			}
+			actionInputs = flatten(actionParams(field));
 		});
 		try {
-			const action = Serializer.decode({
-				data: Bytes.from(data.data || '00'),
-				abi: data.abi,
-				type: String(data.action.name)
-			});
-			if (action) {
-				const data = Serializer.objectify(action);
-				Object.keys(data).forEach((key) => {
-					if (typeof data[key] === 'object') {
-						data[key] = JSON.stringify(data[key]);
-					} else {
-						data[key] = data[key];
-					}
+			if (data.data) {
+				const action = Serializer.decode({
+					data: Bytes.from(data.data),
+					abi: data.abi,
+					type: String(data.action.name)
 				});
-				actionInputs = flatten(data);
-				if (useReadOnly && triggerOnPageLoad) {
-					setTimeout(() => {
-						transact();
-					}, 500);
+				if (action) {
+					actionInputs = flatten(Serializer.objectify(action));
+					if (useReadOnly && triggerOnPageLoad) {
+						setTimeout(() => {
+							transact();
+						}, 500);
+					}
 				}
 			}
 		} catch (e) {
