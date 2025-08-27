@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getContext, onMount, tick } from 'svelte';
-	import { Debounced, FiniteStateMachine } from 'runed';
+	import { FiniteStateMachine } from 'runed';
 	import {
 		Card,
 		TextInput,
@@ -19,182 +19,66 @@
 
 	import * as RegistryContract from '$lib/wharf/contracts/registry';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import { Asset, Checksum256, Name, UInt64 } from '@wharfkit/antelope';
+	import { Asset, Checksum256, UInt64 } from '@wharfkit/antelope';
 	import TransactForm from '$lib/components/transact/form.svelte';
+	import { type AllocationInput, createTokenRAMCosts, CreateTokenState } from './state.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 
-	let registryConfig: RegistryContract.Types.config_row | undefined = $state();
+	const tokenState = new CreateTokenState();
 	onMount(async () => {
-		registryConfig = await context.network.contracts.registry.table('config').get();
-	});
-
-	const baseRAMCost = 513;
-	const perOpenRAMCost = 240;
-
-	let minlength = $derived(Number(registryConfig?.regtoken.minlength) || 1);
-	const maxlength = 7;
-
-	function validateTicker(value: string) {
-		const trimmedValue = value.trim();
-		return (
-			trimmedValue.length >= minlength &&
-			trimmedValue.length <= maxlength &&
-			/^[A-Z]+$/.test(trimmedValue)
-		);
-	}
-
-	function validateSupply(value: string) {
-		if (value === '') return false;
-		const numValue = Number(value);
-		return numValue > 0 && String(UInt64.from(numValue)) === value;
-	}
-
-	function validatePrecision(value: string) {
-		if (value === '') return false;
-		const numValue = Number(value);
-		return numValue >= 0 && numValue <= 18;
-	}
-
-	let tokenContractName = $state('tokens.gm');
-	let tickerValue = $state('');
-	const tickerValueDebounced = new Debounced(() => tickerValue, 500);
-	let tickerAvailable = $state(false);
-	let tickerValid = $derived.by(() => validateTicker(tickerValue));
-	let tickerRef: HTMLInputElement | undefined = $state();
-
-	let precisionValue = $state('');
-	let precisionValid = $derived.by(() => validatePrecision(precisionValue));
-	let precisionRef: HTMLInputElement | undefined = $state();
-
-	let supplyValue = $state('');
-	let supplyValid = $derived.by(() => validateSupply(supplyValue));
-	let supplyRef: HTMLInputElement | undefined = $state();
-
-	interface AllocationInput {
-		id: number;
-		receiver: string;
-		receiverValid: boolean;
-		quantity: number | undefined;
-		quantityValid: boolean;
-	}
-
-	let allocations: AllocationInput[] = $state([
-		{
-			id: 1,
-			receiver: '',
-			// receiver: 'test',
-			receiverValid: false,
-			quantity: undefined,
-			// quantity: 1000,
-			quantityValid: false
-		}
-	]);
-
-	let allocationsValidNames = $derived.by(() => {
-		return allocations.every((allocation) => {
-			const validName = Name.from(allocation.receiver).equals(allocation.receiver);
-			return validName;
-		});
-	});
-
-	let allocationsValidQuantities = $derived.by(() => {
-		return allocations.every((allocation) => {
-			const greaterThanZero = Number(allocation.quantity) > 0;
-			return greaterThanZero;
-		});
-	});
-
-	let allocationsValidTotalQuantity = $derived.by(() => {
-		const total = allocations.reduce((sum, allocation) => {
-			const quantity = Number(allocation.quantity);
-			return sum + (isNaN(quantity) ? 0 : quantity);
-		}, 0);
-		return total === Number(supplyValue);
-	});
-
-	let allocationValid = $derived.by(
-		() => allocationsValidNames && allocationsValidQuantities && allocationsValidTotalQuantity
-	);
-
-	let allocationIncrement = $state(1);
-
-	function addAllocation() {
-		allocationIncrement += 1;
-		allocations.push({
-			id: allocationIncrement,
-			receiver: '',
-			receiverValid: false,
-			quantity: undefined,
-			quantityValid: false
-		});
-	}
-
-	const supplyPreview = $derived.by(() => {
-		try {
-			return Asset.fromFloat(Number(supplyValue), `${precisionValue},${tickerValue}`);
-		} catch (error) {
-			console.error('Error creating supply preview:', error);
-			return undefined;
-		}
+		await tokenState.init(context);
 	});
 
 	$effect(() => {
-		// if the ticker value changes, we need to invalidate the available state
-		if (tickerValid && tickerAvailable === true) {
-			if (tickerValue !== tickerValueDebounced.current) {
-				console.log('debounced vs value differ, reset available');
-				tickerAvailable = false;
-			}
-		}
-	});
-
-	$effect(() => {
-		const name = String(tickerValueDebounced.current);
-		if (name && tickerValid) {
-			console.log('searching for', name);
+		const name = String(tokenState.ticker.value);
+		if (name && tokenState.ticker.valid) {
+			tokenState.tickerCheck = true;
+			tokenState.tickerAvailable = false;
 			context.network.contracts.registry
 				.table('tokens')
-				.get(name)
+				.get(Asset.SymbolCode.from(name).value)
 				.then((token) => {
-					console.log(JSON.stringify(token));
-					tickerAvailable = false;
+					if (!token) {
+						tokenState.tickerAvailable = true;
+					}
 				})
 				.catch((error) => {
-					console.log('error', error);
-					tickerAvailable = true;
+					console.warn('error during token ticker lookup', error);
+					tokenState.tickerAvailable = false;
+				})
+				.finally(() => {
+					tokenState.tickerCheck = false;
 				});
 		}
 	});
-
-	let allValid = $derived.by(() => tickerValid);
 
 	type FormStep = 'welcome' | 'ticker' | 'supply' | 'allocation' | 'preview' | 'complete';
 
 	type FormEvent = 'next' | 'previous' | 'reset' | 'success' | 'error';
 
-	const f = new FiniteStateMachine<FormStep, FormEvent>('welcome', {
+	const f = new FiniteStateMachine<FormStep, FormEvent>('ticker', {
 		welcome: {
 			next: 'ticker'
 		},
 		ticker: {
-			next: () => (tickerValid ? 'supply' : 'ticker'),
+			next: () => (currentStepValid ? 'supply' : 'ticker'),
 			reset,
-			_enter: () => tick().then(() => tickerRef?.focus())
+			_enter: () => tick().then(() => tokenState.ticker.ref?.focus())
 		},
 		supply: {
-			next: () => (precisionValid && supplyValid ? 'allocation' : 'supply'),
+			next: () => (currentStepValid ? 'allocation' : 'supply'),
 			previous: 'ticker',
 			reset,
-			_enter: () => tick().then(() => precisionRef?.focus())
+			_enter: () => tick().then(() => tokenState.precision.ref?.focus())
 		},
 		allocation: {
-			next: () => (allocationValid ? 'preview' : 'allocation'),
+			next: () => (currentStepValid ? 'preview' : 'allocation'),
 			previous: 'supply',
 			reset
 		},
 		preview: {
-			next: () => (allValid ? 'complete' : 'preview'),
+			next: () => (currentStepValid ? 'complete' : 'preview'),
 			previous: 'allocation',
 			reset
 		},
@@ -209,13 +93,16 @@
 	const currentStepValid = $derived.by(() => {
 		switch (f.current) {
 			case 'ticker': {
-				return tickerValid;
+				return tokenState.ticker.valid && tokenState.tickerAvailable;
 			}
 			case 'supply': {
-				return precisionValid && supplyValid;
+				return tokenState.precision.valid && tokenState.supply.valid;
 			}
 			case 'allocation': {
-				return allocationValid;
+				return tokenState.allocationsValid;
+			}
+			case 'preview': {
+				return tokenState.valid;
 			}
 			default: {
 				return true;
@@ -234,10 +121,6 @@
 		}
 	}
 
-	function removeAllocation(id: number) {
-		allocations = allocations.filter((allocation) => allocation.id !== id);
-	}
-
 	let id: Checksum256 | undefined = $state();
 	let error: string | undefined = $state();
 
@@ -245,60 +128,13 @@
 		if (!context.account) {
 			throw new Error('No account selected');
 		}
-		if (!registryConfig?.fees.regtoken) {
-			throw new Error('Registry contract not loaded');
-		}
 		if (!context.wharf.contractKit) {
 			throw new Error('ContractKit not available');
 		}
-		const actor = context.account.name;
-		const symbol = Asset.Symbol.from(`${precisionValue},${tickerValue}`);
-		const tokenContract = await context.wharf.contractKit.load(tokenContractName);
-		const actions = [
-			// Open Balance
-			context.network.contracts.registry.action('openbalance', {
-				account: actor
-			}),
-			// Transfer fee
-			context.network.contracts.token.action('transfer', {
-				from: actor,
-				to: context.network.contracts.registry.account,
-				quantity: registryConfig.fees.regtoken,
-				memo: ''
-			}),
-			// Register the token
-			context.network.contracts.registry.action('regtoken', {
-				creator: actor,
-				ticker: tickerValue,
-				payment: registryConfig.fees.regtoken
-			}),
-			// Set token contract
-			context.network.contracts.registry.action('setcontract', {
-				ticker: tickerValue,
-				contract: tokenContractName
-			}),
-			// Set supply
-			tokenContract.action('setsupply', {
-				ticker: tickerValue,
-				supply: Asset.fromFloat(Number(supplyValue), symbol)
-			}),
-			// Open balances for allocations
-			...allocations.map((allocation) =>
-				tokenContract.action('open', {
-					owner: allocation.receiver,
-					symbol,
-					ram_payer: actor
-				})
-			),
-			// Distribute tokens
-			tokenContract.action('distribute', {
-				ticker: tickerValue,
-				allocations: allocations.map((allocation) => ({
-					receiver: allocation.receiver,
-					quantity: Asset.fromFloat(Number(allocation.quantity), symbol)
-				}))
-			})
-		];
+		const tokenContract = await context.wharf.contractKit.load(
+			tokenState.tokenStandardContractName
+		);
+		const actions = tokenState.getActions(context.account.name, tokenContract);
 		context.wharf
 			.transact({ actions }, { broadcast: false })
 			.then((result) => {
@@ -317,10 +153,10 @@
 	<TextInput
 		id="ticker-input"
 		label="Token Ticker"
-		placeholder={`Enter a ${minlength}-${maxlength} letter token ticker...`}
+		placeholder={`Enter a ${tokenState.minlength}-${tokenState.maxlength} letter token ticker...`}
 		onkeyup={onInputKeyboardEvent}
-		bind:ref={tickerRef}
-		bind:value={tickerValue}
+		bind:ref={tokenState.ticker.ref}
+		bind:value={tokenState.ticker.value}
 	/>
 {/snippet}
 
@@ -331,10 +167,10 @@
 		type="number"
 		min="0"
 		max="18"
-		placeholder="Enter token precision (0-18)..."
+		placeholder="Enter token precision..."
 		onkeyup={onInputKeyboardEvent}
-		bind:ref={precisionRef}
-		bind:value={precisionValue}
+		bind:ref={tokenState.precision.ref}
+		bind:value={tokenState.precision.value}
 	/>
 {/snippet}
 
@@ -344,8 +180,8 @@
 		label="Token Supply"
 		placeholder={`Enter token supply...`}
 		onkeyup={onInputKeyboardEvent}
-		bind:ref={supplyRef}
-		bind:value={supplyValue}
+		bind:ref={tokenState.supply.ref}
+		bind:value={tokenState.supply.value}
 	/>
 {/snippet}
 
@@ -361,36 +197,56 @@
 			<NumberInput
 				label="Quantity"
 				placeholder="Token quantity..."
-				min={0.000000000000000001}
+				min={1}
 				bind:value={allocation.quantity}
 				bind:valid={allocation.quantityValid}
 			/>
-			<Button variant="pill" onclick={() => removeAllocation(allocation.id)}>Remove</Button>
+			<Button variant="pill" onclick={() => tokenState.removeAllocation(allocation.id)}>
+				Remove
+			</Button>
 		</Card>
 	{/key}
 {/snippet}
 
 {#snippet AllocationStep()}
-	{#each allocations as allocation}
+	{#each tokenState.allocations as allocation}
 		{@render AllocationCustom(allocation)}
 	{/each}
-	<Button onclick={addAllocation}>Add Allocation</Button>
+	<Button onclick={tokenState.addAllocation}>Add Allocation</Button>
+{/snippet}
+
+{#snippet TickerAvailable()}
+	<p>
+		Status:
+		{#if tokenState.ticker.valid}
+			{#if tokenState.tickerCheck}
+				Checking availability...
+			{:else if tokenState.tickerAvailable}
+				Available to register
+			{:else}
+				Already registered
+			{/if}
+		{:else}
+			Invalid Ticker
+		{/if}
+	</p>
 {/snippet}
 
 {#snippet TickerStep()}
 	{@render TickerInput()}
+	{@render TickerAvailable()}
 	<p>Rules</p>
 	<ul>
 		<li>Must be all uppercase letters (no numbers or special characters)</li>
-		<li>Must be at least {minlength} characters</li>
-		<li>Must be at most {maxlength} characters</li>
+		<li>Must be at least {tokenState.minlength} characters</li>
+		<li>Must be at most {tokenState.maxlength} characters</li>
 	</ul>
 {/snippet}
 
 {#snippet SupplyStep()}
 	{@render PrecisionInput()}
 	{@render SupplyInput()}
-	<p>Supply Preview: {supplyPreview}</p>
+	<p>Supply Preview: {tokenState.supplyPreview}</p>
 	<p>Rules</p>
 	<ul>
 		<li>Must be a positive integer</li>
@@ -401,7 +257,7 @@
 
 {#snippet ButtonGroup()}
 	{#if f.current === 'complete'}{:else if f.current === 'preview'}
-		<Button onclick={transact} disabled={!allValid}>Create</Button>
+		<Button onclick={transact} disabled={!tokenState.valid}>Create</Button>
 	{:else}
 		<Button onclick={next} disabled={!currentStepValid}>Next</Button>
 	{/if}
@@ -428,154 +284,132 @@
 	</div>
 {/snippet}
 
-<TransactForm {id} {error} onsuccess={Success} onfailure={Failure}>
-	{#if f.current === 'welcome'}
-		{#if registryConfig}
-			<h2>Welcome</h2>
-			<p>As a token creator, you will:</p>
-			<ul>
-				<li>Pay a fee of {registryConfig.fees.regtoken}</li>
-				<li>
-					Pay the fees required for the network resources (CPU, NET, RAM) to perform the creation
-					and distribution.
-				</li>
-				<li>Select an available token ticker</li>
-				<li>Select a type of token</li>
-				<li>Define the tokens decimal precision and maximum supply</li>
-				<li>Set the tokens initial distribution</li>
-			</ul>
-		{:else}
-			<p>Loading {context.network} Registry...</p>
-		{/if}
-	{/if}
-
-	{#if f.current === 'ticker'}
-		{@render TickerStep()}
-	{/if}
-
-	{#if f.current === 'supply'}
-		{@render SupplyStep()}
-	{/if}
-
-	{#if f.current === 'allocation'}
-		{@render AllocationStep()}
-	{/if}
-
-	{#if f.current === 'preview'}
-		<h2>Preview</h2>
-		<p>Review the information below and click Create to create your token.</p>
-		<Card>
-			<ul>
-				<li>Token Ticker: {tickerValue}</li>
-				<li>Token Precision: {precisionValue}</li>
-				<li>
-					Token Supply:
-					<AssetElement
-						variant="full"
-						value={Asset.fromFloat(Number(supplyValue), `${precisionValue},${tickerValue}`)}
-					/>
-				</li>
-			</ul>
-		</Card>
-		<Card>
-			<Table>
-				{#snippet thead()}
-					<TH class="text-lg font-bold">Receiving Account</TH>
-					<TH class="text-lg font-bold">Quantity</TH>
-				{/snippet}
-				{#each allocations as allocation}
-					<TR>
-						<TD>
-							<Account
-								target="blank"
-								href={`/${context.network}/account/${allocation.receiver}`}
-								name={allocation.receiver}
-							/>
-						</TD>
-						<TD>
-							<AssetElement
-								variant="full"
-								value={Asset.fromFloat(
-									Number(allocation.quantity),
-									`${precisionValue},${tickerValue}`
-								)}
-							/>
-						</TD>
-					</TR>
-				{/each}
-			</Table>
-		</Card>
-		<Card>
-			<Table>
-				{#snippet thead()}
-					<TH class="text-lg font-bold">Fee</TH>
-					<TH class="text-lg font-bold">Cost</TH>
-				{/snippet}
+{#snippet Preview()}
+	<h2>Preview</h2>
+	<p>Review the information below and click Create to create your token.</p>
+	<Card>
+		<ul>
+			<li>Token Ticker: {tokenState.ticker.value}</li>
+			<li>Token Precision: {tokenState.precision.value}</li>
+			<li>
+				Token Supply:
+				<AssetElement variant="full" value={tokenState.supplyPreview} />
+			</li>
+		</ul>
+	</Card>
+	<Card>
+		<Table>
+			{#snippet thead()}
+				<TH class="text-lg font-bold">Receiving Account</TH>
+				<TH class="text-lg font-bold">Quantity</TH>
+			{/snippet}
+			{#each tokenState.allocations as allocation}
 				<TR>
-					<TD>Registration Fee</TD>
 					<TD>
-						{registryConfig?.fees.regtoken}
+						<Account
+							target="blank"
+							href={`/${context.network}/account/${allocation.receiver}`}
+							name={allocation.receiver}
+						/>
+					</TD>
+					<TD>
+						<AssetElement
+							variant="full"
+							value={Asset.fromFloat(
+								Number(allocation.quantity),
+								`${tokenState.precision.value},${tokenState.ticker.value}`
+							)}
+						/>
 					</TD>
 				</TR>
-				<TR>
-					<TD>Estimated RAM Usage</TD>
-					<TD>{baseRAMCost + perOpenRAMCost * allocations.length} bytes</TD>
-				</TR>
-			</Table>
-		</Card>
+			{/each}
+		</Table>
+	</Card>
+	<Card>
+		<Table>
+			{#snippet thead()}
+				<TH class="text-lg font-bold">Fee</TH>
+				<TH class="text-lg font-bold">Cost</TH>
+			{/snippet}
+			<TR>
+				<TD>Registration Fee</TD>
+				<TD>
+					{tokenState.registryConfig?.fees.regtoken}
+				</TD>
+			</TR>
+			<TR>
+				<TD>Estimated RAM Usage</TD>
+				<TD>
+					{createTokenRAMCosts.base + createTokenRAMCosts.perOpen * tokenState.allocations.length}
+					bytes
+				</TD>
+			</TR>
+		</Table>
+	</Card>
+{/snippet}
+
+{#snippet Welcome(config: RegistryContract.Types.config_row)}
+	<h2>Welcome</h2>
+	<p>As a token creator, you will:</p>
+	<ul>
+		<li>Pay a fee of {config.fees.regtoken}</li>
+		<li>
+			Pay the fees required for the network resources (CPU, NET, RAM) to perform the creation and
+			distribution.
+		</li>
+		<li>Select an available token ticker</li>
+		<li>Select a type of token</li>
+		<li>Define the tokens decimal precision and maximum supply</li>
+		<li>Set the tokens initial distribution</li>
+	</ul>
+{/snippet}
+
+<TransactForm {id} {error} onsuccess={Success} onfailure={Failure}>
+	{#if tokenState.registryConfig}
+		{#if f.current === 'welcome'}
+			{@render Welcome(tokenState.registryConfig)}
+		{/if}
+
+		{#if f.current === 'ticker'}
+			{@render TickerStep()}
+		{/if}
+
+		{#if f.current === 'supply'}
+			{@render SupplyStep()}
+		{/if}
+
+		{#if f.current === 'allocation'}
+			{@render AllocationStep()}
+		{/if}
+
+		{#if f.current === 'preview'}
+			{@render Preview()}
+		{/if}
+
+		{@render ButtonGroup()}
+	{:else}
+		<p>Loading {context.network} Registry...</p>
 	{/if}
 </TransactForm>
 
-{@render ButtonGroup()}
-
 {#if context.settings.data.debugMode}
 	{#if f.current === 'ticker'}
-		<Code
-			json={{
-				tickerValue,
-				tickerValid,
-				tickerAvailable
-			}}
-		/>
+		<Code json={tokenState.ticker} />
 	{/if}
 
 	{#if f.current === 'supply'}
 		<Code
 			json={{
-				precisionValue,
-				precisionValid,
-				supplyValue,
-				supplyValid,
-				supplyPreview
+				precision: tokenState.precision,
+				supply: tokenState.supply
 			}}
 		/>
 	{/if}
 
 	{#if f.current === 'allocation'}
-		<Code
-			json={{
-				allocationIncrement,
-				allocations,
-				allocationValid,
-				allocationsValidNames,
-				allocationsValidQuantities,
-				allocationsValidTotalQuantity
-			}}
-		/>
+		<Code json={tokenState.allocations} />
 	{/if}
 
 	<h2>Form State</h2>
-	<Code
-		json={{
-			step: f.current,
-			state: {
-				tickerValue,
-				precisionValue,
-				supplyValue
-			},
-			currentStepValid,
-			allValid,
-			registryConfig
-		}}
-	/>
+	<Code json={tokenState} />
 {/if}
