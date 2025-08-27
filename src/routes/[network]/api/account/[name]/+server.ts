@@ -40,7 +40,7 @@ export const GET: RequestHandler = async ({ fetch, locals: { network }, params }
 								UnicoveTypes.token_definition.from({
 									chain: network.chain.id,
 									contract: t.contract,
-									symbol: Asset.Symbol.from(`0,${t.ticker}`)
+									symbol: Asset.Symbol.from(`${t.precision},${t.ticker}`)
 								})
 							);
 					}
