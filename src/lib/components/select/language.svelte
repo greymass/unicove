@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { i18n } from '$lib/i18n';
+	import { i18n, languageNames } from '$lib/i18n';
 	import {
 		availableLanguageTags,
 		languageTag,
@@ -9,12 +9,14 @@
 	import { createSelect, melt, type CreateSelectProps } from '@melt-ui/svelte';
 	import { fade } from 'svelte/transition';
 	import ChevronDown from '@lucide/svelte/icons/chevron-down';
-	import * as m from '$lib/paraglide/messages';
 	import { getContext } from 'svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { goto } from '$app/navigation';
 
-	let defaultLang = { value: languageTag(), label: m[`common_${languageTag()}`]() };
+	let defaultLang = {
+		value: languageTag(),
+		label: languageNames[languageTag() as keyof typeof languageNames]
+	};
 	const context = getContext<UnicoveContext>('state');
 
 	const handleSelect: CreateSelectProps<AvailableLanguageTag>['onSelectedChange'] = ({ next }) => {
@@ -63,7 +65,7 @@
 				class=" hover:bg-primary hover:text-on-primary focus:text-on-primary data-highlighted:bg-primary data-highlighted:text-on-primary relative cursor-pointer rounded-xl px-2 py-1 font-medium focus:z-10 data-disabled:opacity-50"
 				use:melt={$option({ value: lang, label: lang })}
 			>
-				{m[`common_${lang}`]()}
+				{languageNames[lang as keyof typeof languageNames]}
 			</li>
 		{/each}
 	</ul>
