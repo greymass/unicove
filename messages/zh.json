@@ -219,7 +219,7 @@
 	"common_role": "角色",
 	"common_save_permission": "保留权限",
 	"common_search": "搜索……",
-	"common_search_instructions": "搜索 Unicove 功能，或输入网络上的账户名、公钥或交易 ID。",
+	"common_search_instructions": "搜索 Unicove 功能，或在网络中输入账户名、公钥或交易 ID。",
 	"common_search_network": "搜索 {network} 网络……",
 	"common_search_no_results": "未找到结果",
 	"common_search_results": "搜索结果",
