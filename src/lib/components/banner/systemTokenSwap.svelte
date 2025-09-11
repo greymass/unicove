@@ -5,6 +5,7 @@
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import { Button } from 'unicove-components';
 	import { HelpCircle } from '@lucide/svelte';
+	import { Int64 } from '@wharfkit/session';
 
 	interface Props {
 		account?: AccountState;
@@ -13,7 +14,9 @@
 	let props: Props = $props();
 </script>
 
-{#if props.account && props.network.config.legacytoken && props.account.getBalance(props.network.config.legacytoken)}
+{#if props.account && props.network.config.legacytoken && props.account.getBalance(props.network.config.legacytoken) && props.account
+		.getBalance(props.network.config.legacytoken)
+		.balance.units.gt(Int64.from(0))}
 	<aside
 		class="from-primary-container to-primary-container/50 border-outline grid gap-4 rounded-lg border border-2 bg-gradient-to-br p-4 text-center"
 	>
