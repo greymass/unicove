@@ -188,7 +188,7 @@ function getLegacyTokenSwaps(network: NetworkState, pairs: TokenPair[]): TokenSw
 					pair: legacyPair,
 					contract: network.token.contract,
 					action: 'transfer',
-					reversible: !network.config.features.legacyexchangereversible
+					reversible: !!network.config.features.legacyexchangereversible
 				})
 			);
 		}
