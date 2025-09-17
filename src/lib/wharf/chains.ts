@@ -135,6 +135,7 @@ export const chainConfig: ChainConfig = {
 		eosntime: isENVTrue(env.PUBLIC_FEATURE_EOSNTIME),
 		giftedram: isENVTrue(env.PUBLIC_FEATURE_GIFTEDRAM),
 		hyperion: isENVTrue(env.PUBLIC_FEATURE_HYPERION),
+		legacyexchangereversible: isENVTrue(env.PUBLIC_LEGACY_TOKEN_EXCHANGEREVERSABLE),
 		lightapi: isENVTrue(env.PUBLIC_FEATURE_LIGHTAPI),
 		metamask: isENVTrue(env.PUBLIC_FEATURE_METAMASK),
 		powerup: isENVTrue(env.PUBLIC_FEATURE_POWERUP),
@@ -200,6 +201,7 @@ export interface ChainConfig {
 	features: Record<FeatureType, boolean>;
 	endpoints: ChainEndpoints;
 	legacytoken?: Token;
+	legacytokenreversible?: boolean;
 	lockedsupply?: NameType[]; // Accounts where tokens exist but are not in circulation
 	coinbase?: ChainCoinbaseConfig;
 	metamask?: ChainMetaMaskConfig;
@@ -215,6 +217,7 @@ export type FeatureType =
 	| 'eosntime'
 	| 'giftedram'
 	| 'hyperion'
+	| 'legacyexchangereversible'
 	| 'lightapi'
 	| 'metamask'
 	| 'powerup'
