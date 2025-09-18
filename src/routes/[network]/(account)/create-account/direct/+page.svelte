@@ -32,6 +32,24 @@
 	let accountValid = $state(false);
 	let accountName: Name = $state(Name.from(''));
 
+	let mirrorKeys: boolean = $state(false);
+	const currentAccountActiveKey = $derived.by(() => {
+		if (context.account) {
+			const active = context.account.permissions.find((perm) => perm.perm_name.equals('active'));
+			if (mirrorKeys && active && active.required_auth.keys.length > 0) {
+				return active.required_auth.keys[0].key;
+			}
+		}
+	});
+	const currentAccountOwnerKey = $derived.by(() => {
+		if (context.account) {
+			const active = context.account.permissions.find((perm) => perm.perm_name.equals('owner'));
+			if (mirrorKeys && active && active.required_auth.keys.length > 0) {
+				return active.required_auth.keys[0].key;
+			}
+		}
+	});
+
 	let activePublicKeyInput: PublicKeyInput | undefined = $state();
 	let activePublicKeyRef: HTMLInputElement | undefined = $state();
 	let activePublicKeyValid = $state(false);
@@ -123,6 +141,26 @@
 			}
 		}
 	});
+
+	function handleMirrorKeys() {
+		// Toggle flag
+		mirrorKeys = !mirrorKeys;
+		if (mirrorKeys) {
+			if (currentAccountOwnerKey) {
+				ownerPublicKey = currentAccountOwnerKey;
+				ownerPublicKeyInput?.set(String(ownerPublicKey));
+			}
+			if (currentAccountActiveKey) {
+				activePublicKey = currentAccountActiveKey;
+				activePublicKeyInput?.set(String(activePublicKey));
+			}
+		} else {
+			activePublicKey = undefined;
+			activePublicKeyInput?.set('');
+			ownerPublicKey = undefined;
+			ownerPublicKeyInput?.set('');
+		}
+	}
 
 	function onkeydown(event: Event) {
 		const { key } = event as KeyboardEvent;
@@ -283,6 +321,7 @@
 			{onkeydown}
 			id="owner-public-key-input"
 			placeholder={`Owner ${m.common_public_key()}`}
+			disabled={mirrorKeys}
 		/>
 	</fieldset>
 
@@ -296,8 +335,20 @@
 			{onkeydown}
 			id="active-public-key-input"
 			placeholder={`Active ${m.common_public_key()}`}
+			disabled={mirrorKeys}
 		/>
 	</fieldset>
+
+	<Button
+		variant="text"
+		onclick={handleMirrorKeys}
+		class={!showAll && f.current !== 'publickey' ? 'hidden' : ''}
+	>
+		<fieldset class="flex items-center gap-3">
+			<Checkbox checked={mirrorKeys} id="mirror-keys" />
+			<Label for="mirror-keys">Use the public keys from my current account</Label>
+		</fieldset>
+	</Button>
 {/snippet}
 
 {#snippet RAMBytes()}
@@ -310,12 +361,24 @@
 			</DLRow>
 			<DLRow title={`Owner ${m.common_public_key()}`}>
 				<DD>
-					{ownerPublicKey}
+					{#if context.account && mirrorKeys}
+						{`Owner ${m.common_public_key()}`}
+						from
+						<AccountText name={context.account.name} />
+					{:else}
+						{ownerPublicKey}
+					{/if}
 				</DD>
 			</DLRow>
 			<DLRow title={`Active ${m.common_public_key()}`}>
 				<DD>
-					{activePublicKey}
+					{#if context.account && mirrorKeys}
+						{`Active ${m.common_public_key()}`}
+						from
+						<AccountText name={context.account.name} />
+					{:else}
+						{activePublicKey}
+					{/if}
 				</DD>
 			</DLRow>
 			<DLRow title="RAM Bytes">
@@ -404,7 +467,7 @@
 
 {#snippet TransactError()}
 	<div class:hidden={f.current !== 'error'}>
-		<h3 class="text-title mb-4">{m.common_error}</h3>
+		<h3 class="text-title mb-4">{m.common_transaction_error()}</h3>
 		<p>{transactError}</p>
 	</div>
 {/snippet}
