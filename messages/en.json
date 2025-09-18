@@ -296,6 +296,7 @@
 	"common_unstaked": "Unstaked",
 	"common_unstaking": "Unstaking",
 	"common_usable_for": "Usable for",
+	"common_use_current_public_keys": "Use the public keys from my current account",
 	"common_used": "Used",
 	"common_value": "Value",
 	"common_value_with_amount": "Value: {amount}",

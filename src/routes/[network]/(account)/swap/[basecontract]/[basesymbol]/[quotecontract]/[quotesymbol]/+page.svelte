@@ -48,7 +48,6 @@
 
 	const swap = $derived.by(() => market.market.getSwap(data.base.id, data.quote.id));
 	const reversible = $derived(swap && swap.reversible);
-	$inspect(swap)
 
 	const feeAppliedTo = $derived(
 		swap && swap.fee && swap.fee.token.symbol.equals(baseQuantity.symbol)

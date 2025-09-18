@@ -346,7 +346,7 @@
 	>
 		<fieldset class="flex items-center gap-3">
 			<Checkbox checked={mirrorKeys} id="mirror-keys" />
-			<Label for="mirror-keys">Use the public keys from my current account</Label>
+			<Label for="mirror-keys">{m.common_use_current_public_keys()}</Label>
 		</fieldset>
 	</Button>
 {/snippet}
