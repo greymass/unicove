@@ -2,6 +2,7 @@
 	import type { TransactionResponse } from '$lib/types/transaction';
 	import Block from '$lib/components/elements/block.svelte';
 	import Contract from '../elements/contract.svelte';
+	import { Number } from 'unicove-components';
 	import { DateTime } from 'unicove-components';
 	import { DD, DL, DLRow } from 'unicove-components';
 
@@ -35,6 +36,16 @@
 			{#each transaction.contracts as contract}
 				<Contract name={contract} />
 			{/each}
+		</DD>
+	</DLRow>
+	<DLRow title={m.common_cpu_us()}>
+		<DD>
+			<Number number={transaction.trx.receipt.cpu_usage_us} />
+		</DD>
+	</DLRow>
+	<DLRow title={m.common_net_bytes()}>
+		<DD>
+			<Number number={transaction.trx.receipt.net_usage_words.multiplying(8)} />
 		</DD>
 	</DLRow>
 </DL>

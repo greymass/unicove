@@ -63,7 +63,7 @@
 		});
 	}
 
-	async function query(e: SubmitEvent) {
+	async function query(e: SubmitEvent | MouseEvent) {
 		e.preventDefault();
 		goto(pageUrl, {
 			keepFocus: true
@@ -112,7 +112,7 @@
 							<Label for="reverse">Reverse?</Label>
 						</fieldset>
 
-						<Button>Query</Button>
+						<Button onclick={query}>Query</Button>
 					</Cluster>
 				</form>
 

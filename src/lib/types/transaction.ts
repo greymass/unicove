@@ -150,25 +150,12 @@ export class TransactionResponse extends Struct {
 
 	// A deduplicated/filtered list of the traces
 	get filtered(): ActionTraceFiltered[] {
-		const digests: string[] = [];
-		const receipts: Record<string, ActionTraceReceipt[]> = {};
 		const traces: ActionTraceFiltered[] = this.traces
-			.filter((trace) => {
-				if (!receipts[String(trace.receipt.act_digest)]) {
-					receipts[String(trace.receipt.act_digest)] = [];
-				}
-				receipts[String(trace.receipt.act_digest)].push(trace.receipt);
-
-				if (digests.includes(String(trace.receipt.act_digest))) {
-					return false;
-				}
-				digests.push(String(trace.receipt.act_digest));
-				return true;
-			})
+			.filter((trace) => trace.act.account.equals(trace.receipt.receiver))
 			.map((trace) => {
 				return ActionTraceFiltered.from({
 					...trace,
-					receipts: receipts[String(trace.receipt.act_digest)]
+					receipts: []
 				});
 			});
 		return traces;
@@ -229,7 +216,10 @@ export class ActivityResponseAction extends Struct {
 		const receipt = ActionTraceReceipt.from({
 			abi_sequence: 0,
 			act_digest: Checksum256.hash(action.global_sequence.byteArray),
-			auth_sequence: accountReceipt.auth_sequence,
+			auth_sequence: accountReceipt.auth_sequence.map((auth) => [
+				String(auth.account),
+				String(auth.sequence)
+			]),
 			code_sequence: 0,
 			global_sequence: accountReceipt.global_sequence,
 			receiver: accountReceipt.receiver,

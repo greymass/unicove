@@ -28,6 +28,7 @@ import {
 	type DefaultContracts,
 	type FeatureType,
 	getChainConfigByName,
+	legacytoken,
 	systemtoken,
 	ramtoken,
 	wramtoken
@@ -71,6 +72,7 @@ export class NetworkState {
 	readonly resources = $derived(this.getResources());
 	readonly rex = $derived(this.getRexState());
 	readonly token = $derived.by(() => this.getSystemToken());
+	readonly legacy = $derived.by(() => this.getLegacyToken());
 
 	// Writable state
 	public abis?: ABICache = $state();
@@ -194,6 +196,18 @@ export class NetworkState {
 		}
 
 		return token;
+	}
+
+	getLegacyToken(): Token | undefined {
+		if (legacytoken) {
+			const token = Token.from(legacytoken);
+
+			if (this.sources && this.sources.legacy) {
+				token.distribution = this.sources.legacy.distribution;
+			}
+
+			return token;
+		}
 	}
 
 	getToken(id: TokenDefinition): Token {

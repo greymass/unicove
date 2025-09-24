@@ -55,6 +55,7 @@ export class ActivityLoader {
 	private contract?: string;
 	private action?: string;
 
+	public filtering = $state(false);
 	public scene: Scene = $state(new Scene());
 
 	private constructor(network: string, fetchOverride: typeof fetch) {
@@ -117,9 +118,11 @@ export class ActivityLoader {
 			const startIndex = more ? this.scene!.loadStart : 1;
 			// Use the /activity endpoint (robo) for generic activity feeds
 			let path = `/${this.network}/api/account/${account}/activity/${startIndex}`;
+			this.filtering = false;
 			// If filters are defined, use the /actions endpoint (hyperion) for specific contract actions
 			if (this.contract) {
 				path = `/${this.network}/api/account/${account}/actions/${startIndex}/${this.contract}`;
+				this.filtering = true;
 				if (this.action) {
 					path += `/${this.action}`;
 				}

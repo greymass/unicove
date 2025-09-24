@@ -212,6 +212,17 @@ async function getNetworkContract(network: NetworkState): Promise<NetworkDataSou
 
 	const networkState = await network.contracts.unicove.readonly('network');
 
+	let legacyDistribution: UnicoveTypes.token | undefined;
+	if (network.config.legacytoken && network.config.legacytoken.contract) {
+		legacyDistribution = await network.contracts.unicove.readonly('distribution', {
+			def: {
+				chain: network.chain.id,
+				symbol: network.config.legacytoken.symbol,
+				contract: network.config.legacytoken.contract
+			}
+		});
+	}
+
 	if (
 		(network.supports('staking') || network.supports('rentrex') || network.supports('powerup')) &&
 		network.resourceClient
@@ -225,6 +236,7 @@ async function getNetworkContract(network: NetworkState): Promise<NetworkDataSou
 
 	return NetworkDataSources.from({
 		...networkState,
+		legacy: legacyDistribution,
 		oracle,
 		sample
 	});

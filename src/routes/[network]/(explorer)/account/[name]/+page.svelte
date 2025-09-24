@@ -126,6 +126,16 @@
 		{#if legacytoken && legacybalance && legacybalance.balance.units.gt(ZeroUnits)}
 			<TokenBalance
 				balance={legacybalance}
+				cta={data.network.supports('directfunding') &&
+				data.network.config.coinbase?.assets.includes(legacybalance.balance.symbol.name)
+					? [
+							{
+								text: m.common_add_funds(),
+								href: `/${data.network}/fund`,
+								visible: isCurrentUser
+							}
+						]
+					: undefined}
 				{isCurrentUser}
 				open
 				network={data.network}

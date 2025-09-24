@@ -25,6 +25,7 @@
 		}
 		const options = [
 			{ href: urlBase, text: m.common_summary() },
+			{ href: `${urlBase}/details`, text: m.common_details() },
 			// { href: `${urlBase}/resources`, text: 'Resources' },
 			{
 				href: `${urlBase}/actions`,

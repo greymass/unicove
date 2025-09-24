@@ -12,7 +12,7 @@
 	import * as m from '$lib/paraglide/messages';
 	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte.js';
 	import { TokenBalance, TokenSwap, ZeroUnits } from '$lib/types/token.js';
-	import { ArrowRightLeft } from '@lucide/svelte';
+	import { ArrowRight, ArrowRightLeft } from '@lucide/svelte';
 	import { Label } from 'unicove-components';
 	import { SingleCard } from '$lib/components/layout';
 	import { Stack } from 'unicove-components';
@@ -47,6 +47,7 @@
 	);
 
 	const swap = $derived.by(() => market.market.getSwap(data.base.id, data.quote.id));
+	const reversible = $derived(swap && swap.reversible);
 
 	const feeAppliedTo = $derived(
 		swap && swap.fee && swap.fee.token.symbol.equals(baseQuantity.symbol)
@@ -222,13 +223,17 @@
 		<div
 			class="bg-surface-container z-10 col-span-full row-span-full rotate-90 place-self-center rounded-full sm:rotate-0"
 		>
-			<IconButton
-				icon={ArrowRightLeft}
-				href="/{data.network}/swap/{data.quote.id.url}/{data.base.id.url}"
-				onclick={flip}
-				disabled={context.wharf.transacting}
-				size="large"
-			/>
+			{#if reversible}
+				<IconButton
+					icon={ArrowRightLeft}
+					href="/{data.network}/swap/{data.quote.id.url}/{data.base.id.url}"
+					onclick={flip}
+					disabled={context.wharf.transacting}
+					size="large"
+				/>
+			{:else}
+				<IconButton icon={ArrowRight} disabled size="large" />
+			{/if}
 		</div>
 
 		<div

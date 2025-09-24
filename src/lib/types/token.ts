@@ -106,6 +106,15 @@ export class TokenSwap extends Struct {
 	@Struct.field(Name) declare contract: Name;
 	@Struct.field(Name) declare action: Name;
 	@Struct.field(TokenSwapFee, { optional: true }) declare fee?: TokenSwapFee;
+	@Struct.field('bool', { optional: true }) declare reversible?: boolean;
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	static from(data: any): TokenSwap {
+		return new this({
+			...data,
+			reversible: typeof data.reversible === 'boolean' ? data.reversible : true
+		});
+	}
 }
 
 export type TokenBalanceStates =

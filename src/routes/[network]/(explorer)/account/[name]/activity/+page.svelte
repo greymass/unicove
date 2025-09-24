@@ -63,6 +63,10 @@
 	let actionValid = $state(false);
 	let actionFilter = $state(Name.from(''));
 
+	const filterable = $derived.by(() => {
+		return contractValid && actionValid;
+	});
+
 	function filter() {
 		activityLoader.scene.reset();
 		activityLoader.setAccount(String(data.name));
@@ -70,16 +74,21 @@
 		activityLoader.setAction(String(actionFilter));
 		activityLoader.load();
 	}
+
+	function reset() {
+		contractFilter = Name.from('');
+		contractInput?.set('');
+		actionFilter = Name.from('');
+		actionInput?.set('');
+		activityLoader.scene.reset();
+		activityLoader.setAccount(String(data.name));
+		activityLoader.setContract('');
+		activityLoader.setAction('');
+		activityLoader.load();
+	}
 </script>
 
 <Stack class="py-4">
-	{#if isLoading}
-		<div class="flex items-center justify-center gap-4 py-20">
-			<div class="bounce bounce-1 h-3 w-3 rounded-full bg-white"></div>
-			<div class="bounce bounce-2 h-3 w-3 rounded-full bg-white"></div>
-			<div class="bounce bounce-3 h-3 w-3 rounded-full bg-white"></div>
-		</div>
-	{/if}
 	{#if data.network.supports('hyperion')}
 		<div class="flex gap-2">
 			<NameInput
@@ -99,7 +108,22 @@
 				bind:valid={actionValid}
 				placeholder="Action"
 			/>
-			<Button class="max-w-32 flex-0" onclick={filter}>Filter</Button>
+			<Button class="max-w-32 flex-0" onclick={filter} disabled={!filterable}>Filter</Button>
+			<Button class="max-w-32 flex-0" onclick={reset} disabled={!activityLoader.filtering}
+				>Reset</Button
+			>
+		</div>
+		{#if activityLoader.filtering}
+			<p>
+				Filtering to display {actionFilter} on the {contractFilter} contract.
+			</p>
+		{/if}
+	{/if}
+	{#if isLoading}
+		<div class="flex items-center justify-center gap-4 py-20">
+			<div class="bounce bounce-1 h-3 w-3 rounded-full bg-white"></div>
+			<div class="bounce bounce-2 h-3 w-3 rounded-full bg-white"></div>
+			<div class="bounce bounce-3 h-3 w-3 rounded-full bg-white"></div>
 		</div>
 	{/if}
 	{#if activityActions.length}
@@ -125,7 +149,6 @@
 				</li>
 			{/each}
 		</ol>
-
 		{#if hasMore}
 			<Button onclick={clickLoadMore} variant="primary" class="place-self-center">
 				{loadingText}

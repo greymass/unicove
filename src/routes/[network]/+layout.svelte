@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Checksum256, type NameType } from '@wharfkit/antelope';
+	import { type NameType } from '@wharfkit/antelope';
 	import { ChainDefinition } from '@wharfkit/common';
 	import { onMount, setContext, untrack } from 'svelte';
 	import { Head, type SeoConfig } from 'svead';
@@ -132,21 +132,7 @@
 			wharf.init(data.network);
 		}
 
-		const sessions = await wharf.sessionKit?.getSessions();
-		if (sessions) {
-			const lastUsedSession = wharf.chainsSession[String(data.network.chain.id)];
-			const anyValidSession =
-				sessions.length > 0
-					? sessions.find((s) => Checksum256.from(s.chain).equals(data.network.chain.id))
-					: undefined;
-			if (lastUsedSession) {
-				wharf.restore(lastUsedSession);
-			} else if (anyValidSession) {
-				wharf.restore(anyValidSession);
-			} else {
-				wharf.reset();
-			}
-		}
+		await wharf.restore();
 	}
 
 	$effect(() => {
