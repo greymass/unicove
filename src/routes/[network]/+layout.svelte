@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Checksum256, type NameType } from '@wharfkit/antelope';
+	import { type NameType } from '@wharfkit/antelope';
 	import { ChainDefinition } from '@wharfkit/common';
 	import { onMount, setContext, untrack } from 'svelte';
 	import { Head, type SeoConfig } from 'svead';
