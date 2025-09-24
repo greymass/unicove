@@ -1,5 +1,6 @@
 import {
 	PUBLIC_FEATURE_METAMASK_SNAP_ORIGIN,
+	PUBLIC_FEATURE_WEB_AUTHENTICATOR_URL,
 	PUBLIC_LOCAL_SIGNER,
 	PUBLIC_WALLET_ANCHOR,
 	PUBLIC_WALLET_CLOUDWALLET,
@@ -7,6 +8,7 @@ import {
 	PUBLIC_WALLET_METAMASK,
 	PUBLIC_WALLET_SCATTER,
 	PUBLIC_WALLET_TOKENPOCKET,
+	PUBLIC_WALLET_WEB_AUTHENTICATOR,
 	PUBLIC_WALLET_WOMBAT
 } from '$env/static/public';
 import type { ChainDefinition } from '@wharfkit/common';
@@ -20,6 +22,7 @@ import { WalletPluginMultiSig } from '$lib/wharf/plugins/multisig';
 import { WalletPluginPrivateKey } from '@wharfkit/wallet-plugin-privatekey';
 import { WalletPluginScatter } from '@wharfkit/wallet-plugin-scatter';
 import { WalletPluginTokenPocket } from '@wharfkit/wallet-plugin-tokenpocket';
+import { WalletPluginWebAuthenticator } from '@wharfkit/wallet-plugin-web-authenticator';
 import { WalletPluginWombat } from '@wharfkit/wallet-plugin-wombat';
 
 import { TransactPluginResourceProvider } from '@wharfkit/transact-plugin-resource-provider';
@@ -52,6 +55,14 @@ if (isENVTrue(PUBLIC_WALLET_METAMASK)) {
 
 if (isENVTrue(PUBLIC_WALLET_SCATTER)) {
 	baseWalletPlugins.push(new WalletPluginScatter());
+}
+
+if (isENVTrue(PUBLIC_WALLET_WEB_AUTHENTICATOR) && PUBLIC_FEATURE_WEB_AUTHENTICATOR_URL) {
+	baseWalletPlugins.push(
+		new WalletPluginWebAuthenticator({
+			webAuthenticatorUrl: PUBLIC_FEATURE_WEB_AUTHENTICATOR_URL
+		})
+	);
 }
 
 if (isENVTrue(PUBLIC_WALLET_TOKENPOCKET)) {
