@@ -85,6 +85,7 @@ export class WharfState {
 				walletPlugins
 			},
 			{
+				acceptUrlSession: true,
 				accountCreationPlugins,
 				transactPlugins
 			}
