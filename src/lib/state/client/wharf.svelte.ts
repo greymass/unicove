@@ -12,7 +12,6 @@ import {
 	type AccountCreationPlugin,
 	type CreateAccountOptions,
 	type LoginOptions,
-	type RestoreArgs,
 	type SerializedSession,
 	type TransactArgs,
 	type TransactOptions,
@@ -152,7 +151,7 @@ export class WharfState {
 		}
 	}
 
-	public async restore(args?: RestoreArgs, options?: LoginOptions) {
+	public async restore(args?: SerializedSession, options?: LoginOptions) {
 		if (!this.sessionKit) {
 			throw new Error('User not initialized');
 		}
@@ -166,14 +165,8 @@ export class WharfState {
 	}
 
 	public async switch(serialized: SerializedSession): Promise<Session> {
-		const session = await this.restore({
-			chain: serialized.chain,
-			actor: serialized.actor,
-			permission: serialized.permission,
-			walletPlugin: serialized.walletPlugin
-		});
+		const session = await this.restore(serialized);
 		this.chainsSession[String(serialized.chain)] = serialized;
-		// TODO: Redirect to the appropriate network in the URL
 		if (!session) {
 			throw new Error(`Failed to switch session to ${JSON.stringify(serialized)}`);
 		}
