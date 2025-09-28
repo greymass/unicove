@@ -79,7 +79,7 @@ export class WharfState {
 
 		this.sessionKit = new SessionKit(
 			{
-				appName: 'unicove',
+				appName: 'unicovealt',
 				chains: this.chains,
 				ui: new WebRenderer({ minimal: true }),
 				walletPlugins
