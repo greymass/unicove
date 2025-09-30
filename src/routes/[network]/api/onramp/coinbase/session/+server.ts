@@ -78,7 +78,8 @@ export const POST: RequestHandler = async ({ request }) => {
 						blockchains: ['eosio'] // Encompasses all unicove supported chains
 					}
 				],
-				assets: assets
+				assets: assets,
+				clientIp: request.headers.get('CF-Connecting-IP')
 			})
 		});
 
@@ -91,7 +92,11 @@ export const POST: RequestHandler = async ({ request }) => {
 		const responseData = await response.json();
 		const sessionToken = responseData.token;
 
-		return json({ token: sessionToken });
+		const results = json({ token: sessionToken });
+		results.headers.set('Access-Control-Allow-Origin', 'https://*.unicove.com');
+		results.headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+		results.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+		return results;
 	} catch (e) {
 		console.error('Error generating Coinbase session token:', e);
 		throw svelteKitError(500, 'An unexpected error occurred.');
