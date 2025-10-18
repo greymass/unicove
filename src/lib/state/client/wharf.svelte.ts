@@ -170,7 +170,7 @@ export class WharfState {
 		if (!session) {
 			throw new Error(`Failed to switch session to ${JSON.stringify(serialized)}`);
 		}
-		this.chainsSession[String(session.chain)] = session.serialize();
+		this.chainsSession[String(session.chain.id)] = session.serialize();
 		return session;
 	}
 
