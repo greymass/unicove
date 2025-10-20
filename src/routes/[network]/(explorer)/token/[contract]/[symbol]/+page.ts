@@ -1,17 +1,12 @@
-import { API, Asset, Name, Struct, type AssetType, type NameType } from '@wharfkit/antelope';
+import { API, type AssetType, type NameType } from '@wharfkit/antelope';
 import { error } from '@sveltejs/kit';
 
 import type { PageLoad } from './$types';
+import { LightAPIBalance } from '$lib/types';
 
 interface LightAPIHolder {
 	account: NameType;
 	balance: AssetType;
-}
-
-@Struct.type('lightapi_balance')
-class LightAPIBalance extends Struct {
-	@Struct.field(Name) declare account: Name;
-	@Struct.field(Asset) declare balance: Asset;
 }
 
 export const load: PageLoad = async ({ fetch, params, parent, url }) => {
