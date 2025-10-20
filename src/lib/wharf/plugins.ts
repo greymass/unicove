@@ -57,16 +57,16 @@ if (isENVTrue(PUBLIC_WALLET_SCATTER)) {
 	baseWalletPlugins.push(new WalletPluginScatter());
 }
 
+if (isENVTrue(PUBLIC_WALLET_TOKENPOCKET)) {
+	baseWalletPlugins.push(new WalletPluginTokenPocket());
+}
+
 if (isENVTrue(PUBLIC_WALLET_WEB_AUTHENTICATOR) && PUBLIC_FEATURE_WEB_AUTHENTICATOR_URL) {
 	baseWalletPlugins.push(
 		new WalletPluginWebAuthenticator({
 			webAuthenticatorUrl: PUBLIC_FEATURE_WEB_AUTHENTICATOR_URL
 		})
 	);
-}
-
-if (isENVTrue(PUBLIC_WALLET_TOKENPOCKET)) {
-	baseWalletPlugins.push(new WalletPluginTokenPocket());
 }
 
 if (isENVTrue(PUBLIC_WALLET_WOMBAT)) {
