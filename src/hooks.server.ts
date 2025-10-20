@@ -1,31 +1,15 @@
 import { sequence } from '@sveltejs/kit/hooks';
-import type { Handle, RequestEvent } from '@sveltejs/kit';
+import type { Handle } from '@sveltejs/kit';
 
 import { PUBLIC_CHAIN_SHORT } from '$env/static/public';
-import { availableLanguageTags } from '$lib/paraglide/runtime.js';
-import { i18n } from '$lib/i18n';
 import { isNetworkShortName, ramtoken, systemtoken } from '$lib/wharf/chains';
 import { getBackendNetworkByName } from '$lib/wharf/client/ssr';
 
-export const i18nHandle = i18n.handle();
 type HandleParams = Parameters<Handle>[0];
 
 const renamedNetworks: Record<string, string> = {
 	eos: 'vaulta'
 };
-
-export function getHeaderLang(event: RequestEvent) {
-	const acceptLanguage = event.request.headers.get('accept-language');
-	const locales =
-		acceptLanguage?.split(',')?.map((lang: string) => lang.split(';')[0].split('-')[0].trim()) ??
-		[];
-	for (const locale of locales) {
-		if (availableLanguageTags.find((l: string) => l.toLowerCase() === locale.toLowerCase())) {
-			return locale;
-		}
-	}
-	return null;
-}
 
 function isAPIPath(pathname: string) {
 	return /^\/[a-z0-9]+\/api/gm.test(pathname);
@@ -106,4 +90,4 @@ export async function redirectHandle({ event, resolve }: HandleParams): Promise<
 	return resolve(event);
 }
 
-export const handle: Handle = sequence(i18nHandle, redirectHandle, networkHandle);
+export const handle: Handle = sequence(redirectHandle, networkHandle);
