@@ -7,8 +7,6 @@
 	import { page } from '$app/state';
 	import { FiniteStateMachine } from 'runed';
 
-	import * as m from '$lib/paraglide/messages.js';
-
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { tokenEquals, type TokenBalance } from '$lib/types/token';
 	import { Types as RAMTypes } from '$lib/types/ram';
@@ -257,11 +255,11 @@
 	}
 
 	const subtitle = {
-		to: m.common_recipient(),
-		quantity: m.common_asset(),
-		memo: m.common_confirm(),
-		complete: m.common_complete(),
-		error: m.common_error()
+		to: 'Recipient',
+		quantity: 'Asset',
+		memo: 'Confirm',
+		complete: 'Complete',
+		error: 'Error'
 	};
 
 	const tokenOptions: TokenBalance[] = $derived.by(() => {
@@ -292,7 +290,7 @@
 
 {#snippet Recipient()}
 	<fieldset class="grid gap-2" class:hidden={!showAll && f.current !== 'to'}>
-		<Label for="to-input">{m.send_receiving_account()}</Label>
+		<Label for="to-input">Receiving Account</Label>
 		<NameInput
 			bind:this={toInput}
 			bind:ref={toRef}
@@ -300,7 +298,7 @@
 			bind:valid={toValid}
 			id="to-input"
 			{onkeydown}
-			placeholder={m.send_receiving_placeholder()}
+			placeholder="Enter the account name of the recipient"
 		/>
 	</fieldset>
 {/snippet}
@@ -308,7 +306,7 @@
 {#snippet Quantity()}
 	<section class="grid gap-6" class:hidden={!showAll && f.current !== 'quantity'}>
 		<fieldset class="grid gap-2">
-			<Label for="token-select">{m.send_tokens_to_send()}</Label>
+			<Label for="token-select">Token to send</Label>
 			{#if tokenOptions.length}
 				<TokenSelect
 					id="token-select"
@@ -325,12 +323,12 @@
 					}}
 				/>
 			{:else}
-				<p>{m.common_no_balances()}</p>
+				<p>No balances found.</p>
 			{/if}
 		</fieldset>
 
 		<fieldset class="grid gap-2">
-			<Label for="quantity-input">{m.send_amount_to_send()}</Label>
+			<Label for="quantity-input">Amount to send</Label>
 			<AssetInput
 				id="quantity-input"
 				bind:this={quantityInput}
@@ -343,31 +341,23 @@
 				min={sendState.min || 0}
 				max={sendState.max || 0}
 				{onkeydown}
-				placeholder={m.send_enter_amount({
-					token: sendState.quantity.symbol.code
-				})}
+				placeholder="Enter the amount of {sendState.quantity.symbol.code} to send"
 			/>
 
 			{#if context.account}
-				<Button variant="text" disabled={!context.account} onclick={max}>
-					{m.common_fill_max()}
-				</Button>
+				<Button variant="text" disabled={!context.account} onclick={max}>Fill Max</Button>
 			{/if}
 
 			{#if assetValid && sendState.value}
-				<Label for="quantity-input"
-					>{m.common_value_with_amount({
-						amount: formatCurrency(sendState.value)
-					})}</Label
-				>
+				<Label for="quantity-input">Value: {formatCurrency(sendState.value)}</Label>
 			{/if}
 
 			{#if !assetValidPrecision}
-				<p class="text-error">{m.common_invalid_number_decimals()}</p>
+				<p class="text-error">Invalid number, too many decimal places.</p>
 			{/if}
 
 			{#if !assetValidMaximum}
-				<p class="text-error">{m.common_amount_exceeds_balance()}</p>
+				<p class="text-error">Amount exceeds available balance.</p>
 			{/if}
 		</fieldset>
 	</section>
@@ -380,13 +370,13 @@
 		</ActionSummaryContainer>
 
 		<fieldset class="grid gap-2">
-			<Label for="memo-input">{m.common_memo()} ({m.common_optional()})</Label>
+			<Label for="memo-input">Memo (Optional)</Label>
 			<TextInput
 				id="memo-input"
 				bind:ref={memoRef}
 				bind:value={sendState.memo}
 				{onkeydown}
-				placeholder={m.send_memo_placeholder()}
+				placeholder="Specify a public memo for this transfer (optional)"
 			/>
 		</fieldset>
 	</div>
@@ -403,21 +393,19 @@
 {#snippet ButtonGroup()}
 	<fieldset class="grid grid-cols-1 gap-2 @sm:grid-cols-2">
 		{#if f.current === 'to'}
-			<Button variant="secondary" onclick={() => resetURL()}>{m.common_restart()}</Button>
+			<Button variant="secondary" onclick={() => resetURL()}>Restart</Button>
 		{:else if f.current === 'complete'}
-			<Button variant="secondary" onclick={() => resetURL()}>{m.send_start_new()}</Button>
-			<Button href={`/${data.network}/account/${context.account?.name}`}>
-				{m.common_view_my_account()}
-			</Button>
+			<Button variant="secondary" onclick={() => resetURL()}>Start new send</Button>
+			<Button href={`/${data.network}/account/${context.account?.name}`}>View my account</Button>
 		{:else}
-			<Button variant="secondary" onclick={previous}>{m.common_back()}</Button>
+			<Button variant="secondary" onclick={previous}>Back</Button>
 		{/if}
 
 		{#if f.current === 'memo'}
-			<Button class="" onclick={transact} disabled={!ready}>{m.common_submit()}</Button>
+			<Button class="" onclick={transact} disabled={!ready}>Submit</Button>
 		{:else if f.current !== 'complete'}
 			<Button class="" type="submit" onclick={preventDefault(next)} disabled={!nextValid}>
-				{m.common_next()}
+				Next
 			</Button>
 		{/if}
 	</fieldset>
@@ -445,7 +433,7 @@
 </SingleCard>
 
 {#if context.settings.data.debugMode}
-	<h3 class="text-title">{m.common_debugging()}</h3>
+	<h3 class="text-title">Debugging</h3>
 	<Code
 		>{JSON.stringify(
 			{
