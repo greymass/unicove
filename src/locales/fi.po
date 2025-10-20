@@ -1,0 +1,2277 @@
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=2; plural=n == 1 ? 0 : 1;\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2025-10-20T18:08:55.379Z\n"
+"POT-Creation-Date: 2025-10-20T18:08:55.379Z\n"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "$500/day"
+msgstr "crwdns4811:0crwdne4811:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Account not found: {account}"
+msgstr "crwdns4813:0{account}crwdne4813:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "An overview of the {account} account on the {network} Network. View account assets, activity, resources and more."
+msgstr "crwdns4815:0{account}crwdnd4815:0{network}crwdne4815:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{account} | {network} Network Account"
+msgstr "crwdns4817:0{account}crwdnd4817:0{network}crwdne4817:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Account Page"
+msgstr "crwdns4819:0crwdne4819:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Account overview on the {network} Network"
+msgstr "crwdns4821:0{network}crwdne4821:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Total Account Value"
+msgstr "crwdns4823:0crwdne4823:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Associated Accounts"
+msgstr "crwdns4825:0crwdne4825:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Decoded Data"
+msgstr "crwdns5876:0crwdne5876:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Raw JSON"
+msgstr "crwdns5878:0crwdne5878:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Formatted Data"
+msgstr "crwdns5880:0crwdne5880:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Ricardian"
+msgstr "crwdns5882:0crwdne5882:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Action Summary"
+msgstr "crwdns5884:0crwdne5884:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Active Session"
+msgstr "crwdns4827:0crwdne4827:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "EOS Network Rebrands to Vaulta"
+msgstr "crwdns4829:0crwdne4829:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Block #{height}"
+msgstr "crwdns4831:0#{height}crwdne4831:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Block #{height} was produced by {producer} on {timestamp}, which included {transactions} transactions performing {actions} actions."
+msgstr "crwdns4833:0#{height}crwdnd4833:0{producer}crwdnd4833:0{timestamp}crwdnd4833:0{transactions}crwdnd4833:0{actions}crwdne4833:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Block Details"
+msgstr "crwdns4835:0crwdne4835:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Buy {token} with Coinbase"
+msgstr "crwdns4837:0{token}crwdne4837:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Buy or transfer {token}"
+msgstr "crwdns4839:0{token}crwdne4839:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Buy {token} with Coinbase"
+msgstr "crwdns4841:0{token}crwdne4841:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Change network"
+msgstr "crwdns4843:0crwdne4843:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Coinbase service is currently unavailable."
+msgstr "crwdns4845:0crwdne4845:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "About {thing}"
+msgstr "crwdns4847:0{thing}crwdne4847:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Actor"
+msgstr "crwdns4849:0crwdne4849:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {account} account has some form of authority assigned to the other accounts listed below."
+msgstr "crwdns5738:0{account}crwdne5738:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Account Balance"
+msgstr "crwdns4851:0crwdne4851:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Account Created"
+msgstr "crwdns5740:0crwdne5740:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The account was successfully created."
+msgstr "crwdns5742:0crwdne5742:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "multisig using {account}"
+msgstr "crwdns4853:0{account}crwdne4853:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Account Name"
+msgstr "crwdns4855:0crwdne4855:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Action"
+msgstr "crwdns4857:0crwdne4857:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Actions"
+msgstr "crwdns4859:0crwdne4859:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Actor"
+msgstr "crwdns4861:0crwdne4861:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Add Account"
+msgstr "crwdns4863:0crwdne4863:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Add Contract"
+msgstr "crwdns4865:0crwdne4865:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Add Funds"
+msgstr "crwdns4867:0crwdne4867:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Add Key"
+msgstr "crwdns4869:0crwdne4869:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Add Wait"
+msgstr "crwdns4871:0crwdne4871:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Advanced"
+msgstr "crwdns4873:0crwdne4873:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Amount"
+msgstr "crwdns4875:0crwdne4875:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Amount exceeds available balance."
+msgstr "crwdns4877:0crwdne4877:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Amount to {action}"
+msgstr "crwdns4879:0{action}crwdne4879:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Approve"
+msgstr "crwdns4881:0crwdne4881:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Current APR"
+msgstr "crwdns4883:0crwdne4883:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Asset"
+msgstr "crwdns4885:0crwdne4885:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Accounts that allow the {account} account to sign on their behalf"
+msgstr "crwdns5744:0{account}crwdne5744:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Weight of {weight} and threshold of {threshold}."
+msgstr "crwdns5746:0{weight}crwdnd5746:0{threshold}crwdne5746:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Available"
+msgstr "crwdns4887:0crwdne4887:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Back"
+msgstr "crwdns4889:0crwdne4889:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Back to Permissions"
+msgstr "crwdns4891:0crwdne4891:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Balance"
+msgstr "crwdns4893:0crwdne4893:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Balance available"
+msgstr "crwdns4895:0crwdne4895:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "available to swap"
+msgstr "crwdns5864:0crwdne5864:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Balance Change"
+msgstr "crwdns5886:0crwdne5886:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Basic"
+msgstr "crwdns4897:0crwdne4897:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Basic Information"
+msgstr "crwdns4899:0crwdne4899:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The name, parent permission, and type (Basic or Advanced). Name and parent fields cannot be modified after the permission is created."
+msgstr "crwdns4901:0crwdne4901:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Block ID"
+msgstr "crwdns4903:0crwdne4903:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Next Block"
+msgstr "crwdns4905:0crwdne4905:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Block Number"
+msgstr "crwdns4907:0crwdne4907:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Previous Block"
+msgstr "crwdns4909:0crwdne4909:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Block Producers"
+msgstr "crwdns7094:0crwdne7094:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Validators on the {network} network."
+msgstr "crwdns7096:0{network}crwdne7096:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Breakdown"
+msgstr "crwdns4911:0crwdne4911:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Breaking News"
+msgstr "crwdns4913:0crwdne4913:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Buy"
+msgstr "crwdns4915:0crwdne4915:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Bytes"
+msgstr "crwdns4917:0crwdne4917:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Cancel"
+msgstr "crwdns4919:0crwdne4919:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Claim"
+msgstr "crwdns4921:0crwdne4921:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Clear"
+msgstr "crwdns4923:0crwdne4923:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Close"
+msgstr "crwdns4925:0crwdne4925:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Complete"
+msgstr "crwdns4927:0crwdne4927:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Confirm"
+msgstr "crwdns4929:0crwdne4929:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Confirm Details"
+msgstr "crwdns4931:0crwdne4931:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Carefully review and confirm the details of this transaction. Incorrectly setting your permissions could cause permanent loss of access to this permission or account!"
+msgstr "crwdns4933:0crwdne4933:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Connect Wallet"
+msgstr "crwdns4935:0crwdne4935:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Connect your wallet to login"
+msgstr "crwdns4937:0crwdne4937:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Contract"
+msgstr "crwdns4939:0crwdne4939:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Contract Isolation"
+msgstr "crwdns4941:0crwdne4941:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Restrict this permission to specific contracts and actions. Leave the action blank to allow all actions on a contract."
+msgstr "crwdns4943:0crwdne4943:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{contract} Processing"
+msgstr "crwdns5888:0{contract}crwdne5888:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Contracts Used"
+msgstr "crwdns5748:0crwdne5748:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Copied!"
+msgstr "crwdns4945:0crwdne4945:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Copy"
+msgstr "crwdns4947:0crwdne4947:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Total CPU"
+msgstr "crwdns4949:0crwdne4949:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "CPU (μs)"
+msgstr "crwdns4951:0crwdne4951:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Create an account"
+msgstr "crwdns4953:0crwdne4953:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Create Account {how}"
+msgstr "crwdns5750:0{how}crwdne5750:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "by paying {cost} for RAM"
+msgstr "crwdns5752:0{cost}crwdne5752:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Send EOS from an exchange or over a bridge to the account below with the memo provided to create your account."
+msgstr "crwdns5754:0crwdne5754:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Once the transfer is complete, use your private key to import your account into the wallet of your choosing."
+msgstr "crwdns5756:0crwdne5756:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "by transferring {bytes} bytes of RAM"
+msgstr "crwdns5758:0{bytes}crwdne5758:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Change RAM options for new account"
+msgstr "crwdns5760:0crwdne5760:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Create Account"
+msgstr "crwdns5762:0crwdne5762:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Create an account using your existing account"
+msgstr "crwdns5764:0crwdne5764:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "You must be logged in with an existing account in order to create another account on this page."
+msgstr "crwdns5766:0crwdne5766:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "RAM bytes to purchase for new account (min: {min})"
+msgstr "crwdns5768:0{min}crwdne5768:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Data"
+msgstr "crwdns4955:0crwdne4955:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Date"
+msgstr "crwdns5770:0crwdne5770:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Date Available"
+msgstr "crwdns4957:0crwdne4957:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Debugging"
+msgstr "crwdns4959:0crwdne4959:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Delegated"
+msgstr "crwdns4961:0crwdne4961:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Delegated Amount"
+msgstr "crwdns5772:0crwdne5772:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Delete Permission"
+msgstr "crwdns4963:0crwdne4963:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Details"
+msgstr "crwdns4965:0crwdne4965:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Distribution"
+msgstr "crwdns4967:0crwdne4967:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Edit permission for {account} on {network}"
+msgstr "crwdns5774:0{account}crwdnd5774:0{network}crwdne5774:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Error"
+msgstr "crwdns4971:0crwdne4971:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Exchanges"
+msgstr "crwdns4973:0crwdne4973:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Expected to receive"
+msgstr "crwdns4975:0crwdne4975:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "FAQ"
+msgstr "crwdns4977:0crwdne4977:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Fee"
+msgstr "crwdns5890:0crwdne5890:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Fill Max"
+msgstr "crwdns4979:0crwdne4979:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Finality Status"
+msgstr "crwdns5776:0crwdne5776:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Generate Key"
+msgstr "crwdns5778:0crwdne5778:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Get Tokens"
+msgstr "crwdns4981:0crwdne4981:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Hash"
+msgstr "crwdns4983:0crwdne4983:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Included in Block"
+msgstr "crwdns5780:0crwdne5780:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Instructions"
+msgstr "crwdns5782:0crwdne5782:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Invalid number, too many decimal places."
+msgstr "crwdns4985:0crwdne4985:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Irreversible"
+msgstr "crwdns5784:0crwdne5784:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Key Pairs"
+msgstr "crwdns4987:0crwdne4987:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Enter the Public Key(s) which can sign on behalf of this permission."
+msgstr "crwdns4989:0crwdne4989:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Keys and Permissions"
+msgstr "crwdns4991:0crwdne4991:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{unit} Available"
+msgstr "crwdns4995:0{unit}crwdne4995:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{unit} Balance"
+msgstr "crwdns4997:0{unit}crwdne4997:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{unit} Price"
+msgstr "crwdns4999:0{unit}crwdne4999:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{unit} Staked"
+msgstr "crwdns5001:0{unit}crwdne5001:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{unit} Value"
+msgstr "crwdns5003:0{unit}crwdne5003:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Learn more"
+msgstr "crwdns5866:0crwdne5866:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "length"
+msgstr "crwdns5786:0crwdne5786:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Loading"
+msgstr "crwdns5711:0crwdne5711:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Login"
+msgstr "crwdns5005:0crwdne5005:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Login as {permission}"
+msgstr "crwdns5788:0{permission}crwdne5788:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Login to Unicove"
+msgstr "crwdns5007:0crwdne5007:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Market Cap"
+msgstr "crwdns5009:0crwdne5009:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Memo"
+msgstr "crwdns5011:0crwdne5011:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "More"
+msgstr "crwdns5701:0crwdne5701:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Multi-Sig Proposal Created"
+msgstr "crwdns5790:0crwdne5790:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The multi-sig proposal for this transaction has been created and now needs to be approved. View the proposal below and share it with the parties who need to sign."
+msgstr "crwdns5792:0crwdne5792:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Multisig proposals by {account} on the {network} Network."
+msgstr "crwdns5794:0{account}crwdnd5794:0{network}crwdne5794:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "multisig using {account}"
+msgstr "crwdns5796:0{account}crwdne5796:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "You must be logged in with an account to use this feature."
+msgstr "crwdns5013:0crwdne5013:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "My Account"
+msgstr "crwdns5015:0crwdne5015:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "My Accounts"
+msgstr "crwdns5017:0crwdne5017:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Native TVL"
+msgstr "crwdns5019:0crwdne5019:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Navigation"
+msgstr "crwdns5942:0crwdne5942:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "NET (Bytes)"
+msgstr "crwdns5021:0crwdne5021:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Total NET"
+msgstr "crwdns5023:0crwdne5023:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Includes network fee of:"
+msgstr "crwdns5732:0crwdne5732:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Network Fees"
+msgstr "crwdns5025:0crwdne5025:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Network Resource Rental"
+msgstr "crwdns5892:0crwdne5892:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Network Resources Received"
+msgstr "crwdns5894:0crwdne5894:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{network} Token Swap has begun!"
+msgstr "crwdns5868:0{network}crwdne5868:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Swap {legacytoken} to {systemtoken} at a {ratio} ratio"
+msgstr "crwdns5870:0{legacytoken}crwdnd5870:0{systemtoken}crwdnd5870:0{ratio}crwdne5870:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "New Permission"
+msgstr "crwdns5027:0crwdne5027:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Next"
+msgstr "crwdns5029:0crwdne5029:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "No active sessions"
+msgstr "crwdns5031:0crwdne5031:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "No available authorities for this account."
+msgstr "crwdns5798:0crwdne5798:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "No balances found."
+msgstr "crwdns5033:0crwdne5033:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "No data"
+msgstr "crwdns5800:0crwdne5800:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "No proposals found."
+msgstr "crwdns5802:0crwdne5802:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "No swaps available for this pair."
+msgstr "crwdns5713:0crwdne5713:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "No transactions"
+msgstr "crwdns5035:0crwdne5035:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Not logged in"
+msgstr "crwdns5037:0crwdne5037:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "notified"
+msgstr "crwdns5804:0crwdne5804:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "open source"
+msgstr "crwdns5039:0crwdne5039:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Optional"
+msgstr "crwdns5041:0crwdne5041:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Parent Permission"
+msgstr "crwdns5043:0crwdne5043:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Permission"
+msgstr "crwdns5045:0crwdne5045:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Authorization"
+msgstr "crwdns5047:0crwdne5047:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Note: Changing the permission type will reset any unsaved edits made to this permission."
+msgstr "crwdns5049:0crwdne5049:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Permission Name"
+msgstr "crwdns5051:0crwdne5051:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Other Accounts"
+msgstr "crwdns5053:0crwdne5053:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Specify other accounts and permissions that can control this permission."
+msgstr "crwdns5055:0crwdne5055:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Threshold"
+msgstr "crwdns5057:0crwdne5057:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Permission Type"
+msgstr "crwdns5059:0crwdne5059:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Weight"
+msgstr "crwdns5061:0crwdne5061:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Preferences"
+msgstr "crwdns5944:0crwdne5944:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Private Key"
+msgstr "crwdns5806:0crwdne5806:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "I have saved this private key."
+msgstr "crwdns5808:0crwdne5808:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "This is your new private key. Copy it someplace safe, import it into your wallet, and never share it with anyone. If you lose this key, you will lose access to your account."
+msgstr "crwdns5810:0crwdne5810:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Producer Name"
+msgstr "crwdns5063:0crwdne5063:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Standby"
+msgstr "crwdns5065:0crwdne5065:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Top 21"
+msgstr "crwdns5067:0crwdne5067:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Proposal ID"
+msgstr "crwdns5812:0crwdne5812:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Public Key"
+msgstr "crwdns5069:0crwdne5069:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "RAM Market"
+msgstr "crwdns5071:0crwdne5071:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "RAM Swap"
+msgstr "crwdns5896:0crwdne5896:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "RAM Usage"
+msgstr "crwdns5814:0crwdne5814:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The deltas in RAM usage for each trace in the transaction."
+msgstr "crwdns5816:0crwdne5816:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Read announcement"
+msgstr "crwdns5872:0crwdne5872:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Read more"
+msgstr "crwdns5736:0crwdne5736:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Receive {token} Tokens"
+msgstr "crwdns5734:0{token}crwdne5734:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Received"
+msgstr "crwdns5898:0crwdne5898:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Recent Activity"
+msgstr "crwdns5073:0crwdne5073:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Recipient"
+msgstr "crwdns5075:0crwdne5075:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Reclaim"
+msgstr "crwdns5077:0crwdne5077:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Reclaim Delegated {token} Tokens"
+msgstr "crwdns5818:0{token}crwdne5818:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Undelegate and reclaim previously delegated {token} tokens"
+msgstr "crwdns5820:0{token}crwdne5820:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Note: Tokens that are undelegated will remain in a \"refunding\" state for 72 hours, after which they will need to be claimed from your account page."
+msgstr "crwdns5822:0crwdne5822:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Refund"
+msgstr "crwdns5079:0crwdne5079:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Claim previously delegated {token} tokens"
+msgstr "crwdns5081:0{token}crwdne5081:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Refunding"
+msgstr "crwdns5083:0crwdne5083:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Remove"
+msgstr "crwdns5085:0crwdne5085:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "renting {resource} for"
+msgstr "crwdns5900:0{resource}crwdne5900:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Requesting"
+msgstr "crwdns5902:0crwdne5902:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Required"
+msgstr "crwdns5087:0crwdne5087:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Amount of {resource}"
+msgstr "crwdns5089:0{resource}crwdne5089:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Resources"
+msgstr "crwdns5091:0crwdne5091:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Manage CPU/NET"
+msgstr "crwdns5093:0crwdne5093:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The network resources for this transaction were provided by a 3rd party."
+msgstr "crwdns5904:0crwdne5904:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Restart"
+msgstr "crwdns5095:0crwdne5095:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Result"
+msgstr "crwdns5906:0crwdne5906:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Reversible"
+msgstr "crwdns5824:0crwdne5824:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Role"
+msgstr "crwdns5097:0crwdne5097:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Save Permission"
+msgstr "crwdns5099:0crwdne5099:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Search..."
+msgstr "crwdns5932:0crwdne5932:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Search for Unicove features or enter an account name, public key, or transaction ID on the network."
+msgstr "crwdns5103:0crwdne5103:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Search {network}..."
+msgstr "crwdns5934:0{network}crwdne5934:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "No results found"
+msgstr "crwdns5105:0crwdne5105:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Search Results"
+msgstr "crwdns5107:0crwdne5107:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Search Unicove"
+msgstr "crwdns5109:0crwdne5109:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Select an option"
+msgstr "crwdns5111:0crwdne5111:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Sell"
+msgstr "crwdns5113:0crwdne5113:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Send"
+msgstr "crwdns5115:0crwdne5115:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Amount of {token} to send"
+msgstr "crwdns5826:0{token}crwdne5826:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Send {token} to account"
+msgstr "crwdns5828:0{token}crwdne5828:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Send {token} Tokens"
+msgstr "crwdns5703:0{token}crwdne5703:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Sent"
+msgstr "crwdns5908:0crwdne5908:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Settings"
+msgstr "crwdns5119:0crwdne5119:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Signatures"
+msgstr "crwdns5910:0crwdne5910:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Signed by"
+msgstr "crwdns5830:0crwdne5830:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Signer"
+msgstr "crwdns5121:0crwdne5121:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Smart Contract Account Creation"
+msgstr "crwdns5832:0crwdne5832:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Create an account using a basic token transfer to a smart contract"
+msgstr "crwdns5834:0crwdne5834:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Source Code"
+msgstr "crwdns5123:0crwdne5123:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Stake"
+msgstr "crwdns5125:0crwdne5125:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Stake Tokens"
+msgstr "crwdns5127:0crwdne5127:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Stake {token} Tokens"
+msgstr "crwdns5129:0{token}crwdne5129:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Staked"
+msgstr "crwdns5131:0crwdne5131:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Currently staked"
+msgstr "crwdns5133:0crwdne5133:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Staking"
+msgstr "crwdns5135:0crwdne5135:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Staking Rewards"
+msgstr "crwdns5137:0crwdne5137:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "This staking interface is not available on {network}."
+msgstr "crwdns5836:0{network}crwdne5836:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Status"
+msgstr "crwdns5139:0crwdne5139:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Submit"
+msgstr "crwdns5141:0crwdne5141:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Summary"
+msgstr "crwdns5143:0crwdne5143:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Supply"
+msgstr "crwdns5145:0crwdne5145:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Swap"
+msgstr "crwdns5838:0crwdne5838:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Swap {base}/{quote}"
+msgstr "crwdns5728:0{base}crwdnd5728:0{quote}crwdne5728:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Swap to {token}"
+msgstr "crwdns5705:0{token}crwdne5705:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Swaps"
+msgstr "crwdns5840:0crwdne5840:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Available token swaps on the {network} network"
+msgstr "crwdns5842:0{network}crwdne5842:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Switch Account"
+msgstr "crwdns5147:0crwdne5147:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{network} now uses the {token} token"
+msgstr "crwdns5874:0{network}crwdnd5874:0{token}crwdne5874:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Daily"
+msgstr "crwdns5149:0crwdne5149:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Monthly"
+msgstr "crwdns5151:0crwdne5151:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Yearly"
+msgstr "crwdns5153:0crwdne5153:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Today"
+msgstr "crwdns5155:0crwdne5155:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Token"
+msgstr "crwdns5157:0crwdne5157:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "tokens"
+msgstr "crwdns5159:0crwdne5159:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Total"
+msgstr "crwdns5161:0crwdne5161:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Total Actions"
+msgstr "crwdns5163:0crwdne5163:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Total Cost"
+msgstr "crwdns5165:0crwdne5165:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Total Staked"
+msgstr "crwdns5167:0crwdne5167:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Traces"
+msgstr "crwdns5844:0crwdne5844:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The individual transaction traces from the transaction."
+msgstr "crwdns5846:0crwdne5846:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transaction"
+msgstr "crwdns5169:0crwdne5169:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The actions performed in the transaction, without the inline actions."
+msgstr "crwdns5848:0crwdne5848:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transaction Complete"
+msgstr "crwdns5171:0crwdne5171:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transaction Details"
+msgstr "crwdns5850:0crwdne5850:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transaction Error"
+msgstr "crwdns5173:0crwdne5173:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "There was an error submitting your transaction."
+msgstr "crwdns5175:0crwdne5175:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transaction ID"
+msgstr "crwdns5852:0crwdne5852:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Resulting Actions"
+msgstr "crwdns5854:0crwdne5854:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The actions and inline actions performed as a result of the transaction."
+msgstr "crwdns5856:0crwdne5856:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transaction Summary"
+msgstr "crwdns5912:0crwdne5912:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transactions"
+msgstr "crwdns5177:0crwdne5177:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transaction"
+msgstr "crwdns5179:0crwdne5179:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transfer Memo"
+msgstr "crwdns5858:0crwdne5858:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transfer RAM from my account: {account}"
+msgstr "crwdns5860:0{account}crwdne5860:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transfer tokens to another account."
+msgstr "crwdns5181:0crwdne5181:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transaction ID"
+msgstr "crwdns5183:0crwdne5183:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transaction Not Found"
+msgstr "crwdns5185:0crwdne5185:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The transaction with ID {transactionId} could not be found."
+msgstr "crwdns5187:0{transactionId}crwdne5187:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Unapprove"
+msgstr "crwdns5189:0crwdne5189:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Buy {unit}"
+msgstr "crwdns5191:0{unit}crwdne5191:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Sell {unit}"
+msgstr "crwdns5193:0{unit}crwdne5193:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Unstake"
+msgstr "crwdns5195:0crwdne5195:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Unstake tokens"
+msgstr "crwdns5197:0crwdne5197:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Unstake {token} tokens"
+msgstr "crwdns5199:0{token}crwdne5199:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Unstaked"
+msgstr "crwdns5201:0crwdne5201:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Unstaking"
+msgstr "crwdns5203:0crwdne5203:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Usable for"
+msgstr "crwdns5205:0crwdne5205:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Use the public keys from my current account"
+msgstr ""
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Enter a custom owner and active public key"
+msgstr ""
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Used"
+msgstr "crwdns5207:0crwdne5207:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Value"
+msgstr "crwdns5209:0crwdne5209:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Value: {amount}"
+msgstr "crwdns5211:0{amount}crwdne5211:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "version"
+msgstr "crwdns5213:0crwdne5213:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "View my account"
+msgstr "crwdns5215:0crwdne5215:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "View Proposal"
+msgstr "crwdns5862:0crwdne5862:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Wait (Seconds)"
+msgstr "crwdns5217:0crwdne5217:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Waiting Period"
+msgstr "crwdns5219:0crwdne5219:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Specify the minimum amount of time a proposal must be active before the transaction can be completed."
+msgstr "crwdns5221:0crwdne5221:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Weight Threshold"
+msgstr "crwdns5223:0crwdne5223:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The total weight of all keys, accounts, and waits must be greater than or equal to this threshold to approve a transaction."
+msgstr "crwdns5225:0crwdne5225:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Withdraw"
+msgstr "crwdns5227:0crwdne5227:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Withdraw {token} tokens from staking"
+msgstr "crwdns5229:0{token}crwdne5229:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Currently Withdrawable"
+msgstr "crwdns5231:0crwdne5231:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Yield"
+msgstr "crwdns5233:0crwdne5233:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Your Public Keys"
+msgstr "crwdns5235:0crwdne5235:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The ABI defining the {contract} smart contract on the {network} network."
+msgstr "crwdns5239:0{contract}crwdnd5239:0{network}crwdne5239:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "ABI"
+msgstr "crwdns5241:0crwdne5241:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {action} action for the {contract} smart contract on the {network} network."
+msgstr "crwdns5243:0{action}crwdnd5243:0{contract}crwdnd5243:0{network}crwdne5243:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Action: {action}"
+msgstr "crwdns5245:0{action}crwdne5245:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {actions} smart contract actions available for the {contract} contract on the {network} network."
+msgstr "crwdns5247:0{actions}crwdnd5247:0{contract}crwdnd5247:0{network}crwdne5247:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Actions"
+msgstr "crwdns5249:0crwdne5249:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {structs} data structures defined by the {contract} smart contract on the {network} network."
+msgstr "crwdns5251:0{structs}crwdnd5251:0{contract}crwdnd5251:0{network}crwdne5251:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Structs"
+msgstr "crwdns5253:0crwdne5253:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {struct} data structure as defined by the {contract} smart contract on the {network} network."
+msgstr "crwdns5255:0{struct}crwdnd5255:0{contract}crwdnd5255:0{network}crwdne5255:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Struct: {struct}"
+msgstr "crwdns5257:0{struct}crwdne5257:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {tables} data tables in the {contract} contract on the {network} network."
+msgstr "crwdns5259:0{tables}crwdnd5259:0{contract}crwdnd5259:0{network}crwdne5259:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Tables"
+msgstr "crwdns5261:0crwdne5261:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {table} data table in the {contract} smart contract on the {network} network."
+msgstr "crwdns5263:0{table}crwdnd5263:0{contract}crwdnd5263:0{network}crwdne5263:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Table: {table}"
+msgstr "crwdns5265:0{table}crwdne5265:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "An overview of the {contract} smart contract on the {network} network. This contract contains {actions} actions, {tables} tables, and {structs} structs."
+msgstr "crwdns5267:0{contract}crwdnd5267:0{network}crwdnd5267:0{actions}crwdnd5267:0{tables}crwdnd5267:0{structs}crwdne5267:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Contract: {contract} | {network}"
+msgstr "crwdns5269:0{contract}crwdnd5269:0{network}crwdne5269:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Debit and credit cards supported"
+msgstr "crwdns5271:0crwdne5271:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Claim previously delegated {network} tokens."
+msgstr "crwdns5273:0{network}crwdne5273:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Refund Delegated {network} Tokens"
+msgstr "crwdns5275:0{network}crwdne5275:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "DelphiOracle Data"
+msgstr "crwdns5930:0crwdne5930:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Details"
+msgstr "crwdns5277:0crwdne5277:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Error loading accounts: {error}"
+msgstr "crwdns5279:0{error}crwdne5279:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Exchanges"
+msgstr "crwdns5281:0crwdne5281:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "View the transaction history of the {account} account on the {network} network."
+msgstr "crwdns5283:0{account}crwdnd5283:0{network}crwdne5283:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Account Activity for {account} | {network} Network"
+msgstr "crwdns5285:0{account}crwdnd5285:0{network}crwdne5285:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Recent activity on the {network} Network."
+msgstr "crwdns5287:0{network}crwdne5287:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The token balances of the {account} account on the {network} network."
+msgstr "crwdns5289:0{account}crwdnd5289:0{network}crwdne5289:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Token Balances | {account} | {network} Network"
+msgstr "crwdns5291:0{account}crwdnd5291:0{network}crwdne5291:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Token balances on the {network} Network."
+msgstr "crwdns5293:0{network}crwdne5293:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Permissions for {account} on the {network} network."
+msgstr "crwdns5295:0{account}crwdnd5295:0{network}crwdne5295:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Permissions | {account} | {network} Network"
+msgstr "crwdns5297:0{account}crwdnd5297:0{network}crwdne5297:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Permissions on the {network} Network"
+msgstr "crwdns5299:0{network}crwdne5299:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Insufficient {unit} balance. Please enter a smaller amount."
+msgstr "crwdns5301:0{unit}crwdne5301:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Invalid number, too many decimal places."
+msgstr "crwdns5303:0crwdne5303:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Fund Account"
+msgstr "crwdns5305:0crwdne5305:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Purchase {token} tokens to fund your account"
+msgstr "crwdns5307:0{token}crwdne5307:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Learn how to fund your account with {token} tokens through various methods including cryptocurrency exchanges and on-ramp providers."
+msgstr "crwdns5309:0{token}crwdne5309:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Purchase Directly"
+msgstr "crwdns5311:0crwdne5311:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Purchase {token} and have it directly send to your account using one of the platforms below."
+msgstr "crwdns5313:0{token}crwdne5313:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{token} can be purchased through a number of platforms, depending on the users needs and location. Below are some of the most popular options available."
+msgstr "crwdns5315:0{token}crwdne5315:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Token to Purchase"
+msgstr "crwdns5317:0crwdne5317:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Stake, Send, Manage Tokens, and Explore {network} – all with ease"
+msgstr "crwdns5319:0{network}crwdne5319:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {network} web wallet and block explorer"
+msgstr "crwdns5936:0{network}crwdne5936:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "MetaMask, an the industry leading self-custody wallet, is now compatible with Unicove and the {network} network. Install the {name} snap for MetaMask to get started."
+msgstr "crwdns5323:0{network}crwdnd5323:0{name}crwdne5323:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Install {name}"
+msgstr "crwdns5325:0{name}crwdne5325:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {name} for MetaMask"
+msgstr "crwdns5327:0{name}crwdne5327:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {network} network's native token, {token}, can be used for staking rewards, to buy and sell RAM, to pay transaction fees, and more. It is traded on most major exchanges."
+msgstr "crwdns5329:0{network}crwdnd5329:0{token}crwdne5329:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{token}: The Native Token"
+msgstr "crwdns5331:0{token}crwdne5331:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{network} Network DeFi"
+msgstr "crwdns5333:0{network}crwdne5333:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "System-level DeFi is offered by the {network} network both staking and RAM trading. The network also supports a variety of DeFi applications, including decentralized exchanges, lending platforms, swaps, and more."
+msgstr "crwdns5335:0{network}crwdne5335:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "One {ramtoken} of RAM represents ownership rights over {bytes} bytes of the network's total blockchain storage capacity. {ramtoken} can be swapped with {systemtoken} by visiting the RAM Market."
+msgstr "crwdns5337:0{ramtoken}crwdnd5337:0{bytes}crwdnd5337:0{ramtoken}crwdnd5337:0{systemtoken}crwdne5337:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{base}/{quote}  Market"
+msgstr "crwdns5339:0{base}crwdnd5339:0{quote}crwdne5339:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "KB (RAM): Tokenized Data Storage"
+msgstr "crwdns5341:0crwdne5341:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {network} staking rewards program proportionally distributes 85.6k {token} daily to token holders who have staked their tokens. These tokens can be unstaked and will be usable again after a 21 day lockup period."
+msgstr "crwdns5343:0{network}crwdnd5343:0{token}crwdne5343:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Stake {token} today for an estimated {apr}% APR"
+msgstr "crwdns5730:0{token}crwdnd5730:0{apr}crwdne5730:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "APR is based on the total amount staked and dynamically changes over time."
+msgstr "crwdns5347:0crwdne5347:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Key not found: {error}"
+msgstr "crwdns5349:0{error}crwdne5349:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "A public key associated with {accounts} account(s) on the {network} network."
+msgstr "crwdns5351:0{accounts}crwdnd5351:0{network}crwdne5351:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {accounts} account(s) associated with this public key"
+msgstr "crwdns5353:0{accounts}crwdne5353:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Public Key"
+msgstr "crwdns5355:0crwdne5355:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Legacy Key"
+msgstr "crwdns5357:0crwdne5357:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Limits"
+msgstr "crwdns5359:0crwdne5359:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Loading accounts..."
+msgstr "crwdns5361:0crwdne5361:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Install MetaMask"
+msgstr "crwdns5363:0crwdne5363:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Note: If MetaMask is already installed, you may need to grant permissions for Unicove by manually opening MetaMask."
+msgstr "crwdns5365:0crwdne5365:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "It looks like you already have MetaMask installed."
+msgstr "crwdns5367:0crwdne5367:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "To get started with MetaMask on the {network} Network, install the {name} snap using the button below."
+msgstr "crwdns5369:0{network}crwdnd5369:0{name}crwdne5369:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Add {name} to MetaMask"
+msgstr "crwdns5371:0{name}crwdne5371:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "are a new feature in MetaMask that allow community built plugins to extend the functionality of the wallet beyond Ethereum based blockchains. This means you can now access the {network} Network through MetaMask using the {name} snap."
+msgstr "crwdns5373:0{network}crwdnd5373:0{name}crwdne5373:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {name} provides an RPC method which returns the public keys associated with your MetaMask seed phrase. These can be used when manually setting up a new account. Unicove can display these keys to you if you visit the Settings page and enable Advanced Mode."
+msgstr "crwdns5375:0{name}crwdne5375:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "It's possible to access any {network} Network app, provided the app developers have integrated the required SDKs. The {name} and MetaMask can be added to any web app using"
+msgstr "crwdns5377:0{network}crwdnd5377:0{name}crwdne5377:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "with the"
+msgstr "crwdns5379:0crwdne5379:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Unicove itself is"
+msgstr "crwdns5381:0crwdne5381:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "and serves as reference material for how this integration can be performed."
+msgstr "crwdns5383:0crwdne5383:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "If you have any issues with the {name} itself, please feel free to reach out to us at"
+msgstr "crwdns5385:0{name}crwdne5385:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "or by visiting our Support portal at:"
+msgstr "crwdns5387:0crwdne5387:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {name} is a MetaMask Snap you can install directly from this page on Unicove or from the {name} page in the"
+msgstr "crwdns5389:0{name}crwdnd5389:0{name}crwdne5389:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "You will need to have MetaMask installed before adding the {name} snap."
+msgstr "crwdns5391:0{name}crwdne5391:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {name} allows you to use MetaMask as a web3 wallet for an {network} Network account. With it you can sign in to {network} apps and perform transactions."
+msgstr "crwdns5393:0{name}crwdnd5393:0{network}crwdnd5393:0{network}crwdne5393:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {name}'s only purpose is to sign transactions and will need to be paired with a companion dApp, such as Unicove, in order to manage your account."
+msgstr "crwdns5395:0{name}crwdne5395:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Please see our guide on"
+msgstr "crwdns5397:0crwdne5397:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "How to Sign Transactions on the {network} network with MetaMask"
+msgstr "crwdns5399:0{network}crwdne5399:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Yes, the {name} software is completely free to use. However, accounts on the {network} Network require a small amount of {network} before they are created."
+msgstr "crwdns5401:0{name}crwdnd5401:0{network}crwdnd5401:0{network}crwdne5401:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Unicove is currently covering this cost and offering one free account per user. To limit abuse, we require logging in with a valid 3rd party account. Only Apple and Google accounts are supported at this time."
+msgstr "crwdns5403:0crwdne5403:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Unicove is the first web wallet to allow you to manage your {network} account using MetaMask. We expect other wallets will add support in the future."
+msgstr "crwdns5405:0{network}crwdne5405:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "You can view your account on any {network} Network block explorer, like Unicove, simply by searching for the account name."
+msgstr "crwdns5407:0{network}crwdne5407:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {name} uses a private key derived from your MetaMask seed phrase using the BIP-0044 and the {network} coin type. This private key is only ever used for {network} accounts and the {name} cannot access any of your other keys. The {name} never exposes this private key and does not have access to your seed phrase."
+msgstr "crwdns5409:0{name}crwdnd5409:0{network}crwdnd5409:0{network}crwdnd5409:0{name}crwdnd5409:0{name}crwdne5409:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {name} derives your owner and active keys from your MetaMask seed phrase using different indexes. The zero (0) index key is reserved for the owner key and is not available to sign regular transactions with, while the first (1) index key is used for the active key and available for transaction signing."
+msgstr "crwdns5411:0{name}crwdne5411:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "A future update to the {name} will provide a way to use the owner key to reset the active key, allowing for a recovery path in the event the active keys have been changed."
+msgstr "crwdns5413:0{name}crwdne5413:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "What is a MetaMask snap?"
+msgstr "crwdns5415:0crwdne5415:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "How does find my owner and active keys?"
+msgstr "crwdns5417:0crwdne5417:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Can I access all {network} apps using {name} for MetaMask?"
+msgstr "crwdns5419:0{network}crwdnd5419:0{name}crwdne5419:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "How do I reach out for {name} support?"
+msgstr "crwdns5421:0{name}crwdne5421:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "How do I install the {name}?"
+msgstr "crwdns5423:0{name}crwdne5423:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "What does the {name} do?"
+msgstr "crwdns5425:0{name}crwdne5425:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "What does the {name} not do?"
+msgstr "crwdns5427:0{name}crwdne5427:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "How do I sign transactions using the {name}?"
+msgstr "crwdns5429:0{name}crwdne5429:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Is the {name} free to use?"
+msgstr "crwdns5431:0{name}crwdne5431:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Where can I view and manage my {network} account?"
+msgstr "crwdns5433:0{network}crwdne5433:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Is my private key or recovery phrase exposed when using the {name} Snap?"
+msgstr "crwdns5435:0{name}crwdne5435:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "How does MetaMask configure my owner and active keys?"
+msgstr "crwdns5437:0crwdne5437:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "You are logged in as {account} and ready to use Unicove to access the {network} network."
+msgstr "crwdns5439:0{account}crwdnd5439:0{network}crwdne5439:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "You are logged in as {account} but are not using MetaMask."
+msgstr "crwdns5441:0{account}crwdne5441:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {name} snap allows you to interact with Unicove and other {network}-based dApps using MetaMask."
+msgstr "crwdns5443:0{name}crwdnd5443:0{network}crwdne5443:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Begin by installing MetaMask, then come back to this page and install the {name} snap."
+msgstr "crwdns5445:0{name}crwdne5445:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "If you don't already have an {network} account you can create one now. If you have already created an account you can login with MetaMask."
+msgstr "crwdns5447:0{network}crwdne5447:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "MetaMask and the {name} are connected, installed, and up-to-date using"
+msgstr "crwdns5449:0{name}crwdne5449:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Add {name} to MetaMask"
+msgstr "crwdns5451:0{name}crwdne5451:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{name} + MetaMask"
+msgstr "crwdns5453:0{name}crwdne5453:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Update {name}"
+msgstr "crwdns5455:0{name}crwdne5455:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "A new version of the {name} is available. Click the button below to update to the latest version ({latestVersion})."
+msgstr "crwdns5457:0{name}crwdnd5457:0{latestVersion}crwdne5457:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Network does not support MetaMask Snaps"
+msgstr "crwdns5459:0crwdne5459:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Get started with MetaMask on the {network} Network with the {name} snap."
+msgstr "crwdns5461:0{network}crwdnd5461:0{name}crwdne5461:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "MetaMask + {name}"
+msgstr "crwdns5463:0{name}crwdne5463:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "MetaMask Public Key (Active)"
+msgstr "crwdns5465:0crwdne5465:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "MetaMask Public Key (Owner)"
+msgstr "crwdns5467:0crwdne5467:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "MetaMask Snaps Directory"
+msgstr "crwdns5469:0crwdne5469:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Approved"
+msgstr "crwdns5471:0crwdne5471:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Cancel MSIG"
+msgstr "crwdns5473:0crwdne5473:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Multisig Details"
+msgstr "crwdns5475:0crwdne5475:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Execute"
+msgstr "crwdns5477:0crwdne5477:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Expiration"
+msgstr "crwdns5479:0crwdne5479:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Expired"
+msgstr "crwdns5481:0crwdne5481:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "An MSIG proposed by {proposer} on the {network} Network"
+msgstr "crwdns5483:0{proposer}crwdnd5483:0{network}crwdne5483:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Proposal Name"
+msgstr "crwdns5485:0crwdne5485:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Proposed Actions"
+msgstr "crwdns5487:0crwdne5487:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Proposer"
+msgstr "crwdns5489:0crwdne5489:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Requested"
+msgstr "crwdns5491:0crwdne5491:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Requested Approvals"
+msgstr "crwdns5493:0crwdne5493:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "You must be logged in with an account to use this feature."
+msgstr "crwdns5495:0crwdne5495:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Activity"
+msgstr "crwdns5497:0crwdne5497:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Balances"
+msgstr "crwdns5499:0crwdne5499:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Overview"
+msgstr "crwdns5501:0crwdne5501:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Permissions"
+msgstr "crwdns5503:0crwdne5503:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Proposals"
+msgstr "crwdns5505:0crwdne5505:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Resources"
+msgstr "crwdns5507:0crwdne5507:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Staked"
+msgstr "crwdns5509:0crwdne5509:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Votes"
+msgstr "crwdns5511:0crwdne5511:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "No accounts found"
+msgstr "crwdns5513:0crwdne5513:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "No supported funding methods for this blockchain."
+msgstr "crwdns5515:0crwdne5515:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {network} web wallet and block explorer"
+msgstr "crwdns5938:0{network}crwdne5938:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Stake, Send, Manage Tokens, and Explore {network} – all with ease"
+msgstr "crwdns5519:0{network}crwdne5519:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Unicove - The {network} web wallet and block explorer"
+msgstr "crwdns5940:0{network}crwdne5940:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transfer tokens from one account to another account"
+msgstr "crwdns5523:0crwdne5523:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Stake and earn rewards using a {network} compatible wallet"
+msgstr "crwdns5928:0{network}crwdne5928:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Processing fees"
+msgstr "crwdns5525:0crwdne5525:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "RAM Available"
+msgstr "crwdns5527:0crwdne5527:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Amount of RAM to buy:"
+msgstr "crwdns5529:0crwdne5529:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Exchange {quote} for {base} on the {network} network."
+msgstr "crwdns5531:0{quote}crwdnd5531:0{base}crwdnd5531:0{network}crwdne5531:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{base}/{quote} Market | {network} Network"
+msgstr "crwdns5533:0{base}crwdnd5533:0{quote}crwdnd5533:0{network}crwdne5533:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "An overview of RAM Market on the {network} network that provides access to buy and sell RAM with {token} using an {network} compatible wallet."
+msgstr "crwdns5535:0{network}crwdnd5535:0{token}crwdnd5535:0{network}crwdne5535:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Exchange RAM for {token} on the {network} network using an {network} compatible wallet."
+msgstr "crwdns5537:0{token}crwdnd5537:0{network}crwdnd5537:0{network}crwdne5537:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "An overview of the {base}/{quote} market on the {network} Network."
+msgstr "crwdns5539:0{base}crwdnd5539:0{quote}crwdnd5539:0{network}crwdne5539:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{base}/{quote}  Market"
+msgstr "crwdns5541:0{base}crwdnd5541:0{quote}crwdne5541:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Exchange RAM for {token} on the {network} network."
+msgstr "crwdns5543:0{token}crwdnd5543:0{network}crwdne5543:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Exchange {token} for RAM on the {network} network."
+msgstr "crwdns5545:0{token}crwdnd5545:0{network}crwdne5545:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "RAM Purchase Value"
+msgstr "crwdns5547:0crwdne5547:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Amount of RAM to sell:"
+msgstr "crwdns5549:0crwdne5549:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "RAM to be bought"
+msgstr "crwdns5551:0crwdne5551:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "RAM to be sold"
+msgstr "crwdns5553:0crwdne5553:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "An overview of the multiple network resources usable on the {network} Network providing access to manage resources using an compatible wallet."
+msgstr "crwdns5555:0{network}crwdne5555:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Manage CPU, NET, and RAM resources on the {network} Network."
+msgstr "crwdns5557:0{network}crwdne5557:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{network} Network Resources"
+msgstr "crwdns5559:0{network}crwdne5559:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Confirm Rent"
+msgstr "crwdns5561:0crwdne5561:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Rent for {cost}"
+msgstr "crwdns5563:0{cost}crwdne5563:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Rent Resources for my account"
+msgstr "crwdns5565:0crwdne5565:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Rent CPU and NET resources on the {network} Network using an {network} compatible wallet."
+msgstr "crwdns5567:0{network}crwdnd5567:0{network}crwdne5567:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Rent Resources | {network} Network"
+msgstr "crwdns5569:0{network}crwdne5569:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Enter the account name"
+msgstr "crwdns5571:0crwdne5571:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Renting"
+msgstr "crwdns5573:0crwdne5573:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Rent CPU and NET resources on the {network} Network."
+msgstr "crwdns5575:0{network}crwdne5575:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Rent Resources"
+msgstr "crwdns5577:0crwdne5577:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Rent resources with PowerUp"
+msgstr "crwdns5579:0crwdne5579:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Rent resources with REX"
+msgstr "crwdns5581:0crwdne5581:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Rent with Rex"
+msgstr "crwdns5583:0crwdne5583:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Stake {symbolName} for resources"
+msgstr "crwdns5585:0{symbolName}crwdne5585:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "24 Hours"
+msgstr "crwdns5587:0crwdne5587:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "30 Days"
+msgstr "crwdns5589:0crwdne5589:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Until Unstaked"
+msgstr "crwdns5591:0crwdne5591:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Purchase RAM"
+msgstr "crwdns5593:0crwdne5593:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Clear search history"
+msgstr "crwdns5595:0crwdne5595:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Market Overview"
+msgstr "crwdns5597:0crwdne5597:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Sell RAM"
+msgstr "crwdns5599:0crwdne5599:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Configure Unicove"
+msgstr "crwdns5601:0crwdne5601:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Staking overview"
+msgstr "crwdns5603:0crwdne5603:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transfer tokens"
+msgstr "crwdns5605:0crwdne5605:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "View {type}"
+msgstr "crwdns5607:0{type}crwdne5607:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Select provider"
+msgstr "crwdns5609:0crwdne5609:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Amount to send"
+msgstr "crwdns5611:0crwdne5611:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Enter the amount of {token} to send"
+msgstr "crwdns5613:0{token}crwdne5613:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Specify a public memo for this transfer (optional)"
+msgstr "crwdns5615:0crwdne5615:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transfer tokens from one account to another account on the {network} network using an {network} compatible wallet."
+msgstr "crwdns5617:0{network}crwdnd5617:0{network}crwdne5617:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Receiving Account"
+msgstr "crwdns5619:0crwdne5619:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Enter the account name of the recipient"
+msgstr "crwdns5621:0crwdne5621:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Start new send"
+msgstr "crwdns5623:0crwdne5623:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Token to send"
+msgstr "crwdns5625:0crwdne5625:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Advanced"
+msgstr "crwdns5627:0crwdne5627:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Dark Mode"
+msgstr "crwdns5946:0crwdne5946:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Toggle site wide dark mode independent from operating system preferences."
+msgstr "crwdns5948:0crwdne5948:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Developer"
+msgstr "crwdns5629:0crwdne5629:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Enable Advanced Mode"
+msgstr "crwdns5631:0crwdne5631:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Enable features for more advanced use cases."
+msgstr "crwdns5633:0crwdne5633:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Debug Data Display"
+msgstr "crwdns5717:0crwdne5717:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Enable Developer Mode"
+msgstr "crwdns5635:0crwdne5635:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Allow usage of settings meant for development of Unicove"
+msgstr "crwdns5719:0crwdne5719:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Mock token price"
+msgstr "crwdns5707:0crwdne5707:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Force the system token price to equal {mockValue} for testing in environments without pricing information."
+msgstr "crwdns5721:0{mockValue}crwdne5721:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "General"
+msgstr "crwdns5639:0crwdne5639:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Increased Precision"
+msgstr "crwdns5950:0crwdne5950:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Use more decimals to increase currency precision."
+msgstr "crwdns5952:0crwdne5952:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The language used throughout Unicove."
+msgstr "crwdns5954:0crwdne5954:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Language Selector"
+msgstr "crwdns5641:0crwdne5641:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Configure Unicove"
+msgstr "crwdns5643:0crwdne5643:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Prefered Currency"
+msgstr "crwdns5956:0crwdne5956:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The currency used to display the value of tokens."
+msgstr "crwdns5958:0crwdne5958:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Remain on current page when switching accounts"
+msgstr "crwdns5645:0crwdne5645:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Prevents the automatic navigation to the account overview page"
+msgstr "crwdns5647:0crwdne5647:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Allow account switching in search prompt"
+msgstr "crwdns5649:0crwdne5649:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Adds logged in accounts to search results for quick switching."
+msgstr "crwdns5651:0crwdne5651:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Allow page navigation in search prompt"
+msgstr "crwdns5653:0crwdne5653:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Adds popular Unicove pages to search results."
+msgstr "crwdns5655:0crwdne5655:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Staking Calculator"
+msgstr "crwdns5657:0crwdne5657:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Enter an amount of {token} to calculate estimated rewards based on the current APR of {apr}%. This rate will change over time based on the amount of tokens staked."
+msgstr "crwdns5659:0{token}crwdnd5659:0{apr}crwdne5659:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Estimated Yield (Yearly)"
+msgstr "crwdns5661:0crwdne5661:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "An overview of staking on the {network} network providing easy access to stake, unstake, and withdraw {token} tokens using an {network} compatible wallet."
+msgstr "crwdns5663:0{network}crwdnd5663:0{token}crwdnd5663:0{network}crwdne5663:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Stake {token} tokens and earn rewards using an {network} compatible wallet."
+msgstr "crwdns5665:0{token}crwdnd5665:0{network}crwdne5665:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Unstake {token} tokens and begin claiming the balance of your rewards using an {network} compatible wallet."
+msgstr "crwdns5667:0{token}crwdnd5667:0{network}crwdne5667:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Withdraw {token} tokens from the staking contract to add them to your available balance using an {network} compatible wallet."
+msgstr "crwdns5669:0{token}crwdnd5669:0{network}crwdne5669:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Minimum lockup"
+msgstr "crwdns5671:0crwdne5671:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Stake {token} to earn rewards."
+msgstr "crwdns5673:0{token}crwdne5673:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{network} Network Staking"
+msgstr "crwdns5675:0{network}crwdne5675:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Withdrawable in 21 days"
+msgstr "crwdns5677:0crwdne5677:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "RAM Purchase Summary"
+msgstr "crwdns5914:0crwdne5914:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "System contract refund request for {account}."
+msgstr "crwdns5916:0{account}crwdne5916:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Staking Deposit"
+msgstr "crwdns5918:0crwdne5918:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Staking Withdrawal"
+msgstr "crwdns5920:0crwdne5920:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Token Transfer"
+msgstr "crwdns5922:0crwdne5922:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Resource Provider"
+msgstr "crwdns5924:0crwdne5924:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Swap {base}/{quote}"
+msgstr "crwdns5723:0{base}crwdnd5723:0{quote}crwdne5723:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Swap the {base} token for the {quote} token."
+msgstr "crwdns5725:0{base}crwdnd5725:0{quote}crwdne5725:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "This swap will exchange {base} for {quote}."
+msgstr "crwdns5727:0{base}crwdnd5727:0{quote}crwdne5727:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Swap Summary ({base}/{quote})"
+msgstr "crwdns5926:0{base}crwdnd5926:0{quote}crwdne5926:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "This is a test"
+msgstr "crwdns5679:0crwdne5679:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Token Purchase Providers"
+msgstr "crwdns5681:0crwdne5681:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Tokens can be purchased directly through the following providers:"
+msgstr "crwdns5683:0crwdne5683:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Total Proceeds"
+msgstr "crwdns5685:0crwdne5685:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transaction not found: {transaction}"
+msgstr "crwdns5687:0{transaction}crwdne5687:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{number} Actions"
+msgstr "crwdns5689:0{number}crwdne5689:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "A transaction performed at {date} on the {network} Network."
+msgstr "crwdns5691:0{date}crwdnd5691:0{network}crwdne5691:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{id} | {network} Network"
+msgstr "crwdns5693:0{id}crwdnd5693:0{network}crwdne5693:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transaction on {date}"
+msgstr "crwdns5695:0{date}crwdne5695:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The tokens currently being unstaked are listed below with the date they become available. These balances will continue to earn rewards until they are withdrawn."
+msgstr "crwdns5697:0crwdne5697:0"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "EOS can be purchased through a number of platforms, depending on the users needs and location. Below are some of the most popular options available."
+msgstr "crwdns5699:0crwdne5699:0"

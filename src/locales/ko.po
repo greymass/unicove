@@ -1,0 +1,2284 @@
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=2; plural=n == 1 ? 0 : 1;\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2025-10-20T18:08:55.379Z\n"
+"POT-Creation-Date: 2025-10-20T18:08:55.379Z\n"
+
+#: src/routes/+error.svelte
+#: src/routes/+layout.server.ts
+#: src/routes/[network]/+error.svelte
+msgid "Page not found"
+msgstr ""
+
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "$500/day"
+msgstr "1일 500달러"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Account not found: {account}"
+msgstr "계정을 찾을 수 없습니다: {account}"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "An overview of the {account} account on the {network} Network. View account assets, activity, resources and more."
+msgstr "{network} 네트워크의 {account} 계정 개요입니다.  계정 자산, 활동, 리소스 등을 확인하세요."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{account} | {network} Network Account"
+msgstr "{account} | {network} 네트워크 계정"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Account Page"
+msgstr "계정 페이지"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Account overview on the {network} Network"
+msgstr "{network} 네트워크의 계정 개요"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Total Account Value"
+msgstr "총 계정 가치"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Associated Accounts"
+msgstr "연관된 계정"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Decoded Data"
+msgstr "디코딩된 데이터"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Raw JSON"
+msgstr "\n원시 JSON"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Formatted Data"
+msgstr "포맷된 데이터"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Ricardian"
+msgstr "리카디언"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Action Summary"
+msgstr "액션 요약"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Active Session"
+msgstr "활성 세션"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "EOS Network Rebrands to Vaulta"
+msgstr "EOS 네트워크, Vaulta로 리브랜딩"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Block #{height}"
+msgstr "블록 #{height}"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Block #{height} was produced by {producer} on {timestamp}, which included {transactions} transactions performing {actions} actions."
+msgstr "블록 #{height}는 {timestamp}에 {producer}에 의해 생성되었으며, {transactions}개의 트랜잭션으로 {actions}개의 액션을 수행했습니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Block Details"
+msgstr "블록 상세 정보"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Buy {token} with Coinbase"
+msgstr "코인베이스에서 {token} 구매\n"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Buy or transfer {token}"
+msgstr "{token}를 구매하거나 전송하세요"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Buy {token} with Coinbase"
+msgstr "코인베이스로 {token} 구매"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Change network"
+msgstr "네트워크 변경"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Coinbase service is currently unavailable."
+msgstr "코인베이스 서비스는 현재 이용할 수 없습니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "About {thing}"
+msgstr "{thing} 에 대한 정보"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Actor"
+msgstr "액터"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {account} account has some form of authority assigned to the other accounts listed below."
+msgstr "{account} 계정은 아래 나열된 다른 계정들에 특정 형태의 권한을 부여했습니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Account Balance"
+msgstr "계정 잔액"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Account Created"
+msgstr "계정 생성됨"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The account was successfully created."
+msgstr "계정이 성공적으로 생성되었습니다.​"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "multisig using {account}"
+msgstr "{account}을 이용한 다중 서명"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Account Name"
+msgstr "계정 이름"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Action"
+msgstr "액션"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Actions"
+msgstr "액션들"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Actor"
+msgstr "액터"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Add Account"
+msgstr "계정 추가"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Add Contract"
+msgstr "컨트랙트 추가"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Add Funds"
+msgstr "자금 추가"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Add Key"
+msgstr "키 추가"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Add Wait"
+msgstr "지연 추가"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Advanced"
+msgstr "고급"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Amount"
+msgstr "금액"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Amount exceeds available balance."
+msgstr "잔액이 부족합니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Amount to {action}"
+msgstr "{action}할 금액"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Approve"
+msgstr "승인\n"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Current APR"
+msgstr "현재 APR"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Asset"
+msgstr "자산\n"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Accounts that allow the {account} account to sign on their behalf"
+msgstr "{account} 계정을 대신해 서명할 수 있도록 설정된 계정"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Weight of {weight} and threshold of {threshold}."
+msgstr "가중치 {weight}, 임계값 {threshold}"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Available"
+msgstr "사용 가능"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Back"
+msgstr "뒤로\n"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Back to Permissions"
+msgstr "권한 관리로 돌아가기"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Balance"
+msgstr "잔액"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Balance available"
+msgstr "사용 가능한 잔액"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "available to swap"
+msgstr "스왑 가능"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Balance Change"
+msgstr "잔액 변동"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Basic"
+msgstr "기본"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Basic Information"
+msgstr "기본 정보"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The name, parent permission, and type (Basic or Advanced). Name and parent fields cannot be modified after the permission is created."
+msgstr "권한 명칭,상위 권한,유형(기본 또는 고급)입니다.생성 완료 후 권한 명칭 및 상위 권한 필드는 변경 불가합니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Block ID"
+msgstr "블록 ID"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Next Block"
+msgstr "다음 블록"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Block Number"
+msgstr "블록 번호"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Previous Block"
+msgstr "이전 블록"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Block Producers"
+msgstr "Block Producers"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Validators on the {network} network."
+msgstr "Validators on the {network} network."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Breakdown"
+msgstr "세부 내역"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Breaking News"
+msgstr "속보"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Buy"
+msgstr "구입하다"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Bytes"
+msgstr "바이트"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Cancel"
+msgstr "취소"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Claim"
+msgstr "클레임"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Clear"
+msgstr "지우기"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Close"
+msgstr "닫기\n"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Complete"
+msgstr "완료"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Confirm"
+msgstr "확인하다"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Confirm Details"
+msgstr "상세 내용 확인\n"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Carefully review and confirm the details of this transaction. Incorrectly setting your permissions could cause permanent loss of access to this permission or account!"
+msgstr "거래 세부 정보를 신중하게 검토하고 확인해 주세요. 권한을 잘못 설정하면 해당 권한 또는 계정에 대한 접근 권한을 영구적으로 상실할 수 있습니다!"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Connect Wallet"
+msgstr "지갑 연결"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Connect your wallet to login"
+msgstr "지갑을 연결하여 로그인"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Contract"
+msgstr "컨트랙트"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Contract Isolation"
+msgstr "컨트랙트 격리"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Restrict this permission to specific contracts and actions. Leave the action blank to allow all actions on a contract."
+msgstr "권한을 특정 컨트랙트와 액션으로 제한하세요. 컨트랙트의 모든 액션을 허용하려면 액션을 비워두세요."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{contract} Processing"
+msgstr "컨트랙트 처리 중"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Contracts Used"
+msgstr "사용된 컨트랙트"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Copied!"
+msgstr "복사 완료!\n"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Copy"
+msgstr "복사"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Total CPU"
+msgstr "총 CPU"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "CPU (μs)"
+msgstr "CPU (마이크로초)"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Create an account"
+msgstr "계정 생성"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Create Account {how}"
+msgstr "{how} 계정 생성"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "by paying {cost} for RAM"
+msgstr "RAM에 대해 {cost}를 지불하여\n"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Send EOS from an exchange or over a bridge to the account below with the memo provided to create your account."
+msgstr "계정을 생성하려면, 거래소에서 또는 브릿지를 통해 아래 계정으로 제공된 메모를 사용하여 EOS를 전송하세요."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Once the transfer is complete, use your private key to import your account into the wallet of your choosing."
+msgstr "전송이 완료되면, 개인 키를 사용하여 원하는 지갑으로 계정을 가져오세요."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "by transferring {bytes} bytes of RAM"
+msgstr "{bytes} 바이트의 RAM을 전송하여"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Change RAM options for new account"
+msgstr "새 계정에 대한 RAM 옵션 변경"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Create Account"
+msgstr "\n계정 생성"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Create an account using your existing account"
+msgstr "기존 계정을 사용하여 계정 생성"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "You must be logged in with an existing account in order to create another account on this page."
+msgstr "이 페이지에서 다른 계정을 생성하려면 기존 계정으로 로그인해야 합니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "RAM bytes to purchase for new account (min: {min})"
+msgstr "새 계정 생성 시 구매할 RAM 바이트 (최소: {min}) "
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Data"
+msgstr "데이터"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Date"
+msgstr "날짜"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Date Available"
+msgstr "사용 가능 날짜"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Debugging"
+msgstr "디버깅"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Delegated"
+msgstr "위임됨"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Delegated Amount"
+msgstr "위임 금액"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Delete Permission"
+msgstr "권한 삭제"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Details"
+msgstr "세부 사항"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Distribution"
+msgstr "분배"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Edit permission for {account} on {network}"
+msgstr "{account}에서 {network}에 대한 권한 편집"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Error"
+msgstr "오류"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Exchanges"
+msgstr "거래소"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Expected to receive"
+msgstr "예상 수령액"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "FAQ"
+msgstr "자주 묻는 질문"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Fee"
+msgstr "수수료"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Fill Max"
+msgstr "최대 채우기"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Finality Status"
+msgstr "확정성 상태"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Generate Key"
+msgstr "키 생성"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Get Tokens"
+msgstr "토큰 받기 "
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Hash"
+msgstr "해시"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Included in Block"
+msgstr "블록에 포함됨"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Instructions"
+msgstr "지침"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Invalid number, too many decimal places."
+msgstr "\n유효하지 않은 숫자입니다. 소수점 자릿수가 너무 많습니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Irreversible"
+msgstr "되돌릴 수 없음"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Key Pairs"
+msgstr "키 페어"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Enter the Public Key(s) which can sign on behalf of this permission."
+msgstr "이 권한에 대해 서명 가능한 공개 키(들)을 입력하세요."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Keys and Permissions"
+msgstr "키 및 권한"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{unit} Available"
+msgstr "{unit} 사용 가능"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{unit} Balance"
+msgstr "{unit} 잔액"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{unit} Price"
+msgstr "{unit} 가격"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{unit} Staked"
+msgstr "{unit} 스테이킹된 "
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{unit} Value"
+msgstr "{unit} 가치"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Learn more"
+msgstr "더 알아보기"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "length"
+msgstr "길이"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Loading"
+msgstr "로딩 중"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Login"
+msgstr "로그인"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Login as {permission}"
+msgstr "{permission}으로 로그인"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Login to Unicove"
+msgstr "유니코브(Unicove)로 로그인"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Market Cap"
+msgstr "시가총액"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Memo"
+msgstr "메모"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "More"
+msgstr "더 보기"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Multi-Sig Proposal Created"
+msgstr "멀티시그 제안 생성 완료"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The multi-sig proposal for this transaction has been created and now needs to be approved. View the proposal below and share it with the parties who need to sign."
+msgstr "이 거래에 대한 멀티시그 제안이 생성되었으니, 이제 승인이 필요합니다. 아래에 있는 제안을 확인하시고, 서명이 필요한 당사자들과 공유해 주시기 바랍니다. "
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Multisig proposals by {account} on the {network} Network."
+msgstr "{account} 네트워크에서 {network}이 제출한 멀티시그 제안"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "multisig using {account}"
+msgstr "{account} 계정으로 멀티시그"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "You must be logged in with an account to use this feature."
+msgstr "이 기능을 사용하려면 계정으로 로그인해야 합니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "My Account"
+msgstr "내 계정"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "My Accounts"
+msgstr "내 계정"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Native TVL"
+msgstr "네이티브 총 예치 자산"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Navigation"
+msgstr "네비게이션"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "NET (Bytes)"
+msgstr "순수 바이트(바이트)"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Total NET"
+msgstr "총 순수량"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Includes network fee of:"
+msgstr "네트워크 수수료 포함:"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Network Fees"
+msgstr "네트워크 수수료"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Network Resource Rental"
+msgstr "네트워크 리소스 임대"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Network Resources Received"
+msgstr "네트워크 리소스 수령 완료 "
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{network} Token Swap has begun!"
+msgstr "{network} 토큰 스왑이 시작되었습니다!"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Swap {legacytoken} to {systemtoken} at a {ratio} ratio"
+msgstr "{legacytoken}을 {systemtoken}으로 {ratio} 비율로 스왑합니다. "
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "New Permission"
+msgstr "새 권한"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Next"
+msgstr "다음"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "No active sessions"
+msgstr "활성 세션 없음\n"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "No available authorities for this account."
+msgstr "이 계정에는 사용 가능한 권한이 없습니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "No balances found."
+msgstr "잔액이 없습니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "No data"
+msgstr "데이터가 없습니다"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "No proposals found."
+msgstr "제안이 없습니다"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "No swaps available for this pair."
+msgstr "이 페어는 스왑할 수 없습니"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "No transactions"
+msgstr "거래 기록이 없습니다. "
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Not logged in"
+msgstr "로그인하지 않음"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "notified"
+msgstr "알림받음"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "open source"
+msgstr "오픈 소스"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Optional"
+msgstr "선택 사항 "
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Parent Permission"
+msgstr "상위 권한"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Permission"
+msgstr "권한"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Authorization"
+msgstr "권한 부여"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Note: Changing the permission type will reset any unsaved edits made to this permission."
+msgstr "참고: 권한 유형을 변경하면 해당 권한에 대해 저장되지 않은 편집 내용이 초기화됩니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Permission Name"
+msgstr "권한 이름"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Other Accounts"
+msgstr "다른 계정"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Specify other accounts and permissions that can control this permission."
+msgstr "이 권한을 제어할 수 있는 다른 계정과 권한을 지정하세요. "
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Threshold"
+msgstr "임계값"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Permission Type"
+msgstr "권한 유형"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Weight"
+msgstr "가중치"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Preferences"
+msgstr "환경설정"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Private Key"
+msgstr "프라이빗 키"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "I have saved this private key."
+msgstr "이 개인 키를 저장했습니다. "
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "This is your new private key. Copy it someplace safe, import it into your wallet, and never share it with anyone. If you lose this key, you will lose access to your account."
+msgstr "이것은 귀하의 새 개인 키입니다. 안전한 곳에 복사해 두시고, 지갑에 가져오시며, 절대로 누구와도 공유하지 마세요. 이 키를 분실하시면 계정에 접근할 수 없게 됩니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Producer Name"
+msgstr "생산자 이름"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Standby"
+msgstr "대기 중"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Top 21"
+msgstr "상위 21개"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Proposal ID"
+msgstr "제안 ID"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Public Key"
+msgstr "공개 키"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "RAM Market"
+msgstr "RAM 시장"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "RAM Swap"
+msgstr "RAM 스왑"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "RAM Usage"
+msgstr "RAM 사용량"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The deltas in RAM usage for each trace in the transaction."
+msgstr "트랜잭션 내 각 트레이스에 대한 RAM 사용량의 변화량입니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Read announcement"
+msgstr "공지사항 읽기"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Read more"
+msgstr "더 보기 "
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Receive {token} Tokens"
+msgstr "{token} 토큰 받기"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Received"
+msgstr "받음 "
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Recent Activity"
+msgstr "최근 활동"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Recipient"
+msgstr "수신자"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Reclaim"
+msgstr "클레임"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Reclaim Delegated {token} Tokens"
+msgstr "위임된 {token} 토큰 회수하기"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Undelegate and reclaim previously delegated {token} tokens"
+msgstr "이전에 위임한 {token} 토큰 위임 해제 및 클레임\n"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Note: Tokens that are undelegated will remain in a \"refunding\" state for 72 hours, after which they will need to be claimed from your account page."
+msgstr "참고: 위임 해제된 토큰은 72시간 동안 \"환불 중\" 상태로 유지되며, 이후 계정 페이지에서 회수해야 합니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Refund"
+msgstr "환불"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Claim previously delegated {token} tokens"
+msgstr "이전에 위임한 {token} 토큰 클레임"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Refunding"
+msgstr "환불 중"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Remove"
+msgstr "제거"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "renting {resource} for"
+msgstr "{resource} 임대 중"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Requesting"
+msgstr "요청 중"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Required"
+msgstr "필수"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Amount of {resource}"
+msgstr "{resource} 수량"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Resources"
+msgstr "리소스"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Manage CPU/NET"
+msgstr "CPU/NET 관리"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The network resources for this transaction were provided by a 3rd party."
+msgstr "이 트랜잭션의 네트워크 리소스는 제3자가 제공했습니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Restart"
+msgstr "다시 시작"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Result"
+msgstr "결과"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Reversible"
+msgstr "가역적"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Role"
+msgstr "역할"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Save Permission"
+msgstr "권한 저장"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Search..."
+msgstr "검색..."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Search for Unicove features or enter an account name, public key, or transaction ID on the network."
+msgstr "Unicove 기능을 검색하거나 네트워크에서 계정 이름, 공개 키 또는 트랜잭션 ID를 입력하세요."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Search {network}..."
+msgstr "{network} 검색..."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "No results found"
+msgstr "결과를 찾을 수 없습니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Search Results"
+msgstr "검색 결과"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Search Unicove"
+msgstr "Unicove 검색"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Select an option"
+msgstr "옵션을 선택하세요."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Sell"
+msgstr "판매"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Send"
+msgstr "전송\n"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Amount of {token} to send"
+msgstr "보낼 {token} 수량"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Send {token} to account"
+msgstr "{token}을 계정에 전송"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Send {token} Tokens"
+msgstr "{token} 토큰 보내기"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Sent"
+msgstr "보냄"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Settings"
+msgstr "설정"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Signatures"
+msgstr "서명"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Signed by"
+msgstr "서명자"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Signer"
+msgstr "서명자"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Smart Contract Account Creation"
+msgstr "스마트 컨트랙트 계정 생성"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Create an account using a basic token transfer to a smart contract"
+msgstr "기본 토큰을 스마트 컨트랙트로 전송하여 계정을 생성하세요."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Source Code"
+msgstr "소스 코드"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Stake"
+msgstr "스테이킹"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Stake Tokens"
+msgstr "토큰 스테이킹"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Stake {token} Tokens"
+msgstr "{token} 토큰 스테이킹"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Staked"
+msgstr "스테이킹됨"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Currently staked"
+msgstr "현재 스테이킹"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Staking"
+msgstr "스테이킹"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Staking Rewards"
+msgstr "스테이킹 보상"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "This staking interface is not available on {network}."
+msgstr "이 스테이킹 인터페이스는 {network}에서 사용할 수 없습니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Status"
+msgstr "상태"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Submit"
+msgstr "제출"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Summary"
+msgstr "요약"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Supply"
+msgstr "공급"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Swap"
+msgstr "스왑"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Swap {base}/{quote}"
+msgstr "스왑 {base}/{quote}"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Swap to {token}"
+msgstr "{token}으로 스왑하기"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Swaps"
+msgstr "스왑\n"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Available token swaps on the {network} network"
+msgstr "{network} 네트워크에서 이용 가능한 토큰 스왑"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Switch Account"
+msgstr "계정 전환"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{network} now uses the {token} token"
+msgstr "이제 {network}에서 {token} 토큰을 사용합니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Daily"
+msgstr "매일"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Monthly"
+msgstr "매월"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Yearly"
+msgstr "매년 "
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Today"
+msgstr "오늘"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Token"
+msgstr "토큰"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "tokens"
+msgstr "토큰"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Total"
+msgstr "총"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Total Actions"
+msgstr "총 활동 수"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Total Cost"
+msgstr "총 비용"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Total Staked"
+msgstr "총 스테이킹량"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Traces"
+msgstr "추적\n"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The individual transaction traces from the transaction."
+msgstr "트랜잭션에서 발생한 개별 트랜잭션 추적 기록."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transaction"
+msgstr "트랜잭션"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The actions performed in the transaction, without the inline actions."
+msgstr "트랜잭션 내에서 수행된 액션（인라인 액션 제외）"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transaction Complete"
+msgstr "트랜잭션 완료"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transaction Details"
+msgstr "트랜잭션 상세정보"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transaction Error"
+msgstr "트랜잭션 오류"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "There was an error submitting your transaction."
+msgstr "트랜잭션 제출 중 오류가 발생했습니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transaction ID"
+msgstr "트랜잭션 ID"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Resulting Actions"
+msgstr "결과적인 액션"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The actions and inline actions performed as a result of the transaction."
+msgstr "해당 트랜잭션으로 인해 수행된 액션과 인라인 액션"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transaction Summary"
+msgstr "트랜잭션 요약"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transactions"
+msgstr "트랜잭션"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transaction"
+msgstr "트랜잭션"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transfer Memo"
+msgstr "전송 메모 "
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transfer RAM from my account: {account}"
+msgstr "내 계정({account})에서 RAM 전송"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transfer tokens to another account."
+msgstr "토큰을 다른 계정으로 전송하세요."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transaction ID"
+msgstr "트랜잭션 ID"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transaction Not Found"
+msgstr "거래를 찾을 수 없습니다"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The transaction with ID {transactionId} could not be found."
+msgstr "ID가 {transactionId} 인 거래를 찾을 수 없습니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Unapprove"
+msgstr "승인 취소"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Buy {unit}"
+msgstr "{unit} 구매"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Sell {unit}"
+msgstr "{unit} 판매"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Unstake"
+msgstr "언스테이킹"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Unstake tokens"
+msgstr "토큰 언스테이킹"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Unstake {token} tokens"
+msgstr "{token} 토큰 언스테이킹"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Unstaked"
+msgstr "언스테이킹됨"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Unstaking"
+msgstr "언스테이킹"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Usable for"
+msgstr "사용 가능"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Use the public keys from my current account"
+msgstr ""
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Enter a custom owner and active public key"
+msgstr ""
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Used"
+msgstr "사용된"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Value"
+msgstr "가치"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Value: {amount}"
+msgstr "값: {amount}"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "version"
+msgstr "버전"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "View my account"
+msgstr "내 계정 보기"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "View Proposal"
+msgstr "제안 보기"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Wait (Seconds)"
+msgstr "대기(초)"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Waiting Period"
+msgstr "대기 기간"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Specify the minimum amount of time a proposal must be active before the transaction can be completed."
+msgstr "제안이 트랜잭션가 완료되기 전에 활성화되어야 하는 최소 시간을 지정하세요."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Weight Threshold"
+msgstr "가중치 임계값"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The total weight of all keys, accounts, and waits must be greater than or equal to this threshold to approve a transaction."
+msgstr "모든 키, 계정 및 대기 조건의 총 가중치가 이 임계값 이상이어야 트랜잭션가 승인됩니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Withdraw"
+msgstr "출금"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Withdraw {token} tokens from staking"
+msgstr "{token} 토큰 언스테이킹"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Currently Withdrawable"
+msgstr "현재 출금 가능"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Yield"
+msgstr "수익률 "
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Your Public Keys"
+msgstr "귀하의 공개 키"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The ABI defining the {contract} smart contract on the {network} network."
+msgstr "{network} 네트워크 상의 {contract} 스마트 컨트랙트를 정의하는 ABI."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "ABI"
+msgstr "ABI (에이비아이)"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {action} action for the {contract} smart contract on the {network} network."
+msgstr "{network} 네트워크 상의 {contract} 스마트 컨트랙트에 대한 {action} 액션"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Action: {action}"
+msgstr "액션: {action}"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {actions} smart contract actions available for the {contract} contract on the {network} network."
+msgstr "{network} 네트워크 상의 {contract} 컨트랙트에서 사용 가능한 {actions} 스마트 컨트랙트 액션."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Actions"
+msgstr "액션"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {structs} data structures defined by the {contract} smart contract on the {network} network."
+msgstr "{network} 네트워크 상의 {contract} 스마트 컨트랙트에서 정의된 {structs} 데이터 구조."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Structs"
+msgstr "구조체"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {struct} data structure as defined by the {contract} smart contract on the {network} network."
+msgstr "{network} 네트워크 상의 {contract} 스마트 컨트랙트에 의해 정의된 {struct} 구조체."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Struct: {struct}"
+msgstr "구조체: {struct}"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {tables} data tables in the {contract} contract on the {network} network."
+msgstr "{network} 네트워크 상의 {contract} 컨트랙트에 있는 {tables} 데이터 테이블."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Tables"
+msgstr "테이블"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {table} data table in the {contract} smart contract on the {network} network."
+msgstr "{network} 네트워크 상의 {contract} 스마트 컨트랙트에 있는 {table} 데이터 테이블."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Table: {table}"
+msgstr "테이블: {table}"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "An overview of the {contract} smart contract on the {network} network. This contract contains {actions} actions, {tables} tables, and {structs} structs."
+msgstr "이 컨트랙트에는 {actions}개의 액션, {tables}개의 테이블, 그리고 {structs}개의 구조체가 포함되어 있습니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Contract: {contract} | {network}"
+msgstr "컨트랙트: {contract} | {network}"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Debit and credit cards supported"
+msgstr "신용카드 및 직불카드 지원"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Claim previously delegated {network} tokens."
+msgstr "이전에 위임한 {network} 토큰 클레임."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Refund Delegated {network} Tokens"
+msgstr "위임된 {network} 토큰 환불"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "DelphiOracle Data"
+msgstr "델파이 오라클 데이터"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Details"
+msgstr "상세 정보"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Error loading accounts: {error}"
+msgstr "계정 불러오기 오류: {error}"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Exchanges"
+msgstr "거래소"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "View the transaction history of the {account} account on the {network} network."
+msgstr "{network} 네트워크 상의 {account} 계정 트랜잭션 내역을 확인하세요."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Account Activity for {account} | {network} Network"
+msgstr "{network} 네트워크 | {account} 계정 내역"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Recent activity on the {network} Network."
+msgstr "{network} 네트워크의 최근 활동."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The token balances of the {account} account on the {network} network."
+msgstr "{network} 네트워크 상의 {account} 계정 토큰 잔액."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Token Balances | {account} | {network} Network"
+msgstr "토큰 잔액 | {account} | {network} 네트워크"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Token balances on the {network} Network."
+msgstr "{network} 네트워크 상의 토큰 잔액."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Permissions for {account} on the {network} network."
+msgstr "{network} 네트워크 상의 {account} 계정 권한."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Permissions | {account} | {network} Network"
+msgstr "권한 | {account} | {network} 네트워크"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Permissions on the {network} Network"
+msgstr "{network} 네트워크 상의 권한."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Insufficient {unit} balance. Please enter a smaller amount."
+msgstr "{unit} 잔액이 부족합니다. 더 적은 금액을 입력해주세요."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Invalid number, too many decimal places."
+msgstr "유효하지 않은 숫자입니다. 소수점 자릿수가 너무 많습니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Fund Account"
+msgstr "계정 충전"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Purchase {token} tokens to fund your account"
+msgstr "계정 충전을 위해 {token} 토큰을 구매하세요."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Learn how to fund your account with {token} tokens through various methods including cryptocurrency exchanges and on-ramp providers."
+msgstr "계정을 {token} 토큰으로 충전하는 다양한 방법을 알아보세요 (암호화폐 거래소 및 온램프 제공업체 포함)."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Purchase Directly"
+msgstr "직접 구매"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Purchase {token} and have it directly send to your account using one of the platforms below."
+msgstr "아래 플랫폼 중 하나를 사용하여 {token} 토큰을 구매하고 계정으로 직접 전송하세요. "
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{token} can be purchased through a number of platforms, depending on the users needs and location. Below are some of the most popular options available."
+msgstr "{token}은 사용자의 필요와 위치에 따라 다양한 플랫폼에서 구매할 수 있습니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Token to Purchase"
+msgstr "구매할 토큰"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Stake, Send, Manage Tokens, and Explore {network} – all with ease"
+msgstr "손쉽게 {network} 스테이킹, 전송, 토큰 관리, 그리고 탐색을 모두 즐겨보세요! "
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {network} web wallet and block explorer"
+msgstr "{network} 웹 지갑 및 블록 탐색기"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "MetaMask, an the industry leading self-custody wallet, is now compatible with Unicove and the {network} network. Install the {name} snap for MetaMask to get started."
+msgstr "업계를 선도하는 자체 관리형 지갑 메타마스크가 이제 유니코브 및 {network} 네트워크와 호환됩니다. 시작하려면 메타마스크용 {name} 스냅을 설치하세요. "
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Install {name}"
+msgstr "{name} 설치"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {name} for MetaMask"
+msgstr "메타마스크용 {name}"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {network} network's native token, {token}, can be used for staking rewards, to buy and sell RAM, to pay transaction fees, and more. It is traded on most major exchanges."
+msgstr "{network} 네트워크의 네이티브 토큰인 {token}은 스테이킹 보상, RAM 구매 및 판매, 트랜잭션 수수료 지불 등에 사용될 수 있습니다. 대부분의 주요 거래소에서 거래됩니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{token}: The Native Token"
+msgstr "{token}：네이티브 토큰"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{network} Network DeFi"
+msgstr "{network} 네트워크 DeFi"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "System-level DeFi is offered by the {network} network both staking and RAM trading. The network also supports a variety of DeFi applications, including decentralized exchanges, lending platforms, swaps, and more."
+msgstr "{network} 네트워크는 시스템 레벨 DeFi로 스테이킹과 RAM 거래를 제공합니다. 또한 이 네트워크는 탈중앙 거래소、대출 플랫폼、스왑等 다양한 DeFi 애플리케이션을 지원합니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "One {ramtoken} of RAM represents ownership rights over {bytes} bytes of the network's total blockchain storage capacity. {ramtoken} can be swapped with {systemtoken} by visiting the RAM Market."
+msgstr "1개의 {ramtoken}은 네트워크 전체 블록체인 저장 용량 중 {bytes}바이트에 대한 소유권을 나타냅니다. {ramtoken}은 RAM 시장에 접속하여 {systemtoken}과 교환할 수 있습니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{base}/{quote}  Market"
+msgstr "{base}/{quote} 시장"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "KB (RAM): Tokenized Data Storage"
+msgstr "토큰화된 데이터 스토리지"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {network} staking rewards program proportionally distributes 85.6k {token} daily to token holders who have staked their tokens. These tokens can be unstaked and will be usable again after a 21 day lockup period."
+msgstr "{network} 스테이킹 보상 프로그램은 토큰을 스테이킹한 홀더들에게 매일 85.6k {token}을 비례하여 분배합니다. 스테이킹된 토큰은 언스테이킹할 수 있으며, 21일의 락업 기간이 지난 후 다시 사용 가능합니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Stake {token} today for an estimated {apr}% APR"
+msgstr "오늘 {token}을 스테이킹하면 예상 APR {apr}%를 얻을 수 있습니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "APR is based on the total amount staked and dynamically changes over time."
+msgstr "APR은 총 스테이킹 수량에 따라 변동되며 시간에 따라 동적으로 변화합니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Key not found: {error}"
+msgstr "키를 찾을 수 없습니다: {error}"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "A public key associated with {accounts} account(s) on the {network} network."
+msgstr "{network} 네트워크의 {accounts} 계정(들)과 연결된 공개키가 존재합니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {accounts} account(s) associated with this public key"
+msgstr "이 공개키와 연결된 {accounts} 계정(들)"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Public Key"
+msgstr "공개 키"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Legacy Key"
+msgstr "레거시 키"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Limits"
+msgstr "한도"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Loading accounts..."
+msgstr "계정 로딩 중"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Install MetaMask"
+msgstr "MetaMask 설치"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Note: If MetaMask is already installed, you may need to grant permissions for Unicove by manually opening MetaMask."
+msgstr "참고: 메타마스크가 이미 설치되어 있는 경우, 메타마스크를 수동으로 열어 유니코브에 대한 권한을 부여해야 할 수 있습니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "It looks like you already have MetaMask installed."
+msgstr "MetaMask가 이미 설치된 것 같습니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "To get started with MetaMask on the {network} Network, install the {name} snap using the button below."
+msgstr "{network} 네트워크에서 MetaMask를 사용하기 시작하려면 아래 버튼을 통해 {name} 스냅을 설치하세요."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Add {name} to MetaMask"
+msgstr "MetaMask에 {name} 추가하기"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "are a new feature in MetaMask that allow community built plugins to extend the functionality of the wallet beyond Ethereum based blockchains. This means you can now access the {network} Network through MetaMask using the {name} snap."
+msgstr "스냅(Snap)은 MetaMask의 새로운 기능으로，커뮤니티에서 개발한 플러그인이 이더리움 기반 블록체인을 넘어 지갑의 기능을 확장할 수 있도록 합니다. 이를 통해 이제는 {name} 스냅을 사용하여 MetaMask에서 {network} 네트워크에 접근할 수 있습니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {name} provides an RPC method which returns the public keys associated with your MetaMask seed phrase. These can be used when manually setting up a new account. Unicove can display these keys to you if you visit the Settings page and enable Advanced Mode."
+msgstr "{name} 스냅은 MetaMask  시드 문구와 연결된 공개 키를 반환하는 RPC 메서드를 제공합니다. 이 키들은 새 계정을 수동으로 설정할 때 사용될 수 있습니다. 유니코브 설정 페이지에서 고급 모드를 활성화하면 이 키들을 확인할 수 있습니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "It's possible to access any {network} Network app, provided the app developers have integrated the required SDKs. The {name} and MetaMask can be added to any web app using"
+msgstr "어떤 {network} 네트워크 앱이든 해당 앱 개발자가 필요한 SDK를 통합했다면 접근 가능합니다. {name}과 메타마스크는 다음을 사용하여 어떤 웹 앱에도 추가할 수 있습니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "with the"
+msgstr "와 함께"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Unicove itself is"
+msgstr "Unicove 자체는\n"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "and serves as reference material for how this integration can be performed."
+msgstr "그리고 통합을 수행하는 방법에 대한 참고 자료로 활용됩니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "If you have any issues with the {name} itself, please feel free to reach out to us at"
+msgstr "{name} 자체에 문제가 발생하면 언제든지 다음 주소로 문의해 주세요."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "or by visiting our Support portal at:"
+msgstr "또는 다음 지원 포털을 방문하여:"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {name} is a MetaMask Snap you can install directly from this page on Unicove or from the {name} page in the"
+msgstr "{name}은 MetaMask 스냅으로，Unicove의 이 페이지에서 직접 설치하거나 MetaMask 스토어의 {name} 페이지에서 설치할 수 있습니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "You will need to have MetaMask installed before adding the {name} snap."
+msgstr "{name} 스냅을 추가하려면 메타마스크가 먼저 설치되어 있어야 합니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {name} allows you to use MetaMask as a web3 wallet for an {network} Network account. With it you can sign in to {network} apps and perform transactions."
+msgstr "{name}은 MetaMask를 {network} 네트워크 계정용 웹3 지갑으로 사용할 수 있게 해줍니다. 이를 통해 {network} 앱에 로그인하고 트랜잭션을 수행할 수 있습니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {name}'s only purpose is to sign transactions and will need to be paired with a companion dApp, such as Unicove, in order to manage your account."
+msgstr "{name} 스냅은 트랜잭션 서명만을 목적으로 하며, 계정 관리를 위해서는 유니코브와 같은 컴패니언 dApp과 페어링되어야 합니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Please see our guide on"
+msgstr "자세한 내용은 가이드를 참조하세요."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "How to Sign Transactions on the {network} network with MetaMask"
+msgstr "MetaMask로 {network} 네트워크에서 트랜잭션 서명하는 방법"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Yes, the {name} software is completely free to use. However, accounts on the {network} Network require a small amount of {network} before they are created."
+msgstr "네, {name} 소프트웨어는 완전히 무료로 사용할 수 있습니다. 하지만, {network} 네트워크의 계정은 생성되기 전에 소량의 {network} 토큰을 필요로 합니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Unicove is currently covering this cost and offering one free account per user. To limit abuse, we require logging in with a valid 3rd party account. Only Apple and Google accounts are supported at this time."
+msgstr "현재 Unicove에서 이러한 비용을 부담하고 있으며, 사용자마다 무료로 하나의 계정을 제공하고 있습니다. 남용을 제한하기 위해 유효한 제3자 계정으로 로그인해야 합니다. 현재는 애플(Apple)과 구글(Google) 계정만 지원하고 있습니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Unicove is the first web wallet to allow you to manage your {network} account using MetaMask. We expect other wallets will add support in the future."
+msgstr "Unicove는 MetaMask를 사용하여 {network} 계정을 관리할 수 있는 최초의 웹 지갑입니다. 다른 지갑들도 향후 지원 기능을 추가할 것으로 예상합니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "You can view your account on any {network} Network block explorer, like Unicove, simply by searching for the account name."
+msgstr "Unicove와 같은 {network} 네트워크 블록 탐색기에서 계정 이름을 검색하기만 하면 귀하의 계정을 확인할 수 있습니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {name} uses a private key derived from your MetaMask seed phrase using the BIP-0044 and the {network} coin type. This private key is only ever used for {network} accounts and the {name} cannot access any of your other keys. The {name} never exposes this private key and does not have access to your seed phrase."
+msgstr "{name}은(는) BIP-0044 및 {network} 코인 유형을 사용하여 귀하의 메타마스크 시드 문구에서 파생된 개인 키를 사용합니다. 이 개인 키는 {network} 계정에만 사용되며, {name}은(는) 귀하의 다른 어떤 키에도 접근할 수 없습니다. {name}은(는) 이 개인 키를 절대 노출하지 않으며 귀하의 시드 문구에도 접근 권한이 없습니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {name} derives your owner and active keys from your MetaMask seed phrase using different indexes. The zero (0) index key is reserved for the owner key and is not available to sign regular transactions with, while the first (1) index key is used for the active key and available for transaction signing."
+msgstr "{name}은(는) 서로 다른 인덱스를 사용하여 귀하의 MetaMask 시드 문구에서 소유자 키와 액티브 키를 파생시킵니다. 인덱스 0번 키는 오너 키로 예약되어 있어 일반 트랜잭션 서명에는 사용할 수 없지만, 인덱스 1번 키는 액티브 키로 사용되며 트랜잭션 서명에 사용할 수 있습니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "A future update to the {name} will provide a way to use the owner key to reset the active key, allowing for a recovery path in the event the active keys have been changed."
+msgstr "{name} 스냅의 향후 업데이트를 통해 오너 키를 사용하여 액티브 키를 재설정하는 방법이 제공될 예정입니다. 이는 액티브 키가 변경된 경우 복구 경로를 사용할 수 있도록 합니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "What is a MetaMask snap?"
+msgstr "MetaMask Snap이란 무엇인가요?"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "How does find my owner and active keys?"
+msgstr "소유자 키와  액티브 키는 어떻게 찾나요?"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Can I access all {network} apps using {name} for MetaMask?"
+msgstr "{name} for MetaMask를 사용하여 모든 {network} 앱에 접근할 수 있나요?"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "How do I reach out for {name} support?"
+msgstr "{name} 지원을 받으려면 어떻게 연락하면 되나요?"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "How do I install the {name}?"
+msgstr "{name}을 어떻게 설치하나요?"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "What does the {name} do?"
+msgstr " {name}은 무슨 기능을 하나요?"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "What does the {name} not do?"
+msgstr "{name}은 무엇을 하지 않나요?"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "How do I sign transactions using the {name}?"
+msgstr "{name}을 사용해 트랜잭션에 서명하는 방법은 무엇인가요?"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Is the {name} free to use?"
+msgstr "{name} 은 무료로 사용할 수 있나요?"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Where can I view and manage my {network} account?"
+msgstr "{network} 계정은 어디서 확인하고 관리할 수 있나요?"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Is my private key or recovery phrase exposed when using the {name} Snap?"
+msgstr "{name} Snap을 사용할 때 개인키나 복구 구문이 노출되나요?"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "How does MetaMask configure my owner and active keys?"
+msgstr "MetaMask는 소유자 키와액티브 키를 어떻게 구성하나요?"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "You are logged in as {account} and ready to use Unicove to access the {network} network."
+msgstr "귀하는 {account}로 로그인되어 있으며, Unicove를 사용하여 {network} 네트워크에 접근할 준비가 완료되었습니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "You are logged in as {account} but are not using MetaMask."
+msgstr "귀하는 {account}로 로그인되어 있으나, MetaMask를 사용하고 있지는 않습니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {name} snap allows you to interact with Unicove and other {network}-based dApps using MetaMask."
+msgstr "{name} 스냅을 사용하면 MetaMask를 통해 Unicove 및 기타 {network} 기반 DApp과 상호작용할 수 있습니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Begin by installing MetaMask, then come back to this page and install the {name} snap."
+msgstr "먼저 MetaMask를 설치한 후，이 페이지로 돌아와 {name} 스냅을 설치하세요."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "If you don't already have an {network} account you can create one now. If you have already created an account you can login with MetaMask."
+msgstr "{network} 계정이 없으시다면 지금 생성할 수 있습니다. 이미 계정을 생성하셨다면 MetaMask로 로그인하실 수 있습니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "MetaMask and the {name} are connected, installed, and up-to-date using"
+msgstr " MetaMask와 {name} 스냅은 연결되어 있고, 설치되었으며, 최신 상태입니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Add {name} to MetaMask"
+msgstr "MetaMask에 {name} 추가하기"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{name} + MetaMask"
+msgstr "{name} + MetaMask"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Update {name}"
+msgstr "{name} 업데이트하기"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "A new version of the {name} is available. Click the button below to update to the latest version ({latestVersion})."
+msgstr "{name}의 새로운 버전이 출시되었습니다. 아래 버튼을 클릭해 최신 버전({latestVersion})으로 업데이트하세요."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Network does not support MetaMask Snaps"
+msgstr "해당 네트워크는 MetaMask 스냅(Snaps)을 지원하지 않습니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Get started with MetaMask on the {network} Network with the {name} snap."
+msgstr "{name} 스냅을 통해 {network} 네트워크에서 MetaMask 사용을 시작하세요."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "MetaMask + {name}"
+msgstr "메타마스크 + {name}"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "MetaMask Public Key (Active)"
+msgstr "MetaMask 공개 키 (액티브)"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "MetaMask Public Key (Owner)"
+msgstr "MetaMask 공개키 (소유자)"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "MetaMask Snaps Directory"
+msgstr "MetaMask 스냅 디렉토리\n"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Approved"
+msgstr "승인됨"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Cancel MSIG"
+msgstr "MSIG(다중 서명 트랜잭션) 취소하기"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Multisig Details"
+msgstr "멀티시그 상세정보"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Execute"
+msgstr "실행하다"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Expiration"
+msgstr "만료"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Expired"
+msgstr "만료됨"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "An MSIG proposed by {proposer} on the {network} Network"
+msgstr "{network} 네트워크에서 {proposer}가 제안한 MSIG"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Proposal Name"
+msgstr "제안명"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Proposed Actions"
+msgstr "제안된 조치"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Proposer"
+msgstr "제안자"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Requested"
+msgstr "요청됨"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Requested Approvals"
+msgstr "요청된 승인"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "You must be logged in with an account to use this feature."
+msgstr "이 기능을 사용하려면 계정으로 로그인해야 합니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Activity"
+msgstr "활동"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Balances"
+msgstr "잔액"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Overview"
+msgstr "개요"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Permissions"
+msgstr "권한"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Proposals"
+msgstr "제안"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Resources"
+msgstr "리소스"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Staked"
+msgstr "스테이킹됨"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Votes"
+msgstr "투표"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "No accounts found"
+msgstr "계정을 찾을 수 없습니다"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "No supported funding methods for this blockchain."
+msgstr "이 블록체인에는 지원되는 자금 조달 방법이 없습니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {network} web wallet and block explorer"
+msgstr " {network} 웹 지갑 및 블록 탐색기"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Stake, Send, Manage Tokens, and Explore {network} – all with ease"
+msgstr "손쉽게 {network} 네트워크에서 스테이킹, 전송, 토큰 관리 및 탐색을 모두 즐기세요!"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Unicove - The {network} web wallet and block explorer"
+msgstr "Unicove - {network} 웹 지갑 및 블록 탐색기"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transfer tokens from one account to another account"
+msgstr "한 계정에서 다른 계정으로 토큰을 전송하세요."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Stake and earn rewards using a {network} compatible wallet"
+msgstr "{network} 호환 지갑으로 스테이킹하고 보상을 받으세요."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Processing fees"
+msgstr "처리 수수료"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "RAM Available"
+msgstr "사용 가능한 RAM"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Amount of RAM to buy:"
+msgstr "구매할 RAM의 양:"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Exchange {quote} for {base} on the {network} network."
+msgstr " {network} 네트워크에서 {quote}를 {base}로 교환하세요."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{base}/{quote} Market | {network} Network"
+msgstr " {base}/{quote} 시장 | {network} 네트워크"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "An overview of RAM Market on the {network} network that provides access to buy and sell RAM with {token} using an {network} compatible wallet."
+msgstr "{network} 네트워크에서 {token}을 사용해 RAM을 매매할 수 있는 RAM 시장 개요입니다. {network} 호환 지갑으로 접속하세요."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Exchange RAM for {token} on the {network} network using an {network} compatible wallet."
+msgstr "{network} 호환 지갑을 사용하여 {network} 네트워크에서 RAM을 {token}으로 교환하세요."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "An overview of the {base}/{quote} market on the {network} Network."
+msgstr "{network} 네트워크에서의 {base}/{quote} 시장 개요."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{base}/{quote}  Market"
+msgstr "{base}/{quote} 시장"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Exchange RAM for {token} on the {network} network."
+msgstr "{network} 네트워크에서 RAM을 {token}으로 교환하세요."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Exchange {token} for RAM on the {network} network."
+msgstr "{network} 네트워크에서 {token}을 RAM으로 교환하세요."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "RAM Purchase Value"
+msgstr "RAM 구매 가치"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Amount of RAM to sell:"
+msgstr "판매할 RAM 양:"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "RAM to be bought"
+msgstr "구매할 RAM"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "RAM to be sold"
+msgstr "판매할 RAM"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "An overview of the multiple network resources usable on the {network} Network providing access to manage resources using an compatible wallet."
+msgstr "{network} 네트워크에서 사용 가능한 다양한 네트워크 리소스에 대한 개요입니다. 호환 지갑을 통해 이러한 리소스를 관리할 수 있습니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Manage CPU, NET, and RAM resources on the {network} Network."
+msgstr "{network} 네트워크의 CPU、NET 및 RAM 리소스."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{network} Network Resources"
+msgstr "{network} 네트워크 리소스"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Confirm Rent"
+msgstr "렌트 확인"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Rent for {cost}"
+msgstr "{cost}로 렌트"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Rent Resources for my account"
+msgstr "내 계정에 대한 리소스 렌트"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Rent CPU and NET resources on the {network} Network using an {network} compatible wallet."
+msgstr "{network} 호환 지갑을 사용하여 {network} 네트워크에서 CPU 및 NET 리소스를 대여하세요."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Rent Resources | {network} Network"
+msgstr "렌트 리소스 | {network} 네트워크"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Enter the account name"
+msgstr "계정 이름을 입력하세요"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Renting"
+msgstr "렌트 중"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Rent CPU and NET resources on the {network} Network."
+msgstr "{network} 네트워크에서 CPU 및 NET 리소스를 렌트하세요.\n"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Rent Resources"
+msgstr "렌트 리소스"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Rent resources with PowerUp"
+msgstr "PPowerU로 리소스 렌트"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Rent resources with REX"
+msgstr "REX로 리소스 렌트"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Rent with Rex"
+msgstr "Rex를 통해 렌트"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Stake {symbolName} for resources"
+msgstr "리소스를 위해 {symbolName} 스테이크"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "24 Hours"
+msgstr "24시간"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "30 Days"
+msgstr "30일"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Until Unstaked"
+msgstr "언스테이킹 시까지"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Purchase RAM"
+msgstr "RAM 구매"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Clear search history"
+msgstr "검색 기록 삭제"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Market Overview"
+msgstr "시장 개요"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Sell RAM"
+msgstr "RAM 판매"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Configure Unicove"
+msgstr "Unicove 설정"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Staking overview"
+msgstr "스테이킹 개요"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transfer tokens"
+msgstr "토큰 전송"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "View {type}"
+msgstr "{type} 보기"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Select provider"
+msgstr "제공자 선택"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Amount to send"
+msgstr "보낼 금액"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Enter the amount of {token} to send"
+msgstr "보낼 {token} 수량을 입력하세요."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Specify a public memo for this transfer (optional)"
+msgstr "이 전송에 대한 공개 메모를 지정하세요(선택 사항)"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transfer tokens from one account to another account on the {network} network using an {network} compatible wallet."
+msgstr "{network} 네트워크 호환 지갑을 사용하여 {network} 네트워크의 한 계정에서 다른 계정으로 토큰을 전송하세요."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Receiving Account"
+msgstr "수신 계정"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Enter the account name of the recipient"
+msgstr "수신자의 계정명을 입력하세요."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Start new send"
+msgstr "새로운 전송 시작"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Token to send"
+msgstr "보낼 토큰 "
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Advanced"
+msgstr "고급"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Dark Mode"
+msgstr "다크 모드"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Toggle site wide dark mode independent from operating system preferences."
+msgstr "운영 체제 설정과 무관하게 사이트 전체의 다크 모드를 토글합니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Developer"
+msgstr "개발자"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Enable Advanced Mode"
+msgstr "고급 모드 활성화"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Enable features for more advanced use cases."
+msgstr "고급 사용 사례를 위해 기능 활성화."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Debug Data Display"
+msgstr "디버그 데이터 표시"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Enable Developer Mode"
+msgstr "개발자 모드 활성화"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Allow usage of settings meant for development of Unicove"
+msgstr "유니코브 개발용 설정 사용 허용"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Mock token price"
+msgstr "모의 토큰 가격"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Force the system token price to equal {mockValue} for testing in environments without pricing information."
+msgstr "가격 정보가 없는 환경에서 테스트를 위해 시스템 토큰 가격을 {mockValue}로 강제 설정하세요."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "General"
+msgstr "일반"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Increased Precision"
+msgstr "정밀도 향상"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Use more decimals to increase currency precision."
+msgstr "더 많은 소수점을 사용하여 통화 정밀도를 높이세요."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The language used throughout Unicove."
+msgstr "유니코브 전체에서 사용되는 언어"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Language Selector"
+msgstr "언어 선택기"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Configure Unicove"
+msgstr "Unicove 설정"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Prefered Currency"
+msgstr "선호 통화"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The currency used to display the value of tokens."
+msgstr "토큰의 가치를 표시하는 데 사용되는 통화."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Remain on current page when switching accounts"
+msgstr "계정 전환 시 현재 페이지 유지"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Prevents the automatic navigation to the account overview page"
+msgstr "계정 개요 페이지로의 자동 이동 방지"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Allow account switching in search prompt"
+msgstr "검색 프롬프트에서 계정 전환 허용"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Adds logged in accounts to search results for quick switching."
+msgstr "빠른 전환을 위해 로그인된 계정을 검색 결과에 추가합니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Allow page navigation in search prompt"
+msgstr "검색 프롬프트에서 페이지 이동 허용 "
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Adds popular Unicove pages to search results."
+msgstr "인기 있는 Unicove 페이지를 검색 결과에 추가합니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Staking Calculator"
+msgstr "스테이킹 계산기"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Enter an amount of {token} to calculate estimated rewards based on the current APR of {apr}%. This rate will change over time based on the amount of tokens staked."
+msgstr "{apr}%의 현재 연이율(APR)을 기준으로 예상 보상을 계산하려면 {token} 수량을 입력하세요.이율은 스테이킹된 토큰의 총량에 따라 시간이 지남에 따라 변동될 수 있습니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Estimated Yield (Yearly)"
+msgstr "예상 수익률 (연간)"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "An overview of staking on the {network} network providing easy access to stake, unstake, and withdraw {token} tokens using an {network} compatible wallet."
+msgstr "{network} 네트워크에 대한 스테이킹 개요를 제공하며, {network} 호환 지갑을 사용하여 {token} 토큰의 스테이킹, 언스테이킹, 인출을 손쉽게 처리할 수 있습니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Stake {token} tokens and earn rewards using an {network} compatible wallet."
+msgstr "{network} 호환 지갑을 사용하여 {token} 토큰을 스테이킹하고 보상을 얻으세요."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Unstake {token} tokens and begin claiming the balance of your rewards using an {network} compatible wallet."
+msgstr "{network} 호환 지갑을 사용하여 {token} 토큰을 언스테이킹하고 보상 잔액 청구를 시작하세요."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Withdraw {token} tokens from the staking contract to add them to your available balance using an {network} compatible wallet."
+msgstr "{network} 호환 지갑을 사용하여 스테이킹 계약에서 {token} 토큰을 인출하고 사용 가능한 잔액에 추가하세요."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Minimum lockup"
+msgstr "최소 락업"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Stake {token} to earn rewards."
+msgstr "{token}을 스테이킹하여 보상을 받으세요."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{network} Network Staking"
+msgstr "{network} 네트워크 스테이킹"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Withdrawable in 21 days"
+msgstr "21일 후 인출 가능"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "RAM Purchase Summary"
+msgstr "RAM 구매 요약"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "System contract refund request for {account}."
+msgstr "{account} 계정의 시스템 컨트랙트 환불 요청.\n"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Staking Deposit"
+msgstr "스테이킹 예치금"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Staking Withdrawal"
+msgstr "스테이킹 출금"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Token Transfer"
+msgstr "토큰 전송"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Resource Provider"
+msgstr "리소스 제공자"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Swap {base}/{quote}"
+msgstr "스왑 {base}/{quote}"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Swap the {base} token for the {quote} token."
+msgstr "{base} 토큰을 {quote} 토큰으로 스왑합니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "This swap will exchange {base} for {quote}."
+msgstr "이 스왑은 {base}를 {quote}로 교환합니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Swap Summary ({base}/{quote})"
+msgstr "스왑 요약 ({base}/{quote})"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "This is a test"
+msgstr "이것은 테스트입니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Token Purchase Providers"
+msgstr "토큰 구매 제공 업체"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Tokens can be purchased directly through the following providers:"
+msgstr "다음 제공업체를 통해 토큰을 직접 구매할 수 있습니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Total Proceeds"
+msgstr "총 수익금"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transaction not found: {transaction}"
+msgstr "트랜잭션을 찾을 수 없습니다: {transaction}"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{number} Actions"
+msgstr "{number}개 액션\n"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "A transaction performed at {date} on the {network} Network."
+msgstr "{date}에 {network} 네트워크에서 수행된 트랜잭션."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{id} | {network} Network"
+msgstr "{id} | {network} 네트워크"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transaction on {date}"
+msgstr "{date}의 트랜잭션"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The tokens currently being unstaked are listed below with the date they become available. These balances will continue to earn rewards until they are withdrawn."
+msgstr "현재 언스테이킹 중인 토큰 목록과 인출 가능 날짜는 아래에 표시됩니다.해당 잔액은 인출될 때까지 계속해서 보상을 받게 됩니다."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "EOS can be purchased through a number of platforms, depending on the users needs and location. Below are some of the most popular options available."
+msgstr "사용자의 필요와 위치에 따라 다양한 플랫폼에서 EOS를 구매할 수 있습니다.아래에는 가장 인기 있는 구매 옵션들이 있습니다.\n"

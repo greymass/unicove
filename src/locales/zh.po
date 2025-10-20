@@ -1,0 +1,2284 @@
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=2; plural=n == 1 ? 0 : 1;\n"
+"Language: zh\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2025-10-20T18:08:55.381Z\n"
+"POT-Creation-Date: 2025-10-20T18:08:55.381Z\n"
+
+#: src/routes/+error.svelte
+#: src/routes/+layout.server.ts
+#: src/routes/[network]/+error.svelte
+msgid "Page not found"
+msgstr ""
+
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "$500/day"
+msgstr "500 美元/天"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Account not found: {account}"
+msgstr "未找到账户： {account}"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "An overview of the {account} account on the {network} Network. View account assets, activity, resources and more."
+msgstr "在 {network} 网络上查看 {account} 账户的概览。查看账户资产、活动、资源等信息。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{account} | {network} Network Account"
+msgstr "{account} | {network} 网络账户"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Account Page"
+msgstr "账户页面"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Account overview on the {network} Network"
+msgstr "{network} 网络的账户概览"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Total Account Value"
+msgstr "账户总值"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Associated Accounts"
+msgstr "关联账户"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Decoded Data"
+msgstr "解码数据"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Raw JSON"
+msgstr "原始 JSON 数据"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Formatted Data"
+msgstr "格式化数据"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Ricardian"
+msgstr "里卡迪合约"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Action Summary"
+msgstr "操作摘要"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Active Session"
+msgstr "活跃会话"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "EOS Network Rebrands to Vaulta"
+msgstr "EOS品牌更新为Vaulta"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Block #{height}"
+msgstr "区块 #{height}"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Block #{height} was produced by {producer} on {timestamp}, which included {transactions} transactions performing {actions} actions."
+msgstr "区块 #{height} 是由 {producer} 在 {timestamp} 生产的，该区块包含了 {transactions} 笔交易，执行了 {actions} 个操作。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Block Details"
+msgstr "区块详情"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Buy {token} with Coinbase"
+msgstr "通过 Coinbase 购买 {token}"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Buy or transfer {token}"
+msgstr "购买或转移 {token}"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Buy {token} with Coinbase"
+msgstr "使用 Coinbase 购买 {token}"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Change network"
+msgstr "切换网络"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Coinbase service is currently unavailable."
+msgstr "Coinbase 服务目前不可用。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "About {thing}"
+msgstr "关于{thing}"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Actor"
+msgstr "行为人"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {account} account has some form of authority assigned to the other accounts listed below."
+msgstr "账户 {account} 已将部分权限授予以下列出的其他账户。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Account Balance"
+msgstr "账户余额"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Account Created"
+msgstr "帐户已创建"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The account was successfully created."
+msgstr "帐户已成功创建。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "multisig using {account}"
+msgstr "使用{account} 进行多重签名"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Account Name"
+msgstr "账号名称"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Action"
+msgstr "操作"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Actions"
+msgstr "操作"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Actor"
+msgstr "行为人"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Add Account"
+msgstr "添加账号"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Add Contract"
+msgstr "添加联系人"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Add Funds"
+msgstr "注资"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Add Key"
+msgstr "添加密钥"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Add Wait"
+msgstr "添加等待队列"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Advanced"
+msgstr "高级的"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Amount"
+msgstr "数量"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Amount exceeds available balance."
+msgstr "数量超出可用余额。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Amount to {action}"
+msgstr "{action}数量"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Approve"
+msgstr "批准"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Current APR"
+msgstr "当前年利率"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Asset"
+msgstr "资产"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Accounts that allow the {account} account to sign on their behalf"
+msgstr "允许 {account} 帐户代表其签名的帐户"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Weight of {weight} and threshold of {threshold}."
+msgstr "权重 {weight}，阈值 {threshold}。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Available"
+msgstr "可用的"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Back"
+msgstr "返回"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Back to Permissions"
+msgstr "返回权限"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Balance"
+msgstr "余额"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Balance available"
+msgstr "可用余额"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "available to swap"
+msgstr "可兑换"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Balance Change"
+msgstr "余额变动"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Basic"
+msgstr "基础的"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Basic Information"
+msgstr "基本信息"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The name, parent permission, and type (Basic or Advanced). Name and parent fields cannot be modified after the permission is created."
+msgstr "名称、父权限和类型（基础或高级）。权限一旦创建，名称和父权限字段将无法修改。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Block ID"
+msgstr "区块 ID"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Next Block"
+msgstr "下一区块"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Block Number"
+msgstr "区块号"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Previous Block"
+msgstr "上一区块"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Block Producers"
+msgstr "Block Producers"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Validators on the {network} network."
+msgstr "Validators on the {network} network."
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Breakdown"
+msgstr "明细"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Breaking News"
+msgstr "突发新闻"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Buy"
+msgstr "购买"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Bytes"
+msgstr "字节"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Cancel"
+msgstr "取消"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Claim"
+msgstr "领取"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Clear"
+msgstr "清除"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Close"
+msgstr "关闭"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Complete"
+msgstr "完成"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Confirm"
+msgstr "确认"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Confirm Details"
+msgstr "确认详细信息"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Carefully review and confirm the details of this transaction. Incorrectly setting your permissions could cause permanent loss of access to this permission or account!"
+msgstr "请仔细检查并确认此交易的详细信息。错误地设置权限可能导致您永久失去对此权限或账户的访问权限！"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Connect Wallet"
+msgstr "连接钱包"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Connect your wallet to login"
+msgstr "连接你的钱包进行登录"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Contract"
+msgstr "合约"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Contract Isolation"
+msgstr "合约隔离"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Restrict this permission to specific contracts and actions. Leave the action blank to allow all actions on a contract."
+msgstr "将此权限限制在特定的合约和操作上。如果将操作项留空，则表示允许对该合约执行所有操作。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{contract} Processing"
+msgstr "{contract} 处理中"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Contracts Used"
+msgstr "使用的合约"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Copied!"
+msgstr "已复制！"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Copy"
+msgstr "复制"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Total CPU"
+msgstr "CPU 总量"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "CPU (μs)"
+msgstr "CPU (微秒）"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Create an account"
+msgstr "创建账户"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Create Account {how}"
+msgstr "请选择用于创建账户的方法：{how}"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "by paying {cost} for RAM"
+msgstr "通过支付 {cost} 购买 RAM"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Send EOS from an exchange or over a bridge to the account below with the memo provided to create your account."
+msgstr "请将 EOS 从交易所或桥转账至以下账户，并附上提供的备忘，以完成账户创建。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Once the transfer is complete, use your private key to import your account into the wallet of your choosing."
+msgstr "一旦转账完成，使用您的私钥将账户导入您选择的钱包。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "by transferring {bytes} bytes of RAM"
+msgstr "通过转移 {bytes} 字节的 RAM"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Change RAM options for new account"
+msgstr "更改新帐户的 RAM 选项"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Create Account"
+msgstr "创建帐户"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Create an account using your existing account"
+msgstr "使用您现有的账户创建新账户"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "You must be logged in with an existing account in order to create another account on this page."
+msgstr "您必须使用现有账户登录，才能在此页面创建新账户。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "RAM bytes to purchase for new account (min: {min})"
+msgstr "为新账户购买的 RAM 字节数（最小值：{min}）"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Data"
+msgstr "数据"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Date"
+msgstr "日期"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Date Available"
+msgstr "可用日期"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Debugging"
+msgstr "调试中"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Delegated"
+msgstr "委托中"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Delegated Amount"
+msgstr "已委托金额"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Delete Permission"
+msgstr "删除权限"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Details"
+msgstr "详情"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Distribution"
+msgstr "分布"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Edit permission for {account} on {network}"
+msgstr "编辑 {account} 在 {network} 网络上的权限"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Error"
+msgstr "错误"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Exchanges"
+msgstr "交易所"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Expected to receive"
+msgstr "预计收到"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "FAQ"
+msgstr "常见问题"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Fee"
+msgstr "费用"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Fill Max"
+msgstr "填充最大值"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Finality Status"
+msgstr "最终确定状态"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Generate Key"
+msgstr "生成密钥"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Get Tokens"
+msgstr "获取代币"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Hash"
+msgstr "哈希"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Included in Block"
+msgstr "已包含在区块中"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Instructions"
+msgstr "操作指令"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Invalid number, too many decimal places."
+msgstr "无效数字，小位数过多。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Irreversible"
+msgstr "不可逆的"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Key Pairs"
+msgstr "密钥对"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Enter the Public Key(s) which can sign on behalf of this permission."
+msgstr "请输入可代表此权限签名的公钥(s)。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Keys and Permissions"
+msgstr "密钥和权限"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{unit} Available"
+msgstr "可用{unit}"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{unit} Balance"
+msgstr "{unit} 余额"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{unit} Price"
+msgstr "{unit} 价格"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{unit} Staked"
+msgstr "已质押 {unit}"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{unit} Value"
+msgstr "{unit} 价值"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Learn more"
+msgstr "了解更多"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "length"
+msgstr "长度"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Loading"
+msgstr "加载中"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Login"
+msgstr "登录"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Login as {permission}"
+msgstr "以 {permission} 权限身份登录"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Login to Unicove"
+msgstr "登录Unicove"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Market Cap"
+msgstr "市值"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Memo"
+msgstr "备注"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "More"
+msgstr "更多"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Multi-Sig Proposal Created"
+msgstr "已创建多重签名提案"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The multi-sig proposal for this transaction has been created and now needs to be approved. View the proposal below and share it with the parties who need to sign."
+msgstr "此笔交易的多重签名提案已创建，现需相关方批准。请在下方查看该提案，并将其分享给需签署的各方。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Multisig proposals by {account} on the {network} Network."
+msgstr "{account} 在 {network} 网络上发起的多重签名提案。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "multisig using {account}"
+msgstr "使用 {account} 进行多重签名"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "You must be logged in with an account to use this feature."
+msgstr "您必须登录账户才能使用此功能。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "My Account"
+msgstr "我的账户"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "My Accounts"
+msgstr "我的账户"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Native TVL"
+msgstr "原生总锁仓价值 TVL"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Navigation"
+msgstr "导航栏"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "NET (Bytes)"
+msgstr "NET (字节)"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Total NET"
+msgstr "NET 总量"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Includes network fee of:"
+msgstr "包括网络费用："
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Network Fees"
+msgstr "网络费用"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Network Resource Rental"
+msgstr "网络资源租赁"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Network Resources Received"
+msgstr "已获取的网络资源"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{network} Token Swap has begun!"
+msgstr "{network}代币置换已开始！"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Swap {legacytoken} to {systemtoken} at a {ratio} ratio"
+msgstr "以 {ratio} 的比例将 {legacytoken} 兑换为 {systemtoken}"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "New Permission"
+msgstr "新权限"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Next"
+msgstr "下一步"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "No active sessions"
+msgstr "无活跃会话"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "No available authorities for this account."
+msgstr "此账户没有可用的权限。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "No balances found."
+msgstr "无可用余额。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "No data"
+msgstr "无数据"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "No proposals found."
+msgstr "未找到提案。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "No swaps available for this pair."
+msgstr "当前选择的两种代币之间没有可用的交易对。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "No transactions"
+msgstr "无交易记录"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Not logged in"
+msgstr "未登录"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "notified"
+msgstr "已通知"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "open source"
+msgstr "开源"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Optional"
+msgstr "可选"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Parent Permission"
+msgstr "父权限"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Permission"
+msgstr "权限"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Authorization"
+msgstr "授权"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Note: Changing the permission type will reset any unsaved edits made to this permission."
+msgstr "注意：更改权限类型将重置对此权限所做的所有未保存更改。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Permission Name"
+msgstr "权限名称"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Other Accounts"
+msgstr "其他账户"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Specify other accounts and permissions that can control this permission."
+msgstr "指定其他账户及其权限可以控制这个权限。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Threshold"
+msgstr "阈值"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Permission Type"
+msgstr "权限类型"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Weight"
+msgstr "权重"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Preferences"
+msgstr "偏好设置"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Private Key"
+msgstr "私钥"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "I have saved this private key."
+msgstr "我保存了这个私钥。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "This is your new private key. Copy it someplace safe, import it into your wallet, and never share it with anyone. If you lose this key, you will lose access to your account."
+msgstr "这是您的新私钥。请将其保存在安全的地方，导入到您的钱包中，并且切勿与任何人分享。如果您丢失了这个私钥，您将无法再访问您的账户。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Producer Name"
+msgstr "出块人名称"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Standby"
+msgstr "候补状态"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Top 21"
+msgstr "前 21 名"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Proposal ID"
+msgstr "提案ID"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Public Key"
+msgstr "公钥"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "RAM Market"
+msgstr "RAM 市场"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "RAM Swap"
+msgstr "RAM 置换"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "RAM Usage"
+msgstr "RAM 使用量"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The deltas in RAM usage for each trace in the transaction."
+msgstr "每个交易踪迹中RAM使用量的变化量。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Read announcement"
+msgstr "阅读公告"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Read more"
+msgstr "阅读更多"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Receive {token} Tokens"
+msgstr "接收 {token} 代币"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Received"
+msgstr "已接收"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Recent Activity"
+msgstr "近期活动"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Recipient"
+msgstr "接收者"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Reclaim"
+msgstr "取回"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Reclaim Delegated {token} Tokens"
+msgstr "回收已委托的 {token} 代币"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Undelegate and reclaim previously delegated {token} tokens"
+msgstr "撤销委托并回收已委托的 {token} 代币"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Note: Tokens that are undelegated will remain in a \"refunding\" state for 72 hours, after which they will need to be claimed from your account page."
+msgstr "注意：撤销委托的代币将保持在“退款”状态 72 小时，之后您需要从您的账户页面进行领取代币。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Refund"
+msgstr "返还"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Claim previously delegated {token} tokens"
+msgstr "领取先前委托的{token}代币"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Refunding"
+msgstr "返还中"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Remove"
+msgstr "移除"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "renting {resource} for"
+msgstr "租用 {resource} 时长为"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Requesting"
+msgstr "请求中"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Required"
+msgstr "必需的"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Amount of {resource}"
+msgstr "{resource} 数量"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Resources"
+msgstr "资源"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Manage CPU/NET"
+msgstr "管理 CPU/NET"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The network resources for this transaction were provided by a 3rd party."
+msgstr "此交易所需的网络资源由第三方提供。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Restart"
+msgstr "重新开始"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Result"
+msgstr "结果"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Reversible"
+msgstr "可逆的"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Role"
+msgstr "角色"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Save Permission"
+msgstr "保留权限"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Search..."
+msgstr "搜索……"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Search for Unicove features or enter an account name, public key, or transaction ID on the network."
+msgstr "搜索 Unicove 功能，或输入网络上的账户名、公钥或交易 ID。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Search {network}..."
+msgstr "搜索 {network} 网络……"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "No results found"
+msgstr "未找到结果"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Search Results"
+msgstr "搜索结果"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Search Unicove"
+msgstr "在 Unicove 中搜索"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Select an option"
+msgstr "选择一个选项"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Sell"
+msgstr "出售"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Send"
+msgstr "发送"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Amount of {token} to send"
+msgstr "要发送的 {token} 数量"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Send {token} to account"
+msgstr "将 {token} 发送到账户"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Send {token} Tokens"
+msgstr "发送{token}代币"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Sent"
+msgstr "已发送"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Settings"
+msgstr "设置"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Signatures"
+msgstr "签名"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Signed by"
+msgstr "由...签名"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Signer"
+msgstr "签名者"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Smart Contract Account Creation"
+msgstr "智能合约账户创建"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Create an account using a basic token transfer to a smart contract"
+msgstr "通过向智能合约进行基本代币转账来创建账户"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Source Code"
+msgstr "源代码"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Stake"
+msgstr "质押"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Stake Tokens"
+msgstr "质押代币"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Stake {token} Tokens"
+msgstr "质押 {token} 代币"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Staked"
+msgstr "质押中"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Currently staked"
+msgstr "当前已质押"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Staking"
+msgstr "质押"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Staking Rewards"
+msgstr "质押奖励"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "This staking interface is not available on {network}."
+msgstr "此质押界面在 {network} 上不可用。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Status"
+msgstr "状态"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Submit"
+msgstr "提交"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Summary"
+msgstr "摘要"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Supply"
+msgstr "供应量"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Swap"
+msgstr "兑换"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Swap {base}/{quote}"
+msgstr "兑换 {base}/{quote} 交易对"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Swap to {token}"
+msgstr "兑换为{token}"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Swaps"
+msgstr "兑换"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Available token swaps on the {network} network"
+msgstr "{network} 网络上可用的代币兑换对"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Switch Account"
+msgstr "切换账户"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{network} now uses the {token} token"
+msgstr "{network} 现已使用 {token} 代币"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Daily"
+msgstr "每日"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Monthly"
+msgstr "每月"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Yearly"
+msgstr "每年"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Today"
+msgstr "今天"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Token"
+msgstr "代币"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "tokens"
+msgstr "代币"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Total"
+msgstr "总计"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Total Actions"
+msgstr "总操作数"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Total Cost"
+msgstr "总费用"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Total Staked"
+msgstr "总质押"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Traces"
+msgstr "交易追踪信息"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The individual transaction traces from the transaction."
+msgstr "来自该交易的各个执行追踪记录。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transaction"
+msgstr "交易"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The actions performed in the transaction, without the inline actions."
+msgstr "该交易中执行的操作，不包括内联操作。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transaction Complete"
+msgstr "交易完成"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transaction Details"
+msgstr "交易明细"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transaction Error"
+msgstr "交易错误"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "There was an error submitting your transaction."
+msgstr "提交交易时发生错误。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transaction ID"
+msgstr "交易 ID"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Resulting Actions"
+msgstr "结果操作"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The actions and inline actions performed as a result of the transaction."
+msgstr "该交易所执行的操作及其触发的内联操作。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transaction Summary"
+msgstr "交易摘要"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transactions"
+msgstr "交易"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transaction"
+msgstr "交易"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transfer Memo"
+msgstr "转账备注"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transfer RAM from my account: {account}"
+msgstr "从我的账户 {account} 转移 RAM"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transfer tokens to another account."
+msgstr "将代币转移到另一个账户。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transaction ID"
+msgstr "交易 ID"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transaction Not Found"
+msgstr "未找到交易"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The transaction with ID {transactionId} could not be found."
+msgstr "未找到 ID 为 {transactionId} 的交易。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Unapprove"
+msgstr "不批准"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Buy {unit}"
+msgstr "购买 {unit}"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Sell {unit}"
+msgstr "出售 {unit}"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Unstake"
+msgstr "取消质押"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Unstake tokens"
+msgstr "取消质押代币"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Unstake {token} tokens"
+msgstr "取消质押 {token} 代币"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Unstaked"
+msgstr "已取消质押"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Unstaking"
+msgstr "取消质押中"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Usable for"
+msgstr "可用于"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Use the public keys from my current account"
+msgstr ""
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Enter a custom owner and active public key"
+msgstr ""
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Used"
+msgstr "已使用"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Value"
+msgstr "价值"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Value: {amount}"
+msgstr "价值：{amount}"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "version"
+msgstr "版本"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "View my account"
+msgstr "查看我的账户"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "View Proposal"
+msgstr "查看提案"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Wait (Seconds)"
+msgstr "等待时间（秒）"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Waiting Period"
+msgstr "等待期"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Specify the minimum amount of time a proposal must be active before the transaction can be completed."
+msgstr "指定交易完成之前提案必须保持活跃的最短时间。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Weight Threshold"
+msgstr "权重门槛"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The total weight of all keys, accounts, and waits must be greater than or equal to this threshold to approve a transaction."
+msgstr "所有密钥、账户和等待时间的权重总和，必须大于或等于设定的门槛值，交易才能被批准执行。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Withdraw"
+msgstr "提取"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Withdraw {token} tokens from staking"
+msgstr "从质押中提取 {token} 代币"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Currently Withdrawable"
+msgstr "当前可提取"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Yield"
+msgstr "收益"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Your Public Keys"
+msgstr "你的公钥"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The ABI defining the {contract} smart contract on the {network} network."
+msgstr "定义 {contract} 智能合约的 ABI，位于 {network} 网络上。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "ABI"
+msgstr "应用二进制接口"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {action} action for the {contract} smart contract on the {network} network."
+msgstr "{network} 网络上 {contract} 智能合约的 {action} 操作。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Action: {action}"
+msgstr "操作：{action}"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {actions} smart contract actions available for the {contract} contract on the {network} network."
+msgstr "{network} 网络中 {contract} 合约可用的 {actions} 智能合约操作。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Actions"
+msgstr "操作"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {structs} data structures defined by the {contract} smart contract on the {network} network."
+msgstr "{network} 网络中 {contract} 智能合约定义的 {structs} 数据结构。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Structs"
+msgstr "结构"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {struct} data structure as defined by the {contract} smart contract on the {network} network."
+msgstr "{network} 网络中 {contract} 智能合约定义的 {struct} 数据结构。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Struct: {struct}"
+msgstr "结构：{struct}"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {tables} data tables in the {contract} contract on the {network} network."
+msgstr "{network} 网络中，{contract} 合约的 {tables} 数据表。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Tables"
+msgstr "表"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {table} data table in the {contract} smart contract on the {network} network."
+msgstr "{network} 网络中 {contract} 智能合约的 {table} 数据表。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Table: {table}"
+msgstr "表：{table}"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "An overview of the {contract} smart contract on the {network} network. This contract contains {actions} actions, {tables} tables, and {structs} structs."
+msgstr "关于 {network} 网络上 {contract} 智能合约的概述。该合约包含 {actions} 个操作、{tables} 个数据表和 {structs} 个数据结构。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Contract: {contract} | {network}"
+msgstr "合约：{contract} | {network}"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Debit and credit cards supported"
+msgstr "支持借记卡和信用卡"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Claim previously delegated {network} tokens."
+msgstr "领取之前委托的 {network} 代币。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Refund Delegated {network} Tokens"
+msgstr "退款已委托的 {network} 代币"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "DelphiOracle Data"
+msgstr "DelphiOracle 数据"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Details"
+msgstr "详情"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Error loading accounts: {error}"
+msgstr "加载账户时出错： {error}"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Exchanges"
+msgstr "交易所"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "View the transaction history of the {account} account on the {network} network."
+msgstr "查看 {network} 网络中 {account} 账户的历史交易记录。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Account Activity for {account} | {network} Network"
+msgstr "{account} 的账户活动 | {network} 网络"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Recent activity on the {network} Network."
+msgstr "{network} 网络中的近期活动。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The token balances of the {account} account on the {network} network."
+msgstr "{network} 网络中 {account} 账户的代币余额。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Token Balances | {account} | {network} Network"
+msgstr "代币余额 | {account} | {network} 网络"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Token balances on the {network} Network."
+msgstr "{network} 网络中的代币余额。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Permissions for {account} on the {network} network."
+msgstr "{network}网络中的{account} 账户权限。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Permissions | {account} | {network} Network"
+msgstr "权限 | {account} | {network}网络"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Permissions on the {network} Network"
+msgstr "{network} 网络中的权限"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Insufficient {unit} balance. Please enter a smaller amount."
+msgstr "{unit} 余额不足。请减少输入的金额。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Invalid number, too many decimal places."
+msgstr "无效的数字，位数过多。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Fund Account"
+msgstr "为账户充值"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Purchase {token} tokens to fund your account"
+msgstr "购买 {token} 代币以为您的账户提供资金"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Learn how to fund your account with {token} tokens through various methods including cryptocurrency exchanges and on-ramp providers."
+msgstr "了解如何通过多种方式为您的账户充值 {token} 代币，包括使用加密货币交易所和上链服务提供商。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Purchase Directly"
+msgstr "直接购买"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Purchase {token} and have it directly send to your account using one of the platforms below."
+msgstr "使用以下平台之一直接购买 {token} 并将其发送到您的账户。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{token} can be purchased through a number of platforms, depending on the users needs and location. Below are some of the most popular options available."
+msgstr "根据用户的需求和所在地，{token} 可以通过多个平台购买。以下是一些最受欢迎的选项。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Token to Purchase"
+msgstr "购买代币"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Stake, Send, Manage Tokens, and Explore {network} – all with ease"
+msgstr "质押、发送、管理代币，遨游 {network}网络，尽在弹指之间"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {network} web wallet and block explorer"
+msgstr "{network} 网页钱包与区块浏览器"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "MetaMask, an the industry leading self-custody wallet, is now compatible with Unicove and the {network} network. Install the {name} snap for MetaMask to get started."
+msgstr "MetaMask 是行业领先的自托管钱包，现在已兼容 Unicove 和 {network} 网络。安装 MetaMask 的 {name} Snap 即可开始使用。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Install {name}"
+msgstr "安装 {name}"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {name} for MetaMask"
+msgstr "{name} 的 MetaMask 钱包"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {network} network's native token, {token}, can be used for staking rewards, to buy and sell RAM, to pay transaction fees, and more. It is traded on most major exchanges."
+msgstr "{network} 网络的原生代币 {token} 可用于质押奖励、购买和出售 RAM、支付交易费用等。该代币在大多数主流交易所均可交易。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{token}: The Native Token"
+msgstr "{token}: 原生代币"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{network} Network DeFi"
+msgstr "{network} 网络 DeFi"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "System-level DeFi is offered by the {network} network both staking and RAM trading. The network also supports a variety of DeFi applications, including decentralized exchanges, lending platforms, swaps, and more."
+msgstr "{network} 网络提供系统级 DeFi 功能，包括质押和 RAM 交易。该网络还支持多种 DeFi 应用，如去中心化交易所、借贷平台、代币交换等。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "One {ramtoken} of RAM represents ownership rights over {bytes} bytes of the network's total blockchain storage capacity. {ramtoken} can be swapped with {systemtoken} by visiting the RAM Market."
+msgstr "一个 {ramtoken} 的 RAM 代表对网络总区块链存储容量中 {bytes} 字节的所有权。你可以通过访问 RAM 市场将 {ramtoken} 与 {systemtoken} 进行兑换。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{base}/{quote}  Market"
+msgstr "{base}/{quote} 市场"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "KB (RAM): Tokenized Data Storage"
+msgstr "KB（RAM）：代币化数据存储"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {network} staking rewards program proportionally distributes 85.6k {token} daily to token holders who have staked their tokens. These tokens can be unstaked and will be usable again after a 21 day lockup period."
+msgstr "{network} 质押奖励计划每天按比例向已质押代币的代币持有者分发 85.6k {token}。这些代币可以解除质押，并在 21 天锁定期后由用户自由支配。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Stake {token} today for an estimated {apr}% APR"
+msgstr "现在质押{token}，可获得预计 {apr}% 的年化收益"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "APR is based on the total amount staked and dynamically changes over time."
+msgstr "年化收益率基于总质押金额，且会随时间动态变化。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Key not found: {error}"
+msgstr "找不到密钥: {error}"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "A public key associated with {accounts} account(s) on the {network} network."
+msgstr "与 {network} 网络上的 {accounts} 个账户(s)关联的公钥。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {accounts} account(s) associated with this public key"
+msgstr "与此公钥关联的 {accounts} 个账户(s)"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Public Key"
+msgstr "公钥"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Legacy Key"
+msgstr "旧版公钥"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Limits"
+msgstr "限制"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Loading accounts..."
+msgstr "正在加载账户... "
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Install MetaMask"
+msgstr "安装 MetaMask"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Note: If MetaMask is already installed, you may need to grant permissions for Unicove by manually opening MetaMask."
+msgstr "注意：如果已安装 MetaMask，您可能需要手动打开 MetaMask 以授予 Unicove 权限。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "It looks like you already have MetaMask installed."
+msgstr "看起来您已安装 MetaMask。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "To get started with MetaMask on the {network} Network, install the {name} snap using the button below."
+msgstr "要在 {network} 网络上开始使用 MetaMask，请使用下面的按钮安装 {name} snap。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Add {name} to MetaMask"
+msgstr "将 {name} 添加到 MetaMask"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "are a new feature in MetaMask that allow community built plugins to extend the functionality of the wallet beyond Ethereum based blockchains. This means you can now access the {network} Network through MetaMask using the {name} snap."
+msgstr "是 MetaMask 中的一项新功能，允许社区构建的插件扩展钱包的功能，超越基于以太坊的区块链。这意味着您现在可以通过 MetaMask 使用 {name} snap 访问 {network} 网络。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {name} provides an RPC method which returns the public keys associated with your MetaMask seed phrase. These can be used when manually setting up a new account. Unicove can display these keys to you if you visit the Settings page and enable Advanced Mode."
+msgstr "{name} 提供了一个 RPC 方法，用于返回与您的 MetaMask 种子短语相关联的公钥。这些公钥可以在手动设置新账户时使用。如果您访问设置页面并启用高级模式，Unicove 可以向您显示这些公钥。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "It's possible to access any {network} Network app, provided the app developers have integrated the required SDKs. The {name} and MetaMask can be added to any web app using"
+msgstr "只要应用程序开发者集成了所需的 SDK，就可以访问任何 {network} 网络应用程序。可以通过使用 {name} 和 MetaMask 将它们添加到任何 Web 应用程序中"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "with the"
+msgstr "与"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Unicove itself is"
+msgstr "Unicove 本身是"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "and serves as reference material for how this integration can be performed."
+msgstr "并作为如何进行此集成的参考资料。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "If you have any issues with the {name} itself, please feel free to reach out to us at"
+msgstr "如果您在使用 {name} 时遇到任何问题，请随时通过以下方式联系我们"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "or by visiting our Support portal at:"
+msgstr "或访问我们的客户支持门户："
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {name} is a MetaMask Snap you can install directly from this page on Unicove or from the {name} page in the"
+msgstr "{name} 是一个 MetaMask Snap，您可以直接从 Unicove 页面或 {name} 页面安装"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "You will need to have MetaMask installed before adding the {name} snap."
+msgstr "在添加 {name} Snap 之前，您需要先安装 MetaMask。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {name} allows you to use MetaMask as a web3 wallet for an {network} Network account. With it you can sign in to {network} apps and perform transactions."
+msgstr "{name}允许您将 MetaMask 用作 {network} 网络账户的web3 钱包。通过它，您可以登录 {network} 应用并执行交易。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {name}'s only purpose is to sign transactions and will need to be paired with a companion dApp, such as Unicove, in order to manage your account."
+msgstr "{name}的唯一用途是签署交易，并需要与伴生的 dApp（例如 Unicove）配对以管理您的账户。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Please see our guide on"
+msgstr "请参阅我们的指南"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "How to Sign Transactions on the {network} network with MetaMask"
+msgstr "如何使用 MetaMask 在 {network} 网络上签署交易"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Yes, the {name} software is completely free to use. However, accounts on the {network} Network require a small amount of {network} before they are created."
+msgstr "是的，{name} 软件完全免费使用。然而，在 {network} 网络上创建账户之前，需要少量的 {network} 代币。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Unicove is currently covering this cost and offering one free account per user. To limit abuse, we require logging in with a valid 3rd party account. Only Apple and Google accounts are supported at this time."
+msgstr "目前，Unicove 垫付此费用并为每位用户提供一个免费账户。为了限制滥用，我们要求使用有效的第三方账户登录。目前仅支持 Apple 和 Google 账户。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Unicove is the first web wallet to allow you to manage your {network} account using MetaMask. We expect other wallets will add support in the future."
+msgstr "Unicove 是第一个允许您通过 MetaMask 管理 {network} 账户的 web 钱包。我们预计未来会有其他钱包支持此功能。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "You can view your account on any {network} Network block explorer, like Unicove, simply by searching for the account name."
+msgstr "您可以在任何 {network} 网络区块浏览器（例如 Unicove）上查看您的账户，只需搜索账户名称即可。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {name} uses a private key derived from your MetaMask seed phrase using the BIP-0044 and the {network} coin type. This private key is only ever used for {network} accounts and the {name} cannot access any of your other keys. The {name} never exposes this private key and does not have access to your seed phrase."
+msgstr "{name} 使用由您的 MetaMask 种子短语衍生的私钥，该私钥采用 BIP-0044 标准以及 {network} 代币类型。此私钥仅用于 {network} 账户，{name} 无法访问您的其他私钥。{name} 永远不会暴露此私钥，也无法访问您的种子短语。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {name} derives your owner and active keys from your MetaMask seed phrase using different indexes. The zero (0) index key is reserved for the owner key and is not available to sign regular transactions with, while the first (1) index key is used for the active key and available for transaction signing."
+msgstr "{name} 使用不同的索引从您的 MetaMask 种子短语衍生出您的所有者密钥和活动密钥。索引为零（0）的密钥保留为所有者密钥，并不能用于签署常规交易，而索引为一（1）的密钥则用于活动密钥，并可用于签署交易。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "A future update to the {name} will provide a way to use the owner key to reset the active key, allowing for a recovery path in the event the active keys have been changed."
+msgstr "{name} 的未来更新将提供一种方法，允许使用所有者密钥重置活动密钥，从而在活动密钥被更改的情况下提供恢复路径。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "What is a MetaMask snap?"
+msgstr "什么是 MetaMask Snap?"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "How does find my owner and active keys?"
+msgstr "如何查找我的所有者密钥和活动密钥？"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Can I access all {network} apps using {name} for MetaMask?"
+msgstr "我可以通过 MetaMask 上的 {name}访问所有 {network} 应用吗?"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "How do I reach out for {name} support?"
+msgstr "我如何联系 {name} 支持团队？"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "How do I install the {name}?"
+msgstr "如何安装 {name}?"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "What does the {name} do?"
+msgstr "{name}能做什么?"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "What does the {name} not do?"
+msgstr "{name}不能做什么?"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "How do I sign transactions using the {name}?"
+msgstr "如何使用 {name}签署交易?"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Is the {name} free to use?"
+msgstr "{name} 是否免费使用？"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Where can I view and manage my {network} account?"
+msgstr "我可以在哪里查看和管理我的 {network} 账户？"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Is my private key or recovery phrase exposed when using the {name} Snap?"
+msgstr "在使用 {name} Snap 时，我的私钥或恢复短语是否会暴露？"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "How does MetaMask configure my owner and active keys?"
+msgstr "MetaMask 如何配置我的所有者密钥和活动密钥？"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "You are logged in as {account} and ready to use Unicove to access the {network} network."
+msgstr "您已登录为 {account}，可以使用 Unicove 访问 {network} 网络。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "You are logged in as {account} but are not using MetaMask."
+msgstr "您已登录为 {account}，但未使用 MetaMask。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {name} snap allows you to interact with Unicove and other {network}-based dApps using MetaMask."
+msgstr "{name} Snap 允许您使用 MetaMask 与 Unicove 以及其他基于 {network} 的dApps进行交互。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Begin by installing MetaMask, then come back to this page and install the {name} snap."
+msgstr "首先安装 MetaMask，然后返回此页面并安装 {name} snap。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "If you don't already have an {network} account you can create one now. If you have already created an account you can login with MetaMask."
+msgstr "如果您尚未拥有 {network} 账户，可以立即创建一个。如果您已经创建了账户，可以使用 MetaMask 登录。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "MetaMask and the {name} are connected, installed, and up-to-date using"
+msgstr "MetaMask 和 {name}已连接、安装并更新至最新版本。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Add {name} to MetaMask"
+msgstr "将 {name} 添加到 MetaMask"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{name} + MetaMask"
+msgstr "将 {name} 添加到 MetaMask"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Update {name}"
+msgstr "更新 {name}"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "A new version of the {name} is available. Click the button below to update to the latest version ({latestVersion})."
+msgstr "{name}出现了新的可用版本。点击下面的按钮更新至最新版本 ({latestVersion})。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Network does not support MetaMask Snaps"
+msgstr "此网络不支持 MetaMask Snaps"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Get started with MetaMask on the {network} Network with the {name} snap."
+msgstr "通过 {name} 钱包 snap 在 {network} 网络上开始使用 MetaMask。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "MetaMask + {name}"
+msgstr "MetaMask +名字{name}"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "MetaMask Public Key (Active)"
+msgstr "MetaMask 公钥（管理者）"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "MetaMask Public Key (Owner)"
+msgstr "MetaMask 公钥（所有者）"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "MetaMask Snaps Directory"
+msgstr "MetaMask Snaps 目录"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Approved"
+msgstr "已批准"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Cancel MSIG"
+msgstr "撤消多签"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Multisig Details"
+msgstr "多签详情"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Execute"
+msgstr "执行"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Expiration"
+msgstr "过期时间"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Expired"
+msgstr "已过期"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "An MSIG proposed by {proposer} on the {network} Network"
+msgstr "由 {proposer} 在 {network} 网络上发起的多签"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Proposal Name"
+msgstr "提案名称"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Proposed Actions"
+msgstr "提案的操作"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Proposer"
+msgstr "提案人"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Requested"
+msgstr "已请求"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Requested Approvals"
+msgstr "请求批准"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "You must be logged in with an account to use this feature."
+msgstr "您必须登录账户才能使用此功能。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Activity"
+msgstr "活动"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Balances"
+msgstr "余额"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Overview"
+msgstr "概览"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Permissions"
+msgstr "权限"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Proposals"
+msgstr "提案"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Resources"
+msgstr "资源"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Staked"
+msgstr "已质押"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Votes"
+msgstr "投票"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "No accounts found"
+msgstr "未找到账户"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "No supported funding methods for this blockchain."
+msgstr "此区块链不支持任何注资途径。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The {network} web wallet and block explorer"
+msgstr "{network} 网页钱包和区块浏览器"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Stake, Send, Manage Tokens, and Explore {network} – all with ease"
+msgstr "轻松质押,发送,管理代币和探索{network}网络"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Unicove - The {network} web wallet and block explorer"
+msgstr "Unicove-{network} 网页钱包和区块浏览器"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transfer tokens from one account to another account"
+msgstr "将代币从一个帐户转移到另一个帐户"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Stake and earn rewards using a {network} compatible wallet"
+msgstr "使用兼容 {network} 的钱包进行质押并赚取奖励"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Processing fees"
+msgstr "手续费"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "RAM Available"
+msgstr "可用 RAM"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Amount of RAM to buy:"
+msgstr "要购买的 RAM 数量："
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Exchange {quote} for {base} on the {network} network."
+msgstr "在 {network} 网络上将 {quote} 兑换为 {base}。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{base}/{quote} Market | {network} Network"
+msgstr "{base}/{quote} 市场 | {network} 网络"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "An overview of RAM Market on the {network} network that provides access to buy and sell RAM with {token} using an {network} compatible wallet."
+msgstr "{network} 网络上的 RAM 市场概览，提供通过兼容 {network} 的钱包使用 {token} 购买和出售 RAM 的功能。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Exchange RAM for {token} on the {network} network using an {network} compatible wallet."
+msgstr "通过兼容 {network} 的钱包，在 {network} 网络中将 RAM 兑换为 {token}。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "An overview of the {base}/{quote} market on the {network} Network."
+msgstr "{network} 网络上 {base}/{quote} 市场概览。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{base}/{quote}  Market"
+msgstr "{base}/{quote} 市场"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Exchange RAM for {token} on the {network} network."
+msgstr "在 {network} 网络中将 RAM 兑换为 {token}。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Exchange {token} for RAM on the {network} network."
+msgstr "在 {network} 网络中将 {token} 兑换为 RAM。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "RAM Purchase Value"
+msgstr "RAM 购买价值"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Amount of RAM to sell:"
+msgstr "出售 RAM 数量:"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "RAM to be bought"
+msgstr "要购买的 RAM"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "RAM to be sold"
+msgstr "要出售的 RAM"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "An overview of the multiple network resources usable on the {network} Network providing access to manage resources using an compatible wallet."
+msgstr "{network}网络上可用的多种网络资源概述，提供使用兼容钱包管理资源的访问权限。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Manage CPU, NET, and RAM resources on the {network} Network."
+msgstr "管理{network}网络上的 CPU、NET 和 RAM 资源。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{network} Network Resources"
+msgstr "{network}网络资源"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Confirm Rent"
+msgstr "确认租赁"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Rent for {cost}"
+msgstr "以 {cost} 租赁"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Rent Resources for my account"
+msgstr "为我的账户租赁资源"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Rent CPU and NET resources on the {network} Network using an {network} compatible wallet."
+msgstr "使用与 {network} 网络兼容的钱包，在 {network} 网络上租用 CPU 和 NET 资源。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Rent Resources | {network} Network"
+msgstr "资源租赁 | {network} 网络"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Enter the account name"
+msgstr "输入账户名"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Renting"
+msgstr "租赁中"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Rent CPU and NET resources on the {network} Network."
+msgstr "管理{network}网络上的 CPU和NET 资源。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Rent Resources"
+msgstr "资源租赁"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Rent resources with PowerUp"
+msgstr "使用 PowerUp 租赁资源"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Rent resources with REX"
+msgstr "使用 REX 租赁资源"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Rent with Rex"
+msgstr "通过REX租用"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Stake {symbolName} for resources"
+msgstr "质押 {symbolName} 获取资源"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "24 Hours"
+msgstr "24 小时"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "30 Days"
+msgstr "30 天"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Until Unstaked"
+msgstr "直到解押"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Purchase RAM"
+msgstr "购买 RAM"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Clear search history"
+msgstr "清除搜索历史记录"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Market Overview"
+msgstr "市场概览"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Sell RAM"
+msgstr "出售 RAM"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Configure Unicove"
+msgstr "配置 Unicove"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Staking overview"
+msgstr "质押概览"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transfer tokens"
+msgstr "转移代币"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "View {type}"
+msgstr "查看 {type}"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Select provider"
+msgstr "选择提供商"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Amount to send"
+msgstr "发送金额"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Enter the amount of {token} to send"
+msgstr "输入要发送的 {token} 数量"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Specify a public memo for this transfer (optional)"
+msgstr "为此转账指定一个公开备注（可选）"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transfer tokens from one account to another account on the {network} network using an {network} compatible wallet."
+msgstr "使用 {network} 兼容的钱包，在 {network} 网络中从一个账户向另一个账户转移代币。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Receiving Account"
+msgstr "接收账户"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Enter the account name of the recipient"
+msgstr "输入接收账户名称"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Start new send"
+msgstr "开始新发送"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Token to send"
+msgstr "要发送的代币"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Advanced"
+msgstr "高级的"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Dark Mode"
+msgstr "深色模式"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Toggle site wide dark mode independent from operating system preferences."
+msgstr "切换站点全局深色模式，不受操作系统偏好设置影响。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Developer"
+msgstr "开发者"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Enable Advanced Mode"
+msgstr "启用高级模式"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Enable features for more advanced use cases."
+msgstr "启用用于更高级用例的功能。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Debug Data Display"
+msgstr "调试数据展示"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Enable Developer Mode"
+msgstr "启用开发者模式"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Allow usage of settings meant for development of Unicove"
+msgstr "允许使用专为 Unicove 开发所设计的设置"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Mock token price"
+msgstr "模拟的代币价格"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Force the system token price to equal {mockValue} for testing in environments without pricing information."
+msgstr "在无价格信息的测试环境中，将系统代币价格强制设定为 {mockValue}。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "General"
+msgstr "常规"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Increased Precision"
+msgstr "提高精度"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Use more decimals to increase currency precision."
+msgstr "使用更多小数位以提高货币精度。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The language used throughout Unicove."
+msgstr "Unicove 全站使用的语言。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Language Selector"
+msgstr "语言选择器"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Configure Unicove"
+msgstr "配置 Unicove"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Prefered Currency"
+msgstr "首选货币"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The currency used to display the value of tokens."
+msgstr "用于显示代币价值的货币单位。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Remain on current page when switching accounts"
+msgstr "切换账户时保持当前页面"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Prevents the automatic navigation to the account overview page"
+msgstr "防止切换账户时自动导航到账户概览页面"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Allow account switching in search prompt"
+msgstr "允许在搜索提示中切换账户"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Adds logged in accounts to search results for quick switching."
+msgstr "将已登录账户添加到搜索结果中以便快速切换。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Allow page navigation in search prompt"
+msgstr "允许在搜索提示中导航页面"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Adds popular Unicove pages to search results."
+msgstr "将热门的 Unicove 页面添加到搜索结果中。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Staking Calculator"
+msgstr "质押计算器"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Enter an amount of {token} to calculate estimated rewards based on the current APR of {apr}%. This rate will change over time based on the amount of tokens staked."
+msgstr "输入 {token} 数量，根据当前 {apr}% 的年化收益率计算预估奖励。此利率会随着质押代币数量变化。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Estimated Yield (Yearly)"
+msgstr "预估收益（年化）"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "An overview of staking on the {network} network providing easy access to stake, unstake, and withdraw {token} tokens using an {network} compatible wallet."
+msgstr "关于在 {network} 网络上的质押概述，提供通过 {network} 兼容钱包轻松进行质押、取消质押和提取 {token} 代币的功能。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Stake {token} tokens and earn rewards using an {network} compatible wallet."
+msgstr "质押 {token} 代币，并使用兼容 {network} 的钱包赚取奖励。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Unstake {token} tokens and begin claiming the balance of your rewards using an {network} compatible wallet."
+msgstr "解除质押 {token} 代币，并使用兼容 {network} 的钱包开始领取您的奖励余额。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Withdraw {token} tokens from the staking contract to add them to your available balance using an {network} compatible wallet."
+msgstr "使用兼容 {network} 的钱包从质押合约中提取 {token} 代币，并将其添加到您的可用余额中。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Minimum lockup"
+msgstr "最低锁定期"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Stake {token} to earn rewards."
+msgstr "质押 {token} 以赚取奖励。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{network} Network Staking"
+msgstr "{network} 网络质押"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Withdrawable in 21 days"
+msgstr "21 天内可提取"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "RAM Purchase Summary"
+msgstr "RAM购买摘要"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "System contract refund request for {account}."
+msgstr "针对账户 {account} 的系统合约退款请求。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Staking Deposit"
+msgstr "质押存款"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Staking Withdrawal"
+msgstr "质押提现"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Token Transfer"
+msgstr "代币转账"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Resource Provider"
+msgstr "资源供应商"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Swap {base}/{quote}"
+msgstr "兑换 {base}/{quote} 交易对"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Swap the {base} token for the {quote} token."
+msgstr "将 {base} 代币兑换为 {quote} 代币。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "This swap will exchange {base} for {quote}."
+msgstr "此次兑换将把 {base} 兑换为 {quote}。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Swap Summary ({base}/{quote})"
+msgstr "兑换摘要 ({base}/{quote})"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "This is a test"
+msgstr "这是一个测试"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Token Purchase Providers"
+msgstr "代币购买渠道"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Tokens can be purchased directly through the following providers:"
+msgstr "代币可通过以下渠道直接购买："
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Total Proceeds"
+msgstr "总收益"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transaction not found: {transaction}"
+msgstr "未能查询到交易记录：{transaction}"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{number} Actions"
+msgstr "	{number} 个操作"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "A transaction performed at {date} on the {network} Network."
+msgstr "一笔交易于 {date} 在 {network} 网络中执行。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "{id} | {network} Network"
+msgstr "{id} | {network} 网络"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Transaction on {date}"
+msgstr "{date} 的交易"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "The tokens currently being unstaked are listed below with the date they become available. These balances will continue to earn rewards until they are withdrawn."
+msgstr "当前正在解质押的代币及其可用日期列在下方。这些代币在提取前将继续赚取奖励。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "EOS can be purchased through a number of platforms, depending on the users needs and location. Below are some of the most popular options available."
+msgstr "EOS 可以通过多个平台购买，具体取决于用户需求和所在地。以下是一些最受欢迎的选项。"
