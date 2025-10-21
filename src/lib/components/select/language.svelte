@@ -24,7 +24,6 @@
 		label: displayName(context.settings.data.locale)
 	};
 
-
 	const handleSelect: CreateSelectProps<AvailableLanguageTag>['onSelectedChange'] = ({ next }) => {
 		if (next?.value) {
 			setLocale(next.value).then(() => {
