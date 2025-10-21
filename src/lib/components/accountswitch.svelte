@@ -20,10 +20,10 @@
 	import UserCheck from '@lucide/svelte/icons/user-check';
 	import UserPlus from '@lucide/svelte/icons/user-plus';
 	import Search from '@lucide/svelte/icons/search';
-	import { goto } from '$lib/utils';
 	import { Button } from 'unicove-components';
 	import { TextInput } from 'unicove-components';
 	import { Wallet } from '@lucide/svelte';
+	import { goto } from '$app/navigation';
 
 	const context = getContext<UnicoveContext>('state');
 

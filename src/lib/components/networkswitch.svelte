@@ -8,8 +8,8 @@
 	import { createSelect, melt, type CreateSelectProps } from '@melt-ui/svelte';
 	import { fade } from 'svelte/transition';
 	import { chainMap } from '$lib/wharf/chains';
-	import { goto } from '$lib/utils';
 	import type { NetworkState } from '$lib/state/network.svelte';
+	import { goto } from '$app/navigation';
 
 	interface Props {
 		currentNetwork: NetworkState;

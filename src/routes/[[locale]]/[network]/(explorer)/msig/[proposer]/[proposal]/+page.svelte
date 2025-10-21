@@ -12,8 +12,8 @@
 
 	import { ApprovalManager } from './manager.svelte';
 	import type { ActionDisplayVariants } from '$lib/types';
-	import { goto } from '$lib/utils';
 	import { getActionSummaryComponent } from '$lib/components/summary';
+	import { goto } from '$app/navigation';
 
 	let { data } = $props();
 

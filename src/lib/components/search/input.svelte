@@ -3,7 +3,6 @@
 	import { createDialog, melt, type CreateDialogProps } from '@melt-ui/svelte';
 	import type { TextInput } from 'unicove-components';
 	import { preventDefault } from '$lib/utils';
-	import { goto } from '$lib/utils';
 	import { fade, scale } from 'svelte/transition';
 	import {
 		SearchRecordType,
@@ -23,6 +22,7 @@
 	import { ArrowRight } from '@lucide/svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { SerializedSession } from '@wharfkit/session';
+	import { goto } from '$app/navigation';
 
 	const context = getContext<UnicoveContext>('state');
 

@@ -4,9 +4,9 @@
 	import { Code } from 'unicove-components';
 	import { Button } from 'unicove-components';
 	import { TextInput } from 'unicove-components';
-	import { goto } from '$lib/utils';
 	import { Checkbox } from 'unicove-components';
 	import { Label } from 'unicove-components';
+	import { goto } from '$app/navigation';
 
 	const { data } = $props();
 

@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { getContext, onMount } from 'svelte';
-	import { goto } from '$lib/utils';
 
 	import { Button } from 'unicove-components';
 	import Box from '$lib/components/layout/box/box.svelte';
@@ -14,6 +13,7 @@
 	import { TextInput } from 'unicove-components';
 	import { CopyButton } from 'unicove-components';
 	import { Code } from 'unicove-components';
+	import { goto } from '$app/navigation';
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');

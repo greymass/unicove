@@ -6,7 +6,7 @@
 	import { Button } from 'unicove-components';
 	import { ArrowLeftRight, ArrowRight, ArrowLeft } from '@lucide/svelte';
 	import { DD, DL, DLRow } from 'unicove-components';
-	import { goto } from '$lib/utils';
+	import { goto } from '$app/navigation';
 
 	let { data } = $props();
 
