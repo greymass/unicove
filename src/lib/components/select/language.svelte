@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { page } from '$app/state';
-	import { languageNames } from '$lib/i18n';
 	import {
 		availableLanguageTags,
 		languageTag,
@@ -13,7 +11,6 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { goto } from '$app/navigation';
 	import { setLocale } from '$lib/remote/locale.remote';
-	import { locales } from 'virtual:wuchale/locales';
 
 	const displayName = (loc: string) =>
 		new Intl.DisplayNames([loc], { type: 'language' }).of(loc) || 'Unknown';

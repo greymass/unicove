@@ -5,7 +5,7 @@ import { error } from '@sveltejs/kit';
 import { Serializer } from '@wharfkit/antelope';
 import { OpengraphImageData } from '$lib/types/opengraph';
 
-export const GET: RequestHandler = async ({ locals, url, fetch, params }) => {
+export const GET: RequestHandler = async ({ locals, fetch, params }) => {
 	if (!API_OPENGRAPH_GENERATOR || !API_OPENGRAPH_TOKEN) {
 		error(401, 'Unauthorized');
 	}
