@@ -6,7 +6,11 @@
 	import { Card, Stack, Table, TD, TH, TR } from 'unicove-components';
 	import { Button } from 'unicove-components';
 	import type { UnstakingRecord } from '$lib/utils/staking';
-	import { languageTag } from '$lib/paraglide/runtime';
+	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import { getContext } from 'svelte';
+
+	const context = getContext<UnicoveContext>('state');
+	const locale = $derived(context.settings.data.locale);
 
 	interface Props extends HTMLAttributes<HTMLDivElement> {
 		href?: string;
@@ -34,8 +38,8 @@
 						<TR>
 							<TD><AssetText variant="full" value={record.balance} /></TD>
 							<TD class="text-right">
-								{record.date ? record.date.toLocaleTimeString(languageTag()) : '--'}
-								{record.date ? record.date.toLocaleDateString(languageTag()) : '--'}
+								{record.date ? record.date.toLocaleTimeString(locale) : '--'}
+								{record.date ? record.date.toLocaleDateString(locale) : '--'}
 							</TD>
 						</TR>
 					{/if}
