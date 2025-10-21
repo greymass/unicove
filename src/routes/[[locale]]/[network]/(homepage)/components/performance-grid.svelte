@@ -4,7 +4,6 @@
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import { calculateValue } from '$lib/utils';
 	import TextBlock from './text-block.svelte';
-	import * as m from '$lib/paraglide/messages';
 	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte';
 	import { Asset, Int64 } from '@wharfkit/antelope';
 	import { getContext } from 'svelte';
@@ -62,12 +61,8 @@
 	<!-- Text -->
 	<div class="col-span-full row-start-1 grid items-center text-balance @3xl:col-span-1">
 		<TextBlock
-			title={m.homepage_performance_defi({
-				network: networkName
-			})}
-			text={m.homepage_performance_defi_description({
-				network: networkName
-			})}
+			title="{networkName} Network DeFi"
+			text="System-level DeFi is offered by the {networkName} network both staking and RAM trading. The network also supports a variety of DeFi applications, including decentralized exchanges, lending platforms, swaps, and more."
 		/>
 	</div>
 
@@ -78,7 +73,7 @@
 		<div id="performance-row-1" class="grid gap-4 @lg:grid-cols-[1fr_auto_1fr]">
 			<!-- Market Cap -->
 			<Card class="bg-surface-container-high grid content-between gap-4">
-				<h3 class="text-muted text-sm">{network.token.name} {m.common_market_cap()}</h3>
+				<h3 class="text-muted text-sm">{network.token.name} Market Cap</h3>
 				<p class="text-on-surface justify-self-end text-xl font-semibold text-nowrap">
 					<AssetText value={marketcap} variant="short" />
 				</p>
@@ -96,7 +91,7 @@
 
 			<!-- Native TVL -->
 			<Card class="bg-surface-container-highest grid content-between gap-4">
-				<h3 class="text-muted text-sm">{m.common_native_tvl()}</h3>
+				<h3 class="text-muted text-sm">Native TVL</h3>
 				<p class="text-on-surface justify-self-end text-xl font-semibold text-nowrap">
 					<AssetText value={tvl} variant="short" />
 				</p>

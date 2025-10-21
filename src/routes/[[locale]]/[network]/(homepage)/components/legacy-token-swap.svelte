@@ -2,7 +2,6 @@
 	import type { NetworkState } from '$lib/state/network.svelte';
 	import { Button } from 'unicove-components';
 
-	import * as m from '$lib/paraglide/messages';
 	import { Chains } from '@wharfkit/common';
 
 	interface Props {
@@ -33,16 +32,10 @@
 
 				<div class="grid min-w-40 gap-1">
 					<p class="text-lg leading-tight font-semibold text-balance text-white">
-						{m.common_network_swap_begun({
-							network: props.network.chain.name
-						})}
+						{props.network.chain.name} Token Swap has begun!
 					</p>
 					<p class="text-sm leading-snug text-pretty text-white/80">
-						{m.common_network_swap_description_ratio({
-							legacytoken: props.network.config.legacytoken?.name,
-							systemtoken: props.network.token.name,
-							ratio: '1:1'
-						})}
+						Swap {props.network.config.legacytoken?.name} to {props.network.token.name} at a 1:1 ratio
 					</p>
 				</div>
 			</div>
@@ -53,16 +46,14 @@
 					variant="text"
 					href="https://www.vaulta.com/resources/vaulta-token-swap-a-begins-may-14"
 				>
-					{m.common_learn_more()}
+					Learn more
 				</Button>
 				<Button
 					class="bg-white/90 text-[#1c2399]"
 					href="/{props.network}/swap/{props.network.config.legacytoken.id.url}/{props.network.token
 						.id.url}"
 				>
-					{m.common_swap_to_token({
-						token: props.network.token.name
-					})}
+					Swap to {props.network.token.name}
 				</Button>
 			</div>
 		</aside>

@@ -18,7 +18,6 @@
 	import type { NetworkState } from '$lib/state/network.svelte';
 	import type { AccountState } from '$lib/state/client/account.svelte';
 
-	import * as m from '$lib/paraglide/messages';
 	import { preventDefault } from '$lib/utils';
 	import { RentState } from './state.svelte';
 	import { type RentType } from './utils';
@@ -37,9 +36,9 @@
 	const cpuAvailableSize = $derived(context.account?.resources.cpu.available || Int64.from(0));
 	const netAvailableSize = $derived(context.account?.resources.net.available || Int64.from(0));
 	const usableTime = $derived.by(() => {
-		if (rentType === 'POWERUP') return m.resources_usable_time_24h();
-		if (rentType === 'REX') return m.resources_usable_time_30days();
-		return m.resources_usable_time_until_unstaked();
+		if (rentType === 'POWERUP') return '24 Hours';
+		if (rentType === 'REX') return '30 Days';
+		return 'Until Unstaked';
 	});
 
 	$effect(() => {
@@ -87,13 +86,13 @@
 	const rentState: RentState = $state(new RentState(network.chain, rentType));
 	const rentDetails = $derived.by(() => {
 		const details = [];
-		details.push({ title: m.common_usable_for(), desc: usableTime });
+		details.push({ title: 'Usable for', desc: usableTime });
 		details.push({
-			title: m.common_balance_available(),
+			title: 'Balance available',
 			desc: `${rentState.balance.quantity} ${rentState.balance.symbol.name}`
 		});
 		details.push({
-			title: m.common_total_cost(),
+			title: 'Total Cost',
 			desc: `${rentState.cost.quantity} ${rentState.cost.symbol.name}`
 		});
 		return details;
@@ -134,15 +133,11 @@
 
 {#if transactionId}
 	<TransactSummary {transactionId} />
-	<Button href={`/${network}/resources`} variant="secondary">
-		{m.common_resources()}
-	</Button>
-	<Button href={`/${network}/account/${context.account?.name}`}>
-		{m.common_view_my_account()}
-	</Button>
+	<Button href={`/${network}/resources`} variant="secondary">Resources</Button>
+	<Button href={`/${network}/account/${context.account?.name}`}>View my account</Button>
 {:else if errorMessage}
 	<TransactError error={errorMessage} />
-	<Button onclick={resetStateAfterTrasaction}>{m.common_close()}</Button>
+	<Button onclick={resetStateAfterTrasaction}>Close</Button>
 {:else}
 	<div class="mx-auto space-y-6">
 		<CpuAndNetResource cpuAvailable={cpuAvailableSize} netAvailable={netAvailableSize} />
@@ -150,7 +145,7 @@
 			<Stack>
 				<fieldset class="grid gap-2">
 					<Label for="cpuNumberInput"
-						>{m.common_resouce_amount({ resource: 'CPU' })}
+						>Amount of CPU
 						{#if rentState.cpuPricePerMs}
 							(<AssetText variant="full" value={rentState.cpuPricePerMs} />/MS){/if}</Label
 					>
@@ -165,7 +160,7 @@
 
 				<fieldset class="grid gap-2">
 					<Label for="netNumberInput"
-						>{m.common_resouce_amount({ resource: 'NET' })}
+						>Amount of NET
 						{#if rentState.netPricePerKb}
 							(<AssetText variant="full" value={rentState.netPricePerKb} />/KB){/if}</Label
 					>
@@ -180,18 +175,18 @@
 
 				<fieldset class="flex items-center gap-3">
 					<Checkbox id="rentForSelf" bind:checked={rentState.rentingForSelf} />
-					<Label for="rentForSelf">{m.resources_rent_for_self()}</Label>
+					<Label for="rentForSelf">Rent Resources for my account</Label>
 				</fieldset>
 
 				{#if !rentState.rentingForSelf}
 					<fieldset class="semi-bold grid gap-2">
-						<Label for="thirdReceiver">{m.send_receiving_account()}</Label>
+						<Label for="thirdReceiver">Receiving Account</Label>
 						<NameInput
 							id="thirdReceiver"
 							bind:this={receiverNameInput}
 							bind:value={rentState.thirdReceiver}
 							bind:valid={rentState.thirdReceiverValid}
-							placeholder={m.resources_rent_receiving_placeholder()}
+							placeholder="Enter the account name"
 						/>
 					</fieldset>
 				{/if}
@@ -201,9 +196,9 @@
 				{/if}
 				<Button type="submit" class="w-full" disabled={!rentState.valid}>
 					{#if rentState.cost.value}
-						{m.resources_rent_confirm_with_cost({ cost: rentState.cost })}
+						Rent for {rentState.cost}
 					{:else}
-						{m.resources_rent_confirm()}
+						Confirm Rent
 					{/if}
 				</Button>
 			</Stack>

@@ -4,7 +4,6 @@
 	import { getContext } from 'svelte';
 	import { Debounced, FiniteStateMachine } from 'runed';
 	import zlib from 'pako';
-	import * as m from '$lib/paraglide/messages';
 
 	import { preventDefault } from '$lib/utils';
 	import MetaMaskRequired from '$lib/components/wallets/metamask/required.svelte';
@@ -147,14 +146,14 @@
 {#snippet AccountName()}
 	<div class="space-y-2" class:hidden={!showAll && f.current !== 'request'}>
 		<fieldset class="grid gap-2">
-			<Label for="account-input">{m.common_account_name()}</Label>
+			<Label for="account-input">Account Name</Label>
 			<NameInput
 				bind:this={accountInput}
 				bind:ref={accountRef}
 				bind:value={accountName}
 				bind:valid={accountValid}
 				id="account-input"
-				placeholder={m.common_account_name()}
+				placeholder="Account Name"
 			/>
 			<p>
 				Select the 12-character long account name you'd like to register. Use only lowercase A-Z and
@@ -215,7 +214,7 @@
 </SingleCard>
 
 {#if context.settings.data.debugMode}
-	<h3 class="h3">{m.common_debugging()}</h3>
+	<h3 class="h3">Debugging</h3>
 	<Code
 		json={{
 			state: f.current,

@@ -4,7 +4,6 @@
 	import { getContext } from 'svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import TextBlock from './text-block.svelte';
-	import * as m from '$lib/paraglide/messages';
 	import { Button } from 'unicove-components';
 
 	const { network } = getContext<UnicoveContext>('state');
@@ -63,18 +62,11 @@
 
 		<Box class="grid place-items-center py-8">
 			<TextBlock
-				title={m.homepage_metamask_wallet_title({
-					name: productName
-				})}
-				text={m.homepage_metamask_wallet_description({
-					name: productName,
-					network: networkName
-				})}
+				title="The {productName} for MetaMask"
+				text="MetaMask, an the industry leading self-custody wallet, is now compatible with Unicove and the {networkName} network. Install the {productName} snap for MetaMask to get started."
 			>
 				<Button variant="primary" href={`/${network}/metamask`}>
-					{m.homepage_metamask_wallet_install({
-						name: productName
-					})}
+					Install {productName}
 				</Button>
 			</TextBlock>
 		</Box>

@@ -23,7 +23,6 @@
 	import StakingCalculator from './stakingcalculator.svelte';
 	import { Cluster } from 'unicove-components';
 	import { Chip } from 'unicove-components';
-	import * as m from '$lib/paraglide/messages';
 	import { Currencies } from '$lib/types/currencies';
 	import { ZeroUnits } from '$lib/types/token';
 	import SystemTokenSwap from '$lib/components/banner/systemTokenSwap.svelte';
@@ -91,26 +90,17 @@
 					<ChartLine />
 				</picture>
 				<div>
-					<p>{m.common_apr_current()}</p>
+					<p>Current APR</p>
 					<p class="text-on-surface text-2xl font-bold">{apr}%</p>
 				</div>
 			</Cluster>
 		</Card>
 
 		{#snippet leftColumn()}
-			<Card
-				id="token"
-				title={m.common_labeled_unit_balance({
-					unit: m.common_staking()
-				})}
-			>
+			<Card id="token" title="Staking Balance">
 				<Stack>
 					<Stack class="gap-2">
-						<h4 class="text-muted text-base leading-none capitalize">
-							{m.common_labeled_unit_staked({
-								unit: m.common_tokens()
-							})}
-						</h4>
+						<h4 class="text-muted text-base leading-none capitalize">tokens Staked</h4>
 
 						<AssetText
 							class="text-on-surface text-xl leading-none font-semibold"
@@ -128,7 +118,7 @@
 						<Table>
 							{#if staked.units.gt(ZeroUnits)}
 								<TR>
-									<TD>{m.common_staked()}</TD>
+									<TD>Staked</TD>
 									<TD class="text-on-surface grid text-right">
 										{#if staked.units.equals(0)}
 											<span class="font-mono">&lt;</span>
@@ -138,12 +128,12 @@
 											<AssetText variant="full" value={stakedRex} />
 										{/if}
 									</TD>
-									{@render tableAction([m.common_unstake(), `/${data.network}/staking/unstake`])}
+									{@render tableAction(['Unstake', `/${data.network}/staking/unstake`])}
 								</TR>
 							{/if}
 							{#if unstakingTotal.units.gt(ZeroUnits)}
 								<TR>
-									<TD>{m.common_unstaking()}</TD>
+									<TD>Unstaking</TD>
 									<TD class="text-on-surface grid text-right">
 										<AssetText variant="full" value={unstakingTotal} />
 										{#if context.settings.data.advancedMode}
@@ -155,21 +145,21 @@
 							{/if}
 							{#if totalWithdraw.units.gt(ZeroUnits)}
 								<TR>
-									<TD>{m.common_unstaked()}</TD>
+									<TD>Unstaked</TD>
 									<TD class="text-on-surface grid text-right">
 										<AssetText variant="full" value={totalWithdraw} />
 										{#if context.settings.data.advancedMode}
 											<AssetText variant="full" value={unstakingRex} />
 										{/if}
 									</TD>
-									{@render tableAction([m.common_withdraw(), `/${data.network}/staking/withdraw`])}
+									{@render tableAction(['Withdraw', `/${data.network}/staking/withdraw`])}
 								</TR>
 							{/if}
 						</Table>
 					{/if}
 				</Stack>
 			</Card>
-			<AccountBalance cta={{ href: `/${networkName}/staking/stake`, label: m.common_stake() }} />
+			<AccountBalance cta={{ href: `/${networkName}/staking/stake`, label: 'Stake' }} />
 			<SystemTokenSwap account={context.account} network={data.network} />
 		{/snippet}
 
@@ -183,9 +173,5 @@
 		{/snippet}
 	</MultiCard>
 {:else}
-	<p>
-		{m.common_staking_unavailable_network({
-			network: data.network.chain.name
-		})}
-	</p>
+	<p>This staking interface is not available on {data.network.chain.name}.</p>
 {/if}

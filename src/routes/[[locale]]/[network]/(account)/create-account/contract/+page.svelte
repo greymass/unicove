@@ -4,7 +4,6 @@
 	import { FiniteStateMachine } from 'runed';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import * as m from '$lib/paraglide/messages';
 
 	import { preventDefault } from '$lib/utils';
 	import { Label } from 'unicove-components';
@@ -180,7 +179,7 @@
 
 {#snippet AccountName()}
 	<fieldset class="grid gap-2" class:hidden={!showAll && f.current !== 'account'}>
-		<Label for="account-input">{m.common_account_name()}</Label>
+		<Label for="account-input">Account Name</Label>
 		<NameInput
 			bind:this={accountInput}
 			bind:ref={accountRef}
@@ -188,14 +187,14 @@
 			bind:valid={accountValid}
 			{onkeydown}
 			id="account-input"
-			placeholder={m.common_account_name()}
+			placeholder="Account Name"
 		/>
 	</fieldset>
 {/snippet}
 
 {#snippet PublicKey()}
 	<fieldset class="grid gap-2" class:hidden={!showAll && f.current !== 'publickey'}>
-		<Label for="public-key-input">{m.common_public_key}</Label>
+		<Label for="public-key-input">Public Key</Label>
 		<PublicKeyInput
 			bind:this={publicKeyInput}
 			bind:ref={publicKeyRef}
@@ -203,51 +202,47 @@
 			bind:valid={publicKeyValid}
 			{onkeydown}
 			id="public-key-input"
-			placeholder={m.common_public_key()}
+			placeholder="Public Key"
 		/>
-		<Button variant="secondary" onclick={generate}>{m.common_generate_key()}</Button>
+		<Button variant="secondary" onclick={generate}>Generate Key</Button>
 	</fieldset>
 {/snippet}
 
 {#snippet Generate()}
 	<div class:hidden={!showAll && f.current !== 'privatekey'}>
 		<fieldset class="grid gap-2">
-			<Label for="private-key-input"
-				>{m.common_private_key()} <CopyButton data={String(privateKey)} /></Label
-			>
+			<Label for="private-key-input">Private Key <CopyButton data={String(privateKey)} /></Label>
 
 			<TextInput
 				bind:ref={privateKeyRef}
 				bind:value={privateKey}
 				disabled
 				id="private-key-input"
-				placeholder={m.common_private_key()}
+				placeholder="Private Key"
 			>
 				<CopyButton data={String(privateKey)} />
 			</TextInput>
 		</fieldset>
 		<p class="my-3 flex items-center gap-3">
-			{m.common_private_key_safety_warning()}
+			This is your new private key. Copy it someplace safe, import it into your wallet, and never
+			share it with anyone. If you lose this key, you will lose access to your account.
 		</p>
 		<fieldset class="flex items-center gap-3" class:hidden={!showAll && f.current !== 'privatekey'}>
 			<Checkbox id="private-key-copied" bind:checked={privateKeyCopied} />
-			<Label for="private-key-copied">{m.common_private_key_safety_ack()}</Label>
+			<Label for="private-key-copied">I have saved this private key.</Label>
 		</fieldset>
 	</div>
 {/snippet}
 
 {#snippet Create()}
 	<div class="grid gap-2" class:hidden={!showAll && f.current !== 'create'}>
-		<h2 class="text-headline flex gap-2">{m.common_instructions()}</h2>
+		<h2 class="text-headline flex gap-2">Instructions</h2>
 		<p class="flex gap-2">
-			{m.common_create_account_by_sending()}
+			Send EOS from an exchange or over a bridge to the account below with the memo provided to
+			create your account.
 		</p>
 		<fieldset class="grid gap-2">
-			<Label for="send-account-input">
-				{m.common_send_token_to_account({
-					token: context.network.token.name
-				})}
-			</Label>
+			<Label for="send-account-input">Send {context.network.token.name} to account</Label>
 
 			{#if cost}
 				<TextInput is="send-account-input" value={sendAccount} disabled>
@@ -257,11 +252,7 @@
 		</fieldset>
 
 		<fieldset class="grid gap-2">
-			<Label for="cost-amount-input">
-				{m.common_send_token_amount({
-					token: context.network.token.name
-				})}
-			</Label>
+			<Label for="cost-amount-input">Amount of {context.network.token.name} to send</Label>
 
 			{#if cost}
 				<TextInput id="cost-amount-input" value={costAmount} disabled>
@@ -271,7 +262,7 @@
 		</fieldset>
 
 		<fieldset class="grid gap-2">
-			<Label for="memo-input">{m.common_transfer_memo()}</Label>
+			<Label for="memo-input">Transfer Memo</Label>
 
 			<TextInput id="memo-input" value={memo} disabled>
 				<CopyButton data={String(memo)} />
@@ -279,7 +270,8 @@
 		</fieldset>
 
 		<p class="flex gap-2">
-			{m.common_create_account_by_sending_complete()}
+			Once the transfer is complete, use your private key to import your account into the wallet of
+			your choosing.
 		</p>
 	</div>
 {/snippet}
@@ -287,13 +279,13 @@
 {#snippet ButtonGroup()}
 	<fieldset class="flex gap-2 *:flex-1" class:hidden={f.current === 'create'}>
 		{#if f.current === 'account'}
-			<Button variant="secondary" onclick={() => resetURL()}>{m.common_restart()}</Button>
+			<Button variant="secondary" onclick={() => resetURL()}>Restart</Button>
 		{:else}
-			<Button variant="secondary" onclick={previous}>{m.common_back()}</Button>
+			<Button variant="secondary" onclick={previous}>Back</Button>
 		{/if}
 
 		<Button class="col-end-3" type="submit" onclick={preventDefault(next)} disabled={!nextValid}>
-			{m.common_next()}
+			Next
 		</Button>
 	</fieldset>
 {/snippet}
@@ -313,7 +305,7 @@
 </SingleCard>
 
 {#if context.settings.data.debugMode}
-	<h3 class="text-title">{m.common_debugging()}</h3>
+	<h3 class="text-title">Debugging</h3>
 	<Code
 		>{JSON.stringify(
 			{

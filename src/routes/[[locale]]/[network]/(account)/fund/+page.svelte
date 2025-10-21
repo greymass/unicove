@@ -11,7 +11,6 @@
 	import kucoinLogo from '$lib/assets/exchanges/kucoin.webp?enhanced';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { Button } from 'unicove-components';
-	import * as m from '$lib/paraglide/messages';
 	import { DL, DLRow, DD } from 'unicove-components';
 	import coinbaseLogo from '$lib/assets/exchanges/coinbase.svg';
 	import { Stack } from 'unicove-components';
@@ -22,19 +21,17 @@
 
 	const coinbaseOnRamp = new CoinbaseOnRamp(context);
 
-	const ON_RAMP_PROVIDERS = [
+	const ON_RAMP_PROVIDERS = $derived([
 		{
 			id: 'coinbase',
 			logo: coinbaseLogo,
 			isLoading: coinbaseOnRamp.isLoading,
 			action: {
-				text: m.buy_token_with_coinbase({
-					token: context.network.token.symbol.name
-				}),
+				text: `Buy ${context.network.token.symbol.name} with Coinbase`,
 				handler: () => coinbaseOnRamp.open()
 			}
 		}
-	] as const;
+	] as const);
 
 	const EXCHANGES = [
 		{
@@ -82,11 +79,10 @@
 
 <Stack class="mt-6 gap-12">
 	<Stack class="gap-4">
-		<h2 class="text-headline leading-4">{m.fund_direct_purchase()}</h2>
+		<h2 class="text-headline leading-4">Purchase Directly</h2>
 		<p>
-			{m.fund_direct_purchase_description({
-				token: context.network.token.symbol.name
-			})}
+			Purchase {context.network.token.symbol.name} and have it directly send to your account using one
+			of the platforms below.
 		</p>
 		<Cluster tag="ul">
 			{#each ON_RAMP_PROVIDERS as provider}
@@ -97,16 +93,16 @@
 						</div>
 						<DL>
 							{#if context.network.config.coinbase}
-								<DLRow title={m.fund_token_to_purchase()}>
+								<DLRow title="Token to Purchase">
 									<DD>{context.network.config.coinbase.assets.join(', ')}</DD>
 								</DLRow>
 							{/if}
-							<DLRow title={m.send_receiving_account()}>
+							<DLRow title="Receiving Account">
 								<DD>
 									{#if context.account}
 										{context.account?.name}
 									{:else}
-										{m.common_not_logged_in()}
+										Not logged in
 									{/if}
 								</DD>
 							</DLRow>
@@ -115,7 +111,7 @@
 
 					<div class="mt-6">
 						{#if !context.account}
-							<p class="text-sm">{m.common_must_be_logged_in()}</p>
+							<p class="text-sm">You must be logged in with an account to use this feature.</p>
 						{:else}
 							<Button
 								class="w-full"
@@ -123,7 +119,7 @@
 								onclick={provider.action.handler}
 							>
 								{#if provider.isLoading}
-									{m.common_loading()}
+									Loading
 								{:else}
 									{provider.action.text}
 								{/if}</Button
@@ -136,12 +132,11 @@
 	</Stack>
 
 	<Stack class="gap-4">
-		<h2 class="text-headline leading-4">{m.common_exchanges()}</h2>
+		<h2 class="text-headline leading-4">Exchanges</h2>
 
 		<p>
-			{m.fund_exchange_description({
-				token: context.network.token.symbol.name
-			})}
+			{context.network.token.symbol.name} can be purchased through a number of platforms, depending on
+			the users needs and location. Below are some of the most popular options available.
 		</p>
 
 		<ul class="layout-grid" style="--grid-itemWidth:10rem;">

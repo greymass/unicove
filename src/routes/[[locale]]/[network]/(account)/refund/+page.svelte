@@ -7,7 +7,6 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
 	import { RefundManager } from './manager.svelte';
-	import * as m from '$lib/paraglide/messages';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
@@ -30,19 +29,19 @@
 		<TransactSummary transactionId={manager.txid} />
 	{:else if manager.error}
 		<TransactError error={manager.error} />
-		<Button onclick={resetState}>{m.common_close()}</Button>
+		<Button onclick={resetState}>Close</Button>
 	{:else}
 		<Switcher>
 			<Stack class="gap-2">
-				<h3 class="text-muted leading-none">{m.common_refunding()}</h3>
+				<h3 class="text-muted leading-none">Refunding</h3>
 				<p class="text-on-surface text-2xl font-bold">{String(manager.refunding)}</p>
 				{#if manager.dateAvailable}
-					<h3 class="text-muted mt-8 leading-none">{m.common_date_available()}</h3>
+					<h3 class="text-muted mt-8 leading-none">Date Available</h3>
 					<p class="text-on-surface font-bold">{String(manager.dateAvailable?.toLocaleString())}</p>
 				{/if}
 			</Stack>
 
-			<Button onclick={() => manager.transact()} variant="primary">{m.common_refund()}</Button>
+			<Button onclick={() => manager.transact()} variant="primary">Refund</Button>
 		</Switcher>
 	{/if}
 </Stack>

@@ -11,7 +11,6 @@
 	import { getContext } from 'svelte';
 	import { StakeManager } from './manager.svelte';
 	import { DL } from 'unicove-components';
-	import * as m from '$lib/paraglide/messages';
 	import SystemTokenSwap from '$lib/components/banner/systemTokenSwap.svelte';
 	import { Code } from 'unicove-components';
 
@@ -23,12 +22,12 @@
 
 	let hints = $derived([
 		{
-			title: m.common_amount_to_act({ action: m.common_stake() }),
+			title: 'Amount to Stake',
 			description: manager.assetValue.toString()
 		},
-		{ title: m.staking_minimum_lockup(), description: '21 days' },
-		{ title: m.common_apr_current(), description: manager.apr + '%' },
-		{ title: m.staking_estimated_yield_yearly(), description: String(manager.estimateYield) }
+		{ title: 'Minimum lockup', description: '21 days' },
+		{ title: 'Current APR', description: manager.apr + '%' },
+		{ title: 'Estimated Yield (Yearly)', description: String(manager.estimateYield) }
 	]);
 
 	$effect(() => {
@@ -45,28 +44,16 @@
 <Stack>
 	{#if manager.txid}
 		<TransactSummary transactionId={manager.txid} />
-		<Button href={`/${data.network}/staking`} variant="secondary">
-			{m.search_result_description_staking()}
-		</Button>
-		<Button href={`/${data.network}/account/${context.account?.name}`}>
-			{m.common_view_my_account()}
-		</Button>
+		<Button href={`/${data.network}/staking`} variant="secondary">Staking overview</Button>
+		<Button href={`/${data.network}/account/${context.account?.name}`}>View my account</Button>
 	{:else if manager.error}
 		<TransactError error={manager.error} />
-		<Button onclick={resetState}>{m.common_close()}</Button>
+		<Button onclick={resetState}>Close</Button>
 	{:else}
-		<TokenCard
-			token={manager.tokenBalance}
-			title={m.common_staked()}
-			description={m.common_staked_currently()}
-		/>
+		<TokenCard token={manager.tokenBalance} title="Staked" description="Currently staked" />
 		<SystemTokenSwap account={context.account} network={data.network} />
 		<Stack class="gap-3">
-			<Label for="assetInput"
-				>{m.common_amount_to_act({
-					action: m.common_stake()
-				})}</Label
-			>
+			<Label for="assetInput">Amount to Stake</Label>
 			<AssetInput
 				autofocus
 				bind:this={manager.input}
@@ -80,10 +67,10 @@
 			/>
 			{#if !manager.assetValid}
 				{#if !manager.assetValidPrecision}
-					<p class="text-error">{m.form_validation_invalid_number_decimals()}</p>
+					<p class="text-error">Invalid number, too many decimal places.</p>
 				{/if}
 				{#if !manager.assetValidMaximum}
-					<p class="text-error">{m.common_amount_exceeds_balance()}</p>
+					<p class="text-error">Amount exceeds available balance.</p>
 				{/if}
 			{/if}
 
@@ -93,13 +80,11 @@
 					onclick={() => {
 						manager.setMaxValue();
 					}}
-					>{m.common_labeled_unit_available({ unit: '' })}:
+					>Available:
 					<AssetText value={manager.stakable} />
 				</Button>
 			</Label>
-			<Button disabled={!ready} onclick={() => manager.transact()} variant="primary"
-				>{m.common_stake()}</Button
-			>
+			<Button disabled={!ready} onclick={() => manager.transact()} variant="primary">Stake</Button>
 		</Stack>
 
 		<DL items={hints} />

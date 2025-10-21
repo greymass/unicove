@@ -11,7 +11,6 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
 	import { UnstakeManager } from './manager.svelte';
-	import * as m from '$lib/paraglide/messages';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
@@ -19,7 +18,7 @@
 	let manager: UnstakeManager = $state(new UnstakeManager(data.network));
 
 	let hints = $derived([
-		{ title: m.staking_withdraw_timeframe(), description: manager.assetValue.toString() }
+		{ title: 'Withdrawable in 21 days', description: manager.assetValue.toString() }
 	]);
 
 	$effect(() => {
@@ -36,23 +35,15 @@
 <Stack>
 	{#if manager.txid}
 		<TransactSummary transactionId={manager.txid} />
-		<Button href={`/${data.network}/staking`} variant="secondary">
-			{m.search_result_description_staking()}
-		</Button>
-		<Button href={`/${data.network}/account/${context.account?.name}`}>
-			{m.common_view_my_account()}
-		</Button>
+		<Button href={`/${data.network}/staking`} variant="secondary">Staking overview</Button>
+		<Button href={`/${data.network}/account/${context.account?.name}`}>View my account</Button>
 	{:else if manager.error}
 		<TransactError error={manager.error} />
-		<Button onclick={resetState}>{m.common_close()}</Button>
+		<Button onclick={resetState}>Close</Button>
 	{:else}
-		<TokenCard
-			token={manager.tokenBalance}
-			title={m.common_staked()}
-			description={m.common_staked_currently()}
-		/>
+		<TokenCard token={manager.tokenBalance} title="Staked" description="Currently staked" />
 		<Stack class="gap-3">
-			<Label for="assetInput">{m.common_amount_to_act({ action: m.common_unstake() })}</Label>
+			<Label for="assetInput">Amount to Unstake</Label>
 			<AssetInput
 				autofocus
 				bind:this={manager.input}
@@ -66,10 +57,10 @@
 			/>
 			{#if !manager.assetValid}
 				{#if !manager.assetValidPrecision}
-					<p class="text-error">{m.form_validation_invalid_number_decimals()}</p>
+					<p class="text-error">Invalid number, too many decimal places.</p>
 				{/if}
 				{#if !manager.assetValidMaximum}
-					<p class="text-error">{m.common_amount_exceeds_balance()}</p>
+					<p class="text-error">Amount exceeds available balance.</p>
 				{/if}
 			{/if}
 
@@ -80,12 +71,12 @@
 						manager.setMaxValue();
 					}}
 				>
-					{m.common_labeled_unit_available({ unit: '' })}:
+					Available:
 					<AssetText value={manager.unstakable} />
 				</Button>
 			</Label>
 			<Button disabled={!manager.assetValid} onclick={() => manager.transact()} variant="primary">
-				{m.common_unstake()}
+				Unstake
 			</Button>
 		</Stack>
 

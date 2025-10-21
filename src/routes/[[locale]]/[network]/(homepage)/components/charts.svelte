@@ -4,7 +4,6 @@
 	import RamPriceHistory from '$lib/components/chart/rampricehistory.svelte';
 	import TextBlock from './text-block.svelte';
 	import { Stack } from 'unicove-components';
-	import * as m from '$lib/paraglide/messages';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { ramtoken, systemtoken } from '$lib/wharf/chains';
 
@@ -19,22 +18,15 @@
 
 		<TextBlock
 			{...{
-				title: m.homepage_native_token_title({
-					token: String(network.token.symbol.name)
-				}),
-				text: m.homepage_native_token_description({
-					token: String(network.token.symbol.name),
-					network: network.chain.name
-				}),
+				title: `${String(network.token.symbol.name)}: The Native Token`,
+				text: `The ${network.chain.name} network's native token, ${String(network.token.symbol.name)}, can be used for staking rewards, to buy and sell RAM, to pay transaction fees, and more. It is traded on most major exchanges.`,
 				button: funding
 					? {
-							text: m.common_get_tokens(),
+							text: 'Get Tokens',
 							href: `${network}/fund`
 						}
 					: {
-							text: m.common_send_tokens({
-								token: String(network.token.symbol.name)
-							}),
+							text: `Send ${String(network.token.symbol.name)} Tokens`,
 							href: `${network}/send`
 						}
 			}}
@@ -46,17 +38,10 @@
 
 		<TextBlock
 			{...{
-				title: m.homepage_ram_token_title(),
-				text: m.homepage_ram_token_description({
-					bytes: 1000,
-					ramtoken: ramtoken.name,
-					systemtoken: systemtoken.name
-				}),
+				title: 'KB (RAM): Tokenized Data Storage',
+				text: `One ${ramtoken.name} of RAM represents ownership rights over 1000 bytes of the network's total blockchain storage capacity. ${ramtoken.name} can be swapped with ${systemtoken.name} by visiting the RAM Market.`,
 				button: {
-					text: m.swap_base_quote({
-						base: String(network.chain.systemToken?.symbol.name),
-						quote: String(ramtoken.name)
-					}),
+					text: `Swap ${String(network.chain.systemToken?.symbol.name)}/${String(ramtoken.name)}`,
 					href: `${network}/swap/${systemtoken.id.url}/${ramtoken.id.url}`
 				}
 			}}

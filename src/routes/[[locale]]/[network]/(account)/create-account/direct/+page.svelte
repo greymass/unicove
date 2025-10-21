@@ -4,7 +4,6 @@
 	import { FiniteStateMachine } from 'runed';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import * as m from '$lib/paraglide/messages';
 
 	import { DD, DL, DLRow } from 'unicove-components';
 	import { preventDefault } from '$lib/utils';
@@ -297,7 +296,7 @@
 
 {#snippet AccountName()}
 	<fieldset class="grid gap-2" class:hidden={!showAll && f.current !== 'account'}>
-		<Label for="account-input">{m.common_account_name()}</Label>
+		<Label for="account-input">Account Name</Label>
 		<NameInput
 			bind:this={accountInput}
 			bind:ref={accountRef}
@@ -305,14 +304,14 @@
 			bind:valid={accountValid}
 			{onkeydown}
 			id="account-input"
-			placeholder={m.common_account_name()}
+			placeholder="Account Name"
 		/>
 	</fieldset>
 {/snippet}
 
 {#snippet PublicKeys()}
 	<fieldset class="grid gap-2" class:hidden={!showAll && f.current !== 'publickey'}>
-		<Label for="owner-public-key-input">Owner {m.common_public_key()}</Label>
+		<Label for="owner-public-key-input">Owner Public Key</Label>
 		<PublicKeyInput
 			bind:this={ownerPublicKeyInput}
 			bind:ref={ownerPublicKeyRef}
@@ -320,13 +319,13 @@
 			bind:valid={ownerPublicKeyValid}
 			{onkeydown}
 			id="owner-public-key-input"
-			placeholder={`Owner ${m.common_public_key()}`}
+			placeholder="Owner Public Key"
 			disabled={mirrorKeys}
 		/>
 	</fieldset>
 
 	<fieldset class="grid gap-2" class:hidden={!showAll && f.current !== 'publickey'}>
-		<Label for="active-public-key-input">Active {m.common_public_key()}</Label>
+		<Label for="active-public-key-input">Active Public Key</Label>
 		<PublicKeyInput
 			bind:this={activePublicKeyInput}
 			bind:ref={activePublicKeyRef}
@@ -334,7 +333,7 @@
 			bind:valid={activePublicKeyValid}
 			{onkeydown}
 			id="active-public-key-input"
-			placeholder={`Active ${m.common_public_key()}`}
+			placeholder="Active Public Key"
 			disabled={mirrorKeys}
 		/>
 	</fieldset>
@@ -345,9 +344,9 @@
 		class={!showAll && f.current !== 'publickey' ? 'hidden' : ''}
 	>
 		{#if mirrorKeys}
-			{m.common_use_custom_public_keys()}
+			Enter a custom owner and active public key
 		{:else}
-			{m.common_use_current_public_keys()}
+			Use the public keys from my current account
 		{/if}
 	</Button>
 {/snippet}
@@ -355,27 +354,25 @@
 {#snippet RAMBytes()}
 	<div class="space-y-6">
 		<DL>
-			<DLRow title={m.common_account_name()}>
+			<DLRow title="Account Name">
 				<DD>
 					{accountName}
 				</DD>
 			</DLRow>
-			<DLRow title={`Owner ${m.common_public_key()}`}>
+			<DLRow title="Owner Public Key">
 				<DD>
 					{#if context.account && mirrorKeys}
-						{`Owner ${m.common_public_key()}`}
-						from
+						Owner Public Key from
 						<AccountText name={context.account.name} />
 					{:else}
 						{ownerPublicKey}
 					{/if}
 				</DD>
 			</DLRow>
-			<DLRow title={`Active ${m.common_public_key()}`}>
+			<DLRow title="Active Public Key">
 				<DD>
 					{#if context.account && mirrorKeys}
-						{`Active ${m.common_public_key()}`}
-						from
+						Active Public Key from
 						<AccountText name={context.account.name} />
 					{:else}
 						{activePublicKey}
@@ -390,17 +387,15 @@
 		</DL>
 		<fieldset class="flex items-center gap-3">
 			<Checkbox bind:checked={ramBytesUseCustom} id="rambytes-custom" />
-			<Label for="rambytes-custom">{m.common_create_account_change_ram_options()}</Label>
+			<Label for="rambytes-custom">Change RAM options for new account</Label>
 		</fieldset>
 		<fieldset class="grid gap-3">
 			{#if ramBytesUseCustom}
 				<SingleCard>
 					<Stack>
-						<Label for="account-input">
-							{m.common_create_account_ram_to_purchase({
-								min: ramBytesMin
-							})}
-						</Label>
+						<Label for="account-input"
+							>RAM bytes to purchase for new account (min: {ramBytesMin})</Label
+						>
 						<NumberInput
 							bind:this={ramBytesInput}
 							bind:ref={ramBytesRef}
@@ -416,9 +411,7 @@
 								<Checkbox bind:checked={ramBytesUseTransfer} id="rambytes-transfer" />
 								{#if context.wharf.session}
 									<Label for="rambytes-transfer">
-										{m.common_transfer_ram_from_my_account({
-											account: context.wharf.session.actor
-										})}
+										Transfer RAM from my account: {context.wharf.session.actor}
 									</Label>
 								{/if}
 							</fieldset>
@@ -434,19 +427,15 @@
 	<div class="grid gap-2" class:hidden={!showAll && f.current !== 'create'}>
 		{@render RAMBytes()}
 		<Button disabled={!ready} onclick={() => transact()}>
-			{m.common_create_account_by({
-				how: ramBytesUseTransfer
-					? m.common_create_account_by_transfer({
-							bytes: ramBytes
-						})
-					: m.common_create_account_by_paying({
-							cost: String(ramCost)
-						})
-			})}
+			Create Account
+			{ramBytesUseTransfer
+				? `by transferring ${ramBytes} bytes of RAM`
+				: `by paying ${String(ramCost)} for RAM`}
 		</Button>
 		{#if !context.wharf.session}
 			<p class="text-error text-center">
-				{m.common_create_account_login_first()}
+				You must be logged in with an existing account in order to create another account on this
+				page.
 			</p>
 		{/if}
 	</div>
@@ -455,13 +444,13 @@
 {#snippet ButtonGroup()}
 	<fieldset class="flex gap-2 *:flex-1" class:hidden={f.current === 'create' || showAll}>
 		{#if f.current === 'account' || f.current === 'complete'}
-			<Button variant="secondary" onclick={() => resetURL()}>{m.common_restart()}</Button>
+			<Button variant="secondary" onclick={() => resetURL()}>Restart</Button>
 		{:else}
-			<Button variant="secondary" onclick={previous}>{m.common_back()}</Button>
+			<Button variant="secondary" onclick={previous}>Back</Button>
 		{/if}
 
 		<Button class="col-end-3" type="submit" onclick={preventDefault(next)} disabled={!nextValid}>
-			{m.common_next()}
+			Next
 		</Button>
 	</fieldset>
 {/snippet}

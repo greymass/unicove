@@ -11,7 +11,6 @@
 	import waxDark from '$lib/assets/hero/wax/dark.png?enhanced';
 	import UnicoveOutline from '$lib/assets/unicove-outline.svg';
 
-	import * as m from '$lib/paraglide/messages';
 	import { Button } from 'unicove-components';
 	import { browser } from '$app/environment';
 
@@ -77,14 +76,10 @@
 		<UnicoveWordmark class="h-7 w-auto md:h-auto" />
 		<h1 class="text-3xl leading-tight font-bold text-balance lg:text-4xl lg:leading-tight">
 			<span class="sr-only">Unicove -</span>
-			{m.homepage_hero_title({
-				network: networkName
-			})}
+			The {networkName} web wallet and block explorer
 		</h1>
 		<p class="text-muted mb-2 text-xl leading-tight text-balance lg:text-xl lg:leading-tight">
-			{m.homepage_hero_description({
-				network: networkName
-			})}
+			Stake, Send, Manage Tokens, and Explore {networkName} – all with ease
 		</p>
 	</Stack>
 {/snippet}
@@ -207,16 +202,12 @@
 				class="font-sans-hero max-w-128 text-3xl leading-tight font-bold text-balance lg:text-4xl lg:leading-tight"
 			>
 				<span class="">Unicove -</span>
-				{m.homepage_hero_title({
-					network: networkName
-				})}.
+				The {networkName} web wallet and block explorer.
 			</h1>
 			<p
 				class="text-muted mb-2 max-w-md rounded-lg text-xl leading-tight text-pretty lg:text-xl lg:leading-tight"
 			>
-				{m.homepage_hero_description({
-					network: networkName
-				})}
+				Stake, Send, Manage Tokens, and Explore {networkName} – all with ease
 			</p>
 
 			<div class="grid gap-4">

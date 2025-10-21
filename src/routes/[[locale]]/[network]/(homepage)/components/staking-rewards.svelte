@@ -3,7 +3,6 @@
 	import type { NetworkState } from '$lib/state/network.svelte';
 	import StakedHEX from './stakedhex.svelte';
 	import { getAPR } from '$lib/utils/staking';
-	import * as m from '$lib/paraglide/messages';
 	import { Button } from 'unicove-components';
 
 	interface Props {
@@ -25,28 +24,21 @@
 
 	<!-- Text -->
 	<Stack class="max-w-md items-start">
-		<h2 class="text-title leading-tight">{network.token.name} {m.common_staking_rewards()}</h2>
+		<h2 class="text-title leading-tight">{network.token.name} Staking Rewards</h2>
+		<p>Stake {network.token.name} today for an estimated {apr}% APR<sup>1</sup>.</p>
 		<p>
-			{m.homepage_staking_intro({
-				token: network.token.name,
-				apr
-			})}<sup>1</sup>.
-		</p>
-		<p>
-			{m.homepage_staking_description({
-				network: network.token.name,
-				token: String(network.chain.systemToken?.symbol.name)
-			})}
+			The {network.token.name} staking rewards program proportionally distributes 85.6k {String(
+				network.chain.systemToken?.symbol.name
+			)} daily to token holders who have staked their tokens. These tokens can be unstaked and will be
+			usable again after a 21 day lockup period.
 		</p>
 		<div class="mt-2 flex items-center gap-6">
-			<Button variant="primary" href={`/${network}/staking`}>
-				{m.common_stake_action()}
-			</Button>
+			<Button variant="primary" href={`/${network}/staking`}>Stake Tokens</Button>
 			<Button variant="text" href="https://eosnetwork.com/staking-rewards/">Learn more</Button>
 		</div>
 		<p class="text-muted text-xs">
 			<sup>1</sup>
-			{m.homepage_staking_intro_legend()}
+			APR is based on the total amount staked and dynamically changes over time.
 		</p>
 	</Stack>
 </section>

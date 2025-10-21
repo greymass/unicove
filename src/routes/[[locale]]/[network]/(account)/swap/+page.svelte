@@ -10,8 +10,6 @@
 	import { Stack } from 'unicove-components';
 	import { Asset } from '@wharfkit/session';
 
-	import * as m from '$lib/paraglide/messages';
-
 	const { data } = $props();
 
 	const context = getContext<UnicoveContext>('state');
@@ -32,7 +30,7 @@
 					class="border-mine-600 border px-6"
 					href={`/${data.network}/swap/${swap.pair.base.id.url}/${swap.pair.quote.id.url}`}
 				>
-					{m.common_swap()}
+					Swap
 				</Button>
 			</div>
 		</Stack>

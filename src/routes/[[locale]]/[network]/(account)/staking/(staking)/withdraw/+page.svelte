@@ -7,7 +7,6 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
 	import { WithdrawManager } from './manager.svelte';
-	import * as m from '$lib/paraglide/messages';
 	import { Card } from 'unicove-components';
 
 	const context = getContext<UnicoveContext>('state');
@@ -29,23 +28,19 @@
 <Stack>
 	{#if manager.txid}
 		<TransactSummary transactionId={manager.txid} />
-		<Button href={`/${data.network}/staking`} variant="secondary">
-			{m.search_result_description_staking()}
-		</Button>
-		<Button href={`/${data.network}/account/${context.account?.name}`}>
-			{m.common_view_my_account()}
-		</Button>
+		<Button href={`/${data.network}/staking`} variant="secondary">Staking overview</Button>
+		<Button href={`/${data.network}/account/${context.account?.name}`}>View my account</Button>
 	{:else if manager.error}
 		<TransactError error={manager.error} />
-		<Button onclick={resetState}>{m.common_close()}</Button>
+		<Button onclick={resetState}>Close</Button>
 	{:else}
 		<Switcher>
 			<Stack class="gap-2">
-				<h3 class="text-muted leading-none">{m.common_withdrawable_currently()}</h3>
+				<h3 class="text-muted leading-none">Currently Withdrawable</h3>
 				<p class="text-on-surface text-2xl font-bold">{String(manager.total)}</p>
 			</Stack>
 			<Button disabled={!manager.total.value} onclick={() => manager.transact()} variant="primary"
-				>{m.common_withdraw()}</Button
+				>Withdraw</Button
 			>
 			{#if manager.voting && manager.sellingAll}
 				<Card>

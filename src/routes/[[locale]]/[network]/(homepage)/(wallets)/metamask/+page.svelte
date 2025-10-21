@@ -13,7 +13,6 @@
 	import { DD, DL, DLRow } from 'unicove-components';
 	import { TextInput } from 'unicove-components';
 	import { CopyButton } from 'unicove-components';
-	import * as m from '$lib/paraglide/messages';
 	import { Code } from 'unicove-components';
 
 	const { data } = $props();
@@ -157,64 +156,47 @@
 			{#if !context.metamask.isMetaMaskReady}
 				<MetaMaskInstall {networkName} {productName} />
 			{:else if currentVersion}
-				<h2 class="text-xl font-semibold">
-					{m.metamask_install_update({
-						name: productName
-					})}
-				</h2>
+				<h2 class="text-xl font-semibold">{productName} + MetaMask</h2>
 				{#if needsUpdate}
 					<p class="mb-1 leading-snug">
-						{m.metamask_install_update_description({
-							name: productName,
-							latestVersion: String(latestVersion)
-						})}
+						A new version of the {productName} is available. Click the button below to update to the
+						latest version ({String(latestVersion)}).
 					</p>
-					<Button onclick={handleUpdateSnap}
-						>{m.metamask_install_update_action({
-							name: productName
-						})}</Button
-					>
+					<Button onclick={handleUpdateSnap}>Update {productName}</Button>
 				{:else}
 					<Stack class="mb-1 gap-2">
 						<p class="leading-snug">
-							{m.metamask_install_ready_description({
-								name: productName
-							})}
+							MetaMask and the {productName} are connected, installed, and up-to-date using
 							<a href="https://www.npmjs.com/package/{packageName}/v/{currentVersion}"
-								>{m.common_version()} {currentVersion}</a
+								>version {currentVersion}</a
 							>.
 						</p>
 						{#if context.wharf.session && isMetaMaskSession}
 							<p class="leading-snug">
-								{m.metamask_install_logged_in({
-									network: networkName,
-									account: context.wharf.session.actor
-								})}
+								You are logged in as {context.wharf.session.actor} and ready to use Unicove to access
+								the {networkName} network.
 							</p>
 						{:else if context.wharf.session}
 							<p class="leading-snug">
-								{m.metamask_install_logged_in_alternative({
-									account: context.wharf.session.actor
-								})}
+								You are logged in as {context.wharf.session.actor} but are not using MetaMask.
 							</p>
 						{:else}
 							<p class="leading-snug">
-								{m.metamask_install_ready_create_account({
-									network: networkName
-								})}
+								If you don't already have an {networkName} account you can create one now. If you have
+								already created an account you can login with MetaMask.
 							</p>
 						{/if}
 					</Stack>
 					{#if context.wharf.session}
 						<Cluster>
 							<Button href={`/${data.network}/account/${context.wharf.session.actor}`}
-								>{m.common_view_my_account()}</Button
+								>View my account</Button
 							>
 						</Cluster>
 					{:else}
 						<Cluster>
-							<Button onclick={login}>{m.common_login()}</Button>
-							<Button onclick={createAccountAndLogin}>{m.common_create_account()}</Button>
+							<Button onclick={login}>Login</Button>
+							<Button onclick={createAccountAndLogin}>Create an account</Button>
 						</Cluster>
 					{/if}
 				{/if}
@@ -247,173 +229,124 @@
 
 <div class="mt-8 flex flex-row flex-wrap gap-16">
 	<section class="max-w-prose space-y-4">
-		<h2 class="text-2xl font-semibold">{m.common_faq()}</h2>
-		<h3 class="text-md font-semibold">{m.metamask_install_faq_q1()}</h3>
+		<h2 class="text-2xl font-semibold">FAQ</h2>
+		<h3 class="text-md font-semibold">What is a MetaMask snap?</h3>
 		<p>
 			{@render link('MetaMask Snaps', 'https://metamask.io/snaps/')}
-			{m.metamask_install_faq_a1({
-				name: productName,
-				network: networkName
-			})}
+			are a new feature in MetaMask that allow community built plugins to extend the functionality of
+			the wallet beyond Ethereum based blockchains. This means you can now access the {networkName}
+			Network through MetaMask using the {productName} snap.
 		</p>
 
-		<h3 class="text-md font-semibold">
-			{m.metamask_install_faq_q2({
-				name: productName
-			})}
-		</h3>
+		<h3 class="text-md font-semibold">How do I install the {productName}?</h3>
 		<p>
-			{m.metamask_install_faq_a2_p1({
-				name: productName
-			})}
+			The {productName} is a MetaMask Snap you can install directly from this page on Unicove or from
+			the {productName} page in the
 			{@render link(
-				m.metamask_snaps_directory(),
+				'MetaMask Snaps Directory',
 				`https://snaps.metamask.io/snap/npm/${packageName}`
-			)}.
-			{m.metamask_install_faq_a2_p2({
-				name: productName
-			})}
+			)}. You will need to have MetaMask installed before adding the {productName} snap.
 		</p>
 
-		<h3 class="text-md font-semibold">
-			{m.metamask_install_faq_q3({
-				name: productName
-			})}
-		</h3>
+		<h3 class="text-md font-semibold">What does the {productName} do?</h3>
 		<p>
-			{m.metamask_install_faq_a3({
-				name: productName,
-				network: networkName
-			})}
+			The {productName} allows you to use MetaMask as a web3 wallet for an {networkName} Network account.
+			With it you can sign in to {networkName} apps and perform transactions.
 		</p>
 
-		<h3 class="text-md font-semibold">
-			{m.metamask_install_faq_q4({
-				name: productName
-			})}
-		</h3>
+		<h3 class="text-md font-semibold">What does the {productName} not do?</h3>
 		<p>
-			{m.metamask_install_faq_a4({
-				name: productName
-			})}
+			The {productName}'s only purpose is to sign transactions and will need to be paired with a
+			companion dApp, such as Unicove, in order to manage your account.
 		</p>
 
-		<h3 class="text-md font-semibold">
-			{m.metamask_install_faq_q5({
-				name: productName
-			})}
-		</h3>
+		<h3 class="text-md font-semibold">How do I sign transactions using the {productName}?</h3>
 		<p>
-			{m.metamask_install_faq_a5()}
+			Please see our guide on
 			{@render link(
-				m.metamask_install_faq_a5_link({
-					network: networkName
-				}),
+				`How to Sign Transactions on the ${networkName} network with MetaMask`,
 				'https://support.greymass.com/a/solutions/articles/72000637277'
 			)}
 		</p>
 
-		<h3 class="text-md font-semibold">
-			{m.metamask_install_faq_q6({
-				name: productName
-			})}
-		</h3>
+		<h3 class="text-md font-semibold">Is the {productName} free to use?</h3>
 		<p>
-			{m.metamask_install_faq_a6_p1({
-				name: productName,
-				network: networkName
-			})}
+			Yes, the {productName} software is completely free to use. However, accounts on the {networkName}
+			Network require a small amount of {networkName} before they are created.
 		</p>
 		<p>
-			{m.metamask_install_faq_a6_p2({
-				network: networkName
-			})}
+			Unicove is currently covering this cost and offering one free account per user. To limit
+			abuse, we require logging in with a valid 3rd party account. Only Apple and Google accounts
+			are supported at this time.
 		</p>
 		<h3 class="text-md font-semibold">
-			{m.metamask_install_faq_q7({
-				network: networkName
-			})}
+			Where can I view and manage my {networkName} account?
 		</h3>
 		<p>
-			{m.metamask_install_faq_a7_p1({
-				network: networkName
-			})}
+			Unicove is the first web wallet to allow you to manage your {networkName} account using MetaMask.
+			We expect other wallets will add support in the future.
 		</p>
 		<p>
-			{m.metamask_install_faq_a7_p2({
-				network: networkName
-			})}
+			You can view your account on any {networkName} Network block explorer, like Unicove, simply by
+			searching for the account name.
 		</p>
 
 		<h3 class="text-md font-semibold">
-			{m.metamask_install_faq_q8({
-				name: productName
-			})}
+			Is my private key or recovery phrase exposed when using the {productName} Snap?
 		</h3>
 		<p>
-			{m.metamask_install_faq_a8({
-				name: productName,
-				network: networkName
-			})}
+			The {productName} uses a private key derived from your MetaMask seed phrase using the BIP-0044
+			and the {networkName} coin type. This private key is only ever used for {networkName} accounts
+			and the {productName} cannot access any of your other keys. The {productName} never exposes this
+			private key and does not have access to your seed phrase.
 		</p>
 
-		<h3 class="text-md font-semibold">{m.metamask_install_faq_q9()}</h3>
+		<h3 class="text-md font-semibold">How does MetaMask configure my owner and active keys?</h3>
 		<p>
-			{m.metamask_install_faq_a9_p1({
-				name: productName
-			})}
+			The {productName} derives your owner and active keys from your MetaMask seed phrase using different
+			indexes. The zero (0) index key is reserved for the owner key and is not available to sign regular
+			transactions with, while the first (1) index key is used for the active key and available for transaction
+			signing.
 		</p>
 		<p>
-			{m.metamask_install_faq_a9_p2({
-				name: productName
-			})}
+			A future update to the {productName} will provide a way to use the owner key to reset the active
+			key, allowing for a recovery path in the event the active keys have been changed.
 		</p>
 
-		<h3 class="text-md font-semibold">{m.metamask_install_faq_q10()}</h3>
+		<h3 class="text-md font-semibold">How does find my owner and active keys?</h3>
 		<p>
-			{m.metamask_install_faq_a10({
-				name: productName
-			})}
+			The {productName} provides an RPC method which returns the public keys associated with your MetaMask
+			seed phrase. These can be used when manually setting up a new account. Unicove can display these
+			keys to you if you visit the Settings page and enable Advanced Mode.
 		</p>
 
 		<h3 class="text-md font-semibold">
-			{m.metamask_install_faq_q11({
-				name: productName,
-				network: networkName
-			})}
+			Can I access all {networkName} apps using {productName} for MetaMask?
 		</h3>
 		<p>
-			{m.metamask_install_faq_a11_p1({
-				name: productName,
-				network: networkName
-			})}
+			It's possible to access any {networkName} Network app, provided the app developers have integrated
+			the required SDKs. The {productName} and MetaMask can be added to any web app using
 			{@render link('Wharf', 'https://wharfkit.com/')}
-			{m.metamask_install_faq_a11_p2()}
+			with the
 			{@render link(
 				'MetaMask Wallet Plugin',
 				'https://github.com/wharfkit/wallet-plugin-metamask'
 			)}.
 		</p>
 		<p>
-			{m.metamask_install_faq_a11_p3()}
-			{@render link(m.common_open_source(), 'https://github.com/greymass/unicove')}
-			{m.metamask_install_faq_a11_p4()}
+			Unicove itself is
+			{@render link('open source', 'https://github.com/greymass/unicove')}
+			and serves as reference material for how this integration can be performed.
 		</p>
 
-		<h3 class="text-md font-semibold">
-			{m.metamask_install_faq_q12({
-				name: productName
-			})}
-		</h3>
+		<h3 class="text-md font-semibold">How do I reach out for {productName} support?</h3>
 		<p>
-			{m.metamask_install_faq_a12({
-				name: productName
-			})}
+			If you have any issues with the {productName} itself, please feel free to reach out to us at
 		</p>
 		<address class="text-muted inline">
 			<a href="mailto:support@greymass.com">support@greymass.com</a>
 		</address>
-		<p class="inline">{m.metamask_install_faq_a12_p2()}</p>
+		<p class="inline">or by visiting our Support portal at:</p>
 		<p>{@render link('https://support.greymass.com', 'https://support.greymass.com')}</p>
 	</section>
 
@@ -421,15 +354,15 @@
 		<Stack class="gap-4">
 			{#if context.settings.data.advancedMode}
 				{#if context.metamask.publicKey || context.metamask.ownerKey}
-					<h2 class="text-2xl font-semibold">{m.common_your_public_keys()}</h2>
+					<h2 class="text-2xl font-semibold">Your Public Keys</h2>
 					{#if context.metamask.publicKey}
-						<p>{m.metamask_public_key_active()}</p>
+						<p>MetaMask Public Key (Active)</p>
 						<TextInput bind:value={context.metamask.publicKey} disabled>
 							<CopyButton data={String(context.metamask.publicKey)} />
 						</TextInput>
 					{/if}
 					{#if context.metamask.ownerKey}
-						<p>{m.metamask_public_key_owner()}</p>
+						<p>MetaMask Public Key (Owner)</p>
 						<TextInput bind:value={context.metamask.ownerKey} disabled>
 							<CopyButton data={String(context.metamask.ownerKey)} />
 						</TextInput>
@@ -437,9 +370,9 @@
 				{/if}
 			{/if}
 
-			<h2 class="text-2xl font-semibold">{m.common_details()}</h2>
+			<h2 class="text-2xl font-semibold">Details</h2>
 			<DL>
-				<DLRow title={m.metamask_snaps_directory()}>
+				<DLRow title="MetaMask Snaps Directory">
 					<DD>
 						<a class="text-nowrap" href="https://snaps.metamask.io/snap/npm/{packageName}">
 							{networkName} Wallet
@@ -447,7 +380,7 @@
 					</DD>
 				</DLRow>
 
-				<DLRow title={m.common_source_code()}>
+				<DLRow title="Source Code">
 					<DD>
 						<a href="https://github.com/greymass/antelope-snap/tree/{context.network}"> GitHub </a>
 					</DD>

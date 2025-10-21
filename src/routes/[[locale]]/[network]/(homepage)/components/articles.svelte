@@ -1,6 +1,5 @@
 <script lang="ts">
 	import TextBlock from './text-block.svelte';
-	import * as m from '$lib/paraglide/messages';
 	import { Button } from 'unicove-components';
 	import { IconButton } from 'unicove-components';
 	import type { Article } from '$lib/types/content';
@@ -40,9 +39,7 @@
 
 				<div class="col-span-full grid place-items-center @3xl:col-span-1 @3xl:justify-start">
 					<TextBlock class="max-w-lg" title={article.title} text={article.description}>
-						<Button variant="primary" href={article.slug}>
-							{m.common_read_more()}
-						</Button>
+						<Button variant="primary" href={article.slug}>Read more</Button>
 					</TextBlock>
 				</div>
 			</div>

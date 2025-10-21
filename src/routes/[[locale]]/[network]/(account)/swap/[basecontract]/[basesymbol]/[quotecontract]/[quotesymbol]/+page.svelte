@@ -9,7 +9,6 @@
 	import { IconButton } from 'unicove-components';
 	import TransactForm from '$lib/components/transact/form.svelte';
 
-	import * as m from '$lib/paraglide/messages';
 	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte.js';
 	import { TokenBalance, TokenSwap, ZeroUnits } from '$lib/types/token.js';
 	import { ArrowRight, ArrowRightLeft } from '@lucide/svelte';
@@ -190,16 +189,14 @@
 
 {#snippet Success()}
 	<div class="flex gap-4">
-		<Button variant="secondary" onclick={() => (id = undefined)}>{m.common_back()}</Button>
-		<Button href={`/${data.network}/account/${context.account?.name}`}>
-			{m.common_view_my_account()}
-		</Button>
+		<Button variant="secondary" onclick={() => (id = undefined)}>Back</Button>
+		<Button href={`/${data.network}/account/${context.account?.name}`}>View my account</Button>
 	</div>
 {/snippet}
 
 {#snippet Failure()}
 	<div class="flex gap-4">
-		<Button onclick={() => (error = undefined)}>{m.common_back()}</Button>
+		<Button onclick={() => (error = undefined)}>Back</Button>
 	</div>
 {/snippet}
 
@@ -217,7 +214,7 @@
 				<h3 class="text-title">{baseBalance.balance.symbol.name}</h3>
 			</div>
 			<AssetText class="text-on-surface" value={baseBalance.balance} />
-			<p>{m.common_available()}</p>
+			<p>Available</p>
 		</div>
 
 		<div
@@ -248,7 +245,7 @@
 				<span class="text-title">{quoteBalance.balance.symbol.name}</span>
 			</div>
 			<AssetText class="text-on-surface" value={quoteBalance.balance} />
-			<p>{m.common_available()}</p>
+			<p>Available</p>
 		</div>
 	</div>
 {/snippet}

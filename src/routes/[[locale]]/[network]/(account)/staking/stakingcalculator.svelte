@@ -8,7 +8,6 @@
 	import { AssetInput } from 'unicove-components';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
-	import * as m from '$lib/paraglide/messages';
 
 	interface Props extends HTMLAttributes<HTMLDivElement> {
 		apr: string;
@@ -30,17 +29,17 @@
 		let price = tokenprice ? tokenprice.value : 0;
 		return [
 			{
-				time: m.common_timeframe_daily(),
+				time: 'Daily',
 				value: daily,
 				currency: Asset.from(daily.value * price, tokenprice.symbol)
 			},
 			{
-				time: m.common_timeframe_monthly(),
+				time: 'Monthly',
 				value: monthly,
 				currency: Asset.from(monthly.value * price, tokenprice.symbol)
 			},
 			{
-				time: m.common_timeframe_yearly(),
+				time: 'Yearly',
 				value: yearly,
 				currency: Asset.from(yearly.value * price, tokenprice.symbol)
 			}
@@ -48,13 +47,12 @@
 	});
 </script>
 
-<Card {...props} title={m.staking_calculator()}>
+<Card {...props} title="Staking Calculator">
 	<Stack>
 		<p>
-			{m.staking_calculator_description({
-				apr: apr,
-				token: String(network.chain.systemToken!.symbol.name)
-			})}
+			Enter an amount of {String(network.chain.systemToken!.symbol.name)} to calculate estimated rewards
+			based on the current APR of {apr}%. This rate will change over time based on the amount of
+			tokens staked.
 		</p>
 
 		<AssetInput min={0} bind:value={assetValue} bind:valid={assetValid} />
