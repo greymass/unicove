@@ -15,7 +15,6 @@
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import RamResource from '$lib/components/elements/ramresource.svelte';
 	import SystemTokenSwap from '$lib/components/banner/systemTokenSwap.svelte';
-	import * as m from '$lib/paraglide/messages';
 
 	import { BuyRAMState } from './state.svelte';
 	import { preventDefault } from '$lib/utils';
@@ -37,7 +36,7 @@
 	async function handleBuyRAM() {
 		errorMessage = undefined;
 		if (!context.wharf || !context.wharf.session) {
-			alert(m.common_not_logged_in());
+			alert('Not logged in');
 			return;
 		}
 
@@ -99,21 +98,17 @@
 <Stack>
 	{#if transactionId}
 		<TransactSummary {transactionId} />
-		<Button href={`/${data.network}/ram`} variant="secondary">
-			{m.common_ram_market()}
-		</Button>
-		<Button href={`/${data.network}/account/${context.account?.name}`}>
-			{m.common_view_my_account()}
-		</Button>
+		<Button href={`/${data.network}/ram`} variant="secondary">RAM Market</Button>
+		<Button href={`/${data.network}/account/${context.account?.name}`}>View my account</Button>
 	{:else if errorMessage}
 		<TransactError error={errorMessage} />
-		<Button onclick={resetState}>{m.common_close()}</Button>
+		<Button onclick={resetState}>Close</Button>
 	{:else}
 		<form onsubmit={preventDefault(handleBuyRAM)} class="mx-auto max-w-2xl space-y-4">
 			<RamResource class="hidden" ramAvailable={ramAvailableSize} />
 
 			<Stack class="gap-3">
-				<Label class="text-lg" for="bytesInput">{m.ram_form_buy_amount()}</Label>
+				<Label class="text-lg" for="bytesInput">Amount of RAM to buy:</Label>
 				<div class="flex gap-4">
 					<div class="flex-1">
 						<BytesInput
@@ -133,13 +128,12 @@
 				</div>
 				{#if buyRamState.insufficientBalance}
 					<p class="text-error">
-						{m.form_validation_insufficient_balance({
-							unit: String(context.network.chain.systemToken?.symbol.name)
-						})}
+						Insufficient {String(context.network.chain.systemToken?.symbol.name)} balance. Please enter
+						a smaller amount.
 					</p>
 				{/if}
 				<p class="text-right">
-					{m.common_balance()}
+					Balance
 					{#if context.account}
 						{context.account.balance?.balance}
 					{:else}
@@ -148,41 +142,37 @@
 				</p>
 			</Stack>
 
-			<Button type="submit" class="mt-4 w-full" disabled={!ready}>
-				{m.common_unit_buy({ unit: 'RAM' })}
-			</Button>
+			<Button type="submit" class="mt-4 w-full" disabled={!ready}>Buy RAM</Button>
 
 			<SystemTokenSwap account={context.account} network={data.network} />
 
 			<Stack class="gap-3">
 				<DL>
-					<DLRow
-						title={`${m.common_labeled_unit_price({ unit: `${context.network.chain.systemToken?.symbol.name}/RAM` })} (KB) `}
-					>
+					<DLRow title={`${context.network.chain.systemToken?.symbol.name}/RAM Price (KB) `}>
 						<DD>
 							<AssetText variant="full" value={buyRamState.pricePerKB} />
 						</DD>
 					</DLRow>
 
-					<DLRow title={m.ram_to_purchase()}>
+					<DLRow title="RAM to be bought">
 						<DD>
 							<AssetText variant="full" value={buyRamState.kbs} />
 						</DD>
 					</DLRow>
 
-					<DLRow title={m.ram_purchase_value()}>
+					<DLRow title="RAM Purchase Value">
 						<DD>
 							<AssetText variant="full" value={buyRamState.bytesValue} />
 						</DD>
 					</DLRow>
 
-					<DLRow title={`${m.common_network_fees()} (0.5%)`}>
+					<DLRow title="Network Fees (0.5%)">
 						<DD>
 							<AssetText variant="full" value={buyRamState.fee} />
 						</DD>
 					</DLRow>
 
-					<DLRow title={m.common_total_cost()}>
+					<DLRow title="Total Cost">
 						<DD>
 							<AssetText variant="full" value={buyRamState.bytesCost} />
 						</DD>
@@ -192,7 +182,7 @@
 		</form>
 	{/if}
 	{#if context.settings.data.debugMode}
-		<h3 class="text-title">{m.common_debugging()}</h3>
+		<h3 class="text-title">Debugging</h3>
 		<Code
 			>{JSON.stringify(
 				{

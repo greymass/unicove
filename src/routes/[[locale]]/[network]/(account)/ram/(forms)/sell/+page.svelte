@@ -14,7 +14,6 @@
 	import { BytesInput } from 'unicove-components';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import RamResource from '$lib/components/elements/ramresource.svelte';
-	import * as m from '$lib/paraglide/messages';
 
 	import { SellRAMState } from './state.svelte';
 	import { preventDefault } from '$lib/utils';
@@ -90,21 +89,17 @@
 <Stack>
 	{#if transactionId}
 		<TransactSummary {transactionId} />
-		<Button href={`/${data.network}/ram`} variant="secondary">
-			{m.common_ram_market()}
-		</Button>
-		<Button href={`/${data.network}/account/${context.account?.name}`}>
-			{m.common_view_my_account()}
-		</Button>
+		<Button href={`/${data.network}/ram`} variant="secondary">RAM Market</Button>
+		<Button href={`/${data.network}/account/${context.account?.name}`}>View my account</Button>
 	{:else if errorMessage}
 		<TransactError error={errorMessage} />
-		<Button onclick={resetState}>{m.common_close()}</Button>
+		<Button onclick={resetState}>Close</Button>
 	{:else}
 		<form onsubmit={preventDefault(handleSellRAM)} class="mx-auto max-w-2xl space-y-4">
 			<RamResource class="hidden" ramAvailable={ramAvailableSize} />
 
 			<Stack class="gap-3">
-				<Label class="text-lg" for="bytesInput">{m.ram_sale_value()}</Label>
+				<Label class="text-lg" for="bytesInput">Amount of RAM to sell:</Label>
 				<div class="flex gap-4">
 					<div class="flex-1">
 						<BytesInput
@@ -123,10 +118,10 @@
 					</div>
 				</div>
 				{#if sellRamState.insufficientRAM}
-					<p class="text-error">{m.form_validation_insufficient_balance({ unit: 'RAM' })}</p>
+					<p class="text-error">Insufficient RAM balance. Please enter a smaller amount.</p>
 				{/if}
 				<p>
-					{m.common_labeled_unit_available({ unit: 'RAM' })}
+					RAM Available
 					{#if context.account}
 						{sellRamState.maxInKBs}
 					{:else}
@@ -135,39 +130,35 @@
 				</p>
 			</Stack>
 
-			<Button type="submit" class="mt-4 w-full" disabled={!ready}>
-				{m.common_unit_sell({ unit: 'RAM' })}
-			</Button>
+			<Button type="submit" class="mt-4 w-full" disabled={!ready}>Sell RAM</Button>
 
 			<Stack class="gap-3">
 				<DL>
-					<DLRow
-						title={` ${m.common_labeled_unit_price({ unit: `${context.network.chain.systemToken?.symbol.name}/RAM` })} (KB) `}
-					>
+					<DLRow title={` ${context.network.chain.systemToken?.symbol.name}/RAM Price (KB) `}>
 						<DD>
 							<AssetText variant="full" value={sellRamState.pricePerKB} />
 						</DD>
 					</DLRow>
 
-					<DLRow title={m.ram_to_sell()}>
+					<DLRow title="RAM to be sold">
 						<DD>
 							<AssetText variant="full" value={sellRamState.kbsToSell} />
 						</DD>
 					</DLRow>
 
-					<DLRow title={m.total_proceeds()}>
+					<DLRow title="Total Proceeds">
 						<DD>
 							<AssetText variant="full" value={sellRamState.bytesValue} />
 						</DD>
 					</DLRow>
 
-					<DLRow title={` ${m.common_network_fees()} (0.5%) `}>
+					<DLRow title="Network Fees (0.5%)">
 						<DD>
 							<AssetText variant="full" value={sellRamState.fee} />
 						</DD>
 					</DLRow>
 
-					<DLRow title={m.common_expected_receive()}>
+					<DLRow title="Expected to receive">
 						<DD>
 							<AssetText variant="full" value={sellRamState.expectedToReceive} />
 						</DD>
@@ -178,7 +169,7 @@
 	{/if}
 
 	{#if context.settings.data.debugMode}
-		<h3 class="text-title">{m.common_debugging()}</h3>
+		<h3 class="text-title">Debugging</h3>
 		<Code
 			>{JSON.stringify(
 				{

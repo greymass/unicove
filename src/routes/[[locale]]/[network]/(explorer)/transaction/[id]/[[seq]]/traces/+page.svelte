@@ -3,7 +3,7 @@
 	import type { PageData } from './$types';
 	import * as m from '$lib/paraglide/messages';
 
-	export let data: PageData;
+	const { data } = $props<{ data: PageData }>();
 </script>
 
 <div class="p-2">

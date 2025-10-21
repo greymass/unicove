@@ -5,12 +5,12 @@ import { PUBLIC_CHAIN_SHORT } from '$env/static/public';
 import { isNetworkShortName, ramtoken, systemtoken } from '$lib/wharf/chains';
 import { getBackendNetworkByName } from '$lib/wharf/client/ssr';
 
-import * as main from './locales/loader.server.svelte.js';
-import { runWithLocale, loadLocales } from 'wuchale/load-utils/server';
+// import * as main from './locales/loader.server.svelte.js';
 import { locales } from 'virtual:wuchale/locales';
+import { runWithLocale } from 'wuchale/load-utils/server';
 
-// load at server startup
-loadLocales(main.key, main.loadIDs, main.loadCatalog, locales);
+// console.log(main.key, main.loadIDs, main.loadCatalog, locales);
+// await loadLocales(main.key, main.loadIDs, main.loadCatalog, locales);
 
 export const wuchaleHandle: Handle = async ({ event, resolve }) => {
 	const locale = event.cookies.get('locale') ?? 'en';

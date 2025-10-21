@@ -3,7 +3,6 @@
 	import { page } from '$app/state';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
-	import * as m from '$lib/paraglide/messages';
 	import DebugToggle from '$lib/components/select/debug.svelte';
 	import { CodeIcon, MoonIcon } from '@lucide/svelte';
 	import SchemeToggle from '$lib/components/select/scheme.svelte';
@@ -28,13 +27,13 @@
 			// 	text: network.chain.name,
 			// 	active: pathname[2] === String(network) && !pathname[3]
 			// },
-			{ href: `/${locale}/${network}/send`, text: m.common_send(), active: pathname[3] === 'send' }
+			{ href: `/${locale}/${network}/send`, text: 'Send', active: pathname[3] === 'send' }
 		];
 
 		if (network.supports('staking')) {
 			items.push({
 				href: `/${locale}/${network}/staking`,
-				text: m.common_staking(),
+				text: 'Staking',
 				active: pathname[3] === 'staking'
 			});
 		}
@@ -46,7 +45,7 @@
 		if (context.settings.data.advancedMode) {
 			items.push({
 				href: `/${locale}/${network}/resources`,
-				text: m.common_resources(),
+				text: 'Resources',
 				active: pathname[3] === 'resources'
 			});
 		}
@@ -62,14 +61,14 @@
 		if (context.account) {
 			items.splice(0, 0, {
 				href: `/${locale}/${network}/account/${context.account.name}`,
-				text: m.common_my_account(),
+				text: 'My Account',
 				active: pathname[3] === 'account' && pathname[4] === String(context.account.name)
 			});
 		}
 
 		items.push({
 			href: `/${locale}/${network}/settings`,
-			text: m.common_settings(),
+			text: 'Settings',
 			active: pathname[3] === 'settings'
 		});
 

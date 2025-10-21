@@ -1,31 +1,19 @@
-import { languageTag } from '$lib/paraglide/runtime';
 import type { PageLoad } from './$types';
-import * as m from '$lib/paraglide/messages';
 import { ramtoken, systemtoken } from '$lib/wharf/chains';
 
-export const load: PageLoad = async ({ parent }) => {
+export const load: PageLoad = async ({ parent, params }) => {
 	const { network } = await parent();
+	const locale = params.locale || 'en';
 	return {
-		backPath: `/${languageTag()}/${network}/ram`,
-		title: m.common_unit_buy({ unit: 'RAM' }),
-		subtitle: m.ram_page_subtitle({
-			token: String(network.chain.systemToken?.symbol.name || m.common_tokens()),
-			network: network.chain.name
-		}),
+		backPath: `/${locale}/${network}/ram`,
+		title: 'Buy RAM',
+		subtitle: `Exchange ${String(network.chain.systemToken?.symbol.name || 'tokens')} for RAM on the ${network.chain.name} network.`,
 		pageMetaTags: {
 			title: [
-				m.common_unit_buy({ unit: 'RAM' }),
-				m.ram_metadata_buy_title({
-					base: ramtoken.name,
-					quote: systemtoken.name,
-					network: network.chain.name
-				})
+				'Buy RAM',
+				`${ramtoken.name}/${systemtoken.name} Market | ${network.chain.name} Network`
 			].join(' | '),
-			description: m.ram_metadata_buy_description({
-				base: ramtoken.name,
-				quote: systemtoken.name,
-				network: network.chain.name
-			})
+			description: `Exchange ${systemtoken.name} for ${ramtoken.name} on the ${network.chain.name} network.`
 		}
 	};
 };

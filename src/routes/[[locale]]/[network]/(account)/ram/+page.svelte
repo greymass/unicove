@@ -5,7 +5,6 @@
 	import { calculateValue } from '$lib/utils';
 	import { MultiCard } from '$lib/components/layout';
 	import { Stack } from 'unicove-components';
-	import * as m from '$lib/paraglide/messages.js';
 	import { AssetInput } from 'unicove-components';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import { Button } from 'unicove-components';
@@ -77,28 +76,24 @@
 		<Card class="flex gap-4 *:flex-1">
 			<div class="grid content-between gap-4">
 				<div>
-					<h3 class="text-muted text-base">
-						{m.common_labeled_unit_available({ unit: 'RAM' })}
-					</h3>
+					<h3 class="text-muted text-base">RAM Available</h3>
 					<AssetText class=" text-xl font-semibold" variant="full" value={ramLiquid} />
 				</div>
 
-				<Button variant="secondary" href="/{String(data.network)}/ram/buy">{m.common_buy()}</Button>
+				<Button variant="secondary" href="/{String(data.network)}/ram/buy">Buy</Button>
 			</div>
 
 			<div class="grid content-between gap-4">
 				<div>
 					<h3 class="text-muted text-base">
-						{m.common_labeled_unit_value({ unit: balanceValueToken.symbol.name })}
+						{balanceValueToken.symbol.name} Value
 					</h3>
 					<AssetText class=" text-xl font-semibold" variant="full" value={balanceValueToken} />
 					<div>
 						<AssetText class="text-muted  text-base" variant="full" value={balanceValueFiat} />
 					</div>
 				</div>
-				<Button variant="secondary" href="/{String(data.network)}/ram/sell"
-					>{m.common_sell()}</Button
-				>
+				<Button variant="secondary" href="/{String(data.network)}/ram/sell">Sell</Button>
 			</div>
 		</Card>
 
@@ -123,7 +118,7 @@
 					</Stack>
 
 					<Stack class="gap-2">
-						<Label for="bytes-amount" class="leading-none">{m.common_bytes()}</Label>
+						<Label for="bytes-amount" class="leading-none">Bytes</Label>
 						<BytesInput
 							id="bytes-amount"
 							bind:value={ramCalculatorState.bytes}
@@ -134,7 +129,7 @@
 				</div>
 
 				<Stack class="gap-2">
-					<h4 class="text-md font-semibold">{m.common_details()}</h4>
+					<h4 class="text-md font-semibold">Details</h4>
 					<DL>
 						<DLRow title={` ${data.network.token.id.symbol.code || ''}/RAM (KB) `}>
 							<DD>
@@ -146,11 +141,7 @@
 								<AssetText variant="full" value={kbValueFiat} />
 							</DD>
 						</DLRow>
-						<DLRow
-							title={m.common_labeled_unit_price({
-								unit: market.network.currency.symbol.code
-							})}
-						>
+						<DLRow title={`${market.network.currency.symbol.code} Price`}>
 							<DD>
 								<AssetText
 									variant="full"
@@ -161,7 +152,7 @@
 								/>
 							</DD>
 						</DLRow>
-						<DLRow title={m.common_network_fees()}>
+						<DLRow title="Network Fees">
 							<DD>
 								<AssetText variant="full" value={ramCalculatorState.fee} />
 							</DD>
@@ -181,19 +172,17 @@
 
 		<Card>
 			<DL>
-				<DLRow
-					title={`${m.common_market_cap()} (${data.network.chain.systemToken?.symbol.code || ''})`}
-				>
+				<DLRow title={`Market Cap (${data.network.chain.systemToken?.symbol.code || ''})`}>
 					<DD>
 						<AssetText variant="full" value={marketCapToken} />
 					</DD>
 				</DLRow>
-				<DLRow title={`${m.common_market_cap()} (${market.network.currency.symbol.code})`}>
+				<DLRow title={`Market Cap (${market.network.currency.symbol.code})`}>
 					<DD>
 						<AssetText variant="full" value={marketCapFiat} />
 					</DD>
 				</DLRow>
-				<DLRow title={m.common_supply()}>
+				<DLRow title="Supply">
 					<DD>
 						<AssetText variant="full" value={totalRamSupply} />
 					</DD>

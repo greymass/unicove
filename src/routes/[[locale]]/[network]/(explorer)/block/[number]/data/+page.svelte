@@ -2,7 +2,7 @@
 	import { Code } from 'unicove-components';
 	import type { PageData } from './$types';
 
-	export let data: PageData;
+	const { data } = $props<{ data: PageData }>();
 </script>
 
 <Code>

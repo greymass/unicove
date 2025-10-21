@@ -4,7 +4,7 @@
 	import * as m from '$lib/paraglide/messages';
 	import { Stack } from 'unicove-components';
 
-	export let data: PageData;
+	const { data } = $props<{ data: PageData }>();
 </script>
 
 <Stack class="gap-8">
