@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2025-10-21T21:19:33.629Z\n"
+"PO-Revision-Date: 2025-10-21T21:26:16.430Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -37,7 +37,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/withdraw/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/undelegate/+page.svelte
 msgid "Close"
-msgstr ""
+msgstr "关闭"
 
 #: src/lib/components/accountswitch.svelte
 msgid "Filter accounts"
@@ -85,7 +85,7 @@ msgstr ""
 #: src/lib/components/transact/summary.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Status"
-msgstr ""
+msgstr "状态"
 
 #: src/lib/components/footer.svelte
 #: src/lib/components/footer.svelte
@@ -180,7 +180,7 @@ msgstr ""
 
 #: src/lib/components/footer.svelte
 msgid "More"
-msgstr ""
+msgstr "更多"
 
 #: src/lib/components/footer.svelte
 msgid "Affiliates"
@@ -203,7 +203,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/sell/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "RAM Market"
-msgstr ""
+msgstr "RAM 市场"
 
 #: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/buy/+page.svelte
@@ -218,20 +218,20 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/sell/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/sell/+page.ts
 msgid "Sell RAM"
-msgstr ""
+msgstr "出售 RAM"
 
 #: src/lib/components/card/tokenoverview.svelte
 #: src/lib/components/navigation/sidemenu.svelte
 #: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balances/+page.svelte
 msgid "Send"
-msgstr ""
+msgstr "发送"
 
 #: src/lib/components/navigation/sidemenu.svelte
 #: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Settings"
-msgstr ""
+msgstr "设置"
 
 #: src/lib/components/card/tokenoverview.svelte
 #: src/lib/components/navigation/sidemenu.svelte
@@ -245,7 +245,7 @@ msgstr ""
 #: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/summaries/+page.svelte
 msgid "Staking"
-msgstr ""
+msgstr "质押"
 
 #: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/stake/+page.svelte
@@ -254,7 +254,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/cards.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/navigation.svelte
 msgid "Stake"
-msgstr ""
+msgstr "质押"
 
 #: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/unstake/+page.svelte
@@ -262,7 +262,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/cards.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/navigation.svelte
 msgid "Unstake"
-msgstr ""
+msgstr "取消质押"
 
 #: src/lib/components/navigation/sidemenu.svelte
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
@@ -277,17 +277,17 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/resources/+page.svelte
 msgid "Resources"
-msgstr ""
+msgstr "资源"
 
 #: src/lib/components/search/input.svelte
 #: src/lib/state/search.svelte.ts
 msgid "Clear"
-msgstr ""
+msgstr "清除"
 
 #: src/lib/components/breakdown/breakdownRow.svelte
 #: src/lib/components/card/tokenoverview.svelte
 msgid "Total"
-msgstr ""
+msgstr "总计"
 
 #: src/lib/components/chart/tokendistribution.svelte
 msgid "KB (RAM)"
@@ -372,7 +372,7 @@ msgstr ""
 
 #: src/lib/components/navigation/sidemenu.svelte
 msgid "My Account"
-msgstr ""
+msgstr "我的账户"
 
 #: src/lib/components/elements/resourceCard.svelte
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
@@ -415,7 +415,7 @@ msgstr ""
 #: src/lib/components/input/assetOrUnits.svelte
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Asset"
-msgstr ""
+msgstr "资产"
 
 #: src/lib/components/input/assetOrUnits.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/inputs.svelte
@@ -434,11 +434,11 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.svelte
 msgid "Summary"
-msgstr ""
+msgstr "摘要"
 
 #: src/lib/components/select/actionvariant.svelte
 msgid "Ricardian"
-msgstr ""
+msgstr "里卡迪合约"
 
 #: src/lib/components/select/actionvariant.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
@@ -468,11 +468,6 @@ msgstr ""
 
 #: src/lib/state/client/wharf.svelte.ts
 msgid "Transaction was not resolved."
-msgstr ""
-
-#. placeholder {0}: data.locale
-#: src/routes/[[locale]]/[network]/+layout.svelte
-msgid "locale: {0}"
 msgstr ""
 
 #: src/lib/components/contract/action/response.svelte
@@ -513,12 +508,12 @@ msgstr ""
 msgid "+ {0} ms (CPU)"
 msgstr ""
 
-#. placeholder {0}: data.powup_net
 #. placeholder {0}: data.powup_cpu
-#. placeholder {0}: key.weight
+#. placeholder {0}: data.powup_net
 #. placeholder {0}: account.weight
 #. placeholder {0}: key.weight
 #. placeholder {0}: account.weight
+#. placeholder {0}: key.weight
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio/newaccount.svelte
@@ -591,12 +586,12 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
 msgid "Next"
-msgstr ""
+msgstr "下一步"
 
 #: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Configure Unicove"
-msgstr ""
+msgstr "配置 Unicove"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "MSIG Configuration"
@@ -631,96 +626,96 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Preferences"
-msgstr ""
+msgstr "偏好设置"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Language Selector"
-msgstr ""
+msgstr "语言选择器"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "The language used throughout Unicove."
-msgstr ""
+msgstr "Unicove 全站使用的语言。"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Prefered Currency"
-msgstr ""
+msgstr "首选货币"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "The currency used to display the value of tokens."
-msgstr ""
+msgstr "用于显示代币价值的货币单位。"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Increased Precision"
-msgstr ""
+msgstr "提高精度"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Use more decimals to increase currency precision."
-msgstr ""
+msgstr "使用更多小数位以提高货币精度。"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Dark Mode"
-msgstr ""
+msgstr "深色模式"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Toggle site wide dark mode independent from operating system preferences."
-msgstr ""
+msgstr "切换站点全局深色模式，不受操作系统偏好设置影响。"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Navigation"
-msgstr ""
+msgstr "导航栏"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Allow page navigation in search prompt"
-msgstr ""
+msgstr "允许在搜索提示中导航页面"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Adds popular Unicove pages to search results."
-msgstr ""
+msgstr "将热门的 Unicove 页面添加到搜索结果中。"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Allow account switching in search prompt"
-msgstr ""
+msgstr "允许在搜索提示中切换账户"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Adds logged in accounts to search results for quick switching."
-msgstr ""
+msgstr "将已登录账户添加到搜索结果中以便快速切换。"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Remain on current page when switching accounts"
-msgstr ""
+msgstr "切换账户时保持当前页面"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Prevents the automatic navigation to the account overview page"
-msgstr ""
+msgstr "防止切换账户时自动导航到账户概览页面"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/manager.svelte.ts
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Advanced"
-msgstr ""
+msgstr "高级的"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Enable Advanced Mode"
-msgstr ""
+msgstr "启用高级模式"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Enable features for more advanced use cases."
-msgstr ""
+msgstr "启用用于更高级用例的功能。"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Developer"
-msgstr ""
+msgstr "开发者"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Enable Developer Mode"
-msgstr ""
+msgstr "启用开发者模式"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Allow usage of settings meant for development of Unicove"
-msgstr ""
+msgstr "允许使用专为 Unicove 开发所设计的设置"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Mock token price"
-msgstr ""
+msgstr "模拟的代币价格"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid ""
@@ -730,7 +725,7 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Debug Data Display"
-msgstr ""
+msgstr "调试数据展示"
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
 msgid "I have tokens on an exchange and want to create an account."
@@ -749,7 +744,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/metamask/+page.svelte
 msgid "Create Account"
-msgstr ""
+msgstr "创建帐户"
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
 msgid "I have an account and want to create an msig account to share with other accounts."
@@ -765,20 +760,20 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 msgid "RAM Available"
-msgstr ""
+msgstr "可用 RAM"
 
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 msgid "Buy"
-msgstr ""
+msgstr "购买"
 
 #. placeholder {0}: balanceValueToken.symbol.name
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 msgid "{0} Value"
-msgstr ""
+msgstr "{0} 价值"
 
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 msgid "Sell"
-msgstr ""
+msgstr "出售"
 
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 msgid "RAM Calculator"
@@ -787,17 +782,17 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/ram/+page.svelte
 msgid "Bytes"
-msgstr ""
+msgstr "字节"
 
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "Details"
-msgstr ""
+msgstr "详情"
 
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 msgid "Network Fees"
-msgstr ""
+msgstr "网络费用"
 
 #. placeholder {0}: data.network.chain.systemToken?.symbol.code || ''
 #. placeholder {0}: market.network.currency.symbol.code
@@ -809,7 +804,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/token/[contract]/[symbol]/+page.svelte
 msgid "Supply"
-msgstr ""
+msgstr "供应量"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "CPU (Central Processing Unit)"
@@ -918,7 +913,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/sell/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/resources/renting.svelte
 msgid "Not logged in"
-msgstr ""
+msgstr "未登录"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/renting.svelte
 msgid "(<0/>/MS)"
@@ -1071,7 +1066,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(homepage)/components/legacy-token-swap.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/staking-rewards.svelte
 msgid "Learn more"
-msgstr ""
+msgstr "了解更多"
 
 #: src/routes/[[locale]]/[network]/(explorer)/network/+page.svelte
 msgid "Network charts/metrics"
@@ -1196,7 +1191,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/prompt/[payload]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/prompt/[payload]/+page.svelte
 msgid "Back"
-msgstr ""
+msgstr "返回"
 
 #: src/routes/[[locale]]/[network]/(account)/signup/wallets/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/signup/wallets/[walletType]/+page.svelte
@@ -1215,7 +1210,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/prompt/[payload]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "Login"
-msgstr ""
+msgstr "登录"
 
 #. placeholder {0}: currentWallet.name
 #: src/routes/[[locale]]/[network]/(account)/welcome/[wallet]/+page.svelte
@@ -1270,7 +1265,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/+page.ts
 msgid "Actions"
-msgstr ""
+msgstr "操作"
 
 #: src/routes/[[locale]]/[network]/(account)/upload/[[name]]/+page.svelte
 msgid "The actions that will be performed are listed below."
@@ -1350,7 +1345,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/data/+page.svelte
 msgid "Data"
-msgstr ""
+msgstr "数据"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/+page.svelte
 msgid "The internal state of Unicove for debugging purposes"
@@ -1361,7 +1356,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
 msgid "Overview"
-msgstr ""
+msgstr "概览"
 
 #. placeholder {0}: data.abi.actions.length
 #. placeholder {0}: data.transaction.transaction.actions.length
@@ -1385,7 +1380,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/abi/+page.ts
 msgid "ABI"
-msgstr ""
+msgstr "应用二进制接口"
 
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 msgid "ArrowRight"
@@ -1412,12 +1407,12 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/structs/+page.ts
 msgid "Structs"
-msgstr ""
+msgstr "结构"
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/+page.ts
 msgid "Tables"
-msgstr ""
+msgstr "表"
 
 #: src/routes/[[locale]]/[network]/(explorer)/prompt/[payload]/+page.svelte
 msgid "Visit Account"
@@ -1495,7 +1490,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/prompt/[payload]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/details/+page.svelte
 msgid "Transaction Details"
-msgstr ""
+msgstr "交易明细"
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/prompt/[payload]/+page.svelte
@@ -1518,11 +1513,11 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "View my account"
-msgstr ""
+msgstr "查看我的账户"
 
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/buy/+page.svelte
 msgid "Amount of RAM to buy:"
-msgstr ""
+msgstr "要购买的 RAM 数量："
 
 #. placeholder {0}: String(context.network.chain.systemToken?.symbol.name)
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/buy/+page.svelte
@@ -1537,11 +1532,11 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/buy/+page.svelte
 msgid "RAM to be bought"
-msgstr ""
+msgstr "要购买的 RAM"
 
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/buy/+page.svelte
 msgid "RAM Purchase Value"
-msgstr ""
+msgstr "RAM 购买价值"
 
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/buy/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/sell/+page.svelte
@@ -1551,7 +1546,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/buy/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/resources/renting.svelte
 msgid "Total Cost"
-msgstr ""
+msgstr "总费用"
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
@@ -1561,11 +1556,11 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/sell/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/prompt/[payload]/+page.svelte
 msgid "Debugging"
-msgstr ""
+msgstr "调试中"
 
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/sell/+page.svelte
 msgid "Amount of RAM to sell:"
-msgstr ""
+msgstr "出售 RAM 数量:"
 
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/sell/+page.svelte
 msgid "Insufficient RAM balance. Please enter a smaller amount."
@@ -1581,15 +1576,15 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/sell/+page.svelte
 msgid "RAM to be sold"
-msgstr ""
+msgstr "要出售的 RAM"
 
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/sell/+page.svelte
 msgid "Total Proceeds"
-msgstr ""
+msgstr "总收益"
 
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/sell/+page.svelte
 msgid "Expected to receive"
-msgstr ""
+msgstr "预计收到"
 
 #. placeholder {0}: currentWalletType.title
 #: src/routes/[[locale]]/[network]/(account)/signup/wallets/[walletType]/+page.svelte
@@ -1689,13 +1684,13 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/buttons.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Cancel"
-msgstr ""
+msgstr "取消"
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/buttons.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Confirm"
-msgstr ""
+msgstr "确认"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/buttons.svelte
 msgid "Icon Buttons"
@@ -1728,7 +1723,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/cards.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/navigation.svelte
 msgid "Withdraw"
-msgstr ""
+msgstr "提取"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/charts.svelte
 msgid "Charts"
@@ -2000,7 +1995,7 @@ msgstr ""
 #: src/lib/components/select/balance.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
 msgid "Select an option"
-msgstr ""
+msgstr "选择一个选项"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
 msgid "Token Select"
@@ -2231,7 +2226,7 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/summaries/+page.svelte
 msgid "Token Transfer"
-msgstr ""
+msgstr "代币转账"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/summaries/+page.svelte
 msgid "Swap System Token to RAM"
@@ -2316,7 +2311,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/account/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 msgid "Balances"
-msgstr ""
+msgstr "余额"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/account/+page.svelte
 msgid "Delegations (delband)"
@@ -2376,7 +2371,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(account)/fund/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.svelte
 msgid "Loading"
-msgstr ""
+msgstr "加载中"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/token/[contract]/[symbol]/+page.svelte
@@ -2389,7 +2384,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/ram/+page.svelte
 msgid "Contract"
-msgstr ""
+msgstr "合约"
 
 #: src/lib/components/search/input.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.svelte
@@ -2398,7 +2393,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/ram/+page.svelte
 msgid "Action"
-msgstr ""
+msgstr "操作"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.svelte
 msgid "Filter"
@@ -2559,7 +2554,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/staked/+page.svelte
 msgid "Staked"
-msgstr ""
+msgstr "已质押"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/staked/+page.svelte
 msgid "Loading staking details..."
@@ -2655,7 +2650,7 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/token/[contract]/[symbol]/+page.svelte
 msgid "Balance"
-msgstr ""
+msgstr "余额"
 
 #: src/routes/[[locale]]/[network]/(explorer)/token/[contract]/[symbol]/+page.svelte
 msgid "(Locked Supply)"
@@ -2663,64 +2658,64 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Recipient"
-msgstr ""
+msgstr "接收者"
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Complete"
-msgstr ""
+msgstr "完成"
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Error"
-msgstr ""
+msgstr "错误"
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/fund/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/resources/renting.svelte
 msgid "Receiving Account"
-msgstr ""
+msgstr "接收账户"
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Enter the account name of the recipient"
-msgstr ""
+msgstr "输入接收账户名称"
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Token to send"
-msgstr ""
+msgstr "要发送的代币"
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balances/+page.svelte
 msgid "No balances found."
-msgstr ""
+msgstr "无可用余额。"
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Amount to send"
-msgstr ""
+msgstr "发送金额"
 
 #. placeholder {0}: sendState.quantity.symbol.code
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Enter the amount of {0} to send"
-msgstr ""
+msgstr "输入要发送的 {0} 数量"
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Fill Max"
-msgstr ""
+msgstr "填充最大值"
 
 #. placeholder {0}: formatCurrency(sendState.value)
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Value: {0}"
-msgstr ""
+msgstr "价值：{0}"
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/stake/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/unstake/+page.svelte
 msgid "Invalid number, too many decimal places."
-msgstr ""
+msgstr "无效的数字，位数过多。"
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/stake/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/unstake/+page.svelte
 msgid "Amount exceeds available balance."
-msgstr ""
+msgstr "数量超出可用余额。"
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Memo (Optional)"
@@ -2728,21 +2723,21 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Specify a public memo for this transfer (optional)"
-msgstr ""
+msgstr "为此转账指定一个公开备注（可选）"
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
 msgid "Restart"
-msgstr ""
+msgstr "重新开始"
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Start new send"
-msgstr ""
+msgstr "开始新发送"
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Submit"
-msgstr ""
+msgstr "提交"
 
 #: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
@@ -2986,7 +2981,7 @@ msgstr ""
 #: src/lib/components/wallets/metamask/install.svelte
 #: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/metamask/+page.svelte
 msgid "Install MetaMask"
-msgstr ""
+msgstr "安装 MetaMask"
 
 #: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/metamask/+page.svelte
 msgid "Step 2: Install EOS Wallet"
@@ -3456,19 +3451,19 @@ msgstr ""
 #. placeholder {2}: network.chain.name
 #: src/routes/[[locale]]/[network]/(account)/ram/+layout.ts
 msgid "An overview of the {0}/{1} market on the {2} Network."
-msgstr ""
+msgstr "{2} 网络上 {0}/{1} 市场概览。"
 
 #. placeholder {0}: network.chain.name
 #. placeholder {1}: token
 #. placeholder {2}: network.chain.name
 #: src/routes/[[locale]]/[network]/(account)/ram/+layout.ts
 msgid "An overview of RAM Market on the {0} network that provides access to buy and sell RAM with {1} using an {2} compatible wallet."
-msgstr ""
+msgstr "{2} 网络上的 RAM 市场概览，提供通过兼容 {2} 的钱包使用 {1} 购买和出售 RAM 的功能。"
 
 #: src/routes/[[locale]]/[network]/(account)/transactions/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 msgid "Transactions"
-msgstr ""
+msgstr "交易"
 
 #. placeholder {0}: network.chain.name
 #. placeholder {0}: network.chain.name
@@ -3577,14 +3572,14 @@ msgstr ""
 #. placeholder {1}: network.chain.name
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/buy/+page.ts
 msgid "Exchange {0} for RAM on the {1} network."
-msgstr ""
+msgstr "在 {1} 网络中将 {0} 兑换为 RAM。"
 
 #. placeholder {0}: systemtoken.name
 #. placeholder {1}: ramtoken.name
 #. placeholder {2}: network.chain.name
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/buy/+page.ts
 msgid "Exchange {0} for {1} on the {2} network."
-msgstr ""
+msgstr "在 {2} 网络上将 {0} 兑换为 {1}。"
 
 #. placeholder {0}: params.walletType
 #: src/routes/[[locale]]/[network]/(account)/signup/wallets/[walletType]/+page.ts
@@ -3595,14 +3590,14 @@ msgstr ""
 #. placeholder {1}: network.chain.name
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/sell/+page.ts
 msgid "Exchange RAM for {0} on the {1} network."
-msgstr ""
+msgstr "在 {1} 网络中将 RAM 兑换为 {0}。"
 
 #. placeholder {0}: String(network.chain.systemToken?.symbol.name || 'tokens')
 #. placeholder {1}: network.chain.name
 #. placeholder {2}: network.chain.name
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/sell/+page.ts
 msgid "Exchange RAM for {0} on the {1} network using an {2} compatible wallet."
-msgstr ""
+msgstr "通过兼容 {2} 的钱包，在 {2} 网络中将 RAM 兑换为 {0}。"
 
 #. placeholder {0}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/chaindata/+page.ts
@@ -3658,20 +3653,20 @@ msgstr ""
 
 #: src/lib/components/networkswitch.svelte
 msgid "Change network"
-msgstr ""
+msgstr "切换网络"
 
 #: src/lib/components/accountswitch.svelte
 msgid "Connect Wallet"
-msgstr ""
+msgstr "连接钱包"
 
 #: src/lib/components/accountswitch.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Add Account"
-msgstr ""
+msgstr "添加账号"
 
 #: src/lib/components/accountswitch.svelte
 msgid "My Accounts"
-msgstr ""
+msgstr "我的账户"
 
 #. placeholder {0}: session.walletPlugin.data.session.actor
 #: src/lib/components/accountswitch.svelte
@@ -3680,17 +3675,17 @@ msgstr ""
 
 #: src/lib/components/accountswitch.svelte
 msgid "Login to Unicove"
-msgstr ""
+msgstr "登录Unicove"
 
 #: src/lib/components/accountswitch.svelte
 msgid "Connect your wallet to login"
-msgstr ""
+msgstr "连接你的钱包进行登录"
 
 #. placeholder {0}: props.network.chain.name
 #. placeholder {1}: props.network.token.name
 #: src/lib/components/banner/systemTokenSwap.svelte
 msgid "{0} now uses the {1} token"
-msgstr ""
+msgstr "{0} 现已使用 {1} 代币"
 
 #: src/lib/components/banner/systemTokenSwap.svelte
 msgid "<0/> available to swap"
@@ -3699,7 +3694,7 @@ msgstr ""
 #: src/lib/components/banner/systemTokenSwap.svelte
 #: src/routes/[[locale]]/[network]/(account)/swap/+page.svelte
 msgid "Swap"
-msgstr ""
+msgstr "兑换"
 
 #: src/lib/components/banner/pageBanner.svelte
 msgid "<0/><1>Breaking News:</1> EOS Network Rebrands to Vaulta"
@@ -3707,13 +3702,13 @@ msgstr ""
 
 #: src/lib/components/card/tokenoverview.svelte
 msgid "Value"
-msgstr ""
+msgstr "价值"
 
 #: src/lib/components/card/tokenoverview.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.svelte
 msgid "Add Funds"
-msgstr ""
+msgstr "注资"
 
 #: src/lib/components/card/accountbalance.svelte
 #: src/lib/components/card/tokenoverview.svelte
@@ -3722,76 +3717,76 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
 msgid "Available"
-msgstr ""
+msgstr "可用的"
 
 #: src/lib/components/card/tokenoverview.svelte
 #: src/lib/components/chart/tokendistribution.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/+page.svelte
 msgid "Unstaked"
-msgstr ""
+msgstr "已取消质押"
 
 #: src/lib/components/card/tokenoverview.svelte
 #: src/lib/components/chart/tokendistribution.svelte
 msgid "Delegated"
-msgstr ""
+msgstr "委托中"
 
 #: src/lib/components/card/tokenoverview.svelte
 #: src/routes/[[locale]]/[network]/(account)/undelegate/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/undelegate/+page.ts
 msgid "Reclaim"
-msgstr ""
+msgstr "取回"
 
 #: src/lib/components/card/tokenoverview.svelte
 #: src/routes/[[locale]]/[network]/(account)/refund/+page.svelte
 msgid "Refunding"
-msgstr ""
+msgstr "返还中"
 
 #: src/lib/components/card/tokenoverview.svelte
 msgid "Claim"
-msgstr ""
+msgstr "领取"
 
 #: src/lib/components/card/accountbalance.svelte
 msgid "Account Balance"
-msgstr ""
+msgstr "账户余额"
 
 #: src/lib/components/chart/barchart.svelte
 msgid "Yield"
-msgstr ""
+msgstr "收益"
 
 #: src/lib/components/chart/barchart.svelte
 #: src/lib/components/chart/chart-container.svelte
 msgid "Today"
-msgstr ""
+msgstr "今天"
 
 #: src/lib/components/chart/tokendistribution.svelte
 msgid "Distribution"
-msgstr ""
+msgstr "分布"
 
 #: src/lib/components/elements/action.svelte
 msgid "length"
-msgstr ""
+msgstr "长度"
 
 #: src/lib/components/elements/action.svelte
 msgid "No data"
-msgstr ""
+msgstr "无数据"
 
 #: src/lib/components/elements/action.svelte
 msgid "Signed by"
-msgstr ""
+msgstr "由...签名"
 
 #: src/lib/components/elements/action.svelte
 msgid "notified"
-msgstr ""
+msgstr "已通知"
 
 #. placeholder {0}: record.type
 #: src/lib/components/search/result.svelte
 msgid "View {0}"
-msgstr ""
+msgstr "查看 {0}"
 
 #: src/lib/components/elements/unstaking.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/+page.svelte
 msgid "Unstaking"
-msgstr ""
+msgstr "取消质押中"
 
 #: src/lib/components/elements/unstaking.svelte
 msgid ""
@@ -3802,33 +3797,33 @@ msgstr ""
 #: src/lib/components/elements/unstaking.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balances/+page.svelte
 msgid "Amount"
-msgstr ""
+msgstr "数量"
 
 #: src/lib/components/elements/unstaking.svelte
 #: src/routes/[[locale]]/[network]/(account)/refund/+page.svelte
 msgid "Date Available"
-msgstr ""
+msgstr "可用日期"
 
 #. placeholder {0}: String(context.network.chain.name).slice(0, 3)
 #: src/lib/components/search/input.svelte
 msgid "Search {0}..."
-msgstr ""
+msgstr "搜索 {0} 网络……"
 
 #: src/lib/components/search/input.svelte
 msgid "Search Unicove"
-msgstr ""
+msgstr "在 Unicove 中搜索"
 
 #: src/lib/components/search/input.svelte
 msgid "Search Results"
-msgstr ""
+msgstr "搜索结果"
 
 #: src/lib/components/search/input.svelte
 msgid "Recent Activity"
-msgstr ""
+msgstr "近期活动"
 
 #: src/lib/components/search/input.svelte
 msgid "No results found"
-msgstr ""
+msgstr "未找到结果"
 
 #: src/lib/components/search/input.svelte
 msgid ""
@@ -3838,7 +3833,7 @@ msgstr ""
 
 #: src/lib/components/transact/summary.svelte
 msgid "Multi-Sig Proposal Created"
-msgstr ""
+msgstr "已创建多重签名提案"
 
 #: src/lib/components/transact/summary.svelte
 msgid ""
@@ -3854,76 +3849,76 @@ msgstr ""
 
 #: src/lib/components/transact/summary.svelte
 msgid "Transaction Complete"
-msgstr ""
+msgstr "交易完成"
 
 #: src/lib/components/transact/summary.svelte
 #: src/lib/components/transaction/header.svelte
 msgid "Transaction ID"
-msgstr ""
+msgstr "交易 ID"
 
 #: src/lib/components/transact/summary.svelte
 msgid "Transaction Not Found"
-msgstr ""
+msgstr "未找到交易"
 
 #. placeholder {0}: String(transactionId)
 #: src/lib/components/transact/summary.svelte
 msgid "The transaction with ID {0} could not be found."
-msgstr ""
+msgstr "未找到 ID 为 {0} 的交易。"
 
 #: src/lib/components/transact/error.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
 msgid "Transaction Error"
-msgstr ""
+msgstr "交易错误"
 
 #: src/lib/components/transaction/header.svelte
 msgid "Finality Status"
-msgstr ""
+msgstr "最终确定状态"
 
 #: src/lib/components/transaction/header.svelte
 msgid "Irreversible"
-msgstr ""
+msgstr "不可逆的"
 
 #: src/lib/components/transaction/header.svelte
 msgid "Reversible"
-msgstr ""
+msgstr "可逆的"
 
 #: src/lib/components/transaction/header.svelte
 msgid "Date"
-msgstr ""
+msgstr "日期"
 
 #: src/lib/components/transaction/header.svelte
 msgid "Included in Block"
-msgstr ""
+msgstr "已包含在区块中"
 
 #: src/lib/components/transaction/header.svelte
 msgid "Contracts Used"
-msgstr ""
+msgstr "使用的合约"
 
 #: src/lib/components/transaction/header.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 msgid "CPU (μs)"
-msgstr ""
+msgstr "CPU (微秒）"
 
 #: src/lib/components/transaction/header.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 msgid "NET (Bytes)"
-msgstr ""
+msgstr "NET (字节)"
 
 #: src/lib/components/summary/components/transfer.svelte
 msgid "Sent"
-msgstr ""
+msgstr "已发送"
 
 #: src/lib/components/summary/components/transfer.svelte
 msgid "Received"
-msgstr ""
+msgstr "已接收"
 
 #: src/lib/components/summary/eosio/buyrambytes.svelte
 msgid "Requesting"
-msgstr ""
+msgstr "请求中"
 
 #: src/lib/components/summary/eosio/logsystemfee.svelte
 msgid "Fee"
-msgstr ""
+msgstr "费用"
 
 #: src/lib/components/summary/eosio/powerup.svelte
 msgid "renting CPU for"
@@ -3936,18 +3931,18 @@ msgstr ""
 #. placeholder {0}: data.owner
 #: src/lib/components/summary/eosio/refund.svelte
 msgid "System contract refund request for {0}."
-msgstr ""
+msgstr "针对账户 {0} 的系统合约退款请求。"
 
 #: src/lib/components/summary/greymassnoop/noop.svelte
 msgid "The network resources for this transaction were provided by a 3rd party."
-msgstr ""
+msgstr "此交易所需的网络资源由第三方提供。"
 
 #. placeholder {0}: productName
 #. placeholder {0}: productName
 #: src/lib/components/wallets/metamask/install.svelte
 #: src/lib/components/wallets/metamask/snap.svelte
 msgid "Add {0} to MetaMask"
-msgstr ""
+msgstr "将 {0} 添加到 MetaMask"
 
 #. placeholder {0}: productName
 #. placeholder {1}: networkName
@@ -3960,7 +3955,7 @@ msgstr ""
 #. placeholder {0}: productName
 #: src/lib/components/wallets/metamask/install.svelte
 msgid "Begin by installing MetaMask, then come back to this page and install the {0} snap."
-msgstr ""
+msgstr "首先安装 MetaMask，然后返回此页面并安装 {0} snap。"
 
 #: src/lib/components/wallets/metamask/install.svelte
 msgid ""
@@ -3970,7 +3965,7 @@ msgstr ""
 
 #: src/lib/components/wallets/metamask/snap.svelte
 msgid "It looks like you already have MetaMask installed."
-msgstr ""
+msgstr "看起来您已安装 MetaMask。"
 
 #. placeholder {0}: networkName
 #. placeholder {1}: productName
@@ -3985,51 +3980,51 @@ msgstr ""
 #: src/lib/components/wallets/metamask/snap.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/carousel.svelte
 msgid "Install {0}"
-msgstr ""
+msgstr "安装 {0}"
 
 #: src/lib/state/search.svelte.ts
 msgid "Market Overview"
-msgstr ""
+msgstr "市场概览"
 
 #: src/lib/state/search.svelte.ts
 msgid "Purchase RAM"
-msgstr ""
+msgstr "购买 RAM"
 
 #: src/lib/state/search.svelte.ts
 msgid "Transfer tokens"
-msgstr ""
+msgstr "转移代币"
 
 #: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/stake/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/unstake/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/withdraw/+page.svelte
 msgid "Staking overview"
-msgstr ""
+msgstr "质押概览"
 
 #: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/(homepage)/components/staking-rewards.svelte
 msgid "Stake Tokens"
-msgstr ""
+msgstr "质押代币"
 
 #: src/lib/state/search.svelte.ts
 msgid "Unstake tokens"
-msgstr ""
+msgstr "取消质押代币"
 
 #: src/lib/state/search.svelte.ts
 msgid "Manage CPU/NET"
-msgstr ""
+msgstr "管理 CPU/NET"
 
 #: src/lib/state/search.svelte.ts
 msgid "Clear search history"
-msgstr ""
+msgstr "清除搜索历史记录"
 
 #: src/lib/state/search.svelte.ts
 msgid "Switch Account"
-msgstr ""
+msgstr "切换账户"
 
 #: src/routes/[[locale]]/[network]/(account)/fund/+page.svelte
 msgid "Purchase Directly"
-msgstr ""
+msgstr "直接购买"
 
 #. placeholder {0}: context.network.token.symbol.name
 #: src/routes/[[locale]]/[network]/(account)/fund/+page.svelte
@@ -4040,16 +4035,16 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(account)/fund/+page.svelte
 msgid "Token to Purchase"
-msgstr ""
+msgstr "购买代币"
 
 #: src/routes/[[locale]]/[network]/(account)/fund/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/fund/onramps/coinbase.svelte.ts
 msgid "You must be logged in with an account to use this feature."
-msgstr ""
+msgstr "您必须登录账户才能使用此功能。"
 
 #: src/routes/[[locale]]/[network]/(account)/fund/+page.svelte
 msgid "Exchanges"
-msgstr ""
+msgstr "交易所"
 
 #. placeholder {0}: context.network.token.symbol.name
 #: src/routes/[[locale]]/[network]/(account)/fund/+page.svelte
@@ -4060,28 +4055,28 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "Rent resources with PowerUp"
-msgstr ""
+msgstr "使用 PowerUp 租赁资源"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "Rent resources with REX"
-msgstr ""
+msgstr "使用 REX 租赁资源"
 
 #. placeholder {0}: symbolName
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "Stake {0} for resources"
-msgstr ""
+msgstr "质押 {0} 获取资源"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/renting.svelte
 msgid "Until Unstaked"
-msgstr ""
+msgstr "直到解押"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/renting.svelte
 msgid "Usable for"
-msgstr ""
+msgstr "可用于"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/renting.svelte
 msgid "Balance available"
-msgstr ""
+msgstr "可用余额"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/renting.svelte
 msgid "Amount of CPU <0/>"
@@ -4093,30 +4088,30 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(account)/resources/renting.svelte
 msgid "Rent Resources for my account"
-msgstr ""
+msgstr "为我的账户租赁资源"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/renting.svelte
 msgid "Enter the account name"
-msgstr ""
+msgstr "输入账户名"
 
 #. placeholder {0}: rentState.cost
 #: src/routes/[[locale]]/[network]/(account)/resources/renting.svelte
 msgid "Rent for {0}"
-msgstr ""
+msgstr "以 {0} 租赁"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/renting.svelte
 msgid "Confirm Rent"
-msgstr ""
+msgstr "确认租赁"
 
 #: src/routes/[[locale]]/[network]/(account)/refund/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/refund/+page.ts
 msgid "Refund"
-msgstr ""
+msgstr "返还"
 
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/stake/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/+page.svelte
 msgid "Current APR"
-msgstr ""
+msgstr "当前年利率"
 
 #: src/routes/[[locale]]/[network]/(account)/staking/+page.svelte
 msgid "Staking Balance"
@@ -4129,23 +4124,23 @@ msgstr ""
 #. placeholder {0}: data.network.chain.name
 #: src/routes/[[locale]]/[network]/(account)/staking/+page.svelte
 msgid "This staking interface is not available on {0}."
-msgstr ""
+msgstr "此质押界面在 {0} 上不可用。"
 
 #: src/routes/[[locale]]/[network]/(account)/staking/stakingcalculator.svelte
 msgid "Daily"
-msgstr ""
+msgstr "每日"
 
 #: src/routes/[[locale]]/[network]/(account)/staking/stakingcalculator.svelte
 msgid "Monthly"
-msgstr ""
+msgstr "每月"
 
 #: src/routes/[[locale]]/[network]/(account)/staking/stakingcalculator.svelte
 msgid "Yearly"
-msgstr ""
+msgstr "每年"
 
 #: src/routes/[[locale]]/[network]/(account)/staking/stakingcalculator.svelte
 msgid "Staking Calculator"
-msgstr ""
+msgstr "质押计算器"
 
 #. placeholder {0}: String(network.chain.systemToken!.symbol.name)
 #. placeholder {1}: apr
@@ -4158,7 +4153,7 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(account)/undelegate/+page.svelte
 msgid "Delegated Amount"
-msgstr ""
+msgstr "已委托金额"
 
 #: src/routes/[[locale]]/[network]/(account)/undelegate/+page.svelte
 msgid ""
@@ -4170,26 +4165,26 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Actor"
-msgstr ""
+msgstr "行为人"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Votes"
-msgstr ""
+msgstr "投票"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Top 21"
-msgstr ""
+msgstr "前 21 名"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Standby"
-msgstr ""
+msgstr "候补状态"
 
 #: src/routes/[[locale]]/[network]/(homepage)/components/articles.svelte
 msgid "Read more"
-msgstr ""
+msgstr "阅读更多"
 
 #. placeholder {0}: networkName
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
@@ -4203,7 +4198,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
 msgid "Stake, Send, Manage Tokens, and Explore {0} – all with ease"
-msgstr ""
+msgstr "轻松质押,发送,管理代币和探索{0}网络"
 
 #. placeholder {0}: networkName
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
@@ -4213,18 +4208,18 @@ msgstr ""
 #. placeholder {0}: productName
 #: src/routes/[[locale]]/[network]/(homepage)/components/carousel.svelte
 msgid "The {0} for MetaMask"
-msgstr ""
+msgstr "{0} 的 MetaMask 钱包"
 
 #. placeholder {0}: networkName
 #. placeholder {1}: productName
 #: src/routes/[[locale]]/[network]/(homepage)/components/carousel.svelte
 msgid "MetaMask, an the industry leading self-custody wallet, is now compatible with Unicove and the {0} network. Install the {1} snap for MetaMask to get started."
-msgstr ""
+msgstr "MetaMask 是行业领先的自托管钱包，现在已兼容 Unicove 和 {0} 网络。安装 MetaMask 的 {1} Snap 即可开始使用。"
 
 #. placeholder {0}: props.network.chain.name
 #: src/routes/[[locale]]/[network]/(homepage)/components/legacy-token-swap.svelte
 msgid "{0} Token Swap has begun!"
-msgstr ""
+msgstr "{0}代币置换已开始！"
 
 #. placeholder {0}: props.network.config.legacytoken?.name
 #. placeholder {1}: props.network.token.name
@@ -4237,17 +4232,17 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/legacy-token-swap.svelte
 msgid "Swap to {0}"
-msgstr ""
+msgstr "兑换为{0}"
 
 #. placeholder {0}: network.chain.name
 #. placeholder {1}: String(network.token.symbol.name)
 #: src/routes/[[locale]]/[network]/(homepage)/components/charts.svelte
 msgid "The {0} network's native token, {1}, can be used for staking rewards, to buy and sell RAM, to pay transaction fees, and more. It is traded on most major exchanges."
-msgstr ""
+msgstr "{0} 网络的原生代币 {1} 可用于质押奖励、购买和出售 RAM、支付交易费用等。该代币在大多数主流交易所均可交易。"
 
 #: src/routes/[[locale]]/[network]/(homepage)/components/charts.svelte
 msgid "Get Tokens"
-msgstr ""
+msgstr "获取代币"
 
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
@@ -4258,11 +4253,11 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(homepage)/components/charts.svelte
 msgid "Send {0} Tokens"
-msgstr ""
+msgstr "发送{0}代币"
 
 #: src/routes/[[locale]]/[network]/(homepage)/components/charts.svelte
 msgid "KB (RAM): Tokenized Data Storage"
-msgstr ""
+msgstr "KB（RAM）：代币化数据存储"
 
 #. placeholder {0}: ramtoken.name
 #. placeholder {1}: ramtoken.name
@@ -4275,8 +4270,8 @@ msgstr ""
 #. placeholder {1}: quote.name
 #. placeholder {0}: base.name
 #. placeholder {1}: quote.name
-#. placeholder {0}: data.network.token.name
-#. placeholder {1}: data.network.getRamToken().name
+#. placeholder {0}: base.name
+#. placeholder {1}: quote.name
 #. placeholder {0}: base.name
 #. placeholder {1}: quote.name
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.ts
@@ -4284,11 +4279,11 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/charts.svelte
 msgid "Swap {0}/{1}"
-msgstr ""
+msgstr "兑换 {0}/{1} 交易对"
 
 #: src/routes/[[locale]]/[network]/(homepage)/components/stakedhex.svelte
 msgid "Total Staked"
-msgstr ""
+msgstr "总质押"
 
 #. placeholder {0}: network.token.name
 #: src/routes/[[locale]]/[network]/(homepage)/components/staking-rewards.svelte
@@ -4316,7 +4311,7 @@ msgstr ""
 #. placeholder {0}: networkName
 #: src/routes/[[locale]]/[network]/(homepage)/components/performance-grid.svelte
 msgid "System-level DeFi is offered by the {0} network both staking and RAM trading. The network also supports a variety of DeFi applications, including decentralized exchanges, lending platforms, swaps, and more."
-msgstr ""
+msgstr "{0} 网络提供系统级 DeFi 功能，包括质押和 RAM 交易。该网络还支持多种 DeFi 应用，如去中心化交易所、借贷平台、代币交换等。"
 
 #. placeholder {0}: network.token.name
 #: src/routes/[[locale]]/[network]/(homepage)/components/performance-grid.svelte
@@ -4325,7 +4320,7 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(homepage)/components/performance-grid.svelte
 msgid "Native TVL"
-msgstr ""
+msgstr "原生总锁仓价值 TVL"
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
@@ -4338,7 +4333,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(account)/upload/[[name]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Account Name"
-msgstr ""
+msgstr "账号名称"
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
@@ -4370,22 +4365,22 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
 msgid "Change RAM options for new account"
-msgstr ""
+msgstr "更改新帐户的 RAM 选项"
 
 #. placeholder {0}: ramBytesMin
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
 msgid "RAM bytes to purchase for new account (min: {0})"
-msgstr ""
+msgstr "为新账户购买的 RAM 字节数（最小值：{0}）"
 
 #. placeholder {0}: context.wharf.session.actor
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
 msgid "Transfer RAM from my account: {0}"
-msgstr ""
+msgstr "从我的账户 {0} 转移 RAM"
 
 #. placeholder {0}: ramBytesUseTransfer ? `by transferring ${ramBytes} bytes of RAM` : `by paying ${String(ramCost)} for RAM`
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
 msgid "Create Account {0}"
-msgstr ""
+msgstr "请选择用于创建账户的方法：{0}"
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
 msgid ""
@@ -4395,7 +4390,7 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
 msgid "Account Created"
-msgstr ""
+msgstr "帐户已创建"
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
 msgid "Your new account has been created successfully."
@@ -4407,11 +4402,11 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/key/[publicKey]/+page.ts
 msgid "Public Key"
-msgstr ""
+msgstr "公钥"
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
 msgid "Generate Key"
-msgstr ""
+msgstr "生成密钥"
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
 msgid "Private Key <0/>"
@@ -4419,7 +4414,7 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
 msgid "Private Key"
-msgstr ""
+msgstr "私钥"
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
 msgid ""
@@ -4429,11 +4424,11 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
 msgid "I have saved this private key."
-msgstr ""
+msgstr "我保存了这个私钥。"
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
 msgid "Instructions"
-msgstr ""
+msgstr "操作指令"
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
 msgid ""
@@ -4444,16 +4439,16 @@ msgstr ""
 #. placeholder {0}: context.network.token.name
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
 msgid "Send {0} to account"
-msgstr ""
+msgstr "将 {0} 发送到账户"
 
 #. placeholder {0}: context.network.token.name
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
 msgid "Amount of {0} to send"
-msgstr ""
+msgstr "要发送的 {0} 数量"
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
 msgid "Transfer Memo"
-msgstr ""
+msgstr "转账备注"
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
 msgid ""
@@ -4463,11 +4458,11 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 msgid "Activity"
-msgstr ""
+msgstr "活动"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 msgid "Permissions"
-msgstr ""
+msgstr "权限"
 
 #. placeholder {0}: data.account.proposals.length
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
@@ -4481,54 +4476,54 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/key/[publicKey]/+page.svelte
 msgid "Associated Accounts"
-msgstr ""
+msgstr "关联账户"
 
 #: src/routes/[[locale]]/[network]/(explorer)/key/[publicKey]/+page.svelte
 msgid "No accounts found"
-msgstr ""
+msgstr "未找到账户"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.svelte
 msgid "Total Account Value"
-msgstr ""
+msgstr "账户总值"
 
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/transaction/+page.svelte
 msgid "Transaction"
-msgstr ""
+msgstr "交易"
 
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 msgid "No transactions"
-msgstr ""
+msgstr "无交易记录"
 
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 msgid "Block Details"
-msgstr ""
+msgstr "区块详情"
 
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 msgid "Block Number"
-msgstr ""
+msgstr "区块号"
 
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 msgid "Producer Name"
-msgstr ""
+msgstr "出块人名称"
 
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 msgid "Total CPU"
-msgstr ""
+msgstr "CPU 总量"
 
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 msgid "Total NET"
-msgstr ""
+msgstr "NET 总量"
 
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 msgid "Total Actions"
-msgstr ""
+msgstr "总操作数"
 
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 msgid "Block ID"
-msgstr ""
+msgstr "区块 ID"
 
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 msgid "<0/> Previous Block"
@@ -4541,7 +4536,7 @@ msgstr ""
 #. placeholder {0}: productName
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "{0} + MetaMask"
-msgstr ""
+msgstr "将 {0} 添加到 MetaMask"
 
 #. placeholder {0}: productName
 #. placeholder {1}: String(latestVersion)
@@ -4554,7 +4549,7 @@ msgstr ""
 #. placeholder {0}: productName
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "Update {0}"
-msgstr ""
+msgstr "更新 {0}"
 
 #. placeholder {0}: productName
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
@@ -4572,7 +4567,7 @@ msgstr ""
 #. placeholder {0}: context.wharf.session.actor
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "You are logged in as {0} but are not using MetaMask."
-msgstr ""
+msgstr "您已登录为 {0}，但未使用 MetaMask。"
 
 #. placeholder {0}: networkName
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
@@ -4583,15 +4578,15 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "Create an account"
-msgstr ""
+msgstr "创建账户"
 
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "FAQ"
-msgstr ""
+msgstr "常见问题"
 
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "What is a MetaMask snap?"
-msgstr ""
+msgstr "什么是 MetaMask Snap?"
 
 #. placeholder {0}: networkName
 #. placeholder {1}: productName
@@ -4604,7 +4599,7 @@ msgstr ""
 #. placeholder {0}: productName
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "How do I install the {0}?"
-msgstr ""
+msgstr "如何安装 {0}?"
 
 #. placeholder {0}: productName
 #. placeholder {1}: productName
@@ -4618,7 +4613,7 @@ msgstr ""
 #. placeholder {0}: productName
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "What does the {0} do?"
-msgstr ""
+msgstr "{0}能做什么?"
 
 #. placeholder {0}: productName
 #. placeholder {1}: networkName
@@ -4632,7 +4627,7 @@ msgstr ""
 #. placeholder {0}: productName
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "What does the {0} not do?"
-msgstr ""
+msgstr "{0}不能做什么?"
 
 #. placeholder {0}: productName
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
@@ -4644,7 +4639,7 @@ msgstr ""
 #. placeholder {0}: productName
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "How do I sign transactions using the {0}?"
-msgstr ""
+msgstr "如何使用 {0}签署交易?"
 
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "Please see our guide on <0/>"
@@ -4653,14 +4648,14 @@ msgstr ""
 #. placeholder {0}: productName
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "Is the {0} free to use?"
-msgstr ""
+msgstr "{0} 是否免费使用？"
 
 #. placeholder {0}: productName
 #. placeholder {1}: networkName
 #. placeholder {2}: networkName
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "Yes, the {0} software is completely free to use. However, accounts on the {1} Network require a small amount of {2} before they are created."
-msgstr ""
+msgstr "是的，{0} 软件完全免费使用。然而，在 {2} 网络上创建账户之前，需要少量的 {2} 代币。"
 
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid ""
@@ -4672,7 +4667,7 @@ msgstr ""
 #. placeholder {0}: networkName
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "Where can I view and manage my {0} account?"
-msgstr ""
+msgstr "我可以在哪里查看和管理我的 {0} 账户？"
 
 #. placeholder {0}: networkName
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
@@ -4691,7 +4686,7 @@ msgstr ""
 #. placeholder {0}: productName
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "Is my private key or recovery phrase exposed when using the {0} Snap?"
-msgstr ""
+msgstr "在使用 {0} Snap 时，我的私钥或恢复短语是否会暴露？"
 
 #. placeholder {0}: productName
 #. placeholder {1}: networkName
@@ -4708,7 +4703,7 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "How does MetaMask configure my owner and active keys?"
-msgstr ""
+msgstr "MetaMask 如何配置我的所有者密钥和活动密钥？"
 
 #. placeholder {0}: productName
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
@@ -4728,7 +4723,7 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "How does find my owner and active keys?"
-msgstr ""
+msgstr "如何查找我的所有者密钥和活动密钥？"
 
 #. placeholder {0}: productName
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
@@ -4742,7 +4737,7 @@ msgstr ""
 #. placeholder {1}: productName
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "Can I access all {0} apps using {1} for MetaMask?"
-msgstr ""
+msgstr "我可以通过 MetaMask 上的 {1}访问所有 {0} 应用吗?"
 
 #. placeholder {0}: networkName
 #. placeholder {1}: productName
@@ -4759,45 +4754,45 @@ msgstr ""
 #. placeholder {0}: productName
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "How do I reach out for {0} support?"
-msgstr ""
+msgstr "我如何联系 {0} 支持团队？"
 
 #. placeholder {0}: productName
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "If you have any issues with the {0} itself, please feel free to reach out to us at"
-msgstr ""
+msgstr "如果您在使用 {0} 时遇到任何问题，请随时通过以下方式联系我们"
 
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "or by visiting our Support portal at:"
-msgstr ""
+msgstr "或访问我们的客户支持门户："
 
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "Your Public Keys"
-msgstr ""
+msgstr "你的公钥"
 
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "MetaMask Public Key (Active)"
-msgstr ""
+msgstr "MetaMask 公钥（管理者）"
 
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "MetaMask Public Key (Owner)"
-msgstr ""
+msgstr "MetaMask 公钥（所有者）"
 
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "MetaMask Snaps Directory"
-msgstr ""
+msgstr "MetaMask Snaps 目录"
 
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "Source Code"
-msgstr ""
+msgstr "源代码"
 
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/unstake/+page.svelte
 msgid "Withdrawable in 21 days"
-msgstr ""
+msgstr "21 天内可提取"
 
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/stake/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/unstake/+page.svelte
 msgid "Currently staked"
-msgstr ""
+msgstr "当前已质押"
 
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/unstake/+page.svelte
 msgid "Amount to Unstake"
@@ -4815,26 +4810,26 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/stake/+page.svelte
 msgid "Minimum lockup"
-msgstr ""
+msgstr "最低锁定期"
 
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/stake/+page.svelte
 msgid "Estimated Yield (Yearly)"
-msgstr ""
+msgstr "预估收益（年化）"
 
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/withdraw/+page.svelte
 msgid "Currently Withdrawable"
-msgstr ""
+msgstr "当前可提取"
 
 #. placeholder {0}: data.account.name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/authority/+page.svelte
 msgid "The {0} account has some form of authority assigned to the other accounts listed below."
-msgstr ""
+msgstr "账户 {0} 已将部分权限授予以下列出的其他账户。"
 
 #. placeholder {0}: auth.weight
 #. placeholder {1}: auth.threshold
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/authority/+page.svelte
 msgid "Weight of {0} and threshold of {1}."
-msgstr ""
+msgstr "权重 {0}，阈值 {1}。"
 
 #. placeholder {0}: permission
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/authority/+page.svelte
@@ -4843,11 +4838,11 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/authority/+page.svelte
 msgid "No available authorities for this account."
-msgstr ""
+msgstr "此账户没有可用的权限。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balances/+page.svelte
 msgid "Token"
-msgstr ""
+msgstr "代币"
 
 #. placeholder {0}: context.settings.data.displayCurrency
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balances/+page.svelte
@@ -4856,18 +4851,18 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/+page.svelte
 msgid "Keys and Permissions"
-msgstr ""
+msgstr "密钥和权限"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/+page.svelte
 msgid "New Permission"
-msgstr ""
+msgstr "新权限"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/permission.svelte
 msgid "Permission Name"
-msgstr ""
+msgstr "权限名称"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/permission.svelte
 msgid "<0>Threshold</0> Required"
@@ -4880,23 +4875,23 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/permission.svelte
 msgid "Weight"
-msgstr ""
+msgstr "权重"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/permission.svelte
 msgid "Authorization"
-msgstr ""
+msgstr "授权"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
 msgid "Proposal ID"
-msgstr ""
+msgstr "提案ID"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
 msgid "No proposals found."
-msgstr ""
+msgstr "未找到提案。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Requested Approvals"
-msgstr ""
+msgstr "请求批准"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "<0/> Approved"
@@ -4909,63 +4904,63 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Permission"
-msgstr ""
+msgstr "权限"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Role"
-msgstr ""
+msgstr "角色"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Signer"
-msgstr ""
+msgstr "签名者"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Approved"
-msgstr ""
+msgstr "已批准"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Requested"
-msgstr ""
+msgstr "已请求"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Multisig Details"
-msgstr ""
+msgstr "多签详情"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Proposer"
-msgstr ""
+msgstr "提案人"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Proposal Name"
-msgstr ""
+msgstr "提案名称"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Expired"
-msgstr ""
+msgstr "已过期"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Expiration"
-msgstr ""
+msgstr "过期时间"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Hash"
-msgstr ""
+msgstr "哈希"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Unapprove"
-msgstr ""
+msgstr "不批准"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Approve"
-msgstr ""
+msgstr "批准"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Cancel MSIG"
-msgstr ""
+msgstr "撤消多签"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Execute"
-msgstr ""
+msgstr "执行"
 
 #. placeholder {0}: variant
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
@@ -4986,139 +4981,139 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
 msgid "Transaction Summary"
-msgstr ""
+msgstr "交易摘要"
 
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
 msgid "The actions and inline actions performed as a result of the transaction."
-msgstr ""
+msgstr "该交易所执行的操作及其触发的内联操作。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Parent Permission"
-msgstr ""
+msgstr "父权限"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Permission Type"
-msgstr ""
+msgstr "权限类型"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Note: Changing the permission type will reset any unsaved edits made to this permission."
-msgstr ""
+msgstr "注意：更改权限类型将重置对此权限所做的所有未保存更改。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Weight Threshold"
-msgstr ""
+msgstr "权重门槛"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "The total weight of all keys, accounts, and waits must be greater than or equal to this threshold to approve a transaction."
-msgstr ""
+msgstr "所有密钥、账户和等待时间的权重总和，必须大于或等于设定的门槛值，交易才能被批准执行。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Required"
-msgstr ""
+msgstr "必需的"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Threshold"
-msgstr ""
+msgstr "阈值"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Key Pairs"
-msgstr ""
+msgstr "密钥对"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Enter the Public Key(s) which can sign on behalf of this permission."
-msgstr ""
+msgstr "请输入可代表此权限签名的公钥(s)。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Add Key"
-msgstr ""
+msgstr "添加密钥"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Other Accounts"
-msgstr ""
+msgstr "其他账户"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Specify other accounts and permissions that can control this permission."
-msgstr ""
+msgstr "指定其他账户及其权限可以控制这个权限。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Wait (Seconds)"
-msgstr ""
+msgstr "等待时间（秒）"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Waiting Period"
-msgstr ""
+msgstr "等待期"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Specify the minimum amount of time a proposal must be active before the transaction can be completed."
-msgstr ""
+msgstr "指定交易完成之前提案必须保持活跃的最短时间。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Add Wait"
-msgstr ""
+msgstr "添加等待队列"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Contract Isolation"
-msgstr ""
+msgstr "合约隔离"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Restrict this permission to specific contracts and actions. Leave the action blank to allow all actions on a contract."
-msgstr ""
+msgstr "将此权限限制在特定的合约和操作上。如果将操作项留空，则表示允许对该合约执行所有操作。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Add Contract"
-msgstr ""
+msgstr "添加联系人"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Confirm Details"
-msgstr ""
+msgstr "确认详细信息"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Carefully review and confirm the details of this transaction. Incorrectly setting your permissions could cause permanent loss of access to this permission or account!"
-msgstr ""
+msgstr "请仔细检查并确认此交易的详细信息。错误地设置权限可能导致您永久失去对此权限或账户的访问权限！"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Save Permission"
-msgstr ""
+msgstr "保留权限"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Basic Information"
-msgstr ""
+msgstr "基本信息"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "The name, parent permission, and type (Basic or Advanced). Name and parent fields cannot be modified after the permission is created."
-msgstr ""
+msgstr "名称、父权限和类型（基础或高级）。权限一旦创建，名称和父权限字段将无法修改。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Back to Permissions"
-msgstr ""
+msgstr "返回权限"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Delete Permission"
-msgstr ""
+msgstr "删除权限"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/manager.svelte.ts
 msgid "Basic"
-msgstr ""
+msgstr "基础的"
 
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/actions/+page.svelte
 msgid "The actions performed in the transaction, without the inline actions."
-msgstr ""
+msgstr "该交易中执行的操作，不包括内联操作。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/ram/+page.svelte
 msgid "RAM Usage"
-msgstr ""
+msgstr "RAM 使用量"
 
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/ram/+page.svelte
 msgid "The deltas in RAM usage for each trace in the transaction."
-msgstr ""
+msgstr "每个交易踪迹中RAM使用量的变化量。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/transaction/+page.svelte
 msgid "Signatures"
-msgstr ""
+msgstr "签名"
 
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/traces/+page.svelte
 msgid "The individual transaction traces from the transaction."
-msgstr ""
+msgstr "来自该交易的各个执行追踪记录。"
 
 #. placeholder {0}: data.base.name
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
@@ -5145,142 +5140,142 @@ msgstr ""
 #. placeholder {0}: network.chain.name
 #: src/routes/+layout.server.ts
 msgid "Unicove - The {0} web wallet and block explorer"
-msgstr ""
+msgstr "Unicove-{0} 网页钱包和区块浏览器"
 
 #. placeholder {0}: String(network.chain.systemToken?.symbol.name)
 #: src/routes/[[locale]]/[network]/(account)/refund/+page.ts
 msgid "Claim previously delegated {0} tokens"
-msgstr ""
+msgstr "领取先前委托的{0}代币"
 
 #. placeholder {0}: String(network.chain.name)
 #: src/routes/[[locale]]/[network]/(account)/refund/+page.ts
 msgid "Refund Delegated {0} Tokens"
-msgstr ""
+msgstr "退款已委托的 {0} 代币"
 
 #. placeholder {0}: String(network.chain.name)
 #: src/routes/[[locale]]/[network]/(account)/refund/+page.ts
 msgid "Claim previously delegated {0} tokens."
-msgstr ""
+msgstr "领取之前委托的 {0} 代币。"
 
 #: src/routes/[[locale]]/[network]/(account)/fund/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/fund/+page.ts
 msgid "Fund Account"
-msgstr ""
+msgstr "为账户充值"
 
 #. placeholder {0}: network.token.symbol.name
 #: src/routes/[[locale]]/[network]/(account)/fund/+page.ts
 msgid "Purchase {0} tokens to fund your account"
-msgstr ""
+msgstr "购买 {0} 代币以为您的账户提供资金"
 
 #. placeholder {0}: network.token.symbol.name
 #: src/routes/[[locale]]/[network]/(account)/fund/+page.ts
 msgid "Learn how to fund your account with {0} tokens through various methods including cryptocurrency exchanges and on-ramp providers."
-msgstr ""
+msgstr "了解如何通过多种方式为您的账户充值 {0} 代币，包括使用加密货币交易所和上链服务提供商。"
 
 #: src/routes/[[locale]]/[network]/(account)/swap/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/swap/+page.ts
 msgid "Swaps"
-msgstr ""
+msgstr "兑换"
 
 #. placeholder {0}: network.chain.name
 #. placeholder {0}: network.chain.name
 #: src/routes/[[locale]]/[network]/(account)/swap/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/swap/+page.ts
 msgid "Available token swaps on the {0} network"
-msgstr ""
+msgstr "{0} 网络上可用的代币兑换对"
 
 #. placeholder {0}: network.chain.name
 #: src/routes/[[locale]]/[network]/(account)/resources/+layout.ts
 msgid "Manage CPU, NET, and RAM resources on the {0} Network."
-msgstr ""
+msgstr "管理{0}网络上的 CPU、NET 和 RAM 资源。"
 
 #. placeholder {0}: network.chain.name
 #: src/routes/[[locale]]/[network]/(account)/resources/+layout.ts
 msgid "An overview of the multiple network resources usable on the {0} Network providing access to manage resources using an compatible wallet."
-msgstr ""
+msgstr "{0}网络上可用的多种网络资源概述，提供使用兼容钱包管理资源的访问权限。"
 
 #. placeholder {0}: network.token.name
 #. placeholder {0}: network.token.name
 #: src/routes/[[locale]]/[network]/(account)/undelegate/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/undelegate/+page.ts
 msgid "Undelegate and reclaim previously delegated {0} tokens"
-msgstr ""
+msgstr "撤销委托并回收已委托的 {0} 代币"
 
 #. placeholder {0}: network.token.name
 #: src/routes/[[locale]]/[network]/(account)/undelegate/+page.ts
 msgid "Reclaim Delegated {0} Tokens"
-msgstr ""
+msgstr "回收已委托的 {0} 代币"
 
 #. placeholder {0}: network.chain.systemToken?.symbol.name || 'tokens'
 #: src/routes/[[locale]]/[network]/(account)/staking/+layout.ts
 msgid "Stake {0} to earn rewards."
-msgstr ""
+msgstr "质押 {0} 以赚取奖励。"
 
 #. placeholder {0}: network.chain.name
 #. placeholder {1}: network.chain.systemToken?.symbol.name || 'tokens'
 #. placeholder {2}: network.chain.name
 #: src/routes/[[locale]]/[network]/(account)/staking/+layout.ts
 msgid "An overview of staking on the {0} network providing easy access to stake, unstake, and withdraw {1} tokens using an {2} compatible wallet."
-msgstr ""
+msgstr "关于在 {2} 网络上的质押概述，提供通过 {2} 兼容钱包轻松进行质押、取消质押和提取 {1} 代币的功能。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+layout.ts
 msgid "Block Producers"
-msgstr ""
+msgstr "Block Producers"
 
 #. placeholder {0}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+layout.ts
 msgid "Validators on the {0} network."
-msgstr ""
+msgstr "Validators on the {0} network."
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
 msgid "Smart Contract Account Creation"
-msgstr ""
+msgstr "智能合约账户创建"
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
 msgid "Create an account using a basic token transfer to a smart contract"
-msgstr ""
+msgstr "通过向智能合约进行基本代币转账来创建账户"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/stake/+page.ts
 msgid "Renting"
-msgstr ""
+msgstr "租赁中"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/rex/+page.ts
 msgid "Rent with Rex"
-msgstr ""
+msgstr "通过REX租用"
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.ts
 msgid "Create an account using your existing account"
-msgstr ""
+msgstr "使用您现有的账户创建新账户"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/powerup/+page.ts
 msgid "Rent Resources"
-msgstr ""
+msgstr "资源租赁"
 
 #. placeholder {0}: network.chain.name
 #: src/routes/[[locale]]/[network]/(account)/resources/powerup/+page.ts
 msgid "Rent CPU and NET resources on the {0} Network."
-msgstr ""
+msgstr "管理{0}网络上的 CPU和NET 资源。"
 
 #. placeholder {0}: network.chain.name
 #: src/routes/[[locale]]/[network]/(account)/resources/powerup/+page.ts
 msgid "Rent Resources | {0} Network"
-msgstr ""
+msgstr "资源租赁 | {0} 网络"
 
 #. placeholder {0}: network.chain.name
 #. placeholder {1}: network.chain.name
 #: src/routes/[[locale]]/[network]/(account)/resources/powerup/+page.ts
 msgid "Rent CPU and NET resources on the {0} Network using an {1} compatible wallet."
-msgstr ""
+msgstr "使用与 {1} 网络兼容的钱包，在 {1} 网络上租用 CPU 和 NET 资源。"
 
 #. placeholder {0}: network.config.metamask.name
 #. placeholder {0}: network.config.metamask.name
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.ts
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.ts
 msgid "MetaMask + {0}"
-msgstr ""
+msgstr "MetaMask +名字{0}"
 
 #. placeholder {0}: network.chain.name
 #. placeholder {1}: network.config.metamask.name
@@ -5289,13 +5284,13 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.ts
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.ts
 msgid "Get started with MetaMask on the {0} Network with the {1} snap."
-msgstr ""
+msgstr "通过 {1} 钱包 snap 在 {0} 网络上开始使用 MetaMask。"
 
 #. placeholder {0}: params.contract
 #. placeholder {1}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.ts
 msgid "Contract: {0} | {1}"
-msgstr ""
+msgstr "合约：{0} | {1}"
 
 #. placeholder {0}: params.contract
 #. placeholder {1}: network.chain.name
@@ -5304,29 +5299,29 @@ msgstr ""
 #. placeholder {4}: abi.structs.length
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.ts
 msgid "An overview of the {0} smart contract on the {1} network. This contract contains {2} actions, {3} tables, and {4} structs."
-msgstr ""
+msgstr "关于 {1} 网络上 {0} 智能合约的概述。该合约包含 {2} 个操作、{3} 个数据表和 {4} 个数据结构。"
 
 #. placeholder {0}: accounts.length
 #. placeholder {1}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/key/[publicKey]/+page.ts
 msgid "A public key associated with {0} account(s) on the {1} network."
-msgstr ""
+msgstr "与 {1} 网络上的 {0} 个账户(s)关联的公钥。"
 
 #. placeholder {0}: accounts.length
 #: src/routes/[[locale]]/[network]/(explorer)/key/[publicKey]/+page.ts
 msgid "The {0} account(s) associated with this public key"
-msgstr ""
+msgstr "与此公钥关联的 {0} 个账户(s)"
 
 #. placeholder {0}: String(params.name)
 #. placeholder {1}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.ts
 msgid "An overview of the {0} account on the {1} Network. View account assets, activity, resources and more."
-msgstr ""
+msgstr "在 {1} 网络上查看 {0} 账户的概览。查看账户资产、活动、资源等信息。"
 
 #. placeholder {0}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.ts
 msgid "Account overview on the {0} Network"
-msgstr ""
+msgstr "{0} 网络的账户概览"
 
 #. placeholder {0}: params.number
 #. placeholder {1}: block.producer
@@ -5335,97 +5330,97 @@ msgstr ""
 #. placeholder {4}: actionCount
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+layout.ts
 msgid "Block #{0} was produced by {1} on {2}, which included {3} transactions performing {4} actions."
-msgstr ""
+msgstr "区块 #{0} 是由 {1} 在 {2} 生产的，该区块包含了 {3} 笔交易，执行了 {4} 个操作。"
 
 #. placeholder {0}: params.number
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+layout.ts
 msgid "Block #{0}"
-msgstr ""
+msgstr "区块 #{0}"
 
 #. placeholder {0}: String(network.token.symbol.name)
 #. placeholder {0}: String(network.token.symbol.name)
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/stake/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/stake/+page.ts
 msgid "Stake {0} Tokens"
-msgstr ""
+msgstr "质押 {0} 代币"
 
 #. placeholder {0}: String(network.token.symbol.name)
 #. placeholder {1}: String(network.chain.name)
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/stake/+page.ts
 msgid "Stake {0} tokens and earn rewards using an {1} compatible wallet."
-msgstr ""
+msgstr "质押 {0} 代币，并使用兼容 {1} 的钱包赚取奖励。"
 
 #. placeholder {0}: String(network.chain.systemToken?.symbol.name)
 #. placeholder {0}: String(network.chain.systemToken?.symbol.name)
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/unstake/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/unstake/+page.ts
 msgid "Unstake {0} tokens"
-msgstr ""
+msgstr "取消质押 {0} 代币"
 
 #. placeholder {0}: String(network.chain.systemToken?.symbol.name)
 #. placeholder {1}: String(network.chain.name)
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/unstake/+page.ts
 msgid "Unstake {0} tokens and begin claiming the balance of your rewards using an {1} compatible wallet."
-msgstr ""
+msgstr "解除质押 {0} 代币，并使用兼容 {1} 的钱包开始领取您的奖励余额。"
 
 #. placeholder {0}: params.name
 #. placeholder {0}: params.name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/authority/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/authority/+page.ts
 msgid "Accounts that allow the {0} account to sign on their behalf"
-msgstr ""
+msgstr "允许 {0} 帐户代表其签名的帐户"
 
 #. placeholder {0}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.ts
 msgid "Recent activity on the {0} Network."
-msgstr ""
+msgstr "{0} 网络中的近期活动。"
 
 #. placeholder {0}: params.name
 #. placeholder {1}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.ts
 msgid "Account Activity for {0} | {1} Network"
-msgstr ""
+msgstr "{0} 的账户活动 | {1} 网络"
 
 #. placeholder {0}: params.name
 #. placeholder {1}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.ts
 msgid "View the transaction history of the {0} account on the {1} network."
-msgstr ""
+msgstr "查看 {1} 网络中 {0} 账户的历史交易记录。"
 
 #. placeholder {0}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balances/+page.ts
 msgid "Token balances on the {0} Network."
-msgstr ""
+msgstr "{0} 网络中的代币余额。"
 
 #. placeholder {0}: params.name
 #. placeholder {1}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balances/+page.ts
 msgid "Token Balances | {0} | {1} Network"
-msgstr ""
+msgstr "代币余额 | {0} | {1} 网络"
 
 #. placeholder {0}: params.name
 #. placeholder {1}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balances/+page.ts
 msgid "The token balances of the {0} account on the {1} network."
-msgstr ""
+msgstr "{1} 网络中 {0} 账户的代币余额。"
 
 #. placeholder {0}: String(network.chain.systemToken?.symbol.name)
 #. placeholder {0}: String(network.chain.systemToken?.symbol.name)
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/withdraw/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/withdraw/+page.ts
 msgid "Withdraw {0} tokens from staking"
-msgstr ""
+msgstr "从质押中提取 {0} 代币"
 
 #. placeholder {0}: String(network.chain.systemToken?.symbol.name)
 #. placeholder {1}: String(network.chain.name)
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/withdraw/+page.ts
 msgid "Withdraw {0} tokens from the staking contract to add them to your available balance using an {1} compatible wallet."
-msgstr ""
+msgstr "使用兼容 {1} 的钱包从质押合约中提取 {0} 代币，并将其添加到您的可用余额中。"
 
 #. placeholder {0}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/+page.ts
 msgid "Permissions on the {0} Network"
-msgstr ""
+msgstr "{0} 网络中的权限"
 
 #. placeholder {0}: params.name
 #. placeholder {1}: network.chain.name
@@ -5434,13 +5429,13 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.ts
 msgid "Permissions | {0} | {1} Network"
-msgstr ""
+msgstr "权限 | {0} | {1}网络"
 
 #. placeholder {0}: params.name
 #. placeholder {1}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/+page.ts
 msgid "Permissions for {0} on the {1} network."
-msgstr ""
+msgstr "{1}网络中的{0} 账户权限。"
 
 #. placeholder {0}: params.name
 #. placeholder {1}: network.chain.name
@@ -5449,67 +5444,67 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
 msgid "Multisig proposals by {0} on the {1} Network."
-msgstr ""
+msgstr "{0} 在 {1} 网络上发起的多重签名提案。"
 
 #. placeholder {0}: p.abi.actions.length
 #. placeholder {1}: p.contract
 #. placeholder {2}: p.network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/+page.ts
 msgid "The {0} smart contract actions available for the {1} contract on the {2} network."
-msgstr ""
+msgstr "{2} 网络中 {1} 合约可用的 {0} 智能合约操作。"
 
 #. placeholder {0}: p.contract
 #. placeholder {1}: p.network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/abi/+page.ts
 msgid "The ABI defining the {0} smart contract on the {1} network."
-msgstr ""
+msgstr "定义 {0} 智能合约的 ABI，位于 {1} 网络上。"
 
 #. placeholder {0}: p.abi.tables.length
 #. placeholder {1}: p.contract
 #. placeholder {2}: p.network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/+page.ts
 msgid "The {0} data tables in the {1} contract on the {2} network."
-msgstr ""
+msgstr "{2} 网络中，{1} 合约的 {0} 数据表。"
 
 #. placeholder {0}: p.abi.structs.length
 #. placeholder {1}: p.contract
 #. placeholder {2}: p.network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/structs/+page.ts
 msgid "The {0} data structures defined by the {1} smart contract on the {2} network."
-msgstr ""
+msgstr "{2} 网络中 {1} 智能合约定义的 {0} 数据结构。"
 
 #. placeholder {0}: truncateCenter(params.id || '', 14)
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
 msgid "Transaction not found: {0}"
-msgstr ""
+msgstr "未能查询到交易记录：{0}"
 
 #. placeholder {0}: formatDateTime(transaction.block_time.toDate(), lang, { dateStyle: 'long', timeZone: 'UTC' })
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
 msgid "Transaction on {0}"
-msgstr ""
+msgstr "{0} 的交易"
 
 #. placeholder {0}: formatDateTime( transaction.block_time.toDate(), lang, { dateStyle: 'long', timeZone: 'UTC' } )
 #. placeholder {1}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
 msgid "A transaction performed at {0} on the {1} Network."
-msgstr ""
+msgstr "一笔交易于 {0} 在 {1} 网络中执行。"
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 msgid "Transfer tokens to another account."
-msgstr ""
+msgstr "将代币转移到另一个账户。"
 
 #. placeholder {0}: network.chain.name
 #. placeholder {1}: network.chain.name
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 msgid "Transfer tokens from one account to another account on the {0} network using an {1} compatible wallet."
-msgstr ""
+msgstr "使用 {1} 兼容的钱包，在 {1} 网络中从一个账户向另一个账户转移代币。"
 
 #. placeholder {0}: params.proposer
 #. placeholder {1}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.ts
 msgid "An MSIG proposed by {0} on the {1} Network"
-msgstr ""
+msgstr "由 {0} 在 {1} 网络上发起的多签"
 
 #. placeholder {0}: params.name
 #. placeholder {1}: network.chain.name
@@ -5518,31 +5513,31 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.ts
 msgid "Edit permission for {0} on {1}"
-msgstr ""
+msgstr "编辑 {0} 在 {1} 网络上的权限"
 
 #. placeholder {0}: params.struct
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/structs/[struct]/+page.ts
 msgid "Struct: {0}"
-msgstr ""
+msgstr "结构：{0}"
 
 #. placeholder {0}: params.struct
 #. placeholder {1}: p.contract
 #. placeholder {2}: p.network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/structs/[struct]/+page.ts
 msgid "The {0} data structure as defined by the {1} smart contract on the {2} network."
-msgstr ""
+msgstr "{2} 网络中 {1} 智能合约定义的 {0} 数据结构。"
 
 #. placeholder {0}: params.action
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.ts
 msgid "Action: {0}"
-msgstr ""
+msgstr "操作：{0}"
 
 #. placeholder {0}: params.action
 #. placeholder {1}: p.contract
 #. placeholder {2}: p.network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.ts
 msgid "The {0} action for the {1} smart contract on the {2} network."
-msgstr ""
+msgstr "{2} 网络上 {1} 智能合约的 {0} 操作。"
 
 #. placeholder {0}: base.name
 #. placeholder {1}: quote.name
@@ -5551,16 +5546,16 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.ts
 msgid "Swap the {0} token for the {1} token."
-msgstr ""
+msgstr "将 {0} 代币兑换为 {1} 代币。"
 
 #. placeholder {0}: params.table
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.ts
 msgid "Table: {0}"
-msgstr ""
+msgstr "表：{0}"
 
 #. placeholder {0}: params.table
 #. placeholder {1}: contract
 #. placeholder {2}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.ts
 msgid "The {0} data table in the {1} smart contract on the {2} network."
-msgstr ""
+msgstr "{2} 网络中 {1} 智能合约的 {0} 数据表。"
