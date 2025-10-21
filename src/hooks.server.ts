@@ -12,7 +12,13 @@ import { locales } from 'virtual:wuchale/locales';
 await loadLocales(main.key, main.loadIDs, main.loadCatalog, locales);
 
 export const wuchaleHandle: Handle = async ({ event, resolve }) => {
-	const locale = event.cookies.get('locale') ?? 'en';
+	let locale: string = 'en';
+	const [, firstPart] = event.url.pathname.split('/');
+	if (event.cookies.get('locale') !== locale) {
+		locale = event.cookies.get('locale') ?? 'en';
+	} else if (locales.includes(firstPart)) {
+		locale = firstPart;
+	}
 	event.locals.locale = locale;
 	return await runWithLocale(locale, () => resolve(event));
 };
@@ -149,4 +155,4 @@ export async function redirectHandle({ event, resolve }: HandleParams): Promise<
 	return resolve(event);
 }
 
-export const handle: Handle = sequence(wuchaleHandle, redirectHandle, networkHandle);
+export const handle: Handle = sequence(redirectHandle, wuchaleHandle, networkHandle);
