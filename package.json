@@ -4,13 +4,12 @@
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",
-		"build-paraglide": "bunx @inlang/paraglide-js compile --project ./project.inlang --outdir ./src/lib/paraglide",
-		"build": "bun run build-paraglide && vite build",
-		"build-docker": "bun run build-paraglide && ADAPTER=bun vite build",
+		"build": "vite build",
+		"build-docker": "ADAPTER=bun vite build",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"clean": "rm -rf ./.svelte-kit ./node_modules ./src/paraglide",
+		"clean": "rm -rf ./.svelte-kit ./node_modules",
 		"lint": "bun run prettier && bun run eslint",
 		"prettier": "prettier --check .",
 		"eslint": "eslint .",
@@ -18,9 +17,6 @@
 		"test": "bun test"
 	},
 	"devDependencies": {
-		"@inlang/paraglide-js": "^1.11.8",
-		"@inlang/paraglide-sveltekit": "^0.16.1",
-		"@inlang/paraglide-vite": "^1.4.0",
 		"@melt-ui/pp": "^0.3.2",
 		"@melt-ui/svelte": "^0.83.0",
 		"@sveltejs/adapter-auto": "^5.0.0",

@@ -43,8 +43,6 @@ export default ts.config([
 			'dist/',
 			'configs/contracts',
 			'src/lib/wharf/contracts/',
-			'src/lib/paraglide',
-			'src/paraglide',
 			'svelte.config.js'
 		]
 	}
