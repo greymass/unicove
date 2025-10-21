@@ -37,7 +37,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/withdraw/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/undelegate/+page.svelte
 msgid "Close"
-msgstr ""
+msgstr "닫기"
 
 #: src/lib/components/accountswitch.svelte
 msgid "Filter accounts"
@@ -225,13 +225,13 @@ msgstr ""
 #: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balances/+page.svelte
 msgid "Send"
-msgstr ""
+msgstr "전송"
 
 #: src/lib/components/navigation/sidemenu.svelte
 #: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Settings"
-msgstr ""
+msgstr "설정"
 
 #: src/lib/components/card/tokenoverview.svelte
 #: src/lib/components/navigation/sidemenu.svelte
@@ -245,7 +245,7 @@ msgstr ""
 #: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/summaries/+page.svelte
 msgid "Staking"
-msgstr ""
+msgstr "스테이킹"
 
 #: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/stake/+page.svelte
@@ -254,7 +254,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/cards.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/navigation.svelte
 msgid "Stake"
-msgstr ""
+msgstr "스테이킹"
 
 #: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/unstake/+page.svelte
