@@ -11,7 +11,6 @@
 	import RemoveRowButton from '$lib/components/form/removeRowButton.svelte';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import * as m from '$lib/paraglide/messages';
 	import { PublicKeyInput } from 'unicove-components';
 	import { NameInput } from 'unicove-components';
 	import { NumberInput } from 'unicove-components';
@@ -114,11 +113,11 @@
 
 {#snippet PermissionName()}
 	<fieldset class="grid gap-3">
-		<Label for="permission_name">{m.common_permission_name()}</Label>
+		<Label for="permission_name">Permission Name</Label>
 		<NameInput
 			id="permission_name"
 			disabled={!manager.newPermission}
-			placeholder={m.common_permission_name()}
+			placeholder="Permission Name"
 			bind:value={manager.data.name.value.name}
 			bind:valid={manager.data.name.valid.name}
 		/>
@@ -127,7 +126,7 @@
 
 {#snippet PermissionParent()}
 	<fieldset class="grid gap-3">
-		<Label for="permission_parent">{m.common_parent_permission()}</Label>
+		<Label for="permission_parent">Parent Permission</Label>
 		<Select
 			id="permission_parent"
 			disabled={!manager.newPermission}
@@ -140,7 +139,7 @@
 
 {#snippet PermissionType()}
 	<fieldset class="grid gap-3">
-		<Label for="permission_type">{m.common_permission_type()}</Label>
+		<Label for="permission_type">Permission Type</Label>
 		<Select
 			id="permission_type"
 			onSelectedChange={onPermissionTypeChange}
@@ -149,7 +148,7 @@
 			bind:selected={permissionTypeSelected}
 		/>
 		<p class="mt-2 text-pretty">
-			{m.common_permission_form_reset()}
+			Note: Changing the permission type will reset any unsaved edits made to this permission.
 		</p>
 	</fieldset>
 {/snippet}
@@ -157,16 +156,16 @@
 {#snippet WeightThreshold()}
 	<FormSection>
 		<FormSectionHeader
-			title={m.common_weight_threshold()}
-			text={m.common_weight_threshold_description()}
+			title="Weight Threshold"
+			text="The total weight of all keys, accounts, and waits must be greater than or equal to this threshold to approve a transaction."
 		/>
 		<FormSectionContent>
 			<Fieldset>
-				<Label for="threshold">{m.common_required()}</Label>
+				<Label for="threshold">Required</Label>
 				<NumberInput
 					id="threshold"
 					min={1}
-					placeholder={m.common_permission_threshold()}
+					placeholder="Threshold"
 					bind:value={manager.data.threshold}
 				/>
 			</Fieldset>
@@ -186,7 +185,7 @@
 		>
 			<Fieldset>
 				<Label for={`key-${index}-weight`} class={index > 0 ? 'hidden' : ''}>
-					<span>{m.common_permission_weight()}</span>
+					<span>Weight</span>
 				</Label>
 				<NumberInput
 					id={`key-${index}-weight`}
@@ -198,12 +197,12 @@
 
 			<Fieldset>
 				<Label for={`key-${index}-key`} class={index > 0 ? 'hidden' : ''}>
-					<span>{m.common_public_key()}</span>
+					<span>Public Key</span>
 				</Label>
 				<PublicKeyInput
 					class="col-span-1"
 					id="key-{index}-key"
-					placeholder={m.common_public_key()}
+					placeholder="Public Key"
 					bind:value={manager.data.keys[index].value.key}
 					bind:valid={manager.data.keys[index].valid.key}
 				/>
@@ -243,7 +242,10 @@
 
 {#snippet KeyAuthDisplay()}
 	<FormSection>
-		<FormSectionHeader title={m.common_key_pairs()} text={m.common_key_pairs_description()} />
+		<FormSectionHeader
+			title="Key Pairs"
+			text="Enter the Public Key(s) which can sign on behalf of this permission."
+		/>
 
 		<FormSectionContent>
 			{#if manager.data.keys.length}
@@ -254,9 +256,7 @@
 				</ul>
 			{/if}
 
-			<Button class="float-right" variant="primary" onclick={manager.data.addKey}
-				>{m.common_add_key()}</Button
-			>
+			<Button class="float-right" variant="primary" onclick={manager.data.addKey}>Add Key</Button>
 		</FormSectionContent>
 	</FormSection>
 {/snippet}
@@ -272,12 +272,12 @@
 	>
 		<Fieldset class="">
 			<Label for={`account-${index}-weight`} class={index > 0 ? '@md:hidden' : ''}>
-				<span>{m.common_permission_weight()}</span>
+				<span>Weight</span>
 			</Label>
 			<NumberInput
 				id={`account-${index}-weight`}
 				min={1}
-				placeholder={m.common_permission_weight()}
+				placeholder="Weight"
 				bind:value={state.value.weight}
 				bind:valid={state.valid.weight}
 			/>
@@ -285,11 +285,11 @@
 
 		<Fieldset>
 			<Label for={`account-${index}-name`} class={index > 0 ? '@md:hidden' : ''}>
-				<span>{m.common_account_name()}</span>
+				<span>Account Name</span>
 			</Label>
 			<NameInput
 				id={`account-${index}-name`}
-				placeholder={m.common_account()}
+				placeholder="Actor"
 				bind:value={state.value.permission.actor}
 				bind:valid={state.valid.actor}
 			/>
@@ -297,11 +297,11 @@
 
 		<Fieldset>
 			<Label for={`account-${index}-permission`} class={index > 0 ? '@md:hidden' : ''}>
-				<span>{m.common_permission_name()}</span>
+				<span>Permission Name</span>
 			</Label>
 			<NameInput
 				id={`account-${index}-permission`}
-				placeholder={m.common_permission()}
+				placeholder="Permission"
 				bind:value={state.value.permission.permission}
 				bind:valid={state.valid.permission}
 			/>
@@ -317,8 +317,8 @@
 {#snippet AccountAuthDisplay()}
 	<FormSection>
 		<FormSectionHeader
-			title={m.common_permission_other_accounts()}
-			text={m.common_permission_other_accounts_description()}
+			title="Other Accounts"
+			text="Specify other accounts and permissions that can control this permission."
 		/>
 
 		<FormSectionContent>
@@ -331,7 +331,7 @@
 			{/if}
 
 			<Button class="float-right" variant="primary" onclick={manager.data.addAccount}>
-				{m.common_add_account()}
+				Add Account
 			</Button>
 		</FormSectionContent>
 	</FormSection>
@@ -342,11 +342,11 @@
 	<li class="subgrid text-on-surface">
 		<Fieldset>
 			<Label for={`wait-${index}-name`} class={index > 0 ? 'hidden' : ''}>
-				<span>{m.common_permission_weight()}</span>
+				<span>Weight</span>
 			</Label>
 			<NumberInput
 				id={`wait-${index}-name`}
-				placeholder={m.common_permission_weight()}
+				placeholder="Weight"
 				min={1}
 				bind:value={state.value.weight}
 				bind:valid={state.valid.weight}
@@ -355,7 +355,7 @@
 
 		<Fieldset>
 			<Label for={`wait-${index}-value`} class={index > 0 ? 'hidden' : ''}>
-				<span>{m.common_wait_seconds()}</span>
+				<span>Wait (Seconds)</span>
 			</Label>
 			<NumberInput
 				id={`wait-${index}-value`}
@@ -372,8 +372,8 @@
 {#snippet WaitAuthDisplay()}
 	<FormSection>
 		<FormSectionHeader
-			title={m.common_waiting_period()}
-			text={m.common_waiting_period_description()}
+			title="Waiting Period"
+			text="Specify the minimum amount of time a proposal must be active before the transaction can be completed."
 		/>
 
 		<FormSectionContent>
@@ -389,7 +389,7 @@
 				disabled={manager.data.waits.length > 0}
 				class="float-right"
 				variant="primary"
-				onclick={manager.data.addWait}>{m.common_add_wait()}</Button
+				onclick={manager.data.addWait}>Add Wait</Button
 			>
 		</FormSectionContent>
 	</FormSection>
@@ -405,11 +405,11 @@
 	>
 		<Fieldset>
 			<Label for={`contract-${index}-account`} class={index > 0 ? 'hidden' : ''}>
-				<span>{m.common_contract()}</span>
+				<span>Contract</span>
 			</Label>
 			<NameInput
 				id={`contract-${index}-account`}
-				placeholder={m.common_contract()}
+				placeholder="Contract"
 				bind:value={state.value.account}
 				bind:valid={state.valid.account}
 			/>
@@ -417,12 +417,12 @@
 
 		<Fieldset>
 			<Label for={`contract-${index}-action`} class={index > 0 ? 'hidden' : ''}>
-				<span>{m.common_action()}</span>
+				<span>Action</span>
 			</Label>
 			<NameInput
 				optional
 				id={`contract-${index}-action`}
-				placeholder={m.common_action()}
+				placeholder="Action"
 				bind:value={state.value.action}
 				bind:valid={state.valid.action}
 			/>
@@ -435,8 +435,8 @@
 {#snippet LinkedAuthDisplay()}
 	<FormSection>
 		<FormSectionHeader
-			title={m.common_contract_isolation()}
-			text={m.common_contract_isolation_description()}
+			title="Contract Isolation"
+			text="Restrict this permission to specific contracts and actions. Leave the action blank to allow all actions on a contract."
 		/>
 
 		<FormSectionContent>
@@ -449,7 +449,7 @@
 			{/if}
 
 			<Button class="float-right" variant="primary" onclick={manager.data.addLinked}>
-				{m.common_add_contract()}
+				Add Contract
 			</Button>
 		</FormSectionContent>
 	</FormSection>
@@ -458,8 +458,8 @@
 {#snippet ConfirmingDetails()}
 	<article class="grid gap-8 @3xl:gap-12">
 		<FormSectionHeader
-			title={m.common_confirm_details()}
-			text={m.common_confirm_permission_details()}
+			title="Confirm Details"
+			text="Carefully review and confirm the details of this transaction. Incorrectly setting your permissions could cause permanent loss of access to this permission or account!"
 		></FormSectionHeader>
 
 		<ul class="grid grid-cols-[auto_1fr] overflow-x-auto">
@@ -478,8 +478,8 @@
 		</ul>
 
 		<footer class="flex gap-4">
-			<Button onclick={back} variant="secondary">{m.common_back()}</Button>
-			<Button onclick={transact} variant="primary">{m.common_save_permission()}</Button>
+			<Button onclick={back} variant="secondary">Back</Button>
+			<Button onclick={transact} variant="primary">Save Permission</Button>
 		</footer>
 	</article>
 {/snippet}
@@ -487,8 +487,8 @@
 {#snippet BasicInformation()}
 	<FormSection>
 		<FormSectionHeader
-			title={m.common_basic_information()}
-			text={m.common_basic_permission_description()}
+			title="Basic Information"
+			text="The name, parent permission, and type (Basic or Advanced). Name and parent fields cannot be modified after the permission is created."
 		/>
 
 		<FormSectionContent>
@@ -511,11 +511,9 @@
 				href={`/${data.network}/account/${data.account.name}/permissions`}
 				variant="secondary"
 			>
-				{m.common_back_to_permissions()}
+				Back to Permissions
 			</Button>
-			<Button href={`/${data.network}/account/${data.account.name}`}>
-				{m.common_view_my_account()}
-			</Button>
+			<Button href={`/${data.network}/account/${data.account.name}`}>View my account</Button>
 		</footer>
 	{:else if transactError}
 		<!-- Unsuccessful transaction -->
@@ -523,7 +521,7 @@
 			class="bg-surface-container flex flex-col justify-center gap-8 rounded-xl px-4 py-12 sm:items-center"
 		>
 			<TransactError error={transactError} />
-			<Button variant="primary" onclick={back}>{m.common_back()}</Button>
+			<Button variant="primary" onclick={back}>Back</Button>
 		</div>
 	{:else if confirming}
 		{@render ConfirmingDetails()}
@@ -555,17 +553,15 @@
 
 			<footer class="flex flex-col justify-between gap-y-12 @lg:flex-row">
 				{#if manager.permission && !manager.data.isActive && !manager.data.isOwner}
-					<Button class="text-error" variant="text" onclick={deleteAuth}
-						>{m.common_delete_permission()}</Button
-					>
+					<Button class="text-error" variant="text" onclick={deleteAuth}>Delete Permission</Button>
 				{/if}
 				<div class="flex grow flex-col flex-wrap justify-end gap-6 @lg:flex-row">
-					<Button class="grow-0" variant="text" href={data.backPath}>{m.common_cancel()}</Button>
+					<Button class="grow-0" variant="text" href={data.backPath}>Cancel</Button>
 					<Button
 						class="grow-0"
 						variant="primary"
 						disabled={!manager.data.ready || context.wharf.transacting}
-						onclick={confirm}>{m.common_confirm()}</Button
+						onclick={confirm}>Confirm</Button
 					>
 				</div>
 			</footer>

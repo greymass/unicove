@@ -4,7 +4,6 @@
 
 	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
-	import * as m from '$lib/paraglide/messages';
 	import { TokenBalanceValue, ZeroUnits } from '$lib/types/token.js';
 	import { Button, Table, TD, TH, TR } from 'unicove-components';
 	import { Currencies } from '$lib/types/currencies.js';
@@ -54,18 +53,16 @@
 
 {#snippet tableAction(asset: Asset)}
 	<TD class="text-right">
-		<Button variant="text" href="/{data.network}/send?quantity={asset}">
-			{m.common_send()}
-		</Button>
+		<Button variant="text" href="/{data.network}/send?quantity={asset}">Send</Button>
 	</TD>
 {/snippet}
 
 {#if balances.length}
 	<Table>
 		{#snippet thead()}
-			<TH>{m.common_token()}</TH>
-			<TH class="text-right">{m.common_amount()}</TH>
-			<TH class="text-right">{m.common_value()} ({context.settings.data.displayCurrency})</TH>
+			<TH>Token</TH>
+			<TH class="text-right">Amount</TH>
+			<TH class="text-right">Value ({context.settings.data.displayCurrency})</TH>
 			{#if isCurrentUser}
 				<TH></TH>
 			{/if}
@@ -110,5 +107,5 @@
 		{/each}
 	</Table>
 {:else}
-	<p>{m.common_no_balances()}</p>
+	<p>No balances found.</p>
 {/if}

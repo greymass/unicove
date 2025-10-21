@@ -14,7 +14,6 @@
 
 	import { getActionSummaryComponent } from '$lib/components/summary/index.js';
 	import { requestPublicKeys, requestSnap } from '$lib/metamask-snap.js';
-	import * as m from '$lib/paraglide/messages';
 	import * as SystemContract from '$lib/wharf/contracts/system';
 	import AccountElement from '$lib/components/elements/account.svelte';
 	import ActionElement from '$lib/components/elements/action.svelte';
@@ -207,14 +206,14 @@
 
 {#snippet Success()}
 	<div class="flex gap-4">
-		<Button variant="secondary" onclick={() => (id = undefined)}>{m.common_back()}</Button>
+		<Button variant="secondary" onclick={() => (id = undefined)}>Back</Button>
 		<Button href={`/${data.network}/account/${newAccountAction?.name}`}>Visit Account</Button>
 	</div>
 {/snippet}
 
 {#snippet Failure()}
 	<div class="flex gap-4">
-		<Button onclick={() => (error = undefined)}>{m.common_back()}</Button>
+		<Button onclick={() => (error = undefined)}>Back</Button>
 	</div>
 {/snippet}
 
@@ -303,7 +302,7 @@
 </TransactForm>
 
 {#if context.settings.data.debugMode}
-	<h3 class="h3">{m.common_debugging()}</h3>
+	<h3 class="h3">Debugging</h3>
 	<Code
 		json={{
 			disabled,

@@ -1,7 +1,6 @@
 import { Name, PackedTransaction, PermissionLevel } from '@wharfkit/antelope';
 import type { LayoutLoad } from './$types';
 import { error } from '@sveltejs/kit';
-import * as m from '$lib/paraglide/messages';
 
 export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 	const { network } = await parent();
@@ -35,10 +34,7 @@ export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 
 	return {
 		title: `${params.proposal}`,
-		subtitle: m.msig_page_subtitle({
-			proposer: params.proposer,
-			network: network.chain.name
-		}),
+		subtitle: `An MSIG proposed by ${params.proposer} on the ${network.chain.name} Network`,
 		header: {
 			copyData: params.proposal
 		},

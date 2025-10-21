@@ -3,7 +3,6 @@
 	import PillGroup from '$lib/components/navigation/pillgroup.svelte';
 	import { type UnicoveContext } from '$lib/state/client.svelte.js';
 	import { getContext } from 'svelte';
-	import * as m from '$lib/paraglide/messages';
 
 	const { children, data } = $props();
 
@@ -24,25 +23,25 @@
 			urlBase += `/${data.seq}`;
 		}
 		const options = [
-			{ href: urlBase, text: m.common_summary() },
-			{ href: `${urlBase}/details`, text: m.common_details() },
+			{ href: urlBase, text: 'Summary' },
+			{ href: `${urlBase}/details`, text: 'Details' },
 			// { href: `${urlBase}/resources`, text: 'Resources' },
 			{
 				href: `${urlBase}/actions`,
-				text: `${m.common_actions()} (${data.transaction.transaction.actions.length})`
+				text: `Actions (${data.transaction.transaction.actions.length})`
 			},
-			{ href: `${urlBase}/transaction`, text: m.common_transaction() }
+			{ href: `${urlBase}/transaction`, text: 'Transaction' }
 		];
 		if (settings.data.advancedMode) {
 			options.push({
 				href: `${urlBase}/traces`,
-				text: `${m.common_traces()} (${data.transaction.traces.length})`
+				text: `Traces (${data.transaction.traces.length})`
 			});
 			options.push({
 				href: `${urlBase}/ram`,
-				text: `${m.common_ram_usage()} (${ramDeltas})`
+				text: `RAM Usage (${ramDeltas})`
 			});
-			options.push({ href: `${urlBase}/data`, text: m.common_data() });
+			options.push({ href: `${urlBase}/data`, text: 'Data' });
 		}
 		return options;
 	});

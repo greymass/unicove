@@ -1,7 +1,6 @@
 <script lang="ts">
 	import Link from '$lib/components/elements/link.svelte';
 	import { Card } from 'unicove-components';
-	import * as m from '$lib/paraglide/messages';
 
 	const { data } = $props();
 
@@ -9,7 +8,7 @@
 </script>
 
 {#each proposals as proposal}
-	<Card titleTag="span" title={m.common_proposal_id()}>
+	<Card titleTag="span" title="Proposal ID">
 		<h2 class="">
 			<Link href={`/${data.network}/msig/${data.name}/${proposal.proposal_name}`}>
 				{proposal.proposal_name}
@@ -18,6 +17,6 @@
 	</Card>
 {:else}
 	<Card>
-		<p>{m.common_no_proposals()}</p>
+		<p>No proposals found.</p>
 	</Card>
 {/each}

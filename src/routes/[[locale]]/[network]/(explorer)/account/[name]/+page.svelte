@@ -4,7 +4,6 @@
 
 	import { AccountValueState } from '$lib/state/value.svelte.js';
 	import { Card, Stack } from 'unicove-components';
-	import * as m from '$lib/paraglide/messages';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import { Button } from 'unicove-components';
 	import CurrencySelect from '$lib/components/select/currency.svelte';
@@ -75,7 +74,7 @@
 
 					{#if currentAccountValue}
 						<div class="flex flex-1 flex-col gap-1">
-							<p class="leading-none">{m.account_page_total_value()}</p>
+							<p class="leading-none">Total Account Value</p>
 							{#if currentAccountValue.hasPrice}
 								<AssetText
 									class="text-on-surface text-left text-2xl leading-none font-bold"
@@ -107,7 +106,7 @@
 				data.network.config.coinbase?.assets.includes(data.account.balance.token.name)
 					? [
 							{
-								text: m.common_add_funds(),
+								text: 'Add Funds',
 								href: `/${data.network}/fund`,
 								visible: isCurrentUser
 							}
@@ -130,7 +129,7 @@
 				data.network.config.coinbase?.assets.includes(legacybalance.balance.symbol.name)
 					? [
 							{
-								text: m.common_add_funds(),
+								text: 'Add Funds',
 								href: `/${data.network}/fund`,
 								visible: isCurrentUser
 							}
@@ -151,10 +150,7 @@
 				balance={rambalance}
 				cta={[
 					{
-						text: m.common_swap_base_quote({
-							base: data.network.token.name,
-							quote: data.network.getRamToken().name
-						}),
+						text: `Swap ${data.network.token.name}/${data.network.getRamToken().name}`,
 						href: `/${data.network}/swap/${data.network.token.id.url}/${ramtoken.id.url}`,
 						visible: isCurrentUser
 					}
@@ -183,7 +179,7 @@
 			<SystemTokenSwap account={data.account} network={data.network} />
 		{/if}
 		{#if context.settings.data.advancedMode}
-			<Card class="@container" title={m.common_resources()}>
+			<Card class="@container" title="Resources">
 				<Stack>
 					<div class="flex gap-12 *:flex-1 @sm:justify-between @sm:*:flex-auto">
 						<ResourceCard type="cpu" value={cpuAvailable} vertical />
@@ -191,9 +187,7 @@
 						<ResourceCard type="net" value={netAvailable} vertical />
 					</div>
 					{#if isCurrentUser}
-						<Button href={`/${data.network}/resources`} variant="secondary"
-							>{m.common_resources()}</Button
-						>
+						<Button href={`/${data.network}/resources`} variant="secondary">Resources</Button>
 					{/if}
 				</Stack>
 			</Card>

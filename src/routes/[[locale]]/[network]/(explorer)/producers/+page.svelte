@@ -5,8 +5,6 @@
 	import { Chip } from 'unicove-components';
 	import AccountLink from '$lib/components/elements/account.svelte';
 
-	import * as m from '$lib/paraglide/messages';
-
 	const { data } = $props();
 
 	let state: SystemContract.Types.producer_info[] | undefined = $state();
@@ -41,8 +39,8 @@
 		<tr>
 			<th class="w-10 text-center">#</th>
 			<th class="w-20"></th>
-			<th>{m.common_account}</th>
-			<th class="w-20 text-right">{m.navigation_votes()}</th>
+			<th>Actor</th>
+			<th class="w-20 text-right">Votes</th>
 		</tr>
 	</thead>
 	{#if state}
@@ -54,13 +52,9 @@
 					</td>
 					<td>
 						{#if index < 21}
-							<Chip class="bg-success-container text-on-success-container"
-								>{m.common_producer_top21()}</Chip
-							>
+							<Chip class="bg-success-container text-on-success-container">Top 21</Chip>
 						{:else}
-							<Chip class="bg-surface-variant text-on-surface-variant"
-								>{m.common_producer_standby()}</Chip
-							>
+							<Chip class="bg-surface-variant text-on-surface-variant">Standby</Chip>
 						{/if}
 					</td>
 					<td>

@@ -1,7 +1,6 @@
 import { AccountState } from '$lib/state/client/account.svelte';
 import { error } from '@sveltejs/kit';
 import { Name } from '@wharfkit/antelope';
-import * as m from '$lib/paraglide/messages';
 import { getNetworkByName } from '$lib/state/network.svelte';
 import type { LayoutLoad } from './$types';
 import { PUBLIC_CHAIN_SHORT } from '$env/static/public';
@@ -19,9 +18,7 @@ export const load: LayoutLoad = async ({ fetch, url, params }) => {
 	} catch (e) {
 		console.error(e);
 		error(404, {
-			message: m.account_404({
-				account: String(params.name)
-			}),
+			message: `Account not found: ${String(params.name)}`,
 			code: 'NOT_FOUND'
 		});
 	}
@@ -32,22 +29,14 @@ export const load: LayoutLoad = async ({ fetch, url, params }) => {
 		actions.push({ icon: Code, href: `/${network}/contract/${params.name}` });
 	}
 
-	const metaTitle = m.account_meta_title({
-		account: String(params.name),
-		network: network.chain.name
-	});
-	const metaDescription = m.account_meta_description({
-		account: String(params.name),
-		network: network.chain.name
-	});
+	const metaTitle = `${String(params.name)} | ${network.chain.name} Network Account`;
+	const metaDescription = `An overview of the ${String(params.name)} account on the ${network.chain.name} Network. View account assets, activity, resources and more.`;
 
 	return {
 		account,
 		name: params.name,
 		title: `${params.name}`,
-		subtitle: m.account_page_subtitle({
-			network: network.chain.name
-		}),
+		subtitle: `Account overview on the ${network.chain.name} Network`,
 		header: {
 			copyData: params.name,
 			actions: actions

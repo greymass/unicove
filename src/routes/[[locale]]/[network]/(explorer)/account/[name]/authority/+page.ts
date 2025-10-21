@@ -1,5 +1,4 @@
 import type { PageLoad } from './$types';
-import * as m from '$lib/paraglide/messages';
 
 export const load: PageLoad = async ({ params, parent }) => {
 	const { network } = await parent();
@@ -8,9 +7,9 @@ export const load: PageLoad = async ({ params, parent }) => {
 	});
 	return {
 		authorizations,
-		subtitle: m.common_authorities_description({ account: params.name }),
+		subtitle: `Accounts that allow the ${params.name} account to sign on their behalf`,
 		pageMetaTags: {
-			description: m.common_authorities_description({ account: params.name })
+			description: `Accounts that allow the ${params.name} account to sign on their behalf`
 		}
 	};
 };

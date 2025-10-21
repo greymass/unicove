@@ -3,8 +3,6 @@
 	import Contract from '$lib/components/elements/contract.svelte';
 	import { Card, Number, Table, TH, TR, TD } from 'unicove-components';
 
-	import * as m from '$lib/paraglide/messages';
-
 	let { data } = $props();
 
 	const ramDeltas = $derived(
@@ -13,8 +11,8 @@
 </script>
 
 <div class="p-2">
-	<h2 class="text-headline text-2xl">{m.common_ram_usage()}</h2>
-	<p>{m.common_ram_usage_description()}</p>
+	<h2 class="text-headline text-2xl">RAM Usage</h2>
+	<p>The deltas in RAM usage for each trace in the transaction.</p>
 </div>
 
 <Card>
@@ -22,8 +20,8 @@
 		{#snippet thead()}
 			<TH class="text-right">Bytes</TH>
 			<TH>Owner</TH>
-			<TH class="text-right">{m.common_contract()}</TH>
-			<TH>{m.common_action()}</TH>
+			<TH class="text-right">Contract</TH>
+			<TH>Action</TH>
 		{/snippet}
 
 		{#each ramDeltas as trace}

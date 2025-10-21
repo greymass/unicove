@@ -6,7 +6,6 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
 	import { goto } from '$app/navigation';
-	import * as m from '$lib/paraglide/messages';
 	import type { TreePermission } from '$lib/types/permission';
 
 	const context = getContext<UnicoveContext>('state');
@@ -48,14 +47,14 @@
 </script>
 
 <div class="flex flex-wrap items-center justify-between gap-4">
-	<h2 class="text-title leading-tight">{m.common_keys_permissions()}</h2>
+	<h2 class="text-title leading-tight">Keys and Permissions</h2>
 
 	{#if currentUser}
 		<Button
 			href="/{data.network}/account/{data.account.name}/permissions/{generateRandomName()}"
 			class="flex-none"
 		>
-			{m.common_new_permission()}
+			New Permission
 		</Button>
 	{/if}
 </div>

@@ -1,21 +1,12 @@
 import type { PageLoad } from './$types';
-import * as m from '$lib/paraglide/messages';
 
 export const load: PageLoad = async ({ params, parent }) => {
 	const { network } = await parent();
 	return {
-		subtitle: m.explorer_account_activity_subtitle({
-			network: network.chain.name
-		}),
+		subtitle: `Recent activity on the ${network.chain.name} Network.`,
 		pageMetaTags: {
-			title: m.explorer_account_activity_meta_title({
-				account: params.name,
-				network: network.chain.name
-			}),
-			description: m.explorer_account_activity_meta_description({
-				account: params.name,
-				network: network.chain.name
-			})
+			title: `Account Activity for ${params.name} | ${network.chain.name} Network`,
+			description: `View the transaction history of the ${params.name} account on the ${network.chain.name} network.`
 		}
 	};
 };

@@ -7,7 +7,6 @@
 	import Contract from '$lib/components/elements/contract.svelte';
 	import dayjs from 'dayjs';
 	import { Clock, Edit, LogIn } from '@lucide/svelte';
-	import * as m from '$lib/paraglide/messages';
 	import { Name, PermissionLevel, UInt64 } from '@wharfkit/antelope';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
@@ -57,7 +56,7 @@
 		class="bg-surface-container z-20 col-span-full space-y-1 rounded-t-lg px-4 py-3 md:col-span-1 md:rounded-l-lg md:rounded-r-none"
 	>
 		<div>
-			<dt class="sr-only">{m.common_permission_name()}</dt>
+			<dt class="sr-only">Permission Name</dt>
 			<dd class="text-on-surface text-xl font-semibold">
 				<div class="flex items-center gap-2">
 					{permission.perm_name}
@@ -73,14 +72,14 @@
 		</div>
 		<div class="text-muted text-nowrap *:inline">
 			<dt class="after:content-[':']">
-				<span class="sr-only">{m.common_permission_threshold()}</span>
-				{m.common_required()}
+				<span class="sr-only">Threshold</span>
+				Required
 			</dt>
 			<dd>{permission.required_auth.threshold}</dd>
 		</div>
 		{#if permission.linked_actions}
 			<div class="">
-				<dt class="sr-only">{m.common_actions()}</dt>
+				<dt class="sr-only">Actions</dt>
 				{#each permission.linked_actions as { action, account }}
 					<dd>
 						<Contract name={account} {action} class="flex">
@@ -102,8 +101,8 @@
 					<tr
 						class="col-span-full grid grid-cols-subgrid text-left *:pt-1 *:text-base *:font-medium"
 					>
-						<th>{m.common_permission_weight()}</th>
-						<th>{m.common_permission_authorization()}</th>
+						<th>Weight</th>
+						<th>Authorization</th>
 						<th class="flex items-center gap-2">
 							{#if loggedIn && currentUser}
 								<IconButton icon={Edit} href={editUrl}></IconButton>

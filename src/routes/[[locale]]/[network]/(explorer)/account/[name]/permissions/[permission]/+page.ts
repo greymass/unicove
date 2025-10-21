@@ -1,6 +1,5 @@
 import { Name } from '@wharfkit/antelope';
 import type { PageLoad } from './$types';
-import * as m from '$lib/paraglide/messages';
 
 export const load: PageLoad = async ({ params, parent, url }) => {
 	const { network, account } = await parent();
@@ -14,19 +13,10 @@ export const load: PageLoad = async ({ params, parent, url }) => {
 		permissionName: Name.from(params.permission),
 		backPath,
 		title: params.permission,
-		subtitle: m.common_edit_permission_for_account({
-			account: params.name,
-			network: network.chain.name
-		}),
+		subtitle: `Edit permission for ${params.name} on ${network.chain.name}`,
 		pageMetaTags: {
-			title: m.explorer_account_permissions_meta_title({
-				account: params.name,
-				network: network.chain.name
-			}),
-			description: m.common_edit_permission_for_account({
-				account: params.name,
-				network: network.chain.name
-			})
+			title: `Permissions | ${params.name} | ${network.chain.name} Network`,
+			description: `Edit permission for ${params.name} on ${network.chain.name}`
 		}
 	};
 };

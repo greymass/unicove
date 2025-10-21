@@ -1,17 +1,12 @@
 import type { PageLoad } from './$types';
-import * as m from '$lib/paraglide/messages';
 import type { LoadEvent } from '@sveltejs/kit';
 
 export const load: PageLoad = async ({ parent }: LoadEvent) => {
 	const p = await parent();
 	return {
 		pageMetaTags: {
-			title: [m.contract_tables_page_title(), p.pageMetaTags.title].join(' | '),
-			description: m.contract_tables_page_description({
-				tables: p.abi.tables.length,
-				contract: p.contract,
-				network: p.network.chain.name
-			})
+			title: ['Tables', p.pageMetaTags.title].join(' | '),
+			description: `The ${p.abi.tables.length} data tables in the ${p.contract} contract on the ${p.network.chain.name} network.`
 		}
 	};
 };
