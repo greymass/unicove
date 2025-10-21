@@ -1,13 +1,12 @@
 import type { PageLoad } from './$types';
-import * as m from '$lib/paraglide/messages';
 
 export const load: PageLoad = async () => {
 	return {
-		title: m.common_smart_contract_account_creation(),
-		subtitle: m.common_smart_contract_account_creation_description(),
+		title: 'Smart Contract Account Creation',
+		subtitle: 'Create an account using a basic token transfer to a smart contract',
 		pageMetaTags: {
-			title: m.common_smart_contract_account_creation(),
-			description: m.common_smart_contract_account_creation_description()
+			title: 'Smart Contract Account Creation',
+			description: 'Create an account using a basic token transfer to a smart contract'
 		}
 	};
 };

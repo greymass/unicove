@@ -1,23 +1,13 @@
 import type { LayoutLoad } from './$types';
-import * as m from '$lib/paraglide/messages';
 
 export const load: LayoutLoad = async ({ parent }) => {
 	const { network } = await parent();
 	return {
-		title: m.staking_network_title({
-			network: network.chain.name
-		}),
-		subtitle: m.staking_network_subtitle({
-			token: network.chain.systemToken?.symbol.name || m.common_tokens()
-		}),
+		title: `${network.chain.name} Network Staking`,
+		subtitle: `Stake ${network.chain.systemToken?.symbol.name || 'tokens'} to earn rewards.`,
 		pageMetaTags: {
-			title: m.staking_network_title({
-				network: network.chain.name
-			}),
-			description: m.staking_metadata_overview_description({
-				network: network.chain.name,
-				token: network.chain.systemToken?.symbol.name || m.common_tokens()
-			})
+			title: `${network.chain.name} Network Staking`,
+			description: `An overview of staking on the ${network.chain.name} network providing easy access to stake, unstake, and withdraw ${network.chain.systemToken?.symbol.name || 'tokens'} tokens using an ${network.chain.name} compatible wallet.`
 		}
 	};
 };

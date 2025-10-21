@@ -1,7 +1,6 @@
 import { error, type LoadEvent } from '@sveltejs/kit';
 import type { ABI } from '@wharfkit/antelope';
 
-import * as m from '$lib/paraglide/messages.js';
 import { parseRicardian } from '$lib/utils/ricardian';
 import type { PageLoad } from './$types';
 
@@ -18,17 +17,8 @@ export const load: PageLoad = async ({ params, parent }: LoadEvent) => {
 		struct,
 		data: params.data,
 		pageMetaTags: {
-			title: [
-				m.contract_action_view_title({
-					action: String(params.action)
-				}),
-				p.pageMetaTags.title
-			].join(' | '),
-			description: m.contract_action_view_description({
-				action: String(params.action),
-				contract: String(p.contract),
-				network: p.network.chain.name
-			})
+			title: [`Action: ${params.action}`, p.pageMetaTags.title].join(' | '),
+			description: `The ${params.action} action for the ${p.contract} smart contract on the ${p.network.chain.name} network.`
 		},
 		ricardian
 	};

@@ -8,7 +8,6 @@
 	import TransactForm from '$lib/components/transact/form.svelte';
 	import { Button } from 'unicove-components';
 
-	import * as m from '$lib/paraglide/messages';
 	import { SingleCard } from '$lib/components/layout/index.js';
 	import { Stack } from 'unicove-components';
 	import { Label } from 'unicove-components';
@@ -90,16 +89,14 @@
 
 {#snippet Success()}
 	<div class="flex gap-4">
-		<Button variant="secondary" onclick={() => (id = undefined)}>{m.common_back()}</Button>
-		<Button href={`/${data.network}/account/${context.account?.name}`}>
-			{m.common_view_my_account()}
-		</Button>
+		<Button variant="secondary" onclick={() => (id = undefined)}>Back</Button>
+		<Button href={`/${data.network}/account/${context.account?.name}`}>View my account</Button>
 	</div>
 {/snippet}
 
 {#snippet Failure()}
 	<div class="flex gap-4">
-		<Button onclick={() => (error = undefined)}>{m.common_back()}</Button>
+		<Button onclick={() => (error = undefined)}>Back</Button>
 	</div>
 {/snippet}
 
@@ -112,13 +109,13 @@
 			</p>
 
 			<NameInput
-				label={m.common_account_name()}
+				label="Account Name"
 				bind:this={accountInput}
 				bind:ref={accountRef}
 				bind:value={accountName}
 				bind:valid={accountValid}
 				id="account-input"
-				placeholder={m.common_account_name()}
+				placeholder="Account Name"
 			/>
 
 			<Fieldset>

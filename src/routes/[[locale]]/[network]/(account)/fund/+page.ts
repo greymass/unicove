@@ -1,18 +1,13 @@
 import type { PageLoad } from './$types';
-import * as m from '$lib/paraglide/messages';
 
 export const load: PageLoad = async ({ parent }) => {
 	const { network } = await parent();
 	return {
-		title: m.fund_account(),
-		subtitle: m.fund_account_description({
-			token: network.token.symbol.name
-		}),
+		title: 'Fund Account',
+		subtitle: `Purchase ${network.token.symbol.name} tokens to fund your account`,
 		pageMetaTags: {
-			title: m.fund_account(),
-			description: m.fund_account_seo_description({
-				token: network.token.symbol.name
-			})
+			title: 'Fund Account',
+			description: `Learn how to fund your account with ${network.token.symbol.name} tokens through various methods including cryptocurrency exchanges and on-ramp providers.`
 		}
 	};
 };

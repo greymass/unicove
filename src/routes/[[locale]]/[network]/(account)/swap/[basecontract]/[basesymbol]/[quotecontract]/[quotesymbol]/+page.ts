@@ -1,6 +1,5 @@
 import type { PageLoad } from './$types';
 import { TokenDefinition } from '$lib/types/token';
-import * as m from '$lib/paraglide/messages';
 
 export const load: PageLoad = async ({ params, parent }) => {
 	const { network } = await parent();
@@ -22,23 +21,11 @@ export const load: PageLoad = async ({ params, parent }) => {
 	return {
 		base,
 		quote,
-		title: m.swap_base_quote({
-			base: base.name,
-			quote: quote.name
-		}),
-		subtitle: m.swap_base_quote_description({
-			base: base.name,
-			quote: quote.name
-		}),
+		title: `Swap ${base.name}/${quote.name}`,
+		subtitle: `Swap the ${base.name} token for the ${quote.name} token.`,
 		pageMetaTags: {
-			title: m.swap_base_quote({
-				base: base.name,
-				quote: quote.name
-			}),
-			description: m.swap_base_quote_description({
-				base: base.name,
-				quote: quote.name
-			})
+			title: `Swap ${base.name}/${quote.name}`,
+			description: `Swap the ${base.name} token for the ${quote.name} token.`
 		}
 	};
 };

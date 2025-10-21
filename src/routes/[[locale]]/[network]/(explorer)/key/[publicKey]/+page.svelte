@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { Card, Stack } from 'unicove-components';
-	import * as m from '$lib/paraglide/messages.js';
 	import Account from '$lib/components/elements/account.svelte';
 	import Key from '@lucide/svelte/icons/key-round';
 	import { CopyButton } from 'unicove-components';
@@ -24,11 +23,11 @@
 					{pubKey}
 					<CopyButton data={pubKey} />
 				</p>
-				<p class="text-muted">{m.legacy_key()}{': '}{legacyPubKey}</p>
+				<p class="text-muted">Legacy Key: {legacyPubKey}</p>
 			</div>
 		</div>
 	</Card>
-	<Card title={m.accounts_using_public_key()}>
+	<Card title="Associated Accounts">
 		{#if data.accounts && data.accounts.length > 0}
 			<ul class="layout-grid" style="--grid-itemWidth:20ch;">
 				{#each data.accounts as account}
@@ -41,7 +40,7 @@
 				{/each}
 			</ul>
 		{:else}
-			<p class="text-muted text-center">{m.no_accounts_found()}</p>
+			<p class="text-muted text-center">No accounts found</p>
 		{/if}
 	</Card>
 </Stack>

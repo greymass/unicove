@@ -1,5 +1,4 @@
 import { error } from '@sveltejs/kit';
-import * as m from '$lib/paraglide/messages.js';
 import { PublicKey } from '@wharfkit/antelope';
 import type { PageLoad } from './$types';
 import { PUBLIC_CHAIN_SHORT } from '$env/static/public';
@@ -11,7 +10,7 @@ export const load: PageLoad = async ({ fetch, params, parent }) => {
 		pubkey = PublicKey.from(String(params.publicKey));
 	} catch (e) {
 		error(404, {
-			message: m.key_404({ error: String(e) }),
+			message: `Key not found: ${e}`,
 			code: 'KEY_NOT_FOUND'
 		});
 	}
@@ -24,12 +23,9 @@ export const load: PageLoad = async ({ fetch, params, parent }) => {
 	// TODO: The title should follow the rest of the sections of the explorer and be the public key.
 	// The pageheader component should be in charge of visually truncating the text but the full text should
 	// still be in the DOM for a11y and SEO
-	const title = m.key_page_title();
-	const description = m.key_page_description({
-		accounts: accounts.length,
-		network: network.chain.name
-	});
-	const subtitle = m.key_page_subtitle({ accounts: accounts.length });
+	const title = 'Public Key';
+	const description = `A public key associated with ${accounts.length} account(s) on the ${network.chain.name} network.`;
+	const subtitle = `The ${accounts.length} account(s) associated with this public key`;
 
 	return {
 		title,

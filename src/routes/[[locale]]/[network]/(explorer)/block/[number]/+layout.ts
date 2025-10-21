@@ -1,5 +1,4 @@
 import type { LayoutLoad } from './$types';
-import * as m from '$lib/paraglide/messages.js';
 import { API, TimePoint } from '@wharfkit/antelope';
 import { PUBLIC_CHAIN_SHORT } from '$env/static/public';
 
@@ -30,15 +29,9 @@ export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 
 	const date = TimePoint.from(block.timestamp).toDate();
 
-	const description = m.block_height_numbered_description({
-		height: String(params.number),
-		producer: block.producer,
-		timestamp: date,
-		transactions: block.transactions.length,
-		actions: actionCount
-	});
+	const description = `Block #${params.number} was produced by ${block.producer} on ${date}, which included ${block.transactions.length} transactions performing ${actionCount} actions.`;
 
-	const title = m.block_height_numbered({ height: Number(params.number) });
+	const title = `Block #${params.number}`;
 
 	return {
 		number: params.number,

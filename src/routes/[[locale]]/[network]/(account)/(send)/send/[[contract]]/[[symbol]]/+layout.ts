@@ -1,5 +1,4 @@
 import type { LayoutLoad } from './$types';
-import * as m from '$lib/paraglide/messages';
 import { ogImageURL } from '$lib/utils/opengraph';
 import { Token } from '$lib/types/token';
 import { Asset, Name } from '@wharfkit/antelope';
@@ -33,16 +32,14 @@ export const load: LayoutLoad = async ({ url, params, parent }) => {
 		contract,
 		symbol,
 		token,
-		title: m.common_send_tokens({ token: symbol.name }),
-		subtitle: m.common_transfer_to_another_account(),
+		title: `Send ${symbol.name} Tokens`,
+		subtitle: 'Transfer tokens to another account.',
 		pageMetaTags: {
-			title: m.common_send_tokens({ token: symbol.name }),
-			description: m.send_page_description({
-				network: network.chain.name
-			}),
+			title: `Send ${symbol.name} Tokens`,
+			description: `Transfer tokens from one account to another account on the ${network.chain.name} network using an ${network.chain.name} compatible wallet.`,
 			open_graph_image: ogImageURL(url, {
-				title: m.common_send_tokens({ token: symbol.name }),
-				text: m.common_transfer_to_another_account()
+				title: `Send ${symbol.name} Tokens`,
+				text: 'Transfer tokens to another account.'
 			})
 		}
 	};

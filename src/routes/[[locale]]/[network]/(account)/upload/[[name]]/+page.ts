@@ -1,5 +1,4 @@
 import type { PageLoad } from './$types';
-// import * as m from '$lib/paraglide/messages';
 
 export const load: PageLoad = async ({ params }) => {
 	return {

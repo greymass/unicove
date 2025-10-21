@@ -1,7 +1,6 @@
 import { Name, type ABI } from '@wharfkit/antelope';
 import { error } from '@sveltejs/kit';
 
-import * as m from '$lib/paraglide/messages.js';
 import type { LayoutLoad } from './$types';
 import { User } from '@lucide/svelte';
 
@@ -29,17 +28,8 @@ export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 			actions: [{ icon: User, href: `/${network}/account/${params.contract}` }]
 		},
 		pageMetaTags: {
-			title: m.contract_view_title({
-				contract: String(params.contract),
-				network: network.chain.name
-			}),
-			description: m.contract_view_description({
-				contract: String(params.contract),
-				network: network.chain.name,
-				tables: abi.tables.length,
-				structs: abi.structs.length,
-				actions: abi.actions.length
-			})
+			title: `Contract: ${params.contract} | ${network.chain.name}`,
+			description: `An overview of the ${params.contract} smart contract on the ${network.chain.name} network. This contract contains ${abi.actions.length} actions, ${abi.tables.length} tables, and ${abi.structs.length} structs.`
 		}
 	};
 };

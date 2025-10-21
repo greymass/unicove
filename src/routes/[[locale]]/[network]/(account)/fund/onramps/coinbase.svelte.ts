@@ -1,4 +1,3 @@
-import * as m from '$lib/paraglide/messages';
 import type { UnicoveContext } from '$lib/state/client.svelte';
 
 export class CoinbaseOnRamp {
@@ -26,7 +25,7 @@ export class CoinbaseOnRamp {
 	public async open() {
 		if (!this.context.account?.name || !this.context.network.config.coinbase) {
 			console.error('User account or Coinbase config not available.');
-			alert(m.common_must_be_logged_in());
+			alert('You must be logged in with an account to use this feature.');
 			return;
 		}
 
@@ -67,7 +66,7 @@ export class CoinbaseOnRamp {
 			);
 		} catch (error) {
 			console.error('An error occurred during the on-ramp process:', error);
-			alert(m.coinbase_service_unavailable());
+			alert('Coinbase service is currently unavailable.');
 		} finally {
 			this.isLoading = false;
 		}

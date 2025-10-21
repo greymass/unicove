@@ -1,5 +1,4 @@
 import { type SeoConfig } from 'svead';
-import * as m from '$lib/paraglide/messages';
 import { ogImageURL } from '$lib/utils/opengraph';
 import type { LayoutServerLoad } from './$types';
 import type { NetworkState } from '$lib/state/network.svelte';
@@ -17,12 +16,8 @@ function generateMetadata(url: URL, network: NetworkState): SeoConfig {
 
 	return {
 		url: url.pathname,
-		title: m.og_default_title({
-			network: network.chain.name
-		}),
-		description: m.og_default_description({
-			network: network.chain.name
-		}),
+		title: `Unicove - The ${network.chain.name} web wallet and block explorer`,
+		description: `Stake, Send, Manage Tokens, and Explore ${network.chain.name} – all with ease`,
 		open_graph_image
 	};
 }

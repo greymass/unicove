@@ -5,7 +5,6 @@
 	import { getActionSummaryComponent } from '$lib/components/summary/index.js';
 	import SelectActionVariant from '$lib/components/select/actionvariant.svelte';
 	import ActionElement from '$lib/components/elements/action.svelte';
-	import * as m from '$lib/paraglide/messages.js';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -13,10 +12,8 @@
 </script>
 
 <div class="p-2">
-	<h2 class="text-headline text-2xl">
-		{m.common_actions()} ({data.transaction.transaction.actions.length})
-	</h2>
-	<p>{m.common_transaction_actions_description()}</p>
+	<h2 class="text-headline text-2xl">Actions ({data.transaction.transaction.actions.length})</h2>
+	<p>The actions performed in the transaction, without the inline actions.</p>
 </div>
 
 <SelectActionVariant />

@@ -1,5 +1,4 @@
 import type { PageLoad } from './$types';
-import * as m from '$lib/paraglide/messages.js';
 import { error } from '@sveltejs/kit';
 
 export const load: PageLoad = async ({ params, parent }) => {
@@ -9,14 +8,8 @@ export const load: PageLoad = async ({ params, parent }) => {
 	}
 	return {
 		pageMetaTags: {
-			title: [m.contract_struct_view_title({ struct: params.struct }), p.pageMetaTags.title].join(
-				' | '
-			),
-			description: m.contract_struct_view_description({
-				struct: params.struct,
-				contract: String(p.contract),
-				network: p.network.chain.name
-			})
+			title: [`Struct: ${params.struct}`, p.pageMetaTags.title].join(' | '),
+			description: `The ${params.struct} data structure as defined by the ${p.contract} smart contract on the ${p.network.chain.name} network.`
 		},
 		struct: params.struct
 	};

@@ -1,5 +1,4 @@
 import type { PageLoad } from './$types';
-import * as m from '$lib/paraglide/messages.js';
 
 export const load: PageLoad = async ({ fetch, params, parent, url }) => {
 	const { contract, network } = await parent();
@@ -9,14 +8,8 @@ export const load: PageLoad = async ({ fetch, params, parent, url }) => {
 	const json = await response.json();
 	return {
 		pageMetaTags: {
-			title: m.contract_tables_view_title({
-				table: params.table
-			}),
-			description: m.contract_tables_view_description({
-				contract: String(contract),
-				network: network.chain.name,
-				table: params.table
-			})
+			title: `Table: ${params.table}`,
+			description: `The ${params.table} data table in the ${contract} smart contract on the ${network.chain.name} network.`
 		},
 		rows: json.rows,
 		next: json.next,

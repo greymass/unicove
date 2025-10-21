@@ -8,8 +8,6 @@
 	import SelectActionVariant from '$lib/components/select/actionvariant.svelte';
 	import { Stack } from 'unicove-components';
 
-	import * as m from '$lib/paraglide/messages.js';
-
 	const context = getContext<UnicoveContext>('state');
 
 	let { data } = $props();
@@ -19,11 +17,9 @@
 
 <Stack class="gap-8">
 	<div class="space-y-2">
-		<h2 class="text-title">
-			{m.common_transaction_summary()}
-		</h2>
+		<h2 class="text-title">Transaction Summary</h2>
 		<p class="text-pretty">
-			{m.common_transaction_resulting_actions_description()}
+			The actions and inline actions performed as a result of the transaction.
 		</p>
 		<SelectActionVariant />
 		<ol class="grid gap-6">

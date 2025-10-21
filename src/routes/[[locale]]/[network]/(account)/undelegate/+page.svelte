@@ -8,8 +8,6 @@
 	import { getContext } from 'svelte';
 	import { RefundManager } from './manager.svelte';
 
-	import * as m from '$lib/paraglide/messages';
-
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
 
@@ -35,18 +33,19 @@
 	{:else}
 		<Switcher>
 			<Stack class="gap-2">
-				<h3 class="text-muted leading-none">{m.common_delegated_amount()}</h3>
+				<h3 class="text-muted leading-none">Delegated Amount</h3>
 				<p class="text-on-surface text-2xl font-bold">
 					{String(manager.account?.balance.child('delegated').balance)}
 				</p>
 			</Stack>
 
 			<Button disabled={!manager.reclaimable} onclick={() => manager.transact()} variant="primary"
-				>{m.common_reclaim()}</Button
+				>Reclaim</Button
 			>
 		</Switcher>
 		<p>
-			{m.common_reclaim_description()}
+			Note: Tokens that are undelegated will remain in a "refunding" state for 72 hours, after which
+			they will need to be claimed from your account page.
 		</p>
 	{/if}
 </Stack>
