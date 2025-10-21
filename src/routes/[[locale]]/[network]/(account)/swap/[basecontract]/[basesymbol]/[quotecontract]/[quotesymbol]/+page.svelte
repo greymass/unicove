@@ -256,12 +256,8 @@
 			for="base-quantity"
 			class="items-baseline-last grid h-10 grid-cols-[1fr_auto] items-center"
 		>
-			{m.common_send_tokens({
-				token: data.base.name
-			})}
-			<Button variant="text" disabled={!context.account} onclick={max}>
-				{m.common_fill_max()}
-			</Button>
+			Send {data.base.name}
+			<Button variant="text" disabled={!context.account} onclick={max}>Max</Button>
 		</Label>
 		<AssetInput
 			autofocus
@@ -281,9 +277,7 @@
 			for="base-quantity"
 			class="items-baseline-last grid h-10 grid-cols-[1fr_auto] items-center"
 		>
-			{m.common_receive_tokens({
-				token: data.quote.name
-			})}
+			Receive {data.quote.name}
 		</Label>
 		<AssetInput
 			bind:value={quoteQuantity}
@@ -308,7 +302,7 @@
 
 				<p class="text-center text-balance">
 					{#if swap.fee?.ramfee}
-						{m.common_network_fee_amount()}
+						Network Fee:
 						<AssetText class="text-on-surface font-bold" value={fee} variant="full" />
 						(0.5%)
 					{/if}
@@ -320,14 +314,12 @@
 						!context.account ||
 						baseQuantity.units.lte(ZeroUnits)}
 				>
-					{m.common_swap_to_token({
-						token: String(data.quote.symbol.name)
-					})}
+					Swap to {String(data.quote.symbol.name)}
 				</Button>
 			{:else if !market.market.loaded}
-				<p>{m.common_loading()}</p>
+				<p>Loading...</p>
 			{:else}
-				<p class="text-center">{m.common_no_swap_pair()}</p>
+				<p class="text-center">No swap pair available</p>
 			{/if}
 		</TransactForm>
 	</Stack>
