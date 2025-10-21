@@ -21,7 +21,7 @@
 		if (next?.value) {
 			setLocale(next.value).then(() => {
 				context.settings.data.locale = next.value;
-				goto(`/${next.value}/${context.network}/settings`);
+				goto(`/${next.value}/${context.network}/settings`, { replaceState: true });
 			});
 		}
 		return next;
