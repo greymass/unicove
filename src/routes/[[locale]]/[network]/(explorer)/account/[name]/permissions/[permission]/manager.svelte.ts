@@ -34,17 +34,15 @@ interface PermissionManagerArgs {
 	permissionName: Name;
 }
 
-export const permissionTypeBasic: SelectOption = {
+const permissionTypeBasic: SelectOption = {
 	label: 'Basic',
 	value: 'basic'
 };
 
-export const permissionTypeMsig: SelectOption = {
+const permissionTypeMsig: SelectOption = {
 	label: 'Advanced',
 	value: 'msig'
 };
-
-export const permissionTypeSelects: SelectOption[] = [permissionTypeBasic, permissionTypeMsig];
 
 export class PermissionManager {
 	// Required config
@@ -59,6 +57,11 @@ export class PermissionManager {
 
 	// Permission State
 	public data;
+
+	// Permission type options
+	public permissionTypeBasic: SelectOption = permissionTypeBasic;
+	public permissionTypeMsig: SelectOption = permissionTypeMsig;
+	public permissionTypeSelects: SelectOption[] = [permissionTypeBasic, permissionTypeMsig];
 
 	// Existing permissions on this account
 	public permissionNames: SelectOption[] = $derived(

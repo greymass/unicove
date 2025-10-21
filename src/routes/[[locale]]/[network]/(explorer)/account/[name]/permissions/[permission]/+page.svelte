@@ -19,12 +19,7 @@
 	import { Select } from 'unicove-components';
 	import TransactSummary from '$lib/components/transact/summary.svelte';
 	import TransactError from '$lib/components/transact/error.svelte';
-	import {
-		PermissionManager,
-		permissionTypeBasic,
-		permissionTypeMsig,
-		permissionTypeSelects
-	} from './manager.svelte.js';
+	import { PermissionManager } from './manager.svelte.js';
 	import { type Checksum256Type } from '@wharfkit/session';
 	import type { SelectOption } from '@melt-ui/svelte';
 	import type { ExtendedSelectOption } from 'unicove-components';
@@ -50,7 +45,7 @@
 	let msigMode: boolean = $state(requiresMsigInterface);
 	// let msigMode = true;
 	let permissionTypeSelected: SelectOption = $state(
-		requiresMsigInterface ? permissionTypeMsig : permissionTypeBasic
+		requiresMsigInterface ? manager.permissionTypeMsig : manager.permissionTypeBasic
 	);
 
 	let transactionId: Checksum256Type | undefined = $state();
@@ -143,7 +138,7 @@
 		<Select
 			id="permission_type"
 			onSelectedChange={onPermissionTypeChange}
-			options={permissionTypeSelects}
+			options={manager.permissionTypeSelects}
 			variant="form"
 			bind:selected={permissionTypeSelected}
 		/>
