@@ -59,9 +59,12 @@ export class PermissionManager {
 	public data;
 
 	// Permission type options
-	public permissionTypeBasic: SelectOption = permissionTypeBasic;
-	public permissionTypeMsig: SelectOption = permissionTypeMsig;
-	public permissionTypeSelects: SelectOption[] = [permissionTypeBasic, permissionTypeMsig];
+	public permissionTypeBasic: SelectOption = $derived.by(() => permissionTypeBasic);
+	public permissionTypeMsig: SelectOption = $derived.by(() => permissionTypeMsig);
+	public permissionTypeSelects: SelectOption[] = $derived.by(() => [
+		this.permissionTypeBasic,
+		this.permissionTypeMsig
+	]);
 
 	// Existing permissions on this account
 	public permissionNames: SelectOption[] = $derived(
