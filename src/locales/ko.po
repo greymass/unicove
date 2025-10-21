@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.663Z\n"
-"PO-Revision-Date: 2025-10-21T19:04:10.363Z\n"
+"PO-Revision-Date: 2025-10-21T21:19:33.622Z\n"
 "Last-Translator: \n"
 "Language: ko\n"
 "Language-Team: \n"
@@ -180,7 +180,7 @@ msgstr ""
 
 #: src/lib/components/footer.svelte
 msgid "More"
-msgstr ""
+msgstr "더 보기"
 
 #: src/lib/components/footer.svelte
 msgid "Affiliates"
@@ -203,7 +203,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/sell/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "RAM Market"
-msgstr ""
+msgstr "RAM 시장"
 
 #: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/buy/+page.svelte
@@ -218,7 +218,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/sell/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/sell/+page.ts
 msgid "Sell RAM"
-msgstr ""
+msgstr "RAM 판매"
 
 #: src/lib/components/card/tokenoverview.svelte
 #: src/lib/components/navigation/sidemenu.svelte
@@ -262,7 +262,7 @@ msgstr "스테이킹"
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/cards.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/navigation.svelte
 msgid "Unstake"
-msgstr ""
+msgstr "언스테이킹"
 
 #: src/lib/components/navigation/sidemenu.svelte
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
@@ -277,17 +277,17 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/resources/+page.svelte
 msgid "Resources"
-msgstr ""
+msgstr "리소스"
 
 #: src/lib/components/search/input.svelte
 #: src/lib/state/search.svelte.ts
 msgid "Clear"
-msgstr ""
+msgstr "지우기"
 
 #: src/lib/components/breakdown/breakdownRow.svelte
 #: src/lib/components/card/tokenoverview.svelte
 msgid "Total"
-msgstr ""
+msgstr "총"
 
 #: src/lib/components/chart/tokendistribution.svelte
 msgid "KB (RAM)"
@@ -372,7 +372,7 @@ msgstr ""
 
 #: src/lib/components/navigation/sidemenu.svelte
 msgid "My Account"
-msgstr ""
+msgstr "내 계정"
 
 #: src/lib/components/elements/resourceCard.svelte
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
@@ -415,7 +415,7 @@ msgstr ""
 #: src/lib/components/input/assetOrUnits.svelte
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Asset"
-msgstr ""
+msgstr "자산"
 
 #: src/lib/components/input/assetOrUnits.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/inputs.svelte
@@ -434,11 +434,11 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.svelte
 msgid "Summary"
-msgstr ""
+msgstr "요약"
 
 #: src/lib/components/select/actionvariant.svelte
 msgid "Ricardian"
-msgstr ""
+msgstr "리카디언"
 
 #: src/lib/components/select/actionvariant.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
@@ -513,12 +513,12 @@ msgstr ""
 msgid "+ {0} ms (CPU)"
 msgstr ""
 
-#. placeholder {0}: account.weight
-#. placeholder {0}: key.weight
-#. placeholder {0}: account.weight
-#. placeholder {0}: key.weight
-#. placeholder {0}: data.powup_cpu
 #. placeholder {0}: data.powup_net
+#. placeholder {0}: data.powup_cpu
+#. placeholder {0}: key.weight
+#. placeholder {0}: account.weight
+#. placeholder {0}: key.weight
+#. placeholder {0}: account.weight
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio/newaccount.svelte
@@ -591,12 +591,12 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
 msgid "Next"
-msgstr ""
+msgstr "다음"
 
 #: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Configure Unicove"
-msgstr ""
+msgstr "Unicove 설정"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "MSIG Configuration"
@@ -631,96 +631,96 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Preferences"
-msgstr ""
+msgstr "환경설정"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Language Selector"
-msgstr ""
+msgstr "언어 선택기"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "The language used throughout Unicove."
-msgstr ""
+msgstr "유니코브 전체에서 사용되는 언어"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Prefered Currency"
-msgstr ""
+msgstr "선호 통화"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "The currency used to display the value of tokens."
-msgstr ""
+msgstr "토큰의 가치를 표시하는 데 사용되는 통화."
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Increased Precision"
-msgstr ""
+msgstr "정밀도 향상"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Use more decimals to increase currency precision."
-msgstr ""
+msgstr "더 많은 소수점을 사용하여 통화 정밀도를 높이세요."
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Dark Mode"
-msgstr ""
+msgstr "다크 모드"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Toggle site wide dark mode independent from operating system preferences."
-msgstr ""
+msgstr "운영 체제 설정과 무관하게 사이트 전체의 다크 모드를 토글합니다."
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Navigation"
-msgstr ""
+msgstr "네비게이션"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Allow page navigation in search prompt"
-msgstr ""
+msgstr "검색 프롬프트에서 페이지 이동 허용 "
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Adds popular Unicove pages to search results."
-msgstr ""
+msgstr "인기 있는 Unicove 페이지를 검색 결과에 추가합니다."
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Allow account switching in search prompt"
-msgstr ""
+msgstr "검색 프롬프트에서 계정 전환 허용"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Adds logged in accounts to search results for quick switching."
-msgstr ""
+msgstr "빠른 전환을 위해 로그인된 계정을 검색 결과에 추가합니다."
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Remain on current page when switching accounts"
-msgstr ""
+msgstr "계정 전환 시 현재 페이지 유지"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Prevents the automatic navigation to the account overview page"
-msgstr ""
+msgstr "계정 개요 페이지로의 자동 이동 방지"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/manager.svelte.ts
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Advanced"
-msgstr ""
+msgstr "고급"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Enable Advanced Mode"
-msgstr ""
+msgstr "고급 모드 활성화"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Enable features for more advanced use cases."
-msgstr ""
+msgstr "고급 사용 사례를 위해 기능 활성화."
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Developer"
-msgstr ""
+msgstr "개발자"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Enable Developer Mode"
-msgstr ""
+msgstr "개발자 모드 활성화"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Allow usage of settings meant for development of Unicove"
-msgstr ""
+msgstr "유니코브 개발용 설정 사용 허용"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Mock token price"
-msgstr ""
+msgstr "모의 토큰 가격"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid ""
@@ -730,7 +730,7 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Debug Data Display"
-msgstr ""
+msgstr "디버그 데이터 표시"
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
 msgid "I have tokens on an exchange and want to create an account."
@@ -765,20 +765,20 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 msgid "RAM Available"
-msgstr ""
+msgstr "사용 가능한 RAM"
 
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 msgid "Buy"
-msgstr ""
+msgstr "구입하다"
 
 #. placeholder {0}: balanceValueToken.symbol.name
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 msgid "{0} Value"
-msgstr ""
+msgstr "{0} 가치"
 
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 msgid "Sell"
-msgstr ""
+msgstr "판매"
 
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 msgid "RAM Calculator"
@@ -787,17 +787,17 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/ram/+page.svelte
 msgid "Bytes"
-msgstr ""
+msgstr "바이트"
 
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "Details"
-msgstr ""
+msgstr "상세 정보"
 
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 msgid "Network Fees"
-msgstr ""
+msgstr "네트워크 수수료"
 
 #. placeholder {0}: data.network.chain.systemToken?.symbol.code || ''
 #. placeholder {0}: market.network.currency.symbol.code
@@ -809,7 +809,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/token/[contract]/[symbol]/+page.svelte
 msgid "Supply"
-msgstr ""
+msgstr "공급"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "CPU (Central Processing Unit)"
@@ -918,7 +918,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/sell/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/resources/renting.svelte
 msgid "Not logged in"
-msgstr ""
+msgstr "로그인하지 않음"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/renting.svelte
 msgid "(<0/>/MS)"
@@ -1071,7 +1071,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(homepage)/components/legacy-token-swap.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/staking-rewards.svelte
 msgid "Learn more"
-msgstr ""
+msgstr "더 알아보기"
 
 #: src/routes/[[locale]]/[network]/(explorer)/network/+page.svelte
 msgid "Network charts/metrics"
@@ -1196,7 +1196,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/prompt/[payload]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/prompt/[payload]/+page.svelte
 msgid "Back"
-msgstr ""
+msgstr "뒤로"
 
 #: src/routes/[[locale]]/[network]/(account)/signup/wallets/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/signup/wallets/[walletType]/+page.svelte
@@ -1215,7 +1215,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/prompt/[payload]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "Login"
-msgstr ""
+msgstr "로그인"
 
 #. placeholder {0}: currentWallet.name
 #: src/routes/[[locale]]/[network]/(account)/welcome/[wallet]/+page.svelte
@@ -1270,7 +1270,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/+page.ts
 msgid "Actions"
-msgstr ""
+msgstr "액션"
 
 #: src/routes/[[locale]]/[network]/(account)/upload/[[name]]/+page.svelte
 msgid "The actions that will be performed are listed below."
@@ -1350,7 +1350,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/data/+page.svelte
 msgid "Data"
-msgstr ""
+msgstr "데이터"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/+page.svelte
 msgid "The internal state of Unicove for debugging purposes"
@@ -1361,7 +1361,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
 msgid "Overview"
-msgstr ""
+msgstr "개요"
 
 #. placeholder {0}: data.abi.actions.length
 #. placeholder {0}: data.transaction.transaction.actions.length
@@ -1385,7 +1385,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/abi/+page.ts
 msgid "ABI"
-msgstr ""
+msgstr "ABI (에이비아이)"
 
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 msgid "ArrowRight"
@@ -1412,12 +1412,12 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/structs/+page.ts
 msgid "Structs"
-msgstr ""
+msgstr "구조체"
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/+page.ts
 msgid "Tables"
-msgstr ""
+msgstr "테이블"
 
 #: src/routes/[[locale]]/[network]/(explorer)/prompt/[payload]/+page.svelte
 msgid "Visit Account"
@@ -1495,7 +1495,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/prompt/[payload]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/details/+page.svelte
 msgid "Transaction Details"
-msgstr ""
+msgstr "트랜잭션 상세정보"
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/prompt/[payload]/+page.svelte
@@ -1518,11 +1518,11 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "View my account"
-msgstr ""
+msgstr "내 계정 보기"
 
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/buy/+page.svelte
 msgid "Amount of RAM to buy:"
-msgstr ""
+msgstr "구매할 RAM의 양:"
 
 #. placeholder {0}: String(context.network.chain.systemToken?.symbol.name)
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/buy/+page.svelte
@@ -1537,11 +1537,11 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/buy/+page.svelte
 msgid "RAM to be bought"
-msgstr ""
+msgstr "구매할 RAM"
 
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/buy/+page.svelte
 msgid "RAM Purchase Value"
-msgstr ""
+msgstr "RAM 구매 가치"
 
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/buy/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/sell/+page.svelte
@@ -1551,7 +1551,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/buy/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/resources/renting.svelte
 msgid "Total Cost"
-msgstr ""
+msgstr "총 비용"
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
@@ -1561,11 +1561,11 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/sell/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/prompt/[payload]/+page.svelte
 msgid "Debugging"
-msgstr ""
+msgstr "디버깅"
 
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/sell/+page.svelte
 msgid "Amount of RAM to sell:"
-msgstr ""
+msgstr "판매할 RAM 양:"
 
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/sell/+page.svelte
 msgid "Insufficient RAM balance. Please enter a smaller amount."
@@ -1581,15 +1581,15 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/sell/+page.svelte
 msgid "RAM to be sold"
-msgstr ""
+msgstr "판매할 RAM"
 
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/sell/+page.svelte
 msgid "Total Proceeds"
-msgstr ""
+msgstr "총 수익금"
 
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/sell/+page.svelte
 msgid "Expected to receive"
-msgstr ""
+msgstr "예상 수령액"
 
 #. placeholder {0}: currentWalletType.title
 #: src/routes/[[locale]]/[network]/(account)/signup/wallets/[walletType]/+page.svelte
@@ -1689,13 +1689,13 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/buttons.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Cancel"
-msgstr ""
+msgstr "취소"
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/buttons.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Confirm"
-msgstr ""
+msgstr "확인하다"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/buttons.svelte
 msgid "Icon Buttons"
@@ -1728,7 +1728,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/cards.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/navigation.svelte
 msgid "Withdraw"
-msgstr ""
+msgstr "출금"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/charts.svelte
 msgid "Charts"
@@ -2000,7 +2000,7 @@ msgstr ""
 #: src/lib/components/select/balance.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
 msgid "Select an option"
-msgstr ""
+msgstr "옵션을 선택하세요."
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
 msgid "Token Select"
@@ -2231,7 +2231,7 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/summaries/+page.svelte
 msgid "Token Transfer"
-msgstr ""
+msgstr "토큰 전송"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/summaries/+page.svelte
 msgid "Swap System Token to RAM"
@@ -2316,7 +2316,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/account/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 msgid "Balances"
-msgstr ""
+msgstr "잔액"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/account/+page.svelte
 msgid "Delegations (delband)"
@@ -2376,7 +2376,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(account)/fund/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.svelte
 msgid "Loading"
-msgstr ""
+msgstr "로딩 중"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/token/[contract]/[symbol]/+page.svelte
@@ -2389,7 +2389,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/ram/+page.svelte
 msgid "Contract"
-msgstr ""
+msgstr "컨트랙트"
 
 #: src/lib/components/search/input.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.svelte
@@ -2398,7 +2398,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/ram/+page.svelte
 msgid "Action"
-msgstr ""
+msgstr "액션"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.svelte
 msgid "Filter"
@@ -2559,7 +2559,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/staked/+page.svelte
 msgid "Staked"
-msgstr ""
+msgstr "스테이킹됨"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/staked/+page.svelte
 msgid "Loading staking details..."
@@ -2655,7 +2655,7 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/token/[contract]/[symbol]/+page.svelte
 msgid "Balance"
-msgstr ""
+msgstr "잔액"
 
 #: src/routes/[[locale]]/[network]/(explorer)/token/[contract]/[symbol]/+page.svelte
 msgid "(Locked Supply)"
@@ -2663,64 +2663,64 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Recipient"
-msgstr ""
+msgstr "수신자"
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Complete"
-msgstr ""
+msgstr "완료"
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Error"
-msgstr ""
+msgstr "오류"
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/fund/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/resources/renting.svelte
 msgid "Receiving Account"
-msgstr ""
+msgstr "수신 계정"
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Enter the account name of the recipient"
-msgstr ""
+msgstr "수신자의 계정명을 입력하세요."
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Token to send"
-msgstr ""
+msgstr "보낼 토큰 "
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balances/+page.svelte
 msgid "No balances found."
-msgstr ""
+msgstr "잔액이 없습니다."
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Amount to send"
-msgstr ""
+msgstr "보낼 금액"
 
 #. placeholder {0}: sendState.quantity.symbol.code
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Enter the amount of {0} to send"
-msgstr ""
+msgstr "보낼 {0} 수량을 입력하세요."
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Fill Max"
-msgstr ""
+msgstr "최대 채우기"
 
 #. placeholder {0}: formatCurrency(sendState.value)
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Value: {0}"
-msgstr ""
+msgstr "값: {0}"
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/stake/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/unstake/+page.svelte
 msgid "Invalid number, too many decimal places."
-msgstr ""
+msgstr "유효하지 않은 숫자입니다. 소수점 자릿수가 너무 많습니다."
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/stake/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/unstake/+page.svelte
 msgid "Amount exceeds available balance."
-msgstr ""
+msgstr "잔액이 부족합니다."
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Memo (Optional)"
@@ -2728,21 +2728,21 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Specify a public memo for this transfer (optional)"
-msgstr ""
+msgstr "이 전송에 대한 공개 메모를 지정하세요(선택 사항)"
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
 msgid "Restart"
-msgstr ""
+msgstr "다시 시작"
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Start new send"
-msgstr ""
+msgstr "새로운 전송 시작"
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Submit"
-msgstr ""
+msgstr "제출"
 
 #: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
@@ -2986,7 +2986,7 @@ msgstr ""
 #: src/lib/components/wallets/metamask/install.svelte
 #: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/metamask/+page.svelte
 msgid "Install MetaMask"
-msgstr ""
+msgstr "MetaMask 설치"
 
 #: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/metamask/+page.svelte
 msgid "Step 2: Install EOS Wallet"
@@ -3456,19 +3456,19 @@ msgstr ""
 #. placeholder {2}: network.chain.name
 #: src/routes/[[locale]]/[network]/(account)/ram/+layout.ts
 msgid "An overview of the {0}/{1} market on the {2} Network."
-msgstr ""
+msgstr "{2} 네트워크에서의 {0}/{1} 시장 개요."
 
 #. placeholder {0}: network.chain.name
 #. placeholder {1}: token
 #. placeholder {2}: network.chain.name
 #: src/routes/[[locale]]/[network]/(account)/ram/+layout.ts
 msgid "An overview of RAM Market on the {0} network that provides access to buy and sell RAM with {1} using an {2} compatible wallet."
-msgstr ""
+msgstr "{2} 네트워크에서 {1}을 사용해 RAM을 매매할 수 있는 RAM 시장 개요입니다. {2} 호환 지갑으로 접속하세요."
 
 #: src/routes/[[locale]]/[network]/(account)/transactions/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 msgid "Transactions"
-msgstr ""
+msgstr "트랜잭션"
 
 #. placeholder {0}: network.chain.name
 #. placeholder {0}: network.chain.name
@@ -3577,14 +3577,14 @@ msgstr ""
 #. placeholder {1}: network.chain.name
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/buy/+page.ts
 msgid "Exchange {0} for RAM on the {1} network."
-msgstr ""
+msgstr "{1} 네트워크에서 {0}을 RAM으로 교환하세요."
 
 #. placeholder {0}: systemtoken.name
 #. placeholder {1}: ramtoken.name
 #. placeholder {2}: network.chain.name
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/buy/+page.ts
 msgid "Exchange {0} for {1} on the {2} network."
-msgstr ""
+msgstr " {2} 네트워크에서 {0}를 {1}로 교환하세요."
 
 #. placeholder {0}: params.walletType
 #: src/routes/[[locale]]/[network]/(account)/signup/wallets/[walletType]/+page.ts
@@ -3595,14 +3595,14 @@ msgstr ""
 #. placeholder {1}: network.chain.name
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/sell/+page.ts
 msgid "Exchange RAM for {0} on the {1} network."
-msgstr ""
+msgstr "{1} 네트워크에서 RAM을 {0}으로 교환하세요."
 
 #. placeholder {0}: String(network.chain.systemToken?.symbol.name || 'tokens')
 #. placeholder {1}: network.chain.name
 #. placeholder {2}: network.chain.name
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/sell/+page.ts
 msgid "Exchange RAM for {0} on the {1} network using an {2} compatible wallet."
-msgstr ""
+msgstr "{2} 호환 지갑을 사용하여 {2} 네트워크에서 RAM을 {0}으로 교환하세요."
 
 #. placeholder {0}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/chaindata/+page.ts
@@ -3658,20 +3658,20 @@ msgstr ""
 
 #: src/lib/components/networkswitch.svelte
 msgid "Change network"
-msgstr ""
+msgstr "네트워크 변경"
 
 #: src/lib/components/accountswitch.svelte
 msgid "Connect Wallet"
-msgstr ""
+msgstr "지갑 연결"
 
 #: src/lib/components/accountswitch.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Add Account"
-msgstr ""
+msgstr "계정 추가"
 
 #: src/lib/components/accountswitch.svelte
 msgid "My Accounts"
-msgstr ""
+msgstr "내 계정"
 
 #. placeholder {0}: session.walletPlugin.data.session.actor
 #: src/lib/components/accountswitch.svelte
@@ -3680,17 +3680,17 @@ msgstr ""
 
 #: src/lib/components/accountswitch.svelte
 msgid "Login to Unicove"
-msgstr ""
+msgstr "유니코브(Unicove)로 로그인"
 
 #: src/lib/components/accountswitch.svelte
 msgid "Connect your wallet to login"
-msgstr ""
+msgstr "지갑을 연결하여 로그인"
 
 #. placeholder {0}: props.network.chain.name
 #. placeholder {1}: props.network.token.name
 #: src/lib/components/banner/systemTokenSwap.svelte
 msgid "{0} now uses the {1} token"
-msgstr ""
+msgstr "이제 {0}에서 {1} 토큰을 사용합니다."
 
 #: src/lib/components/banner/systemTokenSwap.svelte
 msgid "<0/> available to swap"
@@ -3699,7 +3699,7 @@ msgstr ""
 #: src/lib/components/banner/systemTokenSwap.svelte
 #: src/routes/[[locale]]/[network]/(account)/swap/+page.svelte
 msgid "Swap"
-msgstr ""
+msgstr "스왑"
 
 #: src/lib/components/banner/pageBanner.svelte
 msgid "<0/><1>Breaking News:</1> EOS Network Rebrands to Vaulta"
@@ -3707,13 +3707,13 @@ msgstr ""
 
 #: src/lib/components/card/tokenoverview.svelte
 msgid "Value"
-msgstr ""
+msgstr "가치"
 
 #: src/lib/components/card/tokenoverview.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.svelte
 msgid "Add Funds"
-msgstr ""
+msgstr "자금 추가"
 
 #: src/lib/components/card/accountbalance.svelte
 #: src/lib/components/card/tokenoverview.svelte
@@ -3722,76 +3722,76 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
 msgid "Available"
-msgstr ""
+msgstr "사용 가능"
 
 #: src/lib/components/card/tokenoverview.svelte
 #: src/lib/components/chart/tokendistribution.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/+page.svelte
 msgid "Unstaked"
-msgstr ""
+msgstr "언스테이킹됨"
 
 #: src/lib/components/card/tokenoverview.svelte
 #: src/lib/components/chart/tokendistribution.svelte
 msgid "Delegated"
-msgstr ""
+msgstr "위임됨"
 
 #: src/lib/components/card/tokenoverview.svelte
 #: src/routes/[[locale]]/[network]/(account)/undelegate/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/undelegate/+page.ts
 msgid "Reclaim"
-msgstr ""
+msgstr "클레임"
 
 #: src/lib/components/card/tokenoverview.svelte
 #: src/routes/[[locale]]/[network]/(account)/refund/+page.svelte
 msgid "Refunding"
-msgstr ""
+msgstr "환불 중"
 
 #: src/lib/components/card/tokenoverview.svelte
 msgid "Claim"
-msgstr ""
+msgstr "클레임"
 
 #: src/lib/components/card/accountbalance.svelte
 msgid "Account Balance"
-msgstr ""
+msgstr "계정 잔액"
 
 #: src/lib/components/chart/barchart.svelte
 msgid "Yield"
-msgstr ""
+msgstr "수익률 "
 
 #: src/lib/components/chart/barchart.svelte
 #: src/lib/components/chart/chart-container.svelte
 msgid "Today"
-msgstr ""
+msgstr "오늘"
 
 #: src/lib/components/chart/tokendistribution.svelte
 msgid "Distribution"
-msgstr ""
+msgstr "분배"
 
 #: src/lib/components/elements/action.svelte
 msgid "length"
-msgstr ""
+msgstr "길이"
 
 #: src/lib/components/elements/action.svelte
 msgid "No data"
-msgstr ""
+msgstr "데이터가 없습니다"
 
 #: src/lib/components/elements/action.svelte
 msgid "Signed by"
-msgstr ""
+msgstr "서명자"
 
 #: src/lib/components/elements/action.svelte
 msgid "notified"
-msgstr ""
+msgstr "알림받음"
 
 #. placeholder {0}: record.type
 #: src/lib/components/search/result.svelte
 msgid "View {0}"
-msgstr ""
+msgstr "{0} 보기"
 
 #: src/lib/components/elements/unstaking.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/+page.svelte
 msgid "Unstaking"
-msgstr ""
+msgstr "언스테이킹"
 
 #: src/lib/components/elements/unstaking.svelte
 msgid ""
@@ -3802,33 +3802,33 @@ msgstr ""
 #: src/lib/components/elements/unstaking.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balances/+page.svelte
 msgid "Amount"
-msgstr ""
+msgstr "금액"
 
 #: src/lib/components/elements/unstaking.svelte
 #: src/routes/[[locale]]/[network]/(account)/refund/+page.svelte
 msgid "Date Available"
-msgstr ""
+msgstr "사용 가능 날짜"
 
 #. placeholder {0}: String(context.network.chain.name).slice(0, 3)
 #: src/lib/components/search/input.svelte
 msgid "Search {0}..."
-msgstr ""
+msgstr "{0} 검색..."
 
 #: src/lib/components/search/input.svelte
 msgid "Search Unicove"
-msgstr ""
+msgstr "Unicove 검색"
 
 #: src/lib/components/search/input.svelte
 msgid "Search Results"
-msgstr ""
+msgstr "검색 결과"
 
 #: src/lib/components/search/input.svelte
 msgid "Recent Activity"
-msgstr ""
+msgstr "최근 활동"
 
 #: src/lib/components/search/input.svelte
 msgid "No results found"
-msgstr ""
+msgstr "결과를 찾을 수 없습니다."
 
 #: src/lib/components/search/input.svelte
 msgid ""
@@ -3838,7 +3838,7 @@ msgstr ""
 
 #: src/lib/components/transact/summary.svelte
 msgid "Multi-Sig Proposal Created"
-msgstr ""
+msgstr "멀티시그 제안 생성 완료"
 
 #: src/lib/components/transact/summary.svelte
 msgid ""
@@ -3854,76 +3854,76 @@ msgstr ""
 
 #: src/lib/components/transact/summary.svelte
 msgid "Transaction Complete"
-msgstr ""
+msgstr "트랜잭션 완료"
 
 #: src/lib/components/transact/summary.svelte
 #: src/lib/components/transaction/header.svelte
 msgid "Transaction ID"
-msgstr ""
+msgstr "트랜잭션 ID"
 
 #: src/lib/components/transact/summary.svelte
 msgid "Transaction Not Found"
-msgstr ""
+msgstr "거래를 찾을 수 없습니다"
 
 #. placeholder {0}: String(transactionId)
 #: src/lib/components/transact/summary.svelte
 msgid "The transaction with ID {0} could not be found."
-msgstr ""
+msgstr "ID가 {0} 인 거래를 찾을 수 없습니다."
 
 #: src/lib/components/transact/error.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
 msgid "Transaction Error"
-msgstr ""
+msgstr "트랜잭션 오류"
 
 #: src/lib/components/transaction/header.svelte
 msgid "Finality Status"
-msgstr ""
+msgstr "확정성 상태"
 
 #: src/lib/components/transaction/header.svelte
 msgid "Irreversible"
-msgstr ""
+msgstr "되돌릴 수 없음"
 
 #: src/lib/components/transaction/header.svelte
 msgid "Reversible"
-msgstr ""
+msgstr "가역적"
 
 #: src/lib/components/transaction/header.svelte
 msgid "Date"
-msgstr ""
+msgstr "날짜"
 
 #: src/lib/components/transaction/header.svelte
 msgid "Included in Block"
-msgstr ""
+msgstr "블록에 포함됨"
 
 #: src/lib/components/transaction/header.svelte
 msgid "Contracts Used"
-msgstr ""
+msgstr "사용된 컨트랙트"
 
 #: src/lib/components/transaction/header.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 msgid "CPU (μs)"
-msgstr ""
+msgstr "CPU (마이크로초)"
 
 #: src/lib/components/transaction/header.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 msgid "NET (Bytes)"
-msgstr ""
+msgstr "순수 바이트(바이트)"
 
 #: src/lib/components/summary/components/transfer.svelte
 msgid "Sent"
-msgstr ""
+msgstr "보냄"
 
 #: src/lib/components/summary/components/transfer.svelte
 msgid "Received"
-msgstr ""
+msgstr "받음 "
 
 #: src/lib/components/summary/eosio/buyrambytes.svelte
 msgid "Requesting"
-msgstr ""
+msgstr "요청 중"
 
 #: src/lib/components/summary/eosio/logsystemfee.svelte
 msgid "Fee"
-msgstr ""
+msgstr "수수료"
 
 #: src/lib/components/summary/eosio/powerup.svelte
 msgid "renting CPU for"
@@ -3936,18 +3936,18 @@ msgstr ""
 #. placeholder {0}: data.owner
 #: src/lib/components/summary/eosio/refund.svelte
 msgid "System contract refund request for {0}."
-msgstr ""
+msgstr "{0} 계정의 시스템 컨트랙트 환불 요청."
 
 #: src/lib/components/summary/greymassnoop/noop.svelte
 msgid "The network resources for this transaction were provided by a 3rd party."
-msgstr ""
+msgstr "이 트랜잭션의 네트워크 리소스는 제3자가 제공했습니다."
 
 #. placeholder {0}: productName
 #. placeholder {0}: productName
 #: src/lib/components/wallets/metamask/install.svelte
 #: src/lib/components/wallets/metamask/snap.svelte
 msgid "Add {0} to MetaMask"
-msgstr ""
+msgstr "MetaMask에 {0} 추가하기"
 
 #. placeholder {0}: productName
 #. placeholder {1}: networkName
@@ -3960,7 +3960,7 @@ msgstr ""
 #. placeholder {0}: productName
 #: src/lib/components/wallets/metamask/install.svelte
 msgid "Begin by installing MetaMask, then come back to this page and install the {0} snap."
-msgstr ""
+msgstr "먼저 MetaMask를 설치한 후，이 페이지로 돌아와 {0} 스냅을 설치하세요."
 
 #: src/lib/components/wallets/metamask/install.svelte
 msgid ""
@@ -3970,7 +3970,7 @@ msgstr ""
 
 #: src/lib/components/wallets/metamask/snap.svelte
 msgid "It looks like you already have MetaMask installed."
-msgstr ""
+msgstr "MetaMask가 이미 설치된 것 같습니다."
 
 #. placeholder {0}: networkName
 #. placeholder {1}: productName
@@ -3985,51 +3985,51 @@ msgstr ""
 #: src/lib/components/wallets/metamask/snap.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/carousel.svelte
 msgid "Install {0}"
-msgstr ""
+msgstr "{0} 설치"
 
 #: src/lib/state/search.svelte.ts
 msgid "Market Overview"
-msgstr ""
+msgstr "시장 개요"
 
 #: src/lib/state/search.svelte.ts
 msgid "Purchase RAM"
-msgstr ""
+msgstr "RAM 구매"
 
 #: src/lib/state/search.svelte.ts
 msgid "Transfer tokens"
-msgstr ""
+msgstr "토큰 전송"
 
 #: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/stake/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/unstake/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/withdraw/+page.svelte
 msgid "Staking overview"
-msgstr ""
+msgstr "스테이킹 개요"
 
 #: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/(homepage)/components/staking-rewards.svelte
 msgid "Stake Tokens"
-msgstr ""
+msgstr "토큰 스테이킹"
 
 #: src/lib/state/search.svelte.ts
 msgid "Unstake tokens"
-msgstr ""
+msgstr "토큰 언스테이킹"
 
 #: src/lib/state/search.svelte.ts
 msgid "Manage CPU/NET"
-msgstr ""
+msgstr "CPU/NET 관리"
 
 #: src/lib/state/search.svelte.ts
 msgid "Clear search history"
-msgstr ""
+msgstr "검색 기록 삭제"
 
 #: src/lib/state/search.svelte.ts
 msgid "Switch Account"
-msgstr ""
+msgstr "계정 전환"
 
 #: src/routes/[[locale]]/[network]/(account)/fund/+page.svelte
 msgid "Purchase Directly"
-msgstr ""
+msgstr "직접 구매"
 
 #. placeholder {0}: context.network.token.symbol.name
 #: src/routes/[[locale]]/[network]/(account)/fund/+page.svelte
@@ -4040,16 +4040,16 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(account)/fund/+page.svelte
 msgid "Token to Purchase"
-msgstr ""
+msgstr "구매할 토큰"
 
 #: src/routes/[[locale]]/[network]/(account)/fund/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/fund/onramps/coinbase.svelte.ts
 msgid "You must be logged in with an account to use this feature."
-msgstr ""
+msgstr "이 기능을 사용하려면 계정으로 로그인해야 합니다."
 
 #: src/routes/[[locale]]/[network]/(account)/fund/+page.svelte
 msgid "Exchanges"
-msgstr ""
+msgstr "거래소"
 
 #. placeholder {0}: context.network.token.symbol.name
 #: src/routes/[[locale]]/[network]/(account)/fund/+page.svelte
@@ -4060,28 +4060,28 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "Rent resources with PowerUp"
-msgstr ""
+msgstr "PPowerU로 리소스 렌트"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "Rent resources with REX"
-msgstr ""
+msgstr "REX로 리소스 렌트"
 
 #. placeholder {0}: symbolName
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "Stake {0} for resources"
-msgstr ""
+msgstr "리소스를 위해 {0} 스테이크"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/renting.svelte
 msgid "Until Unstaked"
-msgstr ""
+msgstr "언스테이킹 시까지"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/renting.svelte
 msgid "Usable for"
-msgstr ""
+msgstr "사용 가능"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/renting.svelte
 msgid "Balance available"
-msgstr ""
+msgstr "사용 가능한 잔액"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/renting.svelte
 msgid "Amount of CPU <0/>"
@@ -4093,30 +4093,30 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(account)/resources/renting.svelte
 msgid "Rent Resources for my account"
-msgstr ""
+msgstr "내 계정에 대한 리소스 렌트"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/renting.svelte
 msgid "Enter the account name"
-msgstr ""
+msgstr "계정 이름을 입력하세요"
 
 #. placeholder {0}: rentState.cost
 #: src/routes/[[locale]]/[network]/(account)/resources/renting.svelte
 msgid "Rent for {0}"
-msgstr ""
+msgstr "{0}로 렌트"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/renting.svelte
 msgid "Confirm Rent"
-msgstr ""
+msgstr "렌트 확인"
 
 #: src/routes/[[locale]]/[network]/(account)/refund/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/refund/+page.ts
 msgid "Refund"
-msgstr ""
+msgstr "환불"
 
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/stake/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/+page.svelte
 msgid "Current APR"
-msgstr ""
+msgstr "현재 APR"
 
 #: src/routes/[[locale]]/[network]/(account)/staking/+page.svelte
 msgid "Staking Balance"
@@ -4129,23 +4129,23 @@ msgstr ""
 #. placeholder {0}: data.network.chain.name
 #: src/routes/[[locale]]/[network]/(account)/staking/+page.svelte
 msgid "This staking interface is not available on {0}."
-msgstr ""
+msgstr "이 스테이킹 인터페이스는 {0}에서 사용할 수 없습니다."
 
 #: src/routes/[[locale]]/[network]/(account)/staking/stakingcalculator.svelte
 msgid "Daily"
-msgstr ""
+msgstr "매일"
 
 #: src/routes/[[locale]]/[network]/(account)/staking/stakingcalculator.svelte
 msgid "Monthly"
-msgstr ""
+msgstr "매월"
 
 #: src/routes/[[locale]]/[network]/(account)/staking/stakingcalculator.svelte
 msgid "Yearly"
-msgstr ""
+msgstr "매년 "
 
 #: src/routes/[[locale]]/[network]/(account)/staking/stakingcalculator.svelte
 msgid "Staking Calculator"
-msgstr ""
+msgstr "스테이킹 계산기"
 
 #. placeholder {0}: String(network.chain.systemToken!.symbol.name)
 #. placeholder {1}: apr
@@ -4158,7 +4158,7 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(account)/undelegate/+page.svelte
 msgid "Delegated Amount"
-msgstr ""
+msgstr "위임 금액"
 
 #: src/routes/[[locale]]/[network]/(account)/undelegate/+page.svelte
 msgid ""
@@ -4170,26 +4170,26 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Actor"
-msgstr ""
+msgstr "액터"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Votes"
-msgstr ""
+msgstr "투표"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Top 21"
-msgstr ""
+msgstr "상위 21개"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Standby"
-msgstr ""
+msgstr "대기 중"
 
 #: src/routes/[[locale]]/[network]/(homepage)/components/articles.svelte
 msgid "Read more"
-msgstr ""
+msgstr "더 보기 "
 
 #. placeholder {0}: networkName
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
@@ -4203,7 +4203,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
 msgid "Stake, Send, Manage Tokens, and Explore {0} – all with ease"
-msgstr ""
+msgstr "손쉽게 {0} 네트워크에서 스테이킹, 전송, 토큰 관리 및 탐색을 모두 즐기세요!"
 
 #. placeholder {0}: networkName
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
@@ -4213,18 +4213,18 @@ msgstr ""
 #. placeholder {0}: productName
 #: src/routes/[[locale]]/[network]/(homepage)/components/carousel.svelte
 msgid "The {0} for MetaMask"
-msgstr ""
+msgstr "메타마스크용 {0}"
 
 #. placeholder {0}: networkName
 #. placeholder {1}: productName
 #: src/routes/[[locale]]/[network]/(homepage)/components/carousel.svelte
 msgid "MetaMask, an the industry leading self-custody wallet, is now compatible with Unicove and the {0} network. Install the {1} snap for MetaMask to get started."
-msgstr ""
+msgstr "업계를 선도하는 자체 관리형 지갑 메타마스크가 이제 유니코브 및 {0} 네트워크와 호환됩니다. 시작하려면 메타마스크용 {1} 스냅을 설치하세요. "
 
 #. placeholder {0}: props.network.chain.name
 #: src/routes/[[locale]]/[network]/(homepage)/components/legacy-token-swap.svelte
 msgid "{0} Token Swap has begun!"
-msgstr ""
+msgstr "{0} 토큰 스왑이 시작되었습니다!"
 
 #. placeholder {0}: props.network.config.legacytoken?.name
 #. placeholder {1}: props.network.token.name
@@ -4237,17 +4237,17 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/legacy-token-swap.svelte
 msgid "Swap to {0}"
-msgstr ""
+msgstr "{0}으로 스왑하기"
 
 #. placeholder {0}: network.chain.name
 #. placeholder {1}: String(network.token.symbol.name)
 #: src/routes/[[locale]]/[network]/(homepage)/components/charts.svelte
 msgid "The {0} network's native token, {1}, can be used for staking rewards, to buy and sell RAM, to pay transaction fees, and more. It is traded on most major exchanges."
-msgstr ""
+msgstr "{0} 네트워크의 네이티브 토큰인 {1}은 스테이킹 보상, RAM 구매 및 판매, 트랜잭션 수수료 지불 등에 사용될 수 있습니다. 대부분의 주요 거래소에서 거래됩니다."
 
 #: src/routes/[[locale]]/[network]/(homepage)/components/charts.svelte
 msgid "Get Tokens"
-msgstr ""
+msgstr "토큰 받기 "
 
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
@@ -4258,11 +4258,11 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(homepage)/components/charts.svelte
 msgid "Send {0} Tokens"
-msgstr ""
+msgstr "{0} 토큰 보내기"
 
 #: src/routes/[[locale]]/[network]/(homepage)/components/charts.svelte
 msgid "KB (RAM): Tokenized Data Storage"
-msgstr ""
+msgstr "토큰화된 데이터 스토리지"
 
 #. placeholder {0}: ramtoken.name
 #. placeholder {1}: ramtoken.name
@@ -4275,8 +4275,8 @@ msgstr ""
 #. placeholder {1}: quote.name
 #. placeholder {0}: base.name
 #. placeholder {1}: quote.name
-#. placeholder {0}: base.name
-#. placeholder {1}: quote.name
+#. placeholder {0}: data.network.token.name
+#. placeholder {1}: data.network.getRamToken().name
 #. placeholder {0}: base.name
 #. placeholder {1}: quote.name
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.ts
@@ -4284,11 +4284,11 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/charts.svelte
 msgid "Swap {0}/{1}"
-msgstr ""
+msgstr "스왑 {0}/{1}"
 
 #: src/routes/[[locale]]/[network]/(homepage)/components/stakedhex.svelte
 msgid "Total Staked"
-msgstr ""
+msgstr "총 스테이킹량"
 
 #. placeholder {0}: network.token.name
 #: src/routes/[[locale]]/[network]/(homepage)/components/staking-rewards.svelte
@@ -4316,7 +4316,7 @@ msgstr ""
 #. placeholder {0}: networkName
 #: src/routes/[[locale]]/[network]/(homepage)/components/performance-grid.svelte
 msgid "System-level DeFi is offered by the {0} network both staking and RAM trading. The network also supports a variety of DeFi applications, including decentralized exchanges, lending platforms, swaps, and more."
-msgstr ""
+msgstr "{0} 네트워크는 시스템 레벨 DeFi로 스테이킹과 RAM 거래를 제공합니다. 또한 이 네트워크는 탈중앙 거래소、대출 플랫폼、스왑等 다양한 DeFi 애플리케이션을 지원합니다."
 
 #. placeholder {0}: network.token.name
 #: src/routes/[[locale]]/[network]/(homepage)/components/performance-grid.svelte
@@ -4325,7 +4325,7 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(homepage)/components/performance-grid.svelte
 msgid "Native TVL"
-msgstr ""
+msgstr "네이티브 총 예치 자산"
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
@@ -4338,7 +4338,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(account)/upload/[[name]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Account Name"
-msgstr ""
+msgstr "계정 이름"
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
@@ -4370,22 +4370,22 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
 msgid "Change RAM options for new account"
-msgstr ""
+msgstr "새 계정에 대한 RAM 옵션 변경"
 
 #. placeholder {0}: ramBytesMin
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
 msgid "RAM bytes to purchase for new account (min: {0})"
-msgstr ""
+msgstr "새 계정 생성 시 구매할 RAM 바이트 (최소: {0}) "
 
 #. placeholder {0}: context.wharf.session.actor
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
 msgid "Transfer RAM from my account: {0}"
-msgstr ""
+msgstr "내 계정({0})에서 RAM 전송"
 
 #. placeholder {0}: ramBytesUseTransfer ? `by transferring ${ramBytes} bytes of RAM` : `by paying ${String(ramCost)} for RAM`
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
 msgid "Create Account {0}"
-msgstr ""
+msgstr "{0} 계정 생성"
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
 msgid ""
@@ -4395,7 +4395,7 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
 msgid "Account Created"
-msgstr ""
+msgstr "계정 생성됨"
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
 msgid "Your new account has been created successfully."
@@ -4407,11 +4407,11 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/key/[publicKey]/+page.ts
 msgid "Public Key"
-msgstr ""
+msgstr "공개 키"
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
 msgid "Generate Key"
-msgstr ""
+msgstr "키 생성"
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
 msgid "Private Key <0/>"
@@ -4419,7 +4419,7 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
 msgid "Private Key"
-msgstr ""
+msgstr "프라이빗 키"
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
 msgid ""
@@ -4429,11 +4429,11 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
 msgid "I have saved this private key."
-msgstr ""
+msgstr "이 개인 키를 저장했습니다. "
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
 msgid "Instructions"
-msgstr ""
+msgstr "지침"
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
 msgid ""
@@ -4444,16 +4444,16 @@ msgstr ""
 #. placeholder {0}: context.network.token.name
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
 msgid "Send {0} to account"
-msgstr ""
+msgstr "{0}을 계정에 전송"
 
 #. placeholder {0}: context.network.token.name
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
 msgid "Amount of {0} to send"
-msgstr ""
+msgstr "보낼 {0} 수량"
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
 msgid "Transfer Memo"
-msgstr ""
+msgstr "전송 메모 "
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
 msgid ""
@@ -4463,11 +4463,11 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 msgid "Activity"
-msgstr ""
+msgstr "활동"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 msgid "Permissions"
-msgstr ""
+msgstr "권한"
 
 #. placeholder {0}: data.account.proposals.length
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
@@ -4481,54 +4481,54 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/key/[publicKey]/+page.svelte
 msgid "Associated Accounts"
-msgstr ""
+msgstr "연관된 계정"
 
 #: src/routes/[[locale]]/[network]/(explorer)/key/[publicKey]/+page.svelte
 msgid "No accounts found"
-msgstr ""
+msgstr "계정을 찾을 수 없습니다"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.svelte
 msgid "Total Account Value"
-msgstr ""
+msgstr "총 계정 가치"
 
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/transaction/+page.svelte
 msgid "Transaction"
-msgstr ""
+msgstr "트랜잭션"
 
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 msgid "No transactions"
-msgstr ""
+msgstr "거래 기록이 없습니다. "
 
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 msgid "Block Details"
-msgstr ""
+msgstr "블록 상세 정보"
 
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 msgid "Block Number"
-msgstr ""
+msgstr "블록 번호"
 
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 msgid "Producer Name"
-msgstr ""
+msgstr "생산자 이름"
 
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 msgid "Total CPU"
-msgstr ""
+msgstr "총 CPU"
 
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 msgid "Total NET"
-msgstr ""
+msgstr "총 순수량"
 
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 msgid "Total Actions"
-msgstr ""
+msgstr "총 활동 수"
 
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 msgid "Block ID"
-msgstr ""
+msgstr "블록 ID"
 
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 msgid "<0/> Previous Block"
@@ -4541,7 +4541,7 @@ msgstr ""
 #. placeholder {0}: productName
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "{0} + MetaMask"
-msgstr ""
+msgstr "{name} + MetaMask"
 
 #. placeholder {0}: productName
 #. placeholder {1}: String(latestVersion)
@@ -4554,7 +4554,7 @@ msgstr ""
 #. placeholder {0}: productName
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "Update {0}"
-msgstr ""
+msgstr "{0} 업데이트하기"
 
 #. placeholder {0}: productName
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
@@ -4572,7 +4572,7 @@ msgstr ""
 #. placeholder {0}: context.wharf.session.actor
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "You are logged in as {0} but are not using MetaMask."
-msgstr ""
+msgstr "귀하는 {0}로 로그인되어 있으나, MetaMask를 사용하고 있지는 않습니다."
 
 #. placeholder {0}: networkName
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
@@ -4583,15 +4583,15 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "Create an account"
-msgstr ""
+msgstr "계정 생성"
 
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "FAQ"
-msgstr ""
+msgstr "자주 묻는 질문"
 
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "What is a MetaMask snap?"
-msgstr ""
+msgstr "MetaMask Snap이란 무엇인가요?"
 
 #. placeholder {0}: networkName
 #. placeholder {1}: productName
@@ -4604,7 +4604,7 @@ msgstr ""
 #. placeholder {0}: productName
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "How do I install the {0}?"
-msgstr ""
+msgstr "{0}을 어떻게 설치하나요?"
 
 #. placeholder {0}: productName
 #. placeholder {1}: productName
@@ -4618,7 +4618,7 @@ msgstr ""
 #. placeholder {0}: productName
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "What does the {0} do?"
-msgstr ""
+msgstr " {0}은 무슨 기능을 하나요?"
 
 #. placeholder {0}: productName
 #. placeholder {1}: networkName
@@ -4632,7 +4632,7 @@ msgstr ""
 #. placeholder {0}: productName
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "What does the {0} not do?"
-msgstr ""
+msgstr "{0}은 무엇을 하지 않나요?"
 
 #. placeholder {0}: productName
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
@@ -4644,7 +4644,7 @@ msgstr ""
 #. placeholder {0}: productName
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "How do I sign transactions using the {0}?"
-msgstr ""
+msgstr "{0}을 사용해 트랜잭션에 서명하는 방법은 무엇인가요?"
 
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "Please see our guide on <0/>"
@@ -4653,14 +4653,14 @@ msgstr ""
 #. placeholder {0}: productName
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "Is the {0} free to use?"
-msgstr ""
+msgstr "{0} 은 무료로 사용할 수 있나요?"
 
 #. placeholder {0}: productName
 #. placeholder {1}: networkName
 #. placeholder {2}: networkName
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "Yes, the {0} software is completely free to use. However, accounts on the {1} Network require a small amount of {2} before they are created."
-msgstr ""
+msgstr "네, {0} 소프트웨어는 완전히 무료로 사용할 수 있습니다. 하지만, {2} 네트워크의 계정은 생성되기 전에 소량의 {2} 토큰을 필요로 합니다."
 
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid ""
@@ -4672,7 +4672,7 @@ msgstr ""
 #. placeholder {0}: networkName
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "Where can I view and manage my {0} account?"
-msgstr ""
+msgstr "{0} 계정은 어디서 확인하고 관리할 수 있나요?"
 
 #. placeholder {0}: networkName
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
@@ -4691,7 +4691,7 @@ msgstr ""
 #. placeholder {0}: productName
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "Is my private key or recovery phrase exposed when using the {0} Snap?"
-msgstr ""
+msgstr "{0} Snap을 사용할 때 개인키나 복구 구문이 노출되나요?"
 
 #. placeholder {0}: productName
 #. placeholder {1}: networkName
@@ -4708,7 +4708,7 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "How does MetaMask configure my owner and active keys?"
-msgstr ""
+msgstr "MetaMask는 소유자 키와액티브 키를 어떻게 구성하나요?"
 
 #. placeholder {0}: productName
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
@@ -4728,7 +4728,7 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "How does find my owner and active keys?"
-msgstr ""
+msgstr "소유자 키와  액티브 키는 어떻게 찾나요?"
 
 #. placeholder {0}: productName
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
@@ -4742,7 +4742,7 @@ msgstr ""
 #. placeholder {1}: productName
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "Can I access all {0} apps using {1} for MetaMask?"
-msgstr ""
+msgstr "{1} for MetaMask를 사용하여 모든 {0} 앱에 접근할 수 있나요?"
 
 #. placeholder {0}: networkName
 #. placeholder {1}: productName
@@ -4759,45 +4759,45 @@ msgstr ""
 #. placeholder {0}: productName
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "How do I reach out for {0} support?"
-msgstr ""
+msgstr "{0} 지원을 받으려면 어떻게 연락하면 되나요?"
 
 #. placeholder {0}: productName
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "If you have any issues with the {0} itself, please feel free to reach out to us at"
-msgstr ""
+msgstr "{0} 자체에 문제가 발생하면 언제든지 다음 주소로 문의해 주세요."
 
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "or by visiting our Support portal at:"
-msgstr ""
+msgstr "또는 다음 지원 포털을 방문하여:"
 
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "Your Public Keys"
-msgstr ""
+msgstr "귀하의 공개 키"
 
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "MetaMask Public Key (Active)"
-msgstr ""
+msgstr "MetaMask 공개 키 (액티브)"
 
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "MetaMask Public Key (Owner)"
-msgstr ""
+msgstr "MetaMask 공개키 (소유자)"
 
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "MetaMask Snaps Directory"
-msgstr ""
+msgstr "MetaMask 스냅 디렉토리"
 
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "Source Code"
-msgstr ""
+msgstr "소스 코드"
 
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/unstake/+page.svelte
 msgid "Withdrawable in 21 days"
-msgstr ""
+msgstr "21일 후 인출 가능"
 
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/stake/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/unstake/+page.svelte
 msgid "Currently staked"
-msgstr ""
+msgstr "현재 스테이킹"
 
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/unstake/+page.svelte
 msgid "Amount to Unstake"
@@ -4815,26 +4815,26 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/stake/+page.svelte
 msgid "Minimum lockup"
-msgstr ""
+msgstr "최소 락업"
 
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/stake/+page.svelte
 msgid "Estimated Yield (Yearly)"
-msgstr ""
+msgstr "예상 수익률 (연간)"
 
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/withdraw/+page.svelte
 msgid "Currently Withdrawable"
-msgstr ""
+msgstr "현재 출금 가능"
 
 #. placeholder {0}: data.account.name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/authority/+page.svelte
 msgid "The {0} account has some form of authority assigned to the other accounts listed below."
-msgstr ""
+msgstr "{0} 계정은 아래 나열된 다른 계정들에 특정 형태의 권한을 부여했습니다."
 
 #. placeholder {0}: auth.weight
 #. placeholder {1}: auth.threshold
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/authority/+page.svelte
 msgid "Weight of {0} and threshold of {1}."
-msgstr ""
+msgstr "가중치 {0}, 임계값 {1}"
 
 #. placeholder {0}: permission
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/authority/+page.svelte
@@ -4843,11 +4843,11 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/authority/+page.svelte
 msgid "No available authorities for this account."
-msgstr ""
+msgstr "이 계정에는 사용 가능한 권한이 없습니다."
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balances/+page.svelte
 msgid "Token"
-msgstr ""
+msgstr "토큰"
 
 #. placeholder {0}: context.settings.data.displayCurrency
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balances/+page.svelte
@@ -4856,18 +4856,18 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/+page.svelte
 msgid "Keys and Permissions"
-msgstr ""
+msgstr "키 및 권한"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/+page.svelte
 msgid "New Permission"
-msgstr ""
+msgstr "새 권한"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/permission.svelte
 msgid "Permission Name"
-msgstr ""
+msgstr "권한 이름"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/permission.svelte
 msgid "<0>Threshold</0> Required"
@@ -4880,23 +4880,23 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/permission.svelte
 msgid "Weight"
-msgstr ""
+msgstr "가중치"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/permission.svelte
 msgid "Authorization"
-msgstr ""
+msgstr "권한 부여"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
 msgid "Proposal ID"
-msgstr ""
+msgstr "제안 ID"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
 msgid "No proposals found."
-msgstr ""
+msgstr "제안이 없습니다"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Requested Approvals"
-msgstr ""
+msgstr "요청된 승인"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "<0/> Approved"
@@ -4909,63 +4909,63 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Permission"
-msgstr ""
+msgstr "권한"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Role"
-msgstr ""
+msgstr "역할"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Signer"
-msgstr ""
+msgstr "서명자"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Approved"
-msgstr ""
+msgstr "승인됨"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Requested"
-msgstr ""
+msgstr "요청됨"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Multisig Details"
-msgstr ""
+msgstr "멀티시그 상세정보"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Proposer"
-msgstr ""
+msgstr "제안자"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Proposal Name"
-msgstr ""
+msgstr "제안명"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Expired"
-msgstr ""
+msgstr "만료됨"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Expiration"
-msgstr ""
+msgstr "만료"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Hash"
-msgstr ""
+msgstr "해시"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Unapprove"
-msgstr ""
+msgstr "승인 취소"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Approve"
-msgstr ""
+msgstr "승인"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Cancel MSIG"
-msgstr ""
+msgstr "MSIG(다중 서명 트랜잭션) 취소하기"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Execute"
-msgstr ""
+msgstr "실행하다"
 
 #. placeholder {0}: variant
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
@@ -4986,139 +4986,139 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
 msgid "Transaction Summary"
-msgstr ""
+msgstr "트랜잭션 요약"
 
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
 msgid "The actions and inline actions performed as a result of the transaction."
-msgstr ""
+msgstr "해당 트랜잭션으로 인해 수행된 액션과 인라인 액션"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Parent Permission"
-msgstr ""
+msgstr "상위 권한"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Permission Type"
-msgstr ""
+msgstr "권한 유형"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Note: Changing the permission type will reset any unsaved edits made to this permission."
-msgstr ""
+msgstr "참고: 권한 유형을 변경하면 해당 권한에 대해 저장되지 않은 편집 내용이 초기화됩니다."
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Weight Threshold"
-msgstr ""
+msgstr "가중치 임계값"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "The total weight of all keys, accounts, and waits must be greater than or equal to this threshold to approve a transaction."
-msgstr ""
+msgstr "모든 키, 계정 및 대기 조건의 총 가중치가 이 임계값 이상이어야 트랜잭션가 승인됩니다."
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Required"
-msgstr ""
+msgstr "필수"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Threshold"
-msgstr ""
+msgstr "임계값"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Key Pairs"
-msgstr ""
+msgstr "키 페어"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Enter the Public Key(s) which can sign on behalf of this permission."
-msgstr ""
+msgstr "이 권한에 대해 서명 가능한 공개 키(들)을 입력하세요."
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Add Key"
-msgstr ""
+msgstr "키 추가"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Other Accounts"
-msgstr ""
+msgstr "다른 계정"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Specify other accounts and permissions that can control this permission."
-msgstr ""
+msgstr "이 권한을 제어할 수 있는 다른 계정과 권한을 지정하세요. "
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Wait (Seconds)"
-msgstr ""
+msgstr "대기(초)"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Waiting Period"
-msgstr ""
+msgstr "대기 기간"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Specify the minimum amount of time a proposal must be active before the transaction can be completed."
-msgstr ""
+msgstr "제안이 트랜잭션가 완료되기 전에 활성화되어야 하는 최소 시간을 지정하세요."
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Add Wait"
-msgstr ""
+msgstr "지연 추가"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Contract Isolation"
-msgstr ""
+msgstr "컨트랙트 격리"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Restrict this permission to specific contracts and actions. Leave the action blank to allow all actions on a contract."
-msgstr ""
+msgstr "권한을 특정 컨트랙트와 액션으로 제한하세요. 컨트랙트의 모든 액션을 허용하려면 액션을 비워두세요."
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Add Contract"
-msgstr ""
+msgstr "컨트랙트 추가"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Confirm Details"
-msgstr ""
+msgstr "상세 내용 확인"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Carefully review and confirm the details of this transaction. Incorrectly setting your permissions could cause permanent loss of access to this permission or account!"
-msgstr ""
+msgstr "거래 세부 정보를 신중하게 검토하고 확인해 주세요. 권한을 잘못 설정하면 해당 권한 또는 계정에 대한 접근 권한을 영구적으로 상실할 수 있습니다!"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Save Permission"
-msgstr ""
+msgstr "권한 저장"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Basic Information"
-msgstr ""
+msgstr "기본 정보"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "The name, parent permission, and type (Basic or Advanced). Name and parent fields cannot be modified after the permission is created."
-msgstr ""
+msgstr "권한 명칭,상위 권한,유형(기본 또는 고급)입니다.생성 완료 후 권한 명칭 및 상위 권한 필드는 변경 불가합니다."
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Back to Permissions"
-msgstr ""
+msgstr "권한 관리로 돌아가기"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Delete Permission"
-msgstr ""
+msgstr "권한 삭제"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/manager.svelte.ts
 msgid "Basic"
-msgstr ""
+msgstr "기본"
 
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/actions/+page.svelte
 msgid "The actions performed in the transaction, without the inline actions."
-msgstr ""
+msgstr "트랜잭션 내에서 수행된 액션（인라인 액션 제외）"
 
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/ram/+page.svelte
 msgid "RAM Usage"
-msgstr ""
+msgstr "RAM 사용량"
 
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/ram/+page.svelte
 msgid "The deltas in RAM usage for each trace in the transaction."
-msgstr ""
+msgstr "트랜잭션 내 각 트레이스에 대한 RAM 사용량의 변화량입니다."
 
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/transaction/+page.svelte
 msgid "Signatures"
-msgstr ""
+msgstr "서명"
 
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/traces/+page.svelte
 msgid "The individual transaction traces from the transaction."
-msgstr ""
+msgstr "트랜잭션에서 발생한 개별 트랜잭션 추적 기록."
 
 #. placeholder {0}: data.base.name
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
@@ -5145,142 +5145,142 @@ msgstr ""
 #. placeholder {0}: network.chain.name
 #: src/routes/+layout.server.ts
 msgid "Unicove - The {0} web wallet and block explorer"
-msgstr ""
+msgstr "Unicove - {0} 웹 지갑 및 블록 탐색기"
 
 #. placeholder {0}: String(network.chain.systemToken?.symbol.name)
 #: src/routes/[[locale]]/[network]/(account)/refund/+page.ts
 msgid "Claim previously delegated {0} tokens"
-msgstr ""
+msgstr "이전에 위임한 {0} 토큰 클레임"
 
 #. placeholder {0}: String(network.chain.name)
 #: src/routes/[[locale]]/[network]/(account)/refund/+page.ts
 msgid "Refund Delegated {0} Tokens"
-msgstr ""
+msgstr "위임된 {0} 토큰 환불"
 
 #. placeholder {0}: String(network.chain.name)
 #: src/routes/[[locale]]/[network]/(account)/refund/+page.ts
 msgid "Claim previously delegated {0} tokens."
-msgstr ""
+msgstr "이전에 위임한 {0} 토큰 클레임."
 
 #: src/routes/[[locale]]/[network]/(account)/fund/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/fund/+page.ts
 msgid "Fund Account"
-msgstr ""
+msgstr "계정 충전"
 
 #. placeholder {0}: network.token.symbol.name
 #: src/routes/[[locale]]/[network]/(account)/fund/+page.ts
 msgid "Purchase {0} tokens to fund your account"
-msgstr ""
+msgstr "계정 충전을 위해 {0} 토큰을 구매하세요."
 
 #. placeholder {0}: network.token.symbol.name
 #: src/routes/[[locale]]/[network]/(account)/fund/+page.ts
 msgid "Learn how to fund your account with {0} tokens through various methods including cryptocurrency exchanges and on-ramp providers."
-msgstr ""
+msgstr "계정을 {0} 토큰으로 충전하는 다양한 방법을 알아보세요 (암호화폐 거래소 및 온램프 제공업체 포함)."
 
 #: src/routes/[[locale]]/[network]/(account)/swap/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/swap/+page.ts
 msgid "Swaps"
-msgstr ""
+msgstr "스왑"
 
 #. placeholder {0}: network.chain.name
 #. placeholder {0}: network.chain.name
 #: src/routes/[[locale]]/[network]/(account)/swap/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/swap/+page.ts
 msgid "Available token swaps on the {0} network"
-msgstr ""
+msgstr "{0} 네트워크에서 이용 가능한 토큰 스왑"
 
 #. placeholder {0}: network.chain.name
 #: src/routes/[[locale]]/[network]/(account)/resources/+layout.ts
 msgid "Manage CPU, NET, and RAM resources on the {0} Network."
-msgstr ""
+msgstr "{0} 네트워크의 CPU、NET 및 RAM 리소스."
 
 #. placeholder {0}: network.chain.name
 #: src/routes/[[locale]]/[network]/(account)/resources/+layout.ts
 msgid "An overview of the multiple network resources usable on the {0} Network providing access to manage resources using an compatible wallet."
-msgstr ""
+msgstr "{0} 네트워크에서 사용 가능한 다양한 네트워크 리소스에 대한 개요입니다. 호환 지갑을 통해 이러한 리소스를 관리할 수 있습니다."
 
 #. placeholder {0}: network.token.name
 #. placeholder {0}: network.token.name
 #: src/routes/[[locale]]/[network]/(account)/undelegate/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/undelegate/+page.ts
 msgid "Undelegate and reclaim previously delegated {0} tokens"
-msgstr ""
+msgstr "이전에 위임한 {0} 토큰 위임 해제 및 클레임"
 
 #. placeholder {0}: network.token.name
 #: src/routes/[[locale]]/[network]/(account)/undelegate/+page.ts
 msgid "Reclaim Delegated {0} Tokens"
-msgstr ""
+msgstr "위임된 {0} 토큰 회수하기"
 
 #. placeholder {0}: network.chain.systemToken?.symbol.name || 'tokens'
 #: src/routes/[[locale]]/[network]/(account)/staking/+layout.ts
 msgid "Stake {0} to earn rewards."
-msgstr ""
+msgstr "{0}을 스테이킹하여 보상을 받으세요."
 
 #. placeholder {0}: network.chain.name
 #. placeholder {1}: network.chain.systemToken?.symbol.name || 'tokens'
 #. placeholder {2}: network.chain.name
 #: src/routes/[[locale]]/[network]/(account)/staking/+layout.ts
 msgid "An overview of staking on the {0} network providing easy access to stake, unstake, and withdraw {1} tokens using an {2} compatible wallet."
-msgstr ""
+msgstr "{2} 네트워크에 대한 스테이킹 개요를 제공하며, {2} 호환 지갑을 사용하여 {1} 토큰의 스테이킹, 언스테이킹, 인출을 손쉽게 처리할 수 있습니다."
 
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+layout.ts
 msgid "Block Producers"
-msgstr ""
+msgstr "Block Producers"
 
 #. placeholder {0}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+layout.ts
 msgid "Validators on the {0} network."
-msgstr ""
+msgstr "Validators on the {network} network."
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
 msgid "Smart Contract Account Creation"
-msgstr ""
+msgstr "스마트 컨트랙트 계정 생성"
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
 msgid "Create an account using a basic token transfer to a smart contract"
-msgstr ""
+msgstr "기본 토큰을 스마트 컨트랙트로 전송하여 계정을 생성하세요."
 
 #: src/routes/[[locale]]/[network]/(account)/resources/stake/+page.ts
 msgid "Renting"
-msgstr ""
+msgstr "렌트 중"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/rex/+page.ts
 msgid "Rent with Rex"
-msgstr ""
+msgstr "Rex를 통해 렌트"
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.ts
 msgid "Create an account using your existing account"
-msgstr ""
+msgstr "기존 계정을 사용하여 계정 생성"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/powerup/+page.ts
 msgid "Rent Resources"
-msgstr ""
+msgstr "렌트 리소스"
 
 #. placeholder {0}: network.chain.name
 #: src/routes/[[locale]]/[network]/(account)/resources/powerup/+page.ts
 msgid "Rent CPU and NET resources on the {0} Network."
-msgstr ""
+msgstr "{0} 네트워크에서 CPU 및 NET 리소스를 렌트하세요."
 
 #. placeholder {0}: network.chain.name
 #: src/routes/[[locale]]/[network]/(account)/resources/powerup/+page.ts
 msgid "Rent Resources | {0} Network"
-msgstr ""
+msgstr "렌트 리소스 | {0} 네트워크"
 
 #. placeholder {0}: network.chain.name
 #. placeholder {1}: network.chain.name
 #: src/routes/[[locale]]/[network]/(account)/resources/powerup/+page.ts
 msgid "Rent CPU and NET resources on the {0} Network using an {1} compatible wallet."
-msgstr ""
+msgstr "{1} 호환 지갑을 사용하여 {1} 네트워크에서 CPU 및 NET 리소스를 대여하세요."
 
 #. placeholder {0}: network.config.metamask.name
 #. placeholder {0}: network.config.metamask.name
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.ts
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.ts
 msgid "MetaMask + {0}"
-msgstr ""
+msgstr "메타마스크 + {0}"
 
 #. placeholder {0}: network.chain.name
 #. placeholder {1}: network.config.metamask.name
@@ -5289,13 +5289,13 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.ts
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.ts
 msgid "Get started with MetaMask on the {0} Network with the {1} snap."
-msgstr ""
+msgstr "{1} 스냅을 통해 {0} 네트워크에서 MetaMask 사용을 시작하세요."
 
 #. placeholder {0}: params.contract
 #. placeholder {1}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.ts
 msgid "Contract: {0} | {1}"
-msgstr ""
+msgstr "컨트랙트: {0} | {1}"
 
 #. placeholder {0}: params.contract
 #. placeholder {1}: network.chain.name
@@ -5304,29 +5304,29 @@ msgstr ""
 #. placeholder {4}: abi.structs.length
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.ts
 msgid "An overview of the {0} smart contract on the {1} network. This contract contains {2} actions, {3} tables, and {4} structs."
-msgstr ""
+msgstr "이 컨트랙트에는 {2}개의 액션, {3}개의 테이블, 그리고 {4}개의 구조체가 포함되어 있습니다."
 
 #. placeholder {0}: accounts.length
 #. placeholder {1}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/key/[publicKey]/+page.ts
 msgid "A public key associated with {0} account(s) on the {1} network."
-msgstr ""
+msgstr "{1} 네트워크의 {0} 계정(들)과 연결된 공개키가 존재합니다."
 
 #. placeholder {0}: accounts.length
 #: src/routes/[[locale]]/[network]/(explorer)/key/[publicKey]/+page.ts
 msgid "The {0} account(s) associated with this public key"
-msgstr ""
+msgstr "이 공개키와 연결된 {0} 계정(들)"
 
 #. placeholder {0}: String(params.name)
 #. placeholder {1}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.ts
 msgid "An overview of the {0} account on the {1} Network. View account assets, activity, resources and more."
-msgstr ""
+msgstr "{1} 네트워크의 {0} 계정 개요입니다.  계정 자산, 활동, 리소스 등을 확인하세요."
 
 #. placeholder {0}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.ts
 msgid "Account overview on the {0} Network"
-msgstr ""
+msgstr "{0} 네트워크의 계정 개요"
 
 #. placeholder {0}: params.number
 #. placeholder {1}: block.producer
@@ -5335,97 +5335,97 @@ msgstr ""
 #. placeholder {4}: actionCount
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+layout.ts
 msgid "Block #{0} was produced by {1} on {2}, which included {3} transactions performing {4} actions."
-msgstr ""
+msgstr "블록 #{0}는 {2}에 {1}에 의해 생성되었으며, {3}개의 트랜잭션으로 {4}개의 액션을 수행했습니다."
 
 #. placeholder {0}: params.number
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+layout.ts
 msgid "Block #{0}"
-msgstr ""
+msgstr "블록 #{0}"
 
 #. placeholder {0}: String(network.token.symbol.name)
 #. placeholder {0}: String(network.token.symbol.name)
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/stake/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/stake/+page.ts
 msgid "Stake {0} Tokens"
-msgstr ""
+msgstr "{0} 토큰 스테이킹"
 
 #. placeholder {0}: String(network.token.symbol.name)
 #. placeholder {1}: String(network.chain.name)
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/stake/+page.ts
 msgid "Stake {0} tokens and earn rewards using an {1} compatible wallet."
-msgstr ""
+msgstr "{1} 호환 지갑을 사용하여 {0} 토큰을 스테이킹하고 보상을 얻으세요."
 
 #. placeholder {0}: String(network.chain.systemToken?.symbol.name)
 #. placeholder {0}: String(network.chain.systemToken?.symbol.name)
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/unstake/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/unstake/+page.ts
 msgid "Unstake {0} tokens"
-msgstr ""
+msgstr "{0} 토큰 언스테이킹"
 
 #. placeholder {0}: String(network.chain.systemToken?.symbol.name)
 #. placeholder {1}: String(network.chain.name)
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/unstake/+page.ts
 msgid "Unstake {0} tokens and begin claiming the balance of your rewards using an {1} compatible wallet."
-msgstr ""
+msgstr "{1} 호환 지갑을 사용하여 {0} 토큰을 언스테이킹하고 보상 잔액 청구를 시작하세요."
 
 #. placeholder {0}: params.name
 #. placeholder {0}: params.name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/authority/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/authority/+page.ts
 msgid "Accounts that allow the {0} account to sign on their behalf"
-msgstr ""
+msgstr "{0} 계정을 대신해 서명할 수 있도록 설정된 계정"
 
 #. placeholder {0}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.ts
 msgid "Recent activity on the {0} Network."
-msgstr ""
+msgstr "{0} 네트워크의 최근 활동."
 
 #. placeholder {0}: params.name
 #. placeholder {1}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.ts
 msgid "Account Activity for {0} | {1} Network"
-msgstr ""
+msgstr "{1} 네트워크 | {0} 계정 내역"
 
 #. placeholder {0}: params.name
 #. placeholder {1}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.ts
 msgid "View the transaction history of the {0} account on the {1} network."
-msgstr ""
+msgstr "{1} 네트워크 상의 {0} 계정 트랜잭션 내역을 확인하세요."
 
 #. placeholder {0}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balances/+page.ts
 msgid "Token balances on the {0} Network."
-msgstr ""
+msgstr "{0} 네트워크 상의 토큰 잔액."
 
 #. placeholder {0}: params.name
 #. placeholder {1}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balances/+page.ts
 msgid "Token Balances | {0} | {1} Network"
-msgstr ""
+msgstr "토큰 잔액 | {0} | {1} 네트워크"
 
 #. placeholder {0}: params.name
 #. placeholder {1}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balances/+page.ts
 msgid "The token balances of the {0} account on the {1} network."
-msgstr ""
+msgstr "{1} 네트워크 상의 {0} 계정 토큰 잔액."
 
 #. placeholder {0}: String(network.chain.systemToken?.symbol.name)
 #. placeholder {0}: String(network.chain.systemToken?.symbol.name)
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/withdraw/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/withdraw/+page.ts
 msgid "Withdraw {0} tokens from staking"
-msgstr ""
+msgstr "{0} 토큰 언스테이킹"
 
 #. placeholder {0}: String(network.chain.systemToken?.symbol.name)
 #. placeholder {1}: String(network.chain.name)
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/withdraw/+page.ts
 msgid "Withdraw {0} tokens from the staking contract to add them to your available balance using an {1} compatible wallet."
-msgstr ""
+msgstr "{1} 호환 지갑을 사용하여 스테이킹 계약에서 {0} 토큰을 인출하고 사용 가능한 잔액에 추가하세요."
 
 #. placeholder {0}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/+page.ts
 msgid "Permissions on the {0} Network"
-msgstr ""
+msgstr "{0} 네트워크 상의 권한."
 
 #. placeholder {0}: params.name
 #. placeholder {1}: network.chain.name
@@ -5434,13 +5434,13 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.ts
 msgid "Permissions | {0} | {1} Network"
-msgstr ""
+msgstr "권한 | {0} | {1} 네트워크"
 
 #. placeholder {0}: params.name
 #. placeholder {1}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/+page.ts
 msgid "Permissions for {0} on the {1} network."
-msgstr ""
+msgstr "{1} 네트워크 상의 {0} 계정 권한."
 
 #. placeholder {0}: params.name
 #. placeholder {1}: network.chain.name
@@ -5449,67 +5449,67 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
 msgid "Multisig proposals by {0} on the {1} Network."
-msgstr ""
+msgstr "{0} 네트워크에서 {1}이 제출한 멀티시그 제안"
 
 #. placeholder {0}: p.abi.actions.length
 #. placeholder {1}: p.contract
 #. placeholder {2}: p.network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/+page.ts
 msgid "The {0} smart contract actions available for the {1} contract on the {2} network."
-msgstr ""
+msgstr "{2} 네트워크 상의 {1} 컨트랙트에서 사용 가능한 {0} 스마트 컨트랙트 액션."
 
 #. placeholder {0}: p.contract
 #. placeholder {1}: p.network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/abi/+page.ts
 msgid "The ABI defining the {0} smart contract on the {1} network."
-msgstr ""
+msgstr "{1} 네트워크 상의 {0} 스마트 컨트랙트를 정의하는 ABI."
 
 #. placeholder {0}: p.abi.tables.length
 #. placeholder {1}: p.contract
 #. placeholder {2}: p.network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/+page.ts
 msgid "The {0} data tables in the {1} contract on the {2} network."
-msgstr ""
+msgstr "{2} 네트워크 상의 {1} 컨트랙트에 있는 {0} 데이터 테이블."
 
 #. placeholder {0}: p.abi.structs.length
 #. placeholder {1}: p.contract
 #. placeholder {2}: p.network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/structs/+page.ts
 msgid "The {0} data structures defined by the {1} smart contract on the {2} network."
-msgstr ""
+msgstr "{2} 네트워크 상의 {1} 스마트 컨트랙트에서 정의된 {0} 데이터 구조."
 
 #. placeholder {0}: truncateCenter(params.id || '', 14)
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
 msgid "Transaction not found: {0}"
-msgstr ""
+msgstr "트랜잭션을 찾을 수 없습니다: {0}"
 
 #. placeholder {0}: formatDateTime(transaction.block_time.toDate(), lang, { dateStyle: 'long', timeZone: 'UTC' })
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
 msgid "Transaction on {0}"
-msgstr ""
+msgstr "{0}의 트랜잭션"
 
 #. placeholder {0}: formatDateTime( transaction.block_time.toDate(), lang, { dateStyle: 'long', timeZone: 'UTC' } )
 #. placeholder {1}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
 msgid "A transaction performed at {0} on the {1} Network."
-msgstr ""
+msgstr "{0}에 {1} 네트워크에서 수행된 트랜잭션."
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 msgid "Transfer tokens to another account."
-msgstr ""
+msgstr "토큰을 다른 계정으로 전송하세요."
 
 #. placeholder {0}: network.chain.name
 #. placeholder {1}: network.chain.name
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 msgid "Transfer tokens from one account to another account on the {0} network using an {1} compatible wallet."
-msgstr ""
+msgstr "{1} 네트워크 호환 지갑을 사용하여 {1} 네트워크의 한 계정에서 다른 계정으로 토큰을 전송하세요."
 
 #. placeholder {0}: params.proposer
 #. placeholder {1}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.ts
 msgid "An MSIG proposed by {0} on the {1} Network"
-msgstr ""
+msgstr "{1} 네트워크에서 {0}가 제안한 MSIG"
 
 #. placeholder {0}: params.name
 #. placeholder {1}: network.chain.name
@@ -5518,31 +5518,31 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.ts
 msgid "Edit permission for {0} on {1}"
-msgstr ""
+msgstr "{0}에서 {1}에 대한 권한 편집"
 
 #. placeholder {0}: params.struct
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/structs/[struct]/+page.ts
 msgid "Struct: {0}"
-msgstr ""
+msgstr "구조체: {0}"
 
 #. placeholder {0}: params.struct
 #. placeholder {1}: p.contract
 #. placeholder {2}: p.network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/structs/[struct]/+page.ts
 msgid "The {0} data structure as defined by the {1} smart contract on the {2} network."
-msgstr ""
+msgstr "{2} 네트워크 상의 {1} 스마트 컨트랙트에 의해 정의된 {0} 구조체."
 
 #. placeholder {0}: params.action
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.ts
 msgid "Action: {0}"
-msgstr ""
+msgstr "액션: {0}"
 
 #. placeholder {0}: params.action
 #. placeholder {1}: p.contract
 #. placeholder {2}: p.network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.ts
 msgid "The {0} action for the {1} smart contract on the {2} network."
-msgstr ""
+msgstr "{2} 네트워크 상의 {1} 스마트 컨트랙트에 대한 {0} 액션"
 
 #. placeholder {0}: base.name
 #. placeholder {1}: quote.name
@@ -5551,16 +5551,16 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.ts
 msgid "Swap the {0} token for the {1} token."
-msgstr ""
+msgstr "{0} 토큰을 {1} 토큰으로 스왑합니다."
 
 #. placeholder {0}: params.table
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.ts
 msgid "Table: {0}"
-msgstr ""
+msgstr "테이블: {0}"
 
 #. placeholder {0}: params.table
 #. placeholder {1}: contract
 #. placeholder {2}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.ts
 msgid "The {0} data table in the {1} smart contract on the {2} network."
-msgstr ""
+msgstr "{2} 네트워크 상의 {1} 스마트 컨트랙트에 있는 {0} 데이터 테이블."
