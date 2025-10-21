@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2025-10-21T21:19:33.612Z\n"
+"PO-Revision-Date: 2025-10-21T21:26:16.423Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -470,11 +470,6 @@ msgstr "X"
 msgid "Transaction was not resolved."
 msgstr "Transaction was not resolved."
 
-#. placeholder {0}: data.locale
-#: src/routes/[[locale]]/[network]/+layout.svelte
-msgid "locale: {0}"
-msgstr "locale: {0}"
-
 #: src/lib/components/contract/action/response.svelte
 msgid "Response Array <0/>"
 msgstr "Response Array <0/>"
@@ -513,12 +508,12 @@ msgstr "<0/> Memo: {0}"
 msgid "+ {0} ms (CPU)"
 msgstr "+ {0} ms (CPU)"
 
-#. placeholder {0}: data.powup_net
 #. placeholder {0}: data.powup_cpu
-#. placeholder {0}: key.weight
+#. placeholder {0}: data.powup_net
 #. placeholder {0}: account.weight
 #. placeholder {0}: key.weight
 #. placeholder {0}: account.weight
+#. placeholder {0}: key.weight
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio/newaccount.svelte
@@ -4365,8 +4360,8 @@ msgstr "One {0} of RAM represents ownership rights over 1000 bytes of the networ
 #. placeholder {1}: quote.name
 #. placeholder {0}: base.name
 #. placeholder {1}: quote.name
-#. placeholder {0}: data.network.token.name
-#. placeholder {1}: data.network.getRamToken().name
+#. placeholder {0}: base.name
+#. placeholder {1}: quote.name
 #. placeholder {0}: base.name
 #. placeholder {1}: quote.name
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.ts

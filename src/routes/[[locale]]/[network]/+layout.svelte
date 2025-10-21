@@ -264,7 +264,6 @@
 	<main
 		class="col-span-full col-start-1 row-span-full row-start-2 grid grid-cols-subgrid content-start gap-x-4 *:col-span-full md:col-start-3 md:col-end-13 md:px-0 xl:col-end-13"
 	>
-		<p>locale: {data.locale}</p>
 		{@render children()}
 	</main>
 </div>
