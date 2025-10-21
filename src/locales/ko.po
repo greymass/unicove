@@ -16,16 +16,16 @@ msgstr ""
 #: src/routes/+layout.server.ts
 #: src/routes/[[locale]]/[network]/+error.svelte
 msgid "Page not found"
-msgstr ""
+msgstr "페이지를 찾을 수 없습니다"
 
 #: src/routes/+error.svelte
 msgid "Go to Unicove"
-msgstr ""
+msgstr "유니코브로 이동"
 
 #: src/lib/assets/unicovelogo.svelte
 #: src/routes/+layout.server.ts
 msgid "Unicove"
-msgstr ""
+msgstr "유니코브"
 
 #: src/lib/components/accountswitch.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/buy/+page.svelte
@@ -41,77 +41,77 @@ msgstr "닫기"
 
 #: src/lib/components/accountswitch.svelte
 msgid "Filter accounts"
-msgstr ""
+msgstr "계정 필터링"
 
 #: src/lib/components/footer.svelte
 msgid "About"
-msgstr ""
+msgstr "소개"
 
 #: src/lib/components/footer.svelte
 msgid "About Us"
-msgstr ""
+msgstr "회사 소개"
 
 #: src/lib/components/footer.svelte
 msgid "Our Team"
-msgstr ""
+msgstr "우리 팀"
 
 #: src/lib/components/footer.svelte
 #: src/lib/components/footer.svelte
 msgid "Careers"
-msgstr ""
+msgstr "채용"
 
 #: src/lib/components/footer.svelte
 #: src/lib/components/footer.svelte
 msgid "Press"
-msgstr ""
+msgstr "언론"
 
 #: src/lib/components/footer.svelte
 msgid "Services"
-msgstr ""
+msgstr "서비스"
 
 #: src/lib/components/footer.svelte
 msgid "Pricing"
-msgstr ""
+msgstr "가격"
 
 #: src/lib/components/footer.svelte
 msgid "Documentation"
-msgstr ""
+msgstr "문서"
 
 #: src/lib/components/footer.svelte
 msgid "API Reference"
-msgstr ""
+msgstr "API 참조"
 
 #: src/lib/components/footer.svelte
 #: src/lib/components/transact/summary.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Status"
-msgstr ""
+msgstr "상태"
 
 #: src/lib/components/footer.svelte
 #: src/lib/components/footer.svelte
 msgid "Support"
-msgstr ""
+msgstr "지원"
 
 #: src/lib/components/footer.svelte
 msgid "Help Center"
-msgstr ""
+msgstr "도움말 센터"
 
 #: src/lib/components/footer.svelte
 #: src/lib/components/footer.svelte
 msgid "Contact Us"
-msgstr ""
+msgstr "문의하기"
 
 #: src/lib/components/footer.svelte
 msgid "Privacy Policy"
-msgstr ""
+msgstr "개인정보 보호정책"
 
 #: src/lib/components/footer.svelte
 msgid "Terms of Service"
-msgstr ""
+msgstr "서비스 약관"
 
 #: src/lib/components/footer.svelte
 msgid "Community"
-msgstr ""
+msgstr "커뮤니티"
 
 #: src/lib/components/footer.svelte
 msgid "Blog"
