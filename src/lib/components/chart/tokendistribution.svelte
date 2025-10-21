@@ -1,8 +1,13 @@
 <script lang="ts">
+	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { AccountValue } from '$lib/state/client/account.svelte';
 	import { cn, percentString } from '$lib/utils';
+	import { getContext } from 'svelte';
 	import { Card } from 'unicove-components';
 	import { DD, DL, DLRow } from 'unicove-components';
+
+	const context = getContext<UnicoveContext>('state');
+	const locale = $derived(context.settings.data.locale);
 
 	interface Props {
 		data?: AccountValue;
@@ -46,7 +51,7 @@
 			{#each filtered as item}
 				<div
 					id={`distribution-${item.key}`}
-					style="width:{percentString(item.value)}"
+					style="width:{percentString('en', item.value)}"
 					class={cn('h-12 rounded-md', distributionMap[item.key].color)}
 				></div>
 			{/each}
@@ -61,7 +66,9 @@
 							{distributionMap[item.key].label}
 						</div>
 					{/snippet}
-					<DD class="text-on-surface text-right tabular-nums">{percentString(item.value)}</DD>
+					<DD class="text-on-surface text-right tabular-nums"
+						>{percentString(locale, item.value)}</DD
+					>
 				</DLRow>
 			{/each}
 		</DL>
