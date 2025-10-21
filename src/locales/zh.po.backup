@@ -1,0 +1,3409 @@
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=2; plural=n == 1 ? 0 : 1;\n"
+"Language: zh\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2025-10-20T18:08:55.381Z\n"
+"POT-Creation-Date: 2025-10-20T18:08:55.381Z\n"
+
+#: src/routes/+error.svelte
+#: src/routes/+layout.server.ts
+#: src/routes/[network]/+error.svelte
+msgid "Page not found"
+msgstr ""
+
+#: src/routes/+error.svelte
+msgid "Go to Unicove"
+msgstr ""
+
+#: src/lib/assets/unicovelogo.svelte
+#: src/routes/+layout.server.ts
+msgid "Unicove"
+msgstr ""
+
+#: src/routes/+layout.server.ts
+msgid "Your gateway to Web3"
+msgstr ""
+
+#: src/lib/components/accountswitch.svelte
+#: src/routes/[network]/(account)/undelegate/+page.svelte
+msgid "Close"
+msgstr ""
+
+#: src/lib/components/accountswitch.svelte
+msgid "Filter accounts"
+msgstr ""
+
+#: src/lib/components/footer.svelte
+msgid "About"
+msgstr ""
+
+#: src/lib/components/footer.svelte
+msgid "About Us"
+msgstr ""
+
+#: src/lib/components/footer.svelte
+msgid "Our Team"
+msgstr ""
+
+#: src/lib/components/footer.svelte
+#: src/lib/components/footer.svelte
+msgid "Careers"
+msgstr ""
+
+#: src/lib/components/footer.svelte
+#: src/lib/components/footer.svelte
+msgid "Press"
+msgstr ""
+
+#: src/lib/components/footer.svelte
+msgid "Services"
+msgstr ""
+
+#: src/lib/components/footer.svelte
+msgid "Pricing"
+msgstr ""
+
+#: src/lib/components/footer.svelte
+msgid "Documentation"
+msgstr ""
+
+#: src/lib/components/footer.svelte
+msgid "API Reference"
+msgstr ""
+
+#: src/lib/components/footer.svelte
+msgid "Status"
+msgstr ""
+
+#: src/lib/components/footer.svelte
+#: src/lib/components/footer.svelte
+msgid "Support"
+msgstr ""
+
+#: src/lib/components/footer.svelte
+msgid "Help Center"
+msgstr ""
+
+#: src/lib/components/footer.svelte
+#: src/lib/components/footer.svelte
+msgid "Contact Us"
+msgstr ""
+
+#: src/lib/components/footer.svelte
+msgid "Privacy Policy"
+msgstr ""
+
+#: src/lib/components/footer.svelte
+msgid "Terms of Service"
+msgstr ""
+
+#: src/lib/components/footer.svelte
+msgid "Community"
+msgstr ""
+
+#: src/lib/components/footer.svelte
+msgid "Blog"
+msgstr ""
+
+#: src/lib/components/footer.svelte
+msgid "Forum"
+msgstr ""
+
+#: src/lib/components/footer.svelte
+msgid "Events"
+msgstr ""
+
+#: src/lib/components/footer.svelte
+#: src/lib/components/footer.svelte
+msgid "Partners"
+msgstr ""
+
+#: src/lib/components/footer.svelte
+msgid "Social"
+msgstr ""
+
+#: src/lib/components/footer.svelte
+msgid "Twitter"
+msgstr ""
+
+#: src/lib/components/footer.svelte
+msgid "Facebook"
+msgstr ""
+
+#: src/lib/components/footer.svelte
+msgid "Instagram"
+msgstr ""
+
+#: src/lib/components/footer.svelte
+msgid "LinkedIn"
+msgstr ""
+
+#: src/lib/components/footer.svelte
+msgid "Legal"
+msgstr ""
+
+#: src/lib/components/footer.svelte
+msgid "Security"
+msgstr ""
+
+#: src/lib/components/footer.svelte
+msgid "Compliance"
+msgstr ""
+
+#: src/lib/components/footer.svelte
+msgid "GDPR"
+msgstr ""
+
+#: src/lib/components/footer.svelte
+msgid "CCPA"
+msgstr ""
+
+#: src/lib/components/footer.svelte
+msgid "Contact"
+msgstr ""
+
+#: src/lib/components/footer.svelte
+msgid "Sales"
+msgstr ""
+
+#: src/lib/components/footer.svelte
+msgid "More"
+msgstr ""
+
+#: src/lib/components/footer.svelte
+msgid "Affiliates"
+msgstr ""
+
+#: src/lib/components/footer.svelte
+msgid "Sponsorships"
+msgstr ""
+
+#: src/lib/components/transactions.svelte
+msgid "Pending Transactions"
+msgstr ""
+
+#: src/lib/components/transactions.svelte
+msgid "Completed Transactions"
+msgstr ""
+
+#: src/lib/state/search.svelte.ts
+msgid "RAM Market"
+msgstr ""
+
+#: src/lib/state/search.svelte.ts
+msgid "Buy RAM"
+msgstr ""
+
+#: src/lib/state/search.svelte.ts
+msgid "Sell RAM"
+msgstr ""
+
+#: src/lib/state/search.svelte.ts
+msgid "Send"
+msgstr ""
+
+#: src/lib/state/search.svelte.ts
+msgid "Settings"
+msgstr ""
+
+#: src/lib/components/summary/eosio.rex/buyresult.svelte
+#: src/lib/components/summary/eosio.rex/sellresult.svelte
+#: src/lib/state/search.svelte.ts
+#: src/routes/[network]/(dev)/debug/components/summaries/+page.svelte
+msgid "Staking"
+msgstr ""
+
+#: src/lib/state/search.svelte.ts
+#: src/routes/[network]/(dev)/debug/components/sections/cards.svelte
+#: src/routes/[network]/(dev)/debug/components/sections/navigation.svelte
+msgid "Stake"
+msgstr ""
+
+#: src/lib/state/search.svelte.ts
+#: src/routes/[network]/(dev)/debug/components/sections/cards.svelte
+#: src/routes/[network]/(dev)/debug/components/sections/navigation.svelte
+msgid "Unstake"
+msgstr ""
+
+#: src/lib/state/search.svelte.ts
+#: src/routes/[network]/(dev)/debug/components/summaries/+page.svelte
+#: src/routes/[network]/(explorer)/transaction/[id]/[[seq]]/resources/+page.svelte
+msgid "Resources"
+msgstr ""
+
+#: src/lib/state/search.svelte.ts
+msgid "Clear"
+msgstr ""
+
+#: src/routes/[network]/+layout.svelte
+msgid ""
+"(function () {\n"
+"if (typeof window !== undefined) {\n"
+"const storedTheme = localStorage.getItem('color-scheme');\n"
+"const theme =\n"
+"storedTheme ||\n"
+"(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');\n"
+"document.documentElement.setAttribute('data-scheme', theme);\n"
+"if (!storedTheme) localStorage.setItem('color-scheme', theme);\n"
+"}\n"
+"})();"
+msgstr ""
+
+#: src/lib/components/breakdown/breakdownRow.svelte
+msgid "Total"
+msgstr ""
+
+#. placeholder {0}: balance.token.name
+#. placeholder {0}: balance.token.symbol.name
+#: src/lib/components/card/tokenbalance.svelte
+#: src/lib/components/card/tokenoverview.svelte
+msgid "{0} (RAM)"
+msgstr ""
+
+#: src/lib/components/chart/tokendistribution.svelte
+msgid "KB (RAM)"
+msgstr ""
+
+#: src/lib/components/contract/struct.svelte
+msgid "Extends base type of <0/>"
+msgstr ""
+
+#: src/lib/components/contract/struct.svelte
+msgid "Struct base type of <0/>"
+msgstr ""
+
+#: src/lib/components/contract/struct.svelte
+msgid "Action parameter in <0/>"
+msgstr ""
+
+#: src/lib/components/contract/struct.svelte
+msgid "Struct property of <0/>"
+msgstr ""
+
+#: src/lib/components/contract/struct.svelte
+msgid "Table row type of <0/>"
+msgstr ""
+
+#: src/lib/components/contract/struct.svelte
+msgid "Action return type for <0/>"
+msgstr ""
+
+#: src/lib/components/contract/table.svelte
+msgid "rows of <0/>"
+msgstr ""
+
+#: src/lib/components/contract/table.svelte
+msgid "Field"
+msgstr ""
+
+#: src/lib/components/contract/table.svelte
+msgid "Type"
+msgstr ""
+
+#: src/lib/components/contract/action/response.svelte
+#: src/lib/components/contract/table.svelte
+msgid "No data in response."
+msgstr ""
+
+#: src/lib/components/elements/action.svelte
+msgid "Rendering of the ricardian contract is not yet supported."
+msgstr ""
+
+#: src/lib/components/elements/action.svelte
+msgid "Error decoding for action summary, displaying raw data instead."
+msgstr ""
+
+#: src/lib/components/elements/resourceCard.svelte
+#: src/lib/components/summary/eosio/powerup.svelte
+#: src/routes/[network]/(account)/resources/+page.svelte
+#: src/routes/[network]/(account)/resources/renting.svelte
+#: src/routes/[network]/(explorer)/account/[name]/resources/+page.svelte
+msgid "CPU"
+msgstr ""
+
+#: src/lib/components/elements/resourceCard.svelte
+#: src/lib/components/summary/eosio/powerup.svelte
+#: src/routes/[network]/(account)/resources/+page.svelte
+#: src/routes/[network]/(account)/resources/renting.svelte
+#: src/routes/[network]/(explorer)/account/[name]/resources/+page.svelte
+msgid "NET"
+msgstr ""
+
+#: src/lib/components/elements/resourceCard.svelte
+#: src/lib/components/navigation/sidemenu.svelte
+#: src/routes/[network]/(account)/ram/(forms)/buy/+page.svelte
+#: src/routes/[network]/(account)/ram/(forms)/buy/+page.ts
+#: src/routes/[network]/(account)/ram/(forms)/buy/+page.ts
+#: src/routes/[network]/(account)/ram/(forms)/sell/+page.svelte
+#: src/routes/[network]/(account)/ram/(forms)/sell/+page.svelte
+#: src/routes/[network]/(account)/ram/(forms)/sell/+page.svelte
+#: src/routes/[network]/(account)/ram/(forms)/sell/+page.ts
+#: src/routes/[network]/(account)/ram/(forms)/sell/+page.ts
+#: src/routes/[network]/(account)/ram/+page.svelte
+#: src/routes/[network]/(account)/resources/+page.svelte
+#: src/routes/[network]/(explorer)/account/[name]/+layout.svelte
+#: src/routes/[network]/(explorer)/account/[name]/resources/+page.svelte
+msgid "RAM"
+msgstr ""
+
+#: src/lib/components/search/input.svelte
+#: src/routes/[network]/(explorer)/block/[number]/+page.svelte
+msgid "INPUT"
+msgstr ""
+
+#: src/lib/components/search/input.svelte
+#: src/routes/[network]/(explorer)/block/[number]/+page.svelte
+msgid "TEXTAREA"
+msgstr ""
+
+#: src/lib/components/search/input.svelte
+msgid "ArrowDown"
+msgstr ""
+
+#: src/lib/components/search/input.svelte
+msgid "ArrowUp"
+msgstr ""
+
+#: src/lib/components/search/input.svelte
+msgid "Mac"
+msgstr ""
+
+#: src/lib/components/input/assetOrUnits.svelte
+msgid "Component State"
+msgstr ""
+
+#: src/lib/components/input/assetOrUnits.svelte
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Asset"
+msgstr ""
+
+#: src/lib/components/input/assetOrUnits.svelte
+#: src/routes/[network]/(dev)/debug/components/sections/inputs.svelte
+msgid "Units"
+msgstr ""
+
+#. placeholder {0}: format === 'asset' ? 'Asset' : 'Units'
+#. placeholder {1}: assetValue
+#. placeholder {2}: unitsValue
+#. placeholder {3}: assetValue?.symbol.code
+#: src/lib/components/input/assetOrUnits.svelte
+msgid "Input Type: {0} Asset Value: {1} Units Value: {2} Symbol: {3}"
+msgstr ""
+
+#: src/lib/components/navigation/mobilenavigation.svelte
+msgid "Unicove Home"
+msgstr ""
+
+#: src/lib/components/navigation/pillgroup.svelte
+msgid "Page"
+msgstr ""
+
+#: src/lib/components/navigation/sidemenu.svelte
+#: src/routes/[network]/(dev)/debug/state/+page.svelte
+msgid "Debug State"
+msgstr ""
+
+#: src/lib/components/select/actionvariant.svelte
+#: src/routes/[network]/(explorer)/block/[number]/+layout.svelte
+msgid "Summary"
+msgstr ""
+
+#: src/lib/components/select/actionvariant.svelte
+msgid "Ricardian"
+msgstr ""
+
+#: src/lib/components/select/actionvariant.svelte
+#: src/routes/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
+msgid "Action Data"
+msgstr ""
+
+#: src/lib/components/select/actionvariant.svelte
+#: src/routes/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
+msgid "Decoded"
+msgstr ""
+
+#: src/lib/components/select/actionvariant.svelte
+msgid "JSON"
+msgstr ""
+
+#: src/lib/components/select/language.svelte
+msgid "Select a language"
+msgstr ""
+
+#: src/lib/components/toast/toast.svelte
+msgid "X"
+msgstr ""
+
+#: src/lib/state/client/wharf.svelte.ts
+msgid "Transaction was not resolved."
+msgstr ""
+
+#: src/routes/[network]/settings/+page.svelte
+msgid "MSIG Configuration"
+msgstr ""
+
+#: src/routes/[network]/settings/+page.svelte
+msgid "Proposal Expiration"
+msgstr ""
+
+#: src/routes/[network]/settings/+page.svelte
+msgid "The expiration date set on multisig proposals."
+msgstr ""
+
+#: src/routes/[network]/settings/+page.svelte
+msgid "Proposal Earliest Execution"
+msgstr ""
+
+#: src/routes/[network]/settings/+page.svelte
+msgid ""
+"Set a datetime to specify the earliest a proposal can be executed. This value will be\n"
+"reset after each proposal is created."
+msgstr ""
+
+#: src/routes/[network]/settings/+page.svelte
+msgid "Local Time"
+msgstr ""
+
+#. placeholder {0}: timestamp
+#: src/routes/[network]/settings/+page.svelte
+msgid "Set for UTC: {0} <0>Clear</0>"
+msgstr ""
+
+#: src/lib/components/contract/action/params.svelte
+msgid "Request Parameters <0/>"
+msgstr ""
+
+#: src/lib/components/contract/action/params.svelte
+msgid "No action parameters."
+msgstr ""
+
+#: src/lib/components/contract/action/response.svelte
+msgid "Response Array <0/>"
+msgstr ""
+
+#: src/lib/components/contract/action/response.svelte
+msgid "Response Object <0/>"
+msgstr ""
+
+#: src/lib/components/summary/components/balancechange.svelte
+msgid "Update"
+msgstr ""
+
+#: src/lib/components/summary/components/balancechange.svelte
+msgid "New Balance:"
+msgstr ""
+
+#: src/lib/components/summary/components/transfer.svelte
+msgid "Transfer"
+msgstr ""
+
+#. placeholder {0}: memo
+#: src/lib/components/summary/components/transfer.svelte
+msgid "<0/> Memo: {0}"
+msgstr ""
+
+#. placeholder {0}: (resources.cpu / 1000).toFixed(3)
+#: src/lib/components/summary/eosio.reserv/powupresult.svelte
+msgid "+ {0} ms (CPU)"
+msgstr ""
+
+#. placeholder {0}: data.powup_cpu
+#. placeholder {0}: data.powup_net
+#. placeholder {0}: account.weight
+#. placeholder {0}: key.weight
+#. placeholder {0}: account.weight
+#. placeholder {0}: key.weight
+#: src/lib/components/summary/eosio.reserv/powupresult.svelte
+#: src/lib/components/summary/eosio.reserv/powupresult.svelte
+#: src/lib/components/summary/eosio/newaccount.svelte
+#: src/lib/components/summary/eosio/newaccount.svelte
+#: src/lib/components/summary/eosio/newaccount.svelte
+#: src/lib/components/summary/eosio/newaccount.svelte
+msgid "Weight: {0}"
+msgstr ""
+
+#. placeholder {0}: (resources.net / 1000).toFixed(3)
+#: src/lib/components/summary/eosio.reserv/powupresult.svelte
+msgid "+ {0} kb (NET)"
+msgstr ""
+
+#: src/lib/components/summary/eosio/buyram.svelte
+msgid "( Receiver: <0/> )"
+msgstr ""
+
+#: src/lib/components/summary/eosio/buyrambytes.svelte
+msgid "(Receiver: <0/>)"
+msgstr ""
+
+#: src/lib/components/summary/eosio/newaccount.svelte
+msgid "<0/> creates account <1/>"
+msgstr ""
+
+#: src/lib/components/summary/eosio/newaccount.svelte
+#: src/lib/components/summary/eosio/newaccount.svelte
+#: src/lib/components/summary/eosio/newaccount.svelte
+#: src/lib/components/summary/eosio/newaccount.svelte
+msgid "Key"
+msgstr ""
+
+#: src/lib/components/summary/eosio/newaccount.svelte
+#: src/lib/components/summary/eosio/newaccount.svelte
+#: src/routes/[network]/(explorer)/transaction/[id]/[[seq]]/ram/+page.svelte
+msgid "Owner"
+msgstr ""
+
+#. placeholder {0}: wait.wait_sec
+#: src/lib/components/summary/eosio/newaccount.svelte
+msgid "<0>Key</0> <1>Owner</1> {0} seconds <2>Weight: {0}</2>"
+msgstr ""
+
+#: src/lib/components/summary/eosio/newaccount.svelte
+#: src/lib/components/summary/eosio/newaccount.svelte
+#: src/routes/[network]/(dev)/debug/components/sections/buttons.svelte
+msgid "Active"
+msgstr ""
+
+#. placeholder {0}: wait.wait_sec
+#: src/lib/components/summary/eosio/newaccount.svelte
+msgid "<0>Key</0> <1>Active</1> {0} seconds <2>Weight: {0}</2>"
+msgstr ""
+
+#: src/lib/components/summary/eosio.wram/issue.svelte
+msgid "Issue"
+msgstr ""
+
+#: src/lib/components/summary/greymassnoop/noop.svelte
+msgid "<0/> provided the network resources for this transaction."
+msgstr ""
+
+#: src/lib/components/summary/eosio.wram/retire.svelte
+msgid "Retire"
+msgstr ""
+
+#: src/lib/components/wallets/metamask/required.svelte
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Next"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/+page.svelte
+msgid "Debug"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/+page.svelte
+#: src/routes/[network]/(dev)/debug/state/+layout.svelte
+#: src/routes/[network]/(dev)/debug/state/wharf/+page.svelte
+#: src/routes/[network]/(explorer)/token/[contract]/[symbol]/+page.svelte
+msgid "Account"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/+page.svelte
+msgid "Components"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/+page.svelte
+msgid "Input/Asset"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/+page.svelte
+msgid "Input/Name"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/+page.svelte
+#: src/routes/[network]/(dev)/debug/opengraph/+page.svelte
+msgid "Opengraph Images"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/+page.svelte
+msgid "State"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/+page.svelte
+msgid "State/Account"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/+page.svelte
+msgid "State/Config"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/+page.svelte
+msgid "State/Network"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/+page.svelte
+msgid "State/Wharf"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/+page.svelte
+msgid "Token Definitions"
+msgstr ""
+
+#: src/routes/[network]/(account)/move/+page.svelte
+msgid "Move"
+msgstr ""
+
+#: src/routes/[network]/(account)/create-account/+page.svelte
+msgid "I have tokens on an exchange and want to create an account."
+msgstr ""
+
+#: src/routes/[network]/(account)/create-account/+page.svelte
+msgid "Create Account by Sending Tokens"
+msgstr ""
+
+#: src/routes/[network]/(account)/create-account/+page.svelte
+msgid "I have an account and want to create another."
+msgstr ""
+
+#: src/routes/[network]/(account)/create-account/+page.svelte
+#: src/routes/[network]/(account)/signup/wallets/extensions/metamask/+page.svelte
+msgid "Create Account"
+msgstr ""
+
+#: src/routes/[network]/(account)/create-account/+page.svelte
+msgid "I have an account and want to create an msig account to share with other accounts."
+msgstr ""
+
+#: src/routes/[network]/(account)/create-account/+page.svelte
+msgid "Create MSIG Account"
+msgstr ""
+
+#: src/routes/[network]/(account)/ram/+page.svelte
+msgid "RAM Calculator"
+msgstr ""
+
+#: src/routes/[network]/(account)/create-account/request/+page.svelte
+#: src/routes/[network]/(account)/signup/+layout.svelte
+msgid "Get Started"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/+layout.svelte
+msgid "Select Environment"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/+layout.svelte
+msgid "Select Wallet"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/+layout.svelte
+msgid "Setup Wallet"
+msgstr ""
+
+#. placeholder {0}: index + 1
+#. placeholder {1}: step.title
+#: src/routes/[network]/(account)/signup/+layout.svelte
+msgid "Step {0}: {1}"
+msgstr ""
+
+#. placeholder {0}: network.chain.name
+#. placeholder {0}: network.chain.name
+#: src/routes/[network]/(account)/signup/+layout.ts
+#: src/routes/[network]/(account)/signup/+layout.ts
+msgid "Get started on the {0} Network"
+msgstr ""
+
+#. placeholder {0}: network.chain.name
+#: src/routes/[network]/(account)/signup/+layout.ts
+msgid "Select a wallet and create an account on the {0} network."
+msgstr ""
+
+#. placeholder {0}: network.chain.name
+#. placeholder {1}: network.chain.name
+#: src/routes/[network]/(account)/signup/+layout.ts
+msgid "Select a {0} compatible wallet and create an account on the {1} network."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/+page.svelte
+msgid "Detecting your environment..."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/+page.svelte
+msgid "Please wait while we determine the best options for you."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/+page.svelte
+msgid "Let's get started"
+msgstr ""
+
+#. placeholder {0}: recommendedWallet.name
+#: src/routes/[network]/(account)/signup/+page.svelte
+msgid ""
+"There are many options to create your first account but we recommend {0} for\n"
+"most people new to EOS."
+msgstr ""
+
+#. placeholder {0}: recommendedWallet.name
+#: src/routes/[network]/(account)/signup/+page.svelte
+msgid "Continue with {0}"
+msgstr ""
+
+#. placeholder {0}: currentWalletType?.title
+#: src/routes/[network]/(account)/signup/+page.svelte
+msgid "Other {0}"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/+page.svelte
+msgid "More Options"
+msgstr ""
+
+#. placeholder {0}: Object.values(walletTypes) .filter((type) => type.type !== currentWalletType.type) .map((type) => type.title.toLowerCase()) .join(', ') .replace(/,([^,]*)$/, ' and$1')
+#: src/routes/[network]/(account)/signup/+page.svelte
+msgid "Choose from {0}"
+msgstr ""
+
+#: src/routes/[network]/(account)/resources/+page.svelte
+msgid "CPU (Central Processing Unit)"
+msgstr ""
+
+#: src/routes/[network]/(account)/resources/+page.svelte
+msgid "Provides processing power for blockchain actions."
+msgstr ""
+
+#: src/routes/[network]/(account)/resources/+page.svelte
+msgid "Measured in microseconds."
+msgstr ""
+
+#: src/routes/[network]/(account)/resources/+page.svelte
+msgid "Needed to execute transactions."
+msgstr ""
+
+#: src/routes/[network]/(account)/resources/+page.svelte
+msgid "NET (Network Bandwidth)"
+msgstr ""
+
+#: src/routes/[network]/(account)/resources/+page.svelte
+msgid "Represents network bandwidth usage."
+msgstr ""
+
+#: src/routes/[network]/(account)/resources/+page.svelte
+msgid "Required for transactions on the blockchain."
+msgstr ""
+
+#: src/routes/[network]/(account)/resources/+page.svelte
+#: src/routes/[network]/(account)/resources/+page.svelte
+msgid "CPU and NET"
+msgstr ""
+
+#. placeholder {0}: symbolName
+#: src/routes/[network]/(account)/resources/+page.svelte
+msgid "Can be \"powered up\" by spending {0}."
+msgstr ""
+
+#: src/routes/[network]/(account)/resources/+page.svelte
+msgid "Some free services offer daily power-ups."
+msgstr ""
+
+#. placeholder {0}: symbolName
+#: src/routes/[network]/(account)/resources/+page.svelte
+msgid "Amount received is proportional to {0} spent."
+msgstr ""
+
+#: src/routes/[network]/(account)/resources/+page.svelte
+msgid "Lasts for a specific time period."
+msgstr ""
+
+#: src/routes/[network]/(account)/resources/+page.svelte
+msgid "RAM (Random Access Memory)"
+msgstr ""
+
+#: src/routes/[network]/(account)/resources/+page.svelte
+msgid "It's like computer memory, but for the blockchain."
+msgstr ""
+
+#: src/routes/[network]/(account)/resources/+page.svelte
+msgid "Used to store data on the blockchain."
+msgstr ""
+
+#: src/routes/[network]/(account)/resources/+page.svelte
+msgid "Limited and in high demand."
+msgstr ""
+
+#: src/routes/[network]/(account)/resources/+page.svelte
+msgid "Can be bought and sold by users."
+msgstr ""
+
+#: src/routes/[network]/(account)/resources/+page.svelte
+msgid "Price changes based on availability."
+msgstr ""
+
+#. placeholder {0}: chainName
+#: src/routes/[network]/(account)/resources/+page.svelte
+msgid "{0} Resources: A Simple Explanation"
+msgstr ""
+
+#. placeholder {0}: chainName
+#. placeholder {1}: chainName
+#. placeholder {2}: chainName
+#: src/routes/[network]/(account)/resources/+page.svelte
+msgid ""
+"The {0} blockchain uses three main resources: CPU, NET, and RAM. Users need these resources\n"
+"to interact with smart contracts and perform actions on the {1} blockchain. Managing\n"
+"these resources is crucial for efficient use of the {2} network."
+msgstr ""
+
+#: src/routes/[network]/(account)/resources/powerup/+page.svelte
+#: src/routes/[network]/(account)/resources/renting.svelte
+msgid "POWERUP"
+msgstr ""
+
+#: src/routes/[network]/(account)/resources/renting.svelte
+#: src/routes/[network]/(account)/resources/rex/+page.svelte
+msgid "REX"
+msgstr ""
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+#: src/routes/[network]/(account)/ram/(forms)/sell/+page.svelte
+#: src/routes/[network]/(account)/resources/renting.svelte
+msgid "Not logged in"
+msgstr ""
+
+#: src/routes/[network]/(account)/resources/renting.svelte
+msgid "(<0/>/MS)"
+msgstr ""
+
+#: src/routes/[network]/(account)/resources/renting.svelte
+msgid "(<0/>/KB)"
+msgstr ""
+
+#: src/routes/[network]/(account)/resources/renting.svelte
+msgid "Insufficient balance. Please enter a smaller amount."
+msgstr ""
+
+#: src/routes/[network]/(account)/resources/renting.svelte
+msgid "Debug Info"
+msgstr ""
+
+#: src/routes/[network]/(account)/vote/+page.svelte
+#: src/routes/[network]/(account)/vote/+page.ts
+msgid "Vote"
+msgstr ""
+
+#: src/routes/[network]/(account)/transactions/+page.ts
+msgid "Transactions"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/network/+layout.ts
+msgid "Network Overview"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/network/+page.svelte
+msgid "Network charts/metrics"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/network/+page.svelte
+msgid "Reversible Blocks"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/token/+page.ts
+#: src/routes/[network]/(explorer)/token/+page.ts
+msgid "Token Directory"
+msgstr ""
+
+#: src/routes/[network]/(homepage)/components/hero.svelte
+#: src/routes/[network]/(homepage)/components/hero.svelte
+msgid "Unicove -"
+msgstr ""
+
+#: src/routes/[network]/(homepage)/components/hero.svelte
+msgid "EOS rebrands to Vaulta"
+msgstr ""
+
+#. placeholder {0}: ramtoken.name
+#: src/routes/[network]/(homepage)/components/performance-grid.svelte
+msgid "{0}/USD"
+msgstr ""
+
+#: src/routes/[network]/(homepage)/components/staking-rewards.svelte
+msgid "Learn more"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/account/[name]/staked/+page.svelte
+#: src/routes/[network]/(homepage)/components/stakedhex.svelte
+msgid "APR"
+msgstr ""
+
+#: src/routes/[network]/(account)/(send)/receive/+page.svelte
+msgid "Receive"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/account/+page.svelte
+#: src/routes/[network]/(dev)/debug/state/wharf/+page.svelte
+#: src/routes/[network]/(explorer)/prompt/[payload]/+page.svelte
+msgid "Login"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/+page.svelte
+msgid "Design System"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/opengraph/+page.svelte
+#: src/routes/[network]/(dev)/debug/opengraph/+page.svelte
+#: src/routes/[network]/(dev)/debug/opengraph/+page.svelte
+msgid "Test 1"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/opengraph/+page.svelte
+#: src/routes/[network]/(dev)/debug/opengraph/+page.svelte
+#: src/routes/[network]/(dev)/debug/opengraph/+page.svelte
+msgid "Text 1"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/state/+page.svelte
+msgid "The internal state of Unicove for debugging purposes"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/state/+layout.svelte
+msgid "Config"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/state/+layout.svelte
+msgid "Contracts"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/state/+layout.svelte
+msgid "Market"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/state/+layout.svelte
+#: src/routes/[network]/(dev)/debug/state/network/+page.svelte
+msgid "Network"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/state/+layout.svelte
+msgid "Wharf"
+msgstr ""
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+#: src/routes/[network]/(account)/create-account/contract/+page.svelte
+#: src/routes/[network]/(account)/create-account/direct/+page.svelte
+#: src/routes/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
+msgid "Enter"
+msgstr ""
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+#: src/routes/[network]/(account)/create-account/contract/+page.svelte
+#: src/routes/[network]/(account)/create-account/direct/+page.svelte
+msgid "Escape"
+msgstr ""
+
+#. placeholder {0}: m.common_public_key()
+#. placeholder {0}: m.common_public_key()
+#. placeholder {0}: m.common_public_key()
+#. placeholder {0}: m.common_public_key()
+#: src/routes/[network]/(account)/create-account/direct/+page.svelte
+#: src/routes/[network]/(account)/create-account/direct/+page.svelte
+#: src/routes/[network]/(account)/create-account/direct/+page.svelte
+#: src/routes/[network]/(account)/create-account/direct/+page.svelte
+msgid "Owner {0}"
+msgstr ""
+
+#. placeholder {0}: m.common_public_key()
+#. placeholder {0}: m.common_public_key()
+#. placeholder {0}: m.common_public_key()
+#. placeholder {0}: m.common_public_key()
+#: src/routes/[network]/(account)/create-account/direct/+page.svelte
+#: src/routes/[network]/(account)/create-account/direct/+page.svelte
+#: src/routes/[network]/(account)/create-account/direct/+page.svelte
+#: src/routes/[network]/(account)/create-account/direct/+page.svelte
+msgid "Active {0}"
+msgstr ""
+
+#. placeholder {0}: `Owner ${m.common_public_key()}`
+#. placeholder {0}: `Active ${m.common_public_key()}`
+#: src/routes/[network]/(account)/create-account/direct/+page.svelte
+#: src/routes/[network]/(account)/create-account/direct/+page.svelte
+msgid "{0} from <0/>"
+msgstr ""
+
+#: src/routes/[network]/(account)/create-account/direct/+page.svelte
+msgid "RAM Bytes"
+msgstr ""
+
+#: src/routes/[network]/(account)/create-account/direct/+page.svelte
+msgid "RAM (Bytes)"
+msgstr ""
+
+#: src/routes/[network]/(account)/create-account/contract/+page.svelte
+msgid "K1"
+msgstr ""
+
+#: src/routes/[network]/(account)/create-account/request/+page.svelte
+msgid "Account Creation"
+msgstr ""
+
+#: src/routes/[network]/(account)/create-account/request/+page.svelte
+msgid ""
+"Select the 12-character long account name you'd like to register. Use only lowercase A-Z and\n"
+"1-5."
+msgstr ""
+
+#: src/routes/[network]/(account)/create-account/request/+page.svelte
+msgid "Create Request"
+msgstr ""
+
+#: src/routes/[network]/(account)/create-account/request/+page.svelte
+msgid "If you are not automatically redirected, click the button below:"
+msgstr ""
+
+#: src/routes/[network]/(account)/create-account/request/+page.svelte
+msgid "View Account Creation Request"
+msgstr ""
+
+#: src/routes/[network]/(account)/create-account/request/+page.svelte
+msgid "Don't have an account, but know someone willing to create an account for you?"
+msgstr ""
+
+#: src/routes/[network]/(account)/create-account/request/+page.svelte
+msgid ""
+"This page will help walk you through setting up your first wallet and then create a link you\n"
+"can securely share with them, allowing them to easily create an account for you."
+msgstr ""
+
+#: src/routes/[network]/(account)/create-account/request/+page.svelte
+msgid "Click the Get Started button below and you'll be walked through:"
+msgstr ""
+
+#: src/routes/[network]/(account)/create-account/request/+page.svelte
+msgid "Installing MetaMask + EOS Wallet."
+msgstr ""
+
+#: src/routes/[network]/(account)/create-account/request/+page.svelte
+msgid "Selecting an available account name."
+msgstr ""
+
+#: src/routes/[network]/(account)/create-account/request/+page.svelte
+msgid "Create a sharable link to share with an existing user."
+msgstr ""
+
+#: src/routes/[network]/(account)/create-account/request/+page.svelte
+msgid ""
+"Once the existing user creates the account, you'll be able to login and verify it was\n"
+"successfully created and linked to your MetaMask wallet!"
+msgstr ""
+
+#: src/routes/[network]/(account)/create-account/request/+page.svelte
+msgid "MetaMask + EOS Wallet is installed and connected!"
+msgstr ""
+
+#. placeholder {0}: context.metamask.installedSnap?.version
+#: src/routes/[network]/(account)/create-account/request/+page.svelte
+msgid "Version: {0}"
+msgstr ""
+
+#: src/routes/[network]/(account)/create-account/request/+page.ts
+#: src/routes/[network]/(account)/create-account/request/+page.ts
+msgid "Request Account Creation"
+msgstr ""
+
+#: src/routes/[network]/(account)/create-account/request/+page.ts
+#: src/routes/[network]/(account)/create-account/request/+page.ts
+msgid "Request someone to create an account for you"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/+page.ts
+msgid "Choose a wallet type"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/+page.svelte
+msgid "Choose A Wallet Type"
+msgstr ""
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+#: src/routes/[network]/(account)/signup/wallets/+page.svelte
+#: src/routes/[network]/(account)/signup/wallets/[walletType]/+page.svelte
+msgid "Back"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/+page.svelte
+#: src/routes/[network]/(account)/signup/wallets/[walletType]/+page.svelte
+msgid "Why do I need a wallet?"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/+page.svelte
+#: src/routes/[network]/(account)/signup/wallets/[walletType]/+page.svelte
+msgid ""
+"A wallet is your gateway to the blockchain, allowing you to manage your digital assets and\n"
+"interact with decentralized applications."
+msgstr ""
+
+#: src/routes/[network]/(account)/resources/stake/+page.svelte
+msgid "STAKE"
+msgstr ""
+
+#. placeholder {0}: currentWallet.name
+#: src/routes/[network]/(account)/welcome/[wallet]/+page.svelte
+msgid ""
+"Congratulations! Your {0} account is now set up and ready to go. You're all set\n"
+"to start exploring the world of blockchain and decentralized applications."
+msgstr ""
+
+#. placeholder {0}: currentWallet.name
+#: src/routes/[network]/(account)/welcome/[wallet]/+page.svelte
+msgid "To get started, simply log in to your {0} account using the button below."
+msgstr ""
+
+#. placeholder {0}: currentWallet.name
+#: src/routes/[network]/(account)/welcome/[wallet]/+page.svelte
+msgid "Log In with {0}"
+msgstr ""
+
+#: src/routes/[network]/(account)/welcome/[wallet]/+page.svelte
+msgid "What's Next?"
+msgstr ""
+
+#: src/routes/[network]/(account)/welcome/[wallet]/+page.svelte
+msgid "Manage your digital assets"
+msgstr ""
+
+#: src/routes/[network]/(account)/welcome/[wallet]/+page.svelte
+msgid "Interact with decentralized applications (dApps)"
+msgstr ""
+
+#: src/routes/[network]/(account)/welcome/[wallet]/+page.svelte
+msgid "etc..."
+msgstr ""
+
+#: src/routes/[network]/(account)/welcome/[wallet]/+page.ts
+msgid "Anchor"
+msgstr ""
+
+#: src/routes/[network]/(account)/welcome/[wallet]/+page.ts
+msgid "MetaMask"
+msgstr ""
+
+#: src/routes/[network]/(account)/welcome/[wallet]/+page.ts
+msgid "TokenPocket"
+msgstr ""
+
+#: src/routes/[network]/(account)/welcome/[wallet]/+page.ts
+msgid "Wombat"
+msgstr ""
+
+#. placeholder {0}: currentWallet.name
+#: src/routes/[network]/(account)/welcome/[wallet]/+page.ts
+msgid "Welcome to {0}"
+msgstr ""
+
+#: src/routes/[network]/(account)/welcome/[wallet]/+page.ts
+msgid "Your account is ready to use"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/account/[name]/+layout.svelte
+msgid "Authority"
+msgstr ""
+
+#. placeholder {0}: lastUpdate
+#: src/routes/[network]/(explorer)/account/[name]/+layout.svelte
+msgid "props.account updated {0} seconds ago <0>Refresh</0>"
+msgstr ""
+
+#: src/routes/[network]/(account)/upload/[[name]]/+page.ts
+#: src/routes/[network]/(account)/upload/[[name]]/+page.ts
+msgid "Upload Smart Contract"
+msgstr ""
+
+#. placeholder {0}: params.name
+#: src/routes/[network]/(account)/upload/[[name]]/+page.ts
+msgid "Select the ABI and WASM files to upload for {0}"
+msgstr ""
+
+#: src/routes/[network]/(account)/upload/[[name]]/+page.ts
+msgid "Upload a smart contract by selecting the ABI and WASM files from your computer."
+msgstr ""
+
+#: src/routes/[network]/(account)/upload/[[name]]/+page.svelte
+msgid ""
+"Enter an account name and select an ABI and/or WASM file to upload using the authority of\n"
+"the currently logged in account."
+msgstr ""
+
+#: src/routes/[network]/(account)/upload/[[name]]/+page.svelte
+msgid "Contract Files"
+msgstr ""
+
+#: src/routes/[network]/(account)/upload/[[name]]/+page.svelte
+msgid "Upload"
+msgstr ""
+
+#: src/routes/[network]/(account)/upload/[[name]]/+page.svelte
+#: src/routes/[network]/(explorer)/contract/[contract]/+page.svelte
+msgid "Actions"
+msgstr ""
+
+#: src/routes/[network]/(account)/upload/[[name]]/+page.svelte
+msgid "The actions that will be performed are listed below."
+msgstr ""
+
+#: src/routes/[network]/(account)/upload/[[name]]/+page.svelte
+msgid "Remove Action"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/navigation.svelte
+#: src/routes/[network]/(explorer)/contract/[contract]/+layout.svelte
+#: src/routes/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
+msgid "Overview"
+msgstr ""
+
+#. placeholder {0}: data.abi.actions.length
+#: src/routes/[network]/(explorer)/contract/[contract]/+layout.svelte
+msgid "Actions ({0})"
+msgstr ""
+
+#. placeholder {0}: data.abi.structs.length
+#: src/routes/[network]/(explorer)/contract/[contract]/+layout.svelte
+msgid "Structs ({0})"
+msgstr ""
+
+#. placeholder {0}: data.abi.tables.length
+#: src/routes/[network]/(explorer)/contract/[contract]/+layout.svelte
+msgid "Tables ({0})"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/contract/[contract]/+layout.svelte
+msgid "ABI"
+msgstr ""
+
+#. placeholder {0}: params.contract
+#: src/routes/[network]/(explorer)/contract/[contract]/+layout.ts
+msgid "No contract is currently deployed to the {0} account."
+msgstr ""
+
+#: src/routes/[network]/(explorer)/contract/[contract]/+layout.ts
+#: src/routes/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
+msgid "NOT_FOUND"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/account/[name]/activity/+page.svelte
+#: src/routes/[network]/(explorer)/contract/[contract]/+layout.ts
+msgid "Contract"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/contract/[contract]/+page.svelte
+msgid "Upload Contract"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/contract/[contract]/+page.svelte
+msgid "Structs"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/contract/[contract]/+page.svelte
+msgid "Tables"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/prompt/[payload]/+page.svelte
+msgid "Visit Account"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/prompt/[payload]/+page.svelte
+msgid "Account Ready!"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/prompt/[payload]/+page.svelte
+msgid "Your account creation request for <0/> has been completed."
+msgstr ""
+
+#: src/routes/[network]/(explorer)/prompt/[payload]/+page.svelte
+msgid "Malicious Activity Detected"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/prompt/[payload]/+page.svelte
+msgid ""
+"Unicove cannot verify that this account was created safely and recommends against\n"
+"using it. Whoever signed the request has modified the keys of this account, which\n"
+"means this account may be at risk. Do not use this account."
+msgstr ""
+
+#: src/routes/[network]/(explorer)/prompt/[payload]/+page.svelte
+msgid ""
+"Try creating a new request with a new account name, and find a different person to\n"
+"create your account."
+msgstr ""
+
+#: src/routes/[network]/(explorer)/prompt/[payload]/+page.svelte
+msgid "Request complete, this account has been created."
+msgstr ""
+
+#: src/routes/[network]/(explorer)/prompt/[payload]/+page.svelte
+msgid "View Account"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/prompt/[payload]/+page.svelte
+#: src/routes/[network]/(explorer)/prompt/[payload]/+page.svelte
+msgid "Account Creation Request"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/prompt/[payload]/+page.svelte
+msgid ""
+"Your account creation request is ready. Share the URL of this page with an existing\n"
+"account holder so they can create your account."
+msgstr ""
+
+#: src/routes/[network]/(explorer)/prompt/[payload]/+page.svelte
+msgid "Share Link"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/prompt/[payload]/+page.svelte
+msgid ""
+"Once the account has been created, return to this page to ensure it was created\n"
+"successfully and to login!"
+msgstr ""
+
+#. placeholder {0}: newAccountAction.name
+#: src/routes/[network]/(explorer)/prompt/[payload]/+page.svelte
+msgid "Someone has requested an account named {0} be created."
+msgstr ""
+
+#: src/routes/[network]/(explorer)/prompt/[payload]/+page.svelte
+msgid ""
+"If you are willing to create this account, review the details below and perform the\n"
+"transaction."
+msgstr ""
+
+#: src/routes/[network]/(explorer)/prompt/[payload]/+page.svelte
+msgid "If you created this request, connect your MetaMask wallet."
+msgstr ""
+
+#: src/routes/[network]/(explorer)/prompt/[payload]/+page.svelte
+msgid "Transaction Details"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
+#: src/routes/[network]/(explorer)/prompt/[payload]/+page.svelte
+msgid "Perform transaction"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/prompt/[payload]/+page.svelte
+msgid "Sign-in with your wallet to perform this transaction"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/prompt/[payload]/+page.ts
+msgid "Signing Request"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/prompt/[payload]/+page.ts
+msgid "Review the actions below and sign the transaction."
+msgstr ""
+
+#: src/routes/[network]/(explorer)/block/[number]/+layout.svelte
+#: src/routes/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
+#: src/routes/[network]/(explorer)/transaction/[id]/[[seq]]/data/+page.svelte
+msgid "Data"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/block/[number]/+page.svelte
+msgid "ArrowRight"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/block/[number]/+page.svelte
+msgid "ArrowLeft"
+msgstr ""
+
+#. placeholder {0}: data.details.totalCpu
+#: src/routes/[network]/(explorer)/block/[number]/+page.svelte
+msgid "{0} μs"
+msgstr ""
+
+#. placeholder {0}: data.details.totalNet * 8
+#: src/routes/[network]/(explorer)/block/[number]/+page.svelte
+msgid "{0} Bytes"
+msgstr ""
+
+#: src/routes/[network]/(homepage)/(wallets)/metamask/+page.svelte
+msgid "support@greymass.com"
+msgstr ""
+
+#. placeholder {0}: networkName
+#: src/routes/[network]/(homepage)/(wallets)/metamask/+page.svelte
+msgid "{0} Wallet"
+msgstr ""
+
+#: src/routes/[network]/(homepage)/(wallets)/metamask/+page.svelte
+msgid "GitHub"
+msgstr ""
+
+#: src/routes/[network]/(homepage)/(wallets)/metamask/+page.svelte
+msgid "Latest Version"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/buttons.svelte
+msgid "Buttons"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/buttons.svelte
+#: src/routes/[network]/(dev)/debug/components/sections/colors.svelte
+msgid "Primary"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/buttons.svelte
+#: src/routes/[network]/(dev)/debug/components/sections/buttons.svelte
+#: src/routes/[network]/(dev)/debug/components/sections/buttons.svelte
+#: src/routes/[network]/(dev)/debug/components/sections/buttons.svelte
+#: src/routes/[network]/(dev)/debug/components/sections/colors.svelte
+#: src/routes/[network]/(dev)/debug/components/sections/inputs.svelte
+#: src/routes/[network]/(dev)/debug/components/sections/inputs.svelte
+#: src/routes/[network]/(dev)/debug/components/sections/inputs.svelte
+msgid "Default"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/buttons.svelte
+#: src/routes/[network]/(dev)/debug/components/sections/buttons.svelte
+#: src/routes/[network]/(dev)/debug/input/asset/+page.svelte
+msgid "EOS (0)"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/buttons.svelte
+#: src/routes/[network]/(dev)/debug/components/sections/buttons.svelte
+#: src/routes/[network]/(dev)/debug/components/sections/buttons.svelte
+#: src/routes/[network]/(dev)/debug/components/sections/inputs.svelte
+#: src/routes/[network]/(dev)/debug/components/sections/inputs.svelte
+#: src/routes/[network]/(dev)/debug/components/sections/select.svelte
+msgid "Disabled"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/buttons.svelte
+msgid "Secondary"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/buttons.svelte
+#: src/routes/[network]/(dev)/debug/components/sections/buttons.svelte
+#: src/routes/[network]/(dev)/debug/input/asset/+page.svelte
+msgid "EOS (1)"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/buttons.svelte
+msgid "Pill"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/buttons.svelte
+#: src/routes/[network]/(dev)/debug/components/sections/buttons.svelte
+#: src/routes/[network]/(dev)/debug/components/sections/buttons.svelte
+#: src/routes/[network]/(dev)/debug/components/sections/buttons.svelte
+#: src/routes/[network]/(dev)/debug/input/asset/+page.svelte
+msgid "EOS (MAX)"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/buttons.svelte
+msgid "Text"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/buttons.svelte
+msgid "Side by side"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/buttons.svelte
+msgid "Delete"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/buttons.svelte
+#: src/routes/[network]/(dev)/debug/components/sections/buttons.svelte
+#: src/routes/[network]/(dev)/debug/components/sections/buttons.svelte
+msgid "Cancel"
+msgstr ""
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+#: src/routes/[network]/(dev)/debug/components/sections/buttons.svelte
+msgid "Confirm"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/buttons.svelte
+msgid "Icon Buttons"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/cards.svelte
+msgid "Cards"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/cards.svelte
+msgid "Currently Staked - 34% APR"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/cards.svelte
+msgid "0.0 EOS"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/cards.svelte
+msgid "USD Value $0.0"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/cards.svelte
+msgid "Unstaking Balances Is A Long Title"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/cards.svelte
+#: src/routes/[network]/(dev)/debug/components/sections/navigation.svelte
+msgid "Withdraw"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/charts.svelte
+msgid "Charts"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/charts.svelte
+msgid "Bar Chart"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/charts.svelte
+msgid "Staking Yield History"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/chips.svelte
+msgid "Chips"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/chips.svelte
+msgid "Some text"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/code.svelte
+msgid "Code"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/code.svelte
+msgid "We can use the code component to display JSON snippets. This is useful for debug."
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/code.svelte
+msgid "Here we have an inline code snippet: <0/> surrounded by text."
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/code.svelte
+msgid "And here we have a block code snippet:"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/colors.svelte
+msgid "Color Roles <0/>"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/colors.svelte
+msgid "On Primary"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/colors.svelte
+msgid "Primary Container"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/colors.svelte
+msgid "On Primary Container"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/colors.svelte
+msgid "Background"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/colors.svelte
+#: src/routes/[network]/(dev)/debug/components/sections/colors.svelte
+#: src/routes/[network]/(dev)/debug/components/sections/colors.svelte
+#: src/routes/[network]/(dev)/debug/components/sections/colors.svelte
+#: src/routes/[network]/(dev)/debug/components/sections/colors.svelte
+#: src/routes/[network]/(dev)/debug/components/sections/colors.svelte
+msgid "Surface"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/colors.svelte
+msgid "On Surface"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/colors.svelte
+msgid "On Surface Variant"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/colors.svelte
+msgid "Outline"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/colors.svelte
+msgid "Outline Variant"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/colors.svelte
+msgid "Lowest"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/colors.svelte
+msgid "Low"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/colors.svelte
+msgid "High"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/colors.svelte
+msgid "Highest"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/colors.svelte
+msgid "Surface Container Lowest"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/colors.svelte
+msgid "Surface Container Low"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/colors.svelte
+msgid "Surface Container (Default)"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/colors.svelte
+msgid "Surface Container High"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/colors.svelte
+msgid "Surface Container Highest"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/colors.svelte
+msgid "error"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/colors.svelte
+msgid "On error"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/colors.svelte
+msgid "error Container"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/colors.svelte
+msgid "On error Container"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/colors.svelte
+msgid "success"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/colors.svelte
+msgid "On success"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/colors.svelte
+msgid "success Container"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/colors.svelte
+msgid "On success Container"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/navigation.svelte
+msgid "Navigation Components"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/navigation.svelte
+msgid "Page Actions"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/inputs.svelte
+msgid "Text Input"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/inputs.svelte
+#: src/routes/[network]/(dev)/debug/components/sections/inputs.svelte
+msgid "Placeholder text"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/inputs.svelte
+msgid "With Label"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/inputs.svelte
+msgid "Enter a value"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/inputs.svelte
+msgid "Asset Input"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/inputs.svelte
+msgid "Enter token value:"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/inputs.svelte
+msgid "Asset or Units Input"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/inputs.svelte
+msgid "Number Input"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/inputs.svelte
+msgid "Number Input With Unit"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/inputs.svelte
+msgid "Bytes Input"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/inputs.svelte
+msgid "Switch"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/inputs.svelte
+msgid "Controlled"
+msgstr ""
+
+#. placeholder {0}: controlledSwitch ? 'on' : 'off'
+#: src/routes/[network]/(dev)/debug/components/sections/inputs.svelte
+msgid "Switch is {0}"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/inputs.svelte
+msgid "Checkbox"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/inputs.svelte
+msgid "Indeterminate"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/inputs.svelte
+msgid "Checked"
+msgstr ""
+
+#. placeholder {0}: controlledSwitch ? 'checked' : 'empty'
+#: src/routes/[network]/(dev)/debug/components/sections/inputs.svelte
+msgid "Checkbox is {0}"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/tables.svelte
+#: src/routes/[network]/(dev)/debug/components/sections/tables.svelte
+#: src/routes/[network]/(dev)/debug/components/sections/tables.svelte
+#: src/routes/[network]/(dev)/debug/components/sections/tables.svelte
+#: src/routes/[network]/(dev)/debug/components/sections/tables.svelte
+msgid "Some title"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/tables.svelte
+msgid "Tables and table-like displays"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/tables.svelte
+msgid "Description List"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/tables.svelte
+msgid ""
+"For a simple two-column key-value type table we can use the description list component. This\n"
+"will collapse the value under the key and right-align it on smaller screens. Note there is no\n"
+"row striping here."
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/tables.svelte
+msgid "Some items"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/tables.svelte
+msgid ""
+"For displaying a component in the description, or multiple values under a single key, you can\n"
+"use the components declaratively."
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/tables.svelte
+msgid ""
+"Note: You need to wrap the child component correctly or you'll get a warning. There are CSS\n"
+"rules that'll visually yell at you to fix it :)"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/tables.svelte
+msgid "First"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/tables.svelte
+msgid "Second"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/tables.svelte
+msgid "Warning"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/select.svelte
+msgid "Select"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/select.svelte
+msgid "Pill Select"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/select.svelte
+msgid "Select a date range"
+msgstr ""
+
+#. placeholder {0}: selected.label
+#. placeholder {0}: selectedFormOption.label
+#. placeholder {0}: imageOptionSelected.label
+#. placeholder {0}: JSON.stringify(tokenSelected, null, 2)
+#: src/routes/[network]/(dev)/debug/components/sections/select.svelte
+#: src/routes/[network]/(dev)/debug/components/sections/select.svelte
+#: src/routes/[network]/(dev)/debug/components/sections/select.svelte
+#: src/routes/[network]/(dev)/debug/components/sections/select.svelte
+msgid "Value in parent: {0}"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/select.svelte
+msgid "Test set to 90d"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/select.svelte
+msgid "Form Select"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/select.svelte
+msgid "Select a form option"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/select.svelte
+msgid "Form Select with Images"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/select.svelte
+msgid "Select an option"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/select.svelte
+msgid "Token Select"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/select.svelte
+msgid "Select a token"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/progress.svelte
+#: src/routes/[network]/(dev)/debug/components/sections/progress.svelte
+msgid "Progress"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/tooltips.svelte
+msgid "Tooltips"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/tooltips.svelte
+msgid "Tooltips provide additional information when hovering over an element."
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/tooltips.svelte
+msgid "Another tooltip example"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/tooltips.svelte
+msgid "Small tooltip"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/tooltips.svelte
+msgid "This is a medium-length tooltip that provides more detailed information about a feature or concept."
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/tooltips.svelte
+msgid "Medium tooltip"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/tooltips.svelte
+msgid "This is a longer tooltip that can be used to provide comprehensive explanations or instructions. It's useful when you need to convey more complex information without cluttering the main interface. Remember that tooltips should still be concise and to the point."
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/tooltips.svelte
+msgid "Large tooltip"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/tooltips.svelte
+msgid "This is a long tooltip with an icon. Icons can be used to provide visual cues about the type of information being presented. For example, this icon might indicate that the tooltip contains important or critical information that the user should pay attention to."
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/tooltips.svelte
+msgid "Tooltip with custom icon"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/tooltips.svelte
+msgid "This tooltip has a longer open and close delay, making it slower to appear and disappear when hovering."
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/tooltips.svelte
+msgid "Slow open and close tooltip"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/tooltips.svelte
+msgid "This tooltip has a longer fade in duration, making it show up more slowly."
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/tooltips.svelte
+msgid "Slowly appearing tooltip"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/tooltips.svelte
+msgid "This tooltip is on an icon."
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/typography.svelte
+msgid "Typography"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/typography.svelte
+msgid ""
+"Styles are applied separately from their tag since there will be situations where we want to mix\n"
+"and match styles and tags. We want to adhere to valid and semantic html as much as possible, and\n"
+"having a utility class to apply heading styles helps us with that goal."
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/typography.svelte
+msgid ""
+"For example, some of the designs show the main heading of the page using the style of a second\n"
+"heading. This is easily achieved by applying the h2 class to the h1 tag."
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/typography.svelte
+msgid "Text Display"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/typography.svelte
+msgid "Text Headline"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/typography.svelte
+msgid "Text Title"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/typography.svelte
+msgid "Text Body"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/typography.svelte
+msgid "Text Label"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/typography.svelte
+msgid "Text Label Small"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/sections/typography.svelte
+msgid ""
+"Paragraph - lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor\n"
+"incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation\n"
+"ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit\n"
+"in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat\n"
+"cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/summaries/+page.svelte
+msgid "Example Transactions (Vaulta)"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/summaries/+page.svelte
+msgid "Links to transactions that perform common types of actions."
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/summaries/+page.svelte
+msgid "Tokens"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/summaries/+page.svelte
+msgid "Token Transfer"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/summaries/+page.svelte
+msgid "Swap System Token to RAM"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/summaries/+page.svelte
+msgid "Swap RAM to System Token"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/summaries/+page.svelte
+msgid "Swap RAM to WRAM"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/summaries/+page.svelte
+msgid "Swap WRAM to RAM"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/summaries/+page.svelte
+msgid "Stake System Token"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/summaries/+page.svelte
+msgid "Unstake System Token"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/summaries/+page.svelte
+msgid "Staking Withdraw"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/components/summaries/+page.svelte
+msgid "Powerup"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/state/account/+page.svelte
+msgid "Account State"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/state/account/+page.svelte
+msgid "The account state for the currently active session."
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/state/account/+page.svelte
+msgid "Update account state"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/state/account/+page.svelte
+msgid "Balances"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/state/account/+page.svelte
+msgid "Delegations (delband)"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/state/account/+page.svelte
+msgid "No account state available."
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/input/name/+page.svelte
+msgid "Valid"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/input/name/+page.svelte
+msgid "Valid (Dot)"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/input/name/+page.svelte
+msgid "Greymass"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/input/name/+page.svelte
+msgid "Invalid (Casing)"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/input/name/+page.svelte
+msgid "Invalid (Length)"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/input/name/+page.svelte
+msgid "Invalid (Number >5)"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/input/name/+page.svelte
+msgid "Invalid (Symbol)"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/input/name/+page.svelte
+msgid "Do a thing with the name!"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/input/name/+page.svelte
+msgid "Enter a valid name: <0/>"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/input/asset/+page.svelte
+#: src/routes/[network]/(dev)/debug/input/name/+page.svelte
+msgid "Page State"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/input/asset/+page.svelte
+msgid "WAX (MAX)"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/input/asset/+page.svelte
+msgid "No Decimals"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/input/asset/+page.svelte
+msgid "Maximum No Decimals"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/input/asset/+page.svelte
+msgid "Maximum 4 Decimals"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/input/asset/+page.svelte
+msgid "Maximum 8 Decimals"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/input/asset/+page.svelte
+msgid "Minimum <0/>"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/input/asset/+page.svelte
+msgid "Maximum <0/>"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/input/asset/+page.svelte
+msgid "Do a thing with the token!"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/input/asset/+page.svelte
+msgid "Enter token value: <0/>"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/state/config/+page.svelte
+msgid "Chain Configuration State (Client)"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/state/config/+page.svelte
+msgid "The chain configuration as it exists in the client."
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/state/config/+page.svelte
+msgid "Open SSR chain configuration"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/state/contracts/+page.svelte
+msgid "Embedded Contracts"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/state/contracts/+page.svelte
+msgid "The wharfkit/cli generated contracts for this build and the on-chain account it uses."
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/state/wharf/+page.svelte
+msgid "Wharf State"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/state/wharf/+page.svelte
+msgid "The state internal to the wharf service."
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/state/wharf/+page.svelte
+msgid "controls"
+msgstr ""
+
+#. placeholder {0}: context.wharf.session.actor
+#: src/routes/[network]/(dev)/debug/state/wharf/+page.svelte
+msgid "Logout ({0})"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/state/wharf/+page.svelte
+msgid "Logout (All Accounts)"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/state/wharf/+page.svelte
+msgid "session"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/state/wharf/+page.svelte
+msgid "The currently active session."
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/state/wharf/+page.svelte
+msgid "Chain"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/state/wharf/+page.svelte
+msgid "No Session Active"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/state/wharf/+page.svelte
+msgid "sessions"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/state/wharf/+page.svelte
+msgid "The available sessions that can be used."
+msgstr ""
+
+#. placeholder {0}: session.actor
+#. placeholder {1}: session.permission
+#. placeholder {2}: session.chain
+#: src/routes/[network]/(dev)/debug/state/wharf/+page.svelte
+msgid "Switch: {0}@{1} ({2})"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/state/market/+page.ts
+#: src/routes/[network]/(dev)/debug/state/market/+page.ts
+msgid "Market State"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/state/network/+page.svelte
+msgid "Network State"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/state/network/+page.svelte
+msgid "The currently loaded network state, based off the page URL you're on."
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/state/network/+page.svelte
+msgid "URL"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/state/network/+page.svelte
+msgid "API"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/state/network/+page.svelte
+msgid "Last Updated"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/state/network/+page.svelte
+msgid "Update network state"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/state/market/+page.svelte
+msgid "Refresh"
+msgstr ""
+
+#. placeholder {0}: refreshed
+#: src/routes/[network]/(dev)/debug/state/market/+page.svelte
+msgid "Updated {0}"
+msgstr ""
+
+#. placeholder {0}: pairs.length
+#: src/routes/[network]/(dev)/debug/state/market/+page.svelte
+msgid "TokenPairs ({0})"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/state/market/+page.svelte
+msgid "Historic"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/state/market/+page.svelte
+msgid "MarketContext"
+msgstr ""
+
+#: src/routes/[network]/(account)/ram/(forms)/sell/+page.svelte
+msgid "0 KB"
+msgstr ""
+
+#. placeholder {0}: currentWalletType.title
+#: src/routes/[network]/(account)/signup/wallets/[walletType]/+page.svelte
+msgid "Sign Up with {0}"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/[walletType]/+page.svelte
+msgid "Benefits"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/[walletType]/+page.svelte
+msgid "Available Wallets"
+msgstr ""
+
+#. placeholder {0}: params.walletType
+#: src/routes/[network]/(account)/signup/wallets/[walletType]/+page.ts
+msgid "Choose a {0} wallet"
+msgstr ""
+
+#: src/routes/[network]/(account)/staking/(staking)/withdraw/+page.svelte
+msgid "Notice: Withdrawing will also clear votes"
+msgstr ""
+
+#: src/routes/[network]/(account)/staking/(staking)/withdraw/+page.svelte
+msgid ""
+"Withdrawing and removing all tokens from staking requires we unset any votes that were\n"
+"previously cast for either block producers or proxies."
+msgstr ""
+
+#: src/routes/[network]/(explorer)/account/[name]/activity/+page.svelte
+msgid "No more"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/account/[name]/activity/+page.svelte
+msgid "Loading"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/account/[name]/activity/+page.svelte
+#: src/routes/[network]/(explorer)/token/[contract]/[symbol]/+page.svelte
+msgid "Load more"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/account/[name]/activity/+page.svelte
+#: src/routes/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
+msgid "Action"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/account/[name]/activity/+page.svelte
+msgid "Filter"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/account/[name]/activity/+page.svelte
+msgid "Reset"
+msgstr ""
+
+#. placeholder {0}: actionFilter
+#. placeholder {1}: contractFilter
+#: src/routes/[network]/(explorer)/account/[name]/activity/+page.svelte
+msgid "Filtering to display {0} on the {1} contract."
+msgstr ""
+
+#. placeholder {0}: network.chain.name
+#: src/routes/[network]/(explorer)/account/[name]/chaindata/+page.ts
+msgid "Raw data from the {0} Network."
+msgstr ""
+
+#. placeholder {0}: params.name
+#. placeholder {1}: network.chain.name
+#: src/routes/[network]/(explorer)/account/[name]/chaindata/+page.ts
+msgid "Raw Data | {0} | {1} Network"
+msgstr ""
+
+#. placeholder {0}: params.name
+#. placeholder {1}: network.chain.name
+#: src/routes/[network]/(explorer)/account/[name]/chaindata/+page.ts
+msgid "The raw data for the {0} account on the {1} network."
+msgstr ""
+
+#. placeholder {0}: wait_sec.toString()
+#. placeholder {1}: dayjs .duration(wait_sec.toNumber(), 'seconds') .humanize()
+#: src/routes/[network]/(explorer)/account/[name]/permissions/permission.svelte
+msgid "<0/> {0}s ({1})"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/account/[name]/ram/+page.svelte
+msgid "Account RAM"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/account/[name]/ram/+page.svelte
+msgid "Total:"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/account/[name]/ram/+page.svelte
+msgid "Available:"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/account/[name]/ram/+page.svelte
+msgid "Usable:"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/account/[name]/ram/+page.svelte
+msgid "Used:"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/account/[name]/ram/+page.svelte
+msgid "Loading account RAM details..."
+msgstr ""
+
+#: src/routes/[network]/(explorer)/account/[name]/ram/+page.svelte
+msgid "Current RAM Prices"
+msgstr ""
+
+#. placeholder {0}: data.network.resources.ram.price.rammarket.quantity
+#. placeholder {1}: data.account.network.chain.systemToken?.symbol.code || ''
+#: src/routes/[network]/(explorer)/account/[name]/ram/+page.svelte
+msgid "{0} {1}/KB"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/account/[name]/resources/+page.svelte
+msgid "RAM Prices"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/account/[name]/staked/+page.svelte
+msgid "Total staked"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/account/[name]/staked/+page.svelte
+msgid "Total value"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/account/[name]/staked/+page.svelte
+msgid "Savings"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/account/[name]/staked/+page.svelte
+msgid "Available for claim"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/account/[name]/staked/+page.svelte
+msgid "REX fund"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/account/[name]/staked/+page.svelte
+msgid "Staked"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/account/[name]/staked/+page.svelte
+msgid "Loading staking details..."
+msgstr ""
+
+#: src/routes/[network]/(explorer)/account/[name]/votes/+page.svelte
+msgid "Proxied To"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/account/[name]/votes/+page.svelte
+msgid "Is Proxy?"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/account/[name]/votes/+page.svelte
+msgid "Yes"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/account/[name]/votes/+page.svelte
+msgid "No"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/account/[name]/votes/+page.svelte
+msgid "Total Vote Weight"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/account/[name]/votes/+page.svelte
+msgid "Self Vote Weight"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/account/[name]/votes/+page.svelte
+msgid "Proxied Weight"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/account/[name]/votes/+page.svelte
+msgid "Block Producer"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/contract/[contract]/actions/+page.svelte
+msgid "The actions for this contract with their input parameters and potential response data."
+msgstr ""
+
+#: src/routes/[network]/(explorer)/contract/[contract]/actions/+page.svelte
+msgid "Filter actions..."
+msgstr ""
+
+#: src/routes/[network]/(explorer)/contract/[contract]/actions/+page.svelte
+#: src/routes/[network]/(explorer)/contract/[contract]/structs/+page.svelte
+#: src/routes/[network]/(explorer)/contract/[contract]/tables/+page.svelte
+msgid "No actions match filter"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/contract/[contract]/actions/+page.svelte
+#: src/routes/[network]/(explorer)/contract/[contract]/structs/+page.svelte
+#: src/routes/[network]/(explorer)/contract/[contract]/tables/+page.svelte
+msgid "No actions"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/contract/[contract]/structs/+page.svelte
+msgid "The data structures defined by this contract."
+msgstr ""
+
+#: src/routes/[network]/(explorer)/contract/[contract]/structs/+page.svelte
+msgid "Filter structs..."
+msgstr ""
+
+#: src/routes/[network]/(explorer)/contract/[contract]/tables/+page.svelte
+msgid "The data tables defined by this contract."
+msgstr ""
+
+#: src/routes/[network]/(explorer)/contract/[contract]/tables/+page.svelte
+msgid "Filter tables..."
+msgstr ""
+
+#: src/routes/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
+#: src/routes/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
+msgid "UTC"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/token/[contract]/[symbol]/+page.svelte
+msgid "Total Accounts Holding"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/token/[contract]/[symbol]/+page.svelte
+msgid "Supply"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/token/[contract]/[symbol]/+page.svelte
+msgid "Max Supply"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/token/[contract]/[symbol]/+page.svelte
+msgid "Issuer"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/token/[contract]/[symbol]/+page.svelte
+msgid "Top 100 Accounts"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/token/[contract]/[symbol]/+page.svelte
+msgid "Balance"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/token/[contract]/[symbol]/+page.svelte
+msgid "(Locked Supply)"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/token/[contract]/[symbol]/+page.ts
+msgid "Token not found"
+msgstr ""
+
+#. placeholder {0}: params.contract
+#: src/routes/[network]/(explorer)/token/[contract]/[symbol]/+page.ts
+msgid "A token on the {0} smart contract."
+msgstr ""
+
+#. placeholder {0}: stats.supply.symbol.name
+#. placeholder {1}: params.contract
+#. placeholder {2}: network.chain.name
+#. placeholder {3}: stats.supply.symbol.name
+#. placeholder {4}: json.numholders
+#: src/routes/[network]/(explorer)/token/[contract]/[symbol]/+page.ts
+msgid "The {0} token created by the {1} smart contract on the {2} network. {3} has {4} accounts currently holding a balance."
+msgstr ""
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Recipient"
+msgstr ""
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Complete"
+msgstr ""
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Error"
+msgstr ""
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Receiving Account"
+msgstr ""
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Enter the account name of the recipient"
+msgstr ""
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Token to send"
+msgstr ""
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "No balances found."
+msgstr ""
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Amount to send"
+msgstr ""
+
+#. placeholder {0}: sendState.quantity.symbol.code
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Enter the amount of {0} to send"
+msgstr ""
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Fill Max"
+msgstr ""
+
+#. placeholder {0}: formatCurrency(sendState.value)
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Value: {0}"
+msgstr ""
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Invalid number, too many decimal places."
+msgstr ""
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Amount exceeds available balance."
+msgstr ""
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Memo (Optional)"
+msgstr ""
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Specify a public memo for this transfer (optional)"
+msgstr ""
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Restart"
+msgstr ""
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Start new send"
+msgstr ""
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "View my account"
+msgstr ""
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Submit"
+msgstr ""
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Debugging"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/definition/token/[[payload]]/+page.svelte
+msgid "Build an array of TokenDefinition objects"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/definition/token/[[payload]]/+page.svelte
+msgid "Contract Name"
+msgstr ""
+
+#: src/routes/[network]/(dev)/debug/definition/token/[[payload]]/+page.svelte
+msgid "Token Symbol"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
+#: src/routes/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
+msgid "Download Anchor Desktop"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
+msgid "Visit the official Anchor website to download the Anchor desktop wallet application."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
+#: src/routes/[network]/(account)/signup/wallets/desktop/wombat/+page.svelte
+msgid "Install the Desktop Application"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
+msgid "Run the installer and follow the on-screen instructions to install the Anchor desktop wallet on your computer."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
+#: src/routes/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
+msgid "Launch Anchor"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
+msgid "Open the Anchor desktop application from your computer's applications menu or desktop shortcut."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
+#: src/routes/[network]/(account)/signup/wallets/desktop/wombat/+page.svelte
+#: src/routes/[network]/(account)/signup/wallets/extensions/wombat/+page.svelte
+#: src/routes/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
+msgid "Create a New Account"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
+msgid "In the Anchor desktop app, click on \"Create New Account\" and follow the prompts to set up your wallet."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
+#: src/routes/[network]/(account)/signup/wallets/desktop/wombat/+page.svelte
+#: src/routes/[network]/(account)/signup/wallets/extensions/wombat/+page.svelte
+#: src/routes/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
+msgid "Secure Your Account"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
+msgid "Write down your private key and store it in a safe place. This is crucial for account recovery and should never be shared."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
+#: src/routes/[network]/(account)/signup/wallets/desktop/wombat/+page.svelte
+msgid "Configure Desktop Settings"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
+msgid "Explore the settings to customize your experience, such as default networks and resource management preferences."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
+#: src/routes/[network]/(account)/signup/wallets/desktop/wombat/+page.svelte
+#: src/routes/[network]/(account)/signup/wallets/extensions/wombat/+page.svelte
+#: src/routes/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
+msgid "Fund Your Wallet"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
+msgid "Transfer some cryptocurrency to your new Anchor wallet address to start using it on your desktop."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
+msgid "Why Choose Anchor Desktop?"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
+#: src/routes/[network]/(account)/signup/wallets/desktop/wombat/+page.svelte
+msgid "Full-featured desktop application for enhanced functionality"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
+#: src/routes/[network]/(account)/signup/wallets/desktop/wombat/+page.svelte
+msgid "Improved security with local key storage on your computer"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
+#: src/routes/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
+msgid "Supports multiple EOSIO-based blockchains"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
+msgid "Advanced features for power users, including multi-sig support"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
+#: src/routes/[network]/(account)/signup/wallets/desktop/wombat/+page.svelte
+msgid "Regular updates and desktop-specific features"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
+#: src/routes/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
+msgid "Open-source software for transparency and community contributions"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/desktop/wombat/+page.svelte
+#: src/routes/[network]/(account)/signup/wallets/desktop/wombat/+page.svelte
+msgid "Download Wombat Desktop"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/desktop/wombat/+page.svelte
+msgid "Visit the official Wombat website to download the Wombat desktop wallet application."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/desktop/wombat/+page.svelte
+msgid "Run the installer and follow the on-screen instructions to install the Wombat desktop wallet on your computer."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/desktop/wombat/+page.svelte
+#: src/routes/[network]/(account)/signup/wallets/mobile/wombat/+page.svelte
+msgid "Launch Wombat"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/desktop/wombat/+page.svelte
+msgid "Open the Wombat desktop application from your computer's applications menu or desktop shortcut."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/desktop/wombat/+page.svelte
+msgid "In the Wombat desktop app, click on \"Create a new account\" and follow the prompts to set up your wallet."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/desktop/wombat/+page.svelte
+#: src/routes/[network]/(account)/signup/wallets/extensions/wombat/+page.svelte
+msgid "Write down your recovery phrase and store it in a safe place. This is crucial for account recovery and should never be shared."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/desktop/wombat/+page.svelte
+msgid "Explore the desktop-specific settings to customize your experience, such as auto-updates and notification preferences."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/desktop/wombat/+page.svelte
+msgid "Transfer some cryptocurrency to your new Wombat wallet address to start using it on your desktop."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/desktop/wombat/+page.svelte
+msgid "Why Choose Wombat Desktop?"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/desktop/wombat/+page.svelte
+msgid "Faster transaction processing compared to web-based wallets"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/desktop/wombat/+page.svelte
+#: src/routes/[network]/(account)/signup/wallets/extensions/wombat/+page.svelte
+msgid "Supports multiple blockchains including EOS"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/desktop/wombat/+page.svelte
+msgid "Seamless integration with desktop dApps and tools"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/extensions/wombat/+page.svelte
+#: src/routes/[network]/(account)/signup/wallets/extensions/wombat/+page.svelte
+msgid "Install Wombat Extension"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/extensions/wombat/+page.svelte
+msgid "Visit the Chrome Web Store to download and install the Wombat browser extension."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/extensions/wombat/+page.svelte
+msgid "Add to Chrome"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/extensions/wombat/+page.svelte
+msgid "Click \"Add to Chrome\" and confirm the installation when prompted."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/extensions/wombat/+page.svelte
+msgid "Open Wombat Extension"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/extensions/wombat/+page.svelte
+msgid "Click on the Wombat icon in your browser toolbar to open the extension."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/extensions/wombat/+page.svelte
+msgid "In the Wombat extension, select \"Create a new account\" and follow the on-screen instructions to set up your wallet."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/extensions/wombat/+page.svelte
+msgid "Configure Extension Settings"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/extensions/wombat/+page.svelte
+msgid "Explore the extension settings to customize your experience, such as auto-lock timers and network preferences."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/extensions/wombat/+page.svelte
+msgid "Transfer some cryptocurrency to your new Wombat wallet address to start using it with dApps in your browser."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/extensions/wombat/+page.svelte
+msgid "Why Choose Wombat Browser Extension?"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/extensions/wombat/+page.svelte
+msgid "Seamless integration with web-based dApps"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/extensions/wombat/+page.svelte
+msgid "Quick access to your wallet directly from your browser"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/extensions/wombat/+page.svelte
+msgid "Enhanced security with browser isolation"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/extensions/wombat/+page.svelte
+msgid "Easy-to-use interface for managing your digital assets"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/extensions/wombat/+page.svelte
+msgid "Regular updates and new features through the Chrome Web Store"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/extensions/metamask/+page.svelte
+msgid "Sign Up with MetaMask"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/extensions/metamask/+page.svelte
+msgid "Step 1: Install MetaMask"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/extensions/metamask/+page.svelte
+msgid "To get started, you need to install MetaMask:"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/extensions/metamask/+page.svelte
+msgid "Install MetaMask"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/extensions/metamask/+page.svelte
+msgid "Step 2: Install EOS Wallet"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/extensions/metamask/+page.svelte
+msgid "Install the EOS Wallet for MetaMask:"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/extensions/metamask/+page.svelte
+msgid "Install EOS Wallet"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/extensions/metamask/+page.svelte
+msgid "Step 3: Create an Account"
+msgstr ""
+
+#. placeholder {0}: data.network.chain.name
+#: src/routes/[network]/(account)/signup/wallets/extensions/metamask/+page.svelte
+msgid "Create your {0} account:"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/extensions/metamask/+page.svelte
+msgid "How This Works"
+msgstr ""
+
+#. placeholder {0}: data.network.chain .name
+#. placeholder {1}: data .network.chain.name
+#. placeholder {2}: data.network.chain.name
+#. placeholder {3}: data.network.chain .name
+#: src/routes/[network]/(account)/signup/wallets/extensions/metamask/+page.svelte
+msgid ""
+"This signup method allows you to use your MetaMask wallet to interact with {0}. The EOS Wallet Snap extends MetaMask's functionality, enabling it to sign {1} transactions. Once your account is created, you'll be able to use MetaMask\n"
+"to manage your {2} assets and interact with {3}-based applications."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/hardware/ledger/+page.svelte
+msgid "Purchase a Ledger Device"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/hardware/ledger/+page.svelte
+msgid "Buy a Ledger hardware wallet from the official Ledger website or an authorized reseller."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/hardware/ledger/+page.svelte
+msgid "Set Up Your Ledger"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/hardware/ledger/+page.svelte
+msgid "Follow the instructions provided with your Ledger device to set it up and create a new wallet."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/hardware/ledger/+page.svelte
+msgid "Install Ledger Live"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/hardware/ledger/+page.svelte
+msgid "Download and install Ledger Live software on your computer to manage your device and cryptocurrencies."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/hardware/ledger/+page.svelte
+msgid "Install the EOS App"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/hardware/ledger/+page.svelte
+msgid "Use Ledger Live to install the EOS app on your Ledger device."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/hardware/ledger/+page.svelte
+msgid "Connect to EOS Network"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/hardware/ledger/+page.svelte
+msgid "Use a compatible EOS wallet interface that supports Ledger to connect your device and interact with the EOS network."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/hardware/ledger/+page.svelte
+msgid "Visit Ledger Website"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/hardware/ledger/+page.svelte
+msgid "Why Choose Ledger?"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/hardware/ledger/+page.svelte
+msgid "Highest level of security for your cryptocurrencies"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/hardware/ledger/+page.svelte
+msgid "Supports a wide range of cryptocurrencies, including EOS"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/hardware/ledger/+page.svelte
+msgid "User-friendly interface with Ledger Live software"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/hardware/ledger/+page.svelte
+msgid "Offline storage of private keys for enhanced protection"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/hardware/ledger/+page.svelte
+msgid "Regular firmware updates to maintain security and add new features"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/wombat/+page.svelte
+#: src/routes/[network]/(account)/signup/wallets/mobile/wombat/+page.svelte
+msgid "Download Wombat"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/wombat/+page.svelte
+msgid ""
+"Visit your device's app store (Google Play Store for Android or App Store for iOS) to\n"
+"download the Wombat wallet application."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/tokenpocket/+page.svelte
+#: src/routes/[network]/(account)/signup/wallets/mobile/wombat/+page.svelte
+msgid "Install the App"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/wombat/+page.svelte
+msgid "Tap the \"Install\" button and wait for Wombat to download and install on your device."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/wombat/+page.svelte
+msgid "Open the Wombat app by tapping its icon on your device's home screen or app drawer."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/tokenpocket/+page.svelte
+#: src/routes/[network]/(account)/signup/wallets/mobile/wombat/+page.svelte
+msgid "Create a New Wallet"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/wombat/+page.svelte
+msgid ""
+"In Wombat, follow the prompts to create a new wallet. You may need to set up a PIN or use\n"
+"biometric authentication for security."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/tokenpocket/+page.svelte
+#: src/routes/[network]/(account)/signup/wallets/mobile/wombat/+page.svelte
+msgid "Secure Your Wallet"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/wombat/+page.svelte
+msgid ""
+"Write down your recovery phrase and store it in a safe place. This is crucial for account\n"
+"recovery and should never be shared."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/tokenpocket/+page.svelte
+#: src/routes/[network]/(account)/signup/wallets/mobile/wombat/+page.svelte
+msgid "Visit the Welcome Page"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/wombat/+page.svelte
+msgid "Visit the Wombat <0>welcome page</0> for next steps."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/wombat/+page.svelte
+msgid "Why Choose Wombat?"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/wombat/+page.svelte
+msgid "User-friendly interface designed for simplicity"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/wombat/+page.svelte
+msgid "Multi-chain support including EOS and other popular blockchains"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/tokenpocket/+page.svelte
+#: src/routes/[network]/(account)/signup/wallets/mobile/wombat/+page.svelte
+msgid "Built-in dApp browser for easy access to decentralized applications"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/wombat/+page.svelte
+msgid "Fast and secure transactions"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/tokenpocket/+page.svelte
+#: src/routes/[network]/(account)/signup/wallets/mobile/wombat/+page.svelte
+msgid "Regular updates and new features to enhance user experience"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/tokenpocket/+page.svelte
+#: src/routes/[network]/(account)/signup/wallets/mobile/wombat/+page.svelte
+msgid "Cross-platform availability (mobile and browser extension)"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/wombat/+page.svelte
+msgid "Smooth onboarding experience for crypto newcomers"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
+#: src/routes/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
+msgid "Download Anchor Mobile"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
+msgid "Visit your device's app store (Google Play Store for Android or App Store for iOS) to download the Anchor mobile wallet application."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
+msgid "Install the Mobile App"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
+msgid "Tap the \"Install\" button and wait for the Anchor mobile app to download and install on your device."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
+msgid "Open the Anchor mobile app by tapping its icon on your device's home screen or app drawer."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
+msgid "In the Anchor mobile app, tap on \"Create New Account\" and follow the on-screen prompts to set up your wallet."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
+msgid "Write down your private key and store it in a safe place. This is crucial for account recovery and should never be shared or stored digitally."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
+msgid "Configure Mobile Settings"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
+msgid "Explore the mobile-specific settings to customize your experience, such as biometric authentication and push notification preferences."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
+msgid "Transfer some cryptocurrency to your new Anchor wallet address to start using it on your mobile device."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
+msgid "Why Choose Anchor Mobile?"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
+msgid "User-friendly mobile interface for on-the-go access"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
+msgid "Secure storage of your digital assets on your mobile device"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
+msgid "Quick and easy transactions from your smartphone"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
+msgid "Built-in dApp browser for mobile-optimized decentralized applications"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
+msgid "Biometric authentication for enhanced security"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
+msgid "Push notifications for important wallet activities"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/tokenpocket/+page.svelte
+#: src/routes/[network]/(account)/signup/wallets/mobile/tokenpocket/+page.svelte
+msgid "Download TokenPocket"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/tokenpocket/+page.svelte
+msgid ""
+"Visit your device's app store (Google Play Store for Android or App Store for iOS) to\n"
+"download the TokenPocket wallet application."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/tokenpocket/+page.svelte
+msgid "Tap the \"Install\" button and wait for TokenPocket to download and install on your device."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/tokenpocket/+page.svelte
+msgid "Launch TokenPocket"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/tokenpocket/+page.svelte
+msgid "Open the TokenPocket app by tapping its icon on your device's home screen or app drawer."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/tokenpocket/+page.svelte
+msgid ""
+"In TokenPocket, select \"Create Wallet\" and choose the blockchain you want to use (e.g.,\n"
+"EOS). Follow the prompts to set up your wallet."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/tokenpocket/+page.svelte
+msgid ""
+"Write down your recovery phrase and private key, storing them in a safe place. This is\n"
+"crucial for account recovery and should never be shared."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/tokenpocket/+page.svelte
+msgid ""
+"Visit the TokenPocket <0>welcome page</0> for\n"
+"next steps."
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/tokenpocket/+page.svelte
+msgid "Why Choose TokenPocket?"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/tokenpocket/+page.svelte
+msgid "Multi-chain support including EOS, Ethereum, and many others"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/tokenpocket/+page.svelte
+msgid "User-friendly interface for managing multiple cryptocurrencies"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/tokenpocket/+page.svelte
+msgid "Secure storage with optional hardware wallet integration"
+msgstr ""
+
+#: src/routes/[network]/(account)/signup/wallets/mobile/tokenpocket/+page.svelte
+msgid "Active community and support for troubleshooting"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
+msgid "PUB_K1..."
+msgstr ""
+
+#. placeholder {0}: data.transaction.contracts.length
+#: src/routes/[network]/(explorer)/transaction/[id]/[[seq]]/contracts/+page.svelte
+msgid "Contracts ({0})"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/transaction/[id]/[[seq]]/ram/+page.svelte
+msgid "Bytes"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/transaction/[id]/[[seq]]/data/+page.svelte
+msgid "The raw data for the transaction."
+msgstr ""
+
+#: src/routes/[network]/(explorer)/account/[name]/balance/[contract]/[symbol]/+page.ts
+#: src/routes/[network]/(explorer)/account/[name]/balance/[contract]/[symbol]/+page.ts
+msgid "Token Balance"
+msgstr ""
+
+#. placeholder {0}: params.contract
+#. placeholder {0}: params.contract
+#: src/routes/[network]/(explorer)/account/[name]/balance/[contract]/[symbol]/+page.ts
+#: src/routes/[network]/(explorer)/account/[name]/balance/[contract]/[symbol]/+page.ts
+msgid "Token balance from the {0} smart contract."
+msgstr ""
+
+#: src/routes/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
+#: src/routes/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
+msgid "Clear Results"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
+msgid "Perform Action"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
+msgid "Call readonly action"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
+msgid "Call as readonly action?"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
+msgid "Trigger when page loads?"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
+msgid "Fill out the form to create a representation of the data in this type of action."
+msgstr ""
+
+#: src/routes/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
+msgid "Sharable URL for this action and data"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
+msgid "API call which runs this readonly action"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
+msgid "Error during readonly call..."
+msgstr ""
+
+#: src/routes/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
+#: src/routes/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
+msgid "API Response"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
+msgid "Action Traces"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
+msgid "Input Data"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
+msgid "Struct"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
+msgid "Table Browser"
+msgstr ""
+
+#. placeholder {0}: scope
+#: src/routes/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
+msgid "Scope: {0}"
+msgstr ""
+
+#. placeholder {0}: lower
+#: src/routes/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
+msgid "Lower: {0}"
+msgstr ""
+
+#. placeholder {0}: upper
+#: src/routes/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
+msgid "Upper: {0}"
+msgstr ""
+
+#. placeholder {0}: reverse
+#: src/routes/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
+msgid "Reverse: {0}"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
+#: src/routes/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
+msgid "Scope"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
+msgid "Lower"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
+msgid "Lower bound"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
+msgid "Upper"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
+msgid "Upper bound"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
+msgid "Reverse?"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
+msgid "Query"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
+msgid "First Page"
+msgstr ""
+
+#: src/routes/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
+msgid "Next Page"
+msgstr ""
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Amount exceeds available balance."
+msgstr "数量超出可用余额。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Recipient"
+msgstr "接收者"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Complete"
+msgstr "完成"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Error"
+msgstr "错误"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Fill Max"
+msgstr "填充最大值"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Invalid number, too many decimal places."
+msgstr "无效数字，小位数过多。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Memo"
+msgstr "备注"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "No balances found."
+msgstr "无可用余额。"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Optional"
+msgstr "可选"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Restart"
+msgstr "重新开始"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Submit"
+msgstr "提交"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Value: {amount}"
+msgstr "价值：{amount}"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "View my account"
+msgstr "查看我的账户"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Amount to send"
+msgstr "发送金额"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Enter the amount of {token} to send"
+msgstr "输入要发送的 {token} 数量"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Specify a public memo for this transfer (optional)"
+msgstr "为此转账指定一个公开备注（可选）"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Receiving Account"
+msgstr "接收账户"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Enter the account name of the recipient"
+msgstr "输入接收账户名称"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Start new send"
+msgstr "开始新发送"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Token to send"
+msgstr "要发送的代币"
+
+#: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Debugging"
+msgstr "调试中"

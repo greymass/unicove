@@ -1,6 +1,7 @@
 import { browser } from '$app/environment';
 import type { ActionDisplayVariants } from '$lib/types';
 import { SupportedCurrencies } from '$lib/types/currencies';
+import { locales } from 'virtual:wuchale/locales';
 
 export enum SettingKeys {
 	'actionDisplayVariant' = 'actionDisplayVariant',
@@ -8,6 +9,7 @@ export enum SettingKeys {
 	'debugMode' = 'debugMode',
 	'developerMode' = 'developerMode',
 	'increasedPrecision' = 'increasedPrecision',
+	'locale' = 'locale',
 	'mockPrice' = 'mockPrice',
 	'preventAccountPageSwitching' = 'preventAccountPageSwitching',
 	'searchAccountSwitch' = 'searchAccountSwitch',
@@ -43,10 +45,22 @@ export interface SettingsData {
 	debugMode?: boolean;
 	developerMode?: boolean;
 	increasedPrecision?: boolean;
+	locale: string;
 	mockPrice?: boolean;
 	preventAccountPageSwitching?: boolean;
 	searchAccountSwitch?: boolean;
 	searchShowPages?: boolean;
+}
+
+function getDefaultLocale() {
+	let defaultLocale = 'en';
+	if (browser) {
+		const fromNavigator = navigator.language.split('-')[0];
+		if (locales.includes(fromNavigator)) {
+			defaultLocale = fromNavigator;
+		}
+	}
+	return defaultLocale;
 }
 
 const defaultSettings: SettingsData = {
@@ -56,6 +70,7 @@ const defaultSettings: SettingsData = {
 	debugMode: false,
 	developerMode: false,
 	increasedPrecision: false,
+	locale: getDefaultLocale(),
 	mockPrice: false,
 	preventAccountPageSwitching: false,
 	searchAccountSwitch: false,

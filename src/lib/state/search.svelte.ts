@@ -45,7 +45,7 @@ export interface SearchRecord {
 // export interface Command extends Record {}
 // export interface Favorite extends Record {}
 
-export const SearchCommands: SearchRecord[] = [
+const SearchCommands: SearchRecord[] = [
 	{
 		value: 'RAM Market',
 		type: SearchRecordType.PAGE,

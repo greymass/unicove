@@ -1,15 +1,22 @@
 msgid ""
 msgstr ""
-"Plural-Forms: nplurals=2; plural=n == 1 ? 0 : 1;\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-20T18:08:55.376Z\n"
+"PO-Revision-Date: 2025-10-21T01:25:43.870Z\n"
+"Last-Translator: \n"
 "Language: en\n"
-"MIME-Version: 1.0\n"
+"Language-Team: \n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2025-10-20T18:08:55.375Z\n"
-"POT-Creation-Date: 2025-10-20T18:08:55.376Z\n"
+"Plural-Forms: nplurals=2; plural=n == 1 ? 0 : 1;\n"
+"MIME-Version: 1.0\n"
 
 #: src/routes/+error.svelte
 #: src/routes/+layout.server.ts
+#: src/routes/[[lang]]/[network]/+error.svelte
+#: src/routes/[[locale]]/[network]/+error.svelte
+#: src/routes/[lang]/[network]/+error.svelte
 #: src/routes/[network]/+error.svelte
 msgid "Page not found"
 msgstr "Page not found"
@@ -206,6 +213,7 @@ msgid "Send"
 msgstr "Send"
 
 #: src/lib/state/search.svelte.ts
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Settings"
 msgstr "Settings"
 
@@ -238,29 +246,28 @@ msgstr "Resources"
 msgid "Clear"
 msgstr "Clear"
 
-#: src/routes/[network]/+layout.svelte
-msgid ""
-"(function () {\n"
-"if (typeof window !== undefined) {\n"
-"const storedTheme = localStorage.getItem('color-scheme');\n"
-"const theme =\n"
-"storedTheme ||\n"
-"(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');\n"
-"document.documentElement.setAttribute('data-scheme', theme);\n"
-"if (!storedTheme) localStorage.setItem('color-scheme', theme);\n"
-"}\n"
-"})();"
-msgstr ""
-"(function () {\n"
-"if (typeof window !== undefined) {\n"
-"const storedTheme = localStorage.getItem('color-scheme');\n"
-"const theme =\n"
-"storedTheme ||\n"
-"(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');\n"
-"document.documentElement.setAttribute('data-scheme', theme);\n"
-"if (!storedTheme) localStorage.setItem('color-scheme', theme);\n"
-"}\n"
-"})();"
+#~ msgid ""
+#~ "(function () {\n"
+#~ "if (typeof window !== undefined) {\n"
+#~ "const storedTheme = localStorage.getItem('color-scheme');\n"
+#~ "const theme =\n"
+#~ "storedTheme ||\n"
+#~ "(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');\n"
+#~ "document.documentElement.setAttribute('data-scheme', theme);\n"
+#~ "if (!storedTheme) localStorage.setItem('color-scheme', theme);\n"
+#~ "}\n"
+#~ "})();"
+#~ msgstr ""
+#~ "(function () {\n"
+#~ "if (typeof window !== undefined) {\n"
+#~ "const storedTheme = localStorage.getItem('color-scheme');\n"
+#~ "const theme =\n"
+#~ "storedTheme ||\n"
+#~ "(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');\n"
+#~ "document.documentElement.setAttribute('data-scheme', theme);\n"
+#~ "if (!storedTheme) localStorage.setItem('color-scheme', theme);\n"
+#~ "}\n"
+#~ "})();"
 
 #: src/lib/components/breakdown/breakdownRow.svelte
 msgid "Total"
@@ -328,6 +335,8 @@ msgstr "Error decoding for action summary, displaying raw data instead."
 
 #: src/lib/components/elements/resourceCard.svelte
 #: src/lib/components/summary/eosio/powerup.svelte
+#: src/routes/[[lang]]/[network]/(account)/resources/+page.svelte
+#: src/routes/[[lang]]/[network]/(account)/resources/renting.svelte
 #: src/routes/[network]/(account)/resources/+page.svelte
 #: src/routes/[network]/(account)/resources/renting.svelte
 #: src/routes/[network]/(explorer)/account/[name]/resources/+page.svelte
@@ -336,6 +345,8 @@ msgstr "CPU"
 
 #: src/lib/components/elements/resourceCard.svelte
 #: src/lib/components/summary/eosio/powerup.svelte
+#: src/routes/[[lang]]/[network]/(account)/resources/+page.svelte
+#: src/routes/[[lang]]/[network]/(account)/resources/renting.svelte
 #: src/routes/[network]/(account)/resources/+page.svelte
 #: src/routes/[network]/(account)/resources/renting.svelte
 #: src/routes/[network]/(explorer)/account/[name]/resources/+page.svelte
@@ -344,6 +355,19 @@ msgstr "NET"
 
 #: src/lib/components/elements/resourceCard.svelte
 #: src/lib/components/navigation/sidemenu.svelte
+#: src/routes/[[lang]]/[network]/(account)/ram/(forms)/buy/+page.svelte
+#: src/routes/[[lang]]/[network]/(account)/ram/(forms)/buy/+page.ts
+#: src/routes/[[lang]]/[network]/(account)/ram/(forms)/buy/+page.ts
+#: src/routes/[[lang]]/[network]/(account)/ram/(forms)/sell/+page.svelte
+#: src/routes/[[lang]]/[network]/(account)/ram/(forms)/sell/+page.svelte
+#: src/routes/[[lang]]/[network]/(account)/ram/(forms)/sell/+page.svelte
+#: src/routes/[[lang]]/[network]/(account)/ram/(forms)/sell/+page.ts
+#: src/routes/[[lang]]/[network]/(account)/ram/(forms)/sell/+page.ts
+#: src/routes/[[lang]]/[network]/(account)/ram/+page.svelte
+#: src/routes/[[lang]]/[network]/(account)/resources/+page.svelte
+#: src/routes/[[lang]]/[network]/(explorer)/account/[name]/+layout.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
+#: src/routes/[lang]/[network]/(account)/ram/+page.svelte
 #: src/routes/[network]/(account)/ram/(forms)/buy/+page.svelte
 #: src/routes/[network]/(account)/ram/(forms)/buy/+page.ts
 #: src/routes/[network]/(account)/ram/(forms)/buy/+page.ts
@@ -386,6 +410,8 @@ msgid "Component State"
 msgstr "Component State"
 
 #: src/lib/components/input/assetOrUnits.svelte
+#: src/routes/[[lang]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Asset"
 msgstr "Asset"
@@ -451,22 +477,32 @@ msgstr "X"
 msgid "Transaction was not resolved."
 msgstr "Transaction was not resolved."
 
+#: src/routes/[[lang]]/[network]/settings/+page.svelte
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
 #: src/routes/[network]/settings/+page.svelte
 msgid "MSIG Configuration"
 msgstr "MSIG Configuration"
 
+#: src/routes/[[lang]]/[network]/settings/+page.svelte
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
 #: src/routes/[network]/settings/+page.svelte
 msgid "Proposal Expiration"
 msgstr "Proposal Expiration"
 
+#: src/routes/[[lang]]/[network]/settings/+page.svelte
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
 #: src/routes/[network]/settings/+page.svelte
 msgid "The expiration date set on multisig proposals."
 msgstr "The expiration date set on multisig proposals."
 
+#: src/routes/[[lang]]/[network]/settings/+page.svelte
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
 #: src/routes/[network]/settings/+page.svelte
 msgid "Proposal Earliest Execution"
 msgstr "Proposal Earliest Execution"
 
+#: src/routes/[[lang]]/[network]/settings/+page.svelte
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
 #: src/routes/[network]/settings/+page.svelte
 msgid ""
 "Set a datetime to specify the earliest a proposal can be executed. This value will be\n"
@@ -475,11 +511,17 @@ msgstr ""
 "Set a datetime to specify the earliest a proposal can be executed. This value will be\n"
 "reset after each proposal is created."
 
+#: src/routes/[[lang]]/[network]/settings/+page.svelte
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
 #: src/routes/[network]/settings/+page.svelte
 msgid "Local Time"
 msgstr "Local Time"
 
 #. placeholder {0}: timestamp
+#. placeholder {0}: timestamp
+#. placeholder {0}: timestamp
+#: src/routes/[[lang]]/[network]/settings/+page.svelte
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
 #: src/routes/[network]/settings/+page.svelte
 msgid "Set for UTC: {0} <0>Clear</0>"
 msgstr "Set for UTC: {0} <0>Clear</0>"
@@ -522,12 +564,12 @@ msgstr "<0/> Memo: {0}"
 msgid "+ {0} ms (CPU)"
 msgstr "+ {0} ms (CPU)"
 
-#. placeholder {0}: data.powup_cpu
 #. placeholder {0}: data.powup_net
-#. placeholder {0}: account.weight
+#. placeholder {0}: data.powup_cpu
 #. placeholder {0}: key.weight
 #. placeholder {0}: account.weight
 #. placeholder {0}: key.weight
+#. placeholder {0}: account.weight
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio/newaccount.svelte
@@ -596,6 +638,8 @@ msgid "Retire"
 msgstr "Retire"
 
 #: src/lib/components/wallets/metamask/required.svelte
+#: src/routes/[[lang]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Next"
 msgstr "Next"
@@ -681,6 +725,8 @@ msgstr "I have an account and want to create an msig account to share with other
 msgid "Create MSIG Account"
 msgstr "Create MSIG Account"
 
+#: src/routes/[[lang]]/[network]/(account)/ram/+page.svelte
+#: src/routes/[lang]/[network]/(account)/ram/+page.svelte
 #: src/routes/[network]/(account)/ram/+page.svelte
 msgid "RAM Calculator"
 msgstr "RAM Calculator"
@@ -766,82 +812,105 @@ msgstr "More Options"
 msgid "Choose from {0}"
 msgstr "Choose from {0}"
 
+#: src/routes/[[lang]]/[network]/(account)/resources/+page.svelte
 #: src/routes/[network]/(account)/resources/+page.svelte
 msgid "CPU (Central Processing Unit)"
 msgstr "CPU (Central Processing Unit)"
 
+#: src/routes/[[lang]]/[network]/(account)/resources/+page.svelte
 #: src/routes/[network]/(account)/resources/+page.svelte
 msgid "Provides processing power for blockchain actions."
 msgstr "Provides processing power for blockchain actions."
 
+#: src/routes/[[lang]]/[network]/(account)/resources/+page.svelte
 #: src/routes/[network]/(account)/resources/+page.svelte
 msgid "Measured in microseconds."
 msgstr "Measured in microseconds."
 
+#: src/routes/[[lang]]/[network]/(account)/resources/+page.svelte
 #: src/routes/[network]/(account)/resources/+page.svelte
 msgid "Needed to execute transactions."
 msgstr "Needed to execute transactions."
 
+#: src/routes/[[lang]]/[network]/(account)/resources/+page.svelte
 #: src/routes/[network]/(account)/resources/+page.svelte
 msgid "NET (Network Bandwidth)"
 msgstr "NET (Network Bandwidth)"
 
+#: src/routes/[[lang]]/[network]/(account)/resources/+page.svelte
 #: src/routes/[network]/(account)/resources/+page.svelte
 msgid "Represents network bandwidth usage."
 msgstr "Represents network bandwidth usage."
 
+#: src/routes/[[lang]]/[network]/(account)/resources/+page.svelte
 #: src/routes/[network]/(account)/resources/+page.svelte
 msgid "Required for transactions on the blockchain."
 msgstr "Required for transactions on the blockchain."
 
+#: src/routes/[[lang]]/[network]/(account)/resources/+page.svelte
+#: src/routes/[[lang]]/[network]/(account)/resources/+page.svelte
 #: src/routes/[network]/(account)/resources/+page.svelte
 #: src/routes/[network]/(account)/resources/+page.svelte
 msgid "CPU and NET"
 msgstr "CPU and NET"
 
 #. placeholder {0}: symbolName
+#. placeholder {0}: symbolName
+#: src/routes/[[lang]]/[network]/(account)/resources/+page.svelte
 #: src/routes/[network]/(account)/resources/+page.svelte
 msgid "Can be \"powered up\" by spending {0}."
 msgstr "Can be \"powered up\" by spending {0}."
 
+#: src/routes/[[lang]]/[network]/(account)/resources/+page.svelte
 #: src/routes/[network]/(account)/resources/+page.svelte
 msgid "Some free services offer daily power-ups."
 msgstr "Some free services offer daily power-ups."
 
 #. placeholder {0}: symbolName
+#. placeholder {0}: symbolName
+#: src/routes/[[lang]]/[network]/(account)/resources/+page.svelte
 #: src/routes/[network]/(account)/resources/+page.svelte
 msgid "Amount received is proportional to {0} spent."
 msgstr "Amount received is proportional to {0} spent."
 
+#: src/routes/[[lang]]/[network]/(account)/resources/+page.svelte
 #: src/routes/[network]/(account)/resources/+page.svelte
 msgid "Lasts for a specific time period."
 msgstr "Lasts for a specific time period."
 
+#: src/routes/[[lang]]/[network]/(account)/resources/+page.svelte
 #: src/routes/[network]/(account)/resources/+page.svelte
 msgid "RAM (Random Access Memory)"
 msgstr "RAM (Random Access Memory)"
 
+#: src/routes/[[lang]]/[network]/(account)/resources/+page.svelte
 #: src/routes/[network]/(account)/resources/+page.svelte
 msgid "It's like computer memory, but for the blockchain."
 msgstr "It's like computer memory, but for the blockchain."
 
+#: src/routes/[[lang]]/[network]/(account)/resources/+page.svelte
 #: src/routes/[network]/(account)/resources/+page.svelte
 msgid "Used to store data on the blockchain."
 msgstr "Used to store data on the blockchain."
 
+#: src/routes/[[lang]]/[network]/(account)/resources/+page.svelte
 #: src/routes/[network]/(account)/resources/+page.svelte
 msgid "Limited and in high demand."
 msgstr "Limited and in high demand."
 
+#: src/routes/[[lang]]/[network]/(account)/resources/+page.svelte
 #: src/routes/[network]/(account)/resources/+page.svelte
 msgid "Can be bought and sold by users."
 msgstr "Can be bought and sold by users."
 
+#: src/routes/[[lang]]/[network]/(account)/resources/+page.svelte
 #: src/routes/[network]/(account)/resources/+page.svelte
 msgid "Price changes based on availability."
 msgstr "Price changes based on availability."
 
 #. placeholder {0}: chainName
+#. placeholder {0}: chainName
+#: src/routes/[[lang]]/[network]/(account)/resources/+page.svelte
 #: src/routes/[network]/(account)/resources/+page.svelte
 msgid "{0} Resources: A Simple Explanation"
 msgstr "{0} Resources: A Simple Explanation"
@@ -849,6 +918,10 @@ msgstr "{0} Resources: A Simple Explanation"
 #. placeholder {0}: chainName
 #. placeholder {1}: chainName
 #. placeholder {2}: chainName
+#. placeholder {0}: chainName
+#. placeholder {1}: chainName
+#. placeholder {2}: chainName
+#: src/routes/[[lang]]/[network]/(account)/resources/+page.svelte
 #: src/routes/[network]/(account)/resources/+page.svelte
 msgid ""
 "The {0} blockchain uses three main resources: CPU, NET, and RAM. Users need these resources\n"
@@ -859,34 +932,45 @@ msgstr ""
 "to interact with smart contracts and perform actions on the {1} blockchain. Managing\n"
 "these resources is crucial for efficient use of the {2} network."
 
+#: src/routes/[[lang]]/[network]/(account)/resources/powerup/+page.svelte
+#: src/routes/[[lang]]/[network]/(account)/resources/renting.svelte
 #: src/routes/[network]/(account)/resources/powerup/+page.svelte
 #: src/routes/[network]/(account)/resources/renting.svelte
 msgid "POWERUP"
 msgstr "POWERUP"
 
+#: src/routes/[[lang]]/[network]/(account)/resources/renting.svelte
 #: src/routes/[network]/(account)/resources/renting.svelte
 #: src/routes/[network]/(account)/resources/rex/+page.svelte
 msgid "REX"
 msgstr "REX"
 
+#: src/routes/[[lang]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+#: src/routes/[[lang]]/[network]/(account)/ram/(forms)/sell/+page.svelte
+#: src/routes/[[lang]]/[network]/(account)/resources/renting.svelte
+#: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[network]/(account)/ram/(forms)/sell/+page.svelte
 #: src/routes/[network]/(account)/resources/renting.svelte
 msgid "Not logged in"
 msgstr "Not logged in"
 
+#: src/routes/[[lang]]/[network]/(account)/resources/renting.svelte
 #: src/routes/[network]/(account)/resources/renting.svelte
 msgid "(<0/>/MS)"
 msgstr "(<0/>/MS)"
 
+#: src/routes/[[lang]]/[network]/(account)/resources/renting.svelte
 #: src/routes/[network]/(account)/resources/renting.svelte
 msgid "(<0/>/KB)"
 msgstr "(<0/>/KB)"
 
+#: src/routes/[[lang]]/[network]/(account)/resources/renting.svelte
 #: src/routes/[network]/(account)/resources/renting.svelte
 msgid "Insufficient balance. Please enter a smaller amount."
 msgstr "Insufficient balance. Please enter a smaller amount."
 
+#: src/routes/[[lang]]/[network]/(account)/resources/renting.svelte
 #: src/routes/[network]/(account)/resources/renting.svelte
 msgid "Debug Info"
 msgstr "Debug Info"
@@ -900,6 +984,7 @@ msgstr "Vote"
 msgid "Transactions"
 msgstr "Transactions"
 
+#: src/routes/[lang]/[network]/(explorer)/network/+layout.ts
 #: src/routes/[network]/(explorer)/network/+layout.ts
 msgid "Network Overview"
 msgstr "Network Overview"
@@ -917,24 +1002,45 @@ msgstr "Reversible Blocks"
 msgid "Token Directory"
 msgstr "Token Directory"
 
+#: src/routes/[[lang]]/[network]/(homepage)/components/hero.svelte
+#: src/routes/[[lang]]/[network]/(homepage)/components/hero.svelte
+#: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
+#: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
+#: src/routes/[lang]/[network]/(homepage)/components/hero.svelte
+#: src/routes/[lang]/[network]/(homepage)/components/hero.svelte
 #: src/routes/[network]/(homepage)/components/hero.svelte
 #: src/routes/[network]/(homepage)/components/hero.svelte
 msgid "Unicove -"
 msgstr "Unicove -"
 
+#: src/routes/[[lang]]/[network]/(homepage)/components/hero.svelte
+#: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
+#: src/routes/[lang]/[network]/(homepage)/components/hero.svelte
 #: src/routes/[network]/(homepage)/components/hero.svelte
 msgid "EOS rebrands to Vaulta"
 msgstr "EOS rebrands to Vaulta"
 
 #. placeholder {0}: ramtoken.name
+#. placeholder {0}: ramtoken.name
+#. placeholder {0}: ramtoken.name
+#. placeholder {0}: ramtoken.name
+#: src/routes/[[lang]]/[network]/(homepage)/components/performance-grid.svelte
+#: src/routes/[[locale]]/[network]/(homepage)/components/performance-grid.svelte
+#: src/routes/[lang]/[network]/(homepage)/components/performance-grid.svelte
 #: src/routes/[network]/(homepage)/components/performance-grid.svelte
 msgid "{0}/USD"
 msgstr "{0}/USD"
 
+#: src/routes/[[lang]]/[network]/(homepage)/components/staking-rewards.svelte
+#: src/routes/[[locale]]/[network]/(homepage)/components/staking-rewards.svelte
+#: src/routes/[lang]/[network]/(homepage)/components/staking-rewards.svelte
 #: src/routes/[network]/(homepage)/components/staking-rewards.svelte
 msgid "Learn more"
 msgstr "Learn more"
 
+#: src/routes/[[lang]]/[network]/(homepage)/components/stakedhex.svelte
+#: src/routes/[[locale]]/[network]/(homepage)/components/stakedhex.svelte
+#: src/routes/[lang]/[network]/(homepage)/components/stakedhex.svelte
 #: src/routes/[network]/(explorer)/account/[name]/staked/+page.svelte
 #: src/routes/[network]/(homepage)/components/stakedhex.svelte
 msgid "APR"
@@ -991,6 +1097,9 @@ msgstr "Network"
 msgid "Wharf"
 msgstr "Wharf"
 
+#: src/routes/[[lang]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+#: src/routes/[[lang]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[network]/(account)/create-account/contract/+page.svelte
 #: src/routes/[network]/(account)/create-account/direct/+page.svelte
@@ -998,6 +1107,8 @@ msgstr "Wharf"
 msgid "Enter"
 msgstr "Enter"
 
+#: src/routes/[[lang]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[network]/(account)/create-account/contract/+page.svelte
 #: src/routes/[network]/(account)/create-account/direct/+page.svelte
@@ -1026,8 +1137,8 @@ msgstr "Owner {0}"
 msgid "Active {0}"
 msgstr "Active {0}"
 
-#. placeholder {0}: `Owner ${m.common_public_key()}`
 #. placeholder {0}: `Active ${m.common_public_key()}`
+#. placeholder {0}: `Owner ${m.common_public_key()}`
 #: src/routes/[network]/(account)/create-account/direct/+page.svelte
 #: src/routes/[network]/(account)/create-account/direct/+page.svelte
 msgid "{0} from <0/>"
@@ -1132,6 +1243,8 @@ msgstr "Choose a wallet type"
 msgid "Choose A Wallet Type"
 msgstr "Choose A Wallet Type"
 
+#: src/routes/[[lang]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[network]/(account)/signup/wallets/+page.svelte
 #: src/routes/[network]/(account)/signup/wallets/[walletType]/+page.svelte
@@ -1216,11 +1329,17 @@ msgstr "Welcome to {0}"
 msgid "Your account is ready to use"
 msgstr "Your account is ready to use"
 
+#: src/routes/[[lang]]/[network]/(explorer)/account/[name]/+layout.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 #: src/routes/[network]/(explorer)/account/[name]/+layout.svelte
 msgid "Authority"
 msgstr "Authority"
 
 #. placeholder {0}: lastUpdate
+#. placeholder {0}: lastUpdate
+#. placeholder {0}: lastUpdate
+#: src/routes/[[lang]]/[network]/(explorer)/account/[name]/+layout.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 #: src/routes/[network]/(explorer)/account/[name]/+layout.svelte
 msgid "props.account updated {0} seconds ago <0>Refresh</0>"
 msgstr "props.account updated {0} seconds ago <0>Refresh</0>"
@@ -1303,6 +1422,7 @@ msgstr "No contract is currently deployed to the {0} account."
 msgid "NOT_FOUND"
 msgstr "NOT_FOUND"
 
+#: src/routes/[[lang]]/[network]/(explorer)/account/[name]/activity/+page.svelte
 #: src/routes/[network]/(explorer)/account/[name]/activity/+page.svelte
 #: src/routes/[network]/(explorer)/contract/[contract]/+layout.ts
 msgid "Contract"
@@ -1541,6 +1661,8 @@ msgstr "Delete"
 msgid "Cancel"
 msgstr "Cancel"
 
+#: src/routes/[[lang]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[network]/(dev)/debug/components/sections/buttons.svelte
 msgid "Confirm"
@@ -1873,10 +1995,10 @@ msgstr "Pill Select"
 msgid "Select a date range"
 msgstr "Select a date range"
 
-#. placeholder {0}: selected.label
-#. placeholder {0}: selectedFormOption.label
-#. placeholder {0}: imageOptionSelected.label
 #. placeholder {0}: JSON.stringify(tokenSelected, null, 2)
+#. placeholder {0}: imageOptionSelected.label
+#. placeholder {0}: selectedFormOption.label
+#. placeholder {0}: selected.label
 #: src/routes/[network]/(dev)/debug/components/sections/select.svelte
 #: src/routes/[network]/(dev)/debug/components/sections/select.svelte
 #: src/routes/[network]/(dev)/debug/components/sections/select.svelte
@@ -2309,6 +2431,7 @@ msgstr "Historic"
 msgid "MarketContext"
 msgstr "MarketContext"
 
+#: src/routes/[[lang]]/[network]/(account)/ram/(forms)/sell/+page.svelte
 #: src/routes/[network]/(account)/ram/(forms)/sell/+page.svelte
 msgid "0 KB"
 msgstr "0 KB"
@@ -2343,34 +2466,43 @@ msgstr ""
 "Withdrawing and removing all tokens from staking requires we unset any votes that were\n"
 "previously cast for either block producers or proxies."
 
+#: src/routes/[[lang]]/[network]/(explorer)/account/[name]/activity/+page.svelte
 #: src/routes/[network]/(explorer)/account/[name]/activity/+page.svelte
 msgid "No more"
 msgstr "No more"
 
+#: src/routes/[[lang]]/[network]/(explorer)/account/[name]/activity/+page.svelte
 #: src/routes/[network]/(explorer)/account/[name]/activity/+page.svelte
 msgid "Loading"
 msgstr "Loading"
 
+#: src/routes/[[lang]]/[network]/(explorer)/account/[name]/activity/+page.svelte
 #: src/routes/[network]/(explorer)/account/[name]/activity/+page.svelte
 #: src/routes/[network]/(explorer)/token/[contract]/[symbol]/+page.svelte
 msgid "Load more"
 msgstr "Load more"
 
+#: src/routes/[[lang]]/[network]/(explorer)/account/[name]/activity/+page.svelte
 #: src/routes/[network]/(explorer)/account/[name]/activity/+page.svelte
 #: src/routes/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
 msgid "Action"
 msgstr "Action"
 
+#: src/routes/[[lang]]/[network]/(explorer)/account/[name]/activity/+page.svelte
 #: src/routes/[network]/(explorer)/account/[name]/activity/+page.svelte
 msgid "Filter"
 msgstr "Filter"
 
+#: src/routes/[[lang]]/[network]/(explorer)/account/[name]/activity/+page.svelte
 #: src/routes/[network]/(explorer)/account/[name]/activity/+page.svelte
 msgid "Reset"
 msgstr "Reset"
 
 #. placeholder {0}: actionFilter
 #. placeholder {1}: contractFilter
+#. placeholder {0}: actionFilter
+#. placeholder {1}: contractFilter
+#: src/routes/[[lang]]/[network]/(explorer)/account/[name]/activity/+page.svelte
 #: src/routes/[network]/(explorer)/account/[name]/activity/+page.svelte
 msgid "Filtering to display {0} on the {1} contract."
 msgstr "Filtering to display {0} on the {1} contract."
@@ -2394,6 +2526,9 @@ msgstr "The raw data for the {0} account on the {1} network."
 
 #. placeholder {0}: wait_sec.toString()
 #. placeholder {1}: dayjs .duration(wait_sec.toNumber(), 'seconds') .humanize()
+#. placeholder {0}: wait_sec.toString()
+#. placeholder {1}: dayjs .duration(wait_sec.toNumber(), 'seconds') .humanize()
+#: src/routes/[[lang]]/[network]/(explorer)/account/[name]/permissions/permission.svelte
 #: src/routes/[network]/(explorer)/account/[name]/permissions/permission.svelte
 msgid "<0/> {0}s ({1})"
 msgstr "<0/> {0}s ({1})"
@@ -2464,34 +2599,42 @@ msgstr "Staked"
 msgid "Loading staking details..."
 msgstr "Loading staking details..."
 
+#: src/routes/[[lang]]/[network]/(explorer)/account/[name]/votes/+page.svelte
 #: src/routes/[network]/(explorer)/account/[name]/votes/+page.svelte
 msgid "Proxied To"
 msgstr "Proxied To"
 
+#: src/routes/[[lang]]/[network]/(explorer)/account/[name]/votes/+page.svelte
 #: src/routes/[network]/(explorer)/account/[name]/votes/+page.svelte
 msgid "Is Proxy?"
 msgstr "Is Proxy?"
 
+#: src/routes/[[lang]]/[network]/(explorer)/account/[name]/votes/+page.svelte
 #: src/routes/[network]/(explorer)/account/[name]/votes/+page.svelte
 msgid "Yes"
 msgstr "Yes"
 
+#: src/routes/[[lang]]/[network]/(explorer)/account/[name]/votes/+page.svelte
 #: src/routes/[network]/(explorer)/account/[name]/votes/+page.svelte
 msgid "No"
 msgstr "No"
 
+#: src/routes/[[lang]]/[network]/(explorer)/account/[name]/votes/+page.svelte
 #: src/routes/[network]/(explorer)/account/[name]/votes/+page.svelte
 msgid "Total Vote Weight"
 msgstr "Total Vote Weight"
 
+#: src/routes/[[lang]]/[network]/(explorer)/account/[name]/votes/+page.svelte
 #: src/routes/[network]/(explorer)/account/[name]/votes/+page.svelte
 msgid "Self Vote Weight"
 msgstr "Self Vote Weight"
 
+#: src/routes/[[lang]]/[network]/(explorer)/account/[name]/votes/+page.svelte
 #: src/routes/[network]/(explorer)/account/[name]/votes/+page.svelte
 msgid "Proxied Weight"
 msgstr "Proxied Weight"
 
+#: src/routes/[[lang]]/[network]/(explorer)/account/[name]/votes/+page.svelte
 #: src/routes/[network]/(explorer)/account/[name]/votes/+page.svelte
 msgid "Block Producer"
 msgstr "Block Producer"
@@ -2583,84 +2726,128 @@ msgstr "A token on the {0} smart contract."
 msgid "The {0} token created by the {1} smart contract on the {2} network. {3} has {4} accounts currently holding a balance."
 msgstr "The {0} token created by the {1} smart contract on the {2} network. {3} has {4} accounts currently holding a balance."
 
+#: src/routes/[[lang]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Recipient"
 msgstr "Recipient"
 
+#: src/routes/[[lang]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Complete"
 msgstr "Complete"
 
+#: src/routes/[[lang]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Error"
 msgstr "Error"
 
+#: src/routes/[[lang]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Receiving Account"
 msgstr "Receiving Account"
 
+#: src/routes/[[lang]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Enter the account name of the recipient"
 msgstr "Enter the account name of the recipient"
 
+#: src/routes/[[lang]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Token to send"
 msgstr "Token to send"
 
+#: src/routes/[[lang]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "No balances found."
 msgstr "No balances found."
 
+#: src/routes/[[lang]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Amount to send"
 msgstr "Amount to send"
 
 #. placeholder {0}: sendState.quantity.symbol.code
+#. placeholder {0}: sendState.quantity.symbol.code
+#. placeholder {0}: sendState.quantity.symbol.code
+#: src/routes/[[lang]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Enter the amount of {0} to send"
 msgstr "Enter the amount of {0} to send"
 
+#: src/routes/[[lang]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Fill Max"
 msgstr "Fill Max"
 
 #. placeholder {0}: formatCurrency(sendState.value)
+#. placeholder {0}: formatCurrency(sendState.value)
+#. placeholder {0}: formatCurrency(sendState.value)
+#: src/routes/[[lang]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Value: {0}"
 msgstr "Value: {0}"
 
+#: src/routes/[[lang]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Invalid number, too many decimal places."
 msgstr "Invalid number, too many decimal places."
 
+#: src/routes/[[lang]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Amount exceeds available balance."
 msgstr "Amount exceeds available balance."
 
+#: src/routes/[[lang]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Memo (Optional)"
 msgstr "Memo (Optional)"
 
+#: src/routes/[[lang]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Specify a public memo for this transfer (optional)"
 msgstr "Specify a public memo for this transfer (optional)"
 
+#: src/routes/[[lang]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Restart"
 msgstr "Restart"
 
+#: src/routes/[[lang]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Start new send"
 msgstr "Start new send"
 
+#: src/routes/[[lang]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "View my account"
 msgstr "View my account"
 
+#: src/routes/[[lang]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Submit"
 msgstr "Submit"
 
+#: src/routes/[[lang]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Debugging"
 msgstr "Debugging"
@@ -3398,3 +3585,150 @@ msgstr "First Page"
 #: src/routes/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
 msgid "Next Page"
 msgstr "Next Page"
+
+#~ msgid ""
+#~ "<!-- @wc-ignore -->\n"
+#~ "(function () {\n"
+#~ "if (typeof window !== undefined) {\n"
+#~ "const storedTheme = localStorage.getItem('color-scheme');\n"
+#~ "const theme =\n"
+#~ "storedTheme ||\n"
+#~ "(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');\n"
+#~ "document.documentElement.setAttribute('data-scheme', theme);\n"
+#~ "if (!storedTheme) localStorage.setItem('color-scheme', theme);\n"
+#~ "}\n"
+#~ "})();"
+#~ msgstr ""
+#~ "<!-- @wc-ignore -->\n"
+#~ "(function () {\n"
+#~ "if (typeof window !== undefined) {\n"
+#~ "const storedTheme = localStorage.getItem('color-scheme');\n"
+#~ "const theme =\n"
+#~ "storedTheme ||\n"
+#~ "(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');\n"
+#~ "document.documentElement.setAttribute('data-scheme', theme);\n"
+#~ "if (!storedTheme) localStorage.setItem('color-scheme', theme);\n"
+#~ "}\n"
+#~ "})();"
+
+#. placeholder {0}: data.locale
+#. placeholder {0}: data.locale
+#: src/routes/[[lang]]/[network]/+layout.svelte
+#: src/routes/[[locale]]/[network]/+layout.svelte
+msgid "locale: {0}"
+msgstr "locale: {0}"
+
+#: src/lib/components/select/language.svelte
+msgid "Unknown"
+msgstr "Unknown"
+
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
+msgid "Configure Unicove"
+msgstr "Configure Unicove"
+
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
+msgid "Preferences"
+msgstr "Preferences"
+
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
+msgid "Language Selector"
+msgstr "Language Selector"
+
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
+msgid "The language used throughout Unicove."
+msgstr "The language used throughout Unicove."
+
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
+msgid "Prefered Currency"
+msgstr "Prefered Currency"
+
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
+msgid "The currency used to display the value of tokens."
+msgstr "The currency used to display the value of tokens."
+
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
+msgid "Increased Precision"
+msgstr "Increased Precision"
+
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
+msgid "Use more decimals to increase currency precision."
+msgstr "Use more decimals to increase currency precision."
+
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
+msgid "Dark Mode"
+msgstr "Dark Mode"
+
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
+msgid "Toggle site wide dark mode independent from operating system preferences."
+msgstr "Toggle site wide dark mode independent from operating system preferences."
+
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
+msgid "Navigation"
+msgstr "Navigation"
+
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
+msgid "Allow page navigation in search prompt"
+msgstr "Allow page navigation in search prompt"
+
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
+msgid "Adds popular Unicove pages to search results."
+msgstr "Adds popular Unicove pages to search results."
+
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
+msgid "Allow account switching in search prompt"
+msgstr "Allow account switching in search prompt"
+
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
+msgid "Adds logged in accounts to search results for quick switching."
+msgstr "Adds logged in accounts to search results for quick switching."
+
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
+msgid "Remain on current page when switching accounts"
+msgstr "Remain on current page when switching accounts"
+
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
+msgid "Prevents the automatic navigation to the account overview page"
+msgstr "Prevents the automatic navigation to the account overview page"
+
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
+msgid "Advanced"
+msgstr "Advanced"
+
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
+msgid "Enable Advanced Mode"
+msgstr "Enable Advanced Mode"
+
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
+msgid "Enable features for more advanced use cases."
+msgstr "Enable features for more advanced use cases."
+
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
+msgid "Developer"
+msgstr "Developer"
+
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
+msgid "Enable Developer Mode"
+msgstr "Enable Developer Mode"
+
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
+msgid "Allow usage of settings meant for development of Unicove"
+msgstr "Allow usage of settings meant for development of Unicove"
+
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
+msgid "Mock token price"
+msgstr "Mock token price"
+
+#~ msgid "Force the system token price to equal $1.2345 USD for testing in environments without pricing information."
+#~ msgstr "Force the system token price to equal $1.2345 USD for testing in environments without pricing information."
+
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
+msgid "Debug Data Display"
+msgstr "Debug Data Display"
+
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
+msgid ""
+"Force the system token price to equal $1.2345 USD for testing in environments\n"
+"without pricing information."
+msgstr ""
+"Force the system token price to equal $1.2345 USD for testing in environments\n"
+"without pricing information."

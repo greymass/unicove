@@ -1,7 +1,7 @@
 import { adapter as svelte } from '@wuchale/svelte';
 import { defineConfig, gemini } from 'wuchale';
 
-const ignore = ['src/routes/[network]/(dev)/**'];
+const ignore = ['src/routes/[network]/(dev)/**', 'src/**/+*.server.{js,ts}'];
 
 export default defineConfig({
 	otherLocales: ['ko', 'zh'],
@@ -11,8 +11,8 @@ export default defineConfig({
 				include: [
 					'src/**/*.svelte',
 					'src/**/+{page,layout}.{js,ts}',
-					'src/**/+{page,layout}.server.{js,ts}',
-					'src/**/*.svelte.{js,ts}'
+					'src/**/*.svelte.{js,ts}',
+					'src/**/*.server.svelte.{js,ts}'
 				],
 				ignore
 			}

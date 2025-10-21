@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { i18n, languageNames } from '$lib/i18n';
+	import { languageNames } from '$lib/i18n';
 	import {
 		availableLanguageTags,
 		languageTag,
@@ -12,18 +12,26 @@
 	import { getContext } from 'svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { goto } from '$app/navigation';
+	import { setLocale } from '$lib/remote/locale.remote';
+	import { locales } from 'virtual:wuchale/locales';
 
-	let defaultLang = {
-		value: languageTag(),
-		label: languageNames[languageTag() as keyof typeof languageNames]
-	};
+	const displayName = (loc: string) =>
+		new Intl.DisplayNames([loc], { type: 'language' }).of(loc) || 'Unknown';
+
 	const context = getContext<UnicoveContext>('state');
+	let defaultLang = {
+		value: context.settings.data.locale as AvailableLanguageTag,
+		label: displayName(context.settings.data.locale)
+	};
+
 
 	const handleSelect: CreateSelectProps<AvailableLanguageTag>['onSelectedChange'] = ({ next }) => {
-		const base = i18n.route(page.url.pathname);
-		const route = i18n.resolveRoute(base, next?.value);
-		goto(route);
-
+		if (next?.value) {
+			setLocale(next.value).then(() => {
+				context.settings.data.locale = next.value;
+				goto(`/${next.value}/${context.network}/settings`);
+			});
+		}
 		return next;
 	};
 
@@ -63,9 +71,9 @@
 			<li
 				aria-current={lang === languageTag() ? 'page' : undefined}
 				class=" hover:bg-primary hover:text-on-primary focus:text-on-primary data-highlighted:bg-primary data-highlighted:text-on-primary relative cursor-pointer rounded-xl px-2 py-1 font-medium focus:z-10 data-disabled:opacity-50"
-				use:melt={$option({ value: lang, label: lang })}
+				use:melt={$option({ value: lang, label: displayName(lang) })}
 			>
-				{languageNames[lang as keyof typeof languageNames]}
+				{displayName(lang)}
 			</li>
 		{/each}
 	</ul>
