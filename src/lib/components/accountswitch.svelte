@@ -9,7 +9,6 @@
 		type SerializedSession,
 		type WalletPlugin
 	} from '@wharfkit/session';
-	import * as m from '$lib/paraglide/messages';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
@@ -158,7 +157,7 @@
 		aria-label="account-switcher-label"
 		id="account-switcher"
 	>
-		{m.common_connect_wallet()}
+		Connect Wallet
 	</Button>
 {/if}
 
@@ -216,12 +215,12 @@
 						<Button onclick={addAccount} variant="secondary" class="text-on-surface grow-0">
 							<div class="flex items-center gap-2">
 								<UserPlus class="mb-0.5 size-5" />
-								<span>{m.common_add_account()}</span>
+								<span>Add Account</span>
 							</div>
 						</Button>
 
 						<header class="grid gap-3 pt-2 text-xl font-semibold">
-							<span>{m.common_my_accounts()}</span>
+							<span>My Accounts</span>
 
 							<!-- Filter or Search accounts -->
 							{#if chainSessions.length > 4 || filterValue}
@@ -264,9 +263,7 @@
 											<span class="leading-none">{session.actor}@{session.permission}</span>
 											{#if session.walletPlugin.id === 'wallet-plugin-multisig'}
 												<div class="text-xs font-normal">
-													↳ {m.common_account_multisig_using_account({
-														account: session.walletPlugin.data.session.actor
-													})}
+													↳ multisig using {session.walletPlugin.data.session.actor}
 												</div>
 											{/if}
 										</div>
@@ -297,8 +294,8 @@
 		<hr class="border-outline" />
 
 		<header class="grid justify-center gap-4 py-4 text-center">
-			<span class="text-title">{m.common_login_to_unicove()}</span>
-			<span class="text-muted text-sm font-medium">{m.common_connect_wallet_login()}</span>
+			<span class="text-title">Login to Unicove</span>
+			<span class="text-muted text-sm font-medium">Connect your wallet to login</span>
 		</header>
 
 		{#if context.wharf.sessionKit}
@@ -331,7 +328,7 @@
 			<!-- 	Create account -->
 			<!-- </Button> -->
 			<Button class="text-on-surface" onclick={closeAddingAccount} variant="secondary"
-				>{m.common_cancel()}</Button
+				>Cancel</Button
 			>
 		</div>
 	</div>

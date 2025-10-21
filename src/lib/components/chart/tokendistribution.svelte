@@ -2,7 +2,6 @@
 	import type { AccountValue } from '$lib/state/client/account.svelte';
 	import { cn, percentString } from '$lib/utils';
 	import { Card } from 'unicove-components';
-	import * as m from '$lib/paraglide/messages';
 	import { DD, DL, DLRow } from 'unicove-components';
 
 	interface Props {
@@ -11,11 +10,11 @@
 	let { data }: Props = $props();
 
 	const distributionMap = {
-		delegated: { label: m.common_delegated(), color: 'bg-mine-300' },
-		liquid: { label: m.common_available(), color: 'bg-success' },
+		delegated: { label: 'Delegated', color: 'bg-mine-300' },
+		liquid: { label: 'Available', color: 'bg-success' },
 		ram: { label: 'KB (RAM)', color: 'bg-solar-400' },
-		staked: { label: m.common_staked(), color: 'bg-sky-400' },
-		unstaked: { label: m.common_unstaked(), color: 'bg-sky-600' }
+		staked: { label: 'Staked', color: 'bg-sky-400' },
+		unstaked: { label: 'Unstaked', color: 'bg-sky-600' }
 	};
 
 	type DistributionItem = {
@@ -42,7 +41,7 @@
 </script>
 
 {#if filtered.length}
-	<Card id="distribution" title={m.common_distribution()}>
+	<Card id="distribution" title="Distribution">
 		<div id="distribution-container" class="flex gap-1">
 			{#each filtered as item}
 				<div

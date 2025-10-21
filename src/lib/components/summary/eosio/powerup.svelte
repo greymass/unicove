@@ -1,7 +1,6 @@
 <script lang="ts">
 	import * as SystemContract from '$lib/wharf/contracts/system';
 	import type { ActionSummaryProps } from '$lib/types/transaction';
-	import * as m from '$lib/paraglide/messages';
 	import AccountElement from '$lib/components/elements/account.svelte';
 	import Row from '../components/row.svelte';
 	import { Chip } from 'unicove-components';
@@ -17,15 +16,11 @@
 
 {#if Int64.from(data.cpu_frac).gt(ZeroUnits)}
 	<Row>
-		<Chip>{m.common_resources()}</Chip>
+		<Chip>Resources</Chip>
 
 		<div>
 			<AccountElement name={Name.from(data.payer)} />
-			<span class="text-nowrap">
-				{m.common_renting_resources_for({
-					resource: 'CPU'
-				})}
-			</span>
+			<span class="text-nowrap">renting CPU for</span>
 			<AccountElement name={Name.from(data.receiver)} />
 		</div>
 
@@ -39,15 +34,11 @@
 
 {#if Int64.from(data.net_frac).gt(ZeroUnits)}
 	<Row>
-		<Chip>{m.common_resources()}</Chip>
+		<Chip>Resources</Chip>
 
 		<div>
 			<AccountElement name={Name.from(data.payer)} />
-			<span class="text-nowrap">
-				{m.common_renting_resources_for({
-					resource: 'NET'
-				})}
-			</span>
+			<span class="text-nowrap">renting NET for</span>
 			<AccountElement name={Name.from(data.receiver)} />
 		</div>
 

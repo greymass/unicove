@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2025-10-21T07:48:36.728Z\n"
+"PO-Revision-Date: 2025-10-21T08:11:13.358Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -77,6 +77,7 @@ msgid "API Reference"
 msgstr "API Reference"
 
 #: src/lib/components/footer.svelte
+#: src/lib/components/transact/summary.svelte
 msgid "Status"
 msgstr "Status"
 
@@ -211,6 +212,7 @@ msgstr "Buy RAM"
 msgid "Sell RAM"
 msgstr "Sell RAM"
 
+#: src/lib/components/card/tokenoverview.svelte
 #: src/lib/components/navigation/sidemenu.svelte
 #: src/lib/state/search.svelte.ts
 msgid "Send"
@@ -222,9 +224,15 @@ msgstr "Send"
 msgid "Settings"
 msgstr "Settings"
 
+#: src/lib/components/card/tokenoverview.svelte
 #: src/lib/components/navigation/sidemenu.svelte
 #: src/lib/components/summary/eosio.rex/buyresult.svelte
 #: src/lib/components/summary/eosio.rex/sellresult.svelte
+#: src/lib/components/summary/eosio/buyrex.svelte
+#: src/lib/components/summary/eosio/deposit.svelte
+#: src/lib/components/summary/eosio/mvfrsavings.svelte
+#: src/lib/components/summary/eosio/sellrex.svelte
+#: src/lib/components/summary/eosio/withdraw.svelte
 #: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/summaries/+page.svelte
 msgid "Staking"
@@ -243,17 +251,23 @@ msgid "Unstake"
 msgstr "Unstake"
 
 #: src/lib/components/navigation/sidemenu.svelte
+#: src/lib/components/summary/eosio.reserv/powupresult.svelte
+#: src/lib/components/summary/eosio.reserv/powupresult.svelte
+#: src/lib/components/summary/eosio/powerup.svelte
+#: src/lib/components/summary/eosio/powerup.svelte
 #: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/summaries/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/resources/+page.svelte
 msgid "Resources"
 msgstr "Resources"
 
+#: src/lib/components/search/input.svelte
 #: src/lib/state/search.svelte.ts
 msgid "Clear"
 msgstr "Clear"
 
 #: src/lib/components/breakdown/breakdownRow.svelte
+#: src/lib/components/card/tokenoverview.svelte
 msgid "Total"
 msgstr "Total"
 
@@ -343,7 +357,6 @@ msgid "My Account"
 msgstr "My Account"
 
 #: src/lib/components/elements/resourceCard.svelte
-#: src/lib/components/summary/eosio/powerup.svelte
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/resources/renting.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/resources/+page.svelte
@@ -351,7 +364,6 @@ msgid "CPU"
 msgstr "CPU"
 
 #: src/lib/components/elements/resourceCard.svelte
-#: src/lib/components/summary/eosio/powerup.svelte
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/resources/renting.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/resources/+page.svelte
@@ -484,12 +496,12 @@ msgstr "<0/> Memo: {0}"
 msgid "+ {0} ms (CPU)"
 msgstr "+ {0} ms (CPU)"
 
-#. placeholder {0}: data.powup_cpu
 #. placeholder {0}: data.powup_net
-#. placeholder {0}: account.weight
+#. placeholder {0}: data.powup_cpu
 #. placeholder {0}: key.weight
 #. placeholder {0}: account.weight
 #. placeholder {0}: key.weight
+#. placeholder {0}: account.weight
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio/newaccount.svelte
@@ -766,8 +778,8 @@ msgstr "Details"
 msgid "Network Fees"
 msgstr "Network Fees"
 
-#. placeholder {0}: data.network.chain.systemToken?.symbol.code || ''
 #. placeholder {0}: market.network.currency.symbol.code
+#. placeholder {0}: data.network.chain.systemToken?.symbol.code || ''
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 msgid "Market Cap ({0})"
@@ -881,6 +893,7 @@ msgstr "POWERUP"
 msgid "REX"
 msgstr "REX"
 
+#: src/lib/components/card/accountbalance.svelte
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/buy/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/sell/+page.svelte
@@ -1167,8 +1180,8 @@ msgstr "Owner {0}"
 msgid "Active {0}"
 msgstr "Active {0}"
 
-#. placeholder {0}: `Owner ${m.common_public_key()}`
 #. placeholder {0}: `Active ${m.common_public_key()}`
+#. placeholder {0}: `Owner ${m.common_public_key()}`
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
 msgid "{0} from <0/>"
@@ -1673,6 +1686,7 @@ msgstr "Side by side"
 msgid "Delete"
 msgstr "Delete"
 
+#: src/lib/components/accountswitch.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/buttons.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/buttons.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/buttons.svelte
@@ -1708,6 +1722,8 @@ msgstr "USD Value $0.0"
 msgid "Unstaking Balances Is A Long Title"
 msgstr "Unstaking Balances Is A Long Title"
 
+#: src/lib/components/card/tokenoverview.svelte
+#: src/lib/components/elements/unstaking.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/cards.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/navigation.svelte
 msgid "Withdraw"
@@ -1953,10 +1969,10 @@ msgstr "Pill Select"
 msgid "Select a date range"
 msgstr "Select a date range"
 
-#. placeholder {0}: selected.label
-#. placeholder {0}: selectedFormOption.label
-#. placeholder {0}: imageOptionSelected.label
 #. placeholder {0}: JSON.stringify(tokenSelected, null, 2)
+#. placeholder {0}: imageOptionSelected.label
+#. placeholder {0}: selectedFormOption.label
+#. placeholder {0}: selected.label
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
@@ -1980,6 +1996,7 @@ msgstr "Select a form option"
 msgid "Form Select with Images"
 msgstr "Form Select with Images"
 
+#: src/lib/components/select/balance.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
 msgid "Select an option"
 msgstr "Select an option"
@@ -2370,6 +2387,7 @@ msgstr "MarketContext"
 msgid "No more"
 msgstr "No more"
 
+#: src/lib/components/elements/action.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.svelte
 msgid "Loading"
 msgstr "Loading"
@@ -2384,6 +2402,7 @@ msgstr "Load more"
 msgid "Contract"
 msgstr "Contract"
 
+#: src/lib/components/search/input.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
 msgid "Action"
@@ -2539,6 +2558,9 @@ msgstr "Available for claim"
 msgid "REX fund"
 msgstr "REX fund"
 
+#: src/lib/components/card/tokenoverview.svelte
+#: src/lib/components/chart/barchart.svelte
+#: src/lib/components/chart/tokendistribution.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/staked/+page.svelte
 msgid "Staked"
 msgstr "Staked"
@@ -2956,6 +2978,7 @@ msgstr "Step 1: Install MetaMask"
 msgid "To get started, you need to install MetaMask:"
 msgstr "To get started, you need to install MetaMask:"
 
+#: src/lib/components/wallets/metamask/install.svelte
 #: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/metamask/+page.svelte
 msgid "Install MetaMask"
 msgstr "Install MetaMask"
@@ -3642,3 +3665,328 @@ msgstr "Token Balance"
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balance/[contract]/[symbol]/+page.ts
 msgid "Token balance from the {0} smart contract."
 msgstr "Token balance from the {0} smart contract."
+
+#: src/lib/components/networkswitch.svelte
+msgid "Change network"
+msgstr "Change network"
+
+#: src/lib/components/accountswitch.svelte
+msgid "Connect Wallet"
+msgstr "Connect Wallet"
+
+#: src/lib/components/accountswitch.svelte
+msgid "Add Account"
+msgstr "Add Account"
+
+#: src/lib/components/accountswitch.svelte
+msgid "My Accounts"
+msgstr "My Accounts"
+
+#. placeholder {0}: session.walletPlugin.data.session.actor
+#: src/lib/components/accountswitch.svelte
+msgid "↳ multisig using {0}"
+msgstr "↳ multisig using {0}"
+
+#: src/lib/components/accountswitch.svelte
+msgid "Login to Unicove"
+msgstr "Login to Unicove"
+
+#: src/lib/components/accountswitch.svelte
+msgid "Connect your wallet to login"
+msgstr "Connect your wallet to login"
+
+#. placeholder {0}: props.network.chain.name
+#. placeholder {1}: props.network.token.name
+#: src/lib/components/banner/systemTokenSwap.svelte
+msgid "{0} now uses the {1} token"
+msgstr "{0} now uses the {1} token"
+
+#: src/lib/components/banner/systemTokenSwap.svelte
+msgid "<0/> available to swap"
+msgstr "<0/> available to swap"
+
+#: src/lib/components/banner/systemTokenSwap.svelte
+msgid "Swap"
+msgstr "Swap"
+
+#: src/lib/components/banner/pageBanner.svelte
+msgid "<0/><1>Breaking News:</1> EOS Network Rebrands to Vaulta"
+msgstr "<0/><1>Breaking News:</1> EOS Network Rebrands to Vaulta"
+
+#: src/lib/components/card/tokenoverview.svelte
+msgid "Value"
+msgstr "Value"
+
+#: src/lib/components/card/tokenoverview.svelte
+msgid "Add Funds"
+msgstr "Add Funds"
+
+#: src/lib/components/card/accountbalance.svelte
+#: src/lib/components/card/tokenoverview.svelte
+#: src/lib/components/chart/tokendistribution.svelte
+#: src/lib/components/elements/resourceCard.svelte
+msgid "Available"
+msgstr "Available"
+
+#: src/lib/components/card/tokenoverview.svelte
+#: src/lib/components/chart/tokendistribution.svelte
+msgid "Unstaked"
+msgstr "Unstaked"
+
+#: src/lib/components/card/tokenoverview.svelte
+#: src/lib/components/chart/tokendistribution.svelte
+msgid "Delegated"
+msgstr "Delegated"
+
+#: src/lib/components/card/tokenoverview.svelte
+msgid "Reclaim"
+msgstr "Reclaim"
+
+#: src/lib/components/card/tokenoverview.svelte
+msgid "Refunding"
+msgstr "Refunding"
+
+#: src/lib/components/card/tokenoverview.svelte
+msgid "Claim"
+msgstr "Claim"
+
+#: src/lib/components/card/accountbalance.svelte
+msgid "Account Balance"
+msgstr "Account Balance"
+
+#: src/lib/components/chart/barchart.svelte
+msgid "Yield"
+msgstr "Yield"
+
+#: src/lib/components/chart/barchart.svelte
+#: src/lib/components/chart/chart-container.svelte
+msgid "Today"
+msgstr "Today"
+
+#: src/lib/components/chart/tokendistribution.svelte
+msgid "Distribution"
+msgstr "Distribution"
+
+#: src/lib/components/elements/action.svelte
+msgid "length"
+msgstr "length"
+
+#: src/lib/components/elements/action.svelte
+msgid "No data"
+msgstr "No data"
+
+#: src/lib/components/elements/action.svelte
+msgid "Signed by"
+msgstr "Signed by"
+
+#: src/lib/components/elements/action.svelte
+msgid "notified"
+msgstr "notified"
+
+#. placeholder {0}: record.type
+#: src/lib/components/search/result.svelte
+msgid "View {0}"
+msgstr "View {0}"
+
+#: src/lib/components/elements/unstaking.svelte
+msgid "Unstaking"
+msgstr "Unstaking"
+
+#: src/lib/components/elements/unstaking.svelte
+msgid ""
+"The tokens currently being unstaked are listed below with the date they become available.\n"
+"These balances will continue to earn rewards until they are withdrawn."
+msgstr ""
+"The tokens currently being unstaked are listed below with the date they become available.\n"
+"These balances will continue to earn rewards until they are withdrawn."
+
+#: src/lib/components/elements/unstaking.svelte
+msgid "Amount"
+msgstr "Amount"
+
+#: src/lib/components/elements/unstaking.svelte
+msgid "Date Available"
+msgstr "Date Available"
+
+#. placeholder {0}: String(context.network.chain.name).slice(0, 3)
+#: src/lib/components/search/input.svelte
+msgid "Search {0}..."
+msgstr "Search {0}..."
+
+#: src/lib/components/search/input.svelte
+msgid "Search Unicove"
+msgstr "Search Unicove"
+
+#: src/lib/components/search/input.svelte
+msgid "Search Results"
+msgstr "Search Results"
+
+#: src/lib/components/search/input.svelte
+msgid "Recent Activity"
+msgstr "Recent Activity"
+
+#: src/lib/components/search/input.svelte
+msgid "No results found"
+msgstr "No results found"
+
+#: src/lib/components/search/input.svelte
+msgid ""
+"Search for Unicove features or enter an account name, public key, or transaction\n"
+"ID on the network."
+msgstr ""
+"Search for Unicove features or enter an account name, public key, or transaction\n"
+"ID on the network."
+
+#: src/lib/components/transact/summary.svelte
+msgid "Multi-Sig Proposal Created"
+msgstr "Multi-Sig Proposal Created"
+
+#: src/lib/components/transact/summary.svelte
+msgid ""
+"The multi-sig proposal for this transaction has been created and now needs to be approved.\n"
+"View the proposal below and share it with the parties who need to sign."
+msgstr ""
+"The multi-sig proposal for this transaction has been created and now needs to be approved.\n"
+"View the proposal below and share it with the parties who need to sign."
+
+#. placeholder {0}: proposal.proposer
+#. placeholder {1}: proposal.proposal_name
+#: src/lib/components/transact/summary.svelte
+msgid "View Proposal ({0}/{1})"
+msgstr "View Proposal ({0}/{1})"
+
+#: src/lib/components/transact/summary.svelte
+msgid "Transaction Complete"
+msgstr "Transaction Complete"
+
+#: src/lib/components/transact/summary.svelte
+#: src/lib/components/transaction/header.svelte
+msgid "Transaction ID"
+msgstr "Transaction ID"
+
+#: src/lib/components/transact/summary.svelte
+msgid "Transaction Not Found"
+msgstr "Transaction Not Found"
+
+#. placeholder {0}: String(transactionId)
+#: src/lib/components/transact/summary.svelte
+msgid "The transaction with ID {0} could not be found."
+msgstr "The transaction with ID {0} could not be found."
+
+#: src/lib/components/transact/error.svelte
+msgid "Transaction Error"
+msgstr "Transaction Error"
+
+#: src/lib/components/transaction/header.svelte
+msgid "Finality Status"
+msgstr "Finality Status"
+
+#: src/lib/components/transaction/header.svelte
+msgid "Irreversible"
+msgstr "Irreversible"
+
+#: src/lib/components/transaction/header.svelte
+msgid "Reversible"
+msgstr "Reversible"
+
+#: src/lib/components/transaction/header.svelte
+msgid "Date"
+msgstr "Date"
+
+#: src/lib/components/transaction/header.svelte
+msgid "Included in Block"
+msgstr "Included in Block"
+
+#: src/lib/components/transaction/header.svelte
+msgid "Contracts Used"
+msgstr "Contracts Used"
+
+#: src/lib/components/transaction/header.svelte
+msgid "CPU (μs)"
+msgstr "CPU (μs)"
+
+#: src/lib/components/transaction/header.svelte
+msgid "NET (Bytes)"
+msgstr "NET (Bytes)"
+
+#: src/lib/components/summary/components/transfer.svelte
+msgid "Sent"
+msgstr "Sent"
+
+#: src/lib/components/summary/components/transfer.svelte
+msgid "Received"
+msgstr "Received"
+
+#: src/lib/components/summary/eosio/buyrambytes.svelte
+msgid "Requesting"
+msgstr "Requesting"
+
+#: src/lib/components/summary/eosio/logsystemfee.svelte
+msgid "Fee"
+msgstr "Fee"
+
+#: src/lib/components/summary/eosio/powerup.svelte
+msgid "renting CPU for"
+msgstr "renting CPU for"
+
+#: src/lib/components/summary/eosio/powerup.svelte
+msgid "renting NET for"
+msgstr "renting NET for"
+
+#. placeholder {0}: data.owner
+#: src/lib/components/summary/eosio/refund.svelte
+msgid "System contract refund request for {0}."
+msgstr "System contract refund request for {0}."
+
+#: src/lib/components/summary/greymassnoop/noop.svelte
+msgid "The network resources for this transaction were provided by a 3rd party."
+msgstr "The network resources for this transaction were provided by a 3rd party."
+
+#. placeholder {0}: productName
+#. placeholder {0}: productName
+#: src/lib/components/wallets/metamask/install.svelte
+#: src/lib/components/wallets/metamask/snap.svelte
+msgid "Add {0} to MetaMask"
+msgstr "Add {0} to MetaMask"
+
+#. placeholder {0}: productName
+#. placeholder {1}: networkName
+#: src/lib/components/wallets/metamask/install.svelte
+msgid ""
+"The {0} snap allows you to interact with Unicove and other {1}-based dApps\n"
+"using MetaMask."
+msgstr ""
+"The {0} snap allows you to interact with Unicove and other {1}-based dApps\n"
+"using MetaMask."
+
+#. placeholder {0}: productName
+#: src/lib/components/wallets/metamask/install.svelte
+msgid "Begin by installing MetaMask, then come back to this page and install the {0} snap."
+msgstr "Begin by installing MetaMask, then come back to this page and install the {0} snap."
+
+#: src/lib/components/wallets/metamask/install.svelte
+msgid ""
+"Note: If MetaMask is already installed, you may need to grant permissions for Unicove by manually\n"
+"opening MetaMask."
+msgstr ""
+"Note: If MetaMask is already installed, you may need to grant permissions for Unicove by manually\n"
+"opening MetaMask."
+
+#: src/lib/components/wallets/metamask/snap.svelte
+msgid "It looks like you already have MetaMask installed."
+msgstr "It looks like you already have MetaMask installed."
+
+#. placeholder {0}: networkName
+#. placeholder {1}: productName
+#: src/lib/components/wallets/metamask/snap.svelte
+msgid ""
+"To get started with MetaMask on the {0} Network, install the {1} snap using the\n"
+"button below."
+msgstr ""
+"To get started with MetaMask on the {0} Network, install the {1} snap using the\n"
+"button below."
+
+#. placeholder {0}: productName
+#: src/lib/components/wallets/metamask/snap.svelte
+msgid "Install {0}"
+msgstr "Install {0}"
