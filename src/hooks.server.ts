@@ -5,11 +5,15 @@ import { PUBLIC_CHAIN_SHORT } from '$env/static/public';
 import { isNetworkShortName, ramtoken, systemtoken } from '$lib/wharf/chains';
 import { getBackendNetworkByName } from '$lib/wharf/client/ssr';
 
-import * as main from './locales/loader.server.svelte.js';
+import * as svelte from './locales/loader.svelte.js';
+import * as server from './locales/loader.server.svelte.js';
+import * as js from './locales/loader.js';
 import { runWithLocale, loadLocales } from 'wuchale/load-utils/server';
 import { locales } from 'virtual:wuchale/locales';
 
-await loadLocales(main.key, main.loadIDs, main.loadCatalog, locales);
+await loadLocales(svelte.key, svelte.loadIDs, svelte.loadCatalog, locales);
+loadLocales(server.key, server.loadIDs, server.loadCatalog, locales);
+loadLocales(js.key, js.loadIDs, js.loadCatalog, locales);
 
 export const wuchaleHandle: Handle = async ({ event, resolve }) => {
 	let locale: string = 'en';
@@ -20,7 +24,11 @@ export const wuchaleHandle: Handle = async ({ event, resolve }) => {
 		locale = firstPart;
 	}
 	event.locals.locale = locale;
-	return await runWithLocale(locale, () => resolve(event));
+	return await runWithLocale(locale, () =>
+		resolve(event, {
+			transformPageChunk: ({ html }) => html.replace('%lang%', locale)
+		})
+	);
 };
 
 type HandleParams = Parameters<Handle>[0];

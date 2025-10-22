@@ -6,10 +6,18 @@
 import { loadCatalog, loadIDs, key } from 'virtual:wuchale/proxy'; // or proxy/sync
 import { registerLoaders, defaultCollection } from 'wuchale/load-utils';
 
-const catalogs = $state({});
+export { loadCatalog, loadIDs, key }; // for +layout.{js,ts} and hooks.server.{js,ts}
 
-// for non-reactive
-export const get = registerLoaders(key, loadCatalog, loadIDs, defaultCollection(catalogs));
+/** @type {Function} */
+export let get;
 
-// same function, only will be inside $derived when used
+if (import.meta.env.SSR) {
+	// stripped from production client builds
+	const { currentCatalog } = await import('wuchale/load-utils/server');
+	get = (/** @type {string} */ loadID) => currentCatalog(key, loadID);
+} else {
+	const catalogs = $state({});
+	get = registerLoaders(key, loadCatalog, loadIDs, defaultCollection(catalogs));
+}
+
 export default get;
