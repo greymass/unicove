@@ -20,8 +20,8 @@ export default defineConfig({
 		server: vanilla({
 			files: './src/**/*.server.{js,ts}',
 			writeFiles: {
-				compiled: true,
-				proxy: true
+				compiled: true
+				// proxy: true
 			}
 		})
 	},

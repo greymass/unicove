@@ -1,4 +1,4 @@
-
+ // @ts-nocheck
             import * as _w_c_server_0_ from './en.compiled.server.js'
 import * as _w_c_server_1_ from './ko.compiled.server.js'
 import * as _w_c_server_2_ from './zh.compiled.server.js'

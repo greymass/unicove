@@ -43,6 +43,7 @@ export default ts.config([
 			'dist/',
 			'configs/contracts',
 			'src/lib/wharf/contracts/',
+			'src/locales/*',
 			'svelte.config.js'
 		]
 	}
