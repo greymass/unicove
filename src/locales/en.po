@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2025-10-22T07:29:08.450Z\n"
+"PO-Revision-Date: 2025-10-23T22:50:28.162Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -220,6 +220,7 @@ msgstr "Buy RAM"
 msgid "Sell RAM"
 msgstr "Sell RAM"
 
+#: src/lib/components/card/tokenbalance.svelte
 #: src/lib/components/card/tokenoverview.svelte
 #: src/lib/components/navigation/sidemenu.svelte
 #: src/lib/state/search.svelte.ts
@@ -233,6 +234,7 @@ msgstr "Send"
 msgid "Settings"
 msgstr "Settings"
 
+#: src/lib/components/card/tokenbalance.svelte
 #: src/lib/components/card/tokenoverview.svelte
 #: src/lib/components/navigation/sidemenu.svelte
 #: src/lib/components/summary/eosio.rex/buyresult.svelte
@@ -259,6 +261,7 @@ msgstr "Stake"
 #: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/unstake/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/unstake/+page.ts
+#: src/routes/[[locale]]/[network]/(account)/staking/+page.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/cards.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/navigation.svelte
 msgid "Unstake"
@@ -1347,6 +1350,7 @@ msgid "Network"
 msgstr "Network"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/+layout.svelte
+#: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "Wharf"
 msgstr "Wharf"
 
@@ -1752,10 +1756,12 @@ msgstr "USD Value $0.0"
 msgid "Unstaking Balances Is A Long Title"
 msgstr "Unstaking Balances Is A Long Title"
 
+#: src/lib/components/card/tokenbalance.svelte
 #: src/lib/components/card/tokenoverview.svelte
 #: src/lib/components/elements/unstaking.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/withdraw/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/withdraw/+page.ts
+#: src/routes/[[locale]]/[network]/(account)/staking/+page.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/cards.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/navigation.svelte
 msgid "Withdraw"
@@ -2598,6 +2604,7 @@ msgstr "Available for claim"
 msgid "REX fund"
 msgstr "REX fund"
 
+#: src/lib/components/card/tokenbalance.svelte
 #: src/lib/components/card/tokenoverview.svelte
 #: src/lib/components/chart/barchart.svelte
 #: src/lib/components/chart/tokendistribution.svelte
@@ -3761,6 +3768,7 @@ msgid "<0/> available to swap"
 msgstr "<0/> available to swap"
 
 #: src/lib/components/banner/systemTokenSwap.svelte
+#: src/lib/components/card/tokenbalance.svelte
 #: src/routes/[[locale]]/[network]/(account)/swap/+page.svelte
 msgid "Swap"
 msgstr "Swap"
@@ -3780,6 +3788,7 @@ msgid "Add Funds"
 msgstr "Add Funds"
 
 #: src/lib/components/card/accountbalance.svelte
+#: src/lib/components/card/tokenbalance.svelte
 #: src/lib/components/card/tokenoverview.svelte
 #: src/lib/components/chart/tokendistribution.svelte
 #: src/lib/components/elements/resourceCard.svelte
@@ -3788,28 +3797,33 @@ msgstr "Add Funds"
 msgid "Available"
 msgstr "Available"
 
+#: src/lib/components/card/tokenbalance.svelte
 #: src/lib/components/card/tokenoverview.svelte
 #: src/lib/components/chart/tokendistribution.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/+page.svelte
 msgid "Unstaked"
 msgstr "Unstaked"
 
+#: src/lib/components/card/tokenbalance.svelte
 #: src/lib/components/card/tokenoverview.svelte
 #: src/lib/components/chart/tokendistribution.svelte
 msgid "Delegated"
 msgstr "Delegated"
 
+#: src/lib/components/card/tokenbalance.svelte
 #: src/lib/components/card/tokenoverview.svelte
 #: src/routes/[[locale]]/[network]/(account)/undelegate/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/undelegate/+page.ts
 msgid "Reclaim"
 msgstr "Reclaim"
 
+#: src/lib/components/card/tokenbalance.svelte
 #: src/lib/components/card/tokenoverview.svelte
 #: src/routes/[[locale]]/[network]/(account)/refund/+page.svelte
 msgid "Refunding"
 msgstr "Refunding"
 
+#: src/lib/components/card/tokenbalance.svelte
 #: src/lib/components/card/tokenoverview.svelte
 msgid "Claim"
 msgstr "Claim"
@@ -4914,6 +4928,7 @@ msgid "MetaMask Public Key (Owner)"
 msgstr "MetaMask Public Key (Owner)"
 
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
+#: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "MetaMask Snaps Directory"
 msgstr "MetaMask Snaps Directory"
 
@@ -5695,3 +5710,24 @@ msgstr "Table: {0}"
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.ts
 msgid "The {0} data table in the {1} smart contract on the {2} network."
 msgstr "The {0} data table in the {1} smart contract on the {2} network."
+
+#: src/lib/components/card/tokenbalance.svelte
+msgid "Used"
+msgstr "Used"
+
+#: src/lib/components/card/tokenbalance.svelte
+msgid "WRAM"
+msgstr "WRAM"
+
+#: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
+msgid "MetaMask Snaps"
+msgstr "MetaMask Snaps"
+
+#. placeholder {0}: networkName
+#: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
+msgid "How to Sign Transactions on the {0} network with MetaMask"
+msgstr "How to Sign Transactions on the {0} network with MetaMask"
+
+#: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
+msgid "MetaMask Wallet Plugin"
+msgstr "MetaMask Wallet Plugin"
