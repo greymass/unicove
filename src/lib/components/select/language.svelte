@@ -1,36 +1,42 @@
 <script lang="ts">
-	import { page } from '$app/state';
-	import { i18n, languageNames } from '$lib/i18n';
-	import {
-		availableLanguageTags,
-		languageTag,
-		type AvailableLanguageTag
-	} from '$lib/paraglide/runtime.js';
 	import { createSelect, melt, type CreateSelectProps } from '@melt-ui/svelte';
 	import { fade } from 'svelte/transition';
 	import ChevronDown from '@lucide/svelte/icons/chevron-down';
 	import { getContext } from 'svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { goto } from '$app/navigation';
+	import { setLocale } from '$lib/remote/locale.remote';
+	import { locales } from 'virtual:wuchale/locales';
+	import { page } from '$app/state';
 
-	let defaultLang = {
-		value: languageTag(),
-		label: languageNames[languageTag() as keyof typeof languageNames]
-	};
+	const displayName = (loc: string) =>
+		new Intl.DisplayNames([loc], { type: 'language' }).of(loc) || 'Unknown';
+
 	const context = getContext<UnicoveContext>('state');
+	let defaultLang = $derived({
+		value: context.settings.data.locale,
+		label: displayName(context.settings.data.locale)
+	});
 
-	const handleSelect: CreateSelectProps<AvailableLanguageTag>['onSelectedChange'] = ({ next }) => {
-		const base = i18n.route(page.url.pathname);
-		const route = i18n.resolveRoute(base, next?.value);
-		goto(route);
-
+	const handleSelect: CreateSelectProps<string>['onSelectedChange'] = ({ next }) => {
+		if (next?.value) {
+			setLocale(next.value).then(() => {
+				context.settings.data.locale = next.value;
+				// change URL language
+				const pathname = page.url.pathname;
+				const parts = pathname.split('/').filter(Boolean);
+				parts[0] = next.value;
+				const updatedPath = `/${parts.join('/')}${page.url.search}`;
+				goto(updatedPath, { replaceState: true });
+			});
+		}
 		return next;
 	};
 
 	const {
 		elements: { trigger, menu, option },
 		states: { open, selectedLabel }
-	} = createSelect<AvailableLanguageTag>({
+	} = createSelect<string>({
 		defaultSelected: defaultLang,
 		preventScroll: false,
 		positioning: {
@@ -48,7 +54,7 @@
 	aria-label="langauge-select-label"
 	id="language-select"
 >
-	{$selectedLabel || 'Select a language'}
+	{displayName(context.settings.data.locale)}
 	<ChevronDown class="size-5 transition-transform duration-100 {$open ? 'rotate-180' : ''}" />
 </button>
 
@@ -59,13 +65,13 @@
 		use:melt={$menu}
 		in:fade={{ duration: 100 }}
 	>
-		{#each availableLanguageTags as lang}
+		{#each locales as lang}
 			<li
-				aria-current={lang === languageTag() ? 'page' : undefined}
+				aria-current={lang === context.settings.data.locale ? 'page' : undefined}
 				class=" hover:bg-primary hover:text-on-primary focus:text-on-primary data-highlighted:bg-primary data-highlighted:text-on-primary relative cursor-pointer rounded-xl px-2 py-1 font-medium focus:z-10 data-disabled:opacity-50"
-				use:melt={$option({ value: lang, label: lang })}
+				use:melt={$option({ value: lang, label: displayName(lang) })}
 			>
-				{languageNames[lang as keyof typeof languageNames]}
+				{displayName(lang)}
 			</li>
 		{/each}
 	</ul>

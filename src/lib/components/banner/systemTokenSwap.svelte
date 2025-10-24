@@ -1,5 +1,4 @@
 <script lang="ts">
-	import * as m from '$lib/paraglide/messages';
 	import type { AccountState } from '$lib/state/client/account.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
 	import AssetText from '$lib/components/elements/asset.svelte';
@@ -26,10 +25,7 @@
 				href="https://www.vaulta.com/resources/vaulta-token-swap-a-begins-may-14"
 			>
 				<span>
-					{m.common_system_token_changed({
-						network: props.network.chain.name,
-						token: props.network.token.name
-					})}
+					{props.network.chain.name} now uses the {props.network.token.name} token
 				</span>
 
 				<HelpCircle class="mb-0.5 inline size-4" />
@@ -40,7 +36,7 @@
 					variant="full"
 					value={props.account.getBalance(props.network.config.legacytoken).balance}
 				/>
-				{m.common_balance_available_to_swap()}
+				available to swap
 			</p>
 		</div>
 
@@ -49,7 +45,7 @@
 			href="/{props.network}/swap/{props.network.config.legacytoken.id.url}/{props.network.token.id
 				.url}"
 		>
-			{m.common_swap()}
+			Swap
 		</Button>
 	</aside>
 {/if}

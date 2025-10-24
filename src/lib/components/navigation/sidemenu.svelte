@@ -3,10 +3,10 @@
 	import { page } from '$app/state';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
-	import * as m from '$lib/paraglide/messages';
 	import DebugToggle from '$lib/components/select/debug.svelte';
 	import { CodeIcon, MoonIcon } from '@lucide/svelte';
 	import SchemeToggle from '$lib/components/select/scheme.svelte';
+	import LanguageSelect from '$lib/components/select/language.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -21,38 +21,39 @@
 	let pathname = $derived(page.url.pathname.split('/'));
 
 	const destinations = $derived.by(() => {
+		const [, locale] = pathname;
 		const items = [
 			// {
-			// 	href: `/${network}`,
+			// 	href: `/${locale}/${network}`,
 			// 	text: network.chain.name,
 			// 	active: pathname[2] === String(network) && !pathname[3]
 			// },
-			{ href: `/${network}/send`, text: m.common_send(), active: pathname[3] === 'send' }
+			{ href: `/${locale}/${network}/send`, text: 'Send', active: pathname[3] === 'send' }
 		];
 
 		if (network.supports('staking')) {
 			items.push({
-				href: `/${network}/staking`,
-				text: m.common_staking(),
+				href: `/${locale}/${network}/staking`,
+				text: 'Staking',
 				active: pathname[3] === 'staking'
 			});
 		}
 
 		if (network.supports('rammarket')) {
-			items.push({ href: `/${network}/ram`, text: 'RAM', active: pathname[3] === 'ram' });
+			items.push({ href: `/${locale}/${network}/ram`, text: 'RAM', active: pathname[3] === 'ram' });
 		}
 
 		if (context.settings.data.advancedMode) {
 			items.push({
-				href: `/${network}/resources`,
-				text: m.common_resources(),
+				href: `/${locale}/${network}/resources`,
+				text: 'Resources',
 				active: pathname[3] === 'resources'
 			});
 		}
 
 		if (context.settings.data.debugMode) {
 			items.push({
-				href: `/${network}/debug/state`,
+				href: `/${locale}/${network}/debug/state`,
 				text: 'Debug State',
 				active: pathname[3] === 'debug'
 			});
@@ -60,15 +61,15 @@
 
 		if (context.account) {
 			items.splice(0, 0, {
-				href: `/${network}/account/${context.account.name}`,
-				text: m.common_my_account(),
+				href: `/${locale}/${network}/account/${context.account.name}`,
+				text: 'My Account',
 				active: pathname[3] === 'account' && pathname[4] === String(context.account.name)
 			});
 		}
 
 		items.push({
-			href: `/${network}/settings`,
-			text: m.common_settings(),
+			href: `/${locale}/${network}/settings`,
+			text: 'Settings',
 			active: pathname[3] === 'settings'
 		});
 
@@ -105,6 +106,9 @@
 			<span class="flex items-center gap-2">
 				<MoonIcon />
 				<SchemeToggle />
+			</span>
+			<span class="flex items-center gap-2">
+				<LanguageSelect />
 			</span>
 		</div>
 	{/if}

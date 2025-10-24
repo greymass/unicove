@@ -1,6 +1,4 @@
 import { type SeoConfig } from 'svead';
-import { i18n } from '$lib/i18n';
-import * as m from '$lib/paraglide/messages';
 import { ogImageURL } from '$lib/utils/opengraph';
 import type { LayoutServerLoad } from './$types';
 import type { NetworkState } from '$lib/state/network.svelte';
@@ -8,9 +6,6 @@ import { error } from '@sveltejs/kit';
 import { API_OPENGRAPH_GENERATOR, API_OPENGRAPH_TOKEN } from '$env/static/private';
 
 function generateMetadata(url: URL, network: NetworkState): SeoConfig {
-	const modified = new URL(url);
-	modified.pathname = i18n.route(url.pathname);
-
 	let open_graph_image = undefined;
 	if (API_OPENGRAPH_GENERATOR && API_OPENGRAPH_TOKEN) {
 		open_graph_image = ogImageURL(url, {
@@ -20,13 +15,9 @@ function generateMetadata(url: URL, network: NetworkState): SeoConfig {
 	}
 
 	return {
-		url: String(modified),
-		title: m.og_default_title({
-			network: network.chain.name
-		}),
-		description: m.og_default_description({
-			network: network.chain.name
-		}),
+		url: url.pathname,
+		title: `Unicove - The ${network.chain.name} web wallet and block explorer`,
+		description: `Stake, Send, Manage Tokens, and Explore ${network.chain.name} – all with ease`,
 		open_graph_image
 	};
 }

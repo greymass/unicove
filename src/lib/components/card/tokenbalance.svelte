@@ -13,7 +13,6 @@
 		ZeroUnits,
 		type TokenPair
 	} from '$lib/types/token';
-	import * as m from '$lib/paraglide/messages';
 	import { Button } from 'unicove-components';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { Code } from 'unicove-components';
@@ -143,11 +142,11 @@
 
 <Details class={className} header={DetailsHeader} {open}>
 	{@render SubBalance(
-		m.common_available(),
+		'Available',
 		_balance.balance,
 		!_balance.locked
 			? {
-					text: m.common_send(),
+					text: 'Send',
 					href: `/${network}/send/${balance.token.id.url}`
 				}
 			: undefined
@@ -155,41 +154,41 @@
 
 	{#if tokenEquals(balance.token.id, network.token.id)}
 		{#if network.supports('staking') && balanceStaked}
-			{@render SubBalance(m.common_staked(), balanceStaked.balance, {
-				text: m.common_staking(),
+			{@render SubBalance('Staked', balanceStaked.balance, {
+				text: 'Staking',
 				href: `/${network}/staking`
 			})}
 		{/if}
 
 		{#if balanceUnstaked && balanceUnstaked.balance.value > 0}
-			{@render SubBalance(m.common_unstaked(), balanceUnstaked.balance, {
-				text: m.common_withdraw(),
+			{@render SubBalance('Unstaked', balanceUnstaked.balance, {
+				text: 'Withdraw',
 				href: `/${network}/staking/withdraw`
 			})}
 		{/if}
 
 		{#if balanceDelegated && balanceDelegated.balance.value > 0}
-			{@render SubBalance(m.common_delegated(), balanceDelegated.balance, {
-				text: m.common_reclaim(),
+			{@render SubBalance('Delegated', balanceDelegated.balance, {
+				text: 'Reclaim',
 				href: `/${network}/undelegate`
 			})}
 		{/if}
 
 		{#if balanceRefunding && balanceRefunding.balance.value > 0}
-			{@render SubBalance(m.common_refunding(), balanceRefunding.balance, {
-				text: m.common_claim(),
+			{@render SubBalance('Refunding', balanceRefunding.balance, {
+				text: 'Claim',
 				href: `/${network}/refund`
 			})}
 		{/if}
 	{/if}
 
 	{#if balanceUsed && balanceUsed.balance.value > 0}
-		{@render SubBalance(m.common_used(), balanceUsed.balance)}
+		{@render SubBalance('Used', balanceUsed.balance)}
 	{/if}
 
 	{#if isRamToken && balanceWRAM}
 		{@render SubBalance('WRAM', balanceWRAM.balance, {
-			text: m.common_swap(),
+			text: 'Swap',
 			href: `/${network}/swap/${balanceWRAM.token.id.url}/${network.getRamToken().id.url}`
 		})}
 	{/if}

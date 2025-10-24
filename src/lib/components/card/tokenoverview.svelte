@@ -5,7 +5,6 @@
 	import TradingPair from '$lib/components/elements/tradingpair.svelte';
 	import { Chip } from 'unicove-components';
 	import { Breakdown, BreakdownRow } from '$lib/components/breakdown';
-	import * as m from '$lib/paraglide/messages';
 	import type { NetworkState } from '$lib/state/network.svelte';
 	import { tokenEquals, ZeroUnits, type TokenBalance, type TokenPair } from '$lib/types/token';
 	import { Button } from 'unicove-components';
@@ -64,7 +63,7 @@
 					class="col-start-1 col-end-3 row-start-1 flex flex-col py-2 @xs:flex-row @xs:justify-between"
 				>
 					<Stack class="gap-2">
-						<h4 class="text-muted text-base leading-none">{m.common_value()}</h4>
+						<h4 class="text-muted text-base leading-none">Value</h4>
 						<p class="text-on-surface text-xl leading-none font-semibold">
 							{#if value.units.gt(ZeroUnits)}
 								<AssetText variant="full" {value} />
@@ -86,9 +85,7 @@
 
 				{#if network.supports('directfunding') && tokenEquals(balance.token.id, network.getSystemToken().id) && isCurrentUser}
 					<div class="col-span-2 col-start-2 row-start-1 text-right @xs:col-span-1 @xs:col-start-3">
-						<Button href={`/${network}/fund`}>
-							{m.common_add_funds()}
-						</Button>
+						<Button href={`/${network}/fund`}>Add Funds</Button>
 					</div>
 				{/if}
 			</div>
@@ -96,11 +93,11 @@
 
 		<Breakdown {isCurrentUser}>
 			<BreakdownRow
-				key={m.common_available()}
+				key="Available"
 				value={balance.balance}
 				action={!balance.locked
 					? {
-							text: m.common_send(),
+							text: 'Send',
 							href: `/${network}/send/${balance.token.id.url}`,
 							visible: isCurrentUser
 						}
@@ -110,10 +107,10 @@
 			{#if tokenEquals(balance.token.id, network.token.id)}
 				{#if network.supports('staking')}
 					<BreakdownRow
-						key={m.common_staked()}
+						key="Staked"
 						value={balanceStaked.balance}
 						action={{
-							text: m.common_staking(),
+							text: 'Staking',
 							href: `/${network}/staking`,
 							visible: isCurrentUser
 						}}
@@ -122,10 +119,10 @@
 
 				{#if balanceUnstaked && balanceUnstaked.balance.value > 0}
 					<BreakdownRow
-						key={m.common_unstaked()}
+						key="Unstaked"
 						value={balanceUnstaked.balance}
 						action={{
-							text: m.common_withdraw(),
+							text: 'Withdraw',
 							href: `/${network}/staking/withdraw`,
 							visible: isCurrentUser
 						}}
@@ -134,10 +131,10 @@
 
 				{#if balanceDelegated && balanceDelegated.balance.value > 0}
 					<BreakdownRow
-						key={m.common_delegated()}
+						key="Delegated"
 						value={balanceDelegated.balance}
 						action={{
-							text: m.common_reclaim(),
+							text: 'Reclaim',
 							href: `/${network}/undelegate`,
 							visible: isCurrentUser
 						}}
@@ -146,10 +143,10 @@
 
 				{#if balanceRefunding && balanceRefunding.balance.value > 0}
 					<BreakdownRow
-						key={m.common_refunding()}
+						key="Refunding"
 						value={balanceRefunding.balance}
 						action={{
-							text: m.common_claim(),
+							text: 'Claim',
 							href: `/${network}/refund`,
 							visible: isCurrentUser
 						}}
@@ -158,7 +155,7 @@
 			{/if}
 
 			{#if balanceTotal && balanceTotal.balance.value > 0}
-				<BreakdownRow key={m.common_total()} value={balanceTotal.balance} />
+				<BreakdownRow key="Total" value={balanceTotal.balance} />
 			{/if}
 		</Breakdown>
 

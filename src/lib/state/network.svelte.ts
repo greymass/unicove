@@ -168,7 +168,7 @@ export class NetworkState {
 	}
 
 	public async refresh() {
-		const response = await this.fetch(`/${this}/api/network`);
+		const response = await this.fetch(`/en/${this}/api/network`);
 		this.connection.updated = new Date();
 		if (response.ok) {
 			this.connection.connected = true;
