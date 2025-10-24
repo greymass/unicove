@@ -5,15 +5,13 @@ import { PUBLIC_CHAIN_SHORT } from '$env/static/public';
 import { isNetworkShortName, ramtoken, systemtoken } from '$lib/wharf/chains';
 import { getBackendNetworkByName } from '$lib/wharf/client/ssr';
 
-import * as svelte from './locales/loader.svelte.js';
-import * as server from './locales/loader.server.svelte.js';
-import * as js from './locales/loader.js';
+import * as main from './locales/loader.ssr.svelte';
+import * as js from './locales/loader.ssr';
 import { runWithLocale, loadLocales } from 'wuchale/load-utils/server';
 import { locales } from 'virtual:wuchale/locales';
 
-await loadLocales(svelte.key, svelte.loadIDs, svelte.loadCatalog, locales);
-loadLocales(server.key, server.loadIDs, server.loadCatalog, locales);
-loadLocales(js.key, js.loadIDs, js.loadCatalog, locales);
+await loadLocales(main.key, main.loadIDs, main.loadCatalog, locales);
+await loadLocales(js.key, js.loadIDs, js.loadCatalog, locales);
 
 export const wuchaleHandle: Handle = async ({ event, resolve }) => {
 	let locale: string = 'en';
@@ -93,7 +91,7 @@ export function normalizeUrl(
 
 	const [, pathFirst, pathSecond, ...pathMore] = pathname.split('/').map((p) => p.trim());
 
-	let lang = locale || defaultLang;
+	const lang = locale || defaultLang;
 	let network = defaultNetwork;
 	const remainingPath: string[] = [];
 
@@ -106,11 +104,9 @@ export function normalizeUrl(
 	const isSecondNetwork = pathSecond && (isNetwork(pathSecond) || pathSecond in renamedNetworks);
 
 	if (isFirstLang && isSecondNetwork) {
-		lang = pathFirst;
 		network = renamedNetworks[pathSecond] || pathSecond;
 		remainingPath.push(...pathMore);
 	} else if (isFirstLang && !isSecondNetwork) {
-		lang = pathFirst;
 		if (pathSecond) remainingPath.push(pathSecond);
 		remainingPath.push(...pathMore);
 	} else if (isFirstNetwork && !pathSecond) {
@@ -163,4 +159,4 @@ export async function redirectHandle({ event, resolve }: HandleParams): Promise<
 	return resolve(event);
 }
 
-export const handle: Handle = sequence(redirectHandle, wuchaleHandle, networkHandle);
+export const handle: Handle = sequence(wuchaleHandle, redirectHandle, networkHandle);

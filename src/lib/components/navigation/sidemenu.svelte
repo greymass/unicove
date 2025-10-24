@@ -6,6 +6,7 @@
 	import DebugToggle from '$lib/components/select/debug.svelte';
 	import { CodeIcon, MoonIcon } from '@lucide/svelte';
 	import SchemeToggle from '$lib/components/select/scheme.svelte';
+	import LanguageSelect from '$lib/components/select/language.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -105,6 +106,9 @@
 			<span class="flex items-center gap-2">
 				<MoonIcon />
 				<SchemeToggle />
+			</span>
+			<span class="flex items-center gap-2">
+				<LanguageSelect />
 			</span>
 		</div>
 	{/if}

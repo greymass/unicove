@@ -4,8 +4,6 @@
 	import { onMount, setContext, untrack } from 'svelte';
 	import { Head, type SeoConfig } from 'svead';
 	import extend from 'just-extend';
-	import { loadLocale } from 'wuchale/load-utils';
-	import '../../../locales/loader.svelte';
 
 	import {
 		PUBLIC_ACCOUNT_UPDATE_INTERVAL,
@@ -31,6 +29,7 @@
 	import { MetaMaskState } from '$lib/state/metamask.svelte.js';
 	import { checkForSnap } from '$lib/metamask-snap.js';
 	import { checkIsFlask, getSnapsProvider } from '@wharfkit/wallet-plugin-metamask';
+	import { goto } from '$app/navigation';
 
 	let { children, data } = $props();
 
@@ -170,10 +169,6 @@
 	const ACCOUNT_UPDATE_INTERVAL = Number(PUBLIC_ACCOUNT_UPDATE_INTERVAL);
 	const NETWORK_UPDATE_INTERVAL = Number(PUBLIC_NETWORK_UPDATE_INTERVAL);
 	const MARKET_UPDATE_INTERVAL = Number(PUBLIC_MARKET_UPDATE_INTERVAL);
-
-	$effect(() => {
-		loadLocale(settings.data.locale || data.locale || 'en');
-	});
 
 	onMount(() => {
 		// Set the chain to the current network chain

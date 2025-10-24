@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2025-10-23T22:50:28.162Z\n"
+"PO-Revision-Date: 2025-10-24T01:21:55.503Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -460,10 +460,6 @@ msgstr "JSON"
 #: src/lib/components/select/language.svelte
 msgid "Unknown"
 msgstr "Unknown"
-
-#: src/lib/components/select/language.svelte
-msgid "Select a language"
-msgstr "Select a language"
 
 #: src/lib/components/toast/toast.svelte
 msgid "X"
@@ -4348,9 +4344,9 @@ msgstr "The {0} network's native token, {1}, can be used for staking rewards, to
 msgid "Get Tokens"
 msgstr "Get Tokens"
 
-#. placeholder {0}: symbol?.name || ''
-#. placeholder {0}: symbol?.name || ''
-#. placeholder {0}: symbol?.name || ''
+#. placeholder {0}: symbol.name
+#. placeholder {0}: symbol.name
+#. placeholder {0}: symbol.name
 #. placeholder {0}: String(network.token.symbol.name)
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts

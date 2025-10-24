@@ -7,21 +7,27 @@
 	import { goto } from '$app/navigation';
 	import { setLocale } from '$lib/remote/locale.remote';
 	import { locales } from 'virtual:wuchale/locales';
+	import { page } from '$app/state';
 
 	const displayName = (loc: string) =>
 		new Intl.DisplayNames([loc], { type: 'language' }).of(loc) || 'Unknown';
 
 	const context = getContext<UnicoveContext>('state');
-	let defaultLang = {
+	let defaultLang = $derived({
 		value: context.settings.data.locale,
 		label: displayName(context.settings.data.locale)
-	};
+	});
 
 	const handleSelect: CreateSelectProps<string>['onSelectedChange'] = ({ next }) => {
 		if (next?.value) {
 			setLocale(next.value).then(() => {
 				context.settings.data.locale = next.value;
-				goto(`/${next.value}/${context.network}/settings`, { replaceState: true });
+				// change URL language
+				const pathname = page.url.pathname;
+				const parts = pathname.split('/').filter(Boolean);
+				parts[0] = next.value;
+				const updatedPath = `/${parts.join('/')}${page.url.search}`;
+				goto(updatedPath, { replaceState: true });
 			});
 		}
 		return next;
@@ -48,7 +54,7 @@
 	aria-label="langauge-select-label"
 	id="language-select"
 >
-	{$selectedLabel || 'Select a language'}
+	{displayName(context.settings.data.locale)}
 	<ChevronDown class="size-5 transition-transform duration-100 {$open ? 'rotate-180' : ''}" />
 </button>
 

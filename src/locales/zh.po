@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2025-10-23T22:50:28.170Z\n"
+"PO-Revision-Date: 2025-10-24T01:21:55.510Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -459,10 +459,6 @@ msgstr ""
 
 #: src/lib/components/select/language.svelte
 msgid "Unknown"
-msgstr ""
-
-#: src/lib/components/select/language.svelte
-msgid "Select a language"
 msgstr ""
 
 #: src/lib/components/toast/toast.svelte
@@ -4258,9 +4254,9 @@ msgstr "{0} 网络的原生代币 {1} 可用于质押奖励、购买和出售 RA
 msgid "Get Tokens"
 msgstr "获取代币"
 
-#. placeholder {0}: symbol?.name || ''
-#. placeholder {0}: symbol?.name || ''
-#. placeholder {0}: symbol?.name || ''
+#. placeholder {0}: symbol.name
+#. placeholder {0}: symbol.name
+#. placeholder {0}: symbol.name
 #. placeholder {0}: String(network.token.symbol.name)
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts

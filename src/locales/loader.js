@@ -1,9 +1,11 @@
 // This is just the default loader.
 // You can customize it however you want, it will not be overwritten once it exists and is not empty.
 
-import { loadCatalog, loadIDs, key } from './proxy.js';
-import { currentCatalog } from 'wuchale/load-utils/server';
+/// <reference types="wuchale/virtual" />
 
-export { loadCatalog, loadIDs, key }; // for hooks.server.{js,ts}
+import { loadCatalog, loadIDs, key } from 'virtual:wuchale/proxy' // or proxy/sync
+import { registerLoaders } from 'wuchale/load-utils'
 
-export default (/** @type {string} */ loadID) => currentCatalog(key, loadID);
+// two exports. can be used anywhere
+export const get = registerLoaders(key, loadCatalog, loadIDs)
+export default get
