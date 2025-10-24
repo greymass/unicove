@@ -76,7 +76,7 @@
 		"@wharfkit/wallet-plugin-privatekey": "^1.1.0",
 		"@wharfkit/wallet-plugin-scatter": "^1.5.1",
 		"@wharfkit/wallet-plugin-tokenpocket": "^1.6.3",
-		"@wharfkit/wallet-plugin-web-authenticator": "^0.4.0",
+		"@wharfkit/wallet-plugin-web-authenticator": "^0.5.0",
 		"@wharfkit/wallet-plugin-wombat": "^1.5.1",
 		"@wharfkit/web-renderer": "^1.4.1",
 		"chart.js": "^4.4.3",
