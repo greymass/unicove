@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2025-10-24T01:21:55.503Z\n"
+"PO-Revision-Date: 2025-10-25T23:06:56.766Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -5461,12 +5461,12 @@ msgstr "The {0} account(s) associated with this public key"
 
 #. placeholder {0}: String(params.name)
 #. placeholder {1}: network.chain.name
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.ts
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.ts
 msgid "An overview of the {0} account on the {1} Network. View account assets, activity, resources and more."
 msgstr "An overview of the {0} account on the {1} Network. View account assets, activity, resources and more."
 
 #. placeholder {0}: network.chain.name
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.ts
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.ts
 msgid "Account overview on the {0} Network"
 msgstr "Account overview on the {0} Network"
 
