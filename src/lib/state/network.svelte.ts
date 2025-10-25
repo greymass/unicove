@@ -54,6 +54,7 @@ import {
 	PUBLIC_FEATURE_UNICOVE_CONTRACT_API,
 	PUBLIC_FEATURE_VAULTA_CORE_CONTRACT
 } from '$env/static/public';
+import { localizePath } from '$lib/utils/url';
 
 export class NetworkState {
 	// Readonly state
@@ -168,7 +169,7 @@ export class NetworkState {
 	}
 
 	public async refresh() {
-		const response = await this.fetch(`/en/${this}/api/network`);
+		const response = await this.fetch(localizePath(`/api/network`));
 		this.connection.updated = new Date();
 		if (response.ok) {
 			this.connection.connected = true;

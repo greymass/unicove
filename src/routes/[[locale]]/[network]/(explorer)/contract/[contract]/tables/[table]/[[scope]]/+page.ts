@@ -1,9 +1,12 @@
+import { localizePath } from '$lib/utils/url';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ fetch, params, parent, url }) => {
 	const { contract, network } = await parent();
 	const response = await fetch(
-		`/en/${network}/api/contract/${params.contract}/table/${params.table}/${params.scope || params.contract}?${url.searchParams}`
+		localizePath(
+			`/api/contract/${params.contract}/table/${params.table}/${params.scope || params.contract}?${url.searchParams}`
+		)
 	);
 	const json = await response.json();
 	return {

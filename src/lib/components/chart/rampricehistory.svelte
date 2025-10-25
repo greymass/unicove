@@ -8,7 +8,7 @@
 	import { ramtoken } from '$lib/wharf/chains';
 	import { ZeroUnits } from '$lib/types/token';
 
-	const { network } = getContext<UnicoveContext>('state');
+	const { network, urlPath } = getContext<UnicoveContext>('state');
 	const market = getContext<MarketContext>('market');
 
 	type Price = { date: string; value: number };
@@ -17,7 +17,7 @@
 	const fetchRamPrices = async () => {
 		if (network.supports('timeseries')) {
 			try {
-				const response = await fetch(`/${network}/api/metrics/marketprice/ram`);
+				const response = await fetch(urlPath(`/api/metrics/marketprice/ram`));
 				const parsedRamResponse: APIResponse = await response.json();
 
 				if (Array.isArray(parsedRamResponse) && parsedRamResponse.length) {

@@ -7,7 +7,7 @@ import { localizePath } from '$lib/utils/url';
 
 export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 	const { network } = await parent();
-	const response = await fetch(`/en/${network}/api/contract/${params.contract}`);
+	const response = await fetch(localizePath(`/api/contract/${params.contract}`));
 	const json = await response.json();
 
 	if (!response.ok || !json.abi.abi) {

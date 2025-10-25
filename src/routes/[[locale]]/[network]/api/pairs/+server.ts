@@ -12,10 +12,11 @@ import {
 	PUBLIC_LEGACY_TOKEN_EXCHANGERATE
 } from '$env/static/public';
 import { cmctokens } from './cmctokenmap';
+import { localizePath } from '$lib/utils/url';
 
 export async function GET({ fetch, locals: { network }, url }: RequestEvent) {
 	const pairs: TokenPair[] = [];
-	const currency = await fetch(`/en/${network}/api/currency/usd`);
+	const currency = await fetch(localizePath(`/api/currency/usd`));
 	if (currency.ok) {
 		const fiat = await currency.json();
 		pairs.push(...fiat.pairs.map((pair: TokenPair) => TokenPair.from(pair)));

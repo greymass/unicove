@@ -9,6 +9,7 @@ import {
 import { Asset, Serializer } from '@wharfkit/session';
 import type { RequestEvent } from './$types';
 import { json } from '@sveltejs/kit';
+import { localizePath } from '$lib/utils/url';
 
 export async function GET({ fetch, locals: { network }, params, url }: RequestEvent) {
 	let basePair: TokenDefinition;
@@ -19,7 +20,7 @@ export async function GET({ fetch, locals: { network }, params, url }: RequestEv
 	}
 	// Allow mock data for prices to be passed for testing
 	const mockPrice = url.searchParams.get('mock');
-	let pairsUrl = `/en/${network}/api/pairs`;
+	let pairsUrl = localizePath(`/api/pairs`);
 	if (mockPrice) {
 		pairsUrl += `?mock=${Asset.from(mockPrice)}`;
 	}
@@ -45,7 +46,7 @@ export async function GET({ fetch, locals: { network }, params, url }: RequestEv
 	}
 	const historic: SystemHistoricPrices = SystemHistoricPrices.from({});
 	if (network.supports('timeseries')) {
-		const response = await fetch(`/en/${network}/api/metrics/marketprice/historic`);
+		const response = await fetch(localizePath(`/api/metrics/marketprice/historic`));
 		if (response.ok) {
 			const parsedResponse = await response.json();
 			historic.ram = parsedResponse.ram;

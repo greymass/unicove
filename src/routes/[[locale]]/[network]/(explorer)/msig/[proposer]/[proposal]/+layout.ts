@@ -1,10 +1,11 @@
 import { Name, PackedTransaction, PermissionLevel } from '@wharfkit/antelope';
 import type { LayoutLoad } from './$types';
 import { error } from '@sveltejs/kit';
+import { localizePath } from '$lib/utils/url';
 
 export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 	const { network } = await parent();
-	const response = await fetch(`/en/${network}/api/msig/${params.proposer}/${params.proposal}`);
+	const response = await fetch(localizePath(`/api/msig/${params.proposer}/${params.proposal}`));
 	const json = await response.json();
 
 	if ('error' in json) {

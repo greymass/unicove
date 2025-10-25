@@ -3,6 +3,7 @@ import { error } from '@sveltejs/kit';
 
 import type { PageLoad } from './$types';
 import { LightAPIBalance } from '$lib/types';
+import { localizePath } from '$lib/utils/url';
 
 interface LightAPIHolder {
 	account: NameType;
@@ -13,7 +14,7 @@ export const load: PageLoad = async ({ fetch, params, parent, url }) => {
 	const { network } = await parent();
 
 	const count = Number(url.searchParams.get('count')) || 100;
-	const baseUrl = `/en/${network}/api/token/${params.contract}/${params.symbol}?count=${count}`;
+	const baseUrl = localizePath(`/api/token/${params.contract}/${params.symbol}?count=${count}`);
 	const response = await fetch(baseUrl);
 	if (!response.ok) {
 		return error(404, 'Token not found');

@@ -2,6 +2,7 @@ import { Asset } from '@wharfkit/antelope';
 
 import type { HistoricalPrice } from '$lib/types';
 import type { PageLoad } from './$types';
+import { localizePath } from '$lib/utils/url';
 
 export const load: PageLoad = async ({ fetch, parent }) => {
 	const { network } = await parent();
@@ -10,7 +11,7 @@ export const load: PageLoad = async ({ fetch, parent }) => {
 
 	if (network.supports('timeseries')) {
 		try {
-			const response: Response = await fetch(`/en/${network}/api/metrics/marketprice/ram`);
+			const response: Response = await fetch(localizePath(`/api/metrics/marketprice/ram`));
 			const parsedResponse: { date: string; value: number }[] | { error: string } =
 				await response.json();
 			if ('error' in parsedResponse && parsedResponse.error) {

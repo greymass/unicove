@@ -7,6 +7,7 @@ import {
 	ActivityResponseAction
 } from '$lib/types/transaction';
 import { systemcontract } from '$lib/wharf/chains';
+import { localizePath } from '$lib/utils/url';
 
 export class Scene {
 	firstTime: number = $state(0);
@@ -117,11 +118,11 @@ export class ActivityLoader {
 			this.scene.setLoading(true);
 			const startIndex = more ? this.scene!.loadStart : 1;
 			// Use the /activity endpoint (robo) for generic activity feeds
-			let path = `/en/${this.network}/api/account/${account}/activity/${startIndex}`;
+			let path = localizePath(`/api/account/${account}/activity/${startIndex}`);
 			this.filtering = false;
 			// If filters are defined, use the /actions endpoint (hyperion) for specific contract actions
 			if (this.contract) {
-				path = `/en/${this.network}/api/account/${account}/actions/${startIndex}/${this.contract}`;
+				path = localizePath(`/api/account/${account}/actions/${startIndex}/${this.contract}`);
 				this.filtering = true;
 				if (this.action) {
 					path += `/${this.action}`;

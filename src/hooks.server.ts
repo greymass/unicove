@@ -46,7 +46,7 @@ export async function redirectHandle({ event, resolve }: HandleParams): Promise<
 		forceLocale: event.locals.locale
 	});
 
-	if (pathname !== url) {
+	if (pathname !== url && !pathname.includes('/api/')) {
 		return new Response(undefined, {
 			headers: { Location: url + search },
 			status: 302

@@ -1,4 +1,5 @@
 import type { UnicoveContext } from '$lib/state/client.svelte';
+import { localizePath } from '$lib/utils/url';
 
 export class CoinbaseOnRamp {
 	private readonly ONRAMP_URL = 'https://pay.coinbase.com/buy';
@@ -34,7 +35,7 @@ export class CoinbaseOnRamp {
 		try {
 			const network = this.context.network.toString();
 			// Get the unique session token
-			const response = await fetch(`/en/${network}/api/onramp/coinbase/session`, {
+			const response = await fetch(localizePath(`/api/onramp/coinbase/session`), {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'

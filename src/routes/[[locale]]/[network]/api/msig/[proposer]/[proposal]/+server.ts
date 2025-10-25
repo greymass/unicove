@@ -4,6 +4,7 @@ import { Name } from '@wharfkit/antelope';
 import { getCacheHeaders } from '$lib/utils';
 import type { RequestEvent } from './$types';
 import * as MsigContract from '$lib/wharf/contracts/msig';
+import { localizePath } from '$lib/utils/url';
 
 export async function GET({ fetch, locals: { network }, params }: RequestEvent) {
 	const scope = Name.from(params.proposer);
@@ -28,7 +29,7 @@ export async function GET({ fetch, locals: { network }, params }: RequestEvent) 
 
 	const approvals = await network.contracts.msig.table('approvals2', scope).get(name);
 
-	const response = await fetch(`/en/${network}/api/producers/top30`);
+	const response = await fetch(localizePath(`/api/producers/top30`));
 	const { producers } = await response.json();
 
 	return json(

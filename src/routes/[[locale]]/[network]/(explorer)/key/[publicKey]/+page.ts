@@ -2,6 +2,7 @@ import { error } from '@sveltejs/kit';
 import { PublicKey } from '@wharfkit/antelope';
 import type { PageLoad } from './$types';
 import { PUBLIC_CHAIN_SHORT } from '$env/static/public';
+import { localizePath } from '$lib/utils/url';
 
 export const load: PageLoad = async ({ fetch, params, parent }) => {
 	let pubkey: PublicKey;
@@ -16,7 +17,7 @@ export const load: PageLoad = async ({ fetch, params, parent }) => {
 	}
 
 	const { network } = await parent();
-	const accounts = await fetch(`/en/${PUBLIC_CHAIN_SHORT}/api/key/${params.publicKey}`)
+	const accounts = await fetch(localizePath(`/api/key/${params.publicKey}`))
 		.then((response) => response.json())
 		.then((json) => json.accounts || []);
 
