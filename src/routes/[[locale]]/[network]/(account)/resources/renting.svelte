@@ -133,8 +133,8 @@
 
 {#if transactionId}
 	<TransactSummary {transactionId} />
-	<Button href={`/${network}/resources`} variant="secondary">Resources</Button>
-	<Button href={`/${network}/account/${context.account?.name}`}>View my account</Button>
+	<Button href={context.urlPath('/resources')} variant="secondary">Resources</Button>
+	<Button href={context.urlPath(`/account/${context.account?.name}`)}>View my account</Button>
 {:else if errorMessage}
 	<TransactError error={errorMessage} />
 	<Button onclick={resetStateAfterTrasaction}>Close</Button>

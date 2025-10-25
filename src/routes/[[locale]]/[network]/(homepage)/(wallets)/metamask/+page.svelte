@@ -189,7 +189,7 @@
 					</Stack>
 					{#if context.wharf.session}
 						<Cluster>
-							<Button href={`/${data.network}/account/${context.wharf.session.actor}`}
+							<Button href={context.urlPath(`/account/${context.wharf.session.actor}`)}
 								>View my account</Button
 							>
 						</Cluster>

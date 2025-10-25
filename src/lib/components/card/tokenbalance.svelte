@@ -20,6 +20,7 @@
 	import { Details } from 'unicove-components';
 
 	const context = getContext<UnicoveContext>('state');
+	const { urlPath } = context;
 
 	interface CTA {
 		text: string;
@@ -99,13 +100,13 @@
 				src={_balance.token.media?.logo?.light}
 			/>
 			{#if isRamToken}
-				<Link class="text-on-surface" href="/{network}/ram">
+				<Link class="text-on-surface" href={urlPath('/ram')}>
 					{balance.token.name} (RAM)
 				</Link>
 			{:else}
 				<Link
 					class="text-on-surface"
-					href="/{network}/token/{balance.token.contract}/{balance.token.name}"
+					href={urlPath(`/token/${balance.token.contract}/${balance.token.name}`)}
 				>
 					{balance.token.name}
 					<Info class="text-muted size-4" />
@@ -147,7 +148,7 @@
 		!_balance.locked
 			? {
 					text: 'Send',
-					href: `/${network}/send/${balance.token.id.url}`
+					href: urlPath(`/send/${balance.token.id.url}`)
 				}
 			: undefined
 	)}
@@ -156,28 +157,28 @@
 		{#if network.supports('staking') && balanceStaked}
 			{@render SubBalance('Staked', balanceStaked.balance, {
 				text: 'Staking',
-				href: `/${network}/staking`
+				href: urlPath(`/staking`)
 			})}
 		{/if}
 
 		{#if balanceUnstaked && balanceUnstaked.balance.value > 0}
 			{@render SubBalance('Unstaked', balanceUnstaked.balance, {
 				text: 'Withdraw',
-				href: `/${network}/staking/withdraw`
+				href: urlPath(`/staking/withdraw`)
 			})}
 		{/if}
 
 		{#if balanceDelegated && balanceDelegated.balance.value > 0}
 			{@render SubBalance('Delegated', balanceDelegated.balance, {
 				text: 'Reclaim',
-				href: `/${network}/undelegate`
+				href: urlPath(`/undelegate`)
 			})}
 		{/if}
 
 		{#if balanceRefunding && balanceRefunding.balance.value > 0}
 			{@render SubBalance('Refunding', balanceRefunding.balance, {
 				text: 'Claim',
-				href: `/${network}/refund`
+				href: urlPath(`/refund`)
 			})}
 		{/if}
 	{/if}
@@ -189,7 +190,7 @@
 	{#if isRamToken && balanceWRAM}
 		{@render SubBalance('WRAM', balanceWRAM.balance, {
 			text: 'Swap',
-			href: `/${network}/swap/${balanceWRAM.token.id.url}/${network.getRamToken().id.url}`
+			href: urlPath(`/swap/${balanceWRAM.token.id.url}/${network.getRamToken().id.url}`)
 		})}
 	{/if}
 

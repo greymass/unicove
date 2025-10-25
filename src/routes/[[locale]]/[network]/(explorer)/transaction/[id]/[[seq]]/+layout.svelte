@@ -6,7 +6,7 @@
 
 	const { children, data } = $props();
 
-	const { settings } = getContext<UnicoveContext>('state');
+	const { settings, urlPath } = getContext<UnicoveContext>('state');
 
 	let ramDeltas = $derived.by(() => {
 		return data.transaction.traces.reduce((acc, trace) => {
@@ -18,7 +18,7 @@
 	});
 
 	const options = $derived.by(() => {
-		let urlBase = `/${data.network}/transaction/${data.id}`;
+		let urlBase = urlPath(`/transaction/${data.id}`);
 		if (data.seq) {
 			urlBase += `/${data.seq}`;
 		}

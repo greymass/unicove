@@ -4,12 +4,16 @@
 	import StakedHEX from './stakedhex.svelte';
 	import { getAPR } from '$lib/utils/staking';
 	import { Button } from 'unicove-components';
+	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import { getContext } from 'svelte';
 
 	interface Props {
 		network: NetworkState;
 	}
 
 	let { network }: Props = $props();
+
+	const { urlPath } = getContext<UnicoveContext>('state');
 
 	const apr = $derived(getAPR(network.token.distribution?.staked));
 </script>
@@ -33,7 +37,7 @@
 			usable again after a 21 day lockup period.
 		</p>
 		<div class="mt-2 flex items-center gap-6">
-			<Button variant="primary" href={`/${network}/staking`}>Stake Tokens</Button>
+			<Button variant="primary" href={urlPath(`/staking`)}>Stake Tokens</Button>
 			<Button variant="text" href="https://eosnetwork.com/staking-rewards/">Learn more</Button>
 		</div>
 		<p class="text-muted text-xs">

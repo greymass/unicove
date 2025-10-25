@@ -7,11 +7,14 @@
 	import { ArrowLeftRight, ArrowRight, ArrowLeft } from '@lucide/svelte';
 	import { DD, DL, DLRow } from 'unicove-components';
 	import { goto } from '$app/navigation';
+	import type { UnicoveContext } from '$lib/state/client.svelte.js';
+	import { getContext } from 'svelte';
 
 	let { data } = $props();
+	const { urlPath } = getContext<UnicoveContext>('state');
 
-	const previousBlockLink = $derived(`/${data.network}/block/${Number(data.height) - 1}`);
-	const nextBlockLink = $derived(`/${data.network}/block/${Number(data.height) + 1}`);
+	const previousBlockLink = $derived(urlPath(`/block/${Number(data.height) - 1}`));
+	const nextBlockLink = $derived(urlPath(`/block/${Number(data.height) + 1}`));
 
 	const handleKeydown = (e: KeyboardEvent) => {
 		// Don't do anything if search is open

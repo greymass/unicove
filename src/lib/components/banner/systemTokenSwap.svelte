@@ -5,6 +5,10 @@
 	import { Button } from 'unicove-components';
 	import { HelpCircle } from '@lucide/svelte';
 	import { Int64 } from '@wharfkit/session';
+	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import { getContext } from 'svelte';
+
+	const { urlPath } = getContext<UnicoveContext>('state');
 
 	interface Props {
 		account?: AccountState;
@@ -42,8 +46,9 @@
 
 		<Button
 			class="justify-self-center"
-			href="/{props.network}/swap/{props.network.config.legacytoken.id.url}/{props.network.token.id
-				.url}"
+			href={urlPath(
+				`/swap/${props.network.config.legacytoken.id.url}/${props.network.token.id.url}`
+			)}
 		>
 			Swap
 		</Button>

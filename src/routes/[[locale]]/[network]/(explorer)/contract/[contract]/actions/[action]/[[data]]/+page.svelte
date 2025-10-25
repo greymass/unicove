@@ -114,13 +114,15 @@
 
 	const link = $derived(
 		serialized
-			? `${page.url.protocol}//${page.url.host}/${data.network}/contract/${data.contract}/actions/${data.action.name}/${serialized}?readonly=${useReadOnly}&triggerOnPageLoad=${triggerOnPageLoad}`
+			? context.url(
+					`/contract/${data.contract}/actions/${data.action.name}/${serialized}?readonly=${useReadOnly}&triggerOnPageLoad=${triggerOnPageLoad}`
+				)
 			: undefined
 	);
 
 	const api = $derived(
 		serialized
-			? `${page.url.protocol}//${page.url.host}/${data.network}/api/readonly/${data.contract}/${data.action.name}/${serialized}`
+			? context.url(`/api/readonly/${data.contract}/${data.action.name}/${serialized}`)
 			: undefined
 	);
 

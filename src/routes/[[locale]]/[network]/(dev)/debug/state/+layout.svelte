@@ -1,8 +1,12 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import AccountNavigation from '$lib/components/navigation/accountnavigation.svelte';
+	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import { getContext } from 'svelte';
 
-	let { children, data } = $props();
+	let { children } = $props();
+
+	const { urlPath } = getContext<UnicoveContext>('state');
 
 	const activeItem = $derived($page.url.pathname.split('/').pop());
 </script>
@@ -11,30 +15,30 @@
 	options={[
 		{
 			active: activeItem === 'account',
-			href: `/${data.network}/debug/state/account`,
+			href: urlPath(`/debug/state/account`),
 			text: 'Account'
 		},
 		{
 			active: activeItem === 'config',
-			href: `/${data.network}/debug/state/config`,
+			href: urlPath(`/debug/state/config`),
 			text: 'Config'
 		},
 		{
 			active: activeItem === 'contracts',
-			href: `/${data.network}/debug/state/contracts`,
+			href: urlPath(`/debug/state/contracts`),
 			text: 'Contracts'
 		},
 		{
 			active: activeItem === 'market',
-			href: `/${data.network}/debug/state/market`,
+			href: urlPath(`/debug/state/market`),
 			text: 'Market'
 		},
 		{
 			active: activeItem === 'network',
-			href: `/${data.network}/debug/state/network`,
+			href: urlPath(`/debug/state/network`),
 			text: 'Network'
 		},
-		{ active: activeItem === 'wharf', href: `/${data.network}/debug/state/wharf`, text: 'Wharf' }
+		{ active: activeItem === 'wharf', href: urlPath(`/debug/state/wharf`), text: 'Wharf' }
 	]}
 />
 

@@ -14,7 +14,7 @@
 	<p>The chain configuration as it exists in the client.</p>
 	{#if PUBLIC_ENVIRONMENT !== 'production'}
 		<p>
-			<Button href={`/${context.network}/api/config`}>Open SSR chain configuration</Button>
+			<Button href={context.urlPath(`/api/config`)}>Open SSR chain configuration</Button>
 		</p>
 	{/if}
 	<Code>

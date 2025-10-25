@@ -503,12 +503,12 @@
 
 		<footer class="">
 			<Button
-				href={`/${data.network}/account/${data.account.name}/permissions`}
+				href={context.urlPath(`/account/${data.account.name}/permissions`)}
 				variant="secondary"
 			>
 				Back to Permissions
 			</Button>
-			<Button href={`/${data.network}/account/${data.account.name}`}>View my account</Button>
+			<Button href={context.urlPath(`/account/${data.account.name}`)}>View my account</Button>
 		</footer>
 	{:else if transactError}
 		<!-- Unsuccessful transaction -->
@@ -551,7 +551,8 @@
 					<Button class="text-error" variant="text" onclick={deleteAuth}>Delete Permission</Button>
 				{/if}
 				<div class="flex grow flex-col flex-wrap justify-end gap-6 @lg:flex-row">
-					<Button class="grow-0" variant="text" href={data.backPath}>Cancel</Button>
+					<Button class="grow-0" variant="text" href={context.urlPath(data.backPath)}>Cancel</Button
+					>
 					<Button
 						class="grow-0"
 						variant="primary"

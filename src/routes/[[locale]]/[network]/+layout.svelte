@@ -30,7 +30,7 @@
 	import { checkForSnap } from '$lib/metamask-snap.js';
 	import { checkIsFlask, getSnapsProvider } from '@wharfkit/wallet-plugin-metamask';
 	import { DEFAULT_LOCALE, LOCALES } from '$lib/constants/locales.js';
-	import { localizeUrl } from '$lib/utils/url';
+	import { localizePath, localizeUrl } from '$lib/utils/url';
 
 	let { children, data } = $props();
 
@@ -52,6 +52,14 @@
 	let account: AccountState | undefined = $state();
 	let accountValue: AccountValueState | undefined = $state();
 
+	const url = (url: string) => {
+		return localizeUrl(url, { defaultLocale: data.locale });
+	};
+
+	const urlPath = (path: string) => {
+		return localizePath(path, { defaultLocale: data.locale });
+	};
+
 	setContext<UnicoveContext>('state', {
 		get account() {
 			return account;
@@ -68,6 +76,8 @@
 		get settings() {
 			return settings;
 		},
+		url,
+		urlPath,
 		get wharf() {
 			return wharf;
 		}
@@ -258,7 +268,7 @@
 >
 	<aside class="relative col-start-1 col-end-3 row-span-full row-start-1 hidden h-full md:block">
 		<nav class="sticky top-4 row-span-2 flex h-[calc(100svh-1rem)] flex-col content-start gap-6">
-			<a href="/{data.network}" class="grid h-12 items-center" aria-label="home">
+			<a href={urlPath('/')} class="grid h-12 items-center" aria-label="home">
 				<Unicovelogo small class="items-start" />
 			</a>
 			<SideMenuContent network={data.network} />

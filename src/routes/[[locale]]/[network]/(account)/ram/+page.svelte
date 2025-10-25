@@ -80,7 +80,7 @@
 					<AssetText class=" text-xl font-semibold" variant="full" value={ramLiquid} />
 				</div>
 
-				<Button variant="secondary" href="/{String(data.network)}/ram/buy">Buy</Button>
+				<Button variant="secondary" href={context.urlPath('/ram/buy')}>Buy</Button>
 			</div>
 
 			<div class="grid content-between gap-4">
@@ -93,7 +93,7 @@
 						<AssetText class="text-muted  text-base" variant="full" value={balanceValueFiat} />
 					</div>
 				</div>
-				<Button variant="secondary" href="/{String(data.network)}/ram/sell">Sell</Button>
+				<Button variant="secondary" href={context.urlPath('/ram/sell')}>Sell</Button>
 			</div>
 		</Card>
 

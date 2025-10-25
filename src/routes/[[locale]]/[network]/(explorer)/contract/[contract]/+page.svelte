@@ -10,7 +10,7 @@
 </script>
 
 {#if context.wharf.session}
-	<Button variant="secondary" href={`/${data.network}/upload/${data.contract}`} class="w-full">
+	<Button variant="secondary" href={context.urlPath(`/upload/${data.contract}`)} class="w-full">
 		Upload Contract
 	</Button>
 {/if}

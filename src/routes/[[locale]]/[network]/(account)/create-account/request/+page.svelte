@@ -136,7 +136,7 @@
 				zlib
 			};
 			const request = await SigningRequest.create({ actions }, opts);
-			redirectLink = `/${context.network}/prompt/${request.encode(true, false, '')}`;
+			redirectLink = context.urlPath(`/prompt/${request.encode(true, false, '')}`);
 			redirecting = true;
 			goto(redirectLink);
 		}

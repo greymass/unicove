@@ -7,41 +7,41 @@
 	import { Button } from 'unicove-components';
 
 	const context = getContext<UnicoveContext>('state');
+	const { urlPath } = context;
 	const { children, data } = $props();
 
 	const options = $derived.by(() => {
 		const account = String(data.account.name);
-		const network = String(data.account.network);
 		let items = [
-			{ href: `/${network}/account/${account}`, text: 'Overview' },
-			{ href: `/${network}/account/${account}/activity`, text: 'Activity' },
-			{ href: `/${network}/account/${account}/balances`, text: 'Balances' }
+			{ href: urlPath(`/account/${account}`), text: 'Overview' },
+			{ href: urlPath(`/account/${account}/activity`), text: 'Activity' },
+			{ href: urlPath(`/account/${account}/balances`), text: 'Balances' }
 		];
 
 		if (context.settings.data.advancedMode) {
 			items.push({
-				href: `/${network}/account/${account}/permissions`,
+				href: urlPath(`/account/${account}/permissions`),
 				text: 'Permissions'
 			});
-			items.push({ href: `/${network}/account/${account}/votes`, text: 'Votes' });
+			items.push({ href: urlPath(`/account/${account}/votes`), text: 'Votes' });
 			if (data.account.proposals.length > 0) {
 				items.push({
-					href: `/${network}/account/${account}/proposals`,
+					href: urlPath(`/account/${account}/proposals`),
 					text: `Proposals (${data.account.proposals.length})`
 				});
 			}
-			items.push({ href: `/${network}/account/${account}/authority`, text: 'Authority' });
-			items.push({ href: `/${network}/account/${account}/data`, text: 'Data' });
+			items.push({ href: urlPath(`/account/${account}/authority`), text: 'Authority' });
+			items.push({ href: urlPath(`/account/${account}/data`), text: 'Data' });
 		}
 
 		if (context.settings.data.debugMode) {
-			items.push({ href: `/${network}/account/${account}/ram`, text: 'RAM' });
+			items.push({ href: urlPath(`/account/${account}/ram`), text: 'RAM' });
 			items.push({
-				href: `/${network}/account/${account}/resources`,
+				href: urlPath(`/account/${account}/resources`),
 				text: 'Resources'
 			});
-			items.push({ href: `/${network}/account/${account}/staked`, text: 'Staked' });
-			items.push({ href: `/${network}/account/${account}/chaindata`, text: 'Data' });
+			items.push({ href: urlPath(`/account/${account}/staked`), text: 'Staked' });
+			items.push({ href: urlPath(`/account/${account}/chaindata`), text: 'Data' });
 		}
 
 		return items;

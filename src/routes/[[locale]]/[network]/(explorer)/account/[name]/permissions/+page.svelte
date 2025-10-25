@@ -51,7 +51,7 @@
 
 	{#if currentUser}
 		<Button
-			href="/{data.network}/account/{data.account.name}/permissions/{generateRandomName()}"
+			href={context.urlPath(`/account/${data.account.name}/permissions/${generateRandomName()}`)}
 			class="flex-none"
 		>
 			New Permission

@@ -13,6 +13,8 @@ export interface UnicoveContext {
 	metamask: MetaMaskState;
 	network: NetworkState;
 	settings: SettingsState;
+	url: (url: string) => string;
+	urlPath: (path: string) => string;
 	wharf: WharfState;
 }
 

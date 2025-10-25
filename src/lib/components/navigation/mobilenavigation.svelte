@@ -72,7 +72,7 @@
 				opacity: 1
 			}}
 		>
-			<a href="/{network}" onclick={closeMenu} aria-label="Unicove Home">
+			<a href={context.urlPath(`/`)} onclick={closeMenu} aria-label="Unicove Home">
 				<Unicovelogo wordmark />
 			</a>
 			<SideMenuContent callbackFn={closeMenu} {network} />

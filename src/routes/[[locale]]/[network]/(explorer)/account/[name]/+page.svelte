@@ -107,7 +107,7 @@
 					? [
 							{
 								text: 'Add Funds',
-								href: `/${data.network}/fund`,
+								href: context.urlPath(`/fund`),
 								visible: isCurrentUser
 							}
 						]
@@ -130,7 +130,7 @@
 					? [
 							{
 								text: 'Add Funds',
-								href: `/${data.network}/fund`,
+								href: context.urlPath(`/fund`),
 								visible: isCurrentUser
 							}
 						]
@@ -151,7 +151,7 @@
 				cta={[
 					{
 						text: `Swap ${data.network.token.name}/${data.network.getRamToken().name}`,
-						href: `/${data.network}/swap/${data.network.token.id.url}/${ramtoken.id.url}`,
+						href: context.urlPath(`/swap/${data.network.token.id.url}/${ramtoken.id.url}`),
 						visible: isCurrentUser
 					}
 				]}
@@ -187,7 +187,7 @@
 						<ResourceCard type="net" value={netAvailable} vertical />
 					</div>
 					{#if isCurrentUser}
-						<Button href={`/${data.network}/resources`} variant="secondary">Resources</Button>
+						<Button href={context.urlPath(`/resources`)} variant="secondary">Resources</Button>
 					{/if}
 				</Stack>
 			</Card>

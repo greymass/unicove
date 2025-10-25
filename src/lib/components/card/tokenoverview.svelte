@@ -8,6 +8,10 @@
 	import type { NetworkState } from '$lib/state/network.svelte';
 	import { tokenEquals, ZeroUnits, type TokenBalance, type TokenPair } from '$lib/types/token';
 	import { Button } from 'unicove-components';
+	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import { getContext } from 'svelte';
+
+	const { urlPath } = getContext<UnicoveContext>('state');
 
 	interface TokenOverviewProps {
 		balance: TokenBalance;
@@ -45,11 +49,11 @@
 <Card id="{balance.token.contract}-{balance.token.symbol.name}-token" class={className}>
 	<div class="card-title h4">
 		{#if isRamToken}
-			<a href="/{network}/ram">
+			<a href={urlPath('/ram')}>
 				{balance.token.symbol.name} (RAM)
 			</a>
 		{:else}
-			<a href="/{network}/token/{balance.token.contract}/{balance.token.name}">
+			<a href={urlPath(`/token/${balance.token.contract}/${balance.token.name}`)}>
 				{balance.token.symbol.name}
 			</a>
 		{/if}
@@ -85,7 +89,7 @@
 
 				{#if network.supports('directfunding') && tokenEquals(balance.token.id, network.getSystemToken().id) && isCurrentUser}
 					<div class="col-span-2 col-start-2 row-start-1 text-right @xs:col-span-1 @xs:col-start-3">
-						<Button href={`/${network}/fund`}>Add Funds</Button>
+						<Button href={urlPath(`/fund`)}>Add Funds</Button>
 					</div>
 				{/if}
 			</div>
@@ -98,7 +102,7 @@
 				action={!balance.locked
 					? {
 							text: 'Send',
-							href: `/${network}/send/${balance.token.id.url}`,
+							href: urlPath(`/send/${balance.token.id.url}`),
 							visible: isCurrentUser
 						}
 					: undefined}
@@ -111,7 +115,7 @@
 						value={balanceStaked.balance}
 						action={{
 							text: 'Staking',
-							href: `/${network}/staking`,
+							href: urlPath(`/staking`),
 							visible: isCurrentUser
 						}}
 					/>
@@ -123,7 +127,7 @@
 						value={balanceUnstaked.balance}
 						action={{
 							text: 'Withdraw',
-							href: `/${network}/staking/withdraw`,
+							href: urlPath(`/staking/withdraw`),
 							visible: isCurrentUser
 						}}
 					/>
@@ -135,7 +139,7 @@
 						value={balanceDelegated.balance}
 						action={{
 							text: 'Reclaim',
-							href: `/${network}/undelegate`,
+							href: urlPath(`/undelegate`),
 							visible: isCurrentUser
 						}}
 					/>
@@ -147,7 +151,7 @@
 						value={balanceRefunding.balance}
 						action={{
 							text: 'Claim',
-							href: `/${network}/refund`,
+							href: urlPath(`/refund`),
 							visible: isCurrentUser
 						}}
 					/>

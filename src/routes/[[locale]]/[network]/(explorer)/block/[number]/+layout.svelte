@@ -6,10 +6,10 @@
 
 	const { children, data } = $props();
 
-	const { settings } = getContext<UnicoveContext>('state');
+	const { settings, urlPath } = getContext<UnicoveContext>('state');
 
 	const options = $derived.by(() => {
-		let urlBase = `/${data.network}/block/${data.number}`;
+		let urlBase = urlPath(`/block/${data.number}`);
 		return [
 			{ href: urlBase, text: 'Summary' },
 			{ href: `${urlBase}/data`, text: 'Data' }

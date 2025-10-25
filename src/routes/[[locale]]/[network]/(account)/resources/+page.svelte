@@ -18,7 +18,6 @@
 	const netAvailableSize = $derived(context.account?.resources.net.available || Int64.from(0));
 	const ramAvailableSize = $derived(context.account?.resources.ram.available || Int64.from(0));
 
-	const network = String(data.network);
 	const chainName = data.network.chain.name;
 	const symbolName = data.network.chain.systemToken?.symbol.name || 'token';
 
@@ -74,21 +73,23 @@
 			<CpuAndNetResource cpuAvailable={cpuAvailableSize} netAvailable={netAvailableSize} />
 		{/if}
 		{#if data.network.supports('powerup')}
-			<Button variant="primary" href="/{network}/resources/powerup"
+			<Button variant="primary" href={context.urlPath('/resources/powerup')}
 				>Rent resources with PowerUp</Button
 			>
 		{/if}
 		{#if data.network.supports('rentrex')}
-			<Button variant="primary" href="/{network}/resources/rex">Rent resources with REX</Button>
+			<Button variant="primary" href={context.urlPath('/resources/rex')}
+				>Rent resources with REX</Button
+			>
 		{/if}
 		{#if data.network.supports('stakeresource')}
-			<Button variant="primary" href="/{network}/resources/stake"
+			<Button variant="primary" href={context.urlPath('/resources/stake')}
 				>Stake {symbolName} for resources</Button
 			>
 		{/if}
 
 		<RamResource ramAvailable={ramAvailableSize} />
-		<Button variant="secondary" href="/{network}/ram">RAM Market</Button>
+		<Button variant="secondary" href={context.urlPath('/ram')}>RAM Market</Button>
 
 		<AccountBalance class="bg-surface-container-high" />
 	</Stack>

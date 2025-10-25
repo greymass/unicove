@@ -44,8 +44,8 @@
 <Stack>
 	{#if manager.txid}
 		<TransactSummary transactionId={manager.txid} />
-		<Button href={`/${data.network}/staking`} variant="secondary">Staking overview</Button>
-		<Button href={`/${data.network}/account/${context.account?.name}`}>View my account</Button>
+		<Button href={context.urlPath(`/staking`)} variant="secondary">Staking overview</Button>
+		<Button href={context.urlPath(`/account/${context.account?.name}`)}>View my account</Button>
 	{:else if manager.error}
 		<TransactError error={manager.error} />
 		<Button onclick={resetState}>Close</Button>

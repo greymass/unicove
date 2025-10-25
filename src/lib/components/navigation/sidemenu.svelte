@@ -9,6 +9,7 @@
 	import LanguageSelect from '$lib/components/select/language.svelte';
 
 	const context = getContext<UnicoveContext>('state');
+	const { urlPath } = context;
 
 	interface Props {
 		callbackFn?: (event: MouseEvent) => void;
@@ -21,31 +22,30 @@
 	let pathname = $derived(page.url.pathname.split('/'));
 
 	const destinations = $derived.by(() => {
-		const [, locale] = pathname;
 		const items = [
 			// {
 			// 	href: `/${locale}/${network}`,
 			// 	text: network.chain.name,
 			// 	active: pathname[2] === String(network) && !pathname[3]
 			// },
-			{ href: `/${locale}/${network}/send`, text: 'Send', active: pathname[3] === 'send' }
+			{ href: urlPath(`/send`), text: 'Send', active: pathname[3] === 'send' }
 		];
 
 		if (network.supports('staking')) {
 			items.push({
-				href: `/${locale}/${network}/staking`,
+				href: urlPath(`/staking`),
 				text: 'Staking',
 				active: pathname[3] === 'staking'
 			});
 		}
 
 		if (network.supports('rammarket')) {
-			items.push({ href: `/${locale}/${network}/ram`, text: 'RAM', active: pathname[3] === 'ram' });
+			items.push({ href: urlPath(`/ram`), text: 'RAM', active: pathname[3] === 'ram' });
 		}
 
 		if (context.settings.data.advancedMode) {
 			items.push({
-				href: `/${locale}/${network}/resources`,
+				href: urlPath(`/resources`),
 				text: 'Resources',
 				active: pathname[3] === 'resources'
 			});
@@ -53,7 +53,7 @@
 
 		if (context.settings.data.debugMode) {
 			items.push({
-				href: `/${locale}/${network}/debug/state`,
+				href: urlPath(`/debug/state`),
 				text: 'Debug State',
 				active: pathname[3] === 'debug'
 			});
@@ -61,14 +61,14 @@
 
 		if (context.account) {
 			items.splice(0, 0, {
-				href: `/${locale}/${network}/account/${context.account.name}`,
+				href: urlPath(`/account/${context.account.name}`),
 				text: 'My Account',
 				active: pathname[3] === 'account' && pathname[4] === String(context.account.name)
 			});
 		}
 
 		items.push({
-			href: `/${locale}/${network}/settings`,
+			href: urlPath(`/settings`),
 			text: 'Settings',
 			active: pathname[3] === 'settings'
 		});

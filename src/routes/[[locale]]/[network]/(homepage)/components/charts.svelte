@@ -7,7 +7,7 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { ramtoken, systemtoken } from '$lib/wharf/chains';
 
-	const { network } = getContext<UnicoveContext>('state');
+	const { network, urlPath } = getContext<UnicoveContext>('state');
 
 	const funding = network.supports('directfunding');
 </script>
@@ -23,11 +23,11 @@
 				button: funding
 					? {
 							text: 'Get Tokens',
-							href: `${network}/fund`
+							href: urlPath(`/fund`)
 						}
 					: {
 							text: `Send ${String(network.token.symbol.name)} Tokens`,
-							href: `${network}/send`
+							href: urlPath(`/send`)
 						}
 			}}
 		/>
@@ -42,7 +42,7 @@
 				text: `One ${ramtoken.name} of RAM represents ownership rights over 1000 bytes of the network's total blockchain storage capacity. ${ramtoken.name} can be swapped with ${systemtoken.name} by visiting the RAM Market.`,
 				button: {
 					text: `Swap ${String(network.chain.systemToken?.symbol.name)}/${String(ramtoken.name)}`,
-					href: `${network}/swap/${systemtoken.id.url}/${ramtoken.id.url}`
+					href: urlPath(`/swap/${systemtoken.id.url}/${ramtoken.id.url}`)
 				}
 			}}
 		/>

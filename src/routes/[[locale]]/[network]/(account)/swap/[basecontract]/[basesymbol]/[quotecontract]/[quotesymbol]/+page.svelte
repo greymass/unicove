@@ -190,7 +190,7 @@
 {#snippet Success()}
 	<div class="flex gap-4">
 		<Button variant="secondary" onclick={() => (id = undefined)}>Back</Button>
-		<Button href={`/${data.network}/account/${context.account?.name}`}>View my account</Button>
+		<Button href={context.urlPath(`/account/${context.account?.name}`)}>View my account</Button>
 	</div>
 {/snippet}
 
@@ -223,7 +223,7 @@
 			{#if reversible}
 				<IconButton
 					icon={ArrowRightLeft}
-					href="/{data.network}/swap/{data.quote.id.url}/{data.base.id.url}"
+					href={context.urlPath(`/swap/${data.quote.id.url}/${data.base.id.url}`)}
 					onclick={flip}
 					disabled={context.wharf.transacting}
 					size="large"

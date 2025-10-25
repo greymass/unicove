@@ -3,6 +3,7 @@ import { error } from '@sveltejs/kit';
 
 import type { LayoutLoad } from './$types';
 import { User } from '@lucide/svelte';
+import { localizePath } from '$lib/utils/url';
 
 export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 	const { network } = await parent();
@@ -25,7 +26,12 @@ export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 		subtitle: 'Contract',
 		header: {
 			copyData: String(params.contract),
-			actions: [{ icon: User, href: `/${network}/account/${params.contract}` }]
+			actions: [
+				{
+					icon: User,
+					href: localizePath(`/account/${params.contract}`, { defaultLocale: params.locale })
+				}
+			]
 		},
 		pageMetaTags: {
 			title: `Contract: ${params.contract} | ${network.chain.name}`,

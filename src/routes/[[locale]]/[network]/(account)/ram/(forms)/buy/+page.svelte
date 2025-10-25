@@ -98,8 +98,8 @@
 <Stack>
 	{#if transactionId}
 		<TransactSummary {transactionId} />
-		<Button href={`/${data.network}/ram`} variant="secondary">RAM Market</Button>
-		<Button href={`/${data.network}/account/${context.account?.name}`}>View my account</Button>
+		<Button href={context.urlPath('/ram')} variant="secondary">RAM Market</Button>
+		<Button href={context.urlPath(`/account/${context.account?.name}`)}>View my account</Button>
 	{:else if errorMessage}
 		<TransactError error={errorMessage} />
 		<Button onclick={resetState}>Close</Button>

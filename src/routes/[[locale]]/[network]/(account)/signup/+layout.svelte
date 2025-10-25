@@ -10,25 +10,30 @@
 	import { crossfade } from 'svelte/transition';
 	import { cubicInOut } from 'svelte/easing';
 	import { getWalletNameFromPath, getWalletTypeFromPath } from './walletTypes.js';
+	import type { UnicoveContext } from '$lib/state/client.svelte.js';
+	import { getContext } from 'svelte';
 
-	const { data, children } = $props();
+	const { children } = $props();
+	const context = getContext<UnicoveContext>('state');
 
 	let steps: SignupStep[] = $derived([
 		{
 			title: 'Get Started',
-			path: `/${data.network}/signup`
+			path: context.urlPath('/signup')
 		},
 		{
 			title: 'Select Environment',
-			path: `/${data.network}/signup/wallets`
+			path: context.urlPath('/signup/wallets')
 		},
 		{
 			title: 'Select Wallet',
-			path: `/${data.network}/signup/wallets/${getWalletTypeFromPath($page.url.pathname)?.type}`
+			path: context.urlPath(`/signup/wallets/${getWalletTypeFromPath($page.url.pathname)?.type}`)
 		},
 		{
 			title: 'Setup Wallet',
-			path: `/${data.network}/signup/wallets/${getWalletTypeFromPath($page.url.pathname)?.type}/${getWalletNameFromPath($page.url.pathname)?.toLowerCase()}`
+			path: context.urlPath(
+				`/signup/wallets/${getWalletTypeFromPath($page.url.pathname)?.type}/${getWalletNameFromPath($page.url.pathname)?.toLowerCase()}`
+			)
 		}
 	]);
 

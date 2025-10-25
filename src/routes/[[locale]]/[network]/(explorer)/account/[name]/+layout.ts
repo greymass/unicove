@@ -6,6 +6,7 @@ import type { LayoutLoad } from './$types';
 import { PUBLIC_CHAIN_SHORT } from '$env/static/public';
 import { Code } from '@lucide/svelte';
 import { ogImageURL } from '$lib/utils/opengraph';
+import { localizePath } from '$lib/utils/url';
 
 export const load: LayoutLoad = async ({ fetch, url, params }) => {
 	const network = getNetworkByName(PUBLIC_CHAIN_SHORT, fetch);
@@ -26,7 +27,10 @@ export const load: LayoutLoad = async ({ fetch, url, params }) => {
 	const actions = [];
 
 	if (account.contract) {
-		actions.push({ icon: Code, href: `/${network}/contract/${params.name}` });
+		actions.push({
+			icon: Code,
+			href: localizePath(`/contract/${params.name}`, { defaultLocale: params.locale })
+		});
 	}
 
 	const metaTitle = `${String(params.name)} | ${network.chain.name} Network Account`;

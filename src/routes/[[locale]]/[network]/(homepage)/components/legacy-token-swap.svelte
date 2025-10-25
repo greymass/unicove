@@ -3,6 +3,10 @@
 	import { Button } from 'unicove-components';
 
 	import { Chains } from '@wharfkit/common';
+	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import { getContext } from 'svelte';
+
+	const { urlPath } = getContext<UnicoveContext>('state');
 
 	interface Props {
 		network: NetworkState;
@@ -50,8 +54,9 @@
 				</Button>
 				<Button
 					class="bg-white/90 text-[#1c2399]"
-					href="/{props.network}/swap/{props.network.config.legacytoken.id.url}/{props.network.token
-						.id.url}"
+					href={urlPath(
+						`/swap/${props.network.config.legacytoken.id.url}/${props.network.token.id.url}`
+					)}
 				>
 					Swap to {props.network.token.name}
 				</Button>

@@ -31,7 +31,6 @@
 	const market = getContext<MarketContext>('market');
 
 	const { data } = $props();
-	const networkName = String(data.network);
 
 	let total: Asset = $derived(getStakedBalance(data.network, context.account));
 	let staked: Asset = $derived(getUnstakableBalance(data.network, context.account));
@@ -159,7 +158,7 @@
 					{/if}
 				</Stack>
 			</Card>
-			<AccountBalance cta={{ href: `/${networkName}/staking/stake`, label: 'Stake' }} />
+			<AccountBalance cta={{ href: context.urlPath(`/staking/stake`), label: 'Stake' }} />
 			<SystemTokenSwap account={context.account} network={data.network} />
 		{/snippet}
 

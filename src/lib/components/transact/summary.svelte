@@ -11,7 +11,7 @@
 	import { Button } from 'unicove-components';
 	import { DD, DL, DLRow } from 'unicove-components';
 
-	const context = getContext<UnicoveContext>('state');
+	const { urlPath } = getContext<UnicoveContext>('state');
 
 	interface Props {
 		transactionId?: Checksum256 | string;
@@ -50,7 +50,7 @@
 					View the proposal below and share it with the parties who need to sign.
 				</p>
 				{#each proposals as proposal}
-					<Button href="/{context.network}/msig/{proposal.proposer}/{proposal.proposal_name}">
+					<Button href={urlPath(`/msig/${proposal.proposer}/${proposal.proposal_name}`)}>
 						View Proposal ({proposal.proposer}/{proposal.proposal_name})
 					</Button>
 				{/each}

@@ -6,7 +6,7 @@
 	import TextBlock from './text-block.svelte';
 	import { Button } from 'unicove-components';
 
-	const { network } = getContext<UnicoveContext>('state');
+	const { urlPath } = getContext<UnicoveContext>('state');
 
 	interface Props {
 		networkName: string;
@@ -65,7 +65,7 @@
 				title="The {productName} for MetaMask"
 				text="MetaMask, an the industry leading self-custody wallet, is now compatible with Unicove and the {networkName} network. Install the {productName} snap for MetaMask to get started."
 			>
-				<Button variant="primary" href={`/${network}/metamask`}>
+				<Button variant="primary" href={urlPath(`/metamask`)}>
 					Install {productName}
 				</Button>
 			</TextBlock>

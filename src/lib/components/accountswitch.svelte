@@ -324,7 +324,7 @@
 			</ul>
 		{/if}
 		<div class="grid">
-			<!-- <Button  href={`/${network}/signup`} onclick={closeDrawer} variant="primary"> -->
+			<!-- <Button  href={`/signup`} onclick={closeDrawer} variant="primary"> -->
 			<!-- 	Create account -->
 			<!-- </Button> -->
 			<Button class="text-on-surface" onclick={closeAddingAccount} variant="secondary"

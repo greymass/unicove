@@ -10,7 +10,7 @@
 	// const tabOptions = $derived.by(() => {
 	// 	const network = String(data.network);
 	// 	return Object.entries(walletTypes).map(([key, value]) => ({
-	// 		href: `/${network}/signup/${key}`,
+	// 		href: `/signup/${key}`,
 	// 		text: value.title
 	// 	}));
 	// });

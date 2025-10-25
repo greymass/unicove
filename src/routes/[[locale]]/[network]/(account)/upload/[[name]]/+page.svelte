@@ -90,7 +90,7 @@
 {#snippet Success()}
 	<div class="flex gap-4">
 		<Button variant="secondary" onclick={() => (id = undefined)}>Back</Button>
-		<Button href={`/${data.network}/account/${context.account?.name}`}>View my account</Button>
+		<Button href={context.urlPath(`/account/${context.account?.name}`)}>View my account</Button>
 	</div>
 {/snippet}
 

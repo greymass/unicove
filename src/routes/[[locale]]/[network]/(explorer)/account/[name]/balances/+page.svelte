@@ -53,7 +53,7 @@
 
 {#snippet tableAction(asset: Asset)}
 	<TD class="text-right">
-		<Button variant="text" href="/{data.network}/send?quantity={asset}">Send</Button>
+		<Button variant="text" href={context.urlPath(`/send?quantity=${asset}`)}>Send</Button>
 	</TD>
 {/snippet}
 
@@ -84,7 +84,9 @@
 							{/if}
 						</picture>
 						<a
-							href={`/${context.network}/token/${tokenBalance.token.contract}/${tokenBalance.token.name}`}
+							href={context.urlPath(
+								`/token/${tokenBalance.token.contract}/${tokenBalance.token.name}`
+							)}
 						>
 							{tokenBalance.token.name}
 						</a>

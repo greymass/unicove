@@ -10,8 +10,6 @@
 	import { Stack } from 'unicove-components';
 	import { Asset } from '@wharfkit/session';
 
-	const { data } = $props();
-
 	const context = getContext<UnicoveContext>('state');
 	const market = getContext<MarketContext>('market');
 </script>
@@ -28,7 +26,7 @@
 			<div class="flex gap-4">
 				<Button
 					class="border-mine-600 border px-6"
-					href={`/${data.network}/swap/${swap.pair.base.id.url}/${swap.pair.quote.id.url}`}
+					href={context.urlPath(`/swap/${swap.pair.base.id.url}/${swap.pair.quote.id.url}`)}
 				>
 					Swap
 				</Button>

@@ -24,6 +24,7 @@
 	import { goto } from '$app/navigation';
 
 	const context = getContext<UnicoveContext>('state');
+	const { urlPath } = context;
 	const { data } = $props();
 
 	const request = SigningRequest.from(`esr:` + data.payload, { zlib });
@@ -207,7 +208,7 @@
 {#snippet Success()}
 	<div class="flex gap-4">
 		<Button variant="secondary" onclick={() => (id = undefined)}>Back</Button>
-		<Button href={`/${data.network}/account/${newAccountAction?.name}`}>Visit Account</Button>
+		<Button href={urlPath(`/account/${newAccountAction?.name}`)}>Visit Account</Button>
 	</div>
 {/snippet}
 
@@ -243,9 +244,7 @@
 						</p>
 					{:else}
 						<h2 class="h2">Request complete, this account has been created.</h2>
-						<Button href={`/${context.network}/account/${newAccountAction.name}`}
-							>View Account</Button
-						>
+						<Button href={`${urlPath(`/account/${newAccountAction.name}`)}`}>View Account</Button>
 					{/if}
 				{:else if newAccountMatchesMetaMask}
 					<h2 class="h2">Account Creation Request</h2>

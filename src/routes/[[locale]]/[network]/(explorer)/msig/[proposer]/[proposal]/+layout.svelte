@@ -5,11 +5,10 @@
 	import { getContext } from 'svelte';
 
 	const { children, data } = $props();
-
-	const { settings } = getContext<UnicoveContext>('state');
+	const { settings, urlPath } = getContext<UnicoveContext>('state');
 
 	const tabOptions = $derived.by(() => {
-		let urlBase = `/${data.network}/msig/${data.proposal.proposer}/${data.proposal.name}`;
+		let urlBase = urlPath(`/msig/${data.proposal.proposer}/${data.proposal.name}`);
 		return [
 			{ href: urlBase, text: 'Overview' },
 			{ href: `${urlBase}/data`, text: 'Data' }

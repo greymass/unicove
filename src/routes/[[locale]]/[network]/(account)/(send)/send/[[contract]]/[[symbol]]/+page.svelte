@@ -396,7 +396,7 @@
 			<Button variant="secondary" onclick={() => resetURL()}>Restart</Button>
 		{:else if f.current === 'complete'}
 			<Button variant="secondary" onclick={() => resetURL()}>Start new send</Button>
-			<Button href={`/${data.network}/account/${context.account?.name}`}>View my account</Button>
+			<Button href={context.urlPath(`/account/${context.account?.name}`)}>View my account</Button>
 		{:else}
 			<Button variant="secondary" onclick={previous}>Back</Button>
 		{/if}

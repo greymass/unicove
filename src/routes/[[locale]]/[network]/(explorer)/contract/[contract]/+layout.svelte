@@ -1,10 +1,13 @@
 <script lang="ts">
 	import { Contract } from '@wharfkit/contract';
-	import { setContext } from 'svelte';
+	import { getContext, setContext } from 'svelte';
 
 	import PillGroup from '$lib/components/navigation/pillgroup.svelte';
+	import type { UnicoveContext } from '$lib/state/client.svelte.js';
 
 	const { children, data } = $props();
+
+	const { urlPath } = getContext<UnicoveContext>('state');
 
 	setContext(
 		'contract',
@@ -17,22 +20,21 @@
 
 	const options = $derived.by(() => {
 		const account = String(data.contract);
-		const network = String(data.network);
 		return [
-			{ href: `/${network}/contract/${account}`, text: 'Overview' },
+			{ href: urlPath(`/contract/${account}`), text: 'Overview' },
 			{
-				href: `/${network}/contract/${account}/actions`,
+				href: urlPath(`/contract/${account}/actions`),
 				text: `Actions (${data.abi.actions.length})`
 			},
 			{
-				href: `/${network}/contract/${account}/structs`,
+				href: urlPath(`/contract/${account}/structs`),
 				text: `Structs (${data.abi.structs.length})`
 			},
 			{
-				href: `/${network}/contract/${account}/tables`,
+				href: urlPath(`/contract/${account}/tables`),
 				text: `Tables (${data.abi.tables.length})`
 			},
-			{ href: `/${network}/contract/${account}/abi`, text: 'ABI' }
+			{ href: urlPath(`/contract/${account}/abi`), text: 'ABI' }
 		];
 	});
 </script>
