@@ -8,16 +8,12 @@
 	import { setLocale } from '$lib/remote/locale.remote';
 	import { locales } from 'virtual:wuchale/locales';
 	import { page } from '$app/state';
+	import { writable } from 'svelte/store';
 
 	const displayName = (loc: string) =>
 		new Intl.DisplayNames([loc], { type: 'language' }).of(loc) || 'Unknown';
 
 	const context = getContext<UnicoveContext>('state');
-	let defaultLang = $derived({
-		value: context.settings.data.locale,
-		label: displayName(context.settings.data.locale)
-	});
-
 	const handleSelect: CreateSelectProps<string>['onSelectedChange'] = ({ next }) => {
 		if (next?.value) {
 			setLocale(next.value).then(() => {
@@ -33,11 +29,24 @@
 		return next;
 	};
 
+	// melt-ui doesn't seem to like runes, so setting up a writable and effect
+	const selectedLang = writable({
+		value: context.settings.data.locale,
+		label: displayName(context.settings.data.locale)
+	});
+
+	$effect(() => {
+		selectedLang.set({
+			value: context.settings.data.locale,
+			label: displayName(context.settings.data.locale)
+		});
+	});
+
 	const {
 		elements: { trigger, menu, option },
-		states: { open, selectedLabel }
+		states: { open }
 	} = createSelect<string>({
-		defaultSelected: defaultLang,
+		defaultSelected: $selectedLang,
 		preventScroll: false,
 		positioning: {
 			placement: 'bottom',
