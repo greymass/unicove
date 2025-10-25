@@ -33,7 +33,6 @@ export class CoinbaseOnRamp {
 		this.isLoading = true;
 
 		try {
-			const network = this.context.network.toString();
 			// Get the unique session token
 			const response = await fetch(localizePath(`/api/onramp/coinbase/session`), {
 				method: 'POST',
