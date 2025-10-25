@@ -268,11 +268,6 @@ export function getChainDefinitionFromParams(network: string): ChainDefinition {
 	});
 }
 
-export const chainShortNames = chains.map((chain) => chain.short) as string[];
-export function isNetworkShortName(value: string) {
-	return chainShortNames.includes(value);
-}
-
 export const chainMap: Record<string, string> = {};
 chains.forEach((chain) => {
 	chainMap[String(chain.id)] = chain.name;

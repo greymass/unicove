@@ -29,7 +29,8 @@
 	import { MetaMaskState } from '$lib/state/metamask.svelte.js';
 	import { checkForSnap } from '$lib/metamask-snap.js';
 	import { checkIsFlask, getSnapsProvider } from '@wharfkit/wallet-plugin-metamask';
-	import { goto } from '$app/navigation';
+	import { DEFAULT_LOCALE, LOCALES } from '$lib/constants/locales.js';
+	import { localizeUrl } from '$lib/utils/url';
 
 	let { children, data } = $props();
 
@@ -220,6 +221,20 @@
 <svelte:head>
 	<!-- Preload current chain logo -->
 	<link rel="preload" href={String(data.network.config.logo)} as="image" type="image/png" />
+
+	<!-- Canonical links for locales -->
+	<link
+		rel="alternate"
+		href={localizeUrl(String(page.url), { forceLocale: DEFAULT_LOCALE })}
+		hreflang="x-default"
+	/>
+	{#each LOCALES as locale}
+		<link
+			rel="alternate"
+			hreflang={locale}
+			href={localizeUrl(String(page.url), { forceLocale: locale })}
+		/>
+	{/each}
 
 	<!-- Init color scheme on page load (unsure why this breaks in wuchale) -->
 	<!-- @wc-ignore -->

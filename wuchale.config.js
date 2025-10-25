@@ -2,6 +2,8 @@ import { adapter as svelte } from '@wuchale/svelte';
 import { adapter as js } from 'wuchale/adapter-vanilla';
 import { defineConfig, gemini } from 'wuchale';
 
+import { ADDITIONAL_LOCALES, DEFAULT_LOCALE } from './src/lib/constants/locales.js';
+
 let ai;
 if (process.env.WUCHALE_GEMINI === 'true') {
 	ai = gemini({
@@ -12,7 +14,8 @@ if (process.env.WUCHALE_GEMINI === 'true') {
 }
 
 export default defineConfig({
-	otherLocales: ['ko', 'zh'],
+	sourceLocale: DEFAULT_LOCALE,
+	otherLocales: ADDITIONAL_LOCALES,
 	adapters: {
 		main: svelte(),
 		js: js({

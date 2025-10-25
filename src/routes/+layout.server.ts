@@ -4,6 +4,7 @@ import type { LayoutServerLoad } from './$types';
 import type { NetworkState } from '$lib/state/network.svelte';
 import { error } from '@sveltejs/kit';
 import { API_OPENGRAPH_GENERATOR, API_OPENGRAPH_TOKEN } from '$env/static/private';
+import { localizeUrl } from '$lib/utils/url';
 
 function generateMetadata(url: URL, network: NetworkState): SeoConfig {
 	let open_graph_image = undefined;
@@ -15,7 +16,7 @@ function generateMetadata(url: URL, network: NetworkState): SeoConfig {
 	}
 
 	return {
-		url: url.pathname,
+		url: localizeUrl(String(url)),
 		title: `Unicove - The ${network.chain.name} web wallet and block explorer`,
 		description: `Stake, Send, Manage Tokens, and Explore ${network.chain.name} – all with ease`,
 		open_graph_image
