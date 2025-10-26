@@ -16,7 +16,7 @@ await loadLocales(js.key, js.loadIDs, js.loadCatalog, locales);
 export const wuchaleHandle: Handle = async ({ event, resolve }) => {
 	let locale: string = 'en';
 	const [, firstPart] = event.url.pathname.split('/');
-	if (event.cookies.get('locale') !== locale) {
+	if (event.cookies.get('locale') && event.cookies.get('locale') !== locale) {
 		locale = event.cookies.get('locale') ?? locale;
 	} else if (locales.includes(firstPart)) {
 		locale = firstPart;
