@@ -26,6 +26,7 @@
 	import { goto } from '$app/navigation';
 
 	const context = getContext<UnicoveContext>('state');
+	const urlPath = $derived(context.urlPath);
 
 	interface PageProps {
 		network: NetworkState;
@@ -77,7 +78,7 @@
 
 	function redirect(account: NameType) {
 		if (!context.settings.data.preventAccountPageSwitching) {
-			goto(`/${network}/account/${account}`);
+			goto(urlPath(`/${network}/account/${account}`));
 		}
 	}
 
