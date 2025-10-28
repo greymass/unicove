@@ -4,7 +4,7 @@ import type { ABI } from '@wharfkit/antelope';
 import { parseRicardian } from '$lib/utils/ricardian';
 import type { PageLoad } from './$types';
 
-export const load: PageLoad = async ({ params, parent }: LoadEvent) => {
+export const load: PageLoad = async ({ params, parent, url }: LoadEvent) => {
 	const p = await parent();
 	const action = p.abi.actions.find((s: ABI.Action) => s.name === params.action);
 	if (!action) {
@@ -12,9 +12,12 @@ export const load: PageLoad = async ({ params, parent }: LoadEvent) => {
 	}
 	const struct = p.abi.structs.find((s: ABI.Struct) => s.name === action.type);
 	const ricardian = parseRicardian(action);
+
+	const urlOrigin = new URL(url).origin;
 	return {
 		action,
 		struct,
+		urlOrigin,
 		data: params.data,
 		pageMetaTags: {
 			title: [`Action: ${params.action}`, p.pageMetaTags.title].join(' | '),
