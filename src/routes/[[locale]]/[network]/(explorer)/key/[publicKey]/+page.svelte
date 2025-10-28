@@ -6,8 +6,15 @@
 
 	let { data } = $props();
 
-	const pubKey = String(data.publicKey);
-	const legacyPubKey = data.publicKey.toLegacyString();
+	const pubKey = $derived(String(data.publicKey));
+	const legacyPubKey = $derived.by(() => {
+		try {
+			return data.publicKey.toLegacyString();
+		} catch (error) {
+			console.log(error);
+			return undefined;
+		}
+	});
 </script>
 
 <Stack>
@@ -18,12 +25,16 @@
 			>
 				<Key />
 			</picture>
-			<div class="space-y-0.5 text-balance *:break-all">
-				<p class="text-on-surface font-semibold">
-					{pubKey}
+			<div class="grid gap-0.5 text-balance *:break-all">
+				<div class="flex items-center gap-1">
+					<p class="text-on-surface font-semibold break-all">
+						{pubKey}
+					</p>
 					<CopyButton data={pubKey} />
-				</p>
-				<p class="text-muted">Legacy Key: {legacyPubKey}</p>
+				</div>
+				{#if legacyPubKey}
+					<p class="text-muted">Legacy Key: {legacyPubKey}</p>
+				{/if}
 			</div>
 		</div>
 	</Card>
@@ -40,7 +51,7 @@
 				{/each}
 			</ul>
 		{:else}
-			<p class="text-muted text-center">No accounts found</p>
+			<p class="text-muted">No accounts found</p>
 		{/if}
 	</Card>
 </Stack>
