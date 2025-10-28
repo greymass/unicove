@@ -200,6 +200,16 @@
 	</div>
 {/snippet}
 
+{#snippet TokenLogo(balance: TokenBalance)}
+	<picture class="size-8">
+		<img
+			class="size-full object-contain"
+			alt="{balance.token.name} Logo"
+			src={balance.token.media?.logo?.light}
+		/>
+	</picture>
+{/snippet}
+
 {#snippet Balances()}
 	<div class="grid grid-rows-2 gap-4 sm:grid-cols-2 sm:grid-rows-1">
 		<div
@@ -207,9 +217,7 @@
 		>
 			<div class="flex items-center gap-x-2">
 				{#if baseBalance.token.media?.logo?.light}
-					<picture class="size-8 place-items-center">
-						<img alt="{baseBalance.token.name} Logo" src={baseBalance.token.media?.logo?.light} />
-					</picture>
+					{@render TokenLogo(baseBalance)}
 				{/if}
 				<h3 class="text-title">{baseBalance.balance.symbol.name}</h3>
 			</div>
@@ -238,9 +246,7 @@
 		>
 			<div class="flex items-center gap-x-2">
 				{#if quoteBalance.token.media?.logo?.light}
-					<picture class="size-8 place-items-center">
-						<img alt="{quoteBalance.token.name} Logo" src={quoteBalance.token.media?.logo?.light} />
-					</picture>
+					{@render TokenLogo(quoteBalance)}
 				{/if}
 				<span class="text-title">{quoteBalance.balance.symbol.name}</span>
 			</div>
