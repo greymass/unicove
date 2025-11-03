@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { Button, Card, Stack, Switcher } from 'unicove-components';
 
-	import * as m from '$lib/paraglide/messages';
 	import type { MarketContext } from '$lib/state/client.svelte.js';
 	import { getContext } from 'svelte';
 	import { ramtoken } from '$lib/wharf/chains';
@@ -22,9 +21,7 @@
 					</Button>
 				{:else}
 					<Button disabled>
-						{m.common_not_available_on({
-							network: data.network.chain.name
-						})}
+						Not available on {data.network.chain.name}
 					</Button>
 				{/if}
 			</Switcher>
@@ -33,31 +30,25 @@
 {/snippet}
 
 <Stack>
-	<h3 class="text-headline">{m.common_account_creation()}</h3>
+	<h3 class="text-headline">Account Creation</h3>
 	{@render Tool(
 		'/create-account/direct',
-		m.common_direct_account_creation(),
-		m.common_direct_account_creation_description()
+		'Direct Account Creation',
+		'Use an existing account to create another account.'
 	)}
 	{@render Tool(
 		'/create-account/contract',
-		m.common_smart_contract_account_creation(),
-		m.common_smart_contract_account_creation_description()
+		'Smart Contract Account Creation',
+		'Create an account using a basic token transfer to a smart contract'
 	)}
 </Stack>
 
 <Stack>
-	<h3 class="text-headline">{m.common_tokens()}</h3>
-	{@render Tool(
-		'/send',
-		m.common_send_tokens({ token: '' }),
-		'Send tokens from one account to another.'
-	)}
+	<h3 class="text-headline">Tokens</h3>
+	{@render Tool('/send', 'Send Tokens', 'Send tokens from one account to another.')}
 	{@render Tool(
 		`/send/${ramtoken.id.url}`,
-		m.common_send_tokens({
-			token: 'RAM'
-		}),
+		'Send RAM Tokens',
 		'Transfer RAM from one account to another.',
 		data.network.supports('ramtransfer')
 	)}
@@ -67,144 +58,138 @@
 	<h3 class="text-headline">RAM</h3>
 	{@render Tool(
 		'/ram',
-		m.common_ram_market(),
+		'RAM Market',
 		'Overview of the RAM market on the network.',
 		data.network.supports('rammarket')
 	)}
 	{@render Tool(
 		'/ram/buy',
-		m.search_result_description_buyram(),
+		'Purchase RAM',
 		'Buy RAM from the network.',
 		data.network.supports('rammarket')
 	)}
 	{@render Tool(
 		'/ram/sell',
-		m.search_result_description_sellram(),
+		'Sell RAM',
 		'Sell RAM to the network.',
 		data.network.supports('rammarket')
 	)}
 </Stack>
 
 <Stack>
-	<h3 class="text-headline">{m.common_staking()}</h3>
+	<h3 class="text-headline">Staking</h3>
 	{@render Tool(
 		'/staking',
-		m.search_result_description_staking(),
+		'Staking overview',
 		'Overview of the staking process on the network.',
 		data.network.supports('staking')
 	)}
 	{@render Tool(
 		'/staking/stake',
-		m.common_stake(),
+		'Stake',
 		'Add tokens to a staked balance.',
 		data.network.supports('staking')
 	)}
 	{@render Tool(
 		'/staking/unstake',
-		m.common_unstake(),
+		'Unstake',
 		'Start the unstaking process of staked tokens.',
 		data.network.supports('staking')
 	)}
 	{@render Tool(
 		'/staking/withdraw',
-		m.common_withdraw(),
+		'Withdraw',
 		'Withdraw tokens from the staking contract.',
 		data.network.supports('staking')
 	)}
 </Stack>
 
 <Stack>
-	<h3 class="text-headline">
-		{m.resources_network_title({
-			network: ''
-		})}
-	</h3>
+	<h3 class="text-headline">{`${data.network.chain.name} Network Resources`}</h3>
 	{@render Tool(
 		'/resources',
-		m.common_resources(),
+		'Resources',
 		'Overview of the currenet accounts network resources and options to manage them.'
 	)}
 	{@render Tool(
 		'/resources/powerup',
-		m.resources_rent_with_powerup(),
+		'Rent resources with PowerUp',
 		'Use the powerup system to rent CPU and/or NET resources.',
 		data.network.supports('powerup')
 	)}
 	{@render Tool(
 		'/resources/rex',
-		m.resources_rent_with_rex(),
+		'Rent resources with REX',
 		'Use the REX system to rent CPU and/or NET resources.',
 		data.network.supports('rentrex')
 	)}
 	{@render Tool(
 		'/resources/stake',
-		m.resources_rent_with_stake({
-			symbolName: data.network.token.symbol.name
-		}),
+		`Stake ${data.network.token.symbol.name} for resources`,
 		'Stake tokens to gain access to CPU and NET resources.',
 		data.network.supports('stakeresource')
 	)}
 </Stack>
 
 <Stack>
-	<h3 class="text-headline">{m.common_swaps()}</h3>
+	<h3 class="text-headline">Swaps</h3>
 	{@render Tool(
 		'/swaps',
-		m.common_swaps(),
+		'Swaps',
 		'List of the swaps natively available on the network.',
 		market.market.swaps.length > 0
 	)}
 </Stack>
 
 <Stack>
-	<h3 class="text-headline">{m.common_delegated()}</h3>
+	<h3 class="text-headline">Delegated</h3>
 	{@render Tool(
 		'/undelegate',
-		m.common_reclaim_delegated_tokens({ token: data.network.token.name }),
-		m.delegation_metadata_refund_description({ network: data.network })
+		`Reclaim Delegated ${data.network.token.name} Tokens`,
+		`Claim previously delegated ${data.network.chain.name} tokens.`
 	)}
 </Stack>
 
 <Stack>
-	<h3 class="text-headline">{m.common_block_explorer()}</h3>
+	<h3 class="text-headline">Block Explorer</h3>
 	<p>
 		Each link below is an example of an explorer feature on Unicove. The search at the top of the
 		page can be used to find instances of these types of information.
 	</p>
-	{@render Tool('/account/eosio.token', m.account_page(), 'View details about a specific account.')}
+	{@render Tool('/account/eosio.token', 'Account Page', 'View details about a specific account.')}
 	{@render Tool(
 		'/block/123456789',
-		m.block_page_details(),
+		'Block Details',
 		'View details about a specific block on the network.'
 	)}
 	{@render Tool(
 		'/producers',
-		m.common_block_producers(),
+		'Block Producers',
 		'View information about the block producers on the network.'
 	)}
 	{@render Tool(
 		'/contract/eosio.token',
-		m.common_contract(),
+		'Contract',
 		'View details about a smart contract, the data, actions, and structure.'
 	)}
 	{@render Tool(
 		'/msig/test.gm/testprop',
-		m.msig_details(),
+		'Multisig Details',
 		'View details about a multi-signature proposal.'
 	)}
 	{@render Tool(
 		'/key/PUB_K1_7oWuonsNqqoStWuQgfLfY7w88w3NwghwbPzpiieKimj7iqHnKF',
-		m.common_public_key(),
+		'Public Key',
 		'View details about a public key and the associated accounts.'
 	)}
 	{@render Tool(
 		'/token/core.vaulta/A',
-		m.common_tokens(),
+		'Tokens',
 		'View overview of a token deployed to the network.'
 	)}
 	{@render Tool(
 		'/transaction/587dc971baabcae4121621c273e944ed8290e190938c8394eaf25b42aee41c48',
-		m.common_transaction(),
+		'Transaction',
 		'View details about a transaction that occurred on the network.'
 	)}
 </Stack>
