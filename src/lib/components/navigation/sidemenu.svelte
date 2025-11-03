@@ -49,6 +49,11 @@
 				text: 'Resources',
 				active: pathname[3] === 'resources'
 			});
+			items.push({
+				href: `/${network}/tools`,
+				text: 'Tools',
+				active: pathname[3] === 'tools'
+			});
 		}
 
 		if (context.settings.data.debugMode) {
