@@ -2,9 +2,11 @@ import type { LayoutLoad } from './$types';
 import { API, TimePoint } from '@wharfkit/antelope';
 import { PUBLIC_CHAIN_SHORT } from '$env/static/public';
 import { localizePath } from '$lib/utils/url';
+import { useLocale } from '$lib/utils/intl';
 
 export const load: LayoutLoad = async ({ fetch, params, parent }) => {
-	const { network } = await parent();
+	const { network, locale } = await parent();
+	await useLocale(locale);
 	const response = await fetch(localizePath(`/api/block/${params.number}`));
 	const json = await response.json();
 	const block = json.block as API.v1.GetBlockResponse;

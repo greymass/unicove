@@ -1,7 +1,9 @@
+import { useLocale } from '$lib/utils/intl';
 import type { LayoutLoad } from './$types';
 
 export const load: LayoutLoad = async ({ parent }) => {
-	const { network } = await parent();
+	const { network, locale } = await parent();
+	await useLocale(locale);
 	const title = `${network.chain.name} Network Resources`;
 	return {
 		title,

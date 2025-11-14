@@ -3,11 +3,12 @@ import { error } from '@sveltejs/kit';
 import { truncateCenter } from '$lib/utils';
 import { TransactionResponse } from '$lib/types/transaction';
 import type { LayoutLoad } from './$types';
-import { formatDateTime } from '$lib/utils/intl';
+import { formatDateTime, useLocale } from '$lib/utils/intl';
 import { localizePath } from '$lib/utils/url';
 
 export const load: LayoutLoad = async ({ fetch, params, parent }) => {
-	const { network } = await parent();
+	const { network, locale } = await parent();
+	await useLocale(locale);
 	const response = await fetch(localizePath(`/api/transaction/${params.id}`));
 	const json: TransactionResponse = await response.json();
 	if (!json.id) {

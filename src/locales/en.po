@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2025-10-25T23:06:56.766Z\n"
+"PO-Revision-Date: 2025-11-14T18:51:30.871Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -18,9 +18,8 @@ msgstr ""
 msgid "Page not found"
 msgstr "Page not found"
 
-#: src/routes/+error.svelte
-msgid "Go to Unicove"
-msgstr "Go to Unicove"
+#~ msgid "Go to Unicove"
+#~ msgstr "Go to Unicove"
 
 #: src/lib/assets/unicovelogo.svelte
 #: src/routes/+layout.server.ts
