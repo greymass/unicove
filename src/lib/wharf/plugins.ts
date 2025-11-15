@@ -9,7 +9,8 @@ import {
 	PUBLIC_WALLET_SCATTER,
 	PUBLIC_WALLET_TOKENPOCKET,
 	PUBLIC_WALLET_WEB_AUTHENTICATOR,
-	PUBLIC_WALLET_WOMBAT
+	PUBLIC_WALLET_WOMBAT,
+	PUBLIC_WALLET_GATEWALLET
 } from '$env/static/public';
 import type { ChainDefinition } from '@wharfkit/common';
 import type { WalletPlugin, TransactPlugin } from '@wharfkit/session';
@@ -24,6 +25,7 @@ import { WalletPluginScatter } from '@wharfkit/wallet-plugin-scatter';
 import { WalletPluginTokenPocket } from '@wharfkit/wallet-plugin-tokenpocket';
 import { WalletPluginWebAuthenticator } from '@wharfkit/wallet-plugin-web-authenticator';
 import { WalletPluginWombat } from '@wharfkit/wallet-plugin-wombat';
+import { WalletPluginGateWallet } from '@wharfkit/wallet-plugin-gatewallet';
 
 import { TransactPluginResourceProvider } from '@wharfkit/transact-plugin-resource-provider';
 import { TransactPluginStatusEmitter } from '$lib/wharf/plugins/status';
@@ -71,6 +73,10 @@ if (isENVTrue(PUBLIC_WALLET_WEB_AUTHENTICATOR) && PUBLIC_FEATURE_WEB_AUTHENTICAT
 
 if (isENVTrue(PUBLIC_WALLET_WOMBAT)) {
 	baseWalletPlugins.push(new WalletPluginWombat());
+}
+
+if (isENVTrue(PUBLIC_WALLET_GATEWALLET)) {
+	baseWalletPlugins.push(new WalletPluginGateWallet());
 }
 
 // If a local key is provided, add the private key wallet
