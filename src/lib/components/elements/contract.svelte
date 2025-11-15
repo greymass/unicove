@@ -18,7 +18,7 @@
 
 	let { name, action, struct, table, children, ...props }: Props = $props();
 
-	let href = $derived.by(() => {
+	let path = $derived.by(() => {
 		const base = `/contract/${name}`;
 		if (action) {
 			return base + `/actions/${action}`;
@@ -29,8 +29,10 @@
 		if (table) {
 			return base + `/tables/${table}`;
 		}
-		return urlPath(base);
+		return base;
 	});
+
+	const href = $derived(urlPath(path));
 </script>
 
 {#if name}

@@ -1,8 +1,10 @@
 import type { LayoutLoad } from './$types';
 import { ramtoken, systemtoken } from '$lib/wharf/chains';
+import { useLocale } from '$lib/utils/intl';
 
 export const load: LayoutLoad = async ({ parent }) => {
-	const { network } = await parent();
+	const { network, locale } = await parent();
+	await useLocale(locale);
 	const token = String(network.chain.systemToken?.symbol.name || 'tokens');
 	return {
 		title: `${ramtoken.name}/${systemtoken.name}  Market`,

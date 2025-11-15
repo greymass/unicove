@@ -342,13 +342,12 @@
 		class="group-has-[:hover]/list:text-muted hover:group-has-[:hover]/list:bg-surface-container-high hover:group-has-[:hover]/list:text-on-surface data-[active=true]:bg-surface-container-high data-[active=true]:text-on-surface col-span-full grid h-12 grid-cols-subgrid items-center justify-items-start rounded-lg group-has-[:hover]/list:bg-transparent focus:outline-hidden"
 		data-active={active}
 	>
-		<Result class="col-span-2 sm:col-span-3" {active} record={item} onclick={closeSearch}>
-			<button
-				class="text-muted focus-visible:ring-solar-500 hover:text-on-surface grid hidden size-12 place-items-center justify-self-end focus-visible:ring-3 focus-visible:outline-hidden focus-visible:ring-inset sm:block"
-				onclick={() => context.history.remove(index)}
-			>
-				<X class="text-inherit" />
-			</button>
-		</Result>
+		<Result class="col-span-2 sm:col-span-2" {active} record={item} onclick={closeSearch}></Result>
+		<button
+			class="text-muted focus-visible:ring-solar-500 hover:text-on-surface grid hidden size-12 place-items-center justify-self-end focus-visible:ring-3 focus-visible:outline-hidden focus-visible:ring-inset sm:block"
+			onclick={() => context.history.remove(index)}
+		>
+			<X class="text-inherit" />
+		</button>
 	</li>
 {/snippet}

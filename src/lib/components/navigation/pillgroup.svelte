@@ -19,10 +19,8 @@
 
 	const { options, ...props }: Props = $props();
 
-	let pathWithoutLanguageTag = $derived(page.url.pathname.slice(3));
-
 	let currentOption = $derived(
-		options.map((o) => o.href).findLast((h) => pathWithoutLanguageTag.startsWith(h))
+		options.map((o) => o.href).findLast((h) => page.url.pathname.startsWith(h))
 	);
 
 	const isCurrent = (href: string) => currentOption === href;

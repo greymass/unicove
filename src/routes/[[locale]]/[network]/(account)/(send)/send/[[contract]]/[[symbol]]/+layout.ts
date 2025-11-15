@@ -2,9 +2,11 @@ import type { LayoutLoad } from './$types';
 import { ogImageURL } from '$lib/utils/opengraph';
 import { Token } from '$lib/types/token';
 import { Asset, Name } from '@wharfkit/antelope';
+import { useLocale } from '$lib/utils/intl';
 
 export const load: LayoutLoad = async ({ url, params, parent }) => {
-	const { network } = await parent();
+	const { network, locale } = await parent();
+	await useLocale(locale);
 	let contract: Name | undefined;
 	let symbol: Asset.Symbol | undefined;
 	if (params.contract) {

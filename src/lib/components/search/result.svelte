@@ -8,14 +8,11 @@
 		ReceiptText,
 		UserSearch
 	} from '@lucide/svelte';
-	import { getContext, type ComponentProps, type Snippet } from 'svelte';
+	import { type ComponentProps, type Snippet } from 'svelte';
 
 	import { SearchRecordType, type SearchRecord } from '$lib/state/search.svelte';
 	import { cn, truncateCenter } from '$lib/utils';
 	import type { TextInput } from 'unicove-components';
-	import type { UnicoveContext } from '$lib/state/client.svelte';
-
-	const { urlPath } = getContext<UnicoveContext>('state');
 
 	interface ResultProps extends ComponentProps<typeof TextInput> {
 		record: SearchRecord;
@@ -33,7 +30,7 @@
 		'focus-visible:ring-solar-500 grid grid-cols-subgrid items-center rounded-lg select-none focus-visible:ring-3 focus-visible:outline-hidden focus-visible:ring-inset sm:col-span-2',
 		props.class
 	)}
-	href={urlPath(record.url)}
+	href={record.url}
 	{onclick}
 >
 	<div class="table-cell-styles ml-2 flex items-center gap-2 font-mono tabular-nums">
