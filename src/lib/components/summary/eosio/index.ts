@@ -12,7 +12,7 @@ import logramchange from './logramchange.svelte';
 import logsellram from './logsellram.svelte';
 import logsystemfee from './logsystemfee.svelte';
 import mvfrsavings from './mvfrsavings.svelte';
-import newaccount from './newaccount.svelte';
+// import newaccount from './newaccount.svelte';
 import powerup from './powerup.svelte';
 import ramtransfer from './ramtransfer.svelte';
 import refund from './refund.svelte';
