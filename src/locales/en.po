@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2025-11-14T18:51:30.871Z\n"
+"PO-Revision-Date: 2025-11-15T23:29:18.536Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -82,6 +82,7 @@ msgstr "API Reference"
 
 #: src/lib/components/footer.svelte
 #: src/lib/components/transact/summary.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Status"
 msgstr "Status"
@@ -1374,14 +1375,15 @@ msgstr "The internal state of Unicove for debugging purposes"
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/navigation.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
 msgid "Overview"
 msgstr "Overview"
 
 #. placeholder {0}: data.abi.actions.length
+#. placeholder {0}: data.proposal.transaction.actions.length
 #. placeholder {0}: data.transaction.transaction.actions.length
-#. placeholder {0}: data.transaction.transaction.actions.length
+#. placeholder {0}: data.proposal.transaction.actions.length
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/actions/+page.svelte
 msgid "Actions ({0})"
@@ -4597,6 +4599,7 @@ msgstr "Total Account Value"
 
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/transaction/+page.svelte
 msgid "Transaction"
@@ -5109,7 +5112,7 @@ msgid "Execute"
 msgstr "Execute"
 
 #. placeholder {0}: variant
-#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/actions/+page.svelte
 msgid "Proposed Actions ({0})"
 msgstr "Proposed Actions ({0})"
 
@@ -5726,3 +5729,6 @@ msgstr "How to Sign Transactions on the {0} network with MetaMask"
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "MetaMask Wallet Plugin"
 msgstr "MetaMask Wallet Plugin"
+
+#~ msgid "Controls"
+#~ msgstr "Controls"

@@ -1,19 +1,15 @@
 <script lang="ts">
-	import { getContext } from 'svelte';
+	import { getContext, onMount } from 'svelte';
 
-	import { Button } from 'unicove-components';
+	import { Button, Card } from 'unicove-components';
 	import { DD, DL, DLRow } from 'unicove-components';
 	import { Stack, Switcher } from 'unicove-components';
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
 	import Account from '$lib/components/elements/account.svelte';
-	import ActionCard from '$lib/components/elements/action.svelte';
-	import SelectActionVariant from '$lib/components/select/actionvariant.svelte';
 	import TransactForm from '$lib/components/transact/form.svelte';
 
 	import { ApprovalManager } from './manager.svelte';
-	import type { ActionDisplayVariants } from '$lib/types';
-	import { getActionSummaryComponent } from '$lib/components/summary';
-	import { goto } from '$app/navigation';
+	import { goto, invalidateAll } from '$app/navigation';
 
 	let { data } = $props();
 
@@ -24,9 +20,16 @@
 		manager.sync(data.network, context.wharf);
 	});
 
-	const top21 = data.producers.splice(0, 21);
+	onMount(() => {
+		const interval = setInterval(() => {
+			invalidateAll();
+		}, 15000);
+		return () => {
+			clearInterval(interval);
+		};
+	});
 
-	let variant = $derived(context.settings.data.actionDisplayVariant as ActionDisplayVariants);
+	const top21 = data.producers.splice(0, 21);
 
 	async function cancel() {
 		await manager.cancel();
@@ -113,85 +116,69 @@
 			</table>
 		</Stack>
 
-		<TransactForm
-			id={manager.result?.resolved?.transaction.id}
-			error={manager.error}
-			onsuccess={Complete}
-			onfailure={Complete}
-		>
-			<Stack class="gap-4" id="details">
-				<h2 class="text-title">Multisig Details</h2>
+		<Card class="@container" title="Multisig Details">
+			<TransactForm
+				id={manager.result?.resolved?.transaction.id}
+				error={manager.error}
+				onsuccess={Complete}
+				onfailure={Complete}
+			>
+				<Stack class="gap-4" id="details">
+					<DL>
+						<DLRow title="Proposer">
+							<DD>
+								<Account name={manager.proposal.proposer} />
+							</DD>
+						</DLRow>
+						<DLRow title="Proposal Name">
+							<DD>
+								{manager.proposal.name}
+							</DD>
+						</DLRow>
+						<DLRow title={manager.expired ? 'Expired' : 'Expiration'}>
+							<DD>
+								{manager.proposal.transaction.expiration} ({manager.expiresIn})
+							</DD>
+						</DLRow>
+						<DLRow title="Hash">
+							<DD>
+								{manager.proposal.hash}
+							</DD>
+						</DLRow>
+					</DL>
 
-				<DL>
-					<DLRow title="Proposer">
-						<DD>
-							<Account name={manager.proposal.proposer} />
-						</DD>
-					</DLRow>
-					<DLRow title="Proposal Name">
-						<DD>
-							{manager.proposal.name}
-						</DD>
-					</DLRow>
-					<DLRow title={manager.expired ? 'Expired' : 'Expiration'}>
-						<DD>
-							{manager.proposal.transaction.expiration} ({manager.expiresIn})
-						</DD>
-					</DLRow>
-					<DLRow title="Hash">
-						<DD>
-							{manager.proposal.hash}
-						</DD>
-					</DLRow>
-				</DL>
+					{#if manager.userIsApprover}
+						{#if manager.userHasApproved}
+							<Button
+								variant="secondary"
+								onclick={() => manager.unapprove()}
+								disabled={context.wharf.transacting}>Unapprove</Button
+							>
+						{:else}
+							<Button
+								class="bg-success text-on-success"
+								variant="primary"
+								onclick={() => manager.approve()}
+								disabled={context.wharf.transacting}>Approve</Button
+							>
+						{/if}
+					{/if}
 
-				{#if manager.userIsApprover}
-					{#if manager.userHasApproved}
-						<Button
-							variant="secondary"
-							onclick={() => manager.unapprove()}
-							disabled={context.wharf.transacting}>Unapprove</Button
-						>
-					{:else}
-						<Button
-							class="bg-success text-on-success"
-							variant="primary"
-							onclick={() => manager.approve()}
-							disabled={context.wharf.transacting}>Approve</Button
+					{#if manager.userIsProposer}
+						<Button variant="secondary" disabled={context.wharf.transacting} onclick={cancel}
+							>Cancel MSIG</Button
 						>
 					{/if}
-				{/if}
 
-				{#if manager.userIsProposer}
-					<Button variant="secondary" disabled={context.wharf.transacting} onclick={cancel}
-						>Cancel MSIG</Button
+					<Button
+						variant="primary"
+						disabled={context.wharf.transacting}
+						onclick={() => manager.execute()}>Execute</Button
 					>
-				{/if}
-
-				<Button
-					variant="primary"
-					disabled={context.wharf.transacting}
-					onclick={() => manager.execute()}>Execute</Button
-				>
-			</Stack>
-		</TransactForm>
+				</Stack>
+			</TransactForm>
+		</Card>
 	</Switcher>
-
-	<Stack>
-		<h2 class="text-title">Proposed Actions ({variant})</h2>
-		<SelectActionVariant />
-		{#each manager.readable as decodedAction}
-			{@const contract = String(decodedAction.action.account)}
-			{@const action = String(decodedAction.action.name)}
-			{@const summary = getActionSummaryComponent(contract, action, decodedAction.action.data)}
-			<ActionCard
-				action={decodedAction.action}
-				objectified={decodedAction.readable?.data}
-				{summary}
-				{variant}
-			/>
-		{/each}
-	</Stack>
 </Stack>
 
 {#if context.settings.data.debugMode}

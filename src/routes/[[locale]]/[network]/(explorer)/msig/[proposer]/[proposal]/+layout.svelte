@@ -5,21 +5,20 @@
 	import { getContext } from 'svelte';
 
 	const { children, data } = $props();
-	const { settings, urlPath } = getContext<UnicoveContext>('state');
+	const { urlPath } = getContext<UnicoveContext>('state');
 
 	const tabOptions = $derived.by(() => {
 		let urlBase = urlPath(`/msig/${data.proposal.proposer}/${data.proposal.name}`);
 		return [
-			{ href: urlBase, text: 'Overview' },
+			{ href: urlBase, text: 'Status' },
+			{ href: `${urlBase}/actions`, text: `Actions (${data.proposal.transaction.actions.length})` },
+			{ href: `${urlBase}/transaction`, text: 'Transaction' },
 			{ href: `${urlBase}/data`, text: 'Data' }
 		];
 	});
 </script>
 
 <Stack class="@container">
-	{#if settings.data.debugMode}
-		<PillGroup options={tabOptions} />
-	{/if}
-
+	<PillGroup options={tabOptions} />
 	{@render children()}
 </Stack>

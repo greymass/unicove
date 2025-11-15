@@ -5,5 +5,5 @@
 </script>
 
 <Code>
-	{JSON.stringify(props.data, null, 2)}
+	{JSON.stringify(props.data.proposal, null, 2)}
 </Code>
