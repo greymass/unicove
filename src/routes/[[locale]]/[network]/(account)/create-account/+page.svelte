@@ -1,0 +1,19 @@
+<script lang="ts">
+	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import { getContext } from 'svelte';
+	import { Button } from 'unicove-components';
+
+	const context = getContext<UnicoveContext>('state');
+</script>
+
+<h3>I have tokens on an exchange and want to create an account.</h3>
+
+<Button href={context.urlPath('/create-account/contract')}>Create Account by Sending Tokens</Button>
+
+<h3>I have an account and want to create another.</h3>
+
+<Button href={context.urlPath('/create-account/direct')}>Create Account</Button>
+
+<h3>I have an account and want to create an msig account to share with other accounts.</h3>
+
+<Button href={context.urlPath('/create-account/msig')}>Create MSIG Account</Button>

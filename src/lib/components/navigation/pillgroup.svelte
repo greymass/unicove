@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { Button } from 'unicove-components';
 	import { page } from '$app/state';
-	import { cn, goto } from '$lib/utils';
+	import { cn } from '$lib/utils';
 	import { createSelect, melt, type CreateSelectProps } from '@melt-ui/svelte';
 	import { fade } from 'svelte/transition';
 	import { ChevronDown } from '@lucide/svelte';
+	import { goto } from '$app/navigation';
 
 	interface Option {
 		href: string;
@@ -18,10 +19,8 @@
 
 	const { options, ...props }: Props = $props();
 
-	let pathWithoutLanguageTag = $derived(page.url.pathname.slice(3));
-
 	let currentOption = $derived(
-		options.map((o) => o.href).findLast((h) => pathWithoutLanguageTag.startsWith(h))
+		options.map((o) => o.href).findLast((h) => page.url.pathname.startsWith(h))
 	);
 
 	const isCurrent = (href: string) => currentOption === href;

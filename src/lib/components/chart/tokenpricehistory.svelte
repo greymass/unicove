@@ -18,7 +18,7 @@
 		if (context.network.supports('timeseries')) {
 			try {
 				const response = await context.network.fetch(
-					`/${context.network}/api/metrics/marketprice/token`
+					context.urlPath(`/api/metrics/marketprice/token`)
 				);
 				const parsedTokenResponse: APIResponse = await response.json();
 

@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { ActionSummaryProps } from '$lib/types/transaction';
-	import * as m from '$lib/paraglide/messages';
 	import Row from '../components/row.svelte';
 	import { Chip } from 'unicove-components';
 	import { Int64 } from '@wharfkit/antelope';
@@ -26,7 +25,7 @@
 
 {#if Int64.from(data.powup_cpu).gt(ZeroUnits)}
 	<Row>
-		<Chip>{m.common_resources()}</Chip>
+		<Chip>Resources</Chip>
 		{#if browser}
 			+ {(resources.cpu / 1000).toFixed(3)} ms (CPU)
 		{:else}
@@ -37,7 +36,7 @@
 
 {#if Int64.from(data.powup_net).gt(ZeroUnits)}
 	<Row>
-		<Chip>{m.common_resources()}</Chip>
+		<Chip>Resources</Chip>
 		{#if browser}
 			+ {(resources.net / 1000).toFixed(3)} kb (NET)
 		{:else}

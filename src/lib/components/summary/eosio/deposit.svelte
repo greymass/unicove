@@ -7,7 +7,6 @@
 	import { Chip } from 'unicove-components';
 	import { Types } from '$lib/types/rex';
 	import Row from '../components/row.svelte';
-	import * as m from '$lib/paraglide/messages';
 
 	interface Props extends Omit<ActionSummaryProps, 'data'> {
 		data: Types.deposit;
@@ -17,7 +16,7 @@
 </script>
 
 <Row>
-	<Chip>{m.common_staking()}</Chip>
+	<Chip>Staking</Chip>
 	<AssetElement value={Asset.from(data.amount)} variant="full" />
 	<AccountElement name={Name.from(data.owner)} />
 </Row>

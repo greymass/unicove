@@ -2,8 +2,6 @@ import { Name, PublicKey, UInt32, Checksum256 } from '@wharfkit/antelope';
 import { browser } from '$app/environment';
 import type { NetworkState } from './network.svelte';
 import type { UnicoveContext } from './client.svelte';
-import type { WharfState } from './client/wharf.svelte';
-import * as m from '$lib/paraglide/messages';
 
 export type SearchResult = {
 	result: string;
@@ -45,74 +43,74 @@ export interface SearchRecord {
 // export interface Command extends Record {}
 // export interface Favorite extends Record {}
 
-export const SearchCommands: SearchRecord[] = [
+const SearchCommands: SearchRecord[] = [
 	{
 		value: 'RAM Market',
 		type: SearchRecordType.PAGE,
 		keywords: ['ram'],
-		description: m.search_result_description_ram(),
+		description: 'Market Overview',
 		url: '/ram'
 	},
 	{
 		value: 'Buy RAM',
 		type: SearchRecordType.PAGE,
 		keywords: ['ram', 'buy'],
-		description: m.search_result_description_buyram(),
+		description: 'Purchase RAM',
 		url: '/ram/buy'
 	},
 	{
 		value: 'Sell RAM',
 		type: SearchRecordType.PAGE,
 		keywords: ['ram', 'sell'],
-		description: m.search_result_description_sellram(),
+		description: 'Sell RAM',
 		url: '/ram/sell'
 	},
 	{
 		value: 'Send',
 		type: SearchRecordType.PAGE,
 		keywords: ['send', 'transfer'],
-		description: m.search_result_description_transfer(),
+		description: 'Transfer tokens',
 		url: '/send'
 	},
 	{
 		value: 'Settings',
 		type: SearchRecordType.PAGE,
 		keywords: ['settings', 'preferences'],
-		description: m.search_result_description_settings(),
+		description: 'Configure Unicove',
 		url: '/settings'
 	},
 	{
 		value: 'Staking',
 		type: SearchRecordType.PAGE,
 		keywords: ['staking', 'stake'],
-		description: m.search_result_description_staking(),
+		description: 'Staking overview',
 		url: '/staking'
 	},
 	{
 		value: 'Stake',
 		type: SearchRecordType.PAGE,
 		keywords: ['stake'],
-		description: m.common_stake_action(),
+		description: 'Stake Tokens',
 		url: '/staking/stake'
 	},
 	{
 		value: 'Unstake',
 		type: SearchRecordType.PAGE,
 		keywords: ['unstake'],
-		description: m.common_unstake_action(),
+		description: 'Unstake tokens',
 		url: '/staking/unstake'
 	},
 	{
 		value: 'Resources',
 		type: SearchRecordType.PAGE,
 		keywords: ['resources', 'cpu', 'net', 'powerup'],
-		description: m.common_resources_action(),
+		description: 'Manage CPU/NET',
 		url: '/resources'
 	},
 	{
 		value: 'Clear',
 		type: SearchRecordType.CLEAR,
-		description: m.search_result_description_clear(),
+		description: 'Clear search history',
 		keywords: ['clear', 'history'],
 		url: ''
 	}
@@ -123,16 +121,16 @@ export function search(context: UnicoveContext, query: string): SearchRecord[] {
 
 	// Listing of the currently logged in accounts for quick switching
 	if (context.settings.data.searchAccountSwitch) {
-		results.push(...searchAccounts(query, context.network, context.wharf));
+		results.push(...searchAccounts(query, context));
 	}
 
 	// Page suggestions based on the input
 	if (context.settings.data.searchShowPages) {
-		results.push(...searchCommands(query, context.network));
+		results.push(...searchCommands(query, context));
 	}
 
 	// Search commands for matching keywords
-	results.push(...searchSuggestions(query, context.network));
+	results.push(...searchSuggestions(query, context));
 
 	// Search recent history
 	results.push(...searchHistory(query, context.history));
@@ -140,37 +138,36 @@ export function search(context: UnicoveContext, query: string): SearchRecord[] {
 	return results;
 }
 
-export function searchAccounts(
-	query: string,
-	network: NetworkState,
-	wharf: WharfState
-): SearchRecord[] {
+export function searchAccounts(query: string, context: UnicoveContext): SearchRecord[] {
+	const { network, wharf, urlPath } = context;
 	return wharf.sessions
 		.filter((s) => network.chain.id.equals(s.chain))
 		.filter((s) => String(s.actor).includes(query.trim().toLowerCase()))
 		.map((s) => ({
 			data: s,
-			description: m.common_switch_account(),
+			description: 'Switch Account',
 			type: SearchRecordType.SWITCH,
 			value: `${s.actor}@${s.permission}`,
-			url: `/${network}/account/${s.actor}`
+			url: urlPath(`/${network}/account/${s.actor}`)
 		}));
 }
 
-export function searchSuggestions(query: string, network: NetworkState): SearchRecord[] {
+export function searchSuggestions(query: string, context: UnicoveContext): SearchRecord[] {
+	const { network, urlPath } = context;
 	return getPossibleSearchTypes(query).map((type) => ({
 		type,
 		value: query,
-		url: `/${network}/${type}/${query}`
+		url: urlPath(`/${network}/${type}/${query}`)
 	}));
 }
 
-export function searchCommands(query: string, network: NetworkState): SearchRecord[] {
+export function searchCommands(query: string, context: UnicoveContext): SearchRecord[] {
+	const { network, urlPath } = context;
 	return SearchCommands.filter((c) =>
 		c.keywords?.some((keyword) => keyword.toLowerCase().includes(query.trim().toLowerCase()))
 	).map((c) => ({
 		...c,
-		url: `/${network}${c.url}`
+		url: urlPath(`/${network}${c.url}`)
 	}));
 }
 

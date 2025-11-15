@@ -3,9 +3,7 @@
 	import { createDialog, melt, type CreateDialogProps } from '@melt-ui/svelte';
 	import type { TextInput } from 'unicove-components';
 	import { preventDefault } from '$lib/utils';
-	import { goto } from '$lib/utils';
 	import { fade, scale } from 'svelte/transition';
-	import * as m from '$lib/paraglide/messages';
 	import {
 		SearchRecordType,
 		search,
@@ -24,6 +22,7 @@
 	import { ArrowRight } from '@lucide/svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { SerializedSession } from '@wharfkit/session';
+	import { goto } from '$app/navigation';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -226,9 +225,7 @@
 	<span class="inline-flex items-center gap-2">
 		<SearchIcon class="size-6 text-inherit md:size-5" />
 		<span class="hidden md:inline">
-			{m.common_search({
-				network: String(context.network.chain.name).slice(0, 3)
-			})}
+			Search {String(context.network.chain.name).slice(0, 3)}...
 		</span>
 	</span>
 
@@ -264,7 +261,7 @@
 							autocapitalize="off"
 							bind:this={ref}
 							bind:value={searchValue}
-							placeholder={m.common_search_unicove()}
+							placeholder="Search Unicove"
 							class="border-primary w-full rounded-lg border-2 bg-transparent p-4 focus:outline-hidden"
 						/>
 						<div class="text-muted absolute inset-y-1 right-4 hidden place-items-center sm:grid">
@@ -277,17 +274,17 @@
 					{#if results.length > 0}
 						<div class="table-head-styles col-span-full grid grid-cols-subgrid select-none">
 							{#if searchValue}
-								<span class="pl-2">{m.common_search_results()}</span>
+								<span class="pl-2">Search Results</span>
 							{:else}
-								<span class="pl-2">{m.common_recent_activity()}</span>
+								<span class="pl-2">Recent Activity</span>
 							{/if}
-							<span class="text-right sm:text-left">{m.common_action()}</span>
+							<span class="text-right sm:text-left">Action</span>
 							{#if !searchValue}
 								<button
 									class="focus-visible:outline-solar-500 hidden justify-self-end focus-visible:outline focus-visible:outline-offset-2 sm:block"
 									onclick={() => context.history.clear()}
 								>
-									{m.common_clear()}
+									Clear
 								</button>
 							{/if}
 						</div>
@@ -307,12 +304,11 @@
 						<!-- No results -->
 						<div class="col-span-full m-4 grid items-center justify-items-center">
 							{#if searchValue}
-								<span class="text-muted col-span-full text-center">
-									{m.common_search_no_results()}
-								</span>
+								<span class="text-muted col-span-full text-center">No results found</span>
 							{:else}
 								<span class="text-muted col-span-full text-center">
-									{m.common_search_instructions()}
+									Search for Unicove features or enter an account name, public key, or transaction
+									ID on the network.
 								</span>
 							{/if}
 						</div>
@@ -346,13 +342,12 @@
 		class="group-has-[:hover]/list:text-muted hover:group-has-[:hover]/list:bg-surface-container-high hover:group-has-[:hover]/list:text-on-surface data-[active=true]:bg-surface-container-high data-[active=true]:text-on-surface col-span-full grid h-12 grid-cols-subgrid items-center justify-items-start rounded-lg group-has-[:hover]/list:bg-transparent focus:outline-hidden"
 		data-active={active}
 	>
-		<Result class="col-span-2 sm:col-span-3" {active} record={item} onclick={closeSearch}>
-			<button
-				class="text-muted focus-visible:ring-solar-500 hover:text-on-surface grid hidden size-12 place-items-center justify-self-end focus-visible:ring-3 focus-visible:outline-hidden focus-visible:ring-inset sm:block"
-				onclick={() => context.history.remove(index)}
-			>
-				<X class="text-inherit" />
-			</button>
-		</Result>
+		<Result class="col-span-2 sm:col-span-2" {active} record={item} onclick={closeSearch}></Result>
+		<button
+			class="text-muted focus-visible:ring-solar-500 hover:text-on-surface grid hidden size-12 place-items-center justify-self-end focus-visible:ring-3 focus-visible:outline-hidden focus-visible:ring-inset sm:block"
+			onclick={() => context.history.remove(index)}
+		>
+			<X class="text-inherit" />
+		</button>
 	</li>
 {/snippet}

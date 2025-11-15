@@ -8,9 +8,8 @@
 	import { createSelect, melt, type CreateSelectProps } from '@melt-ui/svelte';
 	import { fade } from 'svelte/transition';
 	import { chainMap } from '$lib/wharf/chains';
-	import { goto } from '$lib/utils';
 	import type { NetworkState } from '$lib/state/network.svelte';
-	import * as m from '$lib/paraglide/messages';
+	import { goto } from '$app/navigation';
 
 	interface Props {
 		currentNetwork: NetworkState;
@@ -85,7 +84,7 @@
 
 		{#if options.length > 1 && context.settings.data.advancedMode}
 			<div class="font-regular text-muted m-0 flex items-center gap-1 pr-1 text-base">
-				<span use:melt={$label}>{m.change_network()}</span>
+				<span use:melt={$label}>Change network</span>
 				<ChevronDown
 					data-open={$open}
 					class="size-4 transition-transform duration-100 data-[open=true]:rotate-180"

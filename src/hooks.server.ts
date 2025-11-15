@@ -1,63 +1,35 @@
 import { sequence } from '@sveltejs/kit/hooks';
-import type { Handle, RequestEvent } from '@sveltejs/kit';
+import type { Handle } from '@sveltejs/kit';
 
 import { PUBLIC_CHAIN_SHORT } from '$env/static/public';
-import { availableLanguageTags } from '$lib/paraglide/runtime.js';
-import { i18n } from '$lib/i18n';
-import { isNetworkShortName, ramtoken, systemtoken } from '$lib/wharf/chains';
 import { getBackendNetworkByName } from '$lib/wharf/client/ssr';
 
-export const i18nHandle = i18n.handle();
-type HandleParams = Parameters<Handle>[0];
+import * as main from './locales/loader.ssr.svelte';
+import * as js from './locales/loader.ssr';
+import { runWithLocale, loadLocales } from 'wuchale/load-utils/server';
+import { locales } from 'virtual:wuchale/locales';
+import { localizePath } from '$lib/utils/url';
 
-const renamedNetworks: Record<string, string> = {
-	eos: 'vaulta'
-};
+await loadLocales(main.key, main.loadIDs, main.loadCatalog, locales);
+await loadLocales(js.key, js.loadIDs, js.loadCatalog, locales);
 
-export function getHeaderLang(event: RequestEvent) {
-	const acceptLanguage = event.request.headers.get('accept-language');
-	const locales =
-		acceptLanguage?.split(',')?.map((lang: string) => lang.split(';')[0].split('-')[0].trim()) ??
-		[];
-	for (const locale of locales) {
-		if (availableLanguageTags.find((l: string) => l.toLowerCase() === locale.toLowerCase())) {
-			return locale;
-		}
+export const wuchaleHandle: Handle = async ({ event, resolve }) => {
+	let locale: string = 'en';
+	const [, firstPart] = event.url.pathname.split('/');
+	if (event.cookies.get('locale') && event.cookies.get('locale') !== locale) {
+		locale = event.cookies.get('locale') ?? locale;
+	} else if (locales.includes(firstPart)) {
+		locale = firstPart;
 	}
-	return null;
-}
-
-function isAPIPath(pathname: string) {
-	return /^\/[a-z0-9]+\/api/gm.test(pathname);
-}
-
-function skipRedirect(pathname: string) {
-	return isAPIPath(pathname) || pathname.endsWith('.xml');
-}
-
-function isNetwork(value: string) {
-	return isNetworkShortName(value);
-}
-
-const redirects: Record<string, string> = {
-	'/earn': '/staking',
-	'/resources/ram/buy': '/ram/buy',
-	'/resources/ram/sell': '/ram/sell',
-	'/swap/eos': `/swap/${systemtoken.id.url}/core.vaulta/4,a`,
-	'/swap/kb': `/swap/${systemtoken.id.url}/${ramtoken.id.url}}`,
-	'/swap/ram': `/swap/${systemtoken.id.url}/${ramtoken.id.url}}`,
-	'/swap/eosio/4,eos/core.vaulta/4,a': '/swap/eosio.token/4,eos/core.vaulta/4,a'
+	event.locals.locale = locale;
+	return await runWithLocale(locale, () =>
+		resolve(event, {
+			transformPageChunk: ({ html }) => html.replace('%lang%', locale)
+		})
+	);
 };
 
-function getManualRedirectPath(pathMore: string[]): string {
-	const pathname = '/' + pathMore.join('/');
-	return redirects[pathname];
-}
-
-function isManualRedirectPath(pathMore: string[]): boolean {
-	const pathname = '/' + pathMore.join('/');
-	return pathname in redirects;
-}
+type HandleParams = Parameters<Handle>[0];
 
 export async function networkHandle({ event, resolve }: HandleParams): Promise<Response> {
 	event.locals.network = getBackendNetworkByName(PUBLIC_CHAIN_SHORT, event.fetch);
@@ -69,34 +41,12 @@ export async function networkHandle({ event, resolve }: HandleParams): Promise<R
 export async function redirectHandle({ event, resolve }: HandleParams): Promise<Response> {
 	const { pathname, search } = new URL(event.request.url);
 
-	if (skipRedirect(pathname)) {
-		return resolve(event);
-	}
+	const url = localizePath(pathname, {
+		forceNetwork: PUBLIC_CHAIN_SHORT,
+		forceLocale: event.locals.locale
+	});
 
-	const [, pathFirst, pathSecond, ...pathMore] = pathname.split('/').map((p) => p.trim());
-
-	let lang = pathFirst;
-	const network: string = PUBLIC_CHAIN_SHORT;
-
-	if (!isNetwork(pathSecond) && !renamedNetworks[pathSecond]) {
-		lang = pathFirst;
-		pathMore.unshift(pathSecond);
-	}
-
-	// Ensure that the 'lang' property exists on the 'Locals' type
-	(event.locals as { lang: string }).lang = lang;
-
-	let url = `/${lang}/${network}`;
-
-	if (pathMore.length > 0) {
-		if (isManualRedirectPath(pathMore)) {
-			url += getManualRedirectPath(pathMore);
-		} else {
-			url += `/${pathMore.join('/')}`;
-		}
-	}
-
-	if (pathname !== url) {
+	if (pathname !== url && !pathname.includes('/api/')) {
 		return new Response(undefined, {
 			headers: { Location: url + search },
 			status: 302
@@ -106,4 +56,4 @@ export async function redirectHandle({ event, resolve }: HandleParams): Promise<
 	return resolve(event);
 }
 
-export const handle: Handle = sequence(i18nHandle, redirectHandle, networkHandle);
+export const handle: Handle = sequence(wuchaleHandle, redirectHandle, networkHandle);

@@ -4,7 +4,8 @@
 	import { CopyButton } from 'unicove-components';
 	import { type NetworkState } from '$lib/state/network.svelte';
 	import ChevronLeft from '@lucide/svelte/icons/chevron-left';
-	import type { ComponentProps } from 'svelte';
+	import { getContext, type ComponentProps } from 'svelte';
+	import type { UnicoveContext } from '$lib/state/client.svelte';
 
 	interface Props {
 		title: string;
@@ -17,9 +18,11 @@
 
 	let props: Props = $props();
 
+	const { urlPath } = getContext<UnicoveContext>('state');
+
 	function goBack() {
 		if (props.backPath) {
-			goto(props.backPath);
+			goto(urlPath(props.backPath));
 		} else {
 			history.back();
 		}

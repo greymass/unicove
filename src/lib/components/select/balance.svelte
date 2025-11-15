@@ -2,7 +2,6 @@
 	import { createSelect, type SelectOption } from '@melt-ui/svelte';
 	import { SelectTrigger, SelectMenu, SelectItem } from 'unicove-components';
 	import { writable } from 'svelte/store';
-	import * as m from '$lib/paraglide/messages';
 	import { TokenBalance } from '$lib/types/token';
 	import type { ChangeFn } from '@melt-ui/svelte/internal/helpers';
 	import { Code } from 'unicove-components';
@@ -108,7 +107,7 @@
 	<!-- {#if selectedTokenImage}
 		<img src={selectedTokenImage} alt={$selectedLabel} class="mr-2 size-5 object-contain" />
 	{/if} -->
-	{_selected ? label(_selected) : m.common_select_an_option()}
+	{_selected ? label(_selected) : 'Select an option'}
 </SelectTrigger>
 
 {#if $open}

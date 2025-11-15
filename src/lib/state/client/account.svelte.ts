@@ -39,6 +39,7 @@ import {
 	tokenEquals,
 	ZeroUnits
 } from '$lib/types/token';
+import { localizePath } from '$lib/utils/url';
 
 export class AccountState {
 	public client?: APIClient = $state();
@@ -79,7 +80,8 @@ export class AccountState {
 	}
 
 	async refresh() {
-		const response = await this.fetch(`/${this.network}/api/account/${this.name}`);
+		const path = localizePath(`/api/account/${this.name}`);
+		const response = await this.fetch(path);
 		if (!response.ok) {
 			throw new Error(
 				`Failed to fetch account data for ${this.name} on ${this.network.chain.name}`
