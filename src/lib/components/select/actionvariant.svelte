@@ -6,6 +6,12 @@
 
 	const context = getContext<UnicoveContext>('state');
 
+	const {
+		display = false
+	}: {
+		display?: boolean;
+	} = $props();
+
 	let current = $derived(context.settings.data.actionDisplayVariant);
 
 	function set(variant: ActionDisplayVariants) {
@@ -13,7 +19,7 @@
 	}
 </script>
 
-{#if context.settings.data.advancedMode}
+{#if display || context.settings.data.advancedMode}
 	<Switcher>
 		<Button
 			variant={current !== 'summary' ? 'secondary' : 'primary'}

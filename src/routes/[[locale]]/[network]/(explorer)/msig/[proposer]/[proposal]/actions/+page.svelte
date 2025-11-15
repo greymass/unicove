@@ -25,7 +25,7 @@
 <Stack class="mt-6">
 	<Stack>
 		<h2 class="text-title">Proposed Actions ({variant})</h2>
-		<SelectActionVariant />
+		<SelectActionVariant display />
 		{#each manager.readable as decodedAction}
 			{@const contract = String(decodedAction.action.account)}
 			{@const action = String(decodedAction.action.name)}
