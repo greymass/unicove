@@ -55,7 +55,7 @@ export default {
 		logsellram,
 		logsystemfee,
 		mvfrsavings,
-		newaccount,
+		// newaccount, // Broken
 		powerup,
 		ramtransfer,
 		refund,
