@@ -108,7 +108,14 @@ else
 	cp ./configs/contracts/eosio.rex.ts $(CONTRACTS)/eosio.rex.ts
 endif
 
-codegen: $(CONTRACTS)/system.ts $(CONTRACTS)/token.ts $(CONTRACTS)/msig.ts $(CONTRACTS)/eosio.wram.ts $(CONTRACTS)/eosio.reserv.ts $(CONTRACTS)/eosio.rex.ts $(CONTRACTS)/delphihelper.ts $(CONTRACTS)/delphioracle.ts $(CONTRACTS)/unicove.api.ts $(CONTRACTS)/eosntime.ts $(CONTRACTS)/core.vaulta.ts
+$(CONTRACTS)/sentiment.ts:
+ifeq ($(PUBLIC_FEATURE_SENTIMENT),true)
+	$(BIN)/wharfkit generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/sentiment.ts $(PUBLIC_SENTIMENT_CONTRACT)
+else
+	cp ./configs/contracts/sentiment.ts $(CONTRACTS)/sentiment.ts
+endif
+
+codegen: $(CONTRACTS)/system.ts $(CONTRACTS)/token.ts $(CONTRACTS)/msig.ts $(CONTRACTS)/eosio.wram.ts $(CONTRACTS)/eosio.reserv.ts $(CONTRACTS)/eosio.rex.ts $(CONTRACTS)/delphihelper.ts $(CONTRACTS)/delphioracle.ts $(CONTRACTS)/unicove.api.ts $(CONTRACTS)/eosntime.ts $(CONTRACTS)/core.vaulta.ts $(CONTRACTS)/sentiment.ts
 	mkdir -p $(CONTRACTS)
 
 .PHONY: codegen/base
@@ -120,6 +127,7 @@ codegen/base:
 	$(BIN)/wharfkit generate -u $(PUBLIC_API_CHAIN) -f ./configs/contracts/unicove.api.ts $(PUBLIC_FEATURE_UNICOVE_CONTRACT_API)
 	$(BIN)/wharfkit generate -u https://eos.greymass.com -f ./configs/contracts/eosio.rex.ts eosio.rex
 	$(BIN)/wharfkit generate -u https://eos.greymass.com -f ./configs/contracts/eosio.wram.ts eosio.wram
+	$(BIN)/wharfkit generate -u https://eos.greymass.com -f ./configs/contracts/sentiment.ts sentiment.gm
 	make format
 
 .PHONY: clean

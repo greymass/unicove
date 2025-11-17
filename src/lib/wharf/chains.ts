@@ -6,6 +6,7 @@ import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphiora
 import { Contract as MSIGContract } from '$lib/wharf/contracts/msig';
 import { Contract as ReserveContract } from '$lib/wharf/contracts/eosio.reserv';
 import { Contract as REXContract } from '$lib/wharf/contracts/eosio.rex';
+import { Contract as SentimentContract } from '$lib/wharf/contracts/sentiment';
 import { Contract as SystemContract } from '$lib/wharf/contracts/system';
 import { Contract as TimeContract } from '$lib/wharf/contracts/eosntime';
 import { Contract as TokenContract } from '$lib/wharf/contracts/token';
@@ -144,6 +145,7 @@ export const chainConfig: ChainConfig = {
 		rentrex: isENVTrue(env.PUBLIC_FEATURE_RENTREX),
 		rex: isENVTrue(env.PUBLIC_FEATURE_REX),
 		robo: isENVTrue(env.PUBLIC_FEATURE_ROBO),
+		sentiment: isENVTrue(env.PUBLIC_FEATURE_SENTIMENT),
 		stakeresource: isENVTrue(env.PUBLIC_FEATURE_STAKERESOURCE),
 		staking: isENVTrue(env.PUBLIC_FEATURE_STAKING),
 		timeseries: isENVTrue(env.PUBLIC_FEATURE_TIMESERIES),
@@ -163,6 +165,7 @@ export interface DefaultContracts {
 	msig: MSIGContract;
 	reserve: ReserveContract;
 	rex: REXContract;
+	sentiment: SentimentContract;
 	system: SystemContract;
 	token: TokenContract;
 	unicove: UnicoveContract;
@@ -226,6 +229,7 @@ export type FeatureType =
 	| 'rentrex'
 	| 'rex'
 	| 'robo'
+	| 'sentiment'
 	| 'stakeresource'
 	| 'staking'
 	| 'timeseries'
