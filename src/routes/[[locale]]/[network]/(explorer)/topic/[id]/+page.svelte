@@ -11,31 +11,28 @@
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
 
-	let transactionId = $state<Checksum256 | undefined>(undefined);
 	let transactionError = $state<string | undefined>(undefined);
-	let lastUpdatedBeforeAction = $state<string | null>(null);
+	let pendingUpdateTimestamp = $state<string | null>(null);
 
+	// Auto-clear loading state when data updates after transaction
 	$effect(() => {
-		if (lastUpdatedBeforeAction && data.sentiment.currentTopic?.topic?.lastUpdated) {
-			if (data.sentiment.currentTopic.topic.lastUpdated !== lastUpdatedBeforeAction) {
-				data.sentiment.loadingStatistics = false;
-				lastUpdatedBeforeAction = null;
-			}
+		const currentTimestamp = data.sentiment.currentTopic?.topic?.lastUpdated;
+
+		if (pendingUpdateTimestamp && currentTimestamp && currentTimestamp !== pendingUpdateTimestamp) {
+			data.sentiment.loadingStatistics = false;
+			pendingUpdateTimestamp = null;
 		}
 	});
 
 	async function handleVoteSuccess(id?: Checksum256, voteType?: number | null) {
+		// Update local state optimistically
 		if (context.account && voteType !== undefined) {
 			data.sentiment.updateUserVote(context.account.name, data.topicId, voteType);
 		}
 
-		if (data.sentiment.currentTopic?.topic?.lastUpdated) {
-			lastUpdatedBeforeAction = data.sentiment.currentTopic.topic.lastUpdated;
-		}
-
+		// Capture timestamp before refresh to detect when new data arrives
+		pendingUpdateTimestamp = data.sentiment.currentTopic?.topic?.lastUpdated ?? null;
 		data.sentiment.loadingStatistics = true;
-
-		transactionId = id;
 	}
 
 	async function handleVoteFailure(error: string) {
@@ -165,12 +162,7 @@
 		<div>
 			<h2 class="text-on-surface mb-3 text-xl font-bold">Cast Your Vote</h2>
 			<Card>
-				<TransactForm
-					id={transactionId}
-					error={transactionError}
-					onfailure={Failure}
-					onsuccessdismiss={() => (transactionId = undefined)}
-				>
+				<TransactForm error={transactionError} onfailure={Failure}>
 					<div class="space-y-4">
 						{#if data.sentiment.currentUserVote}
 							<div
@@ -183,7 +175,7 @@
 										>{data.sentiment.currentUserVote.vote_type === 1
 											? 'Supporting'
 											: 'Opposing'}</strong
-									> this topic
+									> this topic.
 								</div>
 								<VoteButtons
 									topicId={data.topicId}
