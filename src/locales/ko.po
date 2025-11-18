@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.663Z\n"
-"PO-Revision-Date: 2025-11-18T08:59:11.519Z\n"
+"PO-Revision-Date: 2025-11-18T09:38:11.072Z\n"
 "Last-Translator: \n"
 "Language: ko\n"
 "Language-Team: \n"
@@ -1052,16 +1052,16 @@ msgstr ""
 #. placeholder {0}: ramtoken.name
 #: src/routes/[[locale]]/[network]/(homepage)/components/performance-grid.svelte
 msgid "{0}/USD"
-msgstr ""
+msgstr "{0}/USD"
 
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
 msgid "EOS rebrands to Vaulta"
-msgstr ""
+msgstr "EOS가 Vaulta로 리브랜딩됩니다"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/staked/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/stakedhex.svelte
 msgid "APR"
-msgstr ""
+msgstr "APR"
 
 #: src/routes/[[locale]]/[network]/(homepage)/components/legacy-token-swap.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/staking-rewards.svelte
@@ -3805,7 +3805,7 @@ msgstr "언스테이킹"
 msgid ""
 "The tokens currently being unstaked are listed below with the date they become available.\n"
 "These balances will continue to earn rewards until they are withdrawn."
-msgstr ""
+msgstr "현재 언스테이킹 중인 토큰은 사용 가능해지는 날짜와 함께 아래에 나열되어 있습니다. 이 잔액은 인출될 때까지 계속 보상을 받게 됩니다."
 
 #: src/lib/components/elements/unstaking.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balances/+page.svelte
@@ -4128,11 +4128,11 @@ msgstr "현재 APR"
 
 #: src/routes/[[locale]]/[network]/(account)/staking/+page.svelte
 msgid "Staking Balance"
-msgstr ""
+msgstr "스테이킹 잔액"
 
 #: src/routes/[[locale]]/[network]/(account)/staking/+page.svelte
 msgid "tokens Staked"
-msgstr ""
+msgstr "스테이킹된 토큰"
 
 #. placeholder {0}: data.network.chain.name
 #: src/routes/[[locale]]/[network]/(account)/staking/+page.svelte
@@ -4206,7 +4206,7 @@ msgstr "<0>Unicove -</0> {0} 웹 지갑 및 블록 탐색기"
 
 #. placeholder {0}: network.chain.name
 #. placeholder {0}: networkName
-#. placeholder {0}: network.chain.name
+#. placeholder {0}: networkName
 #: src/routes/+layout.server.ts
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
@@ -4238,10 +4238,10 @@ msgstr "{0} 토큰 스왑이 시작되었습니다!"
 #. placeholder {1}: props.network.token.name
 #: src/routes/[[locale]]/[network]/(homepage)/components/legacy-token-swap.svelte
 msgid "Swap {0} to {1} at a 1:1 ratio"
-msgstr ""
+msgstr "{0}을(를) {1}으로 1:1 비율로 교환하세요"
 
 #. placeholder {0}: props.network.token.name
-#. placeholder {0}: String(data.quote.symbol.name)
+#. placeholder {0}: props.network.token.name
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/legacy-token-swap.svelte
 msgid "Swap to {0}"
@@ -4260,7 +4260,7 @@ msgstr "토큰 받기 "
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
-#. placeholder {0}: symbol.name
+#. placeholder {0}: String(network.token.symbol.name)
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
@@ -4285,8 +4285,8 @@ msgstr "1개의 {0}은 네트워크 전체 블록체인 저장 용량 중 1000�
 #. placeholder {1}: quote.name
 #. placeholder {0}: data.network.token.name
 #. placeholder {1}: data.network.getRamToken().name
-#. placeholder {0}: base.name
-#. placeholder {1}: quote.name
+#. placeholder {0}: String(network.chain.systemToken?.symbol.name)
+#. placeholder {1}: String(ramtoken.name)
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.svelte
@@ -4301,13 +4301,13 @@ msgstr "총 스테이킹량"
 #. placeholder {0}: network.token.name
 #: src/routes/[[locale]]/[network]/(homepage)/components/staking-rewards.svelte
 msgid "{0} Staking Rewards"
-msgstr ""
+msgstr "{0} 스테이킹 보상"
 
 #. placeholder {0}: network.token.name
 #. placeholder {1}: apr
 #: src/routes/[[locale]]/[network]/(homepage)/components/staking-rewards.svelte
 msgid "Stake {0} today for an estimated {1}% APR<0>1</0>."
-msgstr ""
+msgstr "지금 {0}을(를) 스테이킹하여 예상 APR {1}%<0>1</0>를 받으세요."
 
 #. placeholder {0}: network.token.name
 #. placeholder {1}: String( network.chain.systemToken?.symbol.name )

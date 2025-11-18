@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2025-11-18T08:59:14.337Z\n"
+"PO-Revision-Date: 2025-11-18T09:38:12.338Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -1052,16 +1052,16 @@ msgstr ""
 #. placeholder {0}: ramtoken.name
 #: src/routes/[[locale]]/[network]/(homepage)/components/performance-grid.svelte
 msgid "{0}/USD"
-msgstr ""
+msgstr "{0}/美元"
 
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
 msgid "EOS rebrands to Vaulta"
-msgstr ""
+msgstr "EOS 品牌重塑为 Vaulta"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/staked/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/stakedhex.svelte
 msgid "APR"
-msgstr ""
+msgstr "年化收益率"
 
 #: src/routes/[[locale]]/[network]/(homepage)/components/legacy-token-swap.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/staking-rewards.svelte
@@ -3806,6 +3806,8 @@ msgid ""
 "The tokens currently being unstaked are listed below with the date they become available.\n"
 "These balances will continue to earn rewards until they are withdrawn."
 msgstr ""
+"下面列出了当前正在取消抵押的代币以及它们可用的日期。\n"
+"这些余额将继续赚取奖励，直到被提取。"
 
 #: src/lib/components/elements/unstaking.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balances/+page.svelte
@@ -4130,11 +4132,11 @@ msgstr "当前年利率"
 
 #: src/routes/[[locale]]/[network]/(account)/staking/+page.svelte
 msgid "Staking Balance"
-msgstr ""
+msgstr "质押余额"
 
 #: src/routes/[[locale]]/[network]/(account)/staking/+page.svelte
 msgid "tokens Staked"
-msgstr ""
+msgstr "已质押代币"
 
 #. placeholder {0}: data.network.chain.name
 #: src/routes/[[locale]]/[network]/(account)/staking/+page.svelte
@@ -4208,7 +4210,7 @@ msgstr "<0>Unicove -</0> {0} 网页钱包与区块浏览器"
 
 #. placeholder {0}: network.chain.name
 #. placeholder {0}: networkName
-#. placeholder {0}: network.chain.name
+#. placeholder {0}: networkName
 #: src/routes/+layout.server.ts
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
@@ -4240,10 +4242,10 @@ msgstr "{0}代币置换已开始！"
 #. placeholder {1}: props.network.token.name
 #: src/routes/[[locale]]/[network]/(homepage)/components/legacy-token-swap.svelte
 msgid "Swap {0} to {1} at a 1:1 ratio"
-msgstr ""
+msgstr "以 1:1 的比例将 {0} 兑换为 {1}"
 
 #. placeholder {0}: props.network.token.name
-#. placeholder {0}: String(data.quote.symbol.name)
+#. placeholder {0}: props.network.token.name
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/legacy-token-swap.svelte
 msgid "Swap to {0}"
@@ -4262,7 +4264,7 @@ msgstr "获取代币"
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
-#. placeholder {0}: symbol.name
+#. placeholder {0}: String(network.token.symbol.name)
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
@@ -4287,8 +4289,8 @@ msgstr "一个 {0} 的 RAM 代表对网络总区块链存储容量中 1000 字�
 #. placeholder {1}: quote.name
 #. placeholder {0}: data.network.token.name
 #. placeholder {1}: data.network.getRamToken().name
-#. placeholder {0}: base.name
-#. placeholder {1}: quote.name
+#. placeholder {0}: String(network.chain.systemToken?.symbol.name)
+#. placeholder {1}: String(ramtoken.name)
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.svelte
@@ -4303,13 +4305,13 @@ msgstr "总质押"
 #. placeholder {0}: network.token.name
 #: src/routes/[[locale]]/[network]/(homepage)/components/staking-rewards.svelte
 msgid "{0} Staking Rewards"
-msgstr ""
+msgstr "{0} 质押奖励"
 
 #. placeholder {0}: network.token.name
 #. placeholder {1}: apr
 #: src/routes/[[locale]]/[network]/(homepage)/components/staking-rewards.svelte
 msgid "Stake {0} today for an estimated {1}% APR<0>1</0>."
-msgstr ""
+msgstr "立即质押 {0}，预计年化利率可达 {1}%<0>1</0>。"
 
 #. placeholder {0}: network.token.name
 #. placeholder {1}: String( network.chain.systemToken?.symbol.name )
