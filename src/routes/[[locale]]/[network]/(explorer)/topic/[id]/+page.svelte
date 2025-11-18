@@ -7,6 +7,7 @@
 	import TopicStats from '$lib/components/sentiment/topicStats.svelte';
 	import VoteButtons from '$lib/components/sentiment/voteButtons.svelte';
 	import TransactForm from '$lib/components/transact/form.svelte';
+	import { formatDescription } from '$lib/utils/strings';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
@@ -153,7 +154,9 @@
 						<div class="text-on-surface-variant text-xs font-medium tracking-wide uppercase">
 							Description
 						</div>
-						<p class="text-on-surface">{topic.description}</p>
+						<div class="text-on-surface whitespace-pre-wrap">
+							{formatDescription(topic.description)}
+						</div>
 					</div>
 				{/if}
 			</div>
