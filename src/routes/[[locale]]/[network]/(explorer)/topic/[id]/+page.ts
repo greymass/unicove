@@ -2,7 +2,7 @@ import type { PageLoad } from './$types';
 import { SentimentState } from '../../topics/state.svelte';
 import { error } from '@sveltejs/kit';
 
-export const load: PageLoad = async ({ parent, params, depends, fetch }) => {
+export const load: PageLoad = async ({ parent, params, fetch }) => {
 	const { network } = await parent();
 	const locale = params.locale || 'en';
 	const topicId = params.id;

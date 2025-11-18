@@ -229,7 +229,7 @@ export class SentimentState {
 			} else {
 				this.currentUserVote = null;
 			}
-		} catch (e) {
+		} catch {
 			this.currentUserVote = null;
 		}
 	}

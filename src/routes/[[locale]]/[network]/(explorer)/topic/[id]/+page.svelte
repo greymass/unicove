@@ -40,8 +40,6 @@
 		transactionError = error;
 	}
 
-	let lastRefreshSuccess = $state(true);
-
 	$effect(() => {
 		if (context.account?.name) {
 			data.sentiment.loadUserVote(context.account.name, data.topicId);
@@ -60,10 +58,8 @@
 
 				try {
 					await data.sentiment.refreshTopicAndVotes(data.topicId, true);
-					lastRefreshSuccess = true;
 				} catch (e) {
 					console.error('Auto-refresh failed:', e);
-					lastRefreshSuccess = false;
 				}
 			}, 5000);
 		};
