@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2025-11-18T08:42:53.314Z\n"
+"PO-Revision-Date: 2025-11-18T08:59:14.337Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -355,7 +355,7 @@ msgstr ""
 
 #: src/lib/components/navigation/mobilenavigation.svelte
 msgid "Unicove Home"
-msgstr ""
+msgstr "Unicove 主页"
 
 #: src/lib/components/navigation/pillgroup.svelte
 msgid "Page"
@@ -393,24 +393,24 @@ msgstr ""
 #: src/lib/components/search/input.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 msgid "INPUT"
-msgstr ""
+msgstr "输入"
 
 #: src/lib/components/search/input.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 msgid "TEXTAREA"
-msgstr ""
+msgstr "文本区域"
 
 #: src/lib/components/search/input.svelte
 msgid "ArrowDown"
-msgstr ""
+msgstr "向下箭头"
 
 #: src/lib/components/search/input.svelte
 msgid "ArrowUp"
-msgstr ""
+msgstr "向上箭头"
 
 #: src/lib/components/search/input.svelte
 msgid "Mac"
-msgstr ""
+msgstr "Mac"
 
 #: src/lib/components/input/assetOrUnits.svelte
 msgid "Component State"
@@ -460,7 +460,7 @@ msgstr ""
 
 #: src/lib/components/select/language.svelte
 msgid "Unknown"
-msgstr ""
+msgstr "未知"
 
 #: src/lib/components/toast/toast.svelte
 msgid "X"
@@ -3842,7 +3842,7 @@ msgstr "未找到结果"
 msgid ""
 "Search for Unicove features or enter an account name, public key, or transaction\n"
 "ID on the network."
-msgstr ""
+msgstr "搜索 Unicove 功能，或在网络上输入帐户名、公钥或交易 ID。"
 
 #: src/lib/components/transact/summary.svelte
 msgid "Multi-Sig Proposal Created"
@@ -3853,12 +3853,14 @@ msgid ""
 "The multi-sig proposal for this transaction has been created and now needs to be approved.\n"
 "View the proposal below and share it with the parties who need to sign."
 msgstr ""
+"此交易的多重签名提案已创建，现在需要获得批准。\n"
+"查看下面的提案并与需要签名的各方分享。"
 
 #. placeholder {0}: proposal.proposer
 #. placeholder {1}: proposal.proposal_name
 #: src/lib/components/transact/summary.svelte
 msgid "View Proposal ({0}/{1})"
-msgstr ""
+msgstr "查看提案 ({0}/{1})"
 
 #: src/lib/components/transact/summary.svelte
 msgid "Transaction Complete"
@@ -5147,7 +5149,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid "Loading..."
-msgstr ""
+msgstr "加载中..."
 
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
 msgid "No swap pair available"
@@ -5599,19 +5601,19 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid "Loading topics..."
-msgstr ""
+msgstr "正在加载主题..."
 
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid "Failed to load topics"
-msgstr ""
+msgstr "加载主题失败"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid "Try Again"
-msgstr ""
+msgstr "重试"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid "No topics available yet"
-msgstr ""
+msgstr "目前还没有可用主题"
 
 #. placeholder {0}: topicData.statistics.supportPercentage
 #. placeholder {0}: statistics.supportPercentage
@@ -5706,12 +5708,12 @@ msgstr "移除"
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.ts
 msgid "Network Sentiment"
-msgstr ""
+msgstr "网络情绪"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.ts
 msgid "Express your opinion on topics important to the community"
-msgstr ""
+msgstr "表达您对社区重要话题的看法"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
 msgid "Updating..."
@@ -5723,7 +5725,7 @@ msgstr "取消"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid "Load More"
-msgstr ""
+msgstr "加载更多"
 
 #: src/lib/components/sentiment/topicStats.svelte
 msgid "Updating Data"
@@ -5751,20 +5753,20 @@ msgstr "投票统计"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid "About Sentiment Voting"
-msgstr ""
+msgstr "关于情绪投票"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid ""
 "Each topic shows the total participation and the distribution of support versus\n"
 "opposition, helping the community gauge consensus on key issues."
-msgstr ""
+msgstr "每个主题都显示了总参与度以及支持与反对的分布，从而帮助社区评估对关键问题的共识。```"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid ""
 "Sentiment voting allows token holders to express their support or opposition on\n"
 "important community topics. Your vote is weighted by your staked tokens, giving more\n"
 "influence to those with a larger stake in the network."
-msgstr ""
+msgstr "情绪投票允许代币持有者对重要的社区话题表达他们的支持或反对。您的投票权重取决于您抵押的代币数量，从而使在网络中拥有更大份额的人拥有更大的影响力。"
 
 #~ msgid "You are <0/> this topic"
 #~ msgstr ""
