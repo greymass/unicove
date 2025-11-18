@@ -38,19 +38,31 @@
 
 			{#if topicData.statistics.totalVotes > 0}
 				<div class="space-y-2">
-					<div class="bg-surface-container flex h-2 overflow-hidden rounded-full">
-						{#if topicData.statistics.supportPercentage > 0}
+					<div class="relative">
+						{#if topicData.statistics.supportPercentage > 0 && topicData.statistics.oppositionPercentage > 0}
 							<div
-								class="bg-success"
-								style="width: {topicData.statistics.supportPercentage}%"
-							></div>
+								class="absolute -top-3 flex -translate-x-1/2 justify-center text-white"
+								style="left: {topicData.statistics.supportPercentage}%"
+							>
+								<svg class="size-3" viewBox="0 0 12 12" fill="currentColor">
+									<path d="M6 12 L0 0 L12 0 Z" />
+								</svg>
+							</div>
 						{/if}
-						{#if topicData.statistics.oppositionPercentage > 0}
-							<div
-								class="bg-error"
-								style="width: {topicData.statistics.oppositionPercentage}%"
-							></div>
-						{/if}
+						<div class="bg-surface-container flex h-2 gap-[1px] overflow-hidden rounded-full">
+							{#if topicData.statistics.supportPercentage > 0}
+								<div
+									class="bg-success"
+									style="width: {topicData.statistics.supportPercentage}%"
+								></div>
+							{/if}
+							{#if topicData.statistics.oppositionPercentage > 0}
+								<div
+									class="bg-error"
+									style="width: {topicData.statistics.oppositionPercentage}%"
+								></div>
+							{/if}
+						</div>
 					</div>
 
 					<div class="text-on-surface-variant flex justify-between text-xs">

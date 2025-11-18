@@ -76,13 +76,25 @@
 	<Card>
 		<h3 class="text-on-surface mb-3 text-sm font-semibold">Vote Distribution</h3>
 		<div class="space-y-3">
-			<div class="bg-surface-container flex h-4 overflow-hidden rounded-full">
-				{#if statistics.supportPercentage > 0}
-					<div class="bg-success" style="width: {statistics.supportPercentage}%"></div>
+			<div class="relative">
+				{#if statistics.supportPercentage > 0 && statistics.oppositionPercentage > 0}
+					<div
+						class="absolute -top-5 flex -translate-x-1/2 justify-center text-white"
+						style="left: {statistics.supportPercentage}%"
+					>
+						<svg class="size-4" viewBox="0 0 12 12" fill="currentColor">
+							<path d="M6 12 L0 0 L12 0 Z" />
+						</svg>
+					</div>
 				{/if}
-				{#if statistics.oppositionPercentage > 0}
-					<div class="bg-error" style="width: {statistics.oppositionPercentage}%"></div>
-				{/if}
+				<div class="bg-surface-container flex h-4 gap-[1px] overflow-hidden rounded-full">
+					{#if statistics.supportPercentage > 0}
+						<div class="bg-success" style="width: {statistics.supportPercentage}%"></div>
+					{/if}
+					{#if statistics.oppositionPercentage > 0}
+						<div class="bg-error" style="width: {statistics.oppositionPercentage}%"></div>
+					{/if}
+				</div>
 			</div>
 			<div class="flex justify-between text-sm">
 				<span class="text-success font-semibold">{statistics.supportPercentage}% Support</span>

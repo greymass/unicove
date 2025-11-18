@@ -162,7 +162,7 @@
 				onclick={() => handleVote(1)}
 			>
 				<span class="flex items-center gap-2">
-					<ThumbsUp class="size-4" />
+					<ThumbsUp class="text-success size-4" />
 					<span>{currentVote === 1 ? 'Supporting' : 'Support'}</span>
 				</span>
 			</Button>
@@ -174,7 +174,7 @@
 				onclick={() => handleVote(0)}
 			>
 				<span class="flex items-center gap-2">
-					<ThumbsDown class="size-4" />
+					<ThumbsDown class="text-error size-4" />
 					<span>{currentVote === 0 ? 'Opposing' : 'Oppose'}</span>
 				</span>
 			</Button>
