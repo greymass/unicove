@@ -24,6 +24,8 @@ export enum SearchRecordType {
 	PAGE = 'page',
 	// Switch to an account
 	SWITCH = 'switch',
+	// View a topic
+	TOPIC = 'topic',
 	// View a transaction
 	TRANSACTION = 'transaction',
 	// Unknown type, error?
@@ -154,7 +156,7 @@ export function searchAccounts(query: string, context: UnicoveContext): SearchRe
 
 export function searchSuggestions(query: string, context: UnicoveContext): SearchRecord[] {
 	const { network, urlPath } = context;
-	return getPossibleSearchTypes(query).map((type) => ({
+	return getPossibleSearchTypes(query, context).map((type) => ({
 		type,
 		value: query,
 		url: urlPath(`/${network}/${type}/${query}`)
@@ -178,13 +180,17 @@ export function searchHistory(query: string, recentHistory: SearchRecordStorage)
 		.filter((r) => r.value.includes(query.trim().toLowerCase()));
 }
 
-export function getPossibleSearchTypes(value: string): SearchRecordType[] {
+export function getPossibleSearchTypes(value: string, context: UnicoveContext): SearchRecordType[] {
 	const types: SearchRecordType[] = [];
 	if (isSearchAccount(value)) types.push(SearchRecordType.ACCOUNT);
 	if (isSearchAccount(value)) types.push(SearchRecordType.CONTRACT);
 	if (isSearchBlock(value)) types.push(SearchRecordType.BLOCK);
 	if (isSearchKey(value)) types.push(SearchRecordType.KEY);
 	if (isSearchTransaction(value)) types.push(SearchRecordType.TRANSACTION);
+	// Only add topic search if sentiment feature is enabled
+	if (context.network.config.features.sentiment && isSearchAccount(value)) {
+		types.push(SearchRecordType.TOPIC);
+	}
 	return types;
 }
 
