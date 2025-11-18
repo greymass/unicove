@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2025-11-18T08:12:28.268Z\n"
+"PO-Revision-Date: 2025-11-18T08:42:53.314Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -16,12 +16,12 @@ msgstr ""
 #: src/routes/+layout.server.ts
 #: src/routes/[[locale]]/[network]/+error.svelte
 msgid "Page not found"
-msgstr ""
+msgstr "未找到页面"
 
 #: src/lib/assets/unicovelogo.svelte
 #: src/routes/+layout.server.ts
 msgid "Unicove"
-msgstr ""
+msgstr "Unicove"
 
 #: src/lib/components/accountswitch.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/buy/+page.svelte
@@ -37,7 +37,7 @@ msgstr "关闭"
 
 #: src/lib/components/accountswitch.svelte
 msgid "Filter accounts"
-msgstr ""
+msgstr "筛选账户"
 
 #: src/lib/components/footer.svelte
 msgid "About"
@@ -90,7 +90,7 @@ msgstr "状态"
 #: src/lib/components/sentiment/voteButtons.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
 msgid "Support"
-msgstr ""
+msgstr "支持"
 
 #: src/lib/components/footer.svelte
 msgid "Help Center"
@@ -210,7 +210,7 @@ msgstr "RAM 市场"
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/buy/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/buy/+page.ts
 msgid "Buy RAM"
-msgstr ""
+msgstr "购买 RAM"
 
 #: src/lib/state/search.svelte.ts
 #: src/lib/state/search.svelte.ts
@@ -367,12 +367,12 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/resources/+page.svelte
 msgid "RAM"
-msgstr ""
+msgstr "内存"
 
 #: src/lib/components/navigation/sidemenu.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/+page.svelte
 msgid "Debug State"
-msgstr ""
+msgstr "调试状态"
 
 #: src/lib/components/navigation/sidemenu.svelte
 msgid "My Account"
@@ -464,11 +464,11 @@ msgstr ""
 
 #: src/lib/components/toast/toast.svelte
 msgid "X"
-msgstr ""
+msgstr "X"
 
 #: src/lib/state/client/wharf.svelte.ts
 msgid "Transaction was not resolved."
-msgstr ""
+msgstr "交易未被解析。"
 
 #: src/lib/components/contract/action/response.svelte
 msgid "Response Array <0/>"
@@ -3450,7 +3450,7 @@ msgstr ""
 
 #: src/routes/+layout.server.ts
 msgid "Your gateway to Web3"
-msgstr ""
+msgstr "您通往 Web3 的门户"
 
 #. placeholder {0}: ramtoken.name
 #. placeholder {1}: systemtoken.name
@@ -3677,7 +3677,7 @@ msgstr "我的账户"
 #. placeholder {0}: session.walletPlugin.data.session.actor
 #: src/lib/components/accountswitch.svelte
 msgid "↳ multisig using {0}"
-msgstr ""
+msgstr "↳ 使用 {0} 的多重签名"
 
 #: src/lib/components/accountswitch.svelte
 msgid "Login to Unicove"
@@ -4283,8 +4283,8 @@ msgstr "一个 {0} 的 RAM 代表对网络总区块链存储容量中 1000 字�
 #. placeholder {1}: quote.name
 #. placeholder {0}: base.name
 #. placeholder {1}: quote.name
-#. placeholder {0}: base.name
-#. placeholder {1}: quote.name
+#. placeholder {0}: data.network.token.name
+#. placeholder {1}: data.network.getRamToken().name
 #. placeholder {0}: base.name
 #. placeholder {1}: quote.name
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.ts
@@ -5618,90 +5618,90 @@ msgstr ""
 #: src/lib/components/sentiment/topicCard.svelte
 #: src/lib/components/sentiment/topicStats.svelte
 msgid "{0}% Support"
-msgstr ""
+msgstr "{0}% 支持"
 
 #. placeholder {0}: topicData.statistics.oppositionPercentage
 #. placeholder {0}: statistics.oppositionPercentage
 #: src/lib/components/sentiment/topicCard.svelte
 #: src/lib/components/sentiment/topicStats.svelte
 msgid "{0}% Oppose"
-msgstr ""
+msgstr "{0}% 反对"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.ts
 msgid "Sentiment"
-msgstr ""
+msgstr "情绪"
 
 #: src/lib/components/sentiment/topicStats.svelte
 #: src/lib/components/sentiment/voteButtons.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
 msgid "Oppose"
-msgstr ""
+msgstr "反对"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
 msgid "Back to All Topics"
-msgstr ""
+msgstr "返回所有话题"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
 msgid "Loading topic..."
-msgstr ""
+msgstr "正在加载话题...```"
 
 #: src/lib/components/sentiment/voteButtons.svelte
 #: src/lib/components/sentiment/voteButtons.svelte
 msgid "Please log in to vote"
-msgstr ""
+msgstr "请登录后进行投票"
 
 #: src/lib/components/sentiment/voteButtons.svelte
 msgid "Please log in to remove vote"
-msgstr ""
+msgstr "请登录后取消投票"
 
 #: src/lib/components/sentiment/voteButtons.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
 msgid "Supporting"
-msgstr ""
+msgstr "支持"
 
 #: src/lib/components/sentiment/voteButtons.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
 msgid "Opposing"
-msgstr ""
+msgstr "反对"
 
 #: src/lib/components/sentiment/topicStats.svelte
 msgid "Vote Distribution"
-msgstr ""
+msgstr "投票分布"
 
 #: src/lib/components/sentiment/topicStats.svelte
 msgid "Total Weight"
-msgstr ""
+msgstr "总权重"
 
 #: src/lib/components/sentiment/topicStats.svelte
 msgid "Support Weight"
-msgstr ""
+msgstr "支持权重"
 
 #: src/lib/components/sentiment/topicStats.svelte
 msgid "Opposition Weight"
-msgstr ""
+msgstr "反对权重"
 
 #. placeholder {0}: new Date(topic.lastUpdated).toLocaleString()
 #. placeholder {0}: new Date(topic.lastUpdated).toLocaleString()
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
 msgid "Last updated {0}"
-msgstr ""
+msgstr "上次更新时间 {0}"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
 msgid "Description"
-msgstr ""
+msgstr "描述"
 
 #: src/lib/components/sentiment/topicStats.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
 msgid "Participants"
-msgstr ""
+msgstr "参与者"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
 msgid "Load More Participants"
-msgstr ""
+msgstr "加载更多参与者"
 
 #: src/lib/components/sentiment/voteButtons.svelte
 msgid "Remove"
-msgstr ""
+msgstr "移除"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.ts
@@ -5715,11 +5715,11 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
 msgid "Updating..."
-msgstr ""
+msgstr "更新中..."
 
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
 msgid "Dismiss"
-msgstr ""
+msgstr "取消"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid "Load More"
@@ -5727,27 +5727,27 @@ msgstr ""
 
 #: src/lib/components/sentiment/topicStats.svelte
 msgid "Updating Data"
-msgstr ""
+msgstr "正在更新数据"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.ts
 msgid "Overview and statistics"
-msgstr ""
+msgstr "概览与统计"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.ts
 msgid "Overview and statistics for community sentiment on the"
-msgstr ""
+msgstr "关于社区对以下主题的情绪的概览与统计"
 
 #: src/lib/components/sentiment/voteButtons.svelte
 msgid "Voting as <0/> with weight <1/>"
-msgstr ""
+msgstr "正在以 <0/> 身份投票，权重为 <1/>"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
 msgid "Cast Your Vote"
-msgstr ""
+msgstr "投出你的票"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
 msgid "Vote Statistics"
-msgstr ""
+msgstr "投票统计"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid "About Sentiment Voting"
@@ -5766,6 +5766,9 @@ msgid ""
 "influence to those with a larger stake in the network."
 msgstr ""
 
+#~ msgid "You are <0/> this topic"
+#~ msgstr ""
+
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
-msgid "You are <0/> this topic"
-msgstr ""
+msgid "You are <0/> this topic."
+msgstr "你<0/>这个话题。"
