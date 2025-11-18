@@ -21,13 +21,30 @@
 	// Example: ['', 'en', 'eos', 'staking', 'withdraw']
 	let pathname = $derived(page.url.pathname.split('/'));
 
+	const isCurrentAccountActive = $derived(
+		pathname[3] === 'account' && pathname[4] === String(context.account?.name)
+	);
+
 	const destinations = $derived.by(() => {
 		const items = [
-			// {
-			// 	href: `/${locale}/${network}`,
-			// 	text: network.chain.name,
-			// 	active: pathname[2] === String(network) && !pathname[3]
-			// },
+			{
+				href: urlPath(`/explore`),
+				text: 'Explore',
+				active:
+					[
+						'explore',
+						'key',
+						'account',
+						'block',
+						'contract',
+						'msig',
+						'network',
+						'producers',
+						'prompt',
+						'token',
+						'transaction'
+					].includes(pathname[3]) && !isCurrentAccountActive
+			},
 			{ href: urlPath(`/send`), text: 'Send', active: pathname[3] === 'send' }
 		];
 
@@ -63,7 +80,7 @@
 			items.splice(0, 0, {
 				href: urlPath(`/account/${context.account.name}`),
 				text: 'My Account',
-				active: pathname[3] === 'account' && pathname[4] === String(context.account.name)
+				active: isCurrentAccountActive
 			});
 		}
 

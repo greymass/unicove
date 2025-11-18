@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2025-11-14T18:51:30.871Z\n"
+"PO-Revision-Date: 2025-11-25T19:12:37.247Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -88,6 +88,8 @@ msgstr "Status"
 
 #: src/lib/components/footer.svelte
 #: src/lib/components/footer.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Support"
 msgstr "Support"
 
@@ -1203,6 +1205,8 @@ msgstr "Choose A Wallet Type"
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/prompt/[payload]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/prompt/[payload]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Back"
 msgstr "Back"
 
@@ -1332,6 +1336,7 @@ msgid "Config"
 msgstr "Config"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/+layout.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "Contracts"
 msgstr "Contracts"
 
@@ -1341,6 +1346,7 @@ msgstr "Market"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/+layout.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/network/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "Network"
 msgstr "Network"
 
@@ -1380,7 +1386,7 @@ msgstr "Overview"
 
 #. placeholder {0}: data.abi.actions.length
 #. placeholder {0}: data.transaction.transaction.actions.length
-#. placeholder {0}: data.transaction.transaction.actions.length
+#. placeholder {0}: data.proposal.transaction.actions.length
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/actions/+page.svelte
@@ -2275,6 +2281,7 @@ msgid "Links to transactions that perform common types of actions."
 msgstr "Links to transactions that perform common types of actions."
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/summaries/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "Tokens"
 msgstr "Tokens"
 
@@ -3533,6 +3540,7 @@ msgstr "An overview of RAM Market on the {0} network that provides access to buy
 
 #: src/routes/[[locale]]/[network]/(account)/transactions/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "Transactions"
 msgstr "Transactions"
 
@@ -3554,6 +3562,7 @@ msgstr "Select a wallet and create an account on the {0} network."
 msgid "Select a {0} compatible wallet and create an account on the {1} network."
 msgstr "Select a {0} compatible wallet and create an account on the {1} network."
 
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/network/+layout.ts
 msgid "Network Overview"
 msgstr "Network Overview"
@@ -5109,7 +5118,9 @@ msgid "Execute"
 msgstr "Execute"
 
 #. placeholder {0}: variant
+#. placeholder {0}: variant
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/actions/+page.svelte
 msgid "Proposed Actions ({0})"
 msgstr "Proposed Actions ({0})"
 
@@ -5276,6 +5287,7 @@ msgid "Network Fee: <0/> (0.5%)"
 msgstr "Network Fee: <0/> (0.5%)"
 
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid "Loading..."
 msgstr "Loading..."
 
@@ -5364,6 +5376,7 @@ msgstr "Stake {0} to earn rewards."
 msgid "An overview of staking on the {0} network providing easy access to stake, unstake, and withdraw {1} tokens using an {2} compatible wallet."
 msgstr "An overview of staking on the {0} network providing easy access to stake, unstake, and withdraw {1} tokens using an {2} compatible wallet."
 
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+layout.ts
 msgid "Block Producers"
 msgstr "Block Producers"
@@ -5726,3 +5739,653 @@ msgstr "How to Sign Transactions on the {0} network with MetaMask"
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "MetaMask Wallet Plugin"
 msgstr "MetaMask Wallet Plugin"
+
+#~ msgid "test"
+#~ msgstr "test"
+
+#: src/lib/components/navigation/sidemenu.svelte
+msgid "Explore"
+msgstr "Explore"
+
+#. placeholder {0}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.ts
+msgid "Explore {0}"
+msgstr "Explore {0}"
+
+#~ msgid "Overview and statistics"
+#~ msgstr "Overview and statistics"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.ts
+msgid "Sentiment"
+msgstr "Sentiment"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.ts
+msgid "Overview and statistics for community sentiment on the"
+msgstr "Overview and statistics for community sentiment on the"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.ts
+msgid "Network Sentiment"
+msgstr "Network Sentiment"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.ts
+msgid "Express your opinion on topics important to the community"
+msgstr "Express your opinion on topics important to the community"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
+msgid "Loading topics..."
+msgstr "Loading topics..."
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
+msgid "Failed to load topics"
+msgstr "Failed to load topics"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
+msgid "Try Again"
+msgstr "Try Again"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
+msgid "No topics available yet"
+msgstr "No topics available yet"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
+msgid "Load More"
+msgstr "Load More"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
+msgid "About Sentiment Voting"
+msgstr "About Sentiment Voting"
+
+#~ msgid ""
+#~ "Sentiment voting allows token holders to express their support or opposition on\n"
+#~ "important community topics. Your vote is weighted by your staked tokens, giving more\n"
+#~ "influence to those with a larger stake in the network."
+#~ msgstr ""
+#~ "Sentiment voting allows token holders to express their support or opposition on\n"
+#~ "important community topics. Your vote is weighted by your staked tokens, giving more\n"
+#~ "influence to those with a larger stake in the network."
+
+#~ msgid ""
+#~ "Each topic shows the total participation and the distribution of support versus\n"
+#~ "opposition, helping the community gauge consensus on key issues."
+#~ msgstr ""
+#~ "Each topic shows the total participation and the distribution of support versus\n"
+#~ "opposition, helping the community gauge consensus on key issues."
+
+#. placeholder {0}: statistics.supportPercentage
+#: src/lib/components/sentiment/SentimentMeter.svelte
+msgid "{0}% Support"
+msgstr "{0}% Support"
+
+#. placeholder {0}: statistics.oppositionPercentage
+#: src/lib/components/sentiment/SentimentMeter.svelte
+msgid "{0}% Oppose"
+msgstr "{0}% Oppose"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
+msgid "Stake tokens"
+msgstr "Stake tokens"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
+msgid "Updating..."
+msgstr "Updating..."
+
+#: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
+msgid "Dismiss"
+msgstr "Dismiss"
+
+#. placeholder {0}: new Date(sentiment.currentTopic.topic.lastUpdated).toLocaleString()
+#. placeholder {0}: new Date(sentiment.currentTopic.topic.lastUpdated).toLocaleString()
+#: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.ts
+msgid "Last updated {0}"
+msgstr "Last updated {0}"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
+msgid "Description"
+msgstr "Description"
+
+#~ msgid "Cast Your Vote"
+#~ msgstr "Cast Your Vote"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
+msgid "Supporting"
+msgstr "Supporting"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
+msgid "Opposing"
+msgstr "Opposing"
+
+#~ msgid "You are <0/> this topic."
+#~ msgstr "You are <0/> this topic."
+
+#~ msgid "Vote Statistics"
+#~ msgstr "Vote Statistics"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
+msgid "Participants"
+msgstr "Participants"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
+msgid "Oppose"
+msgstr "Oppose"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
+msgid "Load More Participants"
+msgstr "Load More Participants"
+
+#~ msgid "Back to All Topics"
+#~ msgstr "Back to All Topics"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
+msgid "Loading topic..."
+msgstr "Loading topic..."
+
+#: src/lib/components/sentiment/topicStats.svelte
+msgid "Updating Data"
+msgstr "Updating Data"
+
+#: src/lib/components/sentiment/topicStats.svelte
+msgid "Support Weight"
+msgstr "Support Weight"
+
+#: src/lib/components/sentiment/topicStats.svelte
+msgid "Total Weight"
+msgstr "Total Weight"
+
+#: src/lib/components/sentiment/topicStats.svelte
+msgid "Opposition Weight"
+msgstr "Opposition Weight"
+
+#: src/lib/components/sentiment/topicStats.svelte
+msgid "Vote Distribution"
+msgstr "Vote Distribution"
+
+#: src/lib/components/sentiment/voteButtons.svelte
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "Please log in to vote"
+msgstr "Please log in to vote"
+
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "Please log in to remove vote"
+msgstr "Please log in to remove vote"
+
+#~ msgid "Remove"
+#~ msgstr "Remove"
+
+#~ msgid "Voting as <0/> with weight <1/>"
+#~ msgstr "Voting as <0/> with weight <1/>"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
+msgid ""
+"Sentiment voting allows token holders to express their support or opposition on important\n"
+"community topics. Your vote is weighted by your staked tokens, giving more influence to\n"
+"those with a larger stake in the network."
+msgstr ""
+"Sentiment voting allows token holders to express their support or opposition on important\n"
+"community topics. Your vote is weighted by your staked tokens, giving more influence to\n"
+"those with a larger stake in the network."
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
+msgid ""
+"Each topic shows the total participation and the distribution of support versus opposition,\n"
+"helping the community gauge consensus on key issues."
+msgstr ""
+"Each topic shows the total participation and the distribution of support versus opposition,\n"
+"helping the community gauge consensus on key issues."
+
+#~ msgid "description"
+#~ msgstr "description"
+
+#~ msgid "Fuel level:"
+#~ msgstr "Fuel level:"
+
+#~ msgid "at 50/100"
+#~ msgstr "at 50/100"
+
+#~ msgid "Support two"
+#~ msgstr "Support two"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
+msgid "Your Vote"
+msgstr "Your Vote"
+
+#~ msgid "I support this"
+#~ msgstr "I support this"
+
+#~ msgid "I oppose this"
+#~ msgstr "I oppose this"
+
+#~ msgid "Actually, I support this"
+#~ msgstr "Actually, I support this"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
+msgid "Statistics"
+msgstr "Statistics"
+
+#~ msgid "123456780 A"
+#~ msgstr "123456780 A"
+
+#~ msgid "1234567890 A"
+#~ msgstr "1234567890 A"
+
+#~ msgid "No Opposing"
+#~ msgstr "No Opposing"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
+msgid "No opposing votes"
+msgstr "No opposing votes"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
+msgid "No supporting votes"
+msgstr "No supporting votes"
+
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "Do you support or oppose this topic?"
+msgstr "Do you support or oppose this topic?"
+
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "I support this topic"
+msgstr "I support this topic"
+
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "I oppose this topic"
+msgstr "I oppose this topic"
+
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "Voting"
+msgstr "Voting"
+
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "Voted"
+msgstr "Voted"
+
+#. placeholder {0}: currentVote === null ? 'Voting' : 'Voted'
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "{0} as <0/> with weight <1/>"
+msgstr "{0} as <0/> with weight <1/>"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Accounts"
+msgstr "Accounts"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Explore account information, balances, permissions, and activity"
+msgstr "Explore account information, balances, permissions, and activity"
+
+#~ msgid "Search Account"
+#~ msgstr "Search Account"
+
+#~ msgid "Find any account on the network"
+#~ msgstr "Find any account on the network"
+
+#~ msgid "View your account details"
+#~ msgstr "View your account details"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Blocks"
+msgstr "Blocks"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Browse blockchain blocks and their transactions"
+msgstr "Browse blockchain blocks and their transactions"
+
+#~ msgid "Latest Blocks"
+#~ msgstr "Latest Blocks"
+
+#~ msgid "View recent blocks"
+#~ msgstr "View recent blocks"
+
+#~ msgid "Block by Number"
+#~ msgstr "Block by Number"
+
+#~ msgid "Explore specific blocks"
+#~ msgstr "Explore specific blocks"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Inspect smart contracts, ABIs, actions, and data tables"
+msgstr "Inspect smart contracts, ABIs, actions, and data tables"
+
+#~ msgid "Search Contract"
+#~ msgstr "Search Contract"
+
+#~ msgid "Find any contract"
+#~ msgstr "Find any contract"
+
+#~ msgid "System Contracts"
+#~ msgstr "System Contracts"
+
+#~ msgid "View core system contracts"
+#~ msgstr "View core system contracts"
+
+#~ msgid "Token Contracts"
+#~ msgstr "Token Contracts"
+
+#~ msgid "Explore token contracts"
+#~ msgstr "Explore token contracts"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Keys"
+msgstr "Keys"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Investigate public keys and associated accounts"
+msgstr "Investigate public keys and associated accounts"
+
+#~ msgid "Search Key"
+#~ msgstr "Search Key"
+
+#~ msgid "Find accounts by public key"
+#~ msgstr "Find accounts by public key"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Analyze transaction details, actions, and traces"
+msgstr "Analyze transaction details, actions, and traces"
+
+#~ msgid "Search Transaction"
+#~ msgstr "Search Transaction"
+
+#~ msgid "Lookup transaction by ID"
+#~ msgstr "Lookup transaction by ID"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Multi-Signatures"
+msgstr "Multi-Signatures"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Review and manage multi-signature proposals"
+msgstr "Review and manage multi-signature proposals"
+
+#~ msgid "Search Proposal"
+#~ msgstr "Search Proposal"
+
+#~ msgid "Find msig proposals"
+#~ msgstr "Find msig proposals"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Monitor network status and producers"
+msgstr "Monitor network status and producers"
+
+#~ msgid "Network statistics"
+#~ msgstr "Network statistics"
+
+#~ msgid "View active producers"
+#~ msgstr "View active producers"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Explore token contracts and token information"
+msgstr "Explore token contracts and token information"
+
+#~ msgid "Token Search"
+#~ msgstr "Token Search"
+
+#~ msgid "Find any token"
+#~ msgstr "Find any token"
+
+#~ msgid "Native Token"
+#~ msgstr "Native Token"
+
+#~ msgid "View system token"
+#~ msgstr "View system token"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "System account"
+msgstr "System account"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Block.one account"
+msgstr "Block.one account"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Token contract account"
+msgstr "Token contract account"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "RAM market account"
+msgstr "RAM market account"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Staking account"
+msgstr "Staking account"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Block 1"
+msgstr "Block 1"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "First block"
+msgstr "First block"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Block 100"
+msgstr "Block 100"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Early block"
+msgstr "Early block"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Block 1000"
+msgstr "Block 1000"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Milestone block"
+msgstr "Milestone block"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Block 10000"
+msgstr "Block 10000"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Recent block"
+msgstr "Recent block"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Block 100000"
+msgstr "Block 100000"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Latest block"
+msgstr "Latest block"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "System contract"
+msgstr "System contract"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Token contract"
+msgstr "Token contract"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "RAM market contract"
+msgstr "RAM market contract"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "REX contract"
+msgstr "REX contract"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Multi-sig contract"
+msgstr "Multi-sig contract"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV"
+msgstr "EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "System key"
+msgstr "System key"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "EOS5kfnT3G1h5R5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z"
+msgstr "EOS5kfnT3G1h5R5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Example key 1"
+msgstr "Example key 1"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "EOS7K9P3qL4m2X8Y5R6T1W3V7B9N2M4Q6S8U0I2O4A6C8E0G2I4K6M8"
+msgstr "EOS7K9P3qL4m2X8Y5R6T1W3V7B9N2M4Q6S8U0I2O4A6C8E0G2I4K6M8"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Example key 2"
+msgstr "Example key 2"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "EOS8L2N5M7Q9R1T3V5X7Z9B2D4F6H8J0K2L4N6P8R0T2V4X6Z8B0D2F4H6J8"
+msgstr "EOS8L2N5M7Q9R1T3V5X7Z9B2D4F6H8J0K2L4N6P8R0T2V4X6Z8B0D2F4H6J8"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Example key 3"
+msgstr "Example key 3"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "EOS9M3N5P7R9T1V3X5Z7B9D2F4H6J8K0L2N4P6R8T0V2X4Z6B8D0F2H4J6K8"
+msgstr "EOS9M3N5P7R9T1V3X5Z7B9D2F4H6J8K0L2N4P6R8T0V2X4Z6B8D0F2H4J6K8"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Example key 4"
+msgstr "Example key 4"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Genesis transaction"
+msgstr "Genesis transaction"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Example transaction 1"
+msgstr "Example transaction 1"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Example transaction 2"
+msgstr "Example transaction 2"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Example transaction 3"
+msgstr "Example transaction 3"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Example transaction 4"
+msgstr "Example transaction 4"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "System proposal"
+msgstr "System proposal"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Block.one proposal"
+msgstr "Block.one proposal"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Token proposal"
+msgstr "Token proposal"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "RAM proposal"
+msgstr "RAM proposal"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Staking proposal"
+msgstr "Staking proposal"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Network statistics and status"
+msgstr "Network statistics and status"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Active producer list"
+msgstr "Active producer list"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Producer eosio"
+msgstr "Producer eosio"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "System producer"
+msgstr "System producer"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Producer bp1"
+msgstr "Producer bp1"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Example producer 1"
+msgstr "Example producer 1"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Producer bp2"
+msgstr "Producer bp2"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Example producer 2"
+msgstr "Example producer 2"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "EOS"
+msgstr "EOS"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Native system token"
+msgstr "Native system token"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "USDT"
+msgstr "USDT"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Tether USD"
+msgstr "Tether USD"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "USDC"
+msgstr "USDC"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "USD Coin"
+msgstr "USD Coin"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "BTC"
+msgstr "BTC"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Bitcoin token"
+msgstr "Bitcoin token"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "ETH"
+msgstr "ETH"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Ethereum token"
+msgstr "Ethereum token"
+oken"
+msgstr "Bitcoin token"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "ETH"
+msgstr "ETH"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Ethereum token"
+msgstr "Ethereum token"
