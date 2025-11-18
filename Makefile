@@ -110,7 +110,7 @@ endif
 
 $(CONTRACTS)/sentiment.ts:
 ifeq ($(PUBLIC_FEATURE_SENTIMENT),true)
-	$(BIN)/wharfkit generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/sentiment.ts $(PUBLIC_SENTIMENT_CONTRACT)
+	$(BIN)/wharfkit generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/sentiment.ts $(PUBLIC_FEATURE_SENTIMENT_CONTRACT)
 else
 	cp ./configs/contracts/sentiment.ts $(CONTRACTS)/sentiment.ts
 endif
