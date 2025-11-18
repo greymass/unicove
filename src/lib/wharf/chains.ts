@@ -179,6 +179,7 @@ export interface ChainEndpoints {
 	hyperion?: string;
 	lightapi?: string;
 	metrics?: string;
+	sentiment?: string;
 }
 
 export interface ChainBackend {
