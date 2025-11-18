@@ -38,11 +38,11 @@
 	<div class="grid gap-4 @lg:grid-cols-3">
 		<Card>
 			<div class="flex items-center justify-between gap-4">
-				<Weight class="text-primary size-12 shrink-0" />
+				<Weight class="text-success size-12 shrink-0" />
 				<div class="flex-1">
-					<p class="text-on-surface-variant text-right text-sm">Total Weight</p>
-					<p class="text-on-surface mt-1 text-right text-2xl font-bold">
-						<AssetText variant="short" value={statistics.totalWeightAsset} />
+					<p class="text-on-surface-variant text-right text-sm">Support Weight</p>
+					<p class="text-success mt-1 text-right text-2xl font-bold">
+						<AssetText variant="short" value={statistics.totalSupportWeightAsset} />
 					</p>
 				</div>
 			</div>
@@ -50,11 +50,11 @@
 
 		<Card>
 			<div class="flex items-center justify-between gap-4">
-				<Weight class="text-success size-12 shrink-0" />
+				<Weight class="text-primary size-12 shrink-0" />
 				<div class="flex-1">
-					<p class="text-on-surface-variant text-right text-sm">Support Weight</p>
-					<p class="text-success mt-1 text-right text-2xl font-bold">
-						<AssetText variant="short" value={statistics.totalSupportWeightAsset} />
+					<p class="text-on-surface-variant text-right text-sm">Total Weight</p>
+					<p class="text-on-surface mt-1 text-right text-2xl font-bold">
+						<AssetText variant="short" value={statistics.totalWeightAsset} />
 					</p>
 				</div>
 			</div>
@@ -94,11 +94,11 @@
 	<div class="grid gap-4 @lg:grid-cols-3">
 		<Card>
 			<div class="flex items-center justify-between gap-4">
-				<Users class="text-primary size-14 shrink-0" />
+				<ThumbsUp class="text-success size-12 shrink-0" />
 				<div class="flex-1">
-					<p class="text-on-surface-variant text-right text-sm">Participants</p>
-					<p class="text-on-surface mt-1 text-right text-2xl font-bold">
-						<NumberFormat number={statistics.totalVotes} />
+					<p class="text-on-surface-variant text-right text-sm">Support</p>
+					<p class="text-success mt-1 text-right text-2xl font-bold">
+						<NumberFormat number={statistics.supportVotes} />
 					</p>
 				</div>
 			</div>
@@ -106,11 +106,11 @@
 
 		<Card>
 			<div class="flex items-center justify-between gap-4">
-				<ThumbsUp class="text-success size-12 shrink-0" />
+				<Users class="text-primary size-14 shrink-0" />
 				<div class="flex-1">
-					<p class="text-on-surface-variant text-right text-sm">Support</p>
-					<p class="text-success mt-1 text-right text-2xl font-bold">
-						<NumberFormat number={statistics.supportVotes} />
+					<p class="text-on-surface-variant text-right text-sm">Participants</p>
+					<p class="text-on-surface mt-1 text-right text-2xl font-bold">
+						<NumberFormat number={statistics.totalVotes} />
 					</p>
 				</div>
 			</div>
