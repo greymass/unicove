@@ -17,7 +17,7 @@
 	<meta name="description" content={data.pageMetaTags.description} />
 </svelte:head>
 
-<div class="xs:grid-cols-full grid gap-6 lg:grid-cols-[70%_1fr]">
+<div class="xs:grid-cols-full grid items-start gap-6 lg:grid-cols-[70%_1fr]">
 	<div class="space-y-6">
 		{#if data.sentiment.loading}
 			<div class="py-12 text-center">
