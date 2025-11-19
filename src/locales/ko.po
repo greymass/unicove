@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.663Z\n"
-"PO-Revision-Date: 2025-11-18T09:38:11.072Z\n"
+"PO-Revision-Date: 2025-11-19T00:04:16.502Z\n"
 "Last-Translator: \n"
 "Language: ko\n"
 "Language-Team: \n"
@@ -86,8 +86,6 @@ msgstr "상태"
 
 #: src/lib/components/footer.svelte
 #: src/lib/components/footer.svelte
-#: src/lib/components/sentiment/topicStats.svelte
-#: src/lib/components/sentiment/voteButtons.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
 msgid "Support"
 msgstr "지원"
@@ -246,7 +244,6 @@ msgstr "설정"
 #: src/lib/components/summary/eosio/withdraw.svelte
 #: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/summaries/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid "Staking"
 msgstr "스테이킹"
 
@@ -508,8 +505,8 @@ msgstr ""
 msgid "+ {0} ms (CPU)"
 msgstr ""
 
-#. placeholder {0}: data.powup_cpu
 #. placeholder {0}: data.powup_net
+#. placeholder {0}: data.powup_cpu
 #. placeholder {0}: account.weight
 #. placeholder {0}: key.weight
 #. placeholder {0}: account.weight
@@ -794,8 +791,8 @@ msgstr "상세 정보"
 msgid "Network Fees"
 msgstr "네트워크 수수료"
 
-#. placeholder {0}: data.network.chain.systemToken?.symbol.code || ''
 #. placeholder {0}: market.network.currency.symbol.code
+#. placeholder {0}: data.network.chain.systemToken?.symbol.code || ''
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 msgid "Market Cap ({0})"
@@ -5613,17 +5610,13 @@ msgstr "다시 시도"
 msgid "No topics available yet"
 msgstr "아직 사용 가능한 토픽이 없습니다."
 
-#. placeholder {0}: topicData.statistics.supportPercentage
 #. placeholder {0}: statistics.supportPercentage
-#: src/lib/components/sentiment/topicCard.svelte
-#: src/lib/components/sentiment/topicStats.svelte
+#: src/lib/components/sentiment/SentimentMeter.svelte
 msgid "{0}% Support"
 msgstr "{0}% 지지"
 
-#. placeholder {0}: topicData.statistics.oppositionPercentage
 #. placeholder {0}: statistics.oppositionPercentage
-#: src/lib/components/sentiment/topicCard.svelte
-#: src/lib/components/sentiment/topicStats.svelte
+#: src/lib/components/sentiment/SentimentMeter.svelte
 msgid "{0}% Oppose"
 msgstr "{0}% 반대"
 
@@ -5631,15 +5624,12 @@ msgstr "{0}% 반대"
 msgid "Sentiment"
 msgstr "정서"
 
-#: src/lib/components/sentiment/topicStats.svelte
-#: src/lib/components/sentiment/voteButtons.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
 msgid "Oppose"
 msgstr "반대"
 
-#: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
-msgid "Back to All Topics"
-msgstr "모든 주제로 돌아가기"
+#~ msgid "Back to All Topics"
+#~ msgstr "모든 주제로 돌아가기"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
 msgid "Loading topic..."
@@ -5680,9 +5670,8 @@ msgstr "지지"
 msgid "Opposing"
 msgstr "반대"
 
-#. placeholder {0}: new Date(topic.lastUpdated).toLocaleString()
-#. placeholder {0}: new Date(topic.lastUpdated).toLocaleString()
-#: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+#. placeholder {0}: new Date(sentiment.currentTopic.topic.lastUpdated).toLocaleString()
+#: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.ts
 msgid "Last updated {0}"
 msgstr "최종 업데이트 {0}"
 
@@ -5690,7 +5679,7 @@ msgstr "최종 업데이트 {0}"
 msgid "Description"
 msgstr "설명"
 
-#: src/lib/components/sentiment/topicStats.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
 msgid "Participants"
 msgstr "참여자"
@@ -5699,9 +5688,8 @@ msgstr "참여자"
 msgid "Load More Participants"
 msgstr "참여자 더 불러오기"
 
-#: src/lib/components/sentiment/voteButtons.svelte
-msgid "Remove"
-msgstr "제거"
+#~ msgid "Remove"
+#~ msgstr "제거"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.ts
@@ -5729,9 +5717,8 @@ msgstr "더 불러오기"
 msgid "Updating Data"
 msgstr "데이터 업데이트 중"
 
-#: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.ts
-msgid "Overview and statistics"
-msgstr "개요 및 통계"
+#~ msgid "Overview and statistics"
+#~ msgstr "개요 및 통계"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.ts
 msgid "Overview and statistics for community sentiment on the"
@@ -5741,9 +5728,8 @@ msgstr "커뮤니티 감정에 대한 개요 및 통계"
 msgid "Voting as <0/> with weight <1/>"
 msgstr "가중치 <1/>로 <0/>로 투표 중"
 
-#: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
-msgid "Cast Your Vote"
-msgstr "투표하기"
+#~ msgid "Cast Your Vote"
+#~ msgstr "투표하기"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
 msgid "Vote Statistics"
@@ -5753,22 +5739,63 @@ msgstr "투표 통계"
 msgid "About Sentiment Voting"
 msgstr "감정 투표에 대하여"
 
-#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
-msgid ""
-"Each topic shows the total participation and the distribution of support versus\n"
-"opposition, helping the community gauge consensus on key issues."
-msgstr "각 토픽은 총 참여도와 지지 대 반대의 분포를 보여주어 커뮤니티가 주요 문제에 대한 합의를 측정하는 데 도움이 됩니다.```"
+#~ msgid ""
+#~ "Each topic shows the total participation and the distribution of support versus\n"
+#~ "opposition, helping the community gauge consensus on key issues."
+#~ msgstr "각 토픽은 총 참여도와 지지 대 반대의 분포를 보여주어 커뮤니티가 주요 문제에 대한 합의를 측정하는 데 도움이 됩니다.```"
 
-#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
-msgid ""
-"Sentiment voting allows token holders to express their support or opposition on\n"
-"important community topics. Your vote is weighted by your staked tokens, giving more\n"
-"influence to those with a larger stake in the network."
-msgstr "감정 투표를 통해 토큰 보유자는 중요한 커뮤니티 토픽에 대한 지지 또는 반대를 표현할 수 있습니다. 사용자의 투표는 스테이킹된 토큰에 따라 가중치가 부여되어 네트워크에 더 큰 지분을 가진 사람들에게 더 많은 영향력을 제공합니다."
+#~ msgid ""
+#~ "Sentiment voting allows token holders to express their support or opposition on\n"
+#~ "important community topics. Your vote is weighted by your staked tokens, giving more\n"
+#~ "influence to those with a larger stake in the network."
+#~ msgstr "감정 투표를 통해 토큰 보유자는 중요한 커뮤니티 토픽에 대한 지지 또는 반대를 표현할 수 있습니다. 사용자의 투표는 스테이킹된 토큰에 따라 가중치가 부여되어 네트워크에 더 큰 지분을 가진 사람들에게 더 많은 영향력을 제공합니다."
 
 #~ msgid "You are <0/> this topic"
 #~ msgstr ""
 
+#~ msgid "You are <0/> this topic."
+#~ msgstr "이 주제를 <0/>하고 있습니다."
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
+msgid "Stake tokens"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
+msgid ""
+"Sentiment voting allows token holders to express their support or opposition on important\n"
+"community topics. Your vote is weighted by your staked tokens, giving more influence to\n"
+"those with a larger stake in the network."
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
+msgid ""
+"Each topic shows the total participation and the distribution of support versus opposition,\n"
+"helping the community gauge consensus on key issues."
+msgstr ""
+
+#~ msgid "description"
+#~ msgstr ""
+
+#~ msgid "Fuel level:"
+#~ msgstr ""
+
+#~ msgid "at 50/100"
+#~ msgstr ""
+
+#~ msgid "Support two"
+#~ msgstr ""
+
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
-msgid "You are <0/> this topic."
-msgstr "이 주제를 <0/>하고 있습니다."
+msgid "Your Vote"
+msgstr ""
+
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "I support this"
+msgstr ""
+
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "I oppose this"
+msgstr ""
+
+#~ msgid "Actually, I support this"
+#~ msgstr ""

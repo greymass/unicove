@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2025-11-18T09:38:12.338Z\n"
+"PO-Revision-Date: 2025-11-19T00:04:16.507Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -86,8 +86,6 @@ msgstr "状态"
 
 #: src/lib/components/footer.svelte
 #: src/lib/components/footer.svelte
-#: src/lib/components/sentiment/topicStats.svelte
-#: src/lib/components/sentiment/voteButtons.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
 msgid "Support"
 msgstr "支持"
@@ -246,7 +244,6 @@ msgstr "设置"
 #: src/lib/components/summary/eosio/withdraw.svelte
 #: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/summaries/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid "Staking"
 msgstr "质押"
 
@@ -508,8 +505,8 @@ msgstr ""
 msgid "+ {0} ms (CPU)"
 msgstr ""
 
-#. placeholder {0}: data.powup_cpu
 #. placeholder {0}: data.powup_net
+#. placeholder {0}: data.powup_cpu
 #. placeholder {0}: account.weight
 #. placeholder {0}: key.weight
 #. placeholder {0}: account.weight
@@ -794,8 +791,8 @@ msgstr "详情"
 msgid "Network Fees"
 msgstr "网络费用"
 
-#. placeholder {0}: data.network.chain.systemToken?.symbol.code || ''
 #. placeholder {0}: market.network.currency.symbol.code
+#. placeholder {0}: data.network.chain.systemToken?.symbol.code || ''
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 msgid "Market Cap ({0})"
@@ -5617,17 +5614,13 @@ msgstr "重试"
 msgid "No topics available yet"
 msgstr "目前还没有可用主题"
 
-#. placeholder {0}: topicData.statistics.supportPercentage
 #. placeholder {0}: statistics.supportPercentage
-#: src/lib/components/sentiment/topicCard.svelte
-#: src/lib/components/sentiment/topicStats.svelte
+#: src/lib/components/sentiment/SentimentMeter.svelte
 msgid "{0}% Support"
 msgstr "{0}% 支持"
 
-#. placeholder {0}: topicData.statistics.oppositionPercentage
 #. placeholder {0}: statistics.oppositionPercentage
-#: src/lib/components/sentiment/topicCard.svelte
-#: src/lib/components/sentiment/topicStats.svelte
+#: src/lib/components/sentiment/SentimentMeter.svelte
 msgid "{0}% Oppose"
 msgstr "{0}% 反对"
 
@@ -5635,15 +5628,12 @@ msgstr "{0}% 反对"
 msgid "Sentiment"
 msgstr "情绪"
 
-#: src/lib/components/sentiment/topicStats.svelte
-#: src/lib/components/sentiment/voteButtons.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
 msgid "Oppose"
 msgstr "反对"
 
-#: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
-msgid "Back to All Topics"
-msgstr "返回所有话题"
+#~ msgid "Back to All Topics"
+#~ msgstr "返回所有话题"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
 msgid "Loading topic..."
@@ -5684,9 +5674,8 @@ msgstr "支持权重"
 msgid "Opposition Weight"
 msgstr "反对权重"
 
-#. placeholder {0}: new Date(topic.lastUpdated).toLocaleString()
-#. placeholder {0}: new Date(topic.lastUpdated).toLocaleString()
-#: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+#. placeholder {0}: new Date(sentiment.currentTopic.topic.lastUpdated).toLocaleString()
+#: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.ts
 msgid "Last updated {0}"
 msgstr "上次更新时间 {0}"
 
@@ -5694,7 +5683,7 @@ msgstr "上次更新时间 {0}"
 msgid "Description"
 msgstr "描述"
 
-#: src/lib/components/sentiment/topicStats.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
 msgid "Participants"
 msgstr "参与者"
@@ -5703,9 +5692,8 @@ msgstr "参与者"
 msgid "Load More Participants"
 msgstr "加载更多参与者"
 
-#: src/lib/components/sentiment/voteButtons.svelte
-msgid "Remove"
-msgstr "移除"
+#~ msgid "Remove"
+#~ msgstr "移除"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.ts
@@ -5733,9 +5721,8 @@ msgstr "加载更多"
 msgid "Updating Data"
 msgstr "正在更新数据"
 
-#: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.ts
-msgid "Overview and statistics"
-msgstr "概览与统计"
+#~ msgid "Overview and statistics"
+#~ msgstr "概览与统计"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.ts
 msgid "Overview and statistics for community sentiment on the"
@@ -5745,9 +5732,8 @@ msgstr "关于社区对以下主题的情绪的概览与统计"
 msgid "Voting as <0/> with weight <1/>"
 msgstr "正在以 <0/> 身份投票，权重为 <1/>"
 
-#: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
-msgid "Cast Your Vote"
-msgstr "投出你的票"
+#~ msgid "Cast Your Vote"
+#~ msgstr "投出你的票"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
 msgid "Vote Statistics"
@@ -5757,22 +5743,63 @@ msgstr "投票统计"
 msgid "About Sentiment Voting"
 msgstr "关于情绪投票"
 
-#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
-msgid ""
-"Each topic shows the total participation and the distribution of support versus\n"
-"opposition, helping the community gauge consensus on key issues."
-msgstr "每个主题都显示了总参与度以及支持与反对的分布，从而帮助社区评估对关键问题的共识。```"
+#~ msgid ""
+#~ "Each topic shows the total participation and the distribution of support versus\n"
+#~ "opposition, helping the community gauge consensus on key issues."
+#~ msgstr "每个主题都显示了总参与度以及支持与反对的分布，从而帮助社区评估对关键问题的共识。```"
 
-#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
-msgid ""
-"Sentiment voting allows token holders to express their support or opposition on\n"
-"important community topics. Your vote is weighted by your staked tokens, giving more\n"
-"influence to those with a larger stake in the network."
-msgstr "情绪投票允许代币持有者对重要的社区话题表达他们的支持或反对。您的投票权重取决于您抵押的代币数量，从而使在网络中拥有更大份额的人拥有更大的影响力。"
+#~ msgid ""
+#~ "Sentiment voting allows token holders to express their support or opposition on\n"
+#~ "important community topics. Your vote is weighted by your staked tokens, giving more\n"
+#~ "influence to those with a larger stake in the network."
+#~ msgstr "情绪投票允许代币持有者对重要的社区话题表达他们的支持或反对。您的投票权重取决于您抵押的代币数量，从而使在网络中拥有更大份额的人拥有更大的影响力。"
 
 #~ msgid "You are <0/> this topic"
 #~ msgstr ""
 
+#~ msgid "You are <0/> this topic."
+#~ msgstr "你<0/>这个话题。"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
+msgid "Stake tokens"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
+msgid ""
+"Sentiment voting allows token holders to express their support or opposition on important\n"
+"community topics. Your vote is weighted by your staked tokens, giving more influence to\n"
+"those with a larger stake in the network."
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
+msgid ""
+"Each topic shows the total participation and the distribution of support versus opposition,\n"
+"helping the community gauge consensus on key issues."
+msgstr ""
+
+#~ msgid "description"
+#~ msgstr ""
+
+#~ msgid "Fuel level:"
+#~ msgstr ""
+
+#~ msgid "at 50/100"
+#~ msgstr ""
+
+#~ msgid "Support two"
+#~ msgstr ""
+
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
-msgid "You are <0/> this topic."
-msgstr "你<0/>这个话题。"
+msgid "Your Vote"
+msgstr ""
+
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "I support this"
+msgstr ""
+
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "I oppose this"
+msgstr ""
+
+#~ msgid "Actually, I support this"
+#~ msgstr ""

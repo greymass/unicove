@@ -1,12 +1,11 @@
 <script lang="ts">
-	import { Button } from 'unicove-components';
+	import { Button, DD, DL, DLRow } from 'unicove-components';
 	import type { NameType, Checksum256 } from '@wharfkit/antelope';
 	import { Name, Asset } from '@wharfkit/antelope';
 	import { getContext } from 'svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import ThumbsUp from '@lucide/svelte/icons/thumbs-up';
 	import ThumbsDown from '@lucide/svelte/icons/thumbs-down';
-	import X from '@lucide/svelte/icons/x';
 	import AssetText from '$lib/components/elements/asset.svelte';
 
 	interface Props {
@@ -23,8 +22,7 @@
 		currentVote = null,
 		disabled = false,
 		onVoteSuccess,
-		onVoteFailure,
-		showOnlyRemove = false
+		onVoteFailure
 	}: Props = $props();
 	const context = getContext<UnicoveContext>('state');
 
@@ -119,69 +117,89 @@
 		const symbol = context.network.config.systemtoken.symbol;
 		return Asset.fromUnits(staked, symbol);
 	});
+
+	function handleSupport() {
+		if (currentVote === 1) {
+			handleRemoveVote();
+		} else {
+			handleVote(1);
+		}
+	}
+
+	function handleOppose() {
+		if (currentVote === 0) {
+			handleRemoveVote();
+		} else {
+			handleVote(0);
+		}
+	}
+
+	const supportColor = $derived.by(() => {
+		switch (currentVote) {
+			case 1:
+				return 'bg-success-container/60 dark:bg-success dark:text-on-success text-on-success-container';
+			case 0:
+				return 'bg-transparent dark:bg-transparent';
+			default:
+				return '';
+		}
+	});
+
+	const opposeColor = $derived.by(() => {
+		switch (currentVote) {
+			case 1:
+				return 'bg-transparent dark:bg-transparent';
+			case 0:
+				return 'bg-error-container/60 dark:bg-error text-on-error-container dark:text-on-error';
+			default:
+				return '';
+		}
+	});
 </script>
 
-{#if showOnlyRemove}
-	{#if currentVote !== null}
+<div class="@container flex flex-col gap-3">
+	{#if error}
+		<div class="bg-error-container text-on-error-container rounded p-3 text-sm">
+			{error}
+		</div>
+	{/if}
+
+	{#if context.wharf.session && context.account && votingWeight}
+		<div class=" text-center">
+			<p class="text-sm">
+				Voting as <strong class="text-on-surface">{context.account.name}</strong> with weight
+				<strong class="text-on-surface"><AssetText variant="full" value={votingWeight} /></strong>
+			</p>
+		</div>
+	{/if}
+
+	<div class="grid grid-cols-1 gap-2 @sm:grid-cols-2">
 		<Button
-			variant="text"
+			variant="secondary"
 			disabled={disabled || voting || !context.wharf.session}
-			onclick={handleRemoveVote}
-			class={currentVote === 1
-				? 'text-success hover:text-success/80'
-				: 'text-error hover:text-error/80'}
+			onclick={handleSupport}
+			class={supportColor}
 		>
-			<span class="flex items-center gap-1.5">
-				<X class="size-4" />
-				<span class="text-sm">Remove</span>
+			<span class="flex items-center gap-2">
+				<ThumbsUp class="mb-0.5 size-4" />
+				<span>I support this</span>
 			</span>
 		</Button>
-	{/if}
-{:else}
-	<div class="flex flex-col gap-3">
-		{#if error}
-			<div class="bg-error-container text-on-error-container rounded p-3 text-sm">
-				{error}
-			</div>
-		{/if}
 
-		{#if context.wharf.session && context.account && votingWeight}
-			<div class="text-on-surface-variant bg-surface-container rounded-lg px-4 py-3 text-center">
-				<p class="text-sm">
-					Voting as <strong class="text-on-surface">{context.account.name}</strong> with weight
-					<strong class="text-on-surface"><AssetText variant="full" value={votingWeight} /></strong>
-				</p>
-			</div>
-		{/if}
-
-		<div class="flex gap-2">
-			<Button
-				class="flex-1 {voting ? 'opacity-70' : ''}"
-				variant="secondary"
-				disabled={disabled || voting || !context.wharf.session || currentVote === 1}
-				onclick={() => handleVote(1)}
-			>
-				<span class="flex items-center gap-2">
-					<ThumbsUp class="text-success size-4" />
-					<span>{currentVote === 1 ? 'Supporting' : 'Support'}</span>
-				</span>
-			</Button>
-
-			<Button
-				class="flex-1 {voting ? 'opacity-70' : ''}"
-				variant="secondary"
-				disabled={disabled || voting || !context.wharf.session || currentVote === 0}
-				onclick={() => handleVote(0)}
-			>
-				<span class="flex items-center gap-2">
-					<ThumbsDown class="text-error size-4" />
-					<span>{currentVote === 0 ? 'Opposing' : 'Oppose'}</span>
-				</span>
-			</Button>
-		</div>
-
-		{#if !context.wharf.session}
-			<p class="text-on-surface-variant text-center text-sm">Please log in to vote</p>
-		{/if}
+		<Button
+			variant="secondary"
+			disabled={disabled || voting || !context.wharf.session}
+			onclick={handleOppose}
+			class={opposeColor}
+		>
+			<span class="flex items-center gap-2">
+				<ThumbsDown class="mt-1.5 size-4" />
+				<span>I oppose this</span>
+			</span>
+		</Button>
 	</div>
-{/if}
+
+	{#if !context.wharf.session}
+		<p class="text-on-surface-variant text-label text-center">Please log in to vote</p>
+	{/if}
+</div>
