@@ -166,7 +166,7 @@
 
 			{#if statistics}
 				<Stack class="gap-3">
-					<h2 class="text-on-surface text-headline">Vote Statistics</h2>
+					<h2 class="text-on-surface text-headline">Statistics</h2>
 					<TopicStats {statistics} loading={data.sentiment.loadingStatistics} />
 				</Stack>
 			{/if}
@@ -191,73 +191,79 @@
 						</div>
 
 						<div class="grid grid-cols-2 gap-6">
-							<Card>
-								<ul class="space-y-2">
-									{#each data.sentiment.currentVotes.filter((v) => v.voteType === 1) as vote (vote.voter)}
-										<li class="flex items-baseline justify-between">
-											<div class="flex items-baseline gap-3">
-												<span class="text-label-sm text-success bg-success/10 rounded px-2 py-1">
-													Support
-												</span>
-												<a
-													href={context.urlPath(`/account/${vote.voter}`)}
-													class="text-primary hover:text-primary-hover font-mono"
-												>
-													{vote.voter}
-												</a>
-											</div>
+							<Stack class="gap-3">
+								<h3 class="text-title">Supporting</h3>
+								<Card>
+									<ul class="space-y-2">
+										{#each data.sentiment.currentVotes.filter((v) => v.voteType === 1) as vote (vote.voter)}
+											<li class="flex items-baseline justify-between">
+												<div class="flex items-baseline gap-3">
+													<span class="text-label-sm text-success bg-success/10 rounded px-2 py-1">
+														Support
+													</span>
+													<a
+														href={context.urlPath(`/account/${vote.voter}`)}
+														class="text-primary hover:text-primary-hover font-mono"
+													>
+														{vote.voter}
+													</a>
+												</div>
 
-											<AssetText
-												class="text-on-surface-variant text-label-sm"
-												variant="short"
-												value={Asset.fromUnits(vote.weight, systemTokenSymbol)}
-											/>
-										</li>
-									{/each}
-								</ul>
-							</Card>
+												<AssetText
+													class="text-on-surface-variant text-label-sm"
+													variant="short"
+													value={Asset.fromUnits(vote.weight, systemTokenSymbol)}
+												/>
+											</li>
+										{/each}
+									</ul>
+								</Card>
+							</Stack>
 
-							<Card>
-								<ul class="space-y-2">
-									{#each data.sentiment.currentVotes.filter((v) => v.voteType === 0) as vote (vote.voter)}
-										<li class="flex items-baseline justify-between">
-											<div class="flex items-baseline gap-3">
-												<span class=" bg-error/10 text-error text-label-sm rounded px-2 py-1">
-													Oppose
-												</span>
-												<a
-													href={context.urlPath(`/account/${vote.voter}`)}
-													class="text-primary hover:text-primary-hover font-mono"
-												>
-													{vote.voter}
-												</a>
-											</div>
+							<Stack class="gap-3">
+								<h3 class="text-title">Opposing</h3>
+								<Card>
+									<ul class="space-y-2">
+										{#each data.sentiment.currentVotes.filter((v) => v.voteType === 0) as vote (vote.voter)}
+											<li class="flex items-baseline justify-between">
+												<div class="flex items-baseline gap-3">
+													<span class=" bg-error/10 text-error text-label-sm rounded px-2 py-1">
+														Oppose
+													</span>
+													<a
+														href={context.urlPath(`/account/${vote.voter}`)}
+														class="text-primary hover:text-primary-hover font-mono"
+													>
+														{vote.voter}
+													</a>
+												</div>
 
-											<AssetText
-												class="text-on-surface-variant text-label-sm"
-												variant="short"
-												value={Asset.fromUnits(vote.weight, systemTokenSymbol)}
-											/>
-										</li>
-									{/each}
-								</ul>
-
-								{#if data.sentiment.pagination && data.sentiment.pagination.hasMore}
-									<div class="mt-4 text-center">
-										<Button
-											variant="secondary"
-											onclick={() =>
-												data.sentiment.loadTopicVotes(
-													data.topicId,
-													data.sentiment.pagination!.page + 1
-												)}
-										>
-											Load More Participants
-										</Button>
-									</div>
-								{/if}
-							</Card>
+												<AssetText
+													class="text-on-surface-variant text-label-sm"
+													variant="short"
+													value={Asset.fromUnits(vote.weight, systemTokenSymbol)}
+												/>
+											</li>
+										{/each}
+									</ul>
+								</Card>
+							</Stack>
 						</div>
+
+						{#if data.sentiment.pagination && data.sentiment.pagination.hasMore}
+							<div class="mt-4 text-center">
+								<Button
+									variant="secondary"
+									onclick={() =>
+										data.sentiment.loadTopicVotes(
+											data.topicId,
+											data.sentiment.pagination!.page + 1
+										)}
+								>
+									Load More Participants
+								</Button>
+							</div>
+						{/if}
 					</Stack>
 				</Stack>
 			{/if}

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2025-11-19T00:04:16.507Z\n"
+"PO-Revision-Date: 2025-11-19T01:50:32.783Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -5648,12 +5648,12 @@ msgstr "请登录后进行投票"
 msgid "Please log in to remove vote"
 msgstr "请登录后取消投票"
 
-#: src/lib/components/sentiment/voteButtons.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
 msgid "Supporting"
 msgstr "支持"
 
-#: src/lib/components/sentiment/voteButtons.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
 msgid "Opposing"
 msgstr "反对"
@@ -5735,9 +5735,8 @@ msgstr "正在以 <0/> 身份投票，权重为 <1/>"
 #~ msgid "Cast Your Vote"
 #~ msgstr "投出你的票"
 
-#: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
-msgid "Vote Statistics"
-msgstr "投票统计"
+#~ msgid "Vote Statistics"
+#~ msgstr "投票统计"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid "About Sentiment Voting"
@@ -5803,3 +5802,7 @@ msgstr ""
 
 #~ msgid "Actually, I support this"
 #~ msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+msgid "Statistics"
+msgstr ""

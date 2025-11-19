@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.663Z\n"
-"PO-Revision-Date: 2025-11-19T00:04:16.502Z\n"
+"PO-Revision-Date: 2025-11-19T01:50:32.772Z\n"
 "Last-Translator: \n"
 "Language: ko\n"
 "Language-Team: \n"
@@ -5662,10 +5662,12 @@ msgstr "투표를 취소하려면 로그인하세요"
 
 #: src/lib/components/sentiment/voteButtons.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
 msgid "Supporting"
 msgstr "지지"
 
 #: src/lib/components/sentiment/voteButtons.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
 msgid "Opposing"
 msgstr "반대"
@@ -5731,9 +5733,8 @@ msgstr "가중치 <1/>로 <0/>로 투표 중"
 #~ msgid "Cast Your Vote"
 #~ msgstr "투표하기"
 
-#: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
-msgid "Vote Statistics"
-msgstr "투표 통계"
+#~ msgid "Vote Statistics"
+#~ msgstr "투표 통계"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid "About Sentiment Voting"
@@ -5799,3 +5800,7 @@ msgstr ""
 
 #~ msgid "Actually, I support this"
 #~ msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+msgid "Statistics"
+msgstr ""

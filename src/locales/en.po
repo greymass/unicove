@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2025-11-19T01:02:10.472Z\n"
+"PO-Revision-Date: 2025-11-19T01:50:32.758Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -5841,9 +5841,11 @@ msgstr "Description"
 #~ msgstr "Cast Your Vote"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
 msgid "Supporting"
 msgstr "Supporting"
 
+#: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
 msgid "Opposing"
 msgstr "Opposing"
@@ -5851,9 +5853,8 @@ msgstr "Opposing"
 #~ msgid "You are <0/> this topic."
 #~ msgstr "You are <0/> this topic."
 
-#: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
-msgid "Vote Statistics"
-msgstr "Vote Statistics"
+#~ msgid "Vote Statistics"
+#~ msgstr "Vote Statistics"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
@@ -5955,3 +5956,7 @@ msgstr "I oppose this"
 
 #~ msgid "Actually, I support this"
 #~ msgstr "Actually, I support this"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+msgid "Statistics"
+msgstr "Statistics"
