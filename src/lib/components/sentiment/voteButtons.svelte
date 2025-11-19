@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Button, DD, DL, DLRow } from 'unicove-components';
+	import { Button } from 'unicove-components';
 	import type { NameType, Checksum256 } from '@wharfkit/antelope';
 	import { Name, Asset } from '@wharfkit/antelope';
 	import { getContext } from 'svelte';
@@ -14,7 +14,6 @@
 		disabled?: boolean;
 		onVoteSuccess?: (id?: Checksum256, voteType?: number | null) => void;
 		onVoteFailure?: (error: string) => void;
-		showOnlyRemove?: boolean;
 	}
 
 	const {
