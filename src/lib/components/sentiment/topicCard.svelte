@@ -39,7 +39,7 @@
 			</header>
 
 			{#if topicData.statistics.totalVotes > 0}
-				<SentimentMeter statistics={topicData.statistics} />
+				<SentimentMeter id={topicData.topic.id} statistics={topicData.statistics} />
 			{/if}
 		</Stack>
 	</Card>
