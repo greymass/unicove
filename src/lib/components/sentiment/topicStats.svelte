@@ -34,6 +34,11 @@
 		</div>
 	{/if}
 
+	<Card>
+		<h3 class="text-muted text-label-sm mb-3">Vote Distribution</h3>
+		<SentimentMeter id="vote-distribution" {statistics} />
+	</Card>
+
 	<div class="grid gap-6 @xl:grid-cols-2 @4xl:grid-cols-3">
 		<StatCard class="" label="Support Weight" icon={Weight} supports={true}>
 			<AssetText variant="short" value={statistics.totalSupportWeightAsset} />
@@ -51,9 +56,4 @@
 			<AssetText variant="short" value={statistics.totalOppositionWeightAsset} />
 		</StatCard>
 	</div>
-
-	<Card>
-		<h3 class="text-muted text-label-sm mb-3">Vote Distribution</h3>
-		<SentimentMeter {statistics} />
-	</Card>
 </div>

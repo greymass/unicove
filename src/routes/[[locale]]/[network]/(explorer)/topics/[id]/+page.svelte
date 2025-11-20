@@ -179,12 +179,16 @@
 					<h2 class="text-on-surface text-headline">Participants</h2>
 
 					<Stack>
-						<div class="grid gap-6 @xl:grid-cols-3">
+						<div class="grid gap-6 @xl:grid-cols-2 @4xl:grid-cols-3">
 							<StatCard label="Supporting" icon={ThumbsUp} supports={true}>
 								<NumberFormat number={statistics.supportVotes} />
 							</StatCard>
 
-							<StatCard label="Participants" icon={Users}>
+							<StatCard
+								class="order-first col-span-full @4xl:order-none @4xl:col-span-1"
+								label="Participants"
+								icon={Users}
+							>
 								<NumberFormat number={statistics.totalVotes} />
 							</StatCard>
 
