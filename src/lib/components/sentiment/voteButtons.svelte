@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { Button } from 'unicove-components';
 	import type { NameType, Checksum256 } from '@wharfkit/antelope';
 	import { Name, Asset } from '@wharfkit/antelope';
 	import { getContext } from 'svelte';
@@ -7,6 +6,9 @@
 	import ThumbsUp from '@lucide/svelte/icons/thumbs-up';
 	import ThumbsDown from '@lucide/svelte/icons/thumbs-down';
 	import AssetText from '$lib/components/elements/asset.svelte';
+	import { cn } from '$lib/utils';
+	import { crossfade } from 'svelte/transition';
+	import { quintOut } from 'svelte/easing';
 
 	interface Props {
 		topicId: NameType;
@@ -117,46 +119,45 @@
 		return Asset.fromUnits(staked, symbol);
 	});
 
+	let supports = $derived(currentVote === 1);
+	let opposes = $derived(currentVote === 0);
+
 	function handleSupport() {
-		if (currentVote === 1) {
+		if (supports) {
+			supports = false;
 			handleRemoveVote();
 		} else {
+			supports = true;
+			opposes = false;
 			handleVote(1);
 		}
 	}
 
 	function handleOppose() {
-		if (currentVote === 0) {
+		if (opposes) {
+			opposes = false;
 			handleRemoveVote();
 		} else {
+			opposes = true;
+			supports = false;
 			handleVote(0);
 		}
 	}
 
-	const supportColor = $derived.by(() => {
-		switch (currentVote) {
-			case 1:
-				return 'bg-success-container/60 dark:bg-success dark:text-on-success text-on-success-container';
-			case 0:
-				return 'bg-transparent dark:bg-transparent';
-			default:
-				return '';
-		}
+	const [send, receive] = crossfade({
+		duration: 300,
+		easing: quintOut
 	});
 
-	const opposeColor = $derived.by(() => {
-		switch (currentVote) {
-			case 1:
-				return 'bg-transparent dark:bg-transparent';
-			case 0:
-				return 'bg-error-container/60 dark:bg-error text-on-error-container dark:text-on-error';
-			default:
-				return '';
-		}
-	});
+	const disabledStyles =
+		'disabled:cursor-default disabled:bg-transparent disabled:text-on-surface transition-opacity disabled:opacity-50';
+
+	const baseButtonStyles = 'grid size-12 shrink-0 cursor-pointer place-items-center rounded-full';
+	const baseWrapperStyles =
+		'flex items-center justify-between gap-2 rounded-xl px-4 py-2 border border-transparent';
 </script>
 
-<div class="@container flex flex-col gap-3">
+<div class="@container grid gap-4">
 	{#if error}
 		<div class="bg-error-container text-on-error-container rounded p-3 text-sm">
 			{error}
@@ -172,33 +173,105 @@
 		</div>
 	{/if}
 
-	<div class="grid grid-cols-1 gap-2 @sm:grid-cols-2">
-		<Button
-			variant="secondary"
-			disabled={disabled || voting || !context.wharf.session}
-			onclick={handleSupport}
-			class={supportColor}
-		>
-			<span class="flex items-center gap-2">
-				<ThumbsUp class="mb-0.5 size-4" />
-				<span>I support this</span>
-			</span>
-		</Button>
+	<div class="grid grid-cols-1 grid-rows-1 *:col-start-1 *:row-start-1">
+		{#if supports}
+			<div
+				class={cn(
+					baseWrapperStyles,
+					'bg-success-container/60 dark:bg-success dark:text-on-success text-on-success-container '
+				)}
+				in:send={{ key: 'element' }}
+				out:receive={{ key: 'element' }}
+			>
+				<button
+					onclick={handleSupport}
+					disabled={disabled || voting || !context.wharf.session}
+					class={cn(
+						baseButtonStyles,
+						'hover:bg-success-container/80 bg-success-container text-on-success-container'
+					)}
+				>
+					<ThumbsUp class={cn('size-6')} />
+				</button>
 
-		<Button
-			variant="secondary"
-			disabled={disabled || voting || !context.wharf.session}
-			onclick={handleOppose}
-			class={opposeColor}
-		>
-			<span class="flex items-center gap-2">
-				<ThumbsDown class="mt-1.5 size-4" />
-				<span>I oppose this</span>
-			</span>
-		</Button>
+				<span class="text-label-sm">I support this topic</span>
+
+				<button
+					onclick={handleOppose}
+					disabled={disabled || voting || !context.wharf.session}
+					class={cn('hover:bg-white/30', baseButtonStyles)}
+				>
+					<ThumbsDown class={cn('size-6')} />
+				</button>
+			</div>
+		{:else if opposes}
+			<div
+				class={cn(
+					baseWrapperStyles,
+					'bg-error-container/60 dark:bg-error text-on-error-container dark:text-on-error '
+				)}
+				in:send={{ key: 'element' }}
+				out:receive={{ key: 'element' }}
+			>
+				<button
+					onclick={handleSupport}
+					disabled={disabled || voting || !context.wharf.session}
+					class={cn('hover:bg-white/30', baseButtonStyles)}
+				>
+					<ThumbsUp class={cn('size-6')} />
+				</button>
+
+				<span class="text-label-sm">I oppose this topic</span>
+
+				<button
+					onclick={handleOppose}
+					disabled={disabled || voting || !context.wharf.session}
+					class={cn(
+						baseButtonStyles,
+						'hover:bg-error-container/80 bg-error-container text-on-error-container '
+					)}
+				>
+					<ThumbsDown class={cn('size-6')} />
+				</button>
+			</div>
+		{:else}
+			<div
+				class={cn(baseWrapperStyles, 'border-outline')}
+				in:send={{ key: 'element' }}
+				out:receive={{ key: 'element' }}
+			>
+				<button
+					onclick={handleSupport}
+					disabled={disabled || voting || !context.wharf.session}
+					class={cn(
+						baseButtonStyles,
+						disabledStyles,
+						'hover:bg-surface-container hover:text-success '
+					)}
+				>
+					<ThumbsUp class={cn('size-6')} />
+				</button>
+
+				{#if !context.wharf.session}
+					<p class="text-on-surface-variant text-label text-center">Please log in to vote</p>
+				{:else}
+					<span class="text-label-sm text-center leading-4 text-balance">
+						Do you support or oppose this topic?
+					</span>
+				{/if}
+
+				<button
+					onclick={handleOppose}
+					disabled={disabled || voting || !context.wharf.session}
+					class={cn(
+						baseButtonStyles,
+						disabledStyles,
+						'hover:bg-surface-container hover:text-error '
+					)}
+				>
+					<ThumbsDown class={cn('size-6')} />
+				</button>
+			</div>
+		{/if}
 	</div>
-
-	{#if !context.wharf.session}
-		<p class="text-on-surface-variant text-label text-center">Please log in to vote</p>
-	{/if}
 </div>
