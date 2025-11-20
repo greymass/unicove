@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.663Z\n"
-"PO-Revision-Date: 2025-11-19T01:50:32.772Z\n"
+"PO-Revision-Date: 2025-11-20T19:30:21.635Z\n"
 "Last-Translator: \n"
 "Language: ko\n"
 "Language-Team: \n"
@@ -87,6 +87,7 @@ msgstr "상태"
 #: src/lib/components/footer.svelte
 #: src/lib/components/footer.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Support"
 msgstr "지원"
 
@@ -1188,6 +1189,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/prompt/[payload]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/prompt/[payload]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Back"
 msgstr "뒤로"
 
@@ -5621,10 +5623,12 @@ msgid "{0}% Oppose"
 msgstr "{0}% 반대"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.ts
 msgid "Sentiment"
 msgstr "정서"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Oppose"
 msgstr "반대"
 
@@ -5632,6 +5636,7 @@ msgstr "반대"
 #~ msgstr "모든 주제로 돌아가기"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Loading topic..."
 msgstr "주제 로딩 중...```"
 
@@ -5653,6 +5658,7 @@ msgstr "반대 가중치"
 
 #: src/lib/components/sentiment/voteButtons.svelte
 #: src/lib/components/sentiment/voteButtons.svelte
+#: src/lib/components/sentiment/voteButtons.svelte
 msgid "Please log in to vote"
 msgstr "투표하려면 로그인하세요"
 
@@ -5660,33 +5666,41 @@ msgstr "투표하려면 로그인하세요"
 msgid "Please log in to remove vote"
 msgstr "투표를 취소하려면 로그인하세요"
 
-#: src/lib/components/sentiment/voteButtons.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Supporting"
 msgstr "지지"
 
-#: src/lib/components/sentiment/voteButtons.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Opposing"
 msgstr "반대"
 
 #. placeholder {0}: new Date(sentiment.currentTopic.topic.lastUpdated).toLocaleString()
+#. placeholder {0}: new Date(sentiment.currentTopic.topic.lastUpdated).toLocaleString()
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.ts
 msgid "Last updated {0}"
 msgstr "최종 업데이트 {0}"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Description"
 msgstr "설명"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Participants"
 msgstr "참여자"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Load More Participants"
 msgstr "참여자 더 불러오기"
 
@@ -5704,10 +5718,12 @@ msgid "Express your opinion on topics important to the community"
 msgstr "커뮤니티에 중요한 주제에 대한 의견을 표현하세요"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Updating..."
 msgstr "업데이트 중..."
 
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Dismiss"
 msgstr "닫기"
 
@@ -5723,6 +5739,7 @@ msgstr "데이터 업데이트 중"
 #~ msgstr "개요 및 통계"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.ts
 msgid "Overview and statistics for community sentiment on the"
 msgstr "커뮤니티 감정에 대한 개요 및 통계"
 
@@ -5787,20 +5804,49 @@ msgstr ""
 #~ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Your Vote"
 msgstr ""
 
-#: src/lib/components/sentiment/voteButtons.svelte
-msgid "I support this"
-msgstr ""
+#~ msgid "I support this"
+#~ msgstr ""
 
-#: src/lib/components/sentiment/voteButtons.svelte
-msgid "I oppose this"
-msgstr ""
+#~ msgid "I oppose this"
+#~ msgstr ""
 
 #~ msgid "Actually, I support this"
 #~ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Statistics"
+msgstr ""
+
+#~ msgid "123456780 A"
+#~ msgstr ""
+
+#~ msgid "1234567890 A"
+#~ msgstr ""
+
+#~ msgid "No Opposing"
+#~ msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
+msgid "No opposing votes"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
+msgid "No supporting votes"
+msgstr ""
+
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "Do you support or oppose this topic?"
+msgstr ""
+
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "I support this topic"
+msgstr ""
+
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "I oppose this topic"
 msgstr ""

@@ -7,6 +7,7 @@
 		label: string;
 		icon: Component;
 		supports?: boolean | undefined;
+		class?: string;
 		children: Snippet;
 	}
 
@@ -24,8 +25,8 @@
 	});
 </script>
 
-<Card>
-	<div class="flex items-center justify-between gap-4">
+<Card class={props.class}>
+	<div class="flex items-start justify-between gap-3">
 		{#if props.icon}
 			{@const Icon = props.icon}
 			<picture
@@ -35,7 +36,7 @@
 			</picture>
 		{/if}
 		<div class="grid gap-2 text-right">
-			<p class="text-label-sm">{props.label}</p>
+			<p class="text-label-sm leading-5">{props.label}</p>
 			<span class={cn('*:text-headline', color)}>
 				{@render props.children()}
 			</span>

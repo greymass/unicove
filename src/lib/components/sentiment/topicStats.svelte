@@ -16,7 +16,7 @@
 	const { statistics, loading = false, ...props }: Props = $props();
 </script>
 
-<div class={cn('@container relative grid gap-6', props.class)}>
+<div class={cn('relative grid gap-6', props.class)}>
 	{#if loading}
 		<div
 			class="bg-surface/40 absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 rounded-lg backdrop-blur-[2px]"
@@ -34,12 +34,16 @@
 		</div>
 	{/if}
 
-	<div class="grid gap-6 @lg:grid-cols-3">
-		<StatCard label="Support Weight" icon={Weight} supports={true}>
+	<div class="grid gap-6 @xl:grid-cols-2 @4xl:grid-cols-3">
+		<StatCard class="" label="Support Weight" icon={Weight} supports={true}>
 			<AssetText variant="short" value={statistics.totalSupportWeightAsset} />
 		</StatCard>
 
-		<StatCard label="Total Weight" icon={Weight}>
+		<StatCard
+			class="order-first col-span-full @4xl:order-none @4xl:col-span-1"
+			label="Total Weight"
+			icon={Weight}
+		>
 			<AssetText variant="short" value={statistics.totalWeightAsset} />
 		</StatCard>
 

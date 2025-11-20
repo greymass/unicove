@@ -93,6 +93,9 @@
 			document.removeEventListener('visibilitychange', handleVisibilityChange);
 		};
 	});
+
+	const supporters = $derived(data.sentiment.currentVotes.filter((v) => v.voteType === 1));
+	const opposers = $derived(data.sentiment.currentVotes.filter((v) => v.voteType === 0));
 </script>
 
 <svelte:head>
@@ -104,7 +107,7 @@
 	<Button onclick={() => (transactionError = undefined)}>Back</Button>
 {/snippet}
 
-<article>
+<article class="@container">
 	<Stack class="gap-8">
 		{#if data.sentiment.refreshing}
 			<div
@@ -139,8 +142,8 @@
 			{@const statistics = data.sentiment.currentTopic.statistics}
 			{@const systemTokenSymbol = context.network.chain.systemToken?.symbol || '4,EOS'}
 
-			<div class="grid grid-cols-3 gap-6">
-				<Stack class="col-span-2 gap-3">
+			<div class="grid gap-6 @3xl:grid-cols-3">
+				<Stack class="gap-3 @3xl:col-span-2">
 					<h2 class="text-on-surface text-headline">Description</h2>
 					<Card class="text-on-surface h-full whitespace-pre-wrap">
 						{#if topic.description}
@@ -176,7 +179,7 @@
 					<h2 class="text-on-surface text-headline">Participants</h2>
 
 					<Stack>
-						<div class="grid gap-6 @lg:grid-cols-3">
+						<div class="grid gap-6 @xl:grid-cols-3">
 							<StatCard label="Supporting" icon={ThumbsUp} supports={true}>
 								<NumberFormat number={statistics.supportVotes} />
 							</StatCard>
@@ -190,62 +193,76 @@
 							</StatCard>
 						</div>
 
-						<div class="grid grid-cols-2 gap-6">
+						<div class="grid gap-6 @xl:grid-cols-2">
 							<Stack class="gap-3">
 								<h3 class="text-title">Supporting</h3>
 								<Card>
-									<ul class="space-y-2">
-										{#each data.sentiment.currentVotes.filter((v) => v.voteType === 1) as vote (vote.voter)}
-											<li class="flex items-baseline justify-between">
-												<div class="flex items-baseline gap-3">
-													<span class="text-label-sm text-success bg-success/10 rounded px-2 py-1">
-														Support
-													</span>
-													<a
-														href={context.urlPath(`/account/${vote.voter}`)}
-														class="text-primary hover:text-primary-hover font-mono"
-													>
-														{vote.voter}
-													</a>
-												</div>
+									{#if supporters.length > 0}
+										<ul class="space-y-3">
+											{#each supporters as vote (vote.voter)}
+												<li class="flex items-center justify-between">
+													<div class="flex items-center gap-3">
+														<span
+															class="text-label-sm text-success bg-success/10 hidden rounded px-2 py-1 @2xl:block"
+														>
+															Support
+														</span>
+														<ThumbsUp class="text-success mb-1 size-4 @2xl:hidden" />
+														<a
+															href={context.urlPath(`/account/${vote.voter}`)}
+															class="text-primary hover:text-primary-hover font-mono"
+														>
+															{vote.voter}
+														</a>
+													</div>
 
-												<AssetText
-													class="text-on-surface-variant text-label-sm"
-													variant="short"
-													value={Asset.fromUnits(vote.weight, systemTokenSymbol)}
-												/>
-											</li>
-										{/each}
-									</ul>
+													<AssetText
+														class="text-on-surface-variant text-label-sm "
+														variant="short"
+														value={Asset.fromUnits(vote.weight, systemTokenSymbol)}
+													/>
+												</li>
+											{/each}
+										</ul>
+									{:else}
+										<p>No supporting votes</p>
+									{/if}
 								</Card>
 							</Stack>
 
 							<Stack class="gap-3">
 								<h3 class="text-title">Opposing</h3>
 								<Card>
-									<ul class="space-y-2">
-										{#each data.sentiment.currentVotes.filter((v) => v.voteType === 0) as vote (vote.voter)}
-											<li class="flex items-baseline justify-between">
-												<div class="flex items-baseline gap-3">
-													<span class=" bg-error/10 text-error text-label-sm rounded px-2 py-1">
-														Oppose
-													</span>
-													<a
-														href={context.urlPath(`/account/${vote.voter}`)}
-														class="text-primary hover:text-primary-hover font-mono"
-													>
-														{vote.voter}
-													</a>
-												</div>
+									{#if opposers.length > 0}
+										<ul class="space-y-3">
+											{#each opposers as vote (vote.voter)}
+												<li class="flex items-center justify-between">
+													<div class="flex items-center gap-3">
+														<span
+															class="bg-error/10 text-error text-label-sm hidden rounded px-2 py-1 @2xl:block"
+														>
+															Oppose
+														</span>
+														<ThumbsDown class="text-error mt-0.5 size-4 @2xl:hidden" />
+														<a
+															href={context.urlPath(`/account/${vote.voter}`)}
+															class="text-primary hover:text-primary-hover font-mono"
+														>
+															{vote.voter}
+														</a>
+													</div>
 
-												<AssetText
-													class="text-on-surface-variant text-label-sm"
-													variant="short"
-													value={Asset.fromUnits(vote.weight, systemTokenSymbol)}
-												/>
-											</li>
-										{/each}
-									</ul>
+													<AssetText
+														class="text-on-surface-variant text-label-sm"
+														variant="short"
+														value={Asset.fromUnits(vote.weight, systemTokenSymbol)}
+													/>
+												</li>
+											{/each}
+										</ul>
+									{:else}
+										<p>No opposing votes</p>
+									{/if}
 								</Card>
 							</Stack>
 						</div>

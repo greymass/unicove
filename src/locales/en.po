@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2025-11-19T01:50:32.758Z\n"
+"PO-Revision-Date: 2025-11-20T19:30:31.942Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -90,6 +90,7 @@ msgstr "Status"
 #: src/lib/components/footer.svelte
 #: src/lib/components/footer.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Support"
 msgstr "Support"
 
@@ -1207,6 +1208,7 @@ msgstr "Choose A Wallet Type"
 #: src/routes/[[locale]]/[network]/(explorer)/prompt/[payload]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/prompt/[payload]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Back"
 msgstr "Back"
 
@@ -5749,10 +5751,12 @@ msgstr "Explore {0}"
 #~ msgstr "Overview and statistics"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.ts
 msgid "Sentiment"
 msgstr "Sentiment"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.ts
 msgid "Overview and statistics for community sentiment on the"
 msgstr "Overview and statistics for community sentiment on the"
 
@@ -5821,19 +5825,24 @@ msgid "Stake tokens"
 msgstr "Stake tokens"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Updating..."
 msgstr "Updating..."
 
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Dismiss"
 msgstr "Dismiss"
 
 #. placeholder {0}: new Date(sentiment.currentTopic.topic.lastUpdated).toLocaleString()
+#. placeholder {0}: new Date(sentiment.currentTopic.topic.lastUpdated).toLocaleString()
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.ts
 msgid "Last updated {0}"
 msgstr "Last updated {0}"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Description"
 msgstr "Description"
 
@@ -5842,11 +5851,15 @@ msgstr "Description"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Supporting"
 msgstr "Supporting"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Opposing"
 msgstr "Opposing"
 
@@ -5858,14 +5871,18 @@ msgstr "Opposing"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Participants"
 msgstr "Participants"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Oppose"
 msgstr "Oppose"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Load More Participants"
 msgstr "Load More Participants"
 
@@ -5873,6 +5890,7 @@ msgstr "Load More Participants"
 #~ msgstr "Back to All Topics"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Loading topic..."
 msgstr "Loading topic..."
 
@@ -5943,20 +5961,49 @@ msgstr ""
 #~ msgstr "Support two"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Your Vote"
 msgstr "Your Vote"
 
-#: src/lib/components/sentiment/voteButtons.svelte
-msgid "I support this"
-msgstr "I support this"
+#~ msgid "I support this"
+#~ msgstr "I support this"
 
-#: src/lib/components/sentiment/voteButtons.svelte
-msgid "I oppose this"
-msgstr "I oppose this"
+#~ msgid "I oppose this"
+#~ msgstr "I oppose this"
 
 #~ msgid "Actually, I support this"
 #~ msgstr "Actually, I support this"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topic/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Statistics"
 msgstr "Statistics"
+
+#~ msgid "123456780 A"
+#~ msgstr "123456780 A"
+
+#~ msgid "1234567890 A"
+#~ msgstr "1234567890 A"
+
+#~ msgid "No Opposing"
+#~ msgstr "No Opposing"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
+msgid "No opposing votes"
+msgstr "No opposing votes"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
+msgid "No supporting votes"
+msgstr "No supporting votes"
+
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "Do you support or oppose this topic?"
+msgstr "Do you support or oppose this topic?"
+
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "I support this topic"
+msgstr "I support this topic"
+
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "I oppose this topic"
+msgstr "I oppose this topic"
