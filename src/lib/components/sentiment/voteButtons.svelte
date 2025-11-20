@@ -167,13 +167,16 @@
 	{#if context.wharf.session && context.account && votingWeight}
 		<div class=" text-center">
 			<p class="text-sm">
-				Voting as <strong class="text-on-surface">{context.account.name}</strong> with weight
+				{currentVote === null ? 'Voting' : 'Voted'}
+				as <strong class="text-on-surface">{context.account.name}</strong> with weight
 				<strong class="text-on-surface"><AssetText variant="full" value={votingWeight} /></strong>
 			</p>
 		</div>
 	{/if}
 
-	<div class="grid grid-cols-1 grid-rows-1 *:col-start-1 *:row-start-1">
+	<div
+		class="grid w-full max-w-sm grid-cols-1 grid-rows-1 justify-self-center *:col-start-1 *:row-start-1"
+	>
 		{#if supports}
 			<div
 				class={cn(
@@ -194,12 +197,12 @@
 					<ThumbsUp class={cn('size-6')} />
 				</button>
 
-				<span class="text-label-sm">I support this topic</span>
+				<span class="text-label-sm text-center leading-4 text-balance">I support this topic</span>
 
 				<button
 					onclick={handleOppose}
 					disabled={disabled || voting || !context.wharf.session}
-					class={cn('hover:bg-white/30', baseButtonStyles)}
+					class={cn('opacity-50 hover:bg-white/30 hover:opacity-100', baseButtonStyles)}
 				>
 					<ThumbsDown class={cn('size-6')} />
 				</button>
@@ -216,12 +219,12 @@
 				<button
 					onclick={handleSupport}
 					disabled={disabled || voting || !context.wharf.session}
-					class={cn('hover:bg-white/30', baseButtonStyles)}
+					class={cn('opacity-50 hover:bg-white/30 hover:opacity-100', baseButtonStyles)}
 				>
 					<ThumbsUp class={cn('size-6')} />
 				</button>
 
-				<span class="text-label-sm">I oppose this topic</span>
+				<span class="text-label-sm text-center leading-4 text-balance">I oppose this topic</span>
 
 				<button
 					onclick={handleOppose}

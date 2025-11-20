@@ -142,8 +142,8 @@
 			{@const statistics = data.sentiment.currentTopic.statistics}
 			{@const systemTokenSymbol = context.network.chain.systemToken?.symbol || '4,EOS'}
 
-			<div class="grid gap-6 @3xl:grid-cols-3">
-				<Stack class="gap-3 @3xl:col-span-2">
+			<div class="grid gap-6 @4xl:grid-cols-3">
+				<Stack class="gap-3 @4xl:col-span-2">
 					<h2 class="text-on-surface text-headline">Description</h2>
 					<Card class="text-on-surface h-full whitespace-pre-wrap">
 						{#if topic.description}

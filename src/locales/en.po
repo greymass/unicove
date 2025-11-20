@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2025-11-20T19:30:31.942Z\n"
+"PO-Revision-Date: 2025-11-20T20:28:36.828Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -5926,9 +5926,8 @@ msgstr "Please log in to remove vote"
 #~ msgid "Remove"
 #~ msgstr "Remove"
 
-#: src/lib/components/sentiment/voteButtons.svelte
-msgid "Voting as <0/> with weight <1/>"
-msgstr "Voting as <0/> with weight <1/>"
+#~ msgid "Voting as <0/> with weight <1/>"
+#~ msgstr "Voting as <0/> with weight <1/>"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid ""
@@ -6007,3 +6006,16 @@ msgstr "I support this topic"
 #: src/lib/components/sentiment/voteButtons.svelte
 msgid "I oppose this topic"
 msgstr "I oppose this topic"
+
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "Voting"
+msgstr "Voting"
+
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "Voted"
+msgstr "Voted"
+
+#. placeholder {0}: currentVote === null ? 'Voting' : 'Voted'
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "{0} as <0/> with weight <1/>"
+msgstr "{0} as <0/> with weight <1/>"

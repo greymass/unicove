@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.663Z\n"
-"PO-Revision-Date: 2025-11-20T19:30:21.635Z\n"
+"PO-Revision-Date: 2025-11-20T20:28:36.838Z\n"
 "Last-Translator: \n"
 "Language: ko\n"
 "Language-Team: \n"
@@ -5658,7 +5658,6 @@ msgstr "반대 가중치"
 
 #: src/lib/components/sentiment/voteButtons.svelte
 #: src/lib/components/sentiment/voteButtons.svelte
-#: src/lib/components/sentiment/voteButtons.svelte
 msgid "Please log in to vote"
 msgstr "투표하려면 로그인하세요"
 
@@ -5743,9 +5742,8 @@ msgstr "데이터 업데이트 중"
 msgid "Overview and statistics for community sentiment on the"
 msgstr "커뮤니티 감정에 대한 개요 및 통계"
 
-#: src/lib/components/sentiment/voteButtons.svelte
-msgid "Voting as <0/> with weight <1/>"
-msgstr "가중치 <1/>로 <0/>로 투표 중"
+#~ msgid "Voting as <0/> with weight <1/>"
+#~ msgstr "가중치 <1/>로 <0/>로 투표 중"
 
 #~ msgid "Cast Your Vote"
 #~ msgstr "투표하기"
@@ -5849,4 +5847,17 @@ msgstr ""
 
 #: src/lib/components/sentiment/voteButtons.svelte
 msgid "I oppose this topic"
+msgstr ""
+
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "Voting"
+msgstr ""
+
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "Voted"
+msgstr ""
+
+#. placeholder {0}: currentVote === null ? 'Voting' : 'Voted'
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "{0} as <0/> with weight <1/>"
 msgstr ""
