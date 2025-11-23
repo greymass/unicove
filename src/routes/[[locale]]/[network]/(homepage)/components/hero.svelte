@@ -11,8 +11,8 @@
 	import waxDark from '$lib/assets/hero/wax/dark.png?enhanced';
 	import UnicoveOutline from '$lib/assets/unicove-outline.svg';
 
-	import { Button } from 'unicove-components';
 	import { browser } from '$app/environment';
+	import GetStarted from './get-started.svelte';
 
 	interface Props {
 		networkName: string;
@@ -23,7 +23,7 @@
 
 	let darkMode = $state(browser && localStorage.getItem('color-scheme') === 'dark');
 
-	const logo = {
+	const logo: Record<string, string> = {
 		vaulta: vaultaLogo,
 		telos: telos,
 		jungle4: jungle4,
@@ -181,9 +181,11 @@
 {#snippet vaulta()}
 	<section
 		id="hero"
-		class="@container col-span-full grid h-[70svh] max-h-156 place-content-center sm:pt-12 md:pt-0"
+		class="@container col-span-full grid h-[40svh] max-h-156 place-content-center sm:pt-12 md:grid-cols-2 md:items-center md:pt-0"
 	>
-		<Stack class="relative grid justify-items-center gap-5  text-center">
+		<Stack
+			class="relative z-10 row-start-1 flex grid justify-items-center gap-5 justify-self-center text-center md:col-start-1"
+		>
 			<svg
 				class="z-50 mb-2 h-auto w-64"
 				width="81"
@@ -197,28 +199,23 @@
 					fill="currentColor"
 				/>
 			</svg>
+		</Stack>
 
+		<Stack class="z-10 grid gap-5 text-center md:col-start-2 md:row-start-1 md:text-left">
 			<h1
 				class="font-sans-hero max-w-128 text-3xl leading-tight font-bold text-balance lg:text-4xl lg:leading-tight"
 			>
-				<span class="">Unicove -</span>
-				The {networkName} web wallet and block explorer.
+				Unicove Your Gateway To The Vaulta Network.
 			</h1>
 			<p
 				class="text-muted mb-2 max-w-md rounded-lg text-xl leading-tight text-pretty lg:text-xl lg:leading-tight"
 			>
-				Stake, Send, Manage Tokens, and Explore {networkName} – all with ease
+				Create your account in minutes. Stake, swap, and manage your digital assets with complete
+				control.
 			</p>
 
 			<div class="grid gap-4">
-				<!-- <div class="grid gap-4 @2xl:grid-cols-2"> -->
-				<!-- <Button variant="primary">Create your Vaulta account</Button> -->
-				<Button
-					class="text-primary bg-surface-container-lowest/20  backdrop-blur"
-					href="https://www.vaulta.com/resources/opening-the-gateway-to-web3-banking"
-				>
-					EOS rebrands to Vaulta
-				</Button>
+				<GetStarted />
 			</div>
 		</Stack>
 	</section>

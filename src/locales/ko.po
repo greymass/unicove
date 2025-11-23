@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.663Z\n"
-"PO-Revision-Date: 2025-11-15T23:29:18.569Z\n"
+"PO-Revision-Date: 2025-11-24T03:31:50.006Z\n"
 "Last-Translator: \n"
 "Language: ko\n"
 "Language-Team: \n"
@@ -4204,17 +4204,13 @@ msgstr "<0>Unicove -</0> {0} 웹 지갑 및 블록 탐색기"
 
 #. placeholder {0}: network.chain.name
 #. placeholder {0}: networkName
-#. placeholder {0}: networkName
 #: src/routes/+layout.server.ts
-#: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
 msgid "Stake, Send, Manage Tokens, and Explore {0} – all with ease"
 msgstr "손쉽게 {0} 네트워크에서 스테이킹, 전송, 토큰 관리 및 탐색을 모두 즐기세요!"
 
-#. placeholder {0}: networkName
-#: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
-msgid "<0>Unicove -</0> The {0} web wallet and block explorer."
-msgstr "<0>Unicove -</0> {0} 웹 지갑 및 블록 탐색기"
+#~ msgid "<0>Unicove -</0> The {0} web wallet and block explorer."
+#~ msgstr "<0>Unicove -</0> {0} 웹 지갑 및 블록 탐색기"
 
 #. placeholder {0}: productName
 #: src/routes/[[locale]]/[network]/(homepage)/components/carousel.svelte
@@ -5596,3 +5592,24 @@ msgstr ""
 
 #~ msgid "Controls"
 #~ msgstr ""
+
+#: src/routes/[[locale]]/[network]/(homepage)/components/get-started.svelte
+#: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
+msgid "Get Started - Create Account"
+msgstr ""
+
+#~ msgid "Unicove Your Gateway To The Jungle 4 Network."
+#~ msgstr ""
+
+#~ msgid "Create your account in minutes. Stake, swap, and manage your digital assets with complete control."
+#~ msgstr ""
+
+#: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
+msgid ""
+"Create your account in minutes. Stake, swap, and manage your digital assets with complete\n"
+"control."
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
+msgid "Unicove Your Gateway To The Vaulta Network."
+msgstr ""

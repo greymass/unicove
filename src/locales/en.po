@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2025-11-15T23:29:18.536Z\n"
+"PO-Revision-Date: 2025-11-24T03:32:56.312Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -1062,9 +1062,8 @@ msgstr "Vote"
 msgid "{0}/USD"
 msgstr "{0}/USD"
 
-#: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
-msgid "EOS rebrands to Vaulta"
-msgstr "EOS rebrands to Vaulta"
+#~ msgid "EOS rebrands to Vaulta"
+#~ msgstr "EOS rebrands to Vaulta"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/staked/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/stakedhex.svelte
@@ -4294,17 +4293,13 @@ msgstr "<0>Unicove -</0> The {0} web wallet and block explorer"
 
 #. placeholder {0}: network.chain.name
 #. placeholder {0}: networkName
-#. placeholder {0}: networkName
 #: src/routes/+layout.server.ts
-#: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
 msgid "Stake, Send, Manage Tokens, and Explore {0} – all with ease"
 msgstr "Stake, Send, Manage Tokens, and Explore {0} – all with ease"
 
-#. placeholder {0}: networkName
-#: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
-msgid "<0>Unicove -</0> The {0} web wallet and block explorer."
-msgstr "<0>Unicove -</0> The {0} web wallet and block explorer."
+#~ msgid "<0>Unicove -</0> The {0} web wallet and block explorer."
+#~ msgstr "<0>Unicove -</0> The {0} web wallet and block explorer."
 
 #. placeholder {0}: productName
 #: src/routes/[[locale]]/[network]/(homepage)/components/carousel.svelte
@@ -5732,3 +5727,25 @@ msgstr "MetaMask Wallet Plugin"
 
 #~ msgid "Controls"
 #~ msgstr "Controls"
+
+#: src/routes/[[locale]]/[network]/(homepage)/components/get-started.svelte
+msgid "Get Started - Create Account"
+msgstr "Get Started - Create Account"
+
+#~ msgid "Unicove Your Gateway To The Jungle 4 Network."
+#~ msgstr "Unicove Your Gateway To The Jungle 4 Network."
+
+#~ msgid "Create your account in minutes. Stake, swap, and manage your digital assets with complete control."
+#~ msgstr "Create your account in minutes. Stake, swap, and manage your digital assets with complete control."
+
+#: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
+msgid ""
+"Create your account in minutes. Stake, swap, and manage your digital assets with complete\n"
+"control."
+msgstr ""
+"Create your account in minutes. Stake, swap, and manage your digital assets with complete\n"
+"control."
+
+#: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
+msgid "Unicove Your Gateway To The Vaulta Network."
+msgstr "Unicove Your Gateway To The Vaulta Network."
