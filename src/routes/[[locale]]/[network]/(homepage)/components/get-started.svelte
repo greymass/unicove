@@ -8,26 +8,19 @@
 	const context = getContext<UnicoveContext>('state');
 	const urlPath = $derived(context.urlPath);
 
-	let webAuthenticatorAvailable = $state(false);
+	let pluginAvailable = $state(true);
 	const TARGET_PLUGIN_ID = 'web-authenticator';
 
 	function checkAvailability() {
 		const sessionKit = context.wharf.sessionKit;
 		if (!sessionKit) {
-			webAuthenticatorAvailable = false;
 			return false;
 		}
 
 		const walletPlugins = sessionKit.walletPlugins;
-		const summary = walletPlugins.map((w) => ({
-			id: w.id,
-			name: w.metadata.name,
-			description: w.metadata.description
-		}));
-
-		const hasWebAuth = walletPlugins.some((wallet) => wallet.id === TARGET_PLUGIN_ID);
-		webAuthenticatorAvailable = hasWebAuth;
-		return hasWebAuth;
+		const hasPlugin = walletPlugins.some((wallet) => wallet.id === TARGET_PLUGIN_ID);
+		pluginAvailable = hasPlugin;
+		return hasPlugin;
 	}
 
 	$effect(() => {
@@ -74,7 +67,7 @@
 	}
 </script>
 
-{#if webAuthenticatorAvailable}
+{#if pluginAvailable}
 	<Button variant="primary" class="w-fit" onclick={handleGetStarted}
 		>Get Started - Create Account</Button
 	>
