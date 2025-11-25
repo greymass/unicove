@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2025-11-25T19:12:37.247Z\n"
+"PO-Revision-Date: 2025-11-25T22:07:01.451Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -6033,128 +6033,12 @@ msgstr "Accounts"
 msgid "Explore account information, balances, permissions, and activity"
 msgstr "Explore account information, balances, permissions, and activity"
 
-#~ msgid "Search Account"
-#~ msgstr "Search Account"
-
-#~ msgid "Find any account on the network"
-#~ msgstr "Find any account on the network"
-
-#~ msgid "View your account details"
-#~ msgstr "View your account details"
-
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Blocks"
-msgstr "Blocks"
-
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Browse blockchain blocks and their transactions"
-msgstr "Browse blockchain blocks and their transactions"
-
-#~ msgid "Latest Blocks"
-#~ msgstr "Latest Blocks"
-
-#~ msgid "View recent blocks"
-#~ msgstr "View recent blocks"
-
-#~ msgid "Block by Number"
-#~ msgstr "Block by Number"
-
-#~ msgid "Explore specific blocks"
-#~ msgstr "Explore specific blocks"
-
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Inspect smart contracts, ABIs, actions, and data tables"
-msgstr "Inspect smart contracts, ABIs, actions, and data tables"
-
-#~ msgid "Search Contract"
-#~ msgstr "Search Contract"
-
-#~ msgid "Find any contract"
-#~ msgstr "Find any contract"
-
-#~ msgid "System Contracts"
-#~ msgstr "System Contracts"
-
-#~ msgid "View core system contracts"
-#~ msgstr "View core system contracts"
-
-#~ msgid "Token Contracts"
-#~ msgstr "Token Contracts"
-
-#~ msgid "Explore token contracts"
-#~ msgstr "Explore token contracts"
-
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Keys"
-msgstr "Keys"
-
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Investigate public keys and associated accounts"
-msgstr "Investigate public keys and associated accounts"
-
-#~ msgid "Search Key"
-#~ msgstr "Search Key"
-
-#~ msgid "Find accounts by public key"
-#~ msgstr "Find accounts by public key"
-
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Analyze transaction details, actions, and traces"
-msgstr "Analyze transaction details, actions, and traces"
-
-#~ msgid "Search Transaction"
-#~ msgstr "Search Transaction"
-
-#~ msgid "Lookup transaction by ID"
-#~ msgstr "Lookup transaction by ID"
-
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Multi-Signatures"
-msgstr "Multi-Signatures"
-
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Review and manage multi-signature proposals"
-msgstr "Review and manage multi-signature proposals"
-
-#~ msgid "Search Proposal"
-#~ msgstr "Search Proposal"
-
-#~ msgid "Find msig proposals"
-#~ msgstr "Find msig proposals"
-
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Monitor network status and producers"
-msgstr "Monitor network status and producers"
-
-#~ msgid "Network statistics"
-#~ msgstr "Network statistics"
-
-#~ msgid "View active producers"
-#~ msgstr "View active producers"
-
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Explore token contracts and token information"
-msgstr "Explore token contracts and token information"
-
-#~ msgid "Token Search"
-#~ msgstr "Token Search"
-
-#~ msgid "Find any token"
-#~ msgstr "Find any token"
-
-#~ msgid "Native Token"
-#~ msgstr "Native Token"
-
-#~ msgid "View system token"
-#~ msgstr "View system token"
-
 #: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "System account"
 msgstr "System account"
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Block.one account"
-msgstr "Block.one account"
+#~ msgid "Block.one account"
+#~ msgstr "Block.one account"
 
 #: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "Token contract account"
@@ -6169,44 +6053,46 @@ msgid "Staking account"
 msgstr "Staking account"
 
 #: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Block 1"
-msgstr "Block 1"
+msgid "Blocks"
+msgstr "Blocks"
 
 #: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "First block"
-msgstr "First block"
+msgid "Browse blockchain blocks and their transactions"
+msgstr "Browse blockchain blocks and their transactions"
+
+#~ msgid "Block 1"
+#~ msgstr "Block 1"
+
+#~ msgid "First block"
+#~ msgstr "First block"
+
+#~ msgid "Block 100"
+#~ msgstr "Block 100"
+
+#~ msgid "Early block"
+#~ msgstr "Early block"
+
+#~ msgid "Block 1000"
+#~ msgstr "Block 1000"
+
+#~ msgid "Milestone block"
+#~ msgstr "Milestone block"
+
+#~ msgid "Block 10000"
+#~ msgstr "Block 10000"
+
+#~ msgid "Recent block"
+#~ msgstr "Recent block"
+
+#~ msgid "Block 100000"
+#~ msgstr "Block 100000"
+
+#~ msgid "Latest block"
+#~ msgstr "Latest block"
 
 #: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Block 100"
-msgstr "Block 100"
-
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Early block"
-msgstr "Early block"
-
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Block 1000"
-msgstr "Block 1000"
-
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Milestone block"
-msgstr "Milestone block"
-
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Block 10000"
-msgstr "Block 10000"
-
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Recent block"
-msgstr "Recent block"
-
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Block 100000"
-msgstr "Block 100000"
-
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Latest block"
-msgstr "Latest block"
+msgid "Inspect smart contracts, ABIs, actions, and data tables"
+msgstr "Inspect smart contracts, ABIs, actions, and data tables"
 
 #: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "System contract"
@@ -6216,9 +6102,8 @@ msgstr "System contract"
 msgid "Token contract"
 msgstr "Token contract"
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "RAM market contract"
-msgstr "RAM market contract"
+#~ msgid "RAM market contract"
+#~ msgstr "RAM market contract"
 
 #: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "REX contract"
@@ -6229,44 +6114,47 @@ msgid "Multi-sig contract"
 msgstr "Multi-sig contract"
 
 #: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Keys"
+msgstr "Keys"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Investigate public keys and associated accounts"
+msgstr "Investigate public keys and associated accounts"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV"
 msgstr "EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV"
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "System key"
-msgstr "System key"
+#~ msgid "System key"
+#~ msgstr "System key"
+
+#~ msgid "EOS5kfnT3G1h5R5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z"
+#~ msgstr "EOS5kfnT3G1h5R5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z"
+
+#~ msgid "Example key 1"
+#~ msgstr "Example key 1"
+
+#~ msgid "EOS7K9P3qL4m2X8Y5R6T1W3V7B9N2M4Q6S8U0I2O4A6C8E0G2I4K6M8"
+#~ msgstr "EOS7K9P3qL4m2X8Y5R6T1W3V7B9N2M4Q6S8U0I2O4A6C8E0G2I4K6M8"
+
+#~ msgid "Example key 2"
+#~ msgstr "Example key 2"
+
+#~ msgid "EOS8L2N5M7Q9R1T3V5X7Z9B2D4F6H8J0K2L4N6P8R0T2V4X6Z8B0D2F4H6J8"
+#~ msgstr "EOS8L2N5M7Q9R1T3V5X7Z9B2D4F6H8J0K2L4N6P8R0T2V4X6Z8B0D2F4H6J8"
+
+#~ msgid "Example key 3"
+#~ msgstr "Example key 3"
+
+#~ msgid "EOS9M3N5P7R9T1V3X5Z7B9D2F4H6J8K0L2N4P6R8T0V2X4Z6B8D0F2H4J6K8"
+#~ msgstr "EOS9M3N5P7R9T1V3X5Z7B9D2F4H6J8K0L2N4P6R8T0V2X4Z6B8D0F2H4J6K8"
+
+#~ msgid "Example key 4"
+#~ msgstr "Example key 4"
 
 #: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "EOS5kfnT3G1h5R5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z"
-msgstr "EOS5kfnT3G1h5R5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z"
-
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Example key 1"
-msgstr "Example key 1"
-
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "EOS7K9P3qL4m2X8Y5R6T1W3V7B9N2M4Q6S8U0I2O4A6C8E0G2I4K6M8"
-msgstr "EOS7K9P3qL4m2X8Y5R6T1W3V7B9N2M4Q6S8U0I2O4A6C8E0G2I4K6M8"
-
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Example key 2"
-msgstr "Example key 2"
-
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "EOS8L2N5M7Q9R1T3V5X7Z9B2D4F6H8J0K2L4N6P8R0T2V4X6Z8B0D2F4H6J8"
-msgstr "EOS8L2N5M7Q9R1T3V5X7Z9B2D4F6H8J0K2L4N6P8R0T2V4X6Z8B0D2F4H6J8"
-
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Example key 3"
-msgstr "Example key 3"
-
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "EOS9M3N5P7R9T1V3X5Z7B9D2F4H6J8K0L2N4P6R8T0V2X4Z6B8D0F2H4J6K8"
-msgstr "EOS9M3N5P7R9T1V3X5Z7B9D2F4H6J8K0L2N4P6R8T0V2X4Z6B8D0F2H4J6K8"
-
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Example key 4"
-msgstr "Example key 4"
+msgid "Analyze transaction details, actions, and traces"
+msgstr "Analyze transaction details, actions, and traces"
 
 #: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "Genesis transaction"
@@ -6289,6 +6177,14 @@ msgid "Example transaction 4"
 msgstr "Example transaction 4"
 
 #: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Multi-Signatures"
+msgstr "Multi-Signatures"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Review and manage multi-signature proposals"
+msgstr "Review and manage multi-signature proposals"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "System proposal"
 msgstr "System proposal"
 
@@ -6307,6 +6203,10 @@ msgstr "RAM proposal"
 #: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "Staking proposal"
 msgstr "Staking proposal"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Monitor network status and producers"
+msgstr "Monitor network status and producers"
 
 #: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "Network statistics and status"
@@ -6341,8 +6241,11 @@ msgid "Example producer 2"
 msgstr "Example producer 2"
 
 #: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "EOS"
-msgstr "EOS"
+msgid "Explore token contracts and token information"
+msgstr "Explore token contracts and token information"
+
+#~ msgid "EOS"
+#~ msgstr "EOS"
 
 #: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "Native system token"
@@ -6379,13 +6282,38 @@ msgstr "ETH"
 #: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "Ethereum token"
 msgstr "Ethereum token"
-oken"
-msgstr "Bitcoin token"
 
 #: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "ETH"
-msgstr "ETH"
+msgid "Unicove contract"
+msgstr "Unicove contract"
+
+#~ msgid "Block {0}"
+#~ msgstr "Block {0}"
+
+#~ msgid "Produced by {0} • {1} transactions • {2} actions"
+#~ msgstr "Produced by {0} • {1} transactions • {2} actions"
 
 #: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Ethereum token"
-msgstr "Ethereum token"
+msgid "Unicove account"
+msgstr "Unicove account"
+
+#~ msgid "Native A token"
+#~ msgstr "Native A token"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "A"
+msgstr "A"
+
+#~ msgid "Navigate through accounts, blocks, contracts, transactions, and more on the {0} blockchain"
+#~ msgstr "Navigate through accounts, blocks, contracts, transactions, and more on the {0} blockchain"
+
+#~ msgid "Discover accounts, blocks, contracts, and transactions"
+#~ msgstr "Discover accounts, blocks, contracts, and transactions"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.ts
+msgid "Explore blockchain resources"
+msgstr "Explore blockchain resources"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "PUB_K1_6RWZ1CmDL4B6LdixuertnzxcRuUDac3NQspJEvMnebGcXY4zZj"
+msgstr "PUB_K1_6RWZ1CmDL4B6LdixuertnzxcRuUDac3NQspJEvMnebGcXY4zZj"

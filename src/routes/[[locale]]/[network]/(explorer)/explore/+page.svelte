@@ -1,20 +1,18 @@
 <script lang="ts">
-	// import { getContext } from 'svelte';
 	import { Card, Stack, Button } from 'unicove-components';
 	import {
 		UserIcon,
 		FileTextIcon,
-		KeyIcon,
+		KeyRoundIcon,
 		UsersIcon,
 		NetworkIcon,
 		CoinsIcon,
 		ActivityIcon,
 		BlocksIcon
 	} from '@lucide/svelte';
-	// import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { localizePath } from '$lib/utils/url';
 
-	// const context = getContext<UnicoveContext>('state');
+	const { data } = $props();
 
 	const explorerSections = [
 		{
@@ -23,7 +21,7 @@
 			icon: UserIcon,
 			items: [
 				{ label: 'eosio', href: '/account/eosio', description: 'System account' },
-				{ label: 'b1', href: '/account/b1', description: 'Block.one account' },
+				{ label: 'unicove.gm', href: '/account/unicove.gm', description: 'Unicove account' },
 				{
 					label: 'eosio.token',
 					href: '/account/eosio.token',
@@ -37,13 +35,11 @@
 			title: 'Blocks',
 			description: 'Browse blockchain blocks and their transactions',
 			icon: BlocksIcon,
-			items: [
-				{ label: 'Block 1', href: '/block/1', description: 'First block' },
-				{ label: 'Block 100', href: '/block/100', description: 'Early block' },
-				{ label: 'Block 1000', href: '/block/1000', description: 'Milestone block' },
-				{ label: 'Block 10000', href: '/block/10000', description: 'Recent block' },
-				{ label: 'Block 100000', href: '/block/100000', description: 'Latest block' }
-			]
+			items: data.blocks.map((b) => ({
+				label: b.block_num,
+				description: b.producer,
+				href: `/block/${b.block_num}`
+			}))
 		},
 		{
 			title: 'Contracts',
@@ -52,7 +48,7 @@
 			items: [
 				{ label: 'eosio', href: '/contract/eosio', description: 'System contract' },
 				{ label: 'eosio.token', href: '/contract/eosio.token', description: 'Token contract' },
-				{ label: 'eosio.ram', href: '/contract/eosio.ram', description: 'RAM market contract' },
+				{ label: 'unicove', href: '/contract/unicove.gm', description: 'Unicove contract' },
 				{ label: 'eosio.rex', href: '/contract/eosio.rex', description: 'REX contract' },
 				{ label: 'eosio.msig', href: '/contract/eosio.msig', description: 'Multi-sig contract' }
 			]
@@ -60,32 +56,17 @@
 		{
 			title: 'Keys',
 			description: 'Investigate public keys and associated accounts',
-			icon: KeyIcon,
+			icon: KeyRoundIcon,
 			items: [
 				{
 					label: 'EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV',
 					href: '/key/EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV',
-					description: 'System key'
+					description: 'eosio system key'
 				},
 				{
-					label: 'EOS5kfnT3G1h5R5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z',
-					href: '/key/EOS5kfnT3G1h5R5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z5Z',
-					description: 'Example key 1'
-				},
-				{
-					label: 'EOS7K9P3qL4m2X8Y5R6T1W3V7B9N2M4Q6S8U0I2O4A6C8E0G2I4K6M8',
-					href: '/key/EOS7K9P3qL4m2X8Y5R6T1W3V7B9N2M4Q6S8U0I2O4A6C8E0G2I4K6M8',
-					description: 'Example key 2'
-				},
-				{
-					label: 'EOS8L2N5M7Q9R1T3V5X7Z9B2D4F6H8J0K2L4N6P8R0T2V4X6Z8B0D2F4H6J8',
-					href: '/key/EOS8L2N5M7Q9R1T3V5X7Z9B2D4F6H8J0K2L4N6P8R0T2V4X6Z8B0D2F4H6J8',
-					description: 'Example key 3'
-				},
-				{
-					label: 'EOS9M3N5P7R9T1V3X5Z7B9D2F4H6J8K0L2N4P6R8T0V2X4Z6B8D0F2H4J6K8',
-					href: '/key/EOS9M3N5P7R9T1V3X5Z7B9D2F4H6J8K0L2N4P6R8T0V2X4Z6B8D0F2H4J6K8',
-					description: 'Example key 4'
+					label: 'PUB_K1_6RWZ1CmDL4B6LdixuertnzxcRuUDac3NQspJEvMnebGcXY4zZj',
+					href: '/key/PUB_K1_6RWZ1CmDL4B6LdixuertnzxcRuUDac3NQspJEvMnebGcXY4zZj',
+					description: 'unicove account key'
 				}
 			]
 		},
@@ -174,7 +155,7 @@
 			description: 'Explore token contracts and token information',
 			icon: CoinsIcon,
 			items: [
-				{ label: 'EOS', href: '/token/eosio.token/EOS', description: 'Native system token' },
+				{ label: 'A', href: '/token/core.vaulta/A', description: 'Native system token' },
 				{ label: 'USDT', href: '/token/tethertether/USDT', description: 'Tether USD' },
 				{ label: 'USDC', href: '/token/eosio.token/USDC', description: 'USD Coin' },
 				{ label: 'BTC', href: '/token/eosio.token/BTC', description: 'Bitcoin token' },
@@ -189,17 +170,17 @@
 		{@const IconComponent = section.icon}
 		<Card>
 			<Stack class="gap-4">
-				<div class="flex items-center gap-3">
-					<div class="bg-primary/10 flex h-10 w-10 items-center justify-center rounded-lg">
-						<IconComponent class="text-primary h-5 w-5" />
-					</div>
+				<div class="flex items-center gap-4">
+					<picture class="bg-surface-container-high grid size-12 place-items-center rounded-full">
+						<IconComponent />
+					</picture>
 					<div class="space-y-2">
 						<h3 class="text-title">{section.title}</h3>
 						<p class="text-muted text-label-sm">{section.description}</p>
 					</div>
 				</div>
 
-				<div class="grid gap-3 sm:grid-cols-2">
+				<div class="grid gap-3">
 					{#each section.items as item}
 						<Button
 							variant="text"
