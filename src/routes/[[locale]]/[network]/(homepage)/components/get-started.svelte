@@ -10,21 +10,12 @@
 
 	const TARGET_PLUGIN_ID = 'web-authenticator';
 
-	let pluginAvailable = $state(true);
-
-	function checkPluginAvailability() {
+	const pluginAvailable = $derived.by(() => {
 		const sessionKit = context.wharf.sessionKit;
 		if (sessionKit) {
-			pluginAvailable = sessionKit.walletPlugins.some((wallet) => wallet.id === TARGET_PLUGIN_ID);
+			return sessionKit.walletPlugins.some((wallet) => wallet.id === TARGET_PLUGIN_ID);
 		}
-	}
-
-	// Track chain reactively - when it's set, sessionKit should be available
-	$effect(() => {
-		const chain = context.wharf.chain; // Track chain changes
-		if (chain) {
-			checkPluginAvailability();
-		}
+		return true;
 	});
 
 	async function handleGetStarted() {
