@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2025-11-25T22:07:01.451Z\n"
+"PO-Revision-Date: 2025-11-26T00:40:13.678Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -1386,7 +1386,7 @@ msgstr "Overview"
 
 #. placeholder {0}: data.abi.actions.length
 #. placeholder {0}: data.transaction.transaction.actions.length
-#. placeholder {0}: data.proposal.transaction.actions.length
+#. placeholder {0}: data.transaction.transaction.actions.length
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/actions/+page.svelte
@@ -3540,7 +3540,6 @@ msgstr "An overview of RAM Market on the {0} network that provides access to buy
 
 #: src/routes/[[locale]]/[network]/(account)/transactions/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "Transactions"
 msgstr "Transactions"
 
@@ -5287,7 +5286,6 @@ msgid "Network Fee: <0/> (0.5%)"
 msgstr "Network Fee: <0/> (0.5%)"
 
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid "Loading..."
 msgstr "Loading..."
 
@@ -6152,57 +6150,44 @@ msgstr "EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV"
 #~ msgid "Example key 4"
 #~ msgstr "Example key 4"
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Analyze transaction details, actions, and traces"
-msgstr "Analyze transaction details, actions, and traces"
+#~ msgid "Analyze transaction details, actions, and traces"
+#~ msgstr "Analyze transaction details, actions, and traces"
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Genesis transaction"
-msgstr "Genesis transaction"
+#~ msgid "Genesis transaction"
+#~ msgstr "Genesis transaction"
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Example transaction 1"
-msgstr "Example transaction 1"
+#~ msgid "Example transaction 1"
+#~ msgstr "Example transaction 1"
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Example transaction 2"
-msgstr "Example transaction 2"
+#~ msgid "Example transaction 2"
+#~ msgstr "Example transaction 2"
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Example transaction 3"
-msgstr "Example transaction 3"
+#~ msgid "Example transaction 3"
+#~ msgstr "Example transaction 3"
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Example transaction 4"
-msgstr "Example transaction 4"
+#~ msgid "Example transaction 4"
+#~ msgstr "Example transaction 4"
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Multi-Signatures"
-msgstr "Multi-Signatures"
+#~ msgid "Multi-Signatures"
+#~ msgstr "Multi-Signatures"
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Review and manage multi-signature proposals"
-msgstr "Review and manage multi-signature proposals"
+#~ msgid "Review and manage multi-signature proposals"
+#~ msgstr "Review and manage multi-signature proposals"
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "System proposal"
-msgstr "System proposal"
+#~ msgid "System proposal"
+#~ msgstr "System proposal"
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Block.one proposal"
-msgstr "Block.one proposal"
+#~ msgid "Block.one proposal"
+#~ msgstr "Block.one proposal"
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Token proposal"
-msgstr "Token proposal"
+#~ msgid "Token proposal"
+#~ msgstr "Token proposal"
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "RAM proposal"
-msgstr "RAM proposal"
+#~ msgid "RAM proposal"
+#~ msgstr "RAM proposal"
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Staking proposal"
-msgstr "Staking proposal"
+#~ msgid "Staking proposal"
+#~ msgstr "Staking proposal"
 
 #: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "Monitor network status and producers"
@@ -6251,37 +6236,29 @@ msgstr "Explore token contracts and token information"
 msgid "Native system token"
 msgstr "Native system token"
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "USDT"
-msgstr "USDT"
+#~ msgid "USDT"
+#~ msgstr "USDT"
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Tether USD"
-msgstr "Tether USD"
+#~ msgid "Tether USD"
+#~ msgstr "Tether USD"
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "USDC"
-msgstr "USDC"
+#~ msgid "USDC"
+#~ msgstr "USDC"
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "USD Coin"
-msgstr "USD Coin"
+#~ msgid "USD Coin"
+#~ msgstr "USD Coin"
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "BTC"
-msgstr "BTC"
+#~ msgid "BTC"
+#~ msgstr "BTC"
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Bitcoin token"
-msgstr "Bitcoin token"
+#~ msgid "Bitcoin token"
+#~ msgstr "Bitcoin token"
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "ETH"
-msgstr "ETH"
+#~ msgid "ETH"
+#~ msgstr "ETH"
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Ethereum token"
-msgstr "Ethereum token"
+#~ msgid "Ethereum token"
+#~ msgstr "Ethereum token"
 
 #: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "Unicove contract"
@@ -6317,3 +6294,15 @@ msgstr "Explore blockchain resources"
 #: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "PUB_K1_6RWZ1CmDL4B6LdixuertnzxcRuUDac3NQspJEvMnebGcXY4zZj"
 msgstr "PUB_K1_6RWZ1CmDL4B6LdixuertnzxcRuUDac3NQspJEvMnebGcXY4zZj"
+
+#~ msgid "Block {0} • {1} actions • {2}"
+#~ msgstr "Block {0} • {1} actions • {2}"
+
+#~ msgid "loading..."
+#~ msgstr "loading..."
+
+#~ msgid "Test"
+#~ msgstr "Test"
+
+#~ msgid "Please wait"
+#~ msgstr "Please wait"

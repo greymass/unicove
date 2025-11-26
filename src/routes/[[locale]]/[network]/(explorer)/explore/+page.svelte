@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { Card, Stack, Button } from 'unicove-components';
 	import {
 		UserIcon,
 		FileTextIcon,
@@ -7,12 +6,15 @@
 		UsersIcon,
 		NetworkIcon,
 		CoinsIcon,
-		ActivityIcon,
+		// ActivityIcon,
 		BlocksIcon
 	} from '@lucide/svelte';
 	import { localizePath } from '$lib/utils/url';
-
-	const { data } = $props();
+	import { getBlocks } from '$lib/remote/blocks.remote';
+	// import { getTransactions } from '$lib/remote/transactions.remote';
+	import ExploreCard from './ExploreCard.svelte';
+	import ExploreButton from './ExploreButton.svelte';
+	import { Key, Stack } from 'unicove-components';
 
 	const explorerSections = [
 		{
@@ -31,16 +33,17 @@
 				{ label: 'eosio.stake', href: '/account/eosio.stake', description: 'Staking account' }
 			]
 		},
-		{
-			title: 'Blocks',
-			description: 'Browse blockchain blocks and their transactions',
-			icon: BlocksIcon,
-			items: data.blocks.map((b) => ({
-				label: b.block_num,
-				description: b.producer,
-				href: `/block/${b.block_num}`
-			}))
-		},
+		// {
+		// 	title: 'Blocks',
+		// 	description: 'Browse blockchain blocks and their transactions',
+		// 	icon: BlocksIcon,
+		// 	items: getBlocks()
+		// 	// items: blocks.map((b) => ({
+		// 	// 	label: b.block_num,
+		// 	// 	description: b.producer,
+		// 	// 	href: `/block/${b.block_num}`
+		// 	// }))
+		// },
 		{
 			title: 'Contracts',
 			description: 'Inspect smart contracts, ABIs, actions, and data tables',
@@ -70,70 +73,51 @@
 				}
 			]
 		},
-		{
-			title: 'Transactions',
-			description: 'Analyze transaction details, actions, and traces',
-			icon: ActivityIcon,
-			items: [
-				{
-					label: '0000000000000000000000000000000000000000000000000000000000000000',
-					href: '/transaction/0000000000000000000000000000000000000000000000000000000000000000',
-					description: 'Genesis transaction'
-				},
-				{
-					label: '1111111111111111111111111111111111111111111111111111111111111111',
-					href: '/transaction/1111111111111111111111111111111111111111111111111111111111111111',
-					description: 'Example transaction 1'
-				},
-				{
-					label: '2222222222222222222222222222222222222222222222222222222222222222',
-					href: '/transaction/2222222222222222222222222222222222222222222222222222222222222222',
-					description: 'Example transaction 2'
-				},
-				{
-					label: '3333333333333333333333333333333333333333333333333333333333333333',
-					href: '/transaction/3333333333333333333333333333333333333333333333333333333333333333',
-					description: 'Example transaction 3'
-				},
-				{
-					label: '4444444444444444444444444444444444444444444444444444444444444444',
-					href: '/transaction/4444444444444444444444444444444444444444444444444444444444444444',
-					description: 'Example transaction 4'
-				}
-			]
-		},
-		{
-			title: 'Multi-Signatures',
-			description: 'Review and manage multi-signature proposals',
-			icon: UsersIcon,
-			items: [
-				{
-					label: 'eosio/msig.proposal1',
-					href: '/msig/eosio/msig.proposal1',
-					description: 'System proposal'
-				},
-				{
-					label: 'b1/msig.proposal2',
-					href: '/msig/b1/msig.proposal2',
-					description: 'Block.one proposal'
-				},
-				{
-					label: 'eosio.token/msig.tokenupdate',
-					href: '/msig/eosio.token/msig.tokenupdate',
-					description: 'Token proposal'
-				},
-				{
-					label: 'eosio.ram/msig.ramconfig',
-					href: '/msig/eosio.ram/msig.ramconfig',
-					description: 'RAM proposal'
-				},
-				{
-					label: 'eosio.stake/msig.stakechange',
-					href: '/msig/eosio.stake/msig.stakechange',
-					description: 'Staking proposal'
-				}
-			]
-		},
+
+		// {
+		// 	title: 'Transactions',
+		// 	description: 'Analyze transaction details, actions, and traces',
+		// 	icon: ActivityIcon,
+		// 	items: transactions.map((t) => ({
+		// 		label: t.id.substring(0, 16) + '...',
+		// 		href: `/transaction/${t.id}`,
+		// 		description: `Block ${t.block_num} • ${t.actions_count} actions • ${t.status}`
+		// 	}))
+		// },
+
+		// {
+		// 	title: 'Multi-Signatures',
+		// 	description: 'Review and manage multi-signature proposals',
+		// 	icon: UsersIcon,
+		// 	items: [
+		// 		{
+		// 			label: 'eosio/msig.proposal1',
+		// 			href: '/msig/eosio/msig.proposal1',
+		// 			description: 'System proposal'
+		// 		},
+		// 		{
+		// 			label: 'b1/msig.proposal2',
+		// 			href: '/msig/b1/msig.proposal2',
+		// 			description: 'Block.one proposal'
+		// 		},
+		// 		{
+		// 			label: 'eosio.token/msig.tokenupdate',
+		// 			href: '/msig/eosio.token/msig.tokenupdate',
+		// 			description: 'Token proposal'
+		// 		},
+		// 		{
+		// 			label: 'eosio.ram/msig.ramconfig',
+		// 			href: '/msig/eosio.ram/msig.ramconfig',
+		// 			description: 'RAM proposal'
+		// 		},
+		// 		{
+		// 			label: 'eosio.stake/msig.stakechange',
+		// 			href: '/msig/eosio.stake/msig.stakechange',
+		// 			description: 'Staking proposal'
+		// 		}
+		// 	]
+		// },
+
 		{
 			title: 'Network',
 			description: 'Monitor network status and producers',
@@ -154,47 +138,29 @@
 			title: 'Tokens',
 			description: 'Explore token contracts and token information',
 			icon: CoinsIcon,
-			items: [
-				{ label: 'A', href: '/token/core.vaulta/A', description: 'Native system token' },
-				{ label: 'USDT', href: '/token/tethertether/USDT', description: 'Tether USD' },
-				{ label: 'USDC', href: '/token/eosio.token/USDC', description: 'USD Coin' },
-				{ label: 'BTC', href: '/token/eosio.token/BTC', description: 'Bitcoin token' },
-				{ label: 'ETH', href: '/token/eosio.token/ETH', description: 'Ethereum token' }
-			]
+			items: [{ label: 'A', href: '/token/core.vaulta/A', description: 'Native system token' }]
 		}
 	];
 </script>
 
-<Stack>
-	{#each explorerSections as section}
-		{@const IconComponent = section.icon}
-		<Card>
-			<Stack class="gap-4">
-				<div class="flex items-center gap-4">
-					<picture class="bg-surface-container-high grid size-12 place-items-center rounded-full">
-						<IconComponent />
-					</picture>
-					<div class="space-y-2">
-						<h3 class="text-title">{section.title}</h3>
-						<p class="text-muted text-label-sm">{section.description}</p>
-					</div>
-				</div>
+<div class="grid grid-cols-2 gap-6">
+	<ExploreCard
+		title="Blocks"
+		description="Browse blockchain blocks and their transactions"
+		icon={BlocksIcon}
+	>
+		<Stack class="gap-3">
+			{#each await getBlocks() as block}
+				<ExploreButton
+					label={block.block_num.toString()}
+					description={block.producer.toString()}
+					href={localizePath(`/block/${block.block_num}`)}
+				/>
+			{/each}
+		</Stack>
+	</ExploreCard>
 
-				<div class="grid gap-3">
-					{#each section.items as item}
-						<Button
-							variant="text"
-							href={localizePath(item.href)}
-							class="h-auto justify-start p-4 text-left"
-						>
-							<div class="flex flex-col gap-1">
-								<span class="font-medium">{item.label}</span>
-								<span class="text-muted text-xs">{item.description}</span>
-							</div>
-						</Button>
-					{/each}
-				</div>
-			</Stack>
-		</Card>
+	{#each explorerSections as section}
+		<ExploreCard {...section} />
 	{/each}
-</Stack>
+</div>

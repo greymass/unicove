@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.663Z\n"
-"PO-Revision-Date: 2025-11-25T22:04:37.487Z\n"
+"PO-Revision-Date: 2025-11-26T00:04:37.089Z\n"
 "Last-Translator: \n"
 "Language: ko\n"
 "Language-Team: \n"
@@ -3467,7 +3467,6 @@ msgstr "{2} 네트워크에서 {1}을 사용해 RAM을 매매할 수 있는 RAM 
 
 #: src/routes/[[locale]]/[network]/(account)/transactions/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "Transactions"
 msgstr "트랜잭션"
 
@@ -5669,9 +5668,11 @@ msgstr ""
 #~ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "Keys"
 msgstr ""
 
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "Investigate public keys and associated accounts"
 msgstr ""
@@ -5682,9 +5683,8 @@ msgstr ""
 #~ msgid "Find accounts by public key"
 #~ msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Analyze transaction details, actions, and traces"
-msgstr ""
+#~ msgid "Analyze transaction details, actions, and traces"
+#~ msgstr ""
 
 #~ msgid "Search Transaction"
 #~ msgstr ""
@@ -5801,6 +5801,7 @@ msgid "Multi-sig contract"
 msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV"
 msgstr ""
 
@@ -5813,46 +5814,38 @@ msgstr ""
 #~ msgid "Example key 1"
 #~ msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "EOS7K9P3qL4m2X8Y5R6T1W3V7B9N2M4Q6S8U0I2O4A6C8E0G2I4K6M8"
-msgstr ""
+#~ msgid "EOS7K9P3qL4m2X8Y5R6T1W3V7B9N2M4Q6S8U0I2O4A6C8E0G2I4K6M8"
+#~ msgstr ""
 
 #~ msgid "Example key 2"
 #~ msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "EOS8L2N5M7Q9R1T3V5X7Z9B2D4F6H8J0K2L4N6P8R0T2V4X6Z8B0D2F4H6J8"
-msgstr ""
+#~ msgid "EOS8L2N5M7Q9R1T3V5X7Z9B2D4F6H8J0K2L4N6P8R0T2V4X6Z8B0D2F4H6J8"
+#~ msgstr ""
 
 #~ msgid "Example key 3"
 #~ msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "EOS9M3N5P7R9T1V3X5Z7B9D2F4H6J8K0L2N4P6R8T0V2X4Z6B8D0F2H4J6K8"
-msgstr ""
+#~ msgid "EOS9M3N5P7R9T1V3X5Z7B9D2F4H6J8K0L2N4P6R8T0V2X4Z6B8D0F2H4J6K8"
+#~ msgstr ""
 
 #~ msgid "Example key 4"
 #~ msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Genesis transaction"
-msgstr ""
+#~ msgid "Genesis transaction"
+#~ msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Example transaction 1"
-msgstr ""
+#~ msgid "Example transaction 1"
+#~ msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Example transaction 2"
-msgstr ""
+#~ msgid "Example transaction 2"
+#~ msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Example transaction 3"
-msgstr ""
+#~ msgid "Example transaction 3"
+#~ msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Example transaction 4"
-msgstr ""
+#~ msgid "Example transaction 4"
+#~ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "System proposal"
@@ -5979,3 +5972,15 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "PUB_K1_6RWZ1CmDL4B6LdixuertnzxcRuUDac3NQspJEvMnebGcXY4zZj"
 msgstr ""
+
+#~ msgid "Block {0} • {1} actions • {2}"
+#~ msgstr ""
+
+#~ msgid "loading..."
+#~ msgstr ""
+
+#~ msgid "Test"
+#~ msgstr ""
+
+#~ msgid "Please wait"
+#~ msgstr ""
