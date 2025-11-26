@@ -181,13 +181,13 @@
 {#snippet vaulta()}
 	<section
 		id="hero"
-		class="@container col-span-full grid h-[40svh] max-h-156 place-content-center sm:pt-12 md:grid-cols-2 md:items-center md:pt-0"
+		class="@container col-span-full grid min-h-[50svh] place-content-center gap-y-8 px-4 pt-8 sm:min-h-[40svh] sm:pt-12 md:grid-cols-2 md:items-center md:gap-y-0 md:px-0 md:pt-0"
 	>
 		<Stack
 			class="relative z-10 row-start-1 flex grid justify-items-center gap-5 justify-self-center text-center md:col-start-1"
 		>
 			<svg
-				class="z-50 mb-2 h-auto w-64"
+				class="z-50 mb-2 h-auto w-48 sm:w-64"
 				width="81"
 				height="33"
 				viewBox="0 0 81 33"
@@ -201,20 +201,20 @@
 			</svg>
 		</Stack>
 
-		<Stack class="z-10 grid gap-5 text-center md:col-start-2 md:row-start-1 md:text-left">
+		<Stack class="z-10 grid gap-4 text-center sm:gap-5 md:col-start-2 md:row-start-1 md:text-left">
 			<h1
-				class="font-sans-hero max-w-128 text-3xl leading-tight font-bold text-balance lg:text-4xl lg:leading-tight"
+				class="font-sans-hero max-w-128 text-2xl leading-tight font-bold text-balance sm:text-3xl sm:leading-tight lg:text-4xl lg:leading-tight"
 			>
 				Unicove Your Gateway To The Vaulta Network.
 			</h1>
 			<p
-				class="text-muted mb-2 max-w-md rounded-lg text-xl leading-tight text-pretty lg:text-xl lg:leading-tight"
+				class="text-muted mb-2 max-w-md rounded-lg text-lg leading-tight text-pretty sm:text-xl sm:leading-tight lg:text-xl lg:leading-tight"
 			>
 				Create your account in minutes. Stake, swap, and manage your digital assets with complete
 				control.
 			</p>
 
-			<div class="grid gap-4">
+			<div class="flex justify-center md:justify-start">
 				<GetStarted />
 			</div>
 		</Stack>
