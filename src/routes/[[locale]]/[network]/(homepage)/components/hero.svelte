@@ -205,7 +205,7 @@
 			<h1
 				class="font-sans-hero max-w-128 text-2xl leading-tight font-bold text-balance sm:text-3xl sm:leading-tight lg:text-4xl lg:leading-tight"
 			>
-				Unicove Your Gateway To The Vaulta Network.
+				Your Gateway To The Vaulta Network.
 			</h1>
 			<p
 				class="text-muted mb-2 max-w-md rounded-lg text-lg leading-tight text-pretty sm:text-xl sm:leading-tight lg:text-xl lg:leading-tight"

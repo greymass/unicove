@@ -48,6 +48,6 @@
 
 {#if pluginAvailable}
 	<Button variant="primary" class="w-fit justify-center" onclick={handleGetStarted}
-		>Get Started - Create Account</Button
+		>Get started with an account</Button
 	>
 {/if}

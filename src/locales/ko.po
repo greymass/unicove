@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.663Z\n"
-"PO-Revision-Date: 2025-11-24T03:31:50.006Z\n"
+"PO-Revision-Date: 2025-11-26T05:26:09.370Z\n"
 "Last-Translator: \n"
 "Language: ko\n"
 "Language-Team: \n"
@@ -1053,9 +1053,8 @@ msgstr ""
 msgid "{0}/USD"
 msgstr ""
 
-#: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
-msgid "EOS rebrands to Vaulta"
-msgstr ""
+#~ msgid "EOS rebrands to Vaulta"
+#~ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/staked/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/stakedhex.svelte
@@ -5593,10 +5592,8 @@ msgstr ""
 #~ msgid "Controls"
 #~ msgstr ""
 
-#: src/routes/[[locale]]/[network]/(homepage)/components/get-started.svelte
-#: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
-msgid "Get Started - Create Account"
-msgstr ""
+#~ msgid "Get Started - Create Account"
+#~ msgstr ""
 
 #~ msgid "Unicove Your Gateway To The Jungle 4 Network."
 #~ msgstr ""
@@ -5610,6 +5607,16 @@ msgid ""
 "control."
 msgstr ""
 
+#~ msgid "Unicove Your Gateway To The Vaulta Network."
+#~ msgstr ""
+
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
-msgid "Unicove Your Gateway To The Vaulta Network."
+msgid "Your Gateway To The Vaulta Network."
+msgstr ""
+
+#~ msgid "Get started with an account\""
+#~ msgstr ""
+
+#: src/routes/[[locale]]/[network]/(homepage)/components/get-started.svelte
+msgid "Get started with an account"
 msgstr ""
