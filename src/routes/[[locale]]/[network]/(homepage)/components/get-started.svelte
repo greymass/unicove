@@ -47,7 +47,7 @@
 </script>
 
 {#if pluginAvailable}
-	<Button variant="primary" class="w-fit justify-center" onclick={handleGetStarted}
+	<Button variant="primary" class="w-full justify-center md:w-auto" onclick={handleGetStarted}
 		>Get started with an account</Button
 	>
 {/if}

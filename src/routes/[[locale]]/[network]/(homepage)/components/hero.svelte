@@ -201,7 +201,9 @@
 			</svg>
 		</Stack>
 
-		<Stack class="z-10 grid gap-4 text-center sm:gap-5 md:col-start-2 md:row-start-1 md:text-left">
+		<Stack
+			class="z-10 grid justify-items-center gap-4 text-center sm:gap-5 md:col-start-2 md:row-start-1 md:justify-items-start md:text-left"
+		>
 			<h1
 				class="font-sans-hero max-w-128 text-2xl leading-tight font-bold text-balance sm:text-3xl sm:leading-tight lg:text-4xl lg:leading-tight"
 			>
@@ -214,9 +216,7 @@
 				control.
 			</p>
 
-			<div class="flex justify-center md:justify-start">
-				<GetStarted />
-			</div>
+			<GetStarted />
 		</Stack>
 	</section>
 {/snippet}
