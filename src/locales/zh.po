@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2025-11-26T00:04:37.099Z\n"
+"PO-Revision-Date: 2025-11-27T01:17:48.213Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -201,6 +201,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/buy/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/sell/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "RAM Market"
 msgstr "RAM 市场"
 
@@ -208,6 +209,7 @@ msgstr "RAM 市场"
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/buy/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/buy/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/buy/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "Buy RAM"
 msgstr ""
 
@@ -216,6 +218,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/sell/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/sell/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/sell/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "Sell RAM"
 msgstr "出售 RAM"
 
@@ -245,6 +248,7 @@ msgstr "设置"
 #: src/lib/components/summary/eosio/withdraw.svelte
 #: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/summaries/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "Staking"
 msgstr "质押"
 
@@ -254,6 +258,7 @@ msgstr "质押"
 #: src/routes/[[locale]]/[network]/(account)/staking/+page.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/cards.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/navigation.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "Stake"
 msgstr "质押"
 
@@ -263,6 +268,7 @@ msgstr "质押"
 #: src/routes/[[locale]]/[network]/(account)/staking/+page.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/cards.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/navigation.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "Unstake"
 msgstr "取消质押"
 
@@ -277,7 +283,8 @@ msgstr "取消质押"
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/resources/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "Resources"
 msgstr "资源"
 
@@ -364,6 +371,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/resources/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "RAM"
 msgstr ""
 
@@ -901,6 +909,7 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(account)/resources/renting.svelte
 #: src/routes/[[locale]]/[network]/(account)/resources/rex/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "REX"
 msgstr ""
 
@@ -1725,6 +1734,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(account)/staking/+page.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/cards.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/navigation.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "Withdraw"
 msgstr "提取"
 
@@ -3737,6 +3747,7 @@ msgstr "已取消质押"
 #: src/lib/components/card/tokenbalance.svelte
 #: src/lib/components/card/tokenoverview.svelte
 #: src/lib/components/chart/tokendistribution.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "Delegated"
 msgstr "委托中"
 
@@ -5188,6 +5199,8 @@ msgstr "了解如何通过多种方式为您的账户充值 {0} 代币，包括�
 
 #: src/routes/[[locale]]/[network]/(account)/swap/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/swap/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "Swaps"
 msgstr "兑换"
 
@@ -5249,6 +5262,7 @@ msgstr "智能合约账户创建"
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "Create an account using a basic token transfer to a smart contract"
 msgstr "通过向智能合约进行基本代币转账来创建账户"
 
@@ -5600,6 +5614,7 @@ msgstr ""
 #~ msgstr ""
 
 #: src/lib/components/navigation/sidemenu.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "Explore"
 msgstr ""
 
@@ -5668,11 +5683,9 @@ msgstr ""
 #~ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "Keys"
 msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "Investigate public keys and associated accounts"
 msgstr ""
@@ -5692,13 +5705,11 @@ msgstr ""
 #~ msgid "Lookup transaction by ID"
 #~ msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Multi-Signatures"
-msgstr ""
+#~ msgid "Multi-Signatures"
+#~ msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Review and manage multi-signature proposals"
-msgstr ""
+#~ msgid "Review and manage multi-signature proposals"
+#~ msgstr ""
 
 #~ msgid "Search Proposal"
 #~ msgstr ""
@@ -5801,7 +5812,6 @@ msgid "Multi-sig contract"
 msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV"
 msgstr ""
 
@@ -5847,25 +5857,20 @@ msgstr ""
 #~ msgid "Example transaction 4"
 #~ msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "System proposal"
-msgstr ""
+#~ msgid "System proposal"
+#~ msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Block.one proposal"
-msgstr ""
+#~ msgid "Block.one proposal"
+#~ msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Token proposal"
-msgstr ""
+#~ msgid "Token proposal"
+#~ msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "RAM proposal"
-msgstr ""
+#~ msgid "RAM proposal"
+#~ msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Staking proposal"
-msgstr ""
+#~ msgid "Staking proposal"
+#~ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "Network statistics and status"
@@ -5906,37 +5911,29 @@ msgstr ""
 msgid "Native system token"
 msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "USDT"
-msgstr ""
+#~ msgid "USDT"
+#~ msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Tether USD"
-msgstr ""
+#~ msgid "Tether USD"
+#~ msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "USDC"
-msgstr ""
+#~ msgid "USDC"
+#~ msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "USD Coin"
-msgstr ""
+#~ msgid "USD Coin"
+#~ msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "BTC"
-msgstr ""
+#~ msgid "BTC"
+#~ msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Bitcoin token"
-msgstr ""
+#~ msgid "Bitcoin token"
+#~ msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "ETH"
-msgstr ""
+#~ msgid "ETH"
+#~ msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
-msgid "Ethereum token"
-msgstr ""
+#~ msgid "Ethereum token"
+#~ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "Unicove contract"
@@ -5983,4 +5980,163 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Please wait"
+#~ msgstr ""
+
+#~ msgid "Create account"
+#~ msgstr ""
+
+#~ msgid "Use an existing account to create a new account"
+#~ msgstr ""
+
+#~ msgid "Create an account using an existing account"
+#~ msgstr ""
+
+#~ msgid "Create an account by transferring tokens to a smart contract"
+#~ msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Create"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Create new accounts"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Send Tokens"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Transfer tokens between accounts"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Send tokens from one account to another"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Send RAM"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Transfer RAM from one account to another"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Manage RAM resources"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Overview of the RAM market on the network"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Buy RAM from the network"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Sell RAM to the network"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Manage staked tokens"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Staking Overview"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Overview of the staking process on the network"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Add tokens to a staked balance"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Start the unstaking process of staked tokens"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Withdraw tokens from the staking contract"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Manage network resources"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Overview of account network resources and management options"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "PowerUp"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Rent CPU and/or NET resources using PowerUp"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Rent CPU and/or NET resources using REX"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Stake for Resources"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Stake tokens to gain access to CPU and NET resources"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Native token swaps"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "List of swaps natively available on the network"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Manage delegated tokens"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Undelegate"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Reclaim previously delegated tokens"
+msgstr ""
+
+#~ msgid "Direct Account Creation"
+#~ msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Use an existing account to create another account"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Create Account - Direct"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Create Account - Transfer"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Interact"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Create Permission"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Create a new permission for an account"
+msgstr ""
+
+#~ msgid "local lint = require 'lint' <0><0><0>Explore</0> <1/></0> <1><0>Interact</0> <1/></1></0>"
 #~ msgstr ""

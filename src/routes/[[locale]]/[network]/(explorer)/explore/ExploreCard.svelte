@@ -17,8 +17,10 @@
 
 <Card>
 	<Stack class="h-full gap-4">
-		<div class="flex items-center gap-4">
-			<picture class="bg-surface-container-high grid size-12 place-items-center rounded-full">
+		<div class="flex items-start gap-4">
+			<picture
+				class="bg-surface-container-high grid size-12 shrink-0 place-items-center rounded-full"
+			>
 				{#if props.icon}
 					{@const IconComponent = props.icon}
 					<IconComponent />
@@ -26,7 +28,7 @@
 			</picture>
 			<div class="space-y-2">
 				<h3 class="text-title">{props.title}</h3>
-				<p class="text-muted text-label-sm">{props.description}</p>
+				<p class="text-muted text-label-sm leading-5 text-pretty">{props.description}</p>
 			</div>
 		</div>
 

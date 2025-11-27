@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2025-11-26T00:40:13.678Z\n"
+"PO-Revision-Date: 2025-11-27T01:17:48.152Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -203,6 +203,7 @@ msgstr "Completed Transactions"
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/buy/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/sell/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "RAM Market"
 msgstr "RAM Market"
 
@@ -210,6 +211,7 @@ msgstr "RAM Market"
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/buy/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/buy/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/buy/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "Buy RAM"
 msgstr "Buy RAM"
 
@@ -218,6 +220,7 @@ msgstr "Buy RAM"
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/sell/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/sell/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/sell/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "Sell RAM"
 msgstr "Sell RAM"
 
@@ -247,6 +250,7 @@ msgstr "Settings"
 #: src/lib/components/summary/eosio/withdraw.svelte
 #: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/summaries/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "Staking"
 msgstr "Staking"
 
@@ -256,6 +260,7 @@ msgstr "Staking"
 #: src/routes/[[locale]]/[network]/(account)/staking/+page.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/cards.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/navigation.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "Stake"
 msgstr "Stake"
 
@@ -265,6 +270,7 @@ msgstr "Stake"
 #: src/routes/[[locale]]/[network]/(account)/staking/+page.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/cards.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/navigation.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "Unstake"
 msgstr "Unstake"
 
@@ -279,7 +285,8 @@ msgstr "Unstake"
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/resources/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "Resources"
 msgstr "Resources"
 
@@ -366,6 +373,7 @@ msgstr "Page"
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/resources/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "RAM"
 msgstr "RAM"
 
@@ -910,6 +918,7 @@ msgstr "POWERUP"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/renting.svelte
 #: src/routes/[[locale]]/[network]/(account)/resources/rex/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "REX"
 msgstr "REX"
 
@@ -1765,6 +1774,7 @@ msgstr "Unstaking Balances Is A Long Title"
 #: src/routes/[[locale]]/[network]/(account)/staking/+page.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/cards.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/navigation.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "Withdraw"
 msgstr "Withdraw"
 
@@ -3810,6 +3820,7 @@ msgstr "Unstaked"
 #: src/lib/components/card/tokenbalance.svelte
 #: src/lib/components/card/tokenoverview.svelte
 #: src/lib/components/chart/tokendistribution.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "Delegated"
 msgstr "Delegated"
 
@@ -5330,6 +5341,8 @@ msgstr "Learn how to fund your account with {0} tokens through various methods i
 
 #: src/routes/[[locale]]/[network]/(account)/swap/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/swap/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "Swaps"
 msgstr "Swaps"
 
@@ -5391,6 +5404,7 @@ msgstr "Smart Contract Account Creation"
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "Create an account using a basic token transfer to a smart contract"
 msgstr "Create an account using a basic token transfer to a smart contract"
 
@@ -5742,6 +5756,7 @@ msgstr "MetaMask Wallet Plugin"
 #~ msgstr "test"
 
 #: src/lib/components/navigation/sidemenu.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
 msgid "Explore"
 msgstr "Explore"
 
@@ -6306,3 +6321,162 @@ msgstr "PUB_K1_6RWZ1CmDL4B6LdixuertnzxcRuUDac3NQspJEvMnebGcXY4zZj"
 
 #~ msgid "Please wait"
 #~ msgstr "Please wait"
+
+#~ msgid "Create account"
+#~ msgstr "Create account"
+
+#~ msgid "Use an existing account to create a new account"
+#~ msgstr "Use an existing account to create a new account"
+
+#~ msgid "Create an account using an existing account"
+#~ msgstr "Create an account using an existing account"
+
+#~ msgid "Create an account by transferring tokens to a smart contract"
+#~ msgstr "Create an account by transferring tokens to a smart contract"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Create"
+msgstr "Create"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Create new accounts"
+msgstr "Create new accounts"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Send Tokens"
+msgstr "Send Tokens"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Transfer tokens between accounts"
+msgstr "Transfer tokens between accounts"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Send tokens from one account to another"
+msgstr "Send tokens from one account to another"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Send RAM"
+msgstr "Send RAM"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Transfer RAM from one account to another"
+msgstr "Transfer RAM from one account to another"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Manage RAM resources"
+msgstr "Manage RAM resources"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Overview of the RAM market on the network"
+msgstr "Overview of the RAM market on the network"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Buy RAM from the network"
+msgstr "Buy RAM from the network"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Sell RAM to the network"
+msgstr "Sell RAM to the network"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Manage staked tokens"
+msgstr "Manage staked tokens"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Staking Overview"
+msgstr "Staking Overview"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Overview of the staking process on the network"
+msgstr "Overview of the staking process on the network"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Add tokens to a staked balance"
+msgstr "Add tokens to a staked balance"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Start the unstaking process of staked tokens"
+msgstr "Start the unstaking process of staked tokens"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Withdraw tokens from the staking contract"
+msgstr "Withdraw tokens from the staking contract"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Manage network resources"
+msgstr "Manage network resources"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Overview of account network resources and management options"
+msgstr "Overview of account network resources and management options"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "PowerUp"
+msgstr "PowerUp"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Rent CPU and/or NET resources using PowerUp"
+msgstr "Rent CPU and/or NET resources using PowerUp"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Rent CPU and/or NET resources using REX"
+msgstr "Rent CPU and/or NET resources using REX"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Stake for Resources"
+msgstr "Stake for Resources"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Stake tokens to gain access to CPU and NET resources"
+msgstr "Stake tokens to gain access to CPU and NET resources"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Native token swaps"
+msgstr "Native token swaps"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "List of swaps natively available on the network"
+msgstr "List of swaps natively available on the network"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Manage delegated tokens"
+msgstr "Manage delegated tokens"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Undelegate"
+msgstr "Undelegate"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Reclaim previously delegated tokens"
+msgstr "Reclaim previously delegated tokens"
+
+#~ msgid "Direct Account Creation"
+#~ msgstr "Direct Account Creation"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Use an existing account to create another account"
+msgstr "Use an existing account to create another account"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Create Account - Direct"
+msgstr "Create Account - Direct"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Create Account - Transfer"
+msgstr "Create Account - Transfer"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Interact"
+msgstr "Interact"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Create Permission"
+msgstr "Create Permission"
+
+#: src/routes/[[locale]]/[network]/(explorer)/explore/+page.svelte
+msgid "Create a new permission for an account"
+msgstr "Create a new permission for an account"
+
+#~ msgid "local lint = require 'lint' <0><0><0>Explore</0> <1/></0> <1><0>Interact</0> <1/></1></0>"
+#~ msgstr "local lint = require 'lint' <0><0><0>Explore</0> <1/></0> <1><0>Interact</0> <1/></1></0>"

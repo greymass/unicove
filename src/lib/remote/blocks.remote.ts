@@ -1,5 +1,4 @@
-import { query } from '$app/server';
-import { getRequestEvent } from '$app/server';
+import { getRequestEvent, query } from '$app/server';
 import { type API } from '@wharfkit/antelope';
 
 export const getBlocks = query(async () => {
