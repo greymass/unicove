@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.663Z\n"
-"PO-Revision-Date: 2025-12-01T18:45:43.092Z\n"
+"PO-Revision-Date: 2025-12-01T23:53:01.081Z\n"
 "Last-Translator: \n"
 "Language: ko\n"
 "Language-Team: \n"
@@ -292,14 +292,14 @@ msgstr "총"
 
 #: src/lib/components/chart/tokendistribution.svelte
 msgid "KB (RAM)"
-msgstr ""
+msgstr "KB (RAM)"
 
 #. placeholder {0}: balance.token.name
 #. placeholder {0}: balance.token.symbol.name
 #: src/lib/components/card/tokenbalance.svelte
 #: src/lib/components/card/tokenoverview.svelte
 msgid "{0} (RAM)"
-msgstr ""
+msgstr "{0} (RAM)"
 
 #: src/lib/components/contract/struct.svelte
 msgid "Extends base type of <0/>"
@@ -356,7 +356,7 @@ msgstr "Unicove 홈"
 
 #: src/lib/components/navigation/pillgroup.svelte
 msgid "Page"
-msgstr ""
+msgstr "페이지"
 
 #: src/lib/components/elements/resourceCard.svelte
 #: src/lib/components/navigation/sidemenu.svelte
@@ -379,13 +379,13 @@ msgstr "내 계정"
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/resources/+page.svelte
 msgid "CPU"
-msgstr ""
+msgstr "CPU"
 
 #: src/lib/components/elements/resourceCard.svelte
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/resources/+page.svelte
 msgid "NET"
-msgstr ""
+msgstr "NET"
 
 #: src/lib/components/search/input.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
@@ -592,34 +592,34 @@ msgstr "Unicove 설정"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "MSIG Configuration"
-msgstr ""
+msgstr "MSIG 구성"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Proposal Expiration"
-msgstr ""
+msgstr "제안 만료"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "The expiration date set on multisig proposals."
-msgstr ""
+msgstr "멀티시그 제안에 설정된 만료 날짜입니다."
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Proposal Earliest Execution"
-msgstr ""
+msgstr "제안의 가장 빠른 실행"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid ""
 "Set a datetime to specify the earliest a proposal can be executed. This value will be\n"
 "reset after each proposal is created."
-msgstr ""
+msgstr "제안을 실행할 수 있는 가장 빠른 날짜와 시간을 지정하려면 날짜/시간을 설정하십시오. 이 값은 각 제안이 생성된 후 재설정됩니다."
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Local Time"
-msgstr ""
+msgstr "현지 시간"
 
 #. placeholder {0}: timestamp
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Set for UTC: {0} <0>Clear</0>"
-msgstr ""
+msgstr "UTC로 설정됨: {0} <0>지우기</0>"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Preferences"
@@ -718,7 +718,7 @@ msgstr "모의 토큰 가격"
 msgid ""
 "Force the system token price to equal $1.2345 USD for testing in environments\n"
 "without pricing information."
-msgstr ""
+msgstr "가격 정보가 없는 환경에서 테스트하기 위해 시스템 토큰 가격을 강제로 $1.2345 USD와 같게 설정합니다."
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Debug Data Display"
@@ -805,83 +805,83 @@ msgstr "공급"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "CPU (Central Processing Unit)"
-msgstr ""
+msgstr "CPU (중앙 처리 장치)"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "Provides processing power for blockchain actions."
-msgstr ""
+msgstr "블록체인 작업을 위한 처리 능력을 제공합니다."
 
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "Measured in microseconds."
-msgstr ""
+msgstr "마이크로초 단위로 측정됩니다."
 
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "Needed to execute transactions."
-msgstr ""
+msgstr "트랜잭션을 실행하는 데 필요합니다."
 
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "NET (Network Bandwidth)"
-msgstr ""
+msgstr "NET (네트워크 대역폭)"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "Represents network bandwidth usage."
-msgstr ""
+msgstr "네트워크 대역폭 사용량을 나타냅니다."
 
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "Required for transactions on the blockchain."
-msgstr ""
+msgstr "블록체인에서 트랜잭션에 필요합니다."
 
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "CPU and NET"
-msgstr ""
+msgstr "CPU 및 NET"
 
 #. placeholder {0}: symbolName
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "Can be \"powered up\" by spending {0}."
-msgstr ""
+msgstr "{0}을(를) 사용하여 \"파워 업\"할 수 있습니다."
 
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "Some free services offer daily power-ups."
-msgstr ""
+msgstr "일부 무료 서비스는 매일 파워 업을 제공합니다."
 
 #. placeholder {0}: symbolName
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "Amount received is proportional to {0} spent."
-msgstr ""
+msgstr "받는 양은 소비된 {0}에 비례합니다."
 
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "Lasts for a specific time period."
-msgstr ""
+msgstr "특정 기간 동안 지속됩니다."
 
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "RAM (Random Access Memory)"
-msgstr ""
+msgstr "RAM (임의 접근 메모리)"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "It's like computer memory, but for the blockchain."
-msgstr ""
+msgstr "컴퓨터 메모리와 유사하지만 블록체인용입니다."
 
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "Used to store data on the blockchain."
-msgstr ""
+msgstr "블록체인에 데이터를 저장하는 데 사용됩니다."
 
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "Limited and in high demand."
-msgstr ""
+msgstr "제한적이며 수요가 높습니다."
 
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "Can be bought and sold by users."
-msgstr ""
+msgstr "사용자가 사고 팔 수 있습니다."
 
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "Price changes based on availability."
-msgstr ""
+msgstr "가격은 가용성에 따라 변동됩니다."
 
 #. placeholder {0}: chainName
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "{0} Resources: A Simple Explanation"
-msgstr ""
+msgstr "{0} 리소스: 간단한 설명"
 
 #. placeholder {0}: chainName
 #. placeholder {1}: chainName
@@ -891,7 +891,7 @@ msgid ""
 "The {0} blockchain uses three main resources: CPU, NET, and RAM. Users need these resources\n"
 "to interact with smart contracts and perform actions on the {1} blockchain. Managing\n"
 "these resources is crucial for efficient use of the {2} network."
-msgstr ""
+msgstr "{0} 블록체인은 CPU, NET, RAM의 세 가지 주요 리소스를 사용합니다. 사용자는 스마트 계약과 상호 작용하고 {1} 블록체인에서 작업을 수행하기 위해 이러한 리소스가 필요합니다. 이러한 리소스를 관리하는 것은 {2} 네트워크를 효율적으로 사용하는 데 매우 중요합니다.```"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/powerup/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/resources/renting.svelte
@@ -1330,12 +1330,12 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 msgid "Authority"
-msgstr ""
+msgstr "권한"
 
 #. placeholder {0}: lastUpdate
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 msgid "props.account updated {0} seconds ago <0>Refresh</0>"
-msgstr ""
+msgstr "props.account 업데이트 {0} 초 전 <0>새로 고침</0>"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
@@ -1365,17 +1365,17 @@ msgstr "개요"
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/actions/+page.svelte
 msgid "Actions ({0})"
-msgstr ""
+msgstr "액션 ({0})"
 
 #. placeholder {0}: data.abi.structs.length
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.svelte
 msgid "Structs ({0})"
-msgstr ""
+msgstr "구조체 ({0})"
 
 #. placeholder {0}: data.abi.tables.length
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.svelte
 msgid "Tables ({0})"
-msgstr ""
+msgstr "테이블 ({0})"
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/abi/+page.ts
@@ -2216,15 +2216,15 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/summaries/+page.svelte
 msgid "Example Transactions (Vaulta)"
-msgstr ""
+msgstr "거래 예시 (Vaulta)"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/summaries/+page.svelte
 msgid "Links to transactions that perform common types of actions."
-msgstr ""
+msgstr "일반적인 유형의 작업을 수행하는 거래 링크입니다."
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/summaries/+page.svelte
 msgid "Tokens"
-msgstr ""
+msgstr "토큰"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/summaries/+page.svelte
 msgid "Token Transfer"
@@ -2232,35 +2232,35 @@ msgstr "토큰 전송"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/summaries/+page.svelte
 msgid "Swap System Token to RAM"
-msgstr ""
+msgstr "시스템 토큰을 RAM으로 교환"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/summaries/+page.svelte
 msgid "Swap RAM to System Token"
-msgstr ""
+msgstr "RAM을 시스템 토큰으로 교환"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/summaries/+page.svelte
 msgid "Swap RAM to WRAM"
-msgstr ""
+msgstr "RAM을 WRAM으로 교환"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/summaries/+page.svelte
 msgid "Swap WRAM to RAM"
-msgstr ""
+msgstr "WRAM을 RAM으로 교환"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/summaries/+page.svelte
 msgid "Stake System Token"
-msgstr ""
+msgstr "시스템 토큰 스테이킹"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/summaries/+page.svelte
 msgid "Unstake System Token"
-msgstr ""
+msgstr "시스템 토큰 스테이킹 해제"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/summaries/+page.svelte
 msgid "Staking Withdraw"
-msgstr ""
+msgstr "스테이킹 인출"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/summaries/+page.svelte
 msgid "Powerup"
-msgstr ""
+msgstr "파워업"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/input/name/+page.svelte
 msgid "Valid"
@@ -3534,12 +3534,12 @@ msgstr ""
 #. placeholder {0}: params.contract
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.ts
 msgid "No contract is currently deployed to the {0} account."
-msgstr ""
+msgstr "{0} 계정에 현재 배포된 컨트랙트가 없습니다."
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
 msgid "NOT_FOUND"
-msgstr ""
+msgstr "찾을 수 없음"
 
 #: src/routes/[[locale]]/[network]/(account)/welcome/[wallet]/+page.ts
 msgid "Anchor"
@@ -4280,8 +4280,8 @@ msgstr "1개의 {0}은 네트워크 전체 블록체인 저장 용량 중 1000�
 #. placeholder {1}: quote.name
 #. placeholder {0}: base.name
 #. placeholder {1}: quote.name
-#. placeholder {0}: base.name
-#. placeholder {1}: quote.name
+#. placeholder {0}: data.network.token.name
+#. placeholder {1}: data.network.getRamToken().name
 #. placeholder {0}: String(network.chain.systemToken?.symbol.name)
 #. placeholder {1}: String(ramtoken.name)
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.ts
@@ -4477,7 +4477,7 @@ msgstr "권한"
 #. placeholder {0}: data.account.proposals.length
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 msgid "Proposals ({0})"
-msgstr ""
+msgstr "제안 ({0})"
 
 #. placeholder {0}: legacyPubKey
 #: src/routes/[[locale]]/[network]/(explorer)/key/[publicKey]/+page.svelte
@@ -5231,12 +5231,12 @@ msgstr "{0}을 스테이킹하여 보상을 받으세요."
 msgid "An overview of staking on the {0} network providing easy access to stake, unstake, and withdraw {1} tokens using an {2} compatible wallet."
 msgstr "{2} 네트워크에 대한 스테이킹 개요를 제공하며, {2} 호환 지갑을 사용하여 {1} 토큰의 스테이킹, 언스테이킹, 인출을 손쉽게 처리할 수 있습니다."
 
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+layout.ts
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.ts
 msgid "Block Producers"
 msgstr "Block Producers"
 
 #. placeholder {0}: network.chain.name
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+layout.ts
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.ts
 msgid "Validators on the {0} network."
 msgstr "Validators on the {network} network."
 
@@ -5575,11 +5575,11 @@ msgstr "{2} 네트워크 상의 {1} 스마트 컨트랙트에 있는 {0} 데이�
 
 #: src/lib/components/card/tokenbalance.svelte
 msgid "Used"
-msgstr ""
+msgstr "사용됨"
 
 #: src/lib/components/card/tokenbalance.svelte
 msgid "WRAM"
-msgstr ""
+msgstr "WRAM"
 
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "MetaMask Snaps"
@@ -5602,6 +5602,7 @@ msgstr "토픽 로딩 중..."
 msgid "Failed to load topics"
 msgstr "토픽 로딩 실패"
 
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid "Try Again"
 msgstr "다시 시도"
@@ -5704,6 +5705,7 @@ msgstr "업데이트 중..."
 msgid "Dismiss"
 msgstr "닫기"
 
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid "Load More"
 msgstr "더 불러오기"
@@ -5722,20 +5724,20 @@ msgstr "감정 투표에 대하여"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid "Stake tokens"
-msgstr ""
+msgstr "토큰 스테이킹"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid ""
 "Sentiment voting allows token holders to express their support or opposition on important\n"
 "community topics. Your vote is weighted by your staked tokens, giving more influence to\n"
 "those with a larger stake in the network."
-msgstr ""
+msgstr "감정 투표를 통해 토큰 보유자는 중요한 커뮤니티 주제에 대한 지지 또는 반대를 표명할 수 있습니다. 귀하의 투표는 스테이킹된 토큰에 따라 가중치가 부여되어 네트워크에 더 많은 지분을 가진 사람들에게 더 큰 영향력을 제공합니다."
 
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid ""
 "Each topic shows the total participation and the distribution of support versus opposition,\n"
 "helping the community gauge consensus on key issues."
-msgstr ""
+msgstr "각 주제는 총 참여도와 지지 대 반대의 분포를 보여주어 커뮤니티가 주요 문제에 대한 합의를 측정하는 데 도움이 됩니다."
 
 #: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Your Vote"
@@ -5798,3 +5800,38 @@ msgstr "토픽 생성은 아직 사용할 수 없습니다. 현재는 기존 제
 #: src/routes/[[locale]]/[network]/(homepage)/components/sentiment-showcase.svelte
 msgid "Sentiment Voting"
 msgstr "감정 투표"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Active Block Producers"
+msgstr "활성 블록 생산자"
+
+#~ msgid "Network Statistics"
+#~ msgstr "네트워크 통계"
+
+#~ msgid "Active Producers"
+#~ msgstr "활성 생산자"
+
+#~ msgid "Total Votes"
+#~ msgstr "총 투표수"
+
+#~ msgid "Top 21 Threshold"
+#~ msgstr "상위 21위 기준"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Loading producers..."
+msgstr "프로듀서 로딩 중..."
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "No active producers found"
+msgstr "활성 프로듀서를 찾을 수 없습니다."
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Website"
+msgstr "웹사이트"
+
+#~ msgid "Link"
+#~ msgstr "링크"
+
+#~ msgid "Loading statistics..."
+#~ msgstr "통계 로딩 중..."

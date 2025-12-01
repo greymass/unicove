@@ -6,6 +6,7 @@ export class ProducersState {
 	public producers = $state<SystemContract.Types.producer_info[]>([]);
 	public loading = $state(false);
 	public error = $state<string | null>(null);
+	public showAll = $state(false);
 
 	constructor(network: NetworkState) {
 		this.network = network;
@@ -30,30 +31,43 @@ export class ProducersState {
 		}
 	}
 
-	get activeProducers() {
+	get allActiveProducers() {
 		return this.producers
 			.filter((p) => p.is_active && Number(p.total_votes) > 0)
 			.toSorted((a, b) => Number(b.total_votes) - Number(a.total_votes));
 	}
 
+	get activeProducers() {
+		return this.showAll ? this.allActiveProducers : this.allActiveProducers.slice(0, 100);
+	}
+
+	get hasMore() {
+		return this.allActiveProducers.length > 100;
+	}
+
+	loadMore() {
+		this.showAll = true;
+	}
+
 	get top21() {
-		return this.activeProducers.slice(0, 21);
+		return this.allActiveProducers.slice(0, 21);
 	}
 
 	get standby() {
-		return this.activeProducers.slice(21);
+		return this.allActiveProducers.slice(21);
 	}
 
 	get totalVotes() {
-		return this.activeProducers.reduce((acc, p) => acc + Number(p.total_votes), 0);
+		return this.allActiveProducers.reduce((acc, p) => acc + Number(p.total_votes), 0);
 	}
 
 	get statistics() {
-		const top21Threshold = Number(this.activeProducers[20]?.total_votes || 0);
+		const top21Threshold =
+			this.allActiveProducers.length >= 21 ? Number(this.allActiveProducers[20].total_votes) : 0;
 		return {
-			totalActive: this.activeProducers.length,
-			totalVotes: this.totalVotes,
-			top21Threshold
+			totalActive: Number(this.allActiveProducers.length),
+			totalVotes: Number(this.totalVotes || 0),
+			top21Threshold: Number(top21Threshold || 0)
 		};
 	}
 }

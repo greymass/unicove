@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2025-12-01T18:39:21.280Z\n"
+"PO-Revision-Date: 2025-12-01T23:52:58.030Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -4370,8 +4370,8 @@ msgstr "One {0} of RAM represents ownership rights over 1000 bytes of the networ
 #. placeholder {1}: quote.name
 #. placeholder {0}: base.name
 #. placeholder {1}: quote.name
-#. placeholder {0}: base.name
-#. placeholder {1}: quote.name
+#. placeholder {0}: data.network.token.name
+#. placeholder {1}: data.network.getRamToken().name
 #. placeholder {0}: String(network.chain.systemToken?.symbol.name)
 #. placeholder {1}: String(ramtoken.name)
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.ts
@@ -5367,12 +5367,12 @@ msgstr "Stake {0} to earn rewards."
 msgid "An overview of staking on the {0} network providing easy access to stake, unstake, and withdraw {1} tokens using an {2} compatible wallet."
 msgstr "An overview of staking on the {0} network providing easy access to stake, unstake, and withdraw {1} tokens using an {2} compatible wallet."
 
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+layout.ts
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.ts
 msgid "Block Producers"
 msgstr "Block Producers"
 
 #. placeholder {0}: network.chain.name
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+layout.ts
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.ts
 msgid "Validators on the {0} network."
 msgstr "Validators on the {0} network."
 
@@ -5756,6 +5756,7 @@ msgstr "Loading topics..."
 msgid "Failed to load topics"
 msgstr "Failed to load topics"
 
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid "Try Again"
 msgstr "Try Again"
@@ -5764,6 +5765,7 @@ msgstr "Try Again"
 msgid "No topics available yet"
 msgstr "No topics available yet"
 
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid "Load More"
 msgstr "Load More"
@@ -5944,3 +5946,38 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(homepage)/components/sentiment-showcase.svelte
 msgid "Sentiment Voting"
 msgstr "Sentiment Voting"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Active Block Producers"
+msgstr "Active Block Producers"
+
+#~ msgid "Network Statistics"
+#~ msgstr "Network Statistics"
+
+#~ msgid "Active Producers"
+#~ msgstr "Active Producers"
+
+#~ msgid "Total Votes"
+#~ msgstr "Total Votes"
+
+#~ msgid "Top 21 Threshold"
+#~ msgstr "Top 21 Threshold"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Loading producers..."
+msgstr "Loading producers..."
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "No active producers found"
+msgstr "No active producers found"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Website"
+msgstr "Website"
+
+#~ msgid "Link"
+#~ msgstr "Link"
+
+#~ msgid "Loading statistics..."
+#~ msgstr "Loading statistics..."
