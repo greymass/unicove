@@ -1,9 +1,12 @@
+import { useLocale } from '$lib/utils/intl';
 import type { PageLoad } from './$types';
 import { SentimentState } from './state.svelte';
 
 export const load: PageLoad = async ({ parent, params, fetch }) => {
 	const { network } = await parent();
 	const locale = params.locale || 'en';
+
+	await useLocale(locale);
 
 	const sentiment = new SentimentState(network, locale, fetch);
 

@@ -17,22 +17,21 @@
 	<meta name="description" content={data.pageMetaTags.description} />
 </svelte:head>
 
-<div class="xs:grid-cols-full grid gap-6 lg:grid-cols-[70%_1fr]">
+<div class="xs:grid-cols-full grid items-start gap-6 lg:grid-cols-[70%_1fr]">
 	<div class="space-y-6">
 		{#if data.sentiment.loading}
 			<div class="py-12 text-center">
 				<p class="text-on-surface-variant">Loading topics...</p>
 			</div>
 		{:else if data.sentiment.error}
-			<div class="bg-error-container rounded p-6 text-center">
-				<p class="text-on-error-container font-semibold">Failed to load topics</p>
+			<Card title="Failed to load topics">
 				<p class="text-on-error-container mt-2 text-sm">
 					{data.sentiment.error}
 				</p>
 				<Button class="mt-4" variant="secondary" onclick={() => data.sentiment.loadTopics()}>
 					Try Again
 				</Button>
-			</div>
+			</Card>
 		{:else if data.sentiment.topics.length === 0}
 			<div class="py-12 text-center">
 				<p class="text-on-surface-variant text-lg">No topics available yet</p>
@@ -57,22 +56,20 @@
 			{/if}
 		{/if}
 	</div>
-	<div class="space-y-6">
-		<Card title="About Sentiment Voting">
-			<Stack>
-				<div class="space-y-3 text-sm">
-					<p>
-						Sentiment voting allows token holders to express their support or opposition on
-						important community topics. Your vote is weighted by your staked tokens, giving more
-						influence to those with a larger stake in the network.
-					</p>
-					<p>
-						Each topic shows the total participation and the distribution of support versus
-						opposition, helping the community gauge consensus on key issues.
-					</p>
-				</div>
-				<Button href={context.urlPath('/staking')} variant="secondary">Staking</Button>
-			</Stack>
-		</Card>
-	</div>
+
+	<Card title="About Sentiment Voting">
+		<Stack>
+			<p>
+				Sentiment voting allows token holders to express their support or opposition on important
+				community topics. Your vote is weighted by your staked tokens, giving more influence to
+				those with a larger stake in the network.
+			</p>
+			<p>
+				Each topic shows the total participation and the distribution of support versus opposition,
+				helping the community gauge consensus on key issues.
+			</p>
+
+			<Button href={context.urlPath('/staking')} variant="secondary">Stake tokens</Button>
+		</Stack>
+	</Card>
 </div>

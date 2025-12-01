@@ -116,68 +116,72 @@
 			</table>
 		</Stack>
 
-		<Card class="@container" title="Multisig Details">
-			<TransactForm
-				id={manager.result?.resolved?.transaction.id}
-				error={manager.error}
-				onsuccess={Complete}
-				onfailure={Complete}
-			>
-				<Stack class="gap-4" id="details">
-					<DL>
-						<DLRow title="Proposer">
-							<DD>
-								<Account name={manager.proposal.proposer} />
-							</DD>
-						</DLRow>
-						<DLRow title="Proposal Name">
-							<DD>
-								{manager.proposal.name}
-							</DD>
-						</DLRow>
-						<DLRow title={manager.expired ? 'Expired' : 'Expiration'}>
-							<DD>
-								{manager.proposal.transaction.expiration} ({manager.expiresIn})
-							</DD>
-						</DLRow>
-						<DLRow title="Hash">
-							<DD>
-								{manager.proposal.hash}
-							</DD>
-						</DLRow>
-					</DL>
+		<Stack class="gap-4">
+			<h2 class="text-title">Multisig Details</h2>
 
-					{#if manager.userIsApprover}
-						{#if manager.userHasApproved}
-							<Button
-								variant="secondary"
-								onclick={() => manager.unapprove()}
-								disabled={context.wharf.transacting}>Unapprove</Button
-							>
-						{:else}
-							<Button
-								class="bg-success text-on-success"
-								variant="primary"
-								onclick={() => manager.approve()}
-								disabled={context.wharf.transacting}>Approve</Button
+			<Card class="@container pt-3">
+				<TransactForm
+					id={manager.result?.resolved?.transaction.id}
+					error={manager.error}
+					onsuccess={Complete}
+					onfailure={Complete}
+				>
+					<Stack class="gap-4" id="details">
+						<DL>
+							<DLRow title="Proposer">
+								<DD>
+									<Account name={manager.proposal.proposer} />
+								</DD>
+							</DLRow>
+							<DLRow title="Proposal Name">
+								<DD>
+									{manager.proposal.name}
+								</DD>
+							</DLRow>
+							<DLRow title={manager.expired ? 'Expired' : 'Expiration'}>
+								<DD>
+									{manager.proposal.transaction.expiration} ({manager.expiresIn})
+								</DD>
+							</DLRow>
+							<DLRow title="Hash">
+								<DD>
+									{manager.proposal.hash}
+								</DD>
+							</DLRow>
+						</DL>
+
+						{#if manager.userIsApprover}
+							{#if manager.userHasApproved}
+								<Button
+									variant="secondary"
+									onclick={() => manager.unapprove()}
+									disabled={context.wharf.transacting}>Unapprove</Button
+								>
+							{:else}
+								<Button
+									class="bg-success text-on-success"
+									variant="primary"
+									onclick={() => manager.approve()}
+									disabled={context.wharf.transacting}>Approve</Button
+								>
+							{/if}
+						{/if}
+
+						{#if manager.userIsProposer}
+							<Button variant="secondary" disabled={context.wharf.transacting} onclick={cancel}
+								>Cancel MSIG</Button
 							>
 						{/if}
-					{/if}
 
-					{#if manager.userIsProposer}
-						<Button variant="secondary" disabled={context.wharf.transacting} onclick={cancel}
-							>Cancel MSIG</Button
+						<Button
+							variant="primary"
+							disabled={context.wharf.transacting}
+							onclick={() => manager.execute()}>Execute</Button
 						>
-					{/if}
-
-					<Button
-						variant="primary"
-						disabled={context.wharf.transacting}
-						onclick={() => manager.execute()}>Execute</Button
-					>
-				</Stack>
-			</TransactForm>
-		</Card>
+					</Stack>
+				</TransactForm>
+			</Card></Stack
+		>
 	</Switcher>
 </Stack>
 

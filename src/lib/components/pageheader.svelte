@@ -31,17 +31,17 @@
 	let logo = $derived(props.network.config.logo || '');
 </script>
 
-<header class="col-span-full flex min-h-16 items-center gap-4">
+<header class="col-span-full flex min-h-16 items-start gap-4">
 	{#if props.backPath}
 		<IconButton
 			size="large"
 			variant="filled"
-			class="text-primary shrink-0"
+			class="text-primary shrink-0 self-center"
 			onclick={goBack}
 			icon={ChevronLeft}
 		/>
 	{:else}
-		<picture class="size-12 shrink-0">
+		<picture class="mt-0.5 size-12 shrink-0">
 			<img
 				src={String(logo)}
 				alt={String(props.network.chain.name)}
@@ -66,7 +66,7 @@
 		</div>
 
 		{#if props.subtitle}
-			<p class="text-muted text-base leading-none">{props.subtitle}</p>
+			<p class="text-muted text-base leading-5">{props.subtitle}</p>
 		{/if}
 	</div>
 </header>

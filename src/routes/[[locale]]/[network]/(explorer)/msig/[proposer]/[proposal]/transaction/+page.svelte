@@ -17,6 +17,6 @@
 	});
 </script>
 
-<Stack class="mt-6">
+<Stack>
 	<Code json={manager.proposal.transaction} />
 </Stack>
