@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.663Z\n"
-"PO-Revision-Date: 2025-12-01T18:39:21.286Z\n"
+"PO-Revision-Date: 2025-12-01T18:45:43.092Z\n"
 "Last-Translator: \n"
 "Language: ko\n"
 "Language-Team: \n"
@@ -5739,44 +5739,44 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Your Vote"
-msgstr ""
+msgstr "나의 투표"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Statistics"
-msgstr ""
+msgstr "통계"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "No opposing votes"
-msgstr ""
+msgstr "반대 투표 없음"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "No supporting votes"
-msgstr ""
+msgstr "찬성 투표 없음"
 
 #: src/lib/components/sentiment/voteButtons.svelte
 msgid "Do you support or oppose this topic?"
-msgstr ""
+msgstr "이 주제를 지지하십니까, 반대하십니까?"
 
 #: src/lib/components/sentiment/voteButtons.svelte
 msgid "I support this topic"
-msgstr ""
+msgstr "이 주제를 지지합니다"
 
 #: src/lib/components/sentiment/voteButtons.svelte
 msgid "I oppose this topic"
-msgstr ""
+msgstr "이 주제를 반대합니다"
 
 #: src/lib/components/sentiment/voteButtons.svelte
 msgid "Voting"
-msgstr ""
+msgstr "투표"
 
 #: src/lib/components/sentiment/voteButtons.svelte
 msgid "Voted"
-msgstr ""
+msgstr "투표 완료"
 
 #. placeholder {0}: currentVote === null ? 'Voting' : 'Voted'
 #: src/lib/components/sentiment/voteButtons.svelte
 msgid "{0} as <0/> with weight <1/>"
-msgstr ""
+msgstr "가중치 <1/>으로 <0/>로 {0}"
 
 #: src/routes/[[locale]]/[network]/(homepage)/components/sentiment-showcase.svelte
 msgid "View All Topics"

@@ -31,6 +31,7 @@
 				Topic creation is not yet available. Currently, only voting on existing proposals is
 				supported.
 			</p>
+			<Button variant="primary" href={urlPath('/topics')}>View All Topics</Button>
 		</Stack>
 	</div>
 
@@ -61,9 +62,5 @@
 				</Card>
 			</a>
 		{/each}
-	</div>
-
-	<div class="col-span-full row-start-3 @3xl:col-span-1 @3xl:row-start-2">
-		<Button variant="primary" href={urlPath('/topics')}>View All Topics</Button>
 	</div>
 </section>
