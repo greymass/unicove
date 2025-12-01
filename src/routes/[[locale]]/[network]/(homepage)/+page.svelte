@@ -1,9 +1,8 @@
 <script lang="ts">
-	import LegacyTokenSwap from './components/legacy-token-swap.svelte';
-	import Articles from './components/articles.svelte';
 	import Hero from './components/hero.svelte';
 	import Carousel from './components/carousel.svelte';
 	import StakingRewards from './components/staking-rewards.svelte';
+	import SentimentShowcase from './components/sentiment-showcase.svelte';
 	import Charts from './components/charts.svelte';
 	import PerformanceGrid from './components/performance-grid.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
@@ -21,10 +20,8 @@
 <div id="homepage" class="mb-4 grid content-start items-start gap-y-12 sm:gap-y-32 md:pt-0">
 	<Hero {networkName} {networkShortname} />
 
-	<LegacyTokenSwap {network} />
-
-	{#if data.articles.length}
-		<Articles articles={data.articles} />
+	{#if network.supports('sentiment') && data.sentimentTopics?.length > 0}
+		<SentimentShowcase topics={data.sentimentTopics} />
 	{/if}
 
 	{#if network.supports('metamask') && productName}
