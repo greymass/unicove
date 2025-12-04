@@ -44,7 +44,7 @@
 			</Stack>
 		{/snippet}
 		{#snippet rightColumn()}
-			{#each { length: 5 } as _, i}
+			{#each [0, 1, 2, 3, 4] as i}
 				{@const producer = top5Producers[i]}
 				{@const isLoading = producers.loading || !producer}
 				{#if isLoading}
