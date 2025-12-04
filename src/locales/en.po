@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2025-12-04T20:47:38.523Z\n"
+"PO-Revision-Date: 2025-12-04T21:17:37.659Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -6762,11 +6762,6 @@ msgid "Participate in network governance on {0}"
 msgstr "Participate in network governance on {0}"
 
 #. placeholder {0}: network.chain.name
-#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.ts
-msgid "Vote on block producers, sentiment topics, and funding proposals on the {0} network."
-msgstr "Vote on block producers, sentiment topics, and funding proposals on the {0} network."
-
-#. placeholder {0}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
 msgid ""
 "Vote for the validators that secure the {0} network. Your voting power is\n"
@@ -6897,3 +6892,8 @@ msgstr "Top 21 Block Producer"
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Loading your votes..."
 msgstr "Loading your votes..."
+
+#. placeholder {0}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.ts
+msgid "Vote on block producers and sentiment topics on the {0} network."
+msgstr "Vote on block producers and sentiment topics on the {0} network."

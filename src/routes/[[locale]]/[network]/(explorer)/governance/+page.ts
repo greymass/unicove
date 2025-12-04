@@ -20,7 +20,7 @@ export const load: PageLoad = async ({ parent, fetch }) => {
 		subtitle: `Participate in network governance on ${network.chain.name}`,
 		pageMetaTags: {
 			title: ['Governance', network.chain.name].join(' | '),
-			description: `Vote on block producers, sentiment topics, and funding proposals on the ${network.chain.name} network.`
+			description: `Vote on block producers and sentiment topics on the ${network.chain.name} network.`
 		}
 	};
 };

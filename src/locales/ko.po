@@ -6480,8 +6480,8 @@ msgstr "{0}의 네트워크 거버넌스에 참여하세요"
 
 #. placeholder {0}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/governance/+page.ts
-msgid "Vote on block producers, sentiment topics, and funding proposals on the {0} network."
-msgstr "{0} 네트워크에서 블록 생산자, 감성 토픽 및 펀딩 제안에 투표하십시오."
+msgid "Vote on block producers and sentiment topics on the {0} network."
+msgstr "{0} 네트워크에서 블록 생산자와 감성 주제에 투표하세요."
 
 #. placeholder {0}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
