@@ -2,6 +2,7 @@ import { apiPlugin, storyblokInit, useStoryblokApi } from '@storyblok/svelte';
 import type { PageLoad } from './$types';
 import type { Article, StoryBlokArticle } from '$lib/types/content';
 import type { TopicWithStats } from '$lib/types/sentiment';
+import type { NetworkState } from '$lib/state/network.svelte';
 import { SentimentState } from '../(explorer)/topics/state.svelte';
 import {
 	PUBLIC_STORYBLOK_CONTENT_TYPE,
@@ -42,7 +43,7 @@ async function getStoryblokStories(limit = 3): Promise<Article[]> {
 }
 
 async function getSentimentTopics(
-	network: any,
+	network: NetworkState,
 	locale: string | undefined,
 	fetch: typeof globalThis.fetch
 ): Promise<TopicWithStats[]> {

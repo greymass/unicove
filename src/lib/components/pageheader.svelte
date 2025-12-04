@@ -1,11 +1,17 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { IconButton } from 'unicove-components';
-	import { CopyButton } from 'unicove-components';
+	import { IconButton, CopyButton } from 'unicove-components';
+	import Tooltip from '$lib/components/tooltip/tooltip.svelte';
 	import { type NetworkState } from '$lib/state/network.svelte';
 	import ChevronLeft from '@lucide/svelte/icons/chevron-left';
-	import { getContext, type ComponentProps } from 'svelte';
+	import { getContext, type ComponentProps, type Component } from 'svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
+
+	interface Badge {
+		icon: Component;
+		tooltip?: string;
+		class?: string;
+	}
 
 	interface Props {
 		title: string;
@@ -14,6 +20,7 @@
 		network: NetworkState;
 		copyData?: string;
 		actions?: ComponentProps<typeof IconButton>[];
+		badges?: Badge[];
 	}
 
 	let props: Props = $props();
@@ -51,8 +58,20 @@
 	{/if}
 
 	<div class="">
-		<div class="text-primary flex h-fit w-fit items-center">
+		<div class="text-primary flex h-fit w-fit items-center gap-2">
 			<h1 class="text-on-surface mb-2 text-3xl leading-none font-bold">{props.title}</h1>
+
+			{#if props.badges}
+				{#each props.badges as badge}
+					{#if badge.tooltip}
+						<Tooltip content={badge.tooltip} icon={undefined}>
+							<badge.icon class={badge.class ?? 'text-primary size-6'} />
+						</Tooltip>
+					{:else}
+						<badge.icon class={badge.class ?? 'text-primary size-6'} />
+					{/if}
+				{/each}
+			{/if}
 
 			{#if props.copyData}
 				<CopyButton data={props.copyData} hideBackground />

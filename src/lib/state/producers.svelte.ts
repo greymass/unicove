@@ -1,5 +1,6 @@
 import type { NetworkState } from '$lib/state/network.svelte';
 import * as SystemContract from '$lib/wharf/contracts/system';
+import { Name, type NameType } from '@wharfkit/antelope';
 
 export class ProducersState {
 	public network: NetworkState;
@@ -17,7 +18,7 @@ export class ProducersState {
 		this.error = null;
 		try {
 			const networkShort = this.network.config.short;
-			const response = await fetch(`/en/${networkShort}/api/producers`);
+			const response = await this.network.fetch(`/en/${networkShort}/api/producers`);
 			if (!response.ok) {
 				throw new Error(`API request failed: ${response.status}`);
 			}
@@ -69,5 +70,15 @@ export class ProducersState {
 			totalVotes: Number(this.totalVotes || 0),
 			top21Threshold: Number(top21Threshold || 0)
 		};
+	}
+
+	isProducer(accountName: NameType): boolean {
+		const name = Name.from(accountName);
+		return this.allActiveProducers.some((p) => name.equals(p.owner));
+	}
+
+	isTop21(accountName: NameType): boolean {
+		const name = Name.from(accountName);
+		return this.top21.some((p) => name.equals(p.owner));
 	}
 }
