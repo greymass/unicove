@@ -15,6 +15,7 @@
 	import { AccountState } from '$lib/state/client/account.svelte.js';
 	import { AccountValueState, NetworkValueState } from '$lib/state/value.svelte.js';
 	import { MarketState } from '$lib/state/market.svelte.js';
+	import { ProducersState } from '$lib/state/producers.svelte.js';
 	import { SearchRecordStorage } from '$lib/state/search.svelte.js';
 	import { SettingsState } from '$lib/state/settings.svelte.js';
 	import { WharfState } from '$lib/state/client/wharf.svelte.js';
@@ -35,6 +36,7 @@
 	let { children, data } = $props();
 
 	const history = new SearchRecordStorage(data.network);
+	const producers = new ProducersState(data.network);
 	const settings = new SettingsState();
 	const wharf = new WharfState(settings);
 	const initialMarketValue = new MarketState(data.network, settings);
@@ -72,6 +74,9 @@
 		},
 		get network() {
 			return data.network;
+		},
+		get producers() {
+			return producers;
 		},
 		get settings() {
 			return settings;
@@ -208,6 +213,9 @@
 		// Load markets based off chain
 		setMarket(data.network);
 		setMarketNetwork(data.network);
+
+		// Load producers
+		producers.loadProducers();
 
 		// Set the MetaMask snap provider on state
 		getSnapsProvider().then((provider) => {

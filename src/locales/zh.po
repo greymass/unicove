@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2025-12-01T18:45:45.040Z\n"
+"PO-Revision-Date: 2025-12-04T20:47:38.531Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -81,6 +81,7 @@ msgstr ""
 #: src/lib/components/transact/summary.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Status"
 msgstr "状态"
 
@@ -292,14 +293,14 @@ msgstr "总计"
 
 #: src/lib/components/chart/tokendistribution.svelte
 msgid "KB (RAM)"
-msgstr ""
+msgstr "KB (RAM)"
 
 #. placeholder {0}: balance.token.name
 #. placeholder {0}: balance.token.symbol.name
 #: src/lib/components/card/tokenbalance.svelte
 #: src/lib/components/card/tokenoverview.svelte
 msgid "{0} (RAM)"
-msgstr ""
+msgstr "{0} (RAM)"
 
 #: src/lib/components/contract/struct.svelte
 msgid "Extends base type of <0/>"
@@ -327,28 +328,28 @@ msgstr ""
 
 #: src/lib/components/contract/table.svelte
 msgid "rows of <0/>"
-msgstr ""
+msgstr "行数据 <0/>"
 
 #: src/lib/components/contract/table.svelte
 msgid "Field"
-msgstr ""
+msgstr "字段"
 
 #: src/lib/components/contract/table.svelte
 msgid "Type"
-msgstr ""
+msgstr "类型"
 
 #: src/lib/components/contract/action/response.svelte
 #: src/lib/components/contract/table.svelte
 msgid "No data in response."
-msgstr ""
+msgstr "响应中没有数据。"
 
 #: src/lib/components/elements/action.svelte
 msgid "Rendering of the ricardian contract is not yet supported."
-msgstr ""
+msgstr "尚不支持呈现Ricardian合约。"
 
 #: src/lib/components/elements/action.svelte
 msgid "Error decoding for action summary, displaying raw data instead."
-msgstr ""
+msgstr "解码操作摘要时出错，将显示原始数据。"
 
 #: src/lib/components/navigation/mobilenavigation.svelte
 msgid "Unicove Home"
@@ -356,7 +357,7 @@ msgstr "Unicove 主页"
 
 #: src/lib/components/navigation/pillgroup.svelte
 msgid "Page"
-msgstr ""
+msgstr "页面"
 
 #: src/lib/components/elements/resourceCard.svelte
 #: src/lib/components/navigation/sidemenu.svelte
@@ -372,6 +373,7 @@ msgid "Debug State"
 msgstr "调试状态"
 
 #: src/lib/components/navigation/sidemenu.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "My Account"
 msgstr "我的账户"
 
@@ -379,13 +381,13 @@ msgstr "我的账户"
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/resources/+page.svelte
 msgid "CPU"
-msgstr ""
+msgstr "CPU"
 
 #: src/lib/components/elements/resourceCard.svelte
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/resources/+page.svelte
 msgid "NET"
-msgstr ""
+msgstr "NET"
 
 #: src/lib/components/search/input.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
@@ -444,16 +446,16 @@ msgstr "里卡迪合约"
 #: src/lib/components/select/actionvariant.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
 msgid "Action Data"
-msgstr ""
+msgstr "操作数据"
 
 #: src/lib/components/select/actionvariant.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
 msgid "Decoded"
-msgstr ""
+msgstr "已解码"
 
 #: src/lib/components/select/actionvariant.svelte
 msgid "JSON"
-msgstr ""
+msgstr "JSON"
 
 #: src/lib/components/select/language.svelte
 msgid "Unknown"
@@ -469,44 +471,44 @@ msgstr "交易未被解析。"
 
 #: src/lib/components/contract/action/response.svelte
 msgid "Response Array <0/>"
-msgstr ""
+msgstr "响应数组 <0/>"
 
 #: src/lib/components/contract/action/response.svelte
 msgid "Response Object <0/>"
-msgstr ""
+msgstr "响应对象 <0/>"
 
 #: src/lib/components/contract/action/params.svelte
 msgid "Request Parameters <0/>"
-msgstr ""
+msgstr "请求参数 <0/>"
 
 #: src/lib/components/contract/action/params.svelte
 msgid "No action parameters."
-msgstr ""
+msgstr "没有操作参数。"
 
 #: src/lib/components/summary/components/balancechange.svelte
 msgid "Update"
-msgstr ""
+msgstr "更新"
 
 #: src/lib/components/summary/components/balancechange.svelte
 msgid "New Balance:"
-msgstr ""
+msgstr "新余额：```"
 
 #: src/lib/components/summary/components/transfer.svelte
 msgid "Transfer"
-msgstr ""
+msgstr "转账"
 
 #. placeholder {0}: memo
 #: src/lib/components/summary/components/transfer.svelte
 msgid "<0/> Memo: {0}"
-msgstr ""
+msgstr "<0/> 备注：{0}"
 
 #. placeholder {0}: (resources.cpu / 1000).toFixed(3)
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 msgid "+ {0} ms (CPU)"
-msgstr ""
+msgstr "+ {0} 毫秒 (CPU)"
 
-#. placeholder {0}: data.powup_cpu
 #. placeholder {0}: data.powup_net
+#. placeholder {0}: data.powup_cpu
 #. placeholder {0}: account.weight
 #. placeholder {0}: key.weight
 #. placeholder {0}: account.weight
@@ -518,20 +520,20 @@ msgstr ""
 #: src/lib/components/summary/eosio/newaccount.svelte
 #: src/lib/components/summary/eosio/newaccount.svelte
 msgid "Weight: {0}"
-msgstr ""
+msgstr "权重：{0}"
 
 #. placeholder {0}: (resources.net / 1000).toFixed(3)
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 msgid "+ {0} kb (NET)"
-msgstr ""
+msgstr "+ {0} kb (NET)"
 
 #: src/lib/components/summary/eosio/buyram.svelte
 msgid "( Receiver: <0/> )"
-msgstr ""
+msgstr "( 接收者: <0/> )"
 
 #: src/lib/components/summary/eosio/buyrambytes.svelte
 msgid "(Receiver: <0/>)"
-msgstr ""
+msgstr "(接收者: <0/>)"
 
 #: src/lib/components/summary/eosio/newaccount.svelte
 msgid "<0/> creates account <1/>"
@@ -568,15 +570,15 @@ msgstr ""
 
 #: src/lib/components/summary/eosio.wram/issue.svelte
 msgid "Issue"
-msgstr ""
+msgstr "发行"
 
 #: src/lib/components/summary/eosio.wram/retire.svelte
 msgid "Retire"
-msgstr ""
+msgstr "撤回"
 
 #: src/lib/components/summary/greymassnoop/noop.svelte
 msgid "<0/> provided the network resources for this transaction."
-msgstr ""
+msgstr "<0/> 为此交易提供了网络资源。"
 
 #: src/lib/components/wallets/metamask/required.svelte
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
@@ -592,34 +594,34 @@ msgstr "配置 Unicove"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "MSIG Configuration"
-msgstr ""
+msgstr "MSIG配置"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Proposal Expiration"
-msgstr ""
+msgstr "提案过期时间"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "The expiration date set on multisig proposals."
-msgstr ""
+msgstr "在多重签名提案上设置的过期日期。"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Proposal Earliest Execution"
-msgstr ""
+msgstr "提案最早执行时间"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid ""
 "Set a datetime to specify the earliest a proposal can be executed. This value will be\n"
 "reset after each proposal is created."
-msgstr ""
+msgstr "设置一个日期时间，以指定提案可以执行的最早时间。此值将在每次创建提案后重置。"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Local Time"
-msgstr ""
+msgstr "本地时间"
 
 #. placeholder {0}: timestamp
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Set for UTC: {0} <0>Clear</0>"
-msgstr ""
+msgstr "已设置为UTC：{0} <0>清除</0>"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Preferences"
@@ -718,7 +720,7 @@ msgstr "模拟的代币价格"
 msgid ""
 "Force the system token price to equal $1.2345 USD for testing in environments\n"
 "without pricing information."
-msgstr ""
+msgstr "强制系统代币价格等于 1.2345 美元，以便在没有定价信息的环境中进行测试。```"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Debug Data Display"
@@ -774,7 +776,7 @@ msgstr "出售"
 
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 msgid "RAM Calculator"
-msgstr ""
+msgstr "RAM 计算器"
 
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/ram/+page.svelte
@@ -791,8 +793,8 @@ msgstr "详情"
 msgid "Network Fees"
 msgstr "网络费用"
 
-#. placeholder {0}: data.network.chain.systemToken?.symbol.code || ''
 #. placeholder {0}: market.network.currency.symbol.code
+#. placeholder {0}: data.network.chain.systemToken?.symbol.code || ''
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 msgid "Market Cap ({0})"
@@ -805,83 +807,83 @@ msgstr "供应量"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "CPU (Central Processing Unit)"
-msgstr ""
+msgstr "CPU (中央处理器)"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "Provides processing power for blockchain actions."
-msgstr ""
+msgstr "为区块链操作提供处理能力。"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "Measured in microseconds."
-msgstr ""
+msgstr "以微秒为单位测量。"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "Needed to execute transactions."
-msgstr ""
+msgstr "执行交易所需。"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "NET (Network Bandwidth)"
-msgstr ""
+msgstr "NET (网络带宽)"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "Represents network bandwidth usage."
-msgstr ""
+msgstr "表示网络带宽使用量。"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "Required for transactions on the blockchain."
-msgstr ""
+msgstr "区块链上交易所需。"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "CPU and NET"
-msgstr ""
+msgstr "CPU 和 NET"
 
 #. placeholder {0}: symbolName
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "Can be \"powered up\" by spending {0}."
-msgstr ""
+msgstr "可以通过花费 {0} 来“增强”。"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "Some free services offer daily power-ups."
-msgstr ""
+msgstr "一些免费服务提供每日增强。"
 
 #. placeholder {0}: symbolName
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "Amount received is proportional to {0} spent."
-msgstr ""
+msgstr "收到的数量与花费的 {0} 成正比。"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "Lasts for a specific time period."
-msgstr ""
+msgstr "持续特定时间段。"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "RAM (Random Access Memory)"
-msgstr ""
+msgstr "RAM (随机存取存储器)"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "It's like computer memory, but for the blockchain."
-msgstr ""
+msgstr "它就像计算机内存，但用于区块链。"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "Used to store data on the blockchain."
-msgstr ""
+msgstr "用于在区块链上存储数据。"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "Limited and in high demand."
-msgstr ""
+msgstr "有限且需求量大。"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "Can be bought and sold by users."
-msgstr ""
+msgstr "可以由用户买卖。"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "Price changes based on availability."
-msgstr ""
+msgstr "价格根据可用性而变化。"
 
 #. placeholder {0}: chainName
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "{0} Resources: A Simple Explanation"
-msgstr ""
+msgstr "{0} 资源：一个简单的解释"
 
 #. placeholder {0}: chainName
 #. placeholder {1}: chainName
@@ -892,6 +894,8 @@ msgid ""
 "to interact with smart contracts and perform actions on the {1} blockchain. Managing\n"
 "these resources is crucial for efficient use of the {2} network."
 msgstr ""
+"{0} 区块链使用三种主要资源：CPU、NET 和 RAM。 用户需要这些资源才能与智能合约交互并在 {1}\n"
+"区块链上执行操作。 管理这些资源对于有效利用 {2} 网络至关重要。```"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/powerup/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/resources/renting.svelte
@@ -998,7 +1002,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/wharf/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/token/[contract]/[symbol]/+page.svelte
 msgid "Account"
-msgstr ""
+msgstr "帐户"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/+page.svelte
 msgid "Components"
@@ -1078,13 +1082,13 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
 msgid "Enter"
-msgstr ""
+msgstr "输入"
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
 msgid "Escape"
-msgstr ""
+msgstr "退出"
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
 msgid "K1"
@@ -1185,6 +1189,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/prompt/[payload]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/prompt/[payload]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
@@ -1247,15 +1252,15 @@ msgstr ""
 msgid ""
 "Enter an account name and select an ABI and/or WASM file to upload using the authority of\n"
 "the currently logged in account."
-msgstr ""
+msgstr "输入帐户名，然后选择 ABI 和/或 WASM 文件，以使用当前登录帐户的权限进行上传。"
 
 #: src/routes/[[locale]]/[network]/(account)/upload/[[name]]/+page.svelte
 msgid "Contract Files"
-msgstr ""
+msgstr "合约文件"
 
 #: src/routes/[[locale]]/[network]/(account)/upload/[[name]]/+page.svelte
 msgid "Upload"
-msgstr ""
+msgstr "上传"
 
 #: src/routes/[[locale]]/[network]/(account)/upload/[[name]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/permission.svelte
@@ -1267,11 +1272,11 @@ msgstr "操作"
 
 #: src/routes/[[locale]]/[network]/(account)/upload/[[name]]/+page.svelte
 msgid "The actions that will be performed are listed below."
-msgstr ""
+msgstr "将要执行的操作如下所示。"
 
 #: src/routes/[[locale]]/[network]/(account)/upload/[[name]]/+page.svelte
 msgid "Remove Action"
-msgstr ""
+msgstr "移除操作"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/+page.svelte
 msgid "Design System"
@@ -1330,12 +1335,12 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 msgid "Authority"
-msgstr ""
+msgstr "权限"
 
 #. placeholder {0}: lastUpdate
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 msgid "props.account updated {0} seconds ago <0>Refresh</0>"
-msgstr ""
+msgstr "props.account {0} 秒前已更新 <0>刷新</0>"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
@@ -1365,17 +1370,17 @@ msgstr "概览"
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/actions/+page.svelte
 msgid "Actions ({0})"
-msgstr ""
+msgstr "操作 ({0})"
 
 #. placeholder {0}: data.abi.structs.length
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.svelte
 msgid "Structs ({0})"
-msgstr ""
+msgstr "结构体 ({0})"
 
 #. placeholder {0}: data.abi.tables.length
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.svelte
 msgid "Tables ({0})"
-msgstr ""
+msgstr "表 ({0})"
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/abi/+page.ts
@@ -1402,7 +1407,7 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+page.svelte
 msgid "Upload Contract"
-msgstr ""
+msgstr "上传合约"
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/structs/+page.ts
@@ -1683,6 +1688,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/buttons.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/buttons.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Cancel"
 msgstr "取消"
 
@@ -2216,15 +2222,15 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/summaries/+page.svelte
 msgid "Example Transactions (Vaulta)"
-msgstr ""
+msgstr "示例交易 (Vaulta)"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/summaries/+page.svelte
 msgid "Links to transactions that perform common types of actions."
-msgstr ""
+msgstr "链接到执行常见类型操作的交易。"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/summaries/+page.svelte
 msgid "Tokens"
-msgstr ""
+msgstr "代币"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/summaries/+page.svelte
 msgid "Token Transfer"
@@ -2232,35 +2238,35 @@ msgstr "代币转账"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/summaries/+page.svelte
 msgid "Swap System Token to RAM"
-msgstr ""
+msgstr "将系统代币兑换为 RAM"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/summaries/+page.svelte
 msgid "Swap RAM to System Token"
-msgstr ""
+msgstr "将 RAM 兑换为系统代币"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/summaries/+page.svelte
 msgid "Swap RAM to WRAM"
-msgstr ""
+msgstr "将 RAM 兑换为 WRAM"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/summaries/+page.svelte
 msgid "Swap WRAM to RAM"
-msgstr ""
+msgstr "将 WRAM 兑换为 RAM"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/summaries/+page.svelte
 msgid "Stake System Token"
-msgstr ""
+msgstr "质押系统代币"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/summaries/+page.svelte
 msgid "Unstake System Token"
-msgstr ""
+msgstr "取消质押系统代币"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/summaries/+page.svelte
 msgid "Staking Withdraw"
-msgstr ""
+msgstr "质押提款"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/summaries/+page.svelte
 msgid "Powerup"
-msgstr ""
+msgstr "能量增强"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/input/name/+page.svelte
 msgid "Valid"
@@ -2367,7 +2373,7 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.svelte
 msgid "No more"
-msgstr ""
+msgstr "没有更多了"
 
 #: src/lib/components/elements/action.svelte
 #: src/routes/[[locale]]/[network]/(account)/fund/+page.svelte
@@ -2378,7 +2384,7 @@ msgstr "加载中"
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/token/[contract]/[symbol]/+page.svelte
 msgid "Load more"
-msgstr ""
+msgstr "加载更多"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
@@ -2399,17 +2405,17 @@ msgstr "操作"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.svelte
 msgid "Filter"
-msgstr ""
+msgstr "筛选"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.svelte
 msgid "Reset"
-msgstr ""
+msgstr "重置"
 
 #. placeholder {0}: actionFilter
 #. placeholder {1}: contractFilter
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.svelte
 msgid "Filtering to display {0} on the {1} contract."
-msgstr ""
+msgstr "正在筛选以显示 {0} 在 {1} 合约上的活动。"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/wharf/+page.svelte
 msgid "Wharf State"
@@ -2595,37 +2601,38 @@ msgstr ""
 msgid "Proxied Weight"
 msgstr ""
 
+#: src/routes/[[locale]]/[network]/(explorer)/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/votes/+page.svelte
 msgid "Block Producer"
-msgstr ""
+msgstr "区块生产者"
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/+page.svelte
 msgid "The actions for this contract with their input parameters and potential response data."
-msgstr ""
+msgstr "此合约的操作及其输入参数和潜在的响应数据。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/+page.svelte
 msgid "Filter actions..."
-msgstr ""
+msgstr "筛选操作..."
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/structs/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/+page.svelte
 msgid "No actions match filter"
-msgstr ""
+msgstr "没有操作符合筛选条件"
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/structs/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/+page.svelte
 msgid "No actions"
-msgstr ""
+msgstr "没有操作"
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/+page.svelte
 msgid "The data tables defined by this contract."
-msgstr ""
+msgstr "此合约定义的数据表。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/+page.svelte
 msgid "Filter tables..."
-msgstr ""
+msgstr "筛选表格..."
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/structs/+page.svelte
 msgid "The data structures defined by this contract."
@@ -2722,7 +2729,7 @@ msgstr "数量超出可用余额。"
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Memo (Optional)"
-msgstr ""
+msgstr "备注（可选）"
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Specify a public memo for this transfer (optional)"
@@ -3386,64 +3393,64 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
 msgid "Table Browser"
-msgstr ""
+msgstr "表格浏览器"
 
 #. placeholder {0}: scope
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
 msgid "Scope: {0}"
-msgstr ""
+msgstr "范围：{0}"
 
 #. placeholder {0}: lower
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
 msgid "Lower: {0}"
-msgstr ""
+msgstr "下限：{0}"
 
 #. placeholder {0}: upper
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
 msgid "Upper: {0}"
-msgstr ""
+msgstr "上限：{0}"
 
 #. placeholder {0}: reverse
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
 msgid "Reverse: {0}"
-msgstr ""
+msgstr "反向：{0}"
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
 msgid "Scope"
-msgstr ""
+msgstr "范围"
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
 msgid "Lower"
-msgstr ""
+msgstr "下限"
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
 msgid "Lower bound"
-msgstr ""
+msgstr "下限"
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
 msgid "Upper"
-msgstr ""
+msgstr "上限"
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
 msgid "Upper bound"
-msgstr ""
+msgstr "上限"
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
 msgid "Reverse?"
-msgstr ""
+msgstr "反向？"
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
 msgid "Query"
-msgstr ""
+msgstr "查询"
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
 msgid "First Page"
-msgstr ""
+msgstr "第一页"
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
 msgid "Next Page"
-msgstr ""
+msgstr "下一页```"
 
 #: src/routes/+layout.server.ts
 msgid "Your gateway to Web3"
@@ -3502,16 +3509,16 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(account)/upload/[[name]]/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/upload/[[name]]/+page.ts
 msgid "Upload Smart Contract"
-msgstr ""
+msgstr "上传智能合约"
 
 #. placeholder {0}: params.name
 #: src/routes/[[locale]]/[network]/(account)/upload/[[name]]/+page.ts
 msgid "Select the ABI and WASM files to upload for {0}"
-msgstr ""
+msgstr "选择要为 {0} 上传的 ABI 和 WASM 文件"
 
 #: src/routes/[[locale]]/[network]/(account)/upload/[[name]]/+page.ts
 msgid "Upload a smart contract by selecting the ABI and WASM files from your computer."
-msgstr ""
+msgstr "通过从您的计算机中选择 ABI 和 WASM 文件来上传智能合约。"
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/request/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/create-account/request/+page.ts
@@ -3534,12 +3541,12 @@ msgstr ""
 #. placeholder {0}: params.contract
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.ts
 msgid "No contract is currently deployed to the {0} account."
-msgstr ""
+msgstr "当前没有合约部署到 {0} 帐户。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
 msgid "NOT_FOUND"
-msgstr ""
+msgstr "未找到"
 
 #: src/routes/[[locale]]/[network]/(account)/welcome/[wallet]/+page.ts
 msgid "Anchor"
@@ -3659,6 +3666,7 @@ msgid "Change network"
 msgstr "切换网络"
 
 #: src/lib/components/accountswitch.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Connect Wallet"
 msgstr "连接钱包"
 
@@ -3765,6 +3773,7 @@ msgstr "收益"
 
 #: src/lib/components/chart/barchart.svelte
 #: src/lib/components/chart/chart-container.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Today"
 msgstr "今天"
 
@@ -3936,11 +3945,11 @@ msgstr "费用"
 
 #: src/lib/components/summary/eosio/powerup.svelte
 msgid "renting CPU for"
-msgstr ""
+msgstr "租赁 CPU 用于"
 
 #: src/lib/components/summary/eosio/powerup.svelte
 msgid "renting NET for"
-msgstr ""
+msgstr "租赁 NET 用于"
 
 #. placeholder {0}: data.owner
 #: src/lib/components/summary/eosio/refund.svelte
@@ -4186,6 +4195,7 @@ msgstr "行为人"
 msgid "Votes"
 msgstr "投票"
 
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Top 21"
@@ -4284,8 +4294,8 @@ msgstr "一个 {0} 的 RAM 代表对网络总区块链存储容量中 1000 字�
 #. placeholder {1}: quote.name
 #. placeholder {0}: base.name
 #. placeholder {1}: quote.name
-#. placeholder {0}: base.name
-#. placeholder {1}: quote.name
+#. placeholder {0}: data.network.token.name
+#. placeholder {1}: data.network.getRamToken().name
 #. placeholder {0}: String(network.chain.systemToken?.symbol.name)
 #. placeholder {1}: String(ramtoken.name)
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.ts
@@ -4481,7 +4491,7 @@ msgstr "权限"
 #. placeholder {0}: data.account.proposals.length
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 msgid "Proposals ({0})"
-msgstr ""
+msgstr "提案 ({0})"
 
 #. placeholder {0}: legacyPubKey
 #: src/routes/[[locale]]/[network]/(explorer)/key/[publicKey]/+page.svelte
@@ -4850,7 +4860,7 @@ msgstr "权重 {0}，阈值 {1}。"
 #. placeholder {0}: permission
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/authority/+page.svelte
 msgid "Login as {0} <0>↳ multisig using {0}</0>"
-msgstr ""
+msgstr "以 {0} 身份登录 <0>↳ 使用 {0} 的多重签名</0>"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/authority/+page.svelte
 msgid "No available authorities for this account."
@@ -4863,7 +4873,7 @@ msgstr "代币"
 #. placeholder {0}: context.settings.data.displayCurrency
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balances/+page.svelte
 msgid "Value ({0})"
-msgstr ""
+msgstr "价值 ({0})"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/+page.svelte
 msgid "Keys and Permissions"
@@ -4911,11 +4921,11 @@ msgstr "请求批准"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "<0/> Approved"
-msgstr ""
+msgstr "<0/> 已批准"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "<0/> Requested"
-msgstr ""
+msgstr "<0/> 已请求"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
@@ -5235,12 +5245,14 @@ msgstr "质押 {0} 以赚取奖励。"
 msgid "An overview of staking on the {0} network providing easy access to stake, unstake, and withdraw {1} tokens using an {2} compatible wallet."
 msgstr "关于在 {2} 网络上的质押概述，提供通过 {2} 兼容钱包轻松进行质押、取消质押和提取 {1} 代币的功能。"
 
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+layout.ts
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.ts
 msgid "Block Producers"
 msgstr "Block Producers"
 
 #. placeholder {0}: network.chain.name
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+layout.ts
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.ts
 msgid "Validators on the {0} network."
 msgstr "Validators on the {0} network."
 
@@ -5579,11 +5591,11 @@ msgstr "{2} 网络中 {1} 智能合约的 {0} 数据表。"
 
 #: src/lib/components/card/tokenbalance.svelte
 msgid "Used"
-msgstr ""
+msgstr "已用"
 
 #: src/lib/components/card/tokenbalance.svelte
 msgid "WRAM"
-msgstr ""
+msgstr "WRAM"
 
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "MetaMask Snaps"
@@ -5606,6 +5618,7 @@ msgstr "正在加载主题..."
 msgid "Failed to load topics"
 msgstr "加载主题失败"
 
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid "Try Again"
 msgstr "重试"
@@ -5708,6 +5721,7 @@ msgstr "更新中..."
 msgid "Dismiss"
 msgstr "取消"
 
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid "Load More"
 msgstr "加载更多"
@@ -5726,20 +5740,20 @@ msgstr "关于情绪投票"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid "Stake tokens"
-msgstr ""
+msgstr "质押代币"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid ""
 "Sentiment voting allows token holders to express their support or opposition on important\n"
 "community topics. Your vote is weighted by your staked tokens, giving more influence to\n"
 "those with a larger stake in the network."
-msgstr ""
+msgstr "情感投票允许代币持有者就重要的社区话题表达他们的支持或反对。您的投票会根据您质押的代币进行加权，从而使在网络中拥有更大份额的人拥有更大的影响力。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid ""
 "Each topic shows the total participation and the distribution of support versus opposition,\n"
 "helping the community gauge consensus on key issues."
-msgstr ""
+msgstr "每个话题都显示了总参与人数以及支持与反对的分布情况，从而帮助社区衡量对关键问题的共识。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Your Vote"
@@ -5782,6 +5796,7 @@ msgstr "已投票"
 msgid "{0} as <0/> with weight <1/>"
 msgstr "以权重 <1/> <0/>身份{0}"
 
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/sentiment-showcase.svelte
 msgid "View All Topics"
 msgstr "查看所有主题"
@@ -5799,6 +5814,794 @@ msgid ""
 "supported."
 msgstr "主题创建尚不可用。目前，仅支持对现有提案进行投票。"
 
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/sentiment-showcase.svelte
 msgid "Sentiment Voting"
 msgstr "情感投票"
+
+#~ msgid "Active Block Producers"
+#~ msgstr "活跃区块生产者"
+
+#~ msgid "Network Statistics"
+#~ msgstr "网络统计"
+
+#~ msgid "Active Producers"
+#~ msgstr "活跃生产者"
+
+#~ msgid "Total Votes"
+#~ msgstr "总票数"
+
+#~ msgid "Top 21 Threshold"
+#~ msgstr "前21名门槛"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Loading producers..."
+msgstr "正在加载生产者..."
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "No active producers found"
+msgstr "未找到活跃的生产者"
+
+#~ msgid "Website"
+#~ msgstr "网站"
+
+#~ msgid "Link"
+#~ msgstr "链接"
+
+#~ msgid "Loading statistics..."
+#~ msgstr "正在加载统计信息..."
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Vote for Producers"
+msgstr "为生产者投票"
+
+#. placeholder {0}: voteState.selected.size
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Selected {0} of 30 producers"
+msgstr "已选择 {0} 个生产者（共 30 个）"
+
+#~ msgid "Adding votes for:"
+#~ msgstr "正在为以下生产者增加投票："
+
+#~ msgid "Removing votes from:"
+#~ msgstr "正在移除以下生产者的投票："
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Submitting..."
+msgstr "正在提交..."
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Submit Vote"
+msgstr "提交投票"
+
+#~ msgid "Vote Again"
+#~ msgstr "再次投票"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Done"
+msgstr "完成"
+
+#~ msgid "Block producers validate transactions and create new blocks on the network. Your vote weight is determined by the amount of tokens you have staked. You can vote for up to 30 producers, and your voting power is split equally among all your selected producers."
+#~ msgstr "区块生产者验证交易并在网络上创建新的区块。您的投票权重由您质押的代币数量决定。您可以投票给最多 30 个生产者，并且您的投票权在所有选定的生产者之间平均分配。"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "How Voting Works"
+msgstr "投票机制"
+
+#~ msgid ""
+#~ "Block producers validate transactions and create new blocks on the network. Your\n"
+#~ "vote weight is determined by the amount of tokens you have staked. You can vote for\n"
+#~ "up to 30 producers, and your voting power is split equally among all your selected\n"
+#~ "producers."
+#~ msgstr "区块生产者验证交易并在网络上创建新的区块。您的投票权重取决于您抵押的代币数量。您最多可以投票给 30 个生产者，您的投票权将在您选择的所有生产者之间平均分配。"
+
+#~ msgid "Your Voting Power"
+#~ msgstr "您的投票权"
+
+#~ msgid "Account: <0/>"
+#~ msgstr "账户: <0/>"
+
+#~ msgid "Vote Weight: <0/>"
+#~ msgstr "投票权重: <0/>"
+
+#~ msgid "Currently voting for {0} of 30 producers"
+#~ msgstr "当前已投票给 30 个生产者中的 {0} 个"
+
+#~ msgid "Log in to see your voting power and cast votes."
+#~ msgstr "登录以查看您的投票权并进行投票。```"
+
+#~ msgid ""
+#~ "Block producers validate transactions and create new blocks on the network. Your\n"
+#~ "vote weight is determined by the amount of tokens you have staked. You can vote\n"
+#~ "for up to 30 producers, and your voting power is split equally among all your\n"
+#~ "selected producers."
+#~ msgstr "区块生产者验证交易并在网络上创建新区块。您的投票权重取决于您质押的代币数量。您最多可以投票给 30 个生产者，并且您的投票权在所有选定的生产者之间平均分配。"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Visit producer website"
+msgstr "访问生产者网站"
+
+#~ msgid "What are Block Producers?"
+#~ msgstr "什么是区块生产者？"
+
+#~ msgid ""
+#~ "Block producers are entities that validate transactions and create new blocks on the\n"
+#~ "network. Only the top 21 block producers actively produce blocks, with several\n"
+#~ "standby producers ready to step in if needed."
+#~ msgstr "区块生产者是验证交易并在网络上创建新区块的实体。只有前21名的区块生产者积极生产区块，还有一些备用生产者随时准备在需要时介入。"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Why Should You Vote?"
+msgstr "你为什么要投票？"
+
+#~ msgid ""
+#~ "Voting helps secure the network and supports teams that contribute value to the\n"
+#~ "ecosystem. An active, well-governed blockchain is more likely to attract users and\n"
+#~ "drive up token demand, benefiting all token holders."
+#~ msgstr "投票有助于保护网络安全，并支持为生态系统贡献价值的团队。一个活跃、治理良好的区块链更有可能吸引用户并提高代币需求，从而使所有代币持有者受益。"
+
+#~ msgid ""
+#~ "• <0>Vote with staked tokens:</0> Your vote weight equals the amount of tokens\n"
+#~ "you have staked"
+#~ msgstr "• <0>使用抵押的代币投票：</0> 您的投票权重等于您抵押的代币数量"
+
+#~ msgid "• <0>Up to 30 producers:</0> Select as many as 30 block producers"
+#~ msgstr "• <0>最多 30 个生产者：</0> 最多选择 30 个区块生产者"
+
+#~ msgid ""
+#~ "• <0>Equal distribution:</0> Your voting power is split equally among all selected\n"
+#~ "producers"
+#~ msgstr "• <0>平均分配：</0> 您的投票权在所有选定的生产者之间平均分配"
+
+#~ msgid "• <0>Update anytime:</0> You can change your votes whenever you want, at no cost"
+#~ msgstr "• <0>随时更新：</0> 您可以随时更改您的投票，无需任何费用"
+
+#~ msgid ""
+#~ "Block producers are entities that validate transactions and create new blocks on\n"
+#~ "the network. Only the top 21 block producers actively produce blocks, with several\n"
+#~ "standby producers ready to step in if needed."
+#~ msgstr "区块生产者是验证交易并在网络上创建新区块的实体。只有前 21 名区块生产者积极生产区块，还有一些备用生产者准备在需要时介入。"
+
+#~ msgid ""
+#~ "• <0>Vote with staked tokens:</0> Your vote weight equals the amount of\n"
+#~ "tokens you have staked"
+#~ msgstr "• <0>使用已抵押的代币投票：</0> 您的投票权重等于您已抵押的代币数量"
+
+#~ msgid ""
+#~ "• <0>Equal distribution:</0> Your voting power is split equally among all\n"
+#~ "selected producers"
+#~ msgstr "• <0>平均分配：</0> 您的投票权在所有选定的生产者之间平均分配"
+
+#~ msgid ""
+#~ "• <0>Update anytime:</0> You can change your votes whenever you want, at\n"
+#~ "no cost"
+#~ msgstr "• <0>随时更新：</0> 您可以随时更改您的投票，无需任何费用"
+
+#~ msgid ""
+#~ "Block producers validate transactions and create new blocks on the network. Only the\n"
+#~ "top 21 block producers actively produce blocks, with several standby producers ready\n"
+#~ "to step in if needed. Voting helps secure the network and supports teams that\n"
+#~ "contribute value to the ecosystem. An active, well-governed blockchain is more\n"
+#~ "likely to attract users and drive up token demand, benefiting all token holders."
+#~ msgstr "区块生产者验证交易并在网络上创建新区块。只有前 21 名区块生产者积极生产区块，还有一些备用生产者随时准备在需要时介入。投票有助于保护网络安全，并支持为生态系统贡献价值的团队。一个活跃且治理良好的区块链更有可能吸引用户并提高代币需求，从而使所有代币持有者受益。"
+
+#~ msgid "• <0>Update anytime:</0> You can change your votes whenever you want"
+#~ msgstr "• <0>随时更新：</0>您可以随时更改您的投票```"
+
+#~ msgid ""
+#~ "Block producers validate transactions and create new blocks on the network. Only\n"
+#~ "the top 21 block producers actively produce blocks, with several standby producers\n"
+#~ "ready to step in if needed. Voting helps secure the network and supports teams\n"
+#~ "that contribute value to the ecosystem. An active, well-governed blockchain is\n"
+#~ "more likely to attract users and drive up token demand, benefiting all token\n"
+#~ "holders."
+#~ msgstr ""
+#~ "区块生产者验证交易并在网络上创建新区块。只有前 21 名区块生产者积极生产区块，\n"
+#~ "如果需要，还有几个备用生产者随时准备介入。投票有助于保护网络并支持为生态系统贡献价值的团队。\n"
+#~ "一个活跃、治理良好的区块链更有可能吸引用户并提高代币需求，从而使所有代币持有者受益。"
+
+#~ msgid "My Votes"
+#~ msgstr "我的投票"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Why Vote?"
+msgstr "为什么要投票？"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "How It Works"
+msgstr "如何运作"
+
+#~ msgid "Current Votes ({0}/30)"
+#~ msgstr "当前投票 ({0}/30)"
+
+#~ msgid "Remove"
+#~ msgstr "移除"
+
+#~ msgid ""
+#~ "You are not currently voting for any block producers. Select producers from the\n"
+#~ "table below to cast your vote."
+#~ msgstr "您目前没有投票给任何区块生产者。请从下表中选择生产者进行投票。"
+
+#~ msgid ""
+#~ "Block producers validate transactions and create new blocks on the network. Only\n"
+#~ "the top 21 block producers actively produce blocks, with several standby\n"
+#~ "producers ready to step in if needed. Voting helps secure the network and\n"
+#~ "supports teams that contribute value to the ecosystem. An active, well-governed\n"
+#~ "blockchain is more likely to attract users and drive up token demand, benefiting\n"
+#~ "all token holders."
+#~ msgstr "区块生产者验证交易并在网络上创建新区块。只有前 21 名区块生产者积极生产区块，还有一些备用生产者随时准备介入。投票有助于保护网络安全，并支持为生态系统贡献价值的团队。一个活跃、治理良好的区块链更有可能吸引用户并提高代币需求，从而使所有代币持有者受益。"
+
+#~ msgid ""
+#~ "<0>Vote with staked tokens:</0> Your vote weight equals the amount of\n"
+#~ "tokens you have staked"
+#~ msgstr "<0>使用质押代币投票：</0> 您的投票权重等于您质押的代币数量"
+
+#~ msgid "<0>Up to 30 producers:</0> Select as many as 30 block producers"
+#~ msgstr "<0>最多 30 个生产者：</0> 最多选择 30 个区块生产者"
+
+#~ msgid "<0>Update anytime:</0> You can change your votes whenever you want"
+#~ msgstr "<0>随时更新：</0> 您可以随时更改您的投票```"
+
+#~ msgid "Remove vote"
+#~ msgstr "移除投票"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Will vote for:"
+msgstr "将会投票给："
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Will remove vote from:"
+msgstr "将会移除对以下对象的投票："
+
+#~ msgid ""
+#~ "You are not currently voting for any block producers. Select producers from the table\n"
+#~ "below to cast your vote."
+#~ msgstr "您目前没有投票给任何区块生产者。 从下表中选择生产者来投您的票。"
+
+#~ msgid ""
+#~ "Block producers validate transactions and create new blocks on the network. Only the top\n"
+#~ "21 block producers actively produce blocks, with several standby producers ready to step\n"
+#~ "in if needed. Voting helps secure the network and supports teams that contribute value\n"
+#~ "to the ecosystem. An active, well-governed blockchain is more likely to attract users and\n"
+#~ "drive up token demand, benefiting all token holders."
+#~ msgstr "区块生产者验证交易并在网络上创建新区块。 只有前21名区块生产者会积极生产区块，如果需要，会有几个备用生产者准备介入。 投票有助于保护网络，并支持为生态系统贡献价值的团队。 一个活跃、管理良好的区块链更有可能吸引用户并提高代币需求，从而使所有代币持有者受益。"
+
+#~ msgid ""
+#~ "<0>Vote with staked tokens:</0> Your vote weight equals the amount of tokens\n"
+#~ "you have staked"
+#~ msgstr "<0>使用质押代币投票：</0> 您的投票权重等于您质押的代币数量```"
+
+#~ msgid ""
+#~ "Block producers validate transactions and create new blocks on the network. Only the\n"
+#~ "top 21 block producers actively produce blocks, with several standby producers ready\n"
+#~ "to step in if needed. Voting helps secure the network and supports teams that\n"
+#~ "contribute value to the ecosystem. An active, well-governed blockchain is more likely\n"
+#~ "to attract users and drive up token demand, benefiting all token holders."
+#~ msgstr "区块生产者验证交易并在网络上创建新区块。只有前 21 名区块生产者积极生产区块，还有一些备用生产者随时准备在需要时介入。投票有助于保护网络并支持为生态系统贡献价值的团队。一个活跃且治理良好的区块链更有可能吸引用户并提高代币需求，从而使所有代币持有者受益。"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Search producers..."
+msgstr "搜索生产者..."
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "No producers match your search"
+msgstr "没有找到与搜索匹配的生产者"
+
+#~ msgid ""
+#~ "Your voting power is determined by the amount of tokens you have staked. Each vote\n"
+#~ "you cast uses your full voting weight."
+#~ msgstr "您的投票权由您质押的代币数量决定。您投出的每一票都使用您的全部投票权重。"
+
+#~ msgid "Vote Weight"
+#~ msgstr "投票权重"
+
+#~ msgid "Current Votes"
+#~ msgstr "当前投票"
+
+#~ msgid "{0} of 30 producers"
+#~ msgstr "30 个生产者中的 {0} 个"
+
+#~ msgid ""
+#~ "Block producers validate transactions and create new blocks on the network. Only the\n"
+#~ "top 21 block producers actively produce blocks, with several standby producers ready\n"
+#~ "to step in if needed."
+#~ msgstr "区块生产者验证交易并在网络上创建新区块。只有排名前 21 位的区块生产者积极生产区块，还有几个备用生产者准备在需要时介入。"
+
+#~ msgid "Your Impact"
+#~ msgstr "您的影响"
+
+#~ msgid ""
+#~ "<0>Secure the network</0> by electing trustworthy\n"
+#~ "block producers"
+#~ msgstr "<0>通过选举值得信赖的区块生产者来保护网络</0>"
+
+#~ msgid ""
+#~ "<0>Support valuable teams</0> that contribute tools\n"
+#~ "and services to the ecosystem"
+#~ msgstr "<0>支持为生态系统贡献工具和服务的有价值的团队</0>"
+
+#~ msgid ""
+#~ "<0>Drive token value</0> through good governance\n"
+#~ "that attracts users and developers"
+#~ msgstr "<0>通过吸引用户和开发者的良好治理来提高代币价值</0>"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid ""
+"Voting for block producers is simple and flexible. Here's everything you need to\n"
+"know."
+msgstr "投票给区块生产者既简单又灵活。这是您需要知道的一切。"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Vote with Staked Tokens"
+msgstr "使用质押代币投票"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid ""
+"Your vote weight equals the amount of tokens you have staked. More stake = more\n"
+"voting power."
+msgstr "您的投票权重等于您质押的代币数量。更多质押 = 更多投票权。"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Up to 30 Producers"
+msgstr "最多 30 个生产者"
+
+#~ msgid ""
+#~ "Select as many as 30 block producers. Your voting power applies to each one you\n"
+#~ "select."
+#~ msgstr "最多选择 30 个区块生产者。您的投票权适用于您选择的每一个生产者。"
+
+#~ msgid "Update Anytime"
+#~ msgstr "随时更新"
+
+#~ msgid ""
+#~ "Change your votes whenever you want. Your votes remain active until you modify\n"
+#~ "them."
+#~ msgstr "随时更改您的投票。您的投票将保持有效，直到您修改它们。"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Top 21 Produce Blocks"
+msgstr "前 21 名生产区块"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Only the top 21 voted producers actively create blocks. Others serve as standbys."
+msgstr "只有投票排名前 21 位的生产者积极创建区块。其他生产者充当备用。```"
+
+#~ msgid "Voting Power"
+#~ msgstr "投票权"
+
+#~ msgid "Available Balance"
+#~ msgstr "可用余额"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Liquid Balance"
+msgstr "流动余额"
+
+#~ msgid "Voting for block producers is simple and flexible. Here's everything you need to know."
+#~ msgstr "投票给区块生产者既简单又灵活。以下是您需要了解的所有信息。"
+
+#~ msgid "Change your votes whenever you want. Your votes remain active until you modify them."
+#~ msgstr "随时更改您的投票。您的投票将保持有效，直到您修改它们为止。"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid ""
+"This network uses <0>Delegated Proof of Stake (DPoS)</0>, a consensus mechanism where token holders elect block producers to validate\n"
+"transactions and secure the network. Your vote directly shapes who runs the\n"
+"infrastructure you depend on."
+msgstr "此网络使用<0>委托权益证明（DPoS）</0>，这是一种共识机制，代币持有者选举区块生产者来验证交易并保护网络。您的投票直接影响运行您所依赖的基础设施的人。"
+
+#~ msgid "What Block Producers Do"
+#~ msgstr "区块生产者做什么"
+
+#~ msgid ""
+#~ "<0>Validate transactions</0> — They verify and\n"
+#~ "process every transaction on the network, preventing double-spending and fraud"
+#~ msgstr "<0>验证交易</0> — 他们验证和处理网络上的每笔交易，防止双重支付和欺诈"
+
+#~ msgid ""
+#~ "<0>Produce blocks</0> — Every 0.5 seconds,\n"
+#~ "producers bundle transactions into blocks and add them to the blockchain"
+#~ msgstr "<0>生成区块</0> — 每隔 0.5 秒，生产者将交易捆绑成区块并将其添加到区块链"
+
+#~ msgid ""
+#~ "<0>Maintain infrastructure</0> — They provide\n"
+#~ "servers, bandwidth, and storage that keep the network running 24/7"
+#~ msgstr "<0>维护基础设施</0> — 他们提供服务器、带宽和存储，以保持网络 24/7 全天候运行"
+
+#~ msgid ""
+#~ "<0>Govern the network</0> — Producers vote on\n"
+#~ "protocol upgrades and critical decisions that affect the blockchain's future"
+#~ msgstr "<0>治理网络</0> — 生产者对协议升级和影响区块链未来的关键决策进行投票"
+
+#~ msgid ""
+#~ "<0>Secure the network</0> — Electing competent,\n"
+#~ "trustworthy producers protects against attacks and downtime"
+#~ msgstr "<0>保护网络</0> — 选举有能力、值得信赖的生产者可以防止攻击和停机"
+
+#~ msgid ""
+#~ "<0>Promote decentralization</0> — Diverse voting\n"
+#~ "prevents any single entity from controlling the network"
+#~ msgstr "<0>促进去中心化</0> — 多样化的投票可以防止任何单个实体控制网络"
+
+#~ msgid ""
+#~ "<0>Hold producers accountable</0> — Active voting\n"
+#~ "encourages producers to perform well or risk losing their position"
+#~ msgstr "<0>追究生产者责任</0> — 积极的投票鼓励生产者表现良好，否则可能会失去他们的地位"
+
+#~ msgid ""
+#~ "<0>Support ecosystem growth</0> — Many producers\n"
+#~ "build tools, run APIs, and contribute to the community"
+#~ msgstr "<0>支持生态系统增长</0> — 许多生产者构建工具、运行 API 并为社区做出贡献```"
+
+#~ msgid ""
+#~ "Your vote weight equals the amount of tokens you have staked. More stake = more\n"
+#~ "voting power. Unstaked tokens cannot be used to vote."
+#~ msgstr "您的投票权重等于您已抵押的代币数量。 抵押越多 = 投票权越大。 未抵押的代币不能用于投票。"
+
+#~ msgid ""
+#~ "Select as many as 30 block producers. Your full voting power applies to each one you\n"
+#~ "select—votes are not split between them."
+#~ msgstr "最多选择 30 个区块生产者。 您的全部投票权适用于您选择的每一个区块生产者——选票不会在他们之间分配。"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Votes Decay Over Time"
+msgstr "选票随时间衰减"
+
+#~ msgid ""
+#~ "Vote weight decays with a half-life of about one year. Re-vote periodically to\n"
+#~ "maintain your full influence on producer rankings."
+#~ msgstr "投票权重会衰减，半衰期约为一年。 定期重新投票以保持您对生产者排名的完全影响力。"
+
+#~ msgid ""
+#~ "Only the top 21 voted producers actively create blocks. Others serve as standbys,\n"
+#~ "ready to step in if an active producer fails."
+#~ msgstr "只有排名前 21 位的投票生产者才会积极创建区块。 其他的则作为候补，准备在活跃生产者失败时介入。"
+
+#~ msgid "Choosing Who to Vote For"
+#~ msgstr "选择投票对象"
+
+#~ msgid ""
+#~ "Not all producers are equal. Consider these factors when deciding who deserves your\n"
+#~ "vote:"
+#~ msgstr "并非所有生产者都是一样的。 在决定谁值得您投票时，请考虑以下因素："
+
+#~ msgid ""
+#~ "<0>Reliability & Performance</0> — Check their\n"
+#~ "track record. Do they miss blocks? How much uptime do they maintain?"
+#~ msgstr "<0>可靠性与性能</0> — 检查他们的往绩。 他们会错过区块吗？ 他们维持多少运行时间？"
+
+#~ msgid ""
+#~ "<0>Transparency</0> — Do they disclose their team,\n"
+#~ "infrastructure, and how they use block rewards?"
+#~ msgstr "<0>透明度</0> — 他们是否公开他们的团队、基础设施以及他们如何使用区块奖励？"
+
+#~ msgid ""
+#~ "<0>Community Contribution</0> — Do they build\n"
+#~ "tools, provide public APIs, create educational content, or support developers?"
+#~ msgstr "<0>社区贡献</0> — 他们是否构建工具、提供公共 API、创建教育内容或支持开发人员？"
+
+#~ msgid ""
+#~ "<0>Technical Capability</0> — Do they run\n"
+#~ "enterprise-grade infrastructure with proper security and redundancy?"
+#~ msgstr "<0>技术能力</0> — 他们是否运行具有适当安全性和冗余的企业级基础设施？"
+
+#~ msgid ""
+#~ "<0>Geographic Distribution</0> — Voting for\n"
+#~ "producers in different regions improves network resilience"
+#~ msgstr "<0>地理分布</0> — 投票给不同地区的生产者可以提高网络弹性"
+
+#~ msgid ""
+#~ "Visit producer websites (click the external link icon) to learn about their operations\n"
+#~ "and contributions before voting."
+#~ msgstr "在投票之前，访问生产者网站（点击外部链接图标）以了解他们的运营和贡献。```"
+
+#~ msgid ""
+#~ "<0>Validate transactions</0> — They verify and process\n"
+#~ "every transaction on the network, preventing double-spending and fraud"
+#~ msgstr "<0>验证交易</0> — 他们验证并处理网络上的每笔交易，防止双重支付和欺诈"
+
+#~ msgid ""
+#~ "<0>Produce blocks</0> — Every 0.5 seconds, producers\n"
+#~ "bundle transactions into blocks and add them to the blockchain"
+#~ msgstr "<0>生成区块</0> — 生产者每 0.5 秒将交易捆绑成区块并添加到区块链中"
+
+#~ msgid ""
+#~ "<0>Maintain infrastructure</0> — They provide servers,\n"
+#~ "bandwidth, and storage that keep the network running 24/7"
+#~ msgstr "<0>维护基础设施</0> — 他们提供服务器、带宽和存储，以保持网络 24/7 全天候运行"
+
+#~ msgid ""
+#~ "<0>Govern the network</0> — Producers vote on protocol\n"
+#~ "upgrades and critical decisions that affect the blockchain's future"
+#~ msgstr "<0>管理网络</0> — 生产者对协议升级和影响区块链未来的关键决策进行投票"
+
+#~ msgid ""
+#~ "<0>Secure the network</0> — Electing competent, trustworthy\n"
+#~ "producers protects against attacks and downtime"
+#~ msgstr "<0>保护网络安全</0> — 选举有能力、值得信赖的生产者可以防止攻击和停机"
+
+#~ msgid ""
+#~ "<0>Reliability & Performance</0> — Check their track\n"
+#~ "record. Do they miss blocks? How much uptime do they maintain?"
+#~ msgstr "<0>可靠性和性能</0> — 检查他们的记录。他们是否会错过区块？他们保持多少正常运行时间？"
+
+#~ msgid ""
+#~ "<0>Community Contribution</0> — Do they build tools,\n"
+#~ "provide public APIs, create educational content, or support developers?"
+#~ msgstr "<0>社区贡献</0> — 他们是否构建工具、提供公共 API、创建教育内容或支持开发人员？"
+
+#~ msgid ""
+#~ "<0>Technical Capability</0> — Do they run enterprise-grade\n"
+#~ "infrastructure with proper security and redundancy?"
+#~ msgstr "<0>技术能力</0> — 他们是否运行具有适当安全性和冗余的企业级基础设施？"
+
+#~ msgid ""
+#~ "<0>Geographic Distribution</0> — Voting for producers\n"
+#~ "in different regions improves network resilience"
+#~ msgstr "<0>地理分布</0> — 投票支持不同地区的生产者可以提高网络弹性```"
+
+#~ msgid ""
+#~ "<0>Validate transactions</0> — They verify and process\n"
+#~ "every transaction on the network"
+#~ msgstr "<0>验证交易</0> — 他们验证和处理网络上的每一笔交易"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Validate Transactions"
+msgstr "验证交易"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "They verify and process every transaction on the network"
+msgstr "他们验证并处理网络上的每笔交易"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Produce Blocks"
+msgstr "生成区块"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Every 0.5 seconds, producers bundle transactions into blocks"
+msgstr "每隔 0.5 秒，生产者将交易捆绑成区块"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Maintain Infrastructure"
+msgstr "维护基础设施"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "They provide servers, bandwidth, and storage that keep the network running 24/7"
+msgstr "他们提供服务器、带宽和存储，以保持网络 24/7 全天候运行"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Govern the Network"
+msgstr "治理网络"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Producers vote on protocol upgrades and critical decisions"
+msgstr "生产者对协议升级和关键决策进行投票"
+
+#~ msgid "Secure the network"
+#~ msgstr "保护网络安全"
+
+#~ msgid "Electing competent producers protects against attacks"
+#~ msgstr "选举有能力的生产者可以防止攻击"
+
+#~ msgid "Promote decentralization"
+#~ msgstr "促进去中心化"
+
+#~ msgid "Diverse voting prevents centralized control"
+#~ msgstr "多样化的投票可以防止中心化控制"
+
+#~ msgid "Hold producers accountable"
+#~ msgstr "追究生产者的责任"
+
+#~ msgid "Active voting encourages strong performance"
+#~ msgstr "积极投票可以鼓励更强的表现"
+
+#~ msgid "Support ecosystem growth"
+#~ msgstr "支持生态系统增长"
+
+#~ msgid "Many producers build tools and contribute to the community"
+#~ msgstr "许多生产者构建工具并为社区做出贡献```"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Select as many as 30 block producers. Your full voting power applies to each one."
+msgstr "选择最多 30 个区块生产者。您的全部投票权适用于每一个。"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Vote weight decays with a half-life of about one year. Re-vote periodically."
+msgstr "投票权重会衰减，半衰期约为一年。请定期重新投票。"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Refresh Vote"
+msgstr "刷新投票"
+
+#~ msgid "Vote Status"
+#~ msgstr "投票状态"
+
+#~ msgid "Last Voted"
+#~ msgstr "上次投票"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Vote Decay"
+msgstr "投票衰减"
+
+#~ msgid "Effective Weight"
+#~ msgstr "有效权重"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "My Voting Power"
+msgstr "我的投票权"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Your voting power is determined by the amount of tokens you have staked."
+msgstr "您的投票权取决于您质押的代币数量。"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Staked Balance"
+msgstr "已质押余额"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Vote Age"
+msgstr "投票时长"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Not voting"
+msgstr "未投票"
+
+#~ msgid "Stake tokens to gain voting power and help secure the network."
+#~ msgstr "质押代币以获得投票权并帮助保护网络安全。"
+
+#~ msgid "Increase your voting power"
+#~ msgstr "增加您的投票權"
+
+#~ msgid "Stake tokens to participate in producer voting and help secure the network."
+#~ msgstr "質押代幣以參與生產者投票並幫助保護網絡安全。"
+
+#~ msgid "Login to view your voting power"
+#~ msgstr "登錄以查看您的投票權"
+
+#~ msgid "Connect your wallet to see your staked balance and vote for block producers."
+#~ msgstr "連接您的錢包以查看您的質押餘額並投票選出區塊生產者。"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Connect to view your voting power"
+msgstr "连接以查看您的投票权"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Login to see your staked balance, vote age, and help secure the network."
+msgstr "登录以查看您的质押余额、投票年龄，并帮助保护网络安全。"
+
+#: src/lib/components/navigation/sidemenu.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.ts
+msgid "Governance"
+msgstr "治理"
+
+#. placeholder {0}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.ts
+msgid "Participate in network governance on {0}"
+msgstr "参与 {0} 上的网络治理"
+
+#. placeholder {0}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.ts
+msgid "Vote on block producers, sentiment topics, and funding proposals on the {0} network."
+msgstr "在 {0} 网络上投票选举区块生产者、情绪主题和资金提案。"
+
+#. placeholder {0}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
+msgid ""
+"Vote for the validators that secure the {0} network. Your voting power is\n"
+"weighted by your staked tokens, giving more influence to those with a larger stake in the network's\n"
+"security."
+msgstr "投票给保护 {0} 网络的验证者。您的投票权会根据您抵押的代币数量进行加权，从而使在网络安全中拥有更大份额的人拥有更大的影响力。"
+
+#. placeholder {0}: producers.statistics.totalActive
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
+msgid "{0} active producers"
+msgstr "{0} 个活跃的生产者"
+
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
+msgid "View All Producers"
+msgstr "查看所有生产者"
+
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
+msgid ""
+"Express your support or opposition on key network topics. Your vote is weighted by your\n"
+"staked tokens, helping the community gauge consensus on important issues."
+msgstr "表达您对关键网络主题的支持或反对。您的投票权会根据您抵押的代币数量进行加权，从而帮助社区评估对重要问题的共识。"
+
+#. placeholder {0}: data.sentimentState.topics.length
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
+msgid "{0} active topics"
+msgstr "{0} 个活跃的主题"
+
+#~ msgid "Build Fund"
+#~ msgstr "建设基金"
+
+#~ msgid ""
+#~ "Vote on how network treasury funds are allocated to support ecosystem development,\n"
+#~ "infrastructure, and community initiatives."
+#~ msgstr "投票决定如何分配网络资金，以支持生态系统发展、基础设施和社区倡议。"
+
+#~ msgid "Coming Soon"
+#~ msgstr "即将推出"
+
+#~ msgid "Build fund proposals will appear here"
+#~ msgstr "建设基金提案将在此处显示```"
+
+#~ msgid ""
+#~ "Vote for the validators that secure the {0} network. Your voting power is\n"
+#~ "weighted by your staked tokens, giving more influence to those with a larger stake in the\n"
+#~ "network's security."
+#~ msgstr "投票给保护 {0} 网络的验证者。您的投票权由您质押的代币数量加权，从而使在网络安全中拥有更大份额的人拥有更大的影响力。"
+
+#~ msgid "Multi-Signature Proposals"
+#~ msgstr "多重签名提案"
+
+#~ msgid ""
+#~ "Multi-signature proposals require approval from multiple parties before execution. These\n"
+#~ "are used for important network decisions that need collective agreement from block\n"
+#~ "producers or other stakeholders."
+#~ msgstr "多重签名提案需要多个方面的批准才能执行。这些提案用于重要的网络决策，需要区块生产者或其他利益相关者的集体同意。"
+
+#~ msgid "View MSIGs"
+#~ msgstr "查看多重签名"
+
+#~ msgid "Featured proposals will appear here"
+#~ msgstr "精选提案将在此处显示"
+
+#: src/routes/[[locale]]/[network]/(explorer)/+layout.svelte
+msgid "Top 21 Block Producer"
+msgstr "前 21 名区块生产者"
+
+#~ msgid "Create new system account"
+#~ msgstr "创建新的系统账户"
+
+#~ msgid "Vaulta transition stage 1"
+#~ msgstr "Vaulta 过渡阶段 1"
+
+#~ msgid "Update Vaulta Foundation permissions"
+#~ msgstr "更新 Vaulta 基金会权限"
+
+#~ msgid "{0} active proposals"
+#~ msgstr "{0} 个活跃提案"
+
+#~ msgid "View All Proposals"
+#~ msgstr "查看所有提案"
+
+#~ msgid "by"
+#~ msgstr "由"
+
+#~ msgid "Approvals"
+#~ msgstr "赞成"
+
+#~ msgid "{0} of {1} approvals"
+#~ msgstr "{0} / {1} 票赞成"
+
+#~ msgid "by <0/>"
+#~ msgstr "由 <0/>"
+
+#~ msgid "Proposed by"
+#~ msgstr "由...提议"
+
+#~ msgid "Approval Progress"
+#~ msgstr "批准进度"
+
+#~ msgid "{0} of {1} <0>({0}%)</0>"
+#~ msgstr "{0}/{1} <0>({0}%)</0>"
+
+#~ msgid "Approved by"
+#~ msgstr "由...批准"
+
+#~ msgid "{0} more needed"
+#~ msgstr "还需要{0}个"
+
+#~ msgid "{0} action{1}"
+#~ msgstr "{0} 个操作{1}"
+
+#~ msgid "Expires {0}"
+#~ msgstr "将于 {0} 过期"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Loading your votes..."
+msgstr "正在加载您的投票..."

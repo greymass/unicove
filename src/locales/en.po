@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2025-12-01T18:39:21.280Z\n"
+"PO-Revision-Date: 2025-12-04T20:47:38.523Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -81,6 +81,7 @@ msgstr "API Reference"
 #: src/lib/components/transact/summary.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Status"
 msgstr "Status"
 
@@ -372,6 +373,7 @@ msgid "Debug State"
 msgstr "Debug State"
 
 #: src/lib/components/navigation/sidemenu.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "My Account"
 msgstr "My Account"
 
@@ -505,8 +507,8 @@ msgstr "<0/> Memo: {0}"
 msgid "+ {0} ms (CPU)"
 msgstr "+ {0} ms (CPU)"
 
-#. placeholder {0}: data.powup_cpu
 #. placeholder {0}: data.powup_net
+#. placeholder {0}: data.powup_cpu
 #. placeholder {0}: account.weight
 #. placeholder {0}: key.weight
 #. placeholder {0}: account.weight
@@ -795,8 +797,8 @@ msgstr "Details"
 msgid "Network Fees"
 msgstr "Network Fees"
 
-#. placeholder {0}: data.network.chain.systemToken?.symbol.code || ''
 #. placeholder {0}: market.network.currency.symbol.code
+#. placeholder {0}: data.network.chain.systemToken?.symbol.code || ''
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 msgid "Market Cap ({0})"
@@ -1200,6 +1202,7 @@ msgstr "Choose A Wallet Type"
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/prompt/[payload]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/prompt/[payload]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
@@ -1719,6 +1722,7 @@ msgstr "Delete"
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/buttons.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/buttons.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Cancel"
 msgstr "Cancel"
 
@@ -2648,6 +2652,7 @@ msgstr "Self Vote Weight"
 msgid "Proxied Weight"
 msgstr "Proxied Weight"
 
+#: src/routes/[[locale]]/[network]/(explorer)/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/votes/+page.svelte
 msgid "Block Producer"
 msgstr "Block Producer"
@@ -3728,6 +3733,7 @@ msgid "Change network"
 msgstr "Change network"
 
 #: src/lib/components/accountswitch.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Connect Wallet"
 msgstr "Connect Wallet"
 
@@ -3834,6 +3840,7 @@ msgstr "Yield"
 
 #: src/lib/components/chart/barchart.svelte
 #: src/lib/components/chart/chart-container.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Today"
 msgstr "Today"
 
@@ -4272,6 +4279,7 @@ msgstr "Actor"
 msgid "Votes"
 msgstr "Votes"
 
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Top 21"
@@ -4370,8 +4378,8 @@ msgstr "One {0} of RAM represents ownership rights over 1000 bytes of the networ
 #. placeholder {1}: quote.name
 #. placeholder {0}: base.name
 #. placeholder {1}: quote.name
-#. placeholder {0}: base.name
-#. placeholder {1}: quote.name
+#. placeholder {0}: data.network.token.name
+#. placeholder {1}: data.network.getRamToken().name
 #. placeholder {0}: String(network.chain.systemToken?.symbol.name)
 #. placeholder {1}: String(ramtoken.name)
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.ts
@@ -5367,12 +5375,14 @@ msgstr "Stake {0} to earn rewards."
 msgid "An overview of staking on the {0} network providing easy access to stake, unstake, and withdraw {1} tokens using an {2} compatible wallet."
 msgstr "An overview of staking on the {0} network providing easy access to stake, unstake, and withdraw {1} tokens using an {2} compatible wallet."
 
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+layout.ts
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.ts
 msgid "Block Producers"
 msgstr "Block Producers"
 
 #. placeholder {0}: network.chain.name
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+layout.ts
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.ts
 msgid "Validators on the {0} network."
 msgstr "Validators on the {0} network."
 
@@ -5756,6 +5766,7 @@ msgstr "Loading topics..."
 msgid "Failed to load topics"
 msgstr "Failed to load topics"
 
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid "Try Again"
 msgstr "Try Again"
@@ -5764,6 +5775,7 @@ msgstr "Try Again"
 msgid "No topics available yet"
 msgstr "No topics available yet"
 
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid "Load More"
 msgstr "Load More"
@@ -5919,6 +5931,7 @@ msgstr "Voted"
 msgid "{0} as <0/> with weight <1/>"
 msgstr "{0} as <0/> with weight <1/>"
 
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/sentiment-showcase.svelte
 msgid "View All Topics"
 msgstr "View All Topics"
@@ -5941,6 +5954,946 @@ msgstr ""
 "Topic creation is not yet available. Currently, only voting on existing proposals is\n"
 "supported."
 
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/sentiment-showcase.svelte
 msgid "Sentiment Voting"
 msgstr "Sentiment Voting"
+
+#~ msgid "Active Block Producers"
+#~ msgstr "Active Block Producers"
+
+#~ msgid "Network Statistics"
+#~ msgstr "Network Statistics"
+
+#~ msgid "Active Producers"
+#~ msgstr "Active Producers"
+
+#~ msgid "Total Votes"
+#~ msgstr "Total Votes"
+
+#~ msgid "Top 21 Threshold"
+#~ msgstr "Top 21 Threshold"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Loading producers..."
+msgstr "Loading producers..."
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "No active producers found"
+msgstr "No active producers found"
+
+#~ msgid "Website"
+#~ msgstr "Website"
+
+#~ msgid "Link"
+#~ msgstr "Link"
+
+#~ msgid "Loading statistics..."
+#~ msgstr "Loading statistics..."
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Vote for Producers"
+msgstr "Vote for Producers"
+
+#. placeholder {0}: voteState.selected.size
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Selected {0} of 30 producers"
+msgstr "Selected {0} of 30 producers"
+
+#~ msgid "Adding votes for:"
+#~ msgstr "Adding votes for:"
+
+#~ msgid "Removing votes from:"
+#~ msgstr "Removing votes from:"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Submitting..."
+msgstr "Submitting..."
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Submit Vote"
+msgstr "Submit Vote"
+
+#~ msgid "Vote Again"
+#~ msgstr "Vote Again"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Done"
+msgstr "Done"
+
+#~ msgid "Block producers validate transactions and create new blocks on the network. Your vote weight is determined by the amount of tokens you have staked. You can vote for up to 30 producers, and your voting power is split equally among all your selected producers."
+#~ msgstr "Block producers validate transactions and create new blocks on the network. Your vote weight is determined by the amount of tokens you have staked. You can vote for up to 30 producers, and your voting power is split equally among all your selected producers."
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "How Voting Works"
+msgstr "How Voting Works"
+
+#~ msgid ""
+#~ "Block producers validate transactions and create new blocks on the network. Your\n"
+#~ "vote weight is determined by the amount of tokens you have staked. You can vote for\n"
+#~ "up to 30 producers, and your voting power is split equally among all your selected\n"
+#~ "producers."
+#~ msgstr ""
+#~ "Block producers validate transactions and create new blocks on the network. Your\n"
+#~ "vote weight is determined by the amount of tokens you have staked. You can vote for\n"
+#~ "up to 30 producers, and your voting power is split equally among all your selected\n"
+#~ "producers."
+
+#~ msgid "Your Voting Power"
+#~ msgstr "Your Voting Power"
+
+#~ msgid "Account: <0/>"
+#~ msgstr "Account: <0/>"
+
+#~ msgid "Vote Weight: <0/>"
+#~ msgstr "Vote Weight: <0/>"
+
+#~ msgid "Currently voting for {0} of 30 producers"
+#~ msgstr "Currently voting for {0} of 30 producers"
+
+#~ msgid "Log in to see your voting power and cast votes."
+#~ msgstr "Log in to see your voting power and cast votes."
+
+#~ msgid ""
+#~ "Block producers validate transactions and create new blocks on the network. Your\n"
+#~ "vote weight is determined by the amount of tokens you have staked. You can vote\n"
+#~ "for up to 30 producers, and your voting power is split equally among all your\n"
+#~ "selected producers."
+#~ msgstr ""
+#~ "Block producers validate transactions and create new blocks on the network. Your\n"
+#~ "vote weight is determined by the amount of tokens you have staked. You can vote\n"
+#~ "for up to 30 producers, and your voting power is split equally among all your\n"
+#~ "selected producers."
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Visit producer website"
+msgstr "Visit producer website"
+
+#~ msgid "What are Block Producers?"
+#~ msgstr "What are Block Producers?"
+
+#~ msgid ""
+#~ "Block producers are entities that validate transactions and create new blocks on the\n"
+#~ "network. Only the top 21 block producers actively produce blocks, with several\n"
+#~ "standby producers ready to step in if needed."
+#~ msgstr ""
+#~ "Block producers are entities that validate transactions and create new blocks on the\n"
+#~ "network. Only the top 21 block producers actively produce blocks, with several\n"
+#~ "standby producers ready to step in if needed."
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Why Should You Vote?"
+msgstr "Why Should You Vote?"
+
+#~ msgid ""
+#~ "Voting helps secure the network and supports teams that contribute value to the\n"
+#~ "ecosystem. An active, well-governed blockchain is more likely to attract users and\n"
+#~ "drive up token demand, benefiting all token holders."
+#~ msgstr ""
+#~ "Voting helps secure the network and supports teams that contribute value to the\n"
+#~ "ecosystem. An active, well-governed blockchain is more likely to attract users and\n"
+#~ "drive up token demand, benefiting all token holders."
+
+#~ msgid ""
+#~ "• <0>Vote with staked tokens:</0> Your vote weight equals the amount of tokens\n"
+#~ "you have staked"
+#~ msgstr ""
+#~ "• <0>Vote with staked tokens:</0> Your vote weight equals the amount of tokens\n"
+#~ "you have staked"
+
+#~ msgid "• <0>Up to 30 producers:</0> Select as many as 30 block producers"
+#~ msgstr "• <0>Up to 30 producers:</0> Select as many as 30 block producers"
+
+#~ msgid ""
+#~ "• <0>Equal distribution:</0> Your voting power is split equally among all selected\n"
+#~ "producers"
+#~ msgstr ""
+#~ "• <0>Equal distribution:</0> Your voting power is split equally among all selected\n"
+#~ "producers"
+
+#~ msgid "• <0>Update anytime:</0> You can change your votes whenever you want, at no cost"
+#~ msgstr "• <0>Update anytime:</0> You can change your votes whenever you want, at no cost"
+
+#~ msgid ""
+#~ "Block producers are entities that validate transactions and create new blocks on\n"
+#~ "the network. Only the top 21 block producers actively produce blocks, with several\n"
+#~ "standby producers ready to step in if needed."
+#~ msgstr ""
+#~ "Block producers are entities that validate transactions and create new blocks on\n"
+#~ "the network. Only the top 21 block producers actively produce blocks, with several\n"
+#~ "standby producers ready to step in if needed."
+
+#~ msgid ""
+#~ "• <0>Vote with staked tokens:</0> Your vote weight equals the amount of\n"
+#~ "tokens you have staked"
+#~ msgstr ""
+#~ "• <0>Vote with staked tokens:</0> Your vote weight equals the amount of\n"
+#~ "tokens you have staked"
+
+#~ msgid ""
+#~ "• <0>Equal distribution:</0> Your voting power is split equally among all\n"
+#~ "selected producers"
+#~ msgstr ""
+#~ "• <0>Equal distribution:</0> Your voting power is split equally among all\n"
+#~ "selected producers"
+
+#~ msgid ""
+#~ "• <0>Update anytime:</0> You can change your votes whenever you want, at\n"
+#~ "no cost"
+#~ msgstr ""
+#~ "• <0>Update anytime:</0> You can change your votes whenever you want, at\n"
+#~ "no cost"
+
+#~ msgid ""
+#~ "Block producers validate transactions and create new blocks on the network. Only the\n"
+#~ "top 21 block producers actively produce blocks, with several standby producers ready\n"
+#~ "to step in if needed. Voting helps secure the network and supports teams that\n"
+#~ "contribute value to the ecosystem. An active, well-governed blockchain is more\n"
+#~ "likely to attract users and drive up token demand, benefiting all token holders."
+#~ msgstr ""
+#~ "Block producers validate transactions and create new blocks on the network. Only the\n"
+#~ "top 21 block producers actively produce blocks, with several standby producers ready\n"
+#~ "to step in if needed. Voting helps secure the network and supports teams that\n"
+#~ "contribute value to the ecosystem. An active, well-governed blockchain is more\n"
+#~ "likely to attract users and drive up token demand, benefiting all token holders."
+
+#~ msgid "• <0>Update anytime:</0> You can change your votes whenever you want"
+#~ msgstr "• <0>Update anytime:</0> You can change your votes whenever you want"
+
+#~ msgid ""
+#~ "Block producers validate transactions and create new blocks on the network. Only\n"
+#~ "the top 21 block producers actively produce blocks, with several standby producers\n"
+#~ "ready to step in if needed. Voting helps secure the network and supports teams\n"
+#~ "that contribute value to the ecosystem. An active, well-governed blockchain is\n"
+#~ "more likely to attract users and drive up token demand, benefiting all token\n"
+#~ "holders."
+#~ msgstr ""
+#~ "Block producers validate transactions and create new blocks on the network. Only\n"
+#~ "the top 21 block producers actively produce blocks, with several standby producers\n"
+#~ "ready to step in if needed. Voting helps secure the network and supports teams\n"
+#~ "that contribute value to the ecosystem. An active, well-governed blockchain is\n"
+#~ "more likely to attract users and drive up token demand, benefiting all token\n"
+#~ "holders."
+
+#~ msgid "My Votes"
+#~ msgstr "My Votes"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Why Vote?"
+msgstr "Why Vote?"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "How It Works"
+msgstr "How It Works"
+
+#~ msgid "Current Votes ({0}/30)"
+#~ msgstr "Current Votes ({0}/30)"
+
+#~ msgid "Remove"
+#~ msgstr "Remove"
+
+#~ msgid ""
+#~ "You are not currently voting for any block producers. Select producers from the\n"
+#~ "table below to cast your vote."
+#~ msgstr ""
+#~ "You are not currently voting for any block producers. Select producers from the\n"
+#~ "table below to cast your vote."
+
+#~ msgid ""
+#~ "Block producers validate transactions and create new blocks on the network. Only\n"
+#~ "the top 21 block producers actively produce blocks, with several standby\n"
+#~ "producers ready to step in if needed. Voting helps secure the network and\n"
+#~ "supports teams that contribute value to the ecosystem. An active, well-governed\n"
+#~ "blockchain is more likely to attract users and drive up token demand, benefiting\n"
+#~ "all token holders."
+#~ msgstr ""
+#~ "Block producers validate transactions and create new blocks on the network. Only\n"
+#~ "the top 21 block producers actively produce blocks, with several standby\n"
+#~ "producers ready to step in if needed. Voting helps secure the network and\n"
+#~ "supports teams that contribute value to the ecosystem. An active, well-governed\n"
+#~ "blockchain is more likely to attract users and drive up token demand, benefiting\n"
+#~ "all token holders."
+
+#~ msgid ""
+#~ "<0>Vote with staked tokens:</0> Your vote weight equals the amount of\n"
+#~ "tokens you have staked"
+#~ msgstr ""
+#~ "<0>Vote with staked tokens:</0> Your vote weight equals the amount of\n"
+#~ "tokens you have staked"
+
+#~ msgid "<0>Up to 30 producers:</0> Select as many as 30 block producers"
+#~ msgstr "<0>Up to 30 producers:</0> Select as many as 30 block producers"
+
+#~ msgid "<0>Update anytime:</0> You can change your votes whenever you want"
+#~ msgstr "<0>Update anytime:</0> You can change your votes whenever you want"
+
+#~ msgid "Remove vote"
+#~ msgstr "Remove vote"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Will vote for:"
+msgstr "Will vote for:"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Will remove vote from:"
+msgstr "Will remove vote from:"
+
+#~ msgid ""
+#~ "You are not currently voting for any block producers. Select producers from the table\n"
+#~ "below to cast your vote."
+#~ msgstr ""
+#~ "You are not currently voting for any block producers. Select producers from the table\n"
+#~ "below to cast your vote."
+
+#~ msgid ""
+#~ "Block producers validate transactions and create new blocks on the network. Only the top\n"
+#~ "21 block producers actively produce blocks, with several standby producers ready to step\n"
+#~ "in if needed. Voting helps secure the network and supports teams that contribute value\n"
+#~ "to the ecosystem. An active, well-governed blockchain is more likely to attract users and\n"
+#~ "drive up token demand, benefiting all token holders."
+#~ msgstr ""
+#~ "Block producers validate transactions and create new blocks on the network. Only the top\n"
+#~ "21 block producers actively produce blocks, with several standby producers ready to step\n"
+#~ "in if needed. Voting helps secure the network and supports teams that contribute value\n"
+#~ "to the ecosystem. An active, well-governed blockchain is more likely to attract users and\n"
+#~ "drive up token demand, benefiting all token holders."
+
+#~ msgid ""
+#~ "<0>Vote with staked tokens:</0> Your vote weight equals the amount of tokens\n"
+#~ "you have staked"
+#~ msgstr ""
+#~ "<0>Vote with staked tokens:</0> Your vote weight equals the amount of tokens\n"
+#~ "you have staked"
+
+#~ msgid ""
+#~ "Block producers validate transactions and create new blocks on the network. Only the\n"
+#~ "top 21 block producers actively produce blocks, with several standby producers ready\n"
+#~ "to step in if needed. Voting helps secure the network and supports teams that\n"
+#~ "contribute value to the ecosystem. An active, well-governed blockchain is more likely\n"
+#~ "to attract users and drive up token demand, benefiting all token holders."
+#~ msgstr ""
+#~ "Block producers validate transactions and create new blocks on the network. Only the\n"
+#~ "top 21 block producers actively produce blocks, with several standby producers ready\n"
+#~ "to step in if needed. Voting helps secure the network and supports teams that\n"
+#~ "contribute value to the ecosystem. An active, well-governed blockchain is more likely\n"
+#~ "to attract users and drive up token demand, benefiting all token holders."
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Search producers..."
+msgstr "Search producers..."
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "No producers match your search"
+msgstr "No producers match your search"
+
+#~ msgid ""
+#~ "Your voting power is determined by the amount of tokens you have staked. Each vote\n"
+#~ "you cast uses your full voting weight."
+#~ msgstr ""
+#~ "Your voting power is determined by the amount of tokens you have staked. Each vote\n"
+#~ "you cast uses your full voting weight."
+
+#~ msgid "Vote Weight"
+#~ msgstr "Vote Weight"
+
+#~ msgid "Current Votes"
+#~ msgstr "Current Votes"
+
+#~ msgid "{0} of 30 producers"
+#~ msgstr "{0} of 30 producers"
+
+#~ msgid ""
+#~ "Block producers validate transactions and create new blocks on the network. Only the\n"
+#~ "top 21 block producers actively produce blocks, with several standby producers ready\n"
+#~ "to step in if needed."
+#~ msgstr ""
+#~ "Block producers validate transactions and create new blocks on the network. Only the\n"
+#~ "top 21 block producers actively produce blocks, with several standby producers ready\n"
+#~ "to step in if needed."
+
+#~ msgid "Your Impact"
+#~ msgstr "Your Impact"
+
+#~ msgid ""
+#~ "<0>Secure the network</0> by electing trustworthy\n"
+#~ "block producers"
+#~ msgstr ""
+#~ "<0>Secure the network</0> by electing trustworthy\n"
+#~ "block producers"
+
+#~ msgid ""
+#~ "<0>Support valuable teams</0> that contribute tools\n"
+#~ "and services to the ecosystem"
+#~ msgstr ""
+#~ "<0>Support valuable teams</0> that contribute tools\n"
+#~ "and services to the ecosystem"
+
+#~ msgid ""
+#~ "<0>Drive token value</0> through good governance\n"
+#~ "that attracts users and developers"
+#~ msgstr ""
+#~ "<0>Drive token value</0> through good governance\n"
+#~ "that attracts users and developers"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid ""
+"Voting for block producers is simple and flexible. Here's everything you need to\n"
+"know."
+msgstr ""
+"Voting for block producers is simple and flexible. Here's everything you need to\n"
+"know."
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Vote with Staked Tokens"
+msgstr "Vote with Staked Tokens"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid ""
+"Your vote weight equals the amount of tokens you have staked. More stake = more\n"
+"voting power."
+msgstr ""
+"Your vote weight equals the amount of tokens you have staked. More stake = more\n"
+"voting power."
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Up to 30 Producers"
+msgstr "Up to 30 Producers"
+
+#~ msgid ""
+#~ "Select as many as 30 block producers. Your voting power applies to each one you\n"
+#~ "select."
+#~ msgstr ""
+#~ "Select as many as 30 block producers. Your voting power applies to each one you\n"
+#~ "select."
+
+#~ msgid "Update Anytime"
+#~ msgstr "Update Anytime"
+
+#~ msgid ""
+#~ "Change your votes whenever you want. Your votes remain active until you modify\n"
+#~ "them."
+#~ msgstr ""
+#~ "Change your votes whenever you want. Your votes remain active until you modify\n"
+#~ "them."
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Top 21 Produce Blocks"
+msgstr "Top 21 Produce Blocks"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Only the top 21 voted producers actively create blocks. Others serve as standbys."
+msgstr "Only the top 21 voted producers actively create blocks. Others serve as standbys."
+
+#~ msgid "Voting Power"
+#~ msgstr "Voting Power"
+
+#~ msgid "Available Balance"
+#~ msgstr "Available Balance"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Liquid Balance"
+msgstr "Liquid Balance"
+
+#~ msgid "Voting for block producers is simple and flexible. Here's everything you need to know."
+#~ msgstr "Voting for block producers is simple and flexible. Here's everything you need to know."
+
+#~ msgid "Change your votes whenever you want. Your votes remain active until you modify them."
+#~ msgstr "Change your votes whenever you want. Your votes remain active until you modify them."
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid ""
+"This network uses <0>Delegated Proof of Stake (DPoS)</0>, a consensus mechanism where token holders elect block producers to validate\n"
+"transactions and secure the network. Your vote directly shapes who runs the\n"
+"infrastructure you depend on."
+msgstr ""
+"This network uses <0>Delegated Proof of Stake (DPoS)</0>, a consensus mechanism where token holders elect block producers to validate\n"
+"transactions and secure the network. Your vote directly shapes who runs the\n"
+"infrastructure you depend on."
+
+#~ msgid "What Block Producers Do"
+#~ msgstr "What Block Producers Do"
+
+#~ msgid ""
+#~ "<0>Validate transactions</0> — They verify and\n"
+#~ "process every transaction on the network, preventing double-spending and fraud"
+#~ msgstr ""
+#~ "<0>Validate transactions</0> — They verify and\n"
+#~ "process every transaction on the network, preventing double-spending and fraud"
+
+#~ msgid ""
+#~ "<0>Produce blocks</0> — Every 0.5 seconds,\n"
+#~ "producers bundle transactions into blocks and add them to the blockchain"
+#~ msgstr ""
+#~ "<0>Produce blocks</0> — Every 0.5 seconds,\n"
+#~ "producers bundle transactions into blocks and add them to the blockchain"
+
+#~ msgid ""
+#~ "<0>Maintain infrastructure</0> — They provide\n"
+#~ "servers, bandwidth, and storage that keep the network running 24/7"
+#~ msgstr ""
+#~ "<0>Maintain infrastructure</0> — They provide\n"
+#~ "servers, bandwidth, and storage that keep the network running 24/7"
+
+#~ msgid ""
+#~ "<0>Govern the network</0> — Producers vote on\n"
+#~ "protocol upgrades and critical decisions that affect the blockchain's future"
+#~ msgstr ""
+#~ "<0>Govern the network</0> — Producers vote on\n"
+#~ "protocol upgrades and critical decisions that affect the blockchain's future"
+
+#~ msgid ""
+#~ "<0>Secure the network</0> — Electing competent,\n"
+#~ "trustworthy producers protects against attacks and downtime"
+#~ msgstr ""
+#~ "<0>Secure the network</0> — Electing competent,\n"
+#~ "trustworthy producers protects against attacks and downtime"
+
+#~ msgid ""
+#~ "<0>Promote decentralization</0> — Diverse voting\n"
+#~ "prevents any single entity from controlling the network"
+#~ msgstr ""
+#~ "<0>Promote decentralization</0> — Diverse voting\n"
+#~ "prevents any single entity from controlling the network"
+
+#~ msgid ""
+#~ "<0>Hold producers accountable</0> — Active voting\n"
+#~ "encourages producers to perform well or risk losing their position"
+#~ msgstr ""
+#~ "<0>Hold producers accountable</0> — Active voting\n"
+#~ "encourages producers to perform well or risk losing their position"
+
+#~ msgid ""
+#~ "<0>Support ecosystem growth</0> — Many producers\n"
+#~ "build tools, run APIs, and contribute to the community"
+#~ msgstr ""
+#~ "<0>Support ecosystem growth</0> — Many producers\n"
+#~ "build tools, run APIs, and contribute to the community"
+
+#~ msgid ""
+#~ "Your vote weight equals the amount of tokens you have staked. More stake = more\n"
+#~ "voting power. Unstaked tokens cannot be used to vote."
+#~ msgstr ""
+#~ "Your vote weight equals the amount of tokens you have staked. More stake = more\n"
+#~ "voting power. Unstaked tokens cannot be used to vote."
+
+#~ msgid ""
+#~ "Select as many as 30 block producers. Your full voting power applies to each one you\n"
+#~ "select—votes are not split between them."
+#~ msgstr ""
+#~ "Select as many as 30 block producers. Your full voting power applies to each one you\n"
+#~ "select—votes are not split between them."
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Votes Decay Over Time"
+msgstr "Votes Decay Over Time"
+
+#~ msgid ""
+#~ "Vote weight decays with a half-life of about one year. Re-vote periodically to\n"
+#~ "maintain your full influence on producer rankings."
+#~ msgstr ""
+#~ "Vote weight decays with a half-life of about one year. Re-vote periodically to\n"
+#~ "maintain your full influence on producer rankings."
+
+#~ msgid ""
+#~ "Only the top 21 voted producers actively create blocks. Others serve as standbys,\n"
+#~ "ready to step in if an active producer fails."
+#~ msgstr ""
+#~ "Only the top 21 voted producers actively create blocks. Others serve as standbys,\n"
+#~ "ready to step in if an active producer fails."
+
+#~ msgid "Choosing Who to Vote For"
+#~ msgstr "Choosing Who to Vote For"
+
+#~ msgid ""
+#~ "Not all producers are equal. Consider these factors when deciding who deserves your\n"
+#~ "vote:"
+#~ msgstr ""
+#~ "Not all producers are equal. Consider these factors when deciding who deserves your\n"
+#~ "vote:"
+
+#~ msgid ""
+#~ "<0>Reliability & Performance</0> — Check their\n"
+#~ "track record. Do they miss blocks? How much uptime do they maintain?"
+#~ msgstr ""
+#~ "<0>Reliability & Performance</0> — Check their\n"
+#~ "track record. Do they miss blocks? How much uptime do they maintain?"
+
+#~ msgid ""
+#~ "<0>Transparency</0> — Do they disclose their team,\n"
+#~ "infrastructure, and how they use block rewards?"
+#~ msgstr ""
+#~ "<0>Transparency</0> — Do they disclose their team,\n"
+#~ "infrastructure, and how they use block rewards?"
+
+#~ msgid ""
+#~ "<0>Community Contribution</0> — Do they build\n"
+#~ "tools, provide public APIs, create educational content, or support developers?"
+#~ msgstr ""
+#~ "<0>Community Contribution</0> — Do they build\n"
+#~ "tools, provide public APIs, create educational content, or support developers?"
+
+#~ msgid ""
+#~ "<0>Technical Capability</0> — Do they run\n"
+#~ "enterprise-grade infrastructure with proper security and redundancy?"
+#~ msgstr ""
+#~ "<0>Technical Capability</0> — Do they run\n"
+#~ "enterprise-grade infrastructure with proper security and redundancy?"
+
+#~ msgid ""
+#~ "<0>Geographic Distribution</0> — Voting for\n"
+#~ "producers in different regions improves network resilience"
+#~ msgstr ""
+#~ "<0>Geographic Distribution</0> — Voting for\n"
+#~ "producers in different regions improves network resilience"
+
+#~ msgid ""
+#~ "Visit producer websites (click the external link icon) to learn about their operations\n"
+#~ "and contributions before voting."
+#~ msgstr ""
+#~ "Visit producer websites (click the external link icon) to learn about their operations\n"
+#~ "and contributions before voting."
+
+#~ msgid ""
+#~ "<0>Validate transactions</0> — They verify and process\n"
+#~ "every transaction on the network, preventing double-spending and fraud"
+#~ msgstr ""
+#~ "<0>Validate transactions</0> — They verify and process\n"
+#~ "every transaction on the network, preventing double-spending and fraud"
+
+#~ msgid ""
+#~ "<0>Produce blocks</0> — Every 0.5 seconds, producers\n"
+#~ "bundle transactions into blocks and add them to the blockchain"
+#~ msgstr ""
+#~ "<0>Produce blocks</0> — Every 0.5 seconds, producers\n"
+#~ "bundle transactions into blocks and add them to the blockchain"
+
+#~ msgid ""
+#~ "<0>Maintain infrastructure</0> — They provide servers,\n"
+#~ "bandwidth, and storage that keep the network running 24/7"
+#~ msgstr ""
+#~ "<0>Maintain infrastructure</0> — They provide servers,\n"
+#~ "bandwidth, and storage that keep the network running 24/7"
+
+#~ msgid ""
+#~ "<0>Govern the network</0> — Producers vote on protocol\n"
+#~ "upgrades and critical decisions that affect the blockchain's future"
+#~ msgstr ""
+#~ "<0>Govern the network</0> — Producers vote on protocol\n"
+#~ "upgrades and critical decisions that affect the blockchain's future"
+
+#~ msgid ""
+#~ "<0>Secure the network</0> — Electing competent, trustworthy\n"
+#~ "producers protects against attacks and downtime"
+#~ msgstr ""
+#~ "<0>Secure the network</0> — Electing competent, trustworthy\n"
+#~ "producers protects against attacks and downtime"
+
+#~ msgid ""
+#~ "<0>Reliability & Performance</0> — Check their track\n"
+#~ "record. Do they miss blocks? How much uptime do they maintain?"
+#~ msgstr ""
+#~ "<0>Reliability & Performance</0> — Check their track\n"
+#~ "record. Do they miss blocks? How much uptime do they maintain?"
+
+#~ msgid ""
+#~ "<0>Community Contribution</0> — Do they build tools,\n"
+#~ "provide public APIs, create educational content, or support developers?"
+#~ msgstr ""
+#~ "<0>Community Contribution</0> — Do they build tools,\n"
+#~ "provide public APIs, create educational content, or support developers?"
+
+#~ msgid ""
+#~ "<0>Technical Capability</0> — Do they run enterprise-grade\n"
+#~ "infrastructure with proper security and redundancy?"
+#~ msgstr ""
+#~ "<0>Technical Capability</0> — Do they run enterprise-grade\n"
+#~ "infrastructure with proper security and redundancy?"
+
+#~ msgid ""
+#~ "<0>Geographic Distribution</0> — Voting for producers\n"
+#~ "in different regions improves network resilience"
+#~ msgstr ""
+#~ "<0>Geographic Distribution</0> — Voting for producers\n"
+#~ "in different regions improves network resilience"
+
+#~ msgid ""
+#~ "<0>Validate transactions</0> — They verify and process\n"
+#~ "every transaction on the network"
+#~ msgstr ""
+#~ "<0>Validate transactions</0> — They verify and process\n"
+#~ "every transaction on the network"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Validate Transactions"
+msgstr "Validate Transactions"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "They verify and process every transaction on the network"
+msgstr "They verify and process every transaction on the network"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Produce Blocks"
+msgstr "Produce Blocks"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Every 0.5 seconds, producers bundle transactions into blocks"
+msgstr "Every 0.5 seconds, producers bundle transactions into blocks"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Maintain Infrastructure"
+msgstr "Maintain Infrastructure"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "They provide servers, bandwidth, and storage that keep the network running 24/7"
+msgstr "They provide servers, bandwidth, and storage that keep the network running 24/7"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Govern the Network"
+msgstr "Govern the Network"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Producers vote on protocol upgrades and critical decisions"
+msgstr "Producers vote on protocol upgrades and critical decisions"
+
+#~ msgid "Secure the network"
+#~ msgstr "Secure the network"
+
+#~ msgid "Electing competent producers protects against attacks"
+#~ msgstr "Electing competent producers protects against attacks"
+
+#~ msgid "Promote decentralization"
+#~ msgstr "Promote decentralization"
+
+#~ msgid "Diverse voting prevents centralized control"
+#~ msgstr "Diverse voting prevents centralized control"
+
+#~ msgid "Hold producers accountable"
+#~ msgstr "Hold producers accountable"
+
+#~ msgid "Active voting encourages strong performance"
+#~ msgstr "Active voting encourages strong performance"
+
+#~ msgid "Support ecosystem growth"
+#~ msgstr "Support ecosystem growth"
+
+#~ msgid "Many producers build tools and contribute to the community"
+#~ msgstr "Many producers build tools and contribute to the community"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Select as many as 30 block producers. Your full voting power applies to each one."
+msgstr "Select as many as 30 block producers. Your full voting power applies to each one."
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Vote weight decays with a half-life of about one year. Re-vote periodically."
+msgstr "Vote weight decays with a half-life of about one year. Re-vote periodically."
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Refresh Vote"
+msgstr "Refresh Vote"
+
+#~ msgid "Vote Status"
+#~ msgstr "Vote Status"
+
+#~ msgid "Last Voted"
+#~ msgstr "Last Voted"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Vote Decay"
+msgstr "Vote Decay"
+
+#~ msgid "Effective Weight"
+#~ msgstr "Effective Weight"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "My Voting Power"
+msgstr "My Voting Power"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Your voting power is determined by the amount of tokens you have staked."
+msgstr "Your voting power is determined by the amount of tokens you have staked."
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Staked Balance"
+msgstr "Staked Balance"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Vote Age"
+msgstr "Vote Age"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Not voting"
+msgstr "Not voting"
+
+#~ msgid "Stake tokens to gain voting power and help secure the network."
+#~ msgstr "Stake tokens to gain voting power and help secure the network."
+
+#~ msgid "Increase your voting power"
+#~ msgstr "Increase your voting power"
+
+#~ msgid "Stake tokens to participate in producer voting and help secure the network."
+#~ msgstr "Stake tokens to participate in producer voting and help secure the network."
+
+#~ msgid "Login to view your voting power"
+#~ msgstr "Login to view your voting power"
+
+#~ msgid "Connect your wallet to see your staked balance and vote for block producers."
+#~ msgstr "Connect your wallet to see your staked balance and vote for block producers."
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Connect to view your voting power"
+msgstr "Connect to view your voting power"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Login to see your staked balance, vote age, and help secure the network."
+msgstr "Login to see your staked balance, vote age, and help secure the network."
+
+#: src/lib/components/navigation/sidemenu.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.ts
+msgid "Governance"
+msgstr "Governance"
+
+#. placeholder {0}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.ts
+msgid "Participate in network governance on {0}"
+msgstr "Participate in network governance on {0}"
+
+#. placeholder {0}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.ts
+msgid "Vote on block producers, sentiment topics, and funding proposals on the {0} network."
+msgstr "Vote on block producers, sentiment topics, and funding proposals on the {0} network."
+
+#. placeholder {0}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
+msgid ""
+"Vote for the validators that secure the {0} network. Your voting power is\n"
+"weighted by your staked tokens, giving more influence to those with a larger stake in the network's\n"
+"security."
+msgstr ""
+"Vote for the validators that secure the {0} network. Your voting power is\n"
+"weighted by your staked tokens, giving more influence to those with a larger stake in the network's\n"
+"security."
+
+#. placeholder {0}: producers.statistics.totalActive
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
+msgid "{0} active producers"
+msgstr "{0} active producers"
+
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
+msgid "View All Producers"
+msgstr "View All Producers"
+
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
+msgid ""
+"Express your support or opposition on key network topics. Your vote is weighted by your\n"
+"staked tokens, helping the community gauge consensus on important issues."
+msgstr ""
+"Express your support or opposition on key network topics. Your vote is weighted by your\n"
+"staked tokens, helping the community gauge consensus on important issues."
+
+#. placeholder {0}: data.sentimentState.topics.length
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
+msgid "{0} active topics"
+msgstr "{0} active topics"
+
+#~ msgid "Build Fund"
+#~ msgstr "Build Fund"
+
+#~ msgid ""
+#~ "Vote on how network treasury funds are allocated to support ecosystem development,\n"
+#~ "infrastructure, and community initiatives."
+#~ msgstr ""
+#~ "Vote on how network treasury funds are allocated to support ecosystem development,\n"
+#~ "infrastructure, and community initiatives."
+
+#~ msgid "Coming Soon"
+#~ msgstr "Coming Soon"
+
+#~ msgid "Build fund proposals will appear here"
+#~ msgstr "Build fund proposals will appear here"
+
+#~ msgid ""
+#~ "Vote for the validators that secure the {0} network. Your voting power is\n"
+#~ "weighted by your staked tokens, giving more influence to those with a larger stake in the\n"
+#~ "network's security."
+#~ msgstr ""
+#~ "Vote for the validators that secure the {0} network. Your voting power is\n"
+#~ "weighted by your staked tokens, giving more influence to those with a larger stake in the\n"
+#~ "network's security."
+
+#~ msgid "Multi-Signature Proposals"
+#~ msgstr "Multi-Signature Proposals"
+
+#~ msgid ""
+#~ "Multi-signature proposals require approval from multiple parties before execution. These\n"
+#~ "are used for important network decisions that need collective agreement from block\n"
+#~ "producers or other stakeholders."
+#~ msgstr ""
+#~ "Multi-signature proposals require approval from multiple parties before execution. These\n"
+#~ "are used for important network decisions that need collective agreement from block\n"
+#~ "producers or other stakeholders."
+
+#~ msgid "View MSIGs"
+#~ msgstr "View MSIGs"
+
+#~ msgid "Featured proposals will appear here"
+#~ msgstr "Featured proposals will appear here"
+
+#: src/routes/[[locale]]/[network]/(explorer)/+layout.svelte
+msgid "Top 21 Block Producer"
+msgstr "Top 21 Block Producer"
+
+#~ msgid "Create new system account"
+#~ msgstr "Create new system account"
+
+#~ msgid "Vaulta transition stage 1"
+#~ msgstr "Vaulta transition stage 1"
+
+#~ msgid "Update Vaulta Foundation permissions"
+#~ msgstr "Update Vaulta Foundation permissions"
+
+#~ msgid "{0} active proposals"
+#~ msgstr "{0} active proposals"
+
+#~ msgid "View All Proposals"
+#~ msgstr "View All Proposals"
+
+#~ msgid "by"
+#~ msgstr "by"
+
+#~ msgid "Approvals"
+#~ msgstr "Approvals"
+
+#~ msgid "{0} of {1} approvals"
+#~ msgstr "{0} of {1} approvals"
+
+#~ msgid "by <0/>"
+#~ msgstr "by <0/>"
+
+#~ msgid "Proposed by"
+#~ msgstr "Proposed by"
+
+#~ msgid "Approval Progress"
+#~ msgstr "Approval Progress"
+
+#~ msgid "{0} of {1} <0>({0}%)</0>"
+#~ msgstr "{0} of {1} <0>({0}%)</0>"
+
+#~ msgid "Approved by"
+#~ msgstr "Approved by"
+
+#~ msgid "{0} more needed"
+#~ msgstr "{0} more needed"
+
+#~ msgid "{0} action{1}"
+#~ msgstr "{0} action{1}"
+
+#~ msgid "Expires {0}"
+#~ msgstr "Expires {0}"
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Loading your votes..."
+msgstr "Loading your votes..."

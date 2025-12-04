@@ -4,8 +4,7 @@ import { error } from '@sveltejs/kit';
 import { useLocale } from '$lib/utils/intl';
 
 export const load: PageLoad = async ({ parent, params, fetch }) => {
-	const { network } = await parent();
-	const locale = params.locale || 'en';
+	const { network, locale } = await parent();
 	const topicId = params.id;
 
 	await useLocale(locale);
