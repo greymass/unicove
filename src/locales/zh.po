@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2025-12-05T19:16:22.703Z\n"
+"PO-Revision-Date: 2025-12-05T20:29:02.741Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -6490,10 +6490,8 @@ msgid ""
 "security."
 msgstr "投票给保护 {0} 网络的验证者。您的投票权会根据您抵押的代币数量进行加权，从而使在网络安全中拥有更大份额的人拥有更大的影响力。"
 
-#. placeholder {0}: producers.statistics.totalActive
-#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
-msgid "{0} active producers"
-msgstr "{0} 个活跃的生产者"
+#~ msgid "{0} active producers"
+#~ msgstr "{0} 个活跃的生产者"
 
 #: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
 msgid "View All Producers"
@@ -6605,3 +6603,20 @@ msgstr "正在加载您的投票..."
 #: src/routes/[[locale]]/[network]/(explorer)/governance/+page.ts
 msgid "Vote on block producers and sentiment topics on the {0} network."
 msgstr "在 {0} 网络上投票选举区块生产者和情绪话题。"
+
+#~ msgid ""
+#~ "Express your support or opposition on key network topics. Your vote is weighted by\n"
+#~ "your staked tokens, helping the community gauge consensus on important issues."
+#~ msgstr "对重要的网络议题表达您的支持或反对。您的投票权重取决于您质押的代币数量，有助于社区评估对重要问题的共识。"
+
+#~ msgid "Top Active Producers"
+#~ msgstr "活跃生产者"
+
+#. placeholder {0}: producers.statistics.totalActive
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
+msgid "{0} active"
+msgstr "{0} 个活跃"
+
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
+msgid "Top Producers"
+msgstr "頂級生產者"

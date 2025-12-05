@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2025-12-04T21:17:37.659Z\n"
+"PO-Revision-Date: 2025-12-05T20:29:02.709Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -6772,10 +6772,8 @@ msgstr ""
 "weighted by your staked tokens, giving more influence to those with a larger stake in the network's\n"
 "security."
 
-#. placeholder {0}: producers.statistics.totalActive
-#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
-msgid "{0} active producers"
-msgstr "{0} active producers"
+#~ msgid "{0} active producers"
+#~ msgstr "{0} active producers"
 
 #: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
 msgid "View All Producers"
@@ -6897,3 +6895,22 @@ msgstr "Loading your votes..."
 #: src/routes/[[locale]]/[network]/(explorer)/governance/+page.ts
 msgid "Vote on block producers and sentiment topics on the {0} network."
 msgstr "Vote on block producers and sentiment topics on the {0} network."
+
+#~ msgid ""
+#~ "Express your support or opposition on key network topics. Your vote is weighted by\n"
+#~ "your staked tokens, helping the community gauge consensus on important issues."
+#~ msgstr ""
+#~ "Express your support or opposition on key network topics. Your vote is weighted by\n"
+#~ "your staked tokens, helping the community gauge consensus on important issues."
+
+#~ msgid "Top Active Producers"
+#~ msgstr "Top Active Producers"
+
+#. placeholder {0}: producers.statistics.totalActive
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
+msgid "{0} active"
+msgstr "{0} active"
+
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
+msgid "Top Producers"
+msgstr "Top Producers"
