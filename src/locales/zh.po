@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2025-12-04T21:17:41.629Z\n"
+"PO-Revision-Date: 2025-12-05T19:16:22.703Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -2497,7 +2497,7 @@ msgstr ""
 #. placeholder {1}: dayjs .duration(wait_sec.toNumber(), 'seconds') .humanize()
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/permission.svelte
 msgid "<0/> {0}s ({1})"
-msgstr ""
+msgstr "<0/> {0}秒 ({1})"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/ram/+page.svelte
 msgid "Account RAM"
@@ -2575,31 +2575,31 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/votes/+page.svelte
 msgid "Proxied To"
-msgstr ""
+msgstr "代理给"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/votes/+page.svelte
 msgid "Is Proxy?"
-msgstr ""
+msgstr "是代理吗？"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/votes/+page.svelte
 msgid "Yes"
-msgstr ""
+msgstr "是"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/votes/+page.svelte
 msgid "No"
-msgstr ""
+msgstr "否"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/votes/+page.svelte
 msgid "Total Vote Weight"
-msgstr ""
+msgstr "总投票权重"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/votes/+page.svelte
 msgid "Self Vote Weight"
-msgstr ""
+msgstr "自身投票权重"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/votes/+page.svelte
 msgid "Proxied Weight"
-msgstr ""
+msgstr "代理权重```"
 
 #: src/routes/[[locale]]/[network]/(explorer)/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/votes/+page.svelte
@@ -4822,12 +4822,12 @@ msgstr "当前已质押"
 
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/unstake/+page.svelte
 msgid "Amount to Unstake"
-msgstr ""
+msgstr "要取消质押的金额"
 
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/stake/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/unstake/+page.svelte
 msgid "Available: <0/>"
-msgstr ""
+msgstr "可用：<0/>"
 
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/stake/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/stake/+page.svelte
@@ -4892,7 +4892,7 @@ msgstr "权限名称"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/permission.svelte
 msgid "<0>Threshold</0> Required"
-msgstr ""
+msgstr "<0>阈值</0> 要求"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte

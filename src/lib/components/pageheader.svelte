@@ -38,7 +38,7 @@
 	let logo = $derived(props.network.config.logo || '');
 </script>
 
-<header class="col-span-full flex min-h-16 items-start gap-4">
+<header class="col-span-full flex items-start gap-3 sm:gap-4">
 	{#if props.backPath}
 		<IconButton
 			size="large"
@@ -48,7 +48,7 @@
 			icon={ChevronLeft}
 		/>
 	{:else}
-		<picture class="mt-0.5 size-12 shrink-0">
+		<picture class="mt-0.5 size-8 shrink-0 sm:size-12">
 			<img
 				src={String(logo)}
 				alt={String(props.network.chain.name)}
@@ -57,9 +57,11 @@
 		</picture>
 	{/if}
 
-	<div class="">
-		<div class="text-primary flex h-fit w-fit items-center gap-2">
-			<h1 class="text-on-surface mb-2 text-3xl leading-none font-bold">{props.title}</h1>
+	<div class="grid gap-1">
+		<div class="text-primary relative flex h-fit w-fit items-center gap-2">
+			<h1 class="text-title text-on-surface sm:text-headline leading-none font-bold">
+				{props.title}
+			</h1>
 
 			{#if props.badges}
 				{#each props.badges as badge}
@@ -74,7 +76,11 @@
 			{/if}
 
 			{#if props.copyData}
-				<CopyButton data={props.copyData} hideBackground />
+				<CopyButton
+					class="absolute right-0 translate-x-full"
+					data={props.copyData}
+					hideBackground
+				/>
 			{/if}
 
 			{#if props.actions}
@@ -85,7 +91,7 @@
 		</div>
 
 		{#if props.subtitle}
-			<p class="text-muted text-base leading-5">{props.subtitle}</p>
+			<p class="text-muted text-label-sm leading-5 text-pretty sm:text-base">{props.subtitle}</p>
 		{/if}
 	</div>
 </header>
