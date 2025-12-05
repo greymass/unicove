@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.663Z\n"
-"PO-Revision-Date: 2025-12-06T07:31:19.416Z\n"
+"PO-Revision-Date: 2025-12-09T01:10:30.809Z\n"
 "Last-Translator: \n"
 "Language: ko\n"
 "Language-Team: \n"
@@ -562,7 +562,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/buttons.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Active"
-msgstr ""
+msgstr "활성"
 
 #. placeholder {0}: wait.wait_sec
 #: src/lib/components/summary/eosio/newaccount.svelte
@@ -6616,3 +6616,57 @@ msgstr "{0} 활성"
 #: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
 msgid "Top Producers"
 msgstr "최고 생산자"
+
+#~ msgid "This network uses Delegated Proof of Stake (DPoS), a consensus mechanism where token holders elect block producers to validate transactions and secure the network. Your vote directly shapes who runs the infrastructure you depend on."
+#~ msgstr "이 네트워크는 위임 지분 증명(DPoS)을 사용합니다. 이는 토큰 보유자가 블록 생산자를 선출하여 트랜잭션을 검증하고 네트워크를 보호하는 합의 메커니즘입니다. 귀하의 투표는 귀하가 의존하는 인프라를 운영하는 사람을 직접적으로 결정합니다."
+
+#~ msgid "Your vote weight equals the amount of tokens you have staked. More stake = more voting power."
+#~ msgstr "투표 가중치는 스테이킹한 토큰 양과 같습니다. 스테이크가 많을수록 투표력이 높아집니다."
+
+#~ msgid "Who Validates Transactions"
+#~ msgstr "트랜잭션을 검증하는 사람"
+
+#~ msgid "The block producers verify and process every transaction on the network"
+#~ msgstr "블록 생산자는 네트워크의 모든 트랜잭션을 검증하고 처리합니다."
+
+#~ msgid "Who Produce Blocks"
+#~ msgstr "블록을 생성하는 사람"
+
+#~ msgid "Who Maintains Infrastructure"
+#~ msgstr "인프라 유지 관리 담당자"
+
+#~ msgid "Who Produces Blocks"
+#~ msgstr "블록 생성자"
+
+#~ msgid "Every 0.5 seconds, block producers bundle transactions into blocks"
+#~ msgstr "블록 생산자는 0.5초마다 트랜잭션을 블록으로 묶습니다."
+
+#~ msgid "These block producers provide servers, bandwidth, and storage that keep the network running 24/7"
+#~ msgstr "이 블록 생성자들은 네트워크가 24시간 연중무휴로 운영되도록 서버, 대역폭 및 저장소를 제공합니다."
+
+#~ msgid "Who Governs the Network"
+#~ msgstr "누가 네트워크를 관리하는가"
+
+#~ msgid "Block Producers vote on protocol upgrades and critical decisions"
+#~ msgstr "블록 생산자는 프로토콜 업그레이드 및 중요한 결정에 투표합니다."
+
+#~ msgid "Block Producers vote on protocol upgrades and critical network decisions"
+#~ msgstr "블록 생산자는 프로토콜 업그레이드 및 중요한 네트워크 결정에 대해 투표합니다."
+
+#~ msgid "Transaction Validation"
+#~ msgstr "트랜잭션 유효성 검사"
+
+#~ msgid "Block Production"
+#~ msgstr "블록 생성"
+
+#~ msgid "Infrastructure Maintenance"
+#~ msgstr "인프라 유지 관리"
+
+#~ msgid "Network Governance"
+#~ msgstr "네트워크 거버넌스"
+
+#~ msgid "Rank"
+#~ msgstr "순위"
+
+#~ msgid "Submit <0>Vote</0>"
+#~ msgstr "<0>투표</0> 제출"
