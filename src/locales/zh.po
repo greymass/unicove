@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2025-12-06T07:31:19.422Z\n"
+"PO-Revision-Date: 2025-12-09T01:10:32.832Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -562,7 +562,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/buttons.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Active"
-msgstr ""
+msgstr "激活"
 
 #. placeholder {0}: wait.wait_sec
 #: src/lib/components/summary/eosio/newaccount.svelte
