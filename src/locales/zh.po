@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2025-12-05T20:29:02.741Z\n"
+"PO-Revision-Date: 2025-12-06T07:31:19.422Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -560,6 +560,7 @@ msgstr ""
 #: src/lib/components/summary/eosio/newaccount.svelte
 #: src/lib/components/summary/eosio/newaccount.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/buttons.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Active"
 msgstr ""
 
@@ -4197,7 +4198,6 @@ msgstr "投票"
 
 #: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Top 21"
 msgstr "前 21 名"
 

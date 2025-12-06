@@ -483,88 +483,119 @@
 						</p>
 					</div>
 				{:else}
-					<table class="table-styles table-fixed">
-						<thead>
-							<tr>
-								<th class="w-12"></th>
-								<th class="w-10 text-center">#</th>
-								<th class="w-20"></th>
-								<th>Actor</th>
-								<th class="w-40 text-right">Votes</th>
-							</tr>
-						</thead>
-						<tbody>
-							{#each filteredProducers as producer, index (String(producer.owner))}
-								<tr
-									class="cursor-pointer"
-									onclick={(e) => {
-										if (
-											e.target instanceof HTMLAnchorElement ||
-											(e.target instanceof HTMLElement && e.target.closest('a'))
-										) {
-											return;
-										}
-										if (
-											context.account &&
-											(voteState.isSelected(producer.owner) || voteState.selected.size < 30)
-										) {
-											voteState.toggleProducer(producer.owner);
-										}
-									}}
-								>
-									<td>
-										<div class="flex items-center justify-center">
-											<input
-												type="checkbox"
-												id={`producer-${String(producer.owner)}`}
-												checked={voteState.isSelected(producer.owner)}
-												disabled={!context.account ||
-													(!voteState.isSelected(producer.owner) && voteState.selected.size >= 30)}
-												class="border-outline size-5 cursor-pointer rounded border disabled:cursor-not-allowed disabled:opacity-30"
-											/>
-										</div>
-									</td>
-									<td class="text-center">
-										{index + 1}
-									</td>
-									<td>
-										{#if index < 21}
-											<Chip class="bg-success-container text-on-success-container">Top 21</Chip>
-										{:else}
-											<Chip class="bg-surface-variant text-on-surface-variant">Standby</Chip>
-										{/if}
-									</td>
-									<td>
-										<div class="flex items-center gap-2">
-											<AccountLink name={producer.owner} />
-											{#if producer.url}
-												<a
-													href={producer.url}
-													target="_blank"
-													rel="noopener noreferrer"
-													class="text-on-surface-variant hover:text-on-surface inline-flex items-center justify-center transition-colors"
-													onclick={(e) => e.stopPropagation()}
-													title="Visit producer website"
-												>
-													<ExternalLink class="size-4" />
-												</a>
-											{/if}
-										</div>
-									</td>
-									<td class="text-right">
-										<div class="flex flex-col items-end">
-											<AssetText value={voteWeightToAsset(producer.total_votes)} variant="short" />
-											<span class="text-on-surface-variant text-sm">
-												{producers.totalVotes > 0
-													? ((Number(producer.total_votes) / producers.totalVotes) * 100).toFixed(2)
-													: '0.00'}%
-											</span>
-										</div>
-									</td>
+					<div class="overflow-x-auto">
+						<table class="table-styles">
+							<thead>
+								<tr>
+									<th class="w-8 sm:w-12"></th>
+									<th class="w-16 text-center sm:w-32">#</th>
+									<th>Actor</th>
+									<th class="hidden w-52 text-right sm:table-cell">Votes</th>
 								</tr>
-							{/each}
-						</tbody>
-					</table>
+							</thead>
+							<tbody>
+								{#each filteredProducers as producer, index (String(producer.owner))}
+									<tr
+										class="cursor-pointer"
+										onclick={(e) => {
+											if (
+												e.target instanceof HTMLAnchorElement ||
+												(e.target instanceof HTMLElement && e.target.closest('a'))
+											) {
+												return;
+											}
+											if (
+												context.account &&
+												(voteState.isSelected(producer.owner) || voteState.selected.size < 30)
+											) {
+												voteState.toggleProducer(producer.owner);
+											}
+										}}
+									>
+										<td>
+											<div class="flex items-center justify-center">
+												<input
+													type="checkbox"
+													id={`producer-${String(producer.owner)}`}
+													checked={voteState.isSelected(producer.owner)}
+													disabled={!context.account ||
+														(!voteState.isSelected(producer.owner) &&
+															voteState.selected.size >= 30)}
+													class="border-outline size-5 cursor-pointer rounded border disabled:cursor-not-allowed disabled:opacity-30"
+												/>
+											</div>
+										</td>
+										<td class="text-center">
+											<div
+												class="flex flex-col items-center justify-center gap-1 sm:flex-row sm:gap-2"
+											>
+												<span>{index + 1}</span>
+												{#if index < 21}
+													<Chip
+														class="bg-success-container text-on-success-container px-1.5 text-xs sm:px-3 sm:text-sm"
+														>Active</Chip
+													>
+												{:else}
+													<Chip
+														class="bg-surface-variant text-on-surface-variant px-1.5 text-xs sm:px-3 sm:text-sm"
+														>Standby</Chip
+													>
+												{/if}
+											</div>
+										</td>
+										<td>
+											<div class="flex flex-col">
+												<div class="flex items-center gap-2">
+													<AccountLink name={producer.owner} />
+													{#if producer.url}
+														<a
+															href={producer.url}
+															target="_blank"
+															rel="noopener noreferrer"
+															class="text-on-surface-variant hover:text-on-surface inline-flex items-center justify-center transition-colors"
+															onclick={(e) => e.stopPropagation()}
+															title="Visit producer website"
+														>
+															<ExternalLink class="size-4" />
+														</a>
+													{/if}
+												</div>
+												<div class="text-on-surface-variant mt-0.5 text-sm sm:hidden">
+													<AssetText
+														value={voteWeightToAsset(producer.total_votes)}
+														variant="short"
+													/>
+													<span
+														>({producers.totalVotes > 0
+															? (
+																	(Number(producer.total_votes) / producers.totalVotes) *
+																	100
+																).toFixed(2)
+															: '0.00'}%)</span
+													>
+												</div>
+											</div>
+										</td>
+										<td class="hidden text-right sm:table-cell">
+											<div class="flex flex-col items-end">
+												<AssetText
+													value={voteWeightToAsset(producer.total_votes)}
+													variant="short"
+												/>
+												<span class="text-on-surface-variant text-sm">
+													{producers.totalVotes > 0
+														? ((Number(producer.total_votes) / producers.totalVotes) * 100).toFixed(
+																2
+															)
+														: '0.00'}%
+												</span>
+											</div>
+										</td>
+									</tr>
+								{/each}
+							</tbody>
+						</table>
+					</div>
 					{#if producers.hasMore && !producers.showAll && (!searchQuery || !String(searchQuery).trim())}
 						<div class="flex justify-center pt-4">
 							<Button variant="secondary" onclick={() => producers.loadMore()}>Load More</Button>
