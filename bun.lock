@@ -1,5 +1,6 @@
 {
   "lockfileVersion": 1,
+  "configVersion": 0,
   "workspaces": {
     "": {
       "name": "unicove",
@@ -38,7 +39,7 @@
         "just-extend": "^6.2.0",
         "runed": "^0.15.3",
         "svead": "^0.0.13",
-        "unicove-components": "^0.2.2",
+        "unicove-components": "^0.6.1",
         "valibot": "^1.1.0",
         "wuchale": "^0.17.5",
         "yaml": "^2.7.0",
@@ -1516,7 +1517,7 @@
 
     "unenv": ["unenv-nightly@1.10.0-1717606461.a117952", "", { "dependencies": { "consola": "^3.2.3", "defu": "^6.1.4", "mime": "^3.0.0", "node-fetch-native": "^1.6.4", "pathe": "^1.1.2", "ufo": "^1.5.3" } }, "sha512-u3TfBX02WzbHTpaEfWEKwDijDSFAHcgXkayUZ+MVDrjhLFvgAJzFGTSTmwlEhwWi2exyRQey23ah9wELMM6etg=="],
 
-    "unicove-components": ["unicove-components@0.2.2", "", { "dependencies": { "@fontsource-variable/inter": "^5.2.6", "@fontsource-variable/jetbrains-mono": "^5.2.6", "@lucide/svelte": "^0.516.0", "@melt-ui/svelte": "^0.86.6", "@wharfkit/antelope": "^1.0.13", "@wharfkit/common": "^1.5.0", "big.js": "^7.0.1", "esm-env": "^1.2.2", "melt": "^0.35.1", "tailwind-merge": "^3.3.1" }, "peerDependencies": { "svelte": "^5.0.0", "tailwindcss": "^4.0.0" } }, "sha512-lly2dHfRv75edGgfPjxfOSdbwgPANzRp5/Z2ha/qp3jP0iNjQOkvbwtT3xODKf6JN1UVgUPlQFLv9WA2pR+fkQ=="],
+    "unicove-components": ["unicove-components@0.6.1", "", { "dependencies": { "@fontsource-variable/inter": "^5.2.6", "@fontsource-variable/jetbrains-mono": "^5.2.6", "@lucide/svelte": "^0.516.0", "@melt-ui/svelte": "^0.86.6", "@wharfkit/antelope": "^1.0.13", "@wharfkit/common": "^1.5.0", "big.js": "^7.0.1", "esm-env": "^1.2.2", "melt": "^0.35.1", "tailwind-merge": "^3.3.1" }, "peerDependencies": { "svelte": "^5.0.0", "tailwindcss": "^4.0.0" } }, "sha512-/A26bicyd9H7eR5pkctjm8i5qBMgknSzrclXpzo2mgoWBz0RZLz+dsur7FNVJU0KNI7Dkkz1ydjBAZBA7GApVQ=="],
 
     "unique-string": ["unique-string@2.0.0", "", { "dependencies": { "crypto-random-string": "^2.0.0" } }, "sha512-uNaeirEPvpZWSgzwsPGtU2zVSTrn/8L5q/IexZmH0eH6SA73CmAA5U4GwORTxQAZs95TAXLNqeLoPPNO5gZfWg=="],
 

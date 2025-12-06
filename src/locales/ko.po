@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.663Z\n"
-"PO-Revision-Date: 2025-12-04T20:47:38.527Z\n"
+"PO-Revision-Date: 2025-12-06T07:31:19.416Z\n"
 "Last-Translator: \n"
 "Language: ko\n"
 "Language-Team: \n"
@@ -560,6 +560,7 @@ msgstr ""
 #: src/lib/components/summary/eosio/newaccount.svelte
 #: src/lib/components/summary/eosio/newaccount.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/buttons.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Active"
 msgstr ""
 
@@ -2495,7 +2496,7 @@ msgstr ""
 #. placeholder {1}: dayjs .duration(wait_sec.toNumber(), 'seconds') .humanize()
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/permission.svelte
 msgid "<0/> {0}s ({1})"
-msgstr ""
+msgstr "<0/> {0}초 ({1})"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/ram/+page.svelte
 msgid "Account RAM"
@@ -2573,31 +2574,31 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/votes/+page.svelte
 msgid "Proxied To"
-msgstr ""
+msgstr "프록시 대상"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/votes/+page.svelte
 msgid "Is Proxy?"
-msgstr ""
+msgstr "프록시인가?"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/votes/+page.svelte
 msgid "Yes"
-msgstr ""
+msgstr "예"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/votes/+page.svelte
 msgid "No"
-msgstr ""
+msgstr "아니오"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/votes/+page.svelte
 msgid "Total Vote Weight"
-msgstr ""
+msgstr "총 투표 가중치"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/votes/+page.svelte
 msgid "Self Vote Weight"
-msgstr ""
+msgstr "자체 투표 가중치"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/votes/+page.svelte
 msgid "Proxied Weight"
-msgstr ""
+msgstr "프록시 가중치"
 
 #: src/routes/[[locale]]/[network]/(explorer)/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/votes/+page.svelte
@@ -4191,7 +4192,6 @@ msgstr "투표"
 
 #: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Top 21"
 msgstr "상위 21개"
 
@@ -4816,12 +4816,12 @@ msgstr "현재 스테이킹"
 
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/unstake/+page.svelte
 msgid "Amount to Unstake"
-msgstr ""
+msgstr "언스테이킹할 수량"
 
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/stake/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/unstake/+page.svelte
 msgid "Available: <0/>"
-msgstr ""
+msgstr "사용 가능: <0/>"
 
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/stake/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/stake/+page.svelte
@@ -4886,7 +4886,7 @@ msgstr "권한 이름"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/permission.svelte
 msgid "<0>Threshold</0> Required"
-msgstr ""
+msgstr "<0>임계값</0> 필요"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
@@ -6491,10 +6491,8 @@ msgid ""
 "security."
 msgstr "{0} 네트워크를 보호하는 유효성 검사기에 투표하세요. 귀하의 투표력은 스테이킹된 토큰에 의해 가중치가 부여되어 네트워크 보안에 더 많은 지분을 가진 사람들에게 더 큰 영향력을 제공합니다."
 
-#. placeholder {0}: producers.statistics.totalActive
-#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
-msgid "{0} active producers"
-msgstr "{0}명의 활성 생산자"
+#~ msgid "{0} active producers"
+#~ msgstr "{0}명의 활성 생산자"
 
 #: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
 msgid "View All Producers"
@@ -6601,3 +6599,20 @@ msgstr "상위 21개 블록 생산자"
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Loading your votes..."
 msgstr "투표 내역을 불러오는 중..."
+
+#~ msgid ""
+#~ "Express your support or opposition on key network topics. Your vote is weighted by\n"
+#~ "your staked tokens, helping the community gauge consensus on important issues."
+#~ msgstr "주요 네트워크 주제에 대한 지지 또는 반대를 표명하세요. 귀하의 투표는 스테이킹된 토큰에 따라 가중치가 부여되어 커뮤니티가 중요한 문제에 대한 합의를 측정하는 데 도움이 됩니다."
+
+#~ msgid "Top Active Producers"
+#~ msgstr "상위 활성 생산자"
+
+#. placeholder {0}: producers.statistics.totalActive
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
+msgid "{0} active"
+msgstr "{0} 활성"
+
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
+msgid "Top Producers"
+msgstr "최고 생산자"

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2025-12-04T21:17:41.629Z\n"
+"PO-Revision-Date: 2025-12-06T07:31:19.422Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -560,6 +560,7 @@ msgstr ""
 #: src/lib/components/summary/eosio/newaccount.svelte
 #: src/lib/components/summary/eosio/newaccount.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/buttons.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Active"
 msgstr ""
 
@@ -2497,7 +2498,7 @@ msgstr ""
 #. placeholder {1}: dayjs .duration(wait_sec.toNumber(), 'seconds') .humanize()
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/permission.svelte
 msgid "<0/> {0}s ({1})"
-msgstr ""
+msgstr "<0/> {0}秒 ({1})"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/ram/+page.svelte
 msgid "Account RAM"
@@ -2575,31 +2576,31 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/votes/+page.svelte
 msgid "Proxied To"
-msgstr ""
+msgstr "代理给"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/votes/+page.svelte
 msgid "Is Proxy?"
-msgstr ""
+msgstr "是代理吗？"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/votes/+page.svelte
 msgid "Yes"
-msgstr ""
+msgstr "是"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/votes/+page.svelte
 msgid "No"
-msgstr ""
+msgstr "否"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/votes/+page.svelte
 msgid "Total Vote Weight"
-msgstr ""
+msgstr "总投票权重"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/votes/+page.svelte
 msgid "Self Vote Weight"
-msgstr ""
+msgstr "自身投票权重"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/votes/+page.svelte
 msgid "Proxied Weight"
-msgstr ""
+msgstr "代理权重```"
 
 #: src/routes/[[locale]]/[network]/(explorer)/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/votes/+page.svelte
@@ -4197,7 +4198,6 @@ msgstr "投票"
 
 #: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Top 21"
 msgstr "前 21 名"
 
@@ -4822,12 +4822,12 @@ msgstr "当前已质押"
 
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/unstake/+page.svelte
 msgid "Amount to Unstake"
-msgstr ""
+msgstr "要取消质押的金额"
 
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/stake/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/unstake/+page.svelte
 msgid "Available: <0/>"
-msgstr ""
+msgstr "可用：<0/>"
 
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/stake/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/stake/+page.svelte
@@ -4892,7 +4892,7 @@ msgstr "权限名称"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/permission.svelte
 msgid "<0>Threshold</0> Required"
-msgstr ""
+msgstr "<0>阈值</0> 要求"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
@@ -6490,10 +6490,8 @@ msgid ""
 "security."
 msgstr "投票给保护 {0} 网络的验证者。您的投票权会根据您抵押的代币数量进行加权，从而使在网络安全中拥有更大份额的人拥有更大的影响力。"
 
-#. placeholder {0}: producers.statistics.totalActive
-#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
-msgid "{0} active producers"
-msgstr "{0} 个活跃的生产者"
+#~ msgid "{0} active producers"
+#~ msgstr "{0} 个活跃的生产者"
 
 #: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
 msgid "View All Producers"
@@ -6605,3 +6603,20 @@ msgstr "正在加载您的投票..."
 #: src/routes/[[locale]]/[network]/(explorer)/governance/+page.ts
 msgid "Vote on block producers and sentiment topics on the {0} network."
 msgstr "在 {0} 网络上投票选举区块生产者和情绪话题。"
+
+#~ msgid ""
+#~ "Express your support or opposition on key network topics. Your vote is weighted by\n"
+#~ "your staked tokens, helping the community gauge consensus on important issues."
+#~ msgstr "对重要的网络议题表达您的支持或反对。您的投票权重取决于您质押的代币数量，有助于社区评估对重要问题的共识。"
+
+#~ msgid "Top Active Producers"
+#~ msgstr "活跃生产者"
+
+#. placeholder {0}: producers.statistics.totalActive
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
+msgid "{0} active"
+msgstr "{0} 个活跃"
+
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
+msgid "Top Producers"
+msgstr "頂級生產者"
