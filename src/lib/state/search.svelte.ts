@@ -2,6 +2,7 @@ import { Name, PublicKey, UInt32, Checksum256 } from '@wharfkit/antelope';
 import { browser } from '$app/environment';
 import type { NetworkState } from './network.svelte';
 import type { UnicoveContext } from './client.svelte';
+import type { Proposal } from '@wharfkit/msigs';
 
 export type SearchResult = {
 	result: string;
@@ -20,12 +21,14 @@ export enum SearchRecordType {
 	CONTRACT = 'contract',
 	// View a key
 	KEY = 'key',
+	// View a multisig proposal
+	MSIG = 'msig',
 	// Visit a page
 	PAGE = 'page',
 	// Switch to an account
 	SWITCH = 'switch',
 	// View a topic
-	TOPIC = 'topic',
+	TOPIC = 'topics',
 	// View a transaction
 	TRANSACTION = 'transaction',
 	// Unknown type, error?
@@ -118,7 +121,7 @@ const SearchCommands: SearchRecord[] = [
 	}
 ];
 
-export function search(context: UnicoveContext, query: string): SearchRecord[] {
+export async function search(context: UnicoveContext, query: string): Promise<SearchRecord[]> {
 	const results: SearchRecord[] = [];
 
 	// Listing of the currently logged in accounts for quick switching
@@ -136,6 +139,9 @@ export function search(context: UnicoveContext, query: string): SearchRecord[] {
 
 	// Search recent history
 	results.push(...searchHistory(query, context.history));
+
+	// Search msigs
+	results.push(...(await searchMsigs(query, context)));
 
 	return results;
 }
@@ -156,11 +162,20 @@ export function searchAccounts(query: string, context: UnicoveContext): SearchRe
 
 export function searchSuggestions(query: string, context: UnicoveContext): SearchRecord[] {
 	const { network, urlPath } = context;
-	return getPossibleSearchTypes(query, context).map((type) => ({
-		type,
-		value: query,
-		url: urlPath(`/${network}/${type}/${query}`)
-	}));
+	return getPossibleSearchTypes(query, context).map((type) => {
+		const result: SearchRecord = {
+			type,
+			value: query,
+			url: urlPath(`/${network}/${type}/${query}`)
+		};
+
+		// Add custom descriptions for types that need different display text
+		if (type === SearchRecordType.TOPIC) {
+			result.description = 'View topic';
+		}
+
+		return result;
+	});
 }
 
 export function searchCommands(query: string, context: UnicoveContext): SearchRecord[] {
@@ -178,6 +193,21 @@ export function searchHistory(query: string, recentHistory: SearchRecordStorage)
 	return history
 		.filter((r) => r.type !== SearchRecordType.PAGE)
 		.filter((r) => r.value.includes(query.trim().toLowerCase()));
+}
+
+export async function searchMsigs(query: string, context: UnicoveContext): Promise<SearchRecord[]> {
+	const { network, urlPath } = context;
+	try {
+		const response = await network.msigs.search_proposals(query, { limit: 10 });
+		return response.proposals.map((proposal: Proposal) => ({
+			type: SearchRecordType.MSIG,
+			value: `${proposal.proposer}:${proposal.proposal_name}`,
+			url: urlPath(`/${network}/msig/${proposal.proposer}/${proposal.proposal_name}`)
+		}));
+	} catch (error) {
+		console.error('Error searching msigs:', error);
+		return [];
+	}
 }
 
 export function getPossibleSearchTypes(value: string, context: UnicoveContext): SearchRecordType[] {

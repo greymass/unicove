@@ -39,7 +39,9 @@
 
 	$effect(() => {
 		if (searchValue) {
-			results = search(context, searchValue);
+			search(context, searchValue).then((searchResults) => {
+				results = searchResults;
+			});
 		} else {
 			results = context.history.get();
 		}

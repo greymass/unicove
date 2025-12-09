@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.663Z\n"
-"PO-Revision-Date: 2025-12-10T22:46:28.376Z\n"
+"PO-Revision-Date: 2025-12-11T21:02:08.599Z\n"
 "Last-Translator: \n"
 "Language: ko\n"
 "Language-Team: \n"
@@ -82,6 +82,7 @@ msgstr "API 참조"
 #: src/lib/components/transact/summary.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Status"
 msgstr "상태"
@@ -1296,20 +1297,20 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "support@greymass.com"
-msgstr ""
+msgstr "support@greymass.com"
 
 #. placeholder {0}: networkName
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "{0} Wallet"
-msgstr ""
+msgstr "{0} 지갑"
 
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "GitHub"
-msgstr ""
+msgstr "GitHub"
 
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "Latest Version"
-msgstr ""
+msgstr "최신 버전```"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/+layout.svelte
 msgid "Config"
@@ -1331,7 +1332,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/+layout.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "Wharf"
-msgstr ""
+msgstr "Wharf"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 msgid "Authority"
@@ -1389,21 +1390,21 @@ msgstr "ABI (에이비아이)"
 
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 msgid "ArrowRight"
-msgstr "오른쪽 화살표"
+msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 msgid "ArrowLeft"
-msgstr "왼쪽 화살표"
+msgstr ""
 
 #. placeholder {0}: data.details.totalCpu
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 msgid "{0} μs"
-msgstr "{0} μs"
+msgstr ""
 
 #. placeholder {0}: data.details.totalNet * 8
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 msgid "{0} Bytes"
-msgstr "{0} 바이트"
+msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+page.svelte
 msgid "Upload Contract"
@@ -1500,7 +1501,7 @@ msgstr "트랜잭션 상세정보"
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/prompt/[payload]/+page.svelte
 msgid "Perform transaction"
-msgstr "트랜잭션 수행"
+msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/prompt/[payload]/+page.svelte
 msgid "Sign-in with your wallet to perform this transaction"
@@ -2645,19 +2646,19 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/token/[contract]/[symbol]/+page.svelte
 msgid "Total Accounts Holding"
-msgstr ""
+msgstr "총 보유 계정 수"
 
 #: src/routes/[[locale]]/[network]/(explorer)/token/[contract]/[symbol]/+page.svelte
 msgid "Max Supply"
-msgstr ""
+msgstr "최대 공급량"
 
 #: src/routes/[[locale]]/[network]/(explorer)/token/[contract]/[symbol]/+page.svelte
 msgid "Issuer"
-msgstr ""
+msgstr "발행자"
 
 #: src/routes/[[locale]]/[network]/(explorer)/token/[contract]/[symbol]/+page.svelte
 msgid "Top 100 Accounts"
-msgstr ""
+msgstr "상위 100개 계정"
 
 #: src/routes/[[locale]]/[network]/(explorer)/token/[contract]/[symbol]/+page.svelte
 msgid "Balance"
@@ -2665,7 +2666,7 @@ msgstr "잔액"
 
 #: src/routes/[[locale]]/[network]/(explorer)/token/[contract]/[symbol]/+page.svelte
 msgid "(Locked Supply)"
-msgstr ""
+msgstr "(잠긴 공급량)"
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Recipient"
@@ -3341,56 +3342,56 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
 msgid "Clear Results"
-msgstr "결과 지우기"
+msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
 msgid "Perform Action"
-msgstr "액션 수행"
+msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
 msgid "Call readonly action"
-msgstr "읽기 전용 액션 호출"
+msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
 msgid "Call as readonly action?"
-msgstr "읽기 전용 액션으로 호출하시겠습니까?"
+msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
 msgid "Trigger when page loads?"
-msgstr "페이지 로드 시 트리거하시겠습니까?"
+msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
 msgid "Fill out the form to create a representation of the data in this type of action."
-msgstr "이러한 유형의 액션에서 데이터 표현을 생성하려면 양식을 작성하세요."
+msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
 msgid "Sharable URL for this action and data"
-msgstr "이 액션 및 데이터에 대한 공유 가능한 URL"
+msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
 msgid "API call which runs this readonly action"
-msgstr "이 읽기 전용 액션을 실행하는 API 호출"
+msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
 msgid "Error during readonly call..."
-msgstr "읽기 전용 호출 중 오류..."
+msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
 msgid "API Response"
-msgstr "API 응답"
+msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
 msgid "Action Traces"
-msgstr "액션 추적"
+msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
 msgid "Input Data"
-msgstr "입력 데이터"
+msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
 msgid "Struct"
-msgstr "구조체```"
+msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
 msgid "Table Browser"
@@ -3546,7 +3547,9 @@ msgstr "{0} 계정에 현재 배포된 컨트랙트가 없습니다."
 
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.ts
+#: src/routes/[[locale]]/[network]/(explorer)/key/[publicKey]/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.ts
+#: src/routes/[[locale]]/[network]/(explorer)/token/[contract]/[symbol]/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
 msgid "NOT_FOUND"
 msgstr "찾을 수 없음"
@@ -3632,16 +3635,16 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
 msgid "UTC"
-msgstr "UTC"
+msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/token/[contract]/[symbol]/+page.ts
 msgid "Token not found"
-msgstr ""
+msgstr "토큰을 찾을 수 없습니다"
 
 #. placeholder {0}: params.contract
 #: src/routes/[[locale]]/[network]/(explorer)/token/[contract]/[symbol]/+page.ts
 msgid "A token on the {0} smart contract."
-msgstr ""
+msgstr "{0} 스마트 컨트랙트의 토큰입니다."
 
 #. placeholder {0}: stats.supply.symbol.name
 #. placeholder {1}: params.contract
@@ -3650,7 +3653,7 @@ msgstr ""
 #. placeholder {4}: json.numholders
 #: src/routes/[[locale]]/[network]/(explorer)/token/[contract]/[symbol]/+page.ts
 msgid "The {0} token created by the {1} smart contract on the {2} network. {3} has {4} accounts currently holding a balance."
-msgstr ""
+msgstr "{2} 네트워크의 {1} 스마트 컨트랙트에 의해 생성된 {0} 토큰입니다. {3}은 현재 {4}개의 계정이 잔액을 보유하고 있습니다."
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balance/[contract]/[symbol]/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balance/[contract]/[symbol]/+page.ts
@@ -4249,7 +4252,7 @@ msgstr "{0} 토큰 스왑이 시작되었습니다!"
 msgid "Swap {0} to {1} at a 1:1 ratio"
 msgstr "{0}을(를) {1}으로 1:1 비율로 교환하세요"
 
-#. placeholder {0}: String(data.quote.symbol.name)
+#. placeholder {0}: props.network.token.name
 #. placeholder {0}: String(data.quote.symbol.name)
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/legacy-token-swap.svelte
@@ -4423,6 +4426,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/key/[publicKey]/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/key/[publicKey]/+page.ts
 msgid "Public Key"
 msgstr "공개 키"
 
@@ -4494,7 +4498,7 @@ msgstr "제안 ({0})"
 #. placeholder {0}: legacyPubKey
 #: src/routes/[[locale]]/[network]/(explorer)/key/[publicKey]/+page.svelte
 msgid "Legacy Key: {0}"
-msgstr ""
+msgstr "레거시 키: {0}"
 
 #: src/routes/[[locale]]/[network]/(explorer)/key/[publicKey]/+page.svelte
 msgid "Associated Accounts"
@@ -4512,7 +4516,6 @@ msgstr "총 계정 가치"
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/transaction/+page.svelte
 msgid "Transaction"
 msgstr "트랜잭션"
@@ -4551,11 +4554,11 @@ msgstr "블록 ID"
 
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 msgid "<0/> Previous Block"
-msgstr "<0/> 이전 블록"
+msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 msgid "Next Block <0/>"
-msgstr "다음 블록 <0/>"
+msgstr ""
 
 #. placeholder {0}: productName
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
@@ -4568,7 +4571,7 @@ msgstr "{name} + MetaMask"
 msgid ""
 "A new version of the {0} is available. Click the button below to update to the\n"
 "latest version ({1})."
-msgstr ""
+msgstr "{0}의 새 버전이 출시되었습니다. 아래 버튼을 클릭하여 최신 버전({1})으로 업데이트하세요."
 
 #. placeholder {0}: productName
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
@@ -4578,7 +4581,7 @@ msgstr "{0} 업데이트하기"
 #. placeholder {0}: productName
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "MetaMask and the {0} are connected, installed, and up-to-date using <0>version {0}</0>."
-msgstr ""
+msgstr "MetaMask와 {0}이(가) 연결되고 설치되었으며 <0>버전 {0}</0>을(를) 사용하여 최신 상태로 유지됩니다."
 
 #. placeholder {0}: context.wharf.session.actor
 #. placeholder {1}: networkName
@@ -4586,7 +4589,7 @@ msgstr ""
 msgid ""
 "You are logged in as {0} and ready to use Unicove to access\n"
 "the {1} network."
-msgstr ""
+msgstr "현재 {0}으로 로그인되어 있으며 Unicove를 사용하여 {1} 네트워크에 액세스할 수 있습니다."
 
 #. placeholder {0}: context.wharf.session.actor
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
@@ -4598,7 +4601,7 @@ msgstr "귀하는 {0}로 로그인되어 있으나, MetaMask를 사용하고 있
 msgid ""
 "If you don't already have an {0} account you can create one now. If you have\n"
 "already created an account you can login with MetaMask."
-msgstr ""
+msgstr "아직 {0} 계정이 없으면 지금 만들 수 있습니다. 이미 계정을 만든 경우 MetaMask로 로그인할 수 있습니다."
 
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "Create an account"
@@ -4866,6 +4869,7 @@ msgid "No available authorities for this account."
 msgstr "이 계정에는 사용 가능한 권한이 없습니다."
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balances/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/token/[contract]/[symbol]/+page.ts
 msgid "Token"
 msgstr "토큰"
 
@@ -5143,16 +5147,16 @@ msgstr "트랜잭션에서 발생한 개별 트랜잭션 추적 기록."
 #. placeholder {0}: data.base.name
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
 msgid "Send {0} <0>Max</0>"
-msgstr "{0} 보내기 <0>최대</0>"
+msgstr ""
 
 #. placeholder {0}: data.quote.name
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
 msgid "Receive {0}"
-msgstr "{0} 받기"
+msgstr ""
 
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
 msgid "Network Fee: <0/> (0.5%)"
-msgstr "네트워크 수수료: <0/> (0.5%)"
+msgstr ""
 
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
@@ -5161,7 +5165,7 @@ msgstr "로딩 중..."
 
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
 msgid "No swap pair available"
-msgstr "사용 가능한 스왑 페어가 없습니다"
+msgstr ""
 
 #. placeholder {0}: network.chain.name
 #: src/routes/+layout.server.ts
@@ -5501,7 +5505,7 @@ msgstr "{2} 네트워크 상의 {1} 컨트랙트에 있는 {0} 데이터 테이�
 msgid "The {0} data structures defined by the {1} smart contract on the {2} network."
 msgstr "{2} 네트워크 상의 {1} 스마트 컨트랙트에서 정의된 {0} 데이터 구조."
 
-#. placeholder {0}: params.id
+#. placeholder {0}: truncateCenter(params.id || '', 14)
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
 msgid "Transaction not found: {0}"
 msgstr "트랜잭션을 찾을 수 없습니다: {0}"
@@ -5598,7 +5602,7 @@ msgstr "WRAM"
 
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "MetaMask Snaps"
-msgstr ""
+msgstr "MetaMask 스냅"
 
 #. placeholder {0}: networkName
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
@@ -5607,7 +5611,7 @@ msgstr "MetaMask로 {0} 네트워크에서 트랜잭션 서명하는 방법"
 
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "MetaMask Wallet Plugin"
-msgstr ""
+msgstr "MetaMask 지갑 플러그인"
 
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid "Loading topics..."
@@ -5869,9 +5873,8 @@ msgstr "30명의 프로듀서 중 {0}명 선택됨"
 msgid "Submitting..."
 msgstr "제출 중..."
 
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
-msgid "Submit Vote"
-msgstr "투표 제출"
+#~ msgid "Submit Vote"
+#~ msgstr "투표 제출"
 
 #~ msgid "Vote Again"
 #~ msgstr "다시 투표"
@@ -5916,9 +5919,8 @@ msgstr "투표 방법"
 #~ "selected producers."
 #~ msgstr "블록 생산자는 트랜잭션을 검증하고 네트워크에 새 블록을 생성합니다. 귀하의 투표 가중치는 스테이킹한 토큰의 양에 따라 결정됩니다. 최대 30명의 생산자에게 투표할 수 있으며, 투표력은 선택한 모든 생산자에게 동일하게 분할됩니다."
 
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
-msgid "Visit producer website"
-msgstr "프로듀서 웹사이트 방문"
+#~ msgid "Visit producer website"
+#~ msgstr "프로듀서 웹사이트 방문"
 
 #~ msgid "What are Block Producers?"
 #~ msgstr "블록 생산자란 무엇인가요?"
@@ -6126,21 +6128,19 @@ msgstr "검색어와 일치하는 프로듀서가 없습니다"
 #~ "that attracts users and developers"
 #~ msgstr "사용자와 개발자를 유치하는 건전한 거버넌스를 통해 <0>토큰 가치를 높이십시오</0>"
 
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
-msgid ""
-"Voting for block producers is simple and flexible. Here's everything you need to\n"
-"know."
-msgstr "블록 프로듀서 투표는 간단하고 유연합니다. 알아야 할 모든 것이 여기에 있습니다."
+#~ msgid ""
+#~ "Voting for block producers is simple and flexible. Here's everything you need to\n"
+#~ "know."
+#~ msgstr "블록 프로듀서 투표는 간단하고 유연합니다. 알아야 할 모든 것이 여기에 있습니다."
 
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Vote with Staked Tokens"
 msgstr "스테이킹된 토큰으로 투표"
 
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
-msgid ""
-"Your vote weight equals the amount of tokens you have staked. More stake = more\n"
-"voting power."
-msgstr "귀하의 투표 가중치는 스테이킹한 토큰의 양과 같습니다. 더 많은 스테이크 = 더 많은 투표력."
+#~ msgid ""
+#~ "Your vote weight equals the amount of tokens you have staked. More stake = more\n"
+#~ "voting power."
+#~ msgstr "귀하의 투표 가중치는 스테이킹한 토큰의 양과 같습니다. 더 많은 스테이크 = 더 많은 투표력."
 
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Up to 30 Producers"
@@ -6177,18 +6177,18 @@ msgstr "투표에서 상위 21위를 차지한 프로듀서만이 활발하게 �
 msgid "Liquid Balance"
 msgstr "유동성 잔액"
 
-#~ msgid "Voting for block producers is simple and flexible. Here's everything you need to know."
-#~ msgstr "블록 생산자 투표는 간단하고 유연합니다. 알아야 할 모든 것이 여기에 있습니다."
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Voting for block producers is simple and flexible. Here's everything you need to know."
+msgstr "블록 생산자 투표는 간단하고 유연합니다. 알아야 할 모든 것이 여기에 있습니다."
 
 #~ msgid "Change your votes whenever you want. Your votes remain active until you modify them."
 #~ msgstr "언제든지 투표를 변경하십시오. 투표는 수정할 때까지 활성 상태로 유지됩니다."
 
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
-msgid ""
-"This network uses <0>Delegated Proof of Stake (DPoS)</0>, a consensus mechanism where token holders elect block producers to validate\n"
-"transactions and secure the network. Your vote directly shapes who runs the\n"
-"infrastructure you depend on."
-msgstr "이 네트워크는 <0>Delegated Proof of Stake (DPoS)</0> 방식을 사용합니다. 이는 토큰 보유자가 블록 생성자를 선출하여 트랜잭션을 검증하고 네트워크를 보호하는 합의 메커니즘입니다. 귀하의 투표는 귀하가 의존하는 인프라를 누가 운영할지 직접적으로 결정합니다."
+#~ msgid ""
+#~ "This network uses <0>Delegated Proof of Stake (DPoS)</0>, a consensus mechanism where token holders elect block producers to validate\n"
+#~ "transactions and secure the network. Your vote directly shapes who runs the\n"
+#~ "infrastructure you depend on."
+#~ msgstr "이 네트워크는 <0>Delegated Proof of Stake (DPoS)</0> 방식을 사용합니다. 이는 토큰 보유자가 블록 생성자를 선출하여 트랜잭션을 검증하고 네트워크를 보호하는 합의 메커니즘입니다. 귀하의 투표는 귀하가 의존하는 인프라를 누가 운영할지 직접적으로 결정합니다."
 
 #~ msgid "What Block Producers Do"
 #~ msgstr "블록 생성자의 역할"
@@ -6345,37 +6345,29 @@ msgstr "시간이 지남에 따라 투표 가치 감소"
 #~ "every transaction on the network"
 #~ msgstr "<0>트랜잭션 유효성 검사</0> — 네트워크의 모든 트랜잭션을 확인하고 처리합니다."
 
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
-msgid "Validate Transactions"
-msgstr "트랜잭션 검증"
+#~ msgid "Validate Transactions"
+#~ msgstr "트랜잭션 검증"
 
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
-msgid "They verify and process every transaction on the network"
-msgstr "그들은 네트워크 상의 모든 트랜잭션을 검증하고 처리합니다."
+#~ msgid "They verify and process every transaction on the network"
+#~ msgstr "그들은 네트워크 상의 모든 트랜잭션을 검증하고 처리합니다."
 
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
-msgid "Produce Blocks"
-msgstr "블록 생성"
+#~ msgid "Produce Blocks"
+#~ msgstr "블록 생성"
 
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
-msgid "Every 0.5 seconds, producers bundle transactions into blocks"
-msgstr "생산자들은 0.5초마다 트랜잭션을 블록으로 묶습니다."
+#~ msgid "Every 0.5 seconds, producers bundle transactions into blocks"
+#~ msgstr "생산자들은 0.5초마다 트랜잭션을 블록으로 묶습니다."
 
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
-msgid "Maintain Infrastructure"
-msgstr "인프라 유지"
+#~ msgid "Maintain Infrastructure"
+#~ msgstr "인프라 유지"
 
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
-msgid "They provide servers, bandwidth, and storage that keep the network running 24/7"
-msgstr "그들은 네트워크가 24시간 내내 작동하도록 서버, 대역폭 및 스토리지를 제공합니다."
+#~ msgid "They provide servers, bandwidth, and storage that keep the network running 24/7"
+#~ msgstr "그들은 네트워크가 24시간 내내 작동하도록 서버, 대역폭 및 스토리지를 제공합니다."
 
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
-msgid "Govern the Network"
-msgstr "네트워크 관리"
+#~ msgid "Govern the Network"
+#~ msgstr "네트워크 관리"
 
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
-msgid "Producers vote on protocol upgrades and critical decisions"
-msgstr "생산자들은 프로토콜 업그레이드 및 중요한 결정에 투표합니다."
+#~ msgid "Producers vote on protocol upgrades and critical decisions"
+#~ msgstr "생산자들은 프로토콜 업그레이드 및 중요한 결정에 투표합니다."
 
 #~ msgid "Secure the network"
 #~ msgstr "네트워크 보안"
@@ -6565,8 +6557,9 @@ msgstr "상위 21개 블록 생산자"
 #~ msgid "{0} active proposals"
 #~ msgstr "{0}개의 활성 제안"
 
-#~ msgid "View All Proposals"
-#~ msgstr "모든 제안 보기"
+#: src/routes/[[locale]]/[network]/(explorer)/msig/+page.svelte
+msgid "View All Proposals"
+msgstr "모든 제안 보기"
 
 #~ msgid "by"
 #~ msgstr "작성자"
@@ -6622,17 +6615,20 @@ msgstr "{0} 활성"
 msgid "Top Producers"
 msgstr "최고 생산자"
 
-#~ msgid "This network uses Delegated Proof of Stake (DPoS), a consensus mechanism where token holders elect block producers to validate transactions and secure the network. Your vote directly shapes who runs the infrastructure you depend on."
-#~ msgstr "이 네트워크는 위임 지분 증명(DPoS)을 사용합니다. 이는 토큰 보유자가 블록 생산자를 선출하여 트랜잭션을 검증하고 네트워크를 보호하는 합의 메커니즘입니다. 귀하의 투표는 귀하가 의존하는 인프라를 운영하는 사람을 직접적으로 결정합니다."
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "This network uses Delegated Proof of Stake (DPoS), a consensus mechanism where token holders elect block producers to validate transactions and secure the network. Your vote directly shapes who runs the infrastructure you depend on."
+msgstr "이 네트워크는 위임 지분 증명(DPoS)을 사용합니다. 이는 토큰 보유자가 블록 생산자를 선출하여 트랜잭션을 검증하고 네트워크를 보호하는 합의 메커니즘입니다. 귀하의 투표는 귀하가 의존하는 인프라를 운영하는 사람을 직접적으로 결정합니다."
 
-#~ msgid "Your vote weight equals the amount of tokens you have staked. More stake = more voting power."
-#~ msgstr "투표 가중치는 스테이킹한 토큰 양과 같습니다. 스테이크가 많을수록 투표력이 높아집니다."
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Your vote weight equals the amount of tokens you have staked. More stake = more voting power."
+msgstr "투표 가중치는 스테이킹한 토큰 양과 같습니다. 스테이크가 많을수록 투표력이 높아집니다."
 
 #~ msgid "Who Validates Transactions"
 #~ msgstr "트랜잭션을 검증하는 사람"
 
-#~ msgid "The block producers verify and process every transaction on the network"
-#~ msgstr "블록 생산자는 네트워크의 모든 트랜잭션을 검증하고 처리합니다."
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "The block producers verify and process every transaction on the network"
+msgstr "블록 생산자는 네트워크의 모든 트랜잭션을 검증하고 처리합니다."
 
 #~ msgid "Who Produce Blocks"
 #~ msgstr "블록을 생성하는 사람"
@@ -6643,11 +6639,13 @@ msgstr "최고 생산자"
 #~ msgid "Who Produces Blocks"
 #~ msgstr "블록 생성자"
 
-#~ msgid "Every 0.5 seconds, block producers bundle transactions into blocks"
-#~ msgstr "블록 생산자는 0.5초마다 트랜잭션을 블록으로 묶습니다."
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Every 0.5 seconds, block producers bundle transactions into blocks"
+msgstr "블록 생산자는 0.5초마다 트랜잭션을 블록으로 묶습니다."
 
-#~ msgid "These block producers provide servers, bandwidth, and storage that keep the network running 24/7"
-#~ msgstr "이 블록 생성자들은 네트워크가 24시간 연중무휴로 운영되도록 서버, 대역폭 및 저장소를 제공합니다."
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "These block producers provide servers, bandwidth, and storage that keep the network running 24/7"
+msgstr "이 블록 생성자들은 네트워크가 24시간 연중무휴로 운영되도록 서버, 대역폭 및 저장소를 제공합니다."
 
 #~ msgid "Who Governs the Network"
 #~ msgstr "누가 네트워크를 관리하는가"
@@ -6655,26 +6653,52 @@ msgstr "최고 생산자"
 #~ msgid "Block Producers vote on protocol upgrades and critical decisions"
 #~ msgstr "블록 생산자는 프로토콜 업그레이드 및 중요한 결정에 투표합니다."
 
-#~ msgid "Block Producers vote on protocol upgrades and critical network decisions"
-#~ msgstr "블록 생산자는 프로토콜 업그레이드 및 중요한 네트워크 결정에 대해 투표합니다."
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Block Producers vote on protocol upgrades and critical network decisions"
+msgstr "블록 생산자는 프로토콜 업그레이드 및 중요한 네트워크 결정에 대해 투표합니다."
 
-#~ msgid "Transaction Validation"
-#~ msgstr "트랜잭션 유효성 검사"
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Transaction Validation"
+msgstr "트랜잭션 유효성 검사"
 
-#~ msgid "Block Production"
-#~ msgstr "블록 생성"
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Block Production"
+msgstr "블록 생성"
 
-#~ msgid "Infrastructure Maintenance"
-#~ msgstr "인프라 유지 관리"
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Infrastructure Maintenance"
+msgstr "인프라 유지 관리"
 
-#~ msgid "Network Governance"
-#~ msgstr "네트워크 거버넌스"
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Network Governance"
+msgstr "네트워크 거버넌스"
 
-#~ msgid "Rank"
-#~ msgstr "순위"
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Rank"
+msgstr "순위"
 
-#~ msgid "Submit <0>Vote</0>"
-#~ msgstr "<0>투표</0> 제출"
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Submit <0>Vote</0>"
+msgstr "<0>투표</0> 제출"
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/+page.svelte
+msgid "Multisig Proposals"
+msgstr "멀티시그 제안"
+
+#. placeholder {0}: data.total
+#: src/routes/[[locale]]/[network]/(explorer)/msig/+page.svelte
+msgid "{0} recent proposals"
+msgstr "최근 제안 {0}개"
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/+page.svelte
+msgid ""
+"View recent multisig proposals requiring approval from multiple accounts. These proposals\n"
+"enable secure, collaborative actions on the network through multi-signature transactions."
+msgstr "여러 계정의 승인이 필요한 최근 멀티시그 제안을 봅니다. 이러한 제안은 멀티 시그니처 트랜잭션을 통해 네트워크에서 안전하고 협업적인 작업을 가능하게 합니다."
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/+page.svelte
+msgid "No recent proposals found"
+msgstr "최근 제안이 없습니다"
 
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+layout.ts
 msgid "No block found."
@@ -6691,3 +6715,11 @@ msgstr "멀티시그 제안을 찾을 수 없습니다."
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.ts
 msgid "Multisig Proposal"
 msgstr "멀티시그 제안"
+
+#: src/routes/[[locale]]/[network]/(explorer)/key/[publicKey]/+page.ts
+msgid "No accounts found for this public key."
+msgstr "이 공개 키에 해당하는 계정을 찾을 수 없습니다."
+
+#: src/lib/state/search.svelte.ts
+msgid "View topic"
+msgstr "토픽 보기"

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2025-12-10T22:46:28.359Z\n"
+"PO-Revision-Date: 2025-12-11T21:02:07.801Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -3616,7 +3616,9 @@ msgstr "No contract is currently deployed to the {0} account."
 
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.ts
+#: src/routes/[[locale]]/[network]/(explorer)/key/[publicKey]/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.ts
+#: src/routes/[[locale]]/[network]/(explorer)/token/[contract]/[symbol]/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
 msgid "NOT_FOUND"
 msgstr "NOT_FOUND"
@@ -4518,6 +4520,7 @@ msgstr "Your new account has been created successfully."
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/key/[publicKey]/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/key/[publicKey]/+page.ts
 msgid "Public Key"
 msgstr "Public Key"
 
@@ -5003,6 +5006,7 @@ msgid "No available authorities for this account."
 msgstr "No available authorities for this account."
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balances/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/token/[contract]/[symbol]/+page.ts
 msgid "Token"
 msgstr "Token"
 
@@ -6845,8 +6849,9 @@ msgstr "Top 21 Block Producer"
 #~ msgid "{0} active proposals"
 #~ msgstr "{0} active proposals"
 
-#~ msgid "View All Proposals"
-#~ msgstr "View All Proposals"
+#: src/routes/[[locale]]/[network]/(explorer)/msig/+page.svelte
+msgid "View All Proposals"
+msgstr "View All Proposals"
 
 #~ msgid "by"
 #~ msgstr "by"
@@ -6990,3 +6995,32 @@ msgstr "No multisig proposal found."
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.ts
 msgid "Multisig Proposal"
 msgstr "Multisig Proposal"
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/+page.svelte
+msgid "Multisig Proposals"
+msgstr "Multisig Proposals"
+
+#. placeholder {0}: data.total
+#: src/routes/[[locale]]/[network]/(explorer)/msig/+page.svelte
+msgid "{0} recent proposals"
+msgstr "{0} recent proposals"
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/+page.svelte
+msgid ""
+"View recent multisig proposals requiring approval from multiple accounts. These proposals\n"
+"enable secure, collaborative actions on the network through multi-signature transactions."
+msgstr ""
+"View recent multisig proposals requiring approval from multiple accounts. These proposals\n"
+"enable secure, collaborative actions on the network through multi-signature transactions."
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/+page.svelte
+msgid "No recent proposals found"
+msgstr "No recent proposals found"
+
+#: src/routes/[[locale]]/[network]/(explorer)/key/[publicKey]/+page.ts
+msgid "No accounts found for this public key."
+msgstr "No accounts found for this public key."
+
+#: src/lib/state/search.svelte.ts
+msgid "View topic"
+msgstr "View topic"
