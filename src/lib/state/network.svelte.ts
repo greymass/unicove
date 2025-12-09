@@ -13,6 +13,7 @@ import {
 import { ChainDefinition } from '@wharfkit/common';
 import { RAMState, Resources as ResourceClient, REXState, PowerUpState } from '@wharfkit/resources';
 import { ABICache } from '@wharfkit/abicache';
+import { MsigsClient } from '@wharfkit/msigs';
 
 import {
 	NetworkDataSources,
@@ -65,6 +66,7 @@ export class NetworkState {
 	readonly config: ChainConfig;
 	readonly contracts: DefaultContracts;
 	readonly fetch = fetch;
+	readonly msigs: MsigsClient;
 	readonly snapOrigin?: string;
 	readonly resourceClient: ResourceClient;
 
@@ -112,6 +114,7 @@ export class NetworkState {
 			sampleAccount: 'eosio.reserv',
 			symbol: String(this.config.systemtoken.symbol)
 		});
+		this.msigs = new MsigsClient(this.client);
 		this.connection.endpoint = (this.client.provider as FetchProvider).url;
 
 		this.contracts = {

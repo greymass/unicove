@@ -30,8 +30,6 @@
 
 		return baseBadges;
 	});
-
-	console.log(page.data);
 </script>
 
 <Stack tag="article" class="@container flex-1 gap-6">

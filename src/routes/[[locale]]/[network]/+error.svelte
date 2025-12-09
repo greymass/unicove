@@ -12,7 +12,7 @@
 <SingleCard>
 	<Stack class="py-8 text-center">
 		<div class="*:object-fit *:size-full">
-			<Generic404 />
+			<!-- <Generic404 /> -->
 		</div>
 		<h1 class="text-headline">
 			{#if page.error?.message}

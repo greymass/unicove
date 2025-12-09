@@ -6,6 +6,8 @@
 		Boxes,
 		Key,
 		ReceiptText,
+		Scale,
+		UserCheck,
 		UserSearch
 	} from '@lucide/svelte';
 	import { type ComponentProps, type Snippet } from 'svelte';
@@ -48,8 +50,14 @@
 			<span class="max-w-[12ch] truncate">
 				{record.value}
 			</span>
+		{:else if record.type === SearchRecordType.MSIG}
+			<UserCheck class="size-4" />
+			<span>{record.value}</span>
 		{:else if record.type === SearchRecordType.SWITCH}
 			<ArrowLeftRight class="size-4" />
+			<span>{record.value}</span>
+		{:else if record.type === SearchRecordType.TOPIC}
+			<Scale class="size-4" />
 			<span>{record.value}</span>
 		{:else if record.type === SearchRecordType.TRANSACTION}
 			<Boxes class="size-4" />
