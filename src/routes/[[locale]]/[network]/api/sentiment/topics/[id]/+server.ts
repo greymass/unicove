@@ -1,32 +1,54 @@
-import { json, error } from '@sveltejs/kit';
-import type { RequestHandler } from './$types';
-import { getCacheHeaders } from '$lib/utils';
+import { error, redirect } from '@sveltejs/kit';
+import type { PageLoad } from './$types';
+import { useLocale } from '$lib/utils/intl';
+import { TopicSentimentState } from '../../../../(explorer)/sentiment/topics/state.svelte';
 
-export const GET: RequestHandler = async ({ fetch, locals: { network }, params }) => {
-	try {
-		const sentimentApiUrl = network.config.endpoints.sentiment;
+export const load: PageLoad = async ({ parent, params, fetch }) => {
+	const { network, locale } = await parent();
+	const topicId = params.id;
 
-		if (!sentimentApiUrl) {
-			throw error(503, 'Sentiment API not configured for this network');
-		}
+	await useLocale(locale);
 
-		const topicId = params.id;
-		const response = await fetch(`${sentimentApiUrl}/v1/topics/${topicId}`);
-
-		if (!response.ok) {
-			throw error(response.status, `Sentiment API error: ${response.statusText}`);
-		}
-
-		const data = await response.json();
-
-		return json(data, {
-			headers: getCacheHeaders(5)
+	if (!topicId) {
+		throw error(404, {
+			message: 'Topic not found',
+			code: 'NOT_FOUND',
+			title: params.id,
+			subtitle: 'Topic'
 		});
-	} catch (e) {
-		console.error('Sentiment topic detail API error:', e);
-		if (e && typeof e === 'object' && 'status' in e) {
-			throw e;
-		}
-		throw error(500, 'Failed to fetch sentiment topic');
 	}
+
+	const sentiment = new TopicSentimentState(network, locale, fetch);
+
+	try {
+		await Promise.all([sentiment.loadTopic(topicId), sentiment.loadTopicVotes(topicId)]);
+	} catch (e) {
+		console.error('Error loading topic:', e);
+		throw error(500, 'Failed to load topic data');
+	}
+
+	if (!sentiment.currentTopic) {
+		throw error(404, {
+			message: 'Topic not found',
+			code: 'NOT_FOUND',
+			title: params.id,
+			subtitle: 'Topic'
+		});
+	}
+
+	return {
+		sentiment,
+		topicId,
+		backPath: `/${locale}/${params.network}/topics`,
+		title: sentiment.currentTopic.topic.id,
+		subtitle: `Last updated ${new Date(sentiment.currentTopic.topic.lastUpdated).toLocaleString()}`,
+		pageMetaTags: {
+			title: [sentiment.currentTopic.topic.id, 'Sentiment', network.chain.name].join(' | '),
+			description: [
+				'Overview and statistics for community sentiment on the',
+				sentiment.currentTopic.topic.id,
+				'topic'
+			].join(' ')
+		}
+	};
 };
