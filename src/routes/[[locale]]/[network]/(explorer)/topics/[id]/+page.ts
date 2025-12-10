@@ -10,7 +10,12 @@ export const load: PageLoad = async ({ parent, params, fetch }) => {
 	await useLocale(locale);
 
 	if (!topicId) {
-		throw error(404, 'Topic not found');
+		throw error(404, {
+			message: 'Topic not found',
+			code: 'NOT_FOUND',
+			title: params.id,
+			subtitle: 'Topic'
+		});
 	}
 
 	const sentiment = new SentimentState(network, locale, fetch);
@@ -23,7 +28,12 @@ export const load: PageLoad = async ({ parent, params, fetch }) => {
 	}
 
 	if (!sentiment.currentTopic) {
-		throw error(404, 'Topic not found');
+		throw error(404, {
+			message: 'Topic not found',
+			code: 'NOT_FOUND',
+			title: params.id,
+			subtitle: 'Topic'
+		});
 	}
 
 	return {

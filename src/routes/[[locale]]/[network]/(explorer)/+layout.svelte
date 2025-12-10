@@ -30,18 +30,22 @@
 
 		return baseBadges;
 	});
+
+	console.log(page.data);
 </script>
 
-<Stack tag="article" class="@container gap-6">
-	<Pageheader
-		network={data.network}
-		title={page.data.title}
-		subtitle={page.data.subtitle}
-		backPath={page.data.backPath}
-		actions={page.data?.header?.actions}
-		copyData={page.data?.header?.copyData}
-		{badges}
-	/>
+<Stack tag="article" class="@container flex-1 gap-6">
+	{#if page.data.title}
+		<Pageheader
+			network={data.network}
+			title={page.data.title}
+			subtitle={page.data.subtitle}
+			backPath={page.data.backPath}
+			actions={page.data?.header?.actions}
+			copyData={page.data?.header?.copyData}
+			{badges}
+		/>
+	{/if}
 
 	{@render children()}
 </Stack>

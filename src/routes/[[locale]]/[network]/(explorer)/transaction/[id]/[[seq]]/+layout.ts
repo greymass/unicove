@@ -13,8 +13,10 @@ export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 	const json: TransactionResponse = await response.json();
 	if (!json.id) {
 		error(404, {
-			message: `Transaction not found: ${truncateCenter(params.id || '', 14)}`,
-			code: 'NOT_FOUND'
+			message: `Transaction not found: ${params.id}`,
+			code: 'NOT_FOUND',
+			title: truncateCenter(params.id || '', 14),
+			subtitle: 'Transaction'
 		});
 	}
 	const transaction = TransactionResponse.from(json);

@@ -21,8 +21,10 @@ export const load: LayoutLoad = async ({ fetch, params }) => {
 	} catch (e) {
 		console.error(e);
 		error(404, {
-			message: `Account not found: ${String(params.name)}`,
-			code: 'NOT_FOUND'
+			message: 'Account not found',
+			code: 'NOT_FOUND',
+			title: params.name,
+			subtitle: 'Account'
 		});
 	}
 

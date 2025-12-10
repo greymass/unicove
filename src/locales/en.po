@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2025-12-09T00:52:18.413Z\n"
+"PO-Revision-Date: 2025-12-10T22:46:28.359Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -14,6 +14,7 @@ msgstr ""
 
 #: src/routes/+error.svelte
 #: src/routes/+layout.server.ts
+#: src/routes/[[locale]]/[network]/(explorer)/+error.svelte
 #: src/routes/[[locale]]/[network]/+error.svelte
 msgid "Page not found"
 msgstr "Page not found"
@@ -2443,6 +2444,7 @@ msgstr "Load more"
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.ts
+#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/ram/+page.svelte
 msgid "Contract"
 msgstr "Contract"
@@ -3612,7 +3614,9 @@ msgstr "Review the actions below and sign the transaction."
 msgid "No contract is currently deployed to the {0} account."
 msgstr "No contract is currently deployed to the {0} account."
 
+#: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.ts
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
 msgid "NOT_FOUND"
 msgstr "NOT_FOUND"
@@ -4336,7 +4340,7 @@ msgstr "{0} Token Swap has begun!"
 msgid "Swap {0} to {1} at a 1:1 ratio"
 msgstr "Swap {0} to {1} at a 1:1 ratio"
 
-#. placeholder {0}: props.network.token.name
+#. placeholder {0}: String(data.quote.symbol.name)
 #. placeholder {0}: String(data.quote.symbol.name)
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/legacy-token-swap.svelte
@@ -4609,6 +4613,7 @@ msgstr "Total Account Value"
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/transaction/+page.svelte
 msgid "Transaction"
 msgstr "Transaction"
@@ -5633,7 +5638,7 @@ msgstr "The {0} data tables in the {1} contract on the {2} network."
 msgid "The {0} data structures defined by the {1} smart contract on the {2} network."
 msgstr "The {0} data structures defined by the {1} smart contract on the {2} network."
 
-#. placeholder {0}: truncateCenter(params.id || '', 14)
+#. placeholder {0}: params.id
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
 msgid "Transaction not found: {0}"
 msgstr "Transaction not found: {0}"
@@ -6969,3 +6974,19 @@ msgstr "Rank"
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Submit <0>Vote</0>"
 msgstr "Submit <0>Vote</0>"
+
+#: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+layout.ts
+msgid "No block found."
+msgstr "No block found."
+
+#: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+layout.ts
+msgid "Block"
+msgstr "Block"
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.ts
+msgid "No multisig proposal found."
+msgstr "No multisig proposal found."
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.ts
+msgid "Multisig Proposal"
+msgstr "Multisig Proposal"

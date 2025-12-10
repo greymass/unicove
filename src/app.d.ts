@@ -8,6 +8,8 @@ declare global {
 		}
 		interface Error {
 			code?: string;
+			title?: string;
+			subtitle?: string;
 		}
 	}
 }

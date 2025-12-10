@@ -12,7 +12,9 @@ export const load: PageLoad = async ({ fetch, params, parent }) => {
 	} catch (e) {
 		error(404, {
 			message: `Key not found: ${e}`,
-			code: 'KEY_NOT_FOUND'
+			code: 'NOT_FOUND',
+			title: params.publicKey,
+			subtitle: 'Public Key'
 		});
 	}
 
@@ -20,6 +22,15 @@ export const load: PageLoad = async ({ fetch, params, parent }) => {
 	const accounts = await fetch(localizePath(`/api/key/${params.publicKey}`))
 		.then((response) => response.json())
 		.then((json) => json.accounts || []);
+
+	if (accounts.length === 0) {
+		error(404, {
+			message: `No accounts found for this public key.`,
+			code: 'NOT_FOUND',
+			title: params.publicKey,
+			subtitle: 'Public Key'
+		});
+	}
 
 	// TODO: The title should follow the rest of the sections of the explorer and be the public key.
 	// The pageheader component should be in charge of visually truncating the text but the full text should
