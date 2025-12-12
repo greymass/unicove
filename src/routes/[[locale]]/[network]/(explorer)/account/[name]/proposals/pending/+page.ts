@@ -4,12 +4,14 @@ export const load: PageLoad = async ({ params, parent, url }) => {
 	const { network } = await parent();
 
 	const status = url.searchParams.get('status') || 'all';
+	const includeApproved = url.searchParams.get('include_approved') === 'true';
 	const offset = Number(url.searchParams.get('offset')) || 0;
 	const limit = Number(url.searchParams.get('limit')) || 20;
 
 	try {
-		const response = await network.msigs.get_proposals(params.name, {
+		const response = await network.msigs.get_approver_proposals(params.name, {
 			status: status === 'all' ? undefined : status,
+			include_approved: includeApproved,
 			limit,
 			offset
 		});
@@ -19,22 +21,24 @@ export const load: PageLoad = async ({ params, parent, url }) => {
 			total: response.total,
 			more: response.more,
 			status,
+			includeApproved,
 			offset,
 			limit,
-			subtitle: `Proposals Created by ${params.name}`,
+			subtitle: `Proposals Pending Approval from ${params.name}`,
 			pageMetaTags: {
-				title: `Proposals Created by ${params.name}`,
-				description: `View all multisig proposals created by ${params.name}`
+				title: `Proposals Pending Approval from ${params.name}`,
+				description: `Multisig proposals awaiting approval from ${params.name}`
 			}
 		};
 	} catch (error) {
-		console.error('Error loading created proposals:', error);
+		console.error('Error loading pending proposals:', error);
 		return {
 			proposals: [],
 			total: 0,
 			more: false,
 			error: String(error),
 			status,
+			includeApproved,
 			offset,
 			limit
 		};

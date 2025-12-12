@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.663Z\n"
-"PO-Revision-Date: 2025-12-11T21:02:08.599Z\n"
+"PO-Revision-Date: 2025-12-12T19:32:41.479Z\n"
 "Last-Translator: \n"
 "Language: ko\n"
 "Language-Team: \n"
@@ -1265,6 +1265,7 @@ msgstr "업로드"
 
 #: src/routes/[[locale]]/[network]/(account)/upload/[[name]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/permission.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/+page.ts
@@ -1363,7 +1364,7 @@ msgid "Overview"
 msgstr "개요"
 
 #. placeholder {0}: data.abi.actions.length
-#. placeholder {0}: data.proposal.transaction.actions.length
+#. placeholder {0}: actionsCount
 #. placeholder {0}: data.transaction.transaction.actions.length
 #. placeholder {0}: data.transaction.transaction.actions.length
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.svelte
@@ -2421,55 +2422,55 @@ msgstr "{1} 계약에서 {0}을(를) 표시하도록 필터링합니다."
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/wharf/+page.svelte
 msgid "Wharf State"
-msgstr ""
+msgstr "Wharf 상태"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/wharf/+page.svelte
 msgid "The state internal to the wharf service."
-msgstr ""
+msgstr "wharf 서비스 내부의 상태입니다."
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/wharf/+page.svelte
 msgid "controls"
-msgstr ""
+msgstr "컨트롤"
 
 #. placeholder {0}: context.wharf.session.actor
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/wharf/+page.svelte
 msgid "Logout ({0})"
-msgstr ""
+msgstr "로그아웃 ({0})"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/wharf/+page.svelte
 msgid "Logout (All Accounts)"
-msgstr ""
+msgstr "로그아웃 (모든 계정)"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/wharf/+page.svelte
 msgid "session"
-msgstr ""
+msgstr "세션"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/wharf/+page.svelte
 msgid "The currently active session."
-msgstr ""
+msgstr "현재 활성 세션입니다."
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/wharf/+page.svelte
 msgid "Chain"
-msgstr ""
+msgstr "체인"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/wharf/+page.svelte
 msgid "No Session Active"
-msgstr ""
+msgstr "활성 세션 없음"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/wharf/+page.svelte
 msgid "sessions"
-msgstr ""
+msgstr "세션"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/wharf/+page.svelte
 msgid "The available sessions that can be used."
-msgstr ""
+msgstr "사용 가능한 세션입니다."
 
 #. placeholder {0}: session.actor
 #. placeholder {1}: session.permission
 #. placeholder {2}: session.chain
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/wharf/+page.svelte
 msgid "Switch: {0}@{1} ({2})"
-msgstr ""
+msgstr "전환: {0}@{1} ({2})```"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/network/+page.svelte
 msgid "Network State"
@@ -3548,7 +3549,6 @@ msgstr "{0} 계정에 현재 배포된 컨트랙트가 없습니다."
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/key/[publicKey]/+page.ts
-#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/token/[contract]/[symbol]/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
 msgid "NOT_FOUND"
@@ -3635,7 +3635,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
 msgid "UTC"
-msgstr ""
+msgstr "UTC```"
 
 #: src/routes/[[locale]]/[network]/(explorer)/token/[contract]/[symbol]/+page.ts
 msgid "Token not found"
@@ -4490,10 +4490,8 @@ msgstr "활동"
 msgid "Permissions"
 msgstr "권한"
 
-#. placeholder {0}: data.account.proposals.length
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
-msgid "Proposals ({0})"
-msgstr "제안 ({0})"
+#~ msgid "Proposals ({0})"
+#~ msgstr "제안 ({0})"
 
 #. placeholder {0}: legacyPubKey
 #: src/routes/[[locale]]/[network]/(explorer)/key/[publicKey]/+page.svelte
@@ -4516,6 +4514,7 @@ msgstr "총 계정 가치"
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/transaction/+page.svelte
 msgid "Transaction"
 msgstr "트랜잭션"
@@ -4910,13 +4909,11 @@ msgstr "가중치"
 msgid "Authorization"
 msgstr "권한 부여"
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
-msgid "Proposal ID"
-msgstr "제안 ID"
+#~ msgid "Proposal ID"
+#~ msgstr "제안 ID"
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
-msgid "No proposals found."
-msgstr "제안이 없습니다"
+#~ msgid "No proposals found."
+#~ msgstr "제안이 없습니다"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Requested Approvals"
@@ -4943,6 +4940,7 @@ msgstr "역할"
 msgid "Signer"
 msgstr "서명자"
 
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Approved"
 msgstr "승인됨"
@@ -4963,10 +4961,12 @@ msgstr "제안자"
 msgid "Proposal Name"
 msgstr "제안명"
 
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Expired"
 msgstr "만료됨"
 
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Expiration"
 msgstr "만료"
@@ -5001,12 +5001,12 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/traces/+page.svelte
 msgid "Traces ({0})"
-msgstr ""
+msgstr "추적 ({0})"
 
 #. placeholder {0}: ramDeltas
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.svelte
 msgid "RAM Usage ({0})"
-msgstr ""
+msgstr "RAM 사용량 ({0})"
 
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
 msgid "Transaction Summary"
@@ -5364,7 +5364,9 @@ msgstr "{0} 네트워크의 계정 개요"
 msgid "Block #{0} was produced by {1} on {2}, which included {3} transactions performing {4} actions."
 msgstr "블록 #{0}는 {2}에 {1}에 의해 생성되었으며, {3}개의 트랜잭션으로 {4}개의 액션을 수행했습니다."
 
-#. placeholder {0}: params.number
+#. placeholder {0}: event.globalseq
+#. placeholder {0}: event.globalseq
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActivityEvent.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+layout.ts
 msgid "Block #{0}"
 msgstr "블록 #{0}"
@@ -5469,14 +5471,8 @@ msgstr "권한 | {0} | {1} 네트워크"
 msgid "Permissions for {0} on the {1} network."
 msgstr "{1} 네트워크 상의 {0} 계정 권한."
 
-#. placeholder {0}: params.name
-#. placeholder {1}: network.chain.name
-#. placeholder {0}: params.name
-#. placeholder {1}: network.chain.name
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
-msgid "Multisig proposals by {0} on the {1} Network."
-msgstr "{0} 네트워크에서 {1}이 제출한 멀티시그 제안"
+#~ msgid "Multisig proposals by {0} on the {1} Network."
+#~ msgstr "{0} 네트워크에서 {1}이 제출한 멀티시그 제안"
 
 #. placeholder {0}: p.abi.actions.length
 #. placeholder {1}: p.contract
@@ -5505,7 +5501,7 @@ msgstr "{2} 네트워크 상의 {1} 컨트랙트에 있는 {0} 데이터 테이�
 msgid "The {0} data structures defined by the {1} smart contract on the {2} network."
 msgstr "{2} 네트워크 상의 {1} 스마트 컨트랙트에서 정의된 {0} 데이터 구조."
 
-#. placeholder {0}: truncateCenter(params.id || '', 14)
+#. placeholder {0}: params.id
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
 msgid "Transaction not found: {0}"
 msgstr "트랜잭션을 찾을 수 없습니다: {0}"
@@ -5532,11 +5528,8 @@ msgstr "토큰을 다른 계정으로 전송하세요."
 msgid "Transfer tokens from one account to another account on the {0} network using an {1} compatible wallet."
 msgstr "{1} 네트워크 호환 지갑을 사용하여 {1} 네트워크의 한 계정에서 다른 계정으로 토큰을 전송하세요."
 
-#. placeholder {0}: params.proposer
-#. placeholder {1}: network.chain.name
-#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.ts
-msgid "An MSIG proposed by {0} on the {1} Network"
-msgstr "{1} 네트워크에서 {0}가 제안한 MSIG"
+#~ msgid "An MSIG proposed by {0} on the {1} Network"
+#~ msgstr "{1} 네트워크에서 {0}가 제안한 MSIG"
 
 #. placeholder {0}: params.name
 #. placeholder {1}: network.chain.name
@@ -5724,6 +5717,11 @@ msgstr "업데이트 중..."
 msgid "Dismiss"
 msgstr "닫기"
 
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/created/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/pending/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid "Load More"
@@ -6573,11 +6571,13 @@ msgstr "모든 제안 보기"
 #~ msgid "by <0/>"
 #~ msgstr "작성자: <0/>"
 
-#~ msgid "Proposed by"
-#~ msgstr "제안자"
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+msgid "Proposed by"
+msgstr "제안자"
 
-#~ msgid "Approval Progress"
-#~ msgstr "승인 진행률"
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+msgid "Approval Progress"
+msgstr "승인 진행률"
 
 #~ msgid "{0} of {1} <0>({0}%)</0>"
 #~ msgstr "{0}/{1} <0>({0}%)</0>"
@@ -6591,8 +6591,10 @@ msgstr "모든 제안 보기"
 #~ msgid "{0} action{1}"
 #~ msgstr "{0} 액션{1}"
 
-#~ msgid "Expires {0}"
-#~ msgstr "만료일: {0}"
+#. placeholder {0}: expirationDate.fromNow()
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+msgid "Expires {0}"
+msgstr "만료일: {0}"
 
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Loading your votes..."
@@ -6708,13 +6710,11 @@ msgstr "블록을 찾을 수 없습니다."
 msgid "Block"
 msgstr "블록"
 
-#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.ts
-msgid "No multisig proposal found."
-msgstr "멀티시그 제안을 찾을 수 없습니다."
+#~ msgid "No multisig proposal found."
+#~ msgstr "멀티시그 제안을 찾을 수 없습니다."
 
-#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.ts
-msgid "Multisig Proposal"
-msgstr "멀티시그 제안"
+#~ msgid "Multisig Proposal"
+#~ msgstr "멀티시그 제안"
 
 #: src/routes/[[locale]]/[network]/(explorer)/key/[publicKey]/+page.ts
 msgid "No accounts found for this public key."
@@ -6723,3 +6723,179 @@ msgstr "이 공개 키에 해당하는 계정을 찾을 수 없습니다."
 #: src/lib/state/search.svelte.ts
 msgid "View topic"
 msgstr "토픽 보기"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+layout.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+msgid "Created"
+msgstr "생성됨"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+layout.svelte
+msgid "Pending"
+msgstr "대기 중"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/created/+page.svelte
+msgid "Proposals Created"
+msgstr "생성된 제안"
+
+#. placeholder {0}: data.error
+#. placeholder {0}: data.error
+#. placeholder {0}: data.error
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/created/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/pending/+page.svelte
+msgid "Failed to load proposals: {0}"
+msgstr "제안 로드 실패: {0}"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/created/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/pending/+page.svelte
+msgid "No proposals found"
+msgstr "제안을 찾을 수 없습니다"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/created/+page.svelte
+msgid "This account hasn't created any multisig proposals yet"
+msgstr "이 계정은 아직 멀티시그 제안을 생성하지 않았습니다."
+
+#. placeholder {0}: currentStatus
+#. placeholder {0}: currentStatus
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/created/+page.svelte
+msgid "No {0} proposals found"
+msgstr "{0} 제안을 찾을 수 없습니다"
+
+#. placeholder {0}: proposals.length
+#. placeholder {1}: data.total
+#. placeholder {0}: proposals.length
+#. placeholder {1}: data.total
+#. placeholder {0}: proposals.length
+#. placeholder {1}: data.total
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/created/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/pending/+page.svelte
+msgid "Showing {0} of {1} total proposals"
+msgstr "총 {1}개의 제안 중 {0}개 표시"
+
+#. placeholder {0}: expirationDate.fromNow()
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+msgid "Expired {0}"
+msgstr "만료됨 {0}"
+
+#. placeholder {0}: proposal.actions_count
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+msgid "{0} action(s)"
+msgstr "{0}개의 액션"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+msgid "MMM D, YYYY"
+msgstr "YYYY년 MMM D일"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+msgid "✓ You have approved this proposal"
+msgstr "✓ 이 제안을 승인했습니다"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+msgid "⚠ Pending your approval"
+msgstr "⚠ 승인 대기 중"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
+msgid "All Statuses"
+msgstr "모든 상태"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
+msgid "Proposed"
+msgstr "제안됨"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
+msgid "Executed"
+msgstr "실행됨"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
+msgid "Cancelled"
+msgstr "취소됨"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/pending/+page.svelte
+msgid "Proposals Pending Approval"
+msgstr "승인 대기 중인 제안"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/pending/+page.svelte
+msgid "Show approved"
+msgstr "승인된 항목 보기"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/pending/+page.svelte
+msgid "No proposals pending"
+msgstr "대기 중인 제안 없음"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/pending/+page.svelte
+msgid "No proposals are currently awaiting your approval"
+msgstr "현재 귀하의 승인을 기다리는 제안이 없습니다."
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
+msgid "Proposals"
+msgstr "제안"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.svelte
+msgid "Multisig Activity Timeline"
+msgstr "멀티시그 활동 타임라인"
+
+#. placeholder {0}: data.error
+#. placeholder {0}: data.error
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.svelte
+msgid "Failed to load activity: {0}"
+msgstr "활동 로드 실패: {0}"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.svelte
+msgid "No activity found"
+msgstr "활동 내역이 없습니다"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.svelte
+msgid "This account has no multisig activity yet"
+msgstr "이 계정에는 아직 멀티시그 활동이 없습니다"
+
+#. placeholder {0}: currentActionType
+#. placeholder {0}: currentActionType
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.svelte
+msgid "No {0} actions found"
+msgstr "{0} 작업이 없습니다"
+
+#. placeholder {0}: activity.length
+#. placeholder {1}: data.total
+#. placeholder {0}: activity.length
+#. placeholder {1}: data.total
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.svelte
+msgid "Showing {0} of {1} total events"
+msgstr "총 {1}개의 이벤트 중 {0}개 표시"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
+msgid "All Actions"
+msgstr "모든 액션"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
+msgid "Unapproved"
+msgstr "승인되지 않음"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActivityEvent.svelte
+msgid "MMM D, YYYY [at] h:mm A"
+msgstr "YYYY년 M월 D일 h:mm A"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActivityEvent.svelte
+msgid "Proposed by <0/>"
+msgstr "<0/>님이 제안"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActivityEvent.svelte
+msgid "View Transaction"
+msgstr "트랜잭션 보기"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+layout.svelte
+msgid "Timeline"
+msgstr "타임라인"

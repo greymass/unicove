@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2025-12-11T21:02:07.801Z\n"
+"PO-Revision-Date: 2025-12-12T19:32:41.466Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -1286,6 +1286,7 @@ msgstr "Upload"
 
 #: src/routes/[[locale]]/[network]/(account)/upload/[[name]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/permission.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/+page.ts
@@ -1384,7 +1385,7 @@ msgid "Overview"
 msgstr "Overview"
 
 #. placeholder {0}: data.abi.actions.length
-#. placeholder {0}: data.proposal.transaction.actions.length
+#. placeholder {0}: actionsCount
 #. placeholder {0}: data.transaction.transaction.actions.length
 #. placeholder {0}: data.transaction.transaction.actions.length
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.svelte
@@ -3617,7 +3618,6 @@ msgstr "No contract is currently deployed to the {0} account."
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/key/[publicKey]/+page.ts
-#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/token/[contract]/[symbol]/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
 msgid "NOT_FOUND"
@@ -4590,10 +4590,8 @@ msgstr "Activity"
 msgid "Permissions"
 msgstr "Permissions"
 
-#. placeholder {0}: data.account.proposals.length
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
-msgid "Proposals ({0})"
-msgstr "Proposals ({0})"
+#~ msgid "Proposals ({0})"
+#~ msgstr "Proposals ({0})"
 
 #. placeholder {0}: legacyPubKey
 #: src/routes/[[locale]]/[network]/(explorer)/key/[publicKey]/+page.svelte
@@ -5047,13 +5045,11 @@ msgstr "Weight"
 msgid "Authorization"
 msgstr "Authorization"
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
-msgid "Proposal ID"
-msgstr "Proposal ID"
+#~ msgid "Proposal ID"
+#~ msgstr "Proposal ID"
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
-msgid "No proposals found."
-msgstr "No proposals found."
+#~ msgid "No proposals found."
+#~ msgstr "No proposals found."
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Requested Approvals"
@@ -5080,6 +5076,7 @@ msgstr "Role"
 msgid "Signer"
 msgstr "Signer"
 
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Approved"
 msgstr "Approved"
@@ -5100,10 +5097,12 @@ msgstr "Proposer"
 msgid "Proposal Name"
 msgstr "Proposal Name"
 
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Expired"
 msgstr "Expired"
 
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Expiration"
 msgstr "Expiration"
@@ -5501,7 +5500,9 @@ msgstr "Account overview on the {0} Network"
 msgid "Block #{0} was produced by {1} on {2}, which included {3} transactions performing {4} actions."
 msgstr "Block #{0} was produced by {1} on {2}, which included {3} transactions performing {4} actions."
 
-#. placeholder {0}: params.number
+#. placeholder {0}: event.globalseq
+#. placeholder {0}: event.globalseq
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActivityEvent.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+layout.ts
 msgid "Block #{0}"
 msgstr "Block #{0}"
@@ -5606,14 +5607,8 @@ msgstr "Permissions | {0} | {1} Network"
 msgid "Permissions for {0} on the {1} network."
 msgstr "Permissions for {0} on the {1} network."
 
-#. placeholder {0}: params.name
-#. placeholder {1}: network.chain.name
-#. placeholder {0}: params.name
-#. placeholder {1}: network.chain.name
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
-msgid "Multisig proposals by {0} on the {1} Network."
-msgstr "Multisig proposals by {0} on the {1} Network."
+#~ msgid "Multisig proposals by {0} on the {1} Network."
+#~ msgstr "Multisig proposals by {0} on the {1} Network."
 
 #. placeholder {0}: p.abi.actions.length
 #. placeholder {1}: p.contract
@@ -5669,11 +5664,8 @@ msgstr "Transfer tokens to another account."
 msgid "Transfer tokens from one account to another account on the {0} network using an {1} compatible wallet."
 msgstr "Transfer tokens from one account to another account on the {0} network using an {1} compatible wallet."
 
-#. placeholder {0}: params.proposer
-#. placeholder {1}: network.chain.name
-#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.ts
-msgid "An MSIG proposed by {0} on the {1} Network"
-msgstr "An MSIG proposed by {0} on the {1} Network"
+#~ msgid "An MSIG proposed by {0} on the {1} Network"
+#~ msgstr "An MSIG proposed by {0} on the {1} Network"
 
 #. placeholder {0}: params.name
 #. placeholder {1}: network.chain.name
@@ -5785,6 +5777,11 @@ msgstr "Try Again"
 msgid "No topics available yet"
 msgstr "No topics available yet"
 
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/created/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/pending/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid "Load More"
@@ -6865,11 +6862,13 @@ msgstr "View All Proposals"
 #~ msgid "by <0/>"
 #~ msgstr "by <0/>"
 
-#~ msgid "Proposed by"
-#~ msgstr "Proposed by"
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+msgid "Proposed by"
+msgstr "Proposed by"
 
-#~ msgid "Approval Progress"
-#~ msgstr "Approval Progress"
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+msgid "Approval Progress"
+msgstr "Approval Progress"
 
 #~ msgid "{0} of {1} <0>({0}%)</0>"
 #~ msgstr "{0} of {1} <0>({0}%)</0>"
@@ -6883,8 +6882,10 @@ msgstr "View All Proposals"
 #~ msgid "{0} action{1}"
 #~ msgstr "{0} action{1}"
 
-#~ msgid "Expires {0}"
-#~ msgstr "Expires {0}"
+#. placeholder {0}: expirationDate.fromNow()
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+msgid "Expires {0}"
+msgstr "Expires {0}"
 
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Loading your votes..."
@@ -6988,13 +6989,11 @@ msgstr "No block found."
 msgid "Block"
 msgstr "Block"
 
-#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.ts
-msgid "No multisig proposal found."
-msgstr "No multisig proposal found."
+#~ msgid "No multisig proposal found."
+#~ msgstr "No multisig proposal found."
 
-#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.ts
-msgid "Multisig Proposal"
-msgstr "Multisig Proposal"
+#~ msgid "Multisig Proposal"
+#~ msgstr "Multisig Proposal"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/+page.svelte
 msgid "Multisig Proposals"
@@ -7024,3 +7023,179 @@ msgstr "No accounts found for this public key."
 #: src/lib/state/search.svelte.ts
 msgid "View topic"
 msgstr "View topic"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+layout.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+msgid "Created"
+msgstr "Created"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+layout.svelte
+msgid "Pending"
+msgstr "Pending"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/created/+page.svelte
+msgid "Proposals Created"
+msgstr "Proposals Created"
+
+#. placeholder {0}: data.error
+#. placeholder {0}: data.error
+#. placeholder {0}: data.error
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/created/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/pending/+page.svelte
+msgid "Failed to load proposals: {0}"
+msgstr "Failed to load proposals: {0}"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/created/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/pending/+page.svelte
+msgid "No proposals found"
+msgstr "No proposals found"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/created/+page.svelte
+msgid "This account hasn't created any multisig proposals yet"
+msgstr "This account hasn't created any multisig proposals yet"
+
+#. placeholder {0}: currentStatus
+#. placeholder {0}: currentStatus
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/created/+page.svelte
+msgid "No {0} proposals found"
+msgstr "No {0} proposals found"
+
+#. placeholder {0}: proposals.length
+#. placeholder {1}: data.total
+#. placeholder {0}: proposals.length
+#. placeholder {1}: data.total
+#. placeholder {0}: proposals.length
+#. placeholder {1}: data.total
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/created/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/pending/+page.svelte
+msgid "Showing {0} of {1} total proposals"
+msgstr "Showing {0} of {1} total proposals"
+
+#. placeholder {0}: expirationDate.fromNow()
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+msgid "Expired {0}"
+msgstr "Expired {0}"
+
+#. placeholder {0}: proposal.actions_count
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+msgid "{0} action(s)"
+msgstr "{0} action(s)"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+msgid "MMM D, YYYY"
+msgstr "MMM D, YYYY"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+msgid "✓ You have approved this proposal"
+msgstr "✓ You have approved this proposal"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+msgid "⚠ Pending your approval"
+msgstr "⚠ Pending your approval"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
+msgid "All Statuses"
+msgstr "All Statuses"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
+msgid "Proposed"
+msgstr "Proposed"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
+msgid "Executed"
+msgstr "Executed"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
+msgid "Cancelled"
+msgstr "Cancelled"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/pending/+page.svelte
+msgid "Proposals Pending Approval"
+msgstr "Proposals Pending Approval"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/pending/+page.svelte
+msgid "Show approved"
+msgstr "Show approved"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/pending/+page.svelte
+msgid "No proposals pending"
+msgstr "No proposals pending"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/pending/+page.svelte
+msgid "No proposals are currently awaiting your approval"
+msgstr "No proposals are currently awaiting your approval"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
+msgid "Proposals"
+msgstr "Proposals"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.svelte
+msgid "Multisig Activity Timeline"
+msgstr "Multisig Activity Timeline"
+
+#. placeholder {0}: data.error
+#. placeholder {0}: data.error
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.svelte
+msgid "Failed to load activity: {0}"
+msgstr "Failed to load activity: {0}"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.svelte
+msgid "No activity found"
+msgstr "No activity found"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.svelte
+msgid "This account has no multisig activity yet"
+msgstr "This account has no multisig activity yet"
+
+#. placeholder {0}: currentActionType
+#. placeholder {0}: currentActionType
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.svelte
+msgid "No {0} actions found"
+msgstr "No {0} actions found"
+
+#. placeholder {0}: activity.length
+#. placeholder {1}: data.total
+#. placeholder {0}: activity.length
+#. placeholder {1}: data.total
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.svelte
+msgid "Showing {0} of {1} total events"
+msgstr "Showing {0} of {1} total events"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActivityEvent.svelte
+msgid "MMM D, YYYY [at] h:mm A"
+msgstr "MMM D, YYYY [at] h:mm A"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActivityEvent.svelte
+msgid "Proposed by <0/>"
+msgstr "Proposed by <0/>"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActivityEvent.svelte
+msgid "View Transaction"
+msgstr "View Transaction"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
+msgid "All Actions"
+msgstr "All Actions"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
+msgid "Unapproved"
+msgstr "Unapproved"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+layout.svelte
+msgid "Timeline"
+msgstr "Timeline"

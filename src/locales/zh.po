@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2025-12-11T21:02:09.267Z\n"
+"PO-Revision-Date: 2025-12-12T19:32:41.489Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -1267,6 +1267,7 @@ msgstr "上传"
 
 #: src/routes/[[locale]]/[network]/(account)/upload/[[name]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/permission.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/+page.ts
@@ -1365,7 +1366,7 @@ msgid "Overview"
 msgstr "概览"
 
 #. placeholder {0}: data.abi.actions.length
-#. placeholder {0}: data.proposal.transaction.actions.length
+#. placeholder {0}: actionsCount
 #. placeholder {0}: data.transaction.transaction.actions.length
 #. placeholder {0}: data.transaction.transaction.actions.length
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.svelte
@@ -2423,55 +2424,55 @@ msgstr "正在筛选以显示 {0} 在 {1} 合约上的活动。"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/wharf/+page.svelte
 msgid "Wharf State"
-msgstr ""
+msgstr "Wharf 状态"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/wharf/+page.svelte
 msgid "The state internal to the wharf service."
-msgstr ""
+msgstr "wharf 服务内部的状态。"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/wharf/+page.svelte
 msgid "controls"
-msgstr ""
+msgstr "控制"
 
 #. placeholder {0}: context.wharf.session.actor
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/wharf/+page.svelte
 msgid "Logout ({0})"
-msgstr ""
+msgstr "登出 ({0})"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/wharf/+page.svelte
 msgid "Logout (All Accounts)"
-msgstr ""
+msgstr "登出 (所有帐户)"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/wharf/+page.svelte
 msgid "session"
-msgstr ""
+msgstr "会话"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/wharf/+page.svelte
 msgid "The currently active session."
-msgstr ""
+msgstr "当前活跃的会话。"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/wharf/+page.svelte
 msgid "Chain"
-msgstr ""
+msgstr "链"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/wharf/+page.svelte
 msgid "No Session Active"
-msgstr ""
+msgstr "没有活跃的会话"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/wharf/+page.svelte
 msgid "sessions"
-msgstr ""
+msgstr "会话"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/wharf/+page.svelte
 msgid "The available sessions that can be used."
-msgstr ""
+msgstr "可以使用的可用会话。"
 
 #. placeholder {0}: session.actor
 #. placeholder {1}: session.permission
 #. placeholder {2}: session.chain
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/wharf/+page.svelte
 msgid "Switch: {0}@{1} ({2})"
-msgstr ""
+msgstr "切换: {0}@{1} ({2})```"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/network/+page.svelte
 msgid "Network State"
@@ -2924,6 +2925,7 @@ msgstr "未找到活跃的生产者"
 msgid "Rank"
 msgstr "排名"
 
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Actor"
 msgstr "参与者"
@@ -2933,10 +2935,16 @@ msgstr "参与者"
 msgid "Votes"
 msgstr "投票"
 
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Standby"
 msgstr "候补"
 
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/created/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/pending/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid "Load More"
@@ -3036,6 +3044,10 @@ msgstr "连接您的钱包以登录"
 msgid "Account Balance"
 msgstr "账户余额"
 
+#: src/lib/components/card/accountbalance.svelte
+#: src/lib/components/card/tokenbalance.svelte
+#: src/lib/components/chart/tokendistribution.svelte
+#: src/lib/components/elements/resourceCard.svelte
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
 msgid "Available"
@@ -3223,6 +3235,7 @@ msgid "Transaction Complete"
 msgstr "交易完成"
 
 #: src/lib/components/transact/summary.svelte
+#: src/lib/components/transaction/header.svelte
 msgid "Transaction ID"
 msgstr "交易ID"
 
@@ -3270,6 +3283,7 @@ msgstr ""
 "下面列出了当前正在取消质押的代币，以及它们可用的日期。\n"
 "这些余额将继续获得奖励，直到它们被提取。"
 
+#: src/lib/components/elements/unstaking.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balances/+page.svelte
 msgid "Amount"
 msgstr "数量"
@@ -3298,10 +3312,8 @@ msgstr "活动"
 msgid "Permissions"
 msgstr "权限"
 
-#. placeholder {0}: data.account.proposals.length
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
-msgid "Proposals ({0})"
-msgstr "提案 ({0})"
+#~ msgid "Proposals ({0})"
+#~ msgstr "提案 ({0})"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.svelte
 msgid "Total Account Value"
@@ -3316,8 +3328,14 @@ msgstr "添加资金"
 #. placeholder {1}: quote.name
 #. placeholder {0}: base.name
 #. placeholder {1}: quote.name
+#. placeholder {0}: data.network.token.name
+#. placeholder {1}: data.network.getRamToken().name
+#. placeholder {0}: String(network.chain.systemToken?.symbol.name)
+#. placeholder {1}: String(ramtoken.name)
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.svelte
+#: src/routes/[[locale]]/[network]/(homepage)/components/charts.svelte
 msgid "Swap {0}/{1}"
 msgstr "兑换 {0}/{1}"
 
@@ -3403,6 +3421,7 @@ msgid "<0>1</0> APR is based on the total amount staked and dynamically changes 
 msgstr "<0>1</0> 年利率基于质押总额，并随时间动态变化。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
+#: src/routes/[[locale]]/[network]/(homepage)/components/sentiment-showcase.svelte
 msgid "Sentiment Voting"
 msgstr "情绪投票"
 
@@ -3420,6 +3439,7 @@ msgid ""
 msgstr "主题创建尚不可用。目前，仅支持对现有提案进行投票。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
+#: src/routes/[[locale]]/[network]/(homepage)/components/sentiment-showcase.svelte
 msgid "View All Topics"
 msgstr "查看所有话题```"
 
@@ -3504,6 +3524,7 @@ msgid "Top Producers"
 msgstr "顶级生产者"
 
 #: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Top 21"
 msgstr "前 21 名"
 
@@ -3549,12 +3570,16 @@ msgstr "选择一个与 {0} 兼容的钱包，并在 {1} 网络上创建一个�
 #~ msgid "Block #{0} was produced by {1} on {2}, which included {3} transactions performing {4} actions.<<<<<<< HEAD"
 #~ msgstr "区块 #{0} 由 {1} 在 {2} 产生，其中包括 {3} 笔交易，执行了 {4} 个操作。>>>>>>> 8ca5fdfa (Search msigs by name)"
 
-#. placeholder {0}: params.number
+#. placeholder {0}: event.globalseq
+#. placeholder {0}: event.globalseq
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActivityEvent.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+layout.ts
 msgid "Block #{0}"
 msgstr "区块 #{0}<<<<<<< HEAD"
 
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/transaction/+page.svelte
 msgid "Transaction"
 msgstr "交易"
@@ -3563,10 +3588,12 @@ msgstr "交易"
 msgid "Transactions"
 msgstr "交易"
 
+#: src/lib/components/transaction/header.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 msgid "CPU (μs)"
 msgstr "CPU (μs)"
 
+#: src/lib/components/transaction/header.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 msgid "NET (Bytes)"
 msgstr "网络 (字节)"
@@ -3619,7 +3646,6 @@ msgstr "当前没有合约部署到 {0} 帐户。"
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/key/[publicKey]/+page.ts
-#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/token/[contract]/[symbol]/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
 msgid "NOT_FOUND"
@@ -3631,11 +3657,8 @@ msgstr "未找到"
 #~ msgid "An overview of the {0} smart contract on the {1} network. This contract contains {2} actions, {3} tables, and {4} structs.<<<<<<< HEAD"
 #~ msgstr "关于 {1} 网络上 {0} 智能合约的概述。此合约包含 {2} 个操作，{3} 个表和 {4} 个结构体。"
 
-#. placeholder {0}: params.proposer
-#. placeholder {1}: network.chain.name
-#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.ts
-msgid "An MSIG proposed by {0} on the {1} Network"
-msgstr "由 {0} 在 {1} 网络上提出的多重签名提案```"
+#~ msgid "An MSIG proposed by {0} on the {1} Network"
+#~ msgstr "由 {0} 在 {1} 网络上提出的多重签名提案```"
 
 #: src/routes/[[locale]]/[network]/(explorer)/network/+layout.ts
 msgid "Network Overview"
@@ -3905,17 +3928,11 @@ msgstr "市场状态```>>>>>>> 8ca5fdfa (Search msigs by name)"
 msgid "Recent activity on the {0} Network."
 msgstr "在 {0} 网络上的近期活动。"
 
-#. placeholder {0}: params.name
-#. placeholder {1}: network.chain.name
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.ts
-msgid "Account Activity for {0} | {1} Network<<<<<<< HEAD"
-msgstr "{0} 的帐户活动 | {1} 网络>>>>>>> 8ca5fdfa (Search msigs by name)"
+#~ msgid "Account Activity for {0} | {1} Network<<<<<<< HEAD"
+#~ msgstr "{0} 的帐户活动 | {1} 网络>>>>>>> 8ca5fdfa (Search msigs by name)"
 
-#. placeholder {0}: params.name
-#. placeholder {1}: network.chain.name
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.ts
-msgid "View the transaction history of the {0} account on the {1} network.<<<<<<< HEAD"
-msgstr "查看 {0} 帐户在 {1} 网络上的交易历史。"
+#~ msgid "View the transaction history of the {0} account on the {1} network.<<<<<<< HEAD"
+#~ msgstr "查看 {0} 帐户在 {1} 网络上的交易历史。"
 
 #. placeholder {0}: params.name
 #. placeholder {0}: params.name
@@ -3936,10 +3953,8 @@ msgstr "代币余额"
 msgid "Token balance from the {0} smart contract."
 msgstr "来自 {0} 智能合约的代币余额。>>>>>>> 8ca5fdfa (Search msigs by name)"
 
-#. placeholder {0}: network.chain.name
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balances/+page.ts
-msgid "Token balances on the {0} Network.<<<<<<< HEAD"
-msgstr "{0} 网络上的代币余额。>>>>>>> 8ca5fdfa (Search msigs by name)"
+#~ msgid "Token balances on the {0} Network.<<<<<<< HEAD"
+#~ msgstr "{0} 网络上的代币余额。>>>>>>> 8ca5fdfa (Search msigs by name)"
 
 #. placeholder {0}: params.name
 #. placeholder {1}: network.chain.name
@@ -3947,11 +3962,8 @@ msgstr "{0} 网络上的代币余额。>>>>>>> 8ca5fdfa (Search msigs by name)"
 msgid "Token Balances | {0} | {1} Network"
 msgstr "代币余额 | {0} | {1} 网络"
 
-#. placeholder {0}: params.name
-#. placeholder {1}: network.chain.name
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balances/+page.ts
-msgid "The token balances of the {0} account on the {1} network.<<<<<<< HEAD"
-msgstr "在 {1} 网络上，{0} 账户的代币余额。```"
+#~ msgid "The token balances of the {0} account on the {1} network.<<<<<<< HEAD"
+#~ msgstr "在 {1} 网络上，{0} 账户的代币余额。```"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balances/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/token/[contract]/[symbol]/+page.ts
@@ -4100,22 +4112,14 @@ msgstr "{0} 在 {1} 网络上的权限。"
 msgid "Edit permission for {0} on {1}"
 msgstr "编辑 {0} 在 {1} 上的权限>>>>>>> 8ca5fdfa (Search msigs by name)"
 
-#. placeholder {0}: params.name
-#. placeholder {1}: network.chain.name
-#. placeholder {0}: params.name
-#. placeholder {1}: network.chain.name
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
-msgid "Multisig proposals by {0} on the {1} Network.<<<<<<< HEAD"
-msgstr "{0} 在 {1} 网络上的多重签名提案。```"
+#~ msgid "Multisig proposals by {0} on the {1} Network.<<<<<<< HEAD"
+#~ msgstr "{0} 在 {1} 网络上的多重签名提案。```"
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
-msgid "Proposal ID"
-msgstr "提案 ID"
+#~ msgid "Proposal ID"
+#~ msgstr "提案 ID"
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
-msgid "No proposals found."
-msgstr "在 {1} 网络上由 {0} 提出的多重签名提案。"
+#~ msgid "No proposals found."
+#~ msgstr "在 {1} 网络上由 {0} 提出的多重签名提案。"
 
 #. placeholder {0}: p.contract
 #. placeholder {1}: p.network.chain.name
@@ -4420,13 +4424,11 @@ msgstr "未找到区块。"
 msgid "Block"
 msgstr "区块"
 
-#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.ts
-msgid "No multisig proposal found."
-msgstr "未找到多重签名提案。"
+#~ msgid "No multisig proposal found."
+#~ msgstr "未找到多重签名提案。"
 
-#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.ts
-msgid "Multisig Proposal"
-msgstr "多重签名提案"
+#~ msgid "Multisig Proposal"
+#~ msgstr "多重签名提案"
 
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
 msgid "Transaction Summary"
@@ -4845,3 +4847,392 @@ msgstr "找不到与此公钥关联的帐户。"
 #: src/lib/state/search.svelte.ts
 msgid "View topic"
 msgstr "查看主题"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+layout.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+msgid "Created"
+msgstr "已创建"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+layout.svelte
+msgid "Pending"
+msgstr "待定"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/created/+page.svelte
+msgid "Proposals Created"
+msgstr "创建的提案"
+
+#. placeholder {0}: data.error
+#. placeholder {0}: data.error
+#. placeholder {0}: data.error
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/created/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/pending/+page.svelte
+msgid "Failed to load proposals: {0}"
+msgstr "加载提案失败: {0}"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/created/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/pending/+page.svelte
+msgid "No proposals found"
+msgstr "未找到提案"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/created/+page.svelte
+msgid "This account hasn't created any multisig proposals yet"
+msgstr "此账户尚未创建任何多重签名提案"
+
+#. placeholder {0}: currentStatus
+#. placeholder {0}: currentStatus
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/created/+page.svelte
+msgid "No {0} proposals found"
+msgstr "未找到 {0} 提案"
+
+#. placeholder {0}: proposals.length
+#. placeholder {1}: data.total
+#. placeholder {0}: proposals.length
+#. placeholder {1}: data.total
+#. placeholder {0}: proposals.length
+#. placeholder {1}: data.total
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/created/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/pending/+page.svelte
+msgid "Showing {0} of {1} total proposals"
+msgstr "显示 {0} / {1} 个提案"
+
+#. placeholder {0}: expirationDate.fromNow()
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+msgid "Expired {0}"
+msgstr "已过期 {0}"
+
+#. placeholder {0}: expirationDate.fromNow()
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+msgid "Expires {0}"
+msgstr "将于 {0} 过期"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+msgid "Proposed by"
+msgstr "由...提议"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+msgid "Approval Progress"
+msgstr "批准进度"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+msgid "Expiration"
+msgstr "到期"
+
+#. placeholder {0}: proposal.actions_count
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+msgid "{0} action(s)"
+msgstr "{0} 个操作"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+msgid "MMM D, YYYY"
+msgstr "YYYY年M月D日"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+msgid "✓ You have approved this proposal"
+msgstr "✓ 您已批准此提案"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+msgid "⚠ Pending your approval"
+msgstr "⚠ 等待您的批准```"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
+msgid "All Statuses"
+msgstr "所有状态"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
+msgid "Proposed"
+msgstr "已提议"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
+msgid "Executed"
+msgstr "已执行"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
+msgid "Cancelled"
+msgstr "已取消"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+msgid "Expired"
+msgstr "已过期"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/pending/+page.svelte
+msgid "Proposals Pending Approval"
+msgstr "待批准的提案"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/pending/+page.svelte
+msgid "Show approved"
+msgstr "显示已批准的"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/pending/+page.svelte
+msgid "No proposals pending"
+msgstr "没有待处理的提案"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/pending/+page.svelte
+msgid "No proposals are currently awaiting your approval"
+msgstr "目前没有提案等待您的批准"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
+msgid "Proposals"
+msgstr "提案"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.svelte
+msgid "Multisig Activity Timeline"
+msgstr "多重签名活动时间线"
+
+#. placeholder {0}: data.error
+#. placeholder {0}: data.error
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.svelte
+msgid "Failed to load activity: {0}"
+msgstr "加载活动失败：{0}"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.svelte
+msgid "No activity found"
+msgstr "未找到活动"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.svelte
+msgid "This account has no multisig activity yet"
+msgstr "此帐户尚无多重签名活动"
+
+#. placeholder {0}: currentActionType
+#. placeholder {0}: currentActionType
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.svelte
+msgid "No {0} actions found"
+msgstr "未找到 {0} 操作"
+
+#. placeholder {0}: activity.length
+#. placeholder {1}: data.total
+#. placeholder {0}: activity.length
+#. placeholder {1}: data.total
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.svelte
+msgid "Showing {0} of {1} total events"
+msgstr "显示 {0} / {1} 个事件"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
+msgid "All Actions"
+msgstr "所有操作"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+msgid "Approved"
+msgstr "已批准"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
+msgid "Unapproved"
+msgstr "未批准"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActivityEvent.svelte
+msgid "MMM D, YYYY [at] h:mm A"
+msgstr "YYYY年M月D日 h:mm A"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActivityEvent.svelte
+msgid "Proposed by <0/>"
+msgstr "由 <0/> 提议"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActivityEvent.svelte
+msgid "View Transaction"
+msgstr "查看交易"
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+msgid "Requested Approvals"
+msgstr "请求的批准"
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+msgid "<0/> Approved"
+msgstr "<0/> 已批准"
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+msgid "<0/> Requested"
+msgstr "<0/> 已请求"
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+msgid "Permission"
+msgstr "权限"
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+msgid "Role"
+msgstr "角色"
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+msgid "Signer"
+msgstr "签名者"
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+msgid "Requested"
+msgstr "已请求"
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+msgid "Multisig Details"
+msgstr "多重签名详情"
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+msgid "Proposer"
+msgstr "提议者"
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+msgid "Proposal Name"
+msgstr "提案名称"
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+msgid "Hash"
+msgstr "哈希"
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+msgid "Unapprove"
+msgstr "取消批准"
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+msgid "Approve"
+msgstr "批准"
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+msgid "Cancel MSIG"
+msgstr "取消多重签名"
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+msgid "Execute"
+msgstr "执行```"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/+page.svelte
+msgid "Keys and Permissions"
+msgstr "密钥和权限"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/+page.svelte
+msgid "New Permission"
+msgstr "新权限"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/permission.svelte
+msgid "Permission Name"
+msgstr "权限名称"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/permission.svelte
+msgid "<0>Threshold</0> Required"
+msgstr "需要 <0>阈值</0>"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/permission.svelte
+msgid "Weight"
+msgstr "权重"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/permission.svelte
+msgid "Authorization"
+msgstr "授权"
+
+#. placeholder {0}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balances/+page.ts
+msgid "Token balances on the {0} Network."
+msgstr "在 {0} 网络上的代币余额。"
+
+#. placeholder {0}: params.name
+#. placeholder {1}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balances/+page.ts
+msgid "The token balances of the {0} account on the {1} network."
+msgstr "在 {1} 网络上，{0} 账户的代币余额。"
+
+#. placeholder {0}: params.name
+#. placeholder {1}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.ts
+msgid "Account Activity for {0} | {1} Network"
+msgstr "{0} 的账户活动 | {1} 网络"
+
+#. placeholder {0}: params.name
+#. placeholder {1}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.ts
+msgid "View the transaction history of the {0} account on the {1} network."
+msgstr "查看 {1} 网络上 {0} 账户的交易历史。"
+
+#: src/lib/components/elements/action.svelte
+msgid "length"
+msgstr "长度"
+
+#: src/lib/components/elements/action.svelte
+msgid "No data"
+msgstr "没有数据"
+
+#: src/lib/components/elements/action.svelte
+msgid "Signed by"
+msgstr "签署人"
+
+#: src/lib/components/elements/action.svelte
+msgid "notified"
+msgstr "已通知"
+
+#: src/lib/components/summary/eosio/buyrambytes.svelte
+msgid "Requesting"
+msgstr "请求中"
+
+#: src/lib/components/summary/eosio/logsystemfee.svelte
+msgid "Fee"
+msgstr "费用"
+
+#: src/lib/components/summary/eosio/powerup.svelte
+msgid "renting CPU for"
+msgstr "租赁 CPU 用于"
+
+#: src/lib/components/summary/eosio/powerup.svelte
+msgid "renting NET for"
+msgstr "租赁 NET 用于"
+
+#. placeholder {0}: data.owner
+#: src/lib/components/summary/eosio/refund.svelte
+msgid "System contract refund request for {0}."
+msgstr "为 {0} 请求系统合约退款。"
+
+#: src/lib/components/summary/greymassnoop/noop.svelte
+msgid "The network resources for this transaction were provided by a 3rd party."
+msgstr "此交易的网络资源由第三方提供。"
+
+#: src/lib/components/transaction/header.svelte
+msgid "Finality Status"
+msgstr "终结状态"
+
+#: src/lib/components/transaction/header.svelte
+msgid "Irreversible"
+msgstr "不可逆"
+
+#: src/lib/components/transaction/header.svelte
+msgid "Reversible"
+msgstr "可逆"
+
+#: src/lib/components/transaction/header.svelte
+msgid "Date"
+msgstr "日期"
+
+#: src/lib/components/transaction/header.svelte
+msgid "Included in Block"
+msgstr "包含在区块中"
+
+#: src/lib/components/transaction/header.svelte
+msgid "Contracts Used"
+msgstr "使用的合约"
+
+#: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
+msgid "Rent resources with PowerUp"
+msgstr "使用 PowerUp 租赁资源"
+
+#: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
+msgid "Rent resources with REX"
+msgstr "使用 REX 租赁资源"
+
+#. placeholder {0}: symbolName
+#: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
+msgid "Stake {0} for resources"
+msgstr "质押 {0} 以获取资源"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+layout.svelte
+msgid "Timeline"
+msgstr "时间线"

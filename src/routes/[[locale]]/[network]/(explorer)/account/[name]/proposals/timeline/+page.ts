@@ -3,38 +3,38 @@ import type { PageLoad } from './$types';
 export const load: PageLoad = async ({ params, parent, url }) => {
 	const { network } = await parent();
 
-	const status = url.searchParams.get('status') || 'all';
+	const actionType = url.searchParams.get('action_type') || 'all';
 	const offset = Number(url.searchParams.get('offset')) || 0;
 	const limit = Number(url.searchParams.get('limit')) || 20;
 
 	try {
-		const response = await network.msigs.get_proposals(params.name, {
-			status: status === 'all' ? undefined : status,
+		const response = await network.msigs.get_activity(params.name, {
+			action_type: actionType === 'all' ? undefined : actionType,
 			limit,
 			offset
 		});
 
 		return {
-			proposals: response.proposals,
+			activity: response.activity,
 			total: response.total,
 			more: response.more,
-			status,
+			actionType,
 			offset,
 			limit,
-			subtitle: `Proposals Created by ${params.name}`,
+			subtitle: `Multisig Activity for ${params.name}`,
 			pageMetaTags: {
-				title: `Proposals Created by ${params.name}`,
-				description: `View all multisig proposals created by ${params.name}`
+				title: `Multisig Activity for ${params.name}`,
+				description: `Complete multisig activity timeline for ${params.name}`
 			}
 		};
 	} catch (error) {
-		console.error('Error loading created proposals:', error);
+		console.error('Error loading activity:', error);
 		return {
-			proposals: [],
+			activity: [],
 			total: 0,
 			more: false,
 			error: String(error),
-			status,
+			actionType,
 			offset,
 			limit
 		};

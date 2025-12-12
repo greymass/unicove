@@ -24,12 +24,10 @@
 				text: 'Permissions'
 			});
 			items.push({ href: urlPath(`/account/${account}/votes`), text: 'Votes' });
-			if (data.account.proposals.length > 0) {
-				items.push({
-					href: urlPath(`/account/${account}/proposals`),
-					text: `Proposals (${data.account.proposals.length})`
-				});
-			}
+			items.push({
+				href: urlPath(`/account/${account}/proposals`),
+				text: 'Proposals'
+			});
 			items.push({ href: urlPath(`/account/${account}/authority`), text: 'Authority' });
 			items.push({ href: urlPath(`/account/${account}/data`), text: 'Data' });
 		}
