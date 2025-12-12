@@ -278,6 +278,12 @@ export class NetworkState {
 		}
 		const asset = Asset.from(rex);
 		const { total_lendable, total_rex } = this.rex;
+
+		// Handle edge case where REX pool is empty (division by zero)
+		if (total_rex.units.equals(0)) {
+			return Asset.fromUnits(0, total_lendable.symbol);
+		}
+
 		const R1 = total_rex.units.adding(asset.units);
 		const S1 = Int128.from(R1).multiplying(total_lendable.units).dividing(total_rex.units);
 		const result = S1.subtracting(total_lendable.units);

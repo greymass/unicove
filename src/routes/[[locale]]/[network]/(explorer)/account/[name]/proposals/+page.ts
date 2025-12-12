@@ -1,20 +1,25 @@
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ params, parent, url }) => {
-	const { network } = await parent();
-
 	const status = url.searchParams.get('status') || 'all';
 	const offset = Number(url.searchParams.get('offset')) || 0;
 	const limit = Number(url.searchParams.get('limit')) || 20;
 
 	try {
-		const response = await network.msigs.get_proposals(params.name, {
-			status: status === 'all' ? undefined : status,
-			limit,
-			offset
-		});
+		// Parallelize parent() and msigs fetch for faster loading
+		const parentPromise = parent();
+		const proposalsPromise = parentPromise.then(({ network }) =>
+			network.msigs.get_proposals(params.name, {
+				status: status === 'all' ? undefined : status,
+				limit,
+				offset
+			})
+		);
+
+		const [parentData, response] = await Promise.all([parentPromise, proposalsPromise]);
 
 		return {
+			...parentData,
 			proposals: response.proposals,
 			total: response.total,
 			more: response.more,
