@@ -48,7 +48,7 @@
 			icon={ChevronLeft}
 		/>
 	{:else}
-		<picture class="mt-0.5 size-8 shrink-0 sm:size-12">
+		<picture class="mt-2 size-8 shrink-0 sm:size-12">
 			<img
 				src={String(logo)}
 				alt={String(props.network.chain.name)}
@@ -57,8 +57,8 @@
 		</picture>
 	{/if}
 
-	<div class="grid gap-1">
-		<div class="text-primary relative flex h-fit w-fit items-center gap-2">
+	<div class="grid gap-0">
+		<div class="text-primary relative flex min-h-10 w-fit items-center gap-2">
 			<h1 class="text-title text-on-surface sm:text-headline leading-none font-bold">
 				{props.title}
 			</h1>
