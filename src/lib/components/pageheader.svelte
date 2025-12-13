@@ -38,7 +38,7 @@
 	let logo = $derived(props.network.config.logo || '');
 </script>
 
-<header class="col-span-full flex items-start gap-3 sm:gap-4">
+<header class="col-span-full flex min-h-15 items-start gap-3 sm:gap-4">
 	{#if props.backPath}
 		<IconButton
 			size="large"
@@ -58,7 +58,7 @@
 	{/if}
 
 	<div class="grid gap-0">
-		<div class="text-primary relative flex min-h-10 w-fit items-center gap-2">
+		<div class="text-primary relative flex min-h-6 w-fit items-center gap-2 sm:min-h-10">
 			<h1 class="text-title text-on-surface sm:text-headline leading-none font-bold">
 				{props.title}
 			</h1>
@@ -90,8 +90,8 @@
 			{/if}
 		</div>
 
-		{#if props.subtitle}
-			<p class="text-muted text-label-sm leading-5 text-pretty sm:text-base">{props.subtitle}</p>
-		{/if}
+		<p class="text-muted text-label-sm leading-5 text-pretty sm:text-base">
+			{props.subtitle || ''}
+		</p>
 	</div>
 </header>
