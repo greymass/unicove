@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.663Z\n"
-"PO-Revision-Date: 2025-12-12T20:42:35.494Z\n"
+"PO-Revision-Date: 2025-12-13T00:13:24.483Z\n"
 "Last-Translator: \n"
 "Language: ko\n"
 "Language-Team: \n"
@@ -6899,3 +6899,24 @@ msgstr "트랜잭션 보기"
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+layout.svelte
 msgid "Timeline"
 msgstr "타임라인"
+
+#~ msgid "Votes ast by {0} on the {1} Network."
+#~ msgstr "{0}님이 {1} 네트워크에서 행사한 투표입니다."
+
+#. placeholder {0}: params.name
+#. placeholder {1}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/votes/+page.ts
+msgid "Votes by {0} | {1} Network"
+msgstr "{0}님의 투표 | {1} 네트워크"
+
+#. placeholder {0}: params.name
+#. placeholder {1}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/votes/+page.ts
+msgid "View the block producer votes cast by the {0} account on the {1} network."
+msgstr "{1} 네트워크에서 {0} 계정이 행사한 블록 프로듀서 투표를 봅니다."
+
+#. placeholder {0}: params.name
+#. placeholder {1}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/votes/+page.ts
+msgid "Votes cast by {0} on the {1} Network."
+msgstr "{0}님이 {1} 네트워크에서 투표한 내역입니다."

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2025-12-12T20:42:36.661Z\n"
+"PO-Revision-Date: 2025-12-13T00:47:22.324Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -4885,11 +4885,13 @@ msgid "View topic"
 msgstr "查看主题"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+layout.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/NavFilter.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
 msgid "Created"
 msgstr "已创建"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+layout.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/NavFilter.svelte
 msgid "Pending"
 msgstr "待定"
 
@@ -5279,6 +5281,7 @@ msgid "Stake {0} for resources"
 msgstr "质押 {0} 以获取资源"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+layout.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/NavFilter.svelte
 msgid "Timeline"
 msgstr "时间线"
 
@@ -6284,3 +6287,24 @@ msgstr "确认租赁"
 #: src/lib/components/chart/barchart.svelte
 msgid "Yield"
 msgstr "产量"
+
+#~ msgid "Votes ast by {0} on the {1} Network."
+#~ msgstr "{0} 在 {1} 网络上投的票。"
+
+#. placeholder {0}: params.name
+#. placeholder {1}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/votes/+page.ts
+msgid "Votes by {0} | {1} Network"
+msgstr "{0} 投的票 | {1} 网络"
+
+#. placeholder {0}: params.name
+#. placeholder {1}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/votes/+page.ts
+msgid "View the block producer votes cast by the {0} account on the {1} network."
+msgstr "查看 {0} 账户在 {1} 网络上投出的区块生产者票。"
+
+#. placeholder {0}: params.name
+#. placeholder {1}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/votes/+page.ts
+msgid "Votes cast by {0} on the {1} Network."
+msgstr "{0} 在 {1} 网络上投的票。"

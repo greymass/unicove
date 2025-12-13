@@ -5,10 +5,7 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { ActivityEvent } from '@wharfkit/msigs';
 	import dayjs from 'dayjs';
-	import relativeTimePlugin from 'dayjs/plugin/relativeTime';
 	import { UserCheck, UserX, FilePlus, CheckCircle, XCircle } from '@lucide/svelte/icons';
-
-	dayjs.extend(relativeTimePlugin);
 
 	interface ActivityEventProps {
 		event: ActivityEvent;

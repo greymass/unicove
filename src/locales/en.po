@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2025-12-12T20:41:52.135Z\n"
+"PO-Revision-Date: 2025-12-13T00:13:22.621Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -7199,3 +7199,24 @@ msgstr "Unapproved"
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+layout.svelte
 msgid "Timeline"
 msgstr "Timeline"
+
+#~ msgid "Votes ast by {0} on the {1} Network."
+#~ msgstr "Votes ast by {0} on the {1} Network."
+
+#. placeholder {0}: params.name
+#. placeholder {1}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/votes/+page.ts
+msgid "Votes by {0} | {1} Network"
+msgstr "Votes by {0} | {1} Network"
+
+#. placeholder {0}: params.name
+#. placeholder {1}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/votes/+page.ts
+msgid "View the block producer votes cast by the {0} account on the {1} network."
+msgstr "View the block producer votes cast by the {0} account on the {1} network."
+
+#. placeholder {0}: params.name
+#. placeholder {1}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/votes/+page.ts
+msgid "Votes cast by {0} on the {1} Network."
+msgstr "Votes cast by {0} on the {1} Network."

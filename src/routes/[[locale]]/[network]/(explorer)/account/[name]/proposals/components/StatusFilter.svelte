@@ -16,17 +16,16 @@
 		{ label: 'Expired', value: 'expired' }
 	];
 
-	let selected: ExtendedSelectOption = $state(
+	const selected: ExtendedSelectOption = $derived(
 		statusOptions.find((o) => o.value === value) || statusOptions[0]
 	);
 
 	function handleChange({ next }: { next: ExtendedSelectOption | undefined }) {
-		if (next) {
-			selected = next;
+		if (next && next.value !== value) {
 			onchange(String(next.value));
 		}
 		return next;
 	}
 </script>
 
-<Select id="status-filter" options={statusOptions} bind:selected onSelectedChange={handleChange} />
+<Select id="status-filter" options={statusOptions} {selected} onSelectedChange={handleChange} />
