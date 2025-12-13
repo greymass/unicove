@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import { Button, Stack } from 'unicove-components';
 
 	import ProposalCard from './components/ProposalCard.svelte';
@@ -14,17 +14,17 @@
 	const currentStatus = $derived(data.status);
 
 	function handleStatusChange(status: string) {
-		const url = new URL($page.url);
+		const url = new URL(page.url);
 		url.searchParams.set('status', status);
 		url.searchParams.delete('offset'); // Reset to first page
-		goto(url.toString());
+		goto(url.toString(), { replaceState: true });
 	}
 
 	function loadMore() {
-		const url = new URL($page.url);
+		const url = new URL(page.url);
 		const newOffset = (data.offset || 0) + (data.limit || 20);
 		url.searchParams.set('offset', String(newOffset));
-		goto(url.toString());
+		goto(url.toString(), { replaceState: true });
 	}
 </script>
 
