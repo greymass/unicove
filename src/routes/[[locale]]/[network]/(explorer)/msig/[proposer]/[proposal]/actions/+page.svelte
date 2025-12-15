@@ -15,6 +15,7 @@
 	let context = getContext<UnicoveContext>('state');
 
 	const manager = $state(new ApprovalManager(context, data.proposal));
+
 	$effect(() => {
 		manager.sync(data.network, context.wharf);
 	});
@@ -22,7 +23,7 @@
 	let variant = $derived(context.settings.data.actionDisplayVariant as ActionDisplayVariants);
 </script>
 
-<Stack class="mt-6">
+<Stack>
 	<Stack>
 		<h2 class="text-title">Proposed Actions ({variant})</h2>
 		<SelectActionVariant display />

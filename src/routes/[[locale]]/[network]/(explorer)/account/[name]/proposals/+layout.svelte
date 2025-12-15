@@ -12,7 +12,7 @@
 
 	const options = $derived.by(() => [
 		{ href: urlPath(`/account/${account}/proposals`), text: 'Created' },
-		{ href: urlPath(`/account/${account}/proposals/pending`), text: 'Pending' },
+		{ href: urlPath(`/account/${account}/proposals/approvals`), text: 'Approvals' },
 		{ href: urlPath(`/account/${account}/proposals/timeline`), text: 'Timeline' }
 	]);
 </script>

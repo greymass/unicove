@@ -6,6 +6,8 @@ export const load: PageLoad = async ({ params, parent, url }) => {
 	const offset = Number(url.searchParams.get('offset')) || 0;
 	const limit = Number(url.searchParams.get('limit')) || 20;
 
+	console.log(includeApproved);
+
 	try {
 		// Parallelize parent() and msigs fetch for faster loading
 		const parentPromise = parent();
@@ -29,6 +31,7 @@ export const load: PageLoad = async ({ params, parent, url }) => {
 			includeApproved,
 			offset,
 			limit,
+			subtitle: `Proposals Pending Approval from ${params.name}`,
 			pageMetaTags: {
 				title: `Proposals Pending Approval from ${params.name}`,
 				description: `Multisig proposals awaiting approval from ${params.name}`
