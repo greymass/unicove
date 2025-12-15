@@ -26,6 +26,7 @@ export const load: PageLoad = async ({ params, parent, url }) => {
 			actionType,
 			offset,
 			limit,
+			subtitle: `Multisig Activity for ${params.name}`,
 			pageMetaTags: {
 				title: `Multisig Activity for ${params.name}`,
 				description: `Complete multisig activity timeline for ${params.name}`

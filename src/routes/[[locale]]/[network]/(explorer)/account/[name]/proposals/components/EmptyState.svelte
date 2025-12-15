@@ -10,7 +10,7 @@
 </script>
 
 <Card>
-	<Stack class="py-8 text-center">
+	<Stack class="gap-2 text-center">
 		<h3 class="text-title">{title}</h3>
 		<p class="text-muted">{message}</p>
 	</Stack>

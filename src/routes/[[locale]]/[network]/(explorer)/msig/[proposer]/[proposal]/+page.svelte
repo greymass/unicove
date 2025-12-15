@@ -45,7 +45,7 @@
 	</div>
 {/snippet}
 
-<Stack class="mt-6">
+<Stack>
 	<Switcher class="items-start gap-6" threshold="40rem">
 		<Stack class="gap-4">
 			<h2 class="text-title">Requested Approvals</h2>

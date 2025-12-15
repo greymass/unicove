@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { page } from '$app/stores';
-	import { Button, Stack } from 'unicove-components';
+	import { page } from '$app/state';
+	import { Button, Label, Stack, Switch } from 'unicove-components';
 
 	import ProposalCard from '../components/ProposalCard.svelte';
 	import StatusFilter from '../components/StatusFilter.svelte';
 	import EmptyState from '../components/EmptyState.svelte';
+	import type { CreateSwitchProps } from '@melt-ui/svelte';
 
 	const { data } = $props();
 
@@ -15,22 +16,23 @@
 	const includeApproved = $derived(data.includeApproved);
 
 	function handleStatusChange(status: string) {
-		const url = new URL($page.url);
+		const url = new URL(page.url);
 		url.searchParams.set('status', status);
 		url.searchParams.delete('offset');
-		goto(url.toString());
+		goto(url.toString(), { replaceState: true });
 	}
 
-	function handleIncludeApprovedChange(event: Event) {
-		const checked = (event.target as HTMLInputElement).checked;
-		const url = new URL($page.url);
-		url.searchParams.set('include_approved', String(checked));
+	const handleIncludeApprovedChange: CreateSwitchProps['onCheckedChange'] = ({ next }) => {
+		// const checked = (event.target as HTMLInputElement).checked;
+		const url = new URL(page.url);
+		url.searchParams.set('include_approved', String(next));
 		url.searchParams.delete('offset');
-		goto(url.toString());
-	}
+		goto(url.toString(), { replaceState: true });
+		return next;
+	};
 
 	function loadMore() {
-		const url = new URL($page.url);
+		const url = new URL(page.url);
 		const newOffset = (data.offset || 0) + (data.limit || 20);
 		url.searchParams.set('offset', String(newOffset));
 		goto(url.toString());
@@ -41,10 +43,16 @@
 	<div class="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
 		<h2 class="text-title">Proposals Pending Approval</h2>
 		<div class="flex flex-wrap items-center gap-4">
-			<label class="flex items-center gap-2">
-				<input type="checkbox" checked={includeApproved} onchange={handleIncludeApprovedChange} />
-				<span>Show approved</span>
-			</label>
+			<Label for="show-approved">Show approved</Label>
+			<Switch
+				id="show-approved"
+				checked={includeApproved}
+				onCheckedChange={handleIncludeApprovedChange}
+			/>
+			<!-- <label class="flex items-center gap-2"> -->
+			<!-- 	<input type="checkbox" checked={includeApproved} onchange={handleIncludeApprovedChange} /> -->
+			<!-- 	<span>Show approved</span> -->
+			<!-- </label> -->
 			<StatusFilter value={currentStatus} onchange={handleStatusChange} />
 		</div>
 	</div>
@@ -56,7 +64,7 @@
 			title="No proposals pending"
 			message={includeApproved
 				? 'No proposals found'
-				: 'No proposals are currently awaiting your approval'}
+				: 'No proposals are currently awaiting approval'}
 		/>
 	{:else}
 		<div class="grid gap-4">

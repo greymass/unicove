@@ -1,11 +1,14 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
-	import { Card } from 'unicove-components';
+	import { Card, cn } from 'unicove-components';
 	import Link from '$lib/components/elements/link.svelte';
+	import Account from '$lib/components/elements/account.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { ActivityEvent } from '@wharfkit/msigs';
 	import dayjs from 'dayjs';
-	import { UserCheck, UserX, FilePlus, CheckCircle, XCircle } from '@lucide/svelte/icons';
+	import { FilePlus, XCircle, BadgeCheck, CirclePlay, BadgeX } from '@lucide/svelte/icons';
+	import Block from '$lib/components/elements/block.svelte';
+	import Transaction from '$lib/components/elements/transaction.svelte';
 
 	interface ActivityEventProps {
 		event: ActivityEvent;
@@ -17,16 +20,16 @@
 
 	const actionIcons = {
 		proposed: FilePlus,
-		approved: UserCheck,
-		unapproved: UserX,
-		executed: CheckCircle,
+		approved: BadgeCheck,
+		unapproved: BadgeX,
+		executed: CirclePlay,
 		cancelled: XCircle
 	};
 
 	const actionColors = {
-		proposed: 'text-primary',
-		approved: 'text-success',
-		unapproved: 'text-warning',
+		proposed: 'text-on-primary bg-primary',
+		approved: 'text-on-success bg-success',
+		unapproved: 'text-on-warning bg-warning',
 		executed: 'text-success',
 		cancelled: 'text-error'
 	};
@@ -39,44 +42,58 @@
 	const absoluteTime = $derived(timestamp.format('MMM D, YYYY [at] h:mm A'));
 </script>
 
-<Card class="@container">
-	<div class="flex items-start gap-4">
-		<div class={`mt-1 ${actionColor}`}>
-			<ActionIcon class="size-6" />
-		</div>
-		<div class="flex-1">
-			<div class="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
-				<div class="flex flex-col gap-1">
-					<div class="flex items-center gap-2">
-						<span class="font-medium capitalize">{event.action}</span>
-						<Link
-							href={urlPath(`/msig/${event.proposer}/${event.proposal_name}`)}
-							class="text-primary hover:underline"
-						>
-							{String(event.proposal_name)}
-						</Link>
-					</div>
-					<div class="text-muted text-sm">
-						Proposed by
-						<Link href={urlPath(`/account/${event.proposer}`)} class="hover:underline">
-							{String(event.proposer)}
-						</Link>
-					</div>
-				</div>
-				<div class="text-muted flex flex-col text-sm sm:text-right">
-					<span>{relativeTime}</span>
-					<span class="text-xs">{absoluteTime}</span>
-				</div>
-			</div>
-			<div class="text-muted mt-2 flex flex-wrap items-center gap-4 text-xs">
-				<Link
-					href={urlPath(`/transaction/${event.trx_id}`)}
-					class="hover:text-on-surface hover:underline"
-				>
-					View Transaction
-				</Link>
-				<span>Block #{event.globalseq}</span>
-			</div>
-		</div>
+<div class="group relative grid grid-cols-[auto_1fr] gap-6">
+	<div class="relative grid h-full place-items-center *:col-start-1 *:row-start-1">
+		<!-- Line -->
+		<div
+			class="border-surface-container-high h-full -translate-y-1/2 border border-2 border-l group-first:hidden"
+		></div>
+
+		<picture
+			class={cn(
+				' bg-surface-container-high z-10 grid size-12 place-items-center rounded-full',
+				actionColor
+			)}
+		>
+			<ActionIcon />
+		</picture>
 	</div>
-</Card>
+
+	<Card class="@container">
+		<div class="grid gap-4 @2xl:grid-cols-4">
+			<hgroup class="flex flex-col gap-2">
+				<h3 class="text-title">
+					<span class="capitalize">{event.action}</span>
+					<a
+						href={urlPath(`/msig/${event.proposer}/${event.proposal_name}`)}
+						class="text-primary hover:underline"
+					>
+						{String(event.proposal_name)}
+					</a>
+				</h3>
+
+				<p class="text-label-sm text-muted">
+					Proposed by
+					<Account name={event.proposer}>
+						{String(event.proposer)}
+					</Account>
+				</p>
+			</hgroup>
+
+			<div class="*:block">
+				<span>Transaction</span>
+				<Transaction id={event.trx_id} />
+			</div>
+
+			<div class="*:block">
+				<span>Block</span>
+				<Block number={event.globalseq} />
+			</div>
+
+			<div class="text-body grid sm:text-right">
+				<span>{relativeTime}</span>
+				<span class="text-muted text-label-sm">{absoluteTime}</span>
+			</div>
+		</div>
+	</Card>
+</div>
