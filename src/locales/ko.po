@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.663Z\n"
-"PO-Revision-Date: 2025-12-16T21:28:39.738Z\n"
+"PO-Revision-Date: 2025-12-16T22:03:58.173Z\n"
 "Last-Translator: \n"
 "Language: ko\n"
 "Language-Team: \n"
@@ -6779,7 +6779,7 @@ msgstr "{0} 제안을 찾을 수 없습니다"
 
 #. placeholder {0}: proposals.length
 #. placeholder {1}: data.total
-#. placeholder {0}: proposals.length
+#. placeholder {0}: filteredProposals.length
 #. placeholder {1}: data.total
 #. placeholder {0}: proposals.length
 #. placeholder {1}: data.total

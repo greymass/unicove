@@ -2,11 +2,8 @@ import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ params, parent, url }) => {
 	const status = url.searchParams.get('status') || 'all';
-	const includeApproved = url.searchParams.get('include_approved') === 'true';
 	const offset = Number(url.searchParams.get('offset')) || 0;
 	const limit = Number(url.searchParams.get('limit')) || 20;
-
-	console.log(includeApproved);
 
 	try {
 		// Parallelize parent() and msigs fetch for faster loading
@@ -14,7 +11,7 @@ export const load: PageLoad = async ({ params, parent, url }) => {
 		const proposalsPromise = parentPromise.then(({ network }) =>
 			network.msigs.get_approver_proposals(params.name, {
 				status: status === 'all' ? undefined : status,
-				include_approved: includeApproved,
+				include_approved: true,
 				limit,
 				offset
 			})
@@ -28,7 +25,6 @@ export const load: PageLoad = async ({ params, parent, url }) => {
 			total: response.total,
 			more: response.more,
 			status,
-			includeApproved,
 			offset,
 			limit,
 			subtitle: `Proposals Pending Approval from ${params.name}`,
@@ -45,7 +41,6 @@ export const load: PageLoad = async ({ params, parent, url }) => {
 			more: false,
 			error: String(error),
 			status,
-			includeApproved,
 			offset,
 			limit
 		};
