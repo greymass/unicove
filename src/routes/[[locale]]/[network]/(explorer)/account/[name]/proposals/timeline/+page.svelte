@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import { Button, Stack } from 'unicove-components';
 
 	import ActivityEvent from '../components/ActivityEvent.svelte';
@@ -14,17 +14,21 @@
 	const currentActionType = $derived(data.actionType);
 
 	function handleActionTypeChange(actionType: string) {
-		const url = new URL($page.url);
-		url.searchParams.set('action_type', actionType);
+		const url = new URL(page.url);
+		if (actionType === 'all') {
+			url.searchParams.delete('action_type');
+		} else {
+			url.searchParams.set('action_type', actionType);
+		}
 		url.searchParams.delete('offset');
-		goto(url.toString());
+		goto(url.toString(), { replaceState: true });
 	}
 
 	function loadMore() {
-		const url = new URL($page.url);
+		const url = new URL(page.url);
 		const newOffset = (data.offset || 0) + (data.limit || 20);
 		url.searchParams.set('offset', String(newOffset));
-		goto(url.toString());
+		goto(url.toString(), { replaceState: true });
 	}
 </script>
 
