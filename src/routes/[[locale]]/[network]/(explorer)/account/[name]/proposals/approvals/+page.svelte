@@ -14,8 +14,12 @@
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');
 
-	const proposals = $derived(data.proposals);
-	const hasMore = $derived(data.more);
+	// Accumulate proposals data for infinite scroll
+	let allProposals = $state(data.proposals);
+	let currentOffset = $state(data.offset);
+	let hasMore = $state(data.more);
+	let isLoading = $state(false);
+
 	const currentStatus = $derived(data.status);
 
 	// Get the account name being viewed from the page params
@@ -26,30 +30,33 @@
 		context.wharf.session ? String(context.wharf.session.actor) : undefined
 	);
 
+	const isOwnAccount = $derived(loggedInAccountName && loggedInAccountName === viewedAccountName);
+
 	// Determine which account's approvals we should check
 	// If viewing own account, use own permissions; otherwise use viewed account
-	const checkAccountName = $derived(
-		loggedInAccountName && loggedInAccountName === viewedAccountName
-			? loggedInAccountName
-			: viewedAccountName
-	);
+	const checkAccountName = $derived(isOwnAccount ? loggedInAccountName : viewedAccountName);
 
 	const checkPermission = $derived(
-		loggedInAccountName && loggedInAccountName === viewedAccountName && context.wharf.session
-			? context.wharf.session.permissionLevel
-			: undefined
+		isOwnAccount && context.wharf.session ? context.wharf.session.permissionLevel : undefined
 	);
 
 	// Get showApproved state from settings, default to false
 	let showApproved = $state(context.settings.get(SettingKeys.showApprovedProposals, false));
 
+	// Reset accumulated data when filters change
+	$effect(() => {
+		allProposals = data.proposals;
+		currentOffset = data.offset;
+		hasMore = data.more;
+	});
+
 	// Client-side filtering based on showApproved toggle
 	const filteredProposals = $derived.by(() => {
 		if (showApproved) {
-			return proposals;
+			return allProposals;
 		}
 		// Filter out proposals where the account being viewed has already approved
-		return proposals.filter((proposal) => {
+		return allProposals.filter((proposal) => {
 			// If we have a specific permission to check (viewing own account while logged in)
 			if (checkPermission) {
 				const hasApproved = proposal.provided_approvals?.some(
@@ -85,11 +92,28 @@
 		return next;
 	};
 
-	function loadMore() {
-		const url = new URL(page.url);
-		const newOffset = (data.offset || 0) + (data.limit || 20);
-		url.searchParams.set('offset', String(newOffset));
-		goto(url.toString());
+	async function loadMore() {
+		if (isLoading) return;
+
+		isLoading = true;
+		try {
+			const newOffset = currentOffset + (data.limit || 20);
+			const response = await context.network.msigs.get_approver_proposals(data.name, {
+				status: currentStatus === 'all' ? undefined : currentStatus,
+				include_approved: true,
+				limit: data.limit || 20,
+				offset: newOffset
+			});
+
+			// Append new proposals to existing data
+			allProposals = [...allProposals, ...response.proposals];
+			currentOffset = newOffset;
+			hasMore = response.more;
+		} catch (error) {
+			console.error('Error loading more proposals:', error);
+		} finally {
+			isLoading = false;
+		}
 	}
 </script>
 
@@ -116,16 +140,18 @@
 		/>
 	{:else}
 		<div class="grid gap-4">
-			{#each filteredProposals as proposal}
+			{#each filteredProposals as proposal, index (`${proposal.proposer}-${proposal.proposal_name}-${index}`)}
 				<ProposalCard {proposal} showApprovalStatus />
 			{/each}
 		</div>
 
 		{#if hasMore}
-			<Button onclick={loadMore} variant="secondary" class="place-self-center">Load More</Button>
+			<Button onclick={loadMore} variant="secondary" class="place-self-center" disabled={isLoading}>
+				{isLoading ? 'Loading...' : 'Load More'}
+			</Button>
 		{/if}
 
-		<p class="text-muted text-center text-sm">
+		<p class="text-muted text-label-sm text-center">
 			Showing {filteredProposals.length} of {data.total} total proposals
 		</p>
 	{/if}

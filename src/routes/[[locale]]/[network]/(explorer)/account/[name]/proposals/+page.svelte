@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { getContext } from 'svelte';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import { Button, Stack } from 'unicove-components';
@@ -6,12 +7,25 @@
 	import ProposalCard from './components/ProposalCard.svelte';
 	import StatusFilter from './components/StatusFilter.svelte';
 	import EmptyState from './components/EmptyState.svelte';
+	import type { UnicoveContext } from '$lib/state/client.svelte';
 
 	const { data } = $props();
+	const context = getContext<UnicoveContext>('state');
 
-	const proposals = $derived(data.proposals);
-	const hasMore = $derived(data.more);
+	// Accumulate proposals data for infinite scroll
+	let allProposals = $state(data.proposals);
+	let currentOffset = $state(data.offset);
+	let hasMore = $state(data.more);
+	let isLoading = $state(false);
+
 	const currentStatus = $derived(data.status);
+
+	// Reset accumulated data when filters change
+	$effect(() => {
+		allProposals = data.proposals;
+		currentOffset = data.offset;
+		hasMore = data.more;
+	});
 
 	function handleStatusChange(status: string) {
 		const url = new URL(page.url);
@@ -24,11 +38,27 @@
 		goto(url.toString(), { replaceState: true });
 	}
 
-	function loadMore() {
-		const url = new URL(page.url);
-		const newOffset = (data.offset || 0) + (data.limit || 20);
-		url.searchParams.set('offset', String(newOffset));
-		goto(url.toString(), { replaceState: true });
+	async function loadMore() {
+		if (isLoading) return;
+
+		isLoading = true;
+		try {
+			const newOffset = currentOffset + (data.limit || 20);
+			const response = await context.network.msigs.get_proposals(data.name, {
+				status: currentStatus === 'all' ? undefined : currentStatus,
+				limit: data.limit || 20,
+				offset: newOffset
+			});
+
+			// Append new proposals to existing data
+			allProposals = [...allProposals, ...response.proposals];
+			currentOffset = newOffset;
+			hasMore = response.more;
+		} catch (error) {
+			console.error('Error loading more proposals:', error);
+		} finally {
+			isLoading = false;
+		}
 	}
 </script>
 
@@ -40,7 +70,7 @@
 
 	{#if data.error}
 		<div class="text-error">Failed to load proposals: {data.error}</div>
-	{:else if proposals.length === 0}
+	{:else if allProposals.length === 0}
 		<EmptyState
 			title="No proposals found"
 			message={currentStatus === 'all'
@@ -49,17 +79,19 @@
 		/>
 	{:else}
 		<div class="grid gap-4">
-			{#each proposals as proposal}
+			{#each allProposals as proposal, index (`${proposal.proposer}-${proposal.proposal_name}-${index}`)}
 				<ProposalCard {proposal} />
 			{/each}
 		</div>
 
 		{#if hasMore}
-			<Button onclick={loadMore} variant="secondary" class="place-self-center">Load More</Button>
+			<Button onclick={loadMore} variant="secondary" class="place-self-center" disabled={isLoading}>
+				{isLoading ? 'Loading...' : 'Load More'}
+			</Button>
 		{/if}
 
-		<p class="text-muted text-center text-sm">
-			Showing {proposals.length} of {data.total} total proposals
+		<p class="text-muted text-label-sm text-center">
+			Showing {allProposals.length} of {data.total} total proposals
 		</p>
 	{/if}
 </Stack>

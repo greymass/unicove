@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2025-12-16T22:03:58.183Z\n"
+"PO-Revision-Date: 2025-12-16T22:41:40.384Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -4360,6 +4360,9 @@ msgid "Swap to {0}"
 msgstr "兑换为 {0}"
 
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/approvals/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid "Loading..."
 msgstr "加载中..."
@@ -4938,7 +4941,7 @@ msgstr "此账户尚未创建任何多重签名提案"
 msgid "No {0} proposals found"
 msgstr "未找到 {0} 提案"
 
-#. placeholder {0}: proposals.length
+#. placeholder {0}: allProposals.length
 #. placeholder {1}: data.total
 #. placeholder {0}: filteredProposals.length
 #. placeholder {1}: data.total
@@ -5064,7 +5067,7 @@ msgstr "未找到 {0} 操作"
 
 #. placeholder {0}: activity.length
 #. placeholder {1}: data.total
-#. placeholder {0}: activity.length
+#. placeholder {0}: allActivity.length
 #. placeholder {1}: data.total
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/activity/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.svelte
