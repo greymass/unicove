@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2025-12-15T23:09:36.943Z\n"
+"PO-Revision-Date: 2025-12-16T21:28:39.748Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -3328,8 +3328,10 @@ msgstr "活动"
 msgid "Permissions"
 msgstr "权限"
 
-#~ msgid "Proposals ({0})"
-#~ msgstr "提案 ({0})"
+#. placeholder {0}: data.account.proposals.length
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
+msgid "Proposals ({0})"
+msgstr "提案 ({0})"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.svelte
 msgid "Total Account Value"
@@ -5028,9 +5030,8 @@ msgstr "没有待处理的提案"
 msgid "No proposals are currently awaiting your approval"
 msgstr "目前没有提案等待您的批准"
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
-msgid "Proposals"
-msgstr "提案"
+#~ msgid "Proposals"
+#~ msgstr "提案"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/activity/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.svelte

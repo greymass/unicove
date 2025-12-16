@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2025-12-15T23:09:36.920Z\n"
+"PO-Revision-Date: 2025-12-16T21:28:39.712Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -4591,8 +4591,10 @@ msgstr "Activity"
 msgid "Permissions"
 msgstr "Permissions"
 
-#~ msgid "Proposals ({0})"
-#~ msgstr "Proposals ({0})"
+#. placeholder {0}: data.account.proposals.length
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
+msgid "Proposals ({0})"
+msgstr "Proposals ({0})"
 
 #. placeholder {0}: legacyPubKey
 #: src/routes/[[locale]]/[network]/(explorer)/key/[publicKey]/+page.svelte
@@ -7146,9 +7148,8 @@ msgstr "No proposals pending"
 msgid "No proposals are currently awaiting your approval"
 msgstr "No proposals are currently awaiting your approval"
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
-msgid "Proposals"
-msgstr "Proposals"
+#~ msgid "Proposals"
+#~ msgstr "Proposals"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/activity/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.svelte

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.663Z\n"
-"PO-Revision-Date: 2025-12-15T23:09:36.928Z\n"
+"PO-Revision-Date: 2025-12-16T21:28:39.738Z\n"
 "Last-Translator: \n"
 "Language: ko\n"
 "Language-Team: \n"
@@ -4491,8 +4491,10 @@ msgstr "활동"
 msgid "Permissions"
 msgstr "권한"
 
-#~ msgid "Proposals ({0})"
-#~ msgstr "제안 ({0})"
+#. placeholder {0}: data.account.proposals.length
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
+msgid "Proposals ({0})"
+msgstr "제안 ({0})"
 
 #. placeholder {0}: legacyPubKey
 #: src/routes/[[locale]]/[network]/(explorer)/key/[publicKey]/+page.svelte
@@ -6846,9 +6848,8 @@ msgstr "대기 중인 제안 없음"
 msgid "No proposals are currently awaiting your approval"
 msgstr "현재 귀하의 승인을 기다리는 제안이 없습니다."
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
-msgid "Proposals"
-msgstr "제안"
+#~ msgid "Proposals"
+#~ msgstr "제안"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/activity/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.svelte
