@@ -17,7 +17,11 @@
 
 	function handleStatusChange(status: string) {
 		const url = new URL(page.url);
-		url.searchParams.set('status', status);
+		if (status === 'all') {
+			url.searchParams.delete('status');
+		} else {
+			url.searchParams.set('status', status);
+		}
 		url.searchParams.delete('offset');
 		goto(url.toString(), { replaceState: true });
 	}

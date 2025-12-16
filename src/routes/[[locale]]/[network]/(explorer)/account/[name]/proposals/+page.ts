@@ -1,7 +1,7 @@
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ params, parent, url }) => {
-	const status = url.searchParams.get('status') || 'all';
+	const status = url.searchParams.get('status') || 'proposed';
 	const offset = Number(url.searchParams.get('offset')) || 0;
 	const limit = Number(url.searchParams.get('limit')) || 20;
 
