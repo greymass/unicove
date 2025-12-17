@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.663Z\n"
-"PO-Revision-Date: 2025-12-17T19:05:18.722Z\n"
+"PO-Revision-Date: 2025-12-17T19:06:48.378Z\n"
 "Last-Translator: \n"
 "Language: ko\n"
 "Language-Team: \n"
@@ -5164,6 +5164,9 @@ msgid "Network Fee: <0/> (0.5%)"
 msgstr "네트워크 수수료: <0/> (0.5%)"
 
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/approvals/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid "Loading..."
 msgstr "로딩 중..."
@@ -6570,6 +6573,7 @@ msgstr "모든 제안 보기"
 #~ msgstr "작성자"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalsHeader.svelte
 msgid "Approvals"
 msgstr "찬성"
 
@@ -6689,6 +6693,7 @@ msgstr "순위"
 msgid "Submit <0>Vote</0>"
 msgstr "<0>투표</0> 제출"
 
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalsHeader.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/+page.svelte
 msgid "Multisig Proposals"
 msgstr "멀티시그 제안"
@@ -6734,13 +6739,13 @@ msgid "View topic"
 msgstr "토픽 보기"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalsHeader.svelte
 msgid "Created"
 msgstr "생성됨"
 
 #~ msgid "Pending"
 #~ msgstr "대기 중"
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/created/+page.svelte
 msgid "Proposals Created"
 msgstr "생성된 제안"
@@ -6775,7 +6780,7 @@ msgstr "이 계정은 아직 멀티시그 제안을 생성하지 않았습니다
 msgid "No {0} proposals found"
 msgstr "{0} 제안을 찾을 수 없습니다"
 
-#. placeholder {0}: proposals.length
+#. placeholder {0}: allProposals.length
 #. placeholder {1}: data.total
 #. placeholder {0}: filteredProposals.length
 #. placeholder {1}: data.total
@@ -6827,7 +6832,6 @@ msgstr "실행됨"
 msgid "Cancelled"
 msgstr "취소됨"
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/approvals/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/pending/+page.svelte
 msgid "Proposals Pending Approval"
 msgstr "승인 대기 중인 제안"
@@ -6850,7 +6854,6 @@ msgstr "현재 귀하의 승인을 기다리는 제안이 없습니다."
 #~ msgstr "제안"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/activity/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.svelte
 msgid "Multisig Activity Timeline"
 msgstr "멀티시그 활동 타임라인"
 
@@ -6880,7 +6883,7 @@ msgstr "{0} 작업이 없습니다"
 
 #. placeholder {0}: activity.length
 #. placeholder {1}: data.total
-#. placeholder {0}: activity.length
+#. placeholder {0}: allActivity.length
 #. placeholder {1}: data.total
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/activity/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.svelte
@@ -6906,8 +6909,9 @@ msgstr "<0/>님이 제안"
 #~ msgid "View Transaction"
 #~ msgstr "트랜잭션 보기"
 
-#~ msgid "Timeline"
-#~ msgstr "타임라인"
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalsHeader.svelte
+msgid "Timeline"
+msgstr "타임라인"
 
 #~ msgid "Votes ast by {0} on the {1} Network."
 #~ msgstr "{0}님이 {1} 네트워크에서 행사한 투표입니다."
