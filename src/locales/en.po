@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2025-12-16T22:41:40.352Z\n"
+"PO-Revision-Date: 2025-12-16T23:53:12.547Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -6863,8 +6863,8 @@ msgstr "View All Proposals"
 #~ msgid "by"
 #~ msgstr "by"
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalsHeader.svelte
 msgid "Approvals"
 msgstr "Approvals"
 
@@ -7008,6 +7008,7 @@ msgstr "No multisig proposal found."
 msgid "Multisig Proposal"
 msgstr "Multisig Proposal"
 
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalsHeader.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/+page.svelte
 msgid "Multisig Proposals"
 msgstr "Multisig Proposals"
@@ -7037,15 +7038,14 @@ msgstr "No accounts found for this public key."
 msgid "View topic"
 msgstr "View topic"
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalsHeader.svelte
 msgid "Created"
 msgstr "Created"
 
 #~ msgid "Pending"
 #~ msgstr "Pending"
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/created/+page.svelte
 msgid "Proposals Created"
 msgstr "Proposals Created"
@@ -7132,7 +7132,6 @@ msgstr "Executed"
 msgid "Cancelled"
 msgstr "Cancelled"
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/approvals/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/pending/+page.svelte
 msgid "Proposals Pending Approval"
 msgstr "Proposals Pending Approval"
@@ -7155,7 +7154,6 @@ msgstr "No proposals are currently awaiting your approval"
 #~ msgstr "Proposals"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/activity/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.svelte
 msgid "Multisig Activity Timeline"
 msgstr "Multisig Activity Timeline"
 
@@ -7211,7 +7209,7 @@ msgstr "All Actions"
 msgid "Unapproved"
 msgstr "Unapproved"
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+layout.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalsHeader.svelte
 msgid "Timeline"
 msgstr "Timeline"
 
@@ -7298,3 +7296,6 @@ msgstr "action"
 
 #~ msgid "Transaction <0/>"
 #~ msgstr "Transaction <0/>"
+
+#~ msgid "MSIG Proposals"
+#~ msgstr "MSIG Proposals"

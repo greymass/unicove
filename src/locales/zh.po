@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2025-12-16T22:41:40.384Z\n"
+"PO-Revision-Date: 2025-12-16T23:53:12.575Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -4534,6 +4534,7 @@ msgstr "关于 {1} 网络上 {0} 智能合约的概述。此合约包含 {2} 个
 msgid "Overview and statistics for community sentiment on the"
 msgstr "关于社区对以下内容的观点概述和统计数据"
 
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalsHeader.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/+page.svelte
 msgid "Multisig Proposals"
 msgstr "多重签名提案"
@@ -4896,9 +4897,9 @@ msgstr "找不到与此公钥关联的帐户。"
 msgid "View topic"
 msgstr "查看主题"
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/NavFilter.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalsHeader.svelte
 msgid "Created"
 msgstr "已创建"
 
@@ -4906,7 +4907,6 @@ msgstr "已创建"
 msgid "Pending"
 msgstr "待定"
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/created/+page.svelte
 msgid "Proposals Created"
 msgstr "创建的提案"
@@ -5014,7 +5014,6 @@ msgstr "已取消"
 msgid "Expired"
 msgstr "已过期"
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/approvals/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/pending/+page.svelte
 msgid "Proposals Pending Approval"
 msgstr "待批准的提案"
@@ -5037,7 +5036,6 @@ msgstr "目前没有提案等待您的批准"
 #~ msgstr "提案"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/activity/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.svelte
 msgid "Multisig Activity Timeline"
 msgstr "多重签名活动时间线"
 
@@ -5293,8 +5291,8 @@ msgstr "使用 REX 租赁资源"
 msgid "Stake {0} for resources"
 msgstr "质押 {0} 以获取资源"
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/NavFilter.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalsHeader.svelte
 msgid "Timeline"
 msgstr "时间线"
 
@@ -6340,8 +6338,8 @@ msgstr "{0} 的账户数据 | {1} 网络"
 msgid "View the stored data and tables for the {0} account on the {1} network."
 msgstr "查看 {1} 网络上 {0} 账户的存储数据和表。"
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalsHeader.svelte
 msgid "Approvals"
 msgstr "赞成"
 
@@ -6389,3 +6387,6 @@ msgstr "操作"
 
 #~ msgid "Transaction <0/>"
 #~ msgstr "交易 <0/>"
+
+#~ msgid "MSIG Proposals"
+#~ msgstr "多重签名提案"

@@ -8,6 +8,7 @@
 	import ProposalCard from '../components/ProposalCard.svelte';
 	import StatusFilter from '../components/StatusFilter.svelte';
 	import EmptyState from '../components/EmptyState.svelte';
+	import ProposalsHeader from '../components/ProposalsHeader.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { SettingKeys } from '$lib/state/settings.svelte';
 
@@ -21,6 +22,7 @@
 	let isLoading = $state(false);
 
 	const currentStatus = $derived(data.status);
+	const accountName = $derived(String(data.name));
 
 	// Get the account name being viewed from the page params
 	const viewedAccountName = $derived(page.params.name);
@@ -117,19 +119,20 @@
 	}
 </script>
 
-<Stack class="gap-4">
-	<div class="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
-		<h2 class="text-title">Proposals Pending Approval</h2>
-		<div class="flex flex-wrap items-center gap-4">
-			<Label for="show-approved">Show approved</Label>
-			<Switch
-				id="show-approved"
-				checked={showApproved}
-				onCheckedChange={handleIncludeApprovedChange}
-			/>
+<Stack class="">
+	<ProposalsHeader {accountName}>
+		<div class="flex items-center gap-4">
+			<span class="flex flex-wrap items-center gap-x-4 gap-y-3">
+				<Label for="show-approved">Show approved</Label>
+				<Switch
+					id="show-approved"
+					checked={showApproved}
+					onCheckedChange={handleIncludeApprovedChange}
+				/>
+			</span>
 			<StatusFilter value={currentStatus} onchange={handleStatusChange} />
 		</div>
-	</div>
+	</ProposalsHeader>
 
 	{#if data.error}
 		<div class="text-error">Failed to load proposals: {data.error}</div>
@@ -141,7 +144,12 @@
 	{:else}
 		<div class="grid gap-4">
 			{#each filteredProposals as proposal, index (`${proposal.proposer}-${proposal.proposal_name}-${index}`)}
-				<ProposalCard {proposal} showApprovalStatus />
+				<ProposalCard
+					{proposal}
+					showApprovalStatus
+					accountName={checkAccountName}
+					permissionLevel={checkPermission}
+				/>
 			{/each}
 		</div>
 

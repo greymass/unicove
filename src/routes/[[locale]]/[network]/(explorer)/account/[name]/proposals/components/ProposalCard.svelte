@@ -1,17 +1,25 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 	import { Card, Chip, Cluster, cn, Stack } from 'unicove-components';
-	import Account from '$lib/components/elements/account.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { Proposal } from '@wharfkit/msigs';
+	import type { PermissionLevel } from '@wharfkit/antelope';
 	import dayjs from 'dayjs';
 
 	interface ProposalCardProps {
 		proposal: Proposal;
 		showApprovalStatus?: boolean;
+		accountName?: string;
+		permissionLevel?: PermissionLevel;
 	}
 
-	const { proposal, showApprovalStatus = false }: ProposalCardProps = $props();
+	const {
+		proposal,
+		showApprovalStatus = false,
+		accountName,
+		permissionLevel
+	}: ProposalCardProps = $props();
+
 	const context = getContext<UnicoveContext>('state');
 	const { urlPath } = context;
 
@@ -31,15 +39,29 @@
 	);
 
 	const userHasApproved = $derived.by(() => {
-		if (!showApprovalStatus || !context.wharf.session) return false;
-		const userPermission = context.wharf.session.permissionLevel;
-		return (
-			proposal.provided_approvals?.some(
-				(approval) =>
-					String(approval.actor) === String(userPermission.actor) &&
-					String(approval.permission) === String(userPermission.permission)
-			) || false
-		);
+		if (!showApprovalStatus) return false;
+
+		// If we have a specific permission level to check, use it (more precise)
+		// TODO: Fix this check once PermissionLevel type is corrected in @wharfkit/msig
+		if (permissionLevel) {
+			return (
+				proposal.provided_approvals?.some(
+					(approval) =>
+						String(approval.actor) === String(permissionLevel.actor) &&
+						String(approval.permission) === String(permissionLevel.permission)
+				) || false
+			);
+		}
+
+		// Otherwise check by account name only
+		if (accountName) {
+			return (
+				proposal.provided_approvals?.some((approval) => String(approval.actor) === accountName) ||
+				false
+			);
+		}
+
+		return false;
 	});
 </script>
 
@@ -61,7 +83,7 @@
 
 				<Cluster>
 					<Chip class={cn('capitalize', statusColor)}>{proposal.status}</Chip>
-					{#if showApprovalStatus && context.wharf.session}
+					{#if showApprovalStatus}
 						{#if userHasApproved}
 							<Chip class="text-on-success bg-success">Approved</Chip>
 						{:else}
@@ -71,7 +93,7 @@
 				</Cluster>
 			</div>
 
-			<div class="grid items-start gap-2 @md:grid-cols-2 @lg:grid-cols-4 @3xl:grid-cols-5">
+			<div class="grid items-start gap-4 @md:grid-cols-2 @xl:grid-cols-4 @3xl:grid-cols-5">
 				{#if proposal.approvals_required}
 					<div class="grid gap-1">
 						<div class="text-muted text-label-sm">Approvals</div>

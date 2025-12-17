@@ -28,4 +28,10 @@
 	}
 </script>
 
-<Select id="status-filter" options={statusOptions} {selected} onSelectedChange={handleChange} />
+<Select
+	id="status-filter"
+	triggerClass="text-nowrap"
+	options={statusOptions}
+	{selected}
+	onSelectedChange={handleChange}
+/>
