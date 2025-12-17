@@ -11,7 +11,12 @@ export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 	const json = await response.json();
 
 	if ('error' in json) {
-		error(404, json.error);
+		error(404, {
+			message: `No multisig proposal found.`,
+			code: 'NOT_FOUND',
+			title: params.proposal,
+			subtitle: 'Multisig Proposal'
+		});
 	}
 
 	const packed = PackedTransaction.from({

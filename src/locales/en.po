@@ -14,6 +14,7 @@ msgstr ""
 
 #: src/routes/+error.svelte
 #: src/routes/+layout.server.ts
+#: src/routes/[[locale]]/[network]/(explorer)/+error.svelte
 #: src/routes/[[locale]]/[network]/+error.svelte
 msgid "Page not found"
 msgstr "Page not found"
@@ -81,6 +82,7 @@ msgstr "API Reference"
 #: src/lib/components/transact/summary.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Status"
 msgstr "Status"
@@ -2444,6 +2446,7 @@ msgstr "Load more"
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.ts
+#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/ram/+page.svelte
 msgid "Contract"
 msgstr "Contract"
@@ -3613,7 +3616,9 @@ msgstr "Review the actions below and sign the transaction."
 msgid "No contract is currently deployed to the {0} account."
 msgstr "No contract is currently deployed to the {0} account."
 
+#: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.ts
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
 msgid "NOT_FOUND"
 msgstr "NOT_FOUND"
@@ -4337,7 +4342,7 @@ msgstr "{0} Token Swap has begun!"
 msgid "Swap {0} to {1} at a 1:1 ratio"
 msgstr "Swap {0} to {1} at a 1:1 ratio"
 
-#. placeholder {0}: props.network.token.name
+#. placeholder {0}: String(data.quote.symbol.name)
 #. placeholder {0}: String(data.quote.symbol.name)
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/legacy-token-swap.svelte
@@ -4610,6 +4615,7 @@ msgstr "Total Account Value"
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/transaction/+page.svelte
 msgid "Transaction"
 msgstr "Transaction"
@@ -5637,7 +5643,7 @@ msgstr "The {0} data tables in the {1} contract on the {2} network."
 msgid "The {0} data structures defined by the {1} smart contract on the {2} network."
 msgstr "The {0} data structures defined by the {1} smart contract on the {2} network."
 
-#. placeholder {0}: truncateCenter(params.id || '', 14)
+#. placeholder {0}: params.id
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
 msgid "Transaction not found: {0}"
 msgstr "Transaction not found: {0}"
@@ -6073,9 +6079,8 @@ msgstr "Selected {0} of 30 producers"
 msgid "Submitting..."
 msgstr "Submitting..."
 
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
-msgid "Submit Vote"
-msgstr "Submit Vote"
+#~ msgid "Submit Vote"
+#~ msgstr "Submit Vote"
 
 #~ msgid "Vote Again"
 #~ msgstr "Vote Again"
@@ -6128,9 +6133,8 @@ msgstr "How Voting Works"
 #~ "for up to 30 producers, and your voting power is split equally among all your\n"
 #~ "selected producers."
 
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
-msgid "Visit producer website"
-msgstr "Visit producer website"
+#~ msgid "Visit producer website"
+#~ msgstr "Visit producer website"
 
 #~ msgid "What are Block Producers?"
 #~ msgstr "What are Block Producers?"
@@ -6398,25 +6402,23 @@ msgstr "No producers match your search"
 #~ "<0>Drive token value</0> through good governance\n"
 #~ "that attracts users and developers"
 
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
-msgid ""
-"Voting for block producers is simple and flexible. Here's everything you need to\n"
-"know."
-msgstr ""
-"Voting for block producers is simple and flexible. Here's everything you need to\n"
-"know."
+#~ msgid ""
+#~ "Voting for block producers is simple and flexible. Here's everything you need to\n"
+#~ "know."
+#~ msgstr ""
+#~ "Voting for block producers is simple and flexible. Here's everything you need to\n"
+#~ "know."
 
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Vote with Staked Tokens"
 msgstr "Vote with Staked Tokens"
 
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
-msgid ""
-"Your vote weight equals the amount of tokens you have staked. More stake = more\n"
-"voting power."
-msgstr ""
-"Your vote weight equals the amount of tokens you have staked. More stake = more\n"
-"voting power."
+#~ msgid ""
+#~ "Your vote weight equals the amount of tokens you have staked. More stake = more\n"
+#~ "voting power."
+#~ msgstr ""
+#~ "Your vote weight equals the amount of tokens you have staked. More stake = more\n"
+#~ "voting power."
 
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Up to 30 Producers"
@@ -6457,21 +6459,21 @@ msgstr "Only the top 21 voted producers actively create blocks. Others serve as 
 msgid "Liquid Balance"
 msgstr "Liquid Balance"
 
-#~ msgid "Voting for block producers is simple and flexible. Here's everything you need to know."
-#~ msgstr "Voting for block producers is simple and flexible. Here's everything you need to know."
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Voting for block producers is simple and flexible. Here's everything you need to know."
+msgstr "Voting for block producers is simple and flexible. Here's everything you need to know."
 
 #~ msgid "Change your votes whenever you want. Your votes remain active until you modify them."
 #~ msgstr "Change your votes whenever you want. Your votes remain active until you modify them."
 
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
-msgid ""
-"This network uses <0>Delegated Proof of Stake (DPoS)</0>, a consensus mechanism where token holders elect block producers to validate\n"
-"transactions and secure the network. Your vote directly shapes who runs the\n"
-"infrastructure you depend on."
-msgstr ""
-"This network uses <0>Delegated Proof of Stake (DPoS)</0>, a consensus mechanism where token holders elect block producers to validate\n"
-"transactions and secure the network. Your vote directly shapes who runs the\n"
-"infrastructure you depend on."
+#~ msgid ""
+#~ "This network uses <0>Delegated Proof of Stake (DPoS)</0>, a consensus mechanism where token holders elect block producers to validate\n"
+#~ "transactions and secure the network. Your vote directly shapes who runs the\n"
+#~ "infrastructure you depend on."
+#~ msgstr ""
+#~ "This network uses <0>Delegated Proof of Stake (DPoS)</0>, a consensus mechanism where token holders elect block producers to validate\n"
+#~ "transactions and secure the network. Your vote directly shapes who runs the\n"
+#~ "infrastructure you depend on."
 
 #~ msgid "What Block Producers Do"
 #~ msgstr "What Block Producers Do"
@@ -6686,37 +6688,29 @@ msgstr "Votes Decay Over Time"
 #~ "<0>Validate transactions</0> — They verify and process\n"
 #~ "every transaction on the network"
 
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
-msgid "Validate Transactions"
-msgstr "Validate Transactions"
+#~ msgid "Validate Transactions"
+#~ msgstr "Validate Transactions"
 
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
-msgid "They verify and process every transaction on the network"
-msgstr "They verify and process every transaction on the network"
+#~ msgid "They verify and process every transaction on the network"
+#~ msgstr "They verify and process every transaction on the network"
 
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
-msgid "Produce Blocks"
-msgstr "Produce Blocks"
+#~ msgid "Produce Blocks"
+#~ msgstr "Produce Blocks"
 
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
-msgid "Every 0.5 seconds, producers bundle transactions into blocks"
-msgstr "Every 0.5 seconds, producers bundle transactions into blocks"
+#~ msgid "Every 0.5 seconds, producers bundle transactions into blocks"
+#~ msgstr "Every 0.5 seconds, producers bundle transactions into blocks"
 
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
-msgid "Maintain Infrastructure"
-msgstr "Maintain Infrastructure"
+#~ msgid "Maintain Infrastructure"
+#~ msgstr "Maintain Infrastructure"
 
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
-msgid "They provide servers, bandwidth, and storage that keep the network running 24/7"
-msgstr "They provide servers, bandwidth, and storage that keep the network running 24/7"
+#~ msgid "They provide servers, bandwidth, and storage that keep the network running 24/7"
+#~ msgstr "They provide servers, bandwidth, and storage that keep the network running 24/7"
 
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
-msgid "Govern the Network"
-msgstr "Govern the Network"
+#~ msgid "Govern the Network"
+#~ msgstr "Govern the Network"
 
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
-msgid "Producers vote on protocol upgrades and critical decisions"
-msgstr "Producers vote on protocol upgrades and critical decisions"
+#~ msgid "Producers vote on protocol upgrades and critical decisions"
+#~ msgstr "Producers vote on protocol upgrades and critical decisions"
 
 #~ msgid "Secure the network"
 #~ msgstr "Secure the network"

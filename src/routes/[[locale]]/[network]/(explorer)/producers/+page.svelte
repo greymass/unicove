@@ -2,7 +2,17 @@
 	import { getContext } from 'svelte';
 	import { watch } from 'runed';
 	import { Asset, type Float64 } from '@wharfkit/antelope';
-	import { Button, Card, Chip, Stack, NameInput } from 'unicove-components';
+	import {
+		Button,
+		Card,
+		Chip,
+		Stack,
+		NameInput,
+		cn,
+		Cluster,
+		IconButton
+	} from 'unicove-components';
+	import Checkbox from './components/Checkbox.svelte';
 	import AccountLink from '$lib/components/elements/account.svelte';
 	import TransactForm from '$lib/components/transact/form.svelte';
 	import AssetText from '$lib/components/elements/asset.svelte';
@@ -18,9 +28,12 @@
 		Blocks,
 		Clock,
 		Hash,
-		ChartNoAxesCombined
+		ChartNoAxesCombined,
+		Icon,
+		CircleQuestionMark
 	} from '@lucide/svelte';
-	import { page } from '$app/stores';
+	import VoteStat from './components/VoteStat.svelte';
+	import { page } from '$app/state';
 
 	const context = getContext<UnicoveContext>('state');
 	const { producers } = context;
@@ -151,7 +164,7 @@
 	});
 
 	const activeTab = $derived.by(() => {
-		const hash = $page.url.hash.slice(1);
+		const hash = page.url.hash.slice(1);
 		if (hash && ['account', 'why', 'how'].includes(hash)) {
 			return hash;
 		}
@@ -186,7 +199,37 @@
 	</div>
 {/snippet}
 
-<div class="space-y-6">
+{#snippet CardHeader(icon: typeof Icon, title: string, description: string)}
+	{@const IconComponent = icon}
+	<div class="flex items-start gap-3">
+		<picture
+			class="bg-surface-container-high grid size-12 shrink-0 place-items-center rounded-full"
+		>
+			<IconComponent />
+		</picture>
+		<hgroup class="mt-1">
+			<h2 class="text-title leading-6">{title}</h2>
+			<p class="text-muted text-label-sm mt-1 leading-5 text-pretty">{description}</p>
+		</hgroup>
+	</div>
+{/snippet}
+
+{#snippet InnerCard(icon: typeof Icon, title: string, description: string)}
+	{@const IconComponent = icon}
+	<Card class="bg-surface-container flex gap-4">
+		<div class="mt-1 shrink-0">
+			<IconComponent class="size-6" />
+		</div>
+		<div class="space-y-1">
+			<h3 class="text-body">{title}</h3>
+			<p class="text-muted text-label-sm leading-5 text-pretty">
+				{description}
+			</p>
+		</div>
+	</Card>
+{/snippet}
+
+<Stack>
 	<menu aria-label="page functions" class="flex gap-2 overflow-auto">
 		{#each tabOptions as option}
 			<li>
@@ -204,270 +247,256 @@
 	<Card>
 		<Stack>
 			{#if activeTab === 'account'}
-				<div class="space-y-6">
-					<div class="flex items-start gap-4">
-						<div class="bg-primary/10 text-primary hidden shrink-0 rounded-xl p-3 sm:block">
-							<Vote class="size-8" />
-						</div>
-						<div>
-							<h2 class="text-on-surface mb-2 text-xl font-semibold">My Voting Power</h2>
-							<p class="text-on-surface-variant text-sm leading-relaxed">
-								Your voting power is determined by the amount of tokens you have staked.
-							</p>
-						</div>
-					</div>
+				<Stack>
+					{@render CardHeader(
+						Vote,
+						'My Voting Power',
+						'Your voting power is determined by the amount of tokens you have staked.'
+					)}
 
 					{#if context.account && !context.account.loaded}
 						<!-- Loading state while account data is being fetched -->
 						<div class="grid gap-6 sm:grid-cols-3">
-							<div class="text-center">
-								<p class="text-on-surface-variant mb-1 text-sm">Staked Balance</p>
-								<div class="flex justify-center">
-									<div class="bg-surface-container h-8 w-24 animate-pulse rounded-lg"></div>
-								</div>
-							</div>
-							<div class="text-center">
-								<p class="text-on-surface-variant mb-1 text-sm">Vote Age</p>
-								<div class="flex justify-center">
-									<div class="bg-surface-container h-8 w-20 animate-pulse rounded-lg"></div>
-								</div>
-							</div>
-							<div class="text-center">
-								<p class="text-on-surface-variant mb-1 text-sm">Vote Decay</p>
-								<div class="flex justify-center">
-									<div class="bg-surface-container h-8 w-16 animate-pulse rounded-lg"></div>
-								</div>
-							</div>
+							<VoteStat label="Staked Balance">
+								<div class="bg-surface-container h-8 w-24 animate-pulse rounded-lg"></div>
+							</VoteStat>
+							<VoteStat label="Vote Age">
+								<div class="bg-surface-container h-8 w-24 animate-pulse rounded-lg"></div>
+							</VoteStat>
+							<VoteStat label="Vote Decay">
+								<div class="bg-surface-container h-8 w-24 animate-pulse rounded-lg"></div>
+							</VoteStat>
 						</div>
 					{:else if context.account && votingWeight}
 						<div class="grid gap-6 sm:grid-cols-3">
-							<div class="text-center">
-								<p class="text-on-surface-variant mb-1 text-sm">Staked Balance</p>
-								<p class="text-on-surface text-2xl font-semibold">
-									<AssetText variant="full" value={votingWeight} />
-								</p>
-							</div>
+							<VoteStat label="Staked Balance">
+								<AssetText variant="full" value={votingWeight} />
+							</VoteStat>
 
 							{#if voteDecayInfo && currentVotes.length > 0}
-								<div class="text-center">
-									<p class="text-on-surface-variant mb-1 text-sm">Vote Age</p>
-									<p class="text-on-surface text-2xl font-semibold">
-										{voteDecayInfo.ageDays === 0
-											? 'Today'
-											: voteDecayInfo.ageDays === 1
-												? '1 day'
-												: `${voteDecayInfo.ageDays} days`}
-									</p>
-								</div>
+								<VoteStat label="Vote Age">
+									{voteDecayInfo.ageDays === 0
+										? 'Today'
+										: voteDecayInfo.ageDays === 1
+											? '1 day'
+											: `${voteDecayInfo.ageDays} days`}
+								</VoteStat>
 
-								<div class="text-center">
-									<p class="text-on-surface-variant mb-1 text-sm">Vote Decay</p>
-									<p
-										class="text-2xl font-semibold {Number(voteDecayInfo.decayPercent) > 10
-											? 'text-error'
-											: 'text-on-surface'}"
-									>
-										{voteDecayInfo.decayPercent}%
-									</p>
-								</div>
+								<VoteStat
+									label="Vote Decay"
+									class={cn(Number(voteDecayInfo.decayPercent) > 10 && '[&_p]:text-success')}
+								>
+									{voteDecayInfo.decayPercent}%
+								</VoteStat>
 							{:else}
-								<div class="text-center">
-									<p class="text-on-surface-variant mb-1 text-sm">Liquid Balance</p>
-									<p class="text-on-surface text-2xl font-semibold">
-										<AssetText variant="full" value={context.account.balance.balance} />
-									</p>
-								</div>
+								<VoteStat label="Liquid Balance">
+									<AssetText variant="full" value={context.account.balance.balance} />
+								</VoteStat>
 
-								<div class="text-center">
-									<p class="text-on-surface-variant mb-1 text-sm">Status</p>
-									<p class="text-on-surface-variant text-2xl font-semibold">Not voting</p>
-								</div>
+								<VoteStat label="Status">Not voting</VoteStat>
 							{/if}
 						</div>
 					{:else}
-						<div
-							class="border-outline-variant flex flex-col items-center gap-4 rounded-xl border border-dashed p-8 text-center"
+						<!-- Logged out state -->
+						<Stack
+							class="border-outline-variant border-outline items-center gap-4 rounded-xl border p-8 text-center"
 						>
-							<div class="bg-primary/10 text-primary rounded-full p-4">
-								<Vote class="size-8" />
-							</div>
-							<div>
-								<p class="text-on-surface text-lg font-medium">Connect to view your voting power</p>
-								<p class="text-on-surface-variant mt-1 text-sm">
+							<Stack class="gap-2">
+								<p class="text-on-surface text-headline">Connect to view your voting power</p>
+								<p class="text-muted text-body">
 									Login to see your staked balance, vote age, and help secure the network.
 								</p>
-							</div>
+							</Stack>
 							<Button onclick={() => context.wharf?.login()}>Connect Wallet</Button>
-						</div>
+						</Stack>
 					{/if}
-				</div>
+				</Stack>
 			{:else if activeTab === 'why'}
-				<div class="space-y-6">
+				<Stack>
 					<div class="flex items-start gap-4">
-						<div class="bg-primary/10 text-primary hidden shrink-0 rounded-xl p-3 sm:block">
-							<Vote class="size-8" />
-						</div>
-						<div>
-							<h2 class="text-on-surface mb-2 text-xl font-semibold">Why Should You Vote?</h2>
-							<p class="text-on-surface-variant text-sm leading-relaxed">
-								This network uses <strong class="text-on-surface"
-									>Delegated Proof of Stake (DPoS)</strong
-								>, a consensus mechanism where token holders elect block producers to validate
-								transactions and secure the network. Your vote directly shapes who runs the
-								infrastructure you depend on.
-							</p>
-						</div>
+						{@render CardHeader(
+							CircleQuestionMark,
+							'Why Should You Vote?',
+							'This network uses Delegated Proof of Stake (DPoS), a consensus mechanism where token holders elect block producers to validate transactions and secure the network. Your vote directly shapes who runs the infrastructure you depend on.'
+						)}
 					</div>
 
 					<div class="grid gap-4 sm:grid-cols-2">
-						<div
-							class="bg-surface-container flex gap-4 rounded-xl p-4 transition-shadow hover:shadow-md"
-						>
-							<div class="text-primary shrink-0">
-								<Shield class="size-6" />
-							</div>
-							<div>
-								<h3 class="text-on-surface mb-1 font-semibold">Validate Transactions</h3>
-								<p class="text-on-surface-variant text-sm leading-relaxed">
-									They verify and process every transaction on the network
-								</p>
-							</div>
-						</div>
+						{@render InnerCard(
+							Shield,
+							'Transaction Validation',
+							'The block producers verify and process every transaction on the network'
+						)}
 
-						<div
-							class="bg-surface-container flex gap-4 rounded-xl p-4 transition-shadow hover:shadow-md"
-						>
-							<div class="text-primary shrink-0">
-								<Blocks class="size-6" />
-							</div>
-							<div>
-								<h3 class="text-on-surface mb-1 font-semibold">Produce Blocks</h3>
-								<p class="text-on-surface-variant text-sm leading-relaxed">
-									Every 0.5 seconds, producers bundle transactions into blocks
-								</p>
-							</div>
-						</div>
+						{@render InnerCard(
+							Blocks,
+							'Block Production',
+							'Every 0.5 seconds, block producers bundle transactions into blocks'
+						)}
 
-						<div
-							class="bg-surface-container flex gap-4 rounded-xl p-4 transition-shadow hover:shadow-md"
-						>
-							<div class="text-primary shrink-0">
-								<Server class="size-6" />
-							</div>
-							<div>
-								<h3 class="text-on-surface mb-1 font-semibold">Maintain Infrastructure</h3>
-								<p class="text-on-surface-variant text-sm leading-relaxed">
-									They provide servers, bandwidth, and storage that keep the network running 24/7
-								</p>
-							</div>
-						</div>
+						{@render InnerCard(
+							Server,
+							'Infrastructure Maintenance',
+							'These block producers provide servers, bandwidth, and storage that keep the network running 24/7'
+						)}
 
-						<div
-							class="bg-surface-container flex gap-4 rounded-xl p-4 transition-shadow hover:shadow-md"
-						>
-							<div class="text-primary shrink-0">
-								<Scale class="size-6" />
-							</div>
-							<div>
-								<h3 class="text-on-surface mb-1 font-semibold">Govern the Network</h3>
-								<p class="text-on-surface-variant text-sm leading-relaxed">
-									Producers vote on protocol upgrades and critical decisions
-								</p>
-							</div>
-						</div>
+						{@render InnerCard(
+							Scale,
+							'Network Governance',
+							'Block Producers vote on protocol upgrades and critical network decisions'
+						)}
 					</div>
-				</div>
+				</Stack>
 			{:else if activeTab === 'how'}
-				<div class="space-y-6">
-					<div class="flex items-start gap-4">
-						<div class="bg-primary/10 text-primary hidden shrink-0 rounded-xl p-3 sm:block">
-							<Scale class="size-8" />
-						</div>
-						<div>
-							<h2 class="text-on-surface mb-2 text-xl font-semibold">How Voting Works</h2>
-							<p class="text-on-surface-variant text-sm leading-relaxed">
-								Voting for block producers is simple and flexible. Here's everything you need to
-								know.
-							</p>
-						</div>
+				<Stack>
+					<div class="flex items-start gap-3">
+						{@render CardHeader(
+							Scale,
+							'How Voting Works',
+							"Voting for block producers is simple and flexible. Here's everything you need to know."
+						)}
 					</div>
 
 					<div class="grid gap-4 sm:grid-cols-2">
-						<div
-							class="bg-surface-container flex gap-4 rounded-xl p-4 transition-shadow hover:shadow-md"
-						>
-							<div class="text-primary shrink-0">
-								<ChartNoAxesCombined class="size-6" />
-							</div>
-							<div>
-								<h3 class="text-on-surface mb-1 font-semibold">Vote with Staked Tokens</h3>
-								<p class="text-on-surface-variant text-sm leading-relaxed">
-									Your vote weight equals the amount of tokens you have staked. More stake = more
-									voting power.
-								</p>
-							</div>
-						</div>
+						{@render InnerCard(
+							ChartNoAxesCombined,
+							'Vote with Staked Tokens',
+							'Your vote weight equals the amount of tokens you have staked. More stake = more voting power.'
+						)}
 
-						<div
-							class="bg-surface-container flex gap-4 rounded-xl p-4 transition-shadow hover:shadow-md"
-						>
-							<div class="text-primary shrink-0">
-								<Hash class="size-6" />
-							</div>
-							<div>
-								<h3 class="text-on-surface mb-1 font-semibold">Up to 30 Producers</h3>
-								<p class="text-on-surface-variant text-sm leading-relaxed">
-									Select as many as 30 block producers. Your full voting power applies to each one.
-								</p>
-							</div>
-						</div>
+						{@render InnerCard(
+							Hash,
+							'Up to 30 Producers',
+							'Select as many as 30 block producers. Your full voting power applies to each one.'
+						)}
 
-						<div
-							class="bg-surface-container flex gap-4 rounded-xl p-4 transition-shadow hover:shadow-md"
-						>
-							<div class="text-primary shrink-0">
-								<Clock class="size-6" />
-							</div>
-							<div>
-								<h3 class="text-on-surface mb-1 font-semibold">Votes Decay Over Time</h3>
-								<p class="text-on-surface-variant text-sm leading-relaxed">
-									Vote weight decays with a half-life of about one year. Re-vote periodically.
-								</p>
-							</div>
-						</div>
+						{@render InnerCard(
+							Clock,
+							'Votes Decay Over Time',
+							'Vote weight decays with a half-life of about one year. Re-vote periodically.'
+						)}
 
-						<div
-							class="bg-surface-container flex gap-4 rounded-xl p-4 transition-shadow hover:shadow-md"
-						>
-							<div class="text-primary shrink-0">
-								<Blocks class="size-6" />
-							</div>
-							<div>
-								<h3 class="text-on-surface mb-1 font-semibold">Top 21 Produce Blocks</h3>
-								<p class="text-on-surface-variant text-sm leading-relaxed">
-									Only the top 21 voted producers actively create blocks. Others serve as standbys.
-								</p>
-							</div>
-						</div>
+						{@render InnerCard(
+							Blocks,
+							'Top 21 Produce Blocks',
+							'Only the top 21 voted producers actively create blocks. Others serve as standbys.'
+						)}
 					</div>
-				</div>
+				</Stack>
 			{/if}
 		</Stack>
 	</Card>
 
-	<div class="grid grid-cols-1 items-start gap-6 lg:grid-cols-[1fr_320px]">
+	<div class="flex flex-col items-start gap-6 lg:flex-row-reverse">
+		<!-- Vote for Producers Sidebar -->
+		<Card class="sticky top-0 z-60 w-full shadow shadow-lg lg:top-4 lg:basis-sm lg:shadow-none">
+			<TransactForm
+				id={transactionId}
+				error={transactionError}
+				onsuccess={Success}
+				onfailure={Failure}
+			>
+				<Stack class="gap-4 lg:gap-6">
+					<hgroup class="flex items-baseline justify-between gap-1 lg:flex-col">
+						<h2 class="text-title text-nowrap">Vote for Producers</h2>
+						{#if context.account && !context.account.loaded}
+							<div class="flex items-center gap-2">
+								<svg
+									class="text-muted size-4 animate-spin"
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 24 24"
+								>
+									<circle
+										class="opacity-25"
+										cx="12"
+										cy="12"
+										r="10"
+										stroke="currentColor"
+										stroke-width="4"
+									></circle>
+									<path
+										class="opacity-75"
+										fill="currentColor"
+										d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+									></path>
+								</svg>
+								<p class="text-muted text-sm">Loading your votes...</p>
+							</div>
+						{:else}
+							<p class="text-label-sm lg:hidden">
+								{voteState.selected.size}/30
+							</p>
+							<p class="text-body hidden lg:block">
+								Selected {voteState.selected.size} of 30 producers
+							</p>
+						{/if}
+					</hgroup>
+
+					{#if voteState.addedProducers.length > 0}
+						<Stack class="gap-2">
+							<p class="text-label-sm">Will vote for:</p>
+							<Cluster class="flex-nowrap gap-2 overflow-auto lg:flex-wrap">
+								{#each voteState.addedProducers as producer}
+									<Chip class="bg-success text-on-success">
+										{String(producer)}
+									</Chip>
+								{/each}
+							</Cluster>
+						</Stack>
+					{/if}
+
+					{#if voteState.removedProducers.length > 0}
+						<Stack class="gap-2">
+							<p class="text-label-sm">Will remove vote from:</p>
+							<Cluster class="flex-nowrap gap-2 overflow-auto lg:flex-wrap">
+								{#each voteState.removedProducers as producer}
+									<Chip class="bg-error text-on-error">
+										{String(producer)}
+									</Chip>
+								{/each}
+							</Cluster>
+						</Stack>
+					{/if}
+
+					<!-- button group -->
+					<div class="flex flex-row-reverse gap-2 *:flex-1">
+						<Button
+							onclick={handleVote}
+							disabled={!context.account ||
+								!context.account.loaded ||
+								!voteState.canVote ||
+								submitting}
+						>
+							{#if submitting}
+								Submitting...
+							{:else if voteState.canRefresh}
+								Refresh Vote
+							{:else}
+								Submit <span class="hidden @lg:inline">Vote</span>
+							{/if}
+						</Button>
+						{#if voteState.hasChanges}
+							<Button variant="secondary" onclick={() => voteState.reset()}>Cancel</Button>
+						{/if}
+					</div>
+				</Stack>
+			</TransactForm>
+		</Card>
+
 		<!-- Block Producers List -->
-		<Card class="order-2 lg:order-1">
-			<Stack>
-				<div class="flex items-center justify-between gap-4">
-					<h2 class="text-xl font-semibold">Block Producers</h2>
+		<Card class="@container w-full lg:flex-1">
+			<Stack class="gap-3">
+				<hgroup class="flex flex-wrap items-center justify-between gap-4">
+					<h2 class="text-title">Block Producers</h2>
 					<div class="w-64">
 						<NameInput bind:value={searchQuery} placeholder="Search producers..." />
 					</div>
-				</div>
+				</hgroup>
+
 				{#if producers.loading}
 					<div class="py-12 text-center">
-						<p class="text-on-surface-variant">Loading producers...</p>
+						<p class="text-muted">Loading producers...</p>
 					</div>
 				{:else if producers.error}
 					<Stack>
@@ -476,125 +505,102 @@
 					</Stack>
 				{:else if filteredProducers.length === 0}
 					<div class="py-12 text-center">
-						<p class="text-on-surface-variant">
+						<p class="text-muted">
 							{searchQuery && String(searchQuery).trim()
 								? 'No producers match your search'
 								: 'No active producers found'}
 						</p>
 					</div>
 				{:else}
-					<div class="overflow-x-auto">
-						<table class="table-styles">
-							<thead>
-								<tr>
-									<th class="w-8 sm:w-12"></th>
-									<th class="w-16 text-center sm:w-32">#</th>
-									<th>Actor</th>
-									<th class="hidden w-52 text-right sm:table-cell">Votes</th>
-								</tr>
-							</thead>
-							<tbody>
-								{#each filteredProducers as producer, index (String(producer.owner))}
-									<tr
-										class="cursor-pointer"
-										onclick={(e) => {
-											if (
-												e.target instanceof HTMLAnchorElement ||
-												(e.target instanceof HTMLElement && e.target.closest('a'))
-											) {
-												return;
-											}
-											if (
-												context.account &&
-												(voteState.isSelected(producer.owner) || voteState.selected.size < 30)
-											) {
-												voteState.toggleProducer(producer.owner);
-											}
-										}}
-									>
-										<td>
-											<div class="flex items-center justify-center">
-												<input
-													type="checkbox"
-													id={`producer-${String(producer.owner)}`}
-													checked={voteState.isSelected(producer.owner)}
-													disabled={!context.account ||
-														(!voteState.isSelected(producer.owner) &&
-															voteState.selected.size >= 30)}
-													class="border-outline size-5 cursor-pointer rounded border disabled:cursor-not-allowed disabled:opacity-30"
-												/>
-											</div>
-										</td>
-										<td class="text-center">
-											<div
-												class="flex flex-col items-center justify-center gap-1 sm:flex-row sm:gap-2"
-											>
-												<span>{index + 1}</span>
-												{#if index < 21}
-													<Chip
-														class="bg-success-container text-on-success-container px-1.5 text-xs sm:px-3 sm:text-sm"
-														>Active</Chip
-													>
-												{:else}
-													<Chip
-														class="bg-surface-variant text-on-surface-variant px-1.5 text-xs sm:px-3 sm:text-sm"
-														>Standby</Chip
-													>
-												{/if}
-											</div>
-										</td>
-										<td>
-											<div class="flex flex-col">
-												<div class="flex items-center gap-2">
-													<AccountLink name={producer.owner} />
-													{#if producer.url}
-														<a
-															href={producer.url}
-															target="_blank"
-															rel="noopener noreferrer"
-															class="text-on-surface-variant hover:text-on-surface inline-flex items-center justify-center transition-colors"
-															onclick={(e) => e.stopPropagation()}
-															title="Visit producer website"
-														>
-															<ExternalLink class="size-4" />
-														</a>
-													{/if}
-												</div>
-												<div class="text-on-surface-variant mt-0.5 text-sm sm:hidden">
-													<AssetText
-														value={voteWeightToAsset(producer.total_votes)}
-														variant="short"
-													/>
-													<span
-														>({producers.totalVotes > 0
-															? (
-																	(Number(producer.total_votes) / producers.totalVotes) *
-																	100
-																).toFixed(2)
-															: '0.00'}%)</span
-													>
-												</div>
-											</div>
-										</td>
-										<td class="hidden text-right sm:table-cell">
-											<div class="flex flex-col items-end">
-												<AssetText
-													value={voteWeightToAsset(producer.total_votes)}
-													variant="short"
-												/>
-												<span class="text-on-surface-variant text-sm">
-													{producers.totalVotes > 0
-														? ((Number(producer.total_votes) / producers.totalVotes) * 100).toFixed(
-																2
-															)
-														: '0.00'}%
-												</span>
-											</div>
-										</td>
-									</tr>
-								{/each}
-							</tbody>
-						</table>
+					<div
+						class="grid grid-cols-[auto_1fr_1fr_auto] gap-x-4 @lg:grid-cols-[auto_auto_1fr_1fr_3rem]"
+					>
+						<div class="col-span-full mt-3 hidden grid-cols-subgrid @lg:grid">
+							<span class="col-start-1">Rank</span>
+							<span class="col-start-2 text-center">Status</span>
+							<span class="col-start-3">Actor</span>
+							<span class="col-start-4 justify-self-end">Votes</span>
+						</div>
+
+						{#each filteredProducers as producer, index (String(producer.owner))}
+							<button
+								class="table-row-background table-row-border col-span-full grid cursor-pointer grid-cols-subgrid items-center py-3"
+								onclick={(e) => {
+									if (
+										e.target instanceof HTMLAnchorElement ||
+										(e.target instanceof HTMLElement && e.target.closest('a'))
+									) {
+										return;
+									}
+									if (
+										context.account &&
+										(voteState.isSelected(producer.owner) || voteState.selected.size < 30)
+									) {
+										voteState.toggleProducer(producer.owner);
+									}
+								}}
+							>
+								<span
+									class:text-on-success={index < 21}
+									class:@lg:text-on-surface={index < 21}
+									class="@lg:text-body order-2 col-start-1 row-start-1 justify-self-center text-xs font-semibold @lg:justify-self-start @lg:font-normal"
+									>{index + 1}</span
+								>
+
+								<div class="order-1 col-start-1 row-start-1 justify-self-center @lg:col-start-2">
+									{#if index < 21}
+										<Chip class="bg-success text-on-success text-label-sm hidden  @lg:block">
+											Active
+										</Chip>
+										<Shield class="fill-success text-success @lg:hidden" />
+									{:else}
+										<Chip
+											class="bg-surface-container-high text-muted text-label-sm hidden @lg:block"
+										>
+											Standby
+										</Chip>
+										<Shield
+											class="text-surface-container-highest fill-surface-container-highest @lg:hidden"
+										/>
+									{/if}
+								</div>
+
+								<div class="flex items-center gap-1">
+									<AccountLink name={producer.owner} />
+									{#if producer.url}
+										<IconButton
+											icon={ExternalLink}
+											href={producer.url}
+											blank={true}
+											class="text-muted hidden @lg:grid"
+											target="_blank"
+										/>
+									{/if}
+								</div>
+
+								<div class="flex flex-col items-end gap-1">
+									<AssetText
+										value={voteWeightToAsset(producer.total_votes)}
+										variant="short"
+										class="text-label-sm md:text-body"
+									/>
+									<span class="text-muted text-label-sm">
+										{producers.totalVotes > 0
+											? ((Number(producer.total_votes) / producers.totalVotes) * 100).toFixed(2)
+											: '0.00'}%
+									</span>
+								</div>
+
+								<div class="grid justify-items-end">
+									<Checkbox
+										id={`producer-${String(producer.owner)}`}
+										checked={voteState.isSelected(producer.owner)}
+										disabled={!context.account ||
+											(!voteState.isSelected(producer.owner) && voteState.selected.size >= 30)}
+									/>
+								</div>
+							</button>
+						{/each}
 					</div>
 					{#if producers.hasMore && !producers.showAll && (!searchQuery || !String(searchQuery).trim())}
 						<div class="flex justify-center pt-4">
@@ -604,100 +610,5 @@
 				{/if}
 			</Stack>
 		</Card>
-
-		<!-- Vote for Producers Sidebar -->
-		<div class="order-1 lg:sticky lg:top-4 lg:order-2">
-			<TransactForm
-				id={transactionId}
-				error={transactionError}
-				onsuccess={Success}
-				onfailure={Failure}
-			>
-				<Card>
-					<Stack>
-						<div class="flex flex-col">
-							<h2 class="text-xl font-semibold">Vote for Producers</h2>
-							<div class="flex-1 space-y-4 pt-4">
-								{#if context.account && !context.account.loaded}
-									<div class="flex items-center gap-2">
-										<svg
-											class="text-on-surface-variant size-4 animate-spin"
-											xmlns="http://www.w3.org/2000/svg"
-											fill="none"
-											viewBox="0 0 24 24"
-										>
-											<circle
-												class="opacity-25"
-												cx="12"
-												cy="12"
-												r="10"
-												stroke="currentColor"
-												stroke-width="4"
-											></circle>
-											<path
-												class="opacity-75"
-												fill="currentColor"
-												d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-											></path>
-										</svg>
-										<p class="text-on-surface-variant text-sm">Loading your votes...</p>
-									</div>
-								{:else}
-									<p class="text-on-surface-variant text-sm">
-										Selected {voteState.selected.size} of 30 producers
-									</p>
-								{/if}
-
-								{#if voteState.addedProducers.length > 0}
-									<div>
-										<p class="text-sm font-medium">Will vote for:</p>
-										<div class="mt-1 flex flex-wrap gap-2">
-											{#each voteState.addedProducers as producer}
-												<Chip class="bg-success-container text-on-success-container">
-													{String(producer)}
-												</Chip>
-											{/each}
-										</div>
-									</div>
-								{/if}
-								{#if voteState.removedProducers.length > 0}
-									<div>
-										<p class="text-sm font-medium">Will remove vote from:</p>
-										<div class="mt-1 flex flex-wrap gap-2">
-											{#each voteState.removedProducers as producer}
-												<Chip class="bg-error-container text-on-error-container">
-													{String(producer)}
-												</Chip>
-											{/each}
-										</div>
-									</div>
-								{/if}
-							</div>
-
-							<div class="flex gap-2 pt-4">
-								<Button
-									onclick={handleVote}
-									disabled={!context.account ||
-										!context.account.loaded ||
-										!voteState.canVote ||
-										submitting}
-								>
-									{#if submitting}
-										Submitting...
-									{:else if voteState.canRefresh}
-										Refresh Vote
-									{:else}
-										Submit Vote
-									{/if}
-								</Button>
-								{#if voteState.hasChanges}
-									<Button variant="secondary" onclick={() => voteState.reset()}>Cancel</Button>
-								{/if}
-							</div>
-						</div>
-					</Stack>
-				</Card>
-			</TransactForm>
-		</div>
 	</div>
-</div>
+</Stack>

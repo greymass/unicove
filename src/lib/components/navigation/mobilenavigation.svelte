@@ -60,12 +60,12 @@
 	<div class="md:hidden" use:melt={$portalled}>
 		<div
 			use:melt={$overlay}
-			class="bg-scrim fixed inset-0 z-50 md:bg-transparent"
+			class="bg-scrim fixed inset-0 z-99 md:bg-transparent"
 			transition:fade={{ duration: 150 }}
 		></div>
 		<nav
 			use:melt={$content}
-			class="bg-surface-container fixed top-0 left-0 z-50 grid h-svh grid-rows-[auto_1fr] gap-8 px-8 pt-4 shadow-lg focus:outline-hidden md:bg-transparent md:shadow-none"
+			class="bg-surface-container fixed top-0 left-0 z-99 grid h-svh grid-rows-[auto_1fr] gap-8 px-8 pt-4 shadow-lg focus:outline-hidden md:bg-transparent md:shadow-none"
 			transition:fly={{
 				x: -350,
 				duration: 300,
