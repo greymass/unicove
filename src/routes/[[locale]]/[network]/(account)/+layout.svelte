@@ -27,5 +27,5 @@
 		backPath={$page.data.backPath}
 	/>
 
-	{@render children()}
+	{@render children?.()}
 </Stack>
