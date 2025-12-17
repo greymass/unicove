@@ -3,12 +3,25 @@ import { API, TimePoint } from '@wharfkit/antelope';
 import { PUBLIC_CHAIN_SHORT } from '$env/static/public';
 import { localizePath } from '$lib/utils/url';
 import { useLocale } from '$lib/utils/intl';
+import { error } from '@sveltejs/kit';
 
 export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 	const { network, locale } = await parent();
 	await useLocale(locale);
 	const response = await fetch(localizePath(`/api/block/${params.number}`));
+
+	const title = `Block #${params.number}`;
+
 	const json = await response.json();
+
+	if (!response.ok || !json.block) {
+		return error(404, {
+			message: `No block found.`,
+			code: 'NOT_FOUND',
+			title: title,
+			subtitle: 'Block'
+		});
+	}
 	const block = json.block as API.v1.GetBlockResponse;
 
 	const { cpuCount, netCount, actionCount } = block.transactions.reduce(
@@ -33,8 +46,6 @@ export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 	const date = TimePoint.from(block.timestamp).toDate();
 
 	const description = `Block #${params.number} was produced by ${block.producer} on ${date}, which included ${block.transactions.length} transactions performing ${actionCount} actions.`;
-
-	const title = `Block #${params.number}`;
 
 	return {
 		number: params.number,

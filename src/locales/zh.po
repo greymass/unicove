@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2025-12-09T01:12:13.839Z\n"
+"PO-Revision-Date: 2025-12-10T22:46:28.398Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -14,6 +14,7 @@ msgstr ""
 
 #: src/routes/+error.svelte
 #: src/routes/+layout.server.ts
+#: src/routes/[[locale]]/[network]/(explorer)/+error.svelte
 #: src/routes/[[locale]]/[network]/+error.svelte
 msgid "Page not found"
 msgstr "未找到页面"
@@ -1390,21 +1391,21 @@ msgstr "应用二进制接口"
 
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 msgid "ArrowRight"
-msgstr ""
+msgstr "向右箭头"
 
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 msgid "ArrowLeft"
-msgstr ""
+msgstr "向左箭头"
 
 #. placeholder {0}: data.details.totalCpu
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 msgid "{0} μs"
-msgstr ""
+msgstr "{0} μs"
 
 #. placeholder {0}: data.details.totalNet * 8
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 msgid "{0} Bytes"
-msgstr ""
+msgstr "{0} 字节"
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+page.svelte
 msgid "Upload Contract"
@@ -1501,7 +1502,7 @@ msgstr "交易明细"
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/prompt/[payload]/+page.svelte
 msgid "Perform transaction"
-msgstr ""
+msgstr "执行交易"
 
 #: src/routes/[[locale]]/[network]/(explorer)/prompt/[payload]/+page.svelte
 msgid "Sign-in with your wallet to perform this transaction"
@@ -2391,6 +2392,7 @@ msgstr "加载更多"
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.ts
+#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/ram/+page.svelte
 msgid "Contract"
 msgstr "合约"
@@ -2715,3 +2717,615 @@ msgstr "填充最大值"
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Value: {0}"
 msgstr "价值：{0}"
+
+#: src/routes/[[locale]]/[network]/(explorer)/+layout.svelte
+msgid "Top 21 Block Producer"
+msgstr "前21名区块生产者"
+
+#. placeholder {0}: params.number
+#. placeholder {1}: block.producer
+#. placeholder {2}: date
+#. placeholder {3}: block.transactions.length
+#. placeholder {4}: actionCount
+#: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+layout.ts
+msgid "Block #{0} was produced by {1} on {2}, which included {3} transactions performing {4} actions."
+msgstr "区块 #{0} 由 {1} 在 {2} 生产，其中包括 {3} 个交易，执行了 {4} 个操作。"
+
+#. placeholder {0}: params.number
+#: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+layout.ts
+msgid "Block #{0}"
+msgstr "区块 #{0}"
+
+#: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
+msgid "Transaction"
+msgstr "交易"
+
+#: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
+msgid "Transactions"
+msgstr "交易"
+
+#: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
+msgid "CPU (μs)"
+msgstr "CPU (μs)"
+
+#: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
+msgid "NET (Bytes)"
+msgstr "网络 (字节)"
+
+#: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
+msgid "No transactions"
+msgstr "没有交易"
+
+#: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
+msgid "Block Details"
+msgstr "区块详情"
+
+#: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
+msgid "Block Number"
+msgstr "区块号"
+
+#: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
+msgid "Producer Name"
+msgstr "生产者名称"
+
+#: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
+msgid "Total CPU"
+msgstr "CPU 总量"
+
+#: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
+msgid "Total NET"
+msgstr "网络总量"
+
+#: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
+msgid "Total Actions"
+msgstr "操作总数"
+
+#: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
+msgid "Block ID"
+msgstr "区块 ID"
+
+#: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
+msgid "<0/> Previous Block"
+msgstr "<0/> 上一个区块"
+
+#: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
+msgid "Next Block <0/>"
+msgstr "下一个区块 <0/>```"
+
+#. placeholder {0}: params.contract
+#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.ts
+msgid "No contract is currently deployed to the {0} account."
+msgstr "当前没有合约部署到 {0} 账户。"
+
+#: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+layout.ts
+#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.ts
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.ts
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
+msgid "NOT_FOUND"
+msgstr "未找到"
+
+#. placeholder {0}: params.contract
+#. placeholder {1}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.ts
+msgid "Contract: {0} | {1}"
+msgstr "合约: {0} | {1}"
+
+#. placeholder {0}: params.contract
+#. placeholder {1}: network.chain.name
+#. placeholder {2}: abi.actions.length
+#. placeholder {3}: abi.tables.length
+#. placeholder {4}: abi.structs.length
+#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.ts
+msgid "An overview of the {0} smart contract on the {1} network. This contract contains {2} actions, {3} tables, and {4} structs."
+msgstr "在 {1} 网络上 {0} 智能合约的概述。 此合约包含 {2} 个操作、{3} 个表和 {4} 个结构体。"
+
+#. placeholder {0}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.ts
+msgid "Recent activity on the {0} Network."
+msgstr "在 {0} 网络上的近期活动。"
+
+#. placeholder {0}: params.name
+#. placeholder {1}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.ts
+msgid "Account Activity for {0} | {1} Network"
+msgstr "{0} 的账户活动 | {1} 网络"
+
+#. placeholder {0}: params.name
+#. placeholder {1}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.ts
+msgid "View the transaction history of the {0} account on the {1} network."
+msgstr "查看 {1} 网络上 {0} 账户的交易历史。"
+
+#. placeholder {0}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balances/+page.ts
+msgid "Token balances on the {0} Network."
+msgstr "在 {0} 网络上的代币余额。"
+
+#. placeholder {0}: params.name
+#. placeholder {1}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balances/+page.ts
+msgid "Token Balances | {0} | {1} Network"
+msgstr "代币余额 | {0} | {1} 网络"
+
+#. placeholder {0}: params.name
+#. placeholder {1}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balances/+page.ts
+msgid "The token balances of the {0} account on the {1} network."
+msgstr "在 {1} 网络上，{0} 账户的代币余额。```"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balances/+page.svelte
+msgid "Token"
+msgstr "代币"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balances/+page.svelte
+msgid "Amount"
+msgstr "数量"
+
+#. placeholder {0}: context.settings.data.displayCurrency
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balances/+page.svelte
+msgid "Value ({0})"
+msgstr "价值 ({0})"
+
+#: src/routes/[[locale]]/[network]/(account)/upload/[[name]]/+page.ts
+#: src/routes/[[locale]]/[network]/(account)/upload/[[name]]/+page.ts
+msgid "Upload Smart Contract"
+msgstr "上传智能合约"
+
+#. placeholder {0}: params.name
+#: src/routes/[[locale]]/[network]/(account)/upload/[[name]]/+page.ts
+msgid "Select the ABI and WASM files to upload for {0}"
+msgstr "选择要上传的 {0} 的 ABI 和 WASM 文件"
+
+#: src/routes/[[locale]]/[network]/(account)/upload/[[name]]/+page.ts
+msgid "Upload a smart contract by selecting the ABI and WASM files from your computer."
+msgstr "通过从您的计算机中选择 ABI 和 WASM 文件来上传智能合约。"
+
+#: src/routes/[[locale]]/[network]/(account)/upload/[[name]]/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/upload/[[name]]/+page.svelte
+msgid "Account Name"
+msgstr "账户名"
+
+#. placeholder {0}: params.action
+#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.ts
+msgid "Action: {0}"
+msgstr "操作：{0}"
+
+#. placeholder {0}: params.action
+#. placeholder {1}: p.contract
+#. placeholder {2}: p.network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.ts
+msgid "The {0} action for the {1} smart contract on the {2} network."
+msgstr "在 {2} 网络上，{1} 智能合约的 {0} 操作。```"
+
+#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
+msgid "Clear Results"
+msgstr "清除结果"
+
+#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
+msgid "Perform Action"
+msgstr "执行操作"
+
+#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
+msgid "Call readonly action"
+msgstr "调用只读操作"
+
+#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
+msgid "Call as readonly action?"
+msgstr "以只读操作方式调用？"
+
+#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
+msgid "Trigger when page loads?"
+msgstr "页面加载时触发？"
+
+#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
+msgid "Fill out the form to create a representation of the data in this type of action."
+msgstr "填写表单以创建此类型操作中数据的表示形式。"
+
+#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
+msgid "Sharable URL for this action and data"
+msgstr "此操作和数据的可共享 URL"
+
+#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
+msgid "API call which runs this readonly action"
+msgstr "运行此只读操作的 API 调用"
+
+#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
+msgid "Error during readonly call..."
+msgstr "只读调用期间出错..."
+
+#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
+msgid "API Response"
+msgstr "API 响应"
+
+#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
+msgid "Action Traces"
+msgstr "操作追踪"
+
+#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
+msgid "Input Data"
+msgstr "输入数据"
+
+#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
+msgid "Struct"
+msgstr "结构体```"
+
+#. placeholder {0}: network.chain.name
+#: src/routes/[[locale]]/[network]/(account)/resources/+layout.ts
+msgid "Manage CPU, NET, and RAM resources on the {0} Network."
+msgstr "管理 {0} 网络上的 CPU、NET 和 RAM 资源。"
+
+#. placeholder {0}: network.chain.name
+#: src/routes/[[locale]]/[network]/(account)/resources/+layout.ts
+msgid "An overview of the multiple network resources usable on the {0} Network providing access to manage resources using an compatible wallet."
+msgstr "概述 {0} 网络上可用的多个网络资源，提供使用兼容钱包管理资源的访问权限。"
+
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
+msgid "Block Producers"
+msgstr "区块生产者"
+
+#. placeholder {0}: producers.statistics.totalActive
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
+msgid "{0} active"
+msgstr "{0} 个活跃"
+
+#. placeholder {0}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
+msgid ""
+"Vote for the validators that secure the {0} network. Your voting power is\n"
+"weighted by your staked tokens, giving more influence to those with a larger stake in the network's\n"
+"security."
+msgstr "投票给保护 {0} 网络的验证者。您的投票权由您抵押的代币数量加权，从而使在网络安全中拥有更大权益的人拥有更大的影响力。"
+
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
+msgid "View All Producers"
+msgstr "查看所有生产者"
+
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
+msgid "Top Producers"
+msgstr "顶级生产者"
+
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
+msgid "Top 21"
+msgstr "前 21 名"
+
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
+msgid "Sentiment Voting"
+msgstr "情绪投票"
+
+#. placeholder {0}: data.sentimentState.topics.length
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
+msgid "{0} active topics"
+msgstr "{0} 个活跃话题"
+
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
+msgid ""
+"Express your support or opposition on key network topics. Your vote is weighted by your\n"
+"staked tokens, helping the community gauge consensus on important issues."
+msgstr "表达您对关键网络话题的支持或反对。您的投票权由您抵押的代币数量加权，帮助社区评估对重要问题的共识。"
+
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
+msgid "View All Topics"
+msgstr "查看所有话题```"
+
+#. placeholder {0}: params.name
+#. placeholder {0}: params.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/authority/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/authority/+page.ts
+msgid "Accounts that allow the {0} account to sign on their behalf"
+msgstr "允许 {0} 账户代表他们签名的账户"
+
+#. placeholder {0}: data.account.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/authority/+page.svelte
+msgid "The {0} account has some form of authority assigned to the other accounts listed below."
+msgstr "{0} 账户已将某种形式的权限分配给下面列出的其他账户。"
+
+#. placeholder {0}: auth.weight
+#. placeholder {1}: auth.threshold
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/authority/+page.svelte
+msgid "Weight of {0} and threshold of {1}."
+msgstr "权重为 {0}，阈值为 {1}。"
+
+#. placeholder {0}: permission
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/authority/+page.svelte
+msgid "Login as {0} <0>↳ multisig using {0}</0>"
+msgstr "以 {0} 身份登录 <0>↳ 使用 {0} 的多重签名</0>"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/authority/+page.svelte
+msgid "No available authorities for this account."
+msgstr "此账户没有可用的权限。"
+
+#. placeholder {0}: params.name
+#. placeholder {1}: network.chain.name
+#. placeholder {0}: params.name
+#. placeholder {1}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
+msgid "Multisig proposals by {0} on the {1} Network."
+msgstr "{0} 在 {1} 网络上的多重签名提案。```"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
+msgid "Proposal ID"
+msgstr "提案 ID"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
+msgid "No proposals found."
+msgstr "未找到提案。"
+
+#. placeholder {0}: new Date(sentiment.currentTopic.topic.lastUpdated).toLocaleString()
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.ts
+msgid "Last updated {0}"
+msgstr "上次更新时间 {0}"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.ts
+msgid "Sentiment"
+msgstr "情绪"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.ts
+msgid "Overview and statistics for community sentiment on the"
+msgstr "关于社区情绪的概述和统计数据"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
+msgid "Updating..."
+msgstr "正在更新..."
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
+msgid "Dismiss"
+msgstr "取消"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
+msgid "Description"
+msgstr "描述"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
+msgid "Your Vote"
+msgstr "您的投票"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
+msgid "Statistics"
+msgstr "统计"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
+msgid "Participants"
+msgstr "参与者"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
+msgid "Supporting"
+msgstr "支持"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
+msgid "Opposing"
+msgstr "反对"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
+msgid "No supporting votes"
+msgstr "没有支持票"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
+msgid "Oppose"
+msgstr "反对"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
+msgid "No opposing votes"
+msgstr "没有反对票"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
+msgid "Load More Participants"
+msgstr "加载更多参与者"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
+msgid "Loading topic..."
+msgstr "正在加载主题...```"
+
+#. placeholder {0}: base.name
+#. placeholder {1}: quote.name
+#. placeholder {0}: base.name
+#. placeholder {1}: quote.name
+#: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.ts
+#: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.ts
+msgid "Swap {0}/{1}"
+msgstr "兑换 {0}/{1}"
+
+#. placeholder {0}: base.name
+#. placeholder {1}: quote.name
+#. placeholder {0}: base.name
+#. placeholder {1}: quote.name
+#: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.ts
+#: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.ts
+msgid "Swap the {0} token for the {1} token."
+msgstr "将 {0} 代币兑换为 {1} 代币。```"
+
+#: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
+msgid "Available"
+msgstr "可用"
+
+#. placeholder {0}: data.base.name
+#: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
+msgid "Send {0} <0>Max</0>"
+msgstr "发送 {0} <0>最大值</0>"
+
+#. placeholder {0}: data.quote.name
+#: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
+msgid "Receive {0}"
+msgstr "接收 {0}"
+
+#: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
+msgid "Network Fee: <0/> (0.5%)"
+msgstr "网络费用: <0/> (0.5%)"
+
+#. placeholder {0}: String(data.quote.symbol.name)
+#: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
+msgid "Swap to {0}"
+msgstr "兑换为 {0}"
+
+#: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
+msgid "Loading..."
+msgstr "加载中..."
+
+#: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
+msgid "No swap pair available"
+msgstr "没有可用的兑换对```"
+
+#: src/lib/components/sentiment/topicStats.svelte
+msgid "Updating Data"
+msgstr "正在更新数据"
+
+#: src/lib/components/sentiment/topicStats.svelte
+msgid "Vote Distribution"
+msgstr "投票分布"
+
+#: src/lib/components/sentiment/topicStats.svelte
+msgid "Support Weight"
+msgstr "支持权重"
+
+#: src/lib/components/sentiment/topicStats.svelte
+msgid "Total Weight"
+msgstr "总权重"
+
+#: src/lib/components/sentiment/topicStats.svelte
+msgid "Opposition Weight"
+msgstr "反对权重"
+
+#: src/lib/components/sentiment/voteButtons.svelte
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "Please log in to vote"
+msgstr "请登录以投票"
+
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "Please log in to remove vote"
+msgstr "请登录以撤销投票"
+
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "Voting"
+msgstr "投票中"
+
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "Voted"
+msgstr "已投票"
+
+#. placeholder {0}: currentVote === null ? 'Voting' : 'Voted'
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "{0} as <0/> with weight <1/>"
+msgstr "{0} 为 <0/>，权重为 <1/>"
+
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "I support this topic"
+msgstr "我支持这个话题"
+
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "I oppose this topic"
+msgstr "我反对这个话题"
+
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "Do you support or oppose this topic?"
+msgstr "你支持还是反对这个话题？"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.ts
+msgid "Network Sentiment"
+msgstr "网络情绪"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.ts
+msgid "Express your opinion on topics important to the community"
+msgstr "表达您对社区重要话题的看法```"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
+msgid "Loading topics..."
+msgstr "正在加载主题..."
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
+msgid "Failed to load topics"
+msgstr "加载主题失败"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
+msgid "Try Again"
+msgstr "重试"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
+msgid "No topics available yet"
+msgstr "目前还没有可用的主题"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
+msgid "Load More"
+msgstr "加载更多"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
+msgid "About Sentiment Voting"
+msgstr "关于情绪投票"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
+msgid ""
+"Sentiment voting allows token holders to express their support or opposition on important\n"
+"community topics. Your vote is weighted by your staked tokens, giving more influence to\n"
+"those with a larger stake in the network."
+msgstr "情绪投票允许代币持有者表达他们对重要社区主题的支持或反对意见。 您的投票由您抵押的代币进行加权，从而对在网络中拥有更大份额的人产生更大的影响。"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
+msgid ""
+"Each topic shows the total participation and the distribution of support versus opposition,\n"
+"helping the community gauge consensus on key issues."
+msgstr "每个主题都显示了总参与度以及支持与反对的分布情况，从而帮助社区评估对关键问题的共识。"
+
+#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
+msgid "Stake tokens"
+msgstr "抵押代币```"
+
+#: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+layout.ts
+msgid "No block found."
+msgstr "未找到区块。"
+
+#: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+layout.ts
+msgid "Block"
+msgstr "区块"
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.ts
+msgid "No multisig proposal found."
+msgstr "未找到多重签名提案。"
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.ts
+msgid "Multisig Proposal"
+msgstr "多重签名提案"
+
+#. placeholder {0}: params.proposer
+#. placeholder {1}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.ts
+msgid "An MSIG proposed by {0} on the {1} Network"
+msgstr "由 {0} 在 {1} 网络上提出的多重签名提案```"
+
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
+msgid "Transaction Summary"
+msgstr "交易概要"
+
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
+msgid "The actions and inline actions performed as a result of the transaction."
+msgstr "作为交易结果执行的操作和内联操作。"
+
+#. placeholder {0}: params.id
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
+msgid "Transaction not found: {0}"
+msgstr "未找到交易：{0}"
+
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
+msgid "UTC"
+msgstr "UTC"
+
+#. placeholder {0}: formatDateTime(transaction.block_time.toDate(), lang, { dateStyle: 'long', timeZone: 'UTC' })
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
+msgid "Transaction on {0}"
+msgstr "交易于 {0}"
+
+#. placeholder {0}: formatDateTime( transaction.block_time.toDate(), lang, { dateStyle: 'long', timeZone: 'UTC' } )
+#. placeholder {1}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
+msgid "A transaction performed at {0} on the {1} Network."
+msgstr "一笔交易在 {0} 于 {1} 网络上执行。"
