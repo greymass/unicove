@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2025-12-16T23:53:12.547Z\n"
+"PO-Revision-Date: 2025-12-17T20:34:50.966Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -5049,11 +5049,13 @@ msgstr "Weight"
 msgid "Authorization"
 msgstr "Authorization"
 
-#~ msgid "Proposal ID"
-#~ msgstr "Proposal ID"
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
+msgid "Proposal ID"
+msgstr "Proposal ID"
 
-#~ msgid "No proposals found."
-#~ msgstr "No proposals found."
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
+msgid "No proposals found."
+msgstr "No proposals found."
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Requested Approvals"
@@ -7299,3 +7301,15 @@ msgstr "action"
 
 #~ msgid "MSIG Proposals"
 #~ msgstr "MSIG Proposals"
+
+#. placeholder {0}: params.name
+#. placeholder {0}: params.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
+msgid "Proposals Created by {0}"
+msgstr "Proposals Created by {0}"
+
+#. placeholder {0}: params.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
+msgid "View all multisig proposals created by {0}"
+msgstr "View all multisig proposals created by {0}"

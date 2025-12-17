@@ -150,7 +150,8 @@ export const chainConfig: ChainConfig = {
 		staking: isENVTrue(env.PUBLIC_FEATURE_STAKING),
 		timeseries: isENVTrue(env.PUBLIC_FEATURE_TIMESERIES),
 		unicovecontractapi: !!env.PUBLIC_FEATURE_UNICOVE_CONTRACT_API,
-		wram: isENVTrue(env.PUBLIC_FEATURE_WRAM)
+		wram: isENVTrue(env.PUBLIC_FEATURE_WRAM),
+		msigapi: isENVTrue(env.PUBLIC_FEATURE_MSIGAPI)
 	},
 	metamask,
 	coinbase
@@ -235,7 +236,8 @@ export type FeatureType =
 	| 'staking'
 	| 'timeseries'
 	| 'unicovecontractapi'
-	| 'wram';
+	| 'wram'
+	| 'msigapi';
 
 export function getChainConfigByName(name: string): ChainConfig {
 	const chain = chains.find((c) => c.short === name);

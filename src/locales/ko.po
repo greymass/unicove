@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.663Z\n"
-"PO-Revision-Date: 2025-12-17T19:06:48.378Z\n"
+"PO-Revision-Date: 2025-12-17T20:34:52.716Z\n"
 "Last-Translator: \n"
 "Language: ko\n"
 "Language-Team: \n"
@@ -4913,11 +4913,13 @@ msgstr "가중치"
 msgid "Authorization"
 msgstr "권한 부여"
 
-#~ msgid "Proposal ID"
-#~ msgstr "제안 ID"
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
+msgid "Proposal ID"
+msgstr "제안 ID"
 
-#~ msgid "No proposals found."
-#~ msgstr "제안이 없습니다"
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
+msgid "No proposals found."
+msgstr "제안이 없습니다"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Requested Approvals"
@@ -6996,3 +6998,15 @@ msgstr "활동"
 
 #~ msgid "Transaction <0/>"
 #~ msgstr "트랜잭션 <0/>"
+
+#. placeholder {0}: params.name
+#. placeholder {0}: params.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
+msgid "Proposals Created by {0}"
+msgstr "{0}님이 생성한 제안"
+
+#. placeholder {0}: params.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
+msgid "View all multisig proposals created by {0}"
+msgstr "{0}님이 생성한 모든 멀티시그 제안 보기"

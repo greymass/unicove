@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2025-12-16T23:53:12.575Z\n"
+"PO-Revision-Date: 2025-12-17T20:34:54.308Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -4150,11 +4150,13 @@ msgstr "编辑 {0} 在 {1} 上的权限>>>>>>> 8ca5fdfa (Search msigs by name)"
 #~ msgid "Multisig proposals by {0} on the {1} Network.<<<<<<< HEAD"
 #~ msgstr "{0} 在 {1} 网络上的多重签名提案。```"
 
-#~ msgid "Proposal ID"
-#~ msgstr "提案 ID"
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
+msgid "Proposal ID"
+msgstr "提案 ID"
 
-#~ msgid "No proposals found."
-#~ msgstr "在 {1} 网络上由 {0} 提出的多重签名提案。"
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
+msgid "No proposals found."
+msgstr "在 {1} 网络上由 {0} 提出的多重签名提案。"
 
 #. placeholder {0}: p.contract
 #. placeholder {1}: p.network.chain.name
@@ -6390,3 +6392,15 @@ msgstr "操作"
 
 #~ msgid "MSIG Proposals"
 #~ msgstr "多重签名提案"
+
+#. placeholder {0}: params.name
+#. placeholder {0}: params.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
+msgid "Proposals Created by {0}"
+msgstr "由 {0} 创建的提案"
+
+#. placeholder {0}: params.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
+msgid "View all multisig proposals created by {0}"
+msgstr "查看由 {0} 创建的所有多重签名提案"
