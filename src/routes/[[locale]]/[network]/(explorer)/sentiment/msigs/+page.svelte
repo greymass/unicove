@@ -1,45 +1,43 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 	import { Button, Card, Stack } from 'unicove-components';
-	import TopicCard from '$lib/components/sentiment/topicCard.svelte';
+	import MsigCard from '$lib/components/sentiment/msigCard.svelte';
+	import MsigCardSkeleton from '$lib/components/sentiment/msigCardSkeleton.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');
 
-	const sortedTopics = $derived(
-		[...data.sentiment.topics].sort((a, b) => b.statistics.totalWeight - a.statistics.totalWeight)
+	const sortedMsigs = $derived(
+		[...data.sentiment.msigs].sort((a, b) => b.statistics.totalWeight - a.statistics.totalWeight)
 	);
 </script>
-
-<svelte:head>
-	<title>{data.pageMetaTags.title}</title>
-	<meta name="description" content={data.pageMetaTags.description} />
-</svelte:head>
 
 <div class="xs:grid-cols-full grid items-start gap-6 lg:grid-cols-[70%_1fr]">
 	<div class="space-y-6">
 		{#if data.sentiment.loading}
-			<div class="py-12 text-center">
-				<p class="text-on-surface-variant">Loading topics...</p>
+			<div class="space-y-4">
+				<MsigCardSkeleton />
+				<MsigCardSkeleton />
+				<MsigCardSkeleton />
 			</div>
 		{:else if data.sentiment.error}
-			<Card title="Failed to load topics">
+			<Card title="Failed to load multisig sentiment">
 				<p class="text-on-error-container mt-2 text-sm">
 					{data.sentiment.error}
 				</p>
-				<Button class="mt-4" variant="secondary" onclick={() => data.sentiment.loadTopics()}>
+				<Button class="mt-4" variant="secondary" onclick={() => data.sentiment.loadMsigs()}>
 					Try Again
 				</Button>
 			</Card>
-		{:else if data.sentiment.topics.length === 0}
+		{:else if data.sentiment.msigs.length === 0}
 			<div class="py-12 text-center">
-				<p class="text-on-surface-variant text-lg">No topics available yet</p>
+				<p class="text-on-surface-variant text-lg">No multisig proposals with sentiment data yet</p>
 			</div>
 		{:else}
 			<div class="space-y-4">
-				{#each sortedTopics as topicData}
-					<TopicCard {topicData} />
+				{#each sortedMsigs as msigData}
+					<MsigCard {msigData} />
 				{/each}
 			</div>
 
@@ -57,16 +55,15 @@
 		{/if}
 	</div>
 
-	<Card title="About Sentiment Voting">
+	<Card title="About Multisig Sentiment">
 		<Stack>
 			<p>
-				Sentiment voting allows token holders to express their support or opposition on important
-				community topics. Your vote is weighted by your staked tokens, giving more influence to
-				those with a larger stake in the network.
+				Express your support or opposition to multisig proposals. Your vote is weighted by your
+				staked tokens, giving more influence to those with a larger stake in the network.
 			</p>
 			<p>
-				Each topic shows the total participation and the distribution of support versus opposition,
-				helping the community gauge consensus on key issues.
+				This allows the community to signal their sentiment on governance proposals before or after
+				they are approved, helping gauge overall community consensus.
 			</p>
 
 			<Button href={context.urlPath('/staking')} variant="secondary">Stake tokens</Button>

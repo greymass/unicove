@@ -3,7 +3,7 @@ import type { PageLoad } from './$types';
 import type { Article, StoryBlokArticle } from '$lib/types/content';
 import type { TopicWithStats } from '$lib/types/sentiment';
 import type { NetworkState } from '$lib/state/network.svelte';
-import { SentimentState } from '../(explorer)/topics/state.svelte';
+import { TopicSentimentState } from '../(explorer)/sentiment/topics/state.svelte';
 import {
 	PUBLIC_STORYBLOK_CONTENT_TYPE,
 	PUBLIC_STORYBLOK_REGION,
@@ -44,15 +44,14 @@ async function getStoryblokStories(limit = 3): Promise<Article[]> {
 
 async function getSentimentTopics(
 	network: NetworkState,
-	locale: string | undefined,
-	fetch: typeof globalThis.fetch
+	locale: string | undefined
 ): Promise<TopicWithStats[]> {
 	if (!network.supports('sentiment')) {
 		return [];
 	}
 
 	try {
-		const sentiment = new SentimentState(network, locale || 'en', fetch);
+		const sentiment = new TopicSentimentState(network, locale || 'en');
 		await sentiment.loadTopics(1, 4);
 		return sentiment.topics.slice(0, 3);
 	} catch (error) {
@@ -61,12 +60,12 @@ async function getSentimentTopics(
 	}
 }
 
-export const load: PageLoad = async ({ parent, fetch }) => {
+export const load: PageLoad = async ({ parent }) => {
 	const { network, locale } = await parent();
 
 	const [articles, sentimentTopics] = await Promise.all([
 		getStoryblokStories(3),
-		getSentimentTopics(network, locale, fetch)
+		getSentimentTopics(network, locale)
 	]);
 
 	return {

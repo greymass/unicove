@@ -5,7 +5,7 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import { cn } from '$lib/utils';
-	import SentimentMeter from './SentimentMeter.svelte';
+	import SentimentMeter from './sentimentMeter.svelte';
 
 	interface Props {
 		topicData: TopicWithStats;
@@ -17,7 +17,7 @@
 	const { urlPath } = context;
 </script>
 
-<a href={urlPath(`/topics/${topicData.topic.id}`)} class="block">
+<a href={urlPath(`/sentiment/topics/${topicData.topic.id}`)} class="block">
 	<Card class={cn('hover:bg-surface-container', props.class)}>
 		<Stack>
 			<header class="flex items-start justify-between gap-4">

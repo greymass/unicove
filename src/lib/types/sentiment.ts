@@ -6,7 +6,7 @@ export interface Topic {
 	lastUpdated: string;
 }
 
-export interface TopicStatistics {
+export interface SentimentStatistics {
 	totalVotes: number;
 	supportVotes: number;
 	oppositionVotes: number;
@@ -20,9 +20,12 @@ export interface TopicStatistics {
 	totalOppositionWeightAsset: Asset;
 }
 
+export type TopicStatistics = SentimentStatistics;
+export type MsigStatistics = SentimentStatistics;
+
 export interface TopicWithStats {
 	topic: Topic;
-	statistics: TopicStatistics;
+	statistics: SentimentStatistics;
 }
 
 export interface VoteWithWeight {
@@ -53,10 +56,36 @@ export interface TopicsListData {
 
 export interface TopicDetailData {
 	topic: Topic;
-	statistics: TopicStatistics;
+	statistics: SentimentStatistics;
 }
 
 export interface TopicVotesData {
+	votes: VoteWithWeight[];
+	pagination: PaginationMeta;
+}
+
+export interface MsigProposal {
+	proposer: string;
+	proposalName: string;
+	lastUpdated: string;
+}
+
+export interface MsigWithStats {
+	msig: MsigProposal;
+	statistics: SentimentStatistics;
+}
+
+export interface MsigsListData {
+	msigs: MsigWithStats[];
+	pagination: PaginationMeta;
+}
+
+export interface MsigDetailData {
+	msig: MsigProposal;
+	statistics: SentimentStatistics;
+}
+
+export interface MsigVotesData {
 	votes: VoteWithWeight[];
 	pagination: PaginationMeta;
 }

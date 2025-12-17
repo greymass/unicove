@@ -47,7 +47,7 @@
 			href: urlPath(`/governance`),
 			text: 'Governance',
 			active:
-				pathname[3] === 'governance' || pathname[3] === 'producers' || pathname[3] === 'topics'
+				pathname[3] === 'governance' || pathname[3] === 'producers' || pathname[3] === 'sentiment'
 		});
 
 		if (context.settings.data.advancedMode) {

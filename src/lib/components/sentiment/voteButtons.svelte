@@ -10,29 +10,38 @@
 	import { crossfade } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';
 
-	interface Props {
+	type TopicProps = {
+		type: 'topic';
 		topicId: NameType;
 		currentVote?: number | null;
 		disabled?: boolean;
 		onVoteSuccess?: (id?: Checksum256, voteType?: number | null) => void;
 		onVoteFailure?: (error: string) => void;
-	}
+	};
 
-	const {
-		topicId,
-		currentVote = null,
-		disabled = false,
-		onVoteSuccess,
-		onVoteFailure
-	}: Props = $props();
+	type MsigProps = {
+		type: 'msig';
+		proposer: NameType;
+		proposalName: NameType;
+		currentVote?: number | null;
+		disabled?: boolean;
+		onVoteSuccess?: (id?: Checksum256, voteType?: number | null) => void;
+		onVoteFailure?: (error: string) => void;
+	};
+
+	type Props = TopicProps | MsigProps;
+
+	const props: Props = $props();
 	const context = getContext<UnicoveContext>('state');
 
 	let voting = $state(false);
 	let error = $state<string | null>(null);
 
+	const currentVote = $derived(props.currentVote ?? null);
+	const disabled = $derived(props.disabled ?? false);
+
 	async function handleVote(voteType: number) {
 		if (!context.wharf.session || !context.account) {
-			alert('Please log in to vote');
 			return;
 		}
 
@@ -41,34 +50,39 @@
 
 		try {
 			const voter = context.account.name;
-			const topic_id = Name.from(topicId);
-
 			let action;
-			if (currentVote === null) {
-				action = context.network.contracts.sentiment.action('vote', {
+
+			if (props.type === 'topic') {
+				const topic_id = Name.from(props.topicId);
+
+				action = context.network.contracts.sentiment.action('votetopic', {
 					voter,
 					topic_id,
 					vote_type: voteType
 				});
 			} else {
-				action = context.network.contracts.sentiment.action('changevote', {
+				const proposerName = Name.from(props.proposer);
+				const proposal_name = Name.from(props.proposalName);
+
+				action = context.network.contracts.sentiment.action('votemsig', {
 					voter,
-					topic_id,
+					proposer: proposerName,
+					proposal_name,
 					vote_type: voteType
 				});
 			}
 
 			const result = await context.wharf.transact({ action });
 
-			if (onVoteSuccess) {
-				onVoteSuccess(result.resolved?.transaction.id, voteType);
+			if (props.onVoteSuccess) {
+				props.onVoteSuccess(result.resolved?.transaction.id, voteType);
 			}
 		} catch (e) {
 			error = e instanceof Error ? e.message : 'Failed to vote';
 			console.error('Vote error:', e);
 
-			if (onVoteFailure) {
-				onVoteFailure(error);
+			if (props.onVoteFailure) {
+				props.onVoteFailure(error);
 			}
 		} finally {
 			voting = false;
@@ -77,7 +91,6 @@
 
 	async function handleRemoveVote() {
 		if (!context.wharf.session || !context.account) {
-			alert('Please log in to remove vote');
 			return;
 		}
 
@@ -86,24 +99,37 @@
 
 		try {
 			const voter = context.account.name;
-			const topic_id = Name.from(topicId);
+			let action;
 
-			const action = context.network.contracts.sentiment.action('removevote', {
-				voter,
-				topic_id
-			});
+			if (props.type === 'topic') {
+				const topic_id = Name.from(props.topicId);
+
+				action = context.network.contracts.sentiment.action('rmtopicvote', {
+					voter,
+					topic_id
+				});
+			} else {
+				const proposerName = Name.from(props.proposer);
+				const proposal_name = Name.from(props.proposalName);
+
+				action = context.network.contracts.sentiment.action('rmmsigvote', {
+					voter,
+					proposer: proposerName,
+					proposal_name
+				});
+			}
 
 			const result = await context.wharf.transact({ action });
 
-			if (onVoteSuccess) {
-				onVoteSuccess(result.resolved?.transaction.id, null);
+			if (props.onVoteSuccess) {
+				props.onVoteSuccess(result.resolved?.transaction.id, null);
 			}
 		} catch (e) {
 			error = e instanceof Error ? e.message : 'Failed to remove vote';
 			console.error('Remove vote error:', e);
 
-			if (onVoteFailure) {
-				onVoteFailure(error);
+			if (props.onVoteFailure) {
+				props.onVoteFailure(error);
 			}
 		} finally {
 			voting = false;
@@ -155,6 +181,8 @@
 	const baseButtonStyles = 'grid size-12 shrink-0 cursor-pointer place-items-center rounded-full';
 	const baseWrapperStyles =
 		'flex items-center justify-between gap-2 rounded-xl px-4 py-2 border border-transparent';
+
+	const itemType = $derived(props.type === 'topic' ? 'topic' : 'proposal');
 </script>
 
 <div class="@container grid gap-4">
@@ -197,7 +225,9 @@
 					<ThumbsUp class={cn('size-6')} />
 				</button>
 
-				<span class="text-label-sm text-center leading-4 text-balance">I support this topic</span>
+				<span class="text-label-sm text-center leading-4 text-balance"
+					>I support this {itemType}</span
+				>
 
 				<button
 					onclick={handleOppose}
@@ -224,7 +254,9 @@
 					<ThumbsUp class={cn('size-6')} />
 				</button>
 
-				<span class="text-label-sm text-center leading-4 text-balance">I oppose this topic</span>
+				<span class="text-label-sm text-center leading-4 text-balance"
+					>I oppose this {itemType}</span
+				>
 
 				<button
 					onclick={handleOppose}
@@ -259,7 +291,7 @@
 					<p class="text-on-surface-variant text-label text-center">Please log in to vote</p>
 				{:else}
 					<span class="text-label-sm text-center leading-4 text-balance">
-						Do you support or oppose this topic?
+						Do you support or oppose this {itemType}?
 					</span>
 				{/if}
 

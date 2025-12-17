@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2025-12-06T07:31:19.422Z\n"
+"PO-Revision-Date: 2025-12-14T08:25:59.237Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -87,6 +87,8 @@ msgstr "状态"
 
 #: src/lib/components/footer.svelte
 #: src/lib/components/footer.svelte
+#: src/lib/components/sentiment/participantList.svelte
+#: src/lib/components/sentiment/participantList.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Support"
 msgstr "支持"
@@ -1193,6 +1195,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/prompt/[payload]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/prompt/[payload]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Back"
 msgstr "返回"
@@ -5156,6 +5159,9 @@ msgid "Network Fee: <0/> (0.5%)"
 msgstr ""
 
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment-msigs/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid "Loading..."
 msgstr "加载中..."
@@ -5614,87 +5620,124 @@ msgstr ""
 msgid "Loading topics..."
 msgstr "正在加载主题..."
 
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid "Failed to load topics"
 msgstr "加载主题失败"
 
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment-msigs/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid "Try Again"
 msgstr "重试"
 
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid "No topics available yet"
 msgstr "目前还没有可用主题"
 
 #. placeholder {0}: statistics.supportPercentage
+#. placeholder {0}: statistics.supportPercentage
 #: src/lib/components/sentiment/SentimentMeter.svelte
+#: src/lib/components/sentiment/sentimentMeter.svelte
 msgid "{0}% Support"
 msgstr "{0}% 支持"
 
 #. placeholder {0}: statistics.oppositionPercentage
+#. placeholder {0}: statistics.oppositionPercentage
 #: src/lib/components/sentiment/SentimentMeter.svelte
+#: src/lib/components/sentiment/sentimentMeter.svelte
 msgid "{0}% Oppose"
 msgstr "{0}% 反对"
 
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.ts
 msgid "Sentiment"
 msgstr "情绪"
 
+#: src/lib/components/sentiment/participantList.svelte
+#: src/lib/components/sentiment/participantList.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Oppose"
 msgstr "反对"
 
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Loading topic..."
 msgstr "正在加载话题...```"
 
+#: src/lib/components/sentiment/MsigVoteButtons.svelte
+#: src/lib/components/sentiment/MsigVoteButtons.svelte
+#: src/lib/components/sentiment/VoteButtons.svelte
+#: src/lib/components/sentiment/VoteButtons.svelte
+#: src/lib/components/sentiment/msigVoteButtons.svelte
+#: src/lib/components/sentiment/msigVoteButtons.svelte
 #: src/lib/components/sentiment/voteButtons.svelte
 #: src/lib/components/sentiment/voteButtons.svelte
 msgid "Please log in to vote"
 msgstr "请登录后进行投票"
 
+#: src/lib/components/sentiment/MsigVoteButtons.svelte
+#: src/lib/components/sentiment/VoteButtons.svelte
+#: src/lib/components/sentiment/msigVoteButtons.svelte
 #: src/lib/components/sentiment/voteButtons.svelte
 msgid "Please log in to remove vote"
 msgstr "请登录后取消投票"
 
-#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
+#: src/lib/components/sentiment/participantList.svelte
+#: src/lib/components/sentiment/participantList.svelte
+#: src/lib/components/sentiment/participantList.svelte
+#: src/lib/components/sentiment/participantList.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Supporting"
 msgstr "支持"
 
-#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
+#: src/lib/components/sentiment/participantList.svelte
+#: src/lib/components/sentiment/participantList.svelte
+#: src/lib/components/sentiment/participantList.svelte
+#: src/lib/components/sentiment/participantList.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Opposing"
 msgstr "反对"
 
+#: src/lib/components/sentiment/TopicStats.svelte
 #: src/lib/components/sentiment/topicStats.svelte
 msgid "Vote Distribution"
 msgstr "投票分布"
 
+#: src/lib/components/sentiment/TopicStats.svelte
 #: src/lib/components/sentiment/topicStats.svelte
 msgid "Total Weight"
 msgstr "总权重"
 
+#: src/lib/components/sentiment/TopicStats.svelte
 #: src/lib/components/sentiment/topicStats.svelte
 msgid "Support Weight"
 msgstr "支持权重"
 
+#: src/lib/components/sentiment/TopicStats.svelte
 #: src/lib/components/sentiment/topicStats.svelte
 msgid "Opposition Weight"
 msgstr "反对权重"
 
 #. placeholder {0}: new Date(sentiment.currentTopic.topic.lastUpdated).toLocaleString()
 #. placeholder {0}: new Date(sentiment.currentTopic.topic.lastUpdated).toLocaleString()
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.ts
 msgid "Last updated {0}"
 msgstr "上次更新时间 {0}"
 
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Description"
 msgstr "描述"
 
-#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
+#: src/lib/components/sentiment/participantList.svelte
+#: src/lib/components/sentiment/participantList.svelte
+#: src/lib/components/sentiment/participantList.svelte
+#: src/lib/components/sentiment/participantList.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Participants"
 msgstr "参与者"
@@ -5703,45 +5746,61 @@ msgstr "参与者"
 msgid "Load More Participants"
 msgstr "加载更多参与者"
 
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.ts
 msgid "Network Sentiment"
 msgstr "网络情绪"
 
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.ts
 msgid "Express your opinion on topics important to the community"
 msgstr "表达您对社区重要话题的看法"
 
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Updating..."
 msgstr "更新中..."
 
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Dismiss"
 msgstr "取消"
 
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment-msigs/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid "Load More"
 msgstr "加载更多"
 
+#: src/lib/components/sentiment/TopicStats.svelte
 #: src/lib/components/sentiment/topicStats.svelte
 msgid "Updating Data"
 msgstr "正在更新数据"
 
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.ts
 msgid "Overview and statistics for community sentiment on the"
 msgstr "关于社区对以下主题的情绪的概览与统计"
 
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid "About Sentiment Voting"
 msgstr "关于情绪投票"
 
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment-msigs/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid "Stake tokens"
 msgstr "质押代币"
 
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid ""
 "Sentiment voting allows token holders to express their support or opposition on important\n"
@@ -5749,49 +5808,65 @@ msgid ""
 "those with a larger stake in the network."
 msgstr "情感投票允许代币持有者就重要的社区话题表达他们的支持或反对。您的投票会根据您质押的代币进行加权，从而使在网络中拥有更大份额的人拥有更大的影响力。"
 
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid ""
 "Each topic shows the total participation and the distribution of support versus opposition,\n"
 "helping the community gauge consensus on key issues."
 msgstr "每个话题都显示了总参与人数以及支持与反对的分布情况，从而帮助社区衡量对关键问题的共识。"
 
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Your Vote"
 msgstr "您的投票"
 
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Statistics"
 msgstr "统计"
 
+#: src/lib/components/sentiment/participantList.svelte
+#: src/lib/components/sentiment/participantList.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "No opposing votes"
 msgstr "没有反对票"
 
+#: src/lib/components/sentiment/participantList.svelte
+#: src/lib/components/sentiment/participantList.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "No supporting votes"
 msgstr "没有支持票"
 
-#: src/lib/components/sentiment/voteButtons.svelte
-msgid "Do you support or oppose this topic?"
-msgstr "你支持还是反对这个话题？"
+#~ msgid "Do you support or oppose this topic?"
+#~ msgstr "你支持还是反对这个话题？"
 
-#: src/lib/components/sentiment/voteButtons.svelte
-msgid "I support this topic"
-msgstr "我支持这个话题"
+#~ msgid "I support this topic"
+#~ msgstr "我支持这个话题"
 
-#: src/lib/components/sentiment/voteButtons.svelte
-msgid "I oppose this topic"
-msgstr "我反对这个话题"
+#~ msgid "I oppose this topic"
+#~ msgstr "我反对这个话题"
 
+#: src/lib/components/sentiment/MsigVoteButtons.svelte
+#: src/lib/components/sentiment/VoteButtons.svelte
+#: src/lib/components/sentiment/msigVoteButtons.svelte
 #: src/lib/components/sentiment/voteButtons.svelte
 msgid "Voting"
 msgstr "投票"
 
+#: src/lib/components/sentiment/MsigVoteButtons.svelte
+#: src/lib/components/sentiment/VoteButtons.svelte
+#: src/lib/components/sentiment/msigVoteButtons.svelte
 #: src/lib/components/sentiment/voteButtons.svelte
 msgid "Voted"
 msgstr "已投票"
 
 #. placeholder {0}: currentVote === null ? 'Voting' : 'Voted'
+#. placeholder {0}: currentVote === null ? 'Voting' : 'Voted'
+#. placeholder {0}: currentVote === null ? 'Voting' : 'Voted'
+#. placeholder {0}: currentVote === null ? 'Voting' : 'Voted'
+#: src/lib/components/sentiment/MsigVoteButtons.svelte
+#: src/lib/components/sentiment/VoteButtons.svelte
+#: src/lib/components/sentiment/msigVoteButtons.svelte
 #: src/lib/components/sentiment/voteButtons.svelte
 msgid "{0} as <0/> with weight <1/>"
 msgstr "以权重 <1/> <0/>身份{0}"
@@ -6559,8 +6634,9 @@ msgstr "前 21 名区块生产者"
 #~ msgid "{0} active proposals"
 #~ msgstr "{0} 个活跃提案"
 
-#~ msgid "View All Proposals"
-#~ msgstr "查看所有提案"
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
+msgid "View All Proposals"
+msgstr "查看所有提案"
 
 #~ msgid "by"
 #~ msgstr "由"
@@ -6571,8 +6647,10 @@ msgstr "前 21 名区块生产者"
 #~ msgid "{0} of {1} approvals"
 #~ msgstr "{0} / {1} 票赞成"
 
-#~ msgid "by <0/>"
-#~ msgstr "由 <0/>"
+#: src/lib/components/sentiment/msigCard.svelte
+#: src/lib/components/sentiment/msigCard.svelte
+msgid "by <0/>"
+msgstr "由 <0/>"
 
 #~ msgid "Proposed by"
 #~ msgstr "由...提议"
@@ -6620,3 +6698,128 @@ msgstr "{0} 个活跃"
 #: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
 msgid "Top Producers"
 msgstr "頂級生產者"
+
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment-msigs/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment-msigs/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/+page.ts
+msgid "Multisig Sentiment"
+msgstr ""
+
+#. placeholder {0}: data.msigSentimentState.msigs.length
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
+msgid "{0} proposals with sentiment"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
+msgid ""
+"Express your opinion on multisig proposals. Your vote is weighted by your staked tokens,\n"
+"helping signal community consensus on governance proposals."
+msgstr ""
+
+#. placeholder {0}: msigData.statistics.totalVotes
+#. placeholder {0}: msigData.statistics.totalVotes
+#: src/lib/components/sentiment/msigCard.svelte
+#: src/lib/components/sentiment/msigCard.svelte
+msgid "{0} votes"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment-msigs/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/+page.ts
+msgid "Community sentiment on multisig proposals"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment-msigs/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/+page.ts
+msgid "View community sentiment on multisig proposals"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment-msigs/+page.svelte
+msgid "Loading multisig sentiment..."
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment-msigs/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/+page.svelte
+msgid "Failed to load multisig sentiment"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment-msigs/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/+page.svelte
+msgid "No multisig proposals with sentiment data yet"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment-msigs/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/+page.svelte
+msgid "About Multisig Sentiment"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment-msigs/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/+page.svelte
+msgid ""
+"Express your support or opposition to multisig proposals. Your vote is weighted by your\n"
+"staked tokens, giving more influence to those with a larger stake in the network."
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment-msigs/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/+page.svelte
+msgid ""
+"This allows the community to signal their sentiment on governance proposals before or after\n"
+"they are approved, helping gauge overall community consensus."
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+msgid "Community Sentiment"
+msgstr ""
+
+#: src/lib/components/sentiment/MsigVoteButtons.svelte
+#: src/lib/components/sentiment/msigVoteButtons.svelte
+msgid "I support this proposal"
+msgstr ""
+
+#: src/lib/components/sentiment/MsigVoteButtons.svelte
+#: src/lib/components/sentiment/msigVoteButtons.svelte
+msgid "I oppose this proposal"
+msgstr ""
+
+#: src/lib/components/sentiment/MsigVoteButtons.svelte
+#: src/lib/components/sentiment/msigVoteButtons.svelte
+msgid "Do you support or oppose this proposal?"
+msgstr ""
+
+#. placeholder {0}: votes.length
+#. placeholder {1}: pagination.total
+#. placeholder {0}: votes.length
+#. placeholder {1}: pagination.total
+#: src/lib/components/sentiment/participantList.svelte
+#: src/lib/components/sentiment/participantList.svelte
+msgid "Showing {0} of {1} participants"
+msgstr ""
+
+#. placeholder {0}: pagination.total - votes.length
+#. placeholder {0}: pagination.total - votes.length
+#: src/lib/components/sentiment/participantList.svelte
+#: src/lib/components/sentiment/participantList.svelte
+msgid "Load More ({0} remaining)"
+msgstr ""
+
+#. placeholder {0}: itemType
+#. placeholder {0}: itemType
+#: src/lib/components/sentiment/VoteButtons.svelte
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "I support this {0}"
+msgstr ""
+
+#. placeholder {0}: itemType
+#. placeholder {0}: itemType
+#: src/lib/components/sentiment/VoteButtons.svelte
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "I oppose this {0}"
+msgstr ""
+
+#. placeholder {0}: itemType
+#. placeholder {0}: itemType
+#: src/lib/components/sentiment/VoteButtons.svelte
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "Do you support or oppose this {0}?"
+msgstr ""
