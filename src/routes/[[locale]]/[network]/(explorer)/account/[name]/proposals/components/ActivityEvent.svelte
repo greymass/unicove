@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 	import { Card, cn } from 'unicove-components';
-	import Link from '$lib/components/elements/link.svelte';
 	import Account from '$lib/components/elements/account.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { ActivityEvent } from '@wharfkit/msigs';
@@ -42,16 +41,18 @@
 	const absoluteTime = $derived(timestamp.format('MMM D, YYYY [at] h:mm A'));
 </script>
 
-<div class="group relative grid grid-cols-[auto_1fr] gap-6">
-	<div class="relative grid h-full place-items-center *:col-start-1 *:row-start-1">
+<div class="group @container relative grid grid-cols-[auto_1fr] gap-6">
+	<div
+		class="relative mt-5 grid h-full justify-items-center *:col-start-1 *:row-start-1 @2xl:mt-0 @2xl:place-items-center"
+	>
 		<!-- Line -->
 		<div
-			class="border-surface-container-high h-full -translate-y-1/2 border border-2 border-l group-first:hidden"
+			class="border-surface-container-high h-full -translate-y-full border border-2 border-l group-first:hidden @2xl:-translate-y-1/2"
 		></div>
 
 		<picture
 			class={cn(
-				' bg-surface-container-high z-10 grid size-12 place-items-center rounded-full',
+				'bg-surface-container-high z-10 grid size-12 place-items-center rounded-full',
 				actionColor
 			)}
 		>
@@ -59,10 +60,10 @@
 		</picture>
 	</div>
 
-	<Card class="@container">
-		<div class="grid gap-4 @2xl:grid-cols-4">
-			<hgroup class="flex flex-col gap-2">
-				<h3 class="text-title">
+	<Card class="">
+		<div class="grid gap-4 @lg:grid-cols-2 @2xl:grid-cols-4">
+			<hgroup class="flex flex-col gap-1">
+				<h3 class="text-title leading-6">
 					<span class="capitalize">{event.action}</span>
 					<a
 						href={urlPath(`/msig/${event.proposer}/${event.proposal_name}`)}
@@ -72,7 +73,7 @@
 					</a>
 				</h3>
 
-				<p class="text-label-sm text-muted">
+				<p class="text-label-sm text-muted leading-4">
 					Proposed by
 					<Account name={event.proposer}>
 						{String(event.proposer)}
@@ -90,8 +91,10 @@
 				<Block number={event.globalseq} />
 			</div>
 
-			<div class="text-body grid sm:text-right">
-				<span>{relativeTime}</span>
+			<div
+				class="text-body *:block @lg:col-start-2 @lg:row-start-1 @2xl:col-start-4 @2xl:row-start-1 @2xl:text-right"
+			>
+				<span class="">{relativeTime}</span>
 				<span class="text-muted text-label-sm">{absoluteTime}</span>
 			</div>
 		</div>
