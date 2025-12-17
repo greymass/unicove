@@ -20,6 +20,8 @@
 		transition-transform
 		duration-100 active:scale-95"
 		data-checked={checked}
+		class:opacity-30={disabled}
+		class:active:scale-100={disabled}
 		xmlns="http://www.w3.org/2000/svg"
 		width="24"
 		height="24"
