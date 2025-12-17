@@ -49,13 +49,20 @@
 
 	function voteWeightToAsset(weight: Float64) {
 		const defaultDecay = 52;
-		const precision = 10 ** context.network.chain.systemToken!.symbol.precision;
+		const symbol = context.network.chain.systemToken!.symbol;
+		const precision = 10 ** symbol.precision;
 		const timestamp = 946684800000;
 		const dates = (Date.now() - timestamp) / 1000;
 		const voteWeight = Math.floor(dates / (86400 * 7)) / defaultDecay;
 		const calcWeight = 2 ** voteWeight;
 		const value = Number(weight) / calcWeight / precision;
-		return Asset.from(value, context.network.chain.systemToken!.symbol);
+
+		// Clamp to prevent overflow when Asset.from multiplies by precision
+		// Max safe value is Number.MAX_SAFE_INTEGER divided by precision
+		const maxSafeValue = Number.MAX_SAFE_INTEGER / precision;
+		const clampedValue = Math.min(value, maxSafeValue);
+
+		return Asset.from(clampedValue, symbol);
 	}
 
 	const votingWeight = $derived.by(() => {
