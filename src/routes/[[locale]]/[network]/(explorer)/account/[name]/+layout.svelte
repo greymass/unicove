@@ -67,7 +67,7 @@
 
 <Stack class="@container gap-6">
 	<PillGroup {options} />
-	{@render children()}
+	{@render children?.()}
 </Stack>
 
 {#if context.settings.data.debugMode}

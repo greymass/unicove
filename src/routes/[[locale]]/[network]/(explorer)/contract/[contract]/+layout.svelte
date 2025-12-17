@@ -41,4 +41,4 @@
 
 <PillGroup {options} />
 
-{@render children()}
+{@render children?.()}
