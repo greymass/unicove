@@ -31,6 +31,7 @@
 </script>
 
 <Select
+	triggerClass="text-nowrap"
 	id="action-type-filter"
 	options={actionTypeOptions}
 	bind:selected

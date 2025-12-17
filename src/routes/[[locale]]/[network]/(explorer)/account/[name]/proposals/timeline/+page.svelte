@@ -7,6 +7,7 @@
 	import ActivityEvent from '../components/ActivityEvent.svelte';
 	import ActionTypeFilter from '../components/ActionTypeFilter.svelte';
 	import EmptyState from '../components/EmptyState.svelte';
+	import ProposalsHeader from '../components/ProposalsHeader.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 
 	const { data } = $props();
@@ -19,6 +20,7 @@
 	let isLoading = $state(false);
 
 	const currentActionType = $derived(data.actionType);
+	const accountName = $derived(String(data.name));
 
 	// Reset accumulated data when filters change
 	$effect(() => {
@@ -63,11 +65,10 @@
 	}
 </script>
 
-<Stack class="gap-4">
-	<div class="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
-		<h2 class="text-title">Multisig Activity Timeline</h2>
+<Stack>
+	<ProposalsHeader {accountName}>
 		<ActionTypeFilter value={currentActionType} onchange={handleActionTypeChange} />
-	</div>
+	</ProposalsHeader>
 
 	{#if data.error}
 		<div class="text-error">Failed to load activity: {data.error}</div>

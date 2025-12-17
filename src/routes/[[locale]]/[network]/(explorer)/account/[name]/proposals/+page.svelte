@@ -7,6 +7,7 @@
 	import ProposalCard from './components/ProposalCard.svelte';
 	import StatusFilter from './components/StatusFilter.svelte';
 	import EmptyState from './components/EmptyState.svelte';
+	import ProposalsHeader from './components/ProposalsHeader.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 
 	const { data } = $props();
@@ -19,6 +20,7 @@
 	let isLoading = $state(false);
 
 	const currentStatus = $derived(data.status);
+	const accountName = $derived(String(data.name));
 
 	// Reset accumulated data when filters change
 	$effect(() => {
@@ -62,11 +64,10 @@
 	}
 </script>
 
-<Stack class="gap-4">
-	<div class="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
-		<h2 class="text-title">Proposals Created</h2>
+<Stack>
+	<ProposalsHeader {accountName}>
 		<StatusFilter value={currentStatus} onchange={handleStatusChange} />
-	</div>
+	</ProposalsHeader>
 
 	{#if data.error}
 		<div class="text-error">Failed to load proposals: {data.error}</div>
