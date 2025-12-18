@@ -127,7 +127,8 @@ export const chainConfig: ChainConfig = {
 	lockedsupply,
 	endpoints: {
 		api: env.PUBLIC_API_CHAIN,
-		history: env.PUBLIC_API_HISTORY
+		history: env.PUBLIC_API_HISTORY,
+		robo2: env.PUBLIC_FEATURE_ROBO2 || undefined
 	},
 	features: {
 		delphihelper: isENVTrue(env.PUBLIC_FEATURE_DELPHIHELPER),
@@ -145,6 +146,7 @@ export const chainConfig: ChainConfig = {
 		rentrex: isENVTrue(env.PUBLIC_FEATURE_RENTREX),
 		rex: isENVTrue(env.PUBLIC_FEATURE_REX),
 		robo: isENVTrue(env.PUBLIC_FEATURE_ROBO),
+		robo2: !!env.PUBLIC_FEATURE_ROBO2,
 		sentiment: isENVTrue(env.PUBLIC_FEATURE_SENTIMENT),
 		stakeresource: isENVTrue(env.PUBLIC_FEATURE_STAKERESOURCE),
 		staking: isENVTrue(env.PUBLIC_FEATURE_STAKING),
@@ -181,6 +183,7 @@ export interface ChainEndpoints {
 	hyperion?: string;
 	lightapi?: string;
 	metrics?: string;
+	robo2?: string;
 	sentiment?: string;
 }
 
@@ -233,6 +236,7 @@ export type FeatureType =
 	| 'rentrex'
 	| 'rex'
 	| 'robo'
+	| 'robo2'
 	| 'sentiment'
 	| 'stakeresource'
 	| 'staking'
