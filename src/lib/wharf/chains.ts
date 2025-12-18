@@ -154,7 +154,8 @@ export const chainConfig: ChainConfig = {
 		msigapi: isENVTrue(env.PUBLIC_FEATURE_MSIGAPI)
 	},
 	metamask,
-	coinbase
+	coinbase,
+	voteDecay: Number(env.PUBLIC_FEATURE_VOTE_DECAY) || 52
 };
 
 export const chains = [chainConfig];
@@ -213,6 +214,7 @@ export interface ChainConfig {
 	systemcontract: Name;
 	systemtoken: Token;
 	systemtokenalt: Asset.Symbol[];
+	voteDecay: number;
 }
 
 export type FeatureType =
