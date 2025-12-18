@@ -3,9 +3,9 @@
 	import type { TopicStatistics } from '$lib/types/sentiment';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import Weight from '@lucide/svelte/icons/scale';
-	import SentimentMeter from './sentimentMeter.svelte';
+	import SentimentMeter from './SentimentMeter.svelte';
 	import { cn } from '$lib/utils';
-	import StatCard from './statCard.svelte';
+	import StatCard from './StatCard.svelte';
 
 	interface Props {
 		statistics: TopicStatistics;

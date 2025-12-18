@@ -5,7 +5,7 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import { cn } from '$lib/utils';
-	import SentimentMeter from './sentimentMeter.svelte';
+	import SentimentMeter from './SentimentMeter.svelte';
 
 	interface Props {
 		topicData: TopicWithStats;

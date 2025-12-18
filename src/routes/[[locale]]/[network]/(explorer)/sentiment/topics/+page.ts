@@ -1,17 +1,23 @@
 import { useLocale } from '$lib/utils/intl';
 import type { PageLoad } from './$types';
+import { TopicSentimentState } from './state.svelte';
 
 export const load: PageLoad = async ({ parent }) => {
-	const { network, locale, sentiment } = await parent();
+	const { network, locale } = await parent();
+
 	await useLocale(locale);
+
+	const sentiment = new TopicSentimentState(network, locale);
+
+	await sentiment.loadTopics();
 
 	return {
 		sentiment,
-		title: 'Network Sentiment',
-		subtitle: 'Express your opinion on topics important to the community',
+		title: 'Topics',
+		subtitle: 'Community sentiment on important topics',
 		pageMetaTags: {
-			title: ['Network Sentiment', network.chain.name].join(' | '),
-			description: 'Express your opinion on topics important to the community'
+			title: ['Topics', 'Sentiment', network.chain.name].join(' | '),
+			description: 'View and participate in community sentiment voting on important topics'
 		}
 	};
 };

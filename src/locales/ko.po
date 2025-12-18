@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.663Z\n"
-"PO-Revision-Date: 2025-12-14T08:25:59.228Z\n"
+"PO-Revision-Date: 2025-12-17T23:46:52.166Z\n"
 "Last-Translator: \n"
 "Language: ko\n"
 "Language-Team: \n"
@@ -83,14 +83,13 @@ msgstr "API 참조"
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Status"
 msgstr "상태"
 
 #: src/lib/components/footer.svelte
 #: src/lib/components/footer.svelte
 #: src/lib/components/sentiment/participantList.svelte
-#: src/lib/components/sentiment/participantList.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Support"
 msgstr "지원"
 
@@ -510,8 +509,8 @@ msgstr "<0/> 메모: {0}"
 msgid "+ {0} ms (CPU)"
 msgstr "+ {0} ms (CPU)"
 
-#. placeholder {0}: data.powup_net
 #. placeholder {0}: data.powup_cpu
+#. placeholder {0}: data.powup_net
 #. placeholder {0}: account.weight
 #. placeholder {0}: key.weight
 #. placeholder {0}: account.weight
@@ -797,8 +796,8 @@ msgstr "상세 정보"
 msgid "Network Fees"
 msgstr "네트워크 수수료"
 
-#. placeholder {0}: market.network.currency.symbol.code
 #. placeholder {0}: data.network.chain.systemToken?.symbol.code || ''
+#. placeholder {0}: market.network.currency.symbol.code
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 msgid "Market Cap ({0})"
@@ -1195,7 +1194,6 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/prompt/[payload]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/prompt/[payload]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Back"
 msgstr "뒤로"
 
@@ -3549,7 +3547,9 @@ msgstr "{0} 계정에 현재 배포된 컨트랙트가 없습니다."
 
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.ts
+#: src/routes/[[locale]]/[network]/(explorer)/key/[publicKey]/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.ts
+#: src/routes/[[locale]]/[network]/(explorer)/token/[contract]/[symbol]/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
 msgid "NOT_FOUND"
 msgstr "찾을 수 없음"
@@ -4218,7 +4218,7 @@ msgstr "<0>Unicove -</0> {0} 웹 지갑 및 블록 탐색기"
 
 #. placeholder {0}: network.chain.name
 #. placeholder {0}: networkName
-#. placeholder {0}: networkName
+#. placeholder {0}: network.chain.name
 #: src/routes/+layout.server.ts
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
@@ -4252,7 +4252,7 @@ msgstr "{0} 토큰 스왑이 시작되었습니다!"
 msgid "Swap {0} to {1} at a 1:1 ratio"
 msgstr "{0}을(를) {1}으로 1:1 비율로 교환하세요"
 
-#. placeholder {0}: String(data.quote.symbol.name)
+#. placeholder {0}: props.network.token.name
 #. placeholder {0}: String(data.quote.symbol.name)
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/legacy-token-swap.svelte
@@ -4272,7 +4272,7 @@ msgstr "토큰 받기 "
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
-#. placeholder {0}: String(network.token.symbol.name)
+#. placeholder {0}: symbol.name
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
@@ -4295,10 +4295,10 @@ msgstr "1개의 {0}은 네트워크 전체 블록체인 저장 용량 중 1000�
 #. placeholder {1}: quote.name
 #. placeholder {0}: base.name
 #. placeholder {1}: quote.name
-#. placeholder {0}: data.network.token.name
-#. placeholder {1}: data.network.getRamToken().name
-#. placeholder {0}: String(network.chain.systemToken?.symbol.name)
-#. placeholder {1}: String(ramtoken.name)
+#. placeholder {0}: base.name
+#. placeholder {1}: quote.name
+#. placeholder {0}: base.name
+#. placeholder {1}: quote.name
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.svelte
@@ -4425,6 +4425,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/key/[publicKey]/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/key/[publicKey]/+page.ts
 msgid "Public Key"
 msgstr "공개 키"
@@ -4869,6 +4870,7 @@ msgid "No available authorities for this account."
 msgstr "이 계정에는 사용 가능한 권한이 없습니다."
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balances/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/token/[contract]/[symbol]/+page.ts
 msgid "Token"
 msgstr "토큰"
 
@@ -5158,10 +5160,8 @@ msgid "Network Fee: <0/> (0.5%)"
 msgstr "네트워크 수수료: <0/> (0.5%)"
 
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/sentiment-msigs/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid "Loading..."
 msgstr "로딩 중..."
 
@@ -5615,192 +5615,130 @@ msgstr "MetaMask로 {0} 네트워크에서 트랜잭션 서명하는 방법"
 msgid "MetaMask Wallet Plugin"
 msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
-msgid "Loading topics..."
-msgstr "토픽 로딩 중..."
-
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid "Failed to load topics"
 msgstr "토픽 로딩 실패"
 
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/sentiment-msigs/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid "Try Again"
 msgstr "다시 시도"
 
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid "No topics available yet"
 msgstr "아직 사용 가능한 토픽이 없습니다."
 
 #. placeholder {0}: statistics.supportPercentage
 #. placeholder {0}: statistics.supportPercentage
 #: src/lib/components/sentiment/SentimentMeter.svelte
-#: src/lib/components/sentiment/sentimentMeter.svelte
 msgid "{0}% Support"
 msgstr "{0}% 지지"
 
 #. placeholder {0}: statistics.oppositionPercentage
 #. placeholder {0}: statistics.oppositionPercentage
 #: src/lib/components/sentiment/SentimentMeter.svelte
-#: src/lib/components/sentiment/sentimentMeter.svelte
 msgid "{0}% Oppose"
 msgstr "{0}% 반대"
 
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.ts
-#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.ts
 msgid "Sentiment"
 msgstr "정서"
 
 #: src/lib/components/sentiment/participantList.svelte
-#: src/lib/components/sentiment/participantList.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Oppose"
 msgstr "반대"
 
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Loading topic..."
 msgstr "주제 로딩 중...```"
 
-#: src/lib/components/sentiment/TopicStats.svelte
 #: src/lib/components/sentiment/topicStats.svelte
 msgid "Vote Distribution"
 msgstr "투표 분포"
 
-#: src/lib/components/sentiment/TopicStats.svelte
 #: src/lib/components/sentiment/topicStats.svelte
 msgid "Total Weight"
 msgstr "총 가중치"
 
-#: src/lib/components/sentiment/TopicStats.svelte
 #: src/lib/components/sentiment/topicStats.svelte
 msgid "Support Weight"
 msgstr "지지 가중치"
 
-#: src/lib/components/sentiment/TopicStats.svelte
 #: src/lib/components/sentiment/topicStats.svelte
 msgid "Opposition Weight"
 msgstr "반대 가중치"
 
-#: src/lib/components/sentiment/MsigVoteButtons.svelte
-#: src/lib/components/sentiment/MsigVoteButtons.svelte
-#: src/lib/components/sentiment/VoteButtons.svelte
-#: src/lib/components/sentiment/VoteButtons.svelte
-#: src/lib/components/sentiment/msigVoteButtons.svelte
-#: src/lib/components/sentiment/msigVoteButtons.svelte
-#: src/lib/components/sentiment/voteButtons.svelte
 #: src/lib/components/sentiment/voteButtons.svelte
 msgid "Please log in to vote"
 msgstr "투표하려면 로그인하세요"
 
-#: src/lib/components/sentiment/MsigVoteButtons.svelte
-#: src/lib/components/sentiment/VoteButtons.svelte
-#: src/lib/components/sentiment/msigVoteButtons.svelte
-#: src/lib/components/sentiment/voteButtons.svelte
-msgid "Please log in to remove vote"
-msgstr "투표를 취소하려면 로그인하세요"
-
 #: src/lib/components/sentiment/participantList.svelte
 #: src/lib/components/sentiment/participantList.svelte
-#: src/lib/components/sentiment/participantList.svelte
-#: src/lib/components/sentiment/participantList.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Supporting"
 msgstr "지지"
 
 #: src/lib/components/sentiment/participantList.svelte
 #: src/lib/components/sentiment/participantList.svelte
-#: src/lib/components/sentiment/participantList.svelte
-#: src/lib/components/sentiment/participantList.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Opposing"
 msgstr "반대"
 
 #. placeholder {0}: new Date(sentiment.currentTopic.topic.lastUpdated).toLocaleString()
-#. placeholder {0}: new Date(sentiment.currentTopic.topic.lastUpdated).toLocaleString()
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.ts
-#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.ts
 msgid "Last updated {0}"
 msgstr "최종 업데이트 {0}"
 
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Description"
 msgstr "설명"
 
 #: src/lib/components/sentiment/participantList.svelte
 #: src/lib/components/sentiment/participantList.svelte
-#: src/lib/components/sentiment/participantList.svelte
-#: src/lib/components/sentiment/participantList.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Participants"
 msgstr "참여자"
 
-#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
-msgid "Load More Participants"
-msgstr "참여자 더 불러오기"
-
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.ts
-#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.ts
-#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.ts
 msgid "Network Sentiment"
 msgstr "네트워크 감성"
 
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.ts
-#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.ts
-#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.ts
 msgid "Express your opinion on topics important to the community"
 msgstr "커뮤니티에 중요한 주제에 대한 의견을 표현하세요"
 
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Updating..."
 msgstr "업데이트 중..."
 
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Dismiss"
 msgstr "닫기"
 
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/sentiment-msigs/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid "Load More"
 msgstr "더 불러오기"
 
-#: src/lib/components/sentiment/TopicStats.svelte
 #: src/lib/components/sentiment/topicStats.svelte
 msgid "Updating Data"
 msgstr "데이터 업데이트 중"
 
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.ts
-#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.ts
 msgid "Overview and statistics for community sentiment on the"
 msgstr "커뮤니티 감정에 대한 개요 및 통계"
 
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid "About Sentiment Voting"
 msgstr "감정 투표에 대하여"
 
-#: src/routes/[[locale]]/[network]/(explorer)/sentiment-msigs/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid "Stake tokens"
 msgstr "토큰 스테이킹"
 
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid ""
 "Sentiment voting allows token holders to express their support or opposition on important\n"
 "community topics. Your vote is weighted by your staked tokens, giving more influence to\n"
@@ -5808,53 +5746,31 @@ msgid ""
 msgstr "감정 투표를 통해 토큰 보유자는 중요한 커뮤니티 주제에 대한 지지 또는 반대를 표명할 수 있습니다. 귀하의 투표는 스테이킹된 토큰에 따라 가중치가 부여되어 네트워크에 더 많은 지분을 가진 사람들에게 더 큰 영향력을 제공합니다."
 
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/topics/+page.svelte
 msgid ""
 "Each topic shows the total participation and the distribution of support versus opposition,\n"
 "helping the community gauge consensus on key issues."
 msgstr "각 주제는 총 참여도와 지지 대 반대의 분포를 보여주어 커뮤니티가 주요 문제에 대한 합의를 측정하는 데 도움이 됩니다."
 
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Your Vote"
 msgstr "나의 투표"
 
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "Statistics"
 msgstr "통계"
 
 #: src/lib/components/sentiment/participantList.svelte
-#: src/lib/components/sentiment/participantList.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "No opposing votes"
 msgstr "반대 투표 없음"
 
 #: src/lib/components/sentiment/participantList.svelte
-#: src/lib/components/sentiment/participantList.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/topics/[id]/+page.svelte
 msgid "No supporting votes"
 msgstr "찬성 투표 없음"
 
-#~ msgid "Do you support or oppose this topic?"
-#~ msgstr "이 주제를 지지하십니까, 반대하십니까?"
-
-#~ msgid "I support this topic"
-#~ msgstr "이 주제를 지지합니다"
-
-#~ msgid "I oppose this topic"
-#~ msgstr "이 주제를 반대합니다"
-
-#: src/lib/components/sentiment/MsigVoteButtons.svelte
-#: src/lib/components/sentiment/VoteButtons.svelte
-#: src/lib/components/sentiment/msigVoteButtons.svelte
 #: src/lib/components/sentiment/voteButtons.svelte
 msgid "Voting"
 msgstr "투표"
 
-#: src/lib/components/sentiment/MsigVoteButtons.svelte
-#: src/lib/components/sentiment/VoteButtons.svelte
-#: src/lib/components/sentiment/msigVoteButtons.svelte
 #: src/lib/components/sentiment/voteButtons.svelte
 msgid "Voted"
 msgstr "투표 완료"
@@ -5863,9 +5779,6 @@ msgstr "투표 완료"
 #. placeholder {0}: currentVote === null ? 'Voting' : 'Voted'
 #. placeholder {0}: currentVote === null ? 'Voting' : 'Voted'
 #. placeholder {0}: currentVote === null ? 'Voting' : 'Voted'
-#: src/lib/components/sentiment/MsigVoteButtons.svelte
-#: src/lib/components/sentiment/VoteButtons.svelte
-#: src/lib/components/sentiment/msigVoteButtons.svelte
 #: src/lib/components/sentiment/voteButtons.svelte
 msgid "{0} as <0/> with weight <1/>"
 msgstr "가중치 <1/>으로 <0/>로 {0}"
@@ -5893,21 +5806,6 @@ msgstr "토픽 생성은 아직 사용할 수 없습니다. 현재는 기존 제
 msgid "Sentiment Voting"
 msgstr "감정 투표"
 
-#~ msgid "Active Block Producers"
-#~ msgstr "활성 블록 생산자"
-
-#~ msgid "Network Statistics"
-#~ msgstr "네트워크 통계"
-
-#~ msgid "Active Producers"
-#~ msgstr "활성 생산자"
-
-#~ msgid "Total Votes"
-#~ msgstr "총 투표수"
-
-#~ msgid "Top 21 Threshold"
-#~ msgstr "상위 21위 기준"
-
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Loading producers..."
 msgstr "프로듀서 로딩 중..."
@@ -5915,15 +5813,6 @@ msgstr "프로듀서 로딩 중..."
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "No active producers found"
 msgstr "활성 프로듀서를 찾을 수 없습니다."
-
-#~ msgid "Website"
-#~ msgstr "웹사이트"
-
-#~ msgid "Link"
-#~ msgstr "링크"
-
-#~ msgid "Loading statistics..."
-#~ msgstr "통계 로딩 중..."
 
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Vote for Producers"
@@ -5934,150 +5823,21 @@ msgstr "프로듀서에게 투표"
 msgid "Selected {0} of 30 producers"
 msgstr "30명의 프로듀서 중 {0}명 선택됨"
 
-#~ msgid "Adding votes for:"
-#~ msgstr "투표 추가 대상:"
-
-#~ msgid "Removing votes from:"
-#~ msgstr "투표 제거 대상:"
-
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Submitting..."
 msgstr "제출 중..."
 
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
-msgid "Submit Vote"
-msgstr "투표 제출"
-
-#~ msgid "Vote Again"
-#~ msgstr "다시 투표"
-
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Done"
 msgstr "완료"
-
-#~ msgid "Block producers validate transactions and create new blocks on the network. Your vote weight is determined by the amount of tokens you have staked. You can vote for up to 30 producers, and your voting power is split equally among all your selected producers."
-#~ msgstr "블록 생성자는 트랜잭션을 검증하고 네트워크에서 새로운 블록을 생성합니다. 투표 가중치는 스테이킹한 토큰의 양에 따라 결정됩니다. 최대 30명의 생성자에게 투표할 수 있으며, 투표력은 선택한 모든 생성자에게 동일하게 분배됩니다."
 
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "How Voting Works"
 msgstr "투표 방법"
 
-#~ msgid ""
-#~ "Block producers validate transactions and create new blocks on the network. Your\n"
-#~ "vote weight is determined by the amount of tokens you have staked. You can vote for\n"
-#~ "up to 30 producers, and your voting power is split equally among all your selected\n"
-#~ "producers."
-#~ msgstr "블록 생산자는 트랜잭션을 검증하고 네트워크에 새로운 블록을 생성합니다. 투표 가중치는 스테이킹한 토큰의 양에 따라 결정됩니다. 최대 30명의 생산자에게 투표할 수 있으며, 투표력은 선택한 모든 생산자에게 동일하게 분할됩니다."
-
-#~ msgid "Your Voting Power"
-#~ msgstr "당신의 투표력"
-
-#~ msgid "Account: <0/>"
-#~ msgstr "계정: <0/>"
-
-#~ msgid "Vote Weight: <0/>"
-#~ msgstr "투표 가중치: <0/>"
-
-#~ msgid "Currently voting for {0} of 30 producers"
-#~ msgstr "현재 30명의 생산자 중 {0}명에게 투표 중"
-
-#~ msgid "Log in to see your voting power and cast votes."
-#~ msgstr "로그인하여 투표력을 확인하고 투표하세요."
-
-#~ msgid ""
-#~ "Block producers validate transactions and create new blocks on the network. Your\n"
-#~ "vote weight is determined by the amount of tokens you have staked. You can vote\n"
-#~ "for up to 30 producers, and your voting power is split equally among all your\n"
-#~ "selected producers."
-#~ msgstr "블록 생산자는 트랜잭션을 검증하고 네트워크에 새 블록을 생성합니다. 귀하의 투표 가중치는 스테이킹한 토큰의 양에 따라 결정됩니다. 최대 30명의 생산자에게 투표할 수 있으며, 투표력은 선택한 모든 생산자에게 동일하게 분할됩니다."
-
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
-msgid "Visit producer website"
-msgstr "프로듀서 웹사이트 방문"
-
-#~ msgid "What are Block Producers?"
-#~ msgstr "블록 생산자란 무엇인가요?"
-
-#~ msgid ""
-#~ "Block producers are entities that validate transactions and create new blocks on the\n"
-#~ "network. Only the top 21 block producers actively produce blocks, with several\n"
-#~ "standby producers ready to step in if needed."
-#~ msgstr "블록 생산자는 트랜잭션을 검증하고 네트워크에 새로운 블록을 생성하는 주체입니다. 상위 21명의 블록 생산자만이 활발하게 블록을 생성하며, 필요에 따라 대기 중인 여러 생산자가 투입될 준비가 되어 있습니다."
-
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Why Should You Vote?"
 msgstr "왜 투표해야 할까요?"
-
-#~ msgid ""
-#~ "Voting helps secure the network and supports teams that contribute value to the\n"
-#~ "ecosystem. An active, well-governed blockchain is more likely to attract users and\n"
-#~ "drive up token demand, benefiting all token holders."
-#~ msgstr "투표는 네트워크를 보호하고 생태계에 가치를 기여하는 팀을 지원합니다. 활발하고 잘 관리되는 블록체인은 사용자를 유치하고 토큰 수요를 증가시켜 모든 토큰 보유자에게 이익을 줄 가능성이 높습니다."
-
-#~ msgid ""
-#~ "• <0>Vote with staked tokens:</0> Your vote weight equals the amount of tokens\n"
-#~ "you have staked"
-#~ msgstr "• <0>스테이킹된 토큰으로 투표:</0> 투표 가중치는 스테이킹한 토큰의 양과 같습니다."
-
-#~ msgid "• <0>Up to 30 producers:</0> Select as many as 30 block producers"
-#~ msgstr "• <0>최대 30명의 생산자:</0> 최대 30명의 블록 생산자를 선택하세요."
-
-#~ msgid ""
-#~ "• <0>Equal distribution:</0> Your voting power is split equally among all selected\n"
-#~ "producers"
-#~ msgstr "• <0>동등한 분배:</0> 투표력은 선택한 모든 생산자에게 동등하게 분할됩니다."
-
-#~ msgid "• <0>Update anytime:</0> You can change your votes whenever you want, at no cost"
-#~ msgstr "• <0>언제든지 업데이트:</0> 언제든지 무료로 투표를 변경할 수 있습니다.```"
-
-#~ msgid ""
-#~ "Block producers are entities that validate transactions and create new blocks on\n"
-#~ "the network. Only the top 21 block producers actively produce blocks, with several\n"
-#~ "standby producers ready to step in if needed."
-#~ msgstr "블록 생산자는 트랜잭션을 검증하고 네트워크에서 새로운 블록을 생성하는 주체입니다. 상위 21명의 블록 생산자만이 활발하게 블록을 생산하며, 필요시 대기 생산자가 투입될 준비가 되어 있습니다."
-
-#~ msgid ""
-#~ "• <0>Vote with staked tokens:</0> Your vote weight equals the amount of\n"
-#~ "tokens you have staked"
-#~ msgstr "• <0>스테이킹된 토큰으로 투표:</0> 투표 가중치는 스테이킹한 토큰의 양과 같습니다."
-
-#~ msgid ""
-#~ "• <0>Equal distribution:</0> Your voting power is split equally among all\n"
-#~ "selected producers"
-#~ msgstr "• <0>균등 분배:</0> 투표권은 선택한 모든 생산자에게 균등하게 분배됩니다."
-
-#~ msgid ""
-#~ "• <0>Update anytime:</0> You can change your votes whenever you want, at\n"
-#~ "no cost"
-#~ msgstr "• <0>언제든지 업데이트:</0> 언제든지 무료로 투표를 변경할 수 있습니다.```"
-
-#~ msgid ""
-#~ "Block producers validate transactions and create new blocks on the network. Only the\n"
-#~ "top 21 block producers actively produce blocks, with several standby producers ready\n"
-#~ "to step in if needed. Voting helps secure the network and supports teams that\n"
-#~ "contribute value to the ecosystem. An active, well-governed blockchain is more\n"
-#~ "likely to attract users and drive up token demand, benefiting all token holders."
-#~ msgstr "블록 생산자는 네트워크에서 트랜잭션을 검증하고 새로운 블록을 생성합니다. 상위 21명의 블록 생산자만이 활발하게 블록을 생산하며, 필요시 투입될 수 있는 여러 대기 생산자가 있습니다. 투표는 네트워크를 보호하고 생태계에 가치를 기여하는 팀을 지원하는 데 도움이 됩니다. 활성적이고 잘 관리되는 블록체인은 사용자를 유치하고 토큰 수요를 증가시켜 모든 토큰 보유자에게 이익을 줄 가능성이 높습니다."
-
-#~ msgid "• <0>Update anytime:</0> You can change your votes whenever you want"
-#~ msgstr "• <0>언제든지 업데이트:</0> 원할 때마다 투표를 변경할 수 있습니다.```"
-
-#~ msgid ""
-#~ "Block producers validate transactions and create new blocks on the network. Only\n"
-#~ "the top 21 block producers actively produce blocks, with several standby producers\n"
-#~ "ready to step in if needed. Voting helps secure the network and supports teams\n"
-#~ "that contribute value to the ecosystem. An active, well-governed blockchain is\n"
-#~ "more likely to attract users and drive up token demand, benefiting all token\n"
-#~ "holders."
-#~ msgstr ""
-#~ "블록 생산자는 트랜잭션을 검증하고 네트워크에 새로운 블록을 생성합니다. 상위 21명의 블록\n"
-#~ "생산자만이 활발하게 블록을 생산하며, 필요시 대기 생산자들이 투입될 준비가 되어 있습니다.\n"
-#~ "투표는 네트워크를 보호하고 생태계에 가치를 기여하는 팀을 지원합니다. 활발하고 잘 관리되는\n"
-#~ "블록체인은 사용자를 유치하고 토큰 수요를 증가시켜 모든 토큰 보유자에게 이익을 줄 가능성이\n"
-#~ "높습니다."
-
-#~ msgid "My Votes"
-#~ msgstr "내 투표"
 
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Why Vote?"
@@ -6087,40 +5847,6 @@ msgstr "왜 투표해야 할까요?"
 msgid "How It Works"
 msgstr "작동 방식"
 
-#~ msgid "Current Votes ({0}/30)"
-#~ msgstr "현재 투표 ({0}/30)"
-
-#~ msgid "Remove"
-#~ msgstr "제거"
-
-#~ msgid ""
-#~ "You are not currently voting for any block producers. Select producers from the\n"
-#~ "table below to cast your vote."
-#~ msgstr "현재 블록 프로듀서를 투표하고 있지 않습니다. 투표하려면 아래 표에서 프로듀서를 선택하십시오."
-
-#~ msgid ""
-#~ "Block producers validate transactions and create new blocks on the network. Only\n"
-#~ "the top 21 block producers actively produce blocks, with several standby\n"
-#~ "producers ready to step in if needed. Voting helps secure the network and\n"
-#~ "supports teams that contribute value to the ecosystem. An active, well-governed\n"
-#~ "blockchain is more likely to attract users and drive up token demand, benefiting\n"
-#~ "all token holders."
-#~ msgstr "블록 프로듀서는 트랜잭션을 검증하고 네트워크에 새 블록을 생성합니다. 상위 21명의 블록 프로듀서만이 활발하게 블록을 생성하며, 필요한 경우 여러 대기 프로듀서가 투입될 준비가 되어 있습니다. 투표는 네트워크를 보호하고 생태계에 가치를 기여하는 팀을 지원합니다. 활발하고 잘 관리되는 블록체인은 사용자를 유치하고 토큰 수요를 증가시켜 모든 토큰 보유자에게 이익을 줄 가능성이 높습니다."
-
-#~ msgid ""
-#~ "<0>Vote with staked tokens:</0> Your vote weight equals the amount of\n"
-#~ "tokens you have staked"
-#~ msgstr "<0>스테이킹된 토큰으로 투표:</0> 투표 가중치는 스테이킹한 토큰 양과 같습니다."
-
-#~ msgid "<0>Up to 30 producers:</0> Select as many as 30 block producers"
-#~ msgstr "<0>최대 30명의 프로듀서:</0> 최대 30명의 블록 프로듀서를 선택하세요."
-
-#~ msgid "<0>Update anytime:</0> You can change your votes whenever you want"
-#~ msgstr "<0>언제든지 업데이트:</0> 언제든지 투표를 변경할 수 있습니다.```"
-
-#~ msgid "Remove vote"
-#~ msgstr "투표 삭제"
-
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Will vote for:"
 msgstr "투표 예정:"
@@ -6128,32 +5854,6 @@ msgstr "투표 예정:"
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Will remove vote from:"
 msgstr "투표 취소 예정:"
-
-#~ msgid ""
-#~ "You are not currently voting for any block producers. Select producers from the table\n"
-#~ "below to cast your vote."
-#~ msgstr "현재 블록 생산자를 투표하고 있지 않습니다. 투표하려면 아래 표에서 생산자를 선택하세요."
-
-#~ msgid ""
-#~ "Block producers validate transactions and create new blocks on the network. Only the top\n"
-#~ "21 block producers actively produce blocks, with several standby producers ready to step\n"
-#~ "in if needed. Voting helps secure the network and supports teams that contribute value\n"
-#~ "to the ecosystem. An active, well-governed blockchain is more likely to attract users and\n"
-#~ "drive up token demand, benefiting all token holders."
-#~ msgstr "블록 생산자는 트랜잭션을 검증하고 네트워크에 새 블록을 생성합니다. 상위 21명의 블록 생산자만이 활발하게 블록을 생산하며, 필요시 대기 생산자들이 투입될 준비가 되어 있습니다. 투표는 네트워크를 보호하고 생태계에 가치를 기여하는 팀을 지원합니다. 활발하고 잘 관리되는 블록체인은 사용자를 유치하고 토큰 수요를 늘려 모든 토큰 보유자에게 이익이 될 가능성이 높습니다."
-
-#~ msgid ""
-#~ "<0>Vote with staked tokens:</0> Your vote weight equals the amount of tokens\n"
-#~ "you have staked"
-#~ msgstr "<0>스테이킹된 토큰으로 투표:</0> 투표 가중치는 스테이킹한 토큰의 양과 같습니다.```"
-
-#~ msgid ""
-#~ "Block producers validate transactions and create new blocks on the network. Only the\n"
-#~ "top 21 block producers actively produce blocks, with several standby producers ready\n"
-#~ "to step in if needed. Voting helps secure the network and supports teams that\n"
-#~ "contribute value to the ecosystem. An active, well-governed blockchain is more likely\n"
-#~ "to attract users and drive up token demand, benefiting all token holders."
-#~ msgstr "블록 생산자는 트랜잭션을 검증하고 네트워크에서 새로운 블록을 생성합니다. 상위 21명의 블록 생산자만이 활발하게 블록을 생산하며, 필요할 경우 대기 생산자가 투입될 준비가 되어 있습니다. 투표는 네트워크를 보호하고 생태계에 가치를 기여하는 팀을 지원합니다. 활발하고 잘 관리되는 블록체인은 사용자를 유치하고 토큰 수요를 증가시켜 모든 토큰 보유자에게 이익을 줄 가능성이 높습니다."
 
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Search producers..."
@@ -6163,76 +5863,13 @@ msgstr "프로듀서 검색..."
 msgid "No producers match your search"
 msgstr "검색어와 일치하는 프로듀서가 없습니다"
 
-#~ msgid ""
-#~ "Your voting power is determined by the amount of tokens you have staked. Each vote\n"
-#~ "you cast uses your full voting weight."
-#~ msgstr "귀하의 투표력은 스테이킹한 토큰의 양에 따라 결정됩니다. 각 투표는 전체 투표 가중치를 사용합니다."
-
-#~ msgid "Vote Weight"
-#~ msgstr "투표 가중치"
-
-#~ msgid "Current Votes"
-#~ msgstr "현재 투표수"
-
-#~ msgid "{0} of 30 producers"
-#~ msgstr "30명의 프로듀서 중 {0}명"
-
-#~ msgid ""
-#~ "Block producers validate transactions and create new blocks on the network. Only the\n"
-#~ "top 21 block producers actively produce blocks, with several standby producers ready\n"
-#~ "to step in if needed."
-#~ msgstr "블록 프로듀서는 트랜잭션을 검증하고 네트워크에서 새 블록을 생성합니다. 상위 21명의 블록 프로듀서만이 활발하게 블록을 생성하며, 필요 시 투입될 수 있도록 여러 대기 프로듀서가 준비되어 있습니다."
-
-#~ msgid "Your Impact"
-#~ msgstr "귀하의 영향력"
-
-#~ msgid ""
-#~ "<0>Secure the network</0> by electing trustworthy\n"
-#~ "block producers"
-#~ msgstr "신뢰할 수 있는 블록 프로듀서를 선출하여 <0>네트워크를 보호하십시오</0>"
-
-#~ msgid ""
-#~ "<0>Support valuable teams</0> that contribute tools\n"
-#~ "and services to the ecosystem"
-#~ msgstr "생태계에 도구와 서비스를 제공하는 <0>가치 있는 팀을 지원하십시오</0>"
-
-#~ msgid ""
-#~ "<0>Drive token value</0> through good governance\n"
-#~ "that attracts users and developers"
-#~ msgstr "사용자와 개발자를 유치하는 건전한 거버넌스를 통해 <0>토큰 가치를 높이십시오</0>"
-
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
-msgid ""
-"Voting for block producers is simple and flexible. Here's everything you need to\n"
-"know."
-msgstr "블록 프로듀서 투표는 간단하고 유연합니다. 알아야 할 모든 것이 여기에 있습니다."
-
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Vote with Staked Tokens"
 msgstr "스테이킹된 토큰으로 투표"
 
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
-msgid ""
-"Your vote weight equals the amount of tokens you have staked. More stake = more\n"
-"voting power."
-msgstr "귀하의 투표 가중치는 스테이킹한 토큰의 양과 같습니다. 더 많은 스테이크 = 더 많은 투표력."
-
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Up to 30 Producers"
 msgstr "최대 30명의 프로듀서"
-
-#~ msgid ""
-#~ "Select as many as 30 block producers. Your voting power applies to each one you\n"
-#~ "select."
-#~ msgstr "최대 30명의 블록 프로듀서를 선택하십시오. 귀하의 투표력은 귀하가 선택한 각 프로듀서에게 적용됩니다."
-
-#~ msgid "Update Anytime"
-#~ msgstr "언제든지 업데이트"
-
-#~ msgid ""
-#~ "Change your votes whenever you want. Your votes remain active until you modify\n"
-#~ "them."
-#~ msgstr "원할 때마다 투표를 변경하십시오. 귀하의 투표는 수정할 때까지 활성 상태로 유지됩니다."
 
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Top 21 Produce Blocks"
@@ -6242,239 +5879,17 @@ msgstr "상위 21명이 블록 생성"
 msgid "Only the top 21 voted producers actively create blocks. Others serve as standbys."
 msgstr "투표에서 상위 21위를 차지한 프로듀서만이 활발하게 블록을 생성합니다. 나머지는 대기 역할을 합니다.```"
 
-#~ msgid "Voting Power"
-#~ msgstr "투표력"
-
-#~ msgid "Available Balance"
-#~ msgstr "사용 가능 잔액"
-
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Liquid Balance"
 msgstr "유동성 잔액"
 
-#~ msgid "Voting for block producers is simple and flexible. Here's everything you need to know."
-#~ msgstr "블록 생산자 투표는 간단하고 유연합니다. 알아야 할 모든 것이 여기에 있습니다."
-
-#~ msgid "Change your votes whenever you want. Your votes remain active until you modify them."
-#~ msgstr "언제든지 투표를 변경하십시오. 투표는 수정할 때까지 활성 상태로 유지됩니다."
-
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
-msgid ""
-"This network uses <0>Delegated Proof of Stake (DPoS)</0>, a consensus mechanism where token holders elect block producers to validate\n"
-"transactions and secure the network. Your vote directly shapes who runs the\n"
-"infrastructure you depend on."
-msgstr "이 네트워크는 <0>Delegated Proof of Stake (DPoS)</0> 방식을 사용합니다. 이는 토큰 보유자가 블록 생성자를 선출하여 트랜잭션을 검증하고 네트워크를 보호하는 합의 메커니즘입니다. 귀하의 투표는 귀하가 의존하는 인프라를 누가 운영할지 직접적으로 결정합니다."
-
-#~ msgid "What Block Producers Do"
-#~ msgstr "블록 생성자의 역할"
-
-#~ msgid ""
-#~ "<0>Validate transactions</0> — They verify and\n"
-#~ "process every transaction on the network, preventing double-spending and fraud"
-#~ msgstr "<0>트랜잭션 검증</0> — 네트워크의 모든 트랜잭션을 확인하고 처리하여 이중 지출 및 사기를 방지합니다."
-
-#~ msgid ""
-#~ "<0>Produce blocks</0> — Every 0.5 seconds,\n"
-#~ "producers bundle transactions into blocks and add them to the blockchain"
-#~ msgstr "<0>블록 생성</0> — 0.5초마다 생성자는 트랜잭션을 블록으로 묶어 블록체인에 추가합니다."
-
-#~ msgid ""
-#~ "<0>Maintain infrastructure</0> — They provide\n"
-#~ "servers, bandwidth, and storage that keep the network running 24/7"
-#~ msgstr "<0>인프라 유지 관리</0> — 네트워크가 24시간 내내 작동하도록 서버, 대역폭 및 스토리지를 제공합니다."
-
-#~ msgid ""
-#~ "<0>Govern the network</0> — Producers vote on\n"
-#~ "protocol upgrades and critical decisions that affect the blockchain's future"
-#~ msgstr "<0>네트워크 관리</0> — 생성자는 프로토콜 업그레이드 및 블록체인의 미래에 영향을 미치는 중요한 결정에 투표합니다."
-
-#~ msgid ""
-#~ "<0>Secure the network</0> — Electing competent,\n"
-#~ "trustworthy producers protects against attacks and downtime"
-#~ msgstr "<0>네트워크 보안</0> — 유능하고 신뢰할 수 있는 생성자를 선출하면 공격 및 가동 중지 시간으로부터 보호할 수 있습니다."
-
-#~ msgid ""
-#~ "<0>Promote decentralization</0> — Diverse voting\n"
-#~ "prevents any single entity from controlling the network"
-#~ msgstr "<0>탈중앙화 촉진</0> — 다양한 투표는 단일 개체가 네트워크를 제어하는 것을 방지합니다."
-
-#~ msgid ""
-#~ "<0>Hold producers accountable</0> — Active voting\n"
-#~ "encourages producers to perform well or risk losing their position"
-#~ msgstr "<0>생성자에게 책임 부여</0> — 적극적인 투표는 생성자가 좋은 성과를 내도록 장려하거나 그렇지 않으면 자신의 위치를 잃을 위험을 감수하도록 합니다."
-
-#~ msgid ""
-#~ "<0>Support ecosystem growth</0> — Many producers\n"
-#~ "build tools, run APIs, and contribute to the community"
-#~ msgstr "<0>생태계 성장 지원</0> — 많은 생산자가 도구를 구축하고, API를 실행하고, 커뮤니티에 기여합니다.```"
-
-#~ msgid ""
-#~ "Your vote weight equals the amount of tokens you have staked. More stake = more\n"
-#~ "voting power. Unstaked tokens cannot be used to vote."
-#~ msgstr "귀하의 투표 가중치는 스테이킹한 토큰의 양과 같습니다. 스테이크가 많을수록 투표권이 커집니다. 스테이킹 해제된 토큰은 투표에 사용할 수 없습니다."
-
-#~ msgid ""
-#~ "Select as many as 30 block producers. Your full voting power applies to each one you\n"
-#~ "select—votes are not split between them."
-#~ msgstr "최대 30명의 블록 생산자를 선택하십시오. 귀하의 모든 투표권은 선택한 각 생산자에게 적용되며 투표는 분할되지 않습니다."
+msgid "Voting for block producers is simple and flexible. Here's everything you need to know."
+msgstr "블록 생산자 투표는 간단하고 유연합니다. 알아야 할 모든 것이 여기에 있습니다."
 
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Votes Decay Over Time"
 msgstr "시간이 지남에 따라 투표 가치 감소"
-
-#~ msgid ""
-#~ "Vote weight decays with a half-life of about one year. Re-vote periodically to\n"
-#~ "maintain your full influence on producer rankings."
-#~ msgstr "투표 가중치는 약 1년의 반감기로 감소합니다. 생산자 순위에 대한 완전한 영향력을 유지하려면 정기적으로 다시 투표하십시오."
-
-#~ msgid ""
-#~ "Only the top 21 voted producers actively create blocks. Others serve as standbys,\n"
-#~ "ready to step in if an active producer fails."
-#~ msgstr "상위 21명의 투표된 생산자만이 활발하게 블록을 생성합니다. 다른 생산자는 대기 상태로 활성 생산자가 실패할 경우를 대비합니다."
-
-#~ msgid "Choosing Who to Vote For"
-#~ msgstr "누구에게 투표할지 선택"
-
-#~ msgid ""
-#~ "Not all producers are equal. Consider these factors when deciding who deserves your\n"
-#~ "vote:"
-#~ msgstr "모든 생산자가 동등하지는 않습니다. 누가 귀하의 투표를 받을 자격이 있는지 결정할 때 다음 요소를 고려하십시오."
-
-#~ msgid ""
-#~ "<0>Reliability & Performance</0> — Check their\n"
-#~ "track record. Do they miss blocks? How much uptime do they maintain?"
-#~ msgstr "<0>신뢰성 및 성능</0> — 실적을 확인하십시오. 블록을 놓치나요? 얼마나 많은 가동 시간을 유지합니까?"
-
-#~ msgid ""
-#~ "<0>Transparency</0> — Do they disclose their team,\n"
-#~ "infrastructure, and how they use block rewards?"
-#~ msgstr "<0>투명성</0> — 팀, 인프라 및 블록 보상 사용 방법을 공개합니까?"
-
-#~ msgid ""
-#~ "<0>Community Contribution</0> — Do they build\n"
-#~ "tools, provide public APIs, create educational content, or support developers?"
-#~ msgstr "<0>커뮤니티 기여</0> — 도구를 구축하고, 공용 API를 제공하고, 교육 콘텐츠를 만들거나 개발자를 지원합니까?"
-
-#~ msgid ""
-#~ "<0>Technical Capability</0> — Do they run\n"
-#~ "enterprise-grade infrastructure with proper security and redundancy?"
-#~ msgstr "<0>기술적 능력</0> — 적절한 보안 및 이중화를 갖춘 엔터프라이즈급 인프라를 실행합니까?"
-
-#~ msgid ""
-#~ "<0>Geographic Distribution</0> — Voting for\n"
-#~ "producers in different regions improves network resilience"
-#~ msgstr "<0>지리적 분포</0> — 다른 지역의 생산자에게 투표하면 네트워크 복원력이 향상됩니다."
-
-#~ msgid ""
-#~ "Visit producer websites (click the external link icon) to learn about their operations\n"
-#~ "and contributions before voting."
-#~ msgstr "투표하기 전에 생산자 웹사이트(외부 링크 아이콘 클릭)를 방문하여 운영 및 기여에 대해 알아보십시오.```"
-
-#~ msgid ""
-#~ "<0>Validate transactions</0> — They verify and process\n"
-#~ "every transaction on the network, preventing double-spending and fraud"
-#~ msgstr "<0>트랜잭션 검증</0> — 그들은 네트워크의 모든 트랜잭션을 확인하고 처리하여 이중 지출과 사기를 방지합니다."
-
-#~ msgid ""
-#~ "<0>Produce blocks</0> — Every 0.5 seconds, producers\n"
-#~ "bundle transactions into blocks and add them to the blockchain"
-#~ msgstr "<0>블록 생성</0> — 생산자는 0.5초마다 트랜잭션을 블록으로 묶어 블록체인에 추가합니다."
-
-#~ msgid ""
-#~ "<0>Maintain infrastructure</0> — They provide servers,\n"
-#~ "bandwidth, and storage that keep the network running 24/7"
-#~ msgstr "<0>인프라 유지 관리</0> — 그들은 네트워크를 24시간 연중무휴로 유지하는 서버, 대역폭 및 스토리지를 제공합니다."
-
-#~ msgid ""
-#~ "<0>Govern the network</0> — Producers vote on protocol\n"
-#~ "upgrades and critical decisions that affect the blockchain's future"
-#~ msgstr "<0>네트워크 관리</0> — 생산자는 프로토콜 업그레이드 및 블록체인의 미래에 영향을 미치는 중요한 결정에 대해 투표합니다."
-
-#~ msgid ""
-#~ "<0>Secure the network</0> — Electing competent, trustworthy\n"
-#~ "producers protects against attacks and downtime"
-#~ msgstr "<0>네트워크 보안</0> — 유능하고 신뢰할 수 있는 생산자를 선출하면 공격 및 가동 중지 시간으로부터 보호할 수 있습니다."
-
-#~ msgid ""
-#~ "<0>Reliability & Performance</0> — Check their track\n"
-#~ "record. Do they miss blocks? How much uptime do they maintain?"
-#~ msgstr "<0>신뢰성 및 성능</0> — 그들의 실적을 확인하십시오. 블록을 놓치나요? 얼마나 많은 가동 시간을 유지합니까?"
-
-#~ msgid ""
-#~ "<0>Community Contribution</0> — Do they build tools,\n"
-#~ "provide public APIs, create educational content, or support developers?"
-#~ msgstr "<0>커뮤니티 기여</0> — 도구를 만들고, 공개 API를 제공하고, 교육 콘텐츠를 만들거나, 개발자를 지원합니까?"
-
-#~ msgid ""
-#~ "<0>Technical Capability</0> — Do they run enterprise-grade\n"
-#~ "infrastructure with proper security and redundancy?"
-#~ msgstr "<0>기술적 능력</0> — 적절한 보안 및 이중화를 갖춘 엔터프라이즈급 인프라를 운영합니까?"
-
-#~ msgid ""
-#~ "<0>Geographic Distribution</0> — Voting for producers\n"
-#~ "in different regions improves network resilience"
-#~ msgstr "<0>지리적 분포</0> — 다른 지역의 생산자에게 투표하면 네트워크 복원력이 향상됩니다.```"
-
-#~ msgid ""
-#~ "<0>Validate transactions</0> — They verify and process\n"
-#~ "every transaction on the network"
-#~ msgstr "<0>트랜잭션 유효성 검사</0> — 네트워크의 모든 트랜잭션을 확인하고 처리합니다."
-
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
-msgid "Validate Transactions"
-msgstr "트랜잭션 검증"
-
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
-msgid "They verify and process every transaction on the network"
-msgstr "그들은 네트워크 상의 모든 트랜잭션을 검증하고 처리합니다."
-
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
-msgid "Produce Blocks"
-msgstr "블록 생성"
-
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
-msgid "Every 0.5 seconds, producers bundle transactions into blocks"
-msgstr "생산자들은 0.5초마다 트랜잭션을 블록으로 묶습니다."
-
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
-msgid "Maintain Infrastructure"
-msgstr "인프라 유지"
-
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
-msgid "They provide servers, bandwidth, and storage that keep the network running 24/7"
-msgstr "그들은 네트워크가 24시간 내내 작동하도록 서버, 대역폭 및 스토리지를 제공합니다."
-
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
-msgid "Govern the Network"
-msgstr "네트워크 관리"
-
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
-msgid "Producers vote on protocol upgrades and critical decisions"
-msgstr "생산자들은 프로토콜 업그레이드 및 중요한 결정에 투표합니다."
-
-#~ msgid "Secure the network"
-#~ msgstr "네트워크 보안"
-
-#~ msgid "Electing competent producers protects against attacks"
-#~ msgstr "유능한 생산자를 선출하는 것은 공격으로부터 보호합니다."
-
-#~ msgid "Promote decentralization"
-#~ msgstr "탈중앙화 장려"
-
-#~ msgid "Diverse voting prevents centralized control"
-#~ msgstr "다양한 투표는 중앙 집중식 통제를 방지합니다."
-
-#~ msgid "Hold producers accountable"
-#~ msgstr "생산자 책임 유지"
-
-#~ msgid "Active voting encourages strong performance"
-#~ msgstr "적극적인 투표는 강력한 성과를 장려합니다."
-
-#~ msgid "Support ecosystem growth"
-#~ msgstr "생태계 성장 지원"
-
-#~ msgid "Many producers build tools and contribute to the community"
-#~ msgstr "많은 생산자들이 도구를 만들고 커뮤니티에 기여합니다.```"
 
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Select as many as 30 block producers. Your full voting power applies to each one."
@@ -6488,19 +5903,10 @@ msgstr "투표 가중치는 약 1년의 반감기로 감소합니다. 주기적�
 msgid "Refresh Vote"
 msgstr "투표 갱신"
 
-#~ msgid "Vote Status"
-#~ msgstr "투표 상태"
-
-#~ msgid "Last Voted"
-#~ msgstr "최근 투표"
-
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Vote Decay"
 msgstr "투표 감소"
-
-#~ msgid "Effective Weight"
-#~ msgstr "유효 가중치"
 
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "My Voting Power"
@@ -6523,21 +5929,6 @@ msgstr "투표 기간"
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Not voting"
 msgstr "투표하지 않음"
-
-#~ msgid "Stake tokens to gain voting power and help secure the network."
-#~ msgstr "토큰을 스테이킹하여 투표권을 얻고 네트워크 보안을 강화하세요."
-
-#~ msgid "Increase your voting power"
-#~ msgstr "투표권을 늘리세요"
-
-#~ msgid "Stake tokens to participate in producer voting and help secure the network."
-#~ msgstr "토큰을 스테이킹하여 프로듀서 투표에 참여하고 네트워크 보안을 강화하세요."
-
-#~ msgid "Login to view your voting power"
-#~ msgstr "로그인하여 투표권을 확인하세요"
-
-#~ msgid "Connect your wallet to see your staked balance and vote for block producers."
-#~ msgstr "지갑을 연결하여 스테이킹된 잔액을 확인하고 블록 프로듀서에게 투표하세요."
 
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Connect to view your voting power"
@@ -6571,9 +5962,6 @@ msgid ""
 "security."
 msgstr "{0} 네트워크를 보호하는 유효성 검사기에 투표하세요. 귀하의 투표력은 스테이킹된 토큰에 의해 가중치가 부여되어 네트워크 보안에 더 많은 지분을 가진 사람들에게 더 큰 영향력을 제공합니다."
 
-#~ msgid "{0} active producers"
-#~ msgstr "{0}명의 활성 생산자"
-
 #: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
 msgid "View All Producers"
 msgstr "모든 생산자 보기"
@@ -6589,107 +5977,21 @@ msgstr "주요 네트워크 주제에 대한 지지 또는 반대를 표명하�
 msgid "{0} active topics"
 msgstr "{0}개의 활성 주제"
 
-#~ msgid "Build Fund"
-#~ msgstr "빌드 펀드"
-
-#~ msgid ""
-#~ "Vote on how network treasury funds are allocated to support ecosystem development,\n"
-#~ "infrastructure, and community initiatives."
-#~ msgstr "네트워크 재무 기금이 생태계 개발, 인프라 및 커뮤니티 이니셔티브를 지원하기 위해 어떻게 할당되는지에 대해 투표하십시오."
-
-#~ msgid "Coming Soon"
-#~ msgstr "출시 예정"
-
-#~ msgid "Build fund proposals will appear here"
-#~ msgstr "빌드 펀드 제안이 여기에 표시됩니다.```"
-
-#~ msgid ""
-#~ "Vote for the validators that secure the {0} network. Your voting power is\n"
-#~ "weighted by your staked tokens, giving more influence to those with a larger stake in the\n"
-#~ "network's security."
-#~ msgstr "{0} 네트워크를 보호하는 검증인에게 투표하세요. 귀하의 투표력은 스테이킹된 토큰에 의해 가중치가 부여되어 네트워크 보안에 더 큰 지분을 가진 사람들에게 더 큰 영향력을 줍니다."
-
-#~ msgid "Multi-Signature Proposals"
-#~ msgstr "다중 서명 제안"
-
-#~ msgid ""
-#~ "Multi-signature proposals require approval from multiple parties before execution. These\n"
-#~ "are used for important network decisions that need collective agreement from block\n"
-#~ "producers or other stakeholders."
-#~ msgstr "다중 서명 제안은 실행 전에 여러 당사자의 승인이 필요합니다. 이는 블록 생성자 또는 기타 이해 관계자의 집단적 합의가 필요한 중요한 네트워크 결정에 사용됩니다."
-
-#~ msgid "View MSIGs"
-#~ msgstr "MSIG 보기"
-
-#~ msgid "Featured proposals will appear here"
-#~ msgstr "주요 제안이 여기에 표시됩니다."
-
 #: src/routes/[[locale]]/[network]/(explorer)/+layout.svelte
 msgid "Top 21 Block Producer"
 msgstr "상위 21개 블록 생산자"
-
-#~ msgid "Create new system account"
-#~ msgstr "새 시스템 계정 생성"
-
-#~ msgid "Vaulta transition stage 1"
-#~ msgstr "Vaulta 전환 1단계"
-
-#~ msgid "Update Vaulta Foundation permissions"
-#~ msgstr "Vaulta 재단 권한 업데이트"
-
-#~ msgid "{0} active proposals"
-#~ msgstr "{0}개의 활성 제안"
 
 #: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
 msgid "View All Proposals"
 msgstr "모든 제안 보기"
 
-#~ msgid "by"
-#~ msgstr "작성자"
-
-#~ msgid "Approvals"
-#~ msgstr "찬성"
-
-#~ msgid "{0} of {1} approvals"
-#~ msgstr "{0}/{1} 승인"
-
-#: src/lib/components/sentiment/msigCard.svelte
 #: src/lib/components/sentiment/msigCard.svelte
 msgid "by <0/>"
 msgstr "작성자: <0/>"
 
-#~ msgid "Proposed by"
-#~ msgstr "제안자"
-
-#~ msgid "Approval Progress"
-#~ msgstr "승인 진행률"
-
-#~ msgid "{0} of {1} <0>({0}%)</0>"
-#~ msgstr "{0}/{1} <0>({0}%)</0>"
-
-#~ msgid "Approved by"
-#~ msgstr "승인자"
-
-#~ msgid "{0} more needed"
-#~ msgstr "{0}개 더 필요"
-
-#~ msgid "{0} action{1}"
-#~ msgstr "{0} 액션{1}"
-
-#~ msgid "Expires {0}"
-#~ msgstr "만료일: {0}"
-
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Loading your votes..."
 msgstr "투표 내역을 불러오는 중..."
-
-#~ msgid ""
-#~ "Express your support or opposition on key network topics. Your vote is weighted by\n"
-#~ "your staked tokens, helping the community gauge consensus on important issues."
-#~ msgstr "주요 네트워크 주제에 대한 지지 또는 반대를 표명하세요. 귀하의 투표는 스테이킹된 토큰에 따라 가중치가 부여되어 커뮤니티가 중요한 문제에 대한 합의를 측정하는 데 도움이 됩니다."
-
-#~ msgid "Top Active Producers"
-#~ msgstr "상위 활성 생산자"
 
 #. placeholder {0}: producers.statistics.totalActive
 #: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
@@ -6701,8 +6003,6 @@ msgid "Top Producers"
 msgstr "최고 생산자"
 
 #: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/sentiment-msigs/+page.ts
-#: src/routes/[[locale]]/[network]/(explorer)/sentiment-msigs/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/+page.ts
 msgid "Multisig Sentiment"
@@ -6720,49 +6020,36 @@ msgid ""
 msgstr ""
 
 #. placeholder {0}: msigData.statistics.totalVotes
-#. placeholder {0}: msigData.statistics.totalVotes
-#: src/lib/components/sentiment/msigCard.svelte
 #: src/lib/components/sentiment/msigCard.svelte
 msgid "{0} votes"
 msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/sentiment-msigs/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/+page.ts
 msgid "Community sentiment on multisig proposals"
 msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/sentiment-msigs/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/+page.ts
 msgid "View community sentiment on multisig proposals"
 msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/sentiment-msigs/+page.svelte
-msgid "Loading multisig sentiment..."
-msgstr ""
-
-#: src/routes/[[locale]]/[network]/(explorer)/sentiment-msigs/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/+page.svelte
 msgid "Failed to load multisig sentiment"
 msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/sentiment-msigs/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/+page.svelte
 msgid "No multisig proposals with sentiment data yet"
 msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/sentiment-msigs/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/+page.svelte
 msgid "About Multisig Sentiment"
 msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/sentiment-msigs/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/+page.svelte
 msgid ""
 "Express your support or opposition to multisig proposals. Your vote is weighted by your\n"
 "staked tokens, giving more influence to those with a larger stake in the network."
 msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/sentiment-msigs/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/+page.svelte
 msgid ""
 "This allows the community to signal their sentiment on governance proposals before or after\n"
@@ -6773,54 +6060,99 @@ msgstr ""
 msgid "Community Sentiment"
 msgstr ""
 
-#: src/lib/components/sentiment/MsigVoteButtons.svelte
-#: src/lib/components/sentiment/msigVoteButtons.svelte
-msgid "I support this proposal"
-msgstr ""
-
-#: src/lib/components/sentiment/MsigVoteButtons.svelte
-#: src/lib/components/sentiment/msigVoteButtons.svelte
-msgid "I oppose this proposal"
-msgstr ""
-
-#: src/lib/components/sentiment/MsigVoteButtons.svelte
-#: src/lib/components/sentiment/msigVoteButtons.svelte
-msgid "Do you support or oppose this proposal?"
-msgstr ""
-
 #. placeholder {0}: votes.length
 #. placeholder {1}: pagination.total
-#. placeholder {0}: votes.length
-#. placeholder {1}: pagination.total
-#: src/lib/components/sentiment/participantList.svelte
 #: src/lib/components/sentiment/participantList.svelte
 msgid "Showing {0} of {1} participants"
 msgstr ""
 
 #. placeholder {0}: pagination.total - votes.length
-#. placeholder {0}: pagination.total - votes.length
-#: src/lib/components/sentiment/participantList.svelte
 #: src/lib/components/sentiment/participantList.svelte
 msgid "Load More ({0} remaining)"
 msgstr ""
 
 #. placeholder {0}: itemType
 #. placeholder {0}: itemType
-#: src/lib/components/sentiment/VoteButtons.svelte
 #: src/lib/components/sentiment/voteButtons.svelte
 msgid "I support this {0}"
 msgstr ""
 
 #. placeholder {0}: itemType
 #. placeholder {0}: itemType
-#: src/lib/components/sentiment/VoteButtons.svelte
 #: src/lib/components/sentiment/voteButtons.svelte
 msgid "I oppose this {0}"
 msgstr ""
 
 #. placeholder {0}: itemType
 #. placeholder {0}: itemType
-#: src/lib/components/sentiment/VoteButtons.svelte
 #: src/lib/components/sentiment/voteButtons.svelte
 msgid "Do you support or oppose this {0}?"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "This network uses Delegated Proof of Stake (DPoS), a consensus mechanism where token holders elect block producers to validate transactions and secure the network. Your vote directly shapes who runs the infrastructure you depend on."
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Transaction Validation"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "The block producers verify and process every transaction on the network"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Block Production"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Every 0.5 seconds, block producers bundle transactions into blocks"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Infrastructure Maintenance"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "These block producers provide servers, bandwidth, and storage that keep the network running 24/7"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Network Governance"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Block Producers vote on protocol upgrades and critical network decisions"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Your vote weight equals the amount of tokens you have staked. More stake = more voting power."
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Submit <0>Vote</0>"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "Rank"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+layout.ts
+msgid "No block found."
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+layout.ts
+msgid "Block"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/key/[publicKey]/+page.ts
+msgid "No accounts found for this public key."
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.ts
+msgid "No multisig proposal found."
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.ts
+msgid "Multisig Proposal"
 msgstr ""

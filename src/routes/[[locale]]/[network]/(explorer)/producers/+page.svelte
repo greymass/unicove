@@ -573,7 +573,6 @@
 											href={producer.url}
 											blank={true}
 											class="text-muted hidden @lg:grid"
-											target="_blank"
 										/>
 									{/if}
 								</div>

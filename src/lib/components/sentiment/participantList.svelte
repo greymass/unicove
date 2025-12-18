@@ -6,7 +6,7 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { VoteWithWeight, SentimentStatistics } from '$lib/types/sentiment';
 	import AssetText from '$lib/components/elements/asset.svelte';
-	import StatCard from '$lib/components/sentiment/statCard.svelte';
+	import StatCard from '$lib/components/sentiment/StatCard.svelte';
 
 	interface Props {
 		votes: VoteWithWeight[];

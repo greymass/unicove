@@ -3,7 +3,7 @@
 	import { getContext } from 'svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { MsigWithStats } from '$lib/types/sentiment';
-	import SentimentMeter from './sentimentMeter.svelte';
+	import SentimentMeter from './SentimentMeter.svelte';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import AccountElement from '$lib/components/elements/account.svelte';
 

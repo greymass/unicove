@@ -1,13 +1,24 @@
+import { useLocale } from '$lib/utils/intl';
 import type { PageLoad } from './$types';
 import { error } from '@sveltejs/kit';
+import { TopicSentimentState } from '../state.svelte';
 
 export const load: PageLoad = async ({ parent, params }) => {
-	const { network, locale, sentiment } = await parent();
+	const { network, locale } = await parent();
 	const topicId = params.id;
 
+	await useLocale(locale);
+
 	if (!topicId) {
-		throw error(404, 'Topic not found');
+		throw error(404, {
+			message: 'Topic not found',
+			code: 'NOT_FOUND',
+			title: params.id,
+			subtitle: 'Topic'
+		});
 	}
+
+	const sentiment = new TopicSentimentState(network, locale);
 
 	try {
 		await Promise.all([sentiment.loadTopic(topicId), sentiment.loadTopicVotes(topicId)]);
@@ -17,13 +28,18 @@ export const load: PageLoad = async ({ parent, params }) => {
 	}
 
 	if (!sentiment.currentTopic) {
-		throw error(404, 'Topic not found');
+		throw error(404, {
+			message: 'Topic not found',
+			code: 'NOT_FOUND',
+			title: params.id,
+			subtitle: 'Topic'
+		});
 	}
 
 	return {
 		sentiment,
 		topicId,
-		backPath: `/${locale}/${params.network}/sentiment/topics`,
+		backPath: `/${locale}/${params.network}/topics`,
 		title: sentiment.currentTopic.topic.id,
 		subtitle: `Last updated ${new Date(sentiment.currentTopic.topic.lastUpdated).toLocaleString()}`,
 		pageMetaTags: {

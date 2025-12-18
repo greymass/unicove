@@ -127,7 +127,7 @@ codegen/base:
 	$(BIN)/wharfkit generate -u $(PUBLIC_API_CHAIN) -f ./configs/contracts/unicove.api.ts $(PUBLIC_FEATURE_UNICOVE_CONTRACT_API)
 	$(BIN)/wharfkit generate -u https://eos.greymass.com -f ./configs/contracts/eosio.rex.ts eosio.rex
 	$(BIN)/wharfkit generate -u https://eos.greymass.com -f ./configs/contracts/eosio.wram.ts eosio.wram
-	$(BIN)/wharfkit generate -u https://eos.greymass.com -f ./configs/contracts/sentiment.ts sentiment.gm
+	$(BIN)/wharfkit generate -u https://jungle4.greymass.com -f ./configs/contracts/sentiment.ts sentiment.gm
 	make format
 
 .PHONY: clean
