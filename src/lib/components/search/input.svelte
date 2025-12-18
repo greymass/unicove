@@ -1,18 +1,15 @@
 <script lang="ts">
-	import { getContext, type ComponentProps } from 'svelte';
+	import { getContext, onDestroy, type ComponentProps } from 'svelte';
 	import { createDialog, melt, type CreateDialogProps } from '@melt-ui/svelte';
 	import type { TextInput } from 'unicove-components';
 	import { preventDefault } from '$lib/utils';
 	import { fade, scale } from 'svelte/transition';
 	import {
-		SearchRecordType,
-		search,
-		isSearchBlock,
-		type SearchRecord,
-		isSearchAccount,
-		isSearchKey,
-		isSearchTransaction
-	} from '$lib/state/search.svelte';
+		defaultRegistry,
+		SearchManager,
+		type SearchActionPlugin,
+		type SearchRecord
+	} from '$lib/state/search';
 	import SearchIcon from '@lucide/svelte/icons/search';
 	import X from '@lucide/svelte/icons/x';
 	import { Stack } from 'unicove-components';
@@ -21,7 +18,6 @@
 	import { browser } from '$app/environment';
 	import { ArrowRight } from '@lucide/svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import type { SerializedSession } from '@wharfkit/session';
 	import { goto } from '$app/navigation';
 
 	const context = getContext<UnicoveContext>('state');
@@ -35,51 +31,20 @@
 	let searchValue: string = $state('');
 	let selectedIndex: number = $state(0);
 
-	let results: SearchRecord[] = $state(context.history.get());
+	// Create search manager to handle sync and async searches
+	const searchManager = new SearchManager(context);
 
+	// Cleanup on component unmount
+	onDestroy(() => {
+		searchManager.destroy();
+	});
+
+	// Derive results from manager
+	const results = $derived(searchManager.results);
+
+	// Update manager when search value changes
 	$effect(() => {
-		if (searchValue) {
-			search(context, searchValue).then((searchResults) => {
-				results = searchResults;
-			});
-		} else {
-			results = context.history.get();
-		}
-	});
-
-	const searchType = $derived.by(() => {
-		// Priority to determine the type of search
-		if (isSearchKey(searchValue)) {
-			return SearchRecordType.KEY;
-		}
-		if (isSearchTransaction(searchValue)) {
-			return SearchRecordType.TRANSACTION;
-		}
-		if (isSearchAccount(searchValue)) {
-			return SearchRecordType.ACCOUNT;
-		}
-		if (isSearchBlock(searchValue)) {
-			return SearchRecordType.BLOCK;
-		}
-		return SearchRecordType.PAGE;
-	});
-
-	const result = $derived.by(() => {
-		switch (searchType) {
-			case SearchRecordType.ACCOUNT:
-				return `/${context.network}/account/${searchValue}`;
-			case SearchRecordType.BLOCK:
-				return `/${context.network}/block/${searchValue}`;
-			case SearchRecordType.KEY:
-				return `/${context.network}/key/${searchValue}`;
-			case SearchRecordType.TRANSACTION:
-				return `/${context.network}/transaction/${searchValue}`;
-			case SearchRecordType.PAGE:
-				return `/${context.network}/${searchValue}`;
-			default:
-				console.warn('unknown search type', searchType);
-				return null;
-		}
+		searchManager.setQuery(searchValue);
 	});
 
 	const resetSelectedIndex: CreateDialogProps['onOpenChange'] = ({ next }) => {
@@ -147,32 +112,41 @@
 			return;
 		}
 
-		// Clear the search history and keep search open, resetting
-		if (result.type === SearchRecordType.CLEAR) {
-			context.history.clear();
-			searchValue = '';
+		// Check if this is an action (CLEAR, PAGE, etc.)
+		if (result.data && typeof result.data === 'object' && 'execute' in result.data) {
+			const action = result.data as SearchActionPlugin;
+			await action.execute(context);
+			// Check if action has onSelect handler that wants to keep dialog open
+			const keepOpen = action.onSelect?.(context);
+			if (keepOpen) {
+				searchValue = '';
+				return;
+			}
+			closeSearch();
 			return;
 		}
 
+		// Get the plugin for this result type
+		const plugin = defaultRegistry.getResultPlugin(result.type);
+
+		// Call onSelect handler if present
+		if (plugin?.onSelect) {
+			const keepOpen = plugin.onSelect(result, context);
+			if (keepOpen) {
+				return; // Keep dialog open
+			}
+		}
+
+		// Close search for normal navigation
 		closeSearch();
 
-		// Switch accounts if this is a request to switch
-		if ([SearchRecordType.SWITCH].includes(result.type)) {
-			context.wharf.switch(result.data as SerializedSession);
-			// Navigate if needed
-			if (!context.settings.data.preventAccountPageSwitching) {
-				goto(result.url);
-			}
-			return;
-		}
-
-		// Should this result type be saved in history?
-		if (![SearchRecordType.SWITCH, SearchRecordType.UNKNOWN].includes(result.type)) {
+		// Check if this result type should be saved to history (default: false)
+		if (plugin?.savesToHistory) {
 			context.history.add(result);
 		}
 
-		// Should this result type navigate to the URL?
-		if (![SearchRecordType.SWITCH, SearchRecordType.UNKNOWN].includes(result.type)) {
+		// Navigate to the URL if present
+		if (result.url) {
 			goto(result.url);
 		}
 	}
@@ -194,7 +168,7 @@
 			if (platform.startsWith('mac')) return '⌘ + K';
 		} else {
 			// Fallback for older browsers
-			if (navigator.userAgent.indexOf('Mac') != -1) return '⌘ + K';
+			if (navigator.userAgent.indexOf('Mac') !== -1) return '⌘ + K';
 		}
 
 		return '/';
@@ -206,8 +180,7 @@
 		$inspect({
 			selectedIndex,
 			searchValue,
-			searchType,
-			result,
+			results,
 			open: $open
 		});
 	}
@@ -247,7 +220,7 @@
 		></div>
 		<div
 			use:melt={$content}
-			class="bg-surface-container fixed top-20 left-1/2 z-50 max-h-[85vh] w-[90vw] max-w-lg -translate-x-1/2 transform overflow-hidden rounded-2xl p-4 shadow-lg"
+			class="bg-surface-container fixed top-20 left-1/2 z-50 max-h-[85vh] w-[90vw] max-w-xl -translate-x-1/2 transform overflow-hidden rounded-2xl p-4 shadow-lg"
 			transition:scale={{
 				duration: 100,
 				start: 0.95

@@ -16,7 +16,7 @@
 	import { AccountValueState, NetworkValueState } from '$lib/state/value.svelte.js';
 	import { MarketState } from '$lib/state/market.svelte.js';
 	import { ProducersState } from '$lib/state/producers.svelte.js';
-	import { SearchRecordStorage } from '$lib/state/search.svelte.js';
+	import { SearchRecordStorage } from '$lib/state/search';
 	import { SettingsState } from '$lib/state/settings.svelte.js';
 	import { WharfState } from '$lib/state/client/wharf.svelte.js';
 	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte';
