@@ -1,4 +1,4 @@
-import { ReceiptText } from '@lucide/svelte';
+import { Code } from '@lucide/svelte';
 
 import type { SearchResultPlugin } from '../types';
 import { isSearchAccount } from '../validators';
@@ -18,7 +18,7 @@ export const ContractPlugin: SearchResultPlugin = {
 	savesToHistory: true,
 
 	ui: {
-		icon: ReceiptText,
+		icon: Code,
 		formatDescription: () => 'View contract'
 	}
 };

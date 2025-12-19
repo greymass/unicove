@@ -11,7 +11,8 @@ export const ClearAction: SearchActionPlugin = {
 	priority: 1000,
 
 	keywords: ['clear', 'history'],
-	description: 'Clear search history',
+	value: 'Clear search history',
+	description: 'Take Action',
 
 	execute: (context) => {
 		context.history.clear();

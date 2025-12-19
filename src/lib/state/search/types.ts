@@ -90,6 +90,8 @@ export interface SearchActionPlugin {
 	enabled?: (context: UnicoveContext) => boolean;
 	/** Keywords that trigger this action in search */
 	keywords: string[];
+	/** Display value shown in search results */
+	value: string;
 	/** Description shown in search results */
 	description: string;
 	/** Execute the action */

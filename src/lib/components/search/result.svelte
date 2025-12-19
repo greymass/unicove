@@ -59,7 +59,7 @@
 	href={record.url}
 	{onclick}
 >
-	<div class="table-cell-styles ml-2 flex items-center gap-2 font-mono tabular-nums">
+	<div class="ml-2 flex items-center gap-2 font-mono text-nowrap tabular-nums">
 		{#if Icon}
 			<Icon class="size-4" />
 		{/if}

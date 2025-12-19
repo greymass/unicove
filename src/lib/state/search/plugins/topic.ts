@@ -66,6 +66,6 @@ export const TopicPlugin: SearchResultPlugin = {
 
 	ui: {
 		icon: Scale,
-		formatDescription: (record) => record.description || 'View topic'
+		formatDescription: () => 'View topic'
 	}
 };

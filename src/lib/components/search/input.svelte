@@ -278,7 +278,7 @@
 					</div>
 				</form>
 
-				<div class="table-styles grid grid-cols-[1fr_1fr] gap-x-4 sm:grid-cols-[1fr_1fr_auto]">
+				<div class="table-styles grid grid-cols-[1fr_1fr] gap-x-4 sm:grid-cols-[1fr_auto_auto]">
 					{#if results.length > 0}
 						<div class="table-head-styles col-span-full grid grid-cols-subgrid select-none">
 							{#if searchValue}
@@ -286,7 +286,7 @@
 							{:else}
 								<span class="pl-2">Recent Activity</span>
 							{/if}
-							<span class="text-right sm:text-left">Action</span>
+							<span class="text-right sm:text-left">Description</span>
 							{#if !searchValue}
 								<button
 									class="focus-visible:outline-solar-500 hidden justify-self-end focus-visible:outline focus-visible:outline-offset-2 sm:block"
@@ -330,7 +330,7 @@
 {#snippet ResultRow(index: number, item: SearchRecord)}
 	{@const active = index === selectedIndex}
 	<li
-		class="group/row group-has-[:hover]/list:text-muted hover:group-has-[:hover]/list:bg-surface-container-high hover:group-has-[:hover]/list:text-on-surfac data-[active=true]:bg-surface-container-high data-[active=true]:text-on-surface col-span-full grid h-12 grid-cols-subgrid items-center justify-items-start rounded-lg group-has-[:hover]/list:bg-transparent focus:outline-hidden"
+		class="group/row group-has-[:hover]/list:text-muted hover:group-has-[:hover]/list:bg-surface-container-high hover:group-has-[:hover]/list:text-on-surface data-[active=true]:bg-surface-container-high data-[active=true]:text-on-surface col-span-full grid h-12 grid-cols-subgrid items-center justify-items-start rounded-lg group-has-[:hover]/list:bg-transparent focus:outline-hidden"
 		data-active={active}
 	>
 		<Result class="col-span-2 sm:col-span-3" {active} record={item} onclick={closeSearch}>

@@ -108,7 +108,7 @@ export class SearchPluginRegistry {
 			)
 			.map((action) => ({
 				type: action.name,
-				value: action.description,
+				value: action.value,
 				description: action.description,
 				url: '', // Actions don't navigate via URL
 				data: action // Store the action for later execution
