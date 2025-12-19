@@ -2,7 +2,7 @@
 	import { getContext } from 'svelte';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { Button, Label, Stack, Switch } from 'unicove-components';
+	import { Button, Card, Label, Stack, Switch } from 'unicove-components';
 	import type { CreateSwitchProps } from '@melt-ui/svelte';
 
 	import ProposalCard from '../components/ProposalCard.svelte';
@@ -11,6 +11,7 @@
 	import ProposalsHeader from '../components/ProposalsHeader.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { SettingKeys } from '$lib/state/settings.svelte';
+	import { TriangleAlert, TriangleAlertIcon } from '@lucide/svelte';
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');
@@ -133,6 +134,18 @@
 			<StatusFilter value={currentStatus} onchange={handleStatusChange} />
 		</div>
 	</ProposalsHeader>
+
+	{#if isOwnAccount}
+		<Card class="border-warning grid gap-2 border-2 bg-transparent">
+			<span class="text-title text-warning"> Security Warning </span>
+			<p class="text-warning text-pretty">
+				Anyone can create a proposal for anything — including proposals that can compromise your
+				account or assets.
+				<strong>Do not sign a multisig if you're unsure of exactly what it does.</strong>
+				Do not trust random messages asking you to sign these proposals.
+			</p>
+		</Card>
+	{/if}
 
 	{#if data.error}
 		<div class="text-error">Failed to load proposals: {data.error}</div>
