@@ -150,6 +150,28 @@ export class SearchManager {
 	}
 
 	/**
+	 * Clear search history and refresh results
+	 */
+	clearHistory(): void {
+		this.context.history.clear();
+		// Refresh results to reflect the cleared history
+		if (!this.query) {
+			this.results = [];
+		}
+	}
+
+	/**
+	 * Remove a single history item by index and refresh results
+	 */
+	removeHistoryItem(index: number): void {
+		this.context.history.remove(index);
+		// Refresh results to reflect the updated history
+		if (!this.query) {
+			this.results = this.context.history.get();
+		}
+	}
+
+	/**
 	 * Clean up resources
 	 */
 	destroy(): void {

@@ -257,7 +257,7 @@
 							{#if !searchValue}
 								<button
 									class="focus-visible:outline-solar-500 hidden justify-self-end focus-visible:outline focus-visible:outline-offset-2 sm:block"
-									onclick={() => context.history.clear()}
+									onclick={() => searchManager.clearHistory()}
 								>
 									Clear
 								</button>
@@ -320,7 +320,7 @@
 		<Result class="col-span-2 sm:col-span-2" {active} record={item} onclick={closeSearch}></Result>
 		<button
 			class="text-muted focus-visible:ring-solar-500 hover:text-on-surface grid hidden size-12 place-items-center justify-self-end focus-visible:ring-3 focus-visible:outline-hidden focus-visible:ring-inset sm:block"
-			onclick={() => context.history.remove(index)}
+			onclick={() => searchManager.removeHistoryItem(index)}
 		>
 			<X class="text-inherit" />
 		</button>
