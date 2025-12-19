@@ -42,11 +42,18 @@ export const MsigPlugin: SearchResultPlugin = {
 				}
 
 				searchDebug('Msig Search', `Found ${response.proposals.length} results for: "${query}"`);
-				return response.proposals.map((proposal: Proposal) => ({
-					type: 'msig',
-					value: `${proposal.proposer}:${proposal.proposal_name}`,
-					url: urlPath(`/${network}/msig/${proposal.proposer}/${proposal.proposal_name}`)
-				}));
+				return response.proposals
+					.sort((a, b) => {
+						// Sort by created_at, newest first
+						const dateA = new Date(String(a.created_at)).getTime();
+						const dateB = new Date(String(b.created_at)).getTime();
+						return dateB - dateA;
+					})
+					.map((proposal: Proposal) => ({
+						type: 'msig',
+						value: `${proposal.proposer}:${proposal.proposal_name}`,
+						url: urlPath(`/${network}/msig/${proposal.proposer}/${proposal.proposal_name}`)
+					}));
 			} catch (error) {
 				if (error instanceof Error && error.name === 'AbortError') {
 					searchDebug('Msig Search', `Request aborted for: "${query}"`);
