@@ -11,7 +11,7 @@ import { isSearchAccount } from '../validators';
  */
 export const MsigPlugin: SearchResultPlugin = {
 	name: 'msig',
-	priority: 100,
+	priority: 60,
 
 	enabled: (context) => !!context.network.msigs,
 

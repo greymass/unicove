@@ -29,6 +29,6 @@ export const defaultResultPlugins: SearchResultPlugin[] = [
 	BlockPlugin, // priority: 20
 	KeyPlugin, // priority: 30
 	TransactionPlugin, // priority: 40
-	TopicPlugin, // priority: 60
-	MsigPlugin // priority: 100
+	TopicPlugin, // priority: 50
+	MsigPlugin // priority: 60
 ];

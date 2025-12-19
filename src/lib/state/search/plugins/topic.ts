@@ -9,7 +9,7 @@ import type { SearchResultPlugin } from '../types';
  */
 export const TopicPlugin: SearchResultPlugin = {
 	name: 'topic',
-	priority: 60,
+	priority: 50,
 
 	enabled: (context) => context.network.config.features.sentiment,
 

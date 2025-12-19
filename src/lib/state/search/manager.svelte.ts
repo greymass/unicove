@@ -99,7 +99,7 @@ export class SearchManager {
 						// Only update if not aborted and query still matches
 						if (!controller.signal.aborted && query === this.query) {
 							searchDebug(plugin.name, `Appending ${pluginResults.length} results for: "${query}"`);
-							this.results = [...this.results, ...pluginResults];
+							this.results = this.sortResultsByPriority([...this.results, ...pluginResults]);
 						} else {
 							searchDebug(
 								plugin.name,
@@ -117,6 +117,19 @@ export class SearchManager {
 					});
 			}
 		);
+	}
+
+	/**
+	 * Sort search results by plugin priority
+	 */
+	private sortResultsByPriority(results: SearchRecord[]): SearchRecord[] {
+		return results.sort((a, b) => {
+			const pluginA = this.registry.getResultPlugin(a.type);
+			const pluginB = this.registry.getResultPlugin(b.type);
+			const priorityA = pluginA?.priority ?? 999;
+			const priorityB = pluginB?.priority ?? 999;
+			return priorityA - priorityB;
+		});
 	}
 
 	/**
