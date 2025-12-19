@@ -239,9 +239,42 @@
 							placeholder="Search Unicove"
 							class="border-primary w-full rounded-lg border-2 bg-transparent p-4 focus:outline-hidden"
 						/>
-						<div class="text-muted absolute inset-y-1 right-4 hidden place-items-center sm:grid">
-							<SearchIcon class="size-5 " />
-						</div>
+
+						{#if searchManager.isLoading}
+							<div class="absolute inset-y-1 right-4 hidden place-items-center sm:grid">
+								<svg
+									class="animate-spin"
+									width="20"
+									height="20"
+									viewBox="0 0 20 20"
+									xmlns="http://www.w3.org/2000/svg"
+								>
+									<!-- Background circle if wanted later  -->
+									<!-- <circle -->
+									<!-- 	cx="10" -->
+									<!-- 	cy="10" -->
+									<!-- 	r="9" -->
+									<!-- 	fill="none" -->
+									<!-- 	class="stroke-surface-container-highest" -->
+									<!-- 	stroke-width="2" -->
+									<!-- 	stroke-dasharray="56.55 18.85" -->
+									<!-- 	stroke-dashoffset="0" -->
+									<!-- /> -->
+
+									<circle
+										class="stroke-primary"
+										cx="10"
+										cy="10"
+										r="9"
+										fill="none"
+										stroke-width="2"
+										stroke-dasharray="14.14 56.55"
+										stroke-dashoffset="0"
+										transform="rotate(-90 10 10)"
+									/>
+								</svg>
+							</div>
+						{/if}
 					</div>
 				</form>
 
