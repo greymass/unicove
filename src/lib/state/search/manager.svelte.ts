@@ -1,6 +1,7 @@
 import { Debounced, watch } from 'runed';
 
 import type { UnicoveContext } from '../client.svelte';
+import { SearchCache } from './cache';
 import { searchDebug } from './debug';
 import { defaultRegistry, type SearchPluginRegistry } from './registry';
 import { search } from './search';
@@ -20,6 +21,7 @@ export class SearchManager {
 
 	private registry: SearchPluginRegistry;
 	private context: UnicoveContext;
+	private cache = new SearchCache();
 	private debouncedQueries = new Map<string, Debounced<string>>();
 	private controllers = new Map<string, AbortController>();
 
@@ -79,6 +81,29 @@ export class SearchManager {
 					return;
 				}
 
+				const cacheConfig = plugin.async?.cache;
+				const chainId = this.context.network.chain.id.toString();
+
+				// Check cache if enabled
+				if (cacheConfig?.enabled) {
+					const cached = this.cache.get(plugin.name, chainId, query);
+
+					if (cached) {
+						// Show cached results immediately
+						searchDebug(plugin.name, `Showing cached results for: "${query}"`);
+						this.results = this.dedupeAndSortResults([...this.results, ...cached]);
+
+						// If fresh, skip API call
+						if (!this.cache.isStale(plugin.name, chainId, query)) {
+							searchDebug(plugin.name, `Using fresh cache for: "${query}"`);
+							return;
+						}
+
+						// Stale cache - continue to fetch in background (SWR)
+						searchDebug(plugin.name, `Stale cache, revalidating: "${query}"`);
+					}
+				}
+
 				// Cancel previous request for this plugin
 				const existingController = this.controllers.get(plugin.name);
 				if (existingController) {
@@ -98,8 +123,16 @@ export class SearchManager {
 					.then((pluginResults) => {
 						// Only update if not aborted and query still matches
 						if (!controller.signal.aborted && query === this.query) {
-							searchDebug(plugin.name, `Appending ${pluginResults.length} results for: "${query}"`);
-							this.results = this.sortResultsByPriority([...this.results, ...pluginResults]);
+							searchDebug(plugin.name, `Received ${pluginResults.length} results for: "${query}"`);
+
+							// Store in cache if enabled
+							if (cacheConfig?.enabled) {
+								this.cache.set(plugin.name, chainId, query, pluginResults);
+							}
+
+							// Replace old results from this plugin with fresh ones (Option A)
+							const filteredResults = this.results.filter((r) => r.type !== plugin.name);
+							this.results = this.dedupeAndSortResults([...filteredResults, ...pluginResults]);
 						} else {
 							searchDebug(
 								plugin.name,
@@ -120,10 +153,20 @@ export class SearchManager {
 	}
 
 	/**
-	 * Sort search results by plugin priority
+	 * Deduplicate results by URL and sort by plugin priority.
+	 * Keeps first occurrence when duplicates are found.
 	 */
-	private sortResultsByPriority(results: SearchRecord[]): SearchRecord[] {
-		return results.sort((a, b) => {
+	private dedupeAndSortResults(results: SearchRecord[]): SearchRecord[] {
+		// First deduplicate by URL
+		const seen = new Set<string>();
+		const deduped = results.filter((r) => {
+			if (seen.has(r.url)) return false;
+			seen.add(r.url);
+			return true;
+		});
+
+		// Then sort by plugin priority
+		return deduped.sort((a, b) => {
 			const pluginA = this.registry.getResultPlugin(a.type);
 			const pluginB = this.registry.getResultPlugin(b.type);
 			const priorityA = pluginA?.priority ?? 999;

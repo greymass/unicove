@@ -28,6 +28,9 @@ export const MsigPlugin: SearchResultPlugin = {
 	async: {
 		debounceMs: 300,
 		minQueryLength: 2,
+		cache: {
+			enabled: true
+		},
 		search: async (query, context, signal) => {
 			const { network, urlPath } = context;
 			try {

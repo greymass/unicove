@@ -45,6 +45,13 @@ export interface SearchResultPlugin {
 			context: UnicoveContext,
 			signal?: AbortSignal
 		) => Promise<SearchRecord[]>;
+		/** Cache configuration (opt-in) */
+		cache?: {
+			/** Enable caching for this plugin */
+			enabled: boolean;
+			/** Custom TTL in milliseconds (default: 300000 = 5 minutes) */
+			ttlMs?: number;
+		};
 	};
 	/** Whether results should be saved to history (default: false) */
 	savesToHistory?: boolean;
