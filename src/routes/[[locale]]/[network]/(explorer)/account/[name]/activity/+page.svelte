@@ -4,14 +4,16 @@
 
 	import { ActivityLoader } from './state.svelte.js';
 	import { getActionSummaryComponent } from '$lib/components/summary/index.js';
-	import { Button } from 'unicove-components';
+	import { Button, Card, Stack, NameInput } from 'unicove-components';
 	import SelectActionVariant from '$lib/components/select/actionvariant.svelte';
 	import Trace from '$lib/components/elements/trace.svelte';
+	import Transaction from '$lib/components/elements/transaction.svelte';
+	import Contract from '$lib/components/elements/contract.svelte';
+	import GenericSummary from '$lib/components/summary/generic.svelte';
 	import type { ActionDisplayVariants } from '$lib/types.js';
 	import type { ActivityResponseAction } from '$lib/types/transaction.js';
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
-	import { Stack } from 'unicove-components';
-	import { NameInput } from 'unicove-components';
+	import { formatDateTime } from '$lib/utils/intl';
 
 	const { data } = $props();
 
@@ -54,18 +56,14 @@
 	let variant = $derived(context.settings.data.actionDisplayVariant as ActionDisplayVariants);
 
 	let contractInput: NameInput | undefined = $state();
-	let contractRef: HTMLInputElement | undefined = $state();
 	let contractValid = $state(false);
 	let contractFilter = $state(Name.from(''));
 
 	let actionInput: NameInput | undefined = $state();
-	let actionRef: HTMLInputElement | undefined = $state();
 	let actionValid = $state(false);
 	let actionFilter = $state(Name.from(''));
 
-	const filterable = $derived.by(() => {
-		return contractValid && actionValid;
-	});
+	const filterable = $derived(contractValid);
 
 	function filter() {
 		activityLoader.scene.reset();
@@ -86,36 +84,70 @@
 		activityLoader.setAction('');
 		activityLoader.load();
 	}
+
+	function handleKeyPress(event: KeyboardEvent) {
+		if (event.key === 'Enter' && filterable) {
+			filter();
+		}
+	}
 </script>
 
 <Stack class="py-4">
-	{#if data.network.supports('hyperion')}
-		<div class="flex gap-2">
-			<NameInput
-				class="flex-1"
-				bind:this={contractInput}
-				bind:ref={contractRef}
-				bind:value={contractFilter}
-				bind:valid={contractValid}
-				id="contract-input"
-				placeholder="Contract"
-			/>
-			<NameInput
-				class="flex-1"
-				bind:this={actionInput}
-				bind:ref={actionRef}
-				bind:value={actionFilter}
-				bind:valid={actionValid}
-				placeholder="Action"
-			/>
-			<Button class="max-w-32 flex-0" onclick={filter} disabled={!filterable}>Filter</Button>
-			<Button class="max-w-32 flex-0" onclick={reset} disabled={!activityLoader.filtering}
-				>Reset</Button
-			>
+	{#if data.network.supports('robo')}
+		<div class="flex flex-col gap-2 md:flex-row">
+			<div class="flex w-full gap-2 md:w-auto md:flex-1">
+				<NameInput
+					class="flex-1"
+					bind:this={contractInput}
+					bind:value={contractFilter}
+					bind:valid={contractValid}
+					id="contract-input"
+					placeholder="Contract"
+					onkeypress={handleKeyPress}
+				/>
+				<NameInput
+					class="flex-1"
+					bind:this={actionInput}
+					bind:value={actionFilter}
+					bind:valid={actionValid}
+					placeholder="Action"
+					onkeypress={handleKeyPress}
+				/>
+			</div>
+			<div class="flex w-full gap-2 md:w-auto">
+				<Button class="flex-1 md:max-w-32 md:flex-none" onclick={filter} disabled={!filterable}
+					>Filter</Button
+				>
+				<Button
+					class="flex-none px-3 md:max-w-32"
+					onclick={reset}
+					disabled={!activityLoader.filtering}
+					title="Reset"
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="16"
+						height="16"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+					>
+						<path d="M18 6 6 18" />
+						<path d="m6 6 12 12" />
+					</svg>
+				</Button>
+			</div>
 		</div>
 		{#if activityLoader.filtering}
 			<p>
-				Filtering to display {actionFilter} on the {contractFilter} contract.
+				{#if actionFilter && !actionFilter.equals(Name.from(''))}
+					Filtering to display {actionFilter} on the {contractFilter} contract.
+				{:else}
+					Filtering to display all actions on the {contractFilter} contract.
+				{/if}
 			</p>
 		{/if}
 	{/if}
@@ -125,30 +157,106 @@
 			<div class="bounce bounce-2 h-3 w-3 rounded-full bg-white"></div>
 			<div class="bounce bounce-3 h-3 w-3 rounded-full bg-white"></div>
 		</div>
-	{/if}
-	{#if activityActions.length}
+	{:else if !activityActions.length}
+		<div class="flex items-center justify-center py-20">
+			<p class="text-center text-gray-400">
+				{#if activityLoader.filtering}
+					No actions found matching the filter criteria.
+				{:else}
+					No activity found for this account.
+				{/if}
+			</p>
+		</div>
+	{:else}
 		<SelectActionVariant />
-		<ol class="grid gap-12">
-			{#each activityActions as activityAction}
-				{@const contract = String(activityAction.trace.action.account)}
-				{@const action = String(activityAction.trace.action.name)}
-				{@const summary = getActionSummaryComponent(
-					contract,
-					action,
-					activityAction.trace.act.data
-				)}
-				<li class="">
-					<Trace
-						perspectiveOf={Name.from(data.name)}
-						trace={activityAction.trace}
-						{summary}
-						date
-						trxid
-						{variant}
-					/>
-				</li>
-			{/each}
-		</ol>
+		{#if variant === 'table'}
+			<Card class="p-0">
+				<div class="w-full">
+					<div class="bg-surface-container-low border-outline-variant hidden border-b md:flex">
+						<div class="p-3 text-left text-sm font-semibold md:w-48 md:shrink-0">Date / TX</div>
+						<div class="p-3 text-left text-sm font-semibold md:w-48 md:shrink-0">
+							Contract / Action
+						</div>
+						<div class="p-3 text-left text-sm font-semibold md:flex-1">Data</div>
+					</div>
+					<div class="flex flex-col">
+						{#each activityActions as activityAction}
+							{@const contract = String(activityAction.trace.action.account)}
+							{@const action = String(activityAction.trace.action.name)}
+							{@const datetime = activityAction.trace.block_time.toDate()}
+							{@const trxId = activityAction.trace.trx_id}
+							{@const summary = getActionSummaryComponent(
+								contract,
+								action,
+								activityAction.trace.act.data
+							)}
+							<div
+								class="border-outline-variant hover:bg-surface-container-high flex flex-row flex-wrap gap-y-2 border-b p-3 last:border-0 md:flex-nowrap md:items-center md:gap-0 md:p-0"
+							>
+								<div class="flex w-1/2 flex-col text-sm md:w-48 md:shrink-0 md:p-3">
+									<div class="whitespace-nowrap tabular-nums">
+										{formatDateTime(datetime, data.locale || 'en', {
+											dateStyle: 'short',
+											timeStyle: 'medium'
+										})}
+									</div>
+									<div class="text-on-surface-variant font-mono text-xs">
+										<Transaction id={trxId} />
+									</div>
+								</div>
+								<div
+									class="flex w-1/2 flex-col items-end text-right text-sm md:w-48 md:shrink-0 md:items-start md:p-3 md:text-left"
+								>
+									<div class="font-semibold">
+										<Contract name={Name.from(contract)} action={Name.from(action)}>
+											{action}
+										</Contract>
+									</div>
+									<div class="text-on-surface-variant text-xs">
+										<Contract name={Name.from(contract)}>
+											{contract}
+										</Contract>
+									</div>
+								</div>
+								<div class="w-full overflow-hidden text-sm md:flex-1 md:p-3">
+									{#if summary}
+										{@const SummaryComponent = summary}
+										<SummaryComponent
+											action={activityAction.trace.action}
+											data={activityAction.trace.act.data}
+										/>
+									{:else if activityAction.trace.act.data}
+										<GenericSummary data={activityAction.trace.act.data} />
+									{/if}
+								</div>
+							</div>
+						{/each}
+					</div>
+				</div>
+			</Card>
+		{:else}
+			<ol class="grid gap-12">
+				{#each activityActions as activityAction}
+					{@const contract = String(activityAction.trace.action.account)}
+					{@const action = String(activityAction.trace.action.name)}
+					{@const summary = getActionSummaryComponent(
+						contract,
+						action,
+						activityAction.trace.act.data
+					)}
+					<li class="">
+						<Trace
+							perspectiveOf={Name.from(data.name)}
+							trace={activityAction.trace}
+							{summary}
+							date
+							trxid
+							{variant}
+						/>
+					</li>
+				{/each}
+			</ol>
+		{/if}
 		{#if hasMore}
 			<Button onclick={clickLoadMore} variant="primary" class="place-self-center">
 				{loadingText}
