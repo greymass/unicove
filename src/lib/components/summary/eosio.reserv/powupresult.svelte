@@ -27,7 +27,7 @@
 	<Row>
 		<Chip>Resources</Chip>
 		{#if browser}
-			+ {(resources.cpu / 1000).toFixed(3)} ms (CPU)
+			+ {(Number(resources.cpu) / 1000).toFixed(3)} ms (CPU)
 		{:else}
 			Weight: {data.powup_cpu}
 		{/if}
@@ -38,7 +38,7 @@
 	<Row>
 		<Chip>Resources</Chip>
 		{#if browser}
-			+ {(resources.net / 1000).toFixed(3)} kb (NET)
+			+ {(Number(resources.net) / 1000).toFixed(3)} kb (NET)
 		{:else}
 			Weight: {data.powup_net}
 		{/if}

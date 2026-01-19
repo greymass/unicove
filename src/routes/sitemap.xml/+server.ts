@@ -13,7 +13,7 @@ export const GET: RequestHandler = async ({ request }) => {
 		const NETWORKS = ['vaulta']; // Add more as needed
 
 		// Pages to include per language-network combination
-		const baseRoutes = ['/', '/send', '/staking', '/ram', '/settings'];
+		const baseRoutes = ['/', '/send', '/staking', '/ram', '/governance', '/settings'];
 
 		// Expand routes
 		const pages: string[] = [];

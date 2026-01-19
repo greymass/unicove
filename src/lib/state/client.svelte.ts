@@ -1,6 +1,7 @@
 import type { AccountState } from './client/account.svelte';
 import type { NetworkState } from './network.svelte';
-import type { SearchRecordStorage } from './search.svelte';
+import type { ProducersState } from './producers.svelte';
+import type { SearchRecordStorage } from './search';
 import type { MarketState } from './market.svelte';
 import type { MetaMaskState } from './metamask.svelte';
 import type { SettingsState } from './settings.svelte';
@@ -12,6 +13,7 @@ export interface UnicoveContext {
 	history: SearchRecordStorage;
 	metamask: MetaMaskState;
 	network: NetworkState;
+	producers: ProducersState;
 	settings: SettingsState;
 	url: (url: string) => string;
 	urlPath: (path: string) => string;

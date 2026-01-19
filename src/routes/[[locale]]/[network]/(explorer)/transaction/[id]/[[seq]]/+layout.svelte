@@ -49,5 +49,5 @@
 
 <Stack class="@container gap-8">
 	<PillGroup {options} />
-	{@render children()}
+	{@render children?.()}
 </Stack>

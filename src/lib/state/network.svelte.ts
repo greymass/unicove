@@ -13,6 +13,7 @@ import {
 import { ChainDefinition } from '@wharfkit/common';
 import { RAMState, Resources as ResourceClient, REXState, PowerUpState } from '@wharfkit/resources';
 import { ABICache } from '@wharfkit/abicache';
+import { MsigsClient } from '@wharfkit/msigs';
 
 import {
 	NetworkDataSources,
@@ -41,6 +42,7 @@ import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphiora
 import { Contract as MSIGContract } from '$lib/wharf/contracts/msig';
 import { Contract as ReserveContract } from '$lib/wharf/contracts/eosio.reserv';
 import { Contract as REXContract } from '$lib/wharf/contracts/eosio.rex';
+import { Contract as SentimentContract } from '$lib/wharf/contracts/sentiment';
 import { Contract as SystemContract } from '$lib/wharf/contracts/system';
 import { Contract as TimeContract } from '$lib/wharf/contracts/eosntime';
 import { Contract as TokenContract } from '$lib/wharf/contracts/token';
@@ -52,7 +54,8 @@ import type { ObjectifiedActionData } from '$lib/types/transaction';
 import {
 	PUBLIC_FEATURE_METAMASK_SNAP_ORIGIN,
 	PUBLIC_FEATURE_UNICOVE_CONTRACT_API,
-	PUBLIC_FEATURE_VAULTA_CORE_CONTRACT
+	PUBLIC_FEATURE_VAULTA_CORE_CONTRACT,
+	PUBLIC_FEATURE_SENTIMENT_CONTRACT
 } from '$env/static/public';
 import { localizePath } from '$lib/utils/url';
 
@@ -63,6 +66,7 @@ export class NetworkState {
 	readonly config: ChainConfig;
 	readonly contracts: DefaultContracts;
 	readonly fetch = fetch;
+	readonly msigs: MsigsClient;
 	readonly snapOrigin?: string;
 	readonly resourceClient: ResourceClient;
 
@@ -110,6 +114,7 @@ export class NetworkState {
 			sampleAccount: 'eosio.reserv',
 			symbol: String(this.config.systemtoken.symbol)
 		});
+		this.msigs = new MsigsClient(this.client);
 		this.connection.endpoint = (this.client.provider as FetchProvider).url;
 
 		this.contracts = {
@@ -121,6 +126,10 @@ export class NetworkState {
 				client: this.client
 			}),
 			rex: new REXContract({
+				client: this.client
+			}),
+			sentiment: new SentimentContract({
+				account: PUBLIC_FEATURE_SENTIMENT_CONTRACT,
 				client: this.client
 			}),
 			system: new SystemContract({
@@ -269,6 +278,12 @@ export class NetworkState {
 		}
 		const asset = Asset.from(rex);
 		const { total_lendable, total_rex } = this.rex;
+
+		// Handle edge case where REX pool is empty (division by zero)
+		if (total_rex.units.equals(0)) {
+			return Asset.fromUnits(0, total_lendable.symbol);
+		}
+
 		const R1 = total_rex.units.adding(asset.units);
 		const S1 = Int128.from(R1).multiplying(total_lendable.units).dividing(total_rex.units);
 		const result = S1.subtracting(total_lendable.units);
@@ -287,8 +302,8 @@ export class NetworkState {
 		}
 		const powerup = PowerUpState.from(this.sources?.powerup);
 		return [
-			powerup.cpu.frac_by_ms(this.sources.sample, cpu),
-			powerup.net.frac_by_kb(this.sources.sample, net)
+			Number(powerup.cpu.frac_by_ms(this.sources.sample, cpu)),
+			Number(powerup.net.frac_by_kb(this.sources.sample, net))
 		];
 	};
 

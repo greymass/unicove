@@ -15,7 +15,9 @@ export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 	if (!response.ok || !json.abi.abi) {
 		return error(404, {
 			message: `No contract is currently deployed to the ${params.contract} account.`,
-			code: 'NOT_FOUND'
+			code: 'NOT_FOUND',
+			title: params.contract,
+			subtitle: 'Contract'
 		});
 	}
 	const abi: ABI = json.abi.abi;

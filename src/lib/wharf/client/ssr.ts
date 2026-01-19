@@ -16,7 +16,8 @@ const backendEndpoints: ChainEndpoints = {
 	history: env.BACKEND_API_HISTORY,
 	hyperion: env.BACKEND_API_HYPERION,
 	lightapi: env.BACKEND_API_LIGHTAPI,
-	metrics: env.BACKEND_API_METRICS
+	metrics: env.BACKEND_API_METRICS,
+	sentiment: env.BACKEND_API_SENTIMENT
 };
 
 function getMergedConfig(chain: string): ChainConfig {

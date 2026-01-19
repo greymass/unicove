@@ -7,6 +7,9 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
 	import Account from '$lib/components/elements/account.svelte';
 	import TransactForm from '$lib/components/transact/form.svelte';
+	import VoteButtons from '$lib/components/sentiment/voteButtons.svelte';
+	import TopicStats from '$lib/components/sentiment/topicStats.svelte';
+	import { MsigSentimentState } from '$lib/state/sentiment/msig.svelte';
 
 	import { ApprovalManager } from './manager.svelte';
 	import { goto, invalidateAll } from '$app/navigation';
@@ -20,22 +23,52 @@
 		manager.sync(data.network, context.wharf);
 	});
 
+	const sentimentState = $state(new MsigSentimentState(context.network, data.locale));
+	let userVote = $derived(sentimentState.currentUserVote?.vote_type ?? null);
+
+	// Disabling this temporarily
+	const enabled = false;
+
 	onMount(() => {
 		const interval = setInterval(() => {
 			invalidateAll();
 		}, 15000);
+
+		if (context.network.supports('sentiment')) {
+			sentimentState.loadMsig(data.proposal.proposer, data.proposal.name);
+			if (context.account) {
+				sentimentState.loadUserVote(
+					context.account.name,
+					data.proposal.proposer,
+					data.proposal.name
+				);
+			}
+		}
+
 		return () => {
 			clearInterval(interval);
 		};
 	});
 
-	const top21 = data.producers.splice(0, 21);
+	const top21 = data.producers.slice(0, 21);
 
 	async function cancel() {
 		await manager.cancel();
 		goto(`/${data.network}/account/${data.proposal.proposer}/proposals`, {
 			invalidateAll: true
 		});
+	}
+
+	async function handleVoteSuccess() {
+		if (context.account) {
+			await sentimentState.refreshMsigAndVotes(
+				data.proposal.proposer,
+				data.proposal.name,
+				false,
+				context.account.name,
+				true
+			);
+		}
 	}
 </script>
 
@@ -45,7 +78,7 @@
 	</div>
 {/snippet}
 
-<Stack class="mt-6">
+<Stack>
 	<Switcher class="items-start gap-6" threshold="40rem">
 		<Stack class="gap-4">
 			<h2 class="text-title">Requested Approvals</h2>
@@ -116,68 +149,92 @@
 			</table>
 		</Stack>
 
-		<Card class="@container" title="Multisig Details">
-			<TransactForm
-				id={manager.result?.resolved?.transaction.id}
-				error={manager.error}
-				onsuccess={Complete}
-				onfailure={Complete}
-			>
-				<Stack class="gap-4" id="details">
-					<DL>
-						<DLRow title="Proposer">
-							<DD>
-								<Account name={manager.proposal.proposer} />
-							</DD>
-						</DLRow>
-						<DLRow title="Proposal Name">
-							<DD>
-								{manager.proposal.name}
-							</DD>
-						</DLRow>
-						<DLRow title={manager.expired ? 'Expired' : 'Expiration'}>
-							<DD>
-								{manager.proposal.transaction.expiration} ({manager.expiresIn})
-							</DD>
-						</DLRow>
-						<DLRow title="Hash">
-							<DD>
-								{manager.proposal.hash}
-							</DD>
-						</DLRow>
-					</DL>
+		<Stack class="gap-4">
+			<h2 class="text-title">Multisig Details</h2>
 
-					{#if manager.userIsApprover}
-						{#if manager.userHasApproved}
-							<Button
-								variant="secondary"
-								onclick={() => manager.unapprove()}
-								disabled={context.wharf.transacting}>Unapprove</Button
-							>
-						{:else}
-							<Button
-								class="bg-success text-on-success"
-								variant="primary"
-								onclick={() => manager.approve()}
-								disabled={context.wharf.transacting}>Approve</Button
+			<Card class="@container pt-3">
+				<TransactForm
+					id={manager.result?.resolved?.transaction.id}
+					error={manager.error}
+					onsuccess={Complete}
+					onfailure={Complete}
+				>
+					<Stack class="gap-4" id="details">
+						<DL>
+							<DLRow title="Proposer">
+								<DD>
+									<Account name={manager.proposal.proposer} />
+								</DD>
+							</DLRow>
+							<DLRow title="Proposal Name">
+								<DD>
+									{manager.proposal.name}
+								</DD>
+							</DLRow>
+							<DLRow title={manager.expired ? 'Expired' : 'Expiration'}>
+								<DD>
+									{manager.proposal.transaction.expiration} ({manager.expiresIn})
+								</DD>
+							</DLRow>
+							<DLRow title="Hash">
+								<DD>
+									{manager.proposal.hash}
+								</DD>
+							</DLRow>
+						</DL>
+
+						{#if manager.userIsApprover}
+							{#if manager.userHasApproved}
+								<Button
+									variant="secondary"
+									onclick={() => manager.unapprove()}
+									disabled={context.wharf.transacting}>Unapprove</Button
+								>
+							{:else}
+								<Button
+									class="bg-success text-on-success"
+									variant="primary"
+									onclick={() => manager.approve()}
+									disabled={context.wharf.transacting}>Approve</Button
+								>
+							{/if}
+						{/if}
+
+						{#if manager.userIsProposer}
+							<Button variant="secondary" disabled={context.wharf.transacting} onclick={cancel}
+								>Cancel MSIG</Button
 							>
 						{/if}
-					{/if}
 
-					{#if manager.userIsProposer}
-						<Button variant="secondary" disabled={context.wharf.transacting} onclick={cancel}
-							>Cancel MSIG</Button
+						<Button
+							variant="primary"
+							disabled={context.wharf.transacting}
+							onclick={() => manager.execute()}>Execute</Button
 						>
-					{/if}
+					</Stack>
+				</TransactForm>
+			</Card>
 
-					<Button
-						variant="primary"
-						disabled={context.wharf.transacting}
-						onclick={() => manager.execute()}>Execute</Button
-					>
-				</Stack>
-			</TransactForm>
-		</Card>
+			{#if enabled && context.network.supports('sentiment') && sentimentState.currentMsig}
+				<h2 class="text-title">Community Sentiment</h2>
+				<Card class="@container">
+					<Stack class="gap-6">
+						<TopicStats
+							statistics={sentimentState.currentMsig.statistics}
+							loading={sentimentState.loadingStatistics}
+						/>
+
+						<VoteButtons
+							type="msig"
+							proposer={data.proposal.proposer}
+							proposalName={data.proposal.name}
+							currentVote={userVote}
+							onVoteSuccess={handleVoteSuccess}
+						/>
+					</Stack>
+				</Card>
+			{/if}
+		</Stack>
 	</Switcher>
 </Stack>
 

@@ -17,7 +17,12 @@ export const load: PageLoad = async ({ fetch, params, parent, url }) => {
 	const baseUrl = localizePath(`/api/token/${params.contract}/${params.symbol}?count=${count}`);
 	const response = await fetch(baseUrl);
 	if (!response.ok) {
-		return error(404, 'Token not found');
+		return error(404, {
+			message: 'Token not found',
+			code: 'NOT_FOUND',
+			title: `${params.contract}:${params.symbol}`,
+			subtitle: 'Token'
+		});
 	}
 	const json = await response.json();
 

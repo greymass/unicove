@@ -43,5 +43,5 @@
 />
 
 <div class="mt-8">
-	{@render children()}
+	{@render children?.()}
 </div>

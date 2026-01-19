@@ -6,6 +6,7 @@ import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphiora
 import { Contract as MSIGContract } from '$lib/wharf/contracts/msig';
 import { Contract as ReserveContract } from '$lib/wharf/contracts/eosio.reserv';
 import { Contract as REXContract } from '$lib/wharf/contracts/eosio.rex';
+import { Contract as SentimentContract } from '$lib/wharf/contracts/sentiment';
 import { Contract as SystemContract } from '$lib/wharf/contracts/system';
 import { Contract as TimeContract } from '$lib/wharf/contracts/eosntime';
 import { Contract as TokenContract } from '$lib/wharf/contracts/token';
@@ -144,14 +145,17 @@ export const chainConfig: ChainConfig = {
 		rentrex: isENVTrue(env.PUBLIC_FEATURE_RENTREX),
 		rex: isENVTrue(env.PUBLIC_FEATURE_REX),
 		robo: isENVTrue(env.PUBLIC_FEATURE_ROBO),
+		sentiment: isENVTrue(env.PUBLIC_FEATURE_SENTIMENT),
 		stakeresource: isENVTrue(env.PUBLIC_FEATURE_STAKERESOURCE),
 		staking: isENVTrue(env.PUBLIC_FEATURE_STAKING),
 		timeseries: isENVTrue(env.PUBLIC_FEATURE_TIMESERIES),
 		unicovecontractapi: !!env.PUBLIC_FEATURE_UNICOVE_CONTRACT_API,
-		wram: isENVTrue(env.PUBLIC_FEATURE_WRAM)
+		wram: isENVTrue(env.PUBLIC_FEATURE_WRAM),
+		msigapi: isENVTrue(env.PUBLIC_FEATURE_MSIGAPI)
 	},
 	metamask,
-	coinbase
+	coinbase,
+	voteDecay: Number(env.PUBLIC_FEATURE_VOTE_DECAY) || 52
 };
 
 export const chains = [chainConfig];
@@ -163,6 +167,7 @@ export interface DefaultContracts {
 	msig: MSIGContract;
 	reserve: ReserveContract;
 	rex: REXContract;
+	sentiment: SentimentContract;
 	system: SystemContract;
 	token: TokenContract;
 	unicove: UnicoveContract;
@@ -176,6 +181,7 @@ export interface ChainEndpoints {
 	hyperion?: string;
 	lightapi?: string;
 	metrics?: string;
+	sentiment?: string;
 }
 
 export interface ChainBackend {
@@ -208,6 +214,7 @@ export interface ChainConfig {
 	systemcontract: Name;
 	systemtoken: Token;
 	systemtokenalt: Asset.Symbol[];
+	voteDecay: number;
 }
 
 export type FeatureType =
@@ -226,11 +233,13 @@ export type FeatureType =
 	| 'rentrex'
 	| 'rex'
 	| 'robo'
+	| 'sentiment'
 	| 'stakeresource'
 	| 'staking'
 	| 'timeseries'
 	| 'unicovecontractapi'
-	| 'wram';
+	| 'wram'
+	| 'msigapi';
 
 export function getChainConfigByName(name: string): ChainConfig {
 	const chain = chains.find((c) => c.short === name);

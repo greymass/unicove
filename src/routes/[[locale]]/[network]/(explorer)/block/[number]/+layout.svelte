@@ -22,5 +22,5 @@
 		<PillGroup {options} />
 	{/if}
 
-	{@render children()}
+	{@render children?.()}
 </Stack>
