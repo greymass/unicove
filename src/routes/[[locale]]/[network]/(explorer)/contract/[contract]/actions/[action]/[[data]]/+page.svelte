@@ -53,6 +53,22 @@
 			{}
 		);
 
+	function isOptionalField(fieldName: string): boolean {
+		const parts = fieldName.split('->');
+		let fields = data.struct.fields;
+		for (let i = 0; i < parts.length; i++) {
+			const field = fields.find((f: ABI.Field) => f.name === parts[i]);
+			if (!field) return false;
+			if (i === parts.length - 1) {
+				return field.type.endsWith('?');
+			}
+			const struct = data.abi.structs.find((s: ABI.Struct) => s.name === field.type);
+			if (!struct) return false;
+			fields = struct.fields;
+		}
+		return false;
+	}
+
 	const restructured = $derived.by(() => {
 		if (Object.keys(actionInputs).length === 0) {
 			return {};
@@ -66,11 +82,16 @@
 				}
 				obj = obj[parts[i]];
 			}
-			try {
-				obj[parts[parts.length - 1]] = JSON.parse(actionInputs[key] as string);
-			} catch (e) {
-				console.warn('restructured error', e);
-				obj[parts[parts.length - 1]] = actionInputs[key];
+			const rawValue = actionInputs[key];
+			if (rawValue === '' && isOptionalField(key)) {
+				obj[parts[parts.length - 1]] = undefined;
+			} else {
+				try {
+					obj[parts[parts.length - 1]] = JSON.parse(rawValue as string);
+				} catch (e) {
+					console.warn('restructured error', e);
+					obj[parts[parts.length - 1]] = rawValue;
+				}
 			}
 			return acc;
 		}, {});
@@ -190,7 +211,9 @@
 			if (action) {
 				const data = Serializer.objectify(action);
 				Object.keys(data).forEach((key) => {
-					if (typeof data[key] === 'object') {
+					if (data[key] === null) {
+						data[key] = '';
+					} else if (typeof data[key] === 'object') {
 						data[key] = JSON.stringify(data[key]);
 					} else {
 						data[key] = data[key];
