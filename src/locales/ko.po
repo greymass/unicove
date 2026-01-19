@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.663Z\n"
-"PO-Revision-Date: 2025-12-17T23:46:52.166Z\n"
+"PO-Revision-Date: 2026-01-19T21:51:44.508Z\n"
 "Last-Translator: \n"
 "Language: ko\n"
 "Language-Team: \n"
@@ -199,22 +199,18 @@ msgstr ""
 msgid "Completed Transactions"
 msgstr ""
 
-#: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/buy/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/sell/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "RAM Market"
 msgstr "RAM 시장"
 
-#: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/buy/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/buy/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/buy/+page.ts
 msgid "Buy RAM"
 msgstr "RAM 구매"
 
-#: src/lib/state/search.svelte.ts
-#: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/sell/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/sell/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/sell/+page.ts
@@ -224,13 +220,11 @@ msgstr "RAM 판매"
 #: src/lib/components/card/tokenbalance.svelte
 #: src/lib/components/card/tokenoverview.svelte
 #: src/lib/components/navigation/sidemenu.svelte
-#: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balances/+page.svelte
 msgid "Send"
 msgstr "전송"
 
 #: src/lib/components/navigation/sidemenu.svelte
-#: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Settings"
 msgstr "설정"
@@ -245,12 +239,10 @@ msgstr "설정"
 #: src/lib/components/summary/eosio/mvfrsavings.svelte
 #: src/lib/components/summary/eosio/sellrex.svelte
 #: src/lib/components/summary/eosio/withdraw.svelte
-#: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/summaries/+page.svelte
 msgid "Staking"
 msgstr "스테이킹"
 
-#: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/stake/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/stake/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/staking/+page.svelte
@@ -259,7 +251,6 @@ msgstr "스테이킹"
 msgid "Stake"
 msgstr "스테이킹"
 
-#: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/unstake/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/unstake/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/staking/+page.svelte
@@ -273,7 +264,6 @@ msgstr "언스테이킹"
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio/powerup.svelte
 #: src/lib/components/summary/eosio/powerup.svelte
-#: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/(account)/resources/renting.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/summaries/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
@@ -284,7 +274,6 @@ msgid "Resources"
 msgstr "리소스"
 
 #: src/lib/components/search/input.svelte
-#: src/lib/state/search.svelte.ts
 msgid "Clear"
 msgstr "지우기"
 
@@ -504,7 +493,7 @@ msgstr "송금"
 msgid "<0/> Memo: {0}"
 msgstr "<0/> 메모: {0}"
 
-#. placeholder {0}: (resources.cpu / 1000).toFixed(3)
+#. placeholder {0}: (Number(resources.cpu) / 1000).toFixed(3)
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 msgid "+ {0} ms (CPU)"
 msgstr "+ {0} ms (CPU)"
@@ -524,7 +513,7 @@ msgstr "+ {0} ms (CPU)"
 msgid "Weight: {0}"
 msgstr "가중치: {0}"
 
-#. placeholder {0}: (resources.net / 1000).toFixed(3)
+#. placeholder {0}: (Number(resources.net) / 1000).toFixed(3)
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 msgid "+ {0} kb (NET)"
 msgstr "+ {0} kb (NET)"
@@ -590,7 +579,6 @@ msgstr "<0/> 님이 이 트랜잭션에 대한 네트워크 리소스를 제공�
 msgid "Next"
 msgstr "다음"
 
-#: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Configure Unicove"
 msgstr "Unicove 설정"
@@ -1265,6 +1253,7 @@ msgstr "업로드"
 
 #: src/routes/[[locale]]/[network]/(account)/upload/[[name]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/permission.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/+page.ts
@@ -2396,7 +2385,6 @@ msgstr "더 불러오기"
 msgid "Contract"
 msgstr "컨트랙트"
 
-#: src/lib/components/search/input.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
@@ -4007,45 +3995,15 @@ msgstr "{0} 네트워크에서 MetaMask를 사용하기 시작하려면 아래 �
 msgid "Install {0}"
 msgstr "{0} 설치"
 
-#: src/lib/state/search.svelte.ts
-msgid "Market Overview"
-msgstr "시장 개요"
-
-#: src/lib/state/search.svelte.ts
-msgid "Purchase RAM"
-msgstr "RAM 구매"
-
-#: src/lib/state/search.svelte.ts
-msgid "Transfer tokens"
-msgstr "토큰 전송"
-
-#: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/stake/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/unstake/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/withdraw/+page.svelte
 msgid "Staking overview"
 msgstr "스테이킹 개요"
 
-#: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/(homepage)/components/staking-rewards.svelte
 msgid "Stake Tokens"
 msgstr "토큰 스테이킹"
-
-#: src/lib/state/search.svelte.ts
-msgid "Unstake tokens"
-msgstr "토큰 언스테이킹"
-
-#: src/lib/state/search.svelte.ts
-msgid "Manage CPU/NET"
-msgstr "CPU/NET 관리"
-
-#: src/lib/state/search.svelte.ts
-msgid "Clear search history"
-msgstr "검색 기록 삭제"
-
-#: src/lib/state/search.svelte.ts
-msgid "Switch Account"
-msgstr "계정 전환"
 
 #: src/routes/[[locale]]/[network]/(account)/fund/+page.svelte
 msgid "Purchase Directly"
@@ -4512,6 +4470,7 @@ msgstr "계정을 찾을 수 없습니다"
 msgid "Total Account Value"
 msgstr "총 계정 가치"
 
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActivityEvent.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
@@ -4944,6 +4903,8 @@ msgstr "역할"
 msgid "Signer"
 msgstr "서명자"
 
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Approved"
 msgstr "승인됨"
@@ -4964,10 +4925,12 @@ msgstr "제안자"
 msgid "Proposal Name"
 msgstr "제안명"
 
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Expired"
 msgstr "만료됨"
 
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Expiration"
 msgstr "만료"
@@ -5160,6 +5123,9 @@ msgid "Network Fee: <0/> (0.5%)"
 msgstr "네트워크 수수료: <0/> (0.5%)"
 
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/approvals/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.svelte
 msgid "Loading..."
@@ -5471,15 +5437,6 @@ msgstr "권한 | {0} | {1} 네트워크"
 msgid "Permissions for {0} on the {1} network."
 msgstr "{1} 네트워크 상의 {0} 계정 권한."
 
-#. placeholder {0}: params.name
-#. placeholder {1}: network.chain.name
-#. placeholder {0}: params.name
-#. placeholder {1}: network.chain.name
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
-msgid "Multisig proposals by {0} on the {1} Network."
-msgstr "{0} 네트워크에서 {1}이 제출한 멀티시그 제안"
-
 #. placeholder {0}: p.abi.actions.length
 #. placeholder {1}: p.contract
 #. placeholder {2}: p.network.chain.name
@@ -5641,6 +5598,7 @@ msgstr "{0}% 지지"
 msgid "{0}% Oppose"
 msgstr "{0}% 반대"
 
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.ts
 msgid "Sentiment"
 msgstr "정서"
@@ -5688,6 +5646,7 @@ msgstr "반대"
 msgid "Last updated {0}"
 msgstr "최종 업데이트 {0}"
 
+#: src/lib/components/search/input.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
 msgid "Description"
 msgstr "설명"
@@ -5697,16 +5656,6 @@ msgstr "설명"
 msgid "Participants"
 msgstr "참여자"
 
-#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.ts
-#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.ts
-msgid "Network Sentiment"
-msgstr "네트워크 감성"
-
-#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.ts
-#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.ts
-msgid "Express your opinion on topics important to the community"
-msgstr "커뮤니티에 중요한 주제에 대한 의견을 표현하세요"
-
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
 msgid "Updating..."
 msgstr "업데이트 중..."
@@ -5715,6 +5664,9 @@ msgstr "업데이트 중..."
 msgid "Dismiss"
 msgstr "닫기"
 
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/approvals/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.svelte
@@ -6141,6 +6093,7 @@ msgstr ""
 msgid "No block found."
 msgstr ""
 
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActivityEvent.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+layout.ts
 msgid "Block"
 msgstr ""
@@ -6155,4 +6108,285 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.ts
 msgid "Multisig Proposal"
+msgstr ""
+
+#: src/lib/state/search/manager.svelte.ts
+#: src/lib/state/search/manager.svelte.ts
+msgid "Search"
+msgstr ""
+
+#. placeholder {0}: query
+#: src/lib/state/search/manager.svelte.ts
+msgid "Query changed to: \"{0}\""
+msgstr ""
+
+#. placeholder {0}: asyncPlugins.length
+#: src/lib/state/search/manager.svelte.ts
+msgid "Setting up {0} async plugins:"
+msgstr ""
+
+#. placeholder {0}: query
+#: src/lib/state/search/manager.svelte.ts
+msgid "Skipping search for: \"{0}\" (not applicable)"
+msgstr ""
+
+#. placeholder {0}: query
+#: src/lib/state/search/manager.svelte.ts
+msgid "Showing cached results for: \"{0}\""
+msgstr ""
+
+#. placeholder {0}: query
+#: src/lib/state/search/manager.svelte.ts
+msgid "Using fresh cache for: \"{0}\""
+msgstr ""
+
+#. placeholder {0}: query
+#: src/lib/state/search/manager.svelte.ts
+msgid "Stale cache, revalidating: \"{0}\""
+msgstr ""
+
+#: src/lib/state/search/manager.svelte.ts
+msgid "Cancelling previous request"
+msgstr ""
+
+#. placeholder {0}: query
+#: src/lib/state/search/manager.svelte.ts
+msgid "Starting async search for: \"{0}\""
+msgstr ""
+
+#. placeholder {0}: pluginResults.length
+#. placeholder {1}: query
+#: src/lib/state/search/manager.svelte.ts
+msgid "Received {0} results for: \"{1}\""
+msgstr ""
+
+#. placeholder {0}: query
+#. placeholder {1}: this.query
+#: src/lib/state/search/manager.svelte.ts
+msgid "Discarding results for: \"{0}\" (query changed to \"{1}\")"
+msgstr ""
+
+#: src/lib/state/search/manager.svelte.ts
+msgid "AbortError"
+msgstr ""
+
+#. placeholder {0}: data.error
+#. placeholder {0}: data.error
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/approvals/+page.svelte
+msgid "Failed to load proposals: {0}"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/approvals/+page.svelte
+msgid "No proposals found"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
+msgid "This account hasn't created any multisig proposals yet"
+msgstr ""
+
+#. placeholder {0}: currentStatus
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
+msgid "No {0} proposals found"
+msgstr ""
+
+#. placeholder {0}: allProposals.length
+#. placeholder {1}: data.total
+#. placeholder {0}: filteredProposals.length
+#. placeholder {1}: data.total
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/approvals/+page.svelte
+msgid "Showing {0} of {1} total proposals"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/approvals/+page.svelte
+msgid "Show approved"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/approvals/+page.svelte
+msgid "Security Warning"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/approvals/+page.svelte
+msgid ""
+"Anyone can create a proposal for anything — including proposals that can compromise your\n"
+"account or assets. <0>Do not sign a multisig if you're unsure of exactly what it does.</0> Do not trust random messages asking you to sign these proposals."
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/approvals/+page.svelte
+msgid "No proposals pending"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/approvals/+page.svelte
+msgid "No proposals are currently awaiting approval"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
+msgid "All Actions"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
+msgid "Proposed"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
+msgid "Unapproved"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
+msgid "Executed"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
+msgid "Cancelled"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActivityEvent.svelte
+msgid "MMM D, YYYY [at] h:mm A"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActivityEvent.svelte
+msgid "Proposed by <0/>"
+msgstr ""
+
+#. placeholder {0}: expirationDate.fromNow()
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+msgid "Expired {0}"
+msgstr ""
+
+#. placeholder {0}: expirationDate.fromNow()
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+msgid "Expires {0}"
+msgstr ""
+
+#. placeholder {0}: proposal.proposer
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+msgid "Proposed by {0}"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+msgid "Pending Approval"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalsHeader.svelte
+msgid "Approvals"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+msgid "action"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+msgid "actions"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalsHeader.svelte
+msgid "Created"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+msgid "MMM D, YYYY"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalsHeader.svelte
+msgid "Timeline"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalsHeader.svelte
+msgid "Multisig Proposals"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
+msgid "All Statuses"
+msgstr ""
+
+#. placeholder {0}: data.error
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.svelte
+msgid "Failed to load activity: {0}"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.svelte
+msgid "No activity found"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.svelte
+msgid "This account has no multisig activity yet"
+msgstr ""
+
+#. placeholder {0}: currentActionType
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.svelte
+msgid "No {0} actions found"
+msgstr ""
+
+#. placeholder {0}: allActivity.length
+#. placeholder {1}: data.total
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.svelte
+msgid "Showing {0} of {1} total events"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.ts
+msgid "Topics"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.ts
+msgid "Community sentiment on important topics"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.ts
+msgid "View and participate in community sentiment voting on important topics"
+msgstr ""
+
+#. placeholder {0}: params.name
+#. placeholder {1}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/data/+page.ts
+msgid "Raw data for {0} on the {1} Network."
+msgstr ""
+
+#. placeholder {0}: params.name
+#. placeholder {1}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/data/+page.ts
+msgid "Account Data for {0} | {1} Network"
+msgstr ""
+
+#. placeholder {0}: params.name
+#. placeholder {1}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/data/+page.ts
+msgid "View the stored data and tables for the {0} account on the {1} network."
+msgstr ""
+
+#. placeholder {0}: params.name
+#. placeholder {1}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/votes/+page.ts
+msgid "Votes cast by {0} on the {1} Network."
+msgstr ""
+
+#. placeholder {0}: params.name
+#. placeholder {1}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/votes/+page.ts
+msgid "Votes by {0} | {1} Network"
+msgstr ""
+
+#. placeholder {0}: params.name
+#. placeholder {1}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/votes/+page.ts
+msgid "View the block producer votes cast by the {0} account on the {1} network."
+msgstr ""
+
+#. placeholder {0}: params.name
+#. placeholder {0}: params.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
+msgid "Proposals Created by {0}"
+msgstr ""
+
+#. placeholder {0}: params.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
+msgid "View all multisig proposals created by {0}"
 msgstr ""

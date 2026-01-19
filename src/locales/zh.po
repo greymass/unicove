@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2025-12-17T23:46:52.170Z\n"
+"PO-Revision-Date: 2026-01-19T21:51:44.511Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -199,22 +199,18 @@ msgstr ""
 msgid "Completed Transactions"
 msgstr ""
 
-#: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/buy/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/sell/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "RAM Market"
 msgstr "RAM 市场"
 
-#: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/buy/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/buy/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/buy/+page.ts
 msgid "Buy RAM"
 msgstr "购买 RAM"
 
-#: src/lib/state/search.svelte.ts
-#: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/sell/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/sell/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/sell/+page.ts
@@ -224,13 +220,11 @@ msgstr "出售 RAM"
 #: src/lib/components/card/tokenbalance.svelte
 #: src/lib/components/card/tokenoverview.svelte
 #: src/lib/components/navigation/sidemenu.svelte
-#: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balances/+page.svelte
 msgid "Send"
 msgstr "发送"
 
 #: src/lib/components/navigation/sidemenu.svelte
-#: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Settings"
 msgstr "设置"
@@ -245,12 +239,10 @@ msgstr "设置"
 #: src/lib/components/summary/eosio/mvfrsavings.svelte
 #: src/lib/components/summary/eosio/sellrex.svelte
 #: src/lib/components/summary/eosio/withdraw.svelte
-#: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/summaries/+page.svelte
 msgid "Staking"
 msgstr "质押"
 
-#: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/stake/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/stake/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/staking/+page.svelte
@@ -259,7 +251,6 @@ msgstr "质押"
 msgid "Stake"
 msgstr "质押"
 
-#: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/unstake/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/unstake/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/staking/+page.svelte
@@ -273,7 +264,6 @@ msgstr "取消质押"
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio/powerup.svelte
 #: src/lib/components/summary/eosio/powerup.svelte
-#: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/(account)/resources/renting.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/summaries/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
@@ -284,7 +274,6 @@ msgid "Resources"
 msgstr "资源"
 
 #: src/lib/components/search/input.svelte
-#: src/lib/state/search.svelte.ts
 msgid "Clear"
 msgstr "清除"
 
@@ -504,7 +493,7 @@ msgstr "转账"
 msgid "<0/> Memo: {0}"
 msgstr "<0/> 备注：{0}"
 
-#. placeholder {0}: (resources.cpu / 1000).toFixed(3)
+#. placeholder {0}: (Number(resources.cpu) / 1000).toFixed(3)
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 msgid "+ {0} ms (CPU)"
 msgstr "+ {0} 毫秒 (CPU)"
@@ -524,7 +513,7 @@ msgstr "+ {0} 毫秒 (CPU)"
 msgid "Weight: {0}"
 msgstr "权重：{0}"
 
-#. placeholder {0}: (resources.net / 1000).toFixed(3)
+#. placeholder {0}: (Number(resources.net) / 1000).toFixed(3)
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 msgid "+ {0} kb (NET)"
 msgstr "+ {0} kb (NET)"
@@ -590,7 +579,6 @@ msgstr "<0/> 为此交易提供了网络资源。"
 msgid "Next"
 msgstr "下一步"
 
-#: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Configure Unicove"
 msgstr "配置 Unicove"
@@ -1267,6 +1255,7 @@ msgstr "上传"
 
 #: src/routes/[[locale]]/[network]/(account)/upload/[[name]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/permission.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/+page.ts
@@ -2398,7 +2387,6 @@ msgstr "加载更多"
 msgid "Contract"
 msgstr "合约"
 
-#: src/lib/components/search/input.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
@@ -2737,6 +2725,7 @@ msgstr "区块 #{0} 由 {1} 在 {2} 生产，其中包括 {3} 个交易，执行
 msgid "Block #{0}"
 msgstr "区块 #{0}"
 
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActivityEvent.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
@@ -3062,15 +3051,6 @@ msgstr "以 {0} 身份登录 <0>↳ 使用 {0} 的多重签名</0>"
 msgid "No available authorities for this account."
 msgstr "此账户没有可用的权限。"
 
-#. placeholder {0}: params.name
-#. placeholder {1}: network.chain.name
-#. placeholder {0}: params.name
-#. placeholder {1}: network.chain.name
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
-msgid "Multisig proposals by {0} on the {1} Network."
-msgstr "{0} 在 {1} 网络上的多重签名提案。```"
-
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
 msgid "Proposal ID"
 msgstr "提案 ID"
@@ -3084,6 +3064,7 @@ msgstr "未找到提案。"
 msgid "Last updated {0}"
 msgstr "上次更新时间 {0}"
 
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.ts
 msgid "Sentiment"
 msgstr "情绪"
@@ -3100,6 +3081,7 @@ msgstr "正在更新..."
 msgid "Dismiss"
 msgstr "取消"
 
+#: src/lib/components/search/input.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
 msgid "Description"
 msgstr "描述"
@@ -3199,6 +3181,9 @@ msgid "Swap to {0}"
 msgstr "兑换为 {0}"
 
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/approvals/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.svelte
 msgid "Loading..."
@@ -3245,16 +3230,6 @@ msgstr "已投票"
 msgid "{0} as <0/> with weight <1/>"
 msgstr "{0} 为 <0/>，权重为 <1/>"
 
-#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.ts
-#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.ts
-msgid "Network Sentiment"
-msgstr "网络情绪"
-
-#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.ts
-#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.ts
-msgid "Express your opinion on topics important to the community"
-msgstr "表达您对社区重要话题的看法```"
-
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.svelte
 msgid "Failed to load topics"
 msgstr "加载主题失败"
@@ -3273,6 +3248,9 @@ msgstr "重试"
 msgid "No topics available yet"
 msgstr "目前还没有可用的主题"
 
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/approvals/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.svelte
@@ -3309,6 +3287,7 @@ msgstr "抵押代币```"
 msgid "No block found."
 msgstr "未找到区块。"
 
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActivityEvent.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+layout.ts
 msgid "Block"
 msgstr "区块"
@@ -3474,44 +3453,14 @@ msgstr ""
 msgid "Connect your wallet to login"
 msgstr ""
 
-#: src/lib/state/search.svelte.ts
-msgid "Market Overview"
-msgstr ""
-
-#: src/lib/state/search.svelte.ts
-msgid "Purchase RAM"
-msgstr ""
-
-#: src/lib/state/search.svelte.ts
-msgid "Transfer tokens"
-msgstr ""
-
-#: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/stake/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/unstake/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/withdraw/+page.svelte
 msgid "Staking overview"
 msgstr ""
 
-#: src/lib/state/search.svelte.ts
 #: src/routes/[[locale]]/[network]/(homepage)/components/staking-rewards.svelte
 msgid "Stake Tokens"
-msgstr ""
-
-#: src/lib/state/search.svelte.ts
-msgid "Unstake tokens"
-msgstr ""
-
-#: src/lib/state/search.svelte.ts
-msgid "Manage CPU/NET"
-msgstr ""
-
-#: src/lib/state/search.svelte.ts
-msgid "Clear search history"
-msgstr ""
-
-#: src/lib/state/search.svelte.ts
-msgid "Switch Account"
 msgstr ""
 
 #. placeholder {0}: props.network.chain.name
@@ -3848,7 +3797,7 @@ msgstr ""
 msgid "Get Tokens"
 msgstr ""
 
-#. placeholder {0}: String(network.token.symbol.name)
+#. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
@@ -3879,7 +3828,7 @@ msgstr ""
 msgid "<0>Unicove -</0> The {0} web wallet and block explorer"
 msgstr ""
 
-#. placeholder {0}: networkName
+#. placeholder {0}: network.chain.name
 #. placeholder {0}: networkName
 #. placeholder {0}: network.chain.name
 #: src/routes/+layout.server.ts
@@ -4778,6 +4727,8 @@ msgstr ""
 msgid "Signer"
 msgstr ""
 
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Approved"
 msgstr ""
@@ -4798,10 +4749,12 @@ msgstr ""
 msgid "Proposal Name"
 msgstr ""
 
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Expired"
 msgstr ""
 
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Expiration"
 msgstr ""
@@ -6152,4 +6105,285 @@ msgstr ""
 #. placeholder {2}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.ts
 msgid "The {0} data table in the {1} smart contract on the {2} network."
+msgstr ""
+
+#: src/lib/state/search/manager.svelte.ts
+#: src/lib/state/search/manager.svelte.ts
+msgid "Search"
+msgstr ""
+
+#. placeholder {0}: query
+#: src/lib/state/search/manager.svelte.ts
+msgid "Query changed to: \"{0}\""
+msgstr ""
+
+#. placeholder {0}: asyncPlugins.length
+#: src/lib/state/search/manager.svelte.ts
+msgid "Setting up {0} async plugins:"
+msgstr ""
+
+#. placeholder {0}: query
+#: src/lib/state/search/manager.svelte.ts
+msgid "Skipping search for: \"{0}\" (not applicable)"
+msgstr ""
+
+#. placeholder {0}: query
+#: src/lib/state/search/manager.svelte.ts
+msgid "Showing cached results for: \"{0}\""
+msgstr ""
+
+#. placeholder {0}: query
+#: src/lib/state/search/manager.svelte.ts
+msgid "Using fresh cache for: \"{0}\""
+msgstr ""
+
+#. placeholder {0}: query
+#: src/lib/state/search/manager.svelte.ts
+msgid "Stale cache, revalidating: \"{0}\""
+msgstr ""
+
+#: src/lib/state/search/manager.svelte.ts
+msgid "Cancelling previous request"
+msgstr ""
+
+#. placeholder {0}: query
+#: src/lib/state/search/manager.svelte.ts
+msgid "Starting async search for: \"{0}\""
+msgstr ""
+
+#. placeholder {0}: pluginResults.length
+#. placeholder {1}: query
+#: src/lib/state/search/manager.svelte.ts
+msgid "Received {0} results for: \"{1}\""
+msgstr ""
+
+#. placeholder {0}: query
+#. placeholder {1}: this.query
+#: src/lib/state/search/manager.svelte.ts
+msgid "Discarding results for: \"{0}\" (query changed to \"{1}\")"
+msgstr ""
+
+#: src/lib/state/search/manager.svelte.ts
+msgid "AbortError"
+msgstr ""
+
+#. placeholder {0}: data.error
+#. placeholder {0}: data.error
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/approvals/+page.svelte
+msgid "Failed to load proposals: {0}"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/approvals/+page.svelte
+msgid "No proposals found"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
+msgid "This account hasn't created any multisig proposals yet"
+msgstr ""
+
+#. placeholder {0}: currentStatus
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
+msgid "No {0} proposals found"
+msgstr ""
+
+#. placeholder {0}: allProposals.length
+#. placeholder {1}: data.total
+#. placeholder {0}: filteredProposals.length
+#. placeholder {1}: data.total
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/approvals/+page.svelte
+msgid "Showing {0} of {1} total proposals"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/approvals/+page.svelte
+msgid "Show approved"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/approvals/+page.svelte
+msgid "Security Warning"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/approvals/+page.svelte
+msgid ""
+"Anyone can create a proposal for anything — including proposals that can compromise your\n"
+"account or assets. <0>Do not sign a multisig if you're unsure of exactly what it does.</0> Do not trust random messages asking you to sign these proposals."
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/approvals/+page.svelte
+msgid "No proposals pending"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/approvals/+page.svelte
+msgid "No proposals are currently awaiting approval"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
+msgid "All Actions"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
+msgid "Proposed"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
+msgid "Unapproved"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
+msgid "Executed"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
+msgid "Cancelled"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActivityEvent.svelte
+msgid "MMM D, YYYY [at] h:mm A"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActivityEvent.svelte
+msgid "Proposed by <0/>"
+msgstr ""
+
+#. placeholder {0}: expirationDate.fromNow()
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+msgid "Expired {0}"
+msgstr ""
+
+#. placeholder {0}: expirationDate.fromNow()
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+msgid "Expires {0}"
+msgstr ""
+
+#. placeholder {0}: proposal.proposer
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+msgid "Proposed by {0}"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+msgid "Pending Approval"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalsHeader.svelte
+msgid "Approvals"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+msgid "action"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+msgid "actions"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalsHeader.svelte
+msgid "Created"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
+msgid "MMM D, YYYY"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalsHeader.svelte
+msgid "Timeline"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalsHeader.svelte
+msgid "Multisig Proposals"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
+msgid "All Statuses"
+msgstr ""
+
+#. placeholder {0}: data.error
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.svelte
+msgid "Failed to load activity: {0}"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.svelte
+msgid "No activity found"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.svelte
+msgid "This account has no multisig activity yet"
+msgstr ""
+
+#. placeholder {0}: currentActionType
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.svelte
+msgid "No {0} actions found"
+msgstr ""
+
+#. placeholder {0}: allActivity.length
+#. placeholder {1}: data.total
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.svelte
+msgid "Showing {0} of {1} total events"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.ts
+msgid "Topics"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.ts
+msgid "Community sentiment on important topics"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.ts
+msgid "View and participate in community sentiment voting on important topics"
+msgstr ""
+
+#. placeholder {0}: params.name
+#. placeholder {1}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/data/+page.ts
+msgid "Raw data for {0} on the {1} Network."
+msgstr ""
+
+#. placeholder {0}: params.name
+#. placeholder {1}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/data/+page.ts
+msgid "Account Data for {0} | {1} Network"
+msgstr ""
+
+#. placeholder {0}: params.name
+#. placeholder {1}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/data/+page.ts
+msgid "View the stored data and tables for the {0} account on the {1} network."
+msgstr ""
+
+#. placeholder {0}: params.name
+#. placeholder {1}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/votes/+page.ts
+msgid "Votes cast by {0} on the {1} Network."
+msgstr ""
+
+#. placeholder {0}: params.name
+#. placeholder {1}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/votes/+page.ts
+msgid "Votes by {0} | {1} Network"
+msgstr ""
+
+#. placeholder {0}: params.name
+#. placeholder {1}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/votes/+page.ts
+msgid "View the block producer votes cast by the {0} account on the {1} network."
+msgstr ""
+
+#. placeholder {0}: params.name
+#. placeholder {0}: params.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
+msgid "Proposals Created by {0}"
+msgstr ""
+
+#. placeholder {0}: params.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
+msgid "View all multisig proposals created by {0}"
 msgstr ""
