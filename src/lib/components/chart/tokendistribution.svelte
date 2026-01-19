@@ -58,13 +58,13 @@
 
 		<DL>
 			{#each filtered as item}
-			<DLRow>
-				{#snippet title()}
-					<DT class="flex items-center gap-2">
-						<div class={cn('size-3 rounded-sm', distributionMap[item.key].color)}></div>
-						{distributionMap[item.key].label}
-					</DT>
-				{/snippet}
+				<DLRow>
+					{#snippet title()}
+						<DT class="flex items-center gap-2">
+							<div class={cn('size-3 rounded-sm', distributionMap[item.key].color)}></div>
+							{distributionMap[item.key].label}
+						</DT>
+					{/snippet}
 					<DD class="text-on-surface text-right tabular-nums"
 						>{percentString(locale, item.value)}</DD
 					>

@@ -1,21 +1,24 @@
 import { useLocale } from '$lib/utils/intl';
 import type { PageLoad } from './$types';
-import { SentimentState } from '../topics/state.svelte';
+import { TopicSentimentState } from '../sentiment/topics/state.svelte';
+import { MsigSentimentState } from '$lib/state/sentiment/msig.svelte';
 
-export const load: PageLoad = async ({ parent, fetch }) => {
+export const load: PageLoad = async ({ parent }) => {
 	const { network, locale } = await parent();
 	await useLocale(locale);
 
-	// Load sentiment topics
-	const sentimentState = new SentimentState(network, locale, fetch);
+	const sentimentState = new TopicSentimentState(network, locale);
+	const msigSentimentState = new MsigSentimentState(network, locale);
+
 	try {
-		await sentimentState.loadTopics();
+		await Promise.all([sentimentState.loadTopics(), msigSentimentState.loadMsigs()]);
 	} catch (e) {
-		console.error('Error loading topics:', e);
+		console.error('Error loading sentiment data:', e);
 	}
 
 	return {
 		sentimentState,
+		msigSentimentState,
 		title: 'Governance',
 		subtitle: `Participate in network governance on ${network.chain.name}`,
 		pageMetaTags: {

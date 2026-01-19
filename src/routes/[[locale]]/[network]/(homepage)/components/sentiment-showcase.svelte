@@ -30,7 +30,7 @@
 				Topic creation is not yet available. Currently, only voting on existing proposals is
 				supported.
 			</p>
-			<Button variant="primary" href={urlPath('/topics')}>View All Topics</Button>
+			<Button variant="primary" href={urlPath('/sentiment/topics')}>View All Topics</Button>
 		</Stack>
 	</div>
 

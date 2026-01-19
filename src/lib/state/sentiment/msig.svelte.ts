@@ -2,27 +2,29 @@ import type { NameType } from '@wharfkit/antelope';
 import { Asset, Name } from '@wharfkit/antelope';
 import type { NetworkState } from '$lib/state/network.svelte';
 import type {
-	TopicWithStats,
+	MsigWithStats,
 	VoteWithWeight,
 	PaginationMeta,
 	ApiResponse,
-	TopicsListData,
-	TopicDetailData,
-	TopicVotesData,
-	TopicStatistics
+	MsigsListData,
+	MsigDetailData,
+	MsigVotesData,
+	MsigStatistics
 } from '$lib/types/sentiment';
 
-export class SentimentState {
+export class MsigSentimentState {
 	public network: NetworkState;
 	private apiBaseUrl: string;
-	private fetch: typeof fetch;
 
-	public topics = $state<TopicWithStats[]>([]);
-	public currentTopic = $state<TopicDetailData | null>(null);
+	public msigs = $state<MsigWithStats[]>([]);
+	public currentMsig = $state<MsigDetailData | null>(null);
 	public currentVotes = $state<VoteWithWeight[]>([]);
-	public currentUserVote = $state<{ voter: string; topic_id: string; vote_type: number } | null>(
-		null
-	);
+	public currentUserVote = $state<{
+		voter: string;
+		proposer: string;
+		proposal_name: string;
+		vote_type: number;
+	} | null>(null);
 	public loading = $state(false);
 	public loadingMore = $state(false);
 	public refreshing = $state(false);
@@ -30,21 +32,13 @@ export class SentimentState {
 	public error = $state<string | null>(null);
 	public pagination = $state<PaginationMeta | null>(null);
 
-	constructor(network: NetworkState, locale: string = 'en', fetchFn: typeof fetch = fetch) {
+	constructor(network: NetworkState, locale: string = 'en') {
 		this.network = network;
-		this.fetch = fetchFn;
 		const networkShort = network.config.short;
 		this.apiBaseUrl = `/${locale}/${networkShort}/api/sentiment`;
 	}
 
-	private getFetch(): typeof fetch {
-		if (typeof window !== 'undefined') {
-			return window.fetch.bind(window);
-		}
-		return this.fetch;
-	}
-
-	private serializeStatistics(statistics: TopicStatistics): TopicStatistics {
+	private serializeStatistics(statistics: MsigStatistics): MsigStatistics {
 		const systemTokenSymbol = this.network.chain.systemToken?.symbol || '4,EOS';
 
 		return {
@@ -60,32 +54,32 @@ export class SentimentState {
 		};
 	}
 
-	async loadTopics(page = 1, limit = 20): Promise<void> {
+	async loadMsigs(page = 1, limit = 20): Promise<void> {
 		this.loading = true;
 		this.error = null;
 
 		try {
-			const url = `${this.apiBaseUrl}/topics?page=${page}&limit=${limit}`;
+			const url = `${this.apiBaseUrl}/msigs?page=${page}&limit=${limit}`;
 
-			const response = await this.getFetch()(url);
+			const response = await this.network.fetch(url);
 			if (!response.ok) {
 				throw new Error(`API request failed: ${response.status}`);
 			}
 
-			const result: ApiResponse<TopicsListData> = await response.json();
+			const result: ApiResponse<MsigsListData> = await response.json();
 
 			if (!result.success || !result.data) {
-				throw new Error(result.error || 'Failed to load topics');
+				throw new Error(result.error || 'Failed to load msigs');
 			}
 
-			this.topics = result.data.topics.map((topic) => ({
-				...topic,
-				statistics: this.serializeStatistics(topic.statistics)
+			this.msigs = result.data.msigs.map((msig) => ({
+				...msig,
+				statistics: this.serializeStatistics(msig.statistics)
 			}));
 			this.pagination = result.data.pagination;
 		} catch (e) {
-			this.error = e instanceof Error ? e.message : 'Failed to load topics';
-			console.error('Error loading topics:', e);
+			this.error = e instanceof Error ? e.message : 'Failed to load msigs';
+			console.error('Error loading msigs:', e);
 		} finally {
 			this.loading = false;
 		}
@@ -102,34 +96,34 @@ export class SentimentState {
 		try {
 			const nextPage = this.pagination.page + 1;
 			const limit = this.pagination.limit;
-			const url = `${this.apiBaseUrl}/topics?page=${nextPage}&limit=${limit}`;
+			const url = `${this.apiBaseUrl}/msigs?page=${nextPage}&limit=${limit}`;
 
-			const response = await this.getFetch()(url);
+			const response = await this.network.fetch(url);
 			if (!response.ok) {
 				throw new Error(`API request failed: ${response.status}`);
 			}
 
-			const result: ApiResponse<TopicsListData> = await response.json();
+			const result: ApiResponse<MsigsListData> = await response.json();
 
 			if (!result.success || !result.data) {
-				throw new Error(result.error || 'Failed to load more topics');
+				throw new Error(result.error || 'Failed to load more msigs');
 			}
 
-			const newTopics = result.data.topics.map((topic) => ({
-				...topic,
-				statistics: this.serializeStatistics(topic.statistics)
+			const newMsigs = result.data.msigs.map((msig) => ({
+				...msig,
+				statistics: this.serializeStatistics(msig.statistics)
 			}));
-			this.topics = [...this.topics, ...newTopics];
+			this.msigs = [...this.msigs, ...newMsigs];
 			this.pagination = result.data.pagination;
 		} catch (e) {
-			this.error = e instanceof Error ? e.message : 'Failed to load more topics';
-			console.error('Error loading more topics:', e);
+			this.error = e instanceof Error ? e.message : 'Failed to load more msigs';
+			console.error('Error loading more msigs:', e);
 		} finally {
 			this.loadingMore = false;
 		}
 	}
 
-	async loadTopic(topicId: NameType): Promise<void> {
+	async loadMsig(proposer: NameType, proposalName: NameType): Promise<void> {
 		if (!this.refreshing) {
 			this.loading = true;
 		}
@@ -137,32 +131,33 @@ export class SentimentState {
 		this.error = null;
 
 		try {
-			const id = String(Name.from(topicId));
+			const proposerStr = String(Name.from(proposer));
+			const proposalStr = String(Name.from(proposalName));
 
-			const url = `${this.apiBaseUrl}/topics/${id}`;
-			const response = await this.getFetch()(url);
+			const url = `${this.apiBaseUrl}/msigs/${proposerStr}/${proposalStr}`;
+			const response = await this.network.fetch(url);
 
 			if (!response.ok) {
 				throw new Error(`API request failed: ${response.status}`);
 			}
 
-			const result: ApiResponse<TopicDetailData> = await response.json();
+			const result: ApiResponse<MsigDetailData> = await response.json();
 
 			if (!result.success || !result.data) {
-				throw new Error(result.error || 'Failed to load topic');
+				throw new Error(result.error || 'Failed to load msig');
 			}
 
-			const newData: TopicDetailData = {
+			const newData: MsigDetailData = {
 				...result.data,
 				statistics: this.serializeStatistics(result.data.statistics)
 			};
 
-			if (!this.currentTopic || JSON.stringify(this.currentTopic) !== JSON.stringify(newData)) {
-				this.currentTopic = newData;
+			if (!this.currentMsig || JSON.stringify(this.currentMsig) !== JSON.stringify(newData)) {
+				this.currentMsig = newData;
 			}
 		} catch (e) {
-			this.error = e instanceof Error ? e.message : 'Failed to load topic';
-			console.error(`Error loading topic ${topicId}:`, e);
+			this.error = e instanceof Error ? e.message : 'Failed to load msig';
+			console.error(`Error loading msig ${proposer}/${proposalName}:`, e);
 		} finally {
 			if (!this.refreshing) {
 				this.loading = false;
@@ -170,24 +165,30 @@ export class SentimentState {
 		}
 	}
 
-	async loadTopicVotes(topicId: NameType, page = 1, limit = 50): Promise<void> {
+	async loadMsigVotes(
+		proposer: NameType,
+		proposalName: NameType,
+		page = 1,
+		limit = 50
+	): Promise<void> {
 		if (!this.refreshing) {
 			this.loading = true;
 		}
 		this.error = null;
 
 		try {
-			const id = String(Name.from(topicId));
+			const proposerStr = String(Name.from(proposer));
+			const proposalStr = String(Name.from(proposalName));
 
-			const url = `${this.apiBaseUrl}/topics/${id}/votes?page=${page}&limit=${limit}`;
+			const url = `${this.apiBaseUrl}/msigs/${proposerStr}/${proposalStr}/votes?page=${page}&limit=${limit}`;
 
-			const response = await this.getFetch()(url);
+			const response = await this.network.fetch(url);
 
 			if (!response.ok) {
 				throw new Error(`API request failed: ${response.status}`);
 			}
 
-			const result: ApiResponse<TopicVotesData> = await response.json();
+			const result: ApiResponse<MsigVotesData> = await response.json();
 
 			if (!result.success || !result.data) {
 				throw new Error(result.error || 'Failed to load votes');
@@ -205,7 +206,7 @@ export class SentimentState {
 			}
 		} catch (e) {
 			this.error = e instanceof Error ? e.message : 'Failed to load votes';
-			console.error(`Error loading votes for topic ${topicId}:`, e);
+			console.error(`Error loading votes for msig ${proposer}/${proposalName}:`, e);
 		} finally {
 			if (!this.refreshing) {
 				this.loading = false;
@@ -213,17 +214,19 @@ export class SentimentState {
 		}
 	}
 
-	async loadUserVote(voter: NameType, topicId: NameType): Promise<void> {
+	async loadUserVote(voter: NameType, proposer: NameType, proposalName: NameType): Promise<void> {
 		try {
-			const result = await this.network.contracts.sentiment.readonly('getvote', {
+			const result = await this.network.contracts.sentiment.readonly('getmsigvote', {
 				voter: Name.from(voter),
-				topic_id: Name.from(topicId)
+				proposer: Name.from(proposer),
+				proposal_name: Name.from(proposalName)
 			});
 
 			if (result) {
 				this.currentUserVote = {
 					voter: String(result.voter),
-					topic_id: String(result.topic_id),
+					proposer: String(result.proposer),
+					proposal_name: String(result.proposal_name),
 					vote_type: Number(result.vote_type)
 				};
 			} else {
@@ -234,23 +237,31 @@ export class SentimentState {
 		}
 	}
 
-	updateUserVote(voter: NameType, topicId: NameType, voteType: number | null): void {
+	updateUserVote(
+		voter: NameType,
+		proposer: NameType,
+		proposalName: NameType,
+		voteType: number | null
+	): void {
 		const voterStr = String(Name.from(voter));
-		const topicIdStr = String(Name.from(topicId));
+		const proposerStr = String(Name.from(proposer));
+		const proposalStr = String(Name.from(proposalName));
 
 		if (voteType === null) {
 			this.currentUserVote = null;
 		} else {
 			this.currentUserVote = {
 				voter: voterStr,
-				topic_id: topicIdStr,
+				proposer: proposerStr,
+				proposal_name: proposalStr,
 				vote_type: voteType
 			};
 		}
 	}
 
-	async refreshTopicAndVotes(
-		topicId: NameType,
+	async refreshMsigAndVotes(
+		proposer: NameType,
+		proposalName: NameType,
 		silent = false,
 		voter?: NameType,
 		showStatisticsLoader = false
@@ -264,16 +275,19 @@ export class SentimentState {
 		this.error = null;
 
 		try {
-			const promises = [this.loadTopic(topicId), this.loadTopicVotes(topicId)];
+			const promises = [
+				this.loadMsig(proposer, proposalName),
+				this.loadMsigVotes(proposer, proposalName)
+			];
 
 			if (voter) {
-				promises.push(this.loadUserVote(voter, topicId));
+				promises.push(this.loadUserVote(voter, proposer, proposalName));
 			}
 
 			await Promise.all(promises);
 		} catch (e) {
 			this.error = e instanceof Error ? e.message : 'Failed to refresh data';
-			console.error('Error refreshing topic and votes:', e);
+			console.error('Error refreshing msig and votes:', e);
 		} finally {
 			if (!silent) {
 				this.refreshing = false;
