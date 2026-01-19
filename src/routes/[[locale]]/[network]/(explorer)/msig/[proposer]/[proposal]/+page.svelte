@@ -26,6 +26,9 @@
 	const sentimentState = $state(new MsigSentimentState(context.network, data.locale));
 	let userVote = $derived(sentimentState.currentUserVote?.vote_type ?? null);
 
+	// Disabling this temporarily
+	const enabled = false;
+
 	onMount(() => {
 		const interval = setInterval(() => {
 			invalidateAll();
@@ -212,7 +215,7 @@
 				</TransactForm>
 			</Card>
 
-			{#if context.network.supports('sentiment') && sentimentState.currentMsig}
+			{#if enabled && context.network.supports('sentiment') && sentimentState.currentMsig}
 				<h2 class="text-title">Community Sentiment</h2>
 				<Card class="@container">
 					<Stack class="gap-6">
@@ -230,8 +233,8 @@
 						/>
 					</Stack>
 				</Card>
-			{/if}</Stack
-		>
+			{/if}
+		</Stack>
 	</Switcher>
 </Stack>
 
