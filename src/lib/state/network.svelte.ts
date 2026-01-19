@@ -302,8 +302,8 @@ export class NetworkState {
 		}
 		const powerup = PowerUpState.from(this.sources?.powerup);
 		return [
-			powerup.cpu.frac_by_ms(this.sources.sample, cpu),
-			powerup.net.frac_by_kb(this.sources.sample, net)
+			Number(powerup.cpu.frac_by_ms(this.sources.sample, cpu)),
+			Number(powerup.net.frac_by_kb(this.sources.sample, net))
 		];
 	};
 
