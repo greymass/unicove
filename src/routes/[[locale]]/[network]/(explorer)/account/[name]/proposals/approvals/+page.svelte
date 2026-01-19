@@ -11,7 +11,6 @@
 	import ProposalsHeader from '../components/ProposalsHeader.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { SettingKeys } from '$lib/state/settings.svelte';
-	import { TriangleAlert, TriangleAlertIcon } from '@lucide/svelte';
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');
