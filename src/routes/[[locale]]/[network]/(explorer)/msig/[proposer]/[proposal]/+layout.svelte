@@ -20,5 +20,5 @@
 
 <Stack class="@container">
 	<PillGroup options={tabOptions} />
-	{@render children()}
+	{@render children?.()}
 </Stack>

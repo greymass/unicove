@@ -150,10 +150,12 @@ export const chainConfig: ChainConfig = {
 		staking: isENVTrue(env.PUBLIC_FEATURE_STAKING),
 		timeseries: isENVTrue(env.PUBLIC_FEATURE_TIMESERIES),
 		unicovecontractapi: !!env.PUBLIC_FEATURE_UNICOVE_CONTRACT_API,
-		wram: isENVTrue(env.PUBLIC_FEATURE_WRAM)
+		wram: isENVTrue(env.PUBLIC_FEATURE_WRAM),
+		msigapi: isENVTrue(env.PUBLIC_FEATURE_MSIGAPI)
 	},
 	metamask,
-	coinbase
+	coinbase,
+	voteDecay: Number(env.PUBLIC_FEATURE_VOTE_DECAY) || 52
 };
 
 export const chains = [chainConfig];
@@ -212,6 +214,7 @@ export interface ChainConfig {
 	systemcontract: Name;
 	systemtoken: Token;
 	systemtokenalt: Asset.Symbol[];
+	voteDecay: number;
 }
 
 export type FeatureType =
@@ -235,7 +238,8 @@ export type FeatureType =
 	| 'staking'
 	| 'timeseries'
 	| 'unicovecontractapi'
-	| 'wram';
+	| 'wram'
+	| 'msigapi';
 
 export function getChainConfigByName(name: string): ChainConfig {
 	const chain = chains.find((c) => c.short === name);

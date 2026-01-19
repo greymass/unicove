@@ -16,7 +16,7 @@
 	import { AccountValueState, NetworkValueState } from '$lib/state/value.svelte.js';
 	import { MarketState } from '$lib/state/market.svelte.js';
 	import { ProducersState } from '$lib/state/producers.svelte.js';
-	import { SearchRecordStorage } from '$lib/state/search.svelte.js';
+	import { SearchRecordStorage } from '$lib/state/search';
 	import { SettingsState } from '$lib/state/settings.svelte.js';
 	import { WharfState } from '$lib/state/client/wharf.svelte.js';
 	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte';
@@ -272,7 +272,7 @@
 
 <div
 	data-theme={data.network}
-	class="mx-auto grid h-full min-h-svh w-[calc(100%-2rem)] max-w-(--breakpoint-2xl) grid-cols-2 grid-rows-[min-content_minmax(0,1fr)] gap-y-6 pt-4 pb-12 sm:grid-cols-4 md:h-auto md:min-h-svh md:grid-cols-12 md:grid-rows-[min-content_minmax(0,1fr)] md:gap-x-4 xl:w-[calc(100%-6rem)]"
+	class="mx-auto grid h-full min-h-svh w-[calc(100%-2rem)] max-w-(--breakpoint-2xl) grid-cols-2 grid-rows-[min-content_minmax(0,1fr)] gap-y-6 pt-4 sm:grid-cols-4 md:h-auto md:min-h-svh md:grid-cols-12 md:grid-rows-[min-content_minmax(0,1fr)] md:gap-x-4 xl:w-[calc(100%-6rem)]"
 >
 	<aside class="relative col-start-1 col-end-3 row-span-full row-start-1 hidden h-full md:block">
 		<nav class="sticky top-4 row-span-2 flex h-[calc(100svh-1rem)] flex-col content-start gap-6">
@@ -296,8 +296,8 @@
 	</header>
 
 	<main
-		class="col-span-full col-start-1 row-span-full row-start-2 grid grid-cols-subgrid content-start gap-x-4 *:col-span-full md:col-start-3 md:col-end-13 md:px-0 xl:col-end-13"
+		class="col-span-full col-start-1 row-span-full row-start-2 grid grid-cols-subgrid content-start gap-x-4 pb-12 *:col-span-full md:col-start-3 md:col-end-13 md:px-0 xl:col-end-13"
 	>
-		{@render children()}
+		{@render children?.()}
 	</main>
 </div>

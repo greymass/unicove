@@ -17,7 +17,7 @@
 
 <Toaster />
 
-{@render children()}
+{@render children?.()}
 
 {#if PUBLIC_ENVIRONMENT === 'production'}
 	<PlausibleAnalytics apiHost="https://stats.greymass.com" domain={PUBLIC_ANALYTICS_DOMAIN} />

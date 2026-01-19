@@ -13,6 +13,7 @@ import {
 import { ChainDefinition } from '@wharfkit/common';
 import { RAMState, Resources as ResourceClient, REXState, PowerUpState } from '@wharfkit/resources';
 import { ABICache } from '@wharfkit/abicache';
+import { MsigsClient } from '@wharfkit/msigs';
 
 import {
 	NetworkDataSources,
@@ -65,6 +66,7 @@ export class NetworkState {
 	readonly config: ChainConfig;
 	readonly contracts: DefaultContracts;
 	readonly fetch = fetch;
+	readonly msigs: MsigsClient;
 	readonly snapOrigin?: string;
 	readonly resourceClient: ResourceClient;
 
@@ -112,6 +114,7 @@ export class NetworkState {
 			sampleAccount: 'eosio.reserv',
 			symbol: String(this.config.systemtoken.symbol)
 		});
+		this.msigs = new MsigsClient(this.client);
 		this.connection.endpoint = (this.client.provider as FetchProvider).url;
 
 		this.contracts = {
@@ -275,6 +278,12 @@ export class NetworkState {
 		}
 		const asset = Asset.from(rex);
 		const { total_lendable, total_rex } = this.rex;
+
+		// Handle edge case where REX pool is empty (division by zero)
+		if (total_rex.units.equals(0)) {
+			return Asset.fromUnits(0, total_lendable.symbol);
+		}
+
 		const R1 = total_rex.units.adding(asset.units);
 		const S1 = Int128.from(R1).multiplying(total_lendable.units).dividing(total_rex.units);
 		const result = S1.subtracting(total_lendable.units);
@@ -293,8 +302,8 @@ export class NetworkState {
 		}
 		const powerup = PowerUpState.from(this.sources?.powerup);
 		return [
-			powerup.cpu.frac_by_ms(this.sources.sample, cpu),
-			powerup.net.frac_by_kb(this.sources.sample, net)
+			Number(powerup.cpu.frac_by_ms(this.sources.sample, cpu)),
+			Number(powerup.net.frac_by_kb(this.sources.sample, net))
 		];
 	};
 

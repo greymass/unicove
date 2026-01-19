@@ -45,5 +45,5 @@
 		/>
 	{/if}
 
-	{@render children()}
+	{@render children?.()}
 </Stack>

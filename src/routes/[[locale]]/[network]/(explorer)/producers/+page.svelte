@@ -48,14 +48,15 @@
 	);
 
 	function voteWeightToAsset(weight: Float64) {
-		const defaultDecay = 52;
-		const precision = 10 ** context.network.chain.systemToken!.symbol.precision;
-		const timestamp = 946684800000;
-		const dates = (Date.now() - timestamp) / 1000;
-		const voteWeight = Math.floor(dates / (86400 * 7)) / defaultDecay;
-		const calcWeight = 2 ** voteWeight;
-		const value = Number(weight) / calcWeight / precision;
-		return Asset.from(value, context.network.chain.systemToken!.symbol);
+		const symbol = context.network.chain.systemToken!.symbol;
+		const voteDecay = context.network.config.voteDecay;
+		const secondsPerDay = 86400;
+		const blockTimestampEpoch = 946684800000;
+		const secondsSinceEpoch = Date.now() / 1000 - blockTimestampEpoch / 1000;
+		const weightExponent = Math.floor(secondsSinceEpoch / (secondsPerDay * 7)) / voteDecay;
+		const stakedUnits = Number(weight) / Math.pow(2, weightExponent);
+		const wholeTokens = Math.floor(stakedUnits / Math.pow(10, symbol.precision));
+		return Asset.from(wholeTokens, `0,${symbol.name}`);
 	}
 
 	const votingWeight = $derived.by(() => {

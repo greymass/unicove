@@ -13,7 +13,8 @@ export enum SettingKeys {
 	'mockPrice' = 'mockPrice',
 	'preventAccountPageSwitching' = 'preventAccountPageSwitching',
 	'searchAccountSwitch' = 'searchAccountSwitch',
-	'searchShowPages' = 'searchShowPages'
+	'searchShowPages' = 'searchShowPages',
+	'showApprovedProposals' = 'showApprovedProposals'
 }
 
 export enum TimeSeconds {
@@ -50,6 +51,7 @@ export interface SettingsData {
 	preventAccountPageSwitching?: boolean;
 	searchAccountSwitch?: boolean;
 	searchShowPages?: boolean;
+	showApprovedProposals?: boolean;
 }
 
 function getDefaultLocale() {
@@ -74,7 +76,8 @@ const defaultSettings: SettingsData = {
 	mockPrice: false,
 	preventAccountPageSwitching: false,
 	searchAccountSwitch: false,
-	searchShowPages: true
+	searchShowPages: true,
+	showApprovedProposals: false
 };
 
 export class SettingsState {
@@ -99,10 +102,11 @@ export class SettingsState {
 	}
 
 	get<T>(key: SettingKeys, value: T) {
-		if (!this.data[key]) {
+		const keyName = key as keyof SettingsData;
+		if (!this.data[keyName]) {
 			return value;
 		}
-		return this.data[key] as T;
+		return this.data[keyName] as T;
 	}
 
 	serialize(data: SettingsData): string {

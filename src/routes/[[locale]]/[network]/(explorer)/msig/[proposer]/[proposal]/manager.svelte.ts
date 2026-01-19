@@ -57,9 +57,9 @@ export class ApprovalManager {
 		requested: [],
 		provided: []
 	});
-	participants = $derived.by(() => [...this.approvals.provided, ...this.approvals.requested]);
+	participants = $derived([...this.approvals.provided, ...this.approvals.requested]);
 	totalRequested = $derived(this.approvals.provided.length + this.approvals.requested.length);
-	totalApproved = $derived.by(() => this.approvals.provided.length);
+	totalApproved = $derived(this.approvals.provided.length);
 	approvalRatio = $derived((this.totalApproved / this.totalRequested) * 100);
 
 	// States related to user

@@ -5,5 +5,5 @@
 </script>
 
 <SingleCard>
-	{@render children()}
+	{@render children?.()}
 </SingleCard>

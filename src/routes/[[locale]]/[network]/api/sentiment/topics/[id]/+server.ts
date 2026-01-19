@@ -2,7 +2,7 @@ import { json, error } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import { getCacheHeaders } from '$lib/utils';
 
-export const GET: RequestHandler = async ({ fetch, locals: { network }, params }) => {
+export const GET: RequestHandler = async ({ fetch, locals: { network }, params, url }) => {
 	try {
 		const sentimentApiUrl = network.config.endpoints.sentiment;
 
@@ -11,7 +11,13 @@ export const GET: RequestHandler = async ({ fetch, locals: { network }, params }
 		}
 
 		const topicId = params.id;
-		const response = await fetch(`${sentimentApiUrl}/v1/topics/${topicId}`);
+
+		const apiUrl = new URL(`${sentimentApiUrl}/v1/topics/${topicId}`);
+		url.searchParams.forEach((value, key) => {
+			apiUrl.searchParams.set(key, value);
+		});
+
+		const response = await fetch(apiUrl.toString());
 
 		if (!response.ok) {
 			throw error(response.status, `Sentiment API error: ${response.statusText}`);
@@ -23,7 +29,7 @@ export const GET: RequestHandler = async ({ fetch, locals: { network }, params }
 			headers: getCacheHeaders(5)
 		});
 	} catch (e) {
-		console.error('Sentiment topic detail API error:', e);
+		console.error('Sentiment topic API error:', e);
 		if (e && typeof e === 'object' && 'status' in e) {
 			throw e;
 		}

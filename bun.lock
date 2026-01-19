@@ -12,8 +12,9 @@
         "@wharfkit/common": "^1.5.0",
         "@wharfkit/contract": "^1.2.1",
         "@wharfkit/hyperion": "^1.0.4",
+        "@wharfkit/msigs": "^0.3.1",
         "@wharfkit/protocol-scatter": "^1.4.2",
-        "@wharfkit/resources": "^1.3.1",
+        "@wharfkit/resources": "^1.5.0",
         "@wharfkit/roborovski": "^1.1.0",
         "@wharfkit/session": "^1.7.1-beta1",
         "@wharfkit/transact-plugin-resource-provider": "^1.1.3",
@@ -493,11 +494,13 @@
 
     "@wharfkit/hyperion": ["@wharfkit/hyperion@1.0.4", "", { "dependencies": { "@wharfkit/antelope": "^1.0.0", "tslib": "^2.0.3" } }, "sha512-sFeB6UumVCVZTbw6V41jgBopU7j4MpzHnUiZOvkUa00FoJhjcgpdD3Z12+LhtKzowqcvJ2KpREn0hwfNgUc4OQ=="],
 
+    "@wharfkit/msigs": ["@wharfkit/msigs@0.3.1", "", { "dependencies": { "@wharfkit/antelope": "^1.0.0", "tslib": "^2.0.3" } }, "sha512-32g8Mr2DVDphhQl1SVKEiv1zSgwi2k0/RZVHsNgNMYeyWz0+cULADZpt++wsm7MXVoOK7kb6nup+OLqWIhPnog=="],
+
     "@wharfkit/protocol-esr": ["@wharfkit/protocol-esr@1.5.0", "", { "dependencies": { "@greymass/buoy": "^1.0.3", "@wharfkit/antelope": "^1.1.0", "@wharfkit/sealed-messages": "^1.1.0", "isomorphic-ws": "^5.0.0", "ws": "^8.13.0" }, "peerDependencies": { "@wharfkit/session": "^1.2.7" } }, "sha512-YNcs5rK151uOuI3Gvy7jiJ4JOPx0Mu8zGiDP/KI7JhI19+yiPPUjz5+59jrCwPv5IIl23BZGUDiYA7qergbbVA=="],
 
     "@wharfkit/protocol-scatter": ["@wharfkit/protocol-scatter@1.4.2", "", { "dependencies": { "eosjs": "20.0.0", "scatter-ts": "^0.1.9", "tslib": "^2.1.0" }, "peerDependencies": { "@wharfkit/session": "^1.6.1" } }, "sha512-YV2GKICyzk6fMx4MxsS1fxvv8ytsnn/vDGkaLYDjscuLyGth8xt/yuFprHTED4f6i/kCTbJVOnnGtjpylnaoVA=="],
 
-    "@wharfkit/resources": ["@wharfkit/resources@1.3.1", "", { "dependencies": { "@wharfkit/antelope": "^1.0.0", "bn.js": "^4.11.9", "js-big-decimal": "^2.0.7", "tslib": "^2.1.0" } }, "sha512-XgL/yiwcJia8chYySt2dBOxa4BRKPqMeNxaZFvvzLgBI3s7m6MUXlXpZSeBvaQH+dr9D9nlBbmgP7PCBrJITIg=="],
+    "@wharfkit/resources": ["@wharfkit/resources@1.5.0", "", { "dependencies": { "@wharfkit/antelope": "^1.1.0", "bn.js": "^4.11.9", "js-big-decimal": "^2.0.7", "tslib": "^2.1.0" } }, "sha512-wcfww9UOc03JlIrLMIxbHSlrDnGtPRuzOCJtp7i4xEUyJbbWBQLEUStPuR2GsxGbRa2pxKdo8Z1pfyS6AI/gRQ=="],
 
     "@wharfkit/roborovski": ["@wharfkit/roborovski@1.1.0", "", { "dependencies": { "@wharfkit/antelope": "^1.0.0", "tslib": "^2.0.3" } }, "sha512-UPZgkW+fLKcXlI4sNA8vzS/qTQoAZiFudnXhQScNHNalGTKTy3c5WEN4RPicbwcmGNUO3JVXMtKgwgrqRrUaVA=="],
 
