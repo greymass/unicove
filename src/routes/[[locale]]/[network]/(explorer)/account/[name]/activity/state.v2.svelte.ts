@@ -11,6 +11,7 @@ export class Activity2Scene {
 	isLoading: boolean = $state(false);
 	hasNext: boolean = $state(false);
 	hasPrev: boolean = $state(false);
+	error: Error | undefined = $state(undefined);
 
 	setLoading(isLoading: boolean) {
 		this.isLoading = isLoading;
@@ -19,11 +20,17 @@ export class Activity2Scene {
 	setList(list: ActivityResponseAction[], nextCursor?: string, prevCursor?: string) {
 		this.list = [...list];
 		this.isLoading = false;
+		this.error = undefined;
 		this.nextCursor = nextCursor;
 		this.prevCursor = prevCursor;
 		this.hasNext = !!nextCursor && list.length > 0;
 		this.hasPrev = !!prevCursor;
 		this.firstTime = this.updatedTime = Date.now();
+	}
+
+	setError(error: Error) {
+		this.error = error;
+		this.isLoading = false;
 	}
 
 	reset() {
@@ -35,6 +42,7 @@ export class Activity2Scene {
 		this.isLoading = false;
 		this.hasNext = false;
 		this.hasPrev = false;
+		this.error = undefined;
 	}
 }
 
@@ -170,8 +178,7 @@ export class Activity2Loader {
 			this.scene.setList(actions, next_cursor, prev_cursor);
 		} catch (error: unknown) {
 			console.error('Error fetching activity actions:', error);
-		} finally {
-			this.scene.setLoading(false);
+			this.scene.setError(error instanceof Error ? error : new Error(String(error)));
 		}
 	}
 

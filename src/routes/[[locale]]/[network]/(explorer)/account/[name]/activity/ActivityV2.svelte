@@ -26,7 +26,14 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
 	import { formatDateTime } from '$lib/utils/intl';
 
-	const { data } = $props();
+	import type { PageData } from './$types';
+
+	interface Props {
+		data: PageData;
+		onError?: () => void;
+	}
+
+	const { data, onError }: Props = $props();
 
 	const networkName = String(data.network);
 	const context = getContext<UnicoveContext>('state');
@@ -108,6 +115,12 @@
 	const hasPrev = $derived(activityLoader.scene.hasPrev);
 	const pageIsLoading = $derived(activityLoader.scene.isLoading);
 	const activityActions = $derived([...activityLoader.scene.list]);
+
+	$effect(() => {
+		if (activityLoader.scene.error && onError) {
+			onError();
+		}
+	});
 
 	function clickNext() {
 		const nextCursor = activityLoader.scene.nextCursor;
