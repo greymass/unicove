@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2026-01-19T21:59:20.026Z\n"
+"PO-Revision-Date: 2026-01-20T18:59:52.426Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -274,6 +274,8 @@ msgid "Resources"
 msgstr "Resources"
 
 #: src/lib/components/search/input.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 msgid "Clear"
 msgstr "Clear"
 
@@ -425,8 +427,11 @@ msgid "Input Type: {0} Asset Value: {1} Units Value: {2} Symbol: {3}"
 msgstr "Input Type: {0} Asset Value: {1} Units Value: {2} Symbol: {3}"
 
 #: src/lib/components/select/actionvariant.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.svelte
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Summary"
 msgstr "Summary"
 
@@ -436,6 +441,7 @@ msgstr "Ricardian"
 
 #: src/lib/components/select/actionvariant.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Action Data"
 msgstr "Action Data"
 
@@ -488,18 +494,16 @@ msgstr "New Balance:"
 msgid "Transfer"
 msgstr "Transfer"
 
-#. placeholder {0}: memo
-#: src/lib/components/summary/components/transfer.svelte
-msgid "<0/> Memo: {0}"
-msgstr "<0/> Memo: {0}"
+#~ msgid "<0/> Memo: {0}"
+#~ msgstr "<0/> Memo: {0}"
 
 #. placeholder {0}: (Number(resources.cpu) / 1000).toFixed(3)
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 msgid "+ {0} ms (CPU)"
 msgstr "+ {0} ms (CPU)"
 
-#. placeholder {0}: data.powup_cpu
 #. placeholder {0}: data.powup_net
+#. placeholder {0}: data.powup_cpu
 #. placeholder {0}: account.weight
 #. placeholder {0}: key.weight
 #. placeholder {0}: account.weight
@@ -576,6 +580,8 @@ msgstr "<0/> provided the network resources for this transaction."
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 msgid "Next"
 msgstr "Next"
 
@@ -779,6 +785,8 @@ msgid "Bytes"
 msgstr "Bytes"
 
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "Details"
@@ -788,8 +796,8 @@ msgstr "Details"
 msgid "Network Fees"
 msgstr "Network Fees"
 
-#. placeholder {0}: data.network.chain.systemToken?.symbol.code || ''
 #. placeholder {0}: market.network.currency.symbol.code
+#. placeholder {0}: data.network.chain.systemToken?.symbol.code || ''
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 msgid "Market Cap ({0})"
@@ -1076,9 +1084,12 @@ msgid "Reversible Blocks"
 msgstr "Reversible Blocks"
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 msgid "Enter"
 msgstr "Enter"
 
@@ -1353,8 +1364,12 @@ msgstr "Authority"
 msgid "props.account updated {0} seconds ago <0>Refresh</0>"
 msgstr "props.account updated {0} seconds ago <0>Refresh</0>"
 
+#: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV1.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.svelte
@@ -1710,6 +1725,7 @@ msgid "Delete"
 msgstr "Delete"
 
 #: src/lib/components/accountswitch.svelte
+#: src/lib/components/elements/suspiciousmemo.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/buttons.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/buttons.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/buttons.svelte
@@ -1999,10 +2015,10 @@ msgstr "Pill Select"
 msgid "Select a date range"
 msgstr "Select a date range"
 
-#. placeholder {0}: selected.label
-#. placeholder {0}: selectedFormOption.label
-#. placeholder {0}: imageOptionSelected.label
 #. placeholder {0}: JSON.stringify(tokenSelected, null, 2)
+#. placeholder {0}: imageOptionSelected.label
+#. placeholder {0}: selectedFormOption.label
+#. placeholder {0}: selected.label
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
@@ -2414,22 +2430,27 @@ msgstr "Historic"
 msgid "MarketContext"
 msgstr "MarketContext"
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV1.svelte
 msgid "No more"
 msgstr "No more"
 
 #: src/lib/components/elements/action.svelte
+#: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/fund/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV1.svelte
 msgid "Loading"
 msgstr "Loading"
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV1.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/token/[contract]/[symbol]/+page.svelte
 msgid "Load more"
 msgstr "Load more"
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.ts
@@ -2438,7 +2459,11 @@ msgstr "Load more"
 msgid "Contract"
 msgstr "Contract"
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
@@ -2446,17 +2471,19 @@ msgstr "Contract"
 msgid "Action"
 msgstr "Action"
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
 msgid "Filter"
 msgstr "Filter"
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 msgid "Reset"
 msgstr "Reset"
 
 #. placeholder {0}: actionFilter
 #. placeholder {1}: contractFilter
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
 msgid "Filtering to display {0} on the {1} contract."
 msgstr "Filtering to display {0} on the {1} contract."
 
@@ -3971,6 +3998,8 @@ msgid "Reversible"
 msgstr "Reversible"
 
 #: src/lib/components/transaction/header.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 msgid "Date"
 msgstr "Date"
 
@@ -4266,7 +4295,7 @@ msgstr "<0>Unicove -</0> The {0} web wallet and block explorer"
 
 #. placeholder {0}: network.chain.name
 #. placeholder {0}: networkName
-#. placeholder {0}: network.chain.name
+#. placeholder {0}: networkName
 #: src/routes/+layout.server.ts
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
@@ -4300,7 +4329,7 @@ msgstr "{0} Token Swap has begun!"
 msgid "Swap {0} to {1} at a 1:1 ratio"
 msgstr "Swap {0} to {1} at a 1:1 ratio"
 
-#. placeholder {0}: props.network.token.name
+#. placeholder {0}: String(data.quote.symbol.name)
 #. placeholder {0}: String(data.quote.symbol.name)
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/legacy-token-swap.svelte
@@ -4320,7 +4349,7 @@ msgstr "Get Tokens"
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
-#. placeholder {0}: symbol.name
+#. placeholder {0}: String(network.token.symbol.name)
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
@@ -4343,10 +4372,10 @@ msgstr "One {0} of RAM represents ownership rights over 1000 bytes of the networ
 #. placeholder {1}: quote.name
 #. placeholder {0}: base.name
 #. placeholder {1}: quote.name
-#. placeholder {0}: base.name
-#. placeholder {1}: quote.name
-#. placeholder {0}: base.name
-#. placeholder {1}: quote.name
+#. placeholder {0}: data.network.token.name
+#. placeholder {1}: data.network.getRamToken().name
+#. placeholder {0}: String(network.chain.systemToken?.symbol.name)
+#. placeholder {1}: String(ramtoken.name)
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.svelte
@@ -4540,6 +4569,7 @@ msgstr ""
 "Once the transfer is complete, use your private key to import your account into the wallet of\n"
 "your choosing."
 
+#: src/routes/[[locale]]/[network]/(account)/activity/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 msgid "Activity"
 msgstr "Activity"
@@ -5507,19 +5537,27 @@ msgid "Accounts that allow the {0} account to sign on their behalf"
 msgstr "Accounts that allow the {0} account to sign on their behalf"
 
 #. placeholder {0}: network.chain.name
+#. placeholder {0}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.ts
 msgid "Recent activity on the {0} Network."
 msgstr "Recent activity on the {0} Network."
 
 #. placeholder {0}: params.name
 #. placeholder {1}: network.chain.name
+#. placeholder {0}: params.name
+#. placeholder {1}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.ts
 msgid "Account Activity for {0} | {1} Network"
 msgstr "Account Activity for {0} | {1} Network"
 
 #. placeholder {0}: params.name
 #. placeholder {1}: network.chain.name
+#. placeholder {0}: params.name
+#. placeholder {1}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.ts
 msgid "View the transaction history of the {0} account on the {1} network."
 msgstr "View the transaction history of the {0} account on the {1} network."
 
@@ -6549,3 +6587,219 @@ msgstr "Proposals Created by {0}"
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
 msgid "View all multisig proposals created by {0}"
 msgstr "View all multisig proposals created by {0}"
+
+#: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
+msgid "Please log in to view your account activity."
+msgstr "Please log in to view your account activity."
+
+#. placeholder {0}: data.network.chain.name
+#: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
+msgid "Activity tracking is not available on {0}."
+msgstr "Activity tracking is not available on {0}."
+
+#. placeholder {0}: contractFilter
+#: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
+msgid "Filtering to display all actions on the {0} contract."
+msgstr "Filtering to display all actions on the {0} contract."
+
+#: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+msgid "No actions found matching the filter criteria."
+msgstr "No actions found matching the filter criteria."
+
+#: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV1.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+msgid "No activity found for this account."
+msgstr "No activity found for this account."
+
+#: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV1.svelte
+msgid "Date / TX"
+msgstr "Date / TX"
+
+#: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV1.svelte
+msgid "Contract / Action"
+msgstr "Contract / Action"
+
+#: src/lib/components/select/actionvariant.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
+msgid "Table"
+msgstr "Table"
+
+#. placeholder {0}: data.network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+msgid "Activity v2 is not available on {0}."
+msgstr "Activity v2 is not available on {0}."
+
+#~ msgid "← Newer"
+#~ msgstr "← Newer"
+
+#~ msgid "Older →"
+#~ msgstr "Older →"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+msgid "← Prev"
+msgstr "← Prev"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+msgid "Next →"
+msgstr "Next →"
+
+#~ msgid "Order"
+#~ msgstr "Order"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+msgid "Newest First"
+msgstr "Newest First"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+msgid "Oldest First"
+msgstr "Oldest First"
+
+#~ msgid "Start Date"
+#~ msgstr "Start Date"
+
+#~ msgid "End Date"
+#~ msgstr "End Date"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+msgid "Filters"
+msgstr "Filters"
+
+#~ msgid "Clear filters"
+#~ msgstr "Clear filters"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+msgid "From Date"
+msgstr "From Date"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+msgid "To Date"
+msgstr "To Date"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+msgid "Sort Order"
+msgstr "Sort Order"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+msgid "Apply Filters"
+msgstr "Apply Filters"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+msgid "Summary view"
+msgstr "Summary view"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+msgid "Table view"
+msgstr "Table view"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+msgid "Action Data view"
+msgstr "Action Data view"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+msgid "Previous page"
+msgstr "Previous page"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+msgid "Prev"
+msgstr "Prev"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+msgid "Next page"
+msgstr "Next page"
+
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
+msgid "Activity Display Format"
+msgstr "Activity Display Format"
+
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
+msgid "The default view format for account activity."
+msgstr "The default view format for account activity."
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+msgid "Results per page"
+msgstr "Results per page"
+
+#~ msgid "Apply"
+#~ msgstr "Apply"
+
+#~ msgid "<0/> Advanced Filters <1/> <2/>"
+#~ msgstr "<0/> Advanced Filters <1/> <2/>"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+msgid "Show less"
+msgstr "Show less"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+msgid "Show more"
+msgstr "Show more"
+
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
+msgid "Warn about suspicious memos"
+msgstr "Warn about suspicious memos"
+
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
+msgid "Show warnings when transaction memos contain potential phishing content."
+msgstr "Show warnings when transaction memos contain potential phishing content."
+
+#: src/lib/components/elements/suspiciousmemo.svelte
+msgid "Memo hidden - click to reveal"
+msgstr "Memo hidden - click to reveal"
+
+#~ msgid "Potential Scam Warning"
+#~ msgstr "Potential Scam Warning"
+
+#~ msgid "This memo may contain links to malicious websites."
+#~ msgstr "This memo may contain links to malicious websites."
+
+#: src/lib/components/elements/suspiciousmemo.svelte
+msgid "Scammers often send small transactions with phishing links to steal your funds."
+msgstr "Scammers often send small transactions with phishing links to steal your funds."
+
+#: src/lib/components/elements/suspiciousmemo.svelte
+msgid ""
+"<0>Never</0> enter private keys, seed phrases, or credentials\n"
+"on websites linked from transaction memos."
+msgstr ""
+"<0>Never</0> enter private keys, seed phrases, or credentials\n"
+"on websites linked from transaction memos."
+
+#~ msgid "<0/> I understand, reveal memo"
+#~ msgstr "<0/> I understand, reveal memo"
+
+#: src/lib/components/elements/suspiciousmemo.svelte
+msgid "Potential Safety Warning"
+msgstr "Potential Safety Warning"
+
+#: src/lib/components/elements/suspiciousmemo.svelte
+msgid "This memo contains content that may pose a security risk."
+msgstr "This memo contains content that may pose a security risk."
+
+#: src/lib/components/elements/suspiciousmemo.svelte
+msgid "Reveal Memo"
+msgstr "Reveal Memo"

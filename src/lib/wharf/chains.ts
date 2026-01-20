@@ -146,7 +146,7 @@ export const chainConfig: ChainConfig = {
 		rentrex: isENVTrue(env.PUBLIC_FEATURE_RENTREX),
 		rex: isENVTrue(env.PUBLIC_FEATURE_REX),
 		robo: isENVTrue(env.PUBLIC_FEATURE_ROBO),
-		robo2: !!env.PUBLIC_FEATURE_ROBO2,
+		robo2: isENVTrue(env.PUBLIC_FEATURE_ROBO2),
 		sentiment: isENVTrue(env.PUBLIC_FEATURE_SENTIMENT),
 		stakeresource: isENVTrue(env.PUBLIC_FEATURE_STAKERESOURCE),
 		staking: isENVTrue(env.PUBLIC_FEATURE_STAKING),

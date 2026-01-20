@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2026-01-19T21:59:20.033Z\n"
+"PO-Revision-Date: 2026-01-20T18:41:18.327Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -274,6 +274,8 @@ msgid "Resources"
 msgstr "资源"
 
 #: src/lib/components/search/input.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 msgid "Clear"
 msgstr "清除"
 
@@ -425,8 +427,11 @@ msgid "Input Type: {0} Asset Value: {1} Units Value: {2} Symbol: {3}"
 msgstr ""
 
 #: src/lib/components/select/actionvariant.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.svelte
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Summary"
 msgstr "摘要"
 
@@ -436,6 +441,7 @@ msgstr "里卡迪合约"
 
 #: src/lib/components/select/actionvariant.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Action Data"
 msgstr "操作数据"
 
@@ -488,18 +494,16 @@ msgstr "新余额：```"
 msgid "Transfer"
 msgstr "转账"
 
-#. placeholder {0}: memo
-#: src/lib/components/summary/components/transfer.svelte
-msgid "<0/> Memo: {0}"
-msgstr "<0/> 备注：{0}"
+#~ msgid "<0/> Memo: {0}"
+#~ msgstr "<0/> 备注：{0}"
 
 #. placeholder {0}: (Number(resources.cpu) / 1000).toFixed(3)
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 msgid "+ {0} ms (CPU)"
 msgstr "+ {0} 毫秒 (CPU)"
 
-#. placeholder {0}: data.powup_cpu
 #. placeholder {0}: data.powup_net
+#. placeholder {0}: data.powup_cpu
 #. placeholder {0}: account.weight
 #. placeholder {0}: key.weight
 #. placeholder {0}: account.weight
@@ -576,6 +580,8 @@ msgstr "<0/> 为此交易提供了网络资源。"
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 msgid "Next"
 msgstr "下一步"
 
@@ -775,6 +781,8 @@ msgid "Bytes"
 msgstr "字节"
 
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "Details"
@@ -784,8 +792,8 @@ msgstr "详情"
 msgid "Network Fees"
 msgstr "网络费用"
 
-#. placeholder {0}: data.network.chain.systemToken?.symbol.code || ''
 #. placeholder {0}: market.network.currency.symbol.code
+#. placeholder {0}: data.network.chain.systemToken?.symbol.code || ''
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 msgid "Market Cap ({0})"
@@ -1069,9 +1077,13 @@ msgid "Reversible Blocks"
 msgstr ""
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV1.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 msgid "Enter"
 msgstr "输入"
 
@@ -1334,8 +1346,12 @@ msgstr "权限"
 msgid "props.account updated {0} seconds ago <0>Refresh</0>"
 msgstr "props.account {0} 秒前已更新 <0>刷新</0>"
 
+#: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV1.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.svelte
@@ -1676,6 +1692,7 @@ msgid "Delete"
 msgstr ""
 
 #: src/lib/components/accountswitch.svelte
+#: src/lib/components/elements/suspiciousmemo.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/buttons.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/buttons.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/buttons.svelte
@@ -1965,10 +1982,10 @@ msgstr ""
 msgid "Select a date range"
 msgstr ""
 
-#. placeholder {0}: selected.label
-#. placeholder {0}: selectedFormOption.label
-#. placeholder {0}: imageOptionSelected.label
 #. placeholder {0}: JSON.stringify(tokenSelected, null, 2)
+#. placeholder {0}: imageOptionSelected.label
+#. placeholder {0}: selectedFormOption.label
+#. placeholder {0}: selected.label
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
@@ -2363,22 +2380,28 @@ msgstr ""
 msgid "MarketContext"
 msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV1.svelte
 msgid "No more"
 msgstr "没有更多了"
 
 #: src/lib/components/elements/action.svelte
+#: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/fund/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV1.svelte
 msgid "Loading"
 msgstr "加载中"
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV1.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/token/[contract]/[symbol]/+page.svelte
 msgid "Load more"
 msgstr "加载更多"
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV1.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.ts
@@ -2387,7 +2410,12 @@ msgstr "加载更多"
 msgid "Contract"
 msgstr "合约"
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV1.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
@@ -2395,17 +2423,24 @@ msgstr "合约"
 msgid "Action"
 msgstr "操作"
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV1.svelte
 msgid "Filter"
 msgstr "筛选"
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV1.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 msgid "Reset"
 msgstr "重置"
 
 #. placeholder {0}: actionFilter
 #. placeholder {1}: contractFilter
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.svelte
+#. placeholder {0}: actionFilter
+#. placeholder {1}: contractFilter
+#: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV1.svelte
 msgid "Filtering to display {0} on the {1} contract."
 msgstr "正在筛选以显示 {0} 在 {1} 合约上的活动。"
 
@@ -2820,19 +2855,27 @@ msgid "An overview of the {0} smart contract on the {1} network. This contract c
 msgstr "在 {1} 网络上 {0} 智能合约的概述。 此合约包含 {2} 个操作、{3} 个表和 {4} 个结构体。"
 
 #. placeholder {0}: network.chain.name
+#. placeholder {0}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.ts
 msgid "Recent activity on the {0} Network."
 msgstr "在 {0} 网络上的近期活动。"
 
 #. placeholder {0}: params.name
 #. placeholder {1}: network.chain.name
+#. placeholder {0}: params.name
+#. placeholder {1}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.ts
 msgid "Account Activity for {0} | {1} Network"
 msgstr "{0} 的账户活动 | {1} 网络"
 
 #. placeholder {0}: params.name
 #. placeholder {1}: network.chain.name
+#. placeholder {0}: params.name
+#. placeholder {1}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.ts
 msgid "View the transaction history of the {0} account on the {1} network."
 msgstr "查看 {1} 网络上 {0} 账户的交易历史。"
 
@@ -3129,10 +3172,10 @@ msgstr "正在加载主题...```"
 #. placeholder {1}: quote.name
 #. placeholder {0}: base.name
 #. placeholder {1}: quote.name
-#. placeholder {0}: base.name
-#. placeholder {1}: quote.name
-#. placeholder {0}: base.name
-#. placeholder {1}: quote.name
+#. placeholder {0}: data.network.token.name
+#. placeholder {1}: data.network.getRamToken().name
+#. placeholder {0}: String(network.chain.systemToken?.symbol.name)
+#. placeholder {1}: String(ramtoken.name)
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.svelte
@@ -3173,7 +3216,7 @@ msgstr "接收 {0}"
 msgid "Network Fee: <0/> (0.5%)"
 msgstr "网络费用: <0/> (0.5%)"
 
-#. placeholder {0}: props.network.token.name
+#. placeholder {0}: String(data.quote.symbol.name)
 #. placeholder {0}: String(data.quote.symbol.name)
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/legacy-token-swap.svelte
@@ -3677,6 +3720,8 @@ msgid "Reversible"
 msgstr ""
 
 #: src/lib/components/transaction/header.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 msgid "Date"
 msgstr ""
 
@@ -3800,7 +3845,7 @@ msgstr ""
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
-#. placeholder {0}: symbol.name
+#. placeholder {0}: String(network.token.symbol.name)
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
@@ -3830,7 +3875,7 @@ msgstr ""
 
 #. placeholder {0}: network.chain.name
 #. placeholder {0}: networkName
-#. placeholder {0}: network.chain.name
+#. placeholder {0}: networkName
 #: src/routes/+layout.server.ts
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
@@ -4246,6 +4291,7 @@ msgid ""
 "they will need to be claimed from your account page."
 msgstr ""
 
+#: src/routes/[[locale]]/[network]/(account)/activity/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 msgid "Activity"
 msgstr ""
@@ -6386,4 +6432,223 @@ msgstr ""
 #. placeholder {0}: params.name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
 msgid "View all multisig proposals created by {0}"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
+msgid "Please log in to view your account activity."
+msgstr ""
+
+#. placeholder {0}: data.network.chain.name
+#: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
+msgid "Activity tracking is not available on {0}."
+msgstr ""
+
+#. placeholder {0}: contractFilter
+#. placeholder {0}: contractFilter
+#: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV1.svelte
+msgid "Filtering to display all actions on the {0} contract."
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV1.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+msgid "No actions found matching the filter criteria."
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV1.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+msgid "No activity found for this account."
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV1.svelte
+msgid "Date / TX"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV1.svelte
+msgid "Contract / Action"
+msgstr ""
+
+#: src/lib/components/select/actionvariant.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
+msgid "Table"
+msgstr ""
+
+#. placeholder {0}: data.network.chain.name
+#. placeholder {0}: data.network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+msgid "Activity v2 is not available on {0}."
+msgstr ""
+
+#~ msgid "← Newer"
+#~ msgstr ""
+
+#~ msgid "Older →"
+#~ msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+msgid "← Prev"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+msgid "Next →"
+msgstr ""
+
+#~ msgid "Order"
+#~ msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+msgid "Newest First"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+msgid "Oldest First"
+msgstr ""
+
+#~ msgid "Start Date"
+#~ msgstr ""
+
+#~ msgid "End Date"
+#~ msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+msgid "Filters"
+msgstr ""
+
+#~ msgid "Clear filters"
+#~ msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+msgid "From Date"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+msgid "To Date"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+msgid "Sort Order"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+msgid "Apply Filters"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+msgid "Summary view"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+msgid "Table view"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+msgid "Action Data view"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+msgid "Previous page"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+msgid "Prev"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+msgid "Next page"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
+msgid "Activity Display Format"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
+msgid "The default view format for account activity."
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+msgid "Results per page"
+msgstr ""
+
+#~ msgid "Apply"
+#~ msgstr ""
+
+#~ msgid "<0/> Advanced Filters <1/> <2/>"
+#~ msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+msgid "Show less"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+msgid "Show more"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
+msgid "Warn about suspicious memos"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
+msgid "Show warnings when transaction memos contain potential phishing content."
+msgstr ""
+
+#: src/lib/components/elements/suspiciousmemo.svelte
+msgid "Memo hidden - click to reveal"
+msgstr ""
+
+#~ msgid "Potential Scam Warning"
+#~ msgstr ""
+
+#~ msgid "This memo may contain links to malicious websites."
+#~ msgstr ""
+
+#: src/lib/components/elements/suspiciousmemo.svelte
+msgid "Scammers often send small transactions with phishing links to steal your funds."
+msgstr ""
+
+#: src/lib/components/elements/suspiciousmemo.svelte
+msgid ""
+"<0>Never</0> enter private keys, seed phrases, or credentials\n"
+"on websites linked from transaction memos."
+msgstr ""
+
+#~ msgid "<0/> I understand, reveal memo"
+#~ msgstr ""
+
+#: src/lib/components/elements/suspiciousmemo.svelte
+msgid "Potential Safety Warning"
+msgstr ""
+
+#: src/lib/components/elements/suspiciousmemo.svelte
+msgid "This memo contains content that may pose a security risk."
+msgstr ""
+
+#: src/lib/components/elements/suspiciousmemo.svelte
+msgid "Reveal Memo"
 msgstr ""
