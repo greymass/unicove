@@ -86,7 +86,13 @@
 		if (urlParams.order) orderFilter = urlParams.order;
 		if (urlParams.limit) limitFilter = urlParams.limit;
 
-		if (urlParams.contract || urlParams.action || urlParams.startDate || urlParams.endDate || urlParams.order !== 'desc') {
+		if (
+			urlParams.contract ||
+			urlParams.action ||
+			urlParams.startDate ||
+			urlParams.endDate ||
+			urlParams.order !== 'desc'
+		) {
 			filtersOpen = true;
 		}
 
@@ -309,318 +315,346 @@
 </script>
 
 <Stack class="py-4">
-	<div bind:this={controlBarEl} class="bg-surface-container-low border-outline-variant flex flex-col gap-3 rounded-xl border p-3">
-			<div class="flex flex-wrap items-center gap-3">
+	<div
+		bind:this={controlBarEl}
+		class="bg-surface-container-low border-outline-variant flex flex-col gap-3 rounded-xl border p-3"
+	>
+		<div class="flex flex-wrap items-center gap-3">
+			<div class="border-outline-variant flex items-center rounded-lg border">
+				<button
+					onclick={() => setVariant('summary')}
+					class="flex items-center gap-1.5 rounded-l-lg px-3 py-2 text-sm font-medium transition-colors {variant ===
+					'summary'
+						? 'bg-primary text-on-primary'
+						: 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container'}"
+					title="Summary view"
+				>
+					<ListIcon size={16} />
+					<span class="hidden md:inline">Summary</span>
+				</button>
+				<button
+					onclick={() => setVariant('table')}
+					class="border-outline-variant flex items-center gap-1.5 border-x px-3 py-2 text-sm font-medium transition-colors {variant ===
+					'table'
+						? 'bg-primary text-on-primary'
+						: 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container'}"
+					title="Table view"
+				>
+					<TableIcon size={16} />
+					<span class="hidden md:inline">Table</span>
+				</button>
+				<button
+					onclick={() => setVariant('pretty')}
+					class="flex items-center gap-1.5 rounded-r-lg px-3 py-2 text-sm font-medium transition-colors {variant ===
+					'pretty'
+						? 'bg-primary text-on-primary'
+						: 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container'}"
+					title="Action Data view"
+				>
+					<GridIcon size={16} />
+					<span class="hidden md:inline">Data</span>
+				</button>
+			</div>
+
+			<div class="flex items-center gap-2">
+				<button
+					onclick={toggleFilters}
+					class="text-on-surface-variant hover:text-on-surface hover:bg-surface-container flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-colors"
+				>
+					<FilterIcon size={16} />
+					<span class="hidden sm:inline">Filters</span>
+					{#if activeFilterCount > 0}
+						<span
+							class="bg-primary text-on-primary flex h-5 min-w-5 items-center justify-center rounded-full px-1.5 text-xs font-semibold"
+						>
+							{activeFilterCount}
+						</span>
+					{/if}
+					<ChevronDownIcon
+						size={16}
+						class="transition-transform duration-200 {filtersOpen ? 'rotate-180' : ''}"
+					/>
+				</button>
+
+				{#if activityLoader?.filtering}
+					<button
+						onclick={reset}
+						class="text-on-surface-variant hover:text-on-surface flex items-center gap-1 text-sm"
+					>
+						<XIcon size={14} />
+						<span class="hidden sm:inline">Clear</span>
+					</button>
+				{/if}
+			</div>
+
+			<div class="ml-auto flex items-center gap-2">
+				<select
+					bind:value={limitFilter}
+					onchange={handleLimitChange}
+					class="bg-surface-container border-outline-variant text-on-surface-variant h-9 rounded-lg border px-2 text-sm"
+					title="Results per page"
+				>
+					{#each limitOptions as option}
+						<option value={option}>{option}</option>
+					{/each}
+				</select>
 				<div class="border-outline-variant flex items-center rounded-lg border">
 					<button
-						onclick={() => setVariant('summary')}
-						class="flex items-center gap-1.5 rounded-l-lg px-3 py-2 text-sm font-medium transition-colors {variant === 'summary' ? 'bg-primary text-on-primary' : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container'}"
-						title="Summary view"
+						onclick={clickPrev}
+						disabled={!hasPrev || pageIsLoading}
+						class="flex items-center gap-1 rounded-l-lg px-2 py-1.5 text-sm font-medium transition-colors disabled:cursor-not-allowed {hasPrev &&
+						!pageIsLoading
+							? 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container'
+							: 'text-on-surface-variant/40'}"
+						title="Previous page"
 					>
-						<ListIcon size={16} />
-						<span class="hidden md:inline">Summary</span>
+						<ChevronLeftIcon size={16} />
+						<span class="hidden sm:inline">Prev</span>
 					</button>
+					<span class="bg-outline-variant h-5 w-px"></span>
 					<button
-						onclick={() => setVariant('table')}
-						class="flex items-center gap-1.5 border-x border-outline-variant px-3 py-2 text-sm font-medium transition-colors {variant === 'table' ? 'bg-primary text-on-primary' : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container'}"
-						title="Table view"
+						onclick={clickNext}
+						disabled={!hasNext || pageIsLoading}
+						class="flex items-center gap-1 rounded-r-lg px-2 py-1.5 text-sm font-medium transition-colors disabled:cursor-not-allowed {hasNext &&
+						!pageIsLoading
+							? 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container'
+							: 'text-on-surface-variant/40'}"
+						title="Next page"
 					>
-						<TableIcon size={16} />
-						<span class="hidden md:inline">Table</span>
+						<span class="hidden sm:inline">Next</span>
+						<ChevronRightIcon size={16} />
 					</button>
-					<button
-						onclick={() => setVariant('pretty')}
-						class="flex items-center gap-1.5 rounded-r-lg px-3 py-2 text-sm font-medium transition-colors {variant === 'pretty' ? 'bg-primary text-on-primary' : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container'}"
-						title="Action Data view"
-					>
-						<GridIcon size={16} />
-						<span class="hidden md:inline">Data</span>
-					</button>
-				</div>
-
-				<div class="flex items-center gap-2">
-					<button
-						onclick={toggleFilters}
-						class="text-on-surface-variant hover:text-on-surface hover:bg-surface-container flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-colors"
-					>
-						<FilterIcon size={16} />
-						<span class="hidden sm:inline">Filters</span>
-						{#if activeFilterCount > 0}
-							<span
-								class="bg-primary text-on-primary flex h-5 min-w-5 items-center justify-center rounded-full px-1.5 text-xs font-semibold"
-							>
-								{activeFilterCount}
-							</span>
-						{/if}
-						<ChevronDownIcon
-							size={16}
-							class="transition-transform duration-200 {filtersOpen ? 'rotate-180' : ''}"
-						/>
-					</button>
-
-					{#if activityLoader?.filtering}
-						<button
-							onclick={reset}
-							class="text-on-surface-variant hover:text-on-surface flex items-center gap-1 text-sm"
-						>
-							<XIcon size={14} />
-							<span class="hidden sm:inline">Clear</span>
-						</button>
-					{/if}
-				</div>
-
-				<div class="ml-auto flex items-center gap-2">
-					<select
-						bind:value={limitFilter}
-						onchange={handleLimitChange}
-						class="bg-surface-container border-outline-variant text-on-surface-variant h-9 rounded-lg border px-2 text-sm"
-						title="Results per page"
-					>
-						{#each limitOptions as option}
-							<option value={option}>{option}</option>
-						{/each}
-					</select>
-					<div class="border-outline-variant flex items-center rounded-lg border">
-						<button
-							onclick={clickPrev}
-							disabled={!hasPrev || pageIsLoading}
-							class="flex items-center gap-1 rounded-l-lg px-2 py-1.5 text-sm font-medium transition-colors disabled:cursor-not-allowed {hasPrev && !pageIsLoading ? 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container' : 'text-on-surface-variant/40'}"
-							title="Previous page"
-						>
-							<ChevronLeftIcon size={16} />
-							<span class="hidden sm:inline">Prev</span>
-						</button>
-						<span class="bg-outline-variant h-5 w-px"></span>
-						<button
-							onclick={clickNext}
-							disabled={!hasNext || pageIsLoading}
-							class="flex items-center gap-1 rounded-r-lg px-2 py-1.5 text-sm font-medium transition-colors disabled:cursor-not-allowed {hasNext && !pageIsLoading ? 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container' : 'text-on-surface-variant/40'}"
-							title="Next page"
-						>
-							<span class="hidden sm:inline">Next</span>
-							<ChevronRightIcon size={16} />
-						</button>
-					</div>
 				</div>
 			</div>
-
-			{#if filtersOpen}
-				<div class="border-outline-variant border-t pt-3">
-					<div class="grid gap-4">
-						<div class="flex flex-wrap items-end gap-4">
-							<div class="flex flex-col gap-1.5">
-								<label for="contract-input" class="text-on-surface-variant text-xs font-medium"
-									>Contract</label
-								>
-								<NameInput
-									bind:this={contractInput}
-									bind:value={contractFilter}
-									bind:valid={contractValid}
-									id="contract-input"
-									placeholder="e.g. eosio.token"
-									onkeypress={handleKeyPress}
-								/>
-							</div>
-							<div class="flex flex-col gap-1.5">
-								<label for="action-input" class="text-on-surface-variant text-xs font-medium"
-									>Action</label
-								>
-								<NameInput
-									bind:this={actionInput}
-									bind:value={actionFilter}
-									bind:valid={actionValid}
-									id="action-input"
-									placeholder="e.g. transfer"
-									onkeypress={handleKeyPress}
-								/>
-							</div>
-							<div class="flex flex-col gap-1.5">
-								<label for="start-date-input" class="text-on-surface-variant text-xs font-medium"
-									>From Date</label
-								>
-								<input
-									type="date"
-									id="start-date-input"
-									bind:value={startDateFilter}
-									onkeypress={handleKeyPress}
-									class="bg-surface-container border-outline-variant h-10 min-w-36 rounded-lg border px-3 text-sm focus:text-on-surface {startDateFilter ? '' : 'text-on-surface-variant/50'}"
-								/>
-							</div>
-							<div class="flex flex-col gap-1.5">
-								<label for="end-date-input" class="text-on-surface-variant text-xs font-medium"
-									>To Date</label
-								>
-								<input
-									type="date"
-									id="end-date-input"
-									bind:value={endDateFilter}
-									onkeypress={handleKeyPress}
-									class="bg-surface-container border-outline-variant h-10 min-w-36 rounded-lg border px-3 text-sm focus:text-on-surface {endDateFilter ? '' : 'text-on-surface-variant/50'}"
-								/>
-							</div>
-							<div class="flex flex-col gap-1.5">
-								<label for="order-input" class="text-on-surface-variant text-xs font-medium"
-									>Sort Order</label
-								>
-								<select
-									id="order-input"
-									bind:value={orderFilter}
-									class="bg-surface-container border-outline-variant h-10 min-w-36 rounded-lg border px-3 text-sm"
-								>
-									<option value="desc">Newest First</option>
-									<option value="asc">Oldest First</option>
-								</select>
-							</div>
-						</div>
-
-						<div class="flex items-center justify-end gap-2">
-							<Button variant="secondary" class="h-9" onclick={reset}>Reset</Button>
-							<Button class="h-9" onclick={filter} disabled={!filterable}>Apply Filters</Button>
-						</div>
-					</div>
-				</div>
-			{/if}
 		</div>
 
-		{#if isLoading}
-			<div class="flex items-center justify-center gap-4 py-20">
-				<div class="bounce bounce-1 h-3 w-3 rounded-full bg-white"></div>
-				<div class="bounce bounce-2 h-3 w-3 rounded-full bg-white"></div>
-				<div class="bounce bounce-3 h-3 w-3 rounded-full bg-white"></div>
-			</div>
-		{:else if !activityActions.length}
-			<div class="flex items-center justify-center py-20">
-				<p class="text-center text-gray-400">
-					{#if activityLoader?.filtering}
-						No actions found matching the filter criteria.
-					{:else}
-						No activity found for this account.
-					{/if}
-				</p>
-			</div>
-		{:else}
-			{#if variant === 'table'}
-				<Card class="overflow-hidden p-0">
-					<div class="hidden text-xs font-medium uppercase tracking-wide text-on-surface-variant/70 md:flex">
-						<div class="w-44 shrink-0 px-4 py-3">Date</div>
-						<div class="w-40 shrink-0 px-4 py-3">Action</div>
-						<div class="flex-1 px-4 py-3">Details</div>
+		{#if filtersOpen}
+			<div class="border-outline-variant border-t pt-3">
+				<div class="grid gap-4">
+					<div class="flex flex-wrap items-end gap-4">
+						<div class="flex flex-col gap-1.5">
+							<label for="contract-input" class="text-on-surface-variant text-xs font-medium"
+								>Contract</label
+							>
+							<NameInput
+								bind:this={contractInput}
+								bind:value={contractFilter}
+								bind:valid={contractValid}
+								id="contract-input"
+								placeholder="e.g. eosio.token"
+								onkeypress={handleKeyPress}
+							/>
+						</div>
+						<div class="flex flex-col gap-1.5">
+							<label for="action-input" class="text-on-surface-variant text-xs font-medium"
+								>Action</label
+							>
+							<NameInput
+								bind:this={actionInput}
+								bind:value={actionFilter}
+								bind:valid={actionValid}
+								id="action-input"
+								placeholder="e.g. transfer"
+								onkeypress={handleKeyPress}
+							/>
+						</div>
+						<div class="flex flex-col gap-1.5">
+							<label for="start-date-input" class="text-on-surface-variant text-xs font-medium"
+								>From Date</label
+							>
+							<input
+								type="date"
+								id="start-date-input"
+								bind:value={startDateFilter}
+								onkeypress={handleKeyPress}
+								class="bg-surface-container border-outline-variant focus:text-on-surface h-10 min-w-36 rounded-lg border px-3 text-sm {startDateFilter
+									? ''
+									: 'text-on-surface-variant/50'}"
+							/>
+						</div>
+						<div class="flex flex-col gap-1.5">
+							<label for="end-date-input" class="text-on-surface-variant text-xs font-medium"
+								>To Date</label
+							>
+							<input
+								type="date"
+								id="end-date-input"
+								bind:value={endDateFilter}
+								onkeypress={handleKeyPress}
+								class="bg-surface-container border-outline-variant focus:text-on-surface h-10 min-w-36 rounded-lg border px-3 text-sm {endDateFilter
+									? ''
+									: 'text-on-surface-variant/50'}"
+							/>
+						</div>
+						<div class="flex flex-col gap-1.5">
+							<label for="order-input" class="text-on-surface-variant text-xs font-medium"
+								>Sort Order</label
+							>
+							<select
+								id="order-input"
+								bind:value={orderFilter}
+								class="bg-surface-container border-outline-variant h-10 min-w-36 rounded-lg border px-3 text-sm"
+							>
+								<option value="desc">Newest First</option>
+								<option value="asc">Oldest First</option>
+							</select>
+						</div>
 					</div>
-					<div class="divide-y divide-outline-variant/40">
-						{#each activityActions as activityAction}
-							{@const contract = String(activityAction.trace.action.account)}
-							{@const action = String(activityAction.trace.action.name)}
-							{@const datetime = activityAction.trace.block_time.toDate()}
-							{@const trxId = activityAction.trace.trx_id}
-							{@const rowKey = `${trxId}-${activityAction.trace.receipt.global_sequence}`}
-							{@const isExpanded = expandedRows.has(rowKey)}
-							{@const summary = getActionSummaryComponent(
-								contract,
-								action,
-								activityAction.trace.act.data
-							)}
-							<div class="hover:bg-surface-container-high/50 transition-colors">
-								<div class="flex flex-col gap-2 p-4 md:flex-row md:items-start md:gap-0">
-									<div class="flex items-center gap-3 md:w-44 md:shrink-0 md:flex-col md:items-start md:gap-1">
-										<div class="text-sm tabular-nums">
-											{formatDateTime(datetime, data.locale || 'en', {
-												dateStyle: 'short',
-												timeStyle: 'short'
-											})}
-										</div>
-										<div class="text-on-surface-variant font-mono text-xs md:block">
-											<Transaction id={trxId} />
-										</div>
-									</div>
-									<div class="flex items-center gap-2 md:w-40 md:shrink-0 md:flex-col md:items-start md:gap-0.5">
-										<span class="bg-surface-container text-on-surface rounded px-2 py-0.5 text-sm font-medium">
-											<Contract name={Name.from(contract)} action={Name.from(action)}>
-												{action}
-											</Contract>
-										</span>
-										<span class="text-on-surface-variant text-xs">
-											<Contract name={Name.from(contract)}>
-												{contract}
-											</Contract>
-										</span>
-									</div>
-									<div class="@container min-w-0 flex-1 text-sm md:pl-4">
-										<div class="relative">
-											<div
-												use:checkOverflow={rowKey}
-												class="overflow-hidden transition-all {isExpanded ? '' : 'max-h-20'}"
-											>
-												{#if summary}
-													{@const SummaryComponent = summary}
-													<SummaryComponent
-														action={activityAction.trace.action}
-														data={activityAction.trace.act.data}
-														perspectiveOf={Name.from(data.name)}
-													/>
-												{:else if activityAction.trace.act.data}
-													<GenericSummary data={activityAction.trace.act.data} />
-												{/if}
-											</div>
-											{#if overflowingRows.has(rowKey) && !isExpanded}
-												<div class="from-surface-container-lowest pointer-events-none absolute inset-x-0 bottom-0 h-6 bg-gradient-to-t to-transparent"></div>
-											{/if}
-										</div>
-										{#if overflowingRows.has(rowKey) || isExpanded}
-											<button
-												onclick={() => {
-													if (isExpanded) {
-														expandedRows.delete(rowKey);
-													} else {
-														expandedRows.add(rowKey);
-													}
-													expandedRows = new Set(expandedRows);
-												}}
-												class="text-primary hover:text-primary/80 hover:bg-primary/10 mt-1 inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-xs font-medium transition-colors"
-											>
-												<ChevronsUpDownIcon size={14} />
-												{isExpanded ? 'Show less' : 'Show more'}
-											</button>
-										{/if}
-									</div>
-								</div>
-							</div>
-						{/each}
+
+					<div class="flex items-center justify-end gap-2">
+						<Button variant="secondary" class="h-9" onclick={reset}>Reset</Button>
+						<Button class="h-9" onclick={filter} disabled={!filterable}>Apply Filters</Button>
 					</div>
-				</Card>
-			{:else}
-				<ol class="grid gap-12">
+				</div>
+			</div>
+		{/if}
+	</div>
+
+	{#if isLoading}
+		<div class="flex items-center justify-center gap-4 py-20">
+			<div class="bounce bounce-1 h-3 w-3 rounded-full bg-white"></div>
+			<div class="bounce bounce-2 h-3 w-3 rounded-full bg-white"></div>
+			<div class="bounce bounce-3 h-3 w-3 rounded-full bg-white"></div>
+		</div>
+	{:else if !activityActions.length}
+		<div class="flex items-center justify-center py-20">
+			<p class="text-center text-gray-400">
+				{#if activityLoader?.filtering}
+					No actions found matching the filter criteria.
+				{:else}
+					No activity found for this account.
+				{/if}
+			</p>
+		</div>
+	{:else}
+		{#if variant === 'table'}
+			<Card class="overflow-hidden p-0">
+				<div
+					class="text-on-surface-variant/70 hidden text-xs font-medium tracking-wide uppercase md:flex"
+				>
+					<div class="w-44 shrink-0 px-4 py-3">Date</div>
+					<div class="w-40 shrink-0 px-4 py-3">Action</div>
+					<div class="flex-1 px-4 py-3">Details</div>
+				</div>
+				<div class="divide-outline-variant/40 divide-y">
 					{#each activityActions as activityAction}
 						{@const contract = String(activityAction.trace.action.account)}
 						{@const action = String(activityAction.trace.action.name)}
+						{@const datetime = activityAction.trace.block_time.toDate()}
+						{@const trxId = activityAction.trace.trx_id}
+						{@const rowKey = `${trxId}-${activityAction.trace.receipt.global_sequence}`}
+						{@const isExpanded = expandedRows.has(rowKey)}
 						{@const summary = getActionSummaryComponent(
 							contract,
 							action,
 							activityAction.trace.act.data
 						)}
-						<li class="">
-							<Trace
-								perspectiveOf={Name.from(data.name)}
-								trace={activityAction.trace}
-								{summary}
-								date
-								trxid
-								{variant}
-							/>
-						</li>
+						<div class="hover:bg-surface-container-high/50 transition-colors">
+							<div class="flex flex-col gap-2 p-4 md:flex-row md:items-start md:gap-0">
+								<div
+									class="flex items-center gap-3 md:w-44 md:shrink-0 md:flex-col md:items-start md:gap-1"
+								>
+									<div class="text-sm tabular-nums">
+										{formatDateTime(datetime, data.locale || 'en', {
+											dateStyle: 'short',
+											timeStyle: 'short'
+										})}
+									</div>
+									<div class="text-on-surface-variant font-mono text-xs md:block">
+										<Transaction id={trxId} />
+									</div>
+								</div>
+								<div
+									class="flex items-center gap-2 md:w-40 md:shrink-0 md:flex-col md:items-start md:gap-0.5"
+								>
+									<span
+										class="bg-surface-container text-on-surface rounded px-2 py-0.5 text-sm font-medium"
+									>
+										<Contract name={Name.from(contract)} action={Name.from(action)}>
+											{action}
+										</Contract>
+									</span>
+									<span class="text-on-surface-variant text-xs">
+										<Contract name={Name.from(contract)}>
+											{contract}
+										</Contract>
+									</span>
+								</div>
+								<div class="@container min-w-0 flex-1 text-sm md:pl-4">
+									<div class="relative">
+										<div
+											use:checkOverflow={rowKey}
+											class="overflow-hidden transition-all {isExpanded ? '' : 'max-h-20'}"
+										>
+											{#if summary}
+												{@const SummaryComponent = summary}
+												<SummaryComponent
+													action={activityAction.trace.action}
+													data={activityAction.trace.act.data}
+													perspectiveOf={Name.from(data.name)}
+												/>
+											{:else if activityAction.trace.act.data}
+												<GenericSummary data={activityAction.trace.act.data} />
+											{/if}
+										</div>
+										{#if overflowingRows.has(rowKey) && !isExpanded}
+											<div
+												class="from-surface-container-lowest pointer-events-none absolute inset-x-0 bottom-0 h-6 bg-gradient-to-t to-transparent"
+											></div>
+										{/if}
+									</div>
+									{#if overflowingRows.has(rowKey) || isExpanded}
+										<button
+											onclick={() => {
+												if (isExpanded) {
+													expandedRows.delete(rowKey);
+												} else {
+													expandedRows.add(rowKey);
+												}
+												expandedRows = new Set(expandedRows);
+											}}
+											class="text-primary hover:text-primary/80 hover:bg-primary/10 mt-1 inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-xs font-medium transition-colors"
+										>
+											<ChevronsUpDownIcon size={14} />
+											{isExpanded ? 'Show less' : 'Show more'}
+										</button>
+									{/if}
+								</div>
+							</div>
+						</div>
 					{/each}
-				</ol>
-			{/if}
-			{#if hasPrev || hasNext}
-				<div class="flex justify-center gap-4">
-					<Button onclick={clickPrev} disabled={!hasPrev || pageIsLoading}>
-						← Prev
-					</Button>
-					<Button onclick={clickNext} disabled={!hasNext || pageIsLoading}>
-						Next →
-					</Button>
 				</div>
-			{/if}
+			</Card>
+		{:else}
+			<ol class="grid gap-12">
+				{#each activityActions as activityAction}
+					{@const contract = String(activityAction.trace.action.account)}
+					{@const action = String(activityAction.trace.action.name)}
+					{@const summary = getActionSummaryComponent(
+						contract,
+						action,
+						activityAction.trace.act.data
+					)}
+					<li class="">
+						<Trace
+							perspectiveOf={Name.from(data.name)}
+							trace={activityAction.trace}
+							{summary}
+							date
+							trxid
+							{variant}
+						/>
+					</li>
+				{/each}
+			</ol>
 		{/if}
+		{#if hasPrev || hasNext}
+			<div class="flex justify-center gap-4">
+				<Button onclick={clickPrev} disabled={!hasPrev || pageIsLoading}>← Prev</Button>
+				<Button onclick={clickNext} disabled={!hasNext || pageIsLoading}>Next →</Button>
+			</div>
+		{/if}
+	{/if}
 </Stack>
 
 <style>

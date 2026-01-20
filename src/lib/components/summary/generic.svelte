@@ -8,9 +8,7 @@
 
 	let { data, nested = false }: Props = $props();
 
-	const sortedEntries = $derived(
-		Object.entries(data).sort(([a], [b]) => a.localeCompare(b))
-	);
+	const sortedEntries = $derived(Object.entries(data).sort(([a], [b]) => a.localeCompare(b)));
 </script>
 
 {#if nested}
@@ -18,7 +16,7 @@
 		{#each sortedEntries as [key, value]}
 			<div class="flex flex-wrap gap-x-2 gap-y-0.5 py-0.5">
 				<span class="text-on-surface-variant shrink-0 text-xs">{key}:</span>
-				<span class="min-w-0 break-all font-mono text-xs">
+				<span class="min-w-0 font-mono text-xs break-all">
 					{#if typeof value === 'object' && value !== null}
 						<GenericSummary data={value as Record<string, unknown>} nested />
 					{:else}
@@ -33,7 +31,7 @@
 		{#each sortedEntries as [key, value]}
 			<div class="flex gap-1.5">
 				<span class="text-on-surface-variant shrink-0 text-xs">{key}:</span>
-				<span class="min-w-0 break-all font-mono text-xs">
+				<span class="min-w-0 font-mono text-xs break-all">
 					{#if typeof value === 'object' && value !== null}
 						<GenericSummary data={value as Record<string, unknown>} nested />
 					{:else}

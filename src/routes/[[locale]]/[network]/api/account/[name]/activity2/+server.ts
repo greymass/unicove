@@ -22,9 +22,7 @@ export async function GET({ fetch, locals: { network }, params, url }: RequestEv
 	}
 
 	const cursor = url.searchParams.get('cursor') || undefined;
-	const limit = url.searchParams.get('limit')
-		? Number(url.searchParams.get('limit'))
-		: undefined;
+	const limit = url.searchParams.get('limit') ? Number(url.searchParams.get('limit')) : undefined;
 	const order = (url.searchParams.get('order') as 'asc' | 'desc') || undefined;
 	const contract = url.searchParams.get('contract') || undefined;
 	const action = url.searchParams.get('action') || undefined;

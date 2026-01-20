@@ -159,7 +159,15 @@ export class Activity2Loader {
 				params.set('limit', String(this.limit));
 			}
 
-			this.filtering = !!(this.contract || this.action || this.date || this.startDate || this.endDate || this.order !== 'desc' || this.limit !== 20);
+			this.filtering = !!(
+				this.contract ||
+				this.action ||
+				this.date ||
+				this.startDate ||
+				this.endDate ||
+				this.order !== 'desc' ||
+				this.limit !== 20
+			);
 
 			const queryString = params.toString();
 			const path = localizePath(

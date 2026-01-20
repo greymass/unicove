@@ -44,7 +44,7 @@
 
 		{#if memo}
 			<span class="text-on-surface-variant inline-flex items-start gap-1">
-				<NotebookText class="size-3.5 mt-0.5 shrink-0" />
+				<NotebookText class="mt-0.5 size-3.5 shrink-0" />
 				<SuspiciousMemo {memo} />
 			</span>
 		{/if}
