@@ -100,7 +100,6 @@
 
 		{#if data.account && data.account.balance}
 			<TokenBalance
-				account={String(data.account.name)}
 				balance={data.account.balance}
 				child="total"
 				cta={data.network.supports('directfunding') &&
@@ -125,7 +124,6 @@
 
 		{#if legacytoken && legacybalance && legacybalance.balance.units.gt(ZeroUnits)}
 			<TokenBalance
-				account={String(data.account.name)}
 				balance={legacybalance}
 				cta={data.network.supports('directfunding') &&
 				data.network.config.coinbase?.assets.includes(legacybalance.balance.symbol.name)
@@ -149,7 +147,6 @@
 
 		{#if rambalance}
 			<TokenBalance
-				account={String(data.account.name)}
 				balance={rambalance}
 				cta={[
 					{
@@ -172,14 +169,7 @@
 			{#each balances as balance}
 				{@const pair = market.market.getPair(balance.token.id, currency)}
 				{@const value = market.market.value(balance.token.id, currency, balance.balance)}
-				<TokenBalance
-					account={String(data.account.name)}
-					{balance}
-					{isCurrentUser}
-					network={data.network}
-					{pair}
-					{value}
-				/>
+				<TokenBalance {balance} {isCurrentUser} network={data.network} {pair} {value} />
 			{/each}
 		{/if}
 	</div>

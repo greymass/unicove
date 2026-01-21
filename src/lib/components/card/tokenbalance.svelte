@@ -30,7 +30,6 @@
 	}
 
 	interface TokenOverviewProps {
-		account?: string;
 		balance: TokenBalance;
 		class?: string;
 		child?: string;
@@ -46,7 +45,6 @@
 	}
 
 	let {
-		account,
 		balance: _balance,
 		class: className = 'break-after-avoid',
 		child,

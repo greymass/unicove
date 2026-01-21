@@ -9,7 +9,6 @@
 	import AccountLink from '$lib/components/elements/account.svelte';
 	import AssetElement from '$lib/components/elements/asset.svelte';
 	import Transaction from '$lib/components/elements/transaction.svelte';
-	import { Stack } from 'unicove-components';
 	import { formatDateTime } from '$lib/utils/intl';
 
 	interface Props {

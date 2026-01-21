@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getContext, onMount } from 'svelte';
+	import { onMount } from 'svelte';
 	import { Asset, Name } from '@wharfkit/antelope';
 	import { page } from '$app/state';
 	import { goto } from '$app/navigation';
@@ -24,7 +24,6 @@
 	import AssetElement from '$lib/components/elements/asset.svelte';
 	import SuspiciousMemo from '$lib/components/elements/suspiciousmemo.svelte';
 	import Transaction from '$lib/components/elements/transaction.svelte';
-	import type { UnicoveContext } from '$lib/state/client.svelte.js';
 	import { formatDateTime } from '$lib/utils/intl';
 
 	import type { PageData } from './$types';
@@ -36,7 +35,6 @@
 	const { data }: Props = $props();
 
 	const networkName = String(data.network);
-	const context = getContext<UnicoveContext>('state');
 	const systemTokenContract = String(data.network.token.contract);
 
 	function getUrlParams() {
