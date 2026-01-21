@@ -146,25 +146,25 @@ codegen/clean:
 	rm -rf $(CONTRACTS)/*.ts
 
 config/eos: codegen/clean
-	cp ./configs/.env.eos .env.local
+	$(ENVS)/merge-env.sh ./configs/.env.eos .env.local
 
 config/jungle4: codegen/clean
-	cp ./configs/.env.jungle4 .env.local
+	$(ENVS)/merge-env.sh ./configs/.env.jungle4 .env.local
 
 config/kylin: codegen/clean
-	cp ./configs/.env.kylin .env.local
+	$(ENVS)/merge-env.sh ./configs/.env.kylin .env.local
 
 config/telos: codegen/clean
-	cp ./configs/.env.telos .env.local
+	$(ENVS)/merge-env.sh ./configs/.env.telos .env.local
 
 config/telostestnet: codegen/clean
-	cp ./configs/.env.telostestnet .env.local
+	$(ENVS)/merge-env.sh ./configs/.env.telostestnet .env.local
 
 config/vaulta: codegen/clean
-	cp ./configs/.env.vaulta .env.local
+	$(ENVS)/merge-env.sh ./configs/.env.vaulta .env.local
 
-config/wax: codegen/clean 
-	cp ./configs/.env.wax .env.local
-	
-config/waxtestnet: codegen/clean 
-	cp ./configs/.env.waxtestnet .env.local
+config/wax: codegen/clean
+	$(ENVS)/merge-env.sh ./configs/.env.wax .env.local
+
+config/waxtestnet: codegen/clean
+	$(ENVS)/merge-env.sh ./configs/.env.waxtestnet .env.local
