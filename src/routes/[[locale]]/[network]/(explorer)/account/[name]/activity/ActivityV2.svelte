@@ -17,7 +17,16 @@
 
 	import { Activity2Loader } from './state.v2.svelte.js';
 	import { getActionSummaryComponent } from '$lib/components/summary/index.js';
-	import { Button, Card, Chip, Label, Stack, NameInput, Select, type ExtendedSelectOption } from 'unicove-components';
+	import {
+		Button,
+		Card,
+		Chip,
+		Label,
+		Stack,
+		NameInput,
+		Select,
+		type ExtendedSelectOption
+	} from 'unicove-components';
 	import Trace from '$lib/components/elements/trace.svelte';
 	import Transaction from '$lib/components/elements/transaction.svelte';
 	import Contract from '$lib/components/elements/contract.svelte';
@@ -220,8 +229,12 @@
 		{ label: 'Oldest First', value: 'asc' }
 	];
 
-	const selectedLimit = $derived(limitOptions.find((o) => o.value === limitFilter) || limitOptions[1]);
-	const selectedOrder = $derived(orderOptions.find((o) => o.value === orderFilter) || orderOptions[0]);
+	const selectedLimit = $derived(
+		limitOptions.find((o) => o.value === limitFilter) || limitOptions[1]
+	);
+	const selectedOrder = $derived(
+		orderOptions.find((o) => o.value === orderFilter) || orderOptions[0]
+	);
 
 	const activeFilterCount = $derived.by(() => {
 		let count = 0;
