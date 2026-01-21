@@ -31,20 +31,20 @@
 	});
 
 	const isLoading = $derived.by(() => {
-		const scene = activityLoader.scene;
-		return scene.isLoading && !scene.list.length;
+		const page = activityLoader.page;
+		return page.isLoading && !page.results.length;
 	});
 
-	const hasMore = $derived(activityLoader.scene.hasMore);
+	const hasMore = $derived(activityLoader.page.hasMore);
 	const loadingText = $derived.by(() => {
-		const scene = activityLoader.scene;
-		if (!scene.hasMore) return 'No more';
-		if (scene.isLoading) return 'Loading';
+		const page = activityLoader.page;
+		if (!page.hasMore) return 'No more';
+		if (page.isLoading) return 'Loading';
 		return 'Load more';
 	});
 
 	const activityActions: ActivityResponseAction[] = $derived.by(() => {
-		return [...activityLoader.scene.list];
+		return [...activityLoader.page.results];
 	});
 
 	function clickLoadMore() {

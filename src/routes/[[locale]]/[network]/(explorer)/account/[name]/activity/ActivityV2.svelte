@@ -3,30 +3,18 @@
 	import { Name } from '@wharfkit/antelope';
 	import { page } from '$app/state';
 	import { goto } from '$app/navigation';
-	import {
-		ChevronDownIcon,
-		ChevronLeftIcon,
-		ChevronRightIcon,
-		FilterIcon,
-		GridIcon,
-		ListIcon,
-		TableIcon,
-		XIcon,
-		ChevronsUpDownIcon
-	} from '@lucide/svelte';
+	import { GridIcon, ListIcon, TableIcon, ChevronsUpDownIcon } from '@lucide/svelte';
 
-	import { Activity2Loader } from './state.v2.svelte.js';
+	import { ActivityPaginator } from './state.v2.svelte.js';
 	import { getActionSummaryComponent } from '$lib/components/summary/index.js';
-	import {
-		Button,
-		Card,
-		Chip,
-		Label,
-		Stack,
-		NameInput,
-		Select,
-		type ExtendedSelectOption
-	} from 'unicove-components';
+	import { Button, Card, Label, Stack, NameInput } from 'unicove-components';
+	import PaginationControls from '$lib/components/filters/PaginationControls.svelte';
+	import FilterToggleButton from '$lib/components/filters/FilterToggleButton.svelte';
+	import ClearFiltersButton from '$lib/components/filters/ClearFiltersButton.svelte';
+	import DateRangeInputs from '$lib/components/filters/DateRangeInputs.svelte';
+	import SortOrderSelect from '$lib/components/filters/SortOrderSelect.svelte';
+	import LimitSelect from '$lib/components/filters/LimitSelect.svelte';
+	import LoadingBounce from '$lib/components/filters/LoadingBounce.svelte';
 	import Trace from '$lib/components/elements/trace.svelte';
 	import Transaction from '$lib/components/elements/transaction.svelte';
 	import Contract from '$lib/components/elements/contract.svelte';
@@ -105,7 +93,7 @@
 			filtersOpen = true;
 		}
 
-		const loader = Activity2Loader.getInst(networkName, data.network.fetch);
+		const loader = ActivityPaginator.getInst(networkName, data.network.fetch);
 		loader.setAccount(String(data.name));
 		loader.setContract(urlParams.contract);
 		loader.setAction(urlParams.action);
@@ -123,23 +111,25 @@
 		loader.load(urlParams.cursor);
 	});
 
-	const activityLoader = $derived(Activity2Loader.getInst(networkName, data.network.fetch));
+	const activityPaginator = $derived(ActivityPaginator.getInst(networkName, data.network.fetch));
 
-	const isLoading = $derived(activityLoader.scene.isLoading && !activityLoader.scene.list.length);
-	const hasNext = $derived(activityLoader.scene.hasNext);
-	const hasPrev = $derived(activityLoader.scene.hasPrev);
-	const pageIsLoading = $derived(activityLoader.scene.isLoading);
-	const activityActions = $derived([...activityLoader.scene.list]);
+	const isLoading = $derived(
+		activityPaginator.page.isLoading && !activityPaginator.page.results.length
+	);
+	const hasNext = $derived(activityPaginator.page.hasNext);
+	const hasPrev = $derived(activityPaginator.page.hasPrev);
+	const pageIsLoading = $derived(activityPaginator.page.isLoading);
+	const activityActions = $derived([...activityPaginator.page.results]);
 
 	$effect(() => {
-		if (activityLoader.scene.error && onError) {
+		if (activityPaginator.page.error && onError) {
 			onError();
 		}
 	});
 
 	function clickNext() {
-		const nextCursor = activityLoader.scene.nextCursor;
-		activityLoader.loadNext();
+		const nextCursor = activityPaginator.page.nextCursor;
+		activityPaginator.loadNext();
 		scrollToTop();
 
 		updateUrl({
@@ -154,8 +144,8 @@
 	}
 
 	function clickPrev() {
-		const prevCursor = activityLoader.scene.prevCursor;
-		activityLoader.loadPrev();
+		const prevCursor = activityPaginator.page.prevCursor;
+		activityPaginator.loadPrev();
 		scrollToTop();
 
 		updateUrl({
@@ -218,24 +208,6 @@
 	let orderFilter = $state<'asc' | 'desc'>('desc');
 	let limitFilter = $state<number>(20);
 
-	const limitOptions: ExtendedSelectOption[] = [
-		{ label: '10', value: 10 },
-		{ label: '20', value: 20 },
-		{ label: '50', value: 50 }
-	];
-
-	const orderOptions: ExtendedSelectOption[] = [
-		{ label: 'Newest First', value: 'desc' },
-		{ label: 'Oldest First', value: 'asc' }
-	];
-
-	const selectedLimit = $derived(
-		limitOptions.find((o) => o.value === limitFilter) || limitOptions[1]
-	);
-	const selectedOrder = $derived(
-		orderOptions.find((o) => o.value === orderFilter) || orderOptions[0]
-	);
-
 	const activeFilterCount = $derived.by(() => {
 		let count = 0;
 		if (contractValid && !contractFilter.equals(Name.from(''))) count++;
@@ -250,22 +222,22 @@
 	);
 
 	function filter() {
-		activityLoader.scene.reset();
-		activityLoader.setAccount(String(data.name));
-		activityLoader.setContract(String(contractFilter));
-		activityLoader.setAction(String(actionFilter));
+		activityPaginator.page.reset();
+		activityPaginator.setAccount(String(data.name));
+		activityPaginator.setContract(String(contractFilter));
+		activityPaginator.setAction(String(actionFilter));
 
 		if (startDateFilter && endDateFilter && startDateFilter === endDateFilter) {
-			activityLoader.setDate(startDateFilter);
-			activityLoader.setDateRange('', '');
+			activityPaginator.setDate(startDateFilter);
+			activityPaginator.setDateRange('', '');
 		} else {
-			activityLoader.setDate('');
-			activityLoader.setDateRange(startDateFilter, endDateFilter);
+			activityPaginator.setDate('');
+			activityPaginator.setDateRange(startDateFilter, endDateFilter);
 		}
 
-		activityLoader.setOrder(orderFilter);
-		activityLoader.setLimit(limitFilter);
-		activityLoader.load();
+		activityPaginator.setOrder(orderFilter);
+		activityPaginator.setLimit(limitFilter);
+		activityPaginator.load();
 
 		if (activeFilterCount === 0) {
 			filtersOpen = false;
@@ -291,15 +263,15 @@
 		endDateFilter = '';
 		orderFilter = 'desc';
 		limitFilter = 20;
-		activityLoader.scene.reset();
-		activityLoader.setAccount(String(data.name));
-		activityLoader.setContract('');
-		activityLoader.setAction('');
-		activityLoader.setDate('');
-		activityLoader.setDateRange('', '');
-		activityLoader.setOrder('desc');
-		activityLoader.setLimit(20);
-		activityLoader.load();
+		activityPaginator.page.reset();
+		activityPaginator.setAccount(String(data.name));
+		activityPaginator.setContract('');
+		activityPaginator.setAction('');
+		activityPaginator.setDate('');
+		activityPaginator.setDateRange('', '');
+		activityPaginator.setOrder('desc');
+		activityPaginator.setLimit(20);
+		activityPaginator.load();
 
 		updateUrl({
 			contract: '',
@@ -318,35 +290,26 @@
 		}
 	}
 
-	function toggleFilters() {
-		filtersOpen = !filtersOpen;
+	function handleLimitChange(newLimit: number) {
+		if (newLimit === limitFilter) return;
+		limitFilter = newLimit;
+		activityPaginator.page.reset();
+		activityPaginator.setLimit(limitFilter);
+		activityPaginator.load();
+
+		updateUrl({
+			contract: String(contractFilter),
+			action: String(actionFilter),
+			startDate: startDateFilter,
+			endDate: endDateFilter,
+			order: orderFilter,
+			limit: limitFilter,
+			cursor: ''
+		});
 	}
 
-	function handleLimitChange({ next }: { next: ExtendedSelectOption | undefined }) {
-		if (next && next.value !== limitFilter) {
-			limitFilter = next.value as number;
-			activityLoader.scene.reset();
-			activityLoader.setLimit(limitFilter);
-			activityLoader.load();
-
-			updateUrl({
-				contract: String(contractFilter),
-				action: String(actionFilter),
-				startDate: startDateFilter,
-				endDate: endDateFilter,
-				order: orderFilter,
-				limit: limitFilter,
-				cursor: ''
-			});
-		}
-		return next;
-	}
-
-	function handleOrderChange({ next }: { next: ExtendedSelectOption | undefined }) {
-		if (next) {
-			orderFilter = next.value as 'asc' | 'desc';
-		}
-		return next;
+	function handleOrderChange(newOrder: 'asc' | 'desc') {
+		orderFilter = newOrder;
 	}
 </script>
 
@@ -393,68 +356,25 @@
 			</div>
 
 			<div class="flex items-center gap-2">
-				<button
-					onclick={toggleFilters}
-					class="text-on-surface-variant hover:text-on-surface hover:bg-surface-container flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-colors"
-				>
-					<FilterIcon size={16} />
-					<span class="hidden sm:inline">Filters</span>
-					{#if activeFilterCount > 0}
-						<Chip class="bg-primary text-on-primary h-5 min-w-5 px-1.5 text-xs font-semibold">
-							{activeFilterCount}
-						</Chip>
-					{/if}
-					<ChevronDownIcon
-						size={16}
-						class="transition-transform duration-200 {filtersOpen ? 'rotate-180' : ''}"
-					/>
-				</button>
-
-				{#if activityLoader?.filtering}
-					<button
-						onclick={reset}
-						class="text-on-surface-variant hover:text-on-surface flex items-center gap-1 text-sm"
-					>
-						<XIcon size={14} />
-						<span class="hidden sm:inline">Clear</span>
-					</button>
+				<FilterToggleButton
+					isOpen={filtersOpen}
+					activeCount={activeFilterCount}
+					onToggle={() => (filtersOpen = !filtersOpen)}
+				/>
+				{#if activityPaginator?.filtering}
+					<ClearFiltersButton onClear={reset} />
 				{/if}
 			</div>
 
 			<div class="ml-auto flex items-center gap-2">
-				<Select
-					id="limit-filter"
-					options={limitOptions}
-					selected={selectedLimit}
-					onSelectedChange={handleLimitChange}
+				<LimitSelect value={limitFilter} onChange={handleLimitChange} />
+				<PaginationControls
+					{hasPrev}
+					{hasNext}
+					isLoading={pageIsLoading}
+					onPrev={clickPrev}
+					onNext={clickNext}
 				/>
-				<div class="border-outline-variant flex items-center rounded-lg border">
-					<button
-						onclick={clickPrev}
-						disabled={!hasPrev || pageIsLoading}
-						class="flex items-center gap-1 rounded-l-lg px-2 py-1.5 text-sm font-medium transition-colors disabled:cursor-not-allowed {hasPrev &&
-						!pageIsLoading
-							? 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container'
-							: 'text-on-surface-variant/40'}"
-						title="Previous page"
-					>
-						<ChevronLeftIcon size={16} />
-						<span class="hidden sm:inline">Prev</span>
-					</button>
-					<span class="bg-outline-variant h-5 w-px"></span>
-					<button
-						onclick={clickNext}
-						disabled={!hasNext || pageIsLoading}
-						class="flex items-center gap-1 rounded-r-lg px-2 py-1.5 text-sm font-medium transition-colors disabled:cursor-not-allowed {hasNext &&
-						!pageIsLoading
-							? 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container'
-							: 'text-on-surface-variant/40'}"
-						title="Next page"
-					>
-						<span class="hidden sm:inline">Next</span>
-						<ChevronRightIcon size={16} />
-					</button>
-				</div>
 			</div>
 		</div>
 
@@ -484,39 +404,12 @@
 								onkeypress={handleKeyPress}
 							/>
 						</div>
-						<div class="flex flex-col gap-1.5">
-							<Label for="start-date-input">From Date</Label>
-							<input
-								type="date"
-								id="start-date-input"
-								bind:value={startDateFilter}
-								onkeypress={handleKeyPress}
-								class="date-input bg-surface-container border-outline-variant focus:text-on-surface h-10 w-full rounded-lg border px-3 text-sm {startDateFilter
-									? 'has-value'
-									: ''}"
-							/>
-						</div>
-						<div class="flex flex-col gap-1.5">
-							<Label for="end-date-input">To Date</Label>
-							<input
-								type="date"
-								id="end-date-input"
-								bind:value={endDateFilter}
-								onkeypress={handleKeyPress}
-								class="date-input bg-surface-container border-outline-variant focus:text-on-surface h-10 w-full rounded-lg border px-3 text-sm {endDateFilter
-									? 'has-value'
-									: ''}"
-							/>
-						</div>
-						<div class="flex flex-col gap-1.5">
-							<Label for="order-input">Sort Order</Label>
-							<Select
-								id="order-input"
-								options={orderOptions}
-								selected={selectedOrder}
-								onSelectedChange={handleOrderChange}
-							/>
-						</div>
+						<DateRangeInputs
+							bind:startDate={startDateFilter}
+							bind:endDate={endDateFilter}
+							onKeyPress={handleKeyPress}
+						/>
+						<SortOrderSelect value={orderFilter} onChange={handleOrderChange} />
 					</div>
 
 					<div class="flex items-center justify-end gap-2">
@@ -529,15 +422,11 @@
 	</div>
 
 	{#if isLoading}
-		<div class="flex items-center justify-center gap-4 py-20">
-			<div class="bounce bounce-1 h-3 w-3 rounded-full bg-white"></div>
-			<div class="bounce bounce-2 h-3 w-3 rounded-full bg-white"></div>
-			<div class="bounce bounce-3 h-3 w-3 rounded-full bg-white"></div>
-		</div>
+		<LoadingBounce />
 	{:else if !activityActions.length}
 		<div class="flex items-center justify-center py-20">
 			<p class="text-center text-gray-400">
-				{#if activityLoader?.filtering}
+				{#if activityPaginator?.filtering}
 					No actions found matching the filter criteria.
 				{:else}
 					No activity found for this account.
@@ -674,53 +563,3 @@
 		{/if}
 	{/if}
 </Stack>
-
-<style>
-	@keyframes bounce {
-		0%,
-		20%,
-		50%,
-		80%,
-		100% {
-			transform: translateY(0);
-		}
-		40% {
-			transform: translateY(-10px);
-		}
-		60% {
-			transform: translateY(-5px);
-		}
-	}
-
-	.bounce {
-		animation: bounce 1.4s infinite ease-in-out;
-	}
-
-	.bounce-1 {
-		animation-delay: 0s;
-	}
-
-	.bounce-2 {
-		animation-delay: 0.2s;
-	}
-
-	.bounce-3 {
-		animation-delay: 0.4s;
-	}
-
-	.date-input {
-		color-scheme: dark;
-	}
-
-	.date-input::-webkit-datetime-edit {
-		color: rgb(var(--color-on-surface-variant) / 0.7);
-	}
-
-	.date-input.has-value::-webkit-datetime-edit {
-		color: rgb(var(--color-on-surface));
-	}
-
-	.date-input::-webkit-calendar-picker-indicator {
-		filter: invert(0.7);
-	}
-</style>

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.663Z\n"
-"PO-Revision-Date: 2026-01-21T03:35:10.575Z\n"
+"PO-Revision-Date: 2026-01-21T18:18:00.620Z\n"
 "Last-Translator: \n"
 "Language: ko\n"
 "Language-Team: \n"
@@ -273,8 +273,8 @@ msgstr "언스테이킹"
 msgid "Resources"
 msgstr "리소스"
 
+#: src/lib/components/filters/ClearFiltersButton.svelte
 #: src/lib/components/search/input.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 msgid "Clear"
 msgstr "지우기"
@@ -576,11 +576,11 @@ msgstr "폐기"
 msgid "<0/> provided the network resources for this transaction."
 msgstr "<0/> 님이 이 트랜잭션에 대한 네트워크 리소스를 제공했습니다."
 
+#: src/lib/components/filters/PaginationControls.svelte
 #: src/lib/components/wallets/metamask/required.svelte
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 msgid "Next"
 msgstr "다음"
@@ -1081,6 +1081,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/transfers/TransfersView.svelte
 msgid "Enter"
 msgstr "입력"
 
@@ -2400,6 +2401,7 @@ msgstr "더 불러오기"
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/transfers/TransfersView.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/ram/+page.svelte
@@ -2425,6 +2427,7 @@ msgstr "필터"
 #: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/transfers/TransfersView.svelte
 msgid "Reset"
 msgstr "초기화"
 
@@ -3836,6 +3839,7 @@ msgstr "현재 언스테이킹 중인 토큰은 사용 가능해지는 날짜와
 
 #: src/lib/components/elements/unstaking.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balances/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/transfers/TransfersView.svelte
 msgid "Amount"
 msgstr "금액"
 
@@ -3925,6 +3929,7 @@ msgstr "가역적"
 #: src/lib/components/transaction/header.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/transfers/TransfersView.svelte
 msgid "Date"
 msgstr "날짜"
 
@@ -6486,25 +6491,25 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/transfers/TransfersView.svelte
 msgid "← Prev"
 msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/transfers/TransfersView.svelte
 msgid "Next →"
 msgstr ""
 
 #~ msgid "Order"
 #~ msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/lib/components/filters/SortOrderSelect.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 msgid "Newest First"
 msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/lib/components/filters/SortOrderSelect.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 msgid "Oldest First"
 msgstr ""
@@ -6515,7 +6520,7 @@ msgstr ""
 #~ msgid "End Date"
 #~ msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/lib/components/filters/FilterToggleButton.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 msgid "Filters"
 msgstr ""
@@ -6523,23 +6528,24 @@ msgstr ""
 #~ msgid "Clear filters"
 #~ msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/lib/components/filters/DateRangeInputs.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 msgid "From Date"
 msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/lib/components/filters/DateRangeInputs.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 msgid "To Date"
 msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/lib/components/filters/SortOrderSelect.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 msgid "Sort Order"
 msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/transfers/TransfersView.svelte
 msgid "Apply Filters"
 msgstr ""
 
@@ -6558,17 +6564,17 @@ msgstr ""
 msgid "Action Data view"
 msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/lib/components/filters/PaginationControls.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 msgid "Previous page"
 msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/lib/components/filters/PaginationControls.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 msgid "Prev"
 msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/lib/components/filters/PaginationControls.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 msgid "Next page"
 msgstr ""
@@ -6581,7 +6587,6 @@ msgstr ""
 msgid "The default view format for account activity."
 msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 msgid "Results per page"
 msgstr ""
@@ -6643,4 +6648,68 @@ msgstr ""
 
 #: src/lib/components/elements/suspiciousmemo.svelte
 msgid "Reveal Memo"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
+msgid "Transfers"
+msgstr ""
+
+#. placeholder {0}: params.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/transfers/+page.ts
+msgid "Token transfers for {0}"
+msgstr ""
+
+#. placeholder {0}: params.name
+#. placeholder {1}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/transfers/+page.ts
+msgid "Token Transfers for {0} | {1} Network"
+msgstr ""
+
+#. placeholder {0}: params.name
+#. placeholder {1}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/transfers/+page.ts
+msgid "View the token transfer history of the {0} account on the {1} network."
+msgstr ""
+
+#~ msgid ""
+#~ "Token transfers view requires Robo2 history support, which is not available on this\n"
+#~ "network."
+#~ msgstr ""
+
+#~ msgid "Token:"
+#~ msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/transfers/TransfersView.svelte
+msgid "No transfers found matching the filter criteria."
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/transfers/TransfersView.svelte
+msgid "No transfers found for this account."
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/transfers/TransfersView.svelte
+msgid "Counterparty"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/transfers/TransfersView.svelte
+msgid "Memo"
+msgstr ""
+
+#: src/lib/components/elements/transferlist.svelte
+msgid "Loading transfers..."
+msgstr ""
+
+#: src/lib/components/elements/transferlist.svelte
+msgid "No transfers found"
+msgstr ""
+
+#: src/lib/components/elements/transferlist.svelte
+msgid "View all transfers <0/>"
+msgstr ""
+
+#~ msgid "Recent Transfers"
+#~ msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/transfers/+page.svelte
+msgid "Token transfers view requires Robo2 history support, which is not available on this network."
 msgstr ""

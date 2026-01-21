@@ -15,6 +15,7 @@
 		let items = [
 			{ href: urlPath(`/account/${account}`), text: 'Overview' },
 			{ href: urlPath(`/account/${account}/activity`), text: 'Activity' },
+			{ href: urlPath(`/account/${account}/transfers`), text: 'Transfers' },
 			{ href: urlPath(`/account/${account}/balances`), text: 'Balances' }
 		];
 
