@@ -17,7 +17,7 @@
 
 	import { Activity2Loader } from './state.v2.svelte.js';
 	import { getActionSummaryComponent } from '$lib/components/summary/index.js';
-	import { Button, Card, Stack, NameInput, Select, type ExtendedSelectOption } from 'unicove-components';
+	import { Button, Card, Chip, Label, Stack, NameInput, Select, type ExtendedSelectOption } from 'unicove-components';
 	import Trace from '$lib/components/elements/trace.svelte';
 	import Transaction from '$lib/components/elements/transaction.svelte';
 	import Contract from '$lib/components/elements/contract.svelte';
@@ -387,11 +387,9 @@
 					<FilterIcon size={16} />
 					<span class="hidden sm:inline">Filters</span>
 					{#if activeFilterCount > 0}
-						<span
-							class="bg-primary text-on-primary flex h-5 min-w-5 items-center justify-center rounded-full px-1.5 text-xs font-semibold"
-						>
+						<Chip class="bg-primary text-on-primary h-5 min-w-5 px-1.5 text-xs font-semibold">
 							{activeFilterCount}
-						</span>
+						</Chip>
 					{/if}
 					<ChevronDownIcon
 						size={16}
@@ -450,11 +448,9 @@
 		{#if filtersOpen}
 			<div class="border-outline-variant border-t pt-3">
 				<div class="grid gap-4">
-					<div class="flex flex-wrap items-end gap-4">
+					<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
 						<div class="flex flex-col gap-1.5">
-							<label for="contract-input" class="text-on-surface-variant text-xs font-medium"
-								>Contract</label
-							>
+							<Label for="contract-input">Contract</Label>
 							<NameInput
 								bind:this={contractInput}
 								bind:value={contractFilter}
@@ -465,9 +461,7 @@
 							/>
 						</div>
 						<div class="flex flex-col gap-1.5">
-							<label for="action-input" class="text-on-surface-variant text-xs font-medium"
-								>Action</label
-							>
+							<Label for="action-input">Action</Label>
 							<NameInput
 								bind:this={actionInput}
 								bind:value={actionFilter}
@@ -478,37 +472,31 @@
 							/>
 						</div>
 						<div class="flex flex-col gap-1.5">
-							<label for="start-date-input" class="text-on-surface-variant text-xs font-medium"
-								>From Date</label
-							>
+							<Label for="start-date-input">From Date</Label>
 							<input
 								type="date"
 								id="start-date-input"
 								bind:value={startDateFilter}
 								onkeypress={handleKeyPress}
-								class="date-input bg-surface-container border-outline-variant focus:text-on-surface h-10 min-w-36 rounded-lg border px-3 text-sm {startDateFilter
+								class="date-input bg-surface-container border-outline-variant focus:text-on-surface h-10 w-full rounded-lg border px-3 text-sm {startDateFilter
 									? 'has-value'
 									: ''}"
 							/>
 						</div>
 						<div class="flex flex-col gap-1.5">
-							<label for="end-date-input" class="text-on-surface-variant text-xs font-medium"
-								>To Date</label
-							>
+							<Label for="end-date-input">To Date</Label>
 							<input
 								type="date"
 								id="end-date-input"
 								bind:value={endDateFilter}
 								onkeypress={handleKeyPress}
-								class="date-input bg-surface-container border-outline-variant focus:text-on-surface h-10 min-w-36 rounded-lg border px-3 text-sm {endDateFilter
+								class="date-input bg-surface-container border-outline-variant focus:text-on-surface h-10 w-full rounded-lg border px-3 text-sm {endDateFilter
 									? 'has-value'
 									: ''}"
 							/>
 						</div>
 						<div class="flex flex-col gap-1.5">
-							<label for="order-input" class="text-on-surface-variant text-xs font-medium"
-								>Sort Order</label
-							>
+							<Label for="order-input">Sort Order</Label>
 							<Select
 								id="order-input"
 								options={orderOptions}
