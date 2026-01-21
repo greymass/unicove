@@ -17,7 +17,7 @@
 
 	import { Activity2Loader } from './state.v2.svelte.js';
 	import { getActionSummaryComponent } from '$lib/components/summary/index.js';
-	import { Button, Card, Stack, NameInput } from 'unicove-components';
+	import { Button, Card, Stack, NameInput, Select, type ExtendedSelectOption } from 'unicove-components';
 	import Trace from '$lib/components/elements/trace.svelte';
 	import Transaction from '$lib/components/elements/transaction.svelte';
 	import Contract from '$lib/components/elements/contract.svelte';
@@ -209,7 +209,19 @@
 	let orderFilter = $state<'asc' | 'desc'>('desc');
 	let limitFilter = $state<number>(20);
 
-	const limitOptions = [10, 20, 50];
+	const limitOptions: ExtendedSelectOption[] = [
+		{ label: '10', value: 10 },
+		{ label: '20', value: 20 },
+		{ label: '50', value: 50 }
+	];
+
+	const orderOptions: ExtendedSelectOption[] = [
+		{ label: 'Newest First', value: 'desc' },
+		{ label: 'Oldest First', value: 'asc' }
+	];
+
+	const selectedLimit = $derived(limitOptions.find((o) => o.value === limitFilter) || limitOptions[1]);
+	const selectedOrder = $derived(orderOptions.find((o) => o.value === orderFilter) || orderOptions[0]);
 
 	const activeFilterCount = $derived.by(() => {
 		let count = 0;
@@ -297,20 +309,31 @@
 		filtersOpen = !filtersOpen;
 	}
 
-	function handleLimitChange() {
-		activityLoader.scene.reset();
-		activityLoader.setLimit(limitFilter);
-		activityLoader.load();
+	function handleLimitChange({ next }: { next: ExtendedSelectOption | undefined }) {
+		if (next && next.value !== limitFilter) {
+			limitFilter = next.value as number;
+			activityLoader.scene.reset();
+			activityLoader.setLimit(limitFilter);
+			activityLoader.load();
 
-		updateUrl({
-			contract: String(contractFilter),
-			action: String(actionFilter),
-			startDate: startDateFilter,
-			endDate: endDateFilter,
-			order: orderFilter,
-			limit: limitFilter,
-			cursor: ''
-		});
+			updateUrl({
+				contract: String(contractFilter),
+				action: String(actionFilter),
+				startDate: startDateFilter,
+				endDate: endDateFilter,
+				order: orderFilter,
+				limit: limitFilter,
+				cursor: ''
+			});
+		}
+		return next;
+	}
+
+	function handleOrderChange({ next }: { next: ExtendedSelectOption | undefined }) {
+		if (next) {
+			orderFilter = next.value as 'asc' | 'desc';
+		}
+		return next;
 	}
 </script>
 
@@ -388,16 +411,12 @@
 			</div>
 
 			<div class="ml-auto flex items-center gap-2">
-				<select
-					bind:value={limitFilter}
-					onchange={handleLimitChange}
-					class="bg-surface-container border-outline-variant text-on-surface-variant h-9 rounded-lg border px-2 text-sm"
-					title="Results per page"
-				>
-					{#each limitOptions as option}
-						<option value={option}>{option}</option>
-					{/each}
-				</select>
+				<Select
+					id="limit-filter"
+					options={limitOptions}
+					selected={selectedLimit}
+					onSelectedChange={handleLimitChange}
+				/>
 				<div class="border-outline-variant flex items-center rounded-lg border">
 					<button
 						onclick={clickPrev}
@@ -467,9 +486,9 @@
 								id="start-date-input"
 								bind:value={startDateFilter}
 								onkeypress={handleKeyPress}
-								class="bg-surface-container border-outline-variant focus:text-on-surface h-10 min-w-36 rounded-lg border px-3 text-sm {startDateFilter
-									? ''
-									: 'text-on-surface-variant/50'}"
+								class="date-input bg-surface-container border-outline-variant focus:text-on-surface h-10 min-w-36 rounded-lg border px-3 text-sm {startDateFilter
+									? 'has-value'
+									: ''}"
 							/>
 						</div>
 						<div class="flex flex-col gap-1.5">
@@ -481,23 +500,21 @@
 								id="end-date-input"
 								bind:value={endDateFilter}
 								onkeypress={handleKeyPress}
-								class="bg-surface-container border-outline-variant focus:text-on-surface h-10 min-w-36 rounded-lg border px-3 text-sm {endDateFilter
-									? ''
-									: 'text-on-surface-variant/50'}"
+								class="date-input bg-surface-container border-outline-variant focus:text-on-surface h-10 min-w-36 rounded-lg border px-3 text-sm {endDateFilter
+									? 'has-value'
+									: ''}"
 							/>
 						</div>
 						<div class="flex flex-col gap-1.5">
 							<label for="order-input" class="text-on-surface-variant text-xs font-medium"
 								>Sort Order</label
 							>
-							<select
+							<Select
 								id="order-input"
-								bind:value={orderFilter}
-								class="bg-surface-container border-outline-variant h-10 min-w-36 rounded-lg border px-3 text-sm"
-							>
-								<option value="desc">Newest First</option>
-								<option value="asc">Oldest First</option>
-							</select>
+								options={orderOptions}
+								selected={selectedOrder}
+								onSelectedChange={handleOrderChange}
+							/>
 						</div>
 					</div>
 
@@ -688,5 +705,21 @@
 
 	.bounce-3 {
 		animation-delay: 0.4s;
+	}
+
+	.date-input {
+		color-scheme: dark;
+	}
+
+	.date-input::-webkit-datetime-edit {
+		color: rgb(var(--color-on-surface-variant) / 0.7);
+	}
+
+	.date-input.has-value::-webkit-datetime-edit {
+		color: rgb(var(--color-on-surface));
+	}
+
+	.date-input::-webkit-calendar-picker-indicator {
+		filter: invert(0.7);
 	}
 </style>

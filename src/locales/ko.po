@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.663Z\n"
-"PO-Revision-Date: 2026-01-20T18:41:17.705Z\n"
+"PO-Revision-Date: 2026-01-21T03:35:10.575Z\n"
 "Last-Translator: \n"
 "Language: ko\n"
 "Language-Team: \n"
@@ -1079,7 +1079,6 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV1.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 msgid "Enter"
@@ -2397,7 +2396,6 @@ msgid "Load more"
 msgstr "더 불러오기"
 
 #: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV1.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
@@ -2409,7 +2407,6 @@ msgid "Contract"
 msgstr "컨트랙트"
 
 #: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV1.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
@@ -2422,12 +2419,10 @@ msgid "Action"
 msgstr "액션"
 
 #: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV1.svelte
 msgid "Filter"
 msgstr "필터"
 
 #: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV1.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 msgid "Reset"
@@ -2435,10 +2430,7 @@ msgstr "초기화"
 
 #. placeholder {0}: actionFilter
 #. placeholder {1}: contractFilter
-#. placeholder {0}: actionFilter
-#. placeholder {1}: contractFilter
 #: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV1.svelte
 msgid "Filtering to display {0} on the {1} contract."
 msgstr "{1} 계약에서 {0}을(를) 표시하도록 필터링합니다."
 
@@ -6447,14 +6439,11 @@ msgid "Activity tracking is not available on {0}."
 msgstr ""
 
 #. placeholder {0}: contractFilter
-#. placeholder {0}: contractFilter
 #: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV1.svelte
 msgid "Filtering to display all actions on the {0} contract."
 msgstr ""
 
 #: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV1.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 msgid "No actions found matching the filter criteria."
@@ -6485,8 +6474,6 @@ msgid "Table"
 msgstr ""
 
 #. placeholder {0}: data.network.chain.name
-#. placeholder {0}: data.network.chain.name
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 msgid "Activity v2 is not available on {0}."
 msgstr ""
@@ -6511,10 +6498,12 @@ msgstr ""
 #~ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 msgid "Newest First"
 msgstr ""
 
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 msgid "Oldest First"

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2026-01-20T18:59:52.426Z\n"
+"PO-Revision-Date: 2026-01-21T03:35:32.103Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -6738,7 +6738,6 @@ msgstr "Activity Display Format"
 msgid "The default view format for account activity."
 msgstr "The default view format for account activity."
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 msgid "Results per page"
 msgstr "Results per page"

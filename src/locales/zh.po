@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2026-01-20T18:41:18.327Z\n"
+"PO-Revision-Date: 2026-01-21T03:35:10.581Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -1081,7 +1081,6 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV1.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 msgid "Enter"
@@ -2399,7 +2398,6 @@ msgid "Load more"
 msgstr "加载更多"
 
 #: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV1.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
@@ -2411,7 +2409,6 @@ msgid "Contract"
 msgstr "合约"
 
 #: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV1.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
@@ -2424,12 +2421,10 @@ msgid "Action"
 msgstr "操作"
 
 #: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV1.svelte
 msgid "Filter"
 msgstr "筛选"
 
 #: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV1.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 msgid "Reset"
@@ -2437,10 +2432,7 @@ msgstr "重置"
 
 #. placeholder {0}: actionFilter
 #. placeholder {1}: contractFilter
-#. placeholder {0}: actionFilter
-#. placeholder {1}: contractFilter
 #: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV1.svelte
 msgid "Filtering to display {0} on the {1} contract."
 msgstr "正在筛选以显示 {0} 在 {1} 合约上的活动。"
 
@@ -6444,14 +6436,11 @@ msgid "Activity tracking is not available on {0}."
 msgstr ""
 
 #. placeholder {0}: contractFilter
-#. placeholder {0}: contractFilter
 #: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV1.svelte
 msgid "Filtering to display all actions on the {0} contract."
 msgstr ""
 
 #: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV1.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 msgid "No actions found matching the filter criteria."
@@ -6482,8 +6471,6 @@ msgid "Table"
 msgstr ""
 
 #. placeholder {0}: data.network.chain.name
-#. placeholder {0}: data.network.chain.name
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 msgid "Activity v2 is not available on {0}."
 msgstr ""
@@ -6508,10 +6495,12 @@ msgstr ""
 #~ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 msgid "Newest First"
 msgstr ""
 
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 msgid "Oldest First"
