@@ -36,12 +36,51 @@
 
 	const networkName = String(data.network);
 	const systemTokenContract = String(data.network.token.contract);
+	const systemTokenSymbol = String(data.network.token.symbol);
+	const legacyTokenContract = data.network.legacy ? String(data.network.legacy.id.contract) : null;
+	const legacyTokenSymbol = data.network.legacy ? String(data.network.legacy.symbol) : null;
+
+	function getDefaultContract(): string {
+		const hasSystemTokenBalance = data.account.balances.some(
+			(b) =>
+				String(b.token.id.contract) === systemTokenContract &&
+				String(b.token.symbol) === systemTokenSymbol &&
+				Number(b.balance.value) > 0
+		);
+
+		if (hasSystemTokenBalance) {
+			return systemTokenContract;
+		}
+
+		const hasLegacyTokenBalance =
+			legacyTokenContract &&
+			legacyTokenSymbol &&
+			data.account.balances.some(
+				(b) =>
+					String(b.token.id.contract) === legacyTokenContract &&
+					String(b.token.symbol) === legacyTokenSymbol &&
+					Number(b.balance.value) > 0
+			);
+
+		if (hasLegacyTokenBalance) {
+			return legacyTokenContract;
+		}
+
+		const firstWithBalance = data.account.balances.find((b) => Number(b.balance.value) > 0);
+		if (firstWithBalance) {
+			return String(firstWithBalance.token.id.contract);
+		}
+
+		return systemTokenContract;
+	}
+
+	const defaultContract = getDefaultContract();
 
 	function getUrlParams() {
 		const params = page.url.searchParams;
 		const limitParam = params.get('limit');
 		return {
-			contract: params.get('contract') || systemTokenContract,
+			contract: params.get('contract') || defaultContract,
 			startDate: params.get('start_date') || '',
 			endDate: params.get('end_date') || '',
 			order: (params.get('order') as 'asc' | 'desc') || 'desc',
@@ -55,7 +94,7 @@
 		const defaults: Record<string, string | number> = {
 			order: 'desc',
 			limit: 20,
-			contract: systemTokenContract
+			contract: defaultContract
 		};
 		const keyMap: Record<string, string> = { startDate: 'start_date', endDate: 'end_date' };
 
@@ -149,7 +188,7 @@
 	let filtersOpen = $state(false);
 
 	let contractInput: NameInput | undefined = $state();
-	let contractFilter = $state(systemTokenContract);
+	let contractFilter = $state(defaultContract);
 
 	let startDateFilter = $state('');
 	let endDateFilter = $state('');
@@ -157,19 +196,27 @@
 	let limitFilter = $state<number>(20);
 
 	const knownTokens: ExtendedSelectOption[] = $derived.by(() => {
-		const seen = new Set<string>();
-		const tokens: ExtendedSelectOption[] = [];
+		const contractMap = new Map<string, { label: string; balance: number }>();
 
-		for (const balance of data.account.balances) {
-			const contract = String(balance.token.contract);
-			if (!seen.has(contract)) {
-				seen.add(contract);
-				tokens.push({
-					label: balance.token.name,
-					value: contract
+		for (const b of data.account.balances) {
+			const contract = String(b.token.contract);
+			const existing = contractMap.get(contract);
+			const balanceValue = Number(b.balance.value);
+
+			if (!existing || balanceValue > existing.balance) {
+				contractMap.set(contract, {
+					label: b.token.name,
+					balance: balanceValue
 				});
 			}
 		}
+
+		const tokens: ExtendedSelectOption[] = Array.from(contractMap.entries()).map(
+			([contract, { label }]) => ({
+				label,
+				value: contract
+			})
+		);
 
 		if (tokens.length === 0) {
 			tokens.push({ label: String(data.network.token.symbol.name), value: systemTokenContract });
@@ -193,10 +240,7 @@
 	});
 
 	const hasFilters = $derived(
-		contractFilter !== systemTokenContract ||
-			startDateFilter ||
-			endDateFilter ||
-			orderFilter !== 'desc'
+		contractFilter !== defaultContract || startDateFilter || endDateFilter || orderFilter !== 'desc'
 	);
 
 	function applyFilters() {
@@ -226,22 +270,22 @@
 	function reset() {
 		if (!paginator) return;
 
-		contractFilter = systemTokenContract;
-		contractInput?.set(systemTokenContract);
+		contractFilter = defaultContract;
+		contractInput?.set(defaultContract);
 		startDateFilter = '';
 		endDateFilter = '';
 		orderFilter = 'desc';
 		limitFilter = 20;
 
 		paginator.page.reset();
-		paginator.setContract(systemTokenContract);
+		paginator.setContract(defaultContract);
 		paginator.setDateRange('', '');
 		paginator.setOrder('desc');
 		paginator.setLimit(20);
 		paginator.load();
 
 		updateUrl({
-			contract: systemTokenContract,
+			contract: defaultContract,
 			startDate: '',
 			endDate: '',
 			order: 'desc',
@@ -380,7 +424,9 @@
 		</div>
 	{:else}
 		<Card class="overflow-hidden p-0">
-			<div class="divide-outline-variant/40 grid grid-cols-[auto_1fr_auto] divide-y md:block">
+			<div
+				class="divide-outline-variant/40 grid grid-cols-[auto_1fr_auto] divide-y p-3 md:block md:p-4"
+			>
 				<div
 					class="text-on-surface-variant/70 col-span-full grid grid-cols-subgrid gap-x-2 px-3 py-2 text-xs font-medium tracking-wide uppercase md:flex md:gap-0 md:p-0"
 				>
@@ -429,7 +475,7 @@
 
 						{#if transferData.memo}
 							<div
-								class="text-on-surface-variant col-span-full min-w-0 truncate text-right text-xs md:flex-1 md:px-4 md:py-3 md:text-left md:text-sm"
+								class="text-on-surface-variant col-span-full min-w-0 text-right text-xs md:flex-1 md:px-4 md:py-3 md:text-left md:text-sm"
 							>
 								<SuspiciousMemo memo={transferData.memo} />
 							</div>
