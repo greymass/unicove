@@ -44,7 +44,9 @@
 	const isMSIG = $derived(permission.required_auth.threshold.gt(UInt64.from(1)));
 	const isDebugMode = $derived(context.settings.data.debugMode);
 
-	const editUrl = $derived(context.urlPath(`/account/${account}/permissions/${permission.perm_name}`));
+	const editUrl = $derived(
+		context.urlPath(`/account/${account}/permissions/${permission.perm_name}`)
+	);
 </script>
 
 <li
