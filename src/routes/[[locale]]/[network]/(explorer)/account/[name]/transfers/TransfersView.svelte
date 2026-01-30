@@ -195,28 +195,15 @@
 	let orderFilter = $state<'asc' | 'desc'>('desc');
 	let limitFilter = $state<number>(20);
 
+	const ramTokenSymbol = data.network.getRamToken().symbol.name;
+
 	const knownTokens: ExtendedSelectOption[] = $derived.by(() => {
-		const contractMap = new Map<string, { label: string; balance: number }>();
-
-		for (const b of data.account.balances) {
-			const contract = String(b.token.contract);
-			const existing = contractMap.get(contract);
-			const balanceValue = Number(b.balance.value);
-
-			if (!existing || balanceValue > existing.balance) {
-				contractMap.set(contract, {
-					label: b.token.name,
-					balance: balanceValue
-				});
-			}
-		}
-
-		const tokens: ExtendedSelectOption[] = Array.from(contractMap.entries()).map(
-			([contract, { label }]) => ({
-				label,
-				value: contract
-			})
-		);
+		const tokens: ExtendedSelectOption[] = data.account.balances
+			.filter((b) => Number(b.balance.value) > 0 && b.token.name !== ramTokenSymbol)
+			.map((b) => ({
+				label: b.token.name,
+				value: String(b.token.id.contract)
+			}));
 
 		if (tokens.length === 0) {
 			tokens.push({ label: String(data.network.token.symbol.name), value: systemTokenContract });
