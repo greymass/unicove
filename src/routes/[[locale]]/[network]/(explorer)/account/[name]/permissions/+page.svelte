@@ -32,11 +32,11 @@
 	const treePermissions = $derived(data.account.permissions.map((p) => ({ permission: p })));
 	const permissions = $derived(buildTree(treePermissions));
 
-	const currentUser: boolean = !!(
-		context.wharf.session && data.account.name.equals(context.wharf.session?.actor)
+	const currentUser = $derived(
+		!!(context.wharf.session && data.account.name.equals(context.wharf.session?.actor))
 	);
 
-	const advancedMode = !!context.settings.data.advancedMode;
+	const advancedMode = $derived(!!context.settings.data.advancedMode);
 	const loggedIn = $derived(!!context.wharf.session);
 	const msigMode = $derived(context.wharf.session?.walletPlugin.id === 'wallet-plugin-multisig');
 
