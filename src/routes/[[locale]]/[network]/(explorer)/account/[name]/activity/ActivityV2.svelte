@@ -3,9 +3,10 @@
 	import { Name } from '@wharfkit/antelope';
 	import { page } from '$app/state';
 	import { goto } from '$app/navigation';
-	import { GridIcon, ListIcon, TableIcon, ChevronsUpDownIcon } from '@lucide/svelte';
+	import { ChevronsUpDownIcon } from '@lucide/svelte';
 
 	import { ActivityPaginator } from './state.v2.svelte.js';
+	import ActivityControlBar from './ActivityControlBar.svelte';
 	import { getActionSummaryComponent } from '$lib/components/summary/index.js';
 	import { Button, Card, Label, Stack, NameInput } from 'unicove-components';
 	import PaginationControls from '$lib/components/filters/PaginationControls.svelte';
@@ -163,10 +164,6 @@
 		(context.settings.data.actionDisplayVariant as ActionDisplayVariants) || 'table'
 	);
 
-	function setVariant(v: ActionDisplayVariants) {
-		context.settings.data.actionDisplayVariant = v;
-	}
-
 	let controlBarEl: HTMLElement | undefined = $state();
 
 	function scrollToTop() {
@@ -314,47 +311,8 @@
 </script>
 
 <Stack class="py-4">
-	<div
-		bind:this={controlBarEl}
-		class="bg-surface-container-low border-outline-variant flex flex-col gap-3 rounded-xl border p-3"
-	>
-		<div class="flex flex-wrap items-center gap-3">
-			<div class="border-outline-variant flex items-center rounded-lg border">
-				<button
-					onclick={() => setVariant('summary')}
-					class="flex items-center gap-1.5 rounded-l-lg px-3 py-2 text-sm font-medium transition-colors {variant ===
-					'summary'
-						? 'bg-primary text-on-primary'
-						: 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container'}"
-					title="Summary view"
-				>
-					<ListIcon size={16} />
-					<span class="hidden md:inline">Summary</span>
-				</button>
-				<button
-					onclick={() => setVariant('table')}
-					class="border-outline-variant flex items-center gap-1.5 border-x px-3 py-2 text-sm font-medium transition-colors {variant ===
-					'table'
-						? 'bg-primary text-on-primary'
-						: 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container'}"
-					title="Table view"
-				>
-					<TableIcon size={16} />
-					<span class="hidden md:inline">Table</span>
-				</button>
-				<button
-					onclick={() => setVariant('pretty')}
-					class="flex items-center gap-1.5 rounded-r-lg px-3 py-2 text-sm font-medium transition-colors {variant ===
-					'pretty'
-						? 'bg-primary text-on-primary'
-						: 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container'}"
-					title="Action Data view"
-				>
-					<GridIcon size={16} />
-					<span class="hidden md:inline">Data</span>
-				</button>
-			</div>
-
+	<ActivityControlBar bind:controlBarEl>
+		{#snippet controls()}
 			<div class="flex items-center gap-2">
 				<FilterToggleButton
 					isOpen={filtersOpen}
@@ -376,50 +334,52 @@
 					onNext={clickNext}
 				/>
 			</div>
-		</div>
+		{/snippet}
 
-		{#if filtersOpen}
-			<div class="border-outline-variant border-t pt-3">
-				<div class="grid gap-4">
-					<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
-						<div class="flex flex-col gap-1.5">
-							<Label for="contract-input">Contract</Label>
-							<NameInput
-								bind:this={contractInput}
-								bind:value={contractFilter}
-								bind:valid={contractValid}
-								id="contract-input"
-								placeholder="e.g. eosio.token"
-								onkeypress={handleKeyPress}
+		{#snippet filterPanel()}
+			{#if filtersOpen}
+				<div class="border-outline-variant border-t pt-3">
+					<div class="grid gap-4">
+						<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
+							<div class="flex flex-col gap-1.5">
+								<Label for="contract-input">Contract</Label>
+								<NameInput
+									bind:this={contractInput}
+									bind:value={contractFilter}
+									bind:valid={contractValid}
+									id="contract-input"
+									placeholder="e.g. eosio.token"
+									onkeypress={handleKeyPress}
+								/>
+							</div>
+							<div class="flex flex-col gap-1.5">
+								<Label for="action-input">Action</Label>
+								<NameInput
+									bind:this={actionInput}
+									bind:value={actionFilter}
+									bind:valid={actionValid}
+									id="action-input"
+									placeholder="e.g. transfer"
+									onkeypress={handleKeyPress}
+								/>
+							</div>
+							<DateRangeInputs
+								bind:startDate={startDateFilter}
+								bind:endDate={endDateFilter}
+								onKeyPress={handleKeyPress}
 							/>
+							<SortOrderSelect value={orderFilter} onChange={handleOrderChange} />
 						</div>
-						<div class="flex flex-col gap-1.5">
-							<Label for="action-input">Action</Label>
-							<NameInput
-								bind:this={actionInput}
-								bind:value={actionFilter}
-								bind:valid={actionValid}
-								id="action-input"
-								placeholder="e.g. transfer"
-								onkeypress={handleKeyPress}
-							/>
-						</div>
-						<DateRangeInputs
-							bind:startDate={startDateFilter}
-							bind:endDate={endDateFilter}
-							onKeyPress={handleKeyPress}
-						/>
-						<SortOrderSelect value={orderFilter} onChange={handleOrderChange} />
-					</div>
 
-					<div class="flex items-center justify-end gap-2">
-						<Button variant="secondary" class="h-9" onclick={reset}>Reset</Button>
-						<Button class="h-9" onclick={filter} disabled={!filterable}>Apply Filters</Button>
+						<div class="flex items-center justify-end gap-2">
+							<Button variant="secondary" class="h-9" onclick={reset}>Reset</Button>
+							<Button class="h-9" onclick={filter} disabled={!filterable}>Apply Filters</Button>
+						</div>
 					</div>
 				</div>
-			</div>
-		{/if}
-	</div>
+			{/if}
+		{/snippet}
+	</ActivityControlBar>
 
 	{#if isLoading}
 		<LoadingBounce />
