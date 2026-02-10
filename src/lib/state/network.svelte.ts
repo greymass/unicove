@@ -402,9 +402,10 @@ export class NetworkState {
 
 	async decodeAction(action: Action): Promise<ABISerializable> {
 		const abi = await this.abis?.getAbi(action.account);
+		const type = abi?.getActionType(action.name) || String(action.name);
 		return Serializer.decode({
 			data: action.data,
-			type: String(action.name),
+			type,
 			abi: abi
 		});
 	}
