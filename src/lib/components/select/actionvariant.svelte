@@ -27,9 +27,6 @@
 		>
 			Summary
 		</Button>
-		<Button variant={current !== 'table' ? 'secondary' : 'primary'} onclick={() => set('table')}>
-			Table
-		</Button>
 		{#if context.settings.data.debugMode}
 			<Button
 				variant={current !== 'ricardian' ? 'secondary' : 'primary'}
