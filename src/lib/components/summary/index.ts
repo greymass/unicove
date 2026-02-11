@@ -10,6 +10,7 @@ import rex from '$lib/components/summary/eosio.rex';
 import token from '$lib/components/summary/eosio.token';
 import greymassnoop from '$lib/components/summary/greymassnoop';
 import delphioracle from '$lib/components/summary/delphioracle';
+import msigmessager from '$lib/components/summary/msigmessager';
 import wram from '$lib/components/summary/eosio.wram';
 
 export const summaries: Record<string, ContractSummaries> = {
@@ -20,6 +21,7 @@ export const summaries: Record<string, ContractSummaries> = {
 	'eosio.rex': rex,
 	'eosio.token': token,
 	greymassnoop: greymassnoop,
+	msigmessager: msigmessager,
 	'eosio.wram': wram
 };
 
