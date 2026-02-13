@@ -22,7 +22,7 @@
 		name: string;
 		bid: Types.name_bid | undefined;
 		refund: Types.bid_refund | undefined;
-		status: 'leading' | 'outbid' | 'won' | 'claimed' | 'unknown';
+		status: 'leading' | 'outbid' | 'watching' | 'won' | 'claimed' | 'no_bids' | 'unknown';
 	}
 
 	let trackedBids: TrackedBid[] = $state([]);
@@ -32,13 +32,20 @@
 
 	function determineStatus(
 		bid: Types.name_bid | undefined,
+		refund: Types.bid_refund | undefined,
 		account: string
-	): 'leading' | 'outbid' | 'won' | 'claimed' | 'unknown' {
-		if (!bid) return 'claimed';
+	): 'leading' | 'outbid' | 'watching' | 'won' | 'claimed' | 'no_bids' | 'unknown' {
+		if (!bid) {
+			if (refund) return 'claimed';
+			return 'no_bids';
+		}
 		const highBid = bid.high_bid.toNumber();
 		if (highBid < 0) return 'won';
 		if (highBid > 0 && String(bid.high_bidder) === account) return 'leading';
-		if (highBid > 0 && String(bid.high_bidder) !== account) return 'outbid';
+		if (highBid > 0 && String(bid.high_bidder) !== account) {
+			if (refund) return 'outbid';
+			return 'watching';
+		}
 		return 'unknown';
 	}
 
@@ -49,16 +56,18 @@
 			return;
 		}
 
-		loading = true;
+		if (trackedBids.length === 0) {
+			loading = true;
+		}
 		try {
 			const results = await Promise.all(
 				names.map(async (name) => {
-					const [bid, refunds] = await Promise.all([
+					const [bid, refund] = await Promise.all([
 						bidnameState.lookupBid(name).catch(() => undefined),
 						fetchRefundForUser(name, accountName).catch(() => undefined)
 					]);
-					const status = determineStatus(bid, accountName);
-					return { name, bid, refund: refunds, status } as TrackedBid;
+					const status = determineStatus(bid, refund, accountName);
+					return { name, bid, refund, status } as TrackedBid;
 				})
 			);
 			trackedBids = results;
@@ -92,11 +101,15 @@
 			case 'leading':
 				return { text: 'Highest Bidder', classes: 'bg-success/15 text-success' };
 			case 'outbid':
-				return { text: 'Not Highest Bidder', classes: 'bg-error/15 text-error' };
+				return { text: 'Outbid', classes: 'bg-error/15 text-error' };
+			case 'watching':
+				return { text: 'Watching', classes: 'bg-primary/15 text-primary' };
 			case 'won':
 				return { text: 'Won', classes: 'bg-success/15 text-success' };
 			case 'claimed':
 				return { text: 'Claimed', classes: 'bg-surface-container-high text-muted' };
+			case 'no_bids':
+				return { text: 'No Bids', classes: 'bg-surface-container-high text-muted' };
 			default:
 				return { text: 'Unknown', classes: 'bg-surface-container-high text-muted' };
 		}
@@ -107,7 +120,7 @@
 			bidnameState.lookupBid(name).catch(() => undefined),
 			fetchRefundForUser(name, accountName).catch(() => undefined)
 		]);
-		const status = determineStatus(bid, accountName);
+		const status = determineStatus(bid, refund, accountName);
 		return { name, bid, refund, status };
 	}
 
@@ -167,6 +180,8 @@
 											<AccountLink name={tracked.bid.high_bidder} />
 										</p>
 									</div>
+								{:else if tracked.status === 'no_bids'}
+									<p class="text-muted mt-1 text-sm">No one has bid on this name yet.</p>
 								{/if}
 							</div>
 							<button
@@ -178,6 +193,9 @@
 							</button>
 						</div>
 						{#if tracked.status === 'outbid'}
+							<p class="text-error mt-2 text-sm font-medium">
+								You have been outbid on this name.{#if tracked.refund}{' '}You have {String(tracked.refund.amount)} available to reclaim.{/if}
+							</p>
 							<div class="mt-3 inline-flex flex-wrap gap-2">
 								<Button href={urlPath(`/bidname/bid?name=${tracked.name}`)} variant="secondary">
 									Place Bid
@@ -187,7 +205,7 @@
 										href={urlPath(`/bidname/refund?name=${tracked.name}`)}
 										variant="secondary"
 									>
-										Claim Refund
+										Claim Refund ({String(tracked.refund.amount)})
 									</Button>
 								{/if}
 							</div>
@@ -195,6 +213,18 @@
 							<div class="mt-3 inline-flex">
 								<Button href={urlPath(`/bidname/claim?name=${tracked.name}`)} variant="primary">
 									Claim Name
+								</Button>
+							</div>
+						{:else if tracked.status === 'watching'}
+							<div class="mt-3 inline-flex">
+								<Button href={urlPath(`/bidname/bid?name=${tracked.name}`)} variant="secondary">
+									Place Bid
+								</Button>
+							</div>
+						{:else if tracked.status === 'no_bids'}
+							<div class="mt-3 inline-flex">
+								<Button href={urlPath(`/bidname/bid?name=${tracked.name}`)} variant="secondary">
+									Place Bid
 								</Button>
 							</div>
 						{/if}

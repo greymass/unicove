@@ -59,19 +59,34 @@
 		<p class="text-muted">Loading refund information...</p>
 	{:else}
 		<Switcher>
-			<Stack class="gap-2">
-				<h3 class="text-muted leading-none">Name</h3>
-				<p class="text-on-surface text-2xl font-bold">{manager.bidName}</p>
+			<Stack class="gap-4">
+				<Stack class="gap-2">
+					<h3 class="text-muted leading-none">Name</h3>
+					<p class="text-on-surface text-2xl font-bold">{manager.bidName}</p>
+				</Stack>
 				{#if manager.hasRefund}
-					<h3 class="text-muted mt-4 leading-none">Refund Available</h3>
-					<p class="text-on-surface text-2xl font-bold">{String(manager.refundAmount)}</p>
+					<Stack class="gap-2">
+						<h3 class="text-muted leading-none">Refund Available</h3>
+						<p class="text-on-surface text-2xl font-bold">{String(manager.refundAmount)}</p>
+					</Stack>
+					<p class="text-muted text-sm">
+						You were outbid on this name. Claim this refund to return {String(manager.refundAmount)}
+						to your account. You can then use these tokens to place a new bid if you wish.
+					</p>
 				{:else}
-					<p class="text-muted mt-4">No refund available for this name.</p>
+					<p class="text-muted">No refund available for this name.</p>
 				{/if}
 			</Stack>
-			<Button disabled={!manager.canRefund} onclick={() => manager.transact()} variant="primary">
-				Claim Refund
-			</Button>
+			{#if manager.hasRefund}
+				<Button
+					disabled={!manager.canRefund}
+					onclick={() => manager.transact()}
+					variant="primary"
+				>
+					Claim Refund ({String(manager.refundAmount)})
+				</Button>
+			{/if}
+			<Button href={context.urlPath(`/bidname`)} variant="secondary">Back to Premium Names</Button>
 		</Switcher>
 	{/if}
 </Stack>

@@ -1,4 +1,4 @@
-import { Action, Asset } from '@wharfkit/antelope';
+import { Action, Asset, type BlockTimestamp } from '@wharfkit/antelope';
 import type { AccountState } from '$lib/state/client/account.svelte';
 import type { NetworkState } from '$lib/state/network.svelte';
 import type { WharfState } from '$lib/state/client/wharf.svelte';
@@ -6,6 +6,8 @@ import { Types } from '$lib/wharf/contracts/system';
 import { BidnameState } from '$lib/state/bidname.svelte';
 import { PlaceholderAuth } from '@wharfkit/session';
 import { addTrackedName } from '../../tracked';
+
+const DAY_MS = 24 * 60 * 60 * 1000;
 
 export class BidManager {
 	public network: NetworkState | undefined = $state();
@@ -19,6 +21,9 @@ export class BidManager {
 	public error: string = $state('');
 	public txid: string = $state('');
 	public loading: boolean = $state(false);
+
+	public leadingBid: Types.name_bid | undefined = $state();
+	public lastNameClose: BlockTimestamp | undefined = $state();
 
 	private bidnameState: BidnameState | undefined;
 
@@ -37,6 +42,25 @@ export class BidManager {
 		if (!this.bidValid || this.bidName.length === 0) return false;
 		if (this.bidAmount.units.toNumber() < this.minimumBid.units.toNumber()) return false;
 		return true;
+	});
+
+	public leadingBidAsset: Asset | undefined = $derived.by(() => {
+		if (!this.leadingBid || !this.network) return undefined;
+		return Asset.fromUnits(this.leadingBid.high_bid, this.network.config.systemtoken.symbol);
+	});
+
+	public wouldBecomeTopBid: boolean = $derived.by(() => {
+		if (!this.leadingBid || !this.bidValid) return false;
+		return this.bidAmount.units.toNumber() > this.leadingBid.high_bid.toNumber();
+	});
+
+	public auctionCloseTime: number = $derived.by(() => {
+		if (!this.leadingBid) return 0;
+		const bidEligible = this.leadingBid.last_bid_time.toMilliseconds() + DAY_MS;
+		const closeEligible = this.lastNameClose
+			? this.lastNameClose.toMilliseconds() + DAY_MS
+			: 0;
+		return Math.max(bidEligible, closeEligible);
 	});
 
 	constructor(network: NetworkState) {
@@ -87,6 +111,13 @@ export class BidManager {
 		} finally {
 			this.loading = false;
 		}
+	}
+
+	async loadAuctionState() {
+		if (!this.bidnameState) return;
+		await this.bidnameState.fetchTopBids(1);
+		this.leadingBid = this.bidnameState.leadingBid;
+		this.lastNameClose = this.bidnameState.lastNameClose;
 	}
 
 	async transact() {

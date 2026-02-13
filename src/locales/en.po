@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2026-02-13T05:20:00.867Z\n"
+"PO-Revision-Date: 2026-02-13T09:55:21.393Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -6918,10 +6918,12 @@ msgstr "Next Auction to Close"
 #~ msgid "High bidder: {0}"
 #~ msgstr "High bidder: {0}"
 
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/components/auction-hero.svelte
 msgid "Eligible to close"
 msgstr "Eligible to close"
 
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/components/auction-hero.svelte
 msgid "Closes in"
 msgstr "Closes in"
@@ -6930,6 +6932,8 @@ msgstr "Closes in"
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/bidname/components/auction-hero.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-search.svelte
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
 msgid "Place Bid"
 msgstr "Place Bid"
@@ -7012,9 +7016,8 @@ msgstr "Start Bidding"
 #~ msgid "Place Higher Bid"
 #~ msgstr "Place Higher Bid"
 
-#: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
-msgid "Claim Refund"
-msgstr "Claim Refund"
+#~ msgid "Claim Refund"
+#~ msgstr "Claim Refund"
 
 #: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
 msgid "Claim Name"
@@ -7165,3 +7168,67 @@ msgstr "Executed By"
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Executed At"
 msgstr "Executed At"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
+msgid "No one has bid on this name yet."
+msgstr "No one has bid on this name yet."
+
+#. placeholder {0}: ' '
+#. placeholder {1}: String(tracked.refund.amount)
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
+msgid "{0}You have {1} available to reclaim."
+msgstr "{0}You have {1} available to reclaim."
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
+msgid "You have been outbid on this name.<0/>"
+msgstr "You have been outbid on this name.<0/>"
+
+#. placeholder {0}: String(tracked.refund.amount)
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
+msgid "Claim Refund ({0})"
+msgstr "Claim Refund ({0})"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "Current Top Bid (all names)"
+msgstr "Current Top Bid (all names)"
+
+#. placeholder {0}: String(manager.leadingBidAsset)
+#. placeholder {1}: String(manager.leadingBid.newname)
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "{0} on {1}"
+msgstr "{0} on {1}"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "This bid will become the highest across all names and start a new 24-hour countdown."
+msgstr "This bid will become the highest across all names and start a new 24-hour countdown."
+
+#. placeholder {0}: String(manager.leadingBidAsset)
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid ""
+"This bid will make you the highest bidder on <0/>, but the\n"
+"auction countdown is currently led by <1/> at {0}. Your name will only close after that auction ends."
+msgstr ""
+"This bid will make you the highest bidder on <0/>, but the\n"
+"auction countdown is currently led by <1/> at {0}. Your name will only close after that auction ends."
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid ""
+"<0>How premium name auctions work:</0> Only one name\n"
+"can be claimed at a time. The name with the highest bid across all auctions is next to close.\n"
+"Once 24 hours pass without a higher bid on any name, that auction ends and the winner can\n"
+"claim their name."
+msgstr ""
+"<0>How premium name auctions work:</0> Only one name\n"
+"can be claimed at a time. The name with the highest bid across all auctions is next to close.\n"
+"Once 24 hours pass without a higher bid on any name, that auction ends and the winner can\n"
+"claim their name."
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid ""
+"Each new bid on a name must be at least 10% higher than the current bid. If your bid becomes\n"
+"the highest across all names, the 24-hour countdown resets. If you are outbid, your tokens\n"
+"become available to refund."
+msgstr ""
+"Each new bid on a name must be at least 10% higher than the current bid. If your bid becomes\n"
+"the highest across all names, the 24-hour countdown resets. If you are outbid, your tokens\n"
+"become available to refund."

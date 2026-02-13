@@ -18,7 +18,9 @@ export class BidnameState {
 	}
 
 	async fetchTopBids(limit = 10): Promise<void> {
-		this.loading = true;
+		if (this.topBids.length === 0) {
+			this.loading = true;
+		}
 		this.error = undefined;
 		try {
 			const eosio = this.network.contracts.eosio;
