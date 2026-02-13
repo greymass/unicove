@@ -120,6 +120,7 @@ export class NetworkState {
 		this.contracts = {
 			delphihelper: new DelphiHelperContract({ client: this.client }),
 			delphioracle: new DelphiOracleContract({ client: this.client }),
+			eosio: new SystemContract({ account: 'eosio', client: this.client }),
 			eosntime: new TimeContract({ client: this.client }),
 			msig: new MSIGContract({ client: this.client }),
 			reserve: new ReserveContract({

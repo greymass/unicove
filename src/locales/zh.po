@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2026-01-21T18:18:00.628Z\n"
+"PO-Revision-Date: 2026-02-13T05:20:00.888Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -80,7 +80,11 @@ msgstr ""
 
 #: src/lib/components/footer.svelte
 #: src/lib/components/transact/summary.svelte
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/auction-hero.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
@@ -427,7 +431,7 @@ msgid "Input Type: {0} Asset Value: {1} Units Value: {2} Symbol: {3}"
 msgstr ""
 
 #: src/lib/components/select/actionvariant.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityControlBar.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.svelte
@@ -1078,6 +1082,7 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-search.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
@@ -1349,8 +1354,8 @@ msgstr "props.account {0} 秒前已更新 <0>刷新</0>"
 #: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityControlBar.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV1.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
@@ -3277,6 +3282,7 @@ msgstr "加载主题失败"
 msgid "View All Proposals"
 msgstr "查看所有提案"
 
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.svelte
@@ -4859,6 +4865,7 @@ msgid "Invalid number, too many decimal places."
 msgstr ""
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/stake/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/unstake/+page.svelte
 msgid "Amount exceeds available balance."
@@ -6152,6 +6159,7 @@ msgstr ""
 
 #: src/lib/state/search/manager.svelte.ts
 #: src/lib/state/search/manager.svelte.ts
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-search.svelte
 msgid "Search"
 msgstr ""
 
@@ -6468,8 +6476,7 @@ msgstr ""
 msgid "Contract / Action"
 msgstr ""
 
-#: src/lib/components/select/actionvariant.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityControlBar.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Table"
@@ -6546,17 +6553,17 @@ msgstr ""
 msgid "Apply Filters"
 msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityControlBar.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 msgid "Summary view"
 msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityControlBar.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 msgid "Table view"
 msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityControlBar.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 msgid "Action Data view"
 msgstr ""
@@ -6647,9 +6654,8 @@ msgstr ""
 msgid "Reveal Memo"
 msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
-msgid "Transfers"
-msgstr ""
+#~ msgid "Transfers"
+#~ msgstr ""
 
 #. placeholder {0}: params.name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/transfers/+page.ts
@@ -6709,4 +6715,285 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/transfers/+page.svelte
 msgid "Token transfers view requires Robo2 history support, which is not available on this network."
+msgstr ""
+
+#~ msgid "Bid Name"
+#~ msgstr ""
+
+#. placeholder {0}: network.chain.name
+#: src/routes/[[locale]]/[network]/(account)/bidname/+layout.ts
+msgid "Bid on premium names on the {0} network."
+msgstr ""
+
+#~ msgid "Browse and bid on premium account names on the {0} network using an {1} compatible wallet."
+#~ msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/+page.svelte
+msgid "Top Active Bids"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/+page.svelte
+msgid "Search Names"
+msgstr ""
+
+#. placeholder {0}: data.network.chain.name
+#: src/routes/[[locale]]/[network]/(account)/bidname/+page.svelte
+msgid "Premium name bidding is not available on {0}."
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/auction-hero.svelte
+msgid "No active auctions"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/auction-hero.svelte
+msgid "Next Auction to Close"
+msgstr ""
+
+#~ msgid "High bidder: {0}"
+#~ msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/auction-hero.svelte
+msgid "Eligible to close"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/auction-hero.svelte
+msgid "Closes in"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.ts
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/auction-hero.svelte
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-search.svelte
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
+msgid "Place Bid"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-list.svelte
+msgid "Loading bids..."
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-list.svelte
+msgid "No active bids found."
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-list.svelte
+msgid "Bid"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-search.svelte
+msgid "Premium names cannot contain dots"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-search.svelte
+msgid "Premium names must be 11 characters or fewer"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-search.svelte
+msgid "Only lowercase a-z and digits 1-5 are allowed"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-search.svelte
+msgid "Search premium names..."
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-search.svelte
+msgid "Searching..."
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-search.svelte
+msgid "This name is already taken"
+msgstr ""
+
+#. placeholder {0}: query.trim().toLowerCase()
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-search.svelte
+msgid "The account \"{0}\" already exists on the network."
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-search.svelte
+msgid "Current bid:"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-search.svelte
+msgid "High bidder:"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-search.svelte
+msgid "No bids yet - be the first!"
+msgstr ""
+
+#. placeholder {0}: searchedName
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-search.svelte
+msgid "No one has placed a bid on \"{0}\" yet."
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-search.svelte
+msgid "Start Bidding"
+msgstr ""
+
+#~ msgid "Your Bids"
+#~ msgstr ""
+
+#~ msgid "Loading your bids..."
+#~ msgstr ""
+
+#~ msgid "No tracked bids. Place a bid or add a name to track."
+#~ msgstr ""
+
+#~ msgid "Increase Bid"
+#~ msgstr ""
+
+#~ msgid "Place Higher Bid"
+#~ msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
+msgid "Claim Refund"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
+msgid "Claim Name"
+msgstr ""
+
+#~ msgid "Remove"
+#~ msgstr ""
+
+#~ msgid "Add name to track..."
+#~ msgstr ""
+
+#~ msgid "Add"
+#~ msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.ts
+msgid "Bid on a premium name"
+msgstr ""
+
+#. placeholder {0}: String(network.chain.name)
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.ts
+msgid "Place Bid - {0} Premium Names"
+msgstr ""
+
+#. placeholder {0}: String(network.chain.name)
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.ts
+msgid "Place a bid on a premium account name on the {0} network."
+msgstr ""
+
+#~ msgid "Name"
+#~ msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "Bid Amount"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "Minimum Bid"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "Current High Bid"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "High Bidder"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "Back to Premium Names"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "No name specified. Go back to browse available names."
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "Browse Names"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "Bidding on"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "Loading current bid..."
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "Minimum Bid (10% higher)"
+msgstr ""
+
+#. placeholder {0}: String(manager.minimumBid)
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "Bid must be at least {0}."
+msgstr ""
+
+#~ msgid "Names"
+#~ msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/+layout.ts
+#: src/routes/[[locale]]/[network]/(account)/bidname/+layout.ts
+msgid "Premium Name Bidding"
+msgstr ""
+
+#. placeholder {0}: network.chain.name
+#: src/routes/[[locale]]/[network]/(account)/bidname/+layout.ts
+msgid "Browse and bid on premium account names on the {0} network."
+msgstr ""
+
+#~ msgid ""
+#~ "Track names you've bid on to monitor their status. Place a bid or add a name\n"
+#~ "below."
+#~ msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
+msgid "High bid:"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
+msgid "Bidder:"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
+msgid "Stop tracking"
+msgstr ""
+
+#~ msgid "Track a name to monitor its bid status"
+#~ msgstr ""
+
+#~ msgid "Enter a name..."
+#~ msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-search.svelte
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-search.svelte
+msgid "Track"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
+msgid "Monitored Names"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-search.svelte
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-search.svelte
+msgid "Untrack"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
+msgid "Loading tracked names..."
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/auction-hero.svelte
+msgid "High bidder: <0/>"
+msgstr ""
+
+#~ msgid "Outbid"
+#~ msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
+msgid "Search for a name above and click Track to monitor its bid status."
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+msgid "Executed By"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+msgid "Executed At"
 msgstr ""

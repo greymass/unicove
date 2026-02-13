@@ -131,6 +131,7 @@ export const chainConfig: ChainConfig = {
 		robo2: env.PUBLIC_FEATURE_ROBO2 || undefined
 	},
 	features: {
+		bidname: isENVTrue(env.PUBLIC_FEATURE_BIDNAME),
 		delphihelper: isENVTrue(env.PUBLIC_FEATURE_DELPHIHELPER),
 		delphioracle: isENVTrue(env.PUBLIC_FEATURE_DELPHIORACLE),
 		directfunding: isENVTrue(env.PUBLIC_FEATURE_DIRECTFUNDING),
@@ -165,6 +166,7 @@ export const chains = [chainConfig];
 export interface DefaultContracts {
 	delphihelper: DelphiHelperContract;
 	delphioracle: DelphiOracleContract;
+	eosio: SystemContract;
 	eosntime: TimeContract;
 	msig: MSIGContract;
 	reserve: ReserveContract;
@@ -221,6 +223,7 @@ export interface ChainConfig {
 }
 
 export type FeatureType =
+	| 'bidname'
 	| 'delphihelper'
 	| 'delphioracle'
 	| 'directfunding'
