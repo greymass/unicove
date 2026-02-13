@@ -69,11 +69,7 @@
 					<p class="text-muted mt-4">No refund available for this name.</p>
 				{/if}
 			</Stack>
-			<Button
-				disabled={!manager.canRefund}
-				onclick={() => manager.transact()}
-				variant="primary"
-			>
+			<Button disabled={!manager.canRefund} onclick={() => manager.transact()} variant="primary">
 				Claim Refund
 			</Button>
 		</Switcher>

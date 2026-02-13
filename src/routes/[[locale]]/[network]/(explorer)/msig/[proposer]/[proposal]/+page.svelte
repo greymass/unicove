@@ -62,9 +62,7 @@
 		expired: 'bg-error text-on-error'
 	};
 
-	const statusColor = $derived(
-		statusColors[data.proposal.status] || statusColors.proposed
-	);
+	const statusColor = $derived(statusColors[data.proposal.status] || statusColors.proposed);
 
 	async function cancel() {
 		await manager.cancel();

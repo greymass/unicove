@@ -14,9 +14,7 @@ export class BidRefundManager {
 	public error: string = $state('');
 	public txid: string = $state('');
 
-	public hasRefund: boolean = $derived(
-		!!this.refundAmount && this.refundAmount.value > 0
-	);
+	public hasRefund: boolean = $derived(!!this.refundAmount && this.refundAmount.value > 0);
 	public canRefund: boolean = $derived(this.hasRefund && this.bidName.length > 0);
 
 	constructor(network: NetworkState) {

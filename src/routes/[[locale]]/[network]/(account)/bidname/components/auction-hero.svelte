@@ -62,7 +62,7 @@
 	}
 </script>
 
-<Card class="bg-gradient-to-br from-primary/10 to-primary/5 border-primary/20 border">
+<Card class="from-primary/10 to-primary/5 border-primary/20 border bg-gradient-to-br">
 	<Stack>
 		{#if !bid}
 			<div class="flex flex-col items-center justify-center py-8">
@@ -72,7 +72,7 @@
 		{:else}
 			<div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 				<div class="flex flex-col gap-2">
-					<p class="text-muted text-sm font-medium uppercase tracking-wider">
+					<p class="text-muted text-sm font-medium tracking-wider uppercase">
 						Next Auction to Close
 					</p>
 					<h2 class="text-on-surface text-3xl font-bold tracking-tight">
@@ -91,14 +91,12 @@
 				<div class="flex flex-col items-start gap-3 sm:items-end">
 					{#if isEligible}
 						<div class="bg-success/15 text-success rounded-lg px-4 py-2">
-							<p class="text-sm font-medium uppercase tracking-wider">Status</p>
+							<p class="text-sm font-medium tracking-wider uppercase">Status</p>
 							<p class="text-xl font-bold">Eligible to close</p>
 						</div>
 					{:else}
 						<div class="bg-surface-container rounded-lg px-4 py-2 text-center">
-							<p class="text-muted text-sm font-medium uppercase tracking-wider">
-								Closes in
-							</p>
+							<p class="text-muted text-sm font-medium tracking-wider uppercase">Closes in</p>
 							<p class="text-on-surface font-mono text-2xl font-bold">
 								{formatCountdown(timeRemaining)}
 							</p>

@@ -72,8 +72,8 @@
 		<Stack class="gap-2">
 			<h3 class="text-on-surface text-xl font-semibold">{manager.bidName}</h3>
 			<p class="text-muted">
-				This name was won by <AccountText name={manager.currentBid.high_bidder} />. Only the
-				winning bidder can claim this name.
+				This name was won by <AccountText name={manager.currentBid.high_bidder} />. Only the winning
+				bidder can claim this name.
 			</p>
 		</Stack>
 	{:else}
@@ -105,11 +105,7 @@
 				</fieldset>
 			</Stack>
 
-			<Button
-				disabled={!manager.canClaim}
-				onclick={() => manager.transact()}
-				variant="primary"
-			>
+			<Button disabled={!manager.canClaim} onclick={() => manager.transact()} variant="primary">
 				Claim Name
 			</Button>
 		</Switcher>

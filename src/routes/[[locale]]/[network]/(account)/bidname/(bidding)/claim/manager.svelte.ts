@@ -17,21 +17,14 @@ export class ClaimManager {
 	public error: string = $state('');
 	public txid: string = $state('');
 
-	public isWon: boolean = $derived(
-		!!this.currentBid && this.currentBid.high_bid.toNumber() < 0
-	);
+	public isWon: boolean = $derived(!!this.currentBid && this.currentBid.high_bid.toNumber() < 0);
 
 	public isHighBidder: boolean = $derived(
-		!!this.currentBid &&
-			!!this.account &&
-			this.currentBid.high_bidder.equals(this.account.name)
+		!!this.currentBid && !!this.account && this.currentBid.high_bidder.equals(this.account.name)
 	);
 
 	public canClaim: boolean = $derived(
-		this.isWon &&
-			this.isHighBidder &&
-			!!this.ownerKey &&
-			!!this.activeKey
+		this.isWon && this.isHighBidder && !!this.ownerKey && !!this.activeKey
 	);
 
 	constructor(network: NetworkState) {
@@ -65,9 +58,7 @@ export class ClaimManager {
 		this.loading = true;
 		this.error = '';
 		try {
-			this.currentBid = await this.network.contracts.eosio
-				.table('namebids')
-				.get(this.bidName);
+			this.currentBid = await this.network.contracts.eosio.table('namebids').get(this.bidName);
 		} catch (e) {
 			this.error = String(e);
 		} finally {

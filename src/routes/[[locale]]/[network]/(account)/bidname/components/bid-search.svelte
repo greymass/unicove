@@ -127,11 +127,9 @@
 			bind:value={query}
 			onkeydown={handleKeydown}
 			placeholder="Search premium names..."
-			class="bg-surface-container border-outline-variant text-on-surface placeholder:text-muted flex-1 rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+			class="bg-surface-container border-outline-variant text-on-surface placeholder:text-muted focus:ring-primary flex-1 rounded-lg border px-3 py-2 text-sm focus:ring-2 focus:outline-none"
 		/>
-		<Button variant="primary" onclick={search} disabled={searching || !query.trim()}>
-			Search
-		</Button>
+		<Button variant="primary" onclick={search} disabled={searching || !query.trim()}>Search</Button>
 	</div>
 
 	{#if validationError}
@@ -169,17 +167,11 @@
 						</p>
 					</div>
 					<div class="flex flex-wrap gap-2">
-						<Button
-							href={urlPath(`/bidname/bid?name=${String(bid.newname)}`)}
-							variant="primary"
-						>
+						<Button href={urlPath(`/bidname/bid?name=${String(bid.newname)}`)} variant="primary">
 							Place Bid
 						</Button>
 						{#if accountName}
-							<Button
-								variant="secondary"
-								onclick={() => toggleTrack(String(bid.newname))}
-							>
+							<Button variant="secondary" onclick={() => toggleTrack(String(bid.newname))}>
 								{tracked ? 'Untrack' : 'Track'}
 							</Button>
 						{/if}
@@ -194,17 +186,11 @@
 						No one has placed a bid on "{searchedName}" yet.
 					</p>
 					<div class="flex flex-wrap gap-2">
-						<Button
-							href={urlPath(`/bidname/bid?name=${searchedName}`)}
-							variant="primary"
-						>
+						<Button href={urlPath(`/bidname/bid?name=${searchedName}`)} variant="primary">
 							Start Bidding
 						</Button>
 						{#if accountName}
-							<Button
-								variant="secondary"
-								onclick={() => toggleTrack(searchedName)}
-							>
+							<Button variant="secondary" onclick={() => toggleTrack(searchedName)}>
 								{tracked ? 'Untrack' : 'Track'}
 							</Button>
 						{/if}

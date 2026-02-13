@@ -87,9 +87,7 @@
 		trackedBids = trackedBids.filter((b) => b.name !== name);
 	}
 
-	function statusLabel(
-		status: string
-	): { text: string; classes: string } {
+	function statusLabel(status: string): { text: string; classes: string } {
 		switch (status) {
 			case 'leading':
 				return { text: 'Highest Bidder', classes: 'bg-success/15 text-success' };
@@ -192,10 +190,7 @@
 						</div>
 						{#if tracked.status === 'outbid'}
 							<div class="mt-3 inline-flex flex-wrap gap-2">
-								<Button
-									href={urlPath(`/bidname/bid?name=${tracked.name}`)}
-									variant="secondary"
-								>
+								<Button href={urlPath(`/bidname/bid?name=${tracked.name}`)} variant="secondary">
 									Place Bid
 								</Button>
 								{#if tracked.refund}
@@ -209,10 +204,7 @@
 							</div>
 						{:else if tracked.status === 'won'}
 							<div class="mt-3 inline-flex">
-								<Button
-									href={urlPath(`/bidname/claim?name=${tracked.name}`)}
-									variant="primary"
-								>
+								<Button href={urlPath(`/bidname/claim?name=${tracked.name}`)} variant="primary">
 									Claim Name
 								</Button>
 							</div>

@@ -69,12 +69,8 @@ export async function GET({ fetch, locals: { network }, params }: RequestEvent) 
 			producers,
 			status: 'proposed',
 			transaction,
-			requested_approvals: approvals
-				? approvals.requested_approvals.map((a) => a.level)
-				: [],
-			provided_approvals: approvals
-				? approvals.provided_approvals.map((a) => a.level)
-				: []
+			requested_approvals: approvals ? approvals.requested_approvals.map((a) => a.level) : [],
+			provided_approvals: approvals ? approvals.provided_approvals.map((a) => a.level) : []
 		},
 		{ headers: getCacheHeaders(5) }
 	);
