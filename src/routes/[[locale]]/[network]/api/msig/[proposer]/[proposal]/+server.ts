@@ -21,6 +21,14 @@ export async function GET({ fetch, locals: { network }, params }: RequestEvent) 
 				? new MsigsClient(new APIClient(new FetchProvider(msigsUrl, { fetch })))
 				: network.msigs;
 			const result = await msigs.get_proposal(proposer, proposal_name);
+			const provided = result.provided_approvals || [];
+			const providedSet = new Set(
+				provided.map((a: PermissionLevel) => `${a.actor}@${a.permission}`)
+			);
+			const requested = (result.requested_approvals || []).filter(
+				(a: PermissionLevel) => !providedSet.has(`${a.actor}@${a.permission}`)
+			);
+
 			return json(
 				{
 					ts: new Date(),
@@ -29,8 +37,8 @@ export async function GET({ fetch, locals: { network }, params }: RequestEvent) 
 					producers,
 					status: result.status,
 					transaction: result.transaction,
-					requested_approvals: result.requested_approvals || [],
-					provided_approvals: result.provided_approvals || [],
+					requested_approvals: requested,
+					provided_approvals: provided,
 					executed_at: result.executed_at ? String(result.executed_at) : undefined,
 					executed_by: result.executed_by ? String(result.executed_by) : undefined,
 					executed_trx_id: result.executed_trx_id ? String(result.executed_trx_id) : undefined
