@@ -185,6 +185,7 @@ export interface ChainEndpoints {
 	hyperion?: string;
 	lightapi?: string;
 	metrics?: string;
+	msigs?: string;
 	robo2?: string;
 	sentiment?: string;
 }

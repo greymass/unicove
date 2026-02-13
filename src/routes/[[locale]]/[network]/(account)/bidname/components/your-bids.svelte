@@ -12,11 +12,11 @@
 		accountName: string;
 		network: NetworkState;
 		urlPath: (path: string) => string;
-		trackVersion?: number;
-		refreshVersion?: number;
+		onrefresh?: (refresh: () => void) => void;
+		ontrackchange?: (sync: () => void) => void;
 	}
 
-	const { accountName, network, urlPath, trackVersion, refreshVersion }: Props = $props();
+	const { accountName, network, urlPath, onrefresh, ontrackchange }: Props = $props();
 
 	interface TrackedBid {
 		name: string;
@@ -128,20 +128,9 @@
 		}
 	}
 
-	let initialized = $state(false);
-
-	$effect(() => {
-		refreshVersion;
-		loadTrackedBids().then(() => {
-			initialized = true;
-		});
-	});
-
-	$effect(() => {
-		if (!initialized) return;
-		trackVersion;
-		syncTrackedBids();
-	});
+	loadTrackedBids();
+	onrefresh?.(() => loadTrackedBids());
+	ontrackchange?.(() => syncTrackedBids());
 </script>
 
 <Card id="monitored-names" title="Monitored Names">

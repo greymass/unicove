@@ -18,6 +18,7 @@ const backendEndpoints: ChainEndpoints = {
 	hyperion: env.BACKEND_API_HYPERION,
 	lightapi: env.BACKEND_API_LIGHTAPI,
 	metrics: env.BACKEND_API_METRICS,
+	msigs: env.BACKEND_API_MSIGS,
 	robo2: env.BACKEND_API_ROBO2,
 	sentiment: env.BACKEND_API_SENTIMENT
 };

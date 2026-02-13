@@ -18,12 +18,12 @@
 
 	const bidnameState = new BidnameState(data.network);
 
-	let trackVersion = $state(0);
-	let refreshVersion = $state(0);
+	let refreshBids: (() => void) | undefined;
+	let syncBids: (() => void) | undefined;
 
 	function refresh() {
 		bidnameState.fetchTopBids();
-		refreshVersion++;
+		refreshBids?.();
 	}
 
 	$effect(() => {
@@ -65,7 +65,7 @@
 					network={data.network}
 					urlPath={context.urlPath}
 					accountName={context.account ? String(context.account.name) : undefined}
-					ontrackchange={() => trackVersion++}
+					ontrackchange={() => syncBids?.()}
 				/>
 			</Card>
 
@@ -74,8 +74,8 @@
 					accountName={String(context.account.name)}
 					network={data.network}
 					urlPath={context.urlPath}
-					{trackVersion}
-					{refreshVersion}
+					onrefresh={(fn) => (refreshBids = fn)}
+					ontrackchange={(fn) => (syncBids = fn)}
 				/>
 			{/if}
 		{/snippet}

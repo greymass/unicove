@@ -1,5 +1,6 @@
 import { json } from '@sveltejs/kit';
-import { Name, PackedTransaction } from '@wharfkit/antelope';
+import { APIClient, FetchProvider, Name, PackedTransaction } from '@wharfkit/antelope';
+import { MsigsClient } from '@wharfkit/msigs';
 
 import { getCacheHeaders } from '$lib/utils';
 import type { RequestEvent } from './$types';
@@ -15,7 +16,11 @@ export async function GET({ fetch, locals: { network }, params }: RequestEvent) 
 
 	if (network.supports('msigapi')) {
 		try {
-			const result = await network.msigs.get_proposal(proposer, proposal_name);
+			const msigsUrl = network.config.endpoints.msigs;
+			const msigs = msigsUrl
+				? new MsigsClient(new APIClient(new FetchProvider(msigsUrl, { fetch })))
+				: network.msigs;
+			const result = await msigs.get_proposal(proposer, proposal_name);
 			return json(
 				{
 					ts: new Date(),
