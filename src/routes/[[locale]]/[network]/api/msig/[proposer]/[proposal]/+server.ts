@@ -22,9 +22,7 @@ export async function GET({ fetch, locals: { network }, params }: RequestEvent) 
 				: network.msigs;
 			const result = await msigs.get_proposal(proposer, proposal_name);
 			const provided = result.provided_approvals || [];
-			const providedSet = new Set(
-				provided.map((a) => `${a.actor}@${a.permission}`)
-			);
+			const providedSet = new Set(provided.map((a) => `${a.actor}@${a.permission}`));
 			const requested = (result.requested_approvals || []).filter(
 				(a) => !providedSet.has(`${a.actor}@${a.permission}`)
 			);
