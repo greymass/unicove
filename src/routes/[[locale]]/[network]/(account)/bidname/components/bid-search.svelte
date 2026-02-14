@@ -1,22 +1,21 @@
 <script lang="ts">
-	import { Asset } from '@wharfkit/antelope';
+	import { getContext } from 'svelte';
 
 	import { Button, Stack } from 'unicove-components';
 	import AccountLink from '$lib/components/elements/account.svelte';
-	import { BidnameState } from '$lib/state/bidname.svelte';
-	import type { NetworkState } from '$lib/state/network.svelte';
-	import { addTrackedName, getTrackedNames, removeTrackedName } from '../tracked';
+	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import type { BidnameApiResponse } from '$lib/state/bidname.svelte';
+	import { Types } from '$lib/wharf/contracts/system';
+	import { addTrackedName, canTrackMore, getTrackedNames, removeTrackedName } from '../tracked';
+	import { formatBidAmount, formatRelativeTime } from '../formatting';
 
 	interface Props {
-		network: NetworkState;
-		urlPath: (path: string) => string;
 		accountName?: string;
 		ontrackchange?: () => void;
 	}
 
-	const { network, urlPath, accountName, ontrackchange }: Props = $props();
-
-	const bidnameState = new BidnameState(network);
+	const { accountName, ontrackchange }: Props = $props();
+	const { network, urlPath } = getContext<UnicoveContext>('state');
 
 	let query = $state('');
 	let result: import('$lib/wharf/contracts/system').Types.name_bid | undefined | null =
@@ -24,25 +23,32 @@
 	let searching = $state(false);
 	let accountExists = $state(false);
 	let validationError = $state('');
+	let searchError = $state('');
 
-	let tracked = $state(false);
+	let trackVersion = $state(0);
 
 	const searchedName = $derived(query.trim().toLowerCase());
 
-	function isTracked(name: string): boolean {
+	const tracked: boolean = $derived.by(() => {
+		void trackVersion;
+		if (!accountName || !searchedName) return false;
+		return getTrackedNames(accountName).includes(searchedName);
+	});
+
+	const atLimit: boolean = $derived.by(() => {
+		void trackVersion;
 		if (!accountName) return false;
-		return getTrackedNames(accountName).includes(name);
-	}
+		return !canTrackMore(accountName);
+	});
 
 	function toggleTrack(name: string) {
 		if (!accountName) return;
-		if (isTracked(name)) {
+		if (getTrackedNames(accountName).includes(name)) {
 			removeTrackedName(accountName, name);
-			tracked = false;
 		} else {
-			addTrackedName(accountName, name);
-			tracked = true;
+			if (!addTrackedName(accountName, name)) return;
 		}
+		trackVersion++;
 		ontrackchange?.();
 	}
 
@@ -69,20 +75,7 @@
 		return true;
 	}
 
-	function formatBidAmount(highBid: import('@wharfkit/antelope').Int64): string {
-		const symbol = network.config.systemtoken.id.symbol;
-		return String(Asset.fromUnits(highBid, symbol));
-	}
-
-	function formatRelativeTime(timestamp: number): string {
-		const diff = Date.now() - timestamp;
-		const hours = Math.floor(diff / (1000 * 60 * 60));
-		const days = Math.floor(hours / 24);
-		if (days > 0) return `${days}d ago`;
-		if (hours > 0) return `${hours}h ago`;
-		const minutes = Math.floor(diff / (1000 * 60));
-		return `${minutes}m ago`;
-	}
+	const symbol = $derived(network.config.systemtoken.id.symbol);
 
 	async function search() {
 		const name = query.trim().toLowerCase();
@@ -91,23 +84,23 @@
 		searching = true;
 		result = null;
 		accountExists = false;
+		searchError = '';
 
 		try {
-			const [bid] = await Promise.all([
-				bidnameState.lookupBid(name),
-				network.client.v1.chain
-					.get_account(name)
-					.then(() => {
-						accountExists = true;
-					})
-					.catch(() => {
-						accountExists = false;
-					})
-			]);
-			result = bid ?? undefined;
-			tracked = isTracked(name);
+			const params = new URLSearchParams({ search: name });
+			const res = await fetch(urlPath(`/api/bidname?${params}`));
+			if (!res.ok) throw new Error(`Search failed: ${res.status}`);
+			const data: BidnameApiResponse = await res.json();
+
+			if (data.searchResult) {
+				result = data.searchResult.bid ? Types.name_bid.from(data.searchResult.bid) : undefined;
+				accountExists = data.searchResult.accountExists;
+			} else {
+				result = undefined;
+			}
 		} catch {
 			result = undefined;
+			searchError = 'Search failed. Please try again.';
 		} finally {
 			searching = false;
 		}
@@ -136,6 +129,10 @@
 		<p class="text-error text-sm">{validationError}</p>
 	{/if}
 
+	{#if searchError}
+		<p class="text-error text-sm">{searchError}</p>
+	{/if}
+
 	{#if searching}
 		<p class="text-muted text-sm">Searching...</p>
 	{:else if result !== null}
@@ -159,7 +156,7 @@
 					<div class="flex flex-col gap-1">
 						<p class="text-on-surface text-sm">
 							<span class="text-muted">Current bid:</span>
-							{formatBidAmount(bid.high_bid)}
+							{formatBidAmount(bid.high_bid, symbol)}
 						</p>
 						<p class="text-sm">
 							<span class="text-muted">High bidder:</span>
@@ -171,8 +168,12 @@
 							Place Bid
 						</Button>
 						{#if accountName}
-							<Button variant="secondary" onclick={() => toggleTrack(String(bid.newname))}>
-								{tracked ? 'Untrack' : 'Track'}
+							<Button
+								variant="secondary"
+								onclick={() => toggleTrack(String(bid.newname))}
+								disabled={!tracked && atLimit}
+							>
+								{tracked ? 'Untrack' : atLimit ? 'Limit Reached' : 'Track'}
 							</Button>
 						{/if}
 					</div>
@@ -190,8 +191,12 @@
 							Start Bidding
 						</Button>
 						{#if accountName}
-							<Button variant="secondary" onclick={() => toggleTrack(searchedName)}>
-								{tracked ? 'Untrack' : 'Track'}
+							<Button
+								variant="secondary"
+								onclick={() => toggleTrack(searchedName)}
+								disabled={!tracked && atLimit}
+							>
+								{tracked ? 'Untrack' : atLimit ? 'Limit Reached' : 'Track'}
 							</Button>
 						{/if}
 					</div>

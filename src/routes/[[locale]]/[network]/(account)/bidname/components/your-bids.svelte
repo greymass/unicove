@@ -1,40 +1,46 @@
 <script lang="ts">
-	import { Asset, type NameType } from '@wharfkit/antelope';
+	import { getContext } from 'svelte';
 
 	import { Button, Card, Stack } from 'unicove-components';
 	import AccountLink from '$lib/components/elements/account.svelte';
-	import { BidnameState } from '$lib/state/bidname.svelte';
-	import type { NetworkState } from '$lib/state/network.svelte';
+	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import type { BidnameApiResponse } from '$lib/state/bidname.svelte';
 	import { Types } from '$lib/wharf/contracts/system';
 	import { getTrackedNames, removeTrackedName } from '../tracked';
+	import { formatBidAmount } from '../formatting';
+
+	type TrackedBidStatus =
+		| 'leading'
+		| 'outbid'
+		| 'watching'
+		| 'won'
+		| 'claimed'
+		| 'no_bids'
+		| 'unknown';
 
 	interface Props {
 		accountName: string;
-		network: NetworkState;
-		urlPath: (path: string) => string;
-		onrefresh?: (refresh: () => void) => void;
-		ontrackchange?: (sync: () => void) => void;
+		trackedBidsData?: BidnameApiResponse['trackedBids'];
+		ontrackchange?: () => void;
 	}
 
-	const { accountName, network, urlPath, onrefresh, ontrackchange }: Props = $props();
+	const { accountName, trackedBidsData, ontrackchange }: Props = $props();
+	const { network, urlPath } = getContext<UnicoveContext>('state');
 
 	interface TrackedBid {
 		name: string;
 		bid: Types.name_bid | undefined;
 		refund: Types.bid_refund | undefined;
-		status: 'leading' | 'outbid' | 'watching' | 'won' | 'claimed' | 'no_bids' | 'unknown';
+		status: TrackedBidStatus;
 	}
 
-	let trackedBids: TrackedBid[] = $state([]);
-	let loading = $state(false);
-
-	const bidnameState = new BidnameState(network);
+	let loading = $derived(trackedBidsData === undefined && getTrackedNames(accountName).length > 0);
 
 	function determineStatus(
 		bid: Types.name_bid | undefined,
 		refund: Types.bid_refund | undefined,
 		account: string
-	): 'leading' | 'outbid' | 'watching' | 'won' | 'claimed' | 'no_bids' | 'unknown' {
+	): TrackedBidStatus {
 		if (!bid) {
 			if (refund) return 'claimed';
 			return 'no_bids';
@@ -49,51 +55,29 @@
 		return 'unknown';
 	}
 
-	async function loadTrackedBids() {
-		const names = getTrackedNames(accountName);
-		if (names.length === 0) {
-			trackedBids = [];
-			return;
-		}
-
-		if (trackedBids.length === 0) {
-			loading = true;
-		}
-		try {
-			const results = await Promise.all(
-				names.map(async (name) => {
-					const [bid, refund] = await Promise.all([
-						bidnameState.lookupBid(name).catch(() => undefined),
-						fetchRefundForUser(name, accountName).catch(() => undefined)
-					]);
-					const status = determineStatus(bid, refund, accountName);
-					return { name, bid, refund, status } as TrackedBid;
-				})
-			);
-			trackedBids = results;
-		} catch {
-			trackedBids = [];
-		} finally {
-			loading = false;
-		}
+	function convertApiData(items: NonNullable<BidnameApiResponse['trackedBids']>): TrackedBid[] {
+		return items.map(({ name, bid, refund }) => {
+			const bidObj = bid ? Types.name_bid.from(bid) : undefined;
+			const refundObj = refund ? Types.bid_refund.from(refund) : undefined;
+			const status = determineStatus(bidObj, refundObj, accountName);
+			return { name, bid: bidObj, refund: refundObj, status };
+		});
 	}
 
-	async function fetchRefundForUser(
-		bidName: NameType,
-		account: NameType
-	): Promise<Types.bid_refund | undefined> {
-		return network.contracts.eosio.table('bidrefunds', bidName).get(account);
-	}
+	const parentBids: TrackedBid[] = $derived(trackedBidsData ? convertApiData(trackedBidsData) : []);
 
-	function formatBidAmount(bid: Types.name_bid): string {
-		const symbol = network.config.systemtoken.id.symbol;
-		const units = bid.high_bid.toNumber();
-		return String(Asset.fromUnits(Math.abs(units), symbol));
-	}
+	let pendingRemovals: string[] = $state([]);
+
+	const trackedBids: TrackedBid[] = $derived(
+		parentBids.filter((b) => !pendingRemovals.includes(b.name))
+	);
+
+	const symbol = $derived(network.config.systemtoken.id.symbol);
 
 	function handleRemove(name: string) {
 		removeTrackedName(accountName, name);
-		trackedBids = trackedBids.filter((b) => b.name !== name);
+		pendingRemovals = [...pendingRemovals, name];
+		ontrackchange?.();
 	}
 
 	function statusLabel(status: string): { text: string; classes: string } {
@@ -114,36 +98,6 @@
 				return { text: 'Unknown', classes: 'bg-surface-container-high text-muted' };
 		}
 	}
-
-	async function fetchSingleBid(name: string): Promise<TrackedBid> {
-		const [bid, refund] = await Promise.all([
-			bidnameState.lookupBid(name).catch(() => undefined),
-			fetchRefundForUser(name, accountName).catch(() => undefined)
-		]);
-		const status = determineStatus(bid, refund, accountName);
-		return { name, bid, refund, status };
-	}
-
-	async function syncTrackedBids() {
-		const names = getTrackedNames(accountName);
-		const currentNames = trackedBids.map((b) => b.name);
-
-		const added = names.filter((n) => !currentNames.includes(n));
-		const removed = currentNames.filter((n) => !names.includes(n));
-
-		if (removed.length > 0) {
-			trackedBids = trackedBids.filter((b) => !removed.includes(b.name));
-		}
-
-		if (added.length > 0) {
-			const newBids = await Promise.all(added.map(fetchSingleBid));
-			trackedBids = [...trackedBids, ...newBids];
-		}
-	}
-
-	loadTrackedBids();
-	onrefresh?.(() => loadTrackedBids());
-	ontrackchange?.(() => syncTrackedBids());
 </script>
 
 <Card id="monitored-names" title="Monitored Names">
@@ -173,7 +127,7 @@
 									<div class="mt-1 flex flex-col gap-0.5">
 										<p class="text-on-surface text-sm">
 											<span class="text-muted">High bid:</span>
-											{formatBidAmount(tracked.bid)}
+											{formatBidAmount(Math.abs(tracked.bid.high_bid.toNumber()), symbol)}
 										</p>
 										<p class="text-sm">
 											<span class="text-muted">Bidder:</span>
@@ -188,13 +142,16 @@
 								class="text-muted hover:text-on-surface shrink-0 p-1 text-sm"
 								onclick={() => handleRemove(tracked.name)}
 								title="Stop tracking"
+								aria-label="Stop tracking {tracked.name}"
 							>
 								✕
 							</button>
 						</div>
 						{#if tracked.status === 'outbid'}
 							<p class="text-error mt-2 text-sm font-medium">
-								You have been outbid on this name.{#if tracked.refund}{' '}You have {String(tracked.refund.amount)} available to reclaim.{/if}
+								You have been outbid on this name.{#if tracked.refund}{' '}You have {String(
+										tracked.refund.amount
+									)} available to reclaim.{/if}
 							</p>
 							<div class="mt-3 inline-flex flex-wrap gap-2">
 								<Button href={urlPath(`/bidname/bid?name=${tracked.name}`)} variant="secondary">

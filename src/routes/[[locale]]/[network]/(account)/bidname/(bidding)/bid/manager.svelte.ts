@@ -1,9 +1,9 @@
-import { Action, Asset, type BlockTimestamp } from '@wharfkit/antelope';
+import { Action, Asset, BlockTimestamp } from '@wharfkit/antelope';
 import type { AccountState } from '$lib/state/client/account.svelte';
 import type { NetworkState } from '$lib/state/network.svelte';
 import type { WharfState } from '$lib/state/client/wharf.svelte';
 import { Types } from '$lib/wharf/contracts/system';
-import { BidnameState } from '$lib/state/bidname.svelte';
+import type { BidnameApiResponse } from '$lib/state/bidname.svelte';
 import { PlaceholderAuth } from '@wharfkit/session';
 import { addTrackedName } from '../../tracked';
 
@@ -24,8 +24,6 @@ export class BidManager {
 
 	public leadingBid: Types.name_bid | undefined = $state();
 	public lastNameClose: BlockTimestamp | undefined = $state();
-
-	private bidnameState: BidnameState | undefined;
 
 	public minimumBid: Asset = $derived.by(() => {
 		if (!this.network) return Asset.fromUnits(0, '4,EOS');
@@ -57,16 +55,13 @@ export class BidManager {
 	public auctionCloseTime: number = $derived.by(() => {
 		if (!this.leadingBid) return 0;
 		const bidEligible = this.leadingBid.last_bid_time.toMilliseconds() + DAY_MS;
-		const closeEligible = this.lastNameClose
-			? this.lastNameClose.toMilliseconds() + DAY_MS
-			: 0;
+		const closeEligible = this.lastNameClose ? this.lastNameClose.toMilliseconds() + DAY_MS : 0;
 		return Math.max(bidEligible, closeEligible);
 	});
 
 	constructor(network: NetworkState) {
 		this.network = network;
 		this.bidAmount = this.zeroValue;
-		this.bidnameState = new BidnameState(network);
 	}
 
 	get zeroValue() {
@@ -79,7 +74,6 @@ export class BidManager {
 		let changed = false;
 		if (network.chain !== this.network?.chain) {
 			this.network = network;
-			this.bidnameState = new BidnameState(network);
 			changed = true;
 		}
 		if (this.account !== account) {
@@ -101,23 +95,35 @@ export class BidManager {
 		}
 	}
 
-	async loadCurrentBid() {
-		if (!this.bidName || !this.bidnameState) return;
+	async loadBidData() {
+		if (!this.bidName || !this.network) return;
 		this.loading = true;
 		try {
-			this.currentBid = await this.bidnameState.lookupBid(this.bidName);
+			const params = new URLSearchParams({ top: '1', names: this.bidName });
+			const url = `/en/${this.network.config.short}/api/bidname?${params}`;
+			const res = await this.network.fetch(url);
+			if (!res.ok) throw new Error(`API request failed: ${res.status}`);
+			const data: BidnameApiResponse = await res.json();
+			if (data.error) throw new Error(data.error);
+
+			if (data.topBids?.length) {
+				this.leadingBid = Types.name_bid.from(data.topBids[0]);
+			}
+			if (data.lastNameClose !== undefined) {
+				this.lastNameClose = data.lastNameClose
+					? BlockTimestamp.from(data.lastNameClose)
+					: undefined;
+			}
+			if (data.trackedBids?.[0]) {
+				this.currentBid = data.trackedBids[0].bid
+					? Types.name_bid.from(data.trackedBids[0].bid)
+					: undefined;
+			}
 		} catch (e) {
 			this.error = String(e);
 		} finally {
 			this.loading = false;
 		}
-	}
-
-	async loadAuctionState() {
-		if (!this.bidnameState) return;
-		await this.bidnameState.fetchTopBids(1);
-		this.leadingBid = this.bidnameState.leadingBid;
-		this.lastNameClose = this.bidnameState.lastNameClose;
 	}
 
 	async transact() {

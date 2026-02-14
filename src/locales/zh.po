@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2026-02-13T09:55:21.414Z\n"
+"PO-Revision-Date: 2026-02-14T16:46:13.963Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -7006,7 +7006,7 @@ msgid "No one has bid on this name yet."
 msgstr ""
 
 #. placeholder {0}: ' '
-#. placeholder {1}: String(tracked.refund.amount)
+#. placeholder {1}: String( tracked.refund.amount )
 #: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
 msgid "{0}You have {1} available to reclaim."
 msgstr ""
@@ -7041,17 +7041,40 @@ msgid ""
 "auction countdown is currently led by <1/> at {0}. Your name will only close after that auction ends."
 msgstr ""
 
-#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
-msgid ""
-"<0>How premium name auctions work:</0> Only one name\n"
-"can be claimed at a time. The name with the highest bid across all auctions is next to close.\n"
-"Once 24 hours pass without a higher bid on any name, that auction ends and the winner can\n"
-"claim their name."
+#~ msgid ""
+#~ "<0>How premium name auctions work:</0> Only one name\n"
+#~ "can be claimed at a time. The name with the highest bid across all auctions is next to close.\n"
+#~ "Once 24 hours pass without a higher bid on any name, that auction ends and the winner can\n"
+#~ "claim their name."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Each new bid on a name must be at least 10% higher than the current bid. If your bid becomes\n"
+#~ "the highest across all names, the 24-hour countdown resets. If you are outbid, your tokens\n"
+#~ "become available to refund."
+#~ msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-search.svelte
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-search.svelte
+msgid "Limit Reached"
+msgstr ""
+
+#. placeholder {0}: tracked.name
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
+msgid "Stop tracking {0}"
 msgstr ""
 
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
 msgid ""
-"Each new bid on a name must be at least 10% higher than the current bid. If your bid becomes\n"
-"the highest across all names, the 24-hour countdown resets. If you are outbid, your tokens\n"
-"become available to refund."
+"<0>How premium name auctions work:</0> Only one name\n"
+"can be claimed at a time. The name with the highest bid across all auctions is next to close.\n"
+"Once 24 hours pass without a higher bid on any name, that auction ends and the winner can claim\n"
+"their name."
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid ""
+"Each new bid on a name must be at least 10% higher than the current bid. If your bid\n"
+"becomes the highest across all names, the 24-hour countdown resets. If you are outbid,\n"
+"your tokens become available to refund."
 msgstr ""

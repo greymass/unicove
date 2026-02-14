@@ -1,25 +1,25 @@
 <script lang="ts">
 	import { Asset, type BlockTimestamp } from '@wharfkit/antelope';
 	import { Timer } from '@lucide/svelte';
+	import { getContext, onMount } from 'svelte';
 
 	import { Button, Card, Stack } from 'unicove-components';
 	import AccountLink from '$lib/components/elements/account.svelte';
-	import type { NetworkState } from '$lib/state/network.svelte';
+	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { Types } from '$lib/wharf/contracts/system';
+	import { formatCountdown } from '../formatting';
 
 	interface Props {
 		bid: Types.name_bid | undefined;
 		lastNameClose: BlockTimestamp | undefined;
-		network: NetworkState;
-		urlPath: (path: string) => string;
-		onexpire?: () => void;
 	}
 
-	const { bid, lastNameClose, network, urlPath, onexpire }: Props = $props();
+	const { bid, lastNameClose }: Props = $props();
+	const { network, urlPath } = getContext<UnicoveContext>('state');
 
 	let now = $state(Date.now());
 
-	$effect(() => {
+	onMount(() => {
 		const interval = setInterval(() => {
 			now = Date.now();
 		}, 1000);
@@ -41,25 +41,6 @@
 
 	const timeRemaining = $derived(Math.max(0, closeEligibleTime - now));
 	const isEligible = $derived(timeRemaining === 0 && !!bid);
-
-	let previouslyHadTime = $state(false);
-
-	$effect(() => {
-		if (timeRemaining > 0) {
-			previouslyHadTime = true;
-		} else if (previouslyHadTime && timeRemaining === 0) {
-			previouslyHadTime = false;
-			onexpire?.();
-		}
-	});
-
-	function formatCountdown(ms: number): string {
-		const totalSeconds = Math.floor(ms / 1000);
-		const hours = Math.floor(totalSeconds / 3600);
-		const minutes = Math.floor((totalSeconds % 3600) / 60);
-		const seconds = totalSeconds % 60;
-		return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-	}
 </script>
 
 <Card class="from-primary/10 to-primary/5 border-primary/20 border bg-gradient-to-br">

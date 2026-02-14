@@ -23,7 +23,7 @@ export class BidRefundManager {
 
 	sync(network: NetworkState, account: AccountState, wharf: WharfState) {
 		let changed = false;
-		if (network.chain != this.network?.chain) {
+		if (network.chain !== this.network?.chain) {
 			this.network = network;
 			changed = true;
 		}

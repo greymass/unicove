@@ -78,11 +78,7 @@
 				{/if}
 			</Stack>
 			{#if manager.hasRefund}
-				<Button
-					disabled={!manager.canRefund}
-					onclick={() => manager.transact()}
-					variant="primary"
-				>
+				<Button disabled={!manager.canRefund} onclick={() => manager.transact()} variant="primary">
 					Claim Refund ({String(manager.refundAmount)})
 				</Button>
 			{/if}

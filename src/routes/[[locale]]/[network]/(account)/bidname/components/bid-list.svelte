@@ -1,34 +1,21 @@
 <script lang="ts">
-	import { Asset } from '@wharfkit/antelope';
+	import { getContext } from 'svelte';
 
 	import { Button, Stack } from 'unicove-components';
 	import AccountLink from '$lib/components/elements/account.svelte';
+	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { Types } from '$lib/wharf/contracts/system';
-	import type { NetworkState } from '$lib/state/network.svelte';
+	import { formatBidAmount, formatRelativeTime } from '../formatting';
 
 	interface Props {
 		bids: Types.name_bid[];
 		loading: boolean;
-		network: NetworkState;
-		urlPath: (path: string) => string;
 	}
 
-	const { bids, loading, network, urlPath }: Props = $props();
+	const { bids, loading }: Props = $props();
+	const { network, urlPath } = getContext<UnicoveContext>('state');
 
-	function formatRelativeTime(timestamp: number): string {
-		const diff = Date.now() - timestamp;
-		const hours = Math.floor(diff / (1000 * 60 * 60));
-		const days = Math.floor(hours / 24);
-		if (days > 0) return `${days}d ago`;
-		if (hours > 0) return `${hours}h ago`;
-		const minutes = Math.floor(diff / (1000 * 60));
-		return `${minutes}m ago`;
-	}
-
-	function formatBidAmount(bid: Types.name_bid): string {
-		const symbol = network.config.systemtoken.id.symbol;
-		return String(Asset.fromUnits(bid.high_bid, symbol));
-	}
+	const symbol = $derived(network.config.systemtoken.id.symbol);
 </script>
 
 {#if loading}
@@ -56,7 +43,9 @@
 				</div>
 				<div class="flex items-center justify-between gap-4 pl-9 sm:justify-end sm:pl-0">
 					<div class="text-right">
-						<p class="text-on-surface text-sm font-medium">{formatBidAmount(bid)}</p>
+						<p class="text-on-surface text-sm font-medium">
+							{formatBidAmount(bid.high_bid, symbol)}
+						</p>
 						<p class="text-muted text-xs">
 							{formatRelativeTime(bid.last_bid_time.toMilliseconds())}
 						</p>

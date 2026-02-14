@@ -1,7 +1,16 @@
-import { BlockTimestamp, type NameType } from '@wharfkit/antelope';
+import { BlockTimestamp } from '@wharfkit/antelope';
 
 import { Types } from '$lib/wharf/contracts/system';
 import type { NetworkState } from './network.svelte';
+
+export interface BidnameApiResponse {
+	ts: string;
+	lastNameClose?: unknown;
+	topBids?: unknown[];
+	trackedBids?: { name: string; bid: unknown; refund: unknown }[];
+	searchResult?: { name: string; bid: unknown; accountExists: boolean };
+	error?: string;
+}
 
 export class BidnameState {
 	topBids: Types.name_bid[] = $state([]);
@@ -17,41 +26,44 @@ export class BidnameState {
 		this.network = network;
 	}
 
-	async fetchTopBids(limit = 10): Promise<void> {
+	async fetchAll(params: {
+		top?: number;
+		names?: string[];
+		account?: string;
+	}): Promise<BidnameApiResponse | undefined> {
+		const searchParams = new URLSearchParams();
+		if (params.top) searchParams.set('top', String(params.top));
+		if (params.names?.length) searchParams.set('names', params.names.join(','));
+		if (params.account) searchParams.set('account', params.account);
+
+		const url = `/en/${this.network.config.short}/api/bidname?${searchParams}`;
+
 		if (this.topBids.length === 0) {
 			this.loading = true;
 		}
 		this.error = undefined;
+
 		try {
-			const eosio = this.network.contracts.eosio;
-			const [topBids, globalState] = await Promise.all([
-				eosio
-					.table('namebids')
-					.query({
-						index_position: 'secondary',
-						key_type: 'i64',
-						from: '9223372036854775808',
-						maxRows: limit
-					})
-					.all(),
-				eosio.table('global').get()
-			]);
-			this.topBids = topBids.filter((bid) => bid.high_bid.toNumber() > 0);
-			if (globalState) {
-				this.lastNameClose = globalState.last_name_close;
+			const res = await this.network.fetch(url);
+			if (!res.ok) throw new Error(`API request failed: ${res.status}`);
+			const data: BidnameApiResponse = await res.json();
+			if (data.error) throw new Error(data.error);
+
+			if (data.topBids) {
+				this.topBids = data.topBids.map((b) => Types.name_bid.from(b));
 			}
+			if (data.lastNameClose !== undefined) {
+				this.lastNameClose = data.lastNameClose
+					? BlockTimestamp.from(data.lastNameClose as string)
+					: undefined;
+			}
+
+			return data;
 		} catch (e) {
 			this.error = String(e);
+			return undefined;
 		} finally {
 			this.loading = false;
 		}
-	}
-
-	async lookupBid(name: NameType): Promise<Types.name_bid | undefined> {
-		return this.network.contracts.eosio.table('namebids').get(name);
-	}
-
-	async fetchRefunds(name: NameType): Promise<Types.bid_refund[]> {
-		return this.network.contracts.eosio.table('bidrefunds', name).all();
 	}
 }

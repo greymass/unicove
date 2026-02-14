@@ -1,5 +1,5 @@
 import { json } from '@sveltejs/kit';
-import { APIClient, FetchProvider, Name, PackedTransaction } from '@wharfkit/antelope';
+import { APIClient, FetchProvider, Name, PackedTransaction, PermissionLevel } from '@wharfkit/antelope';
 import { MsigsClient } from '@wharfkit/msigs';
 
 import { getCacheHeaders } from '$lib/utils';
