@@ -1,5 +1,5 @@
 import { json } from '@sveltejs/kit';
-import { APIClient, FetchProvider, Name, PackedTransaction, PermissionLevel } from '@wharfkit/antelope';
+import { APIClient, FetchProvider, Name, PackedTransaction } from '@wharfkit/antelope';
 import { MsigsClient } from '@wharfkit/msigs';
 
 import { getCacheHeaders } from '$lib/utils';
@@ -23,10 +23,10 @@ export async function GET({ fetch, locals: { network }, params }: RequestEvent) 
 			const result = await msigs.get_proposal(proposer, proposal_name);
 			const provided = result.provided_approvals || [];
 			const providedSet = new Set(
-				provided.map((a: PermissionLevel) => `${a.actor}@${a.permission}`)
+				provided.map((a) => `${a.actor}@${a.permission}`)
 			);
 			const requested = (result.requested_approvals || []).filter(
-				(a: PermissionLevel) => !providedSet.has(`${a.actor}@${a.permission}`)
+				(a) => !providedSet.has(`${a.actor}@${a.permission}`)
 			);
 
 			return json(
