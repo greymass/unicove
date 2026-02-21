@@ -28,7 +28,7 @@
 		<h3 class="text-title">Let's get started</h3>
 		<p>
 			There are many options to create your first account but we recommend {recommendedWallet.name} for
-			most people new to EOS.
+			most people new to {data.network.chain.name}.
 		</p>
 	</Stack>
 
