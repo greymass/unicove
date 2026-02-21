@@ -69,6 +69,23 @@
 		return false;
 	}
 
+	function interpretEscapes(str: string): string {
+		return str.replace(/\\([rnt\\])/g, (_, char: string) => {
+			switch (char) {
+				case 'n':
+					return '\n';
+				case 'r':
+					return '\r';
+				case 't':
+					return '\t';
+				case '\\':
+					return '\\';
+				default:
+					return '\\' + char;
+			}
+		});
+	}
+
 	const restructured = $derived.by(() => {
 		if (Object.keys(actionInputs).length === 0) {
 			return {};
@@ -90,7 +107,7 @@
 					obj[parts[parts.length - 1]] = JSON.parse(rawValue as string);
 				} catch (e) {
 					console.warn('restructured error', e);
-					obj[parts[parts.length - 1]] = rawValue;
+					obj[parts[parts.length - 1]] = interpretEscapes(rawValue as string);
 				}
 			}
 			return acc;
