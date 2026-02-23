@@ -5,11 +5,19 @@
 		hasPrev: boolean;
 		hasNext: boolean;
 		isLoading?: boolean;
+		prevLabel?: string;
 		onPrev: () => void;
 		onNext: () => void;
 	}
 
-	const { hasPrev, hasNext, isLoading = false, onPrev, onNext }: Props = $props();
+	const {
+		hasPrev,
+		hasNext,
+		isLoading = false,
+		prevLabel = 'Prev',
+		onPrev,
+		onNext
+	}: Props = $props();
 </script>
 
 <div class="border-outline-variant flex items-center rounded-lg border">
@@ -20,10 +28,10 @@
 		!isLoading
 			? 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container'
 			: 'text-on-surface-variant/40'}"
-		title="Previous page"
+		title={prevLabel}
 	>
 		<ChevronLeftIcon size={16} />
-		<span class="hidden sm:inline">Prev</span>
+		<span class="hidden sm:inline">{prevLabel}</span>
 	</button>
 	<span class="bg-outline-variant h-5 w-px"></span>
 	<button
