@@ -6,12 +6,27 @@
 	import { TextInput } from 'unicove-components';
 	import { Checkbox } from 'unicove-components';
 	import { Label } from 'unicove-components';
+	import { ChevronsUpDownIcon } from '@lucide/svelte';
 	import { goto } from '$app/navigation';
 
 	const { data } = $props();
 
 	const table = data.abi.tables.find((t) => t.name === data.table);
 	const struct = table && data.abi.structs.find((s) => s.name === table.type);
+
+	let expandedCells = $state(new Set<string>());
+	let overflowingCells = $state(new Set<string>());
+
+	function checkOverflow(node: HTMLElement, cellKey: string) {
+		const check = () => {
+			if (node.scrollHeight > node.clientHeight + 4) {
+				overflowingCells.add(cellKey);
+				overflowingCells = new Set(overflowingCells);
+			}
+		};
+		check();
+		return { destroy() {} };
+	}
 
 	let rows = $derived(data.rows);
 	let scope = $state(data.scope || data.contract);
@@ -125,13 +140,43 @@
 						{/if}
 					{/snippet}
 
-					{#each rows as row}
+					{#each rows as row, rowIndex}
 						<TR>
 							{#each Object.keys(row) as key}
-								<TD>
-									<Code>
-										{JSON.stringify(row[key], null, 2)}
-									</Code>
+								{@const cellKey = `${rowIndex}-${key}`}
+								{@const isExpanded = expandedCells.has(cellKey)}
+								<TD class="align-top">
+									<div class="relative">
+										<div
+											use:checkOverflow={cellKey}
+											class="overflow-hidden transition-all {isExpanded ? '' : 'max-h-20'}"
+										>
+											<Code>
+												{JSON.stringify(row[key], null, 2)}
+											</Code>
+										</div>
+										{#if overflowingCells.has(cellKey) && !isExpanded}
+											<div
+												class="from-surface-container-high pointer-events-none absolute inset-x-0 bottom-0 h-6 bg-gradient-to-t to-transparent"
+											></div>
+										{/if}
+									</div>
+									{#if overflowingCells.has(cellKey) || isExpanded}
+										<button
+											onclick={() => {
+												if (isExpanded) {
+													expandedCells.delete(cellKey);
+												} else {
+													expandedCells.add(cellKey);
+												}
+												expandedCells = new Set(expandedCells);
+											}}
+											class="text-primary hover:text-primary/80 hover:bg-primary/10 mt-1 inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-xs font-medium transition-colors"
+										>
+											<ChevronsUpDownIcon size={14} />
+											{isExpanded ? 'Show less' : 'Show more'}
+										</button>
+									{/if}
 								</TD>
 							{/each}
 						</TR>
