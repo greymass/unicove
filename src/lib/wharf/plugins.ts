@@ -11,7 +11,8 @@ import {
 	PUBLIC_WALLET_TOKENPOCKET,
 	PUBLIC_WALLET_WEB_AUTHENTICATOR,
 	PUBLIC_WALLET_WOMBAT,
-	PUBLIC_WALLET_GATEWALLET
+	PUBLIC_WALLET_GATEWALLET,
+	PUBLIC_RESOURCE_PROVIDER_URL
 } from '$env/static/public';
 import type { ChainDefinition } from '@wharfkit/common';
 import type { WalletPlugin, TransactPlugin } from '@wharfkit/session';
@@ -92,13 +93,23 @@ export const walletPlugins = [
 	new WalletPluginMultiSig({ walletPlugins: baseWalletPlugins })
 ];
 
+const resourceProviderOptions = PUBLIC_RESOURCE_PROVIDER_URL
+	? {
+			endpoints: {
+				[String(PUBLIC_CHAIN_ID)]: PUBLIC_RESOURCE_PROVIDER_URL
+			}
+		}
+	: undefined;
+
 export const transactPlugins: TransactPlugin[] = [
 	new TransactPluginStatusEmitter(),
-	new TransactPluginResourceProvider()
+	new TransactPluginResourceProvider(resourceProviderOptions)
 ];
 
 export const msigTransactPlugins: TransactPlugin[] = [new TransactPluginStatusEmitter()];
-export const msigInternalPlugins: TransactPlugin[] = [new TransactPluginResourceProvider()];
+export const msigInternalPlugins: TransactPlugin[] = [
+	new TransactPluginResourceProvider(resourceProviderOptions)
+];
 
 export const chainDefs: ChainDefinition[] = chains.map((chain) =>
 	getChainDefinitionFromParams(chain.short)
