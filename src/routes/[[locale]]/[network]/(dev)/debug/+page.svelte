@@ -19,6 +19,9 @@
 		<a href="debug/opengraph">Opengraph Images</a>
 	</li>
 	<li>
+		<a href="debug/transact">Transact</a>
+	</li>
+	<li>
 		<a href="debug/state">State</a>
 	</li>
 	<li>

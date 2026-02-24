@@ -55,7 +55,8 @@ import {
 	PUBLIC_FEATURE_METAMASK_SNAP_ORIGIN,
 	PUBLIC_FEATURE_UNICOVE_CONTRACT_API,
 	PUBLIC_FEATURE_VAULTA_CORE_CONTRACT,
-	PUBLIC_FEATURE_SENTIMENT_CONTRACT
+	PUBLIC_FEATURE_SENTIMENT_CONTRACT,
+	PUBLIC_SYSTEM_TOKEN_CONTRACT
 } from '$env/static/public';
 import { localizePath } from '$lib/utils/url';
 
@@ -137,7 +138,7 @@ export class NetworkState {
 				account: this.config.systemcontract,
 				client: this.client
 			}),
-			token: new TokenContract({ client: this.client }),
+			token: new TokenContract({ account: PUBLIC_SYSTEM_TOKEN_CONTRACT, client: this.client }),
 			unicove: new UnicoveContract({
 				account: PUBLIC_FEATURE_UNICOVE_CONTRACT_API,
 				client: this.client
