@@ -42,7 +42,9 @@
 
 <Stack class="items-start">
 	<h2 class="text-headline">Debug Transact</h2>
-	<p>Send {context.network.chain.systemToken?.symbol.name} 0.0001 to the <code>gm</code> account.</p>
+	<p>
+		Send {context.network.chain.systemToken?.symbol.name} 0.0001 to the <code>gm</code> account.
+	</p>
 
 	{#if context.wharf.session}
 		<p>Logged in as: {context.wharf.session.actor}</p>
