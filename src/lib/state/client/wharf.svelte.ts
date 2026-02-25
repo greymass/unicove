@@ -212,7 +212,7 @@ export class WharfState {
 		this.transacting = true;
 
 		const result = await this.session
-			.transact(args, { abiCache: this.abiCache })
+			.transact(args, { abiCache: this.abiCache, expireSeconds: 600 })
 			.catch((e: Error) => {
 				transaction.status = StatusType.ERROR;
 				transaction.error = String(e);
