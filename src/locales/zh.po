@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2026-02-14T16:46:13.963Z\n"
+"PO-Revision-Date: 2026-02-25T19:49:52.599Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -88,6 +88,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
 msgid "Status"
 msgstr "状态"
 
@@ -273,6 +274,7 @@ msgstr "取消质押"
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/resources/+page.svelte
 msgid "Resources"
 msgstr "资源"
@@ -361,6 +363,7 @@ msgstr "页面"
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/resources/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
 msgid "RAM"
 msgstr "内存"
 
@@ -377,12 +380,14 @@ msgstr "我的账户"
 #: src/lib/components/elements/resourceCard.svelte
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/resources/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
 msgid "CPU"
 msgstr "CPU"
 
 #: src/lib/components/elements/resourceCard.svelte
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/resources/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
 msgid "NET"
 msgstr "NET"
 
@@ -784,8 +789,8 @@ msgstr "RAM 计算器"
 msgid "Bytes"
 msgstr "字节"
 
+#: src/lib/components/elements/actiontable.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
@@ -1325,6 +1330,7 @@ msgid "Config"
 msgstr ""
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/+layout.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
 msgid "Contracts"
 msgstr ""
 
@@ -1377,10 +1383,12 @@ msgstr "概览"
 #. placeholder {0}: data.abi.actions.length
 #. placeholder {0}: data.proposal.transaction.actions.length
 #. placeholder {0}: data.transaction.transaction.actions.length
+#. placeholder {0}: data.transaction.filtered.length
 #. placeholder {0}: data.transaction.transaction.actions.length
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/actions/+page.svelte
 msgid "Actions ({0})"
 msgstr "操作 ({0})"
@@ -2415,8 +2423,8 @@ msgstr "加载更多"
 msgid "Contract"
 msgstr "合约"
 
+#: src/lib/components/elements/actiontable.svelte
 #: src/routes/[[locale]]/[network]/(account)/activity/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
@@ -3334,6 +3342,7 @@ msgstr "未找到区块。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActivityEvent.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+layout.ts
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
 msgid "Block"
 msgstr "区块"
 
@@ -3351,13 +3360,11 @@ msgstr "多重签名提案"
 msgid "An MSIG proposed by {0} on the {1} Network"
 msgstr "由 {0} 在 {1} 网络上提出的多重签名提案```"
 
-#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
-msgid "Transaction Summary"
-msgstr "交易概要"
+#~ msgid "Transaction Summary"
+#~ msgstr "交易概要"
 
-#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
-msgid "The actions and inline actions performed as a result of the transaction."
-msgstr "作为交易结果执行的操作和内联操作。"
+#~ msgid "The actions and inline actions performed as a result of the transaction."
+#~ msgstr "作为交易结果执行的操作和内联操作。"
 
 #. placeholder {0}: params.id
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
@@ -3721,8 +3728,8 @@ msgstr ""
 msgid "Reversible"
 msgstr ""
 
+#: src/lib/components/elements/actiontable.svelte
 #: src/lib/components/transaction/header.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/transfers/TransfersView.svelte
 msgid "Date"
@@ -5034,6 +5041,7 @@ msgstr ""
 msgid "The individual transaction traces from the transaction."
 msgstr ""
 
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/transaction/+page.svelte
 msgid "Signatures"
 msgstr ""
@@ -6568,7 +6576,6 @@ msgstr ""
 msgid "Action Data view"
 msgstr ""
 
-#: src/lib/components/filters/PaginationControls.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 msgid "Previous page"
 msgstr ""
@@ -6601,12 +6608,12 @@ msgstr ""
 #~ msgid "<0/> Advanced Filters <1/> <2/>"
 #~ msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/lib/components/elements/actiontable.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 msgid "Show less"
 msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/lib/components/elements/actiontable.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity2/+page.svelte
 msgid "Show more"
 msgstr ""
@@ -7077,4 +7084,83 @@ msgid ""
 "Each new bid on a name must be at least 10% higher than the current bid. If your bid\n"
 "becomes the highest across all names, the 24-hour countdown resets. If you are outbid,\n"
 "your tokens become available to refund."
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
+msgid "<0/> Irreversible"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
+msgid "<0/> Pending"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
+msgid "µs"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
+msgid "bytes"
+msgstr ""
+
+#~ msgid "View transaction details <0/>"
+#~ msgstr ""
+
+#~ msgid "View all actions <0/>"
+#~ msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
+msgid "Signers"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
+msgid "Raw Data"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
+msgid "Traces"
+msgstr ""
+
+#~ msgid "View raw transaction <0/>"
+#~ msgstr ""
+
+#~ msgid "Block <0/>"
+#~ msgstr ""
+
+#~ msgid "<0/> <1/> µs"
+#~ msgstr ""
+
+#~ msgid "<0/> <1/> bytes"
+#~ msgstr ""
+
+#~ msgid "RAM <0/> bytes"
+#~ msgstr ""
+
+#~ msgid "Details <0/>"
+#~ msgstr ""
+
+#~ msgid "View all <0/>"
+#~ msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
+msgid "View raw data <0/>"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
+msgid "All transaction details <0/>"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
+msgid "Inspect data <0/>"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
+msgid "bytes used"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
+msgid "bytes freed"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
+msgid "no net change"
 msgstr ""
