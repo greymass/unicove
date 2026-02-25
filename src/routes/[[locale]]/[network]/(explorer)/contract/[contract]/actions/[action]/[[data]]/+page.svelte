@@ -131,7 +131,7 @@
 	});
 
 	const decoded = $derived.by(() => {
-		if (!serialized) {
+		if (!serialized || Object.keys(restructured).length === 0) {
 			return undefined;
 		}
 		try {
