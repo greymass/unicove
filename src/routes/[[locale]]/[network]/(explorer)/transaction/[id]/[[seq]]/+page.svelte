@@ -42,8 +42,8 @@
 </script>
 
 <Stack class="@container gap-5">
-	<div class="grid auto-cols-fr grid-flow-col gap-3">
-		<div class="bg-surface-container-low rounded-xl p-4">
+	<div class="grid grid-cols-2 gap-3 @lg:grid-cols-4">
+		<div class="bg-surface-container-low col-span-2 rounded-xl p-4 @lg:col-span-1">
 			<p class="text-on-surface-variant mb-1.5 text-xs font-medium tracking-wider uppercase">
 				Block
 			</p>

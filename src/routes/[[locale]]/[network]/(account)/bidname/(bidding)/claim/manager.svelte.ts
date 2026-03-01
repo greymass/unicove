@@ -1,4 +1,4 @@
-import type { PublicKey } from '@wharfkit/antelope';
+import { Asset, type PublicKey, Name } from '@wharfkit/antelope';
 import type { AccountState } from '$lib/state/client/account.svelte';
 import type { NetworkState } from '$lib/state/network.svelte';
 import type { WharfState } from '$lib/state/client/wharf.svelte';
@@ -23,8 +23,42 @@ export class ClaimManager {
 		!!this.currentBid && !!this.account && this.currentBid.high_bidder.equals(this.account.name)
 	);
 
+	public accountOwnerKey: PublicKey | undefined = $derived.by(() => {
+		if (this.account) {
+			const perm = this.account.permissions.find((p) => p.perm_name.equals(Name.from('owner')));
+			if (perm && perm.required_auth.keys.length > 0) {
+				return perm.required_auth.keys[0].key;
+			}
+		}
+	});
+
+	public accountActiveKey: PublicKey | undefined = $derived.by(() => {
+		if (this.account) {
+			const perm = this.account.permissions.find((p) => p.perm_name.equals(Name.from('active')));
+			if (perm && perm.required_auth.keys.length > 0) {
+				return perm.required_auth.keys[0].key;
+			}
+		}
+	});
+
+	public ramBytes: number = $state(2000);
+	public ramBytesMin: number = 1700;
+
+	public ramCost: Asset | undefined = $derived.by(() => {
+		if (this.network && this.ramBytes >= this.ramBytesMin) {
+			return Asset.fromUnits(
+				this.network.resources.ram.price.rammarket.units.dividing(1000).multiplying(this.ramBytes),
+				this.network.config.systemtoken.symbol
+			);
+		}
+	});
+
 	public canClaim: boolean = $derived(
-		this.isWon && this.isHighBidder && !!this.ownerKey && !!this.activeKey
+		this.isWon &&
+			this.isHighBidder &&
+			!!this.ownerKey &&
+			!!this.activeKey &&
+			this.ramBytes >= this.ramBytesMin
 	);
 
 	constructor(network: NetworkState) {
@@ -101,7 +135,7 @@ export class ClaimManager {
 			const buyrambytes = contract.action('buyrambytes', {
 				payer: this.account.name,
 				receiver: this.bidName,
-				bytes: 1500
+				bytes: this.ramBytes
 			});
 
 			const result = await this.wharf.transact({

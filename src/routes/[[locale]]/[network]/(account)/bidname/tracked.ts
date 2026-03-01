@@ -1,7 +1,7 @@
 import { browser } from '$app/environment';
 import { PUBLIC_BIDNAME_MAX_TRACKED } from '$env/static/public';
 
-export const MAX_TRACKED_NAMES = parseInt(PUBLIC_BIDNAME_MAX_TRACKED, 10) || 20;
+export const MAX_TRACKED_NAMES = parseInt(PUBLIC_BIDNAME_MAX_TRACKED, 10) || 100;
 
 function storageKey(account: string): string {
 	return `unicove_bidname_tracked_${account}`;

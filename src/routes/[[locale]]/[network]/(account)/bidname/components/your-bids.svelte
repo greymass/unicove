@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { getContext } from 'svelte';
+	import { getContext, onDestroy } from 'svelte';
 
 	import { Button, Card, Stack } from 'unicove-components';
 	import AccountLink from '$lib/components/elements/account.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { BidnameApiResponse } from '$lib/state/bidname.svelte';
 	import { Types } from '$lib/wharf/contracts/system';
-	import { getTrackedNames, removeTrackedName } from '../tracked';
+	import { addTrackedName, getTrackedNames, removeTrackedName } from '../tracked';
 	import { formatBidAmount } from '../formatting';
 
 	type TrackedBidStatus =
@@ -98,10 +98,102 @@
 				return { text: 'Unknown', classes: 'bg-surface-container-high text-muted' };
 		}
 	}
+
+	let scanning = $state(false);
+	let scannedRows = $state(0);
+	let foundNames: string[] = $state([]);
+	let scanError = $state('');
+	let scanDone = $state(false);
+	let abortController: AbortController | undefined;
+
+	async function scanForBids() {
+		scanning = true;
+		scannedRows = 0;
+		foundNames = [];
+		scanError = '';
+		scanDone = false;
+		abortController = new AbortController();
+
+		let cursor: string | undefined;
+
+		try {
+			while (true) {
+				if (abortController.signal.aborted) break;
+
+				const params = new URLSearchParams({ account: accountName, limit: '100' });
+				if (cursor) params.set('cursor', cursor);
+				const url = `/en/${network.config.short}/api/bidname/scan?${params}`;
+				const res = await network.fetch(url, { signal: abortController.signal });
+				if (!res.ok) throw new Error(`Scan request failed: ${res.status}`);
+				const data: { found: string[]; nextCursor: string | null; scanned: number } =
+					await res.json();
+				if ('error' in data && data.error) throw new Error(String(data.error));
+
+				scannedRows += data.scanned;
+				for (const name of data.found) {
+					if (!foundNames.includes(name)) {
+						foundNames = [...foundNames, name];
+						addTrackedName(accountName, name);
+					}
+				}
+
+				if (!data.nextCursor) break;
+				cursor = data.nextCursor;
+			}
+		} catch (e) {
+			if (!(e instanceof DOMException && e.name === 'AbortError')) {
+				scanError = String(e);
+			}
+		} finally {
+			scanning = false;
+			scanDone = true;
+			abortController = undefined;
+			ontrackchange?.();
+		}
+	}
+
+	function cancelScan() {
+		abortController?.abort();
+	}
+
+	onDestroy(() => {
+		abortController?.abort();
+	});
 </script>
 
 <Card id="monitored-names" title="Monitored Names">
 	<Stack>
+		{#if scanning}
+			<div class="bg-surface-container-high rounded-lg p-4">
+				<p class="text-on-surface text-sm font-medium">Scanning auction table…</p>
+				<p class="text-muted mt-1 text-sm">
+					{scannedRows.toLocaleString()} records checked{#if foundNames.length > 0}, {foundNames.length}
+						name{foundNames.length === 1 ? '' : 's'} found{/if}
+				</p>
+				<div class="mt-2">
+					<Button variant="secondary" onclick={cancelScan}>Cancel</Button>
+				</div>
+			</div>
+		{:else if scanDone && !scanError}
+			<div class="bg-success/5 border-success/30 rounded-lg border p-4">
+				<p class="text-on-surface text-sm">
+					Scan complete — checked {scannedRows.toLocaleString()} records{#if foundNames.length > 0},
+						added {foundNames.length} name{foundNames.length === 1 ? '' : 's'}{:else}, no new names
+						found{/if}.
+				</p>
+			</div>
+		{:else if scanError}
+			<div class="bg-error/5 border-error/30 rounded-lg border p-4">
+				<p class="text-on-surface text-sm">Scan failed: {scanError}</p>
+				{#if foundNames.length > 0}
+					<p class="text-muted mt-1 text-xs">
+						Partial results: {foundNames.length} name{foundNames.length === 1 ? '' : 's'} added from
+						{scannedRows.toLocaleString()} records checked.
+					</p>
+				{/if}
+			</div>
+		{/if}
+
 		{#if loading}
 			<p class="text-muted text-sm">Loading tracked names...</p>
 		{:else if trackedBids.length === 0}
@@ -187,6 +279,12 @@
 						{/if}
 					</div>
 				{/each}
+			</div>
+		{/if}
+
+		{#if !scanning}
+			<div class="text-center">
+				<Button variant="text" class="text-xs" onclick={scanForBids}>Find my bids</Button>
 			</div>
 		{/if}
 	</Stack>

@@ -24,6 +24,37 @@ export class BidManager {
 
 	public leadingBid: Types.name_bid | undefined = $state();
 	public lastNameClose: BlockTimestamp | undefined = $state();
+	public topBids: Types.name_bid[] = $state([]);
+	public refund: Types.bid_refund | undefined = $state();
+
+	public isWon: boolean = $derived.by(() => {
+		if (!this.currentBid) return false;
+		return this.currentBid.high_bid.toNumber() < 0;
+	});
+
+	public isHighBidder: boolean = $derived.by(() => {
+		if (!this.currentBid || !this.account?.name) return false;
+		return (
+			String(this.currentBid.high_bidder) === String(this.account.name) &&
+			this.currentBid.high_bid.toNumber() > 0
+		);
+	});
+
+	public hasRefund: boolean = $derived.by(() => {
+		if (!this.refund) return false;
+		return this.refund.amount.value > 0;
+	});
+
+	public refundAmount: Asset | undefined = $derived.by(() => {
+		if (!this.refund) return undefined;
+		return this.refund.amount;
+	});
+
+	public namesAheadInQueue: Types.name_bid[] = $derived.by(() => {
+		if (!this.currentBid || !this.topBids.length) return [];
+		const currentHighBid = this.currentBid.high_bid.toNumber();
+		return this.topBids.filter((b) => b.high_bid.toNumber() > currentHighBid);
+	});
 
 	public minimumBid: Asset = $derived.by(() => {
 		if (!this.network) return Asset.fromUnits(0, '4,EOS');
@@ -32,6 +63,9 @@ export class BidManager {
 			return Asset.fromUnits(1, symbol);
 		}
 		const currentUnits = this.currentBid.high_bid.toNumber();
+		if (currentUnits <= 0) {
+			return Asset.fromUnits(1, symbol);
+		}
 		const minimumUnits = Math.ceil(currentUnits * 1.1);
 		return Asset.fromUnits(minimumUnits, symbol);
 	});
@@ -99,7 +133,10 @@ export class BidManager {
 		if (!this.bidName || !this.network) return;
 		this.loading = true;
 		try {
-			const params = new URLSearchParams({ top: '1', names: this.bidName });
+			const params = new URLSearchParams({ top: '10', names: this.bidName });
+			if (this.account?.name) {
+				params.set('account', String(this.account.name));
+			}
 			const url = `/en/${this.network.config.short}/api/bidname?${params}`;
 			const res = await this.network.fetch(url);
 			if (!res.ok) throw new Error(`API request failed: ${res.status}`);
@@ -107,7 +144,8 @@ export class BidManager {
 			if (data.error) throw new Error(data.error);
 
 			if (data.topBids?.length) {
-				this.leadingBid = Types.name_bid.from(data.topBids[0]);
+				this.topBids = data.topBids.map((b) => Types.name_bid.from(b));
+				this.leadingBid = this.topBids[0];
 			}
 			if (data.lastNameClose !== undefined) {
 				this.lastNameClose = data.lastNameClose
@@ -117,6 +155,9 @@ export class BidManager {
 			if (data.trackedBids?.[0]) {
 				this.currentBid = data.trackedBids[0].bid
 					? Types.name_bid.from(data.trackedBids[0].bid)
+					: undefined;
+				this.refund = data.trackedBids[0].refund
+					? Types.bid_refund.from(data.trackedBids[0].refund)
 					: undefined;
 			}
 		} catch (e) {
