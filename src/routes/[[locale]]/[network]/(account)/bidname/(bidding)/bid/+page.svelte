@@ -87,11 +87,13 @@
 			<div class="border-outline-variant/30 bg-surface-container-high rounded-xl border p-4">
 				<p class="text-on-surface text-sm font-medium">This name has been claimed</p>
 				<p class="text-muted mt-1 text-xs leading-relaxed">
-					<strong class="text-on-surface-variant">{manager.bidName}</strong> was won by
+					<strong class="text-on-surface-variant">{manager.bidName}</strong>
 					{#if manager.currentBid?.high_bidder}
-						<AccountText name={manager.currentBid.high_bidder} />
+						was won by <AccountText name={manager.currentBid.high_bidder} /> and is
+					{:else}
+						is
 					{/if}
-					and is no longer available for bidding.
+					no longer available for bidding.
 				</p>
 			</div>
 			<Button href={context.urlPath(`/bidname`)} variant="secondary">Browse Names</Button>

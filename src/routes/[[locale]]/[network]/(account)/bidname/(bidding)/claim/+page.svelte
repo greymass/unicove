@@ -73,6 +73,12 @@
 		<p class="text-muted">Please log in to claim a name.</p>
 	{:else if manager.loading}
 		<p class="text-muted">Loading bid information...</p>
+	{:else if manager.isClaimed}
+		<Stack class="gap-2">
+			<h3 class="text-on-surface text-xl font-semibold">{manager.bidName}</h3>
+			<p class="text-muted">This name has already been claimed. The account exists on the network.</p>
+			<Button href={context.urlPath(`/account/${manager.bidName}`)} variant="secondary">View Account</Button>
+		</Stack>
 	{:else if !manager.currentBid}
 		<p class="text-muted">No bid found for "{manager.bidName}".</p>
 	{:else if !manager.isWon}

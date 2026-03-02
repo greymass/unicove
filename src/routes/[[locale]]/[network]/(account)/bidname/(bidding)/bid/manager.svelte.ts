@@ -26,8 +26,10 @@ export class BidManager {
 	public lastNameClose: BlockTimestamp | undefined = $state();
 	public topBids: Types.name_bid[] = $state([]);
 	public refund: Types.bid_refund | undefined = $state();
+	public nameAccountExists: boolean = $state(false);
 
 	public isWon: boolean = $derived.by(() => {
+		if (!this.currentBid && this.nameAccountExists) return true;
 		if (!this.currentBid) return false;
 		return this.currentBid.high_bid.toNumber() < 0;
 	});
@@ -159,6 +161,7 @@ export class BidManager {
 				this.refund = data.trackedBids[0].refund
 					? Types.bid_refund.from(data.trackedBids[0].refund)
 					: undefined;
+				this.nameAccountExists = data.trackedBids[0].accountExists ?? false;
 			}
 		} catch (e) {
 			this.error = String(e);

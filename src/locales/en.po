@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2026-03-01T19:29:58.724Z\n"
+"PO-Revision-Date: 2026-03-02T03:03:11.396Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -289,7 +289,7 @@ msgstr "Total"
 msgid "KB (RAM)"
 msgstr "KB (RAM)"
 
-#. placeholder {0}: balance.token.symbol.name
+#. placeholder {0}: balance.token.name
 #. placeholder {0}: balance.token.name
 #: src/lib/components/card/tokenbalance.svelte
 #: src/lib/components/card/tokenoverview.svelte
@@ -1478,6 +1478,7 @@ msgstr ""
 msgid "Request complete, this account has been created."
 msgstr "Request complete, this account has been created."
 
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/prompt/[payload]/+page.svelte
 msgid "View Account"
 msgstr "View Account"
@@ -4220,7 +4221,7 @@ msgstr "<0>Unicove -</0> The {0} web wallet and block explorer"
 
 #. placeholder {0}: network.chain.name
 #. placeholder {0}: networkName
-#. placeholder {0}: network.chain.name
+#. placeholder {0}: networkName
 #: src/routes/+layout.server.ts
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
@@ -4274,7 +4275,7 @@ msgstr "Get Tokens"
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
-#. placeholder {0}: symbol.name
+#. placeholder {0}: String(network.token.symbol.name)
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
@@ -4297,10 +4298,10 @@ msgstr "One {0} of RAM represents ownership rights over 1000 bytes of the networ
 #. placeholder {1}: quote.name
 #. placeholder {0}: base.name
 #. placeholder {1}: quote.name
-#. placeholder {0}: base.name
-#. placeholder {1}: quote.name
-#. placeholder {0}: base.name
-#. placeholder {1}: quote.name
+#. placeholder {0}: data.network.token.name
+#. placeholder {1}: data.network.getRamToken().name
+#. placeholder {0}: String(network.chain.systemToken?.symbol.name)
+#. placeholder {1}: String(ramtoken.name)
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.svelte
@@ -6881,6 +6882,7 @@ msgstr "Monitored Names"
 
 #: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-search.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-search.svelte
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
 msgid "Untrack"
 msgstr "Untrack"
 
@@ -6919,7 +6921,7 @@ msgid "You have been outbid on this name.<0/>"
 msgstr "You have been outbid on this name.<0/>"
 
 #. placeholder {0}: String(tracked.refund.amount)
-#. placeholder {0}: String(manager.refundAmount)
+#. placeholder {0}: String(tracked.refund.amount)
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/refund/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
 msgid "Claim Refund ({0})"
@@ -7125,9 +7127,8 @@ msgstr "You'd lead this name, but not the global auction"
 msgid "This name has been claimed"
 msgstr "This name has been claimed"
 
-#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
-msgid "<0/> was won by <1/> and is no longer available for bidding."
-msgstr "<0/> was won by <1/> and is no longer available for bidding."
+#~ msgid "<0/> was won by <1/> and is no longer available for bidding."
+#~ msgstr "<0/> was won by <1/> and is no longer available for bidding."
 
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
 msgid "You are the current high bidder"
@@ -7475,3 +7476,19 @@ msgstr "Claim Refund - {0} Premium Names"
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/refund/+page.ts
 msgid "Claim a refund for outbid premium name auctions on the {0} network."
 msgstr "Claim a refund for outbid premium name auctions on the {0} network."
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.svelte
+msgid "This name has already been claimed. The account exists on the network."
+msgstr "This name has already been claimed. The account exists on the network."
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "was won by <0/> and is"
+msgstr "was won by <0/> and is"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "is"
+msgstr "is"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "<0/> <1/> no longer available for bidding."
+msgstr "<0/> <1/> no longer available for bidding."

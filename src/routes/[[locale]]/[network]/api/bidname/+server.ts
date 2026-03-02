@@ -36,6 +36,10 @@ export async function GET({ locals: { network }, url }: RequestEvent) {
 				.table('namebids')
 				.get(name)
 				.catch(() => null);
+			promises[`account:${name}`] = network.client.v1.chain
+				.get_account(name)
+				.then(() => true)
+				.catch(() => false);
 			if (account) {
 				promises[`refund:${name}`] = eosio
 					.table('bidrefunds', name)
@@ -72,7 +76,8 @@ export async function GET({ locals: { network }, url }: RequestEvent) {
 			response.trackedBids = names.map((name) => ({
 				name,
 				bid: results[`bid:${name}`] ?? null,
-				refund: account ? (results[`refund:${name}`] ?? null) : null
+				refund: account ? (results[`refund:${name}`] ?? null) : null,
+				accountExists: Boolean(results[`account:${name}`])
 			}));
 		}
 

@@ -13,11 +13,16 @@ export class ClaimManager {
 	public ownerKey: PublicKey | undefined = $state();
 	public activeKey: PublicKey | undefined = $state();
 	public currentBid: Types.name_bid | undefined = $state();
+	public nameAccountExists: boolean = $state(false);
 	public loading: boolean = $state(false);
 	public error: string = $state('');
 	public txid: string = $state('');
 
-	public isWon: boolean = $derived(!!this.currentBid && this.currentBid.high_bid.toNumber() < 0);
+	public isClaimed: boolean = $derived(this.nameAccountExists);
+
+	public isWon: boolean = $derived(
+		!!this.currentBid && this.currentBid.high_bid.toNumber() < 0 && !this.nameAccountExists
+	);
 
 	public isHighBidder: boolean = $derived(
 		!!this.currentBid && !!this.account && this.currentBid.high_bidder.equals(this.account.name)
@@ -92,7 +97,15 @@ export class ClaimManager {
 		this.loading = true;
 		this.error = '';
 		try {
-			this.currentBid = await this.network.contracts.eosio.table('namebids').get(this.bidName);
+			const [bid, accountExists] = await Promise.all([
+				this.network.contracts.eosio.table('namebids').get(this.bidName),
+				this.network.client.v1.chain
+					.get_account(this.bidName)
+					.then(() => true)
+					.catch(() => false)
+			]);
+			this.currentBid = bid;
+			this.nameAccountExists = accountExists;
 		} catch (e) {
 			this.error = String(e);
 		} finally {

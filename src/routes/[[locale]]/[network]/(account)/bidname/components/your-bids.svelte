@@ -39,9 +39,11 @@
 	function determineStatus(
 		bid: Types.name_bid | undefined,
 		refund: Types.bid_refund | undefined,
-		account: string
+		account: string,
+		accountExists: boolean
 	): TrackedBidStatus {
 		if (!bid) {
+			if (accountExists) return 'claimed';
 			if (refund) return 'claimed';
 			return 'no_bids';
 		}
@@ -56,10 +58,10 @@
 	}
 
 	function convertApiData(items: NonNullable<BidnameApiResponse['trackedBids']>): TrackedBid[] {
-		return items.map(({ name, bid, refund }) => {
+		return items.map(({ name, bid, refund, accountExists }) => {
 			const bidObj = bid ? Types.name_bid.from(bid) : undefined;
 			const refundObj = refund ? Types.bid_refund.from(refund) : undefined;
-			const status = determineStatus(bidObj, refundObj, accountName);
+			const status = determineStatus(bidObj, refundObj, accountName, accountExists ?? false);
 			return { name, bid: bidObj, refund: refundObj, status };
 		});
 	}
@@ -274,6 +276,12 @@
 							<div class="mt-3 inline-flex">
 								<Button href={urlPath(`/bidname/bid?name=${tracked.name}`)} variant="secondary">
 									Place Bid
+								</Button>
+							</div>
+						{:else if tracked.status === 'claimed'}
+							<div class="mt-3 inline-flex">
+								<Button variant="secondary" onclick={() => handleRemove(tracked.name)}>
+									Untrack
 								</Button>
 							</div>
 						{/if}

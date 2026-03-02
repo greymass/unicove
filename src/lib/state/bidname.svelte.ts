@@ -7,7 +7,7 @@ export interface BidnameApiResponse {
 	ts: string;
 	lastNameClose?: unknown;
 	topBids?: unknown[];
-	trackedBids?: { name: string; bid: unknown; refund: unknown }[];
+	trackedBids?: { name: string; bid: unknown; refund: unknown; accountExists?: boolean }[];
 	searchResult?: { name: string; bid: unknown; accountExists: boolean };
 	error?: string;
 }
