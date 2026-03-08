@@ -134,7 +134,7 @@
 					const currentToken = sendState.balance.token;
 					const isDefault = sendState.balance.equals(defaultBalance);
 					const isPreferred =
-						!isDefault && tokenEquals(currentToken.id, token.id) ||
+						(!isDefault && tokenEquals(currentToken.id, token.id)) ||
 						(data.network.legacy && tokenEquals(currentToken.id, data.network.legacy!.id));
 					if (isDefault || !isPreferred) {
 						const balance =
