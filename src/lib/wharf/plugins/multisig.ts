@@ -72,9 +72,16 @@ export class WalletPluginMultiSig extends AbstractWalletPlugin implements Wallet
 	}
 
 	getSession(context: TransactContext): Session {
-		const walletPlugin = this.walletPlugins.find(
-			(plugin) => plugin.id === this.data.session.walletPlugin.id
-		);
+		let walletPlugin: WalletPlugin | undefined;
+		if (this.data.session.walletPlugin.id === this.id) {
+			const parent = new WalletPluginMultiSig({ walletPlugins: this.walletPlugins });
+			parent.data = this.data.session.walletPlugin.data;
+			walletPlugin = parent;
+		} else {
+			walletPlugin = this.walletPlugins.find(
+				(plugin) => plugin.id === this.data.session.walletPlugin.id
+			);
+		}
 		if (!walletPlugin) {
 			throw new Error('Wallet plugin not found');
 		}
@@ -116,12 +123,10 @@ export class WalletPluginMultiSig extends AbstractWalletPlugin implements Wallet
 			expireSeconds = this.data.expireSeconds;
 		}
 
-		if (!context.info) {
-			throw new Error('Missing transaction info');
-		}
+		const info = context.info || (await context.client.v1.chain.get_info());
 
 		const trx = Transaction.from({
-			...context.info.getTransactionHeader(expireSeconds),
+			...info.getTransactionHeader(expireSeconds),
 			actions: resolved.transaction.actions,
 			context_free_actions: [],
 			transaction_extensions: []
