@@ -211,8 +211,13 @@ export class WharfState {
 
 		this.transacting = true;
 
+		const isMsig = this.session.walletPlugin.id === 'wallet-plugin-multisig';
 		const result = await this.session
-			.transact(args, { abiCache: this.abiCache, expireSeconds: 600 })
+			.transact(args, {
+				abiCache: this.abiCache,
+				expireSeconds: 600,
+				...(isMsig && { transactPlugins: msigTransactPlugins })
+			})
 			.catch((e: Error) => {
 				transaction.status = StatusType.ERROR;
 				transaction.error = e instanceof Error ? e.message : String(e);

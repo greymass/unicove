@@ -72,16 +72,13 @@ export class WalletPluginMultiSig extends AbstractWalletPlugin implements Wallet
 	}
 
 	getSession(context: TransactContext): Session {
-		let walletPlugin: WalletPlugin | undefined;
-		if (this.data.session.walletPlugin.id === this.id) {
-			const parent = new WalletPluginMultiSig({ walletPlugins: this.walletPlugins });
-			parent.data = this.data.session.walletPlugin.data;
-			walletPlugin = parent;
-		} else {
-			walletPlugin = this.walletPlugins.find(
-				(plugin) => plugin.id === this.data.session.walletPlugin.id
-			);
+		let sessionData = this.data.session;
+		while (sessionData.walletPlugin.id === this.id) {
+			sessionData = sessionData.walletPlugin.data.session;
 		}
+		const walletPlugin = this.walletPlugins.find(
+			(plugin) => plugin.id === sessionData.walletPlugin.id
+		);
 		if (!walletPlugin) {
 			throw new Error('Wallet plugin not found');
 		}
@@ -89,8 +86,8 @@ export class WalletPluginMultiSig extends AbstractWalletPlugin implements Wallet
 			{
 				chain: context.chain,
 				permissionLevel: PermissionLevel.from({
-					actor: this.data.session.actor,
-					permission: this.data.session.permission
+					actor: sessionData.actor,
+					permission: sessionData.permission
 				}),
 				walletPlugin
 			},
@@ -106,7 +103,11 @@ export class WalletPluginMultiSig extends AbstractWalletPlugin implements Wallet
 		if (!permission) {
 			throw new Error('Requested permission not found');
 		}
-		return permission.required_auth.accounts.map((a) => a.permission);
+		const accountAuths = permission.required_auth.accounts.map((a) => a.permission);
+		if (accountAuths.length > 0) {
+			return accountAuths;
+		}
+		return [signer];
 	}
 
 	async propose(
@@ -117,19 +118,16 @@ export class WalletPluginMultiSig extends AbstractWalletPlugin implements Wallet
 		const session = this.getSession(context);
 		const msig = new MsigContract({ client: context.client });
 		const eosntime = new TimeContract({ client: context.client });
-		const isRecursive = this.data.session.walletPlugin.id === this.id;
 
 		let expireSeconds = 60 * 60 * 24 * 30; // 1 month
 		if (this.data.expireSeconds) {
 			expireSeconds = this.data.expireSeconds;
 		}
 
-		if (!context.info) {
-			throw new Error('TransactContext is missing chain info');
-		}
+		const info = await context.getInfo();
 
 		const trx = Transaction.from({
-			...context.info.getTransactionHeader(expireSeconds),
+			...info.getTransactionHeader(expireSeconds),
 			actions: resolved.transaction.actions,
 			context_free_actions: [],
 			transaction_extensions: []
@@ -156,14 +154,18 @@ export class WalletPluginMultiSig extends AbstractWalletPlugin implements Wallet
 			actions.push(eosntime.action('checktime', { time }));
 		}
 
-		const result = await session.transact(
-			{ actions },
-			{ broadcast: false, transactPlugins: isRecursive ? [] : msigInternalPlugins }
-		);
-		return {
-			resolved: result.resolved,
-			signatures: result.signatures
-		};
+		try {
+			const result = await session.transact(
+				{ actions },
+				{ broadcast: false, transactPlugins: msigInternalPlugins }
+			);
+			return {
+				resolved: result.resolved,
+				signatures: result.signatures
+			};
+		} catch (e) {
+			throw new Error(e instanceof Error ? e.message : String(e));
+		}
 	}
 
 	sign(
