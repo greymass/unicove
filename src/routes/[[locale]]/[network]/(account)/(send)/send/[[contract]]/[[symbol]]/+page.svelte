@@ -130,12 +130,23 @@
 				}
 				// Change the balance field on the transfer
 				const { token } = data;
-				if (sendState.balance.equals(defaultBalance) && context.account) {
-					const balance = balances.find((b) => tokenEquals(b.token.id, token.id));
-					if (balance) {
-						tokenSelect?.set(balance);
-						sendState.setBalance(balance);
-						quantityInput?.set(sendState.quantity);
+				if (context.account) {
+					const currentToken = sendState.balance.token;
+					const isDefault = sendState.balance.equals(defaultBalance);
+					const isPreferred =
+						!isDefault && tokenEquals(currentToken.id, token.id) ||
+						(data.network.legacy && tokenEquals(currentToken.id, data.network.legacy!.id));
+					if (isDefault || !isPreferred) {
+						const balance =
+							balances.find((b) => tokenEquals(b.token.id, token.id)) ||
+							(data.network.legacy &&
+								balances.find((b) => tokenEquals(b.token.id, data.network.legacy!.id))) ||
+							balances[0];
+						if (balance && (isDefault || !tokenEquals(balance.token.id, currentToken.id))) {
+							tokenSelect?.set(balance);
+							sendState.setBalance(balance);
+							quantityInput?.set(sendState.quantity);
+						}
 					}
 				}
 			});
