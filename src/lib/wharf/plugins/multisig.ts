@@ -117,16 +117,19 @@ export class WalletPluginMultiSig extends AbstractWalletPlugin implements Wallet
 		const session = this.getSession(context);
 		const msig = new MsigContract({ client: context.client });
 		const eosntime = new TimeContract({ client: context.client });
+		const isRecursive = this.data.session.walletPlugin.id === this.id;
 
 		let expireSeconds = 60 * 60 * 24 * 30; // 1 month
 		if (this.data.expireSeconds) {
 			expireSeconds = this.data.expireSeconds;
 		}
 
-		const info = context.info || (await context.client.v1.chain.get_info());
+		if (!context.info) {
+			throw new Error('TransactContext is missing chain info');
+		}
 
 		const trx = Transaction.from({
-			...info.getTransactionHeader(expireSeconds),
+			...context.info.getTransactionHeader(expireSeconds),
 			actions: resolved.transaction.actions,
 			context_free_actions: [],
 			transaction_extensions: []
@@ -155,7 +158,7 @@ export class WalletPluginMultiSig extends AbstractWalletPlugin implements Wallet
 
 		const result = await session.transact(
 			{ actions },
-			{ broadcast: false, transactPlugins: msigInternalPlugins }
+			{ broadcast: false, transactPlugins: isRecursive ? [] : msigInternalPlugins }
 		);
 		return {
 			resolved: result.resolved,
