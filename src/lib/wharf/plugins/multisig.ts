@@ -97,24 +97,47 @@ export class WalletPluginMultiSig extends AbstractWalletPlugin implements Wallet
 		);
 	}
 
-	async getSigners(signer: PermissionLevel, context: TransactContext): Promise<PermissionLevel[]> {
-		const account = await context.client.v1.chain.get_account(signer.actor);
-		const permission = account.permissions.find((p) => p.perm_name.equals(signer.permission));
-		if (!permission) {
-			throw new Error('Requested permission not found');
-		}
+	async resolveSigners(
+		auth: PermissionLevel,
+		context: TransactContext,
+		seen: Set<string>
+	): Promise<PermissionLevel[]> {
+		const key = String(auth);
+		if (seen.has(key)) return [];
+		seen.add(key);
+		const account = await context.client.v1.chain.get_account(auth.actor);
+		const permission = account.permissions.find((p) => p.perm_name.equals(auth.permission));
+		if (!permission) return [auth];
 		const accountAuths = permission.required_auth.accounts.map((a) => a.permission);
+		if (accountAuths.length === 1 && permission.required_auth.threshold.equals(1)) {
+			return this.resolveSigners(accountAuths[0], context, seen);
+		}
 		if (accountAuths.length > 0) {
 			return accountAuths;
 		}
-		return [signer];
+		return [auth];
+	}
+
+	async getRequestedSigners(
+		transaction: Transaction,
+		context: TransactContext
+	): Promise<PermissionLevel[]> {
+		const requested: PermissionLevel[] = [];
+		const seen = new Set<string>();
+		for (const action of transaction.actions) {
+			for (const auth of action.authorization) {
+				const resolved = await this.resolveSigners(auth, context, seen);
+				requested.push(...resolved);
+			}
+		}
+		return requested;
 	}
 
 	async propose(
 		resolved: ResolvedSigningRequest,
 		context: TransactContext
 	): Promise<WalletPluginSignResponse> {
-		const requested = await this.getSigners(resolved.signer, context);
+		const requested = await this.getRequestedSigners(resolved.transaction, context);
 		const session = this.getSession(context);
 		const msig = new MsigContract({ client: context.client });
 		const eosntime = new TimeContract({ client: context.client });
