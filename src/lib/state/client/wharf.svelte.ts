@@ -215,7 +215,7 @@ export class WharfState {
 			.transact(args, { abiCache: this.abiCache, expireSeconds: 600 })
 			.catch((e: Error) => {
 				transaction.status = StatusType.ERROR;
-				transaction.error = String(e);
+				transaction.error = e instanceof Error ? e.message : String(e);
 				queueTransaction(transaction);
 				this.transacting = false;
 				throw e;
