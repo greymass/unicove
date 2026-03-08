@@ -42,7 +42,7 @@
 			permission.required_auth.waits.length
 	);
 	const isMSIG = $derived(permission.required_auth.threshold.gt(UInt64.from(1)));
-	const isDebugMode = $derived(context.settings.data.debugMode);
+	const isDeveloperMode = $derived(context.settings.data.developerMode);
 
 	const editUrl = $derived(
 		context.urlPath(`/account/${account}/permissions/${permission.perm_name}`)
@@ -62,7 +62,7 @@
 			<dd class="text-on-surface text-xl font-semibold">
 				<div class="flex items-center gap-2">
 					{permission.perm_name}
-					{#if loggedIn && (isDebugMode || (isMSIG && advancedMode && !msigMode))}
+					{#if loggedIn && (isDeveloperMode || (isMSIG && advancedMode && !msigMode))}
 						<LogIn
 							onclick={() =>
 								signin(PermissionLevel.from({ actor: account, permission: permission.perm_name }))}
