@@ -62,7 +62,9 @@
 			if (i === parts.length - 1) {
 				return field.type.endsWith('?');
 			}
-			const struct = data.abi.structs.find((s: ABI.Struct) => s.name === field.type);
+			const struct = data.abi.structs.find(
+				(s: ABI.Struct) => s.name === field.type.replace('?', '')
+			);
 			if (!struct) return false;
 			fields = struct.fields;
 		}
@@ -101,7 +103,7 @@
 			}
 			const rawValue = actionInputs[key];
 			if (rawValue === '' && isOptionalField(key)) {
-				obj[parts[parts.length - 1]] = undefined;
+				obj[parts[parts.length - 1]] = null;
 			} else {
 				try {
 					obj[parts[parts.length - 1]] = JSON.parse(rawValue as string);
@@ -130,8 +132,10 @@
 		}
 	});
 
+	const hasFields = $derived(data.struct.fields.length > 0);
+
 	const decoded = $derived.by(() => {
-		if (!serialized || Object.keys(restructured).length === 0) {
+		if (!serialized || (hasFields && Object.keys(restructured).length === 0)) {
 			return undefined;
 		}
 		try {
@@ -153,8 +157,9 @@
 	const link = $derived(
 		serialized
 			? [
-					page.url,
-					`/${serialized}?readonly=${useReadOnly}&triggerOnPageLoad=${triggerOnPageLoad}`
+					data.urlOrigin,
+					context.urlPath(`/contract/${data.contract}/actions/${data.action.name}/${serialized}`),
+					`?readonly=${useReadOnly}&triggerOnPageLoad=${triggerOnPageLoad}`
 				].join('')
 			: undefined
 	);
@@ -186,7 +191,6 @@
 				});
 		} else {
 			const action = contract.action(data.action.name, serialized);
-
 			context.wharf
 				.transact({ action })
 				.then((result) => {
@@ -207,18 +211,28 @@
 	onMount(() => {
 		useReadOnly = page.url.searchParams.get('readonly') === 'true';
 		triggerOnPageLoad = page.url.searchParams.get('triggerOnPageLoad') === 'true';
-		data.struct.fields.forEach((field: ABI.Field) => {
-			switch (field.type) {
-				case 'bool': {
-					actionInputs[field.name] = false;
-					break;
+		function initFields(fields: ABI.Field[], prefix: string[] = []) {
+			fields.forEach((field: ABI.Field) => {
+				const fieldType = field.type.replace('?', '');
+				const struct = data.abi.structs.find((s: ABI.Struct) => s.name === fieldType);
+				if (struct) {
+					initFields(struct.fields, [...prefix, field.name]);
+				} else {
+					const key = [...prefix, field.name].join('->');
+					switch (fieldType) {
+						case 'bool': {
+							actionInputs[key] = false;
+							break;
+						}
+						default: {
+							actionInputs[key] = '';
+							break;
+						}
+					}
 				}
-				default: {
-					actionInputs[field.name] = '';
-					break;
-				}
-			}
-		});
+			});
+		}
+		initFields(data.struct.fields);
 		try {
 			const action = Serializer.decode({
 				data: Bytes.from(data.data || '00'),
@@ -226,17 +240,16 @@
 				type: String(data.action.name)
 			});
 			if (action) {
-				const data = Serializer.objectify(action);
-				Object.keys(data).forEach((key) => {
-					if (data[key] === null) {
-						data[key] = '';
-					} else if (typeof data[key] === 'object') {
-						data[key] = JSON.stringify(data[key]);
-					} else {
-						data[key] = data[key];
+				const decoded = Serializer.objectify(action);
+				const flattened = flatten(decoded);
+				Object.keys(flattened).forEach((key) => {
+					if (flattened[key] === null) {
+						flattened[key] = '';
+					} else if (typeof flattened[key] === 'object') {
+						flattened[key] = JSON.stringify(flattened[key]);
 					}
 				});
-				actionInputs = flatten(data);
+				actionInputs = flattened;
 				if (useReadOnly && triggerOnPageLoad) {
 					setTimeout(() => {
 						transact();
