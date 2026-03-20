@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2026-03-20T20:30:27.473Z\n"
+"PO-Revision-Date: 2026-03-20T22:08:25.590Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -7572,3 +7572,35 @@ msgstr "Manage sentiment contract configuration"
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/create/+page.ts
 msgid "Create a new sentiment topic"
 msgstr "Create a new sentiment topic"
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/create/+page.svelte
+msgid "Before You Create"
+msgstr "Before You Create"
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/create/+page.svelte
+msgid ""
+"The creation fee is non-refundable. Fees are sent to the <0/> account, which distributes them through standard network fee channels (RAM, powerup,\n"
+"name bids)."
+msgstr ""
+"The creation fee is non-refundable. Fees are sent to the <0/> account, which distributes them through standard network fee channels (RAM, powerup,\n"
+"name bids)."
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/create/+page.svelte
+msgid ""
+"Topics cannot be edited or deleted by the creator once submitted, including the topic\n"
+"ID. Proofread carefully before submitting. To retain the ability to update details\n"
+"later, include a link to an external resource in the description."
+msgstr ""
+"Topics cannot be edited or deleted by the creator once submitted, including the topic\n"
+"ID. Proofread carefully before submitting. To retain the ability to update details\n"
+"later, include a link to an external resource in the description."
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/create/+page.svelte
+msgid ""
+"Your topic is permanently stored on the blockchain and can be accessed through any\n"
+"compatible interface. Unicove may choose not to display topics that violate its content\n"
+"policies, but the on-chain record is unaffected."
+msgstr ""
+"Your topic is permanently stored on the blockchain and can be accessed through any\n"
+"compatible interface. Unicove may choose not to display topics that violate its content\n"
+"policies, but the on-chain record is unaffected."

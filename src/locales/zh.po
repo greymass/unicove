@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2026-03-20T20:30:27.482Z\n"
+"PO-Revision-Date: 2026-03-20T22:08:25.601Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -7389,3 +7389,27 @@ msgstr "管理情绪合约配置"
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/create/+page.ts
 msgid "Create a new sentiment topic"
 msgstr "创建一个新的情感话题"
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/create/+page.svelte
+msgid "Before You Create"
+msgstr "创建之前"
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/create/+page.svelte
+msgid ""
+"The creation fee is non-refundable. Fees are sent to the <0/> account, which distributes them through standard network fee channels (RAM, powerup,\n"
+"name bids)."
+msgstr "创建费用不予退还。费用将发送到 <0/> 帐户，该帐户通过标准网络费用渠道（RAM、powerup、名称竞标）分配这些费用。"
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/create/+page.svelte
+msgid ""
+"Topics cannot be edited or deleted by the creator once submitted, including the topic\n"
+"ID. Proofread carefully before submitting. To retain the ability to update details\n"
+"later, include a link to an external resource in the description."
+msgstr "主题提交后，创建者无法编辑或删除，包括主题 ID。提交前请仔细校对。要保留稍后更新详细信息的能力，请在描述中包含外部资源的链接。"
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/create/+page.svelte
+msgid ""
+"Your topic is permanently stored on the blockchain and can be accessed through any\n"
+"compatible interface. Unicove may choose not to display topics that violate its content\n"
+"policies, but the on-chain record is unaffected."
+msgstr "您的主题将永久存储在区块链上，并且可以通过任何兼容的界面访问。Unicove可以选择不显示违反其内容政策的主题，但链上记录不受影响。"

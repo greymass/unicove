@@ -61,6 +61,30 @@
 				</p>
 			</div>
 
+			<div class="border-outline-variant/30 bg-surface-container-high rounded-xl border p-4">
+				<p class="text-on-surface text-sm font-medium">Before You Create</p>
+				<ul class="text-muted mt-2 list-disc space-y-1.5 pl-5 text-xs leading-relaxed">
+					<li>
+						The creation fee is non-refundable. Fees are sent to the
+						<strong class="text-on-surface-variant"
+							>{String(data.config.fees.receiver)}</strong
+						>
+						account, which distributes them through standard network fee channels (RAM, powerup,
+						name bids).
+					</li>
+					<li>
+						Topics cannot be edited or deleted by the creator once submitted, including the topic
+						ID. Proofread carefully before submitting. To retain the ability to update details
+						later, include a link to an external resource in the description.
+					</li>
+					<li>
+						Your topic is permanently stored on the blockchain and can be accessed through any
+						compatible interface. Unicove may choose not to display topics that violate its content
+						policies, but the on-chain record is unaffected.
+					</li>
+				</ul>
+			</div>
+
 			<div class="bg-surface-container-high space-y-4 rounded-xl p-4">
 				<fieldset class="grid gap-2">
 					<Label for="topic-id">Topic ID</Label>
