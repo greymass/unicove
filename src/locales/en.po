@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2026-03-02T03:03:11.396Z\n"
+"PO-Revision-Date: 2026-03-20T20:30:27.473Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -290,7 +290,7 @@ msgid "KB (RAM)"
 msgstr "KB (RAM)"
 
 #. placeholder {0}: balance.token.name
-#. placeholder {0}: balance.token.name
+#. placeholder {0}: balance.token.symbol.name
 #: src/lib/components/card/tokenbalance.svelte
 #: src/lib/components/card/tokenoverview.svelte
 msgid "{0} (RAM)"
@@ -502,12 +502,12 @@ msgstr "Transfer"
 msgid "+ {0} ms (CPU)"
 msgstr "+ {0} ms (CPU)"
 
-#. placeholder {0}: account.weight
-#. placeholder {0}: key.weight
-#. placeholder {0}: account.weight
-#. placeholder {0}: key.weight
-#. placeholder {0}: data.powup_cpu
 #. placeholder {0}: data.powup_net
+#. placeholder {0}: data.powup_cpu
+#. placeholder {0}: key.weight
+#. placeholder {0}: account.weight
+#. placeholder {0}: key.weight
+#. placeholder {0}: account.weight
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio/newaccount.svelte
@@ -797,8 +797,8 @@ msgstr "Details"
 msgid "Network Fees"
 msgstr "Network Fees"
 
-#. placeholder {0}: data.network.chain.systemToken?.symbol.code || ''
 #. placeholder {0}: market.network.currency.symbol.code
+#. placeholder {0}: data.network.chain.systemToken?.symbol.code || ''
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 msgid "Market Cap ({0})"
@@ -2013,10 +2013,10 @@ msgstr "Pill Select"
 msgid "Select a date range"
 msgstr "Select a date range"
 
-#. placeholder {0}: selected.label
-#. placeholder {0}: selectedFormOption.label
-#. placeholder {0}: imageOptionSelected.label
 #. placeholder {0}: JSON.stringify(tokenSelected, null, 2)
+#. placeholder {0}: imageOptionSelected.label
+#. placeholder {0}: selectedFormOption.label
+#. placeholder {0}: selected.label
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
@@ -3307,6 +3307,7 @@ msgid "Contract Name"
 msgstr "Contract Name"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/definition/token/[[payload]]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/config/+page.svelte
 msgid "Token Symbol"
 msgstr "Token Symbol"
 
@@ -4255,8 +4256,8 @@ msgstr "{0} Token Swap has begun!"
 msgid "Swap {0} to {1} at a 1:1 ratio"
 msgstr "Swap {0} to {1} at a 1:1 ratio"
 
-#. placeholder {0}: props.network.token.name
 #. placeholder {0}: String(data.quote.symbol.name)
+#. placeholder {0}: props.network.token.name
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/legacy-token-swap.svelte
 msgid "Swap to {0}"
@@ -5682,8 +5683,10 @@ msgstr "Failed to load topics"
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/refund/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/config/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/create/+page.svelte
 msgid "Try Again"
 msgstr "Try Again"
 
@@ -5736,6 +5739,7 @@ msgstr "Last updated {0}"
 
 #: src/lib/components/search/input.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/create/+page.svelte
 msgid "Description"
 msgstr "Description"
 
@@ -6920,7 +6924,7 @@ msgstr "{0}You have {1} available to reclaim."
 msgid "You have been outbid on this name.<0/>"
 msgstr "You have been outbid on this name.<0/>"
 
-#. placeholder {0}: String(tracked.refund.amount)
+#. placeholder {0}: String(manager.refundAmount)
 #. placeholder {0}: String(tracked.refund.amount)
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/refund/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
@@ -7126,9 +7130,6 @@ msgstr "You'd lead this name, but not the global auction"
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
 msgid "This name has been claimed"
 msgstr "This name has been claimed"
-
-#~ msgid "<0/> was won by <1/> and is no longer available for bidding."
-#~ msgstr "<0/> was won by <1/> and is no longer available for bidding."
 
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
 msgid "You are the current high bidder"
@@ -7492,3 +7493,82 @@ msgstr "is"
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
 msgid "<0/> <1/> no longer available for bidding."
 msgstr "<0/> <1/> no longer available for bidding."
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/config/+page.svelte
+msgid "Back to Config"
+msgstr "Back to Config"
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/config/+page.svelte
+msgid "System Contract"
+msgstr "System Contract"
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/config/+page.svelte
+msgid "Token Contract"
+msgstr "Token Contract"
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/config/+page.svelte
+msgid "Token Action"
+msgstr "Token Action"
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/config/+page.svelte
+msgid "Fee Receiver"
+msgstr "Fee Receiver"
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/config/+page.svelte
+msgid "Create Topic Fee"
+msgstr "Create Topic Fee"
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/config/+page.svelte
+msgid "Please log in to update config"
+msgstr "Please log in to update config"
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/config/+page.svelte
+msgid "Set Config"
+msgstr "Set Config"
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/create/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/create/+page.ts
+msgid "Create Topic"
+msgstr "Create Topic"
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/create/+page.svelte
+msgid "View Topic"
+msgstr "View Topic"
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/create/+page.svelte
+msgid "Back to Topics"
+msgstr "Back to Topics"
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/create/+page.svelte
+msgid "Topic Creation Fee"
+msgstr "Topic Creation Fee"
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/create/+page.svelte
+msgid "Creating a topic costs <0/>"
+msgstr "Creating a topic costs <0/>"
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/create/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/create/+page.svelte
+msgid "Topic ID"
+msgstr "Topic ID"
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/create/+page.svelte
+msgid "Describe what this topic is about..."
+msgstr "Describe what this topic is about..."
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/create/+page.svelte
+msgid "Please log in to create a topic"
+msgstr "Please log in to create a topic"
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/config/+page.ts
+msgid "Sentiment Config"
+msgstr "Sentiment Config"
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/config/+page.ts
+msgid "Manage sentiment contract configuration"
+msgstr "Manage sentiment contract configuration"
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/create/+page.ts
+msgid "Create a new sentiment topic"
+msgstr "Create a new sentiment topic"
