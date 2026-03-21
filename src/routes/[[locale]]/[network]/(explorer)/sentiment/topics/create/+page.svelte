@@ -66,11 +66,9 @@
 				<ul class="text-muted mt-2 list-disc space-y-1.5 pl-5 text-xs leading-relaxed">
 					<li>
 						The creation fee is non-refundable. Fees are sent to the
-						<strong class="text-on-surface-variant"
-							>{String(data.config.fees.receiver)}</strong
-						>
-						account, which distributes them through standard network fee channels (RAM, powerup,
-						name bids).
+						<strong class="text-on-surface-variant">{String(data.config.fees.receiver)}</strong>
+						account, which distributes them through standard network fee channels (RAM, powerup, name
+						bids).
 					</li>
 					<li>
 						Topics cannot be edited or deleted by the creator once submitted, including the topic
