@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2026-03-21T00:32:31.210Z\n"
+"PO-Revision-Date: 2026-03-23T03:31:21.088Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -502,12 +502,12 @@ msgstr "转账"
 msgid "+ {0} ms (CPU)"
 msgstr "+ {0} 毫秒 (CPU)"
 
-#. placeholder {0}: data.powup_net
 #. placeholder {0}: data.powup_cpu
-#. placeholder {0}: key.weight
+#. placeholder {0}: data.powup_net
 #. placeholder {0}: account.weight
 #. placeholder {0}: key.weight
 #. placeholder {0}: account.weight
+#. placeholder {0}: key.weight
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio/newaccount.svelte
@@ -793,8 +793,8 @@ msgstr "详情"
 msgid "Network Fees"
 msgstr "网络费用"
 
-#. placeholder {0}: market.network.currency.symbol.code
 #. placeholder {0}: data.network.chain.systemToken?.symbol.code || ''
+#. placeholder {0}: market.network.currency.symbol.code
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 msgid "Market Cap ({0})"
@@ -1690,6 +1690,7 @@ msgid "Delete"
 msgstr "删除"
 
 #: src/lib/components/accountswitch.svelte
+#: src/lib/components/elements/proposalname.svelte
 #: src/lib/components/elements/suspiciousmemo.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/buttons.svelte
@@ -1700,6 +1701,7 @@ msgstr "删除"
 msgid "Cancel"
 msgstr "取消"
 
+#: src/lib/components/elements/proposalname.svelte
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/buttons.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
@@ -1981,10 +1983,10 @@ msgstr "药丸选择"
 msgid "Select a date range"
 msgstr "选择日期范围"
 
-#. placeholder {0}: JSON.stringify(tokenSelected, null, 2)
-#. placeholder {0}: imageOptionSelected.label
-#. placeholder {0}: selectedFormOption.label
 #. placeholder {0}: selected.label
+#. placeholder {0}: selectedFormOption.label
+#. placeholder {0}: imageOptionSelected.label
+#. placeholder {0}: JSON.stringify(tokenSelected, null, 2)
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
@@ -3149,10 +3151,10 @@ msgstr "正在加载主题...```"
 #. placeholder {1}: quote.name
 #. placeholder {0}: base.name
 #. placeholder {1}: quote.name
-#. placeholder {0}: data.network.token.name
-#. placeholder {1}: data.network.getRamToken().name
-#. placeholder {0}: String(network.chain.systemToken?.symbol.name)
-#. placeholder {1}: String(ramtoken.name)
+#. placeholder {0}: base.name
+#. placeholder {1}: quote.name
+#. placeholder {0}: base.name
+#. placeholder {1}: quote.name
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.svelte
@@ -3193,8 +3195,8 @@ msgstr "接收 {0}"
 msgid "Network Fee: <0/> (0.5%)"
 msgstr "网络费用: <0/> (0.5%)"
 
-#. placeholder {0}: String(data.quote.symbol.name)
 #. placeholder {0}: props.network.token.name
+#. placeholder {0}: String(data.quote.symbol.name)
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/legacy-token-swap.svelte
 msgid "Swap to {0}"
@@ -3825,7 +3827,7 @@ msgstr "获取代币"
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
-#. placeholder {0}: String(network.token.symbol.name)
+#. placeholder {0}: symbol.name
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
@@ -3855,7 +3857,7 @@ msgstr "<0>Unicove -</0> {0} 网络钱包和区块浏览器"
 
 #. placeholder {0}: network.chain.name
 #. placeholder {0}: networkName
-#. placeholder {0}: networkName
+#. placeholder {0}: network.chain.name
 #: src/routes/+layout.server.ts
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
@@ -4776,6 +4778,7 @@ msgstr "多重签名详情"
 msgid "Proposer"
 msgstr "提议者"
 
+#: src/lib/components/elements/proposalname.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Proposal Name"
 msgstr "提议名称"
@@ -6674,6 +6677,7 @@ msgstr "出价 - {0} 高级名称"
 msgid "Place a bid on a premium account name on the {0} network."
 msgstr "在 {0} 网络上竞标高级帐户名称。"
 
+#: src/lib/components/elements/proposalname.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/refund/+page.svelte
 msgid "Name"
 msgstr "名称"
@@ -6770,8 +6774,8 @@ msgstr "{0}您有 {1} 可供回收。```"
 msgid "You have been outbid on this name.<0/>"
 msgstr "您在这个名字上的出价已被超过。<0/>"
 
-#. placeholder {0}: String(manager.refundAmount)
 #. placeholder {0}: String(tracked.refund.amount)
+#. placeholder {0}: String(manager.refundAmount)
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/refund/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
 msgid "Claim Refund ({0})"
@@ -7394,11 +7398,6 @@ msgstr "创建一个新的情感话题"
 msgid "Before You Create"
 msgstr "创建之前"
 
-#~ msgid ""
-#~ "The creation fee is non-refundable. Fees are sent to the <0/> account, which distributes them through standard network fee channels (RAM, powerup,\n"
-#~ "name bids)."
-#~ msgstr "创建费用不予退还。费用将发送到 <0/> 帐户，该帐户通过标准网络费用渠道（RAM、powerup、名称竞标）分配这些费用。"
-
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/create/+page.svelte
 msgid ""
 "Topics cannot be edited or deleted by the creator once submitted, including the topic\n"
@@ -7418,3 +7417,15 @@ msgid ""
 "The creation fee is non-refundable. Fees are sent to the <0/> account, which distributes them through standard network fee channels (RAM, powerup, name\n"
 "bids)."
 msgstr "创建费用不予退还。费用将发送到 <0/> 账户，该账户通过标准网络费用渠道（RAM、powerup、域名竞标）分配这些费用。"
+
+#: src/lib/state/client/wharf.svelte.ts
+msgid "Proposal name entry cancelled."
+msgstr "提案名称输入已取消。"
+
+#: src/lib/components/elements/proposalname.svelte
+msgid "Enter a name for this proposal or use the generated default."
+msgstr "为此提案输入一个名称，或使用生成的默认名称。"
+
+#: src/lib/components/elements/proposalname.svelte
+msgid "Proposal name"
+msgstr "提案名称"

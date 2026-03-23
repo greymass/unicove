@@ -105,6 +105,11 @@ export class WalletPluginMultiSig extends AbstractWalletPlugin implements Wallet
 		const key = String(auth);
 		if (seen.has(key)) return [];
 		seen.add(key);
+		if (auth.actor.equals('eosio.prods') && this.data.topProducers) {
+			return (this.data.topProducers as string[]).map((name: string) =>
+				PermissionLevel.from({ actor: name, permission: 'active' })
+			);
+		}
 		const account = await context.client.v1.chain.get_account(auth.actor);
 		const permission = account.permissions.find((p) => p.perm_name.equals(auth.permission));
 		if (!permission) return [auth];
@@ -156,11 +161,14 @@ export class WalletPluginMultiSig extends AbstractWalletPlugin implements Wallet
 			transaction_extensions: []
 		});
 
+		const proposalName = this.data.nextProposalName || generateRandomName();
+		delete this.data.nextProposalName;
+
 		const actions = [
 			msig.action(
 				'propose',
 				{
-					proposal_name: generateRandomName(),
+					proposal_name: proposalName,
 					proposer: session.actor,
 					requested,
 					trx

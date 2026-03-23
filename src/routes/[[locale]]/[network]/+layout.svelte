@@ -22,6 +22,7 @@
 	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte';
 
 	import AccountSwitcher from '$lib/components/accountswitch.svelte';
+	import ProposalNameDialog from '$lib/components/elements/proposalname.svelte';
 	import Search from '$lib/components/search/input.svelte';
 	import SideMenuContent from '$lib/components/navigation/sidemenu.svelte';
 	import Unicovelogo from '$lib/assets/unicovelogo.svelte';
@@ -38,7 +39,7 @@
 	const history = new SearchRecordStorage(data.network);
 	const producers = new ProducersState(data.network);
 	const settings = new SettingsState();
-	const wharf = new WharfState(settings);
+	const wharf = new WharfState(settings, producers);
 	const initialMarketValue = new MarketState(data.network, settings);
 	let metaMaskState = new MetaMaskState();
 	const initialNetworkValue = new NetworkValueState({
@@ -301,3 +302,5 @@
 		{@render children?.()}
 	</main>
 </div>
+
+<ProposalNameDialog />
