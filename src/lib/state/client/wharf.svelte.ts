@@ -243,9 +243,8 @@ export class WharfState {
 
 		if (isMsig) {
 			const { generateRandomName } = await import('$lib/utils/random');
-			this.session.walletPlugin.data.nextProposalName = await this.promptForProposalName(
-				generateRandomName()
-			);
+			this.session.walletPlugin.data.nextProposalName =
+				await this.promptForProposalName(generateRandomName());
 			if (this.producers) {
 				this.session.walletPlugin.data.topProducers = this.producers.allActiveProducers
 					.slice(0, 30)
