@@ -15,7 +15,8 @@
 	const { abi, codePath = [], fields, state = $bindable({}) }: PageProps = $props();
 
 	function deriveFields(fieldType: string) {
-		const struct = abi.structs.find((s: ABI.Struct) => s.name === fieldType);
+		const baseType = fieldType.replace('?', '');
+		const struct = abi.structs.find((s: ABI.Struct) => s.name === baseType);
 		if (struct) {
 			return struct.fields;
 		}

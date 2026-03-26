@@ -68,6 +68,9 @@
 			</p>
 
 			<Button href={context.urlPath('/staking')} variant="secondary">Stake tokens</Button>
+			<Button href={context.urlPath('/sentiment/topics/create')} variant="secondary">
+				Create Topic
+			</Button>
 		</Stack>
 	</Card>
 </div>

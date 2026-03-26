@@ -2,7 +2,7 @@
 	import { createSelect, type SelectOption } from '@melt-ui/svelte';
 	import { SelectTrigger, SelectMenu, SelectItem } from 'unicove-components';
 	import { writable } from 'svelte/store';
-	import { TokenBalance } from '$lib/types/token';
+	import { TokenBalance, tokenEquals } from '$lib/types/token';
 	import type { ChangeFn } from '@melt-ui/svelte/internal/helpers';
 	import { Code } from 'unicove-components';
 
@@ -92,7 +92,7 @@
 		} else {
 			_selected = balance;
 			const option = balanceOptions.find((o) =>
-				TokenBalance.from(options[o.value]).equals(balance)
+				tokenEquals(options[o.value].token.id, balance.token.id)
 			);
 			if (option) {
 				selectedBalanceOption.set(option);

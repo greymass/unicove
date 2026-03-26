@@ -14,7 +14,8 @@ export enum SettingKeys {
 	'preventAccountPageSwitching' = 'preventAccountPageSwitching',
 	'searchAccountSwitch' = 'searchAccountSwitch',
 	'searchShowPages' = 'searchShowPages',
-	'showApprovedProposals' = 'showApprovedProposals'
+	'showApprovedProposals' = 'showApprovedProposals',
+	'warnSuspiciousMemos' = 'warnSuspiciousMemos'
 }
 
 export enum TimeSeconds {
@@ -52,6 +53,7 @@ export interface SettingsData {
 	searchAccountSwitch?: boolean;
 	searchShowPages?: boolean;
 	showApprovedProposals?: boolean;
+	warnSuspiciousMemos?: boolean;
 }
 
 function getDefaultLocale() {
@@ -66,7 +68,7 @@ function getDefaultLocale() {
 }
 
 const defaultSettings: SettingsData = {
-	actionDisplayVariant: 'summary',
+	actionDisplayVariant: 'table',
 	advancedMode: false,
 	displayCurrency: SupportedCurrencies.USD,
 	debugMode: false,
@@ -77,7 +79,8 @@ const defaultSettings: SettingsData = {
 	preventAccountPageSwitching: false,
 	searchAccountSwitch: false,
 	searchShowPages: true,
-	showApprovedProposals: false
+	showApprovedProposals: false,
+	warnSuspiciousMemos: true
 };
 
 export class SettingsState {
@@ -89,11 +92,7 @@ export class SettingsState {
 			if (item)
 				this.data = {
 					...defaultSettings,
-					...this.deserialize(item),
-					// TODO: Once we want this to persist, remove this
-					// Currently running as a soft migratio for users
-					// to not have to deal changing the setting.
-					actionDisplayVariant: 'summary'
+					...this.deserialize(item)
 				};
 		}
 		$effect(() => {

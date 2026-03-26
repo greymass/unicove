@@ -16,34 +16,28 @@
 
 {#if Int64.from(data.cpu_frac).gt(ZeroUnits)}
 	<Row>
-		<Chip>Resources</Chip>
-
-		<div>
-			<AccountElement name={Name.from(data.payer)} />
-			<span class="text-nowrap">renting CPU for</span>
-			<AccountElement name={Name.from(data.receiver)} />
-		</div>
-
-		<div>
-			<span class="text-nowrap">
-				({data.cpu_frac})
+		<span class="inline-flex flex-wrap items-center gap-x-2 gap-y-1">
+			<Chip>Resources</Chip>
+			<span class="inline-flex items-center gap-1">
+				<AccountElement name={Name.from(data.payer)} />
+				<span class="text-on-surface-variant">renting CPU for</span>
+				<AccountElement name={Name.from(data.receiver)} />
 			</span>
-		</div>
+			<span class="text-on-surface-variant text-sm">({data.cpu_frac})</span>
+		</span>
 	</Row>
 {/if}
 
 {#if Int64.from(data.net_frac).gt(ZeroUnits)}
 	<Row>
-		<Chip>Resources</Chip>
-
-		<div>
-			<AccountElement name={Name.from(data.payer)} />
-			<span class="text-nowrap">renting NET for</span>
-			<AccountElement name={Name.from(data.receiver)} />
-		</div>
-
-		<span class="text-nowrap">
-			({data.net_frac})
+		<span class="inline-flex flex-wrap items-center gap-x-2 gap-y-1">
+			<Chip>Resources</Chip>
+			<span class="inline-flex items-center gap-1">
+				<AccountElement name={Name.from(data.payer)} />
+				<span class="text-on-surface-variant">renting NET for</span>
+				<AccountElement name={Name.from(data.receiver)} />
+			</span>
+			<span class="text-on-surface-variant text-sm">({data.net_frac})</span>
 		</span>
 	</Row>
 {/if}

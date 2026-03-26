@@ -43,6 +43,14 @@
 			items.push({ href: urlPath(`/ram`), text: 'RAM', active: pathname[3] === 'ram' });
 		}
 
+		// if (network.supports('bidname')) {
+		// 	items.push({
+		// 		href: urlPath(`/bidname`),
+		// 		text: 'Names',
+		// 		active: pathname[3] === 'bidname'
+		// 	});
+		// }
+
 		items.push({
 			href: urlPath(`/governance`),
 			text: 'Governance',

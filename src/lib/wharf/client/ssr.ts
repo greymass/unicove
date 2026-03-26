@@ -1,4 +1,5 @@
 import { APIClient, FetchProvider } from '@wharfkit/antelope';
+import { RoborovskiClient } from '@wharfkit/roborovski';
 
 import * as env from '$env/static/private';
 
@@ -17,6 +18,8 @@ const backendEndpoints: ChainEndpoints = {
 	hyperion: env.BACKEND_API_HYPERION,
 	lightapi: env.BACKEND_API_LIGHTAPI,
 	metrics: env.BACKEND_API_METRICS,
+	msigs: env.BACKEND_API_MSIGS,
+	robo2: env.BACKEND_API_ROBO2,
 	sentiment: env.BACKEND_API_SENTIMENT
 };
 
@@ -64,4 +67,19 @@ export function getBackendNetworkByName(
 ) {
 	const config = getMergedConfig(network);
 	return getBackendNetwork(config, fetch, options);
+}
+
+export function getRobo2Client(
+	network: string,
+	fetch: typeof window.fetch
+): RoborovskiClient | undefined {
+	const config = getMergedConfig(network);
+	const url = config.endpoints.robo2;
+	if (!url) {
+		return undefined;
+	}
+	const client = new APIClient({
+		provider: new FetchProvider(url, { fetch })
+	});
+	return new RoborovskiClient(client);
 }

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { getContext, onMount } from 'svelte';
 
-	import { Button, Card } from 'unicove-components';
+	import { Button, Card, Chip, cn } from 'unicove-components';
 	import { DD, DL, DLRow } from 'unicove-components';
 	import { Stack, Switcher } from 'unicove-components';
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
@@ -30,9 +30,12 @@
 	const enabled = false;
 
 	onMount(() => {
-		const interval = setInterval(() => {
-			invalidateAll();
-		}, 15000);
+		let interval: ReturnType<typeof setInterval> | undefined;
+		if (manager.isActive) {
+			interval = setInterval(() => {
+				invalidateAll();
+			}, 15000);
+		}
 
 		if (context.network.supports('sentiment')) {
 			sentimentState.loadMsig(data.proposal.proposer, data.proposal.name);
@@ -46,11 +49,20 @@
 		}
 
 		return () => {
-			clearInterval(interval);
+			if (interval) clearInterval(interval);
 		};
 	});
 
 	const top21 = data.producers.slice(0, 21);
+
+	const statusColors: Record<string, string> = {
+		proposed: 'bg-primary text-on-primary',
+		executed: 'bg-success text-on-success',
+		cancelled: 'bg-surface-container-high text-on-surface-variant',
+		expired: 'bg-error text-on-error'
+	};
+
+	const statusColor = $derived(statusColors[data.proposal.status] || statusColors.proposed);
 
 	async function cancel() {
 		await manager.cancel();
@@ -161,6 +173,11 @@
 				>
 					<Stack class="gap-4" id="details">
 						<DL>
+							<DLRow title="Status">
+								<DD>
+									<Chip class={cn('capitalize', statusColor)}>{data.proposal.status}</Chip>
+								</DD>
+							</DLRow>
 							<DLRow title="Proposer">
 								<DD>
 									<Account name={manager.proposal.proposer} />
@@ -181,36 +198,52 @@
 									{manager.proposal.hash}
 								</DD>
 							</DLRow>
+							{#if data.proposal.status === 'executed' && data.proposal.executed_by}
+								<DLRow title="Executed By">
+									<DD>
+										<Account name={data.proposal.executed_by} />
+									</DD>
+								</DLRow>
+							{/if}
+							{#if data.proposal.status === 'executed' && data.proposal.executed_at}
+								<DLRow title="Executed At">
+									<DD>
+										{data.proposal.executed_at}
+									</DD>
+								</DLRow>
+							{/if}
 						</DL>
 
-						{#if manager.userIsApprover}
-							{#if manager.userHasApproved}
-								<Button
-									variant="secondary"
-									onclick={() => manager.unapprove()}
-									disabled={context.wharf.transacting}>Unapprove</Button
-								>
-							{:else}
-								<Button
-									class="bg-success text-on-success"
-									variant="primary"
-									onclick={() => manager.approve()}
-									disabled={context.wharf.transacting}>Approve</Button
+						{#if manager.isActive}
+							{#if manager.userIsApprover}
+								{#if manager.userHasApproved}
+									<Button
+										variant="secondary"
+										onclick={() => manager.unapprove()}
+										disabled={context.wharf.transacting}>Unapprove</Button
+									>
+								{:else}
+									<Button
+										class="bg-success text-on-success"
+										variant="primary"
+										onclick={() => manager.approve()}
+										disabled={context.wharf.transacting}>Approve</Button
+									>
+								{/if}
+							{/if}
+
+							{#if manager.userIsProposer}
+								<Button variant="secondary" disabled={context.wharf.transacting} onclick={cancel}
+									>Cancel MSIG</Button
 								>
 							{/if}
-						{/if}
 
-						{#if manager.userIsProposer}
-							<Button variant="secondary" disabled={context.wharf.transacting} onclick={cancel}
-								>Cancel MSIG</Button
+							<Button
+								variant="primary"
+								disabled={context.wharf.transacting}
+								onclick={() => manager.execute()}>Execute</Button
 							>
 						{/if}
-
-						<Button
-							variant="primary"
-							disabled={context.wharf.transacting}
-							onclick={() => manager.execute()}>Execute</Button
-						>
 					</Stack>
 				</TransactForm>
 			</Card>

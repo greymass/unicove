@@ -100,7 +100,7 @@ export const walletTypes: Record<string, WalletType> = {
 				route: 'signup/wallets/extensions/metamask',
 				logo: MetaMaskLogo,
 				description:
-					'One of the most popular wallets for interacting with web3 applications. Made compatible with Antelope-based blockchains through the EOS Wallet snap.',
+					'One of the most popular wallets for interacting with web3 applications. Made compatible with Antelope-based blockchains through the Vaulta Wallet snap.',
 				supportedNetworks: ['eos', 'jungle4']
 			},
 			{

@@ -272,7 +272,7 @@
 				{/if}
 				{@render Pretty(objectified)}
 			{/snippet}
-			{#if variant === 'summary'}
+			{#if variant === 'summary' || variant === 'table'}
 				{@render Summary()}
 			{:else if variant === 'ricardian'}
 				{@render Ricardian()}

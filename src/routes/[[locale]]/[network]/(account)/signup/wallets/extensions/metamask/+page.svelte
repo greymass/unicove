@@ -67,9 +67,9 @@
 		</Card>
 	{:else if !metaMaskState.installedSnap}
 		<Card class="mb-4">
-			<h2 class="mb-2 text-xl font-semibold">Step 2: Install EOS Wallet</h2>
-			<p class="mb-2">Install the EOS Wallet for MetaMask:</p>
-			<Button onclick={() => requestSnap(metaMaskState)}>Install EOS Wallet</Button>
+			<h2 class="mb-2 text-xl font-semibold">Step 2: Install Vaulta Wallet</h2>
+			<p class="mb-2">Install the Vaulta Wallet for MetaMask:</p>
+			<Button onclick={() => requestSnap(metaMaskState)}>Install Vaulta Wallet</Button>
 		</Card>
 	{:else}
 		<Card class="mb-4">
@@ -83,7 +83,7 @@
 		<h3 class="text-lg font-semibold">How This Works</h3>
 		<p>
 			This signup method allows you to use your MetaMask wallet to interact with {data.network.chain
-				.name}. The EOS Wallet Snap extends MetaMask's functionality, enabling it to sign {data
+				.name}. The Vaulta Wallet Snap extends MetaMask's functionality, enabling it to sign {data
 				.network.chain.name} transactions. Once your account is created, you'll be able to use MetaMask
 			to manage your {data.network.chain.name} assets and interact with {data.network.chain
 				.name}-based applications.

@@ -19,6 +19,7 @@
 	import CurrencySelect from '$lib/components/select/currency.svelte';
 	import DebugToggle from '$lib/components/select/debug.svelte';
 	import SchemeToggle from '$lib/components/select/scheme.svelte';
+	import type { ActionDisplayVariants } from '$lib/types';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -29,6 +30,25 @@
 	let developerMode = $state(!!context.settings.data.developerMode);
 	let mockPrice = $state(!!context.settings.data.mockPrice);
 	let increasedPrecision = $state(!!context.settings.data.increasedPrecision);
+	let warnSuspiciousMemos = $state(context.settings.data.warnSuspiciousMemos !== false);
+
+	const activityDisplayOptions: ExtendedSelectOption[] = [
+		{ label: 'Summary', value: 'summary' },
+		{ label: 'Table', value: 'table' },
+		{ label: 'Action Data', value: 'pretty' }
+	];
+
+	let selectedActivityDisplay: ExtendedSelectOption = $derived(
+		activityDisplayOptions.find((o) => o.value === context.settings.data.actionDisplayVariant) ||
+			activityDisplayOptions[1]
+	);
+
+	const onActivityDisplayChange: ChangeFn<ExtendedSelectOption | undefined> = ({ next }) => {
+		if (next) {
+			context.settings.data.actionDisplayVariant = next.value as ActionDisplayVariants;
+		}
+		return next;
+	};
 
 	let refEarliestExecution: DatetimeInput | undefined = $state();
 
@@ -60,6 +80,10 @@
 
 	$effect(() => {
 		context.settings.data.mockPrice = advancedMode ? mockPrice : false;
+	});
+
+	$effect(() => {
+		context.settings.data.warnSuspiciousMemos = warnSuspiciousMemos;
 	});
 
 	const range: ExtendedSelectOption[] = [
@@ -187,6 +211,19 @@
 				</Stack>
 				<SchemeToggle />
 			</div>
+
+			<div class="flex items-center justify-between">
+				<Stack class="gap-2">
+					<Label for="activity-display">Activity Display Format</Label>
+					<p class="caption text-sm">The default view format for account activity.</p>
+				</Stack>
+				<Select
+					id="activity-display"
+					options={activityDisplayOptions}
+					onSelectedChange={onActivityDisplayChange}
+					selected={selectedActivityDisplay}
+				/>
+			</div>
 		</Card>
 
 		<Card class=" grid gap-8 ">
@@ -234,6 +271,17 @@
 				</Stack>
 				<Switch id="advanced-mode" bind:checked={advancedMode} />
 			</div>
+			{#if advancedMode}
+				<div class="flex items-center justify-between">
+					<Stack class="gap-2">
+						<Label for="warn-suspicious-memos">Warn about suspicious memos</Label>
+						<p class="caption text-sm">
+							Show warnings when transaction memos contain potential phishing content.
+						</p>
+					</Stack>
+					<Switch id="warn-suspicious-memos" bind:checked={warnSuspiciousMemos} />
+				</div>
+			{/if}
 		</Card>
 
 		{#if advancedMode}

@@ -14,7 +14,13 @@ export type DescriptionItem = {
 	value: string;
 };
 
-export type ActionDisplayVariants = 'summary' | 'ricardian' | 'pretty' | 'decoded' | 'json';
+export type ActionDisplayVariants =
+	| 'summary'
+	| 'table'
+	| 'ricardian'
+	| 'pretty'
+	| 'decoded'
+	| 'json';
 
 @Struct.type('account_linked_action')
 export class AccountLinkedAction extends Struct {

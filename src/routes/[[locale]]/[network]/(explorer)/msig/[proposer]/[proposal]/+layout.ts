@@ -1,4 +1,4 @@
-import { Name, PackedTransaction, PermissionLevel } from '@wharfkit/antelope';
+import { Name, PermissionLevel, Transaction } from '@wharfkit/antelope';
 import type { LayoutLoad } from './$types';
 import { error } from '@sveltejs/kit';
 import { localizePath } from '$lib/utils/url';
@@ -19,25 +19,14 @@ export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 		});
 	}
 
-	const packed = PackedTransaction.from({
-		compression: false,
-		signatures: [],
-		packed_trx: json.proposal.packed_transaction,
-		packed_context_free_data: []
-	});
+	const transaction = Transaction.from(json.transaction);
 
-	const transaction = packed.getTransaction();
-
-	const proposal_name = Name.from(json.approvals.proposal_name);
-
-	const version = Number(json.approvals.version);
-
-	const requested_approvals: PermissionLevel[] = json.approvals.requested_approvals.map(
-		({ level }: { level?: PermissionLevel }) => (level ? PermissionLevel.from(level) : undefined)
+	const requested_approvals: PermissionLevel[] = json.requested_approvals.map(
+		(level: PermissionLevel) => PermissionLevel.from(level)
 	);
 
-	const provided_approvals: PermissionLevel[] = json.approvals.provided_approvals.map(
-		({ level }: { level?: PermissionLevel }) => (level ? PermissionLevel.from(level) : undefined)
+	const provided_approvals: PermissionLevel[] = json.provided_approvals.map(
+		(level: PermissionLevel) => PermissionLevel.from(level)
 	);
 
 	return {
@@ -47,12 +36,19 @@ export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 			copyData: params.proposal
 		},
 		proposal: {
-			approvals: { proposal_name, requested_approvals, provided_approvals, version },
+			approvals: {
+				proposal_name: Name.from(params.proposal),
+				requested_approvals,
+				provided_approvals
+			},
 			proposer: params.proposer,
 			name: params.proposal,
+			status: json.status || 'proposed',
 			hash: transaction.id,
-			packed,
-			transaction
+			transaction,
+			executed_at: json.executed_at,
+			executed_by: json.executed_by,
+			executed_trx_id: json.executed_trx_id
 		},
 		producers: json.producers
 	};

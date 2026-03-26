@@ -19,6 +19,14 @@ export async function getActivity(
 	} catch {
 		throw new Error(`Error while loading activity for ${name}.`);
 	}
+	if (!response.actions.length) {
+		return ActivityResponse.from({
+			actions: [],
+			first: 0,
+			last: 0,
+			head_block_num: 0
+		});
+	}
 	return ActivityResponse.from({
 		actions: response.actions,
 		first: response.actions[0].account_action_seq,

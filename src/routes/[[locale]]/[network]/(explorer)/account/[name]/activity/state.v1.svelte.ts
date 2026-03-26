@@ -9,10 +9,10 @@ import {
 import { systemcontract } from '$lib/wharf/chains';
 import { localizePath } from '$lib/utils/url';
 
-export class Scene {
+export class PaginatorPageV1 {
 	firstTime: number = $state(0);
 	updatedTime: number = $state(0);
-	list: ActivityResponseAction[] = $state([]);
+	results: ActivityResponseAction[] = $state([]);
 	loadStart: number = $state(0);
 	isLoading: boolean = $state(false);
 	hasMore: boolean = $state(false);
@@ -21,16 +21,16 @@ export class Scene {
 		this.isLoading = isLoading;
 	}
 
-	setList(list: ActivityResponseAction[], loadStart: number, hasMore: boolean) {
-		this.list = [...list];
+	setResults(results: ActivityResponseAction[], loadStart: number, hasMore: boolean) {
+		this.results = [...results];
 		this.isLoading = false;
 		this.loadStart = loadStart;
 		this.hasMore = hasMore;
 		this.firstTime = this.updatedTime = Date.now();
 	}
 
-	appendList(list: ActivityResponseAction[], loadStart: number, hasMore: boolean) {
-		this.list = [...this.list, ...list];
+	appendResults(results: ActivityResponseAction[], loadStart: number, hasMore: boolean) {
+		this.results = [...this.results, ...results];
 		this.isLoading = false;
 		this.loadStart = loadStart;
 		this.hasMore = hasMore;
@@ -40,7 +40,7 @@ export class Scene {
 	reset() {
 		this.firstTime = 0;
 		this.updatedTime = 0;
-		this.list = [];
+		this.results = [];
 		this.loadStart = 0;
 		this.isLoading = false;
 		this.hasMore = false;
@@ -57,7 +57,7 @@ export class ActivityLoader {
 	private action?: string;
 
 	public filtering = $state(false);
-	public scene: Scene = $state(new Scene());
+	public page: PaginatorPageV1 = $state(new PaginatorPageV1());
 
 	private constructor(network: string, fetchOverride: typeof fetch) {
 		this.network = network;
@@ -77,9 +77,9 @@ export class ActivityLoader {
 	public setAccount(account: string) {
 		if (this.account !== account) {
 			this.account = account;
-			this.scene.reset();
-		} else if (Date.now() - this.scene.updatedTime > 10_000) {
-			this.scene.reset();
+			this.page.reset();
+		} else if (Date.now() - this.page.updatedTime > 10_000) {
+			this.page.reset();
 		}
 	}
 
@@ -94,7 +94,7 @@ export class ActivityLoader {
 	public load() {
 		if (!this.account) throw new Error('set account first');
 
-		if (this.scene.isLoading) return;
+		if (this.page.isLoading) return;
 
 		this.loadRemote(false);
 	}
@@ -102,7 +102,7 @@ export class ActivityLoader {
 	public loadMore() {
 		if (!this.account) throw new Error('set account first');
 
-		if (this.scene.isLoading || !this.scene.hasMore) return;
+		if (this.page.isLoading || !this.page.hasMore) return;
 
 		this.loadRemote(true);
 	}
@@ -115,8 +115,8 @@ export class ActivityLoader {
 		try {
 			if (!this.account) return;
 			const account = this.account;
-			this.scene.setLoading(true);
-			const startIndex = more ? this.scene!.loadStart : 1;
+			this.page.setLoading(true);
+			const startIndex = more ? this.page!.loadStart : 1;
 			// Use the /activity endpoint (robo) for generic activity feeds
 			let path = localizePath(`/api/account/${account}/activity/${startIndex}`);
 			this.filtering = false;
@@ -196,14 +196,14 @@ export class ActivityLoader {
 					});
 				});
 			if (!more) {
-				this.scene.setList(filtered, nextStart, hasMore);
+				this.page.setResults(filtered, nextStart, hasMore);
 			} else {
-				this.scene.appendList(filtered, nextStart, hasMore);
+				this.page.appendResults(filtered, nextStart, hasMore);
 			}
 		} catch (error: unknown) {
 			console.error('Error fetching activity actions:', error);
 		} finally {
-			this.scene.setLoading(false);
+			this.page.setLoading(false);
 		}
 	}
 }

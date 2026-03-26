@@ -15,15 +15,21 @@ import type { NetworkState } from '$lib/state/network.svelte';
 import * as SystemContract from '$lib/wharf/contracts/system';
 import type { TransactResult } from '@wharfkit/session';
 
+type ProposalStatus = 'proposed' | 'executed' | 'cancelled' | 'expired';
+
 type Proposal = {
 	proposer: string;
 	name: string;
+	status: ProposalStatus;
 	hash: Checksum256;
 	approvals: {
 		provided_approvals: PermissionLevel[];
 		requested_approvals: PermissionLevel[];
 	};
 	transaction: Transaction;
+	executed_at?: string;
+	executed_by?: string;
+	executed_trx_id?: string;
 };
 
 interface Approvals {
@@ -52,6 +58,7 @@ export class ApprovalManager {
 	expiration = $derived.by(() => this.proposal.transaction.expiration.toDate());
 	expired = $derived.by(() => dayjs(this.expiration).isBefore());
 	expiresIn = $derived.by(() => dayjs(this.expiration).fromNow());
+	isActive = $derived.by(() => this.proposal.status === 'proposed' && !this.expired);
 
 	approvals: Approvals = $state({
 		requested: [],

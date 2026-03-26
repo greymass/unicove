@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2026-01-19T21:59:20.026Z\n"
+"PO-Revision-Date: 2026-03-23T03:31:21.080Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -80,7 +80,9 @@ msgstr "API Reference"
 
 #: src/lib/components/footer.svelte
 #: src/lib/components/transact/summary.svelte
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/auction-hero.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
@@ -273,6 +275,7 @@ msgstr "Unstake"
 msgid "Resources"
 msgstr "Resources"
 
+#: src/lib/components/filters/ClearFiltersButton.svelte
 #: src/lib/components/search/input.svelte
 msgid "Clear"
 msgstr "Clear"
@@ -355,6 +358,7 @@ msgstr "Page"
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/resources/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
 msgid "RAM"
 msgstr "RAM"
 
@@ -371,12 +375,14 @@ msgstr "My Account"
 #: src/lib/components/elements/resourceCard.svelte
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/resources/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
 msgid "CPU"
 msgstr "CPU"
 
 #: src/lib/components/elements/resourceCard.svelte
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/resources/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
 msgid "NET"
 msgstr "NET"
 
@@ -425,8 +431,10 @@ msgid "Input Type: {0} Asset Value: {1} Units Value: {2} Symbol: {3}"
 msgstr "Input Type: {0} Asset Value: {1} Units Value: {2} Symbol: {3}"
 
 #: src/lib/components/select/actionvariant.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityControlBar.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.svelte
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Summary"
 msgstr "Summary"
 
@@ -436,6 +444,7 @@ msgstr "Ricardian"
 
 #: src/lib/components/select/actionvariant.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Action Data"
 msgstr "Action Data"
 
@@ -487,11 +496,6 @@ msgstr "New Balance:"
 #: src/lib/components/summary/components/transfer.svelte
 msgid "Transfer"
 msgstr "Transfer"
-
-#. placeholder {0}: memo
-#: src/lib/components/summary/components/transfer.svelte
-msgid "<0/> Memo: {0}"
-msgstr "<0/> Memo: {0}"
 
 #. placeholder {0}: (Number(resources.cpu) / 1000).toFixed(3)
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
@@ -572,6 +576,7 @@ msgstr "Retire"
 msgid "<0/> provided the network resources for this transaction."
 msgstr "<0/> provided the network resources for this transaction."
 
+#: src/lib/components/filters/PaginationControls.svelte
 #: src/lib/components/wallets/metamask/required.svelte
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
@@ -681,6 +686,7 @@ msgid "Prevents the automatic navigation to the account overview page"
 msgstr "Prevents the automatic navigation to the account overview page"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/manager.svelte.ts
+#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Advanced"
 msgstr "Advanced"
@@ -733,6 +739,8 @@ msgstr "Create Account by Sending Tokens"
 msgid "I have an account and want to create another."
 msgstr "I have an account and want to create another."
 
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.ts
@@ -778,6 +786,7 @@ msgstr "RAM Calculator"
 msgid "Bytes"
 msgstr "Bytes"
 
+#: src/lib/components/elements/actiontable.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
@@ -965,15 +974,6 @@ msgstr "Let's get started"
 
 #. placeholder {0}: recommendedWallet.name
 #: src/routes/[[locale]]/[network]/(account)/signup/+page.svelte
-msgid ""
-"There are many options to create your first account but we recommend {0} for\n"
-"most people new to EOS."
-msgstr ""
-"There are many options to create your first account but we recommend {0} for\n"
-"most people new to EOS."
-
-#. placeholder {0}: recommendedWallet.name
-#: src/routes/[[locale]]/[network]/(account)/signup/+page.svelte
 msgid "Continue with {0}"
 msgstr "Continue with {0}"
 
@@ -1076,9 +1076,12 @@ msgid "Reversible Blocks"
 msgstr "Reversible Blocks"
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-search.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/transfers/TransfersView.svelte
 msgid "Enter"
 msgstr "Enter"
 
@@ -1169,6 +1172,7 @@ msgstr "Receive"
 msgid "RAM Bytes"
 msgstr "RAM Bytes"
 
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
 msgid "RAM (Bytes)"
 msgstr "RAM (Bytes)"
@@ -1216,6 +1220,7 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/account/+page.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/wharf/+page.svelte
+#: src/routes/[[locale]]/[network]/(dev)/debug/transact/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/prompt/[payload]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "Login"
@@ -1327,6 +1332,7 @@ msgid "Config"
 msgstr "Config"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/+layout.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
 msgid "Contracts"
 msgstr "Contracts"
 
@@ -1355,6 +1361,8 @@ msgstr "props.account updated {0} seconds ago <0>Refresh</0>"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityControlBar.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV1.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.svelte
@@ -1375,10 +1383,12 @@ msgstr "Overview"
 #. placeholder {0}: data.abi.actions.length
 #. placeholder {0}: data.proposal.transaction.actions.length
 #. placeholder {0}: data.transaction.transaction.actions.length
+#. placeholder {0}: data.transaction.filtered.length
 #. placeholder {0}: data.transaction.transaction.actions.length
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/actions/+page.svelte
 msgid "Actions ({0})"
 msgstr "Actions ({0})"
@@ -1468,6 +1478,7 @@ msgstr ""
 msgid "Request complete, this account has been created."
 msgstr "Request complete, this account has been created."
 
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/prompt/[payload]/+page.svelte
 msgid "View Account"
 msgstr "View Account"
@@ -1646,6 +1657,7 @@ msgstr "Buttons"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/buttons.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/colors.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
 msgid "Primary"
 msgstr "Primary"
 
@@ -1710,6 +1722,9 @@ msgid "Delete"
 msgstr "Delete"
 
 #: src/lib/components/accountswitch.svelte
+#: src/lib/components/elements/proposalname.svelte
+#: src/lib/components/elements/suspiciousmemo.svelte
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/buttons.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/buttons.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/buttons.svelte
@@ -1718,6 +1733,7 @@ msgstr "Delete"
 msgid "Cancel"
 msgstr "Cancel"
 
+#: src/lib/components/elements/proposalname.svelte
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/buttons.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
@@ -2086,6 +2102,7 @@ msgstr ""
 "rules that'll visually yell at you to fix it :)"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/tables.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
 msgid "First"
 msgstr "First"
 
@@ -2414,31 +2431,33 @@ msgstr "Historic"
 msgid "MarketContext"
 msgstr "MarketContext"
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV1.svelte
 msgid "No more"
 msgstr "No more"
 
 #: src/lib/components/elements/action.svelte
 #: src/routes/[[locale]]/[network]/(account)/fund/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV1.svelte
 msgid "Loading"
 msgstr "Loading"
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV1.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/token/[contract]/[symbol]/+page.svelte
 msgid "Load more"
 msgstr "Load more"
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/transfers/TransfersView.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/ram/+page.svelte
 msgid "Contract"
 msgstr "Contract"
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.svelte
+#: src/lib/components/elements/actiontable.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
@@ -2446,19 +2465,12 @@ msgstr "Contract"
 msgid "Action"
 msgstr "Action"
 
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.svelte
-msgid "Filter"
-msgstr "Filter"
-
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/transfers/TransfersView.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
 msgid "Reset"
 msgstr "Reset"
-
-#. placeholder {0}: actionFilter
-#. placeholder {1}: contractFilter
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.svelte
-msgid "Filtering to display {0} on the {1} contract."
-msgstr "Filtering to display {0} on the {1} contract."
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/wharf/+page.svelte
 msgid "Wharf State"
@@ -2718,6 +2730,7 @@ msgid "Complete"
 msgstr "Complete"
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+#: src/routes/[[locale]]/[network]/(dev)/debug/transact/+page.svelte
 msgid "Error"
 msgstr "Error"
 
@@ -2765,6 +2778,7 @@ msgid "Invalid number, too many decimal places."
 msgstr "Invalid number, too many decimal places."
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/stake/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/unstake/+page.svelte
 msgid "Amount exceeds available balance."
@@ -3037,18 +3051,6 @@ msgid "Install MetaMask"
 msgstr "Install MetaMask"
 
 #: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/metamask/+page.svelte
-msgid "Step 2: Install EOS Wallet"
-msgstr "Step 2: Install EOS Wallet"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/metamask/+page.svelte
-msgid "Install the EOS Wallet for MetaMask:"
-msgstr "Install the EOS Wallet for MetaMask:"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/metamask/+page.svelte
-msgid "Install EOS Wallet"
-msgstr "Install EOS Wallet"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/metamask/+page.svelte
 msgid "Step 3: Create an Account"
 msgstr "Step 3: Create an Account"
 
@@ -3060,18 +3062,6 @@ msgstr "Create your {0} account:"
 #: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/metamask/+page.svelte
 msgid "How This Works"
 msgstr "How This Works"
-
-#. placeholder {0}: data.network.chain .name
-#. placeholder {1}: data .network.chain.name
-#. placeholder {2}: data.network.chain.name
-#. placeholder {3}: data.network.chain .name
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/metamask/+page.svelte
-msgid ""
-"This signup method allows you to use your MetaMask wallet to interact with {0}. The EOS Wallet Snap extends MetaMask's functionality, enabling it to sign {1} transactions. Once your account is created, you'll be able to use MetaMask\n"
-"to manage your {2} assets and interact with {3}-based applications."
-msgstr ""
-"This signup method allows you to use your MetaMask wallet to interact with {0}. The EOS Wallet Snap extends MetaMask's functionality, enabling it to sign {1} transactions. Once your account is created, you'll be able to use MetaMask\n"
-"to manage your {2} assets and interact with {3}-based applications."
 
 #: src/routes/[[locale]]/[network]/(account)/signup/wallets/hardware/ledger/+page.svelte
 msgid "Purchase a Ledger Device"
@@ -3319,6 +3309,7 @@ msgid "Contract Name"
 msgstr "Contract Name"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/definition/token/[[payload]]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/config/+page.svelte
 msgid "Token Symbol"
 msgstr "Token Symbol"
 
@@ -3451,53 +3442,16 @@ msgid "Struct"
 msgstr "Struct"
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
-msgid "Table Browser"
-msgstr "Table Browser"
-
-#. placeholder {0}: scope
-#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
-msgid "Scope: {0}"
-msgstr "Scope: {0}"
-
-#. placeholder {0}: lower
-#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
-msgid "Lower: {0}"
-msgstr "Lower: {0}"
-
-#. placeholder {0}: upper
-#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
-msgid "Upper: {0}"
-msgstr "Upper: {0}"
-
-#. placeholder {0}: reverse
-#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
-msgid "Reverse: {0}"
-msgstr "Reverse: {0}"
-
-#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
 msgid "Scope"
 msgstr "Scope"
-
-#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
-msgid "Lower"
-msgstr "Lower"
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
 msgid "Lower bound"
 msgstr "Lower bound"
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
-msgid "Upper"
-msgstr "Upper"
-
-#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
 msgid "Upper bound"
 msgstr "Upper bound"
-
-#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
-msgid "Reverse?"
-msgstr "Reverse?"
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
 msgid "Query"
@@ -3880,6 +3834,7 @@ msgstr ""
 
 #: src/lib/components/elements/unstaking.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balances/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/transfers/TransfersView.svelte
 msgid "Amount"
 msgstr "Amount"
 
@@ -3941,6 +3896,7 @@ msgstr "Transaction Complete"
 
 #: src/lib/components/transact/summary.svelte
 #: src/lib/components/transaction/header.svelte
+#: src/routes/[[locale]]/[network]/(dev)/debug/transact/+page.svelte
 msgid "Transaction ID"
 msgstr "Transaction ID"
 
@@ -3970,7 +3926,9 @@ msgstr "Irreversible"
 msgid "Reversible"
 msgstr "Reversible"
 
+#: src/lib/components/elements/actiontable.svelte
 #: src/lib/components/transaction/header.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/transfers/TransfersView.svelte
 msgid "Date"
 msgstr "Date"
 
@@ -4410,12 +4368,16 @@ msgstr "Native TVL"
 msgid "Account Name"
 msgstr "Account Name"
 
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
 msgid "Owner Public Key"
 msgstr "Owner Public Key"
 
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
@@ -5057,6 +5019,7 @@ msgstr "Multisig Details"
 msgid "Proposer"
 msgstr "Proposer"
 
+#: src/lib/components/elements/proposalname.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Proposal Name"
 msgstr "Proposal Name"
@@ -5107,14 +5070,6 @@ msgstr "Traces ({0})"
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.svelte
 msgid "RAM Usage ({0})"
 msgstr "RAM Usage ({0})"
-
-#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
-msgid "Transaction Summary"
-msgstr "Transaction Summary"
-
-#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
-msgid "The actions and inline actions performed as a result of the transaction."
-msgstr "The actions and inline actions performed as a result of the transaction."
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Parent Permission"
@@ -5236,6 +5191,7 @@ msgstr "RAM Usage"
 msgid "The deltas in RAM usage for each trace in the transaction."
 msgstr "The deltas in RAM usage for each trace in the transaction."
 
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/transaction/+page.svelte
 msgid "Signatures"
 msgstr "Signatures"
@@ -5507,16 +5463,21 @@ msgid "Accounts that allow the {0} account to sign on their behalf"
 msgstr "Accounts that allow the {0} account to sign on their behalf"
 
 #. placeholder {0}: network.chain.name
+#. placeholder {0}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.ts
 msgid "Recent activity on the {0} Network."
 msgstr "Recent activity on the {0} Network."
 
 #. placeholder {0}: params.name
 #. placeholder {1}: network.chain.name
+#. placeholder {0}: params.name
+#. placeholder {1}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.ts
 msgid "Account Activity for {0} | {1} Network"
 msgstr "Account Activity for {0} | {1} Network"
 
+#. placeholder {0}: params.name
+#. placeholder {1}: network.chain.name
 #. placeholder {0}: params.name
 #. placeholder {1}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/+page.ts
@@ -5721,9 +5682,14 @@ msgstr "Overview and statistics for community sentiment on the"
 msgid "Failed to load topics"
 msgstr "Failed to load topics"
 
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/refund/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/config/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/create/+page.svelte
 msgid "Try Again"
 msgstr "Try Again"
 
@@ -5776,6 +5742,7 @@ msgstr "Last updated {0}"
 
 #: src/lib/components/search/input.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/create/+page.svelte
 msgid "Description"
 msgstr "Description"
 
@@ -6252,6 +6219,7 @@ msgstr "No block found."
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActivityEvent.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+layout.ts
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
 msgid "Block"
 msgstr "Block"
 
@@ -6269,6 +6237,7 @@ msgstr "Multisig Proposal"
 
 #: src/lib/state/search/manager.svelte.ts
 #: src/lib/state/search/manager.svelte.ts
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-search.svelte
 msgid "Search"
 msgstr "Search"
 
@@ -6549,3 +6518,1105 @@ msgstr "Proposals Created by {0}"
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
 msgid "View all multisig proposals created by {0}"
 msgstr "View all multisig proposals created by {0}"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+msgid "No actions found matching the filter criteria."
+msgstr "No actions found matching the filter criteria."
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV1.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+msgid "No activity found for this account."
+msgstr "No activity found for this account."
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV1.svelte
+msgid "Date / TX"
+msgstr "Date / TX"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV1.svelte
+msgid "Contract / Action"
+msgstr "Contract / Action"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityControlBar.svelte
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
+msgid "Table"
+msgstr "Table"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/transfers/TransfersView.svelte
+msgid "← Prev"
+msgstr "← Prev"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/transfers/TransfersView.svelte
+msgid "Next →"
+msgstr "Next →"
+
+#: src/lib/components/filters/SortOrderSelect.svelte
+msgid "Newest First"
+msgstr "Newest First"
+
+#: src/lib/components/filters/SortOrderSelect.svelte
+msgid "Oldest First"
+msgstr "Oldest First"
+
+#: src/lib/components/filters/FilterToggleButton.svelte
+msgid "Filters"
+msgstr "Filters"
+
+#: src/lib/components/filters/DateRangeInputs.svelte
+msgid "From Date"
+msgstr "From Date"
+
+#: src/lib/components/filters/DateRangeInputs.svelte
+msgid "To Date"
+msgstr "To Date"
+
+#: src/lib/components/filters/SortOrderSelect.svelte
+msgid "Sort Order"
+msgstr "Sort Order"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityV2.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/transfers/TransfersView.svelte
+msgid "Apply Filters"
+msgstr "Apply Filters"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityControlBar.svelte
+msgid "Summary view"
+msgstr "Summary view"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityControlBar.svelte
+msgid "Table view"
+msgstr "Table view"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityControlBar.svelte
+msgid "Action Data view"
+msgstr "Action Data view"
+
+#: src/lib/components/filters/PaginationControls.svelte
+msgid "Prev"
+msgstr "Prev"
+
+#: src/lib/components/filters/PaginationControls.svelte
+msgid "Next page"
+msgstr "Next page"
+
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
+msgid "Activity Display Format"
+msgstr "Activity Display Format"
+
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
+msgid "The default view format for account activity."
+msgstr "The default view format for account activity."
+
+#: src/lib/components/elements/actiontable.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
+msgid "Show less"
+msgstr "Show less"
+
+#: src/lib/components/elements/actiontable.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
+msgid "Show more"
+msgstr "Show more"
+
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
+msgid "Warn about suspicious memos"
+msgstr "Warn about suspicious memos"
+
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
+msgid "Show warnings when transaction memos contain potential phishing content."
+msgstr "Show warnings when transaction memos contain potential phishing content."
+
+#: src/lib/components/elements/suspiciousmemo.svelte
+msgid "Memo hidden - click to reveal"
+msgstr "Memo hidden - click to reveal"
+
+#: src/lib/components/elements/suspiciousmemo.svelte
+msgid "Scammers often send small transactions with phishing links to steal your funds."
+msgstr "Scammers often send small transactions with phishing links to steal your funds."
+
+#: src/lib/components/elements/suspiciousmemo.svelte
+msgid ""
+"<0>Never</0> enter private keys, seed phrases, or credentials\n"
+"on websites linked from transaction memos."
+msgstr ""
+"<0>Never</0> enter private keys, seed phrases, or credentials\n"
+"on websites linked from transaction memos."
+
+#: src/lib/components/elements/suspiciousmemo.svelte
+msgid "Potential Safety Warning"
+msgstr "Potential Safety Warning"
+
+#: src/lib/components/elements/suspiciousmemo.svelte
+msgid "This memo contains content that may pose a security risk."
+msgstr "This memo contains content that may pose a security risk."
+
+#: src/lib/components/elements/suspiciousmemo.svelte
+msgid "Reveal Memo"
+msgstr "Reveal Memo"
+
+#. placeholder {0}: params.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/transfers/+page.ts
+msgid "Token transfers for {0}"
+msgstr "Token transfers for {0}"
+
+#. placeholder {0}: params.name
+#. placeholder {1}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/transfers/+page.ts
+msgid "Token Transfers for {0} | {1} Network"
+msgstr "Token Transfers for {0} | {1} Network"
+
+#. placeholder {0}: params.name
+#. placeholder {1}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/transfers/+page.ts
+msgid "View the token transfer history of the {0} account on the {1} network."
+msgstr "View the token transfer history of the {0} account on the {1} network."
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/transfers/TransfersView.svelte
+msgid "No transfers found matching the filter criteria."
+msgstr "No transfers found matching the filter criteria."
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/transfers/TransfersView.svelte
+msgid "No transfers found for this account."
+msgstr "No transfers found for this account."
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/transfers/TransfersView.svelte
+msgid "Counterparty"
+msgstr "Counterparty"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/transfers/TransfersView.svelte
+msgid "Memo"
+msgstr "Memo"
+
+#: src/lib/components/elements/transferlist.svelte
+msgid "Loading transfers..."
+msgstr "Loading transfers..."
+
+#: src/lib/components/elements/transferlist.svelte
+msgid "No transfers found"
+msgstr "No transfers found"
+
+#: src/lib/components/elements/transferlist.svelte
+msgid "View all transfers <0/>"
+msgstr "View all transfers <0/>"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/transfers/+page.svelte
+msgid "Token transfers view requires Robo2 history support, which is not available on this network."
+msgstr "Token transfers view requires Robo2 history support, which is not available on this network."
+
+#. placeholder {0}: network.chain.name
+#: src/routes/[[locale]]/[network]/(account)/bidname/+layout.ts
+msgid "Bid on premium names on the {0} network."
+msgstr "Bid on premium names on the {0} network."
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/+page.svelte
+msgid "Top Active Bids"
+msgstr "Top Active Bids"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/+page.svelte
+msgid "Search Names"
+msgstr "Search Names"
+
+#. placeholder {0}: data.network.chain.name
+#: src/routes/[[locale]]/[network]/(account)/bidname/+page.svelte
+msgid "Premium name bidding is not available on {0}."
+msgstr "Premium name bidding is not available on {0}."
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/auction-hero.svelte
+msgid "No active auctions"
+msgstr "No active auctions"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/auction-hero.svelte
+msgid "Next Auction to Close"
+msgstr "Next Auction to Close"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/auction-hero.svelte
+msgid "Eligible to close"
+msgstr "Eligible to close"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/auction-hero.svelte
+msgid "Closes in"
+msgstr "Closes in"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.ts
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/auction-hero.svelte
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-search.svelte
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
+msgid "Place Bid"
+msgstr "Place Bid"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-list.svelte
+msgid "Loading bids..."
+msgstr "Loading bids..."
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-list.svelte
+msgid "No active bids found."
+msgstr "No active bids found."
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-list.svelte
+msgid "Bid"
+msgstr "Bid"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-search.svelte
+msgid "Premium names cannot contain dots"
+msgstr "Premium names cannot contain dots"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-search.svelte
+msgid "Premium names must be 11 characters or fewer"
+msgstr "Premium names must be 11 characters or fewer"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-search.svelte
+msgid "Only lowercase a-z and digits 1-5 are allowed"
+msgstr "Only lowercase a-z and digits 1-5 are allowed"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-search.svelte
+msgid "Search premium names..."
+msgstr "Search premium names..."
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-search.svelte
+msgid "Searching..."
+msgstr "Searching..."
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-search.svelte
+msgid "This name is already taken"
+msgstr "This name is already taken"
+
+#. placeholder {0}: query.trim().toLowerCase()
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-search.svelte
+msgid "The account \"{0}\" already exists on the network."
+msgstr "The account \"{0}\" already exists on the network."
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-search.svelte
+msgid "Current bid:"
+msgstr "Current bid:"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-search.svelte
+msgid "High bidder:"
+msgstr "High bidder:"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-search.svelte
+msgid "No bids yet - be the first!"
+msgstr "No bids yet - be the first!"
+
+#. placeholder {0}: searchedName
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-search.svelte
+msgid "No one has placed a bid on \"{0}\" yet."
+msgstr "No one has placed a bid on \"{0}\" yet."
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-search.svelte
+msgid "Start Bidding"
+msgstr "Start Bidding"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/refund/+page.ts
+msgid "Claim Refund"
+msgstr "Claim Refund"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
+msgid "Claim Name"
+msgstr "Claim Name"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.ts
+msgid "Bid on a premium name"
+msgstr "Bid on a premium name"
+
+#. placeholder {0}: String(network.chain.name)
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.ts
+msgid "Place Bid - {0} Premium Names"
+msgstr "Place Bid - {0} Premium Names"
+
+#. placeholder {0}: String(network.chain.name)
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.ts
+msgid "Place a bid on a premium account name on the {0} network."
+msgstr "Place a bid on a premium account name on the {0} network."
+
+#: src/lib/components/elements/proposalname.svelte
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/refund/+page.svelte
+msgid "Name"
+msgstr "Name"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/refund/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/refund/+page.svelte
+msgid "Back to Premium Names"
+msgstr "Back to Premium Names"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "No name specified. Go back to browse available names."
+msgstr "No name specified. Go back to browse available names."
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "Browse Names"
+msgstr "Browse Names"
+
+#. placeholder {0}: String(manager.minimumBid)
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "Bid must be at least {0}."
+msgstr "Bid must be at least {0}."
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/+layout.ts
+#: src/routes/[[locale]]/[network]/(account)/bidname/+layout.ts
+msgid "Premium Name Bidding"
+msgstr "Premium Name Bidding"
+
+#. placeholder {0}: network.chain.name
+#: src/routes/[[locale]]/[network]/(account)/bidname/+layout.ts
+msgid "Browse and bid on premium account names on the {0} network."
+msgstr "Browse and bid on premium account names on the {0} network."
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
+msgid "High bid:"
+msgstr "High bid:"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
+msgid "Bidder:"
+msgstr "Bidder:"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
+msgid "Stop tracking"
+msgstr "Stop tracking"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-search.svelte
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-search.svelte
+msgid "Track"
+msgstr "Track"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
+msgid "Monitored Names"
+msgstr "Monitored Names"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-search.svelte
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-search.svelte
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
+msgid "Untrack"
+msgstr "Untrack"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
+msgid "Loading tracked names..."
+msgstr "Loading tracked names..."
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/auction-hero.svelte
+msgid "High bidder: <0/>"
+msgstr "High bidder: <0/>"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
+msgid "Search for a name above and click Track to monitor its bid status."
+msgstr "Search for a name above and click Track to monitor its bid status."
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+msgid "Executed By"
+msgstr "Executed By"
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+msgid "Executed At"
+msgstr "Executed At"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
+msgid "No one has bid on this name yet."
+msgstr "No one has bid on this name yet."
+
+#. placeholder {0}: ' '
+#. placeholder {1}: String( tracked.refund.amount )
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
+msgid "{0}You have {1} available to reclaim."
+msgstr "{0}You have {1} available to reclaim."
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
+msgid "You have been outbid on this name.<0/>"
+msgstr "You have been outbid on this name.<0/>"
+
+#. placeholder {0}: String(tracked.refund.amount)
+#. placeholder {0}: String(manager.refundAmount)
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/refund/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
+msgid "Claim Refund ({0})"
+msgstr "Claim Refund ({0})"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-search.svelte
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-search.svelte
+msgid "Limit Reached"
+msgstr "Limit Reached"
+
+#. placeholder {0}: tracked.name
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
+msgid "Stop tracking {0}"
+msgstr "Stop tracking {0}"
+
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
+msgid "<0/> Irreversible"
+msgstr "<0/> Irreversible"
+
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
+msgid "<0/> Pending"
+msgstr "<0/> Pending"
+
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
+msgid "µs"
+msgstr "µs"
+
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
+msgid "bytes"
+msgstr "bytes"
+
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
+msgid "Signers"
+msgstr "Signers"
+
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
+msgid "Raw Data"
+msgstr "Raw Data"
+
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
+msgid "Traces"
+msgstr "Traces"
+
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
+msgid "View raw data <0/>"
+msgstr "View raw data <0/>"
+
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
+msgid "All transaction details <0/>"
+msgstr "All transaction details <0/>"
+
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
+msgid "Inspect data <0/>"
+msgstr "Inspect data <0/>"
+
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
+msgid "bytes used"
+msgstr "bytes used"
+
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
+msgid "bytes freed"
+msgstr "bytes freed"
+
+#: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
+msgid "no net change"
+msgstr "no net change"
+
+#: src/routes/[[locale]]/[network]/(dev)/debug/transact/+page.svelte
+msgid "Debug Transact"
+msgstr "Debug Transact"
+
+#. placeholder {0}: context.network.chain.systemToken?.symbol.name
+#: src/routes/[[locale]]/[network]/(dev)/debug/transact/+page.svelte
+msgid "Send {0} 0.0001 to the <0>gm</0> account."
+msgstr "Send {0} 0.0001 to the <0>gm</0> account."
+
+#. placeholder {0}: context.wharf.session.actor
+#: src/routes/[[locale]]/[network]/(dev)/debug/transact/+page.svelte
+msgid "Logged in as: {0}"
+msgstr "Logged in as: {0}"
+
+#: src/routes/[[locale]]/[network]/(dev)/debug/transact/+page.svelte
+msgid "Transacting..."
+msgstr "Transacting..."
+
+#: src/routes/[[locale]]/[network]/(dev)/debug/transact/+page.svelte
+msgid "Send Transfer"
+msgstr "Send Transfer"
+
+#: src/routes/[[locale]]/[network]/(dev)/debug/transact/+page.svelte
+msgid "No session active."
+msgstr "No session active."
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.svelte
+msgid "Please log in to claim a name."
+msgstr "Please log in to claim a name."
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.svelte
+msgid "Loading bid information..."
+msgstr "Loading bid information..."
+
+#. placeholder {0}: manager.bidName
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.svelte
+msgid "No bid found for \"{0}\"."
+msgstr "No bid found for \"{0}\"."
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.svelte
+msgid "This auction has not been won yet. The auction is still active."
+msgstr "This auction has not been won yet. The auction is still active."
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.svelte
+msgid ""
+"This name was won by <0/>. Only the winning\n"
+"bidder can claim this name."
+msgstr ""
+"This name was won by <0/>. Only the winning\n"
+"bidder can claim this name."
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.svelte
+msgid "Use custom public keys instead"
+msgstr "Use custom public keys instead"
+
+#. placeholder {0}: manager.ramBytesMin
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.svelte
+msgid "RAM bytes (min: {0})"
+msgstr "RAM bytes (min: {0})"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.svelte
+msgid "You won this name. Claiming it will create a new account on the network."
+msgstr "You won this name. Claiming it will create a new account on the network."
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.svelte
+msgid "Enter the public keys that will control the new account."
+msgstr "Enter the public keys that will control the new account."
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.svelte
+msgid "Use keys from my current account"
+msgstr "Use keys from my current account"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.svelte
+msgid "Account creation cost: <0/> <1>({0} bytes RAM)</1>"
+msgstr "Account creation cost: <0/> <1>({0} bytes RAM)</1>"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.svelte
+msgid "Change"
+msgstr "Change"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.ts
+msgid "Create an account from a won premium name"
+msgstr "Create an account from a won premium name"
+
+#. placeholder {0}: String(network.chain.name)
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.ts
+msgid "Create Account - {0} Premium Names"
+msgstr "Create Account - {0} Premium Names"
+
+#. placeholder {0}: String(network.chain.name)
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.ts
+msgid "Create an account from a won premium name on the {0} network."
+msgstr "Create an account from a won premium name on the {0} network."
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.svelte
+msgid "Wallet Setup Required"
+msgstr "Wallet Setup Required"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.svelte
+msgid "Wallet Setup May Be Required"
+msgstr "Wallet Setup May Be Required"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "Loading auction data..."
+msgstr "Loading auction data..."
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "Current high bid: <0/> by <1/>"
+msgstr "Current high bid: <0/> by <1/>"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "No bids yet — you would be the first bidder."
+msgstr "No bids yet — you would be the first bidder."
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "Minimum bid: <0/>"
+msgstr "Minimum bid: <0/>"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "Balance: <0/>"
+msgstr "Balance: <0/>"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "Your bid"
+msgstr "Your bid"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "This would become the top bid"
+msgstr "This would become the top bid"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "You'd lead this name, but not the global auction"
+msgstr "You'd lead this name, but not the global auction"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "This name has been claimed"
+msgstr "This name has been claimed"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "You are the current high bidder"
+msgstr "You are the current high bidder"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "You were outbid"
+msgstr "You were outbid"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "Your previous bid of <0/> is available to reclaim. <1>Claim refund</1>"
+msgstr "Your previous bid of <0/> is available to reclaim. <1>Claim refund</1>"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "eligible now"
+msgstr "eligible now"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "countdown: <0/>"
+msgstr "countdown: <0/>"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "This name is next to close — <0/>"
+msgstr "This name is next to close — <0/>"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "Auction Queue"
+msgstr "Auction Queue"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "Hide"
+msgstr "Hide"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "Learn more about auctions"
+msgstr "Learn more about auctions"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "One at a time"
+msgstr "One at a time"
+
+#. placeholder {0}: ' '
+#. placeholder {1}: String(manager.leadingBidAsset)
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid ""
+"{0}Currently\n"
+"that's <0/> at {1}."
+msgstr ""
+"{0}Currently\n"
+"that's <0/> at {1}."
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "Only the name with the highest bid can close.<0/>"
+msgstr "Only the name with the highest bid can close.<0/>"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "24-hour countdown"
+msgstr "24-hour countdown"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "Timer: <0>Eligible now</0>."
+msgstr "Timer: <0>Eligible now</0>."
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "Timer: <0/>"
+msgstr "Timer: <0/>"
+
+#. placeholder {0}: ' '
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "The leading auction must go 24 hours without any new highest bid on any name.{0} <0/>"
+msgstr "The leading auction must go 24 hours without any new highest bid on any name.{0} <0/>"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "10% minimum increase"
+msgstr "10% minimum increase"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "Each bid must beat the current by at least 10%.<0/>"
+msgstr "Each bid must beat the current by at least 10%.<0/>"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "Refunds"
+msgstr "Refunds"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "Outbid tokens are reclaimable on the refund page.<0/>"
+msgstr "Outbid tokens are reclaimable on the refund page.<0/>"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "No guaranteed timeline"
+msgstr "No guaranteed timeline"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
+msgid "Scanning auction table…"
+msgstr "Scanning auction table…"
+
+#. placeholder {0}: foundNames.length
+#. placeholder {1}: foundNames.length === 1 ? '' : 's'
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
+msgid ", {0} name{1} found"
+msgstr ", {0} name{1} found"
+
+#. placeholder {0}: scannedRows.toLocaleString()
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
+msgid "{0} records checked<0/>"
+msgstr "{0} records checked<0/>"
+
+#. placeholder {0}: scannedRows.toLocaleString()
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
+msgid "Scan complete — checked {0} records<0/>."
+msgstr "Scan complete — checked {0} records<0/>."
+
+#. placeholder {0}: scanError
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
+msgid "Scan failed: {0}"
+msgstr "Scan failed: {0}"
+
+#. placeholder {0}: foundNames.length
+#. placeholder {1}: foundNames.length === 1 ? '' : 's'
+#. placeholder {2}: scannedRows.toLocaleString()
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
+msgid "Partial results: {0} name{1} added from {2} records checked."
+msgstr "Partial results: {0} name{1} added from {2} records checked."
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
+msgid "Find my bids"
+msgstr "Find my bids"
+
+#: src/routes/[[locale]]/[network]/(dev)/debug/+page.svelte
+msgid "Transact"
+msgstr "Transact"
+
+#. placeholder {0}: recommendedWallet.name
+#. placeholder {1}: data.network.chain.name
+#: src/routes/[[locale]]/[network]/(account)/signup/+page.svelte
+msgid ""
+"There are many options to create your first account but we recommend {0} for\n"
+"most people new to {1}."
+msgstr ""
+"There are many options to create your first account but we recommend {0} for\n"
+"most people new to {1}."
+
+#. placeholder {0}: foundNames.length
+#. placeholder {1}: foundNames.length === 1 ? '' : 's'
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
+msgid ""
+",\n"
+"added {0} name{1}"
+msgstr ""
+",\n"
+"added {0} name{1}"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
+msgid ""
+", no new names\n"
+"found"
+msgstr ""
+", no new names\n"
+"found"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid ""
+"Premium names are sold through a global auction. The name with the highest bid closes first,\n"
+"once 24 hours pass without a higher bid on any name."
+msgstr ""
+"Premium names are sold through a global auction. The name with the highest bid closes first,\n"
+"once 24 hours pass without a higher bid on any name."
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid ""
+"Placing a new bid will replace your existing one — bids are not additive. Your previous\n"
+"bid amount becomes refundable."
+msgstr ""
+"Placing a new bid will replace your existing one — bids are not additive. Your previous\n"
+"bid amount becomes refundable."
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid ""
+"Your bid will surpass all current auctions and start a new 24-hour countdown. If no\n"
+"higher bid is placed on any name within 24 hours, you can claim <0/>."
+msgstr ""
+"Your bid will surpass all current auctions and start a new 24-hour countdown. If no\n"
+"higher bid is placed on any name within 24 hours, you can claim <0/>."
+
+#. placeholder {0}: String(manager.leadingBidAsset)
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid ""
+"You'll become the highest bidder on <0/>, but <1/> at {0} is currently first in line to close. Your name can only\n"
+"close after that auction ends."
+msgstr ""
+"You'll become the highest bidder on <0/>, but <1/> at {0} is currently first in line to close. Your name can only\n"
+"close after that auction ends."
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid ""
+"Each name ahead must close in turn before this one can. Any new highest bid on any\n"
+"name resets the 24-hour timer for everyone."
+msgstr ""
+"Each name ahead must close in turn before this one can. Any new highest bid on any\n"
+"name resets the 24-hour timer for everyone."
+
+#. placeholder {0}: ' '
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "{0}For <0/>, that's at least <1/>."
+msgstr "{0}For <0/>, that's at least <1/>."
+
+#. placeholder {0}: ' '
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "{0}You have <0/> to reclaim."
+msgstr "{0}You have <0/> to reclaim."
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid ""
+"Names ahead in the queue must close first. New bids on any name can extend the\n"
+"process. The queue shows current order but can change at any time."
+msgstr ""
+"Names ahead in the queue must close first. New bids on any name can extend the\n"
+"process. The queue shows current order but can change at any time."
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/refund/+page.svelte
+msgid "Please log in to claim a refund."
+msgstr "Please log in to claim a refund."
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/refund/+page.svelte
+msgid "Loading refund information..."
+msgstr "Loading refund information..."
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/refund/+page.svelte
+msgid "Refund Available"
+msgstr "Refund Available"
+
+#. placeholder {0}: String(manager.refundAmount)
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/refund/+page.svelte
+msgid "You were outbid on this name. Claim this refund to return {0} to your account. You can then use these tokens to place a new bid if you wish."
+msgstr "You were outbid on this name. Claim this refund to return {0} to your account. You can then use these tokens to place a new bid if you wish."
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/refund/+page.svelte
+msgid "No refund available for this name."
+msgstr "No refund available for this name."
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.svelte
+msgid ""
+"The new account will use the same keys as your current account <0/>, so\n"
+"your existing wallet will control it."
+msgstr ""
+"The new account will use the same keys as your current account <0/>, so\n"
+"your existing wallet will control it."
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.svelte
+msgid ""
+"Some wallets will automatically detect the new account since it shares keys with <0/>. Others may require you to manually import <1/> using your wallet's account\n"
+"import feature. This varies by wallet."
+msgstr ""
+"Some wallets will automatically detect the new account since it shares keys with <0/>. Others may require you to manually import <1/> using your wallet's account\n"
+"import feature. This varies by wallet."
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.svelte
+msgid ""
+"Since you are using custom keys, you will need to import <0/> into your wallet using\n"
+"the corresponding private keys. Make sure you have access to the private keys for the public\n"
+"keys entered above."
+msgstr ""
+"Since you are using custom keys, you will need to import <0/> into your wallet using\n"
+"the corresponding private keys. Make sure you have access to the private keys for the public\n"
+"keys entered above."
+
+#: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/metamask/+page.svelte
+msgid "Step 2: Install Vaulta Wallet"
+msgstr "Step 2: Install Vaulta Wallet"
+
+#: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/metamask/+page.svelte
+msgid "Install the Vaulta Wallet for MetaMask:"
+msgstr "Install the Vaulta Wallet for MetaMask:"
+
+#: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/metamask/+page.svelte
+msgid "Install Vaulta Wallet"
+msgstr "Install Vaulta Wallet"
+
+#. placeholder {0}: data.network.chain .name
+#. placeholder {1}: data .network.chain.name
+#. placeholder {2}: data.network.chain.name
+#. placeholder {3}: data.network.chain .name
+#: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/metamask/+page.svelte
+msgid ""
+"This signup method allows you to use your MetaMask wallet to interact with {0}. The Vaulta Wallet Snap extends MetaMask's functionality, enabling it to sign {1} transactions. Once your account is created, you'll be able to use MetaMask\n"
+"to manage your {2} assets and interact with {3}-based applications."
+msgstr ""
+"This signup method allows you to use your MetaMask wallet to interact with {0}. The Vaulta Wallet Snap extends MetaMask's functionality, enabling it to sign {1} transactions. Once your account is created, you'll be able to use MetaMask\n"
+"to manage your {2} assets and interact with {3}-based applications."
+
+#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
+msgid "ASC"
+msgstr "ASC"
+
+#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
+msgid "DESC"
+msgstr "DESC"
+
+#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
+msgid "From"
+msgstr "From"
+
+#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
+msgid "To"
+msgstr "To"
+
+#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
+msgid "Columns"
+msgstr "Columns"
+
+#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
+msgid "Reset all controls"
+msgstr "Reset all controls"
+
+#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
+msgid "Index Position"
+msgstr "Index Position"
+
+#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
+msgid "Key Type"
+msgstr "Key Type"
+
+#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
+msgid "Select all"
+msgstr "Select all"
+
+#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
+msgid "Deselect all"
+msgstr "Deselect all"
+
+#: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
+msgid "No data found for the current query parameters."
+msgstr "No data found for the current query parameters."
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/refund/+page.ts
+msgid "Reclaim tokens from an outbid name auction"
+msgstr "Reclaim tokens from an outbid name auction"
+
+#. placeholder {0}: String(network.chain.name)
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/refund/+page.ts
+msgid "Claim Refund - {0} Premium Names"
+msgstr "Claim Refund - {0} Premium Names"
+
+#. placeholder {0}: String(network.chain.name)
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/refund/+page.ts
+msgid "Claim a refund for outbid premium name auctions on the {0} network."
+msgstr "Claim a refund for outbid premium name auctions on the {0} network."
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.svelte
+msgid "This name has already been claimed. The account exists on the network."
+msgstr "This name has already been claimed. The account exists on the network."
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "was won by <0/> and is"
+msgstr "was won by <0/> and is"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "is"
+msgstr "is"
+
+#: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
+msgid "<0/> <1/> no longer available for bidding."
+msgstr "<0/> <1/> no longer available for bidding."
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/config/+page.svelte
+msgid "Back to Config"
+msgstr "Back to Config"
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/config/+page.svelte
+msgid "System Contract"
+msgstr "System Contract"
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/config/+page.svelte
+msgid "Token Contract"
+msgstr "Token Contract"
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/config/+page.svelte
+msgid "Token Action"
+msgstr "Token Action"
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/config/+page.svelte
+msgid "Fee Receiver"
+msgstr "Fee Receiver"
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/config/+page.svelte
+msgid "Create Topic Fee"
+msgstr "Create Topic Fee"
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/config/+page.svelte
+msgid "Please log in to update config"
+msgstr "Please log in to update config"
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/config/+page.svelte
+msgid "Set Config"
+msgstr "Set Config"
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/create/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/create/+page.ts
+msgid "Create Topic"
+msgstr "Create Topic"
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/create/+page.svelte
+msgid "View Topic"
+msgstr "View Topic"
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/create/+page.svelte
+msgid "Back to Topics"
+msgstr "Back to Topics"
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/create/+page.svelte
+msgid "Topic Creation Fee"
+msgstr "Topic Creation Fee"
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/create/+page.svelte
+msgid "Creating a topic costs <0/>"
+msgstr "Creating a topic costs <0/>"
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/create/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/create/+page.svelte
+msgid "Topic ID"
+msgstr "Topic ID"
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/create/+page.svelte
+msgid "Describe what this topic is about..."
+msgstr "Describe what this topic is about..."
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/create/+page.svelte
+msgid "Please log in to create a topic"
+msgstr "Please log in to create a topic"
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/config/+page.ts
+msgid "Sentiment Config"
+msgstr "Sentiment Config"
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/config/+page.ts
+msgid "Manage sentiment contract configuration"
+msgstr "Manage sentiment contract configuration"
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/create/+page.ts
+msgid "Create a new sentiment topic"
+msgstr "Create a new sentiment topic"
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/create/+page.svelte
+msgid "Before You Create"
+msgstr "Before You Create"
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/create/+page.svelte
+msgid ""
+"Topics cannot be edited or deleted by the creator once submitted, including the topic\n"
+"ID. Proofread carefully before submitting. To retain the ability to update details\n"
+"later, include a link to an external resource in the description."
+msgstr ""
+"Topics cannot be edited or deleted by the creator once submitted, including the topic\n"
+"ID. Proofread carefully before submitting. To retain the ability to update details\n"
+"later, include a link to an external resource in the description."
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/create/+page.svelte
+msgid ""
+"Your topic is permanently stored on the blockchain and can be accessed through any\n"
+"compatible interface. Unicove may choose not to display topics that violate its content\n"
+"policies, but the on-chain record is unaffected."
+msgstr ""
+"Your topic is permanently stored on the blockchain and can be accessed through any\n"
+"compatible interface. Unicove may choose not to display topics that violate its content\n"
+"policies, but the on-chain record is unaffected."
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/create/+page.svelte
+msgid ""
+"The creation fee is non-refundable. Fees are sent to the <0/> account, which distributes them through standard network fee channels (RAM, powerup, name\n"
+"bids)."
+msgstr ""
+"The creation fee is non-refundable. Fees are sent to the <0/> account, which distributes them through standard network fee channels (RAM, powerup, name\n"
+"bids)."
+
+#: src/lib/state/client/wharf.svelte.ts
+msgid "Proposal name entry cancelled."
+msgstr "Proposal name entry cancelled."
+
+#: src/lib/components/elements/proposalname.svelte
+msgid "Enter a name for this proposal or use the generated default."
+msgstr "Enter a name for this proposal or use the generated default."
+
+#: src/lib/components/elements/proposalname.svelte
+msgid "Proposal name"
+msgstr "Proposal name"
