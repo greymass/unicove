@@ -133,19 +133,22 @@
 				if (context.account) {
 					const currentToken = sendState.balance.token;
 					const isDefault = sendState.balance.equals(defaultBalance);
-					const isPreferred =
-						(!isDefault && tokenEquals(currentToken.id, token.id)) ||
-						(data.network.legacy && tokenEquals(currentToken.id, data.network.legacy!.id));
-					if (isDefault || !isPreferred) {
+					if (isDefault) {
 						const balance =
 							balances.find((b) => tokenEquals(b.token.id, token.id)) ||
 							(data.network.legacy &&
-								balances.find((b) => tokenEquals(b.token.id, data.network.legacy!.id))) ||
-							balances[0];
-						if (balance && (isDefault || !tokenEquals(balance.token.id, currentToken.id))) {
+								balances.find((b) => tokenEquals(b.token.id, data.network.legacy!.id)));
+						if (balance) {
 							tokenSelect?.set(balance);
 							sendState.setBalance(balance);
 							quantityInput?.set(sendState.quantity);
+						}
+					} else {
+						const updatedBalance = balances.find((b) =>
+							tokenEquals(b.token.id, currentToken.id)
+						);
+						if (updatedBalance) {
+							sendState.balance = updatedBalance;
 						}
 					}
 				}
