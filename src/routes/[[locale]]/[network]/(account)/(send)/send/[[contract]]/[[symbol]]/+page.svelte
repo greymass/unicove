@@ -144,9 +144,7 @@
 							quantityInput?.set(sendState.quantity);
 						}
 					} else {
-						const updatedBalance = balances.find((b) =>
-							tokenEquals(b.token.id, currentToken.id)
-						);
+						const updatedBalance = balances.find((b) => tokenEquals(b.token.id, currentToken.id));
 						if (updatedBalance) {
 							sendState.balance = updatedBalance;
 						}
