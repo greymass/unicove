@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2026-03-26T23:09:14.506Z\n"
+"PO-Revision-Date: 2026-03-31T03:36:55.564Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -289,8 +289,8 @@ msgstr "Total"
 msgid "KB (RAM)"
 msgstr "KB (RAM)"
 
-#. placeholder {0}: balance.token.name
 #. placeholder {0}: balance.token.symbol.name
+#. placeholder {0}: balance.token.name
 #: src/lib/components/card/tokenbalance.svelte
 #: src/lib/components/card/tokenoverview.svelte
 msgid "{0} (RAM)"
@@ -502,12 +502,12 @@ msgstr "Transfer"
 msgid "+ {0} ms (CPU)"
 msgstr "+ {0} ms (CPU)"
 
-#. placeholder {0}: data.powup_net
 #. placeholder {0}: data.powup_cpu
-#. placeholder {0}: key.weight
+#. placeholder {0}: data.powup_net
 #. placeholder {0}: account.weight
 #. placeholder {0}: key.weight
 #. placeholder {0}: account.weight
+#. placeholder {0}: key.weight
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio/newaccount.svelte
@@ -797,8 +797,8 @@ msgstr "Details"
 msgid "Network Fees"
 msgstr "Network Fees"
 
-#. placeholder {0}: market.network.currency.symbol.code
 #. placeholder {0}: data.network.chain.systemToken?.symbol.code || ''
+#. placeholder {0}: market.network.currency.symbol.code
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 msgid "Market Cap ({0})"
@@ -2015,10 +2015,10 @@ msgstr "Pill Select"
 msgid "Select a date range"
 msgstr "Select a date range"
 
-#. placeholder {0}: JSON.stringify(tokenSelected, null, 2)
-#. placeholder {0}: imageOptionSelected.label
-#. placeholder {0}: selectedFormOption.label
 #. placeholder {0}: selected.label
+#. placeholder {0}: selectedFormOption.label
+#. placeholder {0}: imageOptionSelected.label
+#. placeholder {0}: JSON.stringify(tokenSelected, null, 2)
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
@@ -4224,7 +4224,7 @@ msgstr "<0>Unicove -</0> The {0} web wallet and block explorer"
 
 #. placeholder {0}: network.chain.name
 #. placeholder {0}: networkName
-#. placeholder {0}: networkName
+#. placeholder {0}: network.chain.name
 #: src/routes/+layout.server.ts
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
@@ -4258,8 +4258,8 @@ msgstr "{0} Token Swap has begun!"
 msgid "Swap {0} to {1} at a 1:1 ratio"
 msgstr "Swap {0} to {1} at a 1:1 ratio"
 
-#. placeholder {0}: String(data.quote.symbol.name)
 #. placeholder {0}: props.network.token.name
+#. placeholder {0}: String(data.quote.symbol.name)
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/legacy-token-swap.svelte
 msgid "Swap to {0}"
@@ -4278,7 +4278,7 @@ msgstr "Get Tokens"
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
-#. placeholder {0}: String(network.token.symbol.name)
+#. placeholder {0}: symbol.name
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
@@ -4301,10 +4301,10 @@ msgstr "One {0} of RAM represents ownership rights over 1000 bytes of the networ
 #. placeholder {1}: quote.name
 #. placeholder {0}: base.name
 #. placeholder {1}: quote.name
-#. placeholder {0}: data.network.token.name
-#. placeholder {1}: data.network.getRamToken().name
-#. placeholder {0}: String(network.chain.systemToken?.symbol.name)
-#. placeholder {1}: String(ramtoken.name)
+#. placeholder {0}: base.name
+#. placeholder {1}: quote.name
+#. placeholder {0}: base.name
+#. placeholder {1}: quote.name
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.svelte
@@ -6928,8 +6928,8 @@ msgstr "{0}You have {1} available to reclaim."
 msgid "You have been outbid on this name.<0/>"
 msgstr "You have been outbid on this name.<0/>"
 
-#. placeholder {0}: String(manager.refundAmount)
 #. placeholder {0}: String(tracked.refund.amount)
+#. placeholder {0}: String(manager.refundAmount)
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/refund/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
 msgid "Claim Refund ({0})"
@@ -7620,3 +7620,25 @@ msgstr "Enter a name for this proposal or use the generated default."
 #: src/lib/components/elements/proposalname.svelte
 msgid "Proposal name"
 msgstr "Proposal name"
+
+#: src/lib/components/summary/eosio.wrap/exec.svelte
+msgid "WRAP"
+msgstr "WRAP"
+
+#: src/lib/components/summary/eosio.wrap/exec.svelte
+msgid "Executor:"
+msgstr "Executor:"
+
+#. placeholder {0}: innerActions.length
+#. placeholder {1}: innerActions.length !== 1 ? 's' : ''
+#: src/lib/components/summary/eosio.wrap/exec.svelte
+msgid "{0} inner action{1}"
+msgstr "{0} inner action{1}"
+
+#: src/lib/components/summary/eosio.wrap/exec.svelte
+msgid "Decoding wrapped actions..."
+msgstr "Decoding wrapped actions..."
+
+#: src/lib/components/summary/eosio.wrap/exec.svelte
+msgid "No actions in wrapped transaction"
+msgstr "No actions in wrapped transaction"

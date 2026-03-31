@@ -11,6 +11,7 @@ import token from '$lib/components/summary/eosio.token';
 import greymassnoop from '$lib/components/summary/greymassnoop';
 import delphioracle from '$lib/components/summary/delphioracle';
 import msigmessager from '$lib/components/summary/msigmessager';
+import wrap from '$lib/components/summary/eosio.wrap';
 import wram from '$lib/components/summary/eosio.wram';
 
 export const summaries: Record<string, ContractSummaries> = {
@@ -20,9 +21,10 @@ export const summaries: Record<string, ContractSummaries> = {
 	'eosio.reserv': reserv,
 	'eosio.rex': rex,
 	'eosio.token': token,
+	'eosio.wrap': wrap,
+	'eosio.wram': wram,
 	greymassnoop: greymassnoop,
-	msigmessager: msigmessager,
-	'eosio.wram': wram
+	msigmessager: msigmessager
 };
 
 export function isStandardTokenTransfer(data: ObjectifiedActionData) {
