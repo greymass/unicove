@@ -64,7 +64,7 @@
 	}
 </script>
 
-<div class="border-l-3 border-primary pl-4">
+<div class="border-primary border-l-3 pl-4">
 	<div class="text-muted mb-3 flex items-center gap-2 text-sm">
 		<span class="bg-primary text-on-primary rounded px-2 py-0.5 text-xs font-semibold">WRAP</span>
 		<span>Executor:</span>

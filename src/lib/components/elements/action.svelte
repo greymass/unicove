@@ -109,7 +109,11 @@
 {/snippet}
 
 {#snippet Pretty(data: ObjectifiedActionData | undefined)}
-	<Code collapsible class="bg-surface-container-high mt-1 [&.overflow-y-hidden]:max-h-80" indent={4}>
+	<Code
+		collapsible
+		class="bg-surface-container-high mt-1 [&.overflow-y-hidden]:max-h-80"
+		indent={4}
+	>
 		{#if data}
 			<dl>
 				{#each Object.keys(data) as key}
