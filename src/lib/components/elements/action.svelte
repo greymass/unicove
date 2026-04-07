@@ -111,7 +111,7 @@
 {#snippet Pretty(data: ObjectifiedActionData | undefined)}
 	<Code
 		collapsible
-		class="bg-surface-container-high mt-1 [&.overflow-y-hidden]:max-h-80"
+		class="bg-surface-container-high mt-1 [&.overflow-y-hidden]:max-h-80 [&_pre]:whitespace-pre-wrap [&_pre]:break-words"
 		indent={4}
 	>
 		{#if data}
