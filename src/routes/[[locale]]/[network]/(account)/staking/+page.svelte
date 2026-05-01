@@ -123,9 +123,7 @@
 											<span class="font-mono">&lt;</span>
 										{/if}
 										<AssetText variant="full" value={staked} />
-										{#if context.settings.data.advancedMode}
-											<AssetText variant="full" value={stakedRex} />
-										{/if}
+										<AssetText variant="full" value={stakedRex} />
 									</TD>
 									{@render tableAction(['Unstake', `/${data.network}/staking/unstake`])}
 								</TR>
@@ -135,9 +133,7 @@
 									<TD>Unstaking</TD>
 									<TD class="text-on-surface grid text-right">
 										<AssetText variant="full" value={unstakingTotal} />
-										{#if context.settings.data.advancedMode}
-											<AssetText variant="full" value={unstakingRex} />
-										{/if}
+										<AssetText variant="full" value={unstakingRex} />
 									</TD>
 									<TD></TD>
 								</TR>
@@ -147,9 +143,7 @@
 									<TD>Unstaked</TD>
 									<TD class="text-on-surface grid text-right">
 										<AssetText variant="full" value={totalWithdraw} />
-										{#if context.settings.data.advancedMode}
-											<AssetText variant="full" value={unstakingRex} />
-										{/if}
+										<AssetText variant="full" value={unstakingRex} />
 									</TD>
 									{@render tableAction(['Withdraw', `/${data.network}/staking/withdraw`])}
 								</TR>

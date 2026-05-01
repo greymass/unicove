@@ -14,7 +14,7 @@
 
 	let { data } = $props();
 
-	const { settings, urlPath } = getContext<UnicoveContext>('state');
+	const { urlPath } = getContext<UnicoveContext>('state');
 
 	let urlBase = $derived.by(() => {
 		let base = urlPath(`/transaction/${data.id}`);
@@ -167,35 +167,33 @@
 			{/if}
 		</Card>
 
-		{#if settings.data.advancedMode}
-			<Card class="p-4">
-				<h3
-					class="text-label text-on-surface-variant pb-3 text-sm font-medium tracking-wide uppercase"
+		<Card class="p-4">
+			<h3
+				class="text-label text-on-surface-variant pb-3 text-sm font-medium tracking-wide uppercase"
+			>
+				Raw Data
+			</h3>
+			<div class="grid grid-cols-2 gap-3">
+				<div class="bg-surface-container-high rounded-lg p-3">
+					<p class="text-on-surface-variant text-xs">Signatures</p>
+					<p class="text-on-surface text-lg font-semibold">
+						{data.transaction.signedTransaction.signatures.length}
+					</p>
+				</div>
+				<div class="bg-surface-container-high rounded-lg p-3">
+					<p class="text-on-surface-variant text-xs">Traces</p>
+					<p class="text-on-surface text-lg font-semibold">{data.transaction.traces.length}</p>
+				</div>
+			</div>
+			<div class="flex justify-end pt-2">
+				<a
+					href={`${urlBase}/transaction`}
+					class="text-primary hover:text-primary/80 inline-flex items-center gap-0.5 text-sm"
 				>
-					Raw Data
-				</h3>
-				<div class="grid grid-cols-2 gap-3">
-					<div class="bg-surface-container-high rounded-lg p-3">
-						<p class="text-on-surface-variant text-xs">Signatures</p>
-						<p class="text-on-surface text-lg font-semibold">
-							{data.transaction.signedTransaction.signatures.length}
-						</p>
-					</div>
-					<div class="bg-surface-container-high rounded-lg p-3">
-						<p class="text-on-surface-variant text-xs">Traces</p>
-						<p class="text-on-surface text-lg font-semibold">{data.transaction.traces.length}</p>
-					</div>
-				</div>
-				<div class="flex justify-end pt-2">
-					<a
-						href={`${urlBase}/transaction`}
-						class="text-primary hover:text-primary/80 inline-flex items-center gap-0.5 text-sm"
-					>
-						View raw data
-						<ChevronRight class="size-3.5" />
-					</a>
-				</div>
-			</Card>
-		{/if}
+					View raw data
+					<ChevronRight class="size-3.5" />
+				</a>
+			</div>
+		</Card>
 	</div>
 </Stack>

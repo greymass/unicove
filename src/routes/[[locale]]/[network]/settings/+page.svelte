@@ -26,7 +26,6 @@
 	let preventAccountPageSwitching = $state(!!context.settings.data.preventAccountPageSwitching);
 	let searchAccountSwitch = $state(!!context.settings.data.searchAccountSwitch);
 	let searchShowPages = $state(!!context.settings.data.searchShowPages);
-	let advancedMode = $state(!!context.settings.data.advancedMode);
 	let developerMode = $state(!!context.settings.data.developerMode);
 	let mockPrice = $state(!!context.settings.data.mockPrice);
 	let increasedPrecision = $state(!!context.settings.data.increasedPrecision);
@@ -55,10 +54,6 @@
 	let { data } = $props();
 
 	$effect(() => {
-		context.settings.data.advancedMode = advancedMode;
-	});
-
-	$effect(() => {
 		context.settings.data.preventAccountPageSwitching = preventAccountPageSwitching;
 	});
 
@@ -71,15 +66,15 @@
 	});
 
 	$effect(() => {
-		context.settings.data.developerMode = advancedMode ? developerMode : false;
+		context.settings.data.developerMode = developerMode;
 	});
 
 	$effect(() => {
-		context.settings.data.increasedPrecision = advancedMode ? increasedPrecision : false;
+		context.settings.data.increasedPrecision = increasedPrecision;
 	});
 
 	$effect(() => {
-		context.settings.data.mockPrice = advancedMode ? mockPrice : false;
+		context.settings.data.mockPrice = mockPrice;
 	});
 
 	$effect(() => {
@@ -149,28 +144,26 @@
 						selected={selectedRange}
 					/>
 				</div>
-				{#if advancedMode}
-					<fieldset class="grid gap-4">
-						<Label for="search-show-pages">Proposal Earliest Execution</Label>
-						<p class="caption text-sm">
-							Set a datetime to specify the earliest a proposal can be executed. This value will be
-							reset after each proposal is created.
+				<fieldset class="grid gap-4">
+					<Label for="search-show-pages">Proposal Earliest Execution</Label>
+					<p class="caption text-sm">
+						Set a datetime to specify the earliest a proposal can be executed. This value will be
+						reset after each proposal is created.
+					</p>
+					<DatetimeInput
+						bind:this={refEarliestExecution}
+						oninput={onEarliestExecutionChange}
+						date={earliestExecution}
+					>
+						Local&nbsp;Time
+					</DatetimeInput>
+					{#if timestamp}
+						<p class="text-sm">
+							Set for UTC: {timestamp}
+							<Button variant="pill" onclick={clearEarliestExecution}>Clear</Button>
 						</p>
-						<DatetimeInput
-							bind:this={refEarliestExecution}
-							oninput={onEarliestExecutionChange}
-							date={earliestExecution}
-						>
-							Local&nbsp;Time
-						</DatetimeInput>
-						{#if timestamp}
-							<p class="text-sm">
-								Set for UTC: {timestamp}
-								<Button variant="pill" onclick={clearEarliestExecution}>Clear</Button>
-							</p>
-						{/if}
-					</fieldset>
-				{/if}
+					{/if}
+				</fieldset>
 			</Card>
 		{/if}
 
@@ -224,6 +217,16 @@
 					selected={selectedActivityDisplay}
 				/>
 			</div>
+
+			<div class="flex items-center justify-between">
+				<Stack class="gap-2">
+					<Label for="warn-suspicious-memos">Warn about suspicious memos</Label>
+					<p class="caption text-sm">
+						Show warnings when transaction memos contain potential phishing content.
+					</p>
+				</Stack>
+				<Switch id="warn-suspicious-memos" bind:checked={warnSuspiciousMemos} />
+			</div>
 		</Card>
 
 		<Card class=" grid gap-8 ">
@@ -261,62 +264,35 @@
 
 		<Card class=" grid gap-8 ">
 			<div class="flex items-center justify-between">
-				<h2 class="text-muted text-2xl font-semibold">Advanced</h2>
+				<h2 class="text-muted text-2xl font-semibold">Developer</h2>
 			</div>
-
 			<div class="flex items-center justify-between">
 				<Stack class="gap-2">
-					<Label for="advanced-mode">Enable Advanced Mode</Label>
-					<p class="caption text-sm">Enable features for more advanced use cases.</p>
+					<Label for="debug-mode">Enable Developer Mode</Label>
+					<p class="caption text-sm">Allow usage of settings meant for development of Unicove</p>
 				</Stack>
-				<Switch id="advanced-mode" bind:checked={advancedMode} />
+				<Switch id="debug-mode" bind:checked={developerMode} />
 			</div>
-			{#if advancedMode}
+			{#if developerMode}
 				<div class="flex items-center justify-between">
 					<Stack class="gap-2">
-						<Label for="warn-suspicious-memos">Warn about suspicious memos</Label>
-						<p class="caption text-sm">
-							Show warnings when transaction memos contain potential phishing content.
+						<Label for="debug-mode">Mock token price</Label>
+						<p class="caption text-sm text-balance">
+							Force the system token price to equal $1.2345 USD for testing in environments without
+							pricing information.
 						</p>
 					</Stack>
-					<Switch id="warn-suspicious-memos" bind:checked={warnSuspiciousMemos} />
+					<Switch id="mock-price" bind:checked={mockPrice} />
+				</div>
+				<div class="flex items-center justify-between">
+					<Stack class="gap-2">
+						<Label for="debug-mode">Debug Data Display</Label>
+						<p class="caption text-sm"></p>
+					</Stack>
+					<DebugToggle />
 				</div>
 			{/if}
 		</Card>
-
-		{#if advancedMode}
-			<Card class=" grid gap-8 ">
-				<div class="flex items-center justify-between">
-					<h2 class="text-muted text-2xl font-semibold">Developer</h2>
-				</div>
-				<div class="flex items-center justify-between">
-					<Stack class="gap-2">
-						<Label for="debug-mode">Enable Developer Mode</Label>
-						<p class="caption text-sm">Allow usage of settings meant for development of Unicove</p>
-					</Stack>
-					<Switch id="debug-mode" bind:checked={developerMode} />
-				</div>
-				{#if developerMode}
-					<div class="flex items-center justify-between">
-						<Stack class="gap-2">
-							<Label for="debug-mode">Mock token price</Label>
-							<p class="caption text-sm text-balance">
-								Force the system token price to equal $1.2345 USD for testing in environments
-								without pricing information.
-							</p>
-						</Stack>
-						<Switch id="mock-price" bind:checked={mockPrice} />
-					</div>
-					<div class="flex items-center justify-between">
-						<Stack class="gap-2">
-							<Label for="debug-mode">Debug Data Display</Label>
-							<p class="caption text-sm"></p>
-						</Stack>
-						<DebugToggle />
-					</div>
-				{/if}
-			</Card>
-		{/if}
 	</div>
 	{#if context.settings.data.debugMode}
 		<Code>{JSON.stringify(context.settings.data, null, 2)}</Code>

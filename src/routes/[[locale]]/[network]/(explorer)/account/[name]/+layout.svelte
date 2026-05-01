@@ -18,17 +18,18 @@
 			{ href: urlPath(`/account/${account}/balances`), text: 'Balances' }
 		];
 
-		if (context.settings.data.advancedMode) {
-			items.push({
-				href: urlPath(`/account/${account}/permissions`),
-				text: 'Permissions'
-			});
-			items.push({ href: urlPath(`/account/${account}/votes`), text: 'Votes' });
-			items.push({
-				href: urlPath(`/account/${account}/proposals`),
-				text: `Proposals (${data.account.proposals.length})`
-			});
-			items.push({ href: urlPath(`/account/${account}/authority`), text: 'Authority' });
+		items.push({
+			href: urlPath(`/account/${account}/permissions`),
+			text: 'Permissions'
+		});
+		items.push({ href: urlPath(`/account/${account}/votes`), text: 'Votes' });
+		items.push({
+			href: urlPath(`/account/${account}/proposals`),
+			text: `Proposals (${data.account.proposals.length})`
+		});
+		items.push({ href: urlPath(`/account/${account}/authority`), text: 'Authority' });
+
+		if (context.settings.data.developerMode) {
 			items.push({ href: urlPath(`/account/${account}/data`), text: 'Data' });
 		}
 

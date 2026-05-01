@@ -32,15 +32,16 @@
 			},
 			{ href: `${urlBase}/transaction`, text: 'Transaction' }
 		];
-		if (settings.data.advancedMode) {
-			options.push({
-				href: `${urlBase}/traces`,
-				text: `Traces (${data.transaction.traces.length})`
-			});
-			options.push({
-				href: `${urlBase}/ram`,
-				text: `RAM Usage (${ramDeltas})`
-			});
+		options.push({
+			href: `${urlBase}/traces`,
+			text: `Traces (${data.transaction.traces.length})`
+		});
+		options.push({
+			href: `${urlBase}/ram`,
+			text: `RAM Usage (${ramDeltas})`
+		});
+
+		if (settings.data.developerMode) {
 			options.push({ href: `${urlBase}/data`, text: 'Data' });
 		}
 		return options;

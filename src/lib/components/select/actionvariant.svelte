@@ -6,12 +6,6 @@
 
 	const context = getContext<UnicoveContext>('state');
 
-	const {
-		display = false
-	}: {
-		display?: boolean;
-	} = $props();
-
 	let current = $derived(context.settings.data.actionDisplayVariant);
 
 	function set(variant: ActionDisplayVariants) {
@@ -19,35 +13,30 @@
 	}
 </script>
 
-{#if display || context.settings.data.advancedMode}
-	<Switcher>
+<Switcher>
+	<Button variant={current !== 'summary' ? 'secondary' : 'primary'} onclick={() => set('summary')}>
+		Summary
+	</Button>
+	{#if context.settings.data.debugMode}
 		<Button
-			variant={current !== 'summary' ? 'secondary' : 'primary'}
-			onclick={() => set('summary')}
+			variant={current !== 'ricardian' ? 'secondary' : 'primary'}
+			onclick={() => set('ricardian')}
 		>
-			Summary
+			Ricardian
 		</Button>
-		{#if context.settings.data.debugMode}
-			<Button
-				variant={current !== 'ricardian' ? 'secondary' : 'primary'}
-				onclick={() => set('ricardian')}
-			>
-				Ricardian
-			</Button>
-		{/if}
-		<Button variant={current !== 'pretty' ? 'secondary' : 'primary'} onclick={() => set('pretty')}>
-			Action Data
+	{/if}
+	<Button variant={current !== 'pretty' ? 'secondary' : 'primary'} onclick={() => set('pretty')}>
+		Action Data
+	</Button>
+	{#if context.settings.data.developerMode}
+		<Button
+			variant={current !== 'decoded' ? 'secondary' : 'primary'}
+			onclick={() => set('decoded')}
+		>
+			Decoded
 		</Button>
-		{#if context.settings.data.developerMode}
-			<Button
-				variant={current !== 'decoded' ? 'secondary' : 'primary'}
-				onclick={() => set('decoded')}
-			>
-				Decoded
-			</Button>
-			<Button variant={current !== 'json' ? 'secondary' : 'primary'} onclick={() => set('json')}>
-				JSON
-			</Button>
-		{/if}
-	</Switcher>
-{/if}
+		<Button variant={current !== 'json' ? 'secondary' : 'primary'} onclick={() => set('json')}>
+			JSON
+		</Button>
+	{/if}
+</Switcher>

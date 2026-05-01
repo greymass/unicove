@@ -14,7 +14,6 @@
 
 	interface Props {
 		account: Name;
-		advancedMode: boolean;
 		currentUser: boolean;
 		loggedIn: boolean;
 		msigMode: boolean;
@@ -22,16 +21,7 @@
 		permission: TreePermission;
 		level?: number;
 	}
-	let {
-		account,
-		advancedMode,
-		currentUser,
-		loggedIn,
-		msigMode,
-		signin,
-		level = 0,
-		...props
-	}: Props = $props();
+	let { account, currentUser, loggedIn, msigMode, signin, level = 0, ...props }: Props = $props();
 	let { permission, children } = $derived(props.permission);
 
 	const context = getContext<UnicoveContext>('state');
@@ -62,7 +52,7 @@
 			<dd class="text-on-surface text-xl font-semibold">
 				<div class="flex items-center gap-2">
 					{permission.perm_name}
-					{#if loggedIn && (isDeveloperMode || (isMSIG && advancedMode && !msigMode))}
+					{#if loggedIn && (isDeveloperMode || (isMSIG && !msigMode))}
 						<LogIn
 							onclick={() =>
 								signin(PermissionLevel.from({ actor: account, permission: permission.perm_name }))}
@@ -194,7 +184,6 @@
 			{#each children as child}
 				<Self
 					{account}
-					{advancedMode}
 					{currentUser}
 					{loggedIn}
 					{msigMode}

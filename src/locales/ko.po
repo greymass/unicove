@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.663Z\n"
-"PO-Revision-Date: 2026-03-31T03:36:55.568Z\n"
+"PO-Revision-Date: 2026-04-16T21:33:44.340Z\n"
 "Last-Translator: \n"
 "Language: ko\n"
 "Language-Team: \n"
@@ -502,12 +502,12 @@ msgstr "송금"
 msgid "+ {0} ms (CPU)"
 msgstr "+ {0} ms (CPU)"
 
+#. placeholder {0}: account.weight
+#. placeholder {0}: key.weight
+#. placeholder {0}: account.weight
+#. placeholder {0}: key.weight
 #. placeholder {0}: data.powup_cpu
 #. placeholder {0}: data.powup_net
-#. placeholder {0}: account.weight
-#. placeholder {0}: key.weight
-#. placeholder {0}: account.weight
-#. placeholder {0}: key.weight
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio/newaccount.svelte
@@ -685,17 +685,8 @@ msgstr "계정 개요 페이지로의 자동 이동 방지"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/manager.svelte.ts
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
-#: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Advanced"
 msgstr "고급"
-
-#: src/routes/[[locale]]/[network]/settings/+page.svelte
-msgid "Enable Advanced Mode"
-msgstr "고급 모드 활성화"
-
-#: src/routes/[[locale]]/[network]/settings/+page.svelte
-msgid "Enable features for more advanced use cases."
-msgstr "고급 사용 사례를 위해 기능 활성화."
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Developer"
@@ -712,12 +703,6 @@ msgstr "유니코브 개발용 설정 사용 허용"
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Mock token price"
 msgstr "모의 토큰 가격"
-
-#: src/routes/[[locale]]/[network]/settings/+page.svelte
-msgid ""
-"Force the system token price to equal $1.2345 USD for testing in environments\n"
-"without pricing information."
-msgstr "가격 정보가 없는 환경에서 테스트하기 위해 시스템 토큰 가격을 강제로 $1.2345 USD와 같게 설정합니다."
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Debug Data Display"
@@ -7457,3 +7442,9 @@ msgstr "래핑된 액션 디코딩 중..."
 #: src/lib/components/summary/eosio.wrap/exec.svelte
 msgid "No actions in wrapped transaction"
 msgstr "래핑된 트랜잭션에 액션이 없습니다"
+
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
+msgid ""
+"Force the system token price to equal $1.2345 USD for testing in environments without\n"
+"pricing information."
+msgstr ""

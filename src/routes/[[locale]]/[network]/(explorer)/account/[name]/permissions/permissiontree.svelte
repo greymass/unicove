@@ -5,7 +5,6 @@
 
 	interface Props {
 		account: Name;
-		advancedMode: boolean;
 		currentUser: boolean;
 		loggedIn: boolean;
 		msigMode: boolean;
@@ -19,7 +18,6 @@
 	{#each props.permissions as permission}
 		<Permission
 			account={props.account}
-			advancedMode={props.advancedMode}
 			currentUser={props.currentUser}
 			loggedIn={props.loggedIn}
 			msigMode={props.msigMode}

@@ -352,21 +352,19 @@
 
 	<div class="w-80">
 		<Stack class="gap-4">
-			{#if context.settings.data.advancedMode}
-				{#if context.metamask.publicKey || context.metamask.ownerKey}
-					<h2 class="text-2xl font-semibold">Your Public Keys</h2>
-					{#if context.metamask.publicKey}
-						<p>MetaMask Public Key (Active)</p>
-						<TextInput bind:value={context.metamask.publicKey} disabled>
-							<CopyButton data={String(context.metamask.publicKey)} />
-						</TextInput>
-					{/if}
-					{#if context.metamask.ownerKey}
-						<p>MetaMask Public Key (Owner)</p>
-						<TextInput bind:value={context.metamask.ownerKey} disabled>
-							<CopyButton data={String(context.metamask.ownerKey)} />
-						</TextInput>
-					{/if}
+			{#if context.metamask.publicKey || context.metamask.ownerKey}
+				<h2 class="text-2xl font-semibold">Your Public Keys</h2>
+				{#if context.metamask.publicKey}
+					<p>MetaMask Public Key (Active)</p>
+					<TextInput bind:value={context.metamask.publicKey} disabled>
+						<CopyButton data={String(context.metamask.publicKey)} />
+					</TextInput>
+				{/if}
+				{#if context.metamask.ownerKey}
+					<p>MetaMask Public Key (Owner)</p>
+					<TextInput bind:value={context.metamask.ownerKey} disabled>
+						<CopyButton data={String(context.metamask.ownerKey)} />
+					</TextInput>
 				{/if}
 			{/if}
 

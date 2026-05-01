@@ -406,16 +406,14 @@
 							placeholder="RAM (Bytes)"
 							min={ramBytesMin}
 						/>
-						{#if context.settings.data.advancedMode}
-							<fieldset class="flex items-center gap-3">
-								<Checkbox bind:checked={ramBytesUseTransfer} id="rambytes-transfer" />
-								{#if context.wharf.session}
-									<Label for="rambytes-transfer">
-										Transfer RAM from my account: {context.wharf.session.actor}
-									</Label>
-								{/if}
-							</fieldset>
-						{/if}
+						<fieldset class="flex items-center gap-3">
+							<Checkbox bind:checked={ramBytesUseTransfer} id="rambytes-transfer" />
+							{#if context.wharf.session}
+								<Label for="rambytes-transfer">
+									Transfer RAM from my account: {context.wharf.session.actor}
+								</Label>
+							{/if}
+						</fieldset>
 					</Stack>
 				</SingleCard>
 			{/if}

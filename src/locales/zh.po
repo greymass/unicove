@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2026-03-31T03:36:55.573Z\n"
+"PO-Revision-Date: 2026-04-16T21:33:44.346Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -502,12 +502,12 @@ msgstr "转账"
 msgid "+ {0} ms (CPU)"
 msgstr "+ {0} 毫秒 (CPU)"
 
+#. placeholder {0}: account.weight
+#. placeholder {0}: key.weight
+#. placeholder {0}: account.weight
+#. placeholder {0}: key.weight
 #. placeholder {0}: data.powup_cpu
 #. placeholder {0}: data.powup_net
-#. placeholder {0}: account.weight
-#. placeholder {0}: key.weight
-#. placeholder {0}: account.weight
-#. placeholder {0}: key.weight
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio/newaccount.svelte
@@ -685,17 +685,8 @@ msgstr "防止切换账户时自动导航到账户概览页面"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/manager.svelte.ts
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
-#: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Advanced"
 msgstr "高级的"
-
-#: src/routes/[[locale]]/[network]/settings/+page.svelte
-msgid "Enable Advanced Mode"
-msgstr "启用高级模式"
-
-#: src/routes/[[locale]]/[network]/settings/+page.svelte
-msgid "Enable features for more advanced use cases."
-msgstr "启用用于更高级用例的功能。"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Developer"
@@ -712,12 +703,6 @@ msgstr "允许使用专为 Unicove 开发所设计的设置"
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Mock token price"
 msgstr "模拟的代币价格"
-
-#: src/routes/[[locale]]/[network]/settings/+page.svelte
-msgid ""
-"Force the system token price to equal $1.2345 USD for testing in environments\n"
-"without pricing information."
-msgstr "强制系统代币价格等于 1.2345 美元，以便在没有定价信息的环境中进行测试。```"
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Debug Data Display"
@@ -7451,3 +7436,9 @@ msgstr "正在解码封装的操作..."
 #: src/lib/components/summary/eosio.wrap/exec.svelte
 msgid "No actions in wrapped transaction"
 msgstr "封装的交易中没有操作"
+
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
+msgid ""
+"Force the system token price to equal $1.2345 USD for testing in environments without\n"
+"pricing information."
+msgstr ""

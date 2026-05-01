@@ -70,7 +70,7 @@ export class WharfState {
 			client: network.client
 		});
 
-		if (this.settings.data.advancedMode) {
+		if (this.settings.data.developerMode) {
 			walletPlugins.push(new WalletPluginCleos());
 		}
 

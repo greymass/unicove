@@ -178,19 +178,17 @@
 		{#if isCurrentUser}
 			<SystemTokenSwap account={data.account} network={data.network} />
 		{/if}
-		{#if context.settings.data.advancedMode}
-			<Card class="@container" title="Resources">
-				<Stack>
-					<div class="flex gap-12 *:flex-1 @sm:justify-between @sm:*:flex-auto">
-						<ResourceCard type="cpu" value={cpuAvailable} vertical />
+		<Card class="@container" title="Resources">
+			<Stack>
+				<div class="flex gap-12 *:flex-1 @sm:justify-between @sm:*:flex-auto">
+					<ResourceCard type="cpu" value={cpuAvailable} vertical />
 
-						<ResourceCard type="net" value={netAvailable} vertical />
-					</div>
-					{#if isCurrentUser}
-						<Button href={context.urlPath(`/resources`)} variant="secondary">Resources</Button>
-					{/if}
-				</Stack>
-			</Card>
-		{/if}
+					<ResourceCard type="net" value={netAvailable} vertical />
+				</div>
+				{#if isCurrentUser}
+					<Button href={context.urlPath(`/resources`)} variant="secondary">Resources</Button>
+				{/if}
+			</Stack>
+		</Card>
 	</div>
 </div>

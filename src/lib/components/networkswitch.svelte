@@ -57,13 +57,11 @@
 <button
 	id="network-switcher"
 	class={cn(
-		'focus:bg-surface-container flex items-center gap-3 rounded-2xl px-4  py-3.5 focus:outline-hidden',
-		!!context.settings.data.advancedMode && 'hover:bg-transparent',
+		'focus:bg-surface-container flex items-center gap-3 rounded-2xl px-4  py-3.5 hover:bg-transparent focus:outline-hidden',
 		className
 	)}
 	use:melt={$trigger}
 	{...props}
-	disabled={!context.settings.data.advancedMode}
 >
 	<picture class="flex size-10 justify-center">
 		{#if logo}
@@ -82,7 +80,7 @@
 			>{currentNetwork.chain.name}</span
 		>
 
-		{#if options.length > 1 && context.settings.data.advancedMode}
+		{#if options.length > 1}
 			<div class="font-regular text-muted m-0 flex items-center gap-1 pr-1 text-base">
 				<span use:melt={$label}>Change network</span>
 				<ChevronDown

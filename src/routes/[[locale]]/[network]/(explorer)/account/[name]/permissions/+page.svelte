@@ -36,7 +36,6 @@
 		!!(context.wharf.session && data.account.name.equals(context.wharf.session?.actor))
 	);
 
-	const advancedMode = $derived(!!context.settings.data.advancedMode);
 	const loggedIn = $derived(!!context.wharf.session);
 	const msigMode = $derived(context.wharf.session?.walletPlugin.id === 'wallet-plugin-multisig');
 
@@ -61,7 +60,6 @@
 
 <PermissionTree
 	account={data.account.name}
-	{advancedMode}
 	{currentUser}
 	{loggedIn}
 	{msigMode}

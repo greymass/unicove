@@ -58,13 +58,11 @@
 				pathname[3] === 'governance' || pathname[3] === 'producers' || pathname[3] === 'sentiment'
 		});
 
-		if (context.settings.data.advancedMode) {
-			items.push({
-				href: urlPath(`/resources`),
-				text: 'Resources',
-				active: pathname[3] === 'resources'
-			});
-		}
+		items.push({
+			href: urlPath(`/resources`),
+			text: 'Resources',
+			active: pathname[3] === 'resources'
+		});
 
 		if (context.settings.data.debugMode) {
 			items.push({

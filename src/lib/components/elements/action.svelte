@@ -46,8 +46,6 @@
 		variant = 'pretty'
 	}: Props = $props();
 
-	let advancedMode = $derived(context.settings.data.advancedMode);
-
 	let summaryTitle = $derived(getActionSummaryTitle(action.account, action.name, objectified));
 </script>
 
@@ -111,7 +109,7 @@
 {#snippet Pretty(data: ObjectifiedActionData | undefined)}
 	<Code
 		collapsible
-		class="bg-surface-container-high mt-1 [&.overflow-y-hidden]:max-h-80 [&_pre]:whitespace-pre-wrap [&_pre]:break-words"
+		class="bg-surface-container-high mt-1 [&_pre]:break-words [&_pre]:whitespace-pre-wrap [&.overflow-y-hidden]:max-h-80"
 		indent={4}
 	>
 		{#if data}
@@ -243,7 +241,7 @@
 
 		<!-- This section is reversed so the list reads better for a11y -->
 		<div class="flex flex-row-reverse flex-wrap-reverse items-baseline gap-1 text-right">
-			{#if advancedMode && notified}
+			{#if notified}
 				<span class="text-muted text-xs">notified</span>
 				<ul class="inline">
 					{#each notified as account}

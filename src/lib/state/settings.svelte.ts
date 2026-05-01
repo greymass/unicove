@@ -5,7 +5,6 @@ import { locales } from 'virtual:wuchale/locales';
 
 export enum SettingKeys {
 	'actionDisplayVariant' = 'actionDisplayVariant',
-	'advancedMode' = 'advancedMode',
 	'debugMode' = 'debugMode',
 	'developerMode' = 'developerMode',
 	'increasedPrecision' = 'increasedPrecision',
@@ -42,7 +41,6 @@ export enum TimeSeconds {
 
 export interface SettingsData {
 	actionDisplayVariant?: ActionDisplayVariants;
-	advancedMode?: boolean;
 	displayCurrency: SupportedCurrencies;
 	debugMode?: boolean;
 	developerMode?: boolean;
@@ -69,7 +67,6 @@ function getDefaultLocale() {
 
 const defaultSettings: SettingsData = {
 	actionDisplayVariant: 'table',
-	advancedMode: false,
 	displayCurrency: SupportedCurrencies.USD,
 	debugMode: false,
 	developerMode: false,

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2026-03-31T03:36:55.564Z\n"
+"PO-Revision-Date: 2026-04-16T21:33:44.335Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -502,12 +502,12 @@ msgstr "Transfer"
 msgid "+ {0} ms (CPU)"
 msgstr "+ {0} ms (CPU)"
 
+#. placeholder {0}: account.weight
+#. placeholder {0}: key.weight
+#. placeholder {0}: account.weight
+#. placeholder {0}: key.weight
 #. placeholder {0}: data.powup_cpu
 #. placeholder {0}: data.powup_net
-#. placeholder {0}: account.weight
-#. placeholder {0}: key.weight
-#. placeholder {0}: account.weight
-#. placeholder {0}: key.weight
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio/newaccount.svelte
@@ -687,17 +687,8 @@ msgstr "Prevents the automatic navigation to the account overview page"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/manager.svelte.ts
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
-#: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Advanced"
 msgstr "Advanced"
-
-#: src/routes/[[locale]]/[network]/settings/+page.svelte
-msgid "Enable Advanced Mode"
-msgstr "Enable Advanced Mode"
-
-#: src/routes/[[locale]]/[network]/settings/+page.svelte
-msgid "Enable features for more advanced use cases."
-msgstr "Enable features for more advanced use cases."
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Developer"
@@ -714,14 +705,6 @@ msgstr "Allow usage of settings meant for development of Unicove"
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Mock token price"
 msgstr "Mock token price"
-
-#: src/routes/[[locale]]/[network]/settings/+page.svelte
-msgid ""
-"Force the system token price to equal $1.2345 USD for testing in environments\n"
-"without pricing information."
-msgstr ""
-"Force the system token price to equal $1.2345 USD for testing in environments\n"
-"without pricing information."
 
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Debug Data Display"
@@ -7642,3 +7625,11 @@ msgstr "Decoding wrapped actions..."
 #: src/lib/components/summary/eosio.wrap/exec.svelte
 msgid "No actions in wrapped transaction"
 msgstr "No actions in wrapped transaction"
+
+#: src/routes/[[locale]]/[network]/settings/+page.svelte
+msgid ""
+"Force the system token price to equal $1.2345 USD for testing in environments without\n"
+"pricing information."
+msgstr ""
+"Force the system token price to equal $1.2345 USD for testing in environments without\n"
+"pricing information."

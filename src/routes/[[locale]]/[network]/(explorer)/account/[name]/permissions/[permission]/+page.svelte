@@ -460,7 +460,6 @@
 		<ul class="grid grid-cols-[auto_1fr] overflow-x-auto">
 			<PermissionComponent
 				account={manager.data.name.value.name}
-				advancedMode={false}
 				currentUser={false}
 				loggedIn={false}
 				msigMode={false}
