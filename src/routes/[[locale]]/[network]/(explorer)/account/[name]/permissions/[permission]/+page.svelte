@@ -41,7 +41,8 @@
 
 	let primaryElement: HTMLElement;
 
-	const requiresMsigInterface = manager.data.isMsig || manager.data.hasAccountsOrWaits;
+	const requiresMsigInterface =
+		manager.data.isMsig || manager.data.hasAccountsOrWaits || manager.data.hasLinkedActions;
 	let msigMode: boolean = $state(requiresMsigInterface);
 	// let msigMode = true;
 	let permissionTypeSelected: SelectOption = $state(

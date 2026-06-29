@@ -211,6 +211,7 @@ export class PermissionState {
 	public isOwner = $derived(this.name.value.name.equals('owner'));
 	public isActive = $derived(this.name.value.name.equals('active'));
 	public hasAccountsOrWaits = $derived(this.accounts.length + this.waits.length > 0);
+	public hasLinkedActions = $derived(this.linked.length > 0);
 	public keyWeights = $derived(this.keys.reduce((acc, k) => acc + k.value.weight, 0));
 	public hasUnevenWeights = $derived(this.keyWeights > this.keys.length);
 	public isMsig = $derived(this.threshold > 1);
@@ -375,8 +376,8 @@ export class PermissionState {
 		this.linked =
 			permission?.linked_actions.map((linked) => ({
 				value: {
-					action: Name.from(''),
-					...Serializer.objectify(linked)
+					account: linked.account,
+					action: linked.action ?? Name.from('')
 				},
 				valid: {
 					account: false,
