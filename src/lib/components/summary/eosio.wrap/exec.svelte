@@ -10,7 +10,7 @@
 	import { getActionSummaryComponent } from '$lib/components/summary';
 	import { Stack } from 'unicove-components';
 
-	interface Props extends ActionSummaryProps {}
+	type Props = ActionSummaryProps;
 
 	const { data }: Props = $props();
 
