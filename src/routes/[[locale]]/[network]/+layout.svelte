@@ -17,6 +17,7 @@
 	import { MarketState } from '$lib/state/market.svelte.js';
 	import { ProducersState } from '$lib/state/producers.svelte.js';
 	import { SearchRecordStorage } from '$lib/state/search';
+	import { reconcileLocale } from '$lib/state/locale.svelte.js';
 	import { SettingsState } from '$lib/state/settings.svelte.js';
 	import { WharfState } from '$lib/state/client/wharf.svelte.js';
 	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte';
@@ -40,6 +41,8 @@
 	const producers = new ProducersState(data.network);
 	const settings = new SettingsState();
 	const wharf = new WharfState(settings, producers);
+
+	reconcileLocale(settings);
 	const initialMarketValue = new MarketState(data.network, settings);
 	let metaMaskState = new MetaMaskState();
 	const initialNetworkValue = new NetworkValueState({

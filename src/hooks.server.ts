@@ -8,19 +8,13 @@ import * as main from './locales/loader.ssr.svelte';
 import * as js from './locales/loader.ssr';
 import { runWithLocale, loadLocales } from 'wuchale/load-utils/server';
 import { locales } from 'virtual:wuchale/locales';
-import { localizePath } from '$lib/utils/url';
+import { localizePath, resolveLocale } from '$lib/utils/url';
 
 await loadLocales(main.key, main.loadIDs, main.loadCatalog, locales);
 await loadLocales(js.key, js.loadIDs, js.loadCatalog, locales);
 
 export const wuchaleHandle: Handle = async ({ event, resolve }) => {
-	let locale: string = 'en';
-	const [, firstPart] = event.url.pathname.split('/');
-	if (event.cookies.get('locale') && event.cookies.get('locale') !== locale) {
-		locale = event.cookies.get('locale') ?? locale;
-	} else if (locales.includes(firstPart)) {
-		locale = firstPart;
-	}
+	const locale = resolveLocale(event.url.pathname, event.cookies.get('locale'));
 	event.locals.locale = locale;
 	return await runWithLocale(locale, () =>
 		resolve(event, {

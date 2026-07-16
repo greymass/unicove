@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'bun:test';
-import { localizePath, localizeUrl } from './url';
+import { localizePath, localizeUrl, resolveLocale } from './url';
 
 const chainName = import.meta.env.PUBLIC_CHAIN_SHORT;
 
@@ -105,5 +105,27 @@ describe('localizeUrl', () => {
 				expected
 			);
 		}
+	});
+});
+
+describe('resolveLocale', () => {
+	test('URL locale wins over cookie', () => {
+		expect(resolveLocale('/en/vaulta', 'zh')).toBe('en');
+		expect(resolveLocale('/zh/vaulta', 'en')).toBe('zh');
+		expect(resolveLocale('/ko/vaulta/staking', 'zh')).toBe('ko');
+	});
+	test('cookie decides locale-less paths', () => {
+		expect(resolveLocale('/', 'zh')).toBe('zh');
+		expect(resolveLocale('/vaulta', 'ko')).toBe('ko');
+		expect(resolveLocale('/staking', 'zh')).toBe('zh');
+	});
+	test('explicit en cookie is honored', () => {
+		expect(resolveLocale('/', 'en')).toBe('en');
+		expect(resolveLocale('/vaulta', 'en')).toBe('en');
+	});
+	test('invalid or missing cookie falls back to default', () => {
+		expect(resolveLocale('/', 'xx')).toBe('en');
+		expect(resolveLocale('/vaulta', undefined)).toBe('en');
+		expect(resolveLocale('/vaulta')).toBe('en');
 	});
 });

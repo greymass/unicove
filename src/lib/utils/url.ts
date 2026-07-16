@@ -113,3 +113,14 @@ export function localizeUrl(urlString: string, options: LocalizePathOptions = {}
 	url.pathname = localizePath(url.pathname, options);
 	return String(url);
 }
+
+export function resolveLocale(pathname: string, cookieLocale?: string): string {
+	const [, first] = pathname.split('/');
+	if (LOCALES.includes(first)) {
+		return first;
+	}
+	if (cookieLocale && LOCALES.includes(cookieLocale)) {
+		return cookieLocale;
+	}
+	return DEFAULT_LOCALE;
+}
