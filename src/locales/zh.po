@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2026-04-16T21:33:44.346Z\n"
+"PO-Revision-Date: 2026-07-16T05:59:09.034Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -289,8 +289,8 @@ msgstr "总计"
 msgid "KB (RAM)"
 msgstr "KB (RAM)"
 
-#. placeholder {0}: balance.token.symbol.name
 #. placeholder {0}: balance.token.name
+#. placeholder {0}: balance.token.symbol.name
 #: src/lib/components/card/tokenbalance.svelte
 #: src/lib/components/card/tokenoverview.svelte
 msgid "{0} (RAM)"
@@ -502,12 +502,12 @@ msgstr "转账"
 msgid "+ {0} ms (CPU)"
 msgstr "+ {0} 毫秒 (CPU)"
 
-#. placeholder {0}: account.weight
-#. placeholder {0}: key.weight
-#. placeholder {0}: account.weight
-#. placeholder {0}: key.weight
-#. placeholder {0}: data.powup_cpu
 #. placeholder {0}: data.powup_net
+#. placeholder {0}: data.powup_cpu
+#. placeholder {0}: key.weight
+#. placeholder {0}: account.weight
+#. placeholder {0}: key.weight
+#. placeholder {0}: account.weight
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio/newaccount.svelte
@@ -778,8 +778,8 @@ msgstr "详情"
 msgid "Network Fees"
 msgstr "网络费用"
 
-#. placeholder {0}: data.network.chain.systemToken?.symbol.code || ''
 #. placeholder {0}: market.network.currency.symbol.code
+#. placeholder {0}: data.network.chain.systemToken?.symbol.code || ''
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 msgid "Market Cap ({0})"
@@ -1968,10 +1968,10 @@ msgstr "药丸选择"
 msgid "Select a date range"
 msgstr "选择日期范围"
 
-#. placeholder {0}: selected.label
-#. placeholder {0}: selectedFormOption.label
-#. placeholder {0}: imageOptionSelected.label
 #. placeholder {0}: JSON.stringify(tokenSelected, null, 2)
+#. placeholder {0}: imageOptionSelected.label
+#. placeholder {0}: selectedFormOption.label
+#. placeholder {0}: selected.label
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
@@ -3136,10 +3136,10 @@ msgstr "正在加载主题...```"
 #. placeholder {1}: quote.name
 #. placeholder {0}: base.name
 #. placeholder {1}: quote.name
-#. placeholder {0}: base.name
-#. placeholder {1}: quote.name
-#. placeholder {0}: base.name
-#. placeholder {1}: quote.name
+#. placeholder {0}: data.network.token.name
+#. placeholder {1}: data.network.getRamToken().name
+#. placeholder {0}: String(network.chain.systemToken?.symbol.name)
+#. placeholder {1}: String(ramtoken.name)
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.svelte
@@ -3180,8 +3180,8 @@ msgstr "接收 {0}"
 msgid "Network Fee: <0/> (0.5%)"
 msgstr "网络费用: <0/> (0.5%)"
 
-#. placeholder {0}: props.network.token.name
 #. placeholder {0}: String(data.quote.symbol.name)
+#. placeholder {0}: props.network.token.name
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/legacy-token-swap.svelte
 msgid "Swap to {0}"
@@ -3812,7 +3812,7 @@ msgstr "获取代币"
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
-#. placeholder {0}: symbol.name
+#. placeholder {0}: String(network.token.symbol.name)
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
@@ -3842,7 +3842,7 @@ msgstr "<0>Unicove -</0> {0} 网络钱包和区块浏览器"
 
 #. placeholder {0}: network.chain.name
 #. placeholder {0}: networkName
-#. placeholder {0}: network.chain.name
+#. placeholder {0}: networkName
 #: src/routes/+layout.server.ts
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
@@ -6759,8 +6759,8 @@ msgstr "{0}您有 {1} 可供回收。```"
 msgid "You have been outbid on this name.<0/>"
 msgstr "您在这个名字上的出价已被超过。<0/>"
 
-#. placeholder {0}: String(tracked.refund.amount)
 #. placeholder {0}: String(manager.refundAmount)
+#. placeholder {0}: String(tracked.refund.amount)
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/refund/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
 msgid "Claim Refund ({0})"
@@ -7441,4 +7441,4 @@ msgstr "封装的交易中没有操作"
 msgid ""
 "Force the system token price to equal $1.2345 USD for testing in environments without\n"
 "pricing information."
-msgstr ""
+msgstr "在没有价格信息的环境中进行测试时，强制系统代币价格等于 1.2345 美元。"
