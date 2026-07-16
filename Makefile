@@ -8,6 +8,8 @@ BIN := ./node_modules/.bin
 
 ENVS=./scripts/env
 CONTRACTS=./src/lib/wharf/contracts
+CODEX_MODEL ?= gpt-5.6-luna
+CODEX_REASONING ?= low
 
 .PHONY: dev
 dev: node_modules codegen
@@ -34,6 +36,21 @@ install: node_modules
 .PHONY: node_modules
 node_modules:
 	bun install --frozen-lockfile
+
+.PHONY: translate
+translate: node_modules
+	@command -v codex >/dev/null 2>&1 || { \
+		echo "Codex CLI is required. Install it, then run 'codex login'."; \
+		exit 1; \
+	}
+	@codex login status >/dev/null 2>&1 || { \
+		echo "Codex CLI is not authenticated. Run 'codex login' and try again."; \
+		exit 1; \
+	}
+	WUCHALE_AI=codex \
+	WUCHALE_CODEX_MODEL="$(CODEX_MODEL)" \
+	WUCHALE_CODEX_REASONING="$(CODEX_REASONING)" \
+	bunx wuchale
 
 .PHONY: build
 build: node_modules codegen
