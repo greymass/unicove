@@ -7,7 +7,6 @@
 	import Launcher from './components/launcher.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
-	import { cn } from '$lib/utils/style';
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');
@@ -18,27 +17,17 @@
 	let networkShortname = $derived(String(data.network));
 </script>
 
-<div
-	id="homepage"
-	class={cn(
-		'mb-4 grid content-start items-start md:pt-0',
-		context.account ? 'gap-y-10 sm:gap-y-16' : 'gap-y-12 sm:gap-y-32'
-	)}
->
-	{#if context.account}
-		<Launcher />
-	{:else}
-		<Hero {networkName} {networkShortname} />
-	{/if}
+<div id="homepage" class="mb-4 grid content-start items-start gap-y-12 sm:gap-y-32 md:pt-0">
+	<Hero {networkName} {networkShortname} />
+
+	<Launcher />
 
 	{#if network.supports('sentiment') && data.sentimentTopics?.length > 0}
 		<SentimentShowcase topics={data.sentimentTopics} />
 	{/if}
 
-	{#if !context.account}
-		{#if network.supports('staking')}
-			<StakingRewards network={data.network} />
-		{/if}
+	{#if network.supports('staking')}
+		<StakingRewards network={data.network} />
 	{/if}
 
 	<Charts />
