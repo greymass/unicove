@@ -11,7 +11,7 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { requestPublicKeys, requestSnap } from '$lib/metamask-snap';
 	import { goto } from '$app/navigation';
-	import { Types as RAMTypes } from '$lib/types/ram';
+	import { Types as VaultaTypes } from '$lib/wharf/contracts/core.vaulta';
 	import { Label, NameInput, Button, Code, Stack } from 'unicove-components';
 
 	const context = getContext<UnicoveContext>('state');
@@ -98,7 +98,7 @@
 				account: contract.account,
 				name: 'giftram',
 				authorization: [PlaceholderAuth],
-				data: RAMTypes.giftram.from({
+				data: VaultaTypes.giftram.from({
 					from: PlaceholderName,
 					receiver: accountName,
 					ram_bytes: ramBytes,
