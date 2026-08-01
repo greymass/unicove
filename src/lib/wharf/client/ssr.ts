@@ -3,6 +3,9 @@ import { RoborovskiClient } from '@wharfkit/roborovski';
 
 import * as env from '$env/static/private';
 
+// Tolerant lookup for endpoints not yet declared in every deployment's env files
+const optionalEnv = env as Partial<Record<string, string>>;
+
 import { getChainConfigByName, type ChainConfig, type ChainEndpoints } from '$lib/wharf/chains';
 import { getNetwork } from '$lib/state/network.svelte';
 
@@ -20,7 +23,8 @@ const backendEndpoints: ChainEndpoints = {
 	metrics: env.BACKEND_API_METRICS,
 	msigs: env.BACKEND_API_MSIGS,
 	robo2: env.BACKEND_API_ROBO2,
-	sentiment: env.BACKEND_API_SENTIMENT
+	sentiment: env.BACKEND_API_SENTIMENT,
+	statindex: optionalEnv.BACKEND_API_STATINDEX
 };
 
 function getMergedConfig(chain: string): ChainConfig {

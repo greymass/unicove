@@ -1,4 +1,4 @@
-import { Asset, Name, type Checksum256Type, type NameType } from '@wharfkit/antelope';
+import { Asset, Name, Serializer, type Checksum256Type, type NameType } from '@wharfkit/antelope';
 import { ChainDefinition, Logo, TokenIdentifier } from '@wharfkit/common';
 
 import { Contract as DelphiHelperContract } from '$lib/wharf/contracts/delphihelper';
@@ -16,7 +16,10 @@ import { Contract as WRAMContract } from '$lib/wharf/contracts/eosio.wram';
 
 import * as env from '$env/static/public';
 
-import { Token, TokenMedia, TokenMediaAsset } from '$lib/types/token';
+// Tolerant lookup for flags not yet declared in every deployment's env files
+const optionalEnv = env as Partial<Record<string, string>>;
+
+import { Token, TokenDefinition, TokenMedia, TokenMediaAsset } from '$lib/types/token';
 import { isENVTrue } from '$lib/utils/strings';
 
 const coinbase =
@@ -112,6 +115,15 @@ export const wramtoken = Token.from({
 	})
 });
 
+// Curated token directory; a registry contract can replace this source later
+export const configuredTokens: TokenDefinition[] = env.PUBLIC_FEATURE_UNICOVE_CONTRACT_API_TOKENS
+	? (Serializer.decode({
+			type: 'token_definition[]',
+			customTypes: [TokenDefinition],
+			data: env.PUBLIC_FEATURE_UNICOVE_CONTRACT_API_TOKENS
+		}) as TokenDefinition[])
+	: [];
+
 export const chainConfig: ChainConfig = {
 	id: env.PUBLIC_CHAIN_ID,
 	short: env.PUBLIC_CHAIN_SHORT,
@@ -150,6 +162,7 @@ export const chainConfig: ChainConfig = {
 		robo2: isENVTrue(env.PUBLIC_FEATURE_ROBO2),
 		sentiment: isENVTrue(env.PUBLIC_FEATURE_SENTIMENT),
 		stakeresource: isENVTrue(env.PUBLIC_FEATURE_STAKERESOURCE),
+		statindex: isENVTrue(optionalEnv.PUBLIC_FEATURE_STATINDEX),
 		staking: isENVTrue(env.PUBLIC_FEATURE_STAKING),
 		timeseries: isENVTrue(env.PUBLIC_FEATURE_TIMESERIES),
 		unicovecontractapi: !!env.PUBLIC_FEATURE_UNICOVE_CONTRACT_API,
@@ -158,6 +171,7 @@ export const chainConfig: ChainConfig = {
 	},
 	metamask,
 	coinbase,
+	tokens: configuredTokens,
 	voteDecay: Number(env.PUBLIC_FEATURE_VOTE_DECAY) || 52
 };
 
@@ -188,6 +202,7 @@ export interface ChainEndpoints {
 	msigs?: string;
 	robo2?: string;
 	sentiment?: string;
+	statindex?: string;
 }
 
 export interface ChainBackend {
@@ -217,6 +232,7 @@ export interface ChainConfig {
 	lockedsupply?: NameType[]; // Accounts where tokens exist but are not in circulation
 	coinbase?: ChainCoinbaseConfig;
 	metamask?: ChainMetaMaskConfig;
+	tokens: TokenDefinition[];
 	systemcontract: Name;
 	systemtoken: Token;
 	systemtokenalt: Asset.Symbol[];
@@ -244,6 +260,7 @@ export type FeatureType =
 	| 'sentiment'
 	| 'stakeresource'
 	| 'staking'
+	| 'statindex'
 	| 'timeseries'
 	| 'unicovecontractapi'
 	| 'wram'

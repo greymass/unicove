@@ -13,6 +13,10 @@
 
 	import { Button } from 'unicove-components';
 	import { browser } from '$app/environment';
+	import { getContext } from 'svelte';
+	import { goto } from '$app/navigation';
+	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import { supportsAccountCreation } from '$lib/wharf/plugins';
 
 	interface Props {
 		networkName: string;
@@ -20,6 +24,27 @@
 	}
 
 	let { networkName, networkShortname }: Props = $props();
+
+	const context = getContext<UnicoveContext>('state');
+	const showCreateAccount = supportsAccountCreation(context.network.chain.id);
+
+	let creating = $state(false);
+
+	async function createAccount() {
+		creating = true;
+		try {
+			await context.wharf.login({
+				chain: context.network.chain.id,
+				walletPlugin: 'anchor',
+				arbitrary: { anchor: { mode: 'web' } }
+			});
+			goto(context.urlPath('/welcome'));
+		} catch (error) {
+			console.error('Account creation login failed:', error);
+		} finally {
+			creating = false;
+		}
+	}
 
 	let darkMode = $state(browser && localStorage.getItem('color-scheme') === 'dark');
 
@@ -81,6 +106,14 @@
 		<p class="text-muted mb-2 text-xl leading-tight text-balance lg:text-xl lg:leading-tight">
 			Stake, Send, Manage Tokens, and Explore {networkName} – all with ease
 		</p>
+		{#if showCreateAccount}
+			<div class="flex flex-wrap gap-3">
+				<Button variant="primary" onclick={createAccount} disabled={creating}>
+					{creating ? 'Waiting for Anchor...' : 'Create account'}
+				</Button>
+				<Button variant="secondary" href="https://anchorwallet.io">Get Anchor Wallet</Button>
+			</div>
+		{/if}
 	</Stack>
 {/snippet}
 
@@ -210,15 +243,13 @@
 				Stake, Send, Manage Tokens, and Explore {networkName} – all with ease
 			</p>
 
-			<div class="grid gap-4">
-				<!-- <div class="grid gap-4 @2xl:grid-cols-2"> -->
-				<!-- <Button variant="primary">Create your Vaulta account</Button> -->
-				<Button
-					class="text-primary bg-surface-container-lowest/20  backdrop-blur"
-					href="https://www.vaulta.com/resources/opening-the-gateway-to-web3-banking"
-				>
-					EOS rebrands to Vaulta
-				</Button>
+			<div class="flex flex-wrap justify-center gap-3">
+				{#if showCreateAccount}
+					<Button variant="primary" onclick={createAccount} disabled={creating}>
+						{creating ? 'Waiting for Anchor...' : 'Create account'}
+					</Button>
+					<Button variant="secondary" href="https://anchorwallet.io">Get Anchor Wallet</Button>
+				{/if}
 			</div>
 		</Stack>
 	</section>

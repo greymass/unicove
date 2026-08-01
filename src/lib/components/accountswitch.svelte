@@ -12,6 +12,7 @@
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte';
+	import { supportsAccountCreation } from '$lib/wharf/plugins';
 
 	import X from '@lucide/svelte/icons/x';
 	import CircleX from '@lucide/svelte/icons/circle-x';
@@ -324,10 +325,12 @@
 				{/each}
 			</ul>
 		{/if}
-		<div class="grid">
-			<!-- <Button  href={`/signup`} onclick={closeDrawer} variant="primary"> -->
-			<!-- 	Create account -->
-			<!-- </Button> -->
+		<div class="grid gap-2">
+			{#if supportsAccountCreation(network.chain.id)}
+				<Button href={urlPath('/signup')} onclick={closeDrawer} variant="primary">
+					Create account
+				</Button>
+			{/if}
 			<Button class="text-on-surface" onclick={closeAddingAccount} variant="secondary"
 				>Cancel</Button
 			>

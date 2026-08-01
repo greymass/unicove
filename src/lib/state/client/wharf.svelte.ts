@@ -21,7 +21,7 @@ import {
 	Session,
 	SessionKit
 } from '@wharfkit/session';
-import WebRenderer from '@wharfkit/web-renderer';
+import { WebUI } from '@wharfkit/web-ui';
 import { WalletPluginCleos } from '@wharfkit/wallet-plugin-cleos';
 import { AccountCreationPluginMetamask } from '@wharfkit/account-creation-plugin-metamask';
 
@@ -87,7 +87,7 @@ export class WharfState {
 			{
 				appName: 'unicove',
 				chains: this.chains,
-				ui: new WebRenderer({ minimal: true }),
+				ui: new WebUI({ minimal: true }),
 				walletPlugins
 			},
 			{

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2026-07-16T05:59:09.021Z\n"
+"PO-Revision-Date: 2026-08-01T18:31:32.052Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -213,6 +213,7 @@ msgstr "RAM Market"
 msgid "Buy RAM"
 msgstr "Buy RAM"
 
+#: src/lib/state/search/actions/pages.svelte.ts
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/sell/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/sell/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/sell/+page.ts
@@ -221,19 +222,19 @@ msgstr "Sell RAM"
 
 #: src/lib/components/card/tokenbalance.svelte
 #: src/lib/components/card/tokenoverview.svelte
-#: src/lib/components/navigation/sidemenu.svelte
+#: src/lib/components/navigation/model.svelte.ts
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balances/+page.svelte
 msgid "Send"
 msgstr "Send"
 
-#: src/lib/components/navigation/sidemenu.svelte
+#: src/lib/components/navigation/model.svelte.ts
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Settings"
 msgstr "Settings"
 
 #: src/lib/components/card/tokenbalance.svelte
 #: src/lib/components/card/tokenoverview.svelte
-#: src/lib/components/navigation/sidemenu.svelte
+#: src/lib/components/navigation/model.svelte.ts
 #: src/lib/components/summary/eosio.rex/buyresult.svelte
 #: src/lib/components/summary/eosio.rex/sellresult.svelte
 #: src/lib/components/summary/eosio/buyrex.svelte
@@ -261,7 +262,7 @@ msgstr "Stake"
 msgid "Unstake"
 msgstr "Unstake"
 
-#: src/lib/components/navigation/sidemenu.svelte
+#: src/lib/components/navigation/model.svelte.ts
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio/powerup.svelte
@@ -345,29 +346,27 @@ msgstr "Rendering of the ricardian contract is not yet supported."
 msgid "Error decoding for action summary, displaying raw data instead."
 msgstr "Error decoding for action summary, displaying raw data instead."
 
-#: src/lib/components/navigation/mobilenavigation.svelte
-msgid "Unicove Home"
-msgstr "Unicove Home"
-
 #: src/lib/components/navigation/pillgroup.svelte
 msgid "Page"
 msgstr "Page"
 
 #: src/lib/components/elements/resourceCard.svelte
-#: src/lib/components/navigation/sidemenu.svelte
+#: src/lib/components/navigation/model.svelte.ts
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/swap/describe.svelte.ts
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/resources/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
 msgid "RAM"
 msgstr "RAM"
 
-#: src/lib/components/navigation/sidemenu.svelte
+#: src/lib/components/navigation/model.svelte.ts
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/+page.svelte
 msgid "Debug State"
 msgstr "Debug State"
 
-#: src/lib/components/navigation/sidemenu.svelte
+#: src/lib/components/navigation/model.svelte.ts
+#: src/lib/components/navigation/model.svelte.ts
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "My Account"
 msgstr "My Account"
@@ -722,26 +721,15 @@ msgstr "Create Account by Sending Tokens"
 msgid "I have an account and want to create another."
 msgstr "I have an account and want to create another."
 
+#: src/lib/components/navigation/model.svelte.ts
+#: src/lib/state/search/actions/pages.svelte.ts
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.ts
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/metamask/+page.svelte
 msgid "Create Account"
 msgstr "Create Account"
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
-msgid "I have an account and want to create an msig account to share with other accounts."
-msgstr "I have an account and want to create an msig account to share with other accounts."
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
-msgid "Create MSIG Account"
-msgstr "Create MSIG Account"
-
-#: src/routes/[[locale]]/[network]/(account)/move/+page.svelte
-msgid "Move"
-msgstr "Move"
 
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 msgid "RAM Available"
@@ -921,58 +909,8 @@ msgid "Debug Info"
 msgstr "Debug Info"
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/request/+page.svelte
-#: src/routes/[[locale]]/[network]/(account)/signup/+layout.svelte
 msgid "Get Started"
 msgstr "Get Started"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/+layout.svelte
-msgid "Select Environment"
-msgstr "Select Environment"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/+layout.svelte
-msgid "Select Wallet"
-msgstr "Select Wallet"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/+layout.svelte
-msgid "Setup Wallet"
-msgstr "Setup Wallet"
-
-#. placeholder {0}: index + 1
-#. placeholder {1}: step.title
-#: src/routes/[[locale]]/[network]/(account)/signup/+layout.svelte
-msgid "Step {0}: {1}"
-msgstr "Step {0}: {1}"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/+page.svelte
-msgid "Detecting your environment..."
-msgstr "Detecting your environment..."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/+page.svelte
-msgid "Please wait while we determine the best options for you."
-msgstr "Please wait while we determine the best options for you."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/+page.svelte
-msgid "Let's get started"
-msgstr "Let's get started"
-
-#. placeholder {0}: recommendedWallet.name
-#: src/routes/[[locale]]/[network]/(account)/signup/+page.svelte
-msgid "Continue with {0}"
-msgstr "Continue with {0}"
-
-#. placeholder {0}: currentWalletType?.title
-#: src/routes/[[locale]]/[network]/(account)/signup/+page.svelte
-msgid "Other {0}"
-msgstr "Other {0}"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/+page.svelte
-msgid "More Options"
-msgstr "More Options"
-
-#. placeholder {0}: Object.values(walletTypes) .filter((type) => type.type !== currentWalletType.type) .map((type) => type.title.toLowerCase()) .join(', ') .replace(/,([^,]*)$/, ' and$1')
-#: src/routes/[[locale]]/[network]/(account)/signup/+page.svelte
-msgid "Choose from {0}"
-msgstr "Choose from {0}"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/+page.svelte
 msgid "Debug"
@@ -981,6 +919,7 @@ msgstr "Debug"
 #: src/routes/[[locale]]/[network]/(dev)/debug/+page.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/+layout.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/wharf/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/token/[contract]/[symbol]/+page.svelte
 msgid "Account"
 msgstr "Account"
@@ -1026,19 +965,10 @@ msgstr "State/Wharf"
 msgid "Token Definitions"
 msgstr "Token Definitions"
 
-#: src/routes/[[locale]]/[network]/(account)/vote/+page.svelte
-#: src/routes/[[locale]]/[network]/(account)/vote/+page.ts
-msgid "Vote"
-msgstr "Vote"
-
 #. placeholder {0}: ramtoken.name
 #: src/routes/[[locale]]/[network]/(homepage)/components/performance-grid.svelte
 msgid "{0}/USD"
 msgstr "{0}/USD"
-
-#: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
-msgid "EOS rebrands to Vaulta"
-msgstr "EOS rebrands to Vaulta"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/staked/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/stakedhex.svelte
@@ -1049,14 +979,6 @@ msgstr "APR"
 #: src/routes/[[locale]]/[network]/(homepage)/components/staking-rewards.svelte
 msgid "Learn more"
 msgstr "Learn more"
-
-#: src/routes/[[locale]]/[network]/(explorer)/network/+page.svelte
-msgid "Network charts/metrics"
-msgstr "Network charts/metrics"
-
-#: src/routes/[[locale]]/[network]/(explorer)/network/+page.svelte
-msgid "Reversible Blocks"
-msgstr "Reversible Blocks"
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/components/bid-search.svelte
@@ -1164,15 +1086,9 @@ msgstr "RAM (Bytes)"
 msgid "STAKE"
 msgstr "STAKE"
 
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/+page.svelte
-msgid "Choose A Wallet Type"
-msgstr "Choose A Wallet Type"
-
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/+page.svelte
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/[walletType]/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/upload/[[name]]/+page.svelte
@@ -1187,20 +1103,6 @@ msgstr "Choose A Wallet Type"
 msgid "Back"
 msgstr "Back"
 
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/+page.svelte
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/[walletType]/+page.svelte
-msgid "Why do I need a wallet?"
-msgstr "Why do I need a wallet?"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/+page.svelte
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/[walletType]/+page.svelte
-msgid ""
-"A wallet is your gateway to the blockchain, allowing you to manage your digital assets and\n"
-"interact with decentralized applications."
-msgstr ""
-"A wallet is your gateway to the blockchain, allowing you to manage your digital assets and\n"
-"interact with decentralized applications."
-
 #: src/routes/[[locale]]/[network]/(dev)/debug/account/+page.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/wharf/+page.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/transact/+page.svelte
@@ -1208,41 +1110,6 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "Login"
 msgstr "Login"
-
-#. placeholder {0}: currentWallet.name
-#: src/routes/[[locale]]/[network]/(account)/welcome/[wallet]/+page.svelte
-msgid ""
-"Congratulations! Your {0} account is now set up and ready to go. You're all set\n"
-"to start exploring the world of blockchain and decentralized applications."
-msgstr ""
-"Congratulations! Your {0} account is now set up and ready to go. You're all set\n"
-"to start exploring the world of blockchain and decentralized applications."
-
-#. placeholder {0}: currentWallet.name
-#: src/routes/[[locale]]/[network]/(account)/welcome/[wallet]/+page.svelte
-msgid "To get started, simply log in to your {0} account using the button below."
-msgstr "To get started, simply log in to your {0} account using the button below."
-
-#. placeholder {0}: currentWallet.name
-#: src/routes/[[locale]]/[network]/(account)/welcome/[wallet]/+page.svelte
-msgid "Log In with {0}"
-msgstr "Log In with {0}"
-
-#: src/routes/[[locale]]/[network]/(account)/welcome/[wallet]/+page.svelte
-msgid "What's Next?"
-msgstr "What's Next?"
-
-#: src/routes/[[locale]]/[network]/(account)/welcome/[wallet]/+page.svelte
-msgid "Manage your digital assets"
-msgstr "Manage your digital assets"
-
-#: src/routes/[[locale]]/[network]/(account)/welcome/[wallet]/+page.svelte
-msgid "Interact with decentralized applications (dApps)"
-msgstr "Interact with decentralized applications (dApps)"
-
-#: src/routes/[[locale]]/[network]/(account)/welcome/[wallet]/+page.svelte
-msgid "etc..."
-msgstr "etc..."
 
 #: src/routes/[[locale]]/[network]/(account)/upload/[[name]]/+page.svelte
 msgid ""
@@ -1261,11 +1128,16 @@ msgid "Upload"
 msgstr "Upload"
 
 #: src/routes/[[locale]]/[network]/(account)/upload/[[name]]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/permission.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/contract/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/contract/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/network/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/network/+page.svelte
 msgid "Actions"
 msgstr "Actions"
 
@@ -1314,7 +1186,10 @@ msgstr "Latest Version"
 msgid "Config"
 msgstr "Config"
 
+#: src/lib/components/navigation/model.svelte.ts
+#: src/lib/state/search/actions/pages.svelte.ts
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/+layout.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/contract/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
 msgid "Contracts"
 msgstr "Contracts"
@@ -1323,6 +1198,7 @@ msgstr "Contracts"
 msgid "Market"
 msgstr "Market"
 
+#: src/lib/components/navigation/model.svelte.ts
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/+layout.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/network/+page.svelte
 msgid "Network"
@@ -1608,19 +1484,6 @@ msgstr "Total Proceeds"
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/sell/+page.svelte
 msgid "Expected to receive"
 msgstr "Expected to receive"
-
-#. placeholder {0}: currentWalletType.title
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/[walletType]/+page.svelte
-msgid "Sign Up with {0}"
-msgstr "Sign Up with {0}"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/[walletType]/+page.svelte
-msgid "Benefits"
-msgstr "Benefits"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/[walletType]/+page.svelte
-msgid "Available Wallets"
-msgstr "Available Wallets"
 
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/withdraw/+page.svelte
 msgid "Notice: Withdrawing will also clear votes"
@@ -2271,7 +2134,10 @@ msgstr "Example Transactions (Vaulta)"
 msgid "Links to transactions that perform common types of actions."
 msgstr "Links to transactions that perform common types of actions."
 
+#: src/lib/components/navigation/model.svelte.ts
+#: src/lib/state/search/actions/pages.svelte.ts
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/summaries/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/token/+page.ts
 msgid "Tokens"
 msgstr "Tokens"
 
@@ -2433,8 +2299,10 @@ msgstr "Load more"
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/transfers/TransfersView.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/contract/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.ts
+#: src/routes/[[locale]]/[network]/(explorer)/token/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/ram/+page.svelte
 msgid "Contract"
 msgstr "Contract"
@@ -2705,6 +2573,7 @@ msgid "(Locked Supply)"
 msgstr "(Locked Supply)"
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Recipient"
 msgstr "Recipient"
 
@@ -2717,15 +2586,10 @@ msgstr "Complete"
 msgid "Error"
 msgstr "Error"
 
-#: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/fund/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/resources/renting.svelte
 msgid "Receiving Account"
 msgstr "Receiving Account"
-
-#: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
-msgid "Enter the account name of the recipient"
-msgstr "Enter the account name of the recipient"
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Token to send"
@@ -2789,499 +2653,9 @@ msgstr "Start new send"
 msgid "Submit"
 msgstr "Submit"
 
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
-msgid "Download Anchor Desktop"
-msgstr "Download Anchor Desktop"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
-msgid "Visit the official Anchor website to download the Anchor desktop wallet application."
-msgstr "Visit the official Anchor website to download the Anchor desktop wallet application."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/wombat/+page.svelte
-msgid "Install the Desktop Application"
-msgstr "Install the Desktop Application"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
-msgid "Run the installer and follow the on-screen instructions to install the Anchor desktop wallet on your computer."
-msgstr "Run the installer and follow the on-screen instructions to install the Anchor desktop wallet on your computer."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
-msgid "Launch Anchor"
-msgstr "Launch Anchor"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
-msgid "Open the Anchor desktop application from your computer's applications menu or desktop shortcut."
-msgstr "Open the Anchor desktop application from your computer's applications menu or desktop shortcut."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/wombat/+page.svelte
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/wombat/+page.svelte
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
-msgid "Create a New Account"
-msgstr "Create a New Account"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
-msgid "In the Anchor desktop app, click on \"Create New Account\" and follow the prompts to set up your wallet."
-msgstr "In the Anchor desktop app, click on \"Create New Account\" and follow the prompts to set up your wallet."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/wombat/+page.svelte
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/wombat/+page.svelte
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
-msgid "Secure Your Account"
-msgstr "Secure Your Account"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
-msgid "Write down your private key and store it in a safe place. This is crucial for account recovery and should never be shared."
-msgstr "Write down your private key and store it in a safe place. This is crucial for account recovery and should never be shared."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/wombat/+page.svelte
-msgid "Configure Desktop Settings"
-msgstr "Configure Desktop Settings"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
-msgid "Explore the settings to customize your experience, such as default networks and resource management preferences."
-msgstr "Explore the settings to customize your experience, such as default networks and resource management preferences."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/wombat/+page.svelte
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/wombat/+page.svelte
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
-msgid "Fund Your Wallet"
-msgstr "Fund Your Wallet"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
-msgid "Transfer some cryptocurrency to your new Anchor wallet address to start using it on your desktop."
-msgstr "Transfer some cryptocurrency to your new Anchor wallet address to start using it on your desktop."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
-msgid "Why Choose Anchor Desktop?"
-msgstr "Why Choose Anchor Desktop?"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/wombat/+page.svelte
-msgid "Full-featured desktop application for enhanced functionality"
-msgstr "Full-featured desktop application for enhanced functionality"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/wombat/+page.svelte
-msgid "Improved security with local key storage on your computer"
-msgstr "Improved security with local key storage on your computer"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
-msgid "Supports multiple EOSIO-based blockchains"
-msgstr "Supports multiple EOSIO-based blockchains"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
-msgid "Advanced features for power users, including multi-sig support"
-msgstr "Advanced features for power users, including multi-sig support"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/wombat/+page.svelte
-msgid "Regular updates and desktop-specific features"
-msgstr "Regular updates and desktop-specific features"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/anchor/+page.svelte
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
-msgid "Open-source software for transparency and community contributions"
-msgstr "Open-source software for transparency and community contributions"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/wombat/+page.svelte
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/wombat/+page.svelte
-msgid "Download Wombat Desktop"
-msgstr "Download Wombat Desktop"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/wombat/+page.svelte
-msgid "Visit the official Wombat website to download the Wombat desktop wallet application."
-msgstr "Visit the official Wombat website to download the Wombat desktop wallet application."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/wombat/+page.svelte
-msgid "Run the installer and follow the on-screen instructions to install the Wombat desktop wallet on your computer."
-msgstr "Run the installer and follow the on-screen instructions to install the Wombat desktop wallet on your computer."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/wombat/+page.svelte
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/wombat/+page.svelte
-msgid "Launch Wombat"
-msgstr "Launch Wombat"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/wombat/+page.svelte
-msgid "Open the Wombat desktop application from your computer's applications menu or desktop shortcut."
-msgstr "Open the Wombat desktop application from your computer's applications menu or desktop shortcut."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/wombat/+page.svelte
-msgid "In the Wombat desktop app, click on \"Create a new account\" and follow the prompts to set up your wallet."
-msgstr "In the Wombat desktop app, click on \"Create a new account\" and follow the prompts to set up your wallet."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/wombat/+page.svelte
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/wombat/+page.svelte
-msgid "Write down your recovery phrase and store it in a safe place. This is crucial for account recovery and should never be shared."
-msgstr "Write down your recovery phrase and store it in a safe place. This is crucial for account recovery and should never be shared."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/wombat/+page.svelte
-msgid "Explore the desktop-specific settings to customize your experience, such as auto-updates and notification preferences."
-msgstr "Explore the desktop-specific settings to customize your experience, such as auto-updates and notification preferences."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/wombat/+page.svelte
-msgid "Transfer some cryptocurrency to your new Wombat wallet address to start using it on your desktop."
-msgstr "Transfer some cryptocurrency to your new Wombat wallet address to start using it on your desktop."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/wombat/+page.svelte
-msgid "Why Choose Wombat Desktop?"
-msgstr "Why Choose Wombat Desktop?"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/wombat/+page.svelte
-msgid "Faster transaction processing compared to web-based wallets"
-msgstr "Faster transaction processing compared to web-based wallets"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/wombat/+page.svelte
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/wombat/+page.svelte
-msgid "Supports multiple blockchains including EOS"
-msgstr "Supports multiple blockchains including EOS"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/desktop/wombat/+page.svelte
-msgid "Seamless integration with desktop dApps and tools"
-msgstr "Seamless integration with desktop dApps and tools"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
-msgid "Download Anchor Mobile"
-msgstr "Download Anchor Mobile"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
-msgid "Visit your device's app store (Google Play Store for Android or App Store for iOS) to download the Anchor mobile wallet application."
-msgstr "Visit your device's app store (Google Play Store for Android or App Store for iOS) to download the Anchor mobile wallet application."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
-msgid "Install the Mobile App"
-msgstr "Install the Mobile App"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
-msgid "Tap the \"Install\" button and wait for the Anchor mobile app to download and install on your device."
-msgstr "Tap the \"Install\" button and wait for the Anchor mobile app to download and install on your device."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
-msgid "Open the Anchor mobile app by tapping its icon on your device's home screen or app drawer."
-msgstr "Open the Anchor mobile app by tapping its icon on your device's home screen or app drawer."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
-msgid "In the Anchor mobile app, tap on \"Create New Account\" and follow the on-screen prompts to set up your wallet."
-msgstr "In the Anchor mobile app, tap on \"Create New Account\" and follow the on-screen prompts to set up your wallet."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
-msgid "Write down your private key and store it in a safe place. This is crucial for account recovery and should never be shared or stored digitally."
-msgstr "Write down your private key and store it in a safe place. This is crucial for account recovery and should never be shared or stored digitally."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
-msgid "Configure Mobile Settings"
-msgstr "Configure Mobile Settings"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
-msgid "Explore the mobile-specific settings to customize your experience, such as biometric authentication and push notification preferences."
-msgstr "Explore the mobile-specific settings to customize your experience, such as biometric authentication and push notification preferences."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
-msgid "Transfer some cryptocurrency to your new Anchor wallet address to start using it on your mobile device."
-msgstr "Transfer some cryptocurrency to your new Anchor wallet address to start using it on your mobile device."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
-msgid "Why Choose Anchor Mobile?"
-msgstr "Why Choose Anchor Mobile?"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
-msgid "User-friendly mobile interface for on-the-go access"
-msgstr "User-friendly mobile interface for on-the-go access"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
-msgid "Secure storage of your digital assets on your mobile device"
-msgstr "Secure storage of your digital assets on your mobile device"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
-msgid "Quick and easy transactions from your smartphone"
-msgstr "Quick and easy transactions from your smartphone"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
-msgid "Built-in dApp browser for mobile-optimized decentralized applications"
-msgstr "Built-in dApp browser for mobile-optimized decentralized applications"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
-msgid "Biometric authentication for enhanced security"
-msgstr "Biometric authentication for enhanced security"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/anchor/+page.svelte
-msgid "Push notifications for important wallet activities"
-msgstr "Push notifications for important wallet activities"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/metamask/+page.svelte
-msgid "Sign Up with MetaMask"
-msgstr "Sign Up with MetaMask"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/metamask/+page.svelte
-msgid "Step 1: Install MetaMask"
-msgstr "Step 1: Install MetaMask"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/metamask/+page.svelte
-msgid "To get started, you need to install MetaMask:"
-msgstr "To get started, you need to install MetaMask:"
-
 #: src/lib/components/wallets/metamask/install.svelte
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/metamask/+page.svelte
 msgid "Install MetaMask"
 msgstr "Install MetaMask"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/metamask/+page.svelte
-msgid "Step 3: Create an Account"
-msgstr "Step 3: Create an Account"
-
-#. placeholder {0}: data.network.chain.name
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/metamask/+page.svelte
-msgid "Create your {0} account:"
-msgstr "Create your {0} account:"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/metamask/+page.svelte
-msgid "How This Works"
-msgstr "How This Works"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/hardware/ledger/+page.svelte
-msgid "Purchase a Ledger Device"
-msgstr "Purchase a Ledger Device"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/hardware/ledger/+page.svelte
-msgid "Buy a Ledger hardware wallet from the official Ledger website or an authorized reseller."
-msgstr "Buy a Ledger hardware wallet from the official Ledger website or an authorized reseller."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/hardware/ledger/+page.svelte
-msgid "Set Up Your Ledger"
-msgstr "Set Up Your Ledger"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/hardware/ledger/+page.svelte
-msgid "Follow the instructions provided with your Ledger device to set it up and create a new wallet."
-msgstr "Follow the instructions provided with your Ledger device to set it up and create a new wallet."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/hardware/ledger/+page.svelte
-msgid "Install Ledger Live"
-msgstr "Install Ledger Live"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/hardware/ledger/+page.svelte
-msgid "Download and install Ledger Live software on your computer to manage your device and cryptocurrencies."
-msgstr "Download and install Ledger Live software on your computer to manage your device and cryptocurrencies."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/hardware/ledger/+page.svelte
-msgid "Install the EOS App"
-msgstr "Install the EOS App"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/hardware/ledger/+page.svelte
-msgid "Use Ledger Live to install the EOS app on your Ledger device."
-msgstr "Use Ledger Live to install the EOS app on your Ledger device."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/hardware/ledger/+page.svelte
-msgid "Connect to EOS Network"
-msgstr "Connect to EOS Network"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/hardware/ledger/+page.svelte
-msgid "Use a compatible EOS wallet interface that supports Ledger to connect your device and interact with the EOS network."
-msgstr "Use a compatible EOS wallet interface that supports Ledger to connect your device and interact with the EOS network."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/hardware/ledger/+page.svelte
-msgid "Visit Ledger Website"
-msgstr "Visit Ledger Website"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/hardware/ledger/+page.svelte
-msgid "Why Choose Ledger?"
-msgstr "Why Choose Ledger?"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/hardware/ledger/+page.svelte
-msgid "Highest level of security for your cryptocurrencies"
-msgstr "Highest level of security for your cryptocurrencies"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/hardware/ledger/+page.svelte
-msgid "Supports a wide range of cryptocurrencies, including EOS"
-msgstr "Supports a wide range of cryptocurrencies, including EOS"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/hardware/ledger/+page.svelte
-msgid "User-friendly interface with Ledger Live software"
-msgstr "User-friendly interface with Ledger Live software"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/hardware/ledger/+page.svelte
-msgid "Offline storage of private keys for enhanced protection"
-msgstr "Offline storage of private keys for enhanced protection"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/hardware/ledger/+page.svelte
-msgid "Regular firmware updates to maintain security and add new features"
-msgstr "Regular firmware updates to maintain security and add new features"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/wombat/+page.svelte
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/wombat/+page.svelte
-msgid "Install Wombat Extension"
-msgstr "Install Wombat Extension"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/wombat/+page.svelte
-msgid "Visit the Chrome Web Store to download and install the Wombat browser extension."
-msgstr "Visit the Chrome Web Store to download and install the Wombat browser extension."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/wombat/+page.svelte
-msgid "Add to Chrome"
-msgstr "Add to Chrome"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/wombat/+page.svelte
-msgid "Click \"Add to Chrome\" and confirm the installation when prompted."
-msgstr "Click \"Add to Chrome\" and confirm the installation when prompted."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/wombat/+page.svelte
-msgid "Open Wombat Extension"
-msgstr "Open Wombat Extension"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/wombat/+page.svelte
-msgid "Click on the Wombat icon in your browser toolbar to open the extension."
-msgstr "Click on the Wombat icon in your browser toolbar to open the extension."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/wombat/+page.svelte
-msgid "In the Wombat extension, select \"Create a new account\" and follow the on-screen instructions to set up your wallet."
-msgstr "In the Wombat extension, select \"Create a new account\" and follow the on-screen instructions to set up your wallet."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/wombat/+page.svelte
-msgid "Configure Extension Settings"
-msgstr "Configure Extension Settings"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/wombat/+page.svelte
-msgid "Explore the extension settings to customize your experience, such as auto-lock timers and network preferences."
-msgstr "Explore the extension settings to customize your experience, such as auto-lock timers and network preferences."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/wombat/+page.svelte
-msgid "Transfer some cryptocurrency to your new Wombat wallet address to start using it with dApps in your browser."
-msgstr "Transfer some cryptocurrency to your new Wombat wallet address to start using it with dApps in your browser."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/wombat/+page.svelte
-msgid "Why Choose Wombat Browser Extension?"
-msgstr "Why Choose Wombat Browser Extension?"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/wombat/+page.svelte
-msgid "Seamless integration with web-based dApps"
-msgstr "Seamless integration with web-based dApps"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/wombat/+page.svelte
-msgid "Quick access to your wallet directly from your browser"
-msgstr "Quick access to your wallet directly from your browser"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/wombat/+page.svelte
-msgid "Enhanced security with browser isolation"
-msgstr "Enhanced security with browser isolation"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/wombat/+page.svelte
-msgid "Easy-to-use interface for managing your digital assets"
-msgstr "Easy-to-use interface for managing your digital assets"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/wombat/+page.svelte
-msgid "Regular updates and new features through the Chrome Web Store"
-msgstr "Regular updates and new features through the Chrome Web Store"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/tokenpocket/+page.svelte
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/tokenpocket/+page.svelte
-msgid "Download TokenPocket"
-msgstr "Download TokenPocket"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/tokenpocket/+page.svelte
-msgid ""
-"Visit your device's app store (Google Play Store for Android or App Store for iOS) to\n"
-"download the TokenPocket wallet application."
-msgstr ""
-"Visit your device's app store (Google Play Store for Android or App Store for iOS) to\n"
-"download the TokenPocket wallet application."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/tokenpocket/+page.svelte
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/wombat/+page.svelte
-msgid "Install the App"
-msgstr "Install the App"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/tokenpocket/+page.svelte
-msgid "Tap the \"Install\" button and wait for TokenPocket to download and install on your device."
-msgstr "Tap the \"Install\" button and wait for TokenPocket to download and install on your device."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/tokenpocket/+page.svelte
-msgid "Launch TokenPocket"
-msgstr "Launch TokenPocket"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/tokenpocket/+page.svelte
-msgid "Open the TokenPocket app by tapping its icon on your device's home screen or app drawer."
-msgstr "Open the TokenPocket app by tapping its icon on your device's home screen or app drawer."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/tokenpocket/+page.svelte
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/wombat/+page.svelte
-msgid "Create a New Wallet"
-msgstr "Create a New Wallet"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/tokenpocket/+page.svelte
-msgid ""
-"In TokenPocket, select \"Create Wallet\" and choose the blockchain you want to use (e.g.,\n"
-"EOS). Follow the prompts to set up your wallet."
-msgstr ""
-"In TokenPocket, select \"Create Wallet\" and choose the blockchain you want to use (e.g.,\n"
-"EOS). Follow the prompts to set up your wallet."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/tokenpocket/+page.svelte
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/wombat/+page.svelte
-msgid "Secure Your Wallet"
-msgstr "Secure Your Wallet"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/tokenpocket/+page.svelte
-msgid ""
-"Write down your recovery phrase and private key, storing them in a safe place. This is\n"
-"crucial for account recovery and should never be shared."
-msgstr ""
-"Write down your recovery phrase and private key, storing them in a safe place. This is\n"
-"crucial for account recovery and should never be shared."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/tokenpocket/+page.svelte
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/wombat/+page.svelte
-msgid "Visit the Welcome Page"
-msgstr "Visit the Welcome Page"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/tokenpocket/+page.svelte
-msgid ""
-"Visit the TokenPocket <0>welcome page</0> for\n"
-"next steps."
-msgstr ""
-"Visit the TokenPocket <0>welcome page</0> for\n"
-"next steps."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/tokenpocket/+page.svelte
-msgid "Why Choose TokenPocket?"
-msgstr "Why Choose TokenPocket?"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/tokenpocket/+page.svelte
-msgid "Multi-chain support including EOS, Ethereum, and many others"
-msgstr "Multi-chain support including EOS, Ethereum, and many others"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/tokenpocket/+page.svelte
-msgid "User-friendly interface for managing multiple cryptocurrencies"
-msgstr "User-friendly interface for managing multiple cryptocurrencies"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/tokenpocket/+page.svelte
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/wombat/+page.svelte
-msgid "Built-in dApp browser for easy access to decentralized applications"
-msgstr "Built-in dApp browser for easy access to decentralized applications"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/tokenpocket/+page.svelte
-msgid "Secure storage with optional hardware wallet integration"
-msgstr "Secure storage with optional hardware wallet integration"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/tokenpocket/+page.svelte
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/wombat/+page.svelte
-msgid "Regular updates and new features to enhance user experience"
-msgstr "Regular updates and new features to enhance user experience"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/tokenpocket/+page.svelte
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/wombat/+page.svelte
-msgid "Cross-platform availability (mobile and browser extension)"
-msgstr "Cross-platform availability (mobile and browser extension)"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/tokenpocket/+page.svelte
-msgid "Active community and support for troubleshooting"
-msgstr "Active community and support for troubleshooting"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/definition/token/[[payload]]/+page.svelte
 msgid "Build an array of TokenDefinition objects"
@@ -3295,67 +2669,6 @@ msgstr "Contract Name"
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/config/+page.svelte
 msgid "Token Symbol"
 msgstr "Token Symbol"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/wombat/+page.svelte
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/wombat/+page.svelte
-msgid "Download Wombat"
-msgstr "Download Wombat"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/wombat/+page.svelte
-msgid ""
-"Visit your device's app store (Google Play Store for Android or App Store for iOS) to\n"
-"download the Wombat wallet application."
-msgstr ""
-"Visit your device's app store (Google Play Store for Android or App Store for iOS) to\n"
-"download the Wombat wallet application."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/wombat/+page.svelte
-msgid "Tap the \"Install\" button and wait for Wombat to download and install on your device."
-msgstr "Tap the \"Install\" button and wait for Wombat to download and install on your device."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/wombat/+page.svelte
-msgid "Open the Wombat app by tapping its icon on your device's home screen or app drawer."
-msgstr "Open the Wombat app by tapping its icon on your device's home screen or app drawer."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/wombat/+page.svelte
-msgid ""
-"In Wombat, follow the prompts to create a new wallet. You may need to set up a PIN or use\n"
-"biometric authentication for security."
-msgstr ""
-"In Wombat, follow the prompts to create a new wallet. You may need to set up a PIN or use\n"
-"biometric authentication for security."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/wombat/+page.svelte
-msgid ""
-"Write down your recovery phrase and store it in a safe place. This is crucial for account\n"
-"recovery and should never be shared."
-msgstr ""
-"Write down your recovery phrase and store it in a safe place. This is crucial for account\n"
-"recovery and should never be shared."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/wombat/+page.svelte
-msgid "Visit the Wombat <0>welcome page</0> for next steps."
-msgstr "Visit the Wombat <0>welcome page</0> for next steps."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/wombat/+page.svelte
-msgid "Why Choose Wombat?"
-msgstr "Why Choose Wombat?"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/wombat/+page.svelte
-msgid "User-friendly interface designed for simplicity"
-msgstr "User-friendly interface designed for simplicity"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/wombat/+page.svelte
-msgid "Multi-chain support including EOS and other popular blockchains"
-msgstr "Multi-chain support including EOS and other popular blockchains"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/wombat/+page.svelte
-msgid "Fast and secure transactions"
-msgstr "Fast and secure transactions"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/mobile/wombat/+page.svelte
-msgid "Smooth onboarding experience for crypto newcomers"
-msgstr "Smooth onboarding experience for crypto newcomers"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "PUB_K1..."
@@ -3467,7 +2780,11 @@ msgid "An overview of RAM Market on the {0} network that provides access to buy 
 msgstr "An overview of RAM Market on the {0} network that provides access to buy and sell RAM with {1} using an {2} compatible wallet."
 
 #: src/routes/[[locale]]/[network]/(account)/transactions/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/account/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/network/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/network/+page.svelte
 msgid "Transactions"
 msgstr "Transactions"
 
@@ -3478,29 +2795,9 @@ msgstr "Transactions"
 msgid "Get started on the {0} Network"
 msgstr "Get started on the {0} Network"
 
-#. placeholder {0}: network.chain.name
-#: src/routes/[[locale]]/[network]/(account)/signup/+layout.ts
-msgid "Select a wallet and create an account on the {0} network."
-msgstr "Select a wallet and create an account on the {0} network."
-
-#. placeholder {0}: network.chain.name
-#. placeholder {1}: network.chain.name
-#: src/routes/[[locale]]/[network]/(account)/signup/+layout.ts
-msgid "Select a {0} compatible wallet and create an account on the {1} network."
-msgstr "Select a {0} compatible wallet and create an account on the {1} network."
-
 #: src/routes/[[locale]]/[network]/(explorer)/network/+layout.ts
 msgid "Network Overview"
 msgstr "Network Overview"
-
-#: src/routes/[[locale]]/[network]/(explorer)/token/+page.ts
-#: src/routes/[[locale]]/[network]/(explorer)/token/+page.ts
-msgid "Token Directory"
-msgstr "Token Directory"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/+page.ts
-msgid "Choose a wallet type"
-msgstr "Choose a wallet type"
 
 #: src/routes/[[locale]]/[network]/(account)/upload/[[name]]/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/upload/[[name]]/+page.ts
@@ -3548,31 +2845,6 @@ msgstr "No contract is currently deployed to the {0} account."
 msgid "NOT_FOUND"
 msgstr "NOT_FOUND"
 
-#: src/routes/[[locale]]/[network]/(account)/welcome/[wallet]/+page.ts
-msgid "Anchor"
-msgstr "Anchor"
-
-#: src/routes/[[locale]]/[network]/(account)/welcome/[wallet]/+page.ts
-msgid "MetaMask"
-msgstr "MetaMask"
-
-#: src/routes/[[locale]]/[network]/(account)/welcome/[wallet]/+page.ts
-msgid "TokenPocket"
-msgstr "TokenPocket"
-
-#: src/routes/[[locale]]/[network]/(account)/welcome/[wallet]/+page.ts
-msgid "Wombat"
-msgstr "Wombat"
-
-#. placeholder {0}: currentWallet.name
-#: src/routes/[[locale]]/[network]/(account)/welcome/[wallet]/+page.ts
-msgid "Welcome to {0}"
-msgstr "Welcome to {0}"
-
-#: src/routes/[[locale]]/[network]/(account)/welcome/[wallet]/+page.ts
-msgid "Your account is ready to use"
-msgstr "Your account is ready to use"
-
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/market/+page.ts
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/market/+page.ts
 msgid "Market State"
@@ -3590,11 +2862,6 @@ msgstr "Exchange {0} for RAM on the {1} network."
 #: src/routes/[[locale]]/[network]/(account)/ram/(forms)/buy/+page.ts
 msgid "Exchange {0} for {1} on the {2} network."
 msgstr "Exchange {0} for {1} on the {2} network."
-
-#. placeholder {0}: params.walletType
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/[walletType]/+page.ts
-msgid "Choose a {0} wallet"
-msgstr "Choose a {0} wallet"
 
 #. placeholder {0}: String(network.chain.systemToken?.symbol.name || 'tokens')
 #. placeholder {1}: network.chain.name
@@ -3704,7 +2971,7 @@ msgstr "<0/> available to swap"
 
 #: src/lib/components/banner/systemTokenSwap.svelte
 #: src/lib/components/card/tokenbalance.svelte
-#: src/routes/[[locale]]/[network]/(account)/swap/+page.svelte
+#: src/lib/components/navigation/model.svelte.ts
 msgid "Swap"
 msgstr "Swap"
 
@@ -3717,6 +2984,8 @@ msgid "Value"
 msgstr "Value"
 
 #: src/lib/components/card/tokenoverview.svelte
+#: src/lib/components/navigation/model.svelte.ts
+#: src/lib/state/search/actions/pages.svelte.ts
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.svelte
 msgid "Add Funds"
@@ -4017,12 +3286,14 @@ msgstr ""
 msgid "Install {0}"
 msgstr "Install {0}"
 
+#: src/lib/state/search/actions/pages.svelte.ts
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/stake/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/unstake/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/withdraw/+page.svelte
 msgid "Staking overview"
 msgstr "Staking overview"
 
+#: src/lib/state/search/actions/pages.svelte.ts
 #: src/routes/[[locale]]/[network]/(homepage)/components/staking-rewards.svelte
 msgid "Stake Tokens"
 msgstr "Stake Tokens"
@@ -4031,14 +3302,12 @@ msgstr "Stake Tokens"
 msgid "Purchase Directly"
 msgstr "Purchase Directly"
 
-#. placeholder {0}: context.network.token.symbol.name
-#: src/routes/[[locale]]/[network]/(account)/fund/+page.svelte
-msgid ""
-"Purchase {0} and have it directly send to your account using one\n"
-"of the platforms below."
-msgstr ""
-"Purchase {0} and have it directly send to your account using one\n"
-"of the platforms below."
+#~ msgid ""
+#~ "Purchase {0} and have it directly send to your account using one\n"
+#~ "of the platforms below."
+#~ msgstr ""
+#~ "Purchase {0} and have it directly send to your account using one\n"
+#~ "of the platforms below."
 
 #: src/routes/[[locale]]/[network]/(account)/fund/+page.svelte
 msgid "Token to Purchase"
@@ -4280,16 +3549,10 @@ msgstr "KB (RAM): Tokenized Data Storage"
 msgid "One {0} of RAM represents ownership rights over 1000 bytes of the network's total blockchain storage capacity. {1} can be swapped with {2} by visiting the RAM Market."
 msgstr "One {0} of RAM represents ownership rights over 1000 bytes of the network's total blockchain storage capacity. {1} can be swapped with {2} by visiting the RAM Market."
 
-#. placeholder {0}: base.name
-#. placeholder {1}: quote.name
-#. placeholder {0}: base.name
-#. placeholder {1}: quote.name
 #. placeholder {0}: data.network.token.name
 #. placeholder {1}: data.network.getRamToken().name
 #. placeholder {0}: String(network.chain.systemToken?.symbol.name)
 #. placeholder {1}: String(ramtoken.name)
-#: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.ts
-#: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/charts.svelte
 msgid "Swap {0}/{1}"
@@ -4910,6 +4173,7 @@ msgid "No available authorities for this account."
 msgstr "No available authorities for this account."
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balances/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/token/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/token/[contract]/[symbol]/+page.ts
 msgid "Token"
 msgstr "Token"
@@ -5183,20 +4447,6 @@ msgstr "Signatures"
 msgid "The individual transaction traces from the transaction."
 msgstr "The individual transaction traces from the transaction."
 
-#. placeholder {0}: data.base.name
-#: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
-msgid "Send {0} <0>Max</0>"
-msgstr "Send {0} <0>Max</0>"
-
-#. placeholder {0}: data.quote.name
-#: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
-msgid "Receive {0}"
-msgstr "Receive {0}"
-
-#: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
-msgid "Network Fee: <0/> (0.5%)"
-msgstr "Network Fee: <0/> (0.5%)"
-
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/approvals/+page.svelte
@@ -5205,10 +4455,6 @@ msgstr "Network Fee: <0/> (0.5%)"
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.svelte
 msgid "Loading..."
 msgstr "Loading..."
-
-#: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
-msgid "No swap pair available"
-msgstr "No swap pair available"
 
 #. placeholder {0}: network.chain.name
 #: src/routes/+layout.server.ts
@@ -5610,15 +4856,6 @@ msgstr "Action: {0}"
 msgid "The {0} action for the {1} smart contract on the {2} network."
 msgstr "The {0} action for the {1} smart contract on the {2} network."
 
-#. placeholder {0}: base.name
-#. placeholder {1}: quote.name
-#. placeholder {0}: base.name
-#. placeholder {1}: quote.name
-#: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.ts
-#: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.ts
-msgid "Swap the {0} token for the {1} token."
-msgstr "Swap the {0} token for the {1} token."
-
 #. placeholder {0}: params.table
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.ts
 msgid "Table: {0}"
@@ -5986,7 +5223,8 @@ msgstr "Connect to view your voting power"
 msgid "Login to see your staked balance, vote age, and help secure the network."
 msgstr "Login to see your staked balance, vote age, and help secure the network."
 
-#: src/lib/components/navigation/sidemenu.svelte
+#: src/lib/components/navigation/model.svelte.ts
+#: src/lib/state/search/actions/pages.svelte.ts
 #: src/routes/[[locale]]/[network]/(explorer)/governance/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/governance/+page.ts
 msgid "Governance"
@@ -7249,16 +6487,6 @@ msgstr "Find my bids"
 msgid "Transact"
 msgstr "Transact"
 
-#. placeholder {0}: recommendedWallet.name
-#. placeholder {1}: data.network.chain.name
-#: src/routes/[[locale]]/[network]/(account)/signup/+page.svelte
-msgid ""
-"There are many options to create your first account but we recommend {0} for\n"
-"most people new to {1}."
-msgstr ""
-"There are many options to create your first account but we recommend {0} for\n"
-"most people new to {1}."
-
 #. placeholder {0}: foundNames.length
 #. placeholder {1}: foundNames.length === 1 ? '' : 's'
 #: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
@@ -7382,30 +6610,6 @@ msgstr ""
 "Since you are using custom keys, you will need to import <0/> into your wallet using\n"
 "the corresponding private keys. Make sure you have access to the private keys for the public\n"
 "keys entered above."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/metamask/+page.svelte
-msgid "Step 2: Install Vaulta Wallet"
-msgstr "Step 2: Install Vaulta Wallet"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/metamask/+page.svelte
-msgid "Install the Vaulta Wallet for MetaMask:"
-msgstr "Install the Vaulta Wallet for MetaMask:"
-
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/metamask/+page.svelte
-msgid "Install Vaulta Wallet"
-msgstr "Install Vaulta Wallet"
-
-#. placeholder {0}: data.network.chain .name
-#. placeholder {1}: data .network.chain.name
-#. placeholder {2}: data.network.chain.name
-#. placeholder {3}: data.network.chain .name
-#: src/routes/[[locale]]/[network]/(account)/signup/wallets/extensions/metamask/+page.svelte
-msgid ""
-"This signup method allows you to use your MetaMask wallet to interact with {0}. The Vaulta Wallet Snap extends MetaMask's functionality, enabling it to sign {1} transactions. Once your account is created, you'll be able to use MetaMask\n"
-"to manage your {2} assets and interact with {3}-based applications."
-msgstr ""
-"This signup method allows you to use your MetaMask wallet to interact with {0}. The Vaulta Wallet Snap extends MetaMask's functionality, enabling it to sign {1} transactions. Once your account is created, you'll be able to use MetaMask\n"
-"to manage your {2} assets and interact with {3}-based applications."
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
 msgid "ASC"
@@ -7633,3 +6837,700 @@ msgid ""
 msgstr ""
 "Force the system token price to equal $1.2345 USD for testing in environments without\n"
 "pricing information."
+
+#: src/lib/components/navigation/shell.svelte
+#: src/lib/components/navigation/shell.svelte
+msgid "Explorer"
+msgstr "Explorer"
+
+#: src/lib/components/navigation/model.svelte.ts
+#: src/lib/state/search/actions/pages.svelte.ts
+#: src/routes/[[locale]]/[network]/(account)/tools/+page.ts
+msgid "Tools"
+msgstr "Tools"
+
+#: src/lib/components/navigation/model.svelte.ts
+#: src/lib/state/search/actions/pages.svelte.ts
+#: src/routes/[[locale]]/[network]/(explorer)/account/+page.ts
+msgid "Accounts"
+msgstr "Accounts"
+
+#: src/lib/components/navigation/model.svelte.ts
+#: src/lib/state/search/actions/pages.svelte.ts
+msgid "Name Bids"
+msgstr "Name Bids"
+
+#: src/lib/components/navigation/model.svelte.ts
+msgid "Bid on premium account names"
+msgstr "Bid on premium account names"
+
+#: src/lib/components/navigation/model.svelte.ts
+msgid "Buy tokens with a card or exchange"
+msgstr "Buy tokens with a card or exchange"
+
+#~ msgid "Undelegate"
+#~ msgstr "Undelegate"
+
+#~ msgid "Reclaim CPU/NET staked to your account"
+#~ msgstr "Reclaim CPU/NET staked to your account"
+
+#~ msgid "Claim unstaked tokens after the refund period"
+#~ msgstr "Claim unstaked tokens after the refund period"
+
+#: src/lib/state/search/actions/pages.svelte.ts
+msgid "Transaction Status"
+msgstr "Transaction Status"
+
+#~ msgid "Pending and completed transactions from this device"
+#~ msgstr "Pending and completed transactions from this device"
+
+#: src/lib/components/navigation/model.svelte.ts
+#: src/lib/state/search/actions/pages.svelte.ts
+msgid "Deploy Contract"
+msgstr "Deploy Contract"
+
+#: src/lib/components/navigation/model.svelte.ts
+msgid "Upload contract code and ABI to an account"
+msgstr "Upload contract code and ABI to an account"
+
+#: src/lib/components/navigation/model.svelte.ts
+msgid "Create a new account on this network"
+msgstr "Create a new account on this network"
+
+#. placeholder {0}: network.chain.name
+#: src/routes/[[locale]]/[network]/(account)/tools/+page.ts
+msgid "Everything else you can do with your account on the {0} Network."
+msgstr "Everything else you can do with your account on the {0} Network."
+
+#. placeholder {0}: network.chain.name
+#: src/routes/[[locale]]/[network]/(account)/tools/+page.ts
+msgid "A collection of tools for managing accounts, tokens, and resources on the {0} Network."
+msgstr "A collection of tools for managing accounts, tokens, and resources on the {0} Network."
+
+#: src/routes/[[locale]]/[network]/(homepage)/components/apps.svelte
+msgid "Apps"
+msgstr "Apps"
+
+#: src/routes/[[locale]]/[network]/(account)/welcome/+page.svelte
+#: src/routes/[[locale]]/[network]/(homepage)/components/launcher.svelte
+msgid "Go to my account"
+msgstr "Go to my account"
+
+#: src/routes/[[locale]]/[network]/(homepage)/components/launcher.svelte
+msgid "<0/> Send"
+msgstr "<0/> Send"
+
+#: src/routes/[[locale]]/[network]/(homepage)/components/launcher.svelte
+msgid "<0/> Stake"
+msgstr "<0/> Stake"
+
+#: src/lib/components/accountswitch.svelte
+#: src/routes/[[locale]]/[network]/(account)/signup/+page.svelte
+#: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
+#: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
+msgid "Create account"
+msgstr "Create account"
+
+#: src/routes/[[locale]]/[network]/(explorer)/network/+page.svelte
+msgid "Network activity charts are unavailable right now."
+msgstr "Network activity charts are unavailable right now."
+
+#: src/routes/[[locale]]/[network]/(explorer)/network/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/network/+page.svelte
+msgid "Unique accounts (approximate)"
+msgstr "Unique accounts (approximate)"
+
+#: src/routes/[[locale]]/[network]/(explorer)/network/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/network/+page.svelte
+msgid "New accounts"
+msgstr "New accounts"
+
+#: src/routes/[[locale]]/[network]/(explorer)/network/+page.svelte
+msgid "Loading network activity..."
+msgstr "Loading network activity..."
+
+#: src/lib/components/statindex/windowselect.svelte
+msgid "30 days"
+msgstr "30 days"
+
+#: src/lib/components/statindex/windowselect.svelte
+msgid "90 days"
+msgstr "90 days"
+
+#: src/lib/components/statindex/windowselect.svelte
+msgid "1 year"
+msgstr "1 year"
+
+#: src/lib/components/statindex/windowselect.svelte
+msgid "All time"
+msgstr "All time"
+
+#: src/lib/state/search/actions/pages.svelte.ts
+msgid "RAM Market Overview"
+msgstr "RAM Market Overview"
+
+#: src/lib/state/search/actions/pages.svelte.ts
+#: src/lib/state/search/actions/pages.svelte.ts
+#: src/lib/state/search/actions/pages.svelte.ts
+#: src/lib/state/search/actions/pages.svelte.ts
+#: src/lib/state/search/actions/pages.svelte.ts
+#: src/lib/state/search/actions/pages.svelte.ts
+#: src/lib/state/search/actions/pages.svelte.ts
+#: src/lib/state/search/actions/pages.svelte.ts
+#: src/lib/state/search/actions/pages.svelte.ts
+#: src/lib/state/search/actions/pages.svelte.ts
+#: src/lib/state/search/actions/pages.svelte.ts
+#: src/lib/state/search/actions/pages.svelte.ts
+#: src/lib/state/search/actions/pages.svelte.ts
+#: src/lib/state/search/actions/pages.svelte.ts
+#: src/lib/state/search/actions/pages.svelte.ts
+#: src/lib/state/search/actions/pages.svelte.ts
+#: src/lib/state/search/actions/pages.svelte.ts
+#: src/lib/state/search/actions/pages.svelte.ts
+#: src/lib/state/search/actions/pages.svelte.ts
+#: src/lib/state/search/actions/pages.svelte.ts
+#: src/lib/state/search/actions/pages.svelte.ts
+#: src/lib/state/search/actions/pages.svelte.ts
+#: src/lib/state/search/actions/pages.svelte.ts
+#: src/lib/state/search/actions/pages.svelte.ts
+#: src/lib/state/search/actions/pages.svelte.ts
+msgid "View Page"
+msgstr "View Page"
+
+#: src/lib/state/search/actions/pages.svelte.ts
+msgid "Purchase RAM"
+msgstr "Purchase RAM"
+
+#: src/lib/state/search/actions/pages.svelte.ts
+msgid "Send tokens"
+msgstr "Send tokens"
+
+#: src/lib/state/search/actions/pages.svelte.ts
+msgid "Unicove settings"
+msgstr "Unicove settings"
+
+#: src/lib/state/search/actions/pages.svelte.ts
+msgid "Unstake tokens"
+msgstr "Unstake tokens"
+
+#: src/lib/state/search/actions/pages.svelte.ts
+msgid "Manage CPU/NET"
+msgstr "Manage CPU/NET"
+
+#: src/lib/state/search/actions/pages.svelte.ts
+msgid "Swap tokens"
+msgstr "Swap tokens"
+
+#: src/lib/state/search/actions/pages.svelte.ts
+msgid "Undelegate tokens"
+msgstr "Undelegate tokens"
+
+#: src/lib/state/search/actions/pages.svelte.ts
+msgid "Claim refund"
+msgstr "Claim refund"
+
+#: src/lib/state/search/actions/pages.svelte.ts
+msgid "Get started"
+msgstr "Get started"
+
+#: src/lib/state/search/actions/pages.svelte.ts
+msgid "Network overview"
+msgstr "Network overview"
+
+#: src/lib/state/search/actions/pages.svelte.ts
+msgid "Producer voting"
+msgstr "Producer voting"
+
+#: src/routes/[[locale]]/[network]/(account)/signup/+page.svelte
+msgid "Create your account"
+msgstr "Create your account"
+
+#: src/routes/[[locale]]/[network]/(account)/signup/+page.svelte
+msgid ""
+"Account creation runs through Anchor, a secure authenticator that opens in a popup window.\n"
+"Choose a sign-in method there, and you'll return here with your new account ready to use."
+msgstr ""
+"Account creation runs through Anchor, a secure authenticator that opens in a popup window.\n"
+"Choose a sign-in method there, and you'll return here with your new account ready to use."
+
+#: src/routes/[[locale]]/[network]/(account)/signup/+page.svelte
+#: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
+#: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
+msgid "Waiting for Anchor..."
+msgstr "Waiting for Anchor..."
+
+#: src/routes/[[locale]]/[network]/(account)/signup/+page.svelte
+msgid "The popup was closed before an account was created. You can try again at any time."
+msgstr "The popup was closed before an account was created. You can try again at any time."
+
+#: src/routes/[[locale]]/[network]/(account)/signup/+page.svelte
+msgid "Prefer to use your own wallet? <0>Browse compatible wallets</0>"
+msgstr "Prefer to use your own wallet? <0>Browse compatible wallets</0>"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/+page.svelte
+msgid "Actions authorized"
+msgstr "Actions authorized"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/+page.svelte
+msgid "Transactions authorized"
+msgstr "Transactions authorized"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/contract/+page.svelte
+msgid "Sort by"
+msgstr "Sort by"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/+page.svelte
+msgid "Include system accounts"
+msgstr "Include system accounts"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/+page.svelte
+msgid "Account activity is unavailable right now. Please try again later."
+msgstr "Account activity is unavailable right now. Please try again later."
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/+page.svelte
+msgid "Loading account activity..."
+msgstr "Loading account activity..."
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/+page.svelte
+msgid "Actions received"
+msgstr "Actions received"
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/+page.svelte
+msgid ""
+"Accounts that sign transactions rank by actions authorized; actions received shows traffic\n"
+"arriving at the account instead."
+msgstr ""
+"Accounts that sign transactions rank by actions authorized; actions received shows traffic\n"
+"arriving at the account instead."
+
+#. placeholder {0}: context.network.chain.name
+#: src/routes/[[locale]]/[network]/(account)/welcome/+page.svelte
+msgid ""
+"You're signed in as <0/>. Your account works across every app on the {0} network — use\n"
+"it to hold tokens, sign transactions, and explore."
+msgstr ""
+"You're signed in as <0/>. Your account works across every app on the {0} network — use\n"
+"it to hold tokens, sign transactions, and explore."
+
+#: src/routes/[[locale]]/[network]/(account)/welcome/+page.svelte
+msgid "Explore Unicove"
+msgstr "Explore Unicove"
+
+#: src/routes/[[locale]]/[network]/(account)/welcome/+page.svelte
+msgid "Sign in with your new account to get started."
+msgstr "Sign in with your new account to get started."
+
+#: src/routes/[[locale]]/[network]/(account)/welcome/+page.svelte
+msgid "Back to Unicove"
+msgstr "Back to Unicove"
+
+#: src/routes/[[locale]]/[network]/(explorer)/contract/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/contract/+page.svelte
+msgid "Unique callers"
+msgstr "Unique callers"
+
+#: src/routes/[[locale]]/[network]/(explorer)/contract/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/contract/+page.svelte
+msgid "New callers"
+msgstr "New callers"
+
+#: src/routes/[[locale]]/[network]/(explorer)/contract/+page.svelte
+msgid "Include system contracts"
+msgstr "Include system contracts"
+
+#: src/routes/[[locale]]/[network]/(explorer)/contract/+page.svelte
+msgid "Contract activity is unavailable right now. Please try again later."
+msgstr "Contract activity is unavailable right now. Please try again later."
+
+#: src/routes/[[locale]]/[network]/(explorer)/contract/+page.svelte
+msgid "Loading contract activity..."
+msgstr "Loading contract activity..."
+
+#: src/routes/[[locale]]/[network]/(explorer)/contract/+page.svelte
+msgid "Share of network"
+msgstr "Share of network"
+
+#: src/routes/[[locale]]/[network]/(explorer)/contract/+page.svelte
+msgid ""
+"Unique counts are approximate. Activity is counted for any account receiving actions, so\n"
+"regular accounts may occasionally appear."
+msgstr ""
+"Unique counts are approximate. Activity is counted for any account receiving actions, so\n"
+"regular accounts may occasionally appear."
+
+#: src/routes/[[locale]]/[network]/(explorer)/token/+page.svelte
+msgid "Price"
+msgstr "Price"
+
+#: src/routes/[[locale]]/[network]/(explorer)/token/+page.svelte
+msgid "Holders"
+msgstr "Holders"
+
+#: src/routes/[[locale]]/[network]/(account)/signup/wallets/+page.svelte
+msgid "Compatible wallets"
+msgstr "Compatible wallets"
+
+#. placeholder {0}: context.network.chain.name
+#: src/routes/[[locale]]/[network]/(account)/signup/wallets/+page.svelte
+msgid ""
+"Any of these wallets can be used with {0} and Unicove. Install one, then\n"
+"return here and sign in with it."
+msgstr ""
+"Any of these wallets can be used with {0} and Unicove. Install one, then\n"
+"return here and sign in with it."
+
+#: src/routes/[[locale]]/[network]/(account)/signup/wallets/+page.svelte
+msgid "Browser extension"
+msgstr "Browser extension"
+
+#: src/routes/[[locale]]/[network]/(account)/signup/wallets/+page.svelte
+msgid "Mobile app"
+msgstr "Mobile app"
+
+#: src/routes/[[locale]]/[network]/(account)/signup/wallets/+page.svelte
+msgid "Desktop app"
+msgstr "Desktop app"
+
+#: src/routes/[[locale]]/[network]/(account)/signup/wallets/+page.svelte
+msgid "Web wallet"
+msgstr "Web wallet"
+
+#: src/routes/[[locale]]/[network]/(account)/signup/wallets/+page.svelte
+msgid "Self-custody"
+msgstr "Self-custody"
+
+#: src/routes/[[locale]]/[network]/(account)/signup/wallets/+page.svelte
+msgid "Custodial"
+msgstr "Custodial"
+
+#: src/routes/[[locale]]/[network]/(account)/signup/wallets/+page.svelte
+msgid "Can create accounts"
+msgstr "Can create accounts"
+
+#. placeholder {0}: context.network.chain.name
+#: src/routes/[[locale]]/[network]/(account)/signup/wallets/+page.svelte
+msgid "New to {0}? <0>Create an account instead</0>"
+msgstr "New to {0}? <0>Create an account instead</0>"
+
+#: src/routes/[[locale]]/[network]/(account)/signup/+layout.ts
+#: src/routes/[[locale]]/[network]/(explorer)/account/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/contract/+page.ts
+msgid "Not found"
+msgstr "Not found"
+
+#. placeholder {0}: network.chain.name
+#: src/routes/[[locale]]/[network]/(account)/signup/+layout.ts
+msgid "Create an account on the {0} network."
+msgstr "Create an account on the {0} network."
+
+#. placeholder {0}: network.chain.name
+#: src/routes/[[locale]]/[network]/(account)/signup/+layout.ts
+msgid "Create an account on the {0} network and explore it with Unicove."
+msgstr "Create an account on the {0} network and explore it with Unicove."
+
+#. placeholder {0}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/+page.ts
+msgid "The most active accounts on the {0} Network."
+msgstr "The most active accounts on the {0} Network."
+
+#. placeholder {0}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/+page.ts
+msgid "A leaderboard of the most active accounts on the {0} Network."
+msgstr "A leaderboard of the most active accounts on the {0} Network."
+
+#. placeholder {0}: network.chain.name
+#: src/routes/[[locale]]/[network]/(account)/welcome/+page.ts
+msgid "Welcome to the {0} Network"
+msgstr "Welcome to the {0} Network"
+
+#: src/routes/[[locale]]/[network]/(account)/welcome/+page.ts
+msgid "Your account is ready to use."
+msgstr "Your account is ready to use."
+
+#. placeholder {0}: network.chain.name
+#: src/routes/[[locale]]/[network]/(account)/welcome/+page.ts
+msgid "Get started with your new account on the {0} Network."
+msgstr "Get started with your new account on the {0} Network."
+
+#. placeholder {0}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/contract/+page.ts
+msgid "The most active contracts on the {0} Network."
+msgstr "The most active contracts on the {0} Network."
+
+#. placeholder {0}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/contract/+page.ts
+msgid "A leaderboard of the most active contracts on the {0} Network."
+msgstr "A leaderboard of the most active contracts on the {0} Network."
+
+#. placeholder {0}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/token/+page.ts
+msgid "Tokens on the {0} Network."
+msgstr "Tokens on the {0} Network."
+
+#. placeholder {0}: network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/token/+page.ts
+msgid "A directory of tokens on the {0} Network."
+msgstr "A directory of tokens on the {0} Network."
+
+#: src/lib/components/navigation/shell.svelte
+msgid "Sign in"
+msgstr "Sign in"
+
+#: src/lib/components/navigation/shell.svelte
+msgid "Menu"
+msgstr "Menu"
+
+#: src/routes/[[locale]]/[network]/(homepage)/components/launcher.svelte
+msgid "<0/> Swap"
+msgstr "<0/> Swap"
+
+#: src/routes/[[locale]]/[network]/(explorer)/network/+page.svelte
+msgid "Chain state"
+msgstr "Chain state"
+
+#: src/routes/[[locale]]/[network]/(explorer)/network/+page.svelte
+msgid "Head block"
+msgstr "Head block"
+
+#: src/routes/[[locale]]/[network]/(explorer)/network/+page.svelte
+msgid "Irreversible block"
+msgstr "Irreversible block"
+
+#: src/routes/[[locale]]/[network]/(explorer)/network/+page.svelte
+msgid "Reversible blocks"
+msgstr "Reversible blocks"
+
+#: src/routes/[[locale]]/[network]/(explorer)/network/+page.svelte
+msgid "Block producer"
+msgstr "Block producer"
+
+#: src/routes/[[locale]]/[network]/(explorer)/network/+page.svelte
+msgid "Head block time"
+msgstr "Head block time"
+
+#: src/routes/[[locale]]/[network]/(explorer)/network/+page.svelte
+msgid "Node"
+msgstr "Node"
+
+#: src/routes/[[locale]]/[network]/(explorer)/network/+page.svelte
+msgid "Server version"
+msgstr "Server version"
+
+#: src/routes/[[locale]]/[network]/(explorer)/network/+page.svelte
+msgid "Chain ID"
+msgstr "Chain ID"
+
+#: src/lib/components/navigation/shell.svelte
+msgid "Wallet"
+msgstr "Wallet"
+
+#: src/routes/[[locale]]/[network]/(account)/swap/+page.svelte
+msgid "No swaps on this network"
+msgstr "No swaps on this network"
+
+#: src/routes/[[locale]]/[network]/(account)/swap/+page.svelte
+msgid ""
+"This network has no token swaps configured. Swaps appear here once a RAM market, token\n"
+"wrapping, or a legacy token exists."
+msgstr ""
+"This network has no token swaps configured. Swaps appear here once a RAM market, token\n"
+"wrapping, or a legacy token exists."
+
+#. placeholder {0}: quote
+#. placeholder {0}: quote
+#: src/routes/[[locale]]/[network]/(account)/swap/describe.svelte.ts
+#: src/routes/[[locale]]/[network]/(account)/swap/describe.svelte.ts
+msgid "Buy {0}"
+msgstr "Buy {0}"
+
+#. placeholder {0}: base
+#. placeholder {1}: quote
+#: src/routes/[[locale]]/[network]/(account)/swap/describe.svelte.ts
+msgid "Spend {0} to add {1} to your account, at the current market rate."
+msgstr "Spend {0} to add {1} to your account, at the current market rate."
+
+#. placeholder {0}: base
+#. placeholder {0}: base
+#: src/routes/[[locale]]/[network]/(account)/swap/describe.svelte.ts
+#: src/routes/[[locale]]/[network]/(account)/swap/describe.svelte.ts
+msgid "Sell {0}"
+msgstr "Sell {0}"
+
+#. placeholder {0}: base
+#. placeholder {1}: quote
+#: src/routes/[[locale]]/[network]/(account)/swap/describe.svelte.ts
+msgid "Release {0} back to the network in exchange for {1}, at the current market rate."
+msgstr "Release {0} back to the network in exchange for {1}, at the current market rate."
+
+#. placeholder {0}: base
+#. placeholder {1}: quote
+#: src/routes/[[locale]]/[network]/(account)/swap/describe.svelte.ts
+msgid "Wrap {0} into {1}"
+msgstr "Wrap {0} into {1}"
+
+#. placeholder {0}: base
+#. placeholder {1}: quote
+#: src/routes/[[locale]]/[network]/(account)/swap/describe.svelte.ts
+msgid "Turn account {0} into the transferable {1} token, one for one."
+msgstr "Turn account {0} into the transferable {1} token, one for one."
+
+#. placeholder {0}: base
+#: src/routes/[[locale]]/[network]/(account)/swap/describe.svelte.ts
+msgid "Wrap {0}"
+msgstr "Wrap {0}"
+
+#. placeholder {0}: base
+#. placeholder {1}: quote
+#: src/routes/[[locale]]/[network]/(account)/swap/describe.svelte.ts
+msgid "Unwrap {0} into {1}"
+msgstr "Unwrap {0} into {1}"
+
+#. placeholder {0}: base
+#. placeholder {1}: quote
+#: src/routes/[[locale]]/[network]/(account)/swap/describe.svelte.ts
+msgid "Turn {0} tokens back into account {1}, one for one."
+msgstr "Turn {0} tokens back into account {1}, one for one."
+
+#. placeholder {0}: base
+#: src/routes/[[locale]]/[network]/(account)/swap/describe.svelte.ts
+msgid "Unwrap {0}"
+msgstr "Unwrap {0}"
+
+#. placeholder {0}: base
+#. placeholder {1}: quote
+#: src/routes/[[locale]]/[network]/(account)/swap/describe.svelte.ts
+msgid "Migrate {0} to {1}"
+msgstr "Migrate {0} to {1}"
+
+#. placeholder {0}: base
+#. placeholder {1}: quote
+#: src/routes/[[locale]]/[network]/(account)/swap/describe.svelte.ts
+msgid "Exchange legacy {0} for {1} at a fixed one to one rate."
+msgstr "Exchange legacy {0} for {1} at a fixed one to one rate."
+
+#. placeholder {0}: base
+#: src/routes/[[locale]]/[network]/(account)/swap/describe.svelte.ts
+msgid "Migrate {0}"
+msgstr "Migrate {0}"
+
+#. placeholder {0}: base
+#. placeholder {1}: quote
+#: src/routes/[[locale]]/[network]/(account)/swap/describe.svelte.ts
+msgid "Convert {0} back to {1}"
+msgstr "Convert {0} back to {1}"
+
+#. placeholder {0}: base
+#. placeholder {1}: quote
+#: src/routes/[[locale]]/[network]/(account)/swap/describe.svelte.ts
+msgid "Exchange {0} for legacy {1} at a fixed one to one rate."
+msgstr "Exchange {0} for legacy {1} at a fixed one to one rate."
+
+#. placeholder {0}: base
+#: src/routes/[[locale]]/[network]/(account)/swap/describe.svelte.ts
+msgid "Convert {0}"
+msgstr "Convert {0}"
+
+#. placeholder {0}: base
+#. placeholder {1}: quote
+#: src/routes/[[locale]]/[network]/(account)/swap/describe.svelte.ts
+msgid "Swap {0} to {1}"
+msgstr "Swap {0} to {1}"
+
+#. placeholder {0}: base
+#. placeholder {1}: quote
+#: src/routes/[[locale]]/[network]/(account)/swap/describe.svelte.ts
+msgid "Exchange {0} for {1}."
+msgstr "Exchange {0} for {1}."
+
+#. placeholder {0}: base
+#: src/routes/[[locale]]/[network]/(account)/swap/describe.svelte.ts
+msgid "Swap {0}"
+msgstr "Swap {0}"
+
+#: src/routes/[[locale]]/[network]/(account)/swap/describe.svelte.ts
+msgid "RAM market"
+msgstr "RAM market"
+
+#: src/routes/[[locale]]/[network]/(account)/swap/describe.svelte.ts
+msgid "Priced by the network, moves with demand."
+msgstr "Priced by the network, moves with demand."
+
+#: src/routes/[[locale]]/[network]/(account)/swap/describe.svelte.ts
+msgid "Wrapping"
+msgstr "Wrapping"
+
+#: src/routes/[[locale]]/[network]/(account)/swap/describe.svelte.ts
+msgid "Fixed one to one, no rate risk."
+msgstr "Fixed one to one, no rate risk."
+
+#: src/routes/[[locale]]/[network]/(account)/swap/describe.svelte.ts
+msgid "Legacy tokens"
+msgstr "Legacy tokens"
+
+#: src/routes/[[locale]]/[network]/(account)/swap/describe.svelte.ts
+msgid "Fixed one to one between the legacy and system token."
+msgstr "Fixed one to one between the legacy and system token."
+
+#: src/routes/[[locale]]/[network]/(account)/swap/describe.svelte.ts
+msgid "Other"
+msgstr "Other"
+
+#: src/routes/[[locale]]/[network]/(account)/swap/describe.svelte.ts
+msgid "Additional swaps available on this network."
+msgstr "Additional swaps available on this network."
+
+#. placeholder {0}: rate.per
+#: src/routes/[[locale]]/[network]/(account)/swap/components/swaprow.svelte
+msgid "per 1 {0}"
+msgstr "per 1 {0}"
+
+#: src/routes/[[locale]]/[network]/(account)/swap/components/swaprow.svelte
+msgid "fixed"
+msgstr "fixed"
+
+#: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
+msgid "Who are you sending to?"
+msgstr "Who are you sending to?"
+
+#. placeholder {0}: data.base.name
+#: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
+msgid "Send {0} <0>Max</0>"
+msgstr "Send {0} <0>Max</0>"
+
+#. placeholder {0}: data.quote.name
+#: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
+msgid "Receive {0}"
+msgstr "Receive {0}"
+
+#: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
+msgid "Network Fee: <0/> (0.5%)"
+msgstr "Network Fee: <0/> (0.5%)"
+
+#: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
+msgid "No swap pair available"
+msgstr "No swap pair available"
+
+#: src/lib/components/navigation/shell.svelte
+msgid "Dark mode"
+msgstr "Dark mode"
+
+#. placeholder {0}: context.network.token.symbol.name
+#: src/routes/[[locale]]/[network]/(account)/fund/+page.svelte
+msgid "Buy {0} with Coinbase"
+msgstr "Buy {0} with Coinbase"
+
+#. placeholder {0}: context.network.token.symbol.name
+#: src/routes/[[locale]]/[network]/(account)/fund/+page.svelte
+msgid ""
+"Purchase {0} and have it directly send to your account using\n"
+"one of the platforms below."
+msgstr ""
+"Purchase {0} and have it directly send to your account using\n"
+"one of the platforms below."
+
+#: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
+#: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
+msgid "Get Anchor Wallet"
+msgstr "Get Anchor Wallet"
