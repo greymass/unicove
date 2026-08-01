@@ -2,7 +2,6 @@
 	import { getContext } from 'svelte';
 	import { Card } from 'unicove-components';
 	import binanceLogo from '$lib/assets/exchanges/binance.webp?enhanced';
-	import coinbaseIconLogo from '$lib/assets/exchanges/coinbase-icon.webp?enhanced';
 	import krakenLogo from '$lib/assets/exchanges/kraken.webp?enhanced';
 	import okxLogo from '$lib/assets/exchanges/okx.webp?enhanced';
 	import huobiLogo from '$lib/assets/exchanges/huobi.webp?enhanced';
@@ -21,28 +20,27 @@
 
 	const coinbaseOnRamp = new CoinbaseOnRamp(context);
 
-	const ON_RAMP_PROVIDERS = $derived([
-		{
-			id: 'coinbase',
-			logo: coinbaseLogo,
-			isLoading: coinbaseOnRamp.isLoading,
-			action: {
-				text: `Buy ${context.network.token.symbol.name} with Coinbase`,
-				handler: () => coinbaseOnRamp.open()
-			}
-		}
-	] as const);
+	const ON_RAMP_PROVIDERS = $derived(
+		context.network.config.coinbase
+			? [
+					{
+						id: 'coinbase',
+						logo: coinbaseLogo,
+						isLoading: coinbaseOnRamp.isLoading,
+						action: {
+							text: `Buy ${context.network.token.symbol.name} with Coinbase`,
+							handler: () => coinbaseOnRamp.open()
+						}
+					}
+				]
+			: []
+	);
 
 	const EXCHANGES = [
 		{
 			name: 'Binance',
 			logo: binanceLogo,
 			url: 'https://www.binance.com'
-		},
-		{
-			name: 'Coinbase',
-			logo: coinbaseIconLogo,
-			url: 'https://www.coinbase.com'
 		},
 		{
 			name: 'Kraken',
@@ -78,58 +76,60 @@
 </script>
 
 <Stack class="mt-6 gap-12">
-	<Stack class="gap-4">
-		<h2 class="text-headline leading-4">Purchase Directly</h2>
-		<p>
-			Purchase {context.network.token.symbol.name} and have it directly send to your account using one
-			of the platforms below.
-		</p>
-		<Cluster tag="ul">
-			{#each ON_RAMP_PROVIDERS as provider}
-				<Card tag="li" class="max-w-sm p-6">
-					<div>
-						<div class="mb-4 flex items-center justify-center">
-							<img src={provider.logo} alt={provider.id} class="h-24 w-3/5 object-contain" />
-						</div>
-						<DL>
-							{#if context.network.config.coinbase}
-								<DLRow title="Token to Purchase">
-									<DD>{context.network.config.coinbase.assets.join(', ')}</DD>
+	{#if ON_RAMP_PROVIDERS.length > 0}
+		<Stack class="gap-4">
+			<h2 class="text-headline leading-4">Purchase Directly</h2>
+			<p>
+				Purchase {context.network.token.symbol.name} and have it directly send to your account using
+				one of the platforms below.
+			</p>
+			<Cluster tag="ul">
+				{#each ON_RAMP_PROVIDERS as provider}
+					<Card tag="li" class="max-w-sm p-6">
+						<div>
+							<div class="mb-4 flex items-center justify-center">
+								<img src={provider.logo} alt={provider.id} class="h-24 w-3/5 object-contain" />
+							</div>
+							<DL>
+								{#if context.network.config.coinbase}
+									<DLRow title="Token to Purchase">
+										<DD>{context.network.config.coinbase.assets.join(', ')}</DD>
+									</DLRow>
+								{/if}
+								<DLRow title="Receiving Account">
+									<DD>
+										{#if context.account}
+											{context.account?.name}
+										{:else}
+											Not logged in
+										{/if}
+									</DD>
 								</DLRow>
-							{/if}
-							<DLRow title="Receiving Account">
-								<DD>
-									{#if context.account}
-										{context.account?.name}
-									{:else}
-										Not logged in
-									{/if}
-								</DD>
-							</DLRow>
-						</DL>
-					</div>
+							</DL>
+						</div>
 
-					<div class="mt-6">
-						{#if !context.account}
-							<p class="text-sm">You must be logged in with an account to use this feature.</p>
-						{:else}
-							<Button
-								class="w-full"
-								disabled={provider.isLoading}
-								onclick={provider.action.handler}
-							>
-								{#if provider.isLoading}
-									Loading
-								{:else}
-									{provider.action.text}
-								{/if}</Button
-							>
-						{/if}
-					</div>
-				</Card>
-			{/each}
-		</Cluster>
-	</Stack>
+						<div class="mt-6">
+							{#if !context.account}
+								<p class="text-sm">You must be logged in with an account to use this feature.</p>
+							{:else}
+								<Button
+									class="w-full"
+									disabled={provider.isLoading}
+									onclick={provider.action.handler}
+								>
+									{#if provider.isLoading}
+										Loading
+									{:else}
+										{provider.action.text}
+									{/if}</Button
+								>
+							{/if}
+						</div>
+					</Card>
+				{/each}
+			</Cluster>
+		</Stack>
+	{/if}
 
 	<Stack class="gap-4">
 		<h2 class="text-headline leading-4">Exchanges</h2>

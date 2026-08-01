@@ -13,7 +13,3 @@
 <h3>I have an account and want to create another.</h3>
 
 <Button href={context.urlPath('/create-account/direct')}>Create Account</Button>
-
-<h3>I have an account and want to create an msig account to share with other accounts.</h3>
-
-<Button href={context.urlPath('/create-account/msig')}>Create MSIG Account</Button>

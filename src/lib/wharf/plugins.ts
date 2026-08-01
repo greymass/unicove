@@ -1,7 +1,6 @@
 import {
 	PUBLIC_CHAIN_ID,
 	PUBLIC_FEATURE_METAMASK_SNAP_ORIGIN,
-	PUBLIC_FEATURE_WEB_AUTHENTICATOR_URL,
 	PUBLIC_LOCAL_SIGNER,
 	PUBLIC_WALLET_ANCHOR,
 	PUBLIC_WALLET_CLOUDWALLET,
@@ -9,15 +8,15 @@ import {
 	PUBLIC_WALLET_METAMASK,
 	PUBLIC_WALLET_SCATTER,
 	PUBLIC_WALLET_TOKENPOCKET,
-	PUBLIC_WALLET_WEB_AUTHENTICATOR,
 	PUBLIC_WALLET_WOMBAT,
 	PUBLIC_WALLET_GATEWALLET,
 	PUBLIC_RESOURCE_PROVIDER_URL
 } from '$env/static/public';
 import type { ChainDefinition } from '@wharfkit/common';
+import type { Checksum256Type } from '@wharfkit/antelope';
 import type { WalletPlugin, TransactPlugin } from '@wharfkit/session';
 
-import { WalletPluginAnchor } from '@wharfkit/wallet-plugin-anchor';
+import { DEFAULT_WEB_AUTHENTICATOR_URLS, WalletPluginAnchor } from '@wharfkit/wallet-plugin-anchor';
 import { WalletPluginCloudWallet } from '@wharfkit/wallet-plugin-cloudwallet';
 import { WalletPluginIMToken } from '@wharfkit/wallet-plugin-imtoken';
 import { WalletPluginMetaMask } from '@wharfkit/wallet-plugin-metamask';
@@ -25,7 +24,6 @@ import { WalletPluginMultiSig } from '$lib/wharf/plugins/multisig';
 import { WalletPluginPrivateKey } from '@wharfkit/wallet-plugin-privatekey';
 import { WalletPluginScatter } from '@wharfkit/wallet-plugin-scatter';
 import { WalletPluginTokenPocket } from '@wharfkit/wallet-plugin-tokenpocket';
-import { WalletPluginWebAuthenticator } from '@wharfkit/wallet-plugin-web-authenticator';
 import { WalletPluginWombat } from '@wharfkit/wallet-plugin-wombat';
 import { WalletPluginGateWallet } from '@wharfkit/wallet-plugin-gatewallet';
 
@@ -63,16 +61,6 @@ if (isENVTrue(PUBLIC_WALLET_SCATTER)) {
 
 if (isENVTrue(PUBLIC_WALLET_TOKENPOCKET)) {
 	baseWalletPlugins.push(new WalletPluginTokenPocket());
-}
-
-if (isENVTrue(PUBLIC_WALLET_WEB_AUTHENTICATOR) && PUBLIC_FEATURE_WEB_AUTHENTICATOR_URL) {
-	baseWalletPlugins.push(
-		new WalletPluginWebAuthenticator({
-			urls: {
-				[String(PUBLIC_CHAIN_ID)]: PUBLIC_FEATURE_WEB_AUTHENTICATOR_URL
-			}
-		})
-	);
 }
 
 if (isENVTrue(PUBLIC_WALLET_WOMBAT)) {
@@ -114,3 +102,11 @@ export const msigInternalPlugins: TransactPlugin[] = [
 export const chainDefs: ChainDefinition[] = chains.map((chain) =>
 	getChainDefinitionFromParams(chain.short)
 );
+
+// Signup requires Anchor's web authenticator, which only serves specific chains
+export function supportsAccountCreation(chainId: Checksum256Type): boolean {
+	return (
+		isENVTrue(PUBLIC_WALLET_ANCHOR) &&
+		String(chainId).toLowerCase() in DEFAULT_WEB_AUTHENTICATOR_URLS
+	);
+}

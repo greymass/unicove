@@ -193,19 +193,19 @@
 	aria-label="search"
 	id="search"
 	class={cn(
-		'text-muted focus-visible:ring-solar-500 focus-visible:border-solar-500 md:border-outline md:bg-surface  relative z-50 inline-flex h-10 items-center justify-between rounded-lg py-3.5 text-base leading-4 font-medium text-nowrap focus:outline-hidden focus-visible:ring focus-visible:ring-inset md:justify-between md:border-2  md:py-2 md:pr-0 md:pl-3',
+		'text-muted focus-visible:ring-solar-500 focus-visible:border-solar-500 lg:border-outline lg:bg-surface  relative z-50 inline-flex h-10 items-center justify-between rounded-lg py-3.5 text-base leading-4 font-medium text-nowrap focus:outline-hidden focus-visible:ring focus-visible:ring-inset md:px-2 lg:justify-between lg:border-2  lg:py-2 lg:pr-0 lg:pl-3',
 		props.class
 	)}
 >
 	<span class="inline-flex items-center gap-2">
 		<SearchIcon class="size-6 text-inherit md:size-5" />
-		<span class="hidden md:inline">
+		<span class="hidden lg:inline">
 			Search {String(context.network.chain.name).slice(0, 3)}...
 		</span>
 	</span>
 
 	{#if shortcutKey}
-		<span class="border-outline m-2 hidden rounded-sm border px-2 py-1 md:inline">
+		<span class="border-outline m-2 hidden rounded-sm border px-2 py-1 lg:inline">
 			{shortcutKey}
 		</span>
 	{/if}

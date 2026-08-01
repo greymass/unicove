@@ -38,7 +38,7 @@
 	let logo = $derived(props.network.config.logo || '');
 </script>
 
-<header class="col-span-full flex min-h-15 items-start gap-3 sm:gap-4">
+<header class="col-span-full flex min-h-15 items-start gap-3 sm:gap-4 md:pr-(--shell-ctl)">
 	{#if props.backPath}
 		<IconButton
 			size="large"

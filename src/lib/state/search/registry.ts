@@ -1,23 +1,32 @@
 import type { UnicoveContext } from '../client.svelte';
 import type { SearchActionPlugin, SearchRecord, SearchResultPlugin } from './types';
 
-import { defaultActionPlugins } from './actions';
+import { getDefaultActionPlugins } from './actions';
 import { defaultResultPlugins } from './plugins';
 
 /**
  * Registry for managing search plugins (both result and action plugins).
  * Provides methods to query plugins, execute searches, and perform actions.
+ * Action plugins may be provided as a factory so localized labels resolve per call.
  */
 export class SearchPluginRegistry {
 	private resultPlugins: Map<string, SearchResultPlugin> = new Map();
 	private actionPlugins: SearchActionPlugin[] = [];
+	private actionFactory?: () => SearchActionPlugin[];
 
-	constructor(resultPlugins: SearchResultPlugin[] = [], actionPlugins: SearchActionPlugin[] = []) {
+	constructor(
+		resultPlugins: SearchResultPlugin[] = [],
+		actionPlugins: SearchActionPlugin[] | (() => SearchActionPlugin[]) = []
+	) {
 		for (const plugin of resultPlugins) {
 			this.registerResult(plugin);
 		}
-		for (const action of actionPlugins) {
-			this.registerAction(action);
+		if (typeof actionPlugins === 'function') {
+			this.actionFactory = actionPlugins;
+		} else {
+			for (const action of actionPlugins) {
+				this.registerAction(action);
+			}
 		}
 	}
 
@@ -94,7 +103,10 @@ export class SearchPluginRegistry {
 	 * Get all action plugins that are enabled for the given context
 	 */
 	getEnabledActionPlugins(context: UnicoveContext): SearchActionPlugin[] {
-		return this.actionPlugins.filter((a) => !a.enabled || a.enabled(context));
+		const plugins = this.actionFactory
+			? [...this.actionFactory(), ...this.actionPlugins].sort((a, b) => a.priority - b.priority)
+			: this.actionPlugins;
+		return plugins.filter((a) => !a.enabled || a.enabled(context));
 	}
 
 	/**
@@ -120,4 +132,7 @@ export class SearchPluginRegistry {
  * Default registry instance with all built-in plugins and actions.
  * This creates a singleton that can be imported and used throughout the app.
  */
-export const defaultRegistry = new SearchPluginRegistry(defaultResultPlugins, defaultActionPlugins);
+export const defaultRegistry = new SearchPluginRegistry(
+	defaultResultPlugins,
+	getDefaultActionPlugins
+);

@@ -94,6 +94,7 @@
 				permissionLevel: `${accountCreationResponse.accountName}@active`,
 				walletPlugin: 'wallet-plugin-metamask'
 			});
+			await goto(context.urlPath('/welcome'));
 		} catch (error) {
 			console.error('Error creating account:', error);
 			alert(

@@ -1,5 +1,6 @@
 import type { PageLoad } from './$types';
 import { TokenDefinition } from '$lib/types/token';
+import { describeTokens } from '../../../../describe.svelte';
 
 export const load: PageLoad = async ({ params, parent }) => {
 	const { network } = await parent();
@@ -18,14 +19,15 @@ export const load: PageLoad = async ({ params, parent }) => {
 			chain: network.chain.id
 		})
 	);
+	const describe = describeTokens(network, base, quote);
 	return {
 		base,
 		quote,
-		title: `Swap ${base.name}/${quote.name}`,
-		subtitle: `Swap the ${base.name} token for the ${quote.name} token.`,
+		title: describe.title,
+		subtitle: describe.summary,
 		pageMetaTags: {
-			title: `Swap ${base.name}/${quote.name}`,
-			description: `Swap the ${base.name} token for the ${quote.name} token.`
+			title: describe.title,
+			description: describe.summary
 		}
 	};
 };

@@ -16,7 +16,7 @@ export function percentString(locale: string, number: number, len: number = 2): 
 	return Intl.NumberFormat(locale, { style: 'percent', minimumFractionDigits: len }).format(number);
 }
 
-export const isENVTrue = (value: string) => value === 'true';
+export const isENVTrue = (value?: string) => value === 'true';
 
 /**
  * Formats a description that may have been JSON.stringify'd with escaped characters

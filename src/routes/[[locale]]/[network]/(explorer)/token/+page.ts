@@ -1,12 +1,17 @@
+import { useLocale } from '$lib/utils/intl';
 import type { PageLoad } from './$types';
 
-export const load: PageLoad = async () => {
+export const load: PageLoad = async ({ data, parent }) => {
+	const { network, locale } = await parent();
+	await useLocale(locale);
+	const title = 'Tokens';
 	return {
-		title: `Token Directory`,
-		subtitle: ``,
+		...data,
+		title,
+		subtitle: `Tokens on the ${network.chain.name} Network.`,
 		pageMetaTags: {
-			title: `Token Directory`,
-			description: ``
+			title: `${network.chain.name} Network Tokens`,
+			description: `A directory of tokens on the ${network.chain.name} Network.`
 		}
 	};
 };

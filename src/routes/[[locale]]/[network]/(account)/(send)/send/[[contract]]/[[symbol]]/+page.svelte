@@ -302,15 +302,16 @@
 
 {#snippet Recipient()}
 	<fieldset class="grid gap-2" class:hidden={!showAll && f.current !== 'to'}>
-		<Label for="to-input">Receiving Account</Label>
+		<Label for="to-input">Recipient</Label>
 		<NameInput
 			bind:this={toInput}
 			bind:ref={toRef}
 			bind:value={sendState.to}
 			bind:valid={toValid}
 			id="to-input"
+			name="recipient"
 			{onkeydown}
-			placeholder="Enter the account name of the recipient"
+			placeholder="Who are you sending to?"
 		/>
 	</fieldset>
 {/snippet}

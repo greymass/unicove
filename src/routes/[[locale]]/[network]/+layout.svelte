@@ -22,12 +22,8 @@
 	import { WharfState } from '$lib/state/client/wharf.svelte.js';
 	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte';
 
-	import AccountSwitcher from '$lib/components/accountswitch.svelte';
 	import ProposalNameDialog from '$lib/components/elements/proposalname.svelte';
-	import Search from '$lib/components/search/input.svelte';
-	import SideMenuContent from '$lib/components/navigation/sidemenu.svelte';
-	import Unicovelogo from '$lib/assets/unicovelogo.svelte';
-	import MobileNavigation from '$lib/components/navigation/mobilenavigation.svelte';
+	import NavShell from '$lib/components/navigation/shell.svelte';
 	import type { NetworkState } from '$lib/state/network.svelte.js';
 	import { MetaMaskState } from '$lib/state/metamask.svelte.js';
 	import { checkForSnap } from '$lib/metamask-snap.js';
@@ -274,36 +270,6 @@
 	</script>
 </svelte:head>
 
-<div
-	data-theme={data.network}
-	class="mx-auto grid h-full min-h-svh w-[calc(100%-2rem)] max-w-(--breakpoint-2xl) grid-cols-2 grid-rows-[min-content_minmax(0,1fr)] gap-y-6 pt-4 sm:grid-cols-4 md:h-auto md:min-h-svh md:grid-cols-12 md:grid-rows-[min-content_minmax(0,1fr)] md:gap-x-4 xl:w-[calc(100%-6rem)]"
->
-	<aside class="relative col-start-1 col-end-3 row-span-full row-start-1 hidden h-full md:block">
-		<nav class="sticky top-4 row-span-2 flex h-[calc(100svh-1rem)] flex-col content-start gap-6">
-			<a href={urlPath('/')} class="grid h-12 items-center" aria-label="home">
-				<Unicovelogo small class="items-start" />
-			</a>
-			<SideMenuContent network={data.network} />
-		</nav>
-	</aside>
-
-	<header class="col-span-full row-start-1 flex h-12 items-center justify-between">
-		<MobileNavigation network={data.network} />
-
-		<div
-			class="flex items-center justify-end gap-4 sm:col-start-4 md:col-span-full md:col-start-9 md:flex-1 md:gap-4"
-		>
-			<Search class="max-w-56 flex-1" />
-
-			<AccountSwitcher network={data.network} />
-		</div>
-	</header>
-
-	<main
-		class="col-span-full col-start-1 row-span-full row-start-2 grid grid-cols-subgrid content-start gap-x-4 pb-12 *:col-span-full md:col-start-3 md:col-end-13 md:px-0 xl:col-end-13"
-	>
-		{@render children?.()}
-	</main>
-</div>
+<NavShell network={data.network}>{@render children?.()}</NavShell>
 
 <ProposalNameDialog />

@@ -1,12 +1,63 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import { Card, Stack, Table, TD, TR } from 'unicove-components';
+	import { getContext, onMount } from 'svelte';
+	import { Card, DD, DL, DLRow, Stack } from 'unicove-components';
 	import { API } from '@wharfkit/antelope';
-	// import Pageheader from '$lib/components/pageheader.svelte';
+
+	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import { StatindexClient, type NetworkStatsEntry } from '$lib/state/statindex/client';
+	import {
+		DEFAULT_STAT_WINDOW,
+		stripIncompletePeriod,
+		windowGranularity,
+		windowStart,
+		type StatWindow
+	} from '$lib/state/statindex/utils';
+	import StatsHistory from '$lib/components/chart/statshistory.svelte';
+	import WindowSelect from '$lib/components/statindex/windowselect.svelte';
 
 	const { data } = $props();
+	const context = getContext<UnicoveContext>('state');
 
-	let state: API.v1.GetInfoResponse | undefined = $state();
+	let chainInfo: API.v1.GetInfoResponse | undefined = $state();
+
+	const locale = $derived(String(data.locale ?? 'en'));
+
+	const hasStats = $derived(data.network.supports('statindex'));
+	const client = new StatindexClient(context.urlPath('/api/stats'));
+
+	let statWindow = $state<StatWindow>(DEFAULT_STAT_WINDOW);
+	let stats = $state<NetworkStatsEntry[]>([]);
+	let statsFailed = $state(false);
+	let requestId = 0;
+
+	$effect(() => {
+		if (!hasStats) return;
+		const window = statWindow;
+		const params = {
+			start: windowStart(window),
+			granularity: windowGranularity(window)
+		};
+		const id = ++requestId;
+		statsFailed = false;
+		client
+			.getNetworkStats(params)
+			.then((response) => {
+				if (id !== requestId) return;
+				stats = stripIncompletePeriod(response.data ?? [], window);
+			})
+			.catch(() => {
+				if (id !== requestId) return;
+				stats = [];
+				statsFailed = true;
+			});
+	});
+
+	const series = $derived({
+		actions: stats.map((entry) => ({ date: entry.date, value: entry.actions })),
+		transactions: stats.map((entry) => ({ date: entry.date, value: entry.transactions })),
+		uniqueAccounts: stats.map((entry) => ({ date: entry.date, value: entry.unique_accounts })),
+		newAccounts: stats.map((entry) => ({ date: entry.date, value: entry.new_accounts }))
+	});
 
 	onMount(() => {
 		updateState();
@@ -18,27 +69,85 @@
 	});
 
 	async function updateState() {
-		state = await data.network.client.v1.chain.get_info();
+		chainInfo = await data.network.client.v1.chain.get_info();
 	}
 </script>
 
 <Stack class="gap-8">
-	<Card>Network charts/metrics</Card>
+	{#if hasStats}
+		<Stack class="gap-6">
+			<WindowSelect bind:value={statWindow} />
+			{#if statsFailed}
+				<p class="text-error">Network activity charts are unavailable right now.</p>
+			{:else if stats.length}
+				<div class="grid gap-8 md:grid-cols-2">
+					<Card title="Actions"><StatsHistory data={series.actions} label="Actions" /></Card>
+					<Card title="Transactions">
+						<StatsHistory data={series.transactions} label="Transactions" />
+					</Card>
+					<Card title="Unique accounts (approximate)">
+						<StatsHistory data={series.uniqueAccounts} label="Unique accounts (approximate)" />
+					</Card>
+					<Card title="New accounts">
+						<StatsHistory data={series.newAccounts} label="New accounts" />
+					</Card>
+				</div>
+			{:else}
+				<p class="text-muted animate-pulse">Loading network activity...</p>
+			{/if}
+		</Stack>
+	{/if}
 
-	<Stack>
-		{#if state}
-			<Table>
-				<TR>
-					<TD>Reversible Blocks</TD>
-					<TD>{state.head_block_num.subtracting(state.last_irreversible_block_num)}</TD>
-				</TR>
-				{#each Object.keys(state) as index}
-					<TR>
-						<TD>{index}</TD>
-						<TD>{state[index as keyof typeof state]}</TD>
-					</TR>
-				{/each}
-			</Table>
-		{/if}
-	</Stack>
+	{#if chainInfo}
+		<div class="grid gap-8 md:grid-cols-2">
+			<Card title="Chain state">
+				<DL>
+					<DLRow title="Head block">
+						<DD class="font-mono tabular-nums">
+							{Number(chainInfo.head_block_num).toLocaleString(locale)}
+						</DD>
+					</DLRow>
+					<DLRow title="Irreversible block">
+						<DD class="font-mono tabular-nums">
+							{Number(chainInfo.last_irreversible_block_num).toLocaleString(locale)}
+						</DD>
+					</DLRow>
+					<DLRow title="Reversible blocks">
+						<DD class="font-mono tabular-nums">
+							{Number(
+								chainInfo.head_block_num.subtracting(chainInfo.last_irreversible_block_num)
+							).toLocaleString(locale)}
+						</DD>
+					</DLRow>
+					<DLRow title="Block producer">
+						<DD>
+							<a
+								class="text-primary"
+								href={context.urlPath(`/account/${chainInfo.head_block_producer}`)}
+							>
+								{chainInfo.head_block_producer}
+							</a>
+						</DD>
+					</DLRow>
+					<DLRow title="Head block time">
+						<DD class="font-mono tabular-nums">
+							{new Date(chainInfo.head_block_time.toMilliseconds()).toLocaleString(locale)}
+						</DD>
+					</DLRow>
+				</DL>
+			</Card>
+			<Card title="Node">
+				<DL>
+					<DLRow title="Server version">
+						<DD class="font-mono">{chainInfo.server_version_string}</DD>
+					</DLRow>
+					<DLRow title="Chain ID">
+						<DD>
+							<span class="font-mono text-sm break-all">{chainInfo.chain_id}</span>
+						</DD>
+					</DLRow>
+				</DL>
+			</Card>
+		</div>
+	{/if}
 </Stack>

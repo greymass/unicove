@@ -6,6 +6,13 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { locales } from 'virtual:wuchale/locales';
 	import { writable } from 'svelte/store';
+	import { cn } from '$lib/utils/style';
+
+	interface Props {
+		class?: string;
+	}
+
+	let { class: className }: Props = $props();
 
 	const displayName = (loc: string) =>
 		new Intl.DisplayNames([loc], { type: 'language' }).of(loc) || 'Unknown';
@@ -47,7 +54,10 @@
 </script>
 
 <button
-	class="border-outline focus:border-primary flex h-10 items-center justify-between gap-2 rounded-full border-2 bg-transparent py-2 pr-3 pl-4 font-medium transition-opacity hover:opacity-90 focus:outline-none"
+	class={cn(
+		'border-outline focus:border-primary flex h-10 items-center justify-between gap-2 rounded-full border-2 bg-transparent py-2 pr-3 pl-4 font-medium transition-opacity hover:opacity-90 focus:outline-none',
+		className
+	)}
 	use:melt={$trigger}
 	aria-label="langauge-select-label"
 	id="language-select"
