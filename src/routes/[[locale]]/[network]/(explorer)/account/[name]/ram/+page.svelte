@@ -1,70 +1,59 @@
 <script lang="ts">
-	import { Asset } from '@wharfkit/antelope';
-	import { Card } from 'unicove-components';
+	import { Asset, type Int64 } from '@wharfkit/antelope';
+	import { Card, DD, DL, DLRow } from 'unicove-components';
 	import { Ram as RAM } from 'unicove-components';
 	import { calculateValue } from '$lib/utils';
 
 	const { data } = $props();
+
+	const ram = $derived(data.account.resources.ram);
+	const price = $derived(data.network.resources.ram.price.rammarket);
+
+	function tokenValue(bytes: Int64) {
+		return calculateValue(Asset.fromUnits(bytes, '3,RAM'), price);
+	}
 </script>
 
 {#if data.account}
 	<h3>Account RAM</h3>
-	<div class="grid grid-cols-1 gap-6 md:grid-cols-3">
-		<Card>
-			<h4 class="mb-2 text-lg font-semibold">Total:</h4>
-			<ul class="space-y-2">
-				<li><RAM bytes={Number(data.account.resources.ram.max || 0)} /></li>
-				{#if data.network.resources.ram.price.rammarket}
-					<li>
-						{calculateValue(
-							Asset.fromUnits(data.account.resources.ram.max, '3,RAM'),
-							data.network.resources.ram.price.rammarket
-						)}
-					</li>
-				{/if}
-			</ul>
+	<div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+		<Card title="Network Resource">
+			<DL>
+				<DLRow title="Total">
+					<DD><RAM bytes={Number(ram.max || 0)} /></DD>
+				</DLRow>
+				<DLRow title="Used">
+					<DD><RAM bytes={Number(ram.used || 0)} /></DD>
+				</DLRow>
+				<DLRow title="Available to use">
+					<DD><RAM bytes={Number(ram.available || 0)} /></DD>
+				</DLRow>
+			</DL>
 		</Card>
-		<Card>
-			<h4 class="mb-2 text-lg font-semibold">Available:</h4>
-			<ul class="space-y-2">
-				<li><RAM bytes={Number(data.account.resources.ram.available || 0)} /></li>
-				{#if data.network.resources.ram.price.rammarket}
-					<li>
-						{calculateValue(
-							Asset.fromUnits(data.account.resources.ram.available, '3,RAM'),
-							data.network.resources.ram.price.rammarket
-						)}
-					</li>
+		<Card title="RAM Holdings">
+			<DL>
+				<DLRow title="Owned">
+					<DD>
+						<RAM bytes={Number(ram.owned || 0)} />
+						{#if price}
+							({tokenValue(ram.owned)})
+						{/if}
+					</DD>
+				</DLRow>
+				<DLRow title="Tradable">
+					<DD>
+						<RAM bytes={Number(ram.balance || 0)} />
+						{#if price}
+							({tokenValue(ram.balance)})
+						{/if}
+					</DD>
+				</DLRow>
+				{#if Number(ram.gifted)}
+					<DLRow title="Gifted (untransferable)">
+						<DD><RAM bytes={Number(ram.gifted || 0)} /></DD>
+					</DLRow>
 				{/if}
-			</ul>
-		</Card>
-		<Card>
-			<h4 class="mb-2 text-lg font-semibold">Usable:</h4>
-			<ul class="space-y-2">
-				<li><RAM bytes={Number(data.account.resources.ram.available || 0)} /></li>
-				{#if data.network.resources.ram.price.rammarket}
-					<li>
-						{calculateValue(
-							Asset.fromUnits(data.account.resources.ram.available, '3,RAM'),
-							data.network.resources.ram.price.rammarket
-						)}
-					</li>
-				{/if}
-			</ul>
-		</Card>
-		<Card>
-			<h4 class="mb-2 text-lg font-semibold">Used:</h4>
-			<ul class="space-y-2">
-				<li><RAM bytes={Number(data.account.resources.ram.used || 0)} /></li>
-				{#if data.network.resources.ram.price.rammarket}
-					<li>
-						{calculateValue(
-							Asset.fromUnits(data.account.resources.ram.used, '3,RAM'),
-							data.network.resources.ram.price.rammarket
-						)}
-					</li>
-				{/if}
-			</ul>
+			</DL>
 		</Card>
 	</div>
 {:else}

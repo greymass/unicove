@@ -68,6 +68,7 @@
 	const balanceDelegated = $derived(_balance.child('delegated'));
 	const balanceUsed = $derived(_balance.child('used'));
 	const balanceWRAM = $derived(_balance.child('wram'));
+	const balanceGifted = $derived(_balance.child('gifted'));
 </script>
 
 {#snippet SubBalance(label: string, value: Asset, action?: { text: string; href: string })}
@@ -143,7 +144,7 @@
 
 <Details class={className} header={DetailsHeader} {open}>
 	{@render SubBalance(
-		'Available',
+		isRamToken ? 'Tradable' : 'Available',
 		_balance.balance,
 		!_balance.locked
 			? {
@@ -185,6 +186,10 @@
 
 	{#if balanceUsed && balanceUsed.balance.value > 0}
 		{@render SubBalance('Used', balanceUsed.balance)}
+	{/if}
+
+	{#if isRamToken && balanceGifted && balanceGifted.balance.value > 0}
+		{@render SubBalance('Gifted (untransferable)', balanceGifted.balance)}
 	{/if}
 
 	{#if isRamToken && balanceWRAM}

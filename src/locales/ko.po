@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.663Z\n"
-"PO-Revision-Date: 2026-08-01T18:31:32.055Z\n"
+"PO-Revision-Date: 2026-08-01T22:14:46.322Z\n"
 "Last-Translator: \n"
 "Language: ko\n"
 "Language-Team: \n"
@@ -283,6 +283,7 @@ msgstr "지우기"
 
 #: src/lib/components/breakdown/breakdownRow.svelte
 #: src/lib/components/card/tokenoverview.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/ram/+page.svelte
 msgid "Total"
 msgstr "총"
 
@@ -2372,22 +2373,6 @@ msgid "Account RAM"
 msgstr "계정 RAM"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/ram/+page.svelte
-msgid "Total:"
-msgstr "총:"
-
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/ram/+page.svelte
-msgid "Available:"
-msgstr "사용 가능:"
-
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/ram/+page.svelte
-msgid "Usable:"
-msgstr "사용 가능:"
-
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/ram/+page.svelte
-msgid "Used:"
-msgstr "사용됨:"
-
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/ram/+page.svelte
 msgid "Loading account RAM details..."
 msgstr "계정 RAM 세부 정보를 로드 중..."
 
@@ -3251,11 +3236,6 @@ msgstr "토큰 스테이킹"
 #: src/routes/[[locale]]/[network]/(account)/fund/+page.svelte
 msgid "Purchase Directly"
 msgstr "직접 구매"
-
-#~ msgid ""
-#~ "Purchase {0} and have it directly send to your account using one\n"
-#~ "of the platforms below."
-#~ msgstr "아래 플랫폼 중 하나를 사용하여 {0}을(를) 구매하고 계정으로 직접 보내십시오."
 
 #: src/routes/[[locale]]/[network]/(account)/fund/+page.svelte
 msgid "Token to Purchase"
@@ -4764,6 +4744,7 @@ msgid "The {0} data table in the {1} smart contract on the {2} network."
 msgstr "{2} 네트워크 상의 {1} 스마트 컨트랙트에 있는 {0} 데이터 테이블."
 
 #: src/lib/components/card/tokenbalance.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/ram/+page.svelte
 msgid "Used"
 msgstr "사용됨"
 
@@ -6705,21 +6686,9 @@ msgstr ""
 msgid "Buy tokens with a card or exchange"
 msgstr ""
 
-#~ msgid "Undelegate"
-#~ msgstr ""
-
-#~ msgid "Reclaim CPU/NET staked to your account"
-#~ msgstr ""
-
-#~ msgid "Claim unstaked tokens after the refund period"
-#~ msgstr ""
-
 #: src/lib/state/search/actions/pages.svelte.ts
 msgid "Transaction Status"
 msgstr ""
-
-#~ msgid "Pending and completed transactions from this device"
-#~ msgstr ""
 
 #: src/lib/components/navigation/model.svelte.ts
 #: src/lib/state/search/actions/pages.svelte.ts
@@ -6755,10 +6724,6 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(homepage)/components/launcher.svelte
 msgid "<0/> Stake"
-msgstr ""
-
-#: src/routes/[[locale]]/[network]/(homepage)/components/apps.svelte
-msgid "Apps"
 msgstr ""
 
 #: src/lib/components/accountswitch.svelte
@@ -7356,4 +7321,30 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
 msgid "Get Anchor Wallet"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/ram/+page.svelte
+msgid "Network Resource"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/ram/+page.svelte
+msgid "Available to use"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/ram/+page.svelte
+msgid "RAM Holdings"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/ram/+page.svelte
+msgid "Owned"
+msgstr ""
+
+#: src/lib/components/card/tokenbalance.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/ram/+page.svelte
+msgid "Tradable"
+msgstr ""
+
+#: src/lib/components/card/tokenbalance.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/ram/+page.svelte
+msgid "Gifted (untransferable)"
 msgstr ""

@@ -405,6 +405,11 @@ export function getBalances(
 		balance: Asset.fromUnits(resources.ram.used, token.symbol),
 		name: 'used'
 	});
+	const ramgifted = TokenBalanceChild.from({
+		token,
+		balance: Asset.fromUnits(resources.ram.gifted, token.symbol),
+		name: 'gifted'
+	});
 
 	let wrambalance: TokenBalanceChild | undefined;
 	if (network.supports('wram')) {
@@ -419,7 +424,7 @@ export function getBalances(
 		});
 	}
 
-	const children: TokenBalanceChild[] = [ramtotal, ramused];
+	const children: TokenBalanceChild[] = [ramtotal, ramused, ramgifted];
 
 	if (wrambalance) {
 		children.push(wrambalance);
@@ -429,7 +434,7 @@ export function getBalances(
 	balances.push(
 		TokenBalance.from({
 			token,
-			balance: Asset.fromUnits(resources.ram.available, token.symbol),
+			balance: Asset.fromUnits(resources.ram.balance, token.symbol),
 			locked: !network.supports('ramtransfer'),
 			children
 		})
