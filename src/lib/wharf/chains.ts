@@ -1,4 +1,4 @@
-import { Asset, Name, Serializer, type Checksum256Type, type NameType } from '@wharfkit/antelope';
+import { Asset, Name, type Checksum256Type, type NameType } from '@wharfkit/antelope';
 import { ChainDefinition, Logo, TokenIdentifier } from '@wharfkit/common';
 
 import { Contract as DelphiHelperContract } from '$lib/wharf/contracts/delphihelper';
@@ -19,7 +19,13 @@ import * as env from '$env/static/public';
 // Tolerant lookup for flags not yet declared in every deployment's env files
 const optionalEnv = env as Partial<Record<string, string>>;
 
-import { Token, TokenDefinition, TokenMedia, TokenMediaAsset } from '$lib/types/token';
+import {
+	parseTokenDefinitions,
+	Token,
+	TokenDefinition,
+	TokenMedia,
+	TokenMediaAsset
+} from '$lib/types/token';
 import { isENVTrue } from '$lib/utils/strings';
 
 const coinbase =
@@ -116,13 +122,9 @@ export const wramtoken = Token.from({
 });
 
 // Curated token directory; a registry contract can replace this source later
-export const configuredTokens: TokenDefinition[] = env.PUBLIC_FEATURE_UNICOVE_CONTRACT_API_TOKENS
-	? (Serializer.decode({
-			type: 'token_definition[]',
-			customTypes: [TokenDefinition],
-			data: env.PUBLIC_FEATURE_UNICOVE_CONTRACT_API_TOKENS
-		}) as TokenDefinition[])
-	: [];
+export const configuredTokens: TokenDefinition[] = parseTokenDefinitions(
+	env.PUBLIC_FEATURE_UNICOVE_CONTRACT_API_TOKENS
+);
 
 export const chainConfig: ChainConfig = {
 	id: env.PUBLIC_CHAIN_ID,
