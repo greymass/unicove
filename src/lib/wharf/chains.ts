@@ -1,6 +1,7 @@
 import { Asset, Name, type Checksum256Type, type NameType } from '@wharfkit/antelope';
 import { ChainDefinition, Logo, TokenIdentifier } from '@wharfkit/common';
 
+import { Contract as CreateContract } from '$lib/wharf/contracts/create.gm';
 import { Contract as DelphiHelperContract } from '$lib/wharf/contracts/delphihelper';
 import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
 import { Contract as MSIGContract } from '$lib/wharf/contracts/msig';
@@ -82,6 +83,9 @@ if (env.PUBLIC_SYSTEM_TOKEN_LOGO_DARK) {
 	systemtokenasset.dark = env.PUBLIC_SYSTEM_TOKEN_LOGO_DARK;
 }
 export const systemcontract = Name.from(env.PUBLIC_SYSTEM_CONTRACT);
+export const createcontract = optionalEnv.PUBLIC_FEATURE_CREATE_CONTRACT
+	? Name.from(optionalEnv.PUBLIC_FEATURE_CREATE_CONTRACT)
+	: undefined;
 export const systemtoken = Token.from({
 	id: {
 		chain: env.PUBLIC_CHAIN_ID,
@@ -146,6 +150,7 @@ export const chainConfig: ChainConfig = {
 	},
 	features: {
 		bidname: isENVTrue(env.PUBLIC_FEATURE_BIDNAME),
+		createcontract: !!optionalEnv.PUBLIC_FEATURE_CREATE_CONTRACT,
 		delphihelper: isENVTrue(env.PUBLIC_FEATURE_DELPHIHELPER),
 		delphioracle: isENVTrue(env.PUBLIC_FEATURE_DELPHIORACLE),
 		directfunding: isENVTrue(env.PUBLIC_FEATURE_DIRECTFUNDING),
@@ -180,6 +185,7 @@ export const chainConfig: ChainConfig = {
 export const chains = [chainConfig];
 
 export interface DefaultContracts {
+	create: CreateContract;
 	delphihelper: DelphiHelperContract;
 	delphioracle: DelphiOracleContract;
 	eosio: SystemContract;
@@ -243,6 +249,7 @@ export interface ChainConfig {
 
 export type FeatureType =
 	| 'bidname'
+	| 'createcontract'
 	| 'delphihelper'
 	| 'delphioracle'
 	| 'directfunding'

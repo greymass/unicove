@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2026-08-01T22:27:30.813Z\n"
+"PO-Revision-Date: 2026-08-08T18:56:19.480Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -708,23 +708,10 @@ msgstr "模拟的代币价格"
 msgid "Debug Data Display"
 msgstr "调试数据展示"
 
-#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
-msgid "I have tokens on an exchange and want to create an account."
-msgstr "我在交易所拥有代币，想要创建一个帐户。"
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
-msgid "Create Account by Sending Tokens"
-msgstr "通过发送代币创建帐户"
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
-msgid "I have an account and want to create another."
-msgstr "我有一个帐户，想要创建另一个。"
-
 #: src/lib/components/navigation/model.svelte.ts
 #: src/lib/state/search/actions/pages.svelte.ts
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.ts
-#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.ts
 msgid "Create Account"
@@ -993,10 +980,6 @@ msgstr "输入"
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
 msgid "Escape"
 msgstr "退出"
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid "K1"
-msgstr "K1"
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/request/+page.svelte
 msgid "Account Creation"
@@ -1588,6 +1571,7 @@ msgstr "解质押余额是一个很长的标题"
 #: src/lib/components/card/tokenbalance.svelte
 #: src/lib/components/card/tokenoverview.svelte
 #: src/lib/components/elements/unstaking.svelte
+#: src/lib/components/summary/powerbot/withdraw.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/withdraw/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/withdraw/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/staking/+page.svelte
@@ -2506,6 +2490,8 @@ msgstr "发行者"
 msgid "Top 100 Accounts"
 msgstr "前 100 个帐户"
 
+#: src/lib/components/summary/powerbot/close.svelte
+#: src/lib/components/summary/powerbot/open.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/token/[contract]/[symbol]/+page.svelte
 msgid "Balance"
 msgstr "余额"
@@ -3257,6 +3243,7 @@ msgid "Change network"
 msgstr "更改网络"
 
 #: src/lib/components/accountswitch.svelte
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Connect Wallet"
 msgstr "连接钱包"
@@ -4388,58 +4375,6 @@ msgstr "账户总价值"
 msgid "Public Key"
 msgstr "公钥"
 
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid "Generate Key"
-msgstr "生成密钥"
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid "Private Key <0/>"
-msgstr "私钥 <0/>"
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid "Private Key"
-msgstr "私钥"
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid ""
-"This is your new private key. Copy it someplace safe, import it into your wallet, and never\n"
-"share it with anyone. If you lose this key, you will lose access to your account."
-msgstr "这是您的新私钥。请将其复制到安全的地方，将其导入您的钱包，并且永远不要与任何人分享。如果您丢失此密钥，您将失去对您帐户的访问权限。"
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid "I have saved this private key."
-msgstr "我已经保存了这个私钥。"
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid "Instructions"
-msgstr "说明"
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid ""
-"Send EOS from an exchange or over a bridge to the account below with the memo provided to\n"
-"create your account."
-msgstr "从交易所或通过桥将EOS发送到下面的帐户，并提供备忘录以创建您的帐户。"
-
-#. placeholder {0}: context.network.token.name
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid "Send {0} to account"
-msgstr "发送 {0} 到帐户"
-
-#. placeholder {0}: context.network.token.name
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid "Amount of {0} to send"
-msgstr "要发送的 {0} 数量"
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid "Transfer Memo"
-msgstr "转账备注"
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid ""
-"Once the transfer is complete, use your private key to import your account into the wallet of\n"
-"your choosing."
-msgstr "转账完成后，使用您的私钥将您的帐户导入您选择的钱包。"
-
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
@@ -4990,16 +4925,6 @@ msgstr "在 {0} 网络上投票选举区块生产者和情绪主题。"
 #: src/routes/[[locale]]/[network]/(explorer)/network/+layout.ts
 msgid "Network Overview"
 msgstr "网络概览"
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
-msgid "Smart Contract Account Creation"
-msgstr "智能合约账户创建"
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
-msgid "Create an account using a basic token transfer to a smart contract"
-msgstr "使用基本的代币转账到智能合约来创建账户"
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/request/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/create-account/request/+page.ts
@@ -6693,10 +6618,6 @@ msgstr "部署合约"
 msgid "Upload contract code and ABI to an account"
 msgstr "将合约代码和 ABI 上传到账户"
 
-#: src/lib/components/navigation/model.svelte.ts
-msgid "Create a new account on this network"
-msgstr "在此网络上创建新账户"
-
 #. placeholder {0}: network.chain.name
 #: src/routes/[[locale]]/[network]/(account)/tools/+page.ts
 msgid "Everything else you can do with your account on the {0} Network."
@@ -6789,7 +6710,6 @@ msgstr "RAM 市场概览"
 #: src/lib/state/search/actions/pages.svelte.ts
 #: src/lib/state/search/actions/pages.svelte.ts
 #: src/lib/state/search/actions/pages.svelte.ts
-#: src/lib/state/search/actions/pages.svelte.ts
 msgid "View Page"
 msgstr "查看页面"
 
@@ -6826,10 +6746,6 @@ msgid "Claim refund"
 msgstr "申请退款"
 
 #: src/lib/state/search/actions/pages.svelte.ts
-msgid "Get started"
-msgstr "开始使用"
-
-#: src/lib/state/search/actions/pages.svelte.ts
 msgid "Network overview"
 msgstr "网络概览"
 
@@ -6849,15 +6765,12 @@ msgstr ""
 "账户创建将通过 Anchor 完成，这是一个会在弹出窗口中打开的安全身份验证器。\n"
 "在那里选择登录方式，然后您将返回此处，新的账户即可使用。"
 
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/signup/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
 msgid "Waiting for Anchor..."
 msgstr "正在等待 Anchor..."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/+page.svelte
-msgid "The popup was closed before an account was created. You can try again at any time."
-msgstr "账户创建完成前弹出窗口已关闭。您可以随时重试。"
 
 #: src/routes/[[locale]]/[network]/(account)/signup/+page.svelte
 msgid "Prefer to use your own wallet? <0>Browse compatible wallets</0>"
@@ -7004,6 +6917,7 @@ msgstr "可以创建账户"
 msgid "New to {0}? <0>Create an account instead</0>"
 msgstr "刚接触 {0}？<0>改为创建账户</0>"
 
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/signup/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/account/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/contract/+page.ts
@@ -7348,3 +7262,320 @@ msgstr "可交易"
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/ram/+page.svelte
 msgid "Gifted (untransferable)"
 msgstr "赠送（不可转让）"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.ts
+msgid "Create an Account"
+msgstr "创建账户"
+
+#. placeholder {0}: network.chain.name
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.ts
+msgid "Choose how you want to create your new {0} account."
+msgstr "选择创建新的 {0} 账户的方式。"
+
+#. placeholder {0}: network.chain.name
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.ts
+msgid "Create a {0} Account"
+msgstr "创建 {0} 账户"
+
+#. placeholder {0}: network.chain.name
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.ts
+msgid "Create a new account on the {0} Network."
+msgstr "在 {0} 网络上创建新账户。"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Sign up with Anchor"
+msgstr "使用 Anchor 注册"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Send tokens to create"
+msgstr "发送代币以创建账户"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Use your existing account"
+msgstr "使用现有账户"
+
+#: src/lib/components/navigation/model.svelte.ts
+msgid "Choose how to create a new account on this network"
+msgstr "选择如何在此网络上创建新账户"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "Account names must be exactly 12 characters."
+msgstr "账户名称必须正好包含 12 个字符。"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "Checking availability…"
+msgstr "正在检查是否可用…"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "That name is already taken. Try another."
+msgstr "该名称已被占用。请尝试其他名称。"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "That name is available."
+msgstr "该名称可用。"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "Send tokens to create your account"
+msgstr "发送代币以创建账户"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "Send at least"
+msgstr "至少发送"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "To account"
+msgstr "目标账户"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "With this memo"
+msgstr "使用此备注"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "The transfer will not create your account without this exact memo."
+msgstr "如果没有这条完全一致的备注，转账不会创建你的账户。"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "Anything you send above the minimum becomes your new account's opening balance."
+msgstr "你发送的超过最低金额的部分，将成为新账户的初始余额。"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "Waiting for transfer…"
+msgstr "等待转账…"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "Account created"
+msgstr "账户已创建"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "<0/> is ready to use."
+msgstr "<0/> 已可使用。"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "Sign in with this account"
+msgstr "使用此账户登录"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "View account"
+msgstr "查看账户"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "Start over"
+msgstr "重新开始"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid ""
+"Creating an account reserves a name and a small amount of storage on the network, so it costs a\n"
+"little. Every option produces the same kind of account. They differ in what you need before you\n"
+"start."
+msgstr ""
+"创建账户会在网络上预留一个名称和少量存储空间，因此需要支付少量费用。每种选项都会创建\n"
+"相同类型的账户。它们的区别在于开始前所需的条件不同。"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "You're signed in already, so <0>creating from your existing account</0> is faster."
+msgstr "你已经登录，因此<0>从现有账户创建</0>会更快。"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid ""
+"Withdraw from an exchange, or send from any existing account. All three values must match\n"
+"exactly."
+msgstr "从交易所提现，或从任何现有账户发送。以下三个值必须完全匹配。"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "Keep this page open until the transfer arrives."
+msgstr "请保持此页面打开，直到转账到账。"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "Name already taken"
+msgstr "名称已被占用"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Create another account and pay for its storage from the account you're signed in with."
+msgstr "创建另一个账户，并使用你当前登录的账户支付其存储费用。"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "This key will have full control of your new account. It becomes both the owner and active key."
+msgstr "此密钥将完全控制你的新账户，并同时成为账户所有者密钥和活动密钥。"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
+msgid "Send Tokens to Create an Account"
+msgstr "发送代币以创建账户"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
+msgid "Send tokens from an exchange or another account, and your new account is created."
+msgstr "从交易所或其他账户发送代币，即可创建您的新账户。"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
+msgid "Create a new account by sending tokens with a memo."
+msgstr "通过发送附带备注的代币来创建新账户。"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid ""
+"Someone else registered <0/> before your transfer arrived. A transfer\n"
+"for a name that already exists will not go through, so your tokens stay where they are. Choose\n"
+"another name and start again."
+msgstr ""
+"在您的转账到账之前，其他人已经注册了 <0/>。已存在名称的转账将无法完成，因此您的代币仍会保留在原处。请选择\n"
+"其他名称，然后重新开始。"
+
+#: src/lib/components/summary/powerbot/close.svelte
+msgid "closed their pool balance"
+msgstr "关闭了他们的池余额"
+
+#: src/lib/components/summary/powerbot/delallow.svelte
+#: src/lib/components/summary/powerbot/setallow.svelte
+msgid "Allowance"
+msgstr "额度"
+
+#: src/lib/components/summary/powerbot/delallow.svelte
+msgid "removed their watcher allowance"
+msgstr "移除了他们的监视者额度"
+
+#: src/lib/components/summary/powerbot/delorder.svelte
+#: src/lib/components/summary/powerbot/setorder.svelte
+msgid "Standing order"
+msgstr "常设订单"
+
+#: src/lib/components/summary/powerbot/setorder.svelte
+msgid "set by"
+msgstr "设置者"
+
+#: src/lib/components/summary/powerbot/transactfee.svelte
+msgid "Paid fee"
+msgstr "已支付费用"
+
+#: src/lib/components/summary/powerbot/transactfee.svelte
+msgid "Service fee"
+msgstr "服务费"
+
+#: src/lib/components/summary/powerbot/transactfee.svelte
+msgid "for"
+msgstr "用于"
+
+#: src/lib/components/summary/powerbot/setallow.svelte
+msgid "allows watcher top-ups for"
+msgstr "允许监视者为其充值"
+
+#: src/lib/components/summary/powerbot/setallow.svelte
+msgid "patterns"
+msgstr "模式"
+
+#: src/lib/components/summary/powerbot/open.svelte
+msgid "opened a pool balance"
+msgstr "开设了池余额"
+
+#: src/lib/components/summary/powerbot/withdraw.svelte
+msgid "withdrew"
+msgstr "提取了"
+
+#: src/lib/components/summary/powerbot/withdraw.svelte
+msgid "from pool balance"
+msgstr "从池余额中"
+
+#: src/lib/components/summary/powerbot/topup.svelte
+msgid "Top-up"
+msgstr "充值"
+
+#: src/lib/components/summary/powerbot/topup.svelte
+msgid "requested for"
+msgstr "请求对象"
+
+#. placeholder {0}: data.cpu_ms
+#. placeholder {1}: data.net_kb
+#. placeholder {0}: data.cpu_ms
+#. placeholder {1}: data.net_kb
+#: src/lib/components/summary/powerbot/logresource.svelte
+#: src/lib/components/summary/powerbot/topup.svelte
+msgid "{0} ms CPU / {1} kB NET"
+msgstr "{0} 毫秒 CPU / {1} kB 网络"
+
+#: src/lib/components/summary/powerbot/logresource.svelte
+msgid "Paid"
+msgstr "已支付"
+
+#: src/lib/components/summary/powerbot/logresource.svelte
+msgid "Received resources"
+msgstr "已接收资源"
+
+#: src/lib/components/summary/powerbot/logresource.svelte
+msgid "Topped up"
+msgstr "已充值"
+
+#: src/lib/components/summary/powerbot/logresource.svelte
+msgid "cost"
+msgstr "成本"
+
+#: src/lib/components/summary/powerbot/logresource.svelte
+msgid "fee"
+msgstr "费用"
+
+#: src/lib/components/summary/powerbot/logresource.svelte
+msgid "funded by"
+msgstr "资助者"
+
+#: src/lib/components/summary/powerbot/configure.svelte
+msgid "Order entry"
+msgstr "订单录入"
+
+#: src/lib/components/summary/powerbot/configure.svelte
+msgid "updated by"
+msgstr "更新者"
+
+#: src/lib/components/summary/powerbot/delorder.svelte
+msgid "removed their standing order"
+msgstr "移除了他们的常设订单"
+
+#. placeholder {0}: floor
+#: src/lib/components/summary/powerbot/entry-row.svelte
+msgid "floor {0}"
+msgstr "下限 {0}"
+
+#: src/lib/components/summary/powerbot/entry-row.svelte
+msgid "Paused"
+msgstr "已暂停"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Anchor opens in a new window to create your account, and secures it on your device."
+msgstr "Anchor 会在新窗口中打开以创建你的账户，并将其安全地保存在你的设备上。"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Start with an account you already use"
+msgstr "从你已经在使用的账户开始"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Recommended for you"
+msgstr "为你推荐"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/signup/+page.svelte
+msgid ""
+"Anchor did not finish creating your account. If you never saw the Anchor window, allow popups\n"
+"for this site and try again."
+msgstr ""
+"Anchor 未完成账户创建。如果你从未看到 Anchor 窗口，请允许此网站弹出窗口，\n"
+"然后重试。"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Create with Anchor"
+msgstr "使用 Anchor 创建"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Create by sending tokens"
+msgstr "通过发送代币创建"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Create from your existing account"
+msgstr "使用你已有的账户创建"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Start with an email address"
+msgstr "从电子邮箱地址开始"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "You create the keys first in a wallet and save them somewhere safe, then send tokens from an exchange to create the account."
+msgstr "先在钱包中创建密钥并妥善保存，然后从交易所发送代币来创建账户。"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Start with tokens and your own keys"
+msgstr "从代币和你自己的密钥开始"

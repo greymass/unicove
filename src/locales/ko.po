@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.663Z\n"
-"PO-Revision-Date: 2026-08-01T22:27:30.806Z\n"
+"PO-Revision-Date: 2026-08-08T18:56:19.476Z\n"
 "Last-Translator: \n"
 "Language: ko\n"
 "Language-Team: \n"
@@ -708,23 +708,10 @@ msgstr "모의 토큰 가격"
 msgid "Debug Data Display"
 msgstr "디버그 데이터 표시"
 
-#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
-msgid "I have tokens on an exchange and want to create an account."
-msgstr "거래소에 토큰이 있고 계정을 만들고 싶습니다."
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
-msgid "Create Account by Sending Tokens"
-msgstr "토큰 전송으로 계정 생성"
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
-msgid "I have an account and want to create another."
-msgstr "계정이 있고 다른 계정을 만들고 싶습니다."
-
 #: src/lib/components/navigation/model.svelte.ts
 #: src/lib/state/search/actions/pages.svelte.ts
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.ts
-#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.ts
 msgid "Create Account"
@@ -991,10 +978,6 @@ msgstr "입력"
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
 msgid "Escape"
 msgstr "탈출"
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid "K1"
-msgstr "K1"
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/request/+page.svelte
 msgid "Account Creation"
@@ -1586,6 +1569,7 @@ msgstr "스테이킹 해제 잔액은 긴 제목입니다"
 #: src/lib/components/card/tokenbalance.svelte
 #: src/lib/components/card/tokenoverview.svelte
 #: src/lib/components/elements/unstaking.svelte
+#: src/lib/components/summary/powerbot/withdraw.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/withdraw/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/withdraw/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/staking/+page.svelte
@@ -2511,6 +2495,8 @@ msgstr "발행자"
 msgid "Top 100 Accounts"
 msgstr "상위 100개 계정"
 
+#: src/lib/components/summary/powerbot/close.svelte
+#: src/lib/components/summary/powerbot/open.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/token/[contract]/[symbol]/+page.svelte
 msgid "Balance"
 msgstr "잔액"
@@ -2880,6 +2866,7 @@ msgid "Change network"
 msgstr "네트워크 변경"
 
 #: src/lib/components/accountswitch.svelte
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Connect Wallet"
 msgstr "지갑 연결"
@@ -3606,58 +3593,6 @@ msgstr "새 계정이 성공적으로 생성되었습니다."
 #: src/routes/[[locale]]/[network]/(explorer)/key/[publicKey]/+page.ts
 msgid "Public Key"
 msgstr "공개 키"
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid "Generate Key"
-msgstr "키 생성"
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid "Private Key <0/>"
-msgstr "개인 키 <0/>"
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid "Private Key"
-msgstr "프라이빗 키"
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid ""
-"This is your new private key. Copy it someplace safe, import it into your wallet, and never\n"
-"share it with anyone. If you lose this key, you will lose access to your account."
-msgstr "이것은 당신의 새로운 개인 키입니다. 안전한 곳에 복사하고, 지갑으로 가져오고, 누구와도 공유하지 마세요. 이 키를 잃어버리면 계정에 대한 접근 권한을 잃게 됩니다."
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid "I have saved this private key."
-msgstr "이 개인 키를 저장했습니다. "
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid "Instructions"
-msgstr "지침"
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid ""
-"Send EOS from an exchange or over a bridge to the account below with the memo provided to\n"
-"create your account."
-msgstr "계정을 생성하려면 아래 계정으로 거래소나 브리지를 통해 EOS를 제공된 메모와 함께 보내세요."
-
-#. placeholder {0}: context.network.token.name
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid "Send {0} to account"
-msgstr "{0}을 계정에 전송"
-
-#. placeholder {0}: context.network.token.name
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid "Amount of {0} to send"
-msgstr "보낼 {0} 수량"
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid "Transfer Memo"
-msgstr "전송 메모 "
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid ""
-"Once the transfer is complete, use your private key to import your account into the wallet of\n"
-"your choosing."
-msgstr "전송이 완료되면 개인 키를 사용하여 원하는 지갑으로 계정을 가져오세요."
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 msgid "Activity"
@@ -4422,16 +4357,6 @@ msgstr "Block Producers"
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.ts
 msgid "Validators on the {0} network."
 msgstr "Validators on the {network} network."
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
-msgid "Smart Contract Account Creation"
-msgstr "스마트 컨트랙트 계정 생성"
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
-msgid "Create an account using a basic token transfer to a smart contract"
-msgstr "기본 토큰을 스마트 컨트랙트로 전송하여 계정을 생성하세요."
 
 #: src/routes/[[locale]]/[network]/(account)/resources/stake/+page.ts
 msgid "Renting"
@@ -6699,10 +6624,6 @@ msgstr "컨트랙트 배포"
 msgid "Upload contract code and ABI to an account"
 msgstr "계정에 컨트랙트 코드와 ABI 업로드"
 
-#: src/lib/components/navigation/model.svelte.ts
-msgid "Create a new account on this network"
-msgstr "이 네트워크에 새 계정 생성"
-
 #. placeholder {0}: network.chain.name
 #: src/routes/[[locale]]/[network]/(account)/tools/+page.ts
 msgid "Everything else you can do with your account on the {0} Network."
@@ -6795,7 +6716,6 @@ msgstr "RAM 시장 개요"
 #: src/lib/state/search/actions/pages.svelte.ts
 #: src/lib/state/search/actions/pages.svelte.ts
 #: src/lib/state/search/actions/pages.svelte.ts
-#: src/lib/state/search/actions/pages.svelte.ts
 msgid "View Page"
 msgstr "페이지 보기"
 
@@ -6832,10 +6752,6 @@ msgid "Claim refund"
 msgstr "환불 청구"
 
 #: src/lib/state/search/actions/pages.svelte.ts
-msgid "Get started"
-msgstr "시작하기"
-
-#: src/lib/state/search/actions/pages.svelte.ts
 msgid "Network overview"
 msgstr "네트워크 개요"
 
@@ -6855,15 +6771,12 @@ msgstr ""
 "계정 생성은 팝업 창에서 열리는 보안 인증 도구인 Anchor를 통해 진행됩니다.\n"
 "그곳에서 로그인 방법을 선택하면 새 계정이 생성되어 여기로 돌아옵니다."
 
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/signup/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
 msgid "Waiting for Anchor..."
 msgstr "Anchor를 기다리는 중..."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/+page.svelte
-msgid "The popup was closed before an account was created. You can try again at any time."
-msgstr "계정이 생성되기 전에 팝업이 닫혔습니다. 언제든 다시 시도할 수 있습니다."
 
 #: src/routes/[[locale]]/[network]/(account)/signup/+page.svelte
 msgid "Prefer to use your own wallet? <0>Browse compatible wallets</0>"
@@ -7016,6 +6929,7 @@ msgstr "계정을 만들 수 있음"
 msgid "New to {0}? <0>Create an account instead</0>"
 msgstr "{0}이(가) 처음이신가요? <0>대신 계정 만들기</0>"
 
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/signup/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/account/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/contract/+page.ts
@@ -7362,3 +7276,321 @@ msgstr "거래 가능"
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/ram/+page.svelte
 msgid "Gifted (untransferable)"
 msgstr "선물 받음(양도 불가)"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.ts
+msgid "Create an Account"
+msgstr "계정 만들기"
+
+#. placeholder {0}: network.chain.name
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.ts
+msgid "Choose how you want to create your new {0} account."
+msgstr "새로운 {0} 계정을 만들 방법을 선택하세요."
+
+#. placeholder {0}: network.chain.name
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.ts
+msgid "Create a {0} Account"
+msgstr "{0} 계정 만들기"
+
+#. placeholder {0}: network.chain.name
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.ts
+msgid "Create a new account on the {0} Network."
+msgstr "{0} 네트워크에서 새 계정을 만드세요."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Sign up with Anchor"
+msgstr "Anchor로 가입"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Send tokens to create"
+msgstr "토큰을 보내서 만들기"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Use your existing account"
+msgstr "기존 계정 사용"
+
+#: src/lib/components/navigation/model.svelte.ts
+msgid "Choose how to create a new account on this network"
+msgstr "이 네트워크에서 새 계정을 만드는 방법을 선택하세요"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "Account names must be exactly 12 characters."
+msgstr "계정 이름은 정확히 12자여야 합니다."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "Checking availability…"
+msgstr "사용 가능 여부 확인 중…"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "That name is already taken. Try another."
+msgstr "해당 이름은 이미 사용 중입니다. 다른 이름을 시도해 보세요."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "That name is available."
+msgstr "해당 이름을 사용할 수 있습니다."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "Send tokens to create your account"
+msgstr "토큰을 보내 계정 만들기"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "Send at least"
+msgstr "최소 전송 금액"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "To account"
+msgstr "수신 계정"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "With this memo"
+msgstr "이 메모와 함께"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "The transfer will not create your account without this exact memo."
+msgstr "이 메모가 정확히 일치하지 않으면 이체로 계정이 생성되지 않습니다."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "Anything you send above the minimum becomes your new account's opening balance."
+msgstr "최소 금액을 초과하여 보낸 금액은 새 계정의 개설 잔액이 됩니다."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "Waiting for transfer…"
+msgstr "이체 대기 중…"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "Account created"
+msgstr "계정이 생성되었습니다"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "<0/> is ready to use."
+msgstr "<0/>을 사용할 준비가 되었습니다."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "Sign in with this account"
+msgstr "이 계정으로 로그인"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "View account"
+msgstr "계정 보기"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "Start over"
+msgstr "처음부터 다시 시작"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid ""
+"Creating an account reserves a name and a small amount of storage on the network, so it costs a\n"
+"little. Every option produces the same kind of account. They differ in what you need before you\n"
+"start."
+msgstr ""
+"계정을 만들면 네트워크에 이름과 소량의 저장 공간이 예약되므로 약간의 비용이 듭니다. 모든 옵션은\n"
+"동일한 종류의 계정을 만듭니다. 시작하기 전에 필요한 것이 무엇인지에 따라 옵션이 다릅니다."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "You're signed in already, so <0>creating from your existing account</0> is faster."
+msgstr "이미 로그인되어 있으므로 <0>기존 계정에서 생성하는 것</0>이 더 빠릅니다."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid ""
+"Withdraw from an exchange, or send from any existing account. All three values must match\n"
+"exactly."
+msgstr "거래소에서 출금하거나 기존 계정에서 보내세요. 세 값이 모두 정확히 일치해야 합니다."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "Keep this page open until the transfer arrives."
+msgstr "이체가 도착할 때까지 이 페이지를 열어 두세요."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "Name already taken"
+msgstr "이미 사용 중인 이름입니다"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Create another account and pay for its storage from the account you're signed in with."
+msgstr "다른 계정을 만들고 현재 로그인한 계정으로 해당 계정의 저장 공간 비용을 지불합니다."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "This key will have full control of your new account. It becomes both the owner and active key."
+msgstr "이 키는 새 계정을 완전히 제어할 수 있습니다. 소유자 키와 활성 키가 모두 됩니다."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
+msgid "Send Tokens to Create an Account"
+msgstr "계정을 생성하기 위해 토큰 보내기"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
+msgid "Send tokens from an exchange or another account, and your new account is created."
+msgstr "거래소나 다른 계정에서 토큰을 보내면 새 계정이 생성됩니다."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
+msgid "Create a new account by sending tokens with a memo."
+msgstr "메모와 함께 토큰을 보내 새 계정을 생성하세요."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid ""
+"Someone else registered <0/> before your transfer arrived. A transfer\n"
+"for a name that already exists will not go through, so your tokens stay where they are. Choose\n"
+"another name and start again."
+msgstr ""
+"송금이 도착하기 전에 다른 사람이 <0/>을(를) 등록했습니다. 이미 존재하는 이름으로의 송금은\n"
+"처리되지 않으므로 토큰은 현재 위치에 그대로 남아 있습니다. 다른 이름을 선택하고\n"
+"다시 시작하세요."
+
+#: src/lib/components/summary/powerbot/close.svelte
+msgid "closed their pool balance"
+msgstr "자신의 풀 잔액을 종료함"
+
+#: src/lib/components/summary/powerbot/open.svelte
+msgid "opened a pool balance"
+msgstr "풀 잔액을 개설함"
+
+#: src/lib/components/summary/powerbot/delallow.svelte
+#: src/lib/components/summary/powerbot/setallow.svelte
+msgid "Allowance"
+msgstr "허용량"
+
+#: src/lib/components/summary/powerbot/setallow.svelte
+msgid "allows watcher top-ups for"
+msgstr "감시자의 충전을 허용하는 대상"
+
+#: src/lib/components/summary/powerbot/setallow.svelte
+msgid "patterns"
+msgstr "패턴"
+
+#: src/lib/components/summary/powerbot/delallow.svelte
+msgid "removed their watcher allowance"
+msgstr "자신의 감시자 허용량을 제거함"
+
+#: src/lib/components/summary/powerbot/delorder.svelte
+#: src/lib/components/summary/powerbot/setorder.svelte
+msgid "Standing order"
+msgstr "상시 주문"
+
+#: src/lib/components/summary/powerbot/setorder.svelte
+msgid "set by"
+msgstr "설정한 사람"
+
+#: src/lib/components/summary/powerbot/topup.svelte
+msgid "Top-up"
+msgstr "충전"
+
+#: src/lib/components/summary/powerbot/topup.svelte
+msgid "requested for"
+msgstr "요청 대상"
+
+#. placeholder {0}: data.cpu_ms
+#. placeholder {1}: data.net_kb
+#. placeholder {0}: data.cpu_ms
+#. placeholder {1}: data.net_kb
+#: src/lib/components/summary/powerbot/logresource.svelte
+#: src/lib/components/summary/powerbot/topup.svelte
+msgid "{0} ms CPU / {1} kB NET"
+msgstr "CPU {0}ms / 네트워크 {1}kB"
+
+#: src/lib/components/summary/powerbot/transactfee.svelte
+msgid "Paid fee"
+msgstr "수수료를 지불함"
+
+#: src/lib/components/summary/powerbot/transactfee.svelte
+msgid "Service fee"
+msgstr "서비스 수수료"
+
+#: src/lib/components/summary/powerbot/transactfee.svelte
+msgid "for"
+msgstr "대상"
+
+#: src/lib/components/summary/powerbot/withdraw.svelte
+msgid "withdrew"
+msgstr "인출함"
+
+#: src/lib/components/summary/powerbot/withdraw.svelte
+msgid "from pool balance"
+msgstr "풀 잔액에서"
+
+#: src/lib/components/summary/powerbot/logresource.svelte
+msgid "Paid"
+msgstr "지불함"
+
+#: src/lib/components/summary/powerbot/logresource.svelte
+msgid "Received resources"
+msgstr "리소스를 받음"
+
+#: src/lib/components/summary/powerbot/logresource.svelte
+msgid "Topped up"
+msgstr "충전함"
+
+#: src/lib/components/summary/powerbot/logresource.svelte
+msgid "cost"
+msgstr "비용"
+
+#: src/lib/components/summary/powerbot/logresource.svelte
+msgid "fee"
+msgstr "수수료"
+
+#: src/lib/components/summary/powerbot/logresource.svelte
+msgid "funded by"
+msgstr "자금 제공자"
+
+#: src/lib/components/summary/powerbot/configure.svelte
+msgid "Order entry"
+msgstr "주문 입력"
+
+#: src/lib/components/summary/powerbot/configure.svelte
+msgid "updated by"
+msgstr "업데이트한 사람"
+
+#: src/lib/components/summary/powerbot/delorder.svelte
+msgid "removed their standing order"
+msgstr "자신의 상시 주문을 제거함"
+
+#. placeholder {0}: floor
+#: src/lib/components/summary/powerbot/entry-row.svelte
+msgid "floor {0}"
+msgstr "하한가 {0}"
+
+#: src/lib/components/summary/powerbot/entry-row.svelte
+msgid "Paused"
+msgstr "일시 중지됨"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Anchor opens in a new window to create your account, and secures it on your device."
+msgstr "Anchor가 새 창을 열어 계정을 생성하고 기기에 안전하게 보관합니다."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Start with an account you already use"
+msgstr "이미 사용 중인 계정으로 시작"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Recommended for you"
+msgstr "추천"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/signup/+page.svelte
+msgid ""
+"Anchor did not finish creating your account. If you never saw the Anchor window, allow popups\n"
+"for this site and try again."
+msgstr ""
+"Anchor가 계정 생성을 완료하지 못했습니다. Anchor 창이 표시되지 않았다면 이 사이트의 팝업을 허용한 후\n"
+"다시 시도해 주세요."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Create with Anchor"
+msgstr "Anchor로 계정 생성"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Create by sending tokens"
+msgstr "토큰을 보내서 생성"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Create from your existing account"
+msgstr "기존 계정으로 생성"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Start with an email address"
+msgstr "이메일 주소로 시작"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "You create the keys first in a wallet and save them somewhere safe, then send tokens from an exchange to create the account."
+msgstr "먼저 지갑에서 키를 생성해 안전한 곳에 보관한 다음, 거래소에서 토큰을 보내 계정을 생성합니다."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Start with tokens and your own keys"
+msgstr "토큰과 직접 만든 키로 시작"

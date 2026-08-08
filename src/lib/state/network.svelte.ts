@@ -24,6 +24,7 @@ import {
 } from '$lib/types/network';
 
 import {
+	createcontract,
 	getChainDefinitionFromParams,
 	type ChainConfig,
 	type DefaultContracts,
@@ -37,6 +38,7 @@ import {
 
 import { Token, ZeroUnits, TokenDefinition, tokenEquals } from '$lib/types/token';
 
+import { Contract as CreateContract } from '$lib/wharf/contracts/create.gm';
 import { Contract as DelphiHelperContract } from '$lib/wharf/contracts/delphihelper';
 import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
 import { Contract as MSIGContract } from '$lib/wharf/contracts/msig';
@@ -119,6 +121,10 @@ export class NetworkState {
 		this.connection.endpoint = (this.client.provider as FetchProvider).url;
 
 		this.contracts = {
+			create: new CreateContract({
+				account: createcontract,
+				client: this.client
+			}),
 			delphihelper: new DelphiHelperContract({ client: this.client }),
 			delphioracle: new DelphiOracleContract({ client: this.client }),
 			eosio: new SystemContract({ account: 'eosio', client: this.client }),

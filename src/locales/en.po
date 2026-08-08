@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2026-08-01T22:14:46.313Z\n"
+"PO-Revision-Date: 2026-08-08T18:56:19.470Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -710,23 +710,10 @@ msgstr "Mock token price"
 msgid "Debug Data Display"
 msgstr "Debug Data Display"
 
-#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
-msgid "I have tokens on an exchange and want to create an account."
-msgstr "I have tokens on an exchange and want to create an account."
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
-msgid "Create Account by Sending Tokens"
-msgstr "Create Account by Sending Tokens"
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
-msgid "I have an account and want to create another."
-msgstr "I have an account and want to create another."
-
 #: src/lib/components/navigation/model.svelte.ts
 #: src/lib/state/search/actions/pages.svelte.ts
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.ts
-#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.ts
 msgid "Create Account"
@@ -996,10 +983,6 @@ msgstr "Enter"
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
 msgid "Escape"
 msgstr "Escape"
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid "K1"
-msgstr "K1"
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/request/+page.svelte
 msgid "Account Creation"
@@ -1614,6 +1597,7 @@ msgstr "Unstaking Balances Is A Long Title"
 #: src/lib/components/card/tokenbalance.svelte
 #: src/lib/components/card/tokenoverview.svelte
 #: src/lib/components/elements/unstaking.svelte
+#: src/lib/components/summary/powerbot/withdraw.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/withdraw/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/withdraw/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/staking/+page.svelte
@@ -2549,6 +2533,8 @@ msgstr "Issuer"
 msgid "Top 100 Accounts"
 msgstr "Top 100 Accounts"
 
+#: src/lib/components/summary/powerbot/close.svelte
+#: src/lib/components/summary/powerbot/open.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/token/[contract]/[symbol]/+page.svelte
 msgid "Balance"
 msgstr "Balance"
@@ -2918,6 +2904,7 @@ msgid "Change network"
 msgstr "Change network"
 
 #: src/lib/components/accountswitch.svelte
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Connect Wallet"
 msgstr "Connect Wallet"
@@ -3667,64 +3654,6 @@ msgstr "Your new account has been created successfully."
 #: src/routes/[[locale]]/[network]/(explorer)/key/[publicKey]/+page.ts
 msgid "Public Key"
 msgstr "Public Key"
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid "Generate Key"
-msgstr "Generate Key"
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid "Private Key <0/>"
-msgstr "Private Key <0/>"
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid "Private Key"
-msgstr "Private Key"
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid ""
-"This is your new private key. Copy it someplace safe, import it into your wallet, and never\n"
-"share it with anyone. If you lose this key, you will lose access to your account."
-msgstr ""
-"This is your new private key. Copy it someplace safe, import it into your wallet, and never\n"
-"share it with anyone. If you lose this key, you will lose access to your account."
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid "I have saved this private key."
-msgstr "I have saved this private key."
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid "Instructions"
-msgstr "Instructions"
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid ""
-"Send EOS from an exchange or over a bridge to the account below with the memo provided to\n"
-"create your account."
-msgstr ""
-"Send EOS from an exchange or over a bridge to the account below with the memo provided to\n"
-"create your account."
-
-#. placeholder {0}: context.network.token.name
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid "Send {0} to account"
-msgstr "Send {0} to account"
-
-#. placeholder {0}: context.network.token.name
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid "Amount of {0} to send"
-msgstr "Amount of {0} to send"
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid "Transfer Memo"
-msgstr "Transfer Memo"
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid ""
-"Once the transfer is complete, use your private key to import your account into the wallet of\n"
-"your choosing."
-msgstr ""
-"Once the transfer is complete, use your private key to import your account into the wallet of\n"
-"your choosing."
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 msgid "Activity"
@@ -4543,16 +4472,6 @@ msgstr "Block Producers"
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.ts
 msgid "Validators on the {0} network."
 msgstr "Validators on the {0} network."
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
-msgid "Smart Contract Account Creation"
-msgstr "Smart Contract Account Creation"
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
-msgid "Create an account using a basic token transfer to a smart contract"
-msgstr "Create an account using a basic token transfer to a smart contract"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/stake/+page.ts
 msgid "Renting"
@@ -6930,15 +6849,12 @@ msgstr ""
 "Account creation runs through Anchor, a secure authenticator that opens in a popup window.\n"
 "Choose a sign-in method there, and you'll return here with your new account ready to use."
 
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/signup/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
 msgid "Waiting for Anchor..."
 msgstr "Waiting for Anchor..."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/+page.svelte
-msgid "The popup was closed before an account was created. You can try again at any time."
-msgstr "The popup was closed before an account was created. You can try again at any time."
 
 #: src/routes/[[locale]]/[network]/(account)/signup/+page.svelte
 msgid "Prefer to use your own wallet? <0>Browse compatible wallets</0>"
@@ -7046,15 +6962,10 @@ msgstr "Deploy Contract"
 msgid "Upload contract code and ABI to an account"
 msgstr "Upload contract code and ABI to an account"
 
-#: src/lib/components/navigation/model.svelte.ts
-msgid "Create a new account on this network"
-msgstr "Create a new account on this network"
-
 #: src/lib/state/search/actions/pages.svelte.ts
 msgid "RAM Market Overview"
 msgstr "RAM Market Overview"
 
-#: src/lib/state/search/actions/pages.svelte.ts
 #: src/lib/state/search/actions/pages.svelte.ts
 #: src/lib/state/search/actions/pages.svelte.ts
 #: src/lib/state/search/actions/pages.svelte.ts
@@ -7119,10 +7030,6 @@ msgid "Transaction Status"
 msgstr "Transaction Status"
 
 #: src/lib/state/search/actions/pages.svelte.ts
-msgid "Get started"
-msgstr "Get started"
-
-#: src/lib/state/search/actions/pages.svelte.ts
 msgid "Network overview"
 msgstr "Network overview"
 
@@ -7130,6 +7037,7 @@ msgstr "Network overview"
 msgid "Producer voting"
 msgstr "Producer voting"
 
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/signup/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/account/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/contract/+page.ts
@@ -7523,3 +7431,324 @@ msgstr "The most active accounts on the {0} Network."
 #: src/routes/[[locale]]/[network]/(explorer)/account/+page.ts
 msgid "A leaderboard of the most active accounts on the {0} Network."
 msgstr "A leaderboard of the most active accounts on the {0} Network."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.ts
+msgid "Create an Account"
+msgstr "Create an Account"
+
+#. placeholder {0}: network.chain.name
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.ts
+msgid "Choose how you want to create your new {0} account."
+msgstr "Choose how you want to create your new {0} account."
+
+#. placeholder {0}: network.chain.name
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.ts
+msgid "Create a {0} Account"
+msgstr "Create a {0} Account"
+
+#. placeholder {0}: network.chain.name
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.ts
+msgid "Create a new account on the {0} Network."
+msgstr "Create a new account on the {0} Network."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Sign up with Anchor"
+msgstr "Sign up with Anchor"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Send tokens to create"
+msgstr "Send tokens to create"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Use your existing account"
+msgstr "Use your existing account"
+
+#: src/lib/components/navigation/model.svelte.ts
+msgid "Choose how to create a new account on this network"
+msgstr "Choose how to create a new account on this network"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "Account names must be exactly 12 characters."
+msgstr "Account names must be exactly 12 characters."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "Checking availability…"
+msgstr "Checking availability…"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "That name is already taken. Try another."
+msgstr "That name is already taken. Try another."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "That name is available."
+msgstr "That name is available."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "Send tokens to create your account"
+msgstr "Send tokens to create your account"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "Send at least"
+msgstr "Send at least"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "To account"
+msgstr "To account"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "With this memo"
+msgstr "With this memo"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "The transfer will not create your account without this exact memo."
+msgstr "The transfer will not create your account without this exact memo."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "Anything you send above the minimum becomes your new account's opening balance."
+msgstr "Anything you send above the minimum becomes your new account's opening balance."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "Waiting for transfer…"
+msgstr "Waiting for transfer…"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "Account created"
+msgstr "Account created"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "<0/> is ready to use."
+msgstr "<0/> is ready to use."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "Sign in with this account"
+msgstr "Sign in with this account"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "View account"
+msgstr "View account"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "Start over"
+msgstr "Start over"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid ""
+"Creating an account reserves a name and a small amount of storage on the network, so it costs a\n"
+"little. Every option produces the same kind of account. They differ in what you need before you\n"
+"start."
+msgstr ""
+"Creating an account reserves a name and a small amount of storage on the network, so it costs a\n"
+"little. Every option produces the same kind of account. They differ in what you need before you\n"
+"start."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "You're signed in already, so <0>creating from your existing account</0> is faster."
+msgstr "You're signed in already, so <0>creating from your existing account</0> is faster."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid ""
+"Withdraw from an exchange, or send from any existing account. All three values must match\n"
+"exactly."
+msgstr ""
+"Withdraw from an exchange, or send from any existing account. All three values must match\n"
+"exactly."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "Keep this page open until the transfer arrives."
+msgstr "Keep this page open until the transfer arrives."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "Name already taken"
+msgstr "Name already taken"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Create another account and pay for its storage from the account you're signed in with."
+msgstr "Create another account and pay for its storage from the account you're signed in with."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "This key will have full control of your new account. It becomes both the owner and active key."
+msgstr "This key will have full control of your new account. It becomes both the owner and active key."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
+msgid "Send Tokens to Create an Account"
+msgstr "Send Tokens to Create an Account"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
+msgid "Send tokens from an exchange or another account, and your new account is created."
+msgstr "Send tokens from an exchange or another account, and your new account is created."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
+msgid "Create a new account by sending tokens with a memo."
+msgstr "Create a new account by sending tokens with a memo."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid ""
+"Someone else registered <0/> before your transfer arrived. A transfer\n"
+"for a name that already exists will not go through, so your tokens stay where they are. Choose\n"
+"another name and start again."
+msgstr ""
+"Someone else registered <0/> before your transfer arrived. A transfer\n"
+"for a name that already exists will not go through, so your tokens stay where they are. Choose\n"
+"another name and start again."
+
+#: src/lib/components/summary/powerbot/delallow.svelte
+#: src/lib/components/summary/powerbot/setallow.svelte
+msgid "Allowance"
+msgstr "Allowance"
+
+#: src/lib/components/summary/powerbot/delallow.svelte
+msgid "removed their watcher allowance"
+msgstr "removed their watcher allowance"
+
+#: src/lib/components/summary/powerbot/delorder.svelte
+#: src/lib/components/summary/powerbot/setorder.svelte
+msgid "Standing order"
+msgstr "Standing order"
+
+#: src/lib/components/summary/powerbot/delorder.svelte
+msgid "removed their standing order"
+msgstr "removed their standing order"
+
+#: src/lib/components/summary/powerbot/logresource.svelte
+msgid "Paid"
+msgstr "Paid"
+
+#: src/lib/components/summary/powerbot/logresource.svelte
+msgid "Received resources"
+msgstr "Received resources"
+
+#: src/lib/components/summary/powerbot/logresource.svelte
+msgid "Topped up"
+msgstr "Topped up"
+
+#. placeholder {0}: data.cpu_ms
+#. placeholder {1}: data.net_kb
+#. placeholder {0}: data.cpu_ms
+#. placeholder {1}: data.net_kb
+#: src/lib/components/summary/powerbot/logresource.svelte
+#: src/lib/components/summary/powerbot/topup.svelte
+msgid "{0} ms CPU / {1} kB NET"
+msgstr "{0} ms CPU / {1} kB NET"
+
+#: src/lib/components/summary/powerbot/logresource.svelte
+msgid "cost"
+msgstr "cost"
+
+#: src/lib/components/summary/powerbot/logresource.svelte
+msgid "fee"
+msgstr "fee"
+
+#: src/lib/components/summary/powerbot/logresource.svelte
+msgid "funded by"
+msgstr "funded by"
+
+#: src/lib/components/summary/powerbot/configure.svelte
+msgid "Order entry"
+msgstr "Order entry"
+
+#: src/lib/components/summary/powerbot/configure.svelte
+msgid "updated by"
+msgstr "updated by"
+
+#: src/lib/components/summary/powerbot/close.svelte
+msgid "closed their pool balance"
+msgstr "closed their pool balance"
+
+#: src/lib/components/summary/powerbot/open.svelte
+msgid "opened a pool balance"
+msgstr "opened a pool balance"
+
+#: src/lib/components/summary/powerbot/setallow.svelte
+msgid "allows watcher top-ups for"
+msgstr "allows watcher top-ups for"
+
+#: src/lib/components/summary/powerbot/setallow.svelte
+msgid "patterns"
+msgstr "patterns"
+
+#: src/lib/components/summary/powerbot/setorder.svelte
+msgid "set by"
+msgstr "set by"
+
+#: src/lib/components/summary/powerbot/topup.svelte
+msgid "Top-up"
+msgstr "Top-up"
+
+#: src/lib/components/summary/powerbot/topup.svelte
+msgid "requested for"
+msgstr "requested for"
+
+#: src/lib/components/summary/powerbot/transactfee.svelte
+msgid "Paid fee"
+msgstr "Paid fee"
+
+#: src/lib/components/summary/powerbot/transactfee.svelte
+msgid "Service fee"
+msgstr "Service fee"
+
+#: src/lib/components/summary/powerbot/transactfee.svelte
+msgid "for"
+msgstr "for"
+
+#: src/lib/components/summary/powerbot/withdraw.svelte
+msgid "withdrew"
+msgstr "withdrew"
+
+#: src/lib/components/summary/powerbot/withdraw.svelte
+msgid "from pool balance"
+msgstr "from pool balance"
+
+#. placeholder {0}: floor
+#: src/lib/components/summary/powerbot/entry-row.svelte
+msgid "floor {0}"
+msgstr "floor {0}"
+
+#: src/lib/components/summary/powerbot/entry-row.svelte
+msgid "Paused"
+msgstr "Paused"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Anchor opens in a new window to create your account, and secures it on your device."
+msgstr "Anchor opens in a new window to create your account, and secures it on your device."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Start with an account you already use"
+msgstr "Start with an account you already use"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Recommended for you"
+msgstr "Recommended for you"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/signup/+page.svelte
+msgid ""
+"Anchor did not finish creating your account. If you never saw the Anchor window, allow popups\n"
+"for this site and try again."
+msgstr ""
+"Anchor did not finish creating your account. If you never saw the Anchor window, allow popups\n"
+"for this site and try again."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Create with Anchor"
+msgstr "Create with Anchor"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Create by sending tokens"
+msgstr "Create by sending tokens"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Create from your existing account"
+msgstr "Create from your existing account"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Start with an email address"
+msgstr "Start with an email address"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "You create the keys first in a wallet and save them somewhere safe, then send tokens from an exchange to create the account."
+msgstr "You create the keys first in a wallet and save them somewhere safe, then send tokens from an exchange to create the account."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Start with tokens and your own keys"
+msgstr "Start with tokens and your own keys"

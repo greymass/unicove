@@ -46,8 +46,9 @@
 	</Button>
 
 	{#if failed}
-		<p class="text-error text-sm">
-			The popup was closed before an account was created. You can try again at any time.
+		<p class="text-error text-sm" role="alert">
+			Anchor did not finish creating your account. If you never saw the Anchor window, allow popups
+			for this site and try again.
 		</p>
 	{/if}
 
