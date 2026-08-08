@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2026-08-08T18:56:19.470Z\n"
+"PO-Revision-Date: 2026-08-08T19:02:07.836Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -685,6 +685,7 @@ msgstr "Remain on current page when switching accounts"
 msgid "Prevents the automatic navigation to the account overview page"
 msgstr "Prevents the automatic navigation to the account overview page"
 
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/manager.svelte.ts
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
 msgid "Advanced"

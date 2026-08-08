@@ -16,6 +16,7 @@
 		actionLabel: string;
 		description: string;
 		requirement: string;
+		advanced?: boolean;
 		href?: string;
 		action?: () => Promise<void>;
 	}
@@ -67,6 +68,7 @@
 				actionLabel: 'Send tokens to create',
 				description: `You create the keys first in a wallet and save them somewhere safe, then send tokens from an exchange to create the account.`,
 				requirement: 'Start with tokens and your own keys',
+				advanced: true,
 				href: context.urlPath('/create-account/contract')
 			});
 		}
@@ -117,6 +119,15 @@
 	{/if}
 {/snippet}
 
+{#snippet chips(path: CreationPath, chipClass: string)}
+	<div class="flex flex-wrap items-center gap-2">
+		<Chip class={chipClass}>{path.requirement}</Chip>
+		{#if path.advanced}
+			<Chip class="ring-outline bg-transparent ring-1">Advanced</Chip>
+		{/if}
+	</div>
+{/snippet}
+
 {#snippet anchorFailed()}
 	<p class="text-error text-sm" role="alert">
 		Anchor did not finish creating your account. If you never saw the Anchor window, allow popups
@@ -137,7 +148,7 @@
 				<span class="text-primary text-sm font-medium">Recommended for you</span>
 				<h2 class="text-headline max-w-prose leading-tight text-balance">{featured.heading}</h2>
 				<p class="text-on-surface-variant max-w-prose text-pretty">{featured.description}</p>
-				<Chip class="bg-surface-container-low">{featured.requirement}</Chip>
+				{@render chips(featured, 'bg-surface-container-low')}
 				{#if featured.id === 'anchor' && failed}
 					{@render anchorFailed()}
 				{/if}
@@ -152,7 +163,7 @@
 				<Card class="flex flex-col gap-3">
 					<h2 class="text-title leading-snug text-balance">{path.heading}</h2>
 					<p class="text-on-surface-variant max-w-prose text-sm text-pretty">{path.description}</p>
-					<Chip>{path.requirement}</Chip>
+					{@render chips(path, '')}
 					{#if path.id === 'anchor' && failed}
 						{@render anchorFailed()}
 					{/if}
