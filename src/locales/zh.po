@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2026-08-08T19:02:07.846Z\n"
+"PO-Revision-Date: 2026-08-11T01:44:38.222Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -80,6 +80,7 @@ msgstr "API 参考"
 
 #: src/lib/components/footer.svelte
 #: src/lib/components/transact/summary.svelte
+#: src/lib/components/vp/VpDetailsCard.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/components/auction-hero.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
@@ -554,6 +555,7 @@ msgstr "<0>密钥</0> <1>所有者</1> {0} 秒 <2>权重：{0}</2>"
 
 #: src/lib/components/summary/eosio/newaccount.svelte
 #: src/lib/components/summary/eosio/newaccount.svelte
+#: src/lib/components/vp/VpMsigCard.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/buttons.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Active"
@@ -745,6 +747,7 @@ msgid "Bytes"
 msgstr "字节"
 
 #: src/lib/components/elements/actiontable.svelte
+#: src/lib/components/vp/VpDetailsCard.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
@@ -2206,7 +2209,9 @@ msgid "Refresh"
 msgstr "刷新"
 
 #. placeholder {0}: refreshed
+#. placeholder {0}: formatDate(proposal.updated)
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/market/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.svelte
 msgid "Updated {0}"
 msgstr "已更新 {0}"
 
@@ -3053,6 +3058,7 @@ msgstr "{0} 为 <0/>，权重为 <1/>"
 msgid "Failed to load topics"
 msgstr "加载主题失败"
 
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
 msgid "View All Proposals"
 msgstr "查看所有提案"
@@ -4079,11 +4085,6 @@ msgstr "活动"
 msgid "Permissions"
 msgstr "权限"
 
-#. placeholder {0}: data.account.proposals.length
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
-msgid "Proposals ({0})"
-msgstr "提案 ({0})"
-
 #. placeholder {0}: productName
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "{0} + MetaMask"
@@ -4527,6 +4528,7 @@ msgstr "提议者"
 msgid "Proposal Name"
 msgstr "提议名称"
 
+#: src/lib/components/vp/VpMsigCard.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Expired"
@@ -5350,6 +5352,8 @@ msgstr "当前没有提案等待批准"
 msgid "All Actions"
 msgstr "所有操作"
 
+#: src/lib/components/vp/VpStatusChip.svelte
+#: src/lib/components/vp/VpStatusChip.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
 msgid "Proposed"
@@ -5359,11 +5363,15 @@ msgstr "已提议"
 msgid "Unapproved"
 msgstr "未批准"
 
+#: src/lib/components/vp/VpMsigCard.svelte
+#: src/lib/components/vp/VpStatusChip.svelte
+#: src/lib/components/vp/VpStatusChip.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
 msgid "Executed"
 msgstr "已执行"
 
+#: src/lib/components/vp/VpMsigCard.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
 msgid "Cancelled"
@@ -5373,6 +5381,7 @@ msgstr "已取消"
 msgid "MMM D, YYYY [at] h:mm A"
 msgstr "MMM D, YYYY [at] h:mm A"
 
+#: src/lib/components/vp/VpMsigCard.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActivityEvent.svelte
 msgid "Proposed by <0/>"
 msgstr "由 <0/> 提议"
@@ -5409,6 +5418,7 @@ msgstr "动作"
 msgid "actions"
 msgstr "动作"
 
+#: src/lib/components/vp/VpDetailsCard.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalsHeader.svelte
 msgid "Created"
@@ -5502,13 +5512,6 @@ msgstr "{0} 的投票 | {1} 网络"
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/votes/+page.ts
 msgid "View the block producer votes cast by the {0} account on the {1} network."
 msgstr "查看 {0} 账户在 {1} 网络上投的区块生产者票。"
-
-#. placeholder {0}: params.name
-#. placeholder {0}: params.name
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
-msgid "Proposals Created by {0}"
-msgstr "由 {0} 创建的提案"
 
 #. placeholder {0}: params.name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
@@ -6922,6 +6925,8 @@ msgstr "刚接触 {0}？<0>改为创建账户</0>"
 #: src/routes/[[locale]]/[network]/(account)/signup/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/account/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/contract/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.server.ts
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+page.server.ts
 msgid "Not found"
 msgstr "未找到"
 
@@ -7580,3 +7585,168 @@ msgstr "先在钱包中创建密钥并妥善保存，然后从交易所发送代
 #: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
 msgid "Start with tokens and your own keys"
 msgstr "从代币和你自己的密钥开始"
+
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.server.ts
+msgid "Proposals"
+msgstr "提案"
+
+#~ msgid "No proposals have been published."
+#~ msgstr "尚未发布任何提案。"
+
+#. placeholder {0}: params.name
+#. placeholder {0}: params.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
+msgid "Multisig Proposals Created by {0}"
+msgstr "由 {0} 创建的多重签名提案"
+
+#. placeholder {0}: data.account.proposals.length
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
+msgid "Multisig ({0})"
+msgstr "多重签名 ({0})"
+
+#: src/lib/components/vp/VpStaleNotice.svelte
+msgid ""
+"This translation was written against an earlier version of the proposal. The English text is the\n"
+"normative version. <0>Read it in English</0>."
+msgstr "此翻译基于提案的早期版本撰写。英文文本为规范版本。<0>以英文阅读</0>。"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+page.server.ts
+msgid "That proposal number does not exist."
+msgstr "该提案编号不存在。"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.server.ts
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+page.server.ts
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+page.server.ts
+msgid "The proposals repository could not be reached."
+msgstr "无法访问提案仓库。"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.server.ts
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+page.server.ts
+msgid "The proposal index could not be read."
+msgstr "无法读取提案索引。"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+page.server.ts
+msgid "The proposal index lists this proposal, but its document is missing."
+msgstr "提案索引列出了此提案，但其文档缺失。"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+page.server.ts
+msgid "That proposal could not be read."
+msgstr "无法读取该提案。"
+
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
+msgid ""
+"Read network proposals published for public review, with their status and the accounts\n"
+"they affect."
+msgstr "阅读已发布供公众审阅的网络提案，查看其状态以及受其影响的账户。"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.server.ts
+msgid "Network proposals for Vaulta, published for public review."
+msgstr "Vaulta 的网络提案，已发布以供公众审阅。"
+
+#. placeholder {0}: heading
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+page.server.ts
+msgid "Read \"{0}\", a Vaulta network proposal published for public review."
+msgstr "阅读“{0}”，这是一个已发布供公众审阅的 Vaulta 网络提案。"
+
+#: src/lib/components/vp/VpOnchain.svelte
+msgid "On-chain activity"
+msgstr "链上活动"
+
+#. placeholder {0}: approved
+#. placeholder {1}: total
+#: src/lib/components/vp/VpMsigCard.svelte
+msgid "{0} of {1} approvals signed"
+msgstr "已签署 {0}/{1} 个批准"
+
+#: src/lib/components/vp/VpMsigCard.svelte
+msgid "No live approval data on this network."
+msgstr "此网络上没有实时批准数据。"
+
+#: src/lib/components/vp/VpMsigCard.svelte
+msgid "View the executed transaction"
+msgstr "查看已执行的交易"
+
+#: src/lib/components/vp/VpSentimentCard.svelte
+msgid "Sentiment for this topic is recorded on-chain."
+msgstr "此主题的意见已记录在链上。"
+
+#: src/lib/components/vp/VpStatusChip.svelte
+#: src/lib/components/vp/VpStatusChip.svelte
+msgid "Draft"
+msgstr "草稿"
+
+#: src/lib/components/vp/VpStatusChip.svelte
+#: src/lib/components/vp/VpStatusChip.svelte
+msgid "Review"
+msgstr "审核中"
+
+#: src/lib/components/vp/VpStatusChip.svelte
+#: src/lib/components/vp/VpStatusChip.svelte
+msgid "Rejected"
+msgstr "已拒绝"
+
+#: src/lib/components/vp/VpStatusChip.svelte
+#: src/lib/components/vp/VpStatusChip.svelte
+msgid "Withdrawn"
+msgstr "已撤回"
+
+#: src/lib/components/vp/VpStatusChip.svelte
+msgid "Superseded"
+msgstr "已被取代"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+page.svelte
+msgid "View source on GitHub"
+msgstr "在 GitHub 上查看源代码"
+
+#: src/lib/components/vp/VpRelatedAccounts.svelte
+msgid "Related accounts"
+msgstr "相关账户"
+
+#: src/lib/components/vp/VpDetailsCard.svelte
+msgid "Updated"
+msgstr "已更新"
+
+#: src/lib/components/vp/VpDetailsCard.svelte
+msgid "Authors"
+msgstr "作者"
+
+#: src/lib/components/vp/VpDetailsCard.svelte
+msgid "Standard"
+msgstr "标准"
+
+#: src/lib/components/vp/VpLanguageNav.svelte
+msgid "Document language"
+msgstr "文档语言"
+
+#. placeholder {0}: statistics.totalVotes
+#: src/lib/components/vp/VpSentimentCard.svelte
+msgid "{0} votes · <0/> participating"
+msgstr "{0} 票 · <0/> 人参与"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.svelte
+msgid "Proposal list unavailable"
+msgstr "提案列表不可用"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.svelte
+msgid "Try again"
+msgstr "重试"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.svelte
+msgid "No published proposals"
+msgstr "没有已发布的提案"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.svelte
+msgid ""
+"Proposals appear here once they are published for public review in the proposals\n"
+"repository."
+msgstr "提案发布到提案仓库供公众审核后，会显示在此处。"
+
+#. placeholder {0}: formatDate(proposal.created)
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.svelte
+msgid "Created {0}"
+msgstr "创建于 {0}"
+
+#~ msgid "VP-9999"
+#~ msgstr ""

@@ -13,9 +13,9 @@ export const load: PageLoad = async ({ params, parent, url }) => {
 		status,
 		offset,
 		limit,
-		subtitle: `Proposals Created by ${params.name}`,
+		subtitle: `Multisig Proposals Created by ${params.name}`,
 		pageMetaTags: {
-			title: `Proposals Created by ${params.name}`,
+			title: `Multisig Proposals Created by ${params.name}`,
 			description: `View all multisig proposals created by ${params.name}`
 		}
 	};

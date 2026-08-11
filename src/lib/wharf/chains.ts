@@ -161,6 +161,7 @@ export const chainConfig: ChainConfig = {
 		lightapi: isENVTrue(env.PUBLIC_FEATURE_LIGHTAPI),
 		metamask: isENVTrue(env.PUBLIC_FEATURE_METAMASK),
 		powerup: isENVTrue(env.PUBLIC_FEATURE_POWERUP),
+		proposals: isENVTrue(env.PUBLIC_FEATURE_PROPOSALS),
 		rammarket: isENVTrue(env.PUBLIC_FEATURE_RAMMARKET),
 		ramtransfer: isENVTrue(env.PUBLIC_FEATURE_RAMTRANSFER),
 		rentrex: isENVTrue(env.PUBLIC_FEATURE_RENTREX),
@@ -260,6 +261,7 @@ export type FeatureType =
 	| 'lightapi'
 	| 'metamask'
 	| 'powerup'
+	| 'proposals'
 	| 'rammarket'
 	| 'ramtransfer'
 	| 'rentrex'

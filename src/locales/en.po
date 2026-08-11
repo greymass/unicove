@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2026-08-08T19:02:07.836Z\n"
+"PO-Revision-Date: 2026-08-11T01:44:38.210Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -80,6 +80,7 @@ msgstr "API Reference"
 
 #: src/lib/components/footer.svelte
 #: src/lib/components/transact/summary.svelte
+#: src/lib/components/vp/VpDetailsCard.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/components/auction-hero.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
@@ -554,6 +555,7 @@ msgstr "<0>Key</0> <1>Owner</1> {0} seconds <2>Weight: {0}</2>"
 
 #: src/lib/components/summary/eosio/newaccount.svelte
 #: src/lib/components/summary/eosio/newaccount.svelte
+#: src/lib/components/vp/VpMsigCard.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/buttons.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Active"
@@ -747,6 +749,7 @@ msgid "Bytes"
 msgstr "Bytes"
 
 #: src/lib/components/elements/actiontable.svelte
+#: src/lib/components/vp/VpDetailsCard.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
@@ -2249,7 +2252,9 @@ msgid "Refresh"
 msgstr "Refresh"
 
 #. placeholder {0}: refreshed
+#. placeholder {0}: formatDate(proposal.updated)
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/market/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.svelte
 msgid "Updated {0}"
 msgstr "Updated {0}"
 
@@ -3664,11 +3669,6 @@ msgstr "Activity"
 msgid "Permissions"
 msgstr "Permissions"
 
-#. placeholder {0}: data.account.proposals.length
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
-msgid "Proposals ({0})"
-msgstr "Proposals ({0})"
-
 #. placeholder {0}: legacyPubKey
 #: src/routes/[[locale]]/[network]/(explorer)/key/[publicKey]/+page.svelte
 msgid "Legacy Key: {0}"
@@ -4179,6 +4179,7 @@ msgstr "Proposer"
 msgid "Proposal Name"
 msgstr "Proposal Name"
 
+#: src/lib/components/vp/VpMsigCard.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Expired"
@@ -5185,6 +5186,7 @@ msgid "Top 21 Block Producer"
 msgstr "Top 21 Block Producer"
 
 #: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
 msgid "View All Proposals"
 msgstr "View All Proposals"
 
@@ -5492,6 +5494,8 @@ msgstr "No proposals are currently awaiting approval"
 msgid "All Actions"
 msgstr "All Actions"
 
+#: src/lib/components/vp/VpStatusChip.svelte
+#: src/lib/components/vp/VpStatusChip.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
 msgid "Proposed"
@@ -5501,11 +5505,15 @@ msgstr "Proposed"
 msgid "Unapproved"
 msgstr "Unapproved"
 
+#: src/lib/components/vp/VpMsigCard.svelte
+#: src/lib/components/vp/VpStatusChip.svelte
+#: src/lib/components/vp/VpStatusChip.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
 msgid "Executed"
 msgstr "Executed"
 
+#: src/lib/components/vp/VpMsigCard.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
 msgid "Cancelled"
@@ -5515,6 +5523,7 @@ msgstr "Cancelled"
 msgid "MMM D, YYYY [at] h:mm A"
 msgstr "MMM D, YYYY [at] h:mm A"
 
+#: src/lib/components/vp/VpMsigCard.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActivityEvent.svelte
 msgid "Proposed by <0/>"
 msgstr "Proposed by <0/>"
@@ -5551,6 +5560,7 @@ msgstr "action"
 msgid "actions"
 msgstr "actions"
 
+#: src/lib/components/vp/VpDetailsCard.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalsHeader.svelte
 msgid "Created"
@@ -5644,13 +5654,6 @@ msgstr "Votes by {0} | {1} Network"
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/votes/+page.ts
 msgid "View the block producer votes cast by the {0} account on the {1} network."
 msgstr "View the block producer votes cast by the {0} account on the {1} network."
-
-#. placeholder {0}: params.name
-#. placeholder {0}: params.name
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
-msgid "Proposals Created by {0}"
-msgstr "Proposals Created by {0}"
 
 #. placeholder {0}: params.name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
@@ -7042,6 +7045,8 @@ msgstr "Producer voting"
 #: src/routes/[[locale]]/[network]/(account)/signup/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/account/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/contract/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.server.ts
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+page.server.ts
 msgid "Not found"
 msgstr "Not found"
 
@@ -7753,3 +7758,174 @@ msgstr "You create the keys first in a wallet and save them somewhere safe, then
 #: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
 msgid "Start with tokens and your own keys"
 msgstr "Start with tokens and your own keys"
+
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.server.ts
+msgid "Proposals"
+msgstr "Proposals"
+
+#~ msgid "No proposals have been published."
+#~ msgstr "No proposals have been published."
+
+#. placeholder {0}: params.name
+#. placeholder {0}: params.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
+msgid "Multisig Proposals Created by {0}"
+msgstr "Multisig Proposals Created by {0}"
+
+#. placeholder {0}: data.account.proposals.length
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
+msgid "Multisig ({0})"
+msgstr "Multisig ({0})"
+
+#: src/lib/components/vp/VpStaleNotice.svelte
+msgid ""
+"This translation was written against an earlier version of the proposal. The English text is the\n"
+"normative version. <0>Read it in English</0>."
+msgstr ""
+"This translation was written against an earlier version of the proposal. The English text is the\n"
+"normative version. <0>Read it in English</0>."
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+page.server.ts
+msgid "That proposal number does not exist."
+msgstr "That proposal number does not exist."
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.server.ts
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+page.server.ts
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+page.server.ts
+msgid "The proposals repository could not be reached."
+msgstr "The proposals repository could not be reached."
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.server.ts
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+page.server.ts
+msgid "The proposal index could not be read."
+msgstr "The proposal index could not be read."
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+page.server.ts
+msgid "The proposal index lists this proposal, but its document is missing."
+msgstr "The proposal index lists this proposal, but its document is missing."
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+page.server.ts
+msgid "That proposal could not be read."
+msgstr "That proposal could not be read."
+
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
+msgid ""
+"Read network proposals published for public review, with their status and the accounts\n"
+"they affect."
+msgstr ""
+"Read network proposals published for public review, with their status and the accounts\n"
+"they affect."
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.server.ts
+msgid "Network proposals for Vaulta, published for public review."
+msgstr "Network proposals for Vaulta, published for public review."
+
+#. placeholder {0}: heading
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+page.server.ts
+msgid "Read \"{0}\", a Vaulta network proposal published for public review."
+msgstr "Read \"{0}\", a Vaulta network proposal published for public review."
+
+#: src/lib/components/vp/VpOnchain.svelte
+msgid "On-chain activity"
+msgstr "On-chain activity"
+
+#. placeholder {0}: approved
+#. placeholder {1}: total
+#: src/lib/components/vp/VpMsigCard.svelte
+msgid "{0} of {1} approvals signed"
+msgstr "{0} of {1} approvals signed"
+
+#: src/lib/components/vp/VpMsigCard.svelte
+msgid "No live approval data on this network."
+msgstr "No live approval data on this network."
+
+#: src/lib/components/vp/VpMsigCard.svelte
+msgid "View the executed transaction"
+msgstr "View the executed transaction"
+
+#: src/lib/components/vp/VpSentimentCard.svelte
+msgid "Sentiment for this topic is recorded on-chain."
+msgstr "Sentiment for this topic is recorded on-chain."
+
+#: src/lib/components/vp/VpStatusChip.svelte
+#: src/lib/components/vp/VpStatusChip.svelte
+msgid "Draft"
+msgstr "Draft"
+
+#: src/lib/components/vp/VpStatusChip.svelte
+#: src/lib/components/vp/VpStatusChip.svelte
+msgid "Review"
+msgstr "Review"
+
+#: src/lib/components/vp/VpStatusChip.svelte
+#: src/lib/components/vp/VpStatusChip.svelte
+msgid "Rejected"
+msgstr "Rejected"
+
+#: src/lib/components/vp/VpStatusChip.svelte
+#: src/lib/components/vp/VpStatusChip.svelte
+msgid "Withdrawn"
+msgstr "Withdrawn"
+
+#: src/lib/components/vp/VpStatusChip.svelte
+msgid "Superseded"
+msgstr "Superseded"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+page.svelte
+msgid "View source on GitHub"
+msgstr "View source on GitHub"
+
+#: src/lib/components/vp/VpLanguageNav.svelte
+msgid "Document language"
+msgstr "Document language"
+
+#: src/lib/components/vp/VpRelatedAccounts.svelte
+msgid "Related accounts"
+msgstr "Related accounts"
+
+#: src/lib/components/vp/VpDetailsCard.svelte
+msgid "Updated"
+msgstr "Updated"
+
+#: src/lib/components/vp/VpDetailsCard.svelte
+msgid "Authors"
+msgstr "Authors"
+
+#: src/lib/components/vp/VpDetailsCard.svelte
+msgid "Standard"
+msgstr "Standard"
+
+#. placeholder {0}: statistics.totalVotes
+#: src/lib/components/vp/VpSentimentCard.svelte
+msgid "{0} votes · <0/> participating"
+msgstr "{0} votes · <0/> participating"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.svelte
+msgid "Proposal list unavailable"
+msgstr "Proposal list unavailable"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.svelte
+msgid "Try again"
+msgstr "Try again"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.svelte
+msgid "No published proposals"
+msgstr "No published proposals"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.svelte
+msgid ""
+"Proposals appear here once they are published for public review in the proposals\n"
+"repository."
+msgstr ""
+"Proposals appear here once they are published for public review in the proposals\n"
+"repository."
+
+#. placeholder {0}: formatDate(proposal.created)
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.svelte
+msgid "Created {0}"
+msgstr "Created {0}"
+
+#~ msgid "VP-9999"
+#~ msgstr "VP-9999"

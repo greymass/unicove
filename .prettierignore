@@ -5,3 +5,5 @@ yarn.lock
 src/lib/wharf/contracts
 .opencode
 src/locales/*
+src/lib/vp/fixtures
+.superpowers/sdd

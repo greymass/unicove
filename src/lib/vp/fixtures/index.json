@@ -1,0 +1,79 @@
+{
+    "generated": "2026-08-09T16:15:11.530Z",
+    "proposals": [
+        {
+            "vp": "VP-0001",
+            "title": "Network RAM Endowment for Account Onboarding",
+            "standard": "VPS-1",
+            "status": "Draft",
+            "authors": [
+                "Aaron Cox (Greymass)"
+            ],
+            "created": "2026-08-02",
+            "accounts": [
+                "ram.vaulta",
+                "admin.grants",
+                "fund.wram",
+                "eosio.wrap",
+                "eosio"
+            ],
+            "msigs": [],
+            "sentiment": [],
+            "requires": [],
+            "slug": "vp-0001-ram-gifting",
+            "path": "proposals/vp-0001-ram-gifting/proposal.md",
+            "excerpt": "A network-owned account (ram.vaulta) holds a RAM endowment.",
+            "updated": "2026-08-09",
+            "translations": [
+                {
+                    "lang": "ko",
+                    "path": "proposals/vp-0001-ram-gifting/proposal.ko.md",
+                    "current": true,
+                    "title": "계정 온보딩을 위한 네트워크 RAM 기금",
+                    "excerpt": "네트워크 소유 계정은 RAM 기금을 보유합니다."
+                },
+                {
+                    "lang": "zh",
+                    "path": "proposals/vp-0001-ram-gifting/proposal.zh.md",
+                    "current": true
+                }
+            ]
+        },
+        {
+            "vp": "VP-0002",
+            "title": "Self-Serve Account Creation",
+            "standard": "VPS-1",
+            "status": "Draft",
+            "authors": [
+                "Aaron Cox (Greymass)"
+            ],
+            "created": "2026-02-16",
+            "accounts": [
+                "new.vaulta",
+                "eosio",
+                "eosio.prods",
+                "core.vaulta",
+                "admin.grants",
+                "fund.wram"
+            ],
+            "msigs": [],
+            "sentiment": [],
+            "requires": [],
+            "slug": "vp-0002-account-creation",
+            "path": "proposals/vp-0002-account-creation/proposal.md",
+            "updated": "2026-08-09",
+            "translations": [
+                {
+                    "lang": "ko",
+                    "path": "proposals/vp-0002-account-creation/proposal.ko.md",
+                    "current": true
+                },
+                {
+                    "lang": "zh",
+                    "path": "proposals/vp-0002-account-creation/proposal.zh.md",
+                    "current": true
+                }
+            ]
+        }
+    ]
+}

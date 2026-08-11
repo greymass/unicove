@@ -27,9 +27,9 @@ export const load: PageLoad = async ({ params, parent, url }) => {
 			status,
 			offset,
 			limit,
-			subtitle: `Proposals Pending Approval from ${params.name}`,
+			subtitle: `Multisig Proposals Pending Approval from ${params.name}`,
 			pageMetaTags: {
-				title: `Proposals Pending Approval from ${params.name}`,
+				title: `Multisig Proposals Pending Approval from ${params.name}`,
 				description: `Multisig proposals awaiting approval from ${params.name}`
 			}
 		};

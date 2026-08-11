@@ -146,6 +146,34 @@
 		</Card>
 	{/if}
 
+	{#if network.supports('proposals')}
+		<Card>
+			<div class="grid grid-rows-[auto_1fr] gap-6 lg:grid-flow-col lg:grid-cols-2">
+				<Stack>
+					<div class="flex items-center gap-3">
+						<picture class="bg-surface-container-high grid size-12 place-items-center rounded-full">
+							<FileText />
+						</picture>
+						<hgroup>
+							<h2 class="text-title">Proposals</h2>
+						</hgroup>
+					</div>
+
+					<p class="max-w-md text-pretty">
+						Read network proposals published for public review, with their status and the accounts
+						they affect.
+					</p>
+				</Stack>
+
+				<Button
+					class="order-last lg:order-none lg:justify-self-start"
+					variant="primary"
+					href={urlPath('/proposals')}>View All Proposals</Button
+				>
+			</div>
+		</Card>
+	{/if}
+
 	{#if network.supports('sentiment') && topMsigs.length > 0}
 		<Card>
 			<div class="grid grid-rows-[auto_1fr] gap-6 lg:grid-flow-col lg:grid-cols-2">

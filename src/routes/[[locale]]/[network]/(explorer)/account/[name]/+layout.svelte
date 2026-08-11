@@ -25,7 +25,7 @@
 		items.push({ href: urlPath(`/account/${account}/votes`), text: 'Votes' });
 		items.push({
 			href: urlPath(`/account/${account}/proposals`),
-			text: `Proposals (${data.account.proposals.length})`
+			text: `Multisig (${data.account.proposals.length})`
 		});
 		items.push({ href: urlPath(`/account/${account}/authority`), text: 'Authority' });
 

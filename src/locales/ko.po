@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.663Z\n"
-"PO-Revision-Date: 2026-08-08T19:02:07.842Z\n"
+"PO-Revision-Date: 2026-08-11T01:44:38.217Z\n"
 "Last-Translator: \n"
 "Language: ko\n"
 "Language-Team: \n"
@@ -80,6 +80,7 @@ msgstr "API 참조"
 
 #: src/lib/components/footer.svelte
 #: src/lib/components/transact/summary.svelte
+#: src/lib/components/vp/VpDetailsCard.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/components/auction-hero.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
@@ -554,6 +555,7 @@ msgstr "<0>키</0> <1>소유자</1> {0} 초 <2>가중치: {0}</2>"
 
 #: src/lib/components/summary/eosio/newaccount.svelte
 #: src/lib/components/summary/eosio/newaccount.svelte
+#: src/lib/components/vp/VpMsigCard.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/buttons.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Active"
@@ -745,6 +747,7 @@ msgid "Bytes"
 msgstr "바이트"
 
 #: src/lib/components/elements/actiontable.svelte
+#: src/lib/components/vp/VpDetailsCard.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
@@ -2211,7 +2214,9 @@ msgid "Refresh"
 msgstr "새로 고침"
 
 #. placeholder {0}: refreshed
+#. placeholder {0}: formatDate(proposal.updated)
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/market/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.svelte
 msgid "Updated {0}"
 msgstr "{0} 업데이트됨"
 
@@ -3603,11 +3608,6 @@ msgstr "활동"
 msgid "Permissions"
 msgstr "권한"
 
-#. placeholder {0}: data.account.proposals.length
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
-msgid "Proposals ({0})"
-msgstr "제안 ({0})"
-
 #. placeholder {0}: legacyPubKey
 #: src/routes/[[locale]]/[network]/(explorer)/key/[publicKey]/+page.svelte
 msgid "Legacy Key: {0}"
@@ -4082,6 +4082,7 @@ msgstr "제안자"
 msgid "Proposal Name"
 msgstr "제안명"
 
+#: src/lib/components/vp/VpMsigCard.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Expired"
@@ -5060,6 +5061,7 @@ msgid "Top 21 Block Producer"
 msgstr "상위 21개 블록 생산자"
 
 #: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
 msgid "View All Proposals"
 msgstr "모든 제안 보기"
 
@@ -5354,6 +5356,8 @@ msgstr "현재 승인을 기다리는 제안이 없습니다."
 msgid "All Actions"
 msgstr "모든 액션"
 
+#: src/lib/components/vp/VpStatusChip.svelte
+#: src/lib/components/vp/VpStatusChip.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
 msgid "Proposed"
@@ -5363,11 +5367,15 @@ msgstr "제안됨"
 msgid "Unapproved"
 msgstr "미승인"
 
+#: src/lib/components/vp/VpMsigCard.svelte
+#: src/lib/components/vp/VpStatusChip.svelte
+#: src/lib/components/vp/VpStatusChip.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
 msgid "Executed"
 msgstr "실행됨"
 
+#: src/lib/components/vp/VpMsigCard.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
 msgid "Cancelled"
@@ -5377,6 +5385,7 @@ msgstr "취소됨"
 msgid "MMM D, YYYY [at] h:mm A"
 msgstr "YYYY년 MMM D일 h:mm A"
 
+#: src/lib/components/vp/VpMsigCard.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActivityEvent.svelte
 msgid "Proposed by <0/>"
 msgstr "<0/>에 의해 제안됨"
@@ -5413,6 +5422,7 @@ msgstr "액션```"
 msgid "actions"
 msgstr "액션"
 
+#: src/lib/components/vp/VpDetailsCard.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalsHeader.svelte
 msgid "Created"
@@ -5506,13 +5516,6 @@ msgstr "{0}의 투표 | {1} 네트워크"
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/votes/+page.ts
 msgid "View the block producer votes cast by the {0} account on the {1} network."
 msgstr "{1} 네트워크에서 {0} 계정이 투표한 블록 생성자를 봅니다."
-
-#. placeholder {0}: params.name
-#. placeholder {0}: params.name
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
-msgid "Proposals Created by {0}"
-msgstr "{0}이(가) 생성한 제안"
 
 #. placeholder {0}: params.name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
@@ -6934,6 +6937,8 @@ msgstr "{0}이(가) 처음이신가요? <0>대신 계정 만들기</0>"
 #: src/routes/[[locale]]/[network]/(account)/signup/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/account/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/contract/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.server.ts
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+page.server.ts
 msgid "Not found"
 msgstr "찾을 수 없습니다"
 
@@ -7595,3 +7600,172 @@ msgstr "먼저 지갑에서 키를 생성해 안전한 곳에 보관한 다음, 
 #: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
 msgid "Start with tokens and your own keys"
 msgstr "토큰과 직접 만든 키로 시작"
+
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.server.ts
+msgid "Proposals"
+msgstr "제안"
+
+#~ msgid "No proposals have been published."
+#~ msgstr "게시된 제안이 없습니다."
+
+#. placeholder {0}: params.name
+#. placeholder {0}: params.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
+msgid "Multisig Proposals Created by {0}"
+msgstr "{0}이(가) 생성한 멀티시그 제안"
+
+#. placeholder {0}: data.account.proposals.length
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
+msgid "Multisig ({0})"
+msgstr "멀티시그 ({0})"
+
+#: src/lib/components/vp/VpStaleNotice.svelte
+msgid ""
+"This translation was written against an earlier version of the proposal. The English text is the\n"
+"normative version. <0>Read it in English</0>."
+msgstr ""
+"이 번역은 제안서의 이전 버전을 바탕으로 작성되었습니다. 영어 텍스트가\n"
+"기준이 되는 버전입니다. <0>영어로 읽기</0>."
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+page.server.ts
+msgid "That proposal number does not exist."
+msgstr "해당 제안 번호가 존재하지 않습니다."
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.server.ts
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+page.server.ts
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+page.server.ts
+msgid "The proposals repository could not be reached."
+msgstr "제안 저장소에 연결할 수 없습니다."
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.server.ts
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+page.server.ts
+msgid "The proposal index could not be read."
+msgstr "제안 색인을 읽을 수 없습니다."
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+page.server.ts
+msgid "The proposal index lists this proposal, but its document is missing."
+msgstr "제안 색인에는 이 제안이 나열되어 있지만 문서가 없습니다."
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+page.server.ts
+msgid "That proposal could not be read."
+msgstr "해당 제안을 읽을 수 없습니다."
+
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
+msgid ""
+"Read network proposals published for public review, with their status and the accounts\n"
+"they affect."
+msgstr ""
+"공개 검토를 위해 게시된 네트워크 제안과 해당 제안의 상태 및 영향을 받는 계정을\n"
+"확인하세요."
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.server.ts
+msgid "Network proposals for Vaulta, published for public review."
+msgstr "공개 검토를 위해 게시된 Vaulta 네트워크 제안입니다."
+
+#. placeholder {0}: heading
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+page.server.ts
+msgid "Read \"{0}\", a Vaulta network proposal published for public review."
+msgstr "공개 검토를 위해 게시된 Vaulta 네트워크 제안 \"{0}\"을(를) 읽습니다."
+
+#: src/lib/components/vp/VpOnchain.svelte
+msgid "On-chain activity"
+msgstr "온체인 활동"
+
+#. placeholder {0}: approved
+#. placeholder {1}: total
+#: src/lib/components/vp/VpMsigCard.svelte
+msgid "{0} of {1} approvals signed"
+msgstr "{1}개 승인 중 {0}개 서명됨"
+
+#: src/lib/components/vp/VpMsigCard.svelte
+msgid "No live approval data on this network."
+msgstr "이 네트워크에는 실시간 승인 데이터가 없습니다."
+
+#: src/lib/components/vp/VpMsigCard.svelte
+msgid "View the executed transaction"
+msgstr "실행된 트랜잭션 보기"
+
+#: src/lib/components/vp/VpSentimentCard.svelte
+msgid "Sentiment for this topic is recorded on-chain."
+msgstr "이 주제에 대한 의견이 온체인에 기록됩니다."
+
+#: src/lib/components/vp/VpStatusChip.svelte
+#: src/lib/components/vp/VpStatusChip.svelte
+msgid "Draft"
+msgstr "초안"
+
+#: src/lib/components/vp/VpStatusChip.svelte
+#: src/lib/components/vp/VpStatusChip.svelte
+msgid "Review"
+msgstr "검토"
+
+#: src/lib/components/vp/VpStatusChip.svelte
+#: src/lib/components/vp/VpStatusChip.svelte
+msgid "Rejected"
+msgstr "거부됨"
+
+#: src/lib/components/vp/VpStatusChip.svelte
+#: src/lib/components/vp/VpStatusChip.svelte
+msgid "Withdrawn"
+msgstr "철회됨"
+
+#: src/lib/components/vp/VpStatusChip.svelte
+msgid "Superseded"
+msgstr "대체됨"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+page.svelte
+msgid "View source on GitHub"
+msgstr "GitHub에서 소스 보기"
+
+#: src/lib/components/vp/VpLanguageNav.svelte
+msgid "Document language"
+msgstr "문서 언어"
+
+#: src/lib/components/vp/VpRelatedAccounts.svelte
+msgid "Related accounts"
+msgstr "관련 계정"
+
+#: src/lib/components/vp/VpDetailsCard.svelte
+msgid "Updated"
+msgstr "업데이트됨"
+
+#: src/lib/components/vp/VpDetailsCard.svelte
+msgid "Authors"
+msgstr "저자"
+
+#: src/lib/components/vp/VpDetailsCard.svelte
+msgid "Standard"
+msgstr "표준"
+
+#. placeholder {0}: statistics.totalVotes
+#: src/lib/components/vp/VpSentimentCard.svelte
+msgid "{0} votes · <0/> participating"
+msgstr "{0}표 · <0/> 참여 중"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.svelte
+msgid "Proposal list unavailable"
+msgstr "제안 목록을 사용할 수 없습니다"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.svelte
+msgid "Try again"
+msgstr "다시 시도"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.svelte
+msgid "No published proposals"
+msgstr "게시된 제안이 없습니다"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.svelte
+msgid ""
+"Proposals appear here once they are published for public review in the proposals\n"
+"repository."
+msgstr "제안 저장소에 공개 검토를 위해 게시되면 여기에 제안이 표시됩니다."
+
+#. placeholder {0}: formatDate(proposal.created)
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.svelte
+msgid "Created {0}"
+msgstr "생성일 {0}"
+
+#~ msgid "VP-9999"
+#~ msgstr ""
