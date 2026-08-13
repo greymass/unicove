@@ -6,6 +6,32 @@ export interface Topic {
 	lastUpdated: string;
 }
 
+export type MetricLens = 'system' | 'ram' | 'v';
+
+export interface MetricComponentStats {
+	support: number;
+	opposition: number;
+	total: number;
+}
+
+export interface AssetMetricStats extends MetricComponentStats {
+	supportPercentage: number;
+	oppositionPercentage: number;
+	components?: { staked: MetricComponentStats; liquid: MetricComponentStats };
+}
+
+export interface StatisticsMetrics {
+	system: AssetMetricStats;
+	ram: AssetMetricStats;
+	v: AssetMetricStats;
+}
+
+export interface VoteMetrics {
+	system: { total: number; staked: number; liquid: number };
+	ram: { total: number };
+	v: { total: number; staked: number; liquid: number };
+}
+
 export interface SentimentStatistics {
 	totalVotes: number;
 	supportVotes: number;
@@ -18,6 +44,7 @@ export interface SentimentStatistics {
 	totalWeightAsset: Asset;
 	totalSupportWeightAsset: Asset;
 	totalOppositionWeightAsset: Asset;
+	metrics: StatisticsMetrics;
 }
 
 export type TopicStatistics = SentimentStatistics;
@@ -33,6 +60,7 @@ export interface VoteWithWeight {
 	voteType: number;
 	weight: number;
 	lastUpdated: string;
+	metrics: VoteMetrics;
 }
 
 export interface PaginationMeta {

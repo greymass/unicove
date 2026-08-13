@@ -136,13 +136,24 @@
 		}
 	}
 
-	const votingWeight = $derived.by(() => {
-		if (!context.account || !context.account.voter) {
-			return null;
+	let votingWeight = $state<Asset | null>(null);
+	$effect(() => {
+		const account = context.account;
+		if (!account) {
+			votingWeight = null;
+			return;
 		}
-		const staked = context.account.voter.staked;
-		const symbol = context.network.config.systemtoken.symbol;
-		return Asset.fromUnits(staked, symbol);
+		(async () => {
+			try {
+				const result = await context.network.contracts.sentiment.readonly('getmetric', {
+					voter: account.name
+				});
+				const units = Number(result.system_staked) + Number(result.system_liquid);
+				votingWeight = Asset.fromUnits(units, context.network.config.systemtoken.symbol);
+			} catch {
+				votingWeight = null;
+			}
+		})();
 	});
 
 	let supports = $derived(currentVote === 1);

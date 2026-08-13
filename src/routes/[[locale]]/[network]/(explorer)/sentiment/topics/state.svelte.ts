@@ -9,7 +9,8 @@ import type {
 	TopicsListData,
 	TopicDetailData,
 	TopicVotesData,
-	TopicStatistics
+	TopicStatistics,
+	MetricLens
 } from '$lib/types/sentiment';
 
 export class TopicSentimentState {
@@ -36,7 +37,10 @@ export class TopicSentimentState {
 	}
 
 	private serializeStatistics(statistics: TopicStatistics): TopicStatistics {
-		const systemTokenSymbol = this.network.chain.systemToken?.symbol || '4,EOS';
+		const systemTokenSymbol = this.network.chain.systemToken?.symbol;
+		if (!systemTokenSymbol) {
+			throw new Error('network systemToken is not configured');
+		}
 
 		return {
 			...statistics,
@@ -161,7 +165,12 @@ export class TopicSentimentState {
 		}
 	}
 
-	async loadTopicVotes(topicId: NameType, page = 1, limit = 50): Promise<void> {
+	async loadTopicVotes(
+		topicId: NameType,
+		page = 1,
+		limit = 50,
+		sort?: MetricLens
+	): Promise<void> {
 		if (!this.refreshing) {
 			this.loading = true;
 		}
@@ -170,7 +179,7 @@ export class TopicSentimentState {
 		try {
 			const id = String(Name.from(topicId));
 
-			const url = `${this.apiBaseUrl}/topics/${id}/votes?page=${page}&limit=${limit}`;
+			const url = `${this.apiBaseUrl}/topics/${id}/votes?page=${page}&limit=${limit}${sort ? `&sort=${sort}` : ''}`;
 
 			const response = await this.network.fetch(url);
 
@@ -244,7 +253,8 @@ export class TopicSentimentState {
 		topicId: NameType,
 		silent = false,
 		voter?: NameType,
-		showStatisticsLoader = false
+		showStatisticsLoader = false,
+		sort?: MetricLens
 	): Promise<void> {
 		if (!silent) {
 			this.refreshing = true;
@@ -255,7 +265,7 @@ export class TopicSentimentState {
 		this.error = null;
 
 		try {
-			const promises = [this.loadTopic(topicId), this.loadTopicVotes(topicId)];
+			const promises = [this.loadTopic(topicId), this.loadTopicVotes(topicId, 1, 50, sort)];
 
 			if (voter) {
 				promises.push(this.loadUserVote(voter, topicId));

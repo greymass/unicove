@@ -8,8 +8,11 @@
 	import Account from '$lib/components/elements/account.svelte';
 	import TransactForm from '$lib/components/transact/form.svelte';
 	import VoteButtons from '$lib/components/sentiment/voteButtons.svelte';
-	import TopicStats from '$lib/components/sentiment/topicStats.svelte';
+	import MetricOverviewCard from '$lib/components/sentiment/MetricOverviewCard.svelte';
+	import MetricLensDetail from '$lib/components/sentiment/MetricLensDetail.svelte';
+	import MetricParticipants from '$lib/components/sentiment/MetricParticipants.svelte';
 	import { MsigSentimentState } from '$lib/state/sentiment/msig.svelte';
+	import type { MetricLens } from '$lib/types/sentiment';
 
 	import { ApprovalManager } from './manager.svelte';
 	import { goto, invalidateAll } from '$app/navigation';
@@ -29,6 +32,15 @@
 	// Disabling this temporarily
 	const enabled = false;
 
+	const lensLabels: Record<MetricLens, string> = { system: 'System Token', ram: 'RAM', v: 'V' };
+	let activeLens = $state<MetricLens>('system');
+	const systemSymbol = $derived(context.network.chain.systemToken!.symbol);
+
+	function selectLens(lens: MetricLens) {
+		activeLens = lens;
+		sentimentState.loadMsigVotes(data.proposal.proposer, data.proposal.name, 1, 50, lens);
+	}
+
 	onMount(() => {
 		let interval: ReturnType<typeof setInterval> | undefined;
 		if (manager.isActive) {
@@ -39,6 +51,7 @@
 
 		if (context.network.supports('sentiment')) {
 			sentimentState.loadMsig(data.proposal.proposer, data.proposal.name);
+			sentimentState.loadMsigVotes(data.proposal.proposer, data.proposal.name, 1, 50, activeLens);
 			if (context.account) {
 				sentimentState.loadUserVote(
 					context.account.name,
@@ -78,7 +91,8 @@
 				data.proposal.name,
 				false,
 				context.account.name,
-				true
+				true,
+				activeLens
 			);
 		}
 	}
@@ -249,12 +263,26 @@
 			</Card>
 
 			{#if enabled && context.network.supports('sentiment') && sentimentState.currentMsig}
+				{@const statistics = sentimentState.currentMsig.statistics}
 				<h2 class="text-title">Community Sentiment</h2>
 				<Card class="@container">
 					<Stack class="gap-6">
-						<TopicStats
-							statistics={sentimentState.currentMsig.statistics}
-							loading={sentimentState.loadingStatistics}
+						<div class="grid gap-6 @xl:grid-cols-3">
+							{#each Object.keys(lensLabels) as lens (lens)}
+								{@const key = lens as MetricLens}
+								<MetricOverviewCard
+									lens={key}
+									label={lensLabels[key]}
+									stats={statistics.metrics[key]}
+									selected={activeLens === key}
+									onselect={selectLens}
+								/>
+							{/each}
+						</div>
+						<MetricLensDetail
+							lens={activeLens}
+							stats={statistics.metrics[activeLens]}
+							{systemSymbol}
 						/>
 
 						<VoteButtons
@@ -266,6 +294,17 @@
 						/>
 					</Stack>
 				</Card>
+
+				{#if sentimentState.currentVotes.length > 0}
+					<MetricParticipants
+						votes={sentimentState.currentVotes}
+						lens={activeLens}
+						totalVotes={statistics.totalVotes}
+						supportVotes={statistics.supportVotes}
+						oppositionVotes={statistics.oppositionVotes}
+						{systemSymbol}
+					/>
+				{/if}
 			{/if}
 		</Stack>
 	</Switcher>

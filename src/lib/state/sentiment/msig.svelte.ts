@@ -9,7 +9,8 @@ import type {
 	MsigsListData,
 	MsigDetailData,
 	MsigVotesData,
-	MsigStatistics
+	MsigStatistics,
+	MetricLens
 } from '$lib/types/sentiment';
 
 export class MsigSentimentState {
@@ -39,7 +40,10 @@ export class MsigSentimentState {
 	}
 
 	private serializeStatistics(statistics: MsigStatistics): MsigStatistics {
-		const systemTokenSymbol = this.network.chain.systemToken?.symbol || '4,EOS';
+		const systemTokenSymbol = this.network.chain.systemToken?.symbol;
+		if (!systemTokenSymbol) {
+			throw new Error('network systemToken is not configured');
+		}
 
 		return {
 			...statistics,
@@ -169,7 +173,8 @@ export class MsigSentimentState {
 		proposer: NameType,
 		proposalName: NameType,
 		page = 1,
-		limit = 50
+		limit = 50,
+		sort?: MetricLens
 	): Promise<void> {
 		if (!this.refreshing) {
 			this.loading = true;
@@ -180,7 +185,7 @@ export class MsigSentimentState {
 			const proposerStr = String(Name.from(proposer));
 			const proposalStr = String(Name.from(proposalName));
 
-			const url = `${this.apiBaseUrl}/msigs/${proposerStr}/${proposalStr}/votes?page=${page}&limit=${limit}`;
+			const url = `${this.apiBaseUrl}/msigs/${proposerStr}/${proposalStr}/votes?page=${page}&limit=${limit}${sort ? `&sort=${sort}` : ''}`;
 
 			const response = await this.network.fetch(url);
 
@@ -264,7 +269,8 @@ export class MsigSentimentState {
 		proposalName: NameType,
 		silent = false,
 		voter?: NameType,
-		showStatisticsLoader = false
+		showStatisticsLoader = false,
+		sort?: MetricLens
 	): Promise<void> {
 		if (!silent) {
 			this.refreshing = true;
@@ -277,7 +283,7 @@ export class MsigSentimentState {
 		try {
 			const promises = [
 				this.loadMsig(proposer, proposalName),
-				this.loadMsigVotes(proposer, proposalName)
+				this.loadMsigVotes(proposer, proposalName, 1, 50, sort)
 			];
 
 			if (voter) {

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.663Z\n"
-"PO-Revision-Date: 2026-08-11T01:44:38.217Z\n"
+"PO-Revision-Date: 2026-08-13T16:53:23.035Z\n"
 "Last-Translator: \n"
 "Language: ko\n"
 "Language-Team: \n"
@@ -92,6 +92,7 @@ msgstr "상태"
 
 #: src/lib/components/footer.svelte
 #: src/lib/components/footer.svelte
+#: src/lib/components/sentiment/MetricParticipants.svelte
 #: src/lib/components/sentiment/participantList.svelte
 msgid "Support"
 msgstr "지원"
@@ -354,10 +355,14 @@ msgstr "페이지"
 
 #: src/lib/components/elements/resourceCard.svelte
 #: src/lib/components/navigation/model.svelte.ts
+#: src/lib/components/sentiment/MetricLensDetail.svelte
+#: src/lib/components/sentiment/MetricParticipants.svelte
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/swap/describe.svelte.ts
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/resources/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
 msgid "RAM"
 msgstr "RAM"
@@ -503,12 +508,12 @@ msgstr "송금"
 msgid "+ {0} ms (CPU)"
 msgstr "+ {0} ms (CPU)"
 
-#. placeholder {0}: data.powup_net
 #. placeholder {0}: data.powup_cpu
-#. placeholder {0}: key.weight
+#. placeholder {0}: data.powup_net
 #. placeholder {0}: account.weight
 #. placeholder {0}: key.weight
 #. placeholder {0}: account.weight
+#. placeholder {0}: key.weight
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio/newaccount.svelte
@@ -758,8 +763,8 @@ msgstr "상세 정보"
 msgid "Network Fees"
 msgstr "네트워크 수수료"
 
-#. placeholder {0}: market.network.currency.symbol.code
 #. placeholder {0}: data.network.chain.systemToken?.symbol.code || ''
+#. placeholder {0}: market.network.currency.symbol.code
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 msgid "Market Cap ({0})"
@@ -1822,10 +1827,10 @@ msgstr "필 선택"
 msgid "Select a date range"
 msgstr "날짜 범위 선택"
 
-#. placeholder {0}: JSON.stringify(tokenSelected, null, 2)
-#. placeholder {0}: imageOptionSelected.label
-#. placeholder {0}: selectedFormOption.label
 #. placeholder {0}: selected.label
+#. placeholder {0}: selectedFormOption.label
+#. placeholder {0}: imageOptionSelected.label
+#. placeholder {0}: JSON.stringify(tokenSelected, null, 2)
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
@@ -2213,8 +2218,8 @@ msgstr "이 빌드 및 사용되는 온체인 계정에 대해 wharfkit/cli에�
 msgid "Refresh"
 msgstr "새로 고침"
 
-#. placeholder {0}: refreshed
 #. placeholder {0}: formatDate(proposal.updated)
+#. placeholder {0}: refreshed
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/market/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.svelte
 msgid "Updated {0}"
@@ -3390,7 +3395,7 @@ msgstr "<0>Unicove -</0> {0} 웹 지갑 및 블록 탐색기"
 
 #. placeholder {0}: network.chain.name
 #. placeholder {0}: networkName
-#. placeholder {0}: networkName
+#. placeholder {0}: network.chain.name
 #: src/routes/+layout.server.ts
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
@@ -3424,8 +3429,8 @@ msgstr "{0} 토큰 스왑이 시작되었습니다!"
 msgid "Swap {0} to {1} at a 1:1 ratio"
 msgstr "{0}을(를) {1}으로 1:1 비율로 교환하세요"
 
-#. placeholder {0}: String(data.quote.symbol.name)
 #. placeholder {0}: props.network.token.name
+#. placeholder {0}: String(data.quote.symbol.name)
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/legacy-token-swap.svelte
 msgid "Swap to {0}"
@@ -3444,7 +3449,7 @@ msgstr "토큰 받기 "
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
-#. placeholder {0}: String(network.token.symbol.name)
+#. placeholder {0}: symbol.name
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
@@ -3463,10 +3468,10 @@ msgstr "토큰화된 데이터 스토리지"
 msgid "One {0} of RAM represents ownership rights over 1000 bytes of the network's total blockchain storage capacity. {1} can be swapped with {2} by visiting the RAM Market."
 msgstr "1개의 {0}은 네트워크 전체 블록체인 저장 용량 중 1000바이트에 대한 소유권을 나타냅니다. {1}은 RAM 시장에 접속하여 {2}과 교환할 수 있습니다."
 
-#. placeholder {0}: data.network.token.name
-#. placeholder {1}: data.network.getRamToken().name
 #. placeholder {0}: String(network.chain.systemToken?.symbol.name)
 #. placeholder {1}: String(ramtoken.name)
+#. placeholder {0}: data.network.token.name
+#. placeholder {1}: data.network.getRamToken().name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/charts.svelte
 msgid "Swap {0}/{1}"
@@ -4712,13 +4717,13 @@ msgid "No topics available yet"
 msgstr "아직 사용 가능한 토픽이 없습니다."
 
 #. placeholder {0}: statistics.supportPercentage
-#. placeholder {0}: statistics.supportPercentage
+#. placeholder {0}: supportPercentage
 #: src/lib/components/sentiment/SentimentMeter.svelte
 msgid "{0}% Support"
 msgstr "{0}% 지지"
 
 #. placeholder {0}: statistics.oppositionPercentage
-#. placeholder {0}: statistics.oppositionPercentage
+#. placeholder {0}: oppositionPercentage
 #: src/lib/components/sentiment/SentimentMeter.svelte
 msgid "{0}% Oppose"
 msgstr "{0}% 반대"
@@ -4728,6 +4733,7 @@ msgstr "{0}% 반대"
 msgid "Sentiment"
 msgstr "정서"
 
+#: src/lib/components/sentiment/MetricParticipants.svelte
 #: src/lib/components/sentiment/participantList.svelte
 msgid "Oppose"
 msgstr "반대"
@@ -4756,11 +4762,13 @@ msgstr "반대 가중치"
 msgid "Please log in to vote"
 msgstr "투표하려면 로그인하세요"
 
+#: src/lib/components/sentiment/MetricParticipants.svelte
 #: src/lib/components/sentiment/participantList.svelte
 #: src/lib/components/sentiment/participantList.svelte
 msgid "Supporting"
 msgstr "지지"
 
+#: src/lib/components/sentiment/MetricParticipants.svelte
 #: src/lib/components/sentiment/participantList.svelte
 #: src/lib/components/sentiment/participantList.svelte
 msgid "Opposing"
@@ -4777,6 +4785,8 @@ msgstr "최종 업데이트 {0}"
 msgid "Description"
 msgstr "설명"
 
+#: src/lib/components/sentiment/MetricParticipants.svelte
+#: src/lib/components/sentiment/MetricParticipants.svelte
 #: src/lib/components/sentiment/participantList.svelte
 #: src/lib/components/sentiment/participantList.svelte
 msgid "Participants"
@@ -5929,8 +5939,8 @@ msgstr "{0} {1}을(를) 환불받을 수 있습니다."
 msgid "You have been outbid on this name.<0/>"
 msgstr "이 이름에 대한 입찰에서 패했습니다.<0/>"
 
-#. placeholder {0}: String(manager.refundAmount)
 #. placeholder {0}: String(tracked.refund.amount)
+#. placeholder {0}: String(manager.refundAmount)
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/refund/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
 msgid "Claim Refund ({0})"
@@ -7606,9 +7616,6 @@ msgstr "토큰과 직접 만든 키로 시작"
 msgid "Proposals"
 msgstr "제안"
 
-#~ msgid "No proposals have been published."
-#~ msgstr "게시된 제안이 없습니다."
-
 #. placeholder {0}: params.name
 #. placeholder {0}: params.name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
@@ -7767,5 +7774,76 @@ msgstr "제안 저장소에 공개 검토를 위해 게시되면 여기에 제�
 msgid "Created {0}"
 msgstr "생성일 {0}"
 
-#~ msgid "VP-9999"
-#~ msgstr ""
+#: src/lib/components/sentiment/MetricParticipants.svelte
+msgid "Voter"
+msgstr ""
+
+#: src/lib/components/sentiment/MetricParticipants.svelte
+msgid "Vote"
+msgstr ""
+
+#: src/lib/components/sentiment/MetricLensDetail.svelte
+#: src/lib/components/sentiment/MetricParticipants.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
+msgid "System Token"
+msgstr ""
+
+#: src/lib/components/sentiment/MetricLensDetail.svelte
+#: src/lib/components/sentiment/MetricParticipants.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
+msgid "V"
+msgstr ""
+
+#. placeholder {0}: labels[lens]
+#. placeholder {0}: active.label
+#. placeholder {0}: active.label
+#: src/lib/components/sentiment/MetricLensDetail.svelte
+msgid "{0} Vote Distribution"
+msgstr ""
+
+#. placeholder {0}: labels[lens]
+#. placeholder {0}: active.label
+#: src/lib/components/sentiment/MetricLensDetail.svelte
+msgid "Support {0}"
+msgstr ""
+
+#. placeholder {0}: labels[lens]
+#. placeholder {0}: active.label
+#: src/lib/components/sentiment/MetricLensDetail.svelte
+msgid "Total {0}"
+msgstr ""
+
+#. placeholder {0}: labels[lens]
+#. placeholder {0}: active.label
+#: src/lib/components/sentiment/MetricLensDetail.svelte
+msgid "Opposition {0}"
+msgstr ""
+
+#: src/lib/components/vp/VpDetailsCard.svelte
+msgid "Version"
+msgstr ""
+
+#: src/lib/components/vp/VpRevisions.svelte
+msgid "Revision history"
+msgstr ""
+
+#. placeholder {0}: revision.version
+#. placeholder {1}: formatDate(revision.date)
+#: src/lib/components/vp/VpRevisions.svelte
+msgid "Version {0} · {1}"
+msgstr ""
+
+#: src/lib/components/vp/VpRevisions.svelte
+msgid "Change history"
+msgstr ""
+
+#. placeholder {0}: stats.total.toLocaleString()
+#. placeholder {0}: amount.toLocaleString()
+#. placeholder {0}: vote.metrics.v.total.toLocaleString()
+#: src/lib/components/sentiment/MetricLensDetail.svelte
+#: src/lib/components/sentiment/MetricOverviewCard.svelte
+#: src/lib/components/sentiment/MetricParticipants.svelte
+msgid "{0} V"
+msgstr ""

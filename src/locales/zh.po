@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2026-08-11T01:44:38.222Z\n"
+"PO-Revision-Date: 2026-08-13T16:53:23.039Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -92,6 +92,7 @@ msgstr "状态"
 
 #: src/lib/components/footer.svelte
 #: src/lib/components/footer.svelte
+#: src/lib/components/sentiment/MetricParticipants.svelte
 #: src/lib/components/sentiment/participantList.svelte
 msgid "Support"
 msgstr "支持"
@@ -354,10 +355,14 @@ msgstr "页面"
 
 #: src/lib/components/elements/resourceCard.svelte
 #: src/lib/components/navigation/model.svelte.ts
+#: src/lib/components/sentiment/MetricLensDetail.svelte
+#: src/lib/components/sentiment/MetricParticipants.svelte
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/swap/describe.svelte.ts
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/resources/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
 msgid "RAM"
 msgstr "内存"
@@ -503,12 +508,12 @@ msgstr "转账"
 msgid "+ {0} ms (CPU)"
 msgstr "+ {0} 毫秒 (CPU)"
 
-#. placeholder {0}: data.powup_net
 #. placeholder {0}: data.powup_cpu
-#. placeholder {0}: key.weight
+#. placeholder {0}: data.powup_net
 #. placeholder {0}: account.weight
 #. placeholder {0}: key.weight
 #. placeholder {0}: account.weight
+#. placeholder {0}: key.weight
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio/newaccount.svelte
@@ -758,8 +763,8 @@ msgstr "详情"
 msgid "Network Fees"
 msgstr "网络费用"
 
-#. placeholder {0}: market.network.currency.symbol.code
 #. placeholder {0}: data.network.chain.systemToken?.symbol.code || ''
+#. placeholder {0}: market.network.currency.symbol.code
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 msgid "Market Cap ({0})"
@@ -1824,10 +1829,10 @@ msgstr "药丸选择"
 msgid "Select a date range"
 msgstr "选择日期范围"
 
-#. placeholder {0}: JSON.stringify(tokenSelected, null, 2)
-#. placeholder {0}: imageOptionSelected.label
-#. placeholder {0}: selectedFormOption.label
 #. placeholder {0}: selected.label
+#. placeholder {0}: selectedFormOption.label
+#. placeholder {0}: imageOptionSelected.label
+#. placeholder {0}: JSON.stringify(tokenSelected, null, 2)
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
@@ -2208,8 +2213,8 @@ msgstr "此构建的 wharfkit/cli 生成的合约以及它使用的链上帐户�
 msgid "Refresh"
 msgstr "刷新"
 
-#. placeholder {0}: refreshed
 #. placeholder {0}: formatDate(proposal.updated)
+#. placeholder {0}: refreshed
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/market/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.svelte
 msgid "Updated {0}"
@@ -2951,16 +2956,20 @@ msgstr "您的投票"
 msgid "Statistics"
 msgstr "统计"
 
+#: src/lib/components/sentiment/MetricParticipants.svelte
+#: src/lib/components/sentiment/MetricParticipants.svelte
 #: src/lib/components/sentiment/participantList.svelte
 #: src/lib/components/sentiment/participantList.svelte
 msgid "Participants"
 msgstr "参与者"
 
+#: src/lib/components/sentiment/MetricParticipants.svelte
 #: src/lib/components/sentiment/participantList.svelte
 #: src/lib/components/sentiment/participantList.svelte
 msgid "Supporting"
 msgstr "支持"
 
+#: src/lib/components/sentiment/MetricParticipants.svelte
 #: src/lib/components/sentiment/participantList.svelte
 #: src/lib/components/sentiment/participantList.svelte
 msgid "Opposing"
@@ -2970,6 +2979,7 @@ msgstr "反对"
 msgid "No supporting votes"
 msgstr "没有支持票"
 
+#: src/lib/components/sentiment/MetricParticipants.svelte
 #: src/lib/components/sentiment/participantList.svelte
 msgid "Oppose"
 msgstr "反对"
@@ -2982,10 +2992,10 @@ msgstr "没有反对票"
 msgid "Loading topic..."
 msgstr "正在加载主题...```"
 
-#. placeholder {0}: data.network.token.name
-#. placeholder {1}: data.network.getRamToken().name
 #. placeholder {0}: String(network.chain.systemToken?.symbol.name)
 #. placeholder {1}: String(ramtoken.name)
+#. placeholder {0}: data.network.token.name
+#. placeholder {1}: data.network.getRamToken().name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/charts.svelte
 msgid "Swap {0}/{1}"
@@ -3001,8 +3011,8 @@ msgstr "兑换 {0}/{1}"
 msgid "Available"
 msgstr "可用"
 
-#. placeholder {0}: String(data.quote.symbol.name)
 #. placeholder {0}: props.network.token.name
+#. placeholder {0}: String(data.quote.symbol.name)
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/legacy-token-swap.svelte
 msgid "Swap to {0}"
@@ -3448,11 +3458,13 @@ msgid ""
 msgstr "搜索 Unicove 功能，或在网络上输入账户名、公钥或交易 ID。```"
 
 #. placeholder {0}: statistics.supportPercentage
+#. placeholder {0}: supportPercentage
 #: src/lib/components/sentiment/SentimentMeter.svelte
 msgid "{0}% Support"
 msgstr "{0}% 支持"
 
 #. placeholder {0}: statistics.oppositionPercentage
+#. placeholder {0}: oppositionPercentage
 #: src/lib/components/sentiment/SentimentMeter.svelte
 msgid "{0}% Oppose"
 msgstr "{0}% 反对"
@@ -3636,7 +3648,7 @@ msgstr "获取代币"
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
-#. placeholder {0}: String(network.token.symbol.name)
+#. placeholder {0}: symbol.name
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
@@ -3666,7 +3678,7 @@ msgstr "<0>Unicove -</0> {0} 网络钱包和区块浏览器"
 
 #. placeholder {0}: network.chain.name
 #. placeholder {0}: networkName
-#. placeholder {0}: networkName
+#. placeholder {0}: network.chain.name
 #: src/routes/+layout.server.ts
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
@@ -5925,8 +5937,8 @@ msgstr "{0}您有 {1} 可供回收。```"
 msgid "You have been outbid on this name.<0/>"
 msgstr "您在这个名字上的出价已被超过。<0/>"
 
-#. placeholder {0}: String(manager.refundAmount)
 #. placeholder {0}: String(tracked.refund.amount)
+#. placeholder {0}: String(manager.refundAmount)
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/refund/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
 msgid "Claim Refund ({0})"
@@ -7591,9 +7603,6 @@ msgstr "从代币和你自己的密钥开始"
 msgid "Proposals"
 msgstr "提案"
 
-#~ msgid "No proposals have been published."
-#~ msgstr "尚未发布任何提案。"
-
 #. placeholder {0}: params.name
 #. placeholder {0}: params.name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
@@ -7748,5 +7757,76 @@ msgstr "提案发布到提案仓库供公众审核后，会显示在此处。"
 msgid "Created {0}"
 msgstr "创建于 {0}"
 
-#~ msgid "VP-9999"
-#~ msgstr ""
+#: src/lib/components/sentiment/MetricParticipants.svelte
+msgid "Voter"
+msgstr ""
+
+#: src/lib/components/sentiment/MetricParticipants.svelte
+msgid "Vote"
+msgstr ""
+
+#: src/lib/components/sentiment/MetricLensDetail.svelte
+#: src/lib/components/sentiment/MetricParticipants.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
+msgid "System Token"
+msgstr ""
+
+#: src/lib/components/sentiment/MetricLensDetail.svelte
+#: src/lib/components/sentiment/MetricParticipants.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
+msgid "V"
+msgstr ""
+
+#. placeholder {0}: labels[lens]
+#. placeholder {0}: active.label
+#. placeholder {0}: active.label
+#: src/lib/components/sentiment/MetricLensDetail.svelte
+msgid "{0} Vote Distribution"
+msgstr ""
+
+#. placeholder {0}: labels[lens]
+#. placeholder {0}: active.label
+#: src/lib/components/sentiment/MetricLensDetail.svelte
+msgid "Support {0}"
+msgstr ""
+
+#. placeholder {0}: labels[lens]
+#. placeholder {0}: active.label
+#: src/lib/components/sentiment/MetricLensDetail.svelte
+msgid "Total {0}"
+msgstr ""
+
+#. placeholder {0}: labels[lens]
+#. placeholder {0}: active.label
+#: src/lib/components/sentiment/MetricLensDetail.svelte
+msgid "Opposition {0}"
+msgstr ""
+
+#: src/lib/components/vp/VpDetailsCard.svelte
+msgid "Version"
+msgstr ""
+
+#: src/lib/components/vp/VpRevisions.svelte
+msgid "Revision history"
+msgstr ""
+
+#. placeholder {0}: revision.version
+#. placeholder {1}: formatDate(revision.date)
+#: src/lib/components/vp/VpRevisions.svelte
+msgid "Version {0} · {1}"
+msgstr ""
+
+#: src/lib/components/vp/VpRevisions.svelte
+msgid "Change history"
+msgstr ""
+
+#. placeholder {0}: stats.total.toLocaleString()
+#. placeholder {0}: amount.toLocaleString()
+#. placeholder {0}: vote.metrics.v.total.toLocaleString()
+#: src/lib/components/sentiment/MetricLensDetail.svelte
+#: src/lib/components/sentiment/MetricOverviewCard.svelte
+#: src/lib/components/sentiment/MetricParticipants.svelte
+msgid "{0} V"
+msgstr ""
