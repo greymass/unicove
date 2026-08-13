@@ -4,7 +4,7 @@ import { error } from '@sveltejs/kit';
 import { localizePath } from '$lib/utils/url';
 import { useLocale } from '$lib/utils/intl';
 
-export const load: LayoutLoad = async ({ fetch, params, parent }) => {
+export const load: LayoutLoad = async ({ data, fetch, params, parent }) => {
 	const { network, locale } = await parent();
 	await useLocale(locale);
 	const response = await fetch(localizePath(`/api/msig/${params.proposer}/${params.proposal}`));
@@ -30,6 +30,7 @@ export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 	);
 
 	return {
+		vp: data?.vp ?? null,
 		title: `${params.proposal}`,
 		subtitle: `An MSIG proposed by ${params.proposer} on the ${network.chain.name} Network`,
 		header: {

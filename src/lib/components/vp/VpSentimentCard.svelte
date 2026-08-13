@@ -31,11 +31,7 @@
 			.then((response) => response.json())
 			.then((result: ApiResponse<TopicDetailData>) => {
 				if (result.success && result.data) {
-					statistics = {
-						...result.data.statistics,
-						supportPercentage: Math.round(result.data.statistics.supportPercentage),
-						oppositionPercentage: Math.round(result.data.statistics.oppositionPercentage)
-					};
+					statistics = result.data.statistics;
 				}
 			})
 			.catch(() => {});
@@ -44,6 +40,7 @@
 </script>
 
 <Card>
+	<h3 class="text-label-sm text-muted">Sentiment topic</h3>
 	<div class="flex flex-wrap items-center justify-between gap-2">
 		<a class="text-primary font-medium hover:underline" href={topicHref}>{topic}</a>
 		<span class="text-muted text-sm">{contract}</span>
@@ -59,4 +56,5 @@
 	{:else}
 		<div class="text-muted text-sm">Sentiment for this topic is recorded on-chain.</div>
 	{/if}
+	<a class="text-primary text-sm hover:underline" href={topicHref}>View the topic</a>
 </Card>

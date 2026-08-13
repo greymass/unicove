@@ -20,7 +20,7 @@
 
 {#if revisions.length}
 	<Card>
-		<h2 class="text-label-sm text-muted mb-3">Revision history</h2>
+		<h3 class="text-label-sm text-muted mb-3">Revision history</h3>
 		<Stack class="gap-3">
 			{#each revisions as revision (revision.version)}
 				<div>

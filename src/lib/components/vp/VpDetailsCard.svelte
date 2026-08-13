@@ -24,7 +24,7 @@
 </script>
 
 <Card>
-	<h2 class="text-label-sm text-muted mb-3">Details</h2>
+	<h3 class="text-label-sm text-muted mb-3">Details</h3>
 	<DL>
 		<DLRow title="Status"><DD><VpStatusChip status={summary.status} /></DD></DLRow>
 		<DLRow title="Created" description={formatDate(summary.created)} />

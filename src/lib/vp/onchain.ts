@@ -1,4 +1,4 @@
-import type { VpMsigStatus, VpSummary } from './types';
+import type { VpIndex, VpMsigStatus, VpSummary } from './types';
 
 export interface VpMsigCardModel {
 	proposer: string;
@@ -22,4 +22,25 @@ export function msigCardModels(summary: VpSummary): VpMsigCardModel[] {
 
 export function sentimentTopicPath(ref: { contract: string; topic: string }): string {
 	return `/sentiment/topics/${ref.topic}`;
+}
+
+export function partitionMsigCardModels(models: VpMsigCardModel[]): {
+	live: VpMsigCardModel[];
+	finished: VpMsigCardModel[];
+} {
+	return {
+		live: models.filter((m) => m.live),
+		finished: models.filter((m) => !m.live)
+	};
+}
+
+export function vpForMsig(index: VpIndex, proposer: string, proposal: string): VpSummary | null {
+	for (const summary of index.proposals) {
+		for (const msig of summary.msigs) {
+			if (msig.proposer === proposer && msig.proposal === proposal) {
+				return summary;
+			}
+		}
+	}
+	return null;
 }

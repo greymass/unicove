@@ -15,6 +15,7 @@
 		topicId: NameType;
 		currentVote?: number | null;
 		disabled?: boolean;
+		showVoter?: boolean;
 		onVoteSuccess?: (id?: Checksum256, voteType?: number | null) => void;
 		onVoteFailure?: (error: string) => void;
 	};
@@ -25,6 +26,7 @@
 		proposalName: NameType;
 		currentVote?: number | null;
 		disabled?: boolean;
+		showVoter?: boolean;
 		onVoteSuccess?: (id?: Checksum256, voteType?: number | null) => void;
 		onVoteFailure?: (error: string) => void;
 	};
@@ -39,6 +41,7 @@
 
 	const currentVote = $derived(props.currentVote ?? null);
 	const disabled = $derived(props.disabled ?? false);
+	const showVoter = $derived(props.showVoter ?? true);
 
 	async function handleVote(voteType: number) {
 		if (!context.wharf.session || !context.account) {
@@ -139,7 +142,7 @@
 	let votingWeight = $state<Asset | null>(null);
 	$effect(() => {
 		const account = context.account;
-		if (!account) {
+		if (!account || !showVoter) {
 			votingWeight = null;
 			return;
 		}
@@ -203,7 +206,7 @@
 		</div>
 	{/if}
 
-	{#if context.wharf.session && context.account && votingWeight}
+	{#if showVoter && context.wharf.session && context.account && votingWeight}
 		<div class=" text-center">
 			<p class="text-sm">
 				{currentVote === null ? 'Voting' : 'Voted'}

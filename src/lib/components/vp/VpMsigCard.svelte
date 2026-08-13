@@ -3,6 +3,7 @@
 	import { Card, Chip } from 'unicove-components';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import AccountLink from '$lib/components/elements/account.svelte';
+	import type { ApiResponse, MsigDetailData } from '$lib/types/sentiment';
 	import type { VpMsigCardModel } from '$lib/vp/onchain';
 
 	interface Props {
@@ -15,6 +16,9 @@
 	let approved = $state<number | null>(null);
 	let total = $state<number | null>(null);
 	let unavailable = $state(false);
+	let sentimentVotes = $state<number | null>(null);
+
+	const sentimentEnabled = $derived(context.network.supports('sentiment'));
 
 	$effect(() => {
 		if (!model.live) {
@@ -42,9 +46,28 @@
 			});
 		return () => controller.abort();
 	});
+
+	$effect(() => {
+		if (!model.live || !sentimentEnabled) {
+			return;
+		}
+		const controller = new AbortController();
+		fetch(context.urlPath(`/api/sentiment/msigs/${model.proposer}/${model.proposal}`), {
+			signal: controller.signal
+		})
+			.then((response) => response.json())
+			.then((result: ApiResponse<MsigDetailData>) => {
+				if (result.success && result.data) {
+					sentimentVotes = result.data.statistics.totalVotes;
+				}
+			})
+			.catch(() => {});
+		return () => controller.abort();
+	});
 </script>
 
 <Card>
+	<h3 class="text-label-sm text-muted">Multisig proposal</h3>
 	<div class="flex flex-wrap items-center justify-between gap-2">
 		<a class="text-primary font-medium hover:underline" href={context.urlPath(model.msigPath)}>
 			{model.proposer}/{model.proposal}
@@ -76,4 +99,21 @@
 			View the executed transaction
 		</a>
 	{/if}
+	<div class="flex flex-wrap gap-4">
+		<a class="text-primary text-sm hover:underline" href={context.urlPath(model.msigPath)}>
+			View the multisig
+		</a>
+		{#if sentimentEnabled}
+			<a
+				class="text-primary text-sm hover:underline"
+				href={context.urlPath(`${model.msigPath}/sentiment`)}
+			>
+				{#if sentimentVotes !== null}
+					Sentiment ({sentimentVotes})
+				{:else}
+					Sentiment
+				{/if}
+			</a>
+		{/if}
+	</div>
 </Card>

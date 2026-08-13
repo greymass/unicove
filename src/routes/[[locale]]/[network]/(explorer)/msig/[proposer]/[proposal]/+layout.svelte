@@ -46,6 +46,14 @@
 </script>
 
 <Stack class="@container">
+	{#if data.vp}
+		<p class="text-muted text-sm">
+			Implements <a
+				class="text-primary hover:underline"
+				href={context.urlPath(`/proposals/${data.vp.slug}`)}>{data.vp.vp}: {data.vp.title}</a
+			>
+		</p>
+	{/if}
 	<PillGroup options={tabOptions} />
 	{@render children?.()}
 </Stack>

@@ -11,7 +11,7 @@
 
 {#if accounts.length}
 	<Card>
-		<h2 class="text-label-sm text-muted mb-3">Related accounts</h2>
+		<h3 class="text-label-sm text-muted mb-3">Related accounts</h3>
 		<div class="flex flex-wrap gap-2">
 			{#each accounts as account (account)}
 				<AccountLink name={account} />

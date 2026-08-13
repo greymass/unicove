@@ -8,8 +8,8 @@
 	import VpMarkdown from '$lib/components/vp/VpMarkdown.svelte';
 	import VpOnchain from '$lib/components/vp/VpOnchain.svelte';
 	import VpLanguageNav from '$lib/components/vp/VpLanguageNav.svelte';
+	import VpActions from '$lib/components/vp/VpActions.svelte';
 	import VpDetailsCard from '$lib/components/vp/VpDetailsCard.svelte';
-	import VpRelatedAccounts from '$lib/components/vp/VpRelatedAccounts.svelte';
 	import VpRevisions from '$lib/components/vp/VpRevisions.svelte';
 	import VpStaleNotice from '$lib/components/vp/VpStaleNotice.svelte';
 	import type { PageData } from './$types';
@@ -29,6 +29,8 @@
 <Stack class="gap-6">
 	<VpLanguageNav summary={data.summary} current={data.lang} />
 
+	<VpActions summary={data.summary} />
+
 	<div class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_20rem]">
 		<Stack class="max-w-[70ch] min-w-0 gap-6">
 			{#if data.stale}
@@ -37,19 +39,21 @@
 			<VpMarkdown body={data.body} slug={data.summary.slug} {basePath} branch={data.branch} />
 		</Stack>
 
-		<Stack tag="aside" class="gap-4 self-start">
-			<VpDetailsCard summary={data.summary} revisions={data.revisions} branch={data.branch} />
+		<Stack tag="aside" class="gap-6 self-start">
+			<Stack class="gap-4">
+				<h2 class="text-label-sm text-muted">Proposal</h2>
+				<VpDetailsCard summary={data.summary} revisions={data.revisions} branch={data.branch} />
+				<VpRevisions revisions={data.revisions} slug={data.summary.slug} branch={data.branch} />
+				<a
+					class="text-muted hover:text-on-surface text-sm hover:underline"
+					href={vpSourceUrl(data.summary.slug, data.branch)}
+					rel="noopener noreferrer"
+					target="_blank"
+				>
+					View source on GitHub
+				</a>
+			</Stack>
 			<VpOnchain summary={data.summary} />
-			<VpRelatedAccounts accounts={data.summary.accounts} />
-			<VpRevisions revisions={data.revisions} slug={data.summary.slug} branch={data.branch} />
-			<a
-				class="text-muted hover:text-on-surface text-sm hover:underline"
-				href={vpSourceUrl(data.summary.slug, data.branch)}
-				rel="noopener noreferrer"
-				target="_blank"
-			>
-				View source on GitHub
-			</a>
 		</Stack>
 	</div>
 </Stack>
