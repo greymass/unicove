@@ -2,6 +2,7 @@
 	import { Card, Stack } from 'unicove-components';
 	import { page } from '$app/state';
 	import { formatDateTime } from '$lib/utils/intl';
+	import { parseVpDate } from '$lib/vp/dates';
 	import { vpHistoryUrl } from '$lib/vp/links';
 	import type { VpRevision } from '$lib/vp/revisions';
 
@@ -13,7 +14,7 @@
 	const { revisions, slug }: Props = $props();
 	const locale = $derived(page.params.locale ?? 'en');
 	const formatDate = (value: string) =>
-		formatDateTime(new Date(value), locale, { dateStyle: 'medium', timeStyle: undefined });
+		formatDateTime(parseVpDate(value), locale, { dateStyle: 'medium', timeStyle: undefined });
 </script>
 
 {#if revisions.length}

@@ -2,6 +2,7 @@
 	import { Card, DD, DL, DLRow } from 'unicove-components';
 	import { page } from '$app/state';
 	import { formatDateTime } from '$lib/utils/intl';
+	import { parseVpDate } from '$lib/vp/dates';
 	import { vpStandardUrl } from '$lib/vp/links';
 	import VpStatusChip from './VpStatusChip.svelte';
 	import type { VpSummary } from '$lib/vp/types';
@@ -15,7 +16,7 @@
 	const { summary, revisions }: Props = $props();
 	const locale = $derived(page.params.locale ?? 'en');
 	const formatDate = (value: string) =>
-		formatDateTime(new Date(value), locale, { dateStyle: 'medium', timeStyle: undefined });
+		formatDateTime(parseVpDate(value), locale, { dateStyle: 'medium', timeStyle: undefined });
 	const highestVersion = $derived(
 		revisions.length ? Math.max(...revisions.map((r) => r.version)) : null
 	);
