@@ -229,7 +229,7 @@
 				</TransactForm>
 			</Card>
 
-			{#if context.network.supports('sentiment')}
+			{#if context.network.supports('sentiment') && context.account}
 				<h2 class="text-title">Community Sentiment</h2>
 				<Card>
 					<VoteButtons

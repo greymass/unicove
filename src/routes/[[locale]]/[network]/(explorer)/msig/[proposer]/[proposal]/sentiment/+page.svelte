@@ -61,6 +61,21 @@
 		{#if sentimentState.currentMsig}
 			{@const statistics = sentimentState.currentMsig.statistics}
 
+			{#if context.account}
+				<Stack class="gap-3">
+					<h2 class="text-on-surface text-headline">Your Vote</h2>
+					<Card>
+						<VoteButtons
+							type="msig"
+							proposer={data.proposal.proposer}
+							proposalName={data.proposal.name}
+							currentVote={userVote}
+							onVoteSuccess={handleVoteSuccess}
+						/>
+					</Card>
+				</Stack>
+			{/if}
+
 			<Stack class="gap-3">
 				<h2 class="text-on-surface text-headline">Statistics</h2>
 				<div class="grid gap-6 @xl:grid-cols-3">
@@ -76,19 +91,6 @@
 					{/each}
 				</div>
 				<MetricLensDetail lens={activeLens} stats={statistics.metrics[activeLens]} {systemSymbol} />
-			</Stack>
-
-			<Stack class="gap-3">
-				<h2 class="text-on-surface text-headline">Your Vote</h2>
-				<Card>
-					<VoteButtons
-						type="msig"
-						proposer={data.proposal.proposer}
-						proposalName={data.proposal.name}
-						currentVote={userVote}
-						onVoteSuccess={handleVoteSuccess}
-					/>
-				</Card>
 			</Stack>
 
 			{#if sentimentState.currentVotes.length > 0}

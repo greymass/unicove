@@ -14,13 +14,15 @@
 	onMount(() => {
 		if (context.network.supports('sentiment')) {
 			sentimentState.loadMsig(data.proposal.proposer, data.proposal.name);
-			if (context.account) {
-				sentimentState.loadUserVote(
-					context.account.name,
-					data.proposal.proposer,
-					data.proposal.name
-				);
-			}
+		}
+	});
+
+	$effect(() => {
+		if (!context.network.supports('sentiment')) return;
+		if (context.account) {
+			sentimentState.loadUserVote(context.account.name, data.proposal.proposer, data.proposal.name);
+		} else {
+			sentimentState.currentUserVote = null;
 		}
 	});
 
