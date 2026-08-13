@@ -29,9 +29,13 @@
 	const sentimentState = $state(new MsigSentimentState(context.network, data.locale));
 	let userVote = $derived(sentimentState.currentUserVote?.vote_type ?? null);
 
-	const lensLabels: Record<MetricLens, string> = { system: 'System Token', ram: 'RAM', v: 'V' };
 	let activeLens = $state<MetricLens>('system');
 	const systemSymbol = $derived(context.network.chain.systemToken!.symbol);
+	const lensLabels: Record<MetricLens, string> = $derived({
+		system: String(systemSymbol.name),
+		ram: 'RAM',
+		v: 'V'
+	});
 
 	function selectLens(lens: MetricLens) {
 		activeLens = lens;

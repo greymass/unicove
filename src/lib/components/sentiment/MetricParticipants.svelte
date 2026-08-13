@@ -22,11 +22,11 @@
 		$props();
 	const context = getContext<UnicoveContext>('state');
 
-	const columns: { key: MetricLens; label: string }[] = [
-		{ key: 'system', label: 'System Token' },
+	const columns: { key: MetricLens; label: string }[] = $derived([
+		{ key: 'system', label: String(systemSymbol.name) },
 		{ key: 'ram', label: 'RAM' },
 		{ key: 'v', label: 'V' }
-	];
+	]);
 </script>
 
 {#snippet value(vote: VoteWithWeight, key: MetricLens)}

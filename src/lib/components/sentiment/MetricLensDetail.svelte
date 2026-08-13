@@ -16,11 +16,11 @@
 
 	const { lens, stats, systemSymbol }: Props = $props();
 
-	const labels: Record<MetricLens, string> = {
-		system: 'System Token',
+	const labels: Record<MetricLens, string> = $derived({
+		system: String(systemSymbol.name),
 		ram: 'RAM',
 		v: 'V'
-	};
+	});
 </script>
 
 {#snippet value(amount: number)}
