@@ -10,6 +10,7 @@
 	import VpLanguageNav from '$lib/components/vp/VpLanguageNav.svelte';
 	import VpDetailsCard from '$lib/components/vp/VpDetailsCard.svelte';
 	import VpRelatedAccounts from '$lib/components/vp/VpRelatedAccounts.svelte';
+	import VpRevisions from '$lib/components/vp/VpRevisions.svelte';
 	import VpStaleNotice from '$lib/components/vp/VpStaleNotice.svelte';
 	import type { PageData } from './$types';
 
@@ -37,9 +38,10 @@
 		</Stack>
 
 		<Stack tag="aside" class="gap-4 self-start">
-			<VpDetailsCard summary={data.summary} />
+			<VpDetailsCard summary={data.summary} revisions={data.revisions} />
 			<VpOnchain summary={data.summary} />
 			<VpRelatedAccounts accounts={data.summary.accounts} />
+			<VpRevisions revisions={data.revisions} slug={data.summary.slug} />
 			<a
 				class="text-muted hover:text-on-surface text-sm hover:underline"
 				href={vpSourceUrl(data.summary.slug)}

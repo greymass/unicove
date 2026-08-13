@@ -4,6 +4,7 @@ import {
 	VP_BRANCH,
 	vpSourceUrl,
 	vpStandardUrl,
+	vpHistoryUrl,
 	rewriteVpHref,
 	resolveVpImageSrc
 } from './links';
@@ -198,6 +199,14 @@ describe('vpStandardUrl', () => {
 	test('links to the standard document on the configured branch', () => {
 		expect(vpStandardUrl('VPS-1')).toBe(
 			`https://github.com/greymass/vaulta-proposals/blob/${VP_BRANCH}/standard/VPS-1.md`
+		);
+	});
+});
+
+describe('vpHistoryUrl', () => {
+	test('links to the proposal file commit history on the configured branch', () => {
+		expect(vpHistoryUrl('vp-0001-ram-gifting')).toBe(
+			`https://github.com/greymass/vaulta-proposals/commits/${VP_BRANCH}/proposals/vp-0001-ram-gifting/proposal.md`
 		);
 	});
 });

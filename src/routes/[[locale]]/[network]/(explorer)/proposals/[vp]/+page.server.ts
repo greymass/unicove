@@ -4,6 +4,7 @@ import { localizeUrl } from '$lib/utils/url';
 import { fetchVpFile, fetchVpIndex, VpFetchError } from '$lib/vp/fetch';
 import { prepareVpDocument } from '$lib/vp/document';
 import { findVpSummary, selectVpFile } from '$lib/vp/resolve';
+import { mergeVpRevisions, parseVpRevisions, sortVpRevisionsNewestFirst } from '$lib/vp/revisions';
 import type { PageServerLoad } from './$types';
 
 function indexErrorMessage(e: unknown): string {
@@ -59,6 +60,18 @@ export const load: PageServerLoad = async ({ fetch, locals, params, setHeaders, 
 	const { title, body } = prepareVpDocument(raw);
 	const heading = title ?? summary.title;
 
+	const localizedRevisions = parseVpRevisions(raw);
+	let revisions = localizedRevisions;
+	if (picked.lang !== 'en' && picked.stale) {
+		try {
+			const englishRaw = await fetchVpFile(fetch, summary.path);
+			revisions = mergeVpRevisions(parseVpRevisions(englishRaw), localizedRevisions);
+		} catch {
+			// English fetch failed; degrade to the localized entries already parsed above.
+		}
+	}
+	revisions = sortVpRevisionsNewestFirst(revisions);
+
 	// A proposal resolves at both vp-0001 and vp-0001-slug, so point search engines at the number.
 	const canonical = new URL(url);
 	const segments = canonical.pathname.split('/');
@@ -73,6 +86,7 @@ export const load: PageServerLoad = async ({ fetch, locals, params, setHeaders, 
 		subtitle: summary.vp,
 		lang: picked.lang,
 		stale: picked.stale,
+		revisions,
 		pageMetaTags: {
 			title: `${summary.vp}: ${heading}`,
 			description: `Read "${heading}", a Vaulta network proposal published for public review.`,

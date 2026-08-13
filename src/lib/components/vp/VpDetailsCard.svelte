@@ -5,15 +5,20 @@
 	import { vpStandardUrl } from '$lib/vp/links';
 	import VpStatusChip from './VpStatusChip.svelte';
 	import type { VpSummary } from '$lib/vp/types';
+	import type { VpRevision } from '$lib/vp/revisions';
 
 	interface Props {
 		summary: VpSummary;
+		revisions: VpRevision[];
 	}
 
-	const { summary }: Props = $props();
+	const { summary, revisions }: Props = $props();
 	const locale = $derived(page.params.locale ?? 'en');
 	const formatDate = (value: string) =>
 		formatDateTime(new Date(value), locale, { dateStyle: 'medium', timeStyle: undefined });
+	const highestVersion = $derived(
+		revisions.length ? Math.max(...revisions.map((r) => r.version)) : null
+	);
 </script>
 
 <Card>
@@ -23,6 +28,9 @@
 		<DLRow title="Created" description={formatDate(summary.created)} />
 		{#if summary.updated}
 			<DLRow title="Updated" description={formatDate(summary.updated)} />
+		{/if}
+		{#if highestVersion !== null}
+			<DLRow title="Version" description={`v${highestVersion}`} />
 		{/if}
 		<DLRow title="Authors" description={summary.authors.join(', ')} />
 		<DLRow title="Standard">

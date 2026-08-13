@@ -15,6 +15,10 @@ export function vpStandardUrl(standard: string): string {
 	return `${REPO_BASE}/blob/${VP_BRANCH}/standard/${standard}.md`;
 }
 
+export function vpHistoryUrl(slug: string): string {
+	return `${REPO_BASE}/commits/${VP_BRANCH}/proposals/${slug}/proposal.md`;
+}
+
 export type VpHref = { kind: 'internal' | 'external' | 'plain'; href: string };
 
 const CROSS_VP = /^\.\.\/vp-(\d{4})(?:-[a-z0-9-]+)?\/proposal(?:\.[a-z-]+)?\.md(#[^\s]*)?$/;
