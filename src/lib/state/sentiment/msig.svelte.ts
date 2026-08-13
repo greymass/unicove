@@ -47,8 +47,6 @@ export class MsigSentimentState {
 
 		return {
 			...statistics,
-			supportPercentage: Math.round(statistics.supportPercentage),
-			oppositionPercentage: Math.round(statistics.oppositionPercentage),
 			totalWeightAsset: Asset.fromUnits(statistics.totalWeight, systemTokenSymbol),
 			totalSupportWeightAsset: Asset.fromUnits(statistics.totalSupportWeight, systemTokenSymbol),
 			totalOppositionWeightAsset: Asset.fromUnits(

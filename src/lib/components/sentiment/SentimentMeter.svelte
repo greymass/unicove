@@ -1,5 +1,8 @@
 <script lang="ts">
+	import { getContext } from 'svelte';
+	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { TopicStatistics } from '$lib/types/sentiment';
+	import { percentString } from '$lib/utils';
 
 	interface Props {
 		id: string;
@@ -8,6 +11,8 @@
 	}
 
 	const { statistics, compact = false, ...props }: Props = $props();
+	const context = getContext<UnicoveContext>('state');
+	const locale = $derived(context.settings.data.locale);
 </script>
 
 <div class="grid gap-2">
@@ -38,14 +43,14 @@
 				class:text-success={statistics.supportPercentage > 0}
 				class:text-muted={statistics.supportPercentage === 0}
 			>
-				{statistics.supportPercentage}% Support
+				{percentString(locale, statistics.supportPercentage / 100, 0)} Support
 			</span>
 			<span
 				class="text-right"
 				class:text-error={statistics.oppositionPercentage > 0}
 				class:text-muted={statistics.oppositionPercentage === 0}
 			>
-				{statistics.oppositionPercentage}% Oppose
+				{percentString(locale, statistics.oppositionPercentage / 100, 0)} Oppose
 			</span>
 		</label>
 	{/if}

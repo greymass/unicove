@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2026-08-13T16:53:23.031Z\n"
+"PO-Revision-Date: 2026-08-13T21:59:03.470Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -361,7 +361,8 @@ msgstr "Page"
 #: src/routes/[[locale]]/[network]/(account)/swap/describe.svelte.ts
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/resources/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/sentiment/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/[proposer]/[proposal]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
 msgid "RAM"
@@ -508,8 +509,8 @@ msgstr "Transfer"
 msgid "+ {0} ms (CPU)"
 msgstr "+ {0} ms (CPU)"
 
-#. placeholder {0}: data.powup_cpu
 #. placeholder {0}: data.powup_net
+#. placeholder {0}: data.powup_cpu
 #. placeholder {0}: account.weight
 #. placeholder {0}: key.weight
 #. placeholder {0}: account.weight
@@ -2257,7 +2258,7 @@ msgid "Refresh"
 msgstr "Refresh"
 
 #. placeholder {0}: formatDate(proposal.updated)
-#. placeholder {0}: refreshed
+#. placeholder {0}: formatDate(proposal.updated)
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/market/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.svelte
 msgid "Updated {0}"
@@ -2915,6 +2916,7 @@ msgid "Change network"
 msgstr "Change network"
 
 #: src/lib/components/accountswitch.svelte
+#: src/lib/components/vp/VpActions.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Connect Wallet"
@@ -3452,7 +3454,7 @@ msgstr "<0>Unicove -</0> The {0} web wallet and block explorer"
 
 #. placeholder {0}: network.chain.name
 #. placeholder {0}: networkName
-#. placeholder {0}: network.chain.name
+#. placeholder {0}: networkName
 #: src/routes/+layout.server.ts
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
@@ -3506,7 +3508,7 @@ msgstr "Get Tokens"
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
-#. placeholder {0}: symbol.name
+#. placeholder {0}: String(network.token.symbol.name)
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
@@ -3525,10 +3527,10 @@ msgstr "KB (RAM): Tokenized Data Storage"
 msgid "One {0} of RAM represents ownership rights over 1000 bytes of the network's total blockchain storage capacity. {1} can be swapped with {2} by visiting the RAM Market."
 msgstr "One {0} of RAM represents ownership rights over 1000 bytes of the network's total blockchain storage capacity. {1} can be swapped with {2} by visiting the RAM Market."
 
-#. placeholder {0}: String(network.chain.systemToken?.symbol.name)
-#. placeholder {1}: String(ramtoken.name)
 #. placeholder {0}: data.network.token.name
 #. placeholder {1}: data.network.getRamToken().name
+#. placeholder {0}: String(network.chain.systemToken?.symbol.name)
+#. placeholder {1}: String(ramtoken.name)
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/charts.svelte
 msgid "Swap {0}/{1}"
@@ -4185,6 +4187,7 @@ msgid "Proposal Name"
 msgstr "Proposal Name"
 
 #: src/lib/components/vp/VpMsigCard.svelte
+#: src/lib/components/vp/VpMsigRow.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Expired"
@@ -4812,11 +4815,15 @@ msgstr "How to Sign Transactions on the {0} network with MetaMask"
 msgid "MetaMask Wallet Plugin"
 msgstr "MetaMask Wallet Plugin"
 
+#: src/lib/components/vp/VpMsigCard.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/[proposer]/[proposal]/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.ts
 msgid "Sentiment"
 msgstr "Sentiment"
 
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/[proposer]/[proposal]/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.ts
 msgid "Overview and statistics for community sentiment on the"
 msgstr "Overview and statistics for community sentiment on the"
@@ -4853,17 +4860,11 @@ msgstr "Load More"
 msgid "About Sentiment Voting"
 msgstr "About Sentiment Voting"
 
-#. placeholder {0}: statistics.supportPercentage
-#. placeholder {0}: supportPercentage
-#: src/lib/components/sentiment/SentimentMeter.svelte
-msgid "{0}% Support"
-msgstr "{0}% Support"
+#~ msgid "{0}% Support"
+#~ msgstr "{0}% Support"
 
-#. placeholder {0}: statistics.oppositionPercentage
-#. placeholder {0}: oppositionPercentage
-#: src/lib/components/sentiment/SentimentMeter.svelte
-msgid "{0}% Oppose"
-msgstr "{0}% Oppose"
+#~ msgid "{0}% Oppose"
+#~ msgstr "{0}% Oppose"
 
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.svelte
@@ -4874,6 +4875,8 @@ msgstr "Stake tokens"
 msgid "Updating..."
 msgstr "Updating..."
 
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/sentiment/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/[proposer]/[proposal]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
 msgid "Dismiss"
 msgstr "Dismiss"
@@ -4959,10 +4962,14 @@ msgstr ""
 "Each topic shows the total participation and the distribution of support versus opposition,\n"
 "helping the community gauge consensus on key issues."
 
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/sentiment/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/[proposer]/[proposal]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
 msgid "Your Vote"
 msgstr "Your Vote"
 
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/sentiment/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/[proposer]/[proposal]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
 msgid "Statistics"
 msgstr "Statistics"
@@ -5196,7 +5203,6 @@ msgid "Top 21 Block Producer"
 msgstr "Top 21 Block Producer"
 
 #: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
 msgid "View All Proposals"
 msgstr "View All Proposals"
 
@@ -5222,24 +5228,20 @@ msgstr "{0} active"
 msgid "Top Producers"
 msgstr "Top Producers"
 
-#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/+page.ts
 msgid "Multisig Sentiment"
 msgstr "Multisig Sentiment"
 
-#. placeholder {0}: data.msigSentimentState.msigs.length
-#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
-msgid "{0} proposals with sentiment"
-msgstr "{0} proposals with sentiment"
+#~ msgid "{0} proposals with sentiment"
+#~ msgstr "{0} proposals with sentiment"
 
-#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
-msgid ""
-"Express your opinion on multisig proposals. Your vote is weighted by your staked tokens,\n"
-"helping signal community consensus on governance proposals."
-msgstr ""
-"Express your opinion on multisig proposals. Your vote is weighted by your staked tokens,\n"
-"helping signal community consensus on governance proposals."
+#~ msgid ""
+#~ "Express your opinion on multisig proposals. Your vote is weighted by your staked tokens,\n"
+#~ "helping signal community consensus on governance proposals."
+#~ msgstr ""
+#~ "Express your opinion on multisig proposals. Your vote is weighted by your staked tokens,\n"
+#~ "helping signal community consensus on governance proposals."
 
 #. placeholder {0}: msigData.statistics.totalVotes
 #: src/lib/components/sentiment/msigCard.svelte
@@ -5516,6 +5518,7 @@ msgid "Unapproved"
 msgstr "Unapproved"
 
 #: src/lib/components/vp/VpMsigCard.svelte
+#: src/lib/components/vp/VpMsigRow.svelte
 #: src/lib/components/vp/VpStatusChip.svelte
 #: src/lib/components/vp/VpStatusChip.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
@@ -5524,6 +5527,7 @@ msgid "Executed"
 msgstr "Executed"
 
 #: src/lib/components/vp/VpMsigCard.svelte
+#: src/lib/components/vp/VpMsigRow.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
 msgid "Cancelled"
@@ -7834,12 +7838,14 @@ msgstr "Network proposals for Vaulta, published for public review."
 msgid "Read \"{0}\", a Vaulta network proposal published for public review."
 msgstr "Read \"{0}\", a Vaulta network proposal published for public review."
 
-#: src/lib/components/vp/VpOnchain.svelte
-msgid "On-chain activity"
-msgstr "On-chain activity"
+#~ msgid "On-chain activity"
+#~ msgstr "On-chain activity"
 
 #. placeholder {0}: approved
 #. placeholder {1}: total
+#. placeholder {0}: approved
+#. placeholder {1}: total
+#: src/lib/components/vp/VpActionMsigRow.svelte
 #: src/lib/components/vp/VpMsigCard.svelte
 msgid "{0} of {1} approvals signed"
 msgstr "{0} of {1} approvals signed"
@@ -7849,6 +7855,7 @@ msgid "No live approval data on this network."
 msgstr "No live approval data on this network."
 
 #: src/lib/components/vp/VpMsigCard.svelte
+#: src/lib/components/vp/VpMsigRow.svelte
 msgid "View the executed transaction"
 msgstr "View the executed transaction"
 
@@ -7942,16 +7949,13 @@ msgstr "Voter"
 msgid "Vote"
 msgstr "Vote"
 
-#: src/lib/components/sentiment/MetricLensDetail.svelte
-#: src/lib/components/sentiment/MetricParticipants.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
-msgid "System Token"
-msgstr "System Token"
+#~ msgid "System Token"
+#~ msgstr "System Token"
 
 #: src/lib/components/sentiment/MetricLensDetail.svelte
 #: src/lib/components/sentiment/MetricParticipants.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/sentiment/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/[proposer]/[proposal]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
 msgid "V"
 msgstr "V"
@@ -7999,11 +8003,115 @@ msgstr "Version {0} · {1}"
 msgid "Change history"
 msgstr "Change history"
 
-#. placeholder {0}: stats.total.toLocaleString()
 #. placeholder {0}: amount.toLocaleString()
+#. placeholder {0}: stats.total.toLocaleString()
 #. placeholder {0}: vote.metrics.v.total.toLocaleString()
 #: src/lib/components/sentiment/MetricLensDetail.svelte
 #: src/lib/components/sentiment/MetricOverviewCard.svelte
 #: src/lib/components/sentiment/MetricParticipants.svelte
 msgid "{0} V"
 msgstr "{0} V"
+
+#~ msgid "View complete breakdown"
+#~ msgstr "View complete breakdown"
+
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/[proposer]/[proposal]/+page.ts
+msgid "Community sentiment on this multisig proposal"
+msgstr "Community sentiment on this multisig proposal"
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/sentiment/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/[proposer]/[proposal]/+page.svelte
+msgid "Loading sentiment..."
+msgstr "Loading sentiment..."
+
+#: src/lib/components/vp/VpActions.svelte
+msgid ""
+"Sentiment voting and multisig approval become available when this proposal has on-chain\n"
+"records."
+msgstr ""
+"Sentiment voting and multisig approval become available when this proposal has on-chain\n"
+"records."
+
+#: src/lib/components/vp/VpActions.svelte
+#: src/lib/components/vp/VpActions.svelte
+msgid "Your participation"
+msgstr "Your participation"
+
+#: src/lib/components/vp/VpActions.svelte
+msgid "with weight <0/>"
+msgstr "with weight <0/>"
+
+#: src/lib/components/vp/VpActions.svelte
+msgid "Acting as <0/> <1/>"
+msgstr "Acting as <0/> <1/>"
+
+#: src/lib/components/vp/VpActionSentimentRow.svelte
+msgid "Sentiment on this proposal"
+msgstr "Sentiment on this proposal"
+
+#. placeholder {0}: model.proposer
+#. placeholder {1}: model.proposal
+#: src/lib/components/vp/VpActionSentimentRow.svelte
+msgid "Sentiment on the multisig {0}/{1}"
+msgstr "Sentiment on the multisig {0}/{1}"
+
+#. placeholder {0}: model.proposer
+#. placeholder {1}: model.proposal
+#: src/lib/components/vp/VpActionMsigRow.svelte
+msgid "Multisig {0}/{1}"
+msgstr "Multisig {0}/{1}"
+
+#: src/lib/components/vp/VpActionMsigRow.svelte
+msgid "Review and approve on the multisig page"
+msgstr "Review and approve on the multisig page"
+
+#: src/lib/components/vp/VpActionMsigRow.svelte
+#: src/lib/components/vp/VpMsigCard.svelte
+msgid "View the multisig"
+msgstr "View the multisig"
+
+#. placeholder {0}: sentimentVotes
+#. placeholder {0}: votes
+#: src/lib/components/vp/VpMsigCard.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
+msgid "Sentiment ({0})"
+msgstr "Sentiment ({0})"
+
+#: src/lib/components/vp/VpMsigCard.svelte
+msgid "Multisig proposal"
+msgstr "Multisig proposal"
+
+#: src/lib/components/vp/VpOnchain.svelte
+msgid "On-chain"
+msgstr "On-chain"
+
+#. placeholder {0}: partition.finished.length
+#: src/lib/components/vp/VpOnchain.svelte
+msgid "Earlier multisigs ({0})"
+msgstr "Earlier multisigs ({0})"
+
+#: src/lib/components/vp/VpSentimentCard.svelte
+msgid "Sentiment topic"
+msgstr "Sentiment topic"
+
+#: src/lib/components/vp/VpSentimentCard.svelte
+msgid "View the topic"
+msgstr "View the topic"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+page.svelte
+msgid "Proposal"
+msgstr "Proposal"
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
+msgid "Implements <0>{0}: {1}</0>"
+msgstr "Implements <0>{0}: {1}</0>"
+
+#. placeholder {0}: percentString(locale, statistics.supportPercentage / 100, 0)
+#: src/lib/components/sentiment/SentimentMeter.svelte
+msgid "{0} Support"
+msgstr "{0} Support"
+
+#. placeholder {0}: percentString(locale, statistics.oppositionPercentage / 100, 0)
+#: src/lib/components/sentiment/SentimentMeter.svelte
+msgid "{0} Oppose"
+msgstr "{0} Oppose"

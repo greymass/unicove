@@ -6,6 +6,7 @@
 	import type { MetricLens, AssetMetricStats } from '$lib/types/sentiment';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import { formatBytes } from '$lib/utils/bytes';
+	import { percentString } from '$lib/utils';
 	import SentimentMeter from './SentimentMeter.svelte';
 
 	interface Props {
@@ -19,6 +20,7 @@
 	const { lens, label, stats, selected, onselect }: Props = $props();
 	const context = getContext<UnicoveContext>('state');
 	const systemSymbol = $derived(context.network.chain.systemToken!.symbol);
+	const locale = $derived(context.settings.data.locale);
 </script>
 
 <button class="text-left" onclick={() => onselect(lens)}>
@@ -42,9 +44,12 @@
 			</div>
 			<SentimentMeter id="overview-{lens}" compact statistics={stats} />
 			<div class="text-label-sm flex justify-between">
-				<span class:text-success={stats.supportPercentage > 0}>{stats.supportPercentage}%</span>
-				<span class:text-error={stats.oppositionPercentage > 0}>{stats.oppositionPercentage}%</span
-				>
+				<span class:text-success={stats.supportPercentage > 0}>
+					{percentString(locale, stats.supportPercentage / 100, 0)}
+				</span>
+				<span class:text-error={stats.oppositionPercentage > 0}>
+					{percentString(locale, stats.oppositionPercentage / 100, 0)}
+				</span>
 			</div>
 		</div>
 	</Card>
