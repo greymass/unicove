@@ -6,10 +6,13 @@
 	import MetricOverviewCard from '$lib/components/sentiment/MetricOverviewCard.svelte';
 	import MetricLensDetail from '$lib/components/sentiment/MetricLensDetail.svelte';
 	import MetricParticipants from '$lib/components/sentiment/MetricParticipants.svelte';
+	import { MsigSentimentState } from '$lib/state/sentiment/msig.svelte';
 	import type { MetricLens } from '$lib/types/sentiment';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
+
+	const sentimentState = $state(new MsigSentimentState(context.network, data.locale));
 
 	let activeLens = $state<MetricLens>('system');
 	const systemSymbol = $derived(context.network.chain.systemToken!.symbol);
@@ -19,23 +22,25 @@
 		v: 'V'
 	});
 
-	let userVote = $derived(data.sentiment.currentUserVote?.vote_type ?? null);
+	let userVote = $derived(sentimentState.currentUserVote?.vote_type ?? null);
 
 	function selectLens(lens: MetricLens) {
 		activeLens = lens;
-		data.sentiment.loadMsigVotes(data.proposer, data.proposal, 1, 50, lens);
+		sentimentState.loadMsigVotes(data.proposal.proposer, data.proposal.name, 1, 50, lens);
 	}
 
 	onMount(() => {
+		sentimentState.loadMsig(data.proposal.proposer, data.proposal.name);
+		sentimentState.loadMsigVotes(data.proposal.proposer, data.proposal.name, 1, 50, activeLens);
 		if (context.account) {
-			data.sentiment.loadUserVote(context.account.name, data.proposer, data.proposal);
+			sentimentState.loadUserVote(context.account.name, data.proposal.proposer, data.proposal.name);
 		}
 	});
 
 	async function handleVoteSuccess() {
-		await data.sentiment.refreshMsigAndVotes(
-			data.proposer,
-			data.proposal,
+		await sentimentState.refreshMsigAndVotes(
+			data.proposal.proposer,
+			data.proposal.name,
 			false,
 			context.account?.name,
 			true,
@@ -46,19 +51,19 @@
 
 <article class="@container">
 	<Stack class="gap-8">
-		{#if data.sentiment.error}
+		{#if sentimentState.error}
 			<div
 				class="bg-error/10 text-error border-error/30 flex items-center justify-between gap-2 rounded border px-4 py-2 text-sm"
 			>
-				<span>{data.sentiment.error}</span>
-				<Button variant="text" onclick={() => (data.sentiment.error = null)} class="text-error">
+				<span>{sentimentState.error}</span>
+				<Button variant="text" onclick={() => (sentimentState.error = null)} class="text-error">
 					Dismiss
 				</Button>
 			</div>
 		{/if}
 
-		{#if data.sentiment.currentMsig}
-			{@const statistics = data.sentiment.currentMsig.statistics}
+		{#if sentimentState.currentMsig}
+			{@const statistics = sentimentState.currentMsig.statistics}
 
 			<Stack class="gap-3">
 				<h2 class="text-on-surface text-headline">Statistics</h2>
@@ -82,17 +87,17 @@
 				<Card>
 					<VoteButtons
 						type="msig"
-						proposer={data.proposer}
-						proposalName={data.proposal}
+						proposer={data.proposal.proposer}
+						proposalName={data.proposal.name}
 						currentVote={userVote}
 						onVoteSuccess={handleVoteSuccess}
 					/>
 				</Card>
 			</Stack>
 
-			{#if data.sentiment.currentVotes.length > 0}
+			{#if sentimentState.currentVotes.length > 0}
 				<MetricParticipants
-					votes={data.sentiment.currentVotes}
+					votes={sentimentState.currentVotes}
 					lens={activeLens}
 					totalVotes={statistics.totalVotes}
 					supportVotes={statistics.supportVotes}

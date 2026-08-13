@@ -5,16 +5,20 @@
 	import { getContext } from 'svelte';
 
 	const { children, data } = $props();
-	const { urlPath } = getContext<UnicoveContext>('state');
+	const context = getContext<UnicoveContext>('state');
 
 	const tabOptions = $derived.by(() => {
-		let urlBase = urlPath(`/msig/${data.proposal.proposer}/${data.proposal.name}`);
-		return [
+		let urlBase = context.urlPath(`/msig/${data.proposal.proposer}/${data.proposal.name}`);
+		const tabs = [
 			{ href: urlBase, text: 'Status' },
 			{ href: `${urlBase}/actions`, text: `Actions (${data.proposal.transaction.actions.length})` },
 			{ href: `${urlBase}/transaction`, text: 'Transaction' },
 			{ href: `${urlBase}/data`, text: 'Data' }
 		];
+		if (context.network.supports('sentiment')) {
+			tabs.push({ href: `${urlBase}/sentiment`, text: 'Sentiment' });
+		}
+		return tabs;
 	});
 </script>
 
