@@ -10,7 +10,6 @@
 	import VoteButtons from '$lib/components/sentiment/voteButtons.svelte';
 	import MetricOverviewCard from '$lib/components/sentiment/MetricOverviewCard.svelte';
 	import MetricLensDetail from '$lib/components/sentiment/MetricLensDetail.svelte';
-	import MetricParticipants from '$lib/components/sentiment/MetricParticipants.svelte';
 	import { MsigSentimentState } from '$lib/state/sentiment/msig.svelte';
 	import type { MetricLens } from '$lib/types/sentiment';
 
@@ -39,7 +38,6 @@
 
 	function selectLens(lens: MetricLens) {
 		activeLens = lens;
-		sentimentState.loadMsigVotes(data.proposal.proposer, data.proposal.name, 1, 50, lens);
 	}
 
 	onMount(() => {
@@ -52,7 +50,6 @@
 
 		if (context.network.supports('sentiment')) {
 			sentimentState.loadMsig(data.proposal.proposer, data.proposal.name);
-			sentimentState.loadMsigVotes(data.proposal.proposer, data.proposal.name, 1, 50, activeLens);
 			if (context.account) {
 				sentimentState.loadUserVote(
 					context.account.name,
@@ -293,19 +290,17 @@
 							currentVote={userVote}
 							onVoteSuccess={handleVoteSuccess}
 						/>
+
+						<Button
+							variant="secondary"
+							href={context.urlPath(
+								`/sentiment/msigs/${data.proposal.proposer}/${data.proposal.name}`
+							)}
+						>
+							View complete breakdown
+						</Button>
 					</Stack>
 				</Card>
-
-				{#if sentimentState.currentVotes.length > 0}
-					<MetricParticipants
-						votes={sentimentState.currentVotes}
-						lens={activeLens}
-						totalVotes={statistics.totalVotes}
-						supportVotes={statistics.supportVotes}
-						oppositionVotes={statistics.oppositionVotes}
-						{systemSymbol}
-					/>
-				{/if}
 			{/if}
 		</Stack>
 	</Switcher>
