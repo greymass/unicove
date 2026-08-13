@@ -6,13 +6,13 @@
 	import MetricOverviewCard from '$lib/components/sentiment/MetricOverviewCard.svelte';
 	import MetricLensDetail from '$lib/components/sentiment/MetricLensDetail.svelte';
 	import MetricParticipants from '$lib/components/sentiment/MetricParticipants.svelte';
-	import { MsigSentimentState } from '$lib/state/sentiment/msig.svelte';
+	import type { MsigSentimentState } from '$lib/state/sentiment/msig.svelte';
 	import type { MetricLens } from '$lib/types/sentiment';
 
 	const context = getContext<UnicoveContext>('state');
 	const { data } = $props();
 
-	const sentimentState = $state(new MsigSentimentState(context.network, data.locale));
+	const sentimentState = getContext<MsigSentimentState>('msig-sentiment');
 
 	let activeLens = $state<MetricLens>('system');
 	const systemSymbol = $derived(context.network.chain.systemToken!.symbol);
@@ -30,11 +30,7 @@
 	}
 
 	onMount(() => {
-		sentimentState.loadMsig(data.proposal.proposer, data.proposal.name);
 		sentimentState.loadMsigVotes(data.proposal.proposer, data.proposal.name, 1, 50, activeLens);
-		if (context.account) {
-			sentimentState.loadUserVote(context.account.name, data.proposal.proposer, data.proposal.name);
-		}
 	});
 
 	async function handleVoteSuccess() {

@@ -7,6 +7,9 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
 	import Account from '$lib/components/elements/account.svelte';
 	import TransactForm from '$lib/components/transact/form.svelte';
+	import VoteButtons from '$lib/components/sentiment/voteButtons.svelte';
+	import type { MsigSentimentState } from '$lib/state/sentiment/msig.svelte';
+
 	import { ApprovalManager } from './manager.svelte';
 	import { goto, invalidateAll } from '$app/navigation';
 
@@ -18,6 +21,16 @@
 	$effect(() => {
 		manager.sync(data.network, context.wharf);
 	});
+
+	const sentimentState = getContext<MsigSentimentState>('msig-sentiment');
+	let userVote = $derived(sentimentState.currentUserVote?.vote_type ?? null);
+
+	async function handleVoteSuccess() {
+		sentimentState.loadMsig(data.proposal.proposer, data.proposal.name);
+		if (context.account) {
+			sentimentState.loadUserVote(context.account.name, data.proposal.proposer, data.proposal.name);
+		}
+	}
 
 	onMount(() => {
 		let interval: ReturnType<typeof setInterval> | undefined;
@@ -216,6 +229,18 @@
 				</TransactForm>
 			</Card>
 
+			{#if context.network.supports('sentiment')}
+				<h2 class="text-title">Community Sentiment</h2>
+				<Card>
+					<VoteButtons
+						type="msig"
+						proposer={data.proposal.proposer}
+						proposalName={data.proposal.name}
+						currentVote={userVote}
+						onVoteSuccess={handleVoteSuccess}
+					/>
+				</Card>
+			{/if}
 		</Stack>
 	</Switcher>
 </Stack>
