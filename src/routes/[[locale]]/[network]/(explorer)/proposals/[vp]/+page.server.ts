@@ -3,6 +3,7 @@ import { getCacheHeaders } from '$lib/utils';
 import { localizeUrl } from '$lib/utils/url';
 import { fetchVpFile, fetchVpIndex, VpFetchError } from '$lib/vp/fetch';
 import { prepareVpDocument } from '$lib/vp/document';
+import { vpBranchForRef } from '$lib/vp/links';
 import { findVpSummary, selectVpFile } from '$lib/vp/resolve';
 import { mergeVpRevisions, parseVpRevisions, sortVpRevisionsNewestFirst } from '$lib/vp/revisions';
 import type { PageServerLoad } from './$types';
@@ -34,10 +35,11 @@ export const load: PageServerLoad = async ({ fetch, locals, params, setHeaders, 
 	setHeaders(getCacheHeaders(300));
 
 	const locale = params.locale ?? 'en';
+	const branch = vpBranchForRef(params.vp);
 
 	let index;
 	try {
-		index = await fetchVpIndex(fetch);
+		index = await fetchVpIndex(fetch, branch);
 	} catch (e) {
 		error(503, indexErrorMessage(e));
 	}
@@ -51,7 +53,7 @@ export const load: PageServerLoad = async ({ fetch, locals, params, setHeaders, 
 
 	let raw: string;
 	try {
-		raw = await fetchVpFile(fetch, picked.path);
+		raw = await fetchVpFile(fetch, picked.path, branch);
 	} catch (e) {
 		const status = e instanceof VpFetchError ? e.status : 503;
 		error(status, documentErrorMessage(e));
@@ -64,7 +66,7 @@ export const load: PageServerLoad = async ({ fetch, locals, params, setHeaders, 
 	let revisions = localizedRevisions;
 	if (picked.lang !== 'en' && picked.stale) {
 		try {
-			const englishRaw = await fetchVpFile(fetch, summary.path);
+			const englishRaw = await fetchVpFile(fetch, summary.path, branch);
 			revisions = mergeVpRevisions(parseVpRevisions(englishRaw), localizedRevisions);
 		} catch {
 			// English fetch failed; degrade to the localized entries already parsed above.
@@ -87,6 +89,7 @@ export const load: PageServerLoad = async ({ fetch, locals, params, setHeaders, 
 		lang: picked.lang,
 		stale: picked.stale,
 		revisions,
+		branch,
 		pageMetaTags: {
 			title: `${summary.vp}: ${heading}`,
 			description: `Read "${heading}", a Vaulta network proposal published for public review.`,

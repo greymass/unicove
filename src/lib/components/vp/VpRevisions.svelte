@@ -3,15 +3,16 @@
 	import { page } from '$app/state';
 	import { formatDateTime } from '$lib/utils/intl';
 	import { parseVpDate } from '$lib/vp/dates';
-	import { vpHistoryUrl } from '$lib/vp/links';
+	import { VP_BRANCH, vpHistoryUrl } from '$lib/vp/links';
 	import type { VpRevision } from '$lib/vp/revisions';
 
 	interface Props {
 		revisions: VpRevision[];
 		slug: string;
+		branch?: string;
 	}
 
-	const { revisions, slug }: Props = $props();
+	const { revisions, slug, branch = VP_BRANCH }: Props = $props();
 	const locale = $derived(page.params.locale ?? 'en');
 	const formatDate = (value: string) =>
 		formatDateTime(parseVpDate(value), locale, { dateStyle: 'medium', timeStyle: undefined });
@@ -32,7 +33,7 @@
 		</Stack>
 		<a
 			class="text-primary mt-3 inline-block text-sm hover:underline"
-			href={vpHistoryUrl(slug)}
+			href={vpHistoryUrl(slug, branch)}
 			rel="noopener noreferrer"
 			target="_blank"
 		>

@@ -3,7 +3,7 @@
 	import { page } from '$app/state';
 	import { formatDateTime } from '$lib/utils/intl';
 	import { parseVpDate } from '$lib/vp/dates';
-	import { vpStandardUrl } from '$lib/vp/links';
+	import { VP_BRANCH, vpStandardUrl } from '$lib/vp/links';
 	import VpStatusChip from './VpStatusChip.svelte';
 	import type { VpSummary } from '$lib/vp/types';
 	import type { VpRevision } from '$lib/vp/revisions';
@@ -11,9 +11,10 @@
 	interface Props {
 		summary: VpSummary;
 		revisions: VpRevision[];
+		branch?: string;
 	}
 
-	const { summary, revisions }: Props = $props();
+	const { summary, revisions, branch = VP_BRANCH }: Props = $props();
 	const locale = $derived(page.params.locale ?? 'en');
 	const formatDate = (value: string) =>
 		formatDateTime(parseVpDate(value), locale, { dateStyle: 'medium', timeStyle: undefined });
@@ -38,7 +39,7 @@
 			<DD>
 				<a
 					class="text-primary hover:underline"
-					href={vpStandardUrl(summary.standard)}
+					href={vpStandardUrl(summary.standard, branch)}
 					rel="noopener noreferrer"
 					target="_blank"
 				>

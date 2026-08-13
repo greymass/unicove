@@ -34,17 +34,17 @@
 			{#if data.stale}
 				<VpStaleNotice {englishHref} />
 			{/if}
-			<VpMarkdown body={data.body} slug={data.summary.slug} {basePath} />
+			<VpMarkdown body={data.body} slug={data.summary.slug} {basePath} branch={data.branch} />
 		</Stack>
 
 		<Stack tag="aside" class="gap-4 self-start">
-			<VpDetailsCard summary={data.summary} revisions={data.revisions} />
+			<VpDetailsCard summary={data.summary} revisions={data.revisions} branch={data.branch} />
 			<VpOnchain summary={data.summary} />
 			<VpRelatedAccounts accounts={data.summary.accounts} />
-			<VpRevisions revisions={data.revisions} slug={data.summary.slug} />
+			<VpRevisions revisions={data.revisions} slug={data.summary.slug} branch={data.branch} />
 			<a
 				class="text-muted hover:text-on-surface text-sm hover:underline"
-				href={vpSourceUrl(data.summary.slug)}
+				href={vpSourceUrl(data.summary.slug, data.branch)}
 				rel="noopener noreferrer"
 				target="_blank"
 			>

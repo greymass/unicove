@@ -1,22 +1,36 @@
 import * as publicEnv from '$env/static/public';
+import { normalizeVpRef } from './resolve';
 
 const optionalEnv = publicEnv as Partial<Record<string, string>>;
 const requested = optionalEnv.PUBLIC_VP_BRANCH ?? 'master';
 export const VP_BRANCH = /^[A-Za-z0-9._-]+$/.test(requested) ? requested : 'master';
-export const RAW_BASE = `https://raw.githubusercontent.com/greymass/vaulta-proposals/${VP_BRANCH}/`;
+
+// VP-9999 always renders from the demo branch; it stays unlisted because the index route never fetches it.
+export const VP_DEMO_BRANCH = 'demo';
+export const VP_DEMO_REF = 'vp-9999';
+
+/** The branch to fetch a proposal's content from: the demo branch for VP-9999, VP_BRANCH otherwise. */
+export function vpBranchForRef(ref: string): string {
+	return normalizeVpRef(ref) === VP_DEMO_REF ? VP_DEMO_BRANCH : VP_BRANCH;
+}
+
+export function vpRawBase(branch: string = VP_BRANCH): string {
+	return `https://raw.githubusercontent.com/greymass/vaulta-proposals/${branch}/`;
+}
+export const RAW_BASE = vpRawBase();
 
 const REPO_BASE = 'https://github.com/greymass/vaulta-proposals';
 
-export function vpSourceUrl(slug: string): string {
-	return `${REPO_BASE}/tree/${VP_BRANCH}/proposals/${slug}`;
+export function vpSourceUrl(slug: string, branch: string = VP_BRANCH): string {
+	return `${REPO_BASE}/tree/${branch}/proposals/${slug}`;
 }
 
-export function vpStandardUrl(standard: string): string {
-	return `${REPO_BASE}/blob/${VP_BRANCH}/standard/${standard}.md`;
+export function vpStandardUrl(standard: string, branch: string = VP_BRANCH): string {
+	return `${REPO_BASE}/blob/${branch}/standard/${standard}.md`;
 }
 
-export function vpHistoryUrl(slug: string): string {
-	return `${REPO_BASE}/commits/${VP_BRANCH}/proposals/${slug}/proposal.md`;
+export function vpHistoryUrl(slug: string, branch: string = VP_BRANCH): string {
+	return `${REPO_BASE}/commits/${branch}/proposals/${slug}/proposal.md`;
 }
 
 export type VpHref = { kind: 'internal' | 'external' | 'plain'; href: string };
@@ -29,8 +43,12 @@ const PINNED_GITHUB =
 
 const IMAGE_EXTENSION = /\.(?:png|jpg|webp|svg)$/i;
 
-export function rewriteVpHref(href: string, ctx: { slug: string; basePath: string }): VpHref {
+export function rewriteVpHref(
+	href: string,
+	ctx: { slug: string; basePath: string; branch?: string }
+): VpHref {
 	const target = href.trim();
+	const rawBase = vpRawBase(ctx.branch ?? VP_BRANCH);
 
 	if (target.startsWith('#')) {
 		return SAFE_ANCHOR.test(target)
@@ -47,7 +65,7 @@ export function rewriteVpHref(href: string, ctx: { slug: string; basePath: strin
 
 	const asset = ASSET.exec(target);
 	if (asset) {
-		return { kind: 'external', href: `${RAW_BASE}proposals/${ctx.slug}/assets/${asset[1]}` };
+		return { kind: 'external', href: `${rawBase}proposals/${ctx.slug}/assets/${asset[1]}` };
 	}
 
 	if (PINNED_GITHUB.test(target)) {
@@ -60,9 +78,10 @@ export function rewriteVpHref(href: string, ctx: { slug: string; basePath: strin
 /** Resolves an image source to a proposal asset URL, or null when the source is anything else. */
 export function resolveVpImageSrc(
 	src: string,
-	ctx: { slug: string; basePath: string }
+	ctx: { slug: string; basePath: string; branch?: string }
 ): string | null {
-	const assetPrefix = `${RAW_BASE}proposals/${ctx.slug}/assets/`;
+	const rawBase = vpRawBase(ctx.branch ?? VP_BRANCH);
+	const assetPrefix = `${rawBase}proposals/${ctx.slug}/assets/`;
 	const resolved = rewriteVpHref(src, ctx);
 	if (resolved.kind !== 'external' || !resolved.href.startsWith(assetPrefix)) {
 		return null;

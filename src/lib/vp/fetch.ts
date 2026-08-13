@@ -1,4 +1,4 @@
-import { RAW_BASE } from './links';
+import { VP_BRANCH, vpRawBase } from './links';
 import { parseVpIndex, type VpIndex } from './types';
 
 export type VpFetchErrorCode =
@@ -19,8 +19,11 @@ export class VpFetchError extends Error {
 	}
 }
 
-export async function fetchVpIndex(fetcher: typeof fetch): Promise<VpIndex> {
-	const url = `${RAW_BASE}index.json`;
+export async function fetchVpIndex(
+	fetcher: typeof fetch,
+	branch: string = VP_BRANCH
+): Promise<VpIndex> {
+	const url = `${vpRawBase(branch)}index.json`;
 	let response: Response;
 	try {
 		response = await fetcher(url);
@@ -42,10 +45,14 @@ export async function fetchVpIndex(fetcher: typeof fetch): Promise<VpIndex> {
 	return index;
 }
 
-export async function fetchVpFile(fetcher: typeof fetch, path: string): Promise<string> {
+export async function fetchVpFile(
+	fetcher: typeof fetch,
+	path: string,
+	branch: string = VP_BRANCH
+): Promise<string> {
 	let response: Response;
 	try {
-		response = await fetcher(`${RAW_BASE}${path}`);
+		response = await fetcher(`${vpRawBase(branch)}${path}`);
 	} catch {
 		throw new VpFetchError('unreachable');
 	}

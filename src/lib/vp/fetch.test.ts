@@ -9,6 +9,15 @@ function respondWith(body: unknown, status = 200): typeof fetch {
 		})) as unknown as typeof fetch;
 }
 
+function capturingUrl(body: unknown): { fetcher: typeof fetch; urls: string[] } {
+	const urls: string[] = [];
+	const fetcher = (async (input: RequestInfo | URL) => {
+		urls.push(String(input));
+		return new Response(typeof body === 'string' ? body : JSON.stringify(body), { status: 200 });
+	}) as unknown as typeof fetch;
+	return { fetcher, urls };
+}
+
 function refuse(): typeof fetch {
 	return (async () => {
 		throw new Error('network down');
@@ -50,6 +59,14 @@ describe('fetchVpIndex', () => {
 			expect((e as VpFetchError).message).toBe('unreachable');
 		}
 	});
+
+	test('fetches from an explicit branch', async () => {
+		const { fetcher, urls } = capturingUrl(fixture);
+		await fetchVpIndex(fetcher, 'demo');
+		expect(urls[0]).toBe(
+			'https://raw.githubusercontent.com/greymass/vaulta-proposals/demo/index.json'
+		);
+	});
 });
 
 describe('fetchVpFile', () => {
@@ -79,6 +96,14 @@ describe('fetchVpFile', () => {
 	test('reports an upstream failure', async () => {
 		expect(await codeOf(() => fetchVpFile(respondWith('', 500), 'proposals/x/proposal.md'))).toBe(
 			'document-unavailable'
+		);
+	});
+
+	test('fetches from an explicit branch', async () => {
+		const { fetcher, urls } = capturingUrl('# Proposal');
+		await fetchVpFile(fetcher, 'proposals/vp-9999-demo/proposal.md', 'demo');
+		expect(urls[0]).toBe(
+			'https://raw.githubusercontent.com/greymass/vaulta-proposals/demo/proposals/vp-9999-demo/proposal.md'
 		);
 	});
 });

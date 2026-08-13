@@ -2,6 +2,9 @@ import { describe, expect, test } from 'bun:test';
 import {
 	RAW_BASE,
 	VP_BRANCH,
+	VP_DEMO_BRANCH,
+	vpBranchForRef,
+	vpRawBase,
 	vpSourceUrl,
 	vpStandardUrl,
 	vpHistoryUrl,
@@ -16,6 +19,42 @@ test('RAW_BASE points at the vaulta-proposals repo on a single branch segment', 
 	expect(RAW_BASE).toMatch(
 		/^https:\/\/raw\.githubusercontent\.com\/greymass\/vaulta-proposals\/[A-Za-z0-9._-]+\/$/
 	);
+});
+
+describe('vpBranchForRef', () => {
+	test('routes the demo ref number form to the demo branch', () => {
+		expect(vpBranchForRef('vp-9999')).toBe(VP_DEMO_BRANCH);
+	});
+
+	test('routes the demo ref full-slug form to the demo branch', () => {
+		expect(vpBranchForRef('vp-9999-demo')).toBe(VP_DEMO_BRANCH);
+	});
+
+	test('is case insensitive on the demo ref', () => {
+		expect(vpBranchForRef('VP-9999')).toBe(VP_DEMO_BRANCH);
+	});
+
+	test('routes an ordinary proposal to the configured branch', () => {
+		expect(vpBranchForRef('vp-0001')).toBe(VP_BRANCH);
+		expect(vpBranchForRef('vp-0001-ram-gifting')).toBe(VP_BRANCH);
+	});
+
+	test('routes a malformed ref to the configured branch', () => {
+		expect(vpBranchForRef('not-a-ref')).toBe(VP_BRANCH);
+		expect(vpBranchForRef('vp-1')).toBe(VP_BRANCH);
+	});
+});
+
+describe('vpRawBase', () => {
+	test('defaults to VP_BRANCH', () => {
+		expect(vpRawBase()).toBe(RAW_BASE);
+	});
+
+	test('builds a raw base for an explicit branch', () => {
+		expect(vpRawBase('demo')).toBe(
+			'https://raw.githubusercontent.com/greymass/vaulta-proposals/demo/'
+		);
+	});
 });
 
 describe('rewriteVpHref', () => {
@@ -58,6 +97,14 @@ describe('rewriteVpHref', () => {
 		const out = rewriteVpHref('assets/diagram.svg', ctx);
 		expect(out.kind).toBe('external');
 		expect(out.href).toBe(`${RAW_BASE}proposals/vp-0001-ram-gifting/assets/diagram.svg`);
+	});
+
+	test('rewrites an asset link against an explicit branch in ctx', () => {
+		const out = rewriteVpHref('assets/diagram.svg', { ...ctx, branch: 'demo' });
+		expect(out).toEqual({
+			kind: 'external',
+			href: 'https://raw.githubusercontent.com/greymass/vaulta-proposals/demo/proposals/vp-0001-ram-gifting/assets/diagram.svg'
+		});
 	});
 
 	test('keeps a commit-pinned github link external', () => {
@@ -185,12 +232,24 @@ describe('resolveVpImageSrc', () => {
 	test('refuses an asset link that escapes its directory', () => {
 		expect(resolveVpImageSrc('assets/../../logo.png', ctx)).toBeNull();
 	});
+
+	test('resolves an asset against an explicit demo branch to a demo raw url', () => {
+		expect(resolveVpImageSrc('assets/pipeline.svg', { ...ctx, branch: 'demo' })).toBe(
+			'https://raw.githubusercontent.com/greymass/vaulta-proposals/demo/proposals/vp-0001-ram-gifting/assets/pipeline.svg'
+		);
+	});
 });
 
 describe('vpSourceUrl', () => {
 	test('links to the proposal folder on the configured branch', () => {
 		expect(vpSourceUrl('vp-0001-ram-gifting')).toBe(
 			`https://github.com/greymass/vaulta-proposals/tree/${VP_BRANCH}/proposals/vp-0001-ram-gifting`
+		);
+	});
+
+	test('links to the proposal folder on an explicit branch', () => {
+		expect(vpSourceUrl('vp-9999-demo', 'demo')).toBe(
+			'https://github.com/greymass/vaulta-proposals/tree/demo/proposals/vp-9999-demo'
 		);
 	});
 });
@@ -201,12 +260,24 @@ describe('vpStandardUrl', () => {
 			`https://github.com/greymass/vaulta-proposals/blob/${VP_BRANCH}/standard/VPS-1.md`
 		);
 	});
+
+	test('links to the standard document on an explicit branch', () => {
+		expect(vpStandardUrl('VPS-1', 'demo')).toBe(
+			'https://github.com/greymass/vaulta-proposals/blob/demo/standard/VPS-1.md'
+		);
+	});
 });
 
 describe('vpHistoryUrl', () => {
 	test('links to the proposal file commit history on the configured branch', () => {
 		expect(vpHistoryUrl('vp-0001-ram-gifting')).toBe(
 			`https://github.com/greymass/vaulta-proposals/commits/${VP_BRANCH}/proposals/vp-0001-ram-gifting/proposal.md`
+		);
+	});
+
+	test('links to the proposal file commit history on an explicit branch', () => {
+		expect(vpHistoryUrl('vp-9999-demo', 'demo')).toBe(
+			'https://github.com/greymass/vaulta-proposals/commits/demo/proposals/vp-9999-demo/proposal.md'
 		);
 	});
 });

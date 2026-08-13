@@ -8,7 +8,7 @@
 	}
 
 	const { src = '', alt = '' }: Props = $props();
-	const ctx = getContext<{ slug: string; basePath: string }>('vp-links');
+	const ctx = getContext<{ slug: string; basePath: string; branch: string }>('vp-links');
 	const resolved = $derived(resolveVpImageSrc(src, ctx));
 </script>
 

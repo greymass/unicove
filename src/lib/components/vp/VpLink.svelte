@@ -8,7 +8,7 @@
 	}
 
 	const { href = '', children }: Props = $props();
-	const ctx = getContext<{ slug: string; basePath: string }>('vp-links');
+	const ctx = getContext<{ slug: string; basePath: string; branch: string }>('vp-links');
 	const link = $derived(rewriteVpHref(href, ctx));
 </script>
 

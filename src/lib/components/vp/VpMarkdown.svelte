@@ -5,6 +5,7 @@
 	import type { Plugin } from 'svelte-exmarkdown';
 	import { TD, TH, TR } from 'unicove-components';
 	import { rehypeVpHeadingIds } from '$lib/vp/headings';
+	import { VP_BRANCH } from '$lib/vp/links';
 	import VpLink from './VpLink.svelte';
 	import VpImage from './VpImage.svelte';
 	import VpHeading2 from './VpHeading2.svelte';
@@ -20,9 +21,10 @@
 		body: string;
 		slug: string;
 		basePath: string;
+		branch?: string;
 	}
 
-	const { body, slug, basePath }: Props = $props();
+	const { body, slug, basePath, branch = VP_BRANCH }: Props = $props();
 
 	// Getters keep the context tracking the props across client-side navigation between proposals.
 	setContext('vp-links', {
@@ -31,6 +33,9 @@
 		},
 		get basePath() {
 			return basePath;
+		},
+		get branch() {
+			return branch;
 		}
 	});
 
