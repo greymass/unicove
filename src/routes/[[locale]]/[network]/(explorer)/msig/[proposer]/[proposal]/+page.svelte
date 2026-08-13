@@ -29,9 +29,6 @@
 	const sentimentState = $state(new MsigSentimentState(context.network, data.locale));
 	let userVote = $derived(sentimentState.currentUserVote?.vote_type ?? null);
 
-	// Disabling this temporarily
-	const enabled = false;
-
 	const lensLabels: Record<MetricLens, string> = { system: 'System Token', ram: 'RAM', v: 'V' };
 	let activeLens = $state<MetricLens>('system');
 	const systemSymbol = $derived(context.network.chain.systemToken!.symbol);
@@ -262,7 +259,7 @@
 				</TransactForm>
 			</Card>
 
-			{#if enabled && context.network.supports('sentiment') && sentimentState.currentMsig}
+			{#if context.network.supports('sentiment') && sentimentState.currentMsig}
 				{@const statistics = sentimentState.currentMsig.statistics}
 				<h2 class="text-title">Community Sentiment</h2>
 				<Card class="@container">
