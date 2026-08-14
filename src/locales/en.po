@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2026-08-13T21:59:03.470Z\n"
+"PO-Revision-Date: 2026-08-14T00:46:08.921Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -766,8 +766,8 @@ msgstr "Details"
 msgid "Network Fees"
 msgstr "Network Fees"
 
-#. placeholder {0}: data.network.chain.systemToken?.symbol.code || ''
 #. placeholder {0}: market.network.currency.symbol.code
+#. placeholder {0}: data.network.chain.systemToken?.symbol.code || ''
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 msgid "Market Cap ({0})"
@@ -2916,7 +2916,6 @@ msgid "Change network"
 msgstr "Change network"
 
 #: src/lib/components/accountswitch.svelte
-#: src/lib/components/vp/VpActions.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Connect Wallet"
@@ -8024,15 +8023,13 @@ msgstr "Community sentiment on this multisig proposal"
 msgid "Loading sentiment..."
 msgstr "Loading sentiment..."
 
-#: src/lib/components/vp/VpActions.svelte
-msgid ""
-"Sentiment voting and multisig approval become available when this proposal has on-chain\n"
-"records."
-msgstr ""
-"Sentiment voting and multisig approval become available when this proposal has on-chain\n"
-"records."
+#~ msgid ""
+#~ "Sentiment voting and multisig approval become available when this proposal has on-chain\n"
+#~ "records."
+#~ msgstr ""
+#~ "Sentiment voting and multisig approval become available when this proposal has on-chain\n"
+#~ "records."
 
-#: src/lib/components/vp/VpActions.svelte
 #: src/lib/components/vp/VpActions.svelte
 msgid "Your participation"
 msgstr "Your participation"
@@ -8115,3 +8112,7 @@ msgstr "{0} Support"
 #: src/lib/components/sentiment/SentimentMeter.svelte
 msgid "{0} Oppose"
 msgstr "{0} Oppose"
+
+#: src/lib/components/vp/VpActionSentimentRow.svelte
+msgid "Approve on the multisig page"
+msgstr "Approve on the multisig page"

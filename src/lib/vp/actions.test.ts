@@ -38,7 +38,7 @@ describe('vpActionModels', () => {
 		]);
 	});
 
-	test('an active msig becomes a sentiment row followed by a link row', () => {
+	test('an active msig becomes one sentiment row carrying its msig path', () => {
 		const models = vpActionModels({
 			...base,
 			msigs: [{ proposer: 'demoaccount1', proposal: 'vpdemo', status: 'active' }]
@@ -47,20 +47,13 @@ describe('vpActionModels', () => {
 			{
 				kind: 'sentiment-msig',
 				proposer: 'demoaccount1',
-				proposal: 'vpdemo'
-			},
-			{
-				kind: 'msig-link',
-				proposer: 'demoaccount1',
 				proposal: 'vpdemo',
-				status: 'active',
-				msigPath: '/msig/demoaccount1/vpdemo',
-				live: true
+				msigPath: '/msig/demoaccount1/vpdemo'
 			}
 		]);
 	});
 
-	test('a finished msig produces the link row only', () => {
+	test('a finished msig produces no action at all', () => {
 		const models = vpActionModels({
 			...base,
 			msigs: [
@@ -69,18 +62,30 @@ describe('vpActionModels', () => {
 				{ proposer: 'demoaccount1', proposal: 'vpgone', status: 'cancelled' }
 			]
 		});
-		expect(models.map((m) => m.kind)).toEqual(['msig-link', 'msig-link', 'msig-link']);
-		expect(models[0]).toEqual({
-			kind: 'msig-link',
-			proposer: 'demoaccount1',
-			proposal: 'vpdone',
-			status: 'executed',
-			msigPath: '/msig/demoaccount1/vpdone',
-			live: false
-		});
+		expect(models).toEqual([]);
 	});
 
-	test('topics come before msigs and msig rows stay paired in order', () => {
+	test('finished msigs drop out from among active ones', () => {
+		const models = vpActionModels({
+			...base,
+			msigs: [
+				{ proposer: 'demoaccount1', proposal: 'vpone', status: 'active' },
+				{ proposer: 'demoaccount1', proposal: 'vpdone', status: 'executed' },
+				{ proposer: 'demoaccount1', proposal: 'vptwo', status: 'active' }
+			]
+		});
+		expect(models.map((m) => ('proposal' in m ? m.proposal : m.topic))).toEqual(['vpone', 'vptwo']);
+	});
+
+	test('a proposal whose only records are finished has no actions', () => {
+		const models = vpActionModels({
+			...base,
+			msigs: [{ proposer: 'demoaccount1', proposal: 'vpdone', status: 'executed' }]
+		});
+		expect(models).toEqual([]);
+	});
+
+	test('topics come before msigs and each active msig contributes one row', () => {
 		const models = vpActionModels({
 			...base,
 			sentiment: [{ contract: 'sentiment.gm', topic: 'vpdemotopic' }],
@@ -92,15 +97,11 @@ describe('vpActionModels', () => {
 		expect(models.map((m) => m.kind)).toEqual([
 			'sentiment-topic',
 			'sentiment-msig',
-			'msig-link',
-			'sentiment-msig',
-			'msig-link'
+			'sentiment-msig'
 		]);
 		expect(models.map((m) => ('proposal' in m ? m.proposal : m.topic))).toEqual([
 			'vpdemotopic',
 			'vpone',
-			'vpone',
-			'vptwo',
 			'vptwo'
 		]);
 	});

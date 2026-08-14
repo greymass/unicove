@@ -1,12 +1,11 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
-	import { Button, Card } from 'unicove-components';
+	import { Card } from 'unicove-components';
 	import { Asset, Name } from '@wharfkit/antelope';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import { vpActionKey, vpActionModels, type VpActionModel } from '$lib/vp/actions';
 	import type { VpSummary } from '$lib/vp/types';
-	import VpActionMsigRow from './VpActionMsigRow.svelte';
 	import VpActionSentimentRow from './VpActionSentimentRow.svelte';
 
 	interface Props {
@@ -17,9 +16,7 @@
 	const context = getContext<UnicoveContext>('state');
 
 	const sentimentEnabled = $derived(context.network.supports('sentiment'));
-	const models = $derived(
-		vpActionModels(summary).filter((model) => sentimentEnabled || model.kind === 'msig-link')
-	);
+	const models = $derived(sentimentEnabled ? vpActionModels(summary) : []);
 
 	let votes = $state<Record<string, number | null>>({});
 	let votingWeight = $state<Asset | null>(null);
@@ -78,13 +75,8 @@
 	}
 </script>
 
-<Card>
-	{#if models.length === 0}
-		<p class="text-muted text-sm">
-			Sentiment voting and multisig approval become available when this proposal has on-chain
-			records.
-		</p>
-	{:else if context.wharf.session && context.account}
+{#if context.wharf.session && context.account && models.length > 0}
+	<Card>
 		<div class="flex flex-wrap items-center justify-between gap-2">
 			<h2 class="text-label-sm text-muted">Your participation</h2>
 			<p class="text-sm">
@@ -95,32 +87,14 @@
 				{/if}
 			</p>
 		</div>
-		<div class="grid gap-4 md:grid-cols-2">
+		<div class="grid gap-6">
 			{#each models as model (vpActionKey(model))}
-				{#if model.kind === 'msig-link'}
-					<VpActionMsigRow {model} />
-				{:else}
-					<VpActionSentimentRow
-						{model}
-						currentVote={votes[vpActionKey(model)] ?? null}
-						onVoted={(voteType) => (votes[vpActionKey(model)] = voteType)}
-					/>
-				{/if}
+				<VpActionSentimentRow
+					{model}
+					currentVote={votes[vpActionKey(model)] ?? null}
+					onVoted={(voteType) => (votes[vpActionKey(model)] = voteType)}
+				/>
 			{/each}
 		</div>
-	{:else}
-		<div class="flex flex-wrap items-center justify-between gap-2">
-			<h2 class="text-label-sm text-muted">Your participation</h2>
-			<Button onclick={() => context.wharf?.login()}>Connect Wallet</Button>
-		</div>
-		<div class="grid gap-4 md:grid-cols-2">
-			{#each models as model (vpActionKey(model))}
-				{#if model.kind === 'msig-link'}
-					<VpActionMsigRow {model} />
-				{:else}
-					<VpActionSentimentRow {model} currentVote={null} onVoted={() => {}} />
-				{/if}
-			{/each}
-		</div>
-	{/if}
-</Card>
+	</Card>
+{/if}
