@@ -6,7 +6,7 @@
 
 	interface Props {
 		model: VpSentimentTopicAction | VpSentimentMsigAction;
-		currentVote: number | null;
+		currentVote: number | null | undefined;
 		onVoted: (voteType: number | null) => void;
 	}
 
@@ -30,7 +30,12 @@
 		{/if}
 	</div>
 	<div class="max-w-sm min-w-72 flex-1">
-		{#if model.kind === 'sentiment-topic'}
+		{#if currentVote === undefined}
+			<!-- box model mirrors voteButtons' wrapper so the swap causes no layout shift -->
+			<div class="rounded-xl border border-transparent px-4 py-2">
+				<div class="bg-surface-container h-12 w-full animate-pulse rounded-full"></div>
+			</div>
+		{:else if model.kind === 'sentiment-topic'}
 			<VoteButtons
 				type="topic"
 				topicId={model.topic}

@@ -91,7 +91,7 @@
 			{#each models as model (vpActionKey(model))}
 				<VpActionSentimentRow
 					{model}
-					currentVote={votes[vpActionKey(model)] ?? null}
+					currentVote={votes[vpActionKey(model)]}
 					onVoted={(voteType) => (votes[vpActionKey(model)] = voteType)}
 				/>
 			{/each}
