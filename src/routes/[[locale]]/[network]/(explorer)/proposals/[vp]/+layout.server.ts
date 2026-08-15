@@ -6,7 +6,7 @@ import { prepareVpDocument } from '$lib/vp/document';
 import { vpBranchForRef } from '$lib/vp/links';
 import { findVpSummary, selectVpFile } from '$lib/vp/resolve';
 import { mergeVpRevisions, parseVpRevisions, sortVpRevisionsNewestFirst } from '$lib/vp/revisions';
-import type { PageServerLoad } from './$types';
+import type { LayoutServerLoad } from './$types';
 
 function indexErrorMessage(e: unknown): string {
 	const code = e instanceof VpFetchError ? e.code : null;
@@ -27,7 +27,7 @@ function documentErrorMessage(e: unknown): string {
 	return 'That proposal could not be read.';
 }
 
-export const load: PageServerLoad = async ({ fetch, locals, params, setHeaders, url }) => {
+export const load: LayoutServerLoad = async ({ fetch, locals, params, setHeaders, url }) => {
 	if (!locals.network.supports('proposals')) {
 		error(404, 'Not found');
 	}

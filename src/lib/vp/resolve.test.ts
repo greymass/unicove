@@ -74,7 +74,7 @@ describe('selectVpFile', () => {
 	test('marks a stale translation', () => {
 		const stale = {
 			...summary,
-			translations: [{ lang: 'ko', path: 'proposals/x/proposal.ko.md', current: false }]
+			translations: [{ lang: 'ko', path: 'proposals/x/proposal.ko.md', current: false, msigs: [] }]
 		};
 		expect(selectVpFile(stale, 'ko').stale).toBe(true);
 	});
@@ -82,7 +82,7 @@ describe('selectVpFile', () => {
 	test('ignores en translation entries and serves base document', () => {
 		const withEnTranslation = {
 			...summary,
-			translations: [{ lang: 'en', path: 'proposals/x/proposal.en.md', current: true }]
+			translations: [{ lang: 'en', path: 'proposals/x/proposal.en.md', current: true, msigs: [] }]
 		};
 		const picked = selectVpFile(withEnTranslation, 'en');
 		expect(picked.lang).toBe('en');

@@ -1,60 +1,74 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 	import { Card } from 'unicove-components';
-	import { Asset } from '@wharfkit/antelope';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import SentimentMeter from '$lib/components/sentiment/SentimentMeter.svelte';
-	import AssetText from '$lib/components/elements/asset.svelte';
-	import type { ApiResponse, TopicDetailData, TopicStatistics } from '$lib/types/sentiment';
-	import { sentimentTopicPath } from '$lib/vp/onchain';
+	import { percentString } from '$lib/utils';
+	import type { TopicStatistics, ApiResponse, TopicDetailData } from '$lib/types/sentiment';
+	import type { VpSummary } from '$lib/vp/types';
 
 	interface Props {
-		contract: string;
-		topic: string;
+		summary: VpSummary;
+		basePath: string;
 	}
 
-	const { contract, topic }: Props = $props();
+	const { summary, basePath }: Props = $props();
 	const context = getContext<UnicoveContext>('state');
 
-	const enabled = $derived(context.network.supports('sentiment'));
-	const topicHref = $derived(context.urlPath(sentimentTopicPath({ contract, topic })));
-	const systemSymbol = $derived(context.network.chain.systemToken?.symbol || '4,EOS');
-
+	const locale = $derived(context.settings.data.locale);
+	const topic = $derived(summary.sentiment[0] ?? null);
 	let statistics = $state<TopicStatistics | null>(null);
 
 	$effect(() => {
-		if (!enabled) {
-			return;
-		}
+		if (!topic) return;
 		const controller = new AbortController();
-		fetch(context.urlPath(`/api/sentiment/topics/${topic}`), { signal: controller.signal })
+		fetch(context.urlPath(`/api/sentiment/topics/${topic.topic}`), { signal: controller.signal })
 			.then((response) => response.json())
 			.then((result: ApiResponse<TopicDetailData>) => {
-				if (result.success && result.data) {
-					statistics = result.data.statistics;
-				}
+				if (result.success && result.data) statistics = result.data.statistics;
 			})
 			.catch(() => {});
 		return () => controller.abort();
 	});
 </script>
 
-<Card>
-	<h3 class="text-label-sm text-muted">Sentiment topic</h3>
-	<div class="flex flex-wrap items-center justify-between gap-2">
-		<a class="text-primary font-medium hover:underline" href={topicHref}>{topic}</a>
-		<span class="text-muted text-sm">{contract}</span>
-	</div>
-	{#if statistics}
-		<SentimentMeter id="vp-sentiment-{topic}" {statistics} />
-		<div class="text-muted text-sm">
-			{statistics.totalVotes} votes · <AssetText
-				variant="short"
-				value={Asset.fromUnits(statistics.totalWeight, systemSymbol)}
-			/> participating
+<Card class="hover:bg-surface-container-high p-0 transition-colors">
+	<a href="{basePath}/sentiment" class="block p-4">
+		<div class="flex items-baseline justify-between gap-2">
+			<h2 class="text-title">Sentiment</h2>
+			{#if statistics}
+				<span class="text-muted text-label-sm">
+					{#if statistics.totalVotes === 1}
+						1 vote
+					{:else}
+						{statistics.totalVotes} votes
+					{/if}
+				</span>
+			{/if}
 		</div>
-	{:else}
-		<div class="text-muted text-sm">Sentiment for this topic is recorded on-chain.</div>
-	{/if}
-	<a class="text-primary text-sm hover:underline" href={topicHref}>View the topic</a>
+
+		{#if statistics}
+			<div class="mt-3 flex items-end justify-between gap-3">
+				<div>
+					<span class="text-headline text-success">
+						{percentString(locale, statistics.supportPercentage / 100, 0)}
+					</span>
+					<p class="text-muted text-sm">support</p>
+				</div>
+				<div class="text-right">
+					<span class="text-title text-error">
+						{percentString(locale, statistics.oppositionPercentage / 100, 0)}
+					</span>
+					<p class="text-muted text-sm">oppose</p>
+				</div>
+			</div>
+			<div class="mt-3">
+				<SentimentMeter id="vp-card-{topic?.topic}" compact {statistics} />
+			</div>
+		{:else}
+			<p class="text-muted mt-3 text-sm">Sentiment is recorded on-chain.</p>
+		{/if}
+
+		<p class="text-primary border-outline mt-4 border-t pt-3 text-sm font-medium">View sentiment</p>
+	</a>
 </Card>

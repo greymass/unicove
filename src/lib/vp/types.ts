@@ -11,14 +11,21 @@ export const VP_STATUSES = [
 ] as const;
 export type VpStatus = (typeof VP_STATUSES)[number];
 
-export const VP_MSIG_STATUSES = ['active', 'expired', 'executed', 'cancelled'] as const;
+export const VP_MSIG_STATUSES = ['planned', 'active', 'expired', 'executed', 'cancelled'] as const;
 export type VpMsigStatus = (typeof VP_MSIG_STATUSES)[number];
 
-const msigRefSchema = v.object({
+const msigSupersedesSchema = v.object({
 	proposer: v.string(),
-	proposal: v.string(),
+	proposal: v.string()
+});
+
+const msigRefSchema = v.object({
+	proposer: v.optional(v.string()),
+	proposal: v.optional(v.string()),
 	status: v.picklist(VP_MSIG_STATUSES),
-	txid: v.optional(v.string())
+	txid: v.optional(v.string()),
+	title: v.optional(v.string()),
+	supersedes: v.optional(msigSupersedesSchema)
 });
 
 const sentimentRefSchema = v.object({
@@ -26,12 +33,18 @@ const sentimentRefSchema = v.object({
 	topic: v.string()
 });
 
+const msigTitleSchema = v.object({
+	step: v.number(),
+	title: v.string()
+});
+
 const translationSchema = v.object({
 	lang: v.string(),
 	path: v.string(),
 	current: v.boolean(),
 	title: v.optional(v.string()),
-	excerpt: v.optional(v.string())
+	excerpt: v.optional(v.string()),
+	msigs: v.optional(v.array(msigTitleSchema), [])
 });
 
 const summarySchema = v.object({

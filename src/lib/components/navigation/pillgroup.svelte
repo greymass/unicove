@@ -23,6 +23,10 @@
 		options.map((o) => o.href).findLast((h) => page.url.pathname.startsWith(h))
 	);
 
+	let currentLabel = $derived(
+		options.find((o) => o.href === currentOption)?.text ?? options[0].text
+	);
+
 	const isCurrent = (href: string) => currentOption === href;
 
 	const handleSelect: CreateSelectProps<string>['onSelectedChange'] = ({ next }) => {
@@ -35,7 +39,7 @@
 
 	const {
 		elements: { trigger, menu, option },
-		states: { selectedLabel, open }
+		states: { open }
 	} = createSelect<string>({
 		forceVisible: true,
 		preventScroll: false,
@@ -70,7 +74,7 @@
 		use:melt={$trigger}
 		aria-label="Page"
 	>
-		{$selectedLabel || options[0].text}
+		{currentLabel}
 		<ChevronDown
 			data-open={$open}
 			class="size-5 transition-transform duration-100 data-[open=true]:rotate-180"

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2026-08-14T00:46:08.937Z\n"
+"PO-Revision-Date: 2026-08-15T03:17:10.027Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -310,7 +310,7 @@ msgstr "<0/>的结构基本类型"
 
 #: src/lib/components/contract/struct.svelte
 msgid "Action parameter in <0/>"
-msgstr "<0/>中的操作参数```"
+msgstr "<0/>中的操作参数"
 
 #: src/lib/components/contract/struct.svelte
 msgid "Struct property of <0/>"
@@ -357,6 +357,7 @@ msgstr "页面"
 #: src/lib/components/navigation/model.svelte.ts
 #: src/lib/components/sentiment/MetricLensDetail.svelte
 #: src/lib/components/sentiment/MetricParticipants.svelte
+#: src/lib/components/vp/VpSentimentLens.svelte
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/swap/describe.svelte.ts
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
@@ -498,7 +499,7 @@ msgstr "更新"
 
 #: src/lib/components/summary/components/balancechange.svelte
 msgid "New Balance:"
-msgstr "新余额：```"
+msgstr "新余额："
 
 #: src/lib/components/summary/components/transfer.svelte
 msgid "Transfer"
@@ -511,10 +512,10 @@ msgstr "+ {0} 毫秒 (CPU)"
 
 #. placeholder {0}: data.powup_net
 #. placeholder {0}: data.powup_cpu
-#. placeholder {0}: account.weight
 #. placeholder {0}: key.weight
 #. placeholder {0}: account.weight
 #. placeholder {0}: key.weight
+#. placeholder {0}: account.weight
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio/newaccount.svelte
@@ -866,7 +867,7 @@ msgid ""
 "these resources is crucial for efficient use of the {2} network."
 msgstr ""
 "{0} 区块链使用三种主要资源：CPU、NET 和 RAM。 用户需要这些资源才能与智能合约交互并在 {1}\n"
-"区块链上执行操作。 管理这些资源对于有效利用 {2} 网络至关重要。```"
+"区块链上执行操作。 管理这些资源对于有效利用 {2} 网络至关重要。"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/powerup/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/resources/renting.svelte
@@ -1167,7 +1168,7 @@ msgstr "最新版本"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/+layout.svelte
 msgid "Config"
-msgstr "配置```"
+msgstr "配置"
 
 #: src/lib/components/navigation/model.svelte.ts
 #: src/lib/state/search/actions/pages.svelte.ts
@@ -1604,7 +1605,7 @@ msgstr "质押收益历史"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/chips.svelte
 msgid "Chips"
-msgstr "标签```"
+msgstr "标签"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/chips.svelte
 msgid "Some text"
@@ -1766,7 +1767,7 @@ msgstr "输入令牌值："
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/inputs.svelte
 msgid "Asset or Units Input"
-msgstr "资产或单位输入```"
+msgstr "资产或单位输入"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/inputs.svelte
 msgid "Number Input"
@@ -1830,10 +1831,10 @@ msgstr "药丸选择"
 msgid "Select a date range"
 msgstr "选择日期范围"
 
-#. placeholder {0}: selected.label
-#. placeholder {0}: selectedFormOption.label
-#. placeholder {0}: imageOptionSelected.label
 #. placeholder {0}: JSON.stringify(tokenSelected, null, 2)
+#. placeholder {0}: imageOptionSelected.label
+#. placeholder {0}: selectedFormOption.label
+#. placeholder {0}: selected.label
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
@@ -2035,7 +2036,7 @@ msgid ""
 "ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit\n"
 "in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat\n"
 "cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-msgstr "段落 - lorem ipsum dolor sit amet, consectetur adipiscing elit。 Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua。 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat。 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur。 Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum。```"
+msgstr "段落 - lorem ipsum dolor sit amet, consectetur adipiscing elit。 Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua。 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat。 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur。 Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum。"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/input/asset/+page.svelte
 msgid "WAX (MAX)"
@@ -2175,7 +2176,7 @@ msgstr "当前活动会话的账户状态。"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/account/+page.svelte
 msgid "Update account state"
-msgstr "更新账户状态```"
+msgstr "更新账户状态"
 
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/account/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
@@ -2214,7 +2215,7 @@ msgstr "此构建的 wharfkit/cli 生成的合约以及它使用的链上帐户�
 msgid "Refresh"
 msgstr "刷新"
 
-#. placeholder {0}: formatDate(proposal.updated)
+#. placeholder {0}: refreshed
 #. placeholder {0}: formatDate(proposal.updated)
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/market/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.svelte
@@ -2443,7 +2444,7 @@ msgstr "自身投票权重"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/votes/+page.svelte
 msgid "Proxied Weight"
-msgstr "代理权重```"
+msgstr "代理权重"
 
 #: src/routes/[[locale]]/[network]/(explorer)/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/votes/+page.svelte
@@ -2643,7 +2644,7 @@ msgstr "<0/> 上一个区块"
 
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 msgid "Next Block <0/>"
-msgstr "下一个区块 <0/>```"
+msgstr "下一个区块 <0/>"
 
 #. placeholder {0}: params.contract
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.ts
@@ -2711,7 +2712,7 @@ msgstr "代币余额 | {0} | {1} 网络"
 #. placeholder {1}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balances/+page.ts
 msgid "The token balances of the {0} account on the {1} network."
-msgstr "在 {1} 网络上，{0} 账户的代币余额。```"
+msgstr "在 {1} 网络上，{0} 账户的代币余额。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balances/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/token/+page.svelte
@@ -2767,7 +2768,7 @@ msgstr "操作：{0}"
 #. placeholder {2}: p.network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.ts
 msgid "The {0} action for the {1} smart contract on the {2} network."
-msgstr "在 {2} 网络上，{1} 智能合约的 {0} 操作。```"
+msgstr "在 {2} 网络上，{1} 智能合约的 {0} 操作。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
@@ -2821,7 +2822,7 @@ msgstr "输入数据"
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/actions/[action]/[[data]]/+page.svelte
 msgid "Struct"
-msgstr "结构体```"
+msgstr "结构体"
 
 #. placeholder {0}: network.chain.name
 #: src/routes/[[locale]]/[network]/(account)/resources/+layout.ts
@@ -2884,7 +2885,7 @@ msgstr "表达您对关键网络话题的支持或反对。您的投票权由您
 #: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/sentiment-showcase.svelte
 msgid "View All Topics"
-msgstr "查看所有话题```"
+msgstr "查看所有话题"
 
 #. placeholder {0}: params.name
 #. placeholder {0}: params.name
@@ -2927,7 +2928,10 @@ msgid "Last updated {0}"
 msgstr "上次更新时间 {0}"
 
 #: src/lib/components/vp/VpMsigCard.svelte
+#: src/lib/components/vp/VpOnchainSummary.svelte
+#: src/lib/components/vp/VpSentimentCard.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/[proposer]/[proposal]/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.ts
@@ -3001,7 +3005,7 @@ msgstr "没有反对票"
 
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
 msgid "Loading topic..."
-msgstr "正在加载主题...```"
+msgstr "正在加载主题..."
 
 #. placeholder {0}: data.network.token.name
 #. placeholder {1}: data.network.getRamToken().name
@@ -3022,8 +3026,8 @@ msgstr "兑换 {0}/{1}"
 msgid "Available"
 msgstr "可用"
 
-#. placeholder {0}: props.network.token.name
 #. placeholder {0}: String(data.quote.symbol.name)
+#. placeholder {0}: props.network.token.name
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/legacy-token-swap.svelte
 msgid "Swap to {0}"
@@ -3058,22 +3062,17 @@ msgstr "总权重"
 msgid "Opposition Weight"
 msgstr "反对权重"
 
-#: src/lib/components/sentiment/voteButtons.svelte
-msgid "Please log in to vote"
-msgstr "请登录以投票"
+#~ msgid "Please log in to vote"
+#~ msgstr "请登录以投票"
 
-#: src/lib/components/sentiment/voteButtons.svelte
-msgid "Voting"
-msgstr "投票中"
+#~ msgid "Voting"
+#~ msgstr "投票中"
 
-#: src/lib/components/sentiment/voteButtons.svelte
-msgid "Voted"
-msgstr "已投票"
+#~ msgid "Voted"
+#~ msgstr "已投票"
 
-#. placeholder {0}: currentVote === null ? 'Voting' : 'Voted'
-#: src/lib/components/sentiment/voteButtons.svelte
-msgid "{0} as <0/> with weight <1/>"
-msgstr "{0} 为 <0/>，权重为 <1/>"
+#~ msgid "{0} as <0/> with weight <1/>"
+#~ msgstr "{0} 为 <0/>，权重为 <1/>"
 
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.svelte
 msgid "Failed to load topics"
@@ -3131,7 +3130,7 @@ msgstr "每个主题都显示了总参与度以及支持与反对的分布情况
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.svelte
 msgid "Stake tokens"
-msgstr "抵押代币```"
+msgstr "抵押代币"
 
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+layout.ts
 msgid "No block found."
@@ -3155,7 +3154,7 @@ msgstr "多重签名提案"
 #. placeholder {1}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.ts
 msgid "An MSIG proposed by {0} on the {1} Network"
-msgstr "由 {0} 在 {1} 网络上提出的多重签名提案```"
+msgstr "由 {0} 在 {1} 网络上提出的多重签名提案"
 
 #. placeholder {0}: params.id
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
@@ -3186,7 +3185,13 @@ msgstr "多重签名情绪"
 #~ msgstr "表达您对多重签名提案的意见。 您的投票权重取决于您质押的代币，有助于发出社区对治理提案的共识信号。"
 
 #. placeholder {0}: msigData.statistics.totalVotes
+#. placeholder {0}: statistics.totalVotes
+#. placeholder {0}: statistics.totalVotes
+#. placeholder {0}: statistics.totalVotes
 #: src/lib/components/sentiment/msigCard.svelte
+#: src/lib/components/vp/VpOnchainSummary.svelte
+#: src/lib/components/vp/VpSentimentCard.svelte
+#: src/lib/components/vp/VpSentimentRow.svelte
 msgid "{0} votes"
 msgstr "{0} 票"
 
@@ -3237,23 +3242,14 @@ msgstr "显示 {1} 位参与者中的 {0} 位"
 msgid "Load More ({0} remaining)"
 msgstr "加载更多 (剩余 {0} 个)"
 
-#. placeholder {0}: itemType
-#. placeholder {0}: itemType
-#: src/lib/components/sentiment/voteButtons.svelte
-msgid "I support this {0}"
-msgstr "我支持这个 {0}"
+#~ msgid "I support this {0}"
+#~ msgstr "我支持这个 {0}"
 
-#. placeholder {0}: itemType
-#. placeholder {0}: itemType
-#: src/lib/components/sentiment/voteButtons.svelte
-msgid "I oppose this {0}"
-msgstr "我反对这个 {0}"
+#~ msgid "I oppose this {0}"
+#~ msgstr "我反对这个 {0}"
 
-#. placeholder {0}: itemType
-#. placeholder {0}: itemType
-#: src/lib/components/sentiment/voteButtons.svelte
-msgid "Do you support or oppose this {0}?"
-msgstr "您支持还是反对这个 {0}？"
+#~ msgid "Do you support or oppose this {0}?"
+#~ msgstr "您支持还是反对这个 {0}？"
 
 #. placeholder {0}: formatDateTime( transaction.block_time.toDate(), lang, { dateStyle: 'long', timeZone: 'UTC' } )
 #. placeholder {1}: network.chain.name
@@ -3461,7 +3457,7 @@ msgstr "未找到结果"
 msgid ""
 "Search for Unicove features or enter an account name, public key, or transaction\n"
 "ID on the network."
-msgstr "搜索 Unicove 功能，或在网络上输入账户名、公钥或交易 ID。```"
+msgstr "搜索 Unicove 功能，或在网络上输入账户名、公钥或交易 ID。"
 
 #~ msgid "{0}% Support"
 #~ msgstr "{0}% 支持"
@@ -3761,7 +3757,7 @@ msgstr "为什么要投票？"
 
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "How It Works"
-msgstr "如何运作```"
+msgstr "如何运作"
 
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Done"
@@ -3953,7 +3949,7 @@ msgstr "投票"
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Standby"
-msgstr "备用```"
+msgstr "备用"
 
 #: src/routes/[[locale]]/[network]/(account)/fund/+page.svelte
 msgid "Purchase Directly"
@@ -3966,7 +3962,7 @@ msgstr "要购买的代币"
 #: src/routes/[[locale]]/[network]/(account)/fund/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/fund/onramps/coinbase.svelte.ts
 msgid "You must be logged in with an account to use this feature."
-msgstr "您必须使用帐户登录才能使用此功能。```"
+msgstr "您必须使用帐户登录才能使用此功能。"
 
 #: src/routes/[[locale]]/[network]/(account)/fund/+page.svelte
 msgid "Exchanges"
@@ -3986,7 +3982,7 @@ msgstr "退款"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/renting.svelte
 msgid "Until Unstaked"
-msgstr "直到取消质押```"
+msgstr "直到取消质押"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/renting.svelte
 msgid "Usable for"
@@ -4027,7 +4023,7 @@ msgstr "使用 PowerUp 租赁资源"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 msgid "Rent resources with REX"
-msgstr "使用 REX 租赁资源```"
+msgstr "使用 REX 租赁资源"
 
 #. placeholder {0}: symbolName
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
@@ -4315,7 +4311,7 @@ msgstr "{0} 提供了一种 RPC 方法，该方法返回与您的 MetaMask 种�
 #. placeholder {1}: productName
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "Can I access all {0} apps using {1} for MetaMask?"
-msgstr "我可以使用 {1} for MetaMask 访问所有 {0} 应用程序吗？```"
+msgstr "我可以使用 {1} for MetaMask 访问所有 {0} 应用程序吗？"
 
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
 msgid "MetaMask Wallet Plugin"
@@ -4413,7 +4409,7 @@ msgstr "活动公钥"
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
 msgid "Enter a custom owner and active public key"
-msgstr "输入自定义所有者和活动公钥```"
+msgstr "输入自定义所有者和活动公钥"
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
 msgid "Use the public keys from my current account"
@@ -4515,7 +4511,7 @@ msgstr "角色"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Signer"
-msgstr "签署者```"
+msgstr "签署者"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
@@ -4542,6 +4538,7 @@ msgstr "提议名称"
 
 #: src/lib/components/vp/VpMsigCard.svelte
 #: src/lib/components/vp/VpMsigRow.svelte
+#: src/lib/components/vp/VpMsigStep.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Expired"
@@ -4591,7 +4588,7 @@ msgstr "要质押的数量"
 
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/stake/+page.svelte
 msgid "Minimum lockup"
-msgstr "最短锁定期```"
+msgstr "最短锁定期"
 
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/stake/+page.svelte
 msgid "Estimated Yield (Yearly)"
@@ -4782,7 +4779,7 @@ msgstr "来自交易的各个交易跟踪。"
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/transaction/+page.svelte
 msgid "Signatures"
-msgstr "签名```"
+msgstr "签名"
 
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+page.svelte
 msgid "Memo (Optional)"
@@ -4822,7 +4819,7 @@ msgstr "上限"
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
 msgid "Query"
-msgstr "查询```"
+msgstr "查询"
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
 msgid "First Page"
@@ -4830,7 +4827,7 @@ msgstr "第一页"
 
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
 msgid "Next Page"
-msgstr "下一页```"
+msgstr "下一页"
 
 #: src/routes/+layout.server.ts
 msgid "Your gateway to Web3"
@@ -5020,7 +5017,7 @@ msgstr "查看以下操作并签署交易。"
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.ts
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.ts
 msgid "MetaMask + {0}"
-msgstr "MetaMask + {0}```"
+msgstr "MetaMask + {0}"
 
 #. placeholder {0}: network.chain.name
 #. placeholder {1}: network.config.metamask.name
@@ -5234,7 +5231,7 @@ msgstr "代币余额"
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balance/[contract]/[symbol]/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balance/[contract]/[symbol]/+page.ts
 msgid "Token balance from the {0} smart contract."
-msgstr "来自 {0} 智能合约的代币余额。```"
+msgstr "来自 {0} 智能合约的代币余额。"
 
 #. placeholder {0}: params.table
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.ts
@@ -5246,7 +5243,7 @@ msgstr "表: {0}"
 #. placeholder {2}: network.chain.name
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.ts
 msgid "The {0} data table in the {1} smart contract on the {2} network."
-msgstr "{2} 网络上 {1} 智能合约中的 {0} 数据表。```"
+msgstr "{2} 网络上 {1} 智能合约中的 {0} 数据表。"
 
 #: src/lib/state/search/manager.svelte.ts
 #: src/lib/state/search/manager.svelte.ts
@@ -5286,7 +5283,7 @@ msgstr "缓存已过期，正在重新验证：\"{0}\""
 
 #: src/lib/state/search/manager.svelte.ts
 msgid "Cancelling previous request"
-msgstr "取消先前的请求```"
+msgstr "取消先前的请求"
 
 #. placeholder {0}: query
 #: src/lib/state/search/manager.svelte.ts
@@ -5351,7 +5348,7 @@ msgstr "安全警告"
 msgid ""
 "Anyone can create a proposal for anything — including proposals that can compromise your\n"
 "account or assets. <0>Do not sign a multisig if you're unsure of exactly what it does.</0> Do not trust random messages asking you to sign these proposals."
-msgstr "任何人都可以为任何事情创建提案 - 包括可能危及您的帐户或资产的提案。<0>如果您不确定多重签名会做什么，请不要签署它。</0> 不要信任要求您签署这些提案的随机消息。```"
+msgstr "任何人都可以为任何事情创建提案 - 包括可能危及您的帐户或资产的提案。<0>如果您不确定多重签名会做什么，请不要签署它。</0> 不要信任要求您签署这些提案的随机消息。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/approvals/+page.svelte
 msgid "No proposals pending"
@@ -5378,6 +5375,7 @@ msgstr "未批准"
 
 #: src/lib/components/vp/VpMsigCard.svelte
 #: src/lib/components/vp/VpMsigRow.svelte
+#: src/lib/components/vp/VpMsigStep.svelte
 #: src/lib/components/vp/VpStatusChip.svelte
 #: src/lib/components/vp/VpStatusChip.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
@@ -5387,6 +5385,7 @@ msgstr "已执行"
 
 #: src/lib/components/vp/VpMsigCard.svelte
 #: src/lib/components/vp/VpMsigRow.svelte
+#: src/lib/components/vp/VpMsigStep.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
 msgid "Cancelled"
@@ -5406,10 +5405,12 @@ msgstr "由 <0/> 提议"
 msgid "Expired {0}"
 msgstr "已过期 {0}"
 
+#. placeholder {0}: expiration
 #. placeholder {0}: expirationDate.fromNow()
+#: src/lib/components/vp/VpMsigStep.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
 msgid "Expires {0}"
-msgstr "将于 {0} 过期```"
+msgstr "将于 {0} 过期"
 
 #. placeholder {0}: proposal.proposer
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
@@ -5934,14 +5935,14 @@ msgstr "还没有人出价购买此名称。"
 #. placeholder {1}: String( tracked.refund.amount )
 #: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
 msgid "{0}You have {1} available to reclaim."
-msgstr "{0}您有 {1} 可供回收。```"
+msgstr "{0}您有 {1} 可供回收。"
 
 #: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
 msgid "You have been outbid on this name.<0/>"
 msgstr "您在这个名字上的出价已被超过。<0/>"
 
-#. placeholder {0}: String(tracked.refund.amount)
 #. placeholder {0}: String(manager.refundAmount)
+#. placeholder {0}: String(tracked.refund.amount)
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/refund/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
 msgid "Claim Refund ({0})"
@@ -6046,7 +6047,7 @@ msgstr "正在加载竞标信息..."
 #. placeholder {0}: manager.bidName
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.svelte
 msgid "No bid found for \"{0}\"."
-msgstr "未找到 \"{0}\" 的出价。```"
+msgstr "未找到 \"{0}\" 的出价。"
 
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.svelte
 msgid "This auction has not been won yet. The auction is still active."
@@ -6127,7 +6128,7 @@ msgstr "最低出价：<0/>"
 
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
 msgid "Balance: <0/>"
-msgstr "余额：<0/>```"
+msgstr "余额：<0/>"
 
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
 msgid "Your bid"
@@ -6473,7 +6474,7 @@ msgstr "费用接收者"
 
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/config/+page.svelte
 msgid "Create Topic Fee"
-msgstr "创建主题费用```"
+msgstr "创建主题费用"
 
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/config/+page.svelte
 msgid "Please log in to update config"
@@ -6606,6 +6607,7 @@ msgid "Tools"
 msgstr "工具"
 
 #: src/lib/components/navigation/model.svelte.ts
+#: src/lib/components/vp/VpSentimentLens.svelte
 #: src/lib/state/search/actions/pages.svelte.ts
 #: src/routes/[[locale]]/[network]/(explorer)/account/+page.ts
 msgid "Accounts"
@@ -6941,6 +6943,7 @@ msgstr "刚接触 {0}？<0>改为创建账户</0>"
 #: src/routes/[[locale]]/[network]/(explorer)/account/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/contract/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.server.ts
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.server.ts
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+page.server.ts
 msgid "Not found"
 msgstr "未找到"
@@ -7624,25 +7627,31 @@ msgid ""
 "normative version. <0>Read it in English</0>."
 msgstr "此翻译基于提案的早期版本撰写。英文文本为规范版本。<0>以英文阅读</0>。"
 
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.server.ts
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+page.server.ts
 msgid "That proposal number does not exist."
 msgstr "该提案编号不存在。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.server.ts
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.server.ts
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.server.ts
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+page.server.ts
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+page.server.ts
 msgid "The proposals repository could not be reached."
 msgstr "无法访问提案仓库。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.server.ts
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.server.ts
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+page.server.ts
 msgid "The proposal index could not be read."
 msgstr "无法读取提案索引。"
 
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.server.ts
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+page.server.ts
 msgid "The proposal index lists this proposal, but its document is missing."
 msgstr "提案索引列出了此提案，但其文档缺失。"
 
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.server.ts
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+page.server.ts
 msgid "That proposal could not be read."
 msgstr "无法读取该提案。"
@@ -7658,6 +7667,8 @@ msgid "Network proposals for Vaulta, published for public review."
 msgstr "Vaulta 的网络提案，已发布以供公众审阅。"
 
 #. placeholder {0}: heading
+#. placeholder {0}: heading
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.server.ts
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+page.server.ts
 msgid "Read \"{0}\", a Vaulta network proposal published for public review."
 msgstr "阅读“{0}”，这是一个已发布供公众审阅的 Vaulta 网络提案。"
@@ -7669,12 +7680,20 @@ msgstr "阅读“{0}”，这是一个已发布供公众审阅的 Vaulta 网络�
 #. placeholder {1}: total
 #. placeholder {0}: approved
 #. placeholder {1}: total
+#. placeholder {0}: approved
+#. placeholder {1}: total
+#. placeholder {0}: approved
+#. placeholder {1}: requested
 #: src/lib/components/vp/VpActionMsigRow.svelte
 #: src/lib/components/vp/VpMsigCard.svelte
+#: src/lib/components/vp/VpMsigProgress.svelte
+#: src/lib/components/vp/VpOnchainSummary.svelte
 msgid "{0} of {1} approvals signed"
 msgstr "已签署 {0}/{1} 个批准"
 
 #: src/lib/components/vp/VpMsigCard.svelte
+#: src/lib/components/vp/VpMsigProgress.svelte
+#: src/lib/components/vp/VpMsigStep.svelte
 msgid "No live approval data on this network."
 msgstr "此网络上没有实时批准数据。"
 
@@ -7683,9 +7702,8 @@ msgstr "此网络上没有实时批准数据。"
 msgid "View the executed transaction"
 msgstr "查看已执行的交易"
 
-#: src/lib/components/vp/VpSentimentCard.svelte
-msgid "Sentiment for this topic is recorded on-chain."
-msgstr "此主题的意见已记录在链上。"
+#~ msgid "Sentiment for this topic is recorded on-chain."
+#~ msgstr "此主题的意见已记录在链上。"
 
 #: src/lib/components/vp/VpStatusChip.svelte
 #: src/lib/components/vp/VpStatusChip.svelte
@@ -7711,7 +7729,7 @@ msgstr "已撤回"
 msgid "Superseded"
 msgstr "已被取代"
 
-#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/revisions/+page.svelte
 msgid "View source on GitHub"
 msgstr "在 GitHub 上查看源代码"
 
@@ -7735,10 +7753,8 @@ msgstr "标准"
 msgid "Document language"
 msgstr "文档语言"
 
-#. placeholder {0}: statistics.totalVotes
-#: src/lib/components/vp/VpSentimentCard.svelte
-msgid "{0} votes · <0/> participating"
-msgstr "{0} 票 · <0/> 人参与"
+#~ msgid "{0} votes · <0/> participating"
+#~ msgstr "{0} 票 · <0/> 人参与"
 
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.svelte
 msgid "Proposal list unavailable"
@@ -7765,51 +7781,52 @@ msgstr "创建于 {0}"
 
 #: src/lib/components/sentiment/MetricParticipants.svelte
 msgid "Voter"
-msgstr ""
+msgstr "投票者"
 
 #: src/lib/components/sentiment/MetricParticipants.svelte
 msgid "Vote"
-msgstr ""
+msgstr "投票"
 
 #~ msgid "System Token"
 #~ msgstr ""
 
 #: src/lib/components/sentiment/MetricLensDetail.svelte
 #: src/lib/components/sentiment/MetricParticipants.svelte
+#: src/lib/components/vp/VpSentimentLens.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/sentiment/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/[proposer]/[proposal]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
 msgid "V"
-msgstr ""
+msgstr "V"
 
 #. placeholder {0}: labels[lens]
 #. placeholder {0}: active.label
 #. placeholder {0}: active.label
 #: src/lib/components/sentiment/MetricLensDetail.svelte
 msgid "{0} Vote Distribution"
-msgstr ""
+msgstr "{0}投票分布"
 
 #. placeholder {0}: labels[lens]
 #. placeholder {0}: active.label
 #: src/lib/components/sentiment/MetricLensDetail.svelte
 msgid "Support {0}"
-msgstr ""
+msgstr "支持{0}"
 
 #. placeholder {0}: labels[lens]
 #. placeholder {0}: active.label
 #: src/lib/components/sentiment/MetricLensDetail.svelte
 msgid "Total {0}"
-msgstr ""
+msgstr "总计{0}"
 
 #. placeholder {0}: labels[lens]
 #. placeholder {0}: active.label
 #: src/lib/components/sentiment/MetricLensDetail.svelte
 msgid "Opposition {0}"
-msgstr ""
+msgstr "反对{0}"
 
 #: src/lib/components/vp/VpDetailsCard.svelte
 msgid "Version"
-msgstr ""
+msgstr "版本"
 
 #: src/lib/components/vp/VpRevisions.svelte
 msgid "Revision history"
@@ -7822,17 +7839,20 @@ msgid "Version {0} · {1}"
 msgstr ""
 
 #: src/lib/components/vp/VpRevisions.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/revisions/+page.svelte
 msgid "Change history"
-msgstr ""
+msgstr "变更历史"
 
 #. placeholder {0}: amount.toLocaleString()
 #. placeholder {0}: stats.total.toLocaleString()
 #. placeholder {0}: vote.metrics.v.total.toLocaleString()
+#. placeholder {0}: statistics.metrics.v.total.toLocaleString()
 #: src/lib/components/sentiment/MetricLensDetail.svelte
 #: src/lib/components/sentiment/MetricOverviewCard.svelte
 #: src/lib/components/sentiment/MetricParticipants.svelte
+#: src/lib/components/vp/VpSentimentHero.svelte
 msgid "{0} V"
-msgstr ""
+msgstr "{0} 票"
 
 #~ msgid "View complete breakdown"
 #~ msgstr ""
@@ -7844,7 +7864,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/sentiment/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/[proposer]/[proposal]/+page.svelte
 msgid "Loading sentiment..."
-msgstr ""
+msgstr "正在加载意见……"
 
 #~ msgid ""
 #~ "Sentiment voting and multisig approval become available when this proposal has on-chain\n"
@@ -7893,47 +7913,332 @@ msgstr ""
 #: src/lib/components/vp/VpMsigCard.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
 msgid "Sentiment ({0})"
-msgstr ""
+msgstr "意见（{0}）"
 
 #: src/lib/components/vp/VpMsigCard.svelte
 msgid "Multisig proposal"
 msgstr ""
 
 #: src/lib/components/vp/VpOnchain.svelte
+#: src/lib/components/vp/VpOnchainSummary.svelte
 msgid "On-chain"
-msgstr ""
+msgstr "链上"
 
 #. placeholder {0}: partition.finished.length
 #: src/lib/components/vp/VpOnchain.svelte
 msgid "Earlier multisigs ({0})"
 msgstr ""
 
-#: src/lib/components/vp/VpSentimentCard.svelte
-msgid "Sentiment topic"
-msgstr ""
+#~ msgid "Sentiment topic"
+#~ msgstr ""
 
-#: src/lib/components/vp/VpSentimentCard.svelte
-msgid "View the topic"
-msgstr ""
+#~ msgid "View the topic"
+#~ msgstr ""
 
-#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.svelte
 msgid "Proposal"
-msgstr ""
+msgstr "提案"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
 msgid "Implements <0>{0}: {1}</0>"
-msgstr ""
+msgstr "实现 <0>{0}：{1}</0>"
 
 #. placeholder {0}: percentString(locale, statistics.supportPercentage / 100, 0)
 #: src/lib/components/sentiment/SentimentMeter.svelte
 msgid "{0} Support"
-msgstr ""
+msgstr "{0} 支持"
 
 #. placeholder {0}: percentString(locale, statistics.oppositionPercentage / 100, 0)
 #: src/lib/components/sentiment/SentimentMeter.svelte
 msgid "{0} Oppose"
-msgstr ""
+msgstr "{0} 反对"
 
 #: src/lib/components/vp/VpActionSentimentRow.svelte
 msgid "Approve on the multisig page"
 msgstr ""
+
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "Your vote was not recorded"
+msgstr "您的投票未被记录"
+
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "Connect a wallet to add your voice. Results stay visible either way."
+msgstr "连接钱包来表达您的意见。无论如何，结果都会保持可见。"
+
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "Waiting for your wallet to sign"
+msgstr "等待您的钱包签名"
+
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "<0/> Support"
+msgstr "<0/> 支持"
+
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "<0/> Oppose"
+msgstr "<0/> 反对"
+
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "Your weight: <0/>"
+msgstr "您的权重：<0/>"
+
+#: src/lib/components/sentiment/voteButtons.svelte
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "You supported"
+msgstr "您支持了"
+
+#: src/lib/components/sentiment/voteButtons.svelte
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "You opposed"
+msgstr "您反对了"
+
+#. placeholder {0}: supports ? 'You supported' : 'You opposed'
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "{0} with <0/>"
+msgstr "{0}，权重为 <0/>"
+
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "Remove vote"
+msgstr "撤销投票"
+
+#: src/lib/components/vp/VpOnchainSummary.svelte
+msgid "Nothing on-chain yet. Voting opens when a topic is published or a multisig is proposed."
+msgstr "链上尚无内容。主题发布或多重签名提案提出后即可投票。"
+
+#: src/lib/components/vp/VpOnchainSummary.svelte
+#: src/lib/components/vp/VpSentimentCard.svelte
+msgid "Sentiment is recorded on-chain."
+msgstr "意见已记录在链上。"
+
+#: src/lib/components/vp/VpMultisigsCard.svelte
+#: src/lib/components/vp/VpOnchainSummary.svelte
+msgid "Multisigs"
+msgstr "多重签名"
+
+#. placeholder {0}: rows.length
+#: src/lib/components/vp/VpOnchainSummary.svelte
+msgid "{0} total"
+msgstr "共 {0} 个"
+
+#: src/lib/components/vp/VpMultisigsCard.svelte
+#: src/lib/components/vp/VpOnchainSummary.svelte
+msgid "One multisig is open for signatures."
+msgstr "有一个多重签名正在等待签名。"
+
+#: src/lib/components/vp/VpMultisigsCard.svelte
+#: src/lib/components/vp/VpOnchainSummary.svelte
+msgid "No multisig is open for signatures."
+msgstr "没有多重签名正在等待签名。"
+
+#. placeholder {0}: closed.length
+#: src/lib/components/vp/VpOnchainSummary.svelte
+msgid "{0} closed"
+msgstr "{0} 个已关闭"
+
+#: src/lib/components/vp/VpMultisigsCard.svelte
+msgid "Awaiting signatures"
+msgstr "等待签名"
+
+#: src/lib/components/vp/VpMsigStep.svelte
+msgid "Open the multisig"
+msgstr "打开多重签名"
+
+#: src/lib/components/vp/VpSentimentRow.svelte
+#: src/lib/components/vp/VpSentimentStepRow.svelte
+msgid "Closed"
+msgstr "已关闭"
+
+#: src/lib/components/vp/VpMsigStep.svelte
+msgid "View the transaction"
+msgstr "查看交易"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/multisigs/+page.svelte
+msgid "This proposal has no multisig bindings."
+msgstr "此提案没有多重签名绑定。"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/sentiment/+page.svelte
+msgid "No sentiment yet. Voting opens when a topic is published or a multisig is proposed."
+msgstr "尚无意见。当主题发布或提出多重签名时，投票将开放。"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/sentiment/+page.svelte
+msgid "Sentiment on the proposal"
+msgstr "对提案的意见"
+
+#. placeholder {0}: data.summary.vp
+#. placeholder {1}: data.summary.title
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/sentiment/+page.svelte
+msgid "Do you support {0}: {1}?"
+msgstr "你支持 {0}：{1} 吗？"
+
+#~ msgid "The transactions that carry it out"
+#~ msgstr "执行该提案的交易"
+
+#~ msgid ""
+#~ "Each multisig is a separate on-chain action with its own poll. Signers weigh these\n"
+#~ "results when deciding whether to approve."
+#~ msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/sentiment/+page.svelte
+msgid "Should this transaction be signed and executed?"
+msgstr "是否应对该交易进行签名并执行？"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/revisions/+page.svelte
+msgid "Revisions"
+msgstr "修订记录"
+
+#. placeholder {0}: revision.version
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/revisions/+page.svelte
+msgid "Version {0}"
+msgstr "版本 {0}"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/revisions/+page.svelte
+msgid "This proposal has no recorded revisions."
+msgstr "此提案没有记录的修订版本。"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/revisions/+page.svelte
+msgid "Translations"
+msgstr "翻译"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/revisions/+page.svelte
+msgid "Current"
+msgstr "当前"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/revisions/+page.svelte
+msgid "Behind the English text"
+msgstr "落后于英文文本"
+
+#~ msgid ""
+#~ "Each multisig is a separate on-chain action with its own poll. Signers weigh these results\n"
+#~ "when deciding whether to approve."
+#~ msgstr ""
+#~ "每个多重签名都是一项独立的链上操作，并有自己的投票。签名者会权衡这些结果，\n"
+#~ "再决定是否批准。"
+
+#. placeholder {0}: tab.count
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.svelte
+msgid "Multisigs ({0})"
+msgstr "多重签名 ({0})"
+
+#. placeholder {0}: tab.count
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.svelte
+msgid "Revisions ({0})"
+msgstr "修订版本 ({0})"
+
+#: src/lib/components/vp/VpSentimentCard.svelte
+msgid "1 vote"
+msgstr "1 票"
+
+#: src/lib/components/vp/VpSentimentCard.svelte
+msgid "support"
+msgstr "支持"
+
+#: src/lib/components/vp/VpSentimentCard.svelte
+msgid "oppose"
+msgstr "反对"
+
+#: src/lib/components/vp/VpSentimentCard.svelte
+msgid "View sentiment"
+msgstr "查看意见"
+
+#: src/lib/components/vp/VpMultisigsCard.svelte
+msgid "approvals signed"
+msgstr "已签署批准"
+
+#: src/lib/components/vp/VpMultisigsCard.svelte
+msgid "closed"
+msgstr "已关闭"
+
+#: src/lib/components/vp/VpMultisigsCard.svelte
+msgid "No step has been proposed on-chain yet."
+msgstr "链上尚未提出任何步骤。"
+
+#. placeholder {0}: steps.length
+#: src/lib/components/vp/VpMultisigsCard.svelte
+msgid "View all {0} multisigs"
+msgstr "查看全部 {0} 个多重签名"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.svelte
+msgid ""
+"Nothing on-chain yet. Voting opens when a topic is published or a multisig is\n"
+"proposed."
+msgstr "链上暂时没有任何内容。当主题发布或多重签名提议后，投票将开放。"
+
+#: src/lib/components/vp/VpMsigStep.svelte
+msgid "Planned"
+msgstr "已计划"
+
+#: src/lib/components/vp/VpMsigStep.svelte
+msgid "Open for signatures"
+msgstr "开放签名"
+
+#: src/lib/components/vp/VpMsigStep.svelte
+msgid "This step has not been proposed on-chain yet."
+msgstr "此步骤尚未在链上提议。"
+
+#: src/lib/components/vp/VpMsigStep.svelte
+msgid "Supersedes 1 earlier attempt."
+msgstr "取代了之前的 1 次尝试。"
+
+#. placeholder {0}: step.supersededAttempts
+#: src/lib/components/vp/VpMsigStep.svelte
+msgid "Supersedes {0} earlier attempts."
+msgstr "取代了之前的 {0} 次尝试。"
+
+#. placeholder {0}: requested
+#: src/lib/components/vp/VpMsigStep.svelte
+msgid "of {0} producers signed"
+msgstr "{0} 位生产者中已有签名"
+
+#: src/lib/components/vp/VpMsigStep.svelte
+msgid "See sentiment on this step"
+msgstr "查看此步骤的意见"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/sentiment/+page.svelte
+msgid "Should this step be signed and executed:"
+msgstr "是否应签署并执行此步骤："
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/sentiment/+page.svelte
+msgid "Sentiment on each step"
+msgstr "每个步骤的意见"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/sentiment/+page.svelte
+msgid ""
+"Each step is a separate on-chain transaction with its own poll. Signers weigh these\n"
+"results when deciding whether to approve."
+msgstr "每个步骤都是一笔独立的链上交易，并拥有自己的投票。签署者会在决定是否批准时权衡这些结果。"
+
+#: src/lib/components/vp/VpSentimentHero.svelte
+msgid "support from 1 vote"
+msgstr "1 票支持"
+
+#. placeholder {0}: statistics.totalVotes
+#: src/lib/components/vp/VpSentimentHero.svelte
+msgid "support from {0} votes"
+msgstr "{0} 票支持"
+
+#. placeholder {0}: percentString(locale, statistics.supportPercentage / 100, 0)
+#: src/lib/components/vp/VpSentimentStepRow.svelte
+msgid "{0} of 1 vote"
+msgstr "1 票中的 {0}"
+
+#. placeholder {0}: percentString(locale, statistics.supportPercentage / 100, 0)
+#. placeholder {1}: statistics.totalVotes
+#: src/lib/components/vp/VpSentimentStepRow.svelte
+msgid "{0} of {1} votes"
+msgstr "{1} 票中的 {0}"
+
+#: src/lib/components/vp/VpSentimentStepRow.svelte
+msgid "No votes were recorded on this step."
+msgstr "此步骤未记录任何投票。"
+
+#: src/lib/components/vp/VpSentimentLens.svelte
+msgid "A"
+msgstr "A"
+
+#: src/lib/components/vp/VpSentimentLens.svelte
+msgid "Measure by"
+msgstr "衡量方式"
+
+#. placeholder {0}: statistics.totalVotes
+#: src/lib/components/vp/VpSentimentHero.svelte
+msgid "{0} accounts voted"
+msgstr "{0} 个账户已投票"

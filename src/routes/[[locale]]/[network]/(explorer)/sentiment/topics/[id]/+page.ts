@@ -1,9 +1,12 @@
 import { useLocale } from '$lib/utils/intl';
 import type { PageLoad } from './$types';
-import { error } from '@sveltejs/kit';
+import { error, redirect } from '@sveltejs/kit';
 import { TopicSentimentState } from '../state.svelte';
+import { fetchVpIndex } from '$lib/vp/fetch';
+import { VP_BRANCH } from '$lib/vp/links';
+import { vpForTopic } from '$lib/vp/onchain';
 
-export const load: PageLoad = async ({ parent, params }) => {
+export const load: PageLoad = async ({ fetch, parent, params }) => {
 	const { network, locale } = await parent();
 	const topicId = params.id;
 
@@ -16,6 +19,12 @@ export const load: PageLoad = async ({ parent, params }) => {
 			title: params.id,
 			subtitle: 'Topic'
 		});
+	}
+
+	const index = await fetchVpIndex(fetch, VP_BRANCH).catch(() => null);
+	const bound = index ? vpForTopic(index, topicId) : null;
+	if (bound) {
+		redirect(307, `/${locale}/${params.network}/proposals/${bound.slug}/sentiment`);
 	}
 
 	const sentiment = new TopicSentimentState(network, locale);
