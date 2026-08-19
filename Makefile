@@ -132,7 +132,14 @@ else
 	cp ./configs/contracts/sentiment.ts $(CONTRACTS)/sentiment.ts
 endif
 
-codegen: $(CONTRACTS)/system.ts $(CONTRACTS)/token.ts $(CONTRACTS)/msig.ts $(CONTRACTS)/eosio.wram.ts $(CONTRACTS)/eosio.reserv.ts $(CONTRACTS)/eosio.rex.ts $(CONTRACTS)/delphihelper.ts $(CONTRACTS)/delphioracle.ts $(CONTRACTS)/unicove.api.ts $(CONTRACTS)/eosntime.ts $(CONTRACTS)/core.vaulta.ts $(CONTRACTS)/sentiment.ts
+$(CONTRACTS)/create.gm.ts:
+ifneq ($(PUBLIC_FEATURE_CREATE_CONTRACT),)
+	$(BIN)/wharfkit generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/create.gm.ts $(PUBLIC_FEATURE_CREATE_CONTRACT)
+else
+	cp ./configs/contracts/create.gm.ts $(CONTRACTS)/create.gm.ts
+endif
+
+codegen: $(CONTRACTS)/system.ts $(CONTRACTS)/token.ts $(CONTRACTS)/msig.ts $(CONTRACTS)/eosio.wram.ts $(CONTRACTS)/eosio.reserv.ts $(CONTRACTS)/eosio.rex.ts $(CONTRACTS)/delphihelper.ts $(CONTRACTS)/delphioracle.ts $(CONTRACTS)/unicove.api.ts $(CONTRACTS)/eosntime.ts $(CONTRACTS)/core.vaulta.ts $(CONTRACTS)/sentiment.ts $(CONTRACTS)/create.gm.ts
 	mkdir -p $(CONTRACTS)
 
 .PHONY: codegen/base
@@ -145,6 +152,7 @@ codegen/base:
 	$(BIN)/wharfkit generate -u https://eos.greymass.com -f ./configs/contracts/eosio.rex.ts eosio.rex
 	$(BIN)/wharfkit generate -u https://eos.greymass.com -f ./configs/contracts/eosio.wram.ts eosio.wram
 	$(BIN)/wharfkit generate -u https://jungle4.greymass.com -f ./configs/contracts/sentiment.ts sentiment.gm
+	$(BIN)/wharfkit generate -u https://jungle4.greymass.com -f ./configs/contracts/create.gm.ts create.gm
 	make format
 
 .PHONY: clean
@@ -161,9 +169,6 @@ clean/sveltekit:
 .PHONY: codegen/clean
 codegen/clean:
 	rm -rf $(CONTRACTS)/*.ts
-
-config/eos: codegen/clean
-	$(ENVS)/merge-env.sh ./configs/.env.eos .env.local
 
 config/jungle4: codegen/clean
 	$(ENVS)/merge-env.sh ./configs/.env.jungle4 .env.local

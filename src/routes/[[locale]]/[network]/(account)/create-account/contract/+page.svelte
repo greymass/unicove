@@ -1,24 +1,23 @@
 <script lang="ts">
-	import { Asset, Name, PrivateKey, PublicKey } from '@wharfkit/antelope';
-	import { getContext, onMount, tick } from 'svelte';
-	import { FiniteStateMachine } from 'runed';
-	import { goto } from '$app/navigation';
-	import { page } from '$app/stores';
+	import { Asset, Name, PublicKey } from '@wharfkit/antelope';
+	import { getContext, onDestroy, onMount, tick } from 'svelte';
+	import { Debounced, FiniteStateMachine } from 'runed';
+	import { goto, replaceState } from '$app/navigation';
+	import { page } from '$app/state';
 
 	import { preventDefault } from '$lib/utils';
 	import { Label } from 'unicove-components';
 	import { NameInput } from 'unicove-components';
 	import { PublicKeyInput } from 'unicove-components';
-	import { TextInput } from 'unicove-components';
 	import { SingleCard } from '$lib/components/layout';
 	import { Stack } from 'unicove-components';
 	import { Button } from 'unicove-components';
 	import { CopyButton } from 'unicove-components';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { Code } from 'unicove-components';
-	import { Checkbox } from 'unicove-components';
-	import ContractKit from '@wharfkit/contract';
-	import { browser } from '$app/environment';
+	import AccountText from '$lib/components/elements/account.svelte';
+	import { buildCreationMemo, isValidCreationName } from '$lib/utils/create/memo';
+	import { CreationWatcher } from './watcher.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -27,34 +26,59 @@
 	let accountValid = $state(false);
 	let accountName: Name = $state(Name.from(''));
 
+	const debouncedAccount = new Debounced(() => accountName, 500);
+	let accountExists = $state(false);
+	let checkingAccount = $state(false);
+	let accountLengthValid = $derived(isValidCreationName(accountName));
+	let accountCheckPending = $derived(String(debouncedAccount.current) !== String(accountName));
+	let accountCheckId = 0;
+
+	$effect(() => {
+		const name = String(debouncedAccount.current);
+		if (!name || !accountValid || !accountLengthValid) {
+			checkingAccount = false;
+			accountExists = false;
+			return;
+		}
+		const id = ++accountCheckId;
+		checkingAccount = true;
+		context.network
+			.doesAccountExist(debouncedAccount.current)
+			.then((exists) => {
+				if (id === accountCheckId) accountExists = exists;
+			})
+			.catch(() => {
+				if (id === accountCheckId) accountExists = false;
+			})
+			.finally(() => {
+				if (id === accountCheckId) checkingAccount = false;
+			});
+	});
+
 	let publicKeyInput: PublicKeyInput | undefined = $state();
 	let publicKeyRef: HTMLInputElement | undefined = $state();
 	let publicKeyValid = $state(false);
 	let publicKey: PublicKey | undefined = $state();
 
-	let privateKeyInput: TextInput | undefined = $state();
-	let privateKeyRef: HTMLInputElement | undefined = $state();
-	let privateKey: PrivateKey | undefined = $state();
-	let privateKeyCopied = $state(false);
-
 	let cost: Asset | undefined = $state();
 	let costAmount: string | undefined = $derived(cost?.quantity);
-	let memo: string = $derived(`${accountName}:${publicKey?.toLegacyString()}`);
+	let memo: string = $derived(publicKey ? buildCreationMemo(accountName, publicKey) : '');
 
-	let sendAccount: string = $state('openaccounts');
+	let sendAccount = $derived(String(context.network.contracts.create.account));
+
+	const watcher = new CreationWatcher(
+		context.network,
+		() => accountName,
+		() => publicKey
+	);
+
+	onDestroy(() => watcher.stop());
 
 	// The state which the submit form can exist in
-	type FormStates =
-		| 'account'
-		| 'publickey'
-		| 'privatekey'
-		| 'create'
-		| 'creating'
-		| 'complete'
-		| 'error';
+	type FormStates = 'account' | 'publickey' | 'create' | 'complete' | 'taken';
 
 	// The events which can modify state
-	type FormEvents = 'next' | 'previous' | 'generate' | 'reset' | 'success' | 'error';
+	type FormEvents = 'next' | 'previous' | 'reset' | 'created' | 'taken';
 
 	// For debugging, show all fields
 	const showAll = false;
@@ -68,23 +92,21 @@
 		publickey: {
 			previous: 'account',
 			next: () => (publicKeyValid ? 'create' : 'publickey'),
-			generate: () => 'privatekey',
 			reset,
 			_enter: () => tick().then(() => publicKeyRef?.focus())
 		},
-		privatekey: {
-			previous: 'publickey',
-			next: () => 'create'
-		},
 		create: {
-			previous: 'publickey'
+			previous: 'publickey',
+			created: 'complete',
+			taken: 'taken',
+			_enter: () => {
+				persistProgress();
+				watcher.start();
+			},
+			_exit: () => watcher.stop()
 		},
-		creating: {},
-		complete: {
-			reset
-		},
-		error: {
-			previous: 'account',
+		complete: {},
+		taken: {
 			reset
 		}
 	});
@@ -92,21 +114,50 @@
 	const next = () => f.send('next');
 	const previous = () => f.send('previous');
 
-	onMount(() => {
-		accountRef?.focus();
-		if (browser) {
-			const contractKit = new ContractKit({
-				client: context.network.client
-			});
-			// Get account creation cost from the contract
-			contractKit.load('openaccounts').then((contract) => {
-				contract.readonly('estimatecost').then((result) => {
-					const modified = Asset.from(result);
-					modified.units.add(2000); // Add buffer of 0.2000 EOS
-					cost = modified;
-				});
-			});
+	$effect(() => {
+		if (watcher.found) {
+			f.send('created');
+		} else if (watcher.taken) {
+			f.send('taken');
 		}
+	});
+
+	function persistProgress() {
+		if (!publicKey) {
+			return;
+		}
+		const params = new URLSearchParams(page.url.searchParams);
+		params.set('account', String(accountName));
+		params.set('active', String(publicKey));
+		try {
+			replaceState(`?${params.toString()}`, {});
+		} catch (e) {
+			console.warn('Unable to persist progress to the URL', e);
+		}
+	}
+
+	onMount(async () => {
+		accountRef?.focus();
+
+		const params = page.url.searchParams;
+		try {
+			if (params.has('account') && params.has('active')) {
+				accountName = Name.from(params.get('account') as string);
+				accountInput?.set(String(accountName));
+				publicKey = PublicKey.from(params.get('active') as string);
+				publicKeyInput?.set(String(publicKey));
+				await tick();
+				f.send('next');
+				f.send('next');
+			}
+		} catch (e) {
+			console.warn('Unable to process URL parameters', params, e);
+		}
+
+		const result = await context.network.contracts.create.readonly('estimatecost', {});
+		const modified = Asset.from(result);
+		modified.units.add(2000);
+		cost = modified;
 	});
 
 	function onkeydown(event: Event) {
@@ -126,11 +177,15 @@
 	const nextValid = $derived.by(() => {
 		switch (f.current) {
 			case 'account':
-				return accountValid;
+				return (
+					accountValid &&
+					accountLengthValid &&
+					!accountExists &&
+					!checkingAccount &&
+					!accountCheckPending
+				);
 			case 'publickey':
 				return publicKeyValid;
-			case 'privatekey':
-				return privateKeyCopied;
 		}
 	});
 
@@ -142,25 +197,13 @@
 		if (publicKeyInput) {
 			publicKeyInput.set('');
 		}
-		if (privateKeyInput) {
-			privateKeyInput?.set('');
-		}
 
 		accountName = Name.from('');
 		publicKey = undefined;
-		privateKey = undefined;
 
 		// Focus the "to" input field
 		await tick();
 		accountRef?.focus();
-	}
-
-	function generate() {
-		privateKey = PrivateKey.generate('K1');
-		privateKeyInput?.set(String(privateKey));
-		const pubkey = privateKey.toPublic();
-		publicKeyInput?.set(String(pubkey));
-		f.send('generate');
 	}
 
 	function reset(): FormStates {
@@ -172,7 +215,10 @@
 	}
 
 	async function resetURL() {
-		await goto(`?${$page.url.searchParams.toString()}`);
+		const params = new URLSearchParams(page.url.searchParams);
+		params.delete('account');
+		params.delete('active');
+		await goto(`?${params.toString()}`);
 		f.send('reset');
 	}
 </script>
@@ -189,10 +235,19 @@
 			id="account-input"
 			placeholder="Account Name"
 		/>
+		{#if String(accountName).length > 0 && !accountLengthValid}
+			<p class="text-error text-sm">Account names must be exactly 12 characters.</p>
+		{:else if checkingAccount || accountCheckPending}
+			<p class="text-on-surface-variant text-sm">Checking availability&hellip;</p>
+		{:else if accountExists}
+			<p class="text-error text-sm">That name is already taken. Try another.</p>
+		{:else if accountLengthValid && accountValid}
+			<p class="text-sm">That name is available.</p>
+		{/if}
 	</fieldset>
 {/snippet}
 
-{#snippet PublicKey()}
+{#snippet PublicKeyStep()}
 	<fieldset class="grid gap-2" class:hidden={!showAll && f.current !== 'publickey'}>
 		<Label for="public-key-input">Public Key</Label>
 		<PublicKeyInput
@@ -204,80 +259,111 @@
 			id="public-key-input"
 			placeholder="Public Key"
 		/>
-		<Button variant="secondary" onclick={generate}>Generate Key</Button>
+		<p class="text-on-surface-variant text-sm">
+			This key will have full control of your new account. It becomes both the owner and active key.
+		</p>
+		{#if context.wharf.session}
+			<p class="text-on-surface-variant text-sm">
+				You're signed in already, so
+				<a class="text-primary" href={context.urlPath('/create-account/direct')}>
+					creating from your existing account
+				</a>
+				is faster.
+			</p>
+		{/if}
 	</fieldset>
 {/snippet}
 
-{#snippet Generate()}
-	<div class:hidden={!showAll && f.current !== 'privatekey'}>
-		<fieldset class="grid gap-2">
-			<Label for="private-key-input">Private Key <CopyButton data={String(privateKey)} /></Label>
+{#snippet Create()}
+	<div class="grid gap-4" class:hidden={!showAll && f.current !== 'create'}>
+		<div class="grid gap-1">
+			<h2 class="text-headline">Send tokens to create your account</h2>
+			<p class="text-on-surface-variant text-sm">
+				Withdraw from an exchange, or send from any existing account. All three values must match
+				exactly.
+			</p>
+		</div>
 
-			<TextInput
-				bind:ref={privateKeyRef}
-				bind:value={privateKey}
-				disabled
-				id="private-key-input"
-				placeholder="Private Key"
-			>
-				<CopyButton data={String(privateKey)} />
-			</TextInput>
-		</fieldset>
-		<p class="my-3 flex items-center gap-3">
-			This is your new private key. Copy it someplace safe, import it into your wallet, and never
-			share it with anyone. If you lose this key, you will lose access to your account.
+		<dl class="grid gap-3">
+			<div class="grid gap-1">
+				<dt class="text-on-surface-variant text-xs tracking-wide uppercase">Send at least</dt>
+				<dd class="flex items-center justify-between gap-2 font-mono">
+					<span>{cost ? String(cost) : '—'}</span>
+					<CopyButton data={costAmount ?? ''} />
+				</dd>
+			</div>
+
+			<div class="grid gap-1">
+				<dt class="text-on-surface-variant text-xs tracking-wide uppercase">To account</dt>
+				<dd class="flex items-center justify-between gap-2 font-mono">
+					<span>{sendAccount}</span>
+					<CopyButton data={sendAccount} />
+				</dd>
+			</div>
+
+			<div class="border-primary grid gap-1 border-l-2 pl-3">
+				<dt class="text-on-surface-variant text-xs tracking-wide uppercase">With this memo</dt>
+				<dd class="flex items-center justify-between gap-2 font-mono break-all">
+					<span>{memo}</span>
+					<CopyButton data={memo} />
+				</dd>
+				<p class="text-sm">The transfer will not create your account without this exact memo.</p>
+			</div>
+		</dl>
+
+		<p class="text-on-surface-variant text-sm">
+			Anything you send above the minimum becomes your new account's opening balance.
 		</p>
-		<fieldset class="flex items-center gap-3" class:hidden={!showAll && f.current !== 'privatekey'}>
-			<Checkbox id="private-key-copied" bind:checked={privateKeyCopied} />
-			<Label for="private-key-copied">I have saved this private key.</Label>
-		</fieldset>
+
+		<div class="bg-surface-container grid gap-2 rounded-xl p-4">
+			{#if watcher.polling}
+				<p class="text-center font-bold">Waiting for transfer&hellip;</p>
+			{/if}
+			<p class="text-on-surface-variant text-center text-sm">
+				Keep this page open until the transfer arrives.
+			</p>
+		</div>
 	</div>
 {/snippet}
 
-{#snippet Create()}
-	<div class="grid gap-2" class:hidden={!showAll && f.current !== 'create'}>
-		<h2 class="text-headline flex gap-2">Instructions</h2>
-		<p class="flex gap-2">
-			Send EOS from an exchange or over a bridge to the account below with the memo provided to
-			create your account.
+{#snippet Complete()}
+	<div class="grid gap-4" class:hidden={f.current !== 'complete'}>
+		<h3 class="text-title">Account created</h3>
+		<p>
+			<AccountText name={accountName} /> is ready to use.
 		</p>
-		<fieldset class="grid gap-2">
-			<Label for="send-account-input">Send {context.network.token.name} to account</Label>
+		<Button
+			onclick={() =>
+				context.wharf.login({
+					chain: context.network.chain.id,
+					permissionLevel: `${accountName}@active`
+				})}
+		>
+			Sign in with this account
+		</Button>
+		<Button variant="secondary" href={context.urlPath(`/account/${accountName}`)}>
+			View account
+		</Button>
+	</div>
+{/snippet}
 
-			{#if cost}
-				<TextInput is="send-account-input" value={sendAccount} disabled>
-					<CopyButton data={sendAccount} />
-				</TextInput>
-			{/if}
-		</fieldset>
-
-		<fieldset class="grid gap-2">
-			<Label for="cost-amount-input">Amount of {context.network.token.name} to send</Label>
-
-			{#if cost}
-				<TextInput id="cost-amount-input" value={costAmount} disabled>
-					<CopyButton data={String(costAmount)} />
-				</TextInput>
-			{/if}
-		</fieldset>
-
-		<fieldset class="grid gap-2">
-			<Label for="memo-input">Transfer Memo</Label>
-
-			<TextInput id="memo-input" value={memo} disabled>
-				<CopyButton data={String(memo)} />
-			</TextInput>
-		</fieldset>
-
-		<p class="flex gap-2">
-			Once the transfer is complete, use your private key to import your account into the wallet of
-			your choosing.
+{#snippet Taken()}
+	<div class="grid gap-4" class:hidden={f.current !== 'taken'}>
+		<h3 class="text-title">Name already taken</h3>
+		<p>
+			Someone else registered <strong>{accountName}</strong> before your transfer arrived. A transfer
+			for a name that already exists will not go through, so your tokens stay where they are. Choose
+			another name and start again.
 		</p>
+		<Button variant="secondary" onclick={() => resetURL()}>Start over</Button>
 	</div>
 {/snippet}
 
 {#snippet ButtonGroup()}
-	<fieldset class="flex gap-2 *:flex-1" class:hidden={f.current === 'create'}>
+	<fieldset
+		class="flex gap-2 *:flex-1"
+		class:hidden={f.current === 'create' || f.current === 'complete' || f.current === 'taken'}
+	>
 		{#if f.current === 'account'}
 			<Button variant="secondary" onclick={() => resetURL()}>Restart</Button>
 		{:else}
@@ -294,11 +380,13 @@
 	<Stack>
 		{@render AccountName()}
 
-		{@render PublicKey()}
-
-		{@render Generate()}
+		{@render PublicKeyStep()}
 
 		{@render Create()}
+
+		{@render Complete()}
+
+		{@render Taken()}
 
 		{@render ButtonGroup()}
 	</Stack>
@@ -312,8 +400,7 @@
 				cost,
 				values: {
 					accountName,
-					publicKey,
-					privateKey
+					publicKey
 				},
 				valid: {
 					accountValid,

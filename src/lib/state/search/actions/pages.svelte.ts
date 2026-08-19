@@ -2,7 +2,6 @@ import { File } from '@lucide/svelte';
 import { goto } from '$app/navigation';
 
 import type { UnicoveContext } from '$lib/state/client.svelte';
-import { supportsAccountCreation } from '$lib/wharf/plugins';
 import type { SearchActionPlugin } from '../types';
 
 interface PageActionConfig {
@@ -163,14 +162,6 @@ export function getPageActions(): SearchActionPlugin[] {
 			value: 'Create Account',
 			description: 'View Page',
 			path: '/create-account'
-		}),
-		createPageAction({
-			name: 'signup',
-			keywords: ['signup', 'create', 'account', 'new', 'get started'],
-			value: 'Get started',
-			description: 'View Page',
-			path: '/signup',
-			enabled: (context) => supportsAccountCreation(context.network.chain.id)
 		}),
 		createPageAction({
 			name: 'network',

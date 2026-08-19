@@ -4,7 +4,7 @@ import { error } from '@sveltejs/kit';
 import { localizePath } from '$lib/utils/url';
 import { useLocale } from '$lib/utils/intl';
 
-export const load: LayoutLoad = async ({ fetch, params, parent }) => {
+export const load: LayoutLoad = async ({ data, fetch, params, parent }) => {
 	const { network, locale } = await parent();
 	await useLocale(locale);
 	const response = await fetch(localizePath(`/api/msig/${params.proposer}/${params.proposal}`));
@@ -30,10 +30,15 @@ export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 	);
 
 	return {
+		vp: data?.vp ?? null,
 		title: `${params.proposal}`,
 		subtitle: `An MSIG proposed by ${params.proposer} on the ${network.chain.name} Network`,
 		header: {
 			copyData: params.proposal
+		},
+		pageMetaTags: {
+			title: `${params.proposer}/${params.proposal} | Multisig on the ${network.chain.name} Network`,
+			description: `Approval status, actions, and transaction data for the multisig proposal ${params.proposal} by ${params.proposer}.`
 		},
 		proposal: {
 			approvals: {
@@ -46,6 +51,7 @@ export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 			status: json.status || 'proposed',
 			hash: transaction.id,
 			transaction,
+			authorities: json.authorities ?? [],
 			executed_at: json.executed_at,
 			executed_by: json.executed_by,
 			executed_trx_id: json.executed_trx_id

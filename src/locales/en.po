@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2026-08-01T22:14:46.313Z\n"
+"PO-Revision-Date: 2026-08-19T22:31:58.015Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -80,6 +80,7 @@ msgstr "API Reference"
 
 #: src/lib/components/footer.svelte
 #: src/lib/components/transact/summary.svelte
+#: src/lib/components/vp/VpDetailsCard.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/components/auction-hero.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
@@ -91,6 +92,7 @@ msgstr "Status"
 
 #: src/lib/components/footer.svelte
 #: src/lib/components/footer.svelte
+#: src/lib/components/sentiment/MetricParticipants.svelte
 #: src/lib/components/sentiment/participantList.svelte
 msgid "Support"
 msgstr "Support"
@@ -353,10 +355,15 @@ msgstr "Page"
 
 #: src/lib/components/elements/resourceCard.svelte
 #: src/lib/components/navigation/model.svelte.ts
+#: src/lib/components/sentiment/MetricLensDetail.svelte
+#: src/lib/components/sentiment/MetricParticipants.svelte
+#: src/lib/components/vp/VpSentimentLens.svelte
 #: src/routes/[[locale]]/[network]/(account)/resources/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/swap/describe.svelte.ts
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/resources/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/sentiment/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
 msgid "RAM"
 msgstr "RAM"
@@ -685,6 +692,7 @@ msgstr "Remain on current page when switching accounts"
 msgid "Prevents the automatic navigation to the account overview page"
 msgstr "Prevents the automatic navigation to the account overview page"
 
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/manager.svelte.ts
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
 msgid "Advanced"
@@ -710,23 +718,10 @@ msgstr "Mock token price"
 msgid "Debug Data Display"
 msgstr "Debug Data Display"
 
-#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
-msgid "I have tokens on an exchange and want to create an account."
-msgstr "I have tokens on an exchange and want to create an account."
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
-msgid "Create Account by Sending Tokens"
-msgstr "Create Account by Sending Tokens"
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
-msgid "I have an account and want to create another."
-msgstr "I have an account and want to create another."
-
 #: src/lib/components/navigation/model.svelte.ts
 #: src/lib/state/search/actions/pages.svelte.ts
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.ts
-#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.ts
 msgid "Create Account"
@@ -759,6 +754,7 @@ msgid "Bytes"
 msgstr "Bytes"
 
 #: src/lib/components/elements/actiontable.svelte
+#: src/lib/components/vp/VpDetailsCard.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/(wallets)/metamask/+page.svelte
@@ -996,10 +992,6 @@ msgstr "Enter"
 #: src/routes/[[locale]]/[network]/(account)/create-account/direct/+page.svelte
 msgid "Escape"
 msgstr "Escape"
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid "K1"
-msgstr "K1"
 
 #: src/routes/[[locale]]/[network]/(account)/create-account/request/+page.svelte
 msgid "Account Creation"
@@ -1614,6 +1606,7 @@ msgstr "Unstaking Balances Is A Long Title"
 #: src/lib/components/card/tokenbalance.svelte
 #: src/lib/components/card/tokenoverview.svelte
 #: src/lib/components/elements/unstaking.svelte
+#: src/lib/components/summary/powerbot/withdraw.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/withdraw/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/staking/(staking)/withdraw/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/staking/+page.svelte
@@ -2264,7 +2257,9 @@ msgid "Refresh"
 msgstr "Refresh"
 
 #. placeholder {0}: refreshed
+#. placeholder {0}: formatDate(proposal.updated)
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/market/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.svelte
 msgid "Updated {0}"
 msgstr "Updated {0}"
 
@@ -2549,6 +2544,8 @@ msgstr "Issuer"
 msgid "Top 100 Accounts"
 msgstr "Top 100 Accounts"
 
+#: src/lib/components/summary/powerbot/close.svelte
+#: src/lib/components/summary/powerbot/open.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/token/[contract]/[symbol]/+page.svelte
 msgid "Balance"
 msgstr "Balance"
@@ -2918,6 +2915,7 @@ msgid "Change network"
 msgstr "Change network"
 
 #: src/lib/components/accountswitch.svelte
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Connect Wallet"
 msgstr "Connect Wallet"
@@ -3668,64 +3666,6 @@ msgstr "Your new account has been created successfully."
 msgid "Public Key"
 msgstr "Public Key"
 
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid "Generate Key"
-msgstr "Generate Key"
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid "Private Key <0/>"
-msgstr "Private Key <0/>"
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid "Private Key"
-msgstr "Private Key"
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid ""
-"This is your new private key. Copy it someplace safe, import it into your wallet, and never\n"
-"share it with anyone. If you lose this key, you will lose access to your account."
-msgstr ""
-"This is your new private key. Copy it someplace safe, import it into your wallet, and never\n"
-"share it with anyone. If you lose this key, you will lose access to your account."
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid "I have saved this private key."
-msgstr "I have saved this private key."
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid "Instructions"
-msgstr "Instructions"
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid ""
-"Send EOS from an exchange or over a bridge to the account below with the memo provided to\n"
-"create your account."
-msgstr ""
-"Send EOS from an exchange or over a bridge to the account below with the memo provided to\n"
-"create your account."
-
-#. placeholder {0}: context.network.token.name
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid "Send {0} to account"
-msgstr "Send {0} to account"
-
-#. placeholder {0}: context.network.token.name
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid "Amount of {0} to send"
-msgstr "Amount of {0} to send"
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid "Transfer Memo"
-msgstr "Transfer Memo"
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
-msgid ""
-"Once the transfer is complete, use your private key to import your account into the wallet of\n"
-"your choosing."
-msgstr ""
-"Once the transfer is complete, use your private key to import your account into the wallet of\n"
-"your choosing."
-
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 msgid "Activity"
 msgstr "Activity"
@@ -3733,11 +3673,6 @@ msgstr "Activity"
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 msgid "Permissions"
 msgstr "Permissions"
-
-#. placeholder {0}: data.account.proposals.length
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
-msgid "Proposals ({0})"
-msgstr "Proposals ({0})"
 
 #. placeholder {0}: legacyPubKey
 #: src/routes/[[locale]]/[network]/(explorer)/key/[publicKey]/+page.svelte
@@ -4209,10 +4144,6 @@ msgstr "Requested Approvals"
 msgid "<0/> Approved"
 msgstr "<0/> Approved"
 
-#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
-msgid "<0/> Requested"
-msgstr "<0/> Requested"
-
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Permission"
@@ -4233,6 +4164,7 @@ msgid "Approved"
 msgstr "Approved"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Requested"
 msgstr "Requested"
 
@@ -4249,6 +4181,7 @@ msgstr "Proposer"
 msgid "Proposal Name"
 msgstr "Proposal Name"
 
+#: src/lib/components/vp/VpMsigStep.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Expired"
@@ -4279,7 +4212,7 @@ msgstr "Cancel MSIG"
 msgid "Execute"
 msgstr "Execute"
 
-#. placeholder {0}: variant
+#. placeholder {0}: data.proposal.transaction.actions.length
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/actions/+page.svelte
 msgid "Proposed Actions ({0})"
 msgstr "Proposed Actions ({0})"
@@ -4543,16 +4476,6 @@ msgstr "Block Producers"
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.ts
 msgid "Validators on the {0} network."
 msgstr "Validators on the {0} network."
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
-msgid "Smart Contract Account Creation"
-msgstr "Smart Contract Account Creation"
-
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
-#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
-msgid "Create an account using a basic token transfer to a smart contract"
-msgstr "Create an account using a basic token transfer to a smart contract"
 
 #: src/routes/[[locale]]/[network]/(account)/resources/stake/+page.ts
 msgid "Renting"
@@ -4886,6 +4809,9 @@ msgstr "How to Sign Transactions on the {0} network with MetaMask"
 msgid "MetaMask Wallet Plugin"
 msgstr "MetaMask Wallet Plugin"
 
+#: src/lib/components/vp/VpSentimentCard.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.ts
 msgid "Sentiment"
@@ -4902,6 +4828,7 @@ msgstr "Failed to load topics"
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/refund/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/sentiment/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/config/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/+page.svelte
@@ -4927,18 +4854,6 @@ msgstr "Load More"
 msgid "About Sentiment Voting"
 msgstr "About Sentiment Voting"
 
-#. placeholder {0}: statistics.supportPercentage
-#. placeholder {0}: statistics.supportPercentage
-#: src/lib/components/sentiment/SentimentMeter.svelte
-msgid "{0}% Support"
-msgstr "{0}% Support"
-
-#. placeholder {0}: statistics.oppositionPercentage
-#. placeholder {0}: statistics.oppositionPercentage
-#: src/lib/components/sentiment/SentimentMeter.svelte
-msgid "{0}% Oppose"
-msgstr "{0}% Oppose"
-
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.svelte
 msgid "Stake tokens"
@@ -4948,6 +4863,7 @@ msgstr "Stake tokens"
 msgid "Updating..."
 msgstr "Updating..."
 
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/sentiment/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
 msgid "Dismiss"
 msgstr "Dismiss"
@@ -4963,21 +4879,26 @@ msgstr "Last updated {0}"
 msgid "Description"
 msgstr "Description"
 
+#: src/lib/components/sentiment/MetricParticipants.svelte
 #: src/lib/components/sentiment/participantList.svelte
 #: src/lib/components/sentiment/participantList.svelte
 msgid "Supporting"
 msgstr "Supporting"
 
+#: src/lib/components/sentiment/MetricParticipants.svelte
 #: src/lib/components/sentiment/participantList.svelte
 #: src/lib/components/sentiment/participantList.svelte
 msgid "Opposing"
 msgstr "Opposing"
 
+#: src/lib/components/sentiment/MetricParticipants.svelte
+#: src/lib/components/sentiment/MetricParticipants.svelte
 #: src/lib/components/sentiment/participantList.svelte
 #: src/lib/components/sentiment/participantList.svelte
 msgid "Participants"
 msgstr "Participants"
 
+#: src/lib/components/sentiment/MetricParticipants.svelte
 #: src/lib/components/sentiment/participantList.svelte
 msgid "Oppose"
 msgstr "Oppose"
@@ -5006,10 +4927,6 @@ msgstr "Opposition Weight"
 msgid "Vote Distribution"
 msgstr "Vote Distribution"
 
-#: src/lib/components/sentiment/voteButtons.svelte
-msgid "Please log in to vote"
-msgstr "Please log in to vote"
-
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.svelte
 msgid ""
 "Sentiment voting allows token holders to express their support or opposition on important\n"
@@ -5028,10 +4945,12 @@ msgstr ""
 "Each topic shows the total participation and the distribution of support versus opposition,\n"
 "helping the community gauge consensus on key issues."
 
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/sentiment/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
 msgid "Your Vote"
 msgstr "Your Vote"
 
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/sentiment/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
 msgid "Statistics"
 msgstr "Statistics"
@@ -5043,22 +4962,6 @@ msgstr "No opposing votes"
 #: src/lib/components/sentiment/participantList.svelte
 msgid "No supporting votes"
 msgstr "No supporting votes"
-
-#: src/lib/components/sentiment/voteButtons.svelte
-msgid "Voting"
-msgstr "Voting"
-
-#: src/lib/components/sentiment/voteButtons.svelte
-msgid "Voted"
-msgstr "Voted"
-
-#. placeholder {0}: currentVote === null ? 'Voting' : 'Voted'
-#. placeholder {0}: currentVote === null ? 'Voting' : 'Voted'
-#. placeholder {0}: currentVote === null ? 'Voting' : 'Voted'
-#. placeholder {0}: currentVote === null ? 'Voting' : 'Voted'
-#: src/lib/components/sentiment/voteButtons.svelte
-msgid "{0} as <0/> with weight <1/>"
-msgstr "{0} as <0/> with weight <1/>"
 
 #: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/sentiment-showcase.svelte
@@ -5290,27 +5193,17 @@ msgstr "{0} active"
 msgid "Top Producers"
 msgstr "Top Producers"
 
-#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/+page.ts
 msgid "Multisig Sentiment"
 msgstr "Multisig Sentiment"
 
-#. placeholder {0}: data.msigSentimentState.msigs.length
-#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
-msgid "{0} proposals with sentiment"
-msgstr "{0} proposals with sentiment"
-
-#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
-msgid ""
-"Express your opinion on multisig proposals. Your vote is weighted by your staked tokens,\n"
-"helping signal community consensus on governance proposals."
-msgstr ""
-"Express your opinion on multisig proposals. Your vote is weighted by your staked tokens,\n"
-"helping signal community consensus on governance proposals."
-
 #. placeholder {0}: msigData.statistics.totalVotes
+#. placeholder {0}: statistics.totalVotes
+#. placeholder {0}: statistics.totalVotes
+#. placeholder {0}: statistics.totalVotes
 #: src/lib/components/sentiment/msigCard.svelte
+#: src/lib/components/vp/VpSentimentCard.svelte
 msgid "{0} votes"
 msgstr "{0} votes"
 
@@ -5364,24 +5257,6 @@ msgstr "Showing {0} of {1} participants"
 #: src/lib/components/sentiment/participantList.svelte
 msgid "Load More ({0} remaining)"
 msgstr "Load More ({0} remaining)"
-
-#. placeholder {0}: itemType
-#. placeholder {0}: itemType
-#: src/lib/components/sentiment/voteButtons.svelte
-msgid "I support this {0}"
-msgstr "I support this {0}"
-
-#. placeholder {0}: itemType
-#. placeholder {0}: itemType
-#: src/lib/components/sentiment/voteButtons.svelte
-msgid "I oppose this {0}"
-msgstr "I oppose this {0}"
-
-#. placeholder {0}: itemType
-#. placeholder {0}: itemType
-#: src/lib/components/sentiment/voteButtons.svelte
-msgid "Do you support or oppose this {0}?"
-msgstr "Do you support or oppose this {0}?"
 
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "This network uses Delegated Proof of Stake (DPoS), a consensus mechanism where token holders elect block producers to validate transactions and secure the network. Your vote directly shapes who runs the infrastructure you depend on."
@@ -5572,6 +5447,8 @@ msgstr "No proposals are currently awaiting approval"
 msgid "All Actions"
 msgstr "All Actions"
 
+#: src/lib/components/vp/VpStatusChip.svelte
+#: src/lib/components/vp/VpStatusChip.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
 msgid "Proposed"
@@ -5581,11 +5458,15 @@ msgstr "Proposed"
 msgid "Unapproved"
 msgstr "Unapproved"
 
+#: src/lib/components/vp/VpMsigStep.svelte
+#: src/lib/components/vp/VpStatusChip.svelte
+#: src/lib/components/vp/VpStatusChip.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
 msgid "Executed"
 msgstr "Executed"
 
+#: src/lib/components/vp/VpMsigStep.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
 msgid "Cancelled"
@@ -5604,7 +5485,9 @@ msgstr "Proposed by <0/>"
 msgid "Expired {0}"
 msgstr "Expired {0}"
 
+#. placeholder {0}: formatExpiration(expiration)
 #. placeholder {0}: expirationDate.fromNow()
+#: src/lib/components/vp/VpMsigStep.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
 msgid "Expires {0}"
 msgstr "Expires {0}"
@@ -5631,6 +5514,7 @@ msgstr "action"
 msgid "actions"
 msgstr "actions"
 
+#: src/lib/components/vp/VpDetailsCard.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalsHeader.svelte
 msgid "Created"
@@ -5726,13 +5610,6 @@ msgid "View the block producer votes cast by the {0} account on the {1} network.
 msgstr "View the block producer votes cast by the {0} account on the {1} network."
 
 #. placeholder {0}: params.name
-#. placeholder {0}: params.name
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
-msgid "Proposals Created by {0}"
-msgstr "Proposals Created by {0}"
-
-#. placeholder {0}: params.name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
 msgid "View all multisig proposals created by {0}"
 msgstr "View all multisig proposals created by {0}"
@@ -5754,6 +5631,7 @@ msgstr "Date / TX"
 msgid "Contract / Action"
 msgstr "Contract / Action"
 
+#: src/lib/components/select/actionvariant.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityControlBar.svelte
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Table"
@@ -6930,15 +6808,12 @@ msgstr ""
 "Account creation runs through Anchor, a secure authenticator that opens in a popup window.\n"
 "Choose a sign-in method there, and you'll return here with your new account ready to use."
 
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/signup/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
 msgid "Waiting for Anchor..."
 msgstr "Waiting for Anchor..."
-
-#: src/routes/[[locale]]/[network]/(account)/signup/+page.svelte
-msgid "The popup was closed before an account was created. You can try again at any time."
-msgstr "The popup was closed before an account was created. You can try again at any time."
 
 #: src/routes/[[locale]]/[network]/(account)/signup/+page.svelte
 msgid "Prefer to use your own wallet? <0>Browse compatible wallets</0>"
@@ -7019,6 +6894,7 @@ msgid "Tools"
 msgstr "Tools"
 
 #: src/lib/components/navigation/model.svelte.ts
+#: src/lib/components/vp/VpSentimentLens.svelte
 #: src/lib/state/search/actions/pages.svelte.ts
 #: src/routes/[[locale]]/[network]/(explorer)/account/+page.ts
 msgid "Accounts"
@@ -7046,15 +6922,10 @@ msgstr "Deploy Contract"
 msgid "Upload contract code and ABI to an account"
 msgstr "Upload contract code and ABI to an account"
 
-#: src/lib/components/navigation/model.svelte.ts
-msgid "Create a new account on this network"
-msgstr "Create a new account on this network"
-
 #: src/lib/state/search/actions/pages.svelte.ts
 msgid "RAM Market Overview"
 msgstr "RAM Market Overview"
 
-#: src/lib/state/search/actions/pages.svelte.ts
 #: src/lib/state/search/actions/pages.svelte.ts
 #: src/lib/state/search/actions/pages.svelte.ts
 #: src/lib/state/search/actions/pages.svelte.ts
@@ -7119,10 +6990,6 @@ msgid "Transaction Status"
 msgstr "Transaction Status"
 
 #: src/lib/state/search/actions/pages.svelte.ts
-msgid "Get started"
-msgstr "Get started"
-
-#: src/lib/state/search/actions/pages.svelte.ts
 msgid "Network overview"
 msgstr "Network overview"
 
@@ -7130,9 +6997,12 @@ msgstr "Network overview"
 msgid "Producer voting"
 msgstr "Producer voting"
 
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
 #: src/routes/[[locale]]/[network]/(account)/signup/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/account/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/contract/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.server.ts
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.server.ts
 msgid "Not found"
 msgstr "Not found"
 
@@ -7523,3 +7393,881 @@ msgstr "The most active accounts on the {0} Network."
 #: src/routes/[[locale]]/[network]/(explorer)/account/+page.ts
 msgid "A leaderboard of the most active accounts on the {0} Network."
 msgstr "A leaderboard of the most active accounts on the {0} Network."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.ts
+msgid "Create an Account"
+msgstr "Create an Account"
+
+#. placeholder {0}: network.chain.name
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.ts
+msgid "Choose how you want to create your new {0} account."
+msgstr "Choose how you want to create your new {0} account."
+
+#. placeholder {0}: network.chain.name
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.ts
+msgid "Create a {0} Account"
+msgstr "Create a {0} Account"
+
+#. placeholder {0}: network.chain.name
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.ts
+msgid "Create a new account on the {0} Network."
+msgstr "Create a new account on the {0} Network."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Sign up with Anchor"
+msgstr "Sign up with Anchor"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Send tokens to create"
+msgstr "Send tokens to create"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Use your existing account"
+msgstr "Use your existing account"
+
+#: src/lib/components/navigation/model.svelte.ts
+msgid "Choose how to create a new account on this network"
+msgstr "Choose how to create a new account on this network"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "Account names must be exactly 12 characters."
+msgstr "Account names must be exactly 12 characters."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "Checking availability…"
+msgstr "Checking availability…"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "That name is already taken. Try another."
+msgstr "That name is already taken. Try another."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "That name is available."
+msgstr "That name is available."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "Send tokens to create your account"
+msgstr "Send tokens to create your account"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "Send at least"
+msgstr "Send at least"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "To account"
+msgstr "To account"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "With this memo"
+msgstr "With this memo"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "The transfer will not create your account without this exact memo."
+msgstr "The transfer will not create your account without this exact memo."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "Anything you send above the minimum becomes your new account's opening balance."
+msgstr "Anything you send above the minimum becomes your new account's opening balance."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "Waiting for transfer…"
+msgstr "Waiting for transfer…"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "Account created"
+msgstr "Account created"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "<0/> is ready to use."
+msgstr "<0/> is ready to use."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "Sign in with this account"
+msgstr "Sign in with this account"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "View account"
+msgstr "View account"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "Start over"
+msgstr "Start over"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid ""
+"Creating an account reserves a name and a small amount of storage on the network, so it costs a\n"
+"little. Every option produces the same kind of account. They differ in what you need before you\n"
+"start."
+msgstr ""
+"Creating an account reserves a name and a small amount of storage on the network, so it costs a\n"
+"little. Every option produces the same kind of account. They differ in what you need before you\n"
+"start."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "You're signed in already, so <0>creating from your existing account</0> is faster."
+msgstr "You're signed in already, so <0>creating from your existing account</0> is faster."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid ""
+"Withdraw from an exchange, or send from any existing account. All three values must match\n"
+"exactly."
+msgstr ""
+"Withdraw from an exchange, or send from any existing account. All three values must match\n"
+"exactly."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "Keep this page open until the transfer arrives."
+msgstr "Keep this page open until the transfer arrives."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "Name already taken"
+msgstr "Name already taken"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Create another account and pay for its storage from the account you're signed in with."
+msgstr "Create another account and pay for its storage from the account you're signed in with."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid "This key will have full control of your new account. It becomes both the owner and active key."
+msgstr "This key will have full control of your new account. It becomes both the owner and active key."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
+msgid "Send Tokens to Create an Account"
+msgstr "Send Tokens to Create an Account"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
+msgid "Send tokens from an exchange or another account, and your new account is created."
+msgstr "Send tokens from an exchange or another account, and your new account is created."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.ts
+msgid "Create a new account by sending tokens with a memo."
+msgstr "Create a new account by sending tokens with a memo."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/contract/+page.svelte
+msgid ""
+"Someone else registered <0/> before your transfer arrived. A transfer\n"
+"for a name that already exists will not go through, so your tokens stay where they are. Choose\n"
+"another name and start again."
+msgstr ""
+"Someone else registered <0/> before your transfer arrived. A transfer\n"
+"for a name that already exists will not go through, so your tokens stay where they are. Choose\n"
+"another name and start again."
+
+#: src/lib/components/summary/powerbot/delallow.svelte
+#: src/lib/components/summary/powerbot/setallow.svelte
+msgid "Allowance"
+msgstr "Allowance"
+
+#: src/lib/components/summary/powerbot/delallow.svelte
+msgid "removed their watcher allowance"
+msgstr "removed their watcher allowance"
+
+#: src/lib/components/summary/powerbot/delorder.svelte
+#: src/lib/components/summary/powerbot/setorder.svelte
+msgid "Standing order"
+msgstr "Standing order"
+
+#: src/lib/components/summary/powerbot/delorder.svelte
+msgid "removed their standing order"
+msgstr "removed their standing order"
+
+#: src/lib/components/summary/powerbot/logresource.svelte
+msgid "Paid"
+msgstr "Paid"
+
+#: src/lib/components/summary/powerbot/logresource.svelte
+msgid "Received resources"
+msgstr "Received resources"
+
+#: src/lib/components/summary/powerbot/logresource.svelte
+msgid "Topped up"
+msgstr "Topped up"
+
+#. placeholder {0}: data.cpu_ms
+#. placeholder {1}: data.net_kb
+#. placeholder {0}: data.cpu_ms
+#. placeholder {1}: data.net_kb
+#: src/lib/components/summary/powerbot/logresource.svelte
+#: src/lib/components/summary/powerbot/topup.svelte
+msgid "{0} ms CPU / {1} kB NET"
+msgstr "{0} ms CPU / {1} kB NET"
+
+#: src/lib/components/summary/powerbot/logresource.svelte
+msgid "cost"
+msgstr "cost"
+
+#: src/lib/components/summary/powerbot/logresource.svelte
+msgid "fee"
+msgstr "fee"
+
+#: src/lib/components/summary/powerbot/logresource.svelte
+msgid "funded by"
+msgstr "funded by"
+
+#: src/lib/components/summary/powerbot/configure.svelte
+msgid "Order entry"
+msgstr "Order entry"
+
+#: src/lib/components/summary/powerbot/configure.svelte
+msgid "updated by"
+msgstr "updated by"
+
+#: src/lib/components/summary/powerbot/close.svelte
+msgid "closed their pool balance"
+msgstr "closed their pool balance"
+
+#: src/lib/components/summary/powerbot/open.svelte
+msgid "opened a pool balance"
+msgstr "opened a pool balance"
+
+#: src/lib/components/summary/powerbot/setallow.svelte
+msgid "allows watcher top-ups for"
+msgstr "allows watcher top-ups for"
+
+#: src/lib/components/summary/powerbot/setallow.svelte
+msgid "patterns"
+msgstr "patterns"
+
+#: src/lib/components/summary/powerbot/setorder.svelte
+msgid "set by"
+msgstr "set by"
+
+#: src/lib/components/summary/powerbot/topup.svelte
+msgid "Top-up"
+msgstr "Top-up"
+
+#: src/lib/components/summary/powerbot/topup.svelte
+msgid "requested for"
+msgstr "requested for"
+
+#: src/lib/components/summary/powerbot/transactfee.svelte
+msgid "Paid fee"
+msgstr "Paid fee"
+
+#: src/lib/components/summary/powerbot/transactfee.svelte
+msgid "Service fee"
+msgstr "Service fee"
+
+#: src/lib/components/summary/powerbot/transactfee.svelte
+msgid "for"
+msgstr "for"
+
+#: src/lib/components/summary/powerbot/withdraw.svelte
+msgid "withdrew"
+msgstr "withdrew"
+
+#: src/lib/components/summary/powerbot/withdraw.svelte
+msgid "from pool balance"
+msgstr "from pool balance"
+
+#. placeholder {0}: floor
+#: src/lib/components/summary/powerbot/entry-row.svelte
+msgid "floor {0}"
+msgstr "floor {0}"
+
+#: src/lib/components/summary/powerbot/entry-row.svelte
+msgid "Paused"
+msgstr "Paused"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Anchor opens in a new window to create your account, and secures it on your device."
+msgstr "Anchor opens in a new window to create your account, and secures it on your device."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Start with an account you already use"
+msgstr "Start with an account you already use"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Recommended for you"
+msgstr "Recommended for you"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+#: src/routes/[[locale]]/[network]/(account)/signup/+page.svelte
+msgid ""
+"Anchor did not finish creating your account. If you never saw the Anchor window, allow popups\n"
+"for this site and try again."
+msgstr ""
+"Anchor did not finish creating your account. If you never saw the Anchor window, allow popups\n"
+"for this site and try again."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Create with Anchor"
+msgstr "Create with Anchor"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Create by sending tokens"
+msgstr "Create by sending tokens"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Create from your existing account"
+msgstr "Create from your existing account"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Start with an email address"
+msgstr "Start with an email address"
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "You create the keys first in a wallet and save them somewhere safe, then send tokens from an exchange to create the account."
+msgstr "You create the keys first in a wallet and save them somewhere safe, then send tokens from an exchange to create the account."
+
+#: src/routes/[[locale]]/[network]/(account)/create-account/+page.svelte
+msgid "Start with tokens and your own keys"
+msgstr "Start with tokens and your own keys"
+
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.server.ts
+msgid "Proposals"
+msgstr "Proposals"
+
+#. placeholder {0}: params.name
+#. placeholder {0}: params.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
+msgid "Multisig Proposals Created by {0}"
+msgstr "Multisig Proposals Created by {0}"
+
+#. placeholder {0}: data.account.proposals.length
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
+msgid "Multisig ({0})"
+msgstr "Multisig ({0})"
+
+#: src/lib/components/vp/VpStaleNotice.svelte
+msgid ""
+"This translation was written against an earlier version of the proposal. The English text is the\n"
+"normative version. <0>Read it in English</0>."
+msgstr ""
+"This translation was written against an earlier version of the proposal. The English text is the\n"
+"normative version. <0>Read it in English</0>."
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.server.ts
+msgid "That proposal number does not exist."
+msgstr "That proposal number does not exist."
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.server.ts
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.server.ts
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.server.ts
+msgid "The proposals repository could not be reached."
+msgstr "The proposals repository could not be reached."
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.server.ts
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.server.ts
+msgid "The proposal index could not be read."
+msgstr "The proposal index could not be read."
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.server.ts
+msgid "The proposal index lists this proposal, but its document is missing."
+msgstr "The proposal index lists this proposal, but its document is missing."
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.server.ts
+msgid "That proposal could not be read."
+msgstr "That proposal could not be read."
+
+#: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
+msgid ""
+"Read network proposals published for public review, with their status and the accounts\n"
+"they affect."
+msgstr ""
+"Read network proposals published for public review, with their status and the accounts\n"
+"they affect."
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.server.ts
+msgid "Network proposals for Vaulta, published for public review."
+msgstr "Network proposals for Vaulta, published for public review."
+
+#. placeholder {0}: heading
+#. placeholder {0}: heading
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.server.ts
+msgid "Read \"{0}\", a Vaulta network proposal published for public review."
+msgstr "Read \"{0}\", a Vaulta network proposal published for public review."
+
+#: src/lib/components/vp/VpMsigStep.svelte
+msgid "No live approval data on this network."
+msgstr "No live approval data on this network."
+
+#: src/lib/components/vp/VpStatusChip.svelte
+#: src/lib/components/vp/VpStatusChip.svelte
+msgid "Draft"
+msgstr "Draft"
+
+#: src/lib/components/vp/VpStatusChip.svelte
+#: src/lib/components/vp/VpStatusChip.svelte
+msgid "Review"
+msgstr "Review"
+
+#: src/lib/components/vp/VpStatusChip.svelte
+#: src/lib/components/vp/VpStatusChip.svelte
+msgid "Rejected"
+msgstr "Rejected"
+
+#: src/lib/components/vp/VpStatusChip.svelte
+#: src/lib/components/vp/VpStatusChip.svelte
+msgid "Withdrawn"
+msgstr "Withdrawn"
+
+#: src/lib/components/vp/VpStatusChip.svelte
+msgid "Superseded"
+msgstr "Superseded"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/revisions/+page.svelte
+msgid "View source on GitHub"
+msgstr "View source on GitHub"
+
+#: src/lib/components/vp/VpLanguageNav.svelte
+msgid "Document language"
+msgstr "Document language"
+
+#: src/lib/components/vp/VpRelatedAccounts.svelte
+msgid "Related accounts"
+msgstr "Related accounts"
+
+#: src/lib/components/vp/VpDetailsCard.svelte
+msgid "Updated"
+msgstr "Updated"
+
+#: src/lib/components/vp/VpDetailsCard.svelte
+msgid "Authors"
+msgstr "Authors"
+
+#: src/lib/components/vp/VpDetailsCard.svelte
+msgid "Standard"
+msgstr "Standard"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.svelte
+msgid "Proposal list unavailable"
+msgstr "Proposal list unavailable"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.svelte
+msgid "Try again"
+msgstr "Try again"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.svelte
+msgid "No published proposals"
+msgstr "No published proposals"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.svelte
+msgid ""
+"Proposals appear here once they are published for public review in the proposals\n"
+"repository."
+msgstr ""
+"Proposals appear here once they are published for public review in the proposals\n"
+"repository."
+
+#. placeholder {0}: formatDate(proposal.created)
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.svelte
+msgid "Created {0}"
+msgstr "Created {0}"
+
+#: src/lib/components/sentiment/MetricParticipants.svelte
+msgid "Voter"
+msgstr "Voter"
+
+#: src/lib/components/sentiment/MetricParticipants.svelte
+msgid "Vote"
+msgstr "Vote"
+
+#: src/lib/components/sentiment/MetricLensDetail.svelte
+#: src/lib/components/sentiment/MetricParticipants.svelte
+#: src/lib/components/vp/VpSentimentLens.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/sentiment/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
+msgid "V"
+msgstr "V"
+
+#. placeholder {0}: labels[lens]
+#. placeholder {0}: active.label
+#. placeholder {0}: active.label
+#: src/lib/components/sentiment/MetricLensDetail.svelte
+msgid "{0} Vote Distribution"
+msgstr "{0} Vote Distribution"
+
+#. placeholder {0}: labels[lens]
+#. placeholder {0}: active.label
+#: src/lib/components/sentiment/MetricLensDetail.svelte
+msgid "Support {0}"
+msgstr "Support {0}"
+
+#. placeholder {0}: labels[lens]
+#. placeholder {0}: active.label
+#: src/lib/components/sentiment/MetricLensDetail.svelte
+msgid "Total {0}"
+msgstr "Total {0}"
+
+#. placeholder {0}: labels[lens]
+#. placeholder {0}: active.label
+#: src/lib/components/sentiment/MetricLensDetail.svelte
+msgid "Opposition {0}"
+msgstr "Opposition {0}"
+
+#: src/lib/components/vp/VpDetailsCard.svelte
+msgid "Version"
+msgstr "Version"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/revisions/+page.svelte
+msgid "Change history"
+msgstr "Change history"
+
+#. placeholder {0}: amount.toLocaleString()
+#. placeholder {0}: stats.total.toLocaleString()
+#. placeholder {0}: vote.metrics.v.total.toLocaleString()
+#. placeholder {0}: statistics.metrics.v.total.toLocaleString()
+#: src/lib/components/sentiment/MetricLensDetail.svelte
+#: src/lib/components/sentiment/MetricOverviewCard.svelte
+#: src/lib/components/sentiment/MetricParticipants.svelte
+#: src/lib/components/vp/VpSentimentHero.svelte
+msgid "{0} V"
+msgstr "{0} V"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.svelte
+msgid "Proposal"
+msgstr "Proposal"
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
+msgid "Implements <0>{0}: {1}</0>"
+msgstr "Implements <0>{0}: {1}</0>"
+
+#. placeholder {0}: percentString(locale, statistics.supportPercentage / 100, 0)
+#: src/lib/components/sentiment/SentimentMeter.svelte
+msgid "{0} Support"
+msgstr "{0} Support"
+
+#. placeholder {0}: percentString(locale, statistics.oppositionPercentage / 100, 0)
+#: src/lib/components/sentiment/SentimentMeter.svelte
+msgid "{0} Oppose"
+msgstr "{0} Oppose"
+
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "Your vote was not recorded"
+msgstr "Your vote was not recorded"
+
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "Connect a wallet to add your voice. Results stay visible either way."
+msgstr "Connect a wallet to add your voice. Results stay visible either way."
+
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "Waiting for your wallet to sign"
+msgstr "Waiting for your wallet to sign"
+
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "<0/> Support"
+msgstr "<0/> Support"
+
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "<0/> Oppose"
+msgstr "<0/> Oppose"
+
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "Your weight: <0/>"
+msgstr "Your weight: <0/>"
+
+#: src/lib/components/sentiment/voteButtons.svelte
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "You supported"
+msgstr "You supported"
+
+#: src/lib/components/sentiment/voteButtons.svelte
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "You opposed"
+msgstr "You opposed"
+
+#. placeholder {0}: supports ? 'You supported' : 'You opposed'
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "{0} with <0/>"
+msgstr "{0} with <0/>"
+
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "Remove vote"
+msgstr "Remove vote"
+
+#: src/lib/components/vp/VpSentimentCard.svelte
+msgid "Sentiment is recorded on-chain."
+msgstr "Sentiment is recorded on-chain."
+
+#: src/lib/components/vp/VpMultisigsCard.svelte
+msgid "Multisigs"
+msgstr "Multisigs"
+
+#: src/lib/components/vp/VpMultisigsCard.svelte
+msgid "One multisig is open for signatures."
+msgstr "One multisig is open for signatures."
+
+#: src/lib/components/vp/VpMultisigsCard.svelte
+msgid "No multisig is open for signatures."
+msgstr "No multisig is open for signatures."
+
+#. placeholder {0}: closed
+#. placeholder {0}: closed
+#: src/lib/components/vp/VpMultisigsCard.svelte
+msgid "{0} closed"
+msgstr "{0} closed"
+
+#: src/lib/components/vp/VpMultisigsCard.svelte
+msgid "Awaiting signatures"
+msgstr "Awaiting signatures"
+
+#: src/lib/components/vp/VpMsigStep.svelte
+msgid "Open the multisig"
+msgstr "Open the multisig"
+
+#: src/lib/components/vp/VpSentimentStepRow.svelte
+msgid "Closed"
+msgstr "Closed"
+
+#: src/lib/components/vp/VpMsigStep.svelte
+msgid "View the transaction"
+msgstr "View the transaction"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/multisigs/+page.svelte
+msgid "This proposal has no multisig bindings."
+msgstr "This proposal has no multisig bindings."
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/sentiment/+page.svelte
+msgid "No sentiment yet. Voting opens when a topic is published or a multisig is proposed."
+msgstr "No sentiment yet. Voting opens when a topic is published or a multisig is proposed."
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/sentiment/+page.svelte
+msgid "Sentiment on the proposal"
+msgstr "Sentiment on the proposal"
+
+#. placeholder {0}: data.summary.vp
+#. placeholder {1}: data.summary.title
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/sentiment/+page.svelte
+msgid "Do you support {0}: {1}?"
+msgstr "Do you support {0}: {1}?"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/sentiment/+page.svelte
+msgid "Should this transaction be signed and executed?"
+msgstr "Should this transaction be signed and executed?"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/revisions/+page.svelte
+msgid "Revisions"
+msgstr "Revisions"
+
+#. placeholder {0}: revision.version
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/revisions/+page.svelte
+msgid "Version {0}"
+msgstr "Version {0}"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/revisions/+page.svelte
+msgid "This proposal has no recorded revisions."
+msgstr "This proposal has no recorded revisions."
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/revisions/+page.svelte
+msgid "Translations"
+msgstr "Translations"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/revisions/+page.svelte
+msgid "Current"
+msgstr "Current"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/revisions/+page.svelte
+msgid "Behind the English text"
+msgstr "Behind the English text"
+
+#. placeholder {0}: tab.count
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.svelte
+msgid "Multisigs ({0})"
+msgstr "Multisigs ({0})"
+
+#. placeholder {0}: tab.count
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.svelte
+msgid "Revisions ({0})"
+msgstr "Revisions ({0})"
+
+#: src/lib/components/vp/VpSentimentCard.svelte
+msgid "1 vote"
+msgstr "1 vote"
+
+#: src/lib/components/vp/VpSentimentCard.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+msgid "support"
+msgstr "support"
+
+#: src/lib/components/vp/VpSentimentCard.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+msgid "oppose"
+msgstr "oppose"
+
+#: src/lib/components/vp/VpSentimentCard.svelte
+msgid "View sentiment"
+msgstr "View sentiment"
+
+#: src/lib/components/vp/VpMultisigsCard.svelte
+msgid "No step has been proposed on-chain yet."
+msgstr "No step has been proposed on-chain yet."
+
+#. placeholder {0}: steps.length
+#: src/lib/components/vp/VpMultisigsCard.svelte
+msgid "View all {0} multisigs"
+msgstr "View all {0} multisigs"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.svelte
+msgid ""
+"Nothing on-chain yet. Voting opens when a topic is published or a multisig is\n"
+"proposed."
+msgstr ""
+"Nothing on-chain yet. Voting opens when a topic is published or a multisig is\n"
+"proposed."
+
+#: src/lib/components/vp/VpMsigStep.svelte
+msgid "Planned"
+msgstr "Planned"
+
+#: src/lib/components/vp/VpMsigStep.svelte
+msgid "Open for signatures"
+msgstr "Open for signatures"
+
+#: src/lib/components/vp/VpMsigStep.svelte
+msgid "This step has not been proposed on-chain yet."
+msgstr "This step has not been proposed on-chain yet."
+
+#: src/lib/components/vp/VpMsigStep.svelte
+msgid "Supersedes 1 earlier attempt."
+msgstr "Supersedes 1 earlier attempt."
+
+#. placeholder {0}: step.supersededAttempts
+#: src/lib/components/vp/VpMsigStep.svelte
+msgid "Supersedes {0} earlier attempts."
+msgstr "Supersedes {0} earlier attempts."
+
+#: src/lib/components/vp/VpMsigStep.svelte
+msgid "See sentiment on this step"
+msgstr "See sentiment on this step"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/sentiment/+page.svelte
+msgid "Should this step be signed and executed:"
+msgstr "Should this step be signed and executed:"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/sentiment/+page.svelte
+msgid "Sentiment on each step"
+msgstr "Sentiment on each step"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/sentiment/+page.svelte
+msgid ""
+"Each step is a separate on-chain transaction with its own poll. Signers weigh these\n"
+"results when deciding whether to approve."
+msgstr ""
+"Each step is a separate on-chain transaction with its own poll. Signers weigh these\n"
+"results when deciding whether to approve."
+
+#: src/lib/components/vp/VpSentimentHero.svelte
+msgid "support from 1 vote"
+msgstr "support from 1 vote"
+
+#. placeholder {0}: statistics.totalVotes
+#: src/lib/components/vp/VpSentimentHero.svelte
+msgid "support from {0} votes"
+msgstr "support from {0} votes"
+
+#. placeholder {0}: percentString(locale, statistics.supportPercentage / 100, 0)
+#: src/lib/components/vp/VpSentimentStepRow.svelte
+msgid "{0} of 1 vote"
+msgstr "{0} of 1 vote"
+
+#. placeholder {0}: percentString(locale, statistics.supportPercentage / 100, 0)
+#. placeholder {1}: statistics.totalVotes
+#: src/lib/components/vp/VpSentimentStepRow.svelte
+msgid "{0} of {1} votes"
+msgstr "{0} of {1} votes"
+
+#: src/lib/components/vp/VpSentimentStepRow.svelte
+msgid "No votes were recorded on this step."
+msgstr "No votes were recorded on this step."
+
+#: src/lib/components/vp/VpSentimentLens.svelte
+msgid "A"
+msgstr "A"
+
+#: src/lib/components/vp/VpSentimentLens.svelte
+msgid "Measure by"
+msgstr "Measure by"
+
+#. placeholder {0}: statistics.totalVotes
+#: src/lib/components/vp/VpSentimentHero.svelte
+msgid "{0} accounts voted"
+msgstr "{0} accounts voted"
+
+#. placeholder {0}: threshold
+#. placeholder {1}: possible
+#: src/lib/components/msig/approvalprogress.svelte
+msgid "approved · {0} of {1} needed"
+msgstr "approved · {0} of {1} needed"
+
+#. placeholder {0}: requested
+#: src/lib/components/msig/approvalprogress.svelte
+msgid "of {0} requested approvals"
+msgstr "of {0} requested approvals"
+
+#. placeholder {0}: manager.possible
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+msgid "Needed of {0} possible"
+msgstr "Needed of {0} possible"
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+msgid "outside current authority"
+msgstr "outside current authority"
+
+#. placeholder {0}: params.proposal
+#. placeholder {1}: params.proposer
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.ts
+msgid "Approval status, actions, and transaction data for the multisig proposal {0} by {1}."
+msgstr "Approval status, actions, and transaction data for the multisig proposal {0} by {1}."
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+msgid "Copy hash"
+msgstr "Copy hash"
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/sentiment/+page.svelte
+msgid "Sentiment results could not be loaded."
+msgstr "Sentiment results could not be loaded."
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/transaction/+page.svelte
+msgid "Proposed Transaction"
+msgstr "Proposed Transaction"
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/transaction/+page.svelte
+msgid "Copy transaction JSON"
+msgstr "Copy transaction JSON"
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/data/+page.svelte
+msgid "Proposal Data"
+msgstr "Proposal Data"
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/data/+page.svelte
+msgid "Copy proposal JSON"
+msgstr "Copy proposal JSON"
+
+#. placeholder {0}: liveStep.step
+#. placeholder {1}: liveStep.title
+#: src/lib/components/vp/VpSentimentCard.svelte
+msgid "Step {0}: {1}"
+msgstr "Step {0}: {1}"
+
+#. placeholder {0}: liveStep.step
+#: src/lib/components/vp/VpSentimentCard.svelte
+msgid "Step {0} of the enactment"
+msgstr "Step {0} of the enactment"
+
+#: src/lib/components/vp/VpSentimentCard.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+msgid "No votes have been cast on this poll."
+msgstr "No votes have been cast on this poll."
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+msgid "1 vote recorded on-chain"
+msgstr "1 vote recorded on-chain"
+
+#. placeholder {0}: sentimentStats.totalVotes
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+msgid "{0} votes recorded on-chain"
+msgstr "{0} votes recorded on-chain"
+
+#. placeholder {0}: data.vp.step.number
+#. placeholder {1}: data.vp.step.total
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
+msgid "Step {0} of {1} · Implements <0>{0}: {1}</0>"
+msgstr "Step {0} of {1} · Implements <0>{0}: {1}</0>"
+
+#: src/lib/components/vp/VpSentimentStepRow.svelte
+msgid "View full results"
+msgstr "View full results"

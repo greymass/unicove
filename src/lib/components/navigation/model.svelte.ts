@@ -64,7 +64,7 @@ export function buildNavModel(context: UnicoveContext, network: NetworkState): N
 			href: urlPath('/governance'),
 			text: 'Governance',
 			icon: LandmarkIcon,
-			match: [urlPath('/producers'), urlPath('/sentiment')]
+			match: [urlPath('/producers'), urlPath('/sentiment'), urlPath('/proposals')]
 		},
 		{ href: urlPath('/token'), text: 'Tokens', icon: CoinsIcon }
 	];
@@ -102,7 +102,7 @@ export function buildNavModel(context: UnicoveContext, network: NetworkState): N
 		{
 			href: urlPath('/create-account'),
 			text: 'Create Account',
-			description: 'Create a new account on this network'
+			description: 'Choose how to create a new account on this network'
 		}
 	);
 

@@ -4,7 +4,6 @@
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import AccountLink from '$lib/components/elements/account.svelte';
 	import TopicCard from '$lib/components/sentiment/topicCard.svelte';
-	import MsigCard from '$lib/components/sentiment/msigCard.svelte';
 	import { Vote, Shield, FileText } from '@lucide/svelte';
 	import type { PageData } from './$types';
 
@@ -18,7 +17,6 @@
 
 	const top5Producers = $derived(producers.top21.slice(0, 5));
 	const topTopics = $derived(data.sentimentState.topics.slice(0, 3));
-	const topMsigs = $derived(data.msigSentimentState.msigs.slice(0, 3));
 </script>
 
 <Stack>
@@ -146,7 +144,7 @@
 		</Card>
 	{/if}
 
-	{#if network.supports('sentiment') && topMsigs.length > 0}
+	{#if network.supports('proposals')}
 		<Card>
 			<div class="grid grid-rows-[auto_1fr] gap-6 lg:grid-flow-col lg:grid-cols-2">
 				<Stack>
@@ -155,32 +153,21 @@
 							<FileText />
 						</picture>
 						<hgroup>
-							<h2 class="text-title">Multisig Sentiment</h2>
-							{#if data.msigSentimentState.msigs.length}
-								<p class="text-muted text-label-sm mt-1">
-									{data.msigSentimentState.msigs.length} proposals with sentiment
-								</p>
-							{/if}
+							<h2 class="text-title">Proposals</h2>
 						</hgroup>
 					</div>
 
 					<p class="max-w-md text-pretty">
-						Express your opinion on multisig proposals. Your vote is weighted by your staked tokens,
-						helping signal community consensus on governance proposals.
+						Read network proposals published for public review, with their status and the accounts
+						they affect.
 					</p>
 				</Stack>
 
 				<Button
 					class="order-last lg:order-none lg:justify-self-start"
 					variant="primary"
-					href={urlPath('/sentiment/msigs')}>View All Proposals</Button
+					href={urlPath('/proposals')}>View All Proposals</Button
 				>
-
-				<Stack class="mt-2 gap-2 lg:row-span-2">
-					{#each topMsigs as msig}
-						<MsigCard msigData={msig} />
-					{/each}
-				</Stack>
 			</div>
 		</Card>
 	{/if}

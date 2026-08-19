@@ -1,15 +1,18 @@
 <script lang="ts">
 	import { getContext, onMount } from 'svelte';
 
-	import { Button, Card, Chip, cn } from 'unicove-components';
+	import { Button, Card, Chip, CopyButton, cn } from 'unicove-components';
 	import { DD, DL, DLRow } from 'unicove-components';
 	import { Stack, Switcher } from 'unicove-components';
+	import { page } from '$app/state';
+	import { formatDateTime } from '$lib/utils/intl';
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
 	import Account from '$lib/components/elements/account.svelte';
 	import TransactForm from '$lib/components/transact/form.svelte';
 	import VoteButtons from '$lib/components/sentiment/voteButtons.svelte';
-	import TopicStats from '$lib/components/sentiment/topicStats.svelte';
-	import { MsigSentimentState } from '$lib/state/sentiment/msig.svelte';
+	import SentimentMeter from '$lib/components/sentiment/SentimentMeter.svelte';
+	import { percentString } from '$lib/utils';
+	import type { MsigSentimentState } from '$lib/state/sentiment/msig.svelte';
 
 	import { ApprovalManager } from './manager.svelte';
 	import { goto, invalidateAll } from '$app/navigation';
@@ -23,11 +26,16 @@
 		manager.sync(data.network, context.wharf);
 	});
 
-	const sentimentState = $state(new MsigSentimentState(context.network, data.locale));
+	const sentimentState = getContext<MsigSentimentState>('msig-sentiment');
 	let userVote = $derived(sentimentState.currentUserVote?.vote_type ?? null);
+	const sentimentStats = $derived(sentimentState.currentMsig?.statistics ?? null);
 
-	// Disabling this temporarily
-	const enabled = false;
+	async function handleVoteSuccess() {
+		sentimentState.loadMsig(data.proposal.proposer, data.proposal.name);
+		if (context.account) {
+			sentimentState.loadUserVote(context.account.name, data.proposal.proposer, data.proposal.name);
+		}
+	}
 
 	onMount(() => {
 		let interval: ReturnType<typeof setInterval> | undefined;
@@ -35,17 +43,6 @@
 			interval = setInterval(() => {
 				invalidateAll();
 			}, 15000);
-		}
-
-		if (context.network.supports('sentiment')) {
-			sentimentState.loadMsig(data.proposal.proposer, data.proposal.name);
-			if (context.account) {
-				sentimentState.loadUserVote(
-					context.account.name,
-					data.proposal.proposer,
-					data.proposal.name
-				);
-			}
 		}
 
 		return () => {
@@ -64,23 +61,17 @@
 
 	const statusColor = $derived(statusColors[data.proposal.status] || statusColors.proposed);
 
+	const locale = $derived(page.params.locale ?? 'en');
+	// Chain timestamps arrive without a zone marker but are UTC.
+	const parseChainDate = (value: string) => new Date(/[Zz+]/.test(value) ? value : `${value}Z`);
+	const formatDate = (value: Date) =>
+		formatDateTime(value, locale, { dateStyle: 'medium', timeStyle: 'short' });
+
 	async function cancel() {
 		await manager.cancel();
 		goto(`/${data.network}/account/${data.proposal.proposer}/proposals`, {
 			invalidateAll: true
 		});
-	}
-
-	async function handleVoteSuccess() {
-		if (context.account) {
-			await sentimentState.refreshMsigAndVotes(
-				data.proposal.proposer,
-				data.proposal.name,
-				false,
-				context.account.name,
-				true
-			);
-		}
 	}
 </script>
 
@@ -92,7 +83,7 @@
 
 <Stack>
 	<Switcher class="items-start gap-6" threshold="40rem">
-		<Stack class="gap-4">
+		<Stack class="min-w-0 gap-4">
 			<h2 class="text-title">Requested Approvals</h2>
 
 			<div
@@ -106,59 +97,66 @@
 				<div class="flex justify-between px-4 font-semibold">
 					<div class="">
 						<span class="flex items-center gap-1 text-3xl">
-							<!-- TODO: Figure out how to clip these icons the same as the text -->
-							<!-- <Check class="size-5 fill-inherit" />  -->
 							{manager.totalApproved}
 						</span>
 						Approved
 					</div>
 
-					<div class="">
+					<div class="text-right">
 						<span class="flex items-center justify-end gap-1 text-3xl">
-							<!-- TODO: Figure out how to clip these icons the same as the text -->
-							<!-- <UserCheck class="size-5 fill-inherit" />  -->
-							{manager.totalRequested}
+							{manager.threshold ?? manager.totalRequested}
 						</span>
-						Requested
+						{#if manager.threshold !== null}
+							Needed of {manager.possible} possible
+						{:else}
+							Requested
+						{/if}
 					</div>
 				</div>
 			</div>
-			<table class="table-styles">
-				<thead>
-					<tr>
-						<th class="text-left">Actor</th>
-						<th class="text-left">Permission</th>
-						<th class="text-left">Role</th>
-						<th class="text-right">Status</th>
-					</tr>
-				</thead>
-				<tbody>
-					{#each manager.participants as participant}
-						{@const isProducer = data.producers.includes(String(participant.actor))}
-						{@const isTop21 = top21.includes(String(participant.actor))}
-						<tr class="h-12 bg-none">
-							<td><Account name={participant.actor} /></td>
-							<td class="text-muted">{participant.permission}</td>
-							<td>
-								{#if isTop21}
-									Top 21
-								{:else if isProducer}
-									Standby
-								{:else}
-									Signer
-								{/if}
-							</td>
-							<td class="text-right">
-								{#if manager.accountHasApproved(participant)}
-									<span class="text-success">Approved</span>
-								{:else}
-									<span class="text-muted">Requested</span>
-								{/if}
-							</td>
-						</tr>
-					{/each}
-				</tbody>
-			</table>
+			<Card>
+				<div class="overflow-x-auto">
+					<table class="table-styles">
+						<thead>
+							<tr>
+								<th class="text-left">Actor</th>
+								<th class="text-left">Permission</th>
+								<th class="text-left">Role</th>
+								<th class="text-right">Status</th>
+							</tr>
+						</thead>
+						<tbody>
+							{#each manager.participants as participant}
+								{@const isProducer = data.producers.includes(String(participant.actor))}
+								{@const isTop21 = top21.includes(String(participant.actor))}
+								<tr class="h-12 bg-none">
+									<td><Account name={participant.actor} /></td>
+									<td class="text-muted">{participant.permission}</td>
+									<td>
+										{#if isTop21}
+											Top 21
+										{:else if isProducer}
+											Standby
+										{:else}
+											Signer
+										{/if}
+									</td>
+									<td class="text-right">
+										{#if manager.accountHasApproved(participant)}
+											<span class="text-success">Approved</span>
+										{:else}
+											<span class="text-muted">Requested</span>
+											{#if !manager.inBindingRoster(participant)}
+												<span class="text-muted block text-xs">outside current authority</span>
+											{/if}
+										{/if}
+									</td>
+								</tr>
+							{/each}
+						</tbody>
+					</table>
+				</div>
+			</Card>
 		</Stack>
 
 		<Stack class="gap-4">
@@ -175,7 +173,7 @@
 						<DL>
 							<DLRow title="Status">
 								<DD>
-									<Chip class={cn('capitalize', statusColor)}>{data.proposal.status}</Chip>
+									<Chip class={cn('ml-auto capitalize', statusColor)}>{data.proposal.status}</Chip>
 								</DD>
 							</DLRow>
 							<DLRow title="Proposer">
@@ -190,12 +188,15 @@
 							</DLRow>
 							<DLRow title={manager.expired ? 'Expired' : 'Expiration'}>
 								<DD>
-									{manager.proposal.transaction.expiration} ({manager.expiresIn})
+									{formatDate(manager.expiration)} ({manager.expiresIn})
 								</DD>
 							</DLRow>
 							<DLRow title="Hash">
 								<DD>
-									{manager.proposal.hash}
+									<span class="inline-flex max-w-full items-center gap-1">
+										<span class="break-all">{manager.proposal.hash}</span>
+										<CopyButton data={String(manager.proposal.hash)} label="Copy hash" />
+									</span>
 								</DD>
 							</DLRow>
 							{#if data.proposal.status === 'executed' && data.proposal.executed_by}
@@ -208,7 +209,7 @@
 							{#if data.proposal.status === 'executed' && data.proposal.executed_at}
 								<DLRow title="Executed At">
 									<DD>
-										{data.proposal.executed_at}
+										{formatDate(parseChainDate(data.proposal.executed_at))}
 									</DD>
 								</DLRow>
 							{/if}
@@ -248,22 +249,51 @@
 				</TransactForm>
 			</Card>
 
-			{#if enabled && context.network.supports('sentiment') && sentimentState.currentMsig}
+			{#if context.network.supports('sentiment')}
 				<h2 class="text-title">Community Sentiment</h2>
-				<Card class="@container">
-					<Stack class="gap-6">
-						<TopicStats
-							statistics={sentimentState.currentMsig.statistics}
-							loading={sentimentState.loadingStatistics}
-						/>
-
-						<VoteButtons
-							type="msig"
-							proposer={data.proposal.proposer}
-							proposalName={data.proposal.name}
-							currentVote={userVote}
-							onVoteSuccess={handleVoteSuccess}
-						/>
+				<Card>
+					<Stack class="gap-4">
+						{#if sentimentStats && sentimentStats.totalVotes > 0}
+							<div class="flex items-end justify-between gap-3">
+								<div>
+									<span class="text-headline text-success">
+										{percentString(locale, sentimentStats.supportPercentage / 100, 0)}
+									</span>
+									<p class="text-muted text-sm">support</p>
+								</div>
+								<div class="text-right">
+									<span class="text-title text-error">
+										{percentString(locale, sentimentStats.oppositionPercentage / 100, 0)}
+									</span>
+									<p class="text-muted text-sm">oppose</p>
+								</div>
+							</div>
+							<div>
+								<SentimentMeter id="msig-status-sentiment" compact statistics={sentimentStats} />
+								<p class="text-muted mt-2 text-sm">
+									{#if sentimentStats.totalVotes === 1}
+										1 vote recorded on-chain
+									{:else}
+										{sentimentStats.totalVotes} votes recorded on-chain
+									{/if}
+								</p>
+							</div>
+						{:else if sentimentStats}
+							<p class="text-muted text-sm">No votes have been cast on this poll.</p>
+						{:else}
+							<div class="animate-pulse">
+								<div class="bg-surface-container h-4 w-24 rounded"></div>
+							</div>
+						{/if}
+						{#if context.account}
+							<VoteButtons
+								type="msig"
+								proposer={data.proposal.proposer}
+								proposalName={data.proposal.name}
+								currentVote={userVote}
+								onVoteSuccess={handleVoteSuccess}
+							/>
+						{/if}
 					</Stack>
 				</Card>
 			{/if}
