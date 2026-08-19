@@ -13,7 +13,7 @@ import {
 import type { ActionOptions, ContractArgs, PartialBy, Table } from '@wharfkit/contract';
 import { Contract as BaseContract } from '@wharfkit/contract';
 export const abiBlob = Blob.from(
-	'DmVvc2lvOjphYmkvMS4yAAkJYXV0aG9yaXR5AAQJdGhyZXNob2xkBnVpbnQzMgRrZXlzDGtleV93ZWlnaHRbXQhhY2NvdW50cxlwZXJtaXNzaW9uX2xldmVsX3dlaWdodFtdBXdhaXRzDXdhaXRfd2VpZ2h0W10MZXN0aW1hdGVjb3N0AAAKa2V5X3dlaWdodAACA2tleQpwdWJsaWNfa2V5BndlaWdodAZ1aW50MTYLbG9nY3JlYXRpb24ABAdhY2NvdW50BG5hbWUGZXhjZXNzBWFzc2V0A3JhbQVhc3NldAl0aW1lc3RhbXAGdWludDY0E3BhaXJfbmFtZV9hdXRob3JpdHkAAgVmaXJzdARuYW1lBnNlY29uZAlhdXRob3JpdHkJcGFyc2VtZW1vAAEEbWVtbwZzdHJpbmcQcGVybWlzc2lvbl9sZXZlbAACBWFjdG9yBG5hbWUKcGVybWlzc2lvbgRuYW1lF3Blcm1pc3Npb25fbGV2ZWxfd2VpZ2h0AAIKcGVybWlzc2lvbhBwZXJtaXNzaW9uX2xldmVsBndlaWdodAZ1aW50MTYLd2FpdF93ZWlnaHQAAgh3YWl0X3NlYwZ1aW50MzIGd2VpZ2h0BnVpbnQxNgOQMUUqG+kyVgxlc3RpbWF0ZWNvc3QAACZ12aiLGI0LbG9nY3JlYXRpb24AAACgUkmFr6kJcGFyc2VtZW1vAAABBmNyZWF0ZQZjcmVhdGUAAAACkDFFKhvpMlYFYXNzZXQAAKBSSYWvqRNwYWlyX25hbWVfYXV0aG9yaXR5'
+	'DmVvc2lvOjphYmkvMS4yAAkJYXV0aG9yaXR5AAQJdGhyZXNob2xkBnVpbnQzMgRrZXlzDGtleV93ZWlnaHRbXQhhY2NvdW50cxlwZXJtaXNzaW9uX2xldmVsX3dlaWdodFtdBXdhaXRzDXdhaXRfd2VpZ2h0W10MZXN0aW1hdGVjb3N0AAAKa2V5X3dlaWdodAACA2tleQpwdWJsaWNfa2V5BndlaWdodAZ1aW50MTYLbG9nY3JlYXRpb24ABQdhY2NvdW50BG5hbWUEZnJvbQRuYW1lBmV4Y2VzcwVhc3NldANyYW0FYXNzZXQJdGltZXN0YW1wBnVpbnQ2NBNwYWlyX25hbWVfYXV0aG9yaXR5AAIFZmlyc3QEbmFtZQZzZWNvbmQJYXV0aG9yaXR5CXBhcnNlbWVtbwABBG1lbW8Gc3RyaW5nEHBlcm1pc3Npb25fbGV2ZWwAAgVhY3RvcgRuYW1lCnBlcm1pc3Npb24EbmFtZRdwZXJtaXNzaW9uX2xldmVsX3dlaWdodAACCnBlcm1pc3Npb24QcGVybWlzc2lvbl9sZXZlbAZ3ZWlnaHQGdWludDE2C3dhaXRfd2VpZ2h0AAIId2FpdF9zZWMGdWludDMyBndlaWdodAZ1aW50MTYDkDFFKhvpMlYMZXN0aW1hdGVjb3N0AAAmddmoixiNC2xvZ2NyZWF0aW9uAAAAoFJJha+pCXBhcnNlbWVtbwAAAQZjcmVhdGUGY3JlYXRlAAAAApAxRSob6TJWBWFzc2V0AACgUkmFr6kTcGFpcl9uYW1lX2F1dGhvcml0eQ=='
 );
 export const abi = ABI.from(abiBlob);
 export namespace Types {
@@ -62,6 +62,8 @@ export namespace Types {
 	export class logcreation extends Struct {
 		@Struct.field(Name)
 		declare account: Name;
+		@Struct.field(Name)
+		declare from: Name;
 		@Struct.field(Asset)
 		declare excess: Asset;
 		@Struct.field(Asset)
@@ -91,6 +93,7 @@ export namespace ActionParams {
 	export interface estimatecost {}
 	export interface logcreation {
 		account: NameType;
+		from: NameType;
 		excess: AssetType;
 		ram: AssetType;
 		timestamp: UInt64Type;

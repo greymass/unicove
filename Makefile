@@ -152,6 +152,7 @@ codegen/base:
 	$(BIN)/wharfkit generate -u https://eos.greymass.com -f ./configs/contracts/eosio.rex.ts eosio.rex
 	$(BIN)/wharfkit generate -u https://eos.greymass.com -f ./configs/contracts/eosio.wram.ts eosio.wram
 	$(BIN)/wharfkit generate -u https://jungle4.greymass.com -f ./configs/contracts/sentiment.ts sentiment.gm
+	$(BIN)/wharfkit generate -u https://jungle4.greymass.com -f ./configs/contracts/create.gm.ts create.gm
 	make format
 
 .PHONY: clean
