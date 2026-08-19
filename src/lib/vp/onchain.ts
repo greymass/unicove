@@ -1,3 +1,4 @@
+import { bindingMsigAuthority, type MsigAuthority } from '$lib/wharf/msig/authority';
 import type { VpIndex, VpMsigStatus, VpSummary } from './types';
 
 export interface VpMsigStep {
@@ -64,6 +65,9 @@ export function vpMsigSteps(summary: VpSummary, lang?: string): VpMsigStep[] {
 export interface VpMsigApprovals {
 	approved: number;
 	requested: number;
+	satisfied: number | null;
+	threshold: number | null;
+	possible: number | null;
 	expiration: string | null;
 	actions: string[];
 }
@@ -73,13 +77,18 @@ export function parseMsigApprovals(json: unknown): VpMsigApprovals | null {
 	const row = json as {
 		provided_approvals?: unknown[];
 		requested_approvals?: unknown[];
+		authorities?: MsigAuthority[];
 		transaction?: { expiration?: string; actions?: { account: string; name: string }[] };
 	};
 	if (!Array.isArray(row.provided_approvals)) return null;
 	const approved = row.provided_approvals.length;
+	const binding = bindingMsigAuthority(row.authorities);
 	return {
 		approved,
 		requested: approved + (row.requested_approvals?.length ?? 0),
+		satisfied: binding?.satisfied ?? null,
+		threshold: binding?.threshold ?? null,
+		possible: binding?.possible ?? null,
 		expiration: row.transaction?.expiration ?? null,
 		actions: (row.transaction?.actions ?? []).map((a) => `${a.account}::${a.name}`)
 	};

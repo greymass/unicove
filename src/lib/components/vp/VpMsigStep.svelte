@@ -1,7 +1,10 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
+	import { page } from '$app/state';
 	import { Card, Chip } from 'unicove-components';
+	import { formatDateTime } from '$lib/utils/intl';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import ApprovalProgress from '$lib/components/msig/approvalprogress.svelte';
 	import { parseMsigApprovals, type VpMsigStep } from '$lib/vp/onchain';
 
 	interface Props {
@@ -15,13 +18,20 @@
 
 	let approved = $state<number | null>(null);
 	let requested = $state<number | null>(null);
+	let satisfied = $state<number | null>(null);
+	let threshold = $state<number | null>(null);
+	let possible = $state<number | null>(null);
 	let expiration = $state<string | null>(null);
 	let actions = $state<string[]>([]);
 	let unavailable = $state(false);
 
-	const percent = $derived(
-		approved !== null && requested ? Math.round((approved / requested) * 100) : 0
-	);
+	const locale = $derived(page.params.locale ?? 'en');
+	// Chain timestamps arrive without a zone marker but are UTC.
+	const formatExpiration = (value: string) =>
+		formatDateTime(new Date(/[Zz+]/.test(value) ? value : `${value}Z`), locale, {
+			dateStyle: 'medium',
+			timeStyle: 'short'
+		});
 
 	const statusLabels: Record<string, string> = {
 		planned: 'Planned',
@@ -46,6 +56,9 @@
 				}
 				approved = msig.approved;
 				requested = msig.requested;
+				satisfied = msig.satisfied;
+				threshold = msig.threshold;
+				possible = msig.possible;
 				expiration = msig.expiration;
 				actions = msig.actions;
 			})
@@ -74,11 +87,11 @@
 		<div class="flex flex-wrap items-start justify-between gap-2">
 			<div class="min-w-0">
 				{#if step.title}
-					<h3 class="text-title">{step.title}</h3>
+					<h2 class="text-title">{step.title}</h2>
 				{:else if step.proposer && step.proposal}
-					<h3 class="text-title font-mono text-base">{step.proposer}/{step.proposal}</h3>
+					<h2 class="text-title font-mono text-base">{step.proposer}/{step.proposal}</h2>
 				{:else}
-					<h3 class="text-title">This step has not been proposed on-chain yet.</h3>
+					<h2 class="text-title">This step has not been proposed on-chain yet.</h2>
 				{/if}
 				{#if step.title && step.proposer && step.proposal}
 					<p class="text-muted mt-1 font-mono text-sm">{step.proposer}/{step.proposal}</p>
@@ -106,14 +119,10 @@
 
 		{#if step.live && approved !== null && requested !== null}
 			<div class="mt-4">
-				<span class="text-headline-sm">{approved}</span>
-				<span class="text-muted text-sm">of {requested} producers signed</span>
-				<div class="bg-surface-container-high mt-2 h-2 overflow-hidden rounded-full">
-					<div class="bg-primary h-full" style="width: {percent}%"></div>
-				</div>
+				<ApprovalProgress {approved} {requested} {satisfied} {threshold} {possible} />
 			</div>
 			{#if expiration}
-				<p class="text-muted mt-2 text-sm">Expires {expiration}</p>
+				<p class="text-muted mt-2 text-sm">Expires {formatExpiration(expiration)}</p>
 			{/if}
 		{:else if step.live && unavailable}
 			<p class="text-muted mt-3 text-sm">No live approval data on this network.</p>
