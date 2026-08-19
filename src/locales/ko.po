@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.663Z\n"
-"PO-Revision-Date: 2026-08-15T03:17:10.020Z\n"
+"PO-Revision-Date: 2026-08-19T22:32:11.159Z\n"
 "Last-Translator: \n"
 "Language: ko\n"
 "Language-Team: \n"
@@ -363,7 +363,6 @@ msgstr "페이지"
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/resources/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/sentiment/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/[proposer]/[proposal]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
 msgid "RAM"
@@ -562,7 +561,6 @@ msgstr "<0>키</0> <1>소유자</1> {0} 초 <2>가중치: {0}</2>"
 
 #: src/lib/components/summary/eosio/newaccount.svelte
 #: src/lib/components/summary/eosio/newaccount.svelte
-#: src/lib/components/vp/VpMsigCard.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/buttons.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Active"
@@ -4049,10 +4047,6 @@ msgstr "요청된 승인"
 msgid "<0/> Approved"
 msgstr "<0/> 승인됨"
 
-#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
-msgid "<0/> Requested"
-msgstr "<0/> 요청됨"
-
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Permission"
@@ -4073,6 +4067,7 @@ msgid "Approved"
 msgstr "승인됨"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Requested"
 msgstr "요청됨"
 
@@ -4089,8 +4084,6 @@ msgstr "제안자"
 msgid "Proposal Name"
 msgstr "제안명"
 
-#: src/lib/components/vp/VpMsigCard.svelte
-#: src/lib/components/vp/VpMsigRow.svelte
 #: src/lib/components/vp/VpMsigStep.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
@@ -4122,7 +4115,7 @@ msgstr "MSIG(다중 서명 트랜잭션) 취소하기"
 msgid "Execute"
 msgstr "실행하다"
 
-#. placeholder {0}: variant
+#. placeholder {0}: data.proposal.transaction.actions.length
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/actions/+page.svelte
 msgid "Proposed Actions ({0})"
 msgstr "제안된 액션 ({0})"
@@ -4708,6 +4701,7 @@ msgstr "토픽 로딩 실패"
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/refund/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/sentiment/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/config/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/+page.svelte
@@ -4720,18 +4714,9 @@ msgstr "다시 시도"
 msgid "No topics available yet"
 msgstr "아직 사용 가능한 토픽이 없습니다."
 
-#~ msgid "{0}% Support"
-#~ msgstr "{0}% 지지"
-
-#~ msgid "{0}% Oppose"
-#~ msgstr "{0}% 반대"
-
-#: src/lib/components/vp/VpMsigCard.svelte
-#: src/lib/components/vp/VpOnchainSummary.svelte
 #: src/lib/components/vp/VpSentimentCard.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/[proposer]/[proposal]/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.ts
 msgid "Sentiment"
@@ -4761,9 +4746,6 @@ msgstr "지지 가중치"
 #: src/lib/components/sentiment/topicStats.svelte
 msgid "Opposition Weight"
 msgstr "반대 가중치"
-
-#~ msgid "Please log in to vote"
-#~ msgstr "투표하려면 로그인하세요"
 
 #: src/lib/components/sentiment/MetricParticipants.svelte
 #: src/lib/components/sentiment/participantList.svelte
@@ -4800,7 +4782,6 @@ msgid "Updating..."
 msgstr "업데이트 중..."
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/sentiment/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/[proposer]/[proposal]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
 msgid "Dismiss"
 msgstr "닫기"
@@ -4818,7 +4799,6 @@ msgstr "더 불러오기"
 msgid "Updating Data"
 msgstr "데이터 업데이트 중"
 
-#: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/[proposer]/[proposal]/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.ts
 msgid "Overview and statistics for community sentiment on the"
 msgstr "커뮤니티 감정에 대한 개요 및 통계"
@@ -4846,13 +4826,11 @@ msgid ""
 msgstr "각 주제는 총 참여도와 지지 대 반대의 분포를 보여주어 커뮤니티가 주요 문제에 대한 합의를 측정하는 데 도움이 됩니다."
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/sentiment/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/[proposer]/[proposal]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
 msgid "Your Vote"
 msgstr "나의 투표"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/sentiment/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/[proposer]/[proposal]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
 msgid "Statistics"
 msgstr "통계"
@@ -4864,15 +4842,6 @@ msgstr "반대 투표 없음"
 #: src/lib/components/sentiment/participantList.svelte
 msgid "No supporting votes"
 msgstr "찬성 투표 없음"
-
-#~ msgid "Voting"
-#~ msgstr "투표"
-
-#~ msgid "Voted"
-#~ msgstr "투표 완료"
-
-#~ msgid "{0} as <0/> with weight <1/>"
-#~ msgstr "가중치 <1/>으로 <0/>로 {0}"
 
 #: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/sentiment-showcase.svelte
@@ -5099,22 +5068,12 @@ msgstr "최고 생산자"
 msgid "Multisig Sentiment"
 msgstr "멀티시그 감정"
 
-#~ msgid "{0} proposals with sentiment"
-#~ msgstr "감정이 있는 {0}개의 제안"
-
-#~ msgid ""
-#~ "Express your opinion on multisig proposals. Your vote is weighted by your staked tokens,\n"
-#~ "helping signal community consensus on governance proposals."
-#~ msgstr "멀티시그 제안에 대한 의견을 표현하세요. 당신의 투표는 스테이킹된 토큰에 의해 가중되어 거버넌스 제안에 대한 커뮤니티 합의를 알리는 데 도움이 됩니다."
-
 #. placeholder {0}: msigData.statistics.totalVotes
 #. placeholder {0}: statistics.totalVotes
 #. placeholder {0}: statistics.totalVotes
 #. placeholder {0}: statistics.totalVotes
 #: src/lib/components/sentiment/msigCard.svelte
-#: src/lib/components/vp/VpOnchainSummary.svelte
 #: src/lib/components/vp/VpSentimentCard.svelte
-#: src/lib/components/vp/VpSentimentRow.svelte
 msgid "{0} votes"
 msgstr "{0} 투표"
 
@@ -5164,15 +5123,6 @@ msgstr "참여자 {1}명 중 {0}명 표시"
 #: src/lib/components/sentiment/participantList.svelte
 msgid "Load More ({0} remaining)"
 msgstr "더 불러오기 ({0}개 남음)"
-
-#~ msgid "I support this {0}"
-#~ msgstr "이 {0}을(를) 지지합니다"
-
-#~ msgid "I oppose this {0}"
-#~ msgstr "이 {0}을(를) 반대합니다"
-
-#~ msgid "Do you support or oppose this {0}?"
-#~ msgstr "이 {0}을(를) 지지하십니까, 반대하십니까?"
 
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "This network uses Delegated Proof of Stake (DPoS), a consensus mechanism where token holders elect block producers to validate transactions and secure the network. Your vote directly shapes who runs the infrastructure you depend on."
@@ -5372,8 +5322,6 @@ msgstr "제안됨"
 msgid "Unapproved"
 msgstr "미승인"
 
-#: src/lib/components/vp/VpMsigCard.svelte
-#: src/lib/components/vp/VpMsigRow.svelte
 #: src/lib/components/vp/VpMsigStep.svelte
 #: src/lib/components/vp/VpStatusChip.svelte
 #: src/lib/components/vp/VpStatusChip.svelte
@@ -5382,8 +5330,6 @@ msgstr "미승인"
 msgid "Executed"
 msgstr "실행됨"
 
-#: src/lib/components/vp/VpMsigCard.svelte
-#: src/lib/components/vp/VpMsigRow.svelte
 #: src/lib/components/vp/VpMsigStep.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
@@ -5394,7 +5340,6 @@ msgstr "취소됨"
 msgid "MMM D, YYYY [at] h:mm A"
 msgstr "YYYY년 MMM D일 h:mm A"
 
-#: src/lib/components/vp/VpMsigCard.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActivityEvent.svelte
 msgid "Proposed by <0/>"
 msgstr "<0/>에 의해 제안됨"
@@ -5404,7 +5349,7 @@ msgstr "<0/>에 의해 제안됨"
 msgid "Expired {0}"
 msgstr "{0}에 만료됨"
 
-#. placeholder {0}: expiration
+#. placeholder {0}: formatExpiration(expiration)
 #. placeholder {0}: expirationDate.fromNow()
 #: src/lib/components/vp/VpMsigStep.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
@@ -5550,6 +5495,7 @@ msgstr "날짜 / TX"
 msgid "Contract / Action"
 msgstr "계약 / 액션"
 
+#: src/lib/components/select/actionvariant.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/activity/ActivityControlBar.svelte
 #: src/routes/[[locale]]/[network]/settings/+page.svelte
 msgid "Table"
@@ -6951,7 +6897,6 @@ msgstr "{0}이(가) 처음이신가요? <0>대신 계정 만들기</0>"
 #: src/routes/[[locale]]/[network]/(explorer)/contract/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.server.ts
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.server.ts
-#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+page.server.ts
 msgid "Not found"
 msgstr "찾을 수 없습니다"
 
@@ -7640,31 +7585,25 @@ msgstr ""
 "기준이 되는 버전입니다. <0>영어로 읽기</0>."
 
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.server.ts
-#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+page.server.ts
 msgid "That proposal number does not exist."
 msgstr "해당 제안 번호가 존재하지 않습니다."
 
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.server.ts
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.server.ts
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.server.ts
-#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+page.server.ts
-#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+page.server.ts
 msgid "The proposals repository could not be reached."
 msgstr "제안 저장소에 연결할 수 없습니다."
 
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.server.ts
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.server.ts
-#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+page.server.ts
 msgid "The proposal index could not be read."
 msgstr "제안 색인을 읽을 수 없습니다."
 
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.server.ts
-#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+page.server.ts
 msgid "The proposal index lists this proposal, but its document is missing."
 msgstr "제안 색인에는 이 제안이 나열되어 있지만 문서가 없습니다."
 
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.server.ts
-#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+page.server.ts
 msgid "That proposal could not be read."
 msgstr "해당 제안을 읽을 수 없습니다."
 
@@ -7683,41 +7622,12 @@ msgstr "공개 검토를 위해 게시된 Vaulta 네트워크 제안입니다."
 #. placeholder {0}: heading
 #. placeholder {0}: heading
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.server.ts
-#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+page.server.ts
 msgid "Read \"{0}\", a Vaulta network proposal published for public review."
 msgstr "공개 검토를 위해 게시된 Vaulta 네트워크 제안 \"{0}\"을(를) 읽습니다."
 
-#~ msgid "On-chain activity"
-#~ msgstr "온체인 활동"
-
-#. placeholder {0}: approved
-#. placeholder {1}: total
-#. placeholder {0}: approved
-#. placeholder {1}: total
-#. placeholder {0}: approved
-#. placeholder {1}: total
-#. placeholder {0}: approved
-#. placeholder {1}: requested
-#: src/lib/components/vp/VpActionMsigRow.svelte
-#: src/lib/components/vp/VpMsigCard.svelte
-#: src/lib/components/vp/VpMsigProgress.svelte
-#: src/lib/components/vp/VpOnchainSummary.svelte
-msgid "{0} of {1} approvals signed"
-msgstr "{1}개 승인 중 {0}개 서명됨"
-
-#: src/lib/components/vp/VpMsigCard.svelte
-#: src/lib/components/vp/VpMsigProgress.svelte
 #: src/lib/components/vp/VpMsigStep.svelte
 msgid "No live approval data on this network."
 msgstr "이 네트워크에는 실시간 승인 데이터가 없습니다."
-
-#: src/lib/components/vp/VpMsigCard.svelte
-#: src/lib/components/vp/VpMsigRow.svelte
-msgid "View the executed transaction"
-msgstr "실행된 트랜잭션 보기"
-
-#~ msgid "Sentiment for this topic is recorded on-chain."
-#~ msgstr "이 주제에 대한 의견이 온체인에 기록됩니다."
 
 #: src/lib/components/vp/VpStatusChip.svelte
 #: src/lib/components/vp/VpStatusChip.svelte
@@ -7767,9 +7677,6 @@ msgstr "저자"
 msgid "Standard"
 msgstr "표준"
 
-#~ msgid "{0} votes · <0/> participating"
-#~ msgstr "{0}표 · <0/> 참여 중"
-
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.svelte
 msgid "Proposal list unavailable"
 msgstr "제안 목록을 사용할 수 없습니다"
@@ -7801,14 +7708,10 @@ msgstr "투표자"
 msgid "Vote"
 msgstr "투표"
 
-#~ msgid "System Token"
-#~ msgstr ""
-
 #: src/lib/components/sentiment/MetricLensDetail.svelte
 #: src/lib/components/sentiment/MetricParticipants.svelte
 #: src/lib/components/vp/VpSentimentLens.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/sentiment/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/[proposer]/[proposal]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
 msgid "V"
 msgstr "V"
@@ -7842,17 +7745,6 @@ msgstr "{0} 반대"
 msgid "Version"
 msgstr "버전"
 
-#: src/lib/components/vp/VpRevisions.svelte
-msgid "Revision history"
-msgstr ""
-
-#. placeholder {0}: revision.version
-#. placeholder {1}: formatDate(revision.date)
-#: src/lib/components/vp/VpRevisions.svelte
-msgid "Version {0} · {1}"
-msgstr ""
-
-#: src/lib/components/vp/VpRevisions.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/revisions/+page.svelte
 msgid "Change history"
 msgstr "변경 기록"
@@ -7867,87 +7759,6 @@ msgstr "변경 기록"
 #: src/lib/components/vp/VpSentimentHero.svelte
 msgid "{0} V"
 msgstr "{0} V"
-
-#~ msgid "View complete breakdown"
-#~ msgstr ""
-
-#: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/[proposer]/[proposal]/+page.ts
-msgid "Community sentiment on this multisig proposal"
-msgstr ""
-
-#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/sentiment/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/sentiment/msigs/[proposer]/[proposal]/+page.svelte
-msgid "Loading sentiment..."
-msgstr "의견 불러오는 중..."
-
-#~ msgid ""
-#~ "Sentiment voting and multisig approval become available when this proposal has on-chain\n"
-#~ "records."
-#~ msgstr ""
-
-#: src/lib/components/vp/VpActions.svelte
-msgid "Your participation"
-msgstr ""
-
-#: src/lib/components/vp/VpActions.svelte
-msgid "with weight <0/>"
-msgstr ""
-
-#: src/lib/components/vp/VpActions.svelte
-msgid "Acting as <0/> <1/>"
-msgstr ""
-
-#: src/lib/components/vp/VpActionSentimentRow.svelte
-msgid "Sentiment on this proposal"
-msgstr ""
-
-#. placeholder {0}: model.proposer
-#. placeholder {1}: model.proposal
-#: src/lib/components/vp/VpActionSentimentRow.svelte
-msgid "Sentiment on the multisig {0}/{1}"
-msgstr ""
-
-#. placeholder {0}: model.proposer
-#. placeholder {1}: model.proposal
-#: src/lib/components/vp/VpActionMsigRow.svelte
-msgid "Multisig {0}/{1}"
-msgstr ""
-
-#: src/lib/components/vp/VpActionMsigRow.svelte
-msgid "Review and approve on the multisig page"
-msgstr ""
-
-#: src/lib/components/vp/VpActionMsigRow.svelte
-#: src/lib/components/vp/VpMsigCard.svelte
-msgid "View the multisig"
-msgstr ""
-
-#. placeholder {0}: sentimentVotes
-#. placeholder {0}: votes
-#: src/lib/components/vp/VpMsigCard.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
-msgid "Sentiment ({0})"
-msgstr "의견 ({0})"
-
-#: src/lib/components/vp/VpMsigCard.svelte
-msgid "Multisig proposal"
-msgstr ""
-
-#: src/lib/components/vp/VpOnchain.svelte
-#: src/lib/components/vp/VpOnchainSummary.svelte
-msgid "On-chain"
-msgstr "온체인"
-
-#. placeholder {0}: partition.finished.length
-#: src/lib/components/vp/VpOnchain.svelte
-msgid "Earlier multisigs ({0})"
-msgstr ""
-
-#~ msgid "Sentiment topic"
-#~ msgstr ""
-
-#~ msgid "View the topic"
-#~ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.svelte
 msgid "Proposal"
@@ -7966,10 +7777,6 @@ msgstr "{0} 지지"
 #: src/lib/components/sentiment/SentimentMeter.svelte
 msgid "{0} Oppose"
 msgstr "{0} 반대"
-
-#: src/lib/components/vp/VpActionSentimentRow.svelte
-msgid "Approve on the multisig page"
-msgstr ""
 
 #: src/lib/components/sentiment/voteButtons.svelte
 msgid "Your vote was not recorded"
@@ -8014,37 +7821,25 @@ msgstr "<0/>으로 {0}"
 msgid "Remove vote"
 msgstr "투표 취소"
 
-#: src/lib/components/vp/VpOnchainSummary.svelte
-msgid "Nothing on-chain yet. Voting opens when a topic is published or a multisig is proposed."
-msgstr "아직 온체인에 아무것도 없습니다. 토픽이 게시되거나 멀티시그가 제안되면 투표가 시작됩니다."
-
-#: src/lib/components/vp/VpOnchainSummary.svelte
 #: src/lib/components/vp/VpSentimentCard.svelte
 msgid "Sentiment is recorded on-chain."
 msgstr "의견이 온체인에 기록됩니다."
 
 #: src/lib/components/vp/VpMultisigsCard.svelte
-#: src/lib/components/vp/VpOnchainSummary.svelte
 msgid "Multisigs"
 msgstr "멀티시그"
 
-#. placeholder {0}: rows.length
-#: src/lib/components/vp/VpOnchainSummary.svelte
-msgid "{0} total"
-msgstr "총 {0}개"
-
 #: src/lib/components/vp/VpMultisigsCard.svelte
-#: src/lib/components/vp/VpOnchainSummary.svelte
 msgid "One multisig is open for signatures."
 msgstr "서명을 기다리는 멀티시그 1개가 있습니다."
 
 #: src/lib/components/vp/VpMultisigsCard.svelte
-#: src/lib/components/vp/VpOnchainSummary.svelte
 msgid "No multisig is open for signatures."
 msgstr "서명을 기다리는 멀티시그가 없습니다."
 
-#. placeholder {0}: closed.length
-#: src/lib/components/vp/VpOnchainSummary.svelte
+#. placeholder {0}: closed
+#. placeholder {0}: closed
+#: src/lib/components/vp/VpMultisigsCard.svelte
 msgid "{0} closed"
 msgstr "{0}개 종료됨"
 
@@ -8056,7 +7851,6 @@ msgstr "서명 대기 중"
 msgid "Open the multisig"
 msgstr "멀티시그 열기"
 
-#: src/lib/components/vp/VpSentimentRow.svelte
 #: src/lib/components/vp/VpSentimentStepRow.svelte
 msgid "Closed"
 msgstr "종료됨"
@@ -8082,14 +7876,6 @@ msgstr "제안에 대한 의견"
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/sentiment/+page.svelte
 msgid "Do you support {0}: {1}?"
 msgstr "{0}: {1}을(를) 지지하시나요?"
-
-#~ msgid "The transactions that carry it out"
-#~ msgstr "이를 실행하는 트랜잭션"
-
-#~ msgid ""
-#~ "Each multisig is a separate on-chain action with its own poll. Signers weigh these\n"
-#~ "results when deciding whether to approve."
-#~ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/sentiment/+page.svelte
 msgid "Should this transaction be signed and executed?"
@@ -8120,13 +7906,6 @@ msgstr "현재"
 msgid "Behind the English text"
 msgstr "영어 원문보다 뒤처짐"
 
-#~ msgid ""
-#~ "Each multisig is a separate on-chain action with its own poll. Signers weigh these results\n"
-#~ "when deciding whether to approve."
-#~ msgstr ""
-#~ "각 멀티시그는 자체 투표가 있는 별도의 온체인 작업입니다. 서명자는 승인 여부를 결정할 때\n"
-#~ "이 결과를 고려합니다."
-
 #. placeholder {0}: tab.count
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.svelte
 msgid "Multisigs ({0})"
@@ -8142,24 +7921,18 @@ msgid "1 vote"
 msgstr "1표"
 
 #: src/lib/components/vp/VpSentimentCard.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "support"
 msgstr "찬성"
 
 #: src/lib/components/vp/VpSentimentCard.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "oppose"
 msgstr "반대"
 
 #: src/lib/components/vp/VpSentimentCard.svelte
 msgid "View sentiment"
 msgstr "의견 보기"
-
-#: src/lib/components/vp/VpMultisigsCard.svelte
-msgid "approvals signed"
-msgstr "승인 서명됨"
-
-#: src/lib/components/vp/VpMultisigsCard.svelte
-msgid "closed"
-msgstr "종료됨"
 
 #: src/lib/components/vp/VpMultisigsCard.svelte
 msgid "No step has been proposed on-chain yet."
@@ -8198,11 +7971,6 @@ msgstr "이전 시도 1건을 대체합니다."
 #: src/lib/components/vp/VpMsigStep.svelte
 msgid "Supersedes {0} earlier attempts."
 msgstr "이전 시도 {0}건을 대체합니다."
-
-#. placeholder {0}: requested
-#: src/lib/components/vp/VpMsigStep.svelte
-msgid "of {0} producers signed"
-msgstr "{0}명의 프로듀서 중 서명함"
 
 #: src/lib/components/vp/VpMsigStep.svelte
 msgid "See sentiment on this step"
@@ -8260,3 +8028,88 @@ msgstr "측정 기준"
 #: src/lib/components/vp/VpSentimentHero.svelte
 msgid "{0} accounts voted"
 msgstr "{0}개 계정이 투표함"
+
+#. placeholder {0}: threshold
+#. placeholder {1}: possible
+#: src/lib/components/msig/approvalprogress.svelte
+msgid "approved · {0} of {1} needed"
+msgstr "승인됨 · 필요한 {1}개 중 {0}개"
+
+#. placeholder {0}: requested
+#: src/lib/components/msig/approvalprogress.svelte
+msgid "of {0} requested approvals"
+msgstr "요청된 승인 {0}개 중"
+
+#. placeholder {0}: manager.possible
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+msgid "Needed of {0} possible"
+msgstr "가능한 {0}표 중 필요한 표"
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+msgid "outside current authority"
+msgstr "현재 권한 범위 밖"
+
+#. placeholder {0}: params.proposal
+#. placeholder {1}: params.proposer
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.ts
+msgid "Approval status, actions, and transaction data for the multisig proposal {0} by {1}."
+msgstr "멀티시그 제안 {1}이(가) 제출한 {0}의 승인 상태, 작업 및 거래 데이터입니다."
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+msgid "Copy hash"
+msgstr "해시 복사"
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/sentiment/+page.svelte
+msgid "Sentiment results could not be loaded."
+msgstr "감정 결과를 불러올 수 없습니다."
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/transaction/+page.svelte
+msgid "Proposed Transaction"
+msgstr "제안된 트랜잭션"
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/transaction/+page.svelte
+msgid "Copy transaction JSON"
+msgstr "트랜잭션 JSON 복사"
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/data/+page.svelte
+msgid "Proposal Data"
+msgstr "제안 데이터"
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/data/+page.svelte
+msgid "Copy proposal JSON"
+msgstr "제안 JSON 복사"
+
+#. placeholder {0}: liveStep.step
+#. placeholder {1}: liveStep.title
+#: src/lib/components/vp/VpSentimentCard.svelte
+msgid "Step {0}: {1}"
+msgstr "단계 {0}: {1}"
+
+#. placeholder {0}: liveStep.step
+#: src/lib/components/vp/VpSentimentCard.svelte
+msgid "Step {0} of the enactment"
+msgstr "제정의 {0}단계"
+
+#: src/lib/components/vp/VpSentimentCard.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+msgid "No votes have been cast on this poll."
+msgstr "이 투표에 투표한 사람이 없습니다."
+
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+msgid "1 vote recorded on-chain"
+msgstr "온체인에 1표 기록됨"
+
+#. placeholder {0}: sentimentStats.totalVotes
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+msgid "{0} votes recorded on-chain"
+msgstr "온체인에 {0}표 기록됨"
+
+#. placeholder {0}: data.vp.step.number
+#. placeholder {1}: data.vp.step.total
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
+msgid "Step {0} of {1} · Implements <0>{0}: {1}</0>"
+msgstr "{1}단계 중 {0}단계 · <0>{0}: {1}</0> 구현"
+
+#: src/lib/components/vp/VpSentimentStepRow.svelte
+msgid "View full results"
+msgstr "전체 결과 보기"
