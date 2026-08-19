@@ -171,5 +171,4 @@
 			</div>
 		</Card>
 	{/if}
-
 </Stack>

@@ -163,12 +163,7 @@ export class TopicSentimentState {
 		}
 	}
 
-	async loadTopicVotes(
-		topicId: NameType,
-		page = 1,
-		limit = 50,
-		sort?: MetricLens
-	): Promise<void> {
+	async loadTopicVotes(topicId: NameType, page = 1, limit = 50, sort?: MetricLens): Promise<void> {
 		if (!this.refreshing) {
 			this.loading = true;
 		}

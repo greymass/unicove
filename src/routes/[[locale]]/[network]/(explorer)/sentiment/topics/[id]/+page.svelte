@@ -192,7 +192,11 @@
 							/>
 						{/each}
 					</div>
-					<MetricLensDetail lens={activeLens} stats={statistics.metrics[activeLens]} {systemSymbol} />
+					<MetricLensDetail
+						lens={activeLens}
+						stats={statistics.metrics[activeLens]}
+						{systemSymbol}
+					/>
 				</Stack>
 			{/if}
 

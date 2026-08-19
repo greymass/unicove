@@ -18,8 +18,7 @@
 		systemSymbol: Asset.Symbol;
 	}
 
-	const { votes, lens, totalVotes, supportVotes, oppositionVotes, systemSymbol }: Props =
-		$props();
+	const { votes, lens, totalVotes, supportVotes, oppositionVotes, systemSymbol }: Props = $props();
 	const context = getContext<UnicoveContext>('state');
 
 	const columns: { key: MetricLens; label: string }[] = $derived([
