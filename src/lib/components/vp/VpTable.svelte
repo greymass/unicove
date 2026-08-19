@@ -6,6 +6,8 @@
 	const { children }: Props = $props();
 </script>
 
-<table class="overflow-x-auto">
-	{@render children?.()}
-</table>
+<div class="overflow-x-auto">
+	<table>
+		{@render children?.()}
+	</table>
+</div>

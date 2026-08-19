@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
-	import { Stack } from 'unicove-components';
+	import { Card, Stack } from 'unicove-components';
 	import { page } from '$app/state';
 	import { localizePath } from '$lib/utils/url';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
@@ -22,9 +22,13 @@
 </script>
 
 <Stack class="max-w-[70ch] gap-6">
-	<VpLanguageNav summary={data.summary} current={data.lang} />
 	{#if data.stale}
 		<VpStaleNotice {englishHref} />
 	{/if}
-	<VpMarkdown body={data.body} slug={data.summary.slug} {basePath} branch={data.branch} />
+	<Card class="p-6 sm:p-8">
+		<div class="mb-6">
+			<VpLanguageNav summary={data.summary} current={data.lang} />
+		</div>
+		<VpMarkdown body={data.body} slug={data.summary.slug} {basePath} branch={data.branch} />
+	</Card>
 </Stack>

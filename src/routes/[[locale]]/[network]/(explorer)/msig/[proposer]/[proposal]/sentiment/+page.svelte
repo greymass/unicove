@@ -103,10 +103,28 @@
 					{systemSymbol}
 				/>
 			{/if}
-		{:else}
+		{:else if sentimentState.error}
 			<Card>
-				<p class="text-on-surface-variant text-center">Loading sentiment...</p>
+				<Stack class="items-start gap-2">
+					<p class="text-on-surface-variant">Sentiment results could not be loaded.</p>
+					<Button
+						variant="secondary"
+						onclick={() => sentimentState.loadMsig(data.proposal.proposer, data.proposal.name)}
+					>
+						Try Again
+					</Button>
+				</Stack>
 			</Card>
+		{:else}
+			<Stack class="animate-pulse gap-3">
+				<div class="bg-surface-container h-7 w-40 rounded"></div>
+				<div class="grid gap-6 @xl:grid-cols-3">
+					<div class="bg-surface-container h-32 rounded-xl"></div>
+					<div class="bg-surface-container h-32 rounded-xl"></div>
+					<div class="bg-surface-container h-32 rounded-xl"></div>
+				</div>
+				<div class="bg-surface-container h-24 rounded-xl"></div>
+			</Stack>
 		{/if}
 	</Stack>
 </article>

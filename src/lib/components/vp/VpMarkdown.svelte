@@ -69,8 +69,15 @@
 	.vp-prose {
 		line-height: 1.7;
 	}
+	.vp-prose > :global(:first-child) {
+		margin-block-start: 0;
+	}
 	.vp-prose :global(p) {
 		margin-block: 0.75rem;
+		color: var(--color-on-surface);
+	}
+	.vp-prose :global(blockquote p) {
+		color: inherit;
 	}
 	.vp-prose :global(ul),
 	.vp-prose :global(ol) {
@@ -85,6 +92,7 @@
 	}
 	.vp-prose :global(li) {
 		margin-block: 0.375rem;
+		color: var(--color-on-surface);
 	}
 	.vp-prose :global(table) {
 		margin-block: 1rem;
@@ -97,5 +105,9 @@
 	}
 	.vp-prose :global(hr) {
 		margin-block: 2rem;
+	}
+	/* Long unbreakable tokens (hashes, account paths) must wrap instead of stretching the page. */
+	.vp-prose :global(code) {
+		overflow-wrap: anywhere;
 	}
 </style>

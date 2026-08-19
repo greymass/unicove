@@ -12,6 +12,7 @@ import dayjs from 'dayjs';
 import type { UnicoveContext } from '$lib/state/client.svelte';
 import type { WharfState } from '$lib/state/client/wharf.svelte';
 import type { NetworkState } from '$lib/state/network.svelte';
+import { bindingMsigAuthority, type MsigAuthority } from '$lib/wharf/msig/authority';
 import * as SystemContract from '$lib/wharf/contracts/system';
 import type { TransactResult } from '@wharfkit/session';
 
@@ -27,6 +28,7 @@ type Proposal = {
 		requested_approvals: PermissionLevel[];
 	};
 	transaction: Transaction;
+	authorities?: MsigAuthority[];
 	executed_at?: string;
 	executed_by?: string;
 	executed_trx_id?: string;
@@ -67,7 +69,39 @@ export class ApprovalManager {
 	participants = $derived([...this.approvals.provided, ...this.approvals.requested]);
 	totalRequested = $derived(this.approvals.provided.length + this.approvals.requested.length);
 	totalApproved = $derived(this.approvals.provided.length);
-	approvalRatio = $derived((this.totalApproved / this.totalRequested) * 100);
+
+	binding = $derived.by(() => bindingMsigAuthority(this.proposal.authorities));
+	threshold = $derived(this.binding?.threshold ?? null);
+	possible = $derived(this.binding?.possible ?? null);
+	// Live approvals override the server snapshot; recursive verdicts survive it.
+	satisfied = $derived.by(() => {
+		const binding = this.binding;
+		if (!binding) return null;
+		const provided = new Set(this.approvals.provided.map((a) => String(a)));
+		return binding.entries.reduce((sum, entry) => {
+			const key = `${entry.actor}@${entry.permission}`;
+			const counts =
+				entry.kind === 'account'
+					? provided.has(key) || (entry.approved && !this.initialProvided.has(key))
+					: entry.approved;
+			return counts ? sum + entry.weight : sum;
+		}, 0);
+	});
+	approvalRatio = $derived.by(() => {
+		if (this.threshold && this.satisfied !== null) {
+			return Math.min(100, (this.satisfied / this.threshold) * 100);
+		}
+		return (this.totalApproved / this.totalRequested) * 100;
+	});
+	private initialProvided: Set<string>;
+
+	inBindingRoster = (account: PermissionLevel) => {
+		if (!this.binding) return true;
+		return this.binding.entries.some(
+			(entry) =>
+				entry.kind === 'account' && `${entry.actor}@${entry.permission}` === String(account)
+		);
+	};
 
 	// States related to user
 	userHasApproved = $derived.by(() =>
@@ -89,6 +123,7 @@ export class ApprovalManager {
 			requested: proposal.approvals.requested_approvals,
 			provided: proposal.approvals.provided_approvals
 		};
+		this.initialProvided = new Set(proposal.approvals.provided_approvals.map((a) => String(a)));
 	}
 
 	async sync(network: NetworkState, wharf: WharfState) {

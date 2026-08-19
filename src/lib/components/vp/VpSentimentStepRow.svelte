@@ -90,4 +90,11 @@
 			/>
 		</div>
 	{/if}
+
+	<a
+		class="text-primary border-outline mt-4 block border-t pt-3 text-sm font-medium"
+		href={context.urlPath(`${row.msigPath}/sentiment`)}
+	>
+		View full results
+	</a>
 </Card>

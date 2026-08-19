@@ -25,8 +25,13 @@
 
 <Stack>
 	<Stack>
-		<h2 class="text-title">Proposed Actions ({variant})</h2>
+		<h2 class="text-title">Proposed Actions ({data.proposal.transaction.actions.length})</h2>
 		<SelectActionVariant />
+		{#if manager.readable.length === 0}
+			{#each data.proposal.transaction.actions as action (action)}
+				<div class="bg-surface-container h-24 animate-pulse rounded-xl"></div>
+			{/each}
+		{/if}
 		{#each manager.readable as decodedAction}
 			{@const contract = String(decodedAction.action.account)}
 			{@const action = String(decodedAction.action.name)}

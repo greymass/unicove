@@ -46,7 +46,7 @@
 	<PillGroup options={tabOptions} />
 
 	{#if isLanding}
-		<div class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_20rem]">
+		<div class="grid gap-8 lg:grid-cols-[minmax(0,70ch)_minmax(20rem,1fr)]">
 			<div class="min-w-0">
 				{@render children?.()}
 			</div>
@@ -55,7 +55,7 @@
 				{#if data.summary.msigs.length}
 					<VpMultisigsCard summary={data.summary} {basePath} />
 				{/if}
-				{#if sentimentEnabled && data.summary.sentiment.length}
+				{#if sentimentEnabled && (data.summary.sentiment.length || data.summary.msigs.some((m) => m.status === 'active'))}
 					<VpSentimentCard summary={data.summary} {basePath} />
 				{/if}
 				{#if !hasOnchain}

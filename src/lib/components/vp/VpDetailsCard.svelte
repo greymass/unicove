@@ -26,7 +26,11 @@
 <Card>
 	<h3 class="text-label-sm text-muted mb-3">Details</h3>
 	<DL>
-		<DLRow title="Status"><DD><VpStatusChip status={summary.status} /></DD></DLRow>
+		<DLRow title="Status">
+			<DD>
+				<span class="flex justify-end"><VpStatusChip status={summary.status} /></span>
+			</DD>
+		</DLRow>
 		<DLRow title="Created" description={formatDate(summary.created)} />
 		{#if summary.updated}
 			<DLRow title="Updated" description={formatDate(summary.updated)} />

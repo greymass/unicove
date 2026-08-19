@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Stack } from 'unicove-components';
+	import { Card, Stack } from 'unicove-components';
 	import PillGroup from '$lib/components/navigation/pillgroup.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
 	import { getContext, onMount, setContext } from 'svelte';
@@ -30,11 +30,7 @@
 		let urlBase = context.urlPath(`/msig/${data.proposal.proposer}/${data.proposal.name}`);
 		const tabs = [{ href: urlBase, text: 'Status' }];
 		if (context.network.supports('sentiment')) {
-			const votes = sentimentState.currentMsig?.statistics.totalVotes;
-			tabs.push({
-				href: `${urlBase}/sentiment`,
-				text: votes !== undefined ? `Sentiment (${votes})` : 'Sentiment'
-			});
+			tabs.push({ href: `${urlBase}/sentiment`, text: 'Sentiment' });
 		}
 		tabs.push(
 			{ href: `${urlBase}/actions`, text: `Actions (${data.proposal.transaction.actions.length})` },
@@ -47,12 +43,40 @@
 
 <Stack class="@container">
 	{#if data.vp}
-		<p class="text-muted text-sm">
-			Implements <a
-				class="text-primary hover:underline"
-				href={context.urlPath(`/proposals/${data.vp.slug}`)}>{data.vp.vp}: {data.vp.title}</a
-			>
-		</p>
+		<Card>
+			{#if data.vp.step}
+				{@const live = data.proposal.status === 'proposed'}
+				<div class="flex items-center gap-3">
+					<span
+						class="grid size-9 shrink-0 place-items-center rounded-full border-2 text-sm font-semibold {live
+							? 'border-primary text-primary'
+							: 'border-outline text-muted'}"
+					>
+						{data.vp.step.number}
+					</span>
+					<div class="min-w-0">
+						{#if data.vp.step.title}
+							<p class="text-title">{data.vp.step.title}</p>
+						{/if}
+						<p class="text-muted text-sm">
+							Step {data.vp.step.number} of {data.vp.step.total} · Implements
+							<a
+								class="text-primary hover:underline"
+								href={context.urlPath(`/proposals/${data.vp.slug}`)}
+								>{data.vp.vp}: {data.vp.title}</a
+							>
+						</p>
+					</div>
+				</div>
+			{:else}
+				<p class="text-muted text-sm">
+					Implements <a
+						class="text-primary hover:underline"
+						href={context.urlPath(`/proposals/${data.vp.slug}`)}>{data.vp.vp}: {data.vp.title}</a
+					>
+				</p>
+			{/if}
+		</Card>
 	{/if}
 	<PillGroup options={tabOptions} />
 	{@render children?.()}

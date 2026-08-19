@@ -46,7 +46,7 @@
 		{#each data.proposals as proposal (proposal.vp)}
 			{@const card = vpCardText(proposal, locale)}
 			<a class="group block" href={urlPath(`/proposals/${proposal.vp.toLowerCase()}`)}>
-				<Card class="group-hover:bg-surface-container-high transition-colors">
+				<Card class="group-hover:bg-surface-container transition-colors">
 					<Stack class="gap-2">
 						<div class="flex flex-wrap items-center gap-3">
 							<span class="text-label-sm text-muted">{proposal.vp}</span>
@@ -61,7 +61,7 @@
 						</div>
 						<span class="text-title group-hover:underline">{card.title}</span>
 						{#if card.excerpt}
-							<p class="text-muted line-clamp-2 text-sm">{card.excerpt}</p>
+							<p class="text-muted line-clamp-2 max-w-[60ch] text-sm">{card.excerpt}</p>
 						{/if}
 					</Stack>
 				</Card>

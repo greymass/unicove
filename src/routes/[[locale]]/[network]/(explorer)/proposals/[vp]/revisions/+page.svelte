@@ -16,6 +16,8 @@
 	const formatDate = (value: string) =>
 		formatDateTime(parseVpDate(value), locale, { dateStyle: 'medium', timeStyle: undefined });
 	const current = $derived(data.revisions.length ? data.revisions[0].version : null);
+	const languageName = (lang: string) =>
+		new Intl.DisplayNames([lang], { type: 'language' }).of(lang) || lang;
 </script>
 
 <Stack class="max-w-[70ch] gap-8">
@@ -30,7 +32,7 @@
 							{formatDate(revision.date)}{revision.version === current ? ' · current' : ''}
 						</span>
 					</div>
-					<p class="text-muted text-sm">{revision.summary}</p>
+					<p class="text-muted max-w-[60ch] text-sm">{revision.summary}</p>
 				</Card>
 			{/each}
 		</Stack>
@@ -45,7 +47,7 @@
 				<Stack class="gap-2">
 					{#each data.summary.translations as translation (translation.lang)}
 						<div class="flex items-baseline justify-between gap-2 text-sm">
-							<span>{translation.lang}</span>
+							<span>{languageName(translation.lang)}</span>
 							<span class="text-muted">
 								{translation.current ? 'Current' : 'Behind the English text'}
 							</span>

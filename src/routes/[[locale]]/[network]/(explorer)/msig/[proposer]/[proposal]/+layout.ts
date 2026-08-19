@@ -36,6 +36,10 @@ export const load: LayoutLoad = async ({ data, fetch, params, parent }) => {
 		header: {
 			copyData: params.proposal
 		},
+		pageMetaTags: {
+			title: `${params.proposer}/${params.proposal} | Multisig on the ${network.chain.name} Network`,
+			description: `Approval status, actions, and transaction data for the multisig proposal ${params.proposal} by ${params.proposer}.`
+		},
 		proposal: {
 			approvals: {
 				proposal_name: Name.from(params.proposal),
@@ -47,6 +51,7 @@ export const load: LayoutLoad = async ({ data, fetch, params, parent }) => {
 			status: json.status || 'proposed',
 			hash: transaction.id,
 			transaction,
+			authorities: json.authorities ?? [],
 			executed_at: json.executed_at,
 			executed_by: json.executed_by,
 			executed_trx_id: json.executed_trx_id
