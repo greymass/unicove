@@ -3,6 +3,7 @@
 	import { getContext } from 'svelte';
 	import { Stack } from 'unicove-components';
 	import { Name } from '@wharfkit/antelope';
+	import { page } from '$app/state';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import VpSentimentHero from '$lib/components/vp/VpSentimentHero.svelte';
 	import VpSentimentStepRow from '$lib/components/vp/VpSentimentStepRow.svelte';
@@ -23,6 +24,7 @@
 	const context = getContext<UnicoveContext>('state');
 
 	const locale = $derived(context.settings.data.locale);
+	const basePath = $derived(context.urlPath(`/proposals/${page.params.vp}`));
 	const topicRows = $derived(vpProposalTopicRows(data.summary));
 	const msigRows = $derived(vpMsigPollRows(data.summary, locale));
 	const hasContent = $derived(topicRows.length > 0 || msigRows.length > 0);
@@ -81,6 +83,7 @@
 				{#each topicRows as row (vpSentimentRowKey(row))}
 					<VpSentimentHero
 						{row}
+						{basePath}
 						question="Do you support {data.summary.vp}: {data.summary.title}?"
 						currentVote={votes[vpSentimentRowKey(row)]}
 						onVoted={(voteType) => (votes[vpSentimentRowKey(row)] = voteType)}
@@ -99,6 +102,7 @@
 				{#each msigRows as row (vpSentimentRowKey(row))}
 					<VpSentimentStepRow
 						{row}
+						{basePath}
 						question={stepQuestion(row)}
 						currentVote={votes[vpSentimentRowKey(row)]}
 						onVoted={(voteType) => (votes[vpSentimentRowKey(row)] = voteType)}

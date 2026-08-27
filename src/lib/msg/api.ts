@@ -69,6 +69,23 @@ export async function fetchMessages(
 	return get(fetchFn, `${apiBase}/get_messages?${params}`);
 }
 
+export async function checkDiscussionAvailable(
+	fetchFn: typeof fetch,
+	apiBase: string
+): Promise<void> {
+	const params = new URLSearchParams({ channel: GOVERNANCE_CHANNEL, tags: 'probe,probe,probe' });
+	await get(fetchFn, `${apiBase}/get_tag_summary?${params}`);
+}
+
+export async function resolveEmptyQuery<T>(
+	fetchFn: typeof fetch,
+	apiBase: string,
+	probe: boolean
+): Promise<T[]> {
+	if (probe) await checkDiscussionAvailable(fetchFn, apiBase);
+	return [];
+}
+
 export async function fetchTagSummaries(
 	fetchFn: typeof fetch,
 	apiBase: string,

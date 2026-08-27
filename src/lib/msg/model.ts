@@ -66,7 +66,10 @@ export function byteLength(text: string): number {
 }
 
 export function normalizeBody(body: string): string {
-	return body.replace(/\r\n?/g, '\n').replace(/\t/g, '    ');
+	return body
+		.replace(/\r\n?/g, '\n')
+		.replace(/[\u2028\u2029]/g, '\n')
+		.replace(/\t/g, '    ');
 }
 
 // U+202A..U+202E and U+2066..U+2069 are rejected by the on-chain validator

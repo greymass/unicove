@@ -6,6 +6,8 @@
 	import MetricOverviewCard from '$lib/components/sentiment/MetricOverviewCard.svelte';
 	import MetricLensDetail from '$lib/components/sentiment/MetricLensDetail.svelte';
 	import MetricParticipants from '$lib/components/sentiment/MetricParticipants.svelte';
+	import DiscussionCard from '$lib/components/discussion/DiscussionCard.svelte';
+	import { msigDescriptor } from '$lib/discussion/targets';
 	import type { MsigSentimentState } from '$lib/state/sentiment/msig.svelte';
 	import type { MetricLens } from '$lib/types/sentiment';
 
@@ -13,6 +15,9 @@
 	const { data } = $props();
 
 	const sentimentState = getContext<MsigSentimentState>('msig-sentiment');
+	const descriptor = $derived(
+		msigDescriptor(data.proposal.proposer, data.proposal.name, data.proposal.status)
+	);
 
 	let activeLens = $state<MetricLens>('system');
 	const systemSymbol = $derived(context.network.chain.systemToken!.symbol);
@@ -101,6 +106,13 @@
 					supportVotes={statistics.supportVotes}
 					oppositionVotes={statistics.oppositionVotes}
 					{systemSymbol}
+				/>
+			{/if}
+
+			{#if context.network.supports('discussion')}
+				<DiscussionCard
+					tuples={[descriptor.tuple]}
+					href={context.urlPath(`/msig/${data.proposal.proposer}/${data.proposal.name}/discussion`)}
 				/>
 			{/if}
 		{:else if sentimentState.error}

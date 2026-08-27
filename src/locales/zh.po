@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2026-08-19T22:32:11.165Z\n"
+"PO-Revision-Date: 2026-08-27T19:07:27.537Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -509,12 +509,12 @@ msgstr "转账"
 msgid "+ {0} ms (CPU)"
 msgstr "+ {0} 毫秒 (CPU)"
 
-#. placeholder {0}: data.powup_net
+#. placeholder {0}: account.weight
+#. placeholder {0}: key.weight
+#. placeholder {0}: account.weight
+#. placeholder {0}: key.weight
 #. placeholder {0}: data.powup_cpu
-#. placeholder {0}: key.weight
-#. placeholder {0}: account.weight
-#. placeholder {0}: key.weight
-#. placeholder {0}: account.weight
+#. placeholder {0}: data.powup_net
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio/newaccount.svelte
@@ -763,8 +763,8 @@ msgstr "详情"
 msgid "Network Fees"
 msgstr "网络费用"
 
-#. placeholder {0}: market.network.currency.symbol.code
 #. placeholder {0}: data.network.chain.systemToken?.symbol.code || ''
+#. placeholder {0}: market.network.currency.symbol.code
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 msgid "Market Cap ({0})"
@@ -1218,13 +1218,14 @@ msgstr "Unicove 的内部状态，用于调试目的"
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/navigation.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+layout.svelte
 msgid "Overview"
 msgstr "概览"
 
 #. placeholder {0}: data.abi.actions.length
 #. placeholder {0}: data.proposal.transaction.actions.length
-#. placeholder {0}: data.transaction.transaction.actions.length
 #. placeholder {0}: data.transaction.filtered.length
+#. placeholder {0}: data.transaction.transaction.actions.length
 #. placeholder {0}: data.transaction.transaction.actions.length
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
@@ -1530,11 +1531,13 @@ msgstr "文本"
 msgid "Side by side"
 msgstr "并排"
 
+#: src/lib/components/discussion/Comment.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/buttons.svelte
 msgid "Delete"
 msgstr "删除"
 
 #: src/lib/components/accountswitch.svelte
+#: src/lib/components/discussion/Comment.svelte
 #: src/lib/components/elements/proposalname.svelte
 #: src/lib/components/elements/suspiciousmemo.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
@@ -1829,10 +1832,10 @@ msgstr "药丸选择"
 msgid "Select a date range"
 msgstr "选择日期范围"
 
-#. placeholder {0}: JSON.stringify(tokenSelected, null, 2)
-#. placeholder {0}: imageOptionSelected.label
-#. placeholder {0}: selectedFormOption.label
 #. placeholder {0}: selected.label
+#. placeholder {0}: selectedFormOption.label
+#. placeholder {0}: imageOptionSelected.label
+#. placeholder {0}: JSON.stringify(tokenSelected, null, 2)
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
@@ -2213,8 +2216,8 @@ msgstr "此构建的 wharfkit/cli 生成的合约以及它使用的链上帐户�
 msgid "Refresh"
 msgstr "刷新"
 
-#. placeholder {0}: refreshed
 #. placeholder {0}: formatDate(proposal.updated)
+#. placeholder {0}: refreshed
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/market/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.svelte
 msgid "Updated {0}"
@@ -2921,7 +2924,7 @@ msgid "No proposals found."
 msgstr "未找到提案。"
 
 #. placeholder {0}: new Date(sentiment.currentTopic.topic.lastUpdated).toLocaleString()
-#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+layout.ts
 msgid "Last updated {0}"
 msgstr "上次更新时间 {0}"
 
@@ -2929,11 +2932,11 @@ msgstr "上次更新时间 {0}"
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.ts
-#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+layout.ts
 msgid "Sentiment"
 msgstr "情绪"
 
-#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+layout.ts
 msgid "Overview and statistics for community sentiment on the"
 msgstr "关于社区情绪的概述和统计数据"
 
@@ -2998,10 +3001,10 @@ msgstr "没有反对票"
 msgid "Loading topic..."
 msgstr "正在加载主题..."
 
-#. placeholder {0}: data.network.token.name
-#. placeholder {1}: data.network.getRamToken().name
 #. placeholder {0}: String(network.chain.systemToken?.symbol.name)
 #. placeholder {1}: String(ramtoken.name)
+#. placeholder {0}: data.network.token.name
+#. placeholder {1}: data.network.getRamToken().name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/charts.svelte
 msgid "Swap {0}/{1}"
@@ -3017,8 +3020,8 @@ msgstr "兑换 {0}/{1}"
 msgid "Available"
 msgstr "可用"
 
-#. placeholder {0}: String(data.quote.symbol.name)
 #. placeholder {0}: props.network.token.name
+#. placeholder {0}: String(data.quote.symbol.name)
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/legacy-token-swap.svelte
 msgid "Swap to {0}"
@@ -3061,6 +3064,7 @@ msgstr "加载主题失败"
 msgid "View All Proposals"
 msgstr "查看所有提案"
 
+#: src/lib/components/discussion/Thread.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/refund/+page.svelte
@@ -3599,7 +3603,7 @@ msgstr "获取代币"
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
-#. placeholder {0}: String(network.token.symbol.name)
+#. placeholder {0}: symbol.name
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
@@ -3618,6 +3622,7 @@ msgstr "KB (RAM)：代币化数据存储"
 msgid "One {0} of RAM represents ownership rights over 1000 bytes of the network's total blockchain storage capacity. {1} can be swapped with {2} by visiting the RAM Market."
 msgstr "1 个 {0} RAM 代表对网络总区块链存储容量 1000 字节的所有权。 可以通过访问 RAM 市场将 {1} 与 {2} 交换。"
 
+#: src/lib/components/discussion/Comment.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/articles.svelte
 msgid "Read more"
 msgstr "阅读更多"
@@ -3629,7 +3634,7 @@ msgstr "<0>Unicove -</0> {0} 网络钱包和区块浏览器"
 
 #. placeholder {0}: network.chain.name
 #. placeholder {0}: networkName
-#. placeholder {0}: networkName
+#. placeholder {0}: network.chain.name
 #: src/routes/+layout.server.ts
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
@@ -5569,6 +5574,7 @@ msgstr "活动显示格式"
 msgid "The default view format for account activity."
 msgstr "帐户活动的默认视图格式。"
 
+#: src/lib/components/discussion/Comment.svelte
 #: src/lib/components/elements/actiontable.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
 msgid "Show less"
@@ -5887,8 +5893,8 @@ msgstr "{0}您有 {1} 可供回收。"
 msgid "You have been outbid on this name.<0/>"
 msgstr "您在这个名字上的出价已被超过。<0/>"
 
-#. placeholder {0}: String(manager.refundAmount)
 #. placeholder {0}: String(tracked.refund.amount)
+#. placeholder {0}: String(manager.refundAmount)
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/refund/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
 msgid "Claim Refund ({0})"
@@ -6888,8 +6894,11 @@ msgstr "刚接触 {0}？<0>改为创建账户</0>"
 #: src/routes/[[locale]]/[network]/(account)/signup/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/account/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/contract/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/discussion/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.server.ts
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.server.ts
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/discussion/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/discussion/+page.ts
 msgid "Not found"
 msgstr "未找到"
 
@@ -7746,6 +7755,8 @@ msgstr "变更历史"
 msgid "{0} V"
 msgstr "{0} 票"
 
+#: src/lib/components/discussion/Comment.svelte
+#: src/lib/components/discussion/Thread.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.svelte
 msgid "Proposal"
 msgstr "提案"
@@ -7772,6 +7783,7 @@ msgstr "您的投票未被记录"
 msgid "Connect a wallet to add your voice. Results stay visible either way."
 msgstr "连接钱包来表达您的意见。无论如何，结果都会保持可见。"
 
+#: src/lib/components/discussion/Composer.svelte
 #: src/lib/components/sentiment/voteButtons.svelte
 msgid "Waiting for your wallet to sign"
 msgstr "等待您的钱包签名"
@@ -8063,6 +8075,8 @@ msgstr "复制提案 JSON"
 
 #. placeholder {0}: liveStep.step
 #. placeholder {1}: liveStep.title
+#. placeholder {0}: step.step
+#. placeholder {1}: step.title
 #: src/lib/components/vp/VpSentimentCard.svelte
 msgid "Step {0}: {1}"
 msgstr "步骤 {0}：{1}"
@@ -8095,3 +8109,201 @@ msgstr "第 {0} 步，共 {1} 步 · 实施 <0>{0}：{1}</0>"
 #: src/lib/components/vp/VpSentimentStepRow.svelte
 msgid "View full results"
 msgstr "查看完整结果"
+
+#: src/lib/components/discussion/Comment.svelte
+msgid "Confirming"
+msgstr ""
+
+#: src/lib/components/discussion/DiscussionCard.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/discussion/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/discussion/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+layout.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/discussion/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/discussion/+page.ts
+msgid "Discussion"
+msgstr ""
+
+#: src/lib/components/discussion/DiscussionCard.svelte
+msgid "1 comment"
+msgstr ""
+
+#. placeholder {0}: summary.total
+#. placeholder {0}: total
+#. placeholder {0}: total
+#. placeholder {0}: PROPOSAL.topic.comments
+#. placeholder {0}: count
+#. placeholder {0}: summary.total
+#: src/lib/components/discussion/DiscussionCard.svelte
+msgid "{0} comments"
+msgstr ""
+
+#: src/lib/discussion/thread.svelte.ts
+msgid "Z"
+msgstr ""
+
+#: src/lib/components/discussion/Comment.svelte
+msgid "<0/> Supported"
+msgstr ""
+
+#: src/lib/components/discussion/Comment.svelte
+msgid "<0/> Opposed"
+msgstr ""
+
+#: src/lib/components/discussion/Comment.svelte
+msgid "Posted, awaiting indexer"
+msgstr ""
+
+#: src/lib/components/discussion/Comment.svelte
+msgid "(edited)"
+msgstr ""
+
+#: src/lib/components/discussion/Comment.svelte
+msgid "View transaction"
+msgstr ""
+
+#: src/lib/components/discussion/Composer.svelte
+msgid "Connect a wallet to join the discussion. Comments stay visible either way."
+msgstr ""
+
+#: src/lib/components/discussion/Composer.svelte
+msgid "This account cannot post in the governance channel."
+msgstr ""
+
+#: src/lib/components/discussion/Composer.svelte
+msgid "<0/> Commenting as a supporter"
+msgstr ""
+
+#: src/lib/components/discussion/Composer.svelte
+msgid "<0/> Commenting as an opponent"
+msgstr ""
+
+#: src/lib/components/discussion/Composer.svelte
+msgid "You have not voted on this yet. Your comment posts either way."
+msgstr ""
+
+#: src/lib/components/discussion/Composer.svelte
+msgid "Write a comment"
+msgstr ""
+
+#: src/lib/components/discussion/Comment.svelte
+#: src/lib/components/discussion/Composer.svelte
+msgid "This comment is longer than the channel allows."
+msgstr ""
+
+#: src/lib/components/discussion/Composer.svelte
+msgid "Post comment"
+msgstr ""
+
+#. placeholder {0}: summary.total
+#. placeholder {0}: summary.total
+#: src/lib/components/discussion/DiscussionCard.svelte
+msgid "Read the discussion ({0} comments)"
+msgstr ""
+
+#. placeholder {0}: discussion.total
+#. placeholder {0}: discussion.total
+#. placeholder {0}: discussion.total
+#. placeholder {0}: discussion.total
+#. placeholder {0}: discussion.total
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+layout.svelte
+msgid "Discussion ({0})"
+msgstr ""
+
+#: src/lib/components/discussion/DiscussionCard.svelte
+#: src/lib/components/discussion/DiscussionCard.svelte
+#: src/lib/components/discussion/Thread.svelte
+msgid "Discussion is unavailable on this network."
+msgstr ""
+
+#: src/lib/components/discussion/DiscussionCard.svelte
+#: src/lib/components/discussion/DiscussionCard.svelte
+#: src/lib/components/vp/VpSentimentHero.svelte
+#: src/lib/components/vp/VpSentimentStepRow.svelte
+msgid "Read the discussion"
+msgstr ""
+
+#: src/lib/components/discussion/DiscussionCard.svelte
+msgid "Read the discussion (1 comment)"
+msgstr ""
+
+#: src/lib/components/discussion/DiscussionCard.svelte
+#: src/lib/components/discussion/Thread.svelte
+msgid "No comments yet."
+msgstr ""
+
+#: src/lib/components/discussion/Thread.svelte
+msgid "All"
+msgstr ""
+
+#. placeholder {0}: d.step
+#: src/lib/components/discussion/Thread.svelte
+msgid "Step {0}<0/>"
+msgstr ""
+
+#: src/lib/components/discussion/Thread.svelte
+msgid "Load earlier comments"
+msgstr ""
+
+#: src/lib/components/discussion/Comment.svelte
+msgid "just now"
+msgstr ""
+
+#: src/lib/components/discussion/Comment.svelte
+msgid "Edit comment"
+msgstr ""
+
+#: src/lib/components/discussion/Comment.svelte
+#: src/lib/components/discussion/Composer.svelte
+msgid ""
+"This comment contains a bidirectional control character, which the chain rejects. Remove it\n"
+"to post."
+msgstr ""
+
+#: src/lib/components/discussion/Comment.svelte
+msgid "Save"
+msgstr ""
+
+#: src/lib/components/discussion/Comment.svelte
+msgid "Edit"
+msgstr ""
+
+#: src/lib/components/discussion/Composer.svelte
+msgid ""
+"Commenting needs at least <0/> held liquid.\n"
+"Your account holds <1/>."
+msgstr ""
+
+#: src/lib/components/discussion/Composer.svelte
+msgid "Comment on <0>Step {0}<0/></0>"
+msgstr ""
+
+#: src/lib/components/discussion/Composer.svelte
+msgid "Plain text only. Line breaks are kept."
+msgstr ""
+
+#. placeholder {0}: formatBytes(netEstimate)
+#. placeholder {1}: formatBytes( netAvailable ?? 0 )
+#: src/lib/components/discussion/Composer.svelte
+msgid "This comment needs about {0} of NET and your account has {1} available. Stake or power up NET, or shorten the comment."
+msgstr ""
+
+#. placeholder {0}: formatBytes(netEstimate)
+#: src/lib/components/discussion/Composer.svelte
+msgid "Long comments use more NET. This one needs about {0}."
+msgstr ""
+
+#: src/lib/components/discussion/Composer.svelte
+msgid ""
+"Comments are on-chain messages signed by your account and are public and permanent. Posting\n"
+"requires 10 A held liquid. Moderators remove comments that are spam, impersonation, harassment, or\n"
+"unrelated to the target, and block accounts that repeat it. A removed comment stays on chain and\n"
+"stops appearing on Unicove."
+msgstr ""
+
+#: src/lib/components/discussion/Composer.svelte
+msgid "This target is closed. Its discussion stays readable."
+msgstr ""

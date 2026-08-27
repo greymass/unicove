@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2026-08-19T22:31:58.015Z\n"
+"PO-Revision-Date: 2026-08-27T19:07:27.527Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -509,12 +509,12 @@ msgstr "Transfer"
 msgid "+ {0} ms (CPU)"
 msgstr "+ {0} ms (CPU)"
 
-#. placeholder {0}: data.powup_net
+#. placeholder {0}: account.weight
+#. placeholder {0}: key.weight
+#. placeholder {0}: account.weight
+#. placeholder {0}: key.weight
 #. placeholder {0}: data.powup_cpu
-#. placeholder {0}: key.weight
-#. placeholder {0}: account.weight
-#. placeholder {0}: key.weight
-#. placeholder {0}: account.weight
+#. placeholder {0}: data.powup_net
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio/newaccount.svelte
@@ -765,8 +765,8 @@ msgstr "Details"
 msgid "Network Fees"
 msgstr "Network Fees"
 
-#. placeholder {0}: market.network.currency.symbol.code
 #. placeholder {0}: data.network.chain.systemToken?.symbol.code || ''
+#. placeholder {0}: market.network.currency.symbol.code
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 msgid "Market Cap ({0})"
@@ -1229,13 +1229,14 @@ msgstr "The internal state of Unicove for debugging purposes"
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/navigation.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+layout.svelte
 msgid "Overview"
 msgstr "Overview"
 
 #. placeholder {0}: data.abi.actions.length
 #. placeholder {0}: data.proposal.transaction.actions.length
-#. placeholder {0}: data.transaction.transaction.actions.length
 #. placeholder {0}: data.transaction.filtered.length
+#. placeholder {0}: data.transaction.transaction.actions.length
 #. placeholder {0}: data.transaction.transaction.actions.length
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
@@ -1556,11 +1557,13 @@ msgstr "Text"
 msgid "Side by side"
 msgstr "Side by side"
 
+#: src/lib/components/discussion/Comment.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/buttons.svelte
 msgid "Delete"
 msgstr "Delete"
 
 #: src/lib/components/accountswitch.svelte
+#: src/lib/components/discussion/Comment.svelte
 #: src/lib/components/elements/proposalname.svelte
 #: src/lib/components/elements/suspiciousmemo.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
@@ -1855,10 +1858,10 @@ msgstr "Pill Select"
 msgid "Select a date range"
 msgstr "Select a date range"
 
-#. placeholder {0}: JSON.stringify(tokenSelected, null, 2)
-#. placeholder {0}: imageOptionSelected.label
-#. placeholder {0}: selectedFormOption.label
 #. placeholder {0}: selected.label
+#. placeholder {0}: selectedFormOption.label
+#. placeholder {0}: imageOptionSelected.label
+#. placeholder {0}: JSON.stringify(tokenSelected, null, 2)
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
@@ -2256,8 +2259,8 @@ msgstr "The wharfkit/cli generated contracts for this build and the on-chain acc
 msgid "Refresh"
 msgstr "Refresh"
 
-#. placeholder {0}: refreshed
 #. placeholder {0}: formatDate(proposal.updated)
+#. placeholder {0}: refreshed
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/market/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.svelte
 msgid "Updated {0}"
@@ -3441,6 +3444,7 @@ msgstr "Top 21"
 msgid "Standby"
 msgstr "Standby"
 
+#: src/lib/components/discussion/Comment.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/articles.svelte
 msgid "Read more"
 msgstr "Read more"
@@ -3452,7 +3456,7 @@ msgstr "<0>Unicove -</0> The {0} web wallet and block explorer"
 
 #. placeholder {0}: network.chain.name
 #. placeholder {0}: networkName
-#. placeholder {0}: networkName
+#. placeholder {0}: network.chain.name
 #: src/routes/+layout.server.ts
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
@@ -3486,8 +3490,8 @@ msgstr "{0} Token Swap has begun!"
 msgid "Swap {0} to {1} at a 1:1 ratio"
 msgstr "Swap {0} to {1} at a 1:1 ratio"
 
-#. placeholder {0}: String(data.quote.symbol.name)
 #. placeholder {0}: props.network.token.name
+#. placeholder {0}: String(data.quote.symbol.name)
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/legacy-token-swap.svelte
 msgid "Swap to {0}"
@@ -3506,7 +3510,7 @@ msgstr "Get Tokens"
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
-#. placeholder {0}: String(network.token.symbol.name)
+#. placeholder {0}: symbol.name
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
@@ -3525,10 +3529,10 @@ msgstr "KB (RAM): Tokenized Data Storage"
 msgid "One {0} of RAM represents ownership rights over 1000 bytes of the network's total blockchain storage capacity. {1} can be swapped with {2} by visiting the RAM Market."
 msgstr "One {0} of RAM represents ownership rights over 1000 bytes of the network's total blockchain storage capacity. {1} can be swapped with {2} by visiting the RAM Market."
 
-#. placeholder {0}: data.network.token.name
-#. placeholder {1}: data.network.getRamToken().name
 #. placeholder {0}: String(network.chain.systemToken?.symbol.name)
 #. placeholder {1}: String(ramtoken.name)
+#. placeholder {0}: data.network.token.name
+#. placeholder {1}: data.network.getRamToken().name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/charts.svelte
 msgid "Swap {0}/{1}"
@@ -4813,11 +4817,11 @@ msgstr "MetaMask Wallet Plugin"
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/+page.ts
-#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+layout.ts
 msgid "Sentiment"
 msgstr "Sentiment"
 
-#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+layout.ts
 msgid "Overview and statistics for community sentiment on the"
 msgstr "Overview and statistics for community sentiment on the"
 
@@ -4825,6 +4829,7 @@ msgstr "Overview and statistics for community sentiment on the"
 msgid "Failed to load topics"
 msgstr "Failed to load topics"
 
+#: src/lib/components/discussion/Thread.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/bid/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/claim/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/refund/+page.svelte
@@ -4869,7 +4874,7 @@ msgid "Dismiss"
 msgstr "Dismiss"
 
 #. placeholder {0}: new Date(sentiment.currentTopic.topic.lastUpdated).toLocaleString()
-#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+layout.ts
 msgid "Last updated {0}"
 msgstr "Last updated {0}"
 
@@ -5704,6 +5709,7 @@ msgstr "Activity Display Format"
 msgid "The default view format for account activity."
 msgstr "The default view format for account activity."
 
+#: src/lib/components/discussion/Comment.svelte
 #: src/lib/components/elements/actiontable.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/tables/[table]/[[scope]]/+page.svelte
 msgid "Show less"
@@ -6024,8 +6030,8 @@ msgstr "{0}You have {1} available to reclaim."
 msgid "You have been outbid on this name.<0/>"
 msgstr "You have been outbid on this name.<0/>"
 
-#. placeholder {0}: String(manager.refundAmount)
 #. placeholder {0}: String(tracked.refund.amount)
+#. placeholder {0}: String(manager.refundAmount)
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/refund/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
 msgid "Claim Refund ({0})"
@@ -7001,8 +7007,11 @@ msgstr "Producer voting"
 #: src/routes/[[locale]]/[network]/(account)/signup/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/account/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/contract/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/discussion/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.server.ts
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.server.ts
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/discussion/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/discussion/+page.ts
 msgid "Not found"
 msgstr "Not found"
 
@@ -7918,6 +7927,8 @@ msgstr "Change history"
 msgid "{0} V"
 msgstr "{0} V"
 
+#: src/lib/components/discussion/Comment.svelte
+#: src/lib/components/discussion/Thread.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.svelte
 msgid "Proposal"
 msgstr "Proposal"
@@ -7944,6 +7955,7 @@ msgstr "Your vote was not recorded"
 msgid "Connect a wallet to add your voice. Results stay visible either way."
 msgstr "Connect a wallet to add your voice. Results stay visible either way."
 
+#: src/lib/components/discussion/Composer.svelte
 #: src/lib/components/sentiment/voteButtons.svelte
 msgid "Waiting for your wallet to sign"
 msgstr "Waiting for your wallet to sign"
@@ -8239,6 +8251,8 @@ msgstr "Copy proposal JSON"
 
 #. placeholder {0}: liveStep.step
 #. placeholder {1}: liveStep.title
+#. placeholder {0}: step.step
+#. placeholder {1}: step.title
 #: src/lib/components/vp/VpSentimentCard.svelte
 msgid "Step {0}: {1}"
 msgstr "Step {0}: {1}"
@@ -8271,3 +8285,209 @@ msgstr "Step {0} of {1} · Implements <0>{0}: {1}</0>"
 #: src/lib/components/vp/VpSentimentStepRow.svelte
 msgid "View full results"
 msgstr "View full results"
+
+#: src/lib/components/discussion/Comment.svelte
+msgid "Confirming"
+msgstr "Confirming"
+
+#: src/lib/components/discussion/DiscussionCard.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/discussion/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/discussion/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+layout.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/discussion/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/discussion/+page.ts
+msgid "Discussion"
+msgstr "Discussion"
+
+#: src/lib/components/discussion/DiscussionCard.svelte
+msgid "1 comment"
+msgstr "1 comment"
+
+#. placeholder {0}: summary.total
+#. placeholder {0}: total
+#. placeholder {0}: total
+#. placeholder {0}: PROPOSAL.topic.comments
+#. placeholder {0}: count
+#. placeholder {0}: summary.total
+#: src/lib/components/discussion/DiscussionCard.svelte
+msgid "{0} comments"
+msgstr "{0} comments"
+
+#: src/lib/discussion/thread.svelte.ts
+msgid "Z"
+msgstr "Z"
+
+#: src/lib/components/discussion/Comment.svelte
+msgid "<0/> Supported"
+msgstr "<0/> Supported"
+
+#: src/lib/components/discussion/Comment.svelte
+msgid "<0/> Opposed"
+msgstr "<0/> Opposed"
+
+#: src/lib/components/discussion/Comment.svelte
+msgid "Posted, awaiting indexer"
+msgstr "Posted, awaiting indexer"
+
+#: src/lib/components/discussion/Comment.svelte
+msgid "(edited)"
+msgstr "(edited)"
+
+#: src/lib/components/discussion/Comment.svelte
+msgid "View transaction"
+msgstr "View transaction"
+
+#: src/lib/components/discussion/Composer.svelte
+msgid "Connect a wallet to join the discussion. Comments stay visible either way."
+msgstr "Connect a wallet to join the discussion. Comments stay visible either way."
+
+#: src/lib/components/discussion/Composer.svelte
+msgid "This account cannot post in the governance channel."
+msgstr "This account cannot post in the governance channel."
+
+#: src/lib/components/discussion/Composer.svelte
+msgid "<0/> Commenting as a supporter"
+msgstr "<0/> Commenting as a supporter"
+
+#: src/lib/components/discussion/Composer.svelte
+msgid "<0/> Commenting as an opponent"
+msgstr "<0/> Commenting as an opponent"
+
+#: src/lib/components/discussion/Composer.svelte
+msgid "You have not voted on this yet. Your comment posts either way."
+msgstr "You have not voted on this yet. Your comment posts either way."
+
+#: src/lib/components/discussion/Composer.svelte
+msgid "Write a comment"
+msgstr "Write a comment"
+
+#: src/lib/components/discussion/Comment.svelte
+#: src/lib/components/discussion/Composer.svelte
+msgid "This comment is longer than the channel allows."
+msgstr "This comment is longer than the channel allows."
+
+#: src/lib/components/discussion/Composer.svelte
+msgid "Post comment"
+msgstr "Post comment"
+
+#. placeholder {0}: summary.total
+#. placeholder {0}: summary.total
+#: src/lib/components/discussion/DiscussionCard.svelte
+msgid "Read the discussion ({0} comments)"
+msgstr "Read the discussion ({0} comments)"
+
+#. placeholder {0}: discussion.total
+#. placeholder {0}: discussion.total
+#. placeholder {0}: discussion.total
+#. placeholder {0}: discussion.total
+#. placeholder {0}: discussion.total
+#: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+layout.svelte
+msgid "Discussion ({0})"
+msgstr "Discussion ({0})"
+
+#: src/lib/components/discussion/DiscussionCard.svelte
+#: src/lib/components/discussion/DiscussionCard.svelte
+#: src/lib/components/discussion/Thread.svelte
+msgid "Discussion is unavailable on this network."
+msgstr "Discussion is unavailable on this network."
+
+#: src/lib/components/discussion/DiscussionCard.svelte
+#: src/lib/components/discussion/DiscussionCard.svelte
+#: src/lib/components/vp/VpSentimentHero.svelte
+#: src/lib/components/vp/VpSentimentStepRow.svelte
+msgid "Read the discussion"
+msgstr "Read the discussion"
+
+#: src/lib/components/discussion/DiscussionCard.svelte
+msgid "Read the discussion (1 comment)"
+msgstr "Read the discussion (1 comment)"
+
+#: src/lib/components/discussion/DiscussionCard.svelte
+#: src/lib/components/discussion/Thread.svelte
+msgid "No comments yet."
+msgstr "No comments yet."
+
+#: src/lib/components/discussion/Thread.svelte
+msgid "All"
+msgstr "All"
+
+#. placeholder {0}: d.step
+#: src/lib/components/discussion/Thread.svelte
+msgid "Step {0}<0/>"
+msgstr "Step {0}<0/>"
+
+#: src/lib/components/discussion/Thread.svelte
+msgid "Load earlier comments"
+msgstr "Load earlier comments"
+
+#: src/lib/components/discussion/Comment.svelte
+msgid "just now"
+msgstr "just now"
+
+#: src/lib/components/discussion/Comment.svelte
+msgid "Edit comment"
+msgstr "Edit comment"
+
+#: src/lib/components/discussion/Comment.svelte
+#: src/lib/components/discussion/Composer.svelte
+msgid ""
+"This comment contains a bidirectional control character, which the chain rejects. Remove it\n"
+"to post."
+msgstr ""
+"This comment contains a bidirectional control character, which the chain rejects. Remove it\n"
+"to post."
+
+#: src/lib/components/discussion/Comment.svelte
+msgid "Save"
+msgstr "Save"
+
+#: src/lib/components/discussion/Comment.svelte
+msgid "Edit"
+msgstr "Edit"
+
+#: src/lib/components/discussion/Composer.svelte
+msgid ""
+"Commenting needs at least <0/> held liquid.\n"
+"Your account holds <1/>."
+msgstr ""
+"Commenting needs at least <0/> held liquid.\n"
+"Your account holds <1/>."
+
+#: src/lib/components/discussion/Composer.svelte
+msgid "Comment on <0>Step {0}<0/></0>"
+msgstr "Comment on <0>Step {0}<0/></0>"
+
+#: src/lib/components/discussion/Composer.svelte
+msgid "Plain text only. Line breaks are kept."
+msgstr "Plain text only. Line breaks are kept."
+
+#. placeholder {0}: formatBytes(netEstimate)
+#. placeholder {1}: formatBytes( netAvailable ?? 0 )
+#: src/lib/components/discussion/Composer.svelte
+msgid "This comment needs about {0} of NET and your account has {1} available. Stake or power up NET, or shorten the comment."
+msgstr "This comment needs about {0} of NET and your account has {1} available. Stake or power up NET, or shorten the comment."
+
+#. placeholder {0}: formatBytes(netEstimate)
+#: src/lib/components/discussion/Composer.svelte
+msgid "Long comments use more NET. This one needs about {0}."
+msgstr "Long comments use more NET. This one needs about {0}."
+
+#: src/lib/components/discussion/Composer.svelte
+msgid ""
+"Comments are on-chain messages signed by your account and are public and permanent. Posting\n"
+"requires 10 A held liquid. Moderators remove comments that are spam, impersonation, harassment, or\n"
+"unrelated to the target, and block accounts that repeat it. A removed comment stays on chain and\n"
+"stops appearing on Unicove."
+msgstr ""
+"Comments are on-chain messages signed by your account and are public and permanent. Posting\n"
+"requires 10 A held liquid. Moderators remove comments that are spam, impersonation, harassment, or\n"
+"unrelated to the target, and block accounts that repeat it. A removed comment stays on chain and\n"
+"stops appearing on Unicove."
+
+#: src/lib/components/discussion/Composer.svelte
+msgid "This target is closed. Its discussion stays readable."
+msgstr "This target is closed. Its discussion stays readable."

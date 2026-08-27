@@ -11,6 +11,7 @@
 	import TransactForm from '$lib/components/transact/form.svelte';
 	import VoteButtons from '$lib/components/sentiment/voteButtons.svelte';
 	import SentimentMeter from '$lib/components/sentiment/SentimentMeter.svelte';
+	import DiscussionCard from '$lib/components/discussion/DiscussionCard.svelte';
 	import { percentString } from '$lib/utils';
 	import type { MsigSentimentState } from '$lib/state/sentiment/msig.svelte';
 
@@ -292,6 +293,15 @@
 								proposalName={data.proposal.name}
 								currentVote={userVote}
 								onVoteSuccess={handleVoteSuccess}
+							/>
+						{/if}
+						{#if context.network.supports('discussion')}
+							<DiscussionCard
+								compact
+								tuples={[['msig', data.proposal.proposer, data.proposal.name]]}
+								href={context.urlPath(
+									`/msig/${data.proposal.proposer}/${data.proposal.name}/discussion`
+								)}
 							/>
 						{/if}
 					</Stack>

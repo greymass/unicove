@@ -17,9 +17,10 @@
 		question: string;
 		currentVote: number | null | undefined;
 		onVoted: (voteType: number | null) => void;
+		basePath: string;
 	}
 
-	const { row, question, currentVote, onVoted }: Props = $props();
+	const { row, question, currentVote, onVoted, basePath }: Props = $props();
 	const context = getContext<UnicoveContext>('state');
 	const locale = $derived(context.settings.data.locale);
 	const systemSymbol = $derived(context.network.chain.systemToken!.symbol);
@@ -86,4 +87,15 @@
 			onVoteSuccess={(_id, voteType) => onVoted(voteType ?? null)}
 		/>
 	</div>
+
+	{#if context.network.supports('discussion')}
+		<div class="border-outline mt-4 border-t pt-3">
+			<a
+				class="text-primary text-sm font-medium hover:underline"
+				href="{basePath}/discussion?target=topic:{row.contract}:{row.topic}"
+			>
+				Read the discussion
+			</a>
+		</div>
+	{/if}
 </Card>

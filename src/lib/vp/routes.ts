@@ -1,7 +1,7 @@
 import { vpMsigSteps } from './onchain';
 import type { VpSummary } from './types';
 
-export type VpRouteKind = 'proposal' | 'multisigs' | 'sentiment' | 'revisions';
+export type VpRouteKind = 'proposal' | 'multisigs' | 'sentiment' | 'discussion' | 'revisions';
 
 export interface VpRouteTab {
 	href: string;
@@ -11,6 +11,7 @@ export interface VpRouteTab {
 
 export interface VpRouteOptions {
 	sentimentEnabled: boolean;
+	discussionEnabled: boolean;
 	revisionCount: number;
 }
 
@@ -30,6 +31,12 @@ export function vpRouteTabs(
 	const hasSentiment = summary.sentiment.length > 0 || summary.msigs.length > 0;
 	if (options.sentimentEnabled && hasSentiment) {
 		tabs.push({ href: `${basePath}/sentiment`, kind: 'sentiment' });
+	}
+
+	const hasDiscussionTarget =
+		summary.sentiment.length > 0 || vpMsigSteps(summary).some((s) => s.proposer && s.proposal);
+	if (options.discussionEnabled && hasDiscussionTarget) {
+		tabs.push({ href: `${basePath}/discussion`, kind: 'discussion' });
 	}
 
 	if (options.revisionCount > 0) {

@@ -9,6 +9,7 @@
 	import MetricOverviewCard from '$lib/components/sentiment/MetricOverviewCard.svelte';
 	import MetricLensDetail from '$lib/components/sentiment/MetricLensDetail.svelte';
 	import MetricParticipants from '$lib/components/sentiment/MetricParticipants.svelte';
+	import DiscussionCard from '$lib/components/discussion/DiscussionCard.svelte';
 	import type { MetricLens } from '$lib/types/sentiment';
 
 	const context = getContext<UnicoveContext>('state');
@@ -208,6 +209,13 @@
 					supportVotes={statistics.supportVotes}
 					oppositionVotes={statistics.oppositionVotes}
 					{systemSymbol}
+				/>
+			{/if}
+
+			{#if context.network.supports('discussion')}
+				<DiscussionCard
+					tuples={[['topic', String(context.network.contracts.sentiment.account), data.topicId]]}
+					href={context.urlPath(`/sentiment/topics/${data.topicId}/discussion`)}
 				/>
 			{/if}
 		{:else}

@@ -26,6 +26,7 @@ describe('vpRouteTabs', () => {
 	test('a draft with nothing bound offers only the document', () => {
 		const tabs = vpRouteTabs('/proposals/vp-9999', summary(), {
 			sentimentEnabled: true,
+			discussionEnabled: false,
 			revisionCount: 0
 		});
 		expect(tabs.map((t) => t.kind)).toEqual(['proposal']);
@@ -35,6 +36,7 @@ describe('vpRouteTabs', () => {
 	test('revisions appear with their count', () => {
 		const tabs = vpRouteTabs('/proposals/vp-9999', summary(), {
 			sentimentEnabled: true,
+			discussionEnabled: false,
 			revisionCount: 3
 		});
 		expect(tabs.map((t) => t.kind)).toEqual(['proposal', 'revisions']);
@@ -52,7 +54,7 @@ describe('vpRouteTabs', () => {
 				],
 				sentiment: [{ contract: 'sentiment.gm', topic: 'sentiment' }]
 			}),
-			{ sentimentEnabled: true, revisionCount: 3 }
+			{ sentimentEnabled: true, discussionEnabled: false, revisionCount: 3 }
 		);
 		expect(tabs.map((t) => t.kind)).toEqual(['proposal', 'multisigs', 'sentiment', 'revisions']);
 		expect(tabs.map((t) => t.count)).toEqual([undefined, 2, undefined, 3]);
@@ -62,7 +64,7 @@ describe('vpRouteTabs', () => {
 		const tabs = vpRouteTabs(
 			'/proposals/vp-9999',
 			summary({ sentiment: [{ contract: 'sentiment.gm', topic: 'sentiment' }] }),
-			{ sentimentEnabled: false, revisionCount: 0 }
+			{ sentimentEnabled: false, discussionEnabled: false, revisionCount: 0 }
 		);
 		expect(tabs.map((t) => t.kind)).toEqual(['proposal']);
 	});
@@ -71,10 +73,41 @@ describe('vpRouteTabs', () => {
 		const tabs = vpRouteTabs(
 			'/proposals/vp-9999',
 			summary({ msigs: [{ proposer: 'test.gm', proposal: 'ugkuddhb2jwp', status: 'active' }] }),
-			{ sentimentEnabled: true, revisionCount: 0 }
+			{ sentimentEnabled: true, discussionEnabled: false, revisionCount: 0 }
 		);
 		expect(tabs.map((t) => t.kind)).toEqual(['proposal', 'multisigs', 'sentiment']);
 		expect(tabs[1].count).toBe(1);
+	});
+
+	test('adds a discussion tab after sentiment when enabled and on-chain objects exist', () => {
+		const summaryWithMsig = summary({
+			msigs: [{ proposer: 'test.gm', proposal: 'ugkuddhb2jwp', status: 'active' }]
+		});
+		const tabs = vpRouteTabs('/proposals/vp-9999', summaryWithMsig, {
+			sentimentEnabled: true,
+			discussionEnabled: true,
+			revisionCount: 0
+		});
+		expect(tabs.map((t) => t.kind)).toEqual(['proposal', 'multisigs', 'sentiment', 'discussion']);
+		const off = vpRouteTabs('/proposals/vp-9999', summaryWithMsig, {
+			sentimentEnabled: true,
+			discussionEnabled: false,
+			revisionCount: 0
+		});
+		expect(off.map((t) => t.kind)).not.toContain('discussion');
+	});
+
+	test('a summary whose only msig is planned gets sentiment but no discussion tab', () => {
+		const summaryWithPlannedOnly = summary({
+			msigs: [{ status: 'planned', title: 'Return the account' }]
+		});
+		const tabs = vpRouteTabs('/proposals/vp-9999', summaryWithPlannedOnly, {
+			sentimentEnabled: true,
+			discussionEnabled: true,
+			revisionCount: 0
+		});
+		expect(tabs.map((t) => t.kind)).toEqual(['proposal', 'multisigs', 'sentiment']);
+		expect(tabs.map((t) => t.kind)).not.toContain('discussion');
 	});
 });
 
@@ -95,7 +128,7 @@ describe('vpRouteTabs multisig count', () => {
 					{ status: 'planned', title: 'Return the account' }
 				]
 			}),
-			{ sentimentEnabled: true, revisionCount: 0 }
+			{ sentimentEnabled: true, discussionEnabled: false, revisionCount: 0 }
 		);
 		const multisigs = tabs.find((t) => t.kind === 'multisigs');
 		expect(multisigs?.count).toBe(2);

@@ -74,6 +74,13 @@ describe('body rules', () => {
 	test('normalizes CRLF and tabs', () => {
 		expect(normalizeBody('a\r\nb\tc\r')).toBe('a\nb    c\n');
 	});
+	test('folds U+2028 line separator and U+2029 paragraph separator to newlines', () => {
+		expect(normalizeBody('a\u2028b')).toBe('a\nb');
+		expect(normalizeBody('a\u2029b')).toBe('a\nb');
+	});
+	test('folds line and paragraph separators alongside CRLF', () => {
+		expect(normalizeBody('a\u2028\r\nb\u2029c')).toBe('a\n\nb\nc');
+	});
 	test('rejects empty and whitespace bodies', () => {
 		expect(checkBody('')).toEqual({ ok: false, reason: 'empty', bytes: 0 });
 		expect(checkBody('  \n\n')).toMatchObject({ ok: false, reason: 'empty' });

@@ -13,9 +13,10 @@
 		question: string;
 		currentVote: number | null | undefined;
 		onVoted: (voteType: number | null) => void;
+		basePath: string;
 	}
 
-	const { row, question, currentVote, onVoted }: Props = $props();
+	const { row, question, currentVote, onVoted, basePath }: Props = $props();
 	const context = getContext<UnicoveContext>('state');
 	const locale = $derived(context.settings.data.locale);
 
@@ -91,10 +92,20 @@
 		</div>
 	{/if}
 
-	<a
-		class="text-primary border-outline mt-4 block border-t pt-3 text-sm font-medium"
-		href={context.urlPath(`${row.msigPath}/sentiment`)}
-	>
-		View full results
-	</a>
+	<div class="border-outline mt-4 flex items-center gap-4 border-t pt-3">
+		<a
+			class="text-primary text-sm font-medium hover:underline"
+			href={context.urlPath(`${row.msigPath}/sentiment`)}
+		>
+			View full results
+		</a>
+		{#if context.network.supports('discussion')}
+			<a
+				class="text-primary text-sm font-medium hover:underline"
+				href="{basePath}/discussion?target=msig:{row.proposer}:{row.proposal}"
+			>
+				Read the discussion
+			</a>
+		{/if}
+	</div>
 </Card>

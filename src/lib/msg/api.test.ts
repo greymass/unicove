@@ -1,5 +1,12 @@
 import { describe, expect, test } from 'bun:test';
-import { DiscussionUnavailable, chainDate, fetchMessages, fetchTagSummaries } from './api';
+import {
+	DiscussionUnavailable,
+	chainDate,
+	checkDiscussionAvailable,
+	fetchMessages,
+	fetchTagSummaries,
+	resolveEmptyQuery
+} from './api';
 
 function fakeFetch(status: number, body: unknown, calls: string[]): typeof fetch {
 	return (async (input: RequestInfo | URL) => {
@@ -82,6 +89,41 @@ describe('fetchTagSummaries', () => {
 		const calls: string[] = [];
 		expect(await fetchTagSummaries(fakeFetch(200, {}, calls), '/x', [])).toEqual([]);
 		expect(calls).toHaveLength(0);
+	});
+});
+
+describe('checkDiscussionAvailable', () => {
+	test('resolves without throwing when the network is up', async () => {
+		await expect(
+			checkDiscussionAvailable(fakeFetch(200, { summaries: [] }, []), '/en/vaulta/api/msg')
+		).resolves.toBeUndefined();
+	});
+	test('throws DiscussionUnavailable on 503, even with no tuples to query', async () => {
+		const calls: string[] = [];
+		await expect(
+			checkDiscussionAvailable(fakeFetch(503, { message: 'x' }, calls), '/en/vaulta/api/msg')
+		).rejects.toBeInstanceOf(DiscussionUnavailable);
+		expect(calls).toHaveLength(1);
+	});
+});
+
+describe('resolveEmptyQuery', () => {
+	test('a poll tick (probe=false) issues no request', async () => {
+		const calls: string[] = [];
+		const result = await resolveEmptyQuery(fakeFetch(200, {}, calls), '/en/vaulta/api/msg', false);
+		expect(result).toEqual([]);
+		expect(calls).toHaveLength(0);
+	});
+	test('a load or refresh (probe=true) issues one request', async () => {
+		const calls: string[] = [];
+		const result = await resolveEmptyQuery(fakeFetch(200, {}, calls), '/en/vaulta/api/msg', true);
+		expect(result).toEqual([]);
+		expect(calls).toHaveLength(1);
+	});
+	test('a load or refresh (probe=true) still throws DiscussionUnavailable on 503', async () => {
+		await expect(
+			resolveEmptyQuery(fakeFetch(503, { message: 'x' }, []), '/en/vaulta/api/msg', true)
+		).rejects.toBeInstanceOf(DiscussionUnavailable);
 	});
 });
 
