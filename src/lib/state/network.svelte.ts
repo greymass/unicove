@@ -64,6 +64,7 @@ import {
 	PUBLIC_SYSTEM_TOKEN_CONTRACT
 } from '$env/static/public';
 import { localizePath } from '$lib/utils/url';
+import { forumAccountFor } from '$lib/msg/model';
 
 export class NetworkState {
 	// Readonly state
@@ -467,9 +468,4 @@ export function getNetworkByName(name: string, fetch?: typeof window.fetch): Net
 	const config = getChainConfigByName(name);
 	const state = getNetwork(config, { fetch });
 	return state;
-}
-
-export function forumAccountFor(msgAccount: string): string {
-	const dot = msgAccount.lastIndexOf('.');
-	return `forum.${dot === -1 ? msgAccount : msgAccount.slice(dot + 1)}`;
 }
