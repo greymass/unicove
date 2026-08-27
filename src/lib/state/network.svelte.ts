@@ -41,6 +41,8 @@ import { Token, ZeroUnits, TokenDefinition, tokenEquals } from '$lib/types/token
 import { Contract as CreateContract } from '$lib/wharf/contracts/create.gm';
 import { Contract as DelphiHelperContract } from '$lib/wharf/contracts/delphihelper';
 import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
+import { Contract as ForumContract } from '$lib/wharf/contracts/forum';
+import { Contract as MsgContract } from '$lib/wharf/contracts/msg';
 import { Contract as MSIGContract } from '$lib/wharf/contracts/msig';
 import { Contract as ReserveContract } from '$lib/wharf/contracts/eosio.reserv';
 import { Contract as REXContract } from '$lib/wharf/contracts/eosio.rex';
@@ -58,6 +60,7 @@ import {
 	PUBLIC_FEATURE_UNICOVE_CONTRACT_API,
 	PUBLIC_FEATURE_VAULTA_CORE_CONTRACT,
 	PUBLIC_FEATURE_SENTIMENT_CONTRACT,
+	PUBLIC_FEATURE_DISCUSSION_CONTRACT,
 	PUBLIC_SYSTEM_TOKEN_CONTRACT
 } from '$env/static/public';
 import { localizePath } from '$lib/utils/url';
@@ -129,6 +132,14 @@ export class NetworkState {
 			delphioracle: new DelphiOracleContract({ client: this.client }),
 			eosio: new SystemContract({ account: 'eosio', client: this.client }),
 			eosntime: new TimeContract({ client: this.client }),
+			forum: new ForumContract({
+				account: forumAccountFor(PUBLIC_FEATURE_DISCUSSION_CONTRACT),
+				client: this.client
+			}),
+			msg: new MsgContract({
+				account: PUBLIC_FEATURE_DISCUSSION_CONTRACT,
+				client: this.client
+			}),
 			msig: new MSIGContract({ client: this.client }),
 			reserve: new ReserveContract({
 				client: this.client
@@ -456,4 +467,9 @@ export function getNetworkByName(name: string, fetch?: typeof window.fetch): Net
 	const config = getChainConfigByName(name);
 	const state = getNetwork(config, { fetch });
 	return state;
+}
+
+export function forumAccountFor(msgAccount: string): string {
+	const dot = msgAccount.lastIndexOf('.');
+	return `forum.${dot === -1 ? msgAccount : msgAccount.slice(dot + 1)}`;
 }

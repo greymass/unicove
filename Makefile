@@ -139,7 +139,23 @@ else
 	cp ./configs/contracts/create.gm.ts $(CONTRACTS)/create.gm.ts
 endif
 
-codegen: $(CONTRACTS)/system.ts $(CONTRACTS)/token.ts $(CONTRACTS)/msig.ts $(CONTRACTS)/eosio.wram.ts $(CONTRACTS)/eosio.reserv.ts $(CONTRACTS)/eosio.rex.ts $(CONTRACTS)/delphihelper.ts $(CONTRACTS)/delphioracle.ts $(CONTRACTS)/unicove.api.ts $(CONTRACTS)/eosntime.ts $(CONTRACTS)/core.vaulta.ts $(CONTRACTS)/sentiment.ts $(CONTRACTS)/create.gm.ts
+FORUM_CONTRACT = forum.$(lastword $(subst ., ,$(PUBLIC_FEATURE_DISCUSSION_CONTRACT)))
+
+$(CONTRACTS)/msg.ts:
+ifeq ($(PUBLIC_FEATURE_DISCUSSION),true)
+	$(BIN)/wharfkit generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/msg.ts $(PUBLIC_FEATURE_DISCUSSION_CONTRACT)
+else
+	cp ./configs/contracts/msg.ts $(CONTRACTS)/msg.ts
+endif
+
+$(CONTRACTS)/forum.ts:
+ifeq ($(PUBLIC_FEATURE_DISCUSSION),true)
+	$(BIN)/wharfkit generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/forum.ts $(FORUM_CONTRACT)
+else
+	cp ./configs/contracts/forum.ts $(CONTRACTS)/forum.ts
+endif
+
+codegen: $(CONTRACTS)/system.ts $(CONTRACTS)/token.ts $(CONTRACTS)/msig.ts $(CONTRACTS)/eosio.wram.ts $(CONTRACTS)/eosio.reserv.ts $(CONTRACTS)/eosio.rex.ts $(CONTRACTS)/delphihelper.ts $(CONTRACTS)/delphioracle.ts $(CONTRACTS)/unicove.api.ts $(CONTRACTS)/eosntime.ts $(CONTRACTS)/core.vaulta.ts $(CONTRACTS)/sentiment.ts $(CONTRACTS)/create.gm.ts $(CONTRACTS)/msg.ts $(CONTRACTS)/forum.ts
 	mkdir -p $(CONTRACTS)
 
 .PHONY: codegen/base
@@ -153,6 +169,8 @@ codegen/base:
 	$(BIN)/wharfkit generate -u https://eos.greymass.com -f ./configs/contracts/eosio.wram.ts eosio.wram
 	$(BIN)/wharfkit generate -u https://jungle4.greymass.com -f ./configs/contracts/sentiment.ts sentiment.gm
 	$(BIN)/wharfkit generate -u https://jungle4.greymass.com -f ./configs/contracts/create.gm.ts create.gm
+	$(BIN)/wharfkit generate -u https://vaulta.greymass.com -f ./configs/contracts/msg.ts msg
+	$(BIN)/wharfkit generate -u https://vaulta.greymass.com -f ./configs/contracts/forum.ts forum.msg
 	make format
 
 .PHONY: clean

@@ -4,6 +4,8 @@ import { ChainDefinition, Logo, TokenIdentifier } from '@wharfkit/common';
 import { Contract as CreateContract } from '$lib/wharf/contracts/create.gm';
 import { Contract as DelphiHelperContract } from '$lib/wharf/contracts/delphihelper';
 import { Contract as DelphiOracleContract } from '$lib/wharf/contracts/delphioracle';
+import { Contract as ForumContract } from '$lib/wharf/contracts/forum';
+import { Contract as MsgContract } from '$lib/wharf/contracts/msg';
 import { Contract as MSIGContract } from '$lib/wharf/contracts/msig';
 import { Contract as ReserveContract } from '$lib/wharf/contracts/eosio.reserv';
 import { Contract as REXContract } from '$lib/wharf/contracts/eosio.rex';
@@ -169,6 +171,7 @@ export const chainConfig: ChainConfig = {
 		robo: isENVTrue(env.PUBLIC_FEATURE_ROBO),
 		robo2: isENVTrue(env.PUBLIC_FEATURE_ROBO2),
 		sentiment: isENVTrue(env.PUBLIC_FEATURE_SENTIMENT),
+		discussion: isENVTrue(optionalEnv.PUBLIC_FEATURE_DISCUSSION),
 		stakeresource: isENVTrue(env.PUBLIC_FEATURE_STAKERESOURCE),
 		statindex: isENVTrue(optionalEnv.PUBLIC_FEATURE_STATINDEX),
 		staking: isENVTrue(env.PUBLIC_FEATURE_STAKING),
@@ -191,6 +194,8 @@ export interface DefaultContracts {
 	delphioracle: DelphiOracleContract;
 	eosio: SystemContract;
 	eosntime: TimeContract;
+	forum: ForumContract;
+	msg: MsgContract;
 	msig: MSIGContract;
 	reserve: ReserveContract;
 	rex: REXContract;
@@ -208,6 +213,7 @@ export interface ChainEndpoints {
 	hyperion?: string;
 	lightapi?: string;
 	metrics?: string;
+	msg?: string;
 	msigs?: string;
 	robo2?: string;
 	sentiment?: string;
@@ -269,6 +275,7 @@ export type FeatureType =
 	| 'robo'
 	| 'robo2'
 	| 'sentiment'
+	| 'discussion'
 	| 'stakeresource'
 	| 'staking'
 	| 'statindex'
