@@ -13,6 +13,9 @@
 	const { statistics, compact = false, ...props }: Props = $props();
 	const context = getContext<UnicoveContext>('state');
 	const locale = $derived(context.settings.data.locale);
+	const meterLabel = $derived(
+		`${percentString(locale, statistics.supportPercentage / 100, 0)} support, ${percentString(locale, statistics.oppositionPercentage / 100, 0)} oppose`
+	);
 </script>
 
 <div class="grid gap-2">
@@ -30,6 +33,7 @@
 				class:bg-surface-container-high={statistics.oppositionPercentage === 0}
 				class="-webkit-progress-value:bg-success -webkit-progress-bar:bg-error bg-error h-full w-full"
 				id={props.id}
+				aria-label={meterLabel}
 				max="100"
 				value={statistics.supportPercentage}
 			>

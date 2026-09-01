@@ -34,15 +34,18 @@
 		<span class="text-muted text-sm">of {requested} requested approvals</span>
 	{/if}
 	<div
-		class="bg-surface-container-highest relative mt-2 h-2 overflow-hidden rounded-full"
+		class="bg-surface-container-highest border-outline-variant relative mt-2 h-2 overflow-hidden rounded-full border"
 		role="progressbar"
+		aria-label={known
+			? `${satisfied} of ${possible} signers approved, ${threshold} needed`
+			: `${approved} of ${requested} requested approvals`}
 		aria-valuemin={0}
-		aria-valuemax={known ? threshold : requested}
+		aria-valuemax={known ? possible : requested}
 		aria-valuenow={known ? satisfied : approved}
 	>
 		<div class="bg-primary h-full" style="width: {fill}%"></div>
 		{#if marker !== null && marker < 100}
-			<span class="bg-outline absolute inset-y-0 w-0.5" style="left: {marker}%"></span>
+			<span class="bg-on-surface absolute inset-y-0 w-1" style="left: {marker}%"></span>
 		{/if}
 	</div>
 </div>
