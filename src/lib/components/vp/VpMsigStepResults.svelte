@@ -115,6 +115,8 @@
 				: null)
 	);
 
+	const showHolders = $derived(hasPoll && (step.live || (displayed?.totalVotes ?? 0) > 0));
+
 	const onVoteSuccess = (_id?: Checksum256, voteType?: number | null) => {
 		const next = voteType ?? null;
 		if (baseVote === undefined) baseVote = currentVote ?? null;
@@ -128,7 +130,7 @@
 	};
 </script>
 
-{#if approvals || !approvalsLoaded || hasPoll}
+{#if approvals || !approvalsLoaded || showHolders}
 	<div class="mt-4 grid gap-3">
 		{#if approvals || !approvalsLoaded}
 			<div
@@ -159,7 +161,7 @@
 			</div>
 		{/if}
 
-		{#if hasPoll}
+		{#if showHolders}
 			<div
 				class="flex items-start gap-3"
 				role="group"

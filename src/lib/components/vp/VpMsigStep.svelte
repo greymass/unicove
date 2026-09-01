@@ -35,7 +35,10 @@
 	};
 
 	$effect(() => {
-		if (!step.proposer || !step.proposal) return;
+		if (!step.proposer || !step.proposal) {
+			approvalsLoaded = true;
+			return;
+		}
 		const controller = new AbortController();
 		fetch(context.urlPath(`/api/msig/${step.proposer}/${step.proposal}`), {
 			signal: controller.signal
