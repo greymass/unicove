@@ -2,7 +2,6 @@ import { describe, expect, test } from 'bun:test';
 import {
 	MAX_BODY_BYTES,
 	checkBody,
-	estimateNetBytes,
 	forumAccountFor,
 	hookAccountFor,
 	normalizeBody,
@@ -99,13 +98,5 @@ describe('body rules', () => {
 	});
 	test('zero-width characters are allowed', () => {
 		expect(checkBody('a​b').ok).toBe(true);
-	});
-});
-
-describe('estimateNetBytes', () => {
-	test('applies the base64 expansion, overhead, and rounds up to 8', () => {
-		expect(estimateNetBytes(0)).toBe(120);
-		expect(estimateNetBytes(1)).toBe(128);
-		expect(estimateNetBytes(65536 + 20)).toBe(87528);
 	});
 });

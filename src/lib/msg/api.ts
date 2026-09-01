@@ -3,6 +3,7 @@ import { GOVERNANCE_CHANNEL } from './model';
 export interface Message {
 	seq: number;
 	block_num: number;
+	trx_id?: string;
 	timestamp: string;
 	sender: string;
 	channel: string;

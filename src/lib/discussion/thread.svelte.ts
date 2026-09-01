@@ -117,6 +117,7 @@ export class ThreadState {
 				pages.flatMap((p) => p.messages)
 			);
 			this.expirePending();
+			this.error = null;
 			this.ready = true;
 		} catch (e) {
 			this.fail(e);
@@ -183,6 +184,7 @@ export class ThreadState {
 	}
 
 	private fail(e: unknown) {
+		this.ready = true;
 		if (e instanceof DiscussionUnavailable) {
 			this.unavailable = true;
 			return;

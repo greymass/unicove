@@ -60,6 +60,13 @@ export function proposalDescriptors(summary: VpSummary, locale?: string): Target
 	return list;
 }
 
+/** Short human label for a target: "Proposal", "Step 3". Never the full step title. */
+export function shortLabel(descriptor: TargetDescriptor): string {
+	if (descriptor.target.kind === 'topic') return 'Proposal';
+	if (descriptor.step) return `Step ${descriptor.step}`;
+	return descriptor.label;
+}
+
 export function descriptorFromParam(
 	descriptors: TargetDescriptor[],
 	param: string | null

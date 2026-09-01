@@ -1,31 +1,27 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 	import { Name } from '@wharfkit/antelope';
-	import { Button, Chip } from 'unicove-components';
+	import { Button } from 'unicove-components';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { ThreadState } from '$lib/discussion/thread.svelte';
-	import { defaultPostTarget, type TargetDescriptor } from '$lib/discussion/targets';
+	import { defaultPostTarget, shortLabel, type TargetDescriptor } from '$lib/discussion/targets';
 	import { buildComment, packContent } from '$lib/msg/content';
 	import { abilityFor, isBlocked, loadGate, type PostAbility } from '$lib/msg/gate';
 	import { GOVERNANCE_CHANNEL, tupleKey } from '$lib/msg/model';
-	import { commentKey, visibleComments } from '$lib/msg/reconcile';
+	import { commentKey, visibleComments, type Comment as ThreadComment } from '$lib/msg/reconcile';
 	import Comment from './Comment.svelte';
 	import Composer from './Composer.svelte';
-	import TargetVotePanel from './TargetVotePanel.svelte';
 
 	interface Props {
 		descriptors: TargetDescriptor[];
 		active: TargetDescriptor | null;
-		onselect: (descriptor: TargetDescriptor | null) => void;
 		votes: Map<string, number>;
-		userVotes: Map<string, number | null>;
-		onuservote: (descriptor: TargetDescriptor, voteType: number | null) => void;
-		showChips: boolean;
+		multiTarget: boolean;
 		locale: string;
+		seed?: ThreadComment[];
 	}
 
-	const { descriptors, active, onselect, votes, userVotes, onuservote, showChips, locale }: Props =
-		$props();
+	const { descriptors, active, votes, multiTarget, locale, seed = [] }: Props = $props();
 	const context = getContext<UnicoveContext>('state');
 
 	const apiBase = context.urlPath('/api/msg');
@@ -51,7 +47,6 @@
 	const viewer = $derived(context.account ? String(context.account.name) : null);
 	const signedIn = $derived(Boolean(context.wharf.session && context.account));
 	const target = $derived(defaultPostTarget(descriptors, active));
-	const voteFor = $derived(target ? (userVotes.get(target.key) ?? null) : null);
 
 	let ability = $state<PostAbility | null>(null);
 	$effect(() => {
@@ -77,11 +72,20 @@
 			cancelled = true;
 		};
 	});
-	const netAvailable = $derived(
-		context.account ? Number(context.account.resources.net.available) : null
+
+	const labelByKey = $derived(new Map(descriptors.map((d) => [d.key, shortLabel(d)])));
+	const activeKeys = $derived(new Set(tuples.map(tupleKey)));
+	const seedVisible = $derived(seed.filter((c) => activeKeys.has(tupleKey(c.tags ?? []))));
+	const comments = $derived([...seedVisible, ...visibleComments(thread.comments)]);
+	const showJump = $derived(
+		comments.length > 0 && target?.postable === true && ability?.ok !== false
 	);
 
-	const comments = $derived(visibleComments(thread.comments));
+	let composerNode = $state<HTMLElement>();
+	function jumpToComposer() {
+		composerNode?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+		composerNode?.querySelector('textarea')?.focus({ preventScroll: true });
+	}
 
 	async function post(body: string) {
 		if (!context.account || !target) return;
@@ -125,38 +129,7 @@
 	}
 </script>
 
-<div class="grid gap-6">
-	{#if showChips}
-		<div class="flex flex-wrap gap-2" role="group" aria-label="Filter comments by target">
-			<button
-				onclick={() => onselect(null)}
-				class="cursor-pointer"
-				aria-current={active === null ? 'true' : undefined}
-			>
-				<Chip class={active === null ? 'bg-primary text-on-primary' : ''}>All</Chip>
-			</button>
-			{#each descriptors as d (d.key)}
-				<button
-					onclick={() => onselect(d)}
-					class="cursor-pointer"
-					aria-current={active?.key === d.key ? 'true' : undefined}
-				>
-					<Chip class={active?.key === d.key ? 'bg-primary text-on-primary' : ''}>
-						{#if d.target.kind === 'topic'}Proposal{:else if d.step}Step {d.step}{#if d.title}: {d.title}{/if}{:else}{d.label}{/if}
-					</Chip>
-				</button>
-			{/each}
-		</div>
-	{/if}
-
-	{#if target}
-		<TargetVotePanel
-			descriptor={target}
-			vote={userVotes.get(target.key)}
-			onvote={(v) => onuservote(target, v)}
-		/>
-	{/if}
-
+<div class="grid max-w-[40rem] gap-6">
 	{#if thread.error}
 		<div
 			class="bg-error/10 text-error border-error/30 flex items-center justify-between gap-2 rounded border px-4 py-2 text-sm"
@@ -169,17 +142,17 @@
 	{#if thread.unavailable}
 		<p class="text-muted text-sm">Discussion is not available on this network.</p>
 	{:else if !thread.ready}
-		<div class="grid animate-pulse gap-3">
+		<div class="grid animate-pulse gap-3" role="status" aria-busy="true">
+			<span class="sr-only">Loading comments</span>
 			<div class="bg-surface-container h-16 rounded"></div>
 			<div class="bg-surface-container h-16 rounded"></div>
 		</div>
 	{:else}
-		<p class="text-muted text-xs">
-			Comments are on-chain messages signed by your account and are public and permanent. Moderators
-			remove comments that are spam, impersonation, harassment, or unrelated to what is being
-			discussed, and block accounts that repeat it. A removed comment stays on chain and stops
-			appearing on Unicove.
-		</p>
+		{#if showJump}
+			<div>
+				<Button variant="secondary" onclick={jumpToComposer}>Write a comment</Button>
+			</div>
+		{/if}
 		{#if thread.hasMore}
 			<div>
 				<Button variant="secondary" onclick={() => thread.loadEarlier()}
@@ -187,7 +160,7 @@
 				>
 			</div>
 		{/if}
-		<div class="grid gap-5" aria-live="polite" aria-relevant="additions">
+		<div class="grid gap-8" aria-live="polite" aria-relevant="additions">
 			{#if comments.length === 0}
 				<p
 					class="border-outline text-muted rounded-xl border border-dashed p-4 text-center text-sm"
@@ -201,21 +174,22 @@
 						vote={votes.get(comment.sender) ?? null}
 						{viewer}
 						{locale}
-						showTarget={showChips && active === null}
+						showTarget={multiTarget && active === null}
+						targetLabel={labelByKey.get(tupleKey(comment.tags ?? [])) ?? null}
 						ondelete={remove}
 						onedit={edit}
 					/>
 				{/each}
 			{/if}
 		</div>
-		<Composer
-			{signedIn}
-			{ability}
-			{netAvailable}
-			vote={voteFor}
-			{showChips}
-			{target}
-			onpost={post}
-		/>
+		<div bind:this={composerNode} class="grid gap-3">
+			<Composer {signedIn} {ability} {multiTarget} {target} onpost={post} />
+			<p class="text-muted text-xs">
+				Comments are on-chain messages signed by your account and are public and permanent.
+				Moderators remove comments that are spam, impersonation, harassment, or unrelated to what is
+				being discussed, and block accounts that repeat it. A removed comment stays on chain and
+				stops appearing on Unicove.
+			</p>
+		</div>
 	{/if}
 </div>

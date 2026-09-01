@@ -1,6 +1,5 @@
 export const GOVERNANCE_CHANNEL = 'governance';
 export const MAX_BODY_BYTES = 65536;
-export const WARN_BODY_BYTES = 16384;
 export const MAX_TITLE_BYTES = 256;
 
 export type Tuple = readonly [kind: 'msig' | 'topic', a: string, b: string];
@@ -85,9 +84,4 @@ export function checkBody(body: string): BodyCheck {
 	if (BIDI.test(body)) return { ok: false, reason: 'bidi', bytes };
 	if (bytes > MAX_BODY_BYTES) return { ok: false, reason: 'too_long', bytes };
 	return { ok: true, bytes };
-}
-
-export function estimateNetBytes(packedContentLength: number): number {
-	const raw = Math.ceil(packedContentLength / 3) * 4 + 120;
-	return Math.ceil(raw / 8) * 8;
 }

@@ -26,19 +26,22 @@
 		viewer: string | null;
 		locale: string;
 		showTarget: boolean;
+		targetLabel: string | null;
 		ondelete: (seq: number) => Promise<void>;
 		onedit: (seq: number, body: string) => Promise<void>;
 	}
 
-	const { comment, vote, viewer, locale, showTarget, ondelete, onedit }: Props = $props();
+	const { comment, vote, viewer, locale, showTarget, targetLabel, ondelete, onedit }: Props =
+		$props();
 	const context = getContext<UnicoveContext>('state');
 
 	const COLLAPSE_BYTES = 8192;
-	const COLLAPSE_PX = 384;
+	const COLLAPSE_PX = 320;
 
 	const when = $derived(comment.pending ? new Date() : chainDate(comment.timestamp));
 	const own = $derived(!comment.pending && viewer !== null && viewer === comment.sender);
 	const target = $derived(targetFromTags(comment.tags));
+	const trxId = $derived(comment.trx_id ?? comment.pending?.trx_id ?? null);
 	const body = $derived(comment.body ?? '');
 
 	let expanded = $state(false);
@@ -114,33 +117,64 @@
 </script>
 
 <article class="border-outline grid gap-2 border-l-2 py-1 pl-4" data-seq={comment.seq}>
-	<header class="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
-		<span class="font-medium"><Account name={comment.sender} /></span>
-		{#if showTarget && target}
-			<Chip class="text-xs">
-				{#if target.kind === 'topic'}Proposal{:else}{target.proposer}/{target.proposal}{/if}
-			</Chip>
-		{/if}
-		{#if vote === 1}
-			<Chip class="text-success gap-1 text-xs"><ThumbsUp class="size-3" /> Supported</Chip>
-		{:else if vote === 0}
-			<Chip class="text-error gap-1 text-xs"><ThumbsDown class="size-3" /> Opposed</Chip>
-		{/if}
-		{#if comment.pending?.phase === 'confirming'}
-			<Chip class="text-primary text-xs">Confirming</Chip>
-		{:else if comment.pending?.phase === 'awaiting'}
-			<Chip class="text-muted text-xs">Posted. It will appear here shortly.</Chip>
-		{/if}
-		<span class="text-muted ml-auto" title={formatDateTime(when, locale)}>
-			{#if comment.pending}
-				just now
+	<header class="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 text-sm">
+		<div class="flex min-w-0 flex-wrap items-center gap-x-3 gap-y-1">
+			<span class="font-medium"><Account name={comment.sender} /></span>
+			{#if vote === 1}
+				<Chip
+					class="bg-success-container text-on-success-container flex shrink-0 items-center gap-1 text-xs whitespace-nowrap"
+					><ThumbsUp class="size-3" /> Supported</Chip
+				>
+			{:else if vote === 0}
+				<Chip
+					class="bg-error-container text-on-error-container flex shrink-0 items-center gap-1 text-xs whitespace-nowrap"
+					><ThumbsDown class="size-3" /> Opposed</Chip
+				>
+			{/if}
+		</div>
+
+		<div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+			{#if comment.pending?.phase === 'confirming'}
+				<Chip class="text-primary text-xs">Confirming</Chip>
+			{:else if comment.pending?.phase === 'awaiting'}
+				<Chip class="text-muted text-xs">Posted. It will appear here shortly.</Chip>
+			{/if}
+			{#if showTarget && targetLabel}
+				<span
+					title={target && target.kind === 'msig'
+						? `${target.proposer}/${target.proposal}`
+						: undefined}
+				>
+					<Chip class="text-xs">{targetLabel}</Chip>
+				</span>
+			{/if}
+			{#snippet stamp()}
+				<time
+					class="text-muted text-xs"
+					datetime={when.toISOString()}
+					title={formatDateTime(when, locale)}
+				>
+					{#if comment.pending}
+						just now
+					{:else}
+						{dayjs(when).fromNow()}
+					{/if}
+					{#if comment.edited_at}
+						(edited)
+					{/if}
+				</time>
+			{/snippet}
+			{#if trxId}
+				<a
+					class="focus-visible:ring-solar-500 -m-1.5 rounded p-1.5 hover:underline focus-visible:ring focus-visible:outline-hidden focus-visible:ring-inset"
+					href={context.urlPath(`/transaction/${trxId}`)}
+				>
+					{@render stamp()}
+				</a>
 			{:else}
-				{dayjs(when).fromNow()}
+				{@render stamp()}
 			{/if}
-			{#if comment.edited_at}
-				<span class="text-xs">(edited)</span>
-			{/if}
-		</span>
+		</div>
 	</header>
 
 	{#if editing}
@@ -180,8 +214,8 @@
 	{:else}
 		<div
 			bind:this={node}
-			class="relative text-sm"
-			class:max-h-96={collapsed}
+			class="relative text-base leading-[1.7]"
+			class:max-h-80={collapsed}
 			class:overflow-hidden={collapsed}
 		>
 			<CommentBody {body} />
@@ -211,16 +245,8 @@
 		<p class="text-muted text-xs">{deleteError}</p>
 	{/if}
 
-	{#if comment.pending?.phase === 'awaiting' || own}
+	{#if own}
 		<footer class="text-muted flex items-center gap-4 text-xs">
-			{#if comment.pending?.phase === 'awaiting'}
-				<a
-					class="text-primary focus-visible:ring-solar-500 -m-1.5 rounded p-1.5 hover:underline focus-visible:ring focus-visible:outline-hidden focus-visible:ring-inset"
-					href={context.urlPath(`/transaction/${comment.pending.trx_id}`)}
-				>
-					View transaction
-				</a>
-			{/if}
 			{#if own && !editing}
 				<button
 					class="focus-visible:ring-solar-500 -m-1.5 cursor-pointer rounded p-1.5 hover:underline focus-visible:ring focus-visible:outline-hidden focus-visible:ring-inset"

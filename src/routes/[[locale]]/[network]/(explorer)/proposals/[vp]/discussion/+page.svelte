@@ -1,33 +1,22 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
-	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import { Stack } from 'unicove-components';
 	import { SvelteMap } from 'svelte/reactivity';
 	import Thread from '$lib/components/discussion/Thread.svelte';
-	import {
-		descriptorFromParam,
-		proposalDescriptors,
-		type TargetDescriptor
-	} from '$lib/discussion/targets';
+	import TargetNav from '$lib/components/discussion/TargetNav.svelte';
+	import { descriptorFromParam, proposalDescriptors } from '$lib/discussion/targets';
+	import { mockComments } from '$lib/discussion/mock';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import { Name } from '@wharfkit/antelope';
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');
 
 	const descriptors = $derived(proposalDescriptors(data.summary, data.lang));
 	const active = $derived(descriptorFromParam(descriptors, page.url.searchParams.get('target')));
-
-	function select(d: TargetDescriptor | null) {
-		const url = new URL(page.url);
-		if (d) url.searchParams.set('target', d.key);
-		else url.searchParams.delete('target');
-		goto(url, { replaceState: true, noScroll: true, keepFocus: true });
-	}
+	const seed = $derived(data.summary.slug.startsWith('vp-9999') ? mockComments(descriptors) : []);
 
 	const votes = new SvelteMap<string, number>();
-	const userVotes = new SvelteMap<string, number | null>();
 
 	$effect(() => {
 		for (const d of descriptors) {
@@ -43,44 +32,20 @@
 				.catch(() => {});
 		}
 	});
-
-	async function loadUserVote(voter: Name, d: TargetDescriptor) {
-		try {
-			const r =
-				d.target.kind === 'msig'
-					? await context.network.contracts.sentiment.readonly('getmsigvote', {
-							voter,
-							proposer: Name.from(d.target.proposer),
-							proposal_name: Name.from(d.target.proposal)
-						})
-					: await context.network.contracts.sentiment.readonly('getvote', {
-							voter,
-							topic_id: Name.from(d.target.topic)
-						});
-			userVotes.set(d.key, r ? Number(r.vote_type) : null);
-		} catch {
-			userVotes.set(d.key, null);
-		}
-	}
-
-	$effect(() => {
-		const account = context.account;
-		if (!account) return;
-		for (const d of descriptors) loadUserVote(account.name, d);
-	});
 </script>
 
 <article class="@container">
 	<Stack class="gap-6">
 		<h2 class="text-on-surface text-headline">Discussion</h2>
+		{#if descriptors.length > 1}
+			<TargetNav {descriptors} />
+		{/if}
 		<Thread
 			{descriptors}
 			{active}
-			onselect={select}
 			{votes}
-			{userVotes}
-			onuservote={(d, v) => userVotes.set(d.key, v)}
-			showChips={descriptors.length > 1}
+			{seed}
+			multiTarget={descriptors.length > 1}
 			locale={data.lang}
 		/>
 	</Stack>
