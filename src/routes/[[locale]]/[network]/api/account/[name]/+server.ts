@@ -106,8 +106,9 @@ async function loadBalances(
 async function getAccount(network: NetworkState, account: NameType): Promise<AccountDataSources> {
 	const { system: systemContract, msig: msigContract } = network.contracts;
 
-	const [get_account, delegated, proposals, hash] = await Promise.all([
-		network.client.v1.chain.get_account(account),
+	// Resolve the account first so a missing account surfaces as its own error.
+	const get_account = await network.client.v1.chain.get_account(account);
+	const [delegated, proposals, hash] = await Promise.all([
 		systemContract.table('delband').all({ scope: account }),
 		msigContract.table('proposal', account).all(),
 		systemContract.table('abihash').get(account)
