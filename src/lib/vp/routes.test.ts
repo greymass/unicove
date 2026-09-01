@@ -18,6 +18,7 @@ function summary(overrides: Partial<VpSummary> = {}): VpSummary {
 		path: 'proposals/vp-9999-demo/proposal.md',
 		updated: null,
 		translations: [],
+		documents: [],
 		...overrides
 	} as VpSummary;
 }
@@ -31,6 +32,22 @@ describe('vpRouteTabs', () => {
 		});
 		expect(tabs.map((t) => t.kind)).toEqual(['proposal']);
 		expect(tabs[0].href).toBe('/proposals/vp-9999');
+	});
+
+	test('documents appear with their count right after the proposal', () => {
+		const tabs = vpRouteTabs(
+			'/proposals/vp-9999',
+			summary({
+				documents: [
+					{ path: 'proposals/vp-9999-demo/documents/a.md', translations: [] },
+					{ path: 'proposals/vp-9999-demo/documents/b.md', translations: [] }
+				]
+			}),
+			{ sentimentEnabled: true, discussionEnabled: false, revisionCount: 1 }
+		);
+		expect(tabs.map((t) => t.kind)).toEqual(['proposal', 'documents', 'revisions']);
+		expect(tabs[1].count).toBe(2);
+		expect(tabs[1].href).toBe('/proposals/vp-9999/documents');
 	});
 
 	test('revisions appear with their count', () => {

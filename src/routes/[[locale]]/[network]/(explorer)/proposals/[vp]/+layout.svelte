@@ -37,7 +37,9 @@
 	const tabOptions = $derived.by(() => {
 		const options: { href: string; text: string }[] = [];
 		for (const tab of tabs) {
-			if (tab.kind === 'multisigs') {
+			if (tab.kind === 'documents') {
+				options.push({ href: tab.href, text: `Documents (${tab.count})` });
+			} else if (tab.kind === 'multisigs') {
 				options.push({ href: tab.href, text: `Multisigs (${tab.count})` });
 			} else if (tab.kind === 'sentiment') {
 				options.push({ href: tab.href, text: 'Sentiment' });
@@ -62,8 +64,8 @@
 <Stack class="@container gap-6">
 	<PillGroup options={tabOptions} />
 
-	<div class="grid gap-8 xl:grid-cols-[minmax(0,40rem)_minmax(20rem,1fr)]">
-		<div class="max-w-[40rem] min-w-0">
+	<div class="grid gap-8 xl:grid-cols-[minmax(0,1fr)_20rem]">
+		<div class="min-w-0">
 			{@render children?.()}
 		</div>
 

@@ -1,7 +1,13 @@
 import { vpMsigSteps } from './onchain';
 import type { VpSummary } from './types';
 
-export type VpRouteKind = 'proposal' | 'multisigs' | 'sentiment' | 'discussion' | 'revisions';
+export type VpRouteKind =
+	| 'proposal'
+	| 'documents'
+	| 'multisigs'
+	| 'sentiment'
+	| 'discussion'
+	| 'revisions';
 
 export interface VpRouteTab {
 	href: string;
@@ -21,6 +27,14 @@ export function vpRouteTabs(
 	options: VpRouteOptions
 ): VpRouteTab[] {
 	const tabs: VpRouteTab[] = [{ href: basePath, kind: 'proposal' }];
+
+	if (summary.documents.length) {
+		tabs.push({
+			href: `${basePath}/documents`,
+			kind: 'documents',
+			count: summary.documents.length
+		});
+	}
 
 	// The tab counts steps, so a superseded attempt does not inflate it past what the timeline shows.
 	const stepCount = vpMsigSteps(summary).length;

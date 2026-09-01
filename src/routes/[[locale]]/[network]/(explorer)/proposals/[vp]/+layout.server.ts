@@ -77,7 +77,8 @@ export const load: LayoutServerLoad = async ({ fetch, locals, params, setHeaders
 	// A proposal resolves at both vp-0001 and vp-0001-slug, so point search engines at the number.
 	const canonical = new URL(url);
 	const segments = canonical.pathname.split('/');
-	segments[segments.length - 1] = summary.vp.toLowerCase();
+	const vpSegment = segments.findIndex((s) => s.toLowerCase() === params.vp.toLowerCase());
+	if (vpSegment !== -1) segments[vpSegment] = summary.vp.toLowerCase();
 	canonical.pathname = segments.join('/');
 	canonical.search = '';
 
