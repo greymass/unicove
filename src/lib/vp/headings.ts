@@ -1,7 +1,7 @@
 import type { HastNode } from 'svelte-exmarkdown';
 import { createSlugger } from './slug';
 
-const HEADINGS = new Set(['h2', 'h3', 'h4', 'h5', 'h6']);
+const HEADINGS = new Set(['h1', 'h2', 'h3', 'h4', 'h5', 'h6']);
 
 export function headingText(node: HastNode): string {
 	if (node.type === 'text') return node.value;
@@ -9,7 +9,7 @@ export function headingText(node: HastNode): string {
 	return (node.children ?? []).map(headingText).join('');
 }
 
-/** Assigns an id to every h2-h6 in the tree so anchors resolve in server-rendered HTML. */
+/** Assigns an id to every h1-h6 in the tree so anchors resolve in server-rendered HTML. */
 export function assignHeadingIds(tree: HastNode): HastNode {
 	const slug = createSlugger();
 

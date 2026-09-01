@@ -1,6 +1,6 @@
 <script lang="ts">
 	interface Props {
-		level: 2 | 3 | 4 | 5 | 6;
+		level: 1 | 2 | 3 | 4 | 5 | 6;
 		id?: string;
 		children?: import('svelte').Snippet;
 	}
@@ -8,6 +8,7 @@
 	const { level, id, children }: Props = $props();
 
 	const styles: Record<number, string> = {
+		1: 'text-headline mt-12 mb-4',
 		2: 'text-headline-sm mt-10 mb-3',
 		3: 'text-title mt-8 mb-2',
 		4: 'text-base font-semibold mt-6 mb-2',

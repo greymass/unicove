@@ -47,6 +47,19 @@ const translationSchema = v.object({
 	msigs: v.optional(v.array(msigTitleSchema), [])
 });
 
+const documentTranslationSchema = v.object({
+	lang: v.string(),
+	path: v.string(),
+	current: v.boolean(),
+	heading: v.optional(v.string())
+});
+
+const documentSchema = v.object({
+	path: v.string(),
+	heading: v.optional(v.string()),
+	translations: v.optional(v.array(documentTranslationSchema), [])
+});
+
 const summarySchema = v.object({
 	vp: v.pipe(v.string(), v.regex(/^VP-\d{4}$/)),
 	title: v.string(),
@@ -65,7 +78,8 @@ const summarySchema = v.object({
 	path: v.string(),
 	excerpt: v.optional(v.string()),
 	updated: v.nullable(v.string()),
-	translations: v.array(translationSchema)
+	translations: v.array(translationSchema),
+	documents: v.optional(v.array(documentSchema), [])
 });
 
 const envelopeSchema = v.object({
@@ -74,6 +88,7 @@ const envelopeSchema = v.object({
 });
 
 export type VpSummary = v.InferOutput<typeof summarySchema>;
+export type VpDocumentRef = v.InferOutput<typeof documentSchema>;
 
 export interface VpIndex {
 	generated: string;

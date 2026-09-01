@@ -59,4 +59,22 @@ describe('parseVpIndex', () => {
 		expect(without?.excerpt).toBeUndefined();
 		expect(index.skipped).toBe(0);
 	});
+
+	test('parses a documents array with per-document translations', () => {
+		const index = parseVpIndex(fixture);
+		const multi = index.proposals.find((p) => p.vp === 'VP-0003');
+		expect(multi?.documents.map((d) => d.path.split('/').pop())).toEqual([
+			'msig-5.md',
+			'rfp-framework.md',
+			'rfp-platform-prd.md'
+		]);
+		expect(multi?.documents[0].heading).toContain('MSIG #5');
+		expect(multi?.documents[0].translations).toEqual([]);
+	});
+
+	test('defaults documents to an empty array when the key is absent', () => {
+		const index = parseVpIndex(fixture);
+		const single = index.proposals.find((p) => p.vp === 'VP-0001');
+		expect(single?.documents).toEqual([]);
+	});
 });

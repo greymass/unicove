@@ -195,6 +195,37 @@ describe('rewriteVpHref', () => {
 			expect(rewriteVpHref(`#${id}`, ctx)).toEqual({ kind: 'internal', href: `#${id}` });
 		}
 	});
+
+	describe('document links', () => {
+		test('rewrites a document link to the document sub-route', () => {
+			expect(rewriteVpHref('documents/rfp-framework.md', ctx)).toEqual({
+				kind: 'internal',
+				href: '/en/vaulta/proposals/vp-0001/documents/rfp-framework'
+			});
+		});
+
+		test('carries a safe anchor through', () => {
+			expect(rewriteVpHref('documents/msig-5.md#blanks-to-fill', ctx)).toEqual({
+				kind: 'internal',
+				href: '/en/vaulta/proposals/vp-0001/documents/msig-5#blanks-to-fill'
+			});
+		});
+
+		test('drops an unsafe anchor', () => {
+			expect(rewriteVpHref('documents/msig-5.md#a"b', ctx)).toEqual({
+				kind: 'internal',
+				href: '/en/vaulta/proposals/vp-0001/documents/msig-5'
+			});
+		});
+
+		test('leaves a translated document file to the plain fallback', () => {
+			expect(rewriteVpHref('documents/rfp-framework.ko.md', ctx).kind).toBe('plain');
+		});
+
+		test('leaves a nested path to the plain fallback', () => {
+			expect(rewriteVpHref('documents/sub/file.md', ctx).kind).toBe('plain');
+		});
+	});
 });
 
 describe('resolveVpImageSrc', () => {

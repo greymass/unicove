@@ -8,6 +8,7 @@
 	import { VP_BRANCH } from '$lib/vp/links';
 	import VpLink from './VpLink.svelte';
 	import VpImage from './VpImage.svelte';
+	import VpHeading1 from './VpHeading1.svelte';
 	import VpHeading2 from './VpHeading2.svelte';
 	import VpHeading3 from './VpHeading3.svelte';
 	import VpHeading4 from './VpHeading4.svelte';
@@ -50,6 +51,7 @@
 			th: TH,
 			pre: VpPre,
 			code: VpCode,
+			h1: VpHeading1,
 			h2: VpHeading2,
 			h3: VpHeading3,
 			h4: VpHeading4,
@@ -75,6 +77,16 @@
 	.vp-prose :global(p) {
 		margin-block: 0.75rem;
 		color: var(--color-on-surface);
+	}
+	.vp-prose :global(a) {
+		color: var(--color-primary);
+		text-decoration: underline;
+		text-decoration-color: color-mix(in oklab, var(--color-primary) 50%, transparent);
+		text-underline-offset: 0.2em;
+		transition: text-decoration-color 120ms ease-out;
+	}
+	.vp-prose :global(a:hover) {
+		text-decoration-color: var(--color-primary);
 	}
 	.vp-prose :global(blockquote p) {
 		color: inherit;

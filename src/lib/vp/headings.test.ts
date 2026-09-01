@@ -64,12 +64,16 @@ describe('assignHeadingIds', () => {
 		expect(idOf(h5)).toBe('notes-1');
 	});
 
+	test('assigns ids to h1s so exhibit part headings anchor', () => {
+		const h1 = element('h1', [text('PART 1')]);
+		assignHeadingIds(root([h1]));
+		expect(idOf(h1)).toBe('part-1');
+	});
+
 	test('leaves other elements alone', () => {
 		const paragraph = element('p', [text('Body copy')]);
-		const h1 = element('h1', [text('Title')]);
-		assignHeadingIds(root([h1, paragraph]));
+		assignHeadingIds(root([paragraph]));
 		expect(idOf(paragraph)).toBeUndefined();
-		expect(idOf(h1)).toBeUndefined();
 	});
 
 	test('disambiguates repeated headings across the whole document', () => {

@@ -20,7 +20,8 @@ const base: VpSummary = {
 	slug: 'vp-9999-demo',
 	path: 'proposals/vp-9999-demo/proposal.md',
 	updated: null,
-	translations: []
+	translations: [],
+	documents: []
 };
 
 describe('vpMsigSteps', () => {

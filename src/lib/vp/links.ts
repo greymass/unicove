@@ -37,6 +37,7 @@ export type VpHref = { kind: 'internal' | 'external' | 'plain'; href: string };
 
 const CROSS_VP = /^\.\.\/vp-(\d{4})(?:-[a-z0-9-]+)?\/proposal(?:\.[a-z-]+)?\.md(#[^\s]*)?$/;
 const SAFE_ANCHOR = /^#[\p{L}\p{N}_-]+$/u;
+const DOCUMENT = /^documents\/([A-Za-z0-9_-]+)\.md(#[^\s]*)?$/;
 const ASSET = /^assets\/([A-Za-z0-9._-]+)$/;
 const PINNED_GITHUB =
 	/^https:\/\/github\.com\/[\w.-]+\/[\w.-]+\/(?:blob|tree)\/[0-9a-f]{40}\/[a-zA-Z0-9._/#%-]+$/;
@@ -61,6 +62,14 @@ export function rewriteVpHref(
 		const rawAnchor = cross[2] ?? '';
 		const anchor = rawAnchor && SAFE_ANCHOR.test(rawAnchor) ? rawAnchor : '';
 		return { kind: 'internal', href: `${ctx.basePath}/vp-${cross[1]}${anchor}` };
+	}
+
+	const doc = DOCUMENT.exec(target);
+	if (doc) {
+		const ref = normalizeVpRef(ctx.slug) ?? ctx.slug;
+		const rawAnchor = doc[2] ?? '';
+		const anchor = rawAnchor && SAFE_ANCHOR.test(rawAnchor) ? rawAnchor : '';
+		return { kind: 'internal', href: `${ctx.basePath}/${ref}/documents/${doc[1]}${anchor}` };
 	}
 
 	const asset = ASSET.exec(target);
