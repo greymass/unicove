@@ -18,7 +18,6 @@
 
 	// basePath keeps the URL's own vp form since PillGroup matches tabs via pathname.startsWith.
 	const basePath = $derived(context.urlPath(`/proposals/${page.params.vp}`));
-	const isLanding = $derived(page.url.pathname.replace(/\/$/, '') === basePath.replace(/\/$/, ''));
 	const sentimentEnabled = $derived(context.network.supports('sentiment'));
 	const discussionEnabled = $derived(context.network.supports('discussion'));
 	const hasOnchain = $derived(data.summary.msigs.length > 0 || data.summary.sentiment.length > 0);
@@ -63,35 +62,33 @@
 <Stack class="@container gap-6">
 	<PillGroup options={tabOptions} />
 
-	{#if isLanding}
-		<div class="grid gap-8 lg:grid-cols-[minmax(0,70ch)_minmax(20rem,1fr)]">
-			<div class="min-w-0">
-				{@render children?.()}
-			</div>
-
-			<Stack tag="aside" class="gap-6 self-start">
-				{#if data.summary.msigs.length}
-					<VpMultisigsCard summary={data.summary} {basePath} />
-				{/if}
-				{#if sentimentEnabled && (data.summary.sentiment.length || data.summary.msigs.some((m) => m.status === 'active'))}
-					<VpSentimentCard summary={data.summary} {basePath} />
-				{/if}
-				{#if discussionEnabled && descriptors.length}
-					<DiscussionCard tuples={descriptors.map((d) => d.tuple)} href="{basePath}/discussion" />
-				{/if}
-				{#if !hasOnchain}
-					<Card>
-						<p class="text-muted text-sm">
-							Nothing on-chain yet. Voting opens when a topic is published or a multisig is
-							proposed.
-						</p>
-					</Card>
-				{/if}
-				<VpDetailsCard summary={data.summary} revisions={data.revisions} branch={data.branch} />
-				<VpRelatedAccounts accounts={data.summary.accounts} />
-			</Stack>
+	<div class="grid gap-8 xl:grid-cols-[minmax(0,40rem)_minmax(20rem,1fr)]">
+		<div class="max-w-[40rem] min-w-0">
+			{@render children?.()}
 		</div>
-	{:else}
-		{@render children?.()}
-	{/if}
+
+		<Stack
+			tag="aside"
+			class="gap-6 self-start xl:sticky xl:top-4 xl:max-h-[calc(100svh-2rem)] xl:overflow-y-auto"
+		>
+			{#if data.summary.msigs.length}
+				<VpMultisigsCard summary={data.summary} {basePath} />
+			{/if}
+			{#if sentimentEnabled && (data.summary.sentiment.length || data.summary.msigs.some((m) => m.status === 'active'))}
+				<VpSentimentCard summary={data.summary} {basePath} />
+			{/if}
+			{#if discussionEnabled && descriptors.length}
+				<DiscussionCard tuples={descriptors.map((d) => d.tuple)} href="{basePath}/discussion" />
+			{/if}
+			{#if !hasOnchain}
+				<Card>
+					<p class="text-muted text-sm">
+						Nothing on-chain yet. Voting opens when a topic is published or a multisig is proposed.
+					</p>
+				</Card>
+			{/if}
+			<VpDetailsCard summary={data.summary} revisions={data.revisions} branch={data.branch} />
+			<VpRelatedAccounts accounts={data.summary.accounts} />
+		</Stack>
+	</div>
 </Stack>

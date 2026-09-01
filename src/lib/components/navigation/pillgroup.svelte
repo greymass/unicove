@@ -57,6 +57,7 @@
 		<li>
 			<Button
 				variant="pill"
+				class="h-11"
 				aria-current={isCurrent(option.href) ? 'page' : undefined}
 				href={option.href}
 			>

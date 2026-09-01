@@ -20,7 +20,7 @@
 		new Intl.DisplayNames([lang], { type: 'language' }).of(lang) || lang;
 </script>
 
-<Stack class="max-w-[70ch] gap-8">
+<Stack class="gap-8">
 	{#if data.revisions.length}
 		<Stack class="gap-3">
 			<h2 class="text-label-sm text-muted">Revisions</h2>

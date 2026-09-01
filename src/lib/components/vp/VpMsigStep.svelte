@@ -41,6 +41,14 @@
 		cancelled: 'Cancelled'
 	};
 
+	const statusVariants: Record<string, string> = {
+		planned: 'opacity-60',
+		active: 'bg-primary-container text-on-primary-container',
+		executed: 'bg-success-container text-on-success-container',
+		expired: 'bg-error-container text-on-error-container',
+		cancelled: 'bg-error-container text-on-error-container'
+	};
+
 	$effect(() => {
 		if (!step.proposer || !step.proposal) return;
 		const controller = new AbortController();
@@ -87,14 +95,14 @@
 		<div class="flex flex-wrap items-start justify-between gap-2">
 			<div class="min-w-0">
 				{#if step.title}
-					<h2 class="text-title">{step.title}</h2>
-				{:else if step.proposer && step.proposal}
-					<h2 class="text-title font-mono text-base">{step.proposer}/{step.proposal}</h2>
+					<h3 class="text-title">{step.title}</h3>
 				{:else}
-					<h2 class="text-title">This step has not been proposed on-chain yet.</h2>
+					<h3 class="text-title">Step {step.step}</h3>
 				{/if}
-				{#if step.title && step.proposer && step.proposal}
+				{#if step.proposer && step.proposal}
 					<p class="text-muted mt-1 font-mono text-sm">{step.proposer}/{step.proposal}</p>
+				{:else if !step.title}
+					<p class="text-muted mt-1 text-sm">This step has not been proposed on-chain yet.</p>
 				{/if}
 				{#if step.supersededAttempts === 1}
 					<p class="text-muted mt-1 text-sm">Supersedes 1 earlier attempt.</p>
@@ -104,7 +112,9 @@
 					</p>
 				{/if}
 			</div>
-			<Chip class="shrink-0 whitespace-nowrap">{statusLabels[step.status]}</Chip>
+			<Chip class="shrink-0 whitespace-nowrap {statusVariants[step.status] ?? ''}"
+				>{statusLabels[step.status]}</Chip
+			>
 		</div>
 
 		{#if actions.length}

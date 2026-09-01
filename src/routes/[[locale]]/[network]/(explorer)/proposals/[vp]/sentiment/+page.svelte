@@ -71,7 +71,7 @@
 	}
 </script>
 
-<Stack class="max-w-[80ch] gap-8">
+<Stack class="gap-8">
 	{#if !hasContent}
 		<p class="text-muted text-sm">
 			No sentiment yet. Voting opens when a topic is published or a multisig is proposed.

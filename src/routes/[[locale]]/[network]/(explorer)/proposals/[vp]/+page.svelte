@@ -21,7 +21,7 @@
 	const englishHref = $derived(localizePath(page.url.pathname, { forceLocale: 'en' }));
 </script>
 
-<Stack class="max-w-[70ch] gap-6">
+<Stack class="gap-6">
 	{#if data.stale}
 		<VpStaleNotice {englishHref} />
 	{/if}

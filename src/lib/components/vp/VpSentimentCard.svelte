@@ -35,7 +35,10 @@
 		} else if (liveStep?.proposer && liveStep?.proposal) {
 			url = context.urlPath(`/api/sentiment/msigs/${liveStep.proposer}/${liveStep.proposal}`);
 		}
-		if (!url) return;
+		if (!url) {
+			loaded = true;
+			return;
+		}
 		fetch(url, { signal: controller.signal })
 			.then((response) => response.json())
 			.then((result: ApiResponse<TopicDetailData | MsigDetailData>) => {

@@ -40,7 +40,7 @@
 	});
 </script>
 
-<Card class={row.votable ? 'ring-primary ring-1' : 'opacity-60'}>
+<Card class={row.votable ? 'ring-primary ring-1' : undefined}>
 	<div class="flex items-start justify-between gap-3">
 		<div class="flex min-w-0 items-start gap-3">
 			<span
@@ -49,12 +49,12 @@
 				{row.step}
 			</span>
 			<div class="min-w-0">
-				<h4 class="font-medium">{question}</h4>
+				<h3 class="font-medium">{question}</h3>
 				<p class="text-muted mt-1 font-mono text-sm">{row.proposer}/{row.proposal}</p>
 			</div>
 		</div>
 		{#if !row.votable}
-			<Chip class="shrink-0 whitespace-nowrap">Closed</Chip>
+			<Chip class="text-muted shrink-0 whitespace-nowrap">Closed</Chip>
 		{/if}
 	</div>
 
