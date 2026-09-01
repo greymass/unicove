@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.663Z\n"
-"PO-Revision-Date: 2026-08-27T21:43:53.804Z\n"
+"PO-Revision-Date: 2026-09-01T03:23:18.793Z\n"
 "Last-Translator: \n"
 "Language: ko\n"
 "Language-Team: \n"
@@ -509,12 +509,12 @@ msgstr "송금"
 msgid "+ {0} ms (CPU)"
 msgstr "+ {0} ms (CPU)"
 
-#. placeholder {0}: data.powup_cpu
 #. placeholder {0}: data.powup_net
-#. placeholder {0}: account.weight
+#. placeholder {0}: data.powup_cpu
 #. placeholder {0}: key.weight
 #. placeholder {0}: account.weight
 #. placeholder {0}: key.weight
+#. placeholder {0}: account.weight
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio/newaccount.svelte
@@ -763,8 +763,8 @@ msgstr "상세 정보"
 msgid "Network Fees"
 msgstr "네트워크 수수료"
 
-#. placeholder {0}: data.network.chain.systemToken?.symbol.code || ''
 #. placeholder {0}: market.network.currency.symbol.code
+#. placeholder {0}: data.network.chain.systemToken?.symbol.code || ''
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 msgid "Market Cap ({0})"
@@ -1832,10 +1832,10 @@ msgstr "필 선택"
 msgid "Select a date range"
 msgstr "날짜 범위 선택"
 
-#. placeholder {0}: selected.label
-#. placeholder {0}: selectedFormOption.label
-#. placeholder {0}: imageOptionSelected.label
 #. placeholder {0}: JSON.stringify(tokenSelected, null, 2)
+#. placeholder {0}: imageOptionSelected.label
+#. placeholder {0}: selectedFormOption.label
+#. placeholder {0}: selected.label
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
@@ -2223,7 +2223,7 @@ msgstr "이 빌드 및 사용되는 온체인 계정에 대해 wharfkit/cli에�
 msgid "Refresh"
 msgstr "새로 고침"
 
-#. placeholder {0}: formatDate(proposal.updated)
+#. placeholder {0}: refreshed
 #. placeholder {0}: formatDate(proposal.updated)
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/market/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.svelte
@@ -3401,7 +3401,7 @@ msgstr "<0>Unicove -</0> {0} 웹 지갑 및 블록 탐색기"
 
 #. placeholder {0}: network.chain.name
 #. placeholder {0}: networkName
-#. placeholder {0}: network.chain.name
+#. placeholder {0}: networkName
 #: src/routes/+layout.server.ts
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
@@ -3435,8 +3435,8 @@ msgstr "{0} 토큰 스왑이 시작되었습니다!"
 msgid "Swap {0} to {1} at a 1:1 ratio"
 msgstr "{0}을(를) {1}으로 1:1 비율로 교환하세요"
 
-#. placeholder {0}: props.network.token.name
 #. placeholder {0}: String(data.quote.symbol.name)
+#. placeholder {0}: props.network.token.name
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/legacy-token-swap.svelte
 msgid "Swap to {0}"
@@ -3455,7 +3455,7 @@ msgstr "토큰 받기 "
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
-#. placeholder {0}: symbol.name
+#. placeholder {0}: String(network.token.symbol.name)
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
@@ -3474,10 +3474,10 @@ msgstr "토큰화된 데이터 스토리지"
 msgid "One {0} of RAM represents ownership rights over 1000 bytes of the network's total blockchain storage capacity. {1} can be swapped with {2} by visiting the RAM Market."
 msgstr "1개의 {0}은 네트워크 전체 블록체인 저장 용량 중 1000바이트에 대한 소유권을 나타냅니다. {1}은 RAM 시장에 접속하여 {2}과 교환할 수 있습니다."
 
-#. placeholder {0}: String(network.chain.systemToken?.symbol.name)
-#. placeholder {1}: String(ramtoken.name)
 #. placeholder {0}: data.network.token.name
 #. placeholder {1}: data.network.getRamToken().name
+#. placeholder {0}: String(network.chain.systemToken?.symbol.name)
+#. placeholder {1}: String(ramtoken.name)
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/charts.svelte
 msgid "Swap {0}/{1}"
@@ -5894,8 +5894,8 @@ msgstr "{0} {1}을(를) 환불받을 수 있습니다."
 msgid "You have been outbid on this name.<0/>"
 msgstr "이 이름에 대한 입찰에서 패했습니다.<0/>"
 
-#. placeholder {0}: String(tracked.refund.amount)
 #. placeholder {0}: String(manager.refundAmount)
+#. placeholder {0}: String(tracked.refund.amount)
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/refund/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
 msgid "Claim Refund ({0})"
@@ -7771,8 +7771,6 @@ msgstr "변경 기록"
 msgid "{0} V"
 msgstr "{0} V"
 
-#: src/lib/components/discussion/Comment.svelte
-#: src/lib/components/discussion/Thread.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.svelte
 msgid "Proposal"
 msgstr "제안"
@@ -7840,6 +7838,7 @@ msgid "Sentiment is recorded on-chain."
 msgstr "의견이 온체인에 기록됩니다."
 
 #: src/lib/components/vp/VpMultisigsCard.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/multisigs/+page.svelte
 msgid "Multisigs"
 msgstr "멀티시그"
 
@@ -7956,14 +7955,6 @@ msgstr "아직 온체인에 제안된 단계가 없습니다."
 #: src/lib/components/vp/VpMultisigsCard.svelte
 msgid "View all {0} multisigs"
 msgstr "모든 {0}개의 멀티시그 보기"
-
-#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.svelte
-msgid ""
-"Nothing on-chain yet. Voting opens when a topic is published or a multisig is\n"
-"proposed."
-msgstr ""
-"아직 온체인에 아무것도 없습니다. 주제가 게시되거나 멀티시그가\n"
-"제안되면 투표가 시작됩니다."
 
 #: src/lib/components/vp/VpMsigStep.svelte
 msgid "Planned"
@@ -8132,7 +8123,7 @@ msgstr "전체 결과 보기"
 
 #: src/lib/components/discussion/Comment.svelte
 msgid "Confirming"
-msgstr ""
+msgstr "확인 중"
 
 #: src/lib/components/discussion/DiscussionCard.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
@@ -8143,11 +8134,11 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/discussion/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/discussion/+page.ts
 msgid "Discussion"
-msgstr ""
+msgstr "토론"
 
 #: src/lib/components/discussion/DiscussionCard.svelte
 msgid "1 comment"
-msgstr ""
+msgstr "댓글 1개"
 
 #. placeholder {0}: summary.total
 #. placeholder {0}: total
@@ -8157,50 +8148,43 @@ msgstr ""
 #. placeholder {0}: summary.total
 #: src/lib/components/discussion/DiscussionCard.svelte
 msgid "{0} comments"
-msgstr ""
+msgstr "댓글 {0}개"
 
 #: src/lib/discussion/thread.svelte.ts
 msgid "Z"
-msgstr ""
+msgstr "Z"
 
 #: src/lib/components/discussion/Comment.svelte
 msgid "<0/> Supported"
-msgstr ""
+msgstr "<0/> 지원됨"
 
 #: src/lib/components/discussion/Comment.svelte
 msgid "<0/> Opposed"
-msgstr ""
+msgstr "<0/> 반대"
 
 #: src/lib/components/discussion/Comment.svelte
 msgid "(edited)"
-msgstr ""
-
-#: src/lib/components/discussion/Comment.svelte
-msgid "View transaction"
-msgstr ""
+msgstr "(수정됨)"
 
 #: src/lib/components/discussion/Composer.svelte
 msgid "Connect a wallet to join the discussion. Comments stay visible either way."
-msgstr ""
-
-#: src/lib/components/discussion/Composer.svelte
-msgid "You have not voted on this yet. Your comment posts either way."
-msgstr ""
+msgstr "토론에 참여하려면 지갑을 연결하세요. 어느 쪽이든 댓글은 계속 표시됩니다."
 
 #: src/lib/components/discussion/Composer.svelte
 #: src/lib/components/discussion/Composer.svelte
+#: src/lib/components/discussion/Thread.svelte
 msgid "Write a comment"
-msgstr ""
+msgstr "댓글 작성"
 
 #: src/lib/components/discussion/Composer.svelte
 msgid "Post comment"
-msgstr ""
+msgstr "댓글 게시"
 
 #. placeholder {0}: summary.total
 #. placeholder {0}: summary.total
 #: src/lib/components/discussion/DiscussionCard.svelte
 msgid "Read the discussion ({0} comments)"
-msgstr ""
+msgstr "토론 읽기 (댓글 {0}개)"
 
 #. placeholder {0}: discussion.total
 #. placeholder {0}: discussion.total
@@ -8211,183 +8195,183 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+layout.svelte
 msgid "Discussion ({0})"
-msgstr ""
+msgstr "토론 ({0})"
 
 #: src/lib/components/discussion/DiscussionCard.svelte
 #: src/lib/components/discussion/DiscussionCard.svelte
 #: src/lib/components/vp/VpSentimentHero.svelte
 #: src/lib/components/vp/VpSentimentStepRow.svelte
 msgid "Read the discussion"
-msgstr ""
+msgstr "토론 읽기"
 
 #: src/lib/components/discussion/DiscussionCard.svelte
 msgid "Read the discussion (1 comment)"
-msgstr ""
+msgstr "토론 읽기 (댓글 1개)"
 
 #: src/lib/components/discussion/DiscussionCard.svelte
 #: src/lib/components/discussion/Thread.svelte
 msgid "No comments yet."
-msgstr ""
+msgstr "아직 댓글이 없습니다."
 
-#: src/lib/components/discussion/Thread.svelte
+#: src/lib/components/discussion/TargetNav.svelte
 msgid "All"
-msgstr ""
-
-#. placeholder {0}: d.step
-#: src/lib/components/discussion/Thread.svelte
-msgid "Step {0}<0/>"
-msgstr ""
+msgstr "모두"
 
 #: src/lib/components/discussion/Thread.svelte
 msgid "Load earlier comments"
-msgstr ""
+msgstr "이전 댓글 로드"
 
 #: src/lib/components/discussion/Comment.svelte
 msgid "just now"
-msgstr ""
+msgstr "방금"
 
 #: src/lib/components/discussion/Comment.svelte
 msgid "Edit comment"
-msgstr ""
+msgstr "댓글 수정"
 
 #: src/lib/components/discussion/Comment.svelte
 msgid "Save"
-msgstr ""
+msgstr "저장"
 
 #: src/lib/components/discussion/Comment.svelte
 msgid "Edit"
-msgstr ""
+msgstr "수정"
 
 #: src/lib/components/discussion/Composer.svelte
 msgid "Plain text only. Line breaks are kept."
-msgstr ""
+msgstr "일반 텍스트만 사용할 수 있습니다. 줄 바꿈은 유지됩니다."
 
 #: src/lib/components/discussion/Comment.svelte
 msgid "Posted. It will appear here shortly."
-msgstr ""
+msgstr "게시되었습니다. 곧 여기에 표시됩니다."
 
 #. placeholder {0}: draftCharsOver
 #. placeholder {0}: charsOver
 #: src/lib/components/discussion/Comment.svelte
 #: src/lib/components/discussion/Composer.svelte
 msgid "{0} characters over the limit."
-msgstr ""
+msgstr "제한보다 {0}자 초과되었습니다."
 
 #. placeholder {0}: draftCharsLeft
 #. placeholder {0}: charsLeft
 #: src/lib/components/discussion/Comment.svelte
 #: src/lib/components/discussion/Composer.svelte
 msgid "About {0} characters left."
-msgstr ""
+msgstr "약 {0}자 남았습니다."
 
 #. placeholder {0}: draftCharsOver
 #. placeholder {0}: charsOver
 #: src/lib/components/discussion/Comment.svelte
 #: src/lib/components/discussion/Composer.svelte
 msgid "This comment is too long. Shorten it by about {0} characters to post."
-msgstr ""
+msgstr "이 댓글은 너무 깁니다. 게시하려면 약 {0}자를 줄이세요."
 
 #: src/lib/components/discussion/Comment.svelte
 #: src/lib/components/discussion/Composer.svelte
 msgid "This comment contains hidden text-direction characters that cannot be posted."
-msgstr ""
+msgstr "이 댓글에는 게시할 수 없는 숨겨진 텍스트 방향 문자가 포함되어 있습니다."
 
 #: src/lib/components/discussion/Comment.svelte
 msgid "Your change could not be saved."
-msgstr ""
+msgstr "변경 사항을 저장할 수 없습니다."
 
 #: src/lib/components/discussion/Comment.svelte
 msgid "The comment could not be deleted."
-msgstr ""
+msgstr "댓글을 삭제할 수 없습니다."
 
 #: src/lib/components/discussion/DiscussionCard.svelte
 #: src/lib/components/discussion/DiscussionCard.svelte
 #: src/lib/components/discussion/Thread.svelte
 msgid "Discussion is not available on this network."
-msgstr ""
+msgstr "이 네트워크에서는 토론을 이용할 수 없습니다."
 
 #: src/lib/components/discussion/Composer.svelte
 msgid "Unstake or add funds to join in."
-msgstr ""
+msgstr "참여하려면 스테이킹을 해제하거나 자금을 추가하세요."
 
 #: src/lib/components/discussion/Composer.svelte
 msgid ""
 "You need <0/> available to comment. Your\n"
 "account has <1/> available; the rest is staked. <2/>"
 msgstr ""
-
-#: src/lib/components/discussion/Composer.svelte
-msgid "<0/> You voted to support this."
-msgstr ""
-
-#: src/lib/components/discussion/Composer.svelte
-msgid "<0/> You voted to oppose this."
-msgstr ""
+"댓글을 작성하려면 <0/>을(를) 사용할 수 있어야 합니다. 계정에서 사용할 수 있는 금액은\n"
+"<1/>이며 나머지는 스테이킹되어 있습니다. <2/>"
 
 #: src/lib/components/discussion/Composer.svelte
 msgid "Commenting on the proposal"
-msgstr ""
+msgstr "제안에 댓글 작성"
 
 #. placeholder {0}: target.step
 #: src/lib/components/discussion/Composer.svelte
 msgid "Commenting on Step {0}<0/>"
-msgstr ""
+msgstr "{0}단계에 댓글 작성<0/>"
 
 #: src/lib/components/discussion/Composer.svelte
 msgid "This step is closed to new comments. The discussion stays readable."
-msgstr ""
+msgstr "이 단계에는 새 댓글을 작성할 수 없습니다. 토론 내용은 계속 읽을 수 있습니다."
 
 #: src/lib/components/discussion/Composer.svelte
 msgid "Choose a step above to comment on it."
-msgstr ""
-
-#. placeholder {0}: netShortChars
-#: src/lib/components/discussion/Composer.svelte
-msgid ""
-"This comment is too long to send with your current network resources. Free up resources on\n"
-"your account, or shorten the comment by about {0} characters."
-msgstr ""
+msgstr "댓글을 작성할 위의 단계를 선택하세요."
 
 #: src/lib/components/discussion/Composer.svelte
 msgid "Your comment could not be posted."
-msgstr ""
+msgstr "댓글을 게시할 수 없습니다."
 
 #: src/lib/components/discussion/Comment.svelte
 #: src/lib/components/discussion/Composer.svelte
 msgid "No characters left."
-msgstr ""
+msgstr "남은 글자 수가 없습니다."
 
 #: src/lib/components/discussion/Comment.svelte
 msgid "Delete this comment?"
-msgstr ""
+msgstr "이 댓글을 삭제하시겠습니까?"
 
 #: src/lib/components/discussion/Composer.svelte
 msgid ""
 "Your account cannot post here. Comments are moderated for spam, impersonation, harassment, and\n"
 "posts unrelated to what is being discussed."
 msgstr ""
-
-#. placeholder {0}: accountName
-#: src/lib/components/discussion/Composer.svelte
-msgid "Posts publicly as {0} and stays on chain permanently."
-msgstr ""
-
-#: src/lib/components/discussion/Thread.svelte
-msgid ""
-"Comments are on-chain messages signed by your account and are public and permanent. Moderators\n"
-"remove comments that are spam, impersonation, harassment, or unrelated to what is being\n"
-"discussed, and block accounts that repeat it. A removed comment stays on chain and stops\n"
-"appearing on Unicove."
-msgstr ""
+"이 계정은 여기에 게시할 수 없습니다. 댓글은 스팸, 사칭, 괴롭힘 및\n"
+"논의 중인 내용과 관련 없는 게시물에 대해 관리됩니다."
 
 #: src/lib/components/discussion/Comment.svelte
 msgid "Show less of this comment"
-msgstr ""
+msgstr "이 댓글 간략히 보기"
 
 #: src/lib/components/discussion/Comment.svelte
 msgid "Read more of this comment"
-msgstr ""
+msgstr "이 댓글 더 보기"
+
+#: src/lib/components/discussion/TargetNav.svelte
+msgid "Filter comments by target"
+msgstr "대상별로 댓글 필터링"
 
 #: src/lib/components/discussion/Thread.svelte
-msgid "Filter comments by target"
+msgid ""
+"Comments are on-chain messages signed by your account and are public and permanent.\n"
+"Moderators remove comments that are spam, impersonation, harassment, or unrelated to what is\n"
+"being discussed, and block accounts that repeat it. A removed comment stays on chain and\n"
+"stops appearing on Unicove."
 msgstr ""
+"댓글은 회원님의 계정으로 서명된 온체인 메시지이며 공개되고 영구적으로 보존됩니다.\n"
+"관리자는 스팸, 사칭, 괴롭힘 또는 토론 내용과 관련 없는 댓글을 삭제하고, 이러한 행위를\n"
+"반복하는 계정을 차단합니다. 삭제된 댓글은 온체인에 남지만 Unicove에는 더 이상\n"
+"표시되지 않습니다."
+
+#: src/lib/components/discussion/Composer.svelte
+msgid "Comment awaiting signature"
+msgstr "서명을 기다리는 댓글"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.svelte
+msgid "Nothing on-chain yet. Voting opens when a topic is published or a multisig is proposed."
+msgstr "아직 온체인에 아무것도 없습니다. 주제가 게시되거나 멀티시그가 제안되면 투표가 시작됩니다."
+
+#: src/lib/components/discussion/Thread.svelte
+msgid "Loading comments"
+msgstr "댓글 로드 중"
+
+#. placeholder {0}: step.step
+#: src/lib/components/vp/VpMsigStep.svelte
+msgid "Step {0}"
+msgstr "{0}단계"

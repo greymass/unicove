@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2026-08-27T21:43:53.810Z\n"
+"PO-Revision-Date: 2026-09-01T03:23:18.798Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -509,12 +509,12 @@ msgstr "转账"
 msgid "+ {0} ms (CPU)"
 msgstr "+ {0} 毫秒 (CPU)"
 
-#. placeholder {0}: data.powup_cpu
 #. placeholder {0}: data.powup_net
-#. placeholder {0}: account.weight
+#. placeholder {0}: data.powup_cpu
 #. placeholder {0}: key.weight
 #. placeholder {0}: account.weight
 #. placeholder {0}: key.weight
+#. placeholder {0}: account.weight
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio/newaccount.svelte
@@ -763,8 +763,8 @@ msgstr "详情"
 msgid "Network Fees"
 msgstr "网络费用"
 
-#. placeholder {0}: data.network.chain.systemToken?.symbol.code || ''
 #. placeholder {0}: market.network.currency.symbol.code
+#. placeholder {0}: data.network.chain.systemToken?.symbol.code || ''
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 msgid "Market Cap ({0})"
@@ -1834,10 +1834,10 @@ msgstr "药丸选择"
 msgid "Select a date range"
 msgstr "选择日期范围"
 
-#. placeholder {0}: selected.label
-#. placeholder {0}: selectedFormOption.label
-#. placeholder {0}: imageOptionSelected.label
 #. placeholder {0}: JSON.stringify(tokenSelected, null, 2)
+#. placeholder {0}: imageOptionSelected.label
+#. placeholder {0}: selectedFormOption.label
+#. placeholder {0}: selected.label
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
@@ -2218,7 +2218,7 @@ msgstr "此构建的 wharfkit/cli 生成的合约以及它使用的链上帐户�
 msgid "Refresh"
 msgstr "刷新"
 
-#. placeholder {0}: formatDate(proposal.updated)
+#. placeholder {0}: refreshed
 #. placeholder {0}: formatDate(proposal.updated)
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/market/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.svelte
@@ -3003,10 +3003,10 @@ msgstr "没有反对票"
 msgid "Loading topic..."
 msgstr "正在加载主题..."
 
-#. placeholder {0}: String(network.chain.systemToken?.symbol.name)
-#. placeholder {1}: String(ramtoken.name)
 #. placeholder {0}: data.network.token.name
 #. placeholder {1}: data.network.getRamToken().name
+#. placeholder {0}: String(network.chain.systemToken?.symbol.name)
+#. placeholder {1}: String(ramtoken.name)
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/charts.svelte
 msgid "Swap {0}/{1}"
@@ -3022,8 +3022,8 @@ msgstr "兑换 {0}/{1}"
 msgid "Available"
 msgstr "可用"
 
-#. placeholder {0}: props.network.token.name
 #. placeholder {0}: String(data.quote.symbol.name)
+#. placeholder {0}: props.network.token.name
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/legacy-token-swap.svelte
 msgid "Swap to {0}"
@@ -3605,7 +3605,7 @@ msgstr "获取代币"
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
-#. placeholder {0}: symbol.name
+#. placeholder {0}: String(network.token.symbol.name)
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
@@ -3636,7 +3636,7 @@ msgstr "<0>Unicove -</0> {0} 网络钱包和区块浏览器"
 
 #. placeholder {0}: network.chain.name
 #. placeholder {0}: networkName
-#. placeholder {0}: network.chain.name
+#. placeholder {0}: networkName
 #: src/routes/+layout.server.ts
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
@@ -5895,8 +5895,8 @@ msgstr "{0}您有 {1} 可供回收。"
 msgid "You have been outbid on this name.<0/>"
 msgstr "您在这个名字上的出价已被超过。<0/>"
 
-#. placeholder {0}: String(tracked.refund.amount)
 #. placeholder {0}: String(manager.refundAmount)
+#. placeholder {0}: String(tracked.refund.amount)
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/refund/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
 msgid "Claim Refund ({0})"
@@ -7757,8 +7757,6 @@ msgstr "变更历史"
 msgid "{0} V"
 msgstr "{0} 票"
 
-#: src/lib/components/discussion/Comment.svelte
-#: src/lib/components/discussion/Thread.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.svelte
 msgid "Proposal"
 msgstr "提案"
@@ -7826,6 +7824,7 @@ msgid "Sentiment is recorded on-chain."
 msgstr "意见已记录在链上。"
 
 #: src/lib/components/vp/VpMultisigsCard.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/multisigs/+page.svelte
 msgid "Multisigs"
 msgstr "多重签名"
 
@@ -7942,12 +7941,6 @@ msgstr "链上尚未提出任何步骤。"
 #: src/lib/components/vp/VpMultisigsCard.svelte
 msgid "View all {0} multisigs"
 msgstr "查看全部 {0} 个多重签名"
-
-#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.svelte
-msgid ""
-"Nothing on-chain yet. Voting opens when a topic is published or a multisig is\n"
-"proposed."
-msgstr "链上暂时没有任何内容。当主题发布或多重签名提议后，投票将开放。"
 
 #: src/lib/components/vp/VpMsigStep.svelte
 msgid "Planned"
@@ -8114,7 +8107,7 @@ msgstr "查看完整结果"
 
 #: src/lib/components/discussion/Comment.svelte
 msgid "Confirming"
-msgstr ""
+msgstr "确认中"
 
 #: src/lib/components/discussion/DiscussionCard.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
@@ -8125,11 +8118,11 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/discussion/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/discussion/+page.ts
 msgid "Discussion"
-msgstr ""
+msgstr "讨论"
 
 #: src/lib/components/discussion/DiscussionCard.svelte
 msgid "1 comment"
-msgstr ""
+msgstr "1 条评论"
 
 #. placeholder {0}: summary.total
 #. placeholder {0}: total
@@ -8139,50 +8132,43 @@ msgstr ""
 #. placeholder {0}: summary.total
 #: src/lib/components/discussion/DiscussionCard.svelte
 msgid "{0} comments"
-msgstr ""
+msgstr "{0} 条评论"
 
 #: src/lib/discussion/thread.svelte.ts
 msgid "Z"
-msgstr ""
+msgstr "Z"
 
 #: src/lib/components/discussion/Comment.svelte
 msgid "<0/> Supported"
-msgstr ""
+msgstr "<0/> 支持"
 
 #: src/lib/components/discussion/Comment.svelte
 msgid "<0/> Opposed"
-msgstr ""
+msgstr "<0/> 反对"
 
 #: src/lib/components/discussion/Comment.svelte
 msgid "(edited)"
-msgstr ""
-
-#: src/lib/components/discussion/Comment.svelte
-msgid "View transaction"
-msgstr ""
+msgstr "（已编辑）"
 
 #: src/lib/components/discussion/Composer.svelte
 msgid "Connect a wallet to join the discussion. Comments stay visible either way."
-msgstr ""
-
-#: src/lib/components/discussion/Composer.svelte
-msgid "You have not voted on this yet. Your comment posts either way."
-msgstr ""
+msgstr "连接钱包以参与讨论。无论如何，评论都会保持可见。"
 
 #: src/lib/components/discussion/Composer.svelte
 #: src/lib/components/discussion/Composer.svelte
+#: src/lib/components/discussion/Thread.svelte
 msgid "Write a comment"
-msgstr ""
+msgstr "撰写评论"
 
 #: src/lib/components/discussion/Composer.svelte
 msgid "Post comment"
-msgstr ""
+msgstr "发表评论"
 
 #. placeholder {0}: summary.total
 #. placeholder {0}: summary.total
 #: src/lib/components/discussion/DiscussionCard.svelte
 msgid "Read the discussion ({0} comments)"
-msgstr ""
+msgstr "阅读讨论（{0} 条评论）"
 
 #. placeholder {0}: discussion.total
 #. placeholder {0}: discussion.total
@@ -8193,183 +8179,178 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+layout.svelte
 msgid "Discussion ({0})"
-msgstr ""
+msgstr "讨论（{0}）"
 
 #: src/lib/components/discussion/DiscussionCard.svelte
 #: src/lib/components/discussion/DiscussionCard.svelte
 #: src/lib/components/vp/VpSentimentHero.svelte
 #: src/lib/components/vp/VpSentimentStepRow.svelte
 msgid "Read the discussion"
-msgstr ""
+msgstr "阅读讨论"
 
 #: src/lib/components/discussion/DiscussionCard.svelte
 msgid "Read the discussion (1 comment)"
-msgstr ""
+msgstr "阅读讨论（1 条评论）"
 
 #: src/lib/components/discussion/DiscussionCard.svelte
 #: src/lib/components/discussion/Thread.svelte
 msgid "No comments yet."
-msgstr ""
+msgstr "暂无评论。"
 
-#: src/lib/components/discussion/Thread.svelte
+#: src/lib/components/discussion/TargetNav.svelte
 msgid "All"
-msgstr ""
-
-#. placeholder {0}: d.step
-#: src/lib/components/discussion/Thread.svelte
-msgid "Step {0}<0/>"
-msgstr ""
+msgstr "全部"
 
 #: src/lib/components/discussion/Thread.svelte
 msgid "Load earlier comments"
-msgstr ""
+msgstr "加载更早的评论"
 
 #: src/lib/components/discussion/Comment.svelte
 msgid "just now"
-msgstr ""
+msgstr "刚刚"
 
 #: src/lib/components/discussion/Comment.svelte
 msgid "Edit comment"
-msgstr ""
+msgstr "编辑评论"
 
 #: src/lib/components/discussion/Comment.svelte
 msgid "Save"
-msgstr ""
+msgstr "保存"
 
 #: src/lib/components/discussion/Comment.svelte
 msgid "Edit"
-msgstr ""
+msgstr "编辑"
 
 #: src/lib/components/discussion/Composer.svelte
 msgid "Plain text only. Line breaks are kept."
-msgstr ""
+msgstr "仅限纯文本。换行会被保留。"
 
 #: src/lib/components/discussion/Comment.svelte
 msgid "Posted. It will appear here shortly."
-msgstr ""
+msgstr "已发布。稍后会显示在这里。"
 
 #. placeholder {0}: draftCharsOver
 #. placeholder {0}: charsOver
 #: src/lib/components/discussion/Comment.svelte
 #: src/lib/components/discussion/Composer.svelte
 msgid "{0} characters over the limit."
-msgstr ""
+msgstr "超出限制 {0} 个字符。"
 
 #. placeholder {0}: draftCharsLeft
 #. placeholder {0}: charsLeft
 #: src/lib/components/discussion/Comment.svelte
 #: src/lib/components/discussion/Composer.svelte
 msgid "About {0} characters left."
-msgstr ""
+msgstr "约剩余 {0} 个字符。"
 
 #. placeholder {0}: draftCharsOver
 #. placeholder {0}: charsOver
 #: src/lib/components/discussion/Comment.svelte
 #: src/lib/components/discussion/Composer.svelte
 msgid "This comment is too long. Shorten it by about {0} characters to post."
-msgstr ""
+msgstr "此评论过长。请缩短约 {0} 个字符后再发布。"
 
 #: src/lib/components/discussion/Comment.svelte
 #: src/lib/components/discussion/Composer.svelte
 msgid "This comment contains hidden text-direction characters that cannot be posted."
-msgstr ""
+msgstr "此评论包含无法发布的隐藏文本方向字符。"
 
 #: src/lib/components/discussion/Comment.svelte
 msgid "Your change could not be saved."
-msgstr ""
+msgstr "无法保存您的更改。"
 
 #: src/lib/components/discussion/Comment.svelte
 msgid "The comment could not be deleted."
-msgstr ""
+msgstr "无法删除该评论。"
 
 #: src/lib/components/discussion/DiscussionCard.svelte
 #: src/lib/components/discussion/DiscussionCard.svelte
 #: src/lib/components/discussion/Thread.svelte
 msgid "Discussion is not available on this network."
-msgstr ""
+msgstr "此网络不提供讨论功能。"
 
 #: src/lib/components/discussion/Composer.svelte
 msgid "Unstake or add funds to join in."
-msgstr ""
+msgstr "解除质押或添加资金以参与。"
 
 #: src/lib/components/discussion/Composer.svelte
 msgid ""
 "You need <0/> available to comment. Your\n"
 "account has <1/> available; the rest is staked. <2/>"
-msgstr ""
-
-#: src/lib/components/discussion/Composer.svelte
-msgid "<0/> You voted to support this."
-msgstr ""
-
-#: src/lib/components/discussion/Composer.svelte
-msgid "<0/> You voted to oppose this."
-msgstr ""
+msgstr "您需要有 <0/> 可用余额才能发表评论。您的账户有 <1/> 可用余额；其余资金已质押。<2/>"
 
 #: src/lib/components/discussion/Composer.svelte
 msgid "Commenting on the proposal"
-msgstr ""
+msgstr "正在评论提案"
 
 #. placeholder {0}: target.step
 #: src/lib/components/discussion/Composer.svelte
 msgid "Commenting on Step {0}<0/>"
-msgstr ""
+msgstr "正在评论步骤 {0}<0/>"
 
 #: src/lib/components/discussion/Composer.svelte
 msgid "This step is closed to new comments. The discussion stays readable."
-msgstr ""
+msgstr "此步骤已关闭新评论。讨论内容仍可阅读。"
 
 #: src/lib/components/discussion/Composer.svelte
 msgid "Choose a step above to comment on it."
-msgstr ""
-
-#. placeholder {0}: netShortChars
-#: src/lib/components/discussion/Composer.svelte
-msgid ""
-"This comment is too long to send with your current network resources. Free up resources on\n"
-"your account, or shorten the comment by about {0} characters."
-msgstr ""
+msgstr "请选择上方的步骤进行评论。"
 
 #: src/lib/components/discussion/Composer.svelte
 msgid "Your comment could not be posted."
-msgstr ""
+msgstr "您的评论无法发布。"
 
 #: src/lib/components/discussion/Comment.svelte
 #: src/lib/components/discussion/Composer.svelte
 msgid "No characters left."
-msgstr ""
+msgstr "没有剩余字符。"
 
 #: src/lib/components/discussion/Comment.svelte
 msgid "Delete this comment?"
-msgstr ""
+msgstr "删除此评论？"
 
 #: src/lib/components/discussion/Composer.svelte
 msgid ""
 "Your account cannot post here. Comments are moderated for spam, impersonation, harassment, and\n"
 "posts unrelated to what is being discussed."
-msgstr ""
-
-#. placeholder {0}: accountName
-#: src/lib/components/discussion/Composer.svelte
-msgid "Posts publicly as {0} and stays on chain permanently."
-msgstr ""
-
-#: src/lib/components/discussion/Thread.svelte
-msgid ""
-"Comments are on-chain messages signed by your account and are public and permanent. Moderators\n"
-"remove comments that are spam, impersonation, harassment, or unrelated to what is being\n"
-"discussed, and block accounts that repeat it. A removed comment stays on chain and stops\n"
-"appearing on Unicove."
-msgstr ""
+msgstr "您的账户无法在此处发帖。评论会接受垃圾信息、冒充、骚扰以及与讨论内容无关的帖子审核。"
 
 #: src/lib/components/discussion/Comment.svelte
 msgid "Show less of this comment"
-msgstr ""
+msgstr "收起此评论"
 
 #: src/lib/components/discussion/Comment.svelte
 msgid "Read more of this comment"
-msgstr ""
+msgstr "阅读此评论的更多内容"
+
+#: src/lib/components/discussion/TargetNav.svelte
+msgid "Filter comments by target"
+msgstr "按目标筛选评论"
 
 #: src/lib/components/discussion/Thread.svelte
-msgid "Filter comments by target"
+msgid ""
+"Comments are on-chain messages signed by your account and are public and permanent.\n"
+"Moderators remove comments that are spam, impersonation, harassment, or unrelated to what is\n"
+"being discussed, and block accounts that repeat it. A removed comment stays on chain and\n"
+"stops appearing on Unicove."
 msgstr ""
+"评论是由您的账户签名的链上消息，公开且永久存在。\n"
+"版主会删除垃圾信息、冒充、骚扰或与讨论内容无关的评论，并屏蔽重复发布此类评论的账户。被删除的评论仍会保留在链上，\n"
+"但不会再显示在 Unicove 上。"
+
+#: src/lib/components/discussion/Composer.svelte
+msgid "Comment awaiting signature"
+msgstr "评论等待签名"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.svelte
+msgid "Nothing on-chain yet. Voting opens when a topic is published or a multisig is proposed."
+msgstr "链上尚无内容。主题发布或提出多重签名提案后，投票将开启。"
+
+#: src/lib/components/discussion/Thread.svelte
+msgid "Loading comments"
+msgstr "正在加载评论"
+
+#. placeholder {0}: step.step
+#: src/lib/components/vp/VpMsigStep.svelte
+msgid "Step {0}"
+msgstr "步骤 {0}"
