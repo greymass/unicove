@@ -4,6 +4,7 @@
 	import { API } from '@wharfkit/antelope';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
+	import About from '$lib/components/seo/about.svelte';
 	import { StatindexClient, type NetworkStatsEntry } from '$lib/state/statindex/client';
 	import {
 		DEFAULT_STAT_WINDOW,
@@ -151,3 +152,21 @@
 		</div>
 	{/if}
 </Stack>
+
+<About title="About the {data.network.chain.name} network">
+	<p>
+		{data.network.chain.name} is a public blockchain built on the Antelope protocol. Blocks are produced
+		by a rotating set of elected block producers, and a block becomes irreversible once enough of them
+		have confirmed it.
+	</p>
+	<p>
+		This page reads the live state of the chain: the current head block, the last irreversible
+		block, the producer signing blocks right now, and the software version the API node reports.
+		Where the network publishes activity statistics, charts of actions, transactions, and account
+		growth appear over selectable time windows.
+	</p>
+	<p>
+		Unicove is a block explorer and web wallet for {data.network.chain.name}. Every account,
+		transaction, block, and contract on the network can be searched from here.
+	</p>
+</About>

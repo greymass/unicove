@@ -30,6 +30,7 @@
 	import { checkIsFlask, getSnapsProvider } from '@wharfkit/wallet-plugin-metamask';
 	import { DEFAULT_LOCALE, LOCALES } from '$lib/constants/locales.js';
 	import { localizePath, localizeUrl } from '$lib/utils/url';
+	import { jsonLd, siteSchema } from '$lib/seo/schema';
 
 	let { children, data } = $props();
 
@@ -237,6 +238,10 @@
 <Head {seo_config} />
 
 <svelte:head>
+	<!-- @wc-ignore -->
+	<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+	{@html jsonLd(siteSchema(page.url.origin, data.network.chain.name))}
+
 	<!-- Preload current chain logo -->
 	<link rel="preload" href={String(data.network.config.logo)} as="image" type="image/png" />
 

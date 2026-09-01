@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
+	import About from '$lib/components/seo/about.svelte';
 	import { watch } from 'runed';
 	import { Asset, type Float64 } from '@wharfkit/antelope';
 	import {
@@ -612,3 +613,17 @@
 		</Card>
 	</div>
 </Stack>
+
+<About title="About block producers on {context.network.chain.name}">
+	<p>
+		Block producers are the validators of the {context.network.chain.name} network. Token holders elect
+		them by voting with staked tokens, and the top-ranked producers take turns producing blocks and confirming
+		the chain.
+	</p>
+	<p>
+		Voting power is proportional to the amount staked. An account can vote for several producers at
+		once or delegate its vote to a proxy. This page lists producers by rank with their vote totals
+		and lets a signed-in account cast or update its votes. Rankings update as votes change, so the
+		list reflects the current state of the election.
+	</p>
+</About>

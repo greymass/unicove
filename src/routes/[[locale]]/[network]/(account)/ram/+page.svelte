@@ -19,6 +19,7 @@
 	import { RAMCalculatorState } from './state.svelte';
 	import { DD, DL, DLRow } from 'unicove-components';
 	import SystemTokenSwap from '$lib/components/banner/systemTokenSwap.svelte';
+	import About from '$lib/components/seo/about.svelte';
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');
@@ -191,3 +192,18 @@
 		</Card>
 	{/snippet}
 </MultiCard>
+
+<About title="About RAM on {data.network.chain.name}">
+	<p>
+		RAM is the on-chain storage of the {data.network.chain.name} network. Every account, token balance,
+		and smart contract table occupies RAM, and an account must hold enough of it to store the data its
+		actions create.
+	</p>
+	<p>
+		RAM is bought from and sold back to a system-managed market whose price moves with demand, so it
+		trades like a token and is measured in kilobytes. This page shows the current price per
+		kilobyte, the market capitalization, and the total supply, and lets a signed-in account buy or
+		sell RAM directly from the market. The calculator converts between token amounts and bytes at
+		the current price.
+	</p>
+</About>

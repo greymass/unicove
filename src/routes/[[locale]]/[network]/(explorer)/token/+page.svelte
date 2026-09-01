@@ -3,6 +3,7 @@
 	import { Stack, Table, TD, TH, TR } from 'unicove-components';
 
 	import AssetText from '$lib/components/elements/asset.svelte';
+	import About from '$lib/components/seo/about.svelte';
 	import type { MarketContext, UnicoveContext } from '$lib/state/client.svelte';
 	import { Currencies } from '$lib/types/currencies';
 	import { TokenDefinition } from '$lib/types/token';
@@ -74,3 +75,17 @@
 		{/each}
 	</Table>
 </Stack>
+
+<About title="About tokens on {context.network.chain.name}">
+	<p>
+		Tokens on the {context.network.chain.name} network are issued by smart contracts, and each is identified
+		by the issuing contract together with its symbol. The network's native token is issued by the system
+		contract, and RAM is tracked as a token in the same way.
+	</p>
+	<p>
+		This directory lists the tokens Unicove tracks on {context.network.chain.name}, with the issuing
+		contract, the current price where a price feed exists, and holder counts where a holder index is
+		available. Open a token to see its supply, holders, and recent activity, or search for any
+		account to see the tokens it holds.
+	</p>
+</About>

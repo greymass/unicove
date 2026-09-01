@@ -7,6 +7,8 @@
 	import Launcher from './components/launcher.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { getContext } from 'svelte';
+	import { page } from '$app/state';
+	import { jsonLd, appSchema } from '$lib/seo/schema';
 
 	const { data } = $props();
 	const context = getContext<UnicoveContext>('state');
@@ -16,6 +18,12 @@
 	let networkName = $derived(String(data.network.config.name));
 	let networkShortname = $derived(String(data.network));
 </script>
+
+<svelte:head>
+	<!-- @wc-ignore -->
+	<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+	{@html jsonLd(appSchema(String(page.url), data.network.chain.name))}
+</svelte:head>
 
 <div id="homepage" class="mb-4 grid content-start items-start gap-y-12 sm:gap-y-32 md:pt-0">
 	<Hero {networkName} {networkShortname} />

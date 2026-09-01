@@ -6,6 +6,7 @@
 
 	import { groupSwaps } from './describe.svelte';
 	import SwapRow from './components/swaprow.svelte';
+	import About from '$lib/components/seo/about.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 	const market = getContext<MarketContext>('market');
@@ -54,3 +55,16 @@
 {#if context.settings.data.debugMode}
 	<Code json={market.market.swaps} />
 {/if}
+
+<About title="About swaps on {context.network.chain.name}">
+	<p>
+		Swaps on Unicove exchange one token for another through contracts that run on the {context
+			.network.chain.name} network itself, with no third-party exchange involved. The swaps listed here
+		come from the network's system contracts, including the RAM market, wrapped tokens, and token migrations
+		where a network has replaced its native token.
+	</p>
+	<p>
+		Each swap shows its current rate before you sign, and the transaction settles on chain in a
+		single action. Connect a {context.network.chain.name} compatible wallet to swap from your own account.
+	</p>
+</About>

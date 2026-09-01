@@ -26,6 +26,7 @@
 	import { Currencies } from '$lib/types/currencies';
 	import { ZeroUnits } from '$lib/types/token';
 	import SystemTokenSwap from '$lib/components/banner/systemTokenSwap.svelte';
+	import About from '$lib/components/seo/about.svelte';
 
 	const context = getContext<UnicoveContext>('state');
 	const market = getContext<MarketContext>('market');
@@ -168,3 +169,18 @@
 {:else}
 	<p>This staking interface is not available on {data.network.chain.name}.</p>
 {/if}
+
+<About title="About staking on {data.network.chain.name}">
+	<p>
+		Staking locks {data.network.chain.systemToken?.symbol.name} tokens in the {data.network.chain
+			.name} system contract in exchange for a share of the network's staking rewards. Rewards are distributed
+		continuously in proportion to each account's staked balance, and the rate shown as APR changes as
+		the total amount staked changes.
+	</p>
+	<p>
+		Staked tokens can be unstaked at any time. They then pass through a lockup period before they
+		can be withdrawn back to a liquid balance. Unicove lets you stake, unstake, and withdraw from
+		this page with any {data.network.chain.name} compatible wallet, and shows the balance held in each
+		stage for the signed-in account.
+	</p>
+</About>
