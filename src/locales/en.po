@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2026-09-01T03:23:18.787Z\n"
+"PO-Revision-Date: 2026-09-01T20:41:42.625Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -5206,11 +5206,13 @@ msgid "Multisig Sentiment"
 msgstr "Multisig Sentiment"
 
 #. placeholder {0}: msigData.statistics.totalVotes
-#. placeholder {0}: statistics.totalVotes
+#. placeholder {0}: displayed.totalVotes
 #. placeholder {0}: statistics.totalVotes
 #. placeholder {0}: statistics.totalVotes
 #: src/lib/components/sentiment/msigCard.svelte
+#: src/lib/components/vp/VpMsigStepResults.svelte
 #: src/lib/components/vp/VpSentimentCard.svelte
+#: src/lib/components/vp/VpSentimentHero.svelte
 msgid "{0} votes"
 msgstr "{0} votes"
 
@@ -5319,6 +5321,7 @@ msgstr "No block found."
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActivityEvent.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+layout.ts
+#: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
 msgid "Block"
 msgstr "Block"
@@ -5392,6 +5395,7 @@ msgstr "Received {0} results for: \"{1}\""
 msgid "Discarding results for: \"{0}\" (query changed to \"{1}\")"
 msgstr "Discarding results for: \"{0}\" (query changed to \"{1}\")"
 
+#: src/lib/components/vp/VpMsigStepResults.svelte
 #: src/lib/state/search/manager.svelte.ts
 msgid "AbortError"
 msgstr "AbortError"
@@ -5492,9 +5496,7 @@ msgstr "Proposed by <0/>"
 msgid "Expired {0}"
 msgstr "Expired {0}"
 
-#. placeholder {0}: formatExpiration(expiration)
 #. placeholder {0}: expirationDate.fromNow()
-#: src/lib/components/vp/VpMsigStep.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
 msgid "Expires {0}"
 msgstr "Expires {0}"
@@ -6065,6 +6067,7 @@ msgstr "µs"
 msgid "bytes"
 msgstr "bytes"
 
+#: src/lib/components/vp/VpMsigStepResults.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+page.svelte
 msgid "Signers"
 msgstr "Signers"
@@ -7253,6 +7256,7 @@ msgstr "Chain ID"
 msgid "Price"
 msgstr "Price"
 
+#: src/lib/components/vp/VpMsigStepResults.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/token/+page.svelte
 msgid "Holders"
 msgstr "Holders"
@@ -7758,6 +7762,7 @@ msgstr "That proposal number does not exist."
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.server.ts
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.server.ts
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.server.ts
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/documents/[doc]/+page.server.ts
 msgid "The proposals repository could not be reached."
 msgstr "The proposals repository could not be reached."
 
@@ -7921,7 +7926,7 @@ msgstr "Change history"
 #. placeholder {0}: amount.toLocaleString()
 #. placeholder {0}: stats.total.toLocaleString()
 #. placeholder {0}: vote.metrics.v.total.toLocaleString()
-#. placeholder {0}: statistics.metrics.v.total.toLocaleString()
+#. placeholder {0}: formatNumber(statistics.metrics.v.total, locale, { notation: 'compact', maximumFractionDigits: 2 })
 #: src/lib/components/sentiment/MetricLensDetail.svelte
 #: src/lib/components/sentiment/MetricOverviewCard.svelte
 #: src/lib/components/sentiment/MetricParticipants.svelte
@@ -7996,7 +8001,6 @@ msgid "Sentiment is recorded on-chain."
 msgstr "Sentiment is recorded on-chain."
 
 #: src/lib/components/vp/VpMultisigsCard.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/multisigs/+page.svelte
 msgid "Multisigs"
 msgstr "Multisigs"
 
@@ -8022,10 +8026,6 @@ msgstr "Awaiting signatures"
 msgid "Open the multisig"
 msgstr "Open the multisig"
 
-#: src/lib/components/vp/VpSentimentStepRow.svelte
-msgid "Closed"
-msgstr "Closed"
-
 #: src/lib/components/vp/VpMsigStep.svelte
 msgid "View the transaction"
 msgstr "View the transaction"
@@ -8034,23 +8034,11 @@ msgstr "View the transaction"
 msgid "This proposal has no multisig bindings."
 msgstr "This proposal has no multisig bindings."
 
-#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/sentiment/+page.svelte
-msgid "No sentiment yet. Voting opens when a topic is published or a multisig is proposed."
-msgstr "No sentiment yet. Voting opens when a topic is published or a multisig is proposed."
-
-#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/sentiment/+page.svelte
-msgid "Sentiment on the proposal"
-msgstr "Sentiment on the proposal"
-
 #. placeholder {0}: data.summary.vp
 #. placeholder {1}: data.summary.title
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/sentiment/+page.svelte
 msgid "Do you support {0}: {1}?"
 msgstr "Do you support {0}: {1}?"
-
-#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/sentiment/+page.svelte
-msgid "Should this transaction be signed and executed?"
-msgstr "Should this transaction be signed and executed?"
 
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/revisions/+page.svelte
 msgid "Revisions"
@@ -8087,10 +8075,13 @@ msgstr "Multisigs ({0})"
 msgid "Revisions ({0})"
 msgstr "Revisions ({0})"
 
+#: src/lib/components/vp/VpMsigStepResults.svelte
 #: src/lib/components/vp/VpSentimentCard.svelte
+#: src/lib/components/vp/VpSentimentHero.svelte
 msgid "1 vote"
 msgstr "1 vote"
 
+#: src/lib/components/vp/VpMsigStepResults.svelte
 #: src/lib/components/vp/VpSentimentCard.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "support"
@@ -8126,59 +8117,6 @@ msgstr "Open for signatures"
 msgid "This step has not been proposed on-chain yet."
 msgstr "This step has not been proposed on-chain yet."
 
-#: src/lib/components/vp/VpMsigStep.svelte
-msgid "Supersedes 1 earlier attempt."
-msgstr "Supersedes 1 earlier attempt."
-
-#. placeholder {0}: step.supersededAttempts
-#: src/lib/components/vp/VpMsigStep.svelte
-msgid "Supersedes {0} earlier attempts."
-msgstr "Supersedes {0} earlier attempts."
-
-#: src/lib/components/vp/VpMsigStep.svelte
-msgid "See sentiment on this step"
-msgstr "See sentiment on this step"
-
-#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/sentiment/+page.svelte
-msgid "Should this step be signed and executed:"
-msgstr "Should this step be signed and executed:"
-
-#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/sentiment/+page.svelte
-msgid "Sentiment on each step"
-msgstr "Sentiment on each step"
-
-#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/sentiment/+page.svelte
-msgid ""
-"Each step is a separate on-chain transaction with its own poll. Signers weigh these\n"
-"results when deciding whether to approve."
-msgstr ""
-"Each step is a separate on-chain transaction with its own poll. Signers weigh these\n"
-"results when deciding whether to approve."
-
-#: src/lib/components/vp/VpSentimentHero.svelte
-msgid "support from 1 vote"
-msgstr "support from 1 vote"
-
-#. placeholder {0}: statistics.totalVotes
-#: src/lib/components/vp/VpSentimentHero.svelte
-msgid "support from {0} votes"
-msgstr "support from {0} votes"
-
-#. placeholder {0}: percentString(locale, statistics.supportPercentage / 100, 0)
-#: src/lib/components/vp/VpSentimentStepRow.svelte
-msgid "{0} of 1 vote"
-msgstr "{0} of 1 vote"
-
-#. placeholder {0}: percentString(locale, statistics.supportPercentage / 100, 0)
-#. placeholder {1}: statistics.totalVotes
-#: src/lib/components/vp/VpSentimentStepRow.svelte
-msgid "{0} of {1} votes"
-msgstr "{0} of {1} votes"
-
-#: src/lib/components/vp/VpSentimentStepRow.svelte
-msgid "No votes were recorded on this step."
-msgstr "No votes were recorded on this step."
-
 #: src/lib/components/vp/VpSentimentLens.svelte
 msgid "A"
 msgstr "A"
@@ -8186,11 +8124,6 @@ msgstr "A"
 #: src/lib/components/vp/VpSentimentLens.svelte
 msgid "Measure by"
 msgstr "Measure by"
-
-#. placeholder {0}: statistics.totalVotes
-#: src/lib/components/vp/VpSentimentHero.svelte
-msgid "{0} accounts voted"
-msgstr "{0} accounts voted"
 
 #. placeholder {0}: threshold
 #. placeholder {1}: possible
@@ -8275,10 +8208,6 @@ msgstr "{0} votes recorded on-chain"
 msgid "Step {0} of {1} · Implements <0>{0}: {1}</0>"
 msgstr "Step {0} of {1} · Implements <0>{0}: {1}</0>"
 
-#: src/lib/components/vp/VpSentimentStepRow.svelte
-msgid "View full results"
-msgstr "View full results"
-
 #: src/lib/components/discussion/Comment.svelte
 msgid "Confirming"
 msgstr "Confirming"
@@ -8287,7 +8216,6 @@ msgstr "Confirming"
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/discussion/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/discussion/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/discussion/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/discussion/+page.ts
@@ -8357,8 +8285,8 @@ msgstr "Discussion ({0})"
 
 #: src/lib/components/discussion/DiscussionCard.svelte
 #: src/lib/components/discussion/DiscussionCard.svelte
+#: src/lib/components/vp/VpMsigStep.svelte
 #: src/lib/components/vp/VpSentimentHero.svelte
-#: src/lib/components/vp/VpSentimentStepRow.svelte
 msgid "Read the discussion"
 msgstr "Read the discussion"
 
@@ -8533,3 +8461,322 @@ msgstr "Loading comments"
 #: src/lib/components/vp/VpMsigStep.svelte
 msgid "Step {0}"
 msgstr "Step {0}"
+
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "Remove your support"
+msgstr "Remove your support"
+
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "Support this step"
+msgstr "Support this step"
+
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "Connect a wallet to support this step"
+msgstr "Connect a wallet to support this step"
+
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "Remove your opposition"
+msgstr "Remove your opposition"
+
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "Oppose this step"
+msgstr "Oppose this step"
+
+#: src/lib/components/sentiment/voteButtons.svelte
+msgid "Connect a wallet to oppose this step"
+msgstr "Connect a wallet to oppose this step"
+
+#. placeholder {0}: symbol
+#: src/lib/components/vp/VpSentimentCard.svelte
+msgid "Weighted by {0}"
+msgstr "Weighted by {0}"
+
+#: src/lib/components/vp/VpSentimentCard.svelte
+msgid "View the multisigs"
+msgstr "View the multisigs"
+
+#: src/lib/components/vp/VpSentimentHero.svelte
+msgid "support by account"
+msgstr "support by account"
+
+#: src/lib/components/vp/VpSentimentHero.svelte
+msgid "support by RAM weight"
+msgstr "support by RAM weight"
+
+#: src/lib/components/vp/VpSentimentHero.svelte
+msgid "support by V weight"
+msgstr "support by V weight"
+
+#. placeholder {0}: symbol
+#. placeholder {0}: systemSymbol.name
+#: src/lib/components/vp/VpMsigStepResults.svelte
+#: src/lib/components/vp/VpSentimentHero.svelte
+msgid "support by {0} weight"
+msgstr "support by {0} weight"
+
+#: src/lib/components/vp/VpSentimentHero.svelte
+msgid "Loading sentiment"
+msgstr "Loading sentiment"
+
+#: src/lib/components/vp/VpMsigStepResults.svelte
+msgid "No votes yet on this step."
+msgstr "No votes yet on this step."
+
+#. placeholder {0}: doc.words.toLocaleString()
+#. placeholder {1}: doc.minutes
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/documents/+page.svelte
+msgid "{0} words · {1} min read"
+msgstr "{0} words · {1} min read"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/sentiment/+page.svelte
+msgid "No sentiment yet. Voting opens when a topic is published for this proposal."
+msgstr "No sentiment yet. Voting opens when a topic is published for this proposal."
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/documents/[doc]/+page.svelte
+msgid "· This document is available in English only."
+msgstr "· This document is available in English only."
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/documents/[doc]/+page.server.ts
+msgid "The proposal lists this document, but its file is missing."
+msgstr "The proposal lists this document, but its file is missing."
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/documents/[doc]/+page.server.ts
+msgid "That document could not be read."
+msgstr "That document could not be read."
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/documents/[doc]/+page.server.ts
+msgid "This proposal has no document by that name."
+msgstr "This proposal has no document by that name."
+
+#. placeholder {0}: heading
+#. placeholder {1}: summary.vp
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/documents/[doc]/+page.server.ts
+msgid "Read \"{0}\", a document of Vaulta network proposal {1}."
+msgstr "Read \"{0}\", a document of Vaulta network proposal {1}."
+
+#. placeholder {0}: data.network.chain.name
+#: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
+msgid "About RAM on {0}"
+msgstr "About RAM on {0}"
+
+#. placeholder {0}: data.network.chain.name
+#: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
+msgid ""
+"RAM is the on-chain storage of the {0} network. Every account, token balance,\n"
+"and smart contract table occupies RAM, and an account must hold enough of it to store the data its\n"
+"actions create."
+msgstr ""
+"RAM is the on-chain storage of the {0} network. Every account, token balance,\n"
+"and smart contract table occupies RAM, and an account must hold enough of it to store the data its\n"
+"actions create."
+
+#: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
+msgid ""
+"RAM is bought from and sold back to a system-managed market whose price moves with demand, so it\n"
+"trades like a token and is measured in kilobytes. This page shows the current price per\n"
+"kilobyte, the market capitalization, and the total supply, and lets a signed-in account buy or\n"
+"sell RAM directly from the market. The calculator converts between token amounts and bytes at\n"
+"the current price."
+msgstr ""
+"RAM is bought from and sold back to a system-managed market whose price moves with demand, so it\n"
+"trades like a token and is measured in kilobytes. This page shows the current price per\n"
+"kilobyte, the market capitalization, and the total supply, and lets a signed-in account buy or\n"
+"sell RAM directly from the market. The calculator converts between token amounts and bytes at\n"
+"the current price."
+
+#. placeholder {0}: data.network.chain.name
+#: src/routes/[[locale]]/[network]/(account)/staking/+page.svelte
+msgid "About staking on {0}"
+msgstr "About staking on {0}"
+
+#. placeholder {0}: data.network.chain.systemToken?.symbol.name
+#. placeholder {1}: data.network.chain .name
+#: src/routes/[[locale]]/[network]/(account)/staking/+page.svelte
+msgid ""
+"Staking locks {0} tokens in the {1} system contract in exchange for a share of the network's staking rewards. Rewards are distributed\n"
+"continuously in proportion to each account's staked balance, and the rate shown as APR changes as\n"
+"the total amount staked changes."
+msgstr ""
+"Staking locks {0} tokens in the {1} system contract in exchange for a share of the network's staking rewards. Rewards are distributed\n"
+"continuously in proportion to each account's staked balance, and the rate shown as APR changes as\n"
+"the total amount staked changes."
+
+#. placeholder {0}: data.network.chain.name
+#: src/routes/[[locale]]/[network]/(account)/staking/+page.svelte
+msgid ""
+"Staked tokens can be unstaked at any time. They then pass through a lockup period before they\n"
+"can be withdrawn back to a liquid balance. Unicove lets you stake, unstake, and withdraw from\n"
+"this page with any {0} compatible wallet, and shows the balance held in each\n"
+"stage for the signed-in account."
+msgstr ""
+"Staked tokens can be unstaked at any time. They then pass through a lockup period before they\n"
+"can be withdrawn back to a liquid balance. Unicove lets you stake, unstake, and withdraw from\n"
+"this page with any {0} compatible wallet, and shows the balance held in each\n"
+"stage for the signed-in account."
+
+#. placeholder {0}: context.network.chain.name
+#: src/routes/[[locale]]/[network]/(account)/swap/+page.svelte
+msgid "About swaps on {0}"
+msgstr "About swaps on {0}"
+
+#. placeholder {0}: context .network.chain.name
+#: src/routes/[[locale]]/[network]/(account)/swap/+page.svelte
+msgid ""
+"Swaps on Unicove exchange one token for another through contracts that run on the {0} network itself, with no third-party exchange involved. The swaps listed here\n"
+"come from the network's system contracts, including the RAM market, wrapped tokens, and token migrations\n"
+"where a network has replaced its native token."
+msgstr ""
+"Swaps on Unicove exchange one token for another through contracts that run on the {0} network itself, with no third-party exchange involved. The swaps listed here\n"
+"come from the network's system contracts, including the RAM market, wrapped tokens, and token migrations\n"
+"where a network has replaced its native token."
+
+#. placeholder {0}: context.network.chain.name
+#: src/routes/[[locale]]/[network]/(account)/swap/+page.svelte
+msgid ""
+"Each swap shows its current rate before you sign, and the transaction settles on chain in a\n"
+"single action. Connect a {0} compatible wallet to swap from your own account."
+msgstr ""
+"Each swap shows its current rate before you sign, and the transaction settles on chain in a\n"
+"single action. Connect a {0} compatible wallet to swap from your own account."
+
+#. placeholder {0}: data.network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/network/+page.svelte
+msgid "About the {0} network"
+msgstr "About the {0} network"
+
+#. placeholder {0}: data.network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/network/+page.svelte
+msgid ""
+"{0} is a public blockchain built on the Antelope protocol. Blocks are produced\n"
+"by a rotating set of elected block producers, and a block becomes irreversible once enough of them\n"
+"have confirmed it."
+msgstr ""
+"{0} is a public blockchain built on the Antelope protocol. Blocks are produced\n"
+"by a rotating set of elected block producers, and a block becomes irreversible once enough of them\n"
+"have confirmed it."
+
+#: src/routes/[[locale]]/[network]/(explorer)/network/+page.svelte
+msgid ""
+"This page reads the live state of the chain: the current head block, the last irreversible\n"
+"block, the producer signing blocks right now, and the software version the API node reports.\n"
+"Where the network publishes activity statistics, charts of actions, transactions, and account\n"
+"growth appear over selectable time windows."
+msgstr ""
+"This page reads the live state of the chain: the current head block, the last irreversible\n"
+"block, the producer signing blocks right now, and the software version the API node reports.\n"
+"Where the network publishes activity statistics, charts of actions, transactions, and account\n"
+"growth appear over selectable time windows."
+
+#. placeholder {0}: data.network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/network/+page.svelte
+msgid ""
+"Unicove is a block explorer and web wallet for {0}. Every account,\n"
+"transaction, block, and contract on the network can be searched from here."
+msgstr ""
+"Unicove is a block explorer and web wallet for {0}. Every account,\n"
+"transaction, block, and contract on the network can be searched from here."
+
+#. placeholder {0}: context.network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid "About block producers on {0}"
+msgstr "About block producers on {0}"
+
+#. placeholder {0}: context.network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid ""
+"Block producers are the validators of the {0} network. Token holders elect\n"
+"them by voting with staked tokens, and the top-ranked producers take turns producing blocks and confirming\n"
+"the chain."
+msgstr ""
+"Block producers are the validators of the {0} network. Token holders elect\n"
+"them by voting with staked tokens, and the top-ranked producers take turns producing blocks and confirming\n"
+"the chain."
+
+#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
+msgid ""
+"Voting power is proportional to the amount staked. An account can vote for several producers at\n"
+"once or delegate its vote to a proxy. This page lists producers by rank with their vote totals\n"
+"and lets a signed-in account cast or update its votes. Rankings update as votes change, so the\n"
+"list reflects the current state of the election."
+msgstr ""
+"Voting power is proportional to the amount staked. An account can vote for several producers at\n"
+"once or delegate its vote to a proxy. This page lists producers by rank with their vote totals\n"
+"and lets a signed-in account cast or update its votes. Rankings update as votes change, so the\n"
+"list reflects the current state of the election."
+
+#. placeholder {0}: context.network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/token/+page.svelte
+msgid "About tokens on {0}"
+msgstr "About tokens on {0}"
+
+#. placeholder {0}: context.network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/token/+page.svelte
+msgid ""
+"Tokens on the {0} network are issued by smart contracts, and each is identified\n"
+"by the issuing contract together with its symbol. The network's native token is issued by the system\n"
+"contract, and RAM is tracked as a token in the same way."
+msgstr ""
+"Tokens on the {0} network are issued by smart contracts, and each is identified\n"
+"by the issuing contract together with its symbol. The network's native token is issued by the system\n"
+"contract, and RAM is tracked as a token in the same way."
+
+#. placeholder {0}: context.network.chain.name
+#: src/routes/[[locale]]/[network]/(explorer)/token/+page.svelte
+msgid ""
+"This directory lists the tokens Unicove tracks on {0}, with the issuing\n"
+"contract, the current price where a price feed exists, and holder counts where a holder index is\n"
+"available. Open a token to see its supply, holders, and recent activity, or search for any\n"
+"account to see the tokens it holds."
+msgstr ""
+"This directory lists the tokens Unicove tracks on {0}, with the issuing\n"
+"contract, the current price where a price feed exists, and holder counts where a holder index is\n"
+"available. Open a token to see its supply, holders, and recent activity, or search for any\n"
+"account to see the tokens it holds."
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/documents/[doc]/+page.svelte
+msgid "Contents <0/>"
+msgstr "Contents <0/>"
+
+#. placeholder {0}: tab.count
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.svelte
+msgid "Documents ({0})"
+msgstr "Documents ({0})"
+
+#. placeholder {0}: data.docPosition + 1
+#. placeholder {1}: data.summary.documents.length
+#. placeholder {2}: data.document.words.toLocaleString()
+#. placeholder {3}: data.document.minutes
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/documents/[doc]/+page.svelte
+msgid "Document {0} of {1} <0/> · {2} words · {3} min read <1/>"
+msgstr "Document {0} of {1} <0/> · {2} words · {3} min read <1/>"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/documents/[doc]/+page.svelte
+msgid "← All documents"
+msgstr "← All documents"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/documents/[doc]/+page.svelte
+msgid "All documents →"
+msgstr "All documents →"
+
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/documents/+page.server.ts
+msgid "This proposal has no documents."
+msgstr "This proposal has no documents."
+
+#. placeholder {0}: summary.vp
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/documents/+page.server.ts
+msgid "The documents of Vaulta network proposal {0}."
+msgstr "The documents of Vaulta network proposal {0}."
+
+#. placeholder {0}: i + 1
+#. placeholder {1}: data.documentListings.length
+#: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/documents/+page.svelte
+msgid "Document {0} of {1}"
+msgstr "Document {0} of {1}"
+
+#: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+layout.ts
+msgid "Block data is temporarily unavailable."
+msgstr "Block data is temporarily unavailable."
+
+#: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+layout.ts
+msgid "UNAVAILABLE"
+msgstr "UNAVAILABLE"
