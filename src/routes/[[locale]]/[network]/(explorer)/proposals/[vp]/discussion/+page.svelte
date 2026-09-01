@@ -36,7 +36,6 @@
 
 <article class="@container">
 	<Stack class="gap-6">
-		<h2 class="text-on-surface text-headline">Discussion</h2>
 		{#if descriptors.length > 1}
 			<TargetNav {descriptors} />
 		{/if}

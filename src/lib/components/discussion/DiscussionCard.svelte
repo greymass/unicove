@@ -42,7 +42,7 @@
 	<Card class="hover:bg-surface-container p-0 transition-colors">
 		<a {href} class="block p-4">
 			<div class="flex items-baseline justify-between gap-2">
-				<h2 class="text-title">Discussion</h2>
+				<h2 class="text-label-sm text-muted">Discussion</h2>
 				{#if summary.loaded && !summary.unavailable}
 					<span class="text-muted text-label-sm">
 						{#if summary.total === 1}1 comment{:else}{summary.total} comments{/if}

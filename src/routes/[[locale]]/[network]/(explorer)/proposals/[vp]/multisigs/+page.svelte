@@ -21,7 +21,6 @@
 </script>
 
 <Stack class="gap-4">
-	<h2 class="text-on-surface text-headline">Multisigs</h2>
 	{#if steps.length}
 		<div>
 			{#each steps as step, i (step.index)}

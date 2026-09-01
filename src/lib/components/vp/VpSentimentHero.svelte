@@ -9,6 +9,7 @@
 	import VpSentimentLens from '$lib/components/vp/VpSentimentLens.svelte';
 	import { formatBytes } from '$lib/utils/bytes';
 	import { percentString } from '$lib/utils';
+	import { formatNumber } from '$lib/utils/intl';
 	import type { VpLens, VpProposalTopicRow } from '$lib/vp/sentiment';
 	import type { ApiResponse, TopicDetailData, TopicStatistics } from '$lib/types/sentiment';
 
@@ -28,6 +29,23 @@
 	let statistics = $state<TopicStatistics | null>(null);
 	let lens = $state<VpLens>('system');
 
+	const lensStats = $derived.by(() => {
+		if (!statistics) return null;
+		if (lens === 'accounts') {
+			const total = statistics.totalVotes;
+			if (!total) return { supportPercentage: 0, oppositionPercentage: 0 };
+			return {
+				supportPercentage: (statistics.supportVotes / total) * 100,
+				oppositionPercentage: (statistics.oppositionVotes / total) * 100
+			};
+		}
+		const metric = statistics.metrics[lens === 'vote' ? 'v' : lens];
+		return {
+			supportPercentage: metric.supportPercentage,
+			oppositionPercentage: metric.oppositionPercentage
+		};
+	});
+
 	$effect(() => {
 		const controller = new AbortController();
 		fetch(context.urlPath(`/api/sentiment/topics/${row.topic}`), { signal: controller.signal })
@@ -41,41 +59,60 @@
 </script>
 
 <Card>
-	<h3 class="text-title">{question}</h3>
+	<h2 class="text-title">{question}</h2>
 
-	{#if statistics}
+	{#if statistics && lensStats}
 		<div class="mt-4 flex flex-wrap items-end justify-between gap-4">
 			<div>
 				<span class="text-display text-success">
-					{percentString(locale, statistics.supportPercentage / 100, 0)}
+					{percentString(locale, lensStats.supportPercentage / 100, 0)}
 				</span>
 				<p class="text-muted mt-1 text-sm">
-					{#if statistics.totalVotes === 1}
-						support from 1 vote
-					{:else}
-						support from {statistics.totalVotes} votes
-					{/if}
-				</p>
-				<p class="text-muted mt-1 text-sm">
 					{#if lens === 'accounts'}
-						{statistics.totalVotes} accounts voted
+						support by account
 					{:else if lens === 'ram'}
-						{formatBytes(statistics.metrics.ram.total)}
+						support by RAM weight
 					{:else if lens === 'vote'}
-						{statistics.metrics.v.total.toLocaleString()} V
+						support by V weight
 					{:else}
-						<AssetText
-							variant="short"
-							value={Asset.fromUnits(statistics.metrics.system.total, systemSymbol)}
-						/>
+						support by {systemSymbol.name} weight
+					{/if}
+					·
+					{#if statistics.totalVotes === 1}
+						1 vote
+					{:else}
+						{statistics.totalVotes} votes
 					{/if}
 				</p>
+				{#if lens !== 'accounts'}
+					<p class="text-muted mt-1 text-sm">
+						{#if lens === 'ram'}
+							{formatBytes(statistics.metrics.ram.total)}
+						{:else if lens === 'vote'}
+							{formatNumber(statistics.metrics.v.total, locale, {
+								notation: 'compact',
+								maximumFractionDigits: 2
+							})} V
+						{:else}
+							<AssetText
+								variant="short"
+								value={Asset.fromUnits(statistics.metrics.system.total, systemSymbol)}
+							/>
+						{/if}
+					</p>
+				{/if}
 			</div>
 			<VpSentimentLens selected={lens} onselect={(next) => (lens = next)} />
 		</div>
 
 		<div class="mt-4">
-			<SentimentMeter id="vp-hero-{row.topic}" {statistics} />
+			<SentimentMeter id="vp-hero-{row.topic}" statistics={lensStats} />
+		</div>
+	{:else}
+		<div class="mt-4 grid animate-pulse gap-3" role="status" aria-busy="true">
+			<span class="sr-only">Loading sentiment</span>
+			<div class="bg-surface-container h-10 w-32 rounded"></div>
+			<div class="bg-surface-container h-7 rounded"></div>
 		</div>
 	{/if}
 

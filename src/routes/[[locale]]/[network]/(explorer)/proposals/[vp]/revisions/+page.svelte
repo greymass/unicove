@@ -23,7 +23,7 @@
 <Stack class="gap-8">
 	{#if data.revisions.length}
 		<Stack class="gap-3">
-			<h2 class="text-label-sm text-muted">Revisions</h2>
+			<h2 class="text-title">Revisions</h2>
 			{#each data.revisions as revision (revision.version)}
 				<Card>
 					<div class="flex flex-wrap items-baseline justify-between gap-2">
@@ -42,7 +42,7 @@
 
 	{#if data.summary.translations.length}
 		<Stack class="gap-3">
-			<h2 class="text-label-sm text-muted">Translations</h2>
+			<h2 class="text-title">Translations</h2>
 			<Card>
 				<Stack class="gap-2">
 					{#each data.summary.translations as translation (translation.lang)}

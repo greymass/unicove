@@ -24,6 +24,8 @@
 	const locale = $derived(context.settings.data.locale);
 	const topic = $derived(summary.sentiment[0] ?? null);
 	const liveStep = $derived(vpMsigSteps(summary, locale).find((s) => s.live) ?? null);
+	const symbol = $derived(context.network.chain.systemToken?.symbol.name ?? null);
+	const href = $derived(topic ? `${basePath}/sentiment` : `${basePath}/multisigs`);
 	let statistics = $state<TopicStatistics | null>(null);
 	let loaded = $state(false);
 
@@ -53,9 +55,9 @@
 </script>
 
 <Card class="hover:bg-surface-container p-0 transition-colors">
-	<a href="{basePath}/sentiment" class="block p-4">
+	<a {href} class="block p-4">
 		<div class="flex items-baseline justify-between gap-2">
-			<h2 class="text-title">Sentiment</h2>
+			<h2 class="text-label-sm text-muted">Sentiment</h2>
 			{#if statistics}
 				<span class="text-muted text-label-sm">
 					{#if statistics.totalVotes === 1}
@@ -95,6 +97,9 @@
 			<div class="mt-3">
 				<SentimentMeter id="vp-card-{topic?.topic ?? liveStep?.proposal}" compact {statistics} />
 			</div>
+			{#if symbol}
+				<p class="text-muted text-label-sm mt-2">Weighted by {symbol}</p>
+			{/if}
 		{:else if statistics}
 			<p class="text-muted mt-3 text-sm">No votes have been cast on this poll.</p>
 		{:else if loaded}
@@ -105,6 +110,8 @@
 			</div>
 		{/if}
 
-		<p class="text-primary border-outline mt-4 border-t pt-3 text-sm font-medium">View sentiment</p>
+		<p class="text-primary border-outline mt-4 border-t pt-3 text-sm font-medium">
+			{topic ? 'View sentiment' : 'View the multisigs'}
+		</p>
 	</a>
 </Card>

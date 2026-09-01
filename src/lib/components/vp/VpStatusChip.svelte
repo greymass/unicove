@@ -9,13 +9,13 @@
 	const { status }: Props = $props();
 
 	const variants: Record<VpStatus, string> = {
-		Draft: '',
-		Review: 'bg-warning/15 text-warning',
-		Proposed: 'bg-primary/15 text-primary',
-		Executed: 'bg-success/15 text-success',
-		Rejected: 'bg-error/15 text-error',
-		Withdrawn: 'opacity-60',
-		Superseded: 'opacity-60'
+		Draft: 'bg-surface-container-high text-muted',
+		Review: 'bg-warning-container text-on-warning-container',
+		Proposed: 'bg-primary-container text-on-primary-container',
+		Executed: 'bg-success-container text-on-success-container',
+		Rejected: 'bg-error-container text-on-error-container',
+		Withdrawn: 'bg-surface-container-high text-muted',
+		Superseded: 'bg-surface-container-high text-muted'
 	};
 </script>
 

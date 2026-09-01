@@ -24,7 +24,7 @@
 </script>
 
 <Card>
-	<h3 class="text-label-sm text-muted mb-3">Details</h3>
+	<h2 class="text-label-sm text-muted mb-3">Details</h2>
 	<DL>
 		<DLRow title="Status">
 			<DD>

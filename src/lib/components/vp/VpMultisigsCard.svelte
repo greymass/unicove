@@ -51,7 +51,7 @@
 <Card class="hover:bg-surface-container p-0 transition-colors">
 	<a href="{basePath}/multisigs" class="block p-4">
 		<div class="flex items-baseline justify-between gap-2">
-			<h2 class="text-title">Multisigs</h2>
+			<h2 class="text-label-sm text-muted">Multisigs</h2>
 			{#if live}
 				<span class="text-primary text-label-sm">Awaiting signatures</span>
 			{/if}
