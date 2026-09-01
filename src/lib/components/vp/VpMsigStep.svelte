@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
-	import { page } from '$app/state';
 	import { Card, Chip } from 'unicove-components';
-	import { formatDateTime } from '$lib/utils/intl';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import VpMsigStepResults from '$lib/components/vp/VpMsigStepResults.svelte';
 	import { parseMsigApprovals, type VpMsigApprovals, type VpMsigStep } from '$lib/vp/onchain';
@@ -17,15 +15,8 @@
 	const context = getContext<UnicoveContext>('state');
 
 	let approvals = $state<VpMsigApprovals | null>(null);
+	let approvalsLoaded = $state(false);
 	let unavailable = $state(false);
-
-	const locale = $derived(page.params.locale ?? 'en');
-	// Chain timestamps arrive without a zone marker but are UTC.
-	const formatExpiration = (value: string) =>
-		formatDateTime(new Date(/[Zz+]/.test(value) ? value : `${value}Z`), locale, {
-			dateStyle: 'medium',
-			timeStyle: 'short'
-		});
 
 	const statusLabels: Record<string, string> = {
 		planned: 'Planned',
@@ -60,6 +51,9 @@
 			})
 			.catch(() => {
 				unavailable = true;
+			})
+			.finally(() => {
+				approvalsLoaded = true;
 			});
 		return () => controller.abort();
 	});
@@ -88,16 +82,20 @@
 					<h2 class="text-title">Step {step.step}</h2>
 				{/if}
 				{#if step.proposer && step.proposal}
-					<p class="text-muted mt-1 font-mono text-sm">{step.proposer}/{step.proposal}</p>
+					<p class="mt-1 font-mono text-sm">
+						{#if step.msigPath}
+							<a
+								class="text-muted hover:text-primary hover:underline"
+								href={context.urlPath(step.msigPath)}
+							>
+								{step.proposer}/{step.proposal}
+							</a>
+						{:else}
+							<span class="text-muted">{step.proposer}/{step.proposal}</span>
+						{/if}
+					</p>
 				{:else if !step.title}
 					<p class="text-muted mt-1 text-sm">This step has not been proposed on-chain yet.</p>
-				{/if}
-				{#if step.supersededAttempts === 1}
-					<p class="text-muted mt-1 text-sm">Supersedes 1 earlier attempt.</p>
-				{:else if step.supersededAttempts > 1}
-					<p class="text-muted mt-1 text-sm">
-						Supersedes {step.supersededAttempts} earlier attempts.
-					</p>
 				{/if}
 			</div>
 			<Chip class="shrink-0 whitespace-nowrap {statusVariants[step.status] ?? ''}"
@@ -113,16 +111,15 @@
 					</span>
 				{/each}
 			</div>
+		{:else if !approvalsLoaded && step.proposer && step.proposal}
+			<div class="mt-3 flex flex-wrap gap-1.5" aria-hidden="true">
+				<span class="bg-surface-container h-[22px] w-44 animate-pulse rounded"></span>
+			</div>
 		{/if}
 
-		<VpMsigStepResults {step} {approvals} />
+		<VpMsigStepResults {step} {approvals} {approvalsLoaded} />
 
-		{#if approvals?.expiration}
-			<p class="text-muted mt-2 text-sm">
-				{step.live ? 'Expires' : 'Expired'}
-				{formatExpiration(approvals.expiration)}
-			</p>
-		{:else if step.live && unavailable}
+		{#if step.live && unavailable}
 			<p class="text-muted mt-3 text-sm">No live approval data on this network.</p>
 		{/if}
 

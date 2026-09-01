@@ -13,9 +13,10 @@
 	interface Props {
 		step: VpMsigStep;
 		approvals: VpMsigApprovals | null;
+		approvalsLoaded?: boolean;
 	}
 
-	const { step, approvals }: Props = $props();
+	const { step, approvals, approvalsLoaded = true }: Props = $props();
 	const context = getContext<UnicoveContext>('state');
 
 	const locale = $derived(context.settings.data.locale);
@@ -127,9 +128,9 @@
 	};
 </script>
 
-{#if approvals || hasPoll}
+{#if approvals || !approvalsLoaded || hasPoll}
 	<div class="mt-4 grid gap-3">
-		{#if approvals}
+		{#if approvals || !approvalsLoaded}
 			<div
 				class="flex items-start gap-3"
 				role="group"
@@ -140,13 +141,20 @@
 					class="text-muted text-label-sm w-16 shrink-0 pt-1">Signers</span
 				>
 				<div class="min-w-0 flex-1">
-					<ApprovalProgress
-						approved={approvals.approved}
-						requested={approvals.requested}
-						satisfied={approvals.satisfied}
-						threshold={approvals.threshold}
-						possible={approvals.possible}
-					/>
+					{#if approvals}
+						<ApprovalProgress
+							approved={approvals.approved}
+							requested={approvals.requested}
+							satisfied={approvals.satisfied}
+							threshold={approvals.threshold}
+							possible={approvals.possible}
+						/>
+					{:else}
+						<div class="grid gap-2" aria-hidden="true">
+							<div class="bg-surface-container h-6 w-48 animate-pulse rounded"></div>
+							<div class="bg-surface-container h-2 animate-pulse rounded-full"></div>
+						</div>
+					{/if}
 				</div>
 			</div>
 		{/if}
