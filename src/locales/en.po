@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2026-08-27T19:07:27.527Z\n"
+"PO-Revision-Date: 2026-08-27T21:43:53.798Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -509,12 +509,12 @@ msgstr "Transfer"
 msgid "+ {0} ms (CPU)"
 msgstr "+ {0} ms (CPU)"
 
-#. placeholder {0}: account.weight
-#. placeholder {0}: key.weight
-#. placeholder {0}: account.weight
-#. placeholder {0}: key.weight
 #. placeholder {0}: data.powup_cpu
 #. placeholder {0}: data.powup_net
+#. placeholder {0}: account.weight
+#. placeholder {0}: key.weight
+#. placeholder {0}: account.weight
+#. placeholder {0}: key.weight
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio/newaccount.svelte
@@ -1235,8 +1235,8 @@ msgstr "Overview"
 
 #. placeholder {0}: data.abi.actions.length
 #. placeholder {0}: data.proposal.transaction.actions.length
-#. placeholder {0}: data.transaction.filtered.length
 #. placeholder {0}: data.transaction.transaction.actions.length
+#. placeholder {0}: data.transaction.filtered.length
 #. placeholder {0}: data.transaction.transaction.actions.length
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
@@ -1558,11 +1558,13 @@ msgid "Side by side"
 msgstr "Side by side"
 
 #: src/lib/components/discussion/Comment.svelte
+#: src/lib/components/discussion/Comment.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/buttons.svelte
 msgid "Delete"
 msgstr "Delete"
 
 #: src/lib/components/accountswitch.svelte
+#: src/lib/components/discussion/Comment.svelte
 #: src/lib/components/discussion/Comment.svelte
 #: src/lib/components/elements/proposalname.svelte
 #: src/lib/components/elements/suspiciousmemo.svelte
@@ -2260,7 +2262,7 @@ msgid "Refresh"
 msgstr "Refresh"
 
 #. placeholder {0}: formatDate(proposal.updated)
-#. placeholder {0}: refreshed
+#. placeholder {0}: formatDate(proposal.updated)
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/market/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.svelte
 msgid "Updated {0}"
@@ -8328,10 +8330,6 @@ msgid "<0/> Opposed"
 msgstr "<0/> Opposed"
 
 #: src/lib/components/discussion/Comment.svelte
-msgid "Posted, awaiting indexer"
-msgstr "Posted, awaiting indexer"
-
-#: src/lib/components/discussion/Comment.svelte
 msgid "(edited)"
 msgstr "(edited)"
 
@@ -8344,29 +8342,13 @@ msgid "Connect a wallet to join the discussion. Comments stay visible either way
 msgstr "Connect a wallet to join the discussion. Comments stay visible either way."
 
 #: src/lib/components/discussion/Composer.svelte
-msgid "This account cannot post in the governance channel."
-msgstr "This account cannot post in the governance channel."
-
-#: src/lib/components/discussion/Composer.svelte
-msgid "<0/> Commenting as a supporter"
-msgstr "<0/> Commenting as a supporter"
-
-#: src/lib/components/discussion/Composer.svelte
-msgid "<0/> Commenting as an opponent"
-msgstr "<0/> Commenting as an opponent"
-
-#: src/lib/components/discussion/Composer.svelte
 msgid "You have not voted on this yet. Your comment posts either way."
 msgstr "You have not voted on this yet. Your comment posts either way."
 
 #: src/lib/components/discussion/Composer.svelte
+#: src/lib/components/discussion/Composer.svelte
 msgid "Write a comment"
 msgstr "Write a comment"
-
-#: src/lib/components/discussion/Comment.svelte
-#: src/lib/components/discussion/Composer.svelte
-msgid "This comment is longer than the channel allows."
-msgstr "This comment is longer than the channel allows."
 
 #: src/lib/components/discussion/Composer.svelte
 msgid "Post comment"
@@ -8388,12 +8370,6 @@ msgstr "Read the discussion ({0} comments)"
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+layout.svelte
 msgid "Discussion ({0})"
 msgstr "Discussion ({0})"
-
-#: src/lib/components/discussion/DiscussionCard.svelte
-#: src/lib/components/discussion/DiscussionCard.svelte
-#: src/lib/components/discussion/Thread.svelte
-msgid "Discussion is unavailable on this network."
-msgstr "Discussion is unavailable on this network."
 
 #: src/lib/components/discussion/DiscussionCard.svelte
 #: src/lib/components/discussion/DiscussionCard.svelte
@@ -8433,15 +8409,6 @@ msgid "Edit comment"
 msgstr "Edit comment"
 
 #: src/lib/components/discussion/Comment.svelte
-#: src/lib/components/discussion/Composer.svelte
-msgid ""
-"This comment contains a bidirectional control character, which the chain rejects. Remove it\n"
-"to post."
-msgstr ""
-"This comment contains a bidirectional control character, which the chain rejects. Remove it\n"
-"to post."
-
-#: src/lib/components/discussion/Comment.svelte
 msgid "Save"
 msgstr "Save"
 
@@ -8450,44 +8417,145 @@ msgid "Edit"
 msgstr "Edit"
 
 #: src/lib/components/discussion/Composer.svelte
-msgid ""
-"Commenting needs at least <0/> held liquid.\n"
-"Your account holds <1/>."
-msgstr ""
-"Commenting needs at least <0/> held liquid.\n"
-"Your account holds <1/>."
-
-#: src/lib/components/discussion/Composer.svelte
-msgid "Comment on <0>Step {0}<0/></0>"
-msgstr "Comment on <0>Step {0}<0/></0>"
-
-#: src/lib/components/discussion/Composer.svelte
 msgid "Plain text only. Line breaks are kept."
 msgstr "Plain text only. Line breaks are kept."
 
-#. placeholder {0}: formatBytes(netEstimate)
-#. placeholder {1}: formatBytes( netAvailable ?? 0 )
-#: src/lib/components/discussion/Composer.svelte
-msgid "This comment needs about {0} of NET and your account has {1} available. Stake or power up NET, or shorten the comment."
-msgstr "This comment needs about {0} of NET and your account has {1} available. Stake or power up NET, or shorten the comment."
+#: src/lib/components/discussion/Comment.svelte
+msgid "Posted. It will appear here shortly."
+msgstr "Posted. It will appear here shortly."
 
-#. placeholder {0}: formatBytes(netEstimate)
+#. placeholder {0}: draftCharsOver
+#. placeholder {0}: charsOver
+#: src/lib/components/discussion/Comment.svelte
 #: src/lib/components/discussion/Composer.svelte
-msgid "Long comments use more NET. This one needs about {0}."
-msgstr "Long comments use more NET. This one needs about {0}."
+msgid "{0} characters over the limit."
+msgstr "{0} characters over the limit."
+
+#. placeholder {0}: draftCharsLeft
+#. placeholder {0}: charsLeft
+#: src/lib/components/discussion/Comment.svelte
+#: src/lib/components/discussion/Composer.svelte
+msgid "About {0} characters left."
+msgstr "About {0} characters left."
+
+#. placeholder {0}: draftCharsOver
+#. placeholder {0}: charsOver
+#: src/lib/components/discussion/Comment.svelte
+#: src/lib/components/discussion/Composer.svelte
+msgid "This comment is too long. Shorten it by about {0} characters to post."
+msgstr "This comment is too long. Shorten it by about {0} characters to post."
+
+#: src/lib/components/discussion/Comment.svelte
+#: src/lib/components/discussion/Composer.svelte
+msgid "This comment contains hidden text-direction characters that cannot be posted."
+msgstr "This comment contains hidden text-direction characters that cannot be posted."
+
+#: src/lib/components/discussion/Comment.svelte
+msgid "Your change could not be saved."
+msgstr "Your change could not be saved."
+
+#: src/lib/components/discussion/Comment.svelte
+msgid "The comment could not be deleted."
+msgstr "The comment could not be deleted."
+
+#: src/lib/components/discussion/DiscussionCard.svelte
+#: src/lib/components/discussion/DiscussionCard.svelte
+#: src/lib/components/discussion/Thread.svelte
+msgid "Discussion is not available on this network."
+msgstr "Discussion is not available on this network."
+
+#: src/lib/components/discussion/Composer.svelte
+msgid "Unstake or add funds to join in."
+msgstr "Unstake or add funds to join in."
 
 #: src/lib/components/discussion/Composer.svelte
 msgid ""
-"Comments are on-chain messages signed by your account and are public and permanent. Posting\n"
-"requires 10 A held liquid. Moderators remove comments that are spam, impersonation, harassment, or\n"
-"unrelated to the target, and block accounts that repeat it. A removed comment stays on chain and\n"
-"stops appearing on Unicove."
+"You need <0/> available to comment. Your\n"
+"account has <1/> available; the rest is staked. <2/>"
 msgstr ""
-"Comments are on-chain messages signed by your account and are public and permanent. Posting\n"
-"requires 10 A held liquid. Moderators remove comments that are spam, impersonation, harassment, or\n"
-"unrelated to the target, and block accounts that repeat it. A removed comment stays on chain and\n"
-"stops appearing on Unicove."
+"You need <0/> available to comment. Your\n"
+"account has <1/> available; the rest is staked. <2/>"
 
 #: src/lib/components/discussion/Composer.svelte
-msgid "This target is closed. Its discussion stays readable."
-msgstr "This target is closed. Its discussion stays readable."
+msgid "<0/> You voted to support this."
+msgstr "<0/> You voted to support this."
+
+#: src/lib/components/discussion/Composer.svelte
+msgid "<0/> You voted to oppose this."
+msgstr "<0/> You voted to oppose this."
+
+#: src/lib/components/discussion/Composer.svelte
+msgid "Commenting on the proposal"
+msgstr "Commenting on the proposal"
+
+#. placeholder {0}: target.step
+#: src/lib/components/discussion/Composer.svelte
+msgid "Commenting on Step {0}<0/>"
+msgstr "Commenting on Step {0}<0/>"
+
+#: src/lib/components/discussion/Composer.svelte
+msgid "This step is closed to new comments. The discussion stays readable."
+msgstr "This step is closed to new comments. The discussion stays readable."
+
+#: src/lib/components/discussion/Composer.svelte
+msgid "Choose a step above to comment on it."
+msgstr "Choose a step above to comment on it."
+
+#. placeholder {0}: netShortChars
+#: src/lib/components/discussion/Composer.svelte
+msgid ""
+"This comment is too long to send with your current network resources. Free up resources on\n"
+"your account, or shorten the comment by about {0} characters."
+msgstr ""
+"This comment is too long to send with your current network resources. Free up resources on\n"
+"your account, or shorten the comment by about {0} characters."
+
+#: src/lib/components/discussion/Composer.svelte
+msgid "Your comment could not be posted."
+msgstr "Your comment could not be posted."
+
+#: src/lib/components/discussion/Comment.svelte
+#: src/lib/components/discussion/Composer.svelte
+msgid "No characters left."
+msgstr "No characters left."
+
+#: src/lib/components/discussion/Comment.svelte
+msgid "Delete this comment?"
+msgstr "Delete this comment?"
+
+#: src/lib/components/discussion/Composer.svelte
+msgid ""
+"Your account cannot post here. Comments are moderated for spam, impersonation, harassment, and\n"
+"posts unrelated to what is being discussed."
+msgstr ""
+"Your account cannot post here. Comments are moderated for spam, impersonation, harassment, and\n"
+"posts unrelated to what is being discussed."
+
+#. placeholder {0}: accountName
+#: src/lib/components/discussion/Composer.svelte
+msgid "Posts publicly as {0} and stays on chain permanently."
+msgstr "Posts publicly as {0} and stays on chain permanently."
+
+#: src/lib/components/discussion/Thread.svelte
+msgid ""
+"Comments are on-chain messages signed by your account and are public and permanent. Moderators\n"
+"remove comments that are spam, impersonation, harassment, or unrelated to what is being\n"
+"discussed, and block accounts that repeat it. A removed comment stays on chain and stops\n"
+"appearing on Unicove."
+msgstr ""
+"Comments are on-chain messages signed by your account and are public and permanent. Moderators\n"
+"remove comments that are spam, impersonation, harassment, or unrelated to what is being\n"
+"discussed, and block accounts that repeat it. A removed comment stays on chain and stops\n"
+"appearing on Unicove."
+
+#: src/lib/components/discussion/Comment.svelte
+msgid "Show less of this comment"
+msgstr "Show less of this comment"
+
+#: src/lib/components/discussion/Comment.svelte
+msgid "Read more of this comment"
+msgstr "Read more of this comment"
+
+#: src/lib/components/discussion/Thread.svelte
+msgid "Filter comments by target"
+msgstr "Filter comments by target"

@@ -29,7 +29,7 @@
 {#if compact}
 	<a {href} class="text-primary text-sm font-medium hover:underline">
 		{#if summary.unavailable}
-			Discussion is unavailable on this network.
+			Discussion is not available on this network.
 		{:else if !summary.loaded}
 			Read the discussion
 		{:else if summary.total === 1}
@@ -50,7 +50,7 @@
 				{/if}
 			</div>
 			{#if summary.unavailable}
-				<p class="text-muted mt-3 text-sm">Discussion is unavailable on this network.</p>
+				<p class="text-muted mt-3 text-sm">Discussion is not available on this network.</p>
 			{:else if !summary.loaded}
 				<div class="mt-3 animate-pulse">
 					<div class="bg-surface-container h-4 w-24 rounded"></div>

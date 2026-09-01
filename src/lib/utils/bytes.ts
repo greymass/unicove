@@ -1,3 +1,13 @@
+export function approxCharsFromBytes(
+	byteDelta: number,
+	textLength: number,
+	textBytes: number
+): number {
+	if (byteDelta <= 0) return 0;
+	const bytesPerChar = textLength > 0 ? textBytes / textLength : 1;
+	return Math.max(1, Math.round(byteDelta / bytesPerChar));
+}
+
 const UNITS = ['bytes', 'KB', 'MB', 'GB', 'TB'];
 
 export function formatBytes(bytes: number): string {

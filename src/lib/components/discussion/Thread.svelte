@@ -8,7 +8,7 @@
 	import { buildComment, packContent } from '$lib/msg/content';
 	import { abilityFor, isBlocked, loadGate, type PostAbility } from '$lib/msg/gate';
 	import { GOVERNANCE_CHANNEL, tupleKey } from '$lib/msg/model';
-	import { visibleComments } from '$lib/msg/reconcile';
+	import { commentKey, visibleComments } from '$lib/msg/reconcile';
 	import Comment from './Comment.svelte';
 	import Composer from './Composer.svelte';
 	import TargetVotePanel from './TargetVotePanel.svelte';
@@ -50,9 +50,7 @@
 
 	const viewer = $derived(context.account ? String(context.account.name) : null);
 	const signedIn = $derived(Boolean(context.wharf.session && context.account));
-	const postTarget = $derived(defaultPostTarget(descriptors, active));
-	let chosen = $state<TargetDescriptor | null>(null);
-	const target = $derived(chosen ?? postTarget);
+	const target = $derived(defaultPostTarget(descriptors, active));
 	const voteFor = $derived(target ? (userVotes.get(target.key) ?? null) : null);
 
 	let ability = $state<PostAbility | null>(null);
@@ -122,23 +120,27 @@
 			channel: Name.from(GOVERNANCE_CHANNEL),
 			seq
 		});
-		try {
-			await context.wharf.transact({ action });
-			thread.markDeleted(seq);
-		} catch (e) {
-			thread.error = e instanceof Error ? e.message : String(e);
-		}
+		await context.wharf.transact({ action });
+		thread.markDeleted(seq);
 	}
 </script>
 
 <div class="grid gap-6">
 	{#if showChips}
-		<div class="flex flex-wrap gap-2">
-			<button onclick={() => onselect(null)} class="cursor-pointer">
+		<div class="flex flex-wrap gap-2" role="group" aria-label="Filter comments by target">
+			<button
+				onclick={() => onselect(null)}
+				class="cursor-pointer"
+				aria-current={active === null ? 'true' : undefined}
+			>
 				<Chip class={active === null ? 'bg-primary text-on-primary' : ''}>All</Chip>
 			</button>
 			{#each descriptors as d (d.key)}
-				<button onclick={() => onselect(d)} class="cursor-pointer">
+				<button
+					onclick={() => onselect(d)}
+					class="cursor-pointer"
+					aria-current={active?.key === d.key ? 'true' : undefined}
+				>
 					<Chip class={active?.key === d.key ? 'bg-primary text-on-primary' : ''}>
 						{#if d.target.kind === 'topic'}Proposal{:else if d.step}Step {d.step}{#if d.title}: {d.title}{/if}{:else}{d.label}{/if}
 					</Chip>
@@ -165,13 +167,19 @@
 	{/if}
 
 	{#if thread.unavailable}
-		<p class="text-muted text-sm">Discussion is unavailable on this network.</p>
+		<p class="text-muted text-sm">Discussion is not available on this network.</p>
 	{:else if !thread.ready}
 		<div class="grid animate-pulse gap-3">
 			<div class="bg-surface-container h-16 rounded"></div>
 			<div class="bg-surface-container h-16 rounded"></div>
 		</div>
 	{:else}
+		<p class="text-muted text-xs">
+			Comments are on-chain messages signed by your account and are public and permanent. Moderators
+			remove comments that are spam, impersonation, harassment, or unrelated to what is being
+			discussed, and block accounts that repeat it. A removed comment stays on chain and stops
+			appearing on Unicove.
+		</p>
 		{#if thread.hasMore}
 			<div>
 				<Button variant="secondary" onclick={() => thread.loadEarlier()}
@@ -179,13 +187,15 @@
 				>
 			</div>
 		{/if}
-		{#if comments.length === 0}
-			<p class="border-outline text-muted rounded-xl border border-dashed p-4 text-center text-sm">
-				No comments yet.
-			</p>
-		{:else}
-			<div class="grid gap-5">
-				{#each comments as comment (comment.seq)}
+		<div class="grid gap-5" aria-live="polite" aria-relevant="additions">
+			{#if comments.length === 0}
+				<p
+					class="border-outline text-muted rounded-xl border border-dashed p-4 text-center text-sm"
+				>
+					No comments yet.
+				</p>
+			{:else}
+				{#each comments as comment (commentKey(comment))}
 					<Comment
 						{comment}
 						vote={votes.get(comment.sender) ?? null}
@@ -196,16 +206,15 @@
 						onedit={edit}
 					/>
 				{/each}
-			</div>
-		{/if}
+			{/if}
+		</div>
 		<Composer
 			{signedIn}
 			{ability}
 			{netAvailable}
 			vote={voteFor}
-			targets={descriptors}
+			{showChips}
 			{target}
-			ontarget={(d) => (chosen = d)}
 			onpost={post}
 		/>
 	{/if}

@@ -12,11 +12,10 @@
 		checkBody,
 		MAX_BODY_BYTES,
 		normalizeBody,
-		targetFromTags,
-		WARN_BODY_BYTES
+		targetFromTags
 	} from '$lib/msg/model';
 	import type { Comment } from '$lib/msg/reconcile';
-	import { formatBytes } from '$lib/utils/bytes';
+	import { approxCharsFromBytes } from '$lib/utils/bytes';
 	import { formatDateTime } from '$lib/utils/intl';
 	import '$lib/utils/dayjs';
 	import dayjs from 'dayjs';
@@ -27,7 +26,7 @@
 		viewer: string | null;
 		locale: string;
 		showTarget: boolean;
-		ondelete: (seq: number) => void;
+		ondelete: (seq: number) => Promise<void>;
 		onedit: (seq: number, body: string) => Promise<void>;
 	}
 
@@ -60,16 +59,31 @@
 	let draft = $state('');
 	let saving = $state(false);
 	let editError = $state<string | null>(null);
+	let deleting = $state(false);
+	let deleteError = $state<string | null>(null);
+	let confirmingDelete = $state(false);
+
+	$effect(() => {
+		void comment;
+		confirmingDelete = false;
+	});
 
 	const normalizedDraft = $derived(normalizeBody(draft));
 	const draftCheck = $derived(checkBody(normalizedDraft));
 	const draftBytes = $derived(draftCheck.bytes);
-	const draftHeavy = $derived(draftBytes > WARN_BODY_BYTES);
+	const draftRemainingBytes = $derived(MAX_BODY_BYTES - draftBytes);
+	const draftCharsLeft = $derived(
+		approxCharsFromBytes(draftRemainingBytes, normalizedDraft.length, draftBytes)
+	);
+	const draftCharsOver = $derived(
+		approxCharsFromBytes(draftBytes - MAX_BODY_BYTES, normalizedDraft.length, draftBytes)
+	);
 
 	function beginEdit() {
 		draft = body;
 		editing = true;
 		editError = null;
+		confirmingDelete = false;
 	}
 
 	async function saveEdit() {
@@ -83,6 +97,18 @@
 			editError = e instanceof Error ? e.message : String(e);
 		} finally {
 			saving = false;
+		}
+	}
+
+	async function remove() {
+		deleting = true;
+		deleteError = null;
+		try {
+			await ondelete(comment.seq);
+		} catch (e) {
+			deleteError = e instanceof Error ? e.message : String(e);
+		} finally {
+			deleting = false;
 		}
 	}
 </script>
@@ -103,7 +129,7 @@
 		{#if comment.pending?.phase === 'confirming'}
 			<Chip class="text-primary text-xs">Confirming</Chip>
 		{:else if comment.pending?.phase === 'awaiting'}
-			<Chip class="text-muted text-xs">Posted, awaiting indexer</Chip>
+			<Chip class="text-muted text-xs">Posted. It will appear here shortly.</Chip>
 		{/if}
 		<span class="text-muted ml-auto" title={formatDateTime(when, locale)}>
 			{#if comment.pending}
@@ -125,23 +151,26 @@
 			class="border-outline bg-surface rounded-lg border p-3 text-sm"
 		></textarea>
 		<div class="text-muted flex justify-end text-xs">
-			<span
-				class:text-error={!draftCheck.ok && draftCheck.reason === 'too_long'}
-				class:text-primary={draftHeavy && draftCheck.ok}
-			>
-				{formatBytes(draftBytes)} / {formatBytes(MAX_BODY_BYTES)}
-			</span>
+			{#if draftBytes > MAX_BODY_BYTES}
+				<span class="text-error">{draftCharsOver} characters over the limit.</span>
+			{:else if draftBytes >= MAX_BODY_BYTES * 0.8}
+				<span>
+					{#if draftCharsLeft === 0}No characters left.{:else}About {draftCharsLeft} characters left.{/if}
+				</span>
+			{/if}
 		</div>
 		{#if !draftCheck.ok && draftCheck.reason === 'too_long'}
-			<p class="text-error text-sm">This comment is longer than the channel allows.</p>
+			<p class="text-error text-sm">
+				This comment is too long. Shorten it by about {draftCharsOver} characters to post.
+			</p>
 		{:else if !draftCheck.ok && draftCheck.reason === 'bidi'}
 			<p class="text-error text-sm">
-				This comment contains a bidirectional control character, which the chain rejects. Remove it
-				to post.
+				This comment contains hidden text-direction characters that cannot be posted.
 			</p>
 		{/if}
 		{#if editError}
-			<p class="text-error text-sm">{editError}</p>
+			<p class="text-error text-sm">Your change could not be saved.</p>
+			<p class="text-muted text-xs">{editError}</p>
 		{/if}
 		<div class="flex gap-2">
 			<Button onclick={saveEdit} disabled={saving || !draftCheck.ok}>Save</Button>
@@ -164,29 +193,57 @@
 		</div>
 		{#if collapsed || (expanded && (longBySource || tall))}
 			<div>
-				<Button variant="text" class="px-0" onclick={() => (expanded = !expanded)}>
+				<Button
+					variant="text"
+					class="px-0"
+					aria-expanded={expanded}
+					aria-label={expanded ? 'Show less of this comment' : 'Read more of this comment'}
+					onclick={() => (expanded = !expanded)}
+				>
 					{#if expanded}Show less{:else}Read more{/if}
 				</Button>
 			</div>
 		{/if}
 	{/if}
 
+	{#if deleteError}
+		<p class="text-error text-sm">The comment could not be deleted.</p>
+		<p class="text-muted text-xs">{deleteError}</p>
+	{/if}
+
 	{#if comment.pending?.phase === 'awaiting' || own}
 		<footer class="text-muted flex items-center gap-4 text-xs">
 			{#if comment.pending?.phase === 'awaiting'}
 				<a
-					class="text-primary hover:underline"
+					class="text-primary focus-visible:ring-solar-500 -m-1.5 rounded p-1.5 hover:underline focus-visible:ring focus-visible:outline-hidden focus-visible:ring-inset"
 					href={context.urlPath(`/transaction/${comment.pending.trx_id}`)}
 				>
 					View transaction
 				</a>
 			{/if}
 			{#if own && !editing}
-				<button class="cursor-pointer hover:underline" onclick={beginEdit}>Edit</button>
 				<button
-					class="hover:text-error cursor-pointer hover:underline"
-					onclick={() => ondelete(comment.seq)}>Delete</button
+					class="focus-visible:ring-solar-500 -m-1.5 cursor-pointer rounded p-1.5 hover:underline focus-visible:ring focus-visible:outline-hidden focus-visible:ring-inset"
+					onclick={beginEdit}>Edit</button
 				>
+				{#if confirmingDelete}
+					<span>Delete this comment?</span>
+					<button
+						class="text-error focus-visible:ring-solar-500 -m-1.5 cursor-pointer rounded p-1.5 hover:underline focus-visible:ring focus-visible:outline-hidden focus-visible:ring-inset"
+						onclick={remove}
+						disabled={deleting}>Delete</button
+					>
+					<button
+						class="focus-visible:ring-solar-500 -m-1.5 cursor-pointer rounded p-1.5 hover:underline focus-visible:ring focus-visible:outline-hidden focus-visible:ring-inset"
+						onclick={() => (confirmingDelete = false)}
+						disabled={deleting}>Cancel</button
+					>
+				{:else}
+					<button
+						class="hover:text-error focus-visible:ring-solar-500 -m-1.5 cursor-pointer rounded p-1.5 hover:underline focus-visible:ring focus-visible:outline-hidden focus-visible:ring-inset"
+						onclick={() => (confirmingDelete = true)}>Delete</button
+					>
+				{/if}
 			{/if}
 		</footer>
 	{/if}

@@ -1,6 +1,7 @@
 import { describe, expect, test } from 'bun:test';
 import type { Message } from './api';
 import {
+	commentKey,
 	mergeMessages,
 	newestSeq,
 	oldestSeq,
@@ -43,6 +44,22 @@ describe('mergeMessages', () => {
 		expect(merged).toHaveLength(1);
 		expect(merged[0].seq).toBe(9);
 		expect(merged[0].pending).toBeUndefined();
+	});
+	test('a pending comment keeps its rendering identity once indexed', () => {
+		const pending = pendingComment('alice', fields, 'abc', 1000);
+		const keyBefore = commentKey(pending);
+		const merged = mergeMessages([pending], [msg(9, 'alice', 'hello')]);
+		expect(merged[0].seq).toBe(9);
+		expect(commentKey(merged[0])).toBe(keyBefore);
+	});
+	test('the indexed comment keeps its rendering identity across a later refresh', () => {
+		const pending = pendingComment('alice', fields, 'abc', 1000);
+		const keyBefore = commentKey(pending);
+		const indexed = msg(9, 'alice', 'hello');
+		const firstMerge = mergeMessages([pending], [indexed]);
+		const refreshed = mergeMessages(firstMerge, [indexed]);
+		expect(refreshed[0].seq).toBe(9);
+		expect(commentKey(refreshed[0])).toBe(keyBefore);
 	});
 	test('keeps a pending comment when only the sender matches', () => {
 		const pending = pendingComment('alice', fields, 'abc', 1000);
