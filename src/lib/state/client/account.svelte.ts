@@ -41,6 +41,15 @@ import {
 } from '$lib/types/token';
 import { localizePath } from '$lib/utils/url';
 
+export class AccountFetchError extends Error {
+	constructor(
+		message: string,
+		public readonly status: number
+	) {
+		super(message);
+	}
+}
+
 export class AccountState {
 	public client?: APIClient = $state();
 	public fetch = $state(fetch);
@@ -83,8 +92,9 @@ export class AccountState {
 		const path = localizePath(`/api/account/${this.name}`);
 		const response = await this.fetch(path);
 		if (!response.ok) {
-			throw new Error(
-				`Failed to fetch account data for ${this.name} on ${this.network.chain.name}`
+			throw new AccountFetchError(
+				`Failed to fetch account data for ${this.name} on ${this.network.chain.name}`,
+				response.status
 			);
 		}
 		const json = await response.json();

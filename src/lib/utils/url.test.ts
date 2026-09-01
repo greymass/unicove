@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'bun:test';
-import { localizePath, localizeUrl, resolveLocale } from './url';
+import { localizePath, localizeUrl, resolveLocale, resolveRedirect } from './url';
 
 const chainName = import.meta.env.PUBLIC_CHAIN_SHORT;
 
@@ -127,5 +127,56 @@ describe('resolveLocale', () => {
 		expect(resolveLocale('/', 'xx')).toBe('en');
 		expect(resolveLocale('/vaulta', undefined)).toBe('en');
 		expect(resolveLocale('/vaulta')).toBe('en');
+	});
+});
+
+describe('resolveRedirect', () => {
+	test('returns nothing for canonical paths', () => {
+		expect(resolveRedirect(`/en/${chainName}/staking`)).toBeNull();
+		expect(resolveRedirect(`/en/${chainName}/api/network`)).toBeNull();
+	});
+	test('permanently redirects unlocalized and renamed paths', () => {
+		expect(resolveRedirect('/')).toEqual({
+			location: `/en/${chainName}`,
+			status: 301,
+			cacheable: false
+		});
+		expect(resolveRedirect(`/${chainName}/staking`)).toEqual({
+			location: `/en/${chainName}/staking`,
+			status: 301,
+			cacheable: false
+		});
+		expect(resolveRedirect('/en/eos/account/a')).toEqual({
+			location: '/en/vaulta/account/a',
+			status: 301,
+			cacheable: true
+		});
+		expect(resolveRedirect('/earn')).toEqual({
+			location: `/en/${chainName}/staking`,
+			status: 301,
+			cacheable: false
+		});
+	});
+	test('temporarily redirects when the cookie locale changes the destination', () => {
+		expect(resolveRedirect('/', 'ko')).toEqual({
+			location: `/ko/${chainName}`,
+			status: 302,
+			cacheable: false
+		});
+		expect(resolveRedirect(`/${chainName}/staking`, 'ko')).toEqual({
+			location: `/ko/${chainName}/staking`,
+			status: 302,
+			cacheable: false
+		});
+	});
+	test('a locale in the path wins over the cookie', () => {
+		expect(resolveRedirect(`/en/${chainName}/staking`, 'ko')).toBeNull();
+	});
+	test('keeps a matching cookie locale permanent', () => {
+		expect(resolveRedirect(`/${chainName}/staking`, 'en')).toEqual({
+			location: `/en/${chainName}/staking`,
+			status: 301,
+			cacheable: false
+		});
 	});
 });

@@ -124,3 +124,25 @@ export function resolveLocale(pathname: string, cookieLocale?: string): string {
 	}
 	return DEFAULT_LOCALE;
 }
+
+export interface RedirectTarget {
+	location: string;
+	status: 301 | 302;
+	cacheable: boolean;
+}
+
+// Permanent unless the cookie locale alone is what moves the request.
+export function resolveRedirect(pathname: string, cookieLocale?: string): RedirectTarget | null {
+	if (pathname.includes('/api/')) return null;
+	const network = PUBLIC_CHAIN_SHORT;
+	const canonical = localizePath(pathname, { forceNetwork: network });
+	const preferred = localizePath(pathname, {
+		forceNetwork: network,
+		forceLocale: resolveLocale(pathname, cookieLocale)
+	});
+	if (pathname === preferred) return null;
+	const status = preferred === canonical ? 301 : 302;
+	// Shared caches key on URL only, so a redirect the cookie could change must not be cached.
+	const cacheable = status === 301 && LOCALES.includes(pathname.split('/')[1]);
+	return { location: preferred, status, cacheable };
+}

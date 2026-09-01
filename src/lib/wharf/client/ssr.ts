@@ -17,6 +17,7 @@ interface GetBackendClientOptions {
 
 const backendEndpoints: ChainEndpoints = {
 	api: env.BACKEND_API_CHAIN,
+	blocks: optionalEnv.BACKEND_API_BLOCKS,
 	history: env.BACKEND_API_HISTORY,
 	hyperion: env.BACKEND_API_HYPERION,
 	lightapi: env.BACKEND_API_LIGHTAPI,
@@ -53,6 +54,14 @@ export function getBackendClient(
 	}
 	return new APIClient({
 		provider: new FetchProvider(url, { fetch, headers: options.headers })
+	});
+}
+
+// Block lookups go to a node with a full block log when one is configured.
+export function getBlocksClient(network: string, fetch: typeof window.fetch): APIClient {
+	const config = getMergedConfig(network);
+	return new APIClient({
+		provider: new FetchProvider(config.endpoints.blocks || config.endpoints.api, { fetch })
 	});
 }
 

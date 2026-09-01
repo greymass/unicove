@@ -3,6 +3,7 @@ import { Asset, type NameType } from '@wharfkit/antelope';
 
 import { NetworkState } from '$lib/state/network.svelte';
 import { getCacheHeaders } from '$lib/utils';
+import { chainErrorStatus } from '$lib/utils/chainerror';
 import type { AccountDataSources } from '$lib/types/account';
 import type { LightAPIBalanceResponse } from '$lib/types/lightapi';
 
@@ -50,8 +51,12 @@ export const GET: RequestHandler = async ({ locals: { network }, params }: Reque
 			{ headers }
 		);
 	} catch (error) {
-		console.error(error);
-		return json({ error: 'Unable to load account.' }, { status: 500 });
+		const status = chainErrorStatus(error);
+		if (status !== 404) console.error(error);
+		return json(
+			{ error: status === 404 ? 'Account not found.' : 'Unable to load account.' },
+			{ status, headers: status === 404 ? getCacheHeaders(60) : {} }
+		);
 	}
 };
 

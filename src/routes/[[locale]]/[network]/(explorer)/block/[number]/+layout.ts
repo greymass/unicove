@@ -14,10 +14,18 @@ export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 
 	const json = await response.json();
 
-	if (!response.ok || !json.block) {
+	if (response.status === 404 || (response.ok && !json.block)) {
 		return error(404, {
 			message: `No block found.`,
 			code: 'NOT_FOUND',
+			title: title,
+			subtitle: 'Block'
+		});
+	}
+	if (!response.ok) {
+		return error(503, {
+			message: `Block data is temporarily unavailable.`,
+			code: 'UNAVAILABLE',
 			title: title,
 			subtitle: 'Block'
 		});

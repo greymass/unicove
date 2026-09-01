@@ -1,4 +1,4 @@
-import { AccountState } from '$lib/state/client/account.svelte';
+import { AccountFetchError, AccountState } from '$lib/state/client/account.svelte';
 import { useLocale } from '$lib/utils/intl';
 import { localizePath } from '$lib/utils/url';
 import { Code } from '@lucide/svelte';
@@ -14,10 +14,18 @@ export const load: LayoutLoad = async ({ fetch, params, parent }) => {
 	try {
 		account = await AccountState.for(network, Name.from(String(params.name)), fetch);
 	} catch (e) {
+		if (e instanceof AccountFetchError && e.status === 404) {
+			error(404, {
+				message: 'Account not found',
+				code: 'NOT_FOUND',
+				title: params.name,
+				subtitle: 'Account'
+			});
+		}
 		console.error(e);
-		error(404, {
-			message: 'Account not found',
-			code: 'NOT_FOUND',
+		error(503, {
+			message: 'Account data is temporarily unavailable',
+			code: 'UNAVAILABLE',
 			title: params.name,
 			subtitle: 'Account'
 		});

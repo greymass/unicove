@@ -1,8 +1,9 @@
-import { error, json } from '@sveltejs/kit';
+import { json } from '@sveltejs/kit';
 import { Checksum256 } from '@wharfkit/antelope';
 
 import type { RequestEvent } from './$types';
 import { getCacheHeaders } from '$lib/utils';
+import { chainErrorStatus } from '$lib/utils/chainerror';
 import { getBackendClient, getRobo2Client } from '$lib/wharf/client/ssr';
 import { TransactionResponse } from '$lib/types/transaction';
 
@@ -38,6 +39,12 @@ export async function GET({ fetch, locals, params }: RequestEvent) {
 	const network = String(locals.network);
 	let transaction: TransactionResponse | undefined;
 
+	try {
+		Checksum256.from(params.id);
+	} catch {
+		return json({ error: 'Transaction not found.' }, { status: 404, headers: getCacheHeaders(60) });
+	}
+
 	if (locals.network.supports('robo2')) {
 		transaction = await getTransactionFromRobo2(network, fetch, params.id);
 	}
@@ -46,9 +53,11 @@ export async function GET({ fetch, locals, params }: RequestEvent) {
 		try {
 			transaction = await getTransactionFromHistory(network, fetch, params.id);
 		} catch (e) {
-			return error(500, {
-				message: `Error while loading transaction ${params.id}: ${e}.`
-			});
+			const status = chainErrorStatus(e);
+			return json(
+				{ error: status === 404 ? 'Transaction not found.' : 'Unable to load transaction.' },
+				{ status, headers: status === 404 ? getCacheHeaders(60) : {} }
+			);
 		}
 	}
 
