@@ -28,7 +28,7 @@ export function vpRouteTabs(
 		tabs.push({ href: `${basePath}/multisigs`, kind: 'multisigs', count: stepCount });
 	}
 
-	const hasSentiment = summary.sentiment.length > 0 || summary.msigs.length > 0;
+	const hasSentiment = summary.sentiment.length > 0;
 	if (options.sentimentEnabled && hasSentiment) {
 		tabs.push({ href: `${basePath}/sentiment`, kind: 'sentiment' });
 	}

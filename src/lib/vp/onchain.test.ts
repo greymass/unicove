@@ -35,6 +35,17 @@ describe('vpMsigSteps', () => {
 		expect(result.map((s) => s.step)).toEqual([1, 2]);
 	});
 
+	test('marks only an active step as live', () => {
+		const result = steps([
+			{ proposer: 'test.gm', proposal: 'aaaaaaaaaaaa', status: 'executed', txid: 'a'.repeat(64) },
+			{ proposer: 'test.gm', proposal: 'bbbbbbbbbbbb', status: 'active' },
+			{ proposer: 'test.gm', proposal: 'cccccccccccc', status: 'expired' },
+			{ proposer: 'test.gm', proposal: 'dddddddddddd', status: 'cancelled' },
+			{ status: 'planned', title: 'Create the account' }
+		]);
+		expect(result.map((s) => s.live)).toEqual([false, true, false, false, false]);
+	});
+
 	test('models a planned step with no binding', () => {
 		const [only] = steps([{ status: 'planned', title: 'Create the account' }]);
 		expect(only.planned).toBe(true);

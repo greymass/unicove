@@ -1,5 +1,6 @@
-import { describe, expect, it, test } from 'bun:test';
-import { vpMsigPollRows, vpProposalTopicRows, vpSentimentRowKey } from './sentiment';
+import { describe, expect, test } from 'bun:test';
+import { vpMsigSteps } from './onchain';
+import { vpApplyOwnVote, vpProposalTopicRows, vpStepHasPoll } from './sentiment';
 import type { VpSummary } from './types';
 
 function summary(overrides: Partial<VpSummary> = {}): VpSummary {
@@ -36,7 +37,7 @@ describe('vpProposalTopicRows', () => {
 				votable: true
 			}
 		]);
-		expect(vpSentimentRowKey(rows[0])).toBe('topic:sentiment');
+		expect(rows[0].topic).toBe('sentiment');
 	});
 
 	test('no topics gives no rows', () => {
@@ -44,9 +45,16 @@ describe('vpProposalTopicRows', () => {
 	});
 });
 
-describe('vpMsigPollRows', () => {
-	test('declared order is kept, and active multisigs are the only votable ones', () => {
-		const rows = vpMsigPollRows(
+describe('vpStepHasPoll', () => {
+	test('a planned step has no poll, because there is no multisig to poll on', () => {
+		const steps = vpMsigSteps(
+			summary({ msigs: [{ status: 'planned', title: 'Create the account' }] })
+		);
+		expect(steps.map(vpStepHasPoll)).toEqual([false]);
+	});
+
+	test('a step proposed on-chain has a poll whatever its status', () => {
+		const steps = vpMsigSteps(
 			summary({
 				msigs: [
 					{ proposer: 'test.gm', proposal: 'hqmz3rvktdxa', status: 'executed' },
@@ -55,68 +63,64 @@ describe('vpMsigPollRows', () => {
 				]
 			})
 		);
-		expect(rows.map((r) => r.proposal)).toEqual(['hqmz3rvktdxa', 'ugkuddhb2jwp', 'pfy4wnsbcjrt']);
-		expect(rows.map((r) => r.votable)).toEqual([false, true, false]);
+		expect(steps.map(vpStepHasPoll)).toEqual([true, true, true]);
 	});
 
-	test('a row carries the paths its component needs', () => {
-		const rows = vpMsigPollRows(
-			summary({ msigs: [{ proposer: 'test.gm', proposal: 'ugkuddhb2jwp', status: 'active' }] })
-		);
-		expect(rows[0].msigPath).toBe('/msig/test.gm/ugkuddhb2jwp');
-		expect(rows[0].status).toBe('active');
-		expect(vpSentimentRowKey(rows[0])).toBe('msigvote:test.gm/ugkuddhb2jwp');
-	});
-
-	test('declaration order is kept within each group', () => {
-		const rows = vpMsigPollRows(
+	test('a planned step among proposed ones is the only one without a poll', () => {
+		const steps = vpMsigSteps(
 			summary({
 				msigs: [
-					{ proposer: 'test.gm', proposal: 'aaa', status: 'active' },
-					{ proposer: 'test.gm', proposal: 'bbb', status: 'active' },
-					{ proposer: 'test.gm', proposal: 'ccc', status: 'cancelled' }
+					{ proposer: 'test.gm', proposal: 'aaaaaaaaaaaa', status: 'active' },
+					{ status: 'planned', title: 'Hand over the keys' }
 				]
 			})
 		);
-		expect(rows.map((r) => r.proposal)).toEqual(['aaa', 'bbb', 'ccc']);
+		expect(steps.map(vpStepHasPoll)).toEqual([true, false]);
 	});
 });
 
-describe('vpMsigPollRows step ordering', () => {
-	const base = summary();
+describe('vpApplyOwnVote', () => {
+	const base = { totalVotes: 3, totalSupportWeight: 300, totalOppositionWeight: 100 };
 
-	it('keeps declared order instead of putting votable rows first', () => {
-		const rows = vpMsigPollRows({
-			...base,
-			msigs: [
-				{ proposer: 'test.gm', proposal: 'aaaaaaaaaaaa', status: 'executed', txid: 'a'.repeat(64) },
-				{ proposer: 'test.gm', proposal: 'bbbbbbbbbbbb', status: 'active' }
-			]
+	test('casting a first support vote adds the weight and the count', () => {
+		expect(vpApplyOwnVote(base, null, 1, 100)).toEqual({
+			totalVotes: 4,
+			supportPercentage: 80,
+			oppositionPercentage: 20
 		});
-		expect(rows.map((r) => r.proposal)).toEqual(['aaaaaaaaaaaa', 'bbbbbbbbbbbb']);
-		expect(rows.map((r) => r.step)).toEqual([1, 2]);
-		expect(rows.map((r) => r.votable)).toEqual([false, true]);
 	});
 
-	it('omits a planned step, which has no poll', () => {
-		const rows = vpMsigPollRows({
-			...base,
-			msigs: [
-				{ status: 'planned', title: 'Create the account' },
-				{ proposer: 'test.gm', proposal: 'bbbbbbbbbbbb', status: 'active' }
-			]
+	test('removing your own support drops the weight and the count', () => {
+		expect(vpApplyOwnVote(base, 1, null, 100)).toEqual({
+			totalVotes: 2,
+			supportPercentage: (200 / 300) * 100,
+			oppositionPercentage: (100 / 300) * 100
 		});
-		expect(rows).toHaveLength(1);
-		expect(rows[0].step).toBe(2);
 	});
 
-	it('carries the step title through', () => {
-		const rows = vpMsigPollRows({
-			...base,
-			msigs: [
-				{ proposer: 'test.gm', proposal: 'aaaaaaaaaaaa', status: 'active', title: 'Deploy it' }
-			]
+	test('switching sides moves the weight without changing the count', () => {
+		expect(vpApplyOwnVote(base, 1, 0, 100)).toEqual({
+			totalVotes: 3,
+			supportPercentage: 50,
+			oppositionPercentage: 50
 		});
-		expect(rows[0].title).toBe('Deploy it');
+	});
+
+	test('removing the only vote reads as no votes rather than a negative tally', () => {
+		const only = { totalVotes: 1, totalSupportWeight: 100, totalOppositionWeight: 0 };
+		expect(vpApplyOwnVote(only, 1, null, 100)).toEqual({
+			totalVotes: 0,
+			supportPercentage: 0,
+			oppositionPercentage: 0
+		});
+	});
+
+	test('stale statistics missing your earlier vote clamp instead of going negative', () => {
+		const stale = { totalVotes: 0, totalSupportWeight: 0, totalOppositionWeight: 0 };
+		expect(vpApplyOwnVote(stale, 1, null, 100)).toEqual({
+			totalVotes: 0,
+			supportPercentage: 0,
+			oppositionPercentage: 0
+		});
 	});
 });

@@ -4,8 +4,8 @@
 	import { Card, Chip } from 'unicove-components';
 	import { formatDateTime } from '$lib/utils/intl';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import ApprovalProgress from '$lib/components/msig/approvalprogress.svelte';
-	import { parseMsigApprovals, type VpMsigStep } from '$lib/vp/onchain';
+	import VpMsigStepResults from '$lib/components/vp/VpMsigStepResults.svelte';
+	import { parseMsigApprovals, type VpMsigApprovals, type VpMsigStep } from '$lib/vp/onchain';
 
 	interface Props {
 		step: VpMsigStep;
@@ -16,13 +16,7 @@
 	const { step, basePath, last }: Props = $props();
 	const context = getContext<UnicoveContext>('state');
 
-	let approved = $state<number | null>(null);
-	let requested = $state<number | null>(null);
-	let satisfied = $state<number | null>(null);
-	let threshold = $state<number | null>(null);
-	let possible = $state<number | null>(null);
-	let expiration = $state<string | null>(null);
-	let actions = $state<string[]>([]);
+	let approvals = $state<VpMsigApprovals | null>(null);
 	let unavailable = $state(false);
 
 	const locale = $derived(page.params.locale ?? 'en');
@@ -62,13 +56,7 @@
 					unavailable = true;
 					return;
 				}
-				approved = msig.approved;
-				requested = msig.requested;
-				satisfied = msig.satisfied;
-				threshold = msig.threshold;
-				possible = msig.possible;
-				expiration = msig.expiration;
-				actions = msig.actions;
+				approvals = msig;
 			})
 			.catch(() => {
 				unavailable = true;
@@ -95,9 +83,9 @@
 		<div class="flex flex-wrap items-start justify-between gap-2">
 			<div class="min-w-0">
 				{#if step.title}
-					<h3 class="text-title">{step.title}</h3>
+					<h2 class="text-title">{step.title}</h2>
 				{:else}
-					<h3 class="text-title">Step {step.step}</h3>
+					<h2 class="text-title">Step {step.step}</h2>
 				{/if}
 				{#if step.proposer && step.proposal}
 					<p class="text-muted mt-1 font-mono text-sm">{step.proposer}/{step.proposal}</p>
@@ -117,9 +105,9 @@
 			>
 		</div>
 
-		{#if actions.length}
+		{#if approvals?.actions.length}
 			<div class="mt-3 flex flex-wrap gap-1.5">
-				{#each actions as action (action)}
+				{#each approvals.actions as action (action)}
 					<span class="bg-surface-container-high text-muted rounded px-2 py-0.5 font-mono text-xs">
 						{action}
 					</span>
@@ -127,13 +115,13 @@
 			</div>
 		{/if}
 
-		{#if step.live && approved !== null && requested !== null}
-			<div class="mt-4">
-				<ApprovalProgress {approved} {requested} {satisfied} {threshold} {possible} />
-			</div>
-			{#if expiration}
-				<p class="text-muted mt-2 text-sm">Expires {formatExpiration(expiration)}</p>
-			{/if}
+		<VpMsigStepResults {step} {approvals} />
+
+		{#if approvals?.expiration}
+			<p class="text-muted mt-2 text-sm">
+				{step.live ? 'Expires' : 'Expired'}
+				{formatExpiration(approvals.expiration)}
+			</p>
 		{:else if step.live && unavailable}
 			<p class="text-muted mt-3 text-sm">No live approval data on this network.</p>
 		{/if}
@@ -155,12 +143,12 @@
 					View the transaction
 				</a>
 			{/if}
-			{#if step.live}
+			{#if context.network.supports('discussion') && step.proposer && step.proposal}
 				<a
 					class="border-outline text-primary rounded-lg border px-4 py-2 text-sm font-semibold"
-					href="{basePath}/sentiment"
+					href="{basePath}/discussion?target=msig:{step.proposer}:{step.proposal}"
 				>
-					See sentiment on this step
+					Read the discussion
 				</a>
 			{/if}
 		</div>

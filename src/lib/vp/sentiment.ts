@@ -1,5 +1,5 @@
-import { vpMsigSteps } from './onchain';
-import type { VpMsigStatus, VpSummary } from './types';
+import type { VpMsigStep } from './onchain';
+import type { VpSummary } from './types';
 
 export interface VpProposalTopicRow {
 	kind: 'proposal';
@@ -8,20 +8,6 @@ export interface VpProposalTopicRow {
 	topicPath: string;
 	votable: true;
 }
-
-export interface VpMsigPollRow {
-	kind: 'msig';
-	step: number;
-	title: string | null;
-	proposer: string;
-	proposal: string;
-	msigPath: string;
-	status: VpMsigStatus;
-	votable: boolean;
-	supersededAttempts: number;
-}
-
-export type VpSentimentRowModel = VpProposalTopicRow | VpMsigPollRow;
 
 export function vpProposalTopicRows(summary: VpSummary): VpProposalTopicRow[] {
 	return summary.sentiment.map((ref) => ({
@@ -33,33 +19,50 @@ export function vpProposalTopicRows(summary: VpSummary): VpProposalTopicRow[] {
 	}));
 }
 
-export function vpMsigPollRows(summary: VpSummary, lang?: string): VpMsigPollRow[] {
-	const rows: VpMsigPollRow[] = [];
-	for (const step of vpMsigSteps(summary, lang)) {
-		// A planned step has no msig, so the sentiment contract has nothing to poll on.
-		if (step.planned || !step.proposer || !step.proposal || !step.msigPath) continue;
-		rows.push({
-			kind: 'msig',
-			step: step.step,
-			title: step.title,
-			proposer: step.proposer,
-			proposal: step.proposal,
-			msigPath: step.msigPath,
-			status: step.status,
-			votable: step.live,
-			supersededAttempts: step.supersededAttempts
-		});
-	}
-	return rows;
+export function vpStepHasPoll(step: VpMsigStep): boolean {
+	return !step.planned && Boolean(step.proposer && step.proposal && step.msigPath);
 }
 
 export type VpLens = 'system' | 'ram' | 'vote' | 'accounts';
 
-export function vpSentimentRowKey(row: VpSentimentRowModel): string {
-	switch (row.kind) {
-		case 'proposal':
-			return `topic:${row.topic}`;
-		case 'msig':
-			return `msigvote:${row.proposer}/${row.proposal}`;
-	}
+export interface VpStepTally {
+	totalVotes: number;
+	supportPercentage: number;
+	oppositionPercentage: number;
+}
+
+interface VpWeightTotals {
+	totalVotes: number;
+	totalSupportWeight: number;
+	totalOppositionWeight: number;
+}
+
+export function vpApplyOwnVote(
+	statistics: VpWeightTotals,
+	previousVote: number | null,
+	nextVote: number | null,
+	weight: number
+): VpStepTally {
+	let support = statistics.totalSupportWeight;
+	let opposition = statistics.totalOppositionWeight;
+	let votes = statistics.totalVotes;
+
+	if (previousVote === 1) support -= weight;
+	if (previousVote === 0) opposition -= weight;
+	if (previousVote !== null) votes -= 1;
+
+	if (nextVote === 1) support += weight;
+	if (nextVote === 0) opposition += weight;
+	if (nextVote !== null) votes += 1;
+
+	support = Math.max(support, 0);
+	opposition = Math.max(opposition, 0);
+	votes = Math.max(votes, 0);
+
+	const total = support + opposition;
+	return {
+		totalVotes: votes,
+		supportPercentage: total ? (support / total) * 100 : 0,
+		oppositionPercentage: total ? (opposition / total) * 100 : 0
+	};
 }
