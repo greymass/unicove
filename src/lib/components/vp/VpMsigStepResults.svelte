@@ -183,9 +183,6 @@
 								statistics={displayed}
 							/>
 						</div>
-						{#if displayed.totalVotes < 5}
-							<p class="text-muted mt-1 text-xs">Too few votes to read as a trend.</p>
-						{/if}
 					{:else if loaded}
 						<p class="text-muted text-sm">No votes yet on this step.</p>
 					{:else}
