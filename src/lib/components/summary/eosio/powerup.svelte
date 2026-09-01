@@ -1,7 +1,6 @@
 <script lang="ts">
 	import * as SystemContract from '$lib/wharf/contracts/system';
 	import type { ActionSummaryProps } from '$lib/types/transaction';
-	import * as m from '$lib/paraglide/messages';
 	import AccountElement from '$lib/components/elements/account.svelte';
 	import Row from '../components/row.svelte';
 	import { Chip } from 'unicove-components';
@@ -17,42 +16,28 @@
 
 {#if Int64.from(data.cpu_frac).gt(ZeroUnits)}
 	<Row>
-		<Chip>{m.common_resources()}</Chip>
-
-		<div>
-			<AccountElement name={Name.from(data.payer)} />
-			<span class="text-nowrap">
-				{m.common_renting_resources_for({
-					resource: 'CPU'
-				})}
+		<span class="inline-flex flex-wrap items-center gap-x-2 gap-y-1">
+			<Chip>Resources</Chip>
+			<span class="inline-flex items-center gap-1">
+				<AccountElement name={Name.from(data.payer)} />
+				<span class="text-on-surface-variant">renting CPU for</span>
+				<AccountElement name={Name.from(data.receiver)} />
 			</span>
-			<AccountElement name={Name.from(data.receiver)} />
-		</div>
-
-		<div>
-			<span class="text-nowrap">
-				({data.cpu_frac})
-			</span>
-		</div>
+			<span class="text-on-surface-variant text-sm">({data.cpu_frac})</span>
+		</span>
 	</Row>
 {/if}
 
 {#if Int64.from(data.net_frac).gt(ZeroUnits)}
 	<Row>
-		<Chip>{m.common_resources()}</Chip>
-
-		<div>
-			<AccountElement name={Name.from(data.payer)} />
-			<span class="text-nowrap">
-				{m.common_renting_resources_for({
-					resource: 'NET'
-				})}
+		<span class="inline-flex flex-wrap items-center gap-x-2 gap-y-1">
+			<Chip>Resources</Chip>
+			<span class="inline-flex items-center gap-1">
+				<AccountElement name={Name.from(data.payer)} />
+				<span class="text-on-surface-variant">renting NET for</span>
+				<AccountElement name={Name.from(data.receiver)} />
 			</span>
-			<AccountElement name={Name.from(data.receiver)} />
-		</div>
-
-		<span class="text-nowrap">
-			({data.net_frac})
+			<span class="text-on-surface-variant text-sm">({data.net_frac})</span>
 		</span>
 	</Row>
 {/if}

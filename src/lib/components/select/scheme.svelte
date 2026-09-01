@@ -6,13 +6,10 @@
 	let darkMode = $state(browser && localStorage.getItem('color-scheme') === 'dark');
 
 	const onDarkModeToggle: CreateSwitchProps['onCheckedChange'] = ({ next }) => {
-		if (darkMode && localStorage.getItem('color-scheme') == 'light') {
-			localStorage.setItem('color-scheme', 'dark');
-			document.documentElement.setAttribute('data-scheme', 'dark');
-		} else if (!darkMode && localStorage.getItem('color-scheme') === 'dark') {
-			localStorage.setItem('color-scheme', 'light');
-			document.documentElement.setAttribute('data-scheme', 'light');
-		}
+		const scheme = next ? 'dark' : 'light';
+		localStorage.setItem('color-scheme', scheme);
+		document.documentElement.setAttribute('data-scheme', scheme);
+		document.documentElement.style.setProperty('color-scheme', scheme);
 		return next;
 	};
 </script>

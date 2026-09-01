@@ -9,10 +9,10 @@
 
 	let { contract = false, ...props }: Props = $props();
 
-	let { network } = getContext<UnicoveContext>('state');
+	let { network, urlPath } = getContext<UnicoveContext>('state');
 
 	const href = $derived(
-		contract ? `/${network}/contract/${props.name}` : `/${network}/account/${props.name}`
+		contract ? urlPath(`/contract/${props.name}`) : urlPath(`/${network}/account/${props.name}`)
 	);
 </script>
 
