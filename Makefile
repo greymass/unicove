@@ -7,6 +7,7 @@ SHELL := /usr/bin/env bash
 BIN := ./node_modules/.bin
 
 ENVS=./scripts/env
+CODEGEN_API_CHAIN ?= $(if $(BACKEND_API_CHAIN),$(BACKEND_API_CHAIN),$(PUBLIC_API_CHAIN))
 CONTRACTS=./src/lib/wharf/contracts
 CODEX_MODEL ?= gpt-5.6-luna
 CODEX_REASONING ?= low
@@ -61,31 +62,31 @@ build/docker: node_modules codegen
 	bun run build-docker
 
 $(CONTRACTS)/system.ts:
-	$(BIN)/wharfkit generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/system.ts eosio
+	$(BIN)/wharfkit generate -u $(CODEGEN_API_CHAIN) -f $(CONTRACTS)/system.ts eosio
 
 $(CONTRACTS)/token.ts:
-	$(BIN)/wharfkit generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/token.ts eosio.token
+	$(BIN)/wharfkit generate -u $(CODEGEN_API_CHAIN) -f $(CONTRACTS)/token.ts eosio.token
 
 $(CONTRACTS)/msig.ts:
-	$(BIN)/wharfkit generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/msig.ts eosio.msig
+	$(BIN)/wharfkit generate -u $(CODEGEN_API_CHAIN) -f $(CONTRACTS)/msig.ts eosio.msig
 
 $(CONTRACTS)/eosio.reserv.ts:
 ifeq ($(PUBLIC_FEATURE_POWERUP),true)
-	$(BIN)/wharfkit generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/eosio.reserv.ts eosio.reserv
+	$(BIN)/wharfkit generate -u $(CODEGEN_API_CHAIN) -f $(CONTRACTS)/eosio.reserv.ts eosio.reserv
 else
 	cp ./configs/contracts/eosio.reserv.ts $(CONTRACTS)/eosio.reserv.ts
 endif	
 
 $(CONTRACTS)/delphihelper.ts:
 ifeq ($(PUBLIC_FEATURE_DELPHIHELPER),true)
-	$(BIN)/wharfkit generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/delphihelper.ts delphihelper
+	$(BIN)/wharfkit generate -u $(CODEGEN_API_CHAIN) -f $(CONTRACTS)/delphihelper.ts delphihelper
 else
 	cp ./configs/contracts/delphihelper.ts $(CONTRACTS)/delphihelper.ts
 endif
 
 $(CONTRACTS)/delphioracle.ts:
 ifeq ($(PUBLIC_FEATURE_DELPHIORACLE),true)
-	$(BIN)/wharfkit generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/delphioracle.ts delphioracle
+	$(BIN)/wharfkit generate -u $(CODEGEN_API_CHAIN) -f $(CONTRACTS)/delphioracle.ts delphioracle
 else
 	cp ./configs/contracts/delphioracle.ts $(CONTRACTS)/delphioracle.ts
 endif
@@ -94,47 +95,47 @@ $(CONTRACTS)/unicove.api.ts:
 ifeq ($(PUBLIC_FEATURE_UNICOVE_CONTRACT_API),)
 	cp ./configs/contracts/unicove.api.ts $(CONTRACTS)/unicove.api.ts
 else
-	$(BIN)/wharfkit generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/unicove.api.ts $(PUBLIC_FEATURE_UNICOVE_CONTRACT_API)
+	$(BIN)/wharfkit generate -u $(CODEGEN_API_CHAIN) -f $(CONTRACTS)/unicove.api.ts $(PUBLIC_FEATURE_UNICOVE_CONTRACT_API)
 endif
 
 $(CONTRACTS)/core.vaulta.ts:
 ifeq ($(PUBLIC_FEATURE_VAULTA_CORE_CONTRACT),)
 	cp ./configs/contracts/core.vaulta.ts $(CONTRACTS)/core.vaulta.ts
 else
-	$(BIN)/wharfkit generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/core.vaulta.ts $(PUBLIC_FEATURE_VAULTA_CORE_CONTRACT)
+	$(BIN)/wharfkit generate -u $(CODEGEN_API_CHAIN) -f $(CONTRACTS)/core.vaulta.ts $(PUBLIC_FEATURE_VAULTA_CORE_CONTRACT)
 endif
 
 $(CONTRACTS)/eosntime.ts:
 ifeq ($(PUBLIC_FEATURE_EOSNTIME),true)
-	$(BIN)/wharfkit generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/eosntime.ts time.eosn
+	$(BIN)/wharfkit generate -u $(CODEGEN_API_CHAIN) -f $(CONTRACTS)/eosntime.ts time.eosn
 else
 	cp ./configs/contracts/eosntime.ts $(CONTRACTS)/eosntime.ts
 endif
 
 $(CONTRACTS)/eosio.wram.ts:
 ifeq ($(PUBLIC_FEATURE_WRAM),true)
-	$(BIN)/wharfkit generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/eosio.wram.ts eosio.wram
+	$(BIN)/wharfkit generate -u $(CODEGEN_API_CHAIN) -f $(CONTRACTS)/eosio.wram.ts eosio.wram
 else
 	cp ./configs/contracts/eosio.wram.ts $(CONTRACTS)/eosio.wram.ts
 endif
 
 $(CONTRACTS)/eosio.rex.ts:
 ifeq ($(PUBLIC_FEATURE_WRAM),true)
-	$(BIN)/wharfkit generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/eosio.rex.ts eosio.rex
+	$(BIN)/wharfkit generate -u $(CODEGEN_API_CHAIN) -f $(CONTRACTS)/eosio.rex.ts eosio.rex
 else
 	cp ./configs/contracts/eosio.rex.ts $(CONTRACTS)/eosio.rex.ts
 endif
 
 $(CONTRACTS)/sentiment.ts:
 ifeq ($(PUBLIC_FEATURE_SENTIMENT),true)
-	$(BIN)/wharfkit generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/sentiment.ts $(PUBLIC_FEATURE_SENTIMENT_CONTRACT)
+	$(BIN)/wharfkit generate -u $(CODEGEN_API_CHAIN) -f $(CONTRACTS)/sentiment.ts $(PUBLIC_FEATURE_SENTIMENT_CONTRACT)
 else
 	cp ./configs/contracts/sentiment.ts $(CONTRACTS)/sentiment.ts
 endif
 
 $(CONTRACTS)/create.gm.ts:
 ifneq ($(PUBLIC_FEATURE_CREATE_CONTRACT),)
-	$(BIN)/wharfkit generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/create.gm.ts $(PUBLIC_FEATURE_CREATE_CONTRACT)
+	$(BIN)/wharfkit generate -u $(CODEGEN_API_CHAIN) -f $(CONTRACTS)/create.gm.ts $(PUBLIC_FEATURE_CREATE_CONTRACT)
 else
 	cp ./configs/contracts/create.gm.ts $(CONTRACTS)/create.gm.ts
 endif
@@ -143,14 +144,14 @@ FORUM_CONTRACT = forum.$(lastword $(subst ., ,$(PUBLIC_FEATURE_DISCUSSION_CONTRA
 
 $(CONTRACTS)/msg.ts:
 ifeq ($(PUBLIC_FEATURE_DISCUSSION),true)
-	$(BIN)/wharfkit generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/msg.ts $(PUBLIC_FEATURE_DISCUSSION_CONTRACT)
+	$(BIN)/wharfkit generate -u $(CODEGEN_API_CHAIN) -f $(CONTRACTS)/msg.ts $(PUBLIC_FEATURE_DISCUSSION_CONTRACT)
 else
 	cp ./configs/contracts/msg.ts $(CONTRACTS)/msg.ts
 endif
 
 $(CONTRACTS)/forum.ts:
 ifeq ($(PUBLIC_FEATURE_DISCUSSION),true)
-	$(BIN)/wharfkit generate -u $(PUBLIC_API_CHAIN) -f $(CONTRACTS)/forum.ts $(FORUM_CONTRACT)
+	$(BIN)/wharfkit generate -u $(CODEGEN_API_CHAIN) -f $(CONTRACTS)/forum.ts $(FORUM_CONTRACT)
 else
 	cp ./configs/contracts/forum.ts $(CONTRACTS)/forum.ts
 endif
@@ -164,7 +165,7 @@ codegen/base:
 	$(BIN)/wharfkit generate -u https://eos.greymass.com -f ./configs/contracts/delphioracle.ts delphioracle
 	$(BIN)/wharfkit generate -u https://eos.greymass.com -f ./configs/contracts/eosntime.ts time.eosn
 	$(BIN)/wharfkit generate -u https://jungle4.greymass.com -f ./configs/contracts/core.vaulta.ts core.vaulta
-	$(BIN)/wharfkit generate -u $(PUBLIC_API_CHAIN) -f ./configs/contracts/unicove.api.ts $(PUBLIC_FEATURE_UNICOVE_CONTRACT_API)
+	$(BIN)/wharfkit generate -u $(CODEGEN_API_CHAIN) -f ./configs/contracts/unicove.api.ts $(PUBLIC_FEATURE_UNICOVE_CONTRACT_API)
 	$(BIN)/wharfkit generate -u https://eos.greymass.com -f ./configs/contracts/eosio.rex.ts eosio.rex
 	$(BIN)/wharfkit generate -u https://eos.greymass.com -f ./configs/contracts/eosio.wram.ts eosio.wram
 	$(BIN)/wharfkit generate -u https://jungle4.greymass.com -f ./configs/contracts/sentiment.ts sentiment.gm
