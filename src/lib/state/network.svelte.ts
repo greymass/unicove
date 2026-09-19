@@ -121,7 +121,11 @@ export class NetworkState {
 			sampleAccount: 'eosio.reserv',
 			symbol: String(this.config.systemtoken.symbol)
 		});
-		this.msigs = new MsigsClient(this.client);
+		this.msigs = new MsigsClient(
+			this.config.endpoints.msigs
+				? new APIClient(new FetchProvider(this.config.endpoints.msigs, { fetch: this.fetch }))
+				: this.client
+		);
 		this.connection.endpoint = (this.client.provider as FetchProvider).url;
 
 		this.contracts = {

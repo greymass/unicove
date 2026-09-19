@@ -1,15 +1,11 @@
-import type { PageLoad } from './$types';
+import type { PageServerLoad } from './$types';
 
-export const load: PageLoad = async ({ params, parent, url }) => {
+export const load: PageServerLoad = async ({ locals: { network }, params, url }) => {
 	const status = url.searchParams.get('status') || 'proposed';
 	const offset = Number(url.searchParams.get('offset')) || 0;
 	const limit = Number(url.searchParams.get('limit')) || 20;
 
-	const parentData = await parent();
-	const { network } = parentData;
-
 	const baseResponse = {
-		...parentData,
 		status,
 		offset,
 		limit,
