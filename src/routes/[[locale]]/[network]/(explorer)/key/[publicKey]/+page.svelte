@@ -7,14 +7,10 @@
 	let { data } = $props();
 
 	const pubKey = $derived(String(data.publicKey));
-	const legacyPubKey = $derived.by(() => {
-		try {
-			return data.publicKey.toLegacyString();
-		} catch (error) {
-			console.log(error);
-			return undefined;
-		}
-	});
+	// Only K1 keys have a legacy string representation
+	const legacyPubKey = $derived(
+		data.publicKey.type === 'K1' ? data.publicKey.toLegacyString() : undefined
+	);
 </script>
 
 <Stack>
