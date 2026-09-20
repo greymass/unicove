@@ -4,6 +4,7 @@ import type { Article, StoryBlokArticle } from '$lib/types/content';
 import type { TopicWithStats } from '$lib/types/sentiment';
 import type { NetworkState } from '$lib/state/network.svelte';
 import { TopicSentimentState } from '../(explorer)/sentiment/topics/state.svelte';
+import { loadMarketPrices } from '$lib/utils/marketprice';
 import {
 	PUBLIC_STORYBLOK_CONTENT_TYPE,
 	PUBLIC_STORYBLOK_REGION,
@@ -60,16 +61,20 @@ async function getSentimentTopics(
 	}
 }
 
-export const load: PageLoad = async ({ parent }) => {
+export const load: PageLoad = async ({ fetch, parent }) => {
 	const { network, locale } = await parent();
 
-	const [articles, sentimentTopics] = await Promise.all([
+	const [articles, sentimentTopics, ramPrices, tokenPrices] = await Promise.all([
 		getStoryblokStories(3),
-		getSentimentTopics(network, locale)
+		getSentimentTopics(network, locale),
+		loadMarketPrices(network, fetch, 'ram'),
+		loadMarketPrices(network, fetch, 'token')
 	]);
 
 	return {
 		articles,
-		sentimentTopics
+		sentimentTopics,
+		ramPrices,
+		tokenPrices
 	};
 };

@@ -38,7 +38,7 @@
 		<StakingRewards network={data.network} />
 	{/if}
 
-	<Charts />
+	<Charts ramPrices={data.ramPrices} tokenPrices={data.tokenPrices} />
 
 	<PerformanceGrid {networkLogo} {networkName} network={data.network} />
 </div>

@@ -165,9 +165,9 @@
 	{/snippet}
 
 	{#snippet rightColumn()}
-		{#if data.historicalPrices.length}
+		{#if data.ramPrices.length}
 			<div class="">
-				<RamPriceHistory />
+				<RamPriceHistory prices={data.ramPrices} />
 			</div>
 		{/if}
 

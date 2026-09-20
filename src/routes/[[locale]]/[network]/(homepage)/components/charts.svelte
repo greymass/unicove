@@ -6,15 +6,21 @@
 	import { Stack } from '@wharfkit/svelte-components';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { ramtoken, systemtoken } from '$lib/wharf/chains';
+	import type { MarketPricePoint } from '$lib/utils/marketprice';
 
 	const { network, urlPath } = getContext<UnicoveContext>('state');
+
+	let {
+		ramPrices,
+		tokenPrices
+	}: { ramPrices: MarketPricePoint[]; tokenPrices: MarketPricePoint[] } = $props();
 
 	const funding = network.supports('directfunding');
 </script>
 
 <section id="charts" class="@container grid grid-cols-2 gap-12 xl:grid-cols-2 xl:gap-x-12">
 	<Stack class="col-span-full @3xl:col-span-1">
-		<TokenPriceHistory />
+		<TokenPriceHistory prices={tokenPrices} />
 
 		<TextBlock
 			{...{
@@ -34,7 +40,7 @@
 	</Stack>
 
 	<Stack class="col-span-full @3xl:col-span-1">
-		<RamPriceHistory />
+		<RamPriceHistory prices={ramPrices} />
 
 		<TextBlock
 			{...{
