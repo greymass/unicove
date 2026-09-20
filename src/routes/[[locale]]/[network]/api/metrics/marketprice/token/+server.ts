@@ -15,11 +15,10 @@ export const GET: RequestHandler = async ({ fetch, locals: { network } }) => {
 		if (network.chain.id.equals(Chains.EOS.id)) {
 			systemtoken = Asset.Symbol.from('4,EOS');
 		}
-		const response = await fetch(
-			`${network.config.endpoints.metrics}/marketprice/${systemtoken.name.toLowerCase()}usd/1h/1mo`
-		);
+		const url = `${network.config.endpoints.metrics}/marketprice/${systemtoken.name.toLowerCase()}usd/1h/1mo`;
+		const response = await fetch(url);
 		if (!response.ok) {
-			throw new Error(`HTTP error! status: ${response.status}`);
+			throw new Error(`HTTP ${response.status} from ${url}`);
 		}
 		const parsedResponse = await response.json();
 

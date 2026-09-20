@@ -8,9 +8,10 @@ export const GET: RequestHandler = async ({ fetch, locals: { network } }) => {
 		if (!network.config.endpoints.metrics) {
 			return json([]);
 		}
-		const response = await fetch(`${network.config.endpoints.metrics}/marketprice/ram/1h/1mo`);
+		const url = `${network.config.endpoints.metrics}/marketprice/ram/1h/1mo`;
+		const response = await fetch(url);
 		if (!response.ok) {
-			throw new Error(`HTTP error! status: ${response.status}`);
+			throw new Error(`HTTP ${response.status} from ${url}`);
 		}
 		const parsedResponse = await response.json();
 

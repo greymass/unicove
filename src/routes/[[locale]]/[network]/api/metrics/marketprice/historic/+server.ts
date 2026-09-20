@@ -18,21 +18,10 @@ export const GET: RequestHandler = async ({ locals: { network } }) => {
 			});
 		}
 
-		const systemtoken = TokenHistoricPrices.from({
-			day: await getHistoricPrice(network, systemTokenPair, '1d', Currencies.USD.symbol),
-			week: await getHistoricPrice(network, systemTokenPair, '1w', Currencies.USD.symbol),
-			month: await getHistoricPrice(network, systemTokenPair, '1mo', Currencies.USD.symbol),
-			quarter: await getHistoricPrice(network, systemTokenPair, '3mo', Currencies.USD.symbol),
-			year: await getHistoricPrice(network, systemTokenPair, '1y', Currencies.USD.symbol)
-		});
-
-		const ramsystemtoken = TokenHistoricPrices.from({
-			day: await getHistoricPrice(network, systemRamPair, '1d', network.token.symbol),
-			week: await getHistoricPrice(network, systemRamPair, '1w', network.token.symbol),
-			month: await getHistoricPrice(network, systemRamPair, '1mo', network.token.symbol),
-			quarter: await getHistoricPrice(network, systemRamPair, '3mo', network.token.symbol),
-			year: await getHistoricPrice(network, systemRamPair, '1y', network.token.symbol)
-		});
+		const [systemtoken, ramsystemtoken] = await Promise.all([
+			getHistoricPrices(network, systemTokenPair, Currencies.USD.symbol),
+			getHistoricPrices(network, systemRamPair, network.token.symbol)
+		]);
 
 		const ram = TokenHistoricPrices.from({
 			day: convertRamToUSD(ramsystemtoken.day, systemtoken.day),
@@ -54,9 +43,30 @@ export const GET: RequestHandler = async ({ locals: { network } }) => {
 		);
 	} catch (error) {
 		console.warn(error);
-		return json([]);
+		return json({ systemtoken: {}, ram: {} });
 	}
 };
+
+const TIMEFRAMES = { day: '1d', week: '1w', month: '1mo', quarter: '3mo', year: '1y' } as const;
+
+async function getHistoricPrices(
+	network: NetworkState,
+	identifier: string,
+	symbol: Asset.Symbol
+): Promise<TokenHistoricPrices> {
+	const entries = await Promise.all(
+		Object.entries(TIMEFRAMES).map(
+			async ([key, timeframe]): Promise<[string, TokenHistoricPrice | undefined]> => [
+				key,
+				await getHistoricPrice(network, identifier, timeframe, symbol).catch((error) => {
+					console.warn(error);
+					return undefined;
+				})
+			]
+		)
+	);
+	return TokenHistoricPrices.from(Object.fromEntries(entries));
+}
 
 function convertRamToUSD(
 	ram: TokenHistoricPrice | undefined,
@@ -77,11 +87,10 @@ async function getHistoricPrice(
 	timeframe: string,
 	symbol: Asset.Symbol
 ): Promise<TokenHistoricPrice> {
-	const response = await fetch(
-		`${network.config.endpoints.metrics}/historicprice/${identifier}/${timeframe}`
-	);
+	const url = `${network.config.endpoints.metrics}/historicprice/${identifier}/${timeframe}`;
+	const response = await fetch(url);
 	if (!response.ok) {
-		throw new Error(`HTTP error! status: ${response.status}`);
+		throw new Error(`HTTP ${response.status} from ${url}`);
 	}
 	const json = await response.json();
 	if (json.length === 0) {
