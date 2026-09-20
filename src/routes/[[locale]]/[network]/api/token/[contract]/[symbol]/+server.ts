@@ -3,15 +3,26 @@ import { Asset, type AssetType, type NameType } from '@wharfkit/antelope';
 
 import { NetworkState } from '$lib/state/network.svelte';
 import { getCacheHeaders } from '$lib/utils';
+import { chainErrorStatus } from '$lib/utils/chainerror';
 import type { RequestEvent } from './$types';
 
 export async function GET({ locals: { network }, params, url }: RequestEvent) {
 	const contract = params.contract.toLocaleLowerCase();
 	const symbol = params.symbol?.toLocaleUpperCase();
 	const count = Number(url.searchParams.get('count')) || 100;
-	const stats = await network.client.v1.chain.get_currency_stats(contract, symbol);
+	let stats: Awaited<ReturnType<typeof network.client.v1.chain.get_currency_stats>>;
+	try {
+		stats = await network.client.v1.chain.get_currency_stats(contract, symbol);
+	} catch (error) {
+		const status = chainErrorStatus(error);
+		if (status !== 404) console.error(error);
+		return json(
+			{ error: status === 404 ? 'Token not found' : 'Unable to load token.' },
+			{ status, headers: status === 404 ? getCacheHeaders(60) : {} }
+		);
+	}
 	if (stats[symbol] === undefined) {
-		return json({ error: 'Token not found' }, { status: 404 });
+		return json({ error: 'Token not found' }, { status: 404, headers: getCacheHeaders(60) });
 	}
 	let topholders: TokenHolders[] = [];
 	let numholders: number = 0;

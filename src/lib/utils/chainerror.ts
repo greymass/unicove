@@ -1,4 +1,8 @@
-const NOT_FOUND_ERRORS = ['unknown_block_exception', 'account_query_exception'];
+const NOT_FOUND_ERRORS = [
+	'unknown_block_exception',
+	'account_query_exception',
+	'contract_table_query_exception'
+];
 
 interface ChainErrorShape {
 	response?: { status?: number; json?: { error?: { name?: string } } };

@@ -12,9 +12,10 @@ function apiError(name: string, status = 400) {
 }
 
 describe('chainErrorStatus', () => {
-	test('unknown block and unknown account are 404', () => {
+	test('unknown block, account and contract table are 404', () => {
 		expect(chainErrorStatus(apiError('unknown_block_exception'))).toBe(404);
 		expect(chainErrorStatus(apiError('account_query_exception'))).toBe(404);
+		expect(chainErrorStatus(apiError('contract_table_query_exception'))).toBe(404);
 	});
 	test('a 404 from the node is 404', () => {
 		expect(chainErrorStatus(apiError('http_exception', 404))).toBe(404);
