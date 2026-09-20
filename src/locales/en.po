@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2026-09-10T21:44:01.983Z\n"
+"PO-Revision-Date: 2026-09-20T02:07:20.078Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -4865,9 +4865,6 @@ msgstr "About Sentiment Voting"
 msgid "Stake tokens"
 msgstr "Stake tokens"
 
-#~ msgid "Updating..."
-#~ msgstr "Updating..."
-
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/sentiment/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
 msgid "Dismiss"
@@ -4900,7 +4897,6 @@ msgstr "Opposing"
 #: src/lib/components/sentiment/MetricParticipants.svelte
 #: src/lib/components/sentiment/participantList.svelte
 #: src/lib/components/sentiment/participantList.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/participants/+page.ts
 msgid "Participants"
 msgstr "Participants"
 
@@ -5617,7 +5613,8 @@ msgid "View the block producer votes cast by the {0} account on the {1} network.
 msgstr "View the block producer votes cast by the {0} account on the {1} network."
 
 #. placeholder {0}: params.name
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
+#. placeholder {0}: params.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.server.ts
 msgid "View all multisig proposals created by {0}"
 msgstr "View all multisig proposals created by {0}"
 
@@ -7736,8 +7733,10 @@ msgstr "Proposals"
 
 #. placeholder {0}: params.name
 #. placeholder {0}: params.name
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
+#. placeholder {0}: params.name
+#. placeholder {0}: params.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.server.ts
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.server.ts
 msgid "Multisig Proposals Created by {0}"
 msgstr "Multisig Proposals Created by {0}"
 
@@ -8810,15 +8809,6 @@ msgstr "Your vote is on chain and will appear in the results shortly."
 msgid "Your approval change is on chain and the list will update shortly."
 msgstr "Your approval change is on chain and the list will update shortly."
 
-#. placeholder {0}: data.topic.statistics.totalVotes
-#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+layout.svelte
-msgid "Participants ({0})"
-msgstr "Participants ({0})"
-
-#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/participants/+page.svelte
-msgid "No votes on this topic yet."
-msgstr "No votes on this topic yet."
-
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/sentiment/[topic]/participants/+page.ts
 msgid "This proposal has no sentiment poll for that topic."
 msgstr "This proposal has no sentiment poll for that topic."
@@ -8826,3 +8816,31 @@ msgstr "This proposal has no sentiment poll for that topic."
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/sentiment/[topic]/participants/+page.svelte
 msgid "No votes on this poll yet."
 msgstr "No votes on this poll yet."
+
+#. placeholder {0}: params.name
+#. placeholder {0}: params.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/approvals/+page.server.ts
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/approvals/+page.server.ts
+msgid "Multisig Proposals Pending Approval from {0}"
+msgstr "Multisig Proposals Pending Approval from {0}"
+
+#. placeholder {0}: params.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/approvals/+page.server.ts
+msgid "Multisig proposals awaiting approval from {0}"
+msgstr "Multisig proposals awaiting approval from {0}"
+
+#. placeholder {0}: params.name
+#. placeholder {0}: params.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.server.ts
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.server.ts
+msgid "Multisig Activity for {0}"
+msgstr "Multisig Activity for {0}"
+
+#. placeholder {0}: params.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.server.ts
+msgid "Complete multisig activity timeline for {0}"
+msgstr "Complete multisig activity timeline for {0}"
+
+#: src/routes/[[locale]]/[network]/(explorer)/key/[publicKey]/+page.svelte
+msgid "K1"
+msgstr "K1"

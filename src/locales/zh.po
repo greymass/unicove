@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2026-09-10T21:44:02.060Z\n"
+"PO-Revision-Date: 2026-09-20T02:09:02.804Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -2941,9 +2941,6 @@ msgstr "情绪"
 msgid "Overview and statistics for community sentiment on the"
 msgstr "关于社区情绪的概述和统计数据"
 
-#~ msgid "Updating..."
-#~ msgstr "正在更新..."
-
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/sentiment/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
 msgid "Dismiss"
@@ -2969,7 +2966,6 @@ msgstr "统计"
 #: src/lib/components/sentiment/MetricParticipants.svelte
 #: src/lib/components/sentiment/participantList.svelte
 #: src/lib/components/sentiment/participantList.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/participants/+page.ts
 msgid "Participants"
 msgstr "参与者"
 
@@ -5482,7 +5478,8 @@ msgid "View the block producer votes cast by the {0} account on the {1} network.
 msgstr "查看 {0} 账户在 {1} 网络上投的区块生产者票。"
 
 #. placeholder {0}: params.name
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
+#. placeholder {0}: params.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.server.ts
 msgid "View all multisig proposals created by {0}"
 msgstr "查看由 {0} 创建的所有多重签名提案"
 
@@ -7570,8 +7567,10 @@ msgstr "提案"
 
 #. placeholder {0}: params.name
 #. placeholder {0}: params.name
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
+#. placeholder {0}: params.name
+#. placeholder {0}: params.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.server.ts
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.server.ts
 msgid "Multisig Proposals Created by {0}"
 msgstr "由 {0} 创建的多重签名提案"
 
@@ -8584,47 +8583,66 @@ msgstr "不可用"
 
 #: src/lib/components/vp/VpSentimentHero.svelte
 msgid "See who voted"
-msgstr ""
+msgstr "查看投票者"
 
 #: src/lib/components/sentiment/voteButtons.svelte
 #: src/lib/components/sentiment/voteButtons.svelte
 msgid "Your vote has been withdrawn and the results will update shortly."
-msgstr ""
+msgstr "您的投票已撤回，结果将在短时间内更新。"
 
 #: src/lib/components/sentiment/voteButtons.svelte
 #: src/lib/components/sentiment/voteButtons.svelte
 msgid "Your vote is on chain and will appear in the results shortly."
-msgstr ""
+msgstr "您的投票已上链，结果将在短时间内显示。"
 
 #: src/lib/state/sentiment/poll.svelte.ts
 msgid "Failed to vote"
-msgstr ""
+msgstr "投票失败"
 
 #: src/lib/state/sentiment/poll.svelte.ts
 msgid "Failed to remove vote"
-msgstr ""
+msgstr "取消投票失败"
 
 #: src/lib/state/sentiment/poll.svelte.ts
 msgid "Failed to load sentiment"
-msgstr ""
+msgstr "加载情绪失败"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Your approval change is on chain and the list will update shortly."
-msgstr ""
-
-#. placeholder {0}: data.topic.statistics.totalVotes
-#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+layout.svelte
-msgid "Participants ({0})"
-msgstr ""
-
-#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/participants/+page.svelte
-msgid "No votes on this topic yet."
-msgstr ""
+msgstr "您的批准更改已上链，列表很快会更新。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/sentiment/[topic]/participants/+page.ts
 msgid "This proposal has no sentiment poll for that topic."
-msgstr ""
+msgstr "此提案没有关于该主题的意见调查。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/sentiment/[topic]/participants/+page.svelte
 msgid "No votes on this poll yet."
-msgstr ""
+msgstr "此投票目前还没有投票。"
+
+#. placeholder {0}: params.name
+#. placeholder {0}: params.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/approvals/+page.server.ts
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/approvals/+page.server.ts
+msgid "Multisig Proposals Pending Approval from {0}"
+msgstr "来自 {0} 的多重签名提案待审批"
+
+#. placeholder {0}: params.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/approvals/+page.server.ts
+msgid "Multisig proposals awaiting approval from {0}"
+msgstr "来自 {0} 的多重签名提案等待审批"
+
+#. placeholder {0}: params.name
+#. placeholder {0}: params.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.server.ts
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.server.ts
+msgid "Multisig Activity for {0}"
+msgstr "{0} 的多重签名活动"
+
+#. placeholder {0}: params.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.server.ts
+msgid "Complete multisig activity timeline for {0}"
+msgstr "{0} 的完整多重签名活动时间线"
+
+#: src/routes/[[locale]]/[network]/(explorer)/key/[publicKey]/+page.svelte
+msgid "K1"
+msgstr "K1"

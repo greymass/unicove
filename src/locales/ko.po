@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.663Z\n"
-"PO-Revision-Date: 2026-09-10T21:44:02.044Z\n"
+"PO-Revision-Date: 2026-09-20T02:09:02.798Z\n"
 "Last-Translator: \n"
 "Language: ko\n"
 "Language-Team: \n"
@@ -4780,12 +4780,8 @@ msgstr "설명"
 #: src/lib/components/sentiment/MetricParticipants.svelte
 #: src/lib/components/sentiment/participantList.svelte
 #: src/lib/components/sentiment/participantList.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/participants/+page.ts
 msgid "Participants"
 msgstr "참여자"
-
-#~ msgid "Updating..."
-#~ msgstr "업데이트 중..."
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/sentiment/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
@@ -5481,7 +5477,8 @@ msgid "View the block producer votes cast by the {0} account on the {1} network.
 msgstr "{1} 네트워크에서 {0} 계정이 투표한 블록 생성자를 봅니다."
 
 #. placeholder {0}: params.name
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
+#. placeholder {0}: params.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.server.ts
 msgid "View all multisig proposals created by {0}"
 msgstr "{0}이(가) 생성한 모든 멀티시그 제안을 봅니다."
 
@@ -7580,8 +7577,10 @@ msgstr "제안"
 
 #. placeholder {0}: params.name
 #. placeholder {0}: params.name
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
-#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.ts
+#. placeholder {0}: params.name
+#. placeholder {0}: params.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.server.ts
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/+page.server.ts
 msgid "Multisig Proposals Created by {0}"
 msgstr "{0}이(가) 생성한 멀티시그 제안"
 
@@ -8623,47 +8622,66 @@ msgstr "사용할 수 없음"
 
 #: src/lib/components/vp/VpSentimentHero.svelte
 msgid "See who voted"
-msgstr ""
+msgstr "누가 투표했는지 보기"
 
 #: src/lib/components/sentiment/voteButtons.svelte
 #: src/lib/components/sentiment/voteButtons.svelte
 msgid "Your vote has been withdrawn and the results will update shortly."
-msgstr ""
+msgstr "투표가 철회되었으며 곧 결과가 업데이트됩니다."
 
 #: src/lib/components/sentiment/voteButtons.svelte
 #: src/lib/components/sentiment/voteButtons.svelte
 msgid "Your vote is on chain and will appear in the results shortly."
-msgstr ""
+msgstr "투표가 온체인에 기록되었으며 곧 결과에 반영됩니다."
 
 #: src/lib/state/sentiment/poll.svelte.ts
 msgid "Failed to vote"
-msgstr ""
+msgstr "투표에 실패했습니다"
 
 #: src/lib/state/sentiment/poll.svelte.ts
 msgid "Failed to remove vote"
-msgstr ""
+msgstr "투표 취소에 실패했습니다"
 
 #: src/lib/state/sentiment/poll.svelte.ts
 msgid "Failed to load sentiment"
-msgstr ""
+msgstr "감정 데이터를 불러오지 못했습니다"
 
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 msgid "Your approval change is on chain and the list will update shortly."
-msgstr ""
-
-#. placeholder {0}: data.topic.statistics.totalVotes
-#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+layout.svelte
-msgid "Participants ({0})"
-msgstr ""
-
-#: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/participants/+page.svelte
-msgid "No votes on this topic yet."
-msgstr ""
+msgstr "승인 변경 사항이 온체인에 반영되었으며 목록이 곧 업데이트됩니다."
 
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/sentiment/[topic]/participants/+page.ts
 msgid "This proposal has no sentiment poll for that topic."
-msgstr ""
+msgstr "이 제안에는 해당 주제에 대한 감정 설문이 없습니다."
 
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/sentiment/[topic]/participants/+page.svelte
 msgid "No votes on this poll yet."
-msgstr ""
+msgstr "이 투표에는 아직 투표가 없습니다."
+
+#. placeholder {0}: params.name
+#. placeholder {0}: params.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/approvals/+page.server.ts
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/approvals/+page.server.ts
+msgid "Multisig Proposals Pending Approval from {0}"
+msgstr "{0}의 승인을 기다리는 다중 서명 제안"
+
+#. placeholder {0}: params.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/approvals/+page.server.ts
+msgid "Multisig proposals awaiting approval from {0}"
+msgstr "{0}의 승인을 기다리는 다중 서명 제안"
+
+#. placeholder {0}: params.name
+#. placeholder {0}: params.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.server.ts
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.server.ts
+msgid "Multisig Activity for {0}"
+msgstr "{0}의 다중 서명 활동"
+
+#. placeholder {0}: params.name
+#: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/timeline/+page.server.ts
+msgid "Complete multisig activity timeline for {0}"
+msgstr "{0}의 전체 다중 서명 활동 타임라인"
+
+#: src/routes/[[locale]]/[network]/(explorer)/key/[publicKey]/+page.svelte
+msgid "K1"
+msgstr "K1"
