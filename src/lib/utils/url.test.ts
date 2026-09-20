@@ -1,5 +1,11 @@
 import { describe, expect, test } from 'bun:test';
-import { localizePath, localizeUrl, resolveLocale, resolveRedirect } from './url';
+import {
+	isMissingAssetPath,
+	localizePath,
+	localizeUrl,
+	resolveLocale,
+	resolveRedirect
+} from './url';
 
 const chainName = import.meta.env.PUBLIC_CHAIN_SHORT;
 
@@ -178,5 +184,20 @@ describe('resolveRedirect', () => {
 			status: 301,
 			cacheable: false
 		});
+	});
+});
+
+describe('isMissingAssetPath', () => {
+	test('scanner probes for files are missing assets', () => {
+		expect(isMissingAssetPath('/wp-includes/css/buttons.css')).toBe(true);
+		expect(isMissingAssetPath('/favicon-32x32.png')).toBe(true);
+		expect(isMissingAssetPath('/theme/Bob-Theme-Argon/favicon.ico')).toBe(true);
+	});
+	test('pages, data and api routes are not', () => {
+		expect(isMissingAssetPath('/staking')).toBe(false);
+		expect(isMissingAssetPath('/swap/eosio.token/4,eos/core.vaulta/4,a')).toBe(false);
+		expect(isMissingAssetPath(`/en/${chainName}/__data.json`)).toBe(false);
+		expect(isMissingAssetPath(`/en/${chainName}/api/og/abc123.png`)).toBe(false);
+		expect(isMissingAssetPath('/sitemap.xml')).toBe(false);
 	});
 });

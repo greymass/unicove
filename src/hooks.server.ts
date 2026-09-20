@@ -8,7 +8,7 @@ import * as main from './locales/loader.ssr.svelte';
 import * as js from './locales/loader.ssr';
 import { runWithLocale, loadLocales } from 'wuchale/load-utils/server';
 import { locales } from 'virtual:wuchale/locales';
-import { resolveLocale, resolveRedirect } from '$lib/utils/url';
+import { isMissingAssetPath, resolveLocale, resolveRedirect } from '$lib/utils/url';
 import { getCacheHeaders } from '$lib/utils';
 
 await loadLocales(main.key, main.loadIDs, main.loadCatalog, locales);
@@ -40,6 +40,9 @@ export async function networkHandle({ event, resolve }: HandleParams): Promise<R
 
 export async function redirectHandle({ event, resolve }: HandleParams): Promise<Response> {
 	const { pathname, search } = new URL(event.request.url);
+	if (isMissingAssetPath(pathname)) {
+		return new Response('Not found', { status: 404, headers: getCacheHeaders(3600) });
+	}
 	const redirect = resolveRedirect(pathname, event.cookies.get('locale'));
 	if (!redirect) return resolve(event);
 	const headers: Record<string, string> = { Location: redirect.location + search };

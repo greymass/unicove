@@ -20,6 +20,17 @@ const redirects: Record<string, string> = {
 	'/swap/eosio/4,eos/core.vaulta/4,a': '/swap/eosio.token/4,eos/core.vaulta/4,a'
 };
 
+const ASSET_EXTENSIONS =
+	/\.(css|js|mjs|map|png|jpe?g|gif|svg|webp|avif|ico|bmp|woff2?|ttf|eot|otf|txt|json|php|asp|aspx|jsp|env|sql|zip|gz|tar|bak)$/i;
+
+// Real static files are served before hooks run, so anything left is a missing asset, not a page.
+export function isMissingAssetPath(pathname: string): boolean {
+	if (isSveltePath(pathname) || isWellKnownFile(pathname) || pathname.includes('/api/')) {
+		return false;
+	}
+	return ASSET_EXTENSIONS.test(pathname);
+}
+
 function skipRedirect(pathname: string) {
 	return isSveltePath(pathname) || isWellKnownFile(pathname) || pathname.endsWith('.xml');
 }
