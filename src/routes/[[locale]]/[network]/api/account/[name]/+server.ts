@@ -36,7 +36,8 @@ export const GET: RequestHandler = async ({ locals: { network }, params }: Reque
 			try {
 				response = await getAccount2(network, params.name);
 			} catch (e) {
-				// Fallback to old method on failure
+				// A missing account is not a failure of getAccount2, so don't retry it
+				if (chainErrorStatus(e) === 404) throw e;
 				console.error('getAccount2 failure', e);
 				response = await getAccount(network, params.name);
 			}
