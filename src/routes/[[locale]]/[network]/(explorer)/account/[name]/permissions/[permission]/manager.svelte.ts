@@ -278,7 +278,9 @@ export class PermissionState {
 	public originalLinkedActionsBytes = $derived.by(() => {
 		try {
 			return Serializer.encode({
-				object: this.originalLinkedActions.map((l) => AccountLinkedAction.from(l)) || []
+				object: this.originalLinkedActions.map((l) => AccountLinkedAction.from(l)) || [],
+				type: 'account_linked_action[]',
+				customTypes: [AccountLinkedAction]
 			});
 		} catch (e) {
 			console.warn(e);
@@ -289,7 +291,9 @@ export class PermissionState {
 	public derivedLinkedActionsBytes = $derived.by(() => {
 		try {
 			return Serializer.encode({
-				object: this.derivedLinkedActions || []
+				object: this.derivedLinkedActions || [],
+				type: 'account_linked_action[]',
+				customTypes: [AccountLinkedAction]
 			});
 		} catch (e) {
 			console.warn(e);
