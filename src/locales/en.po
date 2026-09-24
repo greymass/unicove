@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2026-09-20T02:07:20.078Z\n"
+"PO-Revision-Date: 2026-09-24T01:52:24.492Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -6889,7 +6889,6 @@ msgid "<0/> Stake"
 msgstr "<0/> Stake"
 
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
-#: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
 msgid "Get Anchor Wallet"
 msgstr "Get Anchor Wallet"
 
@@ -8844,3 +8843,8 @@ msgstr "Complete multisig activity timeline for {0}"
 #: src/routes/[[locale]]/[network]/(explorer)/key/[publicKey]/+page.svelte
 msgid "K1"
 msgstr "K1"
+
+#. placeholder {0}: networkName
+#: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
+msgid "Get Anchor Wallet for {0}"
+msgstr "Get Anchor Wallet for {0}"

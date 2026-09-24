@@ -110,3 +110,15 @@ export function supportsAccountCreation(chainId: Checksum256Type): boolean {
 		String(chainId).toLowerCase() in DEFAULT_WEB_AUTHENTICATOR_URLS
 	);
 }
+
+const anchorNetworkPages = ['vaulta', 'wax', 'telos', 'jungle4'];
+
+export function hasAnchorNetworkPage(network: string): boolean {
+	return anchorNetworkPages.includes(network);
+}
+
+export function anchorWalletUrl(network: string): string {
+	return hasAnchorNetworkPage(network)
+		? `https://anchorwallet.io/networks/${network}`
+		: 'https://anchorwallet.io/download';
+}

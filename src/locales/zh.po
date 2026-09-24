@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2026-09-20T02:09:02.804Z\n"
+"PO-Revision-Date: 2026-09-24T01:52:24.515Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -7213,7 +7213,6 @@ msgstr ""
 ""
 
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
-#: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
 msgid "Get Anchor Wallet"
 msgstr "获取 Anchor 钱包"
 
@@ -8646,3 +8645,8 @@ msgstr "{0} 的完整多重签名活动时间线"
 #: src/routes/[[locale]]/[network]/(explorer)/key/[publicKey]/+page.svelte
 msgid "K1"
 msgstr "K1"
+
+#. placeholder {0}: networkName
+#: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
+msgid "Get Anchor Wallet for {0}"
+msgstr "获取适用于 {0} 的 Anchor 钱包"

@@ -6,7 +6,7 @@
 	import type { WalletPlugin } from '@wharfkit/session';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import { baseWalletPlugins } from '$lib/wharf/plugins';
+	import { anchorWalletUrl, baseWalletPlugins } from '$lib/wharf/plugins';
 
 	const context = getContext<UnicoveContext>('state');
 
@@ -50,6 +50,9 @@
 		const path = traitsById[plugin.id]?.path;
 		if (path) {
 			return context.urlPath(path);
+		}
+		if (plugin.id === 'anchor') {
+			return anchorWalletUrl(String(context.network));
 		}
 		return String(plugin.metadata.download || plugin.metadata.homepage || '');
 	}

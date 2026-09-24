@@ -16,7 +16,11 @@
 	import { getContext } from 'svelte';
 	import { goto } from '$app/navigation';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import { supportsAccountCreation } from '$lib/wharf/plugins';
+	import {
+		anchorWalletUrl,
+		hasAnchorNetworkPage,
+		supportsAccountCreation
+	} from '$lib/wharf/plugins';
 
 	interface Props {
 		networkName: string;
@@ -27,6 +31,7 @@
 
 	const context = getContext<UnicoveContext>('state');
 	const showCreateAccount = supportsAccountCreation(context.network.chain.id);
+	const showGetAnchor = $derived(showCreateAccount || hasAnchorNetworkPage(networkShortname));
 
 	let creating = $state(false);
 
@@ -96,6 +101,16 @@
 	</section>
 {/if}
 
+{#snippet getAnchor()}
+	<Button variant="secondary" href={anchorWalletUrl(networkShortname)}>
+		{#if hasAnchorNetworkPage(networkShortname)}
+			Get Anchor Wallet for {networkName}
+		{:else}
+			Get Anchor Wallet
+		{/if}
+	</Button>
+{/snippet}
+
 {#snippet textblock()}
 	<Stack class="grid gap-5">
 		<UnicoveWordmark class="h-7 w-auto md:h-auto" />
@@ -106,12 +121,14 @@
 		<p class="text-muted mb-2 text-xl leading-tight text-balance lg:text-xl lg:leading-tight">
 			Stake, Send, Manage Tokens, and Explore {networkName} – all with ease
 		</p>
-		{#if showCreateAccount}
+		{#if showGetAnchor}
 			<div class="flex flex-wrap gap-3">
-				<Button variant="primary" onclick={createAccount} disabled={creating}>
-					{creating ? 'Waiting for Anchor...' : 'Create account'}
-				</Button>
-				<Button variant="secondary" href="https://anchorwallet.io">Get Anchor Wallet</Button>
+				{#if showCreateAccount}
+					<Button variant="primary" onclick={createAccount} disabled={creating}>
+						{creating ? 'Waiting for Anchor...' : 'Create account'}
+					</Button>
+				{/if}
+				{@render getAnchor()}
 			</div>
 		{/if}
 	</Stack>
@@ -248,7 +265,9 @@
 					<Button variant="primary" onclick={createAccount} disabled={creating}>
 						{creating ? 'Waiting for Anchor...' : 'Create account'}
 					</Button>
-					<Button variant="secondary" href="https://anchorwallet.io">Get Anchor Wallet</Button>
+				{/if}
+				{#if showGetAnchor}
+					{@render getAnchor()}
 				{/if}
 			</div>
 		</Stack>
