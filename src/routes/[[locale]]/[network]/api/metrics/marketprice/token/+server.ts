@@ -7,7 +7,7 @@ import { Chains } from '@wharfkit/common';
 
 export const GET: RequestHandler = async ({ fetch, locals: { network } }) => {
 	try {
-		if (!network.config.endpoints.metrics) {
+		if (!network.supports('timeseries') || !network.config.endpoints.metrics) {
 			return json([]);
 		}
 		let systemtoken = Asset.Symbol.from(network.config.systemtoken.symbol);

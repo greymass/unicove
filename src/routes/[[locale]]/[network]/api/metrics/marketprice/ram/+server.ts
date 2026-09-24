@@ -5,7 +5,7 @@ import type { HistoricalPrice } from '$lib/types';
 
 export const GET: RequestHandler = async ({ fetch, locals: { network } }) => {
 	try {
-		if (!network.config.endpoints.metrics) {
+		if (!network.supports('timeseries') || !network.config.endpoints.metrics) {
 			return json([]);
 		}
 		const url = `${network.config.endpoints.metrics}/marketprice/ram/1h/1mo`;
