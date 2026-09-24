@@ -1,0 +1,22 @@
+{
+	"$schema": "./node_modules/wrangler/config-schema.json",
+	"name": "unicove-purge-on-deploy",
+	"main": "src/index.ts",
+	"compatibility_date": "2026-09-01",
+	"workers_dev": true,
+	"observability": {
+		"enabled": true
+	},
+	"vars": {
+		"ZONE_ID": "44d92672d1de0c2755c11645cb45dfd3",
+		"HOSTNAMES": [
+			"jungle4.unicove.com",
+			"kylin.unicove.com",
+			"telos.unicove.com",
+			"testnet.telos.unicove.com",
+			"wax.unicove.com",
+			"testnet.wax.unicove.com",
+			"dev.unicove.com"
+		]
+	}
+}

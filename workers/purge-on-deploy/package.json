@@ -1,0 +1,11 @@
+{
+	"name": "unicove-purge-on-deploy",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"deploy": "wrangler deploy"
+	},
+	"devDependencies": {
+		"wrangler": "^4.137.0"
+	}
+}
