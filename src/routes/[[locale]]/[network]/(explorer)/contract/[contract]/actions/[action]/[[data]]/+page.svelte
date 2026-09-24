@@ -124,7 +124,7 @@
 			return Serializer.encode({
 				object: restructured,
 				abi: data.abi,
-				type: String(data.action.name)
+				type: String(data.action.type)
 			});
 		} catch (e) {
 			console.warn('serialized error', e);
@@ -142,7 +142,7 @@
 			return Serializer.decode({
 				data: serialized,
 				abi: data.abi,
-				type: String(data.action.name)
+				type: String(data.action.type)
 			});
 		} catch (e) {
 			console.warn('decoded error', e);
@@ -237,7 +237,7 @@
 			const action = Serializer.decode({
 				data: Bytes.from(data.data || '00'),
 				abi: data.abi,
-				type: String(data.action.name)
+				type: String(data.action.type)
 			});
 			if (action) {
 				const decoded = Serializer.objectify(action);
