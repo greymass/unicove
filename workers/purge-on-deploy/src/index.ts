@@ -1,6 +1,5 @@
 interface Env {
 	ZONE_ID: string;
-	HOSTNAMES: string[];
 	WEBHOOK_SECRET: string;
 	PURGE_TOKEN: string;
 }
@@ -33,7 +32,8 @@ async function purge(env: Env, label: string): Promise<void> {
 				authorization: `Bearer ${env.PURGE_TOKEN}`,
 				'content-type': 'application/json'
 			},
-			body: JSON.stringify({ hosts: env.HOSTNAMES })
+			// Host purges miss the SvelteKit adapter's Cache API copies; purge_everything clears them
+			body: JSON.stringify({ purge_everything: true })
 		}
 	);
 	const result = await response.text();
