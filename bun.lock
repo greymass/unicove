@@ -1,5 +1,5 @@
 {
-  "lockfileVersion": 1,
+  "lockfileVersion": 2,
   "configVersion": 0,
   "workspaces": {
     "": {
@@ -7,30 +7,30 @@
       "dependencies": {
         "@lucide/svelte": "^0.525.0",
         "@storyblok/svelte": "^5.0.2",
-        "@wharfkit/abicache": "4.0.1",
-        "@wharfkit/account-creation-plugin-metamask": "4.0.1",
-        "@wharfkit/antelope": "4.0.1",
-        "@wharfkit/common": "4.0.1",
-        "@wharfkit/contract": "4.0.1",
-        "@wharfkit/hyperion": "4.0.1",
-        "@wharfkit/msigs": "4.0.1",
-        "@wharfkit/protocol-scatter": "4.0.1",
-        "@wharfkit/resources": "4.0.1",
-        "@wharfkit/roborovski": "4.0.1",
-        "@wharfkit/session": "4.0.1",
-        "@wharfkit/svelte-components": "4.0.1",
-        "@wharfkit/transact-plugin-resource-provider": "4.0.1",
-        "@wharfkit/wallet-plugin-anchor": "4.0.1",
-        "@wharfkit/wallet-plugin-cleos": "4.0.1",
-        "@wharfkit/wallet-plugin-cloudwallet": "4.0.1",
-        "@wharfkit/wallet-plugin-gatewallet": "4.0.1",
-        "@wharfkit/wallet-plugin-imtoken": "4.0.1",
-        "@wharfkit/wallet-plugin-metamask": "4.0.1",
-        "@wharfkit/wallet-plugin-privatekey": "4.0.1",
-        "@wharfkit/wallet-plugin-scatter": "4.0.1",
-        "@wharfkit/wallet-plugin-tokenpocket": "4.0.1",
+        "@wharfkit/abicache": "4.0.2",
+        "@wharfkit/account-creation-plugin-metamask": "4.0.2",
+        "@wharfkit/antelope": "4.0.2",
+        "@wharfkit/common": "4.0.2",
+        "@wharfkit/contract": "4.0.2",
+        "@wharfkit/hyperion": "4.0.2",
+        "@wharfkit/msigs": "4.0.2",
+        "@wharfkit/protocol-scatter": "4.0.2",
+        "@wharfkit/resources": "4.0.2",
+        "@wharfkit/roborovski": "4.0.2",
+        "@wharfkit/session": "4.0.2",
+        "@wharfkit/svelte-components": "4.0.2",
+        "@wharfkit/transact-plugin-resource-provider": "4.0.2",
+        "@wharfkit/wallet-plugin-anchor": "4.0.2",
+        "@wharfkit/wallet-plugin-cleos": "4.0.2",
+        "@wharfkit/wallet-plugin-cloudwallet": "4.0.2",
+        "@wharfkit/wallet-plugin-gatewallet": "4.0.2",
+        "@wharfkit/wallet-plugin-imtoken": "4.0.2",
+        "@wharfkit/wallet-plugin-metamask": "4.0.2",
+        "@wharfkit/wallet-plugin-privatekey": "4.0.2",
+        "@wharfkit/wallet-plugin-scatter": "4.0.2",
+        "@wharfkit/wallet-plugin-tokenpocket": "4.0.2",
         "@wharfkit/wallet-plugin-wombat": "^1.5.1",
-        "@wharfkit/web-ui": "4.0.1",
+        "@wharfkit/web-ui": "4.0.2",
         "@wuchale/svelte": "^0.16.6",
         "@wuchale/vite-plugin": "^0.14.8",
         "chart.js": "^4.4.3",
@@ -58,7 +58,7 @@
         "@tailwindcss/vite": "^4.0.14",
         "@types/bun": "^1.1.10",
         "@types/eslint": "^9.6.1",
-        "@wharfkit/cli": "4.0.1",
+        "@wharfkit/cli": "4.0.2",
         "eslint": "^9.26.0",
         "eslint-config-prettier": "^10.1.5",
         "eslint-plugin-svelte": "^3.5.1",
@@ -477,61 +477,61 @@
 
     "@ungap/structured-clone": ["@ungap/structured-clone@1.3.0", "", {}, "sha512-WmoN8qaIAo7WTYWbAZuG8PYEhn5fkz7dZrqTBZ7dtt//lL2Gwms1IcnQ5yHqjDfX8Ft5j4YzDM23f87zBfDe9g=="],
 
-    "@wharfkit/abicache": ["@wharfkit/abicache@4.0.1", "", { "dependencies": { "@wharfkit/antelope": "4.0.1", "@wharfkit/signing-request": "4.0.1" } }, "sha512-UnBL12C1tuX3hp51rjpYnXRWoJJYtpRHzhfUVvpOe0RUNfUuU+gOreZc4aH0jHdekDJBtqz+2OWvZXgTJkJ5RQ=="],
+    "@wharfkit/abicache": ["@wharfkit/abicache@4.0.2", "", { "dependencies": { "@wharfkit/antelope": "4.0.2", "@wharfkit/signing-request": "4.0.2" } }, "sha512-bcu8RAN6CcVkZFJqOp6zUVPHx5ZQOMCVIIu/HVgi6u60yDsWj6SDl3YXlOtwhzxPqVphxmoqvnTFFEHhsh8GJw=="],
 
-    "@wharfkit/account-creation-plugin-metamask": ["@wharfkit/account-creation-plugin-metamask@4.0.1", "", { "dependencies": { "@metamask/providers": "^17.0.0", "@wharfkit/session": "4.0.1" } }, "sha512-HqWepWQrbhF+UmHdw9Adea5RktEQUMpJx0hui7Ak4pcbDRf0+OINYBEZUK6q1wO+yPZQom54oJC09JUmBRbM9g=="],
+    "@wharfkit/account-creation-plugin-metamask": ["@wharfkit/account-creation-plugin-metamask@4.0.2", "", { "dependencies": { "@metamask/providers": "^17.0.0", "@wharfkit/session": "4.0.2" } }, "sha512-uF4uWKBJtwnsRJ+WEnZwt6K87wpaPdVbnPTlCSWdz/BGLtDOLKgxWYLO1p3KbnaludUjvTz7HAyCXjwYABJdDg=="],
 
-    "@wharfkit/antelope": ["@wharfkit/antelope@4.0.1", "", { "dependencies": { "@noble/curves": "^2.2.0", "@noble/hashes": "^2.2.0", "bn.js": "^5.2.5", "pako": "^3.0.1" } }, "sha512-/FyGwRfIo20x2+82wzey4lpcwZrvMtX7RdN9WbDp467OnJwh3Xao8QLkQRa/Nsr5ByS2px9v+egMCvKKuCnYJA=="],
+    "@wharfkit/antelope": ["@wharfkit/antelope@4.0.2", "", { "dependencies": { "@noble/curves": "^2.2.0", "@noble/hashes": "^2.2.0", "bn.js": "^5.2.5", "pako": "^3.0.1" } }, "sha512-XDkPghnEpfNqmFw3dT3l4WjjS+HesfjdweV7281UfwINeglSY4lDTM5FaVIf7hWCm0QAHM1nUrDPJxXi6hl7bQ=="],
 
-    "@wharfkit/cli": ["@wharfkit/cli@4.0.1", "", { "dependencies": { "@wharfkit/antelope": "4.0.1", "@wharfkit/common": "4.0.1", "@wharfkit/contract": "4.0.1", "commander": "^11.0.0", "eslint": "^8.48.0", "prettier": "^2.2.1", "typescript": "^4.9.5" }, "bin": { "wharfkit": "lib/cli.js" } }, "sha512-QE1z5+0U/Qdm9svcxp4NVkVl8mHb2/R2VNtp0wvALs0icZNT8MoZyrr0ZxLKZdgZUulvW5iCBCsGmJp5Q7e5qA=="],
+    "@wharfkit/cli": ["@wharfkit/cli@4.0.2", "", { "dependencies": { "@wharfkit/antelope": "4.0.2", "@wharfkit/common": "4.0.2", "@wharfkit/contract": "4.0.2", "commander": "^11.0.0", "eslint": "^8.48.0", "prettier": "^2.2.1", "typescript": "^4.9.5" }, "bin": { "wharfkit": "lib/cli.js" } }, "sha512-8/+Ywuwk5NEtt7MqBZcJJ54bM8n3MifHbI2DfH2X813H3dDWARvFmsVQou2aO9re2xIbqquOVCweQWPN+x11xA=="],
 
-    "@wharfkit/common": ["@wharfkit/common@4.0.1", "", { "dependencies": { "@wharfkit/antelope": "4.0.1" } }, "sha512-LOu1E4mHNx0D43JPjqyywFDarN4ubTJn8LUj/bWU0ivsj14p7rM2KU8qHi7rfhb5tSNpEk/C/GrxfjNFWQofKw=="],
+    "@wharfkit/common": ["@wharfkit/common@4.0.2", "", { "dependencies": { "@wharfkit/antelope": "4.0.2" } }, "sha512-97u6LcJ9WcESmsGEuWXR9KIR8KY5J6kYhNyBAiL+OlUJe+7/GBtlHVrvAY7w2X4gc9FH+BWHyISnZwYSAZd8gA=="],
 
-    "@wharfkit/contract": ["@wharfkit/contract@4.0.1", "", { "dependencies": { "@wharfkit/abicache": "4.0.1", "@wharfkit/antelope": "4.0.1", "@wharfkit/signing-request": "4.0.1" } }, "sha512-1jA4phQwVI+cTPiwZXgT8n/VZq655uvYygTVLBD58nfaSB5Jdr6rZrKc63xpnU36qg+DV4M9Ef9js5RDOqLzRA=="],
+    "@wharfkit/contract": ["@wharfkit/contract@4.0.2", "", { "dependencies": { "@wharfkit/abicache": "4.0.2", "@wharfkit/antelope": "4.0.2", "@wharfkit/signing-request": "4.0.2" } }, "sha512-zC0Sspprp0+/IfUwkcl/2TWkQB6NCPR6Le6wdMbUW19wwzuQu5uA+t7bl4tf7acWZWwExkDnM8zql/bAm1l0Cw=="],
 
-    "@wharfkit/hyperion": ["@wharfkit/hyperion@4.0.1", "", { "dependencies": { "@wharfkit/antelope": "4.0.1" } }, "sha512-VvSsARWxu7in/vs+8Ve0VL7kkLdwyhu9mGiZ6odT0XYv/vSqdB5xOOTiuiACtAwSlXwc+kgKaXRQH2dvmI9udQ=="],
+    "@wharfkit/hyperion": ["@wharfkit/hyperion@4.0.2", "", { "dependencies": { "@wharfkit/antelope": "4.0.2" } }, "sha512-HhjqNeIf2/bXzZkaChmVqV71yVVeuqTRzY9dzNQMjLcWE8BJo3ziP6HIBTy7VELyKCjBn21bxh25TxsEqlPa2Q=="],
 
-    "@wharfkit/msigs": ["@wharfkit/msigs@4.0.1", "", { "dependencies": { "@wharfkit/antelope": "4.0.1" } }, "sha512-9yhoBQRDC23ecSlDoiJ3WbgLRsO76lLV8LhwhyCNFrXMJ3i1kJIH9noqnRXvxqOWAObPCrVAvKseMOSzjC8ZYQ=="],
+    "@wharfkit/msigs": ["@wharfkit/msigs@4.0.2", "", { "dependencies": { "@wharfkit/antelope": "4.0.2" } }, "sha512-R39labQtgmuD5tK8YY1fNuBRTU11cFdcRtRhow8AR3IfRXwnmN7nhSnR67hEj+keEdCj+mUDT2uqW4o9j90vdg=="],
 
-    "@wharfkit/protocol-esr": ["@wharfkit/protocol-esr@4.0.1", "", { "dependencies": { "@greymass/buoy": "^1.0.3", "@wharfkit/sealed-messages": "4.0.1", "@wharfkit/session": "4.0.1", "isomorphic-ws": "^5.0.0", "pako": "^3.0.1", "ws": "^8.13.0" } }, "sha512-7VSslQyzZONJ/CxXryBugL4az0W67UgBH4Xay0smQz4wSOnMRr/gYuCzBounDkrVNs5KVw0lVBui4U1wlm5yqQ=="],
+    "@wharfkit/protocol-esr": ["@wharfkit/protocol-esr@4.0.2", "", { "dependencies": { "@greymass/buoy": "^1.0.3", "@wharfkit/sealed-messages": "4.0.2", "@wharfkit/session": "4.0.2", "isomorphic-ws": "^5.0.0", "pako": "^3.0.1", "ws": "^8.13.0" } }, "sha512-TBrtLPC4VIPpLyR/USzIJqGHWC1YWWw28ndFk/9FJ/y3OnUL3d8XP9NqEdB5JBPNFRGo/syk8SBb5EnaiM+qEg=="],
 
-    "@wharfkit/protocol-scatter": ["@wharfkit/protocol-scatter@4.0.1", "", { "dependencies": { "@wharfkit/antelope": "4.0.1", "@wharfkit/session": "4.0.1", "eosjs": "20.0.0" } }, "sha512-25wf8S0nwIbQqgeXTcjZy0Fm+6UJXvzP7Ep46blkz9IWEJ7lW3o7ITWLCEf2C6If+cfQSmvTDId3hyoXGAEVpg=="],
+    "@wharfkit/protocol-scatter": ["@wharfkit/protocol-scatter@4.0.2", "", { "dependencies": { "@wharfkit/antelope": "4.0.2", "@wharfkit/session": "4.0.2", "eosjs": "20.0.0" } }, "sha512-b7GUnzt5M6NgY6o23TCZmYePcMvNkOLqBVgDMWawG/zjrGSgmi9X2vIIrHOj1C5eto0vNGHw3Rafprzt4LYBQw=="],
 
-    "@wharfkit/resources": ["@wharfkit/resources@4.0.1", "", { "dependencies": { "@wharfkit/antelope": "4.0.1", "bn.js": "^5.2.5", "js-big-decimal": "^2.0.7" } }, "sha512-O4bowZddjv5kSa4oyTg0lcWtWzujN1VygSONw/4NLnruKJdkvF+GLmsUXVr+t9UwInH40qqrCdrCN2xN1gNJog=="],
+    "@wharfkit/resources": ["@wharfkit/resources@4.0.2", "", { "dependencies": { "@wharfkit/antelope": "4.0.2", "bn.js": "^5.2.5", "js-big-decimal": "^2.0.7" } }, "sha512-dqkUd/DJ2JctNN1BigFtg8rDceR0yNVHdM/QJFtLNgNVyShtxdoP6Cu0pJY71A9vZ3nYc2ivr9daG3DE0uHwpQ=="],
 
-    "@wharfkit/roborovski": ["@wharfkit/roborovski@4.0.1", "", { "dependencies": { "@wharfkit/antelope": "4.0.1" } }, "sha512-FrRBZF8lZPACt7kfyVYx4jJhzMepWYuUFw4ftYbnq9Tb7wsuIl8sP1ZZGbLRteEG9ivhhrvRNFN80KaetZVPMQ=="],
+    "@wharfkit/roborovski": ["@wharfkit/roborovski@4.0.2", "", { "dependencies": { "@wharfkit/antelope": "4.0.2" } }, "sha512-sroaYrZ86kbJx3bINFf6dx5Lk/b3QDOXOvePPxGhKsSTZcGYa90nAdAq9qDP9mRAwF/+NKzv/Ir/PkUDIgBNGw=="],
 
-    "@wharfkit/sealed-messages": ["@wharfkit/sealed-messages@4.0.1", "", { "dependencies": { "@greymass/miniaes": "^1.0.0", "@wharfkit/antelope": "4.0.1" } }, "sha512-VTD1lOje/0xqHr/Jqnvkh6TQVV/uPjdALUzV0PG/+YYHmCZAUfS1Q/Zhx8ZJoPecDbzVkW9iU5C+/Ll/YsL9pA=="],
+    "@wharfkit/sealed-messages": ["@wharfkit/sealed-messages@4.0.2", "", { "dependencies": { "@greymass/miniaes": "^1.0.0", "@wharfkit/antelope": "4.0.2" } }, "sha512-gKPrpFptIB56tKd505qS61Qap5WbDMZJsGw/o1VkwYWMqgfEoH9U28O4ksBR0Dntj7qy91VCijSLxgZ1J9yeMQ=="],
 
-    "@wharfkit/session": ["@wharfkit/session@4.0.1", "", { "dependencies": { "@wharfkit/abicache": "4.0.1", "@wharfkit/antelope": "4.0.1", "@wharfkit/common": "4.0.1", "@wharfkit/contract": "4.0.1", "@wharfkit/signing-request": "4.0.1", "pako": "^3.0.1" } }, "sha512-Cu7ATxjCOTQ4TJ7ilkVLLfgWp7TUl1FlA8kuGYcW1jK7/Msj8+Agn7wgqb1HUqAg84anHHdm49nvfpu6cgBYlw=="],
+    "@wharfkit/session": ["@wharfkit/session@4.0.2", "", { "dependencies": { "@wharfkit/abicache": "4.0.2", "@wharfkit/antelope": "4.0.2", "@wharfkit/common": "4.0.2", "@wharfkit/contract": "4.0.2", "@wharfkit/signing-request": "4.0.2", "pako": "^3.0.1" } }, "sha512-Q+8j5Wh9PNl4apxWUeSdI7jdH5SGmg7HbdZnW8Ho3SuSoZu6G5qt00bD/BsO3Lvaj/Hc40aem/8w7RDcC46ypQ=="],
 
-    "@wharfkit/signing-request": ["@wharfkit/signing-request@4.0.1", "", { "dependencies": { "@wharfkit/antelope": "4.0.1" } }, "sha512-hxjVWbmALT0qFj9dx/AebZ1NPgV7Vt6Mtt8btrrMSVTO//DbpuEYHidxkUw0w+qrFDBHRYmtvlpSsn5AyRtHyg=="],
+    "@wharfkit/signing-request": ["@wharfkit/signing-request@4.0.2", "", { "dependencies": { "@wharfkit/antelope": "4.0.2" } }, "sha512-lGrhUYiGH7nnBkltH3Sb1r/R9IpLvaWBt4AMS107mwM9eDFKyCfRGg3oFsfXAR02fRrMz5sMdIpI+VOSmEljkQ=="],
 
-    "@wharfkit/svelte-components": ["@wharfkit/svelte-components@4.0.1", "", { "dependencies": { "@lucide/svelte": "^0.516.0", "@melt-ui/svelte": "^0.86.6", "@wharfkit/antelope": "4.0.1", "big.js": "^7.0.1", "clsx": "^2.1.1", "esm-env": "^1.2.2", "melt": "^0.35.1", "tailwind-merge": "^3.3.1" }, "peerDependencies": { "svelte": "^5.0.0", "tailwindcss": "^4.0.0" } }, "sha512-qer72C6E0o/wrjAe4/04X7zhKjNpCTxEYHYsQSJsxqLyI4/XEZjqdCV71mutlLwWo0kQnifdXSTC8jg1crzRPQ=="],
+    "@wharfkit/svelte-components": ["@wharfkit/svelte-components@4.0.2", "", { "dependencies": { "@lucide/svelte": "^0.516.0", "@melt-ui/svelte": "^0.86.6", "@wharfkit/antelope": "4.0.2", "big.js": "^7.0.1", "clsx": "^2.1.1", "esm-env": "^1.2.2", "melt": "^0.35.1", "tailwind-merge": "^3.3.1" }, "peerDependencies": { "svelte": "^5.0.0", "tailwindcss": "^4.0.0" } }, "sha512-cUTbrW505pHTv7+HlLrf+1rAvuaOmIBMlNb07Rs3GT3+Orfz0HPzoBtEkq6e3Pi4skRxLWUn5itPfK2znC1gUQ=="],
 
-    "@wharfkit/transact-plugin-resource-provider": ["@wharfkit/transact-plugin-resource-provider@4.0.1", "", { "dependencies": { "@wharfkit/resources": "4.0.1", "@wharfkit/session": "4.0.1" } }, "sha512-RFAGazpgbjW2oSnkz1L1Dxdn/ie+Hv+t/RzXzfz+jtf9xzIo2Qtel7ywV8218Aon7YG+1k7ejXiwvm4+CYcVsg=="],
+    "@wharfkit/transact-plugin-resource-provider": ["@wharfkit/transact-plugin-resource-provider@4.0.2", "", { "dependencies": { "@wharfkit/resources": "4.0.2", "@wharfkit/session": "4.0.2" } }, "sha512-00FFlJ4KBaddBII19Eb2kWqyq8Npa0qLpN9lf2a9hrYg5K1X4otSMojq/EOZMCafVlid+dAz04AflYitgpMEWw=="],
 
-    "@wharfkit/wallet-plugin-anchor": ["@wharfkit/wallet-plugin-anchor@4.0.1", "", { "dependencies": { "@greymass/buoy": "^1.0.3", "@wharfkit/antelope": "4.0.1", "@wharfkit/protocol-esr": "4.0.1", "@wharfkit/session": "4.0.1", "@wharfkit/signing-request": "4.0.1", "isomorphic-ws": "^5.0.0", "ws": "^8.13.0" } }, "sha512-Ps751ohTD9PVkLOeyt6B23hWsRnEKn8kQXnpZFMQf54Jqs0pANV4/5hq78z1QS18RZnhtcIpyq65rFlZHjjACg=="],
+    "@wharfkit/wallet-plugin-anchor": ["@wharfkit/wallet-plugin-anchor@4.0.2", "", { "dependencies": { "@greymass/buoy": "^1.0.3", "@wharfkit/antelope": "4.0.2", "@wharfkit/protocol-esr": "4.0.2", "@wharfkit/session": "4.0.2", "@wharfkit/signing-request": "4.0.2", "isomorphic-ws": "^5.0.0", "ws": "^8.13.0" } }, "sha512-KZ8eQek8lVRGnraSk3v60BXOg/DW/3ZPCTK+wiEfoByUOOVlIWrB7G7EIuOuR8nDmApK+nJX1313pkak02DeAQ=="],
 
-    "@wharfkit/wallet-plugin-cleos": ["@wharfkit/wallet-plugin-cleos@4.0.1", "", { "dependencies": { "@wharfkit/session": "4.0.1" } }, "sha512-C5TMqjt1Vv+miJYnsH1CukiloNpu///WMbOjGfRBfETh5lunjWLlaygokS1dJX9Q+rm0ULsAx94XCjpw7o3QHw=="],
+    "@wharfkit/wallet-plugin-cleos": ["@wharfkit/wallet-plugin-cleos@4.0.2", "", { "dependencies": { "@wharfkit/session": "4.0.2" } }, "sha512-y5Fi+4TfjJxSkz+8EcnfeGHrH5FxQWBoJ1B+h6xAVWc1NcOXKmAL0m5JY8/leuJrAYx5jVD+Dgo9T5VJdHisHg=="],
 
-    "@wharfkit/wallet-plugin-cloudwallet": ["@wharfkit/wallet-plugin-cloudwallet@4.0.1", "", { "dependencies": { "@wharfkit/session": "4.0.1" } }, "sha512-55oii2En19jMcRsGqXHILho+amXv2azf9FT7UcJH6YaE17Qu/psiXIRBPqiMOkqANt9mlW+gGj+6lRvQjewXjQ=="],
+    "@wharfkit/wallet-plugin-cloudwallet": ["@wharfkit/wallet-plugin-cloudwallet@4.0.2", "", { "dependencies": { "@wharfkit/session": "4.0.2" } }, "sha512-krZciq0hM3Rj96WENrAGZjq2GaFiPqWydgm3TpIRvLu21Ie7kCd+BJSmu+ydmE0w7yzDvfQ1mGJ4l+lD6vvSsA=="],
 
-    "@wharfkit/wallet-plugin-gatewallet": ["@wharfkit/wallet-plugin-gatewallet@4.0.1", "", { "dependencies": { "@wharfkit/protocol-scatter": "4.0.1", "@wharfkit/session": "4.0.1" } }, "sha512-SRZP7dxam0i5rCHfvA2+R3oUYl4PwVFZb896e0z4czt+iy+Vk1PYrsmagDh8jo7x+bJZ4U91QTGNxwezw4uukA=="],
+    "@wharfkit/wallet-plugin-gatewallet": ["@wharfkit/wallet-plugin-gatewallet@4.0.2", "", { "dependencies": { "@wharfkit/protocol-scatter": "4.0.2", "@wharfkit/session": "4.0.2" } }, "sha512-IgiojXLDiD1YNE+9RiIAKBQ9ZmC31dWZMPwGwXPJ2UJqtyci8atMMVJj+ZwRcfzmFNitkZbUMwGLR2e5eF0cRA=="],
 
-    "@wharfkit/wallet-plugin-imtoken": ["@wharfkit/wallet-plugin-imtoken@4.0.1", "", { "dependencies": { "@wharfkit/protocol-scatter": "4.0.1", "@wharfkit/session": "4.0.1" } }, "sha512-1TIWp00UM7lH6j5uFM9YeU3i2SrS9VxvjmnktwceSOxw+xfBSa6R9RAu0lCImavowgI9dtBGyGvRHGvgswwKlg=="],
+    "@wharfkit/wallet-plugin-imtoken": ["@wharfkit/wallet-plugin-imtoken@4.0.2", "", { "dependencies": { "@wharfkit/protocol-scatter": "4.0.2", "@wharfkit/session": "4.0.2" } }, "sha512-xStVtjNa0/KsTiHcPfIRqekW5YSgyS4IVAraNHFw7KN1buv+FyX98OI2NsBn96RyG8aGZn2r3daEB8clLR6K6w=="],
 
-    "@wharfkit/wallet-plugin-metamask": ["@wharfkit/wallet-plugin-metamask@4.0.1", "", { "dependencies": { "@metamask/providers": "^17.0.0", "@wharfkit/session": "4.0.1" } }, "sha512-p2iInEQ0v6u+YsReSTXgkuhg5Sd2qf5EBQ9Bc2XQgETgMI6guedyBTZiNcvse1GTAlaWtZK9bciILVuoFReuTA=="],
+    "@wharfkit/wallet-plugin-metamask": ["@wharfkit/wallet-plugin-metamask@4.0.2", "", { "dependencies": { "@metamask/providers": "^17.0.0", "@wharfkit/session": "4.0.2" } }, "sha512-ooBkEfg/epltKdiL8IzEM11xkV1Nye8V8uDz1AxACOHASauawAsu1Azo/K8s0myVtYaueye1MU7qagi1CKfSKQ=="],
 
-    "@wharfkit/wallet-plugin-privatekey": ["@wharfkit/wallet-plugin-privatekey@4.0.1", "", { "dependencies": { "@wharfkit/session": "4.0.1" } }, "sha512-c+B975LZ9RCjAPkB+zxeV04I5hOfVpZcaWuaK/wr8XEC1NY/pmycGBAVtVkxcz3iBcLOjzUiKvd6dUUGS/TutA=="],
+    "@wharfkit/wallet-plugin-privatekey": ["@wharfkit/wallet-plugin-privatekey@4.0.2", "", { "dependencies": { "@wharfkit/session": "4.0.2" } }, "sha512-Kma6xMH50EzkzI8nZnLIYSIlXW3SUpmquzv47+bkntEdZiRYAVRJpIiNqNjnJmZjQOiLjlTnjLHFu1IRlUpeSg=="],
 
-    "@wharfkit/wallet-plugin-scatter": ["@wharfkit/wallet-plugin-scatter@4.0.1", "", { "dependencies": { "@wharfkit/protocol-scatter": "4.0.1", "@wharfkit/session": "4.0.1" } }, "sha512-zw7Vb0uvYbm3w1hKX4Px0T8eRG5KEHOBassUqvTBmwWjSjKxOLDFLYTIjTozgp66AfYP9v2R34O7wW8muCTFOQ=="],
+    "@wharfkit/wallet-plugin-scatter": ["@wharfkit/wallet-plugin-scatter@4.0.2", "", { "dependencies": { "@wharfkit/protocol-scatter": "4.0.2", "@wharfkit/session": "4.0.2" } }, "sha512-jhAIbf3Q06u0cjLRvV2DEImEW6bIRaDMg0EqcyF1ghfXo08qAeeU0+s2W1DCPXIbwmDIkgvbg/Fnrkv2UdlVWg=="],
 
-    "@wharfkit/wallet-plugin-tokenpocket": ["@wharfkit/wallet-plugin-tokenpocket@4.0.1", "", { "dependencies": { "@wharfkit/protocol-scatter": "4.0.1", "@wharfkit/session": "4.0.1" } }, "sha512-Wl5Z+vjDlvIjK+2u54EeKFlE45PJQTHFT8fGN8Jf7Rok9bbZI3fSiAvSwXnBNcxMHkXwsHeybUMpEmnWzB2FnQ=="],
+    "@wharfkit/wallet-plugin-tokenpocket": ["@wharfkit/wallet-plugin-tokenpocket@4.0.2", "", { "dependencies": { "@wharfkit/protocol-scatter": "4.0.2", "@wharfkit/session": "4.0.2" } }, "sha512-oRB0btq+yPIpbZgwaStcNEGqSkYM5gM/5moDmDGzsVX+RKyfllUl+/XGbLUAzD357PTbbpq5WUp3KRO4Zem13w=="],
 
     "@wharfkit/wallet-plugin-wombat": ["@wharfkit/wallet-plugin-wombat@1.5.1", "", { "dependencies": { "tslib": "^2.1.0" }, "peerDependencies": { "@wharfkit/protocol-scatter": "^1.3.1", "@wharfkit/session": "^1.4.0" } }, "sha512-zQFBv9Nc/+N2yWLNg35BByA+4mtuU/XcSbQ8UmDcPR8MUQmhn9cRCSUK8y0anDLgZniqIDcML+lgda3MXK+5/w=="],
 
-    "@wharfkit/web-ui": ["@wharfkit/web-ui@4.0.1", "", { "dependencies": { "@wharfkit/common": "4.0.1", "@wharfkit/session": "4.0.1" } }, "sha512-2RV9j6rks6oYm5aXQtoBtCWG1GD5McTwjSgCW7xNPXn0xEsOSLHkHWHOMx6avzSDCDn7YF9myC6tted4Cu0NTQ=="],
+    "@wharfkit/web-ui": ["@wharfkit/web-ui@4.0.2", "", { "dependencies": { "@wharfkit/common": "4.0.2", "@wharfkit/session": "4.0.2" } }, "sha512-PL3heSGpgE7uOIzF0dt3Vm3CGlnwiuEgCaawHNDzfAgjxt+rP43qp8YXLEhHkTBw/kNN1j0jLYwNf3QD4jcZFg=="],
 
     "@wuchale/svelte": ["@wuchale/svelte@0.16.6", "", { "dependencies": { "svelte": "^5.37.0", "wuchale": "^0.17.5" } }, "sha512-1Syz9Ct7YbjWP1S4wQcXlycyJu/TYQM/1yvXGKxvBG+aPn7Zynp0HsACh3qsudO8bMRAZZv2cG7ofVCIM/E6tg=="],
 
