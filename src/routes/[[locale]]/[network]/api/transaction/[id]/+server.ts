@@ -17,7 +17,8 @@ async function getTransactionFromRobo2(
 	try {
 		const response = await robo.transaction(Checksum256.from(id));
 		return TransactionResponse.from(response);
-	} catch {
+	} catch (error) {
+		console.error(`robo2 transaction ${id} on ${network} failed, falling back to history`, error);
 		return undefined;
 	}
 }
