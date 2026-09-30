@@ -20,9 +20,14 @@ export function reconcileLocale(settings: SettingsState) {
 		if (current && LOCALES.includes(current)) {
 			document.documentElement.lang = current;
 			if (current !== preferred) {
-				goto(localizePath(page.url.pathname, { forceLocale: preferred }) + page.url.search, {
-					replaceState: true
-				});
+				goto(
+					localizePath(page.url.pathname, { forceLocale: preferred }) +
+						page.url.search +
+						page.url.hash,
+					{
+						replaceState: true
+					}
+				);
 			}
 		}
 	});
