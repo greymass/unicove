@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2026-09-24T01:52:24.492Z\n"
+"PO-Revision-Date: 2026-09-30T20:38:55.372Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -4865,6 +4865,7 @@ msgstr "About Sentiment Voting"
 msgid "Stake tokens"
 msgstr "Stake tokens"
 
+#: src/lib/components/vp/VpAnchorFocus.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/sentiment/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
 msgid "Dismiss"
@@ -8848,3 +8849,23 @@ msgstr "K1"
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
 msgid "Get Anchor Wallet for {0}"
 msgstr "Get Anchor Wallet for {0}"
+
+#: src/lib/components/vp/VpAnchorFocus.svelte
+msgid ""
+"The linked passage was edited after this link was shared, so the section that held it is\n"
+"highlighted."
+msgstr ""
+"The linked passage was edited after this link was shared, so the section that held it is\n"
+"highlighted."
+
+#: src/lib/components/vp/VpAnchorFocus.svelte
+msgid "The linked passage was edited after this link was shared and is no longer in this document."
+msgstr "The linked passage was edited after this link was shared and is no longer in this document."
+
+#: src/lib/components/vp/VpAnchorFocus.svelte
+msgid ""
+"The lines of this translation do not match the English text here, so the whole section is\n"
+"highlighted. <0>Read the exact passage in English</0>."
+msgstr ""
+"The lines of this translation do not match the English text here, so the whole section is\n"
+"highlighted. <0>Read the exact passage in English</0>."

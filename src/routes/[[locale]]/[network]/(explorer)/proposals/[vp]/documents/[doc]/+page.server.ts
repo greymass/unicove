@@ -1,5 +1,6 @@
 import { error } from '@sveltejs/kit';
 import { localizeUrl } from '$lib/utils/url';
+import { vpPageAnchors } from '$lib/vp/anchors';
 import { fetchVpFile, VpFetchError } from '$lib/vp/fetch';
 import {
 	buildVpToc,
@@ -41,12 +42,17 @@ export const load: PageServerLoad = async ({ fetch, params, parent, url }) => {
 		error(status, documentErrorMessage(e));
 	}
 
+	const englishRaw =
+		picked.lang === 'en' ? null : await fetchVpFile(fetch, doc.path, branch).catch(() => null);
+	const anchors = await vpPageAnchors(raw, picked.lang, englishRaw, !picked.stale);
+
 	const exhibit = prepareVpExhibit(raw);
 	const heading = exhibit.heading ?? vpDocumentHeading(doc);
 	const position = summary.documents.findIndex((d) => vpDocumentStem(d.path) === params.doc);
 
 	return {
 		document: exhibit,
+		anchors,
 		docHeading: heading,
 		docLang: picked.lang,
 		docStale: picked.stale,

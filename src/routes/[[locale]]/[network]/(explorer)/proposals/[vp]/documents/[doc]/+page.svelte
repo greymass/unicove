@@ -75,6 +75,7 @@
 			slug={data.summary.slug}
 			{basePath}
 			branch={data.branch}
+			anchors={data.anchors}
 		/>
 	</Card>
 

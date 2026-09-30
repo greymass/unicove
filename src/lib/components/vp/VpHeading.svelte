@@ -2,10 +2,11 @@
 	interface Props {
 		level: 1 | 2 | 3 | 4 | 5 | 6;
 		id?: string;
+		anchors?: string;
 		children?: import('svelte').Snippet;
 	}
 
-	const { level, id, children }: Props = $props();
+	const { level, id, anchors, children }: Props = $props();
 
 	const styles: Record<number, string> = {
 		1: 'text-headline mt-12 mb-4',
@@ -17,6 +18,11 @@
 	};
 </script>
 
-<svelte:element this={`h${level}`} {id} class="{styles[level] ?? styles[4]} scroll-mt-24">
+<svelte:element
+	this={`h${level}`}
+	{id}
+	data-vp-anchors={anchors}
+	class="{styles[level] ?? styles[4]} scroll-mt-24"
+>
 	{@render children?.()}
 </svelte:element>

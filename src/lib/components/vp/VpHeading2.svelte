@@ -3,10 +3,11 @@
 
 	interface Props {
 		id?: string;
+		'data-vp-anchors'?: string;
 		children?: import('svelte').Snippet;
 	}
 
-	const { id, children }: Props = $props();
+	const { id, 'data-vp-anchors': anchors, children }: Props = $props();
 </script>
 
-<VpHeading level={2} {id}>{@render children?.()}</VpHeading>
+<VpHeading level={2} {id} {anchors}>{@render children?.()}</VpHeading>

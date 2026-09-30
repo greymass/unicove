@@ -29,6 +29,12 @@
 		<div class="mb-6">
 			<VpLanguageNav summary={data.summary} current={data.lang} />
 		</div>
-		<VpMarkdown body={data.body} slug={data.summary.slug} {basePath} branch={data.branch} />
+		<VpMarkdown
+			body={data.body}
+			slug={data.summary.slug}
+			{basePath}
+			branch={data.branch}
+			anchors={data.anchors}
+		/>
 	</Card>
 </Stack>

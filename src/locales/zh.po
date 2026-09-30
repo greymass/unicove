@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2026-09-24T01:52:24.515Z\n"
+"PO-Revision-Date: 2026-09-30T20:38:55.383Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -2941,6 +2941,7 @@ msgstr "情绪"
 msgid "Overview and statistics for community sentiment on the"
 msgstr "关于社区情绪的概述和统计数据"
 
+#: src/lib/components/vp/VpAnchorFocus.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/sentiment/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+page.svelte
 msgid "Dismiss"
@@ -8650,3 +8651,19 @@ msgstr "K1"
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
 msgid "Get Anchor Wallet for {0}"
 msgstr "获取适用于 {0} 的 Anchor 钱包"
+
+#: src/lib/components/vp/VpAnchorFocus.svelte
+msgid ""
+"The linked passage was edited after this link was shared, so the section that held it is\n"
+"highlighted."
+msgstr "链接分享后，所链接的段落已被修改，因此高亮显示其所在的章节。"
+
+#: src/lib/components/vp/VpAnchorFocus.svelte
+msgid "The linked passage was edited after this link was shared and is no longer in this document."
+msgstr "链接分享后，所链接的段落已被修改，本文档中已不再包含该段落。"
+
+#: src/lib/components/vp/VpAnchorFocus.svelte
+msgid ""
+"The lines of this translation do not match the English text here, so the whole section is\n"
+"highlighted. <0>Read the exact passage in English</0>."
+msgstr "此处译文的行与英文原文不一致，因此高亮显示整个章节。<0>以英文阅读确切段落</0>。"

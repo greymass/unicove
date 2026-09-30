@@ -2,6 +2,7 @@ import { error } from '@sveltejs/kit';
 import { getCacheHeaders } from '$lib/utils';
 import { localizeUrl } from '$lib/utils/url';
 import { fetchVpFile, fetchVpIndex, VpFetchError } from '$lib/vp/fetch';
+import { vpPageAnchors } from '$lib/vp/anchors';
 import { prepareVpDocument } from '$lib/vp/document';
 import { vpBranchForRef } from '$lib/vp/links';
 import { findVpSummary, selectVpFile } from '$lib/vp/resolve';
@@ -62,17 +63,19 @@ export const load: LayoutServerLoad = async ({ fetch, locals, params, setHeaders
 	const { title, body } = prepareVpDocument(raw);
 	const heading = title ?? summary.title;
 
+	let englishRaw: string | null = null;
+	if (picked.lang !== 'en') {
+		englishRaw = await fetchVpFile(fetch, summary.path, branch).catch(() => null);
+	}
+
 	const localizedRevisions = parseVpRevisions(raw);
 	let revisions = localizedRevisions;
-	if (picked.lang !== 'en' && picked.stale) {
-		try {
-			const englishRaw = await fetchVpFile(fetch, summary.path, branch);
-			revisions = mergeVpRevisions(parseVpRevisions(englishRaw), localizedRevisions);
-		} catch {
-			// English fetch failed; degrade to the localized entries already parsed above.
-		}
+	if (englishRaw && picked.stale) {
+		revisions = mergeVpRevisions(parseVpRevisions(englishRaw), localizedRevisions);
 	}
 	revisions = sortVpRevisionsNewestFirst(revisions);
+
+	const anchors = await vpPageAnchors(raw, picked.lang, englishRaw, !picked.stale);
 
 	// A proposal resolves at both vp-0001 and vp-0001-slug, so point search engines at the number.
 	const canonical = new URL(url);
@@ -85,6 +88,7 @@ export const load: LayoutServerLoad = async ({ fetch, locals, params, setHeaders
 	return {
 		summary,
 		body,
+		anchors,
 		title: heading,
 		subtitle: summary.vp,
 		lang: picked.lang,
