@@ -19,7 +19,7 @@
 	import LoadingBounce from '$lib/components/filters/LoadingBounce.svelte';
 	import PaginationControls from '$lib/components/filters/PaginationControls.svelte';
 	import Contract from '$lib/components/elements/contract.svelte';
-	import { parseRootType } from '$lib/utils/abi';
+	import { parseRootType, structFields } from '$lib/utils/abi';
 
 	const { urlPath } = getContext<UnicoveContext>('state');
 
@@ -28,7 +28,8 @@
 	const table = $derived(data.abi.tables.find((t) => t.name === data.table));
 	const struct = $derived(table && data.abi.structs.find((s) => s.name === table.type));
 	const tableRow = $derived(table ? data.abi.structs.find((s) => s.name === table.type) : null);
-	const allFieldNames = $derived(struct ? struct.fields.map((f: { name: string }) => f.name) : []);
+	const fields = $derived(struct ? structFields(data.abi.structs, struct.name) : []);
+	const allFieldNames = $derived(fields.map((f) => f.name));
 
 	let expandedCells = $state(new Set<string>());
 	let overflowingCells = $state(new Set<string>());
@@ -78,10 +79,8 @@
 
 	const fieldTypes = $derived.by(() => {
 		const types: Record<string, string> = {};
-		if (struct) {
-			for (const field of struct.fields) {
-				types[field.name] = field.type;
-			}
+		for (const field of fields) {
+			types[field.name] = field.type;
 		}
 		return types;
 	});
@@ -275,9 +274,7 @@
 
 	let allSelected = $derived(visibleFields.size === allFieldNames.length);
 
-	let visibleStruct = $derived(
-		struct ? struct.fields.filter((f: { name: string }) => visibleFields.has(f.name)) : []
-	);
+	let visibleStruct = $derived(fields.filter((f) => visibleFields.has(f.name)));
 </script>
 
 <Stack>
@@ -465,7 +462,7 @@
 							>
 						</div>
 						<div class="flex flex-col">
-							{#each struct ? struct.fields : [] as field}
+							{#each fields as field}
 								{@const fieldType = data.abi.structs.find(
 									(s) => s.name === parseRootType(field.type)
 								)}
