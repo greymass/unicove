@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2026-09-30T20:38:55.372Z\n"
+"PO-Revision-Date: 2026-10-21T18:40:42.613Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -4254,6 +4254,7 @@ msgstr "Weight Threshold"
 msgid "The total weight of all keys, accounts, and waits must be greater than or equal to this threshold to approve a transaction."
 msgstr "The total weight of all keys, accounts, and waits must be greater than or equal to this threshold to approve a transaction."
 
+#: src/lib/components/vp/VpProposalsCard.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Required"
 msgstr "Required"
@@ -5454,7 +5455,6 @@ msgid "All Actions"
 msgstr "All Actions"
 
 #: src/lib/components/vp/VpStatusChip.svelte
-#: src/lib/components/vp/VpStatusChip.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
 msgid "Proposed"
@@ -5465,7 +5465,6 @@ msgid "Unapproved"
 msgstr "Unapproved"
 
 #: src/lib/components/vp/VpMsigStep.svelte
-#: src/lib/components/vp/VpStatusChip.svelte
 #: src/lib/components/vp/VpStatusChip.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
@@ -7726,6 +7725,7 @@ msgstr "You create the keys first in a wallet and save them somewhere safe, then
 msgid "Start with tokens and your own keys"
 msgstr "Start with tokens and your own keys"
 
+#: src/lib/components/vp/VpProposalsCard.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.server.ts
 msgid "Proposals"
@@ -7800,21 +7800,17 @@ msgid "No live approval data on this network."
 msgstr "No live approval data on this network."
 
 #: src/lib/components/vp/VpStatusChip.svelte
-#: src/lib/components/vp/VpStatusChip.svelte
 msgid "Draft"
 msgstr "Draft"
 
-#: src/lib/components/vp/VpStatusChip.svelte
 #: src/lib/components/vp/VpStatusChip.svelte
 msgid "Review"
 msgstr "Review"
 
 #: src/lib/components/vp/VpStatusChip.svelte
-#: src/lib/components/vp/VpStatusChip.svelte
 msgid "Rejected"
 msgstr "Rejected"
 
-#: src/lib/components/vp/VpStatusChip.svelte
 #: src/lib/components/vp/VpStatusChip.svelte
 msgid "Withdrawn"
 msgstr "Withdrawn"
@@ -8869,3 +8865,19 @@ msgid ""
 msgstr ""
 "The lines of this translation do not match the English text here, so the whole section is\n"
 "highlighted. <0>Read the exact passage in English</0>."
+
+#: src/lib/components/vp/VpProposalsCard.svelte
+msgid "View all proposals"
+msgstr "View all proposals"
+
+#: src/lib/components/vp/VpProposalsCard.svelte
+msgid "Depends on this"
+msgstr "Depends on this"
+
+#: src/lib/components/vp/VpProposalsCard.svelte
+msgid "Replaced by this"
+msgstr "Replaced by this"
+
+#: src/lib/components/vp/VpProposalsCard.svelte
+msgid "Replaces this"
+msgstr "Replaces this"

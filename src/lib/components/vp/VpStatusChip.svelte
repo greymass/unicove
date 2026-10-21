@@ -7,6 +7,8 @@
 	}
 
 	const { status }: Props = $props();
+	// Lowercase keys keep wuchale from translating the comparison literals.
+	const key = $derived(status.toLowerCase());
 
 	const variants: Record<VpStatus, string> = {
 		Draft: 'bg-surface-container-high text-muted',
@@ -20,17 +22,17 @@
 </script>
 
 <Chip class={variants[status]}>
-	{#if status === 'Draft'}
+	{#if key === 'draft'}
 		Draft
-	{:else if status === 'Review'}
+	{:else if key === 'review'}
 		Review
-	{:else if status === 'Proposed'}
+	{:else if key === 'proposed'}
 		Proposed
-	{:else if status === 'Executed'}
+	{:else if key === 'executed'}
 		Executed
-	{:else if status === 'Rejected'}
+	{:else if key === 'rejected'}
 		Rejected
-	{:else if status === 'Withdrawn'}
+	{:else if key === 'withdrawn'}
 		Withdrawn
 	{:else}
 		Superseded

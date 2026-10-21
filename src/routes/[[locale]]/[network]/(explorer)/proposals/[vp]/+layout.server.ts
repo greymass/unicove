@@ -7,6 +7,7 @@ import { prepareVpDocument } from '$lib/vp/document';
 import { vpBranchForRef } from '$lib/vp/links';
 import { findVpSummary, selectVpFile } from '$lib/vp/resolve';
 import { mergeVpRevisions, parseVpRevisions, sortVpRevisionsNewestFirst } from '$lib/vp/revisions';
+import { vpSiblings } from '$lib/vp/siblings';
 import type { LayoutServerLoad } from './$types';
 
 function indexErrorMessage(e: unknown): string {
@@ -89,8 +90,10 @@ export const load: LayoutServerLoad = async ({ fetch, locals, params, setHeaders
 		summary,
 		body,
 		anchors,
+		siblings: vpSiblings(index, summary, picked.lang),
 		title: heading,
 		subtitle: summary.vp,
+		backPath: `/${params.network}/proposals`,
 		lang: picked.lang,
 		stale: picked.stale,
 		revisions,

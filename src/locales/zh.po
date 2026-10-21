@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2026-09-30T20:38:55.383Z\n"
+"PO-Revision-Date: 2026-10-21T18:40:42.625Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -4605,6 +4605,7 @@ msgstr "权重阈值"
 msgid "The total weight of all keys, accounts, and waits must be greater than or equal to this threshold to approve a transaction."
 msgstr "所有密钥、帐户和等待的总权重必须大于或等于此阈值才能批准交易。"
 
+#: src/lib/components/vp/VpProposalsCard.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Required"
 msgstr "必需"
@@ -5319,7 +5320,6 @@ msgid "All Actions"
 msgstr "所有操作"
 
 #: src/lib/components/vp/VpStatusChip.svelte
-#: src/lib/components/vp/VpStatusChip.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
 msgid "Proposed"
@@ -5330,7 +5330,6 @@ msgid "Unapproved"
 msgstr "未批准"
 
 #: src/lib/components/vp/VpMsigStep.svelte
-#: src/lib/components/vp/VpStatusChip.svelte
 #: src/lib/components/vp/VpStatusChip.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
@@ -7560,6 +7559,7 @@ msgstr "先在钱包中创建密钥并妥善保存，然后从交易所发送代
 msgid "Start with tokens and your own keys"
 msgstr "从代币和你自己的密钥开始"
 
+#: src/lib/components/vp/VpProposalsCard.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.server.ts
 msgid "Proposals"
@@ -7630,21 +7630,17 @@ msgid "No live approval data on this network."
 msgstr "此网络上没有实时批准数据。"
 
 #: src/lib/components/vp/VpStatusChip.svelte
-#: src/lib/components/vp/VpStatusChip.svelte
 msgid "Draft"
 msgstr "草稿"
 
-#: src/lib/components/vp/VpStatusChip.svelte
 #: src/lib/components/vp/VpStatusChip.svelte
 msgid "Review"
 msgstr "审核中"
 
 #: src/lib/components/vp/VpStatusChip.svelte
-#: src/lib/components/vp/VpStatusChip.svelte
 msgid "Rejected"
 msgstr "已拒绝"
 
-#: src/lib/components/vp/VpStatusChip.svelte
 #: src/lib/components/vp/VpStatusChip.svelte
 msgid "Withdrawn"
 msgstr "已撤回"
@@ -8667,3 +8663,19 @@ msgid ""
 "The lines of this translation do not match the English text here, so the whole section is\n"
 "highlighted. <0>Read the exact passage in English</0>."
 msgstr "此处译文的行与英文原文不一致，因此高亮显示整个章节。<0>以英文阅读确切段落</0>。"
+
+#: src/lib/components/vp/VpProposalsCard.svelte
+msgid "View all proposals"
+msgstr "查看所有提案"
+
+#: src/lib/components/vp/VpProposalsCard.svelte
+msgid "Depends on this"
+msgstr "依赖此提案"
+
+#: src/lib/components/vp/VpProposalsCard.svelte
+msgid "Replaced by this"
+msgstr "被此提案替代"
+
+#: src/lib/components/vp/VpProposalsCard.svelte
+msgid "Replaces this"
+msgstr "替代此提案"

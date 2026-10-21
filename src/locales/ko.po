@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.663Z\n"
-"PO-Revision-Date: 2026-09-30T20:38:55.379Z\n"
+"PO-Revision-Date: 2026-10-21T18:40:42.620Z\n"
 "Last-Translator: \n"
 "Language: ko\n"
 "Language-Team: \n"
@@ -4157,6 +4157,7 @@ msgstr "가중치 임계값"
 msgid "The total weight of all keys, accounts, and waits must be greater than or equal to this threshold to approve a transaction."
 msgstr "모든 키, 계정 및 대기 조건의 총 가중치가 이 임계값 이상이어야 트랜잭션가 승인됩니다."
 
+#: src/lib/components/vp/VpProposalsCard.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Required"
 msgstr "필수"
@@ -5318,7 +5319,6 @@ msgid "All Actions"
 msgstr "모든 액션"
 
 #: src/lib/components/vp/VpStatusChip.svelte
-#: src/lib/components/vp/VpStatusChip.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
 msgid "Proposed"
@@ -5329,7 +5329,6 @@ msgid "Unapproved"
 msgstr "미승인"
 
 #: src/lib/components/vp/VpMsigStep.svelte
-#: src/lib/components/vp/VpStatusChip.svelte
 #: src/lib/components/vp/VpStatusChip.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ActionTypeFilter.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/StatusFilter.svelte
@@ -7570,6 +7569,7 @@ msgstr "먼저 지갑에서 키를 생성해 안전한 곳에 보관한 다음, 
 msgid "Start with tokens and your own keys"
 msgstr "토큰과 직접 만든 키로 시작"
 
+#: src/lib/components/vp/VpProposalsCard.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/governance/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.server.ts
 msgid "Proposals"
@@ -7644,21 +7644,17 @@ msgid "No live approval data on this network."
 msgstr "이 네트워크에는 실시간 승인 데이터가 없습니다."
 
 #: src/lib/components/vp/VpStatusChip.svelte
-#: src/lib/components/vp/VpStatusChip.svelte
 msgid "Draft"
 msgstr "초안"
 
-#: src/lib/components/vp/VpStatusChip.svelte
 #: src/lib/components/vp/VpStatusChip.svelte
 msgid "Review"
 msgstr "검토"
 
 #: src/lib/components/vp/VpStatusChip.svelte
-#: src/lib/components/vp/VpStatusChip.svelte
 msgid "Rejected"
 msgstr "거부됨"
 
-#: src/lib/components/vp/VpStatusChip.svelte
 #: src/lib/components/vp/VpStatusChip.svelte
 msgid "Withdrawn"
 msgstr "철회됨"
@@ -8706,3 +8702,19 @@ msgid ""
 "The lines of this translation do not match the English text here, so the whole section is\n"
 "highlighted. <0>Read the exact passage in English</0>."
 msgstr "이 번역의 줄이 여기서 영어 원문과 맞지 않아 섹션 전체를 강조 표시합니다. <0>영어로 정확한 구절 읽기</0>."
+
+#: src/lib/components/vp/VpProposalsCard.svelte
+msgid "View all proposals"
+msgstr "모든 제안 보기"
+
+#: src/lib/components/vp/VpProposalsCard.svelte
+msgid "Depends on this"
+msgstr "이 항목에 의존함"
+
+#: src/lib/components/vp/VpProposalsCard.svelte
+msgid "Replaced by this"
+msgstr "이것으로 대체됨"
+
+#: src/lib/components/vp/VpProposalsCard.svelte
+msgid "Replaces this"
+msgstr "이것을 대체함"

@@ -9,6 +9,7 @@
 	import VpSentimentCard from '$lib/components/vp/VpSentimentCard.svelte';
 	import VpDetailsCard from '$lib/components/vp/VpDetailsCard.svelte';
 	import VpRelatedAccounts from '$lib/components/vp/VpRelatedAccounts.svelte';
+	import VpProposalsCard from '$lib/components/vp/VpProposalsCard.svelte';
 	import DiscussionCard from '$lib/components/discussion/DiscussionCard.svelte';
 	import { DiscussionSummary } from '$lib/discussion/summary.svelte';
 	import { proposalDescriptors } from '$lib/discussion/targets';
@@ -91,6 +92,7 @@
 			{/if}
 			<VpDetailsCard summary={data.summary} revisions={data.revisions} branch={data.branch} />
 			<VpRelatedAccounts accounts={data.summary.accounts} />
+			<VpProposalsCard siblings={data.siblings} />
 		</Stack>
 	</div>
 </Stack>
