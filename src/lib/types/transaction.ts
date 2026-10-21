@@ -23,8 +23,12 @@ import { Types as HyperionTypes } from '@wharfkit/hyperion';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type ObjectifiedActionData = Record<string, any>;
 
+export abstract class SummaryTitles<V> {
+	[key: string]: V;
+}
+
 export interface ContractSummaries {
-	titles: Record<string, string>;
+	titles: SummaryTitles<string>;
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	components: Record<string, any>;
 }
@@ -39,7 +43,7 @@ export interface ActionSummaryProps {
 
 @Struct.type('action_decoded')
 export class ActionDecoded extends Action {
-	@Struct.field('string') declare hex_data: string;
+	@Struct.field('string', { optional: true }) declare hex_data?: string;
 }
 
 @Struct.type('account_ram_delta')
@@ -54,7 +58,7 @@ export class ActionTraceAction extends Struct {
 	@Struct.field(Name) declare name: Name;
 	@Struct.field(PermissionLevel, { array: true }) declare authorization: PermissionLevel[];
 	@Struct.field('any', { optional: true }) declare data?: ObjectifiedActionData;
-	@Struct.field('string') declare hex_data: string;
+	@Struct.field('string', { optional: true }) declare hex_data?: string;
 }
 
 @Struct.type('action_trace_receipt')
@@ -91,7 +95,7 @@ export class ActionTrace extends Struct {
 			account: this.act.account,
 			name: this.act.name,
 			authorization: this.act.authorization,
-			data: this.act.hex_data
+			data: this.act.hex_data ?? ''
 		});
 	}
 }
@@ -180,7 +184,7 @@ export class TransactionResponse extends Struct {
 			actions: this.trx.trx.actions.map((action) =>
 				Action.from({
 					...action,
-					data: action.hex_data
+					data: action.hex_data ?? ''
 				})
 			)
 		});
@@ -193,7 +197,7 @@ export class TransactionResponse extends Struct {
 			actions: this.trx.trx.actions.map((action) =>
 				Action.from({
 					...action,
-					data: action.hex_data
+					data: action.hex_data ?? ''
 				})
 			)
 		});
@@ -261,7 +265,7 @@ export class ActivityResponseAction extends Struct {
 			account: this.action_trace.act.account,
 			name: this.action_trace.act.name,
 			authorization: this.action_trace.act.authorization,
-			data: this.action_trace.act.hex_data
+			data: this.action_trace.act.hex_data ?? ''
 		});
 	}
 
