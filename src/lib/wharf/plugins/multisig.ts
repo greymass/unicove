@@ -19,6 +19,7 @@ import {
 import { Contract as MsigContract } from '$lib/wharf/contracts/msig';
 import { Contract as TimeContract } from '$lib/wharf/contracts/eosntime';
 import { generateRandomName } from '$lib/utils/random';
+import { chainPermissions, resolveApprovers } from '$lib/wharf/msig/proposer';
 import { msigInternalPlugins } from '$lib/wharf/plugins';
 
 export interface WalletPluginMultiSigOptions {
@@ -97,45 +98,21 @@ export class WalletPluginMultiSig extends AbstractWalletPlugin implements Wallet
 		);
 	}
 
-	async resolveSigners(
-		auth: PermissionLevel,
-		context: TransactContext,
-		seen: Set<string>
-	): Promise<PermissionLevel[]> {
-		const key = String(auth);
-		if (seen.has(key)) return [];
-		seen.add(key);
-		if (auth.actor.equals('eosio.prods') && this.data.topProducers) {
-			return (this.data.topProducers as string[]).map((name: string) =>
-				PermissionLevel.from({ actor: name, permission: 'active' })
-			);
-		}
-		const account = await context.client.v1.chain.get_account(auth.actor);
-		const permission = account.permissions.find((p) => p.perm_name.equals(auth.permission));
-		if (!permission) return [auth];
-		const accountAuths = permission.required_auth.accounts.map((a) => a.permission);
-		if (accountAuths.length === 1 && permission.required_auth.threshold.equals(1)) {
-			return this.resolveSigners(accountAuths[0], context, seen);
-		}
-		if (accountAuths.length > 0) {
-			return accountAuths;
-		}
-		return [auth];
-	}
-
 	async getRequestedSigners(
 		transaction: Transaction,
 		context: TransactContext
 	): Promise<PermissionLevel[]> {
-		const requested: PermissionLevel[] = [];
-		const seen = new Set<string>();
-		for (const action of transaction.actions) {
-			for (const auth of action.authorization) {
-				const resolved = await this.resolveSigners(auth, context, seen);
-				requested.push(...resolved);
-			}
-		}
-		return requested;
+		const approvers = await resolveApprovers({
+			authorizations: transaction.actions.flatMap((action) =>
+				action.authorization.map((auth) => ({
+					actor: String(auth.actor),
+					permission: String(auth.permission)
+				}))
+			),
+			getPermissions: chainPermissions(context.client),
+			producerCandidates: this.data.topProducers ?? []
+		});
+		return approvers.map((level) => PermissionLevel.from(level));
 	}
 
 	async propose(
