@@ -57,6 +57,21 @@ describe('CreationindexClient', () => {
 		expect(urls[1]).toBe('/jungle4/api/creationindex/get_creations?program_creator=gm&limit=2');
 	});
 
+	test('pages creations newest first', async () => {
+		const { urls, client } = recorder({ creations: [], more: false, next: 0 });
+		await client.getCreations({ creator: 'gift.gm' }, { order: 'desc', limit: 25 });
+		await client.getCreations(
+			{ creator: 'gift.gm' },
+			{ order: 'desc', before: 396724548, limit: 25 }
+		);
+		expect(urls[0]).toBe(
+			'/jungle4/api/creationindex/get_creations?creator=gift.gm&order=desc&limit=25'
+		);
+		expect(urls[1]).toBe(
+			'/jungle4/api/creationindex/get_creations?creator=gift.gm&order=desc&before=396724548&limit=25'
+		);
+	});
+
 	test('returns the response body', async () => {
 		const endowment = {
 			program_account: 'gift.gm',

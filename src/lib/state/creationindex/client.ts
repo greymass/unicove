@@ -194,6 +194,12 @@ export interface PageParams {
 	limit?: number;
 }
 
+export interface NewestFirstPageParams {
+	order: 'desc';
+	before?: number;
+	limit?: number;
+}
+
 export class CreationindexError extends Error {
 	status: number;
 
@@ -250,7 +256,7 @@ export class CreationindexClient {
 
 	getCreations(
 		filter: { creator: string } | { program_creator: string },
-		page: PageParams = {}
+		page: PageParams | NewestFirstPageParams = {}
 	): Promise<CreationsPage> {
 		return this.fetch('get_creations', { ...filter, ...page });
 	}
