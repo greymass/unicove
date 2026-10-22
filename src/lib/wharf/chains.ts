@@ -88,6 +88,9 @@ export const systemcontract = Name.from(env.PUBLIC_SYSTEM_CONTRACT);
 export const createcontract = optionalEnv.PUBLIC_FEATURE_CREATE_CONTRACT
 	? Name.from(optionalEnv.PUBLIC_FEATURE_CREATE_CONTRACT)
 	: undefined;
+export const giftcontract = optionalEnv.PUBLIC_FEATURE_GIFT_CONTRACT
+	? Name.from(optionalEnv.PUBLIC_FEATURE_GIFT_CONTRACT)
+	: undefined;
 export const systemtoken = Token.from({
 	id: {
 		chain: env.PUBLIC_CHAIN_ID,
@@ -153,11 +156,15 @@ export const chainConfig: ChainConfig = {
 	features: {
 		bidname: isENVTrue(env.PUBLIC_FEATURE_BIDNAME),
 		createcontract: !!optionalEnv.PUBLIC_FEATURE_CREATE_CONTRACT,
+		creationindex: isENVTrue(optionalEnv.PUBLIC_FEATURE_CREATIONINDEX),
 		delphihelper: isENVTrue(env.PUBLIC_FEATURE_DELPHIHELPER),
 		delphioracle: isENVTrue(env.PUBLIC_FEATURE_DELPHIORACLE),
 		directfunding: isENVTrue(env.PUBLIC_FEATURE_DIRECTFUNDING),
 		eosntime: isENVTrue(env.PUBLIC_FEATURE_EOSNTIME),
 		giftedram: isENVTrue(env.PUBLIC_FEATURE_GIFTEDRAM),
+		giftprogram:
+			isENVTrue(optionalEnv.PUBLIC_FEATURE_CREATIONINDEX) &&
+			!!optionalEnv.PUBLIC_FEATURE_GIFT_CONTRACT,
 		hyperion: isENVTrue(env.PUBLIC_FEATURE_HYPERION),
 		legacyexchangereversible: isENVTrue(env.PUBLIC_LEGACY_TOKEN_EXCHANGEREVERSABLE),
 		lightapi: isENVTrue(env.PUBLIC_FEATURE_LIGHTAPI),
@@ -210,6 +217,7 @@ export interface DefaultContracts {
 export interface ChainEndpoints {
 	api: string;
 	blocks?: string;
+	creationindex?: string;
 	history: string;
 	hyperion?: string;
 	lightapi?: string;
@@ -258,11 +266,13 @@ export interface ChainConfig {
 export type FeatureType =
 	| 'bidname'
 	| 'createcontract'
+	| 'creationindex'
 	| 'delphihelper'
 	| 'delphioracle'
 	| 'directfunding'
 	| 'eosntime'
 	| 'giftedram'
+	| 'giftprogram'
 	| 'hyperion'
 	| 'legacyexchangereversible'
 	| 'lightapi'

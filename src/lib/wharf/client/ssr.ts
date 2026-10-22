@@ -18,6 +18,7 @@ interface GetBackendClientOptions {
 const backendEndpoints: ChainEndpoints = {
 	api: env.BACKEND_API_CHAIN,
 	blocks: optionalEnv.BACKEND_API_BLOCKS,
+	creationindex: optionalEnv.BACKEND_API_CREATIONINDEX,
 	history: env.BACKEND_API_HISTORY,
 	hyperion: env.BACKEND_API_HYPERION,
 	lightapi: env.BACKEND_API_LIGHTAPI,
