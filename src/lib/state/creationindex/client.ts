@@ -3,6 +3,7 @@ export const CREATIONINDEX_ROUTES = [
 	'get_creations',
 	'get_daily',
 	'get_day_creators',
+	'get_creators',
 	'get_program_daily',
 	'get_quota',
 	'get_program_events',
@@ -78,6 +79,14 @@ export interface DayCreator {
 
 export interface DayCreators {
 	day: string;
+	creators: DayCreator[];
+	more: boolean;
+	offset: number;
+}
+
+export interface RangeCreators {
+	from: string;
+	to: string;
 	creators: DayCreator[];
 	more: boolean;
 	offset: number;
@@ -255,6 +264,14 @@ export class CreationindexClient {
 		page: { offset?: number; limit?: number } = {}
 	): Promise<DayCreators> {
 		return this.fetch('get_day_creators', { day, ...page });
+	}
+
+	getCreators(
+		from: string,
+		to: string,
+		page: { offset?: number; limit?: number } = {}
+	): Promise<RangeCreators> {
+		return this.fetch('get_creators', { from, to, ...page });
 	}
 
 	getProgramDaily(from: string, to: string): Promise<ProgramDaily> {

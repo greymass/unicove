@@ -31,6 +31,14 @@ describe('CreationindexClient', () => {
 		);
 	});
 
+	test('ranks creators across a date range', async () => {
+		const { urls, client } = recorder({ creators: [], more: false, offset: 0 });
+		await client.getCreators('2026-09-21', '2026-10-20', { offset: 100, limit: 50 });
+		expect(urls[0]).toBe(
+			'/jungle4/api/creationindex/get_creators?from=2026-09-21&to=2026-10-20&offset=100&limit=50'
+		);
+	});
+
 	test('omits unset parameters', async () => {
 		const { urls, client } = recorder({ days: [] });
 		await client.getDaily('2026-10-19', '2026-10-20');
