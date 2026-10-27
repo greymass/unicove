@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2026-10-21T18:40:42.613Z\n"
+"PO-Revision-Date: 2026-10-27T00:12:02.938Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -85,6 +85,7 @@ msgstr "API Reference"
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Status"
@@ -127,6 +128,7 @@ msgid "Forum"
 msgstr "Forum"
 
 #: src/lib/components/footer.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/+layout.svelte
 msgid "Events"
 msgstr "Events"
 
@@ -749,6 +751,7 @@ msgid "RAM Calculator"
 msgstr "RAM Calculator"
 
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/events/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/ram/+page.svelte
 msgid "Bytes"
 msgstr "Bytes"
@@ -917,6 +920,8 @@ msgstr "Debug"
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/+layout.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/wharf/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/network/origins/[creator]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/events/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/token/[contract]/[symbol]/+page.svelte
 msgid "Account"
 msgstr "Account"
@@ -1202,6 +1207,7 @@ msgid "Wharf"
 msgstr "Wharf"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
 msgid "Authority"
 msgstr "Authority"
 
@@ -1228,6 +1234,7 @@ msgstr "The internal state of Unicove for debugging purposes"
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/navigation.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/contract/[contract]/+layout.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/sentiment/topics/[id]/+layout.svelte
 msgid "Overview"
 msgstr "Overview"
@@ -1523,6 +1530,7 @@ msgstr "EOS (0)"
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/inputs.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/inputs.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
 msgid "Disabled"
 msgstr "Disabled"
 
@@ -2879,6 +2887,10 @@ msgstr "Raw Data | {0} | {1} Network"
 msgid "The raw data for the {0} account on the {1} network."
 msgstr "The raw data for the {0} account on the {1} network."
 
+#: src/lib/components/onboarding/giftschart.svelte
+#: src/lib/components/origins/creationline.svelte
+#: src/lib/components/origins/kindchart.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/network/origins/[creator]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
 msgid "UTC"
@@ -3074,6 +3086,7 @@ msgstr ""
 #: src/lib/components/elements/unstaking.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/balances/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/transfers/TransfersView.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/network/origins/[creator]/+page.svelte
 msgid "Amount"
 msgstr "Amount"
 
@@ -3700,6 +3713,7 @@ msgstr "Total Account Value"
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/block/[number]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+layout.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/events/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/transaction/+page.svelte
@@ -4151,6 +4165,7 @@ msgstr "<0/> Approved"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
 msgid "Permission"
 msgstr "Permission"
 
@@ -4795,6 +4810,7 @@ msgstr "The {0} data table in the {1} smart contract on the {2} network."
 
 #: src/lib/components/card/tokenbalance.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/ram/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
 msgid "Used"
 msgstr "Used"
 
@@ -5520,6 +5536,7 @@ msgstr "actions"
 #: src/lib/components/vp/VpDetailsCard.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalCard.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalsHeader.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/network/origins/[creator]/+page.svelte
 msgid "Created"
 msgstr "Created"
 
@@ -5785,6 +5802,7 @@ msgid "Counterparty"
 msgstr "Counterparty"
 
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/transfers/TransfersView.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/events/+page.svelte
 msgid "Memo"
 msgstr "Memo"
 
@@ -7928,6 +7946,7 @@ msgstr "Change history"
 msgid "{0} V"
 msgstr "{0} V"
 
+#: src/lib/components/onboarding/propose.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.svelte
 msgid "Proposal"
 msgstr "Proposal"
@@ -8294,6 +8313,8 @@ msgid "No comments yet."
 msgstr "No comments yet."
 
 #: src/lib/components/discussion/TargetNav.svelte
+#: src/lib/components/onboarding/labels.svelte.ts
+#: src/lib/components/origins/windowpills.svelte
 msgid "All"
 msgstr "All"
 
@@ -8881,3 +8902,995 @@ msgstr "Replaced by this"
 #: src/lib/components/vp/VpProposalsCard.svelte
 msgid "Replaces this"
 msgstr "Replaces this"
+
+#: src/lib/components/origins/kindbytes.svelte
+msgid "Before system contracts v3.3.0 (March 2024) the chain stated only what was paid or requested, not the bytes delivered."
+msgstr "Before system contracts v3.3.0 (March 2024) the chain stated only what was paid or requested, not the bytes delivered."
+
+#. placeholder {0}: formatNumber(figures.without_bytes, locale)
+#: src/lib/components/origins/kindbytes.svelte
+msgid ", plus {0} with no byte count"
+msgstr ", plus {0} with no byte count"
+
+#: src/lib/components/origins/kindbytes.svelte
+msgid "Byte count not recorded"
+msgstr "Byte count not recorded"
+
+#: src/lib/components/origins/kindchart.svelte
+msgid "Accounts created by how RAM arrived"
+msgstr "Accounts created by how RAM arrived"
+
+#. placeholder {0}: created
+#. placeholder {1}: kindLabel( kind )
+#: src/lib/components/origins/creationline.svelte
+msgid "Created by <0/> on {0} · {1}<1/>"
+msgstr "Created by <0/> on {0} · {1}<1/>"
+
+#. placeholder {0}: formatBytes(contribution.requested_bytes)
+#: src/lib/components/origins/contributionbytes.svelte
+msgid "{0} requested"
+msgstr "{0} requested"
+
+#. placeholder {0}: contribution.quantity
+#: src/lib/components/origins/contributionbytes.svelte
+msgid "{0} paid"
+msgstr "{0} paid"
+
+#: src/routes/[[locale]]/[network]/(explorer)/network/+page.svelte
+msgid "Account origins<0/>"
+msgstr "Account origins<0/>"
+
+#: src/routes/[[locale]]/[network]/(explorer)/network/origins/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/network/origins/[creator]/+page.svelte
+msgid "Account origins are unavailable on this network."
+msgstr "Account origins are unavailable on this network."
+
+#: src/routes/[[locale]]/[network]/(explorer)/network/origins/+page.svelte
+msgid "Account origins are unavailable right now."
+msgstr "Account origins are unavailable right now."
+
+#: src/routes/[[locale]]/[network]/(explorer)/network/origins/+page.svelte
+msgid "Loading account origins..."
+msgstr "Loading account origins..."
+
+#: src/routes/[[locale]]/[network]/(explorer)/network/origins/+page.svelte
+msgid "Creations by how RAM arrived"
+msgstr "Creations by how RAM arrived"
+
+#. placeholder {0}: formatNumber(totals.creations, locale)
+#: src/routes/[[locale]]/[network]/(explorer)/network/origins/+page.svelte
+msgid "{0} accounts"
+msgstr "{0} accounts"
+
+#: src/routes/[[locale]]/[network]/(explorer)/network/origins/+page.svelte
+msgid "Top creators"
+msgstr "Top creators"
+
+#: src/routes/[[locale]]/[network]/(explorer)/network/origins/+page.svelte
+msgid "How RAM arrives"
+msgstr "How RAM arrives"
+
+#: src/routes/[[locale]]/[network]/(explorer)/network/origins/[creator]/+page.svelte
+msgid "Accounts created by day"
+msgstr "Accounts created by day"
+
+#: src/routes/[[locale]]/[network]/(explorer)/network/origins/[creator]/+page.svelte
+msgid "Daily figures are unavailable right now."
+msgstr "Daily figures are unavailable right now."
+
+#: src/routes/[[locale]]/[network]/(explorer)/network/origins/[creator]/+page.svelte
+msgid "<0/> accounts"
+msgstr "<0/> accounts"
+
+#: src/routes/[[locale]]/[network]/(explorer)/network/origins/[creator]/+page.svelte
+msgid "Recently created accounts"
+msgstr "Recently created accounts"
+
+#: src/routes/[[locale]]/[network]/(explorer)/network/origins/[creator]/+page.svelte
+msgid "RAM arrived"
+msgstr "RAM arrived"
+
+#: src/routes/[[locale]]/[network]/(explorer)/network/origins/[creator]/+page.svelte
+msgid "This account has not created any accounts."
+msgstr "This account has not created any accounts."
+
+#: src/routes/[[locale]]/[network]/(explorer)/network/origins/[creator]/+page.svelte
+msgid "Created accounts are unavailable right now."
+msgstr "Created accounts are unavailable right now."
+
+#: src/routes/[[locale]]/[network]/(explorer)/network/origins/[creator]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
+msgid "Loading accounts..."
+msgstr "Loading accounts..."
+
+#: src/routes/[[locale]]/[network]/(explorer)/network/origins/[creator]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/events/+page.svelte
+msgid "Show older"
+msgstr "Show older"
+
+#: src/routes/[[locale]]/[network]/(explorer)/network/origins/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/network/origins/[creator]/+page.ts
+msgid "Account origins"
+msgstr "Account origins"
+
+#: src/lib/components/origins/labels.svelte.ts
+msgid "Bought"
+msgstr "Bought"
+
+#: src/lib/components/origins/labels.svelte.ts
+msgid "Transferred"
+msgstr "Transferred"
+
+#: src/lib/components/origins/labels.svelte.ts
+msgid "Gifted"
+msgstr "Gifted"
+
+#: src/lib/components/origins/labels.svelte.ts
+msgid "Network-funded"
+msgstr "Network-funded"
+
+#: src/lib/components/origins/labels.svelte.ts
+msgid "Set by the system"
+msgstr "Set by the system"
+
+#: src/lib/components/origins/labels.svelte.ts
+msgid "No RAM"
+msgstr "No RAM"
+
+#: src/lib/components/origins/labels.svelte.ts
+msgid "The creator bought RAM for the new account."
+msgstr "The creator bought RAM for the new account."
+
+#: src/lib/components/origins/labels.svelte.ts
+msgid "The creator moved some of its own RAM to the new account; the creator can't take it back."
+msgstr "The creator moved some of its own RAM to the new account; the creator can't take it back."
+
+#: src/lib/components/origins/labels.svelte.ts
+msgid "The creator gifted RAM it can take back once the account returns it."
+msgstr "The creator gifted RAM it can take back once the account returns it."
+
+#: src/lib/components/origins/labels.svelte.ts
+msgid "The network-funded onboarding program paid for the RAM."
+msgstr "The network-funded onboarding program paid for the RAM."
+
+#: src/lib/components/origins/labels.svelte.ts
+msgid "A privileged action set the RAM quota directly."
+msgstr "A privileged action set the RAM quota directly."
+
+#: src/lib/components/origins/labels.svelte.ts
+msgid "The account arrived with no RAM of its own."
+msgstr "The account arrived with no RAM of its own."
+
+#: src/lib/components/origins/labels.svelte.ts
+msgid "Last 30 days"
+msgstr "Last 30 days"
+
+#: src/lib/components/origins/labels.svelte.ts
+msgid "Last 90 days"
+msgstr "Last 90 days"
+
+#: src/lib/components/origins/labels.svelte.ts
+msgid "Last year"
+msgstr "Last year"
+
+#: src/lib/components/origins/labels.svelte.ts
+msgid "Since launch"
+msgstr "Since launch"
+
+#: src/lib/components/onboarding/propose.svelte
+msgid "Review proposal"
+msgstr "Review proposal"
+
+#: src/lib/components/onboarding/propose.svelte
+msgid "Creator account"
+msgstr "Creator account"
+
+#: src/lib/components/onboarding/propose.svelte
+msgid "Daily quota in bytes"
+msgstr "Daily quota in bytes"
+
+#: src/lib/components/onboarding/propose.svelte
+msgid "Application link"
+msgstr "Application link"
+
+#: src/lib/components/onboarding/propose.svelte
+msgid "Change request link"
+msgstr "Change request link"
+
+#: src/lib/components/onboarding/propose.svelte
+msgid "An open proposal already acts on this: <0>{0} ({1}/{2})</0>"
+msgstr "An open proposal already acts on this: <0>{0} ({1}/{2})</0>"
+
+#: src/lib/components/onboarding/propose.svelte
+msgid "Producers usually want a link to the case for this change."
+msgstr "Producers usually want a link to the case for this change."
+
+#: src/lib/components/onboarding/propose.svelte
+msgid "Resolving approvers..."
+msgstr "Resolving approvers..."
+
+#: src/lib/components/onboarding/propose.svelte
+msgid "Needs"
+msgstr "Needs"
+
+#: src/lib/components/onboarding/propose.svelte
+msgid "Requests"
+msgstr "Requests"
+
+#: src/lib/components/onboarding/propose.svelte
+msgid "1 approval"
+msgstr "1 approval"
+
+#. placeholder {0}: formatNumber(review.approvers.length, locale)
+#: src/lib/components/onboarding/propose.svelte
+msgid "{0} approvals"
+msgstr "{0} approvals"
+
+#: src/lib/components/onboarding/propose.svelte
+msgid "Expires"
+msgstr "Expires"
+
+#. placeholder {0}: formatNumber(expireDays(action), locale)
+#: src/lib/components/onboarding/propose.svelte
+msgid "in {0} days"
+msgstr "in {0} days"
+
+#: src/lib/components/onboarding/propose.svelte
+#: src/lib/components/onboarding/propose.svelte
+msgid "Link"
+msgstr "Link"
+
+#. placeholder {0}: MESSAGER
+#: src/lib/components/onboarding/propose.svelte
+msgid "Sent first as a {0} message"
+msgstr "Sent first as a {0} message"
+
+#. placeholder {0}: MESSAGER
+#: src/lib/components/onboarding/propose.svelte
+msgid "Left out: {0} does not exist on this chain"
+msgstr "Left out: {0} does not exist on this chain"
+
+#: src/lib/components/onboarding/propose.svelte
+msgid "Proposing..."
+msgstr "Proposing..."
+
+#: src/lib/components/onboarding/propose.svelte
+msgid "Propose"
+msgstr "Propose"
+
+#: src/lib/components/onboarding/propose.svelte
+msgid "Sign in to propose this from your account."
+msgstr "Sign in to propose this from your account."
+
+#: src/lib/components/onboarding/labels.svelte.ts
+msgid "Gift"
+msgstr "Gift"
+
+#: src/lib/components/onboarding/labels.svelte.ts
+msgid "Return"
+msgstr "Return"
+
+#: src/lib/components/onboarding/labels.svelte.ts
+msgid "Creator added"
+msgstr "Creator added"
+
+#: src/lib/components/onboarding/labels.svelte.ts
+msgid "Creator removed"
+msgstr "Creator removed"
+
+#: src/lib/components/onboarding/labels.svelte.ts
+msgid "Quota changed"
+msgstr "Quota changed"
+
+#: src/lib/components/onboarding/labels.svelte.ts
+msgid "Creator suspended"
+msgstr "Creator suspended"
+
+#: src/lib/components/onboarding/labels.svelte.ts
+msgid "Creator resumed"
+msgstr "Creator resumed"
+
+#: src/lib/components/onboarding/labels.svelte.ts
+msgid "Gifting turned on"
+msgstr "Gifting turned on"
+
+#: src/lib/components/onboarding/labels.svelte.ts
+msgid "Gifting turned off"
+msgstr "Gifting turned off"
+
+#: src/lib/components/onboarding/labels.svelte.ts
+#: src/lib/components/onboarding/labels.svelte.ts
+msgid "RAM bought"
+msgstr "RAM bought"
+
+#: src/lib/components/onboarding/labels.svelte.ts
+msgid "RAM transferred"
+msgstr "RAM transferred"
+
+#: src/lib/components/onboarding/labels.svelte.ts
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
+msgid "Admit a creator"
+msgstr "Admit a creator"
+
+#: src/lib/components/onboarding/labels.svelte.ts
+msgid "Change a quota"
+msgstr "Change a quota"
+
+#: src/lib/components/onboarding/labels.svelte.ts
+msgid "Suspend a creator"
+msgstr "Suspend a creator"
+
+#: src/lib/components/onboarding/labels.svelte.ts
+msgid "Resume a creator"
+msgstr "Resume a creator"
+
+#: src/lib/components/onboarding/labels.svelte.ts
+msgid "Remove a creator"
+msgstr "Remove a creator"
+
+#: src/lib/components/onboarding/labels.svelte.ts
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
+msgid "Turn gifting on"
+msgstr "Turn gifting on"
+
+#: src/lib/components/onboarding/labels.svelte.ts
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
+msgid "Turn gifting off"
+msgstr "Turn gifting off"
+
+#. placeholder {0}: approver.actor
+#: src/lib/components/onboarding/labels.svelte.ts
+msgid "{0}'s key"
+msgstr "{0}'s key"
+
+#. placeholder {0}: threshold
+#. placeholder {1}: total
+#: src/lib/components/onboarding/labels.svelte.ts
+msgid "{0} of {1} producers"
+msgstr "{0} of {1} producers"
+
+#. placeholder {0}: threshold
+#. placeholder {1}: total
+#: src/lib/components/onboarding/labels.svelte.ts
+msgid "{0} of {1} accounts"
+msgstr "{0} of {1} accounts"
+
+#: src/lib/components/onboarding/labels.svelte.ts
+msgid "Enter an account name."
+msgstr "Enter an account name."
+
+#. placeholder {0}: creator
+#: src/lib/components/onboarding/labels.svelte.ts
+msgid "{0} does not exist on this chain."
+msgstr "{0} does not exist on this chain."
+
+#: src/lib/components/onboarding/labels.svelte.ts
+msgid "Enter a daily quota in bytes."
+msgstr "Enter a daily quota in bytes."
+
+#. placeholder {0}: formatNumber(QUOTA_FLOOR, locale)
+#: src/lib/components/onboarding/labels.svelte.ts
+msgid "A quota must be at least {0} bytes."
+msgstr "A quota must be at least {0} bytes."
+
+#. placeholder {0}: creator
+#: src/lib/components/onboarding/labels.svelte.ts
+msgid "{0} is already a creator."
+msgstr "{0} is already a creator."
+
+#. placeholder {0}: creator
+#. placeholder {0}: name
+#: src/lib/components/onboarding/labels.svelte.ts
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
+msgid "{0} is not a registered creator."
+msgstr "{0} is not a registered creator."
+
+#. placeholder {0}: creator
+#: src/lib/components/onboarding/labels.svelte.ts
+msgid "{0} is already suspended."
+msgstr "{0} is already suspended."
+
+#. placeholder {0}: creator
+#: src/lib/components/onboarding/labels.svelte.ts
+msgid "{0} is not suspended."
+msgstr "{0} is not suspended."
+
+#. placeholder {0}: creator
+#: src/lib/components/onboarding/labels.svelte.ts
+msgid "{0} already has this quota."
+msgstr "{0} already has this quota."
+
+#: src/lib/components/onboarding/labels.svelte.ts
+msgid "Gifting"
+msgstr "Gifting"
+
+#: src/lib/components/onboarding/labels.svelte.ts
+msgid "Suspended"
+msgstr "Suspended"
+
+#: src/lib/components/onboarding/hubcard.svelte
+#: src/lib/components/onboarding/labels.svelte.ts
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
+msgid "Program disabled"
+msgstr "Program disabled"
+
+#: src/lib/components/onboarding/labels.svelte.ts
+msgid "Removed"
+msgstr "Removed"
+
+#: src/lib/components/onboarding/labels.svelte.ts
+msgid "No net outflow"
+msgstr "No net outflow"
+
+#. placeholder {0}: formatNumber(Math.round(days * 24), locale)
+#: src/lib/components/onboarding/labels.svelte.ts
+msgid "{0} hours"
+msgstr "{0} hours"
+
+#. placeholder {0}: formatNumber(Math.round(days), locale)
+#. placeholder {0}: formatNumber(days, locale, { maximumFractionDigits: 1 })
+#: src/lib/components/onboarding/labels.svelte.ts
+#: src/lib/components/onboarding/labels.svelte.ts
+msgid "{0} days"
+msgstr "{0} days"
+
+#. placeholder {0}: formatNumber(days / 365, locale, { maximumFractionDigits: 1 })
+#: src/lib/components/onboarding/labels.svelte.ts
+msgid "{0} years"
+msgstr "{0} years"
+
+#: src/lib/components/onboarding/labels.svelte.ts
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
+msgid "Gifts"
+msgstr "Gifts"
+
+#: src/lib/components/onboarding/labels.svelte.ts
+msgid "Returns"
+msgstr "Returns"
+
+#: src/lib/components/onboarding/labels.svelte.ts
+msgid "Admin"
+msgstr "Admin"
+
+#: src/lib/components/onboarding/labels.svelte.ts
+msgid "RAM movements"
+msgstr "RAM movements"
+
+#: src/lib/components/onboarding/empty.svelte
+#: src/lib/components/onboarding/hubcard.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/events/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.ts
+msgid "Network-funded onboarding"
+msgstr "Network-funded onboarding"
+
+#: src/lib/components/onboarding/empty.svelte
+msgid ""
+"The gift program runs from <0/>, an account VP-0001 creates\n"
+"when producers enact it. Its endowment, creators and gifts appear here once that account exists\n"
+"on chain."
+msgstr ""
+"The gift program runs from <0/>, an account VP-0001 creates\n"
+"when producers enact it. Its endowment, creators and gifts appear here once that account exists\n"
+"on chain."
+
+#: src/lib/components/onboarding/hubcard.svelte
+msgid "1 creator,"
+msgstr "1 creator,"
+
+#. placeholder {0}: formatNumber(program.creators.length, locale)
+#: src/lib/components/onboarding/hubcard.svelte
+msgid "{0} creators,"
+msgstr "{0} creators,"
+
+#: src/lib/components/onboarding/hubcard.svelte
+msgid "enabled"
+msgstr "enabled"
+
+#: src/lib/components/onboarding/hubcard.svelte
+msgid "disabled"
+msgstr "disabled"
+
+#: src/lib/components/onboarding/hubcard.svelte
+msgid ""
+"Registered creators gift RAM from a network endowment to each account they create, under\n"
+"daily quotas producers set by msig."
+msgstr ""
+"Registered creators gift RAM from a network endowment to each account they create, under\n"
+"daily quotas producers set by msig."
+
+#: src/lib/components/onboarding/hubcard.svelte
+msgid "View onboarding"
+msgstr "View onboarding"
+
+#: src/lib/components/onboarding/hubcard.svelte
+msgid "Program figures are unavailable right now."
+msgstr "Program figures are unavailable right now."
+
+#: src/lib/components/onboarding/hubcard.svelte
+#: src/lib/components/onboarding/hubcard.svelte
+msgid "Endowment"
+msgstr "Endowment"
+
+#: src/lib/components/onboarding/hubcard.svelte
+msgid "Figures appear here once VP-0001 creates <0/> and seeds it with RAM."
+msgstr "Figures appear here once VP-0001 creates <0/> and seeds it with RAM."
+
+#. placeholder {0}: formatNumber(observed.gifts, locale)
+#. placeholder {1}: OBSERVED_DAYS
+#: src/lib/components/onboarding/hubcard.svelte
+msgid "{0} gifts in {1} days"
+msgstr "{0} gifts in {1} days"
+
+#. placeholder {0}: formatBytes(endowment.ram_quota)
+#: src/lib/components/onboarding/hubcard.svelte
+msgid "available of {0} held"
+msgstr "available of {0} held"
+
+#: src/lib/components/onboarding/hubcard.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
+msgid "Observed runway"
+msgstr "Observed runway"
+
+#. placeholder {0}: OBSERVED_DAYS
+#: src/lib/components/onboarding/hubcard.svelte
+msgid "at the last {0} days' pace"
+msgstr "at the last {0} days' pace"
+
+#: src/lib/components/onboarding/hubcard.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
+msgid "Committed runway"
+msgstr "Committed runway"
+
+#: src/lib/components/onboarding/hubcard.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
+msgid "No active quota"
+msgstr "No active quota"
+
+#. placeholder {0}: formatBytes(committed.suspendedQuota)
+#: src/lib/components/onboarding/hubcard.svelte
+msgid "{0} quota suspended"
+msgstr "{0} quota suspended"
+
+#: src/lib/components/onboarding/hubcard.svelte
+msgid "if every quota is used daily"
+msgstr "if every quota is used daily"
+
+#: src/lib/components/onboarding/giftschart.svelte
+msgid "No creator"
+msgstr "No creator"
+
+#: src/lib/components/onboarding/giftschart.svelte
+msgid "Bytes gifted per day by creator"
+msgstr "Bytes gifted per day by creator"
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
+msgid "Program status"
+msgstr "Program status"
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
+msgid "Gifting is on"
+msgstr "Gifting is on"
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
+msgid "Gifting is off"
+msgstr "Gifting is off"
+
+#. placeholder {0}: formatNumber(program.suspendedCount, locale)
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
+msgid "{0} suspended."
+msgstr "{0} suspended."
+
+#. placeholder {0}: formatNumber(gifting, locale)
+#. placeholder {1}: formatNumber(program.creators.length, locale)
+#. placeholder {2}: formatBytes(program.available)
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
+msgid ""
+"{0} of {1} registered\n"
+"can gift from {2}. <0/>"
+msgstr ""
+"{0} of {1} registered\n"
+"can gift from {2}. <0/>"
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
+msgid ""
+"No creator can gift. Registrations and quotas stay in place for when gifting is turned\n"
+"back on."
+msgstr ""
+"No creator can gift. Registrations and quotas stay in place for when gifting is turned\n"
+"back on."
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
+msgid "Turning gifting off stops every creator at once. Needs <0/>."
+msgstr "Turning gifting off stops every creator at once. Needs <0/>."
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
+msgid ""
+"Turning gifting on needs <0/>. Whoever executes it runs any\n"
+"open proposal to turn gifting off first, in the same transaction."
+msgstr ""
+"Turning gifting on needs <0/>. Whoever executes it runs any\n"
+"open proposal to turn gifting off first, in the same transaction."
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
+msgid "Open proposals"
+msgstr "Open proposals"
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
+msgid "Open proposals are unavailable right now."
+msgstr "Open proposals are unavailable right now."
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
+msgid "Loading proposals..."
+msgstr "Loading proposals..."
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
+msgid "No open proposal acts on <0/>."
+msgstr "No open proposal acts on <0/>."
+
+#. placeholder {0}: formatNumber(proposal.standby, locale)
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
+msgid ", {0} standby not counted"
+msgstr ", {0} standby not counted"
+
+#. placeholder {0}: formatNumber(proposal.satisfied ?? 0, locale)
+#. placeholder {1}: formatNumber( proposal.threshold, locale )
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
+msgid "{0} of {1} approved<0/>"
+msgstr "{0} of {1} approved<0/>"
+
+#. placeholder {0}: expires(proposal.expiration)
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
+msgid "expires {0}"
+msgstr "expires {0}"
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
+msgid "Needs <0/>."
+msgstr "Needs <0/>."
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
+msgid "Review admission"
+msgstr "Review admission"
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
+msgid "Change one creator"
+msgstr "Change one creator"
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
+msgid "Quota changes, suspensions and removals are proposed from each creator's page."
+msgstr "Quota changes, suspensions and removals are proposed from each creator's page."
+
+#. placeholder {0}: formatBytes(row.daily_quota_bytes)
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
+msgid "{0}/day"
+msgstr "{0}/day"
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
+msgid "No creator is registered."
+msgstr "No creator is registered."
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
+msgid "Who approves what"
+msgstr "Who approves what"
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
+msgid "Reading permissions..."
+msgstr "Reading permissions..."
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
+msgid "Permission details"
+msgstr "Permission details"
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
+msgid "Linked actions"
+msgstr "Linked actions"
+
+#. placeholder {0}: authority(permission)
+#. placeholder {1}: permission.authority.threshold
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
+msgid "{0} (threshold {1})"
+msgstr "{0} (threshold {1})"
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
+msgid "Current window"
+msgstr "Current window"
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
+msgid "Daily quota"
+msgstr "Daily quota"
+
+#. placeholder {0}: formatNumber(row.daily_quota_bytes, locale)
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
+msgid "({0} bytes)"
+msgstr "({0} bytes)"
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
+msgid "Used this window"
+msgstr "Used this window"
+
+#. placeholder {0}: formatBytes(Math.max(0, row.daily_quota_bytes - used))
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
+msgid "<0/> <1/>, {0} left"
+msgstr "<0/> <1/>, {0} left"
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
+msgid "Window"
+msgstr "Window"
+
+#. placeholder {0}: time(new Date(row.window_start).toISOString())
+#. placeholder {1}: relative(ends)
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
+msgid "Opened {0}, resets {1}"
+msgstr "Opened {0}, resets {1}"
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
+msgid "Opens on the next gift"
+msgstr "Opens on the next gift"
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
+msgid "Gifts per day"
+msgstr "Gifts per day"
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
+msgid "Quota windows"
+msgstr "Quota windows"
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
+msgid "Quota windows are unavailable right now."
+msgstr "Quota windows are unavailable right now."
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
+msgid "Opened"
+msgstr "Opened"
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
+msgid "Quota"
+msgstr "Quota"
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
+msgid "Ended"
+msgstr "Ended"
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
+msgid "Open"
+msgstr "Open"
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
+msgid "After 24 hours"
+msgstr "After 24 hours"
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
+msgid "No quota window has opened."
+msgstr "No quota window has opened."
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
+msgid "Registration history"
+msgstr "Registration history"
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
+msgid "No registrations."
+msgstr "No registrations."
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
+msgid "Gifted accounts"
+msgstr "Gifted accounts"
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
+msgid "No gifted accounts."
+msgstr "No gifted accounts."
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
+msgid "Gifted accounts are unavailable right now."
+msgstr "Gifted accounts are unavailable right now."
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
+msgid "Propose a change"
+msgstr "Propose a change"
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
+msgid "Set quota"
+msgstr "Set quota"
+
+#. placeholder {0}: name
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
+msgid "Resume {0}"
+msgstr "Resume {0}"
+
+#. placeholder {0}: name
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
+msgid "Lets {0} gift again."
+msgstr "Lets {0} gift again."
+
+#. placeholder {0}: name
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
+msgid "Suspend {0}"
+msgstr "Suspend {0}"
+
+#. placeholder {0}: name
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
+msgid "Stops {0}'s gifts and keeps its registration."
+msgstr "Stops {0}'s gifts and keeps its registration."
+
+#. placeholder {0}: name
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
+msgid "Remove {0}"
+msgstr "Remove {0}"
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
+msgid "Deletes the registration, quota and window."
+msgstr "Deletes the registration, quota and window."
+
+#. placeholder {0}: name
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
+msgid "Add {0}"
+msgstr "Add {0}"
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/+layout.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
+msgid "Creators"
+msgstr "Creators"
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/+layout.svelte
+msgid "Manage"
+msgstr "Manage"
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/+layout.svelte
+msgid "Network-funded onboarding is unavailable on this network."
+msgstr "Network-funded onboarding is unavailable on this network."
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/+layout.svelte
+msgid "Loading the gift program..."
+msgstr "Loading the gift program..."
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/+layout.svelte
+msgid "The gift program's figures are unavailable right now."
+msgstr "The gift program's figures are unavailable right now."
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
+msgid "Endowment available"
+msgstr "Endowment available"
+
+#. placeholder {0}: formatBytes(endowment.ram_quota)
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
+msgid "of {0} held"
+msgstr "of {0} held"
+
+#. placeholder {0}: formatBytes(Math.max(0, observed.perDay))
+#. placeholder {1}: OBSERVED_DAYS
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
+msgid "at {0} a day, the last {1} days' net outflow"
+msgstr "at {0} a day, the last {1} days' net outflow"
+
+#. placeholder {0}: formatBytes(committed.activeQuota)
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
+msgid "{0} daily quota across 1 creator"
+msgstr "{0} daily quota across 1 creator"
+
+#. placeholder {0}: formatBytes(committed.activeQuota)
+#. placeholder {1}: formatNumber( committed.activeCreators, locale )
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
+msgid "{0} daily quota across {1} creators"
+msgstr "{0} daily quota across {1} creators"
+
+#. placeholder {0}: formatBytes(committed.suspendedQuota)
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
+msgid ", plus {0} suspended"
+msgstr ", plus {0} suspended"
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
+msgid "Program"
+msgstr "Program"
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
+msgid "Enabled"
+msgstr "Enabled"
+
+#. placeholder {0}: formatNumber(program.creators.length, locale)
+#. placeholder {1}: formatNumber( program.suspendedCount, locale )
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
+msgid "{0} registered, {1} suspended"
+msgstr "{0} registered, {1} suspended"
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
+msgid "Bytes gifted per day"
+msgstr "Bytes gifted per day"
+
+#. placeholder {0}: formatNumber(observed.gifts, locale)
+#. placeholder {1}: OBSERVED_DAYS
+#. placeholder {2}: formatBytes( observed.giftBytes )
+#. placeholder {3}: formatBytes(observed.returns)
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
+msgid "{0} gifts in the last {1} days, {2} gifted, {3} returned"
+msgstr "{0} gifts in the last {1} days, {2} gifted, {3} returned"
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/events/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/events/+page.svelte
+msgid "Creator"
+msgstr "Creator"
+
+#. placeholder {0}: OBSERVED_DAYS
+#. placeholder {0}: OBSERVED_DAYS
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/+page.svelte
+msgid "Gifts, {0} days"
+msgstr "Gifts, {0} days"
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
+msgid "No creators are registered."
+msgstr "No creators are registered."
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
+msgid "Recent events"
+msgstr "Recent events"
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
+msgid "Recent events are unavailable right now."
+msgstr "Recent events are unavailable right now."
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
+msgid "No events yet."
+msgstr "No events yet."
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
+msgid "All events ›"
+msgstr "All events ›"
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/+page.svelte
+msgid "Registered"
+msgstr "Registered"
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/+page.svelte
+msgid "Gifted, 1 year"
+msgstr "Gifted, 1 year"
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/+page.svelte
+msgid "No creator has registered yet."
+msgstr "No creator has registered yet."
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/events/+page.svelte
+msgid "Every creator"
+msgstr "Every creator"
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/events/+page.svelte
+msgid "Time"
+msgstr "Time"
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/events/+page.svelte
+msgid "Event"
+msgstr "Event"
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/events/+page.svelte
+msgid "No events match."
+msgstr "No events match."
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/events/+page.svelte
+msgid "Events are unavailable right now."
+msgstr "Events are unavailable right now."
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/events/+page.svelte
+msgid "Loading events..."
+msgstr "Loading events..."
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.ts
+msgid "Manage onboarding"
+msgstr "Manage onboarding"
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/events/+page.ts
+msgid "Onboarding events"
+msgstr "Onboarding events"
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/+page.ts
+msgid "Onboarding creators"
+msgstr "Onboarding creators"
+
+#: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.ts
+msgid "Onboarding creator"
+msgstr "Onboarding creator"

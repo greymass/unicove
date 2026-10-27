@@ -15,7 +15,8 @@ const EXPLORER_SEGMENTS = [
 	'key',
 	'msig',
 	'transaction',
-	'token'
+	'token',
+	'onboarding'
 ];
 
 export function isActive(

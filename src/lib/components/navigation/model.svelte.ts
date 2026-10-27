@@ -64,7 +64,12 @@ export function buildNavModel(context: UnicoveContext, network: NetworkState): N
 			href: urlPath('/governance'),
 			text: 'Governance',
 			icon: LandmarkIcon,
-			match: [urlPath('/producers'), urlPath('/sentiment'), urlPath('/proposals')]
+			match: [
+				urlPath('/producers'),
+				urlPath('/sentiment'),
+				urlPath('/proposals'),
+				urlPath('/onboarding')
+			]
 		},
 		{ href: urlPath('/token'), text: 'Tokens', icon: CoinsIcon }
 	];

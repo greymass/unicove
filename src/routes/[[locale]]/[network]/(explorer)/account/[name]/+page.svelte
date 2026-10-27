@@ -16,6 +16,7 @@
 	import { Currencies } from '$lib/types/currencies.js';
 	import { getNonSystemTokenBalances } from '$lib/utils/balance.js';
 	import SystemTokenSwap from '$lib/components/banner/systemTokenSwap.svelte';
+	import CreationLine from '$lib/components/origins/creationline.svelte';
 
 	const { data } = $props();
 
@@ -190,5 +191,8 @@
 				{/if}
 			</Stack>
 		</Card>
+		{#if data.network.supports('creationindex')}
+			<CreationLine account={String(data.account.name)} />
+		{/if}
 	</div>
 </div>

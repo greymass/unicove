@@ -5,6 +5,7 @@
 	import AccountLink from '$lib/components/elements/account.svelte';
 	import TopicCard from '$lib/components/sentiment/topicCard.svelte';
 	import { Vote, Shield, FileText } from '@lucide/svelte';
+	import OnboardingCard from '$lib/components/onboarding/hubcard.svelte';
 	import type { PageData } from './$types';
 
 	interface Props {
@@ -142,6 +143,10 @@
 				</Stack>
 			</div>
 		</Card>
+	{/if}
+
+	{#if network.supports('giftprogram')}
+		<OnboardingCard />
 	{/if}
 
 	{#if network.supports('proposals')}

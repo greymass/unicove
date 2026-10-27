@@ -7,6 +7,7 @@ export const CREATIONINDEX_ROUTES = [
 	'get_program_daily',
 	'get_quota',
 	'get_program_events',
+	'get_program_proposals',
 	'get_endowment',
 	'health'
 ] as const;
@@ -172,6 +173,36 @@ export interface ProgramEventsPage {
 	next: number;
 }
 
+export type ProgramProposalStatus = 'open' | 'expired' | 'executed' | 'cancelled';
+
+export interface ProgramProposalAction {
+	account: string;
+	name: string;
+	permission: string;
+}
+
+export interface ProgramProposal {
+	proposer: string;
+	proposal_name: string;
+	status: ProgramProposalStatus;
+	global_seq: number;
+	block_num: number;
+	block_time: string;
+	trx_id: string;
+	expiration: string;
+	actions: ProgramProposalAction[];
+	closed_by: string;
+	closed_global_seq: number | null;
+	closed_time: string | null;
+}
+
+export interface ProgramProposalsPage {
+	program_account: string;
+	proposals: ProgramProposal[];
+	more: boolean;
+	next: number;
+}
+
 export interface Endowment {
 	program_account: string;
 	ram_quota: number;
@@ -185,6 +216,7 @@ export interface Health {
 	last_global_seq: number;
 	last_block_time: string | null;
 	program_last_global_seq: number;
+	msig_last_global_seq: number;
 	creations: number;
 	program_account: string;
 }
@@ -290,9 +322,16 @@ export class CreationindexClient {
 
 	getProgramEvents(
 		filter: { type?: ProgramEventType; program_creator?: string } = {},
-		page: PageParams = {}
+		page: PageParams | NewestFirstPageParams = {}
 	): Promise<ProgramEventsPage> {
 		return this.fetch('get_program_events', { ...filter, ...page });
+	}
+
+	getProgramProposals(
+		status: ProgramProposalStatus | 'all' = 'open',
+		page: PageParams | NewestFirstPageParams = {}
+	): Promise<ProgramProposalsPage> {
+		return this.fetch('get_program_proposals', { status, ...page });
 	}
 
 	getEndowment(): Promise<Endowment> {

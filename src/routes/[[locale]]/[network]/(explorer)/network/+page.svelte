@@ -2,6 +2,7 @@
 	import { getContext, onMount } from 'svelte';
 	import { Card, DD, DL, DLRow, Stack } from '@wharfkit/svelte-components';
 	import { API } from '@wharfkit/antelope';
+	import ChevronRight from '@lucide/svelte/icons/chevron-right';
 
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import About from '$lib/components/seo/about.svelte';
@@ -91,6 +92,14 @@
 					</Card>
 					<Card title="New accounts">
 						<StatsHistory data={series.newAccounts} label="New accounts" />
+						{#if data.network.supports('creationindex')}
+							<a
+								class="text-primary -mt-2 flex items-center justify-end gap-0.5 text-sm"
+								href={context.urlPath('/network/origins')}
+							>
+								Account origins<ChevronRight class="size-4" />
+							</a>
+						{/if}
 					</Card>
 				</div>
 			{:else}

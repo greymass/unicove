@@ -72,6 +72,32 @@ describe('CreationindexClient', () => {
 		);
 	});
 
+	test('pages program events newest first', async () => {
+		const { urls, client } = recorder({ events: [], more: false, next: 0 });
+		await client.getProgramEvents(
+			{ type: 'admin' },
+			{ order: 'desc', before: 396546776, limit: 50 }
+		);
+		expect(urls[0]).toBe(
+			'/jungle4/api/creationindex/get_program_events?type=admin&order=desc&before=396546776&limit=50'
+		);
+	});
+
+	test('lists program proposals by status', async () => {
+		const { urls, client } = recorder({
+			program_account: 'gift.gm',
+			proposals: [],
+			more: false,
+			next: 0
+		});
+		await client.getProgramProposals();
+		await client.getProgramProposals('all', { order: 'desc', before: 400084415, limit: 10 });
+		expect(urls[0]).toBe('/jungle4/api/creationindex/get_program_proposals?status=open');
+		expect(urls[1]).toBe(
+			'/jungle4/api/creationindex/get_program_proposals?status=all&order=desc&before=400084415&limit=10'
+		);
+	});
+
 	test('returns the response body', async () => {
 		const endowment = {
 			program_account: 'gift.gm',
