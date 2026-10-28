@@ -19,6 +19,7 @@ import {
 import { Contract as MsigContract } from '$lib/wharf/contracts/msig';
 import { Contract as TimeContract } from '$lib/wharf/contracts/eosntime';
 import { generateRandomName } from '$lib/utils/random';
+import { chainPermissions, resolveApprovers } from '$lib/wharf/msig/proposer';
 import { msigInternalPlugins } from '$lib/wharf/plugins';
 
 export interface WalletPluginMultiSigOptions {
@@ -72,8 +73,12 @@ export class WalletPluginMultiSig extends AbstractWalletPlugin implements Wallet
 	}
 
 	getSession(context: TransactContext): Session {
+		let sessionData = this.data.session;
+		while (sessionData.walletPlugin.id === this.id) {
+			sessionData = sessionData.walletPlugin.data.session;
+		}
 		const walletPlugin = this.walletPlugins.find(
-			(plugin) => plugin.id === this.data.session.walletPlugin.id
+			(plugin) => plugin.id === sessionData.walletPlugin.id
 		);
 		if (!walletPlugin) {
 			throw new Error('Wallet plugin not found');
@@ -82,8 +87,8 @@ export class WalletPluginMultiSig extends AbstractWalletPlugin implements Wallet
 			{
 				chain: context.chain,
 				permissionLevel: PermissionLevel.from({
-					actor: this.data.session.actor,
-					permission: this.data.session.permission
+					actor: sessionData.actor,
+					permission: sessionData.permission
 				}),
 				walletPlugin
 			},
@@ -93,20 +98,28 @@ export class WalletPluginMultiSig extends AbstractWalletPlugin implements Wallet
 		);
 	}
 
-	async getSigners(signer: PermissionLevel, context: TransactContext): Promise<PermissionLevel[]> {
-		const account = await context.client.v1.chain.get_account(signer.actor);
-		const permission = account.permissions.find((p) => p.perm_name.equals(signer.permission));
-		if (!permission) {
-			throw new Error('Requested permission not found');
-		}
-		return permission.required_auth.accounts.map((a) => a.permission);
+	async getRequestedSigners(
+		transaction: Transaction,
+		context: TransactContext
+	): Promise<PermissionLevel[]> {
+		const approvers = await resolveApprovers({
+			authorizations: transaction.actions.flatMap((action) =>
+				action.authorization.map((auth) => ({
+					actor: String(auth.actor),
+					permission: String(auth.permission)
+				}))
+			),
+			getPermissions: chainPermissions(context.client),
+			producerCandidates: this.data.topProducers ?? []
+		});
+		return approvers.map((level) => PermissionLevel.from(level));
 	}
 
 	async propose(
 		resolved: ResolvedSigningRequest,
 		context: TransactContext
 	): Promise<WalletPluginSignResponse> {
-		const requested = await this.getSigners(resolved.signer, context);
+		const requested = await this.getRequestedSigners(resolved.transaction, context);
 		const session = this.getSession(context);
 		const msig = new MsigContract({ client: context.client });
 		const eosntime = new TimeContract({ client: context.client });
@@ -116,22 +129,23 @@ export class WalletPluginMultiSig extends AbstractWalletPlugin implements Wallet
 			expireSeconds = this.data.expireSeconds;
 		}
 
-		if (!context.info) {
-			throw new Error('Missing transaction info');
-		}
+		const info = await context.getInfo();
 
 		const trx = Transaction.from({
-			...context.info.getTransactionHeader(expireSeconds),
+			...info.getTransactionHeader(expireSeconds),
 			actions: resolved.transaction.actions,
 			context_free_actions: [],
 			transaction_extensions: []
 		});
 
+		const proposalName = this.data.nextProposalName || generateRandomName();
+		delete this.data.nextProposalName;
+
 		const actions = [
 			msig.action(
 				'propose',
 				{
-					proposal_name: generateRandomName(),
+					proposal_name: proposalName,
 					proposer: session.actor,
 					requested,
 					trx
@@ -148,14 +162,18 @@ export class WalletPluginMultiSig extends AbstractWalletPlugin implements Wallet
 			actions.push(eosntime.action('checktime', { time }));
 		}
 
-		const result = await session.transact(
-			{ actions },
-			{ broadcast: false, transactPlugins: msigInternalPlugins }
-		);
-		return {
-			resolved: result.resolved,
-			signatures: result.signatures
-		};
+		try {
+			const result = await session.transact(
+				{ actions },
+				{ broadcast: false, transactPlugins: msigInternalPlugins }
+			);
+			return {
+				resolved: result.resolved,
+				signatures: result.signatures
+			};
+		} catch (e) {
+			throw new Error(e instanceof Error ? e.message : String(e));
+		}
 	}
 
 	sign(
