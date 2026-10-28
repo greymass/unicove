@@ -43,6 +43,7 @@
 			? formatDateTime(new Date(creation.block_time), locale, {
 					dateStyle: 'medium',
 					timeStyle: undefined,
+					// @wc-ignore
 					timeZone: 'UTC'
 				})
 			: ''

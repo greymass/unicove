@@ -7,9 +7,18 @@ import { loadCatalog, loadIDs, key } from 'virtual:wuchale/proxy' // or proxy/sy
 import { registerLoaders, defaultCollection } from 'wuchale/load-utils'
 
 const catalogs = $state({})
+const collection = defaultCollection(catalogs)
+/** @type {Record<string, unknown>} */
+const current = {}
 
-// for non-reactive
-export const get = registerLoaders(key, loadCatalog, loadIDs, defaultCollection(catalogs))
+// Skip same-catalog writes: every load() calls loadLocale, and rewriting the $state invalidates every translated string
+export const get = registerLoaders(key, loadCatalog, loadIDs, {
+	get: collection.get,
+	set: (loadID, catalog) => {
+		if (current[loadID] === catalog) return
+		current[loadID] = catalog
+		collection.set(loadID, catalog)
+	}
+})
 
-// same function, only will be inside $derived when used
 export default get

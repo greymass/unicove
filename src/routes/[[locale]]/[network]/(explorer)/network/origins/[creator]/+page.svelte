@@ -90,6 +90,7 @@
 		formatDateTime(new Date(time), locale, {
 			dateStyle: 'medium',
 			timeStyle: 'short',
+			// @wc-ignore
 			timeZone: 'UTC'
 		});
 </script>

@@ -50,6 +50,7 @@
 					timeStyle: undefined,
 					month: 'short',
 					day: 'numeric',
+					// @wc-ignore
 					timeZone: 'UTC'
 				})
 			),

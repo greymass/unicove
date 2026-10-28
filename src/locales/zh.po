@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2026-10-27T00:12:02.954Z\n"
+"PO-Revision-Date: 2026-10-28T06:25:56.867Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -295,8 +295,8 @@ msgstr "总计"
 msgid "KB (RAM)"
 msgstr "KB (RAM)"
 
-#. placeholder {0}: balance.token.name
 #. placeholder {0}: balance.token.symbol.name
+#. placeholder {0}: balance.token.name
 #: src/lib/components/card/tokenbalance.svelte
 #: src/lib/components/card/tokenoverview.svelte
 msgid "{0} (RAM)"
@@ -511,12 +511,12 @@ msgstr "转账"
 msgid "+ {0} ms (CPU)"
 msgstr "+ {0} 毫秒 (CPU)"
 
-#. placeholder {0}: data.powup_net
 #. placeholder {0}: data.powup_cpu
-#. placeholder {0}: key.weight
+#. placeholder {0}: data.powup_net
 #. placeholder {0}: account.weight
 #. placeholder {0}: key.weight
 #. placeholder {0}: account.weight
+#. placeholder {0}: key.weight
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio/newaccount.svelte
@@ -1841,10 +1841,10 @@ msgstr "药丸选择"
 msgid "Select a date range"
 msgstr "选择日期范围"
 
-#. placeholder {0}: JSON.stringify(tokenSelected, null, 2)
-#. placeholder {0}: imageOptionSelected.label
-#. placeholder {0}: selectedFormOption.label
 #. placeholder {0}: selected.label
+#. placeholder {0}: selectedFormOption.label
+#. placeholder {0}: imageOptionSelected.label
+#. placeholder {0}: JSON.stringify(tokenSelected, null, 2)
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
@@ -2225,8 +2225,8 @@ msgstr "此构建的 wharfkit/cli 生成的合约以及它使用的链上帐户�
 msgid "Refresh"
 msgstr "刷新"
 
-#. placeholder {0}: refreshed
 #. placeholder {0}: formatDate(proposal.updated)
+#. placeholder {0}: refreshed
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/market/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.svelte
 msgid "Updated {0}"
@@ -3009,10 +3009,10 @@ msgstr "没有反对票"
 msgid "Loading topic..."
 msgstr "正在加载主题..."
 
-#. placeholder {0}: data.network.token.name
-#. placeholder {1}: data.network.getRamToken().name
 #. placeholder {0}: String(network.chain.systemToken?.symbol.name)
 #. placeholder {1}: String(ramtoken.name)
+#. placeholder {0}: data.network.token.name
+#. placeholder {1}: data.network.getRamToken().name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/charts.svelte
 msgid "Swap {0}/{1}"
@@ -3028,8 +3028,8 @@ msgstr "兑换 {0}/{1}"
 msgid "Available"
 msgstr "可用"
 
-#. placeholder {0}: String(data.quote.symbol.name)
 #. placeholder {0}: props.network.token.name
+#. placeholder {0}: String(data.quote.symbol.name)
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/legacy-token-swap.svelte
 msgid "Swap to {0}"
@@ -3154,10 +3154,6 @@ msgstr "由 {0} 在 {1} 网络上提出的多重签名提案"
 msgid "Transaction not found: {0}"
 msgstr "未找到交易：{0}"
 
-#: src/lib/components/onboarding/giftschart.svelte
-#: src/lib/components/origins/creationline.svelte
-#: src/lib/components/origins/kindchart.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/network/origins/[creator]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
 msgid "UTC"
@@ -3174,9 +3170,9 @@ msgid "Multisig Sentiment"
 msgstr "多重签名情绪"
 
 #. placeholder {0}: msigData.statistics.totalVotes
+#. placeholder {0}: statistics.totalVotes
+#. placeholder {0}: statistics.totalVotes
 #. placeholder {0}: displayed.totalVotes
-#. placeholder {0}: statistics.totalVotes
-#. placeholder {0}: statistics.totalVotes
 #: src/lib/components/sentiment/msigCard.svelte
 #: src/lib/components/vp/VpMsigStepResults.svelte
 #: src/lib/components/vp/VpSentimentCard.svelte
@@ -3619,7 +3615,7 @@ msgstr "获取代币"
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
-#. placeholder {0}: String(network.token.symbol.name)
+#. placeholder {0}: symbol.name
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
@@ -3650,7 +3646,7 @@ msgstr "<0>Unicove -</0> {0} 网络钱包和区块浏览器"
 
 #. placeholder {0}: network.chain.name
 #. placeholder {0}: networkName
-#. placeholder {0}: networkName
+#. placeholder {0}: network.chain.name
 #: src/routes/+layout.server.ts
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
@@ -5910,8 +5906,8 @@ msgstr "{0}您有 {1} 可供回收。"
 msgid "You have been outbid on this name.<0/>"
 msgstr "您在这个名字上的出价已被超过。<0/>"
 
-#. placeholder {0}: String(manager.refundAmount)
 #. placeholder {0}: String(tracked.refund.amount)
+#. placeholder {0}: String(manager.refundAmount)
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/refund/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
 msgid "Claim Refund ({0})"
@@ -7763,8 +7759,8 @@ msgstr "版本"
 msgid "Change history"
 msgstr "变更历史"
 
-#. placeholder {0}: amount.toLocaleString()
 #. placeholder {0}: stats.total.toLocaleString()
+#. placeholder {0}: amount.toLocaleString()
 #. placeholder {0}: vote.metrics.v.total.toLocaleString()
 #. placeholder {0}: formatNumber(statistics.metrics.v.total, locale, { notation: 'compact', maximumFractionDigits: 2 })
 #: src/lib/components/sentiment/MetricLensDetail.svelte
@@ -8174,22 +8170,22 @@ msgstr "仅限纯文本。换行会被保留。"
 msgid "Posted. It will appear here shortly."
 msgstr "已发布。稍后会显示在这里。"
 
-#. placeholder {0}: draftCharsOver
 #. placeholder {0}: charsOver
+#. placeholder {0}: draftCharsOver
 #: src/lib/components/discussion/Comment.svelte
 #: src/lib/components/discussion/Composer.svelte
 msgid "{0} characters over the limit."
 msgstr "超出限制 {0} 个字符。"
 
-#. placeholder {0}: draftCharsLeft
 #. placeholder {0}: charsLeft
+#. placeholder {0}: draftCharsLeft
 #: src/lib/components/discussion/Comment.svelte
 #: src/lib/components/discussion/Composer.svelte
 msgid "About {0} characters left."
 msgstr "约剩余 {0} 个字符。"
 
-#. placeholder {0}: draftCharsOver
 #. placeholder {0}: charsOver
+#. placeholder {0}: draftCharsOver
 #: src/lib/components/discussion/Comment.svelte
 #: src/lib/components/discussion/Composer.svelte
 msgid "This comment is too long. Shorten it by about {0} characters to post."
@@ -8345,8 +8341,8 @@ msgstr "按 RAM 权重支持"
 msgid "support by V weight"
 msgstr "按 V 权重支持"
 
-#. placeholder {0}: symbol
 #. placeholder {0}: systemSymbol.name
+#. placeholder {0}: symbol
 #: src/lib/components/vp/VpMsigStepResults.svelte
 #: src/lib/components/vp/VpSentimentHero.svelte
 msgid "support by {0} weight"

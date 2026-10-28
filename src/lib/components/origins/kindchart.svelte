@@ -34,6 +34,7 @@
 				month: 'short',
 				day: monthly ? undefined : 'numeric',
 				year: monthly ? 'numeric' : undefined,
+				// @wc-ignore
 				timeZone: 'UTC'
 			})
 		);

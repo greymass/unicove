@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2026-10-27T00:12:02.938Z\n"
+"PO-Revision-Date: 2026-10-28T06:25:56.845Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -295,8 +295,8 @@ msgstr "Total"
 msgid "KB (RAM)"
 msgstr "KB (RAM)"
 
-#. placeholder {0}: balance.token.name
 #. placeholder {0}: balance.token.symbol.name
+#. placeholder {0}: balance.token.name
 #: src/lib/components/card/tokenbalance.svelte
 #: src/lib/components/card/tokenoverview.svelte
 msgid "{0} (RAM)"
@@ -511,12 +511,12 @@ msgstr "Transfer"
 msgid "+ {0} ms (CPU)"
 msgstr "+ {0} ms (CPU)"
 
-#. placeholder {0}: data.powup_net
 #. placeholder {0}: data.powup_cpu
-#. placeholder {0}: key.weight
+#. placeholder {0}: data.powup_net
 #. placeholder {0}: account.weight
 #. placeholder {0}: key.weight
 #. placeholder {0}: account.weight
+#. placeholder {0}: key.weight
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio/newaccount.svelte
@@ -1867,10 +1867,10 @@ msgstr "Pill Select"
 msgid "Select a date range"
 msgstr "Select a date range"
 
-#. placeholder {0}: JSON.stringify(tokenSelected, null, 2)
-#. placeholder {0}: imageOptionSelected.label
-#. placeholder {0}: selectedFormOption.label
 #. placeholder {0}: selected.label
+#. placeholder {0}: selectedFormOption.label
+#. placeholder {0}: imageOptionSelected.label
+#. placeholder {0}: JSON.stringify(tokenSelected, null, 2)
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
@@ -2268,8 +2268,8 @@ msgstr "The wharfkit/cli generated contracts for this build and the on-chain acc
 msgid "Refresh"
 msgstr "Refresh"
 
-#. placeholder {0}: refreshed
 #. placeholder {0}: formatDate(proposal.updated)
+#. placeholder {0}: refreshed
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/market/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.svelte
 msgid "Updated {0}"
@@ -2887,10 +2887,6 @@ msgstr "Raw Data | {0} | {1} Network"
 msgid "The raw data for the {0} account on the {1} network."
 msgstr "The raw data for the {0} account on the {1} network."
 
-#: src/lib/components/onboarding/giftschart.svelte
-#: src/lib/components/origins/creationline.svelte
-#: src/lib/components/origins/kindchart.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/network/origins/[creator]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(explorer)/transaction/[id]/[[seq]]/+layout.ts
 msgid "UTC"
@@ -3470,7 +3466,7 @@ msgstr "<0>Unicove -</0> The {0} web wallet and block explorer"
 
 #. placeholder {0}: network.chain.name
 #. placeholder {0}: networkName
-#. placeholder {0}: networkName
+#. placeholder {0}: network.chain.name
 #: src/routes/+layout.server.ts
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
@@ -3504,8 +3500,8 @@ msgstr "{0} Token Swap has begun!"
 msgid "Swap {0} to {1} at a 1:1 ratio"
 msgstr "Swap {0} to {1} at a 1:1 ratio"
 
-#. placeholder {0}: String(data.quote.symbol.name)
 #. placeholder {0}: props.network.token.name
+#. placeholder {0}: String(data.quote.symbol.name)
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/legacy-token-swap.svelte
 msgid "Swap to {0}"
@@ -3524,7 +3520,7 @@ msgstr "Get Tokens"
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
-#. placeholder {0}: String(network.token.symbol.name)
+#. placeholder {0}: symbol.name
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
@@ -3543,10 +3539,10 @@ msgstr "KB (RAM): Tokenized Data Storage"
 msgid "One {0} of RAM represents ownership rights over 1000 bytes of the network's total blockchain storage capacity. {1} can be swapped with {2} by visiting the RAM Market."
 msgstr "One {0} of RAM represents ownership rights over 1000 bytes of the network's total blockchain storage capacity. {1} can be swapped with {2} by visiting the RAM Market."
 
-#. placeholder {0}: data.network.token.name
-#. placeholder {1}: data.network.getRamToken().name
 #. placeholder {0}: String(network.chain.systemToken?.symbol.name)
 #. placeholder {1}: String(ramtoken.name)
+#. placeholder {0}: data.network.token.name
+#. placeholder {1}: data.network.getRamToken().name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/charts.svelte
 msgid "Swap {0}/{1}"
@@ -5219,9 +5215,9 @@ msgid "Multisig Sentiment"
 msgstr "Multisig Sentiment"
 
 #. placeholder {0}: msigData.statistics.totalVotes
+#. placeholder {0}: statistics.totalVotes
+#. placeholder {0}: statistics.totalVotes
 #. placeholder {0}: displayed.totalVotes
-#. placeholder {0}: statistics.totalVotes
-#. placeholder {0}: statistics.totalVotes
 #: src/lib/components/sentiment/msigCard.svelte
 #: src/lib/components/vp/VpMsigStepResults.svelte
 #: src/lib/components/vp/VpSentimentCard.svelte
@@ -6047,8 +6043,8 @@ msgstr "{0}You have {1} available to reclaim."
 msgid "You have been outbid on this name.<0/>"
 msgstr "You have been outbid on this name.<0/>"
 
-#. placeholder {0}: String(manager.refundAmount)
 #. placeholder {0}: String(tracked.refund.amount)
+#. placeholder {0}: String(manager.refundAmount)
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/refund/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
 msgid "Claim Refund ({0})"
@@ -7935,8 +7931,8 @@ msgstr "Version"
 msgid "Change history"
 msgstr "Change history"
 
-#. placeholder {0}: amount.toLocaleString()
 #. placeholder {0}: stats.total.toLocaleString()
+#. placeholder {0}: amount.toLocaleString()
 #. placeholder {0}: vote.metrics.v.total.toLocaleString()
 #. placeholder {0}: formatNumber(statistics.metrics.v.total, locale, { notation: 'compact', maximumFractionDigits: 2 })
 #: src/lib/components/sentiment/MetricLensDetail.svelte
@@ -8346,22 +8342,22 @@ msgstr "Plain text only. Line breaks are kept."
 msgid "Posted. It will appear here shortly."
 msgstr "Posted. It will appear here shortly."
 
-#. placeholder {0}: draftCharsOver
 #. placeholder {0}: charsOver
+#. placeholder {0}: draftCharsOver
 #: src/lib/components/discussion/Comment.svelte
 #: src/lib/components/discussion/Composer.svelte
 msgid "{0} characters over the limit."
 msgstr "{0} characters over the limit."
 
-#. placeholder {0}: draftCharsLeft
 #. placeholder {0}: charsLeft
+#. placeholder {0}: draftCharsLeft
 #: src/lib/components/discussion/Comment.svelte
 #: src/lib/components/discussion/Composer.svelte
 msgid "About {0} characters left."
 msgstr "About {0} characters left."
 
-#. placeholder {0}: draftCharsOver
 #. placeholder {0}: charsOver
+#. placeholder {0}: draftCharsOver
 #: src/lib/components/discussion/Comment.svelte
 #: src/lib/components/discussion/Composer.svelte
 msgid "This comment is too long. Shorten it by about {0} characters to post."
@@ -8522,8 +8518,8 @@ msgstr "support by RAM weight"
 msgid "support by V weight"
 msgstr "support by V weight"
 
-#. placeholder {0}: symbol
 #. placeholder {0}: systemSymbol.name
+#. placeholder {0}: symbol
 #: src/lib/components/vp/VpMsigStepResults.svelte
 #: src/lib/components/vp/VpSentimentHero.svelte
 msgid "support by {0} weight"
