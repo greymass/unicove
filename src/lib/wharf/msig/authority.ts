@@ -103,15 +103,16 @@ async function resolveAuthority(
 	const def = await ctx.getAuthority(level.actor, level.permission);
 	if (!def) return indeterminateAuthority(level);
 
-	// A threshold-1 single-account authority delegates, e.g. eosio@active -> eosio.prods@active.
+	// Threshold 1 with one approvable account delegates; @eosio.code can never be an msig approval.
+	const delegates = def.accounts.filter((a) => a.permission.permission !== 'eosio.code');
 	if (
 		def.threshold === 1 &&
-		def.accounts.length === 1 &&
+		delegates.length === 1 &&
 		def.keys.length === 0 &&
 		def.waits.length === 0 &&
-		def.accounts[0].weight >= 1
+		delegates[0].weight >= 1
 	) {
-		return resolveAuthority(def.accounts[0].permission, depth + 1, seen, ctx);
+		return resolveAuthority(delegates[0].permission, depth + 1, seen, ctx);
 	}
 
 	const entries: MsigAuthorityEntry[] = [];

@@ -77,6 +77,29 @@ describe('resolveMsigAuthorities', () => {
 		expect(authority.satisfied).toBe(0);
 	});
 
+	test('delegates past an eosio.code sibling through a chain of delegations', async () => {
+		const producers = Array.from({ length: 21 }, (_, i) => `prod${String.fromCharCode(97 + i)}`);
+		const { get } = fixture({
+			'contract@active': accounts(1, ['contract', 'eosio.code', 1], ['parent', 'active', 1]),
+			'parent@active': accounts(1, ['eosio.prods', 'active', 1]),
+			'eosio.prods@active': accounts(
+				15,
+				...producers.map((p): [string, string, number] => [p, 'active', 1])
+			)
+		});
+		const [authority] = await resolveMsigAuthorities({
+			authorizations: [level('contract')],
+			provided: [],
+			requested: [...producers, 'standby'].map((p) => level(p)),
+			getAuthority: get
+		});
+		expect(authority.actor).toBe('eosio.prods');
+		expect(authority.threshold).toBe(15);
+		expect(authority.possible).toBe(21);
+		expect(authority.satisfied).toBe(0);
+		expect(authority.entries.map((e) => e.actor)).toEqual(producers);
+	});
+
 	test('skips recursion for entries on the requested list', async () => {
 		const { get, calls } = fixture({
 			'shared@active': accounts(1, ['alice', 'active', 1], ['bob', 'active', 1])
