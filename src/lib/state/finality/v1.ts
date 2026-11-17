@@ -51,6 +51,7 @@ export interface HelloMessage {
 	network: string;
 	generation: number;
 	schedule_version: number;
+	resumed?: boolean;
 }
 
 export interface PolicyMessage extends FinalizerPolicy {

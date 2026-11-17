@@ -11,7 +11,6 @@ export class FinalityFeed {
 	private readonly network: string;
 	private socket: WebSocket | null = null;
 	private pending: FinalityState | null = null;
-	private resuming = false;
 	private attempt = 0;
 	private running = false;
 	private suspended = false;
@@ -60,8 +59,7 @@ export class FinalityFeed {
 		this.closeSocket();
 		if (!this.running) return;
 		const from = this.state.ready ? this.state.lastBlockNum : null;
-		this.resuming = from !== null;
-		this.pending = emptyState();
+		this.pending = null;
 		const socket = new WebSocket(feedUrl(this.base, this.network, from));
 		this.socket = socket;
 		socket.onopen = () => {
@@ -85,21 +83,14 @@ export class FinalityFeed {
 			return;
 		}
 		if (!message || typeof message.type !== 'string') return;
-		if (!this.pending) {
+		if (message.type === 'hello') this.pending = message.resumed ? null : emptyState();
+		if (this.pending) {
+			this.pending = reduce(this.pending, message);
+		} else {
 			this.state = reduce(this.state, message);
-			return;
-		}
-		this.pending = reduce(this.pending, message);
-		if (this.resuming) {
-			this.state = reduce(this.state, message);
-			if (message.type === 'block' && !this.pending.schedules.has(message.schedule_version)) {
-				this.pending = null;
-				this.attempt = 0;
-				return;
-			}
 		}
 		if (message.type === 'snapshot_end') {
-			this.state = this.pending;
+			if (this.pending) this.state = this.pending;
 			this.pending = null;
 			this.attempt = 0;
 		}

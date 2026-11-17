@@ -79,3 +79,24 @@ export function coverageLabel(minutes: number, locale: string): string {
 	}
 	return 'Baseline 24 h';
 }
+
+export function formatClock(ms: number): string {
+	return new Date(ms).toISOString().slice(11, 19);
+}
+
+export function formatShare(count: number, total: number, locale: string): string {
+	if (!total) return '–';
+	return formatNumber(count / total, locale, {
+		style: 'percent',
+		minimumFractionDigits: 1,
+		maximumFractionDigits: 1
+	});
+}
+
+export function formatOver(over: number | null, locale: string): string {
+	if (over === null) return '–';
+	const value = formatNumber(Math.abs(over), locale);
+	if (over > 0) return `+${value}`;
+	if (over < 0) return `−${value}`;
+	return value;
+}
