@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2026-11-17T22:48:32.099Z\n"
+"PO-Revision-Date: 2026-11-17T23:34:34.915Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -512,12 +512,12 @@ msgstr "转账"
 msgid "+ {0} ms (CPU)"
 msgstr "+ {0} 毫秒 (CPU)"
 
-#. placeholder {0}: data.powup_net
 #. placeholder {0}: data.powup_cpu
-#. placeholder {0}: key.weight
+#. placeholder {0}: data.powup_net
 #. placeholder {0}: account.weight
 #. placeholder {0}: key.weight
 #. placeholder {0}: account.weight
+#. placeholder {0}: key.weight
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio/newaccount.svelte
@@ -767,8 +767,8 @@ msgstr "详情"
 msgid "Network Fees"
 msgstr "网络费用"
 
-#. placeholder {0}: market.network.currency.symbol.code
 #. placeholder {0}: data.network.chain.systemToken?.symbol.code || ''
+#. placeholder {0}: market.network.currency.symbol.code
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 msgid "Market Cap ({0})"
@@ -1842,10 +1842,10 @@ msgstr "药丸选择"
 msgid "Select a date range"
 msgstr "选择日期范围"
 
-#. placeholder {0}: JSON.stringify(tokenSelected, null, 2)
-#. placeholder {0}: imageOptionSelected.label
-#. placeholder {0}: selectedFormOption.label
 #. placeholder {0}: selected.label
+#. placeholder {0}: selectedFormOption.label
+#. placeholder {0}: imageOptionSelected.label
+#. placeholder {0}: JSON.stringify(tokenSelected, null, 2)
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
@@ -2226,8 +2226,8 @@ msgstr "此构建的 wharfkit/cli 生成的合约以及它使用的链上帐户�
 msgid "Refresh"
 msgstr "刷新"
 
-#. placeholder {0}: refreshed
 #. placeholder {0}: formatDate(proposal.updated)
+#. placeholder {0}: refreshed
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/market/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.svelte
 msgid "Updated {0}"
@@ -3010,10 +3010,10 @@ msgstr "没有反对票"
 msgid "Loading topic..."
 msgstr "正在加载主题..."
 
-#. placeholder {0}: data.network.token.name
-#. placeholder {1}: data.network.getRamToken().name
 #. placeholder {0}: String(network.chain.systemToken?.symbol.name)
 #. placeholder {1}: String(ramtoken.name)
+#. placeholder {0}: data.network.token.name
+#. placeholder {1}: data.network.getRamToken().name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/charts.svelte
 msgid "Swap {0}/{1}"
@@ -3029,8 +3029,8 @@ msgstr "兑换 {0}/{1}"
 msgid "Available"
 msgstr "可用"
 
-#. placeholder {0}: String(data.quote.symbol.name)
 #. placeholder {0}: props.network.token.name
+#. placeholder {0}: String(data.quote.symbol.name)
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/legacy-token-swap.svelte
 msgid "Swap to {0}"
@@ -3617,7 +3617,7 @@ msgstr "获取代币"
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
-#. placeholder {0}: String(network.token.symbol.name)
+#. placeholder {0}: symbol.name
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
@@ -3648,7 +3648,7 @@ msgstr "<0>Unicove -</0> {0} 网络钱包和区块浏览器"
 
 #. placeholder {0}: network.chain.name
 #. placeholder {0}: networkName
-#. placeholder {0}: networkName
+#. placeholder {0}: network.chain.name
 #: src/routes/+layout.server.ts
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
@@ -5912,8 +5912,8 @@ msgstr "{0}您有 {1} 可供回收。"
 msgid "You have been outbid on this name.<0/>"
 msgstr "您在这个名字上的出价已被超过。<0/>"
 
-#. placeholder {0}: String(manager.refundAmount)
 #. placeholder {0}: String(tracked.refund.amount)
+#. placeholder {0}: String(manager.refundAmount)
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/refund/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
 msgid "Claim Refund ({0})"
@@ -9129,8 +9129,8 @@ msgstr "无净流出"
 msgid "{0} hours"
 msgstr "{0} 小时"
 
-#. placeholder {0}: formatNumber(Math.round(days), locale)
 #. placeholder {0}: formatNumber(days, locale, { maximumFractionDigits: 1 })
+#. placeholder {0}: formatNumber(Math.round(days), locale)
 #: src/lib/components/onboarding/labels.svelte.ts
 #: src/lib/components/onboarding/labels.svelte.ts
 msgid "{0} days"
@@ -9707,7 +9707,7 @@ msgstr "延迟"
 #: src/lib/components/finality/labels.svelte.ts
 #: src/lib/components/finality/ttfchart.svelte
 msgid "QC"
-msgstr "质量检查"
+msgstr "QC"
 
 #: src/lib/components/finality/labels.svelte.ts
 msgid "Final"
@@ -9731,7 +9731,7 @@ msgstr "延迟高于基线 p99"
 
 #: src/lib/components/finality/labels.svelte.ts
 msgid "Weak QC"
-msgstr "弱 QC"
+msgstr "weak QC"
 
 #: src/lib/components/finality/labels.svelte.ts
 msgid "No QC"
@@ -9865,7 +9865,7 @@ msgstr "最近 15 分钟每分钟的最终确认时间 p90"
 
 #: src/lib/components/finality/finalizers.svelte
 msgid "Finalizer"
-msgstr "最终确定者"
+msgstr "Finalizer"
 
 #: src/lib/components/finality/finalizers.svelte
 msgid "Missing votes"
@@ -9877,7 +9877,7 @@ msgstr "基线"
 
 #: src/lib/components/finality/finalizers.svelte
 msgid "Weak votes"
-msgstr "弱投票"
+msgstr "weak 投票"
 
 #: src/lib/components/finality/finalizers.svelte
 msgid "Last vote"
@@ -9910,10 +9910,7 @@ msgid ""
 "Finalizer policy order<0/>. Missing votes is\n"
 "the share of QCs in the live window without this finalizer's vote. A marked row is missing more\n"
 "votes than its own baseline rate makes likely."
-msgstr ""
-"最终确定者策略顺序<0/>。缺失投票是\n"
-"实时窗口中不含此最终确定者投票的 QC 占比。标记的行缺失的\n"
-"投票数超过其自身基线速率所预期的数量。"
+msgstr "Finalizer 策略顺序<0/>。缺失投票是实时窗口中不含此 finalizer 投票的 QC 占比。标记的行缺失的投票数超过其自身基线速率所预期的数量。"
 
 #. placeholder {0}: n
 #: src/lib/components/finality/blockstream.svelte
@@ -9942,32 +9939,32 @@ msgstr "区块"
 
 #: src/lib/components/finality/blockstream.svelte
 msgid "block_num"
-msgstr "区块编号"
+msgstr "block_num"
 
 #: src/lib/components/finality/blockstream.svelte
 #: src/lib/components/finality/ttfchart.svelte
 msgid "producer"
-msgstr "生产者"
+msgstr "producer"
 
 #: src/lib/components/finality/blockstream.svelte
 msgid "timestamp"
-msgstr "时间戳"
+msgstr "timestamp"
 
 #: src/lib/components/finality/blockstream.svelte
 msgid "latency"
-msgstr "延迟"
+msgstr "latency"
 
 #: src/lib/components/finality/blockstream.svelte
 msgid "qc"
-msgstr "质量检查"
+msgstr "qc"
 
 #: src/lib/components/finality/blockstream.svelte
 msgid "QC lag"
-msgstr "质量检查延迟"
+msgstr "QC 延迟"
 
 #: src/lib/components/finality/blockstream.svelte
 msgid "missing_votes"
-msgstr "缺失投票"
+msgstr "missing_votes"
 
 #: src/lib/components/finality/blockstream.svelte
 msgid "final by"
@@ -9980,7 +9977,7 @@ msgstr "最终确认时间"
 
 #: src/lib/components/finality/blockstream.svelte
 msgid "Production / QC / Latency"
-msgstr "生产 / 质量检查 / 延迟"
+msgstr "生产 / QC / 延迟"
 
 #: src/lib/components/finality/blockstream.svelte
 #: src/lib/components/finality/blockstream.svelte
@@ -10006,7 +10003,7 @@ msgstr "{0}/{1}"
 #: src/lib/components/finality/policy.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/network/finality/+page.svelte
 msgid "Finalizers"
-msgstr "最终确认者"
+msgstr "Finalizer"
 
 #: src/lib/components/finality/policy.svelte
 msgid "Pending policy"
@@ -10016,7 +10013,7 @@ msgstr "待定策略"
 #. placeholder {1}: formatNumber( policy.pending.finalizers.length, locale )
 #: src/lib/components/finality/policy.svelte
 msgid "Generation {0}, {1} finalizers"
-msgstr "代次 {0}，{1} 个最终确认者"
+msgstr "代次 {0}，{1} 个 finalizer"
 
 #: src/lib/components/finality/policy.svelte
 msgid "None"
@@ -10120,7 +10117,7 @@ msgstr "{3} 的区块中，有 {2} 个 QC 的 {1} 缺少 {0}"
 
 #: src/lib/components/finality/votegrid.svelte
 msgid "Finalizer \\ QC block producer"
-msgstr "最终确认者 \\ QC 区块生产者"
+msgstr "Finalizer \\ QC 区块生产者"
 
 #: src/lib/components/finality/votegrid.svelte
 msgid ""
@@ -10128,14 +10125,11 @@ msgid ""
 "missing. An outlined cell is missing more votes than that finalizer's own baseline rate makes\n"
 "likely. nodeos logs the same absence as \"Block #n produced by p has no votes for block #m from\n"
 "finalizers\"."
-msgstr ""
-"在 24 小时基线期间，按 QC 区块生产者统计的缺失投票占比；颜色越深表示缺失越多。带\n"
-"边框的单元格表示缺失的投票数高于该最终确认者自身基线比率所预计的数量。nodeos\n"
-"会将同一缺失记录为：\"由 p 生产的区块 #n 没有来自最终确认者的区块 #m 投票\"。"
+msgstr "在 24 小时基线期间，按 QC 区块生产者统计的缺失投票占比；色调越强表示缺失越多。带边框的单元格表示缺失的投票数高于该 finalizer 自身基线比率所预计的数量。nodeos 会将同一缺失记录为 \"Block #n produced by p has no votes for block #m from finalizers\"。"
 
 #: src/lib/components/finality/tabs.svelte
 msgid "Producers and finalizers"
-msgstr "生产者和最终确认者"
+msgstr "生产者和 finalizer"
 
 #: src/lib/components/finality/ttfchart.svelte
 msgid "Time to final per block, last 2 min"
@@ -10164,7 +10158,7 @@ msgstr "{0}/{1}（{2}）"
 
 #: src/lib/components/finality/ttfchart.svelte
 msgid "no QC yet"
-msgstr "尚无质量检查"
+msgstr "尚无 QC"
 
 #. placeholder {0}: count
 #: src/lib/components/finality/timeline.svelte
@@ -10243,4 +10237,4 @@ msgstr "QC 区块生产者缺失的投票"
 
 #: src/routes/[[locale]]/[network]/(explorer)/network/finality/+page.svelte
 msgid "Finalizer policy"
-msgstr "最终确认者策略"
+msgstr "Finalizer 策略"

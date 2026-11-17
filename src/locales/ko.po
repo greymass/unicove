@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.663Z\n"
-"PO-Revision-Date: 2026-11-17T22:48:32.091Z\n"
+"PO-Revision-Date: 2026-11-17T23:34:34.904Z\n"
 "Last-Translator: \n"
 "Language: ko\n"
 "Language-Team: \n"
@@ -512,12 +512,12 @@ msgstr "송금"
 msgid "+ {0} ms (CPU)"
 msgstr "+ {0} ms (CPU)"
 
-#. placeholder {0}: data.powup_net
 #. placeholder {0}: data.powup_cpu
-#. placeholder {0}: key.weight
+#. placeholder {0}: data.powup_net
 #. placeholder {0}: account.weight
 #. placeholder {0}: key.weight
 #. placeholder {0}: account.weight
+#. placeholder {0}: key.weight
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio/newaccount.svelte
@@ -767,8 +767,8 @@ msgstr "상세 정보"
 msgid "Network Fees"
 msgstr "네트워크 수수료"
 
-#. placeholder {0}: market.network.currency.symbol.code
 #. placeholder {0}: data.network.chain.systemToken?.symbol.code || ''
+#. placeholder {0}: market.network.currency.symbol.code
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 msgid "Market Cap ({0})"
@@ -1840,10 +1840,10 @@ msgstr "필 선택"
 msgid "Select a date range"
 msgstr "날짜 범위 선택"
 
-#. placeholder {0}: JSON.stringify(tokenSelected, null, 2)
-#. placeholder {0}: imageOptionSelected.label
-#. placeholder {0}: selectedFormOption.label
 #. placeholder {0}: selected.label
+#. placeholder {0}: selectedFormOption.label
+#. placeholder {0}: imageOptionSelected.label
+#. placeholder {0}: JSON.stringify(tokenSelected, null, 2)
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
@@ -2231,8 +2231,8 @@ msgstr "이 빌드 및 사용되는 온체인 계정에 대해 wharfkit/cli에�
 msgid "Refresh"
 msgstr "새로 고침"
 
-#. placeholder {0}: refreshed
 #. placeholder {0}: formatDate(proposal.updated)
+#. placeholder {0}: refreshed
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/market/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.svelte
 msgid "Updated {0}"
@@ -3412,7 +3412,7 @@ msgstr "<0>Unicove -</0> {0} 웹 지갑 및 블록 탐색기"
 
 #. placeholder {0}: network.chain.name
 #. placeholder {0}: networkName
-#. placeholder {0}: networkName
+#. placeholder {0}: network.chain.name
 #: src/routes/+layout.server.ts
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
@@ -3446,8 +3446,8 @@ msgstr "{0} 토큰 스왑이 시작되었습니다!"
 msgid "Swap {0} to {1} at a 1:1 ratio"
 msgstr "{0}을(를) {1}으로 1:1 비율로 교환하세요"
 
-#. placeholder {0}: String(data.quote.symbol.name)
 #. placeholder {0}: props.network.token.name
+#. placeholder {0}: String(data.quote.symbol.name)
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/legacy-token-swap.svelte
 msgid "Swap to {0}"
@@ -3466,7 +3466,7 @@ msgstr "토큰 받기 "
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
-#. placeholder {0}: String(network.token.symbol.name)
+#. placeholder {0}: symbol.name
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
@@ -3485,10 +3485,10 @@ msgstr "토큰화된 데이터 스토리지"
 msgid "One {0} of RAM represents ownership rights over 1000 bytes of the network's total blockchain storage capacity. {1} can be swapped with {2} by visiting the RAM Market."
 msgstr "1개의 {0}은 네트워크 전체 블록체인 저장 용량 중 1000바이트에 대한 소유권을 나타냅니다. {1}은 RAM 시장에 접속하여 {2}과 교환할 수 있습니다."
 
-#. placeholder {0}: data.network.token.name
-#. placeholder {1}: data.network.getRamToken().name
 #. placeholder {0}: String(network.chain.systemToken?.symbol.name)
 #. placeholder {1}: String(ramtoken.name)
+#. placeholder {0}: data.network.token.name
+#. placeholder {1}: data.network.getRamToken().name
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/charts.svelte
 msgid "Swap {0}/{1}"
@@ -5911,8 +5911,8 @@ msgstr "{0} {1}을(를) 환불받을 수 있습니다."
 msgid "You have been outbid on this name.<0/>"
 msgstr "이 이름에 대한 입찰에서 패했습니다.<0/>"
 
-#. placeholder {0}: String(manager.refundAmount)
 #. placeholder {0}: String(tracked.refund.amount)
+#. placeholder {0}: String(manager.refundAmount)
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/refund/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
 msgid "Claim Refund ({0})"
@@ -9168,8 +9168,8 @@ msgstr "순유출 없음"
 msgid "{0} hours"
 msgstr "{0}시간"
 
-#. placeholder {0}: formatNumber(Math.round(days), locale)
 #. placeholder {0}: formatNumber(days, locale, { maximumFractionDigits: 1 })
+#. placeholder {0}: formatNumber(Math.round(days), locale)
 #: src/lib/components/onboarding/labels.svelte.ts
 #: src/lib/components/onboarding/labels.svelte.ts
 msgid "{0} days"
@@ -9770,7 +9770,7 @@ msgstr "기준선 p99 초과 지연 시간"
 
 #: src/lib/components/finality/labels.svelte.ts
 msgid "Weak QC"
-msgstr "약한 QC"
+msgstr "weak QC"
 
 #: src/lib/components/finality/labels.svelte.ts
 msgid "No QC"
@@ -9904,7 +9904,7 @@ msgstr "분당 최종 확정 시간 p90, 최근 15분"
 
 #: src/lib/components/finality/finalizers.svelte
 msgid "Finalizer"
-msgstr "파이널라이저"
+msgstr "Finalizer"
 
 #: src/lib/components/finality/finalizers.svelte
 msgid "Missing votes"
@@ -9916,7 +9916,7 @@ msgstr "기준선"
 
 #: src/lib/components/finality/finalizers.svelte
 msgid "Weak votes"
-msgstr "약한 투표"
+msgstr "weak 투표"
 
 #: src/lib/components/finality/finalizers.svelte
 msgid "Last vote"
@@ -9949,10 +9949,7 @@ msgid ""
 "Finalizer policy order<0/>. Missing votes is\n"
 "the share of QCs in the live window without this finalizer's vote. A marked row is missing more\n"
 "votes than its own baseline rate makes likely."
-msgstr ""
-"파이널라이저 정책 순서<0/>. 누락된 투표는\n"
-"활성 창에서 이 파이널라이저의 투표가 없는 QC의 비율입니다. 표시된 행은 자체 기준 비율로 예상되는 것보다\n"
-"더 많은 투표가 누락되었음을 의미합니다."
+msgstr "Finalizer 정책 순서<0/>. 누락된 투표는 실시간 창에서 이 finalizer의 투표가 없는 QC의 비율입니다. 표시된 행은 자체 기준 비율로 예상되는 것보다 더 많은 투표가 누락되었음을 의미합니다."
 
 #. placeholder {0}: n
 #: src/lib/components/finality/blockstream.svelte
@@ -9981,24 +9978,24 @@ msgstr "블록"
 
 #: src/lib/components/finality/blockstream.svelte
 msgid "block_num"
-msgstr "블록 번호"
+msgstr "block_num"
 
 #: src/lib/components/finality/blockstream.svelte
 #: src/lib/components/finality/ttfchart.svelte
 msgid "producer"
-msgstr "생성자"
+msgstr "producer"
 
 #: src/lib/components/finality/blockstream.svelte
 msgid "timestamp"
-msgstr "타임스탬프"
+msgstr "timestamp"
 
 #: src/lib/components/finality/blockstream.svelte
 msgid "latency"
-msgstr "지연 시간"
+msgstr "latency"
 
 #: src/lib/components/finality/blockstream.svelte
 msgid "qc"
-msgstr "QC"
+msgstr "qc"
 
 #: src/lib/components/finality/blockstream.svelte
 msgid "QC lag"
@@ -10006,7 +10003,7 @@ msgstr "QC 지연"
 
 #: src/lib/components/finality/blockstream.svelte
 msgid "missing_votes"
-msgstr "누락된 투표"
+msgstr "missing_votes"
 
 #: src/lib/components/finality/blockstream.svelte
 msgid "final by"
@@ -10034,7 +10031,7 @@ msgstr "없음"
 
 #: src/lib/components/finality/policy.svelte
 msgid "Generation"
-msgstr "생성"
+msgstr "세대"
 
 #. placeholder {0}: formatNumber(policy.threshold, locale)
 #. placeholder {1}: formatNumber(weight, locale)
@@ -10045,7 +10042,7 @@ msgstr "{1} 중 {0}"
 #: src/lib/components/finality/policy.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/network/finality/+page.svelte
 msgid "Finalizers"
-msgstr "완결자"
+msgstr "Finalizer"
 
 #: src/lib/components/finality/policy.svelte
 msgid "Pending policy"
@@ -10055,7 +10052,7 @@ msgstr "대기 중인 정책"
 #. placeholder {1}: formatNumber( policy.pending.finalizers.length, locale )
 #: src/lib/components/finality/policy.svelte
 msgid "Generation {0}, {1} finalizers"
-msgstr "생성 {0}, 완결자 {1}명"
+msgstr "세대 {0}, finalizer {1}개"
 
 #: src/lib/components/finality/policy.svelte
 msgid "None"
@@ -10159,7 +10156,7 @@ msgstr "{3}의 블록에 있는 {2}개의 QC 중 {1}에서 {0} 누락"
 
 #: src/lib/components/finality/votegrid.svelte
 msgid "Finalizer \\ QC block producer"
-msgstr "완결자 \\ QC 블록 생산자"
+msgstr "Finalizer \\ QC 블록 생산자"
 
 #: src/lib/components/finality/votegrid.svelte
 msgid ""
@@ -10167,14 +10164,11 @@ msgid ""
 "missing. An outlined cell is missing more votes than that finalizer's own baseline rate makes\n"
 "likely. nodeos logs the same absence as \"Block #n produced by p has no votes for block #m from\n"
 "finalizers\"."
-msgstr ""
-"24시간 기준선에서 QC 블록 생산자별 누락 투표 비율입니다. 색상이 진할수록 누락이 많습니다.\n"
-"테두리가 있는 셀은 해당 완결자의 자체 기준선 비율로 예상되는 것보다 더 많은 투표가 누락되었음을 나타냅니다. nodeos는 동일한 누락을 \"p가 생성한 블록 #n에 완결자의 블록 #m 투표가 없습니다\"라고\n"
-"기록합니다."
+msgstr "24시간 기준선에서 QC 블록 생산자별 누락 투표 비율입니다. 음영이 강할수록 누락이 많습니다. 테두리가 있는 셀은 해당 finalizer의 자체 기준선 비율로 예상되는 것보다 더 많은 투표가 누락되었음을 나타냅니다. nodeos는 동일한 누락을 \"Block #n produced by p has no votes for block #m from finalizers\"로 기록합니다."
 
 #: src/lib/components/finality/tabs.svelte
 msgid "Producers and finalizers"
-msgstr "생산자 및 완결자"
+msgstr "생산자 및 finalizer"
 
 #: src/lib/components/finality/ttfchart.svelte
 msgid "Time to final per block, last 2 min"
@@ -10278,8 +10272,8 @@ msgstr "생성자"
 
 #: src/routes/[[locale]]/[network]/(explorer)/network/finality/+page.svelte
 msgid "Missing votes by QC block producer"
-msgstr "QC 블록 생성자별 누락된 투표"
+msgstr "QC 블록 생산자별 누락된 투표"
 
 #: src/routes/[[locale]]/[network]/(explorer)/network/finality/+page.svelte
 msgid "Finalizer policy"
-msgstr "완결자 정책"
+msgstr "Finalizer 정책"
