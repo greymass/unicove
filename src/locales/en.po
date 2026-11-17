@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2026-11-17T21:31:18.055Z\n"
+"PO-Revision-Date: 2026-11-17T22:47:55.458Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -78,6 +78,7 @@ msgstr "Documentation"
 msgid "API Reference"
 msgstr "API Reference"
 
+#: src/lib/components/finality/tabs.svelte
 #: src/lib/components/footer.svelte
 #: src/lib/components/transact/summary.svelte
 #: src/lib/components/vp/VpDetailsCard.svelte
@@ -511,12 +512,12 @@ msgstr "Transfer"
 msgid "+ {0} ms (CPU)"
 msgstr "+ {0} ms (CPU)"
 
-#. placeholder {0}: data.powup_cpu
 #. placeholder {0}: data.powup_net
-#. placeholder {0}: account.weight
+#. placeholder {0}: data.powup_cpu
 #. placeholder {0}: key.weight
 #. placeholder {0}: account.weight
 #. placeholder {0}: key.weight
+#. placeholder {0}: account.weight
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio/newaccount.svelte
@@ -768,8 +769,8 @@ msgstr "Details"
 msgid "Network Fees"
 msgstr "Network Fees"
 
-#. placeholder {0}: data.network.chain.systemToken?.symbol.code || ''
 #. placeholder {0}: market.network.currency.symbol.code
+#. placeholder {0}: data.network.chain.systemToken?.symbol.code || ''
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 msgid "Market Cap ({0})"
@@ -1867,10 +1868,10 @@ msgstr "Pill Select"
 msgid "Select a date range"
 msgstr "Select a date range"
 
-#. placeholder {0}: selected.label
-#. placeholder {0}: selectedFormOption.label
-#. placeholder {0}: imageOptionSelected.label
 #. placeholder {0}: JSON.stringify(tokenSelected, null, 2)
+#. placeholder {0}: imageOptionSelected.label
+#. placeholder {0}: selectedFormOption.label
+#. placeholder {0}: selected.label
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
@@ -2268,8 +2269,8 @@ msgstr "The wharfkit/cli generated contracts for this build and the on-chain acc
 msgid "Refresh"
 msgstr "Refresh"
 
-#. placeholder {0}: formatDate(proposal.updated)
 #. placeholder {0}: refreshed
+#. placeholder {0}: formatDate(proposal.updated)
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/market/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.svelte
 msgid "Updated {0}"
@@ -3468,7 +3469,7 @@ msgstr "<0>Unicove -</0> The {0} web wallet and block explorer"
 
 #. placeholder {0}: network.chain.name
 #. placeholder {0}: networkName
-#. placeholder {0}: network.chain.name
+#. placeholder {0}: networkName
 #: src/routes/+layout.server.ts
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
@@ -3502,8 +3503,8 @@ msgstr "{0} Token Swap has begun!"
 msgid "Swap {0} to {1} at a 1:1 ratio"
 msgstr "Swap {0} to {1} at a 1:1 ratio"
 
-#. placeholder {0}: props.network.token.name
 #. placeholder {0}: String(data.quote.symbol.name)
+#. placeholder {0}: props.network.token.name
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/legacy-token-swap.svelte
 msgid "Swap to {0}"
@@ -3522,7 +3523,7 @@ msgstr "Get Tokens"
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
-#. placeholder {0}: symbol.name
+#. placeholder {0}: String(network.token.symbol.name)
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
@@ -3541,10 +3542,10 @@ msgstr "KB (RAM): Tokenized Data Storage"
 msgid "One {0} of RAM represents ownership rights over 1000 bytes of the network's total blockchain storage capacity. {1} can be swapped with {2} by visiting the RAM Market."
 msgstr "One {0} of RAM represents ownership rights over 1000 bytes of the network's total blockchain storage capacity. {1} can be swapped with {2} by visiting the RAM Market."
 
-#. placeholder {0}: String(network.chain.systemToken?.symbol.name)
-#. placeholder {1}: String(ramtoken.name)
 #. placeholder {0}: data.network.token.name
 #. placeholder {1}: data.network.getRamToken().name
+#. placeholder {0}: String(network.chain.systemToken?.symbol.name)
+#. placeholder {1}: String(ramtoken.name)
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/charts.svelte
 msgid "Swap {0}/{1}"
@@ -4272,6 +4273,7 @@ msgstr "The total weight of all keys, accounts, and waits must be greater than o
 msgid "Required"
 msgstr "Required"
 
+#: src/lib/components/finality/policy.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Threshold"
 msgstr "Threshold"
@@ -5542,7 +5544,9 @@ msgstr "Created"
 msgid "MMM D, YYYY"
 msgstr "MMM D, YYYY"
 
+#: src/lib/components/finality/timeline.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalsHeader.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/network/finality/+page.svelte
 msgid "Timeline"
 msgstr "Timeline"
 
@@ -6045,8 +6049,8 @@ msgstr "{0}You have {1} available to reclaim."
 msgid "You have been outbid on this name.<0/>"
 msgstr "You have been outbid on this name.<0/>"
 
-#. placeholder {0}: String(tracked.refund.amount)
 #. placeholder {0}: String(manager.refundAmount)
+#. placeholder {0}: String(tracked.refund.amount)
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/refund/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
 msgid "Claim Refund ({0})"
@@ -9327,8 +9331,8 @@ msgstr "No net outflow"
 msgid "{0} hours"
 msgstr "{0} hours"
 
-#. placeholder {0}: formatNumber(days, locale, { maximumFractionDigits: 1 })
 #. placeholder {0}: formatNumber(Math.round(days), locale)
+#. placeholder {0}: formatNumber(days, locale, { maximumFractionDigits: 1 })
 #: src/lib/components/onboarding/labels.svelte.ts
 #: src/lib/components/onboarding/labels.svelte.ts
 msgid "{0} days"
@@ -9895,6 +9899,7 @@ msgid "Onboarding creator"
 msgstr "Onboarding creator"
 
 #: src/lib/components/finality/labels.svelte.ts
+#: src/lib/components/finality/ttfchart.svelte
 msgid "Production"
 msgstr "Production"
 
@@ -9903,6 +9908,7 @@ msgid "Latency"
 msgstr "Latency"
 
 #: src/lib/components/finality/labels.svelte.ts
+#: src/lib/components/finality/ttfchart.svelte
 msgid "QC"
 msgstr "QC"
 
@@ -9967,6 +9973,7 @@ msgid "Above baseline"
 msgstr "Above baseline"
 
 #: src/lib/components/finality/labels.svelte.ts
+#: src/lib/components/finality/votegrid.svelte
 msgid "Building baseline"
 msgstr "Building baseline"
 
@@ -9976,7 +9983,9 @@ msgid "{0} ms"
 msgstr "{0} ms"
 
 #. placeholder {0}: value
+#. placeholder {0}: value
 #: src/lib/components/finality/labels.svelte.ts
+#: src/lib/components/finality/ttfchart.svelte
 msgid "{0} s"
 msgstr "{0} s"
 
@@ -10001,3 +10010,441 @@ msgstr "Finality<0/>"
 #: src/routes/[[locale]]/[network]/(explorer)/network/finality/+page.ts
 msgid "Finality"
 msgstr "Finality"
+
+#: src/lib/components/finality/feedbanner.svelte
+msgid "Connecting to the finality feed."
+msgstr "Connecting to the finality feed."
+
+#. placeholder {0}: lastNum
+#. placeholder {1}: formatClock(lastTime)
+#. placeholder {2}: age
+#: src/lib/components/finality/feedbanner.svelte
+msgid "Reconnecting to the finality feed. Last block #{0} at {1} UTC, {2} s ago."
+msgstr "Reconnecting to the finality feed. Last block #{0} at {1} UTC, {2} s ago."
+
+#: src/lib/components/finality/feedbanner.svelte
+msgid "Reconnecting to the finality feed."
+msgstr "Reconnecting to the finality feed."
+
+#. placeholder {0}: lastNum
+#. placeholder {1}: formatClock(lastTime)
+#. placeholder {2}: age
+#: src/lib/components/finality/feedbanner.svelte
+msgid "Feed paused. Last block #{0} at {1} UTC, {2} s ago."
+msgstr "Feed paused. Last block #{0} at {1} UTC, {2} s ago."
+
+#: src/lib/components/finality/feedbanner.svelte
+msgid "Feed paused."
+msgstr "Feed paused."
+
+#: src/lib/components/finality/feedbanner.svelte
+msgid "Catching up. Blocks received during the gap carry no timing."
+msgstr "Catching up. Blocks received during the gap carry no timing."
+
+#: src/lib/components/finality/headline.svelte
+msgid "s"
+msgstr "s"
+
+#. placeholder {0}: formatClock(asOf)
+#: src/lib/components/finality/headline.svelte
+msgid "Time to final as of {0} UTC"
+msgstr "Time to final as of {0} UTC"
+
+#: src/lib/components/finality/headline.svelte
+msgid "Time to final, median of the last 20 final blocks"
+msgstr "Time to final, median of the last 20 final blocks"
+
+#. placeholder {0}: formatMs(covered.time_to_final_p50, locale)
+#. placeholder {1}: formatMs( covered.time_to_final_p99, locale )
+#. placeholder {2}: coverageLabel(covered.minutes, locale)
+#: src/lib/components/finality/headline.svelte
+msgid "Baseline p50 {0} · p99 {1} · {2}"
+msgstr "Baseline p50 {0} · p99 {1} · {2}"
+
+#: src/lib/components/finality/headline.svelte
+#: src/lib/components/finality/sparkline.svelte
+msgid "Time to final p90 per minute, last 15 min"
+msgstr "Time to final p90 per minute, last 15 min"
+
+#: src/lib/components/finality/finalizers.svelte
+msgid "Finalizer"
+msgstr "Finalizer"
+
+#: src/lib/components/finality/finalizers.svelte
+msgid "Missing votes"
+msgstr "Missing votes"
+
+#: src/lib/components/finality/finalizers.svelte
+msgid "Baseline"
+msgstr "Baseline"
+
+#: src/lib/components/finality/finalizers.svelte
+msgid "Weak votes"
+msgstr "Weak votes"
+
+#: src/lib/components/finality/finalizers.svelte
+msgid "Last vote"
+msgstr "Last vote"
+
+#: src/lib/components/finality/finalizers.svelte
+msgid "Behind head"
+msgstr "Behind head"
+
+#: src/lib/components/finality/blockstream.svelte
+#: src/lib/components/finality/finalizers.svelte
+#: src/lib/components/finality/policy.svelte
+#: src/lib/components/finality/producers.svelte
+msgid "Waiting for the first blocks"
+msgstr "Waiting for the first blocks"
+
+#: src/lib/components/finality/blockstream.svelte
+#: src/lib/components/finality/finalizers.svelte
+#: src/lib/components/finality/ttfchart.svelte
+msgid "pending"
+msgstr "pending"
+
+#. placeholder {0}: generation
+#: src/lib/components/finality/finalizers.svelte
+msgid ", generation {0}"
+msgstr ", generation {0}"
+
+#: src/lib/components/finality/finalizers.svelte
+msgid ""
+"Finalizer policy order<0/>. Missing votes is\n"
+"the share of QCs in the live window without this finalizer's vote. A marked row is missing more\n"
+"votes than its own baseline rate makes likely."
+msgstr ""
+"Finalizer policy order<0/>. Missing votes is\n"
+"the share of QCs in the live window without this finalizer's vote. A marked row is missing more\n"
+"votes than its own baseline rate makes likely."
+
+#. placeholder {0}: n
+#: src/lib/components/finality/blockstream.svelte
+msgid "Show all {0} in the live window"
+msgstr "Show all {0} in the live window"
+
+#. placeholder {0}: n
+#: src/lib/components/finality/blockstream.svelte
+msgid "{0} new block"
+msgstr "{0} new block"
+
+#. placeholder {0}: n
+#: src/lib/components/finality/blockstream.svelte
+msgid "{0} new blocks"
+msgstr "{0} new blocks"
+
+#: src/lib/components/finality/blockstream.svelte
+msgid "Newest first. The list holds still while the pointer is over it."
+msgstr "Newest first. The list holds still while the pointer is over it."
+
+#: src/lib/components/finality/blockstream.svelte
+#: src/lib/components/finality/tabs.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/network/finality/+page.svelte
+msgid "Blocks"
+msgstr "Blocks"
+
+#: src/lib/components/finality/blockstream.svelte
+msgid "block_num"
+msgstr "block_num"
+
+#: src/lib/components/finality/blockstream.svelte
+#: src/lib/components/finality/ttfchart.svelte
+msgid "producer"
+msgstr "producer"
+
+#: src/lib/components/finality/blockstream.svelte
+msgid "timestamp"
+msgstr "timestamp"
+
+#: src/lib/components/finality/blockstream.svelte
+msgid "latency"
+msgstr "latency"
+
+#: src/lib/components/finality/blockstream.svelte
+msgid "qc"
+msgstr "qc"
+
+#: src/lib/components/finality/blockstream.svelte
+msgid "QC lag"
+msgstr "QC lag"
+
+#: src/lib/components/finality/blockstream.svelte
+msgid "missing_votes"
+msgstr "missing_votes"
+
+#: src/lib/components/finality/blockstream.svelte
+msgid "final by"
+msgstr "final by"
+
+#: src/lib/components/finality/blockstream.svelte
+#: src/lib/components/finality/ttfchart.svelte
+msgid "time to final"
+msgstr "time to final"
+
+#: src/lib/components/finality/blockstream.svelte
+msgid "Production / QC / Latency"
+msgstr "Production / QC / Latency"
+
+#: src/lib/components/finality/blockstream.svelte
+#: src/lib/components/finality/blockstream.svelte
+#: src/lib/components/finality/ttfchart.svelte
+#: src/lib/components/finality/ttfchart.svelte
+msgid "no timing"
+msgstr "no timing"
+
+#: src/lib/components/finality/blockstream.svelte
+msgid "none"
+msgstr "none"
+
+#: src/lib/components/finality/policy.svelte
+msgid "Generation"
+msgstr "Generation"
+
+#. placeholder {0}: formatNumber(policy.threshold, locale)
+#. placeholder {1}: formatNumber(weight, locale)
+#: src/lib/components/finality/policy.svelte
+msgid "{0} of {1}"
+msgstr "{0} of {1}"
+
+#: src/lib/components/finality/policy.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/network/finality/+page.svelte
+msgid "Finalizers"
+msgstr "Finalizers"
+
+#: src/lib/components/finality/policy.svelte
+msgid "Pending policy"
+msgstr "Pending policy"
+
+#. placeholder {0}: policy.pending.generation
+#. placeholder {1}: formatNumber( policy.pending.finalizers.length, locale )
+#: src/lib/components/finality/policy.svelte
+msgid "Generation {0}, {1} finalizers"
+msgstr "Generation {0}, {1} finalizers"
+
+#: src/lib/components/finality/policy.svelte
+msgid "None"
+msgstr "None"
+
+#: src/lib/components/finality/policy.svelte
+msgid "Proposer schedule version"
+msgstr "Proposer schedule version"
+
+#. placeholder {0}: count
+#: src/lib/components/finality/stages.svelte
+msgid "{0} missed slot"
+msgstr "{0} missed slot"
+
+#. placeholder {0}: count
+#: src/lib/components/finality/stages.svelte
+msgid "{0} missed slots"
+msgstr "{0} missed slots"
+
+#. placeholder {0}: slots
+#. placeholder {1}: forks
+#: src/lib/components/finality/stages.svelte
+msgid "{0}, {1} fork"
+msgstr "{0}, {1} fork"
+
+#. placeholder {0}: slots
+#. placeholder {1}: forks
+#: src/lib/components/finality/stages.svelte
+msgid "{0}, {1} forks"
+msgstr "{0}, {1} forks"
+
+#. placeholder {0}: latency
+#: src/lib/components/finality/stages.svelte
+msgid "p50 {0}"
+msgstr "p50 {0}"
+
+#. placeholder {0}: over
+#: src/lib/components/finality/stages.svelte
+msgid "lowest {0} over threshold"
+msgstr "lowest {0} over threshold"
+
+#. placeholder {0}: count
+#: src/lib/components/finality/stages.svelte
+msgid "{0} exception"
+msgstr "{0} exception"
+
+#. placeholder {0}: count
+#: src/lib/components/finality/stages.svelte
+msgid "{0} exceptions"
+msgstr "{0} exceptions"
+
+#. placeholder {0}: final
+#: src/lib/components/finality/stages.svelte
+msgid "p90 {0}"
+msgstr "p90 {0}"
+
+#: src/lib/components/finality/producers.svelte
+msgid "Producer"
+msgstr "Producer"
+
+#: src/lib/components/finality/producers.svelte
+msgid "Blocks produced"
+msgstr "Blocks produced"
+
+#: src/lib/components/finality/producers.svelte
+msgid "Slots missed"
+msgstr "Slots missed"
+
+#: src/lib/components/finality/producers.svelte
+msgid "Latency p50"
+msgstr "Latency p50"
+
+#: src/lib/components/finality/producers.svelte
+msgid "Latency p90"
+msgstr "Latency p90"
+
+#: src/lib/components/finality/producers.svelte
+msgid "QC-block votes over threshold"
+msgstr "QC-block votes over threshold"
+
+#: src/lib/components/finality/producers.svelte
+msgid "QCs at threshold"
+msgstr "QCs at threshold"
+
+#. placeholder {0}: signed( latencyP99 )
+#: src/lib/components/finality/producers.svelte
+msgid "Schedule order, live window 2 min. A marked row has latency p90 above the baseline p99 ({0})."
+msgstr "Schedule order, live window 2 min. A marked row has latency p90 above the baseline p99 ({0})."
+
+#: src/lib/components/finality/producers.svelte
+msgid "Schedule order, live window 2 min. Rows are marked once the baseline covers 60 min."
+msgstr "Schedule order, live window 2 min. Rows are marked once the baseline covers 60 min."
+
+#. placeholder {0}: description
+#. placeholder {1}: share
+#. placeholder {2}: total
+#. placeholder {3}: producer
+#: src/lib/components/finality/votegrid.svelte
+msgid "{0} missing from {1} of {2} QCs in {3}'s blocks"
+msgstr "{0} missing from {1} of {2} QCs in {3}'s blocks"
+
+#: src/lib/components/finality/votegrid.svelte
+msgid "Finalizer \\ QC block producer"
+msgstr "Finalizer \\ QC block producer"
+
+#: src/lib/components/finality/votegrid.svelte
+msgid ""
+"Missing-vote share by QC block producer over the 24 h baseline; a stronger shade is more\n"
+"missing. An outlined cell is missing more votes than that finalizer's own baseline rate makes\n"
+"likely. nodeos logs the same absence as \"Block #n produced by p has no votes for block #m from\n"
+"finalizers\"."
+msgstr ""
+"Missing-vote share by QC block producer over the 24 h baseline; a stronger shade is more\n"
+"missing. An outlined cell is missing more votes than that finalizer's own baseline rate makes\n"
+"likely. nodeos logs the same absence as \"Block #n produced by p has no votes for block #m from\n"
+"finalizers\"."
+
+#: src/lib/components/finality/tabs.svelte
+msgid "Producers and finalizers"
+msgstr "Producers and finalizers"
+
+#: src/lib/components/finality/ttfchart.svelte
+msgid "Time to final per block, last 2 min"
+msgstr "Time to final per block, last 2 min"
+
+#. placeholder {0}: formatMs(p99, locale)
+#: src/lib/components/finality/ttfchart.svelte
+msgid "Baseline p99 {0}"
+msgstr "Baseline p99 {0}"
+
+#. placeholder {0}: tip.record.by
+#: src/lib/components/finality/ttfchart.svelte
+msgid "Latency, final by #{0}"
+msgstr "Latency, final by #{0}"
+
+#: src/lib/components/finality/ttfchart.svelte
+msgid "votes"
+msgstr "votes"
+
+#. placeholder {0}: tip.votes.votes
+#. placeholder {1}: tip.votes.total
+#. placeholder {2}: formatOver(tip.votes.over, locale)
+#: src/lib/components/finality/ttfchart.svelte
+msgid "{0} of {1} ({2})"
+msgstr "{0} of {1} ({2})"
+
+#: src/lib/components/finality/ttfchart.svelte
+msgid "no QC yet"
+msgstr "no QC yet"
+
+#. placeholder {0}: count
+#: src/lib/components/finality/timeline.svelte
+msgid "{0} block"
+msgstr "{0} block"
+
+#. placeholder {0}: count
+#: src/lib/components/finality/timeline.svelte
+msgid "{0} blocks"
+msgstr "{0} blocks"
+
+#: src/lib/components/finality/timeline.svelte
+msgid "Last hour. Each mark is a run of blocks where a stage departed from normal."
+msgstr "Last hour. Each mark is a run of blocks where a stage departed from normal."
+
+#: src/lib/components/finality/timeline.svelte
+msgid "Last 24 h. Each mark is a run of blocks where a stage departed from normal."
+msgstr "Last 24 h. Each mark is a run of blocks where a stage departed from normal."
+
+#: src/lib/components/finality/timeline.svelte
+msgid "1 h"
+msgstr "1 h"
+
+#: src/lib/components/finality/timeline.svelte
+msgid "24 h"
+msgstr "24 h"
+
+#. placeholder {0}: formatClock(span.start)
+#. placeholder {1}: span.open ? formatClock(end) : formatClock(span.end + 500)
+#: src/lib/components/finality/timeline.svelte
+msgid "{0}–{1} UTC"
+msgstr "{0}–{1} UTC"
+
+#: src/lib/components/finality/timeline.svelte
+msgid "Still open"
+msgstr "Still open"
+
+#: src/lib/components/finality/timeline.svelte
+msgid "Open the run in Blocks"
+msgstr "Open the run in Blocks"
+
+#: src/lib/components/finality/timeline.svelte
+msgid "<0/>Departure or above baseline"
+msgstr "<0/>Departure or above baseline"
+
+#: src/lib/components/finality/timeline.svelte
+msgid "<0/>Feed, this page's own vantage"
+msgstr "<0/>Feed, this page's own vantage"
+
+#. placeholder {0}: newest.block_num
+#. placeholder {1}: formatClock(newest.timestamp)
+#: src/routes/[[locale]]/[network]/(explorer)/network/finality/+page.svelte
+msgid "Head #{0} · {1} UTC"
+msgstr "Head #{0} · {1} UTC"
+
+#. placeholder {0}: host
+#: src/routes/[[locale]]/[network]/(explorer)/network/finality/+page.svelte
+msgid "Savanna finality as seen from {0}. <0/>"
+msgstr "Savanna finality as seen from {0}. <0/>"
+
+#: src/routes/[[locale]]/[network]/(explorer)/network/finality/+page.svelte
+msgid "Time to final per block"
+msgstr "Time to final per block"
+
+#: src/routes/[[locale]]/[network]/(explorer)/network/finality/+page.svelte
+msgid "last 2 min"
+msgstr "last 2 min"
+
+#: src/routes/[[locale]]/[network]/(explorer)/network/finality/+page.svelte
+msgid "Producers"
+msgstr "Producers"
+
+#: src/routes/[[locale]]/[network]/(explorer)/network/finality/+page.svelte
+msgid "Missing votes by QC block producer"
+msgstr "Missing votes by QC block producer"
+
+#: src/routes/[[locale]]/[network]/(explorer)/network/finality/+page.svelte
+msgid "Finalizer policy"
+msgstr "Finalizer policy"

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2026-11-17T21:31:18.068Z\n"
+"PO-Revision-Date: 2026-11-17T22:48:32.099Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -78,6 +78,7 @@ msgstr "文档"
 msgid "API Reference"
 msgstr "API 参考"
 
+#: src/lib/components/finality/tabs.svelte
 #: src/lib/components/footer.svelte
 #: src/lib/components/transact/summary.svelte
 #: src/lib/components/vp/VpDetailsCard.svelte
@@ -511,12 +512,12 @@ msgstr "转账"
 msgid "+ {0} ms (CPU)"
 msgstr "+ {0} 毫秒 (CPU)"
 
-#. placeholder {0}: data.powup_cpu
 #. placeholder {0}: data.powup_net
-#. placeholder {0}: account.weight
+#. placeholder {0}: data.powup_cpu
 #. placeholder {0}: key.weight
 #. placeholder {0}: account.weight
 #. placeholder {0}: key.weight
+#. placeholder {0}: account.weight
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio/newaccount.svelte
@@ -766,8 +767,8 @@ msgstr "详情"
 msgid "Network Fees"
 msgstr "网络费用"
 
-#. placeholder {0}: data.network.chain.systemToken?.symbol.code || ''
 #. placeholder {0}: market.network.currency.symbol.code
+#. placeholder {0}: data.network.chain.systemToken?.symbol.code || ''
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 msgid "Market Cap ({0})"
@@ -1841,10 +1842,10 @@ msgstr "药丸选择"
 msgid "Select a date range"
 msgstr "选择日期范围"
 
-#. placeholder {0}: selected.label
-#. placeholder {0}: selectedFormOption.label
-#. placeholder {0}: imageOptionSelected.label
 #. placeholder {0}: JSON.stringify(tokenSelected, null, 2)
+#. placeholder {0}: imageOptionSelected.label
+#. placeholder {0}: selectedFormOption.label
+#. placeholder {0}: selected.label
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
@@ -2225,8 +2226,8 @@ msgstr "此构建的 wharfkit/cli 生成的合约以及它使用的链上帐户�
 msgid "Refresh"
 msgstr "刷新"
 
-#. placeholder {0}: formatDate(proposal.updated)
 #. placeholder {0}: refreshed
+#. placeholder {0}: formatDate(proposal.updated)
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/market/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.svelte
 msgid "Updated {0}"
@@ -3009,10 +3010,10 @@ msgstr "没有反对票"
 msgid "Loading topic..."
 msgstr "正在加载主题..."
 
-#. placeholder {0}: String(network.chain.systemToken?.symbol.name)
-#. placeholder {1}: String(ramtoken.name)
 #. placeholder {0}: data.network.token.name
 #. placeholder {1}: data.network.getRamToken().name
+#. placeholder {0}: String(network.chain.systemToken?.symbol.name)
+#. placeholder {1}: String(ramtoken.name)
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/charts.svelte
 msgid "Swap {0}/{1}"
@@ -3028,8 +3029,8 @@ msgstr "兑换 {0}/{1}"
 msgid "Available"
 msgstr "可用"
 
-#. placeholder {0}: props.network.token.name
 #. placeholder {0}: String(data.quote.symbol.name)
+#. placeholder {0}: props.network.token.name
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/legacy-token-swap.svelte
 msgid "Swap to {0}"
@@ -3616,7 +3617,7 @@ msgstr "获取代币"
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
-#. placeholder {0}: symbol.name
+#. placeholder {0}: String(network.token.symbol.name)
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
@@ -3647,7 +3648,7 @@ msgstr "<0>Unicove -</0> {0} 网络钱包和区块浏览器"
 
 #. placeholder {0}: network.chain.name
 #. placeholder {0}: networkName
-#. placeholder {0}: network.chain.name
+#. placeholder {0}: networkName
 #: src/routes/+layout.server.ts
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
@@ -4624,6 +4625,7 @@ msgstr "所有密钥、帐户和等待的总权重必须大于或等于此阈值
 msgid "Required"
 msgstr "必需"
 
+#: src/lib/components/finality/policy.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/permissions/[permission]/+page.svelte
 msgid "Threshold"
 msgstr "阈值"
@@ -5407,7 +5409,9 @@ msgstr "已创建"
 msgid "MMM D, YYYY"
 msgstr "MMM D, YYYY"
 
+#: src/lib/components/finality/timeline.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/proposals/components/ProposalsHeader.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/network/finality/+page.svelte
 msgid "Timeline"
 msgstr "时间线"
 
@@ -5908,8 +5912,8 @@ msgstr "{0}您有 {1} 可供回收。"
 msgid "You have been outbid on this name.<0/>"
 msgstr "您在这个名字上的出价已被超过。<0/>"
 
-#. placeholder {0}: String(tracked.refund.amount)
 #. placeholder {0}: String(manager.refundAmount)
+#. placeholder {0}: String(tracked.refund.amount)
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/refund/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
 msgid "Claim Refund ({0})"
@@ -8702,457 +8706,457 @@ msgstr "替代此提案"
 
 #: src/lib/components/origins/kindbytes.svelte
 msgid "Before system contracts v3.3.0 (March 2024) the chain stated only what was paid or requested, not the bytes delivered."
-msgstr ""
+msgstr "在系统合约 v3.3.0（2024 年 3 月）之前，链上只记录支付或请求的数量，而不记录实际交付的字节数。"
 
 #. placeholder {0}: formatNumber(figures.without_bytes, locale)
 #: src/lib/components/origins/kindbytes.svelte
 msgid ", plus {0} with no byte count"
-msgstr ""
+msgstr "，另有 {0} 条未记录字节数"
 
 #: src/lib/components/origins/kindbytes.svelte
 msgid "Byte count not recorded"
-msgstr ""
+msgstr "未记录字节数"
 
 #: src/lib/components/origins/kindchart.svelte
 msgid "Accounts created by how RAM arrived"
-msgstr ""
+msgstr "账户创建时 RAM 的来源"
 
 #. placeholder {0}: created
 #. placeholder {1}: kindLabel( kind )
 #: src/lib/components/origins/creationline.svelte
 msgid "Created by <0/> on {0} · {1}<1/>"
-msgstr ""
+msgstr "由 <0/> 于 {0} 创建 · {1}<1/>"
 
 #. placeholder {0}: formatBytes(contribution.requested_bytes)
 #: src/lib/components/origins/contributionbytes.svelte
 msgid "{0} requested"
-msgstr ""
+msgstr "请求了 {0}"
 
 #. placeholder {0}: contribution.quantity
 #: src/lib/components/origins/contributionbytes.svelte
 msgid "{0} paid"
-msgstr ""
+msgstr "支付了 {0}"
 
 #: src/routes/[[locale]]/[network]/(explorer)/network/+page.svelte
 msgid "Account origins<0/>"
-msgstr ""
+msgstr "账户来源<0/>"
 
 #: src/routes/[[locale]]/[network]/(explorer)/network/origins/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/network/origins/[creator]/+page.svelte
 msgid "Account origins are unavailable on this network."
-msgstr ""
+msgstr "此网络上无法获取账户来源。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/network/origins/+page.svelte
 msgid "Account origins are unavailable right now."
-msgstr ""
+msgstr "目前无法获取账户来源。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/network/origins/+page.svelte
 msgid "Loading account origins..."
-msgstr ""
+msgstr "正在加载账户来源..."
 
 #: src/routes/[[locale]]/[network]/(explorer)/network/origins/+page.svelte
 msgid "Creations by how RAM arrived"
-msgstr ""
+msgstr "按 RAM 到达方式统计创建数"
 
 #. placeholder {0}: formatNumber(totals.creations, locale)
 #: src/routes/[[locale]]/[network]/(explorer)/network/origins/+page.svelte
 msgid "{0} accounts"
-msgstr ""
+msgstr "{0} 个账户"
 
 #: src/routes/[[locale]]/[network]/(explorer)/network/origins/+page.svelte
 msgid "Top creators"
-msgstr ""
+msgstr "创建数最多的账户"
 
 #: src/routes/[[locale]]/[network]/(explorer)/network/origins/+page.svelte
 msgid "How RAM arrives"
-msgstr ""
+msgstr "RAM 到达方式"
 
 #: src/routes/[[locale]]/[network]/(explorer)/network/origins/[creator]/+page.svelte
 msgid "Accounts created by day"
-msgstr ""
+msgstr "按天统计创建的账户"
 
 #: src/routes/[[locale]]/[network]/(explorer)/network/origins/[creator]/+page.svelte
 msgid "Daily figures are unavailable right now."
-msgstr ""
+msgstr "目前无法获取每日数据。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/network/origins/[creator]/+page.svelte
 msgid "<0/> accounts"
-msgstr ""
+msgstr "<0/> 个账户"
 
 #: src/routes/[[locale]]/[network]/(explorer)/network/origins/[creator]/+page.svelte
 msgid "Recently created accounts"
-msgstr ""
+msgstr "最近创建的账户"
 
 #: src/routes/[[locale]]/[network]/(explorer)/network/origins/[creator]/+page.svelte
 msgid "RAM arrived"
-msgstr ""
+msgstr "RAM 已到达"
 
 #: src/routes/[[locale]]/[network]/(explorer)/network/origins/[creator]/+page.svelte
 msgid "This account has not created any accounts."
-msgstr ""
+msgstr "此账户尚未创建任何账户。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/network/origins/[creator]/+page.svelte
 msgid "Created accounts are unavailable right now."
-msgstr ""
+msgstr "目前无法获取已创建的账户。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/network/origins/[creator]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
 msgid "Loading accounts..."
-msgstr ""
+msgstr "正在加载账户..."
 
 #: src/routes/[[locale]]/[network]/(explorer)/network/origins/[creator]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/events/+page.svelte
 msgid "Show older"
-msgstr ""
+msgstr "显示更早内容"
 
 #: src/routes/[[locale]]/[network]/(explorer)/network/origins/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/network/origins/[creator]/+page.ts
 msgid "Account origins"
-msgstr ""
+msgstr "账户来源"
 
 #: src/lib/components/origins/labels.svelte.ts
 msgid "Bought"
-msgstr ""
+msgstr "购买"
 
 #: src/lib/components/origins/labels.svelte.ts
 msgid "Transferred"
-msgstr ""
+msgstr "转移"
 
 #: src/lib/components/origins/labels.svelte.ts
 msgid "Gifted"
-msgstr ""
+msgstr "赠送"
 
 #: src/lib/components/origins/labels.svelte.ts
 msgid "Network-funded"
-msgstr ""
+msgstr "网络资助"
 
 #: src/lib/components/origins/labels.svelte.ts
 msgid "Set by the system"
-msgstr ""
+msgstr "由系统设置"
 
 #: src/lib/components/origins/labels.svelte.ts
 msgid "No RAM"
-msgstr ""
+msgstr "无 RAM"
 
 #: src/lib/components/origins/labels.svelte.ts
 msgid "The creator bought RAM for the new account."
-msgstr ""
+msgstr "创建者为新账户购买了 RAM。"
 
 #: src/lib/components/origins/labels.svelte.ts
 msgid "The creator moved some of its own RAM to the new account; the creator can't take it back."
-msgstr ""
+msgstr "创建者将自己的一部分 RAM 转移到了新账户；创建者无法收回。"
 
 #: src/lib/components/origins/labels.svelte.ts
 msgid "The creator gifted RAM it can take back once the account returns it."
-msgstr ""
+msgstr "创建者赠送了 RAM；账户归还后，创建者可以收回。"
 
 #: src/lib/components/origins/labels.svelte.ts
 msgid "The network-funded onboarding program paid for the RAM."
-msgstr ""
+msgstr "网络资助的入门计划支付了 RAM 费用。"
 
 #: src/lib/components/origins/labels.svelte.ts
 msgid "A privileged action set the RAM quota directly."
-msgstr ""
+msgstr "特权操作直接设置了 RAM 配额。"
 
 #: src/lib/components/origins/labels.svelte.ts
 msgid "The account arrived with no RAM of its own."
-msgstr ""
+msgstr "该账户创建时没有自有 RAM。"
 
 #: src/lib/components/origins/labels.svelte.ts
 msgid "Last 30 days"
-msgstr ""
+msgstr "过去 30 天"
 
 #: src/lib/components/origins/labels.svelte.ts
 msgid "Last 90 days"
-msgstr ""
+msgstr "过去 90 天"
 
 #: src/lib/components/origins/labels.svelte.ts
 msgid "Last year"
-msgstr ""
+msgstr "过去一年"
 
 #: src/lib/components/origins/labels.svelte.ts
 msgid "Since launch"
-msgstr ""
+msgstr "自上线以来"
 
 #: src/lib/components/onboarding/propose.svelte
 msgid "Review proposal"
-msgstr ""
+msgstr "审核提案"
 
 #: src/lib/components/onboarding/propose.svelte
 msgid "Creator account"
-msgstr ""
+msgstr "创建者账户"
 
 #: src/lib/components/onboarding/propose.svelte
 msgid "Daily quota in bytes"
-msgstr ""
+msgstr "每日配额（字节）"
 
 #: src/lib/components/onboarding/propose.svelte
 msgid "Application link"
-msgstr ""
+msgstr "申请链接"
 
 #: src/lib/components/onboarding/propose.svelte
 msgid "Change request link"
-msgstr ""
+msgstr "变更请求链接"
 
 #: src/lib/components/onboarding/propose.svelte
 msgid "An open proposal already acts on this: <0>{0} ({1}/{2})</0>"
-msgstr ""
+msgstr "已有一个开放提案正在处理此事项：<0>{0} ({1}/{2})</0>"
 
 #: src/lib/components/onboarding/propose.svelte
 msgid "Producers usually want a link to the case for this change."
-msgstr ""
+msgstr "生产者通常希望获得此变更事项的案件链接。"
 
 #: src/lib/components/onboarding/propose.svelte
 msgid "Resolving approvers..."
-msgstr ""
+msgstr "正在解析审批者……"
 
 #: src/lib/components/onboarding/propose.svelte
 msgid "Needs"
-msgstr ""
+msgstr "需求"
 
 #: src/lib/components/onboarding/propose.svelte
 msgid "Requests"
-msgstr ""
+msgstr "请求"
 
 #: src/lib/components/onboarding/propose.svelte
 msgid "1 approval"
-msgstr ""
+msgstr "1 个批准"
 
 #. placeholder {0}: formatNumber(review.approvers.length, locale)
 #: src/lib/components/onboarding/propose.svelte
 msgid "{0} approvals"
-msgstr ""
+msgstr "{0} 个批准"
 
 #: src/lib/components/onboarding/propose.svelte
 msgid "Expires"
-msgstr ""
+msgstr "过期时间"
 
 #. placeholder {0}: formatNumber(expireDays(action), locale)
 #: src/lib/components/onboarding/propose.svelte
 msgid "in {0} days"
-msgstr ""
+msgstr "{0} 天后"
 
 #: src/lib/components/onboarding/propose.svelte
 #: src/lib/components/onboarding/propose.svelte
 msgid "Link"
-msgstr ""
+msgstr "链接"
 
 #. placeholder {0}: MESSAGER
 #: src/lib/components/onboarding/propose.svelte
 msgid "Sent first as a {0} message"
-msgstr ""
+msgstr "最初作为 {0} 消息发送"
 
 #. placeholder {0}: MESSAGER
 #: src/lib/components/onboarding/propose.svelte
 msgid "Left out: {0} does not exist on this chain"
-msgstr ""
+msgstr "已省略：此链上不存在 {0}"
 
 #: src/lib/components/onboarding/propose.svelte
 msgid "Proposing..."
-msgstr ""
+msgstr "提议中……"
 
 #: src/lib/components/onboarding/propose.svelte
 msgid "Propose"
-msgstr ""
+msgstr "提议"
 
 #: src/lib/components/onboarding/propose.svelte
 msgid "Sign in to propose this from your account."
-msgstr ""
+msgstr "登录以从您的账户发起此提议。"
 
 #: src/lib/components/onboarding/labels.svelte.ts
 msgid "Gift"
-msgstr ""
+msgstr "赠礼"
 
 #: src/lib/components/onboarding/labels.svelte.ts
 msgid "Return"
-msgstr ""
+msgstr "返回"
 
 #: src/lib/components/onboarding/labels.svelte.ts
 msgid "Creator added"
-msgstr ""
+msgstr "已添加创作者"
 
 #: src/lib/components/onboarding/labels.svelte.ts
 msgid "Creator removed"
-msgstr ""
+msgstr "已移除创作者"
 
 #: src/lib/components/onboarding/labels.svelte.ts
 msgid "Quota changed"
-msgstr ""
+msgstr "配额已更改"
 
 #: src/lib/components/onboarding/labels.svelte.ts
 msgid "Creator suspended"
-msgstr ""
+msgstr "创作者已暂停"
 
 #: src/lib/components/onboarding/labels.svelte.ts
 msgid "Creator resumed"
-msgstr ""
+msgstr "创作者已恢复"
 
 #: src/lib/components/onboarding/labels.svelte.ts
 msgid "Gifting turned on"
-msgstr ""
+msgstr "赠送已开启"
 
 #: src/lib/components/onboarding/labels.svelte.ts
 msgid "Gifting turned off"
-msgstr ""
+msgstr "赠送已关闭"
 
 #: src/lib/components/onboarding/labels.svelte.ts
 #: src/lib/components/onboarding/labels.svelte.ts
 msgid "RAM bought"
-msgstr ""
+msgstr "已购买 RAM"
 
 #: src/lib/components/onboarding/labels.svelte.ts
 msgid "RAM transferred"
-msgstr ""
+msgstr "已转移 RAM"
 
 #: src/lib/components/onboarding/labels.svelte.ts
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
 msgid "Admit a creator"
-msgstr ""
+msgstr "批准创作者加入"
 
 #: src/lib/components/onboarding/labels.svelte.ts
 msgid "Change a quota"
-msgstr ""
+msgstr "更改配额"
 
 #: src/lib/components/onboarding/labels.svelte.ts
 msgid "Suspend a creator"
-msgstr ""
+msgstr "暂停创作者"
 
 #: src/lib/components/onboarding/labels.svelte.ts
 msgid "Resume a creator"
-msgstr ""
+msgstr "恢复创作者"
 
 #: src/lib/components/onboarding/labels.svelte.ts
 msgid "Remove a creator"
-msgstr ""
+msgstr "移除创作者"
 
 #: src/lib/components/onboarding/labels.svelte.ts
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
 msgid "Turn gifting on"
-msgstr ""
+msgstr "开启赠送"
 
 #: src/lib/components/onboarding/labels.svelte.ts
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
 msgid "Turn gifting off"
-msgstr ""
+msgstr "关闭赠送"
 
 #. placeholder {0}: approver.actor
 #: src/lib/components/onboarding/labels.svelte.ts
 msgid "{0}'s key"
-msgstr ""
+msgstr "{0} 的密钥"
 
 #. placeholder {0}: threshold
 #. placeholder {1}: total
 #: src/lib/components/onboarding/labels.svelte.ts
 msgid "{0} of {1} producers"
-msgstr ""
+msgstr "{1} 个生产者中的 {0} 个"
 
 #. placeholder {0}: threshold
 #. placeholder {1}: total
 #: src/lib/components/onboarding/labels.svelte.ts
 msgid "{0} of {1} accounts"
-msgstr ""
+msgstr "{1} 个账户中的 {0} 个"
 
 #: src/lib/components/onboarding/labels.svelte.ts
 msgid "Enter an account name."
-msgstr ""
+msgstr "请输入账户名称。"
 
 #. placeholder {0}: creator
 #: src/lib/components/onboarding/labels.svelte.ts
 msgid "{0} does not exist on this chain."
-msgstr ""
+msgstr "{0} 在此链上不存在。"
 
 #: src/lib/components/onboarding/labels.svelte.ts
 msgid "Enter a daily quota in bytes."
-msgstr ""
+msgstr "请输入以字节为单位的每日配额。"
 
 #. placeholder {0}: formatNumber(QUOTA_FLOOR, locale)
 #: src/lib/components/onboarding/labels.svelte.ts
 msgid "A quota must be at least {0} bytes."
-msgstr ""
+msgstr "配额必须至少为 {0} 字节。"
 
 #. placeholder {0}: creator
 #: src/lib/components/onboarding/labels.svelte.ts
 msgid "{0} is already a creator."
-msgstr ""
+msgstr "{0} 已经是创作者。"
 
 #. placeholder {0}: creator
 #. placeholder {0}: name
 #: src/lib/components/onboarding/labels.svelte.ts
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
 msgid "{0} is not a registered creator."
-msgstr ""
+msgstr "{0} 不是已注册的创建者。"
 
 #. placeholder {0}: creator
 #: src/lib/components/onboarding/labels.svelte.ts
 msgid "{0} is already suspended."
-msgstr ""
+msgstr "{0} 已经暂停。"
 
 #. placeholder {0}: creator
 #: src/lib/components/onboarding/labels.svelte.ts
 msgid "{0} is not suspended."
-msgstr ""
+msgstr "{0} 未暂停。"
 
 #. placeholder {0}: creator
 #: src/lib/components/onboarding/labels.svelte.ts
 msgid "{0} already has this quota."
-msgstr ""
+msgstr "{0} 已经拥有此配额。"
 
 #: src/lib/components/onboarding/labels.svelte.ts
 msgid "Gifting"
-msgstr ""
+msgstr "赠送"
 
 #: src/lib/components/onboarding/labels.svelte.ts
 msgid "Suspended"
-msgstr ""
+msgstr "已暂停"
 
 #: src/lib/components/onboarding/hubcard.svelte
 #: src/lib/components/onboarding/labels.svelte.ts
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
 msgid "Program disabled"
-msgstr ""
+msgstr "计划已禁用"
 
 #: src/lib/components/onboarding/labels.svelte.ts
 msgid "Removed"
-msgstr ""
+msgstr "已移除"
 
 #: src/lib/components/onboarding/labels.svelte.ts
 msgid "No net outflow"
-msgstr ""
+msgstr "无净流出"
 
 #. placeholder {0}: formatNumber(Math.round(days * 24), locale)
 #: src/lib/components/onboarding/labels.svelte.ts
 msgid "{0} hours"
-msgstr ""
+msgstr "{0} 小时"
 
-#. placeholder {0}: formatNumber(days, locale, { maximumFractionDigits: 1 })
 #. placeholder {0}: formatNumber(Math.round(days), locale)
+#. placeholder {0}: formatNumber(days, locale, { maximumFractionDigits: 1 })
 #: src/lib/components/onboarding/labels.svelte.ts
 #: src/lib/components/onboarding/labels.svelte.ts
 msgid "{0} days"
-msgstr ""
+msgstr "{0} 天"
 
 #. placeholder {0}: formatNumber(days / 365, locale, { maximumFractionDigits: 1 })
 #: src/lib/components/onboarding/labels.svelte.ts
 msgid "{0} years"
-msgstr ""
+msgstr "{0} 年"
 
 #: src/lib/components/onboarding/labels.svelte.ts
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
 msgid "Gifts"
-msgstr ""
+msgstr "赠礼"
 
 #: src/lib/components/onboarding/labels.svelte.ts
 msgid "Returns"
-msgstr ""
+msgstr "回报"
 
 #: src/lib/components/onboarding/labels.svelte.ts
 msgid "Admin"
-msgstr ""
+msgstr "管理员"
 
 #: src/lib/components/onboarding/labels.svelte.ts
 msgid "RAM movements"
-msgstr ""
+msgstr "RAM 转移"
 
 #: src/lib/components/onboarding/empty.svelte
 #: src/lib/components/onboarding/hubcard.svelte
@@ -9161,7 +9165,7 @@ msgstr ""
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/events/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.ts
 msgid "Network-funded onboarding"
-msgstr ""
+msgstr "网络资助的入门引导"
 
 #: src/lib/components/onboarding/empty.svelte
 msgid ""
@@ -9169,111 +9173,115 @@ msgid ""
 "when producers enact it. Its endowment, creators and gifts appear here once that account exists\n"
 "on chain."
 msgstr ""
+"赠礼计划由 <0/> 提供，这是生产者启用该计划时创建的账户 VP-0001。\n"
+"该账户一旦在链上存在，其捐赠资金、创建者和赠礼就会显示在这里。"
 
 #: src/lib/components/onboarding/hubcard.svelte
 msgid "1 creator,"
-msgstr ""
+msgstr "1 位创建者，"
 
 #. placeholder {0}: formatNumber(program.creators.length, locale)
 #: src/lib/components/onboarding/hubcard.svelte
 msgid "{0} creators,"
-msgstr ""
+msgstr "{0} 位创建者，"
 
 #: src/lib/components/onboarding/hubcard.svelte
 msgid "enabled"
-msgstr ""
+msgstr "已启用"
 
 #: src/lib/components/onboarding/hubcard.svelte
 msgid "disabled"
-msgstr ""
+msgstr "已禁用"
 
 #: src/lib/components/onboarding/hubcard.svelte
 msgid ""
 "Registered creators gift RAM from a network endowment to each account they create, under\n"
 "daily quotas producers set by msig."
 msgstr ""
+"已注册的创建者从网络捐赠基金中向其创建的每个账户赠送 RAM，额度受\n"
+"生产者通过多重签名设置的每日配额限制。"
 
 #: src/lib/components/onboarding/hubcard.svelte
 msgid "View onboarding"
-msgstr ""
+msgstr "查看入门引导"
 
 #: src/lib/components/onboarding/hubcard.svelte
 msgid "Program figures are unavailable right now."
-msgstr ""
+msgstr "计划数据目前不可用。"
 
 #: src/lib/components/onboarding/hubcard.svelte
 #: src/lib/components/onboarding/hubcard.svelte
 msgid "Endowment"
-msgstr ""
+msgstr "捐赠基金"
 
 #: src/lib/components/onboarding/hubcard.svelte
 msgid "Figures appear here once VP-0001 creates <0/> and seeds it with RAM."
-msgstr ""
+msgstr "VP-0001 创建 <0/> 并为其注入 RAM 后，数据将显示在这里。"
 
 #. placeholder {0}: formatNumber(observed.gifts, locale)
 #. placeholder {1}: OBSERVED_DAYS
 #: src/lib/components/onboarding/hubcard.svelte
 msgid "{0} gifts in {1} days"
-msgstr ""
+msgstr "{1} 天内赠送 {0} 次"
 
 #. placeholder {0}: formatBytes(endowment.ram_quota)
 #: src/lib/components/onboarding/hubcard.svelte
 msgid "available of {0} held"
-msgstr ""
+msgstr "可用，共持有 {0}"
 
 #: src/lib/components/onboarding/hubcard.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
 msgid "Observed runway"
-msgstr ""
+msgstr "观测可维持时间"
 
 #. placeholder {0}: OBSERVED_DAYS
 #: src/lib/components/onboarding/hubcard.svelte
 msgid "at the last {0} days' pace"
-msgstr ""
+msgstr "按最近 {0} 天的速度"
 
 #: src/lib/components/onboarding/hubcard.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
 msgid "Committed runway"
-msgstr ""
+msgstr "承诺可维持时间"
 
 #: src/lib/components/onboarding/hubcard.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
 msgid "No active quota"
-msgstr ""
+msgstr "无有效配额"
 
 #. placeholder {0}: formatBytes(committed.suspendedQuota)
 #: src/lib/components/onboarding/hubcard.svelte
 msgid "{0} quota suspended"
-msgstr ""
+msgstr "{0} 配额已暂停"
 
 #: src/lib/components/onboarding/hubcard.svelte
 msgid "if every quota is used daily"
-msgstr ""
+msgstr "如果每天用尽所有配额"
 
 #: src/lib/components/onboarding/giftschart.svelte
 msgid "No creator"
-msgstr ""
+msgstr "没有创建者"
 
 #: src/lib/components/onboarding/giftschart.svelte
 msgid "Bytes gifted per day by creator"
-msgstr ""
+msgstr "创建者每日赠送的字节数"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
 msgid "Program status"
-msgstr ""
+msgstr "计划状态"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
 msgid "Gifting is on"
-msgstr ""
+msgstr "赠礼已开启"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
 msgid "Gifting is off"
-msgstr ""
+msgstr "赠礼已关闭"
 
 #. placeholder {0}: formatNumber(program.suspendedCount, locale)
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
 msgid "{0} suspended."
-msgstr ""
+msgstr "{0} 个已暂停。"
 
 #. placeholder {0}: formatNumber(gifting, locale)
 #. placeholder {1}: formatNumber(program.creators.length, locale)
@@ -9283,309 +9291,315 @@ msgid ""
 "{0} of {1} registered\n"
 "can gift from {2}. <0/>"
 msgstr ""
+"已注册的 {1} 位创作者中有 {0} 位\n"
+"可以从 {2} 赠礼。<0/>"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
 msgid ""
 "No creator can gift. Registrations and quotas stay in place for when gifting is turned\n"
 "back on."
 msgstr ""
+"没有创作者可以赠礼。注册信息和配额将保留，以便赠礼重新\n"
+"开启时使用。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
 msgid "Turning gifting off stops every creator at once. Needs <0/>."
-msgstr ""
+msgstr "关闭赠送会立即停止所有创作者。需要 <0/>。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
 msgid ""
 "Turning gifting on needs <0/>. Whoever executes it runs any\n"
 "open proposal to turn gifting off first, in the same transaction."
 msgstr ""
+"开启赠送需要 <0/>。执行者会在同一笔交易中先执行任何\n"
+"关闭赠送的未决提案。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
 msgid "Open proposals"
-msgstr ""
+msgstr "未决提案"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
 msgid "Open proposals are unavailable right now."
-msgstr ""
+msgstr "未决提案目前不可用。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
 msgid "Loading proposals..."
-msgstr ""
+msgstr "正在加载提案……"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
 msgid "No open proposal acts on <0/>."
-msgstr ""
+msgstr "没有未决提案作用于 <0/>。"
 
 #. placeholder {0}: formatNumber(proposal.standby, locale)
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
 msgid ", {0} standby not counted"
-msgstr ""
+msgstr "，不计入 {0} 个待机项"
 
 #. placeholder {0}: formatNumber(proposal.satisfied ?? 0, locale)
 #. placeholder {1}: formatNumber( proposal.threshold, locale )
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
 msgid "{0} of {1} approved<0/>"
-msgstr ""
+msgstr "已批准 {0}/{1}<0/>"
 
 #. placeholder {0}: expires(proposal.expiration)
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
 msgid "expires {0}"
-msgstr ""
+msgstr "于 {0} 到期"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
 msgid "Needs <0/>."
-msgstr ""
+msgstr "需要 <0/>。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
 msgid "Review admission"
-msgstr ""
+msgstr "审核加入申请"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
 msgid "Change one creator"
-msgstr ""
+msgstr "更改单个创作者"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
 msgid "Quota changes, suspensions and removals are proposed from each creator's page."
-msgstr ""
+msgstr "配额更改、暂停和移除需从每个创作者的页面发起提案。"
 
 #. placeholder {0}: formatBytes(row.daily_quota_bytes)
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
 msgid "{0}/day"
-msgstr ""
+msgstr "{0}/天"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
 msgid "No creator is registered."
-msgstr ""
+msgstr "没有已注册的创作者。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
 msgid "Who approves what"
-msgstr ""
+msgstr "谁批准什么"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
 msgid "Reading permissions..."
-msgstr ""
+msgstr "正在读取权限……"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
 msgid "Permission details"
-msgstr ""
+msgstr "权限详情"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
 msgid "Linked actions"
-msgstr ""
+msgstr "关联操作"
 
 #. placeholder {0}: authority(permission)
 #. placeholder {1}: permission.authority.threshold
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.svelte
 msgid "{0} (threshold {1})"
-msgstr ""
+msgstr "{0}（阈值 {1}）"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
 msgid "Current window"
-msgstr ""
+msgstr "当前窗口"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
 msgid "Daily quota"
-msgstr ""
+msgstr "每日配额"
 
 #. placeholder {0}: formatNumber(row.daily_quota_bytes, locale)
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
 msgid "({0} bytes)"
-msgstr ""
+msgstr "（{0} 字节）"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
 msgid "Used this window"
-msgstr ""
+msgstr "此窗口已使用"
 
 #. placeholder {0}: formatBytes(Math.max(0, row.daily_quota_bytes - used))
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
 msgid "<0/> <1/>, {0} left"
-msgstr ""
+msgstr "<0/> <1/>，剩余 {0}"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
 msgid "Window"
-msgstr ""
+msgstr "窗口"
 
 #. placeholder {0}: time(new Date(row.window_start).toISOString())
 #. placeholder {1}: relative(ends)
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
 msgid "Opened {0}, resets {1}"
-msgstr ""
+msgstr "于 {0} 开启，{1} 后重置"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
 msgid "Opens on the next gift"
-msgstr ""
+msgstr "下次赠送时开启"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
 msgid "Gifts per day"
-msgstr ""
+msgstr "每日赠送次数"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
 msgid "Quota windows"
-msgstr ""
+msgstr "配额窗口"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
 msgid "Quota windows are unavailable right now."
-msgstr ""
+msgstr "目前无法获取配额窗口。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
 msgid "Opened"
-msgstr ""
+msgstr "已开启"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
 msgid "Quota"
-msgstr ""
+msgstr "配额"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
 msgid "Ended"
-msgstr ""
+msgstr "已结束"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
 msgid "Open"
-msgstr ""
+msgstr "开放"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
 msgid "After 24 hours"
-msgstr ""
+msgstr "24 小时后"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
 msgid "No quota window has opened."
-msgstr ""
+msgstr "尚未开放配额窗口。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
 msgid "Registration history"
-msgstr ""
+msgstr "注册历史"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
 msgid "No registrations."
-msgstr ""
+msgstr "没有注册记录。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
 msgid "Gifted accounts"
-msgstr ""
+msgstr "获赠账户"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
 msgid "No gifted accounts."
-msgstr ""
+msgstr "没有获赠账户。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
 msgid "Gifted accounts are unavailable right now."
-msgstr ""
+msgstr "获赠账户目前不可用。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
 msgid "Propose a change"
-msgstr ""
+msgstr "提议更改"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
 msgid "Set quota"
-msgstr ""
+msgstr "设置配额"
 
 #. placeholder {0}: name
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
 msgid "Resume {0}"
-msgstr ""
+msgstr "恢复 {0}"
 
 #. placeholder {0}: name
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
 msgid "Lets {0} gift again."
-msgstr ""
+msgstr "允许 {0} 再次赠礼。"
 
 #. placeholder {0}: name
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
 msgid "Suspend {0}"
-msgstr ""
+msgstr "暂停 {0}"
 
 #. placeholder {0}: name
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
 msgid "Stops {0}'s gifts and keeps its registration."
-msgstr ""
+msgstr "停止 {0} 的赠礼，但保留其注册信息。"
 
 #. placeholder {0}: name
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
 msgid "Remove {0}"
-msgstr ""
+msgstr "移除 {0}"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
 msgid "Deletes the registration, quota and window."
-msgstr ""
+msgstr "删除注册信息、配额和窗口。"
 
 #. placeholder {0}: name
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.svelte
 msgid "Add {0}"
-msgstr ""
+msgstr "添加 {0}"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
 msgid "Creators"
-msgstr ""
+msgstr "创作者"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/+layout.svelte
 msgid "Manage"
-msgstr ""
+msgstr "管理"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/+layout.svelte
 msgid "Network-funded onboarding is unavailable on this network."
-msgstr ""
+msgstr "此网络不提供网络资助的入门服务。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/+layout.svelte
 msgid "Loading the gift program..."
-msgstr ""
+msgstr "正在加载赠礼计划……"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/+layout.svelte
 msgid "The gift program's figures are unavailable right now."
-msgstr ""
+msgstr "赠礼计划的数据目前不可用。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
 msgid "Endowment available"
-msgstr ""
+msgstr "可用捐赠额"
 
 #. placeholder {0}: formatBytes(endowment.ram_quota)
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
 msgid "of {0} held"
-msgstr ""
+msgstr "共持有 {0}"
 
 #. placeholder {0}: formatBytes(Math.max(0, observed.perDay))
 #. placeholder {1}: OBSERVED_DAYS
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
 msgid "at {0} a day, the last {1} days' net outflow"
-msgstr ""
+msgstr "按每天 {0} 计算，过去 {1} 天的净流出"
 
 #. placeholder {0}: formatBytes(committed.activeQuota)
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
 msgid "{0} daily quota across 1 creator"
-msgstr ""
+msgstr "1 位创作者共享有每日 {0} 的配额"
 
 #. placeholder {0}: formatBytes(committed.activeQuota)
 #. placeholder {1}: formatNumber( committed.activeCreators, locale )
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
 msgid "{0} daily quota across {1} creators"
-msgstr ""
+msgstr "{1} 位创作者共享有每日 {0} 的配额"
 
 #. placeholder {0}: formatBytes(committed.suspendedQuota)
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
 msgid ", plus {0} suspended"
-msgstr ""
+msgstr "，另有 {0} 已暂停"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
 msgid "Program"
-msgstr ""
+msgstr "计划"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
 msgid "Enabled"
-msgstr ""
+msgstr "已启用"
 
 #. placeholder {0}: formatNumber(program.creators.length, locale)
 #. placeholder {1}: formatNumber( program.suspendedCount, locale )
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
 msgid "{0} registered, {1} suspended"
-msgstr ""
+msgstr "已注册 {0} 个，已暂停 {1} 个"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
 msgid "Bytes gifted per day"
-msgstr ""
+msgstr "每日赠送字节数"
 
 #. placeholder {0}: formatNumber(observed.gifts, locale)
 #. placeholder {1}: OBSERVED_DAYS
@@ -9593,198 +9607,640 @@ msgstr ""
 #. placeholder {3}: formatBytes(observed.returns)
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
 msgid "{0} gifts in the last {1} days, {2} gifted, {3} returned"
-msgstr ""
+msgstr "过去 {1} 天赠送 {0} 次，赠送 {2}，返还 {3}"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/events/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/events/+page.svelte
 msgid "Creator"
-msgstr ""
+msgstr "创作者"
 
 #. placeholder {0}: OBSERVED_DAYS
 #. placeholder {0}: OBSERVED_DAYS
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/+page.svelte
 msgid "Gifts, {0} days"
-msgstr ""
+msgstr "赠送，{0} 天"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
 msgid "No creators are registered."
-msgstr ""
+msgstr "没有已注册的创作者。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
 msgid "Recent events"
-msgstr ""
+msgstr "近期事件"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
 msgid "Recent events are unavailable right now."
-msgstr ""
+msgstr "近期事件目前不可用。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
 msgid "No events yet."
-msgstr ""
+msgstr "暂无事件。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/+page.svelte
 msgid "All events ›"
-msgstr ""
+msgstr "所有事件 ›"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/+page.svelte
 msgid "Registered"
-msgstr ""
+msgstr "已注册"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/+page.svelte
 msgid "Gifted, 1 year"
-msgstr ""
+msgstr "赠送，1 年"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/+page.svelte
 msgid "No creator has registered yet."
-msgstr ""
+msgstr "尚未有创作者注册。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/events/+page.svelte
 msgid "Every creator"
-msgstr ""
+msgstr "所有创作者"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/events/+page.svelte
 msgid "Time"
-msgstr ""
+msgstr "时间"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/events/+page.svelte
 msgid "Event"
-msgstr ""
+msgstr "事件"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/events/+page.svelte
 msgid "No events match."
-msgstr ""
+msgstr "没有匹配的事件。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/events/+page.svelte
 msgid "Events are unavailable right now."
-msgstr ""
+msgstr "事件目前不可用。"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/events/+page.svelte
 msgid "Loading events..."
-msgstr ""
+msgstr "正在加载事件……"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/manage/+page.ts
 msgid "Manage onboarding"
-msgstr ""
+msgstr "管理入驻流程"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/events/+page.ts
 msgid "Onboarding events"
-msgstr ""
+msgstr "入驻事件"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/+page.ts
 msgid "Onboarding creators"
-msgstr ""
+msgstr "引导创作者"
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.ts
 msgid "Onboarding creator"
-msgstr ""
+msgstr "入驻创建者"
 
 #: src/lib/components/finality/labels.svelte.ts
+#: src/lib/components/finality/ttfchart.svelte
 msgid "Production"
-msgstr ""
+msgstr "生产"
 
 #: src/lib/components/finality/labels.svelte.ts
 msgid "Latency"
-msgstr ""
+msgstr "延迟"
 
 #: src/lib/components/finality/labels.svelte.ts
+#: src/lib/components/finality/ttfchart.svelte
 msgid "QC"
-msgstr ""
+msgstr "质量检查"
 
 #: src/lib/components/finality/labels.svelte.ts
 msgid "Final"
-msgstr ""
+msgstr "最终"
 
 #: src/lib/components/finality/labels.svelte.ts
 msgid "Feed"
-msgstr ""
+msgstr "馈送"
 
 #: src/lib/components/finality/labels.svelte.ts
 msgid "Missed slot"
-msgstr ""
+msgstr "错过的时隙"
 
 #: src/lib/components/finality/labels.svelte.ts
 msgid "Fork"
-msgstr ""
+msgstr "分叉"
 
 #: src/lib/components/finality/labels.svelte.ts
 msgid "Latency above baseline p99"
-msgstr ""
+msgstr "延迟高于基线 p99"
 
 #: src/lib/components/finality/labels.svelte.ts
 msgid "Weak QC"
-msgstr ""
+msgstr "弱 QC"
 
 #: src/lib/components/finality/labels.svelte.ts
 msgid "No QC"
-msgstr ""
+msgstr "无 QC"
 
 #: src/lib/components/finality/labels.svelte.ts
 msgid "QC lag over 1 block"
-msgstr ""
+msgstr "QC 延迟超过 1 个区块"
 
 #: src/lib/components/finality/labels.svelte.ts
 msgid "QC at threshold"
-msgstr ""
+msgstr "QC 达到阈值"
 
 #: src/lib/components/finality/labels.svelte.ts
 msgid "Time to final above baseline p99"
-msgstr ""
+msgstr "最终确认时间高于基线 p99"
 
 #: src/lib/components/finality/labels.svelte.ts
 msgid "Feed paused"
-msgstr ""
+msgstr "馈送已暂停"
 
 #: src/lib/components/finality/labels.svelte.ts
 msgid "No timing, backfilled"
-msgstr ""
+msgstr "无时间数据，已回填"
 
 #: src/lib/components/finality/labels.svelte.ts
 msgid "Normal"
-msgstr ""
+msgstr "正常"
 
 #: src/lib/components/finality/labels.svelte.ts
 msgid "Departure"
-msgstr ""
+msgstr "偏离"
 
 #: src/lib/components/finality/labels.svelte.ts
 msgid "Above baseline"
-msgstr ""
+msgstr "高于基线"
 
 #: src/lib/components/finality/labels.svelte.ts
+#: src/lib/components/finality/votegrid.svelte
 msgid "Building baseline"
-msgstr ""
+msgstr "正在建立基线"
 
 #. placeholder {0}: value
 #: src/lib/components/finality/labels.svelte.ts
 msgid "{0} ms"
-msgstr ""
+msgstr "{0} 毫秒"
 
 #. placeholder {0}: value
+#. placeholder {0}: value
 #: src/lib/components/finality/labels.svelte.ts
+#: src/lib/components/finality/ttfchart.svelte
 msgid "{0} s"
-msgstr ""
+msgstr "{0} 秒"
 
 #. placeholder {0}: count
 #: src/lib/components/finality/labels.svelte.ts
 msgid "Building, {0} min of 24 h"
-msgstr ""
+msgstr "正在建立，24 小时中的 {0} 分钟"
 
 #. placeholder {0}: hours
 #: src/lib/components/finality/labels.svelte.ts
 msgid "Baseline {0} h"
-msgstr ""
+msgstr "基线 {0} 小时"
 
 #: src/lib/components/finality/labels.svelte.ts
 msgid "Baseline 24 h"
-msgstr ""
+msgstr "基线 24 小时"
 
 #: src/routes/[[locale]]/[network]/(explorer)/network/+page.svelte
 msgid "Finality<0/>"
-msgstr ""
+msgstr "最终性<0/>"
 
 #: src/routes/[[locale]]/[network]/(explorer)/network/finality/+page.ts
 msgid "Finality"
+msgstr "终局性"
+
+#: src/lib/components/finality/feedbanner.svelte
+msgid "Connecting to the finality feed."
+msgstr "正在连接最终确认数据流。"
+
+#. placeholder {0}: lastNum
+#. placeholder {1}: formatClock(lastTime)
+#. placeholder {2}: age
+#: src/lib/components/finality/feedbanner.svelte
+msgid "Reconnecting to the finality feed. Last block #{0} at {1} UTC, {2} s ago."
+msgstr "正在重新连接最终确认数据流。最后一个区块为 #{0}，时间为 UTC {1}，距今 {2} 秒。"
+
+#: src/lib/components/finality/feedbanner.svelte
+msgid "Reconnecting to the finality feed."
+msgstr "正在重新连接最终确认数据流。"
+
+#. placeholder {0}: lastNum
+#. placeholder {1}: formatClock(lastTime)
+#. placeholder {2}: age
+#: src/lib/components/finality/feedbanner.svelte
+msgid "Feed paused. Last block #{0} at {1} UTC, {2} s ago."
+msgstr "数据流已暂停。最后一个区块为 #{0}，时间为 UTC {1}，距今 {2} 秒。"
+
+#: src/lib/components/finality/feedbanner.svelte
+msgid "Feed paused."
+msgstr "数据流已暂停。"
+
+#: src/lib/components/finality/feedbanner.svelte
+msgid "Catching up. Blocks received during the gap carry no timing."
+msgstr "正在追赶进度。间隔期间收到的区块没有计时数据。"
+
+#: src/lib/components/finality/headline.svelte
+msgid "s"
+msgstr "秒"
+
+#. placeholder {0}: formatClock(asOf)
+#: src/lib/components/finality/headline.svelte
+msgid "Time to final as of {0} UTC"
+msgstr "截至 {0} UTC 的最终确认时间"
+
+#: src/lib/components/finality/headline.svelte
+msgid "Time to final, median of the last 20 final blocks"
+msgstr "最终确认时间，最近 20 个最终区块的中位数"
+
+#. placeholder {0}: formatMs(covered.time_to_final_p50, locale)
+#. placeholder {1}: formatMs( covered.time_to_final_p99, locale )
+#. placeholder {2}: coverageLabel(covered.minutes, locale)
+#: src/lib/components/finality/headline.svelte
+msgid "Baseline p50 {0} · p99 {1} · {2}"
+msgstr "基线 p50 {0} · p99 {1} · {2}"
+
+#: src/lib/components/finality/headline.svelte
+#: src/lib/components/finality/sparkline.svelte
+msgid "Time to final p90 per minute, last 15 min"
+msgstr "最近 15 分钟每分钟的最终确认时间 p90"
+
+#: src/lib/components/finality/finalizers.svelte
+msgid "Finalizer"
+msgstr "最终确定者"
+
+#: src/lib/components/finality/finalizers.svelte
+msgid "Missing votes"
+msgstr "缺失投票"
+
+#: src/lib/components/finality/finalizers.svelte
+msgid "Baseline"
+msgstr "基线"
+
+#: src/lib/components/finality/finalizers.svelte
+msgid "Weak votes"
+msgstr "弱投票"
+
+#: src/lib/components/finality/finalizers.svelte
+msgid "Last vote"
+msgstr "最后投票"
+
+#: src/lib/components/finality/finalizers.svelte
+msgid "Behind head"
+msgstr "落后于头部"
+
+#: src/lib/components/finality/blockstream.svelte
+#: src/lib/components/finality/finalizers.svelte
+#: src/lib/components/finality/policy.svelte
+#: src/lib/components/finality/producers.svelte
+msgid "Waiting for the first blocks"
+msgstr "等待首个区块"
+
+#: src/lib/components/finality/blockstream.svelte
+#: src/lib/components/finality/finalizers.svelte
+#: src/lib/components/finality/ttfchart.svelte
+msgid "pending"
+msgstr "待处理"
+
+#. placeholder {0}: generation
+#: src/lib/components/finality/finalizers.svelte
+msgid ", generation {0}"
+msgstr "，第 {0} 代"
+
+#: src/lib/components/finality/finalizers.svelte
+msgid ""
+"Finalizer policy order<0/>. Missing votes is\n"
+"the share of QCs in the live window without this finalizer's vote. A marked row is missing more\n"
+"votes than its own baseline rate makes likely."
 msgstr ""
+"最终确定者策略顺序<0/>。缺失投票是\n"
+"实时窗口中不含此最终确定者投票的 QC 占比。标记的行缺失的\n"
+"投票数超过其自身基线速率所预期的数量。"
+
+#. placeholder {0}: n
+#: src/lib/components/finality/blockstream.svelte
+msgid "Show all {0} in the live window"
+msgstr "在实时窗口中显示全部 {0}"
+
+#. placeholder {0}: n
+#: src/lib/components/finality/blockstream.svelte
+msgid "{0} new block"
+msgstr "{0} 个新区块"
+
+#. placeholder {0}: n
+#: src/lib/components/finality/blockstream.svelte
+msgid "{0} new blocks"
+msgstr "{0} 个新区块"
+
+#: src/lib/components/finality/blockstream.svelte
+msgid "Newest first. The list holds still while the pointer is over it."
+msgstr "最新的排在前面。指针悬停在列表上时，列表将保持不动。"
+
+#: src/lib/components/finality/blockstream.svelte
+#: src/lib/components/finality/tabs.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/network/finality/+page.svelte
+msgid "Blocks"
+msgstr "区块"
+
+#: src/lib/components/finality/blockstream.svelte
+msgid "block_num"
+msgstr "区块编号"
+
+#: src/lib/components/finality/blockstream.svelte
+#: src/lib/components/finality/ttfchart.svelte
+msgid "producer"
+msgstr "生产者"
+
+#: src/lib/components/finality/blockstream.svelte
+msgid "timestamp"
+msgstr "时间戳"
+
+#: src/lib/components/finality/blockstream.svelte
+msgid "latency"
+msgstr "延迟"
+
+#: src/lib/components/finality/blockstream.svelte
+msgid "qc"
+msgstr "质量检查"
+
+#: src/lib/components/finality/blockstream.svelte
+msgid "QC lag"
+msgstr "质量检查延迟"
+
+#: src/lib/components/finality/blockstream.svelte
+msgid "missing_votes"
+msgstr "缺失投票"
+
+#: src/lib/components/finality/blockstream.svelte
+msgid "final by"
+msgstr "最终确认者"
+
+#: src/lib/components/finality/blockstream.svelte
+#: src/lib/components/finality/ttfchart.svelte
+msgid "time to final"
+msgstr "最终确认时间"
+
+#: src/lib/components/finality/blockstream.svelte
+msgid "Production / QC / Latency"
+msgstr "生产 / 质量检查 / 延迟"
+
+#: src/lib/components/finality/blockstream.svelte
+#: src/lib/components/finality/blockstream.svelte
+#: src/lib/components/finality/ttfchart.svelte
+#: src/lib/components/finality/ttfchart.svelte
+msgid "no timing"
+msgstr "无计时数据"
+
+#: src/lib/components/finality/blockstream.svelte
+msgid "none"
+msgstr "无"
+
+#: src/lib/components/finality/policy.svelte
+msgid "Generation"
+msgstr "代次"
+
+#. placeholder {0}: formatNumber(policy.threshold, locale)
+#. placeholder {1}: formatNumber(weight, locale)
+#: src/lib/components/finality/policy.svelte
+msgid "{0} of {1}"
+msgstr "{0}/{1}"
+
+#: src/lib/components/finality/policy.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/network/finality/+page.svelte
+msgid "Finalizers"
+msgstr "最终确认者"
+
+#: src/lib/components/finality/policy.svelte
+msgid "Pending policy"
+msgstr "待定策略"
+
+#. placeholder {0}: policy.pending.generation
+#. placeholder {1}: formatNumber( policy.pending.finalizers.length, locale )
+#: src/lib/components/finality/policy.svelte
+msgid "Generation {0}, {1} finalizers"
+msgstr "代次 {0}，{1} 个最终确认者"
+
+#: src/lib/components/finality/policy.svelte
+msgid "None"
+msgstr "无"
+
+#: src/lib/components/finality/policy.svelte
+msgid "Proposer schedule version"
+msgstr "提议者计划版本"
+
+#. placeholder {0}: count
+#: src/lib/components/finality/stages.svelte
+msgid "{0} missed slot"
+msgstr "错过 {0} 个时隙"
+
+#. placeholder {0}: count
+#: src/lib/components/finality/stages.svelte
+msgid "{0} missed slots"
+msgstr "错过 {0} 个时隙"
+
+#. placeholder {0}: slots
+#. placeholder {1}: forks
+#: src/lib/components/finality/stages.svelte
+msgid "{0}, {1} fork"
+msgstr "{0}，{1} 个分叉"
+
+#. placeholder {0}: slots
+#. placeholder {1}: forks
+#: src/lib/components/finality/stages.svelte
+msgid "{0}, {1} forks"
+msgstr "{0}，{1} 个分叉"
+
+#. placeholder {0}: latency
+#: src/lib/components/finality/stages.svelte
+msgid "p50 {0}"
+msgstr "p50 {0}"
+
+#. placeholder {0}: over
+#: src/lib/components/finality/stages.svelte
+msgid "lowest {0} over threshold"
+msgstr "最低值超过阈值 {0}"
+
+#. placeholder {0}: count
+#: src/lib/components/finality/stages.svelte
+msgid "{0} exception"
+msgstr "{0} 个异常"
+
+#. placeholder {0}: count
+#: src/lib/components/finality/stages.svelte
+msgid "{0} exceptions"
+msgstr "{0} 个异常"
+
+#. placeholder {0}: final
+#: src/lib/components/finality/stages.svelte
+msgid "p90 {0}"
+msgstr "p90 {0}"
+
+#: src/lib/components/finality/producers.svelte
+msgid "Producer"
+msgstr "生产者"
+
+#: src/lib/components/finality/producers.svelte
+msgid "Blocks produced"
+msgstr "已生产区块"
+
+#: src/lib/components/finality/producers.svelte
+msgid "Slots missed"
+msgstr "错过的时隙"
+
+#: src/lib/components/finality/producers.svelte
+msgid "Latency p50"
+msgstr "延迟 p50"
+
+#: src/lib/components/finality/producers.svelte
+msgid "Latency p90"
+msgstr "延迟 p90"
+
+#: src/lib/components/finality/producers.svelte
+msgid "QC-block votes over threshold"
+msgstr "超过阈值的 QC 区块投票"
+
+#: src/lib/components/finality/producers.svelte
+msgid "QCs at threshold"
+msgstr "达到阈值的 QC"
+
+#. placeholder {0}: signed( latencyP99 )
+#: src/lib/components/finality/producers.svelte
+msgid "Schedule order, live window 2 min. A marked row has latency p90 above the baseline p99 ({0})."
+msgstr "计划顺序，实时窗口 2 分钟。标记行的延迟 p90 高于基线 p99（{0}）。"
+
+#: src/lib/components/finality/producers.svelte
+msgid "Schedule order, live window 2 min. Rows are marked once the baseline covers 60 min."
+msgstr "计划顺序，实时窗口 2 分钟。基线覆盖 60 分钟后，行将被标记。"
+
+#. placeholder {0}: description
+#. placeholder {1}: share
+#. placeholder {2}: total
+#. placeholder {3}: producer
+#: src/lib/components/finality/votegrid.svelte
+msgid "{0} missing from {1} of {2} QCs in {3}'s blocks"
+msgstr "{3} 的区块中，有 {2} 个 QC 的 {1} 缺少 {0}"
+
+#: src/lib/components/finality/votegrid.svelte
+msgid "Finalizer \\ QC block producer"
+msgstr "最终确认者 \\ QC 区块生产者"
+
+#: src/lib/components/finality/votegrid.svelte
+msgid ""
+"Missing-vote share by QC block producer over the 24 h baseline; a stronger shade is more\n"
+"missing. An outlined cell is missing more votes than that finalizer's own baseline rate makes\n"
+"likely. nodeos logs the same absence as \"Block #n produced by p has no votes for block #m from\n"
+"finalizers\"."
+msgstr ""
+"在 24 小时基线期间，按 QC 区块生产者统计的缺失投票占比；颜色越深表示缺失越多。带\n"
+"边框的单元格表示缺失的投票数高于该最终确认者自身基线比率所预计的数量。nodeos\n"
+"会将同一缺失记录为：\"由 p 生产的区块 #n 没有来自最终确认者的区块 #m 投票\"。"
+
+#: src/lib/components/finality/tabs.svelte
+msgid "Producers and finalizers"
+msgstr "生产者和最终确认者"
+
+#: src/lib/components/finality/ttfchart.svelte
+msgid "Time to final per block, last 2 min"
+msgstr "最近 2 分钟每个区块的最终确认时间"
+
+#. placeholder {0}: formatMs(p99, locale)
+#: src/lib/components/finality/ttfchart.svelte
+msgid "Baseline p99 {0}"
+msgstr "基线 p99 {0}"
+
+#. placeholder {0}: tip.record.by
+#: src/lib/components/finality/ttfchart.svelte
+msgid "Latency, final by #{0}"
+msgstr "延迟，由 #{0} 最终确认"
+
+#: src/lib/components/finality/ttfchart.svelte
+msgid "votes"
+msgstr "投票"
+
+#. placeholder {0}: tip.votes.votes
+#. placeholder {1}: tip.votes.total
+#. placeholder {2}: formatOver(tip.votes.over, locale)
+#: src/lib/components/finality/ttfchart.svelte
+msgid "{0} of {1} ({2})"
+msgstr "{0}/{1}（{2}）"
+
+#: src/lib/components/finality/ttfchart.svelte
+msgid "no QC yet"
+msgstr "尚无质量检查"
+
+#. placeholder {0}: count
+#: src/lib/components/finality/timeline.svelte
+msgid "{0} block"
+msgstr "{0} 个区块"
+
+#. placeholder {0}: count
+#: src/lib/components/finality/timeline.svelte
+msgid "{0} blocks"
+msgstr "{0} 个区块"
+
+#: src/lib/components/finality/timeline.svelte
+msgid "Last hour. Each mark is a run of blocks where a stage departed from normal."
+msgstr "过去 1 小时。每个标记表示一段某个阶段偏离正常状态的连续区块。"
+
+#: src/lib/components/finality/timeline.svelte
+msgid "Last 24 h. Each mark is a run of blocks where a stage departed from normal."
+msgstr "过去 24 小时。每个标记表示一段某个阶段偏离正常状态的连续区块。"
+
+#: src/lib/components/finality/timeline.svelte
+msgid "1 h"
+msgstr "1 小时"
+
+#: src/lib/components/finality/timeline.svelte
+msgid "24 h"
+msgstr "24 小时"
+
+#. placeholder {0}: formatClock(span.start)
+#. placeholder {1}: span.open ? formatClock(end) : formatClock(span.end + 500)
+#: src/lib/components/finality/timeline.svelte
+msgid "{0}–{1} UTC"
+msgstr "{0}–{1} UTC"
+
+#: src/lib/components/finality/timeline.svelte
+msgid "Still open"
+msgstr "仍在进行"
+
+#: src/lib/components/finality/timeline.svelte
+msgid "Open the run in Blocks"
+msgstr "在 Blocks 中打开此运行"
+
+#: src/lib/components/finality/timeline.svelte
+msgid "<0/>Departure or above baseline"
+msgstr "<0/>偏离基线或高于基线"
+
+#: src/lib/components/finality/timeline.svelte
+msgid "<0/>Feed, this page's own vantage"
+msgstr "<0/>数据源，此页面自身的视角"
+
+#. placeholder {0}: newest.block_num
+#. placeholder {1}: formatClock(newest.timestamp)
+#: src/routes/[[locale]]/[network]/(explorer)/network/finality/+page.svelte
+msgid "Head #{0} · {1} UTC"
+msgstr "头部 #{0} · {1} UTC"
+
+#. placeholder {0}: host
+#: src/routes/[[locale]]/[network]/(explorer)/network/finality/+page.svelte
+msgid "Savanna finality as seen from {0}. <0/>"
+msgstr "从 {0} 观察到的 Savanna 最终性。<0/>"
+
+#: src/routes/[[locale]]/[network]/(explorer)/network/finality/+page.svelte
+msgid "Time to final per block"
+msgstr "每个区块达到最终性的时间"
+
+#: src/routes/[[locale]]/[network]/(explorer)/network/finality/+page.svelte
+msgid "last 2 min"
+msgstr "最近 2 分钟"
+
+#: src/routes/[[locale]]/[network]/(explorer)/network/finality/+page.svelte
+msgid "Producers"
+msgstr "生产者"
+
+#: src/routes/[[locale]]/[network]/(explorer)/network/finality/+page.svelte
+msgid "Missing votes by QC block producer"
+msgstr "QC 区块生产者缺失的投票"
+
+#: src/routes/[[locale]]/[network]/(explorer)/network/finality/+page.svelte
+msgid "Finalizer policy"
+msgstr "最终确认者策略"
