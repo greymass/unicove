@@ -145,6 +145,14 @@
 						</DD>
 					</DLRow>
 				</DL>
+				{#if data.network.supports('finality')}
+					<a
+						class="text-primary -mt-2 flex items-center justify-end gap-0.5 text-sm"
+						href={context.urlPath('/network/finality')}
+					>
+						Finality<ChevronRight class="size-4" />
+					</a>
+				{/if}
 			</Card>
 			<Card title="Node">
 				<DL>

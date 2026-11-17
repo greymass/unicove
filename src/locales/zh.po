@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2026-10-28T06:25:56.867Z\n"
+"PO-Revision-Date: 2026-11-17T21:31:18.068Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -295,8 +295,8 @@ msgstr "总计"
 msgid "KB (RAM)"
 msgstr "KB (RAM)"
 
-#. placeholder {0}: balance.token.symbol.name
 #. placeholder {0}: balance.token.name
+#. placeholder {0}: balance.token.symbol.name
 #: src/lib/components/card/tokenbalance.svelte
 #: src/lib/components/card/tokenoverview.svelte
 msgid "{0} (RAM)"
@@ -766,8 +766,8 @@ msgstr "详情"
 msgid "Network Fees"
 msgstr "网络费用"
 
-#. placeholder {0}: market.network.currency.symbol.code
 #. placeholder {0}: data.network.chain.systemToken?.symbol.code || ''
+#. placeholder {0}: market.network.currency.symbol.code
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 msgid "Market Cap ({0})"
@@ -3170,9 +3170,9 @@ msgid "Multisig Sentiment"
 msgstr "多重签名情绪"
 
 #. placeholder {0}: msigData.statistics.totalVotes
-#. placeholder {0}: statistics.totalVotes
-#. placeholder {0}: statistics.totalVotes
 #. placeholder {0}: displayed.totalVotes
+#. placeholder {0}: statistics.totalVotes
+#. placeholder {0}: statistics.totalVotes
 #: src/lib/components/sentiment/msigCard.svelte
 #: src/lib/components/vp/VpMsigStepResults.svelte
 #: src/lib/components/vp/VpSentimentCard.svelte
@@ -3373,6 +3373,7 @@ msgid "length"
 msgstr "长度"
 
 #: src/lib/components/elements/action.svelte
+#: src/lib/components/finality/labels.svelte.ts
 msgid "No data"
 msgstr "没有数据"
 
@@ -3913,6 +3914,7 @@ msgstr "排名"
 msgid "Actor"
 msgstr "参与者"
 
+#: src/lib/components/finality/labels.svelte.ts
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+layout.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Votes"
@@ -6910,6 +6912,7 @@ msgstr "刚接触 {0}？<0>改为创建账户</0>"
 #: src/routes/[[locale]]/[network]/(explorer)/account/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/contract/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/discussion/+page.ts
+#: src/routes/[[locale]]/[network]/(explorer)/network/finality/+page.ts
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.server.ts
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/+layout.server.ts
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/[vp]/discussion/+page.ts
@@ -7759,8 +7762,8 @@ msgstr "版本"
 msgid "Change history"
 msgstr "变更历史"
 
-#. placeholder {0}: stats.total.toLocaleString()
 #. placeholder {0}: amount.toLocaleString()
+#. placeholder {0}: stats.total.toLocaleString()
 #. placeholder {0}: vote.metrics.v.total.toLocaleString()
 #. placeholder {0}: formatNumber(statistics.metrics.v.total, locale, { notation: 'compact', maximumFractionDigits: 2 })
 #: src/lib/components/sentiment/MetricLensDetail.svelte
@@ -8170,22 +8173,22 @@ msgstr "仅限纯文本。换行会被保留。"
 msgid "Posted. It will appear here shortly."
 msgstr "已发布。稍后会显示在这里。"
 
-#. placeholder {0}: charsOver
 #. placeholder {0}: draftCharsOver
+#. placeholder {0}: charsOver
 #: src/lib/components/discussion/Comment.svelte
 #: src/lib/components/discussion/Composer.svelte
 msgid "{0} characters over the limit."
 msgstr "超出限制 {0} 个字符。"
 
-#. placeholder {0}: charsLeft
 #. placeholder {0}: draftCharsLeft
+#. placeholder {0}: charsLeft
 #: src/lib/components/discussion/Comment.svelte
 #: src/lib/components/discussion/Composer.svelte
 msgid "About {0} characters left."
 msgstr "约剩余 {0} 个字符。"
 
-#. placeholder {0}: charsOver
 #. placeholder {0}: draftCharsOver
+#. placeholder {0}: charsOver
 #: src/lib/components/discussion/Comment.svelte
 #: src/lib/components/discussion/Composer.svelte
 msgid "This comment is too long. Shorten it by about {0} characters to post."
@@ -8341,8 +8344,8 @@ msgstr "按 RAM 权重支持"
 msgid "support by V weight"
 msgstr "按 V 权重支持"
 
-#. placeholder {0}: systemSymbol.name
 #. placeholder {0}: symbol
+#. placeholder {0}: systemSymbol.name
 #: src/lib/components/vp/VpMsigStepResults.svelte
 #: src/lib/components/vp/VpSentimentHero.svelte
 msgid "support by {0} weight"
@@ -9122,8 +9125,8 @@ msgstr ""
 msgid "{0} hours"
 msgstr ""
 
-#. placeholder {0}: formatNumber(Math.round(days), locale)
 #. placeholder {0}: formatNumber(days, locale, { maximumFractionDigits: 1 })
+#. placeholder {0}: formatNumber(Math.round(days), locale)
 #: src/lib/components/onboarding/labels.svelte.ts
 #: src/lib/components/onboarding/labels.svelte.ts
 msgid "{0} days"
@@ -9676,4 +9679,112 @@ msgstr ""
 
 #: src/routes/[[locale]]/[network]/(explorer)/onboarding/creators/[name]/+page.ts
 msgid "Onboarding creator"
+msgstr ""
+
+#: src/lib/components/finality/labels.svelte.ts
+msgid "Production"
+msgstr ""
+
+#: src/lib/components/finality/labels.svelte.ts
+msgid "Latency"
+msgstr ""
+
+#: src/lib/components/finality/labels.svelte.ts
+msgid "QC"
+msgstr ""
+
+#: src/lib/components/finality/labels.svelte.ts
+msgid "Final"
+msgstr ""
+
+#: src/lib/components/finality/labels.svelte.ts
+msgid "Feed"
+msgstr ""
+
+#: src/lib/components/finality/labels.svelte.ts
+msgid "Missed slot"
+msgstr ""
+
+#: src/lib/components/finality/labels.svelte.ts
+msgid "Fork"
+msgstr ""
+
+#: src/lib/components/finality/labels.svelte.ts
+msgid "Latency above baseline p99"
+msgstr ""
+
+#: src/lib/components/finality/labels.svelte.ts
+msgid "Weak QC"
+msgstr ""
+
+#: src/lib/components/finality/labels.svelte.ts
+msgid "No QC"
+msgstr ""
+
+#: src/lib/components/finality/labels.svelte.ts
+msgid "QC lag over 1 block"
+msgstr ""
+
+#: src/lib/components/finality/labels.svelte.ts
+msgid "QC at threshold"
+msgstr ""
+
+#: src/lib/components/finality/labels.svelte.ts
+msgid "Time to final above baseline p99"
+msgstr ""
+
+#: src/lib/components/finality/labels.svelte.ts
+msgid "Feed paused"
+msgstr ""
+
+#: src/lib/components/finality/labels.svelte.ts
+msgid "No timing, backfilled"
+msgstr ""
+
+#: src/lib/components/finality/labels.svelte.ts
+msgid "Normal"
+msgstr ""
+
+#: src/lib/components/finality/labels.svelte.ts
+msgid "Departure"
+msgstr ""
+
+#: src/lib/components/finality/labels.svelte.ts
+msgid "Above baseline"
+msgstr ""
+
+#: src/lib/components/finality/labels.svelte.ts
+msgid "Building baseline"
+msgstr ""
+
+#. placeholder {0}: value
+#: src/lib/components/finality/labels.svelte.ts
+msgid "{0} ms"
+msgstr ""
+
+#. placeholder {0}: value
+#: src/lib/components/finality/labels.svelte.ts
+msgid "{0} s"
+msgstr ""
+
+#. placeholder {0}: count
+#: src/lib/components/finality/labels.svelte.ts
+msgid "Building, {0} min of 24 h"
+msgstr ""
+
+#. placeholder {0}: hours
+#: src/lib/components/finality/labels.svelte.ts
+msgid "Baseline {0} h"
+msgstr ""
+
+#: src/lib/components/finality/labels.svelte.ts
+msgid "Baseline 24 h"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/network/+page.svelte
+msgid "Finality<0/>"
+msgstr ""
+
+#: src/routes/[[locale]]/[network]/(explorer)/network/finality/+page.ts
+msgid "Finality"
 msgstr ""

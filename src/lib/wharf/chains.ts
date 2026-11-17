@@ -151,7 +151,8 @@ export const chainConfig: ChainConfig = {
 	endpoints: {
 		api: env.PUBLIC_API_CHAIN,
 		history: env.PUBLIC_API_HISTORY,
-		robo2: env.PUBLIC_FEATURE_ROBO2 || undefined
+		robo2: env.PUBLIC_FEATURE_ROBO2 || undefined,
+		finality: optionalEnv.PUBLIC_API_FINALITY || undefined
 	},
 	features: {
 		bidname: isENVTrue(env.PUBLIC_FEATURE_BIDNAME),
@@ -161,6 +162,7 @@ export const chainConfig: ChainConfig = {
 		delphioracle: isENVTrue(env.PUBLIC_FEATURE_DELPHIORACLE),
 		directfunding: isENVTrue(env.PUBLIC_FEATURE_DIRECTFUNDING),
 		eosntime: isENVTrue(env.PUBLIC_FEATURE_EOSNTIME),
+		finality: !!optionalEnv.PUBLIC_API_FINALITY,
 		giftedram: isENVTrue(env.PUBLIC_FEATURE_GIFTEDRAM),
 		giftprogram:
 			isENVTrue(optionalEnv.PUBLIC_FEATURE_CREATIONINDEX) &&
@@ -218,6 +220,7 @@ export interface ChainEndpoints {
 	api: string;
 	blocks?: string;
 	creationindex?: string;
+	finality?: string;
 	history: string;
 	hyperion?: string;
 	lightapi?: string;
@@ -271,6 +274,7 @@ export type FeatureType =
 	| 'delphioracle'
 	| 'directfunding'
 	| 'eosntime'
+	| 'finality'
 	| 'giftedram'
 	| 'giftprogram'
 	| 'hyperion'
