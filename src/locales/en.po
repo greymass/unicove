@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.657Z\n"
-"PO-Revision-Date: 2026-11-18T21:28:07.210Z\n"
+"PO-Revision-Date: 2026-11-18T22:29:10.021Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -917,6 +917,7 @@ msgstr "Get Started"
 msgid "Debug"
 msgstr "Debug"
 
+#: src/lib/components/finality/accounts.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/+page.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/+layout.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/wharf/+page.svelte
@@ -10069,6 +10070,7 @@ msgstr "Time to final p90 per minute, last 15 min"
 msgid "Finalizer"
 msgstr "Finalizer"
 
+#: src/lib/components/finality/accounts.svelte
 #: src/lib/components/finality/finalizers.svelte
 msgid "Missing votes"
 msgstr "Missing votes"
@@ -10085,10 +10087,12 @@ msgstr "Weak votes"
 msgid "Last vote"
 msgstr "Last vote"
 
+#: src/lib/components/finality/accounts.svelte
 #: src/lib/components/finality/finalizers.svelte
 msgid "Behind head"
 msgstr "Behind head"
 
+#: src/lib/components/finality/accounts.svelte
 #: src/lib/components/finality/blockstream.svelte
 #: src/lib/components/finality/finalizers.svelte
 #: src/lib/components/finality/policy.svelte
@@ -10135,6 +10139,7 @@ msgstr "{0} new blocks"
 msgid "Newest first. The list holds still while the pointer is over it."
 msgstr "Newest first. The list holds still while the pointer is over it."
 
+#: src/lib/components/finality/accounts.svelte
 #: src/lib/components/finality/blockstream.svelte
 #: src/lib/components/finality/tabs.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/network/finality/+page.svelte
@@ -10204,7 +10209,6 @@ msgid "{0} of {1}"
 msgstr "{0} of {1}"
 
 #: src/lib/components/finality/policy.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/network/finality/+page.svelte
 msgid "Finalizers"
 msgstr "Finalizers"
 
@@ -10333,6 +10337,7 @@ msgstr ""
 "finalizers\"."
 
 #: src/lib/components/finality/tabs.svelte
+#: src/routes/[[locale]]/[network]/(explorer)/network/finality/+page.svelte
 msgid "Producers and finalizers"
 msgstr "Producers and finalizers"
 
@@ -10387,6 +10392,7 @@ msgstr "Last 24 h. Each mark is a run of blocks where a stage departed from norm
 msgid "1 h"
 msgstr "1 h"
 
+#: src/lib/components/finality/accounts.svelte
 #: src/lib/components/finality/timeline.svelte
 msgid "24 h"
 msgstr "24 h"
@@ -10432,9 +10438,8 @@ msgstr "Time to final per block"
 msgid "last 2 min"
 msgstr "last 2 min"
 
-#: src/routes/[[locale]]/[network]/(explorer)/network/finality/+page.svelte
-msgid "Producers"
-msgstr "Producers"
+#~ msgid "Producers"
+#~ msgstr "Producers"
 
 #: src/routes/[[locale]]/[network]/(explorer)/network/finality/+page.svelte
 msgid "Missing votes by QC block producer"
@@ -10487,3 +10492,69 @@ msgstr ""
 #: src/lib/components/finality/producers.svelte
 msgid "Latency max"
 msgstr "Latency max"
+
+#: src/lib/components/finality/accounts.svelte
+msgid "Producing"
+msgstr "Producing"
+
+#: src/lib/components/finality/accounts.svelte
+msgid "Latency p50 / max"
+msgstr "Latency p50 / max"
+
+#: src/lib/components/finality/accounts.svelte
+msgid "Votes over threshold"
+msgstr "Votes over threshold"
+
+#: src/lib/components/finality/accounts.svelte
+msgid "2 min"
+msgstr "2 min"
+
+#. placeholder {0}: formatShare(producer.atThreshold, producer.qcBlocks, locale)
+#: src/lib/components/finality/accounts.svelte
+msgid "· {0} at threshold"
+msgstr "· {0} at threshold"
+
+#. placeholder {0}: producer.missed
+#: src/lib/components/finality/accounts.svelte
+msgid "· {0} missed"
+msgstr "· {0} missed"
+
+#: src/lib/components/finality/accounts.svelte
+msgid "not in schedule"
+msgstr "not in schedule"
+
+#. placeholder {0}: formatShare(finalizer.weak, finalizer.qcs, locale)
+#: src/lib/components/finality/accounts.svelte
+msgid "· {0} weak"
+msgstr "· {0} weak"
+
+#: src/lib/components/finality/accounts.svelte
+msgid "not in policy"
+msgstr "not in policy"
+
+#~ msgid ""
+#~ "Flagged rows first, then schedule order. Producing covers each producer's blocks in the live\n"
+#~ "window (2 min); missing votes covers QCs in the live window and over 24 h. A tinted row produced\n"
+#~ "blocks in a run of 5 or more above the baseline latency p99<0/>, or is missing more votes than its own 24 h rate makes likely. An\n"
+#~ "amber 24 h share is 5% or more. Behind head counts the blocks from the finalizer's last vote\n"
+#~ "seen in a QC to the head. The pulsing dot marks the producer whose slot it is."
+#~ msgstr ""
+#~ "Flagged rows first, then schedule order. Producing covers each producer's blocks in the live\n"
+#~ "window (2 min); missing votes covers QCs in the live window and over 24 h. A tinted row produced\n"
+#~ "blocks in a run of 5 or more above the baseline latency p99<0/>, or is missing more votes than its own 24 h rate makes likely. An\n"
+#~ "amber 24 h share is 5% or more. Behind head counts the blocks from the finalizer's last vote\n"
+#~ "seen in a QC to the head. The pulsing dot marks the producer whose slot it is."
+
+#: src/lib/components/finality/accounts.svelte
+msgid ""
+"Flagged rows first, then schedule order. Producing covers each producer's blocks in the live\n"
+"window (2 min); missing votes covers QCs in the live window and over 24 h. A tinted row produced\n"
+"blocks in a run of 5 or more above the baseline latency p99<0/>, or is missing more votes than its own 24 h rate makes likely. An amber 24 h share is\n"
+"5% or more. Behind head counts the blocks from the finalizer's last vote seen in a QC to the\n"
+"head. The pulsing dot marks the producer whose slot it is."
+msgstr ""
+"Flagged rows first, then schedule order. Producing covers each producer's blocks in the live\n"
+"window (2 min); missing votes covers QCs in the live window and over 24 h. A tinted row produced\n"
+"blocks in a run of 5 or more above the baseline latency p99<0/>, or is missing more votes than its own 24 h rate makes likely. An amber 24 h share is\n"
+"5% or more. Behind head counts the blocks from the finalizer's last vote seen in a QC to the\n"
+"head. The pulsing dot marks the producer whose slot it is."
