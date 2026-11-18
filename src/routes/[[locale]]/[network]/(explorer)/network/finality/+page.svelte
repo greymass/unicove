@@ -3,18 +3,23 @@
 	import { page } from '$app/state';
 	import { Card, Stack } from '@wharfkit/svelte-components';
 
-	import { finality, headline, stageReadings, windowStats } from '$lib/state/finality/derive';
+	import {
+		accountRows,
+		finality,
+		headline,
+		stageReadings,
+		windowStats
+	} from '$lib/state/finality/derive';
 	import { FinalityFeed } from '$lib/state/finality/feed.svelte';
 	import { baselineCovered } from '$lib/state/finality/markers';
 	import { emptyState } from '$lib/state/finality/state';
 	import type { Qc } from '$lib/state/finality/v1';
 	import BlockStream from '$lib/components/finality/blockstream.svelte';
 	import FeedBanner from '$lib/components/finality/feedbanner.svelte';
-	import Finalizers from '$lib/components/finality/finalizers.svelte';
 	import Headline from '$lib/components/finality/headline.svelte';
 	import { formatClock } from '$lib/components/finality/labels.svelte';
 	import Policy from '$lib/components/finality/policy.svelte';
-	import Producers from '$lib/components/finality/producers.svelte';
+	import Accounts from '$lib/components/finality/accounts.svelte';
 	import Stages from '$lib/components/finality/stages.svelte';
 	import Tabs, { type FinalityView } from '$lib/components/finality/tabs.svelte';
 	import Timeline from '$lib/components/finality/timeline.svelte';
@@ -133,19 +138,15 @@
 			<Timeline {current} end={timelineEnd} />
 		</Card>
 	{:else if view === 'producers'}
-		<div class="grid grid-cols-[minmax(0,1fr)] gap-4 xl:grid-cols-2">
-			<Card title="Producers">
-				<Producers producers={stats.producers} ready={current.ready} {latencyP99} />
-			</Card>
-			<Card title="Finalizers" id="finalizers">
-				<Finalizers
-					finalizers={stats.finalizers}
-					baseline={current.baseline?.finalizers ?? []}
-					generation={current.policy?.generation ?? null}
-					ready={current.ready}
-				/>
-			</Card>
-		</div>
+		<Card title="Producers and finalizers">
+			<Accounts
+				rows={accountRows(stats.producers, stats.finalizers, current.baseline?.finalizers ?? [])}
+				baseline={current.baseline?.finalizers ?? []}
+				active={newest?.producer ?? null}
+				ready={current.ready}
+				{latencyP99}
+			/>
+		</Card>
 	{:else}
 		<Card title="Blocks">
 			<BlockStream {current} {records} {highlight} />

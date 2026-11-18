@@ -1,5 +1,11 @@
 import { finalizedBy, timeToFinal } from './final';
-import { baselineCovered, finalizerRowMarked, latencyMarkedProducers } from './markers';
+import {
+	baselineCovered,
+	finalizerChronic,
+	finalizerRowMarked,
+	flaggedFirst,
+	latencyMarkedProducers
+} from './markers';
 import { BLOCK_INTERVAL_MS, missedSlots } from './schedule';
 import type { FinalityState } from './state';
 import type { BaselineFinalizer, BlockMessage, FinalizerPolicy, Qc, Stage } from './v1';
@@ -51,6 +57,14 @@ export interface FinalizerStats {
 	weak: number;
 	lastVote: number | null;
 	behind: number | null;
+	marked: boolean;
+}
+
+export interface AccountRow {
+	account: string;
+	producer: ProducerStats | null;
+	finalizer: FinalizerStats | null;
+	chronic: boolean;
 	marked: boolean;
 }
 
@@ -425,4 +439,36 @@ function baselineStatus(
 	if (!baselineCovered(state.baseline)) return 'building';
 	if (live !== null && p99 !== null && live > p99) return 'above_baseline';
 	return 'normal';
+}
+
+export function accountRows(
+	producers: readonly ProducerStats[],
+	finalizers: readonly FinalizerStats[],
+	baseline: readonly BaselineFinalizer[]
+): AccountRow[] {
+	const rates = new Map(baseline.map((entry) => [entry.public_key, entry]));
+	const rows = new Map<string, AccountRow>();
+	for (const producer of producers) {
+		rows.set(producer.producer, {
+			account: producer.producer,
+			producer,
+			finalizer: null,
+			chronic: false,
+			marked: producer.marked
+		});
+	}
+	for (const finalizer of finalizers) {
+		const row = rows.get(finalizer.description) ?? {
+			account: finalizer.description,
+			producer: null,
+			finalizer: null,
+			chronic: false,
+			marked: false
+		};
+		row.finalizer = finalizer;
+		row.chronic = finalizerChronic(rates.get(finalizer.public_key));
+		row.marked ||= finalizer.marked;
+		rows.set(finalizer.description, row);
+	}
+	return flaggedFirst([...rows.values()], (row) => row.marked || row.chronic);
 }

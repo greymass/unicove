@@ -6,10 +6,11 @@
 	interface Props {
 		block?: number;
 		account?: string;
+		label?: string;
 		class?: string;
 	}
 
-	const { block, account, class: className = '' }: Props = $props();
+	const { block, account, label, class: className = '' }: Props = $props();
 
 	const context = getContext<UnicoveContext>('state');
 	const href = $derived.by(() => {
@@ -19,7 +20,7 @@
 		}
 		return null;
 	});
-	const text = $derived(block !== undefined ? String(block) : (account ?? ''));
+	const text = $derived(label ?? (block !== undefined ? String(block) : (account ?? '')));
 </script>
 
 {#if href}

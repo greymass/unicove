@@ -1,5 +1,6 @@
 import { describe, expect, test } from 'bun:test';
 import {
+	accountRows,
 	attribution,
 	finality,
 	headline,
@@ -320,5 +321,51 @@ describe('stage readings', () => {
 		expect(statuses(paused)).toEqual(noData);
 		expect(statuses(healthy(), true)).toEqual(noData);
 		expect(statuses(emptyState())).toEqual(noData);
+	});
+});
+
+describe('account rows', () => {
+	const producer = (name: string, marked = false) => ({
+		producer: name,
+		blocks: 12,
+		missed: 0,
+		latencyP50: 0,
+		latencyMax: 0,
+		qcBlocks: 12,
+		votesOverP50: 5,
+		atThreshold: 0,
+		marked
+	});
+	const finalizer = (name: string, marked = false) => ({
+		public_key: `PUB_BLS_${name}`,
+		description: name,
+		pending: false,
+		qcs: 240,
+		missing: 0,
+		weak: 0,
+		lastVote: 1000,
+		behind: 1,
+		marked
+	});
+
+	test('joins by name, flagged rows first, schedule order within', () => {
+		const chronicEntry = {
+			public_key: 'PUB_BLS_gamma',
+			qcs: FINALIZER_COVERAGE_QCS,
+			missing: FINALIZER_COVERAGE_QCS / 10,
+			weak: 0
+		};
+		const rows = accountRows(
+			[producer('alpha'), producer('beta'), producer('gamma'), producer('delta', true)],
+			[finalizer('gamma'), finalizer('alpha'), finalizer('beta', true), finalizer('omega')],
+			[chronicEntry]
+		);
+		expect(rows.map((row) => row.account)).toEqual(['beta', 'gamma', 'delta', 'alpha', 'omega']);
+		expect(rows.find((row) => row.account === 'gamma')).toMatchObject({
+			chronic: true,
+			marked: false
+		});
+		expect(rows.find((row) => row.account === 'delta')?.finalizer).toBeNull();
+		expect(rows.find((row) => row.account === 'omega')?.producer).toBeNull();
 	});
 });
