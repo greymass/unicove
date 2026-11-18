@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2026-11-18T04:01:36.405Z\n"
+"PO-Revision-Date: 2026-11-18T21:31:13.315Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -512,12 +512,12 @@ msgstr "转账"
 msgid "+ {0} ms (CPU)"
 msgstr "+ {0} 毫秒 (CPU)"
 
-#. placeholder {0}: data.powup_cpu
 #. placeholder {0}: data.powup_net
-#. placeholder {0}: account.weight
+#. placeholder {0}: data.powup_cpu
 #. placeholder {0}: key.weight
 #. placeholder {0}: account.weight
 #. placeholder {0}: key.weight
+#. placeholder {0}: account.weight
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio.reserv/powupresult.svelte
 #: src/lib/components/summary/eosio/newaccount.svelte
@@ -767,8 +767,8 @@ msgstr "详情"
 msgid "Network Fees"
 msgstr "网络费用"
 
-#. placeholder {0}: data.network.chain.systemToken?.symbol.code || ''
 #. placeholder {0}: market.network.currency.symbol.code
+#. placeholder {0}: data.network.chain.systemToken?.symbol.code || ''
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/ram/+page.svelte
 msgid "Market Cap ({0})"
@@ -1842,10 +1842,10 @@ msgstr "药丸选择"
 msgid "Select a date range"
 msgstr "选择日期范围"
 
-#. placeholder {0}: selected.label
-#. placeholder {0}: selectedFormOption.label
-#. placeholder {0}: imageOptionSelected.label
 #. placeholder {0}: JSON.stringify(tokenSelected, null, 2)
+#. placeholder {0}: imageOptionSelected.label
+#. placeholder {0}: selectedFormOption.label
+#. placeholder {0}: selected.label
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/select.svelte
@@ -2226,8 +2226,8 @@ msgstr "此构建的 wharfkit/cli 生成的合约以及它使用的链上帐户�
 msgid "Refresh"
 msgstr "刷新"
 
-#. placeholder {0}: formatDate(proposal.updated)
 #. placeholder {0}: refreshed
+#. placeholder {0}: formatDate(proposal.updated)
 #: src/routes/[[locale]]/[network]/(dev)/debug/state/market/+page.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/proposals/+page.svelte
 msgid "Updated {0}"
@@ -3010,8 +3010,8 @@ msgstr "没有反对票"
 msgid "Loading topic..."
 msgstr "正在加载主题..."
 
-#. placeholder {0}: String(network.chain.systemToken?.symbol.name)
-#. placeholder {1}: String(ramtoken.name)
+#. placeholder {0}: data.network.token.name
+#. placeholder {1}: data.network.getRamToken().name
 #. placeholder {0}: String(network.chain.systemToken?.symbol.name)
 #. placeholder {1}: String(ramtoken.name)
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.svelte
@@ -3029,8 +3029,8 @@ msgstr "兑换 {0}/{1}"
 msgid "Available"
 msgstr "可用"
 
-#. placeholder {0}: props.network.token.name
 #. placeholder {0}: String(data.quote.symbol.name)
+#. placeholder {0}: props.network.token.name
 #: src/routes/[[locale]]/[network]/(account)/swap/[basecontract]/[basesymbol]/[quotecontract]/[quotesymbol]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/legacy-token-swap.svelte
 msgid "Swap to {0}"
@@ -5912,8 +5912,8 @@ msgstr "{0}您有 {1} 可供回收。"
 msgid "You have been outbid on this name.<0/>"
 msgstr "您在这个名字上的出价已被超过。<0/>"
 
-#. placeholder {0}: String(tracked.refund.amount)
 #. placeholder {0}: String(manager.refundAmount)
+#. placeholder {0}: String(tracked.refund.amount)
 #: src/routes/[[locale]]/[network]/(account)/bidname/(bidding)/refund/+page.svelte
 #: src/routes/[[locale]]/[network]/(account)/bidname/components/your-bids.svelte
 msgid "Claim Refund ({0})"
@@ -9858,7 +9858,6 @@ msgstr "最终确认时间，最近 20 个最终区块的中位数"
 msgid "Baseline p50 {0} · p99 {1} · {2}"
 msgstr "基线 p50 {0} · p99 {1} · {2}"
 
-#: src/lib/components/finality/headline.svelte
 #: src/lib/components/finality/sparkline.svelte
 msgid "Time to final p90 per minute, last 15 min"
 msgstr "最近 15 分钟每分钟的最终确认时间 p90"
@@ -9905,12 +9904,11 @@ msgstr "待处理"
 msgid ", generation {0}"
 msgstr "，第 {0} 代"
 
-#: src/lib/components/finality/finalizers.svelte
-msgid ""
-"Finalizer policy order<0/>. Missing votes is\n"
-"the share of QCs in the live window without this finalizer's vote. A marked row is missing more\n"
-"votes than its own baseline rate makes likely."
-msgstr "Finalizer 策略顺序<0/>。缺失投票是实时窗口中不含此 finalizer 投票的 QC 占比。标记的行缺失的投票数超过其自身基线速率所预期的数量。"
+#~ msgid ""
+#~ "Finalizer policy order<0/>. Missing votes is\n"
+#~ "the share of QCs in the live window without this finalizer's vote. A marked row is missing more\n"
+#~ "votes than its own baseline rate makes likely."
+#~ msgstr "Finalizer 策略顺序<0/>。缺失投票是实时窗口中不含此 finalizer 投票的 QC 占比。标记的行缺失的投票数超过其自身基线速率所预期的数量。"
 
 #. placeholder {0}: n
 #: src/lib/components/finality/blockstream.svelte
@@ -9946,9 +9944,8 @@ msgstr "block_num"
 msgid "producer"
 msgstr "producer"
 
-#: src/lib/components/finality/blockstream.svelte
-msgid "timestamp"
-msgstr "timestamp"
+#~ msgid "timestamp"
+#~ msgstr "timestamp"
 
 #: src/lib/components/finality/blockstream.svelte
 msgid "latency"
@@ -10028,7 +10025,9 @@ msgstr "提议者计划版本"
 msgid "{0} missed slot"
 msgstr "错过 {0} 个时隙"
 
+#. placeholder {0}: n
 #. placeholder {0}: count
+#: src/lib/components/finality/blockstream.svelte
 #: src/lib/components/finality/stages.svelte
 msgid "{0} missed slots"
 msgstr "错过 {0} 个时隙"
@@ -10086,9 +10085,8 @@ msgstr "错过的时隙"
 msgid "Latency p50"
 msgstr "延迟 p50"
 
-#: src/lib/components/finality/producers.svelte
-msgid "Latency p90"
-msgstr "延迟 p90"
+#~ msgid "Latency p90"
+#~ msgstr "延迟 p90"
 
 #: src/lib/components/finality/producers.svelte
 msgid "QC-block votes over threshold"
@@ -10098,14 +10096,11 @@ msgstr "超过阈值的 QC 区块投票"
 msgid "QCs at threshold"
 msgstr "达到阈值的 QC"
 
-#. placeholder {0}: signed( latencyP99 )
-#: src/lib/components/finality/producers.svelte
-msgid "Schedule order, live window 2 min. A marked row has latency p90 above the baseline p99 ({0})."
-msgstr "计划顺序，实时窗口 2 分钟。标记行的延迟 p90 高于基线 p99（{0}）。"
+#~ msgid "Schedule order, live window 2 min. A marked row has latency p90 above the baseline p99 ({0})."
+#~ msgstr "计划顺序，实时窗口 2 分钟。标记行的延迟 p90 高于基线 p99（{0}）。"
 
-#: src/lib/components/finality/producers.svelte
-msgid "Schedule order, live window 2 min. Rows are marked once the baseline covers 60 min."
-msgstr "计划顺序，实时窗口 2 分钟。基线覆盖 60 分钟后，行将被标记。"
+#~ msgid "Schedule order, live window 2 min. Rows are marked once the baseline covers 60 min."
+#~ msgstr "计划顺序，实时窗口 2 分钟。基线覆盖 60 分钟后，行将被标记。"
 
 #. placeholder {0}: description
 #. placeholder {1}: share
@@ -10238,3 +10233,46 @@ msgstr "QC 区块生产者缺失的投票"
 #: src/routes/[[locale]]/[network]/(explorer)/network/finality/+page.svelte
 msgid "Finalizer policy"
 msgstr "Finalizer 策略"
+
+#: src/lib/components/finality/blockstream.svelte
+msgid "missed slot"
+msgstr "错过的插槽"
+
+#~ msgid ""
+#~ "Schedule order, live window 2 min. A marked row produced blocks in a run of 5 or more above\n"
+#~ "the baseline latency p99 ({0})."
+#~ msgstr ""
+#~ "调度顺序，实时窗口 2 分钟。标记的行在连续 5 个或更多区块的序列中产生了高于\n"
+#~ "基线延迟 p99 ({0}) 的区块。"
+
+#. placeholder {0}: signed(latencyP99)
+#: src/lib/components/finality/producers.svelte
+msgid ""
+"Marked rows first, then schedule order; live window 2 min. A marked row produced blocks in a\n"
+"run of 5 or more above the baseline latency p99 ({0})."
+msgstr ""
+"先显示标记的行，然后按调度顺序排列；实时窗口为 2 分钟。某个标记行生成的区块连续 5 个或更多高于基准延迟 p99（{0}）。\n"
+""
+
+#: src/lib/components/finality/producers.svelte
+msgid ""
+"Marked rows first, then schedule order; live window 2 min. Rows are marked once the baseline\n"
+"covers 60 min."
+msgstr ""
+"先显示标记的行，然后按调度顺序排列；实时窗口为 2 分钟。当基准覆盖时长达到 60 分钟后，行将被标记。\n"
+""
+
+#: src/lib/components/finality/finalizers.svelte
+msgid ""
+"Marked rows first, then finalizer policy order<0/>.\n"
+"Missing votes is the share of QCs in the live window without this finalizer's vote. A marked row\n"
+"is missing more votes than its own baseline rate makes likely; a marked baseline misses 5% or\n"
+"more over 24 h."
+msgstr ""
+"先显示标记的行，然后按终结器策略顺序排列<0/>。\n"
+"缺失投票数是指在实时窗口内没有此终结器投票的 QC 所占的比例。标记的行表示其缺失的投票数\n"
+"高于根据自身基准率预计的数量；标记的基准率表示在 24 小时内缺失 5% 或更多。"
+
+#: src/lib/components/finality/producers.svelte
+msgid "Latency max"
+msgstr "最大延迟"
