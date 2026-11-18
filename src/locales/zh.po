@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2026-11-17T23:34:34.915Z\n"
+"PO-Revision-Date: 2026-11-18T04:01:36.405Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -3012,8 +3012,8 @@ msgstr "正在加载主题..."
 
 #. placeholder {0}: String(network.chain.systemToken?.symbol.name)
 #. placeholder {1}: String(ramtoken.name)
-#. placeholder {0}: data.network.token.name
-#. placeholder {1}: data.network.getRamToken().name
+#. placeholder {0}: String(network.chain.systemToken?.symbol.name)
+#. placeholder {1}: String(ramtoken.name)
 #: src/routes/[[locale]]/[network]/(explorer)/account/[name]/+page.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/charts.svelte
 msgid "Swap {0}/{1}"
@@ -3617,7 +3617,7 @@ msgstr "获取代币"
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
 #. placeholder {0}: symbol.name
-#. placeholder {0}: symbol.name
+#. placeholder {0}: String(network.token.symbol.name)
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
 #: src/routes/[[locale]]/[network]/(account)/(send)/send/[[contract]]/[[symbol]]/+layout.ts
@@ -3648,7 +3648,7 @@ msgstr "<0>Unicove -</0> {0} 网络钱包和区块浏览器"
 
 #. placeholder {0}: network.chain.name
 #. placeholder {0}: networkName
-#. placeholder {0}: network.chain.name
+#. placeholder {0}: networkName
 #: src/routes/+layout.server.ts
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
 #: src/routes/[[locale]]/[network]/(homepage)/components/hero.svelte
@@ -9129,8 +9129,8 @@ msgstr "无净流出"
 msgid "{0} hours"
 msgstr "{0} 小时"
 
-#. placeholder {0}: formatNumber(days, locale, { maximumFractionDigits: 1 })
 #. placeholder {0}: formatNumber(Math.round(days), locale)
+#. placeholder {0}: formatNumber(days, locale, { maximumFractionDigits: 1 })
 #: src/lib/components/onboarding/labels.svelte.ts
 #: src/lib/components/onboarding/labels.svelte.ts
 msgid "{0} days"
