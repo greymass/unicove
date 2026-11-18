@@ -10,5 +10,6 @@ COPY . .
 ENV NODE_ENV production
 RUN apt -y install make ca-certificates
 RUN make build/docker
+RUN chmod +x scripts/docker-entrypoint.sh
 
-CMD [ "bun", "build/index.js" ]
+CMD [ "./scripts/docker-entrypoint.sh" ]
