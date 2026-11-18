@@ -2,6 +2,7 @@ export const BACKOFF_MIN_MS = 500;
 export const BACKOFF_MAX_MS = 15_000;
 export const BACKOFF_JITTER = 0.3;
 export const HIDDEN_CLOSE_MS = 60_000;
+export const PING_INTERVAL_MS = 20_000;
 
 export type FinalityConnection = 'connecting' | 'open' | 'reconnecting';
 

@@ -1,4 +1,10 @@
-import { HIDDEN_CLOSE_MS, backoffDelay, feedUrl, type FinalityConnection } from './connection';
+import {
+	HIDDEN_CLOSE_MS,
+	PING_INTERVAL_MS,
+	backoffDelay,
+	feedUrl,
+	type FinalityConnection
+} from './connection';
 import { emptyState, reduce, type FinalityState } from './state';
 import type { Message } from './v1';
 
@@ -17,6 +23,7 @@ export class FinalityFeed {
 	private retryTimer: ReturnType<typeof setTimeout> | undefined;
 	private hiddenTimer: ReturnType<typeof setTimeout> | undefined;
 	private clock: ReturnType<typeof setInterval> | undefined;
+	private pinger: ReturnType<typeof setInterval> | undefined;
 	private onVisibility = () => {
 		if (document.hidden) {
 			this.clearHiddenTimer();
@@ -63,7 +70,9 @@ export class FinalityFeed {
 		const socket = new WebSocket(feedUrl(this.base, this.network, from));
 		this.socket = socket;
 		socket.onopen = () => {
-			if (this.socket === socket) this.connection = 'open';
+			if (this.socket !== socket) return;
+			this.connection = 'open';
+			this.pinger = setInterval(() => socket.send('ping'), PING_INTERVAL_MS);
 		};
 		socket.onmessage = (event) => {
 			if (this.socket === socket) this.receive(event.data);
@@ -75,6 +84,7 @@ export class FinalityFeed {
 	}
 
 	private receive(data: unknown) {
+		if (data === 'pong') return;
 		let message: Message;
 		try {
 			message = JSON.parse(String(data));
@@ -97,6 +107,7 @@ export class FinalityFeed {
 	}
 
 	private closed() {
+		clearInterval(this.pinger);
 		this.socket = null;
 		this.pending = null;
 		if (!this.running || this.suspended) return;
@@ -115,6 +126,7 @@ export class FinalityFeed {
 	}
 
 	private closeSocket() {
+		clearInterval(this.pinger);
 		const socket = this.socket;
 		this.socket = null;
 		if (!socket) return;
