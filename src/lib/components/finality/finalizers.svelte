@@ -3,9 +3,12 @@
 	import { Table, TD, TH, TR } from '@wharfkit/svelte-components';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import type { FinalizerStats } from '$lib/state/finality/derive';
+	import { finalizerChronic, flaggedFirst } from '$lib/state/finality/markers';
 	import type { BaselineFinalizer } from '$lib/state/finality/v1';
 	import { formatNumber } from '$lib/utils/intl';
+	import ExplorerLink from './explorerlink.svelte';
 	import { formatShare } from './labels.svelte';
+	import { CHRONIC_CELL, rowCell } from './marks';
 
 	interface Props {
 		finalizers: FinalizerStats[];
@@ -19,6 +22,8 @@
 	const context = getContext<UnicoveContext>('state');
 	const locale = $derived(context.settings.data.locale);
 	const rates = $derived(new Map(baseline.map((entry) => [entry.public_key, entry])));
+	const chronic = (key: string) => finalizerChronic(rates.get(key));
+	const rows = $derived(flaggedFirst(finalizers, (row) => row.marked || chronic(row.public_key)));
 	const showWeak = $derived(finalizers.some((row) => row.weak > 0));
 	const columns = $derived(showWeak ? 6 : 5);
 
@@ -43,23 +48,32 @@
 			{#if !ready}
 				<TR><TD class="text-muted" colspan={columns}>Waiting for the first blocks</TD></TR>
 			{:else}
-				{#each finalizers as row (row.public_key)}
+				{#each rows as row (row.public_key)}
+					{@const tint = rowCell(row.marked)}
 					<TR>
-						<TD
-							class="bg-surface sticky left-0 z-[1] whitespace-nowrap {row.marked
-								? 'shadow-[inset_2px_0_0_var(--color-on-surface-variant)]'
-								: ''} pl-2"
-						>
-							<span class="font-mono" title={row.public_key}>{row.description}</span>
+						<TD class="sticky left-0 z-[1] whitespace-nowrap {tint || 'bg-surface'} pl-2">
+							<span title={row.public_key}
+								><ExplorerLink account={row.description} class="font-mono" /></span
+							>
 							{#if row.pending}<span class="text-muted ml-1 text-xs">pending</span>{/if}
 						</TD>
-						<TD class="text-right tabular-nums">{formatShare(row.missing, row.qcs, locale)}</TD>
-						<TD class="text-muted text-right tabular-nums">{baselineShare(row.public_key)}</TD>
+						<TD class="text-right tabular-nums {tint}"
+							>{formatShare(row.missing, row.qcs, locale)}</TD
+						>
+						<TD
+							class="text-right tabular-nums {chronic(row.public_key)
+								? CHRONIC_CELL
+								: `text-muted ${tint}`}">{baselineShare(row.public_key)}</TD
+						>
 						{#if showWeak}
-							<TD class="text-right tabular-nums">{formatShare(row.weak, row.qcs, locale)}</TD>
+							<TD class="text-right tabular-nums {tint}"
+								>{formatShare(row.weak, row.qcs, locale)}</TD
+							>
 						{/if}
-						<TD class="text-right font-mono tabular-nums">{row.lastVote ?? '–'}</TD>
-						<TD class="text-right tabular-nums">
+						<TD class="text-right font-mono tabular-nums {tint}">
+							{#if row.lastVote === null}–{:else}<ExplorerLink block={row.lastVote} />{/if}
+						</TD>
+						<TD class="text-right tabular-nums {tint}">
 							{row.behind === null ? '–' : formatNumber(row.behind, locale)}
 						</TD>
 					</TR>
@@ -68,8 +82,9 @@
 		</Table>
 	</div>
 	<p class="text-muted text-xs">
-		Finalizer policy order{#if generation !== null}, generation {generation}{/if}. Missing votes is
-		the share of QCs in the live window without this finalizer's vote. A marked row is missing more
-		votes than its own baseline rate makes likely.
+		Marked rows first, then finalizer policy order{#if generation !== null}, generation {generation}{/if}.
+		Missing votes is the share of QCs in the live window without this finalizer's vote. A marked row
+		is missing more votes than its own baseline rate makes likely; a marked baseline misses 5% or
+		more over 24 h.
 	</p>
 </div>

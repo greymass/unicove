@@ -1,5 +1,5 @@
 import { finalizedBy, timeToFinal } from './final';
-import { baselineCovered, finalizerRowMarked, producerRowMarked } from './markers';
+import { baselineCovered, finalizerRowMarked, latencyMarkedProducers } from './markers';
 import { BLOCK_INTERVAL_MS, missedSlots } from './schedule';
 import type { FinalityState } from './state';
 import type { BaselineFinalizer, BlockMessage, FinalizerPolicy, Qc, Stage } from './v1';
@@ -30,18 +30,12 @@ export interface QcVotes {
 	over: number;
 }
 
-export interface MinutePoint {
-	minute: number;
-	p90: number | null;
-	partial: boolean;
-}
-
 export interface ProducerStats {
 	producer: string;
 	blocks: number;
 	missed: number;
 	latencyP50: number | null;
-	latencyP90: number | null;
+	latencyMax: number | null;
 	qcBlocks: number;
 	votesOverP50: number | null;
 	atThreshold: number;
@@ -134,28 +128,6 @@ export function headline(records: ReadonlyMap<number, FinalRecord>): number | nu
 		.sort((a, b) => b.block_num - a.block_num)
 		.slice(0, HEADLINE_BLOCKS);
 	return median(timedValues(timed));
-}
-
-export function sparkline(
-	state: FinalityState,
-	records: ReadonlyMap<number, FinalRecord>
-): MinutePoint[] {
-	const points: MinutePoint[] = state.minutes.map((row) => ({
-		minute: row.minute,
-		p90: row.time_to_final_p90,
-		partial: false
-	}));
-	const newest = state.blocks[state.blocks.length - 1];
-	if (!newest) return points;
-	const minute = Math.floor(newest.timestamp / 60_000) * 60_000;
-	const last = points[points.length - 1];
-	if (last && last.minute >= minute) return points;
-	const current = state.blocks
-		.filter((block) => block.timestamp >= minute)
-		.map((block) => records.get(block.block_num))
-		.filter((record): record is FinalRecord => !!record);
-	points.push({ minute, p90: quantile(timedValues(current), 0.9), partial: true });
-	return points;
 }
 
 function tally(policy: FinalizerPolicy, missing: readonly number[] = []): QcVotes {
@@ -344,19 +316,19 @@ export function windowStats(
 		if (slot.owner) missedBy.set(slot.owner, (missedBy.get(slot.owner) ?? 0) + 1);
 	}
 
+	const latencyMarked = latencyMarkedProducers(blocks, state.spans.values(), state.baseline);
 	const producers = producerOrder(state).map((producer): ProducerStats => {
 		const entry = perProducer.get(producer);
-		const latencyP90 = quantile(entry?.latencies ?? [], 0.9);
 		return {
 			producer,
 			blocks: entry?.blocks ?? 0,
 			missed: missedBy.get(producer) ?? 0,
 			latencyP50: quantile(entry?.latencies ?? [], 0.5),
-			latencyP90,
+			latencyMax: entry?.latencies.length ? Math.max(...entry.latencies) : null,
 			qcBlocks: entry?.qcBlocks ?? 0,
 			votesOverP50: median(entry?.overs ?? []),
 			atThreshold: (entry?.overs ?? []).filter((over) => over <= 0).length,
-			marked: producerRowMarked(latencyP90, state.baseline)
+			marked: latencyMarked.has(producer)
 		};
 	});
 
@@ -365,7 +337,8 @@ export function windowStats(
 		(state.baseline?.finalizers ?? []).map((entry) => [entry.public_key, entry])
 	);
 	const head = blocks[blocks.length - 1]?.block_num ?? null;
-	const finalizers = finalizerRows(state).map((row): FinalizerStats => {
+	const rows = finalizerRows(state);
+	const finalizers = rows.map((row): FinalizerStats => {
 		const count = counts.get(row.public_key) ?? { qcs: 0, missing: 0, weak: 0, lastVote: null };
 		const policy = newestPolicyHolding(row.public_key, state.policies);
 		return {
@@ -379,7 +352,12 @@ export function windowStats(
 			weak: count.weak,
 			lastVote: count.lastVote,
 			behind: count.lastVote !== null && head !== null ? head - count.lastVote : null,
-			marked: finalizerRowMarked(count.missing, count.qcs, baselineByKey.get(row.public_key))
+			marked: finalizerRowMarked(
+				count.missing,
+				count.qcs,
+				baselineByKey.get(row.public_key),
+				rows.length
+			)
 		};
 	});
 
@@ -421,8 +399,7 @@ export function stageReadings(
 		{
 			stage: 'votes',
 			figure: stats.votesOverMin,
-			status:
-				stats.atThreshold > 0 || stats.finalizers.some((row) => row.marked) ? 'departure' : 'normal'
+			status: stats.atThreshold > 0 ? 'departure' : 'normal'
 		},
 		{
 			stage: 'qc',

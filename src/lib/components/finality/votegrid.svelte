@@ -5,6 +5,7 @@
 	import { baselineCovered, gridCellMarked } from '$lib/state/finality/markers';
 	import type { BaselineGridCell, BaselineMessage } from '$lib/state/finality/v1';
 	import { formatNumber } from '$lib/utils/intl';
+	import ExplorerLink from './explorerlink.svelte';
 	import { formatShare } from './labels.svelte';
 
 	interface Props {
@@ -22,6 +23,7 @@
 		new Map((baseline?.grid ?? []).map((cell) => [`${cell.public_key}|${cell.producer}`, cell]))
 	);
 	const entries = $derived(new Map((baseline?.finalizers ?? []).map((e) => [e.public_key, e])));
+	const tests = $derived(finalizers.length * producers.length);
 
 	function tip(description: string, producer: string, cell: BaselineGridCell | undefined): string {
 		const share = formatShare(cell?.missing ?? 0, cell?.qcs ?? 0, locale);
@@ -48,7 +50,7 @@
 							<th
 								class="text-muted h-24 rotate-180 px-0.5 align-bottom font-normal [writing-mode:vertical-rl]"
 							>
-								{producer}
+								<ExplorerLink account={producer} />
 							</th>
 						{/each}
 					</tr>
@@ -57,19 +59,19 @@
 					{#each finalizers as row (row.public_key)}
 						<tr>
 							<td class="bg-surface sticky left-0 z-[1] pr-2 whitespace-nowrap"
-								>{row.description}</td
+								><ExplorerLink account={row.description} /></td
 							>
 							{#each producers as producer (producer)}
 								{@const cell = cells.get(`${row.public_key}|${producer}`)}
 								{@const rate = cell && cell.qcs ? cell.missing / cell.qcs : 0}
-								{@const marked = !!cell && gridCellMarked(cell, entries.get(row.public_key))}
+								{@const marked = !!cell && gridCellMarked(cell, entries.get(row.public_key), tests)}
 								<td
 									class="border-surface h-[18px] w-[22px] border p-0"
 									title={tip(row.description, producer, cell)}
 								>
 									<div
 										class="size-full {marked
-											? 'shadow-[inset_0_0_0_2px_var(--color-on-surface)]'
+											? 'shadow-[inset_0_0_0_2px_var(--color-warning)]'
 											: ''}"
 										style:background="color-mix(in oklab, var(--color-primary) {Math.round(
 											Math.min(1, rate * 1.6) * 100

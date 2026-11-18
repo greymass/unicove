@@ -24,12 +24,15 @@
 	}
 </script>
 
-<div class="border-outline-variant flex gap-1 overflow-x-auto border-b" role="tablist">
+<div
+	class="flex gap-1 overflow-x-auto shadow-[inset_0_-1px_0_var(--color-outline-variant)]"
+	role="tablist"
+>
 	{#each tabs as tab (tab.view)}
 		<button
 			role="tab"
 			aria-selected={view === tab.view}
-			class="-mb-px cursor-pointer border-b-2 px-3 py-2 whitespace-nowrap {view === tab.view
+			class="cursor-pointer border-b-2 px-3 py-2 whitespace-nowrap {view === tab.view
 				? 'border-primary text-on-surface'
 				: 'text-muted hover:text-on-surface border-transparent'}"
 			onclick={() => select(tab.view)}

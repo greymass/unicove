@@ -3,13 +3,7 @@
 	import { page } from '$app/state';
 	import { Card, Stack } from '@wharfkit/svelte-components';
 
-	import {
-		finality,
-		headline,
-		sparkline,
-		stageReadings,
-		windowStats
-	} from '$lib/state/finality/derive';
+	import { finality, headline, stageReadings, windowStats } from '$lib/state/finality/derive';
 	import { FinalityFeed } from '$lib/state/finality/feed.svelte';
 	import { baselineCovered } from '$lib/state/finality/markers';
 	import { emptyState } from '$lib/state/finality/state';
@@ -60,7 +54,6 @@
 		stageReadings(current, stats, { reconnecting: connection === 'reconnecting' })
 	);
 	const finalReading = $derived(readings.find((reading) => reading.stage === 'final')!);
-	const points = $derived(sparkline(current, records));
 	const newest = $derived(current.blocks[current.blocks.length - 1]);
 	const stalled = $derived(current.feed?.state === 'paused' || connection === 'reconnecting');
 	const asOf = $derived(stalled && newest ? newest.timestamp : null);
@@ -115,7 +108,6 @@
 				value={headline(records)}
 				status={finalReading.status}
 				baseline={current.baseline}
-				{points}
 				{asOf}
 			/>
 		</Card>

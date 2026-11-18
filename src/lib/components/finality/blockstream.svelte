@@ -3,9 +3,11 @@
 	import { Table, TD, TH, TR } from '@wharfkit/svelte-components';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
 	import { qcLag, type FinalRecord } from '$lib/state/finality/derive';
+	import { missedSlots } from '$lib/state/finality/schedule';
 	import type { FinalityState } from '$lib/state/finality/state';
 	import type { BlockMessage } from '$lib/state/finality/v1';
 	import { formatNumber } from '$lib/utils/intl';
+	import ExplorerLink from './explorerlink.svelte';
 	import { formatMs, formatSignedMs } from './labels.svelte';
 
 	interface Props {
@@ -33,6 +35,17 @@
 		const list = frozen ?? live;
 		return all || highlight ? list : list.slice(0, ROWS);
 	});
+	const gaps = $derived.by(() => {
+		const byBlock = new Map<number, { owner: string | null; count: number }[]>();
+		for (const slot of missedSlots(current.blocks, current.schedules)) {
+			const list = byBlock.get(slot.before) ?? [];
+			const last = list[list.length - 1];
+			if (last && last.owner === slot.owner) last.count++;
+			else list.push({ owner: slot.owner, count: 1 });
+			byBlock.set(slot.before, list);
+		}
+		return byBlock;
+	});
 	const newer = $derived(
 		frozen && frozen[0] ? live.filter((block) => block.block_num > frozen![0].block_num).length : 0
 	);
@@ -56,10 +69,6 @@
 		frozen = live;
 	}
 
-	function clock(ms: number): string {
-		return new Date(ms).toISOString().slice(11, 23);
-	}
-
 	function missing(block: BlockMessage): { count: number; names: string[] } | null {
 		const qc = block.qc;
 		if (!qc) return null;
@@ -79,6 +88,12 @@
 		const n = formatNumber(count, locale);
 		// @wc-include
 		return `Show all ${n} in the live window`;
+	}
+
+	function missedLabel(count: number): string {
+		const n = formatNumber(count, locale);
+		// @wc-include
+		return count === 1 ? 'missed slot' : `${n} missed slots`;
 	}
 
 	function newBlocks(count: number): string {
@@ -111,21 +126,20 @@
 		onfocusin={() => (focused = true)}
 		onfocusout={() => (focused = false)}
 	>
-		<Table full class="overflow-visible">
+		<Table full class="border-separate border-spacing-0 overflow-visible">
 			{#snippet thead()}
 				<TH class="bg-surface sticky left-0 z-[1]">block_num</TH>
-				<TH>producer</TH>
-				<TH>timestamp</TH>
+				<TH class="text-right">time to final</TH>
 				<TH class="text-right">latency</TH>
+				<TH>producer</TH>
 				<TH>qc</TH>
 				<TH class="text-right">QC lag</TH>
 				<TH>missing_votes</TH>
 				<TH>final by</TH>
-				<TH class="text-right">time to final</TH>
 				<TH class="text-right">Production / QC / Latency</TH>
 			{/snippet}
 			{#if !current.ready}
-				<TR><TD class="text-muted" colspan={10}>Waiting for the first blocks</TD></TR>
+				<TR><TD class="text-muted" colspan={9}>Waiting for the first blocks</TD></TR>
 			{:else}
 				{#each rows as block (block.block_num)}
 					{@const record = records.get(block.block_num)}
@@ -133,40 +147,46 @@
 					<tr
 						data-block={block.block_num}
 						tabindex="-1"
-						class="border-outline-variant border-b font-mono text-sm whitespace-nowrap {inRun(block)
+						class="[&>td]:border-outline-variant font-mono text-sm whitespace-nowrap [&>td]:border-b {inRun(
+							block
+						)
 							? 'bg-[color-mix(in_oklab,var(--color-primary)_14%,var(--color-surface))]'
 							: ''}"
 					>
 						<td
 							class="sticky left-0 z-[1] py-1.5 pr-3 pl-2 {inRun(block)
 								? 'bg-[color-mix(in_oklab,var(--color-primary)_14%,var(--color-surface))]'
-								: 'bg-surface'}">{block.block_num}</td
+								: 'bg-surface'}"><ExplorerLink block={block.block_num} /></td
 						>
-						<td class="px-3 py-1.5">{block.producer}</td>
-						<td class="px-3 py-1.5">{clock(block.timestamp)}</td>
+						<td class="px-3 py-1.5 text-right tabular-nums">
+							{#if block.no_timing || record?.ms === null}<span class="text-muted font-sans"
+									>no timing</span
+								>{:else if record?.ms !== undefined}{formatMs(record.ms, locale)}{:else}–{/if}
+						</td>
 						<td class="px-3 py-1.5 text-right tabular-nums">
 							{#if block.no_timing}<span class="text-muted font-sans">no timing</span
 								>{:else}{formatSignedMs(block.latency, locale)}{/if}
 						</td>
+						<td class="px-3 py-1.5"><ExplorerLink account={block.producer} /></td>
 						<td class="px-3 py-1.5">
-							{#if block.qc}{block.qc.block_num}
+							{#if block.qc}<ExplorerLink block={block.qc.block_num} />
 								{block.qc.is_strong_qc ? 'strong' : 'weak'}{:else}<span class="text-muted font-sans"
 									>none</span
 								>{/if}
 						</td>
 						<td class="px-3 py-1.5 text-right tabular-nums">{block.qc ? qcLag(block) : '–'}</td>
 						<td class="px-3 py-1.5" title={absent?.names.join(', ')}>
-							{#if !absent}–{:else if absent.count}{absent.count}: {absent.names
-									.slice(0, 2)
-									.join(', ')}{absent.count > 2 ? '…' : ''}{:else}0{/if}
+							{#if !absent}–{:else if absent.count}{absent.count}:
+								{#each absent.names.slice(0, 2) as name, index (index)}{index
+										? ', '
+										: ''}<ExplorerLink account={name} />{/each}{absent.count > 2
+									? '…'
+									: ''}{:else}0{/if}
 						</td>
 						<td class="px-3 py-1.5">
-							{#if record}{record.by}{:else}<span class="text-muted font-sans">pending</span>{/if}
-						</td>
-						<td class="px-3 py-1.5 text-right tabular-nums">
-							{#if block.no_timing || record?.ms === null}<span class="text-muted font-sans"
-									>no timing</span
-								>{:else if record?.ms !== undefined}{formatMs(record.ms, locale)}{:else}–{/if}
+							{#if record}<ExplorerLink block={record.by} />{:else}<span
+									class="text-muted font-sans">pending</span
+								>{/if}
 						</td>
 						<td class="text-muted px-3 py-1.5 text-right tabular-nums">
 							{#if record?.split}{formatMs(record.split.production, locale)} / {formatMs(
@@ -175,6 +195,18 @@
 								)} / {formatSignedMs(record.split.latency, locale)}{/if}
 						</td>
 					</tr>
+					{#each gaps.get(block.block_num) ?? [] as gap, index (index)}
+						<tr class="[&>td]:border-outline-variant text-sm whitespace-nowrap [&>td]:border-b">
+							<td
+								colspan={9}
+								class="bg-surface-container text-on-surface-variant sticky left-0 py-1 pr-3 pl-2"
+							>
+								{missedLabel(gap.count)}{#if gap.owner}<span class="px-1.5" aria-hidden="true"
+										>·</span
+									><ExplorerLink account={gap.owner} class="font-mono" />{/if}
+							</td>
+						</tr>
+					{/each}
 				{/each}
 			{/if}
 		</Table>

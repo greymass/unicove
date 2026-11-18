@@ -1,23 +1,21 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
-	import type { MinutePoint, StageStatus } from '$lib/state/finality/derive';
+	import type { StageStatus } from '$lib/state/finality/derive';
 	import { baselineCovered } from '$lib/state/finality/markers';
 	import type { BaselineMessage } from '$lib/state/finality/v1';
 	import { formatNumber } from '$lib/utils/intl';
 	import { coverageLabel, formatClock, formatMs } from './labels.svelte';
-	import Sparkline from './sparkline.svelte';
 	import Status from './status.svelte';
 
 	interface Props {
 		value: number | null;
 		status: StageStatus;
 		baseline: BaselineMessage | null;
-		points: MinutePoint[];
 		asOf: number | null;
 	}
 
-	const { value, status, baseline, points, asOf }: Props = $props();
+	const { value, status, baseline, asOf }: Props = $props();
 
 	const context = getContext<UnicoveContext>('state');
 	const locale = $derived(context.settings.data.locale);
@@ -58,9 +56,5 @@
 		{:else}
 			<Status status="building" label={coverageLabel(baseline?.minutes ?? 0, locale)} />
 		{/if}
-	</div>
-	<div>
-		<Sparkline {points} p99={covered?.time_to_final_p99 ?? null} />
-		<p class="text-muted mt-1 text-xs">Time to final p90 per minute, last 15 min</p>
 	</div>
 </div>

@@ -1,8 +1,15 @@
-import type { BaselineFinalizer, BaselineGridCell, BaselineMessage } from './v1';
+import type {
+	BaselineFinalizer,
+	BaselineGridCell,
+	BaselineMessage,
+	BlockMessage,
+	SpanMessage
+} from './v1';
 
 export const BASELINE_COVERAGE_MINUTES = 60;
 export const FINALIZER_COVERAGE_QCS = 7_200;
 export const MARKER_QUANTILE = 0.99;
+export const CHRONIC_SHARE = 0.05;
 
 export function binomialQuantile(n: number, p: number, q: number): number {
 	if (n <= 0 || p <= 0) return 0;
@@ -26,6 +33,10 @@ function logAddExp(a: number, b: number): number {
 	return high + Math.log1p(Math.exp(Math.min(a, b) - high));
 }
 
+export function familyQuantile(tests: number): number {
+	return 1 - (1 - MARKER_QUANTILE) / Math.max(1, tests);
+}
+
 export function baselineCovered(baseline: BaselineMessage | null): baseline is BaselineMessage {
 	return !!baseline && baseline.minutes >= BASELINE_COVERAGE_MINUTES;
 }
@@ -38,29 +49,48 @@ export function finalizerRate(entry: BaselineFinalizer): number {
 	return entry.qcs > 0 ? entry.missing / entry.qcs : 0;
 }
 
+export function finalizerChronic(entry: BaselineFinalizer | undefined): boolean {
+	return finalizerCovered(entry) && finalizerRate(entry) >= CHRONIC_SHARE;
+}
+
+export function flaggedFirst<T>(rows: readonly T[], flagged: (row: T) => boolean): T[] {
+	return [...rows.filter(flagged), ...rows.filter((row) => !flagged(row))];
+}
+
 export function finalizerRowMarked(
 	missing: number,
 	qcs: number,
-	entry: BaselineFinalizer | undefined
+	entry: BaselineFinalizer | undefined,
+	rows = 1
 ): boolean {
 	if (!finalizerCovered(entry)) return false;
-	return missing > binomialQuantile(qcs, finalizerRate(entry), MARKER_QUANTILE);
+	return missing > binomialQuantile(qcs, finalizerRate(entry), familyQuantile(rows));
 }
 
 export function gridCellMarked(
 	cell: BaselineGridCell,
-	entry: BaselineFinalizer | undefined
+	entry: BaselineFinalizer | undefined,
+	cells = 1
 ): boolean {
 	if (!finalizerCovered(entry)) return false;
-	return cell.missing > binomialQuantile(cell.qcs, finalizerRate(entry), MARKER_QUANTILE);
+	return cell.missing > binomialQuantile(cell.qcs, finalizerRate(entry), familyQuantile(cells));
 }
 
-export function producerRowMarked(
-	latencyP90: number | null,
+export function latencyMarkedProducers(
+	blocks: readonly BlockMessage[],
+	spans: Iterable<SpanMessage>,
 	baseline: BaselineMessage | null
-): boolean {
-	if (latencyP90 === null || !baselineCovered(baseline) || baseline.latency_p99 === null) {
-		return false;
+): Set<string> {
+	const marked = new Set<string>();
+	if (!baselineCovered(baseline) || baseline.latency_p99 === null) return marked;
+	const p99 = baseline.latency_p99;
+	const runs = [...spans].filter((span) => span.stage === 'latency');
+	if (!runs.length) return marked;
+	for (const block of blocks) {
+		if (block.no_timing || block.latency <= p99) continue;
+		if (runs.some((span) => block.block_num >= span.from && block.block_num <= span.to)) {
+			marked.add(block.producer);
+		}
 	}
-	return latencyP90 > baseline.latency_p99;
+	return marked;
 }

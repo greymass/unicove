@@ -5,7 +5,6 @@ import {
 	headline,
 	pendingQcVotes,
 	qcVotes,
-	sparkline,
 	stageReadings,
 	windowStats
 } from './derive';
@@ -102,31 +101,6 @@ describe('time to final and attribution', () => {
 	});
 });
 
-describe('sparkline', () => {
-	test('adds the in-progress minute from the blocks held', () => {
-		const minute = Math.floor(T0 / 60_000) * 60_000;
-		const state = apply([
-			{
-				type: 'minute',
-				minute: minute - 60_000,
-				time_to_final_p90: 1400,
-				blocks: 120,
-				missed_slot: 0,
-				fork: 0,
-				weak_qc: 0,
-				no_qc: 0,
-				qc_lag: 0
-			},
-			...chain(1000, 1010)
-		]);
-		const points = sparkline(state, finality(state));
-		expect(points).toEqual([
-			{ minute: minute - 60_000, p90: 1400, partial: false },
-			{ minute, p90: 1100, partial: true }
-		]);
-	});
-});
-
 describe('votes over threshold', () => {
 	test('uses the policy of the QC generation and weights', () => {
 		const state = apply([
@@ -196,6 +170,16 @@ describe('window stats', () => {
 		expect(stats.missedSlots).toBe(3);
 		expect(stats.producers.map((p) => p.missed)).toEqual([0, 3, 0]);
 		expect(stats.producers.map((p) => p.blocks)).toEqual([12, 9, 12]);
+	});
+
+	test('producer latency max skips no_timing blocks', () => {
+		const blocks = chain(1000, 1003).map((b, i) => ({
+			...b,
+			latency: [40, 190, -20, 900][i],
+			no_timing: i === 3
+		}));
+		const stats = windowStats(apply([policy(), schedule(['alpha']), ...blocks]));
+		expect(stats.producers[0]).toMatchObject({ latencyMax: 190 });
 	});
 
 	test('finalizers count once per QC, active policy first then pending-only keys', () => {
@@ -303,6 +287,18 @@ describe('stage readings', () => {
 		const state = healthy([atThreshold]);
 		expect(statuses(state).votes).toBe('departure');
 		expect(stageReadings(state, windowStats(state))[2].figure).toBe(0);
+	});
+
+	test('votes stay normal when only a finalizer row is marked', () => {
+		const qcs = FINALIZER_COVERAGE_QCS;
+		const blocks = chain(1000, 1040).map((b) => ({
+			...b,
+			qc: { ...b.qc!, missing: b.block_num % 2 ? [0] : [] }
+		}));
+		const entry = { public_key: 'PUB_BLS_one', qcs, missing: 7, weak: 0 };
+		const state = apply([policy({ threshold: 2 }), baseline({ finalizers: [entry] }), ...blocks]);
+		expect(windowStats(state).finalizers[0].marked).toBe(true);
+		expect(statuses(state).votes).toBe('normal');
 	});
 
 	test('qc departs on any exception', () => {
