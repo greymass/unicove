@@ -9898,60 +9898,24 @@ msgstr "최종 확정 시간, 최근 최종 확정 블록 20개의 중앙값"
 msgid "Baseline p50 {0} · p99 {1} · {2}"
 msgstr "기준선 p50 {0} · p99 {1} · {2}"
 
-#: src/lib/components/finality/sparkline.svelte
-msgid "Time to final p90 per minute, last 15 min"
-msgstr "분당 최종 확정 시간 p90, 최근 15분"
-
-#: src/lib/components/finality/finalizers.svelte
-msgid "Finalizer"
-msgstr "Finalizer"
-
 #: src/lib/components/finality/accounts.svelte
-#: src/lib/components/finality/finalizers.svelte
 msgid "Missing votes"
 msgstr "누락된 투표"
 
-#: src/lib/components/finality/finalizers.svelte
-msgid "Baseline"
-msgstr "기준선"
-
-#: src/lib/components/finality/finalizers.svelte
-msgid "Weak votes"
-msgstr "weak 투표"
-
-#: src/lib/components/finality/finalizers.svelte
-msgid "Last vote"
-msgstr "마지막 투표"
-
 #: src/lib/components/finality/accounts.svelte
-#: src/lib/components/finality/finalizers.svelte
 msgid "Behind head"
 msgstr "헤드보다 뒤처짐"
 
 #: src/lib/components/finality/accounts.svelte
 #: src/lib/components/finality/blockstream.svelte
-#: src/lib/components/finality/finalizers.svelte
 #: src/lib/components/finality/policy.svelte
-#: src/lib/components/finality/producers.svelte
 msgid "Waiting for the first blocks"
 msgstr "첫 번째 블록을 기다리는 중"
 
 #: src/lib/components/finality/blockstream.svelte
-#: src/lib/components/finality/finalizers.svelte
 #: src/lib/components/finality/ttfchart.svelte
 msgid "pending"
 msgstr "대기 중"
-
-#. placeholder {0}: generation
-#: src/lib/components/finality/finalizers.svelte
-msgid ", generation {0}"
-msgstr ", 생성 {0}"
-
-#~ msgid ""
-#~ "Finalizer policy order<0/>. Missing votes is\n"
-#~ "the share of QCs in the live window without this finalizer's vote. A marked row is missing more\n"
-#~ "votes than its own baseline rate makes likely."
-#~ msgstr "Finalizer 정책 순서<0/>. 누락된 투표는 실시간 창에서 이 finalizer의 투표가 없는 QC의 비율입니다. 표시된 행은 자체 기준 비율로 예상되는 것보다 더 많은 투표가 누락되었음을 의미합니다."
 
 #. placeholder {0}: n
 #: src/lib/components/finality/blockstream.svelte
@@ -9987,9 +9951,6 @@ msgstr "block_num"
 #: src/lib/components/finality/ttfchart.svelte
 msgid "producer"
 msgstr "producer"
-
-#~ msgid "timestamp"
-#~ msgstr "timestamp"
 
 #: src/lib/components/finality/blockstream.svelte
 msgid "latency"
@@ -10111,39 +10072,6 @@ msgstr "예외 {0}건"
 #: src/lib/components/finality/stages.svelte
 msgid "p90 {0}"
 msgstr "p90 {0}"
-
-#: src/lib/components/finality/producers.svelte
-msgid "Producer"
-msgstr "생산자"
-
-#: src/lib/components/finality/producers.svelte
-msgid "Blocks produced"
-msgstr "생성된 블록"
-
-#: src/lib/components/finality/producers.svelte
-msgid "Slots missed"
-msgstr "놓친 슬롯"
-
-#: src/lib/components/finality/producers.svelte
-msgid "Latency p50"
-msgstr "지연 시간 p50"
-
-#~ msgid "Latency p90"
-#~ msgstr "지연 시간 p90"
-
-#: src/lib/components/finality/producers.svelte
-msgid "QC-block votes over threshold"
-msgstr "임계값을 초과한 QC 블록 투표"
-
-#: src/lib/components/finality/producers.svelte
-msgid "QCs at threshold"
-msgstr "임계값에 도달한 QC"
-
-#~ msgid "Schedule order, live window 2 min. A marked row has latency p90 above the baseline p99 ({0})."
-#~ msgstr "일정 순서, 실시간 창 2분. 표시된 행은 지연 시간 p90이 기준선 p99({0})보다 높습니다."
-
-#~ msgid "Schedule order, live window 2 min. Rows are marked once the baseline covers 60 min."
-#~ msgstr "일정 순서, 실시간 창 2분. 기준선이 60분을 포함하면 행이 표시됩니다."
 
 #. placeholder {0}: description
 #. placeholder {1}: share
@@ -10267,9 +10195,6 @@ msgstr "블록당 완결 시간"
 msgid "last 2 min"
 msgstr "최근 2분"
 
-#~ msgid "Producers"
-#~ msgstr "생성자"
-
 #: src/routes/[[locale]]/[network]/(explorer)/network/finality/+page.svelte
 msgid "Missing votes by QC block producer"
 msgstr "QC 블록 생산자별 누락된 투표"
@@ -10281,44 +10206,6 @@ msgstr "Finalizer 정책"
 #: src/lib/components/finality/blockstream.svelte
 msgid "missed slot"
 msgstr "놓친 슬롯"
-
-#~ msgid ""
-#~ "Schedule order, live window 2 min. A marked row produced blocks in a run of 5 or more above\n"
-#~ "the baseline latency p99 ({0})."
-#~ msgstr "스케줄 순서, 실시간 창 2분. 표시된 행은 기준 지연 시간 p99 ({0})보다 높은 블록을 5개 이상 연속으로 생성한 실행을 나타냅니다."
-
-#. placeholder {0}: signed(latencyP99)
-#: src/lib/components/finality/producers.svelte
-msgid ""
-"Marked rows first, then schedule order; live window 2 min. A marked row produced blocks in a\n"
-"run of 5 or more above the baseline latency p99 ({0})."
-msgstr ""
-"표시된 행을 먼저 처리한 다음 일정 순서로 처리합니다. 실시간 창은 2분입니다. 표시된 행은 기준 지연 시간 p99\n"
-"({0})보다 높은 블록을 5개 이상 연속으로 생성했습니다."
-
-#: src/lib/components/finality/producers.svelte
-msgid ""
-"Marked rows first, then schedule order; live window 2 min. Rows are marked once the baseline\n"
-"covers 60 min."
-msgstr ""
-"표시된 행을 먼저 처리한 다음 일정 순서로 처리합니다. 실시간 창은 2분입니다. 기준선이 60분을\n"
-"포괄하면 행이 표시됩니다."
-
-#: src/lib/components/finality/finalizers.svelte
-msgid ""
-"Marked rows first, then finalizer policy order<0/>.\n"
-"Missing votes is the share of QCs in the live window without this finalizer's vote. A marked row\n"
-"is missing more votes than its own baseline rate makes likely; a marked baseline misses 5% or\n"
-"more over 24 h."
-msgstr ""
-"먼저 표시된 행, 그다음 파이널라이저 정책 순서<0/>.\n"
-"누락된 투표는 실시간 윈도우에서 이 파이널라이저의 투표가 없는 QC의 비율입니다. 표시된 행은\n"
-"자체 기준 비율로 예상되는 것보다 더 많은 투표가 누락된 경우이며, 표시된 기준은 24시간 동안 5% 이상\n"
-"누락됩니다."
-
-#: src/lib/components/finality/producers.svelte
-msgid "Latency max"
-msgstr "최대 지연 시간"
 
 #: src/lib/components/finality/accounts.svelte
 msgid "Producing"
@@ -10359,20 +10246,6 @@ msgstr "· 약함 {0}"
 msgid "not in policy"
 msgstr "정책에 없음"
 
-#~ msgid ""
-#~ "Flagged rows first, then schedule order. Producing covers each producer's blocks in the live\n"
-#~ "window (2 min); missing votes covers QCs in the live window and over 24 h. A tinted row produced\n"
-#~ "blocks in a run of 5 or more above the baseline latency p99<0/>, or is missing more votes than its own 24 h rate makes likely. An\n"
-#~ "amber 24 h share is 5% or more. Behind head counts the blocks from the finalizer's last vote\n"
-#~ "seen in a QC to the head. The pulsing dot marks the producer whose slot it is."
-#~ msgstr ""
-#~ "플래그가 지정된 행이 먼저 표시되고, 그다음 일정 순서로 표시됩니다. 생산 중 수치는 실시간\n"
-#~ "창(2분)에서 각 생산자가 생성한 블록을 포함합니다. 누락된 투표 수치는 실시간 창과 24시간\n"
-#~ "이상의 QC를 포함합니다. 색이 입혀진 행은 기준 지연 시간 p99<0/>를 초과하는 블록을 5개 이상 연속으로\n"
-#~ "생성했거나, 자체 24시간 비율로 예상되는 것보다 더 많은 투표를 누락한 경우입니다. 황색으로 표시된\n"
-#~ "24시간 비율은 5% 이상입니다. 헤드 뒤 수치는 QC에서 확인된 파이널라이저의 마지막 투표부터\n"
-#~ "헤드까지의 블록 수를 계산합니다. 맥동하는 점은 현재 해당 슬롯인 생산자를 나타냅니다."
-
 #: src/lib/components/finality/accounts.svelte
 msgid ""
 "Flagged rows first, then schedule order. Producing covers each producer's blocks in the live\n"
@@ -10381,3 +10254,8 @@ msgid ""
 "5% or more. Behind head counts the blocks from the finalizer's last vote seen in a QC to the\n"
 "head. The pulsing dot marks the producer whose slot it is."
 msgstr ""
+"플래그된 행이 먼저 표시된 다음 일정 순서가 표시됩니다. 생성 수는 실시간\n"
+"창(2분)에서 각 생성자가 생성한 블록을 포함합니다. 누락된 투표 수는 실시간 창과 24시간 동안의 QC를 포함합니다. 색이 입혀진 행은 기준 지연 시간\n"
+"p99<0/>보다 높은 상태로 5개 이상 연속된 블록을 생성했거나, 자체 24시간 비율로 예상되는 것보다 더 많은 투표가 누락된 경우를 나타냅니다. 황색 24시간 비율은\n"
+"5% 이상입니다. 헤드까지 뒤처진 블록 수는 QC에서 확인된 파이널라이저의 마지막 투표부터\n"
+"헤드까지의 블록을 셉니다. 깜박이는 점은 해당 슬롯이 배정된 생성자를 나타냅니다."

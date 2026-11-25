@@ -10062,63 +10062,24 @@ msgstr "Time to final, median of the last 20 final blocks"
 msgid "Baseline p50 {0} · p99 {1} · {2}"
 msgstr "Baseline p50 {0} · p99 {1} · {2}"
 
-#: src/lib/components/finality/sparkline.svelte
-msgid "Time to final p90 per minute, last 15 min"
-msgstr "Time to final p90 per minute, last 15 min"
-
-#: src/lib/components/finality/finalizers.svelte
-msgid "Finalizer"
-msgstr "Finalizer"
-
 #: src/lib/components/finality/accounts.svelte
-#: src/lib/components/finality/finalizers.svelte
 msgid "Missing votes"
 msgstr "Missing votes"
 
-#: src/lib/components/finality/finalizers.svelte
-msgid "Baseline"
-msgstr "Baseline"
-
-#: src/lib/components/finality/finalizers.svelte
-msgid "Weak votes"
-msgstr "Weak votes"
-
-#: src/lib/components/finality/finalizers.svelte
-msgid "Last vote"
-msgstr "Last vote"
-
 #: src/lib/components/finality/accounts.svelte
-#: src/lib/components/finality/finalizers.svelte
 msgid "Behind head"
 msgstr "Behind head"
 
 #: src/lib/components/finality/accounts.svelte
 #: src/lib/components/finality/blockstream.svelte
-#: src/lib/components/finality/finalizers.svelte
 #: src/lib/components/finality/policy.svelte
-#: src/lib/components/finality/producers.svelte
 msgid "Waiting for the first blocks"
 msgstr "Waiting for the first blocks"
 
 #: src/lib/components/finality/blockstream.svelte
-#: src/lib/components/finality/finalizers.svelte
 #: src/lib/components/finality/ttfchart.svelte
 msgid "pending"
 msgstr "pending"
-
-#. placeholder {0}: generation
-#: src/lib/components/finality/finalizers.svelte
-msgid ", generation {0}"
-msgstr ", generation {0}"
-
-#~ msgid ""
-#~ "Finalizer policy order<0/>. Missing votes is\n"
-#~ "the share of QCs in the live window without this finalizer's vote. A marked row is missing more\n"
-#~ "votes than its own baseline rate makes likely."
-#~ msgstr ""
-#~ "Finalizer policy order<0/>. Missing votes is\n"
-#~ "the share of QCs in the live window without this finalizer's vote. A marked row is missing more\n"
-#~ "votes than its own baseline rate makes likely."
 
 #. placeholder {0}: n
 #: src/lib/components/finality/blockstream.svelte
@@ -10154,9 +10115,6 @@ msgstr "block_num"
 #: src/lib/components/finality/ttfchart.svelte
 msgid "producer"
 msgstr "producer"
-
-#~ msgid "timestamp"
-#~ msgstr "timestamp"
 
 #: src/lib/components/finality/blockstream.svelte
 msgid "latency"
@@ -10278,39 +10236,6 @@ msgstr "{0} exceptions"
 #: src/lib/components/finality/stages.svelte
 msgid "p90 {0}"
 msgstr "p90 {0}"
-
-#: src/lib/components/finality/producers.svelte
-msgid "Producer"
-msgstr "Producer"
-
-#: src/lib/components/finality/producers.svelte
-msgid "Blocks produced"
-msgstr "Blocks produced"
-
-#: src/lib/components/finality/producers.svelte
-msgid "Slots missed"
-msgstr "Slots missed"
-
-#: src/lib/components/finality/producers.svelte
-msgid "Latency p50"
-msgstr "Latency p50"
-
-#~ msgid "Latency p90"
-#~ msgstr "Latency p90"
-
-#: src/lib/components/finality/producers.svelte
-msgid "QC-block votes over threshold"
-msgstr "QC-block votes over threshold"
-
-#: src/lib/components/finality/producers.svelte
-msgid "QCs at threshold"
-msgstr "QCs at threshold"
-
-#~ msgid "Schedule order, live window 2 min. A marked row has latency p90 above the baseline p99 ({0})."
-#~ msgstr "Schedule order, live window 2 min. A marked row has latency p90 above the baseline p99 ({0})."
-
-#~ msgid "Schedule order, live window 2 min. Rows are marked once the baseline covers 60 min."
-#~ msgstr "Schedule order, live window 2 min. Rows are marked once the baseline covers 60 min."
 
 #. placeholder {0}: description
 #. placeholder {1}: share
@@ -10438,9 +10363,6 @@ msgstr "Time to final per block"
 msgid "last 2 min"
 msgstr "last 2 min"
 
-#~ msgid "Producers"
-#~ msgstr "Producers"
-
 #: src/routes/[[locale]]/[network]/(explorer)/network/finality/+page.svelte
 msgid "Missing votes by QC block producer"
 msgstr "Missing votes by QC block producer"
@@ -10452,46 +10374,6 @@ msgstr "Finalizer policy"
 #: src/lib/components/finality/blockstream.svelte
 msgid "missed slot"
 msgstr "missed slot"
-
-#~ msgid ""
-#~ "Schedule order, live window 2 min. A marked row produced blocks in a run of 5 or more above\n"
-#~ "the baseline latency p99 ({0})."
-#~ msgstr ""
-#~ "Schedule order, live window 2 min. A marked row produced blocks in a run of 5 or more above\n"
-#~ "the baseline latency p99 ({0})."
-
-#. placeholder {0}: signed(latencyP99)
-#: src/lib/components/finality/producers.svelte
-msgid ""
-"Marked rows first, then schedule order; live window 2 min. A marked row produced blocks in a\n"
-"run of 5 or more above the baseline latency p99 ({0})."
-msgstr ""
-"Marked rows first, then schedule order; live window 2 min. A marked row produced blocks in a\n"
-"run of 5 or more above the baseline latency p99 ({0})."
-
-#: src/lib/components/finality/producers.svelte
-msgid ""
-"Marked rows first, then schedule order; live window 2 min. Rows are marked once the baseline\n"
-"covers 60 min."
-msgstr ""
-"Marked rows first, then schedule order; live window 2 min. Rows are marked once the baseline\n"
-"covers 60 min."
-
-#: src/lib/components/finality/finalizers.svelte
-msgid ""
-"Marked rows first, then finalizer policy order<0/>.\n"
-"Missing votes is the share of QCs in the live window without this finalizer's vote. A marked row\n"
-"is missing more votes than its own baseline rate makes likely; a marked baseline misses 5% or\n"
-"more over 24 h."
-msgstr ""
-"Marked rows first, then finalizer policy order<0/>.\n"
-"Missing votes is the share of QCs in the live window without this finalizer's vote. A marked row\n"
-"is missing more votes than its own baseline rate makes likely; a marked baseline misses 5% or\n"
-"more over 24 h."
-
-#: src/lib/components/finality/producers.svelte
-msgid "Latency max"
-msgstr "Latency max"
 
 #: src/lib/components/finality/accounts.svelte
 msgid "Producing"
@@ -10531,19 +10413,6 @@ msgstr "· {0} weak"
 #: src/lib/components/finality/accounts.svelte
 msgid "not in policy"
 msgstr "not in policy"
-
-#~ msgid ""
-#~ "Flagged rows first, then schedule order. Producing covers each producer's blocks in the live\n"
-#~ "window (2 min); missing votes covers QCs in the live window and over 24 h. A tinted row produced\n"
-#~ "blocks in a run of 5 or more above the baseline latency p99<0/>, or is missing more votes than its own 24 h rate makes likely. An\n"
-#~ "amber 24 h share is 5% or more. Behind head counts the blocks from the finalizer's last vote\n"
-#~ "seen in a QC to the head. The pulsing dot marks the producer whose slot it is."
-#~ msgstr ""
-#~ "Flagged rows first, then schedule order. Producing covers each producer's blocks in the live\n"
-#~ "window (2 min); missing votes covers QCs in the live window and over 24 h. A tinted row produced\n"
-#~ "blocks in a run of 5 or more above the baseline latency p99<0/>, or is missing more votes than its own 24 h rate makes likely. An\n"
-#~ "amber 24 h share is 5% or more. Behind head counts the blocks from the finalizer's last vote\n"
-#~ "seen in a QC to the head. The pulsing dot marks the producer whose slot it is."
 
 #: src/lib/components/finality/accounts.svelte
 msgid ""
