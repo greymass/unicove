@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.663Z\n"
-"PO-Revision-Date: 2026-11-18T22:29:10.033Z\n"
+"PO-Revision-Date: 2026-11-25T19:33:29.266Z\n"
 "Last-Translator: \n"
 "Language: ko\n"
 "Language-Team: \n"
@@ -562,10 +562,10 @@ msgstr "소유자"
 msgid "<0>Key</0> <1>Owner</1> {0} seconds <2>Weight: {0}</2>"
 msgstr "<0>키</0> <1>소유자</1> {0} 초 <2>가중치: {0}</2>"
 
+#: src/lib/components/elements/producerstatus.svelte
 #: src/lib/components/summary/eosio/newaccount.svelte
 #: src/lib/components/summary/eosio/newaccount.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/buttons.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Active"
 msgstr "활성"
 
@@ -3396,8 +3396,8 @@ msgstr "투표"
 msgid "Top 21"
 msgstr "상위 21개"
 
+#: src/lib/components/elements/producerstatus.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Standby"
 msgstr "대기 중"
 

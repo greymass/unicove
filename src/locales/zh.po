@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-21T07:48:36.665Z\n"
-"PO-Revision-Date: 2026-11-18T22:29:10.041Z\n"
+"PO-Revision-Date: 2026-11-25T19:33:29.276Z\n"
 "Last-Translator: \n"
 "Language: zh\n"
 "Language-Team: \n"
@@ -562,10 +562,10 @@ msgstr "所有者"
 msgid "<0>Key</0> <1>Owner</1> {0} seconds <2>Weight: {0}</2>"
 msgstr "<0>密钥</0> <1>所有者</1> {0} 秒 <2>权重：{0}</2>"
 
+#: src/lib/components/elements/producerstatus.svelte
 #: src/lib/components/summary/eosio/newaccount.svelte
 #: src/lib/components/summary/eosio/newaccount.svelte
 #: src/routes/[[locale]]/[network]/(dev)/debug/components/sections/buttons.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Active"
 msgstr "激活"
 
@@ -3922,8 +3922,8 @@ msgstr "参与者"
 msgid "Votes"
 msgstr "投票"
 
+#: src/lib/components/elements/producerstatus.svelte
 #: src/routes/[[locale]]/[network]/(explorer)/msig/[proposer]/[proposal]/+page.svelte
-#: src/routes/[[locale]]/[network]/(explorer)/producers/+page.svelte
 msgid "Standby"
 msgstr "备用"
 

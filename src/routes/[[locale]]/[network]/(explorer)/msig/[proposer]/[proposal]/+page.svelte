@@ -8,6 +8,7 @@
 	import { formatDateTime } from '$lib/utils/intl';
 	import type { UnicoveContext } from '$lib/state/client.svelte.js';
 	import Account from '$lib/components/elements/account.svelte';
+	import ProducerStatus from '$lib/components/elements/producerstatus.svelte';
 	import TransactForm from '$lib/components/transact/form.svelte';
 	import VoteButtons from '$lib/components/sentiment/voteButtons.svelte';
 	import SentimentMeter from '$lib/components/sentiment/SentimentMeter.svelte';
@@ -32,6 +33,7 @@
 	});
 
 	const top21 = data.producers.slice(0, 21);
+	const producerAuthority = $derived(manager.binding?.actor === 'eosio.prods');
 
 	const statusColors: Record<string, string> = {
 		proposed: 'bg-primary text-on-primary',
@@ -114,7 +116,9 @@
 									<td><Account name={participant.actor} /></td>
 									<td class="text-muted">{participant.permission}</td>
 									<td>
-										{#if isTop21}
+										{#if producerAuthority}
+											<ProducerStatus active={manager.inBindingRoster(participant)} />
+										{:else if isTop21}
 											Top 21
 										{:else if isProducer}
 											Standby

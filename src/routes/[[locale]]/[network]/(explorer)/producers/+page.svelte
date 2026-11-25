@@ -15,6 +15,7 @@
 	} from '@wharfkit/svelte-components';
 	import Checkbox from './components/Checkbox.svelte';
 	import AccountLink from '$lib/components/elements/account.svelte';
+	import ProducerStatus from '$lib/components/elements/producerstatus.svelte';
 	import TransactForm from '$lib/components/transact/form.svelte';
 	import AssetText from '$lib/components/elements/asset.svelte';
 	import type { UnicoveContext } from '$lib/state/client.svelte';
@@ -550,21 +551,7 @@
 								>
 
 								<div class="order-1 col-start-1 row-start-1 justify-self-center @lg:col-start-2">
-									{#if index < 21}
-										<Chip class="bg-success text-on-success text-label-sm hidden  @lg:block">
-											Active
-										</Chip>
-										<Shield class="fill-success text-success @lg:hidden" />
-									{:else}
-										<Chip
-											class="bg-surface-container-high text-muted text-label-sm hidden @lg:block"
-										>
-											Standby
-										</Chip>
-										<Shield
-											class="text-surface-container-highest fill-surface-container-highest @lg:hidden"
-										/>
-									{/if}
+									<ProducerStatus active={index < 21} responsive />
 								</div>
 
 								<div class="flex items-center gap-1">
