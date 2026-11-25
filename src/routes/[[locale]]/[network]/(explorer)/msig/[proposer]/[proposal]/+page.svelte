@@ -78,7 +78,7 @@
 				<div class="flex justify-between px-4 font-semibold">
 					<div class="">
 						<span class="flex items-center gap-1 text-3xl">
-							{manager.totalApproved}
+							{manager.satisfied ?? manager.totalApproved}
 						</span>
 						Approved
 					</div>
